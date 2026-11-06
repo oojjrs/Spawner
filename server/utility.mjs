@@ -123,8 +123,10 @@ export function createUtilityAI(context) {
         return cells.reverse();
       }
       expanded++;
-      for (const next of neighbors(at(current.index))) {
-        if (context.canMove && !context.canMove(agent, next.x, next.y)) continue;
+      const currentCell = at(current.index);
+      const currentAgent = context.canMove ? { ...agent, ...currentCell } : agent;
+      for (const next of neighbors(currentCell)) {
+        if (context.canMove && !context.canMove(currentAgent, next.x, next.y)) continue;
         const nextIndex = indexOf(next), hazard = hazardAt(next.x, next.y), key = terrainAt(next.x, next.y) * 2 + Number(!!hazard);
         if (!speeds.has(key)) speeds.set(key, speed(agent, next, agent.carrying, 0));
         const seconds = 1 / speeds.get(key);
@@ -342,7 +344,9 @@ export function createUtilityAI(context) {
     const materialNeed = key => 1 / (1 + (state.resourceInventory?.[key] || 0) / Math.max(6, state.agents.length * 2));
     const reservation = food => allies.reduce((sum, ally) => sum + (ally.utility?.action === "collect" &&
       ally.utility.target?.key === (food.key || food.x + "," + food.y) ? Math.max(0, ally.utility.plannedCargo - ally.carrying) : 0), 0);
-    const availableFood = immediate ? 0 : [...state.knownFood.values()].filter(food => canHarvest(food, agent) && isFood(resourceType(food)))
+    const foodWithinRange = (immediate ? [state.knownFood.get(suspendedFoodKey)].filter(Boolean) : [...state.knownFood.values()])
+      .filter(food => !context.canMove || context.canMove(agent, food.x, food.y));
+    const availableFood = immediate ? 0 : foodWithinRange.filter(food => canHarvest(food, agent) && isFood(resourceType(food)))
       .reduce((sum, food) => sum + Math.max(0, food.amount - reservation(food)), 0);
     const perAgent = availableFood / Math.max(1, state.agents.length);
     const underAttack = visible.some(enemy => (combatDisposition(enemy) === "aggressive" || enemy.combat) &&
@@ -394,7 +398,7 @@ export function createUtilityAI(context) {
         { recoverHealth: Math.min(agent.stats.health, agent.health + amount) });
     }
     if (agent.carrying < capacity) {
-      const foods = (immediate ? [state.knownFood.get(suspendedFoodKey)].filter(Boolean) : [...state.knownFood.values()]).filter(food => food.amount > 0 &&
+      const foods = foodWithinRange.filter(food => food.amount > 0 &&
         canHarvest(food, agent) &&
         (!agent.carrying || carryingType === resourceType(food)) &&
         (isFood(resourceType(food)) ? storage > 0 : materialSpace > 0))
@@ -441,8 +445,8 @@ export function createUtilityAI(context) {
           { plannedCargo: agent.carrying + best.amount, deliverySeconds:best.time });
       }
     }
-    const frontier = immediate ? [] : frontierCells();
-    const knownFoods = immediate ? [] : [...state.knownFood.values()].filter(food => food.amount > 0 && isFood(resourceType(food)) && canHarvest(food, agent));
+    const frontier = immediate ? [] : frontierCells().filter(cell => !context.canMove || context.canMove(agent, cell.x, cell.y));
+    const knownFoods = immediate ? [] : foodWithinRange.filter(food => food.amount > 0 && isFood(resourceType(food)) && canHarvest(food, agent));
     let assignedForagers = supply.urgency > 0 ? colonyForagers(state, knownFoods, deliveryCells()) : new Set();
     const canDeliver = candidates.some(candidate => candidate.foodGain > 0 && ["collect", "return"].includes(candidate.action));
     const foodSearch = supply.interruption > 0 && knownFoods.length && !canDeliver &&
@@ -454,7 +458,7 @@ export function createUtilityAI(context) {
     const terrainFrontier = roaming ? frontier : frontier.filter(cell => terrain.has(indexOf(cell)));
     const foodTerrainFrontier = roaming ? foodFrontier : foodFrontier.filter(cell => terrain.has(indexOf(cell)));
     const searchFrontier = foodTerrainFrontier.length ? foodTerrainFrontier : terrainFrontier;
-    const searchOrigins = immediate ? [] : [...state.knownFood.values()].filter(food => searchHabitats.includes(food.resourceType) && food.amount > 0)
+    const searchOrigins = immediate ? [] : foodWithinRange.filter(food => searchHabitats.includes(food.resourceType) && food.amount > 0)
       .sort((first,second) => distance(agent,first)-distance(agent,second)).slice(0,24);
     const frontierWeight = target => {
       const revisit = agent.visited.has(target.x + "," + target.y) ? 0.8 : 1;

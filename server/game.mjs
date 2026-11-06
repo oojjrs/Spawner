@@ -1268,7 +1268,8 @@ export function createGame(environment, colony, savedGame) {
       const planned = immediate?.length ? immediate : planner ? planner.request(colony.ownerId, agent, reason) :
         utilityAI.evaluate(agent, !["completed", "targetLost", "restore"].includes(reason));
       if (planned === undefined) return;
-      const candidates = planned.filter(candidate => ["collect", "return", "recover", "fight", "flee", "explore", "wait"].includes(candidate.action));
+      const candidates = planned.filter(candidate => ["collect", "return", "recover", "fight", "flee", "explore", "wait"].includes(candidate.action) &&
+        candidate.target && dnaCanMove(agent, candidate.target.x, candidate.target.y, colonyEntries));
       const best = candidates[0];
       if (best?.defending && !combatTargets().some(target => target.id === best.target.id &&
           colonyDefenseTarget(agent,target,state.agents,defenseStructures()))) {
@@ -1323,6 +1324,7 @@ export function createGame(environment, colony, savedGame) {
       agent.knownEnemyIds = ids;
       if (discovered) return "enemyDiscovered";
       const plan = agent.utility;
+      if (plan?.target && !dnaCanMove(agent, plan.target.x, plan.target.y, colonyEntries)) return "targetLost";
       if (plan?.action === "collect" && (!(state.knownFood.get(plan.target.key)?.amount > 0) ||
         !canHarvestResource(state.knownFood.get(plan.target.key), worldMap, agent.attributes, colony.tribe))) return "targetLost";
       if (plan?.action === "collect" && agent.carrying > 0 && (agent.carryingType || "honey-mushrooms") !==
@@ -1408,11 +1410,12 @@ export function createGame(environment, colony, savedGame) {
         if (!target) return false;
       }
       if (agent.moveBudget + 1e-8 < 1) return false;
-      const candidates = plan.action === "explore" ? [
+      const candidates = (plan.action === "explore" ? [
         { x: agent.x + 1, y: agent.y }, { x: agent.x - 1, y: agent.y },
         { x: agent.x, y: agent.y + 1 }, { x: agent.x, y: agent.y - 1 }
       ].filter(cell => cell.x >= 0 && cell.y >= 0 && cell.x < WORLD_SIZE && cell.y < WORLD_SIZE &&
-        state.explored.has(cell.y * WORLD_SIZE + cell.x) && isWalkable(cell.x, cell.y)) : walkableNeighbors(agent.x, agent.y);
+        state.explored.has(cell.y * WORLD_SIZE + cell.x) && isWalkable(cell.x, cell.y)) : walkableNeighbors(agent.x, agent.y))
+        .filter(cell => dnaCanMove(agent, cell.x, cell.y, colonyEntries));
       let destination = plan.route.find((cell, index) => index > 0 && plan.route[index - 1].x === agent.x && plan.route[index - 1].y === agent.y);
       if (plan.action === "fight" || !destination || !candidates.some(cell => cell.x === destination.x && cell.y === destination.y)) {
         destination = utilityAI.nextStep(agent, target);
