@@ -1,0 +1,26 @@
+{
+  "frames": [
+    "Frames/00.png",
+    "Frames/01.png",
+    "Frames/02.png",
+    "Frames/03.png",
+    "Frames/04.png",
+    "Frames/05.png",
+    "Frames/06.png",
+    "Frames/07.png"
+  ],
+  "durationsMs": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "frameSize": 448,
+  "preview": "walk.webp",
+  "status": "approved",
+  "integrated": false
+}
