@@ -27,6 +27,34 @@
 - 기록자 Codex /root/investigate_sheep_walk, 결정 주체 사용자. 출처 채팅6ae7a6f41c94819380facdaa018ca2b0, 승인 Sentinel_fb11b9e0cb40819180dd21aa7bbcbc25, 재진단 Sentinel_7733ed56ac208191b68f2a64487ebf5c. 원발언 시각 불명. 승인64프레임은 임시검토본으로만 남고 main/기획서는 11월4일 구형8프레임을 참조했음을 확인했다.
 - 승인 시트 원본 SHA f4f5a4000e9d4a520a61d805564ab19756192c350a49db21926298e4b66581bd 그대로 보존하고 PNG·sheet추출GIF·manifest를 추가한다. 640셀8열64장,3.2Hz/312.5ms. GIF는 시간해상도 때문에64장 전부0.25배/1250ms, planning WebP는 누적ms반올림312ms. 기획서 기존 이동 셀 링크·재생정보만 교체, 문구·게임소스·배포 변경 없음. GitHub project 조회는 gh인증 없음으로 미확인.
 
+## 주사위 랜덤5대5 커밋 범위 동결 · 01a1a5fd
+
+- 기록 ID: combat-dice-5v5-commit-freeze-20261106-01a1a5fd. 기록 시각 2026-11-06T23:50:57+09:00. 기록자·분리/커밋 판단 Codex /root, 로컬 커밋 승인 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 ‘커밋’과 직접 현재 HEAD/작업트리/index. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 최종 후보: client/combat-lab.js의 주사위5명씩 생성/독립 복사/선택 초기화, Combat.html의 해당 inline, 주사위 착수/완료/이 동결과 앞선 관련 로딩 커밋f309593의 실제 결과 기록 총4절. 앞선 커밋 후에만 알 수 있던 결과는 다음 승인된 관련 커밋에 함께 싣는 규칙으로 포함한다. 다른 메모리 추가/삭제·게임·애셋·기획서/페이지삭제와 Combat의 기존 둥지 비용 변경은 제외한다.
+- 검수: 실제 로컬 주사위10회·매번5:5/외형난수/기존수치/선택0복귀·독립편집·전장10명·자동전투10.30초 종료·오류0과 제품 source/inline/다른 생성물 보존·형식 성공을 재사용한다. 새 제품검사를 시작하지 않고 분리 후보3텍스트 형식·최종 staged 범위/내용/공백만 확인한다. 제목 ‘전투 실험실 랜덤 5대5 편성 추가’, 기존 main에서 별도index/HEAD/index/제품hash 가드로 로컬 커밋한다.
+- 요청/유지 설정/실제 검수/결과 한계/다음 단계의 기록 누락 점검 완료. dedicated origin oojjrs/Spawner·연결Projects0 기존 결과 재사용. 아직 커밋 전이며 실제 결과는 readback 후 기록한다. 새 브랜치·push/배포는 수행하지 않는다. 다른 작업파일·일반index는 보존한다.
+
+## 전투 실험실 주사위 랜덤5대5 편성 완료 · 01a1a5fd 현재 요약
+
+- 기록 ID: combat-dice-5v5-complete-20261106-01a1a5fd. 기록 시각 2026-11-06T23:47:53+09:00. 기록자·구현/실제 검수 Codex /root, 주사위5:5 요청·규모 결정 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072와 literal $Trash/combat-dice-5v5-20261106의 직접 코드/Playwright 결과. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 완료: 주사위가 양쪽 편성을 매번 정확5명으로 교체하고 전체 유닛 목록에서 각 외형을 독립 랜덤 선택한다. 각 진영의 현재 선택 수치·기관을 structuredClone으로 유닛마다 독립 복사하며 선택을0번으로 돌리고 기존 changed/reset을 호출한다. 편성별 수동 선택·편집과 기존 배치/크기 규칙을 유지했다. 제품은 client/combat-lab.js와 Combat.html의 해당 inline만 수정했고 전체 build·새 문구·게임/서버/다른 동시 변경은 추가하지 않았다.
+- 실제 로컬 file URL 검수: 기존1~3명 편성에서 주사위10회마다 양쪽 정확5명·지정 난수에 따른 외형10개·첫 유닛 선택 복귀·진영별 기존 수치7/3 유지 확인. 첫 유닛 수치를6으로 바꿔도 두 번째가7인 독립 편집 확인. 전장 렌더에서 왼쪽1~5/오른쪽1~5 총10명 이름을 관측했고5:5 자동 전투가10.30초/92사건 후 사망 종료했다. JS/console/request 오류 모두0이다.
+- 최초 전체 화면 캡처는 수치 입력의 자동 스크롤 때문에 전장 일부만 담겨, 제품 동작을 바꾸지 않고 기존 stage 요소의 실제 화면을 다시 캡처했다. dice-5v5-stage.png를 직접 보며 양쪽5명·랜덤 외형·기존1:1 크기/겹침·조작부를 확인했다. 근거 result.json/edited.json 및 위 캡처다.
+- 관련 요청/설정 유지 판단/실제 검수/남은 단계의 메모리 누락 점검 완료. 마지막으로 제품2경로 source/inline·검수hash·그외 생성물 보존, 제품/메모리3텍스트 형식과 국소 diff를 확인한다. 현재 내용 수정 완료·미stage/미commit이며 이번 요청에는 새 Git 완료 지시가 없어 commit/push/배포하지 않는다. combat-dice-5v5-start의 구현/검수 대기를 본 실제 결과로 대체하며 원기록은 보존한다.
+
+## 전투 실험실 주사위 랜덤5대5 편성 착수 · 01a1a5fd
+
+- 기록 ID: combat-dice-5v5-start-20261106-01a1a5fd. 기록 시각 2026-11-06T23:44:29+09:00. 기록자·구현 판단 Codex /root, 요청/규모 결정 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 ‘랜덤 주사위 누르면 유닛들도5:5로 랜덤하게…좌우 다 배치…테스트하기 빡세다’. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 확정 범위: 기존 주사위를 누르면 양쪽 편성을 매번 정확5명씩 새로 채우고 각 유닛 외형을 전체 실험실 목록에서 독립 랜덤 선택한다. 각 진영의 현재 선택된 편집 수치/기관을5개의 독립 복사본으로 유지하고 선택은 첫 유닛으로 돌린다. 새 능력치 무작위화·좌표 규칙 변경·자동 재생 시작은 추가하지 않는다. 기존 수동 추가/제거·선택/편집은 유지하며 changed/reset 경로로 새 편성을 반영한다. 새 UI 문구는 추가하지 않는다.
+- 수정 대상은 client/combat-lab.js와 Combat.html의 해당 inline 모듈뿐이다. 현재 Combat/메모리/게임/자산/기획서 등 동시 변경을 보존하고 전체 build를 실행하지 않는다. 실제 로컬 파일에서 주사위 반복5:5·선택값/수치 독립 편집·자동 전투를 확인한다. 기존 dedicated origin oojjrs/Spawner·연결Projects0 결과 재사용. 새 커밋/푸시/배포는 이번 요청 범위가 아니다. 임시 근거 literal $Trash/combat-dice-5v5-20261106.
+
+## 전투 실험실 로컬 유닛 로딩 커밋 완료 · 01a1a5fd 현재 요약
+
+- 기록 ID: combat-local-assets-commit-result-20261106-01a1a5fd. 기록·Git readback 시각 2026-11-06T22:35:25+09:00. 기록자·분리/커밋/검수 Codex /root, 로컬 커밋 승인 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 ‘커밋해’ 및 literal $Trash/combat-repair-20261106/commit/result.json과 실제 Git 객체. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 완료: main 커밋 f309593acd4190363401bb6915a9f0b0f6a9130f ‘전투 실험실 로컬 유닛 로딩 수정’, parent666a521d5e585e8f7fb43608fe7d116f6fff900f / tree4d4de2f37fdf507bd18146759cf59e0c751652dc. 제품3경로와 이번 복구 관련 메모리7절을 정확4경로로 묶었다. Combat의 둥지 비용 훙크와 다른 공유 기록/동시 작업은 제외했다.
+- 검수: 앞선 실제 로컬649자산·4:4 자동 전투·혼합1318프레임 및 인게임759프레임 성공을 재사용했다. 최종 후보4텍스트 UTF8NoBom/CRLF·staged 경로/본문/공백 검사 통과. 초기 분리 후보의 Git 저장 LF/작업 CRLF 처리는 후보에만 교정하고 경로별 Git 필터를 적용했다. 기대HEAD·일반index·제품hash 가드와 별도index/정상index의 같은 tree 확인 후 ref/index를 갱신했다. commit parent/tree/제목/정확4경로 readback·작업4파일 원바이트 불변·staged 잔여0 확인.
+- 상태: 요청한 로컬 커밋 완료, push/배포 없음. combat-local-assets-commit-freeze의 커밋 전 상태와 combat-local-assets-final의 미커밋 상태를 이 실제 결과로 대체하고 원기록 보존. 커밋 후에만 알 수 있는 본 결과는 로컬 기록으로 남기며 자동 후속 커밋/amend를 하지 않는다. 관련 기록 누락 점검 완료이며 다른 작업은 계속 보존한다.
+
 ## 유닛 외형 DNA 표 로컬 커밋 범위 확정 · 01a1b13a
 
 - 기록 ID: appearance-dna-table-commit-freeze-20261106-01a1b13a. 기록 시각 2026-11-06T23:46:55+09:00; 기록자·범위분리/Git판단 Codex /root, 로컬커밋결정 사용자. 출처현재채팅의 「커밋해」,01a1b13a-d56e-7223-9c1b-a82747d2de3f,H:/Spawner Windows PowerShell local. 원발언정확시각·항목ID·PC식별불명.

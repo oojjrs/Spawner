@@ -22875,9 +22875,13 @@ const stageCenter = node("div", null, "stage-center"); stageCenter.append(elemen
 elements.dice = button(stageCenter, "🎲", () => {
   if (batchBusy) return;
   for (const side of sides) {
-    const unit = COMBAT_LAB_UNITS[Math.floor(Math.random() * COMBAT_LAB_UNITS.length)];
-    builds[side].key = unit.key;
-    inputs[side].appearance.value = unit.key;
+    rosters[side] = Array.from({ length: 5 }, () => {
+      const build = structuredClone(builds[side]);
+      build.key = COMBAT_LAB_UNITS[Math.floor(Math.random() * COMBAT_LAB_UNITS.length)].key;
+      return build;
+    });
+    selected[side] = 0;
+    selectBuild(side);
   }
   changed();
 });
