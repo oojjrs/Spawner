@@ -1,4 +1,4 @@
-import { CREATURE_RANGED_EFFECTS, CREATURE_RANGED_EFFECT_ASSETS, creatureRangedEffectCommand, creatureRangedBodyCanvas, creatureRangedFlightPoint } from "./creature-ranged-vfx.mjs";
+import { CREATURE_RANGED_EFFECTS, CREATURE_RANGED_EFFECT_ASSETS, creatureRangedEffectCommand, creatureRangedBodyCanvas, creatureRangedFlightPoint, creatureRangedChargeCommand } from "./creature-ranged-vfx.mjs";
 import { CREATURE_RANGED_ANIMATIONS, creatureRangedOutlet } from "./creature-ranged.mjs";
 import { unitRangedProjectile } from "./unit-ranged.mjs";
 
@@ -122,6 +122,11 @@ export function createDetailCombatVfx() {
     observe(agents, positions, time, view);
     const width = view.width || 1, height = view.height || 1;
     const byId = new Map(agents.map(agent => [String(agent.id), agent])), result = [];
+    for (const source of agents) {
+      const from = positions.get(String(source.id));
+      const charge = from && creatureRangedChargeCommand(source, time, { ...from, cell });
+      if (charge) result.push(charge);
+    }
     for (const shot of projectiles) {
       const source = byId.get(String(shot.sourceId)), target = positions.get(String(shot.targetId));
       const from = positions.get(String(shot.sourceId));
@@ -155,7 +160,7 @@ export function createDetailCombatVfx() {
         const flight = creatureRangedEffectCommand(launch.clip, "flight", {
           ...path, size: launch.clip.bodyCanvas ? bodyCanvas : size/.85, age: shot.age ?? time-shot.launchedAt, muzzle: { x: startX, y: startY } });
         const release = creatureRangedEffectCommand(launch.clip, "release", {
-          x: startX, y: startY, size: size/.85, angle, age: shot.age ?? time-shot.launchedAt });
+          x: startX, y: startY, size: launch.clip.bodyCanvas ? bodyCanvas : size/.85, angle, age: shot.age ?? time-shot.launchedAt });
         if (flight) result.push({ ...flight, ...identity });
         if (release) result.push({ ...release, ...identity });
         continue;
@@ -326,8 +331,10 @@ export function drawDetailVitalEffect(context, command, { width, height, reduced
 }
 export function drawDetailVfxCell(context, image, command) {
   if (!image?.complete || !image.naturalWidth) return false;
-  const columns = command.columns || 4, cell = image.naturalWidth / columns;
-  const sourceHeight = columns === 1 ? image.naturalHeight : cell;
+  const columns = command.columns || 4, cell = command.frameWidth || image.naturalWidth / columns;
+  const sourceHeight = command.frameHeight || (columns === 1 ? image.naturalHeight : cell);
+  const sourceX = command.frame % columns * cell, sourceY = Math.floor(command.frame / columns) * sourceHeight;
+  if (sourceX + cell > image.naturalWidth || sourceY + sourceHeight > image.naturalHeight) return false;
   const width = command.width || command.size, height = command.height || command.size;
   context.save();
   if (command.muzzleClip) {
@@ -337,8 +344,9 @@ export function drawDetailVfxCell(context, image, command) {
     context.rotate(-muzzle.angle); context.translate(-muzzle.x,-muzzle.y);
   }
   context.translate(command.x, command.y); context.rotate(command.angle);
+  if (command.mirrorX) context.scale(-1, 1);
   context.globalAlpha *= command.alpha ?? 1;
-  context.drawImage(image, command.frame % columns * cell, Math.floor(command.frame / columns) * cell, cell, sourceHeight,
+  context.drawImage(image, sourceX, sourceY, cell, sourceHeight,
     -width / 2, -height / 2, width, height);
   context.restore(); return true;
 }

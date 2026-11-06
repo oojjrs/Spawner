@@ -10743,6 +10743,110 @@
         ]
       },
       "note": "User-approved original effect pixels, retained without resizing."
+    },
+    "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/projectile-atlas.webp": {
+      "display": [
+        384,
+        192
+      ],
+      "grid": [
+        4,
+        3
+      ],
+      "sourceMaximum": [
+        384,
+        192
+      ],
+      "nativeSource": {
+        "sha256": "154bdd038518bdde84f76945645955fc1c3580f4a9ff31ee8c76396197c429a6",
+        "dimensions": [
+          1536,
+          576
+        ],
+        "frame": [
+          384,
+          192
+        ]
+      },
+      "note": "Approved lantern v2 original effect pixels. Source cells retained without resizing; display scale follows the registered 512px body canvas."
+    },
+    "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/charge-atlas.webp": {
+      "display": [
+        192,
+        192
+      ],
+      "grid": [
+        4,
+        3
+      ],
+      "sourceMaximum": [
+        192,
+        192
+      ],
+      "nativeSource": {
+        "sha256": "1c708ba97578b46bc444ba17d0191afbff8c4837d2c73ae4ae1ea9bf06ba313a",
+        "dimensions": [
+          768,
+          576
+        ],
+        "frame": [
+          192,
+          192
+        ]
+      },
+      "note": "Approved lantern v2 original effect pixels. Source cells retained without resizing; display scale follows the registered 512px body canvas."
+    },
+    "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/muzzle-atlas.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        3
+      ],
+      "sourceMaximum": [
+        256,
+        256
+      ],
+      "nativeSource": {
+        "sha256": "ec436c31cd727d15465f4c124ec685749a6974d5f55de6eeda051a4989d6db24",
+        "dimensions": [
+          1024,
+          768
+        ],
+        "frame": [
+          256,
+          256
+        ]
+      },
+      "note": "Approved lantern v2 original effect pixels. Source cells retained without resizing; display scale follows the registered 512px body canvas."
+    },
+    "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/impact-atlas.webp": {
+      "display": [
+        320,
+        320
+      ],
+      "grid": [
+        6,
+        4
+      ],
+      "sourceMaximum": [
+        320,
+        320
+      ],
+      "nativeSource": {
+        "sha256": "429b1b573508454deb801cf8bc193111c3820391b54dc51e4d4459e039ca7fcb",
+        "dimensions": [
+          1920,
+          1280
+        ],
+        "frame": [
+          320,
+          320
+        ]
+      },
+      "note": "Approved lantern v2 original effect pixels. Source cells retained without resizing; display scale follows the registered 512px body canvas."
     }
   }
 }

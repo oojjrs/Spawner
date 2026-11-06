@@ -21,12 +21,14 @@ remain unchanged. Rejected turtle walking is not installed.
 ## Approved effects
 
 - Beetle and leader: their approved flight, release and impact artwork.
+- Lantern: the approved v2 gathering glow, muzzle fan, golden/teal seed projectile
+  and contact bloom. Native rectangular flight cells face right.
 - Toad: the approved water projectile, impact animation and parabolic visual path.
   Flight duration still comes from the server, not the review video's duration.
 - Turtle: the approved static seed projectile, enlarged by 25 percent to a width
   of 125 pixels per displayed original 512-pixel body canvas. There is no new
   turtle impact artwork; existing impact handling remains in use.
-- Bird, mole and lantern retain existing generic flight and impact rendering.
+- Bird and mole retain existing generic flight and impact rendering.
 
 Effects and their rendering contracts are in `client/creature-ranged-vfx.mjs`.
 Only approved assets are registered. Native coordinates are transformed with the

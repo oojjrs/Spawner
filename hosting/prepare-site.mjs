@@ -52,7 +52,7 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
     createHash("sha256").update(bytes).digest("hex") + "." + name.split(".").at(-1)]));
   // Ship revised sprites with the Site so source updates reach production
   // together without requiring a separate asset CDN publication.
-  const localAssets = new Set(["DesignAssets/Welcome/spore-jump.webp", "DesignAssets/Welcome/pebble-jump.webp", "DesignAssets/Animations/CreatureWalkV2/shadow-weasel/walk.webp"]);
+  const localAssets = new Set(["DesignAssets/Welcome/spore-jump.webp", "DesignAssets/Welcome/pebble-jump.webp", "DesignAssets/Animations/CreatureWalkV2/shadow-weasel/walk.webp", ...["charge", "muzzle", "projectile", "impact"].map(stage => "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/" + stage + "-atlas.webp")]);
   const publishedAssets = execFileSync("git", ["show", "HEAD:dist/client/assets.js"], { cwd: destination, encoding: "utf8", maxBuffer: 128 * 1024 * 1024 });
   for (const [name, file] of assetFiles) if (!publishedAssets.includes(assetBase + file)) localAssets.add(name);
   const assetPaths = new Map([...assetFiles].map(([name, file]) => [name,

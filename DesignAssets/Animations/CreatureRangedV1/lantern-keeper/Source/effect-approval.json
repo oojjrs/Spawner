@@ -1,0 +1,664 @@
+{
+  "species": "lantern-keeper",
+  "status": "approved-pending-runtime-integration",
+  "sourceCandidate": "tools/lantern-projectile-v2-20261106",
+  "approved": [
+    "charge",
+    "muzzle",
+    "projectile",
+    "impact"
+  ],
+  "sourceHashes": {
+    "projectile": {
+      "image": "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/projectile-atlas.webp",
+      "sha256": "154bdd038518bdde84f76945645955fc1c3580f4a9ff31ee8c76396197c429a6"
+    },
+    "charge": {
+      "image": "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/charge-atlas.webp",
+      "sha256": "1c708ba97578b46bc444ba17d0191afbff8c4837d2c73ae4ae1ea9bf06ba313a"
+    },
+    "muzzle": {
+      "image": "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/muzzle-atlas.webp",
+      "sha256": "ec436c31cd727d15465f4c124ec685749a6974d5f55de6eeda051a4989d6db24"
+    },
+    "impact": {
+      "image": "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/impact-atlas.webp",
+      "sha256": "429b1b573508454deb801cf8bc193111c3820391b54dc51e4d4459e039ca7fcb"
+    }
+  },
+  "sourceVfxManifest": {
+    "version": 2,
+    "candidate": true,
+    "name": "등불지기 · 여명의 씨앗",
+    "bodyDurationMs": 1000,
+    "previewLaunchMs": 420,
+    "previewImpactMs": 800,
+    "flightDurationMs": 380,
+    "impactDurationMs": 460,
+    "muzzleDurationMs": 180,
+    "releasePoint": {
+      "x": 80,
+      "y": 236
+    },
+    "palette": [
+      "#fffde4",
+      "#ffe798",
+      "#ecb44f",
+      "#71ebd1",
+      "#319d90"
+    ],
+    "status": "unapproved-vfx-candidate-not-integrated",
+    "bodySource": "../lantern-ranged-candidate-20261106",
+    "bodyModified": false,
+    "direction": "+X; rotate to velocity vector",
+    "transparent": true,
+    "blend": "source-over (additive optional, not required)",
+    "assets": {
+      "projectile": {
+        "image": "projectile-atlas.webp",
+        "png": "projectile-atlas.png",
+        "frameWidth": 384,
+        "frameHeight": 192,
+        "columns": 4,
+        "count": 12,
+        "origin": [
+          286,
+          96
+        ],
+        "durationMs": 384,
+        "loop": true,
+        "frames": [
+          {
+            "index": 0,
+            "x": 0,
+            "y": 0,
+            "w": 384,
+            "h": 192,
+            "timeMs": 0
+          },
+          {
+            "index": 1,
+            "x": 384,
+            "y": 0,
+            "w": 384,
+            "h": 192,
+            "timeMs": 32
+          },
+          {
+            "index": 2,
+            "x": 768,
+            "y": 0,
+            "w": 384,
+            "h": 192,
+            "timeMs": 64
+          },
+          {
+            "index": 3,
+            "x": 1152,
+            "y": 0,
+            "w": 384,
+            "h": 192,
+            "timeMs": 96
+          },
+          {
+            "index": 4,
+            "x": 0,
+            "y": 192,
+            "w": 384,
+            "h": 192,
+            "timeMs": 128
+          },
+          {
+            "index": 5,
+            "x": 384,
+            "y": 192,
+            "w": 384,
+            "h": 192,
+            "timeMs": 160
+          },
+          {
+            "index": 6,
+            "x": 768,
+            "y": 192,
+            "w": 384,
+            "h": 192,
+            "timeMs": 192
+          },
+          {
+            "index": 7,
+            "x": 1152,
+            "y": 192,
+            "w": 384,
+            "h": 192,
+            "timeMs": 224
+          },
+          {
+            "index": 8,
+            "x": 0,
+            "y": 384,
+            "w": 384,
+            "h": 192,
+            "timeMs": 256
+          },
+          {
+            "index": 9,
+            "x": 384,
+            "y": 384,
+            "w": 384,
+            "h": 192,
+            "timeMs": 288
+          },
+          {
+            "index": 10,
+            "x": 768,
+            "y": 384,
+            "w": 384,
+            "h": 192,
+            "timeMs": 320
+          },
+          {
+            "index": 11,
+            "x": 1152,
+            "y": 384,
+            "w": 384,
+            "h": 192,
+            "timeMs": 352
+          }
+        ]
+      },
+      "charge": {
+        "image": "charge-atlas.webp",
+        "png": "charge-atlas.png",
+        "frameWidth": 192,
+        "frameHeight": 192,
+        "columns": 4,
+        "count": 12,
+        "origin": [
+          96,
+          96
+        ],
+        "durationMs": 300,
+        "loop": false,
+        "frames": [
+          {
+            "index": 0,
+            "x": 0,
+            "y": 0,
+            "w": 192,
+            "h": 192,
+            "timeMs": 0
+          },
+          {
+            "index": 1,
+            "x": 192,
+            "y": 0,
+            "w": 192,
+            "h": 192,
+            "timeMs": 25
+          },
+          {
+            "index": 2,
+            "x": 384,
+            "y": 0,
+            "w": 192,
+            "h": 192,
+            "timeMs": 50
+          },
+          {
+            "index": 3,
+            "x": 576,
+            "y": 0,
+            "w": 192,
+            "h": 192,
+            "timeMs": 75
+          },
+          {
+            "index": 4,
+            "x": 0,
+            "y": 192,
+            "w": 192,
+            "h": 192,
+            "timeMs": 100
+          },
+          {
+            "index": 5,
+            "x": 192,
+            "y": 192,
+            "w": 192,
+            "h": 192,
+            "timeMs": 125
+          },
+          {
+            "index": 6,
+            "x": 384,
+            "y": 192,
+            "w": 192,
+            "h": 192,
+            "timeMs": 150
+          },
+          {
+            "index": 7,
+            "x": 576,
+            "y": 192,
+            "w": 192,
+            "h": 192,
+            "timeMs": 175
+          },
+          {
+            "index": 8,
+            "x": 0,
+            "y": 384,
+            "w": 192,
+            "h": 192,
+            "timeMs": 200
+          },
+          {
+            "index": 9,
+            "x": 192,
+            "y": 384,
+            "w": 192,
+            "h": 192,
+            "timeMs": 225
+          },
+          {
+            "index": 10,
+            "x": 384,
+            "y": 384,
+            "w": 192,
+            "h": 192,
+            "timeMs": 250
+          },
+          {
+            "index": 11,
+            "x": 576,
+            "y": 384,
+            "w": 192,
+            "h": 192,
+            "timeMs": 275
+          }
+        ]
+      },
+      "muzzle": {
+        "image": "muzzle-atlas.webp",
+        "png": "muzzle-atlas.png",
+        "frameWidth": 256,
+        "frameHeight": 256,
+        "columns": 4,
+        "count": 12,
+        "origin": [
+          128,
+          128
+        ],
+        "durationMs": 180,
+        "loop": false,
+        "frames": [
+          {
+            "index": 0,
+            "x": 0,
+            "y": 0,
+            "w": 256,
+            "h": 256,
+            "timeMs": 0
+          },
+          {
+            "index": 1,
+            "x": 256,
+            "y": 0,
+            "w": 256,
+            "h": 256,
+            "timeMs": 15
+          },
+          {
+            "index": 2,
+            "x": 512,
+            "y": 0,
+            "w": 256,
+            "h": 256,
+            "timeMs": 30
+          },
+          {
+            "index": 3,
+            "x": 768,
+            "y": 0,
+            "w": 256,
+            "h": 256,
+            "timeMs": 45
+          },
+          {
+            "index": 4,
+            "x": 0,
+            "y": 256,
+            "w": 256,
+            "h": 256,
+            "timeMs": 60
+          },
+          {
+            "index": 5,
+            "x": 256,
+            "y": 256,
+            "w": 256,
+            "h": 256,
+            "timeMs": 75
+          },
+          {
+            "index": 6,
+            "x": 512,
+            "y": 256,
+            "w": 256,
+            "h": 256,
+            "timeMs": 90
+          },
+          {
+            "index": 7,
+            "x": 768,
+            "y": 256,
+            "w": 256,
+            "h": 256,
+            "timeMs": 105
+          },
+          {
+            "index": 8,
+            "x": 0,
+            "y": 512,
+            "w": 256,
+            "h": 256,
+            "timeMs": 120
+          },
+          {
+            "index": 9,
+            "x": 256,
+            "y": 512,
+            "w": 256,
+            "h": 256,
+            "timeMs": 135
+          },
+          {
+            "index": 10,
+            "x": 512,
+            "y": 512,
+            "w": 256,
+            "h": 256,
+            "timeMs": 150
+          },
+          {
+            "index": 11,
+            "x": 768,
+            "y": 512,
+            "w": 256,
+            "h": 256,
+            "timeMs": 165
+          }
+        ]
+      },
+      "impact": {
+        "image": "impact-atlas.webp",
+        "png": "impact-atlas.png",
+        "frameWidth": 320,
+        "frameHeight": 320,
+        "columns": 6,
+        "count": 24,
+        "origin": [
+          160,
+          160
+        ],
+        "durationMs": 480,
+        "loop": false,
+        "frames": [
+          {
+            "index": 0,
+            "x": 0,
+            "y": 0,
+            "w": 320,
+            "h": 320,
+            "timeMs": 0
+          },
+          {
+            "index": 1,
+            "x": 320,
+            "y": 0,
+            "w": 320,
+            "h": 320,
+            "timeMs": 20
+          },
+          {
+            "index": 2,
+            "x": 640,
+            "y": 0,
+            "w": 320,
+            "h": 320,
+            "timeMs": 40
+          },
+          {
+            "index": 3,
+            "x": 960,
+            "y": 0,
+            "w": 320,
+            "h": 320,
+            "timeMs": 60
+          },
+          {
+            "index": 4,
+            "x": 1280,
+            "y": 0,
+            "w": 320,
+            "h": 320,
+            "timeMs": 80
+          },
+          {
+            "index": 5,
+            "x": 1600,
+            "y": 0,
+            "w": 320,
+            "h": 320,
+            "timeMs": 100
+          },
+          {
+            "index": 6,
+            "x": 0,
+            "y": 320,
+            "w": 320,
+            "h": 320,
+            "timeMs": 120
+          },
+          {
+            "index": 7,
+            "x": 320,
+            "y": 320,
+            "w": 320,
+            "h": 320,
+            "timeMs": 140
+          },
+          {
+            "index": 8,
+            "x": 640,
+            "y": 320,
+            "w": 320,
+            "h": 320,
+            "timeMs": 160
+          },
+          {
+            "index": 9,
+            "x": 960,
+            "y": 320,
+            "w": 320,
+            "h": 320,
+            "timeMs": 180
+          },
+          {
+            "index": 10,
+            "x": 1280,
+            "y": 320,
+            "w": 320,
+            "h": 320,
+            "timeMs": 200
+          },
+          {
+            "index": 11,
+            "x": 1600,
+            "y": 320,
+            "w": 320,
+            "h": 320,
+            "timeMs": 220
+          },
+          {
+            "index": 12,
+            "x": 0,
+            "y": 640,
+            "w": 320,
+            "h": 320,
+            "timeMs": 240
+          },
+          {
+            "index": 13,
+            "x": 320,
+            "y": 640,
+            "w": 320,
+            "h": 320,
+            "timeMs": 260
+          },
+          {
+            "index": 14,
+            "x": 640,
+            "y": 640,
+            "w": 320,
+            "h": 320,
+            "timeMs": 280
+          },
+          {
+            "index": 15,
+            "x": 960,
+            "y": 640,
+            "w": 320,
+            "h": 320,
+            "timeMs": 300
+          },
+          {
+            "index": 16,
+            "x": 1280,
+            "y": 640,
+            "w": 320,
+            "h": 320,
+            "timeMs": 320
+          },
+          {
+            "index": 17,
+            "x": 1600,
+            "y": 640,
+            "w": 320,
+            "h": 320,
+            "timeMs": 340
+          },
+          {
+            "index": 18,
+            "x": 0,
+            "y": 960,
+            "w": 320,
+            "h": 320,
+            "timeMs": 360
+          },
+          {
+            "index": 19,
+            "x": 320,
+            "y": 960,
+            "w": 320,
+            "h": 320,
+            "timeMs": 380
+          },
+          {
+            "index": 20,
+            "x": 640,
+            "y": 960,
+            "w": 320,
+            "h": 320,
+            "timeMs": 400
+          },
+          {
+            "index": 21,
+            "x": 960,
+            "y": 960,
+            "w": 320,
+            "h": 320,
+            "timeMs": 420
+          },
+          {
+            "index": 22,
+            "x": 1280,
+            "y": 960,
+            "w": 320,
+            "h": 320,
+            "timeMs": 440
+          },
+          {
+            "index": 23,
+            "x": 1600,
+            "y": 960,
+            "w": 320,
+            "h": 320,
+            "timeMs": 460
+          }
+        ]
+      }
+    },
+    "integration": {
+      "launch": "Use authoritative launchedAt / shotLaunches. The 420ms timing is an offline visual preview only.",
+      "impact": "Use the actual hit event / hitAt position. 800ms is a review travel example, not a gameplay rule.",
+      "body": "Body recovery is independent. Do not derive hit or spawn logic from animation.",
+      "audio": false
+    }
+  },
+  "bodyUnchanged": true,
+  "speedAndGameplayUnchanged": true,
+  "audio": false,
+  "runtime": "client/creature-ranged-vfx.mjs",
+  "timingContract": "launchedAt/shotLaunches and authoritative arrival own flight. Do not use offline demo 380ms flight or 800ms impact as gameplay timing.",
+  "approvalEvidence": [
+    "새랑 토끼 오케이. 두꺼비는 저거 포물선 형태로 나가야하지 않냐",
+    ";;;  등불지기",
+    "다 게시해. 승인된 애셋을 올릴 땐 굳이 승인을 요청하지 않아도 된다"
+  ],
+  "bodyChargePointsByFrame": [
+    [
+      123,
+      165
+    ],
+    [
+      85,
+      292
+    ],
+    [
+      75,
+      309
+    ],
+    [
+      53,
+      304
+    ],
+    [
+      80,
+      236
+    ],
+    [
+      80,
+      236
+    ],
+    [
+      80,
+      236
+    ],
+    [
+      80,
+      236
+    ]
+  ],
+  "sourceDocumentHashes": {
+    "lantern-vfx.mjs": "f33678e6b8681d3c6e72753fc91622928fa7cbeebbe5bff42a33598bc1d5727c",
+    "vfx.json": "3e46b356a3a88bef217d42172ddb9aa02836f3268bf6293737276317e6efc74f",
+    "review-1x.mp4": "063f5592f2a1ae25f786baa9ea2715f9f0fae4dcdcc252561fa4cf9c2c7ce57a"
+  },
+  "sourceTimingNotes": {
+    "charge": "Original video uses procedural drawCharge((visualTime-120)/300, visualTime). Atlas is a 12-sample approximation.",
+    "muzzle": "180ms at fixed launch point; faces +X before aim rotation.",
+    "flight": "384ms artwork loop; 55ms growth/fade. This is not gameplay travel duration.",
+    "impact": "460ms visible lifetime; cel23 at460ms is transparent."
+  }
+}

@@ -134,10 +134,10 @@ test("neutral flights retain their first visible outlet and reuse existing gener
     };
     draw(0, []);
     const first = draw(1, [launch])[0], outlet = creatureRangedOutlet(source, direction);
-    const head = command => ({ x: command.x + Math.cos(command.angle) * command.size * .25,
-      y: command.y + Math.sin(command.angle) * command.size * .25 });
+    const head = command => ({ x: command.headX ?? command.x + Math.cos(command.angle) * command.size * .25,
+      y: command.headY ?? command.y + Math.sin(command.angle) * command.size * .25 });
     const origin = head(first);
-    assert.equal(first.image, null);
+    assert.equal(first.image, key === "lantern-keeper" ? "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/projectile-atlas.webp" : null);
     near(origin.x, positions.get("source").x + outlet.x * 200);
     near(origin.y, positions.get("source").y + outlet.y * 200);
     positions.get("source").x += 100;
@@ -145,7 +145,7 @@ test("neutral flights retain their first visible outlet and reuse existing gener
     near(next.x, (origin.x + positions.get("target").x) / 2);
     near(next.y, (origin.y + positions.get("target").y - 25) / 2);
     const hit = draw(2, [launch, { ...launch, id: "hit", kind: "hit", at: 2, amount: 3 }]);
-    assert.equal(hit.at(-1).image, DETAIL_COMBAT_VFX.hit.image);
+    assert.equal(hit.at(-1).image, key === "lantern-keeper" ? "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/impact-atlas.webp" : DETAIL_COMBAT_VFX.hit.image);
     detail.clearView();
     assert.equal(draw(2.1, [launch, { ...launch, id: "cancel", kind: "projectile-cancel", at: 2.1 }]).filter(c => c.kind === "flight").length, 0);
   }
@@ -168,9 +168,9 @@ test("new body registration exactly inverts the approved melee seed transform wi
       near((y - animation.pivotY) / animation.viewSize,
         (y * map.scale + map.offset[1] - old.pivotY) * (old.registrationScale || 1) / old.viewSize);
     }
-    assert.equal(metadata.status, key === "lantern-keeper" ? "approved-body-integrated" : "approved-body-and-effects-integrated");
-    assert.equal(metadata.effectsApproved, key !== "lantern-keeper");
-    assert.equal(!!metadata.projectileAsset, key !== "lantern-keeper");
+    assert.equal(metadata.status, "approved-body-and-effects-integrated");
+    assert.equal(metadata.effectsApproved, true);
+    assert.equal(!!metadata.projectileAsset, true);
     assert.equal(metadata.audio, false);
   }
 });
