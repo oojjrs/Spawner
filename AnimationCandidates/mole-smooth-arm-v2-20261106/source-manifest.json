@@ -1,0 +1,14 @@
+[
+  {
+    "local": "Source/original-mesh.json",
+    "sha256": "c9c625eb5af506d3ccc2f41e5cd9c64ad275f2d336e72b0b3533a1b99961886a"
+  },
+  {
+    "local": "Source/original-rig.json",
+    "sha256": "76731c4563ce99cb0cf2e1347f5a76b1701598df663b6299a367b17b23ffcd7e"
+  },
+  {
+    "local": "Source/neutral.png",
+    "sha256": "a3971df15b38d0b308b4c0e7f0a3f25deccfae34e2354210c43a28a287f1ea2f"
+  }
+]

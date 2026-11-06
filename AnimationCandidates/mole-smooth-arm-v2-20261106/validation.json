@@ -1,0 +1,352 @@
+{
+  "status": "unapproved-study",
+  "frameCount": 64,
+  "uniqueFrames": 64,
+  "minimumVisibleForwardJacobian": 0.38246297292809844,
+  "frameChecks": [
+    {
+      "frame": 0,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 1,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 2,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 3,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 4,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 5,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 6,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 7,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 8,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 9,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 10,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 11,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 12,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 13,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 14,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 15,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 16,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 17,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 18,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 19,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 20,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 21,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 22,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 23,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 24,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 25,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 26,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 27,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 28,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 29,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 30,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 31,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 32,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 33,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 34,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 35,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 36,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 37,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 38,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 39,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 40,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 41,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 42,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 43,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 44,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 45,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 46,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 47,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 48,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 49,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 50,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 51,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 52,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 53,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 54,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 55,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 56,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 57,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 58,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 59,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 60,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 61,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 62,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    },
+    {
+      "frame": 63,
+      "largestDetachedArea": 0,
+      "edgeAlpha": 0
+    }
+  ],
+  "sourceFilesUnchanged": true,
+  "sourceMatchesV2LockedNeutral": true,
+  "sameOriginalMeshTopology": true,
+  "authoredLoopMs": 667,
+  "runtimeSpeedAndScaleVerified": false,
+  "runtimeFootLockingVerified": false,
+  "noNewGeneratedDrawing": true,
+  "audio": false,
+  "limits": "The source exposes only two forepaws and one hindpaw. Hidden surfaces are not invented. 667 ms is the V2 authored loop timing, not verified gameplay cadence. Runtime foot locking and game speed are not verified.",
+  "minimumForwardJacobianBySourceAlphaThreshold": {
+    "1": 0.38246297292809844,
+    "16": 0.38246297292809844,
+    "64": 0.38246297292809844,
+    "128": 0.38246297292809844
+  },
+  "video": {
+    "codec": "h264",
+    "width": 1280,
+    "height": 850,
+    "fps": 60,
+    "durationSeconds": 12,
+    "audioStreams": 0,
+    "realtimePlaybackReviewed": false
+  }
+}

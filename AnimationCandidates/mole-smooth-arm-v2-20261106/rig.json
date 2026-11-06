@@ -1,0 +1,219 @@
+{
+  "status": "unapproved-art-probe-not-integrated",
+  "frameSize": 512,
+  "frameCount": 64,
+  "periodMs": 667,
+  "source": "Source/neutral.png",
+  "sourceRig": "Source/original-rig.json",
+  "sourceMesh": "Source/original-mesh.json",
+  "forwardTravelPixelsPerCycle": 36,
+  "bodyBobPixels": 0.0,
+  "fixedBodyBlendPixels": 42,
+  "fixedHeadLowerBoundary": [
+    [
+      0,
+      276
+    ],
+    [
+      80,
+      276
+    ],
+    [
+      105,
+      286
+    ],
+    [
+      128,
+      300
+    ],
+    [
+      150,
+      316
+    ],
+    [
+      180,
+      335
+    ],
+    [
+      220,
+      341
+    ],
+    [
+      240,
+      326
+    ]
+  ],
+  "legs": [
+    {
+      "name": "paw-near",
+      "phaseOffset": 0,
+      "stance": 0.66,
+      "lift": 13,
+      "pitchDegrees": 6,
+      "anchor": [
+        269,
+        382
+      ],
+      "pivot": [
+        325,
+        288
+      ],
+      "blendStartY": 266,
+      "blendEndY": 326,
+      "maskBlur": 14,
+      "polygon": [
+        [
+          175,
+          317
+        ],
+        [
+          210,
+          283
+        ],
+        [
+          270,
+          245
+        ],
+        [
+          326,
+          242
+        ],
+        [
+          370,
+          270
+        ],
+        [
+          390,
+          320
+        ],
+        [
+          360,
+          380
+        ],
+        [
+          310,
+          426
+        ],
+        [
+          190,
+          430
+        ],
+        [
+          167,
+          370
+        ]
+      ]
+    },
+    {
+      "name": "paw-far",
+      "phaseOffset": 0.5,
+      "stance": 0.66,
+      "lift": 13,
+      "pitchDegrees": 6,
+      "anchor": [
+        100,
+        352
+      ],
+      "pivot": [
+        143,
+        294
+      ],
+      "blendStartY": 266,
+      "blendEndY": 326,
+      "maskBlur": 14,
+      "polygon": [
+        [
+          12,
+          295
+        ],
+        [
+          48,
+          261
+        ],
+        [
+          102,
+          250
+        ],
+        [
+          149,
+          262
+        ],
+        [
+          184,
+          290
+        ],
+        [
+          200,
+          338
+        ],
+        [
+          185,
+          394
+        ],
+        [
+          100,
+          408
+        ],
+        [
+          18,
+          398
+        ],
+        [
+          5,
+          339
+        ]
+      ]
+    },
+    {
+      "name": "rear",
+      "phaseOffset": 0.3,
+      "stance": 0.8,
+      "lift": 4,
+      "pitchDegrees": 2,
+      "anchor": [
+        433,
+        333
+      ],
+      "pivot": [
+        449,
+        300
+      ],
+      "blendStartY": 280,
+      "blendEndY": 325,
+      "maskBlur": 10,
+      "polygon": [
+        [
+          387,
+          305
+        ],
+        [
+          418,
+          281
+        ],
+        [
+          449,
+          287
+        ],
+        [
+          477,
+          314
+        ],
+        [
+          478,
+          360
+        ],
+        [
+          402,
+          365
+        ],
+        [
+          382,
+          336
+        ]
+      ],
+      "forwardTravelPixelsPerCycle": 12
+    }
+  ],
+  "method": "Refined the existing editable V1 weighted-mesh rig on the unchanged locked source. Wide smooth arm-to-body transitions replace the rejected narrow boundary and hard claw plateau. Whole forepaws reach and lift in alternating phases. No new drawing or pixel-painted replacement.",
+  "limits": "The source exposes only two forepaws and one hindpaw. Hidden surfaces are not invented. 667 ms is the V2 authored loop timing, not verified gameplay cadence. Runtime foot locking and game speed are not verified."
+}
