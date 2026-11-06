@@ -1,0 +1,62 @@
+{
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 22,
+  "pivot": [
+    256,
+    448
+  ],
+  "sourceFinalBounds": [
+    70,
+    31,
+    441,
+    447
+  ],
+  "lastFrameMatchesApprovedWalk": true,
+  "fixedClipNormalization": [
+    1.0027027027027027,
+    1.0976253298153034
+  ],
+  "externalSceneRequired": true,
+  "bakedWorldMotion": false,
+  "bakedNest": false,
+  "bakedStalk": false,
+  "durationsMs": [
+    180,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    160,
+    160,
+    160,
+    160,
+    160,
+    160,
+    160,
+    160,
+    80,
+    80,
+    80,
+    80,
+    700
+  ],
+  "previewGeneratedFrom": "feet-birth-body-sheet.png",
+  "backgroundOnlyInGif": "#253040",
+  "worldScaleContract": {
+    "stage": "existing standalone minor walk camera, growth=1",
+    "worldPixelsPerSourcePixel": 0.0008983451536643026,
+    "atCell128": 0.11498817966903073,
+    "applyGrowthOnce": true,
+    "canonicalPixelSize": 512,
+    "sourceMustNotUseCombatTimesTwo": true,
+    "sourceActionScale": 0.72702806613,
+    "externalDisplayScale": 0.90378259521,
+    "gameFilesChanged": false,
+    "notAutoRegistered": true
+  }
+}
