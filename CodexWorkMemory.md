@@ -7,6 +7,20 @@
 
 - 기록자 Codex, 결정 주체 사용자. 출처 채팅 6ae7a6f41c94819380facdaa018ca2b0, 부모 전달 “그래. 원색으로 해”. 원 발언 시각/항목 ID 불명. 승인 파일 libfile_5f241d8ac8f881918973c45f8d687d60의 제작자 확인 원본 PNG만 추가한다. 1254×1254 RGBA, SHA256 58aa335871c82cd89cab67a45e5f49059155608897b963f52936f9e11b18732d.
 - 청록이 최신 원화 선택이며 이전 보라 원본과 승인 이력은 삭제하지 않는다. 청록 탄생/사망은 별도 검수 대기여서 이번 게시 제외. 기존 기획서 분비형 전용 위치 부재는 계속 미해결; 임의 행/문구 추가 및 게임 연결·배포 없음. 최신 main5737f690 fetch 확인.
+## 추가 승인5동작·원화 통합 완료 및 배포 후보 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-all-apply-late-freeze-20261106-01a1b0eb. 기록 시각: 2026-11-06T22:40:38+09:00. 기록자·통합검수판단 Codex /root, 최신전부적용/배포승인 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7 및직접도구/worker원본검수. 원발언정확시각·항목ID·PC식별불명, H:/Spawner Windows PowerShell.
+- 추가실제구현: 새싹콩칼날/갑피/분비사망3종(16프레임2260ms), 샘방울분비원화/탄생13프레임/사망8프레임을연결했다. 분비형native descriptor의frame/pivot/viewSize/registration을몸체크기·성장1회로사용하고spring탄생의외부물효과는유지하며bodywarp중복을없앴다. 새128static도기존채집/납품작업좌표를유지한다. 이전발사/투사체/이동은불변.
+- 기획서: 기존6셀의raw sheet/static원본링크와96px미리보기를교체하고해당data-combat-clip만제거해구버전메타데이터의역덮기를막았다. 원본GIF5개의프레임/각duration/loop일치·static1개·문구불변을검수했다. 합계29애니메이션클립과정지원화1개,기획서미리보기15개다.
+- 확인: 신규원본SHA/치수/타이밍/전체alpha경계/종료표정·높이201/512오차0.3px이내·sourcegate/기존shootwalkprojectile불변·worker6텍스트형식결과와contactPNG를취합/직접확인했다. main은실제game함수를VM추출해spring128탄생crop/물1회/원manifest610ms프레임·bean/springnative사체crop범위,새6asset payload원본일치와bundle/Combat구문을확인했다. 앞선24클립검증은재실행하지않았다.
+- 후보: 고정HEAD f309593acd4190363401bb6915a9f0b0f6a9130f 위후속33경로와이번관련메모리만분리한다. 앞선77경로커밋은rebase후666a521,이번검수후한번더최신origin동기화하고전용main푸시/기존public Sites게시한다. Git/게시성공은실제readback후기록한다. 근거 literal $Trash/assets-all-apply-01a1b0eb/{late-verification.json,creature-final,minor/spring-secretion,vfx/late-assets-result.json}.
+
+## 추가 승인 애셋 pull·후속 적용 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-all-apply-last-source-20261106-01a1b0eb. 기록 시각: 2026-11-06T22:30:15+09:00. 기록자·원격통합/범위판단 Codex /root, 최신pull·전부적용/배포요청 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7 및실제fetch/rebase. 원발언정확시각·항목ID·PC식별불명, H:/Spawner Windows PowerShell.
+- 실제진행: 첫24클립/기획서77경로커밋89a02d03a7c134488afe4607f7b7b8c1f8bd02e5를만든뒤push직전fetch에서원격2cb4546 새싹콩칼날/갑피/분비사망3종과5737f69 샘방울분비원화/탄생/사망을발견했다. 아직push/게시성공없음. main기존3개로컬커밋을새원격위로rebase해현재666a521d5e585e8f7fb43608fe7d116f6fff900f. dirty/index/untracked를별도stash에보관하고memory union임시속성으로기존기록보존후원래속성복원·stash apply--index성공·미해결/인덱스0을직접확인했다. 보존근거 final-sync.json/refs/codex/backups/assets-before-final-sync 유지.
+- 범위추가: 5737f69를이번확인소스기준으로새싹콩3사망·샘방울분비2생애동작과승인정지원화를추가연결한다. 두worker가bean/spring lifecycle분기만독립수정하고다른worker는기존기획서셀/미리보기참조만준비한다. 이전24클립검수/루프/카메라결과를재사용하고후속바이트만검수한다. 원격에더늦게올라오는미확인애셋까지이번완료에포함했다고주장하지않는다.
+
 ## 전투 실험실 복구 커밋 범위 동결 · 01a1a5fd
 
 - 기록 ID: combat-local-assets-commit-freeze-20261106-01a1a5fd. 기록 시각 2026-11-06T22:31:45+09:00. 기록자·범위 분리/커밋 판단 Codex /root, 로컬 커밋 승인 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 ‘커밋해’, 직접 현재 HEAD/작업트리/index와 앞선 최종 검수. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.

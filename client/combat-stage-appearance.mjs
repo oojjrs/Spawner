@@ -93,7 +93,7 @@ export function createCombatStageAppearance(image) {
         animation = tracked.sourceAnimation || animation; frame = tracked.sourceFrame ?? frame;
         const sourceImage = image(animation.image);
         if (!sourceImage) return false;
-        sprite = attributes.frame(agent.tribe, visual, sourceImage, animation, frame, pose.action, time, tracked);
+        sprite = attributes.frame(agent.tribe, visual, sourceImage, animation, frame, pose.action, time, tracked, undefined, undefined, agent);
       }
       if (!sprite) return false;
       const size = fallback.sizeFor?.({ ...pose, animation, frame }) ?? fallback.size;

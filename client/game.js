@@ -4176,6 +4176,24 @@
           return;
         }
       }
+      const nativeLifecycle = Spawner.unitRangedLifecycleAnimation?.(agent, "birth");
+      const nativeSheet = nativeLifecycle?.nativeSecretionLifecycle && agentRangedImage(nativeLifecycle.image);
+      if (nativeSheet?.complete && nativeSheet.naturalWidth) {
+        const elapsed = idleMotion.matches ? nativeLifecycle.durationMs / 1000 : birth.elapsed;
+        const frame = idleMotion.matches ? nativeLifecycle.frameCount - 1 : Spawner.unitAnimationFrame(nativeLifecycle, elapsed * 1000);
+        const size = cell * Spawner.unitRangedDisplaySize(agent) / (100 * unitDisplayScale(agent)) *
+          (nativeLifecycle.registrationScale || 1) * nativeLifecycle.frameSize / (nativeLifecycle.viewSize || nativeLifecycle.frameSize);
+        const pixel = size / nativeLifecycle.frameSize, centerX = topLeft.x + cell / 2;
+        const floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
+        const source = { owner: nativeSheet, index: frame, size: nativeLifecycle.frameSize,
+          x: frame % nativeLifecycle.columns * nativeLifecycle.frameSize, y: Math.floor(frame / nativeLifecycle.columns) * nativeLifecycle.frameSize };
+        Spawner.drawSpringBirthWater(ctx, centerX, floor, cell, elapsed);
+        ctx.save(); ctx.translate(centerX, floor); ctx.scale(birth.facing, 1);
+        const x = -nativeLifecycle.pivotX * pixel, y = -nativeLifecycle.pivotY * pixel;
+        if (outlineColor) drawSelectionOutline(nativeSheet, x, y, size, size, source, outlineColor);
+        ctx.drawImage(nativeSheet, source.x, source.y, source.size, source.size, x, y, size, size);
+        ctx.restore(); return;
+      }
       if (!springBirthSheet.complete || !springBirthSheet.naturalWidth) return;
       const animation = SPRING_BIRTH_ANIMATION;
       const scale = cell * AGENT_HEIGHT * 350 / 512 / animation.height;
@@ -7406,7 +7424,7 @@
       let animation = Spawner.agentDeathAnimation(corpse);
       const entry = unitAnimationSheets.get(corpse.tribe || "bean")?.get("death");
       if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return true;
-      const frame = idleMotion.matches ? animation.frameCount - 1 : index;
+      let frame = idleMotion.matches ? animation.frameCount - 1 : index;
       const attributeFrame = (corpse.tribe || "bean") === "bean" ?
         (attributes.feet && !attributes.antenna && !attributes.strength && !attributes.arms ? sproutCombatFrame(corpse, entry, frame) : null) :
         !["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0) ? null :
@@ -7414,10 +7432,17 @@
       const lifecycle = Spawner.unitRangedLifecycleAnimation?.(corpse, "death");
       const lifecycleSheet = lifecycle && agentRangedImage(lifecycle.image);
       const sheet = attributeFrame || lifecycleSheet || entry.sprite;
+      const nativeLifecycle = !attributeFrame && lifecycleSheet && lifecycle.nativeSecretionLifecycle;
+      if (nativeLifecycle) {
+        animation = lifecycle;
+        frame = idleMotion.matches ? animation.frameCount - 1 : Spawner.unitAnimationFrame(animation, (corpsePlaybackTime() - corpse.diedAt) * 1000);
+      }
       animation = Spawner.imageFrameGeometry(animation, frame);
       const frameSize = attributeFrame ? sheet.width : animation.frameSize;
       const padding = (frameSize - animation.frameSize) / 2;
-      const size = cell * AGENT_HEIGHT * entry.scale * frameSize / animation.frameSize;
+      const size = nativeLifecycle ? cell * Spawner.unitRangedDisplaySize(corpse) / (100 * unitDisplayScale(corpse)) *
+        (animation.registrationScale || 1) * frameSize / (animation.viewSize || frameSize) :
+        cell * AGENT_HEIGHT * entry.scale * frameSize / animation.frameSize;
       const left = -size * (animation.pivotX + padding) / frameSize;
       const top = -size * (animation.pivotY + padding) / frameSize;
       const sourceX = attributeFrame ? 0 : frame % animation.columns * animation.frameSize;

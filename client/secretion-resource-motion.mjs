@@ -30,7 +30,7 @@ export function secretionResourceMotion(tribe, action, clock) {
 
 export function unitSecretionResourcePose(agent, time, appearance) {
   const tribe = agent.tribe || agent.key || "bean", animation = appearance?.idle;
-  if (!profiles[tribe] || !animation || animation.image !== `DesignAssets/Animations/UnitRangedV1/${tribe}/Source/neutral.png` ||
+  if (!profiles[tribe] || !animation || animation.image !== `DesignAssets/Animations/UnitRangedV1/${tribe}/Source/neutral.png` && !animation.nativeSecretionIdle ||
       agent.species || agent.birth || !(agent.health > 0) || !Number.isFinite(time) ||
       agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration) return null;
   const body = unitAnimationPose(agent, time);
@@ -82,25 +82,28 @@ function drawResourceBody(context, image, motion) {
       });
       context.closePath(); context.clip();
       context.transform(xx,yx,xy,yy,p[0]-xx*a[0]-xy*a[1],p[1]-yx*a[0]-yy*a[1]);
-      context.drawImage(image,0,0);
+      context.drawImage(image,0,0,512,512);
     } finally { context.restore(); }
   }
   context.save();
-  try { context.beginPath(); context.rect(0,432,512,80); context.clip(); context.drawImage(image,0,0); }
+  try { context.beginPath(); context.rect(0,432,512,80); context.clip(); context.drawImage(image,0,0,512,512); }
   finally { context.restore(); }
   return true;
 }
 
 export function secretionResourceFrame(image, pose, createSurface, reducedMotion = false) {
-  if (!pose?.resource || !image || image.complete === false ||
-      (image.naturalWidth || image.width) !== 512 || (image.naturalHeight || image.height) !== 512) return null;
+  const size = image?.naturalWidth || image?.width;
+  if (!pose?.resource || !image || image.complete === false || !Number.isInteger(size) || size <= 0 ||
+      size !== (image.naturalHeight || image.height) || size !== 512 && !pose.animation?.nativeSecretionIdle) return null;
   if (reducedMotion || !pose.resource.compression && !pose.resource.sweep) return image;
   let cache = frames.get(image);
   if (!cache) frames.set(image, cache = new Map());
   if (cache.has(pose.resource.key)) return cache.get(pose.resource.key);
   try {
-    const surface = createSurface(512, 512), context = surface?.getContext("2d");
-    if (!context || !drawResourceBody(context, image, pose.resource)) return null;
+    const surface = createSurface(size, size), context = surface?.getContext("2d");
+    if (!context) return null;
+    context.scale(size / 512, size / 512);
+    if (!drawResourceBody(context, image, pose.resource)) return null;
     cache.set(pose.resource.key, surface);
     if (cache.size > 8) cache.delete(cache.keys().next().value);
     return surface;

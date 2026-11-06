@@ -1,0 +1,168 @@
+[
+  {
+    "action": "idle",
+    "image": "DesignAssets/Animations/SecretionApprovedV2/spring/idle.webp",
+    "frameSize": 128,
+    "columns": 1,
+    "frameCount": 1,
+    "pivotX": 64,
+    "pivotY": 112,
+    "viewSize": 128,
+    "durationsMs": [
+      600
+    ],
+    "durationMs": 600,
+    "loop": true,
+    "rangedBody": true,
+    "secretionIdle": true,
+    "nativeSecretionIdle": true,
+    "source": "AnimationCandidates/spring-secretion-v2/secretion-design.png",
+    "sourceSha256": "81f596ddcf0cee4d374d6569af8301e814c525cdd9ea48ef2946765f7387b492",
+    "sha256": "4abf4466d304c38c9b4ab53aa27cb55f5204e6cb5f8f694712dfc599dc427a4f",
+    "grid": [
+      1,
+      1
+    ],
+    "dimensions": [
+      128,
+      128
+    ],
+    "display": [
+      128,
+      128
+    ],
+    "calibration": {
+      "referenceFrame": 0,
+      "sourceBounds": [
+        575,
+        713,
+        346,
+        397
+      ],
+      "uniformScale": 0.07017543859649122,
+      "offset": [
+        20,
+        34
+      ],
+      "referenceHeight": 201,
+      "canonicalCamera": 512
+    }
+  },
+  {
+    "action": "birth",
+    "image": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp",
+    "frameSize": 128,
+    "columns": 4,
+    "frameCount": 13,
+    "pivotX": 64,
+    "pivotY": 112,
+    "viewSize": 128,
+    "durationsMs": [
+      130,
+      120,
+      100,
+      100,
+      80,
+      260,
+      80,
+      90,
+      90,
+      100,
+      100,
+      130,
+      410
+    ],
+    "durationMs": 1790,
+    "loop": false,
+    "rangedBody": true,
+    "secretionLifecycle": true,
+    "nativeSecretionLifecycle": true,
+    "source": "AnimationCandidates/spring-secretion-v2/birth-sheet.png",
+    "sourceSha256": "409e15dfd649d6d814aad354b80d470bacbf37c94d6e495a299dda24dc4c5d90",
+    "sha256": "e431e13a8bd897b7680091da6557bf8fa6e646efed618026926a989653f62588",
+    "grid": [
+      4,
+      4
+    ],
+    "dimensions": [
+      512,
+      512
+    ],
+    "display": [
+      128,
+      128
+    ],
+    "calibration": {
+      "referenceFrame": 12,
+      "sourceBounds": [
+        200,
+        238,
+        192,
+        218
+      ],
+      "uniformScale": 0.2109375,
+      "offset": [
+        2,
+        16
+      ],
+      "referenceHeight": 201,
+      "canonicalCamera": 512
+    }
+  },
+  {
+    "action": "death",
+    "image": "DesignAssets/Animations/SecretionApprovedV2/spring/death.webp",
+    "frameSize": 128,
+    "columns": 4,
+    "frameCount": 8,
+    "pivotX": 64,
+    "pivotY": 112,
+    "viewSize": 128,
+    "durationsMs": [
+      120,
+      100,
+      140,
+      120,
+      140,
+      100,
+      120,
+      600
+    ],
+    "durationMs": 1440,
+    "loop": false,
+    "rangedBody": true,
+    "secretionLifecycle": true,
+    "nativeSecretionLifecycle": true,
+    "source": "AnimationCandidates/spring-secretion-v2/death-sheet.png",
+    "sourceSha256": "56564590e0d6131a2f8c6b3ad29136b5df1405f8d39989c6c381e08229a4dca8",
+    "sha256": "049542138b4e94fec7ed2226422a7cb78cd6c5d44fda5b3b22cae48e4fd29f2d",
+    "grid": [
+      4,
+      2
+    ],
+    "dimensions": [
+      512,
+      256
+    ],
+    "display": [
+      128,
+      128
+    ],
+    "calibration": {
+      "referenceFrame": 0,
+      "sourceBounds": [
+        238,
+        294,
+        138,
+        157
+      ],
+      "uniformScale": 0.171875,
+      "offset": [
+        20,
+        34
+      ],
+      "referenceHeight": 201,
+      "canonicalCamera": 512
+    }
+  }
+]

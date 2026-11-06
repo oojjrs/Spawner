@@ -1,3 +1,4 @@
+import { SPRING_SECRETION_ASSETS } from "./spring-secretion-assets.mjs";
 export const UNIT_RANGED_ASSETS = Object.freeze({
   "spore": {
     "idle": {
@@ -146,21 +147,7 @@ export const UNIT_RANGED_ASSETS = Object.freeze({
     }
   },
   "spring": {
-    "idle": {
-      "image": "DesignAssets/Animations/UnitRangedV1/spring/Source/neutral.png",
-      "frameSize": 512,
-      "columns": 1,
-      "pivotX": 256,
-      "pivotY": 448,
-      "viewSize": 512,
-      "frameCount": 1,
-      "durationMs": 600,
-      "durationsMs": [
-        600
-      ],
-      "loop": true,
-      "rangedBody": true
-    },
+    "idle": SPRING_SECRETION_ASSETS.idle,
     "animation": {
       "image": "DesignAssets/Animations/UnitRangedV1/spring/shoot.webp",
       "frameSize": 512,

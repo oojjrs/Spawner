@@ -11177,6 +11177,126 @@
         1,
         1
       ]
+    },
+    "DesignAssets/Animations/SproutDeathV2/blade/death.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/SproutDeathV2/carapace/death.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/SproutDeathV2/secretion/death.webp": {
+      "display": [
+        83,
+        83
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/SecretionApprovedV2/spring/idle.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        4,
+        4
+      ]
+    },
+    "DesignAssets/Animations/SecretionApprovedV2/spring/death.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/sprout-blade-death.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/sprout-carapace-death.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/sprout-secretion-death.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/spring-secretion-birth.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/spring-secretion-death.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/spring-secretion-design.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
     }
   }
 }

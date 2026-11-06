@@ -1,3 +1,5 @@
+import { SPRING_SECRETION_ASSETS } from "./spring-secretion-assets.mjs";
+import { APPROVED_SPROUT_DEATH_ANIMATIONS } from "./sprout-death-animations.mjs";
 import { SPORE_BIRTH_ANIMATION, PEBBLE_BIRTH_ANIMATION, SPRING_BIRTH_ANIMATION } from "./birth.mjs";
 import { UNIT_ANIMATIONS } from "./unit-animation.mjs";
 import { AGENT_DEATH_ANIMATION } from "./agent-death.mjs";
@@ -16,7 +18,9 @@ export const UNIT_SECRETION_LIFECYCLE_ANIMATIONS = Object.freeze(Object.fromEntr
   Object.entries(bodies).map(([tribe, actions]) => [tribe, Object.freeze(Object.fromEntries(
     Object.entries(actions).map(([action, body]) => [action, Object.freeze({ ...body,
       image: "DesignAssets/Animations/UnitRangedV1/" + tribe + "/" + action + ".png",
-      bodyReferenceImage: body.image, secretionLifecycle: true
+      bodyReferenceImage: body.image, secretionLifecycle: true,
+      ...(tribe === "bean" && action === "death" ? APPROVED_SPROUT_DEATH_ANIMATIONS.secretion : {}),
+      ...(tribe === "spring" ? SPRING_SECRETION_ASSETS[action] : {})
     })])
   ))])
 ));

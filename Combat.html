@@ -11060,11 +11060,111 @@ const COMBAT_EVOLUTION_ASSETS = Object.freeze([
 
 return { COMBAT_EVOLUTION_CATALOG, COMBAT_EVOLUTION_ASSETS };
 })();
+modules["client/sprout-death-animations.mjs"] = (() => {
+const APPROVED_SPROUT_DEATH_ANIMATIONS = Object.freeze({
+  "blade": {
+    "action": "death",
+    "image": "DesignAssets/Animations/SproutDeathV2/blade/death.webp",
+    "frameSize": 256,
+    "columns": 4,
+    "frameCount": 16,
+    "pivotX": 128,
+    "pivotY": 230,
+    "durationsMs": [
+      160,
+      80,
+      80,
+      70,
+      70,
+      60,
+      60,
+      60,
+      60,
+      60,
+      80,
+      90,
+      100,
+      110,
+      120,
+      1000
+    ],
+    "durationMs": 2260,
+    "loop": false
+  },
+  "carapace": {
+    "action": "death",
+    "image": "DesignAssets/Animations/SproutDeathV2/carapace/death.webp",
+    "frameSize": 256,
+    "columns": 4,
+    "frameCount": 16,
+    "pivotX": 128,
+    "pivotY": 230,
+    "durationsMs": [
+      160,
+      80,
+      80,
+      70,
+      70,
+      60,
+      60,
+      60,
+      60,
+      60,
+      80,
+      90,
+      100,
+      110,
+      120,
+      1000
+    ],
+    "durationMs": 2260,
+    "loop": false
+  },
+  "secretion": {
+    "action": "death",
+    "image": "DesignAssets/Animations/SproutDeathV2/secretion/death.webp",
+    "frameSize": 83,
+    "columns": 4,
+    "frameCount": 16,
+    "pivotX": 41.5,
+    "pivotY": 72.625,
+    "durationsMs": [
+      160,
+      80,
+      80,
+      70,
+      70,
+      60,
+      60,
+      60,
+      60,
+      60,
+      80,
+      90,
+      100,
+      110,
+      120,
+      1000
+    ],
+    "durationMs": 2260,
+    "loop": false,
+    "viewSize": 139.00053884913171,
+    "registrationScale": 1.2307692307692308,
+    "bodyReferenceImage": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
+    "secretionLifecycle": true,
+    "nativeSecretionLifecycle": true
+  }
+});
+
+return { APPROVED_SPROUT_DEATH_ANIMATIONS };
+})();
 modules["client/combat-death.mjs"] = (() => {
+const { APPROVED_SPROUT_DEATH_ANIMATIONS } = modules["client/sprout-death-animations.mjs"];
+
 const UNIT_COMBAT_DEATH_ANIMATIONS = Object.freeze({
-  "sprout/blade": Object.freeze({"action":"death","image":"DesignAssets/Animations/CombatDeathV1/sprout/blade/death.webp","frameSize":512,"columns":4,"frameCount":8,"pivotX":256,"pivotY":448,"durationsMs":[100,90,90,100,140,100,100,1100],"durationMs":1820,"loop":false}),
+  "sprout/blade": Object.freeze({ ...APPROVED_SPROUT_DEATH_ANIMATIONS.blade }),
   "sprout/piercing": Object.freeze({"action":"death","image":"DesignAssets/Animations/CombatDeathV1/sprout/piercing/death.webp","frameSize":512,"columns":4,"frameCount":8,"pivotX":256,"pivotY":448,"durationsMs":[100,90,90,100,140,100,100,1100],"durationMs":1820,"loop":false}),
-  "sprout/carapace": Object.freeze({"action":"death","image":"DesignAssets/Animations/CombatDeathV1/sprout/carapace/death.webp","frameSize":512,"columns":4,"frameCount":8,"pivotX":256,"pivotY":448,"durationsMs":[100,90,90,100,140,100,100,1100],"durationMs":1820,"loop":false}),
+  "sprout/carapace": Object.freeze({ ...APPROVED_SPROUT_DEATH_ANIMATIONS.carapace }),
   "spore/blade": Object.freeze({"action":"death","image":"DesignAssets/Animations/CombatDeathV1/spore/blade/death.webp","frameSize":512,"columns":4,"frameCount":8,"pivotX":256,"pivotY":448,"durationsMs":[100,90,90,100,140,100,100,1100],"durationMs":1820,"loop":false}),
   "spore/piercing": Object.freeze({"action":"death","image":"DesignAssets/Animations/CombatDeathV1/spore/piercing/death.webp","frameSize":512,"columns":4,"frameCount":8,"pivotX":256,"pivotY":448,"durationsMs":[100,90,90,100,140,100,100,1100],"durationMs":1820,"loop":false}),
   "spore/carapace": Object.freeze({"action":"death","image":"DesignAssets/Animations/CombatDeathV1/spore/carapace/death.webp","frameSize":512,"columns":4,"frameCount":8,"pivotX":256,"pivotY":448,"durationsMs":[100,90,90,100,140,100,100,1100],"durationMs":1820,"loop":false}),
@@ -11766,7 +11866,7 @@ function secretionResourceMotion(tribe, action, clock) {
 
 function unitSecretionResourcePose(agent, time, appearance) {
   const tribe = agent.tribe || agent.key || "bean", animation = appearance?.idle;
-  if (!profiles[tribe] || !animation || animation.image !== `DesignAssets/Animations/UnitRangedV1/${tribe}/Source/neutral.png` ||
+  if (!profiles[tribe] || !animation || animation.image !== `DesignAssets/Animations/UnitRangedV1/${tribe}/Source/neutral.png` && !animation.nativeSecretionIdle ||
       agent.species || agent.birth || !(agent.health > 0) || !Number.isFinite(time) ||
       agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration) return null;
   const body = unitAnimationPose(agent, time);
@@ -11818,25 +11918,28 @@ function drawResourceBody(context, image, motion) {
       });
       context.closePath(); context.clip();
       context.transform(xx,yx,xy,yy,p[0]-xx*a[0]-xy*a[1],p[1]-yx*a[0]-yy*a[1]);
-      context.drawImage(image,0,0);
+      context.drawImage(image,0,0,512,512);
     } finally { context.restore(); }
   }
   context.save();
-  try { context.beginPath(); context.rect(0,432,512,80); context.clip(); context.drawImage(image,0,0); }
+  try { context.beginPath(); context.rect(0,432,512,80); context.clip(); context.drawImage(image,0,0,512,512); }
   finally { context.restore(); }
   return true;
 }
 
 function secretionResourceFrame(image, pose, createSurface, reducedMotion = false) {
-  if (!pose?.resource || !image || image.complete === false ||
-      (image.naturalWidth || image.width) !== 512 || (image.naturalHeight || image.height) !== 512) return null;
+  const size = image?.naturalWidth || image?.width;
+  if (!pose?.resource || !image || image.complete === false || !Number.isInteger(size) || size <= 0 ||
+      size !== (image.naturalHeight || image.height) || size !== 512 && !pose.animation?.nativeSecretionIdle) return null;
   if (reducedMotion || !pose.resource.compression && !pose.resource.sweep) return image;
   let cache = frames.get(image);
   if (!cache) frames.set(image, cache = new Map());
   if (cache.has(pose.resource.key)) return cache.get(pose.resource.key);
   try {
-    const surface = createSurface(512, 512), context = surface?.getContext("2d");
-    if (!context || !drawResourceBody(context, image, pose.resource)) return null;
+    const surface = createSurface(size, size), context = surface?.getContext("2d");
+    if (!context) return null;
+    context.scale(size / 512, size / 512);
+    if (!drawResourceBody(context, image, pose.resource)) return null;
     cache.set(pose.resource.key, surface);
     if (cache.size > 8) cache.delete(cache.keys().next().value);
     return surface;
@@ -13970,7 +14073,7 @@ function createCombatStageAppearance(image) {
         animation = tracked.sourceAnimation || animation; frame = tracked.sourceFrame ?? frame;
         const sourceImage = image(animation.image);
         if (!sourceImage) return false;
-        sprite = attributes.frame(agent.tribe, visual, sourceImage, animation, frame, pose.action, time, tracked);
+        sprite = attributes.frame(agent.tribe, visual, sourceImage, animation, frame, pose.action, time, tracked, undefined, undefined, agent);
       }
       if (!sprite) return false;
       const size = fallback.sizeFor?.({ ...pose, animation, frame }) ?? fallback.size;
@@ -14789,6 +14892,82 @@ function unitSecretionWalkPose(agent, time, appearance) {
 
 return { UNIT_SECRETION_WALK_ANIMATIONS, unitSecretionWalkPose };
 })();
+modules["client/spring-secretion-assets.mjs"] = (() => {
+const SPRING_SECRETION_ASSETS = Object.freeze({
+  "idle": {
+    "image": "DesignAssets/Animations/SecretionApprovedV2/spring/idle.webp",
+    "frameSize": 128,
+    "columns": 1,
+    "frameCount": 1,
+    "pivotX": 64,
+    "pivotY": 112,
+    "viewSize": 128,
+    "durationsMs": [
+      600
+    ],
+    "durationMs": 600,
+    "loop": true,
+    "rangedBody": true,
+    "secretionIdle": true,
+    "nativeSecretionIdle": true
+  },
+  "birth": {
+    "image": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp",
+    "frameSize": 128,
+    "columns": 4,
+    "frameCount": 13,
+    "pivotX": 64,
+    "pivotY": 112,
+    "viewSize": 128,
+    "durationsMs": [
+      130,
+      120,
+      100,
+      100,
+      80,
+      260,
+      80,
+      90,
+      90,
+      100,
+      100,
+      130,
+      410
+    ],
+    "durationMs": 1790,
+    "loop": false,
+    "rangedBody": true,
+    "secretionLifecycle": true,
+    "nativeSecretionLifecycle": true
+  },
+  "death": {
+    "image": "DesignAssets/Animations/SecretionApprovedV2/spring/death.webp",
+    "frameSize": 128,
+    "columns": 4,
+    "frameCount": 8,
+    "pivotX": 64,
+    "pivotY": 112,
+    "viewSize": 128,
+    "durationsMs": [
+      120,
+      100,
+      140,
+      120,
+      140,
+      100,
+      120,
+      600
+    ],
+    "durationMs": 1440,
+    "loop": false,
+    "rangedBody": true,
+    "secretionLifecycle": true,
+    "nativeSecretionLifecycle": true
+  }
+});
+
+return { SPRING_SECRETION_ASSETS };
+})();
 modules["server/birth.mjs"] = (() => {
 const AGENT_BIRTH_DURATION = 3.85;
 const SPORE_BIRTH_DURATIONS = Object.freeze([180,80,80,80,80,80,80,80,80,160,160,160,160,160,160,160,160,80,80,80,80,700]);
@@ -15235,6 +15414,8 @@ function agentDeathFrame(corpse, time) {
 return { AGENT_DEATH_ANIMATION, AGENT_DEATH_ANIMATIONS, agentDeathAnimation, agentDeathFrame };
 })();
 modules["client/secretion-lifecycle.mjs"] = (() => {
+const { SPRING_SECRETION_ASSETS } = modules["client/spring-secretion-assets.mjs"];
+const { APPROVED_SPROUT_DEATH_ANIMATIONS } = modules["client/sprout-death-animations.mjs"];
 const { SPORE_BIRTH_ANIMATION, PEBBLE_BIRTH_ANIMATION, SPRING_BIRTH_ANIMATION } = modules["client/birth.mjs"];
 const { UNIT_ANIMATIONS } = modules["client/unit-animation.mjs"];
 const { AGENT_DEATH_ANIMATION } = modules["client/agent-death.mjs"];
@@ -15253,7 +15434,9 @@ const UNIT_SECRETION_LIFECYCLE_ANIMATIONS = Object.freeze(Object.fromEntries(
   Object.entries(bodies).map(([tribe, actions]) => [tribe, Object.freeze(Object.fromEntries(
     Object.entries(actions).map(([action, body]) => [action, Object.freeze({ ...body,
       image: "DesignAssets/Animations/UnitRangedV1/" + tribe + "/" + action + ".png",
-      bodyReferenceImage: body.image, secretionLifecycle: true
+      bodyReferenceImage: body.image, secretionLifecycle: true,
+      ...(tribe === "bean" && action === "death" ? APPROVED_SPROUT_DEATH_ANIMATIONS.secretion : {}),
+      ...(tribe === "spring" ? SPRING_SECRETION_ASSETS[action] : {})
     })])
   ))])
 ));
@@ -15263,6 +15446,7 @@ const UNIT_SECRETION_LIFECYCLE_ASSETS = Object.freeze(Object.values(UNIT_SECRETI
 return { UNIT_SECRETION_LIFECYCLE_ANIMATIONS, UNIT_SECRETION_LIFECYCLE_ASSETS };
 })();
 modules["client/unit-ranged-assets.mjs"] = (() => {
+const { SPRING_SECRETION_ASSETS } = modules["client/spring-secretion-assets.mjs"];
 const UNIT_RANGED_ASSETS = Object.freeze({
   "spore": {
     "idle": {
@@ -15411,21 +15595,7 @@ const UNIT_RANGED_ASSETS = Object.freeze({
     }
   },
   "spring": {
-    "idle": {
-      "image": "DesignAssets/Animations/UnitRangedV1/spring/Source/neutral.png",
-      "frameSize": 512,
-      "columns": 1,
-      "pivotX": 256,
-      "pivotY": 448,
-      "viewSize": 512,
-      "frameCount": 1,
-      "durationMs": 600,
-      "durationsMs": [
-        600
-      ],
-      "loop": true,
-      "rangedBody": true
-    },
+    "idle": SPRING_SECRETION_ASSETS.idle,
     "animation": {
       "image": "DesignAssets/Animations/UnitRangedV1/spring/shoot.webp",
       "frameSize": 512,
