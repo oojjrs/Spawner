@@ -153,10 +153,17 @@
       }
     }
   }
-  for (const link of document.querySelectorAll('#codex-attributes [data-combat-clip]')) {
+  for (const link of document.querySelectorAll('#codex-unit-appearance [data-combat-clip]')) {
     const tribe = link.dataset.tribe, key = tribe === 'sprout' ? 'bean' : tribe;
-    const animation = attributes[tribe + '/' + link.dataset.variant]?.[link.dataset.action];
-    if (animation) install(link, units[key], animation, link.dataset.action, true);
+    const animations = attributes[tribe + '/' + link.dataset.variant], animation = animations?.[link.dataset.action];
+    if (!animation) continue;
+    const fit = Math.min(...Object.values(animations).flatMap(clip =>
+      [clip, ...Object.values(clip.frameGeometry || {}).map(shape => ({ ...clip, ...shape }))].map(shape => {
+        const size = shape.frameSize, pivotX = shape.pivotX ?? size / 2, pivotY = shape.pivotY ?? size * .875;
+        return Math.min(stageSize / (2 * Math.max(pivotX, size - pivotX)),
+          floor / pivotY, (stageSize - floor) / (size - pivotY)) / sourceScale(units[key], clip, clip.action);
+      })));
+    install(link, units[key], { ...animation, sourceScale: sourceScale(units[key], animation, link.dataset.action) * fit }, link.dataset.action, true);
   }
   document.addEventListener('visibilitychange', schedule);
   globalThis.SpawnerUnitMatrixPanels = panels;

@@ -22,6 +22,37 @@
 - 승인된 PNG 아틀라스 4개, 대응 프레임·원본 시트·검토 영상 및 필요한 재생정보를 보존한다. Design.html 기존 포자 안테나/발형 셀의 원화와 자료 참조만 갱신하며 새 문구·새 페이지는 추가하지 않는다. 게임 코드·실제 게임 연결·배포는 하지 않는다.
 - 시작 checkout은 Spawner-spring-lifecycle-publish, dedicated origin oojjrs/Spawner. fetch main 및 fast-forward 확인 결과 기존 HEAD와 원격 일치. GitHub Projects 조회는 read:project 권한 부족, 인증 변경하지 않았다. 대용량 복구 아카이브는 승인 대기 상태로 이번 작업에 포함하지 않는다.
 - 실제 확인: 승인 원본과 아틀라스 4개 바이트 일치, 각 2048×1024·8프레임 및 32개 프레임 참조 확인. 기획서 기존 표시 문구와 줄바꿈 형식 유지, 추가 참조 파일 존재, diff 공백 검사 통과. 공통 형식 검사기는 checkout에 없어 실행하지 못했다. 게임 빌드·브라우저 검수는 하지 않았다. 게시 결과는 아직 확인 전이다.
+## 유닛 외형 페이지 최신 부모 재동결 · 01a1b088
+
+- 기록 ID: unit-appearance-page-commit-refreeze-20261106-01a1b088. 기록 시각: 2026-11-06T20:26:39+09:00. 기록자·분리/Git 판단 Codex /root, 커밋 승인 사용자. 출처 현재채팅01a1b088-0d16-7941-bf88-1bb9194b97da의 ‘커밋해’ 및 직접HEAD경합관측. 원발언정확시각·항목ID·딥링크·PC식별불명, H:/Spawner Windows PowerShell host local.
+- 재동결사유: 최초동결이후 다른작업의 a67bb2e 유닛 레벨 제거 및 오래된 테스트 정리 커밋이먼저들어와index/HEAD보호장치가이번커밋실행전에중단했다. 원본freeze기록을보존하고부모기준만이번기록으로대체한다. 동결범위는 Design.html의유닛외형페이지/표시수정, client/unit-matrix-preview.js의연결/프레임맞춤, 본채팅메모리4절+이번기록의정확3경로다. 최신HEAD a67bb2ecf767160aefbf94c483ae9c0f82656bf4에이번변환만적용하고다른작업의기존커밋과작업본문을보존한다. 별도index로검토후main에로컬커밋하며다른미커밋/병행메모리는제외한다.
+- 검수재사용: 실제PC1440/모바일390의셀/문서넘침0·72클립로드/프레임·기존앵커/확대/Escape·오류0과최종72프레임영역/상대배율,직접PNG확인결과를재사용한다. 최종원본3텍스트UTF8NoBom/CRLF·구문/공백검사도통과했다. 커밋을이유로게임/브라우저검사를반복하지않고분리후보/최종staged범위·형식·공백만확인한다. 연결Projects0결과재사용. 메시지 ‘유닛 외형 페이지 분리 및 표 표시 수정’. 아직커밋성공전이며push/배포는수행하지않는다.
+
+## 유닛 외형 페이지 로컬 커밋 범위 확정 · 01a1b088
+
+- 기록 ID: unit-appearance-page-commit-freeze-20261106-01a1b088. 기록 시각: 2026-11-06T20:22:37+09:00. 기록자·분리/Git 판단 Codex /root, 커밋 승인 사용자. 출처 현재채팅01a1b088-0d16-7941-bf88-1bb9194b97da의 ‘커밋해’. 원발언정확시각·항목ID·딥링크·PC식별불명, H:/Spawner Windows PowerShell host local.
+- 동결범위: Design.html의 유닛 외형 페이지 분리/표시CSS/열너비/잘못된tbody/관련selector, client/unit-matrix-preview.js의 새페이지연결과전체프레임맞춤확대, 본채팅메모리3절과이번동결기록의정확3경로다. HEAD 52305234f1853222ecb1242806456681999c90a8에이번HTML변환만적용한후보로기존성장제거등을제외한다. 실제작업본문은덮지않고별도index로스테이징·검토한후main에로컬커밋한다. 다른미커밋/병행메모리를보존한다.
+- 검수재사용: 실제PC1440/모바일390의셀/문서넘침0·72클립로드/프레임·기존앵커/확대/Escape·오류0과최종72프레임영역/상대배율,직접PNG확인결과를재사용한다. 최종원본3텍스트UTF8NoBom/CRLF·구문/공백검사도통과했다. 커밋을이유로게임/브라우저검사를반복하지않고분리후보/최종staged범위·형식·공백만확인한다. 연결Projects0결과재사용. 메시지 ‘유닛 외형 페이지 분리 및 표 표시 수정’. 아직커밋성공전이며push/배포는수행하지않는다.
+
+## 유닛 외형 페이지 분리·표 표시 복구 완료 · 01a1b088 현재 요약
+
+- 기록 ID: unit-appearance-page-complete-20261106-01a1b088. 기록·직접 근거 마지막 확인 시각: 2026-11-06T20:17:50+09:00. 기록자·구현/검수 판단 Codex /root, 분리·표 복구 및 ‘유닛 외형’ 문구 승인 사용자. 출처 현재채팅01a1b088-0d16-7941-bf88-1bb9194b97da의 최초요청·비동기응답 및 직접도구결과. 원발언정확시각·항목ID·딥링크·PC식별불명, H:/Spawner Windows PowerShell host local.
+- 완료: Design.html의 유닛 바로 아래 ‘유닛 외형’ 페이지를 추가하고 기존 속성 페이지의 종족별 외형3행 표·전투외형12행 표와 관련자료/재생script를 옮겼다. 기존 DNA 효과 표 내용은 바이트동일하게 남기고 기존폭/설명스타일도 유지했다. 외형 표의 내용·원본참조는 DOM동일 대조로 보존했고 새 문구는 승인된 목차/제목뿐이다.
+- 표시수정: 96px셀에256pxcanvas를강제하던규칙을셀100%로고치고 전투표를112/96/112×6의880px열구조로정리, 중복tbody닫기를제거했다. client/unit-matrix-preview.js의대상과확대selector를새페이지로연결하고 종족/변종별 공통확대값을 전체프레임/피벗경계에서산출해 행동간비율을유지하며읽을수있게확대했다. 게임/다른유닛페이지/원본자산은수정하지않았다.
+- 직접검수: 격리headlessEdge 실제file HTML의PC1440/모바일390에서셀넘침0·문서가로넘침0·canvas96px·72클립원본로드/재생프레임·누락참조0·중복ID0·단일페이지선택을확인했다. 기존attribute-blade해시가새페이지를선택하며목차aria-current도맞고, 실제확대재생/Escape닫기성공. 최종확대보완에서는72클립의원본전체프레임영역이표시stage안에들어오고그룹별행동상대배율이동일함을확인했으며 확대프레임1을실제관측했다. 각실행JS오류0. 실제최종PC/모바일/확대PNG를메인이직접열어확인했다. 전체애니메이션의모든시점을육안검수했다고확대하지않는다.
+- 범위검토: 작업전사본대비국소diff를읽었고 Design전체가이번이동·CSS·selector recipe만적용한예상결과와정확히일치했다(scope-review.json=true). 기존Design의다른미커밋변경과병행게임/서버/메모리기록은보존한다. 제품변경은Design.html과client/unit-matrix-preview.js 두경로, 지원기록은본메모리다. 미스테이징·미커밋·미배포 상태로리뷰대기이며구현/화면검수blocker없음. 최종공유형식검사/공백검사는직후실행출력에따른다.
+- 근거: 프로젝트literal $Trash/unit-appearance-page/의before사본·verification.json·frame-fit.json·scope-review.json·제품국소diff·desktop.png/mobile.png/lightbox.png. 앞선scope 및frame-fit 기록의수정/검수대기는이완료기록으로대체하며원기록보존. 연결GitHub Projects0 결과를재사용한다.
+## 유닛 외형 렌더 크기 보완 판단 · 01a1b088
+
+- 기록 ID: unit-appearance-page-frame-fit-20261106-01a1b088. 기록 시각: 2026-11-06T20:14:43+09:00. 기록자·표시판단 Codex /root, 복구 요구 사용자. 출처 현재채팅01a1b088-0d16-7941-bf88-1bb9194b97da와 실제 headless 렌더 PNG/verification.json. 원발언정확시각·항목ID·PC식별불명, H:/Spawner Windows PowerShell host local.
+- 직접 확인: 이전72canvas가 모두 셀을 넘었고 파일참조/런타임원본누락0이었다. 1차수정 후 PC1440/모바일390 모두 넘침0·96px셀·72원본로드·본문/기존표내용보존·기존attribute-blade해시와확대/Escape·JS오류0을확인했다. 초기 픽셀검사도구는 file URL의 tainted canvas 제한으로 실패했으며 도구에서픽셀읽기를제거하고 실로드·프레임·실제PNG로확인했다. 픽셀비교성공을주장하지않는다.
+- PNG 직접검토로 잔여문제 확인: 256px 렌더 stage의 게임용 sourceScale까지 96px로축소돼 전투 외형이 지나치게 작아졌다. 이페이지의각 종족/변종에서 원본프레임전체와기존피벗이셀안에들어오는공통확대비율을적용한다. 행동간상대크기·피벗·사망비율/타이밍은유지하며 다른유닛페이지와게임은변경하지않는다. 이표시보완후 달라진크기/프레임경계·실제PNG만재확인하고 이미통과한문구·앵커/원본조회는반복하지않는다.
+## 유닛 외형 페이지 분리·표 표시 복구 착수 · 01a1b088 현재 요약
+
+- 기록 ID: unit-appearance-page-scope-20261106-01a1b088. 기록 시각: 2026-11-06T20:07:25+09:00. 기록자·구현 판단 Codex /root, 페이지 분리·표 복구·문구 승인 사용자. 출처 현재 채팅01a1b088-0d16-7941-bf88-1bb9194b97da의 최초 요청 및 비동기 응답 ‘유닛 외형’으로 적용. 원발언 정확시각·항목ID·딥링크·PC식별 불명. 환경 H:/Spawner, Windows PowerShell, host local.
+- 확정: Design.html 속성 페이지의 종족별 유닛 외형·전투 외형 표를 분리하여 유닛 바로 아래 새 ‘유닛 외형’ 목차·제목으로 옮긴다. 기존 DNA 효과 표는 속성에 남기며 기존 외형 자료·앵커·재생·확대를 보존한다. 새 설명/표 문구는 추가하지 않는다.
+- 직접 소스 관측: 96px 외형 셀 내부에 256px canvas/link를 강제하는 규칙, 이동 후 끊길 #codex-attributes 전용 CSS·재생/확대 selector, 중복 tbody 닫기가 있다. 이 구역과 연결 스크립트만 국소 수정하고 pre-existing Design·게임/서버/번들·메모리 병행변경은 보존한다. 연결 저장소 origin=https://github.com/oojjrs/Spawner, 이번 직접 Projects 조회0으로 보드 작업 없음.
+- 상태: 조사·문구확정 완료, 제품 수정 전. 영향받는 실제 로컬 HTML의 PC/좁은 화면 및 새 페이지/기존 앵커/표 이미지·애니메이션·확대를 격리 headless로 검수한다. 스테이징·커밋·배포는 요청되지 않았다.
 ## 이동 범위 커밋 후보의 기존 차이 확인 · 01a1b076
 
 - 기록 ID: gather-home-range-commit-baseline-20261106-01a1b076. 기록 시각 2026-11-06T20:09:26+09:00. 기록자·분리판단 Codex /root, 이번이동수정만커밋 결정 사용자. 출처 현재채팅01a1b076-6f8c-7770-a2f8-cf4d8efedd95의커밋요청과후보/HEAD직접대조. 원발언시각·항목ID 불명, H:/Spawner Windows PowerShell host local.
