@@ -8159,7 +8159,7 @@
       const { stats, base } = Spawner.dnaDesignStats(Spawner.ATTRIBUTE_DNA, unitDraft.dna.pieces);
       const counts = Spawner.dnaAppearance(unitDraft.dna);
       prepareAgentTemplate(unitDraft).catch(() => {});
-      document.getElementById("design-preview-image").src = agentImageSource({ tribe: unitDraft.tribe, attributes: counts, carrying: 0 });
+      document.getElementById("design-preview-image").src = agentImageSource({ tribe: unitDraft.tribe, dna: unitDraft.dna, attributes: counts, carrying: 0 });
       Spawner.renderDnaDesignStats(document.getElementById("design-stats"), stats, base, true);
       designSave.disabled = unitDraft.readOnly || !!state.ending || connection.busy || !connection.online || !Spawner.validateDna(unitDraft.dna, state.nestLevel, 999999999);
       setEvolutionText(designStatus, unitDraft.error);

@@ -22,6 +22,23 @@
 - 승인된 PNG 아틀라스 4개, 대응 프레임·원본 시트·검토 영상 및 필요한 재생정보를 보존한다. Design.html 기존 포자 안테나/발형 셀의 원화와 자료 참조만 갱신하며 새 문구·새 페이지는 추가하지 않는다. 게임 코드·실제 게임 연결·배포는 하지 않는다.
 - 시작 checkout은 Spawner-spring-lifecycle-publish, dedicated origin oojjrs/Spawner. fetch main 및 fast-forward 확인 결과 기존 HEAD와 원격 일치. GitHub Projects 조회는 read:project 권한 부족, 인증 변경하지 않았다. 대용량 복구 아카이브는 승인 대기 상태로 이번 작업에 포함하지 않는다.
 - 실제 확인: 승인 원본과 아틀라스 4개 바이트 일치, 각 2048×1024·8프레임 및 32개 프레임 참조 확인. 기획서 기존 표시 문구와 줄바꿈 형식 유지, 추가 참조 파일 존재, diff 공백 검사 통과. 공통 형식 검사기는 checkout에 없어 실행하지 못했다. 게임 빌드·브라우저 검수는 하지 않았다. 게시 결과는 아직 확인 전이다.
+## 채집 DNA 미리보기 수정 커밋 범위 확정 · 01a1b095
+
+- 기록 ID: dna-design-preview-freeze-20261106-01a1b095. 기록 시각: 2026-11-06T20:28:27+09:00. 기록자·분리/Git 판단 Codex /root, 로컬 커밋 결정 사용자. 출처 현재 채팅 01a1b095-4dff-7b02-ad0f-79812397761c의 ‘커밋’. 원발언 정확시각·항목 ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
+- 동결 범위는 client/game.js의 updateDnaDesign에 dna 인수를 추가한 한 줄과 본 채팅 메모리 세 절이다. HEAD b6b46ffb5e6a23811425e107087809c7bce7c86b를 기준으로 별도 index에 분리하며 기존 렌더/웰컴 등 공유 작업파일의 다른 변경은 보존한다. 후속 유닛 정보창 DNA 툴팁 요청은 이 커밋 이후 별도 구현 범위다.
+- 네 종족 채집 적용/제거, 기존 구문·형식 확인은 재사용하고 최종 후보의 구문·형식·staged 범위만 확인한다. 연결 Projects 없음 결과 재사용. 메시지 ‘채집 DNA 설계 미리보기 외형 수정’. 아직 커밋 성공 전이며 push·배포는 요청되지 않았다.
+
+## 채집 DNA 설계 미리보기 외형 연결 완료 · 01a1b095
+
+- 기록 ID: dna-design-preview-complete-20261106-01a1b095. 기록·근거 확인 시각: 2026-11-06T20:22:11+09:00. 기록자·수정/검수판단 Codex /root, 기대 외형 제보 사용자. 출처 현재 채팅 01a1b095-4dff-7b02-ad0f-79812397761c와 실제 도구 결과. 원발언 정확시각·항목 ID·딥링크·PC식별 불명. H:/Spawner Windows PowerShell host local.
+- 실제 변경은 client/game.js의 updateDnaDesign→agentImageSource 인수에 dna: unitDraft.dna를 추가한 한 줄뿐이다. 기존 공통 unitDisplayAttributes의 gather→strength1 경로를 설계 미리보기에도 적용한다. 실제 유닛 데이터·스탯·기존 그림·슬롯 전용 분기는 바꾸지 않았다. Spawner.html의 직접 game.js 로드를 확인해 번들/HTML 재생성은 하지 않았다.
+- 직접 확인: 작업 전 사본에 이번 인수 추가를 역제거하면 전체 game.js와 정확히 일치해 병행 변경 보존을 확인했다. node --check client/game.js 성공. 실제 공통 외형 함수를 네 종족 각각 실행해 채집 DNA 전달 시 strength1, 비채집/채집 제거 시 기본 외형 복귀를 확인했다. 브라우저 화면·실제 이미지 재촬영 결과를 주장하지 않는다. 최종 공유형식 검사와 한 줄 scoped diff의 결과는 아래 근거 finish.json에 기록한다.
+- 상태: 로컬 코드 수정 완료, 미스테이징·미커밋·미배포. 원인과 수정 전 상태 dna-design-preview-scope-20261106-01a1b095를 이 완료기록으로 대체하며 원기록은 보존한다. 연결 Projects 없음. 근거 H:/Spawner/$Trash/dna-design-preview-01a1b095의 game-before.js, scoped.diff, finish.json. 다른 채팅의 파일·메모리 기록은 보존했다.
+## 채집 DNA 설계 미리보기 외형 연결 · 01a1b095 현재 요약
+
+- 기록 ID: dna-design-preview-scope-20261106-01a1b095. 기록 시각: 2026-11-06T20:21:08+09:00. 기록자·수정판단 Codex /root, 기대 외형 제보 사용자. 출처 현재 채팅 01a1b095-4dff-7b02-ad0f-79812397761c의 첨부 화면과 ‘채집 dna를 사용 중이면 쟁반 들고 있는 이미지’ 요청. 원발언 정확시각·항목 ID·딥링크·PC식별 불명. H:/Spawner Windows PowerShell host local.
+- 직접 확인: 기존 gather→strength1 표시 투영은 DNA를 받아야 적용된다. client/game.js의 updateDnaDesign은 dnaAppearance 결과만 agentImageSource로 넘겨 실제 편집 DNA를 누락하고 있었다. Spawner.html은 game.js를 직접 로드하므로 이 호출 한 곳에 unitDraft.dna를 전달하는 최소수정으로 연결한다. 구형 슬롯 분기·원본 그림·스탯·다른 미커밋 변경은 보존한다.
+- 상태: 원인 조사 완료, 제품 변경·결과 확인 전. GitHub 연결 Projects 직접 조회 nodes=[]로 보드 없음. 새브랜치·stage·commit·push·배포는 요청되지 않았다. 임시 근거는 literal $Trash/dna-design-preview-01a1b095. 기존 채집 외형 수정 기록 gather-plate-render-result-20261106-01a1b058은 실제 유닛 경로의 근거로 유지하며 이번 설계 미리보기 누락과 구분한다.
 ## 유닛 외형 페이지 최신 부모 재동결 · 01a1b088
 
 - 기록 ID: unit-appearance-page-commit-refreeze-20261106-01a1b088. 기록 시각: 2026-11-06T20:26:39+09:00. 기록자·분리/Git 판단 Codex /root, 커밋 승인 사용자. 출처 현재채팅01a1b088-0d16-7941-bf88-1bb9194b97da의 ‘커밋해’ 및 직접HEAD경합관측. 원발언정확시각·항목ID·딥링크·PC식별불명, H:/Spawner Windows PowerShell host local.
