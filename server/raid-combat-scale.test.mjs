@@ -21,7 +21,7 @@ const beetle = () => ({ species:"spiny-back-beetle", attributes:{}, health:100,
   stats:{ ...unitCombatStats("spiny-back-beetle"), attack:3, speed:1, vision:4 } });
 
 test("raid cohorts rise at the exact stage boundary and never exceed baseline", () => {
-  assert.deepEqual(RAID_COMBAT_STAGES.map(stage => raidCombatStage(stage.at)), [0,1,2,3,4]);
+  assert.deepEqual(RAID_COMBAT_STAGES.map(stage => raidCombatStage(stage.at)), RAID_COMBAT_STAGES.map((_, index) => index));
   for (let index = 1; index < RAID_COMBAT_STAGES.length; index++)
     assert.equal(raidCombatStage(RAID_COMBAT_STAGES[index].at - .001), index - 1);
   for (const [index, stage] of RAID_COMBAT_STAGES.entries()) {
@@ -30,6 +30,17 @@ test("raid cohorts rise at the exact stage boundary and never exceed baseline", 
     assert.equal(agent.stats.health, 100 * stage.health);
     assert.ok(Math.abs(agent.stats.attackPower - 23.2 * stage.damage) < 1e-8);
     assert.equal(agent.stats.attack, 3 * stage.damage);
+  }
+});
+
+test("midgame stages retain opening and progressively approach full strength", () => {
+  assert.deepEqual(RAID_COMBAT_STAGES.map(s => [s.at,s.health,s.damage]), [
+    [300,.2,.1],[480,.3,.15],[720,.4,.2],[1080,.5,.2],
+    [1500,.65,.25],[1800,.8,.4],[2100,.9,.6],[2400,1,1]
+  ]);
+  for(let i=1;i<RAID_COMBAT_STAGES.length;i++) {
+    assert.ok(RAID_COMBAT_STAGES[i].health>=RAID_COMBAT_STAGES[i-1].health);
+    assert.ok(RAID_COMBAT_STAGES[i].damage>=RAID_COMBAT_STAGES[i-1].damage);
   }
 });
 
@@ -103,4 +114,17 @@ test("every cohort keeps damage and fractional injury through creature serializa
     assert.equal(b.raidCombatScale.stage,index);assert.deepEqual(b.stats,expected);
     assert.ok(Math.abs(b.health-stage.health*60)<1e-8);
   }
+});
+
+
+test("version-one cohorts preserve old strength while new cohorts use calibrated stages",()=>{
+  const old = {...beetle(), health:50, raidCombatScale:{version:1,stage:4}};
+  applyRaidCombatScale(old);
+  assert.equal(old.health,50); assert.equal(old.stats.health,100);
+  assert.equal(old.stats.attack,3);
+  const current=beetle();applyRaidCombatScale(current,1500);
+  assert.equal(current.raidCombatScale.version,2);
+  assert.equal(current.stats.health,65);assert.equal(current.stats.attack,.75);
+  current.health/=2;applyRaidCombatScale(current);
+  assert.equal(current.health,32.5);
 });

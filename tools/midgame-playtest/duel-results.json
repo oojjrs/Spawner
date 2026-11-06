@@ -1,0 +1,146 @@
+[
+  {
+    "name": "basic",
+    "hp": 0.4,
+    "damage": 0.2,
+    "count": 1,
+    "kills": 0,
+    "survivors": 0
+  },
+  {
+    "name": "basic",
+    "hp": 0.4,
+    "damage": 0.2,
+    "count": 2,
+    "kills": 30,
+    "survivors": 1.5333333333333334
+  },
+  {
+    "name": "basic",
+    "hp": 0.5,
+    "damage": 0.2,
+    "count": 1,
+    "kills": 0,
+    "survivors": 0
+  },
+  {
+    "name": "basic",
+    "hp": 0.5,
+    "damage": 0.2,
+    "count": 2,
+    "kills": 30,
+    "survivors": 1.0333333333333334
+  },
+  {
+    "name": "basic",
+    "hp": 0.65,
+    "damage": 0.25,
+    "count": 1,
+    "kills": 0,
+    "survivors": 0
+  },
+  {
+    "name": "basic",
+    "hp": 0.65,
+    "damage": 0.25,
+    "count": 2,
+    "kills": 0,
+    "survivors": 0
+  },
+  {
+    "name": "guard",
+    "hp": 0.4,
+    "damage": 0.2,
+    "count": 1,
+    "kills": 30,
+    "survivors": 1
+  },
+  {
+    "name": "guard",
+    "hp": 0.4,
+    "damage": 0.2,
+    "count": 2,
+    "kills": 30,
+    "survivors": 2
+  },
+  {
+    "name": "guard",
+    "hp": 0.5,
+    "damage": 0.2,
+    "count": 1,
+    "kills": 30,
+    "survivors": 1
+  },
+  {
+    "name": "guard",
+    "hp": 0.5,
+    "damage": 0.2,
+    "count": 2,
+    "kills": 30,
+    "survivors": 2
+  },
+  {
+    "name": "guard",
+    "hp": 0.65,
+    "damage": 0.25,
+    "count": 1,
+    "kills": 0,
+    "survivors": 0
+  },
+  {
+    "name": "guard",
+    "hp": 0.65,
+    "damage": 0.25,
+    "count": 2,
+    "kills": 30,
+    "survivors": 2
+  },
+  {
+    "name": "advanced",
+    "hp": 0.4,
+    "damage": 0.2,
+    "count": 1,
+    "kills": 30,
+    "survivors": 1
+  },
+  {
+    "name": "advanced",
+    "hp": 0.4,
+    "damage": 0.2,
+    "count": 2,
+    "kills": 30,
+    "survivors": 2
+  },
+  {
+    "name": "advanced",
+    "hp": 0.5,
+    "damage": 0.2,
+    "count": 1,
+    "kills": 30,
+    "survivors": 1
+  },
+  {
+    "name": "advanced",
+    "hp": 0.5,
+    "damage": 0.2,
+    "count": 2,
+    "kills": 30,
+    "survivors": 2
+  },
+  {
+    "name": "advanced",
+    "hp": 0.65,
+    "damage": 0.25,
+    "count": 1,
+    "kills": 30,
+    "survivors": 1
+  },
+  {
+    "name": "advanced",
+    "hp": 0.65,
+    "damage": 0.25,
+    "count": 2,
+    "kills": 30,
+    "survivors": 2
+  }
+]

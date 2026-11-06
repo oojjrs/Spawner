@@ -1,0 +1,556 @@
+[
+  {
+    "seed": 13,
+    "tribe": "spring",
+    "history": [
+      {
+        "time": 60,
+        "points": 38,
+        "food": 5,
+        "nest": 100,
+        "level": 1,
+        "agents": 4,
+        "soldiers": 0,
+        "combatSeconds": 0
+      },
+      {
+        "time": 120,
+        "points": 24,
+        "food": 11,
+        "nest": 200,
+        "level": 2,
+        "agents": 4,
+        "soldiers": 0,
+        "combatSeconds": 0
+      },
+      {
+        "time": 180,
+        "points": 13,
+        "food": 23,
+        "nest": 200,
+        "level": 2,
+        "agents": 5,
+        "soldiers": 1,
+        "combatSeconds": 0
+      },
+      {
+        "time": 240,
+        "points": 8,
+        "food": 41,
+        "nest": 200,
+        "level": 2,
+        "agents": 6,
+        "soldiers": 2,
+        "combatSeconds": 0
+      },
+      {
+        "time": 300,
+        "points": 27,
+        "food": 60,
+        "nest": 200,
+        "level": 2,
+        "agents": 6,
+        "soldiers": 2,
+        "combatSeconds": 0
+      },
+      {
+        "time": 360,
+        "points": 20,
+        "food": 76,
+        "nest": 200,
+        "level": 2,
+        "agents": 7,
+        "soldiers": 3,
+        "combatSeconds": 4.75
+      },
+      {
+        "time": 420,
+        "points": 15,
+        "food": 94,
+        "nest": 200,
+        "level": 2,
+        "agents": 8,
+        "soldiers": 4,
+        "combatSeconds": 7.25
+      },
+      {
+        "time": 480,
+        "points": 15,
+        "food": 117,
+        "nest": 200,
+        "level": 2,
+        "agents": 9,
+        "soldiers": 5,
+        "combatSeconds": 7.25
+      },
+      {
+        "time": 540,
+        "points": 13,
+        "food": 138,
+        "nest": 200,
+        "level": 2,
+        "agents": 10,
+        "soldiers": 6,
+        "combatSeconds": 15.75
+      },
+      {
+        "time": 600,
+        "points": 0,
+        "food": 162,
+        "nest": 200,
+        "level": 2,
+        "agents": 11,
+        "soldiers": 7,
+        "combatSeconds": 15.75
+      },
+      {
+        "time": 660,
+        "points": 21,
+        "food": 183,
+        "nest": 200,
+        "level": 2,
+        "agents": 11,
+        "soldiers": 7,
+        "combatSeconds": 18.25
+      },
+      {
+        "time": 720,
+        "points": 8,
+        "food": 207,
+        "nest": 200,
+        "level": 2,
+        "agents": 12,
+        "soldiers": 8,
+        "combatSeconds": 18.25
+      },
+      {
+        "time": 780,
+        "points": 26,
+        "food": 225,
+        "nest": 200,
+        "level": 2,
+        "agents": 11,
+        "soldiers": 7,
+        "combatSeconds": 22.75
+      },
+      {
+        "time": 840,
+        "points": 11,
+        "food": 243,
+        "nest": 200,
+        "level": 2,
+        "agents": 12,
+        "soldiers": 7,
+        "combatSeconds": 22.75
+      },
+      {
+        "time": 900,
+        "points": 30,
+        "food": 262,
+        "nest": 200,
+        "level": 2,
+        "agents": 10,
+        "soldiers": 6,
+        "combatSeconds": 32.5
+      },
+      {
+        "time": 960,
+        "points": 10,
+        "food": 279,
+        "nest": 200,
+        "level": 2,
+        "agents": 8,
+        "soldiers": 4,
+        "combatSeconds": 41.75
+      },
+      {
+        "time": 1020,
+        "points": 31,
+        "food": 300,
+        "nest": 200,
+        "level": 2,
+        "agents": 8,
+        "soldiers": 4,
+        "combatSeconds": 41.75
+      },
+      {
+        "time": 1080,
+        "points": 14,
+        "food": 320,
+        "nest": 200,
+        "level": 2,
+        "agents": 8,
+        "soldiers": 4,
+        "combatSeconds": 50.25
+      },
+      {
+        "time": 1140,
+        "points": 20,
+        "food": 326,
+        "nest": 190.99999999999994,
+        "level": 2,
+        "agents": 5,
+        "soldiers": 2,
+        "combatSeconds": 51.75
+      },
+      {
+        "time": 1200,
+        "points": 20,
+        "food": 326,
+        "nest": 147.79999999999967,
+        "level": 2,
+        "agents": 4,
+        "soldiers": 1,
+        "combatSeconds": 51.75
+      },
+      {
+        "time": 1260,
+        "points": 20,
+        "food": 326,
+        "nest": 52.39999999999968,
+        "level": 2,
+        "agents": 4,
+        "soldiers": 1,
+        "combatSeconds": 51.75
+      },
+      {
+        "time": 1320,
+        "points": 20,
+        "food": 326,
+        "nest": 0,
+        "level": 2,
+        "agents": 4,
+        "soldiers": 1,
+        "combatSeconds": 51.75
+      }
+    ],
+    "soldierBirths": [
+      150,
+      225,
+      360,
+      420,
+      480,
+      540,
+      600,
+      720,
+      930,
+      1035
+    ],
+    "raidEvents": [
+      {
+        "time": 316,
+        "id": "beetle:burrow:large:6576:4",
+        "phase": "outbound",
+        "health": 20,
+        "x": 15,
+        "y": 42,
+        "departed": 316
+      },
+      {
+        "time": 331.75,
+        "id": "beetle:burrow:large:6576:4",
+        "phase": "active",
+        "health": 20,
+        "x": 15,
+        "y": 29,
+        "departed": 316
+      },
+      {
+        "time": 362.75,
+        "id": "beetle:burrow:large:6576:4",
+        "phase": "dead",
+        "health": 0,
+        "x": 19,
+        "y": 27,
+        "departed": 316
+      },
+      {
+        "time": 466,
+        "id": "beetle:burrow:large:6576:1",
+        "phase": "outbound",
+        "health": 20,
+        "x": 18,
+        "y": 42,
+        "departed": 466
+      },
+      {
+        "time": 483.5,
+        "id": "beetle:burrow:large:6576:1",
+        "phase": "active",
+        "health": 20,
+        "x": 17,
+        "y": 29,
+        "departed": 466
+      },
+      {
+        "time": 495.5,
+        "id": "beetle:burrow:large:6576:1",
+        "phase": "dead",
+        "health": 0,
+        "x": 17,
+        "y": 29,
+        "departed": 466
+      },
+      {
+        "time": 616,
+        "id": "beetle:burrow:large:6576:5",
+        "phase": "outbound",
+        "health": 30,
+        "x": 16,
+        "y": 42,
+        "departed": 616
+      },
+      {
+        "time": 633.5,
+        "id": "beetle:burrow:large:6576:5",
+        "phase": "active",
+        "health": 30,
+        "x": 17,
+        "y": 29,
+        "departed": 616
+      },
+      {
+        "time": 638.75,
+        "id": "beetle:burrow:large:6576:5",
+        "phase": "dead",
+        "health": 0,
+        "x": 17,
+        "y": 28,
+        "departed": 616
+      },
+      {
+        "time": 736,
+        "id": "beetle:burrow:large:6576:3",
+        "phase": "outbound",
+        "health": 50,
+        "x": 19,
+        "y": 42,
+        "departed": 736
+      },
+      {
+        "time": 756.25,
+        "id": "beetle:burrow:large:6576:3",
+        "phase": "active",
+        "health": 50,
+        "x": 19,
+        "y": 29,
+        "departed": 736
+      },
+      {
+        "time": 767,
+        "id": "beetle:burrow:large:6576:3",
+        "phase": "dead",
+        "health": 0,
+        "x": 17,
+        "y": 28,
+        "departed": 736
+      },
+      {
+        "time": 826,
+        "id": "beetle:burrow:large:6576:6",
+        "phase": "outbound",
+        "health": 50,
+        "x": 17,
+        "y": 42,
+        "departed": 826
+      },
+      {
+        "time": 844.25,
+        "id": "beetle:burrow:large:6576:6",
+        "phase": "active",
+        "health": 50,
+        "x": 19,
+        "y": 29,
+        "departed": 826
+      },
+      {
+        "time": 857.75,
+        "id": "beetle:burrow:large:6576:6",
+        "phase": "dead",
+        "health": 0,
+        "x": 19,
+        "y": 28,
+        "departed": 826
+      },
+      {
+        "time": 916,
+        "id": "beetle:burrow:large:6576:8",
+        "phase": "outbound",
+        "health": 50,
+        "x": 19,
+        "y": 42,
+        "departed": 916
+      },
+      {
+        "time": 937.25,
+        "id": "beetle:burrow:large:6576:8",
+        "phase": "active",
+        "health": 50,
+        "x": 16,
+        "y": 28,
+        "departed": 916
+      },
+      {
+        "time": 947,
+        "id": "beetle:burrow:large:6576:8",
+        "phase": "dead",
+        "health": 0,
+        "x": 16,
+        "y": 28,
+        "departed": 916
+      },
+      {
+        "time": 1006,
+        "id": "beetle:burrow:large:6576:10",
+        "phase": "outbound",
+        "health": 50,
+        "x": 19,
+        "y": 42,
+        "departed": 1006
+      },
+      {
+        "time": 1022.5,
+        "id": "beetle:burrow:large:6576:10",
+        "phase": "active",
+        "health": 50,
+        "x": 17,
+        "y": 29,
+        "departed": 1006
+      },
+      {
+        "time": 1033.75,
+        "id": "beetle:burrow:large:6576:10",
+        "phase": "dead",
+        "health": 0,
+        "x": 17,
+        "y": 28,
+        "departed": 1006
+      },
+      {
+        "time": 1096,
+        "id": "beetle:burrow:large:6576:2",
+        "phase": "outbound",
+        "health": 75,
+        "x": 16,
+        "y": 43,
+        "departed": 1096
+      },
+      {
+        "time": 1114.5,
+        "id": "beetle:burrow:large:6576:2",
+        "phase": "active",
+        "health": 75,
+        "x": 17,
+        "y": 29,
+        "departed": 1096
+      },
+      {
+        "time": 1186,
+        "id": "beetle:burrow:large:6576:11",
+        "phase": "outbound",
+        "health": 75,
+        "x": 15,
+        "y": 41,
+        "departed": 1186
+      },
+      {
+        "time": 1200,
+        "id": "beetle:burrow:large:6576:11",
+        "phase": "active",
+        "health": 75,
+        "x": 16,
+        "y": 28,
+        "departed": 1186
+      },
+      {
+        "time": 1276,
+        "id": "beetle:burrow:large:6576:12",
+        "phase": "outbound",
+        "health": 75,
+        "x": 16,
+        "y": 42,
+        "departed": 1276
+      }
+    ],
+    "deaths": [
+      {
+        "id": "4:5",
+        "soldier": true,
+        "health": 0.1972377662882181,
+        "time": 766.75
+      },
+      {
+        "id": "4:8",
+        "soldier": true,
+        "health": 4.378348197273907,
+        "time": 852
+      },
+      {
+        "id": "4:13",
+        "soldier": false,
+        "health": 2.737061030790212,
+        "time": 883.25
+      },
+      {
+        "id": "4:11",
+        "soldier": true,
+        "health": 20.694505379870535,
+        "time": 900.25
+      },
+      {
+        "id": "4:12",
+        "soldier": true,
+        "health": 2.7157864728644476,
+        "time": 923.5
+      },
+      {
+        "id": "4:10",
+        "soldier": true,
+        "health": 0.6223168500289287,
+        "time": 942.5
+      },
+      {
+        "id": "4:7",
+        "soldier": true,
+        "health": 2.6609394053220736,
+        "time": 1030.75
+      },
+      {
+        "id": "4:6",
+        "soldier": true,
+        "health": 3.8927391532808553,
+        "time": 1119.5
+      },
+      {
+        "id": "4:9",
+        "soldier": true,
+        "health": 2.524341117888685,
+        "time": 1124.75
+      },
+      {
+        "id": "4:4",
+        "soldier": false,
+        "health": 1.7310773294568058,
+        "time": 1129.25
+      },
+      {
+        "id": "4:15",
+        "soldier": true,
+        "health": 12.608982597708701,
+        "time": 1162.75
+      }
+    ],
+    "failures": [],
+    "upgradeAt": 120,
+    "upgrades": [
+      {
+        "time": 120,
+        "level": 2
+      }
+    ],
+    "workerBirths": [
+      810
+    ],
+    "stoppedAfterConfirmedNestLoss": true
+  }
+]

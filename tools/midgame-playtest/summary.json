@@ -1,0 +1,1278 @@
+{
+  "baseline_expensive_roaming_workers": [
+    {
+      "seed": 13,
+      "tribe": "bean",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1140,
+      "final": {
+        "time": 1320,
+        "points": 8,
+        "food": 380,
+        "nest": 0,
+        "level": 2,
+        "agents": 6,
+        "soldiers": 0,
+        "combatSeconds": 59.5
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 10,
+      "nonMilitaryDeaths": 2,
+      "commandErrors": [],
+      "raidDepartures": 9,
+      "raidKills": 6
+    },
+    {
+      "seed": 13,
+      "tribe": "spore",
+      "completed25": true,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1260,
+      "final": {
+        "time": 1500,
+        "points": 24,
+        "food": 367,
+        "nest": 0,
+        "level": 2,
+        "agents": 6,
+        "soldiers": 0,
+        "combatSeconds": 67
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 11,
+      "nonMilitaryDeaths": 0,
+      "commandErrors": [],
+      "raidDepartures": 9,
+      "raidKills": 6
+    },
+    {
+      "seed": 413,
+      "tribe": "spore",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1304.75,
+      "final": {
+        "time": 1260,
+        "points": 3,
+        "food": 420,
+        "nest": 77.59999999999964,
+        "level": 2,
+        "agents": 0,
+        "soldiers": 0,
+        "combatSeconds": 60.5
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 13,
+      "nonMilitaryDeaths": 6,
+      "commandErrors": [],
+      "raidDepartures": 10,
+      "raidKills": 7
+    },
+    {
+      "seed": 13,
+      "tribe": "pebble",
+      "completed25": true,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1380,
+      "final": {
+        "time": 1500,
+        "points": 11,
+        "food": 423,
+        "nest": 0,
+        "level": 2,
+        "agents": 1,
+        "soldiers": 0,
+        "combatSeconds": 62.5
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 13,
+      "nonMilitaryDeaths": 4,
+      "commandErrors": [],
+      "raidDepartures": 10,
+      "raidKills": 7
+    },
+    {
+      "seed": 413,
+      "tribe": "pebble",
+      "completed25": true,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1260,
+      "final": {
+        "time": 1500,
+        "points": 3,
+        "food": 263,
+        "nest": 0,
+        "level": 2,
+        "agents": 1,
+        "soldiers": 0,
+        "combatSeconds": 62.25
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 8,
+      "nonMilitaryDeaths": 5,
+      "commandErrors": [],
+      "raidDepartures": 8,
+      "raidKills": 5
+    },
+    {
+      "seed": 13,
+      "tribe": "spring",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1320,
+      "final": {
+        "time": 1320,
+        "points": 20,
+        "food": 326,
+        "nest": 0,
+        "level": 2,
+        "agents": 4,
+        "soldiers": 1,
+        "combatSeconds": 51.75
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 9,
+      "nonMilitaryDeaths": 2,
+      "commandErrors": [],
+      "raidDepartures": 10,
+      "raidKills": 7
+    },
+    {
+      "seed": 413,
+      "tribe": "bean",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1226.75,
+      "final": {
+        "time": 1200,
+        "points": 27,
+        "food": 469,
+        "nest": 42.49999999999939,
+        "level": 2,
+        "agents": 4,
+        "soldiers": 2,
+        "combatSeconds": 77
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 9,
+      "nonMilitaryDeaths": 7,
+      "commandErrors": [],
+      "raidDepartures": 11,
+      "raidKills": 8
+    },
+    {
+      "seed": 413,
+      "tribe": "spring",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1202,
+      "final": {
+        "time": 1200,
+        "points": 30,
+        "food": 146,
+        "nest": 0.9499999999993545,
+        "level": 2,
+        "agents": 3,
+        "soldiers": 0,
+        "combatSeconds": 56.75
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 5,
+      "nonMilitaryDeaths": 1,
+      "commandErrors": [],
+      "raidDepartures": 8,
+      "raidKills": 5
+    }
+  ],
+  "guard_control": [
+    {
+      "seed": 13,
+      "tribe": "bean",
+      "completed25": true,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1380,
+      "final": {
+        "time": 1500,
+        "points": 5,
+        "food": 535,
+        "nest": 0,
+        "level": 2,
+        "agents": 9,
+        "soldiers": 3,
+        "combatSeconds": 87
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 9,
+      "nonMilitaryDeaths": 4,
+      "commandErrors": [],
+      "raidDepartures": 15,
+      "raidKills": 12
+    },
+    {
+      "seed": 13,
+      "tribe": "spore",
+      "completed25": true,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1320,
+      "final": {
+        "time": 1500,
+        "points": 23,
+        "food": 381,
+        "nest": 0,
+        "level": 2,
+        "agents": 5,
+        "soldiers": 0,
+        "combatSeconds": 63
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 11,
+      "nonMilitaryDeaths": 1,
+      "commandErrors": [],
+      "raidDepartures": 10,
+      "raidKills": 7
+    }
+  ],
+  "medic_control": [
+    {
+      "seed": 13,
+      "tribe": "bean",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1319.5,
+      "final": {
+        "time": 1260,
+        "points": 18,
+        "food": 499,
+        "nest": 122.59999999999957,
+        "level": 2,
+        "agents": 0,
+        "soldiers": 0,
+        "combatSeconds": 101
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 11,
+      "nonMilitaryDeaths": 11,
+      "commandErrors": [],
+      "raidDepartures": 14,
+      "raidKills": 11
+    },
+    {
+      "seed": 13,
+      "tribe": "spore",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1298.5,
+      "final": {
+        "time": 1260,
+        "points": 6,
+        "food": 381,
+        "nest": 63.4999999999996,
+        "level": 2,
+        "agents": 7,
+        "soldiers": 0,
+        "combatSeconds": 71.25
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 8,
+      "nonMilitaryDeaths": 4,
+      "commandErrors": [],
+      "raidDepartures": 10,
+      "raidKills": 7
+    },
+    {
+      "seed": 13,
+      "tribe": "pebble",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1298.75,
+      "final": {
+        "time": 1260,
+        "points": 29,
+        "food": 413,
+        "nest": 62.89999999999965,
+        "level": 2,
+        "agents": 8,
+        "soldiers": 0,
+        "combatSeconds": 63.5
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 8,
+      "nonMilitaryDeaths": 2,
+      "commandErrors": [],
+      "raidDepartures": 10,
+      "raidKills": 7
+    },
+    {
+      "seed": 13,
+      "tribe": "spring",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1297,
+      "final": {
+        "time": 1260,
+        "points": 14,
+        "food": 290,
+        "nest": 61.399999999999665,
+        "level": 2,
+        "agents": 0,
+        "soldiers": 0,
+        "combatSeconds": 69
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 8,
+      "nonMilitaryDeaths": 7,
+      "commandErrors": [],
+      "raidDepartures": 10,
+      "raidKills": 7
+    }
+  ],
+  "balanced_macro_current_prices": [
+    {
+      "seed": 13,
+      "tribe": "bean",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1294.75,
+      "final": {
+        "time": 1260,
+        "points": 7,
+        "food": 775,
+        "nest": 124.39999999999957,
+        "level": 2,
+        "agents": 1,
+        "soldiers": 0,
+        "combatSeconds": 115.75
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 19,
+      "nonMilitaryDeaths": 13,
+      "commandErrors": [],
+      "raidDepartures": 14,
+      "raidKills": 11
+    },
+    {
+      "seed": 13,
+      "tribe": "spore",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1335.25,
+      "final": {
+        "time": 1320,
+        "points": 11,
+        "food": 577,
+        "nest": 36.499999999999645,
+        "level": 2,
+        "agents": 0,
+        "soldiers": 0,
+        "combatSeconds": 96.25
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 14,
+      "nonMilitaryDeaths": 12,
+      "commandErrors": [],
+      "raidDepartures": 10,
+      "raidKills": 7
+    },
+    {
+      "seed": 13,
+      "tribe": "pebble",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1394.75,
+      "final": {
+        "time": 1380,
+        "points": 6,
+        "food": 706,
+        "nest": 79.39999999999964,
+        "level": 2,
+        "agents": 1,
+        "soldiers": 0,
+        "combatSeconds": 87.75
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 17,
+      "nonMilitaryDeaths": 12,
+      "commandErrors": [],
+      "raidDepartures": 11,
+      "raidKills": 8
+    },
+    {
+      "seed": 13,
+      "tribe": "spring",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1307,
+      "final": {
+        "time": 1260,
+        "points": 7,
+        "food": 607,
+        "nest": 200,
+        "level": 2,
+        "agents": 10,
+        "soldiers": 3,
+        "combatSeconds": 72.25
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 14,
+      "nonMilitaryDeaths": 12,
+      "commandErrors": [],
+      "raidDepartures": 10,
+      "raidKills": 8
+    }
+  ],
+  "raid_only_softer": [
+    {
+      "seed": 13,
+      "tribe": "bean",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1292,
+      "final": {
+        "time": 1260,
+        "points": 13,
+        "food": 492,
+        "nest": 44.60000000000005,
+        "level": 2,
+        "agents": 8,
+        "soldiers": 1,
+        "combatSeconds": 78.75
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 11,
+      "nonMilitaryDeaths": 2,
+      "commandErrors": [],
+      "raidDepartures": 13,
+      "raidKills": 10
+    },
+    {
+      "seed": 413,
+      "tribe": "bean",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1379,
+      "final": {
+        "time": 1320,
+        "points": 1,
+        "food": 624,
+        "nest": 82.39999999999935,
+        "level": 2,
+        "agents": 2,
+        "soldiers": 0,
+        "combatSeconds": 97.75
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 15,
+      "nonMilitaryDeaths": 8,
+      "commandErrors": [],
+      "raidDepartures": 13,
+      "raidKills": 10
+    },
+    {
+      "seed": 13,
+      "tribe": "spore",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1433.5,
+      "final": {
+        "time": 1380,
+        "points": 31,
+        "food": 411,
+        "nest": 71.44999999999933,
+        "level": 2,
+        "agents": 6,
+        "soldiers": 1,
+        "combatSeconds": 69.75
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 11,
+      "nonMilitaryDeaths": 1,
+      "commandErrors": [],
+      "raidDepartures": 11,
+      "raidKills": 8
+    },
+    {
+      "seed": 413,
+      "tribe": "spore",
+      "completed25": true,
+      "alive25": true,
+      "loss": false,
+      "lossObservedAt": null,
+      "final": {
+        "time": 1500,
+        "points": 12,
+        "food": 540,
+        "nest": 136.99999999999932,
+        "level": 2,
+        "agents": 5,
+        "soldiers": 1,
+        "combatSeconds": 91.5
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 15,
+      "nonMilitaryDeaths": 2,
+      "commandErrors": [],
+      "raidDepartures": 12,
+      "raidKills": 10
+    },
+    {
+      "seed": 13,
+      "tribe": "pebble",
+      "completed25": true,
+      "alive25": true,
+      "loss": false,
+      "lossObservedAt": null,
+      "final": {
+        "time": 1500,
+        "points": 23,
+        "food": 472,
+        "nest": 26.74999999999948,
+        "level": 2,
+        "agents": 2,
+        "soldiers": 0,
+        "combatSeconds": 83.75
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 14,
+      "nonMilitaryDeaths": 3,
+      "commandErrors": [],
+      "raidDepartures": 12,
+      "raidKills": 9
+    },
+    {
+      "seed": 413,
+      "tribe": "pebble",
+      "completed25": true,
+      "alive25": true,
+      "loss": false,
+      "lossObservedAt": null,
+      "final": {
+        "time": 1500,
+        "points": 11,
+        "food": 349,
+        "nest": 40.399999999999466,
+        "level": 2,
+        "agents": 1,
+        "soldiers": 0,
+        "combatSeconds": 83.5
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 11,
+      "nonMilitaryDeaths": 4,
+      "commandErrors": [],
+      "raidDepartures": 12,
+      "raidKills": 9
+    },
+    {
+      "seed": 13,
+      "tribe": "spring",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1442.5,
+      "final": {
+        "time": 1440,
+        "points": 22,
+        "food": 328,
+        "nest": 4.69999999999947,
+        "level": 2,
+        "agents": 3,
+        "soldiers": 0,
+        "combatSeconds": 70.25
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 10,
+      "nonMilitaryDeaths": 2,
+      "commandErrors": [],
+      "raidDepartures": 11,
+      "raidKills": 8
+    },
+    {
+      "seed": 413,
+      "tribe": "spring",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1401,
+      "final": {
+        "time": 1380,
+        "points": 14,
+        "food": 167,
+        "nest": 29.59999999999953,
+        "level": 2,
+        "agents": 1,
+        "soldiers": 1,
+        "combatSeconds": 69.25
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 5,
+      "nonMilitaryDeaths": 4,
+      "commandErrors": [],
+      "raidDepartures": 10,
+      "raidKills": 7
+    }
+  ],
+  "economy_only": [
+    {
+      "seed": 13,
+      "tribe": "bean",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1341.75,
+      "final": {
+        "time": 1320,
+        "points": 18,
+        "food": 614,
+        "nest": 51.999999999998394,
+        "level": 3,
+        "agents": 10,
+        "soldiers": 0,
+        "combatSeconds": 79.5
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        },
+        {
+          "time": 855,
+          "level": 3
+        }
+      ],
+      "militaryDeaths": 9,
+      "nonMilitaryDeaths": 4,
+      "commandErrors": [],
+      "raidDepartures": 11,
+      "raidKills": 8
+    },
+    {
+      "seed": 413,
+      "tribe": "bean",
+      "completed25": true,
+      "alive25": true,
+      "loss": false,
+      "lossObservedAt": null,
+      "final": {
+        "time": 1500,
+        "points": 26,
+        "food": 847,
+        "nest": 400,
+        "level": 3,
+        "agents": 9,
+        "soldiers": 5,
+        "combatSeconds": 118
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        },
+        {
+          "time": 615,
+          "level": 3
+        }
+      ],
+      "militaryDeaths": 9,
+      "nonMilitaryDeaths": 7,
+      "commandErrors": [],
+      "raidDepartures": 16,
+      "raidKills": 16
+    },
+    {
+      "seed": 13,
+      "tribe": "spore",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1307.75,
+      "final": {
+        "time": 1260,
+        "points": 15,
+        "food": 524,
+        "nest": 85.09999999999957,
+        "level": 2,
+        "agents": 13,
+        "soldiers": 4,
+        "combatSeconds": 77.75
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 9,
+      "nonMilitaryDeaths": 2,
+      "commandErrors": [],
+      "raidDepartures": 10,
+      "raidKills": 7
+    },
+    {
+      "seed": 413,
+      "tribe": "spore",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1471.5,
+      "final": {
+        "time": 1440,
+        "points": 39,
+        "food": 649,
+        "nest": 68.79999999999855,
+        "level": 3,
+        "agents": 8,
+        "soldiers": 1,
+        "combatSeconds": 86.5
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        },
+        {
+          "time": 765,
+          "level": 3
+        }
+      ],
+      "militaryDeaths": 10,
+      "nonMilitaryDeaths": 5,
+      "commandErrors": [],
+      "raidDepartures": 11,
+      "raidKills": 8
+    },
+    {
+      "seed": 13,
+      "tribe": "pebble",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1462.75,
+      "final": {
+        "time": 1440,
+        "points": 0,
+        "food": 672,
+        "nest": 54.0999999999984,
+        "level": 3,
+        "agents": 12,
+        "soldiers": 0,
+        "combatSeconds": 57.75
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        },
+        {
+          "time": 885,
+          "level": 3
+        }
+      ],
+      "militaryDeaths": 11,
+      "nonMilitaryDeaths": 1,
+      "commandErrors": [],
+      "raidDepartures": 8,
+      "raidKills": 5
+    },
+    {
+      "seed": 413,
+      "tribe": "pebble",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1406.25,
+      "final": {
+        "time": 1380,
+        "points": 10,
+        "food": 468,
+        "nest": 54.199999999999676,
+        "level": 2,
+        "agents": 0,
+        "soldiers": 0,
+        "combatSeconds": 82
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 11,
+      "nonMilitaryDeaths": 12,
+      "commandErrors": [],
+      "raidDepartures": 11,
+      "raidKills": 8
+    },
+    {
+      "seed": 13,
+      "tribe": "spring",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1326.5,
+      "final": {
+        "time": 1320,
+        "points": 8,
+        "food": 448,
+        "nest": 14.599999999999703,
+        "level": 2,
+        "agents": 1,
+        "soldiers": 0,
+        "combatSeconds": 79
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 10,
+      "nonMilitaryDeaths": 11,
+      "commandErrors": [],
+      "raidDepartures": 10,
+      "raidKills": 7
+    },
+    {
+      "seed": 413,
+      "tribe": "spring",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1055,
+      "final": {
+        "time": 1020,
+        "points": 14,
+        "food": 100,
+        "nest": 41.59999999999918,
+        "level": 2,
+        "agents": 0,
+        "soldiers": 0,
+        "combatSeconds": 46
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 2,
+      "nonMilitaryDeaths": 7,
+      "commandErrors": [],
+      "raidDepartures": 6,
+      "raidKills": 3
+    }
+  ],
+  "calibrated": [
+    {
+      "seed": 13,
+      "tribe": "bean",
+      "completed25": true,
+      "alive25": true,
+      "loss": false,
+      "lossObservedAt": null,
+      "final": {
+        "time": 1500,
+        "points": 306,
+        "food": 1037,
+        "nest": 399.4,
+        "level": 3,
+        "agents": 21,
+        "soldiers": 8,
+        "combatSeconds": 65
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        },
+        {
+          "time": 795,
+          "level": 3
+        }
+      ],
+      "militaryDeaths": 1,
+      "nonMilitaryDeaths": 3,
+      "commandErrors": [],
+      "raidDepartures": 13,
+      "raidKills": 13
+    },
+    {
+      "seed": 413,
+      "tribe": "bean",
+      "completed25": true,
+      "alive25": true,
+      "loss": false,
+      "lossObservedAt": null,
+      "final": {
+        "time": 1500,
+        "points": 64,
+        "food": 961,
+        "nest": 400,
+        "level": 3,
+        "agents": 20,
+        "soldiers": 8,
+        "combatSeconds": 104.25
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        },
+        {
+          "time": 615,
+          "level": 3
+        }
+      ],
+      "militaryDeaths": 5,
+      "nonMilitaryDeaths": 2,
+      "commandErrors": [],
+      "raidDepartures": 16,
+      "raidKills": 16
+    },
+    {
+      "seed": 13,
+      "tribe": "spore",
+      "completed25": true,
+      "alive25": true,
+      "loss": false,
+      "lossObservedAt": null,
+      "final": {
+        "time": 1500,
+        "points": 80,
+        "food": 836,
+        "nest": 398.49999999999994,
+        "level": 3,
+        "agents": 21,
+        "soldiers": 8,
+        "combatSeconds": 79.75
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        },
+        {
+          "time": 1050,
+          "level": 3
+        }
+      ],
+      "militaryDeaths": 5,
+      "nonMilitaryDeaths": 0,
+      "commandErrors": [],
+      "raidDepartures": 12,
+      "raidKills": 12
+    },
+    {
+      "seed": 413,
+      "tribe": "spore",
+      "completed25": true,
+      "alive25": true,
+      "loss": false,
+      "lossObservedAt": null,
+      "final": {
+        "time": 1500,
+        "points": 258,
+        "food": 1003,
+        "nest": 400,
+        "level": 3,
+        "agents": 23,
+        "soldiers": 8,
+        "combatSeconds": 69
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        },
+        {
+          "time": 765,
+          "level": 3
+        }
+      ],
+      "militaryDeaths": 2,
+      "nonMilitaryDeaths": 0,
+      "commandErrors": [],
+      "raidDepartures": 12,
+      "raidKills": 12
+    },
+    {
+      "seed": 13,
+      "tribe": "pebble",
+      "completed25": true,
+      "alive25": true,
+      "loss": false,
+      "lossObservedAt": null,
+      "final": {
+        "time": 1500,
+        "points": 235,
+        "food": 1078,
+        "nest": 399.7,
+        "level": 3,
+        "agents": 23,
+        "soldiers": 8,
+        "combatSeconds": 60.75
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        },
+        {
+          "time": 855,
+          "level": 3
+        }
+      ],
+      "militaryDeaths": 3,
+      "nonMilitaryDeaths": 2,
+      "commandErrors": [],
+      "raidDepartures": 10,
+      "raidKills": 9
+    },
+    {
+      "seed": 413,
+      "tribe": "pebble",
+      "completed25": true,
+      "alive25": true,
+      "loss": false,
+      "lossObservedAt": null,
+      "final": {
+        "time": 1500,
+        "points": 42,
+        "food": 622,
+        "nest": 400,
+        "level": 3,
+        "agents": 17,
+        "soldiers": 5,
+        "combatSeconds": 72.5
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        },
+        {
+          "time": 795,
+          "level": 3
+        }
+      ],
+      "militaryDeaths": 3,
+      "nonMilitaryDeaths": 1,
+      "commandErrors": [],
+      "raidDepartures": 12,
+      "raidKills": 11
+    },
+    {
+      "seed": 13,
+      "tribe": "spring",
+      "completed25": true,
+      "alive25": true,
+      "loss": false,
+      "lossObservedAt": null,
+      "final": {
+        "time": 1500,
+        "points": 123,
+        "food": 734,
+        "nest": 400,
+        "level": 3,
+        "agents": 19,
+        "soldiers": 8,
+        "combatSeconds": 70.5
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        },
+        {
+          "time": 1065,
+          "level": 3
+        }
+      ],
+      "militaryDeaths": 1,
+      "nonMilitaryDeaths": 2,
+      "commandErrors": [],
+      "raidDepartures": 12,
+      "raidKills": 12
+    },
+    {
+      "seed": 413,
+      "tribe": "spring",
+      "completed25": false,
+      "alive25": false,
+      "loss": true,
+      "lossObservedAt": 1208.5,
+      "final": {
+        "time": 1200,
+        "points": 15,
+        "food": 101,
+        "nest": 6.800000000001177,
+        "level": 2,
+        "agents": 3,
+        "soldiers": 0,
+        "combatSeconds": 55.25
+      },
+      "upgrades": [
+        {
+          "time": 120,
+          "level": 2
+        }
+      ],
+      "militaryDeaths": 2,
+      "nonMilitaryDeaths": 4,
+      "commandErrors": [],
+      "raidDepartures": 7,
+      "raidKills": 4
+    }
+  ]
+}
