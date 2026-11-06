@@ -27,6 +27,41 @@
 - 기록자 Codex /root/investigate_sheep_walk, 결정 주체 사용자. 출처 채팅6ae7a6f41c94819380facdaa018ca2b0, 승인 Sentinel_fb11b9e0cb40819180dd21aa7bbcbc25, 재진단 Sentinel_7733ed56ac208191b68f2a64487ebf5c. 원발언 시각 불명. 승인64프레임은 임시검토본으로만 남고 main/기획서는 11월4일 구형8프레임을 참조했음을 확인했다.
 - 승인 시트 원본 SHA f4f5a4000e9d4a520a61d805564ab19756192c350a49db21926298e4b66581bd 그대로 보존하고 PNG·sheet추출GIF·manifest를 추가한다. 640셀8열64장,3.2Hz/312.5ms. GIF는 시간해상도 때문에64장 전부0.25배/1250ms, planning WebP는 누적ms반올림312ms. 기획서 기존 이동 셀 링크·재생정보만 교체, 문구·게임소스·배포 변경 없음. GitHub project 조회는 gh인증 없음으로 미확인.
 
+## 유닛 외형 DNA 표 로컬 커밋 범위 확정 · 01a1b13a
+
+- 기록 ID: appearance-dna-table-commit-freeze-20261106-01a1b13a. 기록 시각 2026-11-06T23:46:55+09:00; 기록자·범위분리/Git판단 Codex /root, 로컬커밋결정 사용자. 출처현재채팅의 「커밋해」,01a1b13a-d56e-7223-9c1b-a82747d2de3f,H:/Spawner Windows PowerShell local. 원발언정확시각·항목ID·PC식별불명.
+- 확정후보22경로: Design.html의유닛외형페이지개편,문서용96x96썸네일20개,관련메모리의 appearance-dna-table-* 5절이다. 시작HEAD c9130bb029b8d87d821d5e8e3a85937f470a73bf 위로이범위만정상index에분리한다. 공유메모리는HEAD본문에이번5절만투영한후보blob을stage하며작업본문과무관기록을덮지않는다. 헤더회귀조사기록·다른채팅의메모리·게임/서버/HTML/외형원본/새몽돌런타임등다른dirty는제외한다. 현재index0과전용origin=https://github.com/oojjrs/Spawner 직접확인,이번조회Projects0결과재사용.
+- 누락점검/검수재사용: 승인문구·5DNA/20행9열·20문서썸네일・既存3앵커/몽돌V6参照・PC/mobile/확대/Escape・오류/참조누락0・소스外본문보존은완료기록과verification.json으로확인했다. Design mtime14:40:52.608Z/QA14:41:23.474Z이며현재SHA256946286f987b1996936299734d91b8ff24b1238effa290642b7db10690ccd2936로검수후수정없음을확인했다. 포자조사종료·인게임실제재현미확인/헤더미수정상태도이미기록돼있다. 제품렌더/브라우저/빌드는반복하지않고메모리후보형식과최종staged범위/공백만확인한다.
+- 메시지: 유닛 외형 표 DNA 기준 정리. 아직커밋전이며이번요청은push/배포를포함하지않는다. 작업트리의모든기존/동시변경은보존한다.
+
+## 유닛 외형 표 개편 검수 완료·인게임 공유 경로 확인 · 01a1b13a 현재 요약
+
+- 기록 ID: appearance-dna-table-complete-20261106-01a1b13a. 기록 시각 2026-11-06T23:43:29+09:00; 기록자·실제화면/호출확인 Codex /root, 표정리·문구결정 사용자. 출처현재채팅의승인과직접headless/파일결과. 원발언정확시각·항목ID·PC식별불명,H:/Spawner Windows PowerShell local. 앞선implemented절의렌더미실행상태를이번실행결과로대체하며원기록보존.
+- 실제완료: 승인한5개DNA묶음×4종족20행, DNA/종족/원화/대기/이동/공격/피격/탄생/사망9열. 현재DNA표SVG재사용,옛실루엣/CombatDna아이콘·부품겹침·예비도형제거,발자료는기존이속문구의닫힌보조표에보존. 20원화썸네일96x96신규생성,원본과게임파일은이번작업으로변경하지않음. 기존3앵커와최신몽돌안테나V6참조유지. Design해당페이지밖본문은입력현재파일과byte보존이다.
+- 실제검수: sandbox Edge는named-pipe오류로실행실패했으나앵커교정후독립headless를승격실행해1.93초내성공했다. PC1440/모바일390 모두문서너비가viewport와동일하고표의가로스크롤은표안에한정된다. 5tbody모두4행/9열/실제SVG,중복ID0,변경참조누락0,20썸네일96x96,페이지오류0. 실제전투clip확대의canvas열림과Escape닫힘성공,66개canvas설치관측. desktop/mobile/actions PNG를직접열어현재정렬·도형·표행과96px이미지일관성을확인했다. 모든클립/애니프레임을전수플레이했다고확대하지않는다. Design/메모리UTF8NoBom·CRLF OK,Design diff--check 통과. 마지막검수병렬라운드6.732초이며이후성공한렌더는반복하지않았다.
+- 사용자최신우려: 「웰컴만고장이면…인게임도똑같이고장일것같다」. 직접호출확인으로 game.js564의createUnitPresentation과4518~4519의drawAgentAnimation/5211~5212의drawAgentAppearanceBody가공통unit-presentation을호출하며welcome-header.js56/351~352도같은모듈을쓴다. 따라서공통외형투영/기관합성/프레임코드의결함은인게임도영향가능하다. 다만game5056이후는appearanceWorld가준비된경우별도등록renderer를우선하고fallback에공통함수를사용하므로모든유닛·상태가동일한경로라고단정하지않는다. 헤더의worldPixels=min288,width*.58·뷰포트높이·입퇴장셀/화면경계는header/presentation의welcome전용이며인게임카메라는state.camera.zoom·서버moveDuration/실제agent상태를사용한다. 공통함수의원인과웰컴전용연출문제를구별해야한다.
+- 범위/한계: 이번인게임확인은소스호출추적만이며실제인게임고장재현/정상판정이나전체회귀검수는하지않았다. 포자버섯빈부분은사용자의별도작업자해결/넘기기지시에따라수정·추가검수하지않는다. 현재완료범위는Design·새문서썸네일20개·이번메모리,미스테이징/미커밋/미게시. 첫요청헤더회귀역시원인조사상태이며제품수정완료로보고하지않는다. 근거 literal $Trash/unit-appearance-rebuild-01a1b13a/{implementation.json,verification.json,desktop.png,mobile.png,actions.png}.
+
+## 유닛 외형 표 개편 구현·포자 조사 종료 · 01a1b13a
+
+- 기록 ID: appearance-dna-table-implemented-20261106-01a1b13a. 기록 시각 2026-11-06T23:40:52+09:00; 기록자·구현/마감판단 Codex /root, 포자별도수정종료결정 사용자. 출처현재채팅의 「딴 애가 고쳤어 넘어가」. 포자버섯의 빈자리 조사는 이 지시로 종료하며 다른작업자가 실제수정했는지 추가검증하거나 게임코드를 수정하지 않는다.
+- 구현완료: 승인5DNA/4종족20행과승인9열로통합했다. 현행DNA표의실제SVG를재사용하고옛SilhouettesV2/CombatDnaV1 아이콘·겹친부품표시·예비도형을본문에서제거했다. 기존발4외형/승인동작은기존「이속」문구의기본닫힌보조영역으로보존했다. 원화용20썸네일을실제자료에서96x96으로생성했으며원본파일수정없음. 없는동작은빈칸으로두고기존72전투clip연결/96프레임·지연로딩·확대코드는재사용한다. 새몽돌안테나V6원본/미리보기도현재입력에서보존했다.
+- 첫검수: Design및메모리UTF8NoBom/CRLF OK, Design diff--check통과. 실제diff는해당페이지CSS/표/예비아이콘영역에한정됐다. 격리Edge의sandbox named-pipe/crashpad 종료로렌더검사는실행되지않아화면성공으로보고하지않는다. 자동승인거절은아니다.
+- 구현중확인한기존앵커소실교정: 표재작성에서기존 attribute-blade/attribute-piercing/attribute-carapace ID가빠져있어새대응tbody에복구했다. 다른본문의링크대상을보존하는이번범위수정이다. 이수정된결과에대해headless검수1회와마감형식검사를진행한다. 지금까지게임/서버/헤더수정·Git완료/게시없음. 근거 literal $Trash/unit-appearance-rebuild-01a1b13a/{model.json,implementation.json,spore-idle-source.png,spore-gather-body.png}; 해당진단crop은원화의읽기확인용이며제작애셋이아니다.
+
+## 유닛 외형 표 동시 애셋 갱신 보존 · 01a1b13a
+
+- 기록 ID: appearance-dna-table-concurrent-20261106-01a1b13a. 기록 시각 2026-11-06T23:37:05+09:00; 기록자·병합판단 Codex /root, 출처 현재 직접파일비교. 최초변환은 target guard에서중단되어Design을쓰지않았다. 그사이Design의몽돌안테나full참조가구형antenna.webp에서승인후보 AnimationCandidates/pebble-antenna-walk-stable-v6/walk-sheet.png 및walk-from-sheet.gif로변경됐다. 현재Git Design diff는0이며이동시변경의행위자는추정하지않는다.
+- 조치판단: 새몽돌안테나참조를포함한현재section을입력으로다시파싱하여새표의원화/이동칸으로보존한다. 이전section·현재section을각각Trash에보존하며,문서밖본문은현재파일기준그대로둔다. 사전생성된20문서썸네일은이번작업소유이며갱신입력에맞춰재생성한다. 새커밋이나게임파일변경을추가하지않는다.
+
+## 유닛 외형 표 현행 DNA 기준 개편 착수 · 01a1b13a 현재 요약
+
+- 기록 ID: appearance-dna-table-rebuild-start-20261106-01a1b13a. 기록 시각 2026-11-06T23:30:18+09:00; 기록자·편집판단 Codex /root, 결정 주체 사용자. 출처 현재 채팅 01a1b13a-d56e-7223-9c1b-a82747d2de3f의 포자버섯 채집기관 빈자리 질문, 옛속성이미지제거 교정, 「유닛 외형 페이지…표…새로운 기준으로 새로 정리」와 문구 확인 응답 「제시한 문구 승인」. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner local Windows PowerShell.
+- 사용자 문구 승인 확정: 표는 DNA별 묶음/종족별 행/동작별 열. 첫열 이름은 채집기관·칼날·분비기관·안테나·갑각. 열제목은 DNA·종족·원화·대기·이동·공격·피격·탄생·사망. 새 설명·추가 페이지·상태문구는 승인 범위가 아니다. 이 이름/위치의 최소 표 문구만 사용하고 다른 본문은 보존한다.
+- 직접 확인: Design의 codex-unit-appearance는 감지/채집량/이속 정적표와 칼날/관통/갑피 행동표가 서로 다른 폭/열구조이고, 옛 SilhouettesV2 및 CombatDnaV1 아이콘을 계속 참조한다. 실제 DNA는 gather/blade/secretion/antenna 기관과 carapace(갑각) stat을 사용하며 legs는 retired다. current dnaAppearance는 blade/carapace/antenna/legs→feet/secretion을 투영하고 unitDisplayAttributes가 gather를 기존 strength1 rig로 보완한다. 따라서 gather 외형 조사와 문서 표 재배치는 게임 구현 수정권한과 구별한다.
+- 범위/보호: Design의 해당 페이지와 필요한 문서 미리보기/아이콘 연결만 최소 수정한다. 96px 실제 프레임과 가시영역 로딩·확대는 유지한다. 유효한 승인애셋/동작은 새 구조에 재배치하고 은퇴된 발/옛 관통자료는 현행DNA와 섞지 않되 채택자료를 임의삭제하지 않는다. 기존dirty/game/서버/헤더/다른메모리는보호, stage/commit/push/배포 승인 없음. 시작사본은 literal $Trash/unit-appearance-rebuild-01a1b13a에 보존했다.
+- 포자 조사 관측/한계: body-strength PNG는 구형43x27 몸통/팔 대체부품이며 morphology renderer가 body 제거/대체 방식으로 사용한다. 원본strength preview와planning 이미지는존재한다. 현재 사용자가 지적한 빈부분의 정확한 프레임/부위는 아직 확정하지 않았으므로 파일존재만으로 원인이나수정완료를 단정하지 않는다. 독립 headless로 문서 레이아웃/실제참조를 확인하며게임원본수정은하지 않는다. 저장소 origin=https://github.com/oojjrs/Spawner 확인, 이번 직접 ProjectsV2 조회 nodes=[]/hasNextPage=false로 연결보드 없음.
+
 ## 샘방울 칼날 갑피 몸체 탄생 승인 · 2026-11-06T14:19:19+00:00
 
 - 기록자 Codex, 결정 주체 사용자. 출처 채팅6ae7a6f41c94819380facdaa018ca2b0, 부모 전달 “샘방울 칼날형 갑피형 승인”. 원 발언 시각/항목 ID 불명. 기존 springDominantBirthPixels body-only 캡처 두쌍을 검수 자료로 보존한다. 게임소스 idle.webp 두종은 이미main에 존재한다. 이 시트를 게임원본으로 교체하지 않는다. 1024셀6×6/36프레임,40ms 캡처와 최종700ms 확인hold로 총2100ms.
