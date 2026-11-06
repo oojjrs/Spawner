@@ -7,6 +7,57 @@
 
 - 기록자 Codex, 결정 주체 사용자. 출처 채팅 6ae7a6f41c94819380facdaa018ca2b0, 부모 전달 “그래. 원색으로 해”. 원 발언 시각/항목 ID 불명. 승인 파일 libfile_5f241d8ac8f881918973c45f8d687d60의 제작자 확인 원본 PNG만 추가한다. 1254×1254 RGBA, SHA256 58aa335871c82cd89cab67a45e5f49059155608897b963f52936f9e11b18732d.
 - 청록이 최신 원화 선택이며 이전 보라 원본과 승인 이력은 삭제하지 않는다. 청록 탄생/사망은 별도 검수 대기여서 이번 게시 제외. 기존 기획서 분비형 전용 위치 부재는 계속 미해결; 임의 행/문구 추가 및 게임 연결·배포 없음. 최신 main5737f690 fetch 확인.
+## 전투 실험실 복구 커밋 범위 동결 · 01a1a5fd
+
+- 기록 ID: combat-local-assets-commit-freeze-20261106-01a1a5fd. 기록 시각 2026-11-06T22:31:45+09:00. 기록자·범위 분리/커밋 판단 Codex /root, 로컬 커밋 승인 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 ‘커밋해’, 직접 현재 HEAD/작업트리/index와 앞선 최종 검수. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 후보는 client/build-combat.mjs·client/combat-lab.js의 자산 등록/ready 대기, Combat.html의 같은 로딩·실험실 inline 및 tribe-minor-animation 모듈 의존 순서 교정, 이번 복구 관련 메모리7절이다. Combat의 기존 둥지 비용80/200/500은 별도 작업으로 제외하며 다른 공유 메모리의 추가·삭제·수정도 제외한다. 기존 인게임/효과/애셋 본문은 HEAD로 보존하고 제품 실제 작업파일은 바꾸지 않는다.
+- 기존 로컬649자산·4:4 자동 전투 완주·혼합1318프레임/인게임759프레임 누락0·타깃 전환 정상 및 제품3경로 형식/구문/국소정합 성공을 재사용한다. 새 기능/제품 검사는 시작하지 않는다. 분리 후보4텍스트 형식과 최종 staged 범위/내용/공백을 확인한 뒤 한국어 제목 ‘전투 실험실 로컬 유닛 로딩 수정’으로 main에 로컬 커밋한다. 새 브랜치·push/배포는 승인되지 않았다.
+- dedicated origin oojjrs/Spawner 및 이번 작업 연결 Projects0 결과 재사용. 관련 요청/증상/판단 교정/실제 검수/한계를 대조해 누락 점검했고 미완료 커밋 상태를 본 절에 남겼다. 아직 커밋 성공이 아니며 실제 결과는 커밋 후 readback으로 기록한다. 별도 index와 기대HEAD/index/제품hash 가드로 다른 작업의 파일·staged 상태를 보존한다.
+
+## 로컬 전투 실험실·인게임 재검수 최종 완료 · 01a1a5fd 현재 요약
+
+- 기록 ID: combat-local-assets-final-20261106-01a1a5fd. 기록 시각 2026-11-06T22:27:05+09:00. 기록자·수정/실제 검수 Codex /root, 요청/증상/로컬 Combat.html 환경 확인 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072와 literal $Trash/combat-repair-20261106의 실제 결과. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 최종 제품 수정3경로: client/build-combat.mjs·client/combat-lab.js·Combat.html. 로컬 manifest 누락과 자산 준비 전 그리기를 고쳤고, 동시 생성물에 추가된 tribe-minor-animation이 두 의존보다 먼저 실행되던 부팅 오류도 해당 모듈 순서만 이동해 해결했다. 새 애니메이션/효과·서버 등 다른 작업의 모듈 본문은 모두 보존했다. 인게임 소스는 수정하지 않았다.
+- 동시 갱신 이후 최신 실제 로컬 Combat.html 재검수: 보안 완화 옵션 없이649자산 준비·배경/유닛 표시·pending 버튼 잠금·4:4 자동 전투 사망 종료. ready 약8.53초, 이미지1905회 모두blob, JS/console/요청오류0. 최신 혼합 근접/원거리4:4는1318프레임 살아 있는 각 유닛 픽셀 누락0,21.9667초 종료·사망 후 타깃 전환 정상이다. file-after-result.json·lab-mixed-result.json의 최신 결과가 앞선625자산 결과를 대체한다.
+- 최신 인게임 로컬 파일 초기화와 공용 엔진4:4 상태 주입 렌더 재검수도759프레임·몸체draw2754회·표시 대상 몸체 픽셀 누락0·미준비 이미지0·JS/CORS/요청오류0이다. 실제 전투 패널에서 같은 누락은 재현되지 않았다. 전체 자연 발생 게임 플레이·모든 외형/투사체 이벤트 전수 검수로 확대하지 않는다.
+- 최종 국소 정합: 생성물 모든 import 정의 순서 위반0·각 모듈 본문은 순서 교정 전과 원바이트 동일·실험실 source/inline 일치·manifest 선행·classic bundle/source 구문 성공. 제품3텍스트 UTF8NoBom/CRLF와 git diff --check 통과. 근거 final-scope.json의 검수 제품 hash. 직전 complete의 동시 갱신 전 보존 설명은 당시 증거로 유지하고 이 최종 상태를 현재 요약으로 사용한다.
+- 기록/요청/실제 검수/남은 단계 누락 점검 완료. 작업은 로컬 수정과 검수 완료·미stage/미commit이며 commit/push/배포는 하지 않았다. 다음은 사용자 리뷰 및 별도 Git 완료 지시가 있을 때 정확 범위 재조정이다. 관련 없는 메모리·동시 소스/index는 유지한다.
+
+## 전투 실험실 초기화 순서 추가 판정 · 01a1a5fd
+
+- 기록 ID: combat-module-order-two-dependencies-20261106-01a1a5fd. 기록 시각 2026-11-06T13:24:30.694Z, 기록자/판단 Codex /root, 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072 및 실제 생성물 import 순서 전체 대조. 앞선1개 추정은 검사에서2개로 교정됐다. tribe-minor-animation이 목록과 canvas-cache 두 의존보다 앞에 있었다. 해당 소비 모듈만 두 의존 뒤로 옮기면 모든 생성물 import 순서 위반이0이며 각 모듈 본문이 모두 원바이트 동일함을 쓰기 전 확인했다. 이는 사용자 전투 실험실 복구 범위의 최소 시작 순서 교정이다. 다른 모듈/자산 본문은 변경하지 않는다.
+
+## 전투 실험실 동시 재생성 후 초기화 오류 추가 확인 · 01a1a5fd
+
+- 기록 ID: combat-local-assets-concurrent-order-20261106-01a1a5fd. 기록 시각 2026-11-06T22:23:46+09:00. 기록자·재현/추가수정 판단 Codex /root. 요청 주체 사용자, 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 양쪽 전투 수정 요청 및 직접 hash/readback/실제 파일 실행. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- final hash guard에서 Combat.html의 동시 변경을 검출했다. 새 Combat에는 애니메이션/효과9모듈 변경이 추가됐으며 우리 lab source/loader 수정은 유지됐다. 이전 검수 후 동일 hash 유지라는 조건은 성립하지 않아 완료로 주장하지 않고 재개했다. 신규 실제 file 실행은 TRIBE_MINOR_ANIMATIONS undefined 구조분해 오류를 재현했다. client/tribe-minor-animation.mjs가 client/tribe-minor-animations.mjs보다 먼저 실행되는 생성물 순서가 원인이다.
+- 현재 수정 범위에 속하는 실험실 부팅 복구로, 새 목록 모듈 본문을 변경하지 않고 사용 모듈 앞에 이동하는 최소 생성물 순서 교정을 수행한다. 모든 생성물 import 순서 위반을 먼저 확인하고 그1의존 외 문제가 있으면 별도 근거로 판정한다. builder는 원래 의존 우선 출력을 하므로 임의 전체 build/다른 소스 수정으로 확대하지 않는다. 기존 complete 절의 제품 외부 바이트 보존은 동시 갱신 전 우리 수정 시점에 한정하며 현재 전체 파일 불변 주장이 아니다.
+- 새 인게임 초기화/759프레임 재검수는 body2754·누락0·미준비 이미지0·오류0을 다시 출력했다. 실험실 새 오류로 관측 훅이 만들어지지 않은 재검수는 성공에 포함하지 않는다. 교정 후 새 실험실 혼합4:4와 직접 로컬 자동 전투를 재검수하고 최종 요약을 갱신한다.
+
+## 로컬 전투 실험실 유닛 누락 수정 완료 · 01a1a5fd 현재 요약
+
+- 기록 ID: combat-local-assets-repair-complete-20261106-01a1a5fd. 기록 시각 2026-11-06T22:21:02+09:00. 기록자·수정/실행 검수 Codex /root, 양쪽 수정 요청·로컬 파일 환경 확인 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072 및 literal $Trash/combat-repair-20261106의 실제 코드·Playwright·픽셀/국소 정합 결과. 원발언 정확시각·항목ID·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 원인/수정: 실제 로컬 Combat.html은 local-assets.js 등록이 없어 이미지가 file-origin CORS로 차단됐다. client/build-combat.mjs/Combat.html의 manifest→assets 순서와 client/combat-lab.js/inline의 ready 대기·버튼 잠금을 추가했다. 원본3파일 UTF8NoBom/CRLF를 보존했으며, Combat.html에서 실험실 모듈·등록 스크립트 외 모든 바이트가 작업 전 백업과 동일함을 확인했다. 전체 빌드나 기존 게임/자산/다른 채팅 변경은 수정하지 않았다.
+- 실제 로컬 실험실: 보안 우회 없이 file URL에서625자산 등록·배경/유닛 표시·4:4 자동 전투 사망 종료 확인. 초기 pending 버튼 잠금, 이미지1958회 전부blob, JS/console/요청오류0. 근접/원거리 혼합4:4에서는 실제 공용 엔진을1/60초씩 진행하며1318프레임의 살아 있는 각 유닛 몸체 픽셀을 측정해 누락0,21.9667초 사망 종료·여러 타깃 전환·melee/ranged 상태 모두 확인했다. shots라는 실험실 history 항목 수는0으로 투사체 전용 이벤트 검증이라고 주장하지 않는다.
+- 인게임: 제품은 이미 local manifest 등록 및 ready 대기가 있어 동일 고장이 재현되지 않았다. 실제 로컬 Spawner.html을 초기화하고 응답에만 관측 훅을 넣어 공용 엔진4:4 상태759프레임을 실제 전투 패널로 그렸다. 표시 대상별 몸체 픽셀 누락0,몸체그리기2754회·미준비 이미지0·JS/CORS/요청오류0·사망 후 타깃 전환 확인. 자연 발생 전체 게임 플레이/모든 외형 전수 검증은 아니다. 확인 없이 인게임 소스를 고쳤다고 주장하지 않는다.
+- 검수 정합: 생성 HTML의 실험실 inline과 현재 source 일치, manifest 선행, 최종 classic bundle 및 source/builder 구문 확인 성공. 무효 fixture 2회(인게임 combat id 고정·혼합 편성의 미지정0조각 누락)는 제품 결함으로 분류하지 않았고, 실제 id/모든 편집 필드 설정을 적용한 위 유효 결과만 사용했다. 캡처 file-after.png·lab-file-mixed-4v4.png·ingame-file-4v4.png를 직접 확인했다.
+- 현재 범위는 제품3경로와 본 관련 메모리이며 미stage·미commit이다. 현재 요청에 Git 완료가 없어 commit/push/배포하지 않는다. 앞선 착수/진행의 남은 실험실 혼합 검수는 완료로 대체하고 원기록을 보존한다. 근거 file-after-result.json·lab-mixed-result.json·ingame-file-result.json·scope-check.json. 마지막으로 이4텍스트의 형식·제품3경로 국소 diff와 검수 후 hash 유지 여부를 확인한다. 최종 형식 검사 실패가 있으면 성공으로 확대하지 않고 별도 보고한다.
+
+## 로컬 전투 실험실 복구·인게임 프레임 점검 진행 · 01a1a5fd
+
+- 기록 ID: combat-local-assets-repair-progress-20261106-01a1a5fd. 기록 시각 2026-11-06T22:18:46+09:00. 기록자·수정/검수 판단 Codex /root, 수정 요청·로컬 파일 환경 확인 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072 및 literal $Trash/combat-repair-20261106 직접 Playwright 결과. 원발언 정확 시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 제품 최소 변경: client/build-combat.mjs와 Combat.html에서 local-assets.js를 assets.js 앞에 등록하고 client/combat-lab.js에서 ready 완료까지 전투 진행/그리기·전투 실행 버튼을 대기한다. Combat.html은 의존 스크립트·실험실 모듈만 동기화했고 다른 동시 변경은 보존했다. 전체 빌드·게임 소스 변경·Git 완료는 하지 않았다.
+- 실제 로컬 Combat.html을 보안 우회 플래그 없이 열어 pending 중 자동 전투 비활성, 약8.4초 후 자산625개 준비, 배경/유닛 표시, 4:4 자동 전투 사망 종료를 확인했다. pageerror·console error·request failure 모두0, 캔버스 이미지1958회는 모두blob URL이다. 근거 file-after-result.json 및 file-after.png/file-4v4-ended.png.
+- 인게임은 기존 정상 local manifest→ready 순서를 확인하고 실제 file:///H:/Spawner/Spawner.html에 응답 관측 훅만 넣어 공용 엔진의4:4 상태759프레임을 실제 전투 패널로 렌더했다. 표시 대상별 축소 픽셀 레이어에 유효 몸체가 있으며 누락0·body draw2754·미준비 이미지0·JS/CORS/요청 오류0이다. 사망 후 여러 대상 순차 전환을 관측했다. 자연 발생 전투의 전체 게임 플레이를 검증했다고 확대하지 않는다.
+- 초기 인게임 관측 훅은 fixture의 combat id를 잘못 고정해 전투 종료 화면만 그린 무효 검사였다. 당시 body draw0 결과를 성공 근거로 사용하지 않았고 실제 combat id/표시 대상별 픽셀 검사를 추가한 위759프레임으로 대체했다. 현재 인게임 제품 결함은 재현되지 않아 임의 소스 수정하지 않는다. 다음은 실험실 근접/원거리 혼합 편성 프레임 표시·마지막 국소 diff/형식 확인이며 미커밋 상태로 남긴다.
+
+## 로컬 전투 실험실 유닛 누락·인게임 연출 점검 착수 · 01a1a5fd
+
+- 기록 ID: combat-local-assets-repair-start-20261106-01a1a5fd. 기록 시각 2026-11-06T22:09:13+09:00. 기록자·재현/수정판단 Codex /root, 양쪽 수정 요청·증상/환경 확인 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 ‘전투 실험실…인게임…둘 다 고쳐’ 및 답변 ‘유닛이 안나와’/‘로컬 Combat.html 파일’. H:/Spawner Windows PowerShell, 원발언 정확시각·항목ID 불명.
+- 현재 관측: HTTP 실험실 기본 자동전투는 유닛이 표시되고 pageerror0이다. 동일 실제Combat.html을 보안완화 없이 file URL로 열면 grassland·CombatVfxV4·유닛 등 로컬 이미지가 origin null/CORS로 차단되어 콘솔오류64건, SpawnerLocalAssetSources0이며 manifest가없다. 실제 파일열기 증상을 재현했다.
+- 원인: client/build-combat.mjs/Combat.html은client/assets.js 전에client/local-assets.js를로드하지않는다. 공통image는crossOrigin anonymous를사용하므로HTTP이미지는동작하지만file이미지는등록된data/blob사본을거쳐야한다. 인게임Spawner.html은그manifest를로드하고game.js가Assets.ready를기다린다. 실험실에는이두연결이없다.
+- 수정: 실험실 생성기·HTML에기존로컬manifest를연결하고파일로딩완료전전투진행/렌더를기다리게한다. 기존문구와편집기능·수치/전투엔진·보안설정은바꾸지않는다. 인게임도실제file열기/전투패널의동작·유닛/사격/방어/사망·에러를별도검증해확인된같은범위결함만고친다. 아직인게임정상/수정완료를단정하지않는다.
+- 보호: 현재Combat/runtime/game/CSS/서버/DNA/메모리에병행작업이있고다른채팅이최신애셋통합·게시중이다. 최소소스/해당내장모듈만수정하고전체빌드·Git작업·게시를하지않는다. 관련보드없음은같은프로젝트의기존확인결과를재사용한다. 근거 literal 프로젝트 임시폴더combat-repair-20261106의probe.json/file-before.png 및 file브라우저 실제출력.
 
 ## 샘방울 분비형 원화와 탄생 사망 승인 · 2026-11-06T13:24:30+00:00
 

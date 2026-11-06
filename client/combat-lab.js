@@ -8,7 +8,7 @@ const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index
   organs: { attack: 1, ranged: 0, heal: 0 }, counts: Object.fromEntries(SIMULATION_STATS.map(stat => [stat.key, ({power:4,vitality:5,armor:2,haste:2})[stat.key] || 0])) }]));
 const rosters = Object.fromEntries(sides.map(side => [side, [builds[side]]]));
 const selected = { left: 0, right: 0 };
-let rules = { ...DEFAULT_SIMULATION_RULES }, trial, playing = false, lastFrame = 0, renderedRows = -1, generation = 0, batchBusy = false, controlId = 0;
+let rules = { ...DEFAULT_SIMULATION_RULES }, trial, playing = false, lastFrame = 0, renderedRows = -1, generation = 0, batchBusy = false, controlId = 0, assetsReady = false;
 const main = document.querySelector("main");
 main.replaceChildren();
 function node(tag, text, className) {
@@ -201,8 +201,8 @@ function render() {
     } catch(error) { elements.status.textContent=settingError(error); }
   }
   const result=trial?.result(),ended=!!result?.reason;
-  for(const key of ["step","run","finish"])elements[key].disabled=!trial||ended||batchBusy;
-  elements.repeat.disabled=elements.swap.disabled=!trial||batchBusy;
+  for(const key of ["step","run","finish"])elements[key].disabled=!assetsReady||!trial||ended||batchBusy;
+  elements.repeat.disabled=elements.swap.disabled=!assetsReady||!trial||batchBusy;
   if(!trial){elements.phase.textContent="";return;}
   if(ended) {playing=false;elements.run.textContent="자동 전투";elements.status.textContent=(result.winner==="draw"?"무승부":result.winner==="left"?"왼쪽 승리":"오른쪽 승리")+" · "+({death:"사망",'time-limit':"시간 제한",'no-offense':"공격 불가",'event-limit':"사건 제한"}[result.reason]||result.reason);}
   else elements.status.textContent=playing?"전투 중":trial.time?"일시정지":"대결 준비";
@@ -259,8 +259,10 @@ async function runBatch(swap) {
   finally{batchBusy=false;elements.cancel.hidden=true;for(const entry of locked)entry.element.disabled=entry.disabled;render();}
 }
 reset();
+Promise.resolve(globalThis.SpawnerAssets?.ready).then(() => { assetsReady = true; render(); }, error => { elements.status.textContent = error.message; });
 function frame(now) {
   const elapsed=lastFrame?Math.min(.1,(now-lastFrame)/1000):0;lastFrame=now;
+  if (!assetsReady) { requestAnimationFrame(frame); return; }
   if(playing&&trial){trial.advance(elapsed*Number(elements.playback.value));render();}
   combatStage.render(trial, now, playing);requestAnimationFrame(frame);
 }

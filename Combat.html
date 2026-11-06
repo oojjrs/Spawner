@@ -107,7 +107,7 @@ main{padding:16px 8px 32px}.stage-hud{gap:8px 18px;padding:14px 12px 0}.stage-si
 
 .roster-actions{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.roster-actions button{min-height:32px;padding:4px 8px;font-size:11px;background:#2b4434;color:#e9edda;border-color:#a6bf8659}.roster-actions button:hover:not(:disabled){background:#3c5740;border-color:#a6bf8699}.roster-actions button:disabled{background:#304236;color:#bdcbbb;border-color:#627760;opacity:1;cursor:default}
 </style></head>
-<body><main></main><script src="./client/assets.js"></script><script src="./client/unit-appearance-lazy-assets.js"></script><script>(() => {
+<body><main></main><script src="./client/local-assets.js"></script><script src="./client/assets.js"></script><script src="./client/unit-appearance-lazy-assets.js"></script><script>(() => {
 const modules = Object.create(null);
 modules["server/dna-actions.mjs"] = (() => {
 const DNA_ACTION_RULES = Object.freeze({ meleeRange: 1, rangedRange: 3, projectileSpeed: 6, rangedPowerBase: 1.4, healRange: 2, healInterval: 2, healPower: 1 });
@@ -11733,77 +11733,6 @@ function createCombatAttributeArt(assetSource, createSurface, loadImage) {
 
 return { combatAttributeKeys, hasCombatEvolution, createCombatAttributeArt };
 })();
-modules["client/tribe-minor-animation.mjs"] = (() => {
-const { TRIBE_MINOR_ANIMATIONS } = modules["client/tribe-minor-animations.mjs"];
-const { TRIBE_CANVAS_CACHE_BUDGET } = modules["client/canvas-cache.mjs"];
-const { UNIT_APPEARANCE_LEGACY_VISUAL_KEYS } = modules["server/unit-appearance.mjs"];
-
-const TRIBE_MINOR_ANIMATION_ASSETS = Object.freeze(Object.values(TRIBE_MINOR_ANIMATIONS).flatMap(forms => Object.values(forms).flatMap(actions => Object.values(actions).map(clip => clip.image))));
-
-function minorForm(agent, attributes) {
-  if (!agent || agent.species || agent.kind !== "corpse" && (agent.dna?.version !== 3 || !Array.isArray(agent.dna.pieces))) return null;
-  if ([agent.attributes, agent.appearanceAttributes].some(values => UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key => values?.[key] > 0))) return null;
-  if (["blade", "secretion", "carapace", "piercing", "guard", "arms"].some(key => attributes?.[key] > 0)) return null;
-  return attributes?.antenna > 0 ? "antenna" : attributes?.feet > 0 ? "feet" : null;
-}
-
-function tribeMinorAnimation(agent, attributes, action) {
-  const form = minorForm(agent, attributes), actions = TRIBE_MINOR_ANIMATIONS[agent?.tribe]?.[form];
-  return actions?.[action === "carry" || action === "idle" ? "walk" : action] || null;
-}
-
-function tribeMinorAnimationFrame(clip, elapsed) {
-  let clock = Math.max(0, Number.isFinite(elapsed) ? elapsed : 0);
-  if (clip.loop) clock %= clip.durationMs;
-  for (let frame = 0; frame < clip.frameCount - 1; frame++) {
-    if (clock < clip.durationsMs[frame]) return frame;
-    clock -= clip.durationsMs[frame];
-  }
-  return clip.frameCount - 1;
-}
-
-function createTribeMinorAnimation(createSurface, loadImage) {
-  const images = new Map(), frames = TRIBE_CANVAS_CACHE_BUDGET.createCache();
-  const reducedMotion = globalThis.matchMedia?.("(prefers-reduced-motion: reduce)");
-  async function prepare(tribe) {
-    const forms = TRIBE_MINOR_ANIMATIONS[tribe];
-    if (!forms) return;
-    await Promise.all(Object.values(forms).flatMap(actions => Object.values(actions)).map(async clip => {
-      if (!images.has(clip.image)) images.set(clip.image, await loadImage(clip.image));
-    }));
-  }
-  function frame(agent, attributes, animation, index, action, time, motion, layer) {
-    const clip = tribeMinorAnimation(agent, attributes, action), image = clip && images.get(clip.image);
-    if (!image || layer || image.complete === false || !(image.naturalWidth || image.width)) return null;
-    let elapsed;
-    if (action === "idle") elapsed = 0;
-    else if (action === "walk" || action === "carry") elapsed = (motion?.motionPhase ?? index / Math.max(1, animation.frameCount)) * clip.durationMs;
-    else if (action === "birth") elapsed = time * 1000 * clip.durationMs / (animation.duration ? animation.duration * 1000 : animation.durationsMs.reduce((sum, value) => sum + value, 0));
-    else if (Number.isFinite(agent.diedAt)) elapsed = Math.max(0, time - agent.diedAt) * 1000;
-    else elapsed = index / Math.max(1, animation.frameCount - 1) * clip.durationMs;
-    const selected = reducedMotion?.matches ? clip.loop ? 0 : clip.frameCount - 1 : tribeMinorAnimationFrame(clip, elapsed);
-    const direct = action === "birth" && Number.isFinite(clip.worldPerPixelBeforeDisplay);
-    const size = direct ? clip.frameSize : animation.frameSize;
-    const key = [clip.image, selected, size, animation.pivotX, animation.pivotY].join(":");
-    const cached = frames.get(key);
-    if (cached) return cached;
-    const surface = createSurface(size, size), context = surface?.getContext("2d");
-    if (!context) return null;
-    const scale = size / clip.frameSize, x = direct ? 0 : animation.pivotX - clip.pivotX * scale, y = direct ? 0 : animation.pivotY - clip.pivotY * scale;
-    context.drawImage(image, selected % clip.columns * clip.frameSize, Math.floor(selected / clip.columns) * clip.frameSize, clip.frameSize, clip.frameSize, x, y, size, size);
-    if (direct) {
-      surface.minorWorldPerPixel = clip.worldPerPixelBeforeDisplay;
-      surface.minorPivotX = clip.pivotX;
-      surface.minorPivotY = clip.pivotY;
-    }
-    frames.set(key, surface);
-    return surface;
-  }
-  return { prepare, frame };
-}
-
-return { TRIBE_MINOR_ANIMATION_ASSETS, tribeMinorAnimation, tribeMinorAnimationFrame, createTribeMinorAnimation };
-})();
 modules["client/secretion-resource-motion.mjs"] = (() => {
 const { unitAnimationPose } = modules["client/unit-animation.mjs"];
 const { workTriangles } = modules["client/dominant-resource-motion.mjs"];
@@ -12349,6 +12278,77 @@ const mobile = globalThis.matchMedia?.('(max-width: 660px), (pointer: coarse)').
 const TRIBE_CANVAS_CACHE_BUDGET = createCanvasCacheBudget((mobile ? 8 : 32) * 1024 * 1024);
 
 return { createCanvasCacheBudget, TRIBE_CANVAS_CACHE_BUDGET };
+})();
+modules["client/tribe-minor-animation.mjs"] = (() => {
+const { TRIBE_MINOR_ANIMATIONS } = modules["client/tribe-minor-animations.mjs"];
+const { TRIBE_CANVAS_CACHE_BUDGET } = modules["client/canvas-cache.mjs"];
+const { UNIT_APPEARANCE_LEGACY_VISUAL_KEYS } = modules["server/unit-appearance.mjs"];
+
+const TRIBE_MINOR_ANIMATION_ASSETS = Object.freeze(Object.values(TRIBE_MINOR_ANIMATIONS).flatMap(forms => Object.values(forms).flatMap(actions => Object.values(actions).map(clip => clip.image))));
+
+function minorForm(agent, attributes) {
+  if (!agent || agent.species || agent.kind !== "corpse" && (agent.dna?.version !== 3 || !Array.isArray(agent.dna.pieces))) return null;
+  if ([agent.attributes, agent.appearanceAttributes].some(values => UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key => values?.[key] > 0))) return null;
+  if (["blade", "secretion", "carapace", "piercing", "guard", "arms"].some(key => attributes?.[key] > 0)) return null;
+  return attributes?.antenna > 0 ? "antenna" : attributes?.feet > 0 ? "feet" : null;
+}
+
+function tribeMinorAnimation(agent, attributes, action) {
+  const form = minorForm(agent, attributes), actions = TRIBE_MINOR_ANIMATIONS[agent?.tribe]?.[form];
+  return actions?.[action === "carry" || action === "idle" ? "walk" : action] || null;
+}
+
+function tribeMinorAnimationFrame(clip, elapsed) {
+  let clock = Math.max(0, Number.isFinite(elapsed) ? elapsed : 0);
+  if (clip.loop) clock %= clip.durationMs;
+  for (let frame = 0; frame < clip.frameCount - 1; frame++) {
+    if (clock < clip.durationsMs[frame]) return frame;
+    clock -= clip.durationsMs[frame];
+  }
+  return clip.frameCount - 1;
+}
+
+function createTribeMinorAnimation(createSurface, loadImage) {
+  const images = new Map(), frames = TRIBE_CANVAS_CACHE_BUDGET.createCache();
+  const reducedMotion = globalThis.matchMedia?.("(prefers-reduced-motion: reduce)");
+  async function prepare(tribe) {
+    const forms = TRIBE_MINOR_ANIMATIONS[tribe];
+    if (!forms) return;
+    await Promise.all(Object.values(forms).flatMap(actions => Object.values(actions)).map(async clip => {
+      if (!images.has(clip.image)) images.set(clip.image, await loadImage(clip.image));
+    }));
+  }
+  function frame(agent, attributes, animation, index, action, time, motion, layer) {
+    const clip = tribeMinorAnimation(agent, attributes, action), image = clip && images.get(clip.image);
+    if (!image || layer || image.complete === false || !(image.naturalWidth || image.width)) return null;
+    let elapsed;
+    if (action === "idle") elapsed = 0;
+    else if (action === "walk" || action === "carry") elapsed = (motion?.motionPhase ?? index / Math.max(1, animation.frameCount)) * clip.durationMs;
+    else if (action === "birth") elapsed = time * 1000 * clip.durationMs / (animation.duration ? animation.duration * 1000 : animation.durationsMs.reduce((sum, value) => sum + value, 0));
+    else if (Number.isFinite(agent.diedAt)) elapsed = Math.max(0, time - agent.diedAt) * 1000;
+    else elapsed = index / Math.max(1, animation.frameCount - 1) * clip.durationMs;
+    const selected = reducedMotion?.matches ? clip.loop ? 0 : clip.frameCount - 1 : tribeMinorAnimationFrame(clip, elapsed);
+    const direct = action === "birth" && Number.isFinite(clip.worldPerPixelBeforeDisplay);
+    const size = direct ? clip.frameSize : animation.frameSize;
+    const key = [clip.image, selected, size, animation.pivotX, animation.pivotY].join(":");
+    const cached = frames.get(key);
+    if (cached) return cached;
+    const surface = createSurface(size, size), context = surface?.getContext("2d");
+    if (!context) return null;
+    const scale = size / clip.frameSize, x = direct ? 0 : animation.pivotX - clip.pivotX * scale, y = direct ? 0 : animation.pivotY - clip.pivotY * scale;
+    context.drawImage(image, selected % clip.columns * clip.frameSize, Math.floor(selected / clip.columns) * clip.frameSize, clip.frameSize, clip.frameSize, x, y, size, size);
+    if (direct) {
+      surface.minorWorldPerPixel = clip.worldPerPixelBeforeDisplay;
+      surface.minorPivotX = clip.pivotX;
+      surface.minorPivotY = clip.pivotY;
+    }
+    frames.set(key, surface);
+    return surface;
+  }
+  return { prepare, frame };
+}
+
+return { TRIBE_MINOR_ANIMATION_ASSETS, tribeMinorAnimation, tribeMinorAnimationFrame, createTribeMinorAnimation };
 })();
 modules["client/minor-trait-resource-motion.mjs"] = (() => {
 const { unitDisplayAttributes } = modules["client/unit-display-appearance.mjs"];
@@ -22641,7 +22641,7 @@ const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index
   organs: { attack: 1, ranged: 0, heal: 0 }, counts: Object.fromEntries(SIMULATION_STATS.map(stat => [stat.key, ({power:4,vitality:5,armor:2,haste:2})[stat.key] || 0])) }]));
 const rosters = Object.fromEntries(sides.map(side => [side, [builds[side]]]));
 const selected = { left: 0, right: 0 };
-let rules = { ...DEFAULT_SIMULATION_RULES }, trial, playing = false, lastFrame = 0, renderedRows = -1, generation = 0, batchBusy = false, controlId = 0;
+let rules = { ...DEFAULT_SIMULATION_RULES }, trial, playing = false, lastFrame = 0, renderedRows = -1, generation = 0, batchBusy = false, controlId = 0, assetsReady = false;
 const main = document.querySelector("main");
 main.replaceChildren();
 function node(tag, text, className) {
@@ -22834,8 +22834,8 @@ function render() {
     } catch(error) { elements.status.textContent=settingError(error); }
   }
   const result=trial?.result(),ended=!!result?.reason;
-  for(const key of ["step","run","finish"])elements[key].disabled=!trial||ended||batchBusy;
-  elements.repeat.disabled=elements.swap.disabled=!trial||batchBusy;
+  for(const key of ["step","run","finish"])elements[key].disabled=!assetsReady||!trial||ended||batchBusy;
+  elements.repeat.disabled=elements.swap.disabled=!assetsReady||!trial||batchBusy;
   if(!trial){elements.phase.textContent="";return;}
   if(ended) {playing=false;elements.run.textContent="자동 전투";elements.status.textContent=(result.winner==="draw"?"무승부":result.winner==="left"?"왼쪽 승리":"오른쪽 승리")+" · "+({death:"사망",'time-limit':"시간 제한",'no-offense':"공격 불가",'event-limit':"사건 제한"}[result.reason]||result.reason);}
   else elements.status.textContent=playing?"전투 중":trial.time?"일시정지":"대결 준비";
@@ -22892,8 +22892,10 @@ async function runBatch(swap) {
   finally{batchBusy=false;elements.cancel.hidden=true;for(const entry of locked)entry.element.disabled=entry.disabled;render();}
 }
 reset();
+Promise.resolve(globalThis.SpawnerAssets?.ready).then(() => { assetsReady = true; render(); }, error => { elements.status.textContent = error.message; });
 function frame(now) {
   const elapsed=lastFrame?Math.min(.1,(now-lastFrame)/1000):0;lastFrame=now;
+  if (!assetsReady) { requestAnimationFrame(frame); return; }
   if(playing&&trial){trial.advance(elapsed*Number(elements.playback.value));render();}
   combatStage.render(trial, now, playing);requestAnimationFrame(frame);
 }
