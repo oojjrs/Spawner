@@ -71,7 +71,43 @@ export function measureCampExpansion(world, camp, key) {
   return { key, limits: LIMITS, bands, directions: directions.size, weightedAmount };
 }
 
-export function placeResourceCamps(world, tribes) {
+function starterResourceIndex(world) {
+  const index = new Map();
+  for (const cell of world.resources) {
+    const position = cell[1] * world.size + cell[0];
+    if (!index.has(position)) index.set(position, []);
+    index.get(position).push(cell);
+  }
+  return index;
+}
+
+// Level-one DNA workers cannot leave the three-cell nest boundary range.
+// Count only natural food that survives footprint/tree clearing and has a
+// safe path inside that range. Do not manufacture resources or move old maps.
+export function starterFoodAccess(world, camp, key, resourceIndex = starterResourceIndex(world)) {
+  const {size, terrain, hazards} = world, boundary = [];
+  for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++) {
+    if(Math.abs(dx)===2 && Math.abs(dy)===2)continue;
+    if(Math.abs(dx)===2 || Math.abs(dy)===2)boundary.push([camp.x+dx,camp.y+dy]);
+  }
+  const inside=(x,y)=>boundary.some(([bx,by])=>(x-bx)**2+(y-by)**2<=9);
+  const plot=(x,y)=>Math.abs(x-camp.x)<=2&&Math.abs(y-camp.y)<=2;
+  const seen=new Set(), queue=[];
+  for(const [dx,dy] of [[-2,-2],[2,-2],[-2,2],[2,2]]) {
+    const x=camp.x+dx,y=camp.y+dy,i=y*size+x;
+    if(tribeSafeTerrain(camp.tribe,terrain[i],hazards[i])){seen.add(i);queue.push([x,y]);}
+  }
+  for(let j=0;j<queue.length;j++)for(const [x,y] of [[queue[j][0]-1,queue[j][1]],[queue[j][0]+1,queue[j][1]],[queue[j][0],queue[j][1]-1],[queue[j][0],queue[j][1]+1]]) {
+    const i=y*size+x;
+    if(x<0||y<0||x>=size||y>=size||plot(x,y)||!inside(x,y)||seen.has(i)||!tribeSafeTerrain(camp.tribe,terrain[i],hazards[i]))continue;
+    seen.add(i);queue.push([x,y]);
+  }
+  const cells=[...seen].flatMap(i=>resourceIndex.get(i)||[]).filter(([x,y,amount,type])=>type===key&&amount>0&&!plot(x,y)&&
+    !(key==='tree'&&camp.tribe==='spore'&&(x-camp.x)**2+(y-camp.y)**2<=16));
+  return {nodes:cells.length,amount:cells.reduce((sum,cell)=>sum+cell[2],0)};
+}
+
+export function placeResourceCamps(world, tribes, version = world.hydrology?.generationVersion) {
   const { size, terrain, hazards } = world, occupied = new Uint8Array(terrain.length), labels = new Int32Array(terrain.length);
   const queue = new Int32Array(terrain.length), populations = [0];
   for (const [x, y] of [...world.food, ...world.resources]) occupied[y * size + x] = 1;
@@ -109,6 +145,7 @@ export function placeResourceCamps(world, tribes) {
     for (const site of available) values[site.y * size + site.x] = 1;
     recordPlacementMap(world.hydrology, "camp:available", ["camps"], values, { minimum: 0, maximum: 1 });
   }
+  const starterResources = version >= 40 ? starterResourceIndex(world) : null;
   const choices = PRIMARY.map((key, order) => {
     const values = new Float64Array(terrain.length);
     for (const [x, y, amount, type] of world.resources) if (type === key) values[y * size + x] = amount;
@@ -131,6 +168,7 @@ export function placeResourceCamps(world, tribes) {
     for (const site of ranked) {
       if (sampled.some(other => Math.hypot(site.x - other.x, site.y - other.y) < 14)) continue;
       if (nodeCounts && area(nodeCounts, site.x, site.y, 14, size) < MINIMUM[order]) continue;
+      if (version >= 40 && starterFoodAccess(world, { ...site, tribe: tribes[order].key }, key, starterResources).nodes < 2) continue;
       if (!nodeCounts) sampled.push(site);
       const expansion = measureCampExpansion(world, { ...site, tribe: tribes[order].key }, key);
       if (expansion.bands.some(band => band.nodes < MINIMUM[order]) || expansion.directions < 2) continue;

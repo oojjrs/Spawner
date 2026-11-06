@@ -163,7 +163,7 @@ function clearCampFootprints(world, version) {
 }
 
 export function generateLandscapeWorld(seed, baseline, onProgress, tribes, encounterPlans, version, capturePlacementMaps) {
-  const generationVersion = version === undefined ? 39 : version;
+  const generationVersion = version === undefined ? 40 : version;
   const size = generationVersion >= 35 ? WORLD_SIZE : 320;
   const terrain = new Uint8Array(size * size), moisture = new Float32Array(terrain.length), height = new Float32Array(terrain.length);
   const hydrology = generateHydrology(terrain, moisture, height, size, seed, baseline, generationVersion, capturePlacementMaps);
@@ -173,7 +173,7 @@ export function generateLandscapeWorld(seed, baseline, onProgress, tribes, encou
   else populateLandscapeResources(world, baseline);
   if (generationVersion >= 30) world.frontierSites = identifyFrontierSites(world);
   onProgress?.(.5);
-  world.camps = placeResourceCamps(world, tribes);
+  world.camps = placeResourceCamps(world, tribes, generationVersion);
   if (generationVersion >= 32) clearCampFootprints(world, generationVersion);
   const occupied = new Set([...world.food, ...world.resources].map(([x, y]) => y * size + x));
   populateBurrows(world, occupied);

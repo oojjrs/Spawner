@@ -79,7 +79,7 @@ test("새 설계와 속성을 추가한 기존 설계는 목록 가격과 실제
 });
 
 test("새 맵은 포자버섯 중심 반경 4칸의 숲과 목재를 비우고 다른 배치를 보존한다", () => {
-  const seed=1165626204,before=generateWorld(seed,38),after=generateWorld(seed),camp=after.camps.find(entry=>entry.tribe==="spore");
+  const seed=1165626204,before=generateWorld(seed,38),after=generateWorld(seed,39),camp=after.camps.find(entry=>entry.tribe==="spore");
   assert.equal(after.generationVersion,39);
   assert.deepEqual(after.camps,before.camps);
   const inside=(x,y)=>(x-camp.x)**2+(y-camp.y)**2<=16;
