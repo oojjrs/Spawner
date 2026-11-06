@@ -1,0 +1,115 @@
+{
+  "status": "user-approved",
+  "action": "death",
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "durationsMs": [
+    120,
+    100,
+    140,
+    120,
+    140,
+    100,
+    120,
+    700
+  ],
+  "loop": false,
+  "pivot": [
+    256,
+    448
+  ],
+  "method": "Individually redrawn complete anatomical poses; fixed global scale and ground registration. No mesh/row deformation. Same-sheet GIF. Identical peak and corpse holds are byte copies.",
+  "verification": [
+    {
+      "bbox": [
+        43,
+        134,
+        469,
+        448
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        61,
+        159,
+        487,
+        448
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        42,
+        197,
+        487,
+        448
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        30,
+        233,
+        490,
+        449
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        33,
+        254,
+        484,
+        448
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        33,
+        260,
+        483,
+        448
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        33,
+        260,
+        483,
+        448
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        33,
+        260,
+        483,
+        448
+      ],
+      "components": 1
+    }
+  ],
+  "candidate": false,
+  "tribe": "spore",
+  "form": "gather",
+  "durationMs": 1540,
+  "pivotX": 256,
+  "pivotY": 448,
+  "sheet": "spore-gather-death-v2-sheet.png",
+  "preview": "spore-gather-death-v2-preview.gif",
+  "previewLoop": true,
+  "validation": {
+    "previewRegeneratedFromSheetMatchesExactly": true,
+    "gifDecodedFrames": 6,
+    "gifDurationMs": 1540,
+    "singleConnectedBodyOver8px": true,
+    "clippedFrames": 0,
+    "sheetSHA256": "7abdc78a1974d47389963ca7cd58959953f789cfb3d204853e03ae300779deeb",
+    "previewSHA256": "4eabfcc03d1277ad3a7367b022471b55ca3a56bc4bb616c359b784565c2a4bed"
+  }
+}

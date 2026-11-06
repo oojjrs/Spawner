@@ -1,0 +1,115 @@
+{
+  "status": "user-approved",
+  "action": "hurt",
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "durationsMs": [
+    80,
+    60,
+    100,
+    150,
+    250,
+    80,
+    80,
+    400
+  ],
+  "loop": false,
+  "pivot": [
+    256,
+    448
+  ],
+  "method": "Individually redrawn complete anatomical poses; fixed global scale and ground registration. No mesh/row deformation. Same-sheet GIF. Identical peak and corpse holds are byte copies.",
+  "verification": [
+    {
+      "bbox": [
+        43,
+        134,
+        470,
+        449
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        42,
+        129,
+        460,
+        448
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        37,
+        126,
+        450,
+        448
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        37,
+        126,
+        450,
+        448
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        37,
+        126,
+        450,
+        448
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        40,
+        130,
+        458,
+        448
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        41,
+        130,
+        463,
+        448
+      ],
+      "components": 1
+    },
+    {
+      "bbox": [
+        43,
+        134,
+        470,
+        449
+      ],
+      "components": 1
+    }
+  ],
+  "candidate": false,
+  "tribe": "spore",
+  "form": "gather",
+  "durationMs": 1200,
+  "pivotX": 256,
+  "pivotY": 448,
+  "sheet": "spore-gather-hurt-v2-sheet.png",
+  "preview": "spore-gather-hurt-v2-preview.gif",
+  "previewLoop": true,
+  "validation": {
+    "previewRegeneratedFromSheetMatchesExactly": true,
+    "gifDecodedFrames": 6,
+    "gifDurationMs": 1200,
+    "singleConnectedBodyOver8px": true,
+    "clippedFrames": 0,
+    "sheetSHA256": "211392af29682716949495a34071dc63e5c3f30f83ec69d29b6e9ebb75d84896",
+    "previewSHA256": "303727d728ad86440a1f0efc3985b9d25cc065bad069ff49c8ba1468726f772e"
+  }
+}
