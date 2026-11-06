@@ -1,0 +1,63 @@
+{
+  "unit": "lantern-keeper",
+  "columns": 4,
+  "rows": 2,
+  "frameSize": 512,
+  "frameCount": 8,
+  "durationsMs": [
+    70,
+    100,
+    120,
+    40,
+    260,
+    110,
+    160,
+    140
+  ],
+  "supportAnchor": [
+    357,
+    405
+  ],
+  "sourceFrameAnchors": [
+    [
+      322,
+      445
+    ],
+    [
+      333,
+      447
+    ],
+    [
+      339,
+      446
+    ],
+    [
+      459,
+      401
+    ],
+    [
+      437,
+      446
+    ],
+    [
+      327,
+      446
+    ],
+    [
+      334,
+      447
+    ],
+    [
+      322,
+      445
+    ]
+  ],
+  "sourceScale": 1,
+  "registrationOnly": true,
+  "pixelEqualityVerified": true,
+  "sourceImage": "Spawner-retry/DesignAssets/Animations/CreatureAttackV2/lantern-keeper/attack.webp",
+  "sourceSha256": "a282a2b2dba25be424f95d35a0bb120d39205a1ff98047a15255624392dca34f",
+  "status": "approved",
+  "gameIntegration": false,
+  "previewGroundLine": true
+}

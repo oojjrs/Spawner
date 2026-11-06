@@ -1,0 +1,63 @@
+{
+  "unit": "walking-forest",
+  "columns": 4,
+  "rows": 2,
+  "frameSize": 496,
+  "frameCount": 8,
+  "durationsMs": [
+    100,
+    180,
+    220,
+    60,
+    320,
+    180,
+    220,
+    180
+  ],
+  "supportAnchor": [
+    372,
+    439
+  ],
+  "sourceFrameAnchors": [
+    [
+      403,
+      427
+    ],
+    [
+      355,
+      447
+    ],
+    [
+      340,
+      447
+    ],
+    [
+      392,
+      416
+    ],
+    [
+      396,
+      430
+    ],
+    [
+      361,
+      439
+    ],
+    [
+      381,
+      429
+    ],
+    [
+      403,
+      427
+    ]
+  ],
+  "sourceScale": 1,
+  "registrationOnly": true,
+  "pixelEqualityVerified": true,
+  "sourceImage": "Spawner-retry/DesignAssets/Animations/CreatureAttackV2/walking-forest/attack.webp",
+  "sourceSha256": "59bd658ddfca6215d3bd08be7b725af7ebde6dba4cf90c9d2d921eb8baa3938a",
+  "status": "approved",
+  "gameIntegration": false,
+  "previewGroundLine": true
+}

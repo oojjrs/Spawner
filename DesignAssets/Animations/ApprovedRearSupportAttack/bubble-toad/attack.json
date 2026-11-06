@@ -1,0 +1,53 @@
+{
+  "unit": "bubble-toad",
+  "columns": 4,
+  "rows": 2,
+  "frameSize": 536,
+  "frameCount": 6,
+  "durationsMs": [
+    70,
+    210,
+    50,
+    300,
+    170,
+    220
+  ],
+  "supportAnchor": [
+    425,
+    417
+  ],
+  "sourceFrameAnchors": [
+    [
+      380,
+      373
+    ],
+    [
+      367,
+      401
+    ],
+    [
+      448,
+      370
+    ],
+    [
+      446,
+      377
+    ],
+    [
+      390,
+      390
+    ],
+    [
+      380,
+      373
+    ]
+  ],
+  "sourceScale": 1,
+  "registrationOnly": true,
+  "pixelEqualityVerified": true,
+  "sourceImage": "Spawner-retry/DesignAssets/Animations/CreatureAttackV2/bubble-toad/attack.webp",
+  "sourceSha256": "59480c93ef2bb97bde4783ea9ef0ad36cb651e6b93b7fdac80565b6ffbf5991b",
+  "status": "approved",
+  "gameIntegration": false,
+  "previewGroundLine": true
+}

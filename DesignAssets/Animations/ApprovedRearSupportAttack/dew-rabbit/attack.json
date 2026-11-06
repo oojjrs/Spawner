@@ -1,0 +1,63 @@
+{
+  "unit": "dew-rabbit",
+  "columns": 4,
+  "rows": 2,
+  "frameSize": 592,
+  "frameCount": 8,
+  "durationsMs": [
+    100,
+    110,
+    110,
+    40,
+    200,
+    90,
+    130,
+    190
+  ],
+  "supportAnchor": [
+    456,
+    442
+  ],
+  "sourceFrameAnchors": [
+    [
+      330,
+      442
+    ],
+    [
+      326,
+      443
+    ],
+    [
+      332,
+      443
+    ],
+    [
+      382,
+      432
+    ],
+    [
+      456,
+      443
+    ],
+    [
+      419,
+      443
+    ],
+    [
+      336,
+      442
+    ],
+    [
+      330,
+      442
+    ]
+  ],
+  "sourceScale": 1,
+  "registrationOnly": true,
+  "pixelEqualityVerified": true,
+  "sourceImage": "Spawner-retry/DesignAssets/Animations/CreatureAttackV2/dew-rabbit/attack.webp",
+  "sourceSha256": "be8bf86ac32be32a7097924658137ea01cedb238c290a37f6ee3590f1f3310d5",
+  "status": "approved",
+  "gameIntegration": false,
+  "previewGroundLine": true
+}

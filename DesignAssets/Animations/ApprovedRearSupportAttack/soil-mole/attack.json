@@ -1,0 +1,63 @@
+{
+  "unit": "soil-mole",
+  "columns": 4,
+  "rows": 2,
+  "frameSize": 504,
+  "frameCount": 8,
+  "durationsMs": [
+    100,
+    110,
+    120,
+    40,
+    220,
+    90,
+    130,
+    190
+  ],
+  "supportAnchor": [
+    434,
+    268
+  ],
+  "sourceFrameAnchors": [
+    [
+      402,
+      370
+    ],
+    [
+      414,
+      411
+    ],
+    [
+      402,
+      399
+    ],
+    [
+      398,
+      388
+    ],
+    [
+      459,
+      386
+    ],
+    [
+      402,
+      398
+    ],
+    [
+      403,
+      374
+    ],
+    [
+      402,
+      370
+    ]
+  ],
+  "sourceScale": 1,
+  "registrationOnly": true,
+  "pixelEqualityVerified": true,
+  "sourceImage": "Spawner-retry/DesignAssets/Animations/CreatureAttackV2/soil-mole/attack.webp",
+  "sourceSha256": "81186dd1d02f27dbfe585139117f19781929482950b4053d1b98a784dd048906",
+  "status": "approved",
+  "gameIntegration": false,
+  "previewGroundLine": true
+}

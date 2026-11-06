@@ -1,0 +1,52 @@
+{
+  "character": "white-paw",
+  "status": "approved",
+  "frameWidth": 576,
+  "frameHeight": 576,
+  "columns": 3,
+  "rows": 2,
+  "frameCount": 6,
+  "durationsMs": [
+    100,
+    100,
+    70,
+    240,
+    140,
+    150
+  ],
+  "previewEndHoldExtraMs": 600,
+  "rearSupportAnchor": [
+    430,
+    450
+  ],
+  "sourceAnchors": [
+    [
+      389,
+      365
+    ],
+    [
+      389,
+      365
+    ],
+    [
+      393,
+      365
+    ],
+    [
+      424,
+      365
+    ],
+    [
+      392,
+      365
+    ],
+    [
+      392,
+      365
+    ]
+  ],
+  "facing": "left",
+  "method": "New whole-body imagegen drawings; whole-cel integer translation to rear-foot contact. No per-limb transforms, no scaling; last frame exactly first. GIF extracted from final PNG sheet.",
+  "alpha": true,
+  "gameIntegration": false
+}

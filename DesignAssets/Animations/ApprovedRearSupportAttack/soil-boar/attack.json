@@ -1,0 +1,53 @@
+{
+  "unit": "soil-boar",
+  "columns": 4,
+  "rows": 2,
+  "frameSize": 520,
+  "frameCount": 6,
+  "durationsMs": [
+    70,
+    210,
+    50,
+    300,
+    170,
+    220
+  ],
+  "supportAnchor": [
+    440,
+    374
+  ],
+  "sourceFrameAnchors": [
+    [
+      413,
+      374
+    ],
+    [
+      398,
+      381
+    ],
+    [
+      445,
+      376
+    ],
+    [
+      467,
+      381
+    ],
+    [
+      442,
+      381
+    ],
+    [
+      413,
+      374
+    ]
+  ],
+  "sourceScale": 1,
+  "registrationOnly": true,
+  "pixelEqualityVerified": true,
+  "sourceImage": "Spawner-retry/DesignAssets/Animations/CreatureAttackV2/soil-boar/attack.webp",
+  "sourceSha256": "ccda9115ca978eb0824e95d119b21b5880fe9033d199dd43e06cb227618d472d",
+  "status": "approved",
+  "gameIntegration": false,
+  "previewGroundLine": true
+}
