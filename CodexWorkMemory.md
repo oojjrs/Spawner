@@ -22,6 +22,40 @@
 - 승인된 PNG 아틀라스 4개, 대응 프레임·원본 시트·검토 영상 및 필요한 재생정보를 보존한다. Design.html 기존 포자 안테나/발형 셀의 원화와 자료 참조만 갱신하며 새 문구·새 페이지는 추가하지 않는다. 게임 코드·실제 게임 연결·배포는 하지 않는다.
 - 시작 checkout은 Spawner-spring-lifecycle-publish, dedicated origin oojjrs/Spawner. fetch main 및 fast-forward 확인 결과 기존 HEAD와 원격 일치. GitHub Projects 조회는 read:project 권한 부족, 인증 변경하지 않았다. 대용량 복구 아카이브는 승인 대기 상태로 이번 작업에 포함하지 않는다.
 - 실제 확인: 승인 원본과 아틀라스 4개 바이트 일치, 각 2048×1024·8프레임 및 32개 프레임 참조 확인. 기획서 기존 표시 문구와 줄바꿈 형식 유지, 추가 참조 파일 존재, diff 공백 검사 통과. 공통 형식 검사기는 checkout에 없어 실행하지 못했다. 게임 빌드·브라우저 검수는 하지 않았다. 게시 결과는 아직 확인 전이다.
+## 채집 접시 외형 수정 커밋 범위 확정 · 01a1b058
+
+- 기록 ID: gather-plate-local-commit-freeze-20261106-01a1b058. 기록 시각 2026-11-06T19:38:57+09:00. 기록자·분리/마감 판단 Codex /root, 이번수정만 로컬커밋 결정 사용자. 출처 현재채팅01a1b058-b678-7c82-b53d-f7118079bd4d의 ‘수정한 것만 커밋해’. 원발언 정확시각·항목ID 불명. H:/Spawner Windows PowerShell host local.
+- 확정범위3경로: client/unit-display-appearance.mjs의 gather 표시전용 접시 연결, client/runtime.js의 동일함수1개, 본채팅 관련메모리5절(진단/정정/구현/검수/이번동결)만 포함한다. 공유 runtime의 병행984줄 변화와 다른채팅의메모리·게임/이동/웰컴/DNA선택창 변경은 제외한다. HEAD 5e39fe330c17b5076f671a65bfcea87c149a4e1b main에서 원본 blob에 이번함수만 적용한후보와전용index로 로컬커밋하며 실제작업파일은 덮어쓰지 않는다.
+- 재사용검수: 실제4시작DNA/clone입력/스탯·저장불변/32우선순위/혼합기관·중립·구형/번들4종족 72assertions, runtime구문, 실제4종족 renderer 기존strength1과픽셀차이0·pageerror0 및직접PNG확인. 새후보runtime의구문도확인했다. 같은소스의기능테스트/브라우저를반복하지않고 후보형식·최종staged범위/diff/check만확인한다. 연결Projects0결과재사용. 메시지 ‘채집 DNA의 접시 외형 연결 수정’. 아직커밋성공전이며 push/배포는요청되지 않았다.
+
+## 채집 DNA 접시 외형 수정 결과 · 01a1b058 현재 요약
+
+- 기록 ID: gather-plate-render-result-20261106-01a1b058. 기록 시각 2026-11-06T19:32:24+09:00. 기록자·구현/검수 Codex /root, 수정 결정 사용자. 출처 동일 채팅01a1b058-b678-7c82-b53d-f7118079bd4d의 ‘고쳐’. 원발언 정확시각·항목ID 불명. H:/Spawner Windows PowerShell host local.
+- 실제 수정은 client/unit-display-appearance.mjs의 표시 전용 gather→기존 strength1 접시 rig 연결과 client/runtime.js 해당 함수 사본1개다. 시작/생산/저장복원 DNA를 모두 같은 진입점에서 처리하며 현재빈 appearanceAttributes도 보완한다. 실제 DNA·기계속성·스탯·가격·저장데이터는 변경하지 않았다. 기존 기관우선순위·중립예외·구형 strength 수준은 유지한다.
+- 실제 정적/실행 확인: 사용자 기대인 접시와 기존카탈로그를 oracle로 72 assertions(네 종족 실제 시작 DNA·저장복제·빈스냅샷·DNA만 있는입력·비채집·기계/저장불변·32외형우선순위·혼합기관·구형/중립예외·실제 번들4종족)을 통과했고 runtime 전체구문도 통과했다. 격리 headless에서 실제 네 종족 기존 portrait/composer로 before/after를 렌더했다. 네 after 모두 기존 strength1 접시 rig와 pixel 일치0차이이며 before와각각달라짐을 확인했다. pageerror0. screenshot의 위쪽은 before, 아래쪽은 after이며 좌우 순서는 콩/포자/몽돌/샘이다.
+- 근거: 현재 writable 루트 literal $Trash/gather-plate의 implementation.json, verification.json, display-before/after.mjs, before-after.png. 전체 build와 다른 진행중 renderer·이동·웰컴 수정은 수행하지 않았으며 공유 번들의 다른바이트는 좁은 치환으로 보존했다. Git stage/commit/push/배포는 하지 않았다. 최종 공유 형식검사 대상3파일은 UTF8NoBom/CRLF 모두OK이고 표시모듈 scoped diff도 의도한 함수1개 변경임을 확인했다. Codex가 실제 전후PNG를 직접 열어 콩의 접시 표시와 나머지3종족의 기존 strength 전용 채집 외형 복구를 확인했다. 다른3종족은 원래 승인된 몸통/팔 외형을 그대로 사용하며 별도 접시 그림을 새로 합성하지 않았다. 공개 배포판 갱신은 미수행이다.
+
+## 채집 DNA 접시 외형 연결 구현 · 01a1b058 현재 요약
+
+- 기록 ID: gather-plate-render-implementation-20261106-01a1b058. 기록 시각 2026-11-06T19:29:39+09:00. 기록자·구현 판단 Codex /root, 수정 결정 사용자. 출처 현재 채팅01a1b058-b678-7c82-b53d-f7118079bd4d의 ‘고쳐’. 원 발언 정확시각·항목ID 불명. H:/Spawner Windows PowerShell host local.
+- 구현 범위: client/unit-display-appearance.mjs가 실제 DNA에 gather가 있을 때 기존 우선순위 투영 결과에 표시 전용 strength1을 추가해 승인된 기존 손/접시 rig를 재사용한다. 기존 appearanceAttributes가 빈 객체인 시작/저장 DNA도 복구하며, 새로운 기계 속성·DNA·가격·스탯·저장값을 쓰지 않는다. 기존 strength/arms 외형 수준은 보존하고 다른 기관 우선순위는 먼저 적용한다. 종족/중립의 기존 예외는 유지한다.
+- runtime.js는 현재의 해당 함수 사본만 정확 치환했다. 전체 build로 병행 이동·웰컴/공유 renderer의 진행중 변경을 재생성하지 않는다. 변경 전후 소스와 사본별 치환 수는 현재 writable 루트의 literal $Trash/gather-plate에 보존한다. server/game·game.js·기타 진행중 파일은 수정하지 않는다. 연결 GitHub Projects 조회결과0으로 보드 변경은 없다.
+- 현재는 코드 반영 뒤 검수 전이다. 사용자 기대인 접시를 독립 oracle로 삼아 실제 네 시작 DNA/기존 접시 rig/미변경 저장 및 스탯을 확인하고 실제 renderer 캔버스를 비교한다. Git/배포는 요청되지 않았다.
+
+## 채집기관 접시 외형 누락 확인 · 01a1b058 현재 정정
+
+- 기록 ID: starter-gather-plate-appearance-correction-20261106-01a1b058. 기록·근거 확인 시각: 2026-11-06T19:21:17+09:00. 기록자·진단 Codex /root, 원 발언·기대 동작 확인 사용자. 출처 현재 채팅01a1b058-b678-7c82-b53d-f7118079bd4d의 ‘외형은 전혀 적용이 안되어 있는데? 원래 접시 들고 있어야 하는거 아님?’. 원발언 정확시각·항목 ID·딥링크 불명. H:/Spawner Windows PowerShell, host local.
+- 앞선 starter-gather-dna-diagnosis-20261106-01a1b058의 채집 기능 반영 사실은 유지하지만, 그것만으로 사용자 기대인 외형까지 반영됐다고 답한 판단은 정정한다. 현재 실제 누락은 gather기관의 접시 외형 연결이다. 새 게임에도 발생하는 현재 코드 경로이므로 기존 저장 유지 여부를 이 외형 문제의 원인으로 제시하지 않는다.
+- 직접 근거: server/dna-unit.mjs:25 dnaAppearance는 blade/carapace/antenna/legs/secretion만 투영하고 gather를 생략한다. 시작 일꾼의 gather/capacity/harvestSpeed/health/movement는 모두 외형 투영에서 빠져 빈 객체가 된다. server/game.mjs:270-271이 이를 appearanceAttributes로 사용하며 client/unit-display-appearance.mjs도 이 객체를 먼저 사용한다. spawnAgent의 dnaGather 플래그는 이 외형에 연결되지 않는다.
+- 접시 애셋 DesignAssets/Units/Parts/strength-1.png를 view_image로 직접 확인했다. 손으로 접시를 든 기존 원화이며 client/game.js:7934-7938은 attributes.strength가 있을 때만 그린다. client/tribe-art.mjs:221 및 attribute-animation/morphology의 기존 외형도 strength/arms 조건에 연결돼 있다. 기능 유무와 외형 적용을 구분해 답하며 실제 미수정 상태임을 밝힌다.
+- 제품 파일 수정·빌드/테스트·브라우저·Git·배포는 수행하지 않았다. 담당 작업자가 다비스였는지는 여전히 확인하지 못했다. 이번은 사용자 교정에 대한 원인 조사이며 수정 완료로 기록하지 않는다. 메모리만 최신 정정 근거로 갱신한다.
+
+## 시작 유닛 채집 DNA 반영 조사 · 01a1b058 현재 요약
+
+- 기록 ID: starter-gather-dna-diagnosis-20261106-01a1b058. 기록·현재 소스 마지막 확인 시각: 2026-11-06T19:16:29+09:00. 기록자·읽기 조사/판단 Codex /root, 원 발언자 사용자. 출처 현재 채팅 01a1b058-b678-7c82-b53d-f7118079bd4d의 ‘초반 유닛들 채집 속성 부여 안해? 분명 그거 다비스 시켜서 작업했을건데’. 원 발언 정확 시각·항목 ID·딥링크·PC 식별 불명. 확인 환경 H:/Spawner Windows PowerShell, host local.
+- 실제 확인: HEAD 5e39fe3 기준 server/tribe-start.mjs STARTING_WORKER_GENES는 네 종족 모두 gather1을 포함한다. 콩은 capacity3, 포자는 harvestSpeed1+capacity2, 몽돌은 health1+capacity2, 샘방울은 movement1+capacity2이다. 현재 TRIBE_STARTING_UNITS 길이는 모두4이며 server/game.mjs:2182-2188의 새 게임 분기에서 각 개체에 startingWorkerDna를 부여한다. spawnAgent는 DNA 스탯과 dnaGather를 계산한다. client/runtime.js의 생성 번들/워커에도 동일 구성과 생성 호출이 존재한다.
+- 이력 근거: d9d8ddc99de791abaed9871db6ff5306debfded2 ‘시작 일꾼 DNA와 안테나 이동 경계 적용’에 실제 시작 DNA 경로가 추가됐고 02ad0cbcb9c00a831c2de3fea2e5ec337d43fdf9에 번들이 갱신됐다. 이후 c785b86f933b8b17d6cc963db69992138b50c5f9에서 현재 네17P 일꾼 구성이 인계됐다. 도구 실행 결과/실제 diff와 현재 코드를 대조했으며 과거 README의 종족별3/4기·28P 설명은 현행값으로 재사용하지 않는다. 기존 경제 메모리의 무료 gather3기 계산 가정도 현행 스폰 구현값으로 취급하지 않는다.
+- 범위·한계: 기존 savedGame은 restore 분기로 들어가 시작 DNA를 소급 재생성하지 않는다. 현재 소스/번들에 채집 속성이 누락됐다는 근거는 없으며, 실제 사용 중인 공개 배포판·저장 게임의 상태나 담당자가 다비스였는지는 확인하지 않았다. 접근한 durable의 ‘Spawner 설정’ 01a1a6b0-7d53-7684-a55b-c0da6c07b085 전체1턴은 환경 설정 기록으로 이번 구현의 담당자 증거가 아니다. 제품 파일·Git·배포를 수정하지 않았고 빌드/테스트/브라우저도 실행하지 않았다. 사용자에게 현재 코드 반영 사실과 새 게임/기존 저장 분기를 설명한다.
 
 ## 로컬 잔여 7파일 전체 게시 범위 확정 · 01a1a6c1
 
