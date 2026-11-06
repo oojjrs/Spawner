@@ -65,8 +65,25 @@
       "move-lantern-keeper": 0.4101223,
       "move-pebble": 0.2307903,
       "move-spore": 0.1847738,
-      "beetle-attack": 0.7079458,
-      "spiny-back-leader-attack": 0.7079458
+      "beetle-attack": 0.5623413,
+      "flower-tail-bird-attack": 0.7079458,
+      "dew-rabbit-attack": 0.9440609,
+      "soil-mole-attack": 0.8413951,
+      "bundle-snail-attack": 0.9440609,
+      "cotton-sheep-attack": 0.6683439,
+      "rolling-acorn-attack": 0.7943282,
+      "soil-boar-attack": 0.5308844,
+      "bubble-toad-attack": 0.8912509,
+      "vine-turtle-attack": 0.7498942,
+      "shadow-weasel-attack": 0.8413951,
+      "snare-vine-attack": 0.7079458,
+      "talon-owl-attack": 1.0592537,
+      "spring-keeper-attack": 0.7079458,
+      "lantern-keeper-attack": 0.5956621,
+      "old-garden-snail-attack": 0.7498942,
+      "walking-forest-attack": 0.7498942,
+      "white-paw-attack": 0.7943282,
+      "spiny-back-leader-attack": 0.5623413
     };
     const button = document.getElementById("sound-toggle");
 
