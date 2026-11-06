@@ -2797,7 +2797,7 @@ return { generateHydrology, hydrologyResourceSuitability, populateWatershedResou
 modules["server/conquest-pacing.mjs"] = (() => {
 const CONQUEST_PACING = Object.freeze({ quietUntil:120, guidanceAt:160, neutralConflictAt:300, tribeContactAt:420,
   expertLevelFourAt:600, aiLevelFourAt:1200, activePopulation:36, inefficientPopulation:70,
-  workerShare:Object.freeze([.8,.65,.45,.3]), nestCosts:Object.freeze([20,80,360,null]),
+  workerShare:Object.freeze([.8,.65,.45,.3]), nestCosts:Object.freeze([80,400,2000,null]),
   attributeCosts:Object.freeze([0,0,8,16,24]), aiUpgradeAt:Object.freeze([0,270,690,1200]),
   productionInterval:3, frontierSamples:48, preferredScouts:4 });
 
@@ -2936,7 +2936,43 @@ function measureCampExpansion(world, camp, key) {
   return { key, limits: LIMITS, bands, directions: directions.size, weightedAmount };
 }
 
-function placeResourceCamps(world, tribes) {
+function starterResourceIndex(world) {
+  const index = new Map();
+  for (const cell of world.resources) {
+    const position = cell[1] * world.size + cell[0];
+    if (!index.has(position)) index.set(position, []);
+    index.get(position).push(cell);
+  }
+  return index;
+}
+
+// Level-one DNA workers cannot leave the three-cell nest boundary range.
+// Count only natural food that survives footprint/tree clearing and has a
+// safe path inside that range. Do not manufacture resources or move old maps.
+function starterFoodAccess(world, camp, key, resourceIndex = starterResourceIndex(world)) {
+  const {size, terrain, hazards} = world, boundary = [];
+  for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++) {
+    if(Math.abs(dx)===2 && Math.abs(dy)===2)continue;
+    if(Math.abs(dx)===2 || Math.abs(dy)===2)boundary.push([camp.x+dx,camp.y+dy]);
+  }
+  const inside=(x,y)=>boundary.some(([bx,by])=>(x-bx)**2+(y-by)**2<=9);
+  const plot=(x,y)=>Math.abs(x-camp.x)<=2&&Math.abs(y-camp.y)<=2;
+  const seen=new Set(), queue=[];
+  for(const [dx,dy] of [[-2,-2],[2,-2],[-2,2],[2,2]]) {
+    const x=camp.x+dx,y=camp.y+dy,i=y*size+x;
+    if(tribeSafeTerrain(camp.tribe,terrain[i],hazards[i])){seen.add(i);queue.push([x,y]);}
+  }
+  for(let j=0;j<queue.length;j++)for(const [x,y] of [[queue[j][0]-1,queue[j][1]],[queue[j][0]+1,queue[j][1]],[queue[j][0],queue[j][1]-1],[queue[j][0],queue[j][1]+1]]) {
+    const i=y*size+x;
+    if(x<0||y<0||x>=size||y>=size||plot(x,y)||!inside(x,y)||seen.has(i)||!tribeSafeTerrain(camp.tribe,terrain[i],hazards[i]))continue;
+    seen.add(i);queue.push([x,y]);
+  }
+  const cells=[...seen].flatMap(i=>resourceIndex.get(i)||[]).filter(([x,y,amount,type])=>type===key&&amount>0&&!plot(x,y)&&
+    !(key==='tree'&&camp.tribe==='spore'&&(x-camp.x)**2+(y-camp.y)**2<=16));
+  return {nodes:cells.length,amount:cells.reduce((sum,cell)=>sum+cell[2],0)};
+}
+
+function placeResourceCamps(world, tribes, version = world.hydrology?.generationVersion) {
   const { size, terrain, hazards } = world, occupied = new Uint8Array(terrain.length), labels = new Int32Array(terrain.length);
   const queue = new Int32Array(terrain.length), populations = [0];
   for (const [x, y] of [...world.food, ...world.resources]) occupied[y * size + x] = 1;
@@ -2974,6 +3010,7 @@ function placeResourceCamps(world, tribes) {
     for (const site of available) values[site.y * size + site.x] = 1;
     recordPlacementMap(world.hydrology, "camp:available", ["camps"], values, { minimum: 0, maximum: 1 });
   }
+  const starterResources = version >= 40 ? starterResourceIndex(world) : null;
   const choices = PRIMARY.map((key, order) => {
     const values = new Float64Array(terrain.length);
     for (const [x, y, amount, type] of world.resources) if (type === key) values[y * size + x] = amount;
@@ -2996,6 +3033,7 @@ function placeResourceCamps(world, tribes) {
     for (const site of ranked) {
       if (sampled.some(other => Math.hypot(site.x - other.x, site.y - other.y) < 14)) continue;
       if (nodeCounts && area(nodeCounts, site.x, site.y, 14, size) < MINIMUM[order]) continue;
+      if (version >= 40 && starterFoodAccess(world, { ...site, tribe: tribes[order].key }, key, starterResources).nodes < 2) continue;
       if (!nodeCounts) sampled.push(site);
       const expansion = measureCampExpansion(world, { ...site, tribe: tribes[order].key }, key);
       if (expansion.bands.some(band => band.nodes < MINIMUM[order]) || expansion.directions < 2) continue;
@@ -3043,7 +3081,7 @@ function placeResourceCamps(world, tribes) {
     y: best[order].y, playable: true, controller: order === 0 ? "player" : "ai", expansion: best[order].expansion }));
 }
 
-return { campResourceTravel, measureCampExpansion, placeResourceCamps };
+return { campResourceTravel, measureCampExpansion, starterFoodAccess, placeResourceCamps };
 })();
 modules["server/natural-resources.mjs"] = (() => {
 const { quantizeLandscapeValue } = modules["server/landscape-processes.mjs"];
@@ -3418,7 +3456,7 @@ function clearCampFootprints(world, version) {
 }
 
 function generateLandscapeWorld(seed, baseline, onProgress, tribes, encounterPlans, version, capturePlacementMaps) {
-  const generationVersion = version === undefined ? 39 : version;
+  const generationVersion = version === undefined ? 40 : version;
   const size = generationVersion >= 35 ? WORLD_SIZE : 320;
   const terrain = new Uint8Array(size * size), moisture = new Float32Array(terrain.length), height = new Float32Array(terrain.length);
   const hydrology = generateHydrology(terrain, moisture, height, size, seed, baseline, generationVersion, capturePlacementMaps);
@@ -3428,7 +3466,7 @@ function generateLandscapeWorld(seed, baseline, onProgress, tribes, encounterPla
   else populateLandscapeResources(world, baseline);
   if (generationVersion >= 30) world.frontierSites = identifyFrontierSites(world);
   onProgress?.(.5);
-  world.camps = placeResourceCamps(world, tribes);
+  world.camps = placeResourceCamps(world, tribes, generationVersion);
   if (generationVersion >= 32) clearCampFootprints(world, generationVersion);
   const occupied = new Set([...world.food, ...world.resources].map(([x, y]) => y * size + x));
   populateBurrows(world, occupied);
@@ -4358,7 +4396,73 @@ function materialCapacity(nestLevel) {
 
 return { NEST_LEVELS, nestUpgradeCost, materialCapacity };
 })();
+modules["server/dna-combat-stats.mjs"] = (() => {
+const DNA_COMBAT_RULES = Object.freeze({
+  powerCurve: "linear", powerBase: 2, powerGain: 2, powerKnee: 2,
+  rangedPowerBase: 1.4, rangedPowerGain: 1.4, rangedPowerKnee: 2,
+  rangedAttackRateBase: .5, rangedHasteCap: 7, rangedHasteKnee: 70,
+  healthBase: 10, healthPerPoint: 10, armorPerPoint: 1, armorCap: 1, armorKnee: 100,
+  flatPenPerPoint: 1, percentPenCap: .8, percentPenKnee: 4,
+  attackRateBase: .5, hasteCap: 7, hasteKnee: 70, maxActionRate: 4,
+  windupBase: .3, focusPerPoint: .02, windupMinimum: .08,
+  hitGapBase: .12, hitSpeedPerPoint: .005, hitGapMinimum: .06, recovery: 0,
+  defensePreparation: 0, reactionCooldown: 0, counterCooldown: 0,
+  followupBase: .5, comboPerPoint: .05, followupCap: 1,
+  critCap: .75, critKnee: 18.75, critMultiplierBase: 1.5, critMultiplierCap: 4, critPowerKnee: 25,
+  accuracyCap: .6, accuracyKnee: 20, dodgeCap: .6, dodgeKnee: 20,
+  parryCap: .6, parryKnee: 15, blockCap: .75, blockKnee: 15,
+  blockReductionBase: .5, blockReductionCap: .9, blockPowerKnee: 10,
+  counterCap: 1, counterKnee: 10, counterMultiplierBase: 1, counterMultiplierCap: 2,
+  counterPowerKnee: 10, counterWindup: .12,
+  tenacityCap: .75, tenacityKnee: 15, stunCap: .3, stunKnee: 10,
+  stunDurationBase: .25, stunDurationPerPoint: .05, stunDurationCap: 1, stunImmunity: 2,
+  drainCap: .2, drainKnee: 20, jitter: .2
+});
+
+function dnaCombatStats(counts, weights, inputRules) {
+  const rules = inputRules || DNA_COMBAT_RULES, n = weights, c = counts;
+  const capped = (count, cap, knee) => count ? Math.min(cap, cap * count / (knee || 1)) : 0;
+  const powerGain = (count, gain, knee) => rules.powerCurve === "log" ?
+    gain * Math.log1p(count / knee) / Math.log1p(1 / knee) : gain * count;
+  const melee = !!c.blade, ranged = !!c.secretion, attack = melee || ranged;
+  const meleePower = melee ? rules.powerBase * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : 0;
+  const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
+  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : 0;
+  const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
+  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0, healerCount: c.healer || 0,
+    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed, healer: !!n.healer,
+    ...(rules.recovery ? { recovery: rules.recovery } : {}),
+    health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
+    power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,
+    armor: rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),
+    parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),
+    block: 100 * capped((n.carapace || 0) + (n.block || 0), rules.blockCap, rules.blockKnee),
+    evasion: 100 * capped((n.evasion || 0) + (n.legs || 0), rules.dodgeCap, rules.dodgeKnee),
+    comboPower: attack ? 100 * Math.min(rules.followupCap, rules.followupBase + rules.comboPerPoint * (n.comboPower || 0)) : 0,
+    critical: attack ? 100 * capped(n.critical || 0, rules.critCap, rules.critKnee) : 0,
+    criticalPower: attack ? 100 * (rules.critMultiplierBase + capped(n.criticalPower || 0, rules.critMultiplierCap - rules.critMultiplierBase, rules.critPowerKnee)) : 0,
+    accuracy: attack ? 100 * capped(n.accuracy || 0, rules.accuracyCap, rules.accuracyKnee) : 0,
+    penetration: attack ? rules.flatPenPerPoint * (n.penetration || 0) : 0,
+    ...(n.percentPen ? { armorPenetration: capped(n.percentPen, rules.percentPenCap, rules.percentPenKnee) } : {}),
+    blockPower: 100 * (rules.blockReductionBase + capped(n.blockPower || 0, rules.blockReductionCap - rules.blockReductionBase, rules.blockPowerKnee)),
+    counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,
+    counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,
+    tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),
+    healing: 10 * (n.healing || 0), stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
+    stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,
+    bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,
+    area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,
+    lifesteal: attack ? 100 * capped(n.lifesteal || 0, rules.drainCap, rules.drainKnee) : 0,
+    reflection: Math.min(30, 3 * (n.reflection || 0)), regeneration: .1 * (n.regeneration || 0),
+    comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : 0,
+    focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : 0 };
+}
+
+return { DNA_COMBAT_RULES, dnaCombatStats };
+})();
 modules["server/dna.mjs"] = (() => {
+const { dnaCombatStats } = modules["server/dna-combat-stats.mjs"];
+
 const ATTRIBUTE_DNA = (() => {
   const directions = [[1,0],[0,1],[-1,1],[-1,0],[0,-1],[1,-1]];
   const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};
@@ -4417,13 +4521,16 @@ const ATTRIBUTE_DNA = (() => {
     return {valid:!issue,reason:issue,nodes,paths,closed,occupied,outside};
   }
   function price(pieces){return pieces.reduce((sum,piece)=>{const gene=lookup.get(piece.gene),grade=piece.grade===undefined?1:piece.grade;return sum+Math.ceil((gene?.price||0)*(grade+2)/3);},0);}
+  function cost(pieces){return 3+price(pieces);}
   function counts(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+1;return result;}
   function weights(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+(piece.grade===undefined?1:piece.grade);return result;}
   function stats(pieces){
-    const n=weights(pieces),c=counts(pieces),melee=!!c.blade,ranged=!!c.secretion,attack=melee||ranged,gather=!!c.gather,
-      meleePower=melee?2*c.blade+2*(n.power||0):0,meleeSpeed=melee?Math.min(4,.5+.05*(n.speed||0)):0,
-      rangedPower=ranged?1.4*c.secretion+1.4*(n.rangedPower||0):0,rangedSpeed=ranged?Math.min(4,.5+.05*(n.rangedSpeed||0)):0;
-    return {gatherCount:c.gather||0,bladeCount:c.blade||0,antennaCount:c.antenna||0,healerCount:c.healer||0,secretionCount:c.secretion||0,melee,ranged,meleePower,meleeSpeed,rangedPower,rangedSpeed,healer:!!n.healer,health:10+10*(n.health||0),power:melee?meleePower:rangedPower,hits:attack?1+(n.combo||0):0,speed:melee?meleeSpeed:rangedSpeed,armor:(n.armor||0)+(n.carapace||0),parry:Math.min(60,4*(n.parry||0)),block:Math.min(75,5*(n.carapace||0)+5*(n.block||0)),evasion:Math.min(60,3*(n.evasion||0)+3*(n.legs||0)),capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,comboPower:attack?Math.min(100,50+5*(n.comboPower||0)):0,critical:attack?Math.min(75,4*(n.critical||0)):0,criticalPower:attack?Math.min(400,150+10*(n.criticalPower||0)):0,accuracy:attack?Math.min(60,3*(n.accuracy||0)):0,penetration:attack?(n.penetration||0):0,blockPower:Math.min(90,50+4*(n.blockPower||0)),counter:attack?Math.min(100,10*(n.counter||0)):0,counterPower:attack?Math.min(200,100+10*(n.counterPower||0)):0,tenacity:Math.min(75,5*(n.tenacity||0)),reduction:Math.min(40,2*(n.reduction||0)),loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0,healing:10*(n.healing||0),stun:attack?Math.min(30,3*(n.stun||0)):0,stunTime:attack&&n.stun?Math.min(1,.25+.05*(n.stunTime||0)):0,bleed:attack?Math.min(75,5*(n.bleed||0)):0,bleedPower:attack&&n.bleed?1+(n.bleedPower||0):0,area:attack?Math.min(5,n.area||0):0,areaPower:attack&&n.area?Math.min(75,35+5*(n.areaPower||0)):0,lifesteal:attack?Math.min(20,n.lifesteal||0):0,reflection:Math.min(30,3*(n.reflection||0)),regeneration:.1*(n.regeneration||0),comboSpeed:attack?Math.max(.06,.12-.005*(n.comboSpeed||0)):0,focus:attack?Math.max(.08,.3-.02*(n.focus||0)):0};
+    const n=weights(pieces),c=counts(pieces),gather=!!c.gather;
+    return {...dnaCombatStats(c,n),gatherCount:c.gather||0,antennaCount:c.antenna||0,
+      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,
+      harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),
+      vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,
+      loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0};
   }
   function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,shape:piece.shape.slice()};}
   function validate(value){
@@ -4442,7 +4549,7 @@ const ATTRIBUTE_DNA = (() => {
     return {version:3,pieces,budget:Math.floor(value.budget),level};
   }
 
-  return {genes,catalog,lookup,trace,price,counts,weights,stats,validate,clonePiece,step,key,shape,route,boardRadius,inside};
+  return {genes,catalog,lookup,trace,price,cost,counts,weights,stats,validate,clonePiece,step,key,shape,route,boardRadius,inside};
 })();
 
 return { ATTRIBUTE_DNA };
@@ -4586,7 +4693,7 @@ function combatProfile(agent) {
     const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;
     return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: dna.armor,
       armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: dna.focus,
-      recovery: Math.max(0, attackInterval - dna.focus - Math.max(0, dna.hits - 1) * dna.comboSpeed) };
+      recovery: Math.max(dna.recovery || 0, attackInterval - dna.focus - Math.max(0, dna.hits - 1) * dna.comboSpeed) };
   }
   const base = unitCombatStats(agent.species || agent.tribe);
   const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;
@@ -4608,15 +4715,16 @@ function combatProfile(agent) {
     recovery: (primary === "blade" ? .3 : .45) * timingScale };
 }
 
-function combatDamage(attacker, target, variation) {
+function combatDamage(attacker, target, variation, rules) {
   const source = combatProfile(attacker), defense = combatProfile(target);
   const multiplier = Number.isFinite(variation) ? .8 + .4 * Math.max(0, Math.min(1, variation)) : 1;
   if (attacker.stats?.dna || target.stats?.dna) {
     const dna = attacker.stats?.dna, heavy = !dna && attacker.attack?.heavy === true;
-    const armor = Math.max(0, defense.defense - (dna?.penetration || 0)) * (dna ? 1 : 1 - Math.min(.9, source.armorPenetration + (heavy ? .3 : 0)));
+    const armor = Math.max(0, defense.defense - (dna?.penetration || 0)) * (dna ? 1 - (dna.armorPenetration || 0) : 1 - Math.min(.9, source.armorPenetration + (heavy ? .3 : 0)));
     const power = source.attackPower * (dna ? attacker.attack?.counter ? dna.counterPower / 100 : 1 :
       (source.primary === "piercing" ? 1.25 : 1) * (heavy ? 1.5 : 1));
-    return Math.max(0, power * multiplier * 100 / (100 + armor) * (1 - (target.stats?.dna?.reduction || 0) / 100));
+    const reduction = (rules?.armorCap ?? 1) * armor / ((rules?.armorKnee ?? 100) + armor);
+    return Math.max(0, power * multiplier * (1 - reduction) * (1 - (target.stats?.dna?.reduction || 0) / 100));
   }
   const heavy = attacker.attack?.heavy === true;
   const penetration = Math.min(.9, source.armorPenetration + (heavy ? .3 : 0));
@@ -4807,7 +4915,7 @@ const tribeBirthCosts = Object.freeze({
 
 function birthCost(template, tribe) {
   const costs = tribeBirthCosts[tribe || template.tribe] || tribeBirthCosts.bean;
-  if (template.dna) return 3 + ATTRIBUTE_DNA.price(template.dna.pieces);
+  if (template.dna) return ATTRIBUTE_DNA.cost(template.dna.pieces);
   return costs[template.slots.length] ?? Infinity;
 }
 
@@ -4917,6 +5025,8 @@ function colonyForagers(state, foods, homes, scouts) {
 return { recordColonyIncome, restoreColonyIncome, colonySupply, colonyForagers };
 })();
 modules["server/tribe-start.mjs"] = (() => {
+const { ATTRIBUTE_DNA } = modules["server/dna.mjs"];
+
 const PLAYER_STARTING_POINTS = 30;
 
 const TRIBE_STARTING_UNITS = Object.freeze({
@@ -4926,7 +5036,35 @@ const TRIBE_STARTING_UNITS = Object.freeze({
   spring: Object.freeze([["feet"], ["feet"], ["antenna"]].map(slots => Object.freeze(slots)))
 });
 
-return { PLAYER_STARTING_POINTS, TRIBE_STARTING_UNITS };
+// Each tribe gets a modest legal level-one worker, priced through the same
+// DNA catalog as user designs (currently 28P each, including birth cost).
+const STARTING_WORKER_GENES = Object.freeze({
+  bean: Object.freeze(["gather", "capacity", "capacity", "capacity"]),
+  spore: Object.freeze(["gather", "harvestSpeed", "capacity", "health"]),
+  pebble: Object.freeze(["gather", "health", "capacity", "movement"]),
+  spring: Object.freeze(["gather", "movement", "movement", "health"])
+});
+
+function startingWorkerDna(tribe = "bean") {
+  const genes = STARTING_WORKER_GENES[tribe] || STARTING_WORKER_GENES.bean;
+  const place = (index, pieces) => {
+    if (index === genes.length) return pieces;
+    const gene = ATTRIBUTE_DNA.lookup.get(genes[index]);
+    for (let rotation = 0; rotation < 6; rotation++) {
+      const next = [...pieces, { gene: gene.id, grade: gene.grade, rotation, shape: [...gene.steps] }];
+      const trace = ATTRIBUTE_DNA.trace(next, 1);
+      if (!trace.valid || trace.closed && index < genes.length - 1) continue;
+      const result = place(index + 1, next);
+      if (result) return result;
+    }
+    return null;
+  };
+  const pieces = place(0, []);
+  if (!pieces) throw new Error("시작 일꾼 DNA가 1레벨 보드에 맞지 않습니다.");
+  return { version: 3, level: 1, budget: 30, pieces };
+}
+
+return { PLAYER_STARTING_POINTS, TRIBE_STARTING_UNITS, STARTING_WORKER_GENES, startingWorkerDna };
 })();
 modules["server/tribe-production.mjs"] = (() => {
 const { birthCost, isAttributeUnlocked } = modules["server/attributes.mjs"];
@@ -5014,13 +5152,24 @@ function dnaUnitStats(dna) {
     combatStrength: 0, resistance: 1, movementMultiplier: 1, harvestSpeedMultiplier: 1 };
 }
 
+// The antenna rule applies to starting/legacy units as well as DNA designs.
+// Wild creatures have no nest and retain their own territorial movement rules.
 function dnaCanMove(agent, x, y, colonies) {
-  if (!agent.dna || agent.stats.dna.roaming) return true;
-  return colonies.some(colony => {
-    const dx = Math.max(colony.x - x, 0, x - (colony.x + 4));
-    const dy = Math.max(colony.y - y, 0, y - (colony.y + 4));
-    return Math.hypot(dx, dy) <= 3;
-  });
+  if (agent.species && !agent.ownerId) return true;
+  const roaming = agent.dna ? agent.stats?.dna?.roaming : agent.attributes?.antenna > 0;
+  if (roaming) return true;
+  const homes = colonies.filter(colony => !agent.ownerId || colony.ownerId === agent.ownerId);
+  const distanceFromHome = (px, py) => Math.min(...homes.map(colony => {
+    const dx = Math.max(colony.x - px, 0, px - (colony.x + 4));
+    const dy = Math.max(colony.y - py, 0, py - (colony.y + 4));
+    return Math.hypot(dx, dy);
+  }));
+  const nextDistance = distanceFromHome(x, y);
+  if (nextDistance <= 3) return true;
+  // Old saves may already contain an unrestricted unit outside its home range.
+  // Let it approach home, but never move laterally or farther out there.
+  return Number.isFinite(agent.x) && Number.isFinite(agent.y) &&
+    nextDistance < distanceFromHome(agent.x, agent.y);
 }
 
 return { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove };

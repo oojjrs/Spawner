@@ -385,13 +385,24 @@ function dnaUnitStats(dna) {
     combatStrength: 0, resistance: 1, movementMultiplier: 1, harvestSpeedMultiplier: 1 };
 }
 
+// The antenna rule applies to starting/legacy units as well as DNA designs.
+// Wild creatures have no nest and retain their own territorial movement rules.
 function dnaCanMove(agent, x, y, colonies) {
-  if (!agent.dna || agent.stats.dna.roaming) return true;
-  return colonies.some(colony => {
-    const dx = Math.max(colony.x - x, 0, x - (colony.x + 4));
-    const dy = Math.max(colony.y - y, 0, y - (colony.y + 4));
-    return Math.hypot(dx, dy) <= 3;
-  });
+  if (agent.species && !agent.ownerId) return true;
+  const roaming = agent.dna ? agent.stats?.dna?.roaming : agent.attributes?.antenna > 0;
+  if (roaming) return true;
+  const homes = colonies.filter(colony => !agent.ownerId || colony.ownerId === agent.ownerId);
+  const distanceFromHome = (px, py) => Math.min(...homes.map(colony => {
+    const dx = Math.max(colony.x - px, 0, px - (colony.x + 4));
+    const dy = Math.max(colony.y - py, 0, py - (colony.y + 4));
+    return Math.hypot(dx, dy);
+  }));
+  const nextDistance = distanceFromHome(x, y);
+  if (nextDistance <= 3) return true;
+  // Old saves may already contain an unrestricted unit outside its home range.
+  // Let it approach home, but never move laterally or farther out there.
+  return Number.isFinite(agent.x) && Number.isFinite(agent.y) &&
+    nextDistance < distanceFromHome(agent.x, agent.y);
 }
 
 return { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove };
