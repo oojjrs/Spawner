@@ -1,0 +1,37 @@
+// A body-only adapter for the existing bean00 resource scene. The host retains
+// action priority, live head/body clocks, outer scale, root position and cargo.
+export function drawUnitAppearanceResourceSceneBody(ctx, contract, sprites, options) {
+  if (contract?.kind !== "procedural-body-with-external-resource-scene" || contract.tribe !== "bean" ||
+      contract.mask !== 0 || contract.action !== "harvest" || contract.ownership?.bodyOnly !== true ||
+      contract.body?.sourceId !== contract.sourceId || contract.body?.kind !== "existing-procedural-base-parts")
+    throw new Error("INVALID_PROCEDURAL_RESOURCE_SCENE");
+  if (!["body", "sprout-left", "sprout-right", "sprout-stem"].every(name => {
+    const sprite = sprites[name];
+    return sprite && sprite.complete !== false && (sprite.naturalWidth || sprite.width) > 0;
+  })) return false;
+  const { centerX, footY, width, height, bodyPose, headPose } = options;
+  if (![centerX, footY, width, height, bodyPose?.pivot, bodyPose?.scaleX, bodyPose?.scaleY,
+    headPose?.leftRotation, headPose?.rightRotation, headPose?.leftScaleY, headPose?.rightScaleY].every(Number.isFinite) ||
+    !(width > 0) || !(height > 0)) return false;
+  const root = (110 + 350 * 148.15 / 417) / 512;
+  const pivots = [136 + 240 * 133.75 / 286, 136 + 240 * 151.95 / 286];
+  ctx.save();
+  ctx.translate(centerX, footY);
+  ctx.translate(0, height * (bodyPose.pivot - .94));
+  ctx.scale(bodyPose.scaleX, bodyPose.scaleY);
+  for (const [name, sourceX, rotation, scaleX, scaleY] of [
+    ["sprout-left", pivots[0], headPose.leftRotation, headPose.leftScaleX ?? 1, headPose.leftScaleY],
+    ["sprout-right", pivots[1], headPose.rightRotation, headPose.rightScaleX ?? 1, headPose.rightScaleY]
+  ]) {
+    const pivot = sourceX / 512;
+    ctx.save();
+    ctx.translate(-width / 2 + width * pivot, -height * bodyPose.pivot + height * root);
+    ctx.rotate(rotation); ctx.scale(scaleX, scaleY);
+    ctx.drawImage(sprites[name], -width * pivot, -height * root, width, height);
+    ctx.restore();
+  }
+  ctx.drawImage(sprites["sprout-stem"], -width / 2, -height * bodyPose.pivot, width, height);
+  ctx.drawImage(sprites.body, -width / 2, -height * bodyPose.pivot, width, height);
+  ctx.restore();
+  return true;
+}

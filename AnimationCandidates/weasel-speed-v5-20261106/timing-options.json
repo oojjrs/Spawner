@@ -1,0 +1,29 @@
+[
+  {
+    "speedMultiplier": 1,
+    "periodMs": 800.0,
+    "frameDurationMs": 12.5,
+    "sourcePixelsPerSecond": 70.3125,
+    "displayScale": 0.35,
+    "displayPixelsPerSecond": 24.609375,
+    "maximumAnalyticStanceDriftPx": 2.842170943040401e-14
+  },
+  {
+    "speedMultiplier": 2,
+    "periodMs": 400.0,
+    "frameDurationMs": 6.25,
+    "sourcePixelsPerSecond": 140.625,
+    "displayScale": 0.35,
+    "displayPixelsPerSecond": 49.21875,
+    "maximumAnalyticStanceDriftPx": 2.842170943040401e-14
+  },
+  {
+    "speedMultiplier": 3,
+    "periodMs": 266.6666666666667,
+    "frameDurationMs": 4.166666666666667,
+    "sourcePixelsPerSecond": 210.9375,
+    "displayScale": 0.35,
+    "displayPixelsPerSecond": 73.828125,
+    "maximumAnalyticStanceDriftPx": 1.4210854715202004e-14
+  }
+]

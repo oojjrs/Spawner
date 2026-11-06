@@ -1,0 +1,62 @@
+import { rangedReviewState } from './vfx-event-preview.mjs';
+import { unitRangedDisplaySize, unitRangedProjectile } from './unit-ranged.mjs';
+
+// Review only. These are authored source cells, not approved runtime assets.
+export const ACTION_VFX = Object.freeze({
+  hit: { image:'DesignAssets/Animations/CombatVfxV4Draft/general-hit.png', frames:[0,1,2,3,4,5,6,7], durations:[25,45,45,55,65,65,70,80] },
+  seed: { image:'DesignAssets/Animations/CombatVfxV4Draft/seed-impact.png', frames:[1,2,3,4,5,6,7], durations:[45,45,55,65,65,70,80] }
+});
+export function actionFrame(clip, elapsed) {
+  if(elapsed<0)return null;
+  for(let i=0;i<clip.durations.length;i++){if(elapsed<clip.durations[i])return clip.frames[i];elapsed-=clip.durations[i];}
+  return null;
+}
+export function actionBoundaries(clip,start){let t=start;return clip.durations.map(ms=>{const value=t;t+=ms;return value});}
+export function actionCue(data,time){
+  const scene=rangedReviewState(data,time/1000),impact=scene.impact;
+  const damaging=impact&&['hit','critical','block'].includes(impact.kind)&&impact.amount>0;
+  return {scene,frame:damaging?actionFrame(ACTION_VFX.seed,time-impact.at*1000):null};
+}
+if(typeof document!=='undefined'&&document.getElementById('action-scene'))attach();
+function attach(){
+  const $=id=>document.getElementById(id),canvas=$('action-scene'),ctx=canvas.getContext('2d');
+  const ranged=globalThis.SpawnerVfxEventPreviewData,melee=globalThis.SpawnerVfxHitPreviewData,images=new Map();
+  let time=0,previous=null,ready=false,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const paths=[ranged.background,...Object.values(melee.clips).map(c=>c.image),ranged.sourceForm.idle.image,ranged.sourceForm.animation.image,ranged.targetForm.idle.image,ranged.sourceForm.projectile.image,...Object.values(ACTION_VFX).map(c=>c.image)];
+  Promise.all([...new Set(paths)].map(async p=>{const im=new Image();im.src=globalThis.SpawnerAssets?.source(p)||p;await im.decode();images.set(p,im)})).then(()=>{ready=true;render()}).catch(()=>{playing=false;sync();$('action-status').textContent='원본 또는 시안을 불러오지 못했습니다. 로컬 서버의 자산 경로를 확인해 주세요.'});
+  const total=c=>c.durationsMs.reduce((a,b)=>a+b,0);
+  function frame(c,t){let remaining=c.loop?Math.max(0,t)%total(c):Math.min(Math.max(0,t),total(c)-.0001),i=0;while(i<c.durationsMs.length-1&&remaining>=c.durationsMs[i])remaining-=c.durationsMs[i++];return c.frames?.[i]??i;}
+  function body(c,f,x,y,scale,mirror=false){const g={...c,...c.frameGeometry?.[f]};ctx.save();ctx.translate(x,y);ctx.scale(mirror?-1:1,1);ctx.drawImage(images.get(c.image),f%c.columns*c.frameSize,Math.floor(f/c.columns)*c.frameSize,c.frameSize,c.frameSize,-g.pivotX*scale,-g.pivotY*scale,c.frameSize*scale,c.frameSize*scale);ctx.restore();}
+  function effect(clip,f,x,y,size,rotation=0){if(f===null)return;const im=images.get(clip.image),cell=im.width/4;ctx.save();ctx.translate(x,y);ctx.rotate(rotation);ctx.drawImage(im,(f%4)*cell,Math.floor(f/4)*cell,cell,cell,-size/2,-size/2,size,size);ctx.restore();}
+  function meleeScale(action,world){const idle=melee.clips.idle,c=melee.clips[action],r=melee.bounds[idle.image],b=melee.bounds[c.image],ir=idle.frameSize/r.frameSize,ar=c.frameSize/b.frameSize;return world*melee.displaySize*Math.min(r.bodyWidth/(b.width*ar),r.bodyHeight/(b.height*ar))/(Math.min(r.bodyWidth/(r.width*ir),r.bodyHeight/(r.height*ir))*Math.max(r.width,r.height)*ir);}
+  function render(){
+    if(!ready)return;const box=canvas.getBoundingClientRect(),w=box.width,h=box.height,dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.imageSmoothingEnabled=true;
+    const bg=images.get(ranged.background),s=Math.max(w/bg.width,h/bg.height);ctx.drawImage(bg,(w-bg.width*s)/2,(h-bg.height*s)/2,bg.width*s,bg.height*s);
+    const floor=h*.82,visible=$('action-enabled').checked,size=Number($('action-size').value),mode=$('action-mode').value;let status;
+    if(mode==='hit'){
+      const world=Math.min(w*.72,h*1.45),start=300,hit=300+melee.hitAtMs,aa=time>=start&&time<start+total(melee.clips.attack)?'attack':'idle',ta=time>=hit&&time<hit+total(melee.clips.hurt)?'hurt':'idle';
+      body(melee.clips[aa],frame(melee.clips[aa],aa==='attack'?time-start:time),w*.34,floor,meleeScale(aa,world));
+      body(melee.clips[ta],frame(melee.clips[ta],ta==='hurt'?time-hit:time),w*.66,floor,meleeScale(ta,world),true);
+      const f=actionFrame(ACTION_VFX.hit,time-hit);if(visible)effect(ACTION_VFX.hit,f,w*.66-world*.10,floor-world*.16,world*.44*size);
+      status='일반 피격 · '+(f===null?'효과 없음':'작화 '+(f+1)+'/8')+' · 타격 '+hit+'ms';
+    }else{
+      const data=ranged.scenarios.find(c=>c.id===$('action-outcome').value)||ranged,{scene,frame:f}=actionCue(data,time),sx=w*.18,tx=w*.82,world=(tx-sx)/2;
+      body(scene.sourcePose.animation,scene.sourcePose.frame,sx,floor,unitRangedDisplaySize(data.source)/scene.sourcePose.animation.frameSize*world/100);
+      body(scene.targetPose.animation,scene.targetPose.frame,tx,floor,unitRangedDisplaySize(data.target)/scene.targetPose.animation.frameSize*world/100,true);
+      const sprite=unitRangedProjectile(data.source),ss=sprite.sourceScale*world/100,ox=sx+(sprite.outletX-256)*ss,oy=floor+(sprite.outletY-448)*ss,ey=floor-h*.04;
+      for(const flight of scene.projectiles){const x=ox+(tx-ox)*flight.progress,y=oy+(ey-oy)*flight.progress;ctx.save();ctx.translate(x,y);ctx.rotate(Math.atan2(ey-oy,tx-ox));if(visible)effect(ACTION_VFX.seed,0,-world*.08,0,world*.72*size);else ctx.drawImage(images.get(sprite.image),-sprite.width*ss/2,-sprite.height*ss/2,sprite.width*ss,sprite.height*ss);ctx.restore();}
+      if(visible)effect(ACTION_VFX.seed,f,tx,ey,world*.95*size);
+      ctx.fillStyle='#213929';ctx.fillRect(tx-30,floor+12,60,5);ctx.fillStyle='#c6ed8e';ctx.fillRect(tx-30,floor+12,60*scene.health/data.target.stats.health,5);
+      status=scene.phase+' · HP '+scene.health.toFixed(1)+' · 착탄 '+(scene.impact?Math.round(scene.impact.at*1000):'—')+'ms';
+    }
+    $('action-time').value=String(time);$('action-status').textContent=status+' · '+Math.round(time)+'ms · 미승인 V4 검토 시안';
+  }
+  function sync(){$('action-play').textContent=playing?'일시정지':'재생';}
+  $('action-play').onclick=()=>{playing=!playing;previous=null;sync()};
+  $('action-replay').onclick=()=>{time=0;playing=true;previous=null;sync();render()};
+  $('action-step').onclick=()=>{const mode=$('action-mode').value,data=ranged.scenarios.find(c=>c.id===$('action-outcome').value)||ranged,at=mode==='hit'?300+melee.hitAtMs:(rangedReviewState(data,0).impact?.at??.633)*1000,times=actionBoundaries(ACTION_VFX[mode],at);time=times.find(t=>t>time+.0001)??times[0];playing=false;previous=null;sync();render()};
+  $('action-time').oninput=e=>{time=Number(e.target.value);playing=false;previous=null;sync();render()};
+  for(const id of ['action-enabled','action-size','action-mode','action-outcome'])$(id).oninput=()=>{if(id==='action-mode'||id==='action-outcome'){time=0;previous=null;}render()};
+  new ResizeObserver(render).observe(canvas);document.addEventListener('visibilitychange',()=>{previous=null});
+  function tick(now){if(ready&&playing&&!document.hidden&&previous!==null){time=(time+Math.min(100,now-previous)*Number($('action-speed').value))%1800;render();}previous=now;requestAnimationFrame(tick);}sync();requestAnimationFrame(tick);
+}

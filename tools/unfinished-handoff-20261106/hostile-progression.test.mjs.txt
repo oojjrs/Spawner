@@ -1,0 +1,31 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { createEncounters } from "./encounters.mjs";
+import { HOSTILE_ENCOUNTER_START } from "./conquest-pacing.mjs";
+import { unitCombatStats } from "./combat-stats.mjs";
+
+test("적대 종은 등장 경계 전에는 없고 경계에서 출현하며 강도가 역행하지 않는다", () => {
+  let previousStrength = 0;
+  for (const [key, at] of Object.entries(HOSTILE_ENCOUNTER_START)) {
+    const strength = unitCombatStats(key).combatStrength;
+    assert.ok(strength >= previousStrength, key); previousStrength = strength;
+    const cells = [];
+    for (let y = 32; y < 48; y++) for (let x = 32; x < 48; x++) cells.push(y * 320 + x);
+    const room = {simSeconds:0, colonies:[], games:new Map([["test", {
+      agents:[], discoveredKinds:new Set(), colonyFood:0, isVisible:()=>false
+    }]]), food:new Map(), world:{terrain:new Uint8Array(320 * 320).fill(4),
+      hazards:new Uint8Array(320 * 320), encounters:[{key,x:40,y:40,radius:8,safeRadius:0,
+        terrains:[4],nearWater:false,cells,route:[],spawnPoints:[40 * 320 + 40],populationLimit:1,homeId:null}]}};
+    const system = createEncounters(room, null, []);
+    room.creatureSystem = {get agents(){ return system.agents; }, burrowAt(){ return null; }};
+    assert.equal(system.agents.length, 0, key);
+    room.simSeconds = at - .001; system.tick();
+    assert.equal(system.agents.length, 0, key);
+    room.simSeconds = at; system.tick();
+    assert.equal(system.agents.length, 1, key);
+    assert.equal(system.agents[0].species, key);
+    const restored = createEncounters(room, system.save(), []);
+    assert.equal(restored.agents.length, 1, key);
+    assert.equal(restored.agents[0].id, system.agents[0].id, key);
+  }
+});
