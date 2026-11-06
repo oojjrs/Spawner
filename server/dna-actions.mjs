@@ -30,7 +30,7 @@ export function dnaAttackStats(stats, mode) {
 
 export function dnaHealAllocations(source, agents, team, distance) {
   const stats = source.stats.dna || source.stats;
-  let remaining = Number(stats.healerCount ?? stats.healer ?? 0);
+  let remaining = Number(stats.healPower ?? stats.healerCount ?? stats.healer ?? 0);
   const result = [], targets = agents.filter(target => target !== source && target.health > 0 && !target.hidden && !target.retreat &&
     team(target) === team(source) && target.health < target.stats.health && distance(source, target) <= DNA_ACTION_RULES.healRange)
     .sort((a, b) => a.health / a.stats.health - b.health / b.stats.health || String(a.id).localeCompare(String(b.id)));

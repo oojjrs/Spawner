@@ -19,7 +19,7 @@ test("stack prices are order independent and every split pays extra body bases",
   const mixed=[piece("gather"),piece("antenna"),piece("rangedPower"),piece("health")];
   assert.equal(M.price(mixed),M.price([...mixed].reverse()));
   assert.equal(M.price([piece("antenna")]),7);
-  assert.equal(M.price([piece("rangedPower")]),10);
+  assert.equal(M.price([piece("rangedPower")]),4);
   assert.equal(validateDna(build(6),1,60),null);
   assert.deepEqual(M.validate(build(6)),build(6));
   assert.equal(validateDna(build(4),1,100),null);assert.equal(validateDna(build(5),1,100),null);assert.equal(birthCost({dna:build(5)},"bean"),28);

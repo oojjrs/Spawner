@@ -44,12 +44,13 @@ function dnaCombatStats(counts, weights, inputRules) {
   const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
   return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0, healerCount: c.healer || 0,
     melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed, healer: !!n.healer,
+    healPower: c.healer ? c.healer + (n.healPower || 0) : 0,
     ...(rules.recovery ? { recovery: rules.recovery } : {}),
     health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
     power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,
     armor: rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),
     parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),
-    block: 100 * capped((n.carapace || 0) + (n.block || 0), rules.blockCap, rules.blockKnee),
+    block: 100 * capped(n.block || 0, rules.blockCap, rules.blockKnee),
     evasion: 100 * capped((n.evasion || 0) + (n.legs || 0), rules.dodgeCap, rules.dodgeKnee),
     comboPower: attack ? 100 * Math.min(rules.followupCap, rules.followupBase + rules.comboPerPoint * (n.comboPower || 0)) : 0,
     critical: attack ? 100 * capped(n.critical || 0, rules.critCap, rules.critKnee) : 0,
@@ -70,7 +71,6 @@ function dnaCombatStats(counts, weights, inputRules) {
     comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : 0,
     focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : 0 };
 }
-
 return { DNA_COMBAT_RULES, dnaCombatStats };
 })();
 modules["server/dna.mjs"] = (() => {
@@ -80,18 +80,18 @@ const ATTRIBUTE_DNA = (() => {
   const directions = [[1,0],[0,1],[-1,1],[-1,0],[0,-1],[1,-1]];
   const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};
   const definitions = [
-    ['blade','organ',1,20],['carapace','stat',-1,20],['antenna','organ',0,20],['gather','organ',2,20],['legs','stat',-2,20],
+    ['blade','organ',1,20],['carapace','stat',-1,10],['antenna','organ',0,20],['gather','organ',2,20],['legs','stat',-2,20],
     ['power','stat',1,10],['combo','action',-1,14],['speed','stat',0,12],['comboPower','stat',2,12],['critical','stat',-2,12],['criticalPower','stat',1,10],['accuracy','stat',-1,10],['penetration','stat',0,12],
     ['health','stat',-1,10],['armor','stat',2,10],['evasion','stat',-2,14],['parry','action',1,14],['block','action',0,12],['blockPower','stat',-1,10],['counter','action',2,14],['counterPower','stat',-2,10],['tenacity','stat',1,10],['reduction','stat',-1,12],
     ['movement','stat',0,10],['capacity','stat',1,10],['harvest','stat',-1,10],['harvestSpeed','stat',2,10],['vision','stat',-2,10],['loadSpeed','stat',0,10],['healing','stat',1,10],
-    ['stun','action',-1,16],['stunTime','stat',2,12],['bleed','action',-2,16],['bleedPower','stat',1,12],['area','action',0,18],['areaPower','stat',-1,12],['lifesteal','action',2,16],['reflection','action',-2,16],['regeneration','action',1,14],['comboSpeed','stat',-1,12],['focus','stat',0,12],['healer','organ',-1,20],['secretion','organ',-2,20],['rangedPower','stat',-1,12],['rangedSpeed','stat',1,12]
+    ['stun','action',-1,16],['stunTime','stat',2,12],['bleed','action',-2,16],['bleedPower','stat',1,12],['area','action',0,18],['areaPower','stat',-1,12],['lifesteal','action',2,16],['reflection','action',-2,16],['regeneration','action',1,14],['comboSpeed','stat',-1,12],['focus','stat',0,12],['healer','organ',-1,20],['secretion','organ',-2,20],['rangedPower','stat',-1,12],['rangedSpeed','stat',1,12],['healPower','stat',1,10]
   ];
   const alphabet = 'ATGC';
   const genes = definitions.map((entry,index) => ({id:entry[0],category:entry[1],turn:entry[2],price:entry[3]/2,code:alphabet[Math.floor(index/16)]+alphabet[Math.floor(index/4)%4]+alphabet[index%4],color:colors[entry[1]]}));
   const lookup = new Map(genes.map(gene=>[gene.id,gene]));
-  const specification=[{"gene":"gather","grade":1,"steps":[0,1],"order":1},{"gene":"health","grade":1,"steps":[0,4],"order":3},{"gene":"blade","grade":2,"steps":[0,1,5],"order":5},{"gene":"power","grade":2,"steps":[0,0,0],"order":3},{"gene":"speed","grade":2,"steps":[0,0,1],"order":4},{"gene":"capacity","grade":1,"steps":[0,0],"order":0},{"gene":"movement","grade":1,"steps":[0,5],"order":4},{"gene":"antenna","grade":2,"steps":[0,1,2],"order":7},{"gene":"carapace","grade":2,"steps":[0,1,0],"order":8},{"gene":"combo","grade":3,"steps":[0,1,5,0],"order":9},{"gene":"legs","grade":3,"steps":[0,1,0,4],"order":10},{"gene":"armor","grade":3,"steps":[0,1,2,0],"order":11},{"gene":"vision","grade":3,"steps":[0,1,2,4],"order":12},{"gene":"harvest","grade":3,"steps":[0,1,0,5],"order":13},{"gene":"harvestSpeed","grade":1,"steps":[0,2],"order":2},{"gene":"loadSpeed","grade":3,"steps":[0,1,2,3],"order":15},{"gene":"accuracy","grade":3,"steps":[0,1,0,2],"order":16},{"gene":"tenacity","grade":3,"steps":[0,1,0,1],"order":17},{"gene":"healing","grade":3,"steps":[0,2,1,3],"order":18},{"gene":"block","grade":3,"steps":[0,0,1,5],"order":19},{"gene":"evasion","grade":3,"steps":[0,1,1,2],"order":20},{"gene":"parry","grade":4,"steps":[0,1,2,0,1],"order":21},{"gene":"counter","grade":4,"steps":[0,1,0,4,0],"order":22},{"gene":"critical","grade":4,"steps":[0,2,1,0,2],"order":23},{"gene":"criticalPower","grade":4,"steps":[0,1,3,1,0],"order":24},{"gene":"penetration","grade":4,"steps":[0,1,2,0,2],"order":25},{"gene":"comboPower","grade":4,"steps":[0,1,3,1,2],"order":26},{"gene":"blockPower","grade":4,"steps":[0,1,2,3,1],"order":27},{"gene":"counterPower","grade":4,"steps":[0,1,5,1,0],"order":28},{"gene":"reduction","grade":4,"steps":[0,1,0,5,1],"order":29},{"gene":"stun","grade":4,"steps":[0,1,5,4,0],"order":30},{"gene":"stunTime","grade":4,"steps":[0,1,0,5,0],"order":31},{"gene":"bleed","grade":4,"steps":[0,1,2,1,0],"order":32},{"gene":"bleedPower","grade":4,"steps":[0,1,2,3,5],"order":33},{"gene":"area","grade":4,"steps":[0,1,0,1,3],"order":34},{"gene":"areaPower","grade":4,"steps":[0,1,0,2,3],"order":35},{"gene":"lifesteal","grade":4,"steps":[0,1,0,5,4],"order":36},{"gene":"reflection","grade":4,"steps":[0,1,2,1,3],"order":37},{"gene":"regeneration","grade":4,"steps":[0,1,0,1,2],"order":38},{"gene":"comboSpeed","grade":4,"steps":[0,1,2,3,4],"order":39},{"gene":"focus","grade":4,"steps":[0,2,0,1,5],"order":40},{"gene":"healer","grade":2,"steps":[0,1,3],"order":6},{"gene":"secretion","grade":2,"steps":[0,0,2],"order":9},{"gene":"rangedPower","grade":3,"steps":[0,5,4,4],"order":41},{"gene":"rangedSpeed","grade":3,"steps":[0,5,5,0],"order":42}];
-  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.steps=entry.steps;gene.order=entry.order;if(gene.grade<=2)gene.price/=2;}
-  const catalog=genes.slice().sort((a,b)=>a.grade-b.grade||a.order-b.order);
+  const specification=[{"gene":"gather","grade":1,"steps":[0,1],"order":1},{"gene":"health","grade":1,"steps":[0,4],"order":3},{"gene":"blade","grade":2,"steps":[0,2,3],"order":0},{"gene":"power","grade":2,"steps":[0,0,1],"order":1},{"gene":"speed","grade":2,"steps":[0,2,0],"order":2},{"gene":"capacity","grade":1,"steps":[0,0],"order":0},{"gene":"movement","grade":1,"steps":[0,5],"order":4},{"gene":"antenna","grade":2,"steps":[0,4,0],"order":8},{"gene":"carapace","grade":2,"steps":[0,5,1],"order":9},{"gene":"combo","grade":3,"steps":[0,1,5,0],"order":0},{"gene":"legs","grade":3,"steps":[0,1,0,4],"order":10,"retired":true},{"gene":"armor","grade":3,"steps":[0,1,2,0],"order":11,"retired":true},{"gene":"vision","grade":3,"steps":[0,1,2,4],"order":10},{"gene":"harvest","grade":2,"steps":[0,1,2],"order":10},{"gene":"harvestSpeed","grade":1,"steps":[0,2],"order":2},{"gene":"loadSpeed","grade":2,"steps":[0,5,4],"order":11},{"gene":"accuracy","grade":3,"steps":[0,1,0,2],"order":6},{"gene":"tenacity","grade":3,"steps":[0,1,0,1],"order":7},{"gene":"healing","grade":3,"steps":[0,2,1,3],"order":11},{"gene":"block","grade":3,"steps":[0,0,1,5],"order":8},{"gene":"evasion","grade":3,"steps":[0,1,1,2],"order":9},{"gene":"parry","grade":4,"steps":[0,1,2,0,1],"order":21},{"gene":"counter","grade":3,"steps":[0,1,0,4],"order":2},{"gene":"critical","grade":3,"steps":[0,2,1,0],"order":1},{"gene":"criticalPower","grade":4,"steps":[0,1,3,1,0],"order":24},{"gene":"penetration","grade":4,"steps":[0,1,2,0,2],"order":25},{"gene":"comboPower","grade":4,"steps":[0,1,3,1,2],"order":26},{"gene":"blockPower","grade":4,"steps":[0,1,2,3,1],"order":27},{"gene":"counterPower","grade":4,"steps":[0,1,5,1,0],"order":28},{"gene":"reduction","grade":4,"steps":[0,1,0,5,1],"order":29},{"gene":"stun","grade":3,"steps":[0,1,5,4],"order":3},{"gene":"stunTime","grade":4,"steps":[0,1,0,5,0],"order":31},{"gene":"bleed","grade":3,"steps":[0,1,2,1],"order":4},{"gene":"bleedPower","grade":4,"steps":[0,1,2,3,5],"order":33},{"gene":"area","grade":3,"steps":[0,1,0,5],"order":5},{"gene":"areaPower","grade":4,"steps":[0,1,0,2,3],"order":35},{"gene":"lifesteal","grade":4,"steps":[0,1,0,5,4],"order":36},{"gene":"reflection","grade":4,"steps":[0,1,2,1,3],"order":37},{"gene":"regeneration","grade":4,"steps":[0,1,0,1,2],"order":38},{"gene":"comboSpeed","grade":4,"steps":[0,1,2,3,4],"order":39},{"gene":"focus","grade":4,"steps":[0,2,0,1,5],"order":40},{"gene":"healer","grade":2,"steps":[0,2,1],"order":6},{"gene":"secretion","grade":2,"steps":[0,1,3],"order":3},{"gene":"rangedPower","grade":2,"steps":[0,0,2],"order":4},{"gene":"rangedSpeed","grade":2,"steps":[0,0,4],"order":5},{"gene":"healPower","grade":2,"steps":[0,4,4],"order":7}];
+  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.steps=entry.steps;gene.order=entry.order;if(entry.retired)gene.retired=true;if(gene.grade<=2)gene.price/=2;}
+  const catalog=genes.filter(gene=>!gene.retired).sort((a,b)=>a.grade-b.grade||a.order-b.order);
 
   const boardRadii=[2,3,4,5],profiles=new Map(),shapeCache=new Map();
   function boardRadius(level){return Number.isInteger(level)&&level>=1&&level<=4?boardRadii[level-1]:Infinity;}
@@ -164,7 +164,6 @@ const ATTRIBUTE_DNA = (() => {
 
   return {genes,catalog,lookup,trace,price,cost,counts,weights,stats,validate,clonePiece,step,key,shape,route,boardRadius,inside};
 })();
-
 return { ATTRIBUTE_DNA };
 })();
 modules["client/dna-editor.mjs"] = (() => {
@@ -182,7 +181,7 @@ function renderDnaDesignStats(container, stats, base, showScale) {
     ["vision", "시야", "칸"], ["comboPower", "연격숙련", "%"], ["critical", "치명", "%"], ["criticalPower", "치명위력", "%"],
     ["accuracy", "정밀", "%"], ["penetration", "예리함", ""], ["blockPower", "방어숙련", "%"], ["counter", "반격", "%"],
     ["counterPower", "반격위력", "%"], ["tenacity", "강인함", "%"], ["reduction", "완충", "%"], ["loadSpeed", "하중적응", "%"],
-    ["healing", "회복력", "%"], ["stun", "기절", "%"], ["stunTime", "기절연장", "초"], ["bleed", "출혈", "%"],
+    ["healPower", "치유량", ""], ["healing", "회복력", "%"], ["stun", "기절", "%"], ["stunTime", "기절연장", "초"], ["bleed", "출혈", "%"],
     ["bleedPower", "출혈강도", ""], ["area", "범위공격", "칸"], ["areaPower", "확산위력", "%"], ["lifesteal", "흡혈", "%"],
     ["reflection", "반사", "%"], ["regeneration", "재생", "/초"], ["comboSpeed", "연타 간격", "초"], ["focus", "공격 준비", "초"],
     ["scale", "크기", "배"], ["melee", "칼날", ""], ["ranged", "분비기관", ""], ["healer", "치유기관", ""], ["roaming", "안테나", ""]
@@ -229,7 +228,7 @@ function dnaEditorViewport(M,level,start,gene,width,height) {
   return {scale,x:width/2-(minX+maxX)*scale/2,y:top+(height-top-bottom)/2-(minY+maxY)*scale/2};
 }
 
-const dnaGeneNames={blade:'칼날',carapace:'갑각',antenna:'안테나',gather:'채집기관',legs:'다리',power:'근접 공격력',combo:'연타',speed:'근접 공속',comboPower:'연격숙련',critical:'치명',criticalPower:'치명위력',accuracy:'정밀',penetration:'예리함',health:'체력',armor:'경화',evasion:'회피',parry:'패링',block:'방어본능',blockPower:'방어숙련',counter:'반격',counterPower:'반격위력',tenacity:'강인함',reduction:'완충',movement:'이속',capacity:'운반',harvest:'채집량',harvestSpeed:'채집속도',vision:'시야',loadSpeed:'하중적응',healing:'회복력',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중',healer:'치유기관',secretion:'분비기관',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속'};
+const dnaGeneNames={blade:'칼날',carapace:'갑각',antenna:'안테나',gather:'채집기관',legs:'다리',power:'근접 공격력',combo:'연타',speed:'근접 공속',comboPower:'연격숙련',critical:'치명',criticalPower:'치명위력',accuracy:'정밀',penetration:'예리함',health:'체력',armor:'경화',evasion:'회피',parry:'패링',block:'방어본능',blockPower:'방어숙련',counter:'반격',counterPower:'반격위력',tenacity:'강인함',reduction:'완충',movement:'이속',capacity:'운반',harvest:'채집량',harvestSpeed:'채집속도',vision:'시야',loadSpeed:'하중적응',healPower:'치유량 강화',healing:'회복력',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중',healer:'치유기관',secretion:'분비기관',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속'};
 
 function dnaGeneShape(M,gene){const points=M.route({q:0,r:0},gene,gene.grade,0).map(point=>({x:34*Math.sqrt(3)*(point.q+point.r/2),y:51*point.r})),minX=Math.min(...points.map(p=>p.x)),maxX=Math.max(...points.map(p=>p.x)),minY=Math.min(...points.map(p=>p.y)),maxY=Math.max(...points.map(p=>p.y)),scale=Math.min(30/Math.max(1,maxX-minX),24/Math.max(1,maxY-minY));return points.map(p=>[(p.x-(minX+maxX)/2)*scale+22,(p.y-(minY+maxY)/2)*scale+19]);}
 
@@ -257,7 +256,7 @@ function renderDnaComposition(container, M, dna) {
   const list = document.createElement('div');
   list.className = 'unit-dna-list';
   const counts = M.counts(dna.pieces);
-  for (const gene of M.catalog) {
+  for (const gene of [...M.catalog,...M.genes.filter(gene=>gene.retired)]) {
     if (!counts[gene.id]) continue;
     const item = document.createElement('span');
     item.className = 'unit-dna-gene';
@@ -266,7 +265,8 @@ function renderDnaComposition(container, M, dna) {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('viewBox', '0 0 44 38');
     svg.setAttribute('aria-hidden', 'true');
-    svg.innerHTML = dnaGeneShapeSvg(M, gene);
+    const piece = dna.pieces.find(piece=>piece.gene===gene.id);
+    svg.innerHTML = dnaGeneShapeSvg(M, {...gene,grade:piece.grade===undefined?gene.grade:piece.grade,steps:piece.shape||gene.steps});
     const name = document.createElement('span');
     name.className = 'unit-dna-name';
     name.textContent = dnaGeneNames[gene.id];
@@ -315,17 +315,17 @@ function createDnaEditor(container, dnaModel, onChange) {
   function snapshot(){return {pieces:pieces.map(M.clonePiece),insertion};}
   function checkpoint(){history.push(snapshot());if(history.length>200)history.shift();future=[];}
   function clearHistory(){history=[];future=[];renderControls();}
-  function candidate(){const gene=M.lookup.get(selected),proposed=pieces.map(M.clonePiece),start=model.nodes[insertion],points=M.route(start,gene,gene.grade,rotation),path={gene:selected,points,start,end:points[points.length-1]};proposed.splice(insertion,0,{gene:selected,grade:gene.grade,rotation,shape:[...M.shape(gene,gene.grade)]});const result=M.trace(proposed,level);if(selected==='gather'&&pieces.some(piece=>piece.gene==='gather')){result.valid=false;result.reason='collision';}const cost=M.cost(proposed);return {pieces:proposed,result,path,cost,valid:result.valid,reason:result.valid?'ready':result.reason};}
+  function candidate(){const gene=M.lookup.get(selected),proposed=pieces.map(M.clonePiece),start=model.nodes[insertion],points=M.route(start,gene,gene.grade,rotation),path={gene:selected,points,start,end:points[points.length-1]};proposed.splice(insertion,0,{gene:selected,grade:gene.grade,rotation,shape:[...M.shape(gene,gene.grade)]});const result=M.trace(proposed,level);if(gene.category==='organ'&&pieces.some(piece=>piece.gene===selected)){result.valid=false;result.reason='collision';}const cost=M.cost(proposed);return {pieces:proposed,result,path,cost,valid:result.valid,reason:result.valid?'ready':result.reason};}
   function changed(){notice='';state();if(typeof onChange==='function')onChange(getDesign());}
   function previewState(){const previous=rotation,initial=candidate();if(initial.result.valid)return initial;for(let step=1;step<6;step++){rotation=(previous+step)%6;const next=candidate();if(next.result.valid)return next;}rotation=previous;return initial;}
   function state(){model=M.trace(pieces,level);preview=readOnly?candidate():previewState();renderCatalog();renderLegend();renderControls();fit();requestDraw();}
-  function renderLegend(){const legend=find('.dna-legend'),counts=M.counts(pieces);legend.replaceChildren();for(const gene of M.catalog){if(!counts[gene.id])continue;const item=document.createElement('span');item.dataset.gene=gene.id;const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 44 38');svg.innerHTML=shapeSvg(gene);const count=document.createElement('span');count.textContent='×'+counts[gene.id];item.append(svg,count);legend.append(item);}legend.hidden=!legend.children.length;}
+  function renderLegend(){const legend=find('.dna-legend'),counts=M.counts(pieces);legend.replaceChildren();for(const gene of [...M.catalog,...M.genes.filter(gene=>gene.retired)]){if(!counts[gene.id])continue;const item=document.createElement('span');item.dataset.gene=gene.id;const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 44 38');const piece=pieces.find(piece=>piece.gene===gene.id);svg.innerHTML=shapeSvg({...gene,grade:piece.grade===undefined?gene.grade:piece.grade,steps:piece.shape||gene.steps});const count=document.createElement('span');count.textContent='×'+counts[gene.id];item.append(svg,count);legend.append(item);}legend.hidden=!legend.children.length;}
   function renderCatalog(){
     hideGeneName();geneClick=null;
     const filters=find('.dna-filters');filters.replaceChildren();
     for(const [type,label] of [['all','전체'],['organ','기관'],['action','기능'],['stat','스탯']]){const item=document.createElement('button');item.type='button';item.textContent=label;item.dataset.category=type;item.setAttribute('aria-pressed',String(filter===type));item.onclick=()=>{filter=type;renderCatalog();root.focus({preventScroll:true});};filters.append(item);}
     const list=find('.dna-list');list.replaceChildren();
-    for(const gene of M.catalog){if(gene.grade>level||(!mobileQuery?.matches&&filter!=='all'&&gene.category!==filter))continue;const item=document.createElement('button');item.type='button';item.className='dna-gene';item.setAttribute('aria-label',names[gene.id]);item.dataset.gene=gene.id;item.dataset.category=gene.category;item.disabled=gene.grade>level||(gene.id==='gather'&&pieces.some(piece=>piece.gene==='gather'));item.setAttribute('aria-pressed',String(selected===gene.id));item.style.setProperty('--dna-gene-color',gene.color);const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 44 38');svg.innerHTML=shapeSvg(gene);const name=document.createElement('strong');name.textContent=names[gene.id];const cost=document.createElement('span');cost.className='dna-gene-cost';const proposed=pieces.map(M.clonePiece);proposed.splice(insertion,0,{gene:gene.id,grade:gene.grade,rotation,shape:[...gene.steps]});cost.textContent=String(M.price(proposed)-M.price(pieces));cost.title='진화포인트';item.append(svg,name,cost);item.onclick=()=>{if(item.disabled)return;selected=gene.id;notice='';state();root.focus({preventScroll:true});};list.append(item);}
+    for(const gene of M.catalog){if(gene.grade>level||(!mobileQuery?.matches&&filter!=='all'&&gene.category!==filter))continue;const item=document.createElement('button');item.type='button';item.className='dna-gene';item.setAttribute('aria-label',names[gene.id]);item.dataset.gene=gene.id;item.dataset.category=gene.category;item.disabled=gene.grade>level||(gene.category==='organ'&&pieces.some(piece=>piece.gene===gene.id));item.setAttribute('aria-pressed',String(selected===gene.id));item.style.setProperty('--dna-gene-color',gene.color);const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 44 38');svg.innerHTML=shapeSvg(gene);const name=document.createElement('strong');name.textContent=names[gene.id];const cost=document.createElement('span');cost.className='dna-gene-cost';const proposed=pieces.map(M.clonePiece);proposed.splice(insertion,0,{gene:gene.id,grade:gene.grade,rotation,shape:[...gene.steps]});cost.textContent=String(M.price(proposed)-M.price(pieces));cost.title='진화포인트';item.append(svg,name,cost);item.onclick=()=>{if(item.disabled)return;selected=gene.id;notice='';state();root.focus({preventScroll:true});};list.append(item);}
   }
   function renderControls(){addButton.disabled=readOnly||!preview.valid;leftButton.disabled=readOnly;rightButton.disabled=readOnly;undoButton.disabled=readOnly||!history.length;redoButton.disabled=readOnly||!future.length;removeButton.disabled=readOnly||!pieces.length;clearButton.disabled=readOnly||!pieces.length;const reason=notice||preview.reason;const labels={ready:'',collision:'경로가 겹칩니다',closed:'경로가 닫혔습니다',boundary:'판을 벗어납니다',level:'둥지 레벨이 부족합니다'};find('.dna-status').textContent=readOnly?'':labels[reason]||'';find('.dna-status').dataset.kind=reason;find('.dna-cost strong').textContent=String(M.cost(pieces));root.dataset.readonly=String(readOnly);root.dataset.preview=String(preview.valid);}
   function requestDraw(){if(!frame&&!destroyed)frame=requestAnimationFrame(()=>{frame=0;if(!destroyed)draw();});}
@@ -394,7 +394,6 @@ function createDnaEditor(container, dnaModel, onChange) {
     destroy(){destroyed=true;if(mobileQuery)mobileQuery.removeEventListener('change',mobileChange);hideGeneName();geneClick=null;geneTouch=null;catalog.removeEventListener('pointerdown',genePointerDown);catalog.removeEventListener('pointermove',genePointerMove);catalog.removeEventListener('pointerup',genePointerEnd);catalog.removeEventListener('pointercancel',genePointerEnd);catalog.removeEventListener('click',geneClickCapture,true);catalog.removeEventListener('contextmenu',geneContextMenu);observer.disconnect();if(frame)cancelAnimationFrame(frame);root.remove();}
   };
 }
-
 return { dnaDesignStats, renderDnaDesignStats, dnaEditorViewport, renderDnaComposition, createDnaEditor };
 })();
 window.AttributeDna = modules["server/dna.mjs"].ATTRIBUTE_DNA;

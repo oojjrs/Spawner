@@ -92,14 +92,14 @@ test("restoring a colony discards in-flight references and keeps its spent coold
 test("melee and ranged investment change only their own power and rate",()=>{
   const melee=stats(["blade","secretion","power","speed"]),ranged=stats(["blade","secretion","rangedPower","rangedSpeed"]);
   assert.equal(melee.meleePower,6); assert.equal(melee.meleeSpeed,.6); assert.equal(melee.rangedPower,1.4); assert.equal(melee.rangedSpeed,.5);
-  assert.equal(ranged.meleePower,2); assert.equal(ranged.meleeSpeed,.5); assert.ok(Math.abs(ranged.rangedPower-5.6)<1e-9); assert.equal(ranged.rangedSpeed,.65);
+  assert.equal(ranged.meleePower,2); assert.equal(ranged.meleeSpeed,.5); assert.ok(Math.abs(ranged.rangedPower-4.2)<1e-9); assert.equal(ranged.rangedSpeed,.6);
   assert.equal(stats(["secretion"]).power,1.4); assert.equal(stats(["secretion"]).speed,.5);
-  for(const id of ["rangedPower","rangedSpeed"]) { const g=ATTRIBUTE_DNA.lookup.get(id);assert.equal(g.grade,3);assert.equal(g.steps.length,4);assert.ok(ATTRIBUTE_DNA.trace([piece(id)],3).valid); }
+  for(const id of ["rangedPower","rangedSpeed"]) { const g=ATTRIBUTE_DNA.lookup.get(id);assert.equal(g.grade,2);assert.equal(g.steps.length,3);assert.ok(ATTRIBUTE_DNA.trace([piece(id)],2).valid); }
 });
 
 test("ranged damage is the visible base and selected rate owns the shared cooldown",()=>{
   const f=fixture(["blade","secretion","power","speed","rangedSpeed"]); f.target.stats.defense=0; f.target.stats.attackPower=0;
-  f.combat.update(f.source,0); const ready=1/.65; assert.equal(f.source.attackReady,ready);
+  f.combat.update(f.source,0); const ready=1/.6; assert.equal(f.source.attackReady,ready);
   f.combat.update(f.source,.7); assert.ok(Math.abs(f.target.health-98.6)<1e-8);
   f.source.x=f.target.x; f.combat.update(f.source,.8); assert.equal(f.source.combat.nextAttackAt,ready);
   f.combat.update(f.source,ready); assert.equal(f.source.attack.attackMode,"melee"); assert.ok(Math.abs(f.source.combat.nextAttackAt-(ready+1/.6))<1e-9);

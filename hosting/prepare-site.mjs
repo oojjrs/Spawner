@@ -16,8 +16,11 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
   const html = readSource("Spawner.html").toString("utf8")
     .replace(/^  <script src="\.\/client\/local-assets\.js"><\/script>\r?\n/m, "");
   const pages = new Map([["Spawner.html", html]]);
-  for (const name of ["NeutralStats.html", "DnaLayouts.html", "UnitPreview.html", "VfxPreview.html", "Combat.html", "BeanRigPreview.html"]) {
-    if (existsSync(join(root, name))) pages.set(name, readSource(name).toString("utf8"));
+  for (const name of ["Attribute.html", "NeutralStats.html", "DnaLayouts.html", "UnitPreview.html", "VfxPreview.html", "Combat.html", "BeanRigPreview.html"]) {
+    if (existsSync(join(root, name))) {
+      const page = readSource(name).toString("utf8");
+      pages.set(name, name === "Attribute.html" ? page.replace(/(src|href)="(client\/[^\"]+)"/g, '$1="./$2"') : page);
+    }
   }
   const clients = new Map([...pages.values()].flatMap(page => [...page.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="\.\/(client\/[^"]+)"/g)])
     .map(match => [match[1], readSource(match[1]).toString("utf8")]));

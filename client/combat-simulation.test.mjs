@@ -33,13 +33,13 @@ function actualTrial(input, change) {
 test("실험실 기본 수치는 실제 DNA의 같은 투자량과 일치한다", () => {
   const map = {power:"power",rangedPower:"rangedPower",vitality:"health",armor:"armor",flatPen:"penetration",haste:"speed",rangedHaste:"rangedSpeed",
     focus:"focus",multiHit:"combo",hitSpeed:"comboSpeed",combo:"comboPower",crit:"critical",critPower:"criticalPower",accuracy:"accuracy",evasion:"evasion",
-    parry:"parry",block:"block",blockPower:"blockPower",counter:"counter",counterPower:"counterPower",tenacity:"tenacity",stun:"stun",stunDuration:"stunTime",drain:"lifesteal"};
+    parry:"parry",block:"block",blockPower:"blockPower",counter:"counter",counterPower:"counterPower",tenacity:"tenacity",stun:"stun",stunDuration:"stunTime",drain:"lifesteal",healPower:"healPower"};
   for (const count of [0,1,5,20,80]) {
     const counts = Object.fromEntries(Object.keys(map).map(key=>[key,count]));
     const pieces=[{gene:"blade",grade:1},{gene:"secretion",grade:1},{gene:"healer",grade:1},
       ...Object.values(map).flatMap(gene=>Array.from({length:count},()=>({gene,grade:1})))];
     const expected=ATTRIBUTE_DNA.stats(pieces), actual=deriveSimulationStats({key:"bean",counts,organs:{attack:1,ranged:1,heal:1}}).dna;
-    for(const key of ["health","power","speed","hits","focus","comboSpeed","armor","critical","criticalPower","accuracy","evasion","parry","block","blockPower","counter","counterPower","tenacity","stun","stunTime","lifesteal","meleePower","rangedPower","meleeSpeed","rangedSpeed"])
+    for(const key of ["health","power","speed","hits","focus","comboSpeed","armor","critical","criticalPower","accuracy","evasion","parry","block","blockPower","counter","counterPower","tenacity","stun","stunTime","lifesteal","meleePower","rangedPower","meleeSpeed","rangedSpeed","healPower"])
       close(actual[key],expected[key]);
   }
 });
@@ -92,7 +92,7 @@ test("같은 시드는 자동·단계·잘게 나눈 재생에서 같은 결과�
 });
 
 test("지원군 치유는 실제 대상·기관 수·수용 HP를 사용한다", () => {
-  const healer={key:"bean",counts:{vitality:5},organs:{attack:1,heal:3}};
+  const healer={key:"bean",counts:{vitality:5,healPower:2},organs:{attack:1,heal:1}};
   const trial=actualTrial({left:[healer,healer],right:[build({power:2,vitality:5}),build({power:2,vitality:5})],support:true,random:false});
   assert.ok(trial.history.some(event=>event.kind==="heal"&&event.attackerId!==event.targetId));
   for(const agent of [...trial.agents,...trial.supportAgents])assert.ok(agent.health>=0&&agent.health<=agent.stats.health);
@@ -116,7 +116,8 @@ test("시작 거리 편집과 근접 접근은 N:N 교전으로 이어진다", (
 test("기관·수치·규칙·예산 편집은 유지되고 잘못된 입력은 거절한다", () => {
   close(deriveSimulationStats(build({power:2}),{powerCurve:"log"}).attackPower,2+2*Math.log(2)/Math.log(1.5));
   close(deriveSimulationStats(build({vitality:3}),{healthPerPoint:20}).health,70);
-  assert.equal(deriveSimulationStats({key:"bean",organs:{attack:4,ranged:2,heal:3}}).pieceCount,9);
+  assert.equal(deriveSimulationStats({key:"bean",organs:{attack:1,ranged:1,heal:1}}).pieceCount,3);
+  for(const key of ["attack","ranged","heal"])assert.throws(()=>deriveSimulationStats({key:"bean",organs:{[key]:2}}),/Organ count/);
   for(const count of [-1,.5,NaN,Infinity,"1"])assert.throws(()=>deriveSimulationStats(build({power:count})),/count/);
   assert.throws(()=>deriveSimulationStats(build({unknown:1})),/Unknown count/);
   assert.throws(()=>deriveSimulationStats(build({}),{dodgeCap:1.1}),/between/);
@@ -150,4 +151,14 @@ test("중립종 외형도 편집한 DNA 원거리 능력으로 N:N 전투하고 
   const players=createSimulationTrial(input);players.finish();
   const neutral={...b,key:"dew-rabbit"};const creatures=createSimulationTrial({...input,left:[neutral,neutral,neutral],right:[neutral,neutral,neutral]});creatures.finish();
   assert.equal(creatures.reason,"death");assert.deepEqual(creatures.history,players.history);assert.deepEqual(creatures.result(),players.result());
+});
+
+test("치유량 원시 투자는 치유기관과 받는 회복력에서 분리된다",()=>{
+  const build={key:"bean",organs:{attack:0,heal:1},counts:{healPower:2},healing:30};
+  const stats=deriveSimulationStats(build),expected=ATTRIBUTE_DNA.stats([{gene:"healer",grade:2},{gene:"healPower",grade:2}]);
+  assert.equal(stats.healPower,3);assert.equal(stats.dna.healPower,expected.healPower);assert.equal(stats.healerCount,1);assert.equal(stats.healing,30);
+  assert.equal(deriveSimulationStats({...build,organs:{attack:0,heal:0}}).healPower,0);
+  const opponent={key:"spore",counts:{vitality:5}};
+  const trial=createSimulationTrial({left:build,right:opponent,support:true,random:false,distance:3});trial.advance(2.1);
+  const heals=trial.history.filter(event=>event.kind==="heal");assert.ok(heals.length);close(heals[0].damage,3.9);
 });

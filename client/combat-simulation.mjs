@@ -11,7 +11,7 @@ export const SIMULATION_STATS = Object.freeze([
   ["accuracy", "정밀", "공격"], ["evasion", "회피", "방어"], ["parry", "패링", "방어"],
   ["block", "블록", "방어"], ["blockPower", "블록 경감", "방어"], ["counter", "반격 확률", "반격"],
   ["counterPower", "반격 위력", "반격"], ["tenacity", "강인함", "생존"], ["stun", "기절 확률", "제어"],
-  ["stunDuration", "기절 시간", "제어"], ["drain", "흡혈", "생존"]
+  ["stunDuration", "기절 시간", "제어"], ["drain", "흡혈", "생존"], ["healPower", "치유량", "생존"]
 ].map(([key, label, group]) => Object.freeze({ key, label, group })));
 
 export const DEFAULT_SIMULATION_RULES = Object.freeze({ ...DNA_COMBAT_RULES,
@@ -70,7 +70,7 @@ function normalizeBuild(input) {
     if (!Object.hasOwn(organs, key)) throw new TypeError("Unknown organ: " + key);
     if (["attack", "ranged", "heal"].includes(key)) {
       const count = typeof value === "boolean" ? Number(value) : value;
-      if (!Number.isSafeInteger(count) || count < 0) throw new RangeError("Organ count must be a nonnegative safe integer");
+      if (!Number.isSafeInteger(count) || count < 0 || count > 1) throw new RangeError("Organ count must be a nonnegative safe integer");
       organs[key] = count;
     } else {
       if (typeof value !== "boolean") throw new TypeError("Legacy armor and legs must be boolean");
@@ -94,7 +94,7 @@ function derive(build, rules) {
   const dna = { ...dnaCombatStats(counts, counts, rules), movement: .25, vision: 1, roaming: true, healing: build.healing };
   const interval = speed => speed > 0 ? 1 / speed : Infinity;
   const result = { dna, HP: dna.health, health: dna.health, speed: dna.movement, loadedSpeed: dna.movement * .75, vision: dna.vision,
-    healing: dna.healing, attackPower: dna.meleePower, defense: dna.armor, meleePower: dna.meleePower, rangedPower: dna.rangedPower,
+    healing: dna.healing, healPower: dna.healPower, attackPower: dna.meleePower, defense: dna.armor, meleePower: dna.meleePower, rangedPower: dna.rangedPower,
     attackSpeed: dna.meleeSpeed, meleeSpeed: dna.meleeSpeed, rangedSpeed: dna.rangedSpeed,
     attackInterval: interval(dna.meleeSpeed), rangedAttackInterval: interval(dna.rangedSpeed),
     targetAttackSpeed: dna.meleeSpeed, targetRangedSpeed: dna.rangedSpeed, windup: dna.focus, hitGap: dna.comboSpeed,

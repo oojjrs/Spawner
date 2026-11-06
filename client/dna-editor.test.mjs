@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { posix } from "node:path";
-import { createDnaEditor, dnaEditorViewport, dnaDesignStats, renderDnaDesignStats } from "./dna-editor.mjs";
+import { createDnaEditor, dnaEditorViewport, dnaDesignStats, renderDnaDesignStats, renderDnaComposition } from "./dna-editor.mjs";
 import { ATTRIBUTE_DNA } from "../server/dna.mjs";
 import { birthCost } from "../server/attributes.mjs";
 
@@ -12,7 +12,7 @@ function fixture(t, dimensions, model) {
   const draws=[],pending=[];
   const drawing={setTransform(){},clearRect(){draws.length=0;},save(){},restore(){},beginPath(){},closePath(){},moveTo(){},lineTo(){},fill(){},arc(x,y,radius){draws.push({kind:'arc',x,y,radius});},stroke(){draws.push({kind:'stroke',color:this.strokeStyle});}};
   class Element {
-    constructor(){this.children=[];this.dataset={};this.style={setProperty(){}};this.attributes={};this.selectors=new Map();this.listeners=new Map();}
+    constructor(){this.children=[];this.classList={add(){}};this.dataset={};this.style={setProperty(){}};this.attributes={};this.selectors=new Map();this.listeners=new Map();}
     setPointerCapture(){}
     setAttribute(name,value){this.attributes[name]=value;}
     append(...items){this.children.push(...items);}
@@ -236,4 +236,37 @@ test("외부 테스트 확대와 F 전체보기는 DNA·이력을 바꾸지 않�
   const before=editor.getDesign(),original=positions();editor.zoom(.5);draw();assert.notDeepEqual(positions(),original);
   root.dispatch('keydown',{key:'f'});draw();assert.deepEqual(positions(),original);
   assert.deepEqual(editor.getDesign(),before);assert.equal(changes.length,0);
+});
+
+test("기관은 종류별 한 번만 배치하고 다른 기관은 함께 선택할 수 있다",t=>{
+  const {editor,root}=fixture(t),canvas=root.querySelector('canvas');editor.context(4,10000,false);
+  const organs=ATTRIBUTE_DNA.catalog.filter(gene=>gene.category==='organ');
+  for(const organ of organs){
+    assert.equal(editor.load({version:3,pieces:[piece(organ.id,0)],level:4,budget:10000},false),true);
+    const before=editor.getDesign(),items=root.querySelector('.dna-list').children;
+    assert.equal(items.find(item=>item.dataset.gene===organ.id).disabled,true,organ.id);
+    for(const other of organs.filter(gene=>gene.id!==organ.id))assert.equal(items.find(item=>item.dataset.gene===other.id).disabled,false,other.id);
+    assert.equal(root.dataset.preview,'false');root.dispatch('keydown',{key:'Enter'});root.querySelector('.dna-add').onclick();
+    canvas.dispatch('pointerdown',{button:0,pointerId:1,clientX:1,clientY:1});canvas.dispatch('pointerup',{pointerId:1,clientX:1,clientY:1});
+    assert.deepEqual(editor.getDesign(),before,organ.id);
+  }
+});
+
+test("새 치유량과 받는 회복력은 서로 다른 최종 수치로 표시한다",t=>{
+  const {element}=fixture(t),pieces=[piece('healer',0),piece('healPower',0),piece('healing',0)],values=dnaDesignStats(ATTRIBUTE_DNA,pieces),list=element();
+  renderDnaDesignStats(list,values.stats,values.base,false);
+  const value=key=>list.children.find(item=>item.dataset.stat===key&&item.children.length)?.children[0].textContent;
+  assert.equal(value('healPower'),'3');assert.equal(value('healing'),'30%');
+});
+
+test("구형 경화와 다리의 이름·저장 도형은 신규 카드에서 숨겨도 읽기 목록에 남는다",t=>{
+  const {element}=fixture(t),container=element();
+  for(const id of ['armor','legs']){
+    const gene=ATTRIBUTE_DNA.lookup.get(id),piece={gene:id,grade:3,rotation:2,shape:[...gene.steps]};
+    renderDnaComposition(container,ATTRIBUTE_DNA,{version:3,level:4,budget:1000,pieces:[piece]});
+    assert.equal(ATTRIBUTE_DNA.catalog.some(gene=>gene.id===id),false);
+    const item=container.children[1].children[0];assert.equal(item.dataset.gene,id);
+    assert.equal(item.children[1].textContent,id==='armor'?'경화':'다리');
+    assert.ok(container.children[0].innerHTML.includes('data-gene="'+id+'"'));
+  }
 });

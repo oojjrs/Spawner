@@ -9,13 +9,16 @@ export function cloneDna(dna) {
 
 export function validateDna(dna, nestLevel, budget) {
   if (!dna || dna.version !== 3 || !Array.isArray(dna.pieces)) return null;
-  let gatherCount = 0;
+  const organs = new Set();
   for (const piece of dna.pieces) {
     const gene = ATTRIBUTE_DNA.lookup.get(piece?.gene);
-    if (!gene) return null;
+    if (!gene || gene.retired) return null;
     if (piece.grade !== gene.grade || !Array.isArray(piece.shape) ||
         JSON.stringify(piece.shape) !== JSON.stringify(ATTRIBUTE_DNA.shape(gene, gene.grade))) return null;
-    if (piece.gene === "gather" && ++gatherCount > 1) return null;
+    if (gene.category === "organ") {
+      if (organs.has(gene.id)) return null;
+      organs.add(gene.id);
+    }
   }
   const result = ATTRIBUTE_DNA.validate({ ...dna, level: nestLevel, budget: Math.min(999999999, budget) });
   if (!result || !ATTRIBUTE_DNA.trace(result.pieces, nestLevel).valid || ATTRIBUTE_DNA.price(result.pieces) > budget) return null;

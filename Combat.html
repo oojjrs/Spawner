@@ -142,7 +142,7 @@ function dnaAttackStats(stats, mode) {
 
 function dnaHealAllocations(source, agents, team, distance) {
   const stats = source.stats.dna || source.stats;
-  let remaining = Number(stats.healerCount ?? stats.healer ?? 0);
+  let remaining = Number(stats.healPower ?? stats.healerCount ?? stats.healer ?? 0);
   const result = [], targets = agents.filter(target => target !== source && target.health > 0 && !target.hidden && !target.retreat &&
     team(target) === team(source) && target.health < target.stats.health && distance(source, target) <= DNA_ACTION_RULES.healRange)
     .sort((a, b) => a.health / a.stats.health - b.health / b.stats.health || String(a.id).localeCompare(String(b.id)));
@@ -221,12 +221,13 @@ function dnaCombatStats(counts, weights, inputRules) {
   const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
   return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0, healerCount: c.healer || 0,
     melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed, healer: !!n.healer,
+    healPower: c.healer ? c.healer + (n.healPower || 0) : 0,
     ...(rules.recovery ? { recovery: rules.recovery } : {}),
     health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
     power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,
     armor: rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),
     parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),
-    block: 100 * capped((n.carapace || 0) + (n.block || 0), rules.blockCap, rules.blockKnee),
+    block: 100 * capped(n.block || 0, rules.blockCap, rules.blockKnee),
     evasion: 100 * capped((n.evasion || 0) + (n.legs || 0), rules.dodgeCap, rules.dodgeKnee),
     comboPower: attack ? 100 * Math.min(rules.followupCap, rules.followupBase + rules.comboPerPoint * (n.comboPower || 0)) : 0,
     critical: attack ? 100 * capped(n.critical || 0, rules.critCap, rules.critKnee) : 0,
@@ -257,18 +258,18 @@ const ATTRIBUTE_DNA = (() => {
   const directions = [[1,0],[0,1],[-1,1],[-1,0],[0,-1],[1,-1]];
   const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};
   const definitions = [
-    ['blade','organ',1,20],['carapace','stat',-1,20],['antenna','organ',0,20],['gather','organ',2,20],['legs','stat',-2,20],
+    ['blade','organ',1,20],['carapace','stat',-1,10],['antenna','organ',0,20],['gather','organ',2,20],['legs','stat',-2,20],
     ['power','stat',1,10],['combo','action',-1,14],['speed','stat',0,12],['comboPower','stat',2,12],['critical','stat',-2,12],['criticalPower','stat',1,10],['accuracy','stat',-1,10],['penetration','stat',0,12],
     ['health','stat',-1,10],['armor','stat',2,10],['evasion','stat',-2,14],['parry','action',1,14],['block','action',0,12],['blockPower','stat',-1,10],['counter','action',2,14],['counterPower','stat',-2,10],['tenacity','stat',1,10],['reduction','stat',-1,12],
     ['movement','stat',0,10],['capacity','stat',1,10],['harvest','stat',-1,10],['harvestSpeed','stat',2,10],['vision','stat',-2,10],['loadSpeed','stat',0,10],['healing','stat',1,10],
-    ['stun','action',-1,16],['stunTime','stat',2,12],['bleed','action',-2,16],['bleedPower','stat',1,12],['area','action',0,18],['areaPower','stat',-1,12],['lifesteal','action',2,16],['reflection','action',-2,16],['regeneration','action',1,14],['comboSpeed','stat',-1,12],['focus','stat',0,12],['healer','organ',-1,20],['secretion','organ',-2,20],['rangedPower','stat',-1,12],['rangedSpeed','stat',1,12]
+    ['stun','action',-1,16],['stunTime','stat',2,12],['bleed','action',-2,16],['bleedPower','stat',1,12],['area','action',0,18],['areaPower','stat',-1,12],['lifesteal','action',2,16],['reflection','action',-2,16],['regeneration','action',1,14],['comboSpeed','stat',-1,12],['focus','stat',0,12],['healer','organ',-1,20],['secretion','organ',-2,20],['rangedPower','stat',-1,12],['rangedSpeed','stat',1,12],['healPower','stat',1,10]
   ];
   const alphabet = 'ATGC';
   const genes = definitions.map((entry,index) => ({id:entry[0],category:entry[1],turn:entry[2],price:entry[3]/2,code:alphabet[Math.floor(index/16)]+alphabet[Math.floor(index/4)%4]+alphabet[index%4],color:colors[entry[1]]}));
   const lookup = new Map(genes.map(gene=>[gene.id,gene]));
-  const specification=[{"gene":"gather","grade":1,"steps":[0,1],"order":1},{"gene":"health","grade":1,"steps":[0,4],"order":3},{"gene":"blade","grade":2,"steps":[0,1,5],"order":5},{"gene":"power","grade":2,"steps":[0,0,0],"order":3},{"gene":"speed","grade":2,"steps":[0,0,1],"order":4},{"gene":"capacity","grade":1,"steps":[0,0],"order":0},{"gene":"movement","grade":1,"steps":[0,5],"order":4},{"gene":"antenna","grade":2,"steps":[0,1,2],"order":7},{"gene":"carapace","grade":2,"steps":[0,1,0],"order":8},{"gene":"combo","grade":3,"steps":[0,1,5,0],"order":9},{"gene":"legs","grade":3,"steps":[0,1,0,4],"order":10},{"gene":"armor","grade":3,"steps":[0,1,2,0],"order":11},{"gene":"vision","grade":3,"steps":[0,1,2,4],"order":12},{"gene":"harvest","grade":3,"steps":[0,1,0,5],"order":13},{"gene":"harvestSpeed","grade":1,"steps":[0,2],"order":2},{"gene":"loadSpeed","grade":3,"steps":[0,1,2,3],"order":15},{"gene":"accuracy","grade":3,"steps":[0,1,0,2],"order":16},{"gene":"tenacity","grade":3,"steps":[0,1,0,1],"order":17},{"gene":"healing","grade":3,"steps":[0,2,1,3],"order":18},{"gene":"block","grade":3,"steps":[0,0,1,5],"order":19},{"gene":"evasion","grade":3,"steps":[0,1,1,2],"order":20},{"gene":"parry","grade":4,"steps":[0,1,2,0,1],"order":21},{"gene":"counter","grade":4,"steps":[0,1,0,4,0],"order":22},{"gene":"critical","grade":4,"steps":[0,2,1,0,2],"order":23},{"gene":"criticalPower","grade":4,"steps":[0,1,3,1,0],"order":24},{"gene":"penetration","grade":4,"steps":[0,1,2,0,2],"order":25},{"gene":"comboPower","grade":4,"steps":[0,1,3,1,2],"order":26},{"gene":"blockPower","grade":4,"steps":[0,1,2,3,1],"order":27},{"gene":"counterPower","grade":4,"steps":[0,1,5,1,0],"order":28},{"gene":"reduction","grade":4,"steps":[0,1,0,5,1],"order":29},{"gene":"stun","grade":4,"steps":[0,1,5,4,0],"order":30},{"gene":"stunTime","grade":4,"steps":[0,1,0,5,0],"order":31},{"gene":"bleed","grade":4,"steps":[0,1,2,1,0],"order":32},{"gene":"bleedPower","grade":4,"steps":[0,1,2,3,5],"order":33},{"gene":"area","grade":4,"steps":[0,1,0,1,3],"order":34},{"gene":"areaPower","grade":4,"steps":[0,1,0,2,3],"order":35},{"gene":"lifesteal","grade":4,"steps":[0,1,0,5,4],"order":36},{"gene":"reflection","grade":4,"steps":[0,1,2,1,3],"order":37},{"gene":"regeneration","grade":4,"steps":[0,1,0,1,2],"order":38},{"gene":"comboSpeed","grade":4,"steps":[0,1,2,3,4],"order":39},{"gene":"focus","grade":4,"steps":[0,2,0,1,5],"order":40},{"gene":"healer","grade":2,"steps":[0,1,3],"order":6},{"gene":"secretion","grade":2,"steps":[0,0,2],"order":9},{"gene":"rangedPower","grade":3,"steps":[0,5,4,4],"order":41},{"gene":"rangedSpeed","grade":3,"steps":[0,5,5,0],"order":42}];
-  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.steps=entry.steps;gene.order=entry.order;if(gene.grade<=2)gene.price/=2;}
-  const catalog=genes.slice().sort((a,b)=>a.grade-b.grade||a.order-b.order);
+  const specification=[{"gene":"gather","grade":1,"steps":[0,1],"order":1},{"gene":"health","grade":1,"steps":[0,4],"order":3},{"gene":"blade","grade":2,"steps":[0,2,3],"order":0},{"gene":"power","grade":2,"steps":[0,0,1],"order":1},{"gene":"speed","grade":2,"steps":[0,2,0],"order":2},{"gene":"capacity","grade":1,"steps":[0,0],"order":0},{"gene":"movement","grade":1,"steps":[0,5],"order":4},{"gene":"antenna","grade":2,"steps":[0,4,0],"order":8},{"gene":"carapace","grade":2,"steps":[0,5,1],"order":9},{"gene":"combo","grade":3,"steps":[0,1,5,0],"order":0},{"gene":"legs","grade":3,"steps":[0,1,0,4],"order":10,"retired":true},{"gene":"armor","grade":3,"steps":[0,1,2,0],"order":11,"retired":true},{"gene":"vision","grade":3,"steps":[0,1,2,4],"order":10},{"gene":"harvest","grade":2,"steps":[0,1,2],"order":10},{"gene":"harvestSpeed","grade":1,"steps":[0,2],"order":2},{"gene":"loadSpeed","grade":2,"steps":[0,5,4],"order":11},{"gene":"accuracy","grade":3,"steps":[0,1,0,2],"order":6},{"gene":"tenacity","grade":3,"steps":[0,1,0,1],"order":7},{"gene":"healing","grade":3,"steps":[0,2,1,3],"order":11},{"gene":"block","grade":3,"steps":[0,0,1,5],"order":8},{"gene":"evasion","grade":3,"steps":[0,1,1,2],"order":9},{"gene":"parry","grade":4,"steps":[0,1,2,0,1],"order":21},{"gene":"counter","grade":3,"steps":[0,1,0,4],"order":2},{"gene":"critical","grade":3,"steps":[0,2,1,0],"order":1},{"gene":"criticalPower","grade":4,"steps":[0,1,3,1,0],"order":24},{"gene":"penetration","grade":4,"steps":[0,1,2,0,2],"order":25},{"gene":"comboPower","grade":4,"steps":[0,1,3,1,2],"order":26},{"gene":"blockPower","grade":4,"steps":[0,1,2,3,1],"order":27},{"gene":"counterPower","grade":4,"steps":[0,1,5,1,0],"order":28},{"gene":"reduction","grade":4,"steps":[0,1,0,5,1],"order":29},{"gene":"stun","grade":3,"steps":[0,1,5,4],"order":3},{"gene":"stunTime","grade":4,"steps":[0,1,0,5,0],"order":31},{"gene":"bleed","grade":3,"steps":[0,1,2,1],"order":4},{"gene":"bleedPower","grade":4,"steps":[0,1,2,3,5],"order":33},{"gene":"area","grade":3,"steps":[0,1,0,5],"order":5},{"gene":"areaPower","grade":4,"steps":[0,1,0,2,3],"order":35},{"gene":"lifesteal","grade":4,"steps":[0,1,0,5,4],"order":36},{"gene":"reflection","grade":4,"steps":[0,1,2,1,3],"order":37},{"gene":"regeneration","grade":4,"steps":[0,1,0,1,2],"order":38},{"gene":"comboSpeed","grade":4,"steps":[0,1,2,3,4],"order":39},{"gene":"focus","grade":4,"steps":[0,2,0,1,5],"order":40},{"gene":"healer","grade":2,"steps":[0,2,1],"order":6},{"gene":"secretion","grade":2,"steps":[0,1,3],"order":3},{"gene":"rangedPower","grade":2,"steps":[0,0,2],"order":4},{"gene":"rangedSpeed","grade":2,"steps":[0,0,4],"order":5},{"gene":"healPower","grade":2,"steps":[0,4,4],"order":7}];
+  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.steps=entry.steps;gene.order=entry.order;if(entry.retired)gene.retired=true;if(gene.grade<=2)gene.price/=2;}
+  const catalog=genes.filter(gene=>!gene.retired).sort((a,b)=>a.grade-b.grade||a.order-b.order);
 
   const boardRadii=[2,3,4,5],profiles=new Map(),shapeCache=new Map();
   function boardRadius(level){return Number.isInteger(level)&&level>=1&&level<=4?boardRadii[level-1]:Infinity;}
@@ -317,7 +318,7 @@ const ATTRIBUTE_DNA = (() => {
   function stats(pieces){
     const n=weights(pieces),c=counts(pieces),gather=!!c.gather;
     return {...dnaCombatStats(c,n),gatherCount:c.gather||0,antennaCount:c.antenna||0,
-      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,
+      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(2*c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,
       harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),
       vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,
       loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0};
@@ -356,13 +357,16 @@ function cloneDna(dna) {
 
 function validateDna(dna, nestLevel, budget) {
   if (!dna || dna.version !== 3 || !Array.isArray(dna.pieces)) return null;
-  let gatherCount = 0;
+  const organs = new Set();
   for (const piece of dna.pieces) {
     const gene = ATTRIBUTE_DNA.lookup.get(piece?.gene);
-    if (!gene) return null;
+    if (!gene || gene.retired) return null;
     if (piece.grade !== gene.grade || !Array.isArray(piece.shape) ||
         JSON.stringify(piece.shape) !== JSON.stringify(ATTRIBUTE_DNA.shape(gene, gene.grade))) return null;
-    if (piece.gene === "gather" && ++gatherCount > 1) return null;
+    if (gene.category === "organ") {
+      if (organs.has(gene.id)) return null;
+      organs.add(gene.id);
+    }
   }
   const result = ATTRIBUTE_DNA.validate({ ...dna, level: nestLevel, budget: Math.min(999999999, budget) });
   if (!result || !ATTRIBUTE_DNA.trace(result.pieces, nestLevel).valid || ATTRIBUTE_DNA.price(result.pieces) > budget) return null;
@@ -405,7 +409,16 @@ function dnaCanMove(agent, x, y, colonies) {
     nextDistance < distanceFromHome(agent.x, agent.y);
 }
 
-return { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove };
+// The cheapest productive DNA design, not an empty non-gathering body.
+// Keep recovery checks tied to the current catalog and validation rules.
+function basicGathererDna(nestLevel = 1) {
+  const gene = ATTRIBUTE_DNA.lookup.get("gather");
+  const design = { version: 3, level: nestLevel, budget: 999999999,
+    pieces: [{ gene: gene.id, grade: gene.grade, rotation: 0, shape: [...gene.steps] }] };
+  return validateDna(design, nestLevel, design.budget);
+}
+
+return { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, basicGathererDna };
 })();
 modules["server/world-size.mjs"] = (() => {
 const WORLD_SIZE = 160;
@@ -4061,7 +4074,7 @@ const SIMULATION_STATS = Object.freeze([
   ["accuracy", "정밀", "공격"], ["evasion", "회피", "방어"], ["parry", "패링", "방어"],
   ["block", "블록", "방어"], ["blockPower", "블록 경감", "방어"], ["counter", "반격 확률", "반격"],
   ["counterPower", "반격 위력", "반격"], ["tenacity", "강인함", "생존"], ["stun", "기절 확률", "제어"],
-  ["stunDuration", "기절 시간", "제어"], ["drain", "흡혈", "생존"]
+  ["stunDuration", "기절 시간", "제어"], ["drain", "흡혈", "생존"], ["healPower", "치유량", "생존"]
 ].map(([key, label, group]) => Object.freeze({ key, label, group })));
 
 const DEFAULT_SIMULATION_RULES = Object.freeze({ ...DNA_COMBAT_RULES,
@@ -4120,7 +4133,7 @@ function normalizeBuild(input) {
     if (!Object.hasOwn(organs, key)) throw new TypeError("Unknown organ: " + key);
     if (["attack", "ranged", "heal"].includes(key)) {
       const count = typeof value === "boolean" ? Number(value) : value;
-      if (!Number.isSafeInteger(count) || count < 0) throw new RangeError("Organ count must be a nonnegative safe integer");
+      if (!Number.isSafeInteger(count) || count < 0 || count > 1) throw new RangeError("Organ count must be a nonnegative safe integer");
       organs[key] = count;
     } else {
       if (typeof value !== "boolean") throw new TypeError("Legacy armor and legs must be boolean");
@@ -4144,7 +4157,7 @@ function derive(build, rules) {
   const dna = { ...dnaCombatStats(counts, counts, rules), movement: .25, vision: 1, roaming: true, healing: build.healing };
   const interval = speed => speed > 0 ? 1 / speed : Infinity;
   const result = { dna, HP: dna.health, health: dna.health, speed: dna.movement, loadedSpeed: dna.movement * .75, vision: dna.vision,
-    healing: dna.healing, attackPower: dna.meleePower, defense: dna.armor, meleePower: dna.meleePower, rangedPower: dna.rangedPower,
+    healing: dna.healing, healPower: dna.healPower, attackPower: dna.meleePower, defense: dna.armor, meleePower: dna.meleePower, rangedPower: dna.rangedPower,
     attackSpeed: dna.meleeSpeed, meleeSpeed: dna.meleeSpeed, rangedSpeed: dna.rangedSpeed,
     attackInterval: interval(dna.meleeSpeed), rangedAttackInterval: interval(dna.rangedSpeed),
     targetAttackSpeed: dna.meleeSpeed, targetRangedSpeed: dna.rangedSpeed, windup: dna.focus, hitGap: dna.comboSpeed,
@@ -21841,7 +21854,7 @@ for (const side of sides) {
   card.append(node("h2", builds[side].name));
   const organs = node("div", null, "organs");
   for (const [key,label] of [["attack","칼날"],["heal","치유기관"],["ranged","분비기관"]]) {
-    const input = number(builds[side].organs[key], 0, Number.MAX_SAFE_INTEGER, 1);
+    const input = number(builds[side].organs[key], 0, 1, 1);
     control(organs, label, input); input.addEventListener("change", () => { builds[side].organs[key] = Number(input.value); changed(); }); inputs[side][key] = input;
   }
   card.append(organs); elements[side + "Pieces"] = node("output", null, "pieces"); card.append(elements[side + "Pieces"]);
@@ -21881,10 +21894,10 @@ const curvePanel = node("section", null, "panel"); curvePanel.append(node("h2", 
 const curveControls = node("div", null, "controls");
 elements.curveSide = control(curveControls, "설계", select([["left","왼쪽"],["right","오른쪽"]], "left"));
 elements.curveStat = control(curveControls, "투자 속성", select(SIMULATION_STATS.map(stat => [stat.key,stat.label]), "power"));
-const curveMetrics = [["attackPower","근접 공격력"],["rangedPower","원거리 공격력"],["health","HP"],["defense","방어력"],["attackSpeed","근접 공속(회/초)"],["rangedSpeed","원거리 공속(회/초)"],["windup","준비(초)"],["hitCount","타수"],["hitGap","간격(초)"],["followupMultiplier","후속타 배율"],["flatPenetration","고정 관통"],["armorPenetration","비율 관통"],["critChance","치명 확률"],["critMultiplier","치명 배율"],["accuracy","정밀"],["evasion","회피 확률"],["parry","패링 확률"],["block","블록 확률"],["blockReduction","블록 경감"],["counter","반격 확률"],["counterMultiplier","반격 배율"],["tenacity","강인함"],["stunChance","기절 확률"],["stunDuration","기절 시간(초)"],["drain","흡혈 비율"]];
+const curveMetrics = [["attackPower","근접 공격력"],["rangedPower","원거리 공격력"],["health","HP"],["defense","방어력"],["attackSpeed","근접 공속(회/초)"],["rangedSpeed","원거리 공속(회/초)"],["windup","준비(초)"],["hitCount","타수"],["hitGap","간격(초)"],["followupMultiplier","후속타 배율"],["flatPenetration","고정 관통"],["armorPenetration","비율 관통"],["critChance","치명 확률"],["critMultiplier","치명 배율"],["accuracy","정밀"],["evasion","회피 확률"],["parry","패링 확률"],["block","블록 확률"],["blockReduction","블록 경감"],["counter","반격 확률"],["counterMultiplier","반격 배율"],["tenacity","강인함"],["stunChance","기절 확률"],["stunDuration","기절 시간(초)"],["drain","흡혈 비율"],["healPower","치유량"]];
 elements.curveMetric = control(curveControls, "실효 수치", select(curveMetrics,"attackPower")); curvePanel.append(curveControls);
 elements.curve = node("canvas"); elements.curve.width = 800; elements.curve.height = 250; elements.curve.setAttribute("aria-label","투자 0부터 80조각까지 실제 파생 수치 곡선"); curvePanel.append(elements.curve); elements.curveCaption = node("output"); curvePanel.append(elements.curveCaption); main.append(curvePanel);
-const curveDefaults = {power:"attackPower",rangedPower:"rangedPower",rangedHaste:"rangedSpeed",vitality:"health",armor:"defense",flatPen:"flatPenetration",percentPen:"armorPenetration",haste:"attackSpeed",focus:"windup",multiHit:"hitCount",hitSpeed:"hitGap",combo:"followupMultiplier",crit:"critChance",critPower:"critMultiplier",accuracy:"accuracy",evasion:"evasion",parry:"parry",block:"block",blockPower:"blockReduction",counter:"counter",counterPower:"counterMultiplier",tenacity:"tenacity",stun:"stunChance",stunDuration:"stunDuration",drain:"drain"};
+const curveDefaults = {power:"attackPower",rangedPower:"rangedPower",rangedHaste:"rangedSpeed",vitality:"health",armor:"defense",flatPen:"flatPenetration",percentPen:"armorPenetration",haste:"attackSpeed",focus:"windup",multiHit:"hitCount",hitSpeed:"hitGap",combo:"followupMultiplier",crit:"critChance",critPower:"critMultiplier",accuracy:"accuracy",evasion:"evasion",parry:"parry",block:"block",blockPower:"blockReduction",counter:"counter",counterPower:"counterMultiplier",tenacity:"tenacity",stun:"stunChance",stunDuration:"stunDuration",drain:"drain",healPower:"healPower"};
 elements.curveStat.addEventListener("change", () => { elements.curveMetric.value=curveDefaults[elements.curveStat.value];drawCurve(); });
 for (const key of ["curveSide","curveMetric"]) elements[key].addEventListener("change", drawCurve);
 const curveObserver = new ResizeObserver(drawCurve); curveObserver.observe(elements.curve);
@@ -21948,7 +21961,7 @@ function render() {
       const reaction = agent?.combat?.lastReaction, event = agent?.combat?.lastEvent;
       const labels = {dodge:"회피",parry:"패링",block:"블록",stun:"기절"};
       elements[side+"Reaction"].textContent = !agent ? "" : agent.health <= 0 ? "사망" : (agent.combat?.stunnedUntil || agent.dnaStunnedUntil || 0) > trial.time ? "기절" : reaction && trial.time - reaction.at < .65 ? labels[reaction.kind] || "" : event?.kind === "counter" && trial.time - event.at < .45 ? "반격" : agent.attack && trial.time < agent.attack.hitAt ? "공격 준비" : "";
-      const values=[["근접 공격력",stats.attackPower.toFixed(2)],["원거리 공격력",stats.rangedPower.toFixed(2)],["방어",stats.defense.toFixed(2)],["근접 공속",stats.attackSpeed.toFixed(2)+"/초"],["원거리 공속",stats.rangedSpeed.toFixed(2)+"/초"],["준비 / 후딜",stats.windup.toFixed(2)+" / "+stats.recovery.toFixed(2)+"초"],["연타 / 간격",stats.hitCount+"타 / "+stats.hitGap.toFixed(2)+"초"],["후속타",percent(stats.followupMultiplier)],["관통",stats.flatPenetration.toFixed(1)+" + "+percent(stats.armorPenetration)],["치명",percent(stats.critChance)+" ×"+stats.critMultiplier.toFixed(2)],["정밀 / 회피",percent(stats.accuracy)+" / "+percent(stats.evasion)],["패링 / 블록",percent(stats.parry)+" / "+percent(stats.block)],["블록 경감",percent(stats.blockReduction)],["반격",percent(stats.counter)+" ×"+stats.counterMultiplier.toFixed(2)],["강인함",percent(stats.tenacity)],["기절 / 타격당",percent(stats.stunChance)+" / "+percent(stats.stunChancePerHit)],["기절 시간",stats.stunDuration.toFixed(2)+"초"],["흡혈",percent(stats.drain)]];
+      const values=[["근접 공격력",stats.attackPower.toFixed(2)],["원거리 공격력",stats.rangedPower.toFixed(2)],["방어",stats.defense.toFixed(2)],["근접 공속",stats.attackSpeed.toFixed(2)+"/초"],["원거리 공속",stats.rangedSpeed.toFixed(2)+"/초"],["준비 / 후딜",stats.windup.toFixed(2)+" / "+stats.recovery.toFixed(2)+"초"],["연타 / 간격",stats.hitCount+"타 / "+stats.hitGap.toFixed(2)+"초"],["후속타",percent(stats.followupMultiplier)],["관통",stats.flatPenetration.toFixed(1)+" + "+percent(stats.armorPenetration)],["치명",percent(stats.critChance)+" ×"+stats.critMultiplier.toFixed(2)],["정밀 / 회피",percent(stats.accuracy)+" / "+percent(stats.evasion)],["패링 / 블록",percent(stats.parry)+" / "+percent(stats.block)],["블록 경감",percent(stats.blockReduction)],["반격",percent(stats.counter)+" ×"+stats.counterMultiplier.toFixed(2)],["강인함",percent(stats.tenacity)],["기절 / 타격당",percent(stats.stunChance)+" / "+percent(stats.stunChancePerHit)],["기절 시간",stats.stunDuration.toFixed(2)+"초"],["흡혈",percent(stats.drain)],["치유량",stats.healPower.toFixed(2)]];
       elements[side+"Derived"].replaceChildren(...values.flatMap(([label,value])=>[node("dt",label),node("dd",value)]));
     } catch(error) { elements.status.textContent=settingError(error); }
   }
