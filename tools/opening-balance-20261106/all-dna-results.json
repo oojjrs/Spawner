@@ -1,0 +1,1863 @@
+{
+  "profiles": {
+    "basic": {
+      "version": 3,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "shape": [
+            0,
+            1
+          ],
+          "rotation": 0
+        }
+      ],
+      "budget": 9999,
+      "level": 1
+    },
+    "moderate": {
+      "version": 3,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "shape": [
+            0,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "rotation": 3
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "rotation": 4
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "shape": [
+            0,
+            4
+          ],
+          "rotation": 0
+        }
+      ],
+      "budget": 9999,
+      "level": 1
+    },
+    "high": {
+      "version": 3,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "shape": [
+            0,
+            1
+          ],
+          "rotation": 0
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "rotation": 3
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ],
+          "rotation": 4
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "rotation": 5
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "shape": [
+            0,
+            5
+          ],
+          "rotation": 1
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "shape": [
+            0,
+            2
+          ],
+          "rotation": 4
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "shape": [
+            0,
+            0
+          ],
+          "rotation": 1
+        }
+      ],
+      "budget": 9999,
+      "level": 1
+    }
+  },
+  "results": [
+    {
+      "seed": 13,
+      "tribe": "bean",
+      "policy": "moderate",
+      "cost": 28,
+      "stats": {
+        "bladeCount": 0,
+        "secretionCount": 0,
+        "healerCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 20,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0,
+        "gatherCount": 1,
+        "antennaCount": 0,
+        "capacity": 3,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.04,
+        "roaming": false,
+        "loadSpeed": 75
+      },
+      "history": [
+        {
+          "seconds": 60,
+          "delivered": 9,
+          "points": 11,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 120,
+          "delivered": 30,
+          "points": 32,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 180,
+          "delivered": 39,
+          "points": 41,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 240,
+          "delivered": 70,
+          "points": 72,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 300,
+          "delivered": 79,
+          "points": 1,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 360,
+          "delivered": 106,
+          "points": 28,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 420,
+          "delivered": 139,
+          "points": 61,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 480,
+          "delivered": 172,
+          "points": 94,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 540,
+          "delivered": 202,
+          "points": 124,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 600,
+          "delivered": 232,
+          "points": 154,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        }
+      ],
+      "upgradeAt": 300,
+      "defenseBudgetAt": 450,
+      "births": 1,
+      "failures": []
+    },
+    {
+      "seed": 13,
+      "tribe": "spore",
+      "policy": "moderate",
+      "cost": 28,
+      "stats": {
+        "bladeCount": 0,
+        "secretionCount": 0,
+        "healerCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 20,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0,
+        "gatherCount": 1,
+        "antennaCount": 0,
+        "capacity": 3,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.04,
+        "roaming": false,
+        "loadSpeed": 75
+      },
+      "history": [
+        {
+          "seconds": 60,
+          "delivered": 2,
+          "points": 4,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 120,
+          "delivered": 13,
+          "points": 15,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 180,
+          "delivered": 35,
+          "points": 37,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 240,
+          "delivered": 53,
+          "points": 55,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 300,
+          "delivered": 64,
+          "points": 66,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 360,
+          "delivered": 84,
+          "points": 6,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 420,
+          "delivered": 106,
+          "points": 28,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 480,
+          "delivered": 128,
+          "points": 50,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 540,
+          "delivered": 152,
+          "points": 74,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 600,
+          "delivered": 178,
+          "points": 100,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        }
+      ],
+      "upgradeAt": 345,
+      "defenseBudgetAt": 555,
+      "births": 1,
+      "failures": []
+    },
+    {
+      "seed": 13,
+      "tribe": "pebble",
+      "policy": "moderate",
+      "cost": 28,
+      "stats": {
+        "bladeCount": 0,
+        "secretionCount": 0,
+        "healerCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 20,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0,
+        "gatherCount": 1,
+        "antennaCount": 0,
+        "capacity": 3,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.04,
+        "roaming": false,
+        "loadSpeed": 75
+      },
+      "history": [
+        {
+          "seconds": 60,
+          "delivered": 6,
+          "points": 8,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 120,
+          "delivered": 26,
+          "points": 28,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 180,
+          "delivered": 50,
+          "points": 52,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 240,
+          "delivered": 56,
+          "points": 58,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 300,
+          "delivered": 78,
+          "points": 20,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 360,
+          "delivered": 108,
+          "points": 50,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 420,
+          "delivered": 136,
+          "points": 78,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 480,
+          "delivered": 166,
+          "points": 108,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 540,
+          "delivered": 194,
+          "points": 136,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 600,
+          "delivered": 224,
+          "points": 166,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        }
+      ],
+      "upgradeAt": 255,
+      "defenseBudgetAt": 420,
+      "births": 1,
+      "failures": []
+    },
+    {
+      "seed": 13,
+      "tribe": "spring",
+      "policy": "moderate",
+      "cost": 28,
+      "stats": {
+        "bladeCount": 0,
+        "secretionCount": 0,
+        "healerCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 20,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0,
+        "gatherCount": 1,
+        "antennaCount": 0,
+        "capacity": 3,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.04,
+        "roaming": false,
+        "loadSpeed": 75
+      },
+      "history": [
+        {
+          "seconds": 60,
+          "delivered": 5,
+          "points": 7,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 120,
+          "delivered": 18,
+          "points": 20,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 180,
+          "delivered": 38,
+          "points": 40,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 240,
+          "delivered": 49,
+          "points": 51,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 300,
+          "delivered": 68,
+          "points": 70,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 360,
+          "delivered": 80,
+          "points": 2,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 420,
+          "delivered": 98,
+          "points": 20,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 480,
+          "delivered": 120,
+          "points": 42,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 540,
+          "delivered": 139,
+          "points": 61,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 600,
+          "delivered": 159,
+          "points": 81,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        }
+      ],
+      "upgradeAt": 360,
+      "defenseBudgetAt": 585,
+      "births": 1,
+      "failures": []
+    },
+    {
+      "seed": 413,
+      "tribe": "bean",
+      "policy": "moderate",
+      "cost": 28,
+      "stats": {
+        "bladeCount": 0,
+        "secretionCount": 0,
+        "healerCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 20,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0,
+        "gatherCount": 1,
+        "antennaCount": 0,
+        "capacity": 3,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.04,
+        "roaming": false,
+        "loadSpeed": 75
+      },
+      "history": [
+        {
+          "seconds": 60,
+          "delivered": 10,
+          "points": 12,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 120,
+          "delivered": 36,
+          "points": 38,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 180,
+          "delivered": 54,
+          "points": 56,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 240,
+          "delivered": 74,
+          "points": 76,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 300,
+          "delivered": 96,
+          "points": 18,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 360,
+          "delivered": 132,
+          "points": 54,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 420,
+          "delivered": 170,
+          "points": 92,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 480,
+          "delivered": 208,
+          "points": 130,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 540,
+          "delivered": 248,
+          "points": 170,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 600,
+          "delivered": 282,
+          "points": 204,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        }
+      ],
+      "upgradeAt": 270,
+      "defenseBudgetAt": 405,
+      "births": 1,
+      "failures": []
+    },
+    {
+      "seed": 413,
+      "tribe": "spore",
+      "policy": "moderate",
+      "cost": 28,
+      "stats": {
+        "bladeCount": 0,
+        "secretionCount": 0,
+        "healerCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 20,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0,
+        "gatherCount": 1,
+        "antennaCount": 0,
+        "capacity": 3,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.04,
+        "roaming": false,
+        "loadSpeed": 75
+      },
+      "history": [
+        {
+          "seconds": 60,
+          "delivered": 2,
+          "points": 4,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 120,
+          "delivered": 22,
+          "points": 24,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 180,
+          "delivered": 39,
+          "points": 41,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 240,
+          "delivered": 56,
+          "points": 58,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 300,
+          "delivered": 71,
+          "points": 73,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 360,
+          "delivered": 91,
+          "points": 13,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 420,
+          "delivered": 119,
+          "points": 41,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 480,
+          "delivered": 141,
+          "points": 63,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 540,
+          "delivered": 169,
+          "points": 91,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 600,
+          "delivered": 193,
+          "points": 115,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        }
+      ],
+      "upgradeAt": 330,
+      "defenseBudgetAt": 525,
+      "births": 1,
+      "failures": []
+    },
+    {
+      "seed": 413,
+      "tribe": "pebble",
+      "policy": "moderate",
+      "cost": 28,
+      "stats": {
+        "bladeCount": 0,
+        "secretionCount": 0,
+        "healerCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 20,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0,
+        "gatherCount": 1,
+        "antennaCount": 0,
+        "capacity": 3,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.04,
+        "roaming": false,
+        "loadSpeed": 75
+      },
+      "history": [
+        {
+          "seconds": 60,
+          "delivered": 0,
+          "points": 2,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 120,
+          "delivered": 13,
+          "points": 15,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 180,
+          "delivered": 27,
+          "points": 29,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 240,
+          "delivered": 38,
+          "points": 40,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 300,
+          "delivered": 56,
+          "points": 58,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 360,
+          "delivered": 68,
+          "points": 10,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 420,
+          "delivered": 84,
+          "points": 26,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 480,
+          "delivered": 108,
+          "points": 50,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 540,
+          "delivered": 126,
+          "points": 68,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 600,
+          "delivered": 150,
+          "points": 92,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        }
+      ],
+      "upgradeAt": 330,
+      "defenseBudgetAt": 570,
+      "births": 1,
+      "failures": []
+    },
+    {
+      "seed": 413,
+      "tribe": "spring",
+      "policy": "moderate",
+      "cost": 28,
+      "stats": {
+        "bladeCount": 0,
+        "secretionCount": 0,
+        "healerCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 20,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0,
+        "gatherCount": 1,
+        "antennaCount": 0,
+        "capacity": 3,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.04,
+        "roaming": false,
+        "loadSpeed": 75
+      },
+      "history": [
+        {
+          "seconds": 60,
+          "delivered": 3,
+          "points": 5,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 120,
+          "delivered": 11,
+          "points": 13,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 180,
+          "delivered": 20,
+          "points": 22,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 240,
+          "delivered": 30,
+          "points": 32,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 300,
+          "delivered": 41,
+          "points": 43,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 360,
+          "delivered": 52,
+          "points": 54,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 420,
+          "delivered": 62,
+          "points": 64,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 480,
+          "delivered": 69,
+          "points": 71,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 540,
+          "delivered": 80,
+          "points": 2,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 600,
+          "delivered": 93,
+          "points": 15,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        }
+      ],
+      "upgradeAt": 525,
+      "defenseBudgetAt": null,
+      "births": 1,
+      "failures": []
+    },
+    {
+      "seed": 731047,
+      "tribe": "bean",
+      "policy": "moderate",
+      "cost": 28,
+      "stats": {
+        "bladeCount": 0,
+        "secretionCount": 0,
+        "healerCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 20,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0,
+        "gatherCount": 1,
+        "antennaCount": 0,
+        "capacity": 3,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.04,
+        "roaming": false,
+        "loadSpeed": 75
+      },
+      "history": [
+        {
+          "seconds": 60,
+          "delivered": 7,
+          "points": 9,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 120,
+          "delivered": 18,
+          "points": 20,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 180,
+          "delivered": 30,
+          "points": 32,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 240,
+          "delivered": 52,
+          "points": 54,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 300,
+          "delivered": 73,
+          "points": 75,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 360,
+          "delivered": 97,
+          "points": 19,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 420,
+          "delivered": 124,
+          "points": 46,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 480,
+          "delivered": 151,
+          "points": 73,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 540,
+          "delivered": 184,
+          "points": 106,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 600,
+          "delivered": 214,
+          "points": 136,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        }
+      ],
+      "upgradeAt": 330,
+      "defenseBudgetAt": 495,
+      "births": 1,
+      "failures": []
+    },
+    {
+      "seed": 731047,
+      "tribe": "spore",
+      "policy": "moderate",
+      "cost": 28,
+      "stats": {
+        "bladeCount": 0,
+        "secretionCount": 0,
+        "healerCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 20,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0,
+        "gatherCount": 1,
+        "antennaCount": 0,
+        "capacity": 3,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.04,
+        "roaming": false,
+        "loadSpeed": 75
+      },
+      "history": [
+        {
+          "seconds": 60,
+          "delivered": 2,
+          "points": 4,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 120,
+          "delivered": 21,
+          "points": 23,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 180,
+          "delivered": 33,
+          "points": 35,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 240,
+          "delivered": 52,
+          "points": 54,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 300,
+          "delivered": 69,
+          "points": 71,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 1
+        },
+        {
+          "seconds": 360,
+          "delivered": 83,
+          "points": 5,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 420,
+          "delivered": 109,
+          "points": 31,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 480,
+          "delivered": 128,
+          "points": 50,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 540,
+          "delivered": 152,
+          "points": 74,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        },
+        {
+          "seconds": 600,
+          "delivered": 173,
+          "points": 95,
+          "alive": 5,
+          "dnaAlive": 5,
+          "level": 2
+        }
+      ],
+      "upgradeAt": 345,
+      "defenseBudgetAt": 555,
+      "births": 1,
+      "failures": []
+    },
+    {
+      "seed": 731047,
+      "tribe": "pebble",
+      "policy": "moderate",
+      "cost": 28,
+      "stats": {
+        "bladeCount": 0,
+        "secretionCount": 0,
+        "healerCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 20,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0,
+        "gatherCount": 1,
+        "antennaCount": 0,
+        "capacity": 3,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.04,
+        "roaming": false,
+        "loadSpeed": 75
+      },
+      "history": [
+        {
+          "seconds": 60,
+          "delivered": 0,
+          "points": 2,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 120,
+          "delivered": 9,
+          "points": 11,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 180,
+          "delivered": 22,
+          "points": 24,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 240,
+          "delivered": 27,
+          "points": 29,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 300,
+          "delivered": 42,
+          "points": 44,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 360,
+          "delivered": 51,
+          "points": 53,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 420,
+          "delivered": 60,
+          "points": 2,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 480,
+          "delivered": 75,
+          "points": 17,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 540,
+          "delivered": 93,
+          "points": 35,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 600,
+          "delivered": 108,
+          "points": 50,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        }
+      ],
+      "upgradeAt": 390,
+      "defenseBudgetAt": null,
+      "births": 1,
+      "failures": []
+    },
+    {
+      "seed": 731047,
+      "tribe": "spring",
+      "policy": "moderate",
+      "cost": 28,
+      "stats": {
+        "bladeCount": 0,
+        "secretionCount": 0,
+        "healerCount": 0,
+        "melee": false,
+        "ranged": false,
+        "meleePower": 0,
+        "meleeSpeed": 0,
+        "rangedPower": 0,
+        "rangedSpeed": 0,
+        "healer": false,
+        "health": 20,
+        "power": 0,
+        "hits": 0,
+        "speed": 0,
+        "armor": 0,
+        "parry": 0,
+        "block": 0,
+        "evasion": 0,
+        "comboPower": 0,
+        "critical": 0,
+        "criticalPower": 0,
+        "accuracy": 0,
+        "penetration": 0,
+        "blockPower": 50,
+        "counter": 0,
+        "counterPower": 0,
+        "tenacity": 0,
+        "reduction": 0,
+        "healing": 0,
+        "stun": 0,
+        "stunTime": 0,
+        "bleed": 0,
+        "bleedPower": 0,
+        "area": 0,
+        "areaPower": 0,
+        "lifesteal": 0,
+        "reflection": 0,
+        "regeneration": 0,
+        "comboSpeed": 0,
+        "focus": 0,
+        "gatherCount": 1,
+        "antennaCount": 0,
+        "capacity": 3,
+        "harvest": 1,
+        "harvestTime": 4,
+        "movement": 0.25,
+        "vision": 1,
+        "scale": 1.04,
+        "roaming": false,
+        "loadSpeed": 75
+      },
+      "history": [
+        {
+          "seconds": 60,
+          "delivered": 5,
+          "points": 7,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 120,
+          "delivered": 22,
+          "points": 24,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 180,
+          "delivered": 39,
+          "points": 41,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 240,
+          "delivered": 59,
+          "points": 61,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 1
+        },
+        {
+          "seconds": 300,
+          "delivered": 78,
+          "points": 0,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 360,
+          "delivered": 100,
+          "points": 22,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 420,
+          "delivered": 120,
+          "points": 42,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 480,
+          "delivered": 142,
+          "points": 64,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 540,
+          "delivered": 164,
+          "points": 86,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        },
+        {
+          "seconds": 600,
+          "delivered": 187,
+          "points": 109,
+          "alive": 4,
+          "dnaAlive": 4,
+          "level": 2
+        }
+      ],
+      "upgradeAt": 300,
+      "defenseBudgetAt": 525,
+      "births": 1,
+      "failures": []
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 export const CONQUEST_PACING = Object.freeze({ quietUntil:120, guidanceAt:160, neutralConflictAt:300, tribeContactAt:420,
   expertLevelFourAt:600, aiLevelFourAt:1200, activePopulation:36, inefficientPopulation:70,
-  workerShare:Object.freeze([.8,.65,.45,.3]), nestCosts:Object.freeze([80,400,2000,null]),
+  workerShare:Object.freeze([.8,.65,.45,.3]), nestCosts:Object.freeze([20,400,2000,null]),
   attributeCosts:Object.freeze([0,0,8,16,24]), aiUpgradeAt:Object.freeze([0,270,690,1200]),
   productionInterval:3, frontierSamples:48, preferredScouts:4 });
 

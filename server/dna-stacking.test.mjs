@@ -12,17 +12,17 @@ const build=n=>({version:3,pieces:[0,2,4,3,5,1].slice(0,n).map(rotation=>({gene:
 test("stack prices are order independent and every split pays extra body bases",()=>{
   assert.equal(birthCost({dna:build(0)},"bean"),3);
   for(let n=1;n<=6;n++){
-    assert.equal(birthCost({dna:build(n)},"bean"),3+10*n);
-    if(n>1)assert.ok(birthCost({dna:build(n)},"bean")<13*n);
+    assert.equal(birthCost({dna:build(n)},"bean"),3+5*n);
+    if(n>1)assert.ok(birthCost({dna:build(n)},"bean")<8*n);
     for(let left=1;left<n;left++)assert.equal(birthCost({dna:build(left)},"bean")+birthCost({dna:build(n-left)},"bean")-birthCost({dna:build(n)},"bean"),3);
   }
   const mixed=[piece("gather"),piece("antenna"),piece("rangedPower"),piece("health")];
   assert.equal(M.price(mixed),M.price([...mixed].reverse()));
-  assert.equal(M.price([piece("antenna")]),14);
+  assert.equal(M.price([piece("antenna")]),7);
   assert.equal(M.price([piece("rangedPower")]),10);
   assert.equal(validateDna(build(6),1,60),null);
   assert.deepEqual(M.validate(build(6)),build(6));
-  assert.equal(validateDna(build(4),1,100),null);assert.equal(validateDna(build(5),1,100),null);assert.equal(birthCost({dna:build(5)},"bean"),53);
+  assert.equal(validateDna(build(4),1,100),null);assert.equal(validateDna(build(5),1,100),null);assert.equal(birthCost({dna:build(5)},"bean"),28);
 });
 
 test("physical organ copies preserve basic role throughput without extra hits or attack rate",()=>{
@@ -49,11 +49,11 @@ function gameFixture(n){
   const colony={id:1,ownerId:"stack-test",x:40,y:40,tribe:"bean",occupiedCells};
   const environment={simSeconds:0,world:{seed:13,generationVersion:13,terrain:new Uint8Array(320*320).fill(4),hazards:new Uint8Array(320*320)},colonies:[colony],games:new Map(),food:new Map(),foodSpots:new Map()};
   const game=createGame(environment,colony);environment.games.set(colony.ownerId,game);
-  const saved=JSON.parse(game.save());saved.state.evolutionPoints=500-(3+10*n);saved.state.nestLevel=2;
+  const saved=JSON.parse(game.save());saved.state.evolutionPoints=500-(3+5*n);saved.state.nestLevel=2;
   saved.state.templates=[{id:1,name:"stack",slots:[],attributeLevels:{},dna:build(n)}];
-  saved.state.agents=[{...saved.state.agents[0],dna:build(n),templateId:1,slots:[],attributeLevels:{},cost:3+10*n}];
+  saved.state.agents=[{...saved.state.agents[0],dna:build(n),templateId:1,slots:[],attributeLevels:{},cost:3+5*n}];
   game.restore(JSON.stringify(saved));
-  const agent=game.agents[0];assert.equal(game.snapshot().evolutionPoints,500-(3+10*n));assert.deepEqual(agent.dna,build(n));
+  const agent=game.agents[0];assert.equal(game.snapshot().evolutionPoints,500-(3+5*n));assert.deepEqual(agent.dna,build(n));
   const food={key:"38,40",x:38,y:40,resourceType:"clay",kind:"resource",amount:20,initialAmount:20};environment.food.set(food.key,food);
   Object.assign(agent,{x:38,y:40,renderFromX:38,renderFromY:40,birth:null,level:1,activeSlots:[...agent.slots],moveStartedAt:0,moveDuration:0,mode:"harvest",harvestReady:1,harvestPrepared:false,harvestStarted:0,nextDecisionAt:100000,decisionPending:null,utility:{action:"collect",target:{key:food.key,x:38,y:40},plannedCargo:n,route:[]}});
   const tick=at=>{environment.simSeconds=at;game.prepare(at);game.tick(1);};return {game,agent,food,tick,environment};

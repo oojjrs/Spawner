@@ -1,6 +1,6 @@
 import { ATTRIBUTE_DNA } from "./dna.mjs";
 
-export const PLAYER_STARTING_POINTS = 30;
+export const PLAYER_STARTING_POINTS = 50;
 
 export const TRIBE_STARTING_UNITS = Object.freeze({
   bean: Object.freeze([["antenna"], ["strength"], [], []].map(slots => Object.freeze(slots))),

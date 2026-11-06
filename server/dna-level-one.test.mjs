@@ -16,8 +16,8 @@ test("level one has the approved five shapes and unchanged per-grade stat formul
   assert.deepEqual(["blade","secretion"].map(id=>{const g=M.lookup.get(id);return [g.grade,g.steps];}),[[2,[0,1,5]],[2,[0,0,2]]]);
   const pieces=[piece("gather",0),piece("capacity",0),piece("harvestSpeed",0),piece("health",0),piece("movement",0)],stats=M.stats(pieces);
   assert.equal(stats.capacity,2);assert.equal(stats.harvestTime,4/1.1);assert.equal(stats.health,20);assert.equal(stats.movement,.29);
-  assert.equal(M.price(pieces),30);assert.equal(birthCost({dna:{pieces}},"bean"),33);
-  for(const id of ["blade","secretion"]){assert.equal(M.price([piece(id,0)]),14);assert.equal(validateDna({version:3,pieces:[piece(id,0)],budget:100,level:1},1,100),null);}
+  assert.equal(M.price(pieces),17);assert.equal(birthCost({dna:{pieces}},"bean"),20);
+  for(const id of ["blade","secretion"]){assert.equal(M.price([piece(id,0)]),7);assert.equal(validateDna({version:3,pieces:[piece(id,0)],budget:100,level:1},1,100),null);}
 });
 
 test("new designs reject a second gathering organ without restricting other organ copies",()=>{
@@ -31,6 +31,6 @@ test("three approved worker arrangements retain all nineteen board points under 
   for(const [index,entries] of fixtures.entries()){
     const pieces=entries.map(([gene,rotation])=>piece(gene,rotation)),dna={version:3,pieces,budget:100,level:1},trace=M.trace(pieces,1);
     assert.equal(trace.valid,true);assert.equal(trace.occupied.size,19);assert.equal(M.counts(pieces).gather,1);
-    assert.ok(validateDna(dna,1,100));assert.equal(M.price(pieces),[55,50,55][index]);
+    assert.ok(validateDna(dna,1,100));assert.equal(M.price(pieces),[32,29,32][index]);
   }
 });
