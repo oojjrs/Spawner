@@ -1,0 +1,332 @@
+[
+  {
+    "seed": 13,
+    "tribe": "spore",
+    "history": [
+      {
+        "time": 60,
+        "points": 35,
+        "food": 2,
+        "nest": 100,
+        "agents": 5,
+        "soldiers": 0,
+        "combatSeconds": 0
+      },
+      {
+        "time": 120,
+        "points": 24,
+        "food": 11,
+        "nest": 200,
+        "agents": 5,
+        "soldiers": 0,
+        "combatSeconds": 0
+      },
+      {
+        "time": 180,
+        "points": 15,
+        "food": 25,
+        "nest": 200,
+        "agents": 6,
+        "soldiers": 1,
+        "combatSeconds": 0
+      },
+      {
+        "time": 240,
+        "points": 11,
+        "food": 44,
+        "nest": 200,
+        "agents": 7,
+        "soldiers": 2,
+        "combatSeconds": 0
+      },
+      {
+        "time": 300,
+        "points": 37,
+        "food": 70,
+        "nest": 200,
+        "agents": 7,
+        "soldiers": 2,
+        "combatSeconds": 0
+      },
+      {
+        "time": 360,
+        "points": 35,
+        "food": 91,
+        "nest": 198.49999999999994,
+        "agents": 8,
+        "soldiers": 3,
+        "combatSeconds": 8.5
+      },
+      {
+        "time": 420,
+        "points": 34,
+        "food": 113,
+        "nest": 198.49999999999994,
+        "agents": 9,
+        "soldiers": 4,
+        "combatSeconds": 8.5
+      },
+      {
+        "time": 480,
+        "points": 32,
+        "food": 134,
+        "nest": 198.49999999999994,
+        "agents": 10,
+        "soldiers": 5,
+        "combatSeconds": 8.5
+      },
+      {
+        "time": 540,
+        "points": 33,
+        "food": 158,
+        "nest": 198.49999999999994,
+        "agents": 11,
+        "soldiers": 6,
+        "combatSeconds": 15
+      },
+      {
+        "time": 600,
+        "points": 36,
+        "food": 184,
+        "nest": 198.49999999999994,
+        "agents": 12,
+        "soldiers": 7,
+        "combatSeconds": 15
+      }
+    ],
+    "soldierBirths": [
+      150,
+      210,
+      360,
+      420,
+      480,
+      540,
+      600
+    ],
+    "raidEvents": [
+      {
+        "time": 323.75,
+        "id": "beetle:burrow:large:15638:4",
+        "phase": "outbound",
+        "health": 20,
+        "x": 118,
+        "y": 100,
+        "departed": 323.75
+      },
+      {
+        "time": 334.75,
+        "id": "beetle:burrow:large:15638:4",
+        "phase": "active",
+        "health": 20,
+        "x": 118,
+        "y": 111,
+        "departed": 323.75
+      },
+      {
+        "time": 359.5,
+        "id": "beetle:burrow:large:15638:4",
+        "phase": "dead",
+        "health": 0,
+        "x": 116,
+        "y": 112,
+        "departed": 323.75
+      },
+      {
+        "time": 473.75,
+        "id": "beetle:burrow:large:15638:3",
+        "phase": "outbound",
+        "health": 20,
+        "x": 119,
+        "y": 100,
+        "departed": 473.75
+      },
+      {
+        "time": 485.5,
+        "id": "beetle:burrow:large:15638:3",
+        "phase": "active",
+        "health": 20,
+        "x": 120,
+        "y": 110,
+        "departed": 473.75
+      },
+      {
+        "time": 495.75,
+        "id": "beetle:burrow:large:15638:3",
+        "phase": "dead",
+        "health": 0,
+        "x": 120,
+        "y": 112,
+        "departed": 473.75
+      }
+    ],
+    "deaths": [],
+    "failures": [],
+    "upgradeAt": 120,
+    "combatSeconds": 15
+  },
+  {
+    "seed": 413,
+    "tribe": "spore",
+    "history": [
+      {
+        "time": 60,
+        "points": 35,
+        "food": 2,
+        "nest": 100,
+        "agents": 5,
+        "soldiers": 0,
+        "combatSeconds": 0
+      },
+      {
+        "time": 120,
+        "points": 35,
+        "food": 22,
+        "nest": 200,
+        "agents": 5,
+        "soldiers": 0,
+        "combatSeconds": 0
+      },
+      {
+        "time": 180,
+        "points": 19,
+        "food": 29,
+        "nest": 200,
+        "agents": 6,
+        "soldiers": 1,
+        "combatSeconds": 0
+      },
+      {
+        "time": 240,
+        "points": 24,
+        "food": 57,
+        "nest": 200,
+        "agents": 7,
+        "soldiers": 2,
+        "combatSeconds": 0
+      },
+      {
+        "time": 300,
+        "points": 48,
+        "food": 81,
+        "nest": 200,
+        "agents": 7,
+        "soldiers": 2,
+        "combatSeconds": 0
+      },
+      {
+        "time": 360,
+        "points": 51,
+        "food": 107,
+        "nest": 200,
+        "agents": 8,
+        "soldiers": 3,
+        "combatSeconds": 6.5
+      },
+      {
+        "time": 420,
+        "points": 54,
+        "food": 133,
+        "nest": 200,
+        "agents": 9,
+        "soldiers": 4,
+        "combatSeconds": 6.5
+      },
+      {
+        "time": 480,
+        "points": 53,
+        "food": 155,
+        "nest": 200,
+        "agents": 10,
+        "soldiers": 5,
+        "combatSeconds": 6.5
+      },
+      {
+        "time": 540,
+        "points": 54,
+        "food": 179,
+        "nest": 200,
+        "agents": 11,
+        "soldiers": 6,
+        "combatSeconds": 13
+      },
+      {
+        "time": 600,
+        "points": 59,
+        "food": 207,
+        "nest": 200,
+        "agents": 12,
+        "soldiers": 7,
+        "combatSeconds": 13
+      }
+    ],
+    "soldierBirths": [
+      150,
+      195,
+      360,
+      420,
+      480,
+      540,
+      600
+    ],
+    "raidEvents": [
+      {
+        "time": 312.5,
+        "id": "beetle:burrow:large:21324:1",
+        "phase": "outbound",
+        "health": 20,
+        "x": 43,
+        "y": 134,
+        "departed": 312.5
+      },
+      {
+        "time": 332,
+        "id": "beetle:burrow:large:21324:1",
+        "phase": "active",
+        "health": 20,
+        "x": 39,
+        "y": 119,
+        "departed": 312.5
+      },
+      {
+        "time": 343,
+        "id": "beetle:burrow:large:21324:1",
+        "phase": "dead",
+        "health": 0,
+        "x": 38,
+        "y": 118,
+        "departed": 312.5
+      },
+      {
+        "time": 462.5,
+        "id": "beetle:burrow:large:21324:4",
+        "phase": "outbound",
+        "health": 20,
+        "x": 44,
+        "y": 134,
+        "departed": 462.5
+      },
+      {
+        "time": 483.25,
+        "id": "beetle:burrow:large:21324:4",
+        "phase": "active",
+        "health": 20,
+        "x": 39,
+        "y": 119,
+        "departed": 462.5
+      },
+      {
+        "time": 493.5,
+        "id": "beetle:burrow:large:21324:4",
+        "phase": "dead",
+        "health": 0,
+        "x": 38,
+        "y": 118,
+        "departed": 462.5
+      }
+    ],
+    "deaths": [],
+    "failures": [],
+    "upgradeAt": 120,
+    "combatSeconds": 13
+  }
+]

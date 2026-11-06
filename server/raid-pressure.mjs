@@ -18,7 +18,7 @@ export function colonyRaidCadence(seconds, pressure) {
 }
 
 export const COLONY_RAID_PRESSURE = Object.freeze({ openingSeconds:120, nearbySeconds:60, exposedBurrows:2,
-  fastInterval:60, slowInterval:120, arrivalGrace:35, slowArrivalGrace:105, fundingGrace:20, maximumArrivalAt:300 });
+  fastInterval:60, slowInterval:120, arrivalGrace:0, slowArrivalGrace:30, fundingGrace:20, maximumArrivalAt:300 });
 
 export function colonyRaidPressure(delivered, seconds, approaches, firstAt, tribe) {
   const cost = ids => ATTRIBUTE_DNA.cost(ids.map(gene => ({ gene, grade:ATTRIBUTE_DNA.lookup.get(gene).grade })));

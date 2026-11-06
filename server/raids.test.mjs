@@ -218,7 +218,7 @@ test("각 군락이 담당 굴에서 첫 습격을 받고 다음 출정도 자�
     Math.abs(agent.raid.departedAt - departure.time - 135) < 1e-8));
 });
 
-test("느린 입지는 첫 접근을 늦추고 교체 여력에 따라 다른 출정 주기를 유지한다", () => {
+test("초기 출정은 5분대로 제한하고 교체 여력에 따라 다른 출정 주기를 유지한다", () => {
   const outcomes = [];
   for (const delivered of [20,40]) {
     const {room,system} = fixture(false);
@@ -236,7 +236,8 @@ test("느린 입지는 첫 접근을 늦추고 교체 여력에 따라 다른 �
     assert.equal(restored.save().raidCooldowns[0].nextRaidAt, cooldown.nextRaidAt);
     outcomes.push({first,interval:opening.interval});
   }
-  assert.ok(outcomes[0].first > outcomes[1].first);
+  assert.ok(outcomes[0].first >= outcomes[1].first);
+  for (const outcome of outcomes) assert.ok(outcome.first >= 300 && outcome.first <= 330);
   assert.ok(outcomes[0].interval > outcomes[1].interval);
 });
 

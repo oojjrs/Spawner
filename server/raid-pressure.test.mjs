@@ -22,6 +22,15 @@ test("생산이 매우 빠르거나 멈춰도 출정 간격과 첫 도착 유예
   for (const food of [0,1,20,33,10000]) {
     const result = colonyRaidPressure(food, 120, [10,20,30], 120);
     assert.ok(result.interval >= 60 && result.interval <= 120);
-    assert.ok(result.arrivalAt >= 155 && result.arrivalAt <= 300);
+    assert.ok(result.arrivalAt >= 120 && result.arrivalAt <= 300);
   }
+});
+
+// Defense is affordable within five minutes; the old 105-second grace made real
+// first waves wait until almost seven minutes despite their 300-second schedule.
+test("current opening funding grace stays within 5:00–5:30 before actual path travel",()=>{
+ for(const tribe of ["bean","spore","pebble","spring"])for(const food of [0,1,10,20,40,10000]){
+  const result=colonyRaidPressure(food,120,[15,30],300,tribe);
+  assert.ok(result.arrivalAt>=300 && result.arrivalAt<=330);
+ }
 });

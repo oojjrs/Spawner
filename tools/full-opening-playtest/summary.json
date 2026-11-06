@@ -1,0 +1,385 @@
+{
+  "baseline": [
+    {
+      "seed": 13,
+      "tribe": "bean",
+      "secondSoldierAt": 150,
+      "firstRaid": {
+        "outbound": 323.5,
+        "active": 338.75,
+        "dead": 348.25
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 413,
+      "tribe": "bean",
+      "secondSoldierAt": 150,
+      "firstRaid": {
+        "outbound": 325.75,
+        "active": 349.25,
+        "dead": 358.5
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 731047,
+      "tribe": "bean",
+      "secondSoldierAt": 180,
+      "firstRaid": {
+        "outbound": 387.5,
+        "active": 420,
+        "dead": 430.25
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 13,
+      "tribe": "spore",
+      "secondSoldierAt": 210,
+      "firstRaid": {
+        "outbound": 394.25,
+        "active": 407.5,
+        "dead": 421
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 2,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 413,
+      "tribe": "spore",
+      "secondSoldierAt": 195,
+      "firstRaid": {
+        "outbound": 387.5,
+        "active": 408,
+        "dead": 421
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 731047,
+      "tribe": "spore",
+      "secondSoldierAt": 210,
+      "firstRaid": {
+        "outbound": 387.5,
+        "active": 408.5,
+        "dead": 424
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 13,
+      "tribe": "pebble",
+      "secondSoldierAt": 210,
+      "firstRaid": {
+        "outbound": 391.75,
+        "active": 410.25,
+        "dead": 434.5
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 1,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 413,
+      "tribe": "pebble",
+      "secondSoldierAt": 195,
+      "firstRaid": {
+        "outbound": 390,
+        "active": 453,
+        "dead": 461.5
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 731047,
+      "tribe": "pebble",
+      "secondSoldierAt": 255,
+      "firstRaid": {
+        "outbound": 382.5,
+        "active": 422,
+        "dead": 444.25
+      },
+      "nestHealth": 200,
+      "workerDeaths": 1,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 13,
+      "tribe": "spring",
+      "secondSoldierAt": 225,
+      "firstRaid": {
+        "outbound": 391,
+        "active": 409.5,
+        "dead": 420.5
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 413,
+      "tribe": "spring",
+      "secondSoldierAt": 270,
+      "firstRaid": {
+        "outbound": 391,
+        "active": 428.75,
+        "dead": 452.25
+      },
+      "nestHealth": 199.39999999999998,
+      "workerDeaths": 0,
+      "soldierDeaths": 1,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 731047,
+      "tribe": "spring",
+      "secondSoldierAt": 195,
+      "firstRaid": {
+        "outbound": 386.75,
+        "active": 418,
+        "dead": 436.25
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    }
+  ],
+  "adjusted": [
+    {
+      "seed": 13,
+      "tribe": "bean",
+      "secondSoldierAt": 150,
+      "firstRaid": {
+        "outbound": 310.75,
+        "active": 329,
+        "dead": 336.5
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 1,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 413,
+      "tribe": "bean",
+      "secondSoldierAt": 150,
+      "firstRaid": {
+        "outbound": 304.5,
+        "active": 327,
+        "dead": 337.5
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 13,
+      "tribe": "spore",
+      "secondSoldierAt": 210,
+      "firstRaid": {
+        "outbound": 323.75,
+        "active": 334.75,
+        "dead": 359.5
+      },
+      "nestHealth": 198.49999999999994,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 413,
+      "tribe": "spore",
+      "secondSoldierAt": 195,
+      "firstRaid": {
+        "outbound": 312.5,
+        "active": 332,
+        "dead": 343
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 13,
+      "tribe": "pebble",
+      "secondSoldierAt": 210,
+      "firstRaid": {
+        "outbound": 319.25,
+        "active": 342.25,
+        "dead": 355.25
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 413,
+      "tribe": "pebble",
+      "secondSoldierAt": 195,
+      "firstRaid": {
+        "outbound": 315,
+        "active": 342,
+        "dead": 350.5
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 13,
+      "tribe": "spring",
+      "secondSoldierAt": 225,
+      "firstRaid": {
+        "outbound": 316,
+        "active": 331.75,
+        "dead": 362.75
+      },
+      "nestHealth": 200,
+      "workerDeaths": 0,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    },
+    {
+      "seed": 413,
+      "tribe": "spring",
+      "secondSoldierAt": 270,
+      "firstRaid": {
+        "outbound": 316,
+        "active": 354.75,
+        "dead": 380.25
+      },
+      "nestHealth": 199.39999999999998,
+      "workerDeaths": 1,
+      "soldierDeaths": 0,
+      "ending": null,
+      "errors": 0
+    }
+  ],
+  "riskReplay": {
+    "seed": 731047,
+    "tribe": "pebble",
+    "soldierBirths": [
+      150,
+      255,
+      360,
+      420,
+      495,
+      600
+    ],
+    "deaths": [],
+    "failures": [],
+    "raidEvents": [
+      {
+        "time": 311.25,
+        "id": "beetle:burrow:large:1256:3",
+        "phase": "outbound",
+        "health": 20,
+        "x": 138,
+        "y": 8,
+        "departed": 311.25
+      },
+      {
+        "time": 350,
+        "id": "beetle:burrow:large:1256:3",
+        "phase": "active",
+        "health": 20,
+        "x": 117,
+        "y": 17,
+        "departed": 311.25
+      },
+      {
+        "time": 358.5,
+        "id": "beetle:burrow:large:1256:3",
+        "phase": "dead",
+        "health": 0,
+        "x": 117,
+        "y": 16,
+        "departed": 311.25
+      },
+      {
+        "time": 461.25,
+        "id": "beetle:burrow:large:1256:2",
+        "phase": "outbound",
+        "health": 20,
+        "x": 136,
+        "y": 8,
+        "departed": 461.25
+      },
+      {
+        "time": 499,
+        "id": "beetle:burrow:large:1256:2",
+        "phase": "active",
+        "health": 20,
+        "x": 115,
+        "y": 11,
+        "departed": 461.25
+      },
+      {
+        "time": 519.75,
+        "id": "beetle:burrow:large:1256:2",
+        "phase": "dead",
+        "health": 0,
+        "x": 117,
+        "y": 15,
+        "departed": 461.25
+      }
+    ],
+    "final": {
+      "time": 600,
+      "points": 0,
+      "food": 120,
+      "nest": 200,
+      "agents": 10,
+      "soldiers": 6,
+      "combatSeconds": 13
+    }
+  }
+}
