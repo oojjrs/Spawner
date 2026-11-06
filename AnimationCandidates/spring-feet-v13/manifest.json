@@ -1,0 +1,23 @@
+{
+  "status": "approved",
+  "sourceSheet": "water-footplate-walk-sheet.png",
+  "grid": [
+    4,
+    2
+  ],
+  "cellSize": [
+    443,
+    443
+  ],
+  "frames": 8,
+  "durationMsEach": 100,
+  "cropOnly": true,
+  "background": "GIF matte #20313a",
+  "gameIntegration": false,
+  "libraryGif": "libfile_981cd97ab3e48191b123f9b02b9c6b94",
+  "librarySheet": "libfile_73847d29b2288191800c911a63a8df76",
+  "approvedStaticDesign": "new-water-footplate-design.png",
+  "sourceArtwork": "source-water-footplate.png",
+  "workflow": "built-in imagegen creates full-frame8pose sheet based on approved design; alpha cleanup by imagegen; equal-cell extraction and GIF palette encoding; no body/limb transformation",
+  "limitation": "Actual game movement speed not connected"
+}
