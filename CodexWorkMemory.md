@@ -1,3 +1,22 @@
+## 전투 점진 로딩 검수 완료 · 01a1a5fd 커밋 준비
+
+- 기록 ID: combat-loading-verified-20261107-01a1a5fd. 기록시각 2026-11-07T11:44:18+09:00. 기록자·검수 Codex /root, 구현 GPT-6.1 Sol low progressive_assets/unit_loading_ui, 통합검수 loading_integration. 요청·커밋결정 사용자, 출처 현재채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072 및 literal $Trash/combat-loading-20261107의 browser-result.json/game-browser-result.json/room-browser-result.json과 실제 렌더 캡처. 원발언 정확시각 불명.
+- 구현: file 자산 전체선행로드를 요청별 중복제거·최대4동시 로딩으로 전환했다. source 동기계약을 유지하고 image의 src/decode/complete를 비동기wrapper와 연결했다. 실험실 전역대기, 인게임초기시트·BGM·헤더·방지형/부족미리보기의 전역대기를 제거했다. 준비된 화면/개별유닛은 먼저 표시하고 공통 원형spinner는 벽시계로 회전한다. 새 동작을 기다릴 때 기존몸체 유지, 초기미준비 프레임캐시 금지, 실패요청 재시도. 종료 시 생존자 몸을 감싸던 세로반투명타원만 제거하고 발밑체력링 유지.
+- 비동기 보완: 각 중립종의 크기·프레임은 자기 시트만 기다린다. 딱정벌레시체 크기는 동일종 준비Promise에 의존한다. 실제 cold 검수에서 발견한 idle.bodyBounds[0] 미준비접근은 크기/파츠 준비검사와 유효양수캐시로 수정했다. 미준비그림자는 건너뛴다. 월드데이터·색지형은 먼저 준비하고 지역atlas를 비동기로 만든다. 이전방worker취소/세대검사를 적용하고 지역worker IndexedDB캐시를 유지했다. 플레이 중 탐색상태를 덮어쓰는 기존 layout restore는 제외했다. 로컬효과음/부족manifest도 개별load를 기다린다.
+- 실제검수: file://Combat에서 왼쪽reference강제지연 중 spinner1+준비된오른쪽body, 편성추가/제거 조작 확인. 해제후spinner0, 주사위양쪽5명, 자동전투0.58초20사건진행과끝까지종료, 세로타원0, pageerror0. 고의자산실패1회후2번째요청data복구. file://Spawner 실제entry의game.js1회실행, 지연 중 spinner1+준비된중립종1, 해제후body2/spinner0/pageerror0. 별도실제새방seed1생성→부족4선택→시작→game인원4/10진입과오류0. 메인이 최종 로딩/준비완료 캡처를 직접 확인했다. 신규 독립비동기검사 통과. 기존외형검사의5실패는 수정전baseline에서도 동일하게 재현되어 이번로딩회귀로 분류하지 않았다.
+- 범위·보호: 소스14경로와 Combat.html/runtime 생성본2경로, 관련메모리만 커밋후보. 전체빌드 없이 대상module만동기화하고 보호module/inline/nestedworker바이트를검증했다. Spawner.html/preview-runtime은변경없음. staged다른작업·동시커밋·메모리다른채팅기록은분리한다. 공유index를보존하는별도index와HEAD CAS로로컬main커밋예정이며현재기록은커밋성공주장이아니다. 요청/판단/변경/검수/잔여작업대조완료, 남은작업은최종범위검토및로컬커밋이다.
+## 전투 점진 로딩과 타원 제거 시작 · 01a1a5fd 현재 작업
+
+- 기록 ID: combat-loading-start-20261107-01a1a5fd. 기록시각 2026-11-07T11:28:23+09:00. 기록자·구현판단 Codex /root, 요청·커밋결정 사용자. 출처 현재채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072의 “로딩이 오래 걸리는데, 일단 띄울 수 있는 것부터 띄우고, 다 비동기 로딩으로 전환하고, 유닛 로딩 중이면 로딩 progress 동글동글하게 그거 보여주고”, 타원 지목 첨부 ae6392aa 및 “빨리 고치고 커밋해”. 원발언 정확시각·항목ID 불명.
+- 범위: 실험실과 인게임의 화면·준비된 유닛을 먼저 표시하고 자산을 독립 비동기 로드한다. 로드 중인 유닛에는 작은 회전 원형 표시를 사용한다. 전투 종료 시 살아 있는 유닛 몸 전체를 둘러싸던 세로 반투명 타원을 제거하며 발밑 체력 링은 유지한다. 카메라·스탯·공격주기·편집기능은 이번에 변경하지 않는다.
+- 판단·보호: assets.js 전체 file 자산 로드와 game/실험실 ready 대기가 초기표시를 막고, unit-action-art.prepare는 전체 pending을 기다린다. 요청별 로딩과 실제 준비 여부를 분리해 확인한다. 사용자 지정 GPT-6.1 Sol low 워커가 구현하고 메인은 코드·실화면을 검수한다. 현재 다른 작업의 staged/unstaged/untracked와 같은 파일의 다른 hunks를 보존한다. 이번 명시지시는 로컬 커밋까지이며 별도 푸시는 하지 않는다. 관련 보드0 확인 재사용. 구현 전 원본은 literal $Trash/combat-loading-20261107/before에 보존했다.
+## 전투 수정 main 푸시 완료 · 01a1a5fd 현재 요약
+
+- 기록 ID: combat-repair-pushed-20261107-01a1a5fd. 기록·실제관측시각 2026-11-07T11:21:57+09:00. 기록자·Git검수 Codex /root, 푸시결정 사용자. 출처 현재채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 전체작업·검수·즉시업로드·재개 지시와 실제도구결과; literal $Trash/combat-repair-20261107의 commit-result.json/push-result.json/preservation-result.json.
+- 완료: ca7033225283f8ea70e727847bf98782a0a52f87 ‘전투 주기와 유닛 배치 및 방향 수정’을 전용 origin/main에 푸시했다. 부모2d88dfeeace0b9faeb9d7439e8e9735a95c6289b의병행승인커밋을유지했고 시작local main과정확remote main readback은모두ca70332로일치했다. 별도branch/Site배포없음.
+- 범위/보호: 전투33경로 +4709/-284, 관련메모리6섹션45줄만포함. 별도index·HEAD CAS로공용index의다른entry를보존했고 완료후실제entry가준비한보존본과동일함을직접확인했다. Git완료과정working제품파일덮기0. 초기staging의memory혼합줄끝정규화는폐기하고원본바이트를보존해45줄추가만최종검토했다. 임시스크립트PowerShell정규식보간과검수출력buffer오류는각각리터럴처리/충분한buffer로수정해후속검사완료했으며제품오류로혼동하지않는다.
+- 검수: 관련61·simulation16·dice3 검사가각검수범위에서통과했고최신채집동작교집합과방향metadata만표적재검증했다. 양쪽5대5연속snapshot·lab주사위자동종료·공통엔진접점/타깃/효과고유성검수는앞선근거대로통과했다. 전체저장소전수검사나미완성에셋전부완료로확대하지않으며이전구형rig해시검사이력도보존했다.
+- 본결과는commit후확인한사실로로컬memory에만기록한다. 자동memory-only후속commit/amend없이다음승인된관련commit에넘긴다. 요청·판단·변경·검수·보호·푸시결과누락점검완료.
 ## 유닛 표 지정 칸·작업 동작·방향 검수 완료 · 01a1b3ae 현재 요약
 
 - 기록 ID: unit-table-final-check-20261107-01a1b3ae. 기록 시각·요약 근거 시각 2026-11-07T11:32:39+09:00. 기록자·검수 주체 Codex /root, 변경/즉시 커밋 및 메모리 보완 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 및 literal $Trash/unit-table-header-01a1b3ae/explicit-cells/render-result.json, direction-result.json, work-desktop.png, work-lightbox.png, work-narrow.png. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.

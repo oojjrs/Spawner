@@ -23897,7 +23897,19 @@ function createUnitAppearanceEventPlayback({maxGap=.5}={}) {
 
 return { unitActionState, unitAppearanceStatePose, createUnitAppearanceEventPlayback };
 })();
+modules["client/unit-loading.mjs"] = (() => {
+function drawUnitLoading(context, x, y, radius, time) {
+  const angle = (globalThis.performance?.now() ?? Date.now()) / 250;
+  context.save(); context.translate(x, y); context.lineWidth = Math.max(2, radius * .22);
+  context.strokeStyle = "#17312588"; context.beginPath(); context.arc(0, 0, radius, 0, Math.PI * 2); context.stroke();
+  context.strokeStyle = "#e5f5d9"; context.lineCap = "round"; context.beginPath(); context.arc(0, 0, radius, angle, angle + Math.PI * 1.4); context.stroke();
+  context.restore();
+}
+
+return { drawUnitLoading };
+})();
 modules["client/unit-action-art.mjs"] = (() => {
+const { drawUnitLoading } = modules["client/unit-loading.mjs"];
 const { UNIT_ACTION_ART } = modules["client/unit-action-art-assets.mjs"];
 const { unitDisplayAttributes, UNIT_DISPLAY_PRIORITY } = modules["client/unit-display-appearance.mjs"];
 const { unitDisplaySize, unitFrameMirror } = modules["client/unit-size.mjs"];
@@ -23930,16 +23942,18 @@ function unitActionArtPose(agent, time) {
 function createUnitActionArt(assetSource, createSurface, loadImage) {
   const images = new Map(), pending = new Map(), bounds = new Map(), retryAfter = new Map();
   function request(animation) {
-    if (!animation || images.has(animation.image) || pending.has(animation.image) || Date.now() < (retryAfter.get(animation.image) || 0)) return;
-    pending.set(animation.image, Promise.resolve().then(() => loadImage(animation.image)).then(image => {
+    if (!animation || images.has(animation.image) || Date.now() < (retryAfter.get(animation.image) || 0)) return;
+    if (pending.has(animation.image)) return pending.get(animation.image);
+    const loading = Promise.resolve().then(() => loadImage(animation.image)).then(image => {
       images.set(animation.image, image); return image;
-    }).catch(() => { retryAfter.set(animation.image, Date.now() + 1000); return null; }).finally(() => pending.delete(animation.image)));
+    }).catch(() => { retryAfter.set(animation.image, Date.now() + 1000); return null; }).finally(() => pending.delete(animation.image));
+    pending.set(animation.image, loading); return loading;
   }
-  async function prepare(agent) {
+  async function prepare(agent, time) {
     const definition = unitActionArtDefinition(agent);
     if (!definition) return;
-    for (const animation of [definition.reference, ...Object.values(definition.actions)]) request(animation);
-    await Promise.all([...pending.values()]);
+    const pose = unitActionArtPose(agent, time ?? 0);
+    await Promise.all([request(definition.reference), request(pose?.animation)]);
   }
   function referenceBounds(animation) {
     if (bounds.has(animation)) return bounds.get(animation);
@@ -23961,8 +23975,12 @@ function createUnitActionArt(assetSource, createSurface, loadImage) {
     if (!pose) return false;
     request(pose.reference); request(pose.animation);
     const reference = referenceBounds(pose.reference);
-    if (!reference) return true;
-    if (!images.has(pose.animation.image)) pose = { ...pose, animation: pose.reference, frame: pose.reference.frames?.[0] || 0 };
+    const loading = !images.has(pose.animation.image);
+    if (!reference) {
+      drawUnitLoading(context, x, floor - cell * unitDisplaySize(agent) * .4, Math.max(5, cell * .07), time);
+      return true;
+    }
+    if (loading) pose = { ...pose, animation: pose.reference, frame: pose.reference.frames?.[0] || 0 };
     const animation = pose.animation, image = images.get(animation.image), width = animation.frameSize, height = animation.frameHeight || width;
     const cameraScale = (pose.reference.viewSize || pose.reference.frameSize) / (animation.viewSize || animation.frameSize);
     const scale = cell * unitDisplaySize(agent) / (animation.referenceLength || reference.length) * (animation.referenceLength ? 1 : cameraScale);
@@ -23971,13 +23989,19 @@ function createUnitActionArt(assetSource, createSurface, loadImage) {
     context.save(); context.translate(x, floor); context.scale(unitFrameMirror(animation.sourceFacing, mirror ? -1 : 1) ? -1 : 1, 1);
     if (beforeDraw) beforeDraw(context, image, crop, destination);
     context.drawImage(image, crop.x, crop.y, width, height, destination.x, destination.y, destination.width, destination.height);
-    context.restore(); return true;
+    context.restore();
+    if (loading) drawUnitLoading(context, x, floor - cell * unitDisplaySize(agent) * .4, Math.max(5, cell * .07), time);
+    return true;
   }
   function frame(agent, time) {
+    const pose = unitActionArtPose(agent, time);
+    if (!pose) return null;
+    request(pose.reference); request(pose.animation);
+    if (!images.has(pose.reference.image) || !images.has(pose.animation.image)) return null;
     const surface = createSurface(512, 512);
     return draw(surface.getContext("2d"), agent, time, 256, 448, 256 / unitDisplaySize(agent), false, null) ? surface : null;
   }
-  return { prepare, draw, frame, referenceBounds, readyAction: (agent, time) => { const pose = unitActionArtPose(agent, time); return !!pose && !pose.missing && images.has(pose.animation.image) && images.has(pose.reference.image); }, ready: agent => {
+  return { prepare, draw, frame, referenceBounds, readyFrame: (agent, time) => { const pose = unitActionArtPose(agent, time); return !!pose && images.has(pose.animation.image) && images.has(pose.reference.image); }, readyAction: (agent, time) => { const pose = unitActionArtPose(agent, time); return !!pose && !pose.missing && images.has(pose.animation.image) && images.has(pose.reference.image); }, ready: agent => {
     const definition = unitActionArtDefinition(agent); return !!definition && images.has(definition.reference.image);
   } };
 }
@@ -25843,7 +25867,7 @@ function createCombatStageAppearance(image) {
     const cached = image(path);
     if (cached) return cached;
     const asset = globalThis.SpawnerAssets?.image?.() || new Image();
-    asset.src = globalThis.SpawnerAssets?.source(path) || path; await asset.decode(); return asset;
+    asset.src = await globalThis.SpawnerAssets?.load?.(path) || globalThis.SpawnerAssets?.source(path) || path; await asset.decode(); return asset;
   };
   const art = createUnitActionArt(path => globalThis.SpawnerAssets?.source(path) || path, surface, load);
   function draw(context, agent, time, deathAge, fallback, cell, mirror) {
@@ -28348,6 +28372,7 @@ const { drawCombatStun } = modules["client/combat-stun-vfx.mjs"];
 const { drawSpeciesHeldHurt } = modules["client/species-held-hurt.mjs"];
 const { beanHeldHurtSource, drawBeanHeldHurt } = modules["client/bean-held-hurt.mjs"];
 const { combatDodgePose, drawCombatDodgeTrails, drawCombatDodgeGhosts, drawCombatDodgeLabel } = modules["client/combat-dodge-vfx.mjs"];
+const { drawUnitLoading } = modules["client/unit-loading.mjs"];
 const { drawUnitHealthRing } = modules["client/unit-health-ring.mjs"];
 const { createCombatStageAppearance } = modules["client/combat-stage-appearance.mjs"];
 const { attackAnimationElapsed } = modules["server/attack.mjs"];
@@ -28451,7 +28476,7 @@ function poseFor(agent, time, deathAge) {
 }
 
 function createCombatStage(canvas) {
-  const context = canvas.getContext("2d"), images = new Map(), imageRetryAt = new Map();
+  const context = canvas.getContext("2d"), images = new Map(), imageRetryAt = new Map(), imagePending = new Set();
   const appearanceWorld = createUnitAppearanceWorld();
   const representativeArt = createCombatStageAppearance(image);
   const vfxCursor = createCombatVfxCursor(), detailVfx = createDetailCombatVfx();
@@ -28463,13 +28488,14 @@ function createCombatStage(canvas) {
   function image(source) {
     if (!source) return null;
     const previous = images.get(source);
-    if (!previous || previous.complete && !previous.naturalWidth && Date.now() >= (imageRetryAt.get(source) || 0)) {
+    if (!imagePending.has(source) && (!previous || previous.complete && !previous.naturalWidth) && Date.now() >= (imageRetryAt.get(source) || 0)) {
       const asset = globalThis.SpawnerAssets?.image?.() || new Image();
-      asset.src = globalThis.SpawnerAssets?.source(source) || source;
       images.set(source, asset); imageRetryAt.set(source, Date.now() + 2000);
+      imagePending.add(source);
+      Promise.resolve(globalThis.SpawnerAssets?.load?.(source)).then(url => { asset.src = url || globalThis.SpawnerAssets?.source(source) || source; }, () => { imageRetryAt.set(source, Date.now() + 2000); }).finally(() => imagePending.delete(source));
     }
     const asset = images.get(source);
-    return asset.complete && asset.naturalWidth ? asset : null;
+    return asset?.complete && asset.naturalWidth ? asset : null;
   }
 
   function background(width, height) {
@@ -28577,10 +28603,6 @@ function createCombatStage(canvas) {
     context.fillStyle = "#15261c55"; context.beginPath(); context.ellipse(0, 0, radiusX, radiusY, 0, 0, Math.PI * 2); context.fill();
     drawUnitHealthRing(context, agent.health, agent.stats?.health, 0, 0,
       Math.max(7, bodyDimensions(agent).width * 100 * formationScale(width, height) * .55), colors[index]);
-    if (ended && alive) {
-      context.fillStyle = colors[index] + "24";
-      context.beginPath(); context.ellipse(0, -height * .18, width * .09, height * .3, 0, 0, Math.PI * 2); context.fill();
-    }
     const drawBody = (dx = 0, dy = 0) => {
       context.save(); context.translate(dx, dy);
     const appearancePose = appearancePoses.get(String(agent.id));
@@ -28595,6 +28617,7 @@ function createCombatStage(canvas) {
       100 * formationScale(width, height), index === 1, window.devicePixelRatio || 1);
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
       { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), index === 1);
+    if (!appearanceDrawn && !representativeDrawn && !asset) drawUnitLoading(context, 0, -size * .4, Math.max(5, size * .07), clock);
     if (!appearanceDrawn && !representativeDrawn && asset) {
       const mirror = pose?.mirrorX ?? unitFrameMirror(geometry?.sourceFacing || geometry?.facing || (agent.species ? "left" : "right"), agent.facing);
       context.scale(mirror ? -1 : 1, 1);
@@ -28694,6 +28717,7 @@ function createCombatStage(canvas) {
       100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1, window.devicePixelRatio || 1);
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
       { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1);
+    if (!appearanceDrawn && !representativeDrawn && !asset) drawUnitLoading(context, 0, -size * .4, Math.max(5, size * .07), clock);
     if (!appearanceDrawn && !representativeDrawn && asset) {
       const mirror = pose?.mirrorX ?? unitFrameMirror(geometry?.sourceFacing || geometry?.facing || (agent.species ? "left" : "right"), agent.facing);
       context.save(); context.scale(mirror ? -1 : 1, 1);
@@ -28877,7 +28901,7 @@ const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index
 const rosters = Object.fromEntries(sides.map(side => [side, [builds[side]]]));
 const selected = { left: 0, right: 0 };
 const rules = { ...DEFAULT_SIMULATION_RULES };
-let trial, playing = false, lastFrame = 0, controlId = 0, assetsReady = false;
+let trial, playing = false, lastFrame = 0, controlId = 0;
 const main = document.querySelector("main");
 main.replaceChildren();
 function node(tag, text, className) {
@@ -28990,17 +29014,15 @@ function render() {
     } catch(error) { elements.status.textContent=settingError(error); }
   }
   const result=trial?.result(),ended=!!result?.reason;
-  for(const key of ["step","run","finish"])elements[key].disabled=!assetsReady||!trial||ended;
+  for(const key of ["step","run","finish"])elements[key].disabled=!trial||ended;
   if(!trial){elements.phase.textContent="";return;}
   if(ended) {playing=false;elements.run.textContent="자동 전투";elements.status.textContent=(result.winner==="draw"?"무승부":result.winner==="left"?"왼쪽 승리":"오른쪽 승리")+" · "+({death:"사망",'time-limit':"시간 제한",'no-offense':"공격 불가",'event-limit':"사건 제한"}[result.reason]||result.reason);}
   else elements.status.textContent=playing?"전투 중":trial.time?"일시정지":"대결 준비";
   elements.phase.textContent=trial.time.toFixed(2)+"초 · "+trial.history.length+"개 사건";
 }
 reset();
-Promise.resolve(globalThis.SpawnerAssets?.ready).then(() => { assetsReady = true; render(); }, error => { elements.status.textContent = error.message; });
 function frame(now) {
   const elapsed=lastFrame?Math.min(.1,(now-lastFrame)/1000):0;lastFrame=now;
-  if (!assetsReady) { requestAnimationFrame(frame); return; }
   if(playing&&trial){trial.advance(elapsed);render();}
   combatStage.render(trial, now, playing);requestAnimationFrame(frame);
 }

@@ -4,6 +4,7 @@ import { drawCombatStun } from "./combat-stun-vfx.mjs";
 import { drawSpeciesHeldHurt } from "./species-held-hurt.mjs";
 import { beanHeldHurtSource, drawBeanHeldHurt } from "./bean-held-hurt.mjs";
 import { combatDodgePose, drawCombatDodgeTrails, drawCombatDodgeGhosts, drawCombatDodgeLabel } from "./combat-dodge-vfx.mjs";
+import { drawUnitLoading } from "./unit-loading.mjs";
 import { drawUnitHealthRing } from "./unit-health-ring.mjs";
 import { createCombatStageAppearance } from "./combat-stage-appearance.mjs";
 import { attackAnimationElapsed } from "../server/attack.mjs";
@@ -107,7 +108,7 @@ function poseFor(agent, time, deathAge) {
 }
 
 export function createCombatStage(canvas) {
-  const context = canvas.getContext("2d"), images = new Map(), imageRetryAt = new Map();
+  const context = canvas.getContext("2d"), images = new Map(), imageRetryAt = new Map(), imagePending = new Set();
   const appearanceWorld = createUnitAppearanceWorld();
   const representativeArt = createCombatStageAppearance(image);
   const vfxCursor = createCombatVfxCursor(), detailVfx = createDetailCombatVfx();
@@ -119,13 +120,14 @@ export function createCombatStage(canvas) {
   function image(source) {
     if (!source) return null;
     const previous = images.get(source);
-    if (!previous || previous.complete && !previous.naturalWidth && Date.now() >= (imageRetryAt.get(source) || 0)) {
+    if (!imagePending.has(source) && (!previous || previous.complete && !previous.naturalWidth) && Date.now() >= (imageRetryAt.get(source) || 0)) {
       const asset = globalThis.SpawnerAssets?.image?.() || new Image();
-      asset.src = globalThis.SpawnerAssets?.source(source) || source;
       images.set(source, asset); imageRetryAt.set(source, Date.now() + 2000);
+      imagePending.add(source);
+      Promise.resolve(globalThis.SpawnerAssets?.load?.(source)).then(url => { asset.src = url || globalThis.SpawnerAssets?.source(source) || source; }, () => { imageRetryAt.set(source, Date.now() + 2000); }).finally(() => imagePending.delete(source));
     }
     const asset = images.get(source);
-    return asset.complete && asset.naturalWidth ? asset : null;
+    return asset?.complete && asset.naturalWidth ? asset : null;
   }
 
   function background(width, height) {
@@ -233,10 +235,6 @@ export function createCombatStage(canvas) {
     context.fillStyle = "#15261c55"; context.beginPath(); context.ellipse(0, 0, radiusX, radiusY, 0, 0, Math.PI * 2); context.fill();
     drawUnitHealthRing(context, agent.health, agent.stats?.health, 0, 0,
       Math.max(7, bodyDimensions(agent).width * 100 * formationScale(width, height) * .55), colors[index]);
-    if (ended && alive) {
-      context.fillStyle = colors[index] + "24";
-      context.beginPath(); context.ellipse(0, -height * .18, width * .09, height * .3, 0, 0, Math.PI * 2); context.fill();
-    }
     const drawBody = (dx = 0, dy = 0) => {
       context.save(); context.translate(dx, dy);
     const appearancePose = appearancePoses.get(String(agent.id));
@@ -251,6 +249,7 @@ export function createCombatStage(canvas) {
       100 * formationScale(width, height), index === 1, window.devicePixelRatio || 1);
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
       { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), index === 1);
+    if (!appearanceDrawn && !representativeDrawn && !asset) drawUnitLoading(context, 0, -size * .4, Math.max(5, size * .07), clock);
     if (!appearanceDrawn && !representativeDrawn && asset) {
       const mirror = pose?.mirrorX ?? unitFrameMirror(geometry?.sourceFacing || geometry?.facing || (agent.species ? "left" : "right"), agent.facing);
       context.scale(mirror ? -1 : 1, 1);
@@ -350,6 +349,7 @@ export function createCombatStage(canvas) {
       100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1, window.devicePixelRatio || 1);
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
       { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1);
+    if (!appearanceDrawn && !representativeDrawn && !asset) drawUnitLoading(context, 0, -size * .4, Math.max(5, size * .07), clock);
     if (!appearanceDrawn && !representativeDrawn && asset) {
       const mirror = pose?.mirrorX ?? unitFrameMirror(geometry?.sourceFacing || geometry?.facing || (agent.species ? "left" : "right"), agent.facing);
       context.save(); context.scale(mirror ? -1 : 1, 1);

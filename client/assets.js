@@ -2,112 +2,33 @@
   const sources = Object.create(null);
   Object.assign(sources, globalThis.SpawnerLocalAssetSources);
   globalThis.SpawnerLocalAssetSources = sources;
-  const presentation = globalThis.SpawnerWelcomeLoading;
-  const priorityPaths = presentation ? [
-    "DesignAssets/Units/starter-sprout-bean.png",
-    ...globalThis.Spawner.PLAYER_TRIBES.filter(tribe => tribe.key !== "bean").map(tribe => tribe.starter),
-    ...Object.values(globalThis.Spawner.UNIT_ANIMATIONS).flatMap(animations => Object.entries(animations)
-      .filter(([action]) => action === "idle" || action === "walk" || action === "jump")
-      .map(([, animation]) => animation.image)),
-    ...["body", "sprout-left", "sprout-right", "sprout-stem", "green-foot"].map(name => "DesignAssets/Units/BaseParts/" + name + ".png"),
-    ...["bean-root-rig", "feet-1", "antenna-1", "strength-1"].map(name => "DesignAssets/Units/Parts/" + name + ".png"),
-    "DesignAssets/Audio/bean-footstep.mp3", "DesignAssets/Audio/bean-landing.mp3", "DesignAssets/Audio/spring-landing.mp3",
-    "DesignAssets/Audio/ui-click.wav", "DesignAssets/Audio/new-discovery.mp3",
-    ...["move-spore", "move-pebble", "move-spring"].map(name => globalThis.SpawnerMovementAudio.sources[name])
-  ] : [];
-  const priorityFiles = new Set(priorityPaths.map(path => "./client/local-assets/" + path.slice("DesignAssets/".length) + ".js"));
-  const files = location.protocol === "file:" ? globalThis.SpawnerLocalAssetFiles || [] : [];
-  const welcomeReady = presentation && location.protocol === "file:" ?
-    loadLocalAssets(files.filter(file => priorityFiles.has(file))) : Promise.resolve();
-  const ready = (async () => {
-    await welcomeReady;
-    await presentation;
-    if (location.protocol === "file:") await loadLocalAssets(files.filter(file => !priorityFiles.has(file)));
-  })();
-  ready.catch(() => {});
-  async function loadLocalAssets(files) {
-    for (let index = 0; index < files.length; index += 2) {
-      if (index) await new Promise(resolve => {
-        let frame = null, task = null;
-        let settled = false;
-        function finish() {
-          if (settled) return;
-          settled = true;
-          clearTimeout(fallback);
-          if (task !== null) clearTimeout(task);
-          if (frame !== null) cancelAnimationFrame(frame);
-          resolve();
-        }
-        const fallback = setTimeout(finish, 50);
-        if (document.hidden || typeof requestAnimationFrame !== "function") task = setTimeout(finish, 0);
-        else frame = requestAnimationFrame(() => { frame = null; task = setTimeout(finish, 0); });
-      });
-      await Promise.all(files.slice(index, index + 2).map(loadLocalAsset));
+  const files = new Set(globalThis.SpawnerLocalAssetFiles || []);
+  const pending = new Map();
+  const queue = [];
+  let active = 0;
+  const ready = Promise.resolve();
+  const welcomeReady = ready;
+  function drain() {
+    while (active < 4 && queue.length) {
+      const job = queue.shift();
+      active++;
+      loadLocalAsset(job.file).then(() => job.resolve(sources[job.path] || job.path), job.reject).finally(() => { active--; drain(); });
     }
-    await prepareLocalImages();
   }
-  async function prepareLocalImages() {
-    if (typeof Worker !== "function" || typeof Blob !== "function" || !globalThis.URL?.createObjectURL) return;
-    const entries = Object.entries(sources).filter(([, source]) => typeof source === "string" && /^data:image\//i.test(source));
-    if (!entries.length) return;
-    const urls = new Set();
-    let worker = null, workerUrl = null, pending = null, failed = false, nextId = 0;
-    function settle(message) {
-      if (!pending || message && message.id !== pending.id) return;
-      const job = pending;
-      pending = null;
-      clearTimeout(job.timer);
-      job.resolve(message?.blob || null);
+  function load(path) {
+    if (sources[path] || location.protocol !== "file:" || !path.startsWith("DesignAssets/")) return Promise.resolve(sources[path] || path);
+    if (pending.has(path)) {
+      const index = queue.findIndex(job => job.path === path);
+      if (index > 0) queue.unshift(queue.splice(index, 1)[0]);
+      return pending.get(path);
     }
-    function convertImage() {
-      self.onmessage = event => {
-        const { id, source } = event.data;
-        try {
-          const comma = source.indexOf(","), header = source.slice(5, comma);
-          const type = header.split(";")[0];
-          const payload = source.slice(comma + 1);
-          let bytes;
-          if (/;base64$/i.test(header)) {
-            const decoded = atob(payload);
-            bytes = new Uint8Array(decoded.length);
-            for (let index = 0; index < decoded.length; index++) bytes[index] = decoded.charCodeAt(index);
-          } else bytes = new TextEncoder().encode(decodeURIComponent(payload));
-          self.postMessage({ id, blob: new Blob([bytes], { type }) });
-        } catch { self.postMessage({ id, error: true }); }
-      };
-    }
-    try {
-      workerUrl = URL.createObjectURL(new Blob(["(" + convertImage.toString() + ")();"], { type: "text/javascript" }));
-      worker = new Worker(workerUrl);
-      worker.onmessage = event => settle(event.data);
-      worker.onerror = () => { failed = true; settle(null); };
-      for (const [path, source] of entries) {
-        if (failed) break;
-        const blob = await new Promise(resolve => {
-          const id = ++nextId;
-          const timer = setTimeout(() => { failed = true; settle(null); }, 5000);
-          pending = { id, timer, resolve };
-          try { worker.postMessage({ id, source }); }
-          catch { failed = true; settle(null); }
-        });
-        if (blob && sources[path] === source) {
-          try {
-            const url = URL.createObjectURL(blob);
-            urls.add(url);
-            sources[path] = url;
-          } catch {}
-        }
-      }
-    } catch {} finally {
-      settle(null);
-      worker?.terminate();
-      if (workerUrl) URL.revokeObjectURL(workerUrl);
-    }
-    if (urls.size) window.addEventListener("pagehide", event => {
-      if (event.persisted) return;
-      for (const url of urls) URL.revokeObjectURL(url);
-      urls.clear();
-    });
+    const file = "./client/local-assets/" + path.slice("DesignAssets/".length) + ".js";
+    if (!files.has(file)) return Promise.resolve(path);
+    const task = new Promise((resolve, reject) => { queue.push({ path, file, resolve, reject }); });
+    pending.set(path, task);
+    task.catch(() => { pending.delete(path); });
+    drain();
+    return task;
   }
   function loadLocalAsset(file) {
     return new Promise((resolve, reject) => {
@@ -121,7 +42,40 @@
   function image() {
     const sprite = new Image();
     sprite.crossOrigin = "anonymous";
+    const descriptor = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "src");
+    const complete = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, "complete");
+    const decode = sprite.decode.bind(sprite);
+    let requested = null;
+    let pendingSource = false;
+    Object.defineProperty(sprite, "complete", { get() { return !pendingSource && complete.get.call(sprite); } });
+    let loading = Promise.resolve();
+    Object.defineProperty(sprite, "src", {
+      get() { return descriptor.get.call(sprite) || requested || ""; },
+      set(path) {
+        requested = path;
+        pendingSource = false;
+        if (location.protocol !== "file:" || !path.startsWith("DesignAssets/")) {
+          descriptor.set.call(sprite, path);
+          loading = Promise.resolve();
+          return;
+        }
+        pendingSource = true;
+        loading = load(path).then(source => {
+          if (requested === path) {
+            pendingSource = false;
+            descriptor.set.call(sprite, source);
+          }
+        });
+        loading.catch(() => {
+          if (requested === path) {
+            pendingSource = false;
+            sprite.dispatchEvent(new Event("error"));
+          }
+        });
+      }
+    });
+    sprite.decode = () => loading.then(decode);
     return sprite;
   }
-  globalThis.SpawnerAssets = Object.freeze({ ready, welcomeReady, image, source: path => sources[path] || path });
+  globalThis.SpawnerAssets = Object.freeze({ ready, welcomeReady, load, image, source: path => sources[path] || path });
 })();

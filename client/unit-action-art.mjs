@@ -1,3 +1,4 @@
+import { drawUnitLoading } from "./unit-loading.mjs";
 import { UNIT_ACTION_ART } from "./unit-action-art-assets.mjs";
 import { unitDisplayAttributes, UNIT_DISPLAY_PRIORITY } from "./unit-display-appearance.mjs";
 import { unitDisplaySize, unitFrameMirror } from "./unit-size.mjs";
@@ -30,16 +31,18 @@ export function unitActionArtPose(agent, time) {
 export function createUnitActionArt(assetSource, createSurface, loadImage) {
   const images = new Map(), pending = new Map(), bounds = new Map(), retryAfter = new Map();
   function request(animation) {
-    if (!animation || images.has(animation.image) || pending.has(animation.image) || Date.now() < (retryAfter.get(animation.image) || 0)) return;
-    pending.set(animation.image, Promise.resolve().then(() => loadImage(animation.image)).then(image => {
+    if (!animation || images.has(animation.image) || Date.now() < (retryAfter.get(animation.image) || 0)) return;
+    if (pending.has(animation.image)) return pending.get(animation.image);
+    const loading = Promise.resolve().then(() => loadImage(animation.image)).then(image => {
       images.set(animation.image, image); return image;
-    }).catch(() => { retryAfter.set(animation.image, Date.now() + 1000); return null; }).finally(() => pending.delete(animation.image)));
+    }).catch(() => { retryAfter.set(animation.image, Date.now() + 1000); return null; }).finally(() => pending.delete(animation.image));
+    pending.set(animation.image, loading); return loading;
   }
-  async function prepare(agent) {
+  async function prepare(agent, time) {
     const definition = unitActionArtDefinition(agent);
     if (!definition) return;
-    for (const animation of [definition.reference, ...Object.values(definition.actions)]) request(animation);
-    await Promise.all([...pending.values()]);
+    const pose = unitActionArtPose(agent, time ?? 0);
+    await Promise.all([request(definition.reference), request(pose?.animation)]);
   }
   function referenceBounds(animation) {
     if (bounds.has(animation)) return bounds.get(animation);
@@ -61,8 +64,12 @@ export function createUnitActionArt(assetSource, createSurface, loadImage) {
     if (!pose) return false;
     request(pose.reference); request(pose.animation);
     const reference = referenceBounds(pose.reference);
-    if (!reference) return true;
-    if (!images.has(pose.animation.image)) pose = { ...pose, animation: pose.reference, frame: pose.reference.frames?.[0] || 0 };
+    const loading = !images.has(pose.animation.image);
+    if (!reference) {
+      drawUnitLoading(context, x, floor - cell * unitDisplaySize(agent) * .4, Math.max(5, cell * .07), time);
+      return true;
+    }
+    if (loading) pose = { ...pose, animation: pose.reference, frame: pose.reference.frames?.[0] || 0 };
     const animation = pose.animation, image = images.get(animation.image), width = animation.frameSize, height = animation.frameHeight || width;
     const cameraScale = (pose.reference.viewSize || pose.reference.frameSize) / (animation.viewSize || animation.frameSize);
     const scale = cell * unitDisplaySize(agent) / (animation.referenceLength || reference.length) * (animation.referenceLength ? 1 : cameraScale);
@@ -71,13 +78,19 @@ export function createUnitActionArt(assetSource, createSurface, loadImage) {
     context.save(); context.translate(x, floor); context.scale(unitFrameMirror(animation.sourceFacing, mirror ? -1 : 1) ? -1 : 1, 1);
     if (beforeDraw) beforeDraw(context, image, crop, destination);
     context.drawImage(image, crop.x, crop.y, width, height, destination.x, destination.y, destination.width, destination.height);
-    context.restore(); return true;
+    context.restore();
+    if (loading) drawUnitLoading(context, x, floor - cell * unitDisplaySize(agent) * .4, Math.max(5, cell * .07), time);
+    return true;
   }
   function frame(agent, time) {
+    const pose = unitActionArtPose(agent, time);
+    if (!pose) return null;
+    request(pose.reference); request(pose.animation);
+    if (!images.has(pose.reference.image) || !images.has(pose.animation.image)) return null;
     const surface = createSurface(512, 512);
     return draw(surface.getContext("2d"), agent, time, 256, 448, 256 / unitDisplaySize(agent), false, null) ? surface : null;
   }
-  return { prepare, draw, frame, referenceBounds, readyAction: (agent, time) => { const pose = unitActionArtPose(agent, time); return !!pose && !pose.missing && images.has(pose.animation.image) && images.has(pose.reference.image); }, ready: agent => {
+  return { prepare, draw, frame, referenceBounds, readyFrame: (agent, time) => { const pose = unitActionArtPose(agent, time); return !!pose && images.has(pose.animation.image) && images.has(pose.reference.image); }, readyAction: (agent, time) => { const pose = unitActionArtPose(agent, time); return !!pose && !pose.missing && images.has(pose.animation.image) && images.has(pose.reference.image); }, ready: agent => {
     const definition = unitActionArtDefinition(agent); return !!definition && images.has(definition.reference.image);
   } };
 }

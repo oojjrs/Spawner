@@ -78,7 +78,7 @@ export function createTribeArt(definitions, assetSource) {
   }, image);
 
   async function image(path) {
-    const sprite = new Image();
+    const sprite = globalThis.SpawnerAssets?.image() || new Image();
     sprite.crossOrigin = "anonymous";
     sprite.src = assetSource(path);
     await sprite.decode();
@@ -161,7 +161,7 @@ export function createTribeArt(definitions, assetSource) {
     if (tribe.key === "bean") return;
     if (!units.has(tribe.key)) units.set(tribe.key, (async () => {
       const [starter, body, manifest, parts] = await Promise.all([image(tribe.starter), image(tribe.body),
-        fetch(assetSource(tribe.manifest)).then(response => {
+        fetch(await (globalThis.SpawnerAssets?.load(tribe.manifest) || Promise.resolve(assetSource(tribe.manifest)))).then(response => {
           if (!response.ok) throw new Error("부족 정보를 불러오지 못했습니다.");
           return response.json();
         }), Promise.all(tribe.parts.map(image)), attributes.prepare(tribe.key)]);

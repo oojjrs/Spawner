@@ -8,7 +8,7 @@ export function createCombatStageAppearance(image) {
     const cached = image(path);
     if (cached) return cached;
     const asset = globalThis.SpawnerAssets?.image?.() || new Image();
-    asset.src = globalThis.SpawnerAssets?.source(path) || path; await asset.decode(); return asset;
+    asset.src = await globalThis.SpawnerAssets?.load?.(path) || globalThis.SpawnerAssets?.source(path) || path; await asset.decode(); return asset;
   };
   const art = createUnitActionArt(path => globalThis.SpawnerAssets?.source(path) || path, surface, load);
   function draw(context, agent, time, deathAge, fallback, cell, mirror) {

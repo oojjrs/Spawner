@@ -8,7 +8,7 @@ const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index
 const rosters = Object.fromEntries(sides.map(side => [side, [builds[side]]]));
 const selected = { left: 0, right: 0 };
 const rules = { ...DEFAULT_SIMULATION_RULES };
-let trial, playing = false, lastFrame = 0, controlId = 0, assetsReady = false;
+let trial, playing = false, lastFrame = 0, controlId = 0;
 const main = document.querySelector("main");
 main.replaceChildren();
 function node(tag, text, className) {
@@ -121,17 +121,15 @@ function render() {
     } catch(error) { elements.status.textContent=settingError(error); }
   }
   const result=trial?.result(),ended=!!result?.reason;
-  for(const key of ["step","run","finish"])elements[key].disabled=!assetsReady||!trial||ended;
+  for(const key of ["step","run","finish"])elements[key].disabled=!trial||ended;
   if(!trial){elements.phase.textContent="";return;}
   if(ended) {playing=false;elements.run.textContent="자동 전투";elements.status.textContent=(result.winner==="draw"?"무승부":result.winner==="left"?"왼쪽 승리":"오른쪽 승리")+" · "+({death:"사망",'time-limit':"시간 제한",'no-offense':"공격 불가",'event-limit':"사건 제한"}[result.reason]||result.reason);}
   else elements.status.textContent=playing?"전투 중":trial.time?"일시정지":"대결 준비";
   elements.phase.textContent=trial.time.toFixed(2)+"초 · "+trial.history.length+"개 사건";
 }
 reset();
-Promise.resolve(globalThis.SpawnerAssets?.ready).then(() => { assetsReady = true; render(); }, error => { elements.status.textContent = error.message; });
 function frame(now) {
   const elapsed=lastFrame?Math.min(.1,(now-lastFrame)/1000):0;lastFrame=now;
-  if (!assetsReady) { requestAnimationFrame(frame); return; }
   if(playing&&trial){trial.advance(elapsed);render();}
   combatStage.render(trial, now, playing);requestAnimationFrame(frame);
 }

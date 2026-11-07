@@ -66,9 +66,7 @@
     const backgroundReady = image.decode().catch(() => {});
     const seed = globalThis.SpawnerEntryAudio;
     if (!seed) {
-      let timeout;
-      await Promise.race([backgroundReady, new Promise(resolve => { timeout = setTimeout(resolve, 15000); })]);
-      clearTimeout(timeout);
+      backgroundReady.catch(() => {});
       return;
     }
     globalThis.SpawnerLocalAssetSources ||= Object.create(null);
@@ -112,12 +110,7 @@
     }
     globalThis.SpawnerWelcomeWaveform.create(seed.music.waveform);
     seed.resumeMusic?.();
-    let timeout;
-    await Promise.race([
-      Promise.all([backgroundReady, Promise.race([seed.music.ready, seed.priority])]),
-      new Promise(resolve => { timeout = setTimeout(resolve, 15000); })
-    ]);
-    clearTimeout(timeout);
+    Promise.all([backgroundReady, Promise.race([seed.music.ready, seed.priority])]).catch(() => {});
   }
   button.addEventListener("click", async () => {
     if (loading) return;
@@ -142,13 +135,14 @@
           loaded.add(scripts[cursor]);
         }
         if (scripts[cursor] === "./client/welcome-header.js") {
-          await globalThis.SpawnerWelcomeHeaderReady;
-          const seed = globalThis.SpawnerEntryAudio;
-          if (seed) {
-            seed.audio ||= globalThis.SpawnerAudio.create();
-            globalThis.SpawnerWelcomeHeader.attachAudio(seed.audio);
-          }
-          await globalThis.SpawnerWelcomeHeader.start();
+          globalThis.SpawnerWelcomeHeaderReady.then(async () => {
+            const seed = globalThis.SpawnerEntryAudio;
+            if (seed) {
+              seed.audio ||= globalThis.SpawnerAudio.create();
+              globalThis.SpawnerWelcomeHeader.attachAudio(seed.audio);
+            }
+            await globalThis.SpawnerWelcomeHeader.start();
+          }).catch(() => {});
           await new Promise(resolve => {
             let frame = null, task = null, settled = false;
             function finish() {

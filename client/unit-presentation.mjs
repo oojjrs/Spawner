@@ -29,7 +29,8 @@ export function createUnitPresentation(options) {
   const drawAgentBirth = options.drawBirth;
   const createSurface = options.createSurface;
   const actionArt = createUnitActionArt(path => globalThis.SpawnerAssets?.source(path) || path, createSurface, async path => {
-    const image = new Image(); image.src = globalThis.SpawnerAssets?.source(path) || path; await image.decode(); return image;
+    const source = await globalThis.SpawnerAssets?.load?.(path) || globalThis.SpawnerAssets?.source(path) || path;
+    const image = globalThis.SpawnerAssets?.image?.() || new Image(); image.src = source; await image.decode(); return image;
   });
   function hasEmbeddedCargo(agent) { const pose = unitActionArtPose(agent, options.time()); return !!pose?.animation.embeddedCargo && actionArt.readyAction(agent, options.time()); }
   const clamp = (value, lower, upper) => Math.max(lower, Math.min(upper, value));
@@ -315,5 +316,5 @@ export function createUnitPresentation(options) {
     drawBody();
   }
 
-  return { hasEmbeddedCargo, prepareAnimation: actionArt.prepare, agentIdlePose, agentBobOffset, agentWalkPose, drawAgentFeet, agentJumpOffset, agentAppearanceBodyPose, agentBodyPose, agentHeadPose, drawAgentHead, prepareSproutCombatFrames, sproutCombatFrame, drawAgentRanged, drawAgentBaseResource, drawAgentAnimation, drawAgentMovement, drawAgentAttack, drawAgentAppearanceBody, agentAppearanceKey, agentBodyLift, composeAgentAntennae, composeAgentBaseFeet, composeAgentSprite, drawRootMotion };
+  return { hasEmbeddedCargo, animationReady: actionArt.readyFrame, prepareAnimation: actionArt.prepare, agentIdlePose, agentBobOffset, agentWalkPose, drawAgentFeet, agentJumpOffset, agentAppearanceBodyPose, agentBodyPose, agentHeadPose, drawAgentHead, prepareSproutCombatFrames, sproutCombatFrame, drawAgentRanged, drawAgentBaseResource, drawAgentAnimation, drawAgentMovement, drawAgentAttack, drawAgentAppearanceBody, agentAppearanceKey, agentBodyLift, composeAgentAntennae, composeAgentBaseFeet, composeAgentSprite, drawRootMotion };
 }

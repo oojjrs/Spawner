@@ -3,12 +3,13 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   let audioConnection = null;
   let audioReset = null;
   let startPresentation = null;
+  let resourcesReady = false;
   globalThis.SpawnerWelcomeHeader = Object.freeze({ attachAudio(audio) {
     if (audioConnection === audio) return;
     audioReset?.();
     audioConnection = audio;
   }, start() { return startPresentation?.(); },
-  presentationResources() { return { images: sources, sheets: nativeAssets.sheets, creatures: creatureResources }; } });
+  presentationResources() { if (!resourcesReady) return null; return { images: sources, sheets: nativeAssets.sheets, creatures: creatureResources }; } });
   await globalThis.SpawnerAssets.welcomeReady;
   const welcome = document.getElementById("welcome");
   const title = document.getElementById("welcome-title");
@@ -38,7 +39,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
   }
   let unitPresentation;
-  const nativeAssets = model.createUnitPresentationAssets({ model, source: globalThis.SpawnerAssets.source, makeSurface: createSurface,
+  const nativeAssets = model.createUnitPresentationAssets({ model, createImage: globalThis.SpawnerAssets.image, source: globalThis.SpawnerAssets.source, makeSurface: createSurface,
     prepareSproutFrames: (entry, count) => unitPresentation.prepareSproutCombatFrames(entry, count) });
   const tribeArt = nativeAssets.tribeArt;
   const sources = nativeAssets.images;
@@ -77,6 +78,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   ]);
   const creatureResources = { idle: new Map(), walk: new Map(), attack: new Map(), ranged: new Map(), hurt: new Map(),
     owlFrames: new Map(), beetleFrames: new Map(), beetleSheet: null, beetleAttackSheet: null, beetleSprite: null };
+  resourcesReady = true;
   const appearances = [
     { bean: {}, others: {} },
     { bean: { feet: 1 }, others: { feet: 1 } },

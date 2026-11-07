@@ -12,7 +12,7 @@
     const detailVfxImages = new Map();
     function detailVfxImage(path) {
       if (!detailVfxImages.has(path)) {
-        const image = new Image(); image.src = assetSource(path);
+        const image = globalThis.SpawnerAssets.image(); image.src = assetSource(path);
         detailVfxImages.set(path, image);
       }
       return detailVfxImages.get(path);
@@ -24,7 +24,7 @@
     const combatAttributeArt = Spawner.createCombatAttributeArt(assetSource, (width, height) => {
       const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
     }, async path => {
-      const image = new Image(); image.src = assetSource(path); await image.decode(); return image;
+      const image = globalThis.SpawnerAssets.image(); image.src = assetSource(path); await image.decode(); return image;
     });
     const springDominantBirthArt = Spawner.createSpringDominantBirthArt((width, height) => {
       const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
@@ -272,7 +272,7 @@
     });
     const foodProgressFill = document.getElementById("food-progress-fill");
     const evolutionPointsOutput = document.getElementById("evolution-points");
-    const grassGround = new Image();
+    const grassGround = globalThis.SpawnerAssets.image();
     grassGround.src = assetSource("DesignAssets/Terrain/grassland-ground.png");
     const colonyGroundSprites = new Map();
     const colonyPollen = { periodMs: 18000, referenceSize: 512, particles: [
@@ -283,23 +283,23 @@
     colonyPollen.particles.forEach(particle => {
       particle.sprite = createColonyPollenSprite(particle.radiusX, particle.radiusY);
     });
-    const colonyGround = new Image();
+    const colonyGround = globalThis.SpawnerAssets.image();
     colonyGround.src = assetSource("DesignAssets/Terrain/nest-soil-ground.png");
-    const foodSprite = new Image();
+    const foodSprite = globalThis.SpawnerAssets.image();
     foodSprite.src = assetSource("DesignAssets/Resources/clay.png");
-    const treeFruitSprite = new Image();
+    const treeFruitSprite = globalThis.SpawnerAssets.image();
     treeFruitSprite.src = assetSource("DesignAssets/Foods/food-berry-bush.png");
-    const carriedSoilSprite = new Image();
+    const carriedSoilSprite = globalThis.SpawnerAssets.image();
     carriedSoilSprite.src = assetSource("DesignAssets/Resources/clay-carry.png");
-    const carriedFoodSprite = new Image();
+    const carriedFoodSprite = globalThis.SpawnerAssets.image();
     carriedFoodSprite.src = assetSource("DesignAssets/Resources/clay-carry.png");
     const resourceSprites = new Map(Spawner.RESOURCE_TYPES.map(definition => {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = definition.key === "honey-mushrooms" ? foodSprite.src : assetSource(definition.image);
       return [definition.key, sprite];
     }));
     const resourceCarrySprites = new Map(Spawner.RESOURCE_TYPES.map(definition => {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = assetSource(definition.carryImage);
       return [definition.key, sprite];
     }));
@@ -310,12 +310,12 @@
       pebbles: { x: .56, y: .94, width: .83, depth: .025, opacity: .4 },
       clay: { x: .47, y: .98, width: .84, depth: .025, opacity: .42 },
     };
-    const beetleCorpseSprite = new Image();
+    const beetleCorpseSprite = globalThis.SpawnerAssets.image();
     beetleCorpseSprite.src = assetSource("DesignAssets/Animations/BeetleDeath/dead-v2.png");
     const beetleCorpseAnimation = Spawner.imageAnimation({ image: "DesignAssets/Animations/BeetleDeath/dead-v2.png",
       frameSize: 185, columns: 1, pivotX: 95.5, pivotY: 163 });
     const resourceHarvestSprites = new Map(Spawner.RESOURCE_HARVEST_ANIMATIONS.map(animation => {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = assetSource(animation.image);
       return [animation.resourceType, { ...animation, sprite }];
     }));
@@ -325,7 +325,7 @@
       ["small", "DesignAssets/Burrows/beetle-burrow-small.png", { x:112, y:284, width:1048, height:734 }],
       ["large", "DesignAssets/Burrows/beetle-burrow-large.png", { x:41, y:194, width:1694, height:569 }]
     ].map(([type, source, crop]) => {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = assetSource(source);
       return [type, { sprite, crop: Spawner.imageRegion(source, crop) }];
     }));
@@ -351,28 +351,28 @@
     foodSelectionShape.width = 1;
     foodSelectionShape.height = 1;
     foodSelectionShape.getContext("2d").fillRect(0, 0, 1, 1);
-    const starterObjectSprite = new Image();
+    const starterObjectSprite = globalThis.SpawnerAssets.image();
     const agentSprites = new Map();
     const agentRenderingTasks = new Map();
     let agentRenderingQueue = Promise.resolve();
     const agentImageSources = new WeakMap();
     const combatSheets = new Map(Spawner.PLAYER_COMBAT_ANIMATIONS.map(animation => [animation.tribe,
       Object.fromEntries(["attack", "hurt"].map(action => {
-        const sheet = new Image(); sheet.src = assetSource(animation[action]); return [action, sheet];
+        const sheet = globalThis.SpawnerAssets.image(); sheet.src = assetSource(animation[action]); return [action, sheet];
       }))]));
     const agentMovementSheets = new Map([
       ["spore", "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp", 424, 300],
       ["pebble", "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp", 406, 300],
       ["spring", "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp", 230, 300]
     ].map(([tribe, path, width, height]) => {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = assetSource(path);
       return [tribe, { sprite, width, height, scale: 1, ...Spawner.UNIT_ANIMATIONS[tribe].walk }];
     }));
     const unitAnimationSheets = new Map(Object.entries(Spawner.UNIT_ANIMATIONS).map(([tribe, animations]) => [tribe,
       new Map(Object.entries({ ...animations, death: Spawner.AGENT_DEATH_ANIMATIONS[tribe] }).map(([action, animation]) => {
         const prepared = sharedPresentation?.sheets.get(tribe)?.get(action);
-        const sprite = prepared?.sprite || combatSheets.get(tribe)?.[action] || (action === "walk" ? agentMovementSheets.get(tribe)?.sprite : null) || new Image();
+        const sprite = prepared?.sprite || combatSheets.get(tribe)?.[action] || (action === "walk" ? agentMovementSheets.get(tribe)?.sprite : null) || globalThis.SpawnerAssets.image();
         if (!prepared) sprite.src = assetSource(animation.image);
         return [action, prepared || { animation, sprite, scale: 1 }];
       }))]));
@@ -452,51 +452,51 @@
     const unitGroundShapes = new Map();
     let beetleCorpseScale = 1.6;
     const creatureIdleSheets = new Map(Object.entries(Spawner.CREATURE_IDLE_ANIMATIONS).map(([species, animation]) => {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = assetSource(animation.image);
       return [species, { animation, sprite, scale: 1 }];
     }));
     const creatureWalkSheets = new Map(Object.entries(Spawner.CREATURE_WALK_ANIMATIONS).map(([species, animation]) => {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = assetSource(animation.image);
       return [species, { animation, sprite, scale: 1 }];
     }));
     const creatureHurtSheets = new Map(Object.entries(Spawner.CREATURE_HURT_ANIMATIONS).map(([species, animation]) => {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = assetSource(animation.image);
       return [species, { animation, sprite, scale: 1 }];
     }));
     const creatureDeathSheets = new Map(Object.entries(Spawner.CREATURE_DEATH_ANIMATIONS).map(([species, animation]) => {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = assetSource(animation.image);
       return [species, { animation, sprite, scale: 1 }];
     }));
     const creatureAttackSheets = new Map(Object.entries(Spawner.CREATURE_ATTACK_ANIMATIONS).map(([species, animation]) => {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = assetSource(animation.image);
       return [species, { animation, sprite, scale: 1 }];
     }));
     const creatureRangedSheets = new Map(Object.entries(Spawner.CREATURE_RANGED_ANIMATIONS).map(([species, animation]) => {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = assetSource(animation.image);
       return [species, { animation, sprite, scale: 1 }];
     }));
-    const attackSheet = new Image();
+    const attackSheet = globalThis.SpawnerAssets.image();
     attackSheet.src = assetSource(AGENT_ATTACK_ASSET);
     const structureEffectSprites = Object.fromEntries(["ring", "sparkle"].map(key => {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = assetSource(Spawner.STRUCTURE_EFFECT_ASSETS[key]);
       return [key, sprite];
     }));
-    const sporeBirthSheet = new Image();
+    const sporeBirthSheet = globalThis.SpawnerAssets.image();
     sporeBirthSheet.src = assetSource(Spawner.SPORE_BIRTH_ANIMATION.image);
     const sporeBirthFrames = new Map();
     let sporeBirthReady = null;
-    const springBirthSheet = new Image();
+    const springBirthSheet = globalThis.SpawnerAssets.image();
     springBirthSheet.src = assetSource(SPRING_BIRTH_ANIMATION.image);
-    const pebbleBirthSheet = new Image();
+    const pebbleBirthSheet = globalThis.SpawnerAssets.image();
     pebbleBirthSheet.src = assetSource(PEBBLE_BIRTH_ANIMATION.image);
-    const pebbleBirthForeground = new Image();
+    const pebbleBirthForeground = globalThis.SpawnerAssets.image();
     pebbleBirthForeground.src = assetSource(PEBBLE_BIRTH_ANIMATION.foreground);
     const agentHeadMotions = new Map();
     const agentDisplayLayout = { time: null, agents: null, rivals: null, positions: new Map(), cells: new Map(), offsets: new Map() };
@@ -505,22 +505,22 @@
     const snapshotCollections = {};
     const agentCombatLayout = { time: null, agents: null, rivals: null, placements: new Map() };
     const agentSpriteSet = new WeakSet([starterObjectSprite]);
-    const beetleSprite = new Image();
+    const beetleSprite = globalThis.SpawnerAssets.image();
     agentSpriteSet.add(beetleSprite);
     beetleSprite.src = assetSource(globalThis.Spawner.BEETLE_NEUTRAL_ASSET);
-    const beetleSheet = new Image();
+    const beetleSheet = globalThis.SpawnerAssets.image();
     agentSpriteSet.add(beetleSheet);
     beetleSheet.src = assetSource(globalThis.Spawner.BEETLE_ANIMATION_ASSET);
-    const beetleAttackSheet = new Image();
+    const beetleAttackSheet = globalThis.SpawnerAssets.image();
     agentSpriteSet.add(beetleAttackSheet);
     beetleAttackSheet.src = assetSource(Spawner.BEETLE_ATTACK_ASSET);
     const beetleFrames = sharedPresentation?.creatures.beetleFrames || new Map();
-    const talonOwlSheet = new Image();
+    const talonOwlSheet = globalThis.SpawnerAssets.image();
     talonOwlSheet.src = assetSource(Spawner.TALON_OWL_IDLE.image);
     const talonOwlFrames = sharedPresentation?.creatures.owlFrames || new Map();
     const encounterSprites = new Map();
-    await Promise.all(Spawner.ENCOUNTER_TYPES.map(async type => {
-      const image = new Image();
+    Promise.allSettled(Spawner.ENCOUNTER_TYPES.map(async type => {
+      const image = globalThis.SpawnerAssets.image();
       image.src = assetSource(type.image);
       await image.decode();
       const crop = await tribeArt.prepareBounds(image, false);
@@ -540,7 +540,7 @@
       ["antenna-1", assetSource("DesignAssets/Units/Parts/antenna-1.png")],
       ["antenna-2", assetSource("DesignAssets/Units/Parts/antenna-2.png")],
     ].map(([key, source]) => {
-      const part = new Image();
+      const part = globalThis.SpawnerAssets.image();
       part.src = source;
       return [key, part];
     }));
@@ -551,7 +551,7 @@
       ["sprout-right", assetSource("DesignAssets/Units/BaseParts/sprout-right.png")],
       ["sprout-stem", assetSource("DesignAssets/Units/BaseParts/sprout-stem.png")],
     ].map(([key, source]) => {
-      const part = new Image();
+      const part = globalThis.SpawnerAssets.image();
       part.src = source;
       return [key, part];
     }));
@@ -568,95 +568,89 @@
       pixelRatio: () => window.devicePixelRatio || 1, createSurface: (width, height) => {
         const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
       } });
-    await Promise.all([starterObjectSprite, beetleSprite, beetleSheet, beetleAttackSheet, talonOwlSheet, attackSheet, foodSprite, treeFruitSprite, carriedFoodSprite,
-      beetleCorpseSprite, ...resourceCarrySprites.values(), ...agentParts.values(), ...agentBaseParts.values(),
-      ...[...burrowAppearances.values()].map(appearance => appearance.sprite)].map(part => part.decode()));
-
-    await Promise.all([...Spawner.PLAYER_TRIBES.map(prepareUnitAnimationSheets),
-      ...[...creatureIdleSheets.values()].map(async entry => {
+    Promise.allSettled([...agentParts.values(), ...agentBaseParts.values()].map(part => part.decode()));
+    for (const tribe of Spawner.PLAYER_TRIBES) prepareUnitAnimationSheets(tribe).then(() => {
+      const entry = unitAnimationSheets.get(tribe.key).get("idle");
+      prepareUnitDisplaySize(tribe.key, entry.sprite, entry.animation, AGENT_HEIGHT * entry.scale);
+    }).catch(() => {});
+    const creatureIdleReady = new Map([...creatureIdleSheets].map(([species, entry]) => [species, (async () => {
       await entry.sprite.decode();
       const bounds = await tribeArt.prepareBounds(entry.sprite, entry.animation.frameSize);
       entry.scale = Spawner.creatureIdleSheetScale(entry.animation, bounds);
-    })]);
-    await Promise.all([...creatureWalkSheets.entries()].map(async ([species, entry]) => {
-      await entry.sprite.decode();
-      entry.scale = creatureIdleSheets.get(species)?.scale || 1;
-    }));
-    await Promise.all([...creatureHurtSheets].map(async ([species, entry]) => {
-      await entry.sprite.decode();
-      entry.scale = creatureIdleSheets.get(species)?.scale || 1;
-    }));
-    await Promise.all([...creatureAttackSheets, ...creatureRangedSheets, ...creatureDeathSheets].map(async ([species, entry]) => {
-      await entry.sprite.decode();
-      entry.scale = creatureIdleSheets.get(species)?.scale || (species === "spiny-back-beetle" ?
-        Spawner.BEETLE_SPRITE.scale * (Spawner.BEETLE_SPRITE.registrationScale || 1) / 1.4 : 1);
-    }));
-    for (const tribe of Spawner.PLAYER_TRIBES) {
-      const entry = unitAnimationSheets.get(tribe.key).get("idle");
-      prepareUnitDisplaySize(tribe.key, entry.sprite, entry.animation, AGENT_HEIGHT * entry.scale);
-    }
-    for (const [species, entry] of creatureIdleSheets)
       prepareUnitDisplaySize(species, entry.sprite, entry.animation, 1.4 * entry.scale * (entry.animation.registrationScale || 1));
-    prepareUnitDisplaySize("talon-owl", talonOwlSheet, Spawner.TALON_OWL_IDLE, Spawner.TALON_OWL_IDLE.scale * (Spawner.TALON_OWL_IDLE.registrationScale || 1));
-    prepareUnitDisplaySize("spiny-back-beetle", beetleSheet, Spawner.BEETLE_SPRITE, Spawner.BEETLE_SPRITE.scale * (Spawner.BEETLE_SPRITE.registrationScale || 1));
-    for (const [species, entry] of creatureDeathSheets) {
-      await tribeArt.prepareBounds(entry.sprite, entry.animation.frameSize);
-      prepareCreatureDeathSize(species, entry);
+    })()]));
+    for (const task of creatureIdleReady.values()) task.catch(() => {});
+    for (const [species, entry] of [...creatureWalkSheets, ...creatureHurtSheets, ...creatureAttackSheets, ...creatureRangedSheets, ...creatureDeathSheets]) {
+      Promise.all([entry.sprite.decode(), creatureIdleReady.get(species)]).then(async () => {
+        entry.scale = creatureIdleSheets.get(species)?.scale || (species === "spiny-back-beetle" ? Spawner.BEETLE_SPRITE.scale * (Spawner.BEETLE_SPRITE.registrationScale || 1) / 1.4 : 1);
+        if (creatureDeathSheets.get(species) === entry) {
+          await tribeArt.prepareBounds(entry.sprite, entry.animation.frameSize);
+          prepareCreatureDeathSize(species, entry);
+        }
+      }).catch(() => {});
     }
-    const beetleCorpseBounds = tribeArt.bounds(beetleCorpseSprite, false);
-    beetleCorpseScale = Spawner.UNIT_DISPLAY_SIZES["spiny-back-beetle"] * beetleCorpseSprite.naturalWidth /
-      (unitDisplayScales.get("spiny-back-beetle") * Math.max(beetleCorpseBounds.width, beetleCorpseBounds.height));
-    for (const [type, sprite] of resourceCarrySprites) resourceCarryBounds.set(type, tribeArt.bounds(sprite, false));
+    for (const [type, sprite] of resourceCarrySprites) sprite.decode().then(() => {
+      resourceCarryBounds.set(type, tribeArt.bounds(sprite, false));
+    }).catch(() => {});
+    const beetleRenderingReady = beetleSheet.decode().then(() => {
+      prepareUnitDisplaySize("spiny-back-beetle", beetleSheet, Spawner.BEETLE_SPRITE, Spawner.BEETLE_SPRITE.scale * (Spawner.BEETLE_SPRITE.registrationScale || 1));
+      for (const index of new Set(Object.values(Spawner.BEETLE_ANIMATIONS).flatMap(animation => animation.frames))) {
+        if (beetleFrames.has(index)) continue;
+        const shape = Spawner.BEETLE_SPRITE;
+        const frame = document.createElement("canvas");
+        frame.width = shape.frameSize;
+        frame.height = shape.frameSize;
+        frame.getContext("2d").drawImage(beetleSheet, index % shape.columns * shape.frameSize,
+          Math.floor(index / shape.columns) * shape.frameSize, shape.frameSize, shape.frameSize,
+          0, 0, shape.frameSize, shape.frameSize);
+        beetleFrames.set(index, frame);
+        agentSpriteSet.add(frame);
+      }
 
-    for (const index of new Set(Object.values(Spawner.BEETLE_ANIMATIONS).flatMap(animation => animation.frames))) {
-      if (beetleFrames.has(index)) continue;
-      const shape = Spawner.BEETLE_SPRITE;
-      const frame = document.createElement("canvas");
-      frame.width = shape.frameSize;
-      frame.height = shape.frameSize;
-      frame.getContext("2d").drawImage(beetleSheet, index % shape.columns * shape.frameSize,
-        Math.floor(index / shape.columns) * shape.frameSize, shape.frameSize, shape.frameSize,
-        0, 0, shape.frameSize, shape.frameSize);
-      beetleFrames.set(index, frame);
-      agentSpriteSet.add(frame);
-    }
+    });
+    beetleRenderingReady.catch(() => {});
+    Promise.all([beetleCorpseSprite.decode(), beetleRenderingReady]).then(() => {
+      const bounds = tribeArt.bounds(beetleCorpseSprite, false);
+      beetleCorpseScale = Spawner.UNIT_DISPLAY_SIZES["spiny-back-beetle"] * beetleCorpseSprite.naturalWidth /
+        (unitDisplayScales.get("spiny-back-beetle") * Math.max(bounds.width, bounds.height));
+    }).catch(() => {});
+    talonOwlSheet.decode().then(() => {
+      prepareUnitDisplaySize("talon-owl", talonOwlSheet, Spawner.TALON_OWL_IDLE, Spawner.TALON_OWL_IDLE.scale * (Spawner.TALON_OWL_IDLE.registrationScale || 1));
+      for (let index = 0; index < Spawner.TALON_OWL_IDLE.frameCount; index++) {
+        if (talonOwlFrames.has(index)) continue;
+        const shape = Spawner.TALON_OWL_IDLE;
+        const frame = document.createElement("canvas");
+        frame.width = frame.height = shape.frameSize;
+        frame.getContext("2d").drawImage(talonOwlSheet, index % shape.columns * shape.frameSize,
+          Math.floor(index / shape.columns) * shape.frameSize, shape.frameSize, shape.frameSize,
+          0, 0, shape.frameSize, shape.frameSize);
+        talonOwlFrames.set(index, frame);
+        agentSpriteSet.add(frame);
+      }
 
-    for (let index = 0; index < Spawner.TALON_OWL_IDLE.frameCount; index++) {
-      if (talonOwlFrames.has(index)) continue;
-      const shape = Spawner.TALON_OWL_IDLE;
-      const frame = document.createElement("canvas");
-      frame.width = frame.height = shape.frameSize;
-      frame.getContext("2d").drawImage(talonOwlSheet, index % shape.columns * shape.frameSize,
-        Math.floor(index / shape.columns) * shape.frameSize, shape.frameSize, shape.frameSize,
-        0, 0, shape.frameSize, shape.frameSize);
-      talonOwlFrames.set(index, frame);
-      agentSpriteSet.add(frame);
-    }
-
-    await Promise.all([...resourceHarvestSprites.values()].map(async animation => {
+    }).catch(() => {});
+    for (const animation of resourceHarvestSprites.values()) {
       animation.frames = new Map();
-      await prepareAnimationFrames(animation.sprite, animation.frameSize, animation.columns,
-        animation.frameCount, animation.frameSize).then(frames => { animation.frames = frames; }).catch(() => {});
-    }));
-
-    await Promise.all(colonyAppearances.map(initializeColonyLight));
-
+      prepareAnimationFrames(animation.sprite, animation.frameSize, animation.columns, animation.frameCount, animation.frameSize)
+        .then(frames => { animation.frames = frames; }).catch(() => {});
+    }
+    Promise.allSettled(colonyAppearances.map(initializeColonyLight));
     let WORLD_SIZE = Spawner.WORLD_SIZE;
     const worldMap = { terrain: new Uint8Array(WORLD_SIZE * WORLD_SIZE), burrows: [], food: [], origin: { x: WORLD_SIZE / 2, y: WORLD_SIZE / 2 } };
-    const forest = { sprite: new Image(), trees: [], cells: new Map(), steps: new Map(), shakes: new Map(), parts: [], time: null, bounds: [
+    const forest = { sprite: globalThis.SpawnerAssets.image(), trees: [], cells: new Map(), steps: new Map(), shakes: new Map(), parts: [], time: null, bounds: [
       { left: 0.087017, top: 0.09116, right: 0.972376, bottom: 0.964088 },
       { left: 0.093923, top: 0.016575, right: 0.907459, bottom: 0.964088 },
       { left: 0.055249, top: 0.13674, right: 0.929558, bottom: 0.964088 }
     ] };
     forest.sprite.src = assetSource("DesignAssets/Terrain/standing-tree-smooth-atlas.png");
     const hazardGroundSprites = ["DesignAssets/Terrain/poison-spore-ground.png"].map(source => {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = assetSource(source);
       return sprite;
     });
     const hazardCells = [];
     const hazardGroundTiles = new Map();
-    await Promise.all([forest.sprite, ...hazardGroundSprites].map(sprite => sprite.decode()));
+    Promise.allSettled([forest.sprite, ...hazardGroundSprites].map(sprite => sprite.decode()));
 
     const COLONY_SIZE = 5;
     const COLONY_ORIGIN = {
@@ -709,7 +703,7 @@
       ford: "#9da899"
     };
     const terrainGrounds = Object.fromEntries([["land",assetSource("DesignAssets/Terrain/land-ground.png")],["forest",assetSource("DesignAssets/Terrain/forest-ground.png")],["swamp",assetSource("DesignAssets/Terrain/swamp-ground.png")],["lowMountain",assetSource("DesignAssets/Terrain/low-mountain-ground.png")],["highMountain",assetSource("DesignAssets/Terrain/high-mountain-ground.png")],["ridge",assetSource("DesignAssets/Terrain/ridge-ground.png")],["coast",assetSource("DesignAssets/Terrain/coast-ground.png")],["shallow",assetSource("DesignAssets/Terrain/deep-water-ground.png")],["ford",assetSource("DesignAssets/Terrain/ford-ground.png")],["deep",assetSource("DesignAssets/Terrain/deep-water-ground.png")]].map(([terrain, source]) => {
-      const image = new Image();
+      const image = globalThis.SpawnerAssets.image();
       image.src = source;
       return [terrain, image];
     }));
@@ -1459,12 +1453,17 @@
       connectionStatus.hidden = false;
     }
 
-    async function saveWorldRendering() {
+    async function saveWorldRendering(generation) {
       if (!forest.layoutKey) return;
-      if (!forest.hazardImage) forest.hazardImage = await new Promise(resolve => hazardCanvas.toBlob(resolve, "image/png"));
+      if (!forest.hazardImage) {
+        const image = await new Promise(resolve => hazardCanvas.toBlob(resolve, "image/png"));
+        if (generation !== worldRenderingGeneration) return;
+        forest.hazardImage = image;
+      }
       if (!forest.hazardImage) throw new Error("위험 지형 이미지를 저장하지 못했습니다.");
       const layout = worldRenderingRecord(), database = await openRenderingStorage();
       try {
+        if (generation !== worldRenderingGeneration) return;
         await new Promise((resolve, reject) => {
           const task = database.transaction("maps", "readwrite");
           task.objectStore("maps").put(layout);
@@ -1472,14 +1471,18 @@
           task.onabort = () => reject(task.error);
           task.onerror = () => {};
         });
-        forest.layout = layout;
+        if (generation === worldRenderingGeneration) forest.layout = layout;
       } finally { database.close(); }
     }
 
+    let worldRenderingGeneration = 0;
+    let cancelWorldRendering = null;
     async function prepareWorldRendering(world, colonies) {
+      const generation = ++worldRenderingGeneration;
+      cancelWorldRendering?.();
+      cancelWorldRendering = null;
       terrainRendering.ready = false;
       terrainRendering.cacheError = null;
-      await forest.cacheWrite;
       const size = world.size || Math.sqrt(world.terrain.length);
       if (WORLD_SIZE !== size) {
         WORLD_SIZE = size;
@@ -1509,16 +1512,18 @@
       worldMap.treeCells = world.treeCells ? Uint8Array.from(world.treeCells) : null;
       forest.layoutKey = worldRenderingKey(world, colonies);
       forest.resourceCells = world.resourceCells || [];
-      let layout = forest.layoutKey ? await readWorldRendering(forest.layoutKey, world) : null;
-      if (layout) {
-        try { await restoreWorldRendering(layout); }
-        catch { layout = null; }
-      }
-      if (!layout) {
-        updateForest(world.seed, world.resourceCells);
-        updateHazards(world.seed);
-        forest.hazardImage = null;
-      }
+      const layout = null;
+      updateForest(world.seed, world.resourceCells);
+      updateHazards(world.seed);
+      Promise.all(hazardGroundSprites.map(sprite => sprite.decode())).then(() => {
+        if (generation === worldRenderingGeneration) { updateHazards(world.seed); forest.hazardImage = null; }
+      }).catch(() => {});
+      forest.hazardImage = null;
+      updateTerrainRendering(world.seed, null);
+      for (const image of terrainRendering.forest.values()) image.close();
+      terrainRendering.forest.clear();
+      terrainRendering.forestKeys.clear();
+      terrainRendering.ready = true;
       let key = layout ? layout.rendering.key : world.seed >>> 0;
       if (!layout) for (const type of worldMap.terrain) key = Math.imul(key ^ type, 16777619) >>> 0;
       const trees = forest.trees.filter(tree => !colonies.some(colony => {
@@ -1532,7 +1537,7 @@
       const terrainReady = terrainRendering.key === key && terrainRendering.overview && terrainRendering.medium.size === (Math.ceil(WORLD_SIZE / 16) * Math.ceil(WORLD_SIZE / 16));
       const forestReady = changedRegions.length === 0;
       if (terrainReady && forestReady) {
-        if (!layout) await saveWorldRendering().catch(reportRenderingCacheError);
+        if (!layout) await saveWorldRendering(generation).catch(error => { if (generation === worldRenderingGeneration) reportRenderingCacheError(error); });
         terrainRendering.ready = true;
         updateRoomCreationProgress(95);
         return;
@@ -1540,6 +1545,7 @@
       setEvolutionText(welcomeStatus, (terrainReady ? "숲" : "고정 지형") + " 이미지 불러오는 중…");
       const images = [...(terrainReady ? [] : [grassGround, ...Object.values(terrainGrounds)]), ...(forestReady ? [] : [forest.sprite])];
       await Promise.all(images.map(image => image.decode()));
+      if (generation !== worldRenderingGeneration) return;
       const url = URL.createObjectURL(new Blob([terrainWorkerSource], { type: "text/javascript" }));
       const worker = new Worker(url);
       terrainRendering.cached = true;
@@ -1552,7 +1558,6 @@
           let data;
           if (layer === "terrain") {
             updateRoomCreationProgress(45);
-            updateTerrainRendering(world.seed, layout?.rendering);
             const grounds = Spawner.renderingAssets ? null : TERRAIN_TYPES.map((type, index) => terrainGroundPixels(index));
             data = { layer, size: WORLD_SIZE, key: "terrain-64-v4:" + world.seed + ":" + key, assetKey: Spawner.renderingAssets?.terrain,
               rendering: { types: terrainRendering.types, edges: terrainRendering.edges, colors: terrainRendering.colors, waterEdge: terrainRendering.waterEdge,
@@ -1560,15 +1565,20 @@
             updateRoomCreationProgress(50);
           } else {
             if (forest.bitmap) forest.bitmap.close();
-            forest.bitmap = await createImageBitmap(forest.sprite);
+            const bitmap = await createImageBitmap(forest.sprite);
+            if (generation !== worldRenderingGeneration) { bitmap.close(); return; }
+            forest.bitmap = bitmap;
             data = { layer, size: WORLD_SIZE, key: "forest-16-v2:" + world.seed + (world.roomId ? ":" + world.roomId : ""), assetKey: Spawner.renderingAssets?.forest,
               regions: changedRegions, sprite: await createImageBitmap(forest.bitmap) };
             updateRoomCreationProgress(90);
           }
+          if (generation !== worldRenderingGeneration) { data.sprite?.close(); return; }
           await new Promise((resolve, reject) => {
+            cancelWorldRendering = () => { worker.terminate(); reject(new Error()); };
             worker.onerror = event => reject(new Error(event.message));
             worker.onmessage = event => {
               const message = event.data;
+              if (generation !== worldRenderingGeneration) { message.image?.close?.(); message.surface?.close?.(); message.ground?.close?.(); return; }
               if (message.type === "status") {
                 action = message.cached ? "불러오는 중…" : "생성 중…";
                 setEvolutionText(welcomeStatus, label + " 이미지 " + action);
@@ -1601,8 +1611,13 @@
           });
           if (layer === "terrain") terrainRendering.key = key;
         }
-      } finally { worker.terminate(); URL.revokeObjectURL(url); }
-      if (!layout) await saveWorldRendering().catch(reportRenderingCacheError);
+      } finally {
+        worker.terminate(); URL.revokeObjectURL(url);
+        if (generation === worldRenderingGeneration) cancelWorldRendering = null;
+      }
+      if (generation !== worldRenderingGeneration) return;
+      if (!layout) await saveWorldRendering(generation).catch(error => { if (generation === worldRenderingGeneration) reportRenderingCacheError(error); });
+      if (generation !== worldRenderingGeneration) return;
       terrainRendering.ready = true;
       updateRoomCreationProgress(95);
     }
@@ -1712,7 +1727,7 @@
         const point = worldToScreen(x, y), size = 16 * state.camera.zoom;
         const replacement = forest.overrides.get(index);
         if (replacement) ctx.drawImage(replacement, point.x, point.y, size, size);
-        else ctx.drawImage(terrainRendering.forest.get(index), point.x, point.y, size, size);
+        else if (terrainRendering.forest.has(index)) ctx.drawImage(terrainRendering.forest.get(index), point.x, point.y, size, size);
       }
       ctx.restore();
     }
@@ -1772,8 +1787,8 @@
     }
 
     function drawTerrain() {
-      if (state.camera.zoom <= 18) { drawTerrainOverview(); return; }
-      if (state.camera.zoom <= 72) { drawTerrainMedium(); return; }
+      if (state.camera.zoom <= 18 && terrainRendering.overview) { drawTerrainOverview(); return; }
+      if (state.camera.zoom <= 72 && terrainRendering.medium.size === Math.ceil(WORLD_SIZE / 16) ** 2) { drawTerrainMedium(); return; }
       const topLeft = screenToWorld(0, 0);
       const bottomRight = screenToWorld(viewport.width, viewport.height);
       const cell = state.camera.zoom;
@@ -2623,7 +2638,7 @@
     }
 
     function createColonyAppearance(spriteSource) {
-      const sprite = new Image();
+      const sprite = globalThis.SpawnerAssets.image();
       sprite.src = spriteSource;
       const animation = { sheet: sprite, frameSize: 512, columns: 4, frameCount: 16, periodMs: 3960,
         order: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0],
@@ -4011,7 +4026,7 @@
         }
         rows.push(glyphs);
       }
-      const image = new Image();
+      const image = globalThis.SpawnerAssets.image();
       image.src = surface.toDataURL("image/png");
       await image.decode();
       ctx.drawImage(image, 0, 0, 1, 1);
@@ -4022,6 +4037,7 @@
 
     function drawEvolutionPoints(amount, x, y, icon, fontSize) {
       const cache = evolutionPointCache;
+      if (!cache) return;
       const glyphs = cache.rows[Math.round(fontSize) - 26];
       const text = cache.labels[amount] || "+" + amount;
       let width = icon + 10;
@@ -4367,6 +4383,7 @@
 
     async function prepareUnitAnimationSheets(tribe) {
       if (!unitAnimationReady.has(tribe.key)) unitAnimationReady.set(tribe.key, (async () => {
+        if (tribe.key === "bean") await starterObjectSprite.decode();
         const body = tribe.key === "bean" ? tribeArt.bounds(starterObjectSprite, false) : null;
         const reference = body ? Spawner.unitTribeReference(tribe.key, starterObjectSprite, body) : (await tribeArt.prepareUnit(tribe)).box;
         const sheets = unitAnimationSheets.get(tribe.key), idle = sheets.get("idle");
@@ -4398,7 +4415,7 @@
       if (optionalIdle && previous?.complete && !previous.naturalWidth && Date.now() >= (previous.idleRetryAt ?? Infinity))
         agentRangedImages.delete(path);
       if (!agentRangedImages.has(path)) {
-        const image = new Image();
+        const image = globalThis.SpawnerAssets.image();
         image.onload = () => scheduleRender();
         if (optionalIdle) image.onerror = () => { image.idleRetryAt = Date.now() + 2000; };
         image.src = assetSource(path);
@@ -4658,7 +4675,7 @@
       const command = Spawner.creatureRangedEffectCommand(effect, kind, { x, y, size, angle, age, muzzle });
       if (!command) return false;
       let image = detailVfxImages.get(command.image);
-      if (!image) { image = new Image(); image.src = assetSource(command.image); detailVfxImages.set(command.image, image); }
+      if (!image) { image = globalThis.SpawnerAssets.image(); image.src = assetSource(command.image); detailVfxImages.set(command.image, image); }
       return Spawner.drawDetailVfxCell(ctx, image, command);
     }
 
@@ -4789,14 +4806,15 @@
       const kind = unit.species || tribe;
       const base = unitDisplayScales.get(kind) || 1;
       const growth = Spawner.unitDisplaySize(unit) / (Spawner.UNIT_DISPLAY_SIZES[kind] || Spawner.UNIT_DISPLAY_SIZES.bean);
-      if (unit.species) return base * growth;
+      if (unit.species || !unitDisplayBounds.has(tribe)) return base * growth;
       const attributes = Spawner.unitDisplayAttributes(unit);
+      if (tribe === "bean" && [...agentBaseParts.values(), ...agentParts.values()].some(part => !part.complete || !part.naturalWidth)) return base * growth;
       const equipped = ATTRIBUTES.filter(attribute => attributes[attribute.key] > 0);
       if (!equipped.length || equipped.some(attribute => attribute.kind === "combat") && !combatAttributeArt.ready(tribe)) return base * growth;
       const key = tribe + ":" + equipped.map(attribute => attribute.key + ":" + attributes[attribute.key]).join(",");
       if (!unitAttributeScales.has(key)) {
         const scale = measureUnitDisplayScale(tribe, attributes, 1);
-        if (scale) unitAttributeScales.set(key, scale);
+        if (Number.isFinite(scale) && scale > 0) unitAttributeScales.set(key, scale);
       }
       return (unitAttributeScales.get(key) || base) * growth;
     }
@@ -4821,6 +4839,7 @@
       if (birth && !birth.seedVisible && !birth.unitVisible) return;
       const key = agent.species || agent.tribe || "bean";
       const contact = unitGroundContacts[key], bounds = unitDisplayBounds.get(key);
+      if (!bounds) return;
       const scale = unitDisplayScale(agent), anchor = unitDisplayFloor(agent);
       const growth = Spawner.unitDisplaySize(agent) / Spawner.UNIT_DISPLAY_SIZES[key];
       const appearance = Spawner.unitDisplayAttributes(agent);
@@ -4902,6 +4921,13 @@
       const margin = Math.max(4, cell * (birth ? Math.max(1.7, birth.seedLift + .4) : Math.max(.4, walkMargin)));
       if (topLeft.x + cell + margin < 0 || topLeft.x - margin > viewport.width ||
         topLeft.y + cell + margin < 0 || topLeft.y - margin > viewport.height) return;
+      if (agent.species) {
+        const sprite = agent.species === "spiny-back-beetle" ? beetleSheet : agent.species === "talon-owl" ? talonOwlSheet : creatureIdleSheets.get(agent.species)?.sprite;
+        if (!unitDisplayBounds.has(agent.species) || !sprite?.complete || !sprite.naturalWidth) {
+          Spawner.drawUnitLoading(ctx, topLeft.x + cell / 2, topLeft.y + cell * .4, Math.max(7, cell * .15), state.simSeconds);
+          return;
+        }
+      }
       if (agent.species && drawCreatureSpawn(agent, renderPosition)) return;
       if (agent.species && drawCreatureHurt(agent, renderPosition)) return;
       if (agent.species && drawCreatureAttack(agent, renderPosition)) return;
@@ -5440,7 +5466,9 @@
     function hazardGroundTile(hazard) {
       const key = hazard.kind + ":" + hazard.neighbors + ":" + hazard.tileColumn + ":" + hazard.tileRow;
       if (hazardGroundTiles.has(key)) return hazardGroundTiles.get(key);
-      const image = hazardGroundSprites[hazard.kind - 1], cell = image.naturalWidth / 4;
+      const image = hazardGroundSprites[hazard.kind - 1];
+      if (!image?.complete || !image.naturalWidth) return null;
+      const cell = image.naturalWidth / 4;
       const surface = document.createElement("canvas");
       surface.width = surface.height = 64;
       const context = surface.getContext("2d");
@@ -5482,6 +5510,7 @@
 
     function drawHazard(context, hazard, x, y, size) {
       const surface = hazardGroundTile(hazard);
+      if (!surface) return;
       context.drawImage(surface, x - size / 2, y - size / 2, size, size);
       if (context === ctx) drawHazardSelection(context, hazard, x, y, size);
     }
@@ -5590,6 +5619,7 @@
       renderFrame = null;
       if (document.hidden || connection.synchronizing) return;
       drawTribePreviews(now);
+      if (!tribeSelection.hidden) drawTribeWorld();
       if (viewport.pixelRatio !== (window.devicePixelRatio || 1)) resizeCanvas();
       updateZoom(now);
       moveMap(Math.min(0.05, Math.max(0, (now - state.lastFrame) / 1000)));
@@ -7346,9 +7376,10 @@
     const COLONY_CODEX = { key: "colony", name: "군락 둥지", effect: "군락의 본둥지",
       description: "진화 포인트로 둥지를 성장시키면 체력과 속성 슬롯이 늘고 새 속성이 열립니다. 진화 포인트와 자원의 보관량도 늘어납니다. 몽돌의 성장 비용은 25% 적습니다." };
     const NEST_CODEX = [COLONY_CODEX];
-    const evolutionSprite = new Image();
+    const evolutionSprite = globalThis.SpawnerAssets.image();
     evolutionSprite.src = EVOLUTION_SYMBOL;
-    const evolutionPointCache = await createEvolutionPointCache();
+    let evolutionPointCache = null;
+    createEvolutionPointCache().then(cache => { evolutionPointCache = cache; scheduleRender(); }).catch(() => {});
     for (const image of document.querySelectorAll("[data-evolution-symbol]")) image.src = EVOLUTION_SYMBOL;
 
     const templateList = document.getElementById("template-list");
@@ -7537,7 +7568,7 @@
       combatReturnFocus = document.activeElement;
       stopMapMovement();
       for (const path of Spawner.DETAIL_COMBAT_VFX_ASSETS) if (!detailVfxImages.has(path)) {
-        const image = new Image(); image.src = assetSource(path); detailVfxImages.set(path, image);
+        const image = globalThis.SpawnerAssets.image(); image.src = assetSource(path); detailVfxImages.set(path, image);
       }
       combatPanel.showModal();
       combatClose.focus();
@@ -7599,11 +7630,16 @@
     }
     function drawCombatCreature(context, agent, x, floor, height) {
       if (agent.species === "spiny-back-beetle" && !Spawner.creatureRangedPose(agent, state.simSeconds)) {
-        const pose = Spawner.beetleAnimationPose(agent, state.simSeconds);
+        let pose = Spawner.beetleAnimationPose(agent, state.simSeconds);
+        if (pose.action === "attack" && (!beetleAttackSheet.complete || !beetleAttackSheet.naturalWidth))
+          pose = { action: "idle", frame: Spawner.BEETLE_ANIMATIONS.idle.frames[0] };
         const attack = pose.action === "attack";
         const shape = Spawner.imageFrameGeometry(attack ? Spawner.BEETLE_ATTACK_SPRITE : Spawner.BEETLE_SPRITE, pose.frame);
         const sprite = attack ? beetleAttackSheet : beetleSheet;
-        if (!sprite.complete || !sprite.naturalWidth) return false;
+        if (!unitDisplayBounds.has(agent.species) || !sprite.complete || !sprite.naturalWidth) {
+          Spawner.drawUnitLoading(context, x, floor - height * .5, Math.max(7, height * .15), state.simSeconds);
+          return true;
+        }
         const size = height * shape.scale * (shape.registrationScale || 1);
         context.save(); context.translate(x, floor);
         if (shape.facing === "right" ? agent.facing < 0 : agent.facing > 0) context.scale(-1, 1);
@@ -7611,11 +7647,18 @@
           shape.frameSize, shape.frameSize, -size * shape.pivotX / shape.frameSize, -size * shape.pivotY / shape.frameSize, size, size);
         context.restore(); return true;
       }
-      const hurt = Spawner.creatureHurtPose(agent, state.simSeconds);
-      const attack = Spawner.creatureAttackPose(agent, state.simSeconds);
-      const pose = hurt || attack;
-      const entry = hurt ? creatureHurtSheets.get(agent.species) : attack ? (attack.action === "ranged" ? creatureRangedSheets : creatureAttackSheets).get(agent.species) : agent.species === "talon-owl" ? { sprite: talonOwlSheet, animation: Spawner.TALON_OWL_IDLE } : creatureIdleSheets.get(agent.species);
-      if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return false;
+      let hurt = Spawner.creatureHurtPose(agent, state.simSeconds);
+      let attack = Spawner.creatureAttackPose(agent, state.simSeconds);
+      let pose = hurt || attack;
+      let entry = hurt ? creatureHurtSheets.get(agent.species) : attack ? (attack.action === "ranged" ? creatureRangedSheets : creatureAttackSheets).get(agent.species) : agent.species === "talon-owl" ? { sprite: talonOwlSheet, animation: Spawner.TALON_OWL_IDLE } : creatureIdleSheets.get(agent.species);
+      if (pose && (!entry?.sprite.complete || !entry.sprite.naturalWidth)) {
+        hurt = null; attack = null; pose = null;
+        entry = agent.species === "talon-owl" ? { sprite: talonOwlSheet, animation: Spawner.TALON_OWL_IDLE } : creatureIdleSheets.get(agent.species);
+      }
+      if (!unitDisplayBounds.has(agent.species) || !entry?.sprite.complete || !entry.sprite.naturalWidth) {
+        Spawner.drawUnitLoading(context, x, floor - height * .5, Math.max(7, height * .15), state.simSeconds);
+        return true;
+      }
       let animation = pose?.animation || entry.animation;
       const frame = pose?.frame ?? Spawner.unitAnimationFrame(animation, (state.simSeconds - (agent.animationStartedAt || 0)) * 1000);
       animation = Spawner.imageFrameGeometry(animation, frame);
@@ -7793,7 +7836,7 @@
       const defenseImages = new Map(), replacedDefenseIds = new Set();
       for (const command of defenseCommands) {
         let image = detailVfxImages.get(command.image);
-        if (!image) { image = new Image(); image.src = assetSource(command.image); detailVfxImages.set(command.image, image); }
+        if (!image) { image = globalThis.SpawnerAssets.image(); image.src = assetSource(command.image); detailVfxImages.set(command.image, image); }
         defenseImages.set(command.eventId, image);
         if (Spawner.detailDefenseImageReady(image, command)) replacedDefenseIds.add(command.eventId);
       }
@@ -7803,7 +7846,7 @@
         if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         let image = detailVfxImages.get(command.image);
         if (!image && command.image) {
-          image = new Image(); image.src = assetSource(command.image);
+          image = globalThis.SpawnerAssets.image(); image.src = assetSource(command.image);
           detailVfxImages.set(command.image, image);
         }
         if (Spawner.drawDetailVfxCell(context, image, command)) {
@@ -9149,6 +9192,7 @@
         art.nestHeight = COLONY_SIZE * appearance.scale * (1860 / 2048 - appearance.top);
         art.unitSize = AGENT_HEIGHT * unitAnimationSheets.get(tribe.key).get("idle").scale * 2;
         art.unitBounds = tribeArt.bounds(art.idle, Spawner.imageFrameSize(tribe.idle, 512));
+        tribePreviews.set(tribe.key, art);
         return { tribe, art };
       }));
       for (const result of results) {
@@ -9163,7 +9207,11 @@
       const size = tribeWorldMap.width;
       const displayScale = size / (tribeWorldMap.clientWidth || size);
       context.clearRect(0, 0, size, size);
-      context.drawImage(terrainRendering.overview, 0, 0, size, size);
+      if (terrainRendering.overview) context.drawImage(terrainRendering.overview, 0, 0, size, size);
+      else {
+        context.fillStyle = "#171d1b"; context.fillRect(0, 0, size, size);
+        Spawner.drawUnitLoading(context, size / 2, size / 2, size * .04, 0);
+      }
       context.save();
       applyForestMapStyle(context, 0);
       for (const [index, image] of terrainRendering.forest) {
@@ -9224,13 +9272,18 @@
       const previews = [];
       for (const tribe of Spawner.PLAYER_TRIBES) {
         const art = tribePreviews.get(tribe.key);
-        if (!art) continue;
         const preview = tribeGrid.querySelector('[data-tribe="' + tribe.key + '"] canvas');
         const rect = preview.getBoundingClientRect();
         const ratio = Math.min(2, window.devicePixelRatio || 1);
         const width = Math.round(rect.width * ratio), height = Math.round(rect.height * ratio);
         if (!width || !height) continue;
         if (preview.width !== width || preview.height !== height) { preview.width = width; preview.height = height; }
+        if (!art) {
+          const context = preview.getContext("2d");
+          context.clearRect(0, 0, width, height);
+          Spawner.drawUnitLoading(context, width / 2, height / 2, Math.min(width, height) * .08, now);
+          continue;
+        }
         previews.push({ tribe, art, preview, width, height });
       }
       if (!previews.length) return;
@@ -9249,7 +9302,7 @@
         if (key !== "bean") await prepareNestGrowthRendering("bean");
         const definition = Spawner.NEST_GROWTH_ANIMATIONS[key];
         if (!definition) return;
-        const sheet = new Image(), sprite = new Image(), idleSheet = new Image();
+        const sheet = globalThis.SpawnerAssets.image(), sprite = globalThis.SpawnerAssets.image(), idleSheet = globalThis.SpawnerAssets.image();
         sheet.src = assetSource(definition.image);
         sprite.src = assetSource(definition.resting);
         idleSheet.src = assetSource(definition.idle.image);
@@ -9279,9 +9332,9 @@
         if (key !== "bean") fitColonyAppearance(appearance, referenceLevels[2]);
         const levels = { 2: appearance };
         await Promise.all(Object.entries(definition.levels).map(async ([level, source]) => {
-          const sprite = new Image();
+          const sprite = globalThis.SpawnerAssets.image();
           const idle = Spawner.nestIdleAnimation(key, Number(level));
-          const idleSheet = idle ? new Image() : null;
+          const idleSheet = idle ? globalThis.SpawnerAssets.image() : null;
           sprite.src = assetSource(source);
           if (idleSheet) idleSheet.src = assetSource(idle.image);
           await Promise.all([sprite.decode(), idleSheet?.decode()]);
@@ -9294,7 +9347,7 @@
         }));
         const upgrades = {};
         await Promise.all(Object.entries(definition.upgrades).map(async ([level, upgrade]) => {
-          const sheet = new Image();
+          const sheet = globalThis.SpawnerAssets.image();
           sheet.src = assetSource(upgrade.image);
           await sheet.decode();
           const placement = key === "bean" ? null : colonyGrowthPlacement(sheet, upgrade, levels[upgrade.fromLevel], levels[level]);
@@ -9320,7 +9373,7 @@
         if (key === "spring") await springBirthSheet.decode();
         if (key === "pebble") await Promise.all([pebbleBirthSheet.decode(), pebbleBirthForeground.decode()]);
         if (tribeColonies.has(key)) return;
-        const source = new Image();
+        const source = globalThis.SpawnerAssets.image();
         source.src = assetSource(tribe.nest);
         await source.decode();
         const bounds = tribeArt.bounds(source, false);
@@ -9330,14 +9383,14 @@
         surface.width = surface.height = 2048;
         surface.getContext("2d").drawImage(source, bounds.x, bounds.y, bounds.width, bounds.height,
           (2048 - width) / 2, 1860 - height, width, height);
-        const sprite = new Image();
+        const sprite = globalThis.SpawnerAssets.image();
         sprite.src = surface.toDataURL("image/png");
         await sprite.decode();
         const appearance = { sprite, scale: 1, groundWidth: width / 2048,
           top: (1860 - height) / 2048, centerY: 384.5 / 512,
           animation: { smooth: true, frameCount: 1, frameMs: 1, restMs: 0 } };
         if (key === "spore") {
-          const sheet = new Image();
+          const sheet = globalThis.SpawnerAssets.image();
           sheet.src = assetSource("DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle-spine-v1/nest-stage-01-idle-sheet.png");
           await sheet.decode();
           const frameBounds = tribeArt.bounds(sheet, true);
@@ -9356,7 +9409,7 @@
             y: appearance.birthScene.y + Spawner.SPORE_BIRTH_ANIMATION.outletY * sceneScale / 2048 };
         }
         if (key === "spring") {
-          const sheet = new Image();
+          const sheet = globalThis.SpawnerAssets.image();
           sheet.src = assetSource("DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle-v5/nest-stage-01-idle-sheet.png");
           await sheet.decode();
           const sourceScale = 420 / 1492;
@@ -9376,7 +9429,7 @@
           };
         }
         if (key === "pebble") {
-          const sheet = new Image();
+          const sheet = globalThis.SpawnerAssets.image();
           sheet.src = assetSource("DesignAssets/Tribes/pebble/Animations/Nests/stage-01-idle-glow-v3/nest-stage-01-idle-sheet.webp");
           await sheet.decode();
           appearance.animation = { smooth: false, sheet, frameSize: 512, columns: 8, frameCount: 48, frameMs: 100, restMs: 0 };
@@ -9867,8 +9920,12 @@
 
     async function prepareRoom(roomId) {
       const packet = await client.call("enter", { roomId, visible: false });
-      await prepareWorldRendering(packet.world, packet.tribeStarts || packet.colonies);
-      if (packet.colonies.find(colony => colony.id === packet.colonyId).tribe === null) await prepareTribePreviews();
+      const rendering = prepareWorldRendering(packet.world, packet.tribeStarts || packet.colonies);
+      const generation = worldRenderingGeneration;
+      rendering.catch(error => {
+        if (generation === worldRenderingGeneration && (connection.roomId === roomId || tribeRoomId === roomId)) reportRenderingCacheError(error);
+      });
+      if (packet.colonies.find(colony => colony.id === packet.colonyId).tribe === null) prepareTribePreviews().catch(() => {});
       updateRoomCreationProgress(100);
       return packet;
     }
@@ -9890,7 +9947,7 @@
           showTribeSelection(packet);
           return;
         }
-        await prepareTribeRendering(Spawner.PLAYER_TRIBES.map(tribe => ({ tribe: tribe.key })));
+        prepareTribeRendering(packet.colonies).catch(() => {});
         connection.active = true;
         applySnapshot(packet);
         if (!connection.online) return;
@@ -9898,7 +9955,7 @@
           setEvolutionText(connectionStatus, terrainRendering.cacheError);
           connectionStatus.hidden = false;
         }
-        await prepareAgentRendering();
+        prepareAgentRendering().catch(() => {});
         closeEvolutionPanel();
         closeColonyMenu();
         selectObject(null, null);

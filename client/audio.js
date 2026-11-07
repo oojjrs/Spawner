@@ -159,7 +159,7 @@
         try {
           await (welcomeNames.has(name) ? globalThis.SpawnerAssets.welcomeReady : globalThis.SpawnerAssets.ready);
           if (!buffers.has(name)) {
-            const response = await fetch(globalThis.SpawnerAssets.source(sources[name]));
+            const response = await fetch(await globalThis.SpawnerAssets.load(sources[name]));
             if (!response.ok) throw new Error("효과음을 불러오지 못했습니다.");
             buffers.set(name, await context.decodeAudioData(await response.arrayBuffer()));
           }
