@@ -175840,3 +175840,74 @@ Text: none. No lettering, labels, logo, watermark, UI, borders, health bars, peo
 - 최종회귀는 작업트리5/5 및 HEAD322d918+정확방향후보의 완전한 모듈소스를 Git객체에서 읽은 분리실행5/5 PASS다. 기존HEAD에 일부 사망clip의 UNIT_IMAGE_BOUNDS가 없는 별도문제로 최초 분리실행이 실패하여 회귀fixture의 해당사망조합만 등록경계가 있는 경우로 한정했다. 다른 대기/공격/피격23종·4플레이어블의 생존/사망 방향복사·원본불변은 유지한다. 그 경계누락을 제품에서 임의수정하지 않았고 앞선 현재작업트리 전체사망검수근거는 보존한다.
 - 동시 다른 Git보존작업 중 새회귀파일이 사라지고 제품이 이전내용으로 돌아온 것을 직접관측했다. literal $Trash의 기존태스크사본/후보는보존되어 있어 이번방향훙크·최종회귀·관련4기록만 현재본문에 재적용하며 다른본문/기본index·미병합·stash는 건드리지 않는다.
 - HEAD의 외부스크립트진입점이 client/game.js를 읽으므로 무관한 Spawner.html 인라인화를 포함하지 않고 제품3파일+회귀1+메모리1의5경로로 동결한다. 기본index는 전용복사본에서 이번훙크만 반영한뒤 나머지entry보존을 확인하고, compare-and-swap으로 같은main의부모가그대로일때만 원자적로컬커밋한다. 아직커밋성공을기록하지 않는다.
+
+## 기본 채집형 전투 애니메이션 확인 · 01a1b324 현재 요약
+
+- 기록 ID: gather-combat-animation-inspection-20261107-01a1b324. 기록·근거 확인 시각: 2026-11-07T08:19:24+09:00. 기록자·소스 조사/판단 Codex /root, 질문·설명 사용자. 출처 현재 채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe의 기본 채집 유닛 반격 전투 애니 및 채집 기관 유지/기존 기본 애니 재사용 가능 여부 질문. 원발언 정확시각·턴/항목ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
+- 확인 사실: 네 종족 UNIT_ANIMATIONS에 기본 attack/hurt가 있다. unitDisplayAttributes는 순수 gather DNA를 표시전용 strength1로 연결한다. unit-presentation의 새싹콩 sproutCombatFrame은 전투 몸체에 기관 sprite를 합성하고, 다른3종은 attribute-animation→attribute-morphology에서 body-strength를 기존 attack/hurt 트랙에 맞춰 변형한다. 실제 기관 원본5개를 직접 열람했다. 별도 채집형 완성 전투 시트와 기존 기본 동작에 기관 합성 가능한 구현은 구분한다.
+- 실행면 차이: 인게임 game.js 전투확대 drawDodgeBody는 fallback으로 동일 drawAgentAppearanceLayer/unitPresentation을 호출하므로 기존 기관 합성 경로가 있다. 전투 실험실 combat-stage의 representativeArt는 strength를 legacy로 거절하고 fallback에서 기본 시트를 직접 그려 채집 기관이 빠지는 소스 경로다. unified mask0은 네 종족 모두 등록 행동 누락으로 readiness false인 현정적값을 읽었으며, 이 결과가 실험실 기관 합성을 대신하지 않는다. 앞선 진행문구의 포괄적 ‘전투 패널’ 표현은 실험실에 한정해 정정한다.
+- 최신 원화 한계: spore-gather-art의 승인 채집형 원화는 idle/portrait만 대체하며 attack/hurt는 기존 body-strength 합성이다. 따라서 기존 기본 전투 동작 재사용은 가능하지만 최신 승인 원화와 동일한 채집형 전투 애니가 완성·검수됐다는 결론은 아니다. Design.html 채집형4행의 attack/hurt 셀도 비어 있다. 이번에는 제품/애셋/기획서 변경·게임실행·브라우저·빌드·테스트·Git 완료 없이 소스/등록자료/원본 이미지 읽기 및 메모리 기록만 했다. 다음 수정이나 제작은 별도 요청사항이다.
+
+## 채집형 전용 전투 애니 부재·합성 일체감 우려 · 01a1b324
+
+- 기록 ID: gather-combat-authored-art-concern-20261107-01a1b324. 기록 시각: 2026-11-07T08:22:55+09:00. 기록자 Codex /root, 원 발언자·현황 설명 사용자. 출처 현재 채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe의 ‘코드에서 합성하는 형태면 일체감이 걱정되는데, 전용 애니는 일단 없어’와 첨부 codex-clipboard-d34f369e-44e5-4d8f-9512-5fcde9c39818.png. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
+- 사용자 확인: 채집형 전용 전투 애니는 현재 없으며, 코드 합성의 시각적 일체감을 우려한다. 첨부 표의 네 종족 채집기관 공격·피격 칸도 비어 있다. 앞선 gather-combat-animation-inspection의 기존 동작/기관 합성 코드 존재와 구분하며, 코드 재사용 가능성을 완성도나 일체감 확보 근거로 확대하지 않는다.
+- Codex 판단·미확정 방향: 기존 기본 전투 애니는 동작 참고로 활용하고 채집형 몸체와 기관이 함께 움직이는 전용 공격·피격 애니를 마련하는 편이 일체감 요구에 적합하다. 사용자 제작 요청/방식 확정/유료 생성 승인은 아니며 이번에는 설명과 메모리 기록만 한다. 제품·애셋·기획서·Git 변경이나 새 렌더/생성은 없다.
+
+## 기존 코드 채집형 전투 합성 결과 캡처 요청 · 01a1b324
+
+- 기록 ID: gather-current-compositor-review-scope-20261107-01a1b324. 기록 시각: 2026-11-07T08:30:20+09:00. 기록자 Codex /root, 요청·정정 주체 사용자. 출처 현재채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe의 ‘여기에 만들어서 가져와봐 내가 검토할테니’ 이후 ‘지금 코드에서 할 수 있는 형태 그거’·‘만들라는 거 아니다’. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
+- 유효 범위: 신규 전용 애니 제작이 아니라 현재 코드의 기관 합성 전투 모습을 이 채팅에 가져와 사용자에게 검토받는다. Codex의 처음 새 시안 제작 해석은 이 사용자 정정으로 폐기한다. 이미지 생성·새 프레임 작화·제품 renderer/애셋/기획서 수정 없이 실제 current source unit-presentation 및 attribute-morphology를 격리 headless로 실행해 네 종족 공격/피격 캡처를 묶는다. 실제 시작DNA를 사용하고 source 모듈/기관/프레임/재생시계는 그대로 둔다.
+- 검토용 포장: 공격은 기존1배속, 전투version2의120ms 피격은 확인하기 쉽게 캡처 프레임 재생만4배 느리게 표시한다. 새 동작을 만들어 끼우지 않는다. literal root 달러Trash/gather-combat-current-01a1b324에 전용 캡처 스크립트와 이미지·결과만 둔다. 결과는 실제 렌더/직접 이미지 확인 후 갱신하며 아직 캡처 성공을 주장하지 않는다.
+
+## 기존 코드 채집형 공격·피격 미리보기 완료 · 01a1b324 현재 요약
+
+- 기록 ID: gather-current-compositor-review-result-20261107-01a1b324. 기록·직접 PNG 확인 시각: 2026-11-07T08:33:47+09:00. 기록자·캡처/확인 Codex /root, 기존 코드 결과 검토 요청·범위 정정 사용자. 출처 같은채팅의 캡처 요청·신규제작 금지 정정 및 실제 capture.json/PNG/GIF. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
+- 실제 산출: 현재 source unit-presentation·unit-presentation-assets·tribe-art·attribute-animation/morphology와실제startingWorkerDna를직접불러온격리headless로4종족공격25시각·피격12시각=148표본캡처. 네종족모두표시strength1,캐릭터프레임빈이미지/캔버스잘림0,최종시도pageerror/404 0,로드된원본module SHA256이캡처전후같음. 새원화/동작·기관합성코드/제품/기획서수정없이표시결과만샘플링했다. 전체인게임실행·실험실합성복구는이번검수범위아니다.
+- 표시: 왼쪽부터새싹콩/포자버섯/몽돌/샘방울. literal root 달러Trash/gather-combat-current-01a1b324의attack-current.gif는기존공격을25fps로샘플링한루프, hurt-4x-slow.gif는전투version2의120ms피격을10ms간격으로캡처후40ms간격으로4배느리게재생한루프다. 앞뒤500ms정지로관찰여유만추가했다. keyframes.png의공격3/피격3시각을직접열어기관과몸체·눈/잎의현합성결과를확인했다. 시각적품질승인이나새전용애니완성으로기록하지않으며사용자검토대기다.
+- 도구한계/해결: 첫준비는기존runtime.js의spore-gather-asset module초기화오류로Spawner가없어실패했으므로성공근거에서제외했다. 제품묶음은수정하지않고현재원본ESmodules를직접사용했다. 별도샌드박스브라우저실행종료와캡처adapter의bean기본tribe누락오류후작업용adapter만수정했으며최종성공148표본으로대체한다. 브라우저/서버는캡처finally에서닫았다. 메모리및작업용캡처만변경했고Git완료/게시없다.
+
+## 파츠 합성 애니 폐기·외형별 전용 클립 재생 결정 · 01a1b324
+
+- 기록 ID: unit-animation-clips-only-decision-20261107-01a1b324. 기록 시각: 2026-11-07T08:40:53+09:00. 기록자·영향범위 판단 Codex /root, 폐기·새 재생원칙 결정 사용자. 출처 현재채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe의 ‘역시 일체감이 없어서 안되겠다. 그 기능은 폐기해. 어차피 새로 만들고 있으니. 파츠 합성해서 애니로 쓰지 말어. 이제 애니 재생은 다 각자에게 만들어진 애니를 불러와 재생하는 걸로 한다’. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
+- 유효 결정: 사용자 검토 결과 기존 실시간 파츠 합성 애니를 폐기한다. 각 유닛/대표외형에 전용으로 만들어진 이미지·시트의 프레임을 불러와 재생한다. 앞선 gather-combat-authored-art-concern의 합성 재활용 가능성 및 기존 리그 호환 보존 방침은 이 새 결정에 반하는 범위에서 대체된다. 신규 애니 제작은 진행 중인 별도 작업이며 이번 요청에 새 생성·작화·유료 작업을 포함하지 않는다.
+- Codex 구현 범위: 필드/전투 확대/실험실/웰컴/탄생·사망의 player body에서 실시간 몸체/기관 파츠 합성·변형 호출을 제거하고 전용 클립 선택·단일 프레임 그리기로 통일한다. 부족한 동작은 같은 외형의 정지 원화/자기 클립 첫 프레임을 유지하며 다른 외형 동작으로 대체하지 않는다. 월드 위치·방향·성장 크기·전투 판정/타이밍과 별도 화물·VFX는 보존한다. 정적 portrait 합성과 제작용 원본 자료 자체 삭제는 이번 애니 재생 폐기와 구분한다.
+- 작업 경계: 현재 shared game/runtime/Combat/문서 등 기존 dirty와 동시 변경을 보존하고 요청 구간만 바꾼다. 신규 text 문구나 기획서 본문 변경은 하지 않는다. 저장소 전용origin oojjrs/Spawner 확인 및 연결 ProjectsV2 nodes=[] 확인으로 관리할 보드 없음. Git staging/commit/push/배포 승인은 없으며 로컬 수정·표적 검수로 마친다. literal root 달러Trash/unit-animation-clips-only-01a1b324에 기준/작업용 도구·검수 근거를 둔다. 아직 구현/검수 완료 아님.
+
+## 파츠 합성 애니 폐기·전용 클립 재생 전환 완료 · 01a1b324 현재 요약
+
+- 기록 ID: unit-animation-clips-only-complete-20261107-01a1b324. 기록·근거 확인 시각: 2026-11-07T09:04:12+09:00. 기록자·로컬 구현/검수 Codex /root, 파츠 합성 폐기·외형별 전용 애니 재생 원칙 결정 사용자. 출처 같은채팅의 unit-animation-clips-only-decision과 실제 source/compiled modules·표적 검사·headless render/capture.json/probe.json. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
+- 실제 전환: unit-action-art-assets의4종족×7외형28개 전용 소스/클립 목록과 unit-action-art의 상태/프레임 선택·단일 drawImage 재생을 공통으로 사용한다. attribute-animation과 combat-evolution의 실시간 파츠/mesh/기관 합성·변형 구현을 제거했고 unit-presentation의 combat frame 합성·별도 머리/발 그리기·root stretch 호출을 폐기했다. 필드/전투확대/실험실/웰컴/탄생·사망을 이 경로로 연결했다. 전용 클립이 없는 동작은 같은 외형의 원화/자기 시트 첫 프레임을 고정 유지하며 다른 외형 전투 동작을 빌리지 않는다. 정적 portrait 구성/제작용 원본은 보존한다.
+- 범위·동기화: 주요 소스8경로+새 공통 재생기/데이터/회귀3경로, runtime.js·Combat.html·appearance preview runtime의 관련 module과 의존 순서, local asset 목록/새 전신 정지 원화 wrapper5개 및 기존 이미지 크기 정책에 없던 정적 이미지2항목을 반영했다. 생성물은 변경 모듈만 치환하고 나머지 기존 모듈 본문·공유 별칭 및 동시 삭제/편집을 보존했다. 사용자 문구·기획서 본문·게임 수치/판정·외부 배포/새 애니 제작은 바꾸지 않았다. 진행 중 다른 작업의 포자 birth 자료 삭제는 되돌리지 않고 현재 존재하는 전용 자료만 등록했다.
+- 실제 검수: 새 표적6검사6성공. 네 시작 채집DNA에서 공격/피격 누락은 자기 원화0프레임 유지, 안테나04/발08 매핑, 모든 소스/프레임 계약, 전투 파츠 콜백 미호출·root/머리/발 합성 API 정지 확인이다. 실제 source renderer의4채집×공격25·피격12=148표본에서 빈이미지/잘림/JS오류/404 0, 전체37장 합본의 이미지 hash가동일하여 합성/가짜 전투가 재생되지 않음을 확인했다. 28외형의 한 공격 시각 실제 렌더는 외형당 단일 drawImage1회·유효 픽셀 관측이며 forms.png를 직접 열었다. 모든 동작 전프레임 품질 검수로 확대하지 않는다.
+- 실행본·직접 열람: 실제 Combat.html 초기 화면 lab.png를 직접 열고 페이지오류0을 확인했다. 전체 자동 전투/전체 인게임 플레이 검수는 아니다. runtime+appearance 연결의 최종 별칭 보존 후 별도 probe에서 presentation/appearance 존재·오류0을 확인했다. source module hash는 캡처 전후 동일했다. 브라우저·서버는 finally로 종료했고 사용자 창/사이드패널을 열지 않았다. 근거 literal root 달러Trash/unit-animation-clips-only-01a1b324. 해당 로컬 전환은 완료, 새 전용 애니 제작은 별도 진행 중이며 미stage·미commit·미push·미배포다.
+- 누락 점검: 사용자 폐기 결정·부족 동작 처리·표시 경로/실제 검수/경계와 완료 상태를 대조했다. 마감 형식·범위 검사는 이 기록 뒤 정확한 제품 경로로 한 번 수행하며 실제 결과를 따른다. 기존 메모리/제품의 다른 변경·줄바꿈은 일괄 수정하지 않는다.
+
+- 마감 결과(2026-11-07T09:06:40+09:00,Codex/root,unit-animation-clips-only-complete): 정확22텍스트 경로 공유 형식검사를8.1초 이내에 완료했다. 제품/등록자료21개는 UTF8NoBom·CRLF OK이며 CodexWorkMemory.md 하나는 기존 HEAD Mixed/현재 CRLF 차이로 NeedsReview다. 보호된 메모리 원문은 정규화하지 않았다. 실제 폐기한 합성기와 새 클립 재생기·필드/실험실/웰컴 연결의 국소 diff를 읽었고, 다른 채팅의 fixed scale·포자 원본 삭제·메뉴/스탯 등 기존·동시 diff는 이번 변경으로 분류하지 않았다. 사용하지 않는 이번 추가 원화4개의 wrapper/목록·runtime asset 키만 정리해 현재 재생 목록과 맞췄다. 검증된 렌더/검사를 반복하지 않고 미커밋 로컬 결과로 마친다.
+
+## 전용 클립 전환 푸시·기존 Site 배포 승인 · 01a1b324
+
+- 기록 ID: unit-animation-clips-only-publish-start-20261107-01a1b324. 기록 시각 2026-11-07T09:16:37+09:00. 기록자·분리/동기화 판단 Codex /root, 푸시·배포 결정 사용자. 출처 현재채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe의 ‘배포랑 푸시까지 다 해’. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell.
+- 승인범위는 직전 보고한 파츠 합성 폐기·전용 클립 직접 재생 전환과 관련 메모리/필수지원 등록자료다. 다른 UI·주사위·스케일·포자 birth 전면 삭제 등 별도 dirty는 보존하고 제외한다. 현재 공용 registry에 연결된 승인 bean secretion idleV4/spore gather idle·walkV1의 전용 runtime3개는 소스와 배포가 일치하도록 필요한 지원 범위로 분류한다. 해당 적용·배포 별도 사용자 승인은 메모리 assets-three-start-20261107-01a1b0eb에서 확인했으며 새 제작은 없다.
+- 원격 origin/main 9ee3c33은 현재 local main771e69f 대비 원격4/로컬2커밋으로 갈라졌다. 기존 index/unstaged/untracked를 Git 복구참조에 보존하고 일반 main rebase·복원 후 범위를 동결한다. 전용origin Spawner와 기존 public Site appgprj_6ada1cedf2848191938f196c4f346ee9를 유지한다. get_site에서현재public/v42/동일URL확인했고아직새저장/배포전이다.
+- 발견·수정: 이번 원화 wrapper5개의 사전 생성 코드가 실제 로더의 SpawnerLocalAssetSources 대신 Data 이름에 넣어 file-mode에서 누락될 수 있었다. 정확5 wrapper의 사전 이름만 Sources로 고쳤으며 원화 bytes는 그대로다. 게시 전 전용 확인을 수행한다. 핵심6회귀·28외형/148채집검수는 원본 재생 코드가 그대로일 때 재사용한다. 임시는 literal root 달러Trash/clip-publish-01a1b324에 두며 성공은 실제 Git/네이티브 Sites 영수증 후 기록한다.
+
+## 전용 클립 전환 게시 범위 동결 · 01a1b324
+
+- 기록 ID: unit-animation-clips-only-publish-freeze-20261107-01a1b324. 기록 시각 2026-11-07T09:33:36+09:00. 기록자·분리/검수 Codex /root, 푸시·배포 승인 사용자. 출처 현재채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe의 게시 요청 및 candidate-check/render/probe/restore-result 실제 근거. H:/Spawner Windows PowerShell, 원발언 정확시각·항목ID·PC식별 불명.
+- 최종포함30경로: 전용클립전환 소스/회귀11, 관련생성실행본3,로컬목록1,지원native WebP3+manifest2,wrapper8,이미지정책1,관련메모리1. 갱신 main HEAD 위에 공유 game의 body/birth/corpse 함수3개와 준비2줄, combat-stage의 import/pose/size 경계3개, welcome 준비2곳, appearance 순수채집 가드만 투영한다. 다른채팅의스케일·주사위·문서/포자전체삭제·UI·범례 등 내용은 stage/배포에 넣지 않는다. 현재단일registry에직접참조되는승인native3개는필수지원으로만동봉한다.
+- 원격추가통합: 첫175cf65c167d846109e632466271b17d4c308e21와후속1af00ec667bcd117a26869afc9424f8cb13188fb 보존 Git object/refs를유지한다. 원격승인4커밋+추가cdce2ae를보존하고로컬DNA2커밋을그위에rebase했다. stash복원Design충돌은기존로컬전체에원격승인셀13개·후속2개만합쳐해결했고다른로컬변경·신규파일을복원했다. stash충돌로변했던index는기존빈상태로복원했다. 최종main에는기존로컬2커밋도branchhistory로포함해push한다.
+- 동결검수: 후보의실제HEAD기반모듈로6회귀모두성공,wrapper8개는실제로더사전Sources에등록되며복호화bytes가대상source와전부같다. runtime/preview/Combat inline JS구문·정확private-index staged경로·staged diffcheck 공백0을확인했다. 메타데이터2파일의원본CRLF는작업파일에유지하고Git후보만정상LF로구성했다. 앞선28외형/148채집렌더·실행본probe는변하지않은재생기근거로재사용한다. Site기존public/v42와opening checkout/commit 98189bd65e04e53625935916e933ceaeeb8770a8 확인,아직push/배포성공전이다.
+- 커밋제목은 ‘파츠 합성 애니 제거와 전용 클립 재생 적용’으로동결범위와한국어작업규칙에맞춘다. 커밋/원격SHA·Site저장버전/배포완료는실제readback뒤기록하며,그사후결과만을위해추가memory-only commit이나게시이력재작성은하지않는다.
+
+## 전용 클립 게시 보존 복구·Git 순서 대기 · 01a1b324 현재 요약
+
+- 기록 ID: unit-animation-clips-only-filelock-recovery-01a1b324. 기록 시각 2026-11-07T09:50:21+09:00. 기록자·복구/분리 판단 Codex /root, 푸시·배포 결정 사용자. 출처 현재 채팅 01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe, stash 6a0d9e69bc5ac8e30d4aefbc3900f82f0551097c, $Trash/clip-publish-01a1b324/filelock-restore.json과 실제 파일 readback. H:/Spawner Windows PowerShell; 원발언 시각·항목 ID·PC 식별 불명.
+- Git stash의 runtime.js 파일 잠금으로 작업트리 정리가 중간 실패했다. refs/codex/preservation/clip-publish-filelock-01a1b324에 원래 tracked/index/untracked 스냅샷을 보존했다. snapshot과 현재 HEAD가 같거나 파일이 없던 353경로만 복구했고 이미 복구된5경로와 이후 변경12경로는 보존했다. 메모리 전체쓰기 실패 후 이 채팅 원기록8절만 동결본에서 append로 복구한다. 다른 채팅의 최신 폐기·복구 결과가 우선하며 전체stash를 다시 적용하거나 구형 포자 탄생을 승인으로 되살리지 않는다.
+- 01a1b33b의 사용자 승인 조율 메시지를 받아 현재 main/index 이동을 멈추고 포자 구형 탄생 폐기 push를 기다린다. 원본 main과 Sites 소스의 다른 작업을 보존하면서 별도 candidate index에서 전용 클립만 준비한다. 아직 이 채팅 commit/push·Site 배포 완료는 미확인이다. 이전 6회귀·148샘플/28형태 렌더 및8wrapper byte 검증은 해당 입력에서 통과했으며 새 통합본은 필요한 부분만 재확인한다.
+
+## 새 승인 원격 탄생 보존·전용 클립 통합 검수 · 01a1b324
+
+- 기록 ID: unit-animation-clips-only-upstream-preserve-01a1b324. 기록 시각 2026-11-07T10:00:19+09:00. 기록자·동결/검수 Codex /root, 전용 클립 전환과 push·배포 결정 사용자. 출처 현재채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe와 01a1b33b의 명시 조율 메시지, candidate.json/candidate-check.json·회귀6실측. H:/Spawner Windows PowerShell; 원발언정확시각·항목ID불명.
+- 원격 b4b0e05에 새로 추가 승인된 spore-gather-birth-v3는 최초 퇴역145목록 밖의 후속 작업으로 보존한다. 구형 V7/V9 폐기와 구분하며 해당 채팅이 폐기 한정을 마쳐 먼저push하는 동안 이쪽 main/index 이동은 계속 멈춘다. 여기서는 새탄생 연결이나 새 애니 제작을 추가하지 않는다.
+- 전용 클립 후보30경로는 관련native3의 원본/manifest·wrapper를 필수지원으로 포함하되 다른 작업의 게임/편집기/기획서·애셋삭제는 포함하지 않는다. 폐기 후보ac59e395 기반 별도tree aa476fa57에서 회귀6통과·wrapper8 원본bytes일치·runtime/Combat/preview구문과 staged공백검사 통과를 확인했다. 이후 실제push tip으로 투영할 때 변경된통합부분만검수하며 불변렌더/형식결과는 재사용한다. 아직본채팅rootpush·새Site배포성공을 주장하지 않는다.

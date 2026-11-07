@@ -70,6 +70,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     }),
     ...tribes.map(async key => {
       await nativeAssets.prepareTribe(key, ["idle", "walk", "jump"], {});
+      await unitPresentation.prepareAnimation({ tribe: key, attributes: {} });
       const walk = nativeAssets.sheets.get(key).get("walk");
       if (walk) movementSheets.set(key, { ...walk.animation, sprite: walk.sprite, scale: walk.scale });
     })
@@ -113,6 +114,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
       if (choice.variant > 0) await globalThis.SpawnerAssets.ready;
       const attributes = appearances[choice.variant][choice.key === "bean" ? "bean" : "others"];
       await nativeAssets.prepareTribe(choice.key, ["idle", "walk", "jump"], attributes);
+      await unitPresentation.prepareAnimation({ tribe: choice.key, attributes });
       prepareFrame(choice);
       return;
     }

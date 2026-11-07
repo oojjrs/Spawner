@@ -1,3 +1,4 @@
+import { unitActionArtPose } from "./unit-action-art.mjs";
 import { CREATURE_RANGED_ANIMATIONS, creatureRangedPose } from "./creature-ranged.mjs";
 import { drawCombatStun } from "./combat-stun-vfx.mjs";
 import { drawSpeciesHeldHurt } from "./species-held-hurt.mjs";
@@ -58,6 +59,7 @@ function flightKey(source, target, launch, arrival) {
 }
 
 function displaySize(agent, pose) {
+  if (!agent.species) return 100 * unitDisplaySize(agent);
   if (pose?.animation.rangedBody || !pose && unitRangedAppearance(agent)) return unitRangedDisplaySize(agent);
   const key = agent.species || agent.tribe || agent.key;
   const idle = UNIT_ANIMATIONS[key]?.idle || CREATURE_IDLE_ANIMATIONS[key] ||
@@ -82,6 +84,7 @@ function clamp(value) {
 }
 
 function poseFor(agent, time, deathAge) {
+  if (!agent.species) return unitActionArtPose(agent.health <= 0 ? { ...agent, diedAt: time - deathAge } : agent, time);
   const ranged = unitRangedPose(agent, time) || (agent.species === "spiny-back-beetle" && creatureRangedPose(agent, time));
   if (ranged) return ranged;
   const death = unitRangedLifecycleAnimation(agent, "death") || (agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : UNIT_ANIMATIONS[agent.tribe]?.death || CREATURE_DEATH_ANIMATIONS[agent.species]);

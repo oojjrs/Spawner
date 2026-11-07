@@ -1,0 +1,182 @@
+{
+  "assets": [
+    {
+      "image": "DesignAssets/Tribes/spore/ApprovedGatherMotionV1/idle.webp",
+      "frameSize": 128,
+      "columns": 8,
+      "frameCount": 64,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "durationMs": 6400,
+      "loop": true,
+      "pivotX": 64,
+      "pivotY": 112,
+      "viewSize": 128,
+      "rootMotion": false,
+      "source": "AnimationCandidates/spore-gather-motion-v1/spore-gather-idle-v1-sheet.png",
+      "sourceSha256": "bb57a1947a72b9da92790fbc51cb25907efc1126e5c254ddc61fc21f44eba910",
+      "sha256": "85a0af3f769130482d4b57e51fed93e4755a6a092fe2209c9cab8502fb1438ac",
+      "grid": [
+        8,
+        8
+      ],
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "display": [
+        128,
+        128
+      ]
+    },
+    {
+      "image": "DesignAssets/Planning/ApprovedAnimations96/spore-gather-idle-v1.webp",
+      "source": "AnimationCandidates/spore-gather-motion-v1/spore-gather-idle-v1-preview.gif",
+      "sourceSha256": "918aacad701926962bb587f16b9306edaa96f4bfbde318ecca17a72c04b39c74",
+      "sha256": "7a892be85fef36ab3cb31104c0fe3e847add014bf35c15b0c94341f87dde2e90",
+      "grid": [
+        1,
+        1
+      ],
+      "dimensions": [
+        96,
+        96
+      ],
+      "display": [
+        96,
+        96
+      ]
+    },
+    {
+      "image": "DesignAssets/Tribes/spore/ApprovedGatherMotionV1/walk.webp",
+      "frameSize": 128,
+      "columns": 8,
+      "frameCount": 16,
+      "durationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMs": 1120,
+      "loop": true,
+      "pivotX": 64,
+      "pivotY": 112,
+      "viewSize": 128,
+      "rootMotion": false,
+      "source": "AnimationCandidates/spore-gather-motion-v1/spore-gather-walk-v1-sheet.png",
+      "sourceSha256": "2071af19b58a3031532157f64ad106b590cd901020f2fc3510405a4d006d7390",
+      "sha256": "cf893c2df00f8d03b6374be9612573a1467cbc98272c29d17442d7ff9b7537a6",
+      "grid": [
+        8,
+        2
+      ],
+      "dimensions": [
+        1024,
+        256
+      ],
+      "display": [
+        128,
+        128
+      ]
+    },
+    {
+      "image": "DesignAssets/Planning/ApprovedAnimations96/spore-gather-walk-v1.webp",
+      "source": "AnimationCandidates/spore-gather-motion-v1/spore-gather-walk-v1-preview.gif",
+      "sourceSha256": "661df8214cf0a0bb40139e729c65f76c909a71694c3add61f53e808c6dacdf05",
+      "sha256": "6ef2c942d4c8bf29bd24ca2bbaa99a7c80653d062b99db4dd93e18463da4dbc0",
+      "grid": [
+        1,
+        1
+      ],
+      "dimensions": [
+        96,
+        96
+      ],
+      "display": [
+        96,
+        96
+      ]
+    }
+  ],
+  "previewMap": {
+    "AnimationCandidates/spore-gather-motion-v1/spore-gather-idle-v1-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/spore-gather-idle-v1.webp",
+    "AnimationCandidates/spore-gather-motion-v1/spore-gather-walk-v1-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/spore-gather-walk-v1.webp"
+  }
+}

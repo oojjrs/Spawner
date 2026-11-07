@@ -11547,6 +11547,56 @@
         1,
         1
       ]
+    },
+    "DesignAssets/Animations/BeanSecretionIdleV4/idle.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        8,
+        8
+      ]
+    },
+    "DesignAssets/Tribes/spore/ApprovedGatherMotionV1/idle.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        8,
+        8
+      ]
+    },
+    "DesignAssets/Tribes/spore/ApprovedGatherMotionV1/walk.webp": {
+      "display": [
+        128,
+        128
+      ],
+      "grid": [
+        8,
+        2
+      ]
+    },
+    "DesignAssets/Planning/Attributes/Units/pebble-strength.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/Planning/Attributes/Units/spring-strength.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        1,
+        1
+      ]
     }
   }
 }

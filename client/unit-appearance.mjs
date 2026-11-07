@@ -76,6 +76,7 @@ export function unitAppearanceForAgent(agent) {
       [agent.attributes, agent.appearanceAttributes].some(attributes => UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key => attributes?.[key] > 0))) return null;
   const tribe = agent.tribe || "bean", actualMask = unitAppearanceMaskFromDna(agent.dna), mask = unitDominantAppearanceMask(actualMask);
   const definition = unitAppearanceDefinition(tribe, mask);
+  if (mask === 0 && agent.dna.pieces.some(piece => piece.gene === "gather")) return null;
   return mask !== null && unitAppearanceReadiness(definition, actualMask).ready && ATTRIBUTE_DNA.validate(agent.dna) ?
     { tribe, mask, actualMask, definition } : null;
 }

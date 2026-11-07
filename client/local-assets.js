@@ -1,4 +1,12 @@
 globalThis.SpawnerLocalAssetFiles = Object.freeze([
+  "./client/local-assets/Tribes/spore/ApprovedGatherMotionV1/walk.webp.js",
+  "./client/local-assets/Tribes/spore/ApprovedGatherMotionV1/idle.webp.js",
+  "./client/local-assets/Animations/BeanSecretionIdleV4/idle.webp.js",
+  "./client/local-assets/Animations/UnitAppearanceV1/bean/08/Source/neutral.png.js",
+  "./client/local-assets/Animations/UnitAppearanceV1/bean/04/Source/neutral.png.js",
+  "./client/local-assets/Planning/Attributes/Units/spring-strength.png.js",
+  "./client/local-assets/Planning/Attributes/Units/pebble-strength.png.js",
+  "./client/local-assets/Planning/Attributes/Units/bean-strength.png.js",
   "./client/local-assets/Animations/BeanDominantHopV1/blade/hop.webp.js",
   "./client/local-assets/Animations/BeanDominantHopV1/carapace/hop.webp.js",
   "./client/local-assets/Animations/BeanHeldHurtV1/antenna.webp.js",

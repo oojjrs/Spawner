@@ -77,7 +77,6 @@ function unitDisplayAbilityMask(mask) {
 
 return {UNIT_DISPLAY_PRIORITY,UNIT_DISPLAY_MASKS,UNIT_DISPLAY_FORM_COUNT,unitDominantAppearanceMask,unitDisplayAttributesFrom,unitDisplayAttributes,unitDisplayAbilityMask};
 })();
-
 modules["client/unit-appearance-assets.mjs"]=(()=>{
 const UNIT_APPEARANCE_ASSETS = Object.freeze({
   "bean/00": {
@@ -5488,12 +5487,12 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
 
 return {UNIT_APPEARANCE_ASSETS};
 })();
-modules["client/unit-appearance.mjs"]=(()=>{
-const { UNIT_DISPLAY_MASKS, unitDominantAppearanceMask, unitDisplayAbilityMask }=modules["client/unit-display-appearance.mjs"];
-const { UNIT_DISPLAY_SIZES, unitDisplaySize }=modules["client/unit-size.mjs"];
-const { ATTRIBUTE_DNA }=modules["server/dna.mjs"];
-const { UNIT_APPEARANCE_ASSETS }=modules["client/unit-appearance-assets.mjs"];
-const { UNIT_APPEARANCE_BITS, UNIT_APPEARANCE_TRIBES, UNIT_APPEARANCE_LEGACY_VISUAL_KEYS, unitAppearanceKey, unitAppearanceMaskFromDna }=modules["server/unit-appearance.mjs"];
+modules["client/unit-appearance.mjs"] = (() => {
+const { UNIT_DISPLAY_MASKS, unitDominantAppearanceMask, unitDisplayAbilityMask } = modules["client/unit-display-appearance.mjs"];
+const { UNIT_DISPLAY_SIZES, unitDisplaySize } = modules["client/unit-size.mjs"];
+const { ATTRIBUTE_DNA } = modules["server/dna.mjs"];
+const { UNIT_APPEARANCE_ASSETS } = modules["client/unit-appearance-assets.mjs"];
+const { UNIT_APPEARANCE_BITS, UNIT_APPEARANCE_TRIBES, UNIT_APPEARANCE_LEGACY_VISUAL_KEYS, unitAppearanceKey, unitAppearanceMaskFromDna } = modules["server/unit-appearance.mjs"];
 
 function unitAppearanceRequiredWorldActions(mask) {
   const actions = ["idle", "walk", "hurt", "birth", "death", "harvest", "carry", "throw"];
@@ -5567,6 +5566,7 @@ function unitAppearanceForAgent(agent) {
       [agent.attributes, agent.appearanceAttributes].some(attributes => UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key => attributes?.[key] > 0))) return null;
   const tribe = agent.tribe || "bean", actualMask = unitAppearanceMaskFromDna(agent.dna), mask = unitDominantAppearanceMask(actualMask);
   const definition = unitAppearanceDefinition(tribe, mask);
+  if (mask === 0 && agent.dna.pieces.some(piece => piece.gene === "gather")) return null;
   return mask !== null && unitAppearanceReadiness(definition, actualMask).ready && ATTRIBUTE_DNA.validate(agent.dna) ?
     { tribe, mask, actualMask, definition } : null;
 }
@@ -5754,7 +5754,7 @@ function createUnitAppearanceCache(loadSource, makeBitmap, pixelBudget) {
   return { withImage, withReadyImage, prepare, setWorkingSet, clear, stats: () => ({ entries: entries.size, residentPixels, pixelBudget, decodes, cacheHits, workingAtlases: workingSet.size, pending: preparing.size }) };
 }
 
-return {unitAppearanceRequiredWorldActions,unitAppearanceRequiredActions,UNIT_APPEARANCE_OPTIONAL_PREVIEW_ACTIONS,unitAppearanceDefinition,unitAppearanceReadiness,unitAppearanceAnimation,unitAppearanceMissingActions,unitAppearanceReady,unitAppearanceForAgent,unitAppearanceBirthSceneForAgent,unitAppearancePose,unitAppearanceWorldPose,unitAppearanceSourceScale,unitAppearanceInventory,UNIT_APPEARANCE_PIXEL_BUDGETS,unitAppearanceLodRatio,createUnitAppearanceCache};
+return { unitAppearanceRequiredWorldActions, unitAppearanceRequiredActions, UNIT_APPEARANCE_OPTIONAL_PREVIEW_ACTIONS, unitAppearanceDefinition, unitAppearanceReadiness, unitAppearanceAnimation, unitAppearanceMissingActions, unitAppearanceReady, unitAppearanceForAgent, unitAppearanceBirthSceneForAgent, unitAppearancePose, unitAppearanceWorldPose, unitAppearanceSourceScale, unitAppearanceInventory, UNIT_APPEARANCE_PIXEL_BUDGETS, unitAppearanceLodRatio, createUnitAppearanceCache };
 })();
 modules["client/unit-appearance-renderer.mjs"]=(()=>{
 const { createUnitAppearanceCache, unitAppearanceLodRatio, unitAppearanceSourceScale }=modules["client/unit-appearance.mjs"];
