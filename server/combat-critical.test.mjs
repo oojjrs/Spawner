@@ -55,12 +55,12 @@ const paths = [
 
 for (const path of paths) test(path.name + " applies one profile critical roll before HP mutation", () => {
   const normal = fixture({ ...path, rolls: [.99, .99, .99, .99] });
-  const critical = fixture({ ...path, rolls: [.99, .99, .99, 0] });
+  const critical = fixture({ ...path, rolls: path.mode === "ranged" ? [.99, .99, 0] : [.99, .99, .99, 0] });
   assert.equal(normal.outcome.critical, false); assert.equal(critical.outcome.critical, true);
   const multiplier = combatProfile(critical.source).criticalMultiplier;
   assert.ok(Math.abs(critical.outcome.amount - normal.outcome.amount * multiplier) < 1e-8);
   assert.ok(Math.abs(critical.target.stats.health - critical.target.health - critical.outcome.amount) < 1e-8);
-  assert.equal(critical.draws(), path.source === "dna" || path.mode === "ranged" ? 6 : 4);
+  assert.equal(critical.draws(), path.mode === "ranged" ? 5 : path.source === "dna" ? 6 : 4);
   const health = critical.target.health, draws = critical.draws();
   critical.tick(critical.time);
   assert.equal(critical.target.health, health); assert.equal(critical.draws(), draws);
@@ -77,19 +77,19 @@ for (const path of paths) test(path.name + " applies one profile critical roll b
 for (const path of [paths[0], paths[1], paths[4], paths[5]]) test(path.name + " rolls after defense and never marks avoided damage critical", () => {
   const defense = path.target === "dna" ? { evasion: 10, parry: 10, block: 50, blockPower: 65 } : {};
   const normal = fixture({ ...path, defense, rolls: [.99, .99, .99, .99] });
-  const block = fixture({ ...path, defense, rolls: [.99, .99, 0, 0] });
+  const block = fixture({ ...path, defense, rolls: path.mode === "ranged" ? [.99, 0, 0] : [.99, .99, 0, 0] });
   assert.equal(block.outcome.kind, "block"); assert.equal(block.outcome.critical, true);
-  assert.ok(Math.abs(block.outcome.amount - normal.outcome.amount * .35 * 1.5) < 1e-8);
-  for (const [kind, rolls] of [["miss", [0]], ["parry", [.99, 0]]]) {
+  assert.ok(Math.abs(block.outcome.amount - normal.outcome.amount * .5 * 1.5) < 1e-8);
+  for (const [kind, rolls] of path.mode === "ranged" ? [["miss", [0]]] : [["miss", [0]], ["parry", [.99, 0]]]) {
     const avoided = fixture({ ...path, defense, rolls });
     assert.equal(avoided.outcome.kind, kind); assert.equal(avoided.outcome.critical, false);
     assert.equal(avoided.outcome.amount, 0); assert.equal(avoided.target.health, avoided.target.stats.health);
     assert.equal(avoided.draws(), rolls.length);
   }
   const zeroDefense = path.target === "dna" ? { ...defense, blockPower: 100 } : { blockReduction: 1 };
-  const zero = fixture({ ...path, defense: zeroDefense, rolls: [.99, .99, 0] });
-  assert.equal(zero.outcome.kind, "block"); assert.equal(zero.outcome.critical, false);
-  assert.equal(zero.outcome.amount, 0); assert.equal(zero.draws(), 3);
+  const fixed = fixture({ ...path, defense: zeroDefense, rolls: path.mode === "ranged" ? [.99, 0] : [.99, .99, 0] });
+  assert.equal(fixed.outcome.kind, "block"); assert.equal(fixed.outcome.critical, false);
+  assert.ok(Math.abs(fixed.outcome.amount - normal.outcome.amount * .5) < 1e-8);
 });
 
 test("native critical probability uses the exact shared profile boundary", () => {

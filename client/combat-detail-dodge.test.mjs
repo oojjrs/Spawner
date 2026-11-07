@@ -1,4 +1,5 @@
 import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
+import { drawUnitAttackRing } from "./unit-attack-ring.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -39,7 +40,7 @@ function modal({ unavailable = [], rejectDraw = false, version = 1, units, initi
   detail.commands = (...args) => drawnCommands = commands(...args);
   const sandbox = { state: { agents, rivals: [], simSeconds: 0, combatVfx: { version } },
     connection: { get simSeconds() { return sandbox.state.simSeconds; } },
-    Spawner: { combatViewLayout, drawUnitHealthRing() {}, DETAIL_COMBAT_VFX_ASSETS, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade",
+    Spawner: { combatViewLayout, drawUnitHealthRing() {}, drawUnitAttackRing, DETAIL_COMBAT_VFX_ASSETS, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade",
       CREATURE_ATTACK_ANIMATIONS: {}, drawDetailVitalEffect, drawDetailVfxCell: (...args) => !rejectDraw && drawDetailVfxCell(...args) },
     detailVfxImage: path => sandbox.detailVfxImages.get(path),
     detailCombatVfx: detail, detailVfxImages: new Map(DETAIL_COMBAT_VFX_ASSETS.map(path => [path,

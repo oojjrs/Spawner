@@ -4874,9 +4874,10 @@
       const maximum = agent.stats?.health;
       if (!(maximum > 0) || !Number.isFinite(maximum) || !Number.isFinite(agent.health)) return;
       const ratio = clamp(agent.health / maximum, 0, 1), depth = radius * .327;
-      if (state.camera.zoom < 8 || ratio <= 0 || ratio >= 1 || point.x + radius < 0 || point.x - radius > viewport.width ||
+      if (state.camera.zoom < 8 || ratio <= 0 || ratio >= 1 && !agent.combat && !agent.attack && !(agent.attackReady > state.simSeconds) || point.x + radius < 0 || point.x - radius > viewport.width ||
           point.y + depth < 0 || point.y - depth > viewport.height) return;
       Spawner.drawUnitHealthRing(ctx, agent.health, maximum, point.x, point.y, radius, "#eee1c8");
+      Spawner.drawUnitAttackRing(ctx, agent, state.simSeconds, point.x, point.y, radius);
     }
 
     function drawAgentBody(now, agent) {
@@ -7768,6 +7769,7 @@
         context.fillStyle = "#13251e3d"; context.beginPath(); context.ellipse(x, y, Math.max(4, point.width * .28), Math.max(2, point.height * .035), 0, 0, Math.PI * 2); context.fill();
         Spawner.drawUnitHealthRing(context, agent.health, agent.stats?.health, x, y,
           Math.max(7, point.width * .55), agent.combat.side ? "#e18c82" : "#83d6c1");
+        Spawner.drawUnitAttackRing(context, agent, state.simSeconds, x, y, Math.max(7, point.width * .55));
         const frozen = hit && age >= 0 && age < .055;
         const visual = { ...agent, facing, hurtStartedAt: Number.isFinite(agent.hurtStartedAt) ? agent.hurtStartedAt + (frozen && (agent.tribe || "bean") !== "bean" && !Spawner.speciesHeldHurtSource?.(agent) ? age : 0) : agent.hurtStartedAt,
           combat: { ...agent.combat }, attack: attack ? { ...attack, directionX: facing,

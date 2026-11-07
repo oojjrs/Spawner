@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { UNIT_COMBAT_STATS, unitCombatStats, combatStrength, combatInjuryPenalty, combatDamage, migrateCombatStats } from "./combat-stats.mjs";
+import { UNIT_COMBAT_STATS, unitCombatStats, combatProfile, combatStrength, combatInjuryPenalty, combatDamage, migrateCombatStats } from "./combat-stats.mjs";
+import { DNA_COMBAT_RULES, dnaCombatStats } from "./dna-combat-stats.mjs";
 import { attributeCounts, unitStats } from "./attributes.mjs";
 import { ENCOUNTER_TYPES } from "./encounter-types.mjs";
 import { PLAYER_TRIBES } from "./player-tribes.mjs";
@@ -11,6 +12,23 @@ import { createCombat } from "./combat.mjs";
 function strength(value) {
   return { stats: { combatStrength: value } };
 }
+
+test("블록 감경은 종족·중립·DNA·이전 저장·수동 규칙에서 50%로 고정한다", () => {
+  for (const species of Object.keys(UNIT_COMBAT_STATS)) {
+    assert.equal(unitCombatStats(species).blockReduction, .5);
+    for (const blockReduction of [0, .4, .65, .9, 1])
+      assert.equal(combatProfile({ species, stats: { blockReduction } }).blockReduction, .5);
+  }
+  for (const blockPower of [0, 50, 65, 90, 100]) {
+    assert.equal(combatProfile({ stats: { dna: { blockPower } } }).blockReduction, .5);
+    assert.equal(dnaCombatStats({}, { blockPower }, { ...DNA_COMBAT_RULES, blockReductionBase: .9, blockReductionCap: 1 }).blockPower, 50);
+  }
+  const agent = { species: "vine-turtle", health: 37, attackReady: 9,
+    stats: { health: 100, combatStrength: 28, block: .28, blockReduction: .65 } };
+  migrateCombatStats(agent);
+  assert.equal(agent.stats.blockReduction, .5);
+  assert.deepEqual([agent.health, agent.attackReady, agent.stats.block], [37, 9, .28]);
+});
 
 function environment() {
   return { simSeconds: 0, damageRandom: () => .5, games: new Map(), colonies: [], food: new Map(), foodSpots: new Map(),

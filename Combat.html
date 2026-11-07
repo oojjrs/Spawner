@@ -85,7 +85,7 @@ const DNA_COMBAT_RULES = Object.freeze({
   critCap: .75, critKnee: 18.75, critMultiplierBase: 1.5, critMultiplierCap: 4, critPowerKnee: 25,
   accuracyCap: .6, accuracyKnee: 20, dodgeCap: .6, dodgeKnee: 20,
   parryCap: .6, parryKnee: 15, blockCap: .75, blockKnee: 15,
-  blockReductionBase: .5, blockReductionCap: .9, blockPowerKnee: 10,
+  blockReductionBase: .5, blockReductionCap: .5, blockPowerKnee: 10,
   counterCap: 1, counterKnee: 10, counterMultiplierBase: 1, counterMultiplierCap: 2,
   counterPowerKnee: 10, counterWindup: .12,
   tenacityCap: .75, tenacityKnee: 15, stunCap: .3, stunKnee: 10,
@@ -118,7 +118,7 @@ function dnaCombatStats(counts, weights, inputRules) {
     accuracy: attack ? 100 * capped(n.accuracy || 0, rules.accuracyCap, rules.accuracyKnee) : 0,
     penetration: attack ? rules.flatPenPerPoint * (n.penetration || 0) : 0,
     ...(n.percentPen ? { armorPenetration: capped(n.percentPen, rules.percentPenCap, rules.percentPenKnee) } : {}),
-    blockPower: 100 * (rules.blockReductionBase + capped(n.blockPower || 0, rules.blockReductionCap - rules.blockReductionBase, rules.blockPowerKnee)),
+    blockPower: 100 * DNA_COMBAT_RULES.blockReductionBase,
     counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,
     counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,
     tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),
@@ -640,28 +640,28 @@ const UNIT_COMBAT_STATS = Object.freeze(Object.fromEntries([
   ["spore", 18],
   ["pebble", 22],
   ["spring", 19],
-  ["flower-tail-bird", 8, 18, 3, 4, 40, 10],
-  ["dew-rabbit", 10, 22, 3, 4, 40, 8],
-  ["soil-mole", 14, 10, 6, 10, 45, 12],
-  ["bundle-snail", 16, 3, 2, 24, 60, 5],
+  ["flower-tail-bird", 8, 18, 3, 4, 50, 10],
+  ["dew-rabbit", 10, 22, 3, 4, 50, 8],
+  ["soil-mole", 14, 10, 6, 10, 50, 12],
+  ["bundle-snail", 16, 3, 2, 24, 50, 5],
   ["cotton-sheep", 12, 7, 3, 14, 50, 5],
-  ["rolling-acorn", 16, 12, 4, 18, 55, 8],
+  ["rolling-acorn", 16, 12, 4, 18, 50, 8],
   ["bubble-toad", 28, 10, 5, 12, 50, 10],
   ["snare-vine", 34, 3, 12, 14, 50, 8],
-  ["spiny-back-beetle", 32, 6, 6, 22, 60, 8],
-  ["soil-boar", 36, 5, 6, 18, 55, 12],
-  ["vine-turtle", 28, 2, 4, 28, 65, 5],
-  ["shadow-weasel", 40, 22, 12, 5, 40, 20],
-  ["talon-owl", 44, 18, 14, 6, 45, 18],
+  ["spiny-back-beetle", 32, 6, 6, 22, 50, 8],
+  ["soil-boar", 36, 5, 6, 18, 50, 12],
+  ["vine-turtle", 28, 2, 4, 28, 50, 5],
+  ["shadow-weasel", 40, 22, 12, 5, 50, 20],
+  ["talon-owl", 44, 18, 14, 6, 50, 18],
   ["spring-keeper", 36, 18, 18, 10, 50, 15],
   ["lantern-keeper", 38, 16, 10, 14, 50, 15],
-  ["old-garden-snail", 42, 2, 3, 30, 65, 5],
-  ["walking-forest", 48, 2, 6, 28, 65, 8],
+  ["old-garden-snail", 42, 2, 3, 30, 50, 5],
+  ["walking-forest", 48, 2, 6, 28, 50, 8],
   ["white-paw", 64, 20, 16, 12, 50, 20],
-  ["spiny-back-leader", 54, 10, 10, 28, 65, 12]
+  ["spiny-back-leader", 54, 10, 10, 28, 50, 12]
 ].map(([key, combatStrength, evasion, parry, block, blockReduction, criticalChance]) => [key, Object.freeze({
   health: UNIT_MAX_HEALTH, combatStrength, evasion: (evasion || 0) / 100, parry: (parry || 0) / 100,
-  block: (block || 0) / 100, blockReduction: (blockReduction || 0) / 100,
+  block: (block || 0) / 100, blockReduction: (blockReduction || 50) / 100,
   criticalChance: (criticalChance || 0) / 100, criticalMultiplier: 1.5
 })])));
 
@@ -700,7 +700,7 @@ function combatProfile(agent) {
     const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;
     return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: dna.armor,
       armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: dna.focus,
-      recovery: dna.recovery || 0, criticalChance, criticalMultiplier };
+      recovery: dna.recovery || 0, blockReduction: .5, criticalChance, criticalMultiplier };
   }
   const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;
   const primary = combatPrimary(agent);
@@ -715,9 +715,9 @@ function combatProfile(agent) {
   const reduction = equipped("carapace") ? .45 : Math.max(0, Math.min(.8, agent.stats?.damageReduction || 0));
   const defense = Number.isFinite(agent.stats?.defense) ? agent.stats.defense : 8 + strength * .4 + 100 * reduction / (1 - reduction);
   const armorPenetration = equipped("piercing") ? .5 : Math.max(0, Math.min(1, agent.stats?.armorPenetration || 0));
-  const protection = Object.fromEntries(["evasion", "parry", "block", "blockReduction"].map(key => [key,
+  const protection = Object.fromEntries(["evasion", "parry", "block"].map(key => [key,
     Math.max(0, Math.min(1, Number.isFinite(agent.stats?.[key]) ? agent.stats[key] : agent.species ? base[key] : 0))]));
-  return { primary, attackPower: Math.max(1, attackPower), defense: Math.max(0, defense), armorPenetration, ...protection, criticalChance, criticalMultiplier,
+  return { primary, attackPower: Math.max(1, attackPower), defense: Math.max(0, defense), armorPenetration, ...protection, blockReduction: .5, criticalChance, criticalMultiplier,
     attackSpeed, attackInterval, windup: (primary === "piercing" ? .65 : primary === "blade" ? .24 : .4),
     recovery: (primary === "blade" ? .3 : .45) };
 }
@@ -743,7 +743,8 @@ function migrateCombatStats(agent) {
   if (agent.dna || agent.stats?.dna) return;
   const profile = unitCombatStats(agent.species || agent.tribe);
   const combatStrength = profile.combatStrength + (agent.species ? 0 : attributeCombatStrengthBonus(agent.attributes));
-  if (agent.species) for (const key of ["evasion", "parry", "block", "blockReduction", "criticalChance", "criticalMultiplier"])
+  if (agent.species) agent.stats.blockReduction = profile.blockReduction;
+  if (agent.species) for (const key of ["evasion", "parry", "block", "criticalChance", "criticalMultiplier"])
     if (!Number.isFinite(agent.stats[key])) agent.stats[key] = profile[key];
   if (agent.stats.combatStrength === combatStrength && agent.stats.health === UNIT_MAX_HEALTH) return;
   const health = UNIT_MAX_HEALTH;
@@ -3691,7 +3692,8 @@ function createCombat(environment) {
   function engage(agent, target, time) {
     const game = environment.games.get(agent.ownerId);
     const defending = colonyDefenseTarget(agent, target, game?.agents, [game?.nest]);
-    if (!settled(agent, time) || !settled(target, time) || agent.x !== target.x || agent.y !== target.y ||
+    if (agent === target || combatTeam(agent) === combatTeam(target) ||
+        !settled(agent, time) || !settled(target, time) || agent.x !== target.x || agent.y !== target.y ||
         agent.combat || !environment.combatSimulation && !canPursueCombat(agent, target, time, defending)) return false;
     let combat = target.combat;
     if (combat) {
@@ -3849,6 +3851,7 @@ function createCombat(environment) {
     combat.targetId = target.id;
     combat.parryUntil = !counter && profile.primary === "blade" && time >= combat.parryReadyAt ? time + .2 : 0;
     attacker.attackReady = combat.nextAttackAt;
+    attacker.attackInterval = profile.attackInterval;
     combat.position.moving = false;
     attacker.attackStartedAt = time; attacker.animationStartedAt = time;
     attacker.attackTargetId = target.id; attacker.attackHit = false;
@@ -3864,13 +3867,22 @@ function createCombat(environment) {
     if (restored > 0 && kind) vfx(kind, at, agent, agent, restored, { toId: agent.id, ...detail });
   }
 
-  function neutralDefenseReaction(defender, accuracy, time, counter) {
+  function resetAttackWait(agent, time) {
+    if (agent.health <= 0) return;
+    const attack = agent.attack, readyAt = attack ? Math.max(time, attack.endsAt) : time;
+    if (attack) attack.defenseResetAt = time;
+    agent.attackReady = readyAt;
+    agent.dnaScanReady = time;
+    if (agent.combat) agent.combat.nextAttackAt = readyAt;
+  }
+
+  function neutralDefenseReaction(defender, accuracy, time, counter, mode) {
     if (!defender.species || defender.stats?.dna) return null;
     const profile = combatProfile(defender), random = environment.combatRandom || Math.random;
     const available = time >= Math.max(defender.combat?.stunnedUntil || 0, defender.dnaStunnedUntil || 0);
     if (available && random() < Math.max(0, profile.evasion - accuracy / 100)) return { kind: "miss", multiplier: 0 };
     if (available && !counter && time >= (defender.dnaReactionReadyAt || 0)) {
-      if (random() < profile.parry) return { kind: "parry", multiplier: 0 };
+      if (mode === "melee" && random() < profile.parry) return { kind: "parry", multiplier: 0 };
       if (random() < profile.block) return { kind: "block", multiplier: 1 - profile.blockReduction };
     }
     return { kind: null, multiplier: 1 };
@@ -3885,17 +3897,17 @@ function createCombat(environment) {
     let damage = combatDamage(attacker, defender, (environment.damageRandom || Math.random)(), environment.combatRules);
     let reaction = null;
     if (source && attack.hitIndex > 0) damage *= source.comboPower / 100;
-    const neutral = neutralDefenseReaction(defender, source?.accuracy || 0, time, attack.counter);
+    const neutral = neutralDefenseReaction(defender, source?.accuracy || 0, time, attack.counter, "melee");
     if (neutral) { damage *= neutral.multiplier; reaction = neutral.kind; }
     else if (random() * 100 < Math.max(0, (shield?.evasion || 0) - (source?.accuracy || 0))) { damage = 0; reaction = "miss"; }
     else if (!attack.counter && shield && time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < shield.parry) { damage = 0; reaction = "parry"; }
-    else if (!attack.counter && shield && time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < shield.block) { damage *= 1 - shield.blockPower / 100; reaction = "block"; }
+    else if (!attack.counter && shield && time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < shield.block) { damage *= 1 - combatProfile(defender).blockReduction; reaction = "block"; }
     else if (!shield && !attack.counter) {
       const profile = combatProfile(defender), defense = defender.combat;
       if (time < defense.parryUntil && time >= defense.parryReadyAt && profile.primary === "blade") {
         damage = 0; defense.parryReadyAt = time + 3; defense.parryUntil = 0; reaction = "parry";
       } else if (profile.primary === "carapace" && time >= defense.blockReadyAt && time >= defense.stunnedUntil) {
-        damage = Math.max(1, Math.round(damage * (attack.heavy ? .55 : .2))); defense.blockReadyAt = time + 2.5; reaction = "block";
+        damage *= 1 - profile.blockReduction; defense.blockReadyAt = time + 2.5; reaction = "block";
       }
     }
     if (["parry", "block"].includes(reaction) && environment.combatRules?.reactionCooldown)
@@ -3908,6 +3920,7 @@ function createCombat(environment) {
       mode: attack.attackMode, hitIndex: attack.hitIndex || 0, causeId: attackCauses.get(attack) };
     const hitEvent = damage > 0 ? receiveDamage(target, damage, attacker, evidence) : vfx(evidence.kind, time, attacker, defender, 0, evidence);
     if (damage > 0) defender.hurtStartedAt = time;
+    if (["parry", "block"].includes(reaction)) resetAttackWait(defender, time);
     const dealt = Math.max(0, previous - defender.health);
     if (source && dealt > 0) restoreHealth(attacker, dealt * source.lifesteal / 100, time, "drain", {
       causeId: hitEvent?.id, fromId: defender.id, from: { x: defender.x, y: defender.y } });
@@ -3945,13 +3958,14 @@ function createCombat(environment) {
       if (entry) receiveDamage(entry, dealt * shield.reflection / 100, defender,
         { kind: "reflect", at: time, causeId: hitEvent?.id, fromId: defender.id, toId: attacker.id });
     }
-    if (defender.health > 0 && attacker.health > 0 && !attack.counter && reaction && reaction !== "miss" &&
+    if (defender.health > 0 && attacker.health > 0 && !defender.attack && !attack.counter && reaction && reaction !== "miss" &&
         (shield ? shield.power > 0 && time >= (defender.dnaCounterReadyAt || 0) && random() * 100 < shield.counter : !defender.species)) beginAttack(defender, attacker, time, true);
     if (source && !attack.counter && attacker.health > 0 && defender.health > 0 && ++attack.hitIndex < source.hits) {
       attack.resolved = false; attack.hitAt = time + source.comboSpeed;
       if (attack.meleeContacts) attack.meleeContacts.push(attack.hitAt);
       attack.endsAt = Math.max(attack.endsAt, attack.hitAt + attack.recovery);
-      combat.nextAttackAt = Math.max(combat.nextAttackAt, attack.endsAt + attack.interval);
+      combat.nextAttackAt = Number.isFinite(attack.defenseResetAt) ? Math.max(attack.endsAt, attack.defenseResetAt) :
+        Math.max(combat.nextAttackAt, attack.endsAt + attack.interval);
       attacker.attackReady = combat.nextAttackAt;
     }
   }
@@ -3996,7 +4010,8 @@ function createCombat(environment) {
       if (stats && !active.counter && ++active.hitIndex < stats.hits) {
         active.resolved = false; active.hitAt = time + stats.comboSpeed;
         active.endsAt = Math.max(active.endsAt, active.hitAt + active.recovery);
-        attacker.combat.nextAttackAt = Math.max(attacker.combat.nextAttackAt, active.endsAt + active.interval);
+        attacker.combat.nextAttackAt = Number.isFinite(active.defenseResetAt) ? Math.max(active.endsAt, active.defenseResetAt) :
+          Math.max(attacker.combat.nextAttackAt, active.endsAt + active.interval);
         attacker.attackReady = attacker.combat.nextAttackAt;
       }
       return;
@@ -4013,12 +4028,12 @@ function createCombat(environment) {
     const defense = defender.combat, profile = combatProfile(defender);
     let damage = combatDamage(attacker, defender, (environment.damageRandom || Math.random)(), environment.combatRules);
     let reaction = null;
-    const neutral = neutralDefenseReaction(defender, 0, time, attack.counter);
+    const neutral = neutralDefenseReaction(defender, 0, time, attack.counter, "melee");
     if (neutral) { damage *= neutral.multiplier; reaction = neutral.kind; }
     else if (!attack.counter && time < defense.parryUntil && time >= defense.parryReadyAt && profile.primary === "blade") {
       damage = 0; defense.parryReadyAt = time + 3; defense.parryUntil = 0; reaction = "parry";
     } else if (!attack.counter && profile.primary === "carapace" && time >= defense.blockReadyAt && time >= defense.stunnedUntil) {
-      damage = Math.max(1, Math.round(damage * (attack.heavy ? .55 : .2)));
+      damage *= 1 - profile.blockReduction;
       defense.blockReadyAt = time + 2.5; reaction = "block";
     }
     if (["parry", "block"].includes(reaction) && environment.combatRules?.reactionCooldown)
@@ -4030,6 +4045,7 @@ function createCombat(environment) {
       critical, hitIndex: 0, causeId: attackCauses.get(attack) };
     const hitEvent = damage > 0 ? receiveDamage(target, damage, attacker, evidence) : vfx(evidence.kind, time, attacker, defender, 0, evidence);
     if (damage > 0) defender.hurtStartedAt = time;
+    if (["parry", "block"].includes(reaction)) resetAttackWait(defender, time);
     combat.completedExchanges++; defense.completedExchanges++;
     emit(combat, reaction || "hit", time, attacker, defender, damage);
     if (defender.health <= 0) return;
@@ -4041,7 +4057,7 @@ function createCombat(environment) {
       emit(combat, "stun", time, attacker, defender, damage,
         { causeId: hitEvent?.id, duration: .5, endsAt: time + .5 }); reaction = null;
     }
-    if (reaction && reaction !== "miss" && !defender.species && attacker.health > 0) beginAttack(defender, attacker, time, true);
+    if (reaction && reaction !== "miss" && !defender.attack && !defender.species && attacker.health > 0) beginAttack(defender, attacker, time, true);
   }
 
 
@@ -4058,15 +4074,13 @@ function createCombat(environment) {
     let damage = combatDamage({ ...source, attack: projectile.attack }, defender, (environment.damageRandom || Math.random)(), environment.combatRules);
     let reaction = null;
     if (projectile.hitIndex > 0) damage *= offense.comboPower / 100;
-    const neutral = neutralDefenseReaction(defender, offense.accuracy, time, projectile.attack.counter);
+    const neutral = neutralDefenseReaction(defender, offense.accuracy, time, projectile.attack.counter, "ranged");
     if (neutral) { damage *= neutral.multiplier; reaction = neutral.kind; }
     else if (random() * 100 < Math.max(0, (defense?.evasion || 0) - offense.accuracy)) { damage = 0; reaction = "miss"; }
-    else if (time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < (defense?.parry || 0)) { damage = 0; reaction = "parry"; }
-    else if (time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < (defense?.block || 0)) { damage *= 1 - defense.blockPower / 100; reaction = "block"; }
+    else if (time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < (defense?.block || 0)) { damage *= 1 - combatProfile(defender).blockReduction; reaction = "block"; }
     else if (!defense) {
       const profile = combatProfile(defender), state = defender.combat || defender;
-      if (time < (state.parryUntil || 0) && time >= (state.parryReadyAt || 0) && profile.primary === "blade") { damage = 0; state.parryReadyAt = time + 3; state.parryUntil = 0; reaction = "parry"; }
-      else if (profile.primary === "carapace" && time >= (state.blockReadyAt || 0) && time >= (state.stunnedUntil || 0)) { damage = Math.max(1, Math.round(damage * .2)); state.blockReadyAt = time + 2.5; reaction = "block"; }
+      if (profile.primary === "carapace" && time >= (state.blockReadyAt || 0) && time >= (state.stunnedUntil || 0)) { damage *= 1 - profile.blockReduction; state.blockReadyAt = time + 2.5; reaction = "block"; }
     }
     if (["parry", "block"].includes(reaction) && environment.combatRules?.reactionCooldown)
       defender.dnaReactionReadyAt = time + environment.combatRules.reactionCooldown;
@@ -4077,6 +4091,7 @@ function createCombat(environment) {
       causeId: attackCauses.get(projectile.attack), projectileId: projectile.vfxId };
     const hitEvent = damage > 0 ? receiveDamage(target, damage, source, evidence) : vfx(evidence.kind, time, source, defender, 0, evidence);
     if (damage > 0) defender.hurtStartedAt = time;
+    if (["parry", "block"].includes(reaction)) resetAttackWait(defender, time);
     const dealt = Math.max(0, previous - defender.health);
     restoreHealth(source, dealt * offense.lifesteal / 100, time, "drain", {
       causeId: hitEvent?.id, fromId: defender.id, from: { x: defender.x, y: defender.y } });
@@ -4159,6 +4174,7 @@ function createCombat(environment) {
     const recovery = Math.max(combatProfile(agent).recovery, timing.durationMs / 1000 - (timing.hitTimeMs / 1000 || AGENT_ATTACK_HIT_TIME));
     const lastLaunchAt = launchedAt + (stats.hits - 1) * stats.comboSpeed, endsAt = lastLaunchAt + recovery;
     agent.attackReady = endsAt + interval;
+    agent.attackInterval = interval;
     agent.attack = { dnaRanged: true, attackMode: "ranged", startedAt: time, launchedAt, hitAt: arrivesAt, shotLaunches: [],
       endsAt, recovery, interval, speed: 1, targetId: target.agent.id, targetKind: "agent", targetX: target.agent.x, targetY: target.agent.y,
       fromX: agent.x, fromY: agent.y, directionX: Math.sign(target.agent.x - agent.x) || 1, resolved: false, hit: false };
@@ -4226,7 +4242,8 @@ function createCombat(environment) {
         if (target) resolveHit(member, target, event.at);
         else { member.attack.resolved = true; member.attackHit = true; }
       } else if (event.kind === "end") {
-        member.combat.nextAttackAt = Math.max(member.combat.nextAttackAt, event.at + (member.attack.interval ?? combatProfile(member).attackInterval));
+        member.combat.nextAttackAt = Number.isFinite(member.attack.defenseResetAt) ? Math.max(event.at, member.attack.defenseResetAt) :
+          Math.max(member.combat.nextAttackAt, event.at + (member.attack.interval ?? combatProfile(member).attackInterval));
         member.attackReady = member.combat.nextAttackAt;
         member.attack = null; member.attackTargetId = null;
         member.mode = member.species === "spiny-back-beetle" ? "idle" : "fight";
@@ -31629,6 +31646,45 @@ function talonOwlIdleFrame(elapsedMs) {
 
 return { TALON_OWL_IDLE, talonOwlIdleFrame };
 })();
+modules["client/unit-attack-ring.mjs"] = (() => {
+const { combatProfile } = modules["server/combat-stats.mjs"];
+
+function unitAttackCooldown(agent, time) {
+  if (!agent || !(agent.health > 0) || !Number.isFinite(time)) return null;
+  const dna = agent.stats?.dna;
+  if (dna && !(dna.melee && dna.meleePower > 0 && dna.meleeSpeed > 0 || dna.ranged && dna.rangedPower > 0 && dna.rangedSpeed > 0)) return null;
+  if (agent.stats?.canAttack === false) return null;
+  const attack = agent.attack;
+  if (Number.isFinite(attack?.defenseResetAt)) return 1;
+  if (Number.isFinite(attack?.endsAt) && time < attack.endsAt) return 0;
+  const readyAt = agent.attackReady ?? agent.combat?.nextAttackAt ?? 0;
+  if (readyAt <= time) return 1;
+  const buildingInterval = attack && !attack.interval && Number.isFinite(attack.endsAt) ? readyAt - attack.endsAt : null;
+  const interval = attack?.interval ?? buildingInterval ?? agent.attackInterval ?? combatProfile(agent).attackInterval;
+  if (!(interval > 0) || !Number.isFinite(interval) || !Number.isFinite(readyAt)) return 0;
+  return Math.max(0, Math.min(1, 1 - (readyAt - time) / interval));
+}
+
+function drawUnitAttackRing(context, agent, time, x, y, hpRadius) {
+  const ratio = unitAttackCooldown(agent, time);
+  if (ratio === null || !Number.isFinite(hpRadius) || hpRadius <= 0) return false;
+  const healthThickness = Math.max(1, Math.min(6, hpRadius * .064));
+  const thickness = Math.max(.75, Math.min(2, hpRadius * .025));
+  const inset = (healthThickness + 2 + thickness) / 2 + .75;
+  const radius = hpRadius - inset, depth = hpRadius * .327 - inset;
+  if (radius <= 0 || depth <= 0) return false;
+  context.save(); context.lineCap = "round"; context.lineWidth = thickness;
+  context.strokeStyle = "#4b422d";
+  context.beginPath(); context.ellipse(x, y, radius, depth, 0, 0, Math.PI * 2); context.stroke();
+  if (ratio > 0) {
+    context.strokeStyle = "#f5c85b";
+    context.beginPath(); context.ellipse(x, y, radius, depth, 0, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * ratio); context.stroke();
+  }
+  context.restore(); return true;
+}
+
+return { unitAttackCooldown, drawUnitAttackRing };
+})();
 modules["client/combat-stage.mjs"] = (() => {
 const { unitActionArtPose } = modules["client/unit-action-art.mjs"];
 const { CREATURE_RANGED_ANIMATIONS, creatureRangedPose } = modules["client/creature-ranged.mjs"];
@@ -31638,6 +31694,7 @@ const { beanHeldHurtSource, drawBeanHeldHurt } = modules["client/bean-held-hurt.
 const { combatDodgePose, drawCombatDodgeTrails, drawCombatDodgeGhosts, drawCombatDodgeLabel } = modules["client/combat-dodge-vfx.mjs"];
 const { drawUnitLoading } = modules["client/unit-loading.mjs"];
 const { drawUnitHealthRing } = modules["client/unit-health-ring.mjs"];
+const { drawUnitAttackRing } = modules["client/unit-attack-ring.mjs"];
 const { createCombatStageAppearance } = modules["client/combat-stage-appearance.mjs"];
 const { attackAnimationElapsed } = modules["server/attack.mjs"];
 const { createCombatVfxCursor } = modules["client/combat-vfx-events.mjs"];
@@ -31865,8 +31922,9 @@ function createCombatStage(canvas) {
     if (evade) drawCombatDodgeTrails(context, evade);
     context.save(); context.translate(point.x, point.y);
     context.fillStyle = "#15261c55"; context.beginPath(); context.ellipse(0, 0, radiusX, radiusY, 0, 0, Math.PI * 2); context.fill();
-    drawUnitHealthRing(context, agent.health, agent.stats?.health, 0, 0,
-      Math.max(7, bodyDimensions(agent).width * 100 * formationScale(width, height) * .55), colors[index]);
+    const healthRadius = Math.max(7, bodyDimensions(agent).width * 100 * formationScale(width, height) * .55);
+    drawUnitHealthRing(context, agent.health, agent.stats?.health, 0, 0, healthRadius, colors[index]);
+    drawUnitAttackRing(context, agent, currentTrial.time, 0, 0, healthRadius);
     const drawBody = (dx = 0, dy = 0) => {
       context.save(); context.translate(dx, dy);
     const appearancePose = appearancePoses.get(String(agent.id));
@@ -32112,8 +32170,8 @@ const { SIMULATION_STATS, DEFAULT_SIMULATION_RULES, deriveSimulationStats, creat
 const { createCombatStage } = modules["client/combat-stage.mjs"];
 
 const sides = ["left", "right"], elements = {}, inputs = {};
-const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index ? "spore" : "bean", name: index ? "오른쪽" : "왼쪽",
-  }]));
+const builds = Object.fromEntries(sides.map((side, index) => [side, combatLabWithAppearance(
+  { key: index ? "spore" : "bean", name: index ? "오른쪽" : "왼쪽" }, "blade-carapace")]));
 const rosters = Object.fromEntries(sides.map(side => [side, [builds[side]]]));
 const selected = { left: 0, right: 0 };
 const rules = { ...DEFAULT_SIMULATION_RULES };
@@ -32154,7 +32212,7 @@ elements.dice = button(stageCenter, "🎲", () => {
       const choices = COMBAT_LAB_UNITS.filter(unit => unit.key !== previous[slot]?.key && !used.has(unit.key));
       const key = choices[Math.floor(Math.random() * choices.length)].key;
       used.add(key);
-      return { key };
+      return combatLabWithAppearance({ key }, "blade-carapace");
     });
     selected[side] = 0;
     selectBuild(side);
@@ -32187,11 +32245,12 @@ for (const side of sides) {
   });
   hud.append(rosterActions);
   const appearance = control(hud, "외형", select(COMBAT_LAB_UNITS.map(unit => [unit.key, unit.name]), builds[side].key));
-  appearance.addEventListener("change", () => { rosters[side][selected[side]] = { key: appearance.value }; selectBuild(side); changed(); }); inputs[side].appearance = appearance;
-  const dnaAppearance = control(hud, "DNA 외형", select(COMBAT_LAB_APPEARANCES, "native"));
+  appearance.addEventListener("change", () => { rosters[side][selected[side]] = combatLabWithAppearance({ key: appearance.value }, "blade-carapace"); selectBuild(side); changed(); }); inputs[side].appearance = appearance;
+  const dnaAppearance = control(hud, "DNA 외형", select(combatLabPlayable(builds[side].key) ? COMBAT_LAB_APPEARANCES.filter(([key]) => key !== "native") : [["native", "기본"]], combatLabAppearance(builds[side])));
   inputs[side].dnaAppearance = dnaAppearance;
   dnaAppearance.disabled = !combatLabPlayable(builds[side].key);
   dnaAppearance.addEventListener("change", () => {
+    if (!Array.from(dnaAppearance.options).some(option => option.value === dnaAppearance.value)) return;
     rosters[side][selected[side]] = combatLabWithAppearance(builds[side], dnaAppearance.value);
     selectBuild(side); changed();
   });
@@ -32208,6 +32267,10 @@ elements.phase = node("output", null, "phase"); stageFooter.append(actions, elem
 function selectBuild(side) {
   builds[side] = rosters[side][selected[side]];
   inputs[side].appearance.value = builds[side].key;
+  const variants = combatLabPlayable(builds[side].key) ? [["blade-carapace", "칼날+갑각"]] : [["native", "기본"]];
+  inputs[side].dnaAppearance.replaceChildren(...variants.map(([value, label]) => {
+    const option = node("option", label); option.value = value; return option;
+  }));
   inputs[side].dnaAppearance.value = combatLabAppearance(builds[side]);
   inputs[side].dnaAppearance.disabled = !combatLabPlayable(builds[side].key);
 }

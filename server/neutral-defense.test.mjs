@@ -52,10 +52,12 @@ for (const mode of ["native", "dna", "ranged"]) {
   test(mode + " attacks resolve each neutral defense in the authoritative engine", () => {
     const normal = fixture(mode, [.99, .99, .99], 0);
     assert.equal(normal.outcome.kind, "hit");
-    for (const [kind, rolls] of [["miss", [0]], ["parry", [.99, 0]], ["block", [.99, .99, 0]]]) {
+    const reactions = mode === "ranged" ? [["miss", [0]], ["block", [.99, 0]]] :
+      [["miss", [0]], ["parry", [.99, 0]], ["block", [.99, .99, 0]]];
+    for (const [kind, rolls] of reactions) {
       const defended = fixture(mode, rolls, 0);
       assert.equal(defended.outcome.kind, kind);
-      if (kind === "block") assert.ok(Math.abs(defended.outcome.amount - normal.outcome.amount * .35) < 1e-9);
+      if (kind === "block") assert.ok(Math.abs(defended.outcome.amount - normal.outcome.amount * .5) < 1e-9);
       else assert.equal(defended.target.health, 1000);
       assert.equal(defended.events.some(event => event.kind === "counter" && event.sourceId === "b"), false);
       assert.equal(defended.source.attack.hit, kind === "block");

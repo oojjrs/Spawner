@@ -2,14 +2,13 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
-import { COMBAT_LAB_APPEARANCES, combatLabPlayable, combatLabAppearance } from "./combat-lab-appearances.mjs";
+import { COMBAT_LAB_APPEARANCES, combatLabPlayable, combatLabAppearance, combatLabWithAppearance } from "./combat-lab-appearances.mjs";
 import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
 import { SIMULATION_STATS, deriveSimulationStats } from "./combat-simulation.mjs";
 import { dnaUnitStats } from "../server/dna-unit.mjs";
-import { startingWorkerDna } from "../server/tribe-start.mjs";
 import { unitCombatStats, combatProfile } from "../server/combat-stats.mjs";
 
-for (const file of ["./combat-lab.js", "../Combat.html"]) test(file + " 주사위는 양쪽5명을 모두 바꾸고 실제 원종 프로필을 독립 선택한다", () => {
+for (const file of ["./combat-lab.js", "../Combat.html"]) test(file + " 주사위는 양쪽5명을 모두 바꾸고 공격 가능한 원종·전투 DNA를 독립 선택한다", () => {
   const source = readFileSync(new URL(file, import.meta.url), "utf8").replaceAll("\r\n", "\n");
   const start = source.indexOf('elements.dice = button(stageCenter, "🎲", () => {');
   const finish = source.indexOf("\n});", start);
@@ -23,11 +22,12 @@ for (const file of ["./combat-lab.js", "../Combat.html"]) test(file + " 주사�
       organs: { attack: 1, ranged: 0 } };
     rosters[side] = Array.from({ length: 5 }, (_, slot) => ({ ...structuredClone(profile), key: COMBAT_LAB_UNITS[slot + sideIndex].key }));
     selected[side] = 3; builds[side] = rosters[side][3];
-    inputs[side] = Object.fromEntries([...SIMULATION_STATS.map(stat => stat.key), "attack", "ranged", "appearance", "dnaAppearance"].map(key => [key, { value: null }]));
+    inputs[side] = Object.fromEntries([...SIMULATION_STATS.map(stat => stat.key), "attack", "ranged", "appearance", "dnaAppearance"].map(key => [key, { value: null, replaceChildren(...options) { this.options = options; } }]));
   }
   let roll, changes = 0;
   const math = Object.create(Math); math.random = () => 0;
-  const scope = { sides, rosters, builds, selected, inputs, COMBAT_LAB_UNITS, SIMULATION_STATS, structuredClone, combatLabPlayable, combatLabAppearance,
+  const scope = { sides, rosters, builds, selected, inputs, COMBAT_LAB_UNITS, SIMULATION_STATS, structuredClone, combatLabPlayable, combatLabAppearance, combatLabWithAppearance,
+    node: (tag, label) => ({ tag, label }),
     Math: math, elements: {}, stageCenter: null,
     button(parent, label, action) { roll = action; }, changed() { changes++; } };
   runInNewContext(source.slice(helper, helperEnd + 2) + "\n" + source.slice(start, finish + 4), scope);
@@ -42,10 +42,11 @@ for (const file of ["./combat-lab.js", "../Combat.html"]) test(file + " 주사�
       for (const [slot, build] of rosters[side].entries()) {
         assert.notEqual(build.key, previous[side][slot], side + " " + slot);
         assert.ok(COMBAT_LAB_UNITS.some(unit => unit.key === build.key));
-        assert.deepEqual(Object.keys(build), ["key"]);
-        const stats = deriveSimulationStats({ ...build });
+        assert.deepEqual(Object.keys(build), combatLabPlayable(build.key) ? ["key", "dna"] : ["key"]);
+        const stats = deriveSimulationStats(JSON.parse(JSON.stringify(build)));
+        assert.ok(stats.canAttack);
         const expected = ["bean", "spore", "pebble", "spring"].includes(build.key)
-          ? dnaUnitStats(startingWorkerDna(build.key)) : { ...unitCombatStats(build.key), ...combatProfile({ species: build.key, stats: unitCombatStats(build.key), attributes: {} }) };
+          ? dnaUnitStats(build.dna) : { ...unitCombatStats(build.key), ...combatProfile({ species: build.key, stats: unitCombatStats(build.key), attributes: {} }) };
         assert.equal(stats.health, expected.health);
         assert.equal(stats.attackPower, expected.attackPower);
       }

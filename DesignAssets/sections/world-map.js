@@ -4198,7 +4198,7 @@ document.write(
 "  critCap: .75, critKnee: 18.75, critMultiplierBase: 1.5, critMultiplierCap: 4, critPowerKnee: 25,\n" +
 "  accuracyCap: .6, accuracyKnee: 20, dodgeCap: .6, dodgeKnee: 20,\n" +
 "  parryCap: .6, parryKnee: 15, blockCap: .75, blockKnee: 15,\n" +
-"  blockReductionBase: .5, blockReductionCap: .9, blockPowerKnee: 10,\n" +
+"  blockReductionBase: .5, blockReductionCap: .5, blockPowerKnee: 10,\n" +
 "  counterCap: 1, counterKnee: 10, counterMultiplierBase: 1, counterMultiplierCap: 2,\n" +
 "  counterPowerKnee: 10, counterWindup: .12,\n" +
 "  tenacityCap: .75, tenacityKnee: 15, stunCap: .3, stunKnee: 10,\n" +
@@ -4231,7 +4231,7 @@ document.write(
 "    accuracy: attack ? 100 * capped(n.accuracy || 0, rules.accuracyCap, rules.accuracyKnee) : 0,\n" +
 "    penetration: attack ? rules.flatPenPerPoint * (n.penetration || 0) : 0,\n" +
 "    ...(n.percentPen ? { armorPenetration: capped(n.percentPen, rules.percentPenCap, rules.percentPenKnee) } : {}),\n" +
-"    blockPower: 100 * (rules.blockReductionBase + capped(n.blockPower || 0, rules.blockReductionCap - rules.blockReductionBase, rules.blockPowerKnee)),\n" +
+"    blockPower: 100 * DNA_COMBAT_RULES.blockReductionBase,\n" +
 "    counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,\n" +
 "    counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,\n" +
 "    tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),\n" +
@@ -4462,28 +4462,28 @@ document.write(
 "  [\"spore\", 18],\n" +
 "  [\"pebble\", 22],\n" +
 "  [\"spring\", 19],\n" +
-"  [\"flower-tail-bird\", 8, 18, 3, 4, 40, 10],\n" +
-"  [\"dew-rabbit\", 10, 22, 3, 4, 40, 8],\n" +
-"  [\"soil-mole\", 14, 10, 6, 10, 45, 12],\n" +
-"  [\"bundle-snail\", 16, 3, 2, 24, 60, 5],\n" +
+"  [\"flower-tail-bird\", 8, 18, 3, 4, 50, 10],\n" +
+"  [\"dew-rabbit\", 10, 22, 3, 4, 50, 8],\n" +
+"  [\"soil-mole\", 14, 10, 6, 10, 50, 12],\n" +
+"  [\"bundle-snail\", 16, 3, 2, 24, 50, 5],\n" +
 "  [\"cotton-sheep\", 12, 7, 3, 14, 50, 5],\n" +
-"  [\"rolling-acorn\", 16, 12, 4, 18, 55, 8],\n" +
+"  [\"rolling-acorn\", 16, 12, 4, 18, 50, 8],\n" +
 "  [\"bubble-toad\", 28, 10, 5, 12, 50, 10],\n" +
 "  [\"snare-vine\", 34, 3, 12, 14, 50, 8],\n" +
-"  [\"spiny-back-beetle\", 32, 6, 6, 22, 60, 8],\n" +
-"  [\"soil-boar\", 36, 5, 6, 18, 55, 12],\n" +
-"  [\"vine-turtle\", 28, 2, 4, 28, 65, 5],\n" +
-"  [\"shadow-weasel\", 40, 22, 12, 5, 40, 20],\n" +
-"  [\"talon-owl\", 44, 18, 14, 6, 45, 18],\n" +
+"  [\"spiny-back-beetle\", 32, 6, 6, 22, 50, 8],\n" +
+"  [\"soil-boar\", 36, 5, 6, 18, 50, 12],\n" +
+"  [\"vine-turtle\", 28, 2, 4, 28, 50, 5],\n" +
+"  [\"shadow-weasel\", 40, 22, 12, 5, 50, 20],\n" +
+"  [\"talon-owl\", 44, 18, 14, 6, 50, 18],\n" +
 "  [\"spring-keeper\", 36, 18, 18, 10, 50, 15],\n" +
 "  [\"lantern-keeper\", 38, 16, 10, 14, 50, 15],\n" +
-"  [\"old-garden-snail\", 42, 2, 3, 30, 65, 5],\n" +
-"  [\"walking-forest\", 48, 2, 6, 28, 65, 8],\n" +
+"  [\"old-garden-snail\", 42, 2, 3, 30, 50, 5],\n" +
+"  [\"walking-forest\", 48, 2, 6, 28, 50, 8],\n" +
 "  [\"white-paw\", 64, 20, 16, 12, 50, 20],\n" +
-"  [\"spiny-back-leader\", 54, 10, 10, 28, 65, 12]\n" +
+"  [\"spiny-back-leader\", 54, 10, 10, 28, 50, 12]\n" +
 "].map(([key, combatStrength, evasion, parry, block, blockReduction, criticalChance]) => [key, Object.freeze({\n" +
 "  health: UNIT_MAX_HEALTH, combatStrength, evasion: (evasion || 0) / 100, parry: (parry || 0) / 100,\n" +
-"  block: (block || 0) / 100, blockReduction: (blockReduction || 0) / 100,\n" +
+"  block: (block || 0) / 100, blockReduction: (blockReduction || 50) / 100,\n" +
 "  criticalChance: (criticalChance || 0) / 100, criticalMultiplier: 1.5\n" +
 "})])));\n" +
 "\n" +
@@ -4522,7 +4522,7 @@ document.write(
 "    const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;\n" +
 "    return { primary: selected.power > 0 ? \"blade\" : null, attackPower: selected.power, defense: dna.armor,\n" +
 "      armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: dna.focus,\n" +
-"      recovery: dna.recovery || 0, criticalChance, criticalMultiplier };\n" +
+"      recovery: dna.recovery || 0, blockReduction: .5, criticalChance, criticalMultiplier };\n" +
 "  }\n" +
 "  const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;\n" +
 "  const primary = combatPrimary(agent);\n" +
@@ -4537,9 +4537,9 @@ document.write(
 "  const reduction = equipped(\"carapace\") ? .45 : Math.max(0, Math.min(.8, agent.stats?.damageReduction || 0));\n" +
 "  const defense = Number.isFinite(agent.stats?.defense) ? agent.stats.defense : 8 + strength * .4 + 100 * reduction / (1 - reduction);\n" +
 "  const armorPenetration = equipped(\"piercing\") ? .5 : Math.max(0, Math.min(1, agent.stats?.armorPenetration || 0));\n" +
-"  const protection = Object.fromEntries([\"evasion\", \"parry\", \"block\", \"blockReduction\"].map(key => [key,\n" +
+"  const protection = Object.fromEntries([\"evasion\", \"parry\", \"block\"].map(key => [key,\n" +
 "    Math.max(0, Math.min(1, Number.isFinite(agent.stats?.[key]) ? agent.stats[key] : agent.species ? base[key] : 0))]));\n" +
-"  return { primary, attackPower: Math.max(1, attackPower), defense: Math.max(0, defense), armorPenetration, ...protection, criticalChance, criticalMultiplier,\n" +
+"  return { primary, attackPower: Math.max(1, attackPower), defense: Math.max(0, defense), armorPenetration, ...protection, blockReduction: .5, criticalChance, criticalMultiplier,\n" +
 "    attackSpeed, attackInterval, windup: (primary === \"piercing\" ? .65 : primary === \"blade\" ? .24 : .4),\n" +
 "    recovery: (primary === \"blade\" ? .3 : .45) };\n" +
 "}\n" +
@@ -4565,7 +4565,8 @@ document.write(
 "  if (agent.dna || agent.stats?.dna) return;\n" +
 "  const profile = unitCombatStats(agent.species || agent.tribe);\n" +
 "  const combatStrength = profile.combatStrength + (agent.species ? 0 : attributeCombatStrengthBonus(agent.attributes));\n" +
-"  if (agent.species) for (const key of [\"evasion\", \"parry\", \"block\", \"blockReduction\", \"criticalChance\", \"criticalMultiplier\"])\n" +
+"  if (agent.species) agent.stats.blockReduction = profile.blockReduction;\n" +
+"  if (agent.species) for (const key of [\"evasion\", \"parry\", \"block\", \"criticalChance\", \"criticalMultiplier\"])\n" +
 "    if (!Number.isFinite(agent.stats[key])) agent.stats[key] = profile[key];\n" +
 "  if (agent.stats.combatStrength === combatStrength && agent.stats.health === UNIT_MAX_HEALTH) return;\n" +
 "  const health = UNIT_MAX_HEALTH;\n" +

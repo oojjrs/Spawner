@@ -60,7 +60,8 @@ function fixture() {
 test('DNA appearance controls preserve roster edits, cloning, reset, switching and neutral exclusions', () => {
   const f = fixture(), control = f.inputs.left.dnaAppearance;
   const buttons = label => f.nodes.filter(node => node.tag === 'button' && node.textContent === label);
-  assert.equal(control.value, 'native'); assert.equal(control.disabled, false);
+  assert.equal(control.value, 'blade-carapace'); assert.equal(control.disabled, false);
+  assert.deepEqual(control.options.map(option => option.value), ['blade-carapace']);
   control.fire('change', 'blade-carapace');
   assert.equal(combatLabAppearance(f.rosters.left[0]), 'blade-carapace');
   assert.match(unitActionArtDefinition(f.getTrial().agents[0]).reference.image, /BladeCarapaceV1/);
@@ -68,11 +69,12 @@ test('DNA appearance controls preserve roster edits, cloning, reset, switching a
   assert.equal(f.rosters.left.length, 2); assert.equal(control.value, 'blade-carapace');
   assert.notEqual(f.rosters.left[0].dna, f.rosters.left[1].dna);
   control.fire('change', 'native');
-  assert.equal(f.rosters.left[1].dna, undefined); assert.ok(f.rosters.left[0].dna);
+  assert.ok(f.rosters.left[1].dna); assert.ok(f.rosters.left[0].dna);
+  assert.ok(deriveSimulationStats(plain(f.rosters.left[1])).canAttack);
   const roster = f.nodes.find(node => node.tag === 'select' && node.options[0]?.textContent === '왼쪽 1');
   roster.fire('change', '0'); assert.equal(control.value, 'blade-carapace');
   const saved = plain(f.rosters.left); f.reset(); assert.deepEqual(plain(f.rosters.left), saved);
-  buttons('유닛 제거')[0].fire('click'); assert.equal(f.rosters.left.length, 1); assert.equal(control.value, 'native');
+  buttons('유닛 제거')[0].fire('click'); assert.equal(f.rosters.left.length, 1); assert.equal(control.value, 'blade-carapace');
   control.fire('change', 'blade-carapace');
   const neutral = COMBAT_LAB_UNITS.find(unit => !combatLabPlayable(unit.key)).key;
   f.inputs.left.appearance.fire('change', neutral);
@@ -80,11 +82,12 @@ test('DNA appearance controls preserve roster edits, cloning, reset, switching a
   control.fire('change', 'blade-carapace'); // Even a synthetic disabled-control event cannot assign neutral DNA.
   assert.equal(f.rosters.left[0].dna, undefined);
   f.inputs.left.appearance.fire('change', 'spring');
-  assert.equal(control.disabled, false); assert.equal(control.value, 'native');
+  assert.equal(control.disabled, false); assert.equal(control.value, 'blade-carapace');
   control.fire('change', 'blade-carapace'); buttons('🎲')[0].fire('click');
   for (const side of ['left', 'right']) {
-    assert.equal(f.rosters[side].length, 5); assert.ok(f.rosters[side].every(build => build.dna === undefined));
-    assert.equal(f.inputs[side].dnaAppearance.value, 'native');
+    assert.equal(f.rosters[side].length, 5);
+    assert.ok(f.rosters[side].every(build => deriveSimulationStats(plain(build)).canAttack));
+    assert.equal(f.inputs[side].dnaAppearance.value, combatLabAppearance(f.rosters[side][0]));
     assert.equal(f.inputs[side].dnaAppearance.disabled, !combatLabPlayable(f.rosters[side][0].key));
   }
 });

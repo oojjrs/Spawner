@@ -4,8 +4,8 @@ import { SIMULATION_STATS, DEFAULT_SIMULATION_RULES, deriveSimulationStats, crea
 import { createCombatStage } from "./combat-stage.mjs";
 
 const sides = ["left", "right"], elements = {}, inputs = {};
-const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index ? "spore" : "bean", name: index ? "오른쪽" : "왼쪽",
-  }]));
+const builds = Object.fromEntries(sides.map((side, index) => [side, combatLabWithAppearance(
+  { key: index ? "spore" : "bean", name: index ? "오른쪽" : "왼쪽" }, "blade-carapace")]));
 const rosters = Object.fromEntries(sides.map(side => [side, [builds[side]]]));
 const selected = { left: 0, right: 0 };
 const rules = { ...DEFAULT_SIMULATION_RULES };
@@ -46,7 +46,7 @@ elements.dice = button(stageCenter, "🎲", () => {
       const choices = COMBAT_LAB_UNITS.filter(unit => unit.key !== previous[slot]?.key && !used.has(unit.key));
       const key = choices[Math.floor(Math.random() * choices.length)].key;
       used.add(key);
-      return { key };
+      return combatLabWithAppearance({ key }, "blade-carapace");
     });
     selected[side] = 0;
     selectBuild(side);
@@ -79,11 +79,12 @@ for (const side of sides) {
   });
   hud.append(rosterActions);
   const appearance = control(hud, "외형", select(COMBAT_LAB_UNITS.map(unit => [unit.key, unit.name]), builds[side].key));
-  appearance.addEventListener("change", () => { rosters[side][selected[side]] = { key: appearance.value }; selectBuild(side); changed(); }); inputs[side].appearance = appearance;
-  const dnaAppearance = control(hud, "DNA 외형", select(COMBAT_LAB_APPEARANCES, "native"));
+  appearance.addEventListener("change", () => { rosters[side][selected[side]] = combatLabWithAppearance({ key: appearance.value }, "blade-carapace"); selectBuild(side); changed(); }); inputs[side].appearance = appearance;
+  const dnaAppearance = control(hud, "DNA 외형", select(combatLabPlayable(builds[side].key) ? COMBAT_LAB_APPEARANCES.filter(([key]) => key !== "native") : [["native", "기본"]], combatLabAppearance(builds[side])));
   inputs[side].dnaAppearance = dnaAppearance;
   dnaAppearance.disabled = !combatLabPlayable(builds[side].key);
   dnaAppearance.addEventListener("change", () => {
+    if (!Array.from(dnaAppearance.options).some(option => option.value === dnaAppearance.value)) return;
     rosters[side][selected[side]] = combatLabWithAppearance(builds[side], dnaAppearance.value);
     selectBuild(side); changed();
   });
@@ -100,6 +101,10 @@ elements.phase = node("output", null, "phase"); stageFooter.append(actions, elem
 function selectBuild(side) {
   builds[side] = rosters[side][selected[side]];
   inputs[side].appearance.value = builds[side].key;
+  const variants = combatLabPlayable(builds[side].key) ? [["blade-carapace", "칼날+갑각"]] : [["native", "기본"]];
+  inputs[side].dnaAppearance.replaceChildren(...variants.map(([value, label]) => {
+    const option = node("option", label); option.value = value; return option;
+  }));
   inputs[side].dnaAppearance.value = combatLabAppearance(builds[side]);
   inputs[side].dnaAppearance.disabled = !combatLabPlayable(builds[side].key);
 }

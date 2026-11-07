@@ -178,3 +178,27 @@ test("실제 설계 DNA와 기존 수치 편집은 서로의 입력을 덮지 �
   assert.ok(trial.agents[1].stats.dna);
   assert.equal(trial.agents[1].stats.attackSpeed,deriveSimulationStats({key:"bean",counts:{power:2,haste:4}}).attackSpeed);
 });
+
+test("진영 전멸 뒤 승자는 아군과 재교전하지 않고 마지막 위치를 유지한다", () => {
+  const trial = createSimulationTrial({
+    left: ["rolling-acorn", "vine-turtle", "walking-forest", "white-paw", "old-garden-snail"].map(key => ({ key })),
+    right: ["soil-mole", "cotton-sheep", "white-paw", "spiny-back-beetle", "dew-rabbit"].map(key => ({ key })),
+    seed: 1, random: true
+  });
+  const result = trial.finish();
+  assert.equal(result.reason, "death");
+  assert.ok(["left", "right"].includes(result.winner));
+  assert.ok(trial.agents.filter(agent => agent.ownerId !== result.winner).every(agent => agent.health <= 0));
+  const survivors = trial.agents.filter(agent => agent.health > 0);
+  assert.ok(survivors.length > 1);
+  for (const agent of survivors) {
+    assert.equal(agent.combat, null, agent.id);
+    assert.equal(agent.attack, null, agent.id);
+    assert.ok(Number.isFinite(agent.combatPosition?.x), agent.id);
+  }
+  for (const event of trial.history.filter(event => event.kind === "attack")) {
+    const source = trial.agents.find(agent => agent.id === event.attackerId);
+    const target = trial.agents.find(agent => agent.id === event.targetId);
+    assert.notEqual(source.ownerId, target.ownerId);
+  }
+});

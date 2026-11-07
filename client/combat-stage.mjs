@@ -6,6 +6,7 @@ import { beanHeldHurtSource, drawBeanHeldHurt } from "./bean-held-hurt.mjs";
 import { combatDodgePose, drawCombatDodgeTrails, drawCombatDodgeGhosts, drawCombatDodgeLabel } from "./combat-dodge-vfx.mjs";
 import { drawUnitLoading } from "./unit-loading.mjs";
 import { drawUnitHealthRing } from "./unit-health-ring.mjs";
+import { drawUnitAttackRing } from "./unit-attack-ring.mjs";
 import { createCombatStageAppearance } from "./combat-stage-appearance.mjs";
 import { attackAnimationElapsed } from "../server/attack.mjs";
 import { createCombatVfxCursor } from "./combat-vfx-events.mjs";
@@ -233,8 +234,9 @@ export function createCombatStage(canvas) {
     if (evade) drawCombatDodgeTrails(context, evade);
     context.save(); context.translate(point.x, point.y);
     context.fillStyle = "#15261c55"; context.beginPath(); context.ellipse(0, 0, radiusX, radiusY, 0, 0, Math.PI * 2); context.fill();
-    drawUnitHealthRing(context, agent.health, agent.stats?.health, 0, 0,
-      Math.max(7, bodyDimensions(agent).width * 100 * formationScale(width, height) * .55), colors[index]);
+    const healthRadius = Math.max(7, bodyDimensions(agent).width * 100 * formationScale(width, height) * .55);
+    drawUnitHealthRing(context, agent.health, agent.stats?.health, 0, 0, healthRadius, colors[index]);
+    drawUnitAttackRing(context, agent, currentTrial.time, 0, 0, healthRadius);
     const drawBody = (dx = 0, dy = 0) => {
       context.save(); context.translate(dx, dy);
     const appearancePose = appearancePoses.get(String(agent.id));

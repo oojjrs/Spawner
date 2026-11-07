@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { combatViewLayout } from "./unit-size.mjs";
+import { drawUnitAttackRing } from "./unit-attack-ring.mjs";
 import { createCombatVfxCursor } from "./combat-vfx-events.mjs";
 import { createDetailCombatVfx, drawDetailVitalEffect, DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell } from "./combat-detail-vfx.mjs";
 import { createCombat } from "../server/combat.mjs";
@@ -119,7 +120,7 @@ function modal(reduced = false) {
     stats: { health: 100, melee: true }, combat: { id: "fight", side, stunnedUntil: 0 }, attributes: {} }));
   const sandbox = { state: { agents: units, rivals: [], simSeconds: 0, combatVfx: { version: 1 } },
     connection: { get simSeconds() { return sandbox.state.simSeconds; } },
-    Spawner: { combatViewLayout, drawUnitHealthRing() {}, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade", CREATURE_ATTACK_ANIMATIONS: {},
+    Spawner: { combatViewLayout, drawUnitHealthRing() {}, drawUnitAttackRing, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade", CREATURE_ATTACK_ANIMATIONS: {},
       drawDetailVfxCell, drawDetailVitalEffect }, detailCombatVfx: detail,
     detailVfxImage: () => null,
     detailVfxImages: new Map(DETAIL_COMBAT_VFX_ASSETS.map(path => [path, { complete: true, naturalWidth: 1776 }])),
