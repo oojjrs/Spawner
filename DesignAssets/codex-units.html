@@ -19,6 +19,7 @@
 <script defer src="client/unit-matrix-data.js"></script>
 <script defer src="client/unit-matrix-previews.js"></script>
 <script defer src="client/unit-matrix-preview.js"></script>
+<script defer src="client/unit-work-previews.js"></script>
 <script id="unit-matrix-playback">
 document.addEventListener('DOMContentLoaded',()=>{
 const lightbox=document.getElementById('image-lightbox'),image=lightbox.querySelector('.lightbox-image');
@@ -56,7 +57,7 @@ current.ready=true;current.started=performance.now();current.audioElapsed=-1;cur
 document.addEventListener('click',event=>{
 const link=event.target.closest('figure a');if(!link||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey||event.button!==0)return;
 clearPanel();lightbox.classList.remove('is-unit-animation','is-unit-mirrored');if(!link.closest('#codex-units,#codex-nest,#codex-unit-appearance'))return;
-const element=link.querySelector('.unit-matrix-preview')||(link.dataset.runtimeGeometry?link:null);if(!element)return;
+const element=link.querySelector('.unit-matrix-preview')||(link.dataset.runtimeGeometry||link.dataset.mirror?link:null);if(!element)return;
 const mirror=element.dataset.mirror==='true';lightbox.classList.toggle('is-unit-mirrored',mirror);if(!element.dataset.durations)return;
 const nativeAnimation=element.dataset.nativeAnimation==='true';lightbox.classList.toggle('is-unit-animation',!nativeAnimation);let canvas=document.getElementById('unit-lightbox-canvas');if(!canvas){canvas=document.createElement('canvas');canvas.id='unit-lightbox-canvas';image.after(canvas)}
 canvas.width=canvas.height=64;canvas.dataset.frame='-1';const context=canvas.getContext('2d'),thumbnail=element.querySelector('img'),scale=Number(element.dataset.previewScale||1),pivotY=Number(element.dataset.previewPivotY||.875),floor=Number(element.dataset.previewFloor||.875);if(thumbnail.complete&&thumbnail.naturalWidth){if(element.classList.contains('is-mirrored')){context.translate(64,0);context.scale(-1,1)}context.drawImage(thumbnail,64*(1-scale)/2,64*(floor-pivotY*scale),64*scale,64*scale)}

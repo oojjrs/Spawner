@@ -131,6 +131,8 @@
   function install(element, unit, animation, action, updateLightbox) {
     const thumbnail = element.querySelector('img'), link = element.closest('a') || element.querySelector('a');
     if (!thumbnail || !link || !animation) return;
+    if (!unit.tribe && (animation.sourceFacing || animation.facing) === 'left') element.dataset.mirror = 'true';
+    if (element.closest('figure[data-work-action]')) animation = { ...animation, projectile: null, audioCues: null };
     const canvas = document.createElement('canvas'); canvas.width = canvas.height = 1; canvas.className = 'unit-matrix-canvas';
     thumbnail.after(canvas); thumbnail.style.display = 'none';
     const panel = { element, link, unit, action, updateLightbox, canvas, sprite: null, animation, scale: null, frame: -1, dirty: false,
@@ -144,8 +146,13 @@
       if (!unit) continue;
       for (const cell of row.querySelectorAll('td[data-action]')) {
         const action = cell.dataset.action;
-        let animation = unit.animations[action], element = cell.querySelector('.unit-matrix-preview');
-        if (!element) continue;
+        const sourceAction = cell.querySelector('figure')?.dataset.workSource || action;
+        let animation = unit.animations[sourceAction], element = cell.querySelector('.unit-matrix-preview');
+        if (!element) {
+          const link = cell.querySelector('a');
+          if (link && !unit.tribe && (animation?.sourceFacing || animation?.facing) === 'left') link.dataset.mirror = 'true';
+          continue;
+        }
         if (element.dataset.planningClip) {
           install(element, unit, JSON.parse(element.dataset.planningClip), action, true);
           continue;
