@@ -466,10 +466,8 @@ function unitDisplaySize(unit) {
   return UNIT_DISPLAY_SIZES.bean + (size - UNIT_DISPLAY_SIZES.bean) * .5;
 }
 
-function combatViewCell(width, height, units) {
-  const largest = units.reduce((size, unit) => Math.max(size, unitDisplaySize(unit)), 0) || UNIT_DISPLAY_SIZES.bean;
-  const average = units.length ? units.reduce((size, unit) => size + unitDisplaySize(unit), 0) / units.length : largest;
-  return Math.min(width * .18, height * .2) / (largest * .75 + average * .25);
+function combatViewCell(width, height) {
+  return Math.min(width * .18, height * .2) / UNIT_DISPLAY_SIZES.bean;
 }
 
 function combatViewAxis(spans) {
@@ -493,7 +491,30 @@ function combatViewAxis(spans) {
   return { low: intervals[0][0], high: intervals.at(-1)[1], occupied, project, unproject };
 }
 
-function combatViewLayout(width, height, units) {
+function combatViewLayout(width, height, units, camera) {
+  if (!camera) return combatViewFormation(width, height, units);
+  if (!camera.layout) {
+    camera.layout = combatViewFormation(width, height, units);
+    camera.width = width; camera.height = height;
+  }
+  const initial = camera.layout, ratio = Math.min(width / camera.width, height / camera.height);
+  const offsetX = (width - camera.width * ratio) / 2, offsetY = (height - camera.height * ratio) / 2;
+  const resize = point => ({ x: point.x * ratio + offsetX, y: point.y * ratio + offsetY });
+  const project = initial.project && (point => resize(initial.project(point)));
+  const unproject = initial.unproject && (point => initial.unproject({ x: (point.x - offsetX) / ratio, y: (point.y - offsetY) / ratio }));
+  const cell = initial.cell * ratio;
+  const positions = new Map(units.map(unit => {
+    const point = unit.combat?.position || unit.combatPosition;
+    const origin = initial.positions.get(String(unit.id)) || { x: camera.width * ((unit.combat?.side ?? unit.side) ? .75 : .25), y: camera.height * .68 };
+    const { x, y } = project && Number.isFinite(point?.x) && Number.isFinite(point?.y) ? project(point) : resize(origin);
+    const size = unitDisplaySize(unit);
+    return [String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
+      top: y - size * cell * 1.2, bottom: y + size * cell * .18 } }];
+  }));
+  return { cell, positions, project, unproject };
+}
+
+function combatViewFormation(width, height, units) {
   const located = units.map(unit => ({ unit, point: unit.combat?.position || unit.combatPosition }))
     .filter(entry => Number.isFinite(entry.point?.x) && Number.isFinite(entry.point?.y));
   if (located.length) {
@@ -40420,7 +40441,7 @@ function createCombatStage(canvas) {
   const appearanceWorld = createUnitAppearanceWorld();
   const representativeArt = createCombatStageAppearance(image);
   const vfxCursor = createCombatVfxCursor(), detailVfx = createDetailCombatVfx();
-  let appearancePoses = new Map(), dodgePositions = new Map(), dodgeCues = [], cameraUnits = [], viewLayout;
+  let appearancePoses = new Map(), dodgePositions = new Map(), dodgeCues = [], cameraUnits = [], camera = {}, viewLayout;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const deathStarted = new Map(), readyPoses = new Map();
   let currentTrial, previousTime = null, seen = 0, effects = [], clock = 0, lastNow = 0;
@@ -40660,7 +40681,7 @@ function createCombatStage(canvas) {
   function clear() {
     appearanceWorld.clear(); vfxCursor.reset(); detailVfx.consume({ reset: true }, 0);
     currentTrial = undefined; previousTime = null; seen = 0; effects = []; clock = 0; lastNow = 0;
-    deathStarted.clear(); readyPoses.clear(); appearancePoses = new Map(); dodgePositions = new Map(); dodgeCues = [];
+    deathStarted.clear(); readyPoses.clear(); appearancePoses = new Map(); dodgePositions = new Map(); dodgeCues = []; camera = {};
   }
 
   function render(trial, now, playing) {
@@ -40687,7 +40708,7 @@ function createCombatStage(canvas) {
     context.setTransform(ratio, 0, 0, ratio, 0, 0); background(width, height);
     if (!trial) return;
     cameraUnits = trial.agents.map(stageAgent);
-    viewLayout = combatViewLayout(width, height, cameraUnits);
+    viewLayout = combatViewLayout(width, height, cameraUnits, camera);
     const vfx = trial.vfx, liveFlightKeys = new Set();
     let liveFlights = [];
     if (vfx?.version === 1) {
@@ -40713,12 +40734,7 @@ function createCombatStage(canvas) {
       const agent = stageAgent(entry), deathAt = deathStarted.get(agent.id);
       return agent.health <= 0 ? { ...agent, deathStartedAt: time - (clock - (deathAt ?? clock)) } : agent;
     }), time, 100 * formationScale(width, height), ratio, { attackClock: "lab" });
-    const impact = effects.findLast(effect => effect.event.damage > 0 && ["hit", "critical", "followup", "block", "area", "reflect", "ranged"].includes(effect.event.kind) && clock - effect.born < .11);
     context.save();
-    if (impact && !reducedMotion.matches && playing) {
-      const fade = 1 - (clock - impact.born) / .11;
-      context.translate(Math.sin(clock * 150) * fade * (impact.event.critical ? 3 : 1.5), 0);
-    }
     dodgePositions = new Map(trial.agents.map(agent => {
       const point = position(agent, (agent.combat?.side ?? agent.side), width, height, time), bounds = bodyDimensions(agent), cell = 100 * formationScale(width, height);
       return [String(agent.id), { ...point, width: bounds.width * cell, height: bounds.height * cell }];

@@ -7723,7 +7723,7 @@
         livingAgents: [...state.agents, ...state.rivals] });
       const deathCommands = deathPresentation?.commands(state.corpses, corpsePlaybackTime(), { width, height, cell: 1 }) || [];
       const formation = Spawner.combatViewLayout(width, height, combatArenaUnits([...arenaUnits, ...deathCommands.map(command => ({ ...command.corpse,
-        id: command.agentId, combat: formationMembers.get(String(command.agentId)) }))]));
+        id: command.agentId, combat: formationMembers.get(String(command.agentId)) }))]), combatWatch.camera ||= {});
       const cell = formation.cell;
       const appearancePoses = appearanceWorld.prepare(context, arenaUnits, state.simSeconds, cell, pixelRatio);
       const positions = new Map();

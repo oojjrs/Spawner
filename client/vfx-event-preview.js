@@ -1532,10 +1532,8 @@ function unitDisplaySize(unit) {
   return UNIT_DISPLAY_SIZES.bean + (size - UNIT_DISPLAY_SIZES.bean) * .5;
 }
 
-function combatViewCell(width, height, units) {
-  const largest = units.reduce((size, unit) => Math.max(size, unitDisplaySize(unit)), 0) || UNIT_DISPLAY_SIZES.bean;
-  const average = units.length ? units.reduce((size, unit) => size + unitDisplaySize(unit), 0) / units.length : largest;
-  return Math.min(width * .18, height * .2) / (largest * .75 + average * .25);
+function combatViewCell(width, height) {
+  return Math.min(width * .18, height * .2) / UNIT_DISPLAY_SIZES.bean;
 }
 
 function combatViewAxis(spans) {
@@ -1559,7 +1557,30 @@ function combatViewAxis(spans) {
   return { low: intervals[0][0], high: intervals.at(-1)[1], occupied, project, unproject };
 }
 
-function combatViewLayout(width, height, units) {
+function combatViewLayout(width, height, units, camera) {
+  if (!camera) return combatViewFormation(width, height, units);
+  if (!camera.layout) {
+    camera.layout = combatViewFormation(width, height, units);
+    camera.width = width; camera.height = height;
+  }
+  const initial = camera.layout, ratio = Math.min(width / camera.width, height / camera.height);
+  const offsetX = (width - camera.width * ratio) / 2, offsetY = (height - camera.height * ratio) / 2;
+  const resize = point => ({ x: point.x * ratio + offsetX, y: point.y * ratio + offsetY });
+  const project = initial.project && (point => resize(initial.project(point)));
+  const unproject = initial.unproject && (point => initial.unproject({ x: (point.x - offsetX) / ratio, y: (point.y - offsetY) / ratio }));
+  const cell = initial.cell * ratio;
+  const positions = new Map(units.map(unit => {
+    const point = unit.combat?.position || unit.combatPosition;
+    const origin = initial.positions.get(String(unit.id)) || { x: camera.width * ((unit.combat?.side ?? unit.side) ? .75 : .25), y: camera.height * .68 };
+    const { x, y } = project && Number.isFinite(point?.x) && Number.isFinite(point?.y) ? project(point) : resize(origin);
+    const size = unitDisplaySize(unit);
+    return [String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
+      top: y - size * cell * 1.2, bottom: y + size * cell * .18 } }];
+  }));
+  return { cell, positions, project, unproject };
+}
+
+function combatViewFormation(width, height, units) {
   const located = units.map(unit => ({ unit, point: unit.combat?.position || unit.combatPosition }))
     .filter(entry => Number.isFinite(entry.point?.x) && Number.isFinite(entry.point?.y));
   if (located.length) {

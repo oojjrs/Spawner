@@ -113,7 +113,7 @@ export function createCombatStage(canvas) {
   const appearanceWorld = createUnitAppearanceWorld();
   const representativeArt = createCombatStageAppearance(image);
   const vfxCursor = createCombatVfxCursor(), detailVfx = createDetailCombatVfx();
-  let appearancePoses = new Map(), dodgePositions = new Map(), dodgeCues = [], cameraUnits = [], viewLayout;
+  let appearancePoses = new Map(), dodgePositions = new Map(), dodgeCues = [], cameraUnits = [], camera = {}, viewLayout;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const deathStarted = new Map(), readyPoses = new Map();
   let currentTrial, previousTime = null, seen = 0, effects = [], clock = 0, lastNow = 0;
@@ -353,7 +353,7 @@ export function createCombatStage(canvas) {
   function clear() {
     appearanceWorld.clear(); vfxCursor.reset(); detailVfx.consume({ reset: true }, 0);
     currentTrial = undefined; previousTime = null; seen = 0; effects = []; clock = 0; lastNow = 0;
-    deathStarted.clear(); readyPoses.clear(); appearancePoses = new Map(); dodgePositions = new Map(); dodgeCues = [];
+    deathStarted.clear(); readyPoses.clear(); appearancePoses = new Map(); dodgePositions = new Map(); dodgeCues = []; camera = {};
   }
 
   function render(trial, now, playing) {
@@ -380,7 +380,7 @@ export function createCombatStage(canvas) {
     context.setTransform(ratio, 0, 0, ratio, 0, 0); background(width, height);
     if (!trial) return;
     cameraUnits = trial.agents.map(stageAgent);
-    viewLayout = combatViewLayout(width, height, cameraUnits);
+    viewLayout = combatViewLayout(width, height, cameraUnits, camera);
     const vfx = trial.vfx, liveFlightKeys = new Set();
     let liveFlights = [];
     if (vfx?.version === 1) {
@@ -406,12 +406,7 @@ export function createCombatStage(canvas) {
       const agent = stageAgent(entry), deathAt = deathStarted.get(agent.id);
       return agent.health <= 0 ? { ...agent, deathStartedAt: time - (clock - (deathAt ?? clock)) } : agent;
     }), time, 100 * formationScale(width, height), ratio, { attackClock: "lab" });
-    const impact = effects.findLast(effect => effect.event.damage > 0 && ["hit", "critical", "followup", "block", "area", "reflect", "ranged"].includes(effect.event.kind) && clock - effect.born < .11);
     context.save();
-    if (impact && !reducedMotion.matches && playing) {
-      const fade = 1 - (clock - impact.born) / .11;
-      context.translate(Math.sin(clock * 150) * fade * (impact.event.critical ? 3 : 1.5), 0);
-    }
     dodgePositions = new Map(trial.agents.map(agent => {
       const point = position(agent, (agent.combat?.side ?? agent.side), width, height, time), bounds = bodyDimensions(agent), cell = 100 * formationScale(width, height);
       return [String(agent.id), { ...point, width: bounds.width * cell, height: bounds.height * cell }];
