@@ -8,6 +8,7 @@ import { combatLabCombinationDna } from './combat-lab-appearances.mjs';
 import { validateDna } from '../server/dna-unit.mjs';
 const root = new URL('../', import.meta.url);
 const changes = JSON.parse(fs.readFileSync(new URL('AnimationCandidates/spring-birth-pool-registration-v1-20261107/candidate-registration.json', root)));
+const early = JSON.parse(fs.readFileSync(new URL('AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json', root)));
 const digest = path => crypto.createHash('sha256').update(fs.readFileSync(new URL(path, root))).digest('hex');
 function context() { return { calls: [], transforms: [], save() {}, restore() {}, translate(...v) { this.transforms.push(v); }, scale(...v) { this.transforms.push(v); }, drawImage(image, ...args) { this.calls.push({ image: image.path, args }); }, getImageData() { return { data: new Uint8ClampedArray(480 * 480 * 4).fill(255) }; } }; }
 function surface(width, height) { const c = context(); return { width, height, getContext: () => c }; }
@@ -23,7 +24,9 @@ for (const [key, candidate] of Object.entries(changes)) {
     assert.equal(digest(original.sheet), candidate.sourceSHA256);
     assert.equal(sceneLayers.version, 1);
     for (const [i, layer] of sceneLayers.layers.entries()) {
-      const approved = candidate.sceneLayers.layers[i], file = candidate.assetFiles[i];
+      const approved = structuredClone(candidate.sceneLayers.layers[i]), file = candidate.assetFiles[i];
+      if (i === 1) for (let frame = 0; frame < 8; frame++)
+        approved.samples[frame].destination = early[key].candidate.sceneLayers.layers[i].samples[frame].destination;
       assert.deepEqual({ ...layer, image: approved.image }, approved);
       assert.equal(digest(layer.image), file.sha256);
       assert.equal(digest(original.sceneLayers.layers[i].image), file.sha256);
@@ -36,6 +39,10 @@ for (const [key, candidate] of Object.entries(changes)) {
     const cell = row.match(/<td data-action="birth">[\s\S]*?<\/td>/)[0];
     assert.ok(cell.includes('data-birth-scene='));
     for (const layer of sceneLayers.layers) assert.ok(cell.includes(layer.image));
+    const preview = JSON.parse(cell.match(/data-birth-scene="([^"]+)"/)[1]
+      .replaceAll('&quot;', '"').replaceAll('&#x27;', "'").replaceAll('&amp;', '&'));
+    for (const [i, layer] of sceneLayers.layers.entries())
+      assert.deepEqual(preview.sceneLayers.layers[i].samples, layer.samples, 'planning uses the same approved positions');
   });
   test(`${key}: real DNA5, both facings, every frame boundary, idle exit and demand-only loading`, async () => {
     const dna = combatLabCombinationDna(key.split('/')[1]);
@@ -67,7 +74,7 @@ for (const [key, candidate] of Object.entries(changes)) {
   test(`${key}: either missing or undersized layer atomically restores original flat scene`, async () => {
     const clip = UNIT_ACTION_ART[key].actions.birth, layers = clip.sceneLayers.layers;
     const actor = { tribe: 'spring', dna: combatLabCombinationDna(key.split('/')[1]), health: 20, birth: { startedAt: 0, readyAt: 1.79 } };
-    for (const bad of layers) for (const failure of ['missing', 'undersized']) for (const mirror of [false, true]) for (const ms of [800, 900, 1200, 1789.999]) {
+    for (const bad of layers) for (const failure of ['missing', 'undersized']) for (const mirror of [false, true]) for (const ms of [0, 700, 800, 900, 1200, 1789.999]) {
       const loaded = [];
       const art = createUnitActionArt(v => v, surface, async path => {
         loaded.push(path);
