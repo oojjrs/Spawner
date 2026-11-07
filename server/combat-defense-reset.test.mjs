@@ -23,6 +23,7 @@ function fixture(options) {
     target.stats = { ...unitCombatStats(target.species), ...target.stats, evasion: reaction === "miss" ? 1 : 0,
       parry: reaction === "parry" ? 1 : 0, block: reaction === "block" ? 1 : 0, blockReduction: 1, criticalChance: 0 };
   } else target.attributes[reaction === "parry" ? "blade" : "carapace"] = 1;
+  if (target.stats.combat) target.stats.combat = { ...target.stats.combat, hits: 1, counter: 0, stun: 0, bleed: 0, lifesteal: 0, reflection: 0 };
   const events = [], environment = { games: new Map(), colonies: [], simSeconds: 0, combatSimulation: true,
     world: { terrain: new Uint8Array(320 * 320).fill(4) }, damageRandom: () => .5, combatRandom: () => .01,
     onCombatEvent(event) { events.push(event); } };

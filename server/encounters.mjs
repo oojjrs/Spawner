@@ -96,7 +96,7 @@ export function createEncounters(environment, saved, residents) {
     migrateCombatStats(agent);
     applyCreatureMovement(agent);
     const territory = encounterTerritory(agent);
-    if (territory) agent.stats.vision = territory.detectionRadius;
+    agent.stats.vision = unitCombatStats(agent.species).vision;
   }
 
   function players() {
@@ -202,7 +202,7 @@ export function createEncounters(environment, saved, residents) {
       faction: type.hostile ? "hostile" : "neutral", movementType: type.flying ? "flying" : "ground", encounterKey: record.key,
       x, y, homeX: type.unique ? region.x : plan.spawnPoints ? x : record.x,
       homeY: type.unique ? region.y : plan.spawnPoints ? y : record.y, health: combatStats.health,
-      stats: { ...combatStats, attack: 1, speed: CREATURE_MOVEMENT[record.key].speed, vision: territory ? territory.detectionRadius : plan.radius, resistance: 1 },
+      stats: { ...combatStats, speed: CREATURE_MOVEMENT[record.key].speed, resistance: 1 },
       attributes: {}, carrying: 0, renderFromX: x, renderFromY: y, moveStartedAt: environment.simSeconds, moveDuration: 0,
       mode: "idle", nextActionAt: environment.simSeconds, animationStartedAt: environment.simSeconds, facing: 1, stepCount: 0,
       hidden: ["soil-mole", "bubble-toad"].includes(record.key), hiddenUntil: 0, routeCursor: 0, routeDirection: 1,
@@ -341,9 +341,9 @@ export function createEncounters(environment, saved, residents) {
       if (now < agent.moveStartedAt + agent.moveDuration) continue;
       const plan = plans.get(agent.species), type = types.get(agent.species), membership = memberships.get(agent.species),
         territory = encounterTerritory(agent);
-      const candidates = environment.unitIndex ? environment.unitIndex.nearby(agent.x, agent.y, territory ? territory.detectionRadius : plan.radius)
+      const candidates = environment.unitIndex ? environment.unitIndex.nearby(agent.x, agent.y, agent.stats.vision)
         .filter(entry => entry.game && entry.agent.health > 0) : nearby;
-      const radius = territory ? territory.detectionRadius : plan.radius;
+      const radius = agent.stats.vision;
       const targets = candidates.map(entry => ({ ...entry, distance: Math.hypot(agent.x - entry.agent.x, agent.y - entry.agent.y) }))
         .filter(entry => entry.distance <= radius && membership.has(entry.agent.y * size + entry.agent.x) &&
           withinEncounterTerritory(agent, entry.agent, true) && (!type.hostile || canPursueCombat(agent, entry.agent, now) &&

@@ -1,3 +1,4 @@
+import { combatProfile } from "./combat-stats.mjs";
 import { combatDisposition } from "./combat.mjs";
 import { militaryAgent } from "./conquest-pacing.mjs";
 import { burrowDistance } from "./burrows.mjs";
@@ -30,15 +31,16 @@ export function updateCreatureNestAttack(agent, target, time) {
   if (!agent.attack) {
     const restoring = agent.mode === "attack" && agent.attackTargetId === target.agent.id;
     if (!restoring && time + 1e-8 < (agent.attackReadyAt || 0)) return true;
-    const startedAt = restoring ? agent.attackStartedAt : time;
+    const startedAt = restoring ? agent.attackStartedAt : time, profile = combatProfile(agent);
     const directionX = Math.sign(target.agent.x + target.agent.width / 2 - agent.x - .5) || agent.facing;
     agent.attack = { startedAt, speed: 1, hitAt: startedAt + timing.hitTimeMs / 1000,
       endsAt: startedAt + timing.durationMs / 1000, targetId: target.agent.id, targetKind: target.agent.kind,
-      targetX: target.agent.x, targetY: target.agent.y, directionX, damage: agent.stats.attack,
+      targetX: target.agent.x, targetY: target.agent.y, directionX, damage: profile.attackPower,
       hit: restoring && agent.attackHit };
     agent.mode = "attack"; agent.attackStartedAt = startedAt; agent.animationStartedAt = startedAt;
     agent.attackTargetId = target.agent.id; agent.attackHit = agent.attack.hit; agent.facing = directionX;
-    agent.attackReadyAt = agent.attack.endsAt + .8;
+    agent.attackReadyAt = agent.attack.endsAt + profile.attackInterval;
+    agent.attackInterval = profile.attackInterval;
   }
   const attack = agent.attack;
   if (!attack.hit && time + 1e-8 >= attack.hitAt) {

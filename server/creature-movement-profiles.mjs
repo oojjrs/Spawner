@@ -1,3 +1,4 @@
+import { NEUTRAL_UNIT_STATS } from "./neutral-unit-stats.mjs";
 export const CREATURE_MOVEMENT_PROFILES = Object.freeze(Object.fromEntries([
   ["flower-tail-bird", 2, 3],
   ["dew-rabbit", 2.6, 2.5],
@@ -18,4 +19,4 @@ export const CREATURE_MOVEMENT_PROFILES = Object.freeze(Object.fromEntries([
   ["walking-forest", .3, 60],
   ["white-paw", 3.2, 90],
   ["spiny-back-leader", 1.4, 120]
-].map(([species, speed, restSeconds]) => [species, Object.freeze({ speed, restSeconds })])));
+].map(([species, speed, restSeconds]) => [species, Object.freeze({ speed: NEUTRAL_UNIT_STATS[species]?.movement ?? speed, restSeconds })])));

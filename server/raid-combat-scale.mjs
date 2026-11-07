@@ -39,8 +39,8 @@ export function applyRaidCombatScale(agent, departedAt) {
   const fraction = Math.max(0, Math.min(1, agent.health / previousMaximum));
   // Never derive from the already-scaled saved attackPower: restore is idempotent.
   const profile = combatProfile({ species:agent.species, attributes:agent.attributes, stats:base });
-  agent.stats = { ...agent.stats, health:base.health * stage.health, combatStrength:base.combatStrength,
-    attackPower:profile.attackPower * stage.damage, attack:3 * stage.damage };
+  agent.stats = { ...agent.stats, ...base, health:base.health * stage.health, combatStrength:base.combatStrength,
+    attackPower:profile.attackPower * stage.damage, attack:base.attack * stage.damage };
   agent.health = agent.stats.health * fraction;
   agent.raidCombatScale = { ...marker };
   return true;

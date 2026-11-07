@@ -1,4 +1,4 @@
-import { UNIT_COMBAT_STATS, unitCombatStats, combatProfile } from "../server/combat-stats.mjs";
+import { UNIT_COMBAT_STATS, unitCombatStats, combatProfile, combatAbilityStats } from "../server/combat-stats.mjs";
 import { CREATURE_MOVEMENT } from "../server/creature-movement.mjs";
 import { creatureAttackRole } from "../server/creature-attack-role.mjs";
 import { startingWorkerDna } from "../server/tribe-start.mjs";
@@ -105,7 +105,12 @@ function derive(build, rules) {
     const role = creatureAttackRole(build.key);
     const stats = { ...unitCombatStats(build.key), speed: CREATURE_MOVEMENT[build.key].speed, resistance: 1 };
     const profile = combatProfile({ species: build.key, stats, attributes: {} });
-    return { ...stats, ...profile, critChance: profile.criticalChance, critMultiplier: profile.criticalMultiplier,
+    const abilities = stats.combat;
+    return { ...stats, ...profile, HP: stats.health, hitCount: abilities.hits, hitGap: abilities.comboSpeed,
+      followupMultiplier: abilities.comboPower / 100, flatPenetration: abilities.penetration, accuracy: abilities.accuracy / 100,
+      counter: abilities.counter / 100, counterMultiplier: abilities.counterPower / 100, tenacity: abilities.tenacity / 100,
+      stunChance: abilities.stun / 100, stunChancePerHit: abilities.stun / 100, stunDuration: abilities.stunTime,
+      drain: abilities.lifesteal / 100, critChance: profile.criticalChance, critMultiplier: profile.criticalMultiplier,
       melee: !!role?.melee, ranged: !!role?.ranged, canAttack: !!role };
   }
   const counts = Object.fromEntries(Object.entries(build.counts).map(([key, value]) => [geneKeys[key] || key, value]));
@@ -186,7 +191,7 @@ export function createSimulationTrial(settings) {
       const source = participants.find(agent => agent.id === event.sourceId);
       history.push({ index: history.length, time: event.at, kind: event.kind, attackerId: event.sourceId,
         targetId: event.targetId, damage: event.amount, critical: !!event.critical, counter: !!event.counter,
-        hitIndex: event.hitIndex, hitCount: source?.stats.dna?.hits || 1, stunDuration: event.duration,
+        hitIndex: event.hitIndex, hitCount: source?.attack?.hitCount || (source ? combatAbilityStats(source)?.hits : 0) || 1, stunDuration: event.duration,
         leftHealth: teamHealth("left"), rightHealth: teamHealth("right") });
     } };
   for (const side of ["left", "right"]) environment.games.set(side, {

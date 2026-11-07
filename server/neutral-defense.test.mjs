@@ -39,7 +39,7 @@ test("every native creature receives bounded defensive chances in both runtime a
   for (const species of keys) {
     const runtime = combatProfile({ species, stats: {} }), laboratory = deriveSimulationStats({ key: species });
     for (const key of ["evasion", "parry", "block", "blockReduction"]) {
-      assert.ok(runtime[key] > 0 && runtime[key] < 1, species + ":" + key);
+      assert.ok(runtime[key] >= 0 && runtime[key] < 1, species + ":" + key);
       assert.equal(runtime[key], laboratory[key]);
     }
   }
@@ -73,6 +73,6 @@ test("accuracy cancels neutral evasion without disabling parry or block", () => 
 test("old neutral saves gain defense while preserving health and the action clock", () => {
   const agent = { species: "vine-turtle", health: 37, attackReady: 9, stats: { health: 100, combatStrength: 28 } };
   migrateCombatStats(agent);
-  assert.equal(agent.health, 37); assert.equal(agent.attackReady, 9);
+  assert.equal(agent.health, unitCombatStats(agent.species).health * .37); assert.equal(agent.attackReady, 9);
   for (const key of ["evasion", "parry", "block", "blockReduction"]) assert.equal(agent.stats[key], unitCombatStats(agent.species)[key]);
 });

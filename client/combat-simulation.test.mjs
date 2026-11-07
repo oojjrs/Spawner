@@ -128,14 +128,18 @@ test("무공격·시간·사건 한도에서 편집 실험이 멈춘다", () => 
 });
 
 test("기존 방어 준비·재준비·반격 재준비·후딜 편집도 공통 엔진 입력으로 작동한다", () => {
-  const trial=createSimulationTrial({left:build({vitality:5}),right:build({vitality:5,parry:1,counter:1}),random:false,
-    rules:{defensePreparation:1,reactionCooldown:3,counterCooldown:5,recovery:3,parryCap:1,parryKnee:1,counterCap:1,counterKnee:1,maxSeconds:12}});
+  const trial=createSimulationTrial({left:build({vitality:20,haste:70}),right:build({vitality:20,parry:1,counter:1}),first:"left",random:false,
+    rules:{initiativeDelay:20,defensePreparation:1,reactionCooldown:3,counterCooldown:5,recovery:3,parryCap:1,parryKnee:1,counterCap:1,counterKnee:1,maxSeconds:20}});
   trial.agents.forEach(agent => Object.assign(agent.combat.position, { x: agent.side ? .4 : -.4, y: 0, fromX: agent.side ? .4 : -.4, fromY: 0 }));
-  trial.advance(.1);assert.ok(trial.agents.every(agent=>agent.attack.endsAt-agent.attack.startedAt>=3));
+  trial.advance(.1);assert.ok(trial.agents[0].attack.endsAt-trial.agents[0].attack.startedAt>=3);
+  assert.equal(trial.agents[1].attack,null);
   trial.finish();const first=trial.history.find(event=>event.kind==="hit"&&event.attackerId==="left");
-  close(first.time,.3);const parries=trial.history.filter(event=>event.kind==="parry");assert.ok(parries.length>0);
+  close(first.time,.3);const parries=trial.history.filter(event=>event.kind==="parry");assert.ok(parries.length>1);
+  assert.ok(parries[0].time>=1);
   for(let i=1;i<parries.length;i++)assert.ok(parries[i].time-parries[i-1].time>=3);
-  const counters=trial.history.filter(event=>event.kind==="counter");assert.ok(counters.length>0);
+  const counters=trial.history.filter(event=>event.kind==="counter");assert.ok(counters.length>1);
+  close(counters[0].time,parries[0].time);
+  assert.ok(parries.some(parry=>parry.time>counters[0].time&&parry.time<counters[0].time+5));
   for(let i=1;i<counters.length;i++)assert.ok(counters[i].time-counters[i-1].time>=5);
 });
 

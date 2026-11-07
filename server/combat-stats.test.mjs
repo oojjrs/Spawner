@@ -27,7 +27,7 @@ test("블록 감경은 종족·중립·DNA·이전 저장·수동 규칙에서 5
     stats: { health: 100, combatStrength: 28, block: .28, blockReduction: .65 } };
   migrateCombatStats(agent);
   assert.equal(agent.stats.blockReduction, .5);
-  assert.deepEqual([agent.health, agent.attackReady, agent.stats.block], [37, 9, .28]);
+  assert.deepEqual([agent.health, agent.attackReady, agent.stats.block], [unitCombatStats(agent.species).health * .37, 9, unitCombatStats(agent.species).block]);
 });
 
 function environment() {
@@ -69,7 +69,7 @@ test("RPG 피해는 현재 체력에 따른 구형 부상 페널티를 사용하
   assert.equal(combatDamage(injured, injured), 16);
 });
 
-test("4종족과 모든 생물 23종을 정의하고 체력은 모두 100이며 흰발 전투력이 최고다", () => {
+test("4종족과 모든 생물 23종을 정의하고 중립은 종별 기획 체력을 사용한다", () => {
   const players = PLAYER_TRIBES.map(tribe => unitCombatStats(tribe.key));
   const species = [...ENCOUNTER_TYPES.map(type => type.key), "spiny-back-beetle"];
   assert.equal(Object.keys(UNIT_COMBAT_STATS).length, 23);
@@ -78,7 +78,7 @@ test("4종족과 모든 생물 23종을 정의하고 체력은 모두 100이며 
   assert.equal(new Set(players.map(profile => profile.combatStrength)).size, 4);
   for (const key of species) {
     assert.ok(UNIT_COMBAT_STATS[key]);
-    assert.equal(unitCombatStats(key).health, 100);
+    assert.equal(unitCombatStats(key).health, unitCombatStats(key).combat.health);
   }
   assert.equal(Math.max(...Object.values(UNIT_COMBAT_STATS).map(profile => profile.combatStrength)),
     unitCombatStats("white-paw").combatStrength);
@@ -102,14 +102,14 @@ test("이전 저장의 체력 비율과 이동·공격 대기를 보존하고 �
   const agent = { species: "talon-owl", health: 6, stats: { health: 12, attack: 1, speed: .5, vision: 22 },
     moveStartedAt: 7, moveDuration: 2, nextActionAt: 15, attackReady: 19 };
   migrateCombatStats(agent);
-  assert.equal(agent.health, 50);
-  assert.equal(agent.stats.health, 100);
+  assert.equal(agent.health, unitCombatStats(agent.species).health / 2);
+  assert.equal(agent.stats.health, unitCombatStats(agent.species).health);
   assert.equal(agent.stats.combatStrength, 44);
   assert.deepEqual([agent.stats.speed, agent.stats.vision, agent.moveStartedAt, agent.moveDuration, agent.nextActionAt, agent.attackReady],
-    [.5, 22, 7, 2, 15, 19]);
+    [unitCombatStats(agent.species).speed, unitCombatStats(agent.species).vision, 7, 2, 15, 19]);
   agent.health -= 1;
   migrateCombatStats(agent);
-  assert.equal(agent.health, 49);
+  assert.equal(agent.health, unitCombatStats(agent.species).health / 2 - 1);
   const dead = { species: "vine-turtle", health: 0, stats: { health: 12, speed: .5 } };
   migrateCombatStats(dead);
   assert.equal(dead.health, 0);
@@ -150,16 +150,16 @@ test("실제 생물 생성과 이전 저장 복원에서도 생물별 전투 수
   assert.equal(creatures.agents.length, 1);
   assert.equal(creatures.agents[0].species, "talon-owl");
   assert.equal(creatures.agents[0].stats.combatStrength, 44);
-  assert.equal(creatures.agents[0].health, 100);
+  assert.equal(creatures.agents[0].health, unitCombatStats("talon-owl").health);
   const saved = JSON.parse(JSON.stringify(creatures.save()));
   const owl = saved.encounters.agents[0];
   delete owl.stats.combatStrength;
   owl.stats.health = 12;
   owl.health = 6;
   const restored = createCreatures(room, saved).agents[0];
-  assert.equal(restored.health, 50);
+  assert.equal(restored.health, unitCombatStats("talon-owl").health / 2);
   assert.equal(restored.stats.combatStrength, 44);
-  assert.equal(restored.stats.speed, 2);
+  assert.equal(restored.stats.speed, unitCombatStats("talon-owl").speed);
 });
 
 test("탈출로 없는 교전은 이속 강화가 공격 차례를 늘리지 않고 새싹콩이 갈퀴부엉이에게 진다", () => {
@@ -203,6 +203,13 @@ test("실제 군락의 마지막 방어자 사망은 즉시 엔딩을 확정하�
   const [left, right] = games.map(game => game.agents[0]);
   games[1].receiveNestDamage(100);
   room.combatSystem.update(left, 0);
+  assert.ok(left.combat); assert.equal(left.attack, null);
+  for (const [index, agent] of [left, right].entries())
+    Object.assign(agent.combat.position, { x: index ? .4 : -.4, y: 0, fromX: index ? .4 : -.4, fromY: 0 });
+  room.simSeconds = .05;
+  room.combatSystem.update(left, room.simSeconds);
+  assert.equal(left.attack.targetId, right.id);
+  assert.equal(right.attack.targetId, left.id);
   room.simSeconds = left.attack.hitAt;
   for (const game of games) game.prepare(room.simSeconds);
   room.combatSystem.update(left, room.simSeconds);

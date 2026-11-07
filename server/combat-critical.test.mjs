@@ -18,6 +18,8 @@ function fixture(options) {
     attributes: {}, combatDisposition: "aggressive", moveDuration: 0, attackReady: Infinity };
   if (options.target === "dna") target.stats.dna = { ...ATTRIBUTE_DNA.stats([]), ...options.defense };
   else { target.species = "vine-turtle"; target.stats = { ...unitCombatStats(target.species), ...target.stats, ...options.defense }; }
+  if (source.stats.combat) source.stats.combat = { ...source.stats.combat, hits: 1, stun: 0, bleed: 0, area: 0, lifesteal: 0, accuracy: 0 };
+  if (target.stats.combat) target.stats.combat = { ...target.stats.combat, hits: 1, power: 0, reflection: 0, counter: 0 };
   const events = [], queue = [...options.rolls];
   let draws = 0;
   const environment = { games: new Map(), colonies: [], simSeconds: 0, combatSimulation: true,
@@ -60,7 +62,7 @@ for (const path of paths) test(path.name + " applies one profile critical roll b
   const multiplier = combatProfile(critical.source).criticalMultiplier;
   assert.ok(Math.abs(critical.outcome.amount - normal.outcome.amount * multiplier) < 1e-8);
   assert.ok(Math.abs(critical.target.stats.health - critical.target.health - critical.outcome.amount) < 1e-8);
-  assert.equal(critical.draws(), path.mode === "ranged" ? 5 : path.source === "dna" ? 6 : 4);
+  assert.equal(critical.draws(), path.mode === "ranged" ? 5 : 6);
   const health = critical.target.health, draws = critical.draws();
   critical.tick(critical.time);
   assert.equal(critical.target.health, health); assert.equal(critical.draws(), draws);
@@ -79,7 +81,7 @@ for (const path of [paths[0], paths[1], paths[4], paths[5]]) test(path.name + " 
   const normal = fixture({ ...path, defense, rolls: [.99, .99, .99, .99] });
   const block = fixture({ ...path, defense, rolls: path.mode === "ranged" ? [.99, 0, 0] : [.99, .99, 0, 0] });
   assert.equal(block.outcome.kind, "block"); assert.equal(block.outcome.critical, true);
-  assert.ok(Math.abs(block.outcome.amount - normal.outcome.amount * .5 * 1.5) < 1e-8);
+  assert.ok(Math.abs(block.outcome.amount - normal.outcome.amount * .5 * combatProfile(block.source).criticalMultiplier) < 1e-8);
   for (const [kind, rolls] of path.mode === "ranged" ? [["miss", [0]]] : [["miss", [0]], ["parry", [.99, 0]]]) {
     const avoided = fixture({ ...path, defense, rolls });
     assert.equal(avoided.outcome.kind, kind); assert.equal(avoided.outcome.critical, false);

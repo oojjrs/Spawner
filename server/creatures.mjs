@@ -22,7 +22,7 @@ export function createCreatures(environment, saved) {
   let encounters = null;
   let initializing = true;
   const species = "spiny-back-beetle";
-  const stats = { ...unitCombatStats(species), attack: 3, speed: CREATURE_MOVEMENT[species].speed, vision: 4, resistance: 1 };
+  const stats = { ...unitCombatStats(species), speed: CREATURE_MOVEMENT[species].speed, resistance: 1 };
   const burrows = environment.world.burrows || [];
   const distribution = environment.world.encounters?.find(plan => plan.key === species && plan.spawnPoints);
   const burrowSites = new Map(burrows.map(burrow => [burrow.id, burrow]));
