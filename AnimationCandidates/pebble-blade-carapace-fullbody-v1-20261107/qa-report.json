@@ -1,0 +1,197 @@
+{
+  "frameCount": 48,
+  "actionCount": 6,
+  "noRangedAsset": true,
+  "bodyPartsComposited": false,
+  "visualReview": "Source sheets and 48-frame QA contact inspected. Gold stone body, blue armor, attached green blade retained. Birth includes fixed cave and roll-out; death ends in low colored rubble. Attack v1 was discarded because a blade crossed a source cell; final attack was regenerated with generous margins.",
+  "actions": {
+    "idle": {
+      "frameCount": 8,
+      "allFrameOuterBordersFullyTransparent": true,
+      "outerBorderNontransparentPixels": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFractionByFrame": [
+        0.62621,
+        0.61155,
+        0.59259,
+        0.6082,
+        0.61617,
+        0.62165,
+        0.62274,
+        0.62546
+      ],
+      "webpFrames": 8,
+      "gifFrames": 8,
+      "gifDurationMs": 1240,
+      "expectedDurationMs": 1240,
+      "durationMatches": true,
+      "uniqueWholeFrames": 8,
+      "visibleCellEdgeClipping": false
+    },
+    "walk": {
+      "frameCount": 8,
+      "allFrameOuterBordersFullyTransparent": true,
+      "outerBorderNontransparentPixels": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFractionByFrame": [
+        0.67161,
+        0.65992,
+        0.66614,
+        0.66304,
+        0.65246,
+        0.66956,
+        0.66286,
+        0.65602
+      ],
+      "webpFrames": 8,
+      "gifFrames": 8,
+      "gifDurationMs": 880,
+      "expectedDurationMs": 880,
+      "durationMatches": true,
+      "uniqueWholeFrames": 8,
+      "visibleCellEdgeClipping": false
+    },
+    "attack": {
+      "frameCount": 8,
+      "allFrameOuterBordersFullyTransparent": true,
+      "outerBorderNontransparentPixels": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFractionByFrame": [
+        0.62363,
+        0.64366,
+        0.63676,
+        0.69745,
+        0.72134,
+        0.66362,
+        0.63626,
+        0.62571
+      ],
+      "webpFrames": 8,
+      "gifFrames": 8,
+      "gifDurationMs": 980,
+      "expectedDurationMs": 980,
+      "durationMatches": true,
+      "uniqueWholeFrames": 8,
+      "visibleCellEdgeClipping": false
+    },
+    "hurt": {
+      "frameCount": 8,
+      "allFrameOuterBordersFullyTransparent": true,
+      "outerBorderNontransparentPixels": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFractionByFrame": [
+        0.62725,
+        0.64939,
+        0.59644,
+        0.62391,
+        0.62633,
+        0.62835,
+        0.628,
+        0.62668
+      ],
+      "webpFrames": 8,
+      "gifFrames": 8,
+      "gifDurationMs": 1030,
+      "expectedDurationMs": 1030,
+      "durationMatches": true,
+      "uniqueWholeFrames": 8,
+      "visibleCellEdgeClipping": false
+    },
+    "birth": {
+      "frameCount": 8,
+      "allFrameOuterBordersFullyTransparent": true,
+      "outerBorderNontransparentPixels": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFractionByFrame": [
+        0.81219,
+        0.80685,
+        0.7836,
+        0.75464,
+        0.74847,
+        0.75467,
+        0.75557,
+        0.75703
+      ],
+      "webpFrames": 8,
+      "gifFrames": 8,
+      "gifDurationMs": 2140,
+      "expectedDurationMs": 2140,
+      "durationMatches": true,
+      "uniqueWholeFrames": 8,
+      "visibleCellEdgeClipping": false
+    },
+    "death": {
+      "frameCount": 8,
+      "allFrameOuterBordersFullyTransparent": true,
+      "outerBorderNontransparentPixels": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFractionByFrame": [
+        0.60432,
+        0.62186,
+        0.62442,
+        0.63528,
+        0.63569,
+        0.68962,
+        0.75521,
+        0.84008
+      ],
+      "webpFrames": 8,
+      "gifFrames": 8,
+      "gifDurationMs": 1940,
+      "expectedDurationMs": 1940,
+      "durationMatches": true,
+      "uniqueWholeFrames": 8,
+      "visibleCellEdgeClipping": false
+    }
+  },
+  "allTechnicalChecksPassed": true,
+  "timingNote": "GIF uses centiseconds. Attack timing was quantized to 70 ms and 80 ms phases while preserving the 980 ms total; lossless WebP and manifest use the same final timing."
+}
