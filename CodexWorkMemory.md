@@ -1,3 +1,27 @@
+## 문서 폴더 교정 검수·커밋 범위 동결 · 01a1b3b0
+
+- 기록 ID: design-assets-relocation-freeze-20261107-01a1b3b0. 기록 시각 2026-11-07T11:29:53+09:00. 기록자·직접검수 Codex /root, 같은 결과의 수정·푸시 결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 의 ‘고쳐’ 및 앞선 ‘얼른 해서 올려라’와 실제 relocation-verification.json. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 직접 확인:23개 문서파일을 기존 DesignAssets로 옮기고 경로치환 이외 바이트동일, 기존 Design폴더없음, UTF8NoBom/CRLF, build구문, file://7페이지 로딩과 오류0을 확인했다. 루트메뉴7/문서3단계/13섹션 구조는 유지한다.
+- Git후보는 HEAD의문서23파일을경로치환한rename과루트/빌드참조수정·본채팅관련메모리만이다. 옮겨진CSS/유닛표의다른채팅미커밋변경은후보에서제외하고작업트리의새경로에동일하게남긴다. 기존다른index/미추적/자산은보존한다. Projects0조회재사용,새브랜치·사이트배포없음. 요청/교정/검수/보호/남은푸시대조를마쳤으며실제성공은후기록한다.
+
+## 문서 폴더 위치 교정 · 01a1b3b0 현재 요약
+
+- 기록 ID: design-assets-folder-fix-20261107-01a1b3b0. 기록 시각 2026-11-07T11:28:15+09:00. 기록자·경로교정 Codex /root, 교정결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 의 ‘DesignAssets 폴더가 있는데 Design 폴더는 왜 또 만들어?’ 및 ‘고쳐’ 직접 요청. 원 발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 이전 별도 Design 디렉터리 생성 판단을 철회한다. Design.html만 루트에 두고 기존23개 페이지/섹션/공용파일을 기존 DesignAssets 아래 동일 상대구조로 옮긴다. 새 별도문서디렉터리는 만들지 않는다. 루트→페이지→섹션3단계와 페이지메뉴7개는 유지하며 URL/빌드 경로만 고친다.
+- 이동 직전의 동시 CSS/유닛표 미커밋 내용까지 바이트보존 사본으로 보호한다. 대상충돌0 및 Windows절대경로범위를 확인하고 파일별이동했으며 원래폴더는 비었을때만 제거한다. 직전23파일/루트/빌드 사본과 경로목록은 literal $Trash/design-split-01a1b3b0/before-folder-fix. 이전 같은 결과의 푸시 승인에 따른 교정이지만 다른 변경을 묶거나 별도배포하지 않는다. 검사·푸시성공은 아직 미확인이다.
+
+## 공개 기획서3단계 지침 수신·정본 재독 · 01a1b3b0
+
+- 기록 ID: design-guideline-reloaded-20261107-01a1b3b0. 기록 시각 2026-11-07T11:18:53+09:00. 기록자·대조 판단 Codex /root. 출처 codex://threads/01a1b3b5-9122-7193-a5db-a3713d9feaad 에서 사용자 명시 전파 승인을 근거로 전달한 현재 메시지와 https://oojjrs.github.io/codex/guideline-design-generation.review.md 직접 재조회. 원 사용자 발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 전달된 게시 커밋153a957a는 전달자 보고로 구분한다. 직접 읽은 공개 정본에서 루트는 목차/최소레이아웃만, 페이지/모든섹션 각각파일, 루트→페이지→섹션3단계, 섹션 중첩/추가중간헤더 금지, summary가 섹션헤더, 메뉴는페이지만/섹션은페이지본문자동통합 규칙을 확인했다. 이 기준을 이후 승인된 Design 작업에도 적용한다.
+- 현재 루트의본문없음/메뉴7개와 파일7페이지·13섹션을 대조했고, 앞서 본 채팅에서 직접 확인·푸시한2d88dfe의 평탄한 섹션 연결 근거를 재사용한다. 완료한 구조개편을 재시작하거나 다른 작업범위로 확대하지 않는다. 이번 통지 수신으로 제품파일·Git·외부게시를 추가 변경하지 않았으며 수신기록만 로컬 메모리에 남긴다.
+
+## 기획서3단계 파일 분리 푸시 완료 · 01a1b3b0 현재 요약
+
+- 기록 ID: design-split-pushed-20261107-01a1b3b0. 기록·원격 확인 시각 2026-11-07T11:17:11+09:00. 기록자·Git실측 Codex /root, 푸시 결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 및 실제 commit-result.json·push·ls-remote 응답. 원 발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 완료: 2d88dfeeace0b9faeb9d7439e8e9735a95c6289b ‘기획서 페이지와 섹션 파일 분리’를 전용 origin/main에 푸시했다. 원격 readback과 시작 checkout HEAD가 같은 커밋이며 미해결 index0이다. 부모 bff43c8의 동시 CSS 의미 교정까지 통합한27경로이고 다른 코드/자산/삭제와 index는 보존했다.
+- 최종 구조/검수: Design.html→7페이지→13섹션, 섹션 중첩0/섹션메뉴0이며 각 섹션은 자신의 페이지 안에 연속 표시된다. 마지막 지도오류 수정후 참조952개보존·수정3페이지·지도규칙행생성·유닛43행·확대/닫기·pageerror0 확인. 기존2개 누락포자이미지 참조 한계는 유지한다. staging 검사의 새 CSS 빈줄공백1곳만 제거했다. 별도 사이트배포는 없으며 이 성공영수증은 커밋뒤 결과로 로컬 기록해 후속 memory-only커밋을 만들지 않는다.
+
 ## 병행 승인 커밋 통합·최종 검수 범위 정정 · 01a1a5fd
 
 - 기록 ID: combat-repair-final-integration-20261107-01a1a5fd. 기록 시각 2026-11-07T11:16:25+09:00. 기록자·최종통합판단 Codex /root, 사용자 기존수정·검수·업로드 승인 지속. 출처현재채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의재개 및 실제Git/검사응답, finish_checks/finish_projection. 새사용자결정을추가하지않음.

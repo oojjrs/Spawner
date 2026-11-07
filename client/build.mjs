@@ -81,7 +81,7 @@ function writeDesignSection(path, content) {
 }
 
 function writeDesignResources() {
-  const path = resolve(root, "Design/codex-food.html");
+  const path = resolve(root, "DesignAssets/codex-food.html");
   const original = readFileSync(path, "utf8");
   const model = `(() => {\n${bundle(["client/harvest-assets.mjs", "client/resource-art.mjs"])}\nglobalThis.SpawnerDesignResources = { RESOURCE_TYPES: ${JSON.stringify(RESOURCE_TYPES)}, ...modules["client/harvest-assets.mjs"], ...modules["client/resource-art.mjs"] };\n})();`;
   const updated = original.replace(/(<script id="design-resource-model"[^>]*>)[\s\S]*?(<\/script>)/,
@@ -95,7 +95,7 @@ if (process.argv.includes("--design-resources-only")) {
 }
 
 function writeDesignWorld() {
-  const path = resolve(root, "Design/sections/world-map.js");
+  const path = resolve(root, "DesignAssets/sections/world-map.js");
   const original = readDesignSection(path);
   let design = original;
   if (!design.includes('<script id="design-world-model"')) return;
@@ -170,7 +170,7 @@ const content = `(() => {\n${browser}\nconst workerSource = ${JSON.stringify(wor
 writeGenerated(resolve(root, "client/runtime.js"), content);
 if (process.argv.includes("--runtime-only")) process.exit(0);
 if (!process.argv.includes("--preserve-design")) {
-for (const designName of ["Design/sections/terrain-floors.js", "Design/sections/terrain-objects.js"]) {
+for (const designName of ["DesignAssets/sections/terrain-floors.js", "DesignAssets/sections/terrain-objects.js"]) {
 const designPath = resolve(root, designName);
 let design = readDesignSection(designPath);
 const originalDesign = design;

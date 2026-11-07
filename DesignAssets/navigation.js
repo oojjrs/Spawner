@@ -6,7 +6,7 @@ const designAnchors = {"world": "world", "world-map-preview": "world", "map-canv
     const id = decodeURIComponent(location.hash.slice(1)) || "world";
     const page = designAnchors[id] || "world";
     if (page !== current) {
-      frame.src = "Design/" + page + ".html#" + encodeURIComponent(id);
+      frame.src = "DesignAssets/" + page + ".html#" + encodeURIComponent(id);
       current = page;
     } else if (frame.contentWindow) {
       frame.contentWindow.postMessage({ type: "spawner-design-anchor", id }, "*");
