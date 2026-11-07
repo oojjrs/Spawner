@@ -1,0 +1,372 @@
+{
+  "method": "Alpha16 full silhouette at equal first-pose cap width. Ivory diagnostic uses RGB connected component color threshold and is an approximate diagnostic, not segmentation or source editing. No anisotropic scaling applied.",
+  "references": {
+    "Approved idle": {
+      "bboxAlpha16": [
+        27,
+        107,
+        204,
+        231
+      ],
+      "width": 177,
+      "height": 124,
+      "heightPerWidth": 0.7005649717514124,
+      "approxIvoryBodyColorBounds": [
+        81,
+        181,
+        145,
+        229
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.2711864406779661
+    },
+    "Previous attack F0": {
+      "bboxAlpha16": [
+        107,
+        168,
+        404,
+        418
+      ],
+      "width": 297,
+      "height": 250,
+      "heightPerWidth": 0.8417508417508418,
+      "approxIvoryBodyColorBounds": [
+        187,
+        303,
+        325,
+        413
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.37037037037037035
+    },
+    "Redrawn attack F0": {
+      "bboxAlpha16": [
+        107,
+        215,
+        405,
+        418
+      ],
+      "width": 298,
+      "height": 203,
+      "heightPerWidth": 0.6812080536912751,
+      "approxIvoryBodyColorBounds": [
+        190,
+        340,
+        310,
+        414
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.2483221476510067
+    },
+    "Redrawn attack F15": {
+      "bboxAlpha16": [
+        99,
+        205,
+        402,
+        417
+      ],
+      "width": 303,
+      "height": 212,
+      "heightPerWidth": 0.6996699669966997,
+      "approxIvoryBodyColorBounds": [
+        187,
+        333,
+        309,
+        413
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.264026402640264
+    }
+  },
+  "oldNeutralHeightRelativeToIdle": 1.2015314434669275,
+  "newNeutralHeightRelativeToIdle": 0.972369560510933,
+  "newFinalHeightRelativeToIdle": 0.9987224528904504,
+  "allFrames": [
+    {
+      "bboxAlpha16": [
+        107,
+        215,
+        405,
+        418
+      ],
+      "width": 298,
+      "height": 203,
+      "heightPerWidth": 0.6812080536912751,
+      "approxIvoryBodyColorBounds": [
+        190,
+        340,
+        310,
+        414
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.2483221476510067
+    },
+    {
+      "bboxAlpha16": [
+        105,
+        209,
+        396,
+        417
+      ],
+      "width": 291,
+      "height": 208,
+      "heightPerWidth": 0.7147766323024055,
+      "approxIvoryBodyColorBounds": [
+        191,
+        337,
+        310,
+        414
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.2646048109965636
+    },
+    {
+      "bboxAlpha16": [
+        93,
+        197,
+        394,
+        417
+      ],
+      "width": 301,
+      "height": 220,
+      "heightPerWidth": 0.7308970099667774,
+      "approxIvoryBodyColorBounds": [
+        195,
+        330,
+        311,
+        414
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.27906976744186046
+    },
+    {
+      "bboxAlpha16": [
+        83,
+        195,
+        385,
+        417
+      ],
+      "width": 302,
+      "height": 222,
+      "heightPerWidth": 0.7350993377483444,
+      "approxIvoryBodyColorBounds": [
+        191,
+        321,
+        307,
+        414
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.3079470198675497
+    },
+    {
+      "bboxAlpha16": [
+        110,
+        209,
+        399,
+        418
+      ],
+      "width": 289,
+      "height": 209,
+      "heightPerWidth": 0.7231833910034602,
+      "approxIvoryBodyColorBounds": [
+        190,
+        345,
+        308,
+        414
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.23875432525951557
+    },
+    {
+      "bboxAlpha16": [
+        113,
+        215,
+        417,
+        417
+      ],
+      "width": 304,
+      "height": 202,
+      "heightPerWidth": 0.6644736842105263,
+      "approxIvoryBodyColorBounds": [
+        192,
+        339,
+        319,
+        414
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.24671052631578946
+    },
+    {
+      "bboxAlpha16": [
+        110,
+        218,
+        433,
+        417
+      ],
+      "width": 323,
+      "height": 199,
+      "heightPerWidth": 0.6160990712074303,
+      "approxIvoryBodyColorBounds": [
+        194,
+        345,
+        324,
+        413
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.21052631578947367
+    },
+    {
+      "bboxAlpha16": [
+        106,
+        216,
+        414,
+        417
+      ],
+      "width": 308,
+      "height": 201,
+      "heightPerWidth": 0.6525974025974026,
+      "approxIvoryBodyColorBounds": [
+        177,
+        341,
+        307,
+        413
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.23376623376623376
+    },
+    {
+      "bboxAlpha16": [
+        108,
+        219,
+        413,
+        417
+      ],
+      "width": 305,
+      "height": 198,
+      "heightPerWidth": 0.6491803278688525,
+      "approxIvoryBodyColorBounds": [
+        190,
+        343,
+        315,
+        414
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.23278688524590163
+    },
+    {
+      "bboxAlpha16": [
+        98,
+        211,
+        405,
+        417
+      ],
+      "width": 307,
+      "height": 206,
+      "heightPerWidth": 0.6710097719869706,
+      "approxIvoryBodyColorBounds": [
+        183,
+        336,
+        306,
+        414
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.254071661237785
+    },
+    {
+      "bboxAlpha16": [
+        90,
+        201,
+        395,
+        417
+      ],
+      "width": 305,
+      "height": 216,
+      "heightPerWidth": 0.7081967213114754,
+      "approxIvoryBodyColorBounds": [
+        179,
+        332,
+        300,
+        414
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.26885245901639343
+    },
+    {
+      "bboxAlpha16": [
+        90,
+        201,
+        394,
+        417
+      ],
+      "width": 304,
+      "height": 216,
+      "heightPerWidth": 0.7105263157894737,
+      "approxIvoryBodyColorBounds": [
+        177,
+        332,
+        300,
+        413
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.26644736842105265
+    },
+    {
+      "bboxAlpha16": [
+        99,
+        206,
+        406,
+        417
+      ],
+      "width": 307,
+      "height": 211,
+      "heightPerWidth": 0.6872964169381107,
+      "approxIvoryBodyColorBounds": [
+        190,
+        334,
+        310,
+        414
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.26058631921824105
+    },
+    {
+      "bboxAlpha16": [
+        98,
+        205,
+        402,
+        417
+      ],
+      "width": 304,
+      "height": 212,
+      "heightPerWidth": 0.6973684210526315,
+      "approxIvoryBodyColorBounds": [
+        189,
+        333,
+        308,
+        413
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.2631578947368421
+    },
+    {
+      "bboxAlpha16": [
+        99,
+        204,
+        403,
+        417
+      ],
+      "width": 304,
+      "height": 213,
+      "heightPerWidth": 0.7006578947368421,
+      "approxIvoryBodyColorBounds": [
+        189,
+        332,
+        309,
+        413
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.26644736842105265
+    },
+    {
+      "bboxAlpha16": [
+        99,
+        205,
+        402,
+        417
+      ],
+      "width": 303,
+      "height": 212,
+      "heightPerWidth": 0.6996699669966997,
+      "approxIvoryBodyColorBounds": [
+        187,
+        333,
+        309,
+        413
+      ],
+      "approxIvoryBodyHeightPerCapWidth": 0.264026402640264
+    }
+  ],
+  "sourceFacingDifferentIgnored": true,
+  "browserRuntimeTest": false
+}

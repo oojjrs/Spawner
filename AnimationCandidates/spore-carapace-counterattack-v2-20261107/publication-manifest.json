@@ -1,0 +1,93 @@
+{
+  "title": "포자버섯 갑각 반격용 전신 공격",
+  "tribe": "spore",
+  "form": "carapace",
+  "status": "replacement-candidate-after-proportion-audit",
+  "sourceAppearance": "AnimationCandidates/spore-carapace-counterattack-v2-20261107/source.png",
+  "approvedIdleReference": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/idle.webp",
+  "supersedes": "AnimationCandidates/spore-defensive-attack-fullbody-v1-20261107/carapace/publication-manifest.json",
+  "sourceAppearanceSHA256": "2795d796a80a81c5646a06b4a83a0e7f98e8f8fde55d91e4e5538e7310ca5b42",
+  "sourceFacing": "right",
+  "actions": {
+    "attack": {
+      "sheet": "AnimationCandidates/spore-carapace-counterattack-v2-20261107/spore-carapace-counterattack-v2-sheet.png",
+      "preview": "AnimationCandidates/spore-carapace-counterattack-v2-20261107/spore-carapace-counterattack-v2-preview.webp",
+      "gif": "AnimationCandidates/spore-carapace-counterattack-v2-20261107/spore-carapace-counterattack-v2-preview.gif",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        60,
+        70,
+        60,
+        80,
+        30,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        70,
+        80,
+        90,
+        100,
+        60
+      ],
+      "durationMs": 1000,
+      "loop": false,
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "sheetSHA256": "71ad1077156b1a9f832800ab680199187df040f8946a6701d3a5868ed44177f6",
+      "previewSHA256": "99ae647d05f1cbec3312040a0d94f73d5c61f3fcbbbc5dacc70d56bf92a3245e",
+      "gifSHA256": "ba74aee57e85e048f3a3a1743d7dea7d63f5d4178e765a548bde18dd748d15ab",
+      "sourceFacing": "right",
+      "neutralBodyBounds": [
+        107,
+        215,
+        405,
+        418
+      ],
+      "geometryAlphaThreshold": 16,
+      "pivotX": 256.0,
+      "pivotY": 418,
+      "referenceLength": 298,
+      "hitFrameIndex": 5,
+      "hitTimeMs": 300,
+      "fullScene": false,
+      "attackKind": "base-style blunt cap-and-body counterattack",
+      "bodyPartComposition": false,
+      "projectileBakedIntoBodySheet": false
+    }
+  },
+  "excludedActions": [
+    "ranged-attack"
+  ],
+  "additiveActionsOnly": false,
+  "preserveExistingOtherActions": true,
+  "bodyPartComposition": false,
+  "combatRulesModified": false,
+  "gameIntegration": false,
+  "deployment": false,
+  "baseMotionReference": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.json",
+  "method": "Built-in image_gen draws each complete body. Technical processing only extracts cells, applies a single uniform clip scale and positions complete frames. No body-part assembly or anatomical warping.",
+  "verification": {
+    "allActionsMultiFrame": true,
+    "sheetRoundtripExact": true,
+    "gifAndWebpDurationExact": true,
+    "noOpaqueEdgeClipping": true,
+    "oneConnectedBodyEveryFrame": true,
+    "hitCueMatchesBaseMotion": true,
+    "idleProportionsRestored": true,
+    "neutralHeightRatioToIdle": 0.972369560510933,
+    "returnHeightRatioToIdle": 0.9987224528904504
+  },
+  "note": "Replaces only the previously too-tall carapace defensive attack; preserves approved squat idle proportions. Does not add ranged attacks or change combat eligibility, retaliation logic, stats, or initiative rules.",
+  "proportionAudit": "proportion-audit.json",
+  "replacementActionsOnly": [
+    "attack"
+  ]
+}

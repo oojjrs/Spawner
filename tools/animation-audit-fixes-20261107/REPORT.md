@@ -20,3 +20,10 @@ Baseline: 9b0da3b0. This is a first correction batch, not completion of the comp
 ## Continuing work
 
 Spore carapace attack body-proportion correction and other newly identified audit items remain separate follow-ups. Do not describe this first batch as all animations visually approved. Original image sources and earlier publications remain available for comparison.
+
+## Second correction batch
+
+- Spore carapace attack v2 replaces the vertically elongated body with a redrawn whole-body clip based on its actual idle silhouette. Width-normalized height difference changes from +20.15% to -2.76% at entry and -0.13% at return. It retains 16 frames, 1000 ms, 300 ms contact, authored right-facing art and floor registration. No nonuniform body scaling or body-part assembly was used.
+- Bean secretion death gets referenceLength 45.55769230769231, matching the actual idle scale while preserving all source pixels, pivot, frame sequence and timing.
+- Combined targeted tests: 134/134 pass. The ten-case pixel registration/endpoint suite additionally checks spore carapace entry aspect within 5%; 10/10 pass after this assertion was added.
+- Broader birth-scene resolution and other ongoing audit items remain separate, not claimed complete here.

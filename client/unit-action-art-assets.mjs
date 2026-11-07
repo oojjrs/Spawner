@@ -2045,6 +2045,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SproutDeathV2/secretion/death.webp",
+        "referenceLength": 45.55769230769231,
         "sourceFacing": "right",
         "frameSize": 83,
         "frameHeight": 83,

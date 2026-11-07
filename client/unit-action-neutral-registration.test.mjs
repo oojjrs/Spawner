@@ -7,7 +7,7 @@ import { UNIT_ACTION_ART } from "./unit-action-art-assets.mjs";
 // These clips start with a neutral body. Do not apply this invariant to impact,
 // squash, melt, or birth frames, and never resize individual animated frames.
 const cases = [["bean/base", "attack"], ["bean/base", "death"], ["spring/secretion", "death"],
-  ["spore/secretion", "ranged"], ["spore/secretion", "harvest"], ["spore/secretion", "throw"], ["pebble/secretion", "death"]];
+  ["spore/secretion", "ranged"], ["spore/secretion", "harvest"], ["spore/secretion", "throw"], ["pebble/secretion", "death"], ["bean/secretion", "death"], ["spore/carapace", "attack"]];
 const root = fileURLToPath(new URL("../", import.meta.url));
 const records = cases.map(([key, action]) => ({ key, action,
   reference: UNIT_ACTION_ART[key].reference,
@@ -27,7 +27,7 @@ def measure(c):
         tile = image.crop((f % cols*w, f//cols*h, (f % cols+1)*w, (f//cols+1)*h))
         box = tile.getchannel('A').point(lambda a: 255 if a >= 16 else 0).getbbox()
     if not box: raise ValueError('Empty neutral frame: ' + c['image'])
-    return {'length': max(box[2]-box[0], box[3]-box[1]), 'bottom': box[3]}
+    return {'length': max(box[2]-box[0], box[3]-box[1]), 'bottom': box[3], 'aspect': (box[3]-box[1])/(box[2]-box[0])}
 print(json.dumps([{name: measure(row[name]) for name in ['reference', 'idle', 'clip']} for row in rows]))
 `], { cwd: root, input: JSON.stringify(records), encoding: "utf8", maxBuffer: 1024 * 1024 }));
 
@@ -43,6 +43,7 @@ for (const [index, record] of records.entries()) test(`${record.key} ${record.ac
   const clipScale = sourceScale(record.reference, record.clip, pixels.reference.length);
   const ratio = pixels.clip.length * clipScale / (pixels.idle.length * idleScale);
   assert.ok(Math.abs(ratio - 1) <= .05, `neutral size ratio ${ratio}`);
+  if (record.key === "spore/carapace") assert.ok(Math.abs(pixels.clip.aspect / pixels.idle.aspect - 1) <= .05, "cap/body proportions remain within 5% at entry");
   const idleFloor = (pixels.idle.bottom - record.idle.pivotY) * idleScale;
   const clipFloor = (pixels.clip.bottom - record.clip.pivotY) * clipScale;
   assert.ok(Math.abs(clipFloor - idleFloor) <= .03, `neutral floor shift ${clipFloor - idleFloor}`);

@@ -230,7 +230,7 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
   },
   "spore/carapace": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/spore/carapace/attack.png",
-    "sourceManifest": "AnimationCandidates/spore-defensive-attack-fullbody-v1-20261107/carapace/publication-manifest.json",
+    "sourceManifest": "AnimationCandidates/spore-carapace-counterattack-v2-20261107/publication-manifest.json",
     "sourceFacing": "right",
     "frameSize": 512,
     "frameHeight": 512,
@@ -255,10 +255,10 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
       60
     ],
     "durationMs": 1000,
-    "pivotX": 255.5,
+    "pivotX": 256.0,
     "pivotY": 418,
-    "referenceLength": 297,
-    "viewSize": 297,
+    "referenceLength": 298,
+    "viewSize": 298,
     "registrationScale": 1,
     "loop": false,
     "hitTimeMs": 300,
