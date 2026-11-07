@@ -1,0 +1,150 @@
+{
+  "form": "blade-secretion-antenna",
+  "actions": {
+    "idle": {
+      "sheetFrameCount": 16,
+      "durationMs": 6400,
+      "noOpaqueClipping": true,
+      "largeConnectedComponentCounts": [
+        1
+      ],
+      "uniqueSheetFrames": 16,
+      "gif": {
+        "frameCount": 16,
+        "uniqueFrames": 16,
+        "durationMs": 6400
+      },
+      "webp": {
+        "frameCount": 16,
+        "uniqueFrames": 16,
+        "durationMs": 6400
+      },
+      "passed": true
+    },
+    "walk": {
+      "sheetFrameCount": 16,
+      "durationMs": 1120,
+      "noOpaqueClipping": true,
+      "largeConnectedComponentCounts": [
+        1
+      ],
+      "uniqueSheetFrames": 16,
+      "gif": {
+        "frameCount": 16,
+        "uniqueFrames": 16,
+        "durationMs": 1120
+      },
+      "webp": {
+        "frameCount": 16,
+        "uniqueFrames": 16,
+        "durationMs": 1120
+      },
+      "passed": true
+    },
+    "melee": {
+      "sheetFrameCount": 16,
+      "durationMs": 900,
+      "noOpaqueClipping": true,
+      "largeConnectedComponentCounts": [
+        1
+      ],
+      "uniqueSheetFrames": 16,
+      "gif": {
+        "frameCount": 16,
+        "uniqueFrames": 16,
+        "durationMs": 900
+      },
+      "webp": {
+        "frameCount": 16,
+        "uniqueFrames": 16,
+        "durationMs": 900
+      },
+      "passed": true
+    },
+    "ranged": {
+      "sheetFrameCount": 16,
+      "durationMs": 600,
+      "noOpaqueClipping": true,
+      "largeConnectedComponentCounts": [
+        1
+      ],
+      "uniqueSheetFrames": 16,
+      "gif": {
+        "frameCount": 16,
+        "uniqueFrames": 16,
+        "durationMs": 600
+      },
+      "webp": {
+        "frameCount": 16,
+        "uniqueFrames": 16,
+        "durationMs": 600
+      },
+      "passed": true
+    },
+    "hurt": {
+      "sheetFrameCount": 16,
+      "durationMs": 960,
+      "noOpaqueClipping": true,
+      "largeConnectedComponentCounts": [
+        1
+      ],
+      "uniqueSheetFrames": 16,
+      "gif": {
+        "frameCount": 16,
+        "uniqueFrames": 16,
+        "durationMs": 960
+      },
+      "webp": {
+        "frameCount": 16,
+        "uniqueFrames": 16,
+        "durationMs": 960
+      },
+      "passed": true
+    },
+    "death": {
+      "sheetFrameCount": 16,
+      "durationMs": 1440,
+      "noOpaqueClipping": true,
+      "largeConnectedComponentCounts": [
+        1
+      ],
+      "uniqueSheetFrames": 16,
+      "gif": {
+        "frameCount": 16,
+        "uniqueFrames": 16,
+        "durationMs": 1440
+      },
+      "webp": {
+        "frameCount": 16,
+        "uniqueFrames": 16,
+        "durationMs": 1440
+      },
+      "passed": true
+    },
+    "birth": {
+      "sheetFrameCount": 78,
+      "durationMs": 3120,
+      "noOpaqueClipping": true,
+      "largeConnectedComponentCounts": [
+        1,
+        2
+      ],
+      "uniqueSheetFrames": 76,
+      "gif": {
+        "frameCount": 76,
+        "uniqueFrames": 76,
+        "durationMs": 3120
+      },
+      "webp": {
+        "frameCount": 76,
+        "uniqueFrames": 76,
+        "durationMs": 3120
+      },
+      "passed": true
+    }
+  },
+  "visualReview": "Exact cap identity, attached sensory gills, applicable organs and coherent full-body poses retained. Neutral-backdrop contacts reviewed.",
+  "bodyPartComposition": false,
+  "projectileBakedIntoBodySheet": false,
+  "birthBodyLastFrameExactIdle": true
+}

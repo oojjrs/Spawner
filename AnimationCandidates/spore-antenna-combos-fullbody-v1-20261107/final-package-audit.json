@@ -1,0 +1,542 @@
+{
+  "tribe": "spore",
+  "newFormCount": 7,
+  "newActionCount": 43,
+  "existingAntennaActionsVerified": 5,
+  "newActions": {
+    "blade-antenna": {
+      "idle": {
+        "frameCount": 16,
+        "durationMs": 6400,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 6400,
+        "referenceLength": 296,
+        "pivot": [
+          256.0,
+          417
+        ],
+        "passed": true
+      },
+      "walk": {
+        "frameCount": 16,
+        "durationMs": 1120,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1120,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          417
+        ],
+        "passed": true
+      },
+      "attack": {
+        "frameCount": 16,
+        "durationMs": 900,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 900,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          417
+        ],
+        "passed": true
+      },
+      "hurt": {
+        "frameCount": 16,
+        "durationMs": 960,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 960,
+        "referenceLength": 298,
+        "pivot": [
+          256.0,
+          417
+        ],
+        "passed": true
+      },
+      "death": {
+        "frameCount": 16,
+        "durationMs": 1440,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1440,
+        "referenceLength": 296,
+        "pivot": [
+          256.0,
+          417
+        ],
+        "passed": true
+      },
+      "birth": {
+        "frameCount": 78,
+        "durationMs": 3120,
+        "webpDecodedFrameCount": 76,
+        "webpDurationMs": 3120,
+        "referenceLength": 42,
+        "pivot": [
+          534.0,
+          477
+        ],
+        "passed": true
+      }
+    },
+    "blade-carapace-antenna": {
+      "idle": {
+        "frameCount": 16,
+        "durationMs": 6400,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 6400,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          417
+        ],
+        "passed": true
+      },
+      "walk": {
+        "frameCount": 16,
+        "durationMs": 1120,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1120,
+        "referenceLength": 296,
+        "pivot": [
+          256.0,
+          417
+        ],
+        "passed": true
+      },
+      "attack": {
+        "frameCount": 16,
+        "durationMs": 900,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 900,
+        "referenceLength": 298,
+        "pivot": [
+          256.0,
+          417
+        ],
+        "passed": true
+      },
+      "hurt": {
+        "frameCount": 16,
+        "durationMs": 960,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 960,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          418
+        ],
+        "passed": true
+      },
+      "death": {
+        "frameCount": 16,
+        "durationMs": 1440,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1440,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          417
+        ],
+        "passed": true
+      },
+      "birth": {
+        "frameCount": 78,
+        "durationMs": 3120,
+        "webpDecodedFrameCount": 76,
+        "webpDurationMs": 3120,
+        "referenceLength": 44,
+        "pivot": [
+          534.0,
+          478
+        ],
+        "passed": true
+      }
+    },
+    "blade-secretion-antenna": {
+      "idle": {
+        "frameCount": 16,
+        "durationMs": 6400,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 6400,
+        "referenceLength": 299,
+        "pivot": [
+          256.5,
+          416
+        ],
+        "passed": true
+      },
+      "walk": {
+        "frameCount": 16,
+        "durationMs": 1120,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1120,
+        "referenceLength": 296,
+        "pivot": [
+          257.0,
+          418
+        ],
+        "passed": true
+      },
+      "attack": {
+        "frameCount": 16,
+        "durationMs": 900,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 900,
+        "referenceLength": 298,
+        "pivot": [
+          256.0,
+          417
+        ],
+        "passed": true
+      },
+      "ranged-attack": {
+        "frameCount": 16,
+        "durationMs": 600,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 600,
+        "referenceLength": 296,
+        "pivot": [
+          256.0,
+          416
+        ],
+        "passed": true
+      },
+      "hurt": {
+        "frameCount": 16,
+        "durationMs": 960,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 960,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          418
+        ],
+        "passed": true
+      },
+      "death": {
+        "frameCount": 16,
+        "durationMs": 1440,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1440,
+        "referenceLength": 297,
+        "pivot": [
+          255.5,
+          416
+        ],
+        "passed": true
+      },
+      "birth": {
+        "frameCount": 78,
+        "durationMs": 3120,
+        "webpDecodedFrameCount": 76,
+        "webpDurationMs": 3120,
+        "referenceLength": 40,
+        "pivot": [
+          534.0,
+          477
+        ],
+        "passed": true
+      }
+    },
+    "blade-secretion-carapace-antenna": {
+      "idle": {
+        "frameCount": 16,
+        "durationMs": 6400,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 6400,
+        "referenceLength": 297,
+        "pivot": [
+          255.5,
+          416
+        ],
+        "passed": true
+      },
+      "walk": {
+        "frameCount": 16,
+        "durationMs": 1120,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1120,
+        "referenceLength": 297,
+        "pivot": [
+          255.5,
+          417
+        ],
+        "passed": true
+      },
+      "attack": {
+        "frameCount": 16,
+        "durationMs": 900,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 900,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          417
+        ],
+        "passed": true
+      },
+      "ranged-attack": {
+        "frameCount": 16,
+        "durationMs": 600,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 600,
+        "referenceLength": 298,
+        "pivot": [
+          257.0,
+          418
+        ],
+        "passed": true
+      },
+      "hurt": {
+        "frameCount": 16,
+        "durationMs": 960,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 960,
+        "referenceLength": 297,
+        "pivot": [
+          255.5,
+          418
+        ],
+        "passed": true
+      },
+      "death": {
+        "frameCount": 16,
+        "durationMs": 1440,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1440,
+        "referenceLength": 297,
+        "pivot": [
+          255.5,
+          417
+        ],
+        "passed": true
+      },
+      "birth": {
+        "frameCount": 78,
+        "durationMs": 3120,
+        "webpDecodedFrameCount": 76,
+        "webpDurationMs": 3120,
+        "referenceLength": 44,
+        "pivot": [
+          534.0,
+          477
+        ],
+        "passed": true
+      }
+    },
+    "carapace-antenna": {
+      "idle": {
+        "frameCount": 16,
+        "durationMs": 6400,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 6400,
+        "referenceLength": 296,
+        "pivot": [
+          256.0,
+          417
+        ],
+        "passed": true
+      },
+      "walk": {
+        "frameCount": 16,
+        "durationMs": 1120,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1120,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          417
+        ],
+        "passed": true
+      },
+      "hurt": {
+        "frameCount": 16,
+        "durationMs": 960,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 960,
+        "referenceLength": 296,
+        "pivot": [
+          255.0,
+          417
+        ],
+        "passed": true
+      },
+      "death": {
+        "frameCount": 16,
+        "durationMs": 1440,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1440,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          417
+        ],
+        "passed": true
+      },
+      "birth": {
+        "frameCount": 78,
+        "durationMs": 3120,
+        "webpDecodedFrameCount": 76,
+        "webpDurationMs": 3120,
+        "referenceLength": 39,
+        "pivot": [
+          533.5,
+          477
+        ],
+        "passed": true
+      }
+    },
+    "secretion-antenna": {
+      "idle": {
+        "frameCount": 16,
+        "durationMs": 6400,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 6400,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          417
+        ],
+        "passed": true
+      },
+      "walk": {
+        "frameCount": 16,
+        "durationMs": 1120,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1120,
+        "referenceLength": 298,
+        "pivot": [
+          256.0,
+          418
+        ],
+        "passed": true
+      },
+      "ranged-attack": {
+        "frameCount": 16,
+        "durationMs": 600,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 600,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          418
+        ],
+        "passed": true
+      },
+      "hurt": {
+        "frameCount": 16,
+        "durationMs": 960,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 960,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          417
+        ],
+        "passed": true
+      },
+      "death": {
+        "frameCount": 16,
+        "durationMs": 1440,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1440,
+        "referenceLength": 298,
+        "pivot": [
+          256.0,
+          418
+        ],
+        "passed": true
+      },
+      "birth": {
+        "frameCount": 78,
+        "durationMs": 3120,
+        "webpDecodedFrameCount": 76,
+        "webpDurationMs": 3120,
+        "referenceLength": 45,
+        "pivot": [
+          534.5,
+          477
+        ],
+        "passed": true
+      }
+    },
+    "secretion-carapace-antenna": {
+      "idle": {
+        "frameCount": 16,
+        "durationMs": 6400,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 6400,
+        "referenceLength": 297,
+        "pivot": [
+          255.5,
+          417
+        ],
+        "passed": true
+      },
+      "walk": {
+        "frameCount": 16,
+        "durationMs": 1120,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1120,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          417
+        ],
+        "passed": true
+      },
+      "ranged-attack": {
+        "frameCount": 16,
+        "durationMs": 600,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 600,
+        "referenceLength": 296,
+        "pivot": [
+          257.0,
+          417
+        ],
+        "passed": true
+      },
+      "hurt": {
+        "frameCount": 16,
+        "durationMs": 960,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 960,
+        "referenceLength": 296,
+        "pivot": [
+          256.0,
+          417
+        ],
+        "passed": true
+      },
+      "death": {
+        "frameCount": 16,
+        "durationMs": 1440,
+        "webpDecodedFrameCount": 16,
+        "webpDurationMs": 1440,
+        "referenceLength": 297,
+        "pivot": [
+          256.5,
+          417
+        ],
+        "passed": true
+      },
+      "birth": {
+        "frameCount": 78,
+        "durationMs": 3120,
+        "webpDecodedFrameCount": 76,
+        "webpDurationMs": 3120,
+        "referenceLength": 37,
+        "pivot": [
+          533.5,
+          477
+        ],
+        "passed": true
+      }
+    }
+  },
+  "validationScope": "Saved PNG sheets, GIF/WebP decoding and timing, alpha16 geometry, frame diversity, source boundary checks, visual contact-sheet review. Deployed browser/runtime QA belongs to integration stage.",
+  "allNewActionsPassed": true,
+  "noBodyPartComposition": true,
+  "rangedBodiesContainNoDetachedProjectile": true
+}

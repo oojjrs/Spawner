@@ -1,0 +1,55 @@
+{
+  "status": "existing-approved-assets-preserved",
+  "actions": {
+    "idle": {
+      "sheet": "AnimationCandidates/spore-antenna-idle-v1-20261107/spore-antenna-idle-v1-sheet.png",
+      "preview": "AnimationCandidates/spore-antenna-idle-v1-20261107/spore-antenna-idle-v1-preview.gif",
+      "sheetFrameCount": 16,
+      "gifFrames": 16,
+      "uniqueGifFrames": 16,
+      "durationMs": 6400,
+      "sha256": "6d26fe3b6fb9228faed066c7f3b4675e47ff2920558dc500c5d27d332823a10a",
+      "passed": true
+    },
+    "hurt": {
+      "sheet": "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/spore-antenna-hurt-sheet.png",
+      "preview": "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/spore-antenna-hurt-preview.gif",
+      "sheetFrameCount": 8,
+      "gifFrames": 8,
+      "uniqueGifFrames": 8,
+      "durationMs": 1580,
+      "sha256": "528fd068c826d6bfad79684f7c2dc9addf0503bf2ddbab89857dbf39edba59f0",
+      "passed": true
+    },
+    "birth": {
+      "sheet": "AnimationCandidates/spore-birth-calibrated-v7/antenna-birth-scene-sheet.png",
+      "preview": "AnimationCandidates/spore-birth-calibrated-v7/antenna-birth-scene-preview.gif",
+      "sheetFrameCount": 94,
+      "gifFrames": 61,
+      "uniqueGifFrames": 61,
+      "durationMs": 3120,
+      "sha256": "4a4d5bca2ad3b848a5d4be1b12321348c5b3f5a0d62c74c0a3f5274220b2f266",
+      "passed": true
+    },
+    "walk": {
+      "sheet": "AnimationCandidates/SheetGifHandoff-20261106/spore-antenna-walk-sheet.png",
+      "preview": "AnimationCandidates/SheetGifHandoff-20261106/spore-antenna-walk-preview.gif",
+      "sheetFrameCount": 8,
+      "gifFrames": 8,
+      "uniqueGifFrames": 8,
+      "durationMs": 1120,
+      "sha256": "96073425d8165ee650dc00b838d5a360c03f0f36b2667616f1bbc56a0859288f",
+      "passed": true
+    },
+    "death": {
+      "sheet": "AnimationCandidates/SheetGifHandoff-20261106/spore-antenna-death-sheet.png",
+      "preview": "AnimationCandidates/SheetGifHandoff-20261106/spore-antenna-death-preview.gif",
+      "sheetFrameCount": 8,
+      "gifFrames": 8,
+      "uniqueGifFrames": 8,
+      "durationMs": 1440,
+      "sha256": "fb35f4939e9568db9a79f2cf1b5d7d6052d399e6b5563e9f981245f643a63f96",
+      "passed": true
+    }
+  }
+}
