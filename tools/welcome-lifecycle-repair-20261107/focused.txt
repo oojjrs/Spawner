@@ -1,0 +1,49 @@
+{
+  "counts": {
+    "world": 1044,
+    "welcome": 261,
+    "combat": 1044
+  },
+  "failures": [],
+  "pixelTruth": "metadata-only pending independent auditor"
+}
+✔ production body transforms preserve target facing across all 87 appearances (1141.165845ms)
+✔ recovered native V3 registration and exact original source bytes (12.947931ms)
+✔ world and combat render and selection address every native cell in both directions (4.460169ms)
+✔ cell boundaries preserve accumulated phase rather than restart the turtle (0.316087ms)
+✔ welcome enter and exit use identical native walk timing and left-facing selection (1.000951ms)
+✔ design, local wrapper and compiled surfaces use V3 without live V2 links (106.991757ms)
+✔ 방향 미지정 시 논리 기본값을 유지하고 명시된 타깃 방향을 우선한다 (1.30409ms)
+✔ 모든 실제 플레이어 클립의 원본 방향을 명시한다 (0.929635ms)
+✔ 원본 방향 보정과 전장 반전은 프레임 순서와 발 접점을 보존한다 (194.492103ms)
+✔ 기본 피격은 논리적 정면에서 명시적으로 맞는 경우와 같은 좌우 그룹을 고른다 (2.479638ms)
+✔ 중립 발사구는 오른쪽과 왼쪽의 같은 전방 거리를 사용한다 (0.40499ms)
+✔ initial decode retry stays bounded and a later explicit start recovers the same appearance (83.741618ms)
+✔ initial transient failure succeeds once and simultaneous start calls share preparation (19.915573ms)
+✔ actual swallowed idle decode failure never starts blank or changes appearance (19.574149ms)
+✔ actual swallowed walk decode failure never starts blank or changes appearance (17.717402ms)
+✔ reduced-motion toggling during overlap draws one character and resumes the preserved clock (308.324365ms)
+✔ reduced-motion during asset waiting keeps one existing identity until preparation completes (247.173837ms)
+✔ normal native header lifecycle and hidden/game return retain valid left-facing weasel motion (289.179391ms)
+✔ first four remain fixed and later categories favor neutral species independently of variant count (78.338967ms)
+✔ category threshold, duplicate inputs and missing categories have deterministic behavior (1.03443ms)
+✔ creatures keep their relative sizes while tall poses fit the mobile header (0.264311ms)
+✔ independent bags retain all 87 identities and deterministic sequence diversity (23.095959ms)
+✔ welcome movement keeps exact cue stamps and exposes the final landing cell (1.599596ms)
+✔ an unavailable appearance retries its own assets without changing identity (0.992478ms)
+✔ a never-settling appearance releases the rotation without substituting base art (14.05981ms)
+✔ a failed pose uses a fallback pose of the same immutable appearance (0.982644ms)
+✔ welcome tribe forms face left along their entry and exit direction (7.466396ms)
+✔ slow welcome entries and exits keep walking between native cell moves (1.735678ms)
+✔ welcome entry and exit share native pose clocks and finish fully landed (1.450456ms)
+✔ welcome forms select their own registered body and perform only authored actions (3.012902ms)
+✔ actual welcome header uses idle in the center for tribes and neutral species (7.61449ms)
+✔ compiled welcome sequence matches the weighted source roster exactly (60.122698ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1261.854165

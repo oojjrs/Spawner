@@ -1,0 +1,50 @@
+✔ 확정 지형과 벌목 상태는 저장본 그대로 복원하고 생성기를 호출하지 않는다 (3.917215ms)
+✔ 이전 저장은 한 번 생성하여 변환한 다음부터 저장된 지형을 사용한다 (2.015562ms)
+✔ JSON 왕복 저장도 복원하고 손상된 새 지형을 시드로 덮어쓰지 않는다 (122.330961ms)
+✖ 새 방은 초보자 도움말을 기본으로 켜고 직접 끈 설정도 저장과 복원에서 유지한다 (2.549562ms)
+✔ create waits for the complete map before entering (7.578582ms)
+✔ enter waits for the complete map before entering (2.275046ms)
+✔ failed map preparation keeps the lobby open and allows retry (1.692674ms)
+✔ selection and map remain closed until every actual preview is ready (4.730449ms)
+✔ failed preview blocks entry and retries the same created room, reusing completed previews (3.087027ms)
+✔ timeout releases lobby controls; late old preview cannot complete a retry (3.063493ms)
+✔ a superseded room request cannot open its selection or overwrite newer status on rejection (2.956764ms)
+✔ already selected tribes do not prepare selection art (2.057294ms)
+✔ preview rendering skips combat, births and upgrades but full rendering still runs them (1.765261ms)
+✔ world preparation still decodes hazards before drawing them (1.001902ms)
+✔ preview image retry replaces a stalled cached promise without a late rejection evicting its replacement (1.533268ms)
+✔ repeated create clicks during preparation do not start duplicate requests (3.567047ms)
+✔ one unit prepares independently while another reference remains pending (6.179512ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 16
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 227.501328
+
+✖ failing tests:
+
+test at client/room-cache.test.mjs:70:1
+✖ 새 방은 초보자 도움말을 기본으로 켜고 직접 끈 설정도 저장과 복원에서 유지한다 (2.549562ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + undefined
+  - true
+
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/attack-publish-merge/client/room-cache.test.mjs:75:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

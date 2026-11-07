@@ -1,0 +1,81 @@
+✖ initial decode retry stays bounded and a later explicit start recovers the same appearance (49.869135ms)
+✖ actual swallowed idle decode failure never starts blank or changes appearance (19.144091ms)
+✖ actual swallowed walk decode failure never starts blank or changes appearance (11.611989ms)
+✖ reduced-motion toggling during overlap draws one character and resumes the preserved clock (215.457538ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 0
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 407.343765
+
+✖ failing tests:
+
+test at ../../../shared/welcome-native-audit-20261107/candidate/client/welcome-header-lifecycle.test.mjs:130:1
+✖ initial decode retry stays bounded and a later explicit start recovers the same appearance (49.869135ms)
+  Error: injected common decode rejection
+      at Object.loadImage (file:///workspace/shared/welcome-native-audit-20261107/candidate/client/welcome-header-lifecycle.test.mjs:64:71)
+      at welcome-header-under-test.js:66:59
+      at Array.map (<anonymous>)
+      at welcome-header-under-test.js:65:77
+      at async headerHarness (file:///workspace/shared/welcome-native-audit-20261107/candidate/client/welcome-header-lifecycle.test.mjs:106:3)
+      at async TestContext.<anonymous> (file:///workspace/shared/welcome-native-audit-20261107/candidate/client/welcome-header-lifecycle.test.mjs:131:13)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at ../../../shared/welcome-native-audit-20261107/candidate/client/welcome-header-lifecycle.test.mjs:170:46
+✖ actual swallowed idle decode failure never starts blank or changes appearance (19.144091ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + undefined
+  - false
+
+      at TestContext.<anonymous> (file:///workspace/shared/welcome-native-audit-20261107/candidate/client/welcome-header-lifecycle.test.mjs:172:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../../../shared/welcome-native-audit-20261107/candidate/client/welcome-header-lifecycle.test.mjs:170:46
+✖ actual swallowed walk decode failure never starts blank or changes appearance (11.611989ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + undefined
+  - false
+
+      at TestContext.<anonymous> (file:///workspace/shared/welcome-native-audit-20261107/candidate/client/welcome-header-lifecycle.test.mjs:172:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at ../../../shared/welcome-native-audit-20261107/candidate/client/welcome-header-lifecycle.test.mjs:190:1
+✖ reduced-motion toggling during overlap draws one character and resumes the preserved clock (215.457538ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  2 !== 1
+
+      at TestContext.<anonymous> (file:///workspace/shared/welcome-native-audit-20261107/candidate/client/welcome-header-lifecycle.test.mjs:196:10)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -61,23 +61,24 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     rangedImage: path => { const image = sources.get(path); return image?.complete && image.naturalWidth ? image : null; },
     drawBirth: () => false, drawOutline: () => {}, selectionShape: () => null, maxZoom: () => 288,
     pixelRatio: () => devicePixelRatio || 1, createSurface });
-  await Promise.all([
-    ...["body", "green-foot", "sprout-left", "sprout-right", "sprout-stem"].map(async name => {
-      nativeAssets.baseParts.set(name, await nativeAssets.loadImage("DesignAssets/Units/BaseParts/" + name + ".png"));
-    }),
-    ...["root-rig", "feet-1", "antenna-1", "strength-1"].map(async name => {
-      parts.set(name, await nativeAssets.loadImage("DesignAssets/Units/Parts/" + (name === "root-rig" ? "bean-root-rig" : name) + ".png"));
-    }),
-    ...tribes.map(async key => {
-      await nativeAssets.prepareTribe(key, ["idle", "walk"], {});
-      await unitPresentation.prepareAnimation({ tribe: key, attributes: {} });
-      const walk = nativeAssets.sheets.get(key).get("walk");
-      if (walk) movementSheets.set(key, { ...walk.animation, sprite: walk.sprite, scale: walk.scale });
-    })
-  ]);
+  function prepareInitialAssets() {
+    return Promise.all([
+      ...["body", "green-foot", "sprout-left", "sprout-right", "sprout-stem"].map(async name => {
+        nativeAssets.baseParts.set(name, await nativeAssets.loadImage("DesignAssets/Units/BaseParts/" + name + ".png"));
+      }),
+      ...["root-rig", "feet-1", "antenna-1", "strength-1"].map(async name => {
+        parts.set(name, await nativeAssets.loadImage("DesignAssets/Units/Parts/" + (name === "root-rig" ? "bean-root-rig" : name) + ".png"));
+      }),
+      ...tribes.map(async key => {
+        await nativeAssets.prepareTribe(key, ["idle", "walk"], {});
+        await unitPresentation.prepareAnimation({ tribe: key, attributes: {} });
+        const walk = nativeAssets.sheets.get(key).get("walk");
+        if (walk) movementSheets.set(key, { ...walk.animation, sprite: walk.sprite, scale: walk.scale });
+      })
+    ]);
+  }
   const creatureResources = { idle: new Map(), walk: new Map(), attack: new Map(), ranged: new Map(), hurt: new Map(),
     owlFrames: new Map(), beetleFrames: new Map(), beetleSheet: null, beetleAttackSheet: null, beetleSprite: null };
-  resourcesReady = true;
   const appearances = model.WELCOME_UNIT_APPEARANCES;
   const neutralSpecies = [...Object.keys(globalThis.Spawner.CREATURE_IDLE_ANIMATIONS), "talon-owl", "spiny-back-beetle"];
   const nextChoice = globalThis.Spawner.createWelcomeRoster(tribes, neutralSpecies, appearances.length);
@@ -89,6 +90,8 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   const reportedDraws = new WeakSet();
   const renderedChoices = new Map();
   let started = false;
+  let initialAssetsReady = false;
+  let starting = null;
   function neutralAnimations(species) {
     if (species === "spiny-back-beetle") return Object.fromEntries(["idle", "walk", "attack"].map(action => {
       const animation = globalThis.Spawner.BEETLE_ANIMATIONS[action];
@@ -111,11 +114,12 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
       const attributes = appearances[choice.variant];
       await nativeAssets.prepareTribe(choice.key, ["idle", "walk"], attributes);
       const agent = { tribe: choice.key, attributes, health: 1 };
-      await Promise.all([
-        unitPresentation.prepareAnimation(agent, 0),
-        unitPresentation.prepareAnimation({ ...agent, mode: "walk", moveStartedAt: 0, moveDuration: 1, stepCount: 1 }, 0),
-        unitPresentation.prepareAnimation(model.welcomeUnitPerformance(agent, 0).agent, 0)
-      ]);
+      const preparedAgents = [agent,
+        { ...agent, mode: "walk", moveStartedAt: 0, moveDuration: 1, stepCount: 1 },
+        model.welcomeUnitPerformance(agent, 0).agent];
+      await Promise.all(preparedAgents.map(value => unitPresentation.prepareAnimation(value, 0)));
+      if (preparedAgents.some(value => !unitPresentation.animationReady(value, 0)))
+        throw new Error("Missing welcome appearance assets: " + choice.key);
       prepareFrame(choice);
       return;
     }
@@ -255,9 +259,9 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     return true;
   }
   function draw(motion) {
-    if (!width || !height) return;
+    if (!started || !width || !height) return;
     departing = departing.filter(departure => (timeline - departure.startedAt) * 1000 < departureMotion(departure, timeline).durationMs);
-    const retained = new Set([phase === "waiting" ? null : current, upcoming?.choice, ...departing.map(departure => departure.choice)]);
+    const retained = new Set([phase === "waiting" && !reducedMotion.matches ? null : current, upcoming?.choice, ...departing.map(departure => departure.choice)]);
     for (const [choice, value] of renderedChoices) if (!retained.has(choice)) {
       value.front.width = value.back.width = 0;
       renderedChoices.delete(choice);
@@ -266,8 +270,8 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
       ...departing.map(departure => "welcome-" + departure.choice.key + ":" + departure.number)]);
     for (const id of headMotions.keys()) if (!retainedIds.has(id)) headMotions.delete(id);
     context.clearRect(0, 0, width, height);
-    for (const departure of departing) presentDeparture(departure, timeline, () => drawUnit(travelMotion(), false));
-    if (phase !== "waiting") drawUnit(motion, false);
+    for (const departure of reducedMotion.matches ? [] : departing) presentDeparture(departure, timeline, () => drawUnit(travelMotion(), false));
+    if (phase !== "waiting" || reducedMotion.matches) drawUnit(motion, false);
   }
   function prepareFrame(choice) {
     if (!width || !height) return;
@@ -409,14 +413,29 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   new MutationObserver(synchronize).observe(document.body, { attributes: true, attributeFilter: ["data-screen"] });
   document.addEventListener("visibilitychange", synchronize);
   reducedMotion.addEventListener("change", synchronize);
-  startPresentation = async () => {
-    if (started) return;
-    await globalThis.Spawner.prepareWelcomeChoice(current, prepareChoice);
-    started = true;
-    previousTime = null;
-    timeline = elapsed = phaseStartedAt = 0;
-    prepareUpcoming();
-    synchronize();
+  startPresentation = () => {
+    if (started) return Promise.resolve(true);
+    if (starting) return starting;
+    starting = (async () => {
+      if (!initialAssetsReady) {
+        const prepared = await model.prepareWelcomeChoice(current, prepareInitialAssets, {
+          onError: error => console.warn("Welcome initial assets unavailable:", error)
+        });
+        if (!prepared) return false;
+        initialAssetsReady = true;
+      }
+      const prepared = await model.prepareWelcomeChoice(current, prepareChoice, {
+        onError: (error, failed) => console.warn("Welcome asset unavailable:", failed.key, failed.variant, error)
+      });
+      if (!prepared) return false;
+      resourcesReady = started = true;
+      previousTime = null;
+      timeline = elapsed = phaseStartedAt = 0;
+      prepareUpcoming();
+      synchronize();
+      return true;
+    })().finally(() => { starting = null; });
+    return starting;
   };
   synchronize();
 })();
