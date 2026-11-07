@@ -1,3 +1,17 @@
+## 방 생성 시 맵 준비 완료 대기 구현·검수 완료 [room-map-verified-01a1b5ac]
+
+- 기록 및 근거 확인 시각 2026-11-07T20:07:36+09:00; 요청·결정 사용자, 구현·검수 Codex /root. 출처 codex://threads/01a1b5ac-c233-79f2-a628-520d1980e813, client/game.js·client/room-entry.test.mjs와 도구 결과, H:/Spawner Windows PowerShell. 정확 발언 시각·항목 ID 불명. room-map-start를 구현·검수 완료로 갱신하며 배포는 진행 전이다.
+- prepareRoom에서 전체 지형·숲 준비 Promise를 기다린 뒤 100%와 입장을 허용한다. 생성 도중 ready=true 설정을 제거했고 위험지형 이미지 decode와 그리기도 준비 단계에서 완료한다. 실제 Worker의 enter visible:false는 시뮬레이션을 멈추며 게임 입장 뒤 resume하는 기존 계약을 유지한다.
+- 새 방·기존 방의 준비 지연 중 입장 금지, 완료 후 입장, 실패 시 로비 유지와 재시도 가능 상태의 회귀검사 3개 통과. 초기 검사 2개 실패는 VM 객체 prototype 비교 문제로 fixture 데이터를 복제해 교정했으며 제품 실패로 판정하지 않았다. game.js 구문과 제품·검사 2파일 UTF8NoBom/CRLF 검사 통과. 브라우저 렌더링 검수는 수행하지 않았다.
+- 최신 ef186583의 탄생·운반·웰컴 변경을 보존한 전체 소스를 배포 준비기에 전달한다. 실행본 runtime에 game.js는 내장되지 않으며 변경한 준비 함수는 자산 digest 대상도 아니므로 이번 gate 수정에 runtime 재생성은 필요 없다. 기존 메모리 16줄은 보존하고 이번 기록만 코드·회귀검사와 함께 포함한다. 요청·결정·수정·검수·잔여 배포 단계를 대조 완료했다.
+
+## 방 생성 완료 후 입장 복구 진행 [room-map-start-01a1b5ac]
+
+- 기록 시각 2026-11-07T20:05:06+09:00; 기록·실행 Codex /root, 요청·결정 사용자. 출처 codex://threads/01a1b5ac-c233-79f2-a628-520d1980e813 현재 요청, H:/Spawner Windows PowerShell. 정확 발언 시각·항목 ID 불명.
+- 사용자 요구: 방 만들기를 누르면 맵 생성을 모두 끝낸 뒤 입장하도록 기존 흐름을 복구하고 최신 원격 변경을 적용해 배포한다. 변경자 조사는 요청하지 않았다.
+- 확인: 최신 main ef186583을 반영했고 기존 메모리 16줄을 stash30c91ef2로 보존·복원하여 SHA256 동일함을 확인했다. 최신 탄생·운반·웰컴 변경을 유지한다. 연결 GitHub Projects 없음.
+- 원인: prepareRoom이 prepareWorldRendering Promise를 기다리지 않고 100%와 packet을 반환하며 prepareWorldRendering도 이미지 생성 전에 ready를 true로 설정했다. 맵 준비를 await하고 완료 전 ready를 유지하지 않으며 위험지형 이미지도 준비 중에 끝내도록 고친다. 기존 메모리 16줄은 이번 커밋에서 제외하고 보존한다. 기존 public Sites에 게시한다.
+
 ## 동시 원격 변경 반영 후 최종 동결 [entry-click-sync-01a1b598]
 
 - 기록 및 근거 확인 시각 2026-11-07T19:50:15+09:00; 사용자 재배포·pull반영 확인 범위에서 Codex /root 실행. 출처 현재채팅01a1b598 및 Git·기존검사 결과. H:/Spawner local. 직전 fetch에서 몽돌 갑각+더듬이 탄생 비율 수정c6798139와 병합a66af9e7 추가를 확인했다.

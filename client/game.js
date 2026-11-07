@@ -1514,16 +1514,14 @@
       forest.resourceCells = world.resourceCells || [];
       const layout = null;
       updateForest(world.seed, world.resourceCells);
+      await Promise.all(hazardGroundSprites.map(sprite => sprite.decode()));
+      if (generation !== worldRenderingGeneration) return;
       updateHazards(world.seed);
-      Promise.all(hazardGroundSprites.map(sprite => sprite.decode())).then(() => {
-        if (generation === worldRenderingGeneration) { updateHazards(world.seed); forest.hazardImage = null; }
-      }).catch(() => {});
       forest.hazardImage = null;
       updateTerrainRendering(world.seed, null);
       for (const image of terrainRendering.forest.values()) image.close();
       terrainRendering.forest.clear();
       terrainRendering.forestKeys.clear();
-      terrainRendering.ready = true;
       let key = layout ? layout.rendering.key : world.seed >>> 0;
       if (!layout) for (const type of worldMap.terrain) key = Math.imul(key ^ type, 16777619) >>> 0;
       const trees = forest.trees.filter(tree => !colonies.some(colony => {
@@ -9910,11 +9908,7 @@
 
     async function prepareRoom(roomId) {
       const packet = await client.call("enter", { roomId, visible: false });
-      const rendering = prepareWorldRendering(packet.world, packet.tribeStarts || packet.colonies);
-      const generation = worldRenderingGeneration;
-      rendering.catch(error => {
-        if (generation === worldRenderingGeneration && (connection.roomId === roomId || tribeRoomId === roomId)) reportRenderingCacheError(error);
-      });
+      await prepareWorldRendering(packet.world, packet.tribeStarts || packet.colonies);
       if (packet.colonies.find(colony => colony.id === packet.colonyId).tribe === null) prepareTribePreviews().catch(() => {});
       updateRoomCreationProgress(100);
       return packet;
