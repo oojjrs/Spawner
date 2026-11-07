@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { heldHurtProjectileSide, beanHeldHurtSource, drawBeanHeldHurt, BEAN_HELD_HURT_ASSETS } from "./bean-held-hurt.mjs";
 import { speciesHeldHurtSource, drawSpeciesHeldHurt, SPECIES_HELD_HURT_ASSETS } from "./species-held-hurt.mjs";
-import { unitDisplaySize } from "./unit-size.mjs";
+import { unitDisplaySize, unitFacing } from "./unit-size.mjs";
 import { imageDimensions } from "./image-audit.mjs";
 import { createCombatVfxCursor } from "./combat-vfx-events.mjs";
 import { createCombat } from "../server/combat.mjs";
@@ -67,7 +67,7 @@ function world(agent, events, time = 1.3, imageFor = path => images.get(path)) {
     drawImage(image, ...args) { calls.push({ kind: "draw", image: image.path, args }); } };
   const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
   const helper = source.match(/^    function drawAgentHeldHurt\([^]*?^    }/m)[0];
-  const Spawner = { heldHurtProjectileSide, beanHeldHurtSource, speciesHeldHurtSource, drawBeanHeldHurt, drawSpeciesHeldHurt, unitDisplaySize };
+  const Spawner = { heldHurtProjectileSide, beanHeldHurtSource, speciesHeldHurtSource, drawBeanHeldHurt, drawSpeciesHeldHurt, unitDisplaySize, unitFacing };
   const scope = { Spawner, state: { simSeconds: time }, combatVfxFrame: events, AGENT_HEIGHT: .7, ctx,
     unitDisplayScale: () => 1.5, unitBodySize: () => ({ width: .4 }), agentRangedImage: imageFor,
     unitAnimationSheets: new Map(["bean", "spore", "pebble", "spring"].map(tribe => [tribe, new Map([["idle", { scale: 1.25 }]])])) };
@@ -83,10 +83,13 @@ test("actual world helper uses both approved banks across 24 forms, two facings 
       const before = structuredClone(agent), events = frame(shot({ from: { x: 102 + side * 2, y: 100 } }), hit());
       const result = world(agent, events), source = beanHeldHurtSource(agent) || speciesHeldHurtSource(agent);
       assert.equal(result.drawn, true); const draw = result.calls.find(call => call.kind === "draw");
-      const index = side * (facing < 0 ? -1 : 1) > 0 ? source.times.length : 0;
+      // Species blade/carapace atlases are authored facing left; preserve that
+      // source orientation when translating the world hit side to its bank.
+      const mirror = (facing < 0) !== (source.sourceFacing === "left");
+      const index = side * (mirror ? -1 : 1) > 0 ? source.times.length : 0;
       assert.equal(draw.image, source.image); assert.equal(draw.args[0], index % source.columns * source.frameWidth);
       assert.equal(draw.args[1], Math.floor(index / source.columns) * source.frameHeight);
-      assert.deepEqual(result.calls.find(call => call.kind === "scale").args, [facing < 0 ? -1 : 1, 1], "facing is unchanged, not substituted artwork");
+      assert.deepEqual(result.calls.find(call => call.kind === "scale").args, [mirror ? -1 : 1, 1], "source orientation is composed with world facing");
       assert.deepEqual(agent, before);
     }
 });

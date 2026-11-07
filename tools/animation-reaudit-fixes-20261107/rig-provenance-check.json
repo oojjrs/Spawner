@@ -1,0 +1,17 @@
+{
+  "removalCommit": "dd1e1d2ed2807483562c822a3d488cf2482deefd",
+  "sources": [
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV7/spore/blade/rig.json",
+      "onlyRemovedOldBirth": true
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV7/spore/piercing/rig.json",
+      "onlyRemovedOldBirth": true
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV7/spore/carapace/rig.json",
+      "onlyRemovedOldBirth": true
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 import { UNIT_COMBINATION_FORMS } from "./unit-combination-forms.mjs";
 import test from "node:test";
+import { readFileSync } from "node:fs";
+import { runInNewContext } from "node:vm";
 import assert from "node:assert/strict";
 import { WELCOME_UNIT_APPEARANCES, welcomeUnitPerformance, createWelcomeRoster, welcomeCreatureScale, prepareWelcomeChoice, welcomeTravelMotion, drawWelcomeChoice } from "./welcome-presentation.mjs";
 import { CREATURE_IDLE_ANIMATIONS, unitMovementPosition, creatureAnimationSpeed, unitAnimationPose } from "./unit-animation.mjs";
@@ -137,14 +139,14 @@ test("a failed pose uses a fallback pose of the same immutable appearance", () =
 });
 
 
-test("welcome tribe forms preserve native facing across entry, action and exit", () => {
+test("welcome tribe forms face left along their entry and exit direction", () => {
   const model = { unitStats, creatureAnimationSpeed, unitMovementPosition };
   const variants = WELCOME_UNIT_APPEARANCES;
   for (const key of ["bean", "spore", "pebble", "spring"]) for (const attributes of variants)
     for (const phase of ["enter", "perform", "rest", "exit"]) {
       const motion = welcomeTravelMotion(model, { key, attributes, width: 480, size: 146, worldPixels: 364,
         elapsedMs: 250, timeline: 10.25, startedAt: 10, phase, reducedMotion: false, id: "native-facing" });
-      assert.equal(motion.agent.facing, 1);
+      assert.equal(motion.agent.facing, -1);
       assert.equal(motion.cell, 364);
       assert.deepEqual(motion.agent.attributes, attributes);
     }
@@ -194,11 +196,42 @@ test("welcome forms select their own registered body and perform only authored a
     assert.equal(unitActionArtDefinition(agent), definition);
     const performance = welcomeUnitPerformance(agent, 10);
     const pose = unitActionArtPose(performance.agent, 10.001);
-    assert.notEqual(performance.agent.mode, "jump");
+    assert.equal(performance.action, "idle");
+    assert.equal(performance.agent.mode, "idle");
+    assert.equal(performance.agent.attack, null);
     assert.equal(performance.agent.jumpStartedAt, undefined);
     assert.equal(pose.animation, definition.actions[performance.action] || definition.reference);
     assert.equal(performance.durationMs, pose.animation.durationsMs.reduce((sum, value) => sum + value, 0));
     assert.equal(performance.agent.attributes, attributes);
     assert.equal(agent.mode, undefined);
+  }
+});
+
+
+test("actual welcome header uses idle in the center for tribes and neutral species", () => {
+  const source = readFileSync(new URL("./welcome-header.js", import.meta.url), "utf8");
+  const travel = source.slice(source.indexOf("  function travelMotion("), source.indexOf("  function presentDeparture("));
+  const duration = source.slice(source.indexOf("  function phaseDuration("), source.indexOf("  function advance("));
+  const model = { unitStats, creatureAnimationSpeed, unitMovementPosition, welcomeTravelMotion, welcomeUnitPerformance };
+  for (const key of ["bean", "spore", "pebble", "spring", "boar", "talon-owl"]) {
+    const scope = { globalThis: { Spawner: model }, model, current: { key, variant: 0 }, appearances: [{}],
+      tribes: ["bean", "spore", "pebble", "spring"], width: 480, motionSize: () => 100, worldPixels: () => 144,
+      phase: "perform", phaseStartedAt: 10, timeline: 10.5, elapsed: 500, appearanceNumber: 0,
+      reducedMotion: { matches: false }, restDuration: 2000,
+      neutralAnimations: () => ({ idle: { durationsMs: [400, 600] }, attack: { durationsMs: [9000] } }),
+      duration: a => a.durationsMs.reduce((x, y) => x + y, 0) };
+    runInNewContext(travel + duration + "\nresult = { motion: travelMotion(), duration: phaseDuration() };", scope);
+    assert.equal(scope.result.motion.agent.mode, "idle");
+    assert.ok(!scope.result.motion.agent.attack);
+    assert.equal(scope.result.motion.agent.facing, -1);
+    assert.equal(scope.result.motion.x, 240);
+    assert.equal(scope.result.duration, scope.tribes.includes(key) ? welcomeUnitPerformance({ tribe: key, attributes: {} }, 10).durationMs : 1000);
+    for (const phase of ["enter", "exit"]) {
+      scope.phase = phase;
+      runInNewContext("result = travelMotion();", scope);
+      assert.equal(scope.result.agent.mode, "walk");
+      assert.equal(scope.result.agent.facing, -1);
+      assert.ok(!scope.result.agent.attack);
+    }
   }
 });

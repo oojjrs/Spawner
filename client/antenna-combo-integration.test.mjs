@@ -136,7 +136,7 @@ for (const tribe of tribes) for (const form of forms) test(`${tribe}/${form.key}
   }
   assert.equal(unitActionArtPose({ ...agent, ...samples.walk, carrying: 2 }, .2).animation, clips.walk);
   const welcome = welcomeUnitPerformance(agent, 10);
-  assert.equal(welcome.action, clips.attack ? 'attack' : clips.ranged ? 'ranged' : 'idle');
+  assert.equal(welcome.action, 'idle');
   assert.equal(unitActionArtPose(welcome.agent, 10.05).animation, welcome.animation);
 });
 
@@ -264,12 +264,13 @@ test('antenna planning has 28 complete rows and 84 matching work previews', () =
   assert.equal(WELCOME_UNIT_APPEARANCES.length, 18);
 });
 
-test('existing combinations and antenna singles preserve original actions except authorized defensive attacks', async () => {
+test('existing combinations and antenna singles preserve original actions except audited attack and carry fixes', async () => {
   const { UNIT_BIRTH_ART } = await import('./unit-birth-art-assets.mjs');
   const baseline = JSON.parse(read('tools/antenna-combo-integration-20261107/existing-art-baseline.json'));
   assert.equal(Object.keys(baseline.definitions).length, 20);
   for (const [key, definition] of Object.entries(baseline.definitions)) {
     const expected = DEFENSIVE_ATTACK_ART[key] ? { ...definition, actions: { ...definition.actions, attack: DEFENSIVE_ATTACK_ART[key] } } : definition;
+    if (key === 'bean/antenna') expected.actions.carry = definition.actions.walk;
     assert.deepEqual(UNIT_ACTION_ART[key], expected, key);
   }
   for (const [key, clip] of Object.entries(baseline.birth)) assert.deepEqual(UNIT_BIRTH_ART[key], clip, key);

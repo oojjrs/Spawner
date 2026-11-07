@@ -10,6 +10,16 @@ import { unitRangedPose } from './unit-ranged.mjs';
 import { unitDisplaySize, unitFacing } from './unit-size.mjs';
 import { imageDimensions } from './image-audit.mjs';
 import { createSimulationTrial } from './combat-simulation.mjs';
+
+// The user removed obsolete Spore birth metadata in dd1e1d2e. These exact
+// post-removal hashes retain the original held-hurt rig geometry and pixels.
+const retiredBirthMetadataHashes = {
+ 'DesignAssets/Animations/CombatAttributesV7/spore/blade/rig.json':'9be58cc7481732be00d35247771920439fc66fb69af02b1e1404211c236c20c7',
+ 'DesignAssets/Animations/CombatAttributesV7/spore/piercing/rig.json':'705eb5ff528c786996fa5f062b4406d74e9f2971487b6e01eca92933edf9b622',
+ 'DesignAssets/Animations/CombatAttributesV7/spore/carapace/rig.json':'19d0227b2479e746b380f2fc16b1c4e69527dace21f3dbc7ac691c825850e73c',
+};
+const currentInputHash = (path, original) => retiredBirthMetadataHashes[path] || original;
+
 const tribes=['spore','pebble','spring'];
 const forms=['base','blade','carapace','secretion','antenna','feet'];
 const unit=(tribe='spore',key='base',patch={})=>({id:'candidate',tribe,health:10,hurtStartedAt:10,facing:1,attributes:key==='base'?{}:{[key]:1},...patch});
@@ -111,15 +121,15 @@ test('actual world/detail helper preserves native animation scale, secretion sca
 test('actual laboratory stage draws each held source once through attack overlap, hit reset, and expiry',async()=>{
  const vm=await import('node:vm');const{createCombatStage}=await import('./combat-stage.mjs');
  const helpers=fs.readFileSync(new URL('./combat-stage-vfx.test.mjs',import.meta.url),'utf8');
- const box={assert,createCombatStage,globalThis};vm.createContext(box);vm.runInContext(helpers.slice(helpers.indexOf('const root ='),helpers.indexOf('\ntest(')),box);
- for(const tribe of tribes)for(const form of forms)for(const side of [0,1])box.withStage(({draw,calls})=>{
+ const box={assert,createCombatStage,globalThis,setImmediate};vm.createContext(box);vm.runInContext(helpers.slice(helpers.indexOf('const root ='),helpers.indexOf('\ntest(')),box);
+ for(const tribe of tribes)for(const form of forms)for(const side of [0,1])await box.withStage(async({draw,calls})=>{
   const{trial}=box.setup();const target=trial.agents[side];Object.assign(target,unit(tribe,form,{id:target.id,stats:{health:100},combat:{version:2,side}}));
   target.hurtStartedAt=1;target.attack=form==='base'?{startedAt:1,hitAt:1.3,endsAt:2}:{mode:'ranged',startedAt:1,launchedAt:1.2,hitAt:1.4,endsAt:2};trial.time=1.45;
-  const before=JSON.stringify(trial.agents);draw(trial);
+  const before=JSON.stringify(trial.agents);await draw(trial);
   const held=()=>calls.filter(c=>c.name==='drawImage'&&['/SpeciesHeldHurtV1/','/MinorHeldHurtV1/'].some(folder=>c.args[0]?.src.includes(folder)));
   assert.equal(held().length,1);assert.ok(held()[0].args[0].src.endsWith('/'+tribe+'-'+form+'.webp'));assert.equal(JSON.stringify(trial.agents),before);
-  target.hurtStartedAt=1.4;trial.time=1.85;draw(trial);assert.equal(held().length,1);
-  trial.time=2.281;draw(trial);assert.equal(held().length,0);
+  target.hurtStartedAt=1.4;trial.time=1.85;await draw(trial);assert.equal(held().length,1);
+  trial.time=2.281;await draw(trial);assert.equal(held().length,0);
  });
 });
 test('all eighteen native atlases are registered without promoting unfinished action sets',async()=>{
@@ -131,11 +141,11 @@ test('six live V7 blade and carapace sources preserve rig landmarks and material
  const qa=JSON.parse(fs.readFileSync('tools/weapons-held-hurt-20261105/verification.json'));
  const provenance=JSON.parse(fs.readFileSync('tools/weapons-held-hurt-20261105/source-metadata.json'));
  assert.equal(qa.sources.length,6);
- for(const [path,hash] of Object.entries(provenance.inputs))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex'),hash,path);
+ for(const [path,hash] of Object.entries(provenance.inputs))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex'),currentInputHash(path,hash),path);
  for(const s of qa.sources){
   assert.equal(speciesHeldHurtSource(unit(s.tribe,s.form)),SPECIES_HELD_HURT_SOURCES[s.tribe][s.form]);
   assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.sourceImage)).digest('hex'),s.sourceHash);
-  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.sourceRig)).digest('hex'),s.rigHash);
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.sourceRig)).digest('hex'),currentInputHash(s.sourceRig,s.rigHash));
   assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.image)).digest('hex'),s.atlasSha256);
   assert.deepEqual(imageDimensions(s.image),s.atlasDimensions);
   assert.ok(s.liveRigLandmarks&&s.neutralExact&&s.decodedAtlasExact&&s.noEdgeClipping);

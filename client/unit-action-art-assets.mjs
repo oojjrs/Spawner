@@ -2499,23 +2499,44 @@ const baseUnitActionArt = Object.freeze({
         ]
       },
       "carry": {
-        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/walk.png",
         "sourceFacing": "right",
         "frameSize": 768,
         "frameHeight": 768,
         "columns": 8,
-        "frameCount": 136,
+        "frameCount": 25,
         "durationsMs": [
-          1000
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40
         ],
         "pivotX": 383.5,
         "pivotY": 654,
         "viewSize": 768,
         "referenceLength": 333,
-        "loop": true,
-        "frames": [
-          0
-        ]
+        "loop": true
       },
       "throw": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
@@ -2938,8 +2959,9 @@ const baseUnitActionArt = Object.freeze({
           80,
           700
         ],
-        "pivotX": 133.33333333333331,
+        "pivotX": 134.5,
         "pivotY": 162,
+        "referenceLength": 79,
         "viewSize": 192,
         "registrationScale": 1,
         "loop": false
@@ -5085,7 +5107,8 @@ const baseUnitActionArt = Object.freeze({
           700
         ],
         "pivotX": 75.5,
-        "pivotY": 135.6640625,
+        "pivotY": 136,
+        "referenceLength": 93,
         "viewSize": 151,
         "registrationScale": 1,
         "loop": false
@@ -7578,8 +7601,9 @@ const baseUnitActionArt = Object.freeze({
           130,
           410
         ],
-        "pivotX": 147.5,
-        "pivotY": 206.5,
+        "pivotX": 150.0,
+        "pivotY": 207,
+        "referenceLength": 105,
         "viewSize": 236,
         "registrationScale": 1,
         "loop": false

@@ -37208,23 +37208,44 @@ const baseUnitActionArt = Object.freeze({
         ]
       },
       "carry": {
-        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/walk.png",
         "sourceFacing": "right",
         "frameSize": 768,
         "frameHeight": 768,
         "columns": 8,
-        "frameCount": 136,
+        "frameCount": 25,
         "durationsMs": [
-          1000
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40
         ],
         "pivotX": 383.5,
         "pivotY": 654,
         "viewSize": 768,
         "referenceLength": 333,
-        "loop": true,
-        "frames": [
-          0
-        ]
+        "loop": true
       },
       "throw": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
@@ -37647,8 +37668,9 @@ const baseUnitActionArt = Object.freeze({
           80,
           700
         ],
-        "pivotX": 133.33333333333331,
+        "pivotX": 134.5,
         "pivotY": 162,
+        "referenceLength": 79,
         "viewSize": 192,
         "registrationScale": 1,
         "loop": false
@@ -39794,7 +39816,8 @@ const baseUnitActionArt = Object.freeze({
           700
         ],
         "pivotX": 75.5,
-        "pivotY": 135.6640625,
+        "pivotY": 136,
+        "referenceLength": 93,
         "viewSize": 151,
         "registrationScale": 1,
         "loop": false
@@ -42287,8 +42310,9 @@ const baseUnitActionArt = Object.freeze({
           130,
           410
         ],
-        "pivotX": 147.5,
-        "pivotY": 206.5,
+        "pivotX": 150.0,
+        "pivotY": 207,
+        "referenceLength": 105,
         "viewSize": 236,
         "registrationScale": 1,
         "loop": false
@@ -58484,19 +58508,10 @@ const WELCOME_UNIT_APPEARANCES = Object.freeze([
 
 function welcomeUnitPerformance(agent, startedAt) {
   const definition = unitActionArtDefinition(agent);
-  const action = ["attack", "ranged", "harvest", "idle"].find(key => definition?.actions[key]);
-  const animation = definition?.actions[action] || definition?.reference;
+  const animation = definition?.actions.idle || definition?.reference;
   const durationMs = animation?.durationsMs.reduce((sum, value) => sum + value, 0) || 2000;
-  const performer = { ...agent, animationStartedAt: startedAt, moveDuration: 0, mode: "idle" };
-  if (action === "attack" || action === "ranged") {
-    performer.mode = "attack";
-    performer.attackStartedAt = startedAt;
-    performer.attack = { startedAt, endsAt: startedAt + durationMs / 1000, speed: 1, directionX: 1, mode: action };
-  } else if (action === "harvest") {
-    performer.mode = "harvest";
-    performer.harvestStarted = startedAt;
-  }
-  return { agent: performer, action: action || "idle", animation, durationMs };
+  const performer = { ...agent, animationStartedAt: startedAt, moveDuration: 0, mode: "idle", attack: null, attackStartedAt: undefined };
+  return { agent: performer, action: "idle", animation, durationMs };
 }
 
 function createWelcomeRoster(tribes, species, variants, random = Math.random) {
@@ -58540,7 +58555,7 @@ function welcomeCreatureScale(animation, bounds, top, displaySize, width, height
 }
 
 // Construct the same cell moves used by the game; a complete move always lands
-// before switching to an idle/attack pose in the middle of the header.
+// before switching to an idle pose in the middle of the header.
 function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsedMs, timeline, phase, startedAt, reducedMotion = false, id = "welcome", worldPixels }) {
   const neutral = !["bean", "spore", "pebble", "spring"].includes(key);
   const stats = neutral ? null : model.unitStats(attributes, key);
@@ -58557,7 +58572,7 @@ function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsed
   while (step < steps - 1 && timeline >= origin + (step + 1) * moveDuration) step++;
   const moveStartedAt = origin + step * moveDuration;
   const moveEndedAt = origin + (step + 1) * moveDuration;
-  const agent = { id, attributes, stats, carrying: 0, straightSteps: 0, health: stats?.health || 1, facing: neutral ? -1 : 1, mode: moving ? "walk" : "idle",
+  const agent = { id, attributes, stats, carrying: 0, straightSteps: 0, health: stats?.health || 1, facing: -1, mode: moving ? "walk" : "idle",
     ...(neutral ? { species: key } : { tribe: key }), stepCount: step + 1,
     moveDuration: moving ? moveEndedAt - moveStartedAt : 0, moveStartedAt,
     ...(!neutral ? { moveAnimationStartedAt: origin } : {}),

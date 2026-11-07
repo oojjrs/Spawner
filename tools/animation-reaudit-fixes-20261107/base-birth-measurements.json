@@ -1,0 +1,161 @@
+[
+  {
+    "key": "spore/base",
+    "sourceSHA256": "93696aac1e9eb471a1aae0ba8932eec01e369d0d64d064218a01b4b1c2ce9761",
+    "sourceBounds": [
+      95,
+      103,
+      174,
+      162
+    ],
+    "idleBounds": [
+      63,
+      176,
+      486,
+      482
+    ],
+    "oldRegistration": {
+      "referenceLength": null,
+      "pivotX": 133.33333333333331,
+      "pivotY": 162
+    },
+    "newRegistration": {
+      "referenceLength": 79,
+      "pivotX": 134.5,
+      "pivotY": 162
+    },
+    "worldCell100": {
+      "before": {
+        "width": 20.826795212765955,
+        "height": 15.554188829787233,
+        "left": -10.105828900709215,
+        "right": 10.720966312056742,
+        "floor": 0.0
+      },
+      "after": {
+        "width": 39.0,
+        "height": 29.126582278481013,
+        "left": -19.5,
+        "right": 19.5,
+        "floor": 0.0
+      },
+      "idle": {
+        "width": 39.0,
+        "height": 28.212765957446805,
+        "left": -19.5,
+        "right": 19.5,
+        "floor": 0.14982269503546097
+      }
+    },
+    "sceneLayers": null,
+    "scene": null,
+    "timingMs": 3120,
+    "frameCount": 22
+  },
+  {
+    "key": "pebble/base",
+    "sourceSHA256": "d8b762b189ea9767c2026dbfb692750a21b761bdd2514a5626e77f156cb76129",
+    "sourceBounds": [
+      29,
+      68,
+      122,
+      136
+    ],
+    "idleBounds": [
+      53,
+      148,
+      459,
+      448
+    ],
+    "oldRegistration": {
+      "referenceLength": null,
+      "pivotX": 75.5,
+      "pivotY": 135.6640625
+    },
+    "newRegistration": {
+      "referenceLength": 93,
+      "pivotX": 75.5,
+      "pivotY": 136
+    },
+    "worldCell100": {
+      "before": {
+        "width": 31.844452419012825,
+        "height": 23.284115747235184,
+        "left": -15.922226209506412,
+        "right": 15.922226209506412,
+        "floor": 0.11502952402701205
+      },
+      "after": {
+        "width": 41.0,
+        "height": 29.978494623655912,
+        "left": -20.5,
+        "right": 20.5,
+        "floor": 0.0
+      },
+      "idle": {
+        "width": 41.0,
+        "height": 30.295566502463053,
+        "left": -20.5,
+        "right": 20.5,
+        "floor": 0.0
+      }
+    },
+    "sceneLayers": null,
+    "scene": null,
+    "timingMs": 2620,
+    "frameCount": 48
+  },
+  {
+    "key": "spring/base",
+    "sourceSHA256": "01d1eafb5d7d0886dceabbfd8b249d5aae06512e4e507e732ef51e637e3deb00",
+    "sourceBounds": [
+      110,
+      102,
+      190,
+      207
+    ],
+    "idleBounds": [
+      141,
+      161,
+      371,
+      449
+    ],
+    "oldRegistration": {
+      "referenceLength": null,
+      "pivotX": 147.5,
+      "pivotY": 206.5
+    },
+    "newRegistration": {
+      "referenceLength": 105,
+      "pivotX": 150.0,
+      "pivotY": 207
+    },
+    "worldCell100": {
+      "before": {
+        "width": 23.804143126177028,
+        "height": 31.24293785310735,
+        "left": -11.158192090395483,
+        "right": 12.645951035781547,
+        "floor": 0.14877589453860643
+      },
+      "after": {
+        "width": 30.095238095238095,
+        "height": 39.5,
+        "left": -15.047619047619047,
+        "right": 15.047619047619047,
+        "floor": 0.0
+      },
+      "idle": {
+        "width": 31.545138888888893,
+        "height": 39.5,
+        "left": -15.772569444444446,
+        "right": 15.772569444444446,
+        "floor": 0.1371527777777778
+      }
+    },
+    "sceneLayers": null,
+    "scene": null,
+    "timingMs": 1790,
+    "frameCount": 13
+  }
+]

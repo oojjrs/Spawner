@@ -33,16 +33,19 @@ test('all twelve defensive attacks are registered as transparent native own-body
     assert.equal(unitActionArtDefinition(agent).actions.attack, clip);
     assert.equal(unitActionArtDefinition(agent).actions.ranged, undefined);
     const welcome = welcomeUnitPerformance(agent, 10);
-    assert.equal(welcome.action, 'attack'); assert.equal(welcome.animation, clip);
+    assert.equal(welcome.action, 'idle'); assert.equal(welcome.animation, unitActionArtDefinition(agent).actions.idle);
   }
 });
 
-test('defensive bodies preserve other slots except explicitly audited births', () => {
+test('defensive bodies preserve other slots except explicitly audited birth and carry slots', () => {
   const baseline = JSON.parse(read('tools/defensive-attacks-integration-20261107/existing-art-baseline.json'));
   for (const [key, before] of Object.entries(baseline.definitions)) {
     const after = UNIT_ACTION_ART[key];
     assert.deepEqual(after.reference, before.reference, key);
     for (const [name, clip] of Object.entries(before.actions)) if (name !== 'attack') {
+      if (key === 'bean/antenna' && name === 'carry') {
+        assert.deepEqual(after.actions.carry, after.actions.walk); continue;
+      }
       if (key === 'pebble/carapace-antenna' && name === 'birth') {
         const corrected = JSON.parse(read('AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/publication-manifest.json')).actions.birth;
         assert.equal(hash(read(after.actions.birth.image)), corrected.sheetSHA256);

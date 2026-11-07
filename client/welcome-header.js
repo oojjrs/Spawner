@@ -217,11 +217,6 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     motion.agent.animationStartedAt = phaseStartedAt;
     if (phase === "perform" && tribes.includes(current.key))
       motion.agent = model.welcomeUnitPerformance(motion.agent, phaseStartedAt).agent;
-    if (phase === "perform" && !tribes.includes(current.key)) {
-      motion.agent.mode = "attack";
-      motion.agent.attackStartedAt = phaseStartedAt;
-      motion.agent.attack = { startedAt: phaseStartedAt, speed: 1, directionX: -1 };
-    }
     return motion;
   }
   function presentDeparture(departure, time, callback) {
@@ -242,7 +237,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     if (phase === "enter") return travelMotion().durationMs;
     if (phase === "perform") return tribes.includes(current.key) ?
       model.welcomeUnitPerformance({ tribe: current.key, attributes: appearances[current.variant] }, phaseStartedAt).durationMs :
-      duration(neutralAnimations(current.key).attack);
+      duration(neutralAnimations(current.key).idle);
     return restDuration;
   }
   function advance(completedAt) {

@@ -1,5 +1,6 @@
 import { dnaAttackMode } from "../server/dna-actions.mjs";
 import test from 'node:test';
+import { tribeDnaStats } from '../server/tribe-dna-stats.mjs';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { UNIT_APPEARANCE_BITS, UNIT_APPEARANCE_TRIBES, unitAppearanceMaskFromAttributes } from '../server/unit-appearance.mjs';
@@ -83,7 +84,7 @@ test('all four laboratory choices use independently valid DNA and correct attack
       const build = combatLabWithAppearance({ key }, form.key), stats = deriveSimulationStats(build);
       assert.equal(combatLabAppearance(build), form.key);
       assert.equal(stats.dna.melee, !!form.attributes.blade); assert.equal(stats.dna.ranged, !!form.attributes.secretion);
-      assert.equal(stats.dna.armor > 0, !!form.attributes.carapace);
+      assert.equal(stats.dna.armor > tribeDnaStats(key).base.armor, !!form.attributes.carapace);
       const trial = createSimulationTrial({ left: build, right: build, distance: form.attributes.secretion ? 2 : 1, random: false });
       for (const actor of trial.agents) assert.equal(unitCombinationAppearance(actor), form.key);
       trial.finish(); assert.ok(trial.result());
@@ -110,12 +111,12 @@ test('observing combo poses never changes combat outcomes or launch-event stream
   }
 });
 
-test('welcome includes twelve new identities with authored ranged or melee performance', () => {
+test('welcome includes twelve new identities with authored idle performance', () => {
   assert.equal(WELCOME_UNIT_APPEARANCES.length, 18);
   for (const tribe of UNIT_APPEARANCE_TRIBES) for (const form of forms) {
     assert.ok(WELCOME_UNIT_APPEARANCES.some(attributes => unitCombinationAppearance({ attributes }) === form.key));
     const performance = welcomeUnitPerformance(make(tribe, form), 10);
-    assert.equal(performance.action, form.attributes.blade ? 'attack' : 'ranged');
+    assert.equal(performance.action, 'idle');
     assert.equal(unitActionArtPose(performance.agent, 10.1).animation, performance.animation);
   }
 });

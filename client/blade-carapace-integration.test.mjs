@@ -81,7 +81,7 @@ for (const tribe of tribes) test(`${tribe}: six authored actions, carry fallback
   assert.ok(tribe === 'bean' ? beanHeldHurtSource(ordinary) : speciesHeldHurtSource(ordinary));
 });
 
-test('welcome roster includes all four combinations and performs their own attack', () => {
+test('welcome roster includes all four combinations and shows their own idle', () => {
   assert.equal(WELCOME_UNIT_APPEARANCES.length, 18);
   const index = WELCOME_UNIT_APPEARANCES.findIndex(attributes => unitBladeCarapaceAppearance({ attributes }));
   assert.ok(index >= 0);
@@ -90,7 +90,7 @@ test('welcome roster includes all four combinations and performs their own attac
   assert.deepEqual([...selected].sort(), [...tribes].sort());
   for (const tribe of tribes) {
     const performance = welcomeUnitPerformance(agentFor(tribe), 10);
-    assert.equal(performance.action, 'attack'); assert.equal(performance.animation, definitionFor(tribe).actions.attack);
+    assert.equal(performance.action, 'idle'); assert.equal(performance.animation, definitionFor(tribe).actions.idle);
     assert.equal(unitActionArtPose(performance.agent, 10.1).animation, performance.animation);
   }
 });

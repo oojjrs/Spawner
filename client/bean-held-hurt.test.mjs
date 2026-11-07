@@ -73,15 +73,15 @@ test('new native atlases are registered exactly and source pixel comparisons pas
 test('actual laboratory stage draws held body through overlapping attacks, refresh and expiry',async()=>{
  const {createCombatStage}=await import('./combat-stage.mjs');
  const helpers=fs.readFileSync(new URL('./combat-stage-vfx.test.mjs',import.meta.url),'utf8');
- const box={assert,createCombatStage,globalThis};vm.createContext(box);
+ const box={assert,createCombatStage,globalThis,setImmediate};vm.createContext(box);
  vm.runInContext(helpers.slice(helpers.indexOf('const root ='),helpers.indexOf('\ntest(')),box);
- for(const key of ['base','blade','carapace','secretion','antenna','feet']) box.withStage(({draw,calls})=>{
+ for(const key of ['base','blade','carapace','secretion','antenna','feet']) await box.withStage(async({draw,calls})=>{
   const {trial,target}=box.setup();target.attributes=key==='base'?{}:{[key]:1};target.stats={health:100};
   target.hurtStartedAt=1;target.attack={startedAt:1,hitAt:1.3,endsAt:2};trial.time=1.45;
-  const before=JSON.stringify(trial.agents);draw(trial);
+  const before=JSON.stringify(trial.agents);await draw(trial);
   const held=()=>calls.filter(c=>c.name==='drawImage'&&c.args[0]?.src.includes('/BeanHeldHurtV1/'));
   assert.equal(held().length,1,key);assert.ok(held()[0].args[0].src.endsWith('/'+key+'.webp'));assert.equal(JSON.stringify(trial.agents),before);
-  target.hurtStartedAt=1.4;trial.time=1.85;draw(trial);assert.equal(held().length,1,key+' reset');
-  trial.time=2.281;draw(trial);assert.equal(held().length,0,key+' expired');
+  target.hurtStartedAt=1.4;trial.time=1.85;await draw(trial);assert.equal(held().length,1,key+' reset');
+  trial.time=2.281;await draw(trial);assert.equal(held().length,0,key+' expired');
  });
 });

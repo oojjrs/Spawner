@@ -7,19 +7,10 @@ export const WELCOME_UNIT_APPEARANCES = Object.freeze([
 
 export function welcomeUnitPerformance(agent, startedAt) {
   const definition = unitActionArtDefinition(agent);
-  const action = ["attack", "ranged", "harvest", "idle"].find(key => definition?.actions[key]);
-  const animation = definition?.actions[action] || definition?.reference;
+  const animation = definition?.actions.idle || definition?.reference;
   const durationMs = animation?.durationsMs.reduce((sum, value) => sum + value, 0) || 2000;
-  const performer = { ...agent, animationStartedAt: startedAt, moveDuration: 0, mode: "idle" };
-  if (action === "attack" || action === "ranged") {
-    performer.mode = "attack";
-    performer.attackStartedAt = startedAt;
-    performer.attack = { startedAt, endsAt: startedAt + durationMs / 1000, speed: 1, directionX: 1, mode: action };
-  } else if (action === "harvest") {
-    performer.mode = "harvest";
-    performer.harvestStarted = startedAt;
-  }
-  return { agent: performer, action: action || "idle", animation, durationMs };
+  const performer = { ...agent, animationStartedAt: startedAt, moveDuration: 0, mode: "idle", attack: null, attackStartedAt: undefined };
+  return { agent: performer, action: "idle", animation, durationMs };
 }
 
 export function createWelcomeRoster(tribes, species, variants, random = Math.random) {
@@ -63,7 +54,7 @@ export function welcomeCreatureScale(animation, bounds, top, displaySize, width,
 }
 
 // Construct the same cell moves used by the game; a complete move always lands
-// before switching to an idle/attack pose in the middle of the header.
+// before switching to an idle pose in the middle of the header.
 export function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsedMs, timeline, phase, startedAt, reducedMotion = false, id = "welcome", worldPixels }) {
   const neutral = !["bean", "spore", "pebble", "spring"].includes(key);
   const stats = neutral ? null : model.unitStats(attributes, key);
@@ -80,7 +71,7 @@ export function welcomeTravelMotion(model, { key, attributes = {}, width, size, 
   while (step < steps - 1 && timeline >= origin + (step + 1) * moveDuration) step++;
   const moveStartedAt = origin + step * moveDuration;
   const moveEndedAt = origin + (step + 1) * moveDuration;
-  const agent = { id, attributes, stats, carrying: 0, straightSteps: 0, health: stats?.health || 1, facing: neutral ? -1 : 1, mode: moving ? "walk" : "idle",
+  const agent = { id, attributes, stats, carrying: 0, straightSteps: 0, health: stats?.health || 1, facing: -1, mode: moving ? "walk" : "idle",
     ...(neutral ? { species: key } : { tribe: key }), stepCount: step + 1,
     moveDuration: moving ? moveEndedAt - moveStartedAt : 0, moveStartedAt,
     ...(!neutral ? { moveAnimationStartedAt: origin } : {}),
