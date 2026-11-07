@@ -35,7 +35,7 @@ function fixture(options) {
     SpawnerCombatAudio: { sources: {} },
     SpawnerMovementAudio: { sources: { "move-fast": "fast.mp3", "move-slow": "slow.mp3", "move-retry": "retry.mp3" }, levels: {} },
     SpawnerMusic: { create() { musicCreated++; return music; } },
-    SpawnerAssets: { source: file => file, welcomeReady: Promise.resolve(), ready: ready.promise },
+    SpawnerAssets: { source: file => file, load: async file => file, welcomeReady: Promise.resolve(), ready: ready.promise },
     fetch: async file => {
       fetches.set(file, (fetches.get(file) || 0) + 1);
       return { ok: !(file === "retry.mp3" && options.failure === "fetch" && fetches.get(file) === 1), arrayBuffer: async () => file };

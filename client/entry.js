@@ -108,6 +108,15 @@
       seed.music.update(null);
       seed.resumeMusic = resumeMusic;
     }
+    for (const source of ["./client/local-assets.js", "./client/assets.js", "./client/combat-audio.js", "./client/movement-audio.js", "./client/audio.js"]) {
+      if (loaded.has(source) || source === "./client/local-assets.js" && location.protocol !== "file:") continue;
+      await loadScript(source);
+      loaded.add(source);
+    }
+    if (!seed.audio) {
+      seed.audio = globalThis.SpawnerAudio.create();
+      seed.audio.playClick();
+    }
     globalThis.SpawnerWelcomeWaveform.create(seed.music.waveform);
     seed.resumeMusic?.();
     Promise.all([backgroundReady, Promise.race([seed.music.ready, seed.priority])]).catch(() => {});
