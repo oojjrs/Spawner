@@ -244,7 +244,7 @@ test('slow fallback finishing after recovery cannot replace the whole-body scene
   assert.deepEqual(art.frame(agent, at(40)).getContext('2d').calls.map(call => call[0].image), ['test/environment', 'test/body']);
 });
 
-test('all 14 published layered births render 1365 boundaries in both facings without hot-path promises or idle decode', async t => {
+test('all 14 published layered births render 1358 boundaries in both facings without hot-path promises or idle decode', async t => {
   const { ANTENNA_COMBO_ACTION_ART } = await import('./antenna-combo-assets.mjs');
   const { ANTENNA_COMBINATION_FORMS } = await import('./unit-combination-forms.mjs');
   const { createHook } = await import('node:async_hooks');
@@ -286,8 +286,8 @@ test('all 14 published layered births render 1365 boundaries in both facings wit
     for (const [entryIndex, [key, definition]] of entries.entries()) {
       const agent = agents[entryIndex], animation = definition.actions.birth;
       const duration = animation.durationsMs.reduce((sum, value) => sum + value, 0);
-      assert.equal(duration, agent.tribe === 'bean' ? 4500 : 3120);
-      assert.equal(animation.frameCount, agent.tribe === 'bean' ? 117 : 78);
+      assert.equal(duration, agent.tribe === 'bean' ? 3850 : 3120);
+      assert.equal(animation.frameCount, agent.tribe === 'bean' ? 116 : 78);
       assert.equal(animation.fullScene, true);
       assert.equal(animation.worldTravelIncludedInPixels, true);
       let elapsed = 0;
@@ -331,14 +331,14 @@ test('all 14 published layered births render 1365 boundaries in both facings wit
     }
   } finally { hook.disable(); }
   const elapsedMs = performance.now() - started;
-  assert.equal(boundaries, 1365);
-  assert.equal(draws, 2730);
+  assert.equal(boundaries, 1358);
+  assert.equal(draws, 2716);
   assert.equal(promises, 0, 'decoded scene rendering must not allocate asynchronous work');
   assert.equal(requested.length, 16, 'hot frames must not reload layers, references or fallback scenes');
   const rgbaBytes = [...atlases.values()].reduce((sum, image) => sum + image.width * image.height * 4, 0);
   const snapshot = hash.digest('hex');
   assert.equal(rgbaBytes, 518425600);
-  assert.equal(snapshot, '7d30fcd9d2d3bbd7c047334f8ba321569a765a0fa9ce5e33fa8429946d97b0e9',
+  assert.equal(snapshot, 'f95f4901fea1fa4f1763340bdfb98d4c9d368d49465434e2e1452449fc26a79b',
     'published source crops, destinations, facing and scene anchor snapshot');
   t.diagnostic(`Stub-only runtime: ${boundaries} boundaries, ${draws} facing draws, ${elapsedMs.toFixed(1)} ms; decoded atlas estimate ${rgbaBytes} bytes; snapshot ${snapshot}. No pixel decode or browser rendering measured.`);
 });

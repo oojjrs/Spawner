@@ -1,0 +1,92 @@
+{
+  "title": "spore carapace left-authored whole-body counterattack",
+  "tribe": "spore",
+  "form": "carapace",
+  "status": "independently-reviewed-whole-body-source",
+  "sourceFacing": "left",
+  "sourceAppearance": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/source-left-attack.png",
+  "sourceAppearanceSHA256": "62aa6e5147a4aa0d1a9bb09d400d0f7283c014997920e0e8792ea27904314790",
+  "approvedIdleReference": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/idle.webp",
+  "approvedIdleReferenceSHA256": "ea5cf1e85fd82026e36aa5e8ea8282cd5db90cc1eb999b04fe9ebd9ee1e1a1d5",
+  "supersedes": "AnimationCandidates/spore-carapace-counterattack-v2-20261107/publication-manifest.json",
+  "sourceCheckoutHead": "0e9ad27517ed4c283f2e16d89e471fcbbbe3c2f8",
+  "actions": {
+    "attack": {
+      "sheet": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/attack-left.png",
+      "preview": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/attack-left-preview.webp",
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        60,
+        70,
+        60,
+        80,
+        30,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        70,
+        80,
+        90,
+        100,
+        60
+      ],
+      "durationMs": 1000,
+      "loop": false,
+      "previewLoop": true,
+      "sheetSHA256": "6e4622468d23251078d363f60f3b9eb58b5bb849e1558138469ef2bf5e4f059c",
+      "previewSHA256": "4cf315d01599fe20baeb7e2531ca9109335d119552399fdaf9af22c885f474d6",
+      "sourceFacing": "left",
+      "pivotX": 128,
+      "pivotY": 230,
+      "referenceLength": 177,
+      "viewSize": 256,
+      "registrationScale": 1,
+      "hitFrameIndex": 5,
+      "hitTimeMs": 300,
+      "defensiveRetaliation": true,
+      "fullScene": false,
+      "bodyPartComposition": false,
+      "projectileBakedIntoBodySheet": false
+    }
+  },
+  "publication": {
+    "candidateManifestDestination": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/publication-manifest.json",
+    "imageDestination": "DesignAssets/Animations/DefensiveAttackV1/spore/carapace/attack.png",
+    "registryPatch": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/registry-publication-patch.json",
+    "candidateRuntimePatch": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/registry-patch-proposal.json",
+    "preserveOtherRegistryKeys": true
+  },
+  "method": "Built-in image_gen whole-body leftward animation from actual idle. Technical processing only: equal-cell extraction, isolated transparent fringe cleanup, one uniform clip-wide scale, whole-frame registration, exact source idle endpoint copies. No body-part composition, no nonuniform warps, no full-sheet mirror/relabel trick.",
+  "prompt": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/generation-prompt.txt",
+  "registration": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/registration.json",
+  "verification": {
+    "rawFirstRGBAEqualsIdle0": true,
+    "rawLastRGBAEqualsIdle0": true,
+    "opaqueEdgeClippingFrames": [],
+    "timingPreserved": true,
+    "hitTimePreserved": true,
+    "runtimeReport": "AnimationCandidates/carapace-left-counterattack-v1-20261107/runtime-verification.json",
+    "renderedRGBA_note": "PNG and WebP decoding can differ by up to 2/255 in premultiplied RGB. Actual runtime destination and alpha are exact; this is not reported as bit-identical rendered RGBA. Endpoints equal idle frame0; resumed idle retains its existing time-based breathing phase.",
+    "continuousBrowserPlayback": "not tested",
+    "independentVisualReview": "Approved by parent audit after viewing both target-direction contact sheets and every authored pose."
+  },
+  "qa": {
+    "allPoses": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/all-poses.jpg",
+    "targetLeft": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/target-left-transitions.jpg",
+    "targetRight": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/target-right-transitions.jpg",
+    "runtimeAllLeft": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/runtime-left-all-poses.jpg",
+    "runtimeAllRight": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/runtime-right-all-poses.jpg"
+  },
+  "bodyPartComposition": false,
+  "combatRulesModified": false,
+  "gameIntegration": false,
+  "deployment": false
+}

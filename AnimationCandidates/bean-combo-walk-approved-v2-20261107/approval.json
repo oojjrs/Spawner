@@ -1,0 +1,53 @@
+{
+  "approvedForms": [
+    {
+      "form": "blade-carapace",
+      "sha256": "50350b05bb653c9b311f3b0df9d7de4b98f555bdc42e1bb9227be55de3538679"
+    },
+    {
+      "form": "blade-carapace-antenna",
+      "sha256": "4796ebd9279db8a3b47d69cc6afdafe267cd5e2d5ef65eda38b1998aa0c72a4d"
+    },
+    {
+      "form": "blade-secretion",
+      "sha256": "e9ffa861c116adfa845a45db7dab77789cd5b7381cf21ce9908dba2b3ac48bf1"
+    },
+    {
+      "form": "blade-secretion-antenna",
+      "sha256": "1cc9e05492489459ec46ee883b7e24e2cf560516ae683931b34f4658b9b44d36"
+    },
+    {
+      "form": "blade-secretion-carapace-antenna",
+      "sha256": "d910a1643975800cc8e65414f82feb8337b8ae0ae7a0b5e9d63a77d72f6eee28"
+    },
+    {
+      "form": "carapace-antenna",
+      "sha256": "f858f1d1935b8071ff75b2ed3411079968d5f6eaadb4d79edab67ac1cf867062"
+    },
+    {
+      "form": "secretion-antenna",
+      "sha256": "7433684c29b33a14f8806a618354c5ed86173012affa8d12eaa703ea60c06023"
+    },
+    {
+      "form": "secretion-carapace",
+      "sha256": "74e448a110d64651a88d7b6c84b29d1c6f00cfb5b13c1db566dfc38236ef6305"
+    },
+    {
+      "form": "secretion-carapace-antenna",
+      "sha256": "f0c34e5d5098dee40ad7f395c4bdfb6e6cba35f55ddaac7dc56753fb6ce672e1"
+    },
+    {
+      "form": "blade-antenna",
+      "sha256": "5669cf4eb8ca727c906b51861113d9c9a608c4e4db295bddc65614cae6e71dfe"
+    }
+  ],
+  "excludedForms": [
+    "blade-secretion-carapace"
+  ],
+  "runtimeChecks": 5920,
+  "limits": [
+    "Small generated outline and antenna stem weight differences remain.",
+    "No continuous browser playback observed.",
+    "Only incomplete blade-secretion-carapace is excluded."
+  ]
+}

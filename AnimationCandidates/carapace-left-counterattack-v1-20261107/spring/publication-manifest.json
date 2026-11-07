@@ -1,0 +1,92 @@
+{
+  "title": "spring carapace left-authored whole-body counterattack",
+  "tribe": "spring",
+  "form": "carapace",
+  "status": "independently-reviewed-whole-body-source",
+  "sourceFacing": "left",
+  "sourceAppearance": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/source-left-attack.png",
+  "sourceAppearanceSHA256": "73e2efed2580c5b7b3f1cea341c05cfec9685f4c1e3eb8ca456f1274a8587e48",
+  "approvedIdleReference": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/idle.webp",
+  "approvedIdleReferenceSHA256": "1fcb69c07d41f1c1c82e876bd81f1ba4a69acee6eaebf6d5dacdf5af01ad2307",
+  "supersedes": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace/publication-manifest.json",
+  "sourceCheckoutHead": "0e9ad27517ed4c283f2e16d89e471fcbbbe3c2f8",
+  "actions": {
+    "attack": {
+      "sheet": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/attack-left.png",
+      "preview": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/attack-left-preview.webp",
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        60,
+        70,
+        60,
+        80,
+        30,
+        100,
+        100,
+        100,
+        40,
+        40,
+        40,
+        40,
+        40,
+        50,
+        60,
+        90
+      ],
+      "durationMs": 1000,
+      "loop": false,
+      "previewLoop": true,
+      "sheetSHA256": "061901ed0434c7c5fc940c77e7611ee9e51b23b3ee45858f73eee5bb0fc94af7",
+      "previewSHA256": "b5600a120565b23a8910f3d5976f6930f91f97b4ff6b149a253bb6215ce93c78",
+      "sourceFacing": "left",
+      "pivotX": 128,
+      "pivotY": 230,
+      "referenceLength": 157,
+      "viewSize": 256,
+      "registrationScale": 1,
+      "hitFrameIndex": 5,
+      "hitTimeMs": 300,
+      "defensiveRetaliation": true,
+      "fullScene": false,
+      "bodyPartComposition": false,
+      "projectileBakedIntoBodySheet": false
+    }
+  },
+  "publication": {
+    "candidateManifestDestination": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/publication-manifest.json",
+    "imageDestination": "DesignAssets/Animations/DefensiveAttackV1/spring/carapace/attack.png",
+    "registryPatch": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/registry-publication-patch.json",
+    "candidateRuntimePatch": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/registry-patch-proposal.json",
+    "preserveOtherRegistryKeys": true
+  },
+  "method": "Built-in image_gen whole-body leftward animation from actual idle. Technical processing only: equal-cell extraction, isolated transparent fringe cleanup, one uniform clip-wide scale, whole-frame registration, exact source idle endpoint copies. No body-part composition, no nonuniform warps, no full-sheet mirror/relabel trick.",
+  "prompt": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/generation-prompt.txt",
+  "registration": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/registration.json",
+  "verification": {
+    "rawFirstRGBAEqualsIdle0": true,
+    "rawLastRGBAEqualsIdle0": true,
+    "opaqueEdgeClippingFrames": [],
+    "timingPreserved": true,
+    "hitTimePreserved": true,
+    "runtimeReport": "AnimationCandidates/carapace-left-counterattack-v1-20261107/runtime-verification.json",
+    "renderedRGBA_note": "PNG and WebP decoding can differ by up to 2/255 in premultiplied RGB. Actual runtime destination and alpha are exact; this is not reported as bit-identical rendered RGBA. Endpoints equal idle frame0; resumed idle retains its existing time-based breathing phase.",
+    "continuousBrowserPlayback": "not tested",
+    "independentVisualReview": "Approved by parent audit after viewing both target-direction contact sheets and every authored pose."
+  },
+  "qa": {
+    "allPoses": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/all-poses.jpg",
+    "targetLeft": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/target-left-transitions.jpg",
+    "targetRight": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/target-right-transitions.jpg",
+    "runtimeAllLeft": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/runtime-left-all-poses.jpg",
+    "runtimeAllRight": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/runtime-right-all-poses.jpg"
+  },
+  "bodyPartComposition": false,
+  "combatRulesModified": false,
+  "gameIntegration": false,
+  "deployment": false
+}

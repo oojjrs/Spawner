@@ -94,8 +94,8 @@
       "previewMatchesSheetRGBA": true
     },
     "walk": {
-      "sheet": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-sheet.png",
-      "preview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-transparent-preview.webp",
+      "sheet": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/walk.png",
+      "preview": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/preview.webp",
       "frameSize": 512,
       "columns": 8,
       "frameCount": 24,
@@ -126,9 +126,9 @@
         40
       ],
       "durationMs": 960,
-      "loop": false,
-      "sheetSHA256": "4be35e0ed1737b76bd470d9e83df47205b55ecfaa8d31291cc8704ef7f95c7e9",
-      "previewSHA256": "06738a49514d335ebd4a49ff9713bb48e3fa31cba08f15f7ab15524d7840f47c",
+      "loop": true,
+      "sheetSHA256": "50350b05bb653c9b311f3b0df9d7de4b98f555bdc42e1bb9227be55de3538679",
+      "previewSHA256": "d21c6cc491b3ed5d1ac7f49367392be10b23e5989af74953434ef1659286ad87",
       "gifDecodedFrames": 9,
       "timelineMaxRGBRMSE": 1.083058,
       "legacyGIFPreview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-preview.gif",
@@ -137,7 +137,43 @@
       "previewLoopCount": 0,
       "previewFormat": "lossless-webp",
       "previewDecodedFrames": 9,
-      "previewMatchesSheetRGBA": true
+      "previewMatchesSheetRGBA": true,
+      "supersededWalk": {
+        "sheet": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-sheet.png",
+        "sheetSHA256": "4be35e0ed1737b76bd470d9e83df47205b55ecfaa8d31291cc8704ef7f95c7e9",
+        "preview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-transparent-preview.webp",
+        "previewSHA256": "06738a49514d335ebd4a49ff9713bb48e3fa31cba08f15f7ab15524d7840f47c"
+      },
+      "manifest": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/manifest.json",
+      "sourceFacing": "right",
+      "previewFacing": "right",
+      "previewTargetFacing": "left",
+      "previewDurationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40
+      ]
     },
     "attack": {
       "sheet": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-sheet.png",

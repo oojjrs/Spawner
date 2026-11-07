@@ -1,0 +1,125 @@
+{
+  "tribe": "pebble",
+  "form": "blade-secretion",
+  "actions": {
+    "birth": {
+      "durationsMs": [
+        330,
+        250,
+        70,
+        65,
+        65,
+        65,
+        65,
+        33,
+        33,
+        32,
+        32,
+        200,
+        250,
+        650
+      ],
+      "durationMs": 2140,
+      "loop": false,
+      "frameSize": 512,
+      "columns": 4,
+      "frameCount": 14,
+      "sheet": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion/birth.png",
+      "preview": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion/birth-preview.webp",
+      "sheetSHA256": "03ffaecef1f4f3f05823bc0c7e0fa3e22e390011335e0188866e4251dd41bb45",
+      "previewSHA256": "9eaa64d205e41a084d536c8fc122e5cfd4cfa032bec2dc4c9e4cfeea5a8c641c",
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "fullScene": true,
+      "sourceFacing": "right",
+      "frameHeight": 512,
+      "pivotX": 377,
+      "pivotY": 444,
+      "referenceLength": 160,
+      "viewSize": 160,
+      "registrationScale": 1,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneIncludesNest": true,
+      "previewDurationMs": 2140,
+      "previewDurationsMs": [
+        330,
+        250,
+        70,
+        65,
+        65,
+        65,
+        65,
+        33,
+        33,
+        32,
+        32,
+        200,
+        250,
+        650
+      ],
+      "supersededBirth": {
+        "durationsMs": [
+          330,
+          250,
+          200,
+          130,
+          130,
+          200,
+          250,
+          650
+        ],
+        "durationMs": 2140,
+        "loop": false,
+        "frameSize": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "sheet": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-sheet.png",
+        "preview": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-preview.webp",
+        "gif": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-preview.gif",
+        "sheetSHA256": "cc304f8947a9ff2045c28850d9f390f1b095a3fe8d887a8097281d585a4b5118",
+        "previewSHA256": "174d5de2a36f8c2596746496b7f0a5a8ad1e1a134492f5b2b50c9fba7b6631ad",
+        "gifSHA256": "3dd1618f58ed876369c400e11043f507fa8d6fadd4f842b2f0aeeff303d5e427",
+        "previewLoop": true,
+        "previewLoopCount": 0,
+        "fullScene": true
+      }
+    }
+  },
+  "originalSourceImage": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/birth.png",
+  "originalSourceSHA256": "cc304f8947a9ff2045c28850d9f390f1b095a3fe8d887a8097281d585a4b5118",
+  "preservedOriginalFrames": [
+    {
+      "candidateFrame": 0,
+      "sourceFrame": 0,
+      "pixelExact": true
+    },
+    {
+      "candidateFrame": 1,
+      "sourceFrame": 1,
+      "pixelExact": true
+    },
+    {
+      "candidateFrame": 2,
+      "sourceFrame": 2,
+      "pixelExact": true
+    },
+    {
+      "candidateFrame": 11,
+      "sourceFrame": 5,
+      "pixelExact": true
+    },
+    {
+      "candidateFrame": 12,
+      "sourceFrame": 6,
+      "pixelExact": true
+    },
+    {
+      "candidateFrame": 13,
+      "sourceFrame": 7,
+      "pixelExact": true
+    }
+  ],
+  "independentReview": "Approved by audit_all_animations; continuous browser playback not claimed.",
+  "originalSourceSheet": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-sheet.png"
+}

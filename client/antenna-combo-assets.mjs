@@ -281,7 +281,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -398,10 +398,9 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.2299461451247,
         "pivotY": 446.0,
         "referenceLength": 41.09375,
@@ -1466,15 +1465,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -1970,15 +1960,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     80,
                     80
                   ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
-                    80,
-                    80
-                  ]
                 }
               ]
             }
@@ -2301,7 +2282,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -2418,10 +2399,9 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.30054419525067,
         "pivotY": 446.15625,
         "referenceLength": 43.59375,
@@ -3486,15 +3466,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -3990,15 +3961,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     80,
                     80
                   ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
-                    80,
-                    80
-                  ]
                 }
               ]
             }
@@ -4364,7 +4326,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -4481,10 +4443,9 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.1385542168675,
         "pivotY": 446.0,
         "referenceLength": 43.59375,
@@ -5549,15 +5510,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -6053,15 +6005,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     80,
                     80
                   ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
-                    80,
-                    80
-                  ]
                 }
               ]
             }
@@ -6427,7 +6370,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -6544,10 +6487,9 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.29231039325845,
         "pivotY": 446.0,
         "referenceLength": 43.59375,
@@ -7612,15 +7554,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -8116,15 +8049,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     80,
                     80
                   ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
-                    80,
-                    80
-                  ]
                 }
               ]
             }
@@ -8413,7 +8337,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -8530,10 +8454,9 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.31443858560795,
         "pivotY": 446.0,
         "referenceLength": 40.46875,
@@ -9598,15 +9521,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -10102,15 +10016,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     80,
                     80
                   ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
-                    80,
-                    80
-                  ]
                 }
               ]
             }
@@ -10442,7 +10347,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -10559,10 +10464,9 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.2571145533141,
         "pivotY": 446.0,
         "referenceLength": 37.96875,
@@ -11627,15 +11531,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -12131,15 +12026,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     80,
                     80
                   ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
-                    80,
-                    80
-                  ]
                 }
               ]
             }
@@ -12471,7 +12357,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -12588,10 +12474,9 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.14269406392697,
         "pivotY": 446.0,
         "referenceLength": 40.9375,
@@ -13656,15 +13541,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -14094,15 +13970,6 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                   "destination": [
                     390,
                     375.98654819277107,
-                    80,
-                    80
-                  ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
                     80,
                     80
                   ]

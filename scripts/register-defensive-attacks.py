@@ -89,7 +89,7 @@ def main():
         definitions[key] = {'image': image_path, 'sourceManifest': relative, 'sourceFacing': facing,
             'frameSize': width, 'frameHeight': height, 'columns': columns, 'frameCount': count,
             'durationsMs': durations, 'durationMs': sum(durations), 'pivotX': px, 'pivotY': py,
-            'referenceLength': length, 'viewSize': length, 'registrationScale': 1, 'loop': False,
+            'referenceLength': length, 'viewSize': record.get('viewSize', length), 'registrationScale': 1, 'loop': False,
             'hitTimeMs': hit, 'defensiveRetaliation': True}
     if args.complete:
         assert len(definitions) == 12, (len(definitions), 'all four tribes and three forms required')

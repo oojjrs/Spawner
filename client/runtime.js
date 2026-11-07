@@ -301,10 +301,10 @@ const DEFENSIVE_ATTACK_ART = Object.freeze({
   },
   "pebble/carapace": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace/attack.png",
-    "sourceManifest": "AnimationCandidates/pebble-carapace-defensive-attack-v1-20261107/publication-manifest.json",
-    "sourceFacing": "right",
-    "frameSize": 512,
-    "frameHeight": 512,
+    "sourceManifest": "AnimationCandidates/carapace-left-counterattack-v1-20261107/pebble/publication-manifest.json",
+    "sourceFacing": "left",
+    "frameSize": 256,
+    "frameHeight": 256,
     "columns": 4,
     "frameCount": 8,
     "durationsMs": [
@@ -318,10 +318,10 @@ const DEFENSIVE_ATTACK_ART = Object.freeze({
       230
     ],
     "durationMs": 980,
-    "pivotX": 240.5,
-    "pivotY": 450,
-    "referenceLength": 379,
-    "viewSize": 379,
+    "pivotX": 128,
+    "pivotY": 230,
+    "referenceLength": 181,
+    "viewSize": 256,
     "registrationScale": 1,
     "loop": false,
     "hitTimeMs": 450,
@@ -393,10 +393,10 @@ const DEFENSIVE_ATTACK_ART = Object.freeze({
   },
   "spore/carapace": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/spore/carapace/attack.png",
-    "sourceManifest": "AnimationCandidates/spore-carapace-counterattack-v2-20261107/publication-manifest.json",
-    "sourceFacing": "right",
-    "frameSize": 512,
-    "frameHeight": 512,
+    "sourceManifest": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/publication-manifest.json",
+    "sourceFacing": "left",
+    "frameSize": 256,
+    "frameHeight": 256,
     "columns": 4,
     "frameCount": 16,
     "durationsMs": [
@@ -418,10 +418,10 @@ const DEFENSIVE_ATTACK_ART = Object.freeze({
       60
     ],
     "durationMs": 1000,
-    "pivotX": 256.0,
-    "pivotY": 418,
-    "referenceLength": 298,
-    "viewSize": 298,
+    "pivotX": 128,
+    "pivotY": 230,
+    "referenceLength": 177,
+    "viewSize": 256,
     "registrationScale": 1,
     "loop": false,
     "hitTimeMs": 300,
@@ -501,10 +501,10 @@ const DEFENSIVE_ATTACK_ART = Object.freeze({
   },
   "spring/carapace": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/spring/carapace/attack.png",
-    "sourceManifest": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace/publication-manifest.json",
-    "sourceFacing": "right",
-    "frameSize": 480,
-    "frameHeight": 480,
+    "sourceManifest": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/publication-manifest.json",
+    "sourceFacing": "left",
+    "frameSize": 256,
+    "frameHeight": 256,
     "columns": 4,
     "frameCount": 16,
     "durationsMs": [
@@ -526,10 +526,10 @@ const DEFENSIVE_ATTACK_ART = Object.freeze({
       90
     ],
     "durationMs": 1000,
-    "pivotX": 240.0,
-    "pivotY": 368,
-    "referenceLength": 185,
-    "viewSize": 185,
+    "pivotX": 128,
+    "pivotY": 230,
+    "referenceLength": 157,
+    "viewSize": 256,
     "registrationScale": 1,
     "loop": false,
     "hitTimeMs": 300,
@@ -861,7 +861,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -978,10 +978,9 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.2299461451247,
         "pivotY": 446.0,
         "referenceLength": 41.09375,
@@ -2046,15 +2045,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -2550,15 +2540,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     80,
                     80
                   ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
-                    80,
-                    80
-                  ]
                 }
               ]
             }
@@ -2881,7 +2862,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -2998,10 +2979,9 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.30054419525067,
         "pivotY": 446.15625,
         "referenceLength": 43.59375,
@@ -4066,15 +4046,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -4570,15 +4541,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     80,
                     80
                   ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
-                    80,
-                    80
-                  ]
                 }
               ]
             }
@@ -4944,7 +4906,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -5061,10 +5023,9 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.1385542168675,
         "pivotY": 446.0,
         "referenceLength": 43.59375,
@@ -6129,15 +6090,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -6633,15 +6585,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     80,
                     80
                   ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
-                    80,
-                    80
-                  ]
                 }
               ]
             }
@@ -7007,7 +6950,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -7124,10 +7067,9 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.29231039325845,
         "pivotY": 446.0,
         "referenceLength": 43.59375,
@@ -8192,15 +8134,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -8696,15 +8629,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     80,
                     80
                   ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
-                    80,
-                    80
-                  ]
                 }
               ]
             }
@@ -8993,7 +8917,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -9110,10 +9034,9 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.31443858560795,
         "pivotY": 446.0,
         "referenceLength": 40.46875,
@@ -10178,15 +10101,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -10682,15 +10596,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     80,
                     80
                   ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
-                    80,
-                    80
-                  ]
                 }
               ]
             }
@@ -11022,7 +10927,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -11139,10 +11044,9 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.2571145533141,
         "pivotY": 446.0,
         "referenceLength": 37.96875,
@@ -12207,15 +12111,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -12711,15 +12606,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     80,
                     80
                   ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
-                    80,
-                    80
-                  ]
                 }
               ]
             }
@@ -13051,7 +12937,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -13168,10 +13054,9 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430.14269406392697,
         "pivotY": 446.0,
         "referenceLength": 40.9375,
@@ -14236,15 +14121,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                     434,
                     424
                   ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    49,
-                    29,
-                    434,
-                    424
-                  ]
                 }
               ]
             },
@@ -14674,15 +14550,6 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                   "destination": [
                     390,
                     375.98654819277107,
-                    80,
-                    80
-                  ]
-                },
-                {
-                  "frame": 15,
-                  "destination": [
-                    390,
-                    376,
                     80,
                     80
                   ]
@@ -29959,7 +29826,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -30076,10 +29943,9 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430,
         "pivotY": 446,
         "referenceLength": 34.375,
@@ -30450,7 +30316,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -30567,10 +30433,9 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430,
         "pivotY": 446,
         "referenceLength": 40.9375,
@@ -30941,7 +30806,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -31058,10 +30923,9 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430,
         "pivotY": 446,
         "referenceLength": 43.59375,
@@ -32232,13 +32096,19 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
-        "frameCount": 8,
+        "frameCount": 14,
         "durationsMs": [
           330,
           250,
-          200,
-          130,
-          130,
+          70,
+          65,
+          65,
+          65,
+          65,
+          33,
+          33,
+          32,
+          32,
           200,
           250,
           650
@@ -32446,13 +32316,19 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
-        "frameCount": 8,
+        "frameCount": 14,
         "durationsMs": [
           330,
           250,
-          200,
-          130,
-          130,
+          70,
+          65,
+          65,
+          65,
+          65,
+          33,
+          33,
+          32,
+          32,
           200,
           250,
           650
@@ -32660,13 +32536,19 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
-        "frameCount": 8,
+        "frameCount": 14,
         "durationsMs": [
           330,
           250,
-          200,
-          130,
-          130,
+          70,
+          65,
+          65,
+          65,
+          65,
+          33,
+          33,
+          32,
+          32,
           200,
           250,
           650
@@ -33799,7 +33681,7 @@ const BLADE_CARAPACE_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
-        "frameCount": 117,
+        "frameCount": 116,
         "durationsMs": [
           40,
           40,
@@ -33916,10 +33798,9 @@ const BLADE_CARAPACE_ACTION_ART = Object.freeze({
           40,
           40,
           40,
-          10,
-          650
+          10
         ],
-        "durationMs": 4500,
+        "durationMs": 3850,
         "pivotX": 430,
         "pivotY": 446,
         "referenceLength": 43.59375,
@@ -34406,13 +34287,18 @@ const BLADE_CARAPACE_ACTION_ART = Object.freeze({
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
-        "frameCount": 8,
+        "frameCount": 13,
         "durationsMs": [
           330,
           250,
-          200,
-          130,
-          130,
+          70,
+          65,
+          65,
+          65,
+          65,
+          43,
+          43,
+          44,
           200,
           250,
           650

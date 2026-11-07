@@ -1,0 +1,38 @@
+{
+  "spore/carapace": {
+    "image": "DesignAssets/Animations/DefensiveAttackV1/spore/carapace/attack.png",
+    "sourceManifest": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/publication-manifest.json",
+    "sourceFacing": "left",
+    "frameSize": 256,
+    "frameHeight": 256,
+    "columns": 4,
+    "frameCount": 16,
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      70,
+      80,
+      90,
+      100,
+      60
+    ],
+    "durationMs": 1000,
+    "pivotX": 128,
+    "pivotY": 230,
+    "referenceLength": 177,
+    "viewSize": 256,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 300,
+    "defensiveRetaliation": true
+  }
+}

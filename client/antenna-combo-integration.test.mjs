@@ -87,8 +87,10 @@ test('all 28 antenna forms are complete with 172 byte-exact clips and 28 portrai
     for (const [action, clip] of Object.entries(definition.actions)) {
       const record = source.actions[action] || source.actions['ranged-attack'];
       assert.equal(sha(clip.image), record.sheetSHA256, key + '/' + action);
-      assert.deepEqual(clip.durationsMs, record.durationsMs);
-      assert.equal(clip.durationMs, record.durationMs);
+      const reviewHold = tribe === 'bean' && action === 'birth';
+      if (reviewHold) { assert.equal(record.durationsMs.at(-1), 650); assert.equal(record.durationMs, 4500); }
+      assert.deepEqual(clip.durationsMs, reviewHold ? record.durationsMs.slice(0, -1) : record.durationsMs);
+      assert.equal(clip.durationMs, reviewHold ? 3850 : record.durationMs);
       assert.equal(clip.loop, ['idle', 'walk'].includes(action)); clips++;
     }
   }
@@ -271,8 +273,23 @@ test('existing combinations and antenna singles preserve original actions except
   for (const [key, definition] of Object.entries(baseline.definitions)) {
     const expected = DEFENSIVE_ATTACK_ART[key] ? { ...definition, actions: { ...definition.actions, attack: DEFENSIVE_ATTACK_ART[key] } } : definition;
     if (key === 'bean/antenna') expected.actions.carry = definition.actions.walk;
+    if (key.startsWith('bean/') && expected.actions.birth?.durationMs === 4500) {
+      expected.actions.birth = { ...expected.actions.birth, frameCount: 116, durationMs: 3850,
+        durationsMs: expected.actions.birth.durationsMs.slice(0, -1) };
+    }
+    if (key.startsWith('pebble/') && ['blade-carapace', 'blade-secretion', 'secretion-carapace', 'blade-secretion-carapace'].includes(key.split('/')[1])) {
+      const approved = JSON.parse(read('AnimationCandidates/pebble-combo-birth-roll-v2-20261107/' + key.split('/')[1] + '/publication-manifest.json')).actions.birth;
+      expected.actions.birth = { ...expected.actions.birth, frameCount: approved.frameCount, durationsMs: approved.durationsMs };
+    }
     assert.deepEqual(UNIT_ACTION_ART[key], expected, key);
   }
   for (const [key, clip] of Object.entries(baseline.birth)) assert.deepEqual(UNIT_BIRTH_ART[key], clip, key);
-  for (const [image, hash] of Object.entries(baseline.sourceImages)) assert.equal(sha(image), hash, image);
+  const approvedHashes = new Map();
+  for (const form of ['blade-carapace', 'blade-secretion', 'secretion-carapace', 'blade-secretion-carapace']) {
+    const approved = JSON.parse(read('AnimationCandidates/pebble-combo-birth-roll-v2-20261107/' + form + '/publication-manifest.json'));
+    approvedHashes.set(UNIT_ACTION_ART['pebble/' + form].actions.birth.image, approved.actions.birth.sheetSHA256);
+  }
+  for (const entry of JSON.parse(read('AnimationCandidates/bean-combo-walk-approved-v2-20261107/approval.json')).approvedForms)
+    approvedHashes.set(UNIT_ACTION_ART['bean/' + entry.form].actions.walk.image, entry.sha256);
+  for (const [image, hash] of Object.entries(baseline.sourceImages)) assert.equal(sha(image), approvedHashes.get(image) || hash, image);
 });

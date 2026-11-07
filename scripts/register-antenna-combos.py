@@ -11,6 +11,7 @@ import json
 import math
 import shutil
 from PIL import Image
+from birth_runtime import trim_bean_birth_review_hold
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / 'AnimationCandidates/antenna-combinations-v1-20261107/publications.json'
@@ -145,6 +146,8 @@ def main():
                 layers = scene_layers(path, record, policy)
                 if layers is not None:
                     clip['sceneLayers'] = layers
+                if tribe == 'bean':
+                    trim_bean_birth_review_hold(clip, source)
             actions[action] = clip
             register_image(policy, dest, width, height, columns, rows)
             if action == 'idle':

@@ -6,6 +6,7 @@ Run from any directory with Pillow installed.
 from pathlib import Path
 import hashlib, json, math, shutil
 from PIL import Image
+from birth_runtime import trim_bean_birth_review_hold
 
 ROOT = Path(__file__).resolve().parents[1]
 SPECIES = ('bean', 'spore', 'pebble', 'spring')
@@ -75,6 +76,8 @@ def main():
             if action == 'birth':
                 clip.update(fullScene=True, worldTravelIncludedInPixels=True,
                             sceneAnchor='final-body-floor', sceneIncludesNest=True)
+                if tribe == 'bean':
+                    trim_bean_birth_review_hold(clip, src)
             actions[action] = clip
             register(policy, dest, width, height, columns, rows)
             if action == 'idle':

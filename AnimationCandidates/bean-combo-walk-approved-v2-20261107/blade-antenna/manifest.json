@@ -1,0 +1,78 @@
+{
+  "key": "bean/blade-antenna",
+  "action": "walk",
+  "sheet": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-antenna/walk.png",
+  "sheetSHA256": "5669cf4eb8ca727c906b51861113d9c9a608c4e4db295bddc65614cae6e71dfe",
+  "preview": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-antenna/preview.webp",
+  "previewSHA256": "575494b269c7346fd1bf7df14ba27f96447eb43d3be7c4b4b168b7586c7c10eb",
+  "frameSize": 512,
+  "frameHeight": 512,
+  "columns": 8,
+  "frameCount": 24,
+  "durationsMs": [
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40
+  ],
+  "durationMs": 960,
+  "sourceFacing": "right",
+  "previewFacing": "right",
+  "previewTargetFacing": "left",
+  "pivotX": 257.4716553287982,
+  "pivotY": 448,
+  "referenceLength": 263,
+  "originalSource": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-walk-v1-sheet.png",
+  "originalSourceSHA256": "33ef872a664c5ae3aec1b7e50faae49354b3da43f4e7bf5f9255345f89419a82",
+  "fullBody": true,
+  "redrawnCells": [
+    2,
+    4,
+    17,
+    19,
+    21
+  ],
+  "approval": "independent-ordered-pose-approved",
+  "continuousBrowserPlayback": false,
+  "firstLastMatchActualIdle": true,
+  "limitations": [
+    "Small generated outline and antenna stem weight differences remain.",
+    "No continuous browser playback observed.",
+    "Only incomplete blade-secretion-carapace is excluded.",
+    "f21 leaf/antenna total height 281px versus f20 267px and f22 263px; independently accepted as small elastic recovery."
+  ],
+  "provenance": {
+    "source": "/workspace/shared/bean-combo-walk-motion-v2-20261107/expanded/blade-antenna/generated-recovery.png",
+    "sourceSha256": "332ff4c8333d93f8417fcfdca28c3c4d2fdcdad616f7173d36af4a4845866eb4",
+    "existingLeftUsedFor": [
+      4,
+      17
+    ],
+    "existingRightUsedFor": [
+      2,
+      19,
+      21
+    ],
+    "newGenerationCalls": 0
+  }
+}

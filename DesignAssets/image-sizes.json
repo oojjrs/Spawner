@@ -12842,14 +12842,14 @@
     "DesignAssets/Animations/BladeCarapaceV1/bean/walk.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         8,
         3
       ],
       "nativeSource": {
-        "sha256": "4be35e0ed1737b76bd470d9e83df47205b55ecfaa8d31291cc8704ef7f95c7e9",
+        "sha256": "50350b05bb653c9b311f3b0df9d7de4b98f555bdc42e1bb9227be55de3538679",
         "dimensions": [
           4096,
           1536
@@ -13199,17 +13199,17 @@
     "DesignAssets/Animations/BladeCarapaceV1/pebble/birth.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         4,
-        2
+        4
       ],
       "nativeSource": {
-        "sha256": "2983c85114baf165d73f34c0490d1825cef54e3d7d211fdd16bc3663b6e4d78b",
+        "sha256": "fc5afb78d74c757897c3508fe24e1f85e1c8ec727a14d69a90dabb3dce9dc9f1",
         "dimensions": [
           2048,
-          1024
+          2048
         ],
         "frame": [
           512,
@@ -13430,14 +13430,14 @@
     "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/walk.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         8,
         3
       ],
       "nativeSource": {
-        "sha256": "e264fe56d0c56b1271cdd2b786a052df4cfee77408e393054cb22b511281f510",
+        "sha256": "74e448a110d64651a88d7b6c84b29d1c6f00cfb5b13c1db566dfc38236ef6305",
         "dimensions": [
           4096,
           1536
@@ -13577,14 +13577,14 @@
     "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/walk.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         8,
         3
       ],
       "nativeSource": {
-        "sha256": "59cfab71f3925c6648baf782e30d023f13332b80796e41564eb53a26c4132c1e",
+        "sha256": "e9ffa861c116adfa845a45db7dab77789cd5b7381cf21ce9908dba2b3ac48bf1",
         "dimensions": [
           4096,
           1536
@@ -13976,17 +13976,17 @@
     "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/birth.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         4,
-        2
+        4
       ],
       "nativeSource": {
-        "sha256": "c801e684d96b4b659ad061e783d379637fb3a06d0af2600cfcd0f6aa5af15f25",
+        "sha256": "e181a8f3a3e9958085729b3a0cd255c9dc8952cfb8db32f48a811bd422140426",
         "dimensions": [
           2048,
-          1024
+          2048
         ],
         "frame": [
           512,
@@ -14144,17 +14144,17 @@
     "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/birth.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         4,
-        2
+        4
       ],
       "nativeSource": {
-        "sha256": "cc304f8947a9ff2045c28850d9f390f1b095a3fe8d887a8097281d585a4b5118",
+        "sha256": "03ffaecef1f4f3f05823bc0c7e0fa3e22e390011335e0188866e4251dd41bb45",
         "dimensions": [
           2048,
-          1024
+          2048
         ],
         "frame": [
           512,
@@ -14312,17 +14312,17 @@
     "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/birth.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         4,
-        2
+        4
       ],
       "nativeSource": {
-        "sha256": "34c7456540441caa3bf8dfc51594a4975ee470febc910b0fa29c8a446f74dfa7",
+        "sha256": "3b227a36f80f84f6a25e721e0258ee60927e14e010423e5cffeceadc174cf65a",
         "dimensions": [
           2048,
-          1024
+          2048
         ],
         "frame": [
           512,
@@ -15509,14 +15509,14 @@
     "DesignAssets/Animations/AntennaCombosV1/bean/blade-antenna/walk.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         8,
         3
       ],
       "nativeSource": {
-        "sha256": "33ef872a664c5ae3aec1b7e50faae49354b3da43f4e7bf5f9255345f89419a82",
+        "sha256": "5669cf4eb8ca727c906b51861113d9c9a608c4e4db295bddc65614cae6e71dfe",
         "dimensions": [
           4096,
           1536
@@ -15656,14 +15656,14 @@
     "DesignAssets/Animations/AntennaCombosV1/bean/carapace-antenna/walk.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         8,
         3
       ],
       "nativeSource": {
-        "sha256": "2287c25e740d53f87d845a718e78754c0a71a14a005d399b9e1d2b6902ce00e5",
+        "sha256": "f858f1d1935b8071ff75b2ed3411079968d5f6eaadb4d79edab67ac1cf867062",
         "dimensions": [
           4096,
           1536
@@ -15782,14 +15782,14 @@
     "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/walk.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         8,
         3
       ],
       "nativeSource": {
-        "sha256": "b4918836a8af9d7e3f91d1858ee559e71187353a0cc05f5e87e74f21d8f39b58",
+        "sha256": "4796ebd9279db8a3b47d69cc6afdafe267cd5e2d5ef65eda38b1998aa0c72a4d",
         "dimensions": [
           4096,
           1536
@@ -15929,14 +15929,14 @@
     "DesignAssets/Animations/AntennaCombosV1/bean/secretion-antenna/walk.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         8,
         3
       ],
       "nativeSource": {
-        "sha256": "e89762ace0548b1abdaf27e8358b2f7656022f7032c1667a207bc4d699ab6277",
+        "sha256": "7433684c29b33a14f8806a618354c5ed86173012affa8d12eaa703ea60c06023",
         "dimensions": [
           4096,
           1536
@@ -17042,14 +17042,14 @@
     "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-antenna/walk.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         8,
         3
       ],
       "nativeSource": {
-        "sha256": "210b9aacd1762d4342e21dfc72f9709f09c87894675ffe1112c85622e8097934",
+        "sha256": "1cc9e05492489459ec46ee883b7e24e2cf560516ae683931b34f4658b9b44d36",
         "dimensions": [
           4096,
           1536
@@ -17210,14 +17210,14 @@
     "DesignAssets/Animations/AntennaCombosV1/bean/secretion-carapace-antenna/walk.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         8,
         3
       ],
       "nativeSource": {
-        "sha256": "b9eab0291bcac0fc1a10b998e3fb7c35bda1a3155b3dd706eb71e7890021a32a",
+        "sha256": "f0c34e5d5098dee40ad7f395c4bdfb6e6cba35f55ddaac7dc56753fb6ce672e1",
         "dimensions": [
           4096,
           1536
@@ -17357,14 +17357,14 @@
     "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/walk.png": {
       "display": [
         256,
-        256.0
+        256
       ],
       "grid": [
         8,
         3
       ],
       "nativeSource": {
-        "sha256": "97b303a52e7f7692ef2370c531c3a52aebd36e7763be6dcd564793ff4cb9b051",
+        "sha256": "d910a1643975800cc8e65414f82feb8337b8ae0ae7a0b5e9d63a77d72f6eee28",
         "dimensions": [
           4096,
           1536
@@ -19590,14 +19590,14 @@
         2
       ],
       "nativeSource": {
-        "sha256": "6f9ef1d249849fe00fa843afd5a2b4aa343edff5b72f0e573d48bfe888628a42",
+        "sha256": "307eeb6b7fbc1a0cf19fa8c4cf384da47ae89925664c7bc4964d9ef3e0e74bf0",
         "dimensions": [
-          2048,
-          1024
+          1024,
+          512
         ],
         "frame": [
-          512,
-          512
+          256,
+          256
         ]
       }
     },
@@ -19653,14 +19653,14 @@
         4
       ],
       "nativeSource": {
-        "sha256": "71ad1077156b1a9f832800ab680199187df040f8946a6701d3a5868ed44177f6",
+        "sha256": "6e4622468d23251078d363f60f3b9eb58b5bb849e1558138469ef2bf5e4f059c",
         "dimensions": [
-          2048,
-          2048
+          1024,
+          1024
         ],
         "frame": [
-          512,
-          512
+          256,
+          256
         ]
       }
     },
@@ -19716,14 +19716,14 @@
         4
       ],
       "nativeSource": {
-        "sha256": "5826d50ef42740b37bf16dfab64153f2db2a81f7e459766ce2dc04719c88e94f",
+        "sha256": "061901ed0434c7c5fc940c77e7611ee9e51b23b3ee45858f73eee5bb0fc94af7",
         "dimensions": [
-          1920,
-          1920
+          1024,
+          1024
         ],
         "frame": [
-          480,
-          480
+          256,
+          256
         ]
       }
     },
@@ -20144,6 +20144,594 @@
         "frame": [
           631,
           631
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "50350b05bb653c9b311f3b0df9d7de4b98f555bdc42e1bb9227be55de3538679",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "d21c6cc491b3ed5d1ac7f49367392be10b23e5989af74953434ef1659286ad87",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "4796ebd9279db8a3b47d69cc6afdafe267cd5e2d5ef65eda38b1998aa0c72a4d",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace-antenna/preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "2e2e2c35d8a0ad6155ae527fa8269b7a8a12210838b986a48434fd1a072e23c9",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "e9ffa861c116adfa845a45db7dab77789cd5b7381cf21ce9908dba2b3ac48bf1",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion/preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "7286bb8a9b7953178c19a351cacf749612b0734d3525d1a47128343ed8b2446e",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-antenna/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "1cc9e05492489459ec46ee883b7e24e2cf560516ae683931b34f4658b9b44d36",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-antenna/preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "44ea7bb41ec453cd73ecf93c4f42dfafe315ea1f20c67e8e5412e864f5f43295",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "d910a1643975800cc8e65414f82feb8337b8ae0ae7a0b5e9d63a77d72f6eee28",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-carapace-antenna/preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "c7ef65561f2d467c8c472a09e7348a9d07ace81fdcfec3a538556f2ab7144d71",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "f858f1d1935b8071ff75b2ed3411079968d5f6eaadb4d79edab67ac1cf867062",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/carapace-antenna/preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "b6f07cdf4a2cc573c1b8fbf04bd5248268d63dab3f85e1594ea4c32fba6483fd",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-antenna/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "7433684c29b33a14f8806a618354c5ed86173012affa8d12eaa703ea60c06023",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-antenna/preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "044dca8a66a1b7687a7bcb66409699f782391b6ab03a08b39cd688e0ef752e39",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-carapace/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "74e448a110d64651a88d7b6c84b29d1c6f00cfb5b13c1db566dfc38236ef6305",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-carapace/preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "2324e6b56ab90320fdd80ad0bcf00c3e0f843e9b0e2f18a66d5346984dc86029",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "f0c34e5d5098dee40ad7f395c4bdfb6e6cba35f55ddaac7dc56753fb6ce672e1",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-carapace-antenna/preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "5b253626ef2c14413ad9dfa666167a64b8bb66cc990e1e49b78a587e8803cd29",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-carapace/birth.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "fc5afb78d74c757897c3508fe24e1f85e1c8ec727a14d69a90dabb3dce9dc9f1",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-carapace/birth-preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "e2b3b1baf00d1b1c13d856f24e65f2cfb4b201e7117416ba66a8dd07a5f4ed3c",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion/birth.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "03ffaecef1f4f3f05823bc0c7e0fa3e22e390011335e0188866e4251dd41bb45",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion/birth-preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "9eaa64d205e41a084d536c8fc122e5cfd4cfa032bec2dc4c9e4cfeea5a8c641c",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/secretion-carapace/birth.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "e181a8f3a3e9958085729b3a0cd255c9dc8952cfb8db32f48a811bd422140426",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/secretion-carapace/birth-preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "b0897537112a88648e4001cf0dbebe4e65996dc5ddec41e812518a674031240a",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion-carapace/birth.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "3b227a36f80f84f6a25e721e0258ee60927e14e010423e5cffeceadc174cf65a",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion-carapace/birth-preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "3b7815912b944a434d39d1f3ed324f19919edb732eab5424b6ba73bc2ee85447",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-antenna/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "5669cf4eb8ca727c906b51861113d9c9a608c4e4db295bddc65614cae6e71dfe",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-antenna/preview.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "575494b269c7346fd1bf7df14ba27f96447eb43d3be7c4b4b168b7586c7c10eb",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
         ]
       }
     }

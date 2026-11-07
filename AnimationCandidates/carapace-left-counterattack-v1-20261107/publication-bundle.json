@@ -1,0 +1,446 @@
+{
+  "title": "Three carapace attack-facing repairs",
+  "candidateOnly": true,
+  "sharedCodeModified": false,
+  "sourceOriginalsModified": false,
+  "manifests": [
+    "/workspace/shared/carpace-facing-repair-20261107/spore/publication-manifest.json",
+    "/workspace/shared/carpace-facing-repair-20261107/pebble/publication-manifest.json",
+    "/workspace/shared/carpace-facing-repair-20261107/spring/publication-manifest.json"
+  ],
+  "combinedRegistryPatch": {
+    "spore/carapace": {
+      "image": "DesignAssets/Animations/DefensiveAttackV1/spore/carapace/attack.png",
+      "sourceManifest": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spore/publication-manifest.json",
+      "sourceFacing": "left",
+      "frameSize": 256,
+      "frameHeight": 256,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        60,
+        70,
+        60,
+        80,
+        30,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        70,
+        80,
+        90,
+        100,
+        60
+      ],
+      "durationMs": 1000,
+      "pivotX": 128,
+      "pivotY": 230,
+      "referenceLength": 177,
+      "viewSize": 256,
+      "registrationScale": 1,
+      "loop": false,
+      "hitTimeMs": 300,
+      "defensiveRetaliation": true
+    },
+    "pebble/carapace": {
+      "image": "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace/attack.png",
+      "sourceManifest": "AnimationCandidates/carapace-left-counterattack-v1-20261107/pebble/publication-manifest.json",
+      "sourceFacing": "left",
+      "frameSize": 256,
+      "frameHeight": 256,
+      "columns": 4,
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        110,
+        110,
+        70,
+        110,
+        80,
+        110,
+        230
+      ],
+      "durationMs": 980,
+      "pivotX": 128,
+      "pivotY": 230,
+      "referenceLength": 181,
+      "viewSize": 256,
+      "registrationScale": 1,
+      "loop": false,
+      "hitTimeMs": 450,
+      "defensiveRetaliation": true
+    },
+    "spring/carapace": {
+      "image": "DesignAssets/Animations/DefensiveAttackV1/spring/carapace/attack.png",
+      "sourceManifest": "AnimationCandidates/carapace-left-counterattack-v1-20261107/spring/publication-manifest.json",
+      "sourceFacing": "left",
+      "frameSize": 256,
+      "frameHeight": 256,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        60,
+        70,
+        60,
+        80,
+        30,
+        100,
+        100,
+        100,
+        40,
+        40,
+        40,
+        40,
+        40,
+        50,
+        60,
+        90
+      ],
+      "durationMs": 1000,
+      "pivotX": 128,
+      "pivotY": 230,
+      "referenceLength": 157,
+      "viewSize": 256,
+      "registrationScale": 1,
+      "loop": false,
+      "hitTimeMs": 300,
+      "defensiveRetaliation": true
+    }
+  },
+  "assetVerification": "/workspace/shared/carpace-facing-repair-20261107/asset-verification.json",
+  "runtimeVerification": "/workspace/shared/carpace-facing-repair-20261107/runtime-verification.json",
+  "qaRoot": "/workspace/shared/carpace-facing-repair-20261107",
+  "records": {
+    "spore": {
+      "sheetSHA256": "6e4622468d23251078d363f60f3b9eb58b5bb849e1558138469ef2bf5e4f059c",
+      "frameCount": 16,
+      "durationMs": 1000,
+      "hitTimeMs": 300,
+      "sourceFacing": "left",
+      "referenceLength": 177,
+      "alpha16ComponentCountsLargerThan7Pixels": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "alpha16Bounds": [
+        [
+          27,
+          107,
+          204,
+          231
+        ],
+        [
+          26,
+          106,
+          203,
+          231
+        ],
+        [
+          31,
+          103,
+          210,
+          231
+        ],
+        [
+          35,
+          98,
+          210,
+          231
+        ],
+        [
+          26,
+          115,
+          211,
+          231
+        ],
+        [
+          11,
+          106,
+          199,
+          231
+        ],
+        [
+          5,
+          109,
+          199,
+          231
+        ],
+        [
+          9,
+          108,
+          198,
+          231
+        ],
+        [
+          14,
+          107,
+          201,
+          231
+        ],
+        [
+          17,
+          104,
+          202,
+          231
+        ],
+        [
+          20,
+          102,
+          205,
+          231
+        ],
+        [
+          24,
+          101,
+          208,
+          231
+        ],
+        [
+          25,
+          103,
+          206,
+          231
+        ],
+        [
+          24,
+          102,
+          205,
+          231
+        ],
+        [
+          27,
+          107,
+          204,
+          231
+        ],
+        [
+          27,
+          107,
+          204,
+          231
+        ]
+      ],
+      "previewDecodedFrameCount": 15,
+      "previewDecodedDurationMs": 1000,
+      "previewDurationExact": true
+    },
+    "pebble": {
+      "sheetSHA256": "307eeb6b7fbc1a0cf19fa8c4cf384da47ae89925664c7bc4964d9ef3e0e74bf0",
+      "frameCount": 8,
+      "durationMs": 980,
+      "hitTimeMs": 450,
+      "sourceFacing": "left",
+      "referenceLength": 181,
+      "alpha16ComponentCountsLargerThan7Pixels": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "alpha16Bounds": [
+        [
+          28,
+          85,
+          209,
+          231
+        ],
+        [
+          26,
+          90,
+          209,
+          231
+        ],
+        [
+          29,
+          88,
+          217,
+          231
+        ],
+        [
+          9,
+          86,
+          200,
+          231
+        ],
+        [
+          9,
+          96,
+          201,
+          231
+        ],
+        [
+          20,
+          87,
+          207,
+          231
+        ],
+        [
+          24,
+          87,
+          209,
+          231
+        ],
+        [
+          28,
+          85,
+          209,
+          231
+        ]
+      ],
+      "previewDecodedFrameCount": 8,
+      "previewDecodedDurationMs": 980,
+      "previewDurationExact": true
+    },
+    "spring": {
+      "sheetSHA256": "061901ed0434c7c5fc940c77e7611ee9e51b23b3ee45858f73eee5bb0fc94af7",
+      "frameCount": 16,
+      "durationMs": 1000,
+      "hitTimeMs": 300,
+      "sourceFacing": "left",
+      "referenceLength": 157,
+      "alpha16ComponentCountsLargerThan7Pixels": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "alpha16Bounds": [
+        [
+          32,
+          84,
+          189,
+          232
+        ],
+        [
+          32,
+          93,
+          192,
+          232
+        ],
+        [
+          30,
+          100,
+          198,
+          232
+        ],
+        [
+          38,
+          89,
+          195,
+          232
+        ],
+        [
+          29,
+          93,
+          190,
+          232
+        ],
+        [
+          14,
+          97,
+          183,
+          232
+        ],
+        [
+          7,
+          101,
+          186,
+          232
+        ],
+        [
+          7,
+          102,
+          190,
+          232
+        ],
+        [
+          11,
+          96,
+          190,
+          232
+        ],
+        [
+          21,
+          93,
+          187,
+          232
+        ],
+        [
+          25,
+          93,
+          187,
+          232
+        ],
+        [
+          30,
+          90,
+          190,
+          232
+        ],
+        [
+          30,
+          90,
+          191,
+          232
+        ],
+        [
+          31,
+          89,
+          191,
+          232
+        ],
+        [
+          32,
+          84,
+          189,
+          232
+        ],
+        [
+          32,
+          84,
+          189,
+          232
+        ]
+      ],
+      "previewDecodedFrameCount": 15,
+      "previewDecodedDurationMs": 1000,
+      "previewDurationExact": true
+    }
+  },
+  "status": "all-three-independently-reviewed-ready-for-integration",
+  "continuousBrowserPlayback": "not tested",
+  "verifyCommand": "bash /workspace/shared/carpace-facing-repair-20261107/verify-all-runtime.sh"
+}

@@ -1,0 +1,38 @@
+{
+  "spring/carapace": {
+    "image": "/workspace/shared/carpace-facing-repair-20261107/spring/attack-left.png",
+    "sourceManifest": "/workspace/shared/carpace-facing-repair-20261107/spring/publication-manifest.json",
+    "sourceFacing": "left",
+    "frameSize": 256,
+    "frameHeight": 256,
+    "columns": 4,
+    "frameCount": 16,
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      100,
+      100,
+      100,
+      40,
+      40,
+      40,
+      40,
+      40,
+      50,
+      60,
+      90
+    ],
+    "durationMs": 1000,
+    "pivotX": 128,
+    "pivotY": 230,
+    "referenceLength": 157,
+    "viewSize": 256,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 300,
+    "defensiveRetaliation": true
+  }
+}

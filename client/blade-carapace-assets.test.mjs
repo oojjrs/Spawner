@@ -23,7 +23,9 @@ test('all four blade+carapace forms expose six full-body clips and portraits, wi
       const clip = definition.actions[action], source = manifest.actions[action];
       assert.match(clip.image, /^DesignAssets\/Animations\/BladeCarapaceV1\//);
       assert.equal(createHash('sha256').update(readFileSync(resolve(root, clip.image))).digest('hex'), source.sheetSHA256);
-      assert.deepEqual(clip.durationsMs, source.durationsMs);
+      const reviewHold = tribe === 'bean' && action === 'birth';
+      if (reviewHold) { assert.equal(source.durationsMs.at(-1), 650); assert.equal(source.durationsMs.reduce((a, b) => a + b, 0), 4500); }
+      assert.deepEqual(clip.durationsMs, reviewHold ? source.durationsMs.slice(0, -1) : source.durationsMs);
       assert.equal(clip.durationsMs.length, clip.frameCount);
       assert.equal(clip.durationMs, clip.durationsMs.reduce((a, b) => a + b, 0));
       assert.equal(clip.loop, action === 'idle' || action === 'walk');

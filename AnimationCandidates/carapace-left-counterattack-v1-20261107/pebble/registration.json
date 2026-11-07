@@ -1,0 +1,176 @@
+{
+  "scale": 0.5186246418338109,
+  "xOffset": 0,
+  "sourceWidth": 1774,
+  "sourceHeight": 887,
+  "frames": [
+    {
+      "frame": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "uniformScale": 0.5186246418338109,
+      "translation": [
+        0,
+        32
+      ],
+      "exactIdlePixels": true,
+      "alpha16Bounds": [
+        28,
+        85,
+        209,
+        231
+      ]
+    },
+    {
+      "frame": 1,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "uniformScale": 0.5186246418338109,
+      "translation": [
+        0,
+        32
+      ],
+      "exactIdlePixels": false,
+      "alpha16Bounds": [
+        26,
+        90,
+        209,
+        231
+      ]
+    },
+    {
+      "frame": 2,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "uniformScale": 0.5186246418338109,
+      "translation": [
+        0,
+        32
+      ],
+      "exactIdlePixels": false,
+      "alpha16Bounds": [
+        29,
+        88,
+        217,
+        231
+      ]
+    },
+    {
+      "frame": 3,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "uniformScale": 0.5186246418338109,
+      "translation": [
+        0,
+        30
+      ],
+      "exactIdlePixels": false,
+      "alpha16Bounds": [
+        9,
+        86,
+        200,
+        231
+      ]
+    },
+    {
+      "frame": 4,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "uniformScale": 0.5186246418338109,
+      "translation": [
+        0,
+        30
+      ],
+      "exactIdlePixels": false,
+      "alpha16Bounds": [
+        9,
+        96,
+        201,
+        231
+      ]
+    },
+    {
+      "frame": 5,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "uniformScale": 0.5186246418338109,
+      "translation": [
+        0,
+        32
+      ],
+      "exactIdlePixels": false,
+      "alpha16Bounds": [
+        20,
+        87,
+        207,
+        231
+      ]
+    },
+    {
+      "frame": 6,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "uniformScale": 0.5186246418338109,
+      "translation": [
+        0,
+        32
+      ],
+      "exactIdlePixels": false,
+      "alpha16Bounds": [
+        24,
+        87,
+        209,
+        231
+      ]
+    },
+    {
+      "frame": 7,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "uniformScale": 0.5186246418338109,
+      "translation": [
+        0,
+        32
+      ],
+      "exactIdlePixels": true,
+      "alpha16Bounds": [
+        28,
+        85,
+        209,
+        231
+      ]
+    }
+  ]
+}

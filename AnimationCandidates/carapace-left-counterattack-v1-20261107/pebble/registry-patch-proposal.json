@@ -1,0 +1,30 @@
+{
+  "pebble/carapace": {
+    "image": "/workspace/shared/carpace-facing-repair-20261107/pebble/attack-left.png",
+    "sourceManifest": "/workspace/shared/carpace-facing-repair-20261107/pebble/publication-manifest.json",
+    "sourceFacing": "left",
+    "frameSize": 256,
+    "frameHeight": 256,
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      160,
+      110,
+      110,
+      70,
+      110,
+      80,
+      110,
+      230
+    ],
+    "durationMs": 980,
+    "pivotX": 128,
+    "pivotY": 230,
+    "referenceLength": 181,
+    "viewSize": 256,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 450,
+    "defensiveRetaliation": true
+  }
+}

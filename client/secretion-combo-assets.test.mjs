@@ -22,7 +22,9 @@ test('published secretion combinations expose exact source clips and portraits',
   for(const [action,clip] of Object.entries(definition.actions)) {
    const source=manifest.actions[action]??manifest.actions['ranged-attack'];
    assert.equal(sha(clip.image),source.sheetSHA256,`${key}/${action}`);
-   assert.deepEqual(clip.durationsMs,source.durationsMs);
+   const reviewHold=key.startsWith('bean/')&&action==='birth';
+   if(reviewHold) { assert.equal(source.durationsMs.at(-1),650); assert.equal(source.durationsMs.reduce((a,b)=>a+b,0),4500); }
+   assert.deepEqual(clip.durationsMs,reviewHold?source.durationsMs.slice(0,-1):source.durationsMs);
    assert.equal(clip.frameCount,clip.durationsMs.length);
    assert.equal(clip.durationMs,clip.durationsMs.reduce((a,b)=>a+b,0));
    assert.equal(clip.loop,action==='idle'||action==='walk');

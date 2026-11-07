@@ -1,0 +1,154 @@
+{
+  "runtimeSha256": "71165b6f9ba9c115bbe4c3d9fc39b9b27ba664386fd481cbaaad556d5418a26c",
+  "method": "Actual unchanged createUnitActionArt and unitActionArtPose function bodies; imports rewired to read-only candidate catalog. Real @napi-rs/canvas pixels and source image alpha are used.",
+  "tribes": {
+    "spore": {
+      "durationMs": 1000,
+      "hitTimeMs": 300,
+      "framesSelectedCorrectly": 16,
+      "targetDirections": {
+        "left": {
+          "firstRenderedRGBAEqualsIdle0": false,
+          "lastRenderedRGBAEqualsIdle0": false,
+          "alphaDiffMax": 0,
+          "premulDiffMax": 1.9921568627451052,
+          "transformScaleCalls": [
+            [
+              1,
+              1
+            ]
+          ],
+          "explicitViewSize256VsReferenceLengthPixelEquivalent": true,
+          "destinationExact": {
+            "x": -159.09604519774012,
+            "y": -285.8757062146893,
+            "width": 318.19209039548025,
+            "height": 318.19209039548025
+          },
+          "idle0VsResumedEqual": false,
+          "resumedIdleFrame": 10
+        },
+        "right": {
+          "firstRenderedRGBAEqualsIdle0": false,
+          "lastRenderedRGBAEqualsIdle0": false,
+          "alphaDiffMax": 0,
+          "premulDiffMax": 1.9921568627451052,
+          "transformScaleCalls": [
+            [
+              -1,
+              1
+            ]
+          ],
+          "explicitViewSize256VsReferenceLengthPixelEquivalent": true,
+          "destinationExact": {
+            "x": -159.09604519774012,
+            "y": -285.8757062146893,
+            "width": 318.19209039548025,
+            "height": 318.19209039548025
+          },
+          "idle0VsResumedEqual": false,
+          "resumedIdleFrame": 10
+        }
+      }
+    },
+    "pebble": {
+      "durationMs": 980,
+      "hitTimeMs": 450,
+      "framesSelectedCorrectly": 8,
+      "targetDirections": {
+        "left": {
+          "firstRenderedRGBAEqualsIdle0": false,
+          "lastRenderedRGBAEqualsIdle0": false,
+          "alphaDiffMax": 0,
+          "premulDiffMax": 1.9215686274509807,
+          "transformScaleCalls": [
+            [
+              1,
+              1
+            ]
+          ],
+          "explicitViewSize256VsReferenceLengthPixelEquivalent": true,
+          "destinationExact": {
+            "x": -155.58011049723754,
+            "y": -279.5580110497237,
+            "width": 311.1602209944751,
+            "height": 311.1602209944751
+          },
+          "idle0VsResumedEqual": false,
+          "resumedIdleFrame": 9
+        },
+        "right": {
+          "firstRenderedRGBAEqualsIdle0": false,
+          "lastRenderedRGBAEqualsIdle0": false,
+          "alphaDiffMax": 0,
+          "premulDiffMax": 1.9215686274509807,
+          "transformScaleCalls": [
+            [
+              -1,
+              1
+            ]
+          ],
+          "explicitViewSize256VsReferenceLengthPixelEquivalent": true,
+          "destinationExact": {
+            "x": -155.58011049723754,
+            "y": -279.5580110497237,
+            "width": 311.1602209944751,
+            "height": 311.1602209944751
+          },
+          "idle0VsResumedEqual": false,
+          "resumedIdleFrame": 9
+        }
+      }
+    },
+    "spring": {
+      "durationMs": 1000,
+      "hitTimeMs": 300,
+      "framesSelectedCorrectly": 16,
+      "targetDirections": {
+        "left": {
+          "firstRenderedRGBAEqualsIdle0": false,
+          "lastRenderedRGBAEqualsIdle0": false,
+          "alphaDiffMax": 0,
+          "premulDiffMax": 1.9921568627451052,
+          "transformScaleCalls": [
+            [
+              1,
+              1
+            ]
+          ],
+          "explicitViewSize256VsReferenceLengthPixelEquivalent": true,
+          "destinationExact": {
+            "x": -179.36305732484075,
+            "y": -322.2929936305732,
+            "width": 358.7261146496815,
+            "height": 358.7261146496815
+          },
+          "idle0VsResumedEqual": false,
+          "resumedIdleFrame": 10
+        },
+        "right": {
+          "firstRenderedRGBAEqualsIdle0": false,
+          "lastRenderedRGBAEqualsIdle0": false,
+          "alphaDiffMax": 0,
+          "premulDiffMax": 1.9921568627451052,
+          "transformScaleCalls": [
+            [
+              -1,
+              1
+            ]
+          ],
+          "explicitViewSize256VsReferenceLengthPixelEquivalent": true,
+          "destinationExact": {
+            "x": -179.36305732484075,
+            "y": -322.2929936305732,
+            "width": 358.7261146496815,
+            "height": 358.7261146496815
+          },
+          "idle0VsResumedEqual": false,
+          "resumedIdleFrame": 10
+        }
+      }
+    }
+  },
+  "execution": "One independent process per tribe to bound native canvas decoder memory."
+}

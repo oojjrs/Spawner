@@ -1,0 +1,455 @@
+[
+  {
+    "form": "blade-carapace",
+    "totalDurationMs": 2140,
+    "frameCount": 13,
+    "registrationUnchanged": {
+      "sourceFacing": true,
+      "frameSize": true,
+      "frameHeight": true,
+      "columns": true,
+      "durationMs": true,
+      "pivotX": true,
+      "pivotY": true,
+      "referenceLength": true,
+      "viewSize": true,
+      "registrationScale": true,
+      "loop": true,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": true,
+      "sceneIncludesNest": true
+    },
+    "preservedPixels": [
+      {
+        "candidateFrame": 0,
+        "sourceFrame": 0,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 1,
+        "sourceFrame": 1,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 2,
+        "sourceFrame": 2,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 10,
+        "sourceFrame": 5,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 11,
+        "sourceFrame": 6,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 12,
+        "sourceFrame": 7,
+        "pixelExact": true
+      }
+    ],
+    "sourceHashMatches": true,
+    "generatedFrames": [
+      {
+        "frame": 3,
+        "wholeBody": true,
+        "floorY": 443.75,
+        "packingRotation": 0,
+        "uniformScale": 0.43119266055045874
+      },
+      {
+        "frame": 4,
+        "wholeBody": true,
+        "floorY": 445.375,
+        "packingRotation": 0,
+        "uniformScale": 0.43119266055045874
+      },
+      {
+        "frame": 5,
+        "wholeBody": true,
+        "floorY": 447.0,
+        "packingRotation": 0,
+        "uniformScale": 0.43119266055045874
+      },
+      {
+        "frame": 6,
+        "wholeBody": true,
+        "floorY": 447.5,
+        "packingRotation": 0,
+        "uniformScale": 0.43119266055045874
+      },
+      {
+        "frame": 7,
+        "wholeBody": true,
+        "floorY": 448.0,
+        "packingRotation": 0,
+        "uniformScale": 0.43119266055045874
+      },
+      {
+        "frame": 8,
+        "wholeBody": true,
+        "floorY": 446.34615384615387,
+        "packingRotation": 0,
+        "uniformScale": 0.43119266055045874
+      },
+      {
+        "frame": 9,
+        "wholeBody": true,
+        "floorY": 444.6923076923077,
+        "packingRotation": 0,
+        "uniformScale": 0.43119266055045874
+      }
+    ],
+    "nestCheck": "Original frame3 pixels exact in x<344 scene background.",
+    "unusedAtlasCellsTransparent": true
+  },
+  {
+    "form": "blade-secretion",
+    "totalDurationMs": 2140,
+    "frameCount": 14,
+    "registrationUnchanged": {
+      "sourceFacing": true,
+      "frameSize": true,
+      "frameHeight": true,
+      "columns": true,
+      "durationMs": true,
+      "pivotX": true,
+      "pivotY": true,
+      "referenceLength": true,
+      "viewSize": true,
+      "registrationScale": true,
+      "loop": true,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": true,
+      "sceneIncludesNest": true
+    },
+    "preservedPixels": [
+      {
+        "candidateFrame": 0,
+        "sourceFrame": 0,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 1,
+        "sourceFrame": 1,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 2,
+        "sourceFrame": 2,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 11,
+        "sourceFrame": 5,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 12,
+        "sourceFrame": 6,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 13,
+        "sourceFrame": 7,
+        "pixelExact": true
+      }
+    ],
+    "sourceHashMatches": true,
+    "generatedFrames": [
+      {
+        "frame": 3,
+        "wholeBody": true,
+        "floorY": 439.8,
+        "packingRotation": 0,
+        "uniformScale": 0.46647230320699706
+      },
+      {
+        "frame": 4,
+        "wholeBody": true,
+        "floorY": 442.4,
+        "packingRotation": 0,
+        "uniformScale": 0.46647230320699706
+      },
+      {
+        "frame": 5,
+        "wholeBody": true,
+        "floorY": 445.0,
+        "packingRotation": 0,
+        "uniformScale": 0.46647230320699706
+      },
+      {
+        "frame": 6,
+        "wholeBody": true,
+        "floorY": 447.5,
+        "packingRotation": 0,
+        "uniformScale": 0.46647230320699706
+      },
+      {
+        "frame": 7,
+        "wholeBody": true,
+        "floorY": 450.0,
+        "packingRotation": 0,
+        "uniformScale": 0.46647230320699706
+      },
+      {
+        "frame": 8,
+        "wholeBody": true,
+        "floorY": 448.9846153846154,
+        "packingRotation": 0,
+        "uniformScale": 0.46647230320699706
+      },
+      {
+        "frame": 9,
+        "wholeBody": true,
+        "floorY": 447.96923076923076,
+        "packingRotation": 0,
+        "uniformScale": 0.46647230320699706
+      },
+      {
+        "frame": 10,
+        "wholeBody": true,
+        "floorY": 446.9846153846154,
+        "packingRotation": 0,
+        "uniformScale": 0.46647230320699706
+      }
+    ],
+    "nestCheck": "Original frame3 pixels exact outside declared original-body occlusion polygon; source0 same-coordinate pixels inside polygon.",
+    "unusedAtlasCellsTransparent": true
+  },
+  {
+    "form": "secretion-carapace",
+    "totalDurationMs": 2140,
+    "frameCount": 14,
+    "registrationUnchanged": {
+      "sourceFacing": true,
+      "frameSize": true,
+      "frameHeight": true,
+      "columns": true,
+      "durationMs": true,
+      "pivotX": true,
+      "pivotY": true,
+      "referenceLength": true,
+      "viewSize": true,
+      "registrationScale": true,
+      "loop": true,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": true,
+      "sceneIncludesNest": true
+    },
+    "preservedPixels": [
+      {
+        "candidateFrame": 0,
+        "sourceFrame": 0,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 1,
+        "sourceFrame": 1,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 2,
+        "sourceFrame": 2,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 11,
+        "sourceFrame": 5,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 12,
+        "sourceFrame": 6,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 13,
+        "sourceFrame": 7,
+        "pixelExact": true
+      }
+    ],
+    "sourceHashMatches": true,
+    "generatedFrames": [
+      {
+        "frame": 3,
+        "wholeBody": true,
+        "floorY": 444.2,
+        "packingRotation": 0,
+        "uniformScale": 0.519774011299435
+      },
+      {
+        "frame": 4,
+        "wholeBody": true,
+        "floorY": 441.6,
+        "packingRotation": 0,
+        "uniformScale": 0.519774011299435
+      },
+      {
+        "frame": 5,
+        "wholeBody": true,
+        "floorY": 439.0,
+        "packingRotation": 0,
+        "uniformScale": 0.519774011299435
+      },
+      {
+        "frame": 6,
+        "wholeBody": true,
+        "floorY": 445.0,
+        "packingRotation": 0,
+        "uniformScale": 0.519774011299435
+      },
+      {
+        "frame": 7,
+        "wholeBody": true,
+        "floorY": 451.0,
+        "packingRotation": 0,
+        "uniformScale": 0.519774011299435
+      },
+      {
+        "frame": 8,
+        "wholeBody": true,
+        "floorY": 448.46153846153845,
+        "packingRotation": 0,
+        "uniformScale": 0.519774011299435
+      },
+      {
+        "frame": 9,
+        "wholeBody": true,
+        "floorY": 445.9230769230769,
+        "packingRotation": 0,
+        "uniformScale": 0.519774011299435
+      },
+      {
+        "frame": 10,
+        "wholeBody": true,
+        "floorY": 443.46153846153845,
+        "packingRotation": 0,
+        "uniformScale": 0.519774011299435
+      }
+    ],
+    "nestCheck": "Original frame3 pixels exact outside declared original-body occlusion polygon; source0 same-coordinate pixels inside polygon.",
+    "unusedAtlasCellsTransparent": true
+  },
+  {
+    "form": "blade-secretion-carapace",
+    "totalDurationMs": 2140,
+    "frameCount": 14,
+    "registrationUnchanged": {
+      "sourceFacing": true,
+      "frameSize": true,
+      "frameHeight": true,
+      "columns": true,
+      "durationMs": true,
+      "pivotX": true,
+      "pivotY": true,
+      "referenceLength": true,
+      "viewSize": true,
+      "registrationScale": true,
+      "loop": true,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": true,
+      "sceneIncludesNest": true
+    },
+    "preservedPixels": [
+      {
+        "candidateFrame": 0,
+        "sourceFrame": 0,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 1,
+        "sourceFrame": 1,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 2,
+        "sourceFrame": 2,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 11,
+        "sourceFrame": 5,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 12,
+        "sourceFrame": 6,
+        "pixelExact": true
+      },
+      {
+        "candidateFrame": 13,
+        "sourceFrame": 7,
+        "pixelExact": true
+      }
+    ],
+    "sourceHashMatches": true,
+    "generatedFrames": [
+      {
+        "frame": 3,
+        "wholeBody": true,
+        "floorY": 433.0,
+        "packingRotation": 0,
+        "uniformScale": 0.5517241379310345
+      },
+      {
+        "frame": 4,
+        "wholeBody": true,
+        "floorY": 433.0,
+        "packingRotation": 0,
+        "uniformScale": 0.5517241379310345
+      },
+      {
+        "frame": 5,
+        "wholeBody": true,
+        "floorY": 433.0,
+        "packingRotation": 0,
+        "uniformScale": 0.5517241379310345
+      },
+      {
+        "frame": 6,
+        "wholeBody": true,
+        "floorY": 440.5,
+        "packingRotation": 0,
+        "uniformScale": 0.5517241379310345
+      },
+      {
+        "frame": 7,
+        "wholeBody": true,
+        "floorY": 448.0,
+        "packingRotation": 0,
+        "uniformScale": 0.5517241379310345
+      },
+      {
+        "frame": 8,
+        "wholeBody": true,
+        "floorY": 444.95384615384614,
+        "packingRotation": 0,
+        "uniformScale": 0.5517241379310345
+      },
+      {
+        "frame": 9,
+        "wholeBody": true,
+        "floorY": 441.9076923076923,
+        "packingRotation": 0,
+        "uniformScale": 0.5517241379310345
+      },
+      {
+        "frame": 10,
+        "wholeBody": true,
+        "floorY": 438.95384615384614,
+        "packingRotation": 0,
+        "uniformScale": 0.5517241379310345
+      }
+    ],
+    "nestCheck": "Original frame3 pixels exact outside declared original-body occlusion polygon; source0 same-coordinate pixels inside polygon.",
+    "unusedAtlasCellsTransparent": true
+  }
+]

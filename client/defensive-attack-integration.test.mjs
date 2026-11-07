@@ -54,14 +54,18 @@ test('defensive bodies preserve other slots except explicitly audited birth and 
         continue;
       }
       const { sceneLayers, ...preserved } = after.actions[name];
-      assert.deepEqual(preserved, clip, key + '/' + name);
+      const expected = key === 'bean/carapace-antenna' && name === 'birth' ?
+        { ...clip, frameCount: 116, durationMs: 3850, durationsMs: clip.durationsMs.slice(0, -1) } : clip;
+      assert.deepEqual(preserved, expected, key + '/' + name);
       if (sceneLayers) { assert.equal(name, 'birth'); assert.ok(['bean/carapace-antenna', 'spore/carapace-antenna'].includes(key)); }
     }
     assert.deepEqual(Object.keys(after.actions).sort(), [...new Set([...Object.keys(before.actions), 'attack'])].sort());
   }
   for (const [path, sha] of Object.entries(baseline.sourceImages)) {
     if (path === UNIT_ACTION_ART['pebble/carapace-antenna'].actions.birth.image) continue; // Audited v2 hash is checked above.
-    assert.equal(hash(read(path)), sha, path);
+    const repaired = JSON.parse(read('AnimationCandidates/bean-combo-walk-approved-v2-20261107/approval.json')).approvedForms
+      .find(entry => UNIT_ACTION_ART['bean/' + entry.form].actions.walk.image === path);
+    assert.equal(hash(read(path)), repaired?.sha256 || sha, path);
   }
 });
 

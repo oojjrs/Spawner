@@ -1,0 +1,273 @@
+{
+  "tribe": "pebble",
+  "form": "blade-carapace",
+  "action": "walk",
+  "version": 2,
+  "source": "exec-16fbdebb-15a3-4d3c-b93c-477e8496c75f.png",
+  "method": "Twelve independently image-generated complete poses; whole-frame crop, common scale and transparent sheet packing only. No body-part assembly or interpolation.",
+  "sheet": "pebble-blade-carapace-walk-grounded-v2-sheet.png",
+  "preview": "pebble-blade-carapace-walk-grounded-v2-preview.webp",
+  "gif": "pebble-blade-carapace-walk-grounded-v2-preview.gif",
+  "cover": "pebble-blade-carapace-walk-grounded-v2-cover.png",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "rows": 3,
+  "frameCount": 12,
+  "frames": 12,
+  "durationsMs": [
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70,
+    70
+  ],
+  "durationMs": 840,
+  "loop": true,
+  "pivotX": 256,
+  "pivotY": 450,
+  "sourceFacing": "right",
+  "sourceFrameRects": [
+    [
+      0,
+      0,
+      362,
+      362
+    ],
+    [
+      362,
+      0,
+      724,
+      362
+    ],
+    [
+      724,
+      0,
+      1086,
+      362
+    ],
+    [
+      1086,
+      0,
+      1448,
+      362
+    ],
+    [
+      0,
+      362,
+      362,
+      724
+    ],
+    [
+      362,
+      362,
+      724,
+      724
+    ],
+    [
+      724,
+      362,
+      1086,
+      724
+    ],
+    [
+      1086,
+      362,
+      1448,
+      724
+    ],
+    [
+      0,
+      724,
+      362,
+      1086
+    ],
+    [
+      362,
+      724,
+      724,
+      1086
+    ],
+    [
+      724,
+      724,
+      1086,
+      1086
+    ],
+    [
+      1086,
+      724,
+      1448,
+      1086
+    ]
+  ],
+  "packCrop": [
+    23,
+    37,
+    352,
+    314
+  ],
+  "packScale": 1.3026819923371646,
+  "packTranslations": [
+    [
+      42,
+      99,
+      471,
+      460
+    ],
+    [
+      42,
+      99,
+      471,
+      460
+    ],
+    [
+      42,
+      99,
+      471,
+      460
+    ],
+    [
+      42,
+      99,
+      471,
+      460
+    ],
+    [
+      42,
+      102,
+      471,
+      463
+    ],
+    [
+      42,
+      103,
+      471,
+      464
+    ],
+    [
+      42,
+      103,
+      471,
+      464
+    ],
+    [
+      42,
+      103,
+      471,
+      464
+    ],
+    [
+      42,
+      103,
+      471,
+      464
+    ],
+    [
+      42,
+      103,
+      471,
+      464
+    ],
+    [
+      42,
+      103,
+      471,
+      464
+    ],
+    [
+      42,
+      103,
+      471,
+      464
+    ]
+  ],
+  "registration": "One rigid translation of each complete painted frame aligns its planted-foot floor to y=450. No body parts transformed.",
+  "bodyBounds": [
+    [
+      53,
+      110,
+      459,
+      450
+    ],
+    [
+      53,
+      110,
+      459,
+      450
+    ],
+    [
+      53,
+      110,
+      459,
+      450
+    ],
+    [
+      54,
+      112,
+      460,
+      450
+    ],
+    [
+      53,
+      116,
+      460,
+      450
+    ],
+    [
+      53,
+      117,
+      460,
+      450
+    ],
+    [
+      53,
+      115,
+      459,
+      450
+    ],
+    [
+      53,
+      116,
+      459,
+      450
+    ],
+    [
+      53,
+      115,
+      459,
+      450
+    ],
+    [
+      53,
+      116,
+      460,
+      450
+    ],
+    [
+      53,
+      116,
+      460,
+      450
+    ],
+    [
+      53,
+      116,
+      460,
+      450
+    ]
+  ],
+  "sheetSHA256": "a702254359bade5a9ce12cb8f04d0cf8ad77fdeab8b5371fd971c79bb8a78136",
+  "previewSHA256": "7d88a2bcd6fcdedf3a5f4655e52d9629b5d8114258b8b0b0e547c9c2d87cddbc",
+  "replaces": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-walk-v1-sheet.png",
+  "runtimeEdited": false
+}

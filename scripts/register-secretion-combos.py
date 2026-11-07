@@ -6,6 +6,7 @@ are skipped so artists can publish tribes incrementally; --complete requires 12.
 from pathlib import Path
 import argparse, hashlib, json, math, shutil
 from PIL import Image
+from birth_runtime import trim_bean_birth_review_hold
 ROOT = Path(__file__).resolve().parents[1]
 FORMS = {'secretion-carapace':18, 'blade-secretion':17, 'blade-secretion-carapace':19}
 TRIBES = ('bean','spore','pebble','spring')
@@ -55,6 +56,7 @@ def main():
     dest=output/f'{action}.png';shutil.copyfile(source,dest)
     clip=dict(image=dest.relative_to(ROOT).as_posix(),sourceFacing=record.get('sourceFacing','right'),frameSize=w,frameHeight=h,columns=cols,frameCount=count,durationsMs=record['durationsMs'],durationMs=sum(record['durationsMs']),pivotX=px,pivotY=py,referenceLength=length,viewSize=length,registrationScale=1,loop=action in ('idle','walk'))
     if action=='birth': clip.update(fullScene=True,worldTravelIncludedInPixels=True,sceneAnchor='final-body-floor',sceneIncludesNest=True)
+    if action=='birth' and tribe=='bean': trim_bean_birth_review_hold(clip, source)
     if action=='attack':
      # Visually measured peak contact: bean frame6, pebble frame4.
      hit=record.get('hitTimeMs',{'bean':350,'pebble':450}.get(tribe))

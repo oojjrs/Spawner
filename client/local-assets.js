@@ -272,9 +272,11 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Animations/BeetleDeath/dead-v2.png.js",
   "./client/local-assets/Animations/BirthSceneLayersV1/06d19a033b831451da2c194676455b97c3ccf1f3f91b2313272042716e421e15.png.js",
   "./client/local-assets/Animations/BirthSceneLayersV1/0a087ce9ab5b831980be1b42c98563ffc3de01c3a1f4313dd4a332453b9d9d8f.png.js",
+  "./client/local-assets/Animations/BirthSceneLayersV1/178ff651e68c5a0fe41c745fdf7014e5751d817815b6a50400fe65f4dbfc5d0b.png.js",
   "./client/local-assets/Animations/BirthSceneLayersV1/1f9a208fdb80c8d6a210f2827915a43ca37385c8a72aec8f9718f8f684aa12eb.png.js",
   "./client/local-assets/Animations/BirthSceneLayersV1/41504167e08d82d67d7eeb62a3b0c708cba7a3396e4d2c45acf995ca3ec77690.png.js",
   "./client/local-assets/Animations/BirthSceneLayersV1/4ee35e38c111d5807aa869fad0c6710dfdc0b85e9576b1ffc0abe390736d5267.png.js",
+  "./client/local-assets/Animations/BirthSceneLayersV1/638a6a835b0bc2367c75892b47de7e46b49322130f4e0f58e4450590c31a250c.png.js",
   "./client/local-assets/Animations/BirthSceneLayersV1/6eb3772024439756ae332954cdc0f39560920e2633d6947671840f6671993ac8.png.js",
   "./client/local-assets/Animations/BirthSceneLayersV1/79de88f6e96abaffcfca8b35e080ed08fc8e82e402adb256e5e6f91c76c68c10.png.js",
   "./client/local-assets/Animations/BirthSceneLayersV1/8c6f88bf86ab65466e1bedc34dd40ceffd3f2f9958404283e164b0b58d7b21b1.png.js",
@@ -1059,7 +1061,5 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Units/Parts/strength-2.png.js",
   "./client/local-assets/Units/spiny-back-beetle.png.js",
   "./client/local-assets/Units/starter-sprout-bean.png.js",
-  "./client/local-assets/evolution-point-symbol.png.js",
-  "./client/local-assets/Animations/BirthSceneLayersV1/178ff651e68c5a0fe41c745fdf7014e5751d817815b6a50400fe65f4dbfc5d0b.png.js",
-  "./client/local-assets/Animations/BirthSceneLayersV1/638a6a835b0bc2367c75892b47de7e46b49322130f4e0f58e4450590c31a250c.png.js"
+  "./client/local-assets/evolution-point-symbol.png.js"
 ]);
