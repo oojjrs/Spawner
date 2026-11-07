@@ -1,3 +1,23 @@
+## 미사용 동작 표시 교정 검수·푸시 동결 · 01a1b3ae
+
+- 기록 ID: unit-table-unavailable-freeze-20261107-01a1b3ae. 기록 시각 2026-11-07T11:14:40+09:00. 기록자·구현/검수 Codex /root, 의미 교정 및 기존 업로드 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 와 correction/check.json 및 형식 검사·fetch 결과. 사용자 발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 실제 결과: 모든 빈칸 selector를 근거리 전용12종 ranged-attack 빈칸의 명시 ID목록으로 교체했다. 카탈로그12종 동일·해당12개 셀 존재/비어있음·전체빈칸규칙 제거·플레이어 칸 제외를 확인했다. 현행 분리CSS UTF8NoBom/CRLF OK, 기존 memory Mixed NeedsReview는 원문 보존했다. 새 레이아웃/그림 변경이 없어 selector 범위 검수로 한정했다.
+- Git/보호: 이전 관측의 분기는 병행 동기화로 해소돼 시작 main과 fetch한 origin/main이 5f4dc981f6f086a62809f8677c62d3a435da35e2로 일치한다. 최신 승인 행/기존 로컬 이력을 보존하고 이번 CSS selector 한 곳과 본 채팅 미반영 기록만2경로로 동결한다. 분리된 현행 Design/design.css에도 같은 교정을 유지하고 다른 페이지 분리 파일 전체는 게시하지 않는다. 요청·교정·근거/추론·검수·보호범위 누락 점검 완료, 아직 교정 푸시 전이다.
+
+## 빈 칸 표시 의미 교정 · 01a1b3ae 현재 요약
+
+- 기록 ID: unit-table-unavailable-correction-20261107-01a1b3ae. 기록 시각 2026-11-07T11:12:19+09:00. 기록자·과거 근거 대조/추정 Codex /root, 교정·메모리 근거 판단 지시 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 의 “만들어넣어야 하는데 없는 것에도 채우면 안 되고, 앞으로도 안 만들 거에만” 및 “메모리 뒤져서 내가 지금까지 한 말을 근거로 추정해” 지시. 사용자 정확 발언 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 대체 결정: cd3bd8f의 모든 td:empty 자동표시 판단은 잘못됐으며 본 교정으로 철회한다. 이미지 부재를 제작 제외로 취급하지 않는다. 헤더 고정은 유지하고 기존 흐린 아이콘은 명시 미사용 셀에만 둔다. 이전 user 질문은 메모리로 판단하라는 최신 지시로 닫고 추가 확인을 요구하지 않는다.
+- 근거/추론: gather-work-four-approved-push-20261107 및 gather-work-native-registry-20261107은 칼날·분비·안테나·갑각4외형×4종족×3작업48클립을 후속 제작 대상으로 남긴다. bean-integrated-forms-approved-20261104-01a1a155에는 분비+칼날/갑피 혼합 외형과 조건부 사격 승인이 있고 client/blade-ranged.mjs에도 경로가 있어 비분비 외형 원거리도 일괄 제외하지 않는다. 기본형 운반/모든 플레이어 유닛 채집 및 생활 중립 보따리달팽이의 먹이 운반 기록까지 있어 다른 빈 작업칸은 비워 둔다. 폐기된 구형 탄생도 제작 포기 근거로 바꾸지 않는다.
+- 확정 비사용 범위: neutral-attack-role-implementation-start-20261105-01a1a0bf의 사용자 역할 승인과 server/creature-attack-role.mjs는 중립7종의 원거리 가능·나머지12종의 근거리 전용을 일치해서 명시한다. 이12종의 ranged-attack 빈 칸만 CSS의 명시 ID목록으로 표시한다. 원거리7종·모든 플레이어 동작·나머지 불명확 빈 칸은 제작 대상 또는 계획 미확정으로 보존한다. 새 제작 취소를 추정해 확정하지 않는다.
+- 작업 범위: 병행 분리된 Design/design.css의 같은 규칙만 현행 화면에 수정하며 페이지 분리 전체는 포함하지 않는다. 커밋된 단일 Design.html에는 같은 selector 교정만 투영하고 본 채팅 관련 기록과 함께 기존 즉시 업로드 승인 범위에서 수정 푸시한다. 아직 교정 검수/푸시 성공 전이다.
+
+## 유닛 표 헤더·빈 칸 아이콘 푸시 완료 · 01a1b3ae 현재 요약
+
+- 기록 ID: unit-table-header-pushed-20261107-01a1b3ae. 기록·최종 관측 시각 2026-11-07T11:02:42+09:00. 기록자·Git 실행 Codex /root, 수정·업로드·재개 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 와 실제 git push/ls-remote/rev-parse 및 $Trash/unit-table-header-01a1b3ae/commit-result.json. 사용자 정확 발언 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 완료: cd3bd8f47a053151b44a746aad558525aafe8732 「유닛 표 헤더 고정과 빈 이미지 표시 수정」을 origin/main에 푸시했다. 원격 readback과 시작 checkout main 모두 동일 commit이다. 최신 부모51faf243의 다른 변경을 유지했고 Design.html CSS2곳과 본 채팅3기록만2경로로 커밋했다. 헤더는 내부 세로스크롤에 고정되고 빈 td에는20% 불투명도 빗금 사진 아이콘을 표시한다.
+- 보호·검수: 공용 index를 보존한 별도 index로 커밋했고 공용 memory index에는 본3기록만 더해 나머지 staged내용을 유지했다. 최종 남은 Design8행/메모리354추가218삭제는 이전 작업이며 unmerged경로0이다. 기존 형식검사 및 desktop 세로고정 측정과 최종 staged diff/check 통과를 재사용한다. 아이콘·모바일 전체 화면 검수는 앞선 브라우저 실행 실패로 미완료이며 Site배포는 실행하지 않았다. 요청/결정/실행/한계/보호·원격일치 누락을 대조했다. 앞선 푸시대기 상태는 본 실제 결과로 완료 처리하고 이 사후 기록은 로컬에 남겨 별도 memory-only 커밋을 만들지 않는다.
+
 ## 승인 채집 동작 적용·치유 퇴역 동결 · 현재 채팅
 
 - 기록 ID: gather-work-final-freeze-20261107. 기록 시각 2026-11-07T10:42:54+09:00; 기록자·구현/충돌해결 Codex /root, 시각승인·게임/기획서 적용·push 및 검수축소 결정 사용자. 출처 현재 채팅 01a1b349-c2f5-7410-817c-1a43af3819a8, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 미제공.
