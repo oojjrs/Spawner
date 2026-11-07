@@ -4,8 +4,9 @@ import { UNIT_BIRTH_ART } from "./unit-birth-art-assets.mjs";
 import { unitDisplayAttributes, UNIT_DISPLAY_PRIORITY, unitCombinationAppearance } from "./unit-display-appearance.mjs";
 import { unitDisplaySize, unitFrameMirror } from "./unit-size.mjs";
 import { unitActionState } from "./unit-appearance-state.mjs";
+import { unitAppearanceForm } from "../server/unit-appearance.mjs";
 
-function unitActionArtKey(agent) {
+function unitActionArtFallbackKey(agent) {
   if (!agent || agent.species) return null;
   const attributes = unitDisplayAttributes(agent);
   const form = unitCombinationAppearance(agent) || UNIT_DISPLAY_PRIORITY.find(key => attributes[key] > 0) ||
@@ -13,8 +14,17 @@ function unitActionArtKey(agent) {
   return (agent.tribe || agent.key || "bean") + "/" + form;
 }
 
+export function unitActionArtSelection(agent, catalog) {
+  const form = unitAppearanceForm(agent);
+  if (!form) return null;
+  const requestedKey = (agent.tribe || agent.key || "bean") + "/" + form;
+  const key = catalog[requestedKey] ? requestedKey : unitActionArtFallbackKey(agent);
+  const definition = catalog[key];
+  return definition ? { requestedKey, key, definition } : null;
+}
+
 export function unitActionArtDefinition(agent) {
-  return UNIT_ACTION_ART[unitActionArtKey(agent)] || null;
+  return unitActionArtSelection(agent, UNIT_ACTION_ART)?.definition || null;
 }
 
 // Work reuses this same body's authored attack, never another form's rig.
@@ -33,9 +43,10 @@ function actionsFor(agent, definition) {
 }
 
 export function unitActionArtPose(agent, time) {
-  const definition = unitActionArtDefinition(agent);
-  if (!definition) return null;
-  const birth = agent.birth && UNIT_BIRTH_ART[unitActionArtKey(agent)];
+  const selection = unitActionArtSelection(agent, UNIT_ACTION_ART);
+  if (!selection) return null;
+  const { definition, key } = selection;
+  const birth = agent.birth && UNIT_BIRTH_ART[key];
   const authored = actionsFor(agent, definition);
   const actions = birth ? { ...authored, birth } : authored;
   const state = unitActionState(agent, time, { animations: actions });

@@ -16514,6 +16514,20 @@ modules["server/unit-appearance.mjs"] = (() => {
 const UNIT_APPEARANCE_BITS = Object.freeze({ blade: 1, carapace: 2, antenna: 4, feet: 8, secretion: 16 });
 const UNIT_APPEARANCE_LEGACY_VISUAL_KEYS = Object.freeze(["strength", "arms", "piercing", "guard"]);
 const UNIT_APPEARANCE_TRIBES = Object.freeze(["bean", "spore", "pebble", "spring"]);
+const UNIT_APPEARANCE_ORGANS = Object.freeze(["blade", "secretion", "carapace", "antenna"]);
+const UNIT_APPEARANCE_FORMS = Object.freeze(["base", "gather", ...Array.from({ length: 15 }, (_, index) =>
+  UNIT_APPEARANCE_ORGANS.filter((key, bit) => (index + 1) & (1 << bit)).join("-"))]);
+
+function unitAppearanceForm(agent) {
+  if (!agent || agent.species) return null;
+  const attributes = agent.appearanceAttributes || agent.attributes;
+  const pieces = agent.dna?.pieces || [];
+  const organs = UNIT_APPEARANCE_ORGANS.filter(key => attributes ? attributes[key] > 0 : pieces.some(piece => piece.gene === key));
+  if (organs.length) return organs.join("-");
+  if (attributes ? attributes.feet > 0 || attributes.legs > 0 : pieces.some(piece => piece.gene === "legs")) return "feet";
+  if (attributes?.gather > 0 || attributes?.strength > 0 || attributes?.arms > 0 || pieces.some(piece => piece.gene === "gather")) return "gather";
+  return attributes?.piercing > 0 ? "secretion" : "base";
+}
 
 function unitAppearanceKey(tribe, mask) {
   return UNIT_APPEARANCE_TRIBES.includes(tribe) && Number.isInteger(mask) && mask >= 0 && mask < 32 ?
@@ -16533,7 +16547,8 @@ function unitAppearanceMaskFromDna(dna) {
   for (const piece of dna.pieces) mask |= UNIT_APPEARANCE_BITS[piece.gene === "legs" ? "feet" : piece.gene] || 0;
   return mask;
 }
-return { UNIT_APPEARANCE_BITS, UNIT_APPEARANCE_LEGACY_VISUAL_KEYS, UNIT_APPEARANCE_TRIBES, unitAppearanceKey, unitAppearanceMaskFromAttributes, unitAppearanceMaskFromDna };
+
+return { UNIT_APPEARANCE_BITS, UNIT_APPEARANCE_LEGACY_VISUAL_KEYS, UNIT_APPEARANCE_TRIBES, UNIT_APPEARANCE_ORGANS, UNIT_APPEARANCE_FORMS, unitAppearanceForm, unitAppearanceKey, unitAppearanceMaskFromAttributes, unitAppearanceMaskFromDna };
 })();
 modules["client/unit-display-appearance.mjs"] = (() => {
 const { UNIT_COMBINATION_FORMS, UNIT_COMBINATION_MASKS } = modules["client/unit-combination-forms.mjs"];
@@ -24647,8 +24662,9 @@ const { UNIT_BIRTH_ART } = modules["client/unit-birth-art-assets.mjs"];
 const { unitDisplayAttributes, UNIT_DISPLAY_PRIORITY, unitCombinationAppearance } = modules["client/unit-display-appearance.mjs"];
 const { unitDisplaySize, unitFrameMirror } = modules["client/unit-size.mjs"];
 const { unitActionState } = modules["client/unit-appearance-state.mjs"];
+const { unitAppearanceForm } = modules["server/unit-appearance.mjs"];
 
-function unitActionArtKey(agent) {
+function unitActionArtFallbackKey(agent) {
   if (!agent || agent.species) return null;
   const attributes = unitDisplayAttributes(agent);
   const form = unitCombinationAppearance(agent) || UNIT_DISPLAY_PRIORITY.find(key => attributes[key] > 0) ||
@@ -24656,8 +24672,17 @@ function unitActionArtKey(agent) {
   return (agent.tribe || agent.key || "bean") + "/" + form;
 }
 
+function unitActionArtSelection(agent, catalog) {
+  const form = unitAppearanceForm(agent);
+  if (!form) return null;
+  const requestedKey = (agent.tribe || agent.key || "bean") + "/" + form;
+  const key = catalog[requestedKey] ? requestedKey : unitActionArtFallbackKey(agent);
+  const definition = catalog[key];
+  return definition ? { requestedKey, key, definition } : null;
+}
+
 function unitActionArtDefinition(agent) {
-  return UNIT_ACTION_ART[unitActionArtKey(agent)] || null;
+  return unitActionArtSelection(agent, UNIT_ACTION_ART)?.definition || null;
 }
 
 // Work reuses this same body's authored attack, never another form's rig.
@@ -24676,9 +24701,10 @@ function actionsFor(agent, definition) {
 }
 
 function unitActionArtPose(agent, time) {
-  const definition = unitActionArtDefinition(agent);
-  if (!definition) return null;
-  const birth = agent.birth && UNIT_BIRTH_ART[unitActionArtKey(agent)];
+  const selection = unitActionArtSelection(agent, UNIT_ACTION_ART);
+  if (!selection) return null;
+  const { definition, key } = selection;
+  const birth = agent.birth && UNIT_BIRTH_ART[key];
   const authored = actionsFor(agent, definition);
   const actions = birth ? { ...authored, birth } : authored;
   const state = unitActionState(agent, time, { animations: actions });
@@ -24761,7 +24787,7 @@ function createUnitActionArt(assetSource, createSurface, loadImage) {
   } };
 }
 
-return { unitActionArtDefinition, unitActionArtPose, createUnitActionArt };
+return { unitActionArtSelection, unitActionArtDefinition, unitActionArtPose, createUnitActionArt };
 })();
 modules["server/birth.mjs"] = (() => {
 const AGENT_BIRTH_DURATION = 3.85;
