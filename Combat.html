@@ -58023,6 +58023,7 @@ modules["client/unit-appearance-state.mjs"] = (() => {
 const { attackAnimationElapsed, attackAnimationSegments } = modules["server/attack.mjs"];
 const { UNIT_ANIMATIONS, unitMovementElapsedMs } = modules["client/unit-animation.mjs"];
 const { unitAppearanceForAgent, unitAppearancePose } = modules["client/unit-appearance.mjs"];
+const { unitAppearanceForm } = modules["server/unit-appearance.mjs"];
 
 const finite = (...values) => values.find(Number.isFinite);
 const durationOf = clip => clip?.durationsMs?.reduce((sum,value)=>sum+value,0);
@@ -58079,7 +58080,11 @@ function unitActionState(agent, time, options = {}) {
     if(!agent.species){const elapsed=unitMovementElapsedMs(agent,start);return state(action,start,[[start,elapsed],[start+agent.moveDuration,elapsed+agent.moveDuration*1000]])}
     return state(action,start,[[start,step*cycles*ms],[start+agent.moveDuration,(step+1)*cycles*ms]]);
   }
-  return state('idle',finite(agent.animationStartedAt,agent.bornAt,0));
+  // Preserve explicit clocks, founders and older completed saves. A retained
+  // birth snapshot uses the same origin as the server's completed-birth marker.
+  const birthIdle = agent.tribe === 'pebble' && agent.dna?.version === 5 && unitAppearanceForm(agent) === 'gather' ?
+    finite(agent.birth?.readyAt,agent.birthIdleStartedAt) : undefined;
+  return state('idle',finite(agent.animationStartedAt,birthIdle,agent.bornAt,0));
 }
 
 function unitAppearanceStatePose(agent,time,options={}) {

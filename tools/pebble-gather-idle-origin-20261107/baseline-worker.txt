@@ -1,0 +1,22 @@
+✖ 별도 판단 워커는 게임 계산을 실행하지 않고 Map과 Set 상태를 전달한다 (5.038595ms)
+✔ 이동·생존 상태·판단 이유가 바뀐 응답은 적용하지 않고 새 상태로 요청한다 (1.314776ms)
+✔ 판단 워커 오류는 재시도하고 종료하면 워커와 대기 요청을 정리한다 (0.549382ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 2
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 107.995124
+
+✖ failing tests:
+
+test at ../../../../tmp/pebble-idle-origin-baseline-20261107/client/decision-workers.test.mjs:40:1
+✖ 별도 판단 워커는 게임 계산을 실행하지 않고 Map과 Set 상태를 전달한다 (5.038595ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'ids')
+      at TestContext.<anonymous> (file:///tmp/pebble-idle-origin-baseline-20261107/client/decision-workers.test.mjs:52:38)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)

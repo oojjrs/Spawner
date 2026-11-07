@@ -1,0 +1,15 @@
+evalmachine.<anonymous>:3496
+const { UNIT_DISPLAY_SIZES, unitDisplaySize }=modules["client/unit-size.mjs"];
+        ^
+
+TypeError: Cannot destructure property 'UNIT_DISPLAY_SIZES' of 'modules.client/unit-size.mjs' as it is undefined.
+    at evalmachine.<anonymous>:3496:9
+    at evalmachine.<anonymous>:3762:3
+    at evalmachine.<anonymous>:4253:3
+    at Script.runInContext (node:vm:149:12)
+    at Script.runInNewContext (node:vm:154:17)
+    at runInNewContext (node:vm:310:38)
+    at file:///workspace/scratch/cdf786db13f9/attack-publish-merge/[eval1]:5:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async node:internal/modules/esm/loader:223:26

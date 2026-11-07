@@ -10,6 +10,7 @@ import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
 import { TRIBE_STARTING_UNITS, PLAYER_STARTING_POINTS, startingWorkerDna } from "./tribe-start.mjs";
 import { colonySupply, recordColonyIncome, restoreColonyIncome } from "./colony-supply.mjs";
 import { agentBirthDuration } from "./birth.mjs";
+import { unitAppearanceForm } from "./unit-appearance.mjs";
 import { CORPSE_LIFETIME, placeCorpse, expireCorpses } from "./corpses.mjs";
 import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME } from "./attack.mjs";
 import { createRoadOptimizer } from "./roads.mjs";
@@ -1678,6 +1679,9 @@ export function createGame(environment, colony, savedGame) {
         if (agent.health <= 0) continue;
         if (agent.birth) {
           if (state.simSeconds < agent.birth.readyAt) continue;
+          // Only this verified birth-to-idle seam gets a persistent visual origin.
+          if (agent.tribe === "pebble" && agent.dna?.version === 5 && unitAppearanceForm(agent) === "gather")
+            agent.birthIdleStartedAt = agent.birth.readyAt;
           agent.birth = null;
           agent.moveBudget = 0;
           agent.decisionPending = "birth";

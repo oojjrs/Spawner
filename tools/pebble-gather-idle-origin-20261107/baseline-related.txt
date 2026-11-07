@@ -1,0 +1,80 @@
+✔ 네 종족의 모든 전투·일반 속성 조합이 종족 탄생 경로를 공유한다 (8.907438ms)
+✔ 전투 속성은 종족별 탄생 경로·등장 시각·프레임을 바꾸지 않는다 (10.164989ms)
+✔ 세 종족의 마지막 탄생 프레임은 전투 탄생을 다시 재생하지 않는다 (3.685202ms)
+✖ 전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 그리고 크기와 발 위치를 유지한다 (1.434142ms)
+✔ 시작 유닛을 복제하면 같은 속성의 설계를 저장하고 다음 복제에서 재사용한다 (31.465226ms)
+✔ 유닛 복제는 나중에 수정한 템플릿 대신 탄생 당시 설계를 따른다 (12.6202ms)
+✔ 슬롯 순서와 이름이 달라도 정규화한 속성이 같으면 기존 설계를 재사용한다 (13.791654ms)
+✔ 이전 저장의 강화 단계는 1로 정규화하고 같은 속성의 설계를 재사용한다 (12.032061ms)
+✔ 자동 저장 이름은 중복 번호와 24자 제한을 지킨다 (7.512654ms)
+✖ 포인트나 탄생 공간이 부족하면 새 설계와 ID도 남기지 않는다 (8.816273ms)
+✖ 설계 100개 한도에서는 신규 설계를 거부하고 같은 속성의 기존 설계는 재사용한다 (11.883511ms)
+✔ 씨앗은 두 번 굴러 튄 뒤 점프하고 착지해야 새싹콩이 나온다 (1.064966ms)
+✔ 템플릿 생성만 씨앗 연출을 거치고 완전히 착지하기 전에는 이동하지 않는다 (26.433657ms)
+✔ 랜덤 방향의 빈 착지 칸을 고르고 공간이 없으면 비용을 차감하지 않는다 (11.850422ms)
+✔ 발아 중 저장한 월드는 남은 연출과 대기 상태를 복원한다 (32.601432ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 12
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 307.119231
+
+✖ failing tests:
+
+test at ../../../../tmp/pebble-idle-origin-baseline-20261107/client/combat-birth.test.mjs:80:1
+✖ 전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 그리고 크기와 발 위치를 유지한다 (1.434142ms)
+  ReferenceError [Error]: drawAgentAppearanceBody is not defined
+      at Object.drawAgentBirth (evalmachine.<anonymous>:20:7)
+      at TestContext.<anonymous> (file:///tmp/pebble-idle-origin-baseline-20261107/client/combat-birth.test.mjs:98:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at ../../../../tmp/pebble-idle-origin-baseline-20261107/server/birth.test.mjs:114:1
+✖ 포인트나 탄생 공간이 부족하면 새 설계와 ID도 남기지 않는다 (8.816273ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /포인트가 부족/. Input:
+  
+  'Error: 현재 둥지의 슬롯 수와 사용 가능한 속성에 맞춰 설계를 수정해 주세요.'
+  
+      at TestContext.<anonymous> (file:///tmp/pebble-idle-origin-baseline-20261107/server/birth.test.mjs:128:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: 현재 둥지의 슬롯 수와 사용 가능한 속성에 맞춰 설계를 수정해 주세요.
+        at birth (file:///tmp/pebble-idle-origin-baseline-20261107/server/game.mjs:1741:15)
+        at Object.command (file:///tmp/pebble-idle-origin-baseline-20261107/server/game.mjs:1954:27)
+        at file:///tmp/pebble-idle-origin-baseline-20261107/server/birth.test.mjs:128:30
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///tmp/pebble-idle-origin-baseline-20261107/server/birth.test.mjs:128:12)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1402:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+        at Test.postRun (node:internal/test_runner/test:1542:19),
+    expected: /포인트가 부족/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at ../../../../tmp/pebble-idle-origin-baseline-20261107/server/birth.test.mjs:133:1
+✖ 설계 100개 한도에서는 신규 설계를 거부하고 같은 속성의 기존 설계는 재사용한다 (11.883511ms)
+  Error: 설계는 최대 100개까지 저장할 수 있습니다.
+      at Object.command (file:///tmp/pebble-idle-origin-baseline-20261107/server/game.mjs:1946:65)
+      at TestContext.<anonymous> (file:///tmp/pebble-idle-origin-baseline-20261107/server/birth.test.mjs:147:23)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

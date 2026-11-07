@@ -1,0 +1,36 @@
+{
+  "baseline": "2c952c82",
+  "stages": [
+    "spawn",
+    "before-ready",
+    "completed",
+    "restored"
+  ],
+  "snapshotAndSavedStateExactExceptMarker": true,
+  "markers": [
+    {
+      "stage": "completed",
+      "bucket": "snapshot",
+      "agentId": "1:5",
+      "value": 102.745
+    },
+    {
+      "stage": "completed",
+      "bucket": "save",
+      "agentId": "1:5",
+      "value": 102.745
+    },
+    {
+      "stage": "restored",
+      "bucket": "snapshot",
+      "agentId": "1:5",
+      "value": 102.745
+    },
+    {
+      "stage": "restored",
+      "bucket": "save",
+      "agentId": "1:5",
+      "value": 102.745
+    }
+  ]
+}

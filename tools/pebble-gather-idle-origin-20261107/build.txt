@@ -1,0 +1,3 @@
+ENV> CLIENT BUNDLE : 3578892 BYTES
+Appearance runtime: 11 modules; ready combinations only
+VFX EVENT REVIEW : rebuilt presentation; existing event fixtures preserved

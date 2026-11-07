@@ -1,0 +1,128 @@
+✔ base DNA selects its full 3.85 second birth rather than the idle fallback (4.326401ms)
+✔ all authored boundaries draw one whole body after emergence in both facings (6.580535ms)
+✔ final whole-body pixels and registration match the actual current idle (540.529314ms)
+✔ offline publication includes both layers and the independently verified fallback (9.275592ms)
+✔ failed layer uses the complete-scene fallback without reviving part rigs (0.881745ms)
+✔ design and compiled runtime use the same layered base birth with left-facing preview (71.76584ms)
+✔ many simultaneous base births reuse two decoded atlases and keep each body clock (5.814423ms)
+✔ all eleven bean combo births retain the 3850 ms motion clock and enter idle at readyAt (34.75591ms)
+✔ all eleven trimmed births preserve baked fallback crops in both facings through the final body (136.126777ms)
+✔ 네 종족의 모든 전투·일반 속성 조합이 종족 탄생 경로를 공유한다 (12.187963ms)
+✔ 전투 속성은 종족별 탄생 경로·등장 시각·프레임을 바꾸지 않는다 (12.539581ms)
+✔ 세 종족의 마지막 탄생 프레임은 전투 탄생을 다시 재생하지 않는다 (4.179844ms)
+✖ 전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 그리고 크기와 발 위치를 유지한다 (1.756089ms)
+✔ 몽돌은 돌굴의 48프레임을 재생하고 구르기 전 출구와 착지 후 빈 칸에 고정된다 (2.620206ms)
+✔ 몽돌 탄생음은 0.25초에 한 번만 재생하고 새싹콩 효과음은 호출하지 않는다 (5.942362ms)
+✔ Pebble gather idle begins at actual birth completion before and after server tick, snapshot, save and restore (177.352831ms)
+✔ restoring an active birth preserves the completion origin; old completed saves and founders are not backfilled (41.066396ms)
+✔ the retained-birth fallback and persisted marker cannot shift the other 67 forms or legacy DNA (4.541589ms)
+✔ the server does not persist a marker for another tribe or a non-gather Pebble birth (134.20263ms)
+✔ explicit combat and preview clocks win, while ordinary preview and founder actors retain bornAt (1.291711ms)
+✔ idle return keeps the birth origin instead of restarting the neutral hold; non-idle cues remain identical (1.39206ms)
+✔ 17개 외형은 네 종족에서 기관 순서·개수와 관계없이 정확한 세트를 선택한다 (4.310387ms)
+✔ 채집은 독립형이며 기존 혼합 DNA·시체 외형 스냅샷·중립과 퇴역기관을 구분한다 (0.429044ms)
+✔ 미등록 조합은 요청 키를 보존하고 등록 즉시 정확한 세트로 전환한다 (0.746264ms)
+✔ 승인 칼날 갑각은 모든 동작에서 같은 세트를 유지하고 미제작 동작만 원화를 쓴다 (2.029002ms)
+✔ 실제 그리기는 칼날 갑각 완성 프레임 하나를 사용한다 (24.979006ms)
+✔ 인게임 실행본도 동일한 조합 선택과 채집 분리를 사용한다 (75.669192ms)
+✔ same priority handles death/birth, RPG attack, hurt, throw, harvest, preview, carry and idle (2.158163ms)
+✔ world ranged launch uses launchedAt while the laboratory explicitly uses hitAt (0.563874ms)
+✔ absolute cue timestamps dedupe rerenders and consecutive movement cells (0.658925ms)
+✔ RPG hurt consumes its full source clip in the native 120 milliseconds (0.354404ms)
+✔ first four remain fixed and later categories favor neutral species independently of variant count (87.257426ms)
+✔ category threshold, duplicate inputs and missing categories have deterministic behavior (0.846232ms)
+✔ creatures keep their relative sizes while tall poses fit the mobile header (0.400603ms)
+✔ independent bags retain all 87 identities and deterministic sequence diversity (24.330617ms)
+✔ welcome movement keeps exact cue stamps and exposes the final landing cell (1.479659ms)
+✔ an unavailable appearance retries its own assets without changing identity (1.053679ms)
+✔ a never-settling appearance releases the rotation without substituting base art (20.976053ms)
+✔ a failed pose uses a fallback pose of the same immutable appearance (0.859652ms)
+✔ welcome tribe forms face left along their entry and exit direction (3.776658ms)
+✔ slow welcome entries and exits keep walking between native cell moves (1.443666ms)
+✔ welcome entry and exit share native pose clocks and finish fully landed (1.316618ms)
+✔ welcome forms select their own registered body and perform only authored actions (2.878068ms)
+✔ actual welcome header uses idle in the center for tribes and neutral species (7.054196ms)
+✔ compiled welcome sequence matches the weighted source roster exactly (102.506206ms)
+✔ 시작 유닛을 복제하면 같은 속성의 설계를 저장하고 다음 복제에서 재사용한다 (61.986078ms)
+✔ 유닛 복제는 나중에 수정한 템플릿 대신 탄생 당시 설계를 따른다 (25.475491ms)
+✔ 슬롯 순서와 이름이 달라도 정규화한 속성이 같으면 기존 설계를 재사용한다 (19.710961ms)
+✔ 이전 저장의 강화 단계는 1로 정규화하고 같은 속성의 설계를 재사용한다 (18.616724ms)
+✔ 자동 저장 이름은 중복 번호와 24자 제한을 지킨다 (13.843341ms)
+✖ 포인트나 탄생 공간이 부족하면 새 설계와 ID도 남기지 않는다 (15.49179ms)
+✖ 설계 100개 한도에서는 신규 설계를 거부하고 같은 속성의 기존 설계는 재사용한다 (29.969279ms)
+✔ 씨앗은 두 번 굴러 튄 뒤 점프하고 착지해야 새싹콩이 나온다 (1.773694ms)
+✔ 템플릿 생성만 씨앗 연출을 거치고 완전히 착지하기 전에는 이동하지 않는다 (32.061114ms)
+✔ 랜덤 방향의 빈 착지 칸을 고르고 공간이 없으면 비용을 차감하지 않는다 (12.776864ms)
+✔ 발아 중 저장한 월드는 남은 연출과 대기 상태를 복원한다 (32.156916ms)
+✔ 몽돌은 둥지 앞쪽과 양옆의 빈 칸에 태어나 2.62초까지 행동하지 않고 저장 후에도 이어진다 (56.886773ms)
+✔ 몽돌 앞쪽이 막혀도 양옆의 빈 칸에서 탄생한다 (19.495744ms)
+✔ 몽돌은 앞쪽과 양옆 11칸에 분산하고 모두 차면 비용을 차감하지 않는다 (19.414152ms)
+✔ 이전 저장의 몽돌 탄생 대기 시간도 새 애니메이션 길이로 복구한다 (27.597961ms)
+✔ 샘방울은 둥지 앞쪽과 양옆의 빈 칸에서 태어나며 탄생이 끝나기 전에는 이동하지 않는다 (55.092629ms)
+✔ 샘방울 앞쪽이 막혀도 양옆의 빈 칸에서 탄생한다 (21.608019ms)
+✔ 샘방울은 앞쪽과 양옆 11칸에 분산하고 모두 차면 비용을 차감하지 않는다 (33.277383ms)
+ℹ tests 63
+ℹ suites 0
+ℹ pass 60
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 790.35152
+
+✖ failing tests:
+
+test at client/combat-birth.test.mjs:80:1
+✖ 전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 그리고 크기와 발 위치를 유지한다 (1.756089ms)
+  ReferenceError [Error]: drawAgentAppearanceBody is not defined
+      at Object.drawAgentBirth (evalmachine.<anonymous>:20:7)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/attack-publish-merge/client/combat-birth.test.mjs:98:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at server/birth.test.mjs:114:1
+✖ 포인트나 탄생 공간이 부족하면 새 설계와 ID도 남기지 않는다 (15.49179ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /포인트가 부족/. Input:
+  
+  'Error: 현재 둥지의 슬롯 수와 사용 가능한 속성에 맞춰 설계를 수정해 주세요.'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/attack-publish-merge/server/birth.test.mjs:128:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: 현재 둥지의 슬롯 수와 사용 가능한 속성에 맞춰 설계를 수정해 주세요.
+        at birth (file:///workspace/scratch/cdf786db13f9/attack-publish-merge/server/game.mjs:1745:15)
+        at Object.command (file:///workspace/scratch/cdf786db13f9/attack-publish-merge/server/game.mjs:1958:27)
+        at file:///workspace/scratch/cdf786db13f9/attack-publish-merge/server/birth.test.mjs:128:30
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/attack-publish-merge/server/birth.test.mjs:128:12)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1402:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+        at Test.postRun (node:internal/test_runner/test:1542:19),
+    expected: /포인트가 부족/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at server/birth.test.mjs:133:1
+✖ 설계 100개 한도에서는 신규 설계를 거부하고 같은 속성의 기존 설계는 재사용한다 (29.969279ms)
+  Error: 설계는 최대 100개까지 저장할 수 있습니다.
+      at Object.command (file:///workspace/scratch/cdf786db13f9/attack-publish-merge/server/game.mjs:1950:65)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/attack-publish-merge/server/birth.test.mjs:147:23)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
