@@ -204,6 +204,11 @@ export function createUnitPresentation(options) {
     if (!pose) return false;
     const scale = options.displayScale(agent) || 1;
     const facing = unitFacing(agent);
+    if (pose.action === "birth" && options.drawPackedPebbleBirth) {
+      const result = options.drawPackedPebbleBirth(ctx, agent, state.simSeconds, centerX, floor,
+        height / AGENT_HEIGHT / scale, facing < 0, outlineColor, options.birthSurface?.());
+      if (result?.handled) return pose;
+    }
     actionArt.draw(ctx, agent, state.simSeconds, centerX, floor, height / AGENT_HEIGHT / scale, facing < 0,
       outlineColor ? (context, image, crop, destination) => drawSelectionOutline(image,
         destination.x, destination.y, destination.width, destination.height,

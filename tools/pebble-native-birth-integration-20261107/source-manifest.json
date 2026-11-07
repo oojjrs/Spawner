@@ -1,0 +1,97 @@
+{
+  "baseCommit": "00321467694827df653898b1085e1afade5448d5",
+  "files": [
+    {
+      "path": "client/build.mjs",
+      "sha256": "2d6d362c2e93e7ece6e18817909262a9abeda350bdabd0a7e19e3ca01a81a5bb",
+      "baseSha256": "3300ff6378476eabcee3f2a00623484aed32a2cd0aa88ecaf2a3f72a8fa60b57",
+      "appliedSha256": "2d6d362c2e93e7ece6e18817909262a9abeda350bdabd0a7e19e3ca01a81a5bb"
+    },
+    {
+      "path": "client/game.js",
+      "sha256": "119ef2cfdfd718747ef6f5ba866a43a37836fb022d5560d15bd5c9f361327a98",
+      "baseSha256": "4b8dc996c156fe480882435843ae43f80d9a9a37a59930c62b1ea7c55d50bbd3",
+      "appliedSha256": "119ef2cfdfd718747ef6f5ba866a43a37836fb022d5560d15bd5c9f361327a98"
+    },
+    {
+      "path": "client/pebble-birth-bridge.mjs",
+      "sha256": "d67f1760a441005500f5b60b8304b35cc1d53e6e6b5690dca82ef0ddb63993d7",
+      "baseSha256": null,
+      "appliedSha256": "d67f1760a441005500f5b60b8304b35cc1d53e6e6b5690dca82ef0ddb63993d7"
+    },
+    {
+      "path": "client/pebble-birth-choice.mjs",
+      "sha256": "a8db4b2ed9f729e52c63a8fc3504a1f39cdade8f4ff96f117caf0f8ce8f269d4",
+      "baseSha256": null,
+      "appliedSha256": "a8db4b2ed9f729e52c63a8fc3504a1f39cdade8f4ff96f117caf0f8ce8f269d4"
+    },
+    {
+      "path": "client/pebble-birth-mask-bank.mjs",
+      "sha256": "02c86fdec66d0026bd1712d4e801deeecc14af9c9e9cf68508a606eee2cb8640",
+      "baseSha256": null,
+      "appliedSha256": "02c86fdec66d0026bd1712d4e801deeecc14af9c9e9cf68508a606eee2cb8640"
+    },
+    {
+      "path": "client/pebble-birth-native-layer.mjs",
+      "sha256": "a6e5b2f6df10401e507e9519d2bae07d5a46bc0ad31588a018f3ed3f0d2131e1",
+      "baseSha256": null,
+      "appliedSha256": "3b67d809318e255b785362673b9927987ed37fdd0a2c27fae4338efdaf6c4c16",
+      "normalization": "Removed trailing whitespace from one blank line and an extra final blank line; no semantic changes."
+    },
+    {
+      "path": "client/pebble-birth-runtime.mjs",
+      "sha256": "fef08d0c86e254cdb6051a65ca067d05a0d982fdef0922b20899cf62efbeac6c",
+      "baseSha256": null,
+      "appliedSha256": "fef08d0c86e254cdb6051a65ca067d05a0d982fdef0922b20899cf62efbeac6c"
+    },
+    {
+      "path": "client/pebble-growth-occlusion-data.mjs",
+      "sha256": "e136e7d75f6e6cadfa86f9f2a815923c30a5e3fb09bb27d6043168a1335ab287",
+      "baseSha256": null,
+      "appliedSha256": "e136e7d75f6e6cadfa86f9f2a815923c30a5e3fb09bb27d6043168a1335ab287"
+    },
+    {
+      "path": "client/pebble-packed-birth-catalog.mjs",
+      "sha256": "e035ff3a1a6f480d3d06b603f005ee487feaeca9f391d9421f0cbe54a434f6bc",
+      "baseSha256": null,
+      "appliedSha256": "e035ff3a1a6f480d3d06b603f005ee487feaeca9f391d9421f0cbe54a434f6bc"
+    },
+    {
+      "path": "client/pebble-packed-birth.mjs",
+      "sha256": "75491a8f3db3e1fc6f2a073ce12446df1e7f79dbf3aea7f2bb199b457f6ea2df",
+      "baseSha256": null,
+      "appliedSha256": "75491a8f3db3e1fc6f2a073ce12446df1e7f79dbf3aea7f2bb199b457f6ea2df"
+    },
+    {
+      "path": "client/unit-presentation.mjs",
+      "sha256": "85607bb5b811c13248b5a1def358c2743f0fb83f90624bc2d289cb69d0be8b6f",
+      "baseSha256": "b35c9e916b3f7787f1e1e62a067720655e710b8e08f7e02804ef192244bd48d0",
+      "appliedSha256": "85607bb5b811c13248b5a1def358c2743f0fb83f90624bc2d289cb69d0be8b6f"
+    },
+    {
+      "path": "DesignAssets/Animations/PebblePackedBirthV1/blade.png",
+      "sha256": "217b6c682698d4afe7299c008e75e48663f745c17ccf8493ff069ec8fe2abb48",
+      "bytes": 725525,
+      "appliedSha256": "217b6c682698d4afe7299c008e75e48663f745c17ccf8493ff069ec8fe2abb48"
+    },
+    {
+      "path": "DesignAssets/Animations/PebblePackedBirthV1/carapace.png",
+      "sha256": "b9b2ce10c9916da28a9ec5179ee6829de5485f801f58c92338f08635dc21b4aa",
+      "bytes": 1216423,
+      "appliedSha256": "b9b2ce10c9916da28a9ec5179ee6829de5485f801f58c92338f08635dc21b4aa"
+    },
+    {
+      "path": "DesignAssets/Animations/PebblePackedBirthV1/gather.png",
+      "sha256": "d6b2f105aaefe8294e8b5960571b476a9fe3c11e35c14a4a5967d98cf3b23e53",
+      "bytes": 246229,
+      "appliedSha256": "d6b2f105aaefe8294e8b5960571b476a9fe3c11e35c14a4a5967d98cf3b23e53"
+    },
+    {
+      "path": "DesignAssets/Animations/PebblePackedBirthV1/secretion.png",
+      "sha256": "af4e99f85f1e3838b43af5300fa681226751c6e53bfba40f7f1470227fae2d0e",
+      "bytes": 118854,
+      "appliedSha256": "af4e99f85f1e3838b43af5300fa681226751c6e53bfba40f7f1470227fae2d0e"
+    }
+  ],
+  "scope": "Four intact packed birth bodies and native world/independent avatar presentation only."
+}

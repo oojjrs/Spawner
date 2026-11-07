@@ -20897,6 +20897,106 @@
           640
         ]
       }
+    },
+    "DesignAssets/Animations/PebblePackedBirthV1/gather.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        384,
+        966
+      ],
+      "nativeSource": {
+        "sha256": "d6b2f105aaefe8294e8b5960571b476a9fe3c11e35c14a4a5967d98cf3b23e53",
+        "dimensions": [
+          384,
+          966
+        ],
+        "frame": [
+          384,
+          966
+        ]
+      }
+    },
+    "DesignAssets/Animations/PebblePackedBirthV1/blade.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        1536,
+        373
+      ],
+      "nativeSource": {
+        "sha256": "217b6c682698d4afe7299c008e75e48663f745c17ccf8493ff069ec8fe2abb48",
+        "dimensions": [
+          1536,
+          373
+        ],
+        "frame": [
+          1536,
+          373
+        ]
+      }
+    },
+    "DesignAssets/Animations/PebblePackedBirthV1/carapace.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        1024,
+        679
+      ],
+      "nativeSource": {
+        "sha256": "b9b2ce10c9916da28a9ec5179ee6829de5485f801f58c92338f08635dc21b4aa",
+        "dimensions": [
+          1024,
+          679
+        ],
+        "frame": [
+          1024,
+          679
+        ]
+      }
+    },
+    "DesignAssets/Animations/PebblePackedBirthV1/secretion.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "sourceMaximum": [
+        256,
+        529
+      ],
+      "nativeSource": {
+        "sha256": "af4e99f85f1e3838b43af5300fa681226751c6e53bfba40f7f1470227fae2d0e",
+        "dimensions": [
+          256,
+          529
+        ],
+        "frame": [
+          256,
+          529
+        ]
+      }
     }
   }
 }

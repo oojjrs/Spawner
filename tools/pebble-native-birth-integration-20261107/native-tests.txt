@@ -1,0 +1,22 @@
+✔ same room resync retains source choice; rewind and leave reset; whole roster keeps offscreen (2.89275ms)
+✔ pending room entry cannot activate after leave (0.227126ms)
+✔ actual native presentation hook distinguishes original fallback from handled restored failure (1.542222ms)
+✔ actual outline optional context preserves old default and routes offscreen target without mutating global (2.933611ms)
+✔ avatar first cannot pin world or reserve nest (2.173255ms)
+✔ world first cannot pin avatar source (0.582983ms)
+✔ both failed first selections stay original after readiness changes; offscreen roster retains them (0.420232ms)
+✔ avatar ignores world environment records; restored failure remains handled without fallback (0.443316ms)
+✔ reduced first draws use prepared source on both surfaces without changing native pose clock (0.758833ms)
+✔ actual enterRoom preprepared packet awaits catalog before activation/apply (2.580809ms)
+✔ actual enterRoom rejects back/preparation cancellation after new await (0.795597ms)
+✔ actual enterRoom rejects newer entry or leave token (1.05472ms)
+✔ actual world ordering records all colonies before birth, including selected movement path (2.688377ms)
+✔ actual native drawColony offscreen cull cannot record a new environment (1.082591ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 524.724069

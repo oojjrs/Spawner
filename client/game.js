@@ -3,6 +3,27 @@
     (async () => {
     await globalThis.SpawnerAssets.ready;
     const assetSource = globalThis.SpawnerAssets.source;
+    const { createPebbleBirthRuntime } = Spawner;
+    const pebbleBirthRuntime = createPebbleBirthRuntime({
+      source: assetSource, image: () => globalThis.SpawnerAssets.image(),
+      createCanvas: (width, height) => { const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface; }
+    });
+    let pebbleWorldDrawing = false, pebbleAvatarDrawing = false, pebbleRoomEntryVersion = 0;
+    function recordPebbleNative(entry, sprite, frame, x, y, width, height, kind = "static") {
+      if (!pebbleWorldDrawing || entry.tribe !== "pebble") return;
+      pebbleBirthRuntime.recordNative(entry, { sprite, frame, x, y, width, height, kind,
+        level: entry.nestLevel || 1, transform: ctx.getTransform(), alpha: ctx.globalAlpha });
+    }
+    function drawPackedPebbleBirth(context, agent, time, x, floor, cell, mirror, color, surface) {
+      if (!surface) return null;
+      return pebbleBirthRuntime.draw(context, agent, time, x, floor, cell, mirror, {
+        surface, reduced: idleMotion.matches, outlinePadding: color ? selectionOutlineWidth : 0,
+        beforeDraw: color ? (target, image, crop, destination) => {
+          drawSelectionOutline(image, destination.x, destination.y, destination.width,
+            destination.height, { ...crop, size: crop.width }, color, target);
+        } : null
+      });
+    }
     const sharedPresentation = globalThis.SpawnerWelcomeHeader?.presentationResources();
     const tribeArt = Spawner.createTribeArt(Spawner.PLAYER_TRIBES, assetSource);
     const appearanceWorld = globalThis.SpawnerAppearance.createUnitAppearanceWorld({ sourceUrl: assetSource });
@@ -564,7 +585,8 @@
       parts: agentParts, baseParts: agentBaseParts, roots: sproutRoots, headMotions: agentHeadMotions, combatMounts: sproutCombatMounts,
       foodDelivery: id => foodDeliveries.get(id), sprite: agentSprite, birthPose: agentBirthPose, deliveryPose: foodDeliveryPose,
       position: interpolatedAgentPosition, displayScale: unitDisplayScale, rangedImage: agentRangedImage, drawBirth: drawAgentBirth,
-      drawOutline: drawSelectionOutline, selectionShape: () => foodSelectionShape, maxZoom: () => ZOOM_LAYERS[0],
+      birthSurface: () => pebbleAvatarDrawing ? "avatar" : pebbleWorldDrawing ? "world" : null,
+      drawPackedPebbleBirth, drawOutline: drawSelectionOutline, selectionShape: () => foodSelectionShape, maxZoom: () => ZOOM_LAYERS[0],
       pixelRatio: () => window.devicePixelRatio || 1, createSurface: (width, height) => {
         const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
       } });
@@ -2124,6 +2146,7 @@
     }
 
     function drawWorldObjects(now) {
+      pebbleBirthRuntime.beginFrame([...state.agents, ...state.rivals].map(displayedAgent), state.simSeconds);
       const topLeft = screenToWorld(0, 0);
       const bottomRight = screenToWorld(viewport.width, viewport.height);
       const objects = [];
@@ -2790,7 +2813,8 @@
       return { sprite: animation.canvas, index };
     }
 
-    function drawSelectionOutline(sprite, x, y, width, height, frame, color) {
+    function drawSelectionOutline(sprite, x, y, width, height, frame, color, targetContext = ctx) {
+      const ctx = targetContext;
       if (sprite === foodSelectionShape) {
         ctx.save();
         ctx.globalAlpha = 1;
@@ -2998,6 +3022,7 @@
       }
       if (outlineColor && animation !== foodIdle) drawSelectionOutline(sprite, x, y, width, height, frame, outlineColor);
       if (colony) drawStructureEffects("colony", colony, sprite, frame, x, y, width, height, false);
+      if (colony) recordPebbleNative(colony,sprite,frame,x,y,width,height);
       if (frame) ctx.drawImage(sprite, frame.x, frame.y, frame.size, frame.size, x, y, width, height);
       else ctx.drawImage(sprite, x, y, width, height);
       if (colony) drawStructureEffects("colony", colony, sprite, frame, x, y, width, height, true);
@@ -3467,6 +3492,7 @@
         y: Math.floor(frame / rendering.animation.columns) * frameSize, size: frameSize };
       drawStructureEffects("colony", entry, rendering.animation.sheet, region,
         center.x - size / 2, y, size, size, false);
+      recordPebbleNative(entry,rendering.animation.sheet,{...region,index:frame},center.x-size/2,y,size,size,"growth");
       ctx.drawImage(rendering.animation.sheet, frame % rendering.animation.columns * frameSize,
         Math.floor(frame / rendering.animation.columns) * frameSize, frameSize, frameSize,
         center.x - size / 2, y, size, size);
@@ -3537,6 +3563,7 @@
         const light = colonyLight(now);
         if (pebbleBirth) {
           drawStructureEffects("colony", entry, sprite, null, spriteX, spriteY, spriteSize, spriteSize, false);
+          recordPebbleNative(entry,sprite,null,spriteX,spriteY,spriteSize,spriteSize);
           ctx.drawImage(sprite, spriteX, spriteY, spriteSize, spriteSize);
           drawStructureEffects("colony", entry, sprite, null, spriteX, spriteY, spriteSize, spriteSize, true);
         }
@@ -5700,9 +5727,11 @@
       drawFlashes(now);
       for (const entry of colonyEntries) drawColonyGround(entry,
         worldToScreen(entry.x, entry.y), COLONY_SIZE * state.camera.zoom, colonyAppearance(entry));
-      drawWorldObjects(now);
+      pebbleWorldDrawing = true;
+      try { drawWorldObjects(now); } finally { pebbleWorldDrawing = false; }
       for (const entry of colonyEntries) drawColonyHealthRing(entry);
-      drawCombatAgents(now);
+      pebbleWorldDrawing = true;
+      try { drawCombatAgents(now); } finally { pebbleWorldDrawing = false; }
       drawAttackImpacts();
       drawCombatDust();
       drawCombatPanel(now);
@@ -7101,7 +7130,9 @@
         const birth = agentBirthPose(agent, true);
         const cell = size * (birth?.seedVisible ? .38 : .75) * scale;
         const topLeft = { x: (bounds.width - cell) / 2, y: bounds.height * .93 - cell * (.5 + AGENT_HEIGHT * .44) };
-        drawAgentAppearance(context, now, agent, cell, topLeft, interpolatedAgentPosition(agent), birth, null);
+        pebbleAvatarDrawing = true;
+        try { drawAgentAppearance(context, now, agent, cell, topLeft, interpolatedAgentPosition(agent), birth, null); }
+        finally { pebbleAvatarDrawing = false; }
       }
     }
 
@@ -9556,6 +9587,8 @@
     document.getElementById("tribe-selection-back").addEventListener("click", async () => {
       if (lobbyBusy) return;
       ++roomPreparationVersion;
+      ++pebbleRoomEntryVersion;
+      pebbleBirthRuntime.leave();
       ++tribePreviewVersion;
       rememberRoom(null);
       tribeSelection.hidden = true;
@@ -9702,6 +9735,7 @@
       if (connection.busy || !connection.active || roomTransition || roomExitDialog.open) return;
       if (!await confirmRoomExit() || connection.busy || !connection.active || roomTransition) return;
       roomTransition = true;
+      ++pebbleRoomEntryVersion;
       connection.busy = true;
       connection.active = false;
       document.querySelector(".app").inert = true;
@@ -9709,6 +9743,7 @@
       buttons.forEach(button => { button.disabled = true; });
       try {
         await client.call("pause", { visible: false });
+        pebbleBirthRuntime.leave();
         rememberRoom(null);
         connection.active = false;
         connection.online = false;
@@ -9821,6 +9856,7 @@
     function applySnapshot(packet) {
       if (packet.roomId !== connection.roomId) return;
       if (packet.revision < connection.revision) return;
+      pebbleBirthRuntime.acceptSnapshot(packet);
       const colonyChanged = connection.colonyId !== null && connection.colonyId !== packet.colonyId;
       if (colonyChanged) {
         resetEnding();
@@ -9998,6 +10034,7 @@
     }
 
     async function enterRoom(roomId, packet) {
+      const pebbleEntryVersion = ++pebbleRoomEntryVersion;
       resetEnding();
       audio.updateMusic(null);
       connection.roomId = roomId;
@@ -10010,6 +10047,11 @@
       try {
         packet ||= await prepareRoom(roomId);
         if (!packet) return;
+        if (pebbleEntryVersion !== pebbleRoomEntryVersion || connection.roomId !== roomId) return;
+        const birthPreparationVersion = roomPreparationVersion;
+        setEvolutionText(tribeSelection.hidden ? welcomeStatus : tribeSelectionStatus, "탄생 모습을 불러오는 중…");
+        const birthEntry = await pebbleBirthRuntime.enter(packet);
+        if (birthEntry.stale || birthPreparationVersion !== roomPreparationVersion || pebbleEntryVersion !== pebbleRoomEntryVersion || connection.roomId !== roomId) return;
         rememberRoom(roomId);
         if (packet.colonies.find(colony => colony.id === packet.colonyId).tribe === null) {
           showTribeSelection(packet);
