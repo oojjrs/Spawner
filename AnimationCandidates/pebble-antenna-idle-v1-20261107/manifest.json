@@ -1,0 +1,32 @@
+{
+  "status": "approved-for-planning",
+  "tribe": "pebble",
+  "form": "antenna",
+  "action": "idle",
+  "approvalMessageId": "Sentinel_910f3045912c81918d99d2a52defe1b5",
+  "sheet": "pebble-antenna-idle-v1-sheet.png",
+  "preview": "pebble-antenna-idle-v1-preview.gif",
+  "sheetLibraryFileId": "libfile_0d75f1a8e83c819183f4d4d0d8f869da",
+  "previewLibraryFileId": "libfile_34f9f9f0b17c8191a99b801abf49fdd0",
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "gifFrameCount": 8,
+  "durationsMs": [
+    1100,
+    400,
+    70,
+    100,
+    70,
+    180,
+    180,
+    400
+  ],
+  "durationMs": 2500,
+  "sheetSHA256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+  "previewSHA256": "2e1fea4bcca881796361390d80c6208da1e109ff25f180b17230be05609d21c4",
+  "originalBytesPreserved": true,
+  "maxTimelineRGBRMSE": 1.5001309655554609,
+  "usage": "Approved full-body idle poses. Planning reference only; game runtime and deployment are unchanged.",
+  "approvalNote": "Accepted by the user with reservations about the result."
+}
