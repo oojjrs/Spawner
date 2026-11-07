@@ -74,7 +74,7 @@ for (const tribe of UNIT_APPEARANCE_TRIBES) for (const form of forms) test(`${tr
 });
 
 test('all four laboratory choices use independently valid DNA and correct attack capabilities', () => {
-  assert.equal(COMBAT_LAB_APPEARANCES.length, 12);
+  assert.equal(COMBAT_LAB_APPEARANCES.length, 14);
   for (const form of originalForms) {
     const dna = combatLabCombinationDna(form.key), other = combatLabCombinationDna(form.key);
     assert.ok(validateDna(dna, dna.level, dna.budget)); assert.ok(ATTRIBUTE_DNA.trace(dna.pieces, dna.level).valid);
@@ -172,6 +172,6 @@ test('planning lists all sixteen forms, 104 authored clips and 48 matching work 
     if (!form.attributes.blade) assert.match(row, /<td data-action="attack"[^>]*><\/td>/);
   }
   assert.equal(authored, 104); assert.equal(work, 48);
-  assert.ok(html.includes('16개 외형의 기본 동작 104개') || html.includes('44개 복합 외형·276개 기본 동작'));
+  assert.ok(html.includes('16개 외형의 기본 동작 104개') || html.includes('44개 복합 외형·280개 기본 동작'));
   assert.ok(html.includes('pebble-blade-carapace-walk-grounded-v2-20261107'));
 });

@@ -134,7 +134,7 @@ function combatFixture(sourceStats,targetStats) {
   return {a,b,c,tick};
 }
 
-test("칼날 없는 DNA는 실제 전투에서 공격하지 않는다",()=>{
+test("공격 기관 없는 DNA끼리는 실제 전투에서 선제공격하지 않는다",()=>{
   const stats=dnaUnitStats(design([],1)),f=combatFixture(stats,stats);f.tick(0);f.tick(10);
   assert.equal(f.a.health,100);assert.equal(f.b.health,100);assert.ok(!f.a.attack);
 });

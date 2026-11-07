@@ -5,6 +5,8 @@ import argparse
 import html
 import json
 import re
+import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / 'AnimationCandidates/antenna-combinations-v1-20261107/publications.json'
@@ -84,6 +86,13 @@ def main():
         source = source.replace('<div class="table-wrap"><table class="appearance-table">', f'<p class="antenna-combo-publication-note">{note}</p>\n<div class="table-wrap"><table class="appearance-table">', 1)
     DOC.write_text('document.write(\n' + ' +\n'.join(json.dumps(line, ensure_ascii=False) for line in source.splitlines(keepends=True)) + '\n);\n')
     print(f'Published {len(records)}/28 antenna rows and {len(records)*3}/84 work cells')
+    # Later attack-only publications must survive a rebuild of these rows.
+    defensive_index = ROOT / 'AnimationCandidates/defensive-attacks-v1-20261107/publications.json'
+    if defensive_index.is_file() and json.loads(defensive_index.read_text()):
+        command = [sys.executable, str(ROOT / 'scripts/publish-defensive-attack-docs.py')]
+        if args.runtime_complete and len(json.loads(defensive_index.read_text())) == 12:
+            command.append('--runtime-complete')
+        subprocess.run(command, check=True)
 
 
 if __name__ == '__main__':

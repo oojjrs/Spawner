@@ -1,0 +1,176 @@
+{
+  "tribe": "pebble",
+  "form": "carapace",
+  "status": "completed-under-user-delegated-production",
+  "method": "Built-in imagegen complete-body artwork; only whole-frame extraction, uniform scaling, floor registration and encoding. No body-part compositing.",
+  "sourceFacing": "right",
+  "attackRole": "Melee body ram for defensive response. Asset registration alone must not change proactive targeting or combat rules.",
+  "baseMotionReference": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
+  "identityReference": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/idle.webp",
+  "actions": {
+    "attack": {
+      "sheet": "AnimationCandidates/pebble-carapace-defensive-attack-v1-20261107/pebble-carapace-defensive-attack-v1-sheet.png",
+      "preview": "AnimationCandidates/pebble-carapace-defensive-attack-v1-20261107/pebble-carapace-defensive-attack-v1-preview.webp",
+      "gif": "AnimationCandidates/pebble-carapace-defensive-attack-v1-20261107/pebble-carapace-defensive-attack-v1-preview.gif",
+      "cover": "AnimationCandidates/pebble-carapace-defensive-attack-v1-20261107/pebble-carapace-defensive-attack-v1-cover.png",
+      "sheetSHA256": "6f9ef1d249849fe00fa843afd5a2b4aa343edff5b72f0e573d48bfe888628a42",
+      "previewSHA256": "5349a5c7ff641f202b16add742501583f678f05c27ded6b16577f0868abe2d83",
+      "gifSHA256": "b25ca5883bc904a65bb37999fe23aa1ec16960265d39e6cbffad059b32f0fed0",
+      "coverSHA256": "f8d02c0149803ca51040901575e05a2c06dd0c664cce5229ca9262b3ad4b2041",
+      "sourceSHA256": "98365298b50b7b7d9493a00f45b1760cb505b674e715ad90bdd05782c57750c1",
+      "frameSize": 512,
+      "frameHeight": 512,
+      "columns": 4,
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        110,
+        110,
+        70,
+        110,
+        80,
+        110,
+        230
+      ],
+      "durationMs": 980,
+      "loop": false,
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "sourceFacing": "right",
+      "pivotX": 240.5,
+      "pivotY": 450,
+      "referenceLength": 379,
+      "viewSize": 379,
+      "bodyBounds": [
+        [
+          51,
+          134,
+          430,
+          450
+        ],
+        [
+          50,
+          153,
+          428,
+          451
+        ],
+        [
+          47,
+          143,
+          404,
+          451
+        ],
+        [
+          35,
+          163,
+          432,
+          450
+        ],
+        [
+          64,
+          175,
+          476,
+          450
+        ],
+        [
+          47,
+          150,
+          435,
+          450
+        ],
+        [
+          46,
+          136,
+          429,
+          450
+        ],
+        [
+          49,
+          137,
+          427,
+          450
+        ]
+      ],
+      "hitTimeMs": 450,
+      "hitFrameIndex": 4,
+      "fullScene": false,
+      "rootMotion": false,
+      "projectileBakedIntoBodySheet": false,
+      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center.",
+      "packScale": 1.2222222222222223,
+      "packCrop": [
+        48,
+        82,
+        424,
+        368
+      ],
+      "packTranslationX": 26,
+      "packTranslationY": [
+        122,
+        124,
+        125,
+        110,
+        110,
+        119,
+        127,
+        127
+      ],
+      "sourceBodyBounds": [
+        [
+          68,
+          92,
+          378,
+          350
+        ],
+        [
+          68,
+          106,
+          377,
+          349
+        ],
+        [
+          65,
+          96,
+          357,
+          348
+        ],
+        [
+          56,
+          126,
+          380,
+          360
+        ],
+        [
+          79,
+          135,
+          416,
+          360
+        ],
+        [
+          65,
+          108,
+          382,
+          353
+        ],
+        [
+          65,
+          90,
+          378,
+          346
+        ],
+        [
+          67,
+          90,
+          376,
+          346
+        ]
+      ]
+    }
+  },
+  "newRangedAttack": false,
+  "newGatherArt": false,
+  "sourceAppearance": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/idle.webp",
+  "sourceAppearanceSHA256": "d9e9ad58c28d7a842335315b718ace4824a8a40c028ed17e1fb5d178149649f8",
+  "sourceBaseAttack": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
+  "sourceBaseAttackSHA256": "385db115850e1a9a927ff0d44888bb54fb806b682bab67cb49c23f38daf91188"
+}

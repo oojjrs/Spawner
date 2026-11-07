@@ -1,0 +1,28 @@
+{
+  "attack": {
+    "frameCount": 16,
+    "durationMs": 1000,
+    "sheetSize": [
+      4096,
+      1024
+    ],
+    "uniqueWholeBodyPoses": 7,
+    "sheetExactPosePixelEquality": true,
+    "transparentBackground": true,
+    "clippedFrames": 0,
+    "singleConnectedBodyOver8Pixels": true,
+    "connectedBodyCounts": [
+      1
+    ],
+    "contentUnion": [
+      150,
+      202,
+      386,
+      448
+    ],
+    "gifDurationMs": 1000,
+    "gifDecodedFrames": 8,
+    "finalFourFramesIdentical": false,
+    "sheetSha256": "86a35f7b245f60dd66396cd65efa37c4848ad27635f174d05f1ac200757578c7"
+  }
+}

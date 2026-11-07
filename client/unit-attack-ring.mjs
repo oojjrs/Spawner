@@ -1,9 +1,11 @@
 import { combatProfile } from "../server/combat-stats.mjs";
+import { dnaDefensiveMelee } from "../server/dna-actions.mjs";
 
 export function unitAttackCooldown(agent, time) {
   if (!agent || !(agent.health > 0) || !Number.isFinite(time)) return null;
   const dna = agent.stats?.dna;
-  if (dna && !(dna.melee && dna.meleePower > 0 && dna.meleeSpeed > 0 || dna.ranged && dna.rangedPower > 0 && dna.rangedSpeed > 0)) return null;
+  if (dna && !((dna.melee || dnaDefensiveMelee(dna) && agent.combat?.defending) && dna.meleePower > 0 && dna.meleeSpeed > 0 ||
+      dna.ranged && dna.rangedPower > 0 && dna.rangedSpeed > 0)) return null;
   if (agent.stats?.canAttack === false) return null;
   const attack = agent.attack;
   if (Number.isFinite(attack?.defenseResetAt)) return 1;

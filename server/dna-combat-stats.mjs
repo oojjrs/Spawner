@@ -1,4 +1,5 @@
 export const DNA_COMBAT_RULES = Object.freeze({
+  basicPower: 1,
   powerCurve: "linear", powerBase: 2, powerGain: 2, powerKnee: 2,
   rangedPowerBase: 1.4, rangedPowerGain: 1.4, rangedPowerKnee: 2,
   rangedAttackRateBase: .5, rangedHasteCap: 7, rangedHasteKnee: 70,
@@ -25,16 +26,17 @@ export function dnaCombatStats(counts, weights, inputRules) {
   const capped = (count, cap, knee) => count ? Math.min(cap, cap * count / (knee || 1)) : 0;
   const powerGain = (count, gain, knee) => rules.powerCurve === "log" ?
     gain * Math.log1p(count / knee) / Math.log1p(1 / knee) : gain * count;
-  const melee = !!c.blade, ranged = !!c.secretion, attack = melee || ranged;
-  const meleePower = melee ? rules.powerBase * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : 0;
+  const melee = !!c.blade, ranged = !!c.secretion, attack = melee || ranged, defensiveMelee = !attack;
+  // A basic body can defend itself without gaining an offensive organ or its upgrades.
+  const meleePower = melee ? rules.powerBase * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : defensiveMelee ? rules.basicPower : 0;
   const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
-  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : 0;
+  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : defensiveMelee ? Math.min(rules.maxActionRate, rules.attackRateBase) : 0;
   const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
   return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0,
-    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed,
+    melee, ranged, defensiveMelee, meleePower, meleeSpeed, rangedPower, rangedSpeed,
     ...(rules.recovery ? { recovery: rules.recovery } : {}),
     health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
-    power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,
+    power: melee || defensiveMelee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 1, speed: melee || defensiveMelee ? meleeSpeed : rangedSpeed,
     armor: rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),
     parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),
     block: 100 * capped(n.block || 0, rules.blockCap, rules.blockKnee),
@@ -55,6 +57,6 @@ export function dnaCombatStats(counts, weights, inputRules) {
     area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,
     lifesteal: attack ? 100 * capped(n.lifesteal || 0, rules.drainCap, rules.drainKnee) : 0,
     reflection: Math.min(30, 3 * (n.reflection || 0)), regeneration: .1 * (n.regeneration || 0),
-    comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : 0,
-    focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : 0 };
+    comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : rules.hitGapBase,
+    focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : rules.windupBase };
 }

@@ -2562,7 +2562,7 @@ document.write(
 "  expertLevelFourAt:600, aiLevelFourAt:1200, activePopulation:36, inefficientPopulation:70,\n" +
 "  workerShare:Object.freeze([.8,.65,.45,.3]), nestCosts:Object.freeze([80,200,500,null]),\n" +
 "  attributeCosts:Object.freeze([0,0,8,16,24]), aiUpgradeAt:Object.freeze([0,270,690,1200]),\n" +
-"  productionInterval:3, frontierSamples:48, preferredScouts:4 });\n" +
+"  productionInterval:3, frontierSamples:48 });\n" +
 "\n" +
 "const TRIBE_PACING = Object.freeze({\n" +
 "  bean:Object.freeze({tempo:1,population:36,native:null,army:Object.freeze([\"blade\",\"carapace\",\"feet\"])}),\n" +
@@ -4183,70 +4183,6 @@ document.write(
 "\n" +
 "return { NEST_LEVELS, nestUpgradeCost, materialCapacity };\n" +
 "})();\n" +
-"modules[\"server/dna-combat-stats.mjs\"] = (() => {\n" +
-"const DNA_COMBAT_RULES = Object.freeze({\n" +
-"  powerCurve: \"linear\", powerBase: 2, powerGain: 2, powerKnee: 2,\n" +
-"  rangedPowerBase: 1.4, rangedPowerGain: 1.4, rangedPowerKnee: 2,\n" +
-"  rangedAttackRateBase: .5, rangedHasteCap: 7, rangedHasteKnee: 70,\n" +
-"  healthBase: 10, healthPerPoint: 10, armorPerPoint: 1, armorCap: 1, armorKnee: 100,\n" +
-"  flatPenPerPoint: 1, percentPenCap: .8, percentPenKnee: 4,\n" +
-"  attackRateBase: .5, hasteCap: 7, hasteKnee: 70, maxActionRate: 4,\n" +
-"  windupBase: .3, focusPerPoint: .02, windupMinimum: .08,\n" +
-"  hitGapBase: .12, hitSpeedPerPoint: .005, hitGapMinimum: .06, recovery: 0,\n" +
-"  defensePreparation: 0, reactionCooldown: 0, counterCooldown: 0,\n" +
-"  followupBase: .5, comboPerPoint: .05, followupCap: 1,\n" +
-"  critCap: .75, critKnee: 18.75, critMultiplierBase: 1.5, critMultiplierCap: 4, critPowerKnee: 25,\n" +
-"  accuracyCap: .6, accuracyKnee: 20, dodgeCap: .6, dodgeKnee: 20,\n" +
-"  parryCap: .6, parryKnee: 15, blockCap: .75, blockKnee: 15,\n" +
-"  blockReductionBase: .5, blockReductionCap: .5, blockPowerKnee: 10,\n" +
-"  counterCap: 1, counterKnee: 10, counterMultiplierBase: 1, counterMultiplierCap: 2,\n" +
-"  counterPowerKnee: 10, counterWindup: .12,\n" +
-"  tenacityCap: .75, tenacityKnee: 15, stunCap: .3, stunKnee: 10,\n" +
-"  stunDurationBase: .25, stunDurationPerPoint: .05, stunDurationCap: 1, stunImmunity: 2,\n" +
-"  drainCap: .2, drainKnee: 20, jitter: .2\n" +
-"});\n" +
-"\n" +
-"function dnaCombatStats(counts, weights, inputRules) {\n" +
-"  const rules = inputRules || DNA_COMBAT_RULES, n = weights, c = counts;\n" +
-"  const capped = (count, cap, knee) => count ? Math.min(cap, cap * count / (knee || 1)) : 0;\n" +
-"  const powerGain = (count, gain, knee) => rules.powerCurve === \"log\" ?\n" +
-"    gain * Math.log1p(count / knee) / Math.log1p(1 / knee) : gain * count;\n" +
-"  const melee = !!c.blade, ranged = !!c.secretion, attack = melee || ranged;\n" +
-"  const meleePower = melee ? rules.powerBase * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : 0;\n" +
-"  const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;\n" +
-"  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : 0;\n" +
-"  const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;\n" +
-"  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0,\n" +
-"    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed,\n" +
-"    ...(rules.recovery ? { recovery: rules.recovery } : {}),\n" +
-"    health: rules.healthBase + rules.healthPerPoint * (n.health || 0),\n" +
-"    power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,\n" +
-"    armor: rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),\n" +
-"    parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),\n" +
-"    block: 100 * capped(n.block || 0, rules.blockCap, rules.blockKnee),\n" +
-"    evasion: 100 * capped((n.evasion || 0) + (n.legs || 0), rules.dodgeCap, rules.dodgeKnee),\n" +
-"    comboPower: attack ? 100 * Math.min(rules.followupCap, rules.followupBase + rules.comboPerPoint * (n.comboPower || 0)) : 0,\n" +
-"    critical: attack ? 100 * capped(n.critical || 0, rules.critCap, rules.critKnee) : 0,\n" +
-"    criticalPower: attack ? 100 * (rules.critMultiplierBase + capped(n.criticalPower || 0, rules.critMultiplierCap - rules.critMultiplierBase, rules.critPowerKnee)) : 0,\n" +
-"    accuracy: attack ? 100 * capped(n.accuracy || 0, rules.accuracyCap, rules.accuracyKnee) : 0,\n" +
-"    penetration: attack ? rules.flatPenPerPoint * (n.penetration || 0) : 0,\n" +
-"    ...(n.percentPen ? { armorPenetration: capped(n.percentPen, rules.percentPenCap, rules.percentPenKnee) } : {}),\n" +
-"    blockPower: 100 * DNA_COMBAT_RULES.blockReductionBase,\n" +
-"    counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,\n" +
-"    counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,\n" +
-"    tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),\n" +
-"    stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,\n" +
-"    stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,\n" +
-"    bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,\n" +
-"    area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,\n" +
-"    lifesteal: attack ? 100 * capped(n.lifesteal || 0, rules.drainCap, rules.drainKnee) : 0,\n" +
-"    reflection: Math.min(30, 3 * (n.reflection || 0)), regeneration: .1 * (n.regeneration || 0),\n" +
-"    comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : 0,\n" +
-"    focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : 0 };\n" +
-"}\n" +
-"\n" +
-"return { DNA_COMBAT_RULES, dnaCombatStats };\n" +
-"})();\n" +
 "modules[\"server/dna-board.mjs\"] = (() => {\n" +
 "const DNA_BOARD_SHAPES = Object.freeze({\"capacity\":[[0,0],[1,0],[2,0]],\"health\":[[0,0],[1,0],[1,-1]],\"movement\":[[0,0],[1,0],[0,1]],\"harvestSpeed\":[[0,0],[1,0],[2,-1]],\"gather\":[[0,0],[1,0],[1,1]],\"blade\":[[0,0],[0,1],[1,-1],[1,0]],\"power\":[[0,0],[0,1],[0,2],[1,2]],\"speed\":[[0,0],[0,1],[0,2],[1,-1],[1,1]],\"secretion\":[[0,0],[0,1],[1,-2],[1,-1],[2,-3]],\"rangedPower\":[[0,0],[0,1],[0,2],[1,1],[1,2]],\"rangedSpeed\":[[0,0],[0,1],[0,2],[1,2],[1,3]],\"antenna\":[[0,0],[0,1],[0,2],[1,1]],\"carapace\":[[0,0],[0,1],[0,2],[1,-1],[2,-1]],\"harvest\":[[0,0],[0,1],[0,2],[1,0],[1,2]],\"loadSpeed\":[[0,0],[0,1],[0,3],[1,1],[1,2]],\"combo\":[[0,0],[0,1],[0,2],[1,-1],[1,0]],\"critical\":[[0,0],[0,1],[1,-2],[1,-1],[2,-2]],\"counter\":[[0,0],[0,1],[0,2],[0,3],[1,-1]],\"stun\":[[0,0],[0,1],[0,2],[0,3],[1,3]],\"bleed\":[[0,0],[0,1],[0,2],[0,3]],\"area\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[2,0]],\"accuracy\":[[0,0],[0,1],[1,-2],[1,-1],[1,1],[2,0]],\"tenacity\":[[0,0],[0,1],[0,2],[1,-2],[1,-1]],\"block\":[[0,0],[0,1],[1,-1],[2,-3],[2,-2]],\"evasion\":[[0,0],[0,1],[1,1],[2,1],[2,2]],\"vision\":[[0,0],[0,1],[1,-1],[1,0],[1,1],[2,-1]],\"legs\":[[0,0],[1,-2],[1,-1],[1,0],[1,1],[2,-1]],\"armor\":[[0,0],[0,1],[1,-1],[1,1],[2,-1],[2,0]],\"parry\":[[0,0],[0,1],[0,2],[1,-2],[1,-1],[1,0]],\"criticalPower\":[[0,0],[0,1],[0,2],[1,-2],[1,-1],[2,-1]],\"penetration\":[[0,0],[0,1],[0,2],[1,-1],[1,1],[2,0]],\"comboPower\":[[0,0],[0,1],[1,-1],[1,0],[2,0],[2,1]],\"blockPower\":[[0,0],[0,1],[1,0],[1,1],[1,2],[2,-1]],\"counterPower\":[[0,0],[0,1],[0,2],[1,-1],[2,-1],[3,-2]],\"reduction\":[[0,0],[0,1],[1,-2],[1,-1],[2,-3],[2,-2]],\"stunTime\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[2,-2]],\"bleedPower\":[[0,0],[0,1],[0,2],[1,-2],[1,-1],[2,-2]],\"areaPower\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[1,2]],\"lifesteal\":[[0,0],[0,1],[0,2],[0,3],[1,-1],[1,0]],\"reflection\":[[0,0],[0,1],[0,2],[1,0],[1,1],[1,2]],\"regeneration\":[[0,0],[0,1],[1,0],[2,-2],[2,-1],[3,-1]],\"comboSpeed\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[2,-1]],\"focus\":[[0,0],[0,1],[1,-2],[1,-1],[2,-2],[2,-1]]});\n" +
 "\n" +
@@ -4322,6 +4258,72 @@ document.write(
 "}\n" +
 "\n" +
 "return { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoardPack };\n" +
+"})();\n" +
+"modules[\"server/dna-combat-stats.mjs\"] = (() => {\n" +
+"const DNA_COMBAT_RULES = Object.freeze({\n" +
+"  basicPower: 1,\n" +
+"  powerCurve: \"linear\", powerBase: 2, powerGain: 2, powerKnee: 2,\n" +
+"  rangedPowerBase: 1.4, rangedPowerGain: 1.4, rangedPowerKnee: 2,\n" +
+"  rangedAttackRateBase: .5, rangedHasteCap: 7, rangedHasteKnee: 70,\n" +
+"  healthBase: 10, healthPerPoint: 10, armorPerPoint: 1, armorCap: 1, armorKnee: 100,\n" +
+"  flatPenPerPoint: 1, percentPenCap: .8, percentPenKnee: 4,\n" +
+"  attackRateBase: .5, hasteCap: 7, hasteKnee: 70, maxActionRate: 4,\n" +
+"  windupBase: .3, focusPerPoint: .02, windupMinimum: .08,\n" +
+"  hitGapBase: .12, hitSpeedPerPoint: .005, hitGapMinimum: .06, recovery: 0,\n" +
+"  defensePreparation: 0, reactionCooldown: 0, counterCooldown: 0,\n" +
+"  followupBase: .5, comboPerPoint: .05, followupCap: 1,\n" +
+"  critCap: .75, critKnee: 18.75, critMultiplierBase: 1.5, critMultiplierCap: 4, critPowerKnee: 25,\n" +
+"  accuracyCap: .6, accuracyKnee: 20, dodgeCap: .6, dodgeKnee: 20,\n" +
+"  parryCap: .6, parryKnee: 15, blockCap: .75, blockKnee: 15,\n" +
+"  blockReductionBase: .5, blockReductionCap: .5, blockPowerKnee: 10,\n" +
+"  counterCap: 1, counterKnee: 10, counterMultiplierBase: 1, counterMultiplierCap: 2,\n" +
+"  counterPowerKnee: 10, counterWindup: .12,\n" +
+"  tenacityCap: .75, tenacityKnee: 15, stunCap: .3, stunKnee: 10,\n" +
+"  stunDurationBase: .25, stunDurationPerPoint: .05, stunDurationCap: 1, stunImmunity: 2,\n" +
+"  drainCap: .2, drainKnee: 20, jitter: .2\n" +
+"});\n" +
+"\n" +
+"function dnaCombatStats(counts, weights, inputRules) {\n" +
+"  const rules = inputRules || DNA_COMBAT_RULES, n = weights, c = counts;\n" +
+"  const capped = (count, cap, knee) => count ? Math.min(cap, cap * count / (knee || 1)) : 0;\n" +
+"  const powerGain = (count, gain, knee) => rules.powerCurve === \"log\" ?\n" +
+"    gain * Math.log1p(count / knee) / Math.log1p(1 / knee) : gain * count;\n" +
+"  const melee = !!c.blade, ranged = !!c.secretion, attack = melee || ranged, defensiveMelee = !attack;\n" +
+"  // A basic body can defend itself without gaining an offensive organ or its upgrades.\n" +
+"  const meleePower = melee ? rules.powerBase * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : defensiveMelee ? rules.basicPower : 0;\n" +
+"  const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;\n" +
+"  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : defensiveMelee ? Math.min(rules.maxActionRate, rules.attackRateBase) : 0;\n" +
+"  const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;\n" +
+"  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0,\n" +
+"    melee, ranged, defensiveMelee, meleePower, meleeSpeed, rangedPower, rangedSpeed,\n" +
+"    ...(rules.recovery ? { recovery: rules.recovery } : {}),\n" +
+"    health: rules.healthBase + rules.healthPerPoint * (n.health || 0),\n" +
+"    power: melee || defensiveMelee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 1, speed: melee || defensiveMelee ? meleeSpeed : rangedSpeed,\n" +
+"    armor: rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),\n" +
+"    parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),\n" +
+"    block: 100 * capped(n.block || 0, rules.blockCap, rules.blockKnee),\n" +
+"    evasion: 100 * capped((n.evasion || 0) + (n.legs || 0), rules.dodgeCap, rules.dodgeKnee),\n" +
+"    comboPower: attack ? 100 * Math.min(rules.followupCap, rules.followupBase + rules.comboPerPoint * (n.comboPower || 0)) : 0,\n" +
+"    critical: attack ? 100 * capped(n.critical || 0, rules.critCap, rules.critKnee) : 0,\n" +
+"    criticalPower: attack ? 100 * (rules.critMultiplierBase + capped(n.criticalPower || 0, rules.critMultiplierCap - rules.critMultiplierBase, rules.critPowerKnee)) : 0,\n" +
+"    accuracy: attack ? 100 * capped(n.accuracy || 0, rules.accuracyCap, rules.accuracyKnee) : 0,\n" +
+"    penetration: attack ? rules.flatPenPerPoint * (n.penetration || 0) : 0,\n" +
+"    ...(n.percentPen ? { armorPenetration: capped(n.percentPen, rules.percentPenCap, rules.percentPenKnee) } : {}),\n" +
+"    blockPower: 100 * DNA_COMBAT_RULES.blockReductionBase,\n" +
+"    counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,\n" +
+"    counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,\n" +
+"    tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),\n" +
+"    stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,\n" +
+"    stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,\n" +
+"    bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,\n" +
+"    area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,\n" +
+"    lifesteal: attack ? 100 * capped(n.lifesteal || 0, rules.drainCap, rules.drainKnee) : 0,\n" +
+"    reflection: Math.min(30, 3 * (n.reflection || 0)), regeneration: .1 * (n.regeneration || 0),\n" +
+"    comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : rules.hitGapBase,\n" +
+"    focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : rules.windupBase };\n" +
+"}\n" +
+"\n" +
+"return { DNA_COMBAT_RULES, dnaCombatStats };\n" +
 "})();\n" +
 "modules[\"server/dna.mjs\"] = (() => {\n" +
 "const { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoardPack } = modules[\"server/dna-board.mjs\"];\n" +
@@ -4418,29 +4420,6 @@ document.write(
 "\n" +
 "return { TRIBE_UNIT_STATS, ATTRIBUTE_STAT_VALUES };\n" +
 "})();\n" +
-"modules[\"server/dna-actions.mjs\"] = (() => {\n" +
-"const DNA_ACTION_RULES = Object.freeze({ meleeRange: 1, rangedRange: 3, projectileSpeed: 6, rangedPowerBase: 1.4 });\n" +
-"\n" +
-"function dnaAttackMode(stats, distance) {\n" +
-"  if (stats.melee && distance <= DNA_ACTION_RULES.meleeRange) return \"melee\";\n" +
-"  if (stats.ranged && distance <= DNA_ACTION_RULES.rangedRange) return \"ranged\";\n" +
-"  return null;\n" +
-"}\n" +
-"\n" +
-"function dnaProjectileDuration(distance) {\n" +
-"  return Math.max(0, distance) / DNA_ACTION_RULES.projectileSpeed;\n" +
-"}\n" +
-"\n" +
-"function dnaProjectileValid(source, target) {\n" +
-"  return !!source && !!target && source.health > 0 && target.health > 0 && !source.hidden && !target.hidden && !source.retreat && !target.retreat;\n" +
-"}\n" +
-"\n" +
-"function dnaAttackStats(stats, mode) {\n" +
-"  return { power: mode === \"ranged\" ? stats.rangedPower : stats.meleePower, speed: mode === \"ranged\" ? stats.rangedSpeed : stats.meleeSpeed };\n" +
-"}\n" +
-"\n" +
-"return { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaProjectileValid, dnaAttackStats };\n" +
-"})();\n" +
 "modules[\"server/neutral-unit-stats.mjs\"] = (() => {\n" +
 "const NEUTRAL_UNIT_STATS = Object.freeze(Object.fromEntries([\n" +
 "  [\"flower-tail-bird\", {\"health\":30,\"power\":3,\"armor\":2,\"speed\":1,\"movement\":0.947,\"vision\":7.525,\"combo\":1.069,\"comboPower\":51.138,\"critical\":5.831,\"criticalPower\":139.311,\"accuracy\":13,\"penetration\":1.201,\"comboSpeed\":0.113,\"focus\":0.223,\"evasion\":13.147,\"parry\":5.195,\"block\":0,\"blockPower\":50,\"counter\":2.232,\"counterPower\":85.37,\"tenacity\":0,\"reduction\":0,\"stun\":0,\"stunTime\":0.2,\"bleed\":2.006,\"bleedPower\":2.303,\"area\":0.004,\"areaPower\":16.08,\"lifesteal\":0.152,\"reflection\":0.365,\"regeneration\":0.9,\"capacity\":1,\"harvestSpeed\":1.9}],\n" +
@@ -4465,6 +4444,33 @@ document.write(
 "].map(([key, stats]) => [key, Object.freeze(stats)])));\n" +
 "\n" +
 "return { NEUTRAL_UNIT_STATS };\n" +
+"})();\n" +
+"modules[\"server/dna-actions.mjs\"] = (() => {\n" +
+"const DNA_ACTION_RULES = Object.freeze({ meleeRange: 1, rangedRange: 3, projectileSpeed: 6, rangedPowerBase: 1.4 });\n" +
+"\n" +
+"function dnaDefensiveMelee(stats) {\n" +
+"  return !!stats?.defensiveMelee && !stats.melee && !stats.ranged;\n" +
+"}\n" +
+"\n" +
+"function dnaAttackMode(stats, distance, defending = false) {\n" +
+"  if ((stats.melee || defending && dnaDefensiveMelee(stats)) && distance <= DNA_ACTION_RULES.meleeRange) return \"melee\";\n" +
+"  if (stats.ranged && distance <= DNA_ACTION_RULES.rangedRange) return \"ranged\";\n" +
+"  return null;\n" +
+"}\n" +
+"\n" +
+"function dnaProjectileDuration(distance) {\n" +
+"  return Math.max(0, distance) / DNA_ACTION_RULES.projectileSpeed;\n" +
+"}\n" +
+"\n" +
+"function dnaProjectileValid(source, target) {\n" +
+"  return !!source && !!target && source.health > 0 && target.health > 0 && !source.hidden && !target.hidden && !source.retreat && !target.retreat;\n" +
+"}\n" +
+"\n" +
+"function dnaAttackStats(stats, mode) {\n" +
+"  return { power: mode === \"ranged\" ? stats.rangedPower : stats.meleePower, speed: mode === \"ranged\" ? stats.rangedSpeed : stats.meleeSpeed };\n" +
+"}\n" +
+"\n" +
+"return { DNA_ACTION_RULES, dnaDefensiveMelee, dnaAttackMode, dnaProjectileDuration, dnaProjectileValid, dnaAttackStats };\n" +
 "})();\n" +
 "modules[\"server/creature-attack-role.mjs\"] = (() => {\n" +
 "const { DNA_ACTION_RULES } = modules[\"server/dna-actions.mjs\"];\n" +
@@ -4501,7 +4507,7 @@ document.write(
 "modules[\"server/combat-stats.mjs\"] = (() => {\n" +
 "const { NEUTRAL_UNIT_STATS } = modules[\"server/neutral-unit-stats.mjs\"];\n" +
 "const { creatureAttackRole } = modules[\"server/creature-attack-role.mjs\"];\n" +
-"const { dnaAttackStats } = modules[\"server/dna-actions.mjs\"];\n" +
+"const { dnaAttackStats, dnaDefensiveMelee } = modules[\"server/dna-actions.mjs\"];\n" +
 "const COMBAT_BASE_DAMAGE = 15;\n" +
 "const COMBAT_STRENGTH_SCALE = 25;\n" +
 "const COMBAT_MAX_INJURY_PENALTY = 10;\n" +
@@ -4597,7 +4603,7 @@ document.write(
 "  const criticalChance = dna ? (Number.isFinite(chance) ? chance : 0) : Math.max(0, Math.min(.75, chance));\n" +
 "  const criticalMultiplier = dna ? (Number.isFinite(multiplier) ? multiplier : 1.5) : Math.max(1, Math.min(4, multiplier));\n" +
 "  if (abilities) {\n" +
-"    const selected = dnaAttackStats(abilities, agent.attack?.attackMode || (abilities.melee ? \"melee\" : \"ranged\"));\n" +
+"    const selected = dnaAttackStats(abilities, agent.attack?.attackMode || (abilities.melee || dnaDefensiveMelee(dna) ? \"melee\" : \"ranged\"));\n" +
 "    if (!dna && Number.isFinite(agent.stats.attackPower)) selected.power = agent.stats.attackPower;\n" +
 "    if (!dna && Number.isFinite(agent.stats.attackSpeed)) selected.speed = agent.stats.attackSpeed;\n" +
 "    const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;\n" +
@@ -4852,8 +4858,6 @@ document.write(
 "  [[\"piercing\"], \"관통병\"],\n" +
 "  [[\"strength\"], \"수송꾼\"],\n" +
 "  [[\"carapace\"], \"파수꾼\"],\n" +
-"  [[\"antenna\"], \"정찰병\"],\n" +
-"  [[\"feet\"], \"척후병\"],\n" +
 "  [[], \"일꾼\"]\n" +
 "];\n" +
 "\n" +
@@ -4919,7 +4923,7 @@ document.write(
 "    incomeObserved:observedSeconds >= 30, forecastBalance:state.evolutionPoints + incomeRate * 120 - reserve };\n" +
 "}\n" +
 "\n" +
-"function colonyForagers(state, foods, homes, scouts) {\n" +
+"function colonyForagers(state, foods, homes) {\n" +
 "  let workers = state.agents.filter(agent => !militaryAgent(agent,agent.tribe) && agent.health >= agent.stats.health * .6 && !agent.retreat && !agent.combat &&\n" +
 "    !(agent.birth?.readyAt > state.simSeconds));\n" +
 "  const ordinary = workers.filter(agent => !HARVEST_ATTRIBUTE_KEYS.some(key => agent.attributes?.[key] > 0));\n" +
@@ -4939,9 +4943,7 @@ document.write(
 "    return { agent, feasible:Number.isFinite(travel), reachable:Number.isFinite(outward / speed), efficiency };\n" +
 "  }).sort((a,b) => a.efficiency - b.efficiency || String(a.agent.id).localeCompare(String(b.agent.id)));\n" +
 "  const feasible = ranked.filter(entry=>entry.feasible), assigned = feasible.length ? feasible : ranked.filter(entry=>entry.reachable);\n" +
-"  const unreserved = assigned.filter(entry => !scouts?.has(entry.agent.id));\n" +
-"  const selected = unreserved.length ? unreserved : assigned;\n" +
-"  return new Set(selected.slice(0, Math.max(1, Math.ceil(workers.length / 2))).map(entry => entry.agent.id));\n" +
+"  return new Set(assigned.slice(0, Math.max(1, Math.ceil(workers.length / 2))).map(entry => entry.agent.id));\n" +
 "}\n" +
 "\n" +
 "return { recordColonyIncome, restoreColonyIncome, colonySupply, colonyForagers };\n" +
@@ -4970,21 +4972,12 @@ document.write(
 "\n" +
 "function startingWorkerDna(tribe = \"bean\") {\n" +
 "  const genes = STARTING_WORKER_GENES[tribe] || STARTING_WORKER_GENES.bean;\n" +
-"  const place = (index, pieces) => {\n" +
-"    if (index === genes.length) return pieces;\n" +
-"    const gene = ATTRIBUTE_DNA.lookup.get(genes[index]);\n" +
-"    for (let rotation = 0; rotation < 6; rotation++) {\n" +
-"      const next = [...pieces, { gene: gene.id, grade: gene.grade, rotation, shape: [...gene.steps] }];\n" +
-"      const trace = ATTRIBUTE_DNA.trace(next, 1);\n" +
-"      if (!trace.valid || trace.closed && index < genes.length - 1) continue;\n" +
-"      const result = place(index + 1, next);\n" +
-"      if (result) return result;\n" +
-"    }\n" +
-"    return null;\n" +
-"  };\n" +
-"  const pieces = place(0, []);\n" +
+"  const pieces = ATTRIBUTE_DNA.pack(genes.map(id => {\n" +
+"    const gene = ATTRIBUTE_DNA.lookup.get(id);\n" +
+"    return { gene: gene.id, grade: gene.grade, rotation: 0 };\n" +
+"  }), 1);\n" +
 "  if (!pieces) throw new Error(\"시작 일꾼 DNA가 1레벨 보드에 맞지 않습니다.\");\n" +
-"  return { version: 3, level: 1, budget: 30, pieces };\n" +
+"  return { version: 4, level: 1, budget: 30, pieces };\n" +
 "}\n" +
 "\n" +
 "return { PLAYER_STARTING_POINTS, TRIBE_STARTING_UNITS, STARTING_WORKER_GENES, startingWorkerDna };\n" +
@@ -5015,8 +5008,7 @@ document.write(
 " const workerTarget=militaryAllowed?Math.floor(target*colonyWorkerShare(state.nestLevel,state.simSeconds,tribe)):target;\n" +
 " const workers=young.filter(agent=>!militaryAgent(agent,tribe)),soldiers=young.filter(agent=>militaryAgent(agent,tribe));\n" +
 " let role=null;\n" +
-" if(workers.length>=Math.max(2,Math.floor(workerTarget/2))&&!workers.some(agent=>agent.slots.includes(\"antenna\")))role=\"scout\";\n" +
-" else if(workers.length<workerTarget)role=\"worker\";\n" +
+" if(workers.length<workerTarget)role=\"worker\";\n" +
 " else if(militaryAllowed&&soldiers.length<target-workerTarget)role=\"military\";\n" +
 " if(!role)return null;\n" +
 " const supply=colonySupply(state,tribe),replacing=living.length<initial.length;\n" +
@@ -5025,7 +5017,7 @@ document.write(
 "  [\"carapace\",profile.army[0]]].map(slots=>[...new Set(slots.filter(key=>isAttributeUnlocked(key,state.nestLevel,tribe)))].slice(0,state.nestLevel));\n" +
 " const count=slots=>soldiers.filter(agent=>slots.every(key=>agent.slots.includes(key))).length;\n" +
 " const army=armies.filter(slots=>slots.length).sort((first,second)=>count(first)-count(second))[0];\n" +
-" const slots=role===\"scout\"?[\"antenna\",\"feet\",profile.native]:role===\"worker\"?[profile.native,\"strength\",\"feet\"]:army;\n" +
+" const slots=role===\"worker\"?[profile.native,\"strength\",\"feet\"]:army;\n" +
 " const allowed=[...new Set(slots.filter(key=>isAttributeUnlocked(key,state.nestLevel,tribe)))].slice(0,state.nestLevel);\n" +
 " const template=productionTemplate(allowed,role,state);\n" +
 " const reserve=replacing?0:supply.reserve;\n" +
@@ -5033,81 +5025,6 @@ document.write(
 "}\n" +
 "\n" +
 "return { tribeProductionTemplate };\n" +
-"})();\n" +
-"modules[\"server/dna-unit.mjs\"] = (() => {\n" +
-"const { ATTRIBUTE_DNA } = modules[\"server/dna.mjs\"];\n" +
-"\n" +
-"function cloneDna(dna) {\n" +
-"  if (!dna) return null;\n" +
-"  const value = dna.version === 3 ? dna : ATTRIBUTE_DNA.validate(dna);\n" +
-"  if (!value) return null;\n" +
-"  return { version: value.version, pieces: value.pieces.map(ATTRIBUTE_DNA.clonePiece), budget: value.budget, level: value.level };\n" +
-"}\n" +
-"\n" +
-"function validateDna(dna, nestLevel, budget) {\n" +
-"  if (!dna || dna.version !== 3 || !Array.isArray(dna.pieces)) return null;\n" +
-"  const organs = new Set();\n" +
-"  for (const piece of dna.pieces) {\n" +
-"    const gene = ATTRIBUTE_DNA.lookup.get(piece?.gene);\n" +
-"    if (!gene || gene.retired) return null;\n" +
-"    if (piece.grade !== gene.grade || !Array.isArray(piece.shape) ||\n" +
-"        JSON.stringify(piece.shape) !== JSON.stringify(ATTRIBUTE_DNA.shape(gene, gene.grade))) return null;\n" +
-"    if (gene.category === \"organ\") {\n" +
-"      if (organs.has(gene.id)) return null;\n" +
-"      organs.add(gene.id);\n" +
-"    }\n" +
-"  }\n" +
-"  const result = ATTRIBUTE_DNA.validate({ ...dna, level: nestLevel, budget: Math.min(999999999, budget) });\n" +
-"  if (!result || !ATTRIBUTE_DNA.trace(result.pieces, nestLevel).valid || ATTRIBUTE_DNA.price(result.pieces) > budget) return null;\n" +
-"  return result;\n" +
-"}\n" +
-"\n" +
-"function dnaAppearance(dna) {\n" +
-"  const counts = ATTRIBUTE_DNA.counts(dna.pieces), attributes = {};\n" +
-"  for (const [gene, key] of [[\"blade\", \"blade\"], [\"carapace\", \"carapace\"], [\"antenna\", \"antenna\"], [\"legs\", \"feet\"], [\"secretion\", \"secretion\"]]) {\n" +
-"    if (counts[gene]) attributes[key] = counts[gene];\n" +
-"  }\n" +
-"  return attributes;\n" +
-"}\n" +
-"\n" +
-"function dnaUnitStats(dna) {\n" +
-"  const stats = ATTRIBUTE_DNA.stats(dna.pieces);\n" +
-"  return { ...stats, dna: stats, health: stats.health, speed: stats.movement, loadedSpeed: stats.movement * stats.loadSpeed / 100,\n" +
-"    capacity: stats.capacity, vision: stats.vision, attack: stats.power, attackPower: stats.power, attackSpeed: stats.speed,\n" +
-"    defense: stats.armor, attackBonus: 0, armorPenetration: stats.penetration, damageReduction: 0,\n" +
-"    combatStrength: 0, resistance: 1, movementMultiplier: 1, harvestSpeedMultiplier: 1 };\n" +
-"}\n" +
-"\n" +
-"// The antenna rule applies to starting/legacy units as well as DNA designs.\n" +
-"// Wild creatures have no nest and retain their own territorial movement rules.\n" +
-"function dnaCanMove(agent, x, y, colonies) {\n" +
-"  if (agent.species && !agent.ownerId) return true;\n" +
-"  const roaming = agent.dna ? agent.stats?.dna?.roaming : agent.attributes?.antenna > 0;\n" +
-"  if (roaming) return true;\n" +
-"  const homes = colonies.filter(colony => !agent.ownerId || colony.ownerId === agent.ownerId);\n" +
-"  const distanceFromHome = (px, py) => Math.min(...homes.map(colony => {\n" +
-"    const dx = Math.max(colony.x - px, 0, px - (colony.x + 4));\n" +
-"    const dy = Math.max(colony.y - py, 0, py - (colony.y + 4));\n" +
-"    return Math.hypot(dx, dy);\n" +
-"  }));\n" +
-"  const nextDistance = distanceFromHome(x, y);\n" +
-"  if (nextDistance <= 3) return true;\n" +
-"  // Old saves may already contain an unrestricted unit outside its home range.\n" +
-"  // Let it approach home, but never move laterally or farther out there.\n" +
-"  return Number.isFinite(agent.x) && Number.isFinite(agent.y) &&\n" +
-"    nextDistance < distanceFromHome(agent.x, agent.y);\n" +
-"}\n" +
-"\n" +
-"// The cheapest productive DNA design, not an empty non-gathering body.\n" +
-"// Keep recovery checks tied to the current catalog and validation rules.\n" +
-"function basicGathererDna(nestLevel = 1) {\n" +
-"  const gene = ATTRIBUTE_DNA.lookup.get(\"gather\");\n" +
-"  const design = { version: 3, level: nestLevel, budget: 999999999,\n" +
-"    pieces: [{ gene: gene.id, grade: gene.grade, rotation: 0, shape: [...gene.steps] }] };\n" +
-"  return validateDna(design, nestLevel, design.budget);\n" +
-"}\n" +
-"\n" +
-"return { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, basicGathererDna };\n" +
 "})();\n" +
 "modules[\"server/food.mjs\"] = (() => {\n" +
 "const { worldSize } = modules[\"server/world-size.mjs\"];\n" +

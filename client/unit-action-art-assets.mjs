@@ -1,8 +1,9 @@
+import { DEFENSIVE_ATTACK_ART } from "./defensive-attack-assets.mjs";
 import { ANTENNA_COMBO_ACTION_ART } from "./antenna-combo-assets.mjs";
 import { SECRETION_COMBO_ACTION_ART } from "./secretion-combo-assets.mjs";
 import { BLADE_CARAPACE_ACTION_ART } from "./blade-carapace-assets.mjs";
 
-export const UNIT_ACTION_ART = Object.freeze({
+const baseUnitActionArt = Object.freeze({
   ...ANTENNA_COMBO_ACTION_ART,
   ...BLADE_CARAPACE_ACTION_ART,
   ...SECRETION_COMBO_ACTION_ART,
@@ -9474,5 +9475,11 @@ export const UNIT_ACTION_ART = Object.freeze({
     }
   }
 });
+
+// A defensive attack changes only its own action, never the existing body,
+// lifecycle clips, work actions or gameplay permissions.
+export const UNIT_ACTION_ART = Object.freeze(Object.fromEntries(Object.entries(baseUnitActionArt).map(([key, definition]) =>
+  [key, DEFENSIVE_ATTACK_ART[key] ? Object.freeze({ ...definition,
+    actions: Object.freeze({ ...definition.actions, attack: DEFENSIVE_ATTACK_ART[key] }) }) : definition])));
 
 export const UNIT_ACTION_ART_ASSETS = Object.freeze([...new Set(Object.values(UNIT_ACTION_ART).flatMap(value => [value.reference.image, ...Object.values(value.actions).map(clip => clip.image)]))]);

@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "forms": 3,
+  "actions": 3,
+  "outputCels": 48,
+  "distinctSourceCels": 45,
+  "rangedActions": 0,
+  "results": [
+    {
+      "form": "carapace",
+      "passed": true,
+      "frames": 16,
+      "distinctSourceCels": 15,
+      "sourceRGBAExact": true,
+      "previewVisibleRGBAExact": true,
+      "durationMs": 1000,
+      "hitTimeMs": 300,
+      "impactHoldMs": 300,
+      "groundBaseline": 368,
+      "pivotX": 240.0,
+      "referenceLength": 185
+    },
+    {
+      "form": "antenna",
+      "passed": true,
+      "frames": 16,
+      "distinctSourceCels": 15,
+      "sourceRGBAExact": true,
+      "previewVisibleRGBAExact": true,
+      "durationMs": 1000,
+      "hitTimeMs": 300,
+      "impactHoldMs": 300,
+      "groundBaseline": 368,
+      "pivotX": 243.5,
+      "referenceLength": 191
+    },
+    {
+      "form": "carapace-antenna",
+      "passed": true,
+      "frames": 16,
+      "distinctSourceCels": 15,
+      "sourceRGBAExact": true,
+      "previewVisibleRGBAExact": true,
+      "durationMs": 1000,
+      "hitTimeMs": 300,
+      "impactHoldMs": 300,
+      "groundBaseline": 368,
+      "pivotX": 252.0,
+      "referenceLength": 180
+    }
+  ]
+}

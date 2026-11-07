@@ -1,4 +1,4 @@
-import { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaProjectileValid } from "./dna-actions.mjs";
+import { DNA_ACTION_RULES, dnaAttackMode, dnaDefensiveMelee, dnaProjectileDuration, dnaProjectileValid } from "./dna-actions.mjs";
 import { creatureAttackRole, creatureAttackMode } from "./creature-attack-role.mjs";
 import { initializeCombatPosition, advanceCombatPositions, combatSeparation, combatPositionMode } from "./combat-position.mjs";
 import { dnaCanMove } from "./dna-unit.mjs";
@@ -27,7 +27,7 @@ export const COMBAT_EXCHANGE_DAMAGE_VERSION = 5;
 const species = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
 
 export function combatDisposition(agent) {
-  if (agent.dna && agent.ownerId) return agent.stats?.dna?.melee || agent.stats?.dna?.ranged ? "aggressive" : "passive";
+  if ((agent.dna || agent.stats?.dna) && agent.ownerId) return agent.stats?.dna?.melee || agent.stats?.dna?.ranged ? "aggressive" : "passive";
   const type = species.get(agent.species);
   let disposition = agent.combatDisposition || type?.combatDisposition;
   if (!disposition) disposition = agent.species === "spiny-back-beetle" ? "aggressive" : "passive";
@@ -253,12 +253,24 @@ export function createCombat(environment) {
     else environment.creatureSystem.receiveDamage(entry.agent, damage);
     if (entry.agent.health <= 0) { entry.agent.attack = null; entry.agent.attackTargetId = null; }
     if (evidence) {
+      if (["hit", "block", "area"].includes(evidence.kind)) activateDefense(entry.agent, attacker, evidence.at);
       const amount = Math.max(0, previousHealth - entry.agent.health);
       const event = vfx(evidence.kind || "hit", evidence.at, attacker, entry.agent, amount, evidence);
       if (previousHealth > 0 && entry.agent.health <= 0)
         vfx("death", evidence.at, attacker, entry.agent, 0, { causeId: event?.id });
       return event;
     }
+  }
+
+  function activateDefense(defender, attacker, time) {
+    const combat = defender.combat;
+    if (!dnaDefensiveMelee(defender.stats?.dna) || defender.health <= 0 || !attacker ||
+        !combat || combatTeam(defender) === combatTeam(attacker) || combat.defending) return;
+    combat.defending = true;
+    // The initial passive wait is infinite. Receiving an attack opens only this fight's normal attack cycle.
+    combat.nextAttackAt = Math.max(time, combat.waitingForAttack ? time : combat.nextAttackAt);
+    delete combat.waitingForAttack;
+    defender.attackReady = combat.nextAttackAt;
   }
 
   function emit(combat, kind, at, source, target, damage, detail = {}) {
@@ -279,7 +291,9 @@ export function createCombat(environment) {
     const combat = attacker.combat, mode = combatPositionMode(attacker, target);
     if (!mode) {
       const capabilities = combatAbilityStats(attacker) || creatureAttackRole(attacker.species);
-      combat.nextAttackAt = capabilities && !capabilities.melee && !capabilities.ranged ? Infinity : Math.max(combat.nextAttackAt, time + .05);
+      const defensiveMelee = dnaDefensiveMelee(attacker.stats?.dna) && combat.defending;
+      if (dnaDefensiveMelee(attacker.stats?.dna) && !combat.defending) combat.waitingForAttack = true;
+      combat.nextAttackAt = capabilities && !capabilities.melee && !capabilities.ranged && !defensiveMelee ? Infinity : Math.max(combat.nextAttackAt, time + .05);
       return;
     }
     const profile = combatProfile({ ...attacker, attack: { attackMode: mode } });
@@ -381,6 +395,7 @@ export function createCombat(environment) {
     const evidence = { kind: reaction || "hit", at: time, critical, counter: !!attack.counter,
       mode: attack.attackMode, hitIndex: attack.hitIndex || 0, causeId: attackCauses.get(attack) };
     const hitEvent = damage > 0 ? receiveDamage(target, damage, attacker, evidence) : vfx(evidence.kind, time, attacker, defender, 0, evidence);
+    activateDefense(defender, attacker, time);
     if (damage > 0) defender.hurtStartedAt = time;
     if (["parry", "block"].includes(reaction)) resetAttackWait(defender, time);
     const dealt = Math.max(0, previous - defender.health);
@@ -421,7 +436,7 @@ export function createCombat(environment) {
         { kind: "reflect", at: time, causeId: hitEvent?.id, fromId: defender.id, toId: attacker.id });
     }
     if (defender.health > 0 && attacker.health > 0 && !defender.attack && !attack.counter && reaction && reaction !== "miss" &&
-        (shield ? shield.power > 0 && time >= (defender.dnaCounterReadyAt || 0) && random() * 100 < shield.counter : !defender.species)) beginAttack(defender, attacker, time, true);
+        (shield ? !dnaDefensiveMelee(defender.stats?.dna) && shield.power > 0 && time >= (defender.dnaCounterReadyAt || 0) && random() * 100 < shield.counter : !defender.species)) beginAttack(defender, attacker, time, true);
     if (source && !attack.counter && attacker.health > 0 && defender.health > 0 && ++attack.hitIndex < attack.hitCount) {
       attack.resolved = false; attack.hitAt = time + source.comboSpeed;
       if (attack.meleeContacts) attack.meleeContacts.push(attack.hitAt);
@@ -552,6 +567,7 @@ export function createCombat(environment) {
     const evidence = { kind: reaction || "hit", at: time, mode: "ranged", critical, hitIndex: projectile.hitIndex,
       causeId: attackCauses.get(projectile.attack), projectileId: projectile.vfxId };
     const hitEvent = damage > 0 ? receiveDamage(target, damage, source, evidence) : vfx(evidence.kind, time, source, defender, 0, evidence);
+    activateDefense(defender, source, time);
     if (damage > 0) defender.hurtStartedAt = time;
     if (["parry", "block"].includes(reaction)) resetAttackWait(defender, time);
     const dealt = Math.max(0, previous - defender.health);

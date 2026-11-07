@@ -1,0 +1,176 @@
+{
+  "tribe": "pebble",
+  "form": "antenna",
+  "status": "completed-under-user-delegated-production",
+  "method": "Built-in imagegen complete-body artwork; only whole-frame extraction, uniform scaling, floor registration and encoding. No body-part compositing.",
+  "sourceFacing": "right",
+  "attackRole": "Melee body ram for defensive response. Asset registration alone must not change proactive targeting or combat rules.",
+  "baseMotionReference": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
+  "identityReference": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
+  "actions": {
+    "attack": {
+      "sheet": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/pebble-antenna-defensive-attack-v1-sheet.png",
+      "preview": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/pebble-antenna-defensive-attack-v1-preview.webp",
+      "gif": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/pebble-antenna-defensive-attack-v1-preview.gif",
+      "cover": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/pebble-antenna-defensive-attack-v1-cover.png",
+      "sheetSHA256": "4566507332229bc18cc415b92bef6974f7963f07a6d4b665b13d38ec8106b15f",
+      "previewSHA256": "2fcc716824e808f585cf2eee979515465af844fe3ab5b652f9b9835980f2c13d",
+      "gifSHA256": "30f9f70ebb9c4d34d49dec9e5dbd79f7160f3592bdb946bc6c12f690daf1e6f4",
+      "coverSHA256": "ac8812494912cb5383c2c92f32efffe254a59680f9ce0e58d9ba7e044addd3bb",
+      "sourceSHA256": "d6dde7ed5e14ee93133082d5775038fd0d8bf2e9363f004479d402c45fdd60ae",
+      "frameSize": 512,
+      "frameHeight": 512,
+      "columns": 4,
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        110,
+        110,
+        70,
+        110,
+        80,
+        110,
+        230
+      ],
+      "durationMs": 980,
+      "loop": false,
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "sourceFacing": "right",
+      "pivotX": 227.0,
+      "pivotY": 451,
+      "referenceLength": 370,
+      "viewSize": 370,
+      "bodyBounds": [
+        [
+          42,
+          127,
+          412,
+          451
+        ],
+        [
+          39,
+          154,
+          416,
+          450
+        ],
+        [
+          36,
+          140,
+          410,
+          450
+        ],
+        [
+          38,
+          156,
+          443,
+          450
+        ],
+        [
+          56,
+          161,
+          476,
+          451
+        ],
+        [
+          42,
+          148,
+          424,
+          450
+        ],
+        [
+          40,
+          130,
+          423,
+          450
+        ],
+        [
+          45,
+          127,
+          414,
+          451
+        ]
+      ],
+      "hitTimeMs": 450,
+      "hitFrameIndex": 4,
+      "fullScene": false,
+      "rootMotion": false,
+      "projectileBakedIntoBodySheet": false,
+      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center.",
+      "packScale": 1.353846153846154,
+      "packCrop": [
+        76,
+        92,
+        417,
+        352
+      ],
+      "packTranslationX": 25,
+      "packTranslationY": [
+        116,
+        116,
+        117,
+        112,
+        109,
+        109,
+        113,
+        116
+      ],
+      "sourceBodyBounds": [
+        [
+          89,
+          100,
+          362,
+          339
+        ],
+        [
+          87,
+          120,
+          365,
+          339
+        ],
+        [
+          84,
+          109,
+          360,
+          338
+        ],
+        [
+          86,
+          125,
+          384,
+          342
+        ],
+        [
+          99,
+          131,
+          409,
+          344
+        ],
+        [
+          89,
+          121,
+          370,
+          344
+        ],
+        [
+          87,
+          105,
+          369,
+          341
+        ],
+        [
+          91,
+          100,
+          363,
+          339
+        ]
+      ]
+    }
+  },
+  "newRangedAttack": false,
+  "newGatherArt": false,
+  "sourceAppearance": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
+  "sourceAppearanceSHA256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+  "sourceBaseAttack": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
+  "sourceBaseAttackSHA256": "385db115850e1a9a927ff0d44888bb54fb806b682bab67cb49c23f38daf91188"
+}

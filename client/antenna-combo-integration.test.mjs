@@ -6,6 +6,7 @@ import { runInNewContext } from 'node:vm';
 import { ANTENNA_COMBINATION_FORMS, UNIT_COMBINATION_FORMS } from './unit-combination-forms.mjs';
 import { ANTENNA_COMBO_ACTION_ART, ANTENNA_COMBO_IMAGE_ASSETS } from './antenna-combo-assets.mjs';
 import { UNIT_ACTION_ART } from './unit-action-art-assets.mjs';
+import { DEFENSIVE_ATTACK_ART } from './defensive-attack-assets.mjs';
 import { unitActionArtDefinition, unitActionArtPose, unitActionArtSelection, createUnitActionArt } from './unit-action-art.mjs';
 import { unitCombinationAppearance, unitDisplayAttributes, unitDominantAppearanceMask, UNIT_DISPLAY_FORM_COUNT } from './unit-display-appearance.mjs';
 import { UNIT_APPEARANCE_BITS, unitAppearanceForm, unitAppearanceMaskFromAttributes } from '../server/unit-appearance.mjs';
@@ -52,7 +53,7 @@ test('antenna catalogue covers seven exact organ sets and preserves all historic
 });
 
 test('DNA v4 antenna combinations preserve actual ability rules and independent board pieces', () => {
-  assert.equal(COMBAT_LAB_APPEARANCES.length, 12);
+  assert.equal(COMBAT_LAB_APPEARANCES.length, 14);
   for (const form of forms) {
     const dna = combatLabCombinationDna(form.key), other = combatLabCombinationDna(form.key);
     assert.equal(dna.version, 4); assert.ok(validateDna(dna, dna.level, dna.budget));
@@ -63,7 +64,8 @@ test('DNA v4 antenna combinations preserve actual ability rules and independent 
       assert.equal(!!stats.dna.ranged, !!form.attributes.secretion);
       assert.equal(stats.dna.armor > 0, !!form.attributes.carapace);
       assert.equal(!!stats.dna.roaming, true);
-      assert.equal(!!stats.canAttack, !!(form.attributes.blade || form.attributes.secretion));
+      assert.equal(!!stats.canAttack, true);
+      assert.equal(!!stats.canInitiate, !!(form.attributes.blade || form.attributes.secretion));
     }
   }
 });
@@ -75,7 +77,7 @@ test('all 28 antenna forms are complete with 172 byte-exact clips and 28 portrai
   for (const tribe of tribes) for (const form of forms) {
     const key = tribe + '/' + form.key, definition = ANTENNA_COMBO_ACTION_ART[key];
     const source = JSON.parse(read(definition.sourceManifest));
-    assert.equal(UNIT_ACTION_ART[key], definition); assert.equal(definition.mask, form.mask);
+    assert.deepEqual(UNIT_ACTION_ART[key], DEFENSIVE_ATTACK_ART[key] ? { ...definition, actions: { ...definition.actions, attack: DEFENSIVE_ATTACK_ART[key] } } : definition); assert.equal(definition.mask, form.mask);
     const expected = ['idle', 'walk', ...(form.attributes.blade ? ['attack'] : []), ...(form.attributes.secretion ? ['ranged'] : []), 'hurt', 'birth', 'death'];
     assert.deepEqual(Object.keys(definition.actions), expected);
     assert.deepEqual(definition.reference, definition.actions.idle);
@@ -106,7 +108,7 @@ test('offline file builds include all 200 byte-exact antenna image wrappers', ()
 });
 
 for (const tribe of tribes) for (const form of forms) test(`${tribe}/${form.key}: same body, allowed attacks, birth and work clocks`, () => {
-  const agent = make(tribe, form), definition = ANTENNA_COMBO_ACTION_ART[tribe + '/' + form.key];
+  const agent = make(tribe, form), definition = UNIT_ACTION_ART[tribe + '/' + form.key];
   assert.ok(definition); assert.equal(unitActionArtDefinition(agent), definition);
   assert.equal(beanHeldHurtSource(agent), null); assert.equal(speciesHeldHurtSource(agent), null);
   const clips = definition.actions, samples = {
@@ -141,7 +143,8 @@ test('every antenna state draws exactly one full-body cell with measured floor a
     return { getContext: () => context };
   }
   const art = createUnitActionArt(path => path, surface, async image => ({ image }));
-  for (const [key, definition] of Object.entries(ANTENNA_COMBO_ACTION_ART)) {
+  for (const key of Object.keys(ANTENNA_COMBO_ACTION_ART)) {
+    const definition = UNIT_ACTION_ART[key];
     const [tribe, name] = key.split('/'), form = forms.find(form => form.key === name), agent = make(tribe, form);
     const samples = { idle: {}, walk: { moveStartedAt: 0, moveDuration: 2 }, attack: { attack: { startedAt: 0, hitAt: .3, endsAt: 1, mode: 'melee' } },
       ranged: { attack: { startedAt: 0, launchedAt: .2, endsAt: 1, mode: 'ranged' } }, hurt: { hurtStartedAt: 0 },
@@ -176,7 +179,8 @@ test('compiled game and combat lab include the exact antenna catalogue and nativ
   assert.ok(start >= 0 && end > start, 'embedded lab bundle');
   const labScope = { console, setTimeout, clearTimeout, URL, performance };
   runInNewContext(lab.slice(start, end) + '\nglobalThis.labArt = modules[\"client/unit-action-art.mjs\"];', labScope);
-  for (const [key, definition] of Object.entries(ANTENNA_COMBO_ACTION_ART)) {
+  for (const key of Object.keys(ANTENNA_COMBO_ACTION_ART)) {
+    const definition = UNIT_ACTION_ART[key];
     const [tribe, name] = key.split('/'), form = forms.find(form => form.key === name), agent = make(tribe, form);
     for (const renderer of [scope.Spawner, labScope.labArt]) {
       const actual = renderer.unitActionArtDefinition(agent);
@@ -235,19 +239,23 @@ test('antenna planning has 28 complete rows and 84 matching work previews', () =
   for (const tribe of tribes) for (const form of forms) {
     const row = html.match(new RegExp('<tr id="unit-' + tribe + '-' + form.key + '"[^]*?</tr>'))?.[0]; assert.ok(row);
     for (const action of ['harvest', 'carry', 'throw']) {
-      const from = action === 'carry' ? 'walk' : form.attributes.blade ? 'attack' : form.attributes.secretion ? 'ranged-attack' : 'walk';
+      const clips = UNIT_ACTION_ART[tribe + '/' + form.key].actions;
+      const from = action === 'carry' ? 'walk' : clips.attack ? 'attack' : clips.ranged ? 'ranged-attack' : 'walk';
       assert.ok(row.includes('data-work-action="' + action + '" data-work-source="' + from + '"')); count++;
     }
   }
-  assert.equal(count, 84); assert.ok(html.includes('44개 복합 외형·276개 기본 동작'));
+  assert.equal(count, 84); assert.ok(html.includes('44개 복합 외형·280개 기본 동작'));
   assert.equal(WELCOME_UNIT_APPEARANCES.length, 18);
 });
 
-test('existing sixteen combinations and four antenna singles retain every original image and clock', async () => {
+test('existing combinations and antenna singles preserve original actions except authorized defensive attacks', async () => {
   const { UNIT_BIRTH_ART } = await import('./unit-birth-art-assets.mjs');
   const baseline = JSON.parse(read('tools/antenna-combo-integration-20261107/existing-art-baseline.json'));
   assert.equal(Object.keys(baseline.definitions).length, 20);
-  for (const [key, definition] of Object.entries(baseline.definitions)) assert.deepEqual(UNIT_ACTION_ART[key], definition, key);
+  for (const [key, definition] of Object.entries(baseline.definitions)) {
+    const expected = DEFENSIVE_ATTACK_ART[key] ? { ...definition, actions: { ...definition.actions, attack: DEFENSIVE_ATTACK_ART[key] } } : definition;
+    assert.deepEqual(UNIT_ACTION_ART[key], expected, key);
+  }
   for (const [key, clip] of Object.entries(baseline.birth)) assert.deepEqual(UNIT_BIRTH_ART[key], clip, key);
   for (const [image, hash] of Object.entries(baseline.sourceImages)) assert.equal(sha(image), hash, image);
 });

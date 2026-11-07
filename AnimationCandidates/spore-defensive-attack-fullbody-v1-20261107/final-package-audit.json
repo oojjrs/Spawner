@@ -1,0 +1,65 @@
+{
+  "forms": {
+    "carapace": {
+      "actions": [
+        "attack"
+      ],
+      "frames": 16,
+      "uniqueFrames": 16,
+      "durationMs": 1000,
+      "gifDurationMs": 1000,
+      "webpDurationMs": 1000,
+      "hitTimeMs": 300,
+      "hitFrameIndex": 5,
+      "pivot": [
+        255.5,
+        418
+      ],
+      "referenceLength": 297,
+      "shaMatch": true
+    },
+    "antenna": {
+      "actions": [
+        "attack"
+      ],
+      "frames": 16,
+      "uniqueFrames": 16,
+      "durationMs": 1000,
+      "gifDurationMs": 1000,
+      "webpDurationMs": 1000,
+      "hitTimeMs": 300,
+      "hitFrameIndex": 5,
+      "pivot": [
+        256.0,
+        416
+      ],
+      "referenceLength": 298,
+      "shaMatch": true
+    },
+    "carapace-antenna": {
+      "actions": [
+        "attack"
+      ],
+      "frames": 16,
+      "uniqueFrames": 16,
+      "durationMs": 1000,
+      "gifDurationMs": 1000,
+      "webpDurationMs": 1000,
+      "hitTimeMs": 300,
+      "hitFrameIndex": 5,
+      "pivot": [
+        256.5,
+        417
+      ],
+      "referenceLength": 297,
+      "shaMatch": true
+    }
+  },
+  "newAttackCount": 3,
+  "rangedAttackCount": 0,
+  "combatRulesModified": false,
+  "bodyPartComposition": false,
+  "allPassed": true,
+  "visualReview": "All 48 full-body frames inspected on neutral background. Base-style rightward cap/body headbutt, preserved approved organs and proportions. No detached projectile, blade or newly added organ.",
+  "verificationScope": "Asset files, decoding, timings, frame diversity, clipping, body connectivity and visual contact sheets. Runtime/browser verification belongs to integration stage."
+}

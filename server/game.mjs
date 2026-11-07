@@ -1378,7 +1378,7 @@ export function createGame(environment, colony, savedGame) {
           combat.update(agent, state.simSeconds);
           return false;
         }
-        if (building && agent.dna && !agent.stats.dna.power) { agent.decisionPending = "targetLost"; return false; }
+        if (building && agent.dna && !(agent.stats.dna.melee || agent.stats.dna.ranged)) { agent.decisionPending = "targetLost"; return false; }
         if (building && burrowDistance(agent, target) <= 1) {
           if (state.simSeconds >= agent.attackReady) {
             const profile = combatProfile(agent), hits = agent.dna ? agent.stats.dna.hits : 1;

@@ -19516,6 +19516,258 @@
           480
         ]
       }
+    },
+    "DesignAssets/Animations/DefensiveAttackV1/bean/carapace/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "28cf4866bc886f988702e99a6b108299090a889d93f680baba07c099720adc6c",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/DefensiveAttackV1/bean/antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "86a35f7b245f60dd66396cd65efa37c4848ad27635f174d05f1ac200757578c7",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/DefensiveAttackV1/bean/carapace-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "345a9e9ee7b002a878195e4ff46055884a24ca94d73eb8fc87221ed9d57c2923",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "6f9ef1d249849fe00fa843afd5a2b4aa343edff5b72f0e573d48bfe888628a42",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/DefensiveAttackV1/pebble/antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "4566507332229bc18cc415b92bef6974f7963f07a6d4b665b13d38ec8106b15f",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "13b278e903cea46afad400c25b742e294f498a4a95fd9c02bb9f44946fb488c6",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/DefensiveAttackV1/spore/carapace/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "8e6cfc666f5bd4ada54096408e03df0f6be2c69b2299e201881352b4dc3b3546",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/DefensiveAttackV1/spore/antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "b8d2170ffd1a2dd1f1ca69b62be008c35c2d39e192173ec0c8850455c591fb0e",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/DefensiveAttackV1/spore/carapace-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "f9b985d0d33fd9ff96b97454e4c297fb8bdac81eb7b38608de98426fd1edf0f3",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/DefensiveAttackV1/spring/carapace/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "5826d50ef42740b37bf16dfab64153f2db2a81f7e459766ce2dc04719c88e94f",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/DefensiveAttackV1/spring/antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "239156eacf1ff293b13971d6f630d92244a30a0fe7aed30bd91757917711a524",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/DefensiveAttackV1/spring/carapace-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "f6379aca3e582969a22284b8b7f0cf79a7a4dfa015e8de5275985b76786651b0",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
     }
   }
 }

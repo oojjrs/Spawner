@@ -1,6 +1,6 @@
 import { NEUTRAL_UNIT_STATS } from "./neutral-unit-stats.mjs";
 import { creatureAttackRole } from "./creature-attack-role.mjs";
-import { dnaAttackStats } from "./dna-actions.mjs";
+import { dnaAttackStats, dnaDefensiveMelee } from "./dna-actions.mjs";
 export const COMBAT_BASE_DAMAGE = 15;
 export const COMBAT_STRENGTH_SCALE = 25;
 export const COMBAT_MAX_INJURY_PENALTY = 10;
@@ -96,7 +96,7 @@ export function combatProfile(agent) {
   const criticalChance = dna ? (Number.isFinite(chance) ? chance : 0) : Math.max(0, Math.min(.75, chance));
   const criticalMultiplier = dna ? (Number.isFinite(multiplier) ? multiplier : 1.5) : Math.max(1, Math.min(4, multiplier));
   if (abilities) {
-    const selected = dnaAttackStats(abilities, agent.attack?.attackMode || (abilities.melee ? "melee" : "ranged"));
+    const selected = dnaAttackStats(abilities, agent.attack?.attackMode || (abilities.melee || dnaDefensiveMelee(dna) ? "melee" : "ranged"));
     if (!dna && Number.isFinite(agent.stats.attackPower)) selected.power = agent.stats.attackPower;
     if (!dna && Number.isFinite(agent.stats.attackSpeed)) selected.speed = agent.stats.attackSpeed;
     const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;

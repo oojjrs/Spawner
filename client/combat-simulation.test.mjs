@@ -167,7 +167,9 @@ test("실제 생물 프로필과 시작 DNA를 외형용 공통 수치로 덮지
   assert.notEqual(paw.stats.attackPower,rabbit.stats.attackPower);
   assert.deepEqual(worker.dna,startingWorkerDna("pebble"));
   assert.deepEqual(worker.stats.dna,dnaUnitStats(worker.dna).dna);
-  assert.equal(worker.stats.canAttack,false);
+  assert.equal(worker.stats.canAttack,true);
+  assert.equal(worker.stats.canInitiate,false);
+  assert.equal(worker.stats.attackPower,1);
 });
 
 test("실제 설계 DNA와 기존 수치 편집은 서로의 입력을 덮지 않는다", async () => {

@@ -57,9 +57,15 @@ export function unitActionArtPose(agent, time) {
   if (!animation) return { action: state.action, animation: definition.reference, frame: definition.reference.frames?.[0] || 0, reference: definition.reference, missing: true };
   let elapsed = state.elapsedMs;
   const duration = animation.durationsMs.reduce((sum, value) => sum + value, 0);
-  if (animation.loop) elapsed %= duration;
+  // Absolute simulation timestamps can put an exact authored cue a fraction
+  // of a nanosecond before its frame boundary after subtraction.
+  const frameEpsilonMs = 1e-7;
+  if (animation.loop) {
+    elapsed %= duration;
+    if (duration - elapsed <= frameEpsilonMs) elapsed = 0;
+  }
   let index = 0;
-  while (index < animation.durationsMs.length - 1 && elapsed >= animation.durationsMs[index]) elapsed -= animation.durationsMs[index++];
+  while (index < animation.durationsMs.length - 1 && elapsed + frameEpsilonMs >= animation.durationsMs[index]) elapsed -= animation.durationsMs[index++];
   return { action: state.action, animation, frame: animation.frames?.[index] ?? index, reference: definition.reference, missing: false };
 }
 

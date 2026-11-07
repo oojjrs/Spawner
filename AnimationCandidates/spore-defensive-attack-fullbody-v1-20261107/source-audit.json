@@ -1,0 +1,32 @@
+{
+  "currentAttackCells": "All three forms are empty in DesignAssets/sections/unit-appearance.js.",
+  "legacyCarapaceAttack": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/attack.webp",
+  "legacyDecision": "Not reused as final: associated rig.json and AttackParts are segmented-body assets. Reuse approved source anatomy and base motion only.",
+  "appearanceReferences": {
+    "carapace": "DesignAssets/Animations/UnitAppearanceV1/spore/02/Source/key-native.png",
+    "antenna": "AnimationCandidates/spore-full-redraw-v5/Source/antenna-full-redraw.png",
+    "carapace-antenna": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/source.png"
+  },
+  "baseMotion": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.json",
+  "baseTiming": [
+    60,
+    70,
+    60,
+    80,
+    30,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    70,
+    80,
+    90,
+    100,
+    60
+  ],
+  "hitTimeMs": 300,
+  "hitFrameIndex": 5,
+  "combatRulesModified": false
+}

@@ -148,6 +148,7 @@ return { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoard
 })();
 modules["server/dna-combat-stats.mjs"] = (() => {
 const DNA_COMBAT_RULES = Object.freeze({
+  basicPower: 1,
   powerCurve: "linear", powerBase: 2, powerGain: 2, powerKnee: 2,
   rangedPowerBase: 1.4, rangedPowerGain: 1.4, rangedPowerKnee: 2,
   rangedAttackRateBase: .5, rangedHasteCap: 7, rangedHasteKnee: 70,
@@ -174,16 +175,17 @@ function dnaCombatStats(counts, weights, inputRules) {
   const capped = (count, cap, knee) => count ? Math.min(cap, cap * count / (knee || 1)) : 0;
   const powerGain = (count, gain, knee) => rules.powerCurve === "log" ?
     gain * Math.log1p(count / knee) / Math.log1p(1 / knee) : gain * count;
-  const melee = !!c.blade, ranged = !!c.secretion, attack = melee || ranged;
-  const meleePower = melee ? rules.powerBase * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : 0;
+  const melee = !!c.blade, ranged = !!c.secretion, attack = melee || ranged, defensiveMelee = !attack;
+  // A basic body can defend itself without gaining an offensive organ or its upgrades.
+  const meleePower = melee ? rules.powerBase * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : defensiveMelee ? rules.basicPower : 0;
   const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
-  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : 0;
+  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : defensiveMelee ? Math.min(rules.maxActionRate, rules.attackRateBase) : 0;
   const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
   return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0,
-    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed,
+    melee, ranged, defensiveMelee, meleePower, meleeSpeed, rangedPower, rangedSpeed,
     ...(rules.recovery ? { recovery: rules.recovery } : {}),
     health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
-    power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,
+    power: melee || defensiveMelee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 1, speed: melee || defensiveMelee ? meleeSpeed : rangedSpeed,
     armor: rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),
     parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),
     block: 100 * capped(n.block || 0, rules.blockCap, rules.blockKnee),
@@ -204,8 +206,8 @@ function dnaCombatStats(counts, weights, inputRules) {
     area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,
     lifesteal: attack ? 100 * capped(n.lifesteal || 0, rules.drainCap, rules.drainKnee) : 0,
     reflection: Math.min(30, 3 * (n.reflection || 0)), regeneration: .1 * (n.regeneration || 0),
-    comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : 0,
-    focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : 0 };
+    comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : rules.hitGapBase,
+    focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : rules.windupBase };
 }
 
 return { DNA_COMBAT_RULES, dnaCombatStats };
@@ -354,8 +356,14 @@ const { ATTRIBUTE_DNA } = modules["server/dna.mjs"];
 const { unitAppearanceMaskFromDna } = modules["server/unit-appearance.mjs"];
 const { UNIT_COMBINATION_FORMS } = modules["client/unit-combination-forms.mjs"];
 
+const labForms = Object.freeze([
+  ...UNIT_COMBINATION_FORMS,
+  { key: "carapace", label: "갑각", mask: 2, attributes: { carapace: 1 } },
+  { key: "antenna", label: "안테나", mask: 4, attributes: { antenna: 1 } },
+]);
+
 const COMBAT_LAB_APPEARANCES = Object.freeze([
-  Object.freeze(["native", "기본"]), ...UNIT_COMBINATION_FORMS.map(form => Object.freeze([form.key, form.label])),
+  Object.freeze(["native", "기본"]), ...labForms.map(form => Object.freeze([form.key, form.label])),
 ]);
 
 function combatLabPlayable(key) {
@@ -365,7 +373,7 @@ function combatLabPlayable(key) {
 // Use real catalog pieces and normal board rules, never appearance overrides.
 // Every selection receives independently owned DNA with its actual mechanics.
 function combatLabCombinationDna(appearance) {
-  const form = UNIT_COMBINATION_FORMS.find(form => form.key === appearance);
+  const form = labForms.find(form => form.key === appearance);
   if (!form) throw new Error("지원하지 않는 DNA 외형입니다.");
   const genes = Object.keys(form.attributes), level = 4;
   const pieces = ATTRIBUTE_DNA.pack(genes.map(id => {
@@ -381,12 +389,12 @@ function combatLabBladeCarapaceDna() { return combatLabCombinationDna("blade-car
 function combatLabAppearance(build) {
   if (!combatLabPlayable(build?.key)) return "native";
   const mask = unitAppearanceMaskFromDna(build?.dna);
-  return UNIT_COMBINATION_FORMS.find(form => form.mask === mask)?.key || "native";
+  return labForms.find(form => form.mask === mask)?.key || "native";
 }
 
 function combatLabWithAppearance(build, appearance) {
   const result = { key: build.key, ...(build.name === undefined ? {} : { name: build.name }) };
-  if (combatLabPlayable(build.key) && UNIT_COMBINATION_FORMS.some(form => form.key === appearance)) result.dna = combatLabCombinationDna(appearance);
+  if (combatLabPlayable(build.key) && labForms.some(form => form.key === appearance)) result.dna = combatLabCombinationDna(appearance);
   return result;
 }
 
@@ -395,8 +403,12 @@ return { COMBAT_LAB_APPEARANCES, combatLabPlayable, combatLabCombinationDna, com
 modules["server/dna-actions.mjs"] = (() => {
 const DNA_ACTION_RULES = Object.freeze({ meleeRange: 1, rangedRange: 3, projectileSpeed: 6, rangedPowerBase: 1.4 });
 
-function dnaAttackMode(stats, distance) {
-  if (stats.melee && distance <= DNA_ACTION_RULES.meleeRange) return "melee";
+function dnaDefensiveMelee(stats) {
+  return !!stats?.defensiveMelee && !stats.melee && !stats.ranged;
+}
+
+function dnaAttackMode(stats, distance, defending = false) {
+  if ((stats.melee || defending && dnaDefensiveMelee(stats)) && distance <= DNA_ACTION_RULES.meleeRange) return "melee";
   if (stats.ranged && distance <= DNA_ACTION_RULES.rangedRange) return "ranged";
   return null;
 }
@@ -413,7 +425,7 @@ function dnaAttackStats(stats, mode) {
   return { power: mode === "ranged" ? stats.rangedPower : stats.meleePower, speed: mode === "ranged" ? stats.rangedSpeed : stats.meleeSpeed };
 }
 
-return { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaProjectileValid, dnaAttackStats };
+return { DNA_ACTION_RULES, dnaDefensiveMelee, dnaAttackMode, dnaProjectileDuration, dnaProjectileValid, dnaAttackStats };
 })();
 modules["server/creature-attack-role.mjs"] = (() => {
 const { DNA_ACTION_RULES } = modules["server/dna-actions.mjs"];
@@ -535,7 +547,7 @@ function unitFrameMirror(sourceFacing, facing) {
 return { UNIT_DISPLAY_SIZES, unitDisplaySize, combatViewCell, combatViewLayout, unitFacing, unitFrameMirror };
 })();
 modules["server/combat-position.mjs"] = (() => {
-const { DNA_ACTION_RULES, dnaAttackMode } = modules["server/dna-actions.mjs"];
+const { DNA_ACTION_RULES, dnaAttackMode, dnaDefensiveMelee } = modules["server/dna-actions.mjs"];
 const { creatureAttackRole, creatureAttackMode } = modules["server/creature-attack-role.mjs"];
 const { unitDisplaySize } = modules["client/unit-size.mjs"];
 
@@ -572,7 +584,7 @@ function combatSeparation(agent, target) {
 
 function combatPositionMode(agent, target) {
   const distance = combatSeparation(agent, target);
-  if (agent.stats?.dna) return dnaAttackMode(agent.stats.dna, distance);
+  if (agent.stats?.dna) return dnaAttackMode(agent.stats.dna, distance, agent.combat?.defending);
   if (agent.species) return creatureAttackMode(agent, distance);
   return distance <= DNA_ACTION_RULES.meleeRange ? "melee" : null;
 }
@@ -598,7 +610,8 @@ function advanceCombatPositions(units, time) {
     const role = combatPositionRole(unit), capabilities = unit.stats?.dna || creatureAttackRole(unit.species);
     const separation = combatSeparation(unit, target), dx = point.x - position.x, dy = point.y - position.y;
     const length = Math.hypot(dx, dy) || 1;
-    if (capabilities && !capabilities.melee && !capabilities.ranged) { next.set(unit, { x: position.x, y: position.y }); continue; }
+    const defensiveMelee = dnaDefensiveMelee(unit.stats?.dna) && unit.combat.defending;
+    if (capabilities && !capabilities.melee && !capabilities.ranged && !defensiveMelee) { next.set(unit, { x: position.x, y: position.y }); continue; }
     const closeMelee = capabilities?.melee && separation <= DNA_ACTION_RULES.meleeRange;
     const desired = role === "back" && capabilities?.ranged && !closeMelee ? 2.3 : .75;
     const retreat = role === "back" && capabilities?.ranged && !capabilities.melee && separation < 1.8;
@@ -835,7 +848,7 @@ return { NEUTRAL_UNIT_STATS };
 modules["server/combat-stats.mjs"] = (() => {
 const { NEUTRAL_UNIT_STATS } = modules["server/neutral-unit-stats.mjs"];
 const { creatureAttackRole } = modules["server/creature-attack-role.mjs"];
-const { dnaAttackStats } = modules["server/dna-actions.mjs"];
+const { dnaAttackStats, dnaDefensiveMelee } = modules["server/dna-actions.mjs"];
 const COMBAT_BASE_DAMAGE = 15;
 const COMBAT_STRENGTH_SCALE = 25;
 const COMBAT_MAX_INJURY_PENALTY = 10;
@@ -931,7 +944,7 @@ function combatProfile(agent) {
   const criticalChance = dna ? (Number.isFinite(chance) ? chance : 0) : Math.max(0, Math.min(.75, chance));
   const criticalMultiplier = dna ? (Number.isFinite(multiplier) ? multiplier : 1.5) : Math.max(1, Math.min(4, multiplier));
   if (abilities) {
-    const selected = dnaAttackStats(abilities, agent.attack?.attackMode || (abilities.melee ? "melee" : "ranged"));
+    const selected = dnaAttackStats(abilities, agent.attack?.attackMode || (abilities.melee || dnaDefensiveMelee(dna) ? "melee" : "ranged"));
     if (!dna && Number.isFinite(agent.stats.attackPower)) selected.power = agent.stats.attackPower;
     if (!dna && Number.isFinite(agent.stats.attackSpeed)) selected.speed = agent.stats.attackSpeed;
     const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;
@@ -3611,7 +3624,7 @@ function snapshotCombatVfx(environment, time, visibility) {
 return { COMBAT_VFX_JOURNAL_LIMIT, COMBAT_VFX_JOURNAL_SECONDS, combatVfxToken, recordCombatVfx, snapshotCombatVfx };
 })();
 modules["server/combat.mjs"] = (() => {
-const { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaProjectileValid } = modules["server/dna-actions.mjs"];
+const { DNA_ACTION_RULES, dnaAttackMode, dnaDefensiveMelee, dnaProjectileDuration, dnaProjectileValid } = modules["server/dna-actions.mjs"];
 const { creatureAttackRole, creatureAttackMode } = modules["server/creature-attack-role.mjs"];
 const { initializeCombatPosition, advanceCombatPositions, combatSeparation, combatPositionMode } = modules["server/combat-position.mjs"];
 const { dnaCanMove } = modules["server/dna-unit.mjs"];
@@ -3640,7 +3653,7 @@ const COMBAT_EXCHANGE_DAMAGE_VERSION = 5;
 const species = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
 
 function combatDisposition(agent) {
-  if (agent.dna && agent.ownerId) return agent.stats?.dna?.melee || agent.stats?.dna?.ranged ? "aggressive" : "passive";
+  if ((agent.dna || agent.stats?.dna) && agent.ownerId) return agent.stats?.dna?.melee || agent.stats?.dna?.ranged ? "aggressive" : "passive";
   const type = species.get(agent.species);
   let disposition = agent.combatDisposition || type?.combatDisposition;
   if (!disposition) disposition = agent.species === "spiny-back-beetle" ? "aggressive" : "passive";
@@ -3866,12 +3879,24 @@ function createCombat(environment) {
     else environment.creatureSystem.receiveDamage(entry.agent, damage);
     if (entry.agent.health <= 0) { entry.agent.attack = null; entry.agent.attackTargetId = null; }
     if (evidence) {
+      if (["hit", "block", "area"].includes(evidence.kind)) activateDefense(entry.agent, attacker, evidence.at);
       const amount = Math.max(0, previousHealth - entry.agent.health);
       const event = vfx(evidence.kind || "hit", evidence.at, attacker, entry.agent, amount, evidence);
       if (previousHealth > 0 && entry.agent.health <= 0)
         vfx("death", evidence.at, attacker, entry.agent, 0, { causeId: event?.id });
       return event;
     }
+  }
+
+  function activateDefense(defender, attacker, time) {
+    const combat = defender.combat;
+    if (!dnaDefensiveMelee(defender.stats?.dna) || defender.health <= 0 || !attacker ||
+        !combat || combatTeam(defender) === combatTeam(attacker) || combat.defending) return;
+    combat.defending = true;
+    // The initial passive wait is infinite. Receiving an attack opens only this fight's normal attack cycle.
+    combat.nextAttackAt = Math.max(time, combat.waitingForAttack ? time : combat.nextAttackAt);
+    delete combat.waitingForAttack;
+    defender.attackReady = combat.nextAttackAt;
   }
 
   function emit(combat, kind, at, source, target, damage, detail = {}) {
@@ -3892,7 +3917,9 @@ function createCombat(environment) {
     const combat = attacker.combat, mode = combatPositionMode(attacker, target);
     if (!mode) {
       const capabilities = combatAbilityStats(attacker) || creatureAttackRole(attacker.species);
-      combat.nextAttackAt = capabilities && !capabilities.melee && !capabilities.ranged ? Infinity : Math.max(combat.nextAttackAt, time + .05);
+      const defensiveMelee = dnaDefensiveMelee(attacker.stats?.dna) && combat.defending;
+      if (dnaDefensiveMelee(attacker.stats?.dna) && !combat.defending) combat.waitingForAttack = true;
+      combat.nextAttackAt = capabilities && !capabilities.melee && !capabilities.ranged && !defensiveMelee ? Infinity : Math.max(combat.nextAttackAt, time + .05);
       return;
     }
     const profile = combatProfile({ ...attacker, attack: { attackMode: mode } });
@@ -3994,6 +4021,7 @@ function createCombat(environment) {
     const evidence = { kind: reaction || "hit", at: time, critical, counter: !!attack.counter,
       mode: attack.attackMode, hitIndex: attack.hitIndex || 0, causeId: attackCauses.get(attack) };
     const hitEvent = damage > 0 ? receiveDamage(target, damage, attacker, evidence) : vfx(evidence.kind, time, attacker, defender, 0, evidence);
+    activateDefense(defender, attacker, time);
     if (damage > 0) defender.hurtStartedAt = time;
     if (["parry", "block"].includes(reaction)) resetAttackWait(defender, time);
     const dealt = Math.max(0, previous - defender.health);
@@ -4034,7 +4062,7 @@ function createCombat(environment) {
         { kind: "reflect", at: time, causeId: hitEvent?.id, fromId: defender.id, toId: attacker.id });
     }
     if (defender.health > 0 && attacker.health > 0 && !defender.attack && !attack.counter && reaction && reaction !== "miss" &&
-        (shield ? shield.power > 0 && time >= (defender.dnaCounterReadyAt || 0) && random() * 100 < shield.counter : !defender.species)) beginAttack(defender, attacker, time, true);
+        (shield ? !dnaDefensiveMelee(defender.stats?.dna) && shield.power > 0 && time >= (defender.dnaCounterReadyAt || 0) && random() * 100 < shield.counter : !defender.species)) beginAttack(defender, attacker, time, true);
     if (source && !attack.counter && attacker.health > 0 && defender.health > 0 && ++attack.hitIndex < attack.hitCount) {
       attack.resolved = false; attack.hitAt = time + source.comboSpeed;
       if (attack.meleeContacts) attack.meleeContacts.push(attack.hitAt);
@@ -4165,6 +4193,7 @@ function createCombat(environment) {
     const evidence = { kind: reaction || "hit", at: time, mode: "ranged", critical, hitIndex: projectile.hitIndex,
       causeId: attackCauses.get(projectile.attack), projectileId: projectile.vfxId };
     const hitEvent = damage > 0 ? receiveDamage(target, damage, source, evidence) : vfx(evidence.kind, time, source, defender, 0, evidence);
+    activateDefense(defender, source, time);
     if (damage > 0) defender.hurtStartedAt = time;
     if (["parry", "block"].includes(reaction)) resetAttackWait(defender, time);
     const dealt = Math.max(0, previous - defender.health);
@@ -4668,7 +4697,8 @@ function derive(build, rules) {
   if (build.native) {
     if (["bean", "spore", "pebble", "spring"].includes(build.key)) {
       const stats = dnaUnitStats(build.dna || startingWorkerDna(build.key));
-      return { ...stats, canAttack: stats.dna.melee || stats.dna.ranged };
+      return { ...stats, canAttack: stats.dna.power > 0 && stats.dna.speed > 0,
+        canInitiate: stats.dna.melee || stats.dna.ranged };
     }
     const role = creatureAttackRole(build.key);
     const stats = { ...unitCombatStats(build.key), speed: CREATURE_MOVEMENT[build.key].speed, resistance: 1 };
@@ -4679,7 +4709,7 @@ function derive(build, rules) {
       counter: abilities.counter / 100, counterMultiplier: abilities.counterPower / 100, tenacity: abilities.tenacity / 100,
       stunChance: abilities.stun / 100, stunChancePerHit: abilities.stun / 100, stunDuration: abilities.stunTime,
       drain: abilities.lifesteal / 100, critChance: profile.criticalChance, critMultiplier: profile.criticalMultiplier,
-      melee: !!role?.melee, ranged: !!role?.ranged, canAttack: !!role };
+      melee: !!role?.melee, ranged: !!role?.ranged, canAttack: !!role, canInitiate: !!role };
   }
   const counts = Object.fromEntries(Object.entries(build.counts).map(([key, value]) => [geneKeys[key] || key, value]));
   Object.assign(counts, { blade: build.organs.attack, secretion: build.organs.ranged });
@@ -4697,7 +4727,8 @@ function derive(build, rules) {
     counter: dna.counter / 100, counterMultiplier: dna.counterPower / 100, tenacity: dna.tenacity / 100,
     stunChance: dna.stun / 100, stunChancePerHit: dna.stun / 100, stunDuration: dna.stunTime, drain: dna.lifesteal / 100,
     pieceCount: build.pieceCount, melee: dna.melee, ranged: dna.ranged,
-    canAttack: dna.meleePower > 0 && dna.meleeSpeed > 0 || dna.rangedPower > 0 && dna.rangedSpeed > 0 };
+    canAttack: dna.meleePower > 0 && dna.meleeSpeed > 0 || dna.rangedPower > 0 && dna.rangedSpeed > 0,
+    canInitiate: dna.melee || dna.ranged };
   for (const [key, value] of Object.entries(result)) if (typeof value === "number" && !Number.isFinite(value) &&
     !["attackInterval", "rangedAttackInterval", "recovery"].includes(key)) throw new RangeError("Derived " + key + " must be finite");
   return result;
@@ -4782,7 +4813,7 @@ function createSimulationTrial(settings) {
   function conclude() {
     const alive = ["left", "right"].map(side => participants.some(agent => agent.ownerId === side && agent.health > 0));
     if (!alive[0] || !alive[1]) { winner = alive[0] ? "left" : alive[1] ? "right" : "draw"; reason = "death"; }
-    else if (!participants.some(agent => agent.health > 0 && agent.stats.canAttack) &&
+    else if (!participants.some(agent => agent.health > 0 && agent.stats.canAttack && (agent.stats.canInitiate || agent.combat?.defending)) &&
       !participants.some(agent => agent.health > 0 && agent.dnaBleed || agent.dnaProjectiles?.length)) { winner = "draw"; reason = "no-offense"; }
     else if (history.length >= rules.maxEvents) { winner = "draw"; reason = "event-limit"; }
     else if (time >= rules.maxSeconds) { winner = "draw"; reason = "time-limit"; }
@@ -4831,6 +4862,423 @@ function drawUnitLoading(context, x, y, radius, time) {
 }
 
 return { drawUnitLoading };
+})();
+modules["client/defensive-attack-assets.mjs"] = (() => {
+// Generated by scripts/register-defensive-attacks.py. Whole-body attacks only.
+const DEFENSIVE_ATTACK_ART = Object.freeze({
+  "bean/antenna": {
+    "image": "DesignAssets/Animations/DefensiveAttackV1/bean/antenna/attack.png",
+    "sourceManifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v1-20261107/antenna/publication-manifest.json",
+    "sourceFacing": "right",
+    "frameSize": 512,
+    "frameHeight": 512,
+    "columns": 8,
+    "frameCount": 16,
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      70,
+      80,
+      90,
+      100,
+      60
+    ],
+    "durationMs": 1000,
+    "pivotX": 256.9503722084367,
+    "pivotY": 448,
+    "referenceLength": 231,
+    "viewSize": 231,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 300,
+    "defensiveRetaliation": true
+  },
+  "bean/carapace": {
+    "image": "DesignAssets/Animations/DefensiveAttackV1/bean/carapace/attack.png",
+    "sourceManifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v1-20261107/carapace/publication-manifest.json",
+    "sourceFacing": "right",
+    "frameSize": 512,
+    "frameHeight": 512,
+    "columns": 8,
+    "frameCount": 16,
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      70,
+      80,
+      90,
+      100,
+      60
+    ],
+    "durationMs": 1000,
+    "pivotX": 258.59413202933985,
+    "pivotY": 448,
+    "referenceLength": 218,
+    "viewSize": 218,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 300,
+    "defensiveRetaliation": true
+  },
+  "bean/carapace-antenna": {
+    "image": "DesignAssets/Animations/DefensiveAttackV1/bean/carapace-antenna/attack.png",
+    "sourceManifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+    "sourceFacing": "right",
+    "frameSize": 512,
+    "frameHeight": 512,
+    "columns": 8,
+    "frameCount": 16,
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      70,
+      80,
+      90,
+      100,
+      60
+    ],
+    "durationMs": 1000,
+    "pivotX": 258.01240694789084,
+    "pivotY": 448,
+    "referenceLength": 259,
+    "viewSize": 259,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 300,
+    "defensiveRetaliation": true
+  },
+  "pebble/antenna": {
+    "image": "DesignAssets/Animations/DefensiveAttackV1/pebble/antenna/attack.png",
+    "sourceManifest": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/publication-manifest.json",
+    "sourceFacing": "right",
+    "frameSize": 512,
+    "frameHeight": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      160,
+      110,
+      110,
+      70,
+      110,
+      80,
+      110,
+      230
+    ],
+    "durationMs": 980,
+    "pivotX": 227.0,
+    "pivotY": 451,
+    "referenceLength": 370,
+    "viewSize": 370,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 450,
+    "defensiveRetaliation": true
+  },
+  "pebble/carapace": {
+    "image": "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace/attack.png",
+    "sourceManifest": "AnimationCandidates/pebble-carapace-defensive-attack-v1-20261107/publication-manifest.json",
+    "sourceFacing": "right",
+    "frameSize": 512,
+    "frameHeight": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      160,
+      110,
+      110,
+      70,
+      110,
+      80,
+      110,
+      230
+    ],
+    "durationMs": 980,
+    "pivotX": 240.5,
+    "pivotY": 450,
+    "referenceLength": 379,
+    "viewSize": 379,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 450,
+    "defensiveRetaliation": true
+  },
+  "pebble/carapace-antenna": {
+    "image": "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace-antenna/attack.png",
+    "sourceManifest": "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/publication-manifest.json",
+    "sourceFacing": "right",
+    "frameSize": 512,
+    "frameHeight": 512,
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      160,
+      110,
+      110,
+      70,
+      110,
+      80,
+      110,
+      230
+    ],
+    "durationMs": 980,
+    "pivotX": 233.5,
+    "pivotY": 451,
+    "referenceLength": 373,
+    "viewSize": 373,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 450,
+    "defensiveRetaliation": true
+  },
+  "spore/antenna": {
+    "image": "DesignAssets/Animations/DefensiveAttackV1/spore/antenna/attack.png",
+    "sourceManifest": "AnimationCandidates/spore-defensive-attack-fullbody-v1-20261107/antenna/publication-manifest.json",
+    "sourceFacing": "right",
+    "frameSize": 512,
+    "frameHeight": 512,
+    "columns": 4,
+    "frameCount": 16,
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      70,
+      80,
+      90,
+      100,
+      60
+    ],
+    "durationMs": 1000,
+    "pivotX": 256.0,
+    "pivotY": 416,
+    "referenceLength": 298,
+    "viewSize": 298,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 300,
+    "defensiveRetaliation": true
+  },
+  "spore/carapace": {
+    "image": "DesignAssets/Animations/DefensiveAttackV1/spore/carapace/attack.png",
+    "sourceManifest": "AnimationCandidates/spore-defensive-attack-fullbody-v1-20261107/carapace/publication-manifest.json",
+    "sourceFacing": "right",
+    "frameSize": 512,
+    "frameHeight": 512,
+    "columns": 4,
+    "frameCount": 16,
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      70,
+      80,
+      90,
+      100,
+      60
+    ],
+    "durationMs": 1000,
+    "pivotX": 255.5,
+    "pivotY": 418,
+    "referenceLength": 297,
+    "viewSize": 297,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 300,
+    "defensiveRetaliation": true
+  },
+  "spore/carapace-antenna": {
+    "image": "DesignAssets/Animations/DefensiveAttackV1/spore/carapace-antenna/attack.png",
+    "sourceManifest": "AnimationCandidates/spore-defensive-attack-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+    "sourceFacing": "right",
+    "frameSize": 512,
+    "frameHeight": 512,
+    "columns": 4,
+    "frameCount": 16,
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      70,
+      80,
+      90,
+      100,
+      60
+    ],
+    "durationMs": 1000,
+    "pivotX": 256.5,
+    "pivotY": 417,
+    "referenceLength": 297,
+    "viewSize": 297,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 300,
+    "defensiveRetaliation": true
+  },
+  "spring/antenna": {
+    "image": "DesignAssets/Animations/DefensiveAttackV1/spring/antenna/attack.png",
+    "sourceManifest": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/publication-manifest.json",
+    "sourceFacing": "right",
+    "frameSize": 480,
+    "frameHeight": 480,
+    "columns": 4,
+    "frameCount": 16,
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      100,
+      100,
+      100,
+      40,
+      40,
+      40,
+      40,
+      40,
+      50,
+      60,
+      90
+    ],
+    "durationMs": 1000,
+    "pivotX": 243.5,
+    "pivotY": 368,
+    "referenceLength": 191,
+    "viewSize": 191,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 300,
+    "defensiveRetaliation": true
+  },
+  "spring/carapace": {
+    "image": "DesignAssets/Animations/DefensiveAttackV1/spring/carapace/attack.png",
+    "sourceManifest": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace/publication-manifest.json",
+    "sourceFacing": "right",
+    "frameSize": 480,
+    "frameHeight": 480,
+    "columns": 4,
+    "frameCount": 16,
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      100,
+      100,
+      100,
+      40,
+      40,
+      40,
+      40,
+      40,
+      50,
+      60,
+      90
+    ],
+    "durationMs": 1000,
+    "pivotX": 240.0,
+    "pivotY": 368,
+    "referenceLength": 185,
+    "viewSize": 185,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 300,
+    "defensiveRetaliation": true
+  },
+  "spring/carapace-antenna": {
+    "image": "DesignAssets/Animations/DefensiveAttackV1/spring/carapace-antenna/attack.png",
+    "sourceManifest": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+    "sourceFacing": "right",
+    "frameSize": 480,
+    "frameHeight": 480,
+    "columns": 4,
+    "frameCount": 16,
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      100,
+      100,
+      100,
+      40,
+      40,
+      40,
+      40,
+      40,
+      50,
+      60,
+      90
+    ],
+    "durationMs": 1000,
+    "pivotX": 252.0,
+    "pivotY": 368,
+    "referenceLength": 180,
+    "viewSize": 180,
+    "registrationScale": 1,
+    "loop": false,
+    "hitTimeMs": 300,
+    "defensiveRetaliation": true
+  }
+});
+
+const DEFENSIVE_ATTACK_IMAGE_ASSETS = Object.freeze([...new Set(Object.values(DEFENSIVE_ATTACK_ART).map(clip => clip.image))]);
+
+return { DEFENSIVE_ATTACK_ART, DEFENSIVE_ATTACK_IMAGE_ASSETS };
 })();
 modules["client/antenna-combo-assets.mjs"] = (() => {
 // Generated by scripts/register-antenna-combos.py. Source atlases are byte-exact.
@@ -18340,11 +18788,12 @@ const BLADE_CARAPACE_IMAGE_ASSETS = Object.freeze([
 return { BLADE_CARAPACE_ACTION_ART, BLADE_CARAPACE_IMAGE_ASSETS };
 })();
 modules["client/unit-action-art-assets.mjs"] = (() => {
+const { DEFENSIVE_ATTACK_ART } = modules["client/defensive-attack-assets.mjs"];
 const { ANTENNA_COMBO_ACTION_ART } = modules["client/antenna-combo-assets.mjs"];
 const { SECRETION_COMBO_ACTION_ART } = modules["client/secretion-combo-assets.mjs"];
 const { BLADE_CARAPACE_ACTION_ART } = modules["client/blade-carapace-assets.mjs"];
 
-const UNIT_ACTION_ART = Object.freeze({
+const baseUnitActionArt = Object.freeze({
   ...ANTENNA_COMBO_ACTION_ART,
   ...BLADE_CARAPACE_ACTION_ART,
   ...SECRETION_COMBO_ACTION_ART,
@@ -27817,6 +28266,12 @@ const UNIT_ACTION_ART = Object.freeze({
   }
 });
 
+// A defensive attack changes only its own action, never the existing body,
+// lifecycle clips, work actions or gameplay permissions.
+const UNIT_ACTION_ART = Object.freeze(Object.fromEntries(Object.entries(baseUnitActionArt).map(([key, definition]) =>
+  [key, DEFENSIVE_ATTACK_ART[key] ? Object.freeze({ ...definition,
+    actions: Object.freeze({ ...definition.actions, attack: DEFENSIVE_ATTACK_ART[key] }) }) : definition])));
+
 const UNIT_ACTION_ART_ASSETS = Object.freeze([...new Set(Object.values(UNIT_ACTION_ART).flatMap(value => [value.reference.image, ...Object.values(value.actions).map(clip => clip.image)]))]);
 
 return { UNIT_ACTION_ART, UNIT_ACTION_ART_ASSETS };
@@ -36942,9 +37397,15 @@ function unitActionArtPose(agent, time) {
   if (!animation) return { action: state.action, animation: definition.reference, frame: definition.reference.frames?.[0] || 0, reference: definition.reference, missing: true };
   let elapsed = state.elapsedMs;
   const duration = animation.durationsMs.reduce((sum, value) => sum + value, 0);
-  if (animation.loop) elapsed %= duration;
+  // Absolute simulation timestamps can put an exact authored cue a fraction
+  // of a nanosecond before its frame boundary after subtraction.
+  const frameEpsilonMs = 1e-7;
+  if (animation.loop) {
+    elapsed %= duration;
+    if (duration - elapsed <= frameEpsilonMs) elapsed = 0;
+  }
   let index = 0;
-  while (index < animation.durationsMs.length - 1 && elapsed >= animation.durationsMs[index]) elapsed -= animation.durationsMs[index++];
+  while (index < animation.durationsMs.length - 1 && elapsed + frameEpsilonMs >= animation.durationsMs[index]) elapsed -= animation.durationsMs[index++];
   return { action: state.action, animation, frame: animation.frames?.[index] ?? index, reference: definition.reference, missing: false };
 }
 
@@ -37365,11 +37826,13 @@ return { drawUnitHealthRing };
 })();
 modules["client/unit-attack-ring.mjs"] = (() => {
 const { combatProfile } = modules["server/combat-stats.mjs"];
+const { dnaDefensiveMelee } = modules["server/dna-actions.mjs"];
 
 function unitAttackCooldown(agent, time) {
   if (!agent || !(agent.health > 0) || !Number.isFinite(time)) return null;
   const dna = agent.stats?.dna;
-  if (dna && !(dna.melee && dna.meleePower > 0 && dna.meleeSpeed > 0 || dna.ranged && dna.rangedPower > 0 && dna.rangedSpeed > 0)) return null;
+  if (dna && !((dna.melee || dnaDefensiveMelee(dna) && agent.combat?.defending) && dna.meleePower > 0 && dna.meleeSpeed > 0 ||
+      dna.ranged && dna.rangedPower > 0 && dna.rangedSpeed > 0)) return null;
   if (agent.stats?.canAttack === false) return null;
   const attack = agent.attack;
   if (Number.isFinite(attack?.defenseResetAt)) return 1;
@@ -40858,7 +41321,7 @@ function render() {
   const result=trial?.result(),ended=!!result?.reason;
   for(const key of ["step","run","finish"])elements[key].disabled=!trial||ended;
   if(!trial){elements.phase.textContent="";return;}
-  if(ended) {playing=false;elements.run.textContent="자동 전투";elements.status.textContent=(result.winner==="draw"?"무승부":result.winner==="left"?"왼쪽 승리":"오른쪽 승리")+" · "+({death:"사망",'time-limit':"시간 제한",'no-offense':"공격 불가",'event-limit':"사건 제한"}[result.reason]||result.reason);}
+  if(ended) {playing=false;elements.run.textContent="자동 전투";elements.status.textContent=(result.winner==="draw"?"무승부":result.winner==="left"?"왼쪽 승리":"오른쪽 승리")+" · "+({death:"사망",'time-limit':"시간 제한",'no-offense':"선공 유닛 없음",'event-limit':"사건 제한"}[result.reason]||result.reason);}
   else elements.status.textContent=playing?"전투 중":trial.time?"일시정지":"대결 준비";
   elements.phase.textContent=trial.time.toFixed(2)+"초 · "+trial.history.length+"개 사건";
 }

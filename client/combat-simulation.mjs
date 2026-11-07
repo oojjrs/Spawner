@@ -100,7 +100,8 @@ function derive(build, rules) {
   if (build.native) {
     if (["bean", "spore", "pebble", "spring"].includes(build.key)) {
       const stats = dnaUnitStats(build.dna || startingWorkerDna(build.key));
-      return { ...stats, canAttack: stats.dna.melee || stats.dna.ranged };
+      return { ...stats, canAttack: stats.dna.power > 0 && stats.dna.speed > 0,
+        canInitiate: stats.dna.melee || stats.dna.ranged };
     }
     const role = creatureAttackRole(build.key);
     const stats = { ...unitCombatStats(build.key), speed: CREATURE_MOVEMENT[build.key].speed, resistance: 1 };
@@ -111,7 +112,7 @@ function derive(build, rules) {
       counter: abilities.counter / 100, counterMultiplier: abilities.counterPower / 100, tenacity: abilities.tenacity / 100,
       stunChance: abilities.stun / 100, stunChancePerHit: abilities.stun / 100, stunDuration: abilities.stunTime,
       drain: abilities.lifesteal / 100, critChance: profile.criticalChance, critMultiplier: profile.criticalMultiplier,
-      melee: !!role?.melee, ranged: !!role?.ranged, canAttack: !!role };
+      melee: !!role?.melee, ranged: !!role?.ranged, canAttack: !!role, canInitiate: !!role };
   }
   const counts = Object.fromEntries(Object.entries(build.counts).map(([key, value]) => [geneKeys[key] || key, value]));
   Object.assign(counts, { blade: build.organs.attack, secretion: build.organs.ranged });
@@ -129,7 +130,8 @@ function derive(build, rules) {
     counter: dna.counter / 100, counterMultiplier: dna.counterPower / 100, tenacity: dna.tenacity / 100,
     stunChance: dna.stun / 100, stunChancePerHit: dna.stun / 100, stunDuration: dna.stunTime, drain: dna.lifesteal / 100,
     pieceCount: build.pieceCount, melee: dna.melee, ranged: dna.ranged,
-    canAttack: dna.meleePower > 0 && dna.meleeSpeed > 0 || dna.rangedPower > 0 && dna.rangedSpeed > 0 };
+    canAttack: dna.meleePower > 0 && dna.meleeSpeed > 0 || dna.rangedPower > 0 && dna.rangedSpeed > 0,
+    canInitiate: dna.melee || dna.ranged };
   for (const [key, value] of Object.entries(result)) if (typeof value === "number" && !Number.isFinite(value) &&
     !["attackInterval", "rangedAttackInterval", "recovery"].includes(key)) throw new RangeError("Derived " + key + " must be finite");
   return result;
@@ -214,7 +216,7 @@ export function createSimulationTrial(settings) {
   function conclude() {
     const alive = ["left", "right"].map(side => participants.some(agent => agent.ownerId === side && agent.health > 0));
     if (!alive[0] || !alive[1]) { winner = alive[0] ? "left" : alive[1] ? "right" : "draw"; reason = "death"; }
-    else if (!participants.some(agent => agent.health > 0 && agent.stats.canAttack) &&
+    else if (!participants.some(agent => agent.health > 0 && agent.stats.canAttack && (agent.stats.canInitiate || agent.combat?.defending)) &&
       !participants.some(agent => agent.health > 0 && agent.dnaBleed || agent.dnaProjectiles?.length)) { winner = "draw"; reason = "no-offense"; }
     else if (history.length >= rules.maxEvents) { winner = "draw"; reason = "event-limit"; }
     else if (time >= rules.maxSeconds) { winner = "draw"; reason = "time-limit"; }

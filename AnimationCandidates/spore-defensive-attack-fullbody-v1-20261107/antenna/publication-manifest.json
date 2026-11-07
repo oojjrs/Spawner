@@ -1,0 +1,84 @@
+{
+  "title": "포자버섯 안테나 반격용 전신 공격",
+  "tribe": "spore",
+  "form": "antenna",
+  "status": "completed-under-user-delegated-production",
+  "sourceAppearance": "AnimationCandidates/spore-defensive-attack-fullbody-v1-20261107/antenna/source.png",
+  "sourceAppearanceSHA256": "4935d2a036815f831b7f9800b01fa9892db6bd89ad27d5fac0afe101b6413a5a",
+  "sourceFacing": "right",
+  "actions": {
+    "attack": {
+      "sheet": "AnimationCandidates/spore-defensive-attack-fullbody-v1-20261107/antenna/spore-antenna-counterattack-v1-sheet.png",
+      "preview": "AnimationCandidates/spore-defensive-attack-fullbody-v1-20261107/antenna/spore-antenna-counterattack-v1-preview.webp",
+      "gif": "AnimationCandidates/spore-defensive-attack-fullbody-v1-20261107/antenna/spore-antenna-counterattack-v1-preview.gif",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        60,
+        70,
+        60,
+        80,
+        30,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        70,
+        80,
+        90,
+        100,
+        60
+      ],
+      "durationMs": 1000,
+      "loop": false,
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "sheetSHA256": "b8d2170ffd1a2dd1f1ca69b62be008c35c2d39e192173ec0c8850455c591fb0e",
+      "previewSHA256": "ed8245ff894165715d8a0dfba5bc92e5e9b8a3747085ccd082c0930e70f8c031",
+      "gifSHA256": "7181aa8eaf1e8d1baebeceadb59b57169608e5cf520f9ddaece4b3d220a76fa2",
+      "sourceFacing": "right",
+      "neutralBodyBounds": [
+        107,
+        244,
+        405,
+        416
+      ],
+      "geometryAlphaThreshold": 16,
+      "pivotX": 256.0,
+      "pivotY": 416,
+      "referenceLength": 298,
+      "hitFrameIndex": 5,
+      "hitTimeMs": 300,
+      "fullScene": false,
+      "attackKind": "base-style blunt cap-and-body counterattack",
+      "bodyPartComposition": false,
+      "projectileBakedIntoBodySheet": false
+    }
+  },
+  "excludedActions": [
+    "ranged-attack"
+  ],
+  "additiveActionsOnly": true,
+  "preserveExistingOtherActions": true,
+  "bodyPartComposition": false,
+  "combatRulesModified": false,
+  "gameIntegration": false,
+  "deployment": false,
+  "baseMotionReference": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.json",
+  "method": "Built-in image_gen draws each complete body. Technical processing only extracts cells, applies a single uniform clip scale and positions complete frames. No body-part assembly or anatomical warping.",
+  "verification": {
+    "allActionsMultiFrame": true,
+    "sheetRoundtripExact": true,
+    "gifAndWebpDurationExact": true,
+    "noOpaqueEdgeClipping": true,
+    "oneConnectedBodyEveryFrame": true,
+    "hitCueMatchesBaseMotion": true
+  },
+  "note": "Adds only defensive attack art. Does not add ranged attacks or change combat eligibility, retaliation logic, stats, or initiative rules."
+}

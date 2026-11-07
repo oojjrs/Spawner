@@ -25,6 +25,17 @@ test("dead and non-attacking units have no attack ring", () => {
   assert.equal(unitAttackCooldown({ health: 10, species: "vine-turtle", stats: {}, attackReady: 0 }, 0), 1);
 });
 
+test("a basic body's ring appears only during its activated defensive combat", () => {
+  const agent = { health: 10, stats: { dna: ATTRIBUTE_DNA.stats([]), canAttack: true },
+    attackReady: 3.3, attackInterval: 2, combat: { defending: false } };
+  assert.equal(unitAttackCooldown(agent, 0), null);
+  agent.combat.defending = true;
+  agent.attack = { startedAt: .3, hitAt: .6, endsAt: 1.3, interval: 2 };
+  assert.equal(unitAttackCooldown(agent, .3), 0); close(unitAttackCooldown(agent, 2.3), .5);
+  assert.equal(unitAttackCooldown(agent, 3.3), 1);
+  agent.attack = null; agent.combat = null; assert.equal(unitAttackCooldown(agent, 4), null);
+});
+
 test("defense reset is ready immediately and a new action empties the ring again", () => {
   const agent = { health: 100, stats: { dna }, attackReady: 2, attackInterval: 2,
     attack: { startedAt: 1, endsAt: 2, interval: 2, defenseResetAt: 1.2 } };

@@ -1,7 +1,11 @@
 export const DNA_ACTION_RULES = Object.freeze({ meleeRange: 1, rangedRange: 3, projectileSpeed: 6, rangedPowerBase: 1.4 });
 
-export function dnaAttackMode(stats, distance) {
-  if (stats.melee && distance <= DNA_ACTION_RULES.meleeRange) return "melee";
+export function dnaDefensiveMelee(stats) {
+  return !!stats?.defensiveMelee && !stats.melee && !stats.ranged;
+}
+
+export function dnaAttackMode(stats, distance, defending = false) {
+  if ((stats.melee || defending && dnaDefensiveMelee(stats)) && distance <= DNA_ACTION_RULES.meleeRange) return "melee";
   if (stats.ranged && distance <= DNA_ACTION_RULES.rangedRange) return "ranged";
   return null;
 }
