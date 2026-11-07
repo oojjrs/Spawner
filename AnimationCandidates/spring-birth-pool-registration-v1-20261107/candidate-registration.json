@@ -1,0 +1,1182 @@
+{
+  "spring/blade-antenna": {
+    "sourceImage": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png",
+    "sourceSHA256": "1be3a9178da98bf727536fd7f6798c3ae408f729f2f3de6402357bc1a5848c9f",
+    "unchangedRegistration": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 260.5,
+      "pivotY": 332,
+      "referenceLength": 128,
+      "viewSize": 128,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor"
+    },
+    "sceneLayers": {
+      "version": 1,
+      "layers": [
+        {
+          "role": "environment",
+          "image": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/blade-antenna/environment.png",
+          "frameSize": 316,
+          "frameHeight": 264,
+          "columns": 4,
+          "frameCount": 16,
+          "samples": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            {
+              "frame": 9,
+              "destination": [
+                70,
+                67,
+                316,
+                264
+              ]
+            },
+            {
+              "frame": 10,
+              "destination": [
+                72,
+                67,
+                316,
+                264
+              ]
+            },
+            {
+              "frame": 11,
+              "destination": [
+                75,
+                67,
+                316,
+                264
+              ]
+            },
+            {
+              "frame": 12,
+              "destination": [
+                67,
+                79,
+                316,
+                264
+              ]
+            },
+            {
+              "frame": 13,
+              "destination": [
+                70,
+                79,
+                316,
+                264
+              ]
+            },
+            {
+              "frame": 14,
+              "destination": [
+                72,
+                79,
+                316,
+                264
+              ]
+            },
+            {
+              "frame": 15,
+              "destination": [
+                75,
+                79,
+                316,
+                264
+              ]
+            }
+          ]
+        },
+        {
+          "role": "body",
+          "image": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/blade-antenna/body.png",
+          "frameSize": 316,
+          "frameHeight": 312,
+          "columns": 4,
+          "frameCount": 16,
+          "samples": [
+            {
+              "frame": 0,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 2,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 3,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 4,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 5,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 6,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 7,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 8,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 9,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 10,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 11,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 12,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 13,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 14,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 15,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            }
+          ],
+          "wholeBody": true
+        }
+      ]
+    },
+    "assetFiles": [
+      {
+        "local": "/workspace/shared/animation-reaudit-20261107/spring-birth-registration/candidate/blade-antenna/environment.png",
+        "destination": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/blade-antenna/environment.png",
+        "sha256": "c945d053d51e8a1102d2264c6496c0904587b00c0e2808e9c0733e29f76c3f9b"
+      },
+      {
+        "local": "/workspace/shared/animation-reaudit-20261107/spring-birth-registration/candidate/blade-antenna/body.png",
+        "destination": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/blade-antenna/body.png",
+        "sha256": "bd7a27d33b2506dd60766a11299f38430f9831630765a7c198578a0f5b133ab3"
+      }
+    ]
+  },
+  "spring/secretion-antenna": {
+    "sourceImage": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png",
+    "sourceSHA256": "44b3888781bd4185fdad61312007e406ac0ebce40332c5714c67ebe69e139d75",
+    "unchangedRegistration": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 257,
+      "pivotY": 333,
+      "referenceLength": 117,
+      "viewSize": 117,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor"
+    },
+    "sceneLayers": {
+      "version": 1,
+      "layers": [
+        {
+          "role": "environment",
+          "image": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/secretion-antenna/environment.png",
+          "frameSize": 316,
+          "frameHeight": 270,
+          "columns": 4,
+          "frameCount": 16,
+          "samples": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            {
+              "frame": 9,
+              "destination": [
+                75,
+                66,
+                316,
+                270
+              ]
+            },
+            {
+              "frame": 10,
+              "destination": [
+                84,
+                66,
+                316,
+                270
+              ]
+            },
+            {
+              "frame": 11,
+              "destination": [
+                94,
+                66,
+                316,
+                270
+              ]
+            },
+            {
+              "frame": 12,
+              "destination": [
+                67,
+                79,
+                316,
+                270
+              ]
+            },
+            {
+              "frame": 13,
+              "destination": [
+                75,
+                79,
+                316,
+                270
+              ]
+            },
+            {
+              "frame": 14,
+              "destination": [
+                84,
+                78,
+                316,
+                270
+              ]
+            },
+            {
+              "frame": 15,
+              "destination": [
+                94,
+                78,
+                316,
+                270
+              ]
+            }
+          ]
+        },
+        {
+          "role": "body",
+          "image": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/secretion-antenna/body.png",
+          "frameSize": 316,
+          "frameHeight": 312,
+          "columns": 4,
+          "frameCount": 16,
+          "samples": [
+            {
+              "frame": 0,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 2,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 3,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 4,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 5,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 6,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 7,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 8,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 9,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 10,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 11,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 12,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 13,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 14,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 15,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            }
+          ],
+          "wholeBody": true
+        }
+      ]
+    },
+    "assetFiles": [
+      {
+        "local": "/workspace/shared/animation-reaudit-20261107/spring-birth-registration/candidate/secretion-antenna/environment.png",
+        "destination": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/secretion-antenna/environment.png",
+        "sha256": "ebfe66874cde38398024d9306618457503a386074f2b3ba377c365c6c1cba9c1"
+      },
+      {
+        "local": "/workspace/shared/animation-reaudit-20261107/spring-birth-registration/candidate/secretion-antenna/body.png",
+        "destination": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/secretion-antenna/body.png",
+        "sha256": "d1d24d18c2832461358b5d4842e446a9b991f53fc12fe1f4935a9416e211e21e"
+      }
+    ]
+  },
+  "spring/blade-secretion-antenna": {
+    "sourceImage": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png",
+    "sourceSHA256": "f1df65fdd4c17508bf358e52f86935afc3fe0c7a5cdfe5df7885069135827eee",
+    "unchangedRegistration": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 234,
+      "pivotY": 349,
+      "referenceLength": 145,
+      "viewSize": 145,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor"
+    },
+    "sceneLayers": {
+      "version": 1,
+      "layers": [
+        {
+          "role": "environment",
+          "image": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/blade-secretion-antenna/environment.png",
+          "frameSize": 316,
+          "frameHeight": 253,
+          "columns": 4,
+          "frameCount": 16,
+          "samples": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            {
+              "frame": 9,
+              "destination": [
+                81,
+                67,
+                316,
+                253
+              ]
+            },
+            {
+              "frame": 10,
+              "destination": [
+                93,
+                67,
+                316,
+                253
+              ]
+            },
+            {
+              "frame": 11,
+              "destination": [
+                108,
+                66,
+                316,
+                253
+              ]
+            },
+            {
+              "frame": 12,
+              "destination": [
+                67,
+                75,
+                316,
+                253
+              ]
+            },
+            {
+              "frame": 13,
+              "destination": [
+                81,
+                75,
+                316,
+                253
+              ]
+            },
+            {
+              "frame": 14,
+              "destination": [
+                93,
+                75,
+                316,
+                253
+              ]
+            },
+            {
+              "frame": 15,
+              "destination": [
+                108,
+                75,
+                316,
+                253
+              ]
+            }
+          ]
+        },
+        {
+          "role": "body",
+          "image": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/blade-secretion-antenna/body.png",
+          "frameSize": 316,
+          "frameHeight": 312,
+          "columns": 4,
+          "frameCount": 16,
+          "samples": [
+            {
+              "frame": 0,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 2,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 3,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 4,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 5,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 6,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 7,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 8,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 9,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 10,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 11,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 12,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 13,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 14,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 15,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            }
+          ],
+          "wholeBody": true
+        }
+      ]
+    },
+    "assetFiles": [
+      {
+        "local": "/workspace/shared/animation-reaudit-20261107/spring-birth-registration/candidate/blade-secretion-antenna/environment.png",
+        "destination": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/blade-secretion-antenna/environment.png",
+        "sha256": "89dafdbbd6e9ac8406e38ef9e03612d301f5ea800b3f007c9dd2e78083422450"
+      },
+      {
+        "local": "/workspace/shared/animation-reaudit-20261107/spring-birth-registration/candidate/blade-secretion-antenna/body.png",
+        "destination": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/blade-secretion-antenna/body.png",
+        "sha256": "19823a46d35dc74065f32ec1ef292d082c13b8e722cfa7db9733574fd2047754"
+      }
+    ]
+  },
+  "spring/blade-secretion-carapace-antenna": {
+    "sourceImage": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png",
+    "sourceSHA256": "f066680ae39fe2281779ae5625ea058ce7ee18714d2eb0308d8e8cda10b47e9a",
+    "unchangedRegistration": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 271,
+      "pivotY": 341,
+      "referenceLength": 129,
+      "viewSize": 129,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor"
+    },
+    "sceneLayers": {
+      "version": 1,
+      "layers": [
+        {
+          "role": "environment",
+          "image": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/blade-secretion-carapace-antenna/environment.png",
+          "frameSize": 316,
+          "frameHeight": 295,
+          "columns": 4,
+          "frameCount": 16,
+          "samples": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            {
+              "frame": 9,
+              "destination": [
+                66,
+                67,
+                316,
+                295
+              ]
+            },
+            {
+              "frame": 10,
+              "destination": [
+                67,
+                67,
+                316,
+                295
+              ]
+            },
+            {
+              "frame": 11,
+              "destination": [
+                66,
+                67,
+                316,
+                295
+              ]
+            },
+            {
+              "frame": 12,
+              "destination": [
+                67,
+                72,
+                316,
+                295
+              ]
+            },
+            {
+              "frame": 13,
+              "destination": [
+                66,
+                72,
+                316,
+                295
+              ]
+            },
+            {
+              "frame": 14,
+              "destination": [
+                67,
+                72,
+                316,
+                295
+              ]
+            },
+            {
+              "frame": 15,
+              "destination": [
+                66,
+                72,
+                316,
+                295
+              ]
+            }
+          ]
+        },
+        {
+          "role": "body",
+          "image": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/blade-secretion-carapace-antenna/body.png",
+          "frameSize": 316,
+          "frameHeight": 312,
+          "columns": 4,
+          "frameCount": 16,
+          "samples": [
+            {
+              "frame": 0,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 2,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 3,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 4,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 5,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 6,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 7,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 8,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 9,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 10,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 11,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 12,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 13,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 14,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            },
+            {
+              "frame": 15,
+              "destination": [
+                67,
+                67,
+                316,
+                312
+              ]
+            }
+          ],
+          "wholeBody": true
+        }
+      ]
+    },
+    "assetFiles": [
+      {
+        "local": "/workspace/shared/animation-reaudit-20261107/spring-birth-registration/candidate/blade-secretion-carapace-antenna/environment.png",
+        "destination": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/blade-secretion-carapace-antenna/environment.png",
+        "sha256": "4d353f7e6a238450931a51d99db2651dc60c48da430df70d434d5e426ea43fe1"
+      },
+      {
+        "local": "/workspace/shared/animation-reaudit-20261107/spring-birth-registration/candidate/blade-secretion-carapace-antenna/body.png",
+        "destination": "DesignAssets/Animations/SpringBirthPoolRegistrationV1/blade-secretion-carapace-antenna/body.png",
+        "sha256": "764a9acd4cb1f1074be568fe7fb6aa7e66bec46e6de2bcd787df880c9719051d"
+      }
+    ]
+  }
+}

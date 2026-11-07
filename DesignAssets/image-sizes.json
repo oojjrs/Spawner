@@ -20734,6 +20734,174 @@
           512
         ]
       }
+    },
+    "DesignAssets/Animations/BirthSceneLayersV1/c945d053d51e8a1102d2264c6496c0904587b00c0e2808e9c0733e29f76c3f9b.png": {
+      "display": [
+        256,
+        213.873418
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "c945d053d51e8a1102d2264c6496c0904587b00c0e2808e9c0733e29f76c3f9b",
+        "dimensions": [
+          1264,
+          1056
+        ],
+        "frame": [
+          316,
+          264
+        ]
+      }
+    },
+    "DesignAssets/Animations/BirthSceneLayersV1/bd7a27d33b2506dd60766a11299f38430f9831630765a7c198578a0f5b133ab3.png": {
+      "display": [
+        256,
+        252.759494
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "bd7a27d33b2506dd60766a11299f38430f9831630765a7c198578a0f5b133ab3",
+        "dimensions": [
+          1264,
+          1248
+        ],
+        "frame": [
+          316,
+          312
+        ]
+      }
+    },
+    "DesignAssets/Animations/BirthSceneLayersV1/ebfe66874cde38398024d9306618457503a386074f2b3ba377c365c6c1cba9c1.png": {
+      "display": [
+        256,
+        218.734177
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "ebfe66874cde38398024d9306618457503a386074f2b3ba377c365c6c1cba9c1",
+        "dimensions": [
+          1264,
+          1080
+        ],
+        "frame": [
+          316,
+          270
+        ]
+      }
+    },
+    "DesignAssets/Animations/BirthSceneLayersV1/d1d24d18c2832461358b5d4842e446a9b991f53fc12fe1f4935a9416e211e21e.png": {
+      "display": [
+        256,
+        252.759494
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "d1d24d18c2832461358b5d4842e446a9b991f53fc12fe1f4935a9416e211e21e",
+        "dimensions": [
+          1264,
+          1248
+        ],
+        "frame": [
+          316,
+          312
+        ]
+      }
+    },
+    "DesignAssets/Animations/BirthSceneLayersV1/89dafdbbd6e9ac8406e38ef9e03612d301f5ea800b3f007c9dd2e78083422450.png": {
+      "display": [
+        256,
+        204.962025
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "89dafdbbd6e9ac8406e38ef9e03612d301f5ea800b3f007c9dd2e78083422450",
+        "dimensions": [
+          1264,
+          1012
+        ],
+        "frame": [
+          316,
+          253
+        ]
+      }
+    },
+    "DesignAssets/Animations/BirthSceneLayersV1/19823a46d35dc74065f32ec1ef292d082c13b8e722cfa7db9733574fd2047754.png": {
+      "display": [
+        256,
+        252.759494
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "19823a46d35dc74065f32ec1ef292d082c13b8e722cfa7db9733574fd2047754",
+        "dimensions": [
+          1264,
+          1248
+        ],
+        "frame": [
+          316,
+          312
+        ]
+      }
+    },
+    "DesignAssets/Animations/BirthSceneLayersV1/4d353f7e6a238450931a51d99db2651dc60c48da430df70d434d5e426ea43fe1.png": {
+      "display": [
+        256,
+        238.987342
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "4d353f7e6a238450931a51d99db2651dc60c48da430df70d434d5e426ea43fe1",
+        "dimensions": [
+          1264,
+          1180
+        ],
+        "frame": [
+          316,
+          295
+        ]
+      }
+    },
+    "DesignAssets/Animations/BirthSceneLayersV1/764a9acd4cb1f1074be568fe7fb6aa7e66bec46e6de2bcd787df880c9719051d.png": {
+      "display": [
+        256,
+        252.759494
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "764a9acd4cb1f1074be568fe7fb6aa7e66bec46e6de2bcd787df880c9719051d",
+        "dimensions": [
+          1264,
+          1248
+        ],
+        "frame": [
+          316,
+          312
+        ]
+      }
     }
   }
 }

@@ -109,13 +109,13 @@ for relative in json.loads(m.INDEX.read_text()):
 print(json.dumps(result))
 `], { cwd: new URL('..', import.meta.url), encoding: 'utf8' }));
 
-test('all 14 real publication payloads preserve complete bodies, frame counts and hashed atlases', () => {
-  assert.equal(publishedScenes.length, 14);
+test('all 18 real publication payloads preserve complete bodies, frame counts and hashed atlases', () => {
+  assert.equal(publishedScenes.length, 18);
   assert.equal(publishedScenes.filter(item => item.tribe === 'spore').length, 7);
   assert.equal(publishedScenes.filter(item => item.tribe === 'bean').length, 7);
   for (const { tribe, source, clip } of publishedScenes) {
-    assert.equal(clip.frameSize, tribe === 'spore' ? 768 : 512);
-    assert.equal(clip.frameHeight, 512);
+    assert.equal(clip.frameSize, tribe === 'spring' ? 480 : tribe === 'spore' ? 768 : 512);
+    assert.equal(clip.frameHeight, tribe === 'spring' ? 480 : 512);
     assert.deepEqual(clip.durationsMs, source.durationsMs);
     assert.equal(clip.durationsMs.length, source.frameCount);
     assert.deepEqual(clip.sceneLayers.layers.map(layer => layer.role), ['environment', 'body']);
@@ -126,7 +126,7 @@ test('all 14 real publication payloads preserve complete bodies, frame counts an
       try { fs.readSync(fd, header, 0, 24, 0); } finally { fs.closeSync(fd); }
       assert.equal(header.readUInt32BE(16), layer.columns * layer.frameSize);
       assert.equal(header.readUInt32BE(20), Math.ceil(layer.frameCount / layer.columns) * layer.frameHeight);
-      if (layer.role === 'body') { assert.equal(layer.wholeBody, true); assert.equal(layer.frameSize, 512); assert.equal(layer.frameHeight, 512); }
+      if (layer.role === 'body') { assert.equal(layer.wholeBody, true); assert.equal(layer.frameSize, tribe === 'spring' ? 316 : 512); assert.equal(layer.frameHeight, tribe === 'spring' ? 312 : 512); }
       for (const sample of layer.samples.filter(Boolean)) {
         assert.ok(Number.isInteger(sample.frame) && sample.frame >= 0 && sample.frame < layer.frameCount);
         assert.equal(sample.destination.length, 4); assert.ok(sample.destination.every(Number.isFinite));

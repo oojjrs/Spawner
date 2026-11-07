@@ -362,7 +362,251 @@
       ],
       "finalBodyReferenceLength": 128,
       "projectileIncluded": false,
-      "birthPolicy": "Complete authored nest and travel scene. Anchor final body ground at world position; do not add another procedural birth trajectory or second nest."
+      "birthPolicy": "Complete authored nest and travel scene. Anchor final body ground at world position; do not add another procedural birth trajectory or second nest.",
+      "sceneLayers": {
+        "version": 1,
+        "layers": [
+          {
+            "role": "environment",
+            "image": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-antenna/environment.png",
+            "frameSize": 316,
+            "frameHeight": 264,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              {
+                "frame": 9,
+                "destination": [
+                  70,
+                  67,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  72,
+                  67,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  75,
+                  67,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  79,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  70,
+                  79,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  72,
+                  79,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  75,
+                  79,
+                  316,
+                  264
+                ]
+              }
+            ],
+            "imageSHA256": "c945d053d51e8a1102d2264c6496c0904587b00c0e2808e9c0733e29f76c3f9b"
+          },
+          {
+            "role": "body",
+            "image": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-antenna/body.png",
+            "frameSize": 316,
+            "frameHeight": 312,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              {
+                "frame": 0,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              }
+            ],
+            "wholeBody": true,
+            "imageSHA256": "bd7a27d33b2506dd60766a11299f38430f9831630765a7c198578a0f5b133ab3"
+          }
+        ]
+      }
     },
     "death": {
       "sheet": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-death-v1-sheet.png",

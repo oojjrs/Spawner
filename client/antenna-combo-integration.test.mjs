@@ -75,7 +75,7 @@ test('all 28 antenna forms are complete with 172 byte-exact clips and 28 portrai
   assert.equal(Object.keys(ANTENNA_COMBO_ACTION_ART).length, 28);
   const originalImages = new Set(Object.values(ANTENNA_COMBO_ACTION_ART).flatMap(definition => [definition.portrait, ...Object.values(definition.actions).map(clip => clip.image)]));
   assert.equal(originalImages.size, 200);
-  assert.equal(ANTENNA_COMBO_IMAGE_ASSETS.length, 216);
+  assert.equal(ANTENNA_COMBO_IMAGE_ASSETS.length, 224);
   let clips = 0;
   for (const tribe of tribes) for (const form of forms) {
     const key = tribe + '/' + form.key, definition = ANTENNA_COMBO_ACTION_ART[key];
@@ -94,7 +94,7 @@ test('all 28 antenna forms are complete with 172 byte-exact clips and 28 portrai
       assert.equal(clip.loop, ['idle', 'walk'].includes(action)); clips++;
     }
   }
-  assert.equal(clips, 172); assert.equal(auditImages(root, ANTENNA_COMBO_IMAGE_ASSETS), 216);
+  assert.equal(clips, 172); assert.equal(auditImages(root, ANTENNA_COMBO_IMAGE_ASSETS), 224);
 });
 
 test('offline file builds include all original and layered antenna image wrappers', () => {

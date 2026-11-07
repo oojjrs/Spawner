@@ -361,7 +361,251 @@
       ],
       "finalBodyReferenceLength": 117,
       "projectileIncluded": false,
-      "birthPolicy": "Complete authored nest and travel scene. Anchor final body ground at world position; do not add another procedural birth trajectory or second nest."
+      "birthPolicy": "Complete authored nest and travel scene. Anchor final body ground at world position; do not add another procedural birth trajectory or second nest.",
+      "sceneLayers": {
+        "version": 1,
+        "layers": [
+          {
+            "role": "environment",
+            "image": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/secretion-antenna/environment.png",
+            "frameSize": 316,
+            "frameHeight": 270,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              {
+                "frame": 9,
+                "destination": [
+                  75,
+                  66,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  84,
+                  66,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  94,
+                  66,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  79,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  75,
+                  79,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  84,
+                  78,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  94,
+                  78,
+                  316,
+                  270
+                ]
+              }
+            ],
+            "imageSHA256": "ebfe66874cde38398024d9306618457503a386074f2b3ba377c365c6c1cba9c1"
+          },
+          {
+            "role": "body",
+            "image": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/secretion-antenna/body.png",
+            "frameSize": 316,
+            "frameHeight": 312,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              {
+                "frame": 0,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              }
+            ],
+            "wholeBody": true,
+            "imageSHA256": "d1d24d18c2832461358b5d4842e446a9b991f53fc12fe1f4935a9416e211e21e"
+          }
+        ]
+      }
     },
     "death": {
       "sheet": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-death-v1-sheet.png",

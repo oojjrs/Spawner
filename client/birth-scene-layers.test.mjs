@@ -244,12 +244,12 @@ test('slow fallback finishing after recovery cannot replace the whole-body scene
   assert.deepEqual(art.frame(agent, at(40)).getContext('2d').calls.map(call => call[0].image), ['test/environment', 'test/body']);
 });
 
-test('all 14 published layered births render 1358 boundaries in both facings without hot-path promises or idle decode', async t => {
+test('the original 14 bean/spore layered births render 1358 boundaries in both facings without hot-path promises or idle decode', async t => {
   const { ANTENNA_COMBO_ACTION_ART } = await import('./antenna-combo-assets.mjs');
   const { ANTENNA_COMBINATION_FORMS } = await import('./unit-combination-forms.mjs');
   const { createHook } = await import('node:async_hooks');
   const { createHash } = await import('node:crypto');
-  const entries = Object.entries(ANTENNA_COMBO_ACTION_ART).filter(([, definition]) => definition.actions.birth?.sceneLayers);
+  const entries = Object.entries(ANTENNA_COMBO_ACTION_ART).filter(([key, definition]) => /^(bean|spore)\//.test(key) && definition.actions.birth?.sceneLayers);
   assert.equal(entries.length, 14);
   const atlases = new Map();
   for (const [, definition] of entries) for (const layer of definition.actions.birth.sceneLayers.layers) {

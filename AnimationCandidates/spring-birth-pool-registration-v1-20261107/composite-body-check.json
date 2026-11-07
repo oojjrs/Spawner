@@ -1,0 +1,2506 @@
+{
+  "spring/blade-antenna": {
+    "rows": [
+      {
+        "frame": 0,
+        "originalPoolCoreBounds": [
+          122,
+          146,
+          324,
+          234
+        ],
+        "candidatePoolCoreBounds": [
+          122,
+          146,
+          324,
+          234
+        ],
+        "bodyAlpha16CorePixels": 12320,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 1,
+        "originalPoolCoreBounds": [
+          119,
+          146,
+          322,
+          244
+        ],
+        "candidatePoolCoreBounds": [
+          119,
+          146,
+          322,
+          244
+        ],
+        "bodyAlpha16CorePixels": 12815,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 2,
+        "originalPoolCoreBounds": [
+          117,
+          146,
+          322,
+          270
+        ],
+        "candidatePoolCoreBounds": [
+          117,
+          146,
+          322,
+          270
+        ],
+        "bodyAlpha16CorePixels": 13519,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 3,
+        "originalPoolCoreBounds": [
+          114,
+          146,
+          324,
+          284
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          146,
+          324,
+          284
+        ],
+        "bodyAlpha16CorePixels": 14187,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 4,
+        "originalPoolCoreBounds": [
+          122,
+          133,
+          324,
+          221
+        ],
+        "candidatePoolCoreBounds": [
+          122,
+          133,
+          324,
+          221
+        ],
+        "bodyAlpha16CorePixels": 2728,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 5,
+        "originalPoolCoreBounds": [
+          119,
+          133,
+          321,
+          220
+        ],
+        "candidatePoolCoreBounds": [
+          119,
+          133,
+          321,
+          220
+        ],
+        "bodyAlpha16CorePixels": 3854,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 6,
+        "originalPoolCoreBounds": [
+          117,
+          133,
+          321,
+          221
+        ],
+        "candidatePoolCoreBounds": [
+          117,
+          133,
+          321,
+          221
+        ],
+        "bodyAlpha16CorePixels": 4572,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 7,
+        "originalPoolCoreBounds": [
+          114,
+          133,
+          318,
+          221
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          133,
+          318,
+          221
+        ],
+        "bodyAlpha16CorePixels": 5237,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 8,
+        "originalPoolCoreBounds": [
+          122,
+          121,
+          324,
+          209
+        ],
+        "candidatePoolCoreBounds": [
+          122,
+          121,
+          324,
+          209
+        ],
+        "bodyAlpha16CorePixels": 5621,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 9,
+        "originalPoolCoreBounds": [
+          119,
+          121,
+          321,
+          209
+        ],
+        "candidatePoolCoreBounds": [
+          122,
+          121,
+          324,
+          209
+        ],
+        "bodyAlpha16CorePixels": 5968,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 14817,
+            "wholeCellMaximumChannelDifference": 204
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 21086,
+            "wholeCellMaximumChannelDifference": 240
+          }
+        }
+      },
+      {
+        "frame": 10,
+        "originalPoolCoreBounds": [
+          117,
+          121,
+          320,
+          209
+        ],
+        "candidatePoolCoreBounds": [
+          122,
+          121,
+          325,
+          209
+        ],
+        "bodyAlpha16CorePixels": 5510,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 16042,
+            "wholeCellMaximumChannelDifference": 236
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 20377,
+            "wholeCellMaximumChannelDifference": 240
+          }
+        }
+      },
+      {
+        "frame": 11,
+        "originalPoolCoreBounds": [
+          114,
+          121,
+          318,
+          209
+        ],
+        "candidatePoolCoreBounds": [
+          122,
+          121,
+          326,
+          209
+        ],
+        "bodyAlpha16CorePixels": 6394,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 17834,
+            "wholeCellMaximumChannelDifference": 245
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 20449,
+            "wholeCellMaximumChannelDifference": 245
+          }
+        }
+      },
+      {
+        "frame": 12,
+        "originalPoolCoreBounds": [
+          122,
+          109,
+          324,
+          197
+        ],
+        "candidatePoolCoreBounds": [
+          122,
+          121,
+          324,
+          209
+        ],
+        "bodyAlpha16CorePixels": 7534,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 19432,
+            "wholeCellMaximumChannelDifference": 247
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 24365,
+            "wholeCellMaximumChannelDifference": 246
+          }
+        }
+      },
+      {
+        "frame": 13,
+        "originalPoolCoreBounds": [
+          119,
+          109,
+          321,
+          198
+        ],
+        "candidatePoolCoreBounds": [
+          122,
+          121,
+          324,
+          210
+        ],
+        "bodyAlpha16CorePixels": 7945,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 21569,
+            "wholeCellMaximumChannelDifference": 245
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 26580,
+            "wholeCellMaximumChannelDifference": 245
+          }
+        }
+      },
+      {
+        "frame": 14,
+        "originalPoolCoreBounds": [
+          117,
+          109,
+          320,
+          197
+        ],
+        "candidatePoolCoreBounds": [
+          122,
+          121,
+          325,
+          209
+        ],
+        "bodyAlpha16CorePixels": 8244,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 19491,
+            "wholeCellMaximumChannelDifference": 245
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 22849,
+            "wholeCellMaximumChannelDifference": 244
+          }
+        }
+      },
+      {
+        "frame": 15,
+        "originalPoolCoreBounds": [
+          114,
+          109,
+          318,
+          197
+        ],
+        "candidatePoolCoreBounds": [
+          122,
+          121,
+          326,
+          209
+        ],
+        "bodyAlpha16CorePixels": 8871,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 21259,
+            "wholeCellMaximumChannelDifference": 250
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 25905,
+            "wholeCellMaximumChannelDifference": 250
+          }
+        }
+      }
+    ],
+    "f8to9": {
+      "before": {
+        "rawXY": [
+          -3,
+          0
+        ],
+        "leftFacingWorldXY": [
+          1.8515625,
+          0.0
+        ]
+      },
+      "after": {
+        "rawXY": [
+          0,
+          0
+        ],
+        "leftFacingWorldXY": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "f11to12": {
+      "before": {
+        "rawXY": [
+          8,
+          -12
+        ],
+        "leftFacingWorldXY": [
+          -4.9375,
+          -7.40625
+        ]
+      },
+      "after": {
+        "rawXY": [
+          0,
+          0
+        ],
+        "leftFacingWorldXY": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "lateRangeRawBefore": {
+      "x": 8,
+      "y": 12
+    },
+    "lateRangeRawAfter": {
+      "x": 0,
+      "y": 0
+    },
+    "endBoundary": "Non-looping birth. f15 holds 1500 through <1790ms. Native runtime selects idle at1790ms; both versions remove pool then. No runtime loop seam. Early frame0-8 drift intentionally remains."
+  },
+  "spring/secretion-antenna": {
+    "rows": [
+      {
+        "frame": 0,
+        "originalPoolCoreBounds": [
+          131,
+          146,
+          320,
+          236
+        ],
+        "candidatePoolCoreBounds": [
+          131,
+          146,
+          320,
+          236
+        ],
+        "bodyAlpha16CorePixels": 11600,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 1,
+        "originalPoolCoreBounds": [
+          123,
+          146,
+          315,
+          247
+        ],
+        "candidatePoolCoreBounds": [
+          123,
+          146,
+          315,
+          247
+        ],
+        "bodyAlpha16CorePixels": 12094,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 2,
+        "originalPoolCoreBounds": [
+          114,
+          146,
+          313,
+          284
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          146,
+          313,
+          284
+        ],
+        "bodyAlpha16CorePixels": 13244,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 3,
+        "originalPoolCoreBounds": [
+          104,
+          146,
+          316,
+          320
+        ],
+        "candidatePoolCoreBounds": [
+          104,
+          146,
+          316,
+          320
+        ],
+        "bodyAlpha16CorePixels": 15645,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 4,
+        "originalPoolCoreBounds": [
+          131,
+          133,
+          320,
+          222
+        ],
+        "candidatePoolCoreBounds": [
+          131,
+          133,
+          320,
+          222
+        ],
+        "bodyAlpha16CorePixels": 4450,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 5,
+        "originalPoolCoreBounds": [
+          122,
+          133,
+          311,
+          221
+        ],
+        "candidatePoolCoreBounds": [
+          122,
+          133,
+          311,
+          221
+        ],
+        "bodyAlpha16CorePixels": 4768,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 6,
+        "originalPoolCoreBounds": [
+          114,
+          133,
+          303,
+          221
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          133,
+          303,
+          221
+        ],
+        "bodyAlpha16CorePixels": 5380,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 7,
+        "originalPoolCoreBounds": [
+          104,
+          133,
+          293,
+          221
+        ],
+        "candidatePoolCoreBounds": [
+          104,
+          133,
+          293,
+          221
+        ],
+        "bodyAlpha16CorePixels": 5555,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 8,
+        "originalPoolCoreBounds": [
+          131,
+          119,
+          320,
+          207
+        ],
+        "candidatePoolCoreBounds": [
+          131,
+          119,
+          320,
+          207
+        ],
+        "bodyAlpha16CorePixels": 6413,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 9,
+        "originalPoolCoreBounds": [
+          123,
+          120,
+          313,
+          207
+        ],
+        "candidatePoolCoreBounds": [
+          131,
+          119,
+          321,
+          206
+        ],
+        "bodyAlpha16CorePixels": 7085,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 22184,
+            "wholeCellMaximumChannelDifference": 250
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 29678,
+            "wholeCellMaximumChannelDifference": 250
+          }
+        }
+      },
+      {
+        "frame": 10,
+        "originalPoolCoreBounds": [
+          114,
+          120,
+          303,
+          207
+        ],
+        "candidatePoolCoreBounds": [
+          131,
+          119,
+          320,
+          206
+        ],
+        "bodyAlpha16CorePixels": 7488,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 27562,
+            "wholeCellMaximumChannelDifference": 252
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 37518,
+            "wholeCellMaximumChannelDifference": 252
+          }
+        }
+      },
+      {
+        "frame": 11,
+        "originalPoolCoreBounds": [
+          104,
+          120,
+          293,
+          207
+        ],
+        "candidatePoolCoreBounds": [
+          131,
+          119,
+          320,
+          206
+        ],
+        "bodyAlpha16CorePixels": 8274,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 27116,
+            "wholeCellMaximumChannelDifference": 248
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 42012,
+            "wholeCellMaximumChannelDifference": 248
+          }
+        }
+      },
+      {
+        "frame": 12,
+        "originalPoolCoreBounds": [
+          131,
+          107,
+          320,
+          196
+        ],
+        "candidatePoolCoreBounds": [
+          131,
+          119,
+          320,
+          208
+        ],
+        "bodyAlpha16CorePixels": 9427,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 23851,
+            "wholeCellMaximumChannelDifference": 252
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 32520,
+            "wholeCellMaximumChannelDifference": 252
+          }
+        }
+      },
+      {
+        "frame": 13,
+        "originalPoolCoreBounds": [
+          123,
+          107,
+          313,
+          196
+        ],
+        "candidatePoolCoreBounds": [
+          131,
+          119,
+          321,
+          208
+        ],
+        "bodyAlpha16CorePixels": 9448,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 1,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 5,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 1,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 1,
+            "bodyCoreMaximumChannelDifference": 1,
+            "wholeCellAffectedPixelCount": 30852,
+            "wholeCellMaximumChannelDifference": 247
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 1,
+            "bodyCoreMaximumChannelDifference": 1,
+            "wholeCellAffectedPixelCount": 35987,
+            "wholeCellMaximumChannelDifference": 247
+          }
+        }
+      },
+      {
+        "frame": 14,
+        "originalPoolCoreBounds": [
+          114,
+          108,
+          303,
+          196
+        ],
+        "candidatePoolCoreBounds": [
+          131,
+          119,
+          320,
+          207
+        ],
+        "bodyAlpha16CorePixels": 9584,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 20,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 5,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 30,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 17,
+            "bodyCoreMaximumChannelDifference": 1,
+            "wholeCellAffectedPixelCount": 32625,
+            "wholeCellMaximumChannelDifference": 252
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 18,
+            "bodyCoreMaximumChannelDifference": 1,
+            "wholeCellAffectedPixelCount": 40324,
+            "wholeCellMaximumChannelDifference": 252
+          }
+        }
+      },
+      {
+        "frame": 15,
+        "originalPoolCoreBounds": [
+          104,
+          108,
+          293,
+          196
+        ],
+        "candidatePoolCoreBounds": [
+          131,
+          119,
+          320,
+          207
+        ],
+        "bodyAlpha16CorePixels": 9716,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 4,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 10,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 5,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 4,
+            "bodyCoreMaximumChannelDifference": 1,
+            "wholeCellAffectedPixelCount": 29221,
+            "wholeCellMaximumChannelDifference": 253
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 4,
+            "bodyCoreMaximumChannelDifference": 1,
+            "wholeCellAffectedPixelCount": 41813,
+            "wholeCellMaximumChannelDifference": 253
+          }
+        }
+      }
+    ],
+    "f8to9": {
+      "before": {
+        "rawXY": [
+          -8,
+          1
+        ],
+        "leftFacingWorldXY": [
+          5.401709401709402,
+          0.6752136752136753
+        ]
+      },
+      "after": {
+        "rawXY": [
+          0,
+          0
+        ],
+        "leftFacingWorldXY": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "f11to12": {
+      "before": {
+        "rawXY": [
+          27,
+          -13
+        ],
+        "leftFacingWorldXY": [
+          -18.230769230769234,
+          -8.777777777777779
+        ]
+      },
+      "after": {
+        "rawXY": [
+          0,
+          0
+        ],
+        "leftFacingWorldXY": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "lateRangeRawBefore": {
+      "x": 27,
+      "y": 13
+    },
+    "lateRangeRawAfter": {
+      "x": 0,
+      "y": 0
+    },
+    "endBoundary": "Non-looping birth. f15 holds 1500 through <1790ms. Native runtime selects idle at1790ms; both versions remove pool then. No runtime loop seam. Early frame0-8 drift intentionally remains."
+  },
+  "spring/blade-secretion-antenna": {
+    "rows": [
+      {
+        "frame": 0,
+        "originalPoolCoreBounds": [
+          125,
+          134,
+          317,
+          227
+        ],
+        "candidatePoolCoreBounds": [
+          125,
+          134,
+          317,
+          227
+        ],
+        "bodyAlpha16CorePixels": 12380,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 1,
+        "originalPoolCoreBounds": [
+          111,
+          134,
+          309,
+          233
+        ],
+        "candidatePoolCoreBounds": [
+          111,
+          134,
+          309,
+          233
+        ],
+        "bodyAlpha16CorePixels": 12724,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 2,
+        "originalPoolCoreBounds": [
+          99,
+          134,
+          293,
+          273
+        ],
+        "candidatePoolCoreBounds": [
+          99,
+          134,
+          293,
+          273
+        ],
+        "bodyAlpha16CorePixels": 13542,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 3,
+        "originalPoolCoreBounds": [
+          84,
+          134,
+          287,
+          296
+        ],
+        "candidatePoolCoreBounds": [
+          84,
+          134,
+          287,
+          296
+        ],
+        "bodyAlpha16CorePixels": 14610,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 4,
+        "originalPoolCoreBounds": [
+          125,
+          125,
+          316,
+          217
+        ],
+        "candidatePoolCoreBounds": [
+          125,
+          125,
+          316,
+          217
+        ],
+        "bodyAlpha16CorePixels": 3604,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 5,
+        "originalPoolCoreBounds": [
+          111,
+          125,
+          300,
+          216
+        ],
+        "candidatePoolCoreBounds": [
+          111,
+          125,
+          300,
+          216
+        ],
+        "bodyAlpha16CorePixels": 5569,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 6,
+        "originalPoolCoreBounds": [
+          98,
+          125,
+          290,
+          216
+        ],
+        "candidatePoolCoreBounds": [
+          98,
+          125,
+          290,
+          216
+        ],
+        "bodyAlpha16CorePixels": 7389,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 7,
+        "originalPoolCoreBounds": [
+          85,
+          125,
+          274,
+          216
+        ],
+        "candidatePoolCoreBounds": [
+          85,
+          125,
+          274,
+          216
+        ],
+        "bodyAlpha16CorePixels": 8686,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 8,
+        "originalPoolCoreBounds": [
+          125,
+          116,
+          317,
+          207
+        ],
+        "candidatePoolCoreBounds": [
+          125,
+          116,
+          317,
+          207
+        ],
+        "bodyAlpha16CorePixels": 9298,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 9,
+        "originalPoolCoreBounds": [
+          111,
+          116,
+          302,
+          207
+        ],
+        "candidatePoolCoreBounds": [
+          125,
+          116,
+          316,
+          207
+        ],
+        "bodyAlpha16CorePixels": 8814,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 28277,
+            "wholeCellMaximumChannelDifference": 246
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 34904,
+            "wholeCellMaximumChannelDifference": 246
+          }
+        }
+      },
+      {
+        "frame": 10,
+        "originalPoolCoreBounds": [
+          99,
+          116,
+          290,
+          207
+        ],
+        "candidatePoolCoreBounds": [
+          125,
+          116,
+          316,
+          207
+        ],
+        "bodyAlpha16CorePixels": 8799,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 33768,
+            "wholeCellMaximumChannelDifference": 245
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 38674,
+            "wholeCellMaximumChannelDifference": 245
+          }
+        }
+      },
+      {
+        "frame": 11,
+        "originalPoolCoreBounds": [
+          84,
+          117,
+          274,
+          207
+        ],
+        "candidatePoolCoreBounds": [
+          125,
+          116,
+          315,
+          206
+        ],
+        "bodyAlpha16CorePixels": 9485,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 30088,
+            "wholeCellMaximumChannelDifference": 251
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 35481,
+            "wholeCellMaximumChannelDifference": 250
+          }
+        }
+      },
+      {
+        "frame": 12,
+        "originalPoolCoreBounds": [
+          125,
+          108,
+          316,
+          199
+        ],
+        "candidatePoolCoreBounds": [
+          125,
+          116,
+          316,
+          207
+        ],
+        "bodyAlpha16CorePixels": 10605,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 21938,
+            "wholeCellMaximumChannelDifference": 250
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 27065,
+            "wholeCellMaximumChannelDifference": 251
+          }
+        }
+      },
+      {
+        "frame": 13,
+        "originalPoolCoreBounds": [
+          111,
+          108,
+          302,
+          199
+        ],
+        "candidatePoolCoreBounds": [
+          125,
+          116,
+          316,
+          207
+        ],
+        "bodyAlpha16CorePixels": 11477,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 30120,
+            "wholeCellMaximumChannelDifference": 251
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 33319,
+            "wholeCellMaximumChannelDifference": 251
+          }
+        }
+      },
+      {
+        "frame": 14,
+        "originalPoolCoreBounds": [
+          99,
+          108,
+          290,
+          200
+        ],
+        "candidatePoolCoreBounds": [
+          125,
+          116,
+          316,
+          208
+        ],
+        "bodyAlpha16CorePixels": 11749,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 31007,
+            "wholeCellMaximumChannelDifference": 251
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 32729,
+            "wholeCellMaximumChannelDifference": 251
+          }
+        }
+      },
+      {
+        "frame": 15,
+        "originalPoolCoreBounds": [
+          84,
+          108,
+          275,
+          200
+        ],
+        "candidatePoolCoreBounds": [
+          125,
+          116,
+          316,
+          208
+        ],
+        "bodyAlpha16CorePixels": 11935,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 15,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 4,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 29,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 14,
+            "bodyCoreMaximumChannelDifference": 1,
+            "wholeCellAffectedPixelCount": 29909,
+            "wholeCellMaximumChannelDifference": 253
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 13,
+            "bodyCoreMaximumChannelDifference": 1,
+            "wholeCellAffectedPixelCount": 33767,
+            "wholeCellMaximumChannelDifference": 253
+          }
+        }
+      }
+    ],
+    "f8to9": {
+      "before": {
+        "rawXY": [
+          -14,
+          0
+        ],
+        "leftFacingWorldXY": [
+          7.627586206896551,
+          0.0
+        ]
+      },
+      "after": {
+        "rawXY": [
+          0,
+          0
+        ],
+        "leftFacingWorldXY": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "f11to12": {
+      "before": {
+        "rawXY": [
+          41,
+          -9
+        ],
+        "leftFacingWorldXY": [
+          -22.337931034482757,
+          -4.903448275862068
+        ]
+      },
+      "after": {
+        "rawXY": [
+          0,
+          0
+        ],
+        "leftFacingWorldXY": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "lateRangeRawBefore": {
+      "x": 41,
+      "y": 9
+    },
+    "lateRangeRawAfter": {
+      "x": 0,
+      "y": 0
+    },
+    "endBoundary": "Non-looping birth. f15 holds 1500 through <1790ms. Native runtime selects idle at1790ms; both versions remove pool then. No runtime loop seam. Early frame0-8 drift intentionally remains."
+  },
+  "spring/blade-secretion-carapace-antenna": {
+    "rows": [
+      {
+        "frame": 0,
+        "originalPoolCoreBounds": [
+          114,
+          143,
+          319,
+          229
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          143,
+          319,
+          229
+        ],
+        "bodyAlpha16CorePixels": 12090,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 1,
+        "originalPoolCoreBounds": [
+          115,
+          143,
+          323,
+          236
+        ],
+        "candidatePoolCoreBounds": [
+          115,
+          143,
+          323,
+          236
+        ],
+        "bodyAlpha16CorePixels": 12496,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 2,
+        "originalPoolCoreBounds": [
+          114,
+          144,
+          328,
+          256
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          144,
+          328,
+          256
+        ],
+        "bodyAlpha16CorePixels": 13138,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 3,
+        "originalPoolCoreBounds": [
+          115,
+          144,
+          333,
+          279
+        ],
+        "candidatePoolCoreBounds": [
+          115,
+          144,
+          333,
+          279
+        ],
+        "bodyAlpha16CorePixels": 14022,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 4,
+        "originalPoolCoreBounds": [
+          114,
+          135,
+          319,
+          221
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          135,
+          319,
+          221
+        ],
+        "bodyAlpha16CorePixels": 2773,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 5,
+        "originalPoolCoreBounds": [
+          115,
+          135,
+          318,
+          222
+        ],
+        "candidatePoolCoreBounds": [
+          115,
+          135,
+          318,
+          222
+        ],
+        "bodyAlpha16CorePixels": 3707,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 6,
+        "originalPoolCoreBounds": [
+          114,
+          135,
+          318,
+          221
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          135,
+          318,
+          221
+        ],
+        "bodyAlpha16CorePixels": 5018,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 7,
+        "originalPoolCoreBounds": [
+          115,
+          135,
+          319,
+          221
+        ],
+        "candidatePoolCoreBounds": [
+          115,
+          135,
+          319,
+          221
+        ],
+        "bodyAlpha16CorePixels": 6729,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 8,
+        "originalPoolCoreBounds": [
+          114,
+          131,
+          319,
+          217
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          131,
+          319,
+          217
+        ],
+        "bodyAlpha16CorePixels": 7081,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        },
+        "allVisibleRGBAExact": true
+      },
+      {
+        "frame": 9,
+        "originalPoolCoreBounds": [
+          115,
+          131,
+          318,
+          217
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          131,
+          317,
+          217
+        ],
+        "bodyAlpha16CorePixels": 7162,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 17914,
+            "wholeCellMaximumChannelDifference": 130
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 19667,
+            "wholeCellMaximumChannelDifference": 158
+          }
+        }
+      },
+      {
+        "frame": 10,
+        "originalPoolCoreBounds": [
+          114,
+          131,
+          318,
+          216
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          131,
+          318,
+          216
+        ],
+        "bodyAlpha16CorePixels": 7729,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 0,
+            "wholeCellMaximumChannelDifference": 0
+          }
+        }
+      },
+      {
+        "frame": 11,
+        "originalPoolCoreBounds": [
+          115,
+          131,
+          319,
+          217
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          131,
+          318,
+          217
+        ],
+        "bodyAlpha16CorePixels": 8092,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 18702,
+            "wholeCellMaximumChannelDifference": 139
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 20924,
+            "wholeCellMaximumChannelDifference": 177
+          }
+        }
+      },
+      {
+        "frame": 12,
+        "originalPoolCoreBounds": [
+          114,
+          126,
+          319,
+          211
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          131,
+          319,
+          216
+        ],
+        "bodyAlpha16CorePixels": 8782,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 21760,
+            "wholeCellMaximumChannelDifference": 249
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 26578,
+            "wholeCellMaximumChannelDifference": 250
+          }
+        }
+      },
+      {
+        "frame": 13,
+        "originalPoolCoreBounds": [
+          115,
+          126,
+          318,
+          212
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          131,
+          317,
+          217
+        ],
+        "bodyAlpha16CorePixels": 9583,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 24722,
+            "wholeCellMaximumChannelDifference": 249
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 27282,
+            "wholeCellMaximumChannelDifference": 249
+          }
+        }
+      },
+      {
+        "frame": 14,
+        "originalPoolCoreBounds": [
+          114,
+          126,
+          318,
+          211
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          131,
+          318,
+          216
+        ],
+        "bodyAlpha16CorePixels": 9942,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 24883,
+            "wholeCellMaximumChannelDifference": 252
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 26821,
+            "wholeCellMaximumChannelDifference": 255
+          }
+        }
+      },
+      {
+        "frame": 15,
+        "originalPoolCoreBounds": [
+          115,
+          126,
+          319,
+          212
+        ],
+        "candidatePoolCoreBounds": [
+          114,
+          131,
+          318,
+          217
+        ],
+        "bodyAlpha16CorePixels": 10194,
+        "bodyAlpha16SourceLayerExact": true,
+        "bodyAlpha16CompositeRGBAChangedPixels": 0,
+        "bodyAlpha16CompositeMaxRGBAChannelDifference": 0,
+        "environmentAlpha2OrMoreOverBodyAlpha16Core": 0,
+        "environmentAlpha1OverBodyAlpha16Core": 0,
+        "opaqueBackgroundChecks": {
+          "(37, 42, 48)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 24480,
+            "wholeCellMaximumChannelDifference": 250
+          },
+          "(240, 240, 240)": {
+            "bodyCoreAffectedPixelCount": 0,
+            "bodyCoreMaximumChannelDifference": 0,
+            "wholeCellAffectedPixelCount": 26827,
+            "wholeCellMaximumChannelDifference": 250
+          }
+        }
+      }
+    ],
+    "f8to9": {
+      "before": {
+        "rawXY": [
+          1,
+          0
+        ],
+        "leftFacingWorldXY": [
+          -0.6124031007751938,
+          0.0
+        ]
+      },
+      "after": {
+        "rawXY": [
+          0,
+          0
+        ],
+        "leftFacingWorldXY": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "f11to12": {
+      "before": {
+        "rawXY": [
+          -1,
+          -5
+        ],
+        "leftFacingWorldXY": [
+          0.6124031007751938,
+          -3.062015503875969
+        ]
+      },
+      "after": {
+        "rawXY": [
+          0,
+          0
+        ],
+        "leftFacingWorldXY": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "lateRangeRawBefore": {
+      "x": 1,
+      "y": 5
+    },
+    "lateRangeRawAfter": {
+      "x": 0,
+      "y": 0
+    },
+    "endBoundary": "Non-looping birth. f15 holds 1500 through <1790ms. Native runtime selects idle at1790ms; both versions remove pool then. No runtime loop seam. Early frame0-8 drift intentionally remains."
+  }
+}

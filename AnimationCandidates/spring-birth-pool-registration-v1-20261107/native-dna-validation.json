@@ -1,0 +1,16 @@
+{
+  "cases": 304,
+  "sourceHashesVerified": true,
+  "frameTimingAndIdleExitUnchanged": true,
+  "realDnaVersion5Validated": true,
+  "noAttributeOverride": true,
+  "bothFacingDirections": true,
+  "bodyTargetPxAtCell200": {
+    "spring/blade-antenna": 79.78,
+    "spring/secretion-antenna": 79.78,
+    "spring/blade-secretion-antenna": 80.17,
+    "spring/blade-secretion-carapace-antenna": 80.56
+  },
+  "catalogRestoredInMemory": true,
+  "sharedFilesEdited": false
+}

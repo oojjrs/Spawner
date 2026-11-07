@@ -1,0 +1,1026 @@
+{
+  "spring/blade-antenna": {
+    "anchorFrame": 8,
+    "anchorPoolTopLeft": [
+      122,
+      121
+    ],
+    "records": [
+      {
+        "frame": 0,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 1,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 2,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 3,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 4,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 5,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 6,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 7,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 8,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 9,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          119,
+          121,
+          321,
+          209
+        ],
+        "bodyBounds": [
+          224,
+          264,
+          339,
+          338
+        ],
+        "shift": [
+          3,
+          0
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "b920fa1401c38a7807561dd085c48c7ff513700e76a6a4946673e71fd3bc9996",
+        "translatedAlphaBounds": [
+          70,
+          67,
+          385,
+          331
+        ]
+      },
+      {
+        "frame": 10,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          117,
+          121,
+          320,
+          209
+        ],
+        "bodyBounds": [
+          203,
+          281,
+          326,
+          341
+        ],
+        "shift": [
+          5,
+          0
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "dc7c30e9d167f234b2b0b62d29d58a28a0a80d9686ea93d5d04072ac74a7e080",
+        "translatedAlphaBounds": [
+          72,
+          67,
+          388,
+          309
+        ]
+      },
+      {
+        "frame": 11,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          114,
+          121,
+          318,
+          209
+        ],
+        "bodyBounds": [
+          212,
+          264,
+          330,
+          339
+        ],
+        "shift": [
+          8,
+          0
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "c380c5d7366e6c003c74e9796086ce2ea0a191281413a52d2f166ab96016d701",
+        "translatedAlphaBounds": [
+          75,
+          67,
+          389,
+          294
+        ]
+      },
+      {
+        "frame": 12,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          122,
+          109,
+          324,
+          197
+        ],
+        "bodyBounds": [
+          217,
+          244,
+          336,
+          335
+        ],
+        "shift": [
+          0,
+          12
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "bd7ec6ab4b5dd3e7286202f8c88b8549235aaa3092e86678a6ddca624f5f3706",
+        "translatedAlphaBounds": [
+          67,
+          79,
+          382,
+          307
+        ]
+      },
+      {
+        "frame": 13,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          119,
+          109,
+          321,
+          198
+        ],
+        "bodyBounds": [
+          211,
+          235,
+          335,
+          332
+        ],
+        "shift": [
+          3,
+          12
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "c2b8dc866f6a7b03a00f9d0910dc52a12c2b069fa235487b7773deba59a0f830",
+        "translatedAlphaBounds": [
+          70,
+          79,
+          385,
+          332
+        ]
+      },
+      {
+        "frame": 14,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          117,
+          109,
+          320,
+          197
+        ],
+        "bodyBounds": [
+          209,
+          230,
+          332,
+          332
+        ],
+        "shift": [
+          5,
+          12
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "673e782a091abe9e516fca0cf1e93690e4628c4944a19dcef3f002c47e6e6115",
+        "translatedAlphaBounds": [
+          72,
+          79,
+          388,
+          329
+        ]
+      },
+      {
+        "frame": 15,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          114,
+          109,
+          318,
+          197
+        ],
+        "bodyBounds": [
+          203,
+          226,
+          331,
+          332
+        ],
+        "shift": [
+          8,
+          12
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "0f4312aaae68d77187780832e24e6bc3444525aa7c9d818f9f614455699b88bd",
+        "translatedAlphaBounds": [
+          75,
+          79,
+          378,
+          325
+        ]
+      }
+    ],
+    "notes": "Frames 0-8 are intact full scenes in the body layer; environment samples null. Frames 9-15 are an alpha-topological partition. Only environment is translated. No opacity, scale, frame timing, pivot, creature position or sourceFacing edit."
+  },
+  "spring/secretion-antenna": {
+    "anchorFrame": 8,
+    "anchorPoolTopLeft": [
+      131,
+      119
+    ],
+    "records": [
+      {
+        "frame": 0,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 1,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 2,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 3,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 4,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 5,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 6,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 7,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 8,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 9,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          123,
+          120,
+          313,
+          207
+        ],
+        "bodyBounds": [
+          214,
+          269,
+          335,
+          348
+        ],
+        "shift": [
+          8,
+          -1
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "4e4e1d8e63a8b8fd701fd8dead2670b4e8f555dedbf3fecbcf046ac1b37f4366",
+        "translatedAlphaBounds": [
+          75,
+          66,
+          390,
+          326
+        ]
+      },
+      {
+        "frame": 10,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          114,
+          120,
+          303,
+          207
+        ],
+        "bodyBounds": [
+          203,
+          261,
+          322,
+          346
+        ],
+        "shift": [
+          17,
+          -1
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "8360b1f0627c4d84a295bbf1324d0b312a86e9a6437fb0f5415519d7a2e2b1c4",
+        "translatedAlphaBounds": [
+          84,
+          66,
+          400,
+          319
+        ]
+      },
+      {
+        "frame": 11,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          104,
+          120,
+          293,
+          207
+        ],
+        "bodyBounds": [
+          202,
+          242,
+          316,
+          343
+        ],
+        "shift": [
+          27,
+          -1
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "99483e96b963a81dd36322839e27509e786759a7582f9f13861c7b6ba2ac9848",
+        "translatedAlphaBounds": [
+          94,
+          66,
+          409,
+          325
+        ]
+      },
+      {
+        "frame": 12,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          131,
+          107,
+          320,
+          196
+        ],
+        "bodyBounds": [
+          225,
+          219,
+          340,
+          333
+        ],
+        "shift": [
+          0,
+          12
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "a927b03c10960b4bc719da4157a3ea5a0be44c44a86c8800ab0076b8dc22abb9",
+        "translatedAlphaBounds": [
+          67,
+          79,
+          382,
+          349
+        ]
+      },
+      {
+        "frame": 13,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          123,
+          107,
+          313,
+          196
+        ],
+        "bodyBounds": [
+          214,
+          219,
+          328,
+          333
+        ],
+        "shift": [
+          8,
+          12
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "c6818baae1b41ebecc5ef5fe945cc875d7fdb771df7abbd3f3991fd2d0b661c6",
+        "translatedAlphaBounds": [
+          75,
+          79,
+          390,
+          340
+        ]
+      },
+      {
+        "frame": 14,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          114,
+          108,
+          303,
+          196
+        ],
+        "bodyBounds": [
+          204,
+          219,
+          320,
+          333
+        ],
+        "shift": [
+          17,
+          11
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "ba1058f37a57caeaefe92b72c01909829aefa3eaf4e6a0e82cc9741f2cf60a99",
+        "translatedAlphaBounds": [
+          84,
+          78,
+          400,
+          332
+        ]
+      },
+      {
+        "frame": 15,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          104,
+          108,
+          293,
+          196
+        ],
+        "bodyBounds": [
+          194,
+          219,
+          311,
+          333
+        ],
+        "shift": [
+          27,
+          11
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "21e3005d9c04758a342ae7736e6eda8adde8de8c6b72b3ecc9c8103b89637e63",
+        "translatedAlphaBounds": [
+          94,
+          78,
+          408,
+          323
+        ]
+      }
+    ],
+    "notes": "Frames 0-8 are intact full scenes in the body layer; environment samples null. Frames 9-15 are an alpha-topological partition. Only environment is translated. No opacity, scale, frame timing, pivot, creature position or sourceFacing edit."
+  },
+  "spring/blade-secretion-antenna": {
+    "anchorFrame": 8,
+    "anchorPoolTopLeft": [
+      125,
+      116
+    ],
+    "records": [
+      {
+        "frame": 0,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 1,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 2,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 3,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 4,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 5,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 6,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 7,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 8,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 9,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          111,
+          116,
+          302,
+          207
+        ],
+        "bodyBounds": [
+          205,
+          249,
+          338,
+          354
+        ],
+        "shift": [
+          14,
+          0
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "c435256a178bb46eadcfa5f07613388d6f381cbe6218eb6e35b1ad83878ee415",
+        "translatedAlphaBounds": [
+          81,
+          67,
+          396,
+          320
+        ]
+      },
+      {
+        "frame": 10,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          99,
+          116,
+          290,
+          207
+        ],
+        "bodyBounds": [
+          183,
+          268,
+          326,
+          355
+        ],
+        "shift": [
+          26,
+          0
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "0e768ac6b47bf7cfd84e04f48f2fad95b09b08e75445bcce8b7572bab2772ef4",
+        "translatedAlphaBounds": [
+          93,
+          67,
+          409,
+          295
+        ]
+      },
+      {
+        "frame": 11,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          84,
+          117,
+          274,
+          207
+        ],
+        "bodyBounds": [
+          176,
+          249,
+          317,
+          355
+        ],
+        "shift": [
+          41,
+          -1
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "5793e6d4b06447469d8541dab7cdbac57adefec5c84b5bc60ddd30906bfdde67",
+        "translatedAlphaBounds": [
+          108,
+          66,
+          422,
+          272
+        ]
+      },
+      {
+        "frame": 12,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          125,
+          108,
+          316,
+          199
+        ],
+        "bodyBounds": [
+          213,
+          224,
+          351,
+          347
+        ],
+        "shift": [
+          0,
+          8
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "b45528a623c4eaee7b1fa51e99858b5605b47e5eb584a758d1691716cc88e95c",
+        "translatedAlphaBounds": [
+          67,
+          75,
+          382,
+          328
+        ]
+      },
+      {
+        "frame": 13,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          111,
+          108,
+          302,
+          199
+        ],
+        "bodyBounds": [
+          195,
+          218,
+          338,
+          348
+        ],
+        "shift": [
+          14,
+          8
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "9405e0d3e2bdf9dbe805c8cb23821d2039ea698bb11533ebcc2122ff59a6b26b",
+        "translatedAlphaBounds": [
+          81,
+          75,
+          396,
+          311
+        ]
+      },
+      {
+        "frame": 14,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          99,
+          108,
+          290,
+          200
+        ],
+        "bodyBounds": [
+          180,
+          216,
+          326,
+          348
+        ],
+        "shift": [
+          26,
+          8
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "be6bf17dcfc1b6c341e35515b1647a71147fc123e5fe53d4aa48c597a07652ef",
+        "translatedAlphaBounds": [
+          93,
+          75,
+          409,
+          299
+        ]
+      },
+      {
+        "frame": 15,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          84,
+          108,
+          275,
+          200
+        ],
+        "bodyBounds": [
+          167,
+          216,
+          312,
+          349
+        ],
+        "shift": [
+          41,
+          8
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "6ddda7889b42e72c16e5f1854a434bcd00e339c7eb1b7088b974d4a437c3dc73",
+        "translatedAlphaBounds": [
+          108,
+          75,
+          407,
+          291
+        ]
+      }
+    ],
+    "notes": "Frames 0-8 are intact full scenes in the body layer; environment samples null. Frames 9-15 are an alpha-topological partition. Only environment is translated. No opacity, scale, frame timing, pivot, creature position or sourceFacing edit."
+  },
+  "spring/blade-secretion-carapace-antenna": {
+    "anchorFrame": 8,
+    "anchorPoolTopLeft": [
+      114,
+      131
+    ],
+    "records": [
+      {
+        "frame": 0,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 1,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 2,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 3,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 4,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 5,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 6,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 7,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 8,
+        "untouchedFullScene": true
+      },
+      {
+        "frame": 9,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          115,
+          131,
+          318,
+          217
+        ],
+        "bodyBounds": [
+          220,
+          257,
+          336,
+          342
+        ],
+        "shift": [
+          -1,
+          0
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "2bf26bfb6c2deef08d950436cfa99c60f6ad1b8c057d3ffd34fba5f606c7ca3f",
+        "translatedAlphaBounds": [
+          66,
+          67,
+          382,
+          362
+        ]
+      },
+      {
+        "frame": 10,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          114,
+          131,
+          318,
+          216
+        ],
+        "bodyBounds": [
+          211,
+          266,
+          337,
+          344
+        ],
+        "shift": [
+          0,
+          0
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "e00946538744f21bc5941e2b54191dfe2d5845c6a34bac5ac69709d69cfb5a20",
+        "translatedAlphaBounds": [
+          67,
+          67,
+          382,
+          342
+        ]
+      },
+      {
+        "frame": 11,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          115,
+          131,
+          319,
+          217
+        ],
+        "bodyBounds": [
+          215,
+          251,
+          338,
+          346
+        ],
+        "shift": [
+          -1,
+          0
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "c595b82a7496f58d41856e2348946ae3700b48805ab35b4b691f3b96bbbd1fa6",
+        "translatedAlphaBounds": [
+          66,
+          67,
+          382,
+          352
+        ]
+      },
+      {
+        "frame": 12,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          114,
+          126,
+          319,
+          211
+        ],
+        "bodyBounds": [
+          213,
+          236,
+          334,
+          342
+        ],
+        "shift": [
+          0,
+          5
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "3baa26508b61eb73eca25bc4f82072d4e26619ad682ff367bfaf58f14a984784",
+        "translatedAlphaBounds": [
+          67,
+          72,
+          383,
+          352
+        ]
+      },
+      {
+        "frame": 13,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          115,
+          126,
+          318,
+          212
+        ],
+        "bodyBounds": [
+          211,
+          227,
+          335,
+          341
+        ],
+        "shift": [
+          -1,
+          5
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "0126cceb9fbba94c17eaec5b5de9da9c56c97abe918572315d60ca9835af4fab",
+        "translatedAlphaBounds": [
+          66,
+          72,
+          382,
+          351
+        ]
+      },
+      {
+        "frame": 14,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          114,
+          126,
+          318,
+          211
+        ],
+        "bodyBounds": [
+          209,
+          224,
+          336,
+          341
+        ],
+        "shift": [
+          0,
+          5
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "9ad24548979d83f4c35649e6c06c6d8c70bea1e927f8245393f86ac5ee578d3f",
+        "translatedAlphaBounds": [
+          67,
+          72,
+          382,
+          349
+        ]
+      },
+      {
+        "frame": 15,
+        "untouchedFullScene": false,
+        "poolBounds": [
+          115,
+          126,
+          319,
+          212
+        ],
+        "bodyBounds": [
+          208,
+          222,
+          337,
+          341
+        ],
+        "shift": [
+          -1,
+          5
+        ],
+        "cutMaxAlpha": 1,
+        "bodyAndSixPixelFringeUnchanged": true,
+        "sourcePartitionExact": true,
+        "protectedBodySHA256": "e9582badbd621b6635ae4d50084f2cd6b2ca07244dbcd24cffef0f51a1a7bb62",
+        "translatedAlphaBounds": [
+          66,
+          72,
+          382,
+          351
+        ]
+      }
+    ],
+    "notes": "Frames 0-8 are intact full scenes in the body layer; environment samples null. Frames 9-15 are an alpha-topological partition. Only environment is translated. No opacity, scale, frame timing, pivot, creature position or sourceFacing edit."
+  }
+}

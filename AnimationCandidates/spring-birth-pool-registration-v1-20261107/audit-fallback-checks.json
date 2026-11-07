@@ -1,0 +1,54 @@
+{
+  "checks": 48,
+  "passed": true,
+  "results": [
+    {
+      "key": "spring/blade-antenna",
+      "failedEachLayer": true,
+      "bothFacings": true,
+      "times": [
+        900,
+        1200,
+        1789
+      ],
+      "fallback": "unchanged baked source, including old drift",
+      "checks": 12
+    },
+    {
+      "key": "spring/secretion-antenna",
+      "failedEachLayer": true,
+      "bothFacings": true,
+      "times": [
+        900,
+        1200,
+        1789
+      ],
+      "fallback": "unchanged baked source, including old drift",
+      "checks": 12
+    },
+    {
+      "key": "spring/blade-secretion-antenna",
+      "failedEachLayer": true,
+      "bothFacings": true,
+      "times": [
+        900,
+        1200,
+        1789
+      ],
+      "fallback": "unchanged baked source, including old drift",
+      "checks": 12
+    },
+    {
+      "key": "spring/blade-secretion-carapace-antenna",
+      "failedEachLayer": true,
+      "bothFacings": true,
+      "times": [
+        900,
+        1200,
+        1789
+      ],
+      "fallback": "unchanged baked source, including old drift",
+      "checks": 12
+    }
+  ]
+}

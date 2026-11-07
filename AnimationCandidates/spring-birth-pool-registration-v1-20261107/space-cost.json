@@ -1,0 +1,26 @@
+{
+  "forms": {
+    "spring/blade-antenna": {
+      "pngBytes": 921808,
+      "decodedLayerBytes": 11649024,
+      "originalBakedDecodedBytes": 14745600
+    },
+    "spring/secretion-antenna": {
+      "pngBytes": 1036319,
+      "decodedLayerBytes": 11770368,
+      "originalBakedDecodedBytes": 14745600
+    },
+    "spring/blade-secretion-antenna": {
+      "pngBytes": 1116204,
+      "decodedLayerBytes": 11426560,
+      "originalBakedDecodedBytes": 14745600
+    },
+    "spring/blade-secretion-carapace-antenna": {
+      "pngBytes": 1048554,
+      "decodedLayerBytes": 12275968,
+      "originalBakedDecodedBytes": 14745600
+    }
+  },
+  "candidatePngBytes": 4122885,
+  "auditDirectoryBytes": 9195237
+}
