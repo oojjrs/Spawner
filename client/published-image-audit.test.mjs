@@ -11,11 +11,11 @@ const json = path => JSON.parse(read(path));
 const policy = json("DesignAssets/image-sizes.json");
 const evidence = json("Research/CombatVfx/2026-11-04/events/published-preview-registration.json");
 
-test("all 44 registered originals pass, keeping the 36/3/5 evidence groups distinct", () => {
-  const original = json("tools/image-audit-registration-20261104/evidence.json").rows;
+test("all 44 current registered images pass, keeping the 36/3/5 evidence groups distinct", () => {
+  const current = json("tools/image-audit-registration-20261104/evidence.json").rows;
   const ranged = json("Research/CombatVfx/2026-11-04/events/ranged-source-registration.json").rows;
-  assert.deepEqual([original.length, ranged.length, evidence.rows.length], [36, 3, 5]);
-  const names = [...original, ...ranged, ...evidence.rows].map(row => row.image);
+  assert.deepEqual([current.length, ranged.length, evidence.rows.length], [36, 3, 5]);
+  const names = [...current, ...ranged, ...evidence.rows].map(row => row.image);
   assert.equal(new Set(names).size, 44); assert.equal(auditImages(root, names), 44);
   for (const row of evidence.rows) {
     assert.deepEqual(policy.images[row.image], row.registration);

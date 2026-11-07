@@ -1,5 +1,5 @@
 {
-  "revision": "a319b0e9bede88e276b6ff2e5f6b7887d2a5f299",
+  "revision": "7d3a3098e6fabc32b778a9443e9c7433f1bf814e",
   "globalBudget": {
     "preferredScale": 1,
     "maximumScale": 1.5,
@@ -11,27 +11,28 @@
   "unchangedTrackedImageBlobs": true,
   "rows": [
     {
-      "image": "DesignAssets/Animations/CombatDeathV1/sprout/blade/death.webp",
+      "image": "DesignAssets/Animations/SproutDeathV2/blade/death.webp",
       "category": "combat-death",
       "dimensions": [
-        2048,
+        1024,
         1024
       ],
       "frame": [
-        512,
-        512
+        256,
+        256
       ],
       "grid": [
         4,
-        2
+        4
       ],
       "display": [
         256,
         256
       ],
       "previousDisplay": null,
-      "sha256": "4f717d52fe4fa2dfa0576499107514829b7ac0e0bf1e91034fd5d1835d46bc53",
-      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+      "sha256": "aba87cec1ae676d346d854c94cfa833cb6c47c08ef847e380455b866d312528b",
+      "reference": "client/sprout-death-animations.mjs approved V2 and client/combat-death.mjs (fixed 256px camera, 16 frames; unchanged 256px display target)",
+      "frameCount": 16
     },
     {
       "image": "DesignAssets/Animations/CombatDeathV1/sprout/piercing/death.webp",
@@ -54,30 +55,32 @@
       ],
       "previousDisplay": null,
       "sha256": "699b62b76735ef2d03ee36de123b422abde9b143235d0508157800518309698e",
-      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)",
+      "frameCount": 8
     },
     {
-      "image": "DesignAssets/Animations/CombatDeathV1/sprout/carapace/death.webp",
+      "image": "DesignAssets/Animations/SproutDeathV2/carapace/death.webp",
       "category": "combat-death",
       "dimensions": [
-        2048,
+        1024,
         1024
       ],
       "frame": [
-        512,
-        512
+        256,
+        256
       ],
       "grid": [
         4,
-        2
+        4
       ],
       "display": [
         256,
         256
       ],
       "previousDisplay": null,
-      "sha256": "9866156f96295802280db350ef60260944f225f0635258eb1122a5dac9cc10a1",
-      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+      "sha256": "36b5820a6fb34a8645e898639a52abfbea171a33c9208b12937e2b3e511958e8",
+      "reference": "client/sprout-death-animations.mjs approved V2 and client/combat-death.mjs (fixed 256px camera, 16 frames; unchanged 256px display target)",
+      "frameCount": 16
     },
     {
       "image": "DesignAssets/Animations/CombatDeathV1/spore/blade/death.webp",
@@ -100,7 +103,8 @@
       ],
       "previousDisplay": null,
       "sha256": "6ca2a746d764f44681accc5d86fee653608df3a102815d9e376b50d0943ace68",
-      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)",
+      "frameCount": 8
     },
     {
       "image": "DesignAssets/Animations/CombatDeathV1/spore/piercing/death.webp",
@@ -123,7 +127,8 @@
       ],
       "previousDisplay": null,
       "sha256": "af7962315e0ef7457486e513658df28f96a97763f2b324eb1293f1b0849ceb30",
-      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)",
+      "frameCount": 8
     },
     {
       "image": "DesignAssets/Animations/CombatDeathV1/spore/carapace/death.webp",
@@ -146,7 +151,8 @@
       ],
       "previousDisplay": null,
       "sha256": "cb326f987d2d05a447aed6226d93a9c16d08278cd384cc9b4630ca7d44389a3e",
-      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)",
+      "frameCount": 8
     },
     {
       "image": "DesignAssets/Animations/CombatDeathV1/pebble/blade/death.webp",
@@ -169,7 +175,8 @@
       ],
       "previousDisplay": null,
       "sha256": "99a8882e61a3583638e6c0327aaabca116a101eb93c6b17e9d309a63bfb53621",
-      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)",
+      "frameCount": 8
     },
     {
       "image": "DesignAssets/Animations/CombatDeathV1/pebble/piercing/death.webp",
@@ -192,7 +199,8 @@
       ],
       "previousDisplay": null,
       "sha256": "fc2127122929d4391445cea699528b618d98ebcf3608f60fef5d3afd98b93586",
-      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)",
+      "frameCount": 8
     },
     {
       "image": "DesignAssets/Animations/CombatDeathV1/pebble/carapace/death.webp",
@@ -215,7 +223,8 @@
       ],
       "previousDisplay": null,
       "sha256": "001ae71c79f3426bd9fb9df0034aec80746e393b954e6322e254e399daa26126",
-      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)",
+      "frameCount": 8
     },
     {
       "image": "DesignAssets/Animations/CombatDeathV1/spring/blade/death.webp",
@@ -238,7 +247,8 @@
       ],
       "previousDisplay": null,
       "sha256": "985c9346a820d136d9d12ab1a045c8881bf9f6109be357ff46171d37c7ddb055",
-      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)",
+      "frameCount": 8
     },
     {
       "image": "DesignAssets/Animations/CombatDeathV1/spring/piercing/death.webp",
@@ -261,7 +271,8 @@
       ],
       "previousDisplay": null,
       "sha256": "eda4e5ae90cce4e0e0217e2470c4129916931e51ef0a3bf8280fdcb144e2c6fe",
-      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)",
+      "frameCount": 8
     },
     {
       "image": "DesignAssets/Animations/CombatDeathV1/spring/carapace/death.webp",
@@ -284,7 +295,8 @@
       ],
       "previousDisplay": null,
       "sha256": "682aa12ba2a59ad413a12a90add2f70530f9b0d4c678729d5ad81dc4c0d875bf",
-      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)"
+      "reference": "client/combat-death.mjs and adjacent sequence.json (fixed 512px asset camera; display target follows CombatAttributesV7)",
+      "frameCount": 8
     },
     {
       "image": "DesignAssets/Animations/UniqueIdleV4/spring-keeper/idle.webp",
@@ -901,5 +913,6 @@
       "sha256": null,
       "reference": "client/combat-stage.mjs background cover fit; policy.viewport 1920x1080"
     }
-  ]
+  ],
+  "updatedAt": "2026-11-07"
 }

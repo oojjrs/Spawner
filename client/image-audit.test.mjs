@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { deflateSync } from "node:zlib";
 import test from "node:test";
-import { auditImages } from "./image-audit.mjs";
+import { auditImages, imageDimensions } from "./image-audit.mjs";
 import { UNIT_SPRITE_REGISTRATION } from "./unit-sprite-registration.mjs";
 import { UNIT_COMBAT_DEATH_ANIMATIONS } from "./combat-death.mjs";
 
@@ -90,15 +90,55 @@ test("native allowances cannot hide an incorrect grid or a malformed camera cont
   }
 });
 
-test("the 36 retained runtime assets match their actual cameras and keep display targets", () => {
+function assertCombatDeathEvidence(rows) {
+  const combat = rows.filter(row => row.category === "combat-death");
+  const deaths = Object.values(UNIT_COMBAT_DEATH_ANIMATIONS);
+  assert.deepEqual(combat.map(row => row.image).sort(), deaths.map(animation => animation.image).sort(),
+    "combat evidence must cover exactly the current approved death images");
+  for (const row of combat) {
+    const animation = deaths.find(value => value.image === row.image);
+    assert.equal(row.frameCount, animation.frameCount, "approved death frame count: " + row.image);
+    assert.deepEqual(row.grid, [animation.columns, Math.ceil(animation.frameCount / animation.columns)],
+      "approved death grid: " + row.image);
+    assert.deepEqual(row.frame, [animation.frameSize, animation.frameSize],
+      "approved death camera: " + row.image);
+  }
+}
+
+test("combat evidence rejects stale images and changed frame counts, grids or cameras", () => {
+  const rows = JSON.parse(readFileSync(new URL("../tools/image-audit-registration-20261104/evidence.json", import.meta.url))).rows;
+  assertCombatDeathEvidence(rows);
+  for (const [field, value, message] of [
+    ["image", "DesignAssets/Animations/CombatDeathV1/sprout/blade/death.webp", /current approved death images/],
+    ["frameCount", 8, /approved death frame count/],
+    ["grid", [4, 2], /approved death grid/],
+    ["frame", [512, 512], /approved death camera/]
+  ]) {
+    const changed = structuredClone(rows);
+    const row = changed.find(value => value.image === "DesignAssets/Animations/SproutDeathV2/blade/death.webp");
+    assert.ok(row, "the approved sprout blade V2 must remain in the evidence");
+    row[field] = value;
+    assert.throws(() => assertCombatDeathEvidence(changed), message);
+  }
+});
+
+test("the 36 current runtime assets match their approved bytes, cameras and display targets", () => {
   const root = fileURLToPath(new URL("..", import.meta.url));
   const evidence = JSON.parse(readFileSync(new URL("../tools/image-audit-registration-20261104/evidence.json", import.meta.url)));
   const policy = JSON.parse(readFileSync(new URL("../DesignAssets/image-sizes.json", import.meta.url)));
   assert.equal(evidence.rows.length, 36);
   assert.equal(auditImages(root, evidence.rows.map(row => row.image)), 36);
+  assertCombatDeathEvidence(evidence.rows);
   const deaths = Object.values(UNIT_COMBAT_DEATH_ANIMATIONS);
   for (const row of evidence.rows) {
     const size = policy.images[row.image];
+    const image = new URL("../" + row.image, import.meta.url);
+    const dimensions = imageDimensions(image);
+    assert.deepEqual(dimensions, row.dimensions, row.image);
+    assert.deepEqual(dimensions.map((value, axis) => value / size.grid[axis]), row.frame, row.image);
+    if (row.sha256 !== null) {
+      assert.equal(createHash("sha256").update(readFileSync(image)).digest("hex"), row.sha256, row.image);
+    }
     assert.deepEqual(size.grid, row.grid);
     assert.deepEqual(size.display, row.display);
     if (row.category === "neutral-registered-camera") {
@@ -107,7 +147,12 @@ test("the 36 retained runtime assets match their actual cameras and keep display
     } else if (row.category === "combat-death") {
       const animation = deaths.find(value => value.image === row.image);
       assert.deepEqual(size.grid, [animation.columns, Math.ceil(animation.frameCount / animation.columns)]);
-      assert.deepEqual(size.nativeSource.frame, [animation.frameSize, animation.frameSize]);
+      if (size.nativeSource) {
+        assert.deepEqual(size.nativeSource.frame, [animation.frameSize, animation.frameSize]);
+      } else {
+        assert.ok(row.frame.every((value, axis) => value <= size.display[axis] * policy.maximumScale),
+          "approved death camera must fit the ordinary display budget: " + row.image);
+      }
       assert.deepEqual(size.display, [256, 256]);
     } else {
       assert.deepEqual(size.display, policy.viewport);

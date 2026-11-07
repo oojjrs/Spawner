@@ -1,16 +1,18 @@
-# Runtime image audit registration, 2026-11-04
+# Runtime image audit registration, updated 2026-11-07
 
-The standard build failed on 36 assets at `a319b0e9bede88e276b6ff2e5f6b7887d2a5f299`: 15 missing registrations and 21 existing native camera cells above their older display budgets. This change registers the actual assets without changing any image, display target, rendering camera, or the global 100% preferred / 150% maximum policy.
+The original registration on 2026-11-04 resolved a build failure on 36 assets at `a319b0e9bede88e276b6ff2e5f6b7887d2a5f299`: 15 missing registrations and 21 existing native camera cells above their older display budgets. It registered the actual assets without changing images, display targets, rendering cameras, or the global 100% preferred / 150% maximum policy.
 
-Before registration, `git hash-object` for every one of the 36 image paths equaled its `HEAD` blob. All image bytes are unchanged. The machine-readable measurements and original SHA-256 values are in [evidence.json](evidence.json).
+Before that registration, `git hash-object` for all 36 image paths equaled their `HEAD` blobs; that change preserved every image byte. The machine-readable [evidence.json](evidence.json) is now maintained against the current approved runtime assets, with the two sprout replacements described below. Its revision records the checkout used for the latest measurements; no image bytes were changed by the audit update.
 
 ## Why the registrations are valid
 
-### Combat death: 12 missing registrations
+### Combat death: 12 current registered clips
 
-`CombatDeathV1/{sprout,spore,pebble,spring}/{blade,piercing,carapace}/death.webp` contains a **2048×1024 atlas, four columns, two rows, eight 512×512 cells**. Both `client/combat-death.mjs` and each committed adjacent `sequence.json` declare the same 512px fixed asset camera, frame count and columns. The sequences were read from `HEAD` without restoring absent source files.
+Ten current `CombatDeathV1` clips retain a **2048×1024 atlas, four columns, two rows, eight 512×512 cells**. `client/combat-death.mjs` and their adjacent `sequence.json` files agree on this camera and layout.
 
-The display target is **256×256**, matching the existing `CombatAttributesV7` neutral/idle registrations that these death clips extend. Setting the display target to 512 to silence the audit would confuse the fixed authoring camera with the display budget. Instead, each existing atlas is pinned by exact hash, atlas dimensions and 512px cell dimensions.
+The approved sprout blade and carapace clips are now `SproutDeathV2/{blade,carapace}/death.webp`: **1024×1024 atlases, four columns, four rows, sixteen 256×256 cells**, defined in `client/sprout-death-animations.mjs`. The evidence now references these exact current files and hashes, rather than their superseded V1 counterparts.
+
+All 12 display targets remain **256×256**. The ten retained 512px cameras use their existing exact native-source allowances. The two approved 256px V2 cameras already fit the ordinary display budget and need no native-source exception. The test verifies actual dimensions, per-cell geometry, frame count, exact approved bytes, and exact coverage of the current combat-death registry. Reintroducing a superseded image or changing a frame count, grid or camera fails explicitly.
 
 ### Combat backgrounds: three missing registrations
 
@@ -52,7 +54,7 @@ Paths below are relative to `DesignAssets/Animations/`. A display value applies 
 
 Older `sourceMaximum` registrations remain compatible; no existing allowance was broadened. Newly added native exceptions use the stronger pinned contract.
 
-## Validation
+## Original registration validation (2026-11-04)
 
 - `node client/image-audit.test.mjs`: **4 tests passed**. Checks ordinary 150% acceptance/rejection, missing registration, unchanged global limits, same-size image replacement, native source growth/shrinkage, incorrect grids, invalid contracts, all 36 real source registrations, and unchanged neutral display budgets.
 - `node --test client/image-audit.test.mjs`: passed through the repository's Node test runner.
@@ -60,3 +62,15 @@ Older `sourceMaximum` registrations remain compatible; no existing allowance was
 - In the same isolated copy: `node client/build.mjs` **passed**, reporting `ENV> CLIENT BUNDLE : 2063296 BYTES`.
 
 No runtime output, HTML, manifest, library, memory or hosting file in the working repository was written by this task. Build outputs stayed in the isolated copy.
+
+## Current evidence validation (2026-11-07)
+
+The former failure was a stale test lookup: the evidence still named the two old sprout V1 images after the runtime had moved to approved V2. The evidence and its tests were updated without changing game logic, artwork, image budgets, runtime registrations, generated bundles or deployment files. Exact-byte and camera validation remains active; the new negative test proves that stale images and incorrect frame counts, grids or cameras are rejected.
+
+- Focused run: `node --test client/image-audit.test.mjs client/published-image-audit.test.mjs client/retired-resource-art.test.mjs server/removed-resources.test.mjs` passed **15/15**, with no skipped tests.
+- `npm run audit:images` passed **1,019 registered images**.
+- Full baseline: `node --test --test-concurrency=4` ran **1,789 tests: 1,350 passed, 439 failed**.
+- Full updated run using the same command ran **1,790 tests: 1,352 passed, 438 failed**. Both runs had zero skipped, cancelled or todo tests.
+- The complete failure lists were compared by test location and name: this stale 36-asset test is the only resolved failure, **438 failures remain identical**, and **there are no new failures**. The repository-wide suite is therefore still failing; unrelated failures were neither changed nor hidden.
+- An independent read-only review verified all 36 actual dimensions and cell geometries, all 33 recorded source hashes, exact coverage of the 12 current death clips, and the two V2 ordinary-budget registrations.
+- `git diff --check` and syntax checks for both changed test files passed. Only these tests, their evidence and this report changed. No build or deployment was performed.
