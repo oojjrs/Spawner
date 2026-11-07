@@ -61,7 +61,7 @@ test('DNA appearance controls preserve roster edits, cloning, reset, switching a
   const f = fixture(), control = f.inputs.left.dnaAppearance;
   const buttons = label => f.nodes.filter(node => node.tag === 'button' && node.textContent === label);
   assert.equal(control.value, 'blade-carapace'); assert.equal(control.disabled, false);
-  assert.deepEqual(control.options.map(option => option.value), ['blade-carapace']);
+  assert.deepEqual(control.options.map(option => option.value), COMBAT_LAB_APPEARANCES.filter(([key]) => key !== 'native').map(([key]) => key));
   control.fire('change', 'blade-carapace');
   assert.equal(combatLabAppearance(f.rosters.left[0]), 'blade-carapace');
   assert.match(unitActionArtDefinition(f.getTrial().agents[0]).reference.image, /BladeCarapaceV1/);
@@ -100,8 +100,11 @@ test('lab range control changes only real start distance and resets the current 
   const before = plain(f.rosters);
   assert.equal(f.elements.distance.value, '1');
   let trial = f.getTrial(); assert.equal(trial.agents[0].x, trial.agents[1].x);
+  const separation = Math.abs(trial.agents[1].combat.position.x - trial.agents[0].combat.position.x);
   f.elements.distance.fire('change', '2');
-  trial = f.getTrial(); assert.equal(Math.abs(trial.agents[1].x - trial.agents[0].x), 2);
+  trial = f.getTrial(); assert.equal(trial.agents[0].x, trial.agents[1].x);
+  assert.equal(trial.agents[0].combat.initialDistance, 2);
+  assert.ok(Math.abs(Math.abs(trial.agents[1].combat.position.x - trial.agents[0].combat.position.x) - separation - 1) < 1e-9);
   assert.deepEqual(plain(f.rosters), before);
   f.elements.distance.fire('change', '1');
   assert.equal(f.getTrial().time, 0); assert.equal(f.getTrial().agents[0].x, f.getTrial().agents[1].x);

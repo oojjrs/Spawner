@@ -101,7 +101,7 @@ elements.phase = node("output", null, "phase"); stageFooter.append(actions, elem
 function selectBuild(side) {
   builds[side] = rosters[side][selected[side]];
   inputs[side].appearance.value = builds[side].key;
-  const variants = combatLabPlayable(builds[side].key) ? [["blade-carapace", "칼날+갑각"]] : [["native", "기본"]];
+  const variants = combatLabPlayable(builds[side].key) ? COMBAT_LAB_APPEARANCES.filter(([key]) => key !== "native") : [["native", "기본"]];
   inputs[side].dnaAppearance.replaceChildren(...variants.map(([value, label]) => {
     const option = node("option", label); option.value = value; return option;
   }));
@@ -111,7 +111,7 @@ function selectBuild(side) {
 function rosterSettings(side) {
   return rosters[side].map((build, index) => ({ ...structuredClone(build), name: (side === "left" ? "왼쪽 " : "오른쪽 ") + (index + 1) }));
 }
-function settings(seed) { return {left:rosterSettings("left"),right:rosterSettings("right"),selected:{...selected},rules:{...rules},seed,random:true,first:"simultaneous",distance:1,support:false}; }
+function settings(seed) { return {left:rosterSettings("left"),right:rosterSettings("right"),selected:{...selected},rules:{...rules},seed,random:true,first:"simultaneous",distance:Number(elements.distance.value),support:false}; }
 function changed() { reset(); }
 function settingError(error) { return /[가-힣]/.test(error.message) ? error.message : "입력 수치와 규칙의 상한·최소값을 확인해 주세요."; }
 function reset() {

@@ -26,7 +26,7 @@ for (const file of ["./combat-lab.js", "../Combat.html"]) test(file + " 주사�
   }
   let roll, changes = 0;
   const math = Object.create(Math); math.random = () => 0;
-  const scope = { sides, rosters, builds, selected, inputs, COMBAT_LAB_UNITS, SIMULATION_STATS, structuredClone, combatLabPlayable, combatLabAppearance, combatLabWithAppearance,
+  const scope = { sides, rosters, builds, selected, inputs, COMBAT_LAB_APPEARANCES, COMBAT_LAB_UNITS, SIMULATION_STATS, structuredClone, combatLabPlayable, combatLabAppearance, combatLabWithAppearance,
     node: (tag, label) => ({ tag, label }),
     Math: math, elements: {}, stageCenter: null,
     button(parent, label, action) { roll = action; }, changed() { changes++; } };
