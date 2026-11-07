@@ -82,7 +82,10 @@
       "gifSHA256": "24594482d100b9ae91e7de96ca8184798da8fe2ee441920a88f88e06c8e59308",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "hitTimeMs": 450,
+      "hitFrameIndex": 4,
+      "hitTimingSource": "Integration visual review: strongest forward blade/crystal contact pose."
     },
     "ranged-attack": {
       "durationsMs": [
