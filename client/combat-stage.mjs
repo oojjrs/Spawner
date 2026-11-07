@@ -159,7 +159,7 @@ export function createCombatStage(canvas) {
       }
     }
     const recent = effects.filter(effect => effect.event.targetId === agent.id && clock - effect.born < .22);
-    const impact = recent.find(effect => effect.event.damage > 0 && effect.event.kind !== "bleed");
+    const impact = recent.find(effect => effect.event.damage > 0 && ["hit", "critical", "followup", "block", "area", "reflect", "ranged"].includes(effect.event.kind));
     const dodge = currentTrial?.vfx?.version !== 1 && recent.find(effect => effect.event.kind === "dodge");
     const age = impact ? (clock - impact.born) / .22 : 1;
     const recoil = reducedMotion.matches ? 0 : impact ? Math.sin(age * Math.PI) * 16 : dodge ? 26 * Math.sin((clock - dodge.born) / .22 * Math.PI) : 0;
@@ -288,7 +288,7 @@ export function createCombatStage(canvas) {
     const id = ["counter", "shoot"].includes(event.kind) ? event.attackerId : event.targetId;
     const point = points[id], x = point.x, y = point.y - point.height * .5;
     context.save(); context.globalAlpha = 1 - progress ** 2;
-    if (age < .28 && !reducedMotion.matches && (event.damage > 0 && !impactCovered || ["parry", "block"].includes(event.kind))) {
+    if (event.kind !== "reflect" && age < .28 && !reducedMotion.matches && (event.damage > 0 && !impactCovered || ["parry", "block"].includes(event.kind))) {
       const strength = clamp(age / .28), color = event.kind === "parry" ? "#b9e8f0" : event.kind === "block" ? "#c2dce8" : event.critical ? "#ffda8a" : "#f7e9b4";
       context.strokeStyle = color; context.lineWidth = (1 - strength) * 3 + 1;
       for (let i = 0; i < 7; i++) {
@@ -313,10 +313,10 @@ export function createCombatStage(canvas) {
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
     context.font = (event.critical ? "800 " : "700 ") + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
     context.lineWidth = 4; context.strokeStyle = "#203125";
-    let label = event.damage > 0 ? "−" + event.damage.toFixed(1) : reactionLabels[event.kind];
+    let label = event.damage > 0 ? (event.kind === "reflect" ? "반사 −" : "−") + event.damage.toFixed(1) : reactionLabels[event.kind];
     if (event.kind === "stun" || event.kind === "counter") context.font = '700 12px "Malgun Gothic", sans-serif';
     if (label) {
-      context.fillStyle = event.critical ? "#ffda8a" : ["parry", "block", "dodge"].includes(event.kind) ? "#d3f1ff" : event.kind === "counter" ? "#ffe0ae" : "#fff9df";
+      context.fillStyle = event.kind === "reflect" ? "#d6b5ff" : event.critical ? "#ffda8a" : ["parry", "block", "dodge"].includes(event.kind) ? "#d3f1ff" : event.kind === "counter" ? "#ffe0ae" : "#fff9df";
       context.strokeText(label, x, labelY); context.fillText(label, x, labelY);
     }
     if (event.critical && event.damage > 0) {
@@ -406,7 +406,7 @@ export function createCombatStage(canvas) {
       const agent = stageAgent(entry), deathAt = deathStarted.get(agent.id);
       return agent.health <= 0 ? { ...agent, deathStartedAt: time - (clock - (deathAt ?? clock)) } : agent;
     }), time, 100 * formationScale(width, height), ratio, { attackClock: "lab" });
-    const impact = effects.findLast(effect => effect.event.damage > 0 && effect.event.kind !== "bleed" && clock - effect.born < .11);
+    const impact = effects.findLast(effect => effect.event.damage > 0 && ["hit", "critical", "followup", "block", "area", "reflect", "ranged"].includes(effect.event.kind) && clock - effect.born < .11);
     context.save();
     if (impact && !reducedMotion.matches && playing) {
       const fade = 1 - (clock - impact.born) / .11;
@@ -422,7 +422,7 @@ export function createCombatStage(canvas) {
     const drawnFlights = new Set(), drawnImpacts = new Set(), flightCommands = new Map();
     if (vfx?.version === 1 && !reducedMotion.matches) {
       const commands = detailVfx.commands(trial.agents.map(stageAgent), new Map(Object.entries(points)), clock,
-        100 * formationScale(width, height), { scope: trial, width, height, project: viewLayout.project, unproject: viewLayout.unproject, cell: viewLayout.cell });
+        100 * formationScale(width, height), { scope: trial, width, height, simulationTime: trial.time, project: viewLayout.project, unproject: viewLayout.unproject, cell: viewLayout.cell });
       for (const command of commands) {
         if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         const key = command.kind === "flight" && flightKey(command.sourceId, command.targetId, command.launchedAt, command.arrivesAt);
@@ -460,7 +460,7 @@ export function createCombatStage(canvas) {
       drawDetailDefenseFallback(context, command);
     // Use actual HP changes, including drain (which has no history entry).
     const vitalCommands = detailVfx.vitalCommands(trial.agents.map(stageAgent),
-      new Map(Object.entries(points)), clock, { scope: trial, width, height, project: viewLayout.project, unproject: viewLayout.unproject, cell: viewLayout.cell });
+      new Map(Object.entries(points)), clock, { scope: trial, width, height, simulationTime: trial.time, project: viewLayout.project, unproject: viewLayout.unproject, cell: viewLayout.cell });
     for (const command of vitalCommands) drawDetailVitalEffect(context, command, { width, height, reducedMotion: reducedMotion.matches, image });
     drawDetailDefenseLabels(context, defenseCommands, { width, height, reducedMotion: reducedMotion.matches, vitals: vitalCommands });
     for (const agent of trial.agents) if (agent.health > 0) {

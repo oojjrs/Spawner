@@ -110,8 +110,11 @@
     const initial = playback.time === null, active = new Set(), events = [];
     const evidenceFor = (unit, action, at) => records.some(event =>
       action === "attack" ? event.sourceId === (unit.agentId ?? unit.id) && ["attack", "counter"].includes(event.kind) && Math.abs(event.at - at) < 1e-6 :
-        event.targetId === (unit.agentId ?? unit.id) && Math.abs(event.at - at) < 1e-6 &&
-        (action === "death" ? event.kind === "death" : event.amount > 0 && ["hit", "critical", "block", "area", "bleed", "reflect"].includes(event.kind)));
+        event.targetId === (unit.agentId ?? unit.id) &&
+        (action === "death" ? event.kind === "death" && Math.abs((event.diedAt ?? event.at) - at) < 1e-6 :
+          event.amount > 0 && ["hit", "critical", "block", "area", "bleed", "reflect"].includes(event.kind) &&
+          (Number.isFinite(event.hurtCount) && Number.isFinite(unit.hurtCount) ? event.hurtCount === unit.hurtCount :
+            Math.abs(event.at - at) < 1e-6 || Math.abs((event.hurtStartedAt ?? event.at) - at) < 1e-6)));
     const units = new Map([...corpses, ...agents].map(unit => [unit.agentId ?? unit.id, unit]));
     for (const event of records) {
       const unit = units.get(["attack", "counter", "shoot"].includes(event.kind) ? event.sourceId : event.targetId);

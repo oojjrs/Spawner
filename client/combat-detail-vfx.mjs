@@ -35,6 +35,17 @@ function projectileClip(agent) {
   // its separate ranged-body animation. Mixed and appendage builds still fire.
   return agent && !agent.species && ["bean", "spore", "pebble", "spring"].includes(tribe) ? DETAIL_COMBAT_VFX[tribe] : null;
 }
+export function combatReflectionCommand(cue, point, time, direction) {
+  const age = time - cue.at;
+  if (!(cue.amount > 0) || age < 0 || age >= .45 || !point) return null;
+  const progress = age / .45;
+  const size = Math.min(300, Math.max(24, point.height * 1.45)) * (1 + Math.sin(progress * Math.PI) * .12);
+  return { image: DETAIL_DEFENSE_VFX.block, columns: 1, frame: 0,
+    x: point.x, y: point.y - point.height * .5, size, angle: 0, mirrorX: direction > 0,
+    filter: "hue-rotate(90deg) saturate(1.3)", alpha: (1 - progress) ** .65,
+    kind: "impact", effectKind: "reflect", eventId: cue.eventId, sourceId: cue.sourceId, targetId: cue.targetId,
+    eventAt: cue.eventAt ?? cue.at, amount: cue.amount, critical: false };
+}
 export function createDetailCombatVfx() {
   const impacts = new Map(), vitals = new Map(), deaths = new Map(), anchors = new Map(), flightAnchors = new Map(), defenses = new Map();
   const directDamage = new Map();
@@ -132,7 +143,7 @@ export function createDetailCombatVfx() {
     const byId = new Map(agents.map(agent => [String(agent.id), agent])), result = [];
     for (const source of agents) {
       const from = positions.get(String(source.id));
-      const charge = from && creatureRangedChargeCommand(source, time, { ...from, cell });
+      const charge = from && creatureRangedChargeCommand(source, Number.isFinite(view.simulationTime) ? view.simulationTime : time, { ...from, cell });
       if (charge) result.push(charge);
     }
     for (const shot of projectiles) {
@@ -185,8 +196,12 @@ export function createDetailCombatVfx() {
       const point = recipientPoint(cue.targetId, positions, time, view);
       if (!point) continue;
       const source = byId.get(String(cue.sourceId));
-      // Splash and reflection are separate damage at their recorded recipient,
-      // not another projectile landing. Reuse the approved general hit only.
+      if (cue.kind === "reflect") {
+        const from = positions.get(String(cue.sourceId));
+        const reflection = combatReflectionCommand(cue, point, time, from ? Math.sign(from.x - point.x) : 0);
+        if (reflection) result.push(reflection);
+        continue;
+      }
       const projectileImpact = cue.mode === "ranged" && ["hit", "critical", "followup"].includes(cue.kind);
       const sourceClip = projectileImpact && (projectileClip(source) || anchors.get(String(cue.sourceId))?.clip);
       // A residual block number is not approval for a projectile explosion.
@@ -255,7 +270,7 @@ export function layoutDetailCombatLabels(context, { vitals = [], defenses = [], 
     if (command.kind === "regeneration") return command;
     if (++labelCount > 32 || width < 32 || height < 48) return { ...command, labelHidden: true };
     const critical = command.directDamage && command.critical;
-    const text = command.caption ?? ((command.channel === "restore" ? "+" : "−") + vitalAmount(command.amount));
+    const text = command.caption ?? ((command.kind === "reflect" ? "반사 " : "") + (command.channel === "restore" ? "+" : "−") + vitalAmount(command.amount));
     let measured, tagWidth = 0;
     context.save();
     try {
@@ -331,10 +346,10 @@ export function drawDetailVitalEffect(context, command, options) {
     const labelX = command.labelX ?? command.x, critical = command.directDamage && command.critical;
     // Keep fractional positive HP changes readable without inventing zero.
     const amount = vitalAmount(command.amount);
-    const label = (restore ? "+" : "−") + amount;
+    const label = (command.kind === "reflect" ? "반사 " : "") + (restore ? "+" : "−") + amount;
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
     context.font = (critical ? "800 " : "700 ") + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
-    context.lineWidth = 3; context.strokeStyle = "#203125"; context.fillStyle = restore ? "#c1ffc4" : critical ? "#ffda8a" : "#fff9df";
+    context.lineWidth = 3; context.strokeStyle = "#203125"; context.fillStyle = restore ? "#c1ffc4" : command.kind === "reflect" ? "#d6b5ff" : critical ? "#ffda8a" : "#fff9df";
     context.strokeText(label, labelX, labelY); context.fillText(label, labelX, labelY);
     if (critical) {
       context.font = '800 10px "Malgun Gothic", sans-serif';
@@ -352,7 +367,8 @@ export function drawDetailVfxCell(context, image, command) {
   if (sourceX + cell > image.naturalWidth || sourceY + sourceHeight > image.naturalHeight) return false;
   const width = command.width || command.size, height = command.height || command.size;
   context.save();
-  if (command.critical) context.filter = "sepia(1) saturate(3) brightness(1.2)";
+  if (command.filter) context.filter = command.filter;
+  else if (command.critical) context.filter = "sepia(1) saturate(3) brightness(1.2)";
   if (command.muzzleClip) {
     const muzzle = command.muzzleClip;
     context.translate(muzzle.x, muzzle.y); context.rotate(muzzle.angle);

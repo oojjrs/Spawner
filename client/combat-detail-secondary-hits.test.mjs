@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createCombatVfxCursor } from "./combat-vfx-events.mjs";
-import { createDetailCombatVfx, DETAIL_COMBAT_VFX } from "./combat-detail-vfx.mjs";
+import { createDetailCombatVfx, DETAIL_COMBAT_VFX, DETAIL_DEFENSE_VFX } from "./combat-detail-vfx.mjs";
 import { createCombat } from "../server/combat.mjs";
 import { ATTRIBUTE_DNA } from "../server/dna.mjs";
 import { snapshotCombatVfx } from "../server/combat-vfx-journal.mjs";
@@ -21,14 +21,15 @@ function scene() {
 const damage = (kind, targetId, extra = {}) => ({ id: kind + ":" + targetId, kind, at: 1,
   sourceId: "source", targetId, amount: 2, ...extra });
 
-test("area and reflection reuse the approved general hit only at the actual damaged recipient", () => {
+test("area and reflection remain visually distinct at the actual damaged recipient", () => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const mode of ["melee", "ranged"])
     for (const kind of ["area", "reflect"]) {
       const { draw } = scene(), source = { ...agents[0], tribe };
       const event = damage(kind, "other", { mode, projectileId: "parent-shot", critical: true });
       const commands = draw(1.05, [event], [source, ...agents.slice(1)]);
       assert.equal(commands.length, 1, tribe + ":" + mode + ":" + kind);
-      assert.equal(commands[0].image, DETAIL_COMBAT_VFX.hit.image, "secondary damage is not another species projectile");
+      assert.equal(commands[0].image, kind === "reflect" ? DETAIL_DEFENSE_VFX.block : DETAIL_COMBAT_VFX.hit.image);
+      if (kind === "reflect") { assert.equal(commands[0].effectKind, "reflect"); assert.match(commands[0].filter, /hue-rotate/); }
       assert.equal(commands[0].kind, "impact");
       assert.equal(commands[0].targetId, "other");
       assert.equal(commands[0].x, positions.get("other").x);
@@ -44,7 +45,7 @@ test("simultaneous direct, splash and reflected hits remain distinct and never r
     damage("reflect", "source", { sourceId: "target", fromId: "target", toId: "source" })];
   const commands = draw(1.05, events);
   assert.deepEqual(commands.map(command => [command.targetId, command.image]).sort(), [
-    ["other", DETAIL_COMBAT_VFX.hit.image], ["source", DETAIL_COMBAT_VFX.hit.image], ["target", DETAIL_COMBAT_VFX.spring.image]
+    ["other", DETAIL_COMBAT_VFX.hit.image], ["source", DETAIL_DEFENSE_VFX.block], ["target", DETAIL_COMBAT_VFX.spring.image]
   ]);
   assert.equal(draw(1.1, [...events.toReversed(), ...events]).length, 3);
   assert.equal(draw(1.42, events).length, 3, "every approved clip keeps its authored tail");
@@ -94,6 +95,9 @@ function serverScene() {
     receiveDamage(agent, amount) { agent.health = Math.max(0, agent.health - amount); }
   });
   const combat = createCombat(environment);
+  combat.engage(source, target, 0);
+  for (const agent of units) if (agent.combat?.position) Object.assign(agent.combat.position,
+    { x: agent.ownerId === "left" ? -.4 : .4, y: 0, fromX: agent.ownerId === "left" ? -.4 : .4, fromY: 0 });
   const tick = time => { environment.simSeconds = time; for (const agent of units) if (agent.health > 0) combat.update(agent, time); };
   return { units, source, environment, tick, rolls: () => rolls };
 }
@@ -102,6 +106,8 @@ test("real area-plus-reflection combat renders all actual damage without alterin
   const live = serverScene(), control = serverScene(), { draw } = scene();
   live.tick(0); control.tick(0);
   draw(0, snapshotCombatVfx(live.environment, 0).events, live.units);
+  for (let time = 1 / 60; !live.source.attack && time < 3; time += 1 / 60) { live.tick(time); control.tick(time); }
+  assert.ok(live.source.attack);
   const time = live.source.attack.hitAt;
   live.tick(time); control.tick(time);
   const snapshot = snapshotCombatVfx(live.environment, time), damageEvents = snapshot.events.filter(event => event.amount > 0);

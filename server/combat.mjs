@@ -254,9 +254,10 @@ export function createCombat(environment) {
     if (entry.agent.health <= 0) { entry.agent.attack = null; entry.agent.attackTargetId = null; }
     if (evidence) {
       const amount = Math.max(0, previousHealth - entry.agent.health);
-      const event = vfx(evidence.kind || "hit", evidence.at, attacker, entry.agent, amount, evidence);
+      const event = vfx(evidence.kind || "hit", evidence.at, attacker, entry.agent, amount,
+        { ...evidence, hurtStartedAt: entry.agent.hurtStartedAt, hurtCount: entry.agent.hurtCount });
       if (previousHealth > 0 && entry.agent.health <= 0)
-        vfx("death", evidence.at, attacker, entry.agent, 0, { causeId: event?.id });
+        vfx("death", evidence.at, attacker, entry.agent, 0, { causeId: event?.id, diedAt: environment.simSeconds });
       return event;
     }
   }
