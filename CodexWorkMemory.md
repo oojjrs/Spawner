@@ -1,3 +1,23 @@
+## 유닛 표 수정 푸시 재개 · 01a1b3ae 현재 요약
+
+- 기록 ID: unit-table-header-resume-20261107-01a1b3ae. 기록 시각 2026-11-07T11:01:12+09:00. 기록자·Git 상태 관측 Codex /root, 재개·변경·업로드 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 의 재개 지시와 fetch/rev-parse/ls-files 결과. 사용자 정확 발언 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 재개 관측: 앞선 Design.html 충돌은 병행 작업에서 해소됐고 공용 index에 이번 CSS와 다른 변경이 함께 있다. origin/main fetch 직후 원격1커밋 전진을 관측했으며 이어 시작 checkout main도 51faf24306085e592ee48aeef1bf0e673c94afc8로 일치해 별도 이동 없이 최신 부모로 투영한다. 새 원격 행과 다른 staged/unstaged/untracked는 보존한다. 이번 CSS 두 변경과 본 채팅 기록만 별도 index로 커밋하고 공용 index의 다른 staged 내용은 유지한다.
+- 기존 형식 검사와 헤더 측정 근거를 재사용한다. 아이콘·모바일 전체 화면 검수 미완료 한계는 유지하며 재검사하지 않는다. 최종 범위는 Design.html CSS와 본 메모리 기록뿐이고 아직 커밋/푸시 성공 전이다.
+
+## 유닛 표 CSS 검수 범위·푸시 동결 · 01a1b3ae
+
+- 기록 ID: unit-table-header-freeze-20261107-01a1b3ae. 기록 시각 2026-11-07T10:54:51+09:00. 기록자·도구 결과 판단 Codex /root, 변경·즉시 업로드 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 및 본 작업 도구 실행. 사용자 정확 발언 시각·항목 ID 불명. H:/Spawner Windows PowerShell.
+- 변경: 유닛 appearance 표 스크롤 래퍼의 최대 높이를 화면 높이에서128px 뺀 값으로 제한했다. 기존 sticky 헤더는 그대로 사용한다. 실제 비어 있는 td에만20% 불투명도의 빗금 사진 SVG 아이콘을 CSS로 표시하며 데이터·새 문구·원본 이미지·게임 동작은 바꾸지 않는다.
+- 실제 검사: Design.html UTF8NoBom/CRLF 검사 OK. 기존 memory UTF8NoBom/Mixed는 NeedsReview로 보고돼 원문을 보존했다. 독립 headless Edge의 첫 desktop 측정은 세로400px 스크롤과 헤더 상단 고정·본문 이동 단정을 통과한 뒤, 가로300px를 최대스크롤과 무관하게 가정한 임시 검수코드 단정에서 중단됐다. 그 단정을 실제 scrollLeft 기준으로 고쳤지만 다음 실행은 sandbox Edge 시작 시 파이프 오류로 끝났다. 아이콘·모바일·스크린샷 전체 검수 완료로 주장하지 않으며 추가 검사 재시도는 하지 않는다.
+- 보호/동결: origin/main fetch 후 f546eed9ccf705aada1fd5e17b56a1d6e446905a와 로컬 main이0/0이었다. 병행 작업의 stash 복원으로 Design.html에 Updated upstream/Stashed changes 충돌 및 기존 변경이 index에 나타났다. 이 충돌 영역·기존 코드/자산/메모리는 고치거나 커밋하지 않는다. 별도 index에 최신 부모의 CSS 두 변경과 본 채팅 두 기록만 투영한다. 요청/이유/실제 검사/미완료 검수/보호 범위 누락 점검을 마쳤으며 커밋·푸시 성공은 아직 아니다.
+
+## 유닛 표 헤더 고정·빈 이미지 표시 진행 · 01a1b3ae 현재 요약
+
+- 기록 ID: unit-table-header-scope-20261107-01a1b3ae. 기록 시각 2026-11-07T10:48:12+09:00. 기록자·원인 판단 Codex /root, 변경·즉시 업로드 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 의 현재 요청 3건. 사용자 발언 정확 시각·항목 ID 불명. H:/Spawner Windows PowerShell.
+- 사용자 요청: 유닛 페이지 표 헤더를 스크롤에 고정하고, 없어야 하는 빈 칸은 흐린 이미지 없음 아이콘으로 표시하며 바로 올린다. 문서 새 문구는 추가하지 않는다.
+- 확인/판단: Design.html의 통합 appearance-table은 sticky 헤더가 있지만 overflow:auto 컨테이너의 높이가 무제한이다. 해당 표 래퍼에 화면 기준 최대 높이를 추가하고 td:empty에만 흐린 빗금 사진 SVG 배경을 CSS로 표시한다. 기존 이미지·빈 셀·행·열 데이터와 다른 작업의 14행 수정은 보존한다.
+- Git 범위: 전용 H:/Spawner origin https://github.com/oojjrs/Spawner main. 연결 Projects 0. 이번 CSS 두 변경과 본 채팅 관련 메모리만 부모 이력에 투영해 커밋·푸시한다. 다른 채팅의 코드·자산·메모리·미추적 변경 및 공용 index는 보호한다. 별도 Site 재배포는 하지 않는다. 성공은 실제 확인 뒤 기록한다.
+
 ## 포자 탄생 폐기 현재 이력 병합·최종 직렬화 · 01a1b33b
 
 - 기록 ID: spore-birth-purge-current-merge-619ef6c2-01a1b33b. 기록 시각: 2026-11-07T10:36:10+09:00. 기록자·충돌범위판단 Codex /root, push 승인 사용자. 출처 현재 채팅과 실제 merge-tree/current.index, H:/Spawner Windows PowerShell. 원발언시각·항목ID 불명.
