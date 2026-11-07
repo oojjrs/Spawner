@@ -1,0 +1,65 @@
+{
+  "sourceManifestSHA256": "ae49bc89d0a70c949ca1b06a4ef9d3316a57d9d24f5211fccbfb806f6edcc42d",
+  "actions": [
+    {
+      "form": "secretion-carapace",
+      "action": "idle",
+      "frames": 16,
+      "previewFrames": 16,
+      "actionMs": 1920,
+      "previewMs": 1920,
+      "exactVisibleRGBAAndPreviewTiming": true,
+      "edgeAlphaZero": true
+    },
+    {
+      "form": "secretion-carapace",
+      "action": "walk",
+      "frames": 16,
+      "previewFrames": 16,
+      "actionMs": 1120,
+      "previewMs": 1120,
+      "exactVisibleRGBAAndPreviewTiming": true,
+      "edgeAlphaZero": true
+    },
+    {
+      "form": "secretion-carapace",
+      "action": "ranged-attack",
+      "frames": 16,
+      "previewFrames": 16,
+      "actionMs": 600,
+      "previewMs": 1600,
+      "exactVisibleRGBAAndPreviewTiming": true,
+      "edgeAlphaZero": true
+    },
+    {
+      "form": "secretion-carapace",
+      "action": "hurt",
+      "frames": 16,
+      "previewFrames": 16,
+      "actionMs": 800,
+      "previewMs": 1800,
+      "exactVisibleRGBAAndPreviewTiming": true,
+      "edgeAlphaZero": true
+    },
+    {
+      "form": "secretion-carapace",
+      "action": "birth",
+      "frames": 16,
+      "previewFrames": 16,
+      "actionMs": 1790,
+      "previewMs": 2790,
+      "exactVisibleRGBAAndPreviewTiming": true,
+      "edgeAlphaZero": true
+    },
+    {
+      "form": "secretion-carapace",
+      "action": "death",
+      "frames": 16,
+      "previewFrames": 16,
+      "actionMs": 1800,
+      "previewMs": 2800,
+      "exactVisibleRGBAAndPreviewTiming": true,
+      "edgeAlphaZero": true
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "uniqueFrames": 12,
+  "frameBorderNontransparentPixels": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "oldLowestVisiblePixelRange": 22,
+  "newLowestVisiblePixelRange": 0,
+  "sourceBounds": [
+    [
+      31,
+      45,
+      343,
+      306
+    ],
+    [
+      32,
+      45,
+      343,
+      306
+    ],
+    [
+      32,
+      45,
+      343,
+      306
+    ],
+    [
+      32,
+      47,
+      343,
+      306
+    ],
+    [
+      31,
+      48,
+      343,
+      304
+    ],
+    [
+      31,
+      48,
+      344,
+      304
+    ],
+    [
+      32,
+      46,
+      343,
+      303
+    ],
+    [
+      32,
+      47,
+      343,
+      304
+    ],
+    [
+      31,
+      47,
+      343,
+      303
+    ],
+    [
+      32,
+      47,
+      343,
+      303
+    ],
+    [
+      32,
+      47,
+      343,
+      304
+    ],
+    [
+      32,
+      47,
+      343,
+      304
+    ]
+  ],
+  "exportBounds": [
+    [
+      53,
+      110,
+      459,
+      450
+    ],
+    [
+      53,
+      110,
+      459,
+      450
+    ],
+    [
+      53,
+      110,
+      459,
+      450
+    ],
+    [
+      54,
+      112,
+      460,
+      450
+    ],
+    [
+      53,
+      116,
+      460,
+      450
+    ],
+    [
+      53,
+      117,
+      460,
+      450
+    ],
+    [
+      53,
+      115,
+      459,
+      450
+    ],
+    [
+      53,
+      116,
+      459,
+      450
+    ],
+    [
+      53,
+      115,
+      459,
+      450
+    ],
+    [
+      53,
+      116,
+      460,
+      450
+    ],
+    [
+      53,
+      116,
+      460,
+      450
+    ],
+    [
+      53,
+      116,
+      460,
+      450
+    ]
+  ],
+  "gifFrames": 12,
+  "webpFrames": 12,
+  "previewLoop": 0,
+  "browserPlayback": "Not verified here: system Chromium cannot start due to socket permission error. Final integrated playback check must be done in working browser environment.",
+  "visualReview": "Compared original base walk sheet and v1 whole-body walk. v1 repeated the raised screen-right foot and had inconsistent grounding. Corrected cycle uses low right-foot lift in poses 1-3, contact in 4-6, low left-foot lift in 7-9, contact in 10-12. Whole torso stays almost upright and crystals remain rigidly attached.",
+  "technicalPassed": true,
+  "gifDurationMs": 840,
+  "expectedDurationMs": 840,
+  "timingPassed": true
+}

@@ -35,25 +35,41 @@
       "gifSHA256": "6944a7f64d7efb03a680c24202114e5419cf15c900b3efb5e964d76a3d4334da"
     },
     "walk": {
-      "sheet": "pebble-blade-carapace-walk-v1-sheet.png",
-      "preview": "pebble-blade-carapace-walk-v1-preview.webp",
-      "gif": "pebble-blade-carapace-walk-v1-preview.gif",
-      "frames": 8,
-      "loop": true,
-      "durationMs": 880,
+      "columns": 4,
+      "frameCount": 12,
+      "frames": 12,
       "durationsMs": [
-        110,
-        110,
-        110,
-        110,
-        110,
-        110,
-        110,
-        110
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
       ],
-      "sheetSHA256": "d5aa9ba25f39f46885ea393e3fbeb78409d879e58a6b60c5df58ccbada045f4e",
-      "previewSHA256": "fb9410eab5a90b5935fcfc67d277e7a7d4819bdb20becbf3a401e1249e729f57",
-      "gifSHA256": "812d94eca1235dde4af6e40f8eee441f4e2ffe02a077e0e2d77ec7e8842c2ea6"
+      "durationMs": 840,
+      "loop": true,
+      "pivotX": 256,
+      "pivotY": 450,
+      "sourceFacing": "right",
+      "frameSize": 512,
+      "frameHeight": 512,
+      "rows": 3,
+      "referenceLength": 406,
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "version": 2,
+      "sheet": "AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/pebble-blade-carapace-walk-grounded-v2-sheet.png",
+      "sheetSHA256": "a702254359bade5a9ce12cb8f04d0cf8ad77fdeab8b5371fd971c79bb8a78136",
+      "preview": "AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/pebble-blade-carapace-walk-grounded-v2-preview.webp",
+      "previewSHA256": "7d88a2bcd6fcdedf3a5f4655e52d9629b5d8114258b8b0b0e547c9c2d87cddbc",
+      "gif": "AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/pebble-blade-carapace-walk-grounded-v2-preview.gif",
+      "gifSHA256": "772e4d23bc0311cc06ecde762d03e98b66961326f0504e36babcda9248c3faf7"
     },
     "attack": {
       "sheet": "pebble-blade-carapace-attack-v1-sheet.png",
@@ -153,12 +169,13 @@
   "deployment": false,
   "verification": {
     "actions": 6,
-    "frames": 48,
+    "frames": 52,
     "sheetAndPreviewHashesVerified": true,
     "losslessWebpVisibleRGBAAndAlphaMatchSheet": true,
     "gifAndWebpTimingMatchManifest": true,
     "noOuterBorderAlphaPixels": true,
-    "previewLoopOnlyMetadataChange": true
+    "previewLoopOnlyMetadataChange": true,
+    "walkVersion2ExactPreviewVerified": true
   },
   "note": "Birth is a complete cave scene, not a body-only runtime sprite. Production originals and packing provenance remain in the working asset package."
 }
