@@ -1,0 +1,153 @@
+{
+  "form": "secretion-carapace",
+  "actions": {
+    "idle": {
+      "sheetFrameCount": 16,
+      "uniqueSheetFrames": 16,
+      "durationMs": 6400,
+      "noOpaqueClipping": true,
+      "connectedComponentCounts": [
+        1
+      ],
+      "gif": {
+        "frames": 16,
+        "uniqueFrames": 16,
+        "durationMs": 6400
+      },
+      "webp": {
+        "frames": 16,
+        "uniqueFrames": 16,
+        "durationMs": 6400
+      },
+      "passed": true
+    },
+    "walk": {
+      "sheetFrameCount": 16,
+      "uniqueSheetFrames": 16,
+      "durationMs": 1120,
+      "noOpaqueClipping": true,
+      "connectedComponentCounts": [
+        1
+      ],
+      "gif": {
+        "frames": 16,
+        "uniqueFrames": 16,
+        "durationMs": 1120
+      },
+      "webp": {
+        "frames": 16,
+        "uniqueFrames": 16,
+        "durationMs": 1120
+      },
+      "passed": true
+    },
+    "ranged": {
+      "sheetFrameCount": 16,
+      "uniqueSheetFrames": 16,
+      "durationMs": 600,
+      "noOpaqueClipping": true,
+      "connectedComponentCounts": [
+        1
+      ],
+      "gif": {
+        "frames": 16,
+        "uniqueFrames": 16,
+        "durationMs": 600
+      },
+      "webp": {
+        "frames": 16,
+        "uniqueFrames": 16,
+        "durationMs": 600
+      },
+      "passed": true
+    },
+    "hurt": {
+      "sheetFrameCount": 16,
+      "uniqueSheetFrames": 16,
+      "durationMs": 960,
+      "noOpaqueClipping": true,
+      "connectedComponentCounts": [
+        1
+      ],
+      "gif": {
+        "frames": 16,
+        "uniqueFrames": 16,
+        "durationMs": 960
+      },
+      "webp": {
+        "frames": 16,
+        "uniqueFrames": 16,
+        "durationMs": 960
+      },
+      "passed": true
+    },
+    "death": {
+      "sheetFrameCount": 16,
+      "uniqueSheetFrames": 16,
+      "durationMs": 1440,
+      "noOpaqueClipping": true,
+      "connectedComponentCounts": [
+        1
+      ],
+      "gif": {
+        "frames": 16,
+        "uniqueFrames": 16,
+        "durationMs": 1440
+      },
+      "webp": {
+        "frames": 16,
+        "uniqueFrames": 16,
+        "durationMs": 1440
+      },
+      "passed": true
+    },
+    "birth": {
+      "sheetFrameCount": 78,
+      "uniqueSheetFrames": 76,
+      "durationMs": 3120,
+      "noOpaqueClipping": true,
+      "connectedComponentCounts": [
+        1,
+        2
+      ],
+      "gif": {
+        "frames": 76,
+        "uniqueFrames": 76,
+        "durationMs": 3120
+      },
+      "webp": {
+        "frames": 76,
+        "uniqueFrames": 76,
+        "durationMs": 3120
+      },
+      "passed": true
+    }
+  },
+  "bodyPartComposition": false,
+  "runtimeModified": false,
+  "deployed": false,
+  "manualReview": "Generated whole-body source poses and final neutral-backdrop contact sheets visually reviewed. Carapace has thick cream rims; blade forms have three swept rightward tips; secretion forms retain four attached right-hand glands.",
+  "birthFinalFrameExactIdle": true,
+  "neutralGeometry": {
+    "pivot": [
+      256,
+      416
+    ],
+    "opaqueBounds": [
+      109,
+      150,
+      404,
+      416
+    ],
+    "bodyReferenceHeight": 266,
+    "bodyReferenceWidth": 295,
+    "referenceLength": 297,
+    "registrationAlphaThreshold": 16,
+    "registrationBounds": [
+      108,
+      149,
+      405,
+      417
+    ]
+  }
+}
