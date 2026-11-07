@@ -222,5 +222,139 @@
   globalThis.SpawnerUnitMatrixPanels = panels;
   globalThis.SpawnerUnitMatrixFailures = failures;
   globalThis.SpawnerUnitMatrixReady = Promise.resolve();
+  // Whole-body birth scenes use the original master timeline, not the downsampled preview.
+  // Share decoded environment atlases only while visible; never retain offscreen images.
+  function initializeBirthScenes() {
+    const links = [...document.querySelectorAll('#codex-unit-appearance a[data-birth-scene]')];
+    if (!links.length) return;
+    const resources = new Map(), scenes = [], sceneByCanvas = new WeakMap();
+    const lightbox = document.getElementById('image-lightbox');
+    let lightScene = null, animationFrame = null, lightSelection = 0;
+    function acquire(path) {
+      let resource = resources.get(path);
+      if (!resource) {
+        const image = new Image();
+        resource = { image, references: 0, promise: new Promise((resolve, reject) => {
+          image.onload = () => image.naturalWidth ? resolve(image) : reject(new Error(path));
+          image.onerror = () => reject(new Error(path));
+        }) };
+        resources.set(path, resource); image.src = path;
+      }
+      resource.references++;
+      return resource;
+    }
+    function release(scene) {
+      scene.generation++; scene.ready = false; scene.frame = -1;
+      for (const resource of scene.resources || []) {
+        if (--resource.references === 0) {
+          resources.delete(resource.image.getAttribute('src'));
+          resource.image.removeAttribute('src');
+        }
+      }
+      scene.resources = null; scene.canvas.width = scene.canvas.height = 1;
+      if (scene.thumbnail) { scene.thumbnail.style.display = ''; scene.canvas.style.display = 'none'; }
+    }
+    function drawScene(scene, now) {
+      const { clip, canvas, context } = scene;
+      let time = (now - scene.started) % clip.durationsMs.reduce((sum, ms) => sum + ms, 0), index = 0;
+      while (index < clip.durationsMs.length - 1 && time >= clip.durationsMs[index]) time -= clip.durationsMs[index++];
+      const sceneWidth = clip.frameSize, sceneHeight = clip.frameHeight || sceneWidth;
+      const width = canvasBackingSize(canvas, sceneWidth);
+      const height = Math.max(1, Math.round(width * sceneHeight / sceneWidth));
+      if (scene.frame === index && canvas.width === width && canvas.height === height) return;
+      if (canvas.width !== width || canvas.height !== height) { canvas.width = width; canvas.height = height; }
+      context.setTransform(width / sceneWidth, 0, 0, height / sceneHeight, 0, 0);
+      context.clearRect(0, 0, sceneWidth, sceneHeight);
+      clip.sceneLayers.layers.forEach((layer, position) => {
+        const sample = layer.samples[index];
+        if (!sample) return;
+        context.drawImage(scene.resources[position].image,
+          sample.frame % layer.columns * layer.frameSize,
+          Math.floor(sample.frame / layer.columns) * layer.frameHeight,
+          layer.frameSize, layer.frameHeight, ...sample.destination);
+      });
+      canvas.dataset.frame = String(index); scene.frame = index;
+    }
+    function tickScenes(now) {
+      animationFrame = null;
+      if (document.hidden) return;
+      for (const scene of [...scenes, lightScene].filter(Boolean)) if (scene.ready && scene.visible) drawScene(scene, now);
+      if ([...scenes, lightScene].some(scene => scene?.ready && scene.visible)) animationFrame = requestAnimationFrame(tickScenes);
+    }
+    function scheduleScenes() { if (animationFrame === null && !document.hidden) animationFrame = requestAnimationFrame(tickScenes); }
+    async function loadScene(scene) {
+      if (scene.resources || scene.failed || !scene.visible || document.hidden) return;
+      const generation = ++scene.generation;
+      scene.resources = scene.clip.sceneLayers.layers.map(layer => acquire(layer.image));
+      try {
+        await Promise.all(scene.resources.map(resource => resource.promise));
+        if (scene.generation !== generation || !scene.visible || document.hidden) return;
+        scene.ready = true; scene.started = performance.now(); scene.frame = -1;
+        if (scene.thumbnail) { scene.thumbnail.style.display = 'none'; scene.canvas.style.display = 'block'; }
+        else lightbox.classList.add('is-unit-animation');
+        drawScene(scene, scene.started); scheduleScenes();
+      } catch {
+        if (scene.generation !== generation) return;
+        scene.failed = true; release(scene);
+        if (!scene.thumbnail) lightbox.classList.remove('is-unit-animation');
+        refill();
+        // The original animated preview and original sheet link remain intact.
+      }
+    }
+    function refill() {
+      let count = scenes.filter(scene => scene.resources).length;
+      for (const scene of scenes) if (count < 4 && scene.visible && !scene.resources && !scene.failed) { loadScene(scene); count++; }
+    }
+    const sceneObserver = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        const scene = sceneByCanvas.get(entry.target);
+        scene.visible = entry.isIntersecting && !document.hidden && !!activePage()?.contains(scene.link);
+        if (!scene.visible) release(scene);
+      }
+      refill();
+    });
+    for (const link of links) {
+      const clip = JSON.parse(link.dataset.birthScene), thumbnail = link.querySelector('img');
+      const canvas = document.createElement('canvas');
+      canvas.width = canvas.height = 1; canvas.className = 'unit-matrix-canvas'; canvas.style.display = 'none';
+      canvas.style.objectFit = 'contain'; thumbnail.after(canvas);
+      const scene = { link, thumbnail, canvas, context: canvas.getContext('2d'), clip, generation: 0, visible: false, ready: false, frame: -1 };
+      scenes.push(scene); sceneByCanvas.set(link, scene); sceneObserver.observe(link);
+    }
+    function clearLightScene() {
+      if (lightScene) { release(lightScene); lightScene = null; }
+    }
+    document.addEventListener('click', event => {
+      const link = event.target.closest('figure a[href]');
+      if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      clearLightScene();
+      const selection = ++lightSelection;
+      const source = scenes.find(scene => scene.link === link);
+      if (!source) return;
+      // Let the existing lightbox handlers retain ownership of open/close and original links.
+      queueMicrotask(() => {
+        if (selection !== lightSelection || !lightbox.classList.contains('is-open')) return;
+        let canvas = document.getElementById('unit-lightbox-canvas');
+        if (!canvas) { canvas = document.createElement('canvas'); canvas.id = 'unit-lightbox-canvas'; lightbox.querySelector('.lightbox-image').after(canvas); }
+        lightbox.classList.remove('is-unit-animation');
+        lightScene = { canvas, context: canvas.getContext('2d'), clip: source.clip, generation: 0, visible: true, ready: false, frame: -1 };
+        loadScene(lightScene);
+      });
+    });
+    new MutationObserver(() => { if (!lightbox.classList.contains('is-open')) clearLightScene(); }).observe(lightbox, { attributes: true, attributeFilter: ['class'] });
+    function refreshScenes() {
+      for (const scene of scenes) {
+        sceneObserver.unobserve(scene.link);
+        if (document.hidden || !activePage()?.contains(scene.link)) { scene.visible = false; release(scene); }
+        else sceneObserver.observe(scene.link);
+      }
+      if (document.hidden) { if (lightScene) release(lightScene); }
+      else if (lightScene) loadScene(lightScene);
+    }
+    document.addEventListener('visibilitychange', refreshScenes);
+    document.addEventListener('spawner-page', refreshScenes);
+    globalThis.SpawnerBirthScenePreview = { scenes, resources, drawScene, release, loadScene };
+  }
+  initializeBirthScenes();
   activate();
 })();

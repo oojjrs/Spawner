@@ -72,7 +72,9 @@ test('DNA v4 antenna combinations preserve actual ability rules and independent 
 
 test('all 28 antenna forms are complete with 172 byte-exact clips and 28 portraits', () => {
   assert.equal(Object.keys(ANTENNA_COMBO_ACTION_ART).length, 28);
-  assert.equal(ANTENNA_COMBO_IMAGE_ASSETS.length, 200);
+  const originalImages = new Set(Object.values(ANTENNA_COMBO_ACTION_ART).flatMap(definition => [definition.portrait, ...Object.values(definition.actions).map(clip => clip.image)]));
+  assert.equal(originalImages.size, 200);
+  assert.equal(ANTENNA_COMBO_IMAGE_ASSETS.length, 216);
   let clips = 0;
   for (const tribe of tribes) for (const form of forms) {
     const key = tribe + '/' + form.key, definition = ANTENNA_COMBO_ACTION_ART[key];
@@ -89,10 +91,10 @@ test('all 28 antenna forms are complete with 172 byte-exact clips and 28 portrai
       assert.equal(clip.loop, ['idle', 'walk'].includes(action)); clips++;
     }
   }
-  assert.equal(clips, 172); assert.equal(auditImages(root, ANTENNA_COMBO_IMAGE_ASSETS), 200);
+  assert.equal(clips, 172); assert.equal(auditImages(root, ANTENNA_COMBO_IMAGE_ASSETS), 216);
 });
 
-test('offline file builds include all 200 byte-exact antenna image wrappers', () => {
+test('offline file builds include all original and layered antenna image wrappers', () => {
   const scope = {};
   runInNewContext(read('client/local-assets.js').toString(), scope);
   const files = new Set(scope.SpawnerLocalAssetFiles);
@@ -159,6 +161,19 @@ test('every antenna state draws exactly one full-body cell with measured floor a
         const calls = [], transforms = [], context = { save() {}, restore() {}, translate: (...args) => transforms.push(['translate', ...args]),
           scale: (...args) => transforms.push(['scale', ...args]), drawImage: (...args) => calls.push(args) };
         assert.equal(art.draw(context, actor, .05, 240, 420, 100, mirror), true, key + '/' + action);
+        const visibleLayers = clip.sceneLayers?.layers.filter(layer => layer.samples[pose.frame]);
+        if (visibleLayers) {
+          assert.equal(calls.length, visibleLayers.length, 'one environment and at most one whole body');
+          assert.ok(visibleLayers.filter(layer => layer.role === 'body').length <= 1);
+          const scale = 100 * unitDisplaySize(actor) / clip.referenceLength;
+          visibleLayers.forEach((layer, index) => {
+            const { frame, destination: [x, y, width, height] } = layer.samples[pose.frame];
+            assert.equal(calls[index][0].image, layer.image);
+            assert.deepEqual(calls[index].slice(1), [frame % layer.columns * layer.frameSize, Math.floor(frame / layer.columns) * layer.frameHeight, layer.frameSize, layer.frameHeight, (x - clip.pivotX) * scale, (y - clip.pivotY) * scale, width * scale, height * scale]);
+          });
+          assert.deepEqual(transforms, [['translate', 240, 420], ['scale', unitFrameMirror(clip.sourceFacing, mirror ? -1 : 1) ? -1 : 1, 1]]);
+          continue;
+        }
         assert.equal(calls.length, 1, 'no runtime organ overlays');
         const draw = calls[0], height = clip.frameHeight || clip.frameSize, scale = 100 * unitDisplaySize(actor) / clip.referenceLength;
         assert.equal(draw[0].image, clip.image);

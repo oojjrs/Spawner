@@ -1,0 +1,2869 @@
+{
+  "tribe": "spore",
+  "form": "carapace-antenna",
+  "sourcePublication": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+  "birth": {
+    "frameSize": [
+      768,
+      512
+    ],
+    "columns": 8,
+    "frameCount": 78,
+    "durationsMs": [
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40
+    ],
+    "durationMs": 3120,
+    "loop": false,
+    "sheet": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-birth-v1-sheet.png",
+    "preview": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-birth-v1-preview.webp",
+    "gif": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-birth-v1-preview.gif",
+    "sheetSHA256": "eb900f8fbd9131804f6723056f7390635ebd7a3f14e9602d7acbd82ae23294d4",
+    "previewSHA256": "6490a679ae1f71f6be4203fc9392f13efc08b90a10a6ae57a7e2b267b8a24d7c",
+    "gifSHA256": "a0276dd4f6226cd7ac8ed6cba35b6b06f8cbe5cf7459e5e7af4454d4cb44a85e",
+    "previewLoop": true,
+    "previewLoopCount": 0,
+    "fullScene": true,
+    "sourceFacing": "right",
+    "geometryAlphaThreshold": 16,
+    "finalBodyBounds": [
+      514,
+      444,
+      553,
+      477
+    ],
+    "geometrySource": "Isolated final complete-scene whole body, excluding nest.",
+    "bodyOnlySheet": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-birth-body-v1-sheet.png",
+    "pivotX": 533.5,
+    "pivotY": 477,
+    "referenceLength": 39,
+    "sceneLayers": {
+      "version": 1,
+      "layers": [
+        {
+          "imageSHA256": "95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d",
+          "image": "AnimationCandidates/birth-scene-layers-v1-20261107/spore/environment-blade-antenna.png",
+          "frameSize": 336,
+          "frameHeight": 232,
+          "columns": 8,
+          "frameCount": 74,
+          "role": "environment",
+          "samples": [
+            {
+              "frame": 0,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 0,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 2,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 3,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 4,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 5,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 6,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 7,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 8,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 9,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 10,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 11,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 12,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 13,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 14,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 15,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 16,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 17,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 18,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 19,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 20,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 21,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 22,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 23,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 24,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 24,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 25,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 26,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 27,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 28,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 29,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 30,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 31,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 32,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 33,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 34,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 35,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 37,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 38,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 39,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 40,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 41,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 42,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 43,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 44,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 45,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 46,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 47,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 48,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 48,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 49,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 50,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 51,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 52,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 53,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 54,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 55,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 56,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 57,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 58,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 59,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 60,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 61,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 62,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 63,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 64,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 65,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 66,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 67,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 68,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 69,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 70,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 71,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 72,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 72,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            },
+            {
+              "frame": 73,
+              "destination": [
+                62,
+                166,
+                336,
+                232
+              ]
+            }
+          ]
+        },
+        {
+          "imageSHA256": "4ee35e38c111d5807aa869fad0c6710dfdc0b85e9576b1ffc0abe390736d5267",
+          "image": "AnimationCandidates/birth-scene-layers-v1-20261107/spore/carapace-antenna/body.png",
+          "frameSize": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "frameCount": 37,
+          "role": "body",
+          "wholeBody": true,
+          "samples": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                297,
+                328,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 2,
+              "destination": [
+                297,
+                313,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 3,
+              "destination": [
+                299,
+                287,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 4,
+              "destination": [
+                301,
+                264,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 5,
+              "destination": [
+                304,
+                246,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 6,
+              "destination": [
+                308,
+                231,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 7,
+              "destination": [
+                313,
+                219,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 8,
+              "destination": [
+                319,
+                212,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 9,
+              "destination": [
+                326,
+                208,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 10,
+              "destination": [
+                333,
+                208,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 11,
+              "destination": [
+                341,
+                209,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 12,
+              "destination": [
+                349,
+                210,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 13,
+              "destination": [
+                357,
+                212,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 14,
+              "destination": [
+                366,
+                215,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 15,
+              "destination": [
+                376,
+                219,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 16,
+              "destination": [
+                385,
+                224,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 17,
+              "destination": [
+                395,
+                229,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 18,
+              "destination": [
+                404,
+                235,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 19,
+              "destination": [
+                414,
+                242,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 20,
+              "destination": [
+                423,
+                249,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 21,
+              "destination": [
+                432,
+                257,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 22,
+              "destination": [
+                441,
+                266,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 23,
+              "destination": [
+                450,
+                276,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 24,
+              "destination": [
+                458,
+                287,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 25,
+              "destination": [
+                466,
+                298,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 26,
+              "destination": [
+                473,
+                310,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 27,
+              "destination": [
+                479,
+                323,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 27,
+              "destination": [
+                485,
+                336,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 27,
+              "destination": [
+                490,
+                350,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 27,
+              "destination": [
+                495,
+                365,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 27,
+              "destination": [
+                498,
+                381,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 27,
+              "destination": [
+                500,
+                398,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 27,
+              "destination": [
+                501,
+                415,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 28,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 29,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 30,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 31,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 32,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 33,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 34,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 35,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            },
+            {
+              "frame": 36,
+              "destination": [
+                501,
+                424,
+                65,
+                65
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sceneLayers": {
+    "version": 1,
+    "layers": [
+      {
+        "imageSHA256": "95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d",
+        "image": "AnimationCandidates/birth-scene-layers-v1-20261107/spore/environment-blade-antenna.png",
+        "frameSize": 336,
+        "frameHeight": 232,
+        "columns": 8,
+        "frameCount": 74,
+        "role": "environment",
+        "samples": [
+          {
+            "frame": 0,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 16,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 17,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 18,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 19,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 20,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 21,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 22,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 23,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 24,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 24,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 25,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 26,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 28,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 29,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 30,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 31,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 32,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 33,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 34,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 35,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 37,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 38,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 39,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 40,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 41,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 42,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 43,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 44,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 45,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 46,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 47,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 48,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 48,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 49,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 50,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 51,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 52,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 53,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 54,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 55,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 56,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 57,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 58,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 59,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 60,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 61,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 62,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 63,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 64,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 65,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 66,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 67,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 68,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 69,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 70,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 71,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 72,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 72,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          },
+          {
+            "frame": 73,
+            "destination": [
+              62,
+              166,
+              336,
+              232
+            ]
+          }
+        ]
+      },
+      {
+        "imageSHA256": "4ee35e38c111d5807aa869fad0c6710dfdc0b85e9576b1ffc0abe390736d5267",
+        "image": "AnimationCandidates/birth-scene-layers-v1-20261107/spore/carapace-antenna/body.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 37,
+        "role": "body",
+        "wholeBody": true,
+        "samples": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              297,
+              328,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              297,
+              313,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              299,
+              287,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              301,
+              264,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              304,
+              246,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              308,
+              231,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              313,
+              219,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              319,
+              212,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              326,
+              208,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              333,
+              208,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              341,
+              209,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              349,
+              210,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              357,
+              212,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              366,
+              215,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              376,
+              219,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 16,
+            "destination": [
+              385,
+              224,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 17,
+            "destination": [
+              395,
+              229,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 18,
+            "destination": [
+              404,
+              235,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 19,
+            "destination": [
+              414,
+              242,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 20,
+            "destination": [
+              423,
+              249,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 21,
+            "destination": [
+              432,
+              257,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 22,
+            "destination": [
+              441,
+              266,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 23,
+            "destination": [
+              450,
+              276,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 24,
+            "destination": [
+              458,
+              287,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 25,
+            "destination": [
+              466,
+              298,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 26,
+            "destination": [
+              473,
+              310,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              479,
+              323,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              485,
+              336,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              490,
+              350,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              495,
+              365,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              498,
+              381,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              500,
+              398,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              501,
+              415,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 28,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 29,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 30,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 31,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 32,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 33,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 34,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 35,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              501,
+              424,
+              65,
+              65
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

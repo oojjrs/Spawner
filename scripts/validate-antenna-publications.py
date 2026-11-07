@@ -16,10 +16,12 @@ spec.loader.exec_module(registration)
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--complete', action='store_true')
+    parser.add_argument('--layers-only', action='store_true', help='Validate opt-in scene layer sources without re-decoding unchanged legacy atlases')
     args = parser.parse_args()
     paths = json.loads(registration.INDEX.read_text())
     seen = set()
     count = 0
+    layered = 0
     for relative in paths:
         path = ROOT / relative
         manifest = json.loads(path.read_text())
@@ -35,6 +37,13 @@ def main():
         actions = {('ranged' if name == 'ranged-attack' else name): record for name, record in manifest['actions'].items()}
         assert set(actions) == expected, key
         for action, record in actions.items():
+            if record.get('sceneLayers') is not None:
+                layered += 1
+            if args.layers_only:
+                if record.get('sceneLayers') is not None:
+                    registration.scene_layers(path, record)
+                count += 1
+                continue
             sheet = registration.source_path(path, record['sheet'])
             assert registration.sha(sheet) == record['sheetSHA256'], (key, action, 'sheet hash')
             assert isinstance(record.get('loop'), bool), (key, action, 'source loop metadata')
@@ -67,9 +76,14 @@ def main():
                 expected_duration = record.get('previewDurationMs', sum(record.get('previewDurationsMs', record['durationsMs'])))
                 assert actual_duration == expected_duration, (key, action, 'preview clock', actual_duration, expected_duration)
             count += 1
+            if record.get('sceneLayers') is not None:
+                registration.scene_layers(path, record)
     if args.complete:
         assert len(seen) == 28 and count == 172, (len(seen), count)
-    print(f'Validated {len(seen)}/28 forms, {count}/172 transparent clips and looping previews')
+    if args.layers_only:
+        print(f'Validated {len(seen)}/28 publication identities and {layered} layered source records; unchanged clip pixels/previews not re-decoded')
+    else:
+        print(f'Validated {len(seen)}/28 forms, {count}/172 transparent clips and looping previews; {layered} layered sources')
 
 
 if __name__ == '__main__':

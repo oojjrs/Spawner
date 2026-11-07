@@ -20,14 +20,18 @@ const measurements = JSON.parse(execFileSync("python3", ["-c", `
 import json, sys
 from PIL import Image
 rows = json.load(sys.stdin)
+cache = {}
 def measure(c):
     w = c['frameSize']; h = c.get('frameHeight', w)
     f = c.get('frames', [0])[0]; cols = c['columns']
+    key = (c['image'], w, h, f, cols)
+    if key in cache: return cache[key]
     with Image.open(c['image']) as image:
         tile = image.crop((f % cols*w, f//cols*h, (f % cols+1)*w, (f//cols+1)*h))
         box = tile.getchannel('A').point(lambda a: 255 if a >= 16 else 0).getbbox()
     if not box: raise ValueError('Empty neutral frame: ' + c['image'])
-    return {'length': max(box[2]-box[0], box[3]-box[1]), 'bottom': box[3], 'aspect': (box[3]-box[1])/(box[2]-box[0])}
+    cache[key] = {'length': max(box[2]-box[0], box[3]-box[1]), 'bottom': box[3], 'aspect': (box[3]-box[1])/(box[2]-box[0])}
+    return cache[key]
 print(json.dumps([{name: measure(row[name]) for name in ['reference', 'idle', 'clip']} for row in rows]))
 `], { cwd: root, input: JSON.stringify(records), encoding: "utf8", maxBuffer: 1024 * 1024 }));
 

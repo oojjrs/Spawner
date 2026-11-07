@@ -25,6 +25,24 @@ def path_for(manifest_path, value):
     return path.relative_to(ROOT).as_posix()
 
 
+def birth_scene_clip(record):
+    """Normalize square/rectangular masters without changing their sample timeline."""
+    scene = json.loads(json.dumps(record['sceneLayers']))
+    assert scene['version'] == 1 and len(scene['layers']) == 2
+    assert [layer['role'] for layer in scene['layers']] == ['environment', 'body']
+    assert scene['layers'][1]['wholeBody'] is True
+    for layer in scene['layers']:
+        asset = 'DesignAssets/Animations/BirthSceneLayersV1/' + layer['imageSHA256'] + '.png'
+        assert (ROOT / asset).is_file(), asset
+        assert len(layer['samples']) == len(record['durationsMs'])
+        layer['image'] = asset
+    size = record['frameSize']
+    width, height = size if isinstance(size, list) else (size, record.get('frameHeight', size))
+    assert all(isinstance(value, (int, float)) and value > 0 for value in (width, height))
+    return {'sceneLayers': scene, 'frameSize': width, 'frameHeight': height,
+            'durationsMs': record['durationsMs'], 'loop': True}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--runtime-complete', action='store_true')
@@ -67,6 +85,10 @@ def main():
                     record = actions[source_action]
                     original, preview = path_for(path, record['sheet']), path_for(path, record['preview'])
                     attributes = ' data-durations="' + ','.join(str(ms) for ms in record.get('previewDurationsMs', record['durationsMs'])) + '" data-loop="true"'
+                    if action == 'birth' and record.get('sceneLayers'):
+                        clip = birth_scene_clip(record)
+                        attributes += ' data-birth-scene="' + html.escape(json.dumps(clip, separators=(',', ':')), quote=True) + '"'
+
                 else:
                     cells.append(f'<td data-action="{action}" title="{label}은 {action_label}을 사용하지 않음"></td>')
                     continue

@@ -71,19 +71,109 @@ export function unitActionArtPose(agent, time) {
 
 export function createUnitActionArt(assetSource, createSurface, loadImage) {
   const images = new Map(), pending = new Map(), bounds = new Map(), retryAfter = new Map();
-  function request(animation) {
+  // Only opt-in birth scenes may composite an environment and one intact body.
+  // Weak keys avoid retaining decoded scene metadata after catalogs are replaced.
+  const sceneDefinitions = new WeakMap(), layerRecency = new Map();
+  const maxLayerImages = 64;
+  function sceneLayers(animation) {
+    if (!animation?.sceneLayers) return null;
+    if (sceneDefinitions.has(animation)) return sceneDefinitions.get(animation);
+    const scene = animation.sceneLayers, layers = scene.layers;
+    const positiveInteger = value => Number.isSafeInteger(value) && value > 0;
+    const valid = positiveInteger(animation.frameCount) && Number.isFinite(animation.pivotX) && Number.isFinite(animation.pivotY) && scene.version === 1 && Array.isArray(layers) && layers.length === 2 &&
+      layers[0]?.role === "environment" && layers[1]?.role === "body" && layers[1].wholeBody === true && layers[0].wholeBody !== true &&
+      layers[0].image !== layers[1].image && layers.every(layer => layer.image !== animation.image) &&
+      layers.every(layer => typeof layer.image === "string" && layer.image.length > 0 &&
+        positiveInteger(layer.frameSize) && positiveInteger(layer.frameHeight) &&
+        positiveInteger(layer.columns) && positiveInteger(layer.frameCount) &&
+        Array.isArray(layer.samples) && layer.samples.length === animation.frameCount &&
+        layer.samples.every(sample => sample === null || (sample && Number.isSafeInteger(sample.frame) &&
+          sample.frame >= 0 && sample.frame < layer.frameCount && Array.isArray(sample.destination) &&
+          sample.destination.length === 4 && sample.destination.every(Number.isFinite) &&
+          sample.destination[2] > 0 && sample.destination[3] > 0)));
+    sceneDefinitions.set(animation, valid ? layers : null);
+    return valid ? layers : null;
+  }
+  function touchLayer(layer) {
+    layerRecency.delete(layer.image); layerRecency.set(layer.image, true);
+    while (layerRecency.size > maxLayerImages) {
+      const oldest = layerRecency.keys().next().value;
+      layerRecency.delete(oldest); images.delete(oldest); retryAfter.delete(oldest);
+    }
+  }
+  function layersFor(pose) {
+    return pose?.action === "birth" && Number.isSafeInteger(pose.frame) && pose.frame >= 0 &&
+      pose.frame < pose.animation.frameCount ? sceneLayers(pose.animation) : null;
+  }
+  function independentScene(pose) {
+    return !!layersFor(pose) && Number.isFinite(pose.animation.referenceLength) && pose.animation.referenceLength > 0;
+  }
+  function requestReference(pose) {
+    if (pose && !independentScene(pose)) return request(pose.reference);
+  }
+  function layersReady(layers) { return !!layers && layers.every(layer => images.has(layer.image)); }
+  function poseReady(pose) {
+    return !!pose && (independentScene(pose) || images.has(pose.reference.image)) &&
+      (layersReady(layersFor(pose)) || images.has(pose.animation.image));
+  }
+  function releaseSceneFallback(animation) {
+    images.delete(animation.image); retryAfter.delete(animation.image);
+    layerRecency.delete(animation.image);
+  }
+  function requestPose(pose) {
+    if (!pose) return;
+    const layers = layersFor(pose);
+    if (!layers) return request(pose.animation);
+    if (layersReady(layers)) {
+      // This is the hot draw path. Do not create promises or retry closures for
+      // already decoded scenes (including frame() followed by draw()).
+      for (const layer of layers) touchLayer(layer);
+      releaseSceneFallback(pose.animation);
+      return;
+    }
+    const loads = layers.map(layer => { touchLayer(layer); return request(layer, true); });
+    // Never download the large baked scene just because layers are still loading.
+    function fallback() {
+      touchLayer(pose.animation);
+      return Promise.resolve(request(pose.animation)).then(() => {
+        if (layersReady(layers)) releaseSceneFallback(pose.animation);
+      });
+    }
+    if (layers.some(layer => retryAfter.has(layer.image))) fallback();
+    return Promise.all(loads).then(() => {
+      if (layersReady(layers)) {
+        // Release a decoded baked scene after successful recovery; never keep
+        // duplicate body pixels around for an otherwise healthy layered scene.
+        releaseSceneFallback(pose.animation);
+      } else if (layers.some(layer => retryAfter.has(layer.image))) return fallback();
+    });
+  }
+  function request(animation, layer = false) {
     if (!animation || images.has(animation.image) || Date.now() < (retryAfter.get(animation.image) || 0)) return;
     if (pending.has(animation.image)) return pending.get(animation.image);
+    const trackedScene = layer || layerRecency.has(animation.image);
     const loading = Promise.resolve().then(() => loadImage(animation.image)).then(image => {
+      if (layer) {
+        const width = image?.naturalWidth ?? image?.width, height = image?.naturalHeight ?? image?.height;
+        if (!image || (width !== undefined && width !== animation.columns * animation.frameSize) ||
+          (height !== undefined && height !== Math.ceil(animation.frameCount / animation.columns) * animation.frameHeight)) {
+          throw new Error("Invalid birth scene atlas");
+        }
+      }
+      if (trackedScene) touchLayer(animation);
+      retryAfter.delete(animation.image);
       images.set(animation.image, image); return image;
-    }).catch(() => { retryAfter.set(animation.image, Date.now() + 1000); return null; }).finally(() => pending.delete(animation.image));
+    }).catch(() => {
+      if (trackedScene) touchLayer(animation);
+      retryAfter.set(animation.image, Date.now() + 1000); return null;
+    }).finally(() => pending.delete(animation.image));
     pending.set(animation.image, loading); return loading;
   }
   async function prepare(agent, time) {
     const definition = unitActionArtDefinition(agent);
     if (!definition) return;
     const pose = unitActionArtPose(agent, time ?? 0);
-    await Promise.all([request(definition.reference), request(pose?.animation)]);
+    await Promise.all([pose ? requestReference(pose) : request(definition.reference), requestPose(pose)]);
   }
   function referenceBounds(animation) {
     if (bounds.has(animation)) return bounds.get(animation);
@@ -103,10 +193,15 @@ export function createUnitActionArt(assetSource, createSurface, loadImage) {
   function draw(context, agent, time, x, floor, cell, mirror, beforeDraw) {
     let pose = unitActionArtPose(agent, time);
     if (!pose) return false;
-    request(pose.reference); request(pose.animation);
-    const reference = referenceBounds(pose.reference);
-    const loading = !images.has(pose.animation.image);
+    requestReference(pose); requestPose(pose);
+    const reference = independentScene(pose) ? { length: pose.animation.referenceLength } : referenceBounds(pose.reference);
+    const layers = layersFor(pose), layered = layersReady(layers);
+    const loading = !layered && !images.has(pose.animation.image);
     if (!reference) {
+      drawUnitLoading(context, x, floor - cell * unitDisplaySize(agent) * .4, Math.max(5, cell * .07), time);
+      return true;
+    }
+    if (loading && (layers || !images.has(pose.reference.image))) {
       drawUnitLoading(context, x, floor - cell * unitDisplaySize(agent) * .4, Math.max(5, cell * .07), time);
       return true;
     }
@@ -117,8 +212,26 @@ export function createUnitActionArt(assetSource, createSurface, loadImage) {
     const crop = { x: pose.frame % animation.columns * width, y: Math.floor(pose.frame / animation.columns) * height, width, height };
     const destination = { x: -animation.pivotX * scale, y: -animation.pivotY * scale, width: width * scale, height: height * scale };
     context.save(); context.translate(x, floor); context.scale(unitFrameMirror(animation.sourceFacing, mirror ? -1 : 1) ? -1 : 1, 1);
-    if (beforeDraw) beforeDraw(context, image, crop, destination);
-    context.drawImage(image, crop.x, crop.y, width, height, destination.x, destination.y, destination.width, destination.height);
+    if (layered) {
+      for (const layer of layers) {
+        touchLayer(layer);
+        const sample = layer.samples[pose.frame];
+        if (!sample) continue;
+        const layerImage = images.get(layer.image);
+        const layerCrop = { x: sample.frame % layer.columns * layer.frameSize,
+          y: Math.floor(sample.frame / layer.columns) * layer.frameHeight,
+          width: layer.frameSize, height: layer.frameHeight };
+        const [left, top, width, height] = sample.destination;
+        const layerDestination = { x: (left - animation.pivotX) * scale,
+          y: (top - animation.pivotY) * scale, width: width * scale, height: height * scale };
+        if (beforeDraw && layer.role === "body") beforeDraw(context, layerImage, layerCrop, layerDestination);
+        context.drawImage(layerImage, layerCrop.x, layerCrop.y, layerCrop.width, layerCrop.height,
+          layerDestination.x, layerDestination.y, layerDestination.width, layerDestination.height);
+      }
+    } else {
+      if (beforeDraw) beforeDraw(context, image, crop, destination);
+      context.drawImage(image, crop.x, crop.y, width, height, destination.x, destination.y, destination.width, destination.height);
+    }
     context.restore();
     if (loading) drawUnitLoading(context, x, floor - cell * unitDisplaySize(agent) * .4, Math.max(5, cell * .07), time);
     return true;
@@ -126,12 +239,14 @@ export function createUnitActionArt(assetSource, createSurface, loadImage) {
   function frame(agent, time) {
     const pose = unitActionArtPose(agent, time);
     if (!pose) return null;
-    request(pose.reference); request(pose.animation);
-    if (!images.has(pose.reference.image) || !images.has(pose.animation.image)) return null;
+    requestReference(pose); requestPose(pose);
+    if (!poseReady(pose)) return null;
     const surface = createSurface(512, 512);
     return draw(surface.getContext("2d"), agent, time, 256, 448, 256 / unitDisplaySize(agent), false, null) ? surface : null;
   }
-  return { prepare, draw, frame, referenceBounds, readyFrame: (agent, time) => { const pose = unitActionArtPose(agent, time); return !!pose && images.has(pose.animation.image) && images.has(pose.reference.image); }, readyAction: (agent, time) => { const pose = unitActionArtPose(agent, time); return !!pose && !pose.missing && images.has(pose.animation.image) && images.has(pose.reference.image); }, ready: agent => {
+  // ready(agent) intentionally remains the timeless reference/portrait contract.
+  // Scene playback callers use readyFrame/readyAction with simulation time.
+  return { prepare, draw, frame, referenceBounds, readyFrame: (agent, time) => { const pose = unitActionArtPose(agent, time); return poseReady(pose); }, readyAction: (agent, time) => { const pose = unitActionArtPose(agent, time); return !!pose && !pose.missing && poseReady(pose); }, ready: agent => {
     const definition = unitActionArtDefinition(agent); return !!definition && images.has(definition.reference.image);
   } };
 }

@@ -1,0 +1,89 @@
+{
+  "uniqueLayerAssets": 16,
+  "all14FallbackDecodedBytes": 1761607680,
+  "all14LayersDecodedBytesDeduplicated": 518425600,
+  "all14LayerPNGBytesDeduplicated": 42822842,
+  "assets": {
+    "bean/environment.png": {
+      "pngBytes": 1594017,
+      "decodedBytes": 82439168,
+      "role": "environment"
+    },
+    "bean/blade-antenna/body.png": {
+      "pngBytes": 1239366,
+      "decodedBytes": 16777216,
+      "role": "body"
+    },
+    "bean/carapace-antenna/body.png": {
+      "pngBytes": 1489498,
+      "decodedBytes": 16777216,
+      "role": "body"
+    },
+    "bean/secretion-antenna/body.png": {
+      "pngBytes": 1208392,
+      "decodedBytes": 16777216,
+      "role": "body"
+    },
+    "bean/blade-carapace-antenna/body.png": {
+      "pngBytes": 1743793,
+      "decodedBytes": 16777216,
+      "role": "body"
+    },
+    "bean/blade-secretion-antenna/body.png": {
+      "pngBytes": 1580692,
+      "decodedBytes": 16777216,
+      "role": "body"
+    },
+    "bean/secretion-carapace-antenna/body.png": {
+      "pngBytes": 1664341,
+      "decodedBytes": 16777216,
+      "role": "body"
+    },
+    "bean/blade-secretion-carapace-antenna/body.png": {
+      "pngBytes": 1959141,
+      "decodedBytes": 16777216,
+      "role": "body"
+    },
+    "spore/environment-blade-antenna.png": {
+      "pngBytes": 3688945,
+      "decodedBytes": 24944640,
+      "role": "environment"
+    },
+    "spore/blade-antenna/body.png": {
+      "pngBytes": 3946212,
+      "decodedBytes": 41943040,
+      "role": "body"
+    },
+    "spore/carapace-antenna/body.png": {
+      "pngBytes": 3827726,
+      "decodedBytes": 41943040,
+      "role": "body"
+    },
+    "spore/secretion-antenna/body.png": {
+      "pngBytes": 3428116,
+      "decodedBytes": 41943040,
+      "role": "body"
+    },
+    "spore/blade-carapace-antenna/body.png": {
+      "pngBytes": 3829272,
+      "decodedBytes": 41943040,
+      "role": "body"
+    },
+    "spore/blade-secretion-antenna/body.png": {
+      "pngBytes": 3501730,
+      "decodedBytes": 41943040,
+      "role": "body"
+    },
+    "spore/secretion-carapace-antenna/body.png": {
+      "pngBytes": 4176705,
+      "decodedBytes": 41943040,
+      "role": "body"
+    },
+    "spore/blade-secretion-carapace-antenna/body.png": {
+      "pngBytes": 3944896,
+      "decodedBytes": 41943040,
+      "role": "body"
+    }
+  },
+  "note": "RGBA atlas texture estimate, excludes browser object overhead. Fallback need not remain decoded after layers load; peak during transition can include both."
+}

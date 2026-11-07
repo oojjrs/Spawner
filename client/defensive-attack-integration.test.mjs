@@ -42,7 +42,11 @@ test('only the authorized attack slot changes in each defensive body', () => {
   for (const [key, before] of Object.entries(baseline.definitions)) {
     const after = UNIT_ACTION_ART[key];
     assert.deepEqual(after.reference, before.reference, key);
-    for (const [name, clip] of Object.entries(before.actions)) if (name !== 'attack') assert.deepEqual(after.actions[name], clip, key + '/' + name);
+    for (const [name, clip] of Object.entries(before.actions)) if (name !== 'attack') {
+      const { sceneLayers, ...preserved } = after.actions[name];
+      assert.deepEqual(preserved, clip, key + '/' + name);
+      if (sceneLayers) { assert.equal(name, 'birth'); assert.ok(['bean/carapace-antenna', 'spore/carapace-antenna'].includes(key)); }
+    }
     assert.deepEqual(Object.keys(after.actions).sort(), [...new Set([...Object.keys(before.actions), 'attack'])].sort());
   }
   for (const [path, sha] of Object.entries(baseline.sourceImages)) assert.equal(hash(read(path)), sha, path);
