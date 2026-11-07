@@ -1,3 +1,59 @@
+## DNA 부분 저장·선택 영역·목록 높이 완료 및 푸시 동결 · 01a1a10e 현재 요약
+
+- 기록 ID: dna-part-save-final-freeze-20261107-01a1a10e. 기록 시각 2026-11-07T11:05:58+09:00. 기록자 Codex /root/dna_finish_git, 구현·검수 취합 /root, 요청·결정 사용자. 출처 codex://threads/01a1a10e-176c-7cb3-a1cf-2ad477deffc4 및 본 작업 source/실제 게임 검수 결과. 원발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 사용자 요청·결과: 부분 저장·기본 도안 통합, 선택 접점 클릭 보완, 오른쪽 통합 목록, 목록0개 숨김, 자연 높이 후 Attribute 최대3줄·인게임 최대2줄에서 스크롤, 부분 선택 pointer 커서, 선택된 육각 점유면 채움과 연결 영역 바깥 둘레 강조를 반영했다. 치유기관·healPower 퇴역과 갑각2레벨을 관련 canonical 및 내장 worker에 동기화한다. Spawner CSS링크와 deferred script14개의 text/plain은 승인된 실행 지원이다.
+- 검수 근거: 실제 인게임 선택 영역 사진 $Trash/dna-selection-area-20261107/actual-game-selection-area.png 및 목록 높이 $Trash/dna-part-list-height-20261107 결과를 메인이 직접 확인했다. 인게임0개 숨김·1줄105px·5개201px/scroll489, Attribute5개280px/scroll472. 기존 소스 구문·렌더·국소 보존 검수를 재사용한다. 전체 빌드·광범위 테스트는 실행하지 않았다.
+- 범위 동결: 13개 제품/실행 지원 경로와 본 채팅 미반영 메모리만 최신 main에 투영한다. 다른 runtime/game 훙크·자산·문서·메모리와 공용 index/미추적은 보존한다. 연결 Projects0 확인을 재사용한다. 사용자 ‘다 올려’와 재개 지시에 따라 origin/main에 커밋·푸시하며 Site는 메인 단계다. 실제 커밋·푸시 성공은 아직 아니며 확인 뒤 로컬 사후 기록으로 남긴다. 요청·변경이유·검수·미완료·보호 범위의 누락을 대조했다.
+
+## 치유 퇴역·갑각 2레벨 확인·부분 저장 통합 복구 진행 · 01a1a10e
+
+- 기록 ID: dna-part-save-healer-retirement-recovery-20261107-01a1a10e. 기록 시각: 2026-11-07T09:45:15+09:00. 기록자·조율/직접검수 Codex /root, 퇴역·재확인 결정 사용자. 출처 현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의 「갑각을 거기로 옮겨도」「치유기관 관련 내용은 다 삭제하고 갑각을 2레벨로 옮긴다음 새로 다 확인해야지…대체가 안될텐데」 및 문구질문 call_ea19a0c35b364dad94eed042c1f80ffb 회신, 01a1b349-c2f5-7410-817c-1a43af3819a8의 사용자승인 퇴역 전파. 개별 원발언 시각/항목ID 불명, H:/Spawner Windows PowerShell.
+- 새 현재조건: healer/전용강화healPower를 신규선택·초기도안·새부분조합 적용에서 제외한다. 기존 사용자저장 형상/ID/코드는 소실방지를위한 legacy조회로만유지한다. healing은받는회복증폭이며이퇴역과별개다. 기본치유사도안은제거해 채집꾼/근접전사/원거리전사3개만남긴다. 이전본채팅의기본4개·치유사제공계획은이결정으로대체되며 기존연구의치유형추천은현신규제공안이아니다.
+- 직접관측/판단: 현재canonical에서갑각은이미 grade2/shape[0,5,1]이다. 사용자발언을치유기관shape[0,2,1]로갑각을단순치환하라는승인으로해석하지않는다. 갑각2레벨정책으로남은현재3개초기도안의유효성·기능·끝점확장가능성을다시확인한다. 과거91칸전체전역최적성이나새3렙형상실행검수로확대하지않는다.
+- 실제중간검수: actualAttribute 포인터첫/끝선택·원본불변저장·자동부분탭·새로고침지속·전체회전추가·1회undo·저장/삭제실패보존을C가확인했다. 메인은실제스크린샷으로기본목록/부분목록을확인했고 standalone강화미리보기0누락을발견해원본전체stats-선택구간제외stats 기여분으로수정했다(근공강화단독+4 actual확인). budget만변하는인게임context에서선택취소하지않도록수정했다. 기존Attribute body min-width980에따른680폭넘침은범위밖이라수정하지않는다.
+- 통합실수/복구: C작업용inline동기화가병행변경된script type=text/plain태그를못찾고Spawner앞부분을손상시켰다. 메인이즉시공개·쓰기중단/국소복구조율했고, 도중병행작업이정상candidate(empty data-srcstub)로교체한것을확인했다. C가그새정상본을잘못복구대상삼은추가쓰기도즉시되돌렸다. 현재정상candidate직전backup SHA b0640105ea81b9a3c5a847210ec2fdd9acb38c0f051bd04a833befa560633a90 + 부분CSS링크55bytes만추가한현재SHA88a8b3f0d01ca37f09a13a54412c942c391469dcd9a319f036726e1b2b31d52c를C확인했고 메인도html/head/body와빈runtime/game data-srcstub를직접읽었다. 앞으로Spawner inline재삽입은금지하며현재entry.js/static참조구조를보존한다. HEAD전체복원/공용Git조작은하지않았다.
+- 별도동시교체관측: 09:36경mtime의editor/attribute가기능추가전으로바뀌고새parts/helper/CSS/starter파일이없어진사실을메인과A/B가확인했다. 이전검수성공만으로현재구현완료라고주장하지않는다. 교체행위자/명령은미확정이다. 현재canonical치유퇴역도유실되어A가사용자최신조건에맞춰최소재적용했고 catalog치유false/효과0/갑각grade2를실측했다.
+- 현재진행/보호: taskTrash/recovery에완성source들을재구성했다. A는baseline==freshlive조건으로editor/parts를재적용하고helper/CSS/Attribute-only/runtime필요모듈만안전복구, B는attribute/3도안과game현소스에insert-only공용목록연결을담당한다. C는제품쓰기중단/temp자료만제공한다. 현재다른작업source·정상emptySpawnerstub·판저장데이터를보존한다. 전체build/stage/commit/push/deploy는이채팅에서승인·실행하지않았다. 최종구현/인게임host실행은아직미확인이다.
+
+## DNA 부분 저장·기본 3도안 통합 완료 및 최종 실제 검수 · 01a1a10e 현재 요약
+
+- 기록 ID: dna-part-save-complete-20261107-01a1a10e. 기록·최종현물확인 시각: 2026-11-07T09:54:30+09:00. 기록자·독립검수/취합 Codex /root, 구현워커 /root/dna_part_editor·/root/dna_attribute_library·/root/dna_part_integration(gpt-6.1-sol low), 최종기능·치유퇴역 결정 사용자. 출처현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의구현승인/필수문구승인/속성템플릿기존영역표시/인게임판독립보존/치유제거·갑각2렙재확인 지시와 실제source·브라우저·VM결과. 개별원발언정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 현재완료: 속성제작기와인게임공용편집기에 부분저장버튼→첫/끝DNA전체조각선택→순서상연속범위하이라이트·1/2표시→독립형상/선택구간의원본설계기여효과미리보기→이름입력/사본저장 흐름을연결했다. 포인터hover/키보드범위후보,취소,원본불변,묶음회전/끝점추가·전체1회undo,경계·등급·충돌·기관중복·퇴역DNA새적용차단을구현했다. budget-only변화는선택/저장미리보기/append상태를보존하며레벨/readonly변경·load는취소한다.
+- 목록/지속: createDnaPartLibrary/createDnaPartStore가 spawner.dna.parts.v1 localStorage를읽고쓴다. 방/판독립·같은origin브라우저에서속성/게임이공유한다. 별도부분탭·미니어처·불러오기/삭제·저장후자동탭·타탭storage갱신·저장실패시사본성공오인방지/삭제행보존을포함한다. 다른기기/계정동기화기능은아니다. 기존전체도안/현재design키와사용자저장형상을보존한다.
+- 기본도안/최신조건: 기존속성템플릿제목·영역에 immutable 기본채집꾼/기본근접전사/기본원거리전사만표시한다. 치유사신규도안은없다. 최신실제데이터3개는각7/19·17/37·17/37칸이며현canonical기하합법·끝에서유용한조각2개추가가능조건을B가재확인했다. 메인은최종dynamicimport로starter3명/갑각grade2/신규치유catalog없음/필수4source존재/game공용목록연결/CSS링크를다시직접확인했다. 갑각shape051은이미2레벨이었으며치유기관shape로대체하지않았다.
+- 치유퇴역실행: canonical dna의healer/healPower retired true·combatstats healerfalse/healerCount0/healPower0, 공용Attribute/mainruntime와내장mainWorker/decisionWorker의DNA두모듈씩도동일canonical로맞췄다. A가양worker의legacy치유DNA입력에false/0/0을VM으로직접확인했다. geneID/옛형상은legacy보존용이며신규제공하지않는다. healing(받는회복증폭)과regen/lifesteal은그대로다. 다른채팅소유문서/실험실표현퇴역전체를본채팅이추가완료했다고주장하지않는다.
+- 실제검수증거: C actualAttribute 포인터범위선택→원본불변저장→parts자동노출→reload지속→회전추가→undo·저장/삭제실패보존을통과했다. 후속actualAttribute 근접강화단독기여4(+4)·평상시취소hidden을통과했다. B최종game-only-qa는실제game.js마운트구간+실제compiledruntime+game/partsCSS의격리harness에서part불러오기/append·design조각반영·budget99999→100000후select유지·부분저장2개·reload새인스턴스2개보존, pageerror0/requestfailed0을1.3초에확인했다. 메인은 game-host-latest.png를직접열람해2개저장항목과미니어처/조작표시를확인했다. 전체인게임진입→한판완주/전투승률검수는이범위에없다.
+- 통합오류복구최종: 이전미완료기록 dna-part-save-healer-retirement-recovery-20261107-01a1a10e의파일유실/실행차단상태를대체한다. source가돌아온경우동일바이트/데이터를보존하고중복삽입하지않았다. runtime의C국소동기화잔류인중복DNA wrapper36bytes와잘린modules접두사1곳만byteguard·backup후수정해VM globalSpawner/editor/parts/store정상실행을확인했다. 내장workerSource값외본문bytes동일도A가확인했다. 최종runtime SHA60a8643c33928e112b2b13da88312a9136cb6ed25404edb94265539f135801ae. 정상Spawner empty data-src/entry.js구조는그대로며부분CSS링크만추가했다. 이후전체inline복구/unsafe sync를실행하지않았다. QA하네스metaUTF8누락도temp에서만교정했다.
+- 범위/마감: 새dna-parts.mjs·dna-part-library.mjs·dna-starter-designs.mjs·dna-parts.css, sharededitor/attributehost/game마운트/build노출/Attribute번들/runtime/canonical퇴역최소부위와rootmemory만본과제범위다. 다른애셋/HTML문서/기존game·runtime변경을보존했다. 관련source구문·UTF8NoBom/CRLF·국소diff/모듈동일성확인을워커가수행했고실제화면증거는literal $Trash/dna-part-save-20261107/integration에있다. 기존Attribute body min-width980의680폭넘침은범위밖으로남겼다. 연결GitHubProjects조회는nodes0/hasNextPagefalse였다. 본채팅은전체build/stage/commit/push/deploy/branch작업을수행하지않았고로컬변경으로완료했다. 새3렙6칸/91칸체계의제품적용·전역최적증명은계속별도미완료다.
+
+
+## DNA 선택 명확화·오른쪽 통합 목록·실제 인게임 캡처 착수 · 01a1a10e
+
+- 기록 ID: dna-part-selection-visibility-start-20261107-01a1a10e. 기록 시각: 2026-11-07T10:24:48+09:00. 기록자·구현판단/분담 Codex /root, 개선요청·목록위치·캡처결정 사용자. 출처현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의 「부분 저장 좋아, 현재 선택된 걸 좀 더 명쾌하게」「부분 저장된 리스트를 오른편에 리스팅에 같이 표시…인게임 스샷 들고와봐 판정하게」. 원발언정확시각·항목ID 불명,H:/Spawner Windows PowerShell.
+- 현재승인범위: 부분선택범위를시각적으로더명확히한다. 저장부분목록을속성제작기/인게임오른쪽DNA목록에기존개별DNA와동시에보이게배치한다. 기존상호배타탭은통합표시로대체하고왼쪽속성템플릿전체도안목록은유지한다. 부분목록은상단일부높이와자체스크롤로개별DNA선택공간을보존한다. 기존승인 ‘부분 저장’ 표시/불러오기/삭제를요청위치로재배치하며신규설명문구를추가하지않는다.
+- Codex판단: 선택구간에밝은외곽강조와가닥원색보존,현재hover조각/확정첫조각/끝후보를구분한다. 원래기관색·두께구분·저장기하/데이터·비용·효과를바꾸지않는다. 사용자는실제인게임설계창의원본DNA선택과오른쪽저장묶음동시표시화면으로판정한다. 이전격리마운트이미지만다시내는것은이번명시캡처요구충족이아니다.
+- 분담/보호: 기존gpt-6.1-sol low워커A editor선택렌더/국소번들, B 속성/game오른쪽목록+공통helper/CSS, C 제품쓰기금지/실제게임Playwright캡처와동작검수만담당한다. 메인조율·검수/메모리. 모든현재dirty/source/다른작업을보존하며sourcefreshread·uniqueanchor·쓰기직전bytesguard,새temp는literal $Trash/dna-selection-visibility-20261107에둔다. Spawner의현재entry.js와emptydata-src구조를보존하고embeddedHTML쓰기·전체build·Git·배포는하지않는다. 이전parts기능/치유퇴역·갑각grade2·판독립localStorage조건도유지한다.
+- 상태: 구현중이며새UI검수/실제인게임캡처는아직없다. 이전속성페이지/격리검수결과를새변경성공으로확대하지않는다. A/B완료후C가실제게임입장/설계modal열기와독립브라우저테스트상태로대표DNA/저장묶음을보여캡처할예정이다. 실제사용자데스크탑/CUA/UIA/사이드패널은제어하지않는다.
+
+## DNA 선택 강조·오른쪽 통합 목록 적용 및 실제 인게임 이미지 전달 완료 · 01a1a10e 현재 요약
+
+- 기록 ID: dna-part-selection-visibility-complete-20261107-01a1a10e. 기록·실제이미지직접열람 시각: 2026-11-07T10:28:04+09:00. 기록자·독립정적/시각검수 Codex /root, 구현A /root/dna_part_editor·목록B /root/dna_attribute_library·실제게임캡처C /root/dna_part_integration(gpt-6.1-sol low), 개선/위치/캡처요청 및최종판정주체 사용자. 출처현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의선택명확화·오른쪽동시목록·인게임사진요청, actual-game-result.json 및실제PNG두개. 원발언정확시각·항목ID 불명,H:/Spawner Windows PowerShell.
+- 적용완료: 선택된전체DNA가닥에어두운받침+밝은cream외곽,현재hover가닥은흰외곽을그리며DNA원색/기관두께구분을유지한다. 비선택가닥은.12로약화한다. 선택중기존끝점plus/노드표시는숨기고선택범위의시작·끝경계원을표시한다. 첫선택은사각1,끝후보는원형2를선중점양쪽18px에두어가닥/접점과구분하고한조각범위에도두표시가겹치지않는다. 키/포인터선택·저장기하/효과/가격/스토리지는바꾸지않았다.
+- 목록완료: 속성제작기/인게임오른쪽catalog상단에저장부분section,아래에개별DNA필터/목록을동시에표시한다. 저장section은최대35%높이/별도스크롤,개별gene리스트는남은영역스크롤이다. 기존교대설계도/부분탭과속성제작기왼쪽부분패널은제거했고왼쪽기존전체속성템플릿목록/기본3도안은보존했다. 새부분저장직후해당row를선택강조하고list내scroll로노출한다. 기존승인문구만요청위치로재배치했다.
+- 실제사진/검수: C가정상actual Spawner.html입장버튼→entry/assets/game전체초기화를실행하고실제openUnitDesign/modal/render로캡처했다. HTTP응답의테스트전용read-only QA노출과독립browsercontext의기본근접전사6조각/저장묶음3개fixture만주입했으며하네스로UI를대체하거나제품파일을수정하지않았다. actual-game-selection.png는실제HUD배경/설계창에서중간3조각선택후보·사각1/원2·원래가닥색과비선택흐림·오른쪽저장부분/개별DNA를동시에보인다. actual-game-parts.png는평소편집상태의두목록을보인다. 두1600x1050 PNG를메인이직접열어가독/선택범위·표시공존을확인했다.
+- 캡처관측/한계: partRows3/genes15·viewportoverflowfalse·pageerror0·requestfailed0. console에는리소스404두건이있었으나URL이수집되지않아원인/발생전후는미확인으로남겼고별도제품수리를하지않았다. 전체네트워크무오류/한판완주검수라고주장하지않는다. 이번시각안의재미·가독최종판정은사용자에게남긴다.
+- 범위/동기화: source client/dna-editor.mjs·attribute-editor.js·game.js의해당공용목록마운트·dna-part-library.mjs·dna-parts.css와Attribute전용번들/runtime의editor/helper블록만변경했다. 마지막runtimeSHA f7eaf6f9d82610958b368130133976614d0216788a4c357e66b238ea8104459a, 각모듈1개/source일치·구문·UTF8NoBomCRLF·국소diff를A/B가확인했다. runtime해당블록외bytes동일,다른canonical/내장worker/애셋/다른작업·Spawner의emptydata-src/entry.js구조를보존했다. 기록 dna-part-selection-visibility-start-20261107-01a1a10e의미완료상태는본결과로대체한다.
+- 산출물: literal $Trash/dna-selection-visibility-20261107/{actual-game-selection.png,actual-game-parts.png,actual-game-result.json} 및대상baseline/스크립트. 현재로컬적용이며이채팅에서전체build·stage·commit·push·배포·브랜치/기존데이터조작을하지않았다. 사용자에게실제선택사진을인라인으로제공하고평소화면도연결한다.
+
+
+## DNA 부분 저장의 +접점 선택 보완 완료 · 01a1a10e 현재 요약
+
+- 기록 ID: dna-part-endpoint-hit-complete-20261107-01a1a10e. 기록 시각: 2026-11-07T10:34:05+09:00. 기록자·독립소스검수/취합 Codex /root, 구현 /root/dna_part_editor·실제브라우저검수 /root/dna_attribute_library(gpt-6.1-sol low), 원발언자·요청결정 사용자. 출처현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의 「흠. 좋아. + 부분을 눌러도 잘 선택되게 해야돼」와 실제source/result.json. 원발언정확시각·항목ID 불명,H:/Spawner Windows PowerShell.
+- 적용: 부분범위선택 hitPart에서model.nodes의원전체를선분보다먼저hit-test한다. 원점25/기관20/스탯14×현재view.scale에mouse7/touch12px여유를더하며중심이가장가까운접점을택한다. 미배치previewghost는선택대상에넣지않았다. 공유접점에서는실제선hover/명시키보드이동으로설정된partCursorHint가있을때연결된현재조각을유지하고,그외첫직접선택은outgoing/최종끝점은incoming,두번째선택은첫범위와진행방향에맞춘결정론적인접조각을택한다. 초기cursor0을실제hover로오인하지않고cancel때hint를초기화한다.
+- 보존/동기화: 일반편집의+배치·기존선분선택·범위하이라이트/1·2·저장/가격/기하와오른쪽통합목록은유지한다. source client/dna-editor.mjs와Attribute전용번들/runtime의editor1블록만동기화했다. runtime외블록bytes동일,최종SHA38e7688a477b81804db1cd231d72fc937686c6433b7c947848db12470e784da5. Spawner/다른module/canonical/내장worker/애셋·다른dirty변경은바꾸지않았다. A가source/runtime구문·UTF8NoBomCRLF3파일/국소diff/모듈동기화를확인했다. 메인은실제hitPart·hint분기소스를독립검수했다.
+- 실제브라우저결과: B가actualAttribute페이지의실제editor와모델/viewport좌표로원점center→blade,끝점center→power,최초공유접점→outgoing antenna,antenna선hover후공유원click→antenna유지,1.7배zoom의큰원반경82%점→blade,기존선분→antenna 6건을1.18초에검수했다. 각2click후partSavecallback의gene1개를확인했고원본DNA normalizedtuple불변, pageerror0/requestfailed0이다. 첫시도원본비교의JSON객체키순서오라클차이는테스트에서만교정했으며제품동작을바꾸어맞추지않았다.
+- 결과/마감: 속성제작기/인게임공용편집기에로컬적용완료. 이번에는인게임전체새캡처/한판실행을반복하지않았고actualAttribute 6입력검수와양쪽공용모듈동일성으로확인했다. 임시자료 literal $Trash/dna-endpoint-selection-20261107/result.json 및baseline/스크립트. Git/stage/commit/push/배포·전체build/새문구는이번범위가아니다. 이전선택시각·오른쪽목록·실제인게임이미지결과는보존한다.
+
 ## 유닛 표 수정 푸시 재개 · 01a1b3ae 현재 요약
 
 - 기록 ID: unit-table-header-resume-20261107-01a1b3ae. 기록 시각 2026-11-07T11:01:12+09:00. 기록자·Git 상태 관측 Codex /root, 재개·변경·업로드 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 의 재개 지시와 fetch/rev-parse/ls-files 결과. 사용자 정확 발언 시각·항목 ID 불명, H:/Spawner Windows PowerShell.

@@ -30,9 +30,9 @@ export function dnaCombatStats(counts, weights, inputRules) {
   const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
   const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : 0;
   const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
-  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0, healerCount: c.healer || 0,
-    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed, healer: !!n.healer,
-    healPower: c.healer ? c.healer + (n.healPower || 0) : 0,
+  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0, healerCount: 0,
+    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed, healer: false,
+    healPower: 0,
     ...(rules.recovery ? { recovery: rules.recovery } : {}),
     health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
     power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,

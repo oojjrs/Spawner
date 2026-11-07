@@ -7414,6 +7414,17 @@
       unitDraft.error = "";
       updateUnitDesign();
     });
+    const designDnaCatalog = designDnaHost.querySelector('.dna-catalog');
+    const designDnaPartsPanel = document.createElement('section'), designDnaPartsHeading = document.createElement('div');
+    designDnaPartsPanel.className = 'dna-library-section';
+    designDnaPartsPanel.dataset.visibleParts = '2';
+    designDnaPartsHeading.className = 'section-label';
+    designDnaPartsHeading.textContent = '부분 저장';
+    designDnaPartsHeading.id = 'design-dna-parts-label';
+    designDnaPartsPanel.setAttribute('aria-labelledby', designDnaPartsHeading.id);
+    designDnaPartsPanel.append(designDnaPartsHeading);
+    designDnaCatalog.prepend(designDnaPartsPanel);
+    const designDnaPartsLibrary = Spawner.createDnaPartLibrary(designDnaPartsPanel, Spawner.ATTRIBUTE_DNA, designDnaEditor);
     function dnaDesignValid(dna) {
       return !!Spawner.validateDna(dna, state.nestLevel, state.evolutionPoints);
     }
