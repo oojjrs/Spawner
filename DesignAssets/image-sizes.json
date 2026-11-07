@@ -3750,36 +3750,6 @@
         1
       ]
     },
-    "DesignAssets/Animations/CreatureWalkV2/vine-turtle/walk.webp": {
-      "display": [
-        231.07420494699645,
-        231.07420494699645
-      ],
-      "grid": [
-        8,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/vine-turtle/thumb.webp": {
-      "display": [
-        64,
-        64
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/CreatureWalkV2/vine-turtle/preview.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
     "DesignAssets/Animations/CreatureWalkV2/snare-vine/walk.webp": {
       "display": [
         283.16607773851587,
@@ -20900,6 +20870,31 @@
         "frame": [
           316,
           312
+        ]
+      }
+    },
+    "DesignAssets/Animations/CreatureWalkV3/vine-turtle/walk.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "sourceMaximum": [
+        640,
+        640
+      ],
+      "nativeSource": {
+        "sha256": "03dd203f9f7d85d83c38f877b7b3674e33f9f8ef546cd6d5bf8c9ef9f6b063fd",
+        "dimensions": [
+          5120,
+          5120
+        ],
+        "frame": [
+          640,
+          640
         ]
       }
     }

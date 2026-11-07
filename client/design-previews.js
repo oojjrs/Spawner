@@ -30,7 +30,6 @@ globalThis.SpawnerDesignPreviews = Object.freeze({
   "DesignAssets/Animations/CreatureWalkV2/spiny-back-leader/thumb.webp": "DesignAssets/Planning/Thumbnails/Animations/CreatureWalkV2/spiny-back-leader/thumb.webp.webp",
   "DesignAssets/Animations/CreatureWalkV2/spring-keeper/thumb.webp": "DesignAssets/Planning/Thumbnails/Animations/CreatureWalkV2/spring-keeper/thumb.webp.webp",
   "DesignAssets/Animations/CreatureWalkV2/talon-owl/thumb.webp": "DesignAssets/Planning/Thumbnails/Animations/CreatureWalkV2/talon-owl/thumb.webp.webp",
-  "DesignAssets/Animations/CreatureWalkV2/vine-turtle/thumb.webp": "DesignAssets/Planning/Thumbnails/Animations/CreatureWalkV2/vine-turtle/thumb.webp.webp",
   "DesignAssets/Animations/Nests/Growth02To03-v3/pebble/preview.webp": "DesignAssets/Planning/Thumbnails/Animations/Nests/Growth02To03-v3/pebble/preview.webp.webp",
   "DesignAssets/Animations/Nests/Growth02To03-PopV1/spore/preview.webp": "DesignAssets/Planning/Thumbnails/Animations/Nests/Growth02To03-PopV1/spore/preview.webp.webp",
   "DesignAssets/Animations/Nests/Growth02To03-v3/spore/preview.webp": "DesignAssets/Planning/Thumbnails/Animations/Nests/Growth02To03-v3/spore/preview.webp.webp",

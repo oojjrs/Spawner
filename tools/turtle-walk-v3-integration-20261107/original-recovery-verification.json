@@ -1,0 +1,416 @@
+[
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/verify.mjs",
+    "bytes": 7900,
+    "sha256": "b8514cd09b30595ec49b782103e53bd059eeb707a2ddc8060672b76300e7c0c7",
+    "matches_comparison_source": null
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/rig.mjs",
+    "bytes": 4378,
+    "sha256": "6b344dd3e20763a6ba00221d187bde6150c90f8ed6d49e30e6cdb761c818837a",
+    "matches_comparison_source": null
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/README.md",
+    "bytes": 3025,
+    "sha256": "7a4d9569ea7fc9134797bcb013ce1bb270b30b9bc7a1282add0a9aa9237e2dc6",
+    "matches_comparison_source": null
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/runtime.json",
+    "bytes": 40858,
+    "sha256": "76a11109e3f7435a72fef86bc3e54651b57609b0b1345b4f9322a6673b16f772",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/validation.json",
+    "bytes": 89560,
+    "sha256": "45e751dd9546508c8a30762f1ff0cc7087eca985963f597a37e636be4329a3ff",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/03.png",
+    "bytes": 245384,
+    "sha256": "ba1d0969deeff89a392db32b84cc29b21df4bf7c4bcd8c498544373cc6ee21d4",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/61.png",
+    "bytes": 248006,
+    "sha256": "c570279b86d213bb743f4a37ef445b5276d2dcea5c1eb50eca54969a8a380261",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/26.png",
+    "bytes": 248668,
+    "sha256": "411a252f22b69c62ca3770db16206cc97e74b6704a700d45090c48fb3a53d3d5",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/27.png",
+    "bytes": 248422,
+    "sha256": "5677d5cc8d93a17bc59fac9855d4ec4e168c484b10e374fc0cd594f1883d1461",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/06.png",
+    "bytes": 243729,
+    "sha256": "2d16879ec7f4e8a87b5a2db4b6a66085bbfc97ddd42e9fc11bc83bb733422426",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/47.png",
+    "bytes": 259317,
+    "sha256": "287fe164c0383e5a9ddb7f482394ca498852c2a63ed8971aeb2ba22445643100",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/07.png",
+    "bytes": 244241,
+    "sha256": "db5db4573c0ad83a4bf86f7892b42fe1730b30e22c637899c5b7c125812238d7",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/04.png",
+    "bytes": 245970,
+    "sha256": "b9ac2b65de16b30a484a7fc06dea57c7e4f9889dac028e1eb7afcfb90844dd1e",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/35.png",
+    "bytes": 250461,
+    "sha256": "7ad4c37ae8dc05271061f835061ea3e27e36f039b9044565c8302a8f08062bbc",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/12.png",
+    "bytes": 248191,
+    "sha256": "fe92eba1227e42b968b1b0e474baf7aa28a961c5d8c7a690372944e929d8e4cc",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/63.png",
+    "bytes": 247602,
+    "sha256": "a5f07703e32bac8eb039f2ece684532538b76f483266cad3285638f5d6a031c0",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/38.png",
+    "bytes": 252585,
+    "sha256": "ceaa3c187c4563da1962e6ebc3fdbca4ec87c318b75f4d783600ffe969e03fef",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/16.png",
+    "bytes": 249292,
+    "sha256": "cee178e5c7b3f7dd3e3abb1fe113cd8e438556741030fbd8c23fad4155df3842",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/11.png",
+    "bytes": 247636,
+    "sha256": "eca16d4b816b9c4c5f8ffb6824fd12ed1ccdfd55f35349ad3de48c5380b77247",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/43.png",
+    "bytes": 261341,
+    "sha256": "6f920c153debbe324e7d7e72df87295eac2d084dd26985289876a63ee3c59dd6",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/50.png",
+    "bytes": 257428,
+    "sha256": "fcf690304f81de8054f37cee1efc246d584619a2dd301b93797185b96de460dd",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/40.png",
+    "bytes": 257050,
+    "sha256": "89a46940001c0fbe8a8be62609c44e65f894a656e00081d9c616f8fae9084126",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/30.png",
+    "bytes": 249472,
+    "sha256": "658a349ea148ea62792013d56350d4a4061358536b8cde83de731ef1d44c3ef7",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/02.png",
+    "bytes": 245368,
+    "sha256": "b4c8d47a87d75eef7af13e56a08236d8eb8885bb2bb0734e5e1e480a8026ebe8",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/34.png",
+    "bytes": 249717,
+    "sha256": "ff03ce2246bd8477cba256de7818d7c09e415980f57a4312f90382b68d4d3ed1",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/39.png",
+    "bytes": 255114,
+    "sha256": "c63e5085182435b6a270fb50eb7def2151a0724fbc8b00d1bfb4aa5c5902eb68",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/05.png",
+    "bytes": 245374,
+    "sha256": "76a15e4ffa12f84625a6264580945d93178764e68df629a0e983858144ad14f5",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/28.png",
+    "bytes": 249276,
+    "sha256": "cc1a24c4894e18d233212075f11bc75d6ddc2b3b5a8bf83cc230d8fe2d0e2244",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/53.png",
+    "bytes": 253907,
+    "sha256": "7713da6789f5a19108a51bfd706a3a64a7c8124f86dd10f8e0c1c063cde4c136",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/15.png",
+    "bytes": 248353,
+    "sha256": "b6d703747e1a68fab1c4f1b1ba43f1d27c57b6d9c3cb2b0e880141d878d1c165",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/17.png",
+    "bytes": 249273,
+    "sha256": "5db68d06768481ee085482ac227e0b49f05820f19672c74cfea92692d9dbce83",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/08.png",
+    "bytes": 244683,
+    "sha256": "cc4ae01ddbd5a2c35e733075cf0685db6db4d8a500c548fa1f2eefc0880f1ee2",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/09.png",
+    "bytes": 245106,
+    "sha256": "ecbc077bc6cfede9fa21485085d9f8865dd6c9fd592cbf451af3a617877e4fe3",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/60.png",
+    "bytes": 248269,
+    "sha256": "a58fc955944930b71ffe4dbf65e99e1fc4c9d017b941299306d256e0bcd0ea02",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/32.png",
+    "bytes": 250139,
+    "sha256": "ff87760e53e3d8659cdbbc1d49afb4e0649e638c5ed3a1c971aa457a28405a39",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/24.png",
+    "bytes": 249524,
+    "sha256": "a41e4193a2ad35e3816adf5b77f0642127f42651db6cfe8a12d57ab2b917a22e",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/36.png",
+    "bytes": 251656,
+    "sha256": "337b851e435e3b9b5b175de2e7b9fc41f90d835e700a9ebf22cf3445709d2533",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/42.png",
+    "bytes": 258978,
+    "sha256": "dd2cc6f0b5b66aab3ec49905631ee5300738194afb0ac61295a1d839d30080cf",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/51.png",
+    "bytes": 257031,
+    "sha256": "f0c324e1ee6e2233fe855d255146423cb416246b7f4b42d36156da99e6da0b72",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/48.png",
+    "bytes": 259457,
+    "sha256": "13dc7c4adda40f11b993c1c1903a18b6db585c35ba4d84318a9e298d2bac2d33",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/44.png",
+    "bytes": 261793,
+    "sha256": "532da33f07aa34818be8dba6620775b248abfbae50e08931db64b6eab961b02c",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/20.png",
+    "bytes": 249233,
+    "sha256": "4ae1a755a101cb9a0c34b1ebec70ed9b767ce4fa650d1d395bd781e7d2123a3f",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/57.png",
+    "bytes": 251009,
+    "sha256": "65fe022a7bcd9f36c65759ef89613f48406d7f351c677f9533c98fc8070e562d",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/54.png",
+    "bytes": 252989,
+    "sha256": "840d86a85c98d11b43c8b3de35927782c722eb1dae01dc1b42e8605f3ac3e534",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/49.png",
+    "bytes": 258762,
+    "sha256": "e74953fc7965cd293f0126002b0008fc8bd411a1b7dccde100633b78d31249f9",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/52.png",
+    "bytes": 255726,
+    "sha256": "354ff88c3d2b00ea0ff9d1266e4430d3431a618fdc6d45cf8ec1def657fbf134",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/41.png",
+    "bytes": 258650,
+    "sha256": "9d32fd7c456973c15eb5b98e65cc997e674fdc7b5b54881111388af546277e04",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/14.png",
+    "bytes": 248243,
+    "sha256": "93d83d0e0276a50572abbd1ab50c493ce1902337180cf12c321caa2d3329410e",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/56.png",
+    "bytes": 252003,
+    "sha256": "a32cc3fdd8c55e38edd28d2cfcb900a8dbcd1742e36f5e1f0d93d33a608ad933",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/58.png",
+    "bytes": 249088,
+    "sha256": "c0e880da019bad2798db189475b2d378be82d83468057cfcae50b7365a3115ea",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/45.png",
+    "bytes": 260885,
+    "sha256": "ed6e380d291ea2e2b292cfdfdb2c24687044712991946c363c8677cc8ab95aec",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/46.png",
+    "bytes": 259893,
+    "sha256": "b551457c089bed0b505d9a61fa594eb11d24907271e41738acaed53e5bc2d4bd",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/10.png",
+    "bytes": 245146,
+    "sha256": "70b46d464f03b53ab6f1c1fdbb074116b76a9dc1c2b60c3e99f56aefbab33c88",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/29.png",
+    "bytes": 249319,
+    "sha256": "f41617fd19911e3ce1447efc45e90cf6ec1619d0ed33029b2ef850c35fa53f4b",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/59.png",
+    "bytes": 248577,
+    "sha256": "feb9e6aceae02d60e6b1042913080d7649487ce6ed3d38c471e7fe4da3c45bdb",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/22.png",
+    "bytes": 248763,
+    "sha256": "8350527cd37b58d1283b23c565d920fd40489dab5a7db39f12bde4ae38a65fdd",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/01.png",
+    "bytes": 246037,
+    "sha256": "a6757aa0d0e56ad8d872d8f73f1410bc8384fba3e675ae8be669eb603bfdc8e9",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/31.png",
+    "bytes": 250090,
+    "sha256": "57fd3611f443d15a65d4644abbc8fd1da1bf4aa3af3666a6d7ff9b3cb17b26ee",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/18.png",
+    "bytes": 248859,
+    "sha256": "0a6fa83cf1418e90dfce84cc63cbbd80a165acc01250944ab4da5432fe3745a4",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/23.png",
+    "bytes": 249362,
+    "sha256": "6407802d1f4bdc59aa7e15e4df6a6d00ef6a836fa5f4804f62471034e3d75fec",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/55.png",
+    "bytes": 252749,
+    "sha256": "d3092943e1b6b491d917ad9ad2e2c7a9d302d5a5dba97ef9fe77ef5aafdcbb6a",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/62.png",
+    "bytes": 247483,
+    "sha256": "05f17b158a114bffca2441429ec7db6976b201b5a044bc87dc606ef753a47b7b",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/37.png",
+    "bytes": 252451,
+    "sha256": "b65e2c646e5e928d836ba63701e61a7807cec87b8e97b1e667c01d93a8c0dd86",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/25.png",
+    "bytes": 249270,
+    "sha256": "801aaf7460e4d2a83f9320d17ffc29767f94ceff7612a9785c9f826a104ae777",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/33.png",
+    "bytes": 249415,
+    "sha256": "89e3b947fabf84044fcfed734f5001716c1d9d96421b9f876ab232e30b1d1e24",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/21.png",
+    "bytes": 248600,
+    "sha256": "efc9384cb3e6f8e93c3c093e8b548db748031b70adb1ca8d49a89060abca9c7c",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/00.png",
+    "bytes": 247317,
+    "sha256": "0a23a97bcf3b263824450e8aa424ad87a77d2efbf581d94d21b6871efff4d773",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/13.png",
+    "bytes": 248297,
+    "sha256": "fa7197676e09c41a0a81fc30ea92aff55f8f43e2e7b8276b4048418ccabda10e",
+    "matches_comparison_source": true
+  },
+  {
+    "path": "/workspace/shared/turtle-walk-recovery-audit-20261107/recovered-original-v3/Frames/19.png",
+    "bytes": 249056,
+    "sha256": "e42ffeb2bdbccd7e50f029285d6c24a10fc8af71815daaeb8db02765bdd9d853",
+    "matches_comparison_source": true
+  }
+]

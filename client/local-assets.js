@@ -615,7 +615,7 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Animations/CreatureWalkV2/spiny-back-leader/walk.webp.js",
   "./client/local-assets/Animations/CreatureWalkV2/spring-keeper/walk.webp.js",
   "./client/local-assets/Animations/CreatureWalkV2/talon-owl/walk.webp.js",
-  "./client/local-assets/Animations/CreatureWalkV2/vine-turtle/walk.webp.js",
+  "./client/local-assets/Animations/CreatureWalkV3/vine-turtle/walk.webp.js",
   "./client/local-assets/Animations/DefensiveAttackV1/bean/antenna/attack.png.js",
   "./client/local-assets/Animations/DefensiveAttackV1/bean/carapace-antenna/attack.png.js",
   "./client/local-assets/Animations/DefensiveAttackV1/bean/carapace/attack.png.js",

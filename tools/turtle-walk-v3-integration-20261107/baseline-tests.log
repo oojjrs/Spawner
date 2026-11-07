@@ -1,0 +1,74 @@
+✖ all 19 neutral species have an original idle reference and every strip keeps one body scale (15.015895ms)
+✔ ordinary neutral movement is linear, including turtles and weasels (0.829688ms)
+✔ retired feet reuse the base bean preparation and trajectory (0.443566ms)
+✔ authored jumps advance during flight and remain planted before takeoff and after landing (0.391409ms)
+✖ welcome uses the same species speeds, cell interpolation and animation phase as game movement (0.71009ms)
+✔ large wings and attack poses fit above and below the same header ground plane (0.339312ms)
+✖ all 23 welcome units keep valid poses at exact cell boundaries and adjacent instants (0.734427ms)
+✔ boar retains two full strides per cell at every movement duration (0.636251ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 5
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 145.431735
+
+✖ failing tests:
+
+test at ../../shared/turtle-walk-final-integration-tests/baseline/client/movement-registration.test.mjs:17:1
+✖ all 19 neutral species have an original idle reference and every strip keeps one body scale (15.015895ms)
+  AssertionError [ERR_ASSERTION]: cotton-sheep
+      at TestContext.<anonymous> (file:///workspace/shared/turtle-walk-final-integration-tests/baseline/client/movement-registration.test.mjs:29:29)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at ../../shared/turtle-walk-final-integration-tests/baseline/client/movement-registration.test.mjs:59:1
+✖ welcome uses the same species speeds, cell interpolation and animation phase as game movement (0.71009ms)
+  AssertionError [ERR_ASSERTION]: 1 != 2
+      at near (file:///workspace/shared/turtle-walk-final-integration-tests/baseline/client/movement-registration.test.mjs:14:26)
+      at TestContext.<anonymous> (file:///workspace/shared/turtle-walk-final-integration-tests/baseline/client/movement-registration.test.mjs:66:4)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at ../../shared/turtle-walk-final-integration-tests/baseline/client/movement-registration.test.mjs:87:1
+✖ all 23 welcome units keep valid poses at exact cell boundaries and adjacent instants (0.734427ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  1 !== 2
+
+      at TestContext.<anonymous> (file:///workspace/shared/turtle-walk-final-integration-tests/baseline/client/movement-registration.test.mjs:100:11)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

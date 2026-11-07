@@ -1,0 +1,116 @@
+{
+  "key": "vine-turtle",
+  "idleImage": "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp",
+  "walkImage": "DesignAssets/Animations/CreatureWalkV2/vine-turtle/walk.webp",
+  "idlePatch": [
+    163,
+    156,
+    253,
+    222
+  ],
+  "walkPatch": [
+    130,
+    110,
+    195,
+    157
+  ],
+  "score": 0.886522650718689,
+  "scaleFactor": 0.97,
+  "frameSize": 256,
+  "viewSize": 248.32,
+  "pivotX": 137.38092485549134,
+  "pivotY": 208.1395382899422,
+  "groundRadiusX": 0.401734,
+  "groundRadiusY": 0.028902,
+  "idleSha256": "6528cf28b11e4ccbb500afff22f9e3404079ede7ffb149e02136fc94158354f4",
+  "walkSha256": "97fcb422622154c0fa2dedf9fa44b0cf9a6c7f2c3034422a9c6695392fd2e2dd",
+  "originalCyclesPerCell": 1.5,
+  "preservedGroundRegistration": true,
+  "bodyMatches": [
+    [
+      162.5,
+      133.5,
+      0.8179652690887451
+    ],
+    [
+      158.5,
+      132.5,
+      0.8595800399780273
+    ],
+    [
+      150.5,
+      130.5,
+      0.8806365132331848
+    ],
+    [
+      160.5,
+      130.5,
+      0.8609577417373657
+    ],
+    [
+      154.5,
+      132.5,
+      0.8370224833488464
+    ],
+    [
+      154.5,
+      130.5,
+      0.7797528505325317
+    ],
+    [
+      154.5,
+      133.5,
+      0.8211177587509155
+    ],
+    [
+      162.5,
+      132.5,
+      0.8489705324172974
+    ]
+  ],
+  "runtime": {
+    "frameSize": 256,
+    "viewSize": 256,
+    "pivotX": 131.25,
+    "pivotY": 220.81,
+    "groundRadiusX": 0.401734,
+    "groundRadiusY": 0.028902,
+    "registrationScale": 1,
+    "cyclesPerCell": 1.5,
+    "frameGeometry": {
+      "0": {
+        "pivotX": 132.25,
+        "pivotY": 221.31
+      },
+      "1": {
+        "pivotX": 132.25,
+        "pivotY": 221.06
+      },
+      "2": {
+        "pivotX": 128.25,
+        "pivotY": 220.31
+      },
+      "3": {
+        "pivotX": 134.25,
+        "pivotY": 220.31
+      },
+      "4": {
+        "pivotX": 129.75,
+        "pivotY": 221.81
+      },
+      "5": {
+        "pivotX": 131.25,
+        "pivotY": 219.56
+      },
+      "6": {
+        "pivotX": 129.25,
+        "pivotY": 221.81
+      },
+      "7": {
+        "pivotX": 133.25,
+        "pivotY": 220.31
+      }
+    }
+  },
+  "result": "Original idle body landmark / one shared strip scale; authored motion retained."
+}
