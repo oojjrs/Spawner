@@ -77,13 +77,11 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
   }
   const assetFiles = new Map([...assets].map(([name, bytes]) => [name,
     createHash("sha256").update(bytes).digest("hex") + "." + name.split(".").at(-1)]));
-  // Ship revised sprites with the Site so source updates reach production
-  // together without requiring a separate asset CDN publication.
-  const localAssets = new Set(["DesignAssets/Welcome/spore-jump.webp", "DesignAssets/Welcome/pebble-jump.webp", ...["charge", "muzzle", "projectile", "impact"].map(stage => "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/" + stage + "-atlas.webp")]);
+  if (!/^[a-f0-9]{40}$/.test(revision)) throw new Error("게시된 소스 커밋이 필요합니다.");
+  const sourceAssetBase = "https://raw.githubusercontent.com/oojjrs/Spawner/" + revision + "/";
   const publishedAssets = execFileSync("git", ["show", "HEAD:dist/client/assets.js"], { cwd: destination, encoding: "utf8", maxBuffer: 128 * 1024 * 1024 });
-  for (const [name, file] of assetFiles) if (!publishedAssets.includes(assetBase + file)) localAssets.add(name);
   const assetPaths = new Map([...assetFiles].map(([name, file]) => [name,
-    localAssets.has(name) ? "./welcome-assets/" + file : assetBase + file]));
+    publishedAssets.includes(assetBase + file) ? assetBase + file : sourceAssetBase + name.split("/").map(encodeURIComponent).join("/")]));
   const referencedLocalAssets = new Set([...assetPaths.values()].filter(value => value.startsWith("./welcome-assets/"))
     .map(value => value.slice("./welcome-assets/".length).toLowerCase()));
   const localAssetDirectory = resolve(output, "welcome-assets");
@@ -98,7 +96,6 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
       unlinkSync(target);
     }
   }
-  for (const name of localAssets) if (assets.has(name)) write("welcome-assets/" + assetFiles.get(name), assets.get(name));
   write("index.html", html);
   for (const [name, page] of pages) write(name, page);
   function documentSource(source) {

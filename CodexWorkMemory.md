@@ -1,3 +1,15 @@
+## asset-sync-compact-ready-20261107-01a1b40c
+- 기록·검수 시각 2026-11-07T14:12:58+09:00; 기록·배포복구·검수 Codex /root, 공개배포 결정 사용자; 출처 채팅01a1b40c-e3c8-73a0-a37e-e4d6f5a71267 및 실제Sites helper/브라우저/원격응답.
+- GitHub public 저장소064aa7e의새포자탄생이미지는HTTP200·image/png·309687바이트로응답했다. 같은커밋고정URL로새애셋을전달하도록hosting 준비기1파일을수정했다. 기존CDN참조는유지하며복원한기획서와동적16자산은사이트에포함한다. Sites재개원격은최초ebaf0b3그대로이며실패commit aa43980은기존작업폴더에보존했다.
+- 최종패키지91파일·13524091바이트. 11개전체실제브라우저화면(웰컴입장·게임진입·전투·속성·기획서wrapper+7하위페이지)과몽돌채집공격·포자칼날탄생·흙멧돼지이동미리보기를새URL로다시확인했다. pageerror/404/깨진이미지모두0, 부족4종선택/웰컴7외형등록정상. 준비기구문과UTF8NoBom/CRLF검사통과.
+- 요청·실패·복구판단·수정·검수·남은단계를대조했다. 이번추가커밋은hosting/prepare-site.mjs와본작업관련두메모리기록만포함한다. 다른채팅의추가전투수정과메모리는로컬에보존한다. 다음은이추가커밋push/readback과공식helper소스push/package/save/deploy다. 아직Sites배포성공이아니다.
+
+## asset-sync-publication-size-20261107-01a1b40c
+- 기록 시각 2026-11-07T14:09:20+09:00; 기록·배포복구판단 Codex /root; 공개배포 결정 사용자; 출처 본채팅01a1b40c-e3c8-73a0-a37e-e4d6f5a71267의공식Sites helper실행·GitHub조회결과.
+- main151경로커밋064aa7ea916d9daa323b60133c237f0230beef39을origin/main에push했고ls-remote/시작main정확일치를확인했다. 작업중별도채팅이combat-detail-vfx.mjs/server attack·combat및메모리를추가수정했음을감지했으며덮어쓰지않고보존했다. 기본index는비어있다.
+- Sites공식helper는기획서이미지까지포함한1056경로소스커밋aa43980의push에서HTTP413요청크기제한으로실패했다. 로컬source와commit은보존했고배포성공이아니다. GitHub전용Spawner저장소는public이며같은업로드커밋의raw이미지응답을확인중이다.
+- 공개전용저장소의이미지는이미요청대로push됐으므로, 기존CDN이미지는유지하고새이미지는동일프로젝트의커밋고정raw URL로전달한다. 동적경로가필요한자원/지형16파일은Sites에유지한다. 다른저장소spawner-assets에는push하지않는다. 실패한로컬Sitescommit은보존한채공식helper로같은Site원격을새작업폴더에서열어작은소스를재준비한다. 별도브랜치/강제push/공개범위변경은없다. 이실패복구에필요한hosting단일파일과관련메모리만추가commit한다.
+
 ## asset-sync-ready-20261107-01a1b40c
 - 기록·최종 검수 시각 2026-11-07T14:03:22+09:00; 기록·통합검수·Git판단 Codex /root; 최신 애셋 반영·배포 결정 사용자; 출처 채팅 01a1b40c-e3c8-73a0-a37e-e4d6f5a71267, 담당3인의 최종 인계와 메인의 실제 명령/브라우저 결과. 원 사용자 발언 정확시각·항목ID 불명.
 - 구현 완료: 기획서216동작셀 대조(176채움·36의도적빈칸·4작업재사용), 최신90비탄생동작과 기준8개 갱신, 기존 제작본 기반 탄생20종 연결. 이미지59개·새local wrapper59개 및 영구 출처/해시 manifest2개를 등록했다. bean seed 기존renderer 재생은30프레임이며 앞선12개/두구간 기록을 대체한다. 포자 채집 줄기도 기존scene에서 함께분리했다. 독립포즈 새생성이나 폐기구형모듈 복원은없다.
