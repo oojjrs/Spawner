@@ -97,7 +97,7 @@
       "gifSHA256": "42d92751141cdd998adf255f1ed50dc3a3832f91dc85ac2f50302bec70a3af08",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": 1,
+      "sourceFacing": "right",
       "sourceFacingLabel": "right",
       "referenceGeometry": {
         "alphaThreshold": 16,
@@ -112,10 +112,11 @@
         "referenceLength": 259,
         "supportMethod": "Mean x of alpha>=16 pixels in bottom eight pixel rows; lower exclusive alpha bound y.",
         "referenceMethod": "Maximum width/height of exact approved neutral whole-character alpha>=16 bounds. Fixed reference for all actions; not each pose bounding box.",
-        "sourceFacing": 1,
-        "sourceFacingLabel": "right"
+        "sourceFacing": "right",
+        "sourceFacingSign": 1
       },
-      "canonicalCoreLength": 204.8
+      "canonicalCoreLength": 204.8,
+      "sourceFacingSign": 1
     },
     "walk": {
       "tribe": "bean",
@@ -167,7 +168,7 @@
       "gifSHA256": "9e61cca6aaae74acc6c7aeaedf29efb0dd317607418f70e4a95b700536741c42",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": 1,
+      "sourceFacing": "right",
       "sourceFacingLabel": "right",
       "referenceGeometry": {
         "alphaThreshold": 16,
@@ -182,10 +183,11 @@
         "referenceLength": 259,
         "supportMethod": "Mean x of alpha>=16 pixels in bottom eight pixel rows; lower exclusive alpha bound y.",
         "referenceMethod": "Maximum width/height of exact approved neutral whole-character alpha>=16 bounds. Fixed reference for all actions; not each pose bounding box.",
-        "sourceFacing": 1,
-        "sourceFacingLabel": "right"
+        "sourceFacing": "right",
+        "sourceFacingSign": 1
       },
-      "canonicalCoreLength": 204.8
+      "canonicalCoreLength": 204.8,
+      "sourceFacingSign": 1
     },
     "hurt": {
       "tribe": "bean",
@@ -229,7 +231,7 @@
       "gifSHA256": "20316c0d04fc268c2907f8590a78670ab62462304d332ad7c8e44fb2f54a73db",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": 1,
+      "sourceFacing": "right",
       "sourceFacingLabel": "right",
       "referenceGeometry": {
         "alphaThreshold": 16,
@@ -244,10 +246,11 @@
         "referenceLength": 259,
         "supportMethod": "Mean x of alpha>=16 pixels in bottom eight pixel rows; lower exclusive alpha bound y.",
         "referenceMethod": "Maximum width/height of exact approved neutral whole-character alpha>=16 bounds. Fixed reference for all actions; not each pose bounding box.",
-        "sourceFacing": 1,
-        "sourceFacingLabel": "right"
+        "sourceFacing": "right",
+        "sourceFacingSign": 1
       },
-      "canonicalCoreLength": 204.8
+      "canonicalCoreLength": 204.8,
+      "sourceFacingSign": 1
     },
     "birth": {
       "tribe": "bean",
@@ -408,7 +411,7 @@
       "previewLoop": true,
       "previewLoopCount": 0,
       "referenceLength": 40.46875,
-      "sourceFacing": 1,
+      "sourceFacing": "right",
       "sourceFacingLabel": "right",
       "referenceGeometry": {
         "alphaThreshold": 16,
@@ -423,8 +426,8 @@
         "referenceLength": 259,
         "supportMethod": "Mean x of alpha>=16 pixels in bottom eight pixel rows; lower exclusive alpha bound y.",
         "referenceMethod": "Maximum width/height of exact approved neutral whole-character alpha>=16 bounds. Fixed reference for all actions; not each pose bounding box.",
-        "sourceFacing": 1,
-        "sourceFacingLabel": "right"
+        "sourceFacing": "right",
+        "sourceFacingSign": 1
       },
       "canonicalCoreLength": 204.8,
       "planningPivotX": 256,
@@ -448,7 +451,8 @@
         "withinResamplingTolerance": true,
         "actualRasterReferenceLength": 41,
         "note": "Runtime uses transformed continuous reference to avoid rounding size jumps. Raster bounding box differs by at most anti-alias/resampling edge tolerance."
-      }
+      },
+      "sourceFacingSign": 1
     },
     "death": {
       "tribe": "bean",
@@ -492,7 +496,7 @@
       "gifSHA256": "2895e266e6655d33f8f868a4fa39b3e1952b7f7eb69c6e8d72e826895ee00f48",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": 1,
+      "sourceFacing": "right",
       "sourceFacingLabel": "right",
       "referenceGeometry": {
         "alphaThreshold": 16,
@@ -507,10 +511,11 @@
         "referenceLength": 259,
         "supportMethod": "Mean x of alpha>=16 pixels in bottom eight pixel rows; lower exclusive alpha bound y.",
         "referenceMethod": "Maximum width/height of exact approved neutral whole-character alpha>=16 bounds. Fixed reference for all actions; not each pose bounding box.",
-        "sourceFacing": 1,
-        "sourceFacingLabel": "right"
+        "sourceFacing": "right",
+        "sourceFacingSign": 1
       },
-      "canonicalCoreLength": 204.8
+      "canonicalCoreLength": 204.8,
+      "sourceFacingSign": 1
     }
   },
   "rangedBodyOnly": false,
@@ -580,7 +585,7 @@
     "referenceLength": 259,
     "supportMethod": "Mean x of alpha>=16 pixels in bottom eight pixel rows; lower exclusive alpha bound y.",
     "referenceMethod": "Maximum width/height of exact approved neutral whole-character alpha>=16 bounds. Fixed reference for all actions; not each pose bounding box.",
-    "sourceFacing": 1,
-    "sourceFacingLabel": "right"
+    "sourceFacing": "right",
+    "sourceFacingSign": 1
   }
 }

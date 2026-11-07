@@ -1,0 +1,62 @@
+{
+  "tribe": "bean",
+  "form": "antenna",
+  "newArtworkCreated": false,
+  "assets": [
+    {
+      "action": "idle",
+      "source": "AnimationCandidates/bean-antenna-approved-existing-v1/bean-antenna-idle-approved-sheet.png",
+      "sha256": "915aea163ca6c43656b30232dbfddf8fb6f5ed5c610213f9e5f1ffe02526f808",
+      "originalApprovedSheetHashMatches": true,
+      "frameCount": 136,
+      "durationMs": 6800
+    },
+    {
+      "action": "walk",
+      "source": "AnimationCandidates/bean-antenna-approved-existing-v1/bean-antenna-walk-approved-sheet.png",
+      "sha256": "b20d19a21c4be98f2d3837ff583a4d031e251167810822a8a1ad05e2209e2146",
+      "originalApprovedSheetHashMatches": true,
+      "frameCount": 25,
+      "durationMs": 1000
+    },
+    {
+      "action": "death",
+      "source": "AnimationCandidates/bean-antenna-approved-existing-v1/bean-antenna-death-approved-sheet.png",
+      "sha256": "e61fb9352220003b33f2193f70a2811449593515d453db67ba295b11739d787d",
+      "originalApprovedSheetHashMatches": true,
+      "frameCount": 16,
+      "durationMs": 2260
+    },
+    {
+      "action": "birth",
+      "source": "AnimationCandidates/bean-antenna-birth-fullscene-v1-20261107/bean-antenna-birth-complete-v1-sheet.png",
+      "sha256": "3cf740f3b7cc0e22392f2b9bb079e08da9fb07d658cf87fcd891d217b8fc2fb1",
+      "frameCount": 117,
+      "durationMs": 4500,
+      "reuseExistingApprovedBirth": true
+    },
+    {
+      "action": "hurt",
+      "source": "DesignAssets/Animations/BeanHeldHurtV1/antenna.webp",
+      "sha256": "a6ea59ca582697bef68d5543e941617eac3f2d76d29201dde3dfcc7bc627c186",
+      "atlasSize": [
+        1360,
+        2064
+      ],
+      "frameWidth": 340,
+      "frameHeight": 344,
+      "columns": 4,
+      "frameCount": 24,
+      "posesPerHitSide": 12,
+      "metadata": "client/bean-held-hurt-assets.mjs",
+      "reuseExistingRuntimeHeldHurt": true
+    }
+  ],
+  "targetedRuntimeTest": {
+    "command": "node --test client/bean-held-hurt.test.mjs",
+    "passed": 8,
+    "failed": 1,
+    "failure": "actual laboratory stage draws held body through overlapping attacks, refresh and expiry: base 0 !== 1, line83",
+    "note": "Shared runtime was not edited by this asset worker. Failure sent to integration owner; no full runtime pass claimed."
+  }
+}

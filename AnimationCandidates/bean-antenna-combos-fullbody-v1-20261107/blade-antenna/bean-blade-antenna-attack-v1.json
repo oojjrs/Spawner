@@ -161,7 +161,7 @@
       "exactApprovedNeutral": true
     }
   ],
-  "contactMs": 300,
+  "contactMs": 350,
   "verification": {
     "frameCount": 16,
     "durationMs": 1000,
@@ -191,5 +191,7 @@
   "status": "ready-for-authorized-publication",
   "previewLoop": true,
   "sourceMask": "05",
-  "sourceSha256": "783bed93d96a0eab8e30139e6fb296414359f8b1519177b813e3d6e0edc6536d"
+  "sourceSha256": "783bed93d96a0eab8e30139e6fb296414359f8b1519177b813e3d6e0edc6536d",
+  "hitTimeMs": 350,
+  "hitFrameIndex": 6
 }

@@ -1,0 +1,432 @@
+[
+  {
+    "form": "blade-secretion-carapace-antenna",
+    "action": "idle",
+    "frameCount": 64,
+    "webpDecodedFrameCount": 9,
+    "durationMs": 6400,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-secretion-carapace-antenna",
+    "action": "walk",
+    "frameCount": 24,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 960,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-secretion-carapace-antenna",
+    "action": "attack",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 1000,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-secretion-carapace-antenna",
+    "action": "ranged-attack",
+    "frameCount": 24,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 600,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-secretion-carapace-antenna",
+    "action": "hurt",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 760,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-secretion-carapace-antenna",
+    "action": "birth",
+    "frameCount": 117,
+    "webpDecodedFrameCount": 111,
+    "durationMs": 4500,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-secretion-carapace-antenna",
+    "action": "death",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 2260,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-secretion-antenna",
+    "action": "idle",
+    "frameCount": 64,
+    "webpDecodedFrameCount": 9,
+    "durationMs": 6400,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-secretion-antenna",
+    "action": "walk",
+    "frameCount": 24,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 960,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-secretion-antenna",
+    "action": "attack",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 1000,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-secretion-antenna",
+    "action": "ranged-attack",
+    "frameCount": 24,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 600,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-secretion-antenna",
+    "action": "hurt",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 760,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-secretion-antenna",
+    "action": "birth",
+    "frameCount": 117,
+    "webpDecodedFrameCount": 111,
+    "durationMs": 4500,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-secretion-antenna",
+    "action": "death",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 2260,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "secretion-antenna",
+    "action": "idle",
+    "frameCount": 64,
+    "webpDecodedFrameCount": 9,
+    "durationMs": 6400,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "secretion-antenna",
+    "action": "walk",
+    "frameCount": 24,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 960,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "secretion-antenna",
+    "action": "ranged-attack",
+    "frameCount": 24,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 600,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "secretion-antenna",
+    "action": "hurt",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 760,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "secretion-antenna",
+    "action": "birth",
+    "frameCount": 117,
+    "webpDecodedFrameCount": 111,
+    "durationMs": 4500,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "secretion-antenna",
+    "action": "death",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 2260,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "carapace-antenna",
+    "action": "idle",
+    "frameCount": 64,
+    "webpDecodedFrameCount": 9,
+    "durationMs": 6400,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "carapace-antenna",
+    "action": "walk",
+    "frameCount": 24,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 960,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "carapace-antenna",
+    "action": "hurt",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 760,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "carapace-antenna",
+    "action": "birth",
+    "frameCount": 117,
+    "webpDecodedFrameCount": 111,
+    "durationMs": 4500,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "carapace-antenna",
+    "action": "death",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 2260,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "secretion-carapace-antenna",
+    "action": "idle",
+    "frameCount": 64,
+    "webpDecodedFrameCount": 9,
+    "durationMs": 6400,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "secretion-carapace-antenna",
+    "action": "walk",
+    "frameCount": 24,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 960,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "secretion-carapace-antenna",
+    "action": "ranged-attack",
+    "frameCount": 24,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 600,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "secretion-carapace-antenna",
+    "action": "hurt",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 760,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "secretion-carapace-antenna",
+    "action": "birth",
+    "frameCount": 117,
+    "webpDecodedFrameCount": 111,
+    "durationMs": 4500,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "secretion-carapace-antenna",
+    "action": "death",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 2260,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-carapace-antenna",
+    "action": "idle",
+    "frameCount": 64,
+    "webpDecodedFrameCount": 9,
+    "durationMs": 6400,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-carapace-antenna",
+    "action": "walk",
+    "frameCount": 24,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 960,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-carapace-antenna",
+    "action": "attack",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 1000,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-carapace-antenna",
+    "action": "hurt",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 760,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-carapace-antenna",
+    "action": "birth",
+    "frameCount": 117,
+    "webpDecodedFrameCount": 111,
+    "durationMs": 4500,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-carapace-antenna",
+    "action": "death",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 2260,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-antenna",
+    "action": "idle",
+    "frameCount": 64,
+    "webpDecodedFrameCount": 9,
+    "durationMs": 6400,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-antenna",
+    "action": "walk",
+    "frameCount": 24,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 960,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-antenna",
+    "action": "attack",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 1000,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-antenna",
+    "action": "hurt",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 760,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-antenna",
+    "action": "birth",
+    "frameCount": 117,
+    "webpDecodedFrameCount": 111,
+    "durationMs": 4500,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  },
+  {
+    "form": "blade-antenna",
+    "action": "death",
+    "frameCount": 16,
+    "webpDecodedFrameCount": 8,
+    "durationMs": 2260,
+    "webpExactVisibleRGBAAtEveryTimelineSample": true,
+    "webpLoop": 0,
+    "allFileHashesVerified": true
+  }
+]
