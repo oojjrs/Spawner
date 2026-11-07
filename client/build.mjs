@@ -70,8 +70,18 @@ function bundle(entries) {
   return chunks.join("\n");
 }
 
+function readDesignSection(path) {
+  return readFileSync(path, "utf8").split(/\r?\n/).filter(line => line.startsWith('"'))
+    .map(line => JSON.parse(line.replace(/ \+$/, ""))).join("");
+}
+
+function writeDesignSection(path, content) {
+  writeGenerated(path, "document.write(\n" + content.match(/[^\n]*\n|[^\n]+$/g)
+    .map(line => JSON.stringify(line)).join(" +\n") + "\n);\n");
+}
+
 function writeDesignResources() {
-  const path = resolve(root, "Design.html");
+  const path = resolve(root, "Design/codex-food.html");
   const original = readFileSync(path, "utf8");
   const model = `(() => {\n${bundle(["client/harvest-assets.mjs", "client/resource-art.mjs"])}\nglobalThis.SpawnerDesignResources = { RESOURCE_TYPES: ${JSON.stringify(RESOURCE_TYPES)}, ...modules["client/harvest-assets.mjs"], ...modules["client/resource-art.mjs"] };\n})();`;
   const updated = original.replace(/(<script id="design-resource-model"[^>]*>)[\s\S]*?(<\/script>)/,
@@ -85,8 +95,8 @@ if (process.argv.includes("--design-resources-only")) {
 }
 
 function writeDesignWorld() {
-  const path = resolve(root, "Design.html");
-  const original = readFileSync(path, "utf8");
+  const path = resolve(root, "Design/sections/world-map.js");
+  const original = readDesignSection(path);
   let design = original;
   if (!design.includes('<script id="design-world-model"')) return;
   const model = `(() => {\n${bundle(["server/map.mjs","server/nests.mjs","server/attributes.mjs","server/tribe-production.mjs","server/conquest-economy.mjs"])}\nconst map = modules["server/map.mjs"];\nglobalThis.SpawnerDesignWorld = { ...map, ...modules["server/conquest-pacing.mjs"], ...modules["server/nests.mjs"], ...modules["server/attributes.mjs"], ...modules["server/tribe-production.mjs"], ...modules["server/conquest-economy.mjs"], ENCOUNTER_PLANS:map.ENCOUNTER_PLANS.map(modules["server/conquest-pacing.mjs"].conquestEncounterPlan), generateWorld: (seed, onProgress) => map.generateMapWorld(seed, onProgress, undefined, true) };\n})();`;
@@ -98,7 +108,7 @@ function writeDesignWorld() {
   if (design.includes('id="conquest-rules"')) design = design.replace(/<table[^>]*id="conquest-rules"[^>]*>[\s\S]*?<\/table>/,values);
   else design = design.replace('<details class="map-encounter-rules" id="world-encounter-rules">',values + '\n<details class="map-encounter-rules" id="world-encounter-rules">');
   const updated = design.replace(/(<script id="design-world-model"[^>]*>)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\n" + model + "\n" + end).replace(/\r?\n/g, "\r\n");
-  if (updated !== original) writeGenerated(path, updated);
+  if (updated !== original) writeDesignSection(path, updated);
 }
 
 if (process.argv.includes("--design-world-only")) {
@@ -160,8 +170,10 @@ const content = `(() => {\n${browser}\nconst workerSource = ${JSON.stringify(wor
 writeGenerated(resolve(root, "client/runtime.js"), content);
 if (process.argv.includes("--runtime-only")) process.exit(0);
 if (!process.argv.includes("--preserve-design")) {
-const designPath = resolve(root, "Design.html");
-let design = readFileSync(designPath, "utf8");
+for (const designName of ["Design/sections/terrain-floors.js", "Design/sections/terrain-objects.js"]) {
+const designPath = resolve(root, designName);
+let design = readDesignSection(designPath);
+const originalDesign = design;
 const terrainTable = design.match(/<table[^>]*aria-label="지형 바닥"[^>]*>[\s\S]*?<\/table>/)?.[0];
 if (terrainTable) {
   let table = terrainTable.replace(/<thead>[\s\S]*?<\/thead>/, '<thead><tr><th scope="col">지형</th><th scope="col">바닥</th><th scope="col">이동 효과</th><th scope="col">발견 가능한 자원</th></tr></thead>');
@@ -182,14 +194,15 @@ if (terrainObjects) design = design.replace(terrainObjects, terrainObjects.repla
   const hazard = HAZARD_CODEX.find(hazard => hazard.name === name);
   return hazard ? row.slice(0, row.lastIndexOf('<td>')) + '<td>' + hazard.description + '</td></tr>' : row;
 }));
-if (design !== readFileSync(designPath, "utf8")) writeGenerated(designPath, design);
-writeDesignWorld();
-writeDesignResources();
+if (design !== originalDesign) writeDesignSection(designPath, design);
 if (design.includes('<script id="world-model">')) {
   const model = `(() => {\n${bundle(["server/world.mjs"])}\nglobalThis.SpawnerWorld = { ...modules["server/world.mjs"], ...modules["server/burrows.mjs"] };\n})();`;
   const updated = design.replace(/(<script id="world-model">)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\n" + model + "\n" + end).replace(/\r?\n/g, "\r\n");
-  if (updated !== design) writeGenerated(designPath, updated);
+  if (updated !== design) writeDesignSection(designPath, updated);
 }
+}
+writeDesignWorld();
+writeDesignResources();
 }
 const localAssets = new Set(Object.values(assets));
 for (const name of ["client/game.js", "client/audio.js", "client/combat-audio.js", "client/movement-audio.js"]) {

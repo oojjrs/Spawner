@@ -69,7 +69,7 @@
   }
 
   async function startMap() {
-    if (starting || globalThis.SpawnerDesignWorld || activePage()?.id !== 'world') return;
+    if (starting || globalThis.SpawnerDesignWorld || activePage()?.id !== 'world' || !document.getElementById('design-world-model')) return;
     starting = true;
     const root = document.getElementById('world-map-preview'), progress = document.getElementById('map-progress');
     progress.hidden = false;
