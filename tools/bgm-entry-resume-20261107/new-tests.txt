@@ -1,0 +1,24 @@
+✔ a later touch retries while the entry resume promise remains unresolved (9.477873ms)
+✔ running context is not held behind an obsolete pending entry resume (2.301485ms)
+✔ hidden, muted, inactive state blocks retry and music (5.122308ms)
+✔ hidden during resume prevents music after resolution (1.992859ms)
+✔ muted during resume prevents music after resolution (1.981131ms)
+✔ inactive during resume prevents music after resolution (2.275427ms)
+✔ repeated activated touches do not restart BGM or add a context (3.724521ms)
+✔ a closed context is not resumed (3.699403ms)
+✔ media autoplay rejection remains retryable without changing settings (5.333386ms)
+✔ peaceful game entry and combat BGM selection are unchanged (2.366792ms)
+✔ late rejection of the old seed does not disable a successful user retry (1.978968ms)
+✔ old seed rejection during a newer pending resume cannot disable recovery (1.94005ms)
+✔ later gesture B can succeed without being disabled by gesture A's late rejection (2.163921ms)
+✔ older gesture rejection cannot disable a newer still-pending gesture (2.079296ms)
+✔ a rejected resume cannot disable a context already made running by another attempt (2.181677ms)
+✔ the current failed resume still surfaces failure when no attempt has recovered (3.056361ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 131.912479

@@ -35,6 +35,7 @@
     entryAudio?.cleanup?.();
     let context = null;
     let entryResume = entryAudio?.resumed || null;
+    let resumeAttempt = 0;
     let worldGain = null;
     let welcomeGain = null;
     let worldVolume = 1, combatGeneration = 0;
@@ -182,16 +183,29 @@
       return true;
     }
 
-    async function unlock() {
+    async function unlock(retryEntryResume = false) {
       if (!active || muted || failed || document.hidden) return;
       try {
         if (!initialize()) return;
-        if (entryResume) {
+        // New input supersedes an entry request that may still be waiting for activation.
+        if (retryEntryResume) entryResume = null;
+        if (entryResume && context.state !== "running") {
           const request = entryResume;
-          await request;
-          if (entryResume === request) entryResume = null;
+          try { await request; } catch (error) {
+            if (entryResume !== request) return;
+            throw error;
+          }
+          if (entryResume !== request) return;
+          entryResume = null;
         }
-        if (context.state === "suspended") await context.resume();
+        if (context.state === "suspended") {
+          const attempt = ++resumeAttempt;
+          try { await context.resume(); } catch (error) {
+            if (attempt !== resumeAttempt || context.state === "running") return;
+            throw error;
+          }
+        }
+        if (context.state === "running") entryResume = null;
         if (active && !muted && !document.hidden) music.unlock(context);
         if (!loading) {
           const priority = globalThis.SpawnerWelcomeLoading ? names.filter(name => welcomeNames.has(name)) : names;
@@ -385,19 +399,19 @@
     button.addEventListener("click", () => {
       muted = !muted;
       if (muted) { stop(); stopClick(); music.suspend(); }
-      else { unlock(); playClick(); }
+      else { unlock(true); playClick(); }
       updateButton();
     });
     document.addEventListener("click", event => {
-      unlock();
+      unlock(true);
       const target = event.target.closest?.("button, [role='button']");
       if (!target || target === button || target.matches(":disabled") || target.closest("[aria-disabled='true'], [inert]")) return;
       playClick();
     }, true);
-    document.addEventListener("pointerdown", unlock, true);
+    document.addEventListener("pointerdown", () => unlock(true), true);
     // Touch input gains playback activation on release, after pointerdown.
-    document.addEventListener("pointerup", unlock, true);
-    document.addEventListener("keydown", unlock, true);
+    document.addEventListener("pointerup", () => unlock(true), true);
+    document.addEventListener("keydown", () => unlock(true), true);
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) { stop(); stopClick(); music.suspend(); }
       else unlock();
