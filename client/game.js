@@ -7262,6 +7262,8 @@
     function agentImageSource(agent) {
       // DOM portraits load their source directly; caching a temporary canvas
       // fallback here would leave a cold-loaded design/template looking basic.
+      const dedicated = Spawner.unitActionArtDefinition?.(agent);
+      if (dedicated?.portrait) return assetSource(dedicated.portrait);
       const ranged = Spawner.unitRangedAppearance(agent);
       if (ranged) return assetSource(ranged.idle.image);
       const sprite = agentSprite(agent);

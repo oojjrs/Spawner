@@ -1,0 +1,23 @@
+<!doctype html><meta charset="utf-8"><base href="/"><title>칼날+갑각 통합 검수</title><style>body{background:#e9e4d8;font:16px sans-serif;color:#24372b;margin:20px}main{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}article{background:#faf7ef;border:1px solid #c0bcae;border-radius:12px;overflow:hidden}h2{font-size:13px;margin:8px}canvas{width:100%;height:200px}button{padding:10px;margin:4px}#status{padding:10px}</style><h1>칼날+갑각 · 실제 공통 렌더러</h1><button id="play">재생 / 정지</button><button id="mirror">방향 전환</button><button id="end">동작 마지막</button><div id="status">불러오는 중</div><main></main><script type="module">
+import {createUnitActionArt,unitActionArtDefinition,unitActionArtPose} from './client/unit-action-art.mjs';
+let paused=false,mirror=false,atEnd=false,start=performance.now();
+const make=(w,h)=>Object.assign(document.createElement('canvas'),{width:w,height:h});
+const art=createUnitActionArt(x=>x,make,async path=>{const im=new Image();im.src=path;await im.decode();return im});
+const rows=[];const names={bean:'새싹콩',spore:'포자버섯',pebble:'몽돌',spring:'샘방울'};
+for(const tribe of Object.keys(names)) for(const action of ['idle','walk','attack','hurt','birth','death']){
+const def=unitActionArtDefinition({tribe,attributes:{blade:1,carapace:1}}),clip=def.actions[action],duration=clip.durationMs/1000;
+const agent={tribe,attributes:{blade:1,carapace:1},health:10,mode:'idle',animationStartedAt:0};
+if(action==='walk')Object.assign(agent,{moveStartedAt:0,moveDuration:duration,stepCount:1,moveAnimationStartedAt:0});
+if(action==='attack')agent.attack={startedAt:0,endsAt:duration,mode:'melee'};
+if(action==='hurt')agent.hurtStartedAt=0;
+if(action==='birth')agent.birth={startedAt:0,readyAt:duration};
+if(action==='death')Object.assign(agent,{health:0,diedAt:0});
+const card=document.createElement('article'),h=document.createElement('h2');h.textContent=`${names[tribe]} · ${action} (${clip.frameCount})`;card.append(h);const canvas=make(300,240);card.append(canvas);document.querySelector('main').append(card);rows.push({canvas,agent,clip,action,duration});await art.prepare(agent,0);
+}
+document.querySelector('#status').textContent='24 / 24 동작 로드 완료 · 원거리 없음';
+document.querySelector('#play').onclick=()=>paused=!paused;document.querySelector('#mirror').onclick=()=>mirror=!mirror;document.querySelector('#end').onclick=()=>atEnd=!atEnd;
+function draw(now){if(!paused)for(const {canvas,agent,clip,action,duration} of rows){const ctx=canvas.getContext('2d');ctx.clearRect(0,0,300,240);const time=atEnd?duration-.0001:((now-start)/1000)%duration;let cell=200,x=150,floor=218;
+if(action==='birth'){const scale=Math.min(280/clip.frameSize,200/clip.frameHeight);cell=scale*clip.referenceLength/.7;x=10+clip.pivotX*scale;floor=30+clip.pivotY*scale;if(mirror)x=300-x;}
+art.draw(ctx,agent,time,x,floor,cell,mirror,null);}
+requestAnimationFrame(draw)}requestAnimationFrame(draw);
+</script>

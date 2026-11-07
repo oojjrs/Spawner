@@ -16,7 +16,7 @@ test('only projected canonical pebble blade opts in',()=>{
  assert.ok(pebbleDominantSwingAppearance('pebble',{blade:1}));
  for(const key of ['carapace','antenna','strength','arms','feet','legs','secretion','piercing'])assert.equal(pebbleDominantSwingAppearance('pebble',{blade:1,[key]:1}),false);
  for(const tribe of ['bean','spore','spring'])assert.equal(pebbleDominantSwingAppearance(tribe,{blade:1}),false);
- for(let mask=1;mask<32;mask+=2){const attributes=Object.fromEntries(['blade','carapace','antenna','feet','secretion'].map((k,i)=>[k,(mask>>i)&1]));assert.ok(pebbleDominantSwingAppearance('pebble',unitDisplayAttributes({tribe:'pebble',attributes})));}
+ for(let mask=1;mask<32;mask+=2){const attributes=Object.fromEntries(['blade','carapace','antenna','feet','secretion'].map((k,i)=>[k,(mask>>i)&1]));assert.equal(pebbleDominantSwingAppearance('pebble',unitDisplayAttributes({tribe:'pebble',attributes})), mask !== 3);}
 });
 test('approved source registration is exact and missing parts reject safely',()=>{
  const definition=rig(),im=images(definition);assert.ok(preparePebbleDominantSwing(definition,im));

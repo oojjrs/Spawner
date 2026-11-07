@@ -223,7 +223,13 @@ export function createUnitPresentation(options) {
     let x = topLeft.x + cell / 2, floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
     const animation = unitActionArtPose(agent, state.simSeconds)?.animation;
     const scene = animation?.scene;
-    if (birth?.outlet && scene) {
+    if (birth && animation?.worldTravelIncludedInPixels) {
+      // The complete scene already travels from its nest to the final body.
+      // Anchor that endpoint once instead of adding legacy root travel again.
+      const scale = options.displayScale(agent) || 1;
+      x += (birth.targetX - (renderPosition?.x ?? birth.x)) * cell / scale;
+      floor += (birth.targetY - (renderPosition?.y ?? birth.y)) * cell / scale;
+    } else if (birth?.outlet && scene) {
       const size = unitDisplaySize(agent) / animation.referenceLength;
       const scale = options.displayScale(agent) || 1;
       const facing = unitFrameMirror(animation.sourceFacing, unitFacing(agent)) ? -1 : 1;

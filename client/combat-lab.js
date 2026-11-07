@@ -1,3 +1,4 @@
+import { combatLabPlayable, combatLabAppearance, combatLabWithAppearance } from "./combat-lab-appearances.mjs";
 import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
 import { SIMULATION_STATS, DEFAULT_SIMULATION_RULES, deriveSimulationStats, createSimulationTrial } from "./combat-simulation.mjs";
 import { createCombatStage } from "./combat-stage.mjs";
@@ -74,6 +75,13 @@ for (const side of sides) {
   hud.append(rosterActions);
   const appearance = control(hud, "외형", select(COMBAT_LAB_UNITS.map(unit => [unit.key, unit.name]), builds[side].key));
   appearance.addEventListener("change", () => { rosters[side][selected[side]] = { key: appearance.value }; selectBuild(side); changed(); }); inputs[side].appearance = appearance;
+  const dnaAppearance = control(hud, "DNA 외형", select([["native", "기본"], ["blade-carapace", "칼날+갑각"]], "native"));
+  inputs[side].dnaAppearance = dnaAppearance;
+  dnaAppearance.disabled = !combatLabPlayable(builds[side].key);
+  dnaAppearance.addEventListener("change", () => {
+    rosters[side][selected[side]] = combatLabWithAppearance(builds[side], dnaAppearance.value);
+    selectBuild(side); changed();
+  });
   const gauge = node("div", null, "action-bar"); elements[side + "Gauge"] = node("i"); gauge.append(elements[side + "Gauge"]); hud.append(gauge);
   elements[side + "Reaction"] = node("output", null, "reaction"); hud.append(elements[side + "Reaction"]);
 }
@@ -87,6 +95,8 @@ elements.phase = node("output", null, "phase"); stageFooter.append(actions, elem
 function selectBuild(side) {
   builds[side] = rosters[side][selected[side]];
   inputs[side].appearance.value = builds[side].key;
+  inputs[side].dnaAppearance.value = combatLabAppearance(builds[side]);
+  inputs[side].dnaAppearance.disabled = !combatLabPlayable(builds[side].key);
 }
 function rosterSettings(side) {
   return rosters[side].map((build, index) => ({ ...structuredClone(build), name: (side === "left" ? "왼쪽 " : "오른쪽 ") + (index + 1) }));

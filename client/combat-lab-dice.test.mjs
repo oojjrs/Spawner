@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
+import { combatLabPlayable, combatLabAppearance } from "./combat-lab-appearances.mjs";
 import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
 import { SIMULATION_STATS, deriveSimulationStats } from "./combat-simulation.mjs";
 import { dnaUnitStats } from "../server/dna-unit.mjs";
@@ -22,11 +23,11 @@ for (const file of ["./combat-lab.js", "../Combat.html"]) test(file + " 주사�
       organs: { attack: 1, ranged: 0, heal: 0 } };
     rosters[side] = Array.from({ length: 5 }, (_, slot) => ({ ...structuredClone(profile), key: COMBAT_LAB_UNITS[slot + sideIndex].key }));
     selected[side] = 3; builds[side] = rosters[side][3];
-    inputs[side] = Object.fromEntries([...SIMULATION_STATS.map(stat => stat.key), "attack", "ranged", "heal", "appearance"].map(key => [key, { value: null }]));
+    inputs[side] = Object.fromEntries([...SIMULATION_STATS.map(stat => stat.key), "attack", "ranged", "heal", "appearance", "dnaAppearance"].map(key => [key, { value: null }]));
   }
   let roll, changes = 0;
   const math = Object.create(Math); math.random = () => 0;
-  const scope = { sides, rosters, builds, selected, inputs, COMBAT_LAB_UNITS, SIMULATION_STATS, structuredClone,
+  const scope = { sides, rosters, builds, selected, inputs, COMBAT_LAB_UNITS, SIMULATION_STATS, structuredClone, combatLabPlayable, combatLabAppearance,
     Math: math, elements: {}, stageCenter: null,
     button(parent, label, action) { roll = action; }, changed() { changes++; } };
   runInNewContext(source.slice(helper, helperEnd + 2) + "\n" + source.slice(start, finish + 4), scope);

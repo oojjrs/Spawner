@@ -1,4 +1,4 @@
-import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
+import { unitDisplayAttributes, unitBladeCarapaceAppearance } from "./unit-display-appearance.mjs";
 import { unitDisplaySize, unitFrameMirror } from "./unit-size.mjs";
 import { UNIT_APPEARANCE_LEGACY_VISUAL_KEYS } from "../server/unit-appearance.mjs";
 import { BEAN_HELD_HURT_SOURCES } from "./bean-held-hurt-assets.mjs";
@@ -53,6 +53,7 @@ export function beanHeldHurtAmount(age) {
   return 0;
 }
 export function beanHeldHurtSource(agent) {
+  if (unitBladeCarapaceAppearance(agent)) return null;
   if (!agent || agent.species || (agent.tribe || agent.key || "bean") !== "bean") return null;
   const attributes=unitDisplayAttributes(agent);
   if (UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key=>attributes[key]>0)) return null;

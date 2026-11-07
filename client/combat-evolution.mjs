@@ -14,7 +14,8 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
   const art = createUnitActionArt(assetSource, createSurface, loadImage), prepared = new Set();
   async function prepare(tribe) {
     const key = tribe || "bean";
-    await Promise.all(["blade", "carapace", "secretion"].map(form => art.prepare({ tribe: key, attributes: { [form]: 1 } })));
+    await Promise.all([{ blade: 1 }, { carapace: 1 }, { secretion: 1 }, { blade: 1, carapace: 1 }]
+      .map(attributes => art.prepare({ tribe: key, attributes })));
     prepared.add(key);
   }
   function frame(agent, time) { return art.frame(agent, time); }

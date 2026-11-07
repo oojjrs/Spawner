@@ -12806,6 +12806,594 @@
           512
         ]
       }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/bean/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "224a1f010aa39e72787b2bb172e7e6013f43cca34e955ae564cdd2ab86020661",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/bean/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "9832a560748caa6bf784ed51ad3248749fab02f1d17584223cb12fb0342b4a31",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/bean/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "4be35e0ed1737b76bd470d9e83df47205b55ecfaa8d31291cc8704ef7f95c7e9",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/bean/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "283a651970a25dfa460a970da1d25dd35c4fcacf4010c09adedae93e20cefa29",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/bean/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "f527113df73400868252940985be6dc4a54b57f8b5c0d41b1ef18e22f8ae3f0f",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/bean/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "81830034fd0f5ae571bcff173446892c3bcf6744af8158d65e68a555615305ef",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/bean/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "a85debf844b60efb60f5c713f5e1eab8ccbbcbe574d45e448995e834c38ec1f0",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spore/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "007f9fa60707e73dc658c16585dcef8205d8fb75566c67600787a0895a84b2c8",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spore/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "acf5f4913d4a76240a5fc4cfce61110224d76ca74b282fa297da93736302c145",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spore/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "3cbbe09d3d0a6058072710763bf82006dc703f54d466abbe4d628134deb0cd73",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spore/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "5e27541a49c5d2f007a515f74d20cf5d8cc48da972b728eb15a217120aa3521f",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spore/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "bee95289a86ebe94f5ea186fb2224876e6fb10df11967c88ddfd803f3660b852",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spore/birth.png": {
+      "display": [
+        256,
+        170.666667
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "043b9d2ba78b73121a4cfb2ff664a88fc9d5a606ef28777e31e6f3a77820fea2",
+        "dimensions": [
+          6144,
+          5120
+        ],
+        "frame": [
+          768,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spore/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "a8c9ac8501b435acea375093858b0c7ba6e5f8a922f270f8598da49c59b0b215",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/pebble/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "9358e9b1d5e4f2d739e10df5040cb0088153c0cba887f3526ef92a9b797cf754",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/pebble/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "85b0883617350206165684b12d64dd963479613b1b64e4a8ddb517a4d479651a",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/pebble/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "d5aa9ba25f39f46885ea393e3fbeb78409d879e58a6b60c5df58ccbada045f4e",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/pebble/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "c19781e82ac28f6367a72f96262eacef2b9db84b545f22ab6255b48a6fe7ec78",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/pebble/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "d18b32e8d67c13ab8bbff7415d267d7d5f217b16e9b745a986126b43a8b1f38e",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/pebble/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "2983c85114baf165d73f34c0490d1825cef54e3d7d211fdd16bc3663b6e4d78b",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/pebble/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "1b15b793419cdd8ae39aae5e0cfe433fb10ab66933774d382bea9dde6e27fb1c",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spring/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "c8796ba1d2dd56d691ea7d9544677df52d20c9ab514d3384624dfb024944fcbd",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spring/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "489ca4580cee619b2b240cb884d18dd15942833109181bc6a4e2ccadbc81f15c",
+        "dimensions": [
+          480,
+          480
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spring/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "92ac237517fec337598a22cf918be6d65aed12de2e3b7bdd75509cbe1f6b51b6",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spring/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "89cd8bd2d248e093527c55fa4665dc5464df7e27667def129c615ca2615facde",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spring/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "dc6fb508cc860af9adfe895d4bd53684cdb69d485c5c652c462d80066367b885",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spring/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "92d8a06927fd25fe06d577e9e66770fa7d7a7defa422b13b62576e81392041fd",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/BladeCarapaceV1/spring/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "98e9fa905a5498ef509237a29315ac2b2ff6f33f0ba9eea7a4788bd204724746",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
     }
   }
 }

@@ -30,7 +30,7 @@ function design(ids) {
   return dna;
 }
 
-test("all 128 current trait combinations deterministically collapse to exactly 24 display forms", () => {
+test("all 128 current trait combinations deterministically collapse to exactly 28 display forms", () => {
   const forms = new Set();
   for (const tribe of UNIT_APPEARANCE_TRIBES) {
     const groups = new Map();
@@ -42,9 +42,9 @@ test("all 128 current trait combinations deterministically collapse to exactly 2
       assert.deepEqual(attributes, attributesFor(actual));
       forms.add(tribe + "/" + mask); groups.set(mask, (groups.get(mask) || 0) + 1);
     }
-    assert.deepEqual(UNIT_DISPLAY_MASKS.map(mask => groups.get(mask)), [1, 16, 8, 4, 2, 1]);
+    assert.deepEqual(UNIT_DISPLAY_MASKS.map(mask => groups.get(mask)), [1, 15, 8, 4, 2, 1, 1]);
   }
-  assert.equal(forms.size, 24); assert.equal(UNIT_DISPLAY_FORM_COUNT, 24);
+  assert.equal(forms.size, 28); assert.equal(UNIT_DISPLAY_FORM_COUNT, 28);
   for (const invalid of [null, undefined, NaN, -1, 32, .5]) assert.equal(unitDominantAppearanceMask(invalid), null);
 });
 
@@ -73,13 +73,13 @@ test("snapshotted appearance and historical retired-organ rigs keep their compat
   assert.deepEqual(unitDisplayAttributesFrom({ legs: 3, dnaGather: true, healing: 2 }), { feet: 1, dnaGather: true, healing: 2 });
 });
 
-test("production inventory has 24 targets, keeps archival 128 sources and never upgrades readiness", () => {
+test("production inventory has 28 targets, keeps archival 128 sources and never upgrades readiness", () => {
   const inventory = unitAppearanceInventory();
-  assert.equal(inventory.length, 24); assert.equal(unitAppearanceInventory({ includeLegacyCombinations: true }).length, 128);
+  assert.equal(inventory.length, 28); assert.equal(unitAppearanceInventory({ includeLegacyCombinations: true }).length, 128);
   assert.equal(inventory.filter(row => row.worldReady).length, 0);
   assert.ok(inventory.find(row => row.key === "bean/01").missingActions.includes("ranged"));
   assert.equal(unitDisplayAbilityMask(1), 31); assert.equal(unitDisplayAbilityMask(16), 30);
-  assert.equal(unitDisplayAbilityMask(3), null);
+  assert.equal(unitDisplayAbilityMask(3), 3);
 });
 
 test("a shared blade body requires hidden ranged actions and retains true melee/ranged clocks", () => {
