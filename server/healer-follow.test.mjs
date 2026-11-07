@@ -14,15 +14,15 @@ injured.x=53;injured.health=50;retreat.x=50;retreat.y=51;retreat.health=10;retre
 for(let y=45;y<60;y++)for(let x=45;x<60;x++)game.decisionSnapshot().state.explored.add(y*80+x);
 return {game,healer,injured,retreat};
 }
-test('healer ignores retreating allies when choosing a visible wounded ally to approach',()=>{
+test('retired healer does not follow a visible wounded ally',()=>{
  const {game,healer}=fixture();game.tick(.25);
- assert.deepEqual([healer.x,healer.y],[51,50]);
+ assert.deepEqual([healer.x,healer.y],[50,50]);
 });
 test('healer does not acquire a wounded ally outside its antenna vision',()=>{
  const {game,healer}=fixture();healer.stats.vision=1;game.tick(.25);
  assert.deepEqual([healer.x,healer.y],[50,50]);
 });
-test('healer stops within healing range and heals without moving closer',()=>{
+test('retired healer stays still without healing a nearby ally',()=>{
  const {game,healer,injured}=fixture();injured.x=52;game.tick(.25);
- assert.deepEqual([healer.x,healer.y],[50,50]);assert.equal(injured.health,51);
+ assert.deepEqual([healer.x,healer.y],[50,50]);assert.equal(injured.health,50);
 });

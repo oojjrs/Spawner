@@ -43,11 +43,11 @@ test("ranged shot hits outside contact after travel and spends one shared cycle"
   assert.equal(dnaAttackMode(stats(["secretion"]),0),"ranged");
 });
 
-test("support heals a different ally while its ranged attack is running",()=>{
+test("retired support genes do not heal allies while ranged attacks keep running",()=>{
   const f=fixture(["healer","secretion"]); f.source.health=5; f.combat.update(f.source,0);
-  assert.equal(f.ally.health,51); assert.equal(f.source.health,5); assert.equal(f.source.attack.attackMode,"ranged");
-  f.combat.update(f.source,1); assert.equal(f.ally.health,51);
-  f.combat.update(f.source,2); assert.equal(f.ally.health,52);
+  assert.equal(f.ally.health,50); assert.equal(f.source.health,5); assert.equal(f.source.attack.attackMode,"ranged");
+  f.combat.update(f.source,1); assert.equal(f.ally.health,50);
+  f.combat.update(f.source,2); assert.equal(f.ally.health,50);
 });
 
 test("dead or hidden projectile participants cancel damage",()=>{

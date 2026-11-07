@@ -31,17 +31,17 @@ test("physical organ copies preserve basic role throughput without extra hits or
   assert.equal(gather.capacity,6);assert.equal(gather.harvest,6);assert.equal(gather.harvestTime,4);assert.equal(gather.loadSpeed,75);assert.equal(gather.health,10);
   assert.equal(blade.meleePower,12);assert.equal(blade.meleeSpeed,.5);assert.equal(blade.hits,1);assert.equal(blade.rangedPower,0);
   assert.ok(Math.abs(ranged.rangedPower-8.4)<1e-9);assert.equal(ranged.rangedSpeed,.5);assert.equal(ranged.hits,1);assert.equal(ranged.meleePower,0);
-  assert.equal(antenna.vision,7);assert.equal(healer.healerCount,6);
+  assert.equal(antenna.vision,7);assert.equal(healer.healerCount,0);assert.equal(healer.healer,false);assert.equal(healer.healPower,0);
   const capped=M.stats(Array.from({length:20},()=>piece("antenna")));assert.equal(capped.vision,12);
 });
 
-test("pooled healer copies spend remaining budget across injured allies",()=>{
+test("retired healer copies do not heal injured allies even with receiving bonuses",()=>{
   const source={id:"source",team:"a",health:10,stats:{dna:M.stats(Array.from({length:6},()=>piece("healer")))}};
   const first={id:"first",team:"a",health:9,stats:{health:10}},second={id:"second",team:"a",health:95,stats:{health:100}},enemy={id:"enemy",team:"b",health:1,stats:{health:10}};
   const allocations=dnaHealAllocations(source,[source,first,second,enemy],a=>a.team,()=>1);
-  assert.deepEqual(allocations.map(a=>[a.target.id,a.amount]),[["first",1],["second",5]]);
+  assert.deepEqual(allocations.map(a=>[a.target.id,a.amount]),[]);
   first.health=9;first.stats.healing=100;second.health=90;
-  const boosted=dnaHealAllocations(source,[first,second],a=>a.team,()=>1);assert.ok(boosted.every(a=>a.amount<=a.target.stats.health-a.target.health));assert.ok(boosted.reduce((sum,a)=>sum+a.amount,0)>=6);
+  const boosted=dnaHealAllocations(source,[first,second],a=>a.team,()=>1);assert.ok(boosted.every(a=>a.amount<=a.target.stats.health-a.target.health));assert.deepEqual(boosted,[]);
 });
 
 function gameFixture(n){

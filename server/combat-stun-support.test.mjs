@@ -29,18 +29,18 @@ function fixture() {
   return { attacker, healer, ally, combat, events };
 }
 
-test("a melee-stunned healer waits until stun ends without spending its healing cooldown", () => {
+test("retired support stays inactive after melee stun ends", () => {
   const f = fixture();
   f.combat.update(f.healer, .2);
   assert.equal(f.ally.health, 50, "no healing during melee stun");
   assert.equal(f.healer.dnaHealReady, .2, "blocked heal does not spend the next cycle");
   f.combat.update(f.healer, .6);
-  assert.equal(f.ally.health, 51, "healing resumes at the exact stun boundary");
-  assert.equal(f.healer.dnaHealReady, 2.6);
-  assert.equal(f.events.filter(event => event.kind === "heal").length, 1);
+  assert.equal(f.ally.health, 50, "retired healing does not resume");
+  assert.equal(f.healer.dnaHealReady, .2);
+  assert.equal(f.events.filter(event => event.kind === "heal").length, 0);
 });
 
-test("overlapping melee and ranged stun use the later deadline", () => {
+test("retired support remains inactive after both stun deadlines", () => {
   for (const rangedEnd of [.3, .8]) {
     const f = fixture();
     f.healer.dnaStunnedUntil = rangedEnd;
@@ -49,7 +49,7 @@ test("overlapping melee and ranged stun use the later deadline", () => {
     assert.equal(f.ally.health, 50, `no healing before both stuns end (${rangedEnd})`);
     assert.equal(f.healer.dnaHealReady, .2);
     f.combat.update(f.healer, end);
-    assert.equal(f.ally.health, 51);
-    assert.equal(f.healer.dnaHealReady, end + 2);
+    assert.equal(f.ally.health, 50);
+    assert.equal(f.healer.dnaHealReady, .2);
   }
 });

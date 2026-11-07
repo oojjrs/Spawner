@@ -4055,6 +4055,7 @@
           const sinceRelease = state.simSeconds - releaseAt;
           const flight = clamp(sinceRelease / ((delivery.arrivesAt - delivery.startedAt) * 0.76), 0, 1);
           const agent = state.agents.find(candidate => candidate.id === id) || state.rivals.find(candidate => candidate.id === id);
+          if (agent && unitPresentation.hasEmbeddedCargo(agent)) { ctx.restore(); continue; }
           const source = agent || { id };
           const type = delivery.resourceType || "honey-mushrooms";
           const sprite = resourceCarrySprites.get(type);
@@ -5031,6 +5032,7 @@
     }
 
     function drawAgentCarrying(ctx, agent, cell, topLeft, renderPosition) {
+      if (unitPresentation.hasEmbeddedCargo(agent)) return;
       const appearance = Spawner.unitDisplayAttributes(agent), spriteHeight = cell * AGENT_HEIGHT;
       const centerX = topLeft.x + cell / 2, centerY = topLeft.y + cell / 2;
       const bodyPose = agentAppearanceBodyPose(agent, performance.now()), walk = agentWalkPose(agent);

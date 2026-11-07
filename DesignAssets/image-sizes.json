@@ -11507,6 +11507,126 @@
         1,
         1
       ]
+    },
+    "DesignAssets/Animations/GatherWorkV1/bean/harvest.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/GatherWorkV1/bean/carry.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/GatherWorkV1/bean/throw.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/GatherWorkV1/spore/harvest.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/GatherWorkV1/spore/carry.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/GatherWorkV1/spore/throw.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/GatherWorkV1/pebble/harvest.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/GatherWorkV1/pebble/carry.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/GatherWorkV1/pebble/throw.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/GatherWorkV1/spring/harvest.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/GatherWorkV1/spring/carry.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Animations/GatherWorkV1/spring/throw.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
     }
   }
 }

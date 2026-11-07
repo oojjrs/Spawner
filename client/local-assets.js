@@ -659,5 +659,17 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Units/Parts/strength-2.png.js",
   "./client/local-assets/Units/spiny-back-beetle.png.js",
   "./client/local-assets/Units/starter-sprout-bean.png.js",
-  "./client/local-assets/evolution-point-symbol.png.js"
+  "./client/local-assets/evolution-point-symbol.png.js",
+  "./client/local-assets/Animations/GatherWorkV1/bean/harvest.webp.js",
+  "./client/local-assets/Animations/GatherWorkV1/bean/carry.webp.js",
+  "./client/local-assets/Animations/GatherWorkV1/bean/throw.webp.js",
+  "./client/local-assets/Animations/GatherWorkV1/spore/harvest.webp.js",
+  "./client/local-assets/Animations/GatherWorkV1/spore/carry.webp.js",
+  "./client/local-assets/Animations/GatherWorkV1/spore/throw.webp.js",
+  "./client/local-assets/Animations/GatherWorkV1/pebble/harvest.webp.js",
+  "./client/local-assets/Animations/GatherWorkV1/pebble/carry.webp.js",
+  "./client/local-assets/Animations/GatherWorkV1/pebble/throw.webp.js",
+  "./client/local-assets/Animations/GatherWorkV1/spring/harvest.webp.js",
+  "./client/local-assets/Animations/GatherWorkV1/spring/carry.webp.js",
+  "./client/local-assets/Animations/GatherWorkV1/spring/throw.webp.js"
 ]);

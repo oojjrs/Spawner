@@ -14,10 +14,10 @@ export function renderDnaDesignStats(container, stats, base, showScale) {
     ["vision", "시야", "칸"], ["comboPower", "연격숙련", "%"], ["critical", "치명", "%"], ["criticalPower", "치명위력", "%"],
     ["accuracy", "정밀", "%"], ["penetration", "예리함", ""], ["blockPower", "방어숙련", "%"], ["counter", "반격", "%"],
     ["counterPower", "반격위력", "%"], ["tenacity", "강인함", "%"], ["reduction", "완충", "%"], ["loadSpeed", "하중적응", "%"],
-    ["healPower", "치유량", ""], ["healing", "회복력", "%"], ["stun", "기절", "%"], ["stunTime", "기절연장", "초"], ["bleed", "출혈", "%"],
+    ["healing", "회복력", "%"], ["stun", "기절", "%"], ["stunTime", "기절연장", "초"], ["bleed", "출혈", "%"],
     ["bleedPower", "출혈강도", ""], ["area", "범위공격", "칸"], ["areaPower", "확산위력", "%"], ["lifesteal", "흡혈", "%"],
     ["reflection", "반사", "%"], ["regeneration", "재생", "/초"], ["comboSpeed", "연타 간격", "초"], ["focus", "공격 준비", "초"],
-    ["scale", "크기", "배"], ["melee", "칼날", ""], ["ranged", "분비기관", ""], ["healer", "치유기관", ""], ["roaming", "안테나", ""]
+    ["scale", "크기", "배"], ["melee", "칼날", ""], ["ranged", "분비기관", ""], ["roaming", "안테나", ""]
   ];
   const format = value => String(Number(value.toFixed(3)));
   const fragment = document.createDocumentFragment();

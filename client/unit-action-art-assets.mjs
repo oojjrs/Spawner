@@ -265,7 +265,72 @@ export const UNIT_ACTION_ART = Object.freeze({
       "registrationScale": 1,
       "loop": false
     },
-    "actions": {}
+    "actions": {
+      "harvest": {
+        "image": "DesignAssets/Animations/GatherWorkV1/bean/harvest.webp",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 125.5,
+        "pivotY": 233,
+        "referenceLength": 187,
+        "embeddedCargo": true
+      },
+      "carry": {
+        "image": "DesignAssets/Animations/GatherWorkV1/bean/carry.webp",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 125.5,
+        "pivotY": 233,
+        "referenceLength": 187,
+        "embeddedCargo": true
+      },
+      "throw": {
+        "image": "DesignAssets/Animations/GatherWorkV1/bean/throw.webp",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          120,
+          100,
+          80,
+          120,
+          140,
+          320
+        ],
+        "loop": false,
+        "pivotX": 125.5,
+        "pivotY": 233,
+        "referenceLength": 187,
+        "releaseAtMs": 540,
+        "embeddedCargo": true
+      }
+    }
   },
   "bean/blade": {
     "reference": {
@@ -1926,6 +1991,70 @@ export const UNIT_ACTION_ART = Object.freeze({
         "pivotY": 112,
         "viewSize": 128,
         "rootMotion": false
+      },
+      "harvest": {
+        "image": "DesignAssets/Animations/GatherWorkV1/spore/harvest.webp",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 127.5,
+        "pivotY": 221,
+        "referenceLength": 219,
+        "embeddedCargo": true
+      },
+      "carry": {
+        "image": "DesignAssets/Animations/GatherWorkV1/spore/carry.webp",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 127.5,
+        "pivotY": 221,
+        "referenceLength": 219,
+        "embeddedCargo": true
+      },
+      "throw": {
+        "image": "DesignAssets/Animations/GatherWorkV1/spore/throw.webp",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          120,
+          100,
+          80,
+          120,
+          140,
+          320
+        ],
+        "loop": false,
+        "pivotX": 127.5,
+        "pivotY": 221,
+        "referenceLength": 219,
+        "releaseAtMs": 540,
+        "embeddedCargo": true
       }
     }
   },
@@ -3390,7 +3519,72 @@ export const UNIT_ACTION_ART = Object.freeze({
       "registrationScale": 1,
       "loop": false
     },
-    "actions": {}
+    "actions": {
+      "harvest": {
+        "image": "DesignAssets/Animations/GatherWorkV1/pebble/harvest.webp",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 128,
+        "pivotY": 206,
+        "referenceLength": 190,
+        "embeddedCargo": true
+      },
+      "carry": {
+        "image": "DesignAssets/Animations/GatherWorkV1/pebble/carry.webp",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 128,
+        "pivotY": 206,
+        "referenceLength": 190,
+        "embeddedCargo": true
+      },
+      "throw": {
+        "image": "DesignAssets/Animations/GatherWorkV1/pebble/throw.webp",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          120,
+          100,
+          80,
+          120,
+          140,
+          320
+        ],
+        "loop": false,
+        "pivotX": 128,
+        "pivotY": 206,
+        "referenceLength": 190,
+        "releaseAtMs": 540,
+        "embeddedCargo": true
+      }
+    }
   },
   "pebble/blade": {
     "reference": {
@@ -5095,7 +5289,72 @@ export const UNIT_ACTION_ART = Object.freeze({
       "registrationScale": 1,
       "loop": false
     },
-    "actions": {}
+    "actions": {
+      "harvest": {
+        "image": "DesignAssets/Animations/GatherWorkV1/spring/harvest.webp",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 128,
+        "pivotY": 231,
+        "referenceLength": 192,
+        "embeddedCargo": true
+      },
+      "carry": {
+        "image": "DesignAssets/Animations/GatherWorkV1/spring/carry.webp",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 128,
+        "pivotY": 231,
+        "referenceLength": 192,
+        "embeddedCargo": true
+      },
+      "throw": {
+        "image": "DesignAssets/Animations/GatherWorkV1/spring/throw.webp",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          120,
+          100,
+          80,
+          120,
+          140,
+          320
+        ],
+        "loop": false,
+        "pivotX": 128,
+        "pivotY": 231,
+        "referenceLength": 192,
+        "releaseAtMs": 540,
+        "embeddedCargo": true
+      }
+    }
   },
   "spring/blade": {
     "reference": {

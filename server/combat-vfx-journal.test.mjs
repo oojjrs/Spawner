@@ -87,16 +87,16 @@ test("server bleed catch-up uses each real tick time and regeneration reports on
   assert.equal(healing.events.filter(event => event.kind === "regeneration").length, 1, "full health produces no recovery VFX");
 });
 
-test("server preserves multiple same-time heal recipients and emits no self-heal claim", () => {
+test("retired healer genes emit no allied healing or healing VFX", () => {
   const f = fixture(["healer", "healer"]);
   f.source.health = 50; f.ally.health = 99.75;
   const second = { ...f.ally, id: "ally-2", health: 99.9, stats: { ...f.ally.stats } };
   f.environment.games.get("a").agents.push(second);
   f.combat.update(f.source, 0);
   const heals = f.events.filter(event => event.kind === "heal");
-  assert.equal(heals.length, 2); assert.equal(new Set(heals.map(event => event.id)).size, 2);
-  assert.deepEqual(new Set(heals.map(event => event.targetId)), new Set(["ally", "ally-2"]));
-  assert.ok(Math.abs(heals.reduce((sum, event) => sum + event.amount, 0) - .35) < 1e-9);
+  assert.deepEqual(heals, []);
+  assert.equal(f.ally.health, 99.75); assert.equal(second.health, 99.9);
+  assert.equal(f.source.stats.dna.healer, false);
   assert.equal(f.source.health, 50);
 });
 

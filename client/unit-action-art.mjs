@@ -16,7 +16,7 @@ export function unitActionArtPose(agent, time) {
   if (!definition) return null;
   const state = unitActionState(agent, time, { animations: definition.actions });
   if (!state) return null;
-  const requested = state.action === "carry" ? "walk" : state.action;
+  const requested = state.action === "carry" && !definition.actions.carry ? "walk" : state.action;
   const animation = definition.actions[requested];
   if (!animation) return { action: state.action, animation: definition.reference, frame: definition.reference.frames?.[0] || 0, reference: definition.reference, missing: true };
   let elapsed = state.elapsedMs;
@@ -77,7 +77,7 @@ export function createUnitActionArt(assetSource, createSurface, loadImage) {
     const surface = createSurface(512, 512);
     return draw(surface.getContext("2d"), agent, time, 256, 448, 256 / unitDisplaySize(agent), false, null) ? surface : null;
   }
-  return { prepare, draw, frame, referenceBounds, ready: agent => {
+  return { prepare, draw, frame, referenceBounds, readyAction: (agent, time) => { const pose = unitActionArtPose(agent, time); return !!pose && !pose.missing && images.has(pose.animation.image) && images.has(pose.reference.image); }, ready: agent => {
     const definition = unitActionArtDefinition(agent); return !!definition && images.has(definition.reference.image);
   } };
 }

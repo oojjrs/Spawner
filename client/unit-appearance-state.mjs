@@ -36,7 +36,10 @@ export function unitActionState(agent, time, options = {}) {
   const hurt=agent.hurtStartedAt,hurtSeconds=agent.combat?.version === 2 ? .12 : duration('hurt')/1000;
   if(Number.isFinite(hurt)&&time>=hurt&&time<hurt+hurtSeconds)return state('hurt',hurt,[[hurt,0],[hurt+hurtSeconds,duration('hurt')]]);
   if(activeAttack)return activeAttack;
-  if(agent.mode==='unload'&&agent.foodDelivery)return state('throw',finite(agent.foodDelivery.startedAt,time));
+  if(agent.mode==='unload'&&agent.foodDelivery){
+    const delivery=agent.foodDelivery,start=finite(delivery.startedAt,time),end=delivery.arrivesAt,release=clips.throw?.releaseAtMs,ms=duration('throw');
+    return state('throw',start,Number.isFinite(end)&&end>start&&Number.isFinite(release)&&release>0&&release<ms?[[start,0],[start+(end-start)*.24,release],[end,ms]]:undefined);
+  }
   if(agent.mode==='harvest')return state('harvest',finite(agent.harvestStarted,agent.animationStartedAt,0));
   if(options.preview?.action==='jump')return state('jump',finite(options.preview.startedAt,time));
   if(agent.moveDuration>0&&Number.isFinite(agent.moveStartedAt)&&time>=agent.moveStartedAt&&time<agent.moveStartedAt+agent.moveDuration){

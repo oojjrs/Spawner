@@ -30,22 +30,23 @@ function arrangement(ids,level) {
   return {version:3,pieces,budget:1000,level};
 }
 
-test("six C5 arrangement geometries fill all thirty-seven points under the exchanged catalog",()=>{
+test("C5 geometries keep their paths while retired support builds cannot be produced",()=>{
   for(const [index,entries] of fixtures.entries()) {
     const pieces=entries.map(([gene,rotation])=>({gene,rotation,grade:approvedShapes[gene].length-1,shape:[...approvedShapes[gene]]}));
     const dna={version:3,pieces,level:2,budget:1000},trace=M.trace(pieces,2);
     assert.equal(trace.valid,true,String(index));assert.equal(trace.occupied.size,37,String(index));
-    assert.ok(validateDna(dna,2,1000),String(index));
-    assert.equal(M.stats(pieces).healPower,[0,0,0,0,7,11][index]);
+    if(index<4)assert.ok(validateDna(dna,2,1000),String(index));else{assert.deepEqual(M.validate(dna),dna);assert.equal(validateDna(dna,2,1000),null,String(index));}
+    assert.equal(M.stats(pieces).healPower,0);
   }
 });
 
 test("strict designs reject each duplicated organ but permit different organ roles without mandatory support stats",()=>{
-  for(const id of ["gather","blade","secretion","healer","antenna"]) {
+  for(const id of ["gather","blade","secretion","antenna"]) {
     const dna=arrangement([id,id],4);assert.ok(M.validate(dna));assert.equal(validateDna(dna,4,1000),null,id);
     assert.ok(validateDna(arrangement([id],4),4,1000),id);
   }
-  assert.ok(validateDna(arrangement(["gather","blade","secretion","healer","antenna"],4),4,1000));
+  assert.ok(validateDna(arrangement(["gather","blade","secretion","antenna"],4),4,1000));
+  for(const id of ["healer","healPower"]){assert.equal(M.lookup.get(id).retired,true);assert.equal(M.catalog.some(gene=>gene.id===id),false);assert.equal(validateDna(arrangement([id],4),4,1000),null,id);}
   assert.ok(validateDna(arrangement(["power"],2),2,1000));
 });
 
@@ -58,13 +59,13 @@ test("active shapes have the expected point count without equal same-grade paths
   }
 });
 
-test("healing investment supplies donors while receiving healing remains a separate multiplier",()=>{
+test("retired donor genes stay inactive while legacy support budgets preserve receiving multipliers",()=>{
   const stats=ids=>M.stats(ids.map(piece));
   assert.equal(stats(["healPower"]).healPower,0);
-  assert.equal(stats(["healer"]).healPower,1);
-  assert.equal(stats(["healer","healPower","healPower"]).healPower,5);
-  assert.equal(stats(["healer","healing"]).healPower,1);
-  assert.equal(stats(["healer","healer","healer"]).healPower,3);
+  assert.equal(stats(["healer"]).healPower,0);
+  assert.equal(stats(["healer","healPower","healPower"]).healPower,0);
+  assert.equal(stats(["healer","healing"]).healPower,0);
+  assert.equal(stats(["healer","healer","healer"]).healPower,0);
   assert.equal(stats(["healing"]).healing,30);
   assert.equal(DNA_ACTION_RULES.healInterval,2);
   const source={id:"source",team:"a",health:1,stats:{health:20,dna:stats(["healer","healPower","healPower"])}};
@@ -72,6 +73,8 @@ test("healing investment supplies donors while receiving healing remains a separ
   const second={id:"second",team:"a",health:9,stats:{health:10}};
   const excluded=[{...first,id:"enemy",team:"b"},{...first,id:"hidden",hidden:true},{...first,id:"retreat",retreat:true},{...first,id:"dead",health:0},{...first,id:"far"}];
   const allocate=()=>dnaHealAllocations(source,[source,second,first,...excluded],agent=>agent.team,(a,b)=>b.id==="far"?3:1);
+  assert.deepEqual(allocate(),[]);
+  source.stats.dna={healerCount:5};
   assert.deepEqual(allocate().map(a=>[a.target.id,a.amount]),[["first",10]]);
   first.health=18;second.health=8;
   assert.deepEqual(allocate().map(a=>[a.target.id,a.amount]),[["second",2],["first",2]]);
