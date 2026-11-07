@@ -1,0 +1,301 @@
+{
+  "tribe": "bean",
+  "form": "blade-antenna",
+  "appearanceMask": 5,
+  "action": "idle",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 64,
+  "framePoseIndices": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    6,
+    7,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "durationsMs": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "durationMs": 6400,
+  "loop": true,
+  "pivotX": 256,
+  "pivotY": 448,
+  "sheet": "bean-blade-antenna-idle-v1-sheet.png",
+  "preview": "bean-blade-antenna-idle-v1-preview.gif",
+  "distinctWholeBodyPoses": 8,
+  "source": "Sources/approved-neutral.png",
+  "method": "Whole-body imagegen drawings. Code only crops complete cels, uniformly rescales with one fixed scale per atlas, translates whole cels, and packs exact RGBA pixels. No body-part rigging, recombination, mirroring, deformation or interpolation.",
+  "publicationAuthorization": "User requested autonomous completion and planning-document publication without individual confirmations. Newly generated motion has not received individual user approval.",
+  "rangedAttackCreated": false,
+  "records": [
+    {
+      "index": 0,
+      "source": "Sources/approved-neutral.png",
+      "exactApprovedNeutral": true
+    },
+    {
+      "index": 1,
+      "source": "Sources/idle-wholebody-generated.png",
+      "sourceRect": [
+        451,
+        93,
+        733,
+        430
+      ],
+      "uniformScale": 0.8324022346368715,
+      "wholeCelTranslation": [
+        158,
+        170
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 2,
+      "source": "Sources/idle-wholebody-generated.png",
+      "sourceRect": [
+        825,
+        86,
+        1110,
+        430
+      ],
+      "uniformScale": 0.8324022346368715,
+      "wholeCelTranslation": [
+        156,
+        165
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 3,
+      "source": "Sources/idle-wholebody-generated.png",
+      "sourceRect": [
+        1200,
+        79,
+        1487,
+        430
+      ],
+      "uniformScale": 0.8324022346368715,
+      "wholeCelTranslation": [
+        155,
+        159
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 4,
+      "source": "Sources/idle-wholebody-generated.png",
+      "sourceRect": [
+        69,
+        602,
+        353,
+        942
+      ],
+      "uniformScale": 0.8324022346368715,
+      "wholeCelTranslation": [
+        155,
+        168
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 5,
+      "source": "Sources/idle-wholebody-generated.png",
+      "sourceRect": [
+        450,
+        610,
+        733,
+        942
+      ],
+      "uniformScale": 0.8324022346368715,
+      "wholeCelTranslation": [
+        158,
+        175
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 6,
+      "source": "Sources/idle-wholebody-generated.png",
+      "sourceRect": [
+        826,
+        615,
+        1109,
+        942
+      ],
+      "uniformScale": 0.8324022346368715,
+      "wholeCelTranslation": [
+        156,
+        179
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 7,
+      "source": "Sources/idle-wholebody-generated.png",
+      "sourceRect": [
+        1203,
+        616,
+        1485,
+        942
+      ],
+      "uniformScale": 0.8324022346368715,
+      "wholeCelTranslation": [
+        157,
+        180
+      ],
+      "wholeCelLift": 0
+    }
+  ],
+  "verification": {
+    "frameCount": 64,
+    "durationMs": 6400,
+    "sheetSize": [
+      4096,
+      4096
+    ],
+    "uniqueWholeBodyPoses": 8,
+    "sheetExactPosePixelEquality": true,
+    "transparentBackground": true,
+    "clippedFrames": 0,
+    "singleConnectedBodyOver8Pixels": true,
+    "connectedBodyCounts": [
+      1
+    ],
+    "contentUnion": [
+      158,
+      162,
+      407,
+      448
+    ],
+    "gifDurationMs": 6400,
+    "gifDecodedFrames": 9,
+    "finalFourFramesIdentical": true,
+    "sheetSha256": "d3ee488c019a49d57551edf63e7b8011986f9355d221445ea8784a68828ba490"
+  },
+  "status": "ready-for-authorized-publication",
+  "previewLoop": true,
+  "sourceMask": "05",
+  "sourceSha256": "783bed93d96a0eab8e30139e6fb296414359f8b1519177b813e3d6e0edc6536d"
+}

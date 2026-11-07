@@ -1,0 +1,210 @@
+{
+  "tribe": "bean",
+  "form": "carapace-antenna",
+  "appearanceMask": 6,
+  "action": "walk",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 24,
+  "framePoseIndices": [
+    0,
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    4,
+    4,
+    5,
+    5,
+    6,
+    7,
+    0
+  ],
+  "durationsMs": [
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40
+  ],
+  "durationMs": 960,
+  "loop": false,
+  "pivotX": 256,
+  "pivotY": 448,
+  "sheet": "bean-carapace-antenna-walk-v1-sheet.png",
+  "preview": "bean-carapace-antenna-walk-v1-preview.gif",
+  "distinctWholeBodyPoses": 7,
+  "source": "Sources/approved-neutral.png",
+  "method": "Whole-body imagegen drawings. Code only crops complete cels, uniformly rescales with one fixed scale per atlas, translates whole cels, and packs exact RGBA pixels. No body-part rigging, recombination, mirroring, deformation or interpolation.",
+  "publicationAuthorization": "User requested autonomous completion and planning-document publication without individual confirmations. Newly generated motion has not received individual user approval.",
+  "rangedAttackCreated": false,
+  "records": [
+    {
+      "index": 0,
+      "source": "Sources/approved-neutral.png",
+      "exactApprovedNeutral": true
+    },
+    {
+      "index": 1,
+      "source": "Sources/walk-wholebody-generated.png",
+      "sourceRect": [
+        445,
+        124,
+        731,
+        452
+      ],
+      "uniformScale": 0.8010752688172043,
+      "wholeCelTranslation": [
+        145,
+        188
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 2,
+      "source": "Sources/walk-wholebody-generated.png",
+      "sourceRect": [
+        823,
+        107,
+        1107,
+        441
+      ],
+      "uniformScale": 0.8010752688172043,
+      "wholeCelTranslation": [
+        149,
+        159
+      ],
+      "wholeCelLift": 24
+    },
+    {
+      "index": 3,
+      "source": "Sources/walk-wholebody-generated.png",
+      "sourceRect": [
+        1196,
+        87,
+        1478,
+        402
+      ],
+      "uniformScale": 0.8010752688172043,
+      "wholeCelTranslation": [
+        146,
+        149
+      ],
+      "wholeCelLift": 50
+    },
+    {
+      "index": 4,
+      "source": "Sources/walk-wholebody-generated.png",
+      "sourceRect": [
+        69,
+        592,
+        353,
+        932
+      ],
+      "uniformScale": 0.8010752688172043,
+      "wholeCelTranslation": [
+        147,
+        155
+      ],
+      "wholeCelLift": 24
+    },
+    {
+      "index": 5,
+      "source": "Sources/walk-wholebody-generated.png",
+      "sourceRect": [
+        443,
+        609,
+        731,
+        938
+      ],
+      "uniformScale": 0.8010752688172043,
+      "wholeCelTranslation": [
+        143,
+        187
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 6,
+      "source": "Sources/walk-wholebody-generated.png",
+      "sourceRect": [
+        818,
+        605,
+        1105,
+        938
+      ],
+      "uniformScale": 0.8010752688172043,
+      "wholeCelTranslation": [
+        144,
+        184
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 7,
+      "source": "Sources/approved-neutral.png",
+      "exactApprovedNeutral": true
+    }
+  ],
+  "verification": {
+    "frameCount": 24,
+    "durationMs": 960,
+    "sheetSize": [
+      4096,
+      1536
+    ],
+    "uniqueWholeBodyPoses": 7,
+    "sheetExactPosePixelEquality": true,
+    "transparentBackground": true,
+    "clippedFrames": 0,
+    "singleConnectedBodyOver8Pixels": true,
+    "connectedBodyCounts": [
+      1
+    ],
+    "contentUnion": [
+      146,
+      152,
+      374,
+      448
+    ],
+    "gifDurationMs": 960,
+    "gifDecodedFrames": 8,
+    "finalFourFramesIdentical": false,
+    "sheetSha256": "2287c25e740d53f87d845a718e78754c0a71a14a005d399b9e1d2b6902ce00e5"
+  },
+  "status": "ready-for-authorized-publication",
+  "previewLoop": true,
+  "sourceMask": "06",
+  "sourceSha256": "f67773b4dc68c934587452d8368955ee8d4801251cc4e058d0b248ae9641a889"
+}

@@ -1,0 +1,333 @@
+{
+  "tribe": "bean",
+  "form": "carapace-antenna",
+  "appearanceMask": 6,
+  "action": "birth",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 16,
+  "framePoseIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "durationsMs": [
+    40,
+    25,
+    35,
+    50,
+    30,
+    60,
+    60,
+    70,
+    70,
+    90,
+    90,
+    60,
+    70,
+    70,
+    200,
+    240
+  ],
+  "durationMs": 1260,
+  "loop": false,
+  "pivotX": 256,
+  "pivotY": 448,
+  "sheet": "bean-carapace-antenna-birth-body-v1-sheet.png",
+  "preview": "bean-carapace-antenna-birth-body-v1-preview.gif",
+  "distinctWholeBodyPoses": 16,
+  "source": "Sources/approved-neutral.png",
+  "method": "Whole-body imagegen drawings. Code only crops complete cels, uniformly rescales with one fixed scale per atlas, translates whole cels, and packs exact RGBA pixels. No body-part rigging, recombination, mirroring, deformation or interpolation.",
+  "publicationAuthorization": "User requested autonomous completion and planning-document publication without individual confirmations. Newly generated motion has not received individual user approval.",
+  "rangedAttackCreated": false,
+  "records": [
+    {
+      "index": 0,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        54,
+        120,
+        284,
+        307
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        138,
+        259
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 1,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        357,
+        99,
+        589,
+        306
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        139,
+        239
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 2,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        664,
+        84,
+        897,
+        306
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        139,
+        224
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 3,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        972,
+        62,
+        1199,
+        305
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        141,
+        202
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 4,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        53,
+        376,
+        281,
+        610
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        142,
+        212
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 5,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        359,
+        372,
+        588,
+        610
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        143,
+        207
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 6,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        665,
+        363,
+        895,
+        609
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        141,
+        198
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 7,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        973,
+        349,
+        1201,
+        608
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        142,
+        185
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 8,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        52,
+        657,
+        281,
+        914
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        142,
+        188
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 9,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        360,
+        652,
+        586,
+        912
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        144,
+        185
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 10,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        667,
+        642,
+        895,
+        912
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        144,
+        175
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 11,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        974,
+        651,
+        1203,
+        912
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        143,
+        184
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 12,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        52,
+        958,
+        282,
+        1217
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        142,
+        186
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 13,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        359,
+        961,
+        589,
+        1217
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        141,
+        188
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 14,
+      "source": "Sources/birth-wholebody-generated.png",
+      "sourceRect": [
+        665,
+        960,
+        896,
+        1218
+      ],
+      "uniformScale": 1.0275862068965518,
+      "wholeCelTranslation": [
+        140,
+        187
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 15,
+      "source": "Sources/approved-neutral.png",
+      "exactApprovedNeutral": true
+    }
+  ],
+  "verification": {
+    "frameCount": 16,
+    "durationMs": 1260,
+    "sheetSize": [
+      4096,
+      1024
+    ],
+    "uniqueWholeBodyPoses": 16,
+    "sheetExactPosePixelEquality": true,
+    "transparentBackground": true,
+    "clippedFrames": 0,
+    "singleConnectedBodyOver8Pixels": true,
+    "connectedBodyCounts": [
+      1
+    ],
+    "contentUnion": [
+      142,
+      180,
+      375,
+      448
+    ],
+    "gifDurationMs": 1260,
+    "gifDecodedFrames": 16,
+    "finalFourFramesIdentical": false,
+    "sheetSha256": "321d3fd9990db7fff38f30b571c37e08a43e290af272c61b58e4b291bc8c0265"
+  },
+  "status": "ready-for-authorized-publication",
+  "previewLoop": true,
+  "sourceMask": "06",
+  "sourceSha256": "f67773b4dc68c934587452d8368955ee8d4801251cc4e058d0b248ae9641a889"
+}

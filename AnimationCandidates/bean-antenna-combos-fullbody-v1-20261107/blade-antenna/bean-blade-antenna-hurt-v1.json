@@ -1,0 +1,198 @@
+{
+  "tribe": "bean",
+  "form": "blade-antenna",
+  "appearanceMask": 5,
+  "action": "hurt",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 16,
+  "framePoseIndices": [
+    0,
+    1,
+    2,
+    3,
+    3,
+    4,
+    4,
+    5,
+    5,
+    6,
+    6,
+    7,
+    7,
+    0,
+    0,
+    0
+  ],
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "durationMs": 760,
+  "loop": false,
+  "pivotX": 256,
+  "pivotY": 448,
+  "sheet": "bean-blade-antenna-hurt-v1-sheet.png",
+  "preview": "bean-blade-antenna-hurt-v1-preview.gif",
+  "distinctWholeBodyPoses": 7,
+  "source": "Sources/approved-neutral.png",
+  "method": "Whole-body imagegen drawings. Code only crops complete cels, uniformly rescales with one fixed scale per atlas, translates whole cels, and packs exact RGBA pixels. No body-part rigging, recombination, mirroring, deformation or interpolation.",
+  "publicationAuthorization": "User requested autonomous completion and planning-document publication without individual confirmations. Newly generated motion has not received individual user approval.",
+  "rangedAttackCreated": false,
+  "records": [
+    {
+      "index": 0,
+      "source": "Sources/approved-neutral.png",
+      "exactApprovedNeutral": true
+    },
+    {
+      "index": 1,
+      "source": "Sources/hurt-wholebody-generated.png",
+      "sourceRect": [
+        461,
+        85,
+        734,
+        424
+      ],
+      "uniformScale": 0.8465909090909091,
+      "wholeCelTranslation": [
+        164,
+        164
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 2,
+      "source": "Sources/hurt-wholebody-generated.png",
+      "sourceRect": [
+        838,
+        94,
+        1129,
+        426
+      ],
+      "uniformScale": 0.8465909090909091,
+      "wholeCelTranslation": [
+        174,
+        170
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 3,
+      "source": "Sources/hurt-wholebody-generated.png",
+      "sourceRect": [
+        1200,
+        101,
+        1516,
+        426
+      ],
+      "uniformScale": 0.8465909090909091,
+      "wholeCelTranslation": [
+        166,
+        177
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 4,
+      "source": "Sources/hurt-wholebody-generated.png",
+      "sourceRect": [
+        72,
+        610,
+        366,
+        939
+      ],
+      "uniformScale": 0.8465909090909091,
+      "wholeCelTranslation": [
+        173,
+        172
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 5,
+      "source": "Sources/hurt-wholebody-generated.png",
+      "sourceRect": [
+        463,
+        613,
+        745,
+        938
+      ],
+      "uniformScale": 0.8465909090909091,
+      "wholeCelTranslation": [
+        168,
+        176
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 6,
+      "source": "Sources/hurt-wholebody-generated.png",
+      "sourceRect": [
+        844,
+        597,
+        1120,
+        937
+      ],
+      "uniformScale": 0.8465909090909091,
+      "wholeCelTranslation": [
+        165,
+        163
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 7,
+      "source": "Sources/approved-neutral.png",
+      "exactApprovedNeutral": true
+    }
+  ],
+  "hold": {
+    "frame": 4,
+    "durationMs": 400
+  },
+  "verification": {
+    "frameCount": 16,
+    "durationMs": 760,
+    "sheetSize": [
+      4096,
+      1024
+    ],
+    "uniqueWholeBodyPoses": 7,
+    "sheetExactPosePixelEquality": true,
+    "transparentBackground": true,
+    "clippedFrames": 0,
+    "singleConnectedBodyOver8Pixels": true,
+    "connectedBodyCounts": [
+      1
+    ],
+    "contentUnion": [
+      166,
+      166,
+      431,
+      448
+    ],
+    "gifDurationMs": 760,
+    "gifDecodedFrames": 8,
+    "finalFourFramesIdentical": true,
+    "sheetSha256": "7677a2569cae7f6166e4db16e7285824d491f4d1b9eba47411b01dc340e67678"
+  },
+  "status": "ready-for-authorized-publication",
+  "previewLoop": true,
+  "sourceMask": "05",
+  "sourceSha256": "783bed93d96a0eab8e30139e6fb296414359f8b1519177b813e3d6e0edc6536d"
+}

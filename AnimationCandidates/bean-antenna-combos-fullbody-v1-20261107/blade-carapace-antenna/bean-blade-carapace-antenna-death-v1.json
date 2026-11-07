@@ -1,0 +1,205 @@
+{
+  "tribe": "bean",
+  "form": "blade-carapace-antenna",
+  "appearanceMask": 7,
+  "action": "death",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 16,
+  "framePoseIndices": [
+    0,
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    4,
+    4,
+    5,
+    5,
+    6,
+    7,
+    7,
+    7,
+    7
+  ],
+  "durationsMs": [
+    160,
+    80,
+    80,
+    70,
+    70,
+    60,
+    60,
+    60,
+    60,
+    60,
+    80,
+    90,
+    100,
+    110,
+    120,
+    1000
+  ],
+  "durationMs": 2260,
+  "loop": false,
+  "pivotX": 256,
+  "pivotY": 448,
+  "sheet": "bean-blade-carapace-antenna-death-v1-sheet.png",
+  "preview": "bean-blade-carapace-antenna-death-v1-preview.gif",
+  "distinctWholeBodyPoses": 8,
+  "source": "Sources/approved-neutral.png",
+  "method": "Whole-body imagegen drawings. Code only crops complete cels, uniformly rescales with one fixed scale per atlas, translates whole cels, and packs exact RGBA pixels. No body-part rigging, recombination, mirroring, deformation or interpolation.",
+  "publicationAuthorization": "User requested autonomous completion and planning-document publication without individual confirmations. Newly generated motion has not received individual user approval.",
+  "rangedAttackCreated": false,
+  "records": [
+    {
+      "index": 0,
+      "source": "Sources/approved-neutral.png",
+      "exactApprovedNeutral": true
+    },
+    {
+      "index": 1,
+      "source": "Sources/death-wholebody-generated.png",
+      "sourceRect": [
+        437,
+        93,
+        747,
+        447
+      ],
+      "uniformScale": 0.8764705882352941,
+      "wholeCelTranslation": [
+        136,
+        142
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 2,
+      "source": "Sources/death-wholebody-generated.png",
+      "sourceRect": [
+        804,
+        80,
+        1087,
+        450
+      ],
+      "uniformScale": 0.8764705882352941,
+      "wholeCelTranslation": [
+        143,
+        127
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 3,
+      "source": "Sources/death-wholebody-generated.png",
+      "sourceRect": [
+        1165,
+        88,
+        1476,
+        445
+      ],
+      "uniformScale": 0.8764705882352941,
+      "wholeCelTranslation": [
+        99,
+        138
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 4,
+      "source": "Sources/death-wholebody-generated.png",
+      "sourceRect": [
+        26,
+        635,
+        363,
+        914
+      ],
+      "uniformScale": 0.8764705882352941,
+      "wholeCelTranslation": [
+        44,
+        207
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 5,
+      "source": "Sources/death-wholebody-generated.png",
+      "sourceRect": [
+        406,
+        643,
+        742,
+        912
+      ],
+      "uniformScale": 0.8764705882352941,
+      "wholeCelTranslation": [
+        44,
+        216
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 6,
+      "source": "Sources/death-wholebody-generated.png",
+      "sourceRect": [
+        790,
+        652,
+        1123,
+        912
+      ],
+      "uniformScale": 0.8764705882352941,
+      "wholeCelTranslation": [
+        46,
+        223
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 7,
+      "source": "Sources/death-wholebody-generated.png",
+      "sourceRect": [
+        1169,
+        652,
+        1503,
+        912
+      ],
+      "uniformScale": 0.8764705882352941,
+      "wholeCelTranslation": [
+        45,
+        223
+      ],
+      "wholeCelLift": 0
+    }
+  ],
+  "verification": {
+    "frameCount": 16,
+    "durationMs": 2260,
+    "sheetSize": [
+      4096,
+      1024
+    ],
+    "uniqueWholeBodyPoses": 8,
+    "sheetExactPosePixelEquality": true,
+    "transparentBackground": true,
+    "clippedFrames": 0,
+    "singleConnectedBodyOver8Pixels": true,
+    "connectedBodyCounts": [
+      1
+    ],
+    "contentUnion": [
+      46,
+      130,
+      413,
+      448
+    ],
+    "gifDurationMs": 2260,
+    "gifDecodedFrames": 8,
+    "finalFourFramesIdentical": true,
+    "sheetSha256": "9465f98b71a9c2cf3404746204c3bd1c08bce51bdd5892d77f98dfb980a58ce7"
+  },
+  "status": "ready-for-authorized-publication",
+  "previewLoop": true,
+  "sourceMask": "07",
+  "sourceSha256": "1d472b1a15f25475131e2367e5eb589b4f9d910d66d8a93e59b62a3f32507beb"
+}
