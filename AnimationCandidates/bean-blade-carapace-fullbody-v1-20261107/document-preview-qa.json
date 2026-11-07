@@ -1,0 +1,65 @@
+{
+  "purpose": "Document-only preview conversion from original RGBA sheets. No pose, timing, game asset, or action-loop changes.",
+  "actions": [
+    {
+      "action": "idle",
+      "sheetSHA256": "224a1f010aa39e72787b2bb172e7e6013f43cca34e955ae564cdd2ab86020661",
+      "previewSHA256": "5f3bbe7ff48268b90f36ab01c053b15eab687aee0050a8e05b3c8345546393ca",
+      "sheetFrames": 64,
+      "decodedPreviewFrames": 9,
+      "durationMs": 6400,
+      "loopCount": 0,
+      "visibleRGBAndAlphaExact": true,
+      "transparentRGBNormalizedForComparison": true,
+      "sourceSheetUnchanged": true
+    },
+    {
+      "action": "walk",
+      "sheetSHA256": "4be35e0ed1737b76bd470d9e83df47205b55ecfaa8d31291cc8704ef7f95c7e9",
+      "previewSHA256": "06738a49514d335ebd4a49ff9713bb48e3fa31cba08f15f7ab15524d7840f47c",
+      "sheetFrames": 24,
+      "decodedPreviewFrames": 9,
+      "durationMs": 960,
+      "loopCount": 0,
+      "visibleRGBAndAlphaExact": true,
+      "transparentRGBNormalizedForComparison": true,
+      "sourceSheetUnchanged": true
+    },
+    {
+      "action": "attack",
+      "sheetSHA256": "283a651970a25dfa460a970da1d25dd35c4fcacf4010c09adedae93e20cefa29",
+      "previewSHA256": "901e44a65d23564e5f62144b50eed9ee162f78ede8c08357bff33bafd418b301",
+      "sheetFrames": 16,
+      "decodedPreviewFrames": 8,
+      "durationMs": 1000,
+      "loopCount": 0,
+      "visibleRGBAndAlphaExact": true,
+      "transparentRGBNormalizedForComparison": true,
+      "sourceSheetUnchanged": true
+    },
+    {
+      "action": "hurt",
+      "sheetSHA256": "f527113df73400868252940985be6dc4a54b57f8b5c0d41b1ef18e22f8ae3f0f",
+      "previewSHA256": "b629dd401764afb19d6c2f6e20c6be547fb284f9b8985d652c5aeda5daa0722c",
+      "sheetFrames": 16,
+      "decodedPreviewFrames": 8,
+      "durationMs": 760,
+      "loopCount": 0,
+      "visibleRGBAndAlphaExact": true,
+      "transparentRGBNormalizedForComparison": true,
+      "sourceSheetUnchanged": true
+    },
+    {
+      "action": "death",
+      "sheetSHA256": "a85debf844b60efb60f5c713f5e1eab8ccbbcbe574d45e448995e834c38ec1f0",
+      "previewSHA256": "ebd2edfc68571a6ffd37f3aa757b73689478bde375b6f2b412373bca6fdc1f57",
+      "sheetFrames": 16,
+      "decodedPreviewFrames": 8,
+      "durationMs": 2260,
+      "loopCount": 0,
+      "visibleRGBAndAlphaExact": true,
+      "transparentRGBNormalizedForComparison": true,
+      "sourceSheetUnchanged": true
+    }
+  ]
+}

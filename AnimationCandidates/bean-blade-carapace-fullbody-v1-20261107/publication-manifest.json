@@ -9,7 +9,7 @@
   "actions": {
     "idle": {
       "sheet": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-sheet.png",
-      "preview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-preview.gif",
+      "preview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-transparent-preview.webp",
       "frameSize": 512,
       "columns": 8,
       "frameCount": 64,
@@ -82,13 +82,20 @@
       "durationMs": 6400,
       "loop": true,
       "sheetSHA256": "224a1f010aa39e72787b2bb172e7e6013f43cca34e955ae564cdd2ab86020661",
-      "previewSHA256": "3845dc63b5edb26f63221fecd7f26c9095679b5fb05d47efed16e5893e42cdd4",
+      "previewSHA256": "5f3bbe7ff48268b90f36ab01c053b15eab687aee0050a8e05b3c8345546393ca",
       "gifDecodedFrames": 9,
-      "timelineMaxRGBRMSE": 1.091435
+      "timelineMaxRGBRMSE": 1.091435,
+      "legacyGIFPreview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-preview.gif",
+      "legacyGIFPreviewSHA256": "3845dc63b5edb26f63221fecd7f26c9095679b5fb05d47efed16e5893e42cdd4",
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "previewFormat": "lossless-webp",
+      "previewDecodedFrames": 9,
+      "previewMatchesSheetRGBA": true
     },
     "walk": {
       "sheet": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-sheet.png",
-      "preview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-preview.gif",
+      "preview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-transparent-preview.webp",
       "frameSize": 512,
       "columns": 8,
       "frameCount": 24,
@@ -121,13 +128,20 @@
       "durationMs": 960,
       "loop": false,
       "sheetSHA256": "4be35e0ed1737b76bd470d9e83df47205b55ecfaa8d31291cc8704ef7f95c7e9",
-      "previewSHA256": "604c5ad3a9d3bcc644fb2cb27053a72e112dbdb071ae3c03be84a3d8acbb00f6",
+      "previewSHA256": "06738a49514d335ebd4a49ff9713bb48e3fa31cba08f15f7ab15524d7840f47c",
       "gifDecodedFrames": 9,
-      "timelineMaxRGBRMSE": 1.083058
+      "timelineMaxRGBRMSE": 1.083058,
+      "legacyGIFPreview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-preview.gif",
+      "legacyGIFPreviewSHA256": "604c5ad3a9d3bcc644fb2cb27053a72e112dbdb071ae3c03be84a3d8acbb00f6",
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "previewFormat": "lossless-webp",
+      "previewDecodedFrames": 9,
+      "previewMatchesSheetRGBA": true
     },
     "attack": {
       "sheet": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-sheet.png",
-      "preview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-preview.gif",
+      "preview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-transparent-preview.webp",
       "frameSize": 512,
       "columns": 8,
       "frameCount": 16,
@@ -152,13 +166,20 @@
       "durationMs": 1000,
       "loop": false,
       "sheetSHA256": "283a651970a25dfa460a970da1d25dd35c4fcacf4010c09adedae93e20cefa29",
-      "previewSHA256": "3a5dcc9012d3f425cb80c10a3e3ed18bcaf138adedb92a3048f1ea56d63fb271",
+      "previewSHA256": "901e44a65d23564e5f62144b50eed9ee162f78ede8c08357bff33bafd418b301",
       "gifDecodedFrames": 8,
-      "timelineMaxRGBRMSE": 1.083058
+      "timelineMaxRGBRMSE": 1.083058,
+      "legacyGIFPreview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-preview.gif",
+      "legacyGIFPreviewSHA256": "3a5dcc9012d3f425cb80c10a3e3ed18bcaf138adedb92a3048f1ea56d63fb271",
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "previewFormat": "lossless-webp",
+      "previewDecodedFrames": 8,
+      "previewMatchesSheetRGBA": true
     },
     "hurt": {
       "sheet": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-sheet.png",
-      "preview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-preview.gif",
+      "preview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-transparent-preview.webp",
       "frameSize": 512,
       "columns": 8,
       "frameCount": 16,
@@ -183,9 +204,16 @@
       "durationMs": 760,
       "loop": false,
       "sheetSHA256": "f527113df73400868252940985be6dc4a54b57f8b5c0d41b1ef18e22f8ae3f0f",
-      "previewSHA256": "e125c14c795f17e3b5ad0750335bbc861e8729babc69bbb1dc8e46864cac7010",
+      "previewSHA256": "b629dd401764afb19d6c2f6e20c6be547fb284f9b8985d652c5aeda5daa0722c",
       "gifDecodedFrames": 8,
-      "timelineMaxRGBRMSE": 1.229168
+      "timelineMaxRGBRMSE": 1.229168,
+      "legacyGIFPreview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-preview.gif",
+      "legacyGIFPreviewSHA256": "e125c14c795f17e3b5ad0750335bbc861e8729babc69bbb1dc8e46864cac7010",
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "previewFormat": "lossless-webp",
+      "previewDecodedFrames": 8,
+      "previewMatchesSheetRGBA": true
     },
     "birth": {
       "sheet": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-sheet.png",
@@ -323,7 +351,7 @@
     },
     "death": {
       "sheet": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-sheet.png",
-      "preview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-preview.gif",
+      "preview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-transparent-preview.webp",
       "frameSize": 512,
       "columns": 8,
       "frameCount": 16,
@@ -348,9 +376,16 @@
       "durationMs": 2260,
       "loop": false,
       "sheetSHA256": "a85debf844b60efb60f5c713f5e1eab8ccbbcbe574d45e448995e834c38ec1f0",
-      "previewSHA256": "3fe8e94bfa9ba524999697ccfa60876c23449da42c96d56b7e68d849b7c1f5f0",
+      "previewSHA256": "ebd2edfc68571a6ffd37f3aa757b73689478bde375b6f2b412373bca6fdc1f57",
       "gifDecodedFrames": 8,
-      "timelineMaxRGBRMSE": 1.092215
+      "timelineMaxRGBRMSE": 1.092215,
+      "legacyGIFPreview": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-preview.gif",
+      "legacyGIFPreviewSHA256": "3fe8e94bfa9ba524999697ccfa60876c23449da42c96d56b7e68d849b7c1f5f0",
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "previewFormat": "lossless-webp",
+      "previewDecodedFrames": 8,
+      "previewMatchesSheetRGBA": true
     }
   },
   "rangedAttack": null,
@@ -362,7 +397,9 @@
     "sheetHashesVerified": true,
     "gifTimelineMatchesSheetWithinPaletteQuantization": true,
     "gifDurationsMatchManifest": true,
-    "clippedFrames": 0
+    "clippedFrames": 0,
+    "transparentBodyPreviewsMatchSheetRGBA": true,
+    "transparentBodyPreviewDurationsExact": true
   },
   "note": "Birth is the 117-frame full nest scene, not the 16-pose body-only draft. GIF uses 10ms time quantization and merges identical holds. Production originals and packing provenance remain in the working asset package."
 }

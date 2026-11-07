@@ -73,8 +73,10 @@
         230
       ],
       "sheetSHA256": "c19781e82ac28f6367a72f96262eacef2b9db84b545f22ab6255b48a6fe7ec78",
-      "previewSHA256": "e5160e8bf10d1d829d177d92d3161a780e3ada77360677828c1ce88cc9683d4b",
-      "gifSHA256": "3aae664db439ff319b81e5ecdded75157cdb79171fb7cf5c3a3f85941a8107cd"
+      "previewSHA256": "375b99a2aef11b060e146036e3b9390004a083b2764f7b17a352d515bb055a32",
+      "gifSHA256": "3aae664db439ff319b81e5ecdded75157cdb79171fb7cf5c3a3f85941a8107cd",
+      "previewLoop": true,
+      "previewLoopCount": 0
     },
     "hurt": {
       "sheet": "pebble-blade-carapace-hurt-v1-sheet.png",
@@ -94,8 +96,10 @@
         240
       ],
       "sheetSHA256": "d18b32e8d67c13ab8bbff7415d267d7d5f217b16e9b745a986126b43a8b1f38e",
-      "previewSHA256": "edd272c0b7e5864780a322ab78f8a147481839441fedf095442d02558550c447",
-      "gifSHA256": "f75eaa9e8543d295cb13e5837e4635971feaa5d2f45579880f80a02c8e248ee0"
+      "previewSHA256": "adb6544d74d6f61a68fcccf82e143e14df9b5dfab58e49c2b748c26de62b83ff",
+      "gifSHA256": "f75eaa9e8543d295cb13e5837e4635971feaa5d2f45579880f80a02c8e248ee0",
+      "previewLoop": true,
+      "previewLoopCount": 0
     },
     "birth": {
       "sheet": "pebble-blade-carapace-birth-v1-sheet.png",
@@ -115,8 +119,10 @@
         650
       ],
       "sheetSHA256": "2983c85114baf165d73f34c0490d1825cef54e3d7d211fdd16bc3663b6e4d78b",
-      "previewSHA256": "06fd115614e0b38dfe91ff35864abed06647dba7cc5194dcfe076122a750822c",
-      "gifSHA256": "6ae8fbb42a08570ca42edb26cc898221d848c01bc8c86f5dd9ac71f3f25bf335"
+      "previewSHA256": "a43caf80b2c061f3f4cade95bd6e296d1360dc2a9c7da8b867da3737703deeb4",
+      "gifSHA256": "6ae8fbb42a08570ca42edb26cc898221d848c01bc8c86f5dd9ac71f3f25bf335",
+      "previewLoop": true,
+      "previewLoopCount": 0
     },
     "death": {
       "sheet": "pebble-blade-carapace-death-v1-sheet.png",
@@ -136,8 +142,10 @@
         750
       ],
       "sheetSHA256": "1b15b793419cdd8ae39aae5e0cfe433fb10ab66933774d382bea9dde6e27fb1c",
-      "previewSHA256": "42a37a1ce1d526536210f4aca92b9d66aec945a78f710b2a19e51595589029e0",
-      "gifSHA256": "9dd686748f01f5ae72a2f8ad24abca61ef1a78ce63e98a010b10903bee088ee6"
+      "previewSHA256": "17e5a22e27d8b7366839966585ed575f6e1b73ed058ad7e76965bf20f43a1ff6",
+      "gifSHA256": "9dd686748f01f5ae72a2f8ad24abca61ef1a78ce63e98a010b10903bee088ee6",
+      "previewLoop": true,
+      "previewLoopCount": 0
     }
   },
   "rangedAttack": null,
@@ -149,7 +157,8 @@
     "sheetAndPreviewHashesVerified": true,
     "losslessWebpVisibleRGBAAndAlphaMatchSheet": true,
     "gifAndWebpTimingMatchManifest": true,
-    "noOuterBorderAlphaPixels": true
+    "noOuterBorderAlphaPixels": true,
+    "previewLoopOnlyMetadataChange": true
   },
   "note": "Birth is a complete cave scene, not a body-only runtime sprite. Production originals and packing provenance remain in the working asset package."
 }
