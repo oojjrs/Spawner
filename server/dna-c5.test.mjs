@@ -5,14 +5,14 @@ import { validateDna, cloneDna } from "./dna-unit.mjs";
 import { dnaHealAllocations, DNA_ACTION_RULES } from "./dna-actions.mjs";
 import { createGame } from "./game.mjs";
 
-const approvedShapes={health:[0,4],movement:[0,5],blade:[0,2,3],power:[0,0,1],speed:[0,2,0],secretion:[0,1,3],rangedPower:[0,0,2],rangedSpeed:[0,0,4],healer:[0,2,1],healPower:[0,4,4],antenna:[0,4,0],carapace:[0,5,1]};
+const approvedShapes={health:[0,4],harvestSpeed:[0,5],blade:[0,2,3],power:[0,0,1],speed:[0,2,0],secretion:[0,1,3],rangedPower:[0,0,2],rangedSpeed:[0,0,4],healer:[0,2,1],healPower:[0,4,4],antenna:[0,4,0],carapace:[0,5,1]};
 const fixtures=[
-  [["power",0],["movement",5],["speed",3],["health",5],["carapace",3],["carapace",2],["health",2],["antenna",2],["health",1],["health",1],["power",4],["blade",5],["carapace",1],["health",2],["health",5]],
-  [["power",0],["movement",5],["health",4],["movement",3],["blade",1],["power",5],["health",5],["carapace",3],["carapace",2],["health",2],["speed",1],["health",1],["antenna",1],["power",5],["power",2]],
-  [["secretion",0],["carapace",1],["rangedPower",3],["movement",3],["rangedPower",4],["health",0],["rangedPower",3],["carapace",0],["antenna",0],["movement",1],["movement",2],["movement",5],["rangedSpeed",4],["movement",4],["movement",3]],
-  [["secretion",0],["rangedSpeed",1],["carapace",5],["carapace",4],["health",4],["movement",4],["movement",3],["movement",0],["rangedPower",1],["carapace",3],["movement",2],["carapace",0],["rangedPower",1],["antenna",4]],
-  [["health",0],["antenna",0],["movement",4],["movement",3],["healPower",2],["movement",4],["healPower",4],["health",2],["health",2],["movement",2],["healPower",0],["healer",5],["movement",2],["health",0],["health",0],["movement",0],["health",4]],
-  [["antenna",0],["healPower",0],["healPower",3],["carapace",1],["movement",3],["health",2],["health",5],["healPower",4],["healer",3],["healPower",0],["movement",0],["health",4],["health",4],["movement",2],["healPower",3]]
+  [["power",0],["harvestSpeed",5],["speed",3],["health",5],["carapace",3],["carapace",2],["health",2],["antenna",2],["health",1],["health",1],["power",4],["blade",5],["carapace",1],["health",2],["health",5]],
+  [["power",0],["harvestSpeed",5],["health",4],["harvestSpeed",3],["blade",1],["power",5],["health",5],["carapace",3],["carapace",2],["health",2],["speed",1],["health",1],["antenna",1],["power",5],["power",2]],
+  [["secretion",0],["carapace",1],["rangedPower",3],["harvestSpeed",3],["rangedPower",4],["health",0],["rangedPower",3],["carapace",0],["antenna",0],["harvestSpeed",1],["harvestSpeed",2],["harvestSpeed",5],["rangedSpeed",4],["harvestSpeed",4],["harvestSpeed",3]],
+  [["secretion",0],["rangedSpeed",1],["carapace",5],["carapace",4],["health",4],["harvestSpeed",4],["harvestSpeed",3],["harvestSpeed",0],["rangedPower",1],["carapace",3],["harvestSpeed",2],["carapace",0],["rangedPower",1],["antenna",4]],
+  [["health",0],["antenna",0],["harvestSpeed",4],["harvestSpeed",3],["healPower",2],["harvestSpeed",4],["healPower",4],["health",2],["health",2],["harvestSpeed",2],["healPower",0],["healer",5],["harvestSpeed",2],["health",0],["health",0],["harvestSpeed",0],["health",4]],
+  [["antenna",0],["healPower",0],["healPower",3],["carapace",1],["harvestSpeed",3],["health",2],["health",5],["healPower",4],["healer",3],["healPower",0],["harvestSpeed",0],["health",4],["health",4],["harvestSpeed",2],["healPower",3]]
 ];
 const piece=id=>{const gene=M.lookup.get(id);return {gene:id,grade:gene.grade,rotation:0,shape:[...gene.steps]};};
 function arrangement(ids,level) {
@@ -30,7 +30,7 @@ function arrangement(ids,level) {
   return {version:3,pieces,budget:1000,level};
 }
 
-test("six approved C5 arrangements fill all thirty-seven points under the actual strict catalog",()=>{
+test("six C5 arrangement geometries fill all thirty-seven points under the exchanged catalog",()=>{
   for(const [index,entries] of fixtures.entries()) {
     const pieces=entries.map(([gene,rotation])=>({gene,rotation,grade:approvedShapes[gene].length-1,shape:[...approvedShapes[gene]]}));
     const dna={version:3,pieces,level:2,budget:1000},trace=M.trace(pieces,2);

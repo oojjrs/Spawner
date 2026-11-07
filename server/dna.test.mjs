@@ -157,15 +157,15 @@ test("DNA 연타는 같은 공격 주기 안에 후속 타격하고 범위 공�
 });
 test("DNA 원이 중앙에 겹친 뒤 빈 선으로 계속 배치하고 겹치는 선은 거부한다",()=>{
   const piece=(gene,rotation)=>{const entry=ATTRIBUTE_DNA.lookup.get(gene);return {gene,rotation,grade:entry.grade,shape:[...entry.steps]};};
-  const loop=[piece("harvestSpeed",0),piece("harvestSpeed",2),piece("harvestSpeed",4)];
+  const loop=[piece("movement",0),piece("movement",2),piece("movement",4)];
   assert.equal(ATTRIBUTE_DNA.trace(loop,1).closed,true);
   const pieces=loop.concat(piece("capacity",5)),dna={version:3,pieces,level:1,budget:10000};
   assert.equal(ATTRIBUTE_DNA.trace(pieces,1).valid,true);
   assert.equal(ATTRIBUTE_DNA.trace(pieces,1).closed,false);
   assert.ok(validateDna(dna,1,10000));
-  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("harvestSpeed",0)),1).reason,"collision");
+  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("movement",0)),1).reason,"collision");
   assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("capacity",1)),1).reason,"collision");
-  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("harvestSpeed",5)),1).reason,"collision");
+  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("movement",5)),1).reason,"collision");
   const overlap=[{gene:"gather",grade:1,rotation:0,shape:[0,3]}];
   assert.equal(ATTRIBUTE_DNA.trace(overlap,1).reason,"collision");
   const {game}=fixture(1);

@@ -42,7 +42,7 @@ function selectGene(root,id){const item=root.querySelector('.dna-list').children
 function piece(gene,rotation){const entry=ATTRIBUTE_DNA.lookup.get(gene);return {gene,rotation,grade:entry.grade,shape:[...entry.steps]};}
 function design(pieces){return {version:3,pieces,level:1,budget:0};}
 function place(root){root.querySelector('.dna-add').onclick();}
-function blockedPieces(){return [['capacity',0],['movement',4],['movement',4],['capacity',1],['capacity',3],['movement',1],['harvestSpeed',0],['movement',0]].map(([gene,rotation])=>piece(gene,rotation));}
+function blockedPieces(){return [['capacity',0],['harvestSpeed',4],['harvestSpeed',4],['capacity',1],['capacity',3],['harvestSpeed',1],['movement',0],['harvestSpeed',0]].map(([gene,rotation])=>piece(gene,rotation));}
 
 test("현재 둥지 레벨 이하 속성만 표시하고 저장한 레벨로 우회하지 않는다",t=>{
   const {editor,root}=fixture(t),genes=()=>root.querySelector('.dna-list').children.map(item=>item.dataset.gene);
@@ -186,7 +186,7 @@ test("초기화·불러오기·저장 이력 경계에서 이전 설계가 되�
   place(root);const current=editor.getDesign(),count=changes.length;editor.clearHistory();
   assert.deepEqual(editor.getDesign(),current);assert.equal(changes.length,count);
   root.dispatch('keydown',{key:'Backspace'});root.dispatch('keydown',{key:'z',ctrlKey:true,shiftKey:true});assert.deepEqual(editor.getDesign(),current);
-  selectGene(root,'movement');place(root);root.dispatch('contextmenu',{});assert.deepEqual(editor.getDesign(),current);
+  selectGene(root,'harvestSpeed');place(root);root.dispatch('contextmenu',{});assert.deepEqual(editor.getDesign(),current);
   root.dispatch('keydown',{key:'y',ctrlKey:true});assert.equal(editor.getDesign().pieces.length,2);
   editor.load(design([]),false);root.dispatch('contextmenu',{});root.dispatch('keydown',{key:'y',ctrlKey:true});assert.equal(editor.getDesign().pieces.length,0);
 });
@@ -213,7 +213,7 @@ test("설계 전환과 저장 재로드는 현재 설계 안에서만 이력을 
   root.dispatch('keydown',{key:'y',ctrlKey:true});assert.deepEqual(editor.getDesign(),second);
   root.dispatch('contextmenu',{});root.dispatch('contextmenu',{});root.dispatch('contextmenu',{});assert.equal(editor.getDesign().pieces.length,0);
   root.dispatch('keydown',{key:'y',ctrlKey:true});assert.deepEqual(editor.getDesign().pieces,second.pieces.slice(0,1));
-  selectGene(root,'movement');place(root);const current=editor.getDesign();assert.equal(current.pieces.length,2);assert.equal(root.querySelector('.dna-tools').children[1].disabled,true);
+  selectGene(root,'harvestSpeed');place(root);const current=editor.getDesign();assert.equal(current.pieces.length,2);assert.equal(root.querySelector('.dna-tools').children[1].disabled,true);
   root.dispatch('keydown',{key:'y',ctrlKey:true});assert.deepEqual(editor.getDesign(),current);
   editor.load(current,false);root.dispatch('contextmenu',{});assert.deepEqual(editor.getDesign().pieces,current.pieces.slice(0,1));
   root.dispatch('keydown',{key:'y',ctrlKey:true});assert.deepEqual(editor.getDesign(),current);

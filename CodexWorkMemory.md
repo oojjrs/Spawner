@@ -1,3 +1,40 @@
+## DNA 조각 교환 로컬 커밋 범위 확정 · 01a1b342 현재 요약
+
+- 기록 ID: dna-level1-shape-swap-commit-freeze-20261107-01a1b342. 기록 시각 2026-11-07T09:02:20+09:00. 기록자·분리/범위판단 Codex /root, 로컬커밋승인 사용자. 출처 현재 채팅 01a1b342-551b-7c40-a4f4-60130e6efa4e의 ‘커밋’과 실제 Git/검수결과. 원발언 정확 시각·항목 ID·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 확정10경로: server/dna.mjs,Attribute.html,client/runtime.js,Combat.html,Design.html의두shape필드·server/dna-level-one.test.mjs/server/dna-c5.test.mjs/server/dna.test.mjs/client/dna-editor.test.mjs의해당형상fixture·본채팅관련기록6절이다. 현재HEAD 41f986cdef69664fa11486fd208c13d53e74b9d9에이번내용만투영한별도index로준비하며다른화면/애셋/게임/공유메모리변경은커밋하지않고작업파일에보존한다.
+- 누락점검: 사용자교정에따른모양교환·두화면적용·가격/효과유지·기존shape저장정책유지와실제검수42개(첫40+교정2)성공을대조했다. 제품/회귀9텍스트의최종형식UTF8NoBom/CRLF는OK,공유메모리는현재CRLF/HEAD Mixed차이로NeedsReview였으며기존본문은정규화하지않는다. 후보메모리도HEAD기존바이트를그대로보존한다.기존연결Projects nodes=[]결과재사용,새build/실행검사는반복하지않는다.
+- 내용동결: 메시지는 ‘1레벨 DNA 채집속도와 이동속도 조각 형태 교환’. 승인범위는로컬커밋이며push/배포는없다. 아직commit성공전이다.
+
+## 1레벨 DNA 조각 형태 교환 완료 · 01a1b342 현재 요약
+
+- 기록 ID: dna-level1-shape-swap-complete-20261107-01a1b342. 기록·직접검수 시각 2026-11-07T08:56:22+09:00. 기록자·구현/검수 Codex /root, 모양교환·양쪽적용 결정 사용자. 출처 현재 채팅 01a1b342-551b-7c40-a4f4-60130e6efa4e 및 literal $Trash/dna-level1-shape-swap-20261107의 실제도구결과. 원발언 정확 시각·항목 ID·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 결과: 공통 카탈로그 harvestSpeed를 [0,2]→[0,5], movement를 [0,5]→[0,2]로 교환했다. 속성 제작기 Attribute.html과 인게임 runtime(직접모델/worker/decision-worker) 및 같은 정의를 포함한 Combat.html/Design.html 사본의 두 필드를 갱신했다. 문구·레이아웃·다른조각·가격·효과·등급·목록순서 변경은 없다.
+- 실제검수: 기존42개중첫40개성공은재사용하고구도형을새gene로교정한이력2개는재검수2/2통과했다(전체42개최종성공). 제작기/인게임공통모듈일치·19점/37점만석·충돌/이력·기관제한·게임명령검사를포함한다. 여섯사본에서추출한DNA모듈전체가현재원본과정확일치하고대표전체스탯/가격/순서와두기존명시shape의validate보존도직접확인했다. 다른모듈동시변경때문에실패한파일전체비교는모듈단위근거로정정한다.
+- 범위·누락점검: 제품5/관련회귀4/본채팅기록이이번범위다. 최초수치교환해석은사용자교정으로폐기했고모양교환과두화면적용을완료했다. 새조각은새카탈로그,기존저장의명시shape는유지하며자동이관/정책변경은없다. 기존dirty·동시변경/index를보존하고commit/push/배포하지않았다. 최종필수형식은이기록직후동일호출의실제결과가근거며검사이후새제품수정은하지않는다.
+
+## 조각 교환 뒤 이력 회귀 fixture 보정 · 01a1b342
+
+- 기록 ID: dna-level1-shape-swap-fixture-fix-20261107-01a1b342. 기록 시각 2026-11-07T08:55:40+09:00. 기록자·범위내 fixture 교정 판단 Codex /root, 출처 현재 채팅 01a1b342-551b-7c40-a4f4-60130e6efa4e의 직접 회귀결과, H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.
+- 실제 확인: 공통 원본과 제작기/인게임/worker/decision-worker/Combat/Design 여섯 DNA 모듈은 정확일치했고 새매핑·대표스탯/가격/순서·두기존명시shape보존은통과했다. 기존42회귀중40통과,이력2개가1!=2로실패했다. 원인은두fixture가구movement05의배치가능한기하를전제로했으나새movement02를선택한것이다. 제품이력버그로판정하지않는다.
+- 수정: 두 이력fixture의 selectGene만 같은구도형을받은harvestSpeed로바꾸고동작/기대조각수/undo-redo검사를유지한다. 이미성공한40개/모듈검사는반복하지않고수정한2개만재검수후최종형식과범위diff를확인한다. 제품코드나저장정책추가수정은없다.
+
+## 조각 교환 검수의 동시변경 구분 · 01a1b342
+
+- 기록 ID: dna-level1-shape-swap-check-scope-20261107-01a1b342. 기록 시각 2026-11-07T08:53:49+09:00. 기록자·검수범위 정정 Codex /root, 출처 현재 채팅 01a1b342-551b-7c40-a4f4-60130e6efa4e의 직접 도구결과, H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.
+- 첫 검수는 runtime 전체파일에 교환을 역적용해 시작 snapshot과 일치하는지 비교하다 중단됐다. 실제 차이는 다른 작업이 추가한 unit-action-art 등 DNA 외 모듈이며 제품오류로 판정하지 않는다. 그 이전 server/Attribute의 역치환 및 runtime의 직접/worker/decision-worker에 옛 배정 부재 검사는 통과했으나 테스트/공통형식 실행에는 도달하지 않았다.
+- 검수기 판단을 정정한다. 동시수정이 허용된 파일 전체가 아니라 실제 server/dna.mjs 모듈을 각 사본에서 추출해 비교하고, 실행되지 않은 기존 표적 회귀와 필수 형식 검사를 수행한다. 제품의 동시변경은 되돌리거나 다시 빌드하지 않는다.
+
+## 1레벨 조각 교환·공통 사본과 회귀 범위 확정 · 01a1b342
+
+- 기록 ID: dna-level1-shape-swap-scope-20261107-01a1b342. 기록 시각 2026-11-07T08:50:46+09:00. 기록자·판단 Codex /root, 결정 주체 사용자(교환/양쪽 적용)와 Codex(최소 동기화/검수 범위). 출처 현재 채팅 01a1b342-551b-7c40-a4f4-60130e6efa4e와 직접 확인한 공통 모델/생성기. 원발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 적용범위: server/dna.mjs의 두 steps만 교환하고 Attribute.html/client/runtime.js 및 같은 공통모델을 포함한 Combat.html/Design.html 사본의 정확 두 필드만 동기화한다. runtime의 worker와 decision-worker 직렬화 사본도 포함하며 전체 build/다른모듈/문구는 바꾸지 않는다.
+- 기존 도형 회귀 네 파일은 새 gene-형상 배정에 맞춰 fixture의 gene만 교환하고 기존 경로·회전·만석/충돌 oracle을 보존한다. 1렙 전체 매핑 assertion은 새 계약으로 바꾸되 효과/가격 assertion은 유지한다. 기존 명시 shape의 자동 이관이나 저장정책 변경은 하지 않는다. 제품 변경과 관련 회귀 수정은 아직 검수 전이며 근거 snapshot은 literal $Trash/dna-level1-shape-swap-20261107/before다.
+
+## 1레벨 DNA 채집속도·이속 조각 교환 착수 · 01a1b342 현재 요약
+
+- 기록 ID: dna-level1-shape-swap-start-20261107-01a1b342. 기록 시각 2026-11-07T08:49:30+09:00. 기록자·공통정의/범위 판단 Codex /root, 교환 및 양쪽 화면 적용 결정 사용자. 출처 현재 채팅 01a1b342-551b-7c40-a4f4-60130e6efa4e의 ‘1렙 dna에서 채집속도랑 이속을 바꿔’·‘조각 형태 말하는 거야’·‘속성 제작기랑 인게임 속성 설계창에 모두 적용하고’. 원발언 정확 시각·항목 ID·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 확정: 효과 수치가 아닌 1렙 harvestSpeed와 movement의 형태만 서로 교환한다. 현재 공통 server/dna.mjs에서 harvestSpeed=[0,2], movement=[0,5]이며 교환 뒤 각각 [0,5]/[0,2]로 한다. 가격·효과·등급·목록 순서는 유지한다. Attribute.html과 client/runtime.js의 공통모듈 및 내장 worker를 좁게 동기화하며 기존 다른 화면/애셋/메모리 dirty와 index를 보존한다.
+- 근거·계획: 두 화면 모두 공통 DNA 모델/편집기를 소비한다. 새 조각은 새 카탈로그를 쓰고 기존 명시 shape 저장을 자동 치환하지 않는다. 형상에 묶인 기존 테스트 계약/fixture를 살펴 새 매핑과 기존 저장 형상 보존을 구분해 확인한다. 저장소 전용 origin oojjrs/Spawner 및 연결 Projects nodes=[] 확인. 로컬 수정 요청이며 commit/push/배포는 없다. 현재 미구현·미검수다.
 ## 유닛 외형 연결 정리 커밋·푸시 범위 · 01a1b330 현재 요약
 
 - 기록 ID: appearance-link-cleanup-finish-scope-20261107-01a1b330. 기록 시각 2026-11-07T08:38:35+09:00. 기록자·범위분리/Git판단 Codex /root, 커밋·푸시 승인 사용자. 출처 현재 채팅 01a1b330-4e8e-74d2-9980-301f0e6378ae의 「커밋하고 푸시해」 및 실제 Git/후보 결과. 원발언시각·항목ID·PC식별 불명,H:/Spawner Windows PowerShell.
