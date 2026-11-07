@@ -90,6 +90,21 @@ test('all 28 antenna forms are complete with 172 byte-exact clips and 28 portrai
   assert.equal(clips, 172); assert.equal(auditImages(root, ANTENNA_COMBO_IMAGE_ASSETS), 200);
 });
 
+test('offline file builds include all 200 byte-exact antenna image wrappers', () => {
+  const scope = {};
+  runInNewContext(read('client/local-assets.js').toString(), scope);
+  const files = new Set(scope.SpawnerLocalAssetFiles);
+  for (const path of ANTENNA_COMBO_IMAGE_ASSETS) {
+    const wrapper = 'client/local-assets/' + path.slice('DesignAssets/'.length) + '.js';
+    assert.ok(files.has('./' + wrapper), wrapper + ' is discoverable offline');
+    const source = read(wrapper).toString();
+    assert.ok(source.startsWith('globalThis.SpawnerLocalAssetSources[' + JSON.stringify(path) + '] = '));
+    const payload = source.match(/"data:image\/png;base64,([A-Za-z0-9+/=]+)";/);
+    assert.ok(payload, wrapper);
+    assert.equal(createHash('sha256').update(Buffer.from(payload[1], 'base64')).digest('hex'), sha(path), wrapper);
+  }
+});
+
 for (const tribe of tribes) for (const form of forms) test(`${tribe}/${form.key}: same body, allowed attacks, birth and work clocks`, () => {
   const agent = make(tribe, form), definition = ANTENNA_COMBO_ACTION_ART[tribe + '/' + form.key];
   assert.ok(definition); assert.equal(unitActionArtDefinition(agent), definition);

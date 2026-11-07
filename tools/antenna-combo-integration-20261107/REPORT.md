@@ -15,8 +15,8 @@
 - `python scripts/validate-antenna-publications.py --complete`: 28/28 forms and 172/172 transparent clips and looping previews passed. Checks include SHA, geometry, cell-edge clipping, preview decoding and exact preview duration.
 - `python scripts/register-antenna-combos.py --complete`: 28 forms, 172 byte-exact source sheets and 28 first-cell portraits registered. Measured pivots, facing and frame-boundary hit/launch cues validated.
 - `python scripts/publish-antenna-combo-docs.py --runtime-complete`: all 28 rows and 84 work cells published; total combined catalogue is 44 forms and 276 basic clips.
-- Runtime-only and Combat builds completed. Unrelated generated files were preserved.
-- 85 focused integration tests passed across antenna, prior combinations, laboratory, exact selection and welcome presentation.
+- Runtime, Combat and full offline builds completed. All 200 offline PNG wrappers are indexed and byte-identical to their native images. Unrelated generated files were preserved.
+- 86 focused integration tests passed across antenna, prior combinations, laboratory, exact selection and welcome presentation.
 - Image audit passed all 1,397 registered files.
 - The same 83 older regression tests report 40 pass / 43 fail on both this change and clean 8e25d039, with identical failing test names. These pre-existing failures are not reported as passes.
 - A further 29 source/renderer/approval tests report 27 pass / 2 fail on both this change and clean 8e25d039. The existing spore-approval fixture and world-decode fixture failures remain. Tests tied to the old dominant blade path were updated to the newly authored combination and native atlas geometry.
