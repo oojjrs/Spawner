@@ -5487,6 +5487,234 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
 
 return {UNIT_APPEARANCE_ASSETS};
 })();
+modules["client/unit-size.mjs"] = (() => {
+const UNIT_DISPLAY_SIZES = Object.freeze({
+  bean: .40, spore: .38, pebble: .42, spring: .39,
+  "flower-tail-bird": .26, "dew-rabbit": .29, "cotton-sheep": .32,
+  "soil-mole": .35, "bundle-snail": .38, "rolling-acorn": .38,
+  "bubble-toad": .52, "vine-turtle": .52, "spiny-back-beetle": .58,
+  "snare-vine": .62, "soil-boar": .66, "shadow-weasel": .72, "talon-owl": .78,
+  "spring-keeper": .88, "lantern-keeper": .92, "old-garden-snail": 1.00, "walking-forest": 1.12,
+  "spiny-back-leader": 1.24, "white-paw": 1.44
+});
+
+function unitDisplaySize(unit) {
+  const count = Array.isArray(unit.dna?.pieces) ? unit.dna.pieces.length :
+    Number.isFinite(unit.stats?.pieceCount) ? Math.max(0, unit.stats.pieceCount) : 0;
+  const scale = 1 + .01 * count;
+  return (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean)*scale;
+}
+
+function combatViewCell(width, height, units) {
+  const largest = units.reduce((size, unit) => Math.max(size, unitDisplaySize(unit)), 0) || UNIT_DISPLAY_SIZES.bean;
+  return Math.min(width * .24, height * .5) / largest;
+}
+
+function combatViewLayout(width, height, units) {
+  const teams = [0, 1].map(side => units.filter(unit => (unit.combat?.side ?? unit.side) === side));
+  const count = Math.max(...teams.map(team => team.length));
+  const positions = new Map();
+  if (!count) return { cell: combatViewCell(width, height, units), positions };
+  const columnCount = Math.min(count, Math.ceil(Math.sqrt(count * 1.5))), rowCount = Math.ceil(count / columnCount);
+  const columns = Array(columnCount).fill(0), rows = Array(rowCount).fill(0);
+  teams.forEach(team => team.forEach((unit, index) => {
+    const size = unitDisplaySize(unit);
+    columns[index % columnCount] = Math.max(columns[index % columnCount], size * 1.3);
+    rows[Math.floor(index / columnCount)] = Math.max(rows[Math.floor(index / columnCount)], size);
+  }));
+  const gapX = Math.min(width * .035, width * .42 / (columnCount * 4));
+  const gapY = Math.min(height * .035, height * .36 / (rowCount * 4));
+  const totalWidth = columns.reduce((sum, value) => sum + value, 0);
+  const rowSpans = rows.slice(1).map((size, index) => rows[index] * .18 + size * 1.2);
+  const groundSpan = rowSpans.reduce((sum, value) => sum + value, 0);
+  const cell = Math.min(combatViewCell(width, height, units),
+    (width * .42 - gapX * (columnCount - 1)) / totalWidth,
+    height * .44 / (rows[0] * 1.2), height * .08 / (rows[rowCount - 1] * .18),
+    rowCount > 1 ? (height * .36 - gapY * (rowCount - 1)) / groundSpan : Infinity);
+  const gridWidth = totalWidth * cell + gapX * (columnCount - 1);
+  const gridHeight = groundSpan * cell + gapY * (rowCount - 1);
+  const firstFoot = height * .5 + (height * .36 - gridHeight) / 2;
+  teams.forEach((team, side) => team.forEach((unit, index) => {
+    const column = index % columnCount, row = Math.floor(index / columnCount), size = unitDisplaySize(unit);
+    const offsetX = columns.slice(0, column).reduce((sum, value) => sum + value, 0) * cell + gapX * column;
+    const offsetY = rowSpans.slice(0, row).reduce((sum, value) => sum + value, 0) * cell + gapY * row;
+    const x = width * (side ? .75 : .25) + (side ? -1 : 1) * (gridWidth / 2 - offsetX - columns[column] * cell / 2);
+    const y = firstFoot + offsetY;
+    positions.set(String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
+      top: y - size * cell * 1.2, bottom: y + size * cell * .18 } });
+  }));
+  return { cell, positions };
+}
+
+function unitFacing(unit) {
+  return (unit.attack?.directionX || unit.facing || 1) < 0 ? -1 : 1;
+}
+
+function unitFrameMirror(sourceFacing, facing) {
+  return (facing < 0) !== (sourceFacing === "left");
+}
+
+return { UNIT_DISPLAY_SIZES, unitDisplaySize, combatViewCell, combatViewLayout, unitFacing, unitFrameMirror };
+})();
+modules["server/dna-combat-stats.mjs"] = (() => {
+const DNA_COMBAT_RULES = Object.freeze({
+  powerCurve: "linear", powerBase: 2, powerGain: 2, powerKnee: 2,
+  rangedPowerBase: 1.4, rangedPowerGain: 1.4, rangedPowerKnee: 2,
+  rangedAttackRateBase: .5, rangedHasteCap: 7, rangedHasteKnee: 70,
+  healthBase: 10, healthPerPoint: 10, armorPerPoint: 1, armorCap: 1, armorKnee: 100,
+  flatPenPerPoint: 1, percentPenCap: .8, percentPenKnee: 4,
+  attackRateBase: .5, hasteCap: 7, hasteKnee: 70, maxActionRate: 4,
+  windupBase: .3, focusPerPoint: .02, windupMinimum: .08,
+  hitGapBase: .12, hitSpeedPerPoint: .005, hitGapMinimum: .06, recovery: 0,
+  defensePreparation: 0, reactionCooldown: 0, counterCooldown: 0,
+  followupBase: .5, comboPerPoint: .05, followupCap: 1,
+  critCap: .75, critKnee: 18.75, critMultiplierBase: 1.5, critMultiplierCap: 4, critPowerKnee: 25,
+  accuracyCap: .6, accuracyKnee: 20, dodgeCap: .6, dodgeKnee: 20,
+  parryCap: .6, parryKnee: 15, blockCap: .75, blockKnee: 15,
+  blockReductionBase: .5, blockReductionCap: .9, blockPowerKnee: 10,
+  counterCap: 1, counterKnee: 10, counterMultiplierBase: 1, counterMultiplierCap: 2,
+  counterPowerKnee: 10, counterWindup: .12,
+  tenacityCap: .75, tenacityKnee: 15, stunCap: .3, stunKnee: 10,
+  stunDurationBase: .25, stunDurationPerPoint: .05, stunDurationCap: 1, stunImmunity: 2,
+  drainCap: .2, drainKnee: 20, jitter: .2
+});
+
+function dnaCombatStats(counts, weights, inputRules) {
+  const rules = inputRules || DNA_COMBAT_RULES, n = weights, c = counts;
+  const capped = (count, cap, knee) => count ? Math.min(cap, cap * count / (knee || 1)) : 0;
+  const powerGain = (count, gain, knee) => rules.powerCurve === "log" ?
+    gain * Math.log1p(count / knee) / Math.log1p(1 / knee) : gain * count;
+  const melee = !!c.blade, ranged = !!c.secretion, attack = melee || ranged;
+  const meleePower = melee ? rules.powerBase * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : 0;
+  const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
+  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : 0;
+  const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
+  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0, healerCount: 0,
+    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed, healer: false,
+    healPower: 0,
+    ...(rules.recovery ? { recovery: rules.recovery } : {}),
+    health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
+    power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,
+    armor: rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),
+    parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),
+    block: 100 * capped(n.block || 0, rules.blockCap, rules.blockKnee),
+    evasion: 100 * capped((n.evasion || 0) + (n.legs || 0), rules.dodgeCap, rules.dodgeKnee),
+    comboPower: attack ? 100 * Math.min(rules.followupCap, rules.followupBase + rules.comboPerPoint * (n.comboPower || 0)) : 0,
+    critical: attack ? 100 * capped(n.critical || 0, rules.critCap, rules.critKnee) : 0,
+    criticalPower: attack ? 100 * (rules.critMultiplierBase + capped(n.criticalPower || 0, rules.critMultiplierCap - rules.critMultiplierBase, rules.critPowerKnee)) : 0,
+    accuracy: attack ? 100 * capped(n.accuracy || 0, rules.accuracyCap, rules.accuracyKnee) : 0,
+    penetration: attack ? rules.flatPenPerPoint * (n.penetration || 0) : 0,
+    ...(n.percentPen ? { armorPenetration: capped(n.percentPen, rules.percentPenCap, rules.percentPenKnee) } : {}),
+    blockPower: 100 * (rules.blockReductionBase + capped(n.blockPower || 0, rules.blockReductionCap - rules.blockReductionBase, rules.blockPowerKnee)),
+    counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,
+    counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,
+    tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),
+    healing: 10 * (n.healing || 0), stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
+    stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,
+    bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,
+    area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,
+    lifesteal: attack ? 100 * capped(n.lifesteal || 0, rules.drainCap, rules.drainKnee) : 0,
+    reflection: Math.min(30, 3 * (n.reflection || 0)), regeneration: .1 * (n.regeneration || 0),
+    comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : 0,
+    focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : 0 };
+}
+
+return { DNA_COMBAT_RULES, dnaCombatStats };
+})();
+modules["server/dna.mjs"] = (() => {
+const { dnaCombatStats } = modules["server/dna-combat-stats.mjs"];
+
+const ATTRIBUTE_DNA = (() => {
+  const directions = [[1,0],[0,1],[-1,1],[-1,0],[0,-1],[1,-1]];
+  const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};
+  const definitions = [
+    ['blade','organ',1,20],['carapace','stat',-1,10],['antenna','organ',0,20],['gather','organ',2,20],['legs','stat',-2,20],
+    ['power','stat',1,10],['combo','action',-1,14],['speed','stat',0,12],['comboPower','stat',2,12],['critical','stat',-2,12],['criticalPower','stat',1,10],['accuracy','stat',-1,10],['penetration','stat',0,12],
+    ['health','stat',-1,10],['armor','stat',2,10],['evasion','stat',-2,14],['parry','action',1,14],['block','action',0,12],['blockPower','stat',-1,10],['counter','action',2,14],['counterPower','stat',-2,10],['tenacity','stat',1,10],['reduction','stat',-1,12],
+    ['movement','stat',0,10],['capacity','stat',1,10],['harvest','stat',-1,10],['harvestSpeed','stat',2,10],['vision','stat',-2,10],['loadSpeed','stat',0,10],['healing','stat',1,10],
+    ['stun','action',-1,16],['stunTime','stat',2,12],['bleed','action',-2,16],['bleedPower','stat',1,12],['area','action',0,18],['areaPower','stat',-1,12],['lifesteal','action',2,16],['reflection','action',-2,16],['regeneration','action',1,14],['comboSpeed','stat',-1,12],['focus','stat',0,12],['healer','organ',-1,20],['secretion','organ',-2,20],['rangedPower','stat',-1,12],['rangedSpeed','stat',1,12],['healPower','stat',1,10]
+  ];
+  const alphabet = 'ATGC';
+  const genes = definitions.map((entry,index) => ({id:entry[0],category:entry[1],turn:entry[2],price:entry[3]/2,code:alphabet[Math.floor(index/16)]+alphabet[Math.floor(index/4)%4]+alphabet[index%4],color:colors[entry[1]]}));
+  const lookup = new Map(genes.map(gene=>[gene.id,gene]));
+  const specification=[{"gene":"gather","grade":1,"steps":[0,1],"order":1},{"gene":"health","grade":1,"steps":[0,4],"order":3},{"gene":"blade","grade":2,"steps":[0,2,3],"order":0},{"gene":"power","grade":2,"steps":[0,0,1],"order":1},{"gene":"speed","grade":2,"steps":[0,2,0],"order":2},{"gene":"capacity","grade":1,"steps":[0,0],"order":0},{"gene":"movement","grade":1,"steps":[0,2],"order":4},{"gene":"antenna","grade":2,"steps":[0,4,0],"order":8},{"gene":"carapace","grade":2,"steps":[0,5,1],"order":9},{"gene":"combo","grade":3,"steps":[0,1,5,0],"order":0},{"gene":"legs","grade":3,"steps":[0,1,0,4],"order":10,"retired":true},{"gene":"armor","grade":3,"steps":[0,1,2,0],"order":11,"retired":true},{"gene":"vision","grade":3,"steps":[0,1,2,4],"order":10},{"gene":"harvest","grade":2,"steps":[0,1,2],"order":10},{"gene":"harvestSpeed","grade":1,"steps":[0,5],"order":2},{"gene":"loadSpeed","grade":2,"steps":[0,5,4],"order":11},{"gene":"accuracy","grade":3,"steps":[0,1,0,2],"order":6},{"gene":"tenacity","grade":3,"steps":[0,1,0,1],"order":7},{"gene":"healing","grade":3,"steps":[0,2,1,3],"order":11},{"gene":"block","grade":3,"steps":[0,0,1,5],"order":8},{"gene":"evasion","grade":3,"steps":[0,1,1,2],"order":9},{"gene":"parry","grade":4,"steps":[0,1,2,0,1],"order":21},{"gene":"counter","grade":3,"steps":[0,1,0,4],"order":2},{"gene":"critical","grade":3,"steps":[0,2,1,0],"order":1},{"gene":"criticalPower","grade":4,"steps":[0,1,3,1,0],"order":24},{"gene":"penetration","grade":4,"steps":[0,1,2,0,2],"order":25},{"gene":"comboPower","grade":4,"steps":[0,1,3,1,2],"order":26},{"gene":"blockPower","grade":4,"steps":[0,1,2,3,1],"order":27},{"gene":"counterPower","grade":4,"steps":[0,1,5,1,0],"order":28},{"gene":"reduction","grade":4,"steps":[0,1,0,5,1],"order":29},{"gene":"stun","grade":3,"steps":[0,1,5,4],"order":3},{"gene":"stunTime","grade":4,"steps":[0,1,0,5,0],"order":31},{"gene":"bleed","grade":3,"steps":[0,1,2,1],"order":4},{"gene":"bleedPower","grade":4,"steps":[0,1,2,3,5],"order":33},{"gene":"area","grade":3,"steps":[0,1,0,5],"order":5},{"gene":"areaPower","grade":4,"steps":[0,1,0,2,3],"order":35},{"gene":"lifesteal","grade":4,"steps":[0,1,0,5,4],"order":36},{"gene":"reflection","grade":4,"steps":[0,1,2,1,3],"order":37},{"gene":"regeneration","grade":4,"steps":[0,1,0,1,2],"order":38},{"gene":"comboSpeed","grade":4,"steps":[0,1,2,3,4],"order":39},{"gene":"focus","grade":4,"steps":[0,2,0,1,5],"order":40},{"gene":"healer","grade":2,"steps":[0,2,1],"order":6,"retired":true},{"gene":"secretion","grade":2,"steps":[0,1,3],"order":3},{"gene":"rangedPower","grade":2,"steps":[0,0,2],"order":4},{"gene":"rangedSpeed","grade":2,"steps":[0,0,4],"order":5},{"gene":"healPower","grade":2,"steps":[0,4,4],"order":7,"retired":true}];
+  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.steps=entry.steps;gene.order=entry.order;if(entry.retired)gene.retired=true;if(gene.grade<=2)gene.price/=2;}
+  const catalog=genes.filter(gene=>!gene.retired).sort((a,b)=>a.grade-b.grade||a.order-b.order);
+
+  const boardRadii=[2,3,4,5],profiles=new Map(),shapeCache=new Map();
+  function boardRadius(level){return Number.isInteger(level)&&level>=1&&level<=4?boardRadii[level-1]:Infinity;}
+  function inside(point,level){return Math.max(Math.abs(point.q),Math.abs(point.r),Math.abs(point.q+point.r))<=boardRadius(level);}
+  function legacyShape(gene,grade){
+    if(grade===1)return [0,gene.turn];
+    const identity=gene.id+':'+grade;if(shapeCache.has(identity))return shapeCache.get(identity);
+    if(!profiles.has(grade)){
+      const options=[],visited=new Set(['0,0','1,0']);
+      function visit(position,path,bends){
+        if(path.length===grade+1){if(bends>=grade-1)options.push(path.slice());return;}
+        for(const turn of [-2,-1,0,1,2]){const direction=((path[path.length-1]+turn)%6+6)%6,next=step(position,direction),id=key(next);if(visited.has(id))continue;visited.add(id);path.push(direction);visit(next,path,bends+(turn===0?0:1));path.pop();visited.delete(id);}
+      }
+      visit({q:1,r:0},[0],0);profiles.set(grade,options);
+    }
+    const options=profiles.get(grade),result=options[(genes.indexOf(gene)*17+grade*7)%options.length];shapeCache.set(identity,result);return result;
+  }
+  function shape(gene,grade){return gene.steps;}
+  function route(start,gene,grade,rotation,shapeSteps){const points=[{q:start.q,r:start.r}],directions=Array.isArray(shapeSteps)?shapeSteps:shape(gene,grade);for(const direction of directions)points.push(step(points[points.length-1],direction+rotation));return points;}
+
+  function key(point) {return point.q+','+point.r;}
+  function step(point,direction) {const delta=directions[((direction%6)+6)%6];return {q:point.q+delta[0],r:point.r+delta[1]};}
+  function trace(pieces,level){
+    const nodes=[{q:0,r:0}],paths=[],occupied=new Map([['0,0',{kind:'node',index:0}]]),outside=[],edges=new Set();let closed=false,issue='';
+    for(let index=0;index<pieces.length;index++){
+      const piece=pieces[index],gene=lookup.get(piece.gene),grade=piece.grade===undefined?1:piece.grade;
+      if(!gene||!Number.isInteger(piece.rotation)||piece.rotation<0||piece.rotation>5||!Number.isInteger(grade)||grade<1||grade>4)return {valid:false,reason:'invalid',nodes,paths,closed,at:index,outside};
+      if(Number.isInteger(level)&&grade>level&&!issue)issue='level';
+      closed=false;const start=nodes[nodes.length-1],points=route(start,gene,grade,piece.rotation,piece.shape),end=points[points.length-1];
+      for(let pointIndex=1;pointIndex<points.length;pointIndex++){
+        const point=points[pointIndex],last=pointIndex===points.length-1,contact=occupied.get(key(point)),edge=[key(points[pointIndex-1]),key(point)].sort().join(':');
+        if(edges.has(edge))return {valid:false,reason:'collision',nodes,paths,closed,at:index,problem:point,outside};
+        edges.add(edge);
+        if(contact&&(!last||contact.kind!=='node'))return {valid:false,reason:'collision',nodes,paths,closed,at:index,problem:point,outside};
+        if(!inside(point,level)){outside.push(point);if(!issue)issue='boundary';}
+        if(last&&contact)closed=true;else occupied.set(key(point),{kind:last?'node':'path',index:last?index+1:index});
+      }
+      paths.push({start,middle:points[1],end,points,gene:gene.id,rotation:piece.rotation,grade});nodes.push(end);
+    }
+    return {valid:!issue,reason:issue,nodes,paths,closed,occupied,outside};
+  }
+  function price(pieces){return pieces.reduce((sum,piece)=>{const gene=lookup.get(piece.gene),grade=piece.grade===undefined?1:piece.grade;return sum+Math.ceil((gene?.price||0)*(grade+2)/3);},0);}
+  function cost(pieces){return 3+price(pieces);}
+  function counts(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+1;return result;}
+  function weights(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+(piece.grade===undefined?1:piece.grade);return result;}
+  function stats(pieces){
+    const n=weights(pieces),c=counts(pieces),gather=!!c.gather;
+    return {...dnaCombatStats(c,n),gatherCount:c.gather||0,antennaCount:c.antenna||0,
+      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(2*c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,
+      harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),
+      vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,
+      loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0};
+  }
+  function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,shape:piece.shape.slice()};}
+  function validate(value){
+    if(!value||![1,2,3].includes(value.version)||!Array.isArray(value.pieces)||value.pieces.length>2048||!Number.isFinite(value.budget)||value.budget<0||value.budget>999999999)return null;
+    const pieces=[];
+    for(const input of value.pieces){
+      const gene=lookup.get(input?.gene),grade=input?.grade===undefined?(value.version===3?gene?.grade:1):input.grade,rotation=input?.rotation;
+      if(!gene||!Number.isInteger(grade)||grade<1||grade>4||!Number.isInteger(rotation)||rotation<0||rotation>5)return null;
+      const original=Array.isArray(input.shape)?input.shape:value.version<3?legacyShape(gene,grade):shape(gene,grade);
+      if(original.length!==grade+1||!original.every(direction=>Number.isInteger(direction)&&direction>=-5&&direction<=5))return null;
+      pieces.push({gene:gene.id,grade,rotation,shape:original.map(direction=>(direction%6+6)%6)});
+    }
+    if(!trace(pieces).valid)return null;
+    let level=Number.isInteger(value.level)&&value.level>=1&&value.level<=4?value.level:1;
+    if(value.level===undefined){while(level<4&&!trace(pieces,level).valid)level++;}
+    return {version:3,pieces,budget:Math.floor(value.budget),level};
+  }
+
+  return {genes,catalog,lookup,trace,price,cost,counts,weights,stats,validate,clonePiece,step,key,shape,route,boardRadius,inside};
+})();
+
+return { ATTRIBUTE_DNA };
+})();
 modules["client/unit-appearance.mjs"] = (() => {
 const { UNIT_DISPLAY_MASKS, unitDominantAppearanceMask, unitDisplayAbilityMask } = modules["client/unit-display-appearance.mjs"];
 const { UNIT_DISPLAY_SIZES, unitDisplaySize } = modules["client/unit-size.mjs"];
@@ -5756,8 +5984,9 @@ function createUnitAppearanceCache(loadSource, makeBitmap, pixelBudget) {
 
 return { unitAppearanceRequiredWorldActions, unitAppearanceRequiredActions, UNIT_APPEARANCE_OPTIONAL_PREVIEW_ACTIONS, unitAppearanceDefinition, unitAppearanceReadiness, unitAppearanceAnimation, unitAppearanceMissingActions, unitAppearanceReady, unitAppearanceForAgent, unitAppearanceBirthSceneForAgent, unitAppearancePose, unitAppearanceWorldPose, unitAppearanceSourceScale, unitAppearanceInventory, UNIT_APPEARANCE_PIXEL_BUDGETS, unitAppearanceLodRatio, createUnitAppearanceCache };
 })();
-modules["client/unit-appearance-renderer.mjs"]=(()=>{
-const { createUnitAppearanceCache, unitAppearanceLodRatio, unitAppearanceSourceScale }=modules["client/unit-appearance.mjs"];
+modules["client/unit-appearance-renderer.mjs"] = (() => {
+const { unitFrameMirror } = modules["client/unit-size.mjs"];
+const { createUnitAppearanceCache, unitAppearanceLodRatio, unitAppearanceSourceScale } = modules["client/unit-appearance.mjs"];
 
 function createUnitAppearanceRenderer(loadSource, makeBitmap, pixelBudget) {
   const cache = createUnitAppearanceCache(loadSource, makeBitmap, pixelBudget);
@@ -5783,7 +6012,7 @@ function createUnitAppearanceRenderer(loadSource, makeBitmap, pixelBudget) {
     const destination = { x: -shape.pivotX * scale, y: -shape.pivotY * scale, width: width * scale, height: height * scale };
     context.save();
     try {
-      context.translate(anchor.x, anchor.y); context.scale(mirror ? -1 : 1, 1);
+      context.translate(anchor.x, anchor.y); context.scale(unitFrameMirror(animation.sourceFacing || pose.source.sourceFacing, mirror ? -1 : 1) ? -1 : 1, 1);
       context.imageSmoothingEnabled = true; context.imageSmoothingQuality = "high";
       beforeDraw?.(context, raster.image, crop, destination);
       context.drawImage(raster.image, crop.x, crop.y, crop.width, crop.height,
@@ -5827,7 +6056,7 @@ function createUnitAppearanceRenderer(loadSource, makeBitmap, pixelBudget) {
   return { beginFrame, prepareFrame, drawReady, isReady, draw, clear() { failures.clear(); cache.clear(); }, stats: cache.stats };
 }
 
-return {createUnitAppearanceRenderer};
+return { createUnitAppearanceRenderer };
 })();
 modules["client/unit-appearance-source.mjs"]=(()=>{
 const UNIT_APPEARANCE_BYTE_BUDGETS = Object.freeze({ mobile: 8 * 1024 * 1024, desktop: 32 * 1024 * 1024 });
@@ -5940,7 +6169,2036 @@ function createUnitAppearanceSource(options = {}) {
 
 return {UNIT_APPEARANCE_BYTE_BUDGETS,createUnitAppearanceSource};
 })();
-modules["client/unit-appearance-state.mjs"]=(()=>{
+modules["server/attack.mjs"] = (() => {
+const AGENT_ATTACK_FRAME_DURATIONS = Object.freeze([
+  .06, .07, .06, .08, .03, .05, .05, .05, .05, .05, .05, .07, .08, .09, .10, .06
+]);
+
+const AGENT_HURT_FRAME_DURATIONS = Object.freeze([
+  .02, .03, .03, .03, .4, .03, .03, .03, .02, .02, .02, .02, .02, .02, .02, .02
+]);
+const AGENT_HURT_DURATION = AGENT_HURT_FRAME_DURATIONS.reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
+
+const AGENT_ATTACK_HIT_FRAME = 5;
+const AGENT_ATTACK_HIT_TIME = AGENT_ATTACK_FRAME_DURATIONS.slice(0, AGENT_ATTACK_HIT_FRAME).reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
+const AGENT_ATTACK_DURATION = AGENT_ATTACK_FRAME_DURATIONS.reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
+const AGENT_ATTACK_ASSET = "DesignAssets/Animations/UnitAttack/attack.png";
+
+function attackAnimationElapsed(attack, time, hitTime, duration) {
+  const elapsed = time - attack.startedAt;
+  if (Number.isFinite(attack.recovery)) {
+    const contacts = attack.meleeContacts || [attack.hitAt];
+    let index = 0;
+    while (index < contacts.length - 1 && time > contacts[index] && time >= contacts[index + 1] - hitTime) index++;
+    const contact = contacts[index], start = index ? Math.max(contacts[index - 1], contact - hitTime) : attack.startedAt;
+    if (time < contact) return Math.max(0, (time - start) / Math.max(1e-9, contact - start) * hitTime);
+    return Math.min(duration, hitTime + time - contact);
+  }
+
+  // DNA melee follow-ups move hitAt forward without beginning a new action.
+  // Keep the contact already reached, then finish recovery and prepare the next
+  // swing using only the server's recorded contacts, not current unit stats.
+  const contacts = attack.meleeContacts;
+  if (attack.combatId && !attack.exchange && Array.isArray(contacts) && contacts.length &&
+      Number.isFinite(attack.startedAt) && Number.isFinite(attack.endsAt) && attack.endsAt >= attack.hitAt &&
+      hitTime > 0 && duration > hitTime &&
+      contacts.at(-1) === attack.hitAt && contacts[0] > attack.startedAt &&
+      contacts.every((at, index) => Number.isFinite(at) && (!index || at > contacts[index - 1]))) {
+    if (time > attack.endsAt || time === attack.endsAt && attack.endsAt > attack.hitAt) return duration;
+    const recoveryShare = (duration - hitTime) / duration;
+    const startFor = index => index ? contacts[index - 1] +
+      (contacts[index] - contacts[index - 1]) * recoveryShare : attack.startedAt;
+    let swing = 0;
+    while (swing < contacts.length - 1 && time >= startFor(swing + 1)) swing++;
+    const start = startFor(swing), hit = contacts[swing];
+    const end = swing + 1 < contacts.length ? startFor(swing + 1) : attack.endsAt;
+    return time <= hit ? (time - start) / (hit - start) * hitTime :
+      hitTime + Math.min(1, (time - hit) / (end - hit)) * (duration - hitTime);
+  }
+  if (!attack.combatId || attack.exchange || !Number.isFinite(attack.hitAt) || !Number.isFinite(attack.endsAt) ||
+      !(attack.hitAt > attack.startedAt) || !(attack.endsAt > attack.hitAt)) return elapsed * (attack.speed || 1);
+  if (time >= attack.endsAt) return duration;
+  if (time <= attack.hitAt) return elapsed / (attack.hitAt - attack.startedAt) * hitTime;
+  return hitTime + Math.min(1, (time - attack.hitAt) / (attack.endsAt - attack.hitAt)) * (duration - hitTime);
+}
+
+function agentAttackFrame(attack, time) {
+  if (!attack) return -1;
+  const elapsed = attackAnimationElapsed(attack, time, AGENT_ATTACK_HIT_TIME, AGENT_ATTACK_DURATION);
+  if (elapsed < 0 || elapsed + 1e-8 >= AGENT_ATTACK_DURATION) return -1;
+  let end = 0;
+  for (let index = 0; index < AGENT_ATTACK_FRAME_DURATIONS.length; index++) {
+    end += AGENT_ATTACK_FRAME_DURATIONS[index];
+    if (elapsed + 1e-8 < end) return index;
+  }
+  return -1;
+}
+
+return { AGENT_ATTACK_FRAME_DURATIONS, AGENT_HURT_FRAME_DURATIONS, AGENT_HURT_DURATION, AGENT_ATTACK_HIT_FRAME, AGENT_ATTACK_HIT_TIME, AGENT_ATTACK_DURATION, AGENT_ATTACK_ASSET, attackAnimationElapsed, agentAttackFrame };
+})();
+modules["client/creature-approved-actions.mjs"] = (() => {
+const APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS = Object.freeze({
+  "bubble-toad": {
+    "image": "DesignAssets/Animations/CreatureApprovedV5/bubble-toad/attack.webp",
+    "frameSize": 128,
+    "pivotX": 73.7181701397773,
+    "pivotY": 99.67266996572693,
+    "viewSize": 122.62249221100252,
+    "registrationScale": 1,
+    "groundRadiusX": 0.34626,
+    "groundRadiusY": 0.027701,
+    "supportAnchor": [
+      101.49253731343283,
+      99.5820895522388
+    ],
+    "columns": 4,
+    "frameCount": 6,
+    "durationsMs": [
+      70,
+      210,
+      50,
+      300,
+      170,
+      220
+    ],
+    "durationMs": 1020,
+    "loop": false,
+    "facing": "left",
+    "impactFrame": 3,
+    "hitTimeMs": 330,
+    "fixedSupport": true
+  },
+  "dew-rabbit": {
+    "image": "DesignAssets/Animations/CreatureApprovedV5/dew-rabbit/attack.webp",
+    "frameSize": 128,
+    "pivotX": 88.43302298870299,
+    "pivotY": 92.07242947061347,
+    "viewSize": 114.68932699420773,
+    "registrationScale": 1.0287769784172662,
+    "groundRadiusX": 0.199041,
+    "groundRadiusY": 0.03717,
+    "supportAnchor": [
+      98.5945945945946,
+      95.56756756756758
+    ],
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      100,
+      110,
+      110,
+      40,
+      200,
+      90,
+      130,
+      190
+    ],
+    "durationMs": 970,
+    "loop": false,
+    "facing": "left",
+    "impactFrame": 4,
+    "hitTimeMs": 360,
+    "fixedSupport": true
+  },
+  "lantern-keeper": {
+    "image": "DesignAssets/Animations/CreatureApprovedV5/lantern-keeper/attack.webp",
+    "frameSize": 128,
+    "pivotX": 71.91820815789474,
+    "pivotY": 98.65081821052632,
+    "viewSize": 122.88818130736094,
+    "registrationScale": 1,
+    "groundRadiusX": 0.182292,
+    "groundRadiusY": 0.033854,
+    "supportAnchor": [
+      89.25,
+      101.25
+    ],
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      70,
+      100,
+      120,
+      40,
+      260,
+      110,
+      160,
+      140
+    ],
+    "durationMs": 1000,
+    "loop": false,
+    "facing": "left",
+    "impactFrame": 4,
+    "hitTimeMs": 330,
+    "fixedSupport": true
+  },
+  "soil-boar": {
+    "image": "DesignAssets/Animations/CreatureApprovedV5/soil-boar/attack.webp",
+    "frameSize": 128,
+    "pivotX": 73.01615647049246,
+    "pivotY": 90.91383687944646,
+    "viewSize": 125.94803856520835,
+    "registrationScale": 1,
+    "groundRadiusX": 0.325203,
+    "groundRadiusY": 0.04607,
+    "supportAnchor": [
+      108.30769230769232,
+      92.06153846153846
+    ],
+    "columns": 4,
+    "frameCount": 6,
+    "durationsMs": [
+      70,
+      210,
+      50,
+      300,
+      170,
+      220
+    ],
+    "durationMs": 1020,
+    "loop": false,
+    "facing": "left",
+    "impactFrame": 3,
+    "hitTimeMs": 330,
+    "fixedSupport": true
+  },
+  "soil-mole": {
+    "image": "DesignAssets/Animations/CreatureApprovedV5/soil-mole/attack.webp",
+    "frameSize": 128,
+    "pivotX": 72.94630339128246,
+    "pivotY": 70.09282788275803,
+    "viewSize": 113.68334782654499,
+    "registrationScale": 1.0036630036630036,
+    "groundRadiusX": 0.387324,
+    "groundRadiusY": 0.087324,
+    "supportAnchor": [
+      110.22222222222221,
+      68.06349206349206
+    ],
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      100,
+      110,
+      120,
+      40,
+      220,
+      90,
+      130,
+      190
+    ],
+    "durationMs": 1000,
+    "loop": false,
+    "facing": "left",
+    "impactFrame": 4,
+    "hitTimeMs": 370,
+    "fixedSupport": true
+  },
+  "walking-forest": {
+    "image": "DesignAssets/Animations/CreatureApprovedV5/walking-forest/attack.webp",
+    "frameSize": 128,
+    "pivotX": 58.252199483870974,
+    "pivotY": 112.2815249032258,
+    "viewSize": 109.79472140762462,
+    "registrationScale": 1.015625,
+    "groundRadiusX": 0.414063,
+    "groundRadiusY": 0.0625,
+    "supportAnchor": [
+      96,
+      113.29032258064515
+    ],
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      100,
+      180,
+      220,
+      60,
+      320,
+      180,
+      220,
+      180
+    ],
+    "durationMs": 1460,
+    "loop": false,
+    "facing": "left",
+    "impactFrame": 4,
+    "hitTimeMs": 560,
+    "fixedSupport": true
+  },
+  "white-paw": {
+    "image": "DesignAssets/Animations/CreatureApprovedV5/white-paw/attack.webp",
+    "frameSize": 128,
+    "pivotX": 61.707070707070706,
+    "pivotY": 93.9040404040404,
+    "viewSize": 132.36363636363637,
+    "registrationScale": 1,
+    "groundRadiusX": 0.267361,
+    "groundRadiusY": 0.048611,
+    "supportAnchor": [
+      95.55555555555556,
+      100
+    ],
+    "columns": 3,
+    "frameCount": 6,
+    "durationsMs": [
+      100,
+      100,
+      70,
+      240,
+      140,
+      150
+    ],
+    "durationMs": 800,
+    "loop": false,
+    "facing": "left",
+    "impactFrame": 3,
+    "hitTimeMs": 270,
+    "fixedSupport": true
+  },
+  "vine-turtle": {
+    "image": "DesignAssets/Animations/CreatureApprovedV5/vine-turtle/attack.webp",
+    "frameSize": 128,
+    "pivotX": 68.97122665320545,
+    "pivotY": 87.6737004688541,
+    "viewSize": 109.82574457344775,
+    "registrationScale": 1,
+    "groundRadiusX": 0.401734,
+    "groundRadiusY": 0.028902,
+    "supportAnchor": [
+      101.94285714285714,
+      91.88571428571429
+    ],
+    "columns": 3,
+    "frameCount": 6,
+    "durationsMs": [
+      70,
+      210,
+      50,
+      300,
+      170,
+      220
+    ],
+    "durationMs": 1020,
+    "loop": false,
+    "facing": "left",
+    "impactFrame": 3,
+    "hitTimeMs": 330,
+    "fixedSupport": true
+  },
+  "shadow-weasel": {
+    "image": "DesignAssets/Animations/CreatureApprovedV5/shadow-weasel/attack.webp",
+    "frameSize": 128,
+    "pivotX": 66.350167983165,
+    "pivotY": 91.74410847811447,
+    "viewSize": 117.07407407407405,
+    "registrationScale": 1,
+    "groundRadiusX": 0.285266,
+    "groundRadiusY": 0.037618,
+    "supportAnchor": [
+      95.55555555555556,
+      100
+    ],
+    "columns": 3,
+    "frameCount": 6,
+    "durationsMs": [
+      100,
+      100,
+      70,
+      240,
+      140,
+      150
+    ],
+    "durationMs": 800,
+    "loop": false,
+    "facing": "left",
+    "impactFrame": 3,
+    "hitTimeMs": 270,
+    "fixedSupport": true
+  }
+});
+
+const APPROVED_COTTON_SHEEP_WALK_ANIMATION = Object.freeze({
+  "image": "DesignAssets/Animations/CreatureApprovedV5/cotton-sheep/walk.webp",
+  "frameSize": 128,
+  "pivotX": 70.4,
+  "pivotY": 86.4,
+  "viewSize": 102.4,
+  "registrationScale": 1,
+  "groundRadiusX": 0.244141,
+  "groundRadiusY": 0.064453,
+  "columns": 8,
+  "frameCount": 64,
+  "durationsMs": [
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125,
+    4.8828125
+  ],
+  "durationMs": 312.5,
+  "loop": true,
+  "temporalCadenceHz": 3.2
+});
+
+return { APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS, APPROVED_COTTON_SHEEP_WALK_ANIMATION };
+})();
+modules["client/creature-approved-animations.mjs"] = (() => {
+const APPROVED_CREATURE_WALK_ANIMATIONS = Object.freeze({
+  "soil-mole": {
+    "image": "DesignAssets/Animations/CreatureApprovedV4/soil-mole/walk.webp",
+    "frameSize": 238,
+    "viewSize": 237.3314606741573,
+    "columns": 8,
+    "pivotX": 125.35112359550561,
+    "pivotY": 187.85955056179773,
+    "durationsMs": [
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875,
+      10.421875
+    ],
+    "loop": true,
+    "registrationScale": 1,
+    "groundRadiusX": 0.387324,
+    "groundRadiusY": 0.087324,
+    "cyclesPerCell": 2.5
+  },
+  "walking-forest": {
+    "image": "DesignAssets/Animations/CreatureApprovedV4/walking-forest/walk.webp",
+    "frameSize": 440,
+    "viewSize": 403.11784073543805,
+    "columns": 8,
+    "pivotX": 216.6153846153846,
+    "pivotY": 362.15384615384613,
+    "durationsMs": [
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773,
+      20.676631501373773
+    ],
+    "loop": true,
+    "registrationScale": 1,
+    "groundRadiusX": 0.414063,
+    "groundRadiusY": 0.0625,
+    "cyclesPerCell": 1.4
+  },
+  "shadow-weasel": {
+    "image": "DesignAssets/Animations/CreatureApprovedV4/shadow-weasel/walk.webp",
+    "frameSize": 229,
+    "viewSize": 176.45169082125602,
+    "columns": 8,
+    "pivotX": 111.18115886714976,
+    "pivotY": 193.59903492270533,
+    "durationsMs": [
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5
+    ],
+    "loop": true,
+    "registrationScale": 1,
+    "groundRadiusX": 0.285266,
+    "groundRadiusY": 0.037618,
+    "cyclesPerCell": 0.769231
+  },
+  "white-paw": {
+    "image": "DesignAssets/Animations/CreatureApprovedV4/white-paw/walk.webp",
+    "frameSize": 248,
+    "viewSize": 228.92307692307693,
+    "columns": 8,
+    "pivotX": 120.82051282051282,
+    "pivotY": 205.87179487179486,
+    "durationsMs": [
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5,
+      12.5
+    ],
+    "loop": true,
+    "registrationScale": 1,
+    "groundRadiusX": 0.267361,
+    "groundRadiusY": 0.048611,
+    "cyclesPerCell": 0.625
+  }
+});
+
+const APPROVED_CREATURE_DEATH_ANIMATIONS = Object.freeze({
+  "bubble-toad": {
+    "image": "DesignAssets/Animations/CreatureApprovedV4/bubble-toad/death.webp",
+    "frameSize": 202,
+    "viewSize": 201.44198895027625,
+    "columns": 4,
+    "pivotX": 103.23204364088399,
+    "pivotY": 171.30939226519337,
+    "durationsMs": [
+      300,
+      90,
+      100,
+      100,
+      90,
+      80,
+      80,
+      80,
+      90,
+      90,
+      90,
+      90,
+      90,
+      90,
+      90,
+      1200
+    ],
+    "loop": false,
+    "registrationScale": 1,
+    "groundRadiusX": 0.34626,
+    "groundRadiusY": 0.027701
+  }
+});
+
+return { APPROVED_CREATURE_WALK_ANIMATIONS, APPROVED_CREATURE_DEATH_ANIMATIONS };
+})();
+modules["client/image-scales.mjs"] = (() => {
+const IMAGE_SCALES = Object.freeze({
+  "DesignAssets/Animations/Beetle/attack-right.webp": [
+    0.673828125,
+    0.673828125
+  ],
+  "DesignAssets/Animations/Beetle/atlas.webp": [
+    0.673828125,
+    0.673828125
+  ],
+  "DesignAssets/Animations/Beetle/neutral.webp": [
+    0.673828125,
+    0.673828125
+  ],
+  "DesignAssets/Animations/BeetleDeath/dead-v2.png": [
+    0.361328125,
+    0.361328125
+  ],
+  "DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp": [
+    0.705078125,
+    0.705078125
+  ],
+  "DesignAssets/Animations/CreatureIdleStudies/V1/snare-vine/idle.webp": [
+    0.828125,
+    0.828125
+  ],
+  "DesignAssets/Animations/CreatureIdleStudies/V2/shadow-weasel/idle.webp": [
+    0.623046875,
+    0.623046875
+  ],
+  "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp": [
+    0.67578125,
+    0.67578125
+  ],
+  "DesignAssets/Animations/CreatureIdleV3/dew-rabbit/idle.webp": [
+    0.814453125,
+    0.814453125
+  ],
+  "DesignAssets/Animations/CreatureIdleV3/flower-tail-bird/idle.webp": [
+    0.7578125,
+    0.7578125
+  ],
+  "DesignAssets/Animations/CreatureIdleV3/soil-mole/idle.webp": [
+    0.693359375,
+    0.693359375
+  ],
+  "DesignAssets/Animations/CreatureIdleV4/bundle-snail/idle.webp": [
+    0.77734375,
+    0.77734375
+  ],
+  "DesignAssets/Animations/Resources/FertileSoil/harvest-sheet.png": [
+    0.890625,
+    0.890625
+  ],
+  "DesignAssets/Animations/Resources/HarvestDrawnV2/pebbles/harvest-sheet.png": [
+    0.400390625,
+    0.400390625
+  ],
+  "DesignAssets/Animations/Resources/HarvestDrawnV2/wood/harvest-sheet.png": [
+    0.462890625,
+    0.462890625
+  ],
+  "DesignAssets/Animations/Resources/HarvestDrawnV3/dew/harvest-sheet.png": [
+    0.966796875,
+    0.966796875
+  ],
+  "DesignAssets/Animations/Resources/HarvestV1/honey-mushrooms/sheet.png": [
+    0.890625,
+    0.890625
+  ],
+  "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp": [
+    0.8203125,
+    0.8203125
+  ],
+  "DesignAssets/Animations/SoilBoarIdle/V1/idle.webp": [
+    0.720703125,
+    0.720703125
+  ],
+  "DesignAssets/Animations/TalonOwlIdle/PerchedV4/idle.webp": [
+    0.84375,
+    0.84375
+  ],
+  "DesignAssets/Animations/UnitAttack/attack.png": [
+    0.234375,
+    0.234375
+  ],
+  "DesignAssets/Animations/UnitHurt/V3/hurt.png": [
+    0.234375,
+    0.234375
+  ],
+  "DesignAssets/Attributes/SilhouettesV2/04-crescent.png": [
+    0.140625,
+    0.140625
+  ],
+  "DesignAssets/Attributes/SilhouettesV2/23-y-branch.png": [
+    0.140625,
+    0.140625
+  ],
+  "DesignAssets/Attributes/SilhouettesV2/24-horseshoe.png": [
+    0.140625,
+    0.140625
+  ],
+  "DesignAssets/Attributes/SilhouettesV2/27-chevron.png": [
+    0.140625,
+    0.140625
+  ],
+  "DesignAssets/Burrows/beetle-burrow-large.png": [
+    0.38218714768883877,
+    0.38218714768883877
+  ],
+  "DesignAssets/Burrows/beetle-burrow-small.png": [
+    0.20574162679425836,
+    0.20574162679425836
+  ],
+  "DesignAssets/CreatureConcepts/v3/bubble-toad.png": [
+    0.21169590643274855,
+    0.21168923734853884
+  ],
+  "DesignAssets/CreatureConcepts/v3/bundle-snail.png": [
+    0.21721311475409835,
+    0.2168918918918919
+  ],
+  "DesignAssets/CreatureConcepts/v3/cotton-sheep.png": [
+    0.22564102564102564,
+    0.22564102564102564
+  ],
+  "DesignAssets/CreatureConcepts/v3/dew-rabbit.png": [
+    0.23980222496909764,
+    0.23948019801980197
+  ],
+  "DesignAssets/CreatureConcepts/v3/flower-tail-bird.png": [
+    0.2372986369268897,
+    0.23800738007380073
+  ],
+  "DesignAssets/CreatureConcepts/v3/lantern-keeper.png": [
+    0.24166142227816237,
+    0.24221668742216687
+  ],
+  "DesignAssets/CreatureConcepts/v3/old-garden-snail.png": [
+    0.2185897435897436,
+    0.2185897435897436
+  ],
+  "DesignAssets/CreatureConcepts/v3/rolling-acorn.png": [
+    0.25064102564102564,
+    0.25064102564102564
+  ],
+  "DesignAssets/CreatureConcepts/v3/shadow-weasel.png": [
+    0.1750911933298593,
+    0.17466561762391816
+  ],
+  "DesignAssets/CreatureConcepts/v3/snare-vine.png": [
+    0.3234946871310508,
+    0.32482124616956076
+  ],
+  "DesignAssets/CreatureConcepts/v3/soil-boar.png": [
+    0.2178508514386377,
+    0.2175141242937853
+  ],
+  "DesignAssets/CreatureConcepts/v3/soil-mole.png": [
+    0.2128205128205128,
+    0.2128205128205128
+  ],
+  "DesignAssets/CreatureConcepts/v3/spiny-back-leader.png": [
+    0.21640826873385013,
+    0.21564760026298488
+  ],
+  "DesignAssets/CreatureConcepts/v3/spring-keeper.png": [
+    0.2270560190703218,
+    0.22809278350515463
+  ],
+  "DesignAssets/CreatureConcepts/v3/talon-owl.png": [
+    0.24971098265895952,
+    0.24910522548317823
+  ],
+  "DesignAssets/CreatureConcepts/v3/vine-turtle.png": [
+    0.21987179487179487,
+    0.21987179487179487
+  ],
+  "DesignAssets/CreatureConcepts/v3/walking-forest.png": [
+    0.2240829346092504,
+    0.2240829346092504
+  ],
+  "DesignAssets/CreatureConcepts/v3/white-paw.png": [
+    0.18733783082511676,
+    0.18781302170283806
+  ],
+  "DesignAssets/Foods/food-berry-bush.png": [
+    0.1722488038277512,
+    0.1722488038277512
+  ],
+  "DesignAssets/Foods/food-meat.png": [
+    0.03827751196172249,
+    0.03827751196172249
+  ],
+  "DesignAssets/Nests/nest-stage-01.png": [
+    0.3271484375,
+    0.3271484375
+  ],
+  "DesignAssets/ResourceConcepts/v1/resource-carapace.png": [
+    0.029505582137161084,
+    0.029505582137161084
+  ],
+  "DesignAssets/Resources/clay-carry.png": [
+    0.04704944178628389,
+    0.04704944178628389
+  ],
+  "DesignAssets/Resources/clay.png": [
+    0.1379585326953748,
+    0.1379585326953748
+  ],
+  "DesignAssets/Resources/dew-carry.png": [
+    0.1291866028708134,
+    0.1291866028708134
+  ],
+  "DesignAssets/Resources/dew-grass.png": [
+    0.1379585326953748,
+    0.1379585326953748
+  ],
+  "DesignAssets/Resources/pebbles-carry.png": [
+    0.10127591706539076,
+    0.10127591706539076
+  ],
+  "DesignAssets/Resources/pebbles.png": [
+    0.1379585326953748,
+    0.1379585326953748
+  ],
+  "DesignAssets/Resources/wood-carry.png": [
+    0.07097288676236045,
+    0.07097288676236045
+  ],
+  "DesignAssets/Terrain/coast-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/deep-water-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/ford-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/forest-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/grassland-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/high-mountain-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/land-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/low-mountain-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/nest-soil-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/ridge-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/shallow-water-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Terrain/standing-tree-smooth-atlas.png": [
+    0.27348066298342544,
+    0.27348066298342544
+  ],
+  "DesignAssets/Terrain/swamp-ground.png": [
+    0.2109375,
+    0.2109375
+  ],
+  "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp": [
+    1,
+    1
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp": [
+    0.203125,
+    0.203125
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp": [
+    0.294921875,
+    0.294921875
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": [
+    0.205078125,
+    0.205078125
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp": [
+    0.205078125,
+    0.205078125
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": [
+    0.4375,
+    0.4375
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp": [
+    1,
+    1
+  ],
+  "DesignAssets/Tribes/pebble/AnimationStudies/roll-v2/roll-v2.webp": [
+    0.20703125,
+    0.20703125
+  ],
+  "DesignAssets/Tribes/pebble/BaseParts/body.png": [
+    0.439453125,
+    0.439453125
+  ],
+  "DesignAssets/Tribes/pebble/Nests/nest-stage-01.png": [
+    0.5215311004784688,
+    0.5215311004784688
+  ],
+  "DesignAssets/Tribes/pebble/starter.png": [
+    0.0733652312599681,
+    0.0733652312599681
+  ],
+  "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp": [
+    1,
+    1
+  ],
+  "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp": [
+    0.19921875,
+    0.19921875
+  ],
+  "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": [
+    0.19921875,
+    0.19921875
+  ],
+  "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp": [
+    0.19921875,
+    0.19921875
+  ],
+  "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp": [
+    0.4375,
+    0.4375
+  ],
+  "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp": [
+    1,
+    1
+  ],
+  "DesignAssets/Tribes/spore/BaseParts/body.png": [
+    0.439453125,
+    0.439453125
+  ],
+  "DesignAssets/Tribes/spore/Nests/nest-stage-01.png": [
+    0.4696969696969697,
+    0.4696969696969697
+  ],
+  "DesignAssets/Tribes/spore/starter.png": [
+    0.06937799043062201,
+    0.06937799043062201
+  ],
+  "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp": [
+    1,
+    1
+  ],
+  "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp": [
+    0.318359375,
+    0.318359375
+  ],
+  "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp": [
+    0.4609375,
+    0.4609375
+  ],
+  "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": [
+    0.318359375,
+    0.318359375
+  ],
+  "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp": [
+    1,
+    1
+  ],
+  "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp": [
+    0.318359375,
+    0.318359375
+  ],
+  "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp": [
+    0.4375,
+    0.4375
+  ],
+  "DesignAssets/Tribes/spring/BaseParts/body.png": [
+    0.439453125,
+    0.439453125
+  ],
+  "DesignAssets/Tribes/spring/Nests/nest-stage-01.png": [
+    0.37034949267192785,
+    0.3697857948139797
+  ],
+  "DesignAssets/Tribes/spring/starter.png": [
+    0.09170653907496013,
+    0.09170653907496013
+  ],
+  "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp": [
+    0.45703125,
+    0.45703125
+  ],
+  "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp": [
+    0.4375,
+    0.4375
+  ],
+  "DesignAssets/Units/BaseParts/body.png": [
+    0.09090909090909091,
+    0.09172661870503597
+  ],
+  "DesignAssets/Units/BaseParts/sprout-left.png": [
+    0.06118881118881119,
+    0.06115107913669065
+  ],
+  "DesignAssets/Units/BaseParts/sprout-right.png": [
+    0.06118881118881119,
+    0.06115107913669065
+  ],
+  "DesignAssets/Units/BaseParts/sprout-stem.png": [
+    0.055944055944055944,
+    0.05575539568345324
+  ],
+  "DesignAssets/Units/Parts/antenna-1.png": [
+    0.07172995780590717,
+    0.07176470588235294
+  ],
+  "DesignAssets/Units/Parts/antenna-2.png": [
+    0.059834123222748815,
+    0.059490084985835696
+  ],
+  "DesignAssets/Units/Parts/feet-1.png": [
+    0.06878306878306878,
+    0.06935483870967742
+  ],
+  "DesignAssets/Units/Parts/feet-2.png": [
+    0.04061784897025172,
+    0.041044776119402986
+  ],
+  "DesignAssets/Units/Parts/strength-1.png": [
+    0.06914893617021277,
+    0.06761006289308176
+  ],
+  "DesignAssets/Units/Parts/strength-2.png": [
+    0.046875,
+    0.046089385474860335
+  ],
+  "DesignAssets/Units/spiny-back-beetle.png": [
+    0.16845703125,
+    0.16845703125
+  ],
+  "DesignAssets/Units/starter-sprout-bean.png": [
+    0.09090909090909091,
+    0.09172661870503597
+  ],
+  "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp": [0.3333333333333333, 0.3333333333333333]
+});
+
+return { IMAGE_SCALES };
+})();
+modules["client/unit-sprite-registration.mjs"] = (() => {
+const UNIT_SPRITE_REGISTRATION = Object.freeze({
+  "DesignAssets/Animations/CreatureWalkV2/flower-tail-bird/walk.webp": Object.freeze({"frameSize":388,"viewSize":388,"pivotX":170.0,"pivotY":320.0,"groundRadiusX":0.14433,"groundRadiusY":0.043814,"registrationScale":1,"cyclesPerCell":1.0}),
+  "DesignAssets/Animations/CreatureWalkV2/dew-rabbit/walk.webp": Object.freeze({"frameSize":433,"viewSize":429.51,"pivotX":221.885,"pivotY":401.035,"groundRadiusX":0.199041,"groundRadiusY":0.03717,"registrationScale":1,"travelWindow":[0.18,0.56],"cyclesPerCell":1}),
+  "DesignAssets/Animations/CreatureWalkV2/bundle-snail/walk.webp": Object.freeze({"frameSize":398,"viewSize":374.12,"pivotX":201.1,"pivotY":294.83,"groundRadiusX":0.288945,"groundRadiusY":0.04397,"registrationScale":1,"travelWindow":[0.22,0.82],"cyclesPerCell":1,"frameGeometry":{"0":{"pivotX":200.6,"pivotY":294.83},"1":{"pivotX":201.6,"pivotY":294.83},"2":{"pivotX":201.6,"pivotY":295.58},"3":{"pivotX":199.6,"pivotY":293.83},"4":{"pivotX":202.1,"pivotY":295.33},"5":{"pivotX":200.35,"pivotY":295.08},"6":{"pivotX":201.6,"pivotY":295.08},"7":{"pivotX":201.35,"pivotY":294.08}}}),
+  "DesignAssets/Animations/CreatureWalkV2/rolling-acorn/walk.webp": Object.freeze({"frameSize":420,"viewSize":420,"pivotX":205.0,"pivotY":335.5,"groundRadiusX":0.178571,"groundRadiusY":0.039286,"registrationScale":1,"cyclesPerCell":0.4}),
+  "DesignAssets/Animations/CreatureWalkV2/soil-boar/walk.webp": Object.freeze({"frameSize":256,"viewSize":253.426415,"pivotX":131.077358,"pivotY":180.745283,"groundRadiusX":0.325203,"groundRadiusY":0.04607,"registrationScale":1,"cyclesPerCell":2}),
+  "DesignAssets/Animations/CreatureWalkV2/bubble-toad/walk.webp": Object.freeze({"frameSize":288,"viewSize":239.758491,"pivotX":147.854716,"pivotY":216.69434,"groundRadiusX":0.34626,"groundRadiusY":0.027701,"registrationScale":1,"travelWindow":[0.22727272727272727,0.5227272727272727],"cyclesPerCell":1}),
+  "DesignAssets/Animations/CreatureWalkV2/vine-turtle/walk.webp": Object.freeze({"frameSize":256,"viewSize":256,"pivotX":131.25,"pivotY":220.81,"groundRadiusX":0.401734,"groundRadiusY":0.028902,"registrationScale":1,"cyclesPerCell":1.5,"frameGeometry":{"0":{"pivotX":132.25,"pivotY":221.31},"1":{"pivotX":132.25,"pivotY":221.06},"2":{"pivotX":128.25,"pivotY":220.31},"3":{"pivotX":134.25,"pivotY":220.31},"4":{"pivotX":129.75,"pivotY":221.81},"5":{"pivotX":131.25,"pivotY":219.56},"6":{"pivotX":129.25,"pivotY":221.81},"7":{"pivotX":133.25,"pivotY":220.31}}}),
+  "DesignAssets/Animations/CreatureWalkV2/snare-vine/walk.webp": Object.freeze({"frameSize":256,"viewSize":263.68,"pivotX":128.537358,"pivotY":227.825659,"groundRadiusX":0.122642,"groundRadiusY":0.021226,"registrationScale":1,"cyclesPerCell":1.428571}),
+  "DesignAssets/Animations/CreatureWalkV2/talon-owl/walk.webp": Object.freeze({"frameSize":432,"viewSize":271.36,"pivotX":209.783704,"pivotY":318.478519,"registrationScale":1,"cyclesPerCell":1.0}),
+  "DesignAssets/Animations/CreatureWalkV2/spring-keeper/walk.webp": Object.freeze({"frameSize":512,"viewSize":384,"pivotX":207.0,"pivotY":344.0,"groundRadiusX":0.125,"groundRadiusY":0.028646,"registrationScale":1,"cyclesPerCell":1.25}),
+  "DesignAssets/Animations/CreatureWalkV2/lantern-keeper/walk.webp": Object.freeze({"frameSize":384,"viewSize":360.96,"pivotX":187.4,"pivotY":313.72,"groundRadiusX":0.182292,"groundRadiusY":0.033854,"registrationScale":1,"travelWindow":[0.32432432432432434,0.6486486486486487],"cyclesPerCell":1}),
+  "DesignAssets/Animations/CreatureWalkV2/old-garden-snail/walk.webp": Object.freeze({"frameSize":352,"viewSize":352,"pivotX":172.0,"pivotY":291.0,"groundRadiusX":0.318182,"groundRadiusY":0.056818,"registrationScale":1,"travelWindow":[0.25,0.82],"cyclesPerCell":1,"frameGeometry":{"0":{"pivotX":169.0,"pivotY":291.0},"1":{"pivotX":175.0,"pivotY":290.75},"2":{"pivotX":175.0,"pivotY":291.5},"3":{"pivotX":169.0,"pivotY":290.25},"4":{"pivotX":172.75,"pivotY":292.0},"5":{"pivotX":175.0,"pivotY":290.5}}}),
+  "DesignAssets/Animations/CreatureWalkV2/spiny-back-leader/walk.webp": Object.freeze({"frameSize":256,"viewSize":248.32,"pivotX":132.87,"pivotY":196.51,"groundRadiusX":0.398438,"groundRadiusY":0.085938,"registrationScale":1,"cyclesPerCell":1.428571,"frameGeometry":{"0":{"pivotX":135.87,"pivotY":196.51},"1":{"pivotX":131.87,"pivotY":196.01},"2":{"pivotX":132.62,"pivotY":197.26},"3":{"pivotX":132.12,"pivotY":196.51},"4":{"pivotX":133.62,"pivotY":196.26},"5":{"pivotX":130.62,"pivotY":196.51}}}),
+  "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp": Object.freeze({"frameSize":631,"pivotX":315.5,"pivotY":553.268115942029,"viewSize":631,"registrationScale":1.2321428571428572}),
+  "DesignAssets/Animations/UnitAttack/attack.png": Object.freeze({"frameSize":632,"pivotX":316,"pivotY":555.1351351351351,"viewSize":632,"registrationScale":1.2333333333333334}),
+  "DesignAssets/Animations/UnitHurt/V3/hurt.png": Object.freeze({"frameSize":632,"pivotX":316,"pivotY":555.1351351351351,"viewSize":632,"registrationScale":1.2333333333333334}),
+  "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp": Object.freeze({"frameSize":316,"pivotX":158,"pivotY":276.5,"viewSize":316,"registrationScale":1.2307692307692308}),
+  "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp": Object.freeze({"frameSize":549,"pivotX":274.5,"pivotY":480.375,"viewSize":549,"registrationScale":1.0714285714285714}),
+  "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":553,"pivotX":276.5,"pivotY":482.6181818181818,"viewSize":553,"registrationScale":1.0784313725490196}),
+  "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":553,"pivotX":276.5,"pivotY":482.6181818181818,"viewSize":553,"registrationScale":1.0784313725490196}),
+  "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":553,"pivotX":276.5,"pivotY":482.6181818181818,"viewSize":553,"registrationScale":1.0784313725490196}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": Object.freeze({"frameSize":512,"pivotX":256,"pivotY":448,"viewSize":512,"registrationScale":1}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":512,"pivotX":256,"pivotY":448,"viewSize":512,"registrationScale":1}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":517,"pivotX":258.5,"pivotY":453.5943396226415,"viewSize":517,"registrationScale":1.0095238095238095}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":517,"pivotX":258.5,"pivotY":453.5943396226415,"viewSize":517,"registrationScale":1.0095238095238095}),
+  "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp": Object.freeze({"frameSize":512,"pivotX":256,"pivotY":448,"viewSize":512,"registrationScale":1}),
+  "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":516,"pivotX":258,"pivotY":453.07317073170736,"viewSize":516,"registrationScale":1.0061349693251533}),
+  "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":516,"pivotX":258,"pivotY":453.07317073170736,"viewSize":516,"registrationScale":1.0061349693251533}),
+  "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":516,"pivotX":258,"pivotY":453.07317073170736,"viewSize":516,"registrationScale":1.0061349693251533}),
+  "DesignAssets/Animations/CreatureIdleV3/flower-tail-bird/idle.webp": Object.freeze({"frameSize":440,"pivotX":226,"pivotY":367,"viewSize":440,"registrationScale":1.134020618556701,"groundRadiusX":0.14433,"groundRadiusY":0.043814}),
+  "DesignAssets/Animations/CreatureAttackV2/flower-tail-bird/runtime.webp": Object.freeze({"frameSize":320,"pivotX":164.280041,"pivotY":267.159876,"viewSize":312.9622641509434,"registrationScale":1.1307420494699647,"groundRadiusX":0.14433,"groundRadiusY":0.043814}),
+  "DesignAssets/Animations/CreatureHurtV6/flower-tail-bird/hurt.webp": Object.freeze({"frameSize":440,"pivotX":226,"pivotY":367,"viewSize":440,"registrationScale":1.134020618556701,"groundRadiusX":0.14433,"groundRadiusY":0.043814}),
+  "DesignAssets/Animations/CreatureDeathV4/flower-tail-bird/runtime.webp": Object.freeze({"frameSize":290,"pivotX":148.958763,"pivotY":242.123711,"viewSize":290,"registrationScale":1.1328125,"groundRadiusX":0.14433,"groundRadiusY":0.043814,"frameGeometry":{"0":{"pivotX":148.958763,"pivotY":242.123711,"groundRadiusX":0.14433,"groundRadiusY":0.043814},"1":{"pivotX":149.194866,"pivotY":242.170305,"groundRadiusX":0.146325,"groundRadiusY":0.043683},"2":{"pivotX":149.430968,"pivotY":242.216899,"groundRadiusX":0.148321,"groundRadiusY":0.043551},"3":{"pivotX":149.667071,"pivotY":242.263493,"groundRadiusX":0.150316,"groundRadiusY":0.04342},"4":{"pivotX":149.903174,"pivotY":242.310087,"groundRadiusX":0.152311,"groundRadiusY":0.043289},"5":{"pivotX":150.139276,"pivotY":242.356681,"groundRadiusX":0.154307,"groundRadiusY":0.043157},"6":{"pivotX":150.375379,"pivotY":242.403275,"groundRadiusX":0.156302,"groundRadiusY":0.043026},"7":{"pivotX":150.611482,"pivotY":242.449869,"groundRadiusX":0.158297,"groundRadiusY":0.042894},"8":{"pivotX":150.847584,"pivotY":242.496463,"groundRadiusX":0.160293,"groundRadiusY":0.042763},"9":{"pivotX":151.083687,"pivotY":242.543056,"groundRadiusX":0.162288,"groundRadiusY":0.042631},"10":{"pivotX":151.31979,"pivotY":242.58965,"groundRadiusX":0.164284,"groundRadiusY":0.0425},"11":{"pivotX":151.555892,"pivotY":242.636244,"groundRadiusX":0.166279,"groundRadiusY":0.042368},"12":{"pivotX":151.791995,"pivotY":242.682838,"groundRadiusX":0.168274,"groundRadiusY":0.042237},"13":{"pivotX":152.028098,"pivotY":242.729432,"groundRadiusX":0.17027,"groundRadiusY":0.042105},"14":{"pivotX":152.264201,"pivotY":242.776026,"groundRadiusX":0.172265,"groundRadiusY":0.041974},"15":{"pivotX":152.500303,"pivotY":242.82262,"groundRadiusX":0.17426,"groundRadiusY":0.041842},"16":{"pivotX":152.736406,"pivotY":242.869214,"groundRadiusX":0.176256,"groundRadiusY":0.041711},"17":{"pivotX":152.972509,"pivotY":242.915808,"groundRadiusX":0.178251,"groundRadiusY":0.041579},"18":{"pivotX":153.208611,"pivotY":242.962401,"groundRadiusX":0.180247,"groundRadiusY":0.041448},"19":{"pivotX":153.444714,"pivotY":243.008995,"groundRadiusX":0.182242,"groundRadiusY":0.041316},"20":{"pivotX":153.680817,"pivotY":243.055589,"groundRadiusX":0.184237,"groundRadiusY":0.041185},"21":{"pivotX":153.916919,"pivotY":243.102183,"groundRadiusX":0.186233,"groundRadiusY":0.041054},"22":{"pivotX":154.153022,"pivotY":243.148777,"groundRadiusX":0.188228,"groundRadiusY":0.040922},"23":{"pivotX":154.389125,"pivotY":243.195371,"groundRadiusX":0.190223,"groundRadiusY":0.040791},"24":{"pivotX":154.625227,"pivotY":243.241965,"groundRadiusX":0.192219,"groundRadiusY":0.040659},"25":{"pivotX":154.86133,"pivotY":243.288559,"groundRadiusX":0.194214,"groundRadiusY":0.040528},"26":{"pivotX":155.097433,"pivotY":243.335153,"groundRadiusX":0.19621,"groundRadiusY":0.040396},"27":{"pivotX":155.333535,"pivotY":243.381747,"groundRadiusX":0.198205,"groundRadiusY":0.040265},"28":{"pivotX":155.569638,"pivotY":243.42834,"groundRadiusX":0.2002,"groundRadiusY":0.040133},"29":{"pivotX":155.805741,"pivotY":243.474934,"groundRadiusX":0.202196,"groundRadiusY":0.040002},"30":{"pivotX":156.041844,"pivotY":243.521528,"groundRadiusX":0.204191,"groundRadiusY":0.03987},"31":{"pivotX":156.277946,"pivotY":243.568122,"groundRadiusX":0.206186,"groundRadiusY":0.039739},"32":{"pivotX":156.514049,"pivotY":243.614716,"groundRadiusX":0.208182,"groundRadiusY":0.039607},"33":{"pivotX":156.750152,"pivotY":243.66131,"groundRadiusX":0.210177,"groundRadiusY":0.039476},"34":{"pivotX":156.986254,"pivotY":243.707904,"groundRadiusX":0.212172,"groundRadiusY":0.039344},"35":{"pivotX":157.222357,"pivotY":243.754498,"groundRadiusX":0.214168,"groundRadiusY":0.039213},"36":{"pivotX":157.45846,"pivotY":243.801092,"groundRadiusX":0.216163,"groundRadiusY":0.039081},"37":{"pivotX":157.694562,"pivotY":243.847685,"groundRadiusX":0.218159,"groundRadiusY":0.03895},"38":{"pivotX":157.930665,"pivotY":243.894279,"groundRadiusX":0.220154,"groundRadiusY":0.038819},"39":{"pivotX":158.166768,"pivotY":243.940873,"groundRadiusX":0.222149,"groundRadiusY":0.038687},"40":{"pivotX":158.40287,"pivotY":243.987467,"groundRadiusX":0.224145,"groundRadiusY":0.038556},"41":{"pivotX":158.638973,"pivotY":244.034061,"groundRadiusX":0.22614,"groundRadiusY":0.038424},"42":{"pivotX":158.875076,"pivotY":244.080655,"groundRadiusX":0.228135,"groundRadiusY":0.038293},"43":{"pivotX":159.111178,"pivotY":244.127249,"groundRadiusX":0.230131,"groundRadiusY":0.038161},"44":{"pivotX":159.347281,"pivotY":244.173843,"groundRadiusX":0.232126,"groundRadiusY":0.03803},"45":{"pivotX":159.583384,"pivotY":244.220437,"groundRadiusX":0.234122,"groundRadiusY":0.037898},"46":{"pivotX":159.819487,"pivotY":244.267031,"groundRadiusX":0.236117,"groundRadiusY":0.037767},"47":{"pivotX":160.055589,"pivotY":244.313624,"groundRadiusX":0.238112,"groundRadiusY":0.037635},"48":{"pivotX":160.291692,"pivotY":244.360218,"groundRadiusX":0.240108,"groundRadiusY":0.037504},"49":{"pivotX":160.527795,"pivotY":244.406812,"groundRadiusX":0.242103,"groundRadiusY":0.037372},"50":{"pivotX":160.763897,"pivotY":244.453406,"groundRadiusX":0.244098,"groundRadiusY":0.037241},"51":{"pivotX":161,"pivotY":244.5,"groundRadiusX":0.246094,"groundRadiusY":0.037109}}}),
+  "DesignAssets/Animations/CreatureIdleV3/dew-rabbit/idle.webp": Object.freeze({"frameSize":430,"pivotX":223,"pivotY":360.5,"viewSize":430,"registrationScale":1.0311750599520384,"groundRadiusX":0.199041,"groundRadiusY":0.03717}),
+  "DesignAssets/Animations/CreatureHurtV5/dew-rabbit/hurt.webp": Object.freeze({"frameSize":430,"pivotX":223,"pivotY":360.5,"viewSize":430,"registrationScale":1.0311750599520384,"groundRadiusX":0.199041,"groundRadiusY":0.03717}),
+  "DesignAssets/Animations/CreatureDeathV6/dew-rabbit/runtime.webp": Object.freeze({"frameSize":264,"pivotX":136.911271,"pivotY":221.484412,"viewSize":264,"registrationScale":1.03125,"groundRadiusX":0.199041,"groundRadiusY":0.03717,"frameGeometry":{"0":{"pivotX":136.911271,"pivotY":221.484412,"groundRadiusX":0.199041,"groundRadiusY":0.03717},"1":{"pivotX":137.070949,"pivotY":221.413429,"groundRadiusX":0.200106,"groundRadiusY":0.037224},"2":{"pivotX":137.230627,"pivotY":221.342446,"groundRadiusX":0.201171,"groundRadiusY":0.037278},"3":{"pivotX":137.390305,"pivotY":221.271463,"groundRadiusX":0.202237,"groundRadiusY":0.037332},"4":{"pivotX":137.549983,"pivotY":221.20048,"groundRadiusX":0.203302,"groundRadiusY":0.037387},"5":{"pivotX":137.709661,"pivotY":221.129496,"groundRadiusX":0.204368,"groundRadiusY":0.037441},"6":{"pivotX":137.869339,"pivotY":221.058513,"groundRadiusX":0.205433,"groundRadiusY":0.037495},"7":{"pivotX":138.029017,"pivotY":220.98753,"groundRadiusX":0.206498,"groundRadiusY":0.037549},"8":{"pivotX":138.188695,"pivotY":220.916547,"groundRadiusX":0.207564,"groundRadiusY":0.037603},"9":{"pivotX":138.348373,"pivotY":220.845564,"groundRadiusX":0.208629,"groundRadiusY":0.037657},"10":{"pivotX":138.508051,"pivotY":220.77458,"groundRadiusX":0.209694,"groundRadiusY":0.037711},"11":{"pivotX":138.667729,"pivotY":220.703597,"groundRadiusX":0.21076,"groundRadiusY":0.037765},"12":{"pivotX":138.827407,"pivotY":220.632614,"groundRadiusX":0.211825,"groundRadiusY":0.037819},"13":{"pivotX":138.987085,"pivotY":220.561631,"groundRadiusX":0.21289,"groundRadiusY":0.037873},"14":{"pivotX":139.146763,"pivotY":220.490647,"groundRadiusX":0.213956,"groundRadiusY":0.037927},"15":{"pivotX":139.306441,"pivotY":220.419664,"groundRadiusX":0.215021,"groundRadiusY":0.037981},"16":{"pivotX":139.466119,"pivotY":220.348681,"groundRadiusX":0.216086,"groundRadiusY":0.038035},"17":{"pivotX":139.625797,"pivotY":220.277698,"groundRadiusX":0.217152,"groundRadiusY":0.038089},"18":{"pivotX":139.785474,"pivotY":220.206715,"groundRadiusX":0.218217,"groundRadiusY":0.038143},"19":{"pivotX":139.945152,"pivotY":220.135731,"groundRadiusX":0.219282,"groundRadiusY":0.038197},"20":{"pivotX":140.10483,"pivotY":220.064748,"groundRadiusX":0.220348,"groundRadiusY":0.038252},"21":{"pivotX":140.264508,"pivotY":219.993765,"groundRadiusX":0.221413,"groundRadiusY":0.038306},"22":{"pivotX":140.424186,"pivotY":219.922782,"groundRadiusX":0.222479,"groundRadiusY":0.03836},"23":{"pivotX":140.583864,"pivotY":219.851799,"groundRadiusX":0.223544,"groundRadiusY":0.038414},"24":{"pivotX":140.743542,"pivotY":219.780815,"groundRadiusX":0.224609,"groundRadiusY":0.038468},"25":{"pivotX":140.90322,"pivotY":219.709832,"groundRadiusX":0.225675,"groundRadiusY":0.038522},"26":{"pivotX":141.062898,"pivotY":219.638849,"groundRadiusX":0.22674,"groundRadiusY":0.038576},"27":{"pivotX":141.222576,"pivotY":219.567866,"groundRadiusX":0.227805,"groundRadiusY":0.03863},"28":{"pivotX":141.382254,"pivotY":219.496882,"groundRadiusX":0.228871,"groundRadiusY":0.038684},"29":{"pivotX":141.541932,"pivotY":219.425899,"groundRadiusX":0.229936,"groundRadiusY":0.038738},"30":{"pivotX":141.70161,"pivotY":219.354916,"groundRadiusX":0.231001,"groundRadiusY":0.038792},"31":{"pivotX":141.861288,"pivotY":219.283933,"groundRadiusX":0.232067,"groundRadiusY":0.038846},"32":{"pivotX":142.020966,"pivotY":219.21295,"groundRadiusX":0.233132,"groundRadiusY":0.0389},"33":{"pivotX":142.180644,"pivotY":219.141966,"groundRadiusX":0.234197,"groundRadiusY":0.038954},"34":{"pivotX":142.340322,"pivotY":219.070983,"groundRadiusX":0.235263,"groundRadiusY":0.039008},"35":{"pivotX":142.5,"pivotY":219,"groundRadiusX":0.236328,"groundRadiusY":0.039063}}}),
+  "DesignAssets/Animations/CreatureIdleV3/soil-mole/idle.webp": Object.freeze({"frameSize":356,"pivotX":187.5,"pivotY":281,"viewSize":356,"registrationScale":1.0028169014084507,"groundRadiusX":0.387324,"groundRadiusY":0.087324}),
+  "DesignAssets/Animations/CreatureHurtV5/soil-mole/hurt.webp": Object.freeze({"frameSize":356,"pivotX":187.5,"pivotY":281,"viewSize":356,"registrationScale":1.0028169014084507,"groundRadiusX":0.387324,"groundRadiusY":0.087324}),
+  "DesignAssets/Animations/CreatureDeathV6/soil-mole/runtime.webp": Object.freeze({"frameSize":258,"pivotX":135.852598,"pivotY":203.638891,"viewSize":258.0713165605441,"registrationScale":1.0078125,"groundRadiusX":0.387324,"groundRadiusY":0.087324,"frameGeometry":{"0":{"pivotX":135.852598,"pivotY":203.638891,"groundRadiusX":0.387324,"groundRadiusY":0.087324},"1":{"pivotX":135.730798,"pivotY":202.904764,"groundRadiusX":0.387222,"groundRadiusY":0.086844},"2":{"pivotX":135.608999,"pivotY":202.170636,"groundRadiusX":0.38712,"groundRadiusY":0.086363},"3":{"pivotX":135.487199,"pivotY":201.436509,"groundRadiusX":0.387019,"groundRadiusY":0.085883},"4":{"pivotX":135.365399,"pivotY":200.702382,"groundRadiusX":0.386917,"groundRadiusY":0.085402},"5":{"pivotX":135.243599,"pivotY":199.968255,"groundRadiusX":0.386815,"groundRadiusY":0.084922},"6":{"pivotX":135.1218,"pivotY":199.234127,"groundRadiusX":0.386714,"groundRadiusY":0.084442},"7":{"pivotX":135,"pivotY":198.5,"groundRadiusX":0.386612,"groundRadiusY":0.083961}}}),
+  "DesignAssets/Animations/CreatureIdleV4/bundle-snail/idle.webp": Object.freeze({"frameSize":470,"pivotX":227,"pivotY":393.5,"viewSize":469.99999999999994,"registrationScale":1.1809045226130652,"groundRadiusX":0.288945,"groundRadiusY":0.04397}),
+  "DesignAssets/Animations/CreatureAttackV2/bundle-snail/runtime.webp": Object.freeze({"frameSize":346,"pivotX":167.645373,"pivotY":291.286754,"viewSize":314.57975375441697,"registrationScale":1.180887372013652,"groundRadiusX":0.288945,"groundRadiusY":0.04397}),
+  "DesignAssets/Animations/CreatureHurtV7/bundle-snail/hurt.webp": Object.freeze({"frameSize":470,"pivotX":227,"pivotY":393.5,"viewSize":469.99999999999994,"registrationScale":1.1809045226130652,"groundRadiusX":0.288945,"groundRadiusY":0.04397}),
+  "DesignAssets/Animations/SnailDeathV1/bundle-snail/runtime.webp": Object.freeze({"frameSize":304,"pivotX":146.855124,"pivotY":254.745583,"viewSize":303.94964664310953,"registrationScale":1.1875,"groundRadiusX":0.288945,"groundRadiusY":0.04397,"frameGeometry":{"0":{"pivotX":146.855124,"pivotY":254.745583,"groundRadiusX":0.288945,"groundRadiusY":0.04397},"1":{"pivotX":147.120478,"pivotY":254.751641,"groundRadiusX":0.285786,"groundRadiusY":0.043946},"2":{"pivotX":147.385832,"pivotY":254.757698,"groundRadiusX":0.282627,"groundRadiusY":0.043923},"3":{"pivotX":147.651186,"pivotY":254.763756,"groundRadiusX":0.279468,"groundRadiusY":0.043899},"4":{"pivotX":147.91654,"pivotY":254.769813,"groundRadiusX":0.27631,"groundRadiusY":0.043875},"5":{"pivotX":148.181895,"pivotY":254.775871,"groundRadiusX":0.273151,"groundRadiusY":0.043852},"6":{"pivotX":148.447249,"pivotY":254.781928,"groundRadiusX":0.269992,"groundRadiusY":0.043828},"7":{"pivotX":148.712603,"pivotY":254.787986,"groundRadiusX":0.266833,"groundRadiusY":0.043804},"8":{"pivotX":148.977957,"pivotY":254.794043,"groundRadiusX":0.263674,"groundRadiusY":0.043781},"9":{"pivotX":149.243311,"pivotY":254.800101,"groundRadiusX":0.260516,"groundRadiusY":0.043757},"10":{"pivotX":149.508666,"pivotY":254.806159,"groundRadiusX":0.257357,"groundRadiusY":0.043733},"11":{"pivotX":149.77402,"pivotY":254.812216,"groundRadiusX":0.254198,"groundRadiusY":0.04371},"12":{"pivotX":150.039374,"pivotY":254.818274,"groundRadiusX":0.251039,"groundRadiusY":0.043686},"13":{"pivotX":150.304728,"pivotY":254.824331,"groundRadiusX":0.247881,"groundRadiusY":0.043662},"14":{"pivotX":150.570082,"pivotY":254.830389,"groundRadiusX":0.244722,"groundRadiusY":0.043639},"15":{"pivotX":150.835437,"pivotY":254.836446,"groundRadiusX":0.241563,"groundRadiusY":0.043615},"16":{"pivotX":151.100791,"pivotY":254.842504,"groundRadiusX":0.238404,"groundRadiusY":0.043591},"17":{"pivotX":151.366145,"pivotY":254.848561,"groundRadiusX":0.235245,"groundRadiusY":0.043568},"18":{"pivotX":151.631499,"pivotY":254.854619,"groundRadiusX":0.232087,"groundRadiusY":0.043544},"19":{"pivotX":151.896853,"pivotY":254.860676,"groundRadiusX":0.228928,"groundRadiusY":0.04352},"20":{"pivotX":152.162208,"pivotY":254.866734,"groundRadiusX":0.225769,"groundRadiusY":0.043497},"21":{"pivotX":152.427562,"pivotY":254.872792,"groundRadiusX":0.22261,"groundRadiusY":0.043473},"22":{"pivotX":152.692916,"pivotY":254.878849,"groundRadiusX":0.219452,"groundRadiusY":0.043449},"23":{"pivotX":152.95827,"pivotY":254.884907,"groundRadiusX":0.216293,"groundRadiusY":0.043426},"24":{"pivotX":153.223624,"pivotY":254.890964,"groundRadiusX":0.213134,"groundRadiusY":0.043402},"25":{"pivotX":153.488979,"pivotY":254.897022,"groundRadiusX":0.209975,"groundRadiusY":0.043378},"26":{"pivotX":153.754333,"pivotY":254.903079,"groundRadiusX":0.206816,"groundRadiusY":0.043355},"27":{"pivotX":154.019687,"pivotY":254.909137,"groundRadiusX":0.203658,"groundRadiusY":0.043331},"28":{"pivotX":154.285041,"pivotY":254.915194,"groundRadiusX":0.200499,"groundRadiusY":0.043307},"29":{"pivotX":154.550395,"pivotY":254.921252,"groundRadiusX":0.19734,"groundRadiusY":0.043284},"30":{"pivotX":154.81575,"pivotY":254.927309,"groundRadiusX":0.194181,"groundRadiusY":0.04326},"31":{"pivotX":155.081104,"pivotY":254.933367,"groundRadiusX":0.191022,"groundRadiusY":0.043236},"32":{"pivotX":155.346458,"pivotY":254.939425,"groundRadiusX":0.187864,"groundRadiusY":0.043213},"33":{"pivotX":155.611812,"pivotY":254.945482,"groundRadiusX":0.184705,"groundRadiusY":0.043189},"34":{"pivotX":155.877166,"pivotY":254.95154,"groundRadiusX":0.181546,"groundRadiusY":0.043165},"35":{"pivotX":156.142521,"pivotY":254.957597,"groundRadiusX":0.178387,"groundRadiusY":0.043142},"36":{"pivotX":156.407875,"pivotY":254.963655,"groundRadiusX":0.175229,"groundRadiusY":0.043118},"37":{"pivotX":156.673229,"pivotY":254.969712,"groundRadiusX":0.17207,"groundRadiusY":0.043094},"38":{"pivotX":156.938583,"pivotY":254.97577,"groundRadiusX":0.168911,"groundRadiusY":0.043071},"39":{"pivotX":157.203937,"pivotY":254.981827,"groundRadiusX":0.165752,"groundRadiusY":0.043047},"40":{"pivotX":157.469292,"pivotY":254.987885,"groundRadiusX":0.162593,"groundRadiusY":0.043023},"41":{"pivotX":157.734646,"pivotY":254.993942,"groundRadiusX":0.159435,"groundRadiusY":0.043},"42":{"pivotX":158,"pivotY":255,"groundRadiusX":0.156276,"groundRadiusY":0.042976}}}),
+  "DesignAssets/Animations/CottonSheepIdle/CalmV5/idle-runtime.webp": Object.freeze({"frameSize":256,"pivotX":142.5,"pivotY":204.5,"viewSize":256,"registrationScale":1,"groundRadiusX":0.244141,"groundRadiusY":0.064453}),
+  "DesignAssets/Animations/CreatureAttackV2/cotton-sheep/runtime.webp": Object.freeze({"frameSize":290,"pivotX":159.54366,"pivotY":234.441284,"viewSize":256.7708333333333,"registrationScale":1,"groundRadiusX":0.244141,"groundRadiusY":0.064453,"frameGeometry":{"0":{"pivotX":159.54366,"pivotY":234.441284},"1":{"pivotX":156.04366,"pivotY":234.441284},"2":{"pivotX":158.54366,"pivotY":236.441284},"3":{"pivotX":174.04366,"pivotY":248.441284},"4":{"pivotX":199.54366,"pivotY":240.441284},"5":{"pivotX":166.54366,"pivotY":238.441284},"6":{"pivotX":158.04366,"pivotY":235.441284},"7":{"pivotX":159.54366,"pivotY":234.441284}},"fixedSupport":true}),
+  "DesignAssets/Animations/CreatureHurtV5/cotton-sheep/hurt.webp": Object.freeze({"frameSize":256,"pivotX":142.5,"pivotY":204.5,"viewSize":256,"registrationScale":1,"groundRadiusX":0.244141,"groundRadiusY":0.064453}),
+  "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/runtime.webp": Object.freeze({"frameSize":256,"pivotX":142.5,"pivotY":204.5,"viewSize":256,"registrationScale":1,"groundRadiusX":0.244141,"groundRadiusY":0.064453,"frameGeometry":{"0":{"pivotX":142.5,"pivotY":204.5,"groundRadiusX":0.244141,"groundRadiusY":0.064453},"1":{"pivotX":140.5,"pivotY":205.214286,"groundRadiusX":0.254185,"groundRadiusY":0.063337},"2":{"pivotX":138.5,"pivotY":205.928571,"groundRadiusX":0.26423,"groundRadiusY":0.062221},"3":{"pivotX":136.5,"pivotY":206.642857,"groundRadiusX":0.274275,"groundRadiusY":0.061105},"4":{"pivotX":134.5,"pivotY":207.357143,"groundRadiusX":0.284319,"groundRadiusY":0.059989},"5":{"pivotX":132.5,"pivotY":208.071429,"groundRadiusX":0.294364,"groundRadiusY":0.058873},"6":{"pivotX":130.5,"pivotY":208.785714,"groundRadiusX":0.304408,"groundRadiusY":0.057757},"7":{"pivotX":128.5,"pivotY":209.5,"groundRadiusX":0.314453,"groundRadiusY":0.056641}}}),
+  "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp": Object.freeze({"frameSize":428,"pivotX":215,"pivotY":358.5,"viewSize":428,"registrationScale":1.019047619047619,"groundRadiusX":0.178571,"groundRadiusY":0.039286}),
+  "DesignAssets/Animations/CreatureAttackV2/rolling-acorn/runtime.webp": Object.freeze({"frameSize":318,"pivotX":159.669667,"pivotY":266.950502,"viewSize":286.6687831272085,"registrationScale":1.0192307692307692,"groundRadiusX":0.178571,"groundRadiusY":0.039286}),
+  "DesignAssets/Animations/CreatureHurtV4/rolling-acorn/hurt.webp": Object.freeze({"frameSize":428,"pivotX":215,"pivotY":358.5,"viewSize":428,"registrationScale":1.019047619047619,"groundRadiusX":0.178571,"groundRadiusY":0.039286}),
+  "DesignAssets/Animations/CreatureDeathV4/rolling-acorn/runtime.webp": Object.freeze({"frameSize":262,"pivotX":131.609524,"pivotY":218.942857,"viewSize":262,"registrationScale":1.0234375,"groundRadiusX":0.178571,"groundRadiusY":0.039286,"frameGeometry":{"0":{"pivotX":131.609524,"pivotY":218.942857,"groundRadiusX":0.178571,"groundRadiusY":0.039286},"1":{"pivotX":131.701727,"pivotY":218.932496,"groundRadiusX":0.178326,"groundRadiusY":0.039326},"2":{"pivotX":131.79393,"pivotY":218.922135,"groundRadiusX":0.178081,"groundRadiusY":0.039367},"3":{"pivotX":131.886133,"pivotY":218.911774,"groundRadiusX":0.177836,"groundRadiusY":0.039407},"4":{"pivotX":131.978336,"pivotY":218.901413,"groundRadiusX":0.17759,"groundRadiusY":0.039448},"5":{"pivotX":132.070539,"pivotY":218.891052,"groundRadiusX":0.177345,"groundRadiusY":0.039488},"6":{"pivotX":132.162742,"pivotY":218.880691,"groundRadiusX":0.1771,"groundRadiusY":0.039529},"7":{"pivotX":132.254945,"pivotY":218.87033,"groundRadiusX":0.176854,"groundRadiusY":0.039569},"8":{"pivotX":132.347148,"pivotY":218.859969,"groundRadiusX":0.176609,"groundRadiusY":0.039609},"9":{"pivotX":132.439351,"pivotY":218.849608,"groundRadiusX":0.176364,"groundRadiusY":0.03965},"10":{"pivotX":132.531554,"pivotY":218.839246,"groundRadiusX":0.176119,"groundRadiusY":0.03969},"11":{"pivotX":132.623757,"pivotY":218.828885,"groundRadiusX":0.175873,"groundRadiusY":0.039731},"12":{"pivotX":132.71596,"pivotY":218.818524,"groundRadiusX":0.175628,"groundRadiusY":0.039771},"13":{"pivotX":132.808163,"pivotY":218.808163,"groundRadiusX":0.175383,"groundRadiusY":0.039812},"14":{"pivotX":132.900366,"pivotY":218.797802,"groundRadiusX":0.175137,"groundRadiusY":0.039852},"15":{"pivotX":132.992569,"pivotY":218.787441,"groundRadiusX":0.174892,"groundRadiusY":0.039893},"16":{"pivotX":133.084772,"pivotY":218.77708,"groundRadiusX":0.174647,"groundRadiusY":0.039933},"17":{"pivotX":133.176975,"pivotY":218.766719,"groundRadiusX":0.174401,"groundRadiusY":0.039974},"18":{"pivotX":133.269178,"pivotY":218.756358,"groundRadiusX":0.174156,"groundRadiusY":0.040014},"19":{"pivotX":133.361381,"pivotY":218.745997,"groundRadiusX":0.173911,"groundRadiusY":0.040055},"20":{"pivotX":133.453585,"pivotY":218.735636,"groundRadiusX":0.173666,"groundRadiusY":0.040095},"21":{"pivotX":133.545788,"pivotY":218.725275,"groundRadiusX":0.17342,"groundRadiusY":0.040136},"22":{"pivotX":133.637991,"pivotY":218.714914,"groundRadiusX":0.173175,"groundRadiusY":0.040176},"23":{"pivotX":133.730194,"pivotY":218.704553,"groundRadiusX":0.17293,"groundRadiusY":0.040217},"24":{"pivotX":133.822397,"pivotY":218.694192,"groundRadiusX":0.172684,"groundRadiusY":0.040257},"25":{"pivotX":133.9146,"pivotY":218.68383,"groundRadiusX":0.172439,"groundRadiusY":0.040298},"26":{"pivotX":134.006803,"pivotY":218.673469,"groundRadiusX":0.172194,"groundRadiusY":0.040338},"27":{"pivotX":134.099006,"pivotY":218.663108,"groundRadiusX":0.171949,"groundRadiusY":0.040378},"28":{"pivotX":134.191209,"pivotY":218.652747,"groundRadiusX":0.171703,"groundRadiusY":0.040419},"29":{"pivotX":134.283412,"pivotY":218.642386,"groundRadiusX":0.171458,"groundRadiusY":0.040459},"30":{"pivotX":134.375615,"pivotY":218.632025,"groundRadiusX":0.171213,"groundRadiusY":0.0405},"31":{"pivotX":134.467818,"pivotY":218.621664,"groundRadiusX":0.170967,"groundRadiusY":0.04054},"32":{"pivotX":134.560021,"pivotY":218.611303,"groundRadiusX":0.170722,"groundRadiusY":0.040581},"33":{"pivotX":134.652224,"pivotY":218.600942,"groundRadiusX":0.170477,"groundRadiusY":0.040621},"34":{"pivotX":134.744427,"pivotY":218.590581,"groundRadiusX":0.170232,"groundRadiusY":0.040662},"35":{"pivotX":134.83663,"pivotY":218.58022,"groundRadiusX":0.169986,"groundRadiusY":0.040702},"36":{"pivotX":134.928833,"pivotY":218.569859,"groundRadiusX":0.169741,"groundRadiusY":0.040743},"37":{"pivotX":135.021036,"pivotY":218.559498,"groundRadiusX":0.169496,"groundRadiusY":0.040783},"38":{"pivotX":135.113239,"pivotY":218.549137,"groundRadiusX":0.16925,"groundRadiusY":0.040824},"39":{"pivotX":135.205442,"pivotY":218.538776,"groundRadiusX":0.169005,"groundRadiusY":0.040864},"40":{"pivotX":135.297645,"pivotY":218.528414,"groundRadiusX":0.16876,"groundRadiusY":0.040905},"41":{"pivotX":135.389848,"pivotY":218.518053,"groundRadiusX":0.168515,"groundRadiusY":0.040945},"42":{"pivotX":135.482051,"pivotY":218.507692,"groundRadiusX":0.168269,"groundRadiusY":0.040986},"43":{"pivotX":135.574254,"pivotY":218.497331,"groundRadiusX":0.168024,"groundRadiusY":0.041026},"44":{"pivotX":135.666457,"pivotY":218.48697,"groundRadiusX":0.167779,"groundRadiusY":0.041067},"45":{"pivotX":135.75866,"pivotY":218.476609,"groundRadiusX":0.167533,"groundRadiusY":0.041107},"46":{"pivotX":135.850863,"pivotY":218.466248,"groundRadiusX":0.167288,"groundRadiusY":0.041147},"47":{"pivotX":135.943066,"pivotY":218.455887,"groundRadiusX":0.167043,"groundRadiusY":0.041188},"48":{"pivotX":136.035269,"pivotY":218.445526,"groundRadiusX":0.166797,"groundRadiusY":0.041228},"49":{"pivotX":136.127473,"pivotY":218.435165,"groundRadiusX":0.166552,"groundRadiusY":0.041269},"50":{"pivotX":136.219676,"pivotY":218.424804,"groundRadiusX":0.166307,"groundRadiusY":0.041309},"51":{"pivotX":136.311879,"pivotY":218.414443,"groundRadiusX":0.166062,"groundRadiusY":0.04135},"52":{"pivotX":136.404082,"pivotY":218.404082,"groundRadiusX":0.165816,"groundRadiusY":0.04139},"53":{"pivotX":136.496285,"pivotY":218.393721,"groundRadiusX":0.165571,"groundRadiusY":0.041431},"54":{"pivotX":136.588488,"pivotY":218.383359,"groundRadiusX":0.165326,"groundRadiusY":0.041471},"55":{"pivotX":136.680691,"pivotY":218.372998,"groundRadiusX":0.16508,"groundRadiusY":0.041512},"56":{"pivotX":136.772894,"pivotY":218.362637,"groundRadiusX":0.164835,"groundRadiusY":0.041552},"57":{"pivotX":136.865097,"pivotY":218.352276,"groundRadiusX":0.16459,"groundRadiusY":0.041593},"58":{"pivotX":136.9573,"pivotY":218.341915,"groundRadiusX":0.164345,"groundRadiusY":0.041633},"59":{"pivotX":137.049503,"pivotY":218.331554,"groundRadiusX":0.164099,"groundRadiusY":0.041674},"60":{"pivotX":137.141706,"pivotY":218.321193,"groundRadiusX":0.163854,"groundRadiusY":0.041714},"61":{"pivotX":137.233909,"pivotY":218.310832,"groundRadiusX":0.163609,"groundRadiusY":0.041755},"62":{"pivotX":137.326112,"pivotY":218.300471,"groundRadiusX":0.163363,"groundRadiusY":0.041795},"63":{"pivotX":137.418315,"pivotY":218.29011,"groundRadiusX":0.163118,"groundRadiusY":0.041836},"64":{"pivotX":137.510518,"pivotY":218.279749,"groundRadiusX":0.162873,"groundRadiusY":0.041876},"65":{"pivotX":137.602721,"pivotY":218.269388,"groundRadiusX":0.162628,"groundRadiusY":0.041916},"66":{"pivotX":137.694924,"pivotY":218.259027,"groundRadiusX":0.162382,"groundRadiusY":0.041957},"67":{"pivotX":137.787127,"pivotY":218.248666,"groundRadiusX":0.162137,"groundRadiusY":0.041997},"68":{"pivotX":137.87933,"pivotY":218.238305,"groundRadiusX":0.161892,"groundRadiusY":0.042038},"69":{"pivotX":137.971533,"pivotY":218.227943,"groundRadiusX":0.161646,"groundRadiusY":0.042078},"70":{"pivotX":138.063736,"pivotY":218.217582,"groundRadiusX":0.161401,"groundRadiusY":0.042119},"71":{"pivotX":138.155939,"pivotY":218.207221,"groundRadiusX":0.161156,"groundRadiusY":0.042159},"72":{"pivotX":138.248142,"pivotY":218.19686,"groundRadiusX":0.160911,"groundRadiusY":0.0422},"73":{"pivotX":138.340345,"pivotY":218.186499,"groundRadiusX":0.160665,"groundRadiusY":0.04224},"74":{"pivotX":138.432548,"pivotY":218.176138,"groundRadiusX":0.16042,"groundRadiusY":0.042281},"75":{"pivotX":138.524751,"pivotY":218.165777,"groundRadiusX":0.160175,"groundRadiusY":0.042321},"76":{"pivotX":138.616954,"pivotY":218.155416,"groundRadiusX":0.159929,"groundRadiusY":0.042362},"77":{"pivotX":138.709158,"pivotY":218.145055,"groundRadiusX":0.159684,"groundRadiusY":0.042402},"78":{"pivotX":138.801361,"pivotY":218.134694,"groundRadiusX":0.159439,"groundRadiusY":0.042443},"79":{"pivotX":138.893564,"pivotY":218.124333,"groundRadiusX":0.159193,"groundRadiusY":0.042483},"80":{"pivotX":138.985767,"pivotY":218.113972,"groundRadiusX":0.158948,"groundRadiusY":0.042524},"81":{"pivotX":139.07797,"pivotY":218.103611,"groundRadiusX":0.158703,"groundRadiusY":0.042564},"82":{"pivotX":139.170173,"pivotY":218.09325,"groundRadiusX":0.158458,"groundRadiusY":0.042604},"83":{"pivotX":139.262376,"pivotY":218.082889,"groundRadiusX":0.158212,"groundRadiusY":0.042645},"84":{"pivotX":139.354579,"pivotY":218.072527,"groundRadiusX":0.157967,"groundRadiusY":0.042685},"85":{"pivotX":139.446782,"pivotY":218.062166,"groundRadiusX":0.157722,"groundRadiusY":0.042726},"86":{"pivotX":139.538985,"pivotY":218.051805,"groundRadiusX":0.157476,"groundRadiusY":0.042766},"87":{"pivotX":139.631188,"pivotY":218.041444,"groundRadiusX":0.157231,"groundRadiusY":0.042807},"88":{"pivotX":139.723391,"pivotY":218.031083,"groundRadiusX":0.156986,"groundRadiusY":0.042847},"89":{"pivotX":139.815594,"pivotY":218.020722,"groundRadiusX":0.156741,"groundRadiusY":0.042888},"90":{"pivotX":139.907797,"pivotY":218.010361,"groundRadiusX":0.156495,"groundRadiusY":0.042928},"91":{"pivotX":140,"pivotY":218,"groundRadiusX":0.15625,"groundRadiusY":0.042969}}}),
+  "DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp": Object.freeze({"frameSize":362,"pivotX":184.999999,"pivotY":307,"viewSize":362,"registrationScale":1.002770083102493,"groundRadiusX":0.34626,"groundRadiusY":0.027701}),
+  "DesignAssets/Animations/CreatureHurtV7/bubble-toad/hurt.webp": Object.freeze({"frameSize":362,"pivotX":184.999999,"pivotY":307,"viewSize":362,"registrationScale":1.002770083102493,"groundRadiusX":0.34626,"groundRadiusY":0.027701}),
+  "DesignAssets/Animations/CreatureIdleStudies/V1/snare-vine/idle.webp": Object.freeze({"frameSize":456,"pivotX":230,"pivotY":389.999998,"viewSize":456,"registrationScale":1.0754716981132075,"groundRadiusX":0.122642,"groundRadiusY":0.021226}),
+  "DesignAssets/Animations/CreatureAttackV2/snare-vine/runtime.webp": Object.freeze({"frameSize":304,"pivotX":153.335937,"pivotY":259.98828,"viewSize":304.2349823321555,"registrationScale":1.0742049469964665,"groundRadiusX":0.122642,"groundRadiusY":0.021226}),
+  "DesignAssets/Animations/CreatureHurtV7/snare-vine/hurt.webp": Object.freeze({"frameSize":456,"pivotX":230,"pivotY":389.999998,"viewSize":456,"registrationScale":1.0754716981132075,"groundRadiusX":0.122642,"groundRadiusY":0.021226}),
+  "DesignAssets/Animations/CreatureDeathV4/snare-vine/runtime.webp": Object.freeze({"frameSize":276,"pivotX":139.207547,"pivotY":236.566036,"viewSize":276,"registrationScale":1.078125,"groundRadiusX":0.122642,"groundRadiusY":0.021226,"frameGeometry":{"0":{"pivotX":139.207547,"pivotY":236.566036,"groundRadiusX":0.122642,"groundRadiusY":0.021226},"1":{"pivotX":139.193171,"pivotY":236.547393,"groundRadiusX":0.123181,"groundRadiusY":0.021299},"2":{"pivotX":139.178796,"pivotY":236.52875,"groundRadiusX":0.123721,"groundRadiusY":0.021372},"3":{"pivotX":139.16442,"pivotY":236.510107,"groundRadiusX":0.12426,"groundRadiusY":0.021445},"4":{"pivotX":139.150045,"pivotY":236.491463,"groundRadiusX":0.1248,"groundRadiusY":0.021518},"5":{"pivotX":139.135669,"pivotY":236.47282,"groundRadiusX":0.12534,"groundRadiusY":0.021591},"6":{"pivotX":139.121294,"pivotY":236.454177,"groundRadiusX":0.125879,"groundRadiusY":0.021663},"7":{"pivotX":139.106918,"pivotY":236.435533,"groundRadiusX":0.126419,"groundRadiusY":0.021736},"8":{"pivotX":139.092542,"pivotY":236.41689,"groundRadiusX":0.126958,"groundRadiusY":0.021809},"9":{"pivotX":139.078167,"pivotY":236.398247,"groundRadiusX":0.127498,"groundRadiusY":0.021882},"10":{"pivotX":139.063791,"pivotY":236.379604,"groundRadiusX":0.128038,"groundRadiusY":0.021955},"11":{"pivotX":139.049416,"pivotY":236.36096,"groundRadiusX":0.128577,"groundRadiusY":0.022027},"12":{"pivotX":139.03504,"pivotY":236.342317,"groundRadiusX":0.129117,"groundRadiusY":0.0221},"13":{"pivotX":139.020665,"pivotY":236.323674,"groundRadiusX":0.129656,"groundRadiusY":0.022173},"14":{"pivotX":139.006289,"pivotY":236.30503,"groundRadiusX":0.130196,"groundRadiusY":0.022246},"15":{"pivotX":138.991914,"pivotY":236.286387,"groundRadiusX":0.130736,"groundRadiusY":0.022319},"16":{"pivotX":138.977538,"pivotY":236.267744,"groundRadiusX":0.131275,"groundRadiusY":0.022392},"17":{"pivotX":138.963162,"pivotY":236.249101,"groundRadiusX":0.131815,"groundRadiusY":0.022464},"18":{"pivotX":138.948787,"pivotY":236.230457,"groundRadiusX":0.132354,"groundRadiusY":0.022537},"19":{"pivotX":138.934411,"pivotY":236.211814,"groundRadiusX":0.132894,"groundRadiusY":0.02261},"20":{"pivotX":138.920036,"pivotY":236.193171,"groundRadiusX":0.133434,"groundRadiusY":0.022683},"21":{"pivotX":138.90566,"pivotY":236.174527,"groundRadiusX":0.133973,"groundRadiusY":0.022756},"22":{"pivotX":138.891285,"pivotY":236.155884,"groundRadiusX":0.134513,"groundRadiusY":0.022829},"23":{"pivotX":138.876909,"pivotY":236.137241,"groundRadiusX":0.135053,"groundRadiusY":0.022901},"24":{"pivotX":138.862533,"pivotY":236.118597,"groundRadiusX":0.135592,"groundRadiusY":0.022974},"25":{"pivotX":138.848158,"pivotY":236.099954,"groundRadiusX":0.136132,"groundRadiusY":0.023047},"26":{"pivotX":138.833782,"pivotY":236.081311,"groundRadiusX":0.136671,"groundRadiusY":0.02312},"27":{"pivotX":138.819407,"pivotY":236.062668,"groundRadiusX":0.137211,"groundRadiusY":0.023193},"28":{"pivotX":138.805031,"pivotY":236.044024,"groundRadiusX":0.137751,"groundRadiusY":0.023266},"29":{"pivotX":138.790656,"pivotY":236.025381,"groundRadiusX":0.13829,"groundRadiusY":0.023338},"30":{"pivotX":138.77628,"pivotY":236.006738,"groundRadiusX":0.13883,"groundRadiusY":0.023411},"31":{"pivotX":138.761905,"pivotY":235.988094,"groundRadiusX":0.139369,"groundRadiusY":0.023484},"32":{"pivotX":138.747529,"pivotY":235.969451,"groundRadiusX":0.139909,"groundRadiusY":0.023557},"33":{"pivotX":138.733153,"pivotY":235.950808,"groundRadiusX":0.140449,"groundRadiusY":0.02363},"34":{"pivotX":138.718778,"pivotY":235.932165,"groundRadiusX":0.140988,"groundRadiusY":0.023702},"35":{"pivotX":138.704402,"pivotY":235.913521,"groundRadiusX":0.141528,"groundRadiusY":0.023775},"36":{"pivotX":138.690027,"pivotY":235.894878,"groundRadiusX":0.142067,"groundRadiusY":0.023848},"37":{"pivotX":138.675651,"pivotY":235.876235,"groundRadiusX":0.142607,"groundRadiusY":0.023921},"38":{"pivotX":138.661276,"pivotY":235.857591,"groundRadiusX":0.143147,"groundRadiusY":0.023994},"39":{"pivotX":138.6469,"pivotY":235.838948,"groundRadiusX":0.143686,"groundRadiusY":0.024067},"40":{"pivotX":138.632525,"pivotY":235.820305,"groundRadiusX":0.144226,"groundRadiusY":0.024139},"41":{"pivotX":138.618149,"pivotY":235.801662,"groundRadiusX":0.144766,"groundRadiusY":0.024212},"42":{"pivotX":138.603773,"pivotY":235.783018,"groundRadiusX":0.145305,"groundRadiusY":0.024285},"43":{"pivotX":138.589398,"pivotY":235.764375,"groundRadiusX":0.145845,"groundRadiusY":0.024358},"44":{"pivotX":138.575022,"pivotY":235.745732,"groundRadiusX":0.146384,"groundRadiusY":0.024431},"45":{"pivotX":138.560647,"pivotY":235.727088,"groundRadiusX":0.146924,"groundRadiusY":0.024504},"46":{"pivotX":138.546271,"pivotY":235.708445,"groundRadiusX":0.147464,"groundRadiusY":0.024576},"47":{"pivotX":138.531896,"pivotY":235.689802,"groundRadiusX":0.148003,"groundRadiusY":0.024649},"48":{"pivotX":138.51752,"pivotY":235.671158,"groundRadiusX":0.148543,"groundRadiusY":0.024722},"49":{"pivotX":138.503145,"pivotY":235.652515,"groundRadiusX":0.149082,"groundRadiusY":0.024795},"50":{"pivotX":138.488769,"pivotY":235.633872,"groundRadiusX":0.149622,"groundRadiusY":0.024868},"51":{"pivotX":138.474393,"pivotY":235.615229,"groundRadiusX":0.150162,"groundRadiusY":0.024941},"52":{"pivotX":138.460018,"pivotY":235.596585,"groundRadiusX":0.150701,"groundRadiusY":0.025013},"53":{"pivotX":138.445642,"pivotY":235.577942,"groundRadiusX":0.151241,"groundRadiusY":0.025086},"54":{"pivotX":138.431267,"pivotY":235.559299,"groundRadiusX":0.15178,"groundRadiusY":0.025159},"55":{"pivotX":138.416891,"pivotY":235.540655,"groundRadiusX":0.15232,"groundRadiusY":0.025232},"56":{"pivotX":138.402516,"pivotY":235.522012,"groundRadiusX":0.15286,"groundRadiusY":0.025305},"57":{"pivotX":138.38814,"pivotY":235.503369,"groundRadiusX":0.153399,"groundRadiusY":0.025377},"58":{"pivotX":138.373765,"pivotY":235.484726,"groundRadiusX":0.153939,"groundRadiusY":0.02545},"59":{"pivotX":138.359389,"pivotY":235.466082,"groundRadiusX":0.154479,"groundRadiusY":0.025523},"60":{"pivotX":138.345013,"pivotY":235.447439,"groundRadiusX":0.155018,"groundRadiusY":0.025596},"61":{"pivotX":138.330638,"pivotY":235.428796,"groundRadiusX":0.155558,"groundRadiusY":0.025669},"62":{"pivotX":138.316262,"pivotY":235.410152,"groundRadiusX":0.156097,"groundRadiusY":0.025742},"63":{"pivotX":138.301887,"pivotY":235.391509,"groundRadiusX":0.156637,"groundRadiusY":0.025814},"64":{"pivotX":138.287511,"pivotY":235.372866,"groundRadiusX":0.157177,"groundRadiusY":0.025887},"65":{"pivotX":138.273136,"pivotY":235.354223,"groundRadiusX":0.157716,"groundRadiusY":0.02596},"66":{"pivotX":138.25876,"pivotY":235.335579,"groundRadiusX":0.158256,"groundRadiusY":0.026033},"67":{"pivotX":138.244384,"pivotY":235.316936,"groundRadiusX":0.158795,"groundRadiusY":0.026106},"68":{"pivotX":138.230009,"pivotY":235.298293,"groundRadiusX":0.159335,"groundRadiusY":0.026179},"69":{"pivotX":138.215633,"pivotY":235.279649,"groundRadiusX":0.159875,"groundRadiusY":0.026251},"70":{"pivotX":138.201258,"pivotY":235.261006,"groundRadiusX":0.160414,"groundRadiusY":0.026324},"71":{"pivotX":138.186882,"pivotY":235.242363,"groundRadiusX":0.160954,"groundRadiusY":0.026397},"72":{"pivotX":138.172507,"pivotY":235.223719,"groundRadiusX":0.161493,"groundRadiusY":0.02647},"73":{"pivotX":138.158131,"pivotY":235.205076,"groundRadiusX":0.162033,"groundRadiusY":0.026543},"74":{"pivotX":138.143756,"pivotY":235.186433,"groundRadiusX":0.162573,"groundRadiusY":0.026615},"75":{"pivotX":138.12938,"pivotY":235.16779,"groundRadiusX":0.163112,"groundRadiusY":0.026688},"76":{"pivotX":138.115004,"pivotY":235.149146,"groundRadiusX":0.163652,"groundRadiusY":0.026761},"77":{"pivotX":138.100629,"pivotY":235.130503,"groundRadiusX":0.164191,"groundRadiusY":0.026834},"78":{"pivotX":138.086253,"pivotY":235.11186,"groundRadiusX":0.164731,"groundRadiusY":0.026907},"79":{"pivotX":138.071878,"pivotY":235.093216,"groundRadiusX":0.165271,"groundRadiusY":0.02698},"80":{"pivotX":138.057502,"pivotY":235.074573,"groundRadiusX":0.16581,"groundRadiusY":0.027052},"81":{"pivotX":138.043127,"pivotY":235.05593,"groundRadiusX":0.16635,"groundRadiusY":0.027125},"82":{"pivotX":138.028751,"pivotY":235.037287,"groundRadiusX":0.16689,"groundRadiusY":0.027198},"83":{"pivotX":138.014376,"pivotY":235.018643,"groundRadiusX":0.167429,"groundRadiusY":0.027271},"84":{"pivotX":138,"pivotY":235,"groundRadiusX":0.167969,"groundRadiusY":0.027344}}}),
+  "DesignAssets/Animations/Beetle/atlas.webp": Object.freeze({"frameSize":346,"pivotX":172,"pivotY":281.999998,"viewSize":346,"registrationScale":1.0028985507246377,"groundRadiusX":0.347826,"groundRadiusY":0.06087,"frameGeometry":{"17":{"pivotX":172.5,"pivotY":285.972972,"groundRadiusX":0.349589,"groundRadiusY":0.049354},"18":{"pivotX":173,"pivotY":289.945945,"groundRadiusX":0.351351,"groundRadiusY":0.037838}}}),
+  "DesignAssets/Animations/Beetle/attack-right.webp": Object.freeze({"frameSize":346,"pivotX":172,"pivotY":281.999998,"viewSize":346,"registrationScale":1.0028985507246377,"groundRadiusX":0.347826,"groundRadiusY":0.06087}),
+  "DesignAssets/Animations/BeetleDeath/dead-v2.png": Object.freeze({"frameSize":186,"pivotX":93,"pivotY":156,"viewSize":186,"registrationScale":1.0054054054054054,"groundRadiusX":0.351351,"groundRadiusY":0.037838}),
+  "DesignAssets/Animations/SoilBoarIdle/V1/idle.webp": Object.freeze({"frameSize":370,"pivotX":195,"pivotY":307,"viewSize":369.99999999999994,"registrationScale":1.002710027100271,"groundRadiusX":0.325203,"groundRadiusY":0.04607}),
+  "DesignAssets/Animations/CreatureHurtV7/soil-boar/hurt.webp": Object.freeze({"frameSize":370,"pivotX":195,"pivotY":307,"viewSize":369.99999999999994,"registrationScale":1.002710027100271,"groundRadiusX":0.325203,"groundRadiusY":0.04607}),
+  "DesignAssets/Animations/CreatureDeathV6/soil-boar/runtime.webp": Object.freeze({"frameSize":256,"pivotX":134.937669,"pivotY":212.205962,"viewSize":256,"registrationScale":1,"groundRadiusX":0.325203,"groundRadiusY":0.04607,"frameGeometry":{"0":{"pivotX":134.937669,"pivotY":212.205962,"groundRadiusX":0.325203,"groundRadiusY":0.04607},"1":{"pivotX":132.232288,"pivotY":212.60511,"groundRadiusX":0.319482,"groundRadiusY":0.044511},"2":{"pivotX":129.526907,"pivotY":213.004259,"groundRadiusX":0.313761,"groundRadiusY":0.042952},"3":{"pivotX":126.821525,"pivotY":213.403407,"groundRadiusX":0.30804,"groundRadiusY":0.041393},"4":{"pivotX":124.116144,"pivotY":213.802555,"groundRadiusX":0.302319,"groundRadiusY":0.039834},"5":{"pivotX":121.410763,"pivotY":214.201703,"groundRadiusX":0.296598,"groundRadiusY":0.038275},"6":{"pivotX":118.705381,"pivotY":214.600852,"groundRadiusX":0.290877,"groundRadiusY":0.036715},"7":{"pivotX":116,"pivotY":215,"groundRadiusX":0.285156,"groundRadiusY":0.035156}}}),
+  "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp": Object.freeze({"frameSize":346,"pivotX":173,"pivotY":293.000001,"viewSize":346,"registrationScale":1,"groundRadiusX":0.401734,"groundRadiusY":0.028902}),
+  "DesignAssets/Animations/CreatureHurtV7/vine-turtle/hurt.webp": Object.freeze({"frameSize":346,"pivotX":173,"pivotY":293.000001,"viewSize":346,"registrationScale":1,"groundRadiusX":0.401734,"groundRadiusY":0.028902}),
+  "DesignAssets/Animations/CreatureDeathV12/vine-turtle/runtime.webp": Object.freeze({"frameSize":256,"pivotX":128,"pivotY":216.601157,"viewSize":256,"registrationScale":1,"groundRadiusX":0.401734,"groundRadiusY":0.028902,"frameGeometry":{"0":{"pivotX":128,"pivotY":216.601157,"groundRadiusX":0.401734,"groundRadiusY":0.028902},"1":{"pivotX":128,"pivotY":216.62015,"groundRadiusX":0.403437,"groundRadiusY":0.028828},"2":{"pivotX":128,"pivotY":216.639142,"groundRadiusX":0.40514,"groundRadiusY":0.028753},"3":{"pivotX":128,"pivotY":216.658135,"groundRadiusX":0.406844,"groundRadiusY":0.028679},"4":{"pivotX":128,"pivotY":216.677127,"groundRadiusX":0.408547,"groundRadiusY":0.028605},"5":{"pivotX":128,"pivotY":216.69612,"groundRadiusX":0.41025,"groundRadiusY":0.028531},"6":{"pivotX":128,"pivotY":216.715112,"groundRadiusX":0.411953,"groundRadiusY":0.028457},"7":{"pivotX":128,"pivotY":216.734105,"groundRadiusX":0.413656,"groundRadiusY":0.028382},"8":{"pivotX":128,"pivotY":216.753097,"groundRadiusX":0.415359,"groundRadiusY":0.028308},"9":{"pivotX":128,"pivotY":216.77209,"groundRadiusX":0.417062,"groundRadiusY":0.028234},"10":{"pivotX":128,"pivotY":216.791082,"groundRadiusX":0.418765,"groundRadiusY":0.02816},"11":{"pivotX":128,"pivotY":216.810075,"groundRadiusX":0.420469,"groundRadiusY":0.028086},"12":{"pivotX":128,"pivotY":216.829067,"groundRadiusX":0.422172,"groundRadiusY":0.028011},"13":{"pivotX":128,"pivotY":216.84806,"groundRadiusX":0.423875,"groundRadiusY":0.027937},"14":{"pivotX":128,"pivotY":216.867052,"groundRadiusX":0.425578,"groundRadiusY":0.027863},"15":{"pivotX":128,"pivotY":216.886045,"groundRadiusX":0.427281,"groundRadiusY":0.027789},"16":{"pivotX":128,"pivotY":216.905037,"groundRadiusX":0.428984,"groundRadiusY":0.027715},"17":{"pivotX":128,"pivotY":216.92403,"groundRadiusX":0.430687,"groundRadiusY":0.027641},"18":{"pivotX":128,"pivotY":216.943022,"groundRadiusX":0.432391,"groundRadiusY":0.027566},"19":{"pivotX":128,"pivotY":216.962015,"groundRadiusX":0.434094,"groundRadiusY":0.027492},"20":{"pivotX":128,"pivotY":216.981007,"groundRadiusX":0.435797,"groundRadiusY":0.027418},"21":{"pivotX":128,"pivotY":217,"groundRadiusX":0.4375,"groundRadiusY":0.027344}}}),
+  "DesignAssets/Animations/CreatureIdleStudies/V2/shadow-weasel/idle.webp": Object.freeze({"frameSize":414,"pivotX":200.999999,"pivotY":350.000002,"viewSize":414.00000000000006,"registrationScale":1.297805642633229,"groundRadiusX":0.285266,"groundRadiusY":0.037618}),
+  "DesignAssets/Animations/CreatureHurtV6/shadow-weasel/hurt.webp": Object.freeze({"frameSize":414,"pivotX":200.999999,"pivotY":350.000002,"viewSize":414.00000000000006,"registrationScale":1.297805642633229,"groundRadiusX":0.285266,"groundRadiusY":0.037618}),
+  "DesignAssets/Animations/CreatureDeathV6/shadow-weasel/runtime.webp": Object.freeze({"frameSize":332,"pivotX":161.417746,"pivotY":281.835495,"viewSize":315.9487343410433,"registrationScale":1.296875,"groundRadiusX":0.285266,"groundRadiusY":0.037618,"frameGeometry":{"0":{"pivotX":161.417746,"pivotY":281.835495,"groundRadiusX":0.285266,"groundRadiusY":0.037618},"1":{"pivotX":161.072354,"pivotY":282.430424,"groundRadiusX":0.283802,"groundRadiusY":0.035176},"2":{"pivotX":160.726961,"pivotY":283.025354,"groundRadiusX":0.282337,"groundRadiusY":0.032734},"3":{"pivotX":160.381569,"pivotY":283.620283,"groundRadiusX":0.280873,"groundRadiusY":0.030292},"4":{"pivotX":160.036176,"pivotY":284.215213,"groundRadiusX":0.279408,"groundRadiusY":0.02785},"5":{"pivotX":159.690784,"pivotY":284.810142,"groundRadiusX":0.277944,"groundRadiusY":0.025408},"6":{"pivotX":159.345391,"pivotY":285.405071,"groundRadiusX":0.276479,"groundRadiusY":0.022966},"7":{"pivotX":158.999999,"pivotY":286.000001,"groundRadiusX":0.275015,"groundRadiusY":0.020524}}}),
+  "DesignAssets/Animations/TalonOwlIdle/PerchedV4/idle.webp": Object.freeze({"frameSize":472,"pivotX":236,"pivotY":413,"viewSize":472,"registrationScale":1.0925925925925926}),
+  "DesignAssets/Animations/CreatureAttackV2/talon-owl/runtime.webp": Object.freeze({"frameSize":314,"pivotX":157,"pivotY":275,"viewSize":314.18238847583643,"registrationScale":1.0902777777777777}),
+  "DesignAssets/Animations/CreatureHurtV6/talon-owl/hurt.webp": Object.freeze({"frameSize":472,"pivotX":236,"pivotY":413,"viewSize":472,"registrationScale":1.0925925925925926}),
+  "DesignAssets/Animations/CreatureDeathV6/talon-owl/runtime.webp": Object.freeze({"frameSize":280,"pivotX":140,"pivotY":245,"viewSize":280,"registrationScale":1.09375}),
+  "DesignAssets/Animations/UniqueIdleV4/spring-keeper/idle.webp": Object.freeze({"frameSize":412,"pivotX":206,"pivotY":349,"viewSize":412,"registrationScale":1.0729166666666667,"groundRadiusX":0.125,"groundRadiusY":0.028646}),
+  "DesignAssets/Animations/CreatureAttackV2/spring-keeper/runtime.webp": Object.freeze({"frameSize":288,"pivotX":144,"pivotY":243.435142,"viewSize":293.4339622641509,"registrationScale":1.070631970260223,"groundRadiusX":0.125,"groundRadiusY":0.028646}),
+  "DesignAssets/Animations/CreatureHurtV6/spring-keeper/hurt.webp": Object.freeze({"frameSize":412,"pivotX":206,"pivotY":349,"viewSize":412,"registrationScale":1.0729166666666667,"groundRadiusX":0.125,"groundRadiusY":0.028646}),
+  "DesignAssets/Animations/CreatureDeathV11/spring-keeper/runtime.webp": Object.freeze({"frameSize":308,"pivotX":154,"pivotY":261,"viewSize":308,"registrationScale":1.0694444444444444,"groundRadiusX":0.125,"groundRadiusY":0.028646,"frameGeometry":{"0":{"pivotX":154,"pivotY":261,"groundRadiusX":0.125,"groundRadiusY":0.028646},"1":{"pivotX":154,"pivotY":261.050847,"groundRadiusX":0.126824,"groundRadiusY":0.028749},"2":{"pivotX":154,"pivotY":261.101695,"groundRadiusX":0.128649,"groundRadiusY":0.028852},"3":{"pivotX":154,"pivotY":261.152542,"groundRadiusX":0.130473,"groundRadiusY":0.028955},"4":{"pivotX":154,"pivotY":261.20339,"groundRadiusX":0.132298,"groundRadiusY":0.029058},"5":{"pivotX":154,"pivotY":261.254237,"groundRadiusX":0.134122,"groundRadiusY":0.029161},"6":{"pivotX":154,"pivotY":261.305085,"groundRadiusX":0.135946,"groundRadiusY":0.029264},"7":{"pivotX":154,"pivotY":261.355932,"groundRadiusX":0.137771,"groundRadiusY":0.029367},"8":{"pivotX":154,"pivotY":261.40678,"groundRadiusX":0.139595,"groundRadiusY":0.02947},"9":{"pivotX":154,"pivotY":261.457627,"groundRadiusX":0.141419,"groundRadiusY":0.029573},"10":{"pivotX":154,"pivotY":261.508475,"groundRadiusX":0.143244,"groundRadiusY":0.029676},"11":{"pivotX":154,"pivotY":261.559322,"groundRadiusX":0.145068,"groundRadiusY":0.029779},"12":{"pivotX":154,"pivotY":261.610169,"groundRadiusX":0.146893,"groundRadiusY":0.029882},"13":{"pivotX":154,"pivotY":261.661017,"groundRadiusX":0.148717,"groundRadiusY":0.029985},"14":{"pivotX":154,"pivotY":261.711864,"groundRadiusX":0.150541,"groundRadiusY":0.030088},"15":{"pivotX":154,"pivotY":261.762712,"groundRadiusX":0.152366,"groundRadiusY":0.030191},"16":{"pivotX":154,"pivotY":261.813559,"groundRadiusX":0.15419,"groundRadiusY":0.030294},"17":{"pivotX":154,"pivotY":261.864407,"groundRadiusX":0.156015,"groundRadiusY":0.030397},"18":{"pivotX":154,"pivotY":261.915254,"groundRadiusX":0.157839,"groundRadiusY":0.0305},"19":{"pivotX":154,"pivotY":261.966102,"groundRadiusX":0.159663,"groundRadiusY":0.030603},"20":{"pivotX":154,"pivotY":262.016949,"groundRadiusX":0.161488,"groundRadiusY":0.030706},"21":{"pivotX":154,"pivotY":262.067797,"groundRadiusX":0.163312,"groundRadiusY":0.030809},"22":{"pivotX":154,"pivotY":262.118644,"groundRadiusX":0.165137,"groundRadiusY":0.030912},"23":{"pivotX":154,"pivotY":262.169492,"groundRadiusX":0.166961,"groundRadiusY":0.031015},"24":{"pivotX":154,"pivotY":262.220339,"groundRadiusX":0.168785,"groundRadiusY":0.031118},"25":{"pivotX":154,"pivotY":262.271186,"groundRadiusX":0.17061,"groundRadiusY":0.031221},"26":{"pivotX":154,"pivotY":262.322034,"groundRadiusX":0.172434,"groundRadiusY":0.031324},"27":{"pivotX":154,"pivotY":262.372881,"groundRadiusX":0.174258,"groundRadiusY":0.031427},"28":{"pivotX":154,"pivotY":262.423729,"groundRadiusX":0.176083,"groundRadiusY":0.03153},"29":{"pivotX":154,"pivotY":262.474576,"groundRadiusX":0.177907,"groundRadiusY":0.031633},"30":{"pivotX":154,"pivotY":262.525424,"groundRadiusX":0.179732,"groundRadiusY":0.031736},"31":{"pivotX":154,"pivotY":262.576271,"groundRadiusX":0.181556,"groundRadiusY":0.031839},"32":{"pivotX":154,"pivotY":262.627119,"groundRadiusX":0.18338,"groundRadiusY":0.031942},"33":{"pivotX":154,"pivotY":262.677966,"groundRadiusX":0.185205,"groundRadiusY":0.032044},"34":{"pivotX":154,"pivotY":262.728814,"groundRadiusX":0.187029,"groundRadiusY":0.032147},"35":{"pivotX":154,"pivotY":262.779661,"groundRadiusX":0.188854,"groundRadiusY":0.03225},"36":{"pivotX":154,"pivotY":262.830508,"groundRadiusX":0.190678,"groundRadiusY":0.032353},"37":{"pivotX":154,"pivotY":262.881356,"groundRadiusX":0.192502,"groundRadiusY":0.032456},"38":{"pivotX":154,"pivotY":262.932203,"groundRadiusX":0.194327,"groundRadiusY":0.032559},"39":{"pivotX":154,"pivotY":262.983051,"groundRadiusX":0.196151,"groundRadiusY":0.032662},"40":{"pivotX":154,"pivotY":263.033898,"groundRadiusX":0.197976,"groundRadiusY":0.032765},"41":{"pivotX":154,"pivotY":263.084746,"groundRadiusX":0.1998,"groundRadiusY":0.032868},"42":{"pivotX":154,"pivotY":263.135593,"groundRadiusX":0.201624,"groundRadiusY":0.032971},"43":{"pivotX":154,"pivotY":263.186441,"groundRadiusX":0.203449,"groundRadiusY":0.033074},"44":{"pivotX":154,"pivotY":263.237288,"groundRadiusX":0.205273,"groundRadiusY":0.033177},"45":{"pivotX":154,"pivotY":263.288136,"groundRadiusX":0.207097,"groundRadiusY":0.03328},"46":{"pivotX":154,"pivotY":263.338983,"groundRadiusX":0.208922,"groundRadiusY":0.033383},"47":{"pivotX":154,"pivotY":263.389831,"groundRadiusX":0.210746,"groundRadiusY":0.033486},"48":{"pivotX":154,"pivotY":263.440678,"groundRadiusX":0.212571,"groundRadiusY":0.033589},"49":{"pivotX":154,"pivotY":263.491525,"groundRadiusX":0.214395,"groundRadiusY":0.033692},"50":{"pivotX":154,"pivotY":263.542373,"groundRadiusX":0.216219,"groundRadiusY":0.033795},"51":{"pivotX":154,"pivotY":263.59322,"groundRadiusX":0.218044,"groundRadiusY":0.033898},"52":{"pivotX":154,"pivotY":263.644068,"groundRadiusX":0.219868,"groundRadiusY":0.034001},"53":{"pivotX":154,"pivotY":263.694915,"groundRadiusX":0.221693,"groundRadiusY":0.034104},"54":{"pivotX":154,"pivotY":263.745763,"groundRadiusX":0.223517,"groundRadiusY":0.034207},"55":{"pivotX":154,"pivotY":263.79661,"groundRadiusX":0.225341,"groundRadiusY":0.03431},"56":{"pivotX":154,"pivotY":263.847458,"groundRadiusX":0.227166,"groundRadiusY":0.034413},"57":{"pivotX":154,"pivotY":263.898305,"groundRadiusX":0.22899,"groundRadiusY":0.034516},"58":{"pivotX":154,"pivotY":263.949153,"groundRadiusX":0.230815,"groundRadiusY":0.034619},"59":{"pivotX":154,"pivotY":264,"groundRadiusX":0.232639,"groundRadiusY":0.034722}}}),
+  "DesignAssets/Animations/UniqueIdleV4/lantern-keeper/idle.webp": Object.freeze({"frameSize":384,"pivotX":182,"pivotY":325,"viewSize":384,"registrationScale":1,"groundRadiusX":0.182292,"groundRadiusY":0.033854}),
+  "DesignAssets/Animations/CreatureHurtV5/lantern-keeper/hurt.webp": Object.freeze({"frameSize":384,"pivotX":182,"pivotY":325,"viewSize":384,"registrationScale":1,"groundRadiusX":0.182292,"groundRadiusY":0.033854}),
+  "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/runtime.webp": Object.freeze({"frameSize":256,"pivotX":121.523132,"pivotY":216.875445,"viewSize":248.71174377224202,"registrationScale":1,"groundRadiusX":0.182292,"groundRadiusY":0.033854,"frameGeometry":{"0":{"pivotX":121.523132,"pivotY":216.875445,"groundRadiusX":0.182292,"groundRadiusY":0.033854},"1":{"pivotX":121.635053,"pivotY":216.878559,"groundRadiusX":0.183464,"groundRadiusY":0.034013},"2":{"pivotX":121.746975,"pivotY":216.881673,"groundRadiusX":0.184636,"groundRadiusY":0.034172},"3":{"pivotX":121.858897,"pivotY":216.884786,"groundRadiusX":0.185808,"groundRadiusY":0.034331},"4":{"pivotX":121.970819,"pivotY":216.8879,"groundRadiusX":0.186981,"groundRadiusY":0.034489},"5":{"pivotX":122.08274,"pivotY":216.891014,"groundRadiusX":0.188153,"groundRadiusY":0.034648},"6":{"pivotX":122.194662,"pivotY":216.894128,"groundRadiusX":0.189325,"groundRadiusY":0.034807},"7":{"pivotX":122.306584,"pivotY":216.897242,"groundRadiusX":0.190497,"groundRadiusY":0.034966},"8":{"pivotX":122.418505,"pivotY":216.900356,"groundRadiusX":0.19167,"groundRadiusY":0.035125},"9":{"pivotX":122.530427,"pivotY":216.90347,"groundRadiusX":0.192842,"groundRadiusY":0.035284},"10":{"pivotX":122.642349,"pivotY":216.906584,"groundRadiusX":0.194014,"groundRadiusY":0.035442},"11":{"pivotX":122.75427,"pivotY":216.909698,"groundRadiusX":0.195186,"groundRadiusY":0.035601},"12":{"pivotX":122.866192,"pivotY":216.912811,"groundRadiusX":0.196358,"groundRadiusY":0.03576},"13":{"pivotX":122.978114,"pivotY":216.915925,"groundRadiusX":0.197531,"groundRadiusY":0.035919},"14":{"pivotX":123.090036,"pivotY":216.919039,"groundRadiusX":0.198703,"groundRadiusY":0.036078},"15":{"pivotX":123.201957,"pivotY":216.922153,"groundRadiusX":0.199875,"groundRadiusY":0.036237},"16":{"pivotX":123.313879,"pivotY":216.925267,"groundRadiusX":0.201047,"groundRadiusY":0.036395},"17":{"pivotX":123.425801,"pivotY":216.928381,"groundRadiusX":0.20222,"groundRadiusY":0.036554},"18":{"pivotX":123.537722,"pivotY":216.931495,"groundRadiusX":0.203392,"groundRadiusY":0.036713},"19":{"pivotX":123.649644,"pivotY":216.934609,"groundRadiusX":0.204564,"groundRadiusY":0.036872},"20":{"pivotX":123.761566,"pivotY":216.937722,"groundRadiusX":0.205736,"groundRadiusY":0.037031},"21":{"pivotX":123.873488,"pivotY":216.940836,"groundRadiusX":0.206909,"groundRadiusY":0.03719},"22":{"pivotX":123.985409,"pivotY":216.94395,"groundRadiusX":0.208081,"groundRadiusY":0.037348},"23":{"pivotX":124.097331,"pivotY":216.947064,"groundRadiusX":0.209253,"groundRadiusY":0.037507},"24":{"pivotX":124.209253,"pivotY":216.950178,"groundRadiusX":0.210425,"groundRadiusY":0.037666},"25":{"pivotX":124.321174,"pivotY":216.953292,"groundRadiusX":0.211597,"groundRadiusY":0.037825},"26":{"pivotX":124.433096,"pivotY":216.956406,"groundRadiusX":0.21277,"groundRadiusY":0.037984},"27":{"pivotX":124.545018,"pivotY":216.95952,"groundRadiusX":0.213942,"groundRadiusY":0.038142},"28":{"pivotX":124.65694,"pivotY":216.962633,"groundRadiusX":0.215114,"groundRadiusY":0.038301},"29":{"pivotX":124.768861,"pivotY":216.965747,"groundRadiusX":0.216286,"groundRadiusY":0.03846},"30":{"pivotX":124.880783,"pivotY":216.968861,"groundRadiusX":0.217459,"groundRadiusY":0.038619},"31":{"pivotX":124.992705,"pivotY":216.971975,"groundRadiusX":0.218631,"groundRadiusY":0.038778},"32":{"pivotX":125.104626,"pivotY":216.975089,"groundRadiusX":0.219803,"groundRadiusY":0.038937},"33":{"pivotX":125.216548,"pivotY":216.978203,"groundRadiusX":0.220975,"groundRadiusY":0.039095},"34":{"pivotX":125.32847,"pivotY":216.981317,"groundRadiusX":0.222148,"groundRadiusY":0.039254},"35":{"pivotX":125.440391,"pivotY":216.984431,"groundRadiusX":0.22332,"groundRadiusY":0.039413},"36":{"pivotX":125.552313,"pivotY":216.987544,"groundRadiusX":0.224492,"groundRadiusY":0.039572},"37":{"pivotX":125.664235,"pivotY":216.990658,"groundRadiusX":0.225664,"groundRadiusY":0.039731},"38":{"pivotX":125.776157,"pivotY":216.993772,"groundRadiusX":0.226837,"groundRadiusY":0.03989},"39":{"pivotX":125.888078,"pivotY":216.996886,"groundRadiusX":0.228009,"groundRadiusY":0.040048},"40":{"pivotX":126,"pivotY":217,"groundRadiusX":0.229181,"groundRadiusY":0.040207}}}),
+  "DesignAssets/Animations/UniqueIdleV3/old-garden-snail/idle.webp": Object.freeze({"frameSize":352,"pivotX":166,"pivotY":288,"viewSize":352,"registrationScale":1,"groundRadiusX":0.318182,"groundRadiusY":0.056818}),
+  "DesignAssets/Animations/CreatureAttackV2/old-garden-snail/runtime.webp": Object.freeze({"frameSize":264,"pivotX":125.200549,"pivotY":217.401099,"viewSize":239.34065934065933,"registrationScale":1,"groundRadiusX":0.318182,"groundRadiusY":0.056818}),
+  "DesignAssets/Animations/CreatureHurtV7/old-garden-snail/hurt.webp": Object.freeze({"frameSize":352,"pivotX":166,"pivotY":288,"viewSize":352,"registrationScale":1,"groundRadiusX":0.318182,"groundRadiusY":0.056818}),
+  "DesignAssets/Animations/SnailDeathV1/old-garden-snail/runtime.webp": Object.freeze({"frameSize":256,"pivotX":120.710623,"pivotY":209.421245,"viewSize":256.5860805860806,"registrationScale":1,"groundRadiusX":0.318182,"groundRadiusY":0.056818,"frameGeometry":{"0":{"pivotX":120.710623,"pivotY":209.421245,"groundRadiusX":0.318182,"groundRadiusY":0.056818},"1":{"pivotX":120.820818,"pivotY":209.537469,"groundRadiusX":0.315775,"groundRadiusY":0.056609},"2":{"pivotX":120.931013,"pivotY":209.653694,"groundRadiusX":0.313368,"groundRadiusY":0.056399},"3":{"pivotX":121.041209,"pivotY":209.769918,"groundRadiusX":0.310962,"groundRadiusY":0.05619},"4":{"pivotX":121.151404,"pivotY":209.886142,"groundRadiusX":0.308555,"groundRadiusY":0.055981},"5":{"pivotX":121.2616,"pivotY":210.002366,"groundRadiusX":0.306148,"groundRadiusY":0.055771},"6":{"pivotX":121.371795,"pivotY":210.11859,"groundRadiusX":0.303742,"groundRadiusY":0.055562},"7":{"pivotX":121.48199,"pivotY":210.234814,"groundRadiusX":0.301335,"groundRadiusY":0.055353},"8":{"pivotX":121.592186,"pivotY":210.351038,"groundRadiusX":0.298928,"groundRadiusY":0.055143},"9":{"pivotX":121.702381,"pivotY":210.467262,"groundRadiusX":0.296522,"groundRadiusY":0.054934},"10":{"pivotX":121.812576,"pivotY":210.583486,"groundRadiusX":0.294115,"groundRadiusY":0.054724},"11":{"pivotX":121.922772,"pivotY":210.69971,"groundRadiusX":0.291708,"groundRadiusY":0.054515},"12":{"pivotX":122.032967,"pivotY":210.815934,"groundRadiusX":0.289302,"groundRadiusY":0.054306},"13":{"pivotX":122.143162,"pivotY":210.932158,"groundRadiusX":0.286895,"groundRadiusY":0.054096},"14":{"pivotX":122.253358,"pivotY":211.048382,"groundRadiusX":0.284488,"groundRadiusY":0.053887},"15":{"pivotX":122.363553,"pivotY":211.164606,"groundRadiusX":0.282082,"groundRadiusY":0.053677},"16":{"pivotX":122.473748,"pivotY":211.28083,"groundRadiusX":0.279675,"groundRadiusY":0.053468},"17":{"pivotX":122.583944,"pivotY":211.397054,"groundRadiusX":0.277268,"groundRadiusY":0.053259},"18":{"pivotX":122.694139,"pivotY":211.513278,"groundRadiusX":0.274862,"groundRadiusY":0.053049},"19":{"pivotX":122.804335,"pivotY":211.629502,"groundRadiusX":0.272455,"groundRadiusY":0.05284},"20":{"pivotX":122.91453,"pivotY":211.745726,"groundRadiusX":0.270048,"groundRadiusY":0.052631},"21":{"pivotX":123.024725,"pivotY":211.861951,"groundRadiusX":0.267641,"groundRadiusY":0.052421},"22":{"pivotX":123.134921,"pivotY":211.978175,"groundRadiusX":0.265235,"groundRadiusY":0.052212},"23":{"pivotX":123.245116,"pivotY":212.094399,"groundRadiusX":0.262828,"groundRadiusY":0.052002},"24":{"pivotX":123.355311,"pivotY":212.210623,"groundRadiusX":0.260421,"groundRadiusY":0.051793},"25":{"pivotX":123.465507,"pivotY":212.326847,"groundRadiusX":0.258015,"groundRadiusY":0.051584},"26":{"pivotX":123.575702,"pivotY":212.443071,"groundRadiusX":0.255608,"groundRadiusY":0.051374},"27":{"pivotX":123.685897,"pivotY":212.559295,"groundRadiusX":0.253201,"groundRadiusY":0.051165},"28":{"pivotX":123.796093,"pivotY":212.675519,"groundRadiusX":0.250795,"groundRadiusY":0.050956},"29":{"pivotX":123.906288,"pivotY":212.791743,"groundRadiusX":0.248388,"groundRadiusY":0.050746},"30":{"pivotX":124.016484,"pivotY":212.907967,"groundRadiusX":0.245981,"groundRadiusY":0.050537},"31":{"pivotX":124.126679,"pivotY":213.024191,"groundRadiusX":0.243575,"groundRadiusY":0.050327},"32":{"pivotX":124.236874,"pivotY":213.140415,"groundRadiusX":0.241168,"groundRadiusY":0.050118},"33":{"pivotX":124.34707,"pivotY":213.256639,"groundRadiusX":0.238761,"groundRadiusY":0.049909},"34":{"pivotX":124.457265,"pivotY":213.372863,"groundRadiusX":0.236355,"groundRadiusY":0.049699},"35":{"pivotX":124.56746,"pivotY":213.489087,"groundRadiusX":0.233948,"groundRadiusY":0.04949},"36":{"pivotX":124.677656,"pivotY":213.605311,"groundRadiusX":0.231541,"groundRadiusY":0.04928},"37":{"pivotX":124.787851,"pivotY":213.721535,"groundRadiusX":0.229135,"groundRadiusY":0.049071},"38":{"pivotX":124.898046,"pivotY":213.837759,"groundRadiusX":0.226728,"groundRadiusY":0.048862},"39":{"pivotX":125.008242,"pivotY":213.953984,"groundRadiusX":0.224321,"groundRadiusY":0.048652},"40":{"pivotX":125.118437,"pivotY":214.070208,"groundRadiusX":0.221914,"groundRadiusY":0.048443},"41":{"pivotX":125.228632,"pivotY":214.186432,"groundRadiusX":0.219508,"groundRadiusY":0.048234},"42":{"pivotX":125.338828,"pivotY":214.302656,"groundRadiusX":0.217101,"groundRadiusY":0.048024},"43":{"pivotX":125.449023,"pivotY":214.41888,"groundRadiusX":0.214694,"groundRadiusY":0.047815},"44":{"pivotX":125.559219,"pivotY":214.535104,"groundRadiusX":0.212288,"groundRadiusY":0.047605},"45":{"pivotX":125.669414,"pivotY":214.651328,"groundRadiusX":0.209881,"groundRadiusY":0.047396},"46":{"pivotX":125.779609,"pivotY":214.767552,"groundRadiusX":0.207474,"groundRadiusY":0.047187},"47":{"pivotX":125.889805,"pivotY":214.883776,"groundRadiusX":0.205068,"groundRadiusY":0.046977},"48":{"pivotX":126,"pivotY":215,"groundRadiusX":0.202661,"groundRadiusY":0.046768}}}),
+  "DesignAssets/Animations/MountainPawLeaderIdle/walking-forest/idle-runtime.webp": Object.freeze({"frameSize":260,"pivotX":128,"pivotY":214,"viewSize":260,"registrationScale":1.015625,"groundRadiusX":0.414063,"groundRadiusY":0.0625}),
+  "DesignAssets/Animations/CreatureHurtV8/walking-forest/hurt.webp": Object.freeze({"frameSize":260,"pivotX":128,"pivotY":214,"viewSize":260,"registrationScale":1.015625,"groundRadiusX":0.414063,"groundRadiusY":0.0625}),
+  "DesignAssets/Animations/CreatureDeathV12/walking-forest/runtime.webp": Object.freeze({"frameSize":260,"pivotX":128,"pivotY":214,"viewSize":260,"registrationScale":1.015625,"groundRadiusX":0.414063,"groundRadiusY":0.0625,"frameGeometry":{"0":{"pivotX":128,"pivotY":214,"groundRadiusX":0.414063,"groundRadiusY":0.0625},"1":{"pivotX":128.076923,"pivotY":214.115385,"groundRadiusX":0.416166,"groundRadiusY":0.0622},"2":{"pivotX":128.153846,"pivotY":214.230769,"groundRadiusX":0.418269,"groundRadiusY":0.061899},"3":{"pivotX":128.230769,"pivotY":214.346154,"groundRadiusX":0.420373,"groundRadiusY":0.061599},"4":{"pivotX":128.307692,"pivotY":214.461538,"groundRadiusX":0.422476,"groundRadiusY":0.061298},"5":{"pivotX":128.384615,"pivotY":214.576923,"groundRadiusX":0.424579,"groundRadiusY":0.060998},"6":{"pivotX":128.461538,"pivotY":214.692308,"groundRadiusX":0.426683,"groundRadiusY":0.060697},"7":{"pivotX":128.538462,"pivotY":214.807692,"groundRadiusX":0.428786,"groundRadiusY":0.060397},"8":{"pivotX":128.615385,"pivotY":214.923077,"groundRadiusX":0.430889,"groundRadiusY":0.060096},"9":{"pivotX":128.692308,"pivotY":215.038462,"groundRadiusX":0.432993,"groundRadiusY":0.059796},"10":{"pivotX":128.769231,"pivotY":215.153846,"groundRadiusX":0.435096,"groundRadiusY":0.059495},"11":{"pivotX":128.846154,"pivotY":215.269231,"groundRadiusX":0.4372,"groundRadiusY":0.059195},"12":{"pivotX":128.923077,"pivotY":215.384615,"groundRadiusX":0.439303,"groundRadiusY":0.058894},"13":{"pivotX":129,"pivotY":215.5,"groundRadiusX":0.441406,"groundRadiusY":0.058594},"14":{"pivotX":129.076923,"pivotY":215.615385,"groundRadiusX":0.44351,"groundRadiusY":0.058293},"15":{"pivotX":129.153846,"pivotY":215.730769,"groundRadiusX":0.445613,"groundRadiusY":0.057993},"16":{"pivotX":129.230769,"pivotY":215.846154,"groundRadiusX":0.447716,"groundRadiusY":0.057692},"17":{"pivotX":129.307692,"pivotY":215.961538,"groundRadiusX":0.44982,"groundRadiusY":0.057392},"18":{"pivotX":129.384615,"pivotY":216.076923,"groundRadiusX":0.451923,"groundRadiusY":0.057091},"19":{"pivotX":129.461538,"pivotY":216.192308,"groundRadiusX":0.454026,"groundRadiusY":0.056791},"20":{"pivotX":129.538462,"pivotY":216.307692,"groundRadiusX":0.45613,"groundRadiusY":0.05649},"21":{"pivotX":129.615385,"pivotY":216.423077,"groundRadiusX":0.458233,"groundRadiusY":0.05619},"22":{"pivotX":129.692308,"pivotY":216.538462,"groundRadiusX":0.460337,"groundRadiusY":0.055889},"23":{"pivotX":129.769231,"pivotY":216.653846,"groundRadiusX":0.46244,"groundRadiusY":0.055589},"24":{"pivotX":129.846154,"pivotY":216.769231,"groundRadiusX":0.464543,"groundRadiusY":0.055288},"25":{"pivotX":129.923077,"pivotY":216.884615,"groundRadiusX":0.466647,"groundRadiusY":0.054988},"26":{"pivotX":130,"pivotY":217,"groundRadiusX":0.46875,"groundRadiusY":0.054688}}}),
+  "DesignAssets/Animations/MountainPawLeaderIdle/white-paw/idle-runtime.webp": Object.freeze({"frameSize":312,"pivotX":152,"pivotY":259,"viewSize":312,"registrationScale":1.0833333333333333,"groundRadiusX":0.267361,"groundRadiusY":0.048611}),
+  "DesignAssets/Animations/CreatureHurtV6/white-paw/hurt.webp": Object.freeze({"frameSize":312,"pivotX":152,"pivotY":259,"viewSize":312,"registrationScale":1.0833333333333333,"groundRadiusX":0.267361,"groundRadiusY":0.048611}),
+  "DesignAssets/Animations/CreatureDeathV12/white-paw/runtime.webp": Object.freeze({"frameSize":276,"pivotX":134.444444,"pivotY":229.555556,"viewSize":276,"registrationScale":1.078125,"groundRadiusX":0.267361,"groundRadiusY":0.048611,"frameGeometry":{"0":{"pivotX":134.444444,"pivotY":229.555556,"groundRadiusX":0.267361,"groundRadiusY":0.048611},"1":{"pivotX":134.51153,"pivotY":229.658281,"groundRadiusX":0.268802,"groundRadiusY":0.048431},"2":{"pivotX":134.578616,"pivotY":229.761006,"groundRadiusX":0.270244,"groundRadiusY":0.048251},"3":{"pivotX":134.645702,"pivotY":229.863732,"groundRadiusX":0.271685,"groundRadiusY":0.048071},"4":{"pivotX":134.712788,"pivotY":229.966457,"groundRadiusX":0.273126,"groundRadiusY":0.04789},"5":{"pivotX":134.779874,"pivotY":230.069182,"groundRadiusX":0.274568,"groundRadiusY":0.04771},"6":{"pivotX":134.84696,"pivotY":230.171908,"groundRadiusX":0.276009,"groundRadiusY":0.04753},"7":{"pivotX":134.914046,"pivotY":230.274633,"groundRadiusX":0.27745,"groundRadiusY":0.04735},"8":{"pivotX":134.981132,"pivotY":230.377358,"groundRadiusX":0.278892,"groundRadiusY":0.04717},"9":{"pivotX":135.048218,"pivotY":230.480084,"groundRadiusX":0.280333,"groundRadiusY":0.04699},"10":{"pivotX":135.115304,"pivotY":230.582809,"groundRadiusX":0.281774,"groundRadiusY":0.046809},"11":{"pivotX":135.18239,"pivotY":230.685535,"groundRadiusX":0.283215,"groundRadiusY":0.046629},"12":{"pivotX":135.249476,"pivotY":230.78826,"groundRadiusX":0.284657,"groundRadiusY":0.046449},"13":{"pivotX":135.316562,"pivotY":230.890985,"groundRadiusX":0.286098,"groundRadiusY":0.046269},"14":{"pivotX":135.383648,"pivotY":230.993711,"groundRadiusX":0.287539,"groundRadiusY":0.046089},"15":{"pivotX":135.450734,"pivotY":231.096436,"groundRadiusX":0.288981,"groundRadiusY":0.045909},"16":{"pivotX":135.51782,"pivotY":231.199161,"groundRadiusX":0.290422,"groundRadiusY":0.045729},"17":{"pivotX":135.584906,"pivotY":231.301887,"groundRadiusX":0.291863,"groundRadiusY":0.045548},"18":{"pivotX":135.651992,"pivotY":231.404612,"groundRadiusX":0.293305,"groundRadiusY":0.045368},"19":{"pivotX":135.719078,"pivotY":231.507338,"groundRadiusX":0.294746,"groundRadiusY":0.045188},"20":{"pivotX":135.786164,"pivotY":231.610063,"groundRadiusX":0.296187,"groundRadiusY":0.045008},"21":{"pivotX":135.853249,"pivotY":231.712788,"groundRadiusX":0.297628,"groundRadiusY":0.044828},"22":{"pivotX":135.920335,"pivotY":231.815514,"groundRadiusX":0.29907,"groundRadiusY":0.044648},"23":{"pivotX":135.987421,"pivotY":231.918239,"groundRadiusX":0.300511,"groundRadiusY":0.044467},"24":{"pivotX":136.054507,"pivotY":232.020964,"groundRadiusX":0.301952,"groundRadiusY":0.044287},"25":{"pivotX":136.121593,"pivotY":232.12369,"groundRadiusX":0.303394,"groundRadiusY":0.044107},"26":{"pivotX":136.188679,"pivotY":232.226415,"groundRadiusX":0.304835,"groundRadiusY":0.043927},"27":{"pivotX":136.255765,"pivotY":232.32914,"groundRadiusX":0.306276,"groundRadiusY":0.043747},"28":{"pivotX":136.322851,"pivotY":232.431866,"groundRadiusX":0.307718,"groundRadiusY":0.043567},"29":{"pivotX":136.389937,"pivotY":232.534591,"groundRadiusX":0.309159,"groundRadiusY":0.043386},"30":{"pivotX":136.457023,"pivotY":232.637317,"groundRadiusX":0.3106,"groundRadiusY":0.043206},"31":{"pivotX":136.524109,"pivotY":232.740042,"groundRadiusX":0.312041,"groundRadiusY":0.043026},"32":{"pivotX":136.591195,"pivotY":232.842767,"groundRadiusX":0.313483,"groundRadiusY":0.042846},"33":{"pivotX":136.658281,"pivotY":232.945493,"groundRadiusX":0.314924,"groundRadiusY":0.042666},"34":{"pivotX":136.725367,"pivotY":233.048218,"groundRadiusX":0.316365,"groundRadiusY":0.042486},"35":{"pivotX":136.792453,"pivotY":233.150943,"groundRadiusX":0.317807,"groundRadiusY":0.042305},"36":{"pivotX":136.859539,"pivotY":233.253669,"groundRadiusX":0.319248,"groundRadiusY":0.042125},"37":{"pivotX":136.926625,"pivotY":233.356394,"groundRadiusX":0.320689,"groundRadiusY":0.041945},"38":{"pivotX":136.993711,"pivotY":233.459119,"groundRadiusX":0.322131,"groundRadiusY":0.041765},"39":{"pivotX":137.060797,"pivotY":233.561845,"groundRadiusX":0.323572,"groundRadiusY":0.041585},"40":{"pivotX":137.127883,"pivotY":233.66457,"groundRadiusX":0.325013,"groundRadiusY":0.041405},"41":{"pivotX":137.194969,"pivotY":233.767296,"groundRadiusX":0.326454,"groundRadiusY":0.041224},"42":{"pivotX":137.262055,"pivotY":233.870021,"groundRadiusX":0.327896,"groundRadiusY":0.041044},"43":{"pivotX":137.32914,"pivotY":233.972746,"groundRadiusX":0.329337,"groundRadiusY":0.040864},"44":{"pivotX":137.396226,"pivotY":234.075472,"groundRadiusX":0.330778,"groundRadiusY":0.040684},"45":{"pivotX":137.463312,"pivotY":234.178197,"groundRadiusX":0.33222,"groundRadiusY":0.040504},"46":{"pivotX":137.530398,"pivotY":234.280922,"groundRadiusX":0.333661,"groundRadiusY":0.040324},"47":{"pivotX":137.597484,"pivotY":234.383648,"groundRadiusX":0.335102,"groundRadiusY":0.040143},"48":{"pivotX":137.66457,"pivotY":234.486373,"groundRadiusX":0.336544,"groundRadiusY":0.039963},"49":{"pivotX":137.731656,"pivotY":234.589099,"groundRadiusX":0.337985,"groundRadiusY":0.039783},"50":{"pivotX":137.798742,"pivotY":234.691824,"groundRadiusX":0.339426,"groundRadiusY":0.039603},"51":{"pivotX":137.865828,"pivotY":234.794549,"groundRadiusX":0.340867,"groundRadiusY":0.039423},"52":{"pivotX":137.932914,"pivotY":234.897275,"groundRadiusX":0.342309,"groundRadiusY":0.039243},"53":{"pivotX":138,"pivotY":235,"groundRadiusX":0.34375,"groundRadiusY":0.039063}}}),
+  "DesignAssets/Animations/MountainPawLeaderIdle/spiny-back-leader/idle-runtime.webp": Object.freeze({"frameSize":256,"pivotX":124,"pivotY":202,"viewSize":256,"registrationScale":1,"groundRadiusX":0.398438,"groundRadiusY":0.085938}),
+  "DesignAssets/Animations/CreatureAttackV2/spiny-back-leader/runtime.webp": Object.freeze({"frameSize":512,"pivotX":249.454545,"pivotY":412,"viewSize":418.9090909090909,"registrationScale":1,"groundRadiusX":0.398438,"groundRadiusY":0.085938}),
+  "DesignAssets/Animations/CreatureHurtV8/spiny-back-leader/hurt.webp": Object.freeze({"frameSize":256,"pivotX":124,"pivotY":202,"viewSize":256,"registrationScale":1,"groundRadiusX":0.398438,"groundRadiusY":0.085938}),
+  "DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/runtime.webp": Object.freeze({"frameSize":256,"pivotX":124,"pivotY":202,"viewSize":256,"registrationScale":1,"groundRadiusX":0.398438,"groundRadiusY":0.085938,"frameGeometry":{"0":{"pivotX":124,"pivotY":202,"groundRadiusX":0.398438,"groundRadiusY":0.085938},"1":{"pivotX":125,"pivotY":208.5,"groundRadiusX":0.410156,"groundRadiusY":0.068359},"2":{"pivotX":126,"pivotY":215,"groundRadiusX":0.421875,"groundRadiusY":0.050781}}}),
+});
+
+return { UNIT_SPRITE_REGISTRATION };
+})();
+modules["client/image-geometry.mjs"] = (() => {
+const { IMAGE_SCALES } = modules["client/image-scales.mjs"];
+const { UNIT_SPRITE_REGISTRATION } = modules["client/unit-sprite-registration.mjs"];
+
+function imageScale(source) {
+  return IMAGE_SCALES[source]?.[0] || 1;
+}
+
+function imageFrameSize(source, size) {
+  return UNIT_SPRITE_REGISTRATION[source]?.frameSize || Math.round(size * imageScale(source));
+}
+
+function imageRegion(source, region) {
+  const scale = IMAGE_SCALES[source] || [1, 1];
+  return { x: region.x * scale[0], y: region.y * scale[1],
+    width: region.width * scale[0], height: region.height * scale[1] };
+}
+
+function imageAnimation(animation) {
+  const scale = imageScale(animation.image);
+  const result = { ...animation };
+  for (const key of ["frameSize", "pivotX", "pivotY", "outletX", "outletY", "height", "viewSize"])
+    if (Number.isFinite(result[key])) result[key] *= scale;
+  if (Number.isFinite(result.frameSize)) result.frameSize = Math.round(result.frameSize);
+  if (result.nestBounds) result.nestBounds = Object.freeze(imageRegion(animation.image, result.nestBounds));
+  Object.assign(result, UNIT_SPRITE_REGISTRATION[animation.image]);
+  return result;
+}
+
+function imageFrameGeometry(animation, frame) {
+  const geometry = animation.frameGeometry?.[frame];
+  return geometry ? { ...animation, ...geometry } : animation;
+}
+
+return { imageScale, imageFrameSize, imageRegion, imageAnimation, imageFrameGeometry };
+})();
+modules["client/unit-image-bounds.mjs"] = (() => {
+const UNIT_IMAGE_BOUNDS = Object.freeze({
+  "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp": Object.freeze({"height":287,"width":440,"frameSize":512}),
+  "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp": Object.freeze({"height":287,"width":421,"frameSize":512}),
+  "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp": Object.freeze({"height":287,"width":238,"frameSize":512}),
+  "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp": Object.freeze({"frameSize":631,"width":201,"height":247,"bodyWidth":237.69230769230768,"bodyHeight":290.52287581699346}),
+  "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp": Object.freeze({"frameSize":316,"width":140,"height":173}),
+  "DesignAssets/Animations/UnitAttack/attack.png": Object.freeze({"frameSize":632,"width":295,"height":331}),
+  "DesignAssets/Animations/UnitHurt/V3/hurt.png": Object.freeze({"frameSize":632,"width":293,"height":360}),
+  "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp": Object.freeze({"frameSize":549,"width":423,"height":306,"bodyWidth":85,"bodyHeight":61}),
+  "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":553,"width":424,"height":300}),
+  "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":553,"width":424,"height":300}),
+  "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":553,"width":424,"height":300}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": Object.freeze({"frameSize":512,"width":406,"height":300,"bodyWidth":84,"bodyHeight":63}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":517,"width":406,"height":300}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":512,"width":399,"height":303}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":517,"width":406,"height":300}),
+  "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp": Object.freeze({"frameSize":512,"width":230,"height":288,"bodyWidth":74,"bodyHeight":97}),
+  "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":516,"width":230,"height":288}),
+  "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":516,"width":230,"height":288}),
+  "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":516,"width":230,"height":288}),
+  "DesignAssets/Animations/CreatureIdleV3/flower-tail-bird/idle.webp": Object.freeze({"frameSize":440,"width":265,"height":243}),
+  "DesignAssets/Animations/CreatureDeathV4/flower-tail-bird/runtime.webp": Object.freeze({"frameSize":290,"width":185,"height":161}),
+  "DesignAssets/Animations/CreatureIdleV3/dew-rabbit/idle.webp": Object.freeze({"frameSize":430,"width":257,"height":283}),
+  "DesignAssets/Animations/CreatureDeathV6/dew-rabbit/runtime.webp": Object.freeze({"frameSize":264,"width":157,"height":177}),
+  "DesignAssets/Animations/CreatureIdleV3/soil-mole/idle.webp": Object.freeze({"frameSize":356,"width":283,"height":199}),
+  "DesignAssets/Animations/CreatureDeathV6/soil-mole/runtime.webp": Object.freeze({"frameSize":258,"width":205,"height":144}),
+  "DesignAssets/Animations/CreatureIdleV4/bundle-snail/idle.webp": Object.freeze({"frameSize":470,"width":283,"height":220}),
+  "DesignAssets/Animations/SnailDeathV1/bundle-snail/runtime.webp": Object.freeze({"frameSize":304,"width":182,"height":138}),
+  "DesignAssets/Animations/CottonSheepIdle/CalmV5/idle-runtime.webp": Object.freeze({"frameSize":256,"width":192,"height":175}),
+  "DesignAssets/Animations/CreatureDeathV6/cotton-sheep/runtime.webp": Object.freeze({"frameSize":256,"width":193,"height":175}),
+  "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp": Object.freeze({"frameSize":428,"width":283,"height":272}),
+  "DesignAssets/Animations/CreatureDeathV4/rolling-acorn/runtime.webp": Object.freeze({"frameSize":262,"width":172,"height":167}),
+  "DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp": Object.freeze({"frameSize":362,"width":265,"height":186}),
+  "DesignAssets/Animations/CreatureIdleStudies/V1/snare-vine/idle.webp": Object.freeze({"frameSize":456,"width":239,"height":283}),
+  "DesignAssets/Animations/CreatureDeathV4/snare-vine/runtime.webp": Object.freeze({"frameSize":276,"width":144,"height":170}),
+  "DesignAssets/Animations/Beetle/atlas.webp": Object.freeze({"frameSize":346,"width":245,"height":195}),
+  "DesignAssets/Animations/BeetleDeath/dead-v2.png": Object.freeze({"frameSize":186,"width":144,"height":86}),
+  "DesignAssets/Animations/SoilBoarIdle/V1/idle.webp": Object.freeze({"frameSize":370,"width":265,"height":195}),
+  "DesignAssets/Animations/CreatureDeathV6/soil-boar/runtime.webp": Object.freeze({"frameSize":256,"width":184,"height":135}),
+  "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp": Object.freeze({"frameSize":346,"width":283,"height":207}),
+  "DesignAssets/Animations/CreatureDeathV12/vine-turtle/runtime.webp": Object.freeze({"frameSize":256,"width":231,"height":143}),
+  "DesignAssets/Animations/CreatureIdleStudies/V2/shadow-weasel/idle.webp": Object.freeze({"frameSize":414,"width":264,"height":111}),
+  "DesignAssets/Animations/CreatureDeathV6/shadow-weasel/runtime.webp": Object.freeze({"frameSize":332,"width":202,"height":85}),
+  "DesignAssets/Animations/TalonOwlIdle/PerchedV4/idle.webp": Object.freeze({"frameSize":472,"width":210,"height":269}),
+  "DesignAssets/Animations/CreatureDeathV6/talon-owl/runtime.webp": Object.freeze({"frameSize":280,"width":178,"height":140}),
+  "DesignAssets/Animations/UniqueIdleV4/spring-keeper/idle.webp": Object.freeze({"frameSize":412,"width":265,"height":230}),
+  "DesignAssets/Animations/CreatureDeathV11/spring-keeper/runtime.webp": Object.freeze({"frameSize":308,"width":178,"height":155}),
+  "DesignAssets/Animations/UniqueIdleV4/lantern-keeper/idle.webp": Object.freeze({"frameSize":384,"width":281,"height":256}),
+  "DesignAssets/Animations/CreatureDeathV10/lantern-keeper/runtime.webp": Object.freeze({"frameSize":256,"width":182,"height":172}),
+  "DesignAssets/Animations/UniqueIdleV3/old-garden-snail/idle.webp": Object.freeze({"frameSize":352,"width":273,"height":261}),
+  "DesignAssets/Animations/SnailDeathV1/old-garden-snail/runtime.webp": Object.freeze({"frameSize":256,"width":199,"height":188}),
+  "DesignAssets/Animations/MountainPawLeaderIdle/walking-forest/idle-runtime.webp": Object.freeze({"frameSize":260,"width":220,"height":187}),
+  "DesignAssets/Animations/CreatureDeathV12/walking-forest/runtime.webp": Object.freeze({"frameSize":260,"width":250,"height":205}),
+  "DesignAssets/Animations/MountainPawLeaderIdle/white-paw/idle-runtime.webp": Object.freeze({"frameSize":312,"width":220,"height":125}),
+  "DesignAssets/Animations/CreatureDeathV12/white-paw/runtime.webp": Object.freeze({"frameSize":276,"width":200,"height":115}),
+  "DesignAssets/Animations/MountainPawLeaderIdle/spiny-back-leader/idle-runtime.webp": Object.freeze({"frameSize":256,"width":220,"height":191}),
+  "DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/runtime.webp": Object.freeze({"frameSize":256,"width":203,"height":176}),
+});
+
+return { UNIT_IMAGE_BOUNDS };
+})();
+modules["client/creature-ranged.mjs"] = (() => {
+const { imageAnimation } = modules["client/image-geometry.mjs"];
+const { UNIT_IMAGE_BOUNDS } = modules["client/unit-image-bounds.mjs"];
+const { unitDisplaySize, unitFrameMirror, unitFacing } = modules["client/unit-size.mjs"];
+
+// Approved 2026-11-06. Native cels are unchanged; registration is the exact
+// inverse of the approved melee seed's lossless resize-and-padding transform.
+const CREATURE_RANGED_ANIMATIONS = Object.freeze({
+  "spiny-back-beetle": Object.freeze({
+    image: "DesignAssets/Animations/CreatureRangedV1/spiny-back-beetle/shoot.webp",
+    frameSize: 512, viewSize: 454.8367346938776, columns: 4,
+    pivotX: 263.7510204081633, pivotY: 421.314283077551,
+    durationsMs: Object.freeze([120,130,150,100,80,140,160,160]),
+    frameCount: 8, durationMs: 1040, launchAtMs: 500, launchFrame: 4,
+    outletX: 145, outletY: 339, registrationScale: 1, facing: "left", loop: false,
+    idleImage: "DesignAssets/Animations/Beetle/atlas.webp"
+  }),
+  "spiny-back-leader": Object.freeze({
+    image: "DesignAssets/Animations/CreatureRangedV1/spiny-back-leader/shoot.webp",
+    frameSize: 512, viewSize: 418.9090909090909, columns: 4,
+    pivotX: 263.454545, pivotY: 411,
+    durationsMs: Object.freeze([140,170,190,140,90,170,180,160]),
+    frameCount: 8, durationMs: 1240, launchAtMs: 640, launchFrame: 4,
+    outletX: 145, outletY: 317, registrationScale: 1, facing: "left", loop: false,
+    idleImage: "DesignAssets/Animations/MountainPawLeaderIdle/spiny-back-leader/idle-runtime.webp"
+  }),
+  "flower-tail-bird": Object.freeze({
+    image: "DesignAssets/Animations/CreatureRangedV1/flower-tail-bird/shoot.webp",
+    frameSize: 512, viewSize: 500.7396226415094, columns: 4,
+    pivotX: 228.86883742756186, pivotY: 422.2344753074205,
+    durationsMs: Object.freeze([100,120,120,60,100,120,160,220]),
+    frameCount: 8, durationMs: 1000, launchAtMs: 400, launchFrame: 4,
+    outletX: 92, outletY: 234, registrationScale: 1, facing: "left", loop: false,
+    idleImage: "DesignAssets/Animations/CreatureIdleV3/flower-tail-bird/idle.webp"
+  }),
+  "soil-mole": Object.freeze({
+    image: "DesignAssets/Animations/CreatureRangedV1/soil-mole/shoot.png",
+    frameSize: 512, viewSize: 445.3180212014134, columns: 4,
+    pivotX: 256.16421403663, pivotY: 377.90245216117216,
+    durationsMs: Object.freeze([140,110,140,160,70,100,140,180]),
+    frameCount: 8, durationMs: 1040, launchAtMs: 550, launchFrame: 4,
+    outletX: 99, outletY: 291, registrationScale: 1, facing: "left", loop: false,
+    idleImage: "DesignAssets/Animations/CreatureIdleV3/soil-mole/idle.webp"
+  }),
+  "lantern-keeper": Object.freeze({
+      image: "DesignAssets/Animations/CreatureRangedV1/lantern-keeper/ranged.webp",
+      frameSize: 512,
+      viewSize: 491.95729537366554,
+      columns: 4,
+      pivotX: 253.11824237037038,
+      pivotY: 433.88154714074074,
+      durationsMs: Object.freeze([
+          100,
+          100,
+          120,
+          100,
+          70,
+          110,
+          160,
+          240
+      ]),
+      frameCount: 8,
+      durationMs: 1000,
+      launchAtMs: 420,
+      launchFrame: 4,
+      outletX: 80,
+      outletY: 236,
+      registrationScale: 1,
+      facing: "left",
+      loop: false,
+      idleImage: "DesignAssets/Animations/UniqueIdleV4/lantern-keeper/idle.webp"
+  }),
+  "bubble-toad": Object.freeze({
+      image: "DesignAssets/Animations/CreatureRangedV1/bubble-toad/ranged.webp",
+      frameSize: 512,
+      viewSize: 512.211320754717,
+      columns: 4,
+      pivotX: 264.1522145736434,
+      pivotY: 373.28031330232557,
+      durationsMs: Object.freeze([
+          100,
+          110,
+          140,
+          110,
+          70,
+          100,
+          150,
+          220
+      ]),
+      frameCount: 8,
+      durationMs: 1000,
+      launchAtMs: 460,
+      launchFrame: 4,
+      outletX: 125,
+      outletY: 190,
+      registrationScale: 1,
+      facing: "left",
+      loop: false,
+      idleImage: "DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp"
+  }),
+  "vine-turtle": Object.freeze({
+      image: "DesignAssets/Animations/CreatureRangedV1/vine-turtle/ranged.webp",
+      frameSize: 512,
+      viewSize: 513.4982332155477,
+      columns: 4,
+      pivotX: 271.0151515151515,
+      pivotY: 435.7066318961039,
+      durationsMs: Object.freeze([
+          160,
+          180,
+          240,
+          100,
+          90,
+          160,
+          210,
+          260
+      ]),
+      frameCount: 8,
+      durationMs: 1400,
+      launchAtMs: 680,
+      launchFrame: 4,
+      outletX: 103,
+      outletY: 181,
+      registrationScale: 1,
+      facing: "left",
+      loop: false,
+      idleImage: "DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp"
+  })
+});
+const CREATURE_RANGED_ASSETS = Object.freeze(Object.values(CREATURE_RANGED_ANIMATIONS).map(animation => animation.image));
+
+function creatureRangedPose(agent, time) {
+  const animation = CREATURE_RANGED_ANIMATIONS[agent.species], attack = agent.attack;
+  if (!animation || !(agent.health > 0) || agent.birth || !Number.isFinite(time) ||
+      !attack || !(attack.dnaRanged || attack.mode === "ranged" || attack.attackMode === "ranged") ||
+      !Number.isFinite(attack.startedAt) || !Number.isFinite(attack.launchedAt) ||
+      !Number.isFinite(attack.endsAt) || attack.launchedAt < attack.startedAt ||
+      attack.endsAt < attack.launchedAt || attack.endsAt <= attack.startedAt || time < attack.startedAt) return null;
+  const epsilon = Number.EPSILON * Math.max(1, Math.abs(attack.startedAt), Math.abs(attack.endsAt)) * 4;
+  if (time > attack.endsAt + epsilon) return null;
+  const recorded = attack.shotLaunches;
+  const launches = Array.isArray(recorded) && recorded.length && recorded[0] === attack.launchedAt &&
+    recorded.every((at, index) => Number.isFinite(at) && at <= attack.endsAt + epsilon &&
+      (!index || at > recorded[index - 1])) ? recorded : [attack.launchedAt];
+  if (time > attack.endsAt && time !== launches.at(-1) ||
+      time === attack.endsAt && Math.abs(launches.at(-1) - attack.endsAt) > epsilon) return null;
+  const recoveryShare = (animation.durationMs - animation.launchAtMs) / animation.durationMs;
+  const startFor = index => index ? launches[index-1] +
+    (launches[index] - launches[index-1]) * recoveryShare : attack.startedAt;
+  let shotIndex = 0;
+  while (shotIndex < launches.length - 1 && time >= startFor(shotIndex + 1)) shotIndex++;
+  const start = startFor(shotIndex), launch = launches[shotIndex];
+  const end = shotIndex + 1 < launches.length ? startFor(shotIndex + 1) : attack.endsAt;
+  let elapsed = time < launch ? animation.launchAtMs * (time-start) / Math.max(.001, launch-start) :
+    animation.launchAtMs + (animation.durationMs-animation.launchAtMs) * (time-launch) / Math.max(.001, end-launch);
+  if (Math.abs(time-launch) <= epsilon) elapsed = animation.launchAtMs;
+  let frame = 0;
+  while (frame < animation.frameCount-1 && elapsed >= animation.durationsMs[frame]) elapsed -= animation.durationsMs[frame++];
+  return { action: "ranged", animation, frame, shotIndex, launchAt: launch,
+    mirrorX: unitFrameMirror(animation.sourceFacing || animation.facing || "left", attack.directionX || agent.facing || 1) };
+}
+
+// Offsets are in world cells relative to the same idle-normalized body pivot
+// used by the world, detail and laboratory renderers. The journal owns timing.
+function creatureRangedOutlet(agent, facing) {
+  facing ||= unitFacing(agent);
+  const animation = CREATURE_RANGED_ANIMATIONS[agent.species];
+  if (!animation) return null;
+  const idle = imageAnimation({ image: animation.idleImage, frameSize: 512, viewSize: 512 });
+  const bounds = UNIT_IMAGE_BOUNDS[animation.idleImage];
+  const length = Math.max(bounds.width, bounds.height) * idle.frameSize / bounds.frameSize;
+  const scale = unitDisplaySize(agent) * idle.viewSize /
+    ((idle.registrationScale || 1) * length * animation.viewSize);
+  return { x: (unitFrameMirror(animation.sourceFacing || animation.facing || "left", facing) ? -1 : 1) * (animation.outletX-animation.pivotX) * scale,
+    y: (animation.outletY-animation.pivotY) * scale };
+}
+
+return { CREATURE_RANGED_ANIMATIONS, CREATURE_RANGED_ASSETS, creatureRangedPose, creatureRangedOutlet };
+})();
+modules["client/toad-hop.mjs"] = (() => {
+// Approved original-cel v5 hop. All timing is normalized to a server cell move;
+// no accumulated animation clock, new artwork, gameplay speed, or hitbox changes.
+const TOAD_HOP = Object.freeze({ cycleMs:880, takeoffMs:200, airborneMs:260, apex:.44, height:100 });
+const CENTERS = [[127.3,165.7],[128.3,169.2],[121.2,91],[127.9,93.2],[127.9,86.4],[127.5,115],[129.7,173.1],[128.1,168.3]];
+function clamp01(value) { return Math.max(0,Math.min(1,value)); }
+function smooth(value) { const p=clamp01(value); return p*p*(3-2*p); }
+function toadHopMotion(progress) {
+  const time=clamp01(progress)*TOAD_HOP.cycleMs;
+  const phase=clamp01((time-TOAD_HOP.takeoffMs)/TOAD_HOP.airborneMs);
+  let travel,height;
+  if(phase<=TOAD_HOP.apex) {
+    const u=phase/TOAD_HOP.apex;
+    travel=.5*smooth(u); height=TOAD_HOP.height*(1-(1-u)**3);
+  } else {
+    const u=(phase-TOAD_HOP.apex)/(1-TOAD_HOP.apex);
+    travel=.5+.5*smooth(u); height=TOAD_HOP.height*(1-u**3);
+  }
+  const airborne=time>=200&&time<460;
+  const frame=time<110?0:time<200?1:airborne?
+    phase<.16?1:phase<.48?3:phase<.56?4:phase<.84?5:6:time<560?6:7;
+  let degrees=0;
+  if(airborne) {
+    if(phase<.25) degrees=40*smooth((phase-.08)/.17);
+    else if(phase<.40) degrees=40;
+    else if(phase<.60) degrees=40-80*smooth((phase-.40)/.20);
+    else if(phase<.74) degrees=-40;
+    else degrees=-40*(1-smooth((phase-.74)/.18));
+  }
+  // Blend the body registration into/out of the airborne pose, so takeoff and
+  // landing meet the unmodified grounded cel exactly rather than snapping 3-7px.
+  const blend=airborne ? smooth(phase/.16)*(1-smooth((phase-.84)/.16)) : 0;
+  const [sourceX,sourceY]=CENTERS[frame], [restX,restY]=CENTERS[0];
+  return { frame, travel, phase, height, rotation:degrees*Math.PI/180,
+    sourceX,sourceY,targetX:sourceX+(restX-sourceX)*blend,
+    targetY:sourceY+(restY-sourceY)*blend-height };
+}
+
+return { TOAD_HOP, toadHopMotion };
+})();
+modules["server/creature-attack.mjs"] = (() => {
+const CREATURE_ATTACK_TIMINGS = Object.freeze({
+  "flower-tail-bird": Object.freeze({ durationMs: 970, hitTimeMs: 360 }),
+  "dew-rabbit": Object.freeze({ durationMs: 970, hitTimeMs: 360 }),
+  "soil-mole": Object.freeze({ durationMs: 1000, hitTimeMs: 370 }),
+  "bundle-snail": Object.freeze({ durationMs: 1065, hitTimeMs: 395 }),
+  "cotton-sheep": Object.freeze({ durationMs: 1030, hitTimeMs: 370 }),
+  "rolling-acorn": Object.freeze({ durationMs: 1020, hitTimeMs: 380 }),
+  "soil-boar": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "bubble-toad": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "vine-turtle": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "shadow-weasel": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "snare-vine": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "talon-owl": Object.freeze({ durationMs: 1020, hitTimeMs: 330 }),
+  "spring-keeper": Object.freeze({ durationMs: 905, hitTimeMs: 295 }),
+  "lantern-keeper": Object.freeze({ durationMs: 1000, hitTimeMs: 330 }),
+  "old-garden-snail": Object.freeze({ durationMs: 1570, hitTimeMs: 590 }),
+  "walking-forest": Object.freeze({ durationMs: 1460, hitTimeMs: 560 }),
+  "white-paw": Object.freeze({ durationMs: 920, hitTimeMs: 300 }),
+  "spiny-back-leader": Object.freeze({ durationMs: 1440, hitTimeMs: 530 })
+});
+
+return { CREATURE_ATTACK_TIMINGS };
+})();
+modules["server/creature-movement-profiles.mjs"] = (() => {
+const CREATURE_MOVEMENT_PROFILES = Object.freeze(Object.fromEntries([
+  ["flower-tail-bird", 2, 3],
+  ["dew-rabbit", 2.6, 2.5],
+  ["soil-mole", .8, 5],
+  ["bundle-snail", .4, 6],
+  ["cotton-sheep", .8, 4],
+  ["rolling-acorn", 1.8, 6],
+  ["bubble-toad", .8, 20],
+  ["snare-vine", 1.4, 30],
+  ["spiny-back-beetle", 1.2, 18],
+  ["soil-boar", 1.6, 24],
+  ["vine-turtle", .4, 30],
+  ["shadow-weasel", 2.6, 30],
+  ["talon-owl", 2, 40],
+  ["spring-keeper", 1.6, 30],
+  ["lantern-keeper", 2.8, 30],
+  ["old-garden-snail", .3, 45],
+  ["walking-forest", .3, 60],
+  ["white-paw", 3.2, 90],
+  ["spiny-back-leader", 1.4, 120]
+].map(([species, speed, restSeconds]) => [species, Object.freeze({ speed, restSeconds })])));
+
+return { CREATURE_MOVEMENT_PROFILES };
+})();
+modules["client/unit-animation.mjs"] = (() => {
+const { unitFrameMirror } = modules["client/unit-size.mjs"];
+const { APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS, APPROVED_COTTON_SHEEP_WALK_ANIMATION } = modules["client/creature-approved-actions.mjs"];
+const { APPROVED_CREATURE_WALK_ANIMATIONS, APPROVED_CREATURE_DEATH_ANIMATIONS } = modules["client/creature-approved-animations.mjs"];
+const { CREATURE_RANGED_ANIMATIONS, CREATURE_RANGED_ASSETS, creatureRangedPose } = modules["client/creature-ranged.mjs"];
+const { unitDisplayAttributes } = modules["client/unit-display-appearance.mjs"];
+const { toadHopMotion } = modules["client/toad-hop.mjs"];
+const { attackAnimationElapsed, AGENT_ATTACK_HIT_TIME } = modules["server/attack.mjs"];
+const { CREATURE_ATTACK_TIMINGS } = modules["server/creature-attack.mjs"];
+const { imageAnimation } = modules["client/image-geometry.mjs"];
+const { CREATURE_MOVEMENT_PROFILES } = modules["server/creature-movement-profiles.mjs"];
+
+const UNIT_ANIMATIONS = Object.freeze({
+  "bean": {
+    "idle": {"image": "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(64).fill(100) },
+    "attack": {"image": "DesignAssets/Animations/UnitAttack/attack.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60] },
+    "hurt": {"image": "DesignAssets/Animations/UnitHurt/V3/hurt.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20] },
+  },
+  "spore": {
+    "idle": {"image": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(64).fill(100) },
+    "walk": {"image": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(16).fill(70) },
+    "jump": {"image": "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: Array(16).fill(70) },
+    "attack": {"image": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60] },
+    "hurt": {"image": "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20] },
+    "death": {"image": "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [120,100,140,120,140,100,120,600] },
+  },
+  "pebble": {
+    "idle": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(64).fill(100) },
+    "walk": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp", "frameSize": 512, "columns": 5, "loop": true, cyclesPerCell: 2.5, "pivotX": 256, "pivotY": 448, durationsMs: Array(20).fill(40) },
+    "jump": {"image": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: Array(16).fill(70) },
+    "attack": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60] },
+    "hurt": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20] },
+    "death": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [120,100,140,120,140,100,120,600] },
+  },
+  "spring": {
+    "idle": {"image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(64).fill(100) },
+    "walk": {"image": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(16).fill(70) },
+    "jump": {"image": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: Array(16).fill(70) },
+    "attack": {"image": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60] },
+    "hurt": {"image": "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20] },
+    "death": {"image": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [120,100,140,120,140,100,120,600] },
+  },
+});
+
+const CREATURE_IDLE_ANIMATIONS = Object.freeze({
+  "spring-keeper": {"image":"DesignAssets/Animations/UniqueIdleV4/spring-keeper/idle.webp","frameSize":384,"columns":8,"durationsMs":[1450,50,50,50,50,50,50,50,50,50,50,50,100,200,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,1350,150,1700],"loop":true,"pivotX":157.5,"pivotY":307.5},
+  "lantern-keeper": {"image":"DesignAssets/Animations/UniqueIdleV4/lantern-keeper/idle.webp","frameSize":384,"columns":8,"durationsMs":[1650,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,400,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,2700],"loop":true,"pivotX":203.25,"pivotY":324.75},
+  "white-paw": {"image":"DesignAssets/Animations/MountainPawLeaderIdle/white-paw/idle-runtime.webp","frameSize":288,"columns":8,"durationsMs":[1400,150,100,150,100,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,300,150,150,150,150,2700],"loop":true,"pivotX":192.5,"pivotY":242},
+  "old-garden-snail": {"image":"DesignAssets/Animations/UniqueIdleV3/old-garden-snail/idle.webp","frameSize":352,"columns":8,"durationsMs":[800,160,150,180,180,210,700,150,130,130,140,180,2600],"loop":true,"pivotX":180.8125,"pivotY":304.5625},
+  "cotton-sheep": {"image":"DesignAssets/Animations/CottonSheepIdle/CalmV5/idle-runtime.webp","frameSize":256,"columns":8,"durationsMs":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,100],"loop":true,"pivotX":128,"pivotY":224},
+  "walking-forest": {"image":"DesignAssets/Animations/MountainPawLeaderIdle/walking-forest/idle-runtime.webp","frameSize":256,"columns":8,"durationsMs":[1450,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,1600],"loop":true,"pivotX":128,"pivotY":224},
+  "spiny-back-leader": {"image":"DesignAssets/Animations/MountainPawLeaderIdle/spiny-back-leader/idle-runtime.webp","frameSize":256,"columns":8,"durationsMs":[1250,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,600,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,2550],"loop":true,"pivotX":128,"pivotY":224},
+  "vine-turtle": {"image":"DesignAssets/Animations/CreatureIdleStudies/V2/vine-turtle/idle.webp","frameSize":512,"columns":8,"durationsMs":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50],"loop":true,"pivotX":262.5,"pivotY":441.62},
+  "shadow-weasel": {"image":"DesignAssets/Animations/CreatureIdleStudies/V2/shadow-weasel/idle.webp","frameSize":512,"columns":8,"durationsMs":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50],"loop":true,"pivotX":257.0,"pivotY":423.56},
+  "snare-vine": {"image":"DesignAssets/Animations/CreatureIdleStudies/V1/snare-vine/idle.webp","frameSize":512,"columns":8,"durationsMs":[650,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,3350],"loop":true,"pivotX":255.5,"pivotY":470.15999999999997},
+  "rolling-acorn": {"image":"DesignAssets/Animations/RollingAcornIdle/v1/idle.webp","frameSize":512,"columns":4,"durationsMs":[500,500,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,40,80,40,50,90,100,150,150,200,500],"loop":true,"pivotX":256,"pivotY":426},
+  "bubble-toad": {"image":"DesignAssets/Animations/BubbleToadIdle/BreathV1/idle.webp","frameSize":512,"columns":4,"durationsMs":[50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,50,500],"loop":true,"pivotX":259,"pivotY":380.52},
+  "soil-boar": {"image": "DesignAssets/Animations/SoilBoarIdle/V1/idle.webp", "frameSize": 512, "columns": 8, "loop": true, "pivotX": 256, "pivotY": 394, durationsMs: Array(80).fill(50) },
+  "flower-tail-bird": {"image": "DesignAssets/Animations/CreatureIdleV3/flower-tail-bird/idle.webp", "frameSize": 512, "columns": 4, "durationsMs": [2000, 65, 50, 40, 40, 55, 40, 35, 40, 45, 50, 80, 55, 45, 40, 40, 55, 40, 35, 40, 50, 70, 3990], "loop": true, "pivotX": 256, "pivotY": 448},
+  "dew-rabbit": {"image": "DesignAssets/Animations/CreatureIdleV3/dew-rabbit/idle.webp", "frameSize": 512, "columns": 4, "durationsMs": [2200, 65, 60, 50, 45, 40, 65, 50, 55, 60, 180, 35, 35, 35, 35, 40, 35, 35, 35, 35, 60, 3750], "loop": true, "pivotX": 256, "pivotY": 448},
+  "soil-mole": {"image": "DesignAssets/Animations/CreatureIdleV3/soil-mole/idle.webp", "frameSize": 512, "columns": 4, "durationsMs": [1650, 180, 180, 240, 200, 200, 750, 25, 25, 30, 45, 25, 20, 25, 3405], "loop": true, "pivotX": 256, "pivotY": 448},
+  "bundle-snail": {"image": "DesignAssets/Animations/CreatureIdleV4/bundle-snail/idle.webp", "frameSize": 512, "columns": 4, "durationsMs": [1500, 65, 60, 60, 65, 70, 70, 160, 100, 90, 90, 200, 100, 110, 110, 240, 90, 90, 90, 80, 80, 80, 90, 3310], "loop": true, "pivotX": 256, "pivotY": 448},
+});
+
+const CREATURE_WALK_ANIMATIONS = Object.freeze({
+  "flower-tail-bird": {"image":"DesignAssets/Animations/CreatureWalkV2/flower-tail-bird/walk.webp","frameSize":388,"columns":4,"durationsMs":[80,80,80,90,90,80,80,87],"loop":true,"pivotX":194,"pivotY":357.0086206896552,"cyclesPerCell":3},
+  "dew-rabbit": {"image":"DesignAssets/Animations/CreatureWalkV2/dew-rabbit/walk.webp","frameSize":433,"viewSize":417,"columns":4,"durationsMs":[100,80,100,180,100,100,150,190],"loop":true,"pivotX":216.5,"pivotY":442.9627192982456,"cyclesPerCell":2},
+  "soil-mole": { ...APPROVED_CREATURE_WALK_ANIMATIONS["soil-mole"] },
+  "bundle-snail": {"image":"DesignAssets/Animations/CreatureWalkV2/bundle-snail/walk.webp","frameSize":398,"columns":4,"durationsMs":[200,250,250,250,300,250,250,250],"loop":true,"pivotX":199,"pivotY":348.25,"cyclesPerCell":1},
+  "cotton-sheep": { ...APPROVED_COTTON_SHEEP_WALK_ANIMATION },
+  "rolling-acorn": {"image":"DesignAssets/Animations/CreatureWalkV2/rolling-acorn/walk.webp","frameSize":420,"columns":8,"durationsMs":[78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78,78,78,78,78,79,78,78,78,78,78,78,79,78,78,78,78],"loop":true,"pivotX":210,"pivotY":349.453125,"cyclesPerCell":0.4},
+  "soil-boar": {"image":"DesignAssets/Animations/CreatureWalkApprovedV3/soil-boar/walk.webp","frameSize":640,"viewSize":506.85283,"columns":8,"durationsMs":Array(64).fill(4.8828125),"loop":true,"pivotX":326.154716,"pivotY":425.490566,"cyclesPerCell":2,"registrationScale":1},
+  "bubble-toad": {"image":"DesignAssets/Animations/CreatureWalkV2/bubble-toad/walk.webp","frameSize":288,"viewSize":256,"columns":8,"durationsMs":[110,120,80,110,130,90,90,150],"loop":true,"pivotX":145.5,"pivotY":222.26,"cyclesPerCell":2},
+  "vine-turtle": {"image":"DesignAssets/Animations/CreatureWalkV2/vine-turtle/walk.webp","frameSize":256,"viewSize":256,"columns":8,"durationsMs":[170,130,120,140,170,130,120,140],"loop":true,"pivotX":131.25,"pivotY":220.81,"cyclesPerCell":1.5},
+  "shadow-weasel": { ...APPROVED_CREATURE_WALK_ANIMATIONS["shadow-weasel"] },
+  "snare-vine": {"image":"DesignAssets/Animations/CreatureWalkV2/snare-vine/walk.webp","frameSize":256,"viewSize":256,"columns":6,"durationsMs":[180,140,140,160,140,180],"loop":true,"pivotX":127.75,"pivotY":235.08,"cyclesPerCell":1.5},
+  "talon-owl": {"image":"DesignAssets/Animations/CreatureWalkV2/talon-owl/walk.webp","frameSize":432,"viewSize":256,"columns":8,"durationsMs":[70,80,80,85,80,70,70,65],"loop":true,"pivotX":205,"pivotY":288,"cyclesPerCell":3},
+  "spring-keeper": {"image":"DesignAssets/Animations/CreatureWalkV2/spring-keeper/walk.webp","frameSize":512,"viewSize":384,"columns":4,"durationsMs":[60,60,80,120,80,80,80,80,80,80,80,80,80,80,80,80],"loop":true,"pivotX":221.5,"pivotY":371.5,"cyclesPerCell":3,"takeoffDurationMs":320,"flightDurationMs":640,"landingDurationMs":320},
+  "lantern-keeper": {"image":"DesignAssets/Animations/CreatureWalkV2/lantern-keeper/walk.webp","frameSize":384,"columns":6,"durationsMs":[140,100,140,100,120,140],"loop":true,"pivotX":203.25,"pivotY":324.75,"cyclesPerCell":2},
+  "old-garden-snail": {"image":"DesignAssets/Animations/CreatureWalkV2/old-garden-snail/walk.webp","frameSize":352,"columns":6,"durationsMs":[220,220,260,220,220,260],"loop":true,"pivotX":180.8125,"pivotY":304.5625,"cyclesPerCell":1},
+  "walking-forest": { ...APPROVED_CREATURE_WALK_ANIMATIONS["walking-forest"] },
+  "white-paw": { ...APPROVED_CREATURE_WALK_ANIMATIONS["white-paw"] },
+  "spiny-back-leader": {"image":"DesignAssets/Animations/CreatureWalkV2/spiny-back-leader/walk.webp","frameSize":256,"columns":6,"durationsMs":[110,100,100,110,100,100],"loop":true,"pivotX":128,"pivotY":224,"cyclesPerCell":2.5}
+});
+
+const CREATURE_ATTACK_ANIMATIONS = Object.freeze({
+  "spring-keeper": {"image":"DesignAssets/Animations/CreatureAttackV2/spring-keeper/runtime.webp","frameSize":269,"viewSize":274.07547169811323,"columns":4,"pivotX":101.66804245283019,"pivotY":235.25604363207546,"durationsMs":[70,90,100,35,240,100,140,130],"loop":false,"facing":"left","impactFrame":4},
+  "lantern-keeper": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["lantern-keeper"] },
+  "white-paw": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["white-paw"] },
+  "old-garden-snail": {"image":"DesignAssets/Animations/CreatureAttackV2/old-garden-snail/runtime.webp","frameSize":264,"viewSize":239.34065934065933,"columns":4,"pivotX":133.57237293956044,"pivotY":230.11323832417582,"durationsMs":[110,180,220,80,300,220,260,200],"loop":false,"facing":"left","impactFrame":4},
+  "cotton-sheep": {"image":"DesignAssets/Animations/CreatureAttackV2/cotton-sheep/runtime.webp","frameSize":290,"viewSize":256.7708333333333,"columns":4,"pivotX":145.43660481770834,"pivotY":249.0771484375,"durationsMs":[100,110,120,40,240,90,140,190],"loop":false,"facing":"left","impactFrame":4},
+  "walking-forest": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["walking-forest"] },
+  "spiny-back-leader": {"image":"DesignAssets/Animations/CreatureAttackV2/spiny-back-leader/runtime.webp","frameSize":512,"viewSize":418.9090909090909,"columns":4,"pivotX":255.99999999999997,"pivotY":449.5454545454545,"durationsMs":[90,170,220,50,340,180,220,170],"loop":false,"facing":"left","impactFrame":4},
+  "vine-turtle": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["vine-turtle"] },
+  "shadow-weasel": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["shadow-weasel"] },
+  "snare-vine": {"image":"DesignAssets/Animations/CreatureAttackV2/snare-vine/runtime.webp","frameSize":283,"viewSize":283.21875,"columns":6,"pivotX":141.23318481445312,"pivotY":259.8811083984375,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
+  "rolling-acorn": {"image":"DesignAssets/Animations/CreatureAttackV2/rolling-acorn/runtime.webp","frameSize":312,"viewSize":281.2599381625442,"columns":4,"pivotX":157.38239840989397,"pivotY":270.69152788896866,"durationsMs":[100,110,130,40,220,90,140,190],"loop":false,"facing":"left","impactFrame":4},
+  "bubble-toad": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["bubble-toad"] },
+  "soil-boar": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["soil-boar"] },
+  "flower-tail-bird": {"image":"DesignAssets/Animations/CreatureAttackV2/flower-tail-bird/runtime.webp","frameSize":283,"viewSize":276.77600235849053,"columns":4,"pivotX":138.03967423349056,"pivotY":259.49940300707544,"durationsMs":[100,110,110,40,220,80,130,180],"loop":false,"facing":"left","impactFrame":4},
+  "dew-rabbit": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["dew-rabbit"] },
+  "soil-mole": { ...APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS["soil-mole"] },
+  "bundle-snail": {"image":"DesignAssets/Animations/CreatureAttackV2/bundle-snail/runtime.webp","frameSize":293,"viewSize":266.3926816475265,"columns":4,"pivotX":146.9266715437279,"pivotY":270.04213884441253,"durationsMs":[100,130,120,45,220,100,140,210],"loop":false,"facing":"left","impactFrame":4},
+  "talon-owl": {"image":"DesignAssets/Animations/CreatureAttackV2/talon-owl/runtime.webp","frameSize":288,"viewSize":288.1672862453532,"columns":6,"pivotX":131.6345405436803,"pivotY":225.24361059479554,"durationsMs":[70,210,50,300,170,220],"loop":false,"facing":"left","impactFrame":3},
+});
+
+const CREATURE_HURT_ANIMATIONS = Object.freeze({
+  "flower-tail-bird": {"image":"DesignAssets/Animations/CreatureHurtV6/flower-tail-bird/hurt.webp","frameSize":388,"columns":4,"pivotX":194,"pivotY":339.5,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "dew-rabbit": {"image":"DesignAssets/Animations/CreatureHurtV5/dew-rabbit/hurt.webp","frameSize":417,"columns":4,"pivotX":208.5,"pivotY":364.875,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "soil-mole": {"image":"DesignAssets/Animations/CreatureHurtV5/soil-mole/hurt.webp","frameSize":355,"columns":4,"pivotX":177.5,"pivotY":310.625,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "bundle-snail": {"image":"DesignAssets/Animations/CreatureHurtV7/bundle-snail/hurt.webp","frameSize":398,"columns":4,"pivotX":199,"pivotY":348.25,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "cotton-sheep": {"image":"DesignAssets/Animations/CreatureHurtV5/cotton-sheep/hurt.webp","frameSize":256,"columns":4,"pivotX":128,"pivotY":224,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "rolling-acorn": {"image":"DesignAssets/Animations/CreatureHurtV4/rolling-acorn/hurt.webp","frameSize":420,"columns":4,"pivotX":210,"pivotY":349.453125,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "soil-boar": {"image":"DesignAssets/Animations/CreatureHurtV7/soil-boar/hurt.webp","frameSize":369,"columns":4,"pivotX":184.5,"pivotY":283.957031,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "bubble-toad": {"image":"DesignAssets/Animations/CreatureHurtV7/bubble-toad/hurt.webp","frameSize":361,"columns":4,"pivotX":182.615234,"pivotY":268.296328,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "vine-turtle": {"image":"DesignAssets/Animations/CreatureHurtV7/vine-turtle/hurt.webp","frameSize":346,"columns":4,"pivotX":177.392578,"pivotY":298.438516,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "shadow-weasel": {"image":"DesignAssets/Animations/CreatureHurtV6/shadow-weasel/hurt.webp","frameSize":319,"columns":4,"pivotX":160.123047,"pivotY":263.897734,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "snare-vine": {"image":"DesignAssets/Animations/CreatureHurtV7/snare-vine/hurt.webp","frameSize":424,"columns":4,"pivotX":211.585938,"pivotY":389.35125,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "talon-owl": {"image":"DesignAssets/Animations/CreatureHurtV6/talon-owl/hurt.webp","frameSize":432,"columns":4,"pivotX":197.4375,"pivotY":337.5,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "spring-keeper": {"image":"DesignAssets/Animations/CreatureHurtV6/spring-keeper/hurt.webp","frameSize":384,"columns":4,"pivotX":157.5,"pivotY":307.5,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "lantern-keeper": {"image":"DesignAssets/Animations/CreatureHurtV5/lantern-keeper/hurt.webp","frameSize":384,"columns":4,"pivotX":203.25,"pivotY":324.75,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "old-garden-snail": {"image":"DesignAssets/Animations/CreatureHurtV7/old-garden-snail/hurt.webp","frameSize":352,"columns":4,"pivotX":180.8125,"pivotY":304.5625,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "walking-forest": {"image":"DesignAssets/Animations/CreatureHurtV8/walking-forest/hurt.webp","frameSize":256,"columns":4,"pivotX":128,"pivotY":224,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "white-paw": {"image":"DesignAssets/Animations/CreatureHurtV6/white-paw/hurt.webp","frameSize":288,"columns":4,"pivotX":192.5,"pivotY":242,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+  "spiny-back-leader": {"image":"DesignAssets/Animations/CreatureHurtV8/spiny-back-leader/hurt.webp","frameSize":256,"columns":4,"pivotX":128,"pivotY":224,"durationsMs":[20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20],"loop":false},
+});
+
+const CREATURE_DEATH_ANIMATIONS = Object.freeze({
+  "flower-tail-bird": {"image":"DesignAssets/Animations/CreatureDeathV4/flower-tail-bird/runtime.webp","frameSize":256,"viewSize":256,"columns":4,"pivotX":128.0,"pivotY":224.0,"durationsMs":[40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,1000],"loop":false},
+  "rolling-acorn": {"image":"DesignAssets/Animations/CreatureDeathV4/rolling-acorn/runtime.webp","frameSize":256,"viewSize":256,"columns":4,"pivotX":128.0,"pivotY":224.0,"durationsMs":[40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,1000],"loop":false},
+  "snare-vine": {"image":"DesignAssets/Animations/CreatureDeathV4/snare-vine/runtime.webp","frameSize":256,"viewSize":256,"columns":8,"pivotX":128.0,"pivotY":224.0,"durationsMs":[33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,900],"loop":false},
+  "dew-rabbit": {"image":"DesignAssets/Animations/CreatureDeathV6/dew-rabbit/runtime.webp","frameSize":256,"viewSize":256,"columns":4,"pivotX":128.0,"pivotY":224.0,"durationsMs":[33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,1000],"loop":false},
+  "cotton-sheep": {"image":"DesignAssets/Animations/CreatureDeathV6/cotton-sheep/runtime.webp","frameSize":256,"viewSize":256,"columns":4,"pivotX":128.0,"pivotY":224.0,"durationsMs":[120,90,90,100,100,100,160,1000],"loop":false},
+  "soil-boar": {"image":"DesignAssets/Animations/CreatureDeathV6/soil-boar/runtime.webp","frameSize":256,"viewSize":256,"columns":4,"pivotX":128.0,"pivotY":224.0,"durationsMs":[80,40,40,80,80,160,160,800],"loop":false},
+  "talon-owl": {"image":"DesignAssets/Animations/CreatureDeathV6/talon-owl/runtime.webp","frameSize":256,"viewSize":256,"columns":4,"pivotX":128.0,"pivotY":224.0,"durationsMs":[40,40,40,40,40,40,40,40,40,40,160,240,900],"loop":false},
+  "spring-keeper": {"image":"DesignAssets/Animations/CreatureDeathV11/spring-keeper/runtime.webp","frameSize":288,"viewSize":288,"columns":4,"pivotX":144.0,"pivotY":240.0,"durationsMs":[33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,25,25,25,25,25,25,34,35,34,35,34,34,35,34,33,34,33,33,34,33,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35],"loop":false},
+  "white-paw": {"image":"DesignAssets/Animations/CreatureDeathV12/white-paw/runtime.webp","frameSize":256,"viewSize":256,"columns":4,"pivotX":128.0,"pivotY":224.0,"durationsMs":[200,16,17,16,16,17,16,16,17,16,16,17,16,16,17,16,17,16,16,17,16,16,17,16,16,17,16,16,17,16,16,17,16,16,17,16,16,17,16,17,16,16,17,16,16,17,16,16,17,16,16,17,16,920],"loop":false},
+  "vine-turtle": {"image": "DesignAssets/Animations/CreatureDeathV12/vine-turtle/runtime.webp", "frameSize": 256, "viewSize": 256, "pivotX": 128.0, "pivotY": 224.0, "columns": 8, "durationsMs": [33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 900], "loop": false},
+  "walking-forest": {"image": "DesignAssets/Animations/CreatureDeathV12/walking-forest/runtime.webp", "frameSize": 256, "viewSize": 256, "pivotX": 128.0, "pivotY": 224.0, "columns": 8, "durationsMs": [33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 34, 33, 33, 17, 1000], "loop": false},
+  "bundle-snail": {"image":"DesignAssets/Animations/SnailDeathV1/bundle-snail/runtime.webp","frameSize":256,"viewSize":255.95759717314488,"pivotX":128.03533568904592,"pivotY":248.9558303886926,"columns":8,"durationsMs":[40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,1000],"loop":false},
+  "old-garden-snail": {"image":"DesignAssets/Animations/SnailDeathV1/old-garden-snail/runtime.webp","frameSize":256,"viewSize":256.5860805860806,"pivotX":131.1856684981685,"pivotY":223.95215201465203,"columns":8,"durationsMs":[40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,1000],"loop":false},
+  "bubble-toad": { ...APPROVED_CREATURE_DEATH_ANIMATIONS["bubble-toad"] },
+  "soil-mole": {"image": "DesignAssets/Animations/CreatureDeathV6/soil-mole/runtime.webp", "frameSize": 256, "viewSize": 256.0707637189895, "pivotX": 128.02064407200112, "pivotY": 231.56069494440834, "columns": 4, "durationsMs": [120, 90, 90, 90, 90, 90, 140, 1000], "loop": false},
+  "shadow-weasel": {"image": "DesignAssets/Animations/CreatureDeathV6/shadow-weasel/runtime.webp", "frameSize": 256, "viewSize": 243.62312045574424, "pivotX": 128.35099274270337, "pivotY": 171.4882831172111, "columns": 4, "durationsMs": [120, 90, 90, 100, 100, 100, 160, 1000], "loop": false},
+  "lantern-keeper": {"image":"DesignAssets/Animations/CreatureDeathV10/lantern-keeper/runtime.webp","frameSize":256,"viewSize":248.71174377224202,"pivotX":135.3149466192171,"pivotY":223.83807829181495,"columns":6,"durationsMs":[33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,34,33,33,17,17,33,33,34,33,33,34,33,33,34,33,770],"loop":false},
+  "spiny-back-leader": {"image":"DesignAssets/Animations/CreatureDeathV10/spiny-back-leader/runtime.webp","frameSize":256,"viewSize":256,"pivotX":128,"pivotY":224,"columns":3,"durationsMs":[80,120,520],"loop":false}
+});
+
+for (const animations of Object.values(UNIT_ANIMATIONS)) for (const animation of Object.values(animations)) {
+  Object.assign(animation, imageAnimation(animation));
+  animation.frameCount = animation.durationsMs.length;
+  animation.durationMs = animation.durationsMs.reduce((sum, duration) => sum + duration, 0);
+  Object.freeze(animation.durationsMs);
+  Object.freeze(animation);
+}
+for (const animation of [...Object.values(CREATURE_IDLE_ANIMATIONS), ...Object.values(CREATURE_WALK_ANIMATIONS), ...Object.values(CREATURE_ATTACK_ANIMATIONS), ...Object.values(CREATURE_HURT_ANIMATIONS), ...Object.values(CREATURE_DEATH_ANIMATIONS)]) {
+  Object.assign(animation, imageAnimation(animation));
+  animation.frameCount = animation.durationsMs.length;
+  animation.durationMs = animation.durationsMs.reduce((sum, duration) => sum + duration, 0);
+  Object.freeze(animation.durationsMs);
+  Object.freeze(animation);
+}
+
+// Approved single-attack rhythm from spring-combat-rhythm-20261105. Keep
+// attachment rigs on their existing timing; only the unadorned melee body uses it.
+const SPRING_BASIC_ATTACK_ANIMATION = Object.freeze({ ...UNIT_ANIMATIONS.spring.attack,
+  durationsMs: Object.freeze([60,70,60,80,30,60,16,16,16,16,32,40,52,76,100,276])
+});
+
+const UNIT_ANIMATION_ASSETS = Object.freeze([...new Set([
+  ...CREATURE_RANGED_ASSETS,
+  ...Object.values(UNIT_ANIMATIONS).flatMap(animations => Object.values(animations).map(animation => animation.image)),
+  ...[...Object.values(CREATURE_IDLE_ANIMATIONS), ...Object.values(CREATURE_ATTACK_ANIMATIONS), ...Object.values(CREATURE_HURT_ANIMATIONS), ...Object.values(CREATURE_DEATH_ANIMATIONS)].map(animation => animation.image),
+  ...Object.values(CREATURE_WALK_ANIMATIONS).map(animation => animation.image)
+])]);
+
+function unitAnimationFrame(animation, elapsedMs) {
+  let elapsed = Number.isFinite(elapsedMs) ? Math.max(0, elapsedMs) : animation.durationMs;
+  if (animation.loop) elapsed %= animation.durationMs;
+  for (let frame = 0; frame < animation.frameCount; frame++) {
+    if (elapsed + 1e-6 < animation.durationsMs[frame]) return frame;
+    elapsed -= animation.durationsMs[frame];
+  }
+  return animation.frameCount - 1;
+}
+
+function creatureAttackPose(agent, time) {
+  if (CREATURE_RANGED_ANIMATIONS[agent.species] && (agent.attack?.dnaRanged || agent.attack?.mode === "ranged" || agent.attack?.attackMode === "ranged")) return creatureRangedPose(agent, time);
+  const animation = CREATURE_ATTACK_ANIMATIONS[agent.species], attack = agent.attack;
+  if (!animation || !attack || agent.health <= 0 || !Number.isFinite(attack.startedAt)) return null;
+  const timing = CREATURE_ATTACK_TIMINGS[agent.species];
+  let elapsed = attackAnimationElapsed(attack, time, timing.hitTimeMs / 1000, timing.durationMs / 1000) * 1000;
+  if (Number.isFinite(animation.hitTimeMs) && (animation.hitTimeMs !== timing.hitTimeMs || animation.durationMs !== timing.durationMs)) {
+    elapsed = elapsed <= timing.hitTimeMs ? elapsed / timing.hitTimeMs * animation.hitTimeMs :
+      animation.hitTimeMs + (elapsed - timing.hitTimeMs) / (timing.durationMs - timing.hitTimeMs) * (animation.durationMs - animation.hitTimeMs);
+  }
+  if (!Number.isFinite(elapsed) || elapsed < 0 || elapsed + 1e-6 >= animation.durationMs) return null;
+  const direction = attack.directionX || agent.facing || 1;
+  return { action: "attack", animation, frame: unitAnimationFrame(animation, elapsed), mirrorX: unitFrameMirror(animation.sourceFacing || animation.facing || "left", direction) };
+}
+
+function creatureHurtPose(agent, time) {
+  const animation = CREATURE_HURT_ANIMATIONS[agent.species];
+  if (!animation || agent.health <= 0 || !Number.isFinite(agent.hurtStartedAt)) return null;
+  if (agent.combat?.version === 2 && creatureAttackPose(agent, time)) return null;
+  const elapsed = (time - agent.hurtStartedAt) * 1000 * (agent.combat?.version === 2 ? animation.durationMs / 120 : 1);
+  if (!Number.isFinite(elapsed) || elapsed < 0 || elapsed + 1e-6 >= animation.durationMs) return null;
+  return { action: "hurt", animation, frame: unitAnimationFrame(animation, elapsed) };
+}
+
+function unitMovementElapsedMs(agent, time) {
+  const start = Number.isFinite(agent.moveAnimationStartedAt) ? agent.moveAnimationStartedAt : agent.moveStartedAt;
+  return Number.isFinite(time) && Number.isFinite(start) ? Math.max(0, time - start) * 1000 : 0;
+}
+
+function unitAnimationPose(agent, time) {
+  if (agent.species || agent.birth || agent.health <= 0) return null;
+  const animations = UNIT_ANIMATIONS[agent.tribe || "bean"];
+  if (!animations) return null;
+  let action = "idle", elapsed = (time - (agent.animationStartedAt ?? agent.bornAt ?? 0)) * 1000;
+  const rpg = agent.combat?.version === 2;
+  const hurt = (time - agent.hurtStartedAt) * 1000 * (rpg ? animations.hurt.durationMs / 120 : 1);
+  const attack = agent.attack ? attackAnimationElapsed(agent.attack, time, AGENT_ATTACK_HIT_TIME, animations.attack.durationMs / 1000) * 1000 : -1;
+  const moving = agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
+  if (rpg && attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
+  else if (hurt >= 0 && hurt < animations.hurt.durationMs) { action = "hurt"; elapsed = hurt; }
+  else if (attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
+  else if (agent.mode === "unload" && agent.foodDelivery) { action = "throw"; elapsed = (time - agent.foodDelivery.startedAt) * 1000; }
+  else if (agent.mode === "harvest") { action = "harvest"; elapsed = (time - agent.harvestStarted) * 1000; }
+  else if (agent.mode === "jump") { action = "jump"; elapsed = (time - (agent.jumpStartedAt ?? agent.moveStartedAt)) * 1000; }
+  else if (moving) {
+    action = "walk";
+    elapsed = unitMovementElapsedMs(agent, time);
+  }
+  const attributes = unitDisplayAttributes(agent);
+  let animation = animations[action] || ((agent.tribe || "bean") !== "bean" && ["harvest", "throw"].includes(action) &&
+      ["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0) ? animations.idle : null);
+  if (action === "attack" && agent.tribe === "spring" && !Object.values(attributes).some(value => value > 0) &&
+      !agent.attack?.dnaRanged && agent.attack?.mode !== "ranged" && agent.attack?.attackMode !== "ranged") animation = SPRING_BASIC_ATTACK_ANIMATION;
+  return animation ? { action, animation, frame: unitAnimationFrame(animation, elapsed) } : null;
+}
+
+function creatureWalkPose(agent, time) {
+  const animation = CREATURE_WALK_ANIMATIONS[agent.species];
+  const elapsed = time - agent.moveStartedAt;
+  if (!animation || agent.health <= 0 || agent.mode !== "walk" ||
+    !(agent.moveDuration > 0) || !Number.isFinite(elapsed) || elapsed < 0 || elapsed >= agent.moveDuration) return null;
+  if (agent.species === "spring-keeper") return springKeeperFlightPose(agent, time);
+  if (agent.species === "bubble-toad") {
+    const hop=toadHopMotion(elapsed / agent.moveDuration);
+    return { animation, frame:hop.frame, hop };
+  }
+  if (Number.isFinite(animation.temporalCadenceHz)) {
+    const startedAt = Number.isFinite(agent.animationStartedAt) ? agent.animationStartedAt : agent.moveStartedAt;
+    return { animation, frame: unitAnimationFrame(animation, (time - startedAt) * 1000) };
+  }
+  const progress = Math.max(0, (agent.stepCount || 1) - 1) + elapsed / agent.moveDuration;
+  return { animation, frame: unitAnimationFrame(animation, progress * (animation.cyclesPerCell || 1) * animation.durationMs) };
+}
+
+function creatureAnimationSpeed(species) {
+  return CREATURE_MOVEMENT_PROFILES[species]?.speed || 1;
+}
+
+function unitMovementPosition(agent, time, reducedMotion = false) {
+  const raw = agent.moveDuration > 0 ? Math.max(0, Math.min(1, (time - agent.moveStartedAt) / agent.moveDuration)) : 1;
+  const attributes = unitDisplayAttributes(agent);
+  const beanHop = !agent.species && (agent.tribe || "bean") === "bean" && !attributes.feet;
+  let progress = raw, travel = raw;
+  if (!reducedMotion && beanHop) {
+    progress = Math.max(0, Math.min(1, (raw - .18) / .82));
+    travel = progress * progress * (3 - 2 * progress);
+  } else if (!reducedMotion && agent.species === "bubble-toad") {
+    travel=toadHopMotion(raw).travel;
+  } else if (!reducedMotion && agent.species) {
+    const animation = CREATURE_WALK_ANIMATIONS[agent.species], window = animation?.travelWindow;
+    if (window) {
+      const cycles = animation.cyclesPerCell || 1;
+      const phase = raw * cycles, complete = Math.floor(phase), local = phase - complete;
+      const airborne = Math.max(0, Math.min(1, (local - window[0]) / (window[1] - window[0])));
+      travel = (complete + airborne * airborne * (3 - 2 * airborne)) / cycles;
+      if (raw === 1) travel = 1;
+    }
+  }
+  return { x: agent.moveDuration ? agent.renderFromX + (agent.x - agent.renderFromX) * travel : agent.x,
+    y: agent.moveDuration ? agent.renderFromY + (agent.y - agent.renderFromY) * travel : agent.y, progress };
+}
+
+function springKeeperFlightPose(agent, time) {
+  if (agent.species !== "spring-keeper" || !(agent.health > 0) || !(agent.moveDuration > 0)) return null;
+  const animation = CREATURE_WALK_ANIMATIONS[agent.species];
+  const elapsed = time - agent.moveStartedAt;
+  if (!Number.isFinite(elapsed) || elapsed < 0) return null;
+  const startedAt = Number.isFinite(agent.flightStartedAt) ? agent.flightStartedAt : agent.moveStartedAt;
+  if (agent.mode === "walk" && elapsed < agent.moveDuration) {
+    const age = Math.max(0, (time - startedAt) * 1000);
+    const takeoff = age < animation.takeoffDurationMs;
+    const frameTime = takeoff ? age : animation.takeoffDurationMs +
+      (age - animation.takeoffDurationMs) % animation.flightDurationMs;
+    return { animation, frame: unitAnimationFrame(animation, frameTime), stage: takeoff ? "takeoff" : "flight",
+      phase: takeoff ? age / animation.takeoffDurationMs - 1 : (age - animation.takeoffDurationMs) / animation.flightDurationMs,
+      rate: 1000 / (takeoff ? animation.takeoffDurationMs : animation.flightDurationMs) };
+  }
+  const stoppedAt = Number.isFinite(agent.flightStoppedAt) ? agent.flightStoppedAt : agent.moveStartedAt + agent.moveDuration;
+  const landing = (time - stoppedAt) * 1000;
+  if (landing < 0 || landing >= animation.landingDurationMs) return null;
+  return { animation, frame: unitAnimationFrame(animation, animation.takeoffDurationMs + animation.flightDurationMs + landing), stage: "landing" };
+}
+
+return { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_WALK_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, UNIT_ANIMATION_ASSETS, unitAnimationFrame, creatureAttackPose, creatureHurtPose, unitMovementElapsedMs, unitAnimationPose, creatureWalkPose, creatureAnimationSpeed, unitMovementPosition, springKeeperFlightPose };
+})();
+modules["client/unit-appearance-state.mjs"] = (() => {
+const { attackAnimationElapsed } = modules["server/attack.mjs"];
 const { UNIT_ANIMATIONS, unitMovementElapsedMs } = modules["client/unit-animation.mjs"];
 const { unitAppearanceForAgent, unitAppearancePose } = modules["client/unit-appearance.mjs"];
 
@@ -5972,6 +8230,16 @@ function unitActionState(agent, time, options = {}) {
     // the shot's launch cue; the caller selects that explicit clock contract.
     const contact=ranged?finite(attack.launchedAt,options.attackClock==='lab'?attack.hitAt:undefined):attack.hitAt;
     const cue=ranged?(clips.ranged?.launchAtMs??200):(clips.attack?.hitTimeMs??300);
+    if(Number.isFinite(attack.recovery)&&Number.isFinite(contact)) {
+      const clock=ranged?{...attack,hitAt:contact,meleeContacts:attack.shotLaunches||[contact]}:attack;
+      const elapsed=attackAnimationElapsed(clock,time,cue/1000,ms/1000)*1000;
+      if(elapsed>=ms)return null;
+      const contacts=clock.meleeContacts||[contact];
+      let index=0;while(index<contacts.length-1&&time>contacts[index]&&time>=contacts[index+1]-cue/1000)index++;
+      const hit=contacts[index],swing=index?Math.max(contacts[index-1],hit-cue/1000):start;
+      const tail=Math.min(end,hit+(ms-cue)/1000);
+      return {...state(action,start,[[swing,0],[hit,cue],[tail,Math.min(ms,cue+Math.max(0,tail-hit)*1000)]]),elapsedMs:elapsed,hasLaunchAnchor:true,eventAnchors:contacts.map(at=>({atMs:cue,at}))};
+    }
     const anchored=Number.isFinite(contact)&&contact>start&&contact<end;
     return state(action,start,anchored?[[start,0],[contact,cue],[end,ms]]:[[start,0],[end,ms]],{hasLaunchAnchor:!ranged||anchored});
   }
@@ -5979,7 +8247,10 @@ function unitActionState(agent, time, options = {}) {
   const hurt=agent.hurtStartedAt,hurtSeconds=agent.combat?.version === 2 ? .12 : duration('hurt')/1000;
   if(Number.isFinite(hurt)&&time>=hurt&&time<hurt+hurtSeconds)return state('hurt',hurt,[[hurt,0],[hurt+hurtSeconds,duration('hurt')]]);
   if(activeAttack)return activeAttack;
-  if(agent.mode==='unload'&&agent.foodDelivery)return state('throw',finite(agent.foodDelivery.startedAt,time));
+  if(agent.mode==='unload'&&agent.foodDelivery){
+    const delivery=agent.foodDelivery,start=finite(delivery.startedAt,time),end=delivery.arrivesAt,release=clips.throw?.releaseAtMs,ms=duration('throw');
+    return state('throw',start,Number.isFinite(end)&&end>start&&Number.isFinite(release)&&release>0&&release<ms?[[start,0],[start+(end-start)*.24,release],[end,ms]]:undefined);
+  }
   if(agent.mode==='harvest')return state('harvest',finite(agent.harvestStarted,agent.animationStartedAt,0));
   if(options.preview?.action==='jump')return state('jump',finite(options.preview.startedAt,time));
   if(agent.moveDuration>0&&Number.isFinite(agent.moveStartedAt)&&time>=agent.moveStartedAt&&time<agent.moveStartedAt+agent.moveDuration){
@@ -6031,11 +8302,14 @@ function createUnitAppearanceEventPlayback({maxGap=.5}={}) {
     for(let cycle=first;cycle<=last;cycle++)for(const [index,event]of(animation.events||[]).entries()){
       if(event.type==='launch'&&state.hasLaunchAnchor===false)continue;
       const atMs=cycle*ms+event.atMs;if(!Number.isFinite(atMs)||event.atMs<0||event.atMs>ms)continue;
-      const at=absoluteEventTime(state,atMs);
-      if(at===null||at<=previous+1e-9||at>time+1e-9)continue;
-      const id=[state.unitId,animation.sourceId,state.action,index,cycle,at.toFixed(6)].join(':');
-      if(seen.has(id))continue;
-      seen.set(id,true);events.push({...event,at,cycle,dedupeId:id,unitId:state.unitId,action:state.action});
+      const anchors=state.eventAnchors?.filter(anchor=>anchor.atMs===atMs);
+      const times=anchors?.length?anchors.map(anchor=>anchor.at):[absoluteEventTime(state,atMs)];
+      for(const at of times){
+        if(at===null||at<=previous+1e-9||at>time+1e-9)continue;
+        const id=[state.unitId,animation.sourceId,state.action,index,cycle,at.toFixed(6)].join(':');
+        if(seen.has(id))continue;
+        seen.set(id,true);events.push({...event,at,cycle,dedupeId:id,unitId:state.unitId,action:state.action});
+      }
     }
     while(seen.size>2048)seen.delete(seen.keys().next().value);
     return events;
@@ -6043,7 +8317,7 @@ function createUnitAppearanceEventPlayback({maxGap=.5}={}) {
   return {update,reset(){cursors.clear();seen.clear()}};
 }
 
-return {unitActionState,unitAppearanceStatePose,createUnitAppearanceEventPlayback};
+return { unitActionState, unitAppearanceStatePose, createUnitAppearanceEventPlayback };
 })();
 modules["client/unit-appearance-world.mjs"]=(()=>{
 const { UNIT_APPEARANCE_PIXEL_BUDGETS }=modules["client/unit-appearance.mjs"];
@@ -6074,6 +8348,417 @@ function createUnitAppearanceWorld(options = {}) {
 }
 
 return {createUnitAppearanceWorld};
+})();
+modules["server/birth.mjs"] = (() => {
+const AGENT_BIRTH_DURATION = 3.85;
+const SPORE_BIRTH_DURATIONS = Object.freeze([180,80,80,80,80,80,80,80,80,160,160,160,160,160,160,160,160,80,80,80,80,700]);
+const SPORE_BIRTH_DURATION = SPORE_BIRTH_DURATIONS.reduce((sum, duration) => sum + duration, 0) / 1000;
+const SPRING_BIRTH_DURATIONS = Object.freeze([130, 120, 100, 100, 80, 260, 80, 90, 90, 100, 100, 130, 410]);
+const SPRING_BIRTH_DURATION = SPRING_BIRTH_DURATIONS.reduce((sum, duration) => sum + duration, 0) / 1000;
+
+const PEBBLE_BIRTH_DURATIONS = Object.freeze([80,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,700]);
+const PEBBLE_BIRTH_DURATION = PEBBLE_BIRTH_DURATIONS.reduce((sum, duration) => sum + duration, 0) / 1000;
+
+function agentBirthDuration(tribe) {
+  if (tribe === "spore") return SPORE_BIRTH_DURATION;
+  if (tribe === "pebble") return PEBBLE_BIRTH_DURATION;
+  return tribe === "spring" ? SPRING_BIRTH_DURATION : AGENT_BIRTH_DURATION;
+}
+
+const bodyKeys = [
+  [0, .76, .49, 0, -.03], [.065, .83, 1.15, 16, .025], [.18, .94, 1.06, 53, -.02],
+  [.30, 1, 1, 71, .015], [.44, 1, 1.02, 49, 0], [.62, 1.05, .97, 0, 0],
+  [.68, 1.16, .83, 0, -.015], [.82, .96, 1.05, 5, .01], [1.02, 1, 1, 0, 0]
+];
+const leafKeys = [
+  [0, 1, .18, .16], [.15, .62, .62, .8], [.28, -.18, 1.08, 1.05],
+  [.43, .10, .97, .96], [.65, -.04, 1.02, 1.01], [.88, 0, 1, 1]
+];
+
+function smooth(value) {
+  const p = Math.max(0, Math.min(1, value));
+  return p * p * (3 - 2 * p);
+}
+
+function keyPose(keys, elapsed) {
+  const t = Math.max(0, elapsed);
+  const last = keys[keys.length - 1];
+  if (t >= last[0]) return last.slice(1);
+  for (let i = 1; i < keys.length; i++) {
+    const a = keys[i - 1], b = keys[i];
+    if (t <= b[0]) {
+      const p = smooth((t - a[0]) / (b[0] - a[0]));
+      return a.slice(1).map((value, j) => value + (b[j + 1] - value) * p);
+    }
+  }
+  return last.slice(1);
+}
+
+function agentBirthMotion(elapsed, dx, dy) {
+  if (elapsed < 0 || elapsed >= AGENT_BIRTH_DURATION) return null;
+  const length = Math.hypot(dx, dy);
+  const direction = dx < -.01 ? -1 : 1;
+  const endAngle = direction * (Math.PI * .5 + length * .64 / (.24 * .45));
+  let progress = 1, seedLift = 0, seedAngle = endAngle, seedScaleX = 1, seedScaleY = 1;
+  if (elapsed < .30) progress = 0;
+  else if (elapsed < .72) {
+    const p = (elapsed - .30) / .42;
+    progress = .07 + .29 * p * p;
+    seedLift = .42 * (1 - p) + 4 * p * (1 - p) * 2.1;
+    seedAngle = direction * (-.24 + (Math.PI * .5 + .24) * p);
+  } else if (elapsed < 1.60) {
+    const first = elapsed < 1.18;
+    const p = first ? (elapsed - .72) / .46 : (elapsed - 1.18) / .42;
+    progress = first ? .36 + .36 * p : .72 + .28 * p;
+    seedLift = 4 * p * (1 - p) * (first ? .23 : .14);
+    seedAngle = direction * (Math.PI * .5 + length * (progress - .36) / (.24 * .45));
+  } else if (elapsed < 1.78) {
+    const p = smooth((elapsed - 1.60) / .18);
+    seedScaleX += .16 * p;
+    seedScaleY -= .18 * p;
+  } else if (elapsed < 2.50) {
+    const p = (elapsed - 1.78) / .72;
+    seedLift = 4 * p * (1 - p) * .62;
+    seedAngle += (Math.round(endAngle / (Math.PI * 2)) * Math.PI * 2 - endAngle) * p;
+  } else if (elapsed < 2.57) {
+    const p = Math.sin(Math.min(1, (elapsed - 2.50) / .07) * Math.PI * .5);
+    seedAngle = 0;
+    seedScaleX += .22 * p;
+    seedScaleY -= .30 * p;
+  }
+  const unitAge = elapsed - 2.59;
+  const [scaleX, scaleY, lift, rotation] = keyPose(bodyKeys, unitAge);
+  const left = keyPose(leafKeys, unitAge - .02), right = keyPose(leafKeys, unitAge - .055);
+  return { elapsed, progress, seedLift, seedAngle, seedScaleX, seedScaleY,
+    seedVisible: elapsed >= .30 && elapsed < 2.57, unitVisible: unitAge >= 0,
+    fractureAge: elapsed - 2.57, unitAge, scaleX, scaleY, rotation, lift: lift / 83 * .7 * .55,
+    head: { leftRotation: left[0], rightRotation: -right[0], leftScaleX: left[1], rightScaleX: right[1],
+      leftScaleY: left[2], rightScaleY: right[2] } };
+}
+
+return { AGENT_BIRTH_DURATION, SPORE_BIRTH_DURATIONS, SPORE_BIRTH_DURATION, SPRING_BIRTH_DURATIONS, SPRING_BIRTH_DURATION, PEBBLE_BIRTH_DURATIONS, PEBBLE_BIRTH_DURATION, agentBirthDuration, agentBirthMotion };
+})();
+modules["client/birth.mjs"] = (() => {
+const { imageAnimation, imageScale } = modules["client/image-geometry.mjs"];
+const { SPORE_BIRTH_DURATIONS, SPORE_BIRTH_DURATION, SPRING_BIRTH_DURATIONS, SPRING_BIRTH_DURATION, PEBBLE_BIRTH_DURATIONS, PEBBLE_BIRTH_DURATION } = modules["server/birth.mjs"];
+
+const SPORE_BIRTH_ANIMATION = Object.freeze(imageAnimation({
+  image: "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp",
+  nest: "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/nest-stationary.png",
+  frameSize: 576, columns: 4, frameCount: 22, pivotX: 400, pivotY: 486,
+  outletX: 450, outletY: 400,
+  unitHeight: 179, detachAt: .82, contactAt: 2.10, audioAt: .45, firstUnitFrame: 2,
+  nestBounds: Object.freeze({ x: 37, y: 77, width: 459, height: 344 }),
+  duration: SPORE_BIRTH_DURATION, durationsMs: SPORE_BIRTH_DURATIONS
+}));
+
+function sporeBirthPlacement(elapsed, outlet, target, height) {
+  const animation = SPORE_BIRTH_ANIMATION;
+  if (elapsed < 0 || elapsed >= animation.duration) return null;
+  let end = 0, frame = animation.frameCount - 1;
+  for (let index = 0; index < animation.frameCount; index++) {
+    end += animation.durationsMs[index] / 1000;
+    if (elapsed + 1e-9 < end) { frame = index; break; }
+  }
+  const age = Math.max(0, Math.min(1, (elapsed - animation.detachAt) / (animation.contactAt - animation.detachAt)));
+  const progress = age * age * (3 - 2 * age);
+  const rootX = outlet.x + (target.x - outlet.x) * progress;
+  const apexY = Math.min(outlet.y, target.y) - 1;
+  const rise = Math.min(1, age / .25), fall = Math.max(0, (age - .25) / .75);
+  const rootY = age < .25 ? outlet.y + (apexY - outlet.y) * (1 - (1 - rise) ** 2) :
+    apexY + (target.y - apexY) * fall * fall;
+  return { frame, rootX, rootY, scale: height / (animation.unitHeight * imageScale(animation.image)), unitVisible: frame >= animation.firstUnitFrame };
+}
+
+function birthLandingPulse(elapsed, contactAt) {
+  const age = elapsed - contactAt;
+  const keys = [[-.035, 0], [.02, 1], [.14, -.42], [.30, .16], [.52, 0]];
+  if (age <= keys[0][0] || age >= keys.at(-1)[0]) return 0;
+  for (let index = 1; index < keys.length; index++) {
+    const previous = keys[index - 1], next = keys[index];
+    if (age > next[0]) continue;
+    const progress = (age - previous[0]) / (next[0] - previous[0]);
+    return previous[1] + (next[1] - previous[1]) * progress * progress * (3 - 2 * progress);
+  }
+  return 0;
+}
+
+function sporeBirthMotion(elapsed) {
+  const animation = SPORE_BIRTH_ANIMATION;
+  const flight = Math.max(0, Math.min(1, (elapsed - animation.detachAt) / (animation.contactAt - animation.detachAt)));
+  const turn = Math.max(0, Math.min(1, (elapsed - animation.detachAt) / (animation.contactAt - .28 - animation.detachAt)));
+  const landing = Math.max(0, elapsed - animation.contactAt);
+  const settle = Math.max(0, 1 - landing / .28);
+  const impact = birthLandingPulse(elapsed, animation.contactAt);
+  return { rotation: flight < 1 ? Math.PI * 4 * turn * turn * (3 - 2 * turn) :
+    Math.sin(landing * 24) * .12 * settle * settle,
+    scaleX: 1 + impact * .10, scaleY: 1 - impact * .08 };
+}
+
+function springBirthMotion(elapsed) {
+  const animation = SPRING_BIRTH_ANIMATION;
+  if (elapsed < animation.detachAt) {
+    const age = Math.max(0, elapsed / animation.detachAt);
+    const pulse = Math.sin(age * Math.PI) * Math.sin(age * Math.PI * 3);
+    return { scaleX: 1 + pulse * .055, scaleY: 1 - pulse * .035,
+      bulge: Math.sin(age * Math.PI) * .10, sway: pulse * .025,
+      anchorX: animation.outletX, anchorY: animation.outletY };
+  }
+  if (elapsed < animation.contactAt) {
+    const age = (elapsed - animation.detachAt) / (animation.contactAt - animation.detachAt);
+    const stretch = Math.sin(age * Math.PI);
+    const impact = birthLandingPulse(elapsed, animation.contactAt);
+    return { scaleX: 1 - stretch * .12 + impact * .27, scaleY: 1 + stretch * .22 - impact * .22,
+      bulge: stretch * .08 + impact * .12, sway: (Math.sin(age * Math.PI * 2) + impact) * .035,
+      anchorX: animation.pivotX, anchorY: animation.pivotY };
+  }
+  const bounce = birthLandingPulse(elapsed, animation.contactAt);
+  return { scaleX: 1 + bounce * .27, scaleY: 1 - bounce * .22,
+    bulge: bounce * .12, sway: bounce * .035,
+    anchorX: animation.pivotX, anchorY: animation.pivotY };
+}
+
+function drawSpringBirthSurface(ctx, sprite, source, target, motion) {
+  const animation = SPRING_BIRTH_ANIMATION;
+  const scale = target.size / source.size;
+  const padding = (source.size - animation.frameSize) / 2;
+  const anchorX = motion.anchorX + padding, anchorY = motion.anchorY + padding;
+  const centerX = animation.pivotX + padding;
+  ctx.save();
+  ctx.translate(target.x + anchorX * scale, target.y + anchorY * scale);
+  ctx.scale(motion.scaleX, motion.scaleY);
+  const step = Math.max(1, Math.round(animation.frameSize / 120));
+  for (let row = 0; row < source.size; row += step) {
+    const height = Math.min(step, source.size - row);
+    const depth = Math.max(0, Math.min(1, (row - padding - animation.pivotY + animation.height) / animation.height));
+    const width = 1 + motion.bulge * Math.sin(depth * Math.PI);
+    const shift = motion.sway * animation.height * Math.sin(depth * Math.PI * 2);
+    ctx.drawImage(sprite, source.x, source.y + row, source.size, height,
+      ((-centerX) * width + centerX - anchorX + shift) * scale, (row - anchorY) * scale,
+      source.size * scale * width, height * scale);
+  }
+  ctx.restore();
+}
+
+function drawSpringBirthWater(ctx, x, floor, cell, elapsed) {
+  const age = elapsed - SPRING_BIRTH_ANIMATION.contactAt;
+  if (age < 0 || age >= .52) return;
+  const progress = age / .52;
+  const fade = (1 - progress) ** 2;
+  ctx.save();
+  ctx.globalAlpha *= fade;
+  ctx.strokeStyle = "#a4eced";
+  ctx.lineWidth = Math.max(.5, cell * .006);
+  for (const delay of [0, .14]) {
+    const ripple = (age - delay) / .38;
+    if (ripple < 0 || ripple > 1) continue;
+    ctx.beginPath();
+    ctx.ellipse(x, floor + cell * .008, cell * (.10 + ripple * .23), cell * (.025 + ripple * .045), 0, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+  for (let index = 0; index < 6; index++) {
+    const side = index % 2 ? -1 : 1;
+    const travel = cell * (.07 + progress * (.16 + index * .018));
+    const lift = Math.sin(Math.min(1, progress * 1.35) * Math.PI) * cell * (.06 + index % 3 * .025);
+    const radius = cell * (.016 + index % 3 * .004) * (1 - progress * .6);
+    const px = x + side * travel, py = floor - lift;
+    const fill = ctx.createRadialGradient(px - radius * .3, py - radius * .4, 0, px, py, radius);
+    fill.addColorStop(0, "#ecffff");
+    fill.addColorStop(.45, "#a1eeed");
+    fill.addColorStop(1, "#259dbb");
+    ctx.fillStyle = fill;
+    ctx.beginPath();
+    ctx.ellipse(px, py, radius * (1 + progress * .3), radius * (1 - progress * .2), 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function sporeBirthPixels(scene, nest) {
+  const pixels = new Uint8ClampedArray(scene.length);
+  for (let index = 0; index < scene.length; index += 4) {
+    if (scene[index] === nest[index] && scene[index + 1] === nest[index + 1] &&
+        scene[index + 2] === nest[index + 2] && scene[index + 3] === nest[index + 3]) continue;
+    const alpha = nest[index + 3] === 255 ? 255 :
+      Math.max(0, Math.min(255, (scene[index + 3] - nest[index + 3]) * 255 / (255 - nest[index + 3])));
+    if (alpha <= 0) continue;
+    pixels[index + 3] = alpha;
+    for (let channel = 0; channel < 3; channel++) pixels[index + channel] =
+      (scene[index + channel] * scene[index + 3] - nest[index + channel] * nest[index + 3] * (1 - alpha / 255)) / alpha;
+  }
+  return pixels;
+}
+
+const SPRING_BIRTH_ANIMATION = Object.freeze(imageAnimation({
+  image: "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+  frameSize: 512, columns: 4, frameCount: 13, pivotX: 320, pivotY: 448,
+  outletX: 86, outletY: 105, height: 224, detachAt: .53, contactAt: .79, audioAt: .70,
+  duration: SPRING_BIRTH_DURATION, durationsMs: SPRING_BIRTH_DURATIONS
+}));
+
+function springBirthPlacement(elapsed, outlet, target, height) {
+  if (elapsed < 0 || elapsed >= SPRING_BIRTH_DURATION) return null;
+  const animation = SPRING_BIRTH_ANIMATION;
+  let end = 0, frame = animation.frameCount - 1;
+  for (let index = 0; index < animation.durationsMs.length; index++) {
+    end += animation.durationsMs[index] / 1000;
+    if (elapsed + 1e-9 < end) { frame = index; break; }
+  }
+  const scale = height / animation.height;
+  const startX = outlet.x - animation.outletX * scale;
+  const startY = outlet.y - animation.outletY * scale;
+  const endX = target.x - animation.pivotX * scale;
+  const endY = target.y - animation.pivotY * scale;
+  const progress = Math.max(0, Math.min(1, (elapsed - animation.detachAt) / (animation.contactAt - animation.detachAt)));
+  const x = startX + (endX - startX) * progress;
+  const y = startY + (endY - startY) * progress * progress;
+  return { frame, x, y, scale, rootX: x + animation.pivotX * scale, rootY: y + animation.pivotY * scale };
+}
+
+const PEBBLE_BIRTH_ANIMATION = Object.freeze(imageAnimation({
+  image: "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
+  foreground: "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-foreground.png",
+  frameSize: 512, columns: 8, frameCount: 48, pivotX: 256, pivotY: 460,
+  outletX: 256, outletY: 460, height: 229, unitHeight: 229, unitPivotY: 460,
+  detachAt: .12, contactAt: 1.48, audioAt: .25,
+  nestOutletX: .5, nestOutletY: .82,
+  duration: PEBBLE_BIRTH_DURATION, durationsMs: PEBBLE_BIRTH_DURATIONS
+}));
+
+function pebbleBirthPlacement(elapsed, outlet, target, height) {
+  const animation = PEBBLE_BIRTH_ANIMATION;
+  if (elapsed < 0 || elapsed >= animation.duration) return null;
+  let end = 0, frame = animation.frameCount - 1;
+  for (let index = 0; index < animation.durationsMs.length; index++) {
+    end += animation.durationsMs[index] / 1000;
+    if (elapsed + 1e-9 < end) { frame = index; break; }
+  }
+  const scale = height / animation.height;
+  const startX = outlet.x - animation.outletX * scale;
+  const startY = outlet.y - animation.outletY * scale;
+  const endX = target.x - animation.pivotX * scale;
+  const endY = target.y - animation.pivotY * scale;
+  const progress = Math.max(0, Math.min(1, (elapsed - animation.detachAt) / (animation.contactAt - animation.detachAt)));
+  const horizontal = progress * progress * (3 - 2 * progress);
+  const x = startX + (endX - startX) * horizontal;
+  const y = startY + (endY - startY) * horizontal;
+  return { frame, x, y, scale, rootX: x + animation.pivotX * scale, rootY: y + animation.pivotY * scale };
+}
+
+const pieces = [
+  { polygon: [[-.06, -1], [-.43, -.58], [-.46, -.32], [0, -.48]], vx: -82, vy: -145, spin: -5 },
+  { polygon: [[-.06, -1], [.42, -.62], [.48, -.32], [0, -.48]], vx: 87, vy: -160, spin: 5 },
+  { polygon: [[-.46, -.32], [-.33, -.04], [-.02, 0], [0, -.48]], vx: -130, vy: -93, spin: -8 },
+  { polygon: [[0, -.48], [-.02, 0], [.40, -.08], [.48, -.32]], vx: 136, vy: -100, spin: 8 }
+];
+
+function seedSurface(ctx, w, h) {
+  const fill = ctx.createLinearGradient(-w * .45, -h * .7, w * .46, -h * .2);
+  [[0, "#b17a3e"], [.28, "#e6c27b"], [.52, "#b98043"], [.77, "#d2a05a"], [1, "#85532f"]]
+    .forEach(([p, color]) => fill.addColorStop(p, color));
+  ctx.beginPath();
+  ctx.moveTo(-w * .06, -h);
+  ctx.bezierCurveTo(w * .08, -h * .87, w * .48, -h * .63, w * .48, -h * .31);
+  ctx.bezierCurveTo(w * .48, -h * .11, w * .20, h * .02, -w * .05, -h * .02);
+  ctx.bezierCurveTo(-w * .36, -h * .04, -w * .48, -h * .20, -w * .43, -h * .42);
+  ctx.bezierCurveTo(-w * .39, -h * .62, -w * .12, -h * .79, -w * .06, -h);
+  ctx.closePath();
+  ctx.fillStyle = fill;
+  ctx.fill();
+  ctx.strokeStyle = "#4d3e26";
+  ctx.lineWidth = Math.max(.6, w * .035);
+  ctx.stroke();
+  ctx.strokeStyle = "#fff0bd70";
+  ctx.lineWidth = Math.max(.5, w * .03);
+  ctx.beginPath();
+  ctx.moveTo(-w * .12, -h * .79);
+  ctx.bezierCurveTo(-w * .29, -h * .54, -w * .37, -h * .33, -w * .21, -h * .15);
+  ctx.stroke();
+  ctx.strokeStyle = "#78502d99";
+  ctx.lineWidth = Math.max(.4, w * .018);
+  for (const side of [-1, 1]) {
+    ctx.beginPath();
+    ctx.moveTo(-w * .02, -h * .82);
+    ctx.bezierCurveTo(side * w * .26, -h * .61, side * w * .29, -h * .32, side * w * .13, -h * .12);
+    ctx.stroke();
+  }
+  ctx.strokeStyle = "#654329";
+  ctx.lineWidth = Math.max(.6, w * .037);
+  ctx.beginPath();
+  ctx.moveTo(-w * .04, -h * .93);
+  ctx.bezierCurveTo(w * .09, -h * .61, -w * .05, -h * .27, -w * .02, -h * .08);
+  ctx.stroke();
+}
+
+function drawBirthSeed(ctx, x, floor, cell, motion) {
+  const w = cell * .24, h = w * 1.42;
+  const support = Math.hypot(w * .48 * motion.seedScaleX * Math.sin(motion.seedAngle),
+    h * .50 * motion.seedScaleY * Math.cos(motion.seedAngle));
+  ctx.save();
+  ctx.imageSmoothingEnabled = true;
+  ctx.translate(x, floor - support - motion.seedLift * cell);
+  ctx.rotate(motion.seedAngle);
+  ctx.scale(motion.seedScaleX, motion.seedScaleY);
+  ctx.translate(0, h * .5);
+  seedSurface(ctx, w, h);
+  if (motion.elapsed >= 2.50) {
+    ctx.strokeStyle = "#443425";
+    ctx.lineWidth = Math.max(.7, w * .044);
+    ctx.beginPath();
+    ctx.moveTo(-w * .05, -h * .94);
+    for (const [px, py] of [[.10, -.66], [-.08, -.48], [.06, -.25], [0, -.03]]) ctx.lineTo(px * w, py * h);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawBirthFragments(ctx, x, floor, cell, age) {
+  if (age < 0 || age >= .74) return;
+  const w = cell * .24, h = w * 1.42, scale = w / 46;
+  for (const piece of pieces) {
+    const dy = piece.vy * age * scale + 240 * age * age * scale;
+    const p = Math.max(0, Math.min(1, (age - .40) / .34));
+    ctx.save();
+    ctx.translate(x + piece.vx * age * scale, Math.min(floor - h * .18, floor - h * .5 + dy));
+    ctx.rotate(piece.spin * age);
+    ctx.translate(0, h * .5);
+    ctx.globalAlpha *= 1 - p * p * (3 - 2 * p);
+    ctx.beginPath();
+    piece.polygon.forEach(([px, py], index) => {
+      if (index === 0) ctx.moveTo(px * w, py * h);
+      else ctx.lineTo(px * w, py * h);
+    });
+    ctx.closePath();
+    ctx.clip();
+    seedSurface(ctx, w, h);
+    ctx.restore();
+  }
+}
+
+function drawBirthImpact(ctx, x, floor, cell, age, strength) {
+  if (age < 0 || age > .26) return;
+  const p = age / .26;
+  ctx.save();
+  ctx.globalAlpha *= (1 - p) * strength;
+  ctx.strokeStyle = "#d5c596";
+  ctx.lineWidth = Math.max(.5, cell * .007);
+  ctx.beginPath();
+  ctx.ellipse(x, floor + cell * .008, cell * (.07 + p * .16), cell * (.02 + p * .04), 0, 0, Math.PI * 2);
+  ctx.stroke();
+  if (strength > .35) {
+    ctx.fillStyle = "#dbc28e";
+    for (let i = 0; i < 8; i++) {
+      const d = cell * (.04 + i * .016) * (1 + p * 1.6);
+      ctx.beginPath();
+      ctx.ellipse(x + (i % 2 ? 1 : -1) * d, floor - Math.sin(p * Math.PI) * cell * (.025 + i % 3 * .02),
+        Math.max(.1, cell * .011 * (1 - p)), Math.max(.1, cell * .009 * (1 - p)), 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+
+return { SPORE_BIRTH_ANIMATION, sporeBirthPlacement, sporeBirthMotion, springBirthMotion, drawSpringBirthSurface, drawSpringBirthWater, sporeBirthPixels, SPRING_BIRTH_ANIMATION, springBirthPlacement, PEBBLE_BIRTH_ANIMATION, pebbleBirthPlacement, drawBirthSeed, drawBirthFragments, drawBirthImpact };
 })();
 modules["client/unit-appearance-birth-scene.mjs"]=(()=>{
 // Exact native raw00 body renderer for an external legacy birth scene.

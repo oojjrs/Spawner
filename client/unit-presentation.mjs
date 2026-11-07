@@ -1,3 +1,4 @@
+import { unitFacing } from "./unit-size.mjs";
 import { createUnitActionArt, unitActionArtPose } from "./unit-action-art.mjs";
 
 export function createUnitPresentation(options) {
@@ -200,7 +201,7 @@ export function createUnitPresentation(options) {
     const pose = unitActionArtPose(agent, state.simSeconds);
     if (!pose) return false;
     const scale = options.displayScale(agent) || 1;
-    const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.attack?.directionX || agent.facing || 1;
+    const facing = unitFacing(agent);
     actionArt.draw(ctx, agent, state.simSeconds, centerX, floor, height / AGENT_HEIGHT / scale, facing < 0,
       outlineColor ? (context, image, crop, destination) => drawSelectionOutline(image,
         destination.x, destination.y, destination.width, destination.height,

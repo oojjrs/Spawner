@@ -70,7 +70,7 @@ export function combatProfile(agent) {
     const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;
     return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: dna.armor,
       armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: dna.focus,
-      recovery: Math.max(dna.recovery || 0, attackInterval - dna.focus - Math.max(0, dna.hits - 1) * dna.comboSpeed) };
+      recovery: dna.recovery || 0 };
   }
   const base = unitCombatStats(agent.species || agent.tribe);
   const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;
@@ -79,7 +79,6 @@ export function combatProfile(agent) {
   const attackSpeed = Number.isFinite(agent.stats?.attackSpeed) && agent.stats.attackSpeed > 0 ?
     Math.max(.2, Math.min(4, agent.stats.attackSpeed)) : 1 / defaultInterval;
   const attackInterval = 1 / attackSpeed;
-  const timingScale = attackInterval / defaultInterval;
   const strength = Number.isFinite(agent.stats?.combatStrength) ?
     agent.stats.combatStrength - (agent.species ? 0 : attributeCombatStrengthBonus(agent.attributes)) : base.combatStrength;
   const attackPower = Number.isFinite(agent.stats?.attackPower) ? agent.stats.attackPower :
@@ -88,8 +87,8 @@ export function combatProfile(agent) {
   const defense = Number.isFinite(agent.stats?.defense) ? agent.stats.defense : 8 + strength * .4 + 100 * reduction / (1 - reduction);
   const armorPenetration = equipped("piercing") ? .5 : Math.max(0, Math.min(1, agent.stats?.armorPenetration || 0));
   return { primary, attackPower: Math.max(1, attackPower), defense: Math.max(0, defense), armorPenetration,
-    attackSpeed, attackInterval, windup: (primary === "piercing" ? .65 : primary === "blade" ? .24 : .4) * timingScale,
-    recovery: (primary === "blade" ? .3 : .45) * timingScale };
+    attackSpeed, attackInterval, windup: (primary === "piercing" ? .65 : primary === "blade" ? .24 : .4),
+    recovery: (primary === "blade" ? .3 : .45) };
 }
 
 export function combatDamage(attacker, target, variation, rules) {

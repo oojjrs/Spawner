@@ -4,7 +4,7 @@ import { createCombatStage } from "./combat-stage.mjs";
 
 const sides = ["left", "right"], elements = {}, inputs = {};
 const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index ? "spore" : "bean", name: index ? "오른쪽" : "왼쪽",
-  organs: { attack: 1, ranged: 0, heal: 0 }, counts: Object.fromEntries(SIMULATION_STATS.map(stat => [stat.key, ({power:4,vitality:5,armor:2,haste:2})[stat.key] || 0])) }]));
+  }]));
 const rosters = Object.fromEntries(sides.map(side => [side, [builds[side]]]));
 const selected = { left: 0, right: 0 };
 const rules = { ...DEFAULT_SIMULATION_RULES };
@@ -32,17 +32,19 @@ function button(parent, label, action) {
   const element = node("button", label); element.type = "button"; element.addEventListener("click", action); parent.append(element); return element;
 }
 const header = node("header");
-const title = node("div"); title.append(node("div", "SPAWNER / COMBAT LAB", "eyebrow"), node("h1", "전투 실험실"), node("p", "초깃값은 실험용입니다. 비교 조각 수는 공정한 실험 조건이며, 외형은 수치에 영향을 주지 않습니다."));
+const title = node("div"); title.append(node("div", "SPAWNER / COMBAT LAB", "eyebrow"), node("h1", "전투 실험실"));
 elements.status = node("output", "대결 준비", "status"); elements.status.setAttribute("aria-live", "polite"); header.append(title, elements.status); main.append(header);
 const stage = node("section", null, "stage"); main.append(stage);
 const stageHud = node("div", null, "stage-hud"); stage.append(stageHud);
 const stageCenter = node("div", null, "stage-center"); stageCenter.append(elements.status); stageHud.append(stageCenter);
 elements.dice = button(stageCenter, "🎲", () => {
   for (const side of sides) {
-    rosters[side] = Array.from({ length: 5 }, () => {
-      const build = structuredClone(builds[side]);
-      build.key = COMBAT_LAB_UNITS[Math.floor(Math.random() * COMBAT_LAB_UNITS.length)].key;
-      return build;
+    const previous = rosters[side], used = new Set();
+    rosters[side] = Array.from({ length: 5 }, (_, slot) => {
+      const choices = COMBAT_LAB_UNITS.filter(unit => unit.key !== previous[slot]?.key && !used.has(unit.key));
+      const key = choices[Math.floor(Math.random() * choices.length)].key;
+      used.add(key);
+      return { key };
     });
     selected[side] = 0;
     selectBuild(side);
@@ -71,9 +73,7 @@ for (const side of sides) {
   });
   hud.append(rosterActions);
   const appearance = control(hud, "외형", select(COMBAT_LAB_UNITS.map(unit => [unit.key, unit.name]), builds[side].key));
-  appearance.addEventListener("change", () => { builds[side].key = appearance.value; changed(); }); inputs[side].appearance = appearance;
-  const hp = node("div", null, "hp"); elements[side + "Hp"] = node("strong"); hp.append(node("span", "HP"), elements[side + "Hp"]); hud.append(hp);
-  const bar = node("div", null, "bar"); elements[side + "Bar"] = node("i"); bar.append(elements[side + "Bar"]); hud.append(bar);
+  appearance.addEventListener("change", () => { rosters[side][selected[side]] = { key: appearance.value }; selectBuild(side); changed(); }); inputs[side].appearance = appearance;
   const gauge = node("div", null, "action-bar"); elements[side + "Gauge"] = node("i"); gauge.append(elements[side + "Gauge"]); hud.append(gauge);
   elements[side + "Reaction"] = node("output", null, "reaction"); hud.append(elements[side + "Reaction"]);
 }
@@ -112,8 +112,6 @@ function render() {
       const roster = elements[side + "Roster"];
       if (roster.options.length !== options.length) roster.replaceChildren(...options.map(([value, label]) => { const option = node("option", label); option.value = value; return option; }));
       roster.value = String(selected[side]); elements[side + "Remove"].disabled = rosters[side].length <= 1;
-      elements[side+"Hp"].textContent=(agent?agent.health:stats.health).toFixed(1)+" / "+stats.health.toFixed(1);
-      elements[side+"Bar"].style.width=(100*(agent?agent.health:stats.health)/stats.health)+"%";
       const start = agent?.combat?.cycleStartedAt || 0, end = agent?.combat?.nextAttackAt || 0;
       const progress = agent?.health > 0 && agent.stats.canAttack && end > start ? Math.max(0, Math.min(1, (trial.time - start) / (end - start))) : 0;
       elements[side+"Gauge"].style.width=(100*progress)+"%";

@@ -113,11 +113,15 @@ test("real simulation launches before damage and emits actual capped drain separ
   assert.equal(trial.vfx.events.filter(item => item.kind === "drain").length, 0, "full health has no actual drain recovery");
   const melee = createSimulationTrial({ left: { key: "bean", counts: { drain: 3, vitality: 2 } }, right: { key: "spore", counts: { vitality: 2 } }, random: false,
     rules: { maxSeconds: .31 } });
+  melee.agents[0].health -= 2;
   melee.finish();
   const drain = melee.vfx.events.find(item => item.kind === "drain");
   assert.ok(drain); assert.equal(drain.targetId, drain.toId); assert.notEqual(drain.fromId, drain.toId);
   assert.ok(melee.vfx.events.some(item => item.id === drain.causeId && item.kind === "hit"));
-  assert.equal(melee.history.some(item => item.kind === "drain"), false, "presentation evidence does not rewrite experiment history");
+  const recordedDrain = melee.history.filter(item => item.kind === "drain");
+  assert.equal(recordedDrain.length, 1);
+  assert.equal(recordedDrain[0].time, drain.at);
+  assert.equal(recordedDrain[0].damage, drain.amount);
 });
 
 test("bounded cursor never restarts impacts when an oversized packet repeats or reorders", () => {

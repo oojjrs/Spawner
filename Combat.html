@@ -560,7 +560,7 @@ function combatProfile(agent) {
     const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;
     return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: dna.armor,
       armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: dna.focus,
-      recovery: Math.max(dna.recovery || 0, attackInterval - dna.focus - Math.max(0, dna.hits - 1) * dna.comboSpeed) };
+      recovery: dna.recovery || 0 };
   }
   const base = unitCombatStats(agent.species || agent.tribe);
   const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;
@@ -569,7 +569,6 @@ function combatProfile(agent) {
   const attackSpeed = Number.isFinite(agent.stats?.attackSpeed) && agent.stats.attackSpeed > 0 ?
     Math.max(.2, Math.min(4, agent.stats.attackSpeed)) : 1 / defaultInterval;
   const attackInterval = 1 / attackSpeed;
-  const timingScale = attackInterval / defaultInterval;
   const strength = Number.isFinite(agent.stats?.combatStrength) ?
     agent.stats.combatStrength - (agent.species ? 0 : attributeCombatStrengthBonus(agent.attributes)) : base.combatStrength;
   const attackPower = Number.isFinite(agent.stats?.attackPower) ? agent.stats.attackPower :
@@ -578,8 +577,8 @@ function combatProfile(agent) {
   const defense = Number.isFinite(agent.stats?.defense) ? agent.stats.defense : 8 + strength * .4 + 100 * reduction / (1 - reduction);
   const armorPenetration = equipped("piercing") ? .5 : Math.max(0, Math.min(1, agent.stats?.armorPenetration || 0));
   return { primary, attackPower: Math.max(1, attackPower), defense: Math.max(0, defense), armorPenetration,
-    attackSpeed, attackInterval, windup: (primary === "piercing" ? .65 : primary === "blade" ? .24 : .4) * timingScale,
-    recovery: (primary === "blade" ? .3 : .45) * timingScale };
+    attackSpeed, attackInterval, windup: (primary === "piercing" ? .65 : primary === "blade" ? .24 : .4),
+    recovery: (primary === "blade" ? .3 : .45) };
 }
 
 function combatDamage(attacker, target, variation, rules) {
@@ -2263,6 +2262,15 @@ const AGENT_ATTACK_ASSET = "DesignAssets/Animations/UnitAttack/attack.png";
 
 function attackAnimationElapsed(attack, time, hitTime, duration) {
   const elapsed = time - attack.startedAt;
+  if (Number.isFinite(attack.recovery)) {
+    const contacts = attack.meleeContacts || [attack.hitAt];
+    let index = 0;
+    while (index < contacts.length - 1 && time > contacts[index] && time >= contacts[index + 1] - hitTime) index++;
+    const contact = contacts[index], start = index ? Math.max(contacts[index - 1], contact - hitTime) : attack.startedAt;
+    if (time < contact) return Math.max(0, (time - start) / Math.max(1e-9, contact - start) * hitTime);
+    return Math.min(duration, hitTime + time - contact);
+  }
+
   // DNA melee follow-ups move hitAt forward without beginning a new action.
   // Keep the contact already reached, then finish recovery and prepare the next
   // swing using only the server's recorded contacts, not current unit stats.
@@ -3231,7 +3239,7 @@ const { dropCarriedResources } = modules["server/resources.mjs"];
 const { militaryAgent } = modules["server/conquest-pacing.mjs"];
 const { creatureSpawning } = modules["server/creature-spawn.mjs"];
 const { ENCOUNTER_TYPES } = modules["server/encounter-types.mjs"];
-const { AGENT_ATTACK_DURATION } = modules["server/attack.mjs"];
+const { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME } = modules["server/attack.mjs"];
 const { BEETLE_ANIMATIONS } = modules["server/beetle-animation.mjs"];
 const { CREATURE_ATTACK_TIMINGS } = modules["server/creature-attack.mjs"];
 const { unitTravelSpeed, unitTerrainSpeedMultiplier } = modules["server/attributes.mjs"];
@@ -3251,6 +3259,7 @@ const COMBAT_EXCHANGE_DAMAGE_VERSION = 5;
 const species = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
 
 function combatDisposition(agent) {
+  if (agent.dna && agent.ownerId) return agent.stats?.dna?.melee || agent.stats?.dna?.ranged ? "aggressive" : "passive";
   const type = species.get(agent.species);
   let disposition = agent.combatDisposition || type?.combatDisposition;
   if (!disposition) disposition = agent.species === "spiny-back-beetle" ? "aggressive" : "passive";
@@ -3500,11 +3509,12 @@ function createCombat(environment) {
     const windup = counter ? (environment.combatRules?.counterWindup ?? .12) : profile.windup + (heavy ? .15 : 0);
     const timing = CREATURE_ATTACK_TIMINGS[attacker.species] || (attacker.species === "spiny-back-beetle" ? BEETLE_ANIMATIONS.attack :
       { durationMs: AGENT_ATTACK_DURATION * 1000 });
-    const duration = windup + profile.recovery;
+    const recovery = Math.max(profile.recovery, timing.durationMs / 1000 - (timing.hitTimeMs / 1000 || AGENT_ATTACK_HIT_TIME));
+    const duration = windup + recovery;
     attacker.attack = { combatId: combat.id, startedAt: time, hitAt: time + windup, endsAt: time + duration,
       speed: timing.durationMs / 1000 / duration, directionX: combat.side === 0 ? -1 : 1,
       targetId: target.id, targetKind: "agent", targetX: combat.x, targetY: combat.y,
-      resolved: false, hit: false, counter, heavy, attackMode: mode };
+      resolved: false, hit: false, counter, heavy, attackMode: mode, recovery };
     if (attacker.stats?.dna) { attacker.attack.hitIndex = 0; attacker.attack.heavy = false; }
     if (attacker.stats?.dna && mode === "melee" && !counter) attacker.attack.meleeContacts = [attacker.attack.hitAt];
     if (attacker.species && !attacker.stats?.dna && mode === "ranged") {
@@ -3606,7 +3616,7 @@ function createCombat(environment) {
     if (source && !attack.counter && attacker.health > 0 && defender.health > 0 && ++attack.hitIndex < source.hits) {
       attack.resolved = false; attack.hitAt = time + source.comboSpeed;
       if (attack.meleeContacts) attack.meleeContacts.push(attack.hitAt);
-      attack.endsAt = Math.max(attack.endsAt, attack.hitAt + combatProfile(attacker).recovery);
+      attack.endsAt = Math.max(attack.endsAt, attack.hitAt + attack.recovery);
     }
   }
 
@@ -3840,7 +3850,9 @@ function createCombat(environment) {
       participants = members(combat).sort((a, b) => String(a.agent.id).localeCompare(String(b.agent.id)));
       if (new Set(participants.map(entry => entry.agent.combat.side)).size < 2) { finish(combat, time); processed.delete(combat.id); return true; }
       const events = participants.flatMap(({ agent: member }) => {
-        if (member.attack) return [{ agent: member, at: member.attack.resolved ? member.attack.endsAt : member.attack.hitAt, kind: member.attack.resolved ? "end" : "hit" }];
+        if (member.attack) return [{ agent: member, at: member.attack.resolved ?
+          Math.min(member.attack.endsAt, Math.max(member.attack.hitAt + combatProfile(member).recovery, member.combat.nextAttackAt)) : member.attack.hitAt,
+          kind: member.attack.resolved ? "end" : "hit" }];
         return [{ agent: member, at: Math.max(member.combat.nextAttackAt, member.combat.stunnedUntil), kind: "start" }];
       }).filter(event => event.at <= time + 1e-8).sort((a, b) => a.at - b.at ||
         ({ hit: 0, end: 1, start: 2 }[a.kind] - { hit: 0, end: 1, start: 2 }[b.kind]) || String(a.agent.id).localeCompare(String(b.agent.id)));
@@ -3852,6 +3864,7 @@ function createCombat(environment) {
         if (target) resolveHit(member, target, event.at);
         else { member.attack.resolved = true; member.attackHit = true; }
       } else if (event.kind === "end") {
+        member.combat.nextAttackAt = Math.max(member.combat.nextAttackAt, event.at);
         member.attack = null; member.attackTargetId = null;
         member.mode = member.species === "spiny-back-beetle" ? "idle" : "fight";
       } else {
@@ -4006,7 +4019,108 @@ function createCombatTrial(settings) {
 
 return { COMBAT_LAB_UNITS, createCombatTrial };
 })();
+modules["server/creature-movement-profiles.mjs"] = (() => {
+const CREATURE_MOVEMENT_PROFILES = Object.freeze(Object.fromEntries([
+  ["flower-tail-bird", 2, 3],
+  ["dew-rabbit", 2.6, 2.5],
+  ["soil-mole", .8, 5],
+  ["bundle-snail", .4, 6],
+  ["cotton-sheep", .8, 4],
+  ["rolling-acorn", 1.8, 6],
+  ["bubble-toad", .8, 20],
+  ["snare-vine", 1.4, 30],
+  ["spiny-back-beetle", 1.2, 18],
+  ["soil-boar", 1.6, 24],
+  ["vine-turtle", .4, 30],
+  ["shadow-weasel", 2.6, 30],
+  ["talon-owl", 2, 40],
+  ["spring-keeper", 1.6, 30],
+  ["lantern-keeper", 2.8, 30],
+  ["old-garden-snail", .3, 45],
+  ["walking-forest", .3, 60],
+  ["white-paw", 3.2, 90],
+  ["spiny-back-leader", 1.4, 120]
+].map(([species, speed, restSeconds]) => [species, Object.freeze({ speed, restSeconds })])));
+
+return { CREATURE_MOVEMENT_PROFILES };
+})();
+modules["server/creature-movement.mjs"] = (() => {
+const { CREATURE_MOVEMENT_PROFILES } = modules["server/creature-movement-profiles.mjs"];
+const { unitTerrainSpeedMultiplier } = modules["server/attributes.mjs"];
+
+const CREATURE_MOVEMENT = CREATURE_MOVEMENT_PROFILES;
+
+function applyCreatureMovement(agent) {
+  const movement = CREATURE_MOVEMENT[agent.species];
+  agent.stats.speed = movement.speed;
+  if (agent.returningHome) agent.nextActionAt = agent.moveStartedAt + agent.moveDuration;
+  else if (agent.stepCount > 0 && ["idle", "walk"].includes(agent.mode))
+    agent.nextActionAt = Math.max(agent.nextActionAt, agent.moveStartedAt + agent.moveDuration + movement.restSeconds);
+}
+
+function creatureMoveDuration(agent, terrain) {
+  return 1 / (agent.stats.speed * unitTerrainSpeedMultiplier(agent, terrain));
+}
+
+function finishCreatureMove(agent, time) {
+  const endsAt = agent.moveStartedAt + agent.moveDuration;
+  if (agent.mode !== "walk" || time < endsAt) return;
+  agent.mode = "idle";
+  agent.animationStartedAt = endsAt;
+  agent.nextActionAt = agent.returningHome ? endsAt : Math.max(agent.nextActionAt, endsAt + CREATURE_MOVEMENT[agent.species].restSeconds);
+}
+
+return { CREATURE_MOVEMENT, applyCreatureMovement, creatureMoveDuration, finishCreatureMove };
+})();
+modules["server/tribe-start.mjs"] = (() => {
+const { ATTRIBUTE_DNA } = modules["server/dna.mjs"];
+
+// Worker production is affordable immediately; gathering funds nest growth.
+const PLAYER_STARTING_POINTS = 30;
+
+const TRIBE_STARTING_UNITS = Object.freeze({
+  bean: Object.freeze([["antenna"], ["strength"], [], []].map(slots => Object.freeze(slots))),
+  spore: Object.freeze([["strength"], ["blade"], [], []].map(slots => Object.freeze(slots))),
+  pebble: Object.freeze([["strength"], ["strength"], ["antenna"], []].map(slots => Object.freeze(slots))),
+  spring: Object.freeze([["feet"], ["feet"], ["antenna"], []].map(slots => Object.freeze(slots)))
+});
+
+// Each tribe gets a modest legal level-one worker, priced through the same
+// DNA catalog as user designs (currently 17P each, including birth cost).
+const STARTING_WORKER_GENES = Object.freeze({
+  bean: Object.freeze(["gather", "capacity", "capacity", "capacity"]),
+  spore: Object.freeze(["gather", "harvestSpeed", "capacity", "capacity"]),
+  pebble: Object.freeze(["gather", "health", "capacity", "capacity"]),
+  spring: Object.freeze(["gather", "movement", "capacity", "capacity"])
+});
+
+function startingWorkerDna(tribe = "bean") {
+  const genes = STARTING_WORKER_GENES[tribe] || STARTING_WORKER_GENES.bean;
+  const place = (index, pieces) => {
+    if (index === genes.length) return pieces;
+    const gene = ATTRIBUTE_DNA.lookup.get(genes[index]);
+    for (let rotation = 0; rotation < 6; rotation++) {
+      const next = [...pieces, { gene: gene.id, grade: gene.grade, rotation, shape: [...gene.steps] }];
+      const trace = ATTRIBUTE_DNA.trace(next, 1);
+      if (!trace.valid || trace.closed && index < genes.length - 1) continue;
+      const result = place(index + 1, next);
+      if (result) return result;
+    }
+    return null;
+  };
+  const pieces = place(0, []);
+  if (!pieces) throw new Error("시작 일꾼 DNA가 1레벨 보드에 맞지 않습니다.");
+  return { version: 3, level: 1, budget: 30, pieces };
+}
+
+return { PLAYER_STARTING_POINTS, TRIBE_STARTING_UNITS, STARTING_WORKER_GENES, startingWorkerDna };
+})();
 modules["client/combat-simulation.mjs"] = (() => {
+const { UNIT_COMBAT_STATS, unitCombatStats, combatProfile } = modules["server/combat-stats.mjs"];
+const { CREATURE_MOVEMENT } = modules["server/creature-movement.mjs"];
+const { creatureAttackRole } = modules["server/creature-attack-role.mjs"];
+const { startingWorkerDna } = modules["server/tribe-start.mjs"];
+const { dnaUnitStats, dnaAppearance, validateDna } = modules["server/dna-unit.mjs"];
 const { createCombat } = modules["server/combat.mjs"];
 const { DNA_COMBAT_RULES, dnaCombatStats } = modules["server/dna-combat-stats.mjs"];
 const { snapshotCombatVfx } = modules["server/combat-vfx-journal.mjs"];
@@ -4066,6 +4180,11 @@ function normalizeBuild(input) {
   plainObject(input, "build");
   if (typeof input.key !== "string" || !input.key.length || input.key.length > 100) throw new TypeError("build.key must be a nonempty string up to 100 characters");
   if (input.name !== undefined && (typeof input.name !== "string" || input.name.length > 100)) throw new TypeError("build.name must be a string up to 100 characters");
+  const native = input.counts === undefined && input.organs === undefined && input.healing === undefined;
+  if (native && !Object.hasOwn(UNIT_COMBAT_STATS, input.key)) throw new RangeError("Unknown unit: " + input.key);
+  const dna = input.dna === undefined ? undefined : validateDna(input.dna, input.dna?.level, input.dna?.budget);
+  if (input.dna !== undefined && (!dna || !["bean", "spore", "pebble", "spring"].includes(input.key))) throw new RangeError("Invalid playable DNA");
+  if (dna && !native) throw new RangeError("DNA and count overrides must be separate builds");
   if (input.counts !== undefined) plainObject(input.counts, "counts");
   const counts = Object.fromEntries([...statKeys].map(key => [key, 0]));
   for (const [key, value] of Object.entries(input.counts || {})) {
@@ -4090,7 +4209,7 @@ function normalizeBuild(input) {
   if (!Number.isFinite(healing) || healing < 0 || healing > 1000000) throw new RangeError("healing must be a finite nonnegative percentage");
   const pieceCount = Object.values(counts).reduce((sum, value) => sum + value, 0) + organs.attack + organs.ranged + organs.heal;
   if (!Number.isSafeInteger(pieceCount)) throw new RangeError("Total piece count must be a safe integer including organs");
-  return { key: input.key, name: input.name || input.key, organs, counts, healing, pieceCount };
+  return { key: input.key, name: input.name || input.key, organs, counts, healing, pieceCount, native, dna };
 }
 
 const geneKeys = Object.freeze({ vitality: "health", flatPen: "penetration", haste: "speed", rangedHaste: "rangedSpeed",
@@ -4098,6 +4217,16 @@ const geneKeys = Object.freeze({ vitality: "health", flatPen: "penetration", has
   stunDuration: "stunTime", drain: "lifesteal" });
 
 function derive(build, rules) {
+  if (build.native) {
+    if (["bean", "spore", "pebble", "spring"].includes(build.key)) {
+      const stats = dnaUnitStats(build.dna || startingWorkerDna(build.key));
+      return { ...stats, canAttack: stats.dna.melee || stats.dna.ranged };
+    }
+    const role = creatureAttackRole(build.key);
+    const stats = { ...unitCombatStats(build.key), speed: CREATURE_MOVEMENT[build.key].speed, resistance: 1 };
+    const profile = combatProfile({ species: build.key, stats, attributes: {} });
+    return { ...stats, ...profile, melee: !!role?.melee, ranged: !!role?.ranged, canAttack: !!role };
+  }
   const counts = Object.fromEntries(Object.entries(build.counts).map(([key, value]) => [geneKeys[key] || key, value]));
   Object.assign(counts, { blade: build.organs.attack, secretion: build.organs.ranged, healer: build.organs.heal });
   const dna = { ...dnaCombatStats(counts, counts, rules), movement: .25, vision: 1, roaming: true, healing: build.healing };
@@ -4107,7 +4236,7 @@ function derive(build, rules) {
     attackSpeed: dna.meleeSpeed, meleeSpeed: dna.meleeSpeed, rangedSpeed: dna.rangedSpeed,
     attackInterval: interval(dna.meleeSpeed), rangedAttackInterval: interval(dna.rangedSpeed),
     targetAttackSpeed: dna.meleeSpeed, targetRangedSpeed: dna.rangedSpeed, windup: dna.focus, hitGap: dna.comboSpeed,
-    hitCount: dna.hits, recovery: Math.max(dna.recovery || 0, interval(dna.speed) - dna.focus - Math.max(0, dna.hits - 1) * dna.comboSpeed),
+    hitCount: dna.hits, recovery: dna.recovery || 0,
     followupMultiplier: dna.comboPower / 100, critChance: dna.critical / 100, critMultiplier: dna.criticalPower / 100,
     armorPenetration: dna.armorPenetration || 0, flatPenetration: dna.penetration, accuracy: dna.accuracy / 100,
     evasion: dna.evasion / 100, parry: dna.parry / 100, block: dna.block / 100, blockReduction: dna.blockPower / 100,
@@ -4157,10 +4286,12 @@ function createSimulationTrial(settings) {
     const ownerId = side === 0 ? "left" : "right", stats = derive(build, rules);
     const player = ["bean", "spore", "pebble", "spring"].includes(build.key);
     return { id: slot ? ownerId + "-" + (slot + 1) : ownerId, ownerId, side, slot,
-      key: build.key, name: build.name, labAppearance: true, tribe: player ? build.key : "bean", species: undefined,
+      key: build.key, name: build.name, labAppearance: !build.native, tribe: player ? build.key : undefined,
+      species: !player && build.native ? build.key : undefined,
+      dna: player && build.native ? build.dna || startingWorkerDna(build.key) : undefined,
       x: 100 + (distance > 1 ? side * distance : 0), y: 100, renderFromX: 100, renderFromY: 100,
       moveStartedAt: 0, moveDuration: 0, health: stats.health, stats, attributes: {},
-      appearanceAttributes: player ? { ...(stats.melee ? { blade: 1 } : {}), ...(stats.ranged ? { secretion: 1 } : {}) } : undefined,
+      appearanceAttributes: player && build.native ? dnaAppearance(build.dna || startingWorkerDna(build.key)) : player ? { ...(stats.melee ? { blade: 1 } : {}), ...(stats.ranged ? { secretion: 1 } : {}) } : undefined,
       combatDisposition: "aggressive", mode: "fight", facing: side === 0 ? 1 : -1, animationStartedAt: 0,
       hurtStartedAt: -Infinity, dnaHealReady: 2, dnaReactionReadyAt: rules.defensePreparation,
       attackReady: first !== "simultaneous" && first !== ownerId ? rules.initiativeDelay : 0,
@@ -4180,7 +4311,7 @@ function createSimulationTrial(settings) {
       const source = participants.find(agent => agent.id === event.sourceId);
       history.push({ index: history.length, time: event.at, kind: event.kind, attackerId: event.sourceId,
         targetId: event.targetId, damage: event.amount, critical: !!event.critical, counter: !!event.counter,
-        hitIndex: event.hitIndex, hitCount: source?.stats.dna.hits, stunDuration: event.duration,
+        hitIndex: event.hitIndex, hitCount: source?.stats.dna?.hits || 1, stunDuration: event.duration,
         leftHealth: teamHealth("left"), rightHealth: teamHealth("right") });
     } };
   for (const side of ["left", "right"]) environment.games.set(side, {
@@ -4208,7 +4339,7 @@ function createSimulationTrial(settings) {
       if (agent.combat || agent.attack || !agent.stats.canAttack || environment.simSeconds < (agent.dnaStunnedUntil || 0)) return [];
       const target = living.filter(other => other.ownerId !== agent.ownerId).sort((a, b) => Math.abs(a.x - agent.x) - Math.abs(b.x - agent.x) || a.id.localeCompare(b.id))[0];
       if (!target || agent.stats.ranged && (!agent.stats.melee || Math.abs(agent.x - target.x) > 1) && Math.abs(agent.x - target.x) <= 3) return [];
-      return [{ agent, target, travel: Math.min(Math.abs(target.x - agent.x), agent.stats.dna.movement * seconds) }];
+      return [{ agent, target, travel: Math.min(Math.abs(target.x - agent.x), (agent.stats.dna?.movement || agent.stats.speed) * seconds) }];
     });
     const positions = new Map();
     for (const move of moves) {
@@ -4344,12 +4475,61 @@ function unitDisplaySize(unit) {
   return (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean)*scale;
 }
 
-return { UNIT_DISPLAY_SIZES, unitDisplaySize };
+function combatViewCell(width, height, units) {
+  const largest = units.reduce((size, unit) => Math.max(size, unitDisplaySize(unit)), 0) || UNIT_DISPLAY_SIZES.bean;
+  return Math.min(width * .24, height * .5) / largest;
+}
+
+function combatViewLayout(width, height, units) {
+  const teams = [0, 1].map(side => units.filter(unit => (unit.combat?.side ?? unit.side) === side));
+  const count = Math.max(...teams.map(team => team.length));
+  const positions = new Map();
+  if (!count) return { cell: combatViewCell(width, height, units), positions };
+  const columnCount = Math.min(count, Math.ceil(Math.sqrt(count * 1.5))), rowCount = Math.ceil(count / columnCount);
+  const columns = Array(columnCount).fill(0), rows = Array(rowCount).fill(0);
+  teams.forEach(team => team.forEach((unit, index) => {
+    const size = unitDisplaySize(unit);
+    columns[index % columnCount] = Math.max(columns[index % columnCount], size * 1.3);
+    rows[Math.floor(index / columnCount)] = Math.max(rows[Math.floor(index / columnCount)], size);
+  }));
+  const gapX = Math.min(width * .035, width * .42 / (columnCount * 4));
+  const gapY = Math.min(height * .035, height * .36 / (rowCount * 4));
+  const totalWidth = columns.reduce((sum, value) => sum + value, 0);
+  const rowSpans = rows.slice(1).map((size, index) => rows[index] * .18 + size * 1.2);
+  const groundSpan = rowSpans.reduce((sum, value) => sum + value, 0);
+  const cell = Math.min(combatViewCell(width, height, units),
+    (width * .42 - gapX * (columnCount - 1)) / totalWidth,
+    height * .44 / (rows[0] * 1.2), height * .08 / (rows[rowCount - 1] * .18),
+    rowCount > 1 ? (height * .36 - gapY * (rowCount - 1)) / groundSpan : Infinity);
+  const gridWidth = totalWidth * cell + gapX * (columnCount - 1);
+  const gridHeight = groundSpan * cell + gapY * (rowCount - 1);
+  const firstFoot = height * .5 + (height * .36 - gridHeight) / 2;
+  teams.forEach((team, side) => team.forEach((unit, index) => {
+    const column = index % columnCount, row = Math.floor(index / columnCount), size = unitDisplaySize(unit);
+    const offsetX = columns.slice(0, column).reduce((sum, value) => sum + value, 0) * cell + gapX * column;
+    const offsetY = rowSpans.slice(0, row).reduce((sum, value) => sum + value, 0) * cell + gapY * row;
+    const x = width * (side ? .75 : .25) + (side ? -1 : 1) * (gridWidth / 2 - offsetX - columns[column] * cell / 2);
+    const y = firstFoot + offsetY;
+    positions.set(String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
+      top: y - size * cell * 1.2, bottom: y + size * cell * .18 } });
+  }));
+  return { cell, positions };
+}
+
+function unitFacing(unit) {
+  return (unit.attack?.directionX || unit.facing || 1) < 0 ? -1 : 1;
+}
+
+function unitFrameMirror(sourceFacing, facing) {
+  return (facing < 0) !== (sourceFacing === "left");
+}
+
+return { UNIT_DISPLAY_SIZES, unitDisplaySize, combatViewCell, combatViewLayout, unitFacing, unitFrameMirror };
 })();
 modules["client/creature-ranged.mjs"] = (() => {
 const { imageAnimation } = modules["client/image-geometry.mjs"];
 const { UNIT_IMAGE_BOUNDS } = modules["client/unit-image-bounds.mjs"];
-const { unitDisplaySize } = modules["client/unit-size.mjs"];
+const { unitDisplaySize, unitFrameMirror, unitFacing } = modules["client/unit-size.mjs"];
 
 // Approved 2026-11-06. Native cels are unchanged; registration is the exact
 // inverse of the approved melee seed's lossless resize-and-padding transform.
@@ -4505,12 +4685,13 @@ function creatureRangedPose(agent, time) {
   let frame = 0;
   while (frame < animation.frameCount-1 && elapsed >= animation.durationsMs[frame]) elapsed -= animation.durationsMs[frame++];
   return { action: "ranged", animation, frame, shotIndex, launchAt: launch,
-    mirrorX: (attack.directionX || agent.facing || -1) > 0 };
+    mirrorX: unitFrameMirror(animation.sourceFacing || animation.facing || "left", attack.directionX || agent.facing || 1) };
 }
 
 // Offsets are in world cells relative to the same idle-normalized body pivot
 // used by the world, detail and laboratory renderers. The journal owns timing.
-function creatureRangedOutlet(agent, facing = agent.attack?.directionX || agent.facing || -1) {
+function creatureRangedOutlet(agent, facing) {
+  facing ||= unitFacing(agent);
   const animation = CREATURE_RANGED_ANIMATIONS[agent.species];
   if (!animation) return null;
   const idle = imageAnimation({ image: animation.idleImage, frameSize: 512, viewSize: 512 });
@@ -4518,7 +4699,7 @@ function creatureRangedOutlet(agent, facing = agent.attack?.directionX || agent.
   const length = Math.max(bounds.width, bounds.height) * idle.frameSize / bounds.frameSize;
   const scale = unitDisplaySize(agent) * idle.viewSize /
     ((idle.registrationScale || 1) * length * animation.viewSize);
-  return { x: -Math.sign(facing || -1) * (animation.outletX-animation.pivotX) * scale,
+  return { x: (unitFrameMirror(animation.sourceFacing || animation.facing || "left", facing) ? -1 : 1) * (animation.outletX-animation.pivotX) * scale,
     y: (animation.outletY-animation.pivotY) * scale };
 }
 
@@ -4679,13 +4860,13 @@ function unitDisplayAbilityMask(mask) {
 return { UNIT_DISPLAY_PRIORITY, UNIT_DISPLAY_MASKS, UNIT_DISPLAY_FORM_COUNT, unitDominantAppearanceMask, unitDisplayAttributesFrom, unitDisplayAttributes, unitDisplayAbilityMask };
 })();
 modules["client/bean-held-hurt-assets.mjs"] = (() => {
-const BEAN_HELD_HURT_SOURCES = Object.freeze({"base":{"image":"DesignAssets/Animations/BeanHeldHurtV1/base.webp","frameWidth":268,"frameHeight":216,"columns":4,"pivotX":134,"pivotY":210,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":206,"bodyWidth":162,"worldScale":"source","sourceHash":"9c8893d8792c6d4e987ec0479463ebbd9085f89d38bb1c7db2580c3f4d230f73","sourceImage":"DesignAssets/Animations/UnitAppearanceV1/bean/00/Source/neutral.png"},"secretion":{"image":"DesignAssets/Animations/BeanHeldHurtV1/secretion.webp","frameWidth":256,"frameHeight":216,"columns":4,"pivotX":125,"pivotY":211,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":206,"bodyWidth":146,"worldScale":"source","sourceHash":"65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811","sourceImage":"DesignAssets/Animations/UnitAppearanceV1/bean/10/Source/neutral.png"},"blade":{"image":"DesignAssets/Animations/BeanHeldHurtV1/blade.webp","frameWidth":380,"frameHeight":264,"columns":4,"pivotX":193,"pivotY":251,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":336,"bodyWidth":187.072,"worldScale":"evolution","sourceHash":"ecf9e603dcdd560c80235983a1aa3e8b0199a47cfdcdbc7b49dbff661d18385f","sourceImage":"tools/bean-hurt-amplify-20261105/current-sources/01-neutral.png"},"carapace":{"image":"DesignAssets/Animations/BeanHeldHurtV1/carapace.webp","frameWidth":360,"frameHeight":272,"columns":4,"pivotX":175,"pivotY":256,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":292,"bodyWidth":182.648,"worldScale":"evolution","sourceHash":"a77b36135ea7e132f640882f1c58f486afc62e9e70c2436577d289de60b7fc76","sourceImage":"tools/bean-hurt-amplify-20261105/current-sources/02-neutral.png"},"antenna":{"image":"DesignAssets/Animations/BeanHeldHurtV1/antenna.webp","frameWidth":340,"frameHeight":344,"columns":4,"pivotX":170,"pivotY":365.28,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":333,"bodyWidth":237.69230769230768,"worldScale":"composed","sourceHash":"3b99b78cef52d1ccd80ebf55b971c7440b4e16d2c6de9fa21a7ed0b791a0b1b3","sourceImage":"tools/bean-hurt-amplify-20261105/current-sources/04-neutral.png"},"feet":{"image":"DesignAssets/Animations/BeanHeldHurtV1/feet.webp","frameWidth":340,"frameHeight":356,"columns":4,"pivotX":170,"pivotY":349.28,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":339,"bodyWidth":237.69230769230768,"worldScale":"composed","sourceHash":"dd5004eae2fb914810739a1a1e8ed622a1aadcd13dedece9558e599372094825","sourceImage":"tools/bean-hurt-amplify-20261105/current-sources/08-neutral.png"}});
+const BEAN_HELD_HURT_SOURCES = Object.freeze({"base":{"image":"DesignAssets/Animations/BeanHeldHurtV1/base.webp","frameWidth":268,"frameHeight":216,"columns":4,"pivotX":134,"pivotY":210,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":206,"bodyWidth":162,"worldScale":"source","sourceHash":"9c8893d8792c6d4e987ec0479463ebbd9085f89d38bb1c7db2580c3f4d230f73","sourceImage":"DesignAssets/Animations/UnitAppearanceV1/bean/00/Source/neutral.png","sourceFacing":"right"},"secretion":{"image":"DesignAssets/Animations/BeanHeldHurtV1/secretion.webp","frameWidth":256,"frameHeight":216,"columns":4,"pivotX":125,"pivotY":211,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":206,"bodyWidth":146,"worldScale":"source","sourceHash":"65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811","sourceImage":"DesignAssets/Animations/UnitAppearanceV1/bean/10/Source/neutral.png","sourceFacing":"right"},"blade":{"image":"DesignAssets/Animations/BeanHeldHurtV1/blade.webp","frameWidth":380,"frameHeight":264,"columns":4,"pivotX":193,"pivotY":251,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":336,"bodyWidth":187.072,"worldScale":"evolution","sourceHash":"ecf9e603dcdd560c80235983a1aa3e8b0199a47cfdcdbc7b49dbff661d18385f","sourceImage":"tools/bean-hurt-amplify-20261105/current-sources/01-neutral.png","sourceFacing":"left"},"carapace":{"image":"DesignAssets/Animations/BeanHeldHurtV1/carapace.webp","frameWidth":360,"frameHeight":272,"columns":4,"pivotX":175,"pivotY":256,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":292,"bodyWidth":182.648,"worldScale":"evolution","sourceHash":"a77b36135ea7e132f640882f1c58f486afc62e9e70c2436577d289de60b7fc76","sourceImage":"tools/bean-hurt-amplify-20261105/current-sources/02-neutral.png","sourceFacing":"left"},"antenna":{"image":"DesignAssets/Animations/BeanHeldHurtV1/antenna.webp","frameWidth":340,"frameHeight":344,"columns":4,"pivotX":170,"pivotY":365.28,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":333,"bodyWidth":237.69230769230768,"worldScale":"composed","sourceHash":"3b99b78cef52d1ccd80ebf55b971c7440b4e16d2c6de9fa21a7ed0b791a0b1b3","sourceImage":"tools/bean-hurt-amplify-20261105/current-sources/04-neutral.png","sourceFacing":"right"},"feet":{"image":"DesignAssets/Animations/BeanHeldHurtV1/feet.webp","frameWidth":340,"frameHeight":356,"columns":4,"pivotX":170,"pivotY":349.28,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84],"referenceLength":339,"bodyWidth":237.69230769230768,"worldScale":"composed","sourceHash":"dd5004eae2fb914810739a1a1e8ed622a1aadcd13dedece9558e599372094825","sourceImage":"tools/bean-hurt-amplify-20261105/current-sources/08-neutral.png","sourceFacing":"right"}});
 
 return { BEAN_HELD_HURT_SOURCES };
 })();
 modules["client/bean-held-hurt.mjs"] = (() => {
 const { unitDisplayAttributes } = modules["client/unit-display-appearance.mjs"];
-const { unitDisplaySize } = modules["client/unit-size.mjs"];
+const { unitDisplaySize, unitFrameMirror } = modules["client/unit-size.mjs"];
 const { UNIT_APPEARANCE_LEGACY_VISUAL_KEYS } = modules["server/unit-appearance.mjs"];
 const { BEAN_HELD_HURT_SOURCES } = modules["client/bean-held-hurt-assets.mjs"];
 
@@ -4765,8 +4946,8 @@ function drawBeanHeldHurt(context,agent,time,imageFor,options={}) {
   const image=imageFor(source.image); // Preload on the normal living draw path.
   const pose=beanHeldHurtPose(agent,time);
   if (!pose || !image || image.complete===false || !(image.naturalWidth || image.width) || !(image.naturalHeight || image.height)) return false;
-  const mirror=!!options.mirror;
-  const screenSide=Number.isFinite(options.hitSide) && options.hitSide!==0 ? Math.sign(options.hitSide) : (mirror?-1:1);
+  const mirror=unitFrameMirror(source.sourceFacing, options.mirror ? -1 : 1);
+  const screenSide=Number.isFinite(options.hitSide) && options.hitSide!==0 ? Math.sign(options.hitSide) : (options.mirror?-1:1);
   const sourceSide=screenSide*(mirror?-1:1);
   const index=pose.frame+(sourceSide>0?source.times.length:0);
   const crop={x:index%source.columns*source.frameWidth,y:Math.floor(index/source.columns)*source.frameHeight,width:source.frameWidth,height:source.frameHeight};
@@ -4791,13 +4972,13 @@ function drawBeanHeldHurt(context,agent,time,imageFor,options={}) {
 return { BEAN_HURT_HOLD_SECONDS, BEAN_HURT_TOTAL_SECONDS, BEAN_HELD_HURT_ASSETS, heldHurtProjectileSide, beanHeldHurtAmount, beanHeldHurtSource, beanHeldHurtPose, drawBeanHeldHurt };
 })();
 modules["client/species-held-hurt-assets.mjs"] = (() => {
-const SPECIES_HELD_HURT_SOURCES = Object.freeze({"spore":{"base":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spore-base.webp","frameWidth":448,"frameHeight":324,"columns":4,"pivotX":224.5,"pivotY":314.375,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":423,"worldScale":"animation","nativeFrameSize":549,"sourcePadding":64,"sourceAnimation":"DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp","sourceHash":"fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7","sourceFrame":0,"material":"cap-flex"},"secretion":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spore-secretion.webp","frameWidth":212,"frameHeight":152,"columns":4,"pivotX":105,"pivotY":144,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":195,"worldScale":"source","nativeFrameSize":512,"sourcePadding":64,"sourceAnimation":"DesignAssets/Animations/UnitRangedV1/spore/Source/neutral.png","sourceHash":"f4e2667b695119e422b0235edfdeb739801b358b5e55a24180fbc17ea5502f8d","sourceFrame":0,"material":"cap-flex"},"blade":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spore-blade.webp","frameWidth":400,"frameHeight":252,"columns":4,"pivotX":198,"pivotY":239,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":368,"worldScale":"evolution","nativeFrameSize":512,"sourcePadding":64,"sourceImage":"tools/weapons-held-hurt-20261105/spore-blade-source.png","sourceHash":"cf522a9438ecddb1d56f0dadde68c8e459c7ea00cf8b2ba1aa038adaa67e40f1","sourceRig":"DesignAssets/Animations/CombatAttributesV7/spore/blade/rig.json","rigHash":"9dc0279c07cbd70009392f760e588ff87f4c2dea64cfc1af213cfb1f17e54571","sourceFrame":0,"material":"cap-flex"},"carapace":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spore-carapace.webp","frameWidth":376,"frameHeight":260,"columns":4,"pivotX":215,"pivotY":253,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":355,"worldScale":"evolution","nativeFrameSize":512,"sourcePadding":64,"sourceImage":"tools/weapons-held-hurt-20261105/spore-carapace-source.png","sourceHash":"e0d2fbd28d3ed4fa302fdfac0b25ff4b56519ac976f1d930d1afbbba94c7c865","sourceRig":"DesignAssets/Animations/CombatAttributesV7/spore/carapace/rig.json","rigHash":"b15e82726a609a6ec275cb7c1656ec92cff60ca87cb956016d55d2c83549d6e2","sourceFrame":0,"material":"cap-flex"},"antenna":{"image":"DesignAssets/Animations/MinorHeldHurtV1/spore-antenna.webp","frameWidth":536,"frameHeight":316,"columns":4,"pivotX":263.5,"pivotY":302.375,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":423,"worldScale":"animation","nativeFrameSize":549,"sourcePadding":275,"sourceAnimation":"DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp","sourceAnimationHash":"fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7","sourceImage":"tools/minor-held-hurt-20261105/spore-antenna-source.png","sourceHash":"4f2a64d375789107871973841f802df5370b75317223ec1e6132d764aa6d4c8b","sourceFrame":0,"material":"cap-flex"},"feet":{"image":"DesignAssets/Animations/MinorHeldHurtV1/spore-feet.webp","frameWidth":448,"frameHeight":320,"columns":4,"pivotX":223.5,"pivotY":310.375,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":423,"worldScale":"animation","nativeFrameSize":549,"sourcePadding":275,"sourceAnimation":"DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp","sourceAnimationHash":"fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7","sourceImage":"tools/minor-held-hurt-20261105/spore-feet-source.png","sourceHash":"b9c412f3c639f0e56f5929087d5d40aaa7b64bb7cb86ed253b4c38ea74a04923","sourceFrame":0,"material":"cap-flex"}},"pebble":{"base":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/pebble-base.webp","frameWidth":532,"frameHeight":332,"columns":4,"pivotX":271,"pivotY":326,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":406,"worldScale":"animation","nativeFrameSize":512,"sourcePadding":64,"sourceAnimation":"DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp","sourceHash":"f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37","sourceFrame":0,"material":"rigid-rock"},"secretion":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/pebble-secretion.webp","frameWidth":288,"frameHeight":192,"columns":4,"pivotX":141,"pivotY":186,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":217,"worldScale":"source","nativeFrameSize":512,"sourcePadding":64,"sourceAnimation":"DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png","sourceHash":"d688e4e363ac109847d9832551f0e0abb6f5ff810e5cd6c0bc16ddbe7b5960d8","sourceFrame":0,"material":"rigid-rock"},"blade":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/pebble-blade.webp","frameWidth":432,"frameHeight":292,"columns":4,"pivotX":253,"pivotY":285,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":334,"worldScale":"evolution","nativeFrameSize":512,"sourcePadding":64,"sourceImage":"tools/weapons-held-hurt-20261105/pebble-blade-source.png","sourceHash":"06dc272e53c9da49c6c363c0dd093f83f6b7d44b6659e438ec871dcc2b7dcc93","sourceRig":"DesignAssets/Animations/CombatAttributesV7/pebble/blade/rig.json","rigHash":"1b996b8b8f4537013c8aa5748512317a646e38a4e93cb912d94fede9bf43e70d","sourceFrame":0,"material":"rigid-rock"},"carapace":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/pebble-carapace.webp","frameWidth":468,"frameHeight":316,"columns":4,"pivotX":254,"pivotY":310,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":364,"worldScale":"evolution","nativeFrameSize":512,"sourcePadding":64,"sourceImage":"tools/weapons-held-hurt-20261105/pebble-carapace-source.png","sourceHash":"95c1b93e7203a2c4f55b57058b3b93f0c0af4896663a9d57dbdb2aa5a56be3be","sourceRig":"DesignAssets/Animations/CombatAttributesV7/pebble/carapace/rig.json","rigHash":"9129e6026316e5fcfdb372122394405dfaf4eee5f7fac1f2073a7cf754f6449e","sourceFrame":0,"material":"rigid-rock"},"antenna":{"image":"DesignAssets/Animations/MinorHeldHurtV1/pebble-antenna.webp","frameWidth":564,"frameHeight":344,"columns":4,"pivotX":283,"pivotY":336,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":406,"worldScale":"animation","nativeFrameSize":512,"sourcePadding":256,"sourceAnimation":"DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp","sourceAnimationHash":"f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37","sourceImage":"tools/minor-held-hurt-20261105/pebble-antenna-source.png","sourceHash":"0a0e375f969a3b5b5146366267b182c8b72b751236f3ec9c2ef69943c63cd123","sourceFrame":0,"material":"rigid-rock"},"feet":{"image":"DesignAssets/Animations/MinorHeldHurtV1/pebble-feet.webp","frameWidth":528,"frameHeight":332,"columns":4,"pivotX":270,"pivotY":324,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":406,"worldScale":"animation","nativeFrameSize":512,"sourcePadding":256,"sourceAnimation":"DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp","sourceAnimationHash":"f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37","sourceImage":"tools/minor-held-hurt-20261105/pebble-feet-source.png","sourceHash":"9a2852ba89a917ff15b917ee1c925b5b202b979988a3f42d111b9c9eb73bd659","sourceFrame":0,"material":"rigid-rock"}},"spring":{"base":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spring-base.webp","frameWidth":304,"frameHeight":308,"columns":4,"pivotX":144,"pivotY":303,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":288,"worldScale":"animation","nativeFrameSize":512,"sourcePadding":64,"sourceAnimation":"DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp","sourceHash":"42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86","sourceFrame":0,"material":"elastic-compression"},"secretion":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spring-secretion.webp","frameWidth":208,"frameHeight":220,"columns":4,"pivotX":99,"pivotY":214,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":201,"worldScale":"source","nativeFrameSize":512,"sourcePadding":64,"sourceAnimation":"DesignAssets/Animations/UnitRangedV1/spring/Source/neutral.png","sourceHash":"05b62016490fd6792fd5255eefbc7fd907b4880c9103c7e94f1d3f8e7b53077d","sourceFrame":0,"material":"elastic-compression"},"blade":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spring-blade.webp","frameWidth":472,"frameHeight":324,"columns":4,"pivotX":221,"pivotY":315,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":334,"worldScale":"evolution","nativeFrameSize":512,"sourcePadding":64,"sourceImage":"tools/weapons-held-hurt-20261105/spring-blade-source.png","sourceHash":"a6b622523f65c7e41f27c9abf7244324f2688de783a315c1b8bbffff105b49d2","sourceRig":"DesignAssets/Animations/CombatAttributesV7/spring/blade/rig.json","rigHash":"83f92db59ffd2412f7434296b3fdb573e7e537b8a4660cc52f55e8dd56600957","sourceFrame":0,"material":"elastic-compression"},"carapace":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spring-carapace.webp","frameWidth":428,"frameHeight":320,"columns":4,"pivotX":248,"pivotY":309,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":315,"worldScale":"evolution","nativeFrameSize":512,"sourcePadding":64,"sourceImage":"tools/weapons-held-hurt-20261105/spring-carapace-source.png","sourceHash":"8e7c6fb2405156b045b10251443b36704b268d2fba83a61e0be28db67baa84e9","sourceRig":"DesignAssets/Animations/CombatAttributesV7/spring/carapace/rig.json","rigHash":"5979efd8e8077456acad4abf3598617097276724ad0f9588a5faa4914a2dab73","sourceFrame":0,"material":"elastic-compression"},"antenna":{"image":"DesignAssets/Animations/MinorHeldHurtV1/spring-antenna.webp","frameWidth":352,"frameHeight":308,"columns":4,"pivotX":159,"pivotY":305,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":288,"worldScale":"animation","nativeFrameSize":512,"sourcePadding":256,"sourceAnimation":"DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp","sourceAnimationHash":"42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86","sourceImage":"tools/minor-held-hurt-20261105/spring-antenna-source.png","sourceHash":"8ce3f30e32f3ec0d86c56026c2cba29ea5ea0eb35779c470853f166432064ac9","sourceFrame":0,"material":"elastic-compression"},"feet":{"image":"DesignAssets/Animations/MinorHeldHurtV1/spring-feet.webp","frameWidth":312,"frameHeight":312,"columns":4,"pivotX":146,"pivotY":308,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":288,"worldScale":"animation","nativeFrameSize":512,"sourcePadding":256,"sourceAnimation":"DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp","sourceAnimationHash":"42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86","sourceImage":"tools/minor-held-hurt-20261105/spring-feet-source.png","sourceHash":"a70a120de990cb10a161e224227e800457749755e91314b4a7f23ed76a6b11ea","sourceFrame":0,"material":"elastic-compression"}}});
+const SPECIES_HELD_HURT_SOURCES = Object.freeze({"spore":{"base":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spore-base.webp","frameWidth":448,"frameHeight":324,"columns":4,"pivotX":224.5,"pivotY":314.375,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":423,"worldScale":"animation","nativeFrameSize":549,"sourcePadding":64,"sourceAnimation":"DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp","sourceHash":"fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7","sourceFrame":0,"material":"cap-flex","sourceFacing":"right"},"secretion":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spore-secretion.webp","frameWidth":212,"frameHeight":152,"columns":4,"pivotX":105,"pivotY":144,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":195,"worldScale":"source","nativeFrameSize":512,"sourcePadding":64,"sourceAnimation":"DesignAssets/Animations/UnitRangedV1/spore/Source/neutral.png","sourceHash":"f4e2667b695119e422b0235edfdeb739801b358b5e55a24180fbc17ea5502f8d","sourceFrame":0,"material":"cap-flex","sourceFacing":"right"},"blade":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spore-blade.webp","frameWidth":400,"frameHeight":252,"columns":4,"pivotX":198,"pivotY":239,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":368,"worldScale":"evolution","nativeFrameSize":512,"sourcePadding":64,"sourceImage":"tools/weapons-held-hurt-20261105/spore-blade-source.png","sourceHash":"cf522a9438ecddb1d56f0dadde68c8e459c7ea00cf8b2ba1aa038adaa67e40f1","sourceRig":"DesignAssets/Animations/CombatAttributesV7/spore/blade/rig.json","rigHash":"9dc0279c07cbd70009392f760e588ff87f4c2dea64cfc1af213cfb1f17e54571","sourceFrame":0,"material":"cap-flex","sourceFacing":"left"},"carapace":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spore-carapace.webp","frameWidth":376,"frameHeight":260,"columns":4,"pivotX":215,"pivotY":253,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":355,"worldScale":"evolution","nativeFrameSize":512,"sourcePadding":64,"sourceImage":"tools/weapons-held-hurt-20261105/spore-carapace-source.png","sourceHash":"e0d2fbd28d3ed4fa302fdfac0b25ff4b56519ac976f1d930d1afbbba94c7c865","sourceRig":"DesignAssets/Animations/CombatAttributesV7/spore/carapace/rig.json","rigHash":"b15e82726a609a6ec275cb7c1656ec92cff60ca87cb956016d55d2c83549d6e2","sourceFrame":0,"material":"cap-flex","sourceFacing":"left"},"antenna":{"image":"DesignAssets/Animations/MinorHeldHurtV1/spore-antenna.webp","frameWidth":536,"frameHeight":316,"columns":4,"pivotX":263.5,"pivotY":302.375,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":423,"worldScale":"animation","nativeFrameSize":549,"sourcePadding":275,"sourceAnimation":"DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp","sourceAnimationHash":"fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7","sourceImage":"tools/minor-held-hurt-20261105/spore-antenna-source.png","sourceHash":"4f2a64d375789107871973841f802df5370b75317223ec1e6132d764aa6d4c8b","sourceFrame":0,"material":"cap-flex","sourceFacing":"right"},"feet":{"image":"DesignAssets/Animations/MinorHeldHurtV1/spore-feet.webp","frameWidth":448,"frameHeight":320,"columns":4,"pivotX":223.5,"pivotY":310.375,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":423,"worldScale":"animation","nativeFrameSize":549,"sourcePadding":275,"sourceAnimation":"DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp","sourceAnimationHash":"fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7","sourceImage":"tools/minor-held-hurt-20261105/spore-feet-source.png","sourceHash":"b9c412f3c639f0e56f5929087d5d40aaa7b64bb7cb86ed253b4c38ea74a04923","sourceFrame":0,"material":"cap-flex","sourceFacing":"right"}},"pebble":{"base":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/pebble-base.webp","frameWidth":532,"frameHeight":332,"columns":4,"pivotX":271,"pivotY":326,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":406,"worldScale":"animation","nativeFrameSize":512,"sourcePadding":64,"sourceAnimation":"DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp","sourceHash":"f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37","sourceFrame":0,"material":"rigid-rock","sourceFacing":"right"},"secretion":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/pebble-secretion.webp","frameWidth":288,"frameHeight":192,"columns":4,"pivotX":141,"pivotY":186,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":217,"worldScale":"source","nativeFrameSize":512,"sourcePadding":64,"sourceAnimation":"DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png","sourceHash":"d688e4e363ac109847d9832551f0e0abb6f5ff810e5cd6c0bc16ddbe7b5960d8","sourceFrame":0,"material":"rigid-rock","sourceFacing":"right"},"blade":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/pebble-blade.webp","frameWidth":432,"frameHeight":292,"columns":4,"pivotX":253,"pivotY":285,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":334,"worldScale":"evolution","nativeFrameSize":512,"sourcePadding":64,"sourceImage":"tools/weapons-held-hurt-20261105/pebble-blade-source.png","sourceHash":"06dc272e53c9da49c6c363c0dd093f83f6b7d44b6659e438ec871dcc2b7dcc93","sourceRig":"DesignAssets/Animations/CombatAttributesV7/pebble/blade/rig.json","rigHash":"1b996b8b8f4537013c8aa5748512317a646e38a4e93cb912d94fede9bf43e70d","sourceFrame":0,"material":"rigid-rock","sourceFacing":"left"},"carapace":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/pebble-carapace.webp","frameWidth":468,"frameHeight":316,"columns":4,"pivotX":254,"pivotY":310,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":364,"worldScale":"evolution","nativeFrameSize":512,"sourcePadding":64,"sourceImage":"tools/weapons-held-hurt-20261105/pebble-carapace-source.png","sourceHash":"95c1b93e7203a2c4f55b57058b3b93f0c0af4896663a9d57dbdb2aa5a56be3be","sourceRig":"DesignAssets/Animations/CombatAttributesV7/pebble/carapace/rig.json","rigHash":"9129e6026316e5fcfdb372122394405dfaf4eee5f7fac1f2073a7cf754f6449e","sourceFrame":0,"material":"rigid-rock","sourceFacing":"left"},"antenna":{"image":"DesignAssets/Animations/MinorHeldHurtV1/pebble-antenna.webp","frameWidth":564,"frameHeight":344,"columns":4,"pivotX":283,"pivotY":336,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":406,"worldScale":"animation","nativeFrameSize":512,"sourcePadding":256,"sourceAnimation":"DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp","sourceAnimationHash":"f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37","sourceImage":"tools/minor-held-hurt-20261105/pebble-antenna-source.png","sourceHash":"0a0e375f969a3b5b5146366267b182c8b72b751236f3ec9c2ef69943c63cd123","sourceFrame":0,"material":"rigid-rock","sourceFacing":"right"},"feet":{"image":"DesignAssets/Animations/MinorHeldHurtV1/pebble-feet.webp","frameWidth":528,"frameHeight":332,"columns":4,"pivotX":270,"pivotY":324,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":406,"worldScale":"animation","nativeFrameSize":512,"sourcePadding":256,"sourceAnimation":"DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp","sourceAnimationHash":"f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37","sourceImage":"tools/minor-held-hurt-20261105/pebble-feet-source.png","sourceHash":"9a2852ba89a917ff15b917ee1c925b5b202b979988a3f42d111b9c9eb73bd659","sourceFrame":0,"material":"rigid-rock","sourceFacing":"right"}},"spring":{"base":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spring-base.webp","frameWidth":304,"frameHeight":308,"columns":4,"pivotX":144,"pivotY":303,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":288,"worldScale":"animation","nativeFrameSize":512,"sourcePadding":64,"sourceAnimation":"DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp","sourceHash":"42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86","sourceFrame":0,"material":"elastic-compression","sourceFacing":"right"},"secretion":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spring-secretion.webp","frameWidth":208,"frameHeight":220,"columns":4,"pivotX":99,"pivotY":214,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":201,"worldScale":"source","nativeFrameSize":512,"sourcePadding":64,"sourceAnimation":"DesignAssets/Animations/UnitRangedV1/spring/Source/neutral.png","sourceHash":"05b62016490fd6792fd5255eefbc7fd907b4880c9103c7e94f1d3f8e7b53077d","sourceFrame":0,"material":"elastic-compression","sourceFacing":"right"},"blade":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spring-blade.webp","frameWidth":472,"frameHeight":324,"columns":4,"pivotX":221,"pivotY":315,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":334,"worldScale":"evolution","nativeFrameSize":512,"sourcePadding":64,"sourceImage":"tools/weapons-held-hurt-20261105/spring-blade-source.png","sourceHash":"a6b622523f65c7e41f27c9abf7244324f2688de783a315c1b8bbffff105b49d2","sourceRig":"DesignAssets/Animations/CombatAttributesV7/spring/blade/rig.json","rigHash":"83f92db59ffd2412f7434296b3fdb573e7e537b8a4660cc52f55e8dd56600957","sourceFrame":0,"material":"elastic-compression","sourceFacing":"left"},"carapace":{"image":"DesignAssets/Animations/SpeciesHeldHurtV1/spring-carapace.webp","frameWidth":428,"frameHeight":320,"columns":4,"pivotX":248,"pivotY":309,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":315,"worldScale":"evolution","nativeFrameSize":512,"sourcePadding":64,"sourceImage":"tools/weapons-held-hurt-20261105/spring-carapace-source.png","sourceHash":"8e7c6fb2405156b045b10251443b36704b268d2fba83a61e0be28db67baa84e9","sourceRig":"DesignAssets/Animations/CombatAttributesV7/spring/carapace/rig.json","rigHash":"5979efd8e8077456acad4abf3598617097276724ad0f9588a5faa4914a2dab73","sourceFrame":0,"material":"elastic-compression","sourceFacing":"left"},"antenna":{"image":"DesignAssets/Animations/MinorHeldHurtV1/spring-antenna.webp","frameWidth":352,"frameHeight":308,"columns":4,"pivotX":159,"pivotY":305,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":288,"worldScale":"animation","nativeFrameSize":512,"sourcePadding":256,"sourceAnimation":"DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp","sourceAnimationHash":"42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86","sourceImage":"tools/minor-held-hurt-20261105/spring-antenna-source.png","sourceHash":"8ce3f30e32f3ec0d86c56026c2cba29ea5ea0eb35779c470853f166432064ac9","sourceFrame":0,"material":"elastic-compression","sourceFacing":"right"},"feet":{"image":"DesignAssets/Animations/MinorHeldHurtV1/spring-feet.webp","frameWidth":312,"frameHeight":312,"columns":4,"pivotX":146,"pivotY":308,"times":[0,0.5,0.5333333333,0.5666666667,0.6,0.6333333333,0.66,0.69,0.72,0.76,0.8,0.84,0.86,0.875],"referenceLength":288,"worldScale":"animation","nativeFrameSize":512,"sourcePadding":256,"sourceAnimation":"DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp","sourceAnimationHash":"42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86","sourceImage":"tools/minor-held-hurt-20261105/spring-feet-source.png","sourceHash":"a70a120de990cb10a161e224227e800457749755e91314b4a7f23ed76a6b11ea","sourceFrame":0,"material":"elastic-compression","sourceFacing":"right"}}});
 
 return { SPECIES_HELD_HURT_SOURCES };
 })();
 modules["client/species-held-hurt.mjs"] = (() => {
 const { unitDisplayAttributes } = modules["client/unit-display-appearance.mjs"];
-const { unitDisplaySize } = modules["client/unit-size.mjs"];
+const { unitDisplaySize, unitFrameMirror } = modules["client/unit-size.mjs"];
 const { UNIT_APPEARANCE_LEGACY_VISUAL_KEYS } = modules["server/unit-appearance.mjs"];
 const { BEAN_HURT_HOLD_SECONDS, BEAN_HURT_TOTAL_SECONDS, beanHeldHurtAmount } = modules["client/bean-held-hurt.mjs"];
 const { SPECIES_HELD_HURT_SOURCES } = modules["client/species-held-hurt-assets.mjs"];
@@ -4833,8 +5014,8 @@ function drawSpeciesHeldHurt(context, agent, time, imageFor, options = {}) {
   const image = imageFor(source.image);
   const pose = speciesHeldHurtPose(agent, time);
   if (!pose || !image || image.complete === false || !(image.naturalWidth || image.width) || !(image.naturalHeight || image.height)) return false;
-  const mirror = !!options.mirror;
-  const screenSide = Number.isFinite(options.hitSide) && options.hitSide !== 0 ? Math.sign(options.hitSide) : (mirror ? -1 : 1);
+  const mirror = unitFrameMirror(source.sourceFacing, options.mirror ? -1 : 1);
+  const screenSide = Number.isFinite(options.hitSide) && options.hitSide !== 0 ? Math.sign(options.hitSide) : (options.mirror ? -1 : 1);
   const sourceSide = screenSide * (mirror ? -1 : 1);
   const index = pose.frame + (sourceSide > 0 ? source.times.length : 0);
   const crop = { x: index % source.columns * source.frameWidth, y: Math.floor(index / source.columns) * source.frameHeight,
@@ -5843,32 +6024,8 @@ function toadHopMotion(progress) {
 
 return { TOAD_HOP, toadHopMotion };
 })();
-modules["server/creature-movement-profiles.mjs"] = (() => {
-const CREATURE_MOVEMENT_PROFILES = Object.freeze(Object.fromEntries([
-  ["flower-tail-bird", 2, 3],
-  ["dew-rabbit", 2.6, 2.5],
-  ["soil-mole", .8, 5],
-  ["bundle-snail", .4, 6],
-  ["cotton-sheep", .8, 4],
-  ["rolling-acorn", 1.8, 6],
-  ["bubble-toad", .8, 20],
-  ["snare-vine", 1.4, 30],
-  ["spiny-back-beetle", 1.2, 18],
-  ["soil-boar", 1.6, 24],
-  ["vine-turtle", .4, 30],
-  ["shadow-weasel", 2.6, 30],
-  ["talon-owl", 2, 40],
-  ["spring-keeper", 1.6, 30],
-  ["lantern-keeper", 2.8, 30],
-  ["old-garden-snail", .3, 45],
-  ["walking-forest", .3, 60],
-  ["white-paw", 3.2, 90],
-  ["spiny-back-leader", 1.4, 120]
-].map(([species, speed, restSeconds]) => [species, Object.freeze({ speed, restSeconds })])));
-
-return { CREATURE_MOVEMENT_PROFILES };
-})();
 modules["client/unit-animation.mjs"] = (() => {
+const { unitFrameMirror } = modules["client/unit-size.mjs"];
 const { APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS, APPROVED_COTTON_SHEEP_WALK_ANIMATION } = modules["client/creature-approved-actions.mjs"];
 const { APPROVED_CREATURE_WALK_ANIMATIONS, APPROVED_CREATURE_DEATH_ANIMATIONS } = modules["client/creature-approved-animations.mjs"];
 const { CREATURE_RANGED_ANIMATIONS, CREATURE_RANGED_ASSETS, creatureRangedPose } = modules["client/creature-ranged.mjs"];
@@ -6064,8 +6221,8 @@ function creatureAttackPose(agent, time) {
       animation.hitTimeMs + (elapsed - timing.hitTimeMs) / (timing.durationMs - timing.hitTimeMs) * (animation.durationMs - animation.hitTimeMs);
   }
   if (!Number.isFinite(elapsed) || elapsed < 0 || elapsed + 1e-6 >= animation.durationMs) return null;
-  const direction = attack.directionX || agent.facing || -1;
-  return { action: "attack", animation, frame: unitAnimationFrame(animation, elapsed), mirrorX: direction > 0 };
+  const direction = attack.directionX || agent.facing || 1;
+  return { action: "attack", animation, frame: unitAnimationFrame(animation, elapsed), mirrorX: unitFrameMirror(animation.sourceFacing || animation.facing || "left", direction) };
 }
 
 function creatureHurtPose(agent, time) {
@@ -11145,6 +11302,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "bean/base": {
     "reference": {
       "image": "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp",
+      "sourceFacing": "right",
       "frameSize": 631,
       "frameHeight": 631,
       "columns": 4,
@@ -11224,6 +11382,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp",
+        "sourceFacing": "right",
         "frameSize": 631,
         "frameHeight": 631,
         "columns": 4,
@@ -11302,6 +11461,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/UnitAttack/attack.png",
+        "sourceFacing": "right",
         "frameSize": 632,
         "frameHeight": 632,
         "columns": 4,
@@ -11332,6 +11492,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/UnitHurt/V3/hurt.png",
+        "sourceFacing": "right",
         "frameSize": 632,
         "frameHeight": 632,
         "columns": 4,
@@ -11362,6 +11523,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
+        "sourceFacing": "right",
         "frameSize": 316,
         "frameHeight": 316,
         "columns": 4,
@@ -11395,6 +11557,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "bean/gather": {
     "reference": {
       "image": "DesignAssets/Planning/Attributes/Units/bean-strength.png",
+      "sourceFacing": "right",
       "frameSize": 144,
       "frameHeight": 144,
       "columns": 1,
@@ -11408,11 +11571,80 @@ const UNIT_ACTION_ART = Object.freeze({
       "registrationScale": 1,
       "loop": false
     },
-    "actions": {}
+    "actions": {
+      "harvest": {
+        "image": "DesignAssets/Animations/GatherWorkV1/bean/harvest.webp",
+        "sourceFacing": "right",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 125.5,
+        "pivotY": 233,
+        "referenceLength": 187,
+        "embeddedCargo": true
+      },
+      "carry": {
+        "image": "DesignAssets/Animations/GatherWorkV1/bean/carry.webp",
+        "sourceFacing": "right",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 125.5,
+        "pivotY": 233,
+        "referenceLength": 187,
+        "embeddedCargo": true
+      },
+      "throw": {
+        "image": "DesignAssets/Animations/GatherWorkV1/bean/throw.webp",
+        "sourceFacing": "right",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          120,
+          100,
+          80,
+          120,
+          140,
+          320
+        ],
+        "loop": false,
+        "pivotX": 125.5,
+        "pivotY": 233,
+        "referenceLength": 187,
+        "releaseAtMs": 540,
+        "embeddedCargo": true
+      }
+    }
   },
   "bean/blade": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -11492,6 +11724,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -11570,6 +11803,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -11624,6 +11858,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -11662,6 +11897,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -11692,6 +11928,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/birth.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -11803,6 +12040,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SproutDeathV2/blade/death.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 4,
@@ -11836,6 +12074,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "bean/carapace": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -11915,6 +12154,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -11993,6 +12233,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -12047,6 +12288,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -12085,6 +12327,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -12115,6 +12358,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/birth.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -12226,6 +12470,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SproutDeathV2/carapace/death.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 4,
@@ -12259,6 +12504,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "bean/secretion": {
     "reference": {
       "image": "DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 1,
@@ -12275,6 +12521,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/BeanSecretionIdleV4/idle.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 8,
@@ -12353,6 +12600,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 6,
@@ -12391,6 +12639,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/UnitRangedV1/bean/hurt.png",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -12421,6 +12670,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/UnitRangedV1/bean/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -12459,6 +12709,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SproutDeathV2/secretion/death.webp",
+        "sourceFacing": "right",
         "frameSize": 83,
         "frameHeight": 83,
         "columns": 4,
@@ -12492,6 +12743,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "bean/antenna": {
     "reference": {
       "image": "DesignAssets/Animations/UnitAppearanceV1/bean/04/Source/neutral.png",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 1,
@@ -12508,6 +12760,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "hurt": {
         "image": "DesignAssets/Animations/BeanHeldHurtV1/antenna.webp",
+        "sourceFacing": "right",
         "frameSize": 340,
         "frameHeight": 344,
         "columns": 4,
@@ -12551,6 +12804,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "bean/feet": {
     "reference": {
       "image": "DesignAssets/Animations/UnitAppearanceV1/bean/08/Source/neutral.png",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 1,
@@ -12567,6 +12821,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "hurt": {
         "image": "DesignAssets/Animations/BeanHeldHurtV1/feet.webp",
+        "sourceFacing": "right",
         "frameSize": 340,
         "frameHeight": 356,
         "columns": 4,
@@ -12610,6 +12865,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "spore/base": {
     "reference": {
       "image": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp",
+      "sourceFacing": "right",
       "frameSize": 549,
       "frameHeight": 549,
       "columns": 4,
@@ -12689,6 +12945,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp",
+        "sourceFacing": "right",
         "frameSize": 549,
         "frameHeight": 549,
         "columns": 4,
@@ -12767,6 +13024,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -12797,6 +13055,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "jump": {
         "image": "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -12827,6 +13086,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp",
+        "sourceFacing": "right",
         "frameSize": 553,
         "frameHeight": 553,
         "columns": 4,
@@ -12857,6 +13117,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp",
+        "sourceFacing": "right",
         "frameSize": 553,
         "frameHeight": 553,
         "columns": 4,
@@ -12887,6 +13148,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+        "sourceFacing": "right",
         "frameSize": 553,
         "frameHeight": 553,
         "columns": 4,
@@ -12909,6 +13171,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp",
+        "sourceFacing": "right",
         "frameSize": 192,
         "frameHeight": 192,
         "columns": 4,
@@ -12948,6 +13211,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "spore/gather": {
     "reference": {
       "image": "DesignAssets/Tribes/spore/ApprovedGatherV1/idle.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 1,
@@ -12964,6 +13228,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Tribes/spore/ApprovedGatherMotionV1/idle.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "columns": 8,
         "frameCount": 64,
@@ -13042,6 +13307,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Tribes/spore/ApprovedGatherMotionV1/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "columns": 8,
         "frameCount": 16,
@@ -13069,12 +13335,80 @@ const UNIT_ACTION_ART = Object.freeze({
         "pivotY": 112,
         "viewSize": 128,
         "rootMotion": false
+      },
+      "harvest": {
+        "image": "DesignAssets/Animations/GatherWorkV1/spore/harvest.webp",
+        "sourceFacing": "right",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 127.5,
+        "pivotY": 221,
+        "referenceLength": 219,
+        "embeddedCargo": true
+      },
+      "carry": {
+        "image": "DesignAssets/Animations/GatherWorkV1/spore/carry.webp",
+        "sourceFacing": "right",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 127.5,
+        "pivotY": 221,
+        "referenceLength": 219,
+        "embeddedCargo": true
+      },
+      "throw": {
+        "image": "DesignAssets/Animations/GatherWorkV1/spore/throw.webp",
+        "sourceFacing": "right",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          120,
+          100,
+          80,
+          120,
+          140,
+          320
+        ],
+        "loop": false,
+        "pivotX": 127.5,
+        "pivotY": 221,
+        "referenceLength": 219,
+        "releaseAtMs": 540,
+        "embeddedCargo": true
       }
     }
   },
   "spore/blade": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -13154,6 +13488,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -13232,6 +13567,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -13262,6 +13598,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -13300,6 +13637,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -13330,6 +13668,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/CombatDeathV1/spore/blade/death.webp",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -13355,6 +13694,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "spore/carapace": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -13434,6 +13774,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -13512,6 +13853,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -13542,6 +13884,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -13580,6 +13923,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -13610,6 +13954,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/CombatDeathV1/spore/carapace/death.webp",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -13635,6 +13980,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "spore/secretion": {
     "reference": {
       "image": "DesignAssets/Animations/UnitRangedV1/spore/Source/neutral.png",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 1,
@@ -13651,6 +13997,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionIdleV1/spore/idle.webp",
+        "sourceFacing": "right",
         "frameSize": 208,
         "frameHeight": 208,
         "columns": 4,
@@ -13795,6 +14142,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 6,
@@ -13839,6 +14187,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/UnitRangedV1/spore/hurt.png",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -13869,6 +14218,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/UnitRangedV1/spore/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -13899,6 +14249,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/UnitRangedV1/spore/death.png",
+        "sourceFacing": "right",
         "frameSize": 553,
         "frameHeight": 553,
         "columns": 4,
@@ -13924,6 +14275,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "spore/antenna": {
     "reference": {
       "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/walk.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 4,
@@ -13947,6 +14299,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -13969,6 +14322,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/death.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -13991,6 +14345,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/MinorHeldHurtV1/spore-antenna.webp",
+        "sourceFacing": "right",
         "frameSize": 536,
         "frameHeight": 316,
         "columns": 4,
@@ -14038,6 +14393,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "spore/feet": {
     "reference": {
       "image": "DesignAssets/Animations/TribeMinorV1/spore/feet/walk.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 4,
@@ -14061,6 +14417,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/spore/feet/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -14083,6 +14440,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/TribeMinorV1/spore/feet/death.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -14105,6 +14463,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/MinorHeldHurtV1/spore-feet.webp",
+        "sourceFacing": "right",
         "frameSize": 448,
         "frameHeight": 320,
         "columns": 4,
@@ -14152,6 +14511,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "pebble/base": {
     "reference": {
       "image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -14231,6 +14591,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14309,6 +14670,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 5,
@@ -14343,6 +14705,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "jump": {
         "image": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14373,6 +14736,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14403,6 +14767,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp",
+        "sourceFacing": "right",
         "frameSize": 517,
         "frameHeight": 517,
         "columns": 4,
@@ -14433,6 +14798,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+        "sourceFacing": "right",
         "frameSize": 517,
         "frameHeight": 517,
         "columns": 4,
@@ -14455,6 +14821,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
+        "sourceFacing": "right",
         "frameSize": 151,
         "frameHeight": 151,
         "columns": 8,
@@ -14520,6 +14887,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "pebble/gather": {
     "reference": {
       "image": "DesignAssets/Planning/Attributes/Units/pebble-strength.png",
+      "sourceFacing": "right",
       "frameSize": 144,
       "frameHeight": 144,
       "columns": 1,
@@ -14533,11 +14901,80 @@ const UNIT_ACTION_ART = Object.freeze({
       "registrationScale": 1,
       "loop": false
     },
-    "actions": {}
+    "actions": {
+      "harvest": {
+        "image": "DesignAssets/Animations/GatherWorkV1/pebble/harvest.webp",
+        "sourceFacing": "right",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 128,
+        "pivotY": 206,
+        "referenceLength": 190,
+        "embeddedCargo": true
+      },
+      "carry": {
+        "image": "DesignAssets/Animations/GatherWorkV1/pebble/carry.webp",
+        "sourceFacing": "right",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 128,
+        "pivotY": 206,
+        "referenceLength": 190,
+        "embeddedCargo": true
+      },
+      "throw": {
+        "image": "DesignAssets/Animations/GatherWorkV1/pebble/throw.webp",
+        "sourceFacing": "right",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          120,
+          100,
+          80,
+          120,
+          140,
+          320
+        ],
+        "loop": false,
+        "pivotX": 128,
+        "pivotY": 206,
+        "referenceLength": 190,
+        "releaseAtMs": 540,
+        "embeddedCargo": true
+      }
+    }
   },
   "pebble/blade": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -14617,6 +15054,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -14695,6 +15133,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -14729,6 +15168,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -14767,6 +15207,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -14797,6 +15238,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/birth.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -14877,6 +15319,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/CombatDeathV1/pebble/blade/death.webp",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14902,6 +15345,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "pebble/carapace": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -14981,6 +15425,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -15059,6 +15504,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -15093,6 +15539,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -15131,6 +15578,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -15161,6 +15609,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/birth.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -15241,6 +15690,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/CombatDeathV1/pebble/carapace/death.webp",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -15266,6 +15716,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "pebble/secretion": {
     "reference": {
       "image": "DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 1,
@@ -15282,6 +15733,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionIdleV1/pebble/idle.webp",
+        "sourceFacing": "right",
         "frameSize": 236,
         "frameHeight": 236,
         "columns": 4,
@@ -15426,6 +15878,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 6,
@@ -15470,6 +15923,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/hurt.png",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -15500,6 +15954,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -15534,6 +15989,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/birth.png",
+        "sourceFacing": "right",
         "frameSize": 151,
         "frameHeight": 151,
         "columns": 8,
@@ -15596,6 +16052,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/death.png",
+        "sourceFacing": "right",
         "frameSize": 517,
         "frameHeight": 517,
         "columns": 4,
@@ -15621,6 +16078,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "pebble/antenna": {
     "reference": {
       "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 4,
@@ -15644,6 +16102,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "birth": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/birth.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 8,
@@ -15675,6 +16134,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/death.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -15697,6 +16157,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -15719,6 +16180,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/MinorHeldHurtV1/pebble-antenna.webp",
+        "sourceFacing": "right",
         "frameSize": 564,
         "frameHeight": 344,
         "columns": 4,
@@ -15766,6 +16228,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "pebble/feet": {
     "reference": {
       "image": "DesignAssets/Animations/TribeMinorV1/pebble/feet/walk.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 4,
@@ -15789,6 +16252,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "birth": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/feet/birth.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 8,
@@ -15827,6 +16291,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/feet/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -15849,6 +16314,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/MinorHeldHurtV1/pebble-feet.webp",
+        "sourceFacing": "right",
         "frameSize": 528,
         "frameHeight": 332,
         "columns": 4,
@@ -15896,6 +16362,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "spring/base": {
     "reference": {
       "image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -15975,6 +16442,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -16053,6 +16521,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -16083,6 +16552,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "jump": {
         "image": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -16113,6 +16583,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
+        "sourceFacing": "right",
         "frameSize": 516,
         "frameHeight": 516,
         "columns": 4,
@@ -16143,6 +16614,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp",
+        "sourceFacing": "right",
         "frameSize": 516,
         "frameHeight": 516,
         "columns": 4,
@@ -16173,6 +16645,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+        "sourceFacing": "right",
         "frameSize": 516,
         "frameHeight": 516,
         "columns": 4,
@@ -16195,6 +16668,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+        "sourceFacing": "right",
         "frameSize": 236,
         "frameHeight": 236,
         "columns": 4,
@@ -16225,6 +16699,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "spring/gather": {
     "reference": {
       "image": "DesignAssets/Planning/Attributes/Units/spring-strength.png",
+      "sourceFacing": "right",
       "frameSize": 144,
       "frameHeight": 144,
       "columns": 1,
@@ -16238,11 +16713,80 @@ const UNIT_ACTION_ART = Object.freeze({
       "registrationScale": 1,
       "loop": false
     },
-    "actions": {}
+    "actions": {
+      "harvest": {
+        "image": "DesignAssets/Animations/GatherWorkV1/spring/harvest.webp",
+        "sourceFacing": "right",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 128,
+        "pivotY": 231,
+        "referenceLength": 192,
+        "embeddedCargo": true
+      },
+      "carry": {
+        "image": "DesignAssets/Animations/GatherWorkV1/spring/carry.webp",
+        "sourceFacing": "right",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          180
+        ],
+        "loop": true,
+        "pivotX": 128,
+        "pivotY": 231,
+        "referenceLength": 192,
+        "embeddedCargo": true
+      },
+      "throw": {
+        "image": "DesignAssets/Animations/GatherWorkV1/spring/throw.webp",
+        "sourceFacing": "right",
+        "frameSize": 256,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          180,
+          140,
+          120,
+          100,
+          80,
+          120,
+          140,
+          320
+        ],
+        "loop": false,
+        "pivotX": 128,
+        "pivotY": 231,
+        "referenceLength": 192,
+        "releaseAtMs": 540,
+        "embeddedCargo": true
+      }
+    }
   },
   "spring/blade": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -16322,6 +16866,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -16400,6 +16945,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -16430,6 +16976,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -16468,6 +17015,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -16498,6 +17046,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/birth.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -16557,6 +17106,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/CombatDeathV1/spring/blade/death.webp",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -16582,6 +17132,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "spring/carapace": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -16661,6 +17212,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -16739,6 +17291,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -16769,6 +17322,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -16807,6 +17361,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -16837,6 +17392,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/birth.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -16896,6 +17452,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/CombatDeathV1/spring/carapace/death.webp",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -16921,6 +17478,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "spring/secretion": {
     "reference": {
       "image": "DesignAssets/Animations/SecretionApprovedV2/spring/idle.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 1,
@@ -16937,6 +17495,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionIdleV1/spring/idle.webp",
+        "sourceFacing": "right",
         "frameSize": 228,
         "frameHeight": 228,
         "columns": 4,
@@ -17081,6 +17640,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/UnitRangedV1/spring/shoot.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 6,
@@ -17125,6 +17685,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/UnitRangedV1/spring/hurt.png",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -17155,6 +17716,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/UnitRangedV1/spring/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -17185,6 +17747,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -17212,6 +17775,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SecretionApprovedV2/spring/death.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -17237,6 +17801,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "spring/antenna": {
     "reference": {
       "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/walk.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 4,
@@ -17260,6 +17825,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -17282,6 +17848,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/birth.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -17309,6 +17876,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/death.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -17331,6 +17899,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/MinorHeldHurtV1/spring-antenna.webp",
+        "sourceFacing": "right",
         "frameSize": 352,
         "frameHeight": 308,
         "columns": 4,
@@ -17378,6 +17947,7 @@ const UNIT_ACTION_ART = Object.freeze({
   "spring/feet": {
     "reference": {
       "image": "DesignAssets/Animations/TribeMinorV1/spring/feet/walk.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 4,
@@ -17401,6 +17971,7 @@ const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "birth": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/feet/birth.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -17428,6 +17999,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/feet/death.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -17450,6 +18022,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/feet/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -17472,6 +18045,7 @@ const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/MinorHeldHurtV1/spring-feet.webp",
+        "sourceFacing": "right",
         "frameSize": 312,
         "frameHeight": 312,
         "columns": 4,
@@ -23202,6 +23776,7 @@ function createUnitAppearanceCache(loadSource, makeBitmap, pixelBudget) {
 return { unitAppearanceRequiredWorldActions, unitAppearanceRequiredActions, UNIT_APPEARANCE_OPTIONAL_PREVIEW_ACTIONS, unitAppearanceDefinition, unitAppearanceReadiness, unitAppearanceAnimation, unitAppearanceMissingActions, unitAppearanceReady, unitAppearanceForAgent, unitAppearanceBirthSceneForAgent, unitAppearancePose, unitAppearanceWorldPose, unitAppearanceSourceScale, unitAppearanceInventory, UNIT_APPEARANCE_PIXEL_BUDGETS, unitAppearanceLodRatio, createUnitAppearanceCache };
 })();
 modules["client/unit-appearance-state.mjs"] = (() => {
+const { attackAnimationElapsed } = modules["server/attack.mjs"];
 const { UNIT_ANIMATIONS, unitMovementElapsedMs } = modules["client/unit-animation.mjs"];
 const { unitAppearanceForAgent, unitAppearancePose } = modules["client/unit-appearance.mjs"];
 
@@ -23233,6 +23808,16 @@ function unitActionState(agent, time, options = {}) {
     // the shot's launch cue; the caller selects that explicit clock contract.
     const contact=ranged?finite(attack.launchedAt,options.attackClock==='lab'?attack.hitAt:undefined):attack.hitAt;
     const cue=ranged?(clips.ranged?.launchAtMs??200):(clips.attack?.hitTimeMs??300);
+    if(Number.isFinite(attack.recovery)&&Number.isFinite(contact)) {
+      const clock=ranged?{...attack,hitAt:contact,meleeContacts:attack.shotLaunches||[contact]}:attack;
+      const elapsed=attackAnimationElapsed(clock,time,cue/1000,ms/1000)*1000;
+      if(elapsed>=ms)return null;
+      const contacts=clock.meleeContacts||[contact];
+      let index=0;while(index<contacts.length-1&&time>contacts[index]&&time>=contacts[index+1]-cue/1000)index++;
+      const hit=contacts[index],swing=index?Math.max(contacts[index-1],hit-cue/1000):start;
+      const tail=Math.min(end,hit+(ms-cue)/1000);
+      return {...state(action,start,[[swing,0],[hit,cue],[tail,Math.min(ms,cue+Math.max(0,tail-hit)*1000)]]),elapsedMs:elapsed,hasLaunchAnchor:true,eventAnchors:contacts.map(at=>({atMs:cue,at}))};
+    }
     const anchored=Number.isFinite(contact)&&contact>start&&contact<end;
     return state(action,start,anchored?[[start,0],[contact,cue],[end,ms]]:[[start,0],[end,ms]],{hasLaunchAnchor:!ranged||anchored});
   }
@@ -23240,7 +23825,10 @@ function unitActionState(agent, time, options = {}) {
   const hurt=agent.hurtStartedAt,hurtSeconds=agent.combat?.version === 2 ? .12 : duration('hurt')/1000;
   if(Number.isFinite(hurt)&&time>=hurt&&time<hurt+hurtSeconds)return state('hurt',hurt,[[hurt,0],[hurt+hurtSeconds,duration('hurt')]]);
   if(activeAttack)return activeAttack;
-  if(agent.mode==='unload'&&agent.foodDelivery)return state('throw',finite(agent.foodDelivery.startedAt,time));
+  if(agent.mode==='unload'&&agent.foodDelivery){
+    const delivery=agent.foodDelivery,start=finite(delivery.startedAt,time),end=delivery.arrivesAt,release=clips.throw?.releaseAtMs,ms=duration('throw');
+    return state('throw',start,Number.isFinite(end)&&end>start&&Number.isFinite(release)&&release>0&&release<ms?[[start,0],[start+(end-start)*.24,release],[end,ms]]:undefined);
+  }
   if(agent.mode==='harvest')return state('harvest',finite(agent.harvestStarted,agent.animationStartedAt,0));
   if(options.preview?.action==='jump')return state('jump',finite(options.preview.startedAt,time));
   if(agent.moveDuration>0&&Number.isFinite(agent.moveStartedAt)&&time>=agent.moveStartedAt&&time<agent.moveStartedAt+agent.moveDuration){
@@ -23292,11 +23880,14 @@ function createUnitAppearanceEventPlayback({maxGap=.5}={}) {
     for(let cycle=first;cycle<=last;cycle++)for(const [index,event]of(animation.events||[]).entries()){
       if(event.type==='launch'&&state.hasLaunchAnchor===false)continue;
       const atMs=cycle*ms+event.atMs;if(!Number.isFinite(atMs)||event.atMs<0||event.atMs>ms)continue;
-      const at=absoluteEventTime(state,atMs);
-      if(at===null||at<=previous+1e-9||at>time+1e-9)continue;
-      const id=[state.unitId,animation.sourceId,state.action,index,cycle,at.toFixed(6)].join(':');
-      if(seen.has(id))continue;
-      seen.set(id,true);events.push({...event,at,cycle,dedupeId:id,unitId:state.unitId,action:state.action});
+      const anchors=state.eventAnchors?.filter(anchor=>anchor.atMs===atMs);
+      const times=anchors?.length?anchors.map(anchor=>anchor.at):[absoluteEventTime(state,atMs)];
+      for(const at of times){
+        if(at===null||at<=previous+1e-9||at>time+1e-9)continue;
+        const id=[state.unitId,animation.sourceId,state.action,index,cycle,at.toFixed(6)].join(':');
+        if(seen.has(id))continue;
+        seen.set(id,true);events.push({...event,at,cycle,dedupeId:id,unitId:state.unitId,action:state.action});
+      }
     }
     while(seen.size>2048)seen.delete(seen.keys().next().value);
     return events;
@@ -23309,7 +23900,7 @@ return { unitActionState, unitAppearanceStatePose, createUnitAppearanceEventPlay
 modules["client/unit-action-art.mjs"] = (() => {
 const { UNIT_ACTION_ART } = modules["client/unit-action-art-assets.mjs"];
 const { unitDisplayAttributes, UNIT_DISPLAY_PRIORITY } = modules["client/unit-display-appearance.mjs"];
-const { unitDisplaySize } = modules["client/unit-size.mjs"];
+const { unitDisplaySize, unitFrameMirror } = modules["client/unit-size.mjs"];
 const { unitActionState } = modules["client/unit-appearance-state.mjs"];
 
 function unitActionArtDefinition(agent) {
@@ -23325,7 +23916,7 @@ function unitActionArtPose(agent, time) {
   if (!definition) return null;
   const state = unitActionState(agent, time, { animations: definition.actions });
   if (!state) return null;
-  const requested = state.action === "carry" ? "walk" : state.action;
+  const requested = state.action === "carry" && !definition.actions.carry ? "walk" : state.action;
   const animation = definition.actions[requested];
   if (!animation) return { action: state.action, animation: definition.reference, frame: definition.reference.frames?.[0] || 0, reference: definition.reference, missing: true };
   let elapsed = state.elapsedMs;
@@ -23377,7 +23968,7 @@ function createUnitActionArt(assetSource, createSurface, loadImage) {
     const scale = cell * unitDisplaySize(agent) / (animation.referenceLength || reference.length) * (animation.referenceLength ? 1 : cameraScale);
     const crop = { x: pose.frame % animation.columns * width, y: Math.floor(pose.frame / animation.columns) * height, width, height };
     const destination = { x: -animation.pivotX * scale, y: -animation.pivotY * scale, width: width * scale, height: height * scale };
-    context.save(); context.translate(x, floor); context.scale(mirror ? -1 : 1, 1);
+    context.save(); context.translate(x, floor); context.scale(unitFrameMirror(animation.sourceFacing, mirror ? -1 : 1) ? -1 : 1, 1);
     if (beforeDraw) beforeDraw(context, image, crop, destination);
     context.drawImage(image, crop.x, crop.y, width, height, destination.x, destination.y, destination.width, destination.height);
     context.restore(); return true;
@@ -23386,7 +23977,7 @@ function createUnitActionArt(assetSource, createSurface, loadImage) {
     const surface = createSurface(512, 512);
     return draw(surface.getContext("2d"), agent, time, 256, 448, 256 / unitDisplaySize(agent), false, null) ? surface : null;
   }
-  return { prepare, draw, frame, referenceBounds, ready: agent => {
+  return { prepare, draw, frame, referenceBounds, readyAction: (agent, time) => { const pose = unitActionArtPose(agent, time); return !!pose && !pose.missing && images.has(pose.animation.image) && images.has(pose.reference.image); }, ready: agent => {
     const definition = unitActionArtDefinition(agent); return !!definition && images.has(definition.reference.image);
   } };
 }
@@ -26832,14 +27423,99 @@ const UNIT_RANGED_ASSETS = Object.freeze({
 
 return { UNIT_RANGED_ASSETS };
 })();
+modules["client/bean-secretion-idle-assets.mjs"] = (() => {
+const BEAN_SECRETION_IDLE_ANIMATION = Object.freeze({
+  "image": "DesignAssets/Animations/BeanSecretionIdleV4/idle.webp",
+  "frameSize": 128,
+  "viewSize": 128,
+  "columns": 8,
+  "frameCount": 64,
+  "pivotX": 64,
+  "pivotY": 112,
+  "durationsMs": [
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50
+  ],
+  "durationMs": 3200,
+  "loop": true,
+  "rangedBody": true,
+  "secretionIdle": true,
+  "nativeSecretionIdle": true
+});
+
+return { BEAN_SECRETION_IDLE_ANIMATION };
+})();
 modules["client/unit-ranged.mjs"] = (() => {
 const { UNIT_SECRETION_IDLE_ASSETS, unitSecretionIdlePose } = modules["client/secretion-idle.mjs"];
+const { BEAN_SECRETION_IDLE_ANIMATION } = modules["client/bean-secretion-idle-assets.mjs"];
 const { drawBeanSecretionBirth } = modules["client/bean-secretion-birth.mjs"];
 const { UNIT_SECRETION_WALK_ANIMATIONS, unitSecretionWalkPose } = modules["client/secretion-walk.mjs"];
 const { UNIT_SECRETION_LIFECYCLE_ANIMATIONS, UNIT_SECRETION_LIFECYCLE_ASSETS } = modules["client/secretion-lifecycle.mjs"];
 const { unitDisplayAttributes } = modules["client/unit-display-appearance.mjs"];
 const { UNIT_RANGED_ASSETS } = modules["client/unit-ranged-assets.mjs"];
-const { unitDisplaySize } = modules["client/unit-size.mjs"];
+const { unitDisplaySize, unitFrameMirror, unitFacing } = modules["client/unit-size.mjs"];
 const { unitSecretionResourcePose, secretionResourceFrame } = modules["client/secretion-resource-motion.mjs"];
 
 const root = "DesignAssets/Animations/UnitRangedV1/bean/";
@@ -26855,7 +27531,7 @@ const UNIT_RANGED_FORMS = Object.freeze({
   ...Object.fromEntries(Object.entries(UNIT_RANGED_ASSETS).map(([tribe, form]) =>
     [tribe, Object.freeze({ ...form, hurt: UNIT_RANGED_HURT_ANIMATIONS[tribe], walk: UNIT_SECRETION_WALK_ANIMATIONS[tribe],
       lifecycle: UNIT_SECRETION_LIFECYCLE_ANIMATIONS[tribe] || null })])),
-  bean: Object.freeze({ birthBody: drawBeanSecretionBirth, lifecycle: UNIT_SECRETION_LIFECYCLE_ANIMATIONS.bean, hurt: UNIT_RANGED_HURT_ANIMATIONS.bean, walk: UNIT_SECRETION_WALK_ANIMATIONS.bean,
+  bean: Object.freeze({ idleAnimation: BEAN_SECRETION_IDLE_ANIMATION, birthBody: drawBeanSecretionBirth, lifecycle: UNIT_SECRETION_LIFECYCLE_ANIMATIONS.bean, hurt: UNIT_RANGED_HURT_ANIMATIONS.bean, walk: UNIT_SECRETION_WALK_ANIMATIONS.bean,
   idle: { image: root + "Source/neutral.png", frameSize: 512, viewSize: 512, columns: 1,
     pivotX: 256, pivotY: 448, frameCount: 1, durationMs: 600, durationsMs: [600], loop: true, rangedBody: true },
   animation: { image: root + "shoot.webp", frameSize: 512, viewSize: 512, columns: 6,
@@ -26905,7 +27581,7 @@ function unitRangedAttackOrIdlePose(agent, time) {
   const appearance = unitRangedAppearance(agent);
   if (!appearance || agent.health <= 0) return null;
   const active = unitRangedAttack(agent), animation = appearance.animation;
-  const idle = () => ({ action: "idle", animation: appearance.idle, frame: 0, mirrorX: agent.facing < 0 });
+  const idle = () => ({ action: "idle", animation: appearance.idle, frame: 0, mirrorX: unitFrameMirror(appearance.idle.sourceFacing, unitFacing(agent)) });
   if (!active || !Number.isFinite(time) || time < active.attack.startedAt) return idle();
   // The world computes readyAt and the final launch with differently grouped
   // additions. Permit only floating-point roundoff, not a delayed recovery.
@@ -26935,7 +27611,7 @@ function unitRangedAttackOrIdlePose(agent, time) {
   if (Math.abs(time - launch) <= epsilon) elapsed = launchAt;
   let frame = 0;
   while (frame < animation.frameCount - 1 && elapsed >= animation.durationsMs[frame]) elapsed -= animation.durationsMs[frame++];
-  return { action: "shoot", animation, frame, mirrorX: (active.attack.directionX || agent.facing) < 0 };
+  return { action: "shoot", animation, frame, mirrorX: unitFrameMirror(animation.sourceFacing, active.attack.directionX || unitFacing(agent)) };
 }
 
 function unitRangedCombatPose(agent, time) {
@@ -26951,7 +27627,7 @@ function unitRangedCombatPose(agent, time) {
   if (age < 0 || age >= duration) return pose;
   let elapsed = age / duration * animation.durationMs, frame = 0;
   while (frame < animation.frameCount - 1 && elapsed >= animation.durationsMs[frame]) elapsed -= animation.durationsMs[frame++];
-  return { action: "hurt", animation, frame, mirrorX: agent.facing < 0 };
+  return { action: "hurt", animation, frame, mirrorX: unitFrameMirror(animation.sourceFacing, unitFacing(agent)) };
 }
 
 function unitRangedPose(agent, time) {
@@ -27537,6 +28213,7 @@ function createUnitAppearanceSource(options = {}) {
 return { UNIT_APPEARANCE_BYTE_BUDGETS, createUnitAppearanceSource };
 })();
 modules["client/unit-appearance-renderer.mjs"] = (() => {
+const { unitFrameMirror } = modules["client/unit-size.mjs"];
 const { createUnitAppearanceCache, unitAppearanceLodRatio, unitAppearanceSourceScale } = modules["client/unit-appearance.mjs"];
 
 function createUnitAppearanceRenderer(loadSource, makeBitmap, pixelBudget) {
@@ -27563,7 +28240,7 @@ function createUnitAppearanceRenderer(loadSource, makeBitmap, pixelBudget) {
     const destination = { x: -shape.pivotX * scale, y: -shape.pivotY * scale, width: width * scale, height: height * scale };
     context.save();
     try {
-      context.translate(anchor.x, anchor.y); context.scale(mirror ? -1 : 1, 1);
+      context.translate(anchor.x, anchor.y); context.scale(unitFrameMirror(animation.sourceFacing || pose.source.sourceFacing, mirror ? -1 : 1) ? -1 : 1, 1);
       context.imageSmoothingEnabled = true; context.imageSmoothingQuality = "high";
       beforeDraw?.(context, raster.image, crop, destination);
       context.drawImage(raster.image, crop.x, crop.y, crop.width, crop.height,
@@ -27680,7 +28357,7 @@ const { COMBAT_LAB_UNITS } = modules["client/combat-lab.mjs"];
 const { createUnitAppearanceWorld } = modules["client/unit-appearance-world.mjs"];
 const { AGENT_DEATH_ANIMATION } = modules["client/agent-death.mjs"];
 const { imageAnimation, imageFrameGeometry } = modules["client/image-geometry.mjs"];
-const { unitDisplaySize } = modules["client/unit-size.mjs"];
+const { unitDisplaySize, combatViewLayout, unitFrameMirror } = modules["client/unit-size.mjs"];
 const { unitRangedAppearance, unitRangedPose, unitRangedDisplaySize, unitRangedProjectile, unitRangedLifecycleAnimation } = modules["client/unit-ranged.mjs"];
 const { UNIT_IMAGE_BOUNDS } = modules["client/unit-image-bounds.mjs"];
 const { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, unitAnimationPose, unitAnimationFrame, creatureHurtPose, creatureAttackPose } = modules["client/unit-animation.mjs"];
@@ -27740,7 +28417,7 @@ function displaySize(agent, pose) {
     return scale * (pose.animation.viewSize || pose.animation.frameSize) / (pose.animation.registrationScale || 1);
   }
   const reference = pose && ["death", "dead"].includes(pose.action) ? pose.animation : idle;
-  const bounds = UNIT_IMAGE_BOUNDS[reference.image];
+  const bounds = UNIT_IMAGE_BOUNDS[reference.image] || UNIT_IMAGE_BOUNDS[idle.image];
   const length = Math.max(bounds.width, bounds.height) * reference.frameSize / bounds.frameSize;
   return 100 * unitDisplaySize(agent) * (reference.viewSize || reference.frameSize) /
     ((reference.registrationScale || 1) * length);
@@ -27778,7 +28455,7 @@ function createCombatStage(canvas) {
   const appearanceWorld = createUnitAppearanceWorld();
   const representativeArt = createCombatStageAppearance(image);
   const vfxCursor = createCombatVfxCursor(), detailVfx = createDetailCombatVfx();
-  let appearancePoses = new Map(), dodgePositions = new Map(), dodgeCues = [];
+  let appearancePoses = new Map(), dodgePositions = new Map(), dodgeCues = [], cameraUnits = [], viewLayout;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const deathStarted = new Map(), readyPoses = new Map();
   let currentTrial, previousTime = null, seen = 0, effects = [], clock = 0, lastNow = 0;
@@ -27827,22 +28504,12 @@ function createCombatStage(canvas) {
     const dodge = currentTrial?.vfx?.version !== 1 && recent.find(effect => effect.event.kind === "dodge");
     const age = impact ? (clock - impact.born) / .22 : 1;
     const recoil = reducedMotion.matches ? 0 : impact ? Math.sin(age * Math.PI) * 16 : dodge ? 26 * Math.sin((clock - dodge.born) / .22 * Math.PI) : 0;
-    const distance = currentTrial?.agents.every(entry => Number.isFinite(entry.x)) ? Math.abs(currentTrial.agents[1].x - currentTrial.agents[0].x) : 1;
-    const gap = Math.min(.64, .2 * Math.max(1, distance));
-    const members = currentTrial.agents.filter(other => (other.combat?.side ?? other.side) === index);
-    if (currentTrial.agents.length > 2) {
-      const slot = members.indexOf(agent), columns = Math.ceil(Math.sqrt(members.length)), rows = Math.ceil(members.length / columns);
-      return { x: width * (index === 0 ? .12 + .28 * ((slot % columns + .5) / columns) : .88 - .28 * ((slot % columns + .5) / columns)) + direction * (lunge - recoil) * width / 1040,
-        y: height * (.35 + .43 * ((Math.floor(slot / columns) + 1) / rows)), direction };
-    }
-    return { x: width * (.5 - direction * gap / 2) + direction * (lunge - recoil) * width / 1040, y: Math.round(height * .79), direction };
+    const point = viewLayout.positions.get(String(agent.id));
+    return { x: point.x + direction * (lunge - recoil) * width / 1040, y: point.y, direction };
   }
 
   function formationScale(width, height) {
-    const bounds = currentTrial.agents.map(bodyDimensions);
-    const maxWidth = Math.max(.4, ...bounds.map(bound => bound.width));
-    const maxHeight = Math.max(.4, ...bounds.map(bound => bound.height));
-    return Math.min(width * .31, width * .22 / maxWidth, height * .43 / maxHeight) / 100;
+    return viewLayout.cell / 100;
   }
 
   function readyPose(agent, requested, time) {
@@ -27929,7 +28596,7 @@ function createCombatStage(canvas) {
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
       { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), index === 1);
     if (!appearanceDrawn && !representativeDrawn && asset) {
-      const mirror = pose?.mirrorX ?? ((geometry?.facing || (agent.species ? "left" : "right")) === "right" ? agent.facing < 0 : agent.facing > 0);
+      const mirror = pose?.mirrorX ?? unitFrameMirror(geometry?.sourceFacing || geometry?.facing || (agent.species ? "left" : "right"), agent.facing);
       context.scale(mirror ? -1 : 1, 1);
       if (!alive && pose?.action !== "death" && pose?.action !== "dead") { context.globalAlpha = .38; context.rotate(-point.direction * .9); context.scale(.85, .85); }
       if (pose) {
@@ -28008,8 +28675,7 @@ function createCombatStage(canvas) {
   }
 
   function supportPoint(agent, points, width, height) {
-    const point = points[agent.id.replace(/-support$/, "")];
-    return { x: point.x - point.direction * width * .13, y: height * .88, direction: point.direction };
+    return { ...viewLayout.positions.get(String(agent.id)), direction: (agent.combat?.side ?? agent.side) === 0 ? 1 : -1 };
   }
 
   function supportArt(agent, points, width, height, time) {
@@ -28029,7 +28695,7 @@ function createCombatStage(canvas) {
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
       { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1);
     if (!appearanceDrawn && !representativeDrawn && asset) {
-      const mirror = pose?.mirrorX ?? ((geometry?.facing || (agent.species ? "left" : "right")) === "right" ? agent.facing < 0 : agent.facing > 0);
+      const mirror = pose?.mirrorX ?? unitFrameMirror(geometry?.sourceFacing || geometry?.facing || (agent.species ? "left" : "right"), agent.facing);
       context.save(); context.scale(mirror ? -1 : 1, 1);
       if (pose) { const { frameSize, columns, pivotX, pivotY, viewSize, registrationScale } = geometry;
         const scale = size * (registrationScale || 1) / (viewSize || frameSize);
@@ -28102,6 +28768,8 @@ function createCombatStage(canvas) {
     if (canvas.width !== Math.round(width * ratio) || canvas.height !== Math.round(height * ratio)) { canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio); }
     context.setTransform(ratio, 0, 0, ratio, 0, 0); background(width, height);
     if (!trial) return;
+    cameraUnits = [...trial.agents, ...(trial.supportAgents || [])].map(stageAgent);
+    viewLayout = combatViewLayout(width, height, cameraUnits);
     const vfx = trial.vfx, liveFlightKeys = new Set();
     let liveFlights = [];
     if (vfx?.version === 1) {
@@ -28205,7 +28873,7 @@ const { createCombatStage } = modules["client/combat-stage.mjs"];
 
 const sides = ["left", "right"], elements = {}, inputs = {};
 const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index ? "spore" : "bean", name: index ? "오른쪽" : "왼쪽",
-  organs: { attack: 1, ranged: 0, heal: 0 }, counts: Object.fromEntries(SIMULATION_STATS.map(stat => [stat.key, ({power:4,vitality:5,armor:2,haste:2})[stat.key] || 0])) }]));
+  }]));
 const rosters = Object.fromEntries(sides.map(side => [side, [builds[side]]]));
 const selected = { left: 0, right: 0 };
 const rules = { ...DEFAULT_SIMULATION_RULES };
@@ -28233,17 +28901,19 @@ function button(parent, label, action) {
   const element = node("button", label); element.type = "button"; element.addEventListener("click", action); parent.append(element); return element;
 }
 const header = node("header");
-const title = node("div"); title.append(node("div", "SPAWNER / COMBAT LAB", "eyebrow"), node("h1", "전투 실험실"), node("p", "초깃값은 실험용입니다. 비교 조각 수는 공정한 실험 조건이며, 외형은 수치에 영향을 주지 않습니다."));
+const title = node("div"); title.append(node("div", "SPAWNER / COMBAT LAB", "eyebrow"), node("h1", "전투 실험실"));
 elements.status = node("output", "대결 준비", "status"); elements.status.setAttribute("aria-live", "polite"); header.append(title, elements.status); main.append(header);
 const stage = node("section", null, "stage"); main.append(stage);
 const stageHud = node("div", null, "stage-hud"); stage.append(stageHud);
 const stageCenter = node("div", null, "stage-center"); stageCenter.append(elements.status); stageHud.append(stageCenter);
 elements.dice = button(stageCenter, "🎲", () => {
   for (const side of sides) {
-    rosters[side] = Array.from({ length: 5 }, () => {
-      const build = structuredClone(builds[side]);
-      build.key = COMBAT_LAB_UNITS[Math.floor(Math.random() * COMBAT_LAB_UNITS.length)].key;
-      return build;
+    const previous = rosters[side], used = new Set();
+    rosters[side] = Array.from({ length: 5 }, (_, slot) => {
+      const choices = COMBAT_LAB_UNITS.filter(unit => unit.key !== previous[slot]?.key && !used.has(unit.key));
+      const key = choices[Math.floor(Math.random() * choices.length)].key;
+      used.add(key);
+      return { key };
     });
     selected[side] = 0;
     selectBuild(side);
@@ -28272,9 +28942,7 @@ for (const side of sides) {
   });
   hud.append(rosterActions);
   const appearance = control(hud, "외형", select(COMBAT_LAB_UNITS.map(unit => [unit.key, unit.name]), builds[side].key));
-  appearance.addEventListener("change", () => { builds[side].key = appearance.value; changed(); }); inputs[side].appearance = appearance;
-  const hp = node("div", null, "hp"); elements[side + "Hp"] = node("strong"); hp.append(node("span", "HP"), elements[side + "Hp"]); hud.append(hp);
-  const bar = node("div", null, "bar"); elements[side + "Bar"] = node("i"); bar.append(elements[side + "Bar"]); hud.append(bar);
+  appearance.addEventListener("change", () => { rosters[side][selected[side]] = { key: appearance.value }; selectBuild(side); changed(); }); inputs[side].appearance = appearance;
   const gauge = node("div", null, "action-bar"); elements[side + "Gauge"] = node("i"); gauge.append(elements[side + "Gauge"]); hud.append(gauge);
   elements[side + "Reaction"] = node("output", null, "reaction"); hud.append(elements[side + "Reaction"]);
 }
@@ -28313,8 +28981,6 @@ function render() {
       const roster = elements[side + "Roster"];
       if (roster.options.length !== options.length) roster.replaceChildren(...options.map(([value, label]) => { const option = node("option", label); option.value = value; return option; }));
       roster.value = String(selected[side]); elements[side + "Remove"].disabled = rosters[side].length <= 1;
-      elements[side+"Hp"].textContent=(agent?agent.health:stats.health).toFixed(1)+" / "+stats.health.toFixed(1);
-      elements[side+"Bar"].style.width=(100*(agent?agent.health:stats.health)/stats.health)+"%";
       const start = agent?.combat?.cycleStartedAt || 0, end = agent?.combat?.nextAttackAt || 0;
       const progress = agent?.health > 0 && agent.stats.canAttack && end > start ? Math.max(0, Math.min(1, (trial.time - start) / (end - start))) : 0;
       elements[side+"Gauge"].style.width=(100*progress)+"%";

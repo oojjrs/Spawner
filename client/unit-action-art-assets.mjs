@@ -2,6 +2,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "bean/base": {
     "reference": {
       "image": "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp",
+      "sourceFacing": "right",
       "frameSize": 631,
       "frameHeight": 631,
       "columns": 4,
@@ -81,6 +82,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp",
+        "sourceFacing": "right",
         "frameSize": 631,
         "frameHeight": 631,
         "columns": 4,
@@ -159,6 +161,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/UnitAttack/attack.png",
+        "sourceFacing": "right",
         "frameSize": 632,
         "frameHeight": 632,
         "columns": 4,
@@ -189,6 +192,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/UnitHurt/V3/hurt.png",
+        "sourceFacing": "right",
         "frameSize": 632,
         "frameHeight": 632,
         "columns": 4,
@@ -219,6 +223,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
+        "sourceFacing": "right",
         "frameSize": 316,
         "frameHeight": 316,
         "columns": 4,
@@ -252,6 +257,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "bean/gather": {
     "reference": {
       "image": "DesignAssets/Planning/Attributes/Units/bean-strength.png",
+      "sourceFacing": "right",
       "frameSize": 144,
       "frameHeight": 144,
       "columns": 1,
@@ -268,6 +274,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "harvest": {
         "image": "DesignAssets/Animations/GatherWorkV1/bean/harvest.webp",
+        "sourceFacing": "right",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -289,6 +296,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "carry": {
         "image": "DesignAssets/Animations/GatherWorkV1/bean/carry.webp",
+        "sourceFacing": "right",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -310,6 +318,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "throw": {
         "image": "DesignAssets/Animations/GatherWorkV1/bean/throw.webp",
+        "sourceFacing": "right",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -335,6 +344,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "bean/blade": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -414,6 +424,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -492,6 +503,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -546,6 +558,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -584,6 +597,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -614,6 +628,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/birth.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -725,6 +740,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SproutDeathV2/blade/death.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 4,
@@ -758,6 +774,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "bean/carapace": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -837,6 +854,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -915,6 +933,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -969,6 +988,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -1007,6 +1027,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -1037,6 +1058,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/birth.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -1148,6 +1170,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SproutDeathV2/carapace/death.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 4,
@@ -1181,6 +1204,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "bean/secretion": {
     "reference": {
       "image": "DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 1,
@@ -1197,6 +1221,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/BeanSecretionIdleV4/idle.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 8,
@@ -1275,6 +1300,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 6,
@@ -1313,6 +1339,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/UnitRangedV1/bean/hurt.png",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1343,6 +1370,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/UnitRangedV1/bean/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1381,6 +1409,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SproutDeathV2/secretion/death.webp",
+        "sourceFacing": "right",
         "frameSize": 83,
         "frameHeight": 83,
         "columns": 4,
@@ -1414,6 +1443,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "bean/antenna": {
     "reference": {
       "image": "DesignAssets/Animations/UnitAppearanceV1/bean/04/Source/neutral.png",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 1,
@@ -1430,6 +1460,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "hurt": {
         "image": "DesignAssets/Animations/BeanHeldHurtV1/antenna.webp",
+        "sourceFacing": "right",
         "frameSize": 340,
         "frameHeight": 344,
         "columns": 4,
@@ -1473,6 +1504,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "bean/feet": {
     "reference": {
       "image": "DesignAssets/Animations/UnitAppearanceV1/bean/08/Source/neutral.png",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 1,
@@ -1489,6 +1521,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "hurt": {
         "image": "DesignAssets/Animations/BeanHeldHurtV1/feet.webp",
+        "sourceFacing": "right",
         "frameSize": 340,
         "frameHeight": 356,
         "columns": 4,
@@ -1532,6 +1565,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spore/base": {
     "reference": {
       "image": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp",
+      "sourceFacing": "right",
       "frameSize": 549,
       "frameHeight": 549,
       "columns": 4,
@@ -1611,6 +1645,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp",
+        "sourceFacing": "right",
         "frameSize": 549,
         "frameHeight": 549,
         "columns": 4,
@@ -1689,6 +1724,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1719,6 +1755,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "jump": {
         "image": "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1749,6 +1786,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp",
+        "sourceFacing": "right",
         "frameSize": 553,
         "frameHeight": 553,
         "columns": 4,
@@ -1779,6 +1817,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp",
+        "sourceFacing": "right",
         "frameSize": 553,
         "frameHeight": 553,
         "columns": 4,
@@ -1809,6 +1848,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+        "sourceFacing": "right",
         "frameSize": 553,
         "frameHeight": 553,
         "columns": 4,
@@ -1831,6 +1871,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp",
+        "sourceFacing": "right",
         "frameSize": 192,
         "frameHeight": 192,
         "columns": 4,
@@ -1870,6 +1911,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spore/gather": {
     "reference": {
       "image": "DesignAssets/Tribes/spore/ApprovedGatherV1/idle.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 1,
@@ -1886,6 +1928,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Tribes/spore/ApprovedGatherMotionV1/idle.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "columns": 8,
         "frameCount": 64,
@@ -1964,6 +2007,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Tribes/spore/ApprovedGatherMotionV1/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "columns": 8,
         "frameCount": 16,
@@ -1994,6 +2038,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "harvest": {
         "image": "DesignAssets/Animations/GatherWorkV1/spore/harvest.webp",
+        "sourceFacing": "right",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -2015,6 +2060,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "carry": {
         "image": "DesignAssets/Animations/GatherWorkV1/spore/carry.webp",
+        "sourceFacing": "right",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -2036,6 +2082,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "throw": {
         "image": "DesignAssets/Animations/GatherWorkV1/spore/throw.webp",
+        "sourceFacing": "right",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -2061,6 +2108,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spore/blade": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -2140,6 +2188,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -2218,6 +2267,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -2248,6 +2298,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -2286,6 +2337,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -2316,6 +2368,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/CombatDeathV1/spore/blade/death.webp",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -2341,6 +2394,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spore/carapace": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -2420,6 +2474,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -2498,6 +2553,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -2528,6 +2584,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -2566,6 +2623,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -2596,6 +2654,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/CombatDeathV1/spore/carapace/death.webp",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -2621,6 +2680,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spore/secretion": {
     "reference": {
       "image": "DesignAssets/Animations/UnitRangedV1/spore/Source/neutral.png",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 1,
@@ -2637,6 +2697,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionIdleV1/spore/idle.webp",
+        "sourceFacing": "right",
         "frameSize": 208,
         "frameHeight": 208,
         "columns": 4,
@@ -2781,6 +2842,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 6,
@@ -2825,6 +2887,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/UnitRangedV1/spore/hurt.png",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -2855,6 +2918,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/UnitRangedV1/spore/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -2885,6 +2949,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/UnitRangedV1/spore/death.png",
+        "sourceFacing": "right",
         "frameSize": 553,
         "frameHeight": 553,
         "columns": 4,
@@ -2910,6 +2975,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spore/antenna": {
     "reference": {
       "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/walk.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 4,
@@ -2933,6 +2999,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -2955,6 +3022,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/death.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -2977,6 +3045,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/MinorHeldHurtV1/spore-antenna.webp",
+        "sourceFacing": "right",
         "frameSize": 536,
         "frameHeight": 316,
         "columns": 4,
@@ -3024,6 +3093,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spore/feet": {
     "reference": {
       "image": "DesignAssets/Animations/TribeMinorV1/spore/feet/walk.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 4,
@@ -3047,6 +3117,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/spore/feet/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -3069,6 +3140,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/TribeMinorV1/spore/feet/death.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -3091,6 +3163,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/MinorHeldHurtV1/spore-feet.webp",
+        "sourceFacing": "right",
         "frameSize": 448,
         "frameHeight": 320,
         "columns": 4,
@@ -3138,6 +3211,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "pebble/base": {
     "reference": {
       "image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -3217,6 +3291,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -3295,6 +3370,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 5,
@@ -3329,6 +3405,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "jump": {
         "image": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -3359,6 +3436,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -3389,6 +3467,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp",
+        "sourceFacing": "right",
         "frameSize": 517,
         "frameHeight": 517,
         "columns": 4,
@@ -3419,6 +3498,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+        "sourceFacing": "right",
         "frameSize": 517,
         "frameHeight": 517,
         "columns": 4,
@@ -3441,6 +3521,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
+        "sourceFacing": "right",
         "frameSize": 151,
         "frameHeight": 151,
         "columns": 8,
@@ -3506,6 +3587,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "pebble/gather": {
     "reference": {
       "image": "DesignAssets/Planning/Attributes/Units/pebble-strength.png",
+      "sourceFacing": "right",
       "frameSize": 144,
       "frameHeight": 144,
       "columns": 1,
@@ -3522,6 +3604,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "harvest": {
         "image": "DesignAssets/Animations/GatherWorkV1/pebble/harvest.webp",
+        "sourceFacing": "right",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -3543,6 +3626,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "carry": {
         "image": "DesignAssets/Animations/GatherWorkV1/pebble/carry.webp",
+        "sourceFacing": "right",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -3564,6 +3648,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "throw": {
         "image": "DesignAssets/Animations/GatherWorkV1/pebble/throw.webp",
+        "sourceFacing": "right",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -3589,6 +3674,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "pebble/blade": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -3668,6 +3754,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -3746,6 +3833,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -3780,6 +3868,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -3818,6 +3907,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -3848,6 +3938,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/birth.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -3928,6 +4019,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/CombatDeathV1/pebble/blade/death.webp",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -3953,6 +4045,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "pebble/carapace": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -4032,6 +4125,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -4110,6 +4204,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -4144,6 +4239,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -4182,6 +4278,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -4212,6 +4309,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/birth.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -4292,6 +4390,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/CombatDeathV1/pebble/carapace/death.webp",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -4317,6 +4416,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "pebble/secretion": {
     "reference": {
       "image": "DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 1,
@@ -4333,6 +4433,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionIdleV1/pebble/idle.webp",
+        "sourceFacing": "right",
         "frameSize": 236,
         "frameHeight": 236,
         "columns": 4,
@@ -4477,6 +4578,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 6,
@@ -4521,6 +4623,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/hurt.png",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -4551,6 +4654,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -4585,6 +4689,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/birth.png",
+        "sourceFacing": "right",
         "frameSize": 151,
         "frameHeight": 151,
         "columns": 8,
@@ -4647,6 +4752,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/death.png",
+        "sourceFacing": "right",
         "frameSize": 517,
         "frameHeight": 517,
         "columns": 4,
@@ -4672,6 +4778,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "pebble/antenna": {
     "reference": {
       "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 4,
@@ -4695,6 +4802,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "birth": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/birth.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 8,
@@ -4726,6 +4834,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/death.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -4748,6 +4857,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -4770,6 +4880,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/MinorHeldHurtV1/pebble-antenna.webp",
+        "sourceFacing": "right",
         "frameSize": 564,
         "frameHeight": 344,
         "columns": 4,
@@ -4817,6 +4928,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "pebble/feet": {
     "reference": {
       "image": "DesignAssets/Animations/TribeMinorV1/pebble/feet/walk.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 4,
@@ -4840,6 +4952,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "birth": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/feet/birth.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 8,
@@ -4878,6 +4991,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/feet/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -4900,6 +5014,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/MinorHeldHurtV1/pebble-feet.webp",
+        "sourceFacing": "right",
         "frameSize": 528,
         "frameHeight": 332,
         "columns": 4,
@@ -4947,6 +5062,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spring/base": {
     "reference": {
       "image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp",
+      "sourceFacing": "right",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -5026,6 +5142,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -5104,6 +5221,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -5134,6 +5252,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "jump": {
         "image": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -5164,6 +5283,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
+        "sourceFacing": "right",
         "frameSize": 516,
         "frameHeight": 516,
         "columns": 4,
@@ -5194,6 +5314,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp",
+        "sourceFacing": "right",
         "frameSize": 516,
         "frameHeight": 516,
         "columns": 4,
@@ -5224,6 +5345,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+        "sourceFacing": "right",
         "frameSize": 516,
         "frameHeight": 516,
         "columns": 4,
@@ -5246,6 +5368,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+        "sourceFacing": "right",
         "frameSize": 236,
         "frameHeight": 236,
         "columns": 4,
@@ -5276,6 +5399,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spring/gather": {
     "reference": {
       "image": "DesignAssets/Planning/Attributes/Units/spring-strength.png",
+      "sourceFacing": "right",
       "frameSize": 144,
       "frameHeight": 144,
       "columns": 1,
@@ -5292,6 +5416,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "harvest": {
         "image": "DesignAssets/Animations/GatherWorkV1/spring/harvest.webp",
+        "sourceFacing": "right",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -5313,6 +5438,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "carry": {
         "image": "DesignAssets/Animations/GatherWorkV1/spring/carry.webp",
+        "sourceFacing": "right",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -5334,6 +5460,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "throw": {
         "image": "DesignAssets/Animations/GatherWorkV1/spring/throw.webp",
+        "sourceFacing": "right",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -5359,6 +5486,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spring/blade": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -5438,6 +5566,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -5516,6 +5645,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -5546,6 +5676,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -5584,6 +5715,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -5614,6 +5746,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/birth.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -5673,6 +5806,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/CombatDeathV1/spring/blade/death.webp",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -5698,6 +5832,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spring/carapace": {
     "reference": {
       "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/idle.webp",
+      "sourceFacing": "left",
       "frameSize": 256,
       "frameHeight": 256,
       "columns": 8,
@@ -5777,6 +5912,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/idle.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -5855,6 +5991,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/walk.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -5885,6 +6022,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -5923,6 +6061,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/hurt.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -5953,6 +6092,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/birth.webp",
+        "sourceFacing": "left",
         "frameSize": 256,
         "frameHeight": 256,
         "columns": 8,
@@ -6012,6 +6152,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/CombatDeathV1/spring/carapace/death.webp",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -6037,6 +6178,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spring/secretion": {
     "reference": {
       "image": "DesignAssets/Animations/SecretionApprovedV2/spring/idle.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 1,
@@ -6053,6 +6195,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionIdleV1/spring/idle.webp",
+        "sourceFacing": "right",
         "frameSize": 228,
         "frameHeight": 228,
         "columns": 4,
@@ -6197,6 +6340,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/UnitRangedV1/spring/shoot.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 6,
@@ -6241,6 +6385,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/UnitRangedV1/spring/hurt.png",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -6271,6 +6416,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/UnitRangedV1/spring/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -6301,6 +6447,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -6328,6 +6475,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SecretionApprovedV2/spring/death.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -6353,6 +6501,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spring/antenna": {
     "reference": {
       "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/walk.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 4,
@@ -6376,6 +6525,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -6398,6 +6548,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/birth.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -6425,6 +6576,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/death.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -6447,6 +6599,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/MinorHeldHurtV1/spring-antenna.webp",
+        "sourceFacing": "right",
         "frameSize": 352,
         "frameHeight": 308,
         "columns": 4,
@@ -6494,6 +6647,7 @@ export const UNIT_ACTION_ART = Object.freeze({
   "spring/feet": {
     "reference": {
       "image": "DesignAssets/Animations/TribeMinorV1/spring/feet/walk.webp",
+      "sourceFacing": "right",
       "frameSize": 128,
       "frameHeight": 128,
       "columns": 4,
@@ -6517,6 +6671,7 @@ export const UNIT_ACTION_ART = Object.freeze({
     "actions": {
       "birth": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/feet/birth.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -6544,6 +6699,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/feet/death.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -6566,6 +6722,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/feet/walk.webp",
+        "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -6588,6 +6745,7 @@ export const UNIT_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/MinorHeldHurtV1/spring-feet.webp",
+        "sourceFacing": "right",
         "frameSize": 312,
         "frameHeight": 312,
         "columns": 4,

@@ -1,10 +1,11 @@
 import { UNIT_SECRETION_IDLE_ASSETS, unitSecretionIdlePose } from "./secretion-idle.mjs";
+import { BEAN_SECRETION_IDLE_ANIMATION } from "./bean-secretion-idle-assets.mjs";
 import { drawBeanSecretionBirth } from "./bean-secretion-birth.mjs";
 import { UNIT_SECRETION_WALK_ANIMATIONS, unitSecretionWalkPose } from "./secretion-walk.mjs";
 import { UNIT_SECRETION_LIFECYCLE_ANIMATIONS, UNIT_SECRETION_LIFECYCLE_ASSETS } from "./secretion-lifecycle.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import { UNIT_RANGED_ASSETS } from "./unit-ranged-assets.mjs";
-import { unitDisplaySize } from "./unit-size.mjs";
+import { unitDisplaySize, unitFrameMirror, unitFacing } from "./unit-size.mjs";
 import { unitSecretionResourcePose, secretionResourceFrame } from "./secretion-resource-motion.mjs";
 
 const root = "DesignAssets/Animations/UnitRangedV1/bean/";
@@ -20,7 +21,7 @@ export const UNIT_RANGED_FORMS = Object.freeze({
   ...Object.fromEntries(Object.entries(UNIT_RANGED_ASSETS).map(([tribe, form]) =>
     [tribe, Object.freeze({ ...form, hurt: UNIT_RANGED_HURT_ANIMATIONS[tribe], walk: UNIT_SECRETION_WALK_ANIMATIONS[tribe],
       lifecycle: UNIT_SECRETION_LIFECYCLE_ANIMATIONS[tribe] || null })])),
-  bean: Object.freeze({ birthBody: drawBeanSecretionBirth, lifecycle: UNIT_SECRETION_LIFECYCLE_ANIMATIONS.bean, hurt: UNIT_RANGED_HURT_ANIMATIONS.bean, walk: UNIT_SECRETION_WALK_ANIMATIONS.bean,
+  bean: Object.freeze({ idleAnimation: BEAN_SECRETION_IDLE_ANIMATION, birthBody: drawBeanSecretionBirth, lifecycle: UNIT_SECRETION_LIFECYCLE_ANIMATIONS.bean, hurt: UNIT_RANGED_HURT_ANIMATIONS.bean, walk: UNIT_SECRETION_WALK_ANIMATIONS.bean,
   idle: { image: root + "Source/neutral.png", frameSize: 512, viewSize: 512, columns: 1,
     pivotX: 256, pivotY: 448, frameCount: 1, durationMs: 600, durationsMs: [600], loop: true, rangedBody: true },
   animation: { image: root + "shoot.webp", frameSize: 512, viewSize: 512, columns: 6,
@@ -70,7 +71,7 @@ function unitRangedAttackOrIdlePose(agent, time) {
   const appearance = unitRangedAppearance(agent);
   if (!appearance || agent.health <= 0) return null;
   const active = unitRangedAttack(agent), animation = appearance.animation;
-  const idle = () => ({ action: "idle", animation: appearance.idle, frame: 0, mirrorX: agent.facing < 0 });
+  const idle = () => ({ action: "idle", animation: appearance.idle, frame: 0, mirrorX: unitFrameMirror(appearance.idle.sourceFacing, unitFacing(agent)) });
   if (!active || !Number.isFinite(time) || time < active.attack.startedAt) return idle();
   // The world computes readyAt and the final launch with differently grouped
   // additions. Permit only floating-point roundoff, not a delayed recovery.
@@ -100,7 +101,7 @@ function unitRangedAttackOrIdlePose(agent, time) {
   if (Math.abs(time - launch) <= epsilon) elapsed = launchAt;
   let frame = 0;
   while (frame < animation.frameCount - 1 && elapsed >= animation.durationsMs[frame]) elapsed -= animation.durationsMs[frame++];
-  return { action: "shoot", animation, frame, mirrorX: (active.attack.directionX || agent.facing) < 0 };
+  return { action: "shoot", animation, frame, mirrorX: unitFrameMirror(animation.sourceFacing, active.attack.directionX || unitFacing(agent)) };
 }
 
 function unitRangedCombatPose(agent, time) {
@@ -116,7 +117,7 @@ function unitRangedCombatPose(agent, time) {
   if (age < 0 || age >= duration) return pose;
   let elapsed = age / duration * animation.durationMs, frame = 0;
   while (frame < animation.frameCount - 1 && elapsed >= animation.durationsMs[frame]) elapsed -= animation.durationsMs[frame++];
-  return { action: "hurt", animation, frame, mirrorX: agent.facing < 0 };
+  return { action: "hurt", animation, frame, mirrorX: unitFrameMirror(animation.sourceFacing, unitFacing(agent)) };
 }
 
 export function unitRangedPose(agent, time) {

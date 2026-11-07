@@ -1,3 +1,4 @@
+import { unitFrameMirror } from "./unit-size.mjs";
 import { APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS, APPROVED_COTTON_SHEEP_WALK_ANIMATION } from "./creature-approved-actions.mjs";
 import { APPROVED_CREATURE_WALK_ANIMATIONS, APPROVED_CREATURE_DEATH_ANIMATIONS } from "./creature-approved-animations.mjs";
 import { CREATURE_RANGED_ANIMATIONS, CREATURE_RANGED_ASSETS, creatureRangedPose } from "./creature-ranged.mjs";
@@ -193,8 +194,8 @@ export function creatureAttackPose(agent, time) {
       animation.hitTimeMs + (elapsed - timing.hitTimeMs) / (timing.durationMs - timing.hitTimeMs) * (animation.durationMs - animation.hitTimeMs);
   }
   if (!Number.isFinite(elapsed) || elapsed < 0 || elapsed + 1e-6 >= animation.durationMs) return null;
-  const direction = attack.directionX || agent.facing || -1;
-  return { action: "attack", animation, frame: unitAnimationFrame(animation, elapsed), mirrorX: direction > 0 };
+  const direction = attack.directionX || agent.facing || 1;
+  return { action: "attack", animation, frame: unitAnimationFrame(animation, elapsed), mirrorX: unitFrameMirror(animation.sourceFacing || animation.facing || "left", direction) };
 }
 
 export function creatureHurtPose(agent, time) {

@@ -7,7 +7,7 @@ import { SPECIES_HELD_HURT_SOURCES } from './species-held-hurt-assets.mjs';
 import { beanHeldHurtAmount } from './bean-held-hurt.mjs';
 import { unitAnimationPose } from './unit-animation.mjs';
 import { unitRangedPose } from './unit-ranged.mjs';
-import { unitDisplaySize } from './unit-size.mjs';
+import { unitDisplaySize, unitFacing } from './unit-size.mjs';
 import { imageDimensions } from './image-audit.mjs';
 import { createSimulationTrial } from './combat-simulation.mjs';
 const tribes=['spore','pebble','spring'];
@@ -50,10 +50,11 @@ test('both strike directions and facing retain camera, native crop and source or
  for(const tribe of tribes)for(const form of forms)for(const mirror of [false,true])for(const hitSide of [-1,1]){
   const a=unit(tribe,form),s=speciesHeldHurtSource(a),ctx=context(),before=JSON.stringify(a),scale=250*unitDisplaySize(a)/s.referenceLength;
   assert.ok(drawSpeciesHeldHurt(ctx,a,10.2,p=>images.get(p),{cell:250,mirror,hitSide}));
-  const i=hitSide*(mirror?-1:1)>0?s.times.length:0,draw=ctx.calls.find(c=>c[0]==='draw');
+  const nativeFacing=["blade","carapace"].includes(form)?-1:1,displayFacing=(mirror?-1:1)*nativeFacing;
+  const i=hitSide*displayFacing>0?s.times.length:0,draw=ctx.calls.find(c=>c[0]==='draw');
   assert.deepEqual(draw.slice(2,6),[i%s.columns*s.frameWidth,Math.floor(i/s.columns)*s.frameHeight,s.frameWidth,s.frameHeight]);
   assert.deepEqual(draw.slice(6),[-s.pivotX*scale,-s.pivotY*scale,s.frameWidth*scale,s.frameHeight*scale]);
-  assert.deepEqual(ctx.calls.find(c=>c[0]==='scale'),['scale',mirror?-1:1,1]);assert.equal(JSON.stringify(a),before);
+  assert.deepEqual(ctx.calls.find(c=>c[0]==='scale'),['scale',displayFacing,1]);assert.equal(JSON.stringify(a),before);
  }
 });
 test('unavailable, partial and expired images fall through and loading recovers without timer reset',()=>{
@@ -91,7 +92,7 @@ test('actual world/detail helper preserves native animation scale, secretion sca
  const game=fs.readFileSync(new URL('./game.js',import.meta.url),'utf8');
  const helper=game.match(/^    function drawAgentHeldHurt\([^]*?^    }/m)[0];
  const state={simSeconds:10.3},draws=[],ctx=context();
- const Spawner={beanHeldHurtSource:()=>null,speciesHeldHurtSource,unitDisplaySize,
+ const Spawner={beanHeldHurtSource:()=>null,speciesHeldHurtSource,unitDisplaySize,unitFacing,
   drawSpeciesHeldHurt:(...a)=>{draws.push(a);return drawSpeciesHeldHurt(...a)}};
  const scope=vm.createContext({Spawner,state,AGENT_HEIGHT:.7,ctx,unitDisplayScale:()=>1.5,agentRangedImage:p=>images.get(p),
   unitAnimationSheets:new Map(['spore','pebble','spring'].map(t=>[t,new Map([['idle',{scale:1.25}]])])),unitBodySize:()=>{throw new Error('Wrong body fallback')}});

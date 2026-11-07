@@ -1,6 +1,6 @@
 import { UNIT_ACTION_ART } from "./unit-action-art-assets.mjs";
 import { unitDisplayAttributes, UNIT_DISPLAY_PRIORITY } from "./unit-display-appearance.mjs";
-import { unitDisplaySize } from "./unit-size.mjs";
+import { unitDisplaySize, unitFrameMirror } from "./unit-size.mjs";
 import { unitActionState } from "./unit-appearance-state.mjs";
 
 export function unitActionArtDefinition(agent) {
@@ -68,7 +68,7 @@ export function createUnitActionArt(assetSource, createSurface, loadImage) {
     const scale = cell * unitDisplaySize(agent) / (animation.referenceLength || reference.length) * (animation.referenceLength ? 1 : cameraScale);
     const crop = { x: pose.frame % animation.columns * width, y: Math.floor(pose.frame / animation.columns) * height, width, height };
     const destination = { x: -animation.pivotX * scale, y: -animation.pivotY * scale, width: width * scale, height: height * scale };
-    context.save(); context.translate(x, floor); context.scale(mirror ? -1 : 1, 1);
+    context.save(); context.translate(x, floor); context.scale(unitFrameMirror(animation.sourceFacing, mirror ? -1 : 1) ? -1 : 1, 1);
     if (beforeDraw) beforeDraw(context, image, crop, destination);
     context.drawImage(image, crop.x, crop.y, width, height, destination.x, destination.y, destination.width, destination.height);
     context.restore(); return true;

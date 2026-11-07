@@ -4154,7 +4154,7 @@
       if (form && combatAttributeArt.ready("spring")) {
         // Keep the current idle clock so the settled sprite and terminal idle
         // are identical, including eye animation, facing and the common pivot.
-        const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
+        const facing = Spawner.unitFacing(agent);
         const neutral = { ...agent, birth: null, attack: null, support: null, hurtStartedAt: -Infinity,
           mode: "idle", moveDuration: 0, facing: 1, combat: agent.combat ? { ...agent.combat, side: 1 } : null };
         const time = idleMotion.matches ? agent.bornAt || 0 : state.simSeconds;
@@ -4274,7 +4274,7 @@
       if (!sprite) return false;
       const size = Spawner.unitRangedDisplaySize(agent) / 100 * cell / unitDisplayScale(agent);
       const animation = form.idle;
-      const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
+      const facing = Spawner.unitFacing(agent);
       ctx.save();
       ctx.translate(centerX, floor - birth.lift * cell);
       ctx.rotate(birth.rotation);
@@ -4525,7 +4525,7 @@
       context.globalAlpha *= opacity * (1 - decay * .4);
       context.filter = "saturate(" + (1 - decay * .8) + ")";
       context.translate(x, floor);
-      context.scale(corpse.facing > 0 ? -1 : 1, 1);
+      context.scale(Spawner.unitFrameMirror(animation.sourceFacing || animation.facing || "left", corpse.facing) ? -1 : 1, 1);
       context.drawImage(entry.sprite, source.x, source.y, animation.frameSize, animation.frameSize, left, top, size, size);
       if (outlineColor) drawSelectionOutline(entry.sprite, left, top, size, size, source, outlineColor);
       context.restore();
@@ -4858,7 +4858,7 @@
         opacity *= 1 - lift * .35;
       }
       const attacking = agent.attack && state.simSeconds >= agent.attack.startedAt && state.simSeconds < agent.attack.endsAt;
-      const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : attacking ? agent.attack.directionX || agent.facing || 1 : agent.facing || 1;
+      const facing = Spawner.unitFacing(agent);
       if (agent.species ? facing > 0 : facing < 0) offsetX = -offsetX;
       const floor = key === "spiny-back-beetle" ? .86 : anchor;
       const point = worldToScreen(renderPosition.x + .5 + (position.x - renderPosition.x) * scale + offsetX,
@@ -4944,7 +4944,7 @@
       } else if (speciesSource || source.image.endsWith("/secretion.webp"))
         sourceScale = cell * Spawner.unitDisplaySize(agent) / source.referenceLength / scale;
       else sourceScale = cell * unitBodySize("bean", {}).width / source.bodyWidth * growth / scale;
-      const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
+      const facing = Spawner.unitFacing(agent);
       return (speciesSource ? Spawner.drawSpeciesHeldHurt : Spawner.drawBeanHeldHurt)(context, agent, state.simSeconds, agentRangedImage, {
         x, y, sourceScale, mirror: facing < 0,
         hitSide: !agent.combat ? Spawner.heldHurtProjectileSide?.(agent, combatVfxFrame, state.simSeconds) : null,
@@ -4964,7 +4964,7 @@
       }
       if (appearancePose) {
         const floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
-        const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
+        const facing = Spawner.unitFacing(agent);
         const drawn = appearanceWorld.draw(ctx, agent, appearancePose,
           { x: topLeft.x + cell / 2, y: floor - agentJumpOffset(agent, renderPosition) * cell }, cell,
           facing < 0, viewport.pixelRatio, outlineColor ? (context, image, crop, destination) => {
@@ -7626,13 +7626,11 @@
         animation.frameSize, animation.frameSize, -size * animation.pivotX / animation.frameSize, -size * animation.pivotY / animation.frameSize, size, size);
       context.restore(); return true;
     }
-    function combatArenaUnits(units, selected) {
-      if ([0, 1].every(side => units.filter(agent => agent.combat.side === side).length <= 3)) return units;
-      const target = selected && units.find(agent => String(agent.id) === String(selected.attack?.targetId ?? selected.combat.targetId));
-      return [0, 1].flatMap(side => {
-        const priority = [selected, target].filter(agent => agent?.combat.side === side);
-        return [...priority, ...units.filter(agent => agent.combat.side === side && !priority.includes(agent))].slice(0, 3);
-      });
+    function combatArenaUnits(units) {
+      return units.toSorted((a, b) => (a.combat?.side ?? a.side) - (b.combat?.side ?? b.side) ||
+        (a.combat?.slot ?? Infinity) - (b.combat?.slot ?? Infinity) ||
+        (a.combat?.joinedAt ?? Infinity) - (b.combat?.joinedAt ?? Infinity) ||
+        String(a.agentId ?? a.id).localeCompare(String(b.agentId ?? b.id), undefined, { numeric: true }));
     }
     function drawCombatPanel(now) {
       combatOpen.hidden = !selectedCombatUnits().length || !evolutionPanel.hidden || !welcome.hidden || combatPanel.open;
@@ -7656,8 +7654,10 @@
       }
       for (const button of combatRoster.children) button.setAttribute("aria-pressed", String(button.dataset.agent === combatSelected));
       const selected = units.find(agent => String(agent.id) === combatSelected);
-      const arenaUnits = combatArenaUnits(units, selected);
-      combatHeading.textContent = units.length > arenaUnits.length ? "전투 · 선택 유닛 중심" : "전투";
+      const arenaUnits = combatArenaUnits(units);
+      const formationMembers = combatWatch.formationMembers ||= new Map();
+      for (const agent of arenaUnits) formationMembers.set(String(agent.id), { ...agent.combat });
+      combatHeading.textContent = "전투";
       const events = { dodge: "회피", parry: "패링", block: "방어", stun: "기절", counter: "반격", hit: "타격" };
       const selectedEvent = combatVisualEvent(selected);
       const status = selected?.combat.stunnedUntil > state.simSeconds ? "기절" : selectedEvent && state.simSeconds - selectedEvent.at < .5 && ["dodge", "parry", "block", "stun"].includes(selectedEvent.kind) ? events[selectedEvent.kind] : selected?.attack?.counter ? "반격" : selected?.attack?.heavy ? "모아 찌르기" : selected?.attack && state.simSeconds < selected.attack.hitAt ? "공격 준비" : selectedEvent && state.simSeconds - selectedEvent.at < .5 ? events[selectedEvent.kind] : "교전 중";
@@ -7687,27 +7687,28 @@
         const bounds = unitDisplayBounds.get(kind), growth = scale / (unitDisplayScales.get(kind) || 1);
         return [String(agent.id), { scale, width: (bounds?.width || .4) * growth, height: (bounds?.height || .4) * growth }];
       }));
-      combatWatch.maxWidth = Math.max(combatWatch.maxWidth || .4, ...[...dimensions.values()].map(size => size.width));
-      combatWatch.maxHeight = Math.max(combatWatch.maxHeight || .4, ...[...dimensions.values()].map(size => size.height));
-      const cell = Math.min(width * .31, width * .22 / combatWatch.maxWidth, height * .43 / combatWatch.maxHeight);
-      const appearancePoses = appearanceWorld.prepare(context, arenaUnits, state.simSeconds, cell, pixelRatio);
-      const positions = new Map();
-      const fallbackImpacts = [];
-      let dodgeLabels = [];
-      const slots = [{ x:.39, floor:.76 }, { x:.20, floor:.58 }, { x:.21, floor:.88 }];
-      [0, 1].forEach(side => arenaUnits.filter(agent => agent.combat.side === side).forEach((agent, index) => {
-        const slot = slots[index], size = dimensions.get(String(agent.id));
-        positions.set(String(agent.id), { x: width * (side ? 1 - slot.x : slot.x), y: height * slot.floor,
-          scale: size.scale, width: size.width * cell, height: size.height * cell });
-      }));
-      const vfxPositions = new Map(positions);
       const deathPresentation = combatWatch.deaths ||= Spawner.createDetailCombatDeath?.();
       deathPresentation?.begin(state.simSeconds, { scope: combatWatch.id, roomId: connection.roomId, snapshotTime: connection.simSeconds,
         streamId: state.combatVfx?.streamId, width, height, visibleIds: arenaUnits.map(agent => agent.id),
         livingAgents: [...state.agents, ...state.rivals] });
+      const deathCommands = deathPresentation?.commands(state.corpses, corpsePlaybackTime(), { width, height, cell: 1 }) || [];
+      const formation = Spawner.combatViewLayout(width, height, combatArenaUnits([...arenaUnits, ...deathCommands.map(command => ({ ...command.corpse,
+        id: command.agentId, combat: formationMembers.get(String(command.agentId)) }))]));
+      const cell = formation.cell;
+      const appearancePoses = appearanceWorld.prepare(context, arenaUnits, state.simSeconds, cell, pixelRatio);
+      const positions = new Map();
+      const fallbackImpacts = [];
+      let dodgeLabels = [];
+      for (const agent of arenaUnits) {
+        const point = formation.positions.get(String(agent.id)), size = dimensions.get(String(agent.id));
+        positions.set(String(agent.id), { x: point.x, y: point.y,
+          scale: size.scale, width: size.width * cell, height: size.height * cell });
+      }
+      const vfxPositions = new Map(positions);
       // Current authoritative corpses remain behind the living roster. Only
       // this open view's previously observed approved body routes are eligible.
-      for (const command of deathPresentation?.commands(state.corpses, corpsePlaybackTime(), { width, height, cell }) || []) {
+      for (const entry of deathCommands) {
+        const command = { ...entry, cell };
         const { point } = command;
         context.save(); context.fillStyle = "#13251e3d";
         const shadow = Spawner.detailCreatureDeathShadow?.(command, creatureDeathSheets.get(command.corpse.species), idleMotion.matches);
@@ -7752,7 +7753,7 @@
           Math.max(7, point.width * .55), agent.combat.side ? "#e18c82" : "#83d6c1");
         const frozen = hit && age >= 0 && age < .055;
         const visual = { ...agent, facing, hurtStartedAt: Number.isFinite(agent.hurtStartedAt) ? agent.hurtStartedAt + (frozen && (agent.tribe || "bean") !== "bean" && !Spawner.speciesHeldHurtSource?.(agent) ? age : 0) : agent.hurtStartedAt,
-          combat: { ...agent.combat, side: facing > 0 ? 1 : 0 }, attack: attack ? { ...attack, directionX: facing,
+          combat: { ...agent.combat }, attack: attack ? { ...attack, directionX: facing,
             startedAt: attack.startedAt + (frozen ? age : 0), hitAt: attack.hitAt + (frozen ? age : 0), endsAt: attack.endsAt + (frozen ? age : 0),
             meleeContacts: Array.isArray(attack.meleeContacts) ? attack.meleeContacts.map(at => at + (frozen ? age : 0)) : undefined } : null };
         const appearancePose = appearancePoses.get(String(agent.id));

@@ -1,6 +1,6 @@
 import { imageAnimation } from "./image-geometry.mjs";
 import { UNIT_IMAGE_BOUNDS } from "./unit-image-bounds.mjs";
-import { unitDisplaySize } from "./unit-size.mjs";
+import { unitDisplaySize, unitFrameMirror, unitFacing } from "./unit-size.mjs";
 
 // Approved 2026-11-06. Native cels are unchanged; registration is the exact
 // inverse of the approved melee seed's lossless resize-and-padding transform.
@@ -156,12 +156,13 @@ export function creatureRangedPose(agent, time) {
   let frame = 0;
   while (frame < animation.frameCount-1 && elapsed >= animation.durationsMs[frame]) elapsed -= animation.durationsMs[frame++];
   return { action: "ranged", animation, frame, shotIndex, launchAt: launch,
-    mirrorX: (attack.directionX || agent.facing || -1) > 0 };
+    mirrorX: unitFrameMirror(animation.sourceFacing || animation.facing || "left", attack.directionX || agent.facing || 1) };
 }
 
 // Offsets are in world cells relative to the same idle-normalized body pivot
 // used by the world, detail and laboratory renderers. The journal owns timing.
-export function creatureRangedOutlet(agent, facing = agent.attack?.directionX || agent.facing || -1) {
+export function creatureRangedOutlet(agent, facing) {
+  facing ||= unitFacing(agent);
   const animation = CREATURE_RANGED_ANIMATIONS[agent.species];
   if (!animation) return null;
   const idle = imageAnimation({ image: animation.idleImage, frameSize: 512, viewSize: 512 });
@@ -169,6 +170,6 @@ export function creatureRangedOutlet(agent, facing = agent.attack?.directionX ||
   const length = Math.max(bounds.width, bounds.height) * idle.frameSize / bounds.frameSize;
   const scale = unitDisplaySize(agent) * idle.viewSize /
     ((idle.registrationScale || 1) * length * animation.viewSize);
-  return { x: -Math.sign(facing || -1) * (animation.outletX-animation.pivotX) * scale,
+  return { x: (unitFrameMirror(animation.sourceFacing || animation.facing || "left", facing) ? -1 : 1) * (animation.outletX-animation.pivotX) * scale,
     y: (animation.outletY-animation.pivotY) * scale };
 }

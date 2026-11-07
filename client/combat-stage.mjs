@@ -13,7 +13,7 @@ import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
 import { createUnitAppearanceWorld } from "./unit-appearance-world.mjs";
 import { AGENT_DEATH_ANIMATION } from "./agent-death.mjs";
 import { imageAnimation, imageFrameGeometry } from "./image-geometry.mjs";
-import { unitDisplaySize } from "./unit-size.mjs";
+import { unitDisplaySize, combatViewLayout, unitFrameMirror } from "./unit-size.mjs";
 import { unitRangedAppearance, unitRangedPose, unitRangedDisplaySize, unitRangedProjectile, unitRangedLifecycleAnimation } from "./unit-ranged.mjs";
 import { UNIT_IMAGE_BOUNDS } from "./unit-image-bounds.mjs";
 import { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, unitAnimationPose, unitAnimationFrame, creatureHurtPose, creatureAttackPose } from "./unit-animation.mjs";
@@ -73,7 +73,7 @@ function displaySize(agent, pose) {
     return scale * (pose.animation.viewSize || pose.animation.frameSize) / (pose.animation.registrationScale || 1);
   }
   const reference = pose && ["death", "dead"].includes(pose.action) ? pose.animation : idle;
-  const bounds = UNIT_IMAGE_BOUNDS[reference.image];
+  const bounds = UNIT_IMAGE_BOUNDS[reference.image] || UNIT_IMAGE_BOUNDS[idle.image];
   const length = Math.max(bounds.width, bounds.height) * reference.frameSize / bounds.frameSize;
   return 100 * unitDisplaySize(agent) * (reference.viewSize || reference.frameSize) /
     ((reference.registrationScale || 1) * length);
@@ -111,7 +111,7 @@ export function createCombatStage(canvas) {
   const appearanceWorld = createUnitAppearanceWorld();
   const representativeArt = createCombatStageAppearance(image);
   const vfxCursor = createCombatVfxCursor(), detailVfx = createDetailCombatVfx();
-  let appearancePoses = new Map(), dodgePositions = new Map(), dodgeCues = [];
+  let appearancePoses = new Map(), dodgePositions = new Map(), dodgeCues = [], cameraUnits = [], viewLayout;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const deathStarted = new Map(), readyPoses = new Map();
   let currentTrial, previousTime = null, seen = 0, effects = [], clock = 0, lastNow = 0;
@@ -160,22 +160,12 @@ export function createCombatStage(canvas) {
     const dodge = currentTrial?.vfx?.version !== 1 && recent.find(effect => effect.event.kind === "dodge");
     const age = impact ? (clock - impact.born) / .22 : 1;
     const recoil = reducedMotion.matches ? 0 : impact ? Math.sin(age * Math.PI) * 16 : dodge ? 26 * Math.sin((clock - dodge.born) / .22 * Math.PI) : 0;
-    const distance = currentTrial?.agents.every(entry => Number.isFinite(entry.x)) ? Math.abs(currentTrial.agents[1].x - currentTrial.agents[0].x) : 1;
-    const gap = Math.min(.64, .2 * Math.max(1, distance));
-    const members = currentTrial.agents.filter(other => (other.combat?.side ?? other.side) === index);
-    if (currentTrial.agents.length > 2) {
-      const slot = members.indexOf(agent), columns = Math.ceil(Math.sqrt(members.length)), rows = Math.ceil(members.length / columns);
-      return { x: width * (index === 0 ? .12 + .28 * ((slot % columns + .5) / columns) : .88 - .28 * ((slot % columns + .5) / columns)) + direction * (lunge - recoil) * width / 1040,
-        y: height * (.35 + .43 * ((Math.floor(slot / columns) + 1) / rows)), direction };
-    }
-    return { x: width * (.5 - direction * gap / 2) + direction * (lunge - recoil) * width / 1040, y: Math.round(height * .79), direction };
+    const point = viewLayout.positions.get(String(agent.id));
+    return { x: point.x + direction * (lunge - recoil) * width / 1040, y: point.y, direction };
   }
 
   function formationScale(width, height) {
-    const bounds = currentTrial.agents.map(bodyDimensions);
-    const maxWidth = Math.max(.4, ...bounds.map(bound => bound.width));
-    const maxHeight = Math.max(.4, ...bounds.map(bound => bound.height));
-    return Math.min(width * .31, width * .22 / maxWidth, height * .43 / maxHeight) / 100;
+    return viewLayout.cell / 100;
   }
 
   function readyPose(agent, requested, time) {
@@ -262,7 +252,7 @@ export function createCombatStage(canvas) {
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
       { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), index === 1);
     if (!appearanceDrawn && !representativeDrawn && asset) {
-      const mirror = pose?.mirrorX ?? ((geometry?.facing || (agent.species ? "left" : "right")) === "right" ? agent.facing < 0 : agent.facing > 0);
+      const mirror = pose?.mirrorX ?? unitFrameMirror(geometry?.sourceFacing || geometry?.facing || (agent.species ? "left" : "right"), agent.facing);
       context.scale(mirror ? -1 : 1, 1);
       if (!alive && pose?.action !== "death" && pose?.action !== "dead") { context.globalAlpha = .38; context.rotate(-point.direction * .9); context.scale(.85, .85); }
       if (pose) {
@@ -341,8 +331,7 @@ export function createCombatStage(canvas) {
   }
 
   function supportPoint(agent, points, width, height) {
-    const point = points[agent.id.replace(/-support$/, "")];
-    return { x: point.x - point.direction * width * .13, y: height * .88, direction: point.direction };
+    return { ...viewLayout.positions.get(String(agent.id)), direction: (agent.combat?.side ?? agent.side) === 0 ? 1 : -1 };
   }
 
   function supportArt(agent, points, width, height, time) {
@@ -362,7 +351,7 @@ export function createCombatStage(canvas) {
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
       { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1);
     if (!appearanceDrawn && !representativeDrawn && asset) {
-      const mirror = pose?.mirrorX ?? ((geometry?.facing || (agent.species ? "left" : "right")) === "right" ? agent.facing < 0 : agent.facing > 0);
+      const mirror = pose?.mirrorX ?? unitFrameMirror(geometry?.sourceFacing || geometry?.facing || (agent.species ? "left" : "right"), agent.facing);
       context.save(); context.scale(mirror ? -1 : 1, 1);
       if (pose) { const { frameSize, columns, pivotX, pivotY, viewSize, registrationScale } = geometry;
         const scale = size * (registrationScale || 1) / (viewSize || frameSize);
@@ -435,6 +424,8 @@ export function createCombatStage(canvas) {
     if (canvas.width !== Math.round(width * ratio) || canvas.height !== Math.round(height * ratio)) { canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio); }
     context.setTransform(ratio, 0, 0, ratio, 0, 0); background(width, height);
     if (!trial) return;
+    cameraUnits = [...trial.agents, ...(trial.supportAgents || [])].map(stageAgent);
+    viewLayout = combatViewLayout(width, height, cameraUnits);
     const vfx = trial.vfx, liveFlightKeys = new Set();
     let liveFlights = [];
     if (vfx?.version === 1) {

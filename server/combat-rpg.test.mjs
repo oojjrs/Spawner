@@ -148,7 +148,10 @@ test("RPG animation maps the exact hit and end boundaries to native metadata", a
   assert.equal(unitAnimationPose(agent, attack.hitAt).frame, AGENT_ATTACK_HIT_FRAME);
   assert.notEqual(unitAnimationPose(agent, attack.endsAt).action, "attack");
   const animations = COMBAT_EVOLUTION_CATALOG["sprout/blade"].animations;
-  assert.equal(combatEvolutionPose(agent, attack.hitAt, animations).elapsed, AGENT_ATTACK_HIT_TIME * 1000);
+  agent.attributes = { blade: 1 };
+  const evolution = combatEvolutionPose(agent, attack.hitAt, animations);
+  assert.equal(evolution.missing, false);
+  assert.equal(evolution.frame, unitAnimationFrame(evolution.animation, evolution.animation.hitTimeMs ?? AGENT_ATTACK_HIT_TIME * 1000));
   agent.species = "flower-tail-bird";
   const native = CREATURE_ATTACK_TIMINGS[agent.species], animation = CREATURE_ATTACK_ANIMATIONS[agent.species];
   assert.equal(creatureAttackPose(agent, attack.hitAt).frame, unitAnimationFrame(animation, native.hitTimeMs));

@@ -1,3 +1,4 @@
+import { unitFrameMirror } from "./unit-size.mjs";
 import { createUnitAppearanceCache, unitAppearanceLodRatio, unitAppearanceSourceScale } from "./unit-appearance.mjs";
 
 export function createUnitAppearanceRenderer(loadSource, makeBitmap, pixelBudget) {
@@ -24,7 +25,7 @@ export function createUnitAppearanceRenderer(loadSource, makeBitmap, pixelBudget
     const destination = { x: -shape.pivotX * scale, y: -shape.pivotY * scale, width: width * scale, height: height * scale };
     context.save();
     try {
-      context.translate(anchor.x, anchor.y); context.scale(mirror ? -1 : 1, 1);
+      context.translate(anchor.x, anchor.y); context.scale(unitFrameMirror(animation.sourceFacing || pose.source.sourceFacing, mirror ? -1 : 1) ? -1 : 1, 1);
       context.imageSmoothingEnabled = true; context.imageSmoothingQuality = "high";
       beforeDraw?.(context, raster.image, crop, destination);
       context.drawImage(raster.image, crop.x, crop.y, crop.width, crop.height,

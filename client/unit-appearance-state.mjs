@@ -1,3 +1,4 @@
+import { attackAnimationElapsed } from '../server/attack.mjs';
 import { UNIT_ANIMATIONS, unitMovementElapsedMs } from './unit-animation.mjs';
 import { unitAppearanceForAgent, unitAppearancePose } from './unit-appearance.mjs';
 
@@ -29,6 +30,16 @@ export function unitActionState(agent, time, options = {}) {
     // the shot's launch cue; the caller selects that explicit clock contract.
     const contact=ranged?finite(attack.launchedAt,options.attackClock==='lab'?attack.hitAt:undefined):attack.hitAt;
     const cue=ranged?(clips.ranged?.launchAtMs??200):(clips.attack?.hitTimeMs??300);
+    if(Number.isFinite(attack.recovery)&&Number.isFinite(contact)) {
+      const clock=ranged?{...attack,hitAt:contact,meleeContacts:attack.shotLaunches||[contact]}:attack;
+      const elapsed=attackAnimationElapsed(clock,time,cue/1000,ms/1000)*1000;
+      if(elapsed>=ms)return null;
+      const contacts=clock.meleeContacts||[contact];
+      let index=0;while(index<contacts.length-1&&time>contacts[index]&&time>=contacts[index+1]-cue/1000)index++;
+      const hit=contacts[index],swing=index?Math.max(contacts[index-1],hit-cue/1000):start;
+      const tail=Math.min(end,hit+(ms-cue)/1000);
+      return {...state(action,start,[[swing,0],[hit,cue],[tail,Math.min(ms,cue+Math.max(0,tail-hit)*1000)]]),elapsedMs:elapsed,hasLaunchAnchor:true,eventAnchors:contacts.map(at=>({atMs:cue,at}))};
+    }
     const anchored=Number.isFinite(contact)&&contact>start&&contact<end;
     return state(action,start,anchored?[[start,0],[contact,cue],[end,ms]]:[[start,0],[end,ms]],{hasLaunchAnchor:!ranged||anchored});
   }
@@ -91,11 +102,14 @@ export function createUnitAppearanceEventPlayback({maxGap=.5}={}) {
     for(let cycle=first;cycle<=last;cycle++)for(const [index,event]of(animation.events||[]).entries()){
       if(event.type==='launch'&&state.hasLaunchAnchor===false)continue;
       const atMs=cycle*ms+event.atMs;if(!Number.isFinite(atMs)||event.atMs<0||event.atMs>ms)continue;
-      const at=absoluteEventTime(state,atMs);
-      if(at===null||at<=previous+1e-9||at>time+1e-9)continue;
-      const id=[state.unitId,animation.sourceId,state.action,index,cycle,at.toFixed(6)].join(':');
-      if(seen.has(id))continue;
-      seen.set(id,true);events.push({...event,at,cycle,dedupeId:id,unitId:state.unitId,action:state.action});
+      const anchors=state.eventAnchors?.filter(anchor=>anchor.atMs===atMs);
+      const times=anchors?.length?anchors.map(anchor=>anchor.at):[absoluteEventTime(state,atMs)];
+      for(const at of times){
+        if(at===null||at<=previous+1e-9||at>time+1e-9)continue;
+        const id=[state.unitId,animation.sourceId,state.action,index,cycle,at.toFixed(6)].join(':');
+        if(seen.has(id))continue;
+        seen.set(id,true);events.push({...event,at,cycle,dedupeId:id,unitId:state.unitId,action:state.action});
+      }
     }
     while(seen.size>2048)seen.delete(seen.keys().next().value);
     return events;

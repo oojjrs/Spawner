@@ -14,6 +14,15 @@ export const AGENT_ATTACK_ASSET = "DesignAssets/Animations/UnitAttack/attack.png
 
 export function attackAnimationElapsed(attack, time, hitTime, duration) {
   const elapsed = time - attack.startedAt;
+  if (Number.isFinite(attack.recovery)) {
+    const contacts = attack.meleeContacts || [attack.hitAt];
+    let index = 0;
+    while (index < contacts.length - 1 && time > contacts[index] && time >= contacts[index + 1] - hitTime) index++;
+    const contact = contacts[index], start = index ? Math.max(contacts[index - 1], contact - hitTime) : attack.startedAt;
+    if (time < contact) return Math.max(0, (time - start) / Math.max(1e-9, contact - start) * hitTime);
+    return Math.min(duration, hitTime + time - contact);
+  }
+
   // DNA melee follow-ups move hitAt forward without beginning a new action.
   // Keep the contact already reached, then finish recovery and prepare the next
   // swing using only the server's recorded contacts, not current unit stats.

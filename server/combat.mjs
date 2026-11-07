@@ -6,7 +6,7 @@ import { dropCarriedResources } from "./resources.mjs";
 import { militaryAgent } from "./conquest-pacing.mjs";
 import { creatureSpawning } from "./creature-spawn.mjs";
 import { ENCOUNTER_TYPES } from "./encounter-types.mjs";
-import { AGENT_ATTACK_DURATION } from "./attack.mjs";
+import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME } from "./attack.mjs";
 import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
 import { CREATURE_ATTACK_TIMINGS } from "./creature-attack.mjs";
 import { unitTravelSpeed, unitTerrainSpeedMultiplier } from "./attributes.mjs";
@@ -276,11 +276,12 @@ export function createCombat(environment) {
     const windup = counter ? (environment.combatRules?.counterWindup ?? .12) : profile.windup + (heavy ? .15 : 0);
     const timing = CREATURE_ATTACK_TIMINGS[attacker.species] || (attacker.species === "spiny-back-beetle" ? BEETLE_ANIMATIONS.attack :
       { durationMs: AGENT_ATTACK_DURATION * 1000 });
-    const duration = windup + profile.recovery;
+    const recovery = Math.max(profile.recovery, timing.durationMs / 1000 - (timing.hitTimeMs / 1000 || AGENT_ATTACK_HIT_TIME));
+    const duration = windup + recovery;
     attacker.attack = { combatId: combat.id, startedAt: time, hitAt: time + windup, endsAt: time + duration,
       speed: timing.durationMs / 1000 / duration, directionX: combat.side === 0 ? -1 : 1,
       targetId: target.id, targetKind: "agent", targetX: combat.x, targetY: combat.y,
-      resolved: false, hit: false, counter, heavy, attackMode: mode };
+      resolved: false, hit: false, counter, heavy, attackMode: mode, recovery };
     if (attacker.stats?.dna) { attacker.attack.hitIndex = 0; attacker.attack.heavy = false; }
     if (attacker.stats?.dna && mode === "melee" && !counter) attacker.attack.meleeContacts = [attacker.attack.hitAt];
     if (attacker.species && !attacker.stats?.dna && mode === "ranged") {
@@ -382,7 +383,7 @@ export function createCombat(environment) {
     if (source && !attack.counter && attacker.health > 0 && defender.health > 0 && ++attack.hitIndex < source.hits) {
       attack.resolved = false; attack.hitAt = time + source.comboSpeed;
       if (attack.meleeContacts) attack.meleeContacts.push(attack.hitAt);
-      attack.endsAt = Math.max(attack.endsAt, attack.hitAt + combatProfile(attacker).recovery);
+      attack.endsAt = Math.max(attack.endsAt, attack.hitAt + attack.recovery);
     }
   }
 
@@ -616,7 +617,9 @@ export function createCombat(environment) {
       participants = members(combat).sort((a, b) => String(a.agent.id).localeCompare(String(b.agent.id)));
       if (new Set(participants.map(entry => entry.agent.combat.side)).size < 2) { finish(combat, time); processed.delete(combat.id); return true; }
       const events = participants.flatMap(({ agent: member }) => {
-        if (member.attack) return [{ agent: member, at: member.attack.resolved ? member.attack.endsAt : member.attack.hitAt, kind: member.attack.resolved ? "end" : "hit" }];
+        if (member.attack) return [{ agent: member, at: member.attack.resolved ?
+          Math.min(member.attack.endsAt, Math.max(member.attack.hitAt + combatProfile(member).recovery, member.combat.nextAttackAt)) : member.attack.hitAt,
+          kind: member.attack.resolved ? "end" : "hit" }];
         return [{ agent: member, at: Math.max(member.combat.nextAttackAt, member.combat.stunnedUntil), kind: "start" }];
       }).filter(event => event.at <= time + 1e-8).sort((a, b) => a.at - b.at ||
         ({ hit: 0, end: 1, start: 2 }[a.kind] - { hit: 0, end: 1, start: 2 }[b.kind]) || String(a.agent.id).localeCompare(String(b.agent.id)));
@@ -628,6 +631,7 @@ export function createCombat(environment) {
         if (target) resolveHit(member, target, event.at);
         else { member.attack.resolved = true; member.attackHit = true; }
       } else if (event.kind === "end") {
+        member.combat.nextAttackAt = Math.max(member.combat.nextAttackAt, event.at);
         member.attack = null; member.attackTargetId = null;
         member.mode = member.species === "spiny-back-beetle" ? "idle" : "fight";
       } else {

@@ -1,5 +1,5 @@
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
-import { unitDisplaySize } from "./unit-size.mjs";
+import { unitDisplaySize, unitFrameMirror } from "./unit-size.mjs";
 import { UNIT_APPEARANCE_LEGACY_VISUAL_KEYS } from "../server/unit-appearance.mjs";
 import { BEAN_HELD_HURT_SOURCES } from "./bean-held-hurt-assets.mjs";
 
@@ -79,8 +79,8 @@ export function drawBeanHeldHurt(context,agent,time,imageFor,options={}) {
   const image=imageFor(source.image); // Preload on the normal living draw path.
   const pose=beanHeldHurtPose(agent,time);
   if (!pose || !image || image.complete===false || !(image.naturalWidth || image.width) || !(image.naturalHeight || image.height)) return false;
-  const mirror=!!options.mirror;
-  const screenSide=Number.isFinite(options.hitSide) && options.hitSide!==0 ? Math.sign(options.hitSide) : (mirror?-1:1);
+  const mirror=unitFrameMirror(source.sourceFacing, options.mirror ? -1 : 1);
+  const screenSide=Number.isFinite(options.hitSide) && options.hitSide!==0 ? Math.sign(options.hitSide) : (options.mirror?-1:1);
   const sourceSide=screenSide*(mirror?-1:1);
   const index=pose.frame+(sourceSide>0?source.times.length:0);
   const crop={x:index%source.columns*source.frameWidth,y:Math.floor(index/source.columns)*source.frameHeight,width:source.frameWidth,height:source.frameHeight};

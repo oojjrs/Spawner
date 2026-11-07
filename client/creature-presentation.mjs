@@ -1,3 +1,4 @@
+import { unitFrameMirror } from "./unit-size.mjs";
 function ready(image) {
   return image?.complete !== false && (image?.naturalWidth || image?.width) > 0;
 }
@@ -19,7 +20,7 @@ export function beetlePresentationFrame(model, index, facing, action, resources)
   const sheet = attack ? resources.beetleAttackSheet : resources.beetleSheet;
   const prepared = attack ? null : resources.beetleFrames?.get(index);
   const sprite = prepared || sheet;
-  const mirrorX = animation.facing === "right" ? facing < 0 : facing > 0;
+  const mirrorX = unitFrameMirror(animation.sourceFacing || animation.facing || "left", facing);
   const descriptor = sheetDescriptor(model, { species: "spiny-back-beetle" }, animation, index, sprite,
     animation.scale * (animation.registrationScale || 1), mirrorX, action);
   descriptor.smoothing = true;
@@ -33,7 +34,7 @@ export function beetlePresentationFrame(model, index, facing, action, resources)
   descriptor.source = null;
   descriptor.selection = null;
   descriptor.left = -model.BEETLE_SPRITE.pivotX / model.BEETLE_SPRITE.frameSize;
-  descriptor.mirrorX = attack ? !mirrorX : mirrorX;
+  descriptor.mirrorX = unitFrameMirror(model.BEETLE_SPRITE.sourceFacing || model.BEETLE_SPRITE.facing || "left", facing);
   descriptor.whole = true;
   return descriptor;
 }
@@ -60,7 +61,7 @@ export function creaturePresentationPose(model, agent, time, reducedMotion, reso
     const sprite = resources.owlFrames?.get(index);
     if (!sprite) return null;
     const descriptor = sheetDescriptor(model, agent, animation, index, sprite,
-      animation.scale * (animation.registrationScale || 1), agent.facing > 0, "idle");
+      animation.scale * (animation.registrationScale || 1), unitFrameMirror(animation.sourceFacing || animation.facing || "left", agent.facing || 1), "idle");
     descriptor.source = null;
     descriptor.selection = null;
     descriptor.whole = true;
@@ -75,7 +76,7 @@ export function creaturePresentationPose(model, agent, time, reducedMotion, reso
     const animation = model.imageFrameGeometry(pose.animation, frame);
     const size = (agent.species === "talon-owl" ? model.TALON_OWL_IDLE.scale : 1.4 * entry.scale) *
       animation.frameSize / (animation.viewSize || animation.frameSize);
-    const descriptor = sheetDescriptor(model, agent, animation, frame, entry.sprite, size, agent.facing > 0, action);
+    const descriptor = sheetDescriptor(model, agent, animation, frame, entry.sprite, size, unitFrameMirror(animation.sourceFacing || animation.facing || "left", agent.facing || 1), action);
     descriptor.hop = !reducedMotion ? pose.hop || null : null;
     return descriptor;
   }
@@ -88,7 +89,7 @@ export function creaturePresentationPose(model, agent, time, reducedMotion, reso
     if (action === "attack") size *= animation.frameSize / animation.viewSize;
     size *= animation.registrationScale || 1;
     return sheetDescriptor(model, agent, animation, pose.frame, entry.sprite, size,
-      action === "attack" ? !!pose.mirrorX : agent.facing > 0, pose.action || action);
+      action === "attack" ? !!pose.mirrorX : unitFrameMirror(animation.sourceFacing || animation.facing || "left", agent.facing || 1), pose.action || action);
   }
   if (action !== "idle") return null;
   const entry = resources.idle.get(agent.species);
@@ -100,7 +101,7 @@ export function creaturePresentationPose(model, agent, time, reducedMotion, reso
   const frame = reducedMotion ? 0 : model.unitAnimationFrame(entry.animation, (time - startedAt) * 1000);
   const animation = model.imageFrameGeometry(entry.animation, frame);
   const descriptor = sheetDescriptor(model, agent, animation, frame, entry.sprite,
-    1.4 * entry.scale * (animation.registrationScale || 1), agent.facing > 0, action);
+    1.4 * entry.scale * (animation.registrationScale || 1), unitFrameMirror(animation.sourceFacing || animation.facing || "left", agent.facing || 1), action);
   descriptor.groundOffset = 1;
   return descriptor;
 }

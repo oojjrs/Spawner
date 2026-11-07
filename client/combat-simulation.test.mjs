@@ -91,10 +91,13 @@ test("같은 시드는 자동·단계·잘게 나눈 재생에서 같은 결과�
   assert.deepEqual(first.result(),stepped.result());assert.deepEqual(first.result(),chunked.result());
 });
 
-test("지원군 치유는 실제 대상·기관 수·수용 HP를 사용한다", () => {
+test("폐기한 치유기관은 지원군 치유를 만들지 않고 수용 HP를 지킨다", () => {
   const healer={key:"bean",counts:{vitality:5,healPower:2},organs:{attack:1,heal:1}};
   const trial=actualTrial({left:[healer,healer],right:[build({power:2,vitality:5}),build({power:2,vitality:5})],support:true,random:false});
-  assert.ok(trial.history.some(event=>event.kind==="heal"&&event.attackerId!==event.targetId));
+  const expected=ATTRIBUTE_DNA.stats([{gene:"healer",grade:1},{gene:"healPower",grade:2}]);
+  assert.equal(expected.healerCount,0);assert.equal(expected.healPower,0);
+  assert.ok(trial.agents.every(agent=>agent.stats.healerCount===expected.healerCount&&agent.stats.healPower===expected.healPower));
+  assert.equal(trial.history.some(event=>event.kind==="heal"),false);
   for(const agent of [...trial.agents,...trial.supportAgents])assert.ok(agent.health>=0&&agent.health<=agent.stats.health);
 });
 
@@ -153,12 +156,47 @@ test("중립종 외형도 편집한 DNA 원거리 능력으로 N:N 전투하고 
   assert.equal(creatures.reason,"death");assert.deepEqual(creatures.history,players.history);assert.deepEqual(creatures.result(),players.result());
 });
 
-test("치유량 원시 투자는 치유기관과 받는 회복력에서 분리된다",()=>{
+test("폐기한 치유기관과 치유량은 전투 능력을 만들지 않고 받는 회복력은 보존한다",()=>{
   const build={key:"bean",organs:{attack:0,heal:1},counts:{healPower:2},healing:30};
   const stats=deriveSimulationStats(build),expected=ATTRIBUTE_DNA.stats([{gene:"healer",grade:2},{gene:"healPower",grade:2}]);
-  assert.equal(stats.healPower,3);assert.equal(stats.dna.healPower,expected.healPower);assert.equal(stats.healerCount,1);assert.equal(stats.healing,30);
+  assert.equal(expected.healPower,0);assert.equal(expected.healerCount,0);
+  assert.equal(stats.healPower,expected.healPower);assert.equal(stats.dna.healPower,expected.healPower);assert.equal(stats.healerCount,expected.healerCount);assert.equal(stats.healing,30);
+  assert.equal(stats.canAttack,false);
   assert.equal(deriveSimulationStats({...build,organs:{attack:0,heal:0}}).healPower,0);
   const opponent={key:"spore",counts:{vitality:5}};
   const trial=createSimulationTrial({left:build,right:opponent,support:true,random:false,distance:3});trial.advance(2.1);
-  const heals=trial.history.filter(event=>event.kind==="heal");assert.ok(heals.length);close(heals[0].damage,3.9);
+  assert.equal(trial.history.some(event=>event.kind==="heal"),false);
+  assert.equal(trial.agents.find(agent=>agent.ownerId==="left").stats.canAttack,false);
+});
+
+
+test("실제 생물 프로필과 시작 DNA를 외형용 공통 수치로 덮지 않는다", async () => {
+  const { unitCombatStats, combatProfile } = await import("../server/combat-stats.mjs");
+  const { startingWorkerDna } = await import("../server/tribe-start.mjs");
+  const { dnaUnitStats } = await import("../server/dna-unit.mjs");
+  const trial = createSimulationTrial({left:[{key:"white-paw"},{key:"dew-rabbit"}],right:{key:"pebble"},random:false});
+  const [paw, worker, rabbit] = trial.agents;
+  for (const agent of [paw,rabbit]) {
+    assert.equal(agent.species,agent.key);
+    assert.equal(agent.stats.dna,undefined);
+    assert.equal(agent.stats.combatStrength,unitCombatStats(agent.key).combatStrength);
+    assert.equal(agent.stats.attackPower,combatProfile({species:agent.key,stats:unitCombatStats(agent.key),attributes:{}}).attackPower);
+  }
+  assert.notEqual(paw.stats.attackPower,rabbit.stats.attackPower);
+  assert.deepEqual(worker.dna,startingWorkerDna("pebble"));
+  assert.deepEqual(worker.stats.dna,dnaUnitStats(worker.dna).dna);
+  assert.equal(worker.stats.canAttack,false);
+});
+
+test("실제 설계 DNA와 기존 수치 편집은 서로의 입력을 덮지 않는다", async () => {
+  const { validateDna, dnaUnitStats } = await import("../server/dna-unit.mjs");
+  const gene = ATTRIBUTE_DNA.lookup.get("blade");
+  const dna = validateDna({version:3,level:2,budget:999,pieces:[{gene:gene.id,grade:gene.grade,rotation:0,shape:[...gene.steps]}]},2,999);
+  assert.ok(dna);
+  const trial = createSimulationTrial({left:{key:"spore",dna},right:{key:"white-paw",counts:{power:2,haste:4}},random:false});
+  assert.deepEqual(trial.agents[0].stats.dna,dnaUnitStats(dna).dna);
+  assert.equal(trial.agents[0].stats.canAttack,true);
+  assert.equal(trial.agents[1].species,undefined);
+  assert.ok(trial.agents[1].stats.dna);
+  assert.equal(trial.agents[1].stats.attackSpeed,deriveSimulationStats({key:"bean",counts:{power:2,haste:4}}).attackSpeed);
 });
