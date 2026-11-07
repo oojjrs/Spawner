@@ -12,6 +12,22 @@
 - 확인: 최신 main ef186583을 반영했고 기존 메모리 16줄을 stash30c91ef2로 보존·복원하여 SHA256 동일함을 확인했다. 최신 탄생·운반·웰컴 변경을 유지한다. 연결 GitHub Projects 없음.
 - 원인: prepareRoom이 prepareWorldRendering Promise를 기다리지 않고 100%와 packet을 반환하며 prepareWorldRendering도 이미지 생성 전에 ready를 true로 설정했다. 맵 준비를 await하고 완료 전 ready를 유지하지 않으며 위험지형 이미지도 준비 중에 끝내도록 고친다. 기존 메모리 16줄은 이번 커밋에서 제외하고 보존한다. 기존 public Sites에 게시한다.
 
+## 버튼 효과음 수정·pull 반영 v57 배포 완료 [entry-click-published-01a1b598]
+
+- 기록 및 완료근거 확인 시각 2026-11-07T19:59:10+09:00; 사용자 승인, Codex /root 실행·검수. 출처 codex://threads/01a1b598-8448-7b50-aa83-63db26d0e52e 및 Git push/readback, Sites 공식workflow·save·deploy 도구 결과. H:/Spawner local. 원발언 시각·항목 ID 불명. 앞 entry-click-sites-sync·freeze의 미완료 상태를 실제완료로 갱신한다.
+- 원본fb2677ba6c297d3a6cd48ceb2165310413a9ae77 반영 및 origin/main 정확readback일치, 시작checkout동일HEAD·index깨끗함 확인. 첫 입장효과음9줄·기존검사fixture1줄과 관련기록만 포함했다. 보호stash8492b215 유지.
+- pull관련101검사, 최신몽돌·영향범위19검사(17개재검수·새2개), 효과음4검사와 격리Chrome 실제gain이후 비무음출력 근거확인. 첫클릭/일반클릭/음소거/해제 및 controller1개를 확인했다. 스피커청취를 수행했다고 주장하지 않는다.
+- Sites 준비기는 고정원본fb2677ba의2771자산/2355465632bytes를 대조했다. 배포19파일 중18개 생성줄끝을 기존CRLF로 복원·checker Fix자체검증, runtime기존Mixed는 보존. 의미동일34파일은 기존원시바이트복원. entry·runtime·Combat 배포payload원본일치3건 및 자산주소원본커밋고정 확인. staged공백검사통과.
+- 동시Sites원격9af90bd와15개 URL커밋차이충돌을 양쪽정규화비교로만 해결했다. rebase후전체dist/hosting tree가 검수후보와동일함확인. Sites소스23860d45424be32ed4d58dd0dbcf839eb6d81258 공식helperpush/readback/package성공. 검수전후backupref유지.
+- 기존public유지, 저장v57 appgprj_6ada1cedf2848191938f196c4f346ee9~appgver_341ce7c2ef50819183d417e6c4a55941. archive89파일/14397440bytes, sha2569efab4fdc63cc9550b3c8146cfa4c91ab09e05e9f85618f61064451956693849. 배포appgdep_6aef0448d56c819186c246a172faa305 succeeded·failure_message=null·https://spawner.oojjrs.chatgpt.site 반환. 완료native결과 이후중복브라우저/상태검사없음.
+- 요청·정정·원인·수정·검수·최신원격통합·실제게시결과를대조완료, 남은배포작업없음. 커밋후결과기록만로컬에남기고 메모리전용후속커밋/추가push는하지않는다.
+
+## 동시 Sites 게시 이력 통합 [entry-click-sites-sync-01a1b598]
+
+- 기록 시각 2026-11-07T19:57:02+09:00; Codex /root, 현재 채팅01a1b598·Sites 공식helper 및 Git검수 결과, H:/Spawner local. 원본 커밋fb2677ba 후에 확인된 사실이다.
+- Sites 최종 fetch에서 원격9af90bd가 기존ac88904 이후 동일 탄생 레이어·몽돌 비율 배포를 먼저 반영한 것을 확인했다. 현재 후보4fbb3db와원격을비교해15파일은 raw GitHub 원본커밋주소만 다르고, 추가동작차이는 이번entry.js9줄뿐임을 확인했다. 게임runtime·Combat와 기존수치변경은 동일하다.
+- 검수한 후보의 복구참조를 남기고 원격이력 위로 rebase한다. 충돌은 비교로확인된 원본커밋주소 차이만 현재fb2677ba 고정주소로 해결한다. 다른 기능을 덮지 않는다. 배포완료는아직미확인이다.
+
 ## 동시 원격 변경 반영 후 최종 동결 [entry-click-sync-01a1b598]
 
 - 기록 및 근거 확인 시각 2026-11-07T19:50:15+09:00; 사용자 재배포·pull반영 확인 범위에서 Codex /root 실행. 출처 현재채팅01a1b598 및 Git·기존검사 결과. H:/Spawner local. 직전 fetch에서 몽돌 갑각+더듬이 탄생 비율 수정c6798139와 병합a66af9e7 추가를 확인했다.
