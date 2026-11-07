@@ -1,0 +1,52 @@
+{
+  "status": "approved-for-planning",
+  "tribe": "pebble",
+  "form": "gather",
+  "action": "hurt",
+  "approvedAt": "2026-11-07T02:12:04Z",
+  "approvalScope": "User-approved gathering-form animation. Publish the submitted sheet and GIF unchanged and link the matching planning-table cell only.",
+  "sheet": "pebble-gather-hurt-v1-sheet.png",
+  "sheetSHA256": "f5d91668885bd9b6bd78d69866cb1da629d02b07d0aa5c981dda807273f8aee5",
+  "preview": "pebble-gather-hurt-v1-preview.gif",
+  "previewSHA256": "515a261d5a3839fa8ee2b232e6a955c7e1b9aea1bedb65dea1c568d70817db16",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "distinctWholeBodyDrawings": 7,
+  "durationsMs": [
+    700,
+    500,
+    40,
+    40,
+    80,
+    60,
+    40,
+    120
+  ],
+  "previewDurationMs": 1580,
+  "previewLeadInMs": 700,
+  "actionDurationMs": 880,
+  "previewLoop": true,
+  "actionLoop": false,
+  "processing": "Complete coherent imagegen full-body poses. Whole source-cell crops, integer vertical registration and atlas/GIF packaging only. Source RGBA retained exactly. No body-part composition, warping, resampling or procedural body motion. Last frame repeats complete first pose.",
+  "verification": {
+    "originalApprovedBytesUnchanged": true,
+    "sourceRGBAExact": true,
+    "noOpaqueEdgeClipping": true,
+    "maxGifRMSE": 0.8020743497535325,
+    "firstLastExact": true
+  },
+  "integration": "Planning review only. Game runtime and deployment are unchanged.",
+  "hurtHoldMs": 500,
+  "recoveryMs": 380,
+  "impactFrom": "right",
+  "reactionTowards": "left",
+  "pivot": [
+    256,
+    400
+  ]
+}

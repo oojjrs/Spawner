@@ -1,0 +1,45 @@
+{
+  "status": "approved-for-planning",
+  "tribe": "pebble",
+  "form": "gather",
+  "action": "death",
+  "approvedAt": "2026-11-07T02:33:21Z",
+  "approvalScope": "User-approved gathering-form animation. Publish the submitted sheet and GIF unchanged and link the matching planning-table cell only.",
+  "sheet": "pebble-gather-death-v1-sheet.png",
+  "sheetSHA256": "6a843aeb318c78afb05459971f64f57818610626a0a4ec7b51e6e8647775db4f",
+  "preview": "pebble-gather-death-v1-preview.gif",
+  "previewSHA256": "8090957dcb94e1606db79ebe27bfe91825a4429aef1e73785584f0865e88a471",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "distinctWholeBodyDrawings": 7,
+  "durationsMs": [
+    700,
+    100,
+    140,
+    120,
+    140,
+    100,
+    120,
+    900
+  ],
+  "previewDurationMs": 2320,
+  "previewLeadInMs": 700,
+  "actionDurationMs": 1620,
+  "previewLoop": true,
+  "actionLoop": false,
+  "processing": "Only whole-cell cropping, integer translation, transparent padding, atlas packing and GIF encoding. No anatomical compositing, no resampling, no warping.",
+  "verification": {
+    "originalApprovedBytesUnchanged": true,
+    "sourceRGBAExact": true,
+    "noOpaqueEdgeClipping": true,
+    "maxGifRMSE": 0.9363484409734506,
+    "lastTwoFramesExact": true
+  },
+  "integration": "Planning review only. Game runtime and deployment are unchanged.",
+  "finalPoseHoldMs": 1020
+}
