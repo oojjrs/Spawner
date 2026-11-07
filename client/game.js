@@ -3361,6 +3361,39 @@
       ctx.restore();
     }
 
+    function drawColonyHealthRing(entry) {
+      if (colonyInactive(entry) || state.camera.zoom < 8) return;
+      const maximum = entry.nestMaxHealth ?? NEST_LEVELS[Math.max(0, (entry.nestLevel || 1) - 1)]?.health;
+      const health = entry.nestHealth ?? maximum;
+      if (!Number.isFinite(health) || !Number.isFinite(maximum) || health <= 0 || maximum <= 0) return;
+      const size = COLONY_SIZE * state.camera.zoom;
+      const topLeft = worldToScreen(entry.x, entry.y);
+      const center = worldToScreen(entry.x + COLONY_SIZE / 2, entry.y + COLONY_SIZE / 2);
+      const appearance = colonyAppearance(entry);
+      let spriteSize = size * appearance.scale;
+      let floorY = (appearance.centerY == null ? topLeft.y + (size - spriteSize) * 465 / 512 :
+        center.y - spriteSize * appearance.centerY) + spriteSize * 1860 / 2048;
+      let groundWidth = appearance.groundWidth;
+      const frame = Spawner.nestGrowthFrame(nestGrowthPlayback, entry, state.simSeconds, idleMotion.matches);
+      const growth = colonyGrowthRendering(entry);
+      if (frame !== null && growth?.animation.sheet.complete) {
+        const progress = frame / Math.max(1, growth.animation.frameCount - 1);
+        const placement = growth.placement;
+        const scale = placement ? placement.fromScale + (placement.toScale - placement.fromScale) * progress : growth.appearance.scale;
+        const offset = placement ? placement.fromOffset + (placement.toOffset - placement.fromOffset) * progress :
+          growth.appearance.scale * (.875 - growth.appearance.centerY);
+        spriteSize = size * scale;
+        floorY = center.y + size * offset;
+        groundWidth = growth.appearance.groundWidth;
+      }
+      const radius = spriteSize * groundWidth * .52, depth = radius * .327;
+      const y = floorY - size * .012;
+      if (!(radius > 0) || center.x + radius < 0 || center.x - radius > viewport.width ||
+          y + depth < 0 || y - depth > viewport.height) return;
+      // Draw in the ground-status pass, after nest sprites, so their walls cannot hide HP.
+      Spawner.drawUnitHealthRing(ctx, health, maximum, center.x, y, radius, "#eee1c8");
+    }
+
     function createColonyPollenSprite(radiusX, radiusY) {
       const sprite = document.createElement("canvas");
       sprite.width = 32;
@@ -5668,6 +5701,7 @@
       for (const entry of colonyEntries) drawColonyGround(entry,
         worldToScreen(entry.x, entry.y), COLONY_SIZE * state.camera.zoom, colonyAppearance(entry));
       drawWorldObjects(now);
+      for (const entry of colonyEntries) drawColonyHealthRing(entry);
       drawCombatAgents(now);
       drawAttackImpacts();
       drawCombatDust();
@@ -8693,6 +8727,7 @@
       document.getElementById("codex-related-title").textContent = "종족별 채집 조건";
       related.append(createCodexStats(Spawner.PLAYER_TRIBES.map(tribe => {
         const requirements = Spawner.resourceHarvestRequirements({ resourceType: resource.key }, worldMap, tribe.key);
+        if (requirements === null) return [tribe.name, "채집 불가"];
         const keys = Object.keys(requirements).filter(key => requirements[key] > 0);
         return [tribe.name, keys.length ? keys.map(key => ATTRIBUTES.find(attribute => attribute.key === key).name).join(" · ") : "속성 없이 채집 가능"];
       })));
@@ -9119,6 +9154,9 @@
     let tribeRoomId = null;
     let tribePreviewError = "";
     let lobbyBusy = false;
+    let roomPreparationVersion = 0;
+    let tribePreviewVersion = 0;
+    let pendingCreatedRoom = null;
     let roomCount = 0;
     let roomNames = new Set();
     let generatedRoomName = roomTitle.value;
@@ -9172,24 +9210,51 @@
     }
 
     async function prepareTribePreviews() {
-      welcomeStatus.textContent = "미리보기를 불러오는 중…";
-      const results = await Promise.allSettled(Spawner.PLAYER_TRIBES.map(async tribe => {
-        await prepareTribeRendering([{ tribe: tribe.key }]);
-        await prepareUnitAnimationSheets(tribe);
-        const art = await tribeArt.preparePreview(tribe);
-        const appearance = tribe.key === "bean" ? colonyAppearances[0] : tribeColonies.get(tribe.key);
-        art.nestWidth = COLONY_SIZE * appearance.scale * appearance.groundWidth;
-        art.nestHeight = COLONY_SIZE * appearance.scale * (1860 / 2048 - appearance.top);
-        art.unitSize = AGENT_HEIGHT * unitAnimationSheets.get(tribe.key).get("idle").scale * 2;
-        art.unitBounds = tribeArt.bounds(art.idle, Spawner.imageFrameSize(tribe.idle, 512));
-        tribePreviews.set(tribe.key, art);
-        return { tribe, art };
-      }));
-      for (const result of results) {
-        if (result.status === "fulfilled") tribePreviews.set(result.value.tribe.key, result.value.art);
+      const version = ++tribePreviewVersion;
+      let active = true, timer;
+      welcomeStatus.textContent = "부족 미리보기를 불러오는 중…";
+      const pending = Spawner.PLAYER_TRIBES.filter(tribe => !tribePreviews.has(tribe.key));
+      let completed = Spawner.PLAYER_TRIBES.length - pending.length;
+      try {
+        await Promise.race([
+          Promise.all(pending.map(async tribe => {
+            // Selection needs nests and idle art, not combat forms, births or upgrades.
+            const [art] = await Promise.all([
+              tribeArt.preparePreview(tribe, { retry: true }),
+              prepareTribeRendering([{ tribe: tribe.key }], { previewOnly: true })
+            ]);
+            const starter = tribe.key === "bean" ? starterObjectSprite : globalThis.SpawnerAssets.image();
+            if (tribe.key !== "bean") starter.src = assetSource(tribe.starter);
+            if (starter.complete && !starter.naturalWidth) starter.src = starter.src;
+            await starter.decode();
+            const body = await tribeArt.prepareBounds(starter, false);
+            const reference = Spawner.unitTribeReference(tribe.key, starter, body);
+            const idle = unitAnimationSheets.get(tribe.key).get("idle");
+            const idleBounds = await tribeArt.prepareBounds(art.idle, idle.animation.frameSize);
+            const scale = Spawner.unitAnimationSheetScale(reference, idle.animation, idleBounds, idle.animation, idleBounds, "idle");
+            const appearance = tribe.key === "bean" ? colonyAppearances[0] : tribeColonies.get(tribe.key);
+            const preview = { ...art,
+              nestWidth: COLONY_SIZE * appearance.scale * appearance.groundWidth,
+              nestHeight: COLONY_SIZE * appearance.scale * (1860 / 2048 - appearance.top),
+              unitSize: AGENT_HEIGHT * scale * 2,
+              unitBounds: tribeArt.bounds(art.idle, Spawner.imageFrameSize(tribe.idle, 512)) };
+            if (!active || version !== tribePreviewVersion) return;
+            tribePreviews.set(tribe.key, preview);
+            completed++;
+            welcomeStatus.textContent = "부족 미리보기를 불러오는 중… " + completed + "/" + Spawner.PLAYER_TRIBES.length;
+            updateRoomCreationProgress(95 + completed / Spawner.PLAYER_TRIBES.length * 4);
+          })),
+          new Promise((resolve, reject) => {
+            timer = setTimeout(() => reject(new Error("부족 미리보기 로딩 시간이 초과되었습니다. 다시 시도해 주세요.")), 45000);
+          })
+        ]);
+        tribePreviewError = "";
+      } catch (error) {
+        throw new Error("부족 미리보기를 불러오지 못했습니다. 다시 시도해 주세요. " + (error.message || ""));
+      } finally {
+        active = false;
+        clearTimeout(timer);
       }
-      tribePreviewError = results.some(result => result.status === "rejected") ?
-        "일부 미리보기를 불러오지 못했습니다. 부족 선택은 가능합니다." : "";
     }
 
     function drawTribeWorld() {
@@ -9352,16 +9417,18 @@
       finally { nestGrowthLoading.delete(key); }
     }
 
-    async function prepareTribeRendering(colonies) {
-      await Promise.all(Spawner.PLAYER_TRIBES.flatMap(tribe => ["base", "strength", "blade", "secretion", "carapace", "antenna"].map(form =>
+    async function prepareTribeRendering(colonies, { previewOnly = false } = {}) {
+      if (!previewOnly) await Promise.all(Spawner.PLAYER_TRIBES.flatMap(tribe => ["base", "strength", "blade", "secretion", "carapace", "antenna"].map(form =>
         unitPresentation.prepareAnimation({ tribe: tribe.key, appearanceAttributes: form === "base" ? {} : { [form]: 1 } }))));
-      await colonyAppearances[0].sprite.decode();
+      const nestSprite = colonyAppearances[0].sprite;
+      if (previewOnly && nestSprite.complete && !nestSprite.naturalWidth) nestSprite.src = nestSprite.src;
+      await nestSprite.decode();
       await Promise.all([...new Set(colonies.map(colony => colony.tribe).filter(key => key && key !== "bean"))].map(async key => {
         const tribe = Spawner.PLAYER_TRIBES.find(entry => entry.key === key);
-        await prepareAgentMovement(tribe);
-        if (key === "spore") await prepareSporeBirth();
-        if (key === "spring") await springBirthSheet.decode();
-        if (key === "pebble") await Promise.all([pebbleBirthSheet.decode(), pebbleBirthForeground.decode()]);
+        if (!previewOnly) await prepareAgentMovement(tribe);
+        if (!previewOnly && key === "spore") await prepareSporeBirth();
+        if (!previewOnly && key === "spring") await springBirthSheet.decode();
+        if (!previewOnly && key === "pebble") await Promise.all([pebbleBirthSheet.decode(), pebbleBirthForeground.decode()]);
         if (tribeColonies.has(key)) return;
         const source = globalThis.SpawnerAssets.image();
         source.src = assetSource(tribe.nest);
@@ -9428,7 +9495,7 @@
         fitColonyAppearance(appearance, colonyAppearances[0]);
         tribeColonies.set(key, appearance);
       }));
-      await Promise.all([...new Set(colonies.map(colony => colony.tribe || "bean"))].map(prepareNestGrowthRendering));
+      if (!previewOnly) await Promise.all([...new Set(colonies.map(colony => colony.tribe || "bean"))].map(prepareNestGrowthRendering));
     }
 
     for (const tribe of Spawner.PLAYER_TRIBES) {
@@ -9488,6 +9555,8 @@
 
     document.getElementById("tribe-selection-back").addEventListener("click", async () => {
       if (lobbyBusy) return;
+      ++roomPreparationVersion;
+      ++tribePreviewVersion;
       rememberRoom(null);
       tribeSelection.hidden = true;
       tribeRoomId = null;
@@ -9909,11 +9978,23 @@
     }
 
     async function prepareRoom(roomId) {
-      const packet = await client.call("enter", { roomId, visible: false });
-      await prepareWorldRendering(packet.world, packet.tribeStarts || packet.colonies);
-      if (packet.colonies.find(colony => colony.id === packet.colonyId).tribe === null) prepareTribePreviews().catch(() => {});
-      updateRoomCreationProgress(100);
-      return packet;
+      const version = ++roomPreparationVersion;
+      ++tribePreviewVersion;
+      try {
+        const packet = await client.call("enter", { roomId, visible: false });
+        if (version !== roomPreparationVersion) return null;
+        await prepareWorldRendering(packet.world, packet.tribeStarts || packet.colonies);
+        if (version !== roomPreparationVersion) return null;
+        if (packet.colonies.find(colony => colony.id === packet.colonyId).tribe === null) {
+          await prepareTribePreviews();
+          if (version !== roomPreparationVersion) return null;
+        }
+        updateRoomCreationProgress(100);
+        return packet;
+      } catch (error) {
+        if (version !== roomPreparationVersion) return null;
+        throw error;
+      }
     }
 
     async function enterRoom(roomId, packet) {
@@ -9928,6 +10009,7 @@
       connection.online = false;
       try {
         packet ||= await prepareRoom(roomId);
+        if (!packet) return;
         rememberRoom(roomId);
         if (packet.colonies.find(colony => colony.id === packet.colonyId).tribe === null) {
           showTribeSelection(packet);
@@ -10081,6 +10163,7 @@
       welcomeStatus.textContent = "방 삭제 중…";
       try {
         await client.call("delete", { roomId: room.id, title: room.title });
+        if (pendingCreatedRoom?.result.roomId === room.id) pendingCreatedRoom = null;
         if (connection.roomId === room.id) connection.roomId = null;
         welcomeStatus.textContent = "방을 삭제했습니다.";
       } catch (error) { setEvolutionText(welcomeStatus, error.message); }
@@ -10098,6 +10181,7 @@
       welcomeStatus.textContent = "멸망한 방 삭제 중…";
       try {
         const result = await client.call("delete-ended", { roomIds });
+        if (result.roomIds.includes(pendingCreatedRoom?.result.roomId)) pendingCreatedRoom = null;
         if (result.roomIds.includes(connection.roomId)) connection.roomId = null;
         welcomeStatus.textContent = result.roomIds.length ? "멸망한 방 " + result.roomIds.length + "개를 삭제했습니다." : "삭제할 멸망한 방이 없습니다.";
       } catch (error) { setEvolutionText(welcomeStatus, error.message); }
@@ -10114,6 +10198,7 @@
       welcomeStatus.textContent = "모든 방 삭제 중…";
       try {
         await client.call("delete-all", null);
+        pendingCreatedRoom = null;
         connection.roomId = null;
         welcomeStatus.textContent = "모든 방을 삭제했습니다.";
       } catch (error) { setEvolutionText(welcomeStatus, error.message); }
@@ -10139,9 +10224,17 @@
       }
       welcomeStatus.textContent = type === "create" ? "생성 중…" : "입장 준비 중…";
       try {
-        const result = type === "create" ? await client.call("create", data, progress => updateRoomCreationProgress(progress * 40)) : data;
+        const signature = JSON.stringify(data);
+        let result = data;
+        if (type === "create") {
+          result = pendingCreatedRoom?.signature === signature ? pendingCreatedRoom.result :
+            await client.call("create", data, progress => updateRoomCreationProgress(progress * 40));
+          pendingCreatedRoom = { signature, result };
+        }
         const packet = await prepareRoom(result.roomId);
+        if (!packet) return;
         await enterRoom(result.roomId, packet);
+        if (welcome.hidden) pendingCreatedRoom = null;
         if (welcome.hidden) welcomeStatus.textContent = "";
       } catch (error) { setEvolutionText(welcomeStatus, error.message); }
       finally {

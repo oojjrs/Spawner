@@ -43,13 +43,13 @@ test("네 종족의 기본 자원만 채집 가능하며 다른 종족 자원은
   for (const generationVersion of [undefined, 10, 11, 15]) for (const [tribe, ownFood] of foods) {
     for (const [, resourceType] of foods) for (const attributes of [{}, { antenna: 2, strength: 2, feet: 2 }]) {
       const world = { generationVersion };
-      assert.equal(canHarvestResource({ resourceType }, world, attributes, tribe), (resourceType === ownFood || ["dew", "clay"].includes(resourceType)), tribe + ":" + resourceType);
+      assert.equal(canHarvestResource({ resourceType }, world, attributes, tribe), resourceType === ownFood, tribe + ":" + resourceType);
       const attribute = resourceType === "tree" ? "blade" : resourceType === "pebbles" ? "piercing" : null;
       const requirements = resourceHarvestRequirements({ resourceType }, world, tribe);
-      if (resourceType === ownFood || ["dew", "clay"].includes(resourceType)) assert.ok(Object.values(requirements).every(value => value === 0));
+      if (resourceType === ownFood) assert.ok(Object.values(requirements).every(value => value === 0));
       else {
-        assert.equal(requirements[attribute], 1);
-        assert.equal(canHarvestResource({ resourceType }, world, { [attribute]: 1 }, tribe), true);
+        assert.equal(requirements, null);
+        assert.equal(canHarvestResource({ resourceType }, world, { [attribute]: 1 }, tribe), false);
       }
     }
   }
@@ -59,21 +59,21 @@ test("네 종족의 기본 자원만 채집 가능하며 다른 종족 자원은
 
 
 for (const [tribe, ownFood] of foods) {
-  test(tribe + "은 자기 자원과 공용 자원만 자동 채집한다", () => {
+  test(tribe + "은 자기 자원만 자동 채집한다", () => {
     const f = fixture(tribe, ownFood, createGame);
     advance(f, .25);
     const candidates = f.game.agents[0].utility.scores.filter(candidate => candidate.action === "collect");
     assert.ok(candidates.length > 0);
-    assert.ok(candidates.every(candidate => candidate.key === "47,42" || ["dew", "clay"].includes(f.environment.food.get(candidate.key)?.resourceType)));
+    assert.ok(candidates.every(candidate => candidate.key === "47,42"));
     advance(f, 24);
     assert.ok([...f.environment.food.values()].some(cell =>
-      [ownFood, "dew", "clay"].includes(cell.resourceType) && cell.amount < 12));
-    for (const [key, cell] of f.environment.food) if (key !== "47,42" && !["dew", "clay"].includes(cell.resourceType)) assert.equal(cell.amount, 12, tribe + ":" + cell.resourceType);
+      cell.resourceType === ownFood && cell.amount < 12));
+    for (const [key, cell] of f.environment.food) if (key !== "47,42") assert.equal(cell.amount, 12, tribe + ":" + cell.resourceType);
   });
 
   test(tribe + "은 자기 자원이 없으면 다른 자원을 채집하지 않는다", () => {
     const f = fixture(tribe, null, createGame);
-    for (const [key, cell] of f.environment.food) if ([ownFood, "dew", "clay"].includes(cell.resourceType)) f.environment.food.delete(key);
+    for (const [key, cell] of f.environment.food) if (cell.resourceType === ownFood) f.environment.food.delete(key);
     advance(f, 4);
     assert.ok(f.game.agents[0].utility.scores.every(candidate => candidate.action !== "collect"));
     for (const cell of f.environment.food.values()) assert.equal(cell.amount, 12);
@@ -84,7 +84,7 @@ for (const [tribe, ownFood] of foods) {
     const f = fixture(tribe, ownFood, createGame);
     advance(f, .25);
     f.environment.world.generationVersion = 10;
-    const cell = [...f.environment.food.values()].find(cell => foods.some(([, type]) => type === cell.resourceType) && cell.resourceType !== ownFood && !["dew", "clay"].includes(cell.resourceType));
+    const cell = [...f.environment.food.values()].find(cell => foods.some(([, type]) => type === cell.resourceType) && cell.resourceType !== ownFood);
     const key = cell.x + "," + cell.y;
     Object.assign(f.game.agents[0], { x: cell.x, y: cell.y, renderFromX: cell.x, renderFromY: cell.y,
       mode: "harvest", harvestPrepared: true, harvestReady: 120, decisionPending: null, nextDecisionAt: 1000,
@@ -104,7 +104,7 @@ test("브라우저 번들과 내장 워커에도 동일한 종족별 채집 규�
   const browser = {};
   runInNewContext(runtime, browser);
   for (const [tribe, ownFood] of foods) for (const [, resourceType] of foods) {
-    assert.equal(browser.Spawner.canHarvestResource({ resourceType }, { generationVersion: 15 }, { strength: 2 }, tribe), resourceType === ownFood || ["dew", "clay"].includes(resourceType));
+    assert.equal(browser.Spawner.canHarvestResource({ resourceType }, { generationVersion: 15 }, { strength: 2 }, tribe), resourceType === ownFood);
   }
   const worker = JSON.parse(runtime.match(/const workerSource = ("[^\r\n]+");/)[1]);
   const context = { Map, Set, Uint8Array, setTimeout, clearTimeout, performance };
@@ -115,7 +115,7 @@ test("브라우저 번들과 내장 워커에도 동일한 종족별 채집 규�
     advance(f, .25);
     const candidates = f.game.agents[0].utility.scores.filter(candidate => candidate.action === "collect");
     assert.ok(candidates.length > 0);
-    assert.ok(candidates.every(candidate => candidate.key === "47,42" || ["dew", "clay"].includes(f.environment.food.get(candidate.key)?.resourceType)));
+    assert.ok(candidates.every(candidate => candidate.key === "47,42"));
   }
 });
 

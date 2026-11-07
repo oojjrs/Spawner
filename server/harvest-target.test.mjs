@@ -43,10 +43,8 @@ function advance(fixture, seconds) {
 
 for (const [surface, create] of [["소스", createGame], ["브라우저 워커", context.createGame]]) {
   for (const [tribe, resourceType, attribute] of [
-    ["bean", "clay", null], ["spore", "clay", null],
-    ["pebble", "clay", null], ["spring", "clay", null],
-    ["bean", "tree", "blade"], ["bean", "pebbles", "piercing"],
-    ["bean", "dew", null], ["spore", "clay", null]
+    ["bean", "clay", null], ["spore", "tree", "blade"],
+    ["pebble", "pebbles", "piercing"], ["spring", "dew", null]
   ]) {
     test(surface + ": " + tribe + "의 해금된 " + resourceType + " 목표를 접근부터 첫 채집까지 유지한다", () => {
       const f = fixture(create, tribe, resourceType, attribute);
@@ -68,7 +66,7 @@ for (const [surface, create] of [["소스", createGame], ["브라우저 워커",
 
   for (const invalid of ["고갈", "다른 적재물"]) {
     test(surface + ": " + invalid + "인 채집 목표는 계속 무효 처리한다", () => {
-      const f = fixture(create, "bean", "tree", "blade");
+      const f = fixture(create, "spore", "tree", "blade");
       if (invalid === "고갈") f.food.amount = 0;
       if (invalid === "다른 적재물") { f.agent.carrying = 1; f.agent.carryingType = "clay"; }
       advance(f, 0);

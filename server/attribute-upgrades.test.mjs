@@ -40,14 +40,14 @@ test("모든 속성의 강화 비용과 강화 요청을 허용하지 않는다"
   assert.match(attributeUpgradeIssue({ slots: [] }, "feet", 4, 1000, {}), /장착/);
 });
 
-test("네 종족 모두 기본 채집 속성으로 대응 자원을 채집한다", () => {
+test("기존 채집 속성으로도 자기 종족의 자원만 채집한다", () => {
   const groups = { blade: ["tree"],
     piercing: ["pebbles"] };
   const world = { generationVersion: 16 };
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     for (const [key, resources] of Object.entries(groups)) {
       for (const resourceType of resources) {
-        assert.equal(canHarvestResource({ resourceType }, world, attributeCounts([key]), tribe), true, tribe + ":" + resourceType);
+        assert.equal(canHarvestResource({ resourceType }, world, attributeCounts([key]), tribe), ({ bean: "clay", spore: "tree", pebble: "pebbles", spring: "dew" })[tribe] === resourceType, tribe + ":" + resourceType);
         assert.equal(canHarvestResource({ resourceType }, world, attributeCounts(["strength"]), tribe),
           ({ bean: "clay", spore: "tree", pebble: "pebbles", spring: "dew" })[tribe] === resourceType);
       }

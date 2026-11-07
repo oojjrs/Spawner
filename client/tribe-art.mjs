@@ -151,9 +151,15 @@ export function createTribeArt(definitions, assetSource) {
     return result;
   }
 
-  function preparePreview(tribe) {
-    if (!previews.has(tribe.key)) previews.set(tribe.key, Promise.all([image(tribe.nest), image(tribe.idle)]).then(([nest, idle]) =>
-      ({ nest, idle, nestBounds: bounds(nest, false) })).catch(error => { previews.delete(tribe.key); throw error; }));
+  function preparePreview(tribe, { retry = false } = {}) {
+    if (retry || !previews.has(tribe.key)) {
+      const pending = Promise.all([image(tribe.nest), image(tribe.idle)]).then(([nest, idle]) =>
+        ({ nest, idle, nestBounds: bounds(nest, false) })).catch(error => {
+          if (previews.get(tribe.key) === pending) previews.delete(tribe.key);
+          throw error;
+        });
+      previews.set(tribe.key, pending);
+    }
     return previews.get(tribe.key);
   }
 

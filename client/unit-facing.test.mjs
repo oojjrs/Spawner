@@ -17,7 +17,7 @@ function surface(width, height) {
   return { width, height, calls, transforms, getContext: () => context };
 }
 
-test("기본 방향은 오른쪽이며 진영 번호가 모델 방향을 뒤집지 않는다", () => {
+test("방향 미지정 시 논리 기본값을 유지하고 명시된 타깃 방향을 우선한다", () => {
   assert.equal(unitFacing({}), 1);
   for (const side of [0, 1]) for (const facing of [-1, 1]) assert.equal(unitFacing({ facing, combat: { side } }), facing);
   assert.equal(unitFacing({ facing: -1, attack: { directionX: 1 } }), 1);

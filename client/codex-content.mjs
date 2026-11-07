@@ -7,8 +7,8 @@ export const CODEX_ATTRIBUTE_DESCRIPTIONS = Object.freeze({
   antenna: "유닛의 시야 반경이 늘어납니다.",
   strength: "한 번에 채집해 운반하는 자원의 양을 늘립니다.",
   feet: "이동 속도를 높입니다.",
-  blade: "공격할 때의 전투력을 높입니다.\n목재를 채집할 수 있습니다.",
-  piercing: "상대 갑피의 피해 감소를 무시합니다.\n자갈을 채집할 수 있습니다.",
+  blade: "공격할 때의 전투력을 높입니다.",
+  piercing: "상대 갑피의 피해 감소를 무시합니다.",
   carapace: "받는 전투 피해를 줄입니다. 관통 공격에는 효과가 줄어듭니다.",
 });
 

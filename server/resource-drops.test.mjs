@@ -45,8 +45,8 @@ test("전투에 걸린 운반자와 증원은 모든 자원을 그 셀에 보존
   }
 });
 
-function fixture() {
-  const colony = { id: 1, ownerId: "home", tribe: "bean", name: "둥지", x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
+function fixture(tribe = "bean") {
+  const colony = { id: 1, ownerId: "home", tribe, name: "둥지", x: 40, y: 40, occupiedCells: new Set(["2,2"]) };
   const room = { id: "drops", title: "자원 회수", hostId: "home", seed: 7, simSeconds: 10, resourceVersion: 3,
     world: { seed: 7, size: 160, generationVersion: 20, sites: [[42, 42]], burrows: [], resources: [], encounters: [],
       terrain: new Uint8Array(160 * 160).fill(4), hazards: new Uint8Array(160 * 160), treeCells: new Uint8Array(160 * 160) },
@@ -72,8 +72,8 @@ test("내려놓은 서로 다른 자원은 저장·복원 후에도 수량과 �
   assert.equal(restored.world.treeCells[42 * 160 + 46], 0);
 });
 
-test("도구 없는 일꾼도 내려놓은 목재를 회수하며 같은 셀의 나무와 벌목 연출을 건드리지 않는다", () => {
-  const { room, game } = fixture();
+test("도구 없는 포자 일꾼도 내려놓은 목재를 회수하며 같은 셀의 나무와 벌목 연출을 건드리지 않는다", () => {
+  const { room, game } = fixture("spore");
   const tree = { x: 46, y: 42, resourceType: "tree", kind: "resource", amount: 50, initialAmount: 50 };
   room.food.set("46,42", tree);
   room.world.treeCells[42 * 160 + 46] = 1;

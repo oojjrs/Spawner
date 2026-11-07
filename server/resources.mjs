@@ -140,6 +140,7 @@ export function resourceHarvestMultiplier(resourceType, attributes, tribe) {
 }
 
 export function resourceHarvestRequirements(cell, world, tribe) {
+  if (tribe && !isTribeFood(resourceTypeForCell(cell, world), tribe)) return null;
   if (!cell || cell.kind === "corpse") return null;
   if (cell.dropped && resourceDefinition(cell.resourceType)) return {};
   if (isTribeFood(cell.resourceType, tribe, world.generationVersion)) return {};
@@ -150,6 +151,8 @@ export function resourceHarvestRequirements(cell, world, tribe) {
 }
 
 export function canHarvestResource(cell, world, attributes, tribe) {
+  // 종족이 지정된 개체는 채집 기관이나 옛 속성에 관계없이 자기 자원만 채집한다.
+  if (tribe && !isTribeFood(resourceTypeForCell(cell, world), tribe)) return false;
   if (typeof attributes?.dnaGather === "boolean") return attributes.dnaGather && !!cell && cell.kind !== "corpse" && !resourceDefinition(resourceTypeForCell(cell, world))?.harvestLocked;
   const required = resourceHarvestRequirements(cell, world, tribe);
   return required !== null && Object.entries(required).every(([key, count]) => (attributes?.[key] || 0) >= count);

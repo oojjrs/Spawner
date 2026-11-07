@@ -21,7 +21,7 @@ test("채집 속성은 모든 자원에 대응하며 주자원은 무속성 채�
   for (const [tribe, primary] of native) for (const [key, resources] of Object.entries(groups)) {
     for (const resourceType of resources) {
       assert.equal(canHarvestResource({ resourceType }, world, {}, tribe), resourceType === primary, tribe + resourceType);
-      assert.equal(canHarvestResource({ resourceType }, world, attributeCounts([key]), tribe), true, tribe + resourceType);
+      assert.equal(canHarvestResource({ resourceType }, world, attributeCounts([key]), tribe), resourceType === primary, tribe + resourceType);
       for (const other of Object.keys(groups).filter(other => other !== key)) {
         assert.equal(canHarvestResource({ resourceType }, world, attributeCounts([other]), tribe), resourceType === primary, other + resourceType);
       }
@@ -118,14 +118,14 @@ test("실제 게임에서 종족 모두 기본 채집이 되고 대응 속성은
   }
 });
 
-test("추가 해금 자원과 다른 종족의 자원은 실제 게임에서도 정해진 시간에 채집한다", () => {
+test("다른 종족의 자원은 대응 속성이 있어도 실제 게임에서 채집하지 않는다", () => {
   for (const [tribe, primary] of native) for (const [key, resources] of Object.entries(groups)) for (const resourceType of resources) {
     if (resourceType === primary) continue;
     const f = harvesting(tribe, resourceType, [key]);
     tick(f, 120);
-    assert.equal(f.agent.mode, "harvest", tribe + ":" + resourceType);
-    tick(f, 121);
-    assert.equal(f.agent.harvestReady, 121 + resourceDefinition(resourceType).harvestSeconds, tribe + ":" + resourceType);
+    assert.notEqual(f.agent.mode, "harvest", tribe + ":" + resourceType);
+    tick(f, 130);
+    assert.equal(f.food.amount, 12, tribe + ":" + resourceType);
   }
 });
 
@@ -142,7 +142,7 @@ test("브라우저와 내장 워커가 속성의 채집 권한과 1레벨 보너
     assert.equal(rules.resourceHarvestMultiplier(resourceType, {}, tribe), 1);
     assert.equal(rules.resourceHarvestMultiplier(resourceType, { [key]: 1 }, tribe), key ? .75 : 1);
     for (const [other, resources] of Object.entries(groups)) for (const type of resources) {
-      assert.equal(rules.canHarvestResource({ resourceType: type }, { generationVersion: 23 }, { [other]: 1 }, tribe), true);
+      assert.equal(rules.canHarvestResource({ resourceType: type }, { generationVersion: 23 }, { [other]: 1 }, tribe), type === resourceType);
       assert.equal(rules.resourceHarvestMultiplier(type, { [other]: 1 }, tribe), type === resourceType && other === key ? .75 : 1);
     }
   }
