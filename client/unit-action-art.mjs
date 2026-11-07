@@ -1,24 +1,31 @@
 import { drawUnitLoading } from "./unit-loading.mjs";
 import { UNIT_ACTION_ART } from "./unit-action-art-assets.mjs";
+import { UNIT_BIRTH_ART } from "./unit-birth-art-assets.mjs";
 import { unitDisplayAttributes, UNIT_DISPLAY_PRIORITY } from "./unit-display-appearance.mjs";
 import { unitDisplaySize, unitFrameMirror } from "./unit-size.mjs";
 import { unitActionState } from "./unit-appearance-state.mjs";
 
-export function unitActionArtDefinition(agent) {
+function unitActionArtKey(agent) {
   if (!agent || agent.species) return null;
   const attributes = unitDisplayAttributes(agent);
   const form = UNIT_DISPLAY_PRIORITY.find(key => attributes[key] > 0) ||
     (attributes.strength > 0 || attributes.arms > 0 || agent.dna?.pieces?.some(piece => piece.gene === "gather") ? "gather" : attributes.piercing > 0 ? "secretion" : "base");
-  return UNIT_ACTION_ART[(agent.tribe || agent.key || "bean") + "/" + form] || null;
+  return (agent.tribe || agent.key || "bean") + "/" + form;
+}
+
+export function unitActionArtDefinition(agent) {
+  return UNIT_ACTION_ART[unitActionArtKey(agent)] || null;
 }
 
 export function unitActionArtPose(agent, time) {
   const definition = unitActionArtDefinition(agent);
   if (!definition) return null;
-  const state = unitActionState(agent, time, { animations: definition.actions });
+  const birth = agent.birth && UNIT_BIRTH_ART[unitActionArtKey(agent)];
+  const actions = birth ? { ...definition.actions, birth } : definition.actions;
+  const state = unitActionState(agent, time, { animations: actions });
   if (!state) return null;
   const requested = state.action === "carry" && !definition.actions.carry ? "walk" : state.action;
-  const animation = definition.actions[requested];
+  const animation = actions[requested];
   if (!animation) return { action: state.action, animation: definition.reference, frame: definition.reference.frames?.[0] || 0, reference: definition.reference, missing: true };
   let elapsed = state.elapsedMs;
   const duration = animation.durationsMs.reduce((sum, value) => sum + value, 0);

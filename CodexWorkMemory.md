@@ -1,3 +1,94 @@
+## asset-sync-ready-20261107-01a1b40c
+- 기록·최종 검수 시각 2026-11-07T14:03:22+09:00; 기록·통합검수·Git판단 Codex /root; 최신 애셋 반영·배포 결정 사용자; 출처 채팅 01a1b40c-e3c8-73a0-a37e-e4d6f5a71267, 담당3인의 최종 인계와 메인의 실제 명령/브라우저 결과. 원 사용자 발언 정확시각·항목ID 불명.
+- 구현 완료: 기획서216동작셀 대조(176채움·36의도적빈칸·4작업재사용), 최신90비탄생동작과 기준8개 갱신, 기존 제작본 기반 탄생20종 연결. 이미지59개·새local wrapper59개 및 영구 출처/해시 manifest2개를 등록했다. bean seed 기존renderer 재생은30프레임이며 앞선12개/두구간 기록을 대체한다. 포자 채집 줄기도 기존scene에서 함께분리했다. 독립포즈 새생성이나 폐기구형모듈 복원은없다.
+- 웰컴은4부족×7외형+중립19종=47조합과 실제등록동작을사용한다. 흙멧돼지이동을V3로맞췄고6전투사망셀·몽돌채집2동작·지정20빈칸을기획서와동기화했다. Design.html+7하위페이지와helper/자산을배포수집에추가했고 중립티어19행은data-unit-key로hashURL과분리해배포오류를수정했다. 기획설명문구는추가하지않았다.
+- 검수: 원본프레임/해시/배치 대조, 탄생20종 크기·시간·전환·definition identity와대표4종canvas, 출구/착지408+중간이동상쇄612경우 통과. welcome11·action art6검사 통과. 최종upstream반영후build/build-combat 및 bundle구문2+퇴역자원3검사 통과. 실제배포물브라우저에서웰컴/게임진입/Combat/Attribute/Design/7하위페이지/3최신애니lightbox 확인; 최종재검한Spawner·Combat·tiers·food 모두pageerror·404·깨진이미지0. 첫welcome timeout은검사순서문제로수정했다. 20종모두를livegame전체상태로시연한것은아니며 원본대조+대표실행검수범위다.
+- 원격74df56f까지main fast-forward와264개작업경로복원·빈index검증완료. 보호원본과refs/codex-preserve/asset-sync-01a1b40c를남겼다. 별도전투/DNA미커밋변경은root원바이트/최소3방향통합으로보존하고이번commit/배포에서제외한다. 관련기획표채팅01a1b418의몽돌새동작·표/CSS·해당기록은현재요청의관련지원범위에포함한다.
+- 요청/결정/변경/검수/남은작업을대조했다. 정확candidate소스·등록자산·관련메모리만개별index로동결하며 다른root변경은stage하지않는다. 연결GitHub Projects는0개. 남은절차는한국어commit·origin/main push/readback 및기존public Site appgprj_6ada1cedf2848191938f196c4f346ee9의공식source package/version/deploy다. 아직push·배포성공으로기록하지않는다.
+
+## asset-sync-upstream-integration-20261107-01a1b40c
+- 기록 시각 2026-11-07T13:57:43+09:00; 기록·통합판단 Codex /root; 요청·배포 결정 사용자; 출처 채팅 01a1b40c-e3c8-73a0-a37e-e4d6f5a71267 및 담당3인의 최종 인계·직접 브라우저·git fetch 결과.
+- 탄생20종 이미지·코드·manifest 동결 완료. bean 기존 seed renderer 재생 예외는 최종30프레임으로 확정하며 앞선12/두구간 수량을 대체한다. spore/gather는 실제 현행 host에 줄기 그리기가 없음을 확인하여 승인 scene에서 몸체와 연결 줄기를 함께 분리했다. 20종 해시/치수/시간/action identity 검사와 대표4종 canvas 검수를 통과했다.
+- 직접 브라우저에서 웰컴7외형 등록, 부족4종 선택, 실제 game 진입, 전투/속성/기획서 및 최신3애니 미리보기의 로딩과 화면을 확인했다. welcome 첫 timeout은 입장 전 lazy script를 기다린 검사순서 오류로 수정했고 실제제품 오류가 아니다. 중립 티어 도구는 배포 hash파일명에서 유닛키를 읽어19행이실패하는 실제문제를 찾았으며 안정적인data-unit-key19개와참조1행으로수정했다. root의별도22행수정은보존했다. 해당페이지 최종배포물 브라우저 확인은남았다.
+- 최종fetch에서 origin/main이 cbf4b7f→74df56f 두커밋 앞으로감(퇴역자원메타/미사용미디어정리,승인콩사망V2검사갱신). 새브랜치없이 현재dirty/index/untracked 원바이트를보존하고3방향대조로원격을통합한후main을fast-forward한다. candidate도같은원격변경을적용하고영향받은빌드/기획서페이지만다시확인한다. 별도전투/DNA미커밋변경은여전히보존·제외한다. 아직push/배포완료아니다.
+
+## asset-sync-birth-alpha-correction-20261107-01a1b40c
+- 기록 시각 2026-11-07T13:41:45+09:00; Codex /root의 직접 소스검토 및 birth_integration 보고. 출처 채팅 01a1b40c-e3c8-73a0-a37e-e4d6f5a71267.
+- 앞선 bean 재렌더 두 구간 판단의 수량을 정정한다. gather/secretion/antenna는9·10프레임, blade/carapace는카메라차이로11도겹쳐9·10·11프레임이다. 기존seed renderer를재사용하는총12셀로변경하며나머지원본보존원칙은같다.
+- 직접 연결 추적에서 spore/gather V3 body의 host-owned stalk 계약이 현행코드에없음을발견했다. source scene이명시한spore-dominant-birth.mjs는삭제됐고game/presentation에stalk호출이없으며구형drawSporeBirth도미호출이다. 승인full-scene에있는줄기를새body등록만으로반영했다고간주하지않고,현재정확둥지차분방식으로gather scene의몸체+줄기를분리하거나최소독립scene layer로연결한다. 폐기구형모듈전체복원은하지않는다. 담당검토/시각검수가남았다.
+
+## asset-sync-birth-alpha-20261107-01a1b40c
+- 작성 시각: 2026-11-07T13:37:36+09:00; 기록·구현판단: Codex /root; 범위 결정: 사용자; 출처 채팅 01a1b40c-e3c8-73a0-a37e-e4d6f5a71267 및 birth_integration·asset_inventory·surface_audit의 source/body 대조.
+- 사용자 “기존에 만든거 보고 만들어놔” 지시에 따라 기존 완성 포즈/기존 실제 renderer를 재사용한다. bean .32/.36초 두 프레임의 씨앗은 둥지에 alpha 합성되어 단순 원본 RGBA 절단으로는 녹색/노란 배경 테두리가 남는다. 기존 drawBirthSeed·공식 agentBirthMotion·원본 camera80로 동일 시각에 재생한 독립 seed layer를 두 구간에 사용한다. 다른 분리 가능한4시점의 실제 씨앗bbox와 guide가 일치함을 담당자가 확인했다. 새 원화/새 포즈가 아니며 해당 두 구간은 원본 바이트 복사로 표현하지 않고 source renderer 재렌더임을 영구 manifest에 명시한다.
+- 확정 검수: 부족 비탄생216셀 중176채움/36의도적빈칸/4작업재사용구분, 총90동작 등록과 기준8개갱신. 웰컴11검사와 unit-action-art6검사 통과(기준 원화 기대값은 최신 antenna idle로 갱신). scene 출구·착지408경우와 중간 기존이동상쇄612경우 통과, 몽돌 손실322+14픽셀은 sourceRGBA 그대로 복구했다.
+- 포자분비 초반 native nest는512→571 LANCZOS·(-55,-125)로 원본카메라를 찾았다. 잔상인 동일색<=2픽셀 제거와 반투명 layer 역합성을 추가검수 중이다. 실제canvas contact는 몽돌/포자/스프링12샘플 ready·오류0을 담당자가 확인했고 메인이 세이미지를 직접 보았다. 포자 idle전환에서낮아지는모양은 최종idle원본frame10과hash가같은정상포즈다. 아직최종전체빌드·브라우저·배포완료아니다.
+
+## asset-sync-integration-20261107-01a1b40c
+- 작성 시각: 2026-11-07T13:01:58+09:00; 발화자·판단 주체: Codex /root; 출처 채팅: 01a1b40c-e3c8-73a0-a37e-e4d6f5a71267; 작업자: asset_inventory·surface_audit·birth_integration.
+- 사용자 최신 지시(기존 제작본을 보고 직접 완성)에 따라 승인 동작 38곳과 상위형 작업 동작 48곳을 연결하고, 탄생 20곳은 기존 장면의 원본 포즈를 분리하여 인게임에 연결 중이다. 완료로 간주하지 않으며 실제 추출/통합 결과는 뒤에서 기록한다.
+- 중립 19종 102개 동작을 정본과 대조했다. 흙멧돼지 이동 tool registry 1곳만 구형 V2여서 승인 V3로 바꾸고 나머지 객체 바이트는 보존했다. 웰컴 외형 목록은 4부족×7외형+중립19종=47종이며 승인 재생 동작을 선택한다.
+- 콩 기본 이동의 색 깨짐 의심은 철회했다. alpha<16인 비가시 RGB를 이미지 도구에서 보고 오판했으며, 정상 alpha 합성 전체 프레임에는 가시 오염이 없다. 기존 기획서 Base96 원본을 그대로 등록한다.
+- 배포 v45 소스에는 Design.html 및 분할 기획서 페이지가 빠져 있었다. 배포 준비기에서 문서·도구 참조 자산과 helper까지 수집하도록 보완 중이다. 다른 저장소 spawner-assets에는 push하지 않는다.
+- 동시 전투/DNA 변경을 보호하기 위해 $Trash/asset-sync-01a1b40c/candidate에 HEAD cbf4b7f의 소스/문서 스냅샷과 기존 애셋 hardlink를 준비했다. root에 있는 동시 편집 바이트는 최종 통합 시 별도 보존하며, 미완료 다른 작업을 배포 완료로 취급하지 않는다.
+
+## 유닛 빈칸·애니 링크 보완 및 GIF 제시 완료 · 01a1b418 현재 요약
+
+- 기록 ID: unit-table-repair-complete-20261107-01a1b418. 기록·최종 관측 시각 2026-11-07T12:53:30+09:00. 기록자·제작/검수 Codex /root, 범위·기본형참고·GIF제시 결정 사용자. 출처 codex://threads/01a1b418-469e-79d0-9737-ddf91fe08f14 및 package-result.json·verification.json, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
+- 완료: 지정한 갑각/안테나 근접·원거리16칸과 분비근접4칸에 기존no image아이콘을 표시한다. 채집몽돌 이동/공격은 기본형 동작과 승인채집외형을 참고한 새sheet/GIF4파일을 제작해 기존2셀에 연결했다. 별도작업이 복원한 포자채집탄생scene2파일은 승인b4b0e05와byte동일해 기존링크가해결됐다. 해당동시복원은본채팅실적으로바꾸지않는다.
+- 검수실측: 유닛표참조1182건 누락0, 채집이동/공격/탄생필수빈칸0, 새2셀외표내용완전동일. CSS선택자2줄diff와변경2셀before/after검토. GIF이동16프레임800ms, 공격17프레임1900ms(본동작16프레임1000ms+검토정지900ms)로 직전기록의1010ms를정정한다. 제품2텍스트UTF8NoBom/CRLF OK, 메모리기존Mixed는NeedsReview/불일치줄없음으로원문보존했다. 루틴검수6.53초.
+- 산출물은 AnimationCandidates/pebble-gather-motion-v1-20261107 아래 실제재생GIF2개와각원본시트다. 현재제작안의사용자미술승인·게임적용·커밋·푸시·배포는주장하지않는다. 원요청·추가20칸·3개교정·기본형참고·GIF요구·동시변경보호·실측결과와남은사용자검토상태를대조해누락점검했다. 이번로컬수정과GIF제시는완료이며보완의견은이산출물에서이어받는다.
+## 최신 탄생도 기존 제작본을 보고 직접 보완 확정 · 01a1b40c
+
+- 기록 ID: asset-sync-birth-directed-20261107-01a1b40c. 기록 시각 2026-11-07T12:52:47+09:00. 기록자·이행판단 Codex /root, 원 발언자·추가구현 결정 사용자. 출처 codex://threads/01a1b40c-e3c8-73a0-a37e-e4d6f5a71267의 탄생처리 질문답변 “뭔소린지 전혀 모르겠네 기존에 만든거 보고 만들어놔”. 정확발언시각·항목ID 불명,H:/Spawner Windows PowerShell.
+- 앞선미확정탄생기존유지/원본확보선택질문은사용자교정으로대체한다. 사용자는기존제작본을보고직접완성하도록지시했다. 최신탄생기준을보류하거나구형유지로자동선택하지않고기존승인scene/body제작구조·원화·포즈·리듬을기준으로필요한몸체시트와연결코드를보완한다. 기존과다른미술을임의채택하지않고출구·착지·월드이동중복을검수한다.
+- birth_integration에추가지시와기존20탄생셀전체완료범위를전달했다. 이미구현한2개외나머지도기존body와동일성입증/재사용또는보완후반영한다. 동시server/game.js변경은보호하고client/game.js의필요한최소훙크는메인이분리통합한다. 아직실행/배포완료아니다.
+
+## 애셋 대응·실행면 조사 및 동기화 판단 · 01a1b40c
+
+- 기록 ID: asset-sync-findings-20261107-01a1b40c. 기록 시각 2026-11-07T12:51:01+09:00. 기록자·통합판단 Codex /root, 전체반영/배포 결정 사용자. 출처 현재채팅과 $Trash/asset-sync-01a1b40c의 asset-inventory.json·planning-table-inventory.json·surface-audit.json. 원발언시각·항목ID 불명,H:/Spawner Windows PowerShell.
+- 기획표43행473셀·후보연결98셀 조사. 실제 공용렌더 UNIT_ACTION_ART의 누락action은reference정지로표시된다. 최초 runtime2모듈·Combat7모듈 불일치와폐기포자탄생5참조를확인했다. 승인시트바이트/리듬보존등록,표의명시된상위작업재사용을적용한다. pivot불명은같은camera기존기준우선,그외완성프레임alpha바닥중앙/고정referenceLength로등록하며원저작pivot증거와구분한다.
+- 최신포자gather V3는구형145와별개의승인근거로6자산/JSON을원바이트복원했다. 최신탄생중fullscene은몸체로단순치환하지않고분리계약을조사한다. 원본부재시기존유지배포/원본확보전체배포질문에답변대기. 웰컴7형47정체성/등록동작사용변경의서브11검사통과보고를받았으며메인번들/화면확인이남았다.
+- 동시전투/DNA/표변경을보호하기위해 cbf4b7f950fdbfd4f8156d00034aae56058a9d82 코드만임시candidate로추출했다. 우리모듈을투영·생성하고공유번들은변경모듈만통합할예정이다. Site공식open ebaf0b3/public권한유지. 기존hosting이누락한Design페이지·섹션·참조자산을같이패키징하도록수정중이며아직구현/배포완료아니다.
+
+## 남은 3동작 확정·새 포자 탄생 보존 근거 · 01a1b418
+
+- 기록 ID: unit-table-three-sources-20261107-01a1b418. 기록 시각 2026-11-07T12:46:09+09:00. 기록자 Codex /root, 개수 교정 사용자·소스판단 Codex. 출처 현재채팅의 ‘4개가 아니라 3개네’와 원 폐기채팅01a1b33b 전체 사용자 메시지·신규V3보존 응답, Git b4b0e05/cbf4b7f, H:/Spawner Windows PowerShell. 원 발언 정확 시각 불명.
+- 최종3개는 몽돌 채집형 이동·공격과 포자 채집형 탄생이다. 앞선 약6개→4개 추정은 사용자 최신3개로 대체한다. 몽돌2개는 현재 후보파일·UNIT_ACTION_ART에 완성클립이 없어 새동작 방향을 사용자에게 질문했다. 선택응답은 아직 없으며 기존 기본형이나 은퇴한 발형을 채집형으로 대신 연결하지 않는다.
+- 포자V3는 폐기 이후 별도로 승인된 소스다. b4b0e05의 body/scene JSON은 user-approved이며 원 폐기채팅의 msg_0ae8f9e4bf297c44016aee7891b89087d0a05f2a9617523100 및 spore-birth-purge-new-upstream-v3-20261107-01a1b33b 기록이 최초구형145개와 구분해 보존한다고 명시한다. cbf4b7f는 후속 잔여변경 전체업로드에서7파일 삭제를 포함했으나 기획서 셀은 살아 있다. 현재 깨진링크수정 범위로 그 셀에 필요한 승인 장면GIF/PNG2개만 동일Git원바이트로 복원한다. 최초구형V7/V9는 복원하지 않는다.
+- 적용됨: design.css의 기존 no image 아이콘 규칙에 지정20칸 선택자2개만 추가했다. 최종참조·형식 검수는 포자복원과 나머지작업 후 수행한다.
+## 유닛 페이지 빈칸·깨진 동작 보완 착수 · 01a1b418 현재 요약
+
+- 기록 ID: unit-table-repair-start-20261107-01a1b418. 기록 시각 2026-11-07T12:42:57+09:00. 기록자·조사판단 Codex /root, 요청·표시 결정 사용자. 출처 codex://threads/01a1b418-469e-79d0-9737-ddf91fe08f14, H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID 불명.
+- 요청: 최신 기획서 유닛 페이지의 필수 빈칸과 깨진 애니메이션 링크를 모두 보완한다. 후속 지정으로 갑각·안테나4종의 근접/원거리16칸과 분비기관4종의 근접4칸을 기존 no image 플레이스홀더로 표시한다. 앞선 unit-table-carapace-order 및 unit-table-secretion-melee-empty의 해당 빈칸 유지 결정은 이번 명시 지시로 대체한다. 채집기관 이동·공격·탄생 약6개를 남은 대상으로 지목했다.
+- 직접 관측: 현재 unit-appearance.js에서 채집 몽돌 walk/attack2칸이 비어 있고, 포자 채집 birth는 삭제된 spore-gather-birth-v3 후보2파일을 네 속성에서 참조한다. 그 외 채집 이동·공격·탄생과 승인 자산 대응을 조사한다. 폐기된 포자 탄생을 임의 복원하지 않고 유효한 승인본을 연결한다. 새로운 원화·문구·게임 동작으로 범위를 확장하지 않는다.
+- 기존 동시 작업 코드·메모리는 보호하며 이 요청의 표/CSS 참조만 수정한다. repository.projectsV2 조회는0개. 커밋·푸시·배포는 이번 요청에 없으며 현재 수정·검수 전이다.
+## 최신 애셋·기획서·전체 실행면 동기화 및 배포 착수 · 01a1b40c 현재 요약
+
+- 기록 ID: asset-sync-start-20261107-01a1b40c. 기록 시각 2026-11-07T12:37:44+09:00. 기록자·통합판단 Codex /root, 요청·수정·배포 결정 사용자. 출처 codex://threads/01a1b40c-e3c8-73a0-a37e-e4d6f5a71267 현재 요청. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 요청: 현재 최신화된 애셋과 기획서를 대조하고 인게임에도 모두 반영한다. 웰컴 헤더와 각종 툴페이지 최신화를 확인하고 배포한다. 기존 승인 그림·동작을 기준으로 참조/등록/공용렌더/번들을 동기화하며 새로운 원화나 문구를 임의로 만들지 않는다. 기획서의 실제 채택 슬롯과 승인 manifest를 대조하며 mtime만으로 채택을 추정하지 않는다.
+- 시작 main cbf4b7f, 기존 dirty는 작업기록뿐이다. 전투 간격·중립 방어를 별도채팅01a1b411에서 작업중임을 메모리로 확인했으며 해당 로직과 동시변경을 보존한다. 애셋 대응과 웰컴·툴면의 독립 읽기전용 조사를 동일모델 서브에이전트 asset_inventory/surface_audit에 분담했고 수정·검수 통합과 Sites 게시 권한은 메인이 맡는다.
+- 기존 Spawner Site appgprj_6ada1cedf2848191938f196c4f346ee9은 public, 현재v45/https://spawner.oojjrs.chatgpt.site 를 native get_site로 확인했다. audience를 유지하며 공식 source helper로 최신 source를 연 뒤 준비한다. 지금은 조사·구현·배포 전이며 결과로 갱신한다.
+
+## 로컬 잔여 변경 전체 푸시 완료 · 01a1b40c 현재 요약
+
+- 기록 ID: all-local-push-complete-20261107-01a1b40c. 기록·관측 시각 2026-11-07T12:34:17+09:00. 기록자·Git실행/검수 Codex /root, 전체 업로드 결정 사용자. 출처 codex://threads/01a1b40c-e3c8-73a0-a37e-e4d6f5a71267 및 실제 commit/push/ls-remote/status 응답, literal $Trash/all-local-push-01a1b40c/staged.diff·frozen.json·preservation.json. 원 발언 정확시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 완료: cbf4b7f950fdbfd4f8156d00034aae56058a9d82 ‘채집·분비 동작과 초기 설계 반영 및 구형 미리보기 정리’를 origin/main에 푸시했다. 총34경로 +59212/-2359이며 신규 채집 동작 모듈·기존 코드/자산/작업기록과12파일 삭제를 포함한다. 푸시 직전 fetch에서 로컬1/원격0, 푸시 뒤 정확 refs/heads/main과 시작 checkout main HEAD 동일, 사후기록 직전 clean을 직접 확인했다. 시작/동결 기록의 미푸시 상태를 본 결과로 대체한다.
+- 검수: 원34경로 원바이트·삭제 상태와 index entries 보존복원, 최종 staged diff·범위·JSON rig 의미변화없음을 확인했다. 공통 형식검사22텍스트 중20 OK, 기존 신규모듈 gather-work-animation.mjs의 LF는 Mismatch, 기존 메모리 Mixed는 NeedsReview이며 원문 보존. git diff --cached --check는 메모리 CRLF와 기존 공백 경고로 exit2였다. 루틴 검사8.19초. 성공한 게임 테스트나 빌드·별도 Site배포로 주장하지 않는다.
+- 남은 한계: 동결 기록의 기획서 포자 탄생 이미지2개 참조 누락을 유지한다. staged Combat.html에 구형 SporeCombatBirthV9/CombatAttributesV7 탄생 메타데이터가 추가되는 기존 변경도 관측했으나 현재 Git 요청으로 내용을 수리하거나 실행검증하지 않았다. 관련 경로의 기능 완전성을 이번 업로드 검수로 보증하지 않는다. 보존 ref/stash와 원파일 백업은 유지한다.
+- 최종 요청·전체범위·원격동기화·검수경고·남은참조한계 누락 비교완료. 제품변경의 커밋·푸시는 완료했고 이 성공기록만 로컬에 남겨 다음 승인된 관련 커밋으로 이월한다. 메모리 전용 후속커밋은 만들지 않는다.
+
+## 몽돌 2동작 제작 위임·기본형 참고 확정 · 01a1b418
+
+- 기록 ID: unit-table-pebble-create-20261107-01a1b418. 기록 시각 2026-11-07T12:47:38+09:00. 기록자 Codex /root, 제작·참고 결정 사용자. 출처 현재채팅의 ‘네가 해서 가져와봐’, ‘기본형 참고해서 만들어서 가져와’. 원발언 시각/항목ID 불명, H:/Spawner Windows PowerShell.
+- 사용자에게 동작방향 결정을 다시 요구하지 않고 기본형 이동20프레임/800ms와 오른쪽 공격16프레임/1010ms 시트를 직접 참고한다. 이동은 기본형의 낮은 상하/좌우 체중 이동과 발 교대, 공격은 오른쪽으로 기울며 몸통으로 들이받고 복귀하는 형태다. 채집형 승인 피격시트의 중립512프레임을 외형 기준으로 쓰며 기본형으로 교체하거나 팔을 제거하지 않는다. imagegen으로 두 동작의 원화를 만들고 동일 프레임 원본에서 재생GIF를 만들어 제시한다.
+- 동시변경 관측: 포자scene GIF/PNG 복원 시도는 기존경로가 이미 생겨 쓰기 전에 중단됐다. 두파일은 현재 b4b0e05 원본과 byte동일함을 직접확인했다. 이번채팅의 복원실적으로 기록하지 않는다. 기존 no image20칸 외에는 아직 제품수정하지 않았다.
+## 몽돌 채집형 이동·공격 GIF 제작·연결 · 01a1b418
+
+- 기록 ID: unit-table-pebble-gifs-20261107-01a1b418. 기록 시각 2026-11-07T12:52:25+09:00. 기록자·제작 판단 Codex /root, 사용자 결정은 기본형 참고 제작 및 GIF 미리보기다. 출처 현재채팅과 image_gen2건·package.mjs 결과, H:/Spawner Windows PowerShell. 원발언 시각·항목ID 불명.
+- 제작: 기본형 이동/오른쪽공격 시트를 동작참고, 승인 채집형 피격시트 첫중립프레임을 외형참고로 imagegen을 실행했다. 투명4×4 원화2장을 실제프레임으로 잘라 공통512셀·바닥400에 정렬하고 원본시트와320GIF를 만들었다. 이동16프레임800ms, 공격16프레임1010ms+검토정지900ms. 두클립의마지막은첫중립과같게닫았다. 의미 없는 텍스트·새원화설명은 표에 추가하지 않았다.
+- 로컬후보: AnimationCandidates/pebble-gather-motion-v1-20261107 아래 walk/attack sheet.png·preview.gif4개. unit-appearance.js의 채집몽돌 비어있던2셀에 GIF미리보기·동일시트원본을 연결했다. 이는 이번제작결과이며 사용자최종미술승인이나게임적용으로기록하지않는다. 현재요청에따라GIF를직접제시할예정이다.
+- 최종검수대상은 위2셀·20플레이스홀더선택자·복원확인된포자링크와 GIF프레임/재생시간이다. 동시포자복원원본동일결과는재사용하고게임/서버/배포변경을포함하지않는다. 커밋·푸시없음.
+
 ## 로컬 잔여 변경 전체 업로드 범위 동결 · 01a1b40c
 
 - 기록 ID: all-local-push-freeze-20261107-01a1b40c. 기록·관측 시각 2026-11-07T12:31:34+09:00. 기록자·Git실행/검수 Codex /root, 전체 업로드 결정 사용자. 출처 codex://threads/01a1b40c-e3c8-73a0-a37e-e4d6f5a71267 및 literal $Trash/all-local-push-01a1b40c/preservation.json·실제 git 응답. 원 발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.

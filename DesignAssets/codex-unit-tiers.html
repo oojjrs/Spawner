@@ -77,7 +77,7 @@
     element.setAttribute("aria-labelledby", element.getAttribute("aria-labelledby").split(" ").map(id => id + "-stats").join(" "));
   });
   [...statTable.tBodies[0].rows].forEach(row => {
-    const unitKey = row.querySelector("a[href]").getAttribute("href").split("/").pop().replace(/\.(?:png|webp)$/i, "");
+    const unitKey = row.dataset.unitKey;
     const values = projectedStats.get(unitKey);
     fields.slice(3).forEach((field, offset) => {
       const cell = row.cells[offset + 3];

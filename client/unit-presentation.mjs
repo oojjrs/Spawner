@@ -1,5 +1,6 @@
-import { unitFacing } from "./unit-size.mjs";
+import { unitFacing, unitDisplaySize, unitFrameMirror } from "./unit-size.mjs";
 import { createUnitActionArt, unitActionArtPose } from "./unit-action-art.mjs";
+import { agentBirthMotion } from "../server/birth.mjs";
 
 export function createUnitPresentation(options) {
   const Spawner = options.model;
@@ -219,8 +220,26 @@ export function createUnitPresentation(options) {
   }
 
   function drawAgentAppearanceBody(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
-    return drawAgentAnimation(ctx, agent, topLeft.x + cell / 2,
-      topLeft.y + cell * (.5 + AGENT_HEIGHT * .44), cell * AGENT_HEIGHT, outlineColor);
+    let x = topLeft.x + cell / 2, floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
+    const animation = unitActionArtPose(agent, state.simSeconds)?.animation;
+    const scene = animation?.scene;
+    if (birth?.outlet && scene) {
+      const size = unitDisplaySize(agent) / animation.referenceLength;
+      const scale = options.displayScale(agent) || 1;
+      const facing = unitFrameMirror(animation.sourceFacing, unitFacing(agent)) ? -1 : 1;
+      const elapsed = Math.max(0, (state.simSeconds - agent.birth.startedAt) * 1000);
+      const age = clamp((elapsed - scene.travelStartMs) / (scene.travelEndMs - scene.travelStartMs), 0, 1);
+      let progressX = age * age * (3 - 2 * age), progressY = progressX;
+      if (agent.tribe === "bean") progressX = progressY = agentBirthMotion(elapsed / 1000, 0, 0)?.progress ?? 1;
+      if (agent.tribe === "spring") { progressX = age; progressY = age * age; }
+      if (agent.tribe === "spore") progressY = age < .25 ? 0 : ((age - .25) / .75) ** 2;
+      const sourceX = (scene.outletX - animation.pivotX) * size * facing;
+      const sourceY = (scene.outletY - animation.pivotY) * size;
+      const targetX = birth.targetX + .5, targetY = birth.targetY + .5 + AGENT_HEIGHT * .44;
+      x += (birth.targetX - (renderPosition?.x ?? birth.x) + (birth.outlet.x - targetX - sourceX) * (1 - progressX)) * cell / scale;
+      floor += (birth.targetY - (renderPosition?.y ?? birth.y) + (birth.outlet.y - targetY - sourceY) * (1 - progressY)) * cell / scale;
+    }
+    return drawAgentAnimation(ctx, agent, x, floor, cell * AGENT_HEIGHT, outlineColor);
   }
 
   function agentAppearanceKey(attributes) {

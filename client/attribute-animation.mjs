@@ -1,7 +1,8 @@
 import { UNIT_ACTION_ART_ASSETS } from "./unit-action-art-assets.mjs";
+import { UNIT_BIRTH_ART_ASSETS } from "./unit-birth-art-assets.mjs";
 import { createUnitActionArt, unitActionArtDefinition } from "./unit-action-art.mjs";
 
-export const TRIBE_ATTRIBUTE_ASSETS = UNIT_ACTION_ART_ASSETS;
+export const TRIBE_ATTRIBUTE_ASSETS = Object.freeze([...UNIT_ACTION_ART_ASSETS, ...UNIT_BIRTH_ART_ASSETS]);
 
 export function hasTribeAttributes(attributes) { return ["antenna", "strength", "arms", "feet"].some(key => attributes?.[key] > 0); }
 

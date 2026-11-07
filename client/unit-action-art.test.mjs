@@ -16,22 +16,31 @@ function surface(width, height) {
   return { width, height, getContext: () => context };
 }
 
-test("채집형은 전투 클립이 없으면 자기 원화를 고정해 유지한다", () => {
+test("채집형은 승인 전투 클립을 사용하고 미제작 동작만 원화를 유지한다", () => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     const agent = { tribe, dna: startingWorkerDna(tribe), health: 10, mode: "fight", attack: { startedAt: 100 } };
     const definition = unitActionArtDefinition(agent);
     assert.equal(definition, UNIT_ACTION_ART[tribe + "/gather"]);
     for (const time of [100.02, 100.3, 100.7]) {
       const pose = unitActionArtPose(agent, time);
-      assert.equal(pose.animation, definition.reference); assert.equal(pose.frame, 0); assert.equal(pose.missing, true);
+      assert.equal(pose.animation, definition.actions.attack);
+      assert.equal(pose.missing, false);
+      assert.match(pose.animation.image, new RegExp("ApprovedActionsV1/" + tribe + "/gather/attack"));
     }
     const hurt = unitActionArtPose({ ...agent, attack: null, hurtStartedAt: 100 }, 100.04);
-    assert.equal(hurt.animation, definition.reference); assert.equal(hurt.frame, 0);
+    assert.equal(hurt.animation, definition.actions.hurt);
+    assert.equal(hurt.missing, false);
+    assert.match(hurt.animation.image, new RegExp("ApprovedActionsV1/" + tribe + "/gather/hurt"));
   }
+  const agent = { tribe: "bean", attributes: { antenna: 1 }, health: 10, mode: "fight", attack: { startedAt: 100 } };
+  const pose = unitActionArtPose(agent, 100.3);
+  assert.equal(pose.animation, UNIT_ACTION_ART["bean/antenna"].reference);
+  assert.equal(pose.missing, true);
+  assert.equal(pose.frame, 0);
 });
 
 test("안테나와 발의 기준 원화는 해당 외형의 마스크를 사용한다", () => {
-  assert.match(UNIT_ACTION_ART["bean/antenna"].reference.image, /bean\/04\/Source/);
+  assert.match(UNIT_ACTION_ART["bean/antenna"].reference.image, /ApprovedActionsV1\/bean\/antenna\/idle/);
   assert.match(UNIT_ACTION_ART["bean/feet"].reference.image, /bean\/08\/Source/);
   for (const tribe of ["spore", "pebble", "spring"]) for (const form of ["antenna", "feet"]) {
     assert.match(UNIT_ACTION_ART[tribe + "/" + form].reference.image, new RegExp("/" + tribe + "/" + form + "/"));
@@ -64,7 +73,10 @@ test("전투 외형은 기존 파츠 콜백을 호출하지 않고 전용 시트
   const art = createCombatEvolutionArt(value => value, surface, async image => ({ image }));
   await art.prepare("bean");
   const rejectParts = () => { throw new Error("폐기한 파츠 합성 호출"); };
-  const frame = art.frame({ tribe: "bean", attributes: { blade: 1 }, health: 10, attack: { startedAt: 0 } }, .3, rejectParts, rejectParts);
+  const agent = { tribe: "bean", attributes: { blade: 1 }, health: 10, attack: { startedAt: 0 } };
+  art.frame(agent, .3, rejectParts, rejectParts);
+  await new Promise(resolve => setImmediate(resolve));
+  const frame = art.frame(agent, .3, rejectParts, rejectParts);
   assert.equal(frame.getContext("2d").calls.length, 1);
   assert.match(frame.getContext("2d").calls[0][0].image, /sprout\/Sheets\/blade\/attack/);
 });

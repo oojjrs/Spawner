@@ -1,3 +1,26 @@
+import { unitActionArtDefinition } from "./unit-action-art.mjs";
+
+export const WELCOME_UNIT_APPEARANCES = Object.freeze([
+  {}, { strength: 1 }, { feet: 1 }, { antenna: 1 }, { blade: 1 }, { secretion: 1 }, { carapace: 1 }
+].map(attributes => Object.freeze(attributes)));
+
+export function welcomeUnitPerformance(agent, startedAt) {
+  const definition = unitActionArtDefinition(agent);
+  const action = ["attack", "ranged", "harvest", "idle"].find(key => definition?.actions[key]);
+  const animation = definition?.actions[action] || definition?.reference;
+  const durationMs = animation?.durationsMs.reduce((sum, value) => sum + value, 0) || 2000;
+  const performer = { ...agent, animationStartedAt: startedAt, moveDuration: 0, mode: "idle" };
+  if (action === "attack" || action === "ranged") {
+    performer.mode = "attack";
+    performer.attackStartedAt = startedAt;
+    performer.attack = { startedAt, endsAt: startedAt + durationMs / 1000, speed: 1, directionX: 1, mode: action };
+  } else if (action === "harvest") {
+    performer.mode = "harvest";
+    performer.harvestStarted = startedAt;
+  }
+  return { agent: performer, action: action || "idle", animation, durationMs };
+}
+
 export function createWelcomeRoster(tribes, species, variants, random = Math.random) {
   const pool = [...new Set(tribes)].flatMap(key => Array.from({ length: variants }, (_, variant) => ({ key, variant })))
     .concat([...new Set(species)].filter(key => !tribes.includes(key)).map(key => ({ key, variant: 0 })));

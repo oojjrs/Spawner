@@ -34,7 +34,6 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   let context = canvas.getContext("2d");
   const tribes = ["bean", "spore", "pebble", "spring"];
   const model = globalThis.Spawner;
-  const animations = model.UNIT_ANIMATIONS;
   function createSurface(width, height) {
     const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
   }
@@ -70,7 +69,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
       parts.set(name, await nativeAssets.loadImage("DesignAssets/Units/Parts/" + (name === "root-rig" ? "bean-root-rig" : name) + ".png"));
     }),
     ...tribes.map(async key => {
-      await nativeAssets.prepareTribe(key, ["idle", "walk", "jump"], {});
+      await nativeAssets.prepareTribe(key, ["idle", "walk"], {});
       await unitPresentation.prepareAnimation({ tribe: key, attributes: {} });
       const walk = nativeAssets.sheets.get(key).get("walk");
       if (walk) movementSheets.set(key, { ...walk.animation, sprite: walk.sprite, scale: walk.scale });
@@ -79,12 +78,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   const creatureResources = { idle: new Map(), walk: new Map(), attack: new Map(), ranged: new Map(), hurt: new Map(),
     owlFrames: new Map(), beetleFrames: new Map(), beetleSheet: null, beetleAttackSheet: null, beetleSprite: null };
   resourcesReady = true;
-  const appearances = [
-    { bean: {}, others: {} },
-    { bean: { feet: 1 }, others: { feet: 1 } },
-    { bean: { feet: 2, antenna: 1 }, others: { antenna: 1 } },
-    { bean: { feet: 1, strength: 1 }, others: { strength: 1 } }
-  ];
+  const appearances = model.WELCOME_UNIT_APPEARANCES;
   const neutralSpecies = [...Object.keys(globalThis.Spawner.CREATURE_IDLE_ANIMATIONS), "talon-owl", "spiny-back-beetle"];
   const nextChoice = globalThis.Spawner.createWelcomeRoster(tribes, neutralSpecies, appearances.length);
   const preparedCreatures = new Set();
@@ -114,9 +108,14 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     await audioConnection?.prepare(soundNames(choice));
     if (tribes.includes(choice.key)) {
       if (choice.variant > 0) await globalThis.SpawnerAssets.ready;
-      const attributes = appearances[choice.variant][choice.key === "bean" ? "bean" : "others"];
-      await nativeAssets.prepareTribe(choice.key, ["idle", "walk", "jump"], attributes);
-      await unitPresentation.prepareAnimation({ tribe: choice.key, attributes });
+      const attributes = appearances[choice.variant];
+      await nativeAssets.prepareTribe(choice.key, ["idle", "walk"], attributes);
+      const agent = { tribe: choice.key, attributes, health: 1 };
+      await Promise.all([
+        unitPresentation.prepareAnimation(agent, 0),
+        unitPresentation.prepareAnimation({ ...agent, mode: "walk", moveStartedAt: 0, moveDuration: 1, stepCount: 1 }, 0),
+        unitPresentation.prepareAnimation(model.welcomeUnitPerformance(agent, 0).agent, 0)
+      ]);
       prepareFrame(choice);
       return;
     }
@@ -211,15 +210,13 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   function travelMotion(atElapsed, atTime) {
     const size = motionSize();
     const request = { key: current.key,
-      attributes: appearances[current.variant][current.key === "bean" ? "bean" : "others"], width, size, elapsedMs: Number.isFinite(atElapsed) ? atElapsed : elapsed,
+      attributes: appearances[current.variant], width, size, elapsedMs: Number.isFinite(atElapsed) ? atElapsed : elapsed,
       timeline: Number.isFinite(atTime) ? atTime : timeline, phase, startedAt: phaseStartedAt, reducedMotion: reducedMotion.matches,
       id: "welcome-" + current.key + ":" + appearanceNumber, worldPixels: worldPixels() };
     const motion = globalThis.Spawner.welcomeTravelMotion(globalThis.Spawner, request);
     motion.agent.animationStartedAt = phaseStartedAt;
-    if (phase === "perform" && tribes.includes(current.key) && animations[current.key].jump) {
-      motion.agent.mode = "jump";
-      motion.agent.jumpStartedAt = phaseStartedAt;
-    }
+    if (phase === "perform" && tribes.includes(current.key))
+      motion.agent = model.welcomeUnitPerformance(motion.agent, phaseStartedAt).agent;
     if (phase === "perform" && !tribes.includes(current.key)) {
       motion.agent.mode = "attack";
       motion.agent.attackStartedAt = phaseStartedAt;
@@ -243,8 +240,9 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   function phaseDuration() {
     if (phase === "waiting") return 0;
     if (phase === "enter") return travelMotion().durationMs;
-    if (phase === "perform") return current.key === "bean" ? globalThis.Spawner.SPROUT_IDLE_SHRUG_DURATION_MS :
-      duration(tribes.includes(current.key) ? animations[current.key].jump : neutralAnimations(current.key).attack);
+    if (phase === "perform") return tribes.includes(current.key) ?
+      model.welcomeUnitPerformance({ tribe: current.key, attributes: appearances[current.variant] }, phaseStartedAt).durationMs :
+      duration(neutralAnimations(current.key).attack);
     return restDuration;
   }
   function advance(completedAt) {

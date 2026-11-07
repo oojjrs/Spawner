@@ -1,16 +1,18 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createWelcomeRoster, welcomeCreatureScale, prepareWelcomeChoice, welcomeTravelMotion, drawWelcomeChoice } from "./welcome-presentation.mjs";
+import { WELCOME_UNIT_APPEARANCES, welcomeUnitPerformance, createWelcomeRoster, welcomeCreatureScale, prepareWelcomeChoice, welcomeTravelMotion, drawWelcomeChoice } from "./welcome-presentation.mjs";
 import { CREATURE_IDLE_ANIMATIONS, unitMovementPosition, creatureAnimationSpeed, unitAnimationPose } from "./unit-animation.mjs";
 import { unitStats } from "../server/attributes.mjs";
+import { unitActionArtDefinition, unitActionArtPose } from "./unit-action-art.mjs";
+import { UNIT_ACTION_ART } from "./unit-action-art-assets.mjs";
 
 test("opening base forms consume four identities from a full appearance bag", () => {
   let seed = 37;
   const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32);
   const tribes = ["bean", "spore", "pebble", "spring"];
   const species = ["boar", "toad", "weasel", "white-paw"];
-  const expected = [...tribes.flatMap(key => [0, 1, 2, 3].map(variant => key + ":" + variant)), ...species.map(key => key + ":0")].sort();
-  const next = createWelcomeRoster(tribes, species, 4, random);
+  const expected = [...tribes.flatMap(key => WELCOME_UNIT_APPEARANCES.map((_, variant) => key + ":" + variant)), ...species.map(key => key + ":0")].sort();
+  const next = createWelcomeRoster(tribes, species, WELCOME_UNIT_APPEARANCES.length, random);
   const choices = Array.from({ length: expected.length * 40 }, next);
   const identities = choices.map(choice => choice.key + ":" + choice.variant);
   assert.deepEqual(choices.slice(0, 4), tribes.map(key => ({ key, variant: 0 })));
@@ -37,30 +39,30 @@ test("creatures keep their relative sizes while tall poses fit the mobile header
   assert.ok(leader * idle.registrationScale * (idle.pivotY - 100) / idle.frameSize <= 168 + 1e-6);
 });
 
-test("all 35 appearance identities complete every round across different shuffle seeds", () => {
+test("all 47 appearance identities complete every round across different shuffle seeds", () => {
   const tribes = ["bean", "spore", "pebble", "spring"];
   const species = [...Object.keys(CREATURE_IDLE_ANIMATIONS), "talon-owl", "spiny-back-beetle"];
-  const expected = [...tribes.flatMap(key => [0, 1, 2, 3].map(variant => key + ":" + variant)), ...species.map(key => key + ":0")].sort();
-  assert.equal(expected.length, 35);
+  const expected = [...tribes.flatMap(key => WELCOME_UNIT_APPEARANCES.map((_, variant) => key + ":" + variant)), ...species.map(key => key + ":0")].sort();
+  assert.equal(expected.length, 47);
   const initialOrders = new Set();
   for (const initialSeed of [37, 749, 123456]) {
     let seed = initialSeed;
     const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32);
-    const next = createWelcomeRoster(tribes, species, 4, random);
-    const choices = Array.from({ length: 35 * 12 }, next);
+    const next = createWelcomeRoster(tribes, species, WELCOME_UNIT_APPEARANCES.length, random);
+    const choices = Array.from({ length: expected.length * 12 }, next);
     const identities = choices.map(choice => choice.key + ":" + choice.variant);
     assert.deepEqual(choices.slice(0, 4), tribes.map(key => ({ key, variant: 0 })));
-    const remainder = choices.slice(4, 35);
-    assert.equal(remainder.filter(choice => tribes.includes(choice.key) && choice.variant > 0).length, 12);
+    const remainder = choices.slice(4, expected.length);
+    assert.equal(remainder.filter(choice => tribes.includes(choice.key) && choice.variant > 0).length, 24);
     assert.deepEqual(remainder.filter(choice => species.includes(choice.key)).map(choice => choice.key).sort(), [...species].sort());
-    assert.deepEqual(identities.slice(4, 35).sort(), expected.filter(identity => !tribes.some(key => identity === key + ":0")));
-    initialOrders.add(identities.slice(4, 35).join(","));
-    for (let start = 0; start < choices.length; start += 35) assert.deepEqual(identities.slice(start, start + 35).sort(), expected);
+    assert.deepEqual(identities.slice(4, expected.length).sort(), expected.filter(identity => !tribes.some(key => identity === key + ":0")));
+    initialOrders.add(identities.slice(4, expected.length).join(","));
+    for (let start = 0; start < choices.length; start += expected.length) assert.deepEqual(identities.slice(start, start + expected.length).sort(), expected);
     for (let i = 4; i < choices.length; i++) {
       assert.notEqual(identities[i], identities[i - 1]);
       assert.notEqual(identities[i], identities[i - 2]);
       const recent = choices.slice(i - 2, i).map(choice => choice.key);
-      const remaining = choices.slice(i, Math.ceil((i + 1) / 35) * 35);
+      const remaining = choices.slice(i, Math.ceil((i + 1) / expected.length) * expected.length);
       if (remaining.some(choice => !recent.includes(choice.key))) assert.ok(!recent.includes(choices[i].key));
     }
   }
@@ -136,7 +138,7 @@ test("a failed pose uses a fallback pose of the same immutable appearance", () =
 
 test("welcome tribe forms preserve native facing across entry, action and exit", () => {
   const model = { unitStats, creatureAnimationSpeed, unitMovementPosition };
-  const variants = [{}, { feet: 1 }, { feet: 2, antenna: 1 }, { feet: 1, strength: 1 }];
+  const variants = WELCOME_UNIT_APPEARANCES;
   for (const key of ["bean", "spore", "pebble", "spring"]) for (const attributes of variants)
     for (const phase of ["enter", "perform", "rest", "exit"]) {
       const motion = welcomeTravelMotion(model, { key, attributes, width: 480, size: 146, worldPixels: 364,
@@ -179,5 +181,23 @@ test("welcome entry and exit share native pose clocks and finish fully landed", 
       assert.ok(Math.abs(enter.x - exit.x - (start.x - request.width / 2)) < 1e-8);
       if (ratio === 1) { assert.ok(Math.abs(enter.x - 240) < 1e-8); assert.ok(Math.abs(enter.position.progress - 1) < 1e-8); }
     }
+  }
+});
+
+test("welcome forms select their own registered body and perform only authored actions", () => {
+  const forms = ["base", "gather", "feet", "antenna", "blade", "secretion", "carapace"];
+  assert.equal(WELCOME_UNIT_APPEARANCES.length, forms.length);
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const [variant, attributes] of WELCOME_UNIT_APPEARANCES.entries()) {
+    const agent = { tribe, attributes, health: 1 };
+    const definition = UNIT_ACTION_ART[tribe + "/" + forms[variant]];
+    assert.equal(unitActionArtDefinition(agent), definition);
+    const performance = welcomeUnitPerformance(agent, 10);
+    const pose = unitActionArtPose(performance.agent, 10.001);
+    assert.notEqual(performance.agent.mode, "jump");
+    assert.equal(performance.agent.jumpStartedAt, undefined);
+    assert.equal(pose.animation, definition.actions[performance.action] || definition.reference);
+    assert.equal(performance.durationMs, pose.animation.durationsMs.reduce((sum, value) => sum + value, 0));
+    assert.equal(performance.agent.attributes, attributes);
+    assert.equal(agent.mode, undefined);
   }
 });

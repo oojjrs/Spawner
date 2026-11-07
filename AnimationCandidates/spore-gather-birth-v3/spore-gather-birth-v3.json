@@ -1,0 +1,1046 @@
+{
+  "status": "user-approved",
+  "frameSize": 768,
+  "columns": 8,
+  "frameCount": 78,
+  "durationsMs": [
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40
+  ],
+  "durationMs": 3120,
+  "loop": false,
+  "pivotX": 384,
+  "pivotY": 541,
+  "sourceCommit": "cdce2ae54a8e8cdbe3c21da0a5886d58ddfcab88",
+  "rootMotionBaked": false,
+  "bodyRotationAndLandingBaked": true,
+  "warning": "Do not apply sporeBirthMotion twice. Host owns nest, stalk and world root travel. Whole-body drawn poses only; no parts assembled. Preview shows in-place body to inspect spin.",
+  "references": [
+    "client/birth.mjs",
+    "client/game.js:4375",
+    "client/unit-appearance-birth-scene.mjs",
+    "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp"
+  ],
+  "frames": [
+    {
+      "time": 0,
+      "baseFrame": 0,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": null
+    },
+    {
+      "time": 0.04,
+      "baseFrame": 0,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": null
+    },
+    {
+      "time": 0.08,
+      "baseFrame": 0,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": null
+    },
+    {
+      "time": 0.12,
+      "baseFrame": 0,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": null
+    },
+    {
+      "time": 0.16,
+      "baseFrame": 0,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": null
+    },
+    {
+      "time": 0.2,
+      "baseFrame": 1,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": null
+    },
+    {
+      "time": 0.24,
+      "baseFrame": 1,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": null
+    },
+    {
+      "time": 0.28,
+      "baseFrame": 2,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.32,
+      "baseFrame": 2,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.36,
+      "baseFrame": 3,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.4,
+      "baseFrame": 3,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.44,
+      "baseFrame": 4,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.48,
+      "baseFrame": 4,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.52,
+      "baseFrame": 5,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.56,
+      "baseFrame": 5,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.6,
+      "baseFrame": 6,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.64,
+      "baseFrame": 6,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.68,
+      "baseFrame": 7,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.72,
+      "baseFrame": 7,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.76,
+      "baseFrame": 8,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.8,
+      "baseFrame": 8,
+      "pose": 0,
+      "rotationRadians": 0,
+      "bounds": [
+        257,
+        295,
+        511,
+        541
+      ]
+    },
+    {
+      "time": 0.84,
+      "baseFrame": 9,
+      "pose": 1,
+      "rotationRadians": 0.014878582807401288,
+      "bounds": [
+        247,
+        283,
+        521,
+        541
+      ]
+    },
+    {
+      "time": 0.88,
+      "baseFrame": 9,
+      "pose": 1,
+      "rotationRadians": 0.1302881305296761,
+      "bounds": [
+        243,
+        284,
+        518,
+        544
+      ]
+    },
+    {
+      "time": 0.92,
+      "baseFrame": 9,
+      "pose": 1,
+      "rotationRadians": 0.3518583772020575,
+      "bounds": [
+        239,
+        282,
+        510,
+        550
+      ]
+    },
+    {
+      "time": 0.96,
+      "baseFrame": 9,
+      "pose": 1,
+      "rotationRadians": 0.6699383501927163,
+      "bounds": [
+        221,
+        278,
+        500,
+        554
+      ]
+    },
+    {
+      "time": 1,
+      "baseFrame": 10,
+      "pose": 2,
+      "rotationRadians": 1.0748770768698266,
+      "bounds": [
+        202,
+        256,
+        497,
+        560
+      ]
+    },
+    {
+      "time": 1.04,
+      "baseFrame": 10,
+      "pose": 2,
+      "rotationRadians": 1.55702358460156,
+      "bounds": [
+        227,
+        227,
+        491,
+        543
+      ]
+    },
+    {
+      "time": 1.08,
+      "baseFrame": 10,
+      "pose": 2,
+      "rotationRadians": 2.106726900756088,
+      "bounds": [
+        200,
+        207,
+        497,
+        511
+      ]
+    },
+    {
+      "time": 1.12,
+      "baseFrame": 10,
+      "pose": 2,
+      "rotationRadians": 2.7143360527015834,
+      "bounds": [
+        212,
+        204,
+        517,
+        495
+      ]
+    },
+    {
+      "time": 1.16,
+      "baseFrame": 11,
+      "pose": 3,
+      "rotationRadians": 3.370200067806215,
+      "bounds": [
+        210,
+        211,
+        570,
+        505
+      ]
+    },
+    {
+      "time": 1.2,
+      "baseFrame": 11,
+      "pose": 3,
+      "rotationRadians": 4.06466797343816,
+      "bounds": [
+        257,
+        192,
+        579,
+        523
+      ]
+    },
+    {
+      "time": 1.24,
+      "baseFrame": 11,
+      "pose": 3,
+      "rotationRadians": 4.7880887969655905,
+      "bounds": [
+        264,
+        202,
+        544,
+        569
+      ]
+    },
+    {
+      "time": 1.28,
+      "baseFrame": 11,
+      "pose": 3,
+      "rotationRadians": 5.530811565756676,
+      "bounds": [
+        252,
+        255,
+        578,
+        580
+      ]
+    },
+    {
+      "time": 1.32,
+      "baseFrame": 12,
+      "pose": 4,
+      "rotationRadians": 6.283185307179589,
+      "bounds": [
+        191,
+        253,
+        577,
+        541
+      ]
+    },
+    {
+      "time": 1.36,
+      "baseFrame": 12,
+      "pose": 4,
+      "rotationRadians": 7.035559048602502,
+      "bounds": [
+        184,
+        243,
+        526,
+        585
+      ]
+    },
+    {
+      "time": 1.4000000000000001,
+      "baseFrame": 12,
+      "pose": 4,
+      "rotationRadians": 7.7782818173935855,
+      "bounds": [
+        221,
+        193,
+        516,
+        577
+      ]
+    },
+    {
+      "time": 1.44,
+      "baseFrame": 12,
+      "pose": 4,
+      "rotationRadians": 8.501702640921012,
+      "bounds": [
+        184,
+        186,
+        523,
+        533
+      ]
+    },
+    {
+      "time": 1.48,
+      "baseFrame": 13,
+      "pose": 5,
+      "rotationRadians": 9.196170546552958,
+      "bounds": [
+        178,
+        205,
+        585,
+        536
+      ]
+    },
+    {
+      "time": 1.52,
+      "baseFrame": 13,
+      "pose": 5,
+      "rotationRadians": 9.852034561657591,
+      "bounds": [
+        194,
+        190,
+        580,
+        536
+      ]
+    },
+    {
+      "time": 1.56,
+      "baseFrame": 13,
+      "pose": 5,
+      "rotationRadians": 10.459643713603086,
+      "bounds": [
+        231,
+        184,
+        584,
+        563
+      ]
+    },
+    {
+      "time": 1.6,
+      "baseFrame": 13,
+      "pose": 5,
+      "rotationRadians": 11.009347029757615,
+      "bounds": [
+        233,
+        175,
+        541,
+        592
+      ]
+    },
+    {
+      "time": 1.6400000000000001,
+      "baseFrame": 14,
+      "pose": 5,
+      "rotationRadians": 11.491493537489347,
+      "bounds": [
+        232,
+        200,
+        582,
+        583
+      ]
+    },
+    {
+      "time": 1.68,
+      "baseFrame": 14,
+      "pose": 5,
+      "rotationRadians": 11.896432264166457,
+      "bounds": [
+        219,
+        231,
+        588,
+        589
+      ]
+    },
+    {
+      "time": 1.72,
+      "baseFrame": 14,
+      "pose": 5,
+      "rotationRadians": 12.214512237157116,
+      "bounds": [
+        190,
+        232,
+        584,
+        573
+      ]
+    },
+    {
+      "time": 1.76,
+      "baseFrame": 14,
+      "pose": 5,
+      "rotationRadians": 12.436082483829496,
+      "bounds": [
+        179,
+        232,
+        592,
+        554
+      ]
+    },
+    {
+      "time": 1.8,
+      "baseFrame": 15,
+      "pose": 5,
+      "rotationRadians": 12.55149203155177,
+      "bounds": [
+        176,
+        233,
+        593,
+        541
+      ]
+    },
+    {
+      "time": 1.84,
+      "baseFrame": 15,
+      "pose": 5,
+      "rotationRadians": 12.566370614359172,
+      "bounds": [
+        176,
+        233,
+        593,
+        541
+      ]
+    },
+    {
+      "time": 1.8800000000000001,
+      "baseFrame": 15,
+      "pose": 5,
+      "rotationRadians": 12.566370614359172,
+      "bounds": [
+        176,
+        233,
+        593,
+        541
+      ]
+    },
+    {
+      "time": 1.92,
+      "baseFrame": 15,
+      "pose": 5,
+      "rotationRadians": 12.566370614359172,
+      "bounds": [
+        176,
+        233,
+        593,
+        541
+      ]
+    },
+    {
+      "time": 1.96,
+      "baseFrame": 16,
+      "pose": 5,
+      "rotationRadians": 12.566370614359172,
+      "bounds": [
+        176,
+        233,
+        593,
+        541
+      ]
+    },
+    {
+      "time": 2,
+      "baseFrame": 16,
+      "pose": 5,
+      "rotationRadians": 12.566370614359172,
+      "bounds": [
+        176,
+        233,
+        593,
+        541
+      ]
+    },
+    {
+      "time": 2.04,
+      "baseFrame": 16,
+      "pose": 5,
+      "rotationRadians": 12.566370614359172,
+      "bounds": [
+        176,
+        233,
+        593,
+        541
+      ]
+    },
+    {
+      "time": 2.08,
+      "baseFrame": 16,
+      "pose": 5,
+      "rotationRadians": 12.566370614359172,
+      "bounds": [
+        172,
+        237,
+        597,
+        541
+      ]
+    },
+    {
+      "time": 2.12,
+      "baseFrame": 17,
+      "pose": 6,
+      "rotationRadians": 0.047780008571333056,
+      "bounds": [
+        152,
+        264,
+        615,
+        545
+      ]
+    },
+    {
+      "time": 2.16,
+      "baseFrame": 17,
+      "pose": 6,
+      "rotationRadians": 0.07344885314154738,
+      "bounds": [
+        160,
+        255,
+        607,
+        548
+      ]
+    },
+    {
+      "time": 2.2,
+      "baseFrame": 18,
+      "pose": 6,
+      "rotationRadians": 0.03349745977018962,
+      "bounds": [
+        174,
+        239,
+        593,
+        544
+      ]
+    },
+    {
+      "time": 2.24,
+      "baseFrame": 18,
+      "pose": 7,
+      "rotationRadians": -0.006500252411621467,
+      "bounds": [
+        180,
+        217,
+        588,
+        542
+      ]
+    },
+    {
+      "time": 2.2800000000000002,
+      "baseFrame": 19,
+      "pose": 7,
+      "rotationRadians": -0.014142828960048776,
+      "bounds": [
+        179,
+        219,
+        591,
+        543
+      ]
+    },
+    {
+      "time": 2.32,
+      "baseFrame": 19,
+      "pose": 7,
+      "rotationRadians": -0.0046461365367599095,
+      "bounds": [
+        174,
+        224,
+        594,
+        541
+      ]
+    },
+    {
+      "time": 2.36,
+      "baseFrame": 20,
+      "pose": 7,
+      "rotationRadians": -2.6431766454327575e-05,
+      "bounds": [
+        171,
+        229,
+        599,
+        541
+      ]
+    },
+    {
+      "time": 2.4,
+      "baseFrame": 20,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        168,
+        231,
+        600,
+        541
+      ]
+    },
+    {
+      "time": 2.44,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        169,
+        231,
+        601,
+        541
+      ]
+    },
+    {
+      "time": 2.48,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        169,
+        230,
+        600,
+        541
+      ]
+    },
+    {
+      "time": 2.52,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        229,
+        599,
+        541
+      ]
+    },
+    {
+      "time": 2.56,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        228,
+        598,
+        541
+      ]
+    },
+    {
+      "time": 2.6,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        227,
+        597,
+        541
+      ]
+    },
+    {
+      "time": 2.64,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        227,
+        597,
+        541
+      ]
+    },
+    {
+      "time": 2.68,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        227,
+        597,
+        541
+      ]
+    },
+    {
+      "time": 2.72,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        227,
+        597,
+        541
+      ]
+    },
+    {
+      "time": 2.7600000000000002,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        227,
+        597,
+        541
+      ]
+    },
+    {
+      "time": 2.8000000000000003,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        227,
+        597,
+        541
+      ]
+    },
+    {
+      "time": 2.84,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        227,
+        597,
+        541
+      ]
+    },
+    {
+      "time": 2.88,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        227,
+        597,
+        541
+      ]
+    },
+    {
+      "time": 2.92,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        227,
+        597,
+        541
+      ]
+    },
+    {
+      "time": 2.96,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        227,
+        597,
+        541
+      ]
+    },
+    {
+      "time": 3,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        227,
+        597,
+        541
+      ]
+    },
+    {
+      "time": 3.04,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        227,
+        597,
+        541
+      ]
+    },
+    {
+      "time": 3.08,
+      "baseFrame": 21,
+      "pose": 7,
+      "rotationRadians": 0,
+      "bounds": [
+        171,
+        227,
+        597,
+        541
+      ]
+    }
+  ],
+  "candidate": false,
+  "tribe": "spore",
+  "form": "gather",
+  "action": "birth",
+  "sheet": "spore-gather-birth-v3-sheet.png",
+  "preview": "spore-gather-birth-v3-preview.gif",
+  "previewLoop": true,
+  "verification": {
+    "frameCount": 78,
+    "frameSize": [
+      768,
+      768
+    ],
+    "sheetSize": [
+      6144,
+      7680
+    ],
+    "gifFrames": 42,
+    "gifDurationMs": 3120,
+    "gifRegeneratedFromSheetMatchesExactly": true,
+    "noCellEdgeClipping": true,
+    "transparentFrameIndices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "neutralBoundary": {
+      "alphaMatches": true,
+      "opaqueRgbMatches": true,
+      "maxDisplayedRgbDifference": 1,
+      "displayBackgrounds": [
+        "#273139",
+        "#ffffff",
+        "#000000"
+      ]
+    },
+    "sheetSHA256": "360f8bc3f6b51c054e1af721bec4cfa1f175f335d83327a5d7ca379cc30da282",
+    "previewSHA256": "f5e54a8c4a80883df524ef19a72864066c65ec3284c5dcfc6a59bbca26c5d1fd"
+  }
+}

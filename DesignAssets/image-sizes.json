@@ -11567,6 +11567,1245 @@
         4,
         2
       ]
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/gather/idle.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        9
+      ],
+      "nativeSource": {
+        "sha256": "db70c0fb59ce47122d079f5e00fa3f37fdd6e374ef43e6d453d202facc461a47",
+        "dimensions": [
+          4096,
+          4608
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/gather/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        5
+      ],
+      "nativeSource": {
+        "sha256": "6c38836e54cfea18780d6460f919517212ca41a1459dd7b9315edb2e0e00f6bb",
+        "dimensions": [
+          4096,
+          2560
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/gather/attack.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "9145721d2c1e04eafb65d902540b19e5e021985fb48000581bcd55041ab843d4",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/gather/hurt.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "95657f2fd28ee1c62bfa29469bd7acaf9ca4536d6481fd0dab1106cca7038715",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/gather/death.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "8f7f1bceef88b316ca720ed4a1556007a208401f177d52371ef48adad944b2d2",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/blade/ranged.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "bc73f33da8c9556fdf47bdc014f96a06dc16ecd8727c2c614cf07bafb70f16aa",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/gather/attack.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "6e3e0adf80a23712488b5318f64d9c1626f97b47957112275e4e357264ace99e",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/gather/hurt.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "211392af29682716949495a34071dc63e5c3f30f83ec69d29b6e9ebb75d84896",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/gather/death.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "7abdc78a1974d47389963ca7cd58959953f789cfb3d204853e03ae300779deeb",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/blade/ranged.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "c8aa734f32b30cb1076d88cd07b1c97a12b5d77c141e0b51661815f856c0b738",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/hurt.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "f5d91668885bd9b6bd78d69866cb1da629d02b07d0aa5c981dda807273f8aee5",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/death.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "6a843aeb318c78afb05459971f64f57818610626a0a4ec7b51e6e8647775db4f",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/blade/ranged.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "97add6a94fd18a16686cc1238789b7e5fb89b69f64dbd5e448f6b546f94dc173",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/gather/idle.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "064d6b34196b02b5092a079c73fbed3bca065645e3e141eeaa8033be007c3d88",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/gather/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "07fb978c09e8bbd78ffda229dae0aff084ca0714a531f15b2cb695f8ac460b5f",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/gather/attack.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "e9b385429ae6b813b00e7590dbff7eed063b270df5ba7347d3bcf771c0c3503b",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/gather/hurt.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "0e19d0df8bf1319f3e9004bc0d9685385a16662162b9be7724b2c14eb58e08e2",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/gather/death.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "836208b42680903df24a65acd145ed739a4fd0d307fea01a6666e189e570201c",
+        "dimensions": [
+          4096,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/blade/ranged.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "dc383e26e5e71763b4fbccd8cd688547986feaf65309c76381413503b42f691b",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/idle.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "6687b1d1b3ab3367de9f60ade147a1be7807f5edbeca0d3aca9a436a0865a93e",
+        "dimensions": [
+          1536,
+          1536
+        ],
+        "frame": [
+          384,
+          384
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "ad322f377a7bee41f58a4ec73fd4c0f78770e6ffe35937ccbcb63cda7fdbbaef",
+        "dimensions": [
+          1536,
+          1536
+        ],
+        "frame": [
+          384,
+          384
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/death.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "3188a7391ad44fe67150eab01da04246a22704664c53ac832f4fb5ccf8f014d9",
+        "dimensions": [
+          1536,
+          1536
+        ],
+        "frame": [
+          384,
+          384
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/idle.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "72470f0882cb54073ac08219e84bc738da8b98a6d33f94bfc3f5b9ba9a2618e2",
+        "dimensions": [
+          1256,
+          1256
+        ],
+        "frame": [
+          314,
+          314
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "b83da42bf02a380d7be98e5ea681ccd889cb5175cb3e37fba55213bb14f29ee6",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/ranged.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "f506aced908bc557e233b12e75f7f334ea882b3fd1db9f86617cf6978d1cd116",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/hurt.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "a96e6e47080da3fc3c3a7c0ffff933a25ea0990e4b661dd4f70282638d87f09d",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        17
+      ],
+      "nativeSource": {
+        "sha256": "915aea163ca6c43656b30232dbfddf8fb6f5ed5c610213f9e5f1ffe02526f808",
+        "dimensions": [
+          6144,
+          13056
+        ],
+        "frame": [
+          768,
+          768
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        8,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "b20d19a21c4be98f2d3837ff583a4d031e251167810822a8a1ad05e2209e2146",
+        "dimensions": [
+          6144,
+          3072
+        ],
+        "frame": [
+          768,
+          768
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/death.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "e61fb9352220003b33f2193f70a2811449593515d453db67ba295b11739d787d",
+        "dimensions": [
+          1264,
+          1264
+        ],
+        "frame": [
+          316,
+          316
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/idle.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "6d26fe3b6fb9228faed066c7f3b4675e47ff2920558dc500c5d27d332823a10a",
+        "dimensions": [
+          1536,
+          1536
+        ],
+        "frame": [
+          384,
+          384
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/hurt.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "528fd068c826d6bfad79684f7c2dc9addf0503bf2ddbab89857dbf39edba59f0",
+        "dimensions": [
+          1792,
+          896
+        ],
+        "frame": [
+          448,
+          448
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/hurt.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "e6ee61e4a6e8a914436df3232cadf58f8edcba9c0b539e7585475ea48c39434a",
+        "dimensions": [
+          1792,
+          896
+        ],
+        "frame": [
+          448,
+          448
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "4d956f01d6c0e47f4f7b4ec61496621394aac27d6ee746f7b62d426a5cde67ee",
+        "dimensions": [
+          1408,
+          1408
+        ],
+        "frame": [
+          352,
+          352
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/hurt.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "440a7320f7195d1828a26080118f2b1bf3b7a0a950a3e98e19d00f0d87e04ea5",
+        "dimensions": [
+          1792,
+          896
+        ],
+        "frame": [
+          448,
+          448
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/base/walk.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        8,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "27e478b4c3905320acbd9a532b69b6b6082536497a000fea9311077dee04a133",
+        "dimensions": [
+          768,
+          384
+        ],
+        "frame": [
+          96,
+          96
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/idle.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "d84f940262ada63a1207a6a0c74dfe9e048d0435ec2c3ad8596a61802c8c60ba",
+        "dimensions": [
+          1152,
+          576
+        ],
+        "frame": [
+          144,
+          144
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/walk.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "3a3a1d7a9b42272f701d07624b3fd50fa3a25e1a5598f8a599339138be6c1ac5",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/attack.png": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "402804789844d116ffb535915d7797fccbb62c34d5e8e5c12296fdf5c55d6972",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "0884f793922a51497a256c431b77a6ebab7c5887696eb31cc333b67dfc7eaace",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/blade/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "1efc2a3647f9ceb83f07ba02aadeca892386af23538f62662636c1db4ec26cb3",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/carapace/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "be9e86248616fe2845aea74b7f6cdd06e1a1d0fb509b183451758d7e0f204f84",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/gather/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "576b0fd16496119100d7b998ed6deb147c3950bbb3f43f0be702543a7f7a18f8",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/bean/secretion/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "a59c98323f33d333bacd70167ec0e6362e9fe1103e11eba92b6abf672beb8507",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "69fe1857cbc4100485086455bc0012a8d5d27af46b39449ba3c1ede5caa876c8",
+        "dimensions": [
+          2880,
+          1080
+        ],
+        "frame": [
+          360,
+          360
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/blade/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "efc3d1a95b5b79982a30689fa357333e822ecf172a11a017a6b2d480c86095de",
+        "dimensions": [
+          4096,
+          6200
+        ],
+        "frame": [
+          512,
+          620
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/carapace/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "ee5d3153e3796f693113a920674df40eaa01131ce61820ecc093b634e26e0036",
+        "dimensions": [
+          4096,
+          6200
+        ],
+        "frame": [
+          512,
+          620
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        9
+      ],
+      "nativeSource": {
+        "sha256": "8471cda90a0010dcf1ac867d6ab0b5a20d2eef4c39ec89e36ea6dfc2c7b2c4df",
+        "dimensions": [
+          4096,
+          4608
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/secretion/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        6
+      ],
+      "nativeSource": {
+        "sha256": "d06a22904c8733f6710508ee1e1a37d4027e900cfdd9cb7131f45ea304c55527",
+        "dimensions": [
+          4096,
+          3072
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        12
+      ],
+      "nativeSource": {
+        "sha256": "7235f1961b34d622b6c3abeff03d3cf38dc40335cece5bc943236565a81a4107",
+        "dimensions": [
+          5632,
+          7680
+        ],
+        "frame": [
+          704,
+          640
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/blade/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        12
+      ],
+      "nativeSource": {
+        "sha256": "cdf0dd14ba7375112f0b613aff2f979b4e14bdabfb02df161f2ae113a80f10d5",
+        "dimensions": [
+          5632,
+          7680
+        ],
+        "frame": [
+          704,
+          640
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/carapace/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        12
+      ],
+      "nativeSource": {
+        "sha256": "249c059a4b78cf3c8ec60d77587651ab03467929e61c2dc6eeb44360ea956e45",
+        "dimensions": [
+          5632,
+          7680
+        ],
+        "frame": [
+          704,
+          640
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/gather/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "dcd0f043eef7527995de7a6ff776390ecc0b3e21a1e6fac8be4747564be199b8",
+        "dimensions": [
+          6144,
+          5120
+        ],
+        "frame": [
+          768,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "304b7813737671057ae9f5b43a44613b39d391f4ce8a9111f4bc7ed374f1e44d",
+        "dimensions": [
+          6144,
+          5120
+        ],
+        "frame": [
+          768,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "81f2c6059b8d79bf3f3dda8363cc9889a9597dfe494684d0e34a8c29c6e0fc31",
+        "dimensions": [
+          944,
+          944
+        ],
+        "frame": [
+          236,
+          236
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/blade/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        6,
+        6
+      ],
+      "nativeSource": {
+        "sha256": "d7d42f54cf50e994d3a8fca8533670d307fb35e33f73e5de034df0eb6e589eae",
+        "dimensions": [
+          3072,
+          3072
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/carapace/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        6,
+        6
+      ],
+      "nativeSource": {
+        "sha256": "05fb4787e53938aeb2825254d4d2517937734fcf1092b994d53f06dc7303629d",
+        "dimensions": [
+          3072,
+          3072
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/gather/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "3534eb9b380f6d2ec4e7cf37c2c4f6a1acd582daae322c2e87700715b68e87da",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/birth.png": {
+      "display": [
+        144,
+        144
+      ],
+      "grid": [
+        8,
+        7
+      ],
+      "nativeSource": {
+        "sha256": "7bd2ddb6033a01f238908938bb9efc22b7681ac76b92c2edf271b98905fed107",
+        "dimensions": [
+          4096,
+          3584
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
     }
   }
 }

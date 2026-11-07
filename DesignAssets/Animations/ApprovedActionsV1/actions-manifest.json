@@ -1,0 +1,6149 @@
+{
+  "version": 1,
+  "registry": "client/unit-action-art-assets.mjs",
+  "registrySha256": "6cbf60eeea2dff3f439f500e129a75dd3b600b55cba76a4622c5096e538a650c",
+  "planning": "DesignAssets/sections/unit-appearance.js",
+  "actionCount": 90,
+  "copiedAssetCount": 38,
+  "packedAssetCount": 1,
+  "checks": {
+    "sourceByteCopies": 38,
+    "packedFrames": 29,
+    "packedRgbaPixels": 601344,
+    "packedRgbaEqual": true,
+    "planningNonBirthActionCells": 216,
+    "unresolvedPlanningMappings": 0,
+    "existingBirthAndOtherSlotsPreserved": true
+  },
+  "references": [
+    {
+      "slot": "bean/gather/reference",
+      "sha256": "db70c0fb59ce47122d079f5e00fa3f37fdd6e374ef43e6d453d202facc461a47",
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 68,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 237,
+        "loop": false,
+        "frames": [
+          0
+        ]
+      }
+    },
+    {
+      "slot": "bean/antenna/reference",
+      "sha256": "915aea163ca6c43656b30232dbfddf8fb6f5ed5c610213f9e5f1ffe02526f808",
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 768,
+        "frameHeight": 768,
+        "columns": 8,
+        "frameCount": 136,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 383.5,
+        "pivotY": 654,
+        "viewSize": 768,
+        "referenceLength": 333,
+        "loop": false,
+        "frames": [
+          0
+        ]
+      }
+    },
+    {
+      "slot": "spore/secretion/reference",
+      "sha256": "6687b1d1b3ab3367de9f60ade147a1be7807f5edbeca0d3aca9a436a0865a93e",
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 384,
+        "frameHeight": 384,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 192,
+        "pivotY": 320,
+        "viewSize": 384,
+        "referenceLength": 276,
+        "loop": false,
+        "frames": [
+          0
+        ]
+      }
+    },
+    {
+      "slot": "spore/antenna/reference",
+      "sha256": "6d26fe3b6fb9228faed066c7f3b4675e47ff2920558dc500c5d27d332823a10a",
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 384,
+        "frameHeight": 384,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 192.5,
+        "pivotY": 321,
+        "viewSize": 384,
+        "referenceLength": 289,
+        "loop": false,
+        "frames": [
+          0
+        ]
+      }
+    },
+    {
+      "slot": "pebble/antenna/reference",
+      "sha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 256,
+        "pivotY": 436,
+        "viewSize": 512,
+        "referenceLength": 354,
+        "loop": false,
+        "frames": [
+          0
+        ]
+      }
+    },
+    {
+      "slot": "spring/gather/reference",
+      "sha256": "064d6b34196b02b5092a079c73fbed3bca065645e3e141eeaa8033be007c3d88",
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 64,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 275,
+        "loop": false,
+        "frames": [
+          0
+        ]
+      }
+    },
+    {
+      "slot": "spring/secretion/reference",
+      "sha256": "72470f0882cb54073ac08219e84bc738da8b98a6d33f94bfc3f5b9ba9a2618e2",
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 314,
+        "frameHeight": 314,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 157.5,
+        "pivotY": 285,
+        "viewSize": 314,
+        "referenceLength": 200,
+        "loop": false,
+        "frames": [
+          0
+        ]
+      }
+    },
+    {
+      "slot": "spring/antenna/reference",
+      "sha256": "4d956f01d6c0e47f4f7b4ec61496621394aac27d6ee746f7b62d426a5cde67ee",
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 352,
+        "frameHeight": 352,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 175,
+        "pivotY": 317,
+        "viewSize": 352,
+        "referenceLength": 222,
+        "loop": false,
+        "frames": [
+          0
+        ]
+      }
+    }
+  ],
+  "actions": [
+    {
+      "slot": "bean/gather/idle",
+      "source": "AnimationCandidates/bean-gather-motion-v1/bean-gather-idle-v1-sheet.png",
+      "sourceSha256": "db70c0fb59ce47122d079f5e00fa3f37fdd6e374ef43e6d453d202facc461a47",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/idle.png",
+      "sha256": "db70c0fb59ce47122d079f5e00fa3f37fdd6e374ef43e6d453d202facc461a47",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/bean-gather-motion-v1/bean-gather-idle-v1.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/bean-gather-motion-v1/bean-gather-idle-v1.json": {
+            "status": "user-approved",
+            "artApproval": "user-approved"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 68,
+        "durationsMs": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 237,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          148,
+          211,
+          216,
+          237
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 237
+      },
+      "sourceDurationMs": 6800,
+      "actionDurationMs": 6800,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/gather/walk",
+      "source": "AnimationCandidates/bean-gather-motion-v1/bean-gather-walk-v1-sheet.png",
+      "sourceSha256": "6c38836e54cfea18780d6460f919517212ca41a1459dd7b9315edb2e0e00f6bb",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/walk.png",
+      "sha256": "6c38836e54cfea18780d6460f919517212ca41a1459dd7b9315edb2e0e00f6bb",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/bean-gather-motion-v1/bean-gather-walk-v1.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/bean-gather-motion-v1/bean-gather-walk-v1.json": {
+            "status": "user-approved",
+            "artApproval": "user-approved"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/walk.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 33,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 237,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          148,
+          211,
+          216,
+          237
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 237
+      },
+      "sourceDurationMs": 1320,
+      "actionDurationMs": 1320,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/gather/attack",
+      "source": "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-attack-v3-sheet.png",
+      "sourceSha256": "9145721d2c1e04eafb65d902540b19e5e021985fb48000581bcd55041ab843d4",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/attack.png",
+      "sha256": "9145721d2c1e04eafb65d902540b19e5e021985fb48000581bcd55041ab843d4",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-attack-v3.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-attack-v3.json": {
+            "status": "user-approved"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/attack.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16,
+        "durationsMs": [
+          60,
+          70,
+          60,
+          80,
+          30,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          70,
+          80,
+          90,
+          100,
+          60
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 237,
+        "loop": false,
+        "hitTimeMs": 300
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          148,
+          211,
+          216,
+          237
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 237
+      },
+      "sourceDurationMs": 1000,
+      "actionDurationMs": 1000,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/gather/hurt",
+      "source": "AnimationCandidates/bean-gather-hurt-v1/bean-gather-hurt-v1-sheet.png",
+      "sourceSha256": "95657f2fd28ee1c62bfa29469bd7acaf9ca4536d6481fd0dab1106cca7038715",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/hurt.png",
+      "sha256": "95657f2fd28ee1c62bfa29469bd7acaf9ca4536d6481fd0dab1106cca7038715",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/bean-gather-hurt-v1/bean-gather-hurt-v1.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/bean-gather-hurt-v1/bean-gather-hurt-v1.json": {
+            "status": "user-approved"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/hurt.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16,
+        "durationsMs": [
+          20,
+          30,
+          30,
+          30,
+          500,
+          30,
+          30,
+          30,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          40
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 237,
+        "loop": false
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          148,
+          211,
+          216,
+          237
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 237
+      },
+      "sourceDurationMs": 880,
+      "actionDurationMs": 880,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/gather/death",
+      "source": "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-death-v2-sheet.png",
+      "sourceSha256": "8f7f1bceef88b316ca720ed4a1556007a208401f177d52371ef48adad944b2d2",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/death.png",
+      "sha256": "8f7f1bceef88b316ca720ed4a1556007a208401f177d52371ef48adad944b2d2",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-death-v2.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-death-v2.json": {
+            "status": "user-approved"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/death.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16,
+        "durationsMs": [
+          160,
+          80,
+          80,
+          70,
+          70,
+          60,
+          60,
+          60,
+          60,
+          60,
+          80,
+          90,
+          100,
+          110,
+          120,
+          1000
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 237,
+        "loop": false
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          148,
+          211,
+          216,
+          237
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 237
+      },
+      "sourceDurationMs": 2260,
+      "actionDurationMs": 2260,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/blade/ranged",
+      "source": "AnimationCandidates/blade-ranged-approved-recovery-v1-20261107/bean-blade-ranged-approved-sheet.png",
+      "sourceSha256": "bc73f33da8c9556fdf47bdc014f96a06dc16ecd8727c2c614cf07bafb70f16aa",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/bean/blade/ranged.png",
+      "sha256": "bc73f33da8c9556fdf47bdc014f96a06dc16ecd8727c2c614cf07bafb70f16aa",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/blade-ranged-approved-recovery-v1-20261107/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/blade-ranged-approved-recovery-v1-20261107/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/blade/ranged.png",
+        "sourceFacing": "left",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 61,
+        "durationsMs": [
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20
+        ],
+        "pivotX": 249.5,
+        "pivotY": 451,
+        "viewSize": 512,
+        "referenceLength": 337,
+        "loop": false,
+        "launchAtMs": 300
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          81,
+          205,
+          337,
+          246
+        ],
+        "pivot": [
+          249.5,
+          451
+        ],
+        "referenceLength": 337
+      },
+      "sourceDurationMs": 1220,
+      "actionDurationMs": 1220,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/gather/attack",
+      "source": "AnimationCandidates/spore-gather-attack-v1/spore-gather-attack-v1-sheet.png",
+      "sourceSha256": "6e3e0adf80a23712488b5318f64d9c1626f97b47957112275e4e357264ace99e",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spore/gather/attack.png",
+      "sha256": "6e3e0adf80a23712488b5318f64d9c1626f97b47957112275e4e357264ace99e",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spore-gather-attack-v1/spore-gather-attack-v1.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spore-gather-attack-v1/spore-gather-attack-v1.json": {
+            "status": "user-approved"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/gather/attack.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16,
+        "durationsMs": [
+          60,
+          70,
+          60,
+          80,
+          30,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          70,
+          80,
+          90,
+          100,
+          60
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 427,
+        "loop": false,
+        "hitTimeMs": 300
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          43,
+          134,
+          427,
+          315
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 427
+      },
+      "sourceDurationMs": 1000,
+      "actionDurationMs": 1000,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/gather/hurt",
+      "source": "AnimationCandidates/spore-gather-hurt-death-v2/spore-gather-hurt-v2-sheet.png",
+      "sourceSha256": "211392af29682716949495a34071dc63e5c3f30f83ec69d29b6e9ebb75d84896",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spore/gather/hurt.png",
+      "sha256": "211392af29682716949495a34071dc63e5c3f30f83ec69d29b6e9ebb75d84896",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spore-gather-hurt-death-v2/spore-gather-hurt-v2.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spore-gather-hurt-death-v2/spore-gather-hurt-v2.json": {
+            "status": "user-approved"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/gather/hurt.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          80,
+          60,
+          100,
+          150,
+          250,
+          80,
+          80,
+          400
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 428,
+        "loop": false
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          43,
+          133,
+          428,
+          316
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 428
+      },
+      "sourceDurationMs": 1200,
+      "actionDurationMs": 1200,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/gather/death",
+      "source": "AnimationCandidates/spore-gather-hurt-death-v2/spore-gather-death-v2-sheet.png",
+      "sourceSha256": "7abdc78a1974d47389963ca7cd58959953f789cfb3d204853e03ae300779deeb",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spore/gather/death.png",
+      "sha256": "7abdc78a1974d47389963ca7cd58959953f789cfb3d204853e03ae300779deeb",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spore-gather-hurt-death-v2/spore-gather-death-v2.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spore-gather-hurt-death-v2/spore-gather-death-v2.json": {
+            "status": "user-approved"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/gather/death.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          120,
+          100,
+          140,
+          120,
+          140,
+          100,
+          120,
+          700
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 429,
+        "loop": false
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          42,
+          133,
+          429,
+          316
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 429
+      },
+      "sourceDurationMs": 1540,
+      "actionDurationMs": 1540,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/blade/ranged",
+      "source": "AnimationCandidates/blade-ranged-approved-recovery-v1-20261107/spore-blade-ranged-approved-sheet.png",
+      "sourceSha256": "c8aa734f32b30cb1076d88cd07b1c97a12b5d77c141e0b51661815f856c0b738",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spore/blade/ranged.png",
+      "sha256": "c8aa734f32b30cb1076d88cd07b1c97a12b5d77c141e0b51661815f856c0b738",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/blade-ranged-approved-recovery-v1-20261107/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/blade-ranged-approved-recovery-v1-20261107/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/blade/ranged.png",
+        "sourceFacing": "left",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 61,
+        "durationsMs": [
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20
+        ],
+        "pivotX": 255,
+        "pivotY": 451,
+        "viewSize": 512,
+        "referenceLength": 368,
+        "loop": false,
+        "launchAtMs": 300
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          71,
+          219,
+          368,
+          232
+        ],
+        "pivot": [
+          255,
+          451
+        ],
+        "referenceLength": 368
+      },
+      "sourceDurationMs": 1220,
+      "actionDurationMs": 1220,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/gather/hurt",
+      "source": "AnimationCandidates/pebble-gather-hurt-fullbody-v1-20261107/pebble-gather-hurt-v1-sheet.png",
+      "sourceSha256": "f5d91668885bd9b6bd78d69866cb1da629d02b07d0aa5c981dda807273f8aee5",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/hurt.png",
+      "sha256": "f5d91668885bd9b6bd78d69866cb1da629d02b07d0aa5c981dda807273f8aee5",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/pebble-gather-hurt-fullbody-v1-20261107/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/pebble-gather-hurt-fullbody-v1-20261107/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/hurt.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          500,
+          40,
+          40,
+          80,
+          60,
+          40,
+          120
+        ],
+        "pivotX": 256,
+        "pivotY": 400,
+        "viewSize": 512,
+        "referenceLength": 347,
+        "loop": false,
+        "frames": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          83,
+          174,
+          347,
+          226
+        ],
+        "pivot": [
+          256,
+          400
+        ],
+        "referenceLength": 347
+      },
+      "sourceDurationMs": 1580,
+      "actionDurationMs": 880,
+      "excludedPreviewLeadInMs": 700,
+      "excludedSourceFrames": [
+        0
+      ],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/gather/death",
+      "source": "AnimationCandidates/pebble-gather-death-fullbody-v1-20261107/pebble-gather-death-v1-sheet.png",
+      "sourceSha256": "6a843aeb318c78afb05459971f64f57818610626a0a4ec7b51e6e8647775db4f",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/death.png",
+      "sha256": "6a843aeb318c78afb05459971f64f57818610626a0a4ec7b51e6e8647775db4f",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/pebble-gather-death-fullbody-v1-20261107/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/pebble-gather-death-fullbody-v1-20261107/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/death.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          100,
+          140,
+          120,
+          140,
+          100,
+          120,
+          900
+        ],
+        "pivotX": 258.5,
+        "pivotY": 402,
+        "viewSize": 512,
+        "referenceLength": 357,
+        "loop": false,
+        "frames": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          80,
+          163,
+          357,
+          239
+        ],
+        "pivot": [
+          258.5,
+          402
+        ],
+        "referenceLength": 357
+      },
+      "sourceDurationMs": 2320,
+      "actionDurationMs": 1620,
+      "excludedPreviewLeadInMs": 700,
+      "excludedSourceFrames": [
+        0
+      ],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/blade/ranged",
+      "source": "AnimationCandidates/blade-ranged-approved-recovery-v1-20261107/pebble-blade-ranged-approved-sheet.png",
+      "sourceSha256": "97add6a94fd18a16686cc1238789b7e5fb89b69f64dbd5e448f6b546f94dc173",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/blade/ranged.png",
+      "sha256": "97add6a94fd18a16686cc1238789b7e5fb89b69f64dbd5e448f6b546f94dc173",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/blade-ranged-approved-recovery-v1-20261107/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/blade-ranged-approved-recovery-v1-20261107/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/blade/ranged.png",
+        "sourceFacing": "left",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 61,
+        "durationsMs": [
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20
+        ],
+        "pivotX": 218,
+        "pivotY": 450,
+        "viewSize": 512,
+        "referenceLength": 334,
+        "loop": false,
+        "launchAtMs": 300
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          51,
+          179,
+          334,
+          271
+        ],
+        "pivot": [
+          218,
+          450
+        ],
+        "referenceLength": 334
+      },
+      "sourceDurationMs": 1220,
+      "actionDurationMs": 1220,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/gather/idle",
+      "source": "AnimationCandidates/spring-gather-motion-v1/spring-gather-idle-v1-sheet.png",
+      "sourceSha256": "064d6b34196b02b5092a079c73fbed3bca065645e3e141eeaa8033be007c3d88",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/idle.png",
+      "sha256": "064d6b34196b02b5092a079c73fbed3bca065645e3e141eeaa8033be007c3d88",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spring-gather-motion-v1/spring-gather-idle-v1.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spring-gather-motion-v1/spring-gather-idle-v1.json": {
+            "status": "user-approved"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 64,
+        "durationsMs": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 275,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          119,
+          183,
+          275,
+          266
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 275
+      },
+      "sourceDurationMs": 6400,
+      "actionDurationMs": 6400,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/gather/walk",
+      "source": "AnimationCandidates/spring-gather-motion-v1/spring-gather-walk-v1-sheet.png",
+      "sourceSha256": "07fb978c09e8bbd78ffda229dae0aff084ca0714a531f15b2cb695f8ac460b5f",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/walk.png",
+      "sha256": "07fb978c09e8bbd78ffda229dae0aff084ca0714a531f15b2cb695f8ac460b5f",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spring-gather-motion-v1/spring-gather-walk-v1.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spring-gather-motion-v1/spring-gather-walk-v1.json": {
+            "status": "user-approved"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/walk.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16,
+        "durationsMs": [
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 289,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          112,
+          185,
+          289,
+          264
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 289
+      },
+      "sourceDurationMs": 1120,
+      "actionDurationMs": 1120,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/gather/attack",
+      "source": "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1-sheet.png",
+      "sourceSha256": "e9b385429ae6b813b00e7590dbff7eed063b270df5ba7347d3bcf771c0c3503b",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/attack.png",
+      "sha256": "e9b385429ae6b813b00e7590dbff7eed063b270df5ba7347d3bcf771c0c3503b",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1.json": {
+            "status": "user-approved"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/attack.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16,
+        "durationsMs": [
+          60,
+          70,
+          60,
+          80,
+          30,
+          60,
+          16,
+          16,
+          16,
+          16,
+          32,
+          40,
+          52,
+          76,
+          100,
+          276
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 275,
+        "loop": false,
+        "hitTimeMs": 300
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          119,
+          183,
+          275,
+          266
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 275
+      },
+      "sourceDurationMs": 1000,
+      "actionDurationMs": 1000,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/gather/hurt",
+      "source": "AnimationCandidates/spring-gather-actions-v1/spring-gather-hurt-v1-sheet.png",
+      "sourceSha256": "0e19d0df8bf1319f3e9004bc0d9685385a16662162b9be7724b2c14eb58e08e2",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/hurt.png",
+      "sha256": "0e19d0df8bf1319f3e9004bc0d9685385a16662162b9be7724b2c14eb58e08e2",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spring-gather-actions-v1/spring-gather-hurt-v1.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spring-gather-actions-v1/spring-gather-hurt-v1.json": {
+            "status": "user-approved"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/hurt.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 14,
+        "durationsMs": [
+          500,
+          30,
+          30,
+          30,
+          30,
+          40,
+          30,
+          30,
+          40,
+          40,
+          40,
+          20,
+          10,
+          10
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 315,
+        "loop": false
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          88,
+          234,
+          315,
+          215
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 315
+      },
+      "sourceDurationMs": 880,
+      "actionDurationMs": 880,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/gather/death",
+      "source": "AnimationCandidates/spring-gather-actions-v1/spring-gather-death-v1-sheet.png",
+      "sourceSha256": "836208b42680903df24a65acd145ed739a4fd0d307fea01a6666e189e570201c",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/death.png",
+      "sha256": "836208b42680903df24a65acd145ed739a4fd0d307fea01a6666e189e570201c",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spring-gather-actions-v1/spring-gather-death-v1.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spring-gather-actions-v1/spring-gather-death-v1.json": {
+            "status": "user-approved"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/death.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 8,
+        "durationsMs": [
+          120,
+          100,
+          140,
+          120,
+          140,
+          100,
+          120,
+          600
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 275,
+        "loop": false
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          119,
+          183,
+          275,
+          266
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 275
+      },
+      "sourceDurationMs": 1440,
+      "actionDurationMs": 1440,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/blade/ranged",
+      "source": "AnimationCandidates/blade-ranged-approved-recovery-v1-20261107/spring-blade-ranged-approved-sheet.png",
+      "sourceSha256": "dc383e26e5e71763b4fbccd8cd688547986feaf65309c76381413503b42f691b",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/blade/ranged.png",
+      "sha256": "dc383e26e5e71763b4fbccd8cd688547986feaf65309c76381413503b42f691b",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/blade-ranged-approved-recovery-v1-20261107/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/blade-ranged-approved-recovery-v1-20261107/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/blade/ranged.png",
+        "sourceFacing": "left",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 61,
+        "durationsMs": [
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20
+        ],
+        "pivotX": 240,
+        "pivotY": 451,
+        "viewSize": 512,
+        "referenceLength": 334,
+        "loop": false,
+        "launchAtMs": 300
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          73,
+          149,
+          334,
+          302
+        ],
+        "pivot": [
+          240,
+          451
+        ],
+        "referenceLength": 334
+      },
+      "sourceDurationMs": 1220,
+      "actionDurationMs": 1220,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/secretion/idle",
+      "source": "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-idle-fullbody-v1-sheet.png",
+      "sourceSha256": "6687b1d1b3ab3367de9f60ade147a1be7807f5edbeca0d3aca9a436a0865a93e",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/idle.png",
+      "sha256": "6687b1d1b3ab3367de9f60ade147a1be7807f5edbeca0d3aca9a436a0865a93e",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-idle-fullbody-v1.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-idle-fullbody-v1.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 384,
+        "frameHeight": 384,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          1000,
+          200,
+          200,
+          100,
+          100,
+          800,
+          200,
+          200,
+          100,
+          200,
+          500,
+          600,
+          200,
+          200,
+          100,
+          1700
+        ],
+        "pivotX": 192,
+        "pivotY": 320,
+        "viewSize": 384,
+        "referenceLength": 276,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          55,
+          95,
+          276,
+          225
+        ],
+        "pivot": [
+          192,
+          320
+        ],
+        "referenceLength": 276
+      },
+      "sourceDurationMs": 6400,
+      "actionDurationMs": 6400,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/secretion/walk",
+      "source": "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-walk-fullbody-v1-sheet.png",
+      "sourceSha256": "ad322f377a7bee41f58a4ec73fd4c0f78770e6ffe35937ccbcb63cda7fdbbaef",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/walk.png",
+      "sha256": "ad322f377a7bee41f58a4ec73fd4c0f78770e6ffe35937ccbcb63cda7fdbbaef",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-walk-fullbody-v1.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-walk-fullbody-v1.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/walk.png",
+        "sourceFacing": "right",
+        "frameSize": 384,
+        "frameHeight": 384,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70
+        ],
+        "pivotX": 192,
+        "pivotY": 320,
+        "viewSize": 384,
+        "referenceLength": 283,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          51,
+          99,
+          283,
+          222
+        ],
+        "pivot": [
+          192,
+          320
+        ],
+        "referenceLength": 283
+      },
+      "sourceDurationMs": 1120,
+      "actionDurationMs": 1120,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/secretion/hurt",
+      "source": "DesignAssets/Animations/SpeciesHeldHurtV1/spore-secretion.webp",
+      "sourceSha256": "762065a6d51247c96ee50773c791d0e2524813bc90391694f37128d98e46832a",
+      "image": "DesignAssets/Animations/SpeciesHeldHurtV1/spore-secretion.webp",
+      "sha256": "762065a6d51247c96ee50773c791d0e2524813bc90391694f37128d98e46832a",
+      "provenance": {
+        "kind": "existing-native-atlas",
+        "sourceMetadata": [
+          "AnimationCandidates/spore-secretion-held-hurt-v1-20261107/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spore-secretion-held-hurt-v1-20261107/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/SpeciesHeldHurtV1/spore-secretion.webp",
+        "sourceFacing": "right",
+        "frameSize": 212,
+        "frameHeight": 152,
+        "columns": 4,
+        "frameCount": 14,
+        "durationsMs": [
+          500,
+          30,
+          40,
+          30,
+          30,
+          30,
+          30,
+          30,
+          40,
+          40,
+          40,
+          20,
+          10,
+          10
+        ],
+        "pivotX": 105,
+        "pivotY": 144,
+        "viewSize": 512,
+        "referenceLength": 195,
+        "loop": false
+      },
+      "actionDurationMs": 880,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/secretion/death",
+      "source": "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-death-fullbody-v1-sheet.png",
+      "sourceSha256": "3188a7391ad44fe67150eab01da04246a22704664c53ac832f4fb5ccf8f014d9",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/death.png",
+      "sha256": "3188a7391ad44fe67150eab01da04246a22704664c53ac832f4fb5ccf8f014d9",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-death-fullbody-v1.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-death-fullbody-v1.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/death.png",
+        "sourceFacing": "right",
+        "frameSize": 384,
+        "frameHeight": 384,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          60,
+          60,
+          50,
+          50,
+          70,
+          70,
+          60,
+          60,
+          70,
+          70,
+          50,
+          50,
+          60,
+          60,
+          300,
+          300
+        ],
+        "pivotX": 192,
+        "pivotY": 320,
+        "viewSize": 384,
+        "referenceLength": 281,
+        "loop": false
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          56,
+          99,
+          281,
+          222
+        ],
+        "pivot": [
+          192,
+          320
+        ],
+        "referenceLength": 281
+      },
+      "sourceDurationMs": 1440,
+      "actionDurationMs": 1440,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/secretion/hurt",
+      "source": "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-secretion.webp",
+      "sourceSha256": "9a79a6294dc523f341e1afed18bec2b49a7ecfbeb90b499695b206ae2e3cb634",
+      "image": "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-secretion.webp",
+      "sha256": "9a79a6294dc523f341e1afed18bec2b49a7ecfbeb90b499695b206ae2e3cb634",
+      "provenance": {
+        "kind": "existing-native-atlas",
+        "sourceMetadata": [
+          "AnimationCandidates/pebble-secretion-approved-idle-hurt-v1/hurt-manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/pebble-secretion-approved-idle-hurt-v1/hurt-manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-secretion.webp",
+        "sourceFacing": "right",
+        "frameSize": 288,
+        "frameHeight": 192,
+        "columns": 4,
+        "frameCount": 14,
+        "durationsMs": [
+          500,
+          30,
+          40,
+          30,
+          30,
+          30,
+          30,
+          30,
+          40,
+          40,
+          40,
+          20,
+          10,
+          10
+        ],
+        "pivotX": 141,
+        "pivotY": 186,
+        "viewSize": 512,
+        "referenceLength": 217,
+        "loop": false
+      },
+      "actionDurationMs": 880,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/secretion/idle",
+      "source": "AnimationCandidates/spring-secretion-idle-v2/spring-secretion-idle-redraw-v2-sheet.png",
+      "sourceSha256": "72470f0882cb54073ac08219e84bc738da8b98a6d33f94bfc3f5b9ba9a2618e2",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/idle.png",
+      "sha256": "72470f0882cb54073ac08219e84bc738da8b98a6d33f94bfc3f5b9ba9a2618e2",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spring-secretion-idle-v2/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spring-secretion-idle-v2/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 314,
+        "frameHeight": 314,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          1200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          100,
+          2500
+        ],
+        "pivotX": 157.5,
+        "pivotY": 285,
+        "viewSize": 314,
+        "referenceLength": 200,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          72,
+          85,
+          171,
+          200
+        ],
+        "pivot": [
+          157.5,
+          285
+        ],
+        "referenceLength": 200
+      },
+      "sourceDurationMs": 6400,
+      "actionDurationMs": 6400,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/secretion/walk",
+      "source": "AnimationCandidates/spring-secretion-motion-v4/walk-sheet.png",
+      "sourceSha256": "b83da42bf02a380d7be98e5ea681ccd889cb5175cb3e37fba55213bb14f29ee6",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/walk.png",
+      "sha256": "b83da42bf02a380d7be98e5ea681ccd889cb5175cb3e37fba55213bb14f29ee6",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spring-secretion-motion-v4/walk-manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spring-secretion-motion-v4/walk-manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/walk.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 298,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          131,
+          150,
+          250,
+          298
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 298
+      },
+      "sourceDurationMs": 800,
+      "actionDurationMs": 800,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/secretion/ranged",
+      "source": "AnimationCandidates/spring-secretion-motion-v4/shoot-sheet.png",
+      "sourceSha256": "f506aced908bc557e233b12e75f7f334ea882b3fd1db9f86617cf6978d1cd116",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/ranged.png",
+      "sha256": "f506aced908bc557e233b12e75f7f334ea882b3fd1db9f86617cf6978d1cd116",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spring-secretion-motion-v4/shoot-manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spring-secretion-motion-v4/shoot-manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/ranged.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          80,
+          80,
+          80,
+          40,
+          40,
+          80,
+          100,
+          100
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 279,
+        "loop": false,
+        "launchAtMs": 200
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          144,
+          170,
+          241,
+          279
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 279
+      },
+      "sourceDurationMs": 600,
+      "actionDurationMs": 600,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/secretion/hurt",
+      "source": "AnimationCandidates/spring-secretion-hurt-fullbody-v1-20261107/spring-secretion-hurt-v1-sheet.png",
+      "sourceSha256": "a96e6e47080da3fc3c3a7c0ffff933a25ea0990e4b661dd4f70282638d87f09d",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/hurt.png",
+      "sha256": "a96e6e47080da3fc3c3a7c0ffff933a25ea0990e4b661dd4f70282638d87f09d",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spring-secretion-hurt-fullbody-v1-20261107/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spring-secretion-hurt-fullbody-v1-20261107/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/hurt.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          500,
+          40,
+          40,
+          80,
+          60,
+          40,
+          120
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 331,
+        "loop": false,
+        "frames": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          120,
+          118,
+          272,
+          331
+        ],
+        "pivot": [
+          256,
+          448
+        ],
+        "referenceLength": 331
+      },
+      "sourceDurationMs": 1580,
+      "actionDurationMs": 880,
+      "excludedPreviewLeadInMs": 700,
+      "excludedSourceFrames": [
+        0
+      ],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/antenna/idle",
+      "source": "AnimationCandidates/bean-antenna-approved-existing-v1/bean-antenna-idle-approved-sheet.png",
+      "sourceSha256": "915aea163ca6c43656b30232dbfddf8fb6f5ed5c610213f9e5f1ffe02526f808",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
+      "sha256": "915aea163ca6c43656b30232dbfddf8fb6f5ed5c610213f9e5f1ffe02526f808",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/bean-antenna-approved-existing-v1/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/bean-antenna-approved-existing-v1/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 768,
+        "frameHeight": 768,
+        "columns": 8,
+        "frameCount": 136,
+        "durationsMs": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "pivotX": 383.5,
+        "pivotY": 654,
+        "viewSize": 768,
+        "referenceLength": 333,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          264,
+          321,
+          239,
+          333
+        ],
+        "pivot": [
+          383.5,
+          654
+        ],
+        "referenceLength": 333
+      },
+      "sourceDurationMs": 6800,
+      "actionDurationMs": 6800,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/antenna/walk",
+      "source": "AnimationCandidates/bean-antenna-approved-existing-v1/bean-antenna-walk-approved-sheet.png",
+      "sourceSha256": "b20d19a21c4be98f2d3837ff583a4d031e251167810822a8a1ad05e2209e2146",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/walk.png",
+      "sha256": "b20d19a21c4be98f2d3837ff583a4d031e251167810822a8a1ad05e2209e2146",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/bean-antenna-approved-existing-v1/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/bean-antenna-approved-existing-v1/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/walk.png",
+        "sourceFacing": "right",
+        "frameSize": 768,
+        "frameHeight": 768,
+        "columns": 8,
+        "frameCount": 25,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40
+        ],
+        "pivotX": 383.5,
+        "pivotY": 654,
+        "viewSize": 768,
+        "referenceLength": 333,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          264,
+          321,
+          239,
+          333
+        ],
+        "pivot": [
+          383.5,
+          654
+        ],
+        "referenceLength": 333
+      },
+      "sourceDurationMs": 1000,
+      "actionDurationMs": 1000,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/antenna/death",
+      "source": "AnimationCandidates/bean-antenna-approved-existing-v1/bean-antenna-death-approved-sheet.png",
+      "sourceSha256": "e61fb9352220003b33f2193f70a2811449593515d453db67ba295b11739d787d",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/death.png",
+      "sha256": "e61fb9352220003b33f2193f70a2811449593515d453db67ba295b11739d787d",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/bean-antenna-approved-existing-v1/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/bean-antenna-approved-existing-v1/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/death.png",
+        "sourceFacing": "right",
+        "frameSize": 316,
+        "frameHeight": 316,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          160,
+          80,
+          80,
+          70,
+          70,
+          60,
+          60,
+          60,
+          60,
+          60,
+          80,
+          90,
+          100,
+          110,
+          120,
+          1000
+        ],
+        "pivotX": 160.5,
+        "pivotY": 279,
+        "viewSize": 316,
+        "referenceLength": 206,
+        "loop": false
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          86,
+          73,
+          149,
+          206
+        ],
+        "pivot": [
+          160.5,
+          279
+        ],
+        "referenceLength": 206
+      },
+      "sourceDurationMs": 2260,
+      "actionDurationMs": 2260,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/antenna/idle",
+      "source": "AnimationCandidates/spore-antenna-idle-v1-20261107/spore-antenna-idle-v1-sheet.png",
+      "sourceSha256": "6d26fe3b6fb9228faed066c7f3b4675e47ff2920558dc500c5d27d332823a10a",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/idle.png",
+      "sha256": "6d26fe3b6fb9228faed066c7f3b4675e47ff2920558dc500c5d27d332823a10a",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spore-antenna-idle-v1-20261107/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spore-antenna-idle-v1-20261107/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 384,
+        "frameHeight": 384,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          1000,
+          200,
+          200,
+          100,
+          100,
+          800,
+          200,
+          200,
+          100,
+          200,
+          500,
+          600,
+          200,
+          200,
+          100,
+          1700
+        ],
+        "pivotX": 192.5,
+        "pivotY": 321,
+        "viewSize": 384,
+        "referenceLength": 289,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          48,
+          163,
+          289,
+          158
+        ],
+        "pivot": [
+          192.5,
+          321
+        ],
+        "referenceLength": 289
+      },
+      "sourceDurationMs": 6400,
+      "actionDurationMs": 6400,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/antenna/hurt",
+      "source": "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/spore-antenna-hurt-sheet.png",
+      "sourceSha256": "528fd068c826d6bfad79684f7c2dc9addf0503bf2ddbab89857dbf39edba59f0",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/hurt.png",
+      "sha256": "528fd068c826d6bfad79684f7c2dc9addf0503bf2ddbab89857dbf39edba59f0",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/spore-manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/spore-manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/hurt.png",
+        "sourceFacing": "right",
+        "frameSize": 448,
+        "frameHeight": 448,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          500,
+          40,
+          40,
+          80,
+          60,
+          40,
+          120
+        ],
+        "pivotX": 224,
+        "pivotY": 420,
+        "viewSize": 448,
+        "referenceLength": 420,
+        "loop": false,
+        "frames": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          15,
+          207,
+          420,
+          213
+        ],
+        "pivot": [
+          224,
+          420
+        ],
+        "referenceLength": 420
+      },
+      "sourceDurationMs": 1580,
+      "actionDurationMs": 880,
+      "excludedPreviewLeadInMs": 700,
+      "excludedSourceFrames": [
+        0
+      ],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/antenna/idle",
+      "source": "AnimationCandidates/pebble-antenna-idle-v1-20261107/pebble-antenna-idle-v1-sheet.png",
+      "sourceSha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
+      "sha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/pebble-antenna-idle-v1-20261107/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/pebble-antenna-idle-v1-20261107/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          1100,
+          400,
+          70,
+          100,
+          70,
+          180,
+          180,
+          400
+        ],
+        "pivotX": 256,
+        "pivotY": 436,
+        "viewSize": 512,
+        "referenceLength": 354,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          79,
+          135,
+          354,
+          301
+        ],
+        "pivot": [
+          256,
+          436
+        ],
+        "referenceLength": 354
+      },
+      "sourceDurationMs": 2500,
+      "actionDurationMs": 2500,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/antenna/hurt",
+      "source": "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/pebble-antenna-hurt-sheet.png",
+      "sourceSha256": "e6ee61e4a6e8a914436df3232cadf58f8edcba9c0b539e7585475ea48c39434a",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/hurt.png",
+      "sha256": "e6ee61e4a6e8a914436df3232cadf58f8edcba9c0b539e7585475ea48c39434a",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/pebble-manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/pebble-manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/hurt.png",
+        "sourceFacing": "right",
+        "frameSize": 448,
+        "frameHeight": 448,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          500,
+          40,
+          40,
+          80,
+          60,
+          40,
+          120
+        ],
+        "pivotX": 224,
+        "pivotY": 420,
+        "viewSize": 448,
+        "referenceLength": 350,
+        "loop": false,
+        "frames": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          49,
+          133,
+          350,
+          287
+        ],
+        "pivot": [
+          224,
+          420
+        ],
+        "referenceLength": 350
+      },
+      "sourceDurationMs": 1580,
+      "actionDurationMs": 880,
+      "excludedPreviewLeadInMs": 700,
+      "excludedSourceFrames": [
+        0
+      ],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/antenna/idle",
+      "source": "AnimationCandidates/spring-antenna-idle-fullbody-v2-20261107/spring-antenna-idle-v1-sheet.png",
+      "sourceSha256": "4d956f01d6c0e47f4f7b4ec61496621394aac27d6ee746f7b62d426a5cde67ee",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png",
+      "sha256": "4d956f01d6c0e47f4f7b4ec61496621394aac27d6ee746f7b62d426a5cde67ee",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/spring-antenna-idle-fullbody-v2-20261107/manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/spring-antenna-idle-fullbody-v2-20261107/manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 352,
+        "frameHeight": 352,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          480,
+          170,
+          170,
+          220,
+          260,
+          170,
+          170,
+          170,
+          300,
+          170,
+          170,
+          260,
+          70,
+          90,
+          110,
+          350
+        ],
+        "pivotX": 175,
+        "pivotY": 317,
+        "viewSize": 352,
+        "referenceLength": 222,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          87,
+          95,
+          176,
+          222
+        ],
+        "pivot": [
+          175,
+          317
+        ],
+        "referenceLength": 222
+      },
+      "sourceDurationMs": 3330,
+      "actionDurationMs": 3330,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/antenna/hurt",
+      "source": "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/spring-antenna-hurt-sheet.png",
+      "sourceSha256": "440a7320f7195d1828a26080118f2b1bf3b7a0a950a3e98e19d00f0d87e04ea5",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/hurt.png",
+      "sha256": "440a7320f7195d1828a26080118f2b1bf3b7a0a950a3e98e19d00f0d87e04ea5",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/spring-manifest.json"
+        ],
+        "sourceApprovalFields": {
+          "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/spring-manifest.json": {
+            "status": "approved-for-planning"
+          }
+        },
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/hurt.png",
+        "sourceFacing": "right",
+        "frameSize": 448,
+        "frameHeight": 448,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          500,
+          40,
+          40,
+          80,
+          60,
+          40,
+          120
+        ],
+        "pivotX": 224,
+        "pivotY": 420,
+        "viewSize": 448,
+        "referenceLength": 366,
+        "loop": false,
+        "frames": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "calibration": {
+        "kind": "source-metadata",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          77,
+          55,
+          290,
+          366
+        ],
+        "pivot": [
+          224,
+          420
+        ],
+        "referenceLength": 366
+      },
+      "sourceDurationMs": 1580,
+      "actionDurationMs": 880,
+      "excludedPreviewLeadInMs": 700,
+      "excludedSourceFrames": [
+        0
+      ],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/blade/harvest",
+      "source": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/attack.webp",
+      "sourceSha256": "78bfa1b8a12fdfce94ac75c04a1ccccc72f939a9df46f42106e45adf0f0206f9",
+      "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/attack.webp",
+      "sha256": "78bfa1b8a12fdfce94ac75c04a1ccccc72f939a9df46f42106e45adf0f0206f9",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "bean/blade/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/blade/carry",
+      "source": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/walk.webp",
+      "sourceSha256": "0b2b9704c30803b5dd7f9bfea7eac89620b23f5e0963392afbf0faac83e3621a",
+      "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/walk.webp",
+      "sha256": "0b2b9704c30803b5dd7f9bfea7eac89620b23f5e0963392afbf0faac83e3621a",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "bean/blade/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/walk.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 40,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1600,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/blade/throw",
+      "source": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/attack.webp",
+      "sourceSha256": "78bfa1b8a12fdfce94ac75c04a1ccccc72f939a9df46f42106e45adf0f0206f9",
+      "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/attack.webp",
+      "sha256": "78bfa1b8a12fdfce94ac75c04a1ccccc72f939a9df46f42106e45adf0f0206f9",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "bean/blade/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": false,
+        "releaseAtMs": 240
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/blade/harvest",
+      "source": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/attack.webp",
+      "sourceSha256": "748cd0ae9e0bb156a7a1eaba6ad8525742d63087a84a4eb3582e1eb38d83ba3c",
+      "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/attack.webp",
+      "sha256": "748cd0ae9e0bb156a7a1eaba6ad8525742d63087a84a4eb3582e1eb38d83ba3c",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spore/blade/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/blade/carry",
+      "source": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/walk.webp",
+      "sourceSha256": "eb803addc03f5bdf4563414c00bc169f1d22c49af97936467f95261a68a60e7e",
+      "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/walk.webp",
+      "sha256": "eb803addc03f5bdf4563414c00bc169f1d22c49af97936467f95261a68a60e7e",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spore/blade/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/walk.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 16,
+        "durationsMs": [
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1120,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/blade/throw",
+      "source": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/attack.webp",
+      "sourceSha256": "748cd0ae9e0bb156a7a1eaba6ad8525742d63087a84a4eb3582e1eb38d83ba3c",
+      "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/attack.webp",
+      "sha256": "748cd0ae9e0bb156a7a1eaba6ad8525742d63087a84a4eb3582e1eb38d83ba3c",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spore/blade/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": false,
+        "releaseAtMs": 240
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/blade/harvest",
+      "source": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/attack.webp",
+      "sourceSha256": "c9cf4c3faa5967dd7294a286ef6eaa7e2294ca063b21da656630fcdc0355471e",
+      "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/attack.webp",
+      "sha256": "c9cf4c3faa5967dd7294a286ef6eaa7e2294ca063b21da656630fcdc0355471e",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "pebble/blade/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/blade/carry",
+      "source": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/walk.webp",
+      "sourceSha256": "d3fb1fdb9b85119c9e426814caa68d65ebbc6dcef0a7a23e885b94de5e471f80",
+      "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/walk.webp",
+      "sha256": "d3fb1fdb9b85119c9e426814caa68d65ebbc6dcef0a7a23e885b94de5e471f80",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "pebble/blade/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/walk.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 20,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 800,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/blade/throw",
+      "source": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/attack.webp",
+      "sourceSha256": "c9cf4c3faa5967dd7294a286ef6eaa7e2294ca063b21da656630fcdc0355471e",
+      "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/attack.webp",
+      "sha256": "c9cf4c3faa5967dd7294a286ef6eaa7e2294ca063b21da656630fcdc0355471e",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "pebble/blade/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": false,
+        "releaseAtMs": 240
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/blade/harvest",
+      "source": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/attack.webp",
+      "sourceSha256": "ecbf66dcad1f5d7ab1f3e893f78e834937b2776a0c85f32b5993035395e43e17",
+      "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/attack.webp",
+      "sha256": "ecbf66dcad1f5d7ab1f3e893f78e834937b2776a0c85f32b5993035395e43e17",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spring/blade/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/blade/carry",
+      "source": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/walk.webp",
+      "sourceSha256": "dac2d51276a5daceec55df4fb051dfbbfd5ed88b04d2c96a055204e087210aca",
+      "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/walk.webp",
+      "sha256": "dac2d51276a5daceec55df4fb051dfbbfd5ed88b04d2c96a055204e087210aca",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spring/blade/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/walk.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 16,
+        "durationsMs": [
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1120,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/blade/throw",
+      "source": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/attack.webp",
+      "sourceSha256": "ecbf66dcad1f5d7ab1f3e893f78e834937b2776a0c85f32b5993035395e43e17",
+      "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/attack.webp",
+      "sha256": "ecbf66dcad1f5d7ab1f3e893f78e834937b2776a0c85f32b5993035395e43e17",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spring/blade/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/blade/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": false,
+        "releaseAtMs": 240
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/secretion/harvest",
+      "source": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+      "sourceSha256": "b3201a6c2f7d911fc3de72251c20ebb9a5559810018a1f6e216a25b30ac9321d",
+      "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+      "sha256": "b3201a6c2f7d911fc3de72251c20ebb9a5559810018a1f6e216a25b30ac9321d",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "bean/secretion/ranged",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 6,
+        "frameCount": 24,
+        "durationsMs": [
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 600,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/secretion/carry",
+      "source": "DesignAssets/Animations/UnitRangedV1/bean/walk.webp",
+      "sourceSha256": "327cd0eced08465750788f76bc086238a8e19328c2ada490e04c8ed13462e8b8",
+      "image": "DesignAssets/Animations/UnitRangedV1/bean/walk.webp",
+      "sha256": "327cd0eced08465750788f76bc086238a8e19328c2ada490e04c8ed13462e8b8",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "bean/secretion/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/UnitRangedV1/bean/walk.webp",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 960,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/secretion/throw",
+      "source": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+      "sourceSha256": "b3201a6c2f7d911fc3de72251c20ebb9a5559810018a1f6e216a25b30ac9321d",
+      "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+      "sha256": "b3201a6c2f7d911fc3de72251c20ebb9a5559810018a1f6e216a25b30ac9321d",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "bean/secretion/ranged",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 6,
+        "frameCount": 24,
+        "durationsMs": [
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25,
+          25
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "registrationScale": 1,
+        "loop": false,
+        "releaseAtMs": 144
+      },
+      "actionDurationMs": 600,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/secretion/harvest",
+      "source": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
+      "sourceSha256": "88e4c11e6a0b3d4ac0d76fab7222589c7dd9f58a5ab875f6041df021c357b986",
+      "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
+      "sha256": "88e4c11e6a0b3d4ac0d76fab7222589c7dd9f58a5ab875f6041df021c357b986",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spore/secretion/ranged",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 6,
+        "frameCount": 30,
+        "durationsMs": [
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 600,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/secretion/carry",
+      "source": "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-walk-fullbody-v1-sheet.png",
+      "sourceSha256": "ad322f377a7bee41f58a4ec73fd4c0f78770e6ffe35937ccbcb63cda7fdbbaef",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/walk.png",
+      "sha256": "ad322f377a7bee41f58a4ec73fd4c0f78770e6ffe35937ccbcb63cda7fdbbaef",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spore/secretion/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/walk.png",
+        "sourceFacing": "right",
+        "frameSize": 384,
+        "frameHeight": 384,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70
+        ],
+        "pivotX": 192,
+        "pivotY": 320,
+        "viewSize": 384,
+        "referenceLength": 283,
+        "loop": true
+      },
+      "actionDurationMs": 1120,
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/secretion/throw",
+      "source": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
+      "sourceSha256": "88e4c11e6a0b3d4ac0d76fab7222589c7dd9f58a5ab875f6041df021c357b986",
+      "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
+      "sha256": "88e4c11e6a0b3d4ac0d76fab7222589c7dd9f58a5ab875f6041df021c357b986",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spore/secretion/ranged",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 6,
+        "frameCount": 30,
+        "durationsMs": [
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "registrationScale": 1,
+        "loop": false,
+        "releaseAtMs": 144
+      },
+      "actionDurationMs": 600,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/secretion/harvest",
+      "source": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+      "sourceSha256": "c401bca78452c95c08b582517e1fc29444c10afa9c83e302d71736f738e3cede",
+      "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+      "sha256": "c401bca78452c95c08b582517e1fc29444c10afa9c83e302d71736f738e3cede",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "pebble/secretion/ranged",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 6,
+        "frameCount": 30,
+        "durationsMs": [
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 600,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/secretion/carry",
+      "source": "DesignAssets/Animations/UnitRangedV1/pebble/walk.webp",
+      "sourceSha256": "bceec6e78824a416bf8f31177468d7486ecbd3d7a84bdbcbd40d096a4f237b26",
+      "image": "DesignAssets/Animations/UnitRangedV1/pebble/walk.webp",
+      "sha256": "bceec6e78824a416bf8f31177468d7486ecbd3d7a84bdbcbd40d096a4f237b26",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "pebble/secretion/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/UnitRangedV1/pebble/walk.webp",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 20,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 800,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/secretion/throw",
+      "source": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+      "sourceSha256": "c401bca78452c95c08b582517e1fc29444c10afa9c83e302d71736f738e3cede",
+      "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+      "sha256": "c401bca78452c95c08b582517e1fc29444c10afa9c83e302d71736f738e3cede",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "pebble/secretion/ranged",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 6,
+        "frameCount": 30,
+        "durationsMs": [
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "registrationScale": 1,
+        "loop": false,
+        "releaseAtMs": 144
+      },
+      "actionDurationMs": 600,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/secretion/harvest",
+      "source": "AnimationCandidates/spring-secretion-motion-v4/shoot-sheet.png",
+      "sourceSha256": "f506aced908bc557e233b12e75f7f334ea882b3fd1db9f86617cf6978d1cd116",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/ranged.png",
+      "sha256": "f506aced908bc557e233b12e75f7f334ea882b3fd1db9f86617cf6978d1cd116",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spring/secretion/ranged",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/ranged.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          80,
+          80,
+          80,
+          40,
+          40,
+          80,
+          100,
+          100
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 279,
+        "loop": true,
+        "launchAtMs": 200
+      },
+      "actionDurationMs": 600,
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/secretion/carry",
+      "source": "AnimationCandidates/spring-secretion-motion-v4/walk-sheet.png",
+      "sourceSha256": "b83da42bf02a380d7be98e5ea681ccd889cb5175cb3e37fba55213bb14f29ee6",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/walk.png",
+      "sha256": "b83da42bf02a380d7be98e5ea681ccd889cb5175cb3e37fba55213bb14f29ee6",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spring/secretion/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/walk.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 298,
+        "loop": true
+      },
+      "actionDurationMs": 800,
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/secretion/throw",
+      "source": "AnimationCandidates/spring-secretion-motion-v4/shoot-sheet.png",
+      "sourceSha256": "f506aced908bc557e233b12e75f7f334ea882b3fd1db9f86617cf6978d1cd116",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/ranged.png",
+      "sha256": "f506aced908bc557e233b12e75f7f334ea882b3fd1db9f86617cf6978d1cd116",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spring/secretion/ranged",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/ranged.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          80,
+          80,
+          80,
+          40,
+          40,
+          80,
+          100,
+          100
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "referenceLength": 279,
+        "loop": false,
+        "launchAtMs": 200,
+        "releaseAtMs": 200
+      },
+      "actionDurationMs": 600,
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/carapace/harvest",
+      "source": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/attack.webp",
+      "sourceSha256": "18950ed2968654d52958d74511bf973eb98deacab7c31399d4e8d89d8417c2cb",
+      "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/attack.webp",
+      "sha256": "18950ed2968654d52958d74511bf973eb98deacab7c31399d4e8d89d8417c2cb",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "bean/carapace/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/carapace/carry",
+      "source": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/walk.webp",
+      "sourceSha256": "609f989f32a4eccab6ae72c001b3e1947622656c9a5b77719bc13e2f170e016c",
+      "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/walk.webp",
+      "sha256": "609f989f32a4eccab6ae72c001b3e1947622656c9a5b77719bc13e2f170e016c",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "bean/carapace/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/walk.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 40,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1600,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/carapace/throw",
+      "source": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/attack.webp",
+      "sourceSha256": "18950ed2968654d52958d74511bf973eb98deacab7c31399d4e8d89d8417c2cb",
+      "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/attack.webp",
+      "sha256": "18950ed2968654d52958d74511bf973eb98deacab7c31399d4e8d89d8417c2cb",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "bean/carapace/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": false,
+        "releaseAtMs": 240
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/carapace/harvest",
+      "source": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/attack.webp",
+      "sourceSha256": "6242aae89dd04680804f0defe34448813aede01c02b747e5bd26ba90495a133a",
+      "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/attack.webp",
+      "sha256": "6242aae89dd04680804f0defe34448813aede01c02b747e5bd26ba90495a133a",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spore/carapace/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/carapace/carry",
+      "source": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/walk.webp",
+      "sourceSha256": "6e54c052fb952d86327b179dcea96252ac527c432463d32ef77083ca1be5a761",
+      "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/walk.webp",
+      "sha256": "6e54c052fb952d86327b179dcea96252ac527c432463d32ef77083ca1be5a761",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spore/carapace/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/walk.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 16,
+        "durationsMs": [
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1120,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/carapace/throw",
+      "source": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/attack.webp",
+      "sourceSha256": "6242aae89dd04680804f0defe34448813aede01c02b747e5bd26ba90495a133a",
+      "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/attack.webp",
+      "sha256": "6242aae89dd04680804f0defe34448813aede01c02b747e5bd26ba90495a133a",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spore/carapace/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": false,
+        "releaseAtMs": 240
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/carapace/harvest",
+      "source": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/attack.webp",
+      "sourceSha256": "0af9bc135d45a694098601dca4cb03d198adbc2738429eb3d9dd17c1454a4af4",
+      "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/attack.webp",
+      "sha256": "0af9bc135d45a694098601dca4cb03d198adbc2738429eb3d9dd17c1454a4af4",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "pebble/carapace/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/carapace/carry",
+      "source": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/walk.webp",
+      "sourceSha256": "0d58863ec4185ec3e9899e89f03f3f69980cd73c9a95aebfb89f41c532928667",
+      "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/walk.webp",
+      "sha256": "0d58863ec4185ec3e9899e89f03f3f69980cd73c9a95aebfb89f41c532928667",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "pebble/carapace/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/walk.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 20,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 800,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/carapace/throw",
+      "source": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/attack.webp",
+      "sourceSha256": "0af9bc135d45a694098601dca4cb03d198adbc2738429eb3d9dd17c1454a4af4",
+      "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/attack.webp",
+      "sha256": "0af9bc135d45a694098601dca4cb03d198adbc2738429eb3d9dd17c1454a4af4",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "pebble/carapace/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": false,
+        "releaseAtMs": 240
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/carapace/harvest",
+      "source": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/attack.webp",
+      "sourceSha256": "f298de5b32dd34138329bc0ae85709d6cc5c32cb23cbb682ce9e86d1e72217f7",
+      "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/attack.webp",
+      "sha256": "f298de5b32dd34138329bc0ae85709d6cc5c32cb23cbb682ce9e86d1e72217f7",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spring/carapace/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/carapace/carry",
+      "source": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/walk.webp",
+      "sourceSha256": "08b7b41fc481e103ee28034710dc14ef27bc026a1006a815507df89cec636bb8",
+      "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/walk.webp",
+      "sha256": "08b7b41fc481e103ee28034710dc14ef27bc026a1006a815507df89cec636bb8",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spring/carapace/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/walk.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 16,
+        "durationsMs": [
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70,
+          70
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1120,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/carapace/throw",
+      "source": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/attack.webp",
+      "sourceSha256": "f298de5b32dd34138329bc0ae85709d6cc5c32cb23cbb682ce9e86d1e72217f7",
+      "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/attack.webp",
+      "sha256": "f298de5b32dd34138329bc0ae85709d6cc5c32cb23cbb682ce9e86d1e72217f7",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spring/carapace/attack",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/attack.webp",
+        "sourceFacing": "left",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 8,
+        "frameCount": 24,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          30,
+          30,
+          40,
+          40,
+          50,
+          50,
+          60,
+          60,
+          80,
+          80,
+          80,
+          60
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "viewSize": 256,
+        "registrationScale": 1,
+        "loop": false,
+        "releaseAtMs": 240
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/antenna/harvest",
+      "source": "AnimationCandidates/bean-antenna-approved-existing-v1/bean-antenna-idle-approved-sheet.png",
+      "sourceSha256": "915aea163ca6c43656b30232dbfddf8fb6f5ed5c610213f9e5f1ffe02526f808",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
+      "sha256": "915aea163ca6c43656b30232dbfddf8fb6f5ed5c610213f9e5f1ffe02526f808",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "bean/antenna/reference",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 768,
+        "frameHeight": 768,
+        "columns": 8,
+        "frameCount": 136,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 383.5,
+        "pivotY": 654,
+        "viewSize": 768,
+        "referenceLength": 333,
+        "loop": true,
+        "frames": [
+          0
+        ]
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/antenna/carry",
+      "source": "AnimationCandidates/bean-antenna-approved-existing-v1/bean-antenna-idle-approved-sheet.png",
+      "sourceSha256": "915aea163ca6c43656b30232dbfddf8fb6f5ed5c610213f9e5f1ffe02526f808",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
+      "sha256": "915aea163ca6c43656b30232dbfddf8fb6f5ed5c610213f9e5f1ffe02526f808",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "bean/antenna/reference",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 768,
+        "frameHeight": 768,
+        "columns": 8,
+        "frameCount": 136,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 383.5,
+        "pivotY": 654,
+        "viewSize": 768,
+        "referenceLength": 333,
+        "loop": true,
+        "frames": [
+          0
+        ]
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/antenna/throw",
+      "source": "AnimationCandidates/bean-antenna-approved-existing-v1/bean-antenna-idle-approved-sheet.png",
+      "sourceSha256": "915aea163ca6c43656b30232dbfddf8fb6f5ed5c610213f9e5f1ffe02526f808",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
+      "sha256": "915aea163ca6c43656b30232dbfddf8fb6f5ed5c610213f9e5f1ffe02526f808",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "bean/antenna/reference",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 768,
+        "frameHeight": 768,
+        "columns": 8,
+        "frameCount": 136,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 383.5,
+        "pivotY": 654,
+        "viewSize": 768,
+        "referenceLength": 333,
+        "loop": false,
+        "frames": [
+          0
+        ],
+        "releaseAtMs": 240
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/antenna/harvest",
+      "source": "AnimationCandidates/spore-antenna-idle-v1-20261107/spore-antenna-idle-v1-sheet.png",
+      "sourceSha256": "6d26fe3b6fb9228faed066c7f3b4675e47ff2920558dc500c5d27d332823a10a",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/idle.png",
+      "sha256": "6d26fe3b6fb9228faed066c7f3b4675e47ff2920558dc500c5d27d332823a10a",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spore/antenna/reference",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 384,
+        "frameHeight": 384,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 192.5,
+        "pivotY": 321,
+        "viewSize": 384,
+        "referenceLength": 289,
+        "loop": true,
+        "frames": [
+          0
+        ]
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/antenna/carry",
+      "source": "DesignAssets/Animations/TribeMinorV1/spore/antenna/walk.webp",
+      "sourceSha256": "3d8ef792651e9cad2d9d643f316d6631ec36c783308469943b8e4ed0ef2a4146",
+      "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/walk.webp",
+      "sha256": "3d8ef792651e9cad2d9d643f316d6631ec36c783308469943b8e4ed0ef2a4146",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spore/antenna/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/walk.webp",
+        "sourceFacing": "right",
+        "frameSize": 128,
+        "frameHeight": 128,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140
+        ],
+        "pivotX": 64,
+        "pivotY": 112,
+        "viewSize": 128,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 1120,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spore/antenna/throw",
+      "source": "AnimationCandidates/spore-antenna-idle-v1-20261107/spore-antenna-idle-v1-sheet.png",
+      "sourceSha256": "6d26fe3b6fb9228faed066c7f3b4675e47ff2920558dc500c5d27d332823a10a",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/idle.png",
+      "sha256": "6d26fe3b6fb9228faed066c7f3b4675e47ff2920558dc500c5d27d332823a10a",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spore/antenna/reference",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 384,
+        "frameHeight": 384,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 192.5,
+        "pivotY": 321,
+        "viewSize": 384,
+        "referenceLength": 289,
+        "loop": false,
+        "frames": [
+          0
+        ],
+        "releaseAtMs": 240
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/antenna/harvest",
+      "source": "AnimationCandidates/pebble-antenna-idle-v1-20261107/pebble-antenna-idle-v1-sheet.png",
+      "sourceSha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
+      "sha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "pebble/antenna/reference",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 256,
+        "pivotY": 436,
+        "viewSize": 512,
+        "referenceLength": 354,
+        "loop": true,
+        "frames": [
+          0
+        ]
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/antenna/carry",
+      "source": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
+      "sourceSha256": "7b270f83cbc550e5b5aa65fab3a40c9b7ea4a48d43dfe0d97c0f571640a79252",
+      "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
+      "sha256": "7b270f83cbc550e5b5aa65fab3a40c9b7ea4a48d43dfe0d97c0f571640a79252",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "pebble/antenna/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
+        "sourceFacing": "right",
+        "frameSize": 128,
+        "frameHeight": 128,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "pivotX": 64,
+        "pivotY": 112,
+        "viewSize": 128,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 800,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/antenna/throw",
+      "source": "AnimationCandidates/pebble-antenna-idle-v1-20261107/pebble-antenna-idle-v1-sheet.png",
+      "sourceSha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
+      "sha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "pebble/antenna/reference",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 256,
+        "pivotY": 436,
+        "viewSize": 512,
+        "referenceLength": 354,
+        "loop": false,
+        "frames": [
+          0
+        ],
+        "releaseAtMs": 240
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/antenna/harvest",
+      "source": "AnimationCandidates/spring-antenna-idle-fullbody-v2-20261107/spring-antenna-idle-v1-sheet.png",
+      "sourceSha256": "4d956f01d6c0e47f4f7b4ec61496621394aac27d6ee746f7b62d426a5cde67ee",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png",
+      "sha256": "4d956f01d6c0e47f4f7b4ec61496621394aac27d6ee746f7b62d426a5cde67ee",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spring/antenna/reference",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 352,
+        "frameHeight": 352,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 175,
+        "pivotY": 317,
+        "viewSize": 352,
+        "referenceLength": 222,
+        "loop": true,
+        "frames": [
+          0
+        ]
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/antenna/carry",
+      "source": "DesignAssets/Animations/TribeMinorV1/spring/antenna/walk.webp",
+      "sourceSha256": "4e29eac01ec06e3f8f0dff1b76d26381ed757d2ec4058837de2b3988ca12a3e1",
+      "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/walk.webp",
+      "sha256": "4e29eac01ec06e3f8f0dff1b76d26381ed757d2ec4058837de2b3988ca12a3e1",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spring/antenna/walk",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/walk.webp",
+        "sourceFacing": "right",
+        "frameSize": 128,
+        "frameHeight": 128,
+        "columns": 4,
+        "frameCount": 8,
+        "durationsMs": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "pivotX": 64,
+        "pivotY": 112,
+        "viewSize": 128,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actionDurationMs": 800,
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "spring/antenna/throw",
+      "source": "AnimationCandidates/spring-antenna-idle-fullbody-v2-20261107/spring-antenna-idle-v1-sheet.png",
+      "sourceSha256": "4d956f01d6c0e47f4f7b4ec61496621394aac27d6ee746f7b62d426a5cde67ee",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png",
+      "sha256": "4d956f01d6c0e47f4f7b4ec61496621394aac27d6ee746f7b62d426a5cde67ee",
+      "provenance": {
+        "kind": "existing-action-alias",
+        "sourceSlot": "spring/antenna/reference",
+        "sourceMetadata": [
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 352,
+        "frameHeight": 352,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          1000
+        ],
+        "pivotX": 175,
+        "pivotY": 317,
+        "viewSize": 352,
+        "referenceLength": 222,
+        "loop": false,
+        "frames": [
+          0
+        ],
+        "releaseAtMs": 240
+      },
+      "actionDurationMs": 1000,
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/base/walk",
+      "source": "DesignAssets/Planning/UnitBase96V1/bean/walk.webp",
+      "sourceSha256": "27e478b4c3905320acbd9a532b69b6b6082536497a000fea9311077dee04a133",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/bean/base/walk.webp",
+      "sha256": "27e478b4c3905320acbd9a532b69b6b6082536497a000fea9311077dee04a133",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [
+          "client/unit-matrix-previews.js",
+          "DesignAssets/sections/unit-appearance.js"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/bean/base/walk.webp",
+        "sourceFacing": "right",
+        "frameSize": 96,
+        "frameHeight": 96,
+        "columns": 8,
+        "frameCount": 28,
+        "durationsMs": [
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40
+        ],
+        "pivotX": 48,
+        "pivotY": 92,
+        "viewSize": 96,
+        "referenceLength": 67,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          25,
+          25,
+          46,
+          67
+        ],
+        "pivot": [
+          48,
+          92
+        ],
+        "referenceLength": 67
+      },
+      "sourceDurationMs": 1120,
+      "actionDurationMs": 1120,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "bean/secretion/hurt",
+      "source": "DesignAssets/Animations/BeanHeldHurtV1/secretion.webp",
+      "sourceSha256": "630817f2e41525aeaa8df55e60dfcf7494e5d29f745ac07342727163abde528a",
+      "image": "DesignAssets/Animations/BeanHeldHurtV1/secretion.webp",
+      "sha256": "630817f2e41525aeaa8df55e60dfcf7494e5d29f745ac07342727163abde528a",
+      "provenance": {
+        "kind": "existing-native-atlas",
+        "sourceMetadata": [
+          "client/bean-held-hurt-assets.mjs",
+          "client/bean-held-hurt.mjs"
+        ],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/BeanHeldHurtV1/secretion.webp",
+        "sourceFacing": "right",
+        "frameSize": 256,
+        "frameHeight": 216,
+        "columns": 4,
+        "frameCount": 24,
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "durationsMs": [
+          500,
+          33.33333329999999,
+          33.3333334,
+          33.33333329999999,
+          33.33333329999999,
+          26.666666700000064,
+          29.999999999999915,
+          30.00000000000003,
+          40.000000000000036,
+          40.000000000000036,
+          39.99999999999992,
+          40.000000000000036
+        ],
+        "pivotX": 125,
+        "pivotY": 211,
+        "viewSize": 256,
+        "referenceLength": 206,
+        "loop": false
+      },
+      "actionDurationMs": 879.9999999999999,
+      "bodySourceSha256": "65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811",
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/gather/idle",
+      "source": "DesignAssets/Tribes/pebble/Animations/Attributes/v1/Previews/strength.webp",
+      "sourceSha256": "e4a73355acab0671d2a8f7a7335a2577ccd39a541092d5545a8b48a89563c157",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/idle.png",
+      "sha256": "d84f940262ada63a1207a6a0c74dfe9e048d0435ec2c3ad8596a61802c8c60ba",
+      "provenance": {
+        "kind": "lossless-frame-pack",
+        "sourceMetadata": [],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/idle.png",
+        "sourceFacing": "right",
+        "frameSize": 144,
+        "frameHeight": 144,
+        "columns": 8,
+        "frameCount": 29,
+        "durationsMs": [
+          1000,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          700,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          100,
+          800,
+          100,
+          100,
+          100,
+          1400
+        ],
+        "pivotX": 72,
+        "pivotY": 132,
+        "viewSize": 144,
+        "referenceLength": 101,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "existing-reference-camera",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          21,
+          66,
+          101,
+          63
+        ],
+        "pivot": [
+          72,
+          132
+        ],
+        "referenceLength": 101
+      },
+      "sourceDurationMs": 6400,
+      "actionDurationMs": 6400,
+      "excludedPreviewLeadInMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": false,
+      "exactDecodedFramePixels": true
+    },
+    {
+      "slot": "pebble/gather/walk",
+      "source": "AnimationCandidates/pebble-gather-motion-v1-20261107/pebble-gather-walk-v1-sheet.png",
+      "sourceSha256": "3a3a1d7a9b42272f701d07624b3fd50fa3a25e1a5598f8a599339138be6c1ac5",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/walk.png",
+      "sha256": "3a3a1d7a9b42272f701d07624b3fd50fa3a25e1a5598f8a599339138be6c1ac5",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/walk.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50
+        ],
+        "pivotX": 256,
+        "pivotY": 401,
+        "viewSize": 512,
+        "referenceLength": 352,
+        "loop": true
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          80,
+          157,
+          352,
+          244
+        ],
+        "pivot": [
+          256,
+          401
+        ],
+        "referenceLength": 352
+      },
+      "sourceDurationMs": 800,
+      "actionDurationMs": 800,
+      "excludedPreviewLeadInMs": 0,
+      "excludedPreviewTailMs": 0,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    },
+    {
+      "slot": "pebble/gather/attack",
+      "source": "AnimationCandidates/pebble-gather-motion-v1-20261107/pebble-gather-attack-v1-sheet.png",
+      "sourceSha256": "402804789844d116ffb535915d7797fccbb62c34d5e8e5c12296fdf5c55d6972",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/attack.png",
+      "sha256": "402804789844d116ffb535915d7797fccbb62c34d5e8e5c12296fdf5c55d6972",
+      "provenance": {
+        "kind": "source-byte-copy",
+        "sourceMetadata": [],
+        "task": "01a1b40c-e3c8-73a0-a37e-e4d6f5a71267",
+        "worker": "/root/asset_inventory"
+      },
+      "clip": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/attack.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 16,
+        "durationsMs": [
+          60,
+          70,
+          60,
+          80,
+          30,
+          50,
+          50,
+          50,
+          50,
+          50,
+          50,
+          70,
+          80,
+          90,
+          100,
+          60
+        ],
+        "pivotX": 256.5,
+        "pivotY": 400,
+        "viewSize": 512,
+        "referenceLength": 351,
+        "loop": false,
+        "hitTimeMs": 300
+      },
+      "calibration": {
+        "kind": "fixed-neutral-alpha-bounds",
+        "referenceFrame": 0,
+        "alphaThreshold": 16,
+        "bounds": [
+          81,
+          157,
+          351,
+          243
+        ],
+        "pivot": [
+          256.5,
+          400
+        ],
+        "referenceLength": 351
+      },
+      "sourceDurationMs": 1900,
+      "actionDurationMs": 1000,
+      "excludedPreviewLeadInMs": 0,
+      "excludedPreviewTailMs": 900,
+      "excludedSourceFrames": [],
+      "exactSourceBytes": true,
+      "exactDecodedFramePixels": false
+    }
+  ]
+}

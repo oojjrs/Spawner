@@ -24,27 +24,48 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
   }
   const clients = new Map([...pages.values()].flatMap(page => [...page.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="\.\/(client\/[^"]+)"/g)])
     .map(match => [match[1], readSource(match[1]).toString("utf8")]));
+  const gameClients = new Set(clients.keys()), documentClients = new Set(), documents = new Map(), documentAssets = new Set();
+  const documentQueue = ["Design.html", ...readdirSync(join(root, "DesignAssets")).filter(name => name.endsWith(".html")).map(name => "DesignAssets/" + name)];
+  for (let index = 0; index < documentQueue.length; index++) {
+    const name = documentQueue[index];
+    if (name.startsWith("client/")) documentClients.add(name);
+    if (documents.has(name) || clients.has(name)) continue;
+    const source = readSource(name).toString("utf8");
+    if (name.startsWith("client/")) clients.set(name, source);
+    else documents.set(name, source);
+    for (const match of source.matchAll(/(?:DesignAssets|AnimationCandidates|client)\/[^"'<>\\\s?#]+?\.(?:html|css|js|png|webp|gif|jpe?g|mp3|wav|ogg|json)(?=["'<>\\\s?#&)]|$)/g)) {
+      const dependency = match[0];
+      if (!existsSync(join(root, dependency))) continue;
+      if (/\.(?:html|css|js)$/.test(dependency)) documentQueue.push(dependency);
+      else documentAssets.add(dependency);
+    }
+  }
+  const documentOriginalAssets = new Set([...documentAssets].filter(name =>
+    name.startsWith("DesignAssets/Animations/Resources/") || /^DesignAssets\/Terrain\/[^/]+-ground\.png$/.test(name)));
   if (clients.has("client/welcome-art.js")) {
     const welcomePath = "DesignAssets/Welcome/forest-clearing.webp";
     const welcomeSource = clients.get("client/welcome-art.js").match(/^globalThis\.SpawnerWelcomeBackground = ("data:image\/webp;base64,[A-Za-z0-9+/]*={0,2}");\r?\n?$/);
     if (!welcomeSource || !Buffer.from(JSON.parse(welcomeSource[1]).slice("data:image/webp;base64,".length), "base64").equals(readSource(welcomePath))) throw new Error("내장 자산을 DesignAssets 파일로 분리해 주세요.");
     clients.set("client/welcome-art.js", "globalThis.SpawnerWelcomeBackground = " + JSON.stringify(welcomePath) + ";\r\n");
   }
-  const assets = new Map();
-  for (const source of [...pages.values(), ...clients.values()]) {
+  const assets = new Map(), gameAssets = new Set();
+  for (const name of documentAssets) assets.set(name, readSource(name));
+  for (const source of [...pages.values(), ...[...clients].filter(([name]) => gameClients.has(name)).map(([, source]) => source)]) {
     if (/data:[^;,\s]+;base64,/.test(source)) throw new Error("내장 자산을 DesignAssets 파일로 분리해 주세요.");
     const dependencies = source.replace(/modules\["client\/image-scales\.mjs"\] = \(\(\) => \{[\s\S]*?^\}\)\(\);/m, "")
       .replace(/\b[A-Za-z_$][\w$]*\.approvedSource\s*(?:===|!==)\s*["']DesignAssets\/[^"'\r\n]+["']/g, "");
     for (const match of dependencies.matchAll(/["'](DesignAssets\/[^"'?#\r\n]+)["']/g)) {
       const name = match[1];
-      if (!/\.[a-z0-9]+$/i.test(name) || assets.has(name)) continue;
+      if (!/\.[a-z0-9]+$/i.test(name)) continue;
+      gameAssets.add(name);
+      if (assets.has(name)) continue;
       if (name.split("/").some(part => part === ".." || part === "")) throw new Error("잘못된 자산 경로입니다.");
       assets.set(name, readSource(name));
     }
   }
   // Review pages have their own sprites. Validate the entire publication, not
   // only the assets found by the main game's runtime build.
-  auditImages(root, [...assets.keys()].filter(name => /\.(?:png|webp|gif|jpe?g)$/i.test(name)));
+  auditImages(root, [...gameAssets].filter(name => /\.(?:png|webp|gif|jpe?g)$/i.test(name)));
   const output = join(destination, "dist");
   for (const name of ["VfxPreview.html", "UnitPreview.html", "NeutralStats.html", "DnaLayouts.html", "BeanRigPreview.html"]) {
     if (existsSync(join(output, name))) unlinkSync(join(output, name));
@@ -80,6 +101,12 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
   for (const name of localAssets) if (assets.has(name)) write("welcome-assets/" + assetFiles.get(name), assets.get(name));
   write("index.html", html);
   for (const [name, page] of pages) write(name, page);
+  function documentSource(source) {
+    for (const [assetName, assetPath] of assetPaths) if (!documentOriginalAssets.has(assetName)) source = source.replaceAll(assetName, assetPath);
+    return source;
+  }
+  for (const name of documentOriginalAssets) write(name, assets.get(name));
+  for (const [name, source] of documents) write(name, documentSource(source));
   for (const [name, source] of clients) {
     if (name === "client/assets.js") {
       const marker = "const sources = Object.create(null);";
@@ -90,8 +117,9 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
       for (const [assetName, assetPath] of assetPaths) catalog = catalog.replaceAll(assetName, assetPath);
       write(name, catalog);
     } else {
-      const script = name === "client/runtime.js" ? productionRuntime(source) : source;
-      write(name, name.endsWith(".js") ? script.replaceAll("new Image()", "globalThis.SpawnerAssets.image()") : script);
+      let script = name === "client/runtime.js" ? productionRuntime(source) : source;
+      if (documentClients.has(name)) script = documentSource(script);
+      write(name, gameClients.has(name) && name.endsWith(".js") ? script.replaceAll("new Image()", "globalThis.SpawnerAssets.image()") : script);
     }
   }
   mkdirSync(assetDirectory, { recursive: true });

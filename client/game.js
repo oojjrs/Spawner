@@ -3803,7 +3803,7 @@
         const height = AGENT_HEIGHT * (unitAnimationSheets.get("spore")?.get("idle")?.referenceHeight || 219) / 512;
         const placement = Spawner.sporeBirthPlacement(idleMotion.matches ? shape.duration - .001 : elapsed,
           outlet, { x: targetX + .5, y: targetY + .5 + AGENT_HEIGHT * .44 }, height);
-        return { kind: "spore", elapsed, facing, frame: placement.frame, scale: placement.scale, seedVisible: false, seedLift: 0,
+        return { kind: "spore", elapsed, outlet, facing, frame: placement.frame, scale: placement.scale, seedVisible: false, seedLift: 0,
           unitVisible: idleMotion.matches || placement.unitVisible, lift: 0, targetX, targetY,
           x: placement.rootX - .5, y: placement.rootY - .5 - AGENT_HEIGHT * .44,
           head: { leftRotation: 0, rightRotation: 0, leftScaleX: 1, rightScaleX: 1, leftScaleY: 1, rightScaleY: 1 } };
@@ -3816,7 +3816,7 @@
         const foot = AGENT_HEIGHT * (animation.unitPivotY / 512 - .5);
         const placement = pebbleBirthPlacement(idleMotion.matches ? animation.duration - .001 : elapsed,
           outlet, { x: targetX + .5, y: targetY + .5 + foot }, AGENT_HEIGHT * animation.unitHeight / 512);
-        return { kind: "pebble", elapsed, frame: placement.frame, seedVisible: false, seedLift: 0,
+        return { kind: "pebble", elapsed, outlet, frame: placement.frame, seedVisible: false, seedLift: 0,
           unitVisible: idleMotion.matches || elapsed >= animation.contactAt, lift: 0,
           targetX, targetY, x: placement.rootX - .5, y: placement.rootY - .5 - foot,
           head: { leftRotation: 0, rightRotation: 0, leftScaleX: 1, rightScaleX: 1, leftScaleY: 1, rightScaleY: 1 } };
@@ -3827,7 +3827,7 @@
         const targetX = agent.x + offset.x, targetY = agent.y + offset.y;
         const placement = springBirthPlacement(idleMotion.matches ? SPRING_BIRTH_ANIMATION.duration - .001 : elapsed,
           outlet, { x: targetX + .5, y: targetY + .5 + AGENT_HEIGHT * .44 }, AGENT_HEIGHT * 350 / 512);
-        return { kind: "spring", elapsed, frame: placement.frame, seedVisible: false, seedLift: 0,
+        return { kind: "spring", elapsed, outlet, frame: placement.frame, seedVisible: false, seedLift: 0,
           unitVisible: idleMotion.matches || elapsed >= SPRING_BIRTH_ANIMATION.contactAt, lift: 0,
           targetX, targetY, x: placement.rootX - .5, y: placement.rootY - .5 - AGENT_HEIGHT * .44,
           head: { leftRotation: 0, rightRotation: 0, leftScaleX: 1, rightScaleX: 1, leftScaleY: 1, rightScaleY: 1 } };
@@ -3843,7 +3843,7 @@
           scaleX: 1, scaleY: 1, lift: 0, rotation: 0,
           head: { leftRotation: 0, rightRotation: 0, leftScaleX: 1, rightScaleX: 1, leftScaleY: 1, rightScaleY: 1 } });
       }
-      return { ...motion, fromX, fromY, targetX, targetY,
+      return { ...motion, outlet: mouth || { x: birth.fromX + .5, y: birth.fromY + .5 }, fromX, fromY, targetX, targetY,
         x: fromX + (targetX - fromX) * motion.progress,
         y: fromY + (targetY - fromY) * motion.progress };
     }
