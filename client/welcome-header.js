@@ -206,7 +206,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   }
   function groundY() { return height * .88; }
   function worldPixels() { return Math.min(288, width * .58, height * .54); }
-  function motionSize() { return (model.UNIT_DISPLAY_SIZES[current.key] || .4) * worldPixels(); }
+  function motionSize() { return model.unitDisplaySize({ species: current.key }) * worldPixels(); }
   function travelMotion(atElapsed, atTime) {
     const size = motionSize();
     const request = { key: current.key,

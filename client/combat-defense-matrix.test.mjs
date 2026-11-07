@@ -1,3 +1,4 @@
+import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -17,7 +18,7 @@ const source = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
 const helperFile = readFileSync(new URL('./combat-detail-dodge.test.mjs', import.meta.url), 'utf8').split('const event = ')[0];
 const helper = helperFile.slice(helperFile.indexOf('function extract('))
   .replace('key: "source,target"', 'key: agents.map(agent => agent.id).join(",")');
-const box = { assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
+const box = { combatViewLayout, unitDisplaySize, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
   DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect };
 createContext(box); runInContext(helper, box);
 const drawHelpers = { detailDefenseImageReady, drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels,

@@ -9,7 +9,7 @@ const stage2=JSON.parse(readFileSync(new URL('../level2/comparison.json',import.
 if(createHash('sha256').update(readFileSync(new URL('../../../../server/dna.mjs',import.meta.url))).digest('hex')!==stage2.sourceHash)
   throw new Error('Stage-two source changed; reconcile before inspecting later stages.');
 const names={...Object.fromEntries(stage2.currentGenes.map(g=>[g.gene,g.label])),
-  gather:'채집기관',health:'체력',blade:'칼날',movement:'이속',secretion:'분비기관',combo:'연타',legs:'다리',armor:'경화',vision:'시야',harvest:'채집량',harvestSpeed:'채집속도',loadSpeed:'하중적응',accuracy:'정밀',tenacity:'강인함',healing:'회복력',block:'방어본능',evasion:'회피',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속',parry:'패링',counter:'반격',critical:'치명',criticalPower:'치명위력',penetration:'예리함',comboPower:'연격숙련',blockPower:'방어숙련',counterPower:'반격위력',reduction:'완충',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중'};
+  gather:'채집기관',health:'체력',blade:'칼날',movement:'이속',secretion:'분비기관',combo:'연타',legs:'다리',armor:'경화',vision:'시야',harvest:'채집량',harvestSpeed:'채집속도',loadSpeed:'하중적응',accuracy:'정밀',tenacity:'강인함',block:'방어본능',evasion:'회피',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속',parry:'패링',counter:'반격',critical:'치명',criticalPower:'치명위력',penetration:'예리함',comboPower:'연격숙련',blockPower:'방어숙련',counterPower:'반격위력',reduction:'완충',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중'};
 const cases={3:[
   {id:'ranged',title:'원거리 기본 강화',genes:['secretion','rangedPower','rangedSpeed','health']},
   {id:'gather',title:'채집량·속도와 운반 용량',genes:['gather','gather','capacity','capacity','harvest','harvestSpeed','movement']},
@@ -23,7 +23,6 @@ const cases={3:[
   {id:'bleed',title:'출혈·출혈강도',genes:['blade','power','bleed','bleedPower','health']},
   {id:'area',title:'범위공격·확산위력',genes:['blade','power','area','areaPower','health']},
   {id:'counter',title:'방어 판정·반격·반격위력',genes:['blade','carapace','block','parry','counter','counterPower','health']},
-  {id:'recovery',title:'전투후 재생·받는 회복량',genes:['health','health','health','regeneration','healing']},
   {id:'combo-timing',title:'연타·연격숙련·연타속도·집중',genes:['blade','power','combo','comboPower','comboSpeed','focus','health']}
 ]};
 
@@ -55,7 +54,7 @@ const groups={
   3:[{role:'근접·원거리 강화',genes:['combo','accuracy','rangedPower','rangedSpeed']},
     {role:'경제 강화',genes:['harvest','harvestSpeed','loadSpeed']},
     {role:'생존 강화',genes:['legs','armor','block','evasion','tenacity']},
-    {role:'정찰',genes:['vision']},{role:'받는 회복량',genes:['healing']}],
+    {role:'정찰',genes:['vision']}],
   4:[{role:'공격 강화',genes:['critical','criticalPower','penetration','comboPower']},
     {role:'공격 주기·연타 간격',genes:['comboSpeed','focus']},
     {role:'방어·반격',genes:['parry','counter','blockPower','counterPower','reduction']},
@@ -92,13 +91,11 @@ const dependencyChecks={
   harvestWithOneCapacity:stats(['gather','capacity','harvest']).harvest,
   harvestWithTwoCapacity:stats(['gather','capacity','capacity','harvest']).harvest,
   legsEvasion:stats(['legs']).evasion,evasionEvasion:stats(['evasion']).evasion,
-  healingReceivedMultiplier:1+stats(['healing']).healing/100,
   critPowerWithoutCritChance:stats(['blade','criticalPower']).critical,
   noStunStunTime:stats(['blade','stunTime']).stunTime,
   noBleedBleedPower:stats(['blade','bleedPower']).bleedPower,
   noAreaAreaPower:stats(['blade','areaPower']).areaPower,
   regenerationPerSecond:stats(['regeneration']).regeneration,
-  regenerationWithHealingPerSecond:stats(['regeneration']).regeneration*(1+stats(['healing']).healing/100)
 };
 const data={version:1,applied:false,firstLevelFixed:true,stageOrder:[2,3,4],
   stage2Decision:'still a proposal; higher-stage witnesses are conditional on current or stage2-A shapes',
@@ -106,7 +103,6 @@ const data={version:1,applied:false,firstLevelFixed:true,stageOrder:[2,3,4],
   limits:['Catalog grouping describes existing genes; it does not approve their final shape assignments.',
     'Examples are placement and effect witnesses, not optimal builds or combat/income simulations.',
     'Current catalog witnesses pass native validation. Stage2-A shape witnesses may require migration before game use.',
-    'Related genes are representative builds, not exclusive prerequisites; ranged organs and alternative defense triggers can also apply.',
-    'Healing is received recovery; regeneration is out of combat after the existing five-second delay.']};
+    'Related genes are representative builds, not exclusive prerequisites; ranged organs and alternative defense triggers can also apply.']};
 writeFileSync(new URL('./higher-levels.json',import.meta.url),JSON.stringify(data,null,2)+'\n');
 console.log(JSON.stringify({dependencies:dependencyChecks,stages:steps.map(stage=>({level:stage.level,genes:stage.catalog.length,examples:stage.examples.map(e=>({id:e.id,cost:e.birthCost,occupied:e.layouts.map(l=>l.occupied),visits:e.layouts.map(l=>l.searchVisits)}))}))},null,2));

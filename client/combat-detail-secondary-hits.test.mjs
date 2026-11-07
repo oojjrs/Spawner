@@ -54,7 +54,7 @@ test("simultaneous direct, splash and reflected hits remain distinct and never r
 
 test("zero damage, defense, cancellation and non-hit channels do not invent secondary bursts", () => {
   for (const kind of ["area", "reflect"]) assert.equal(scene().draw(1.05, [damage(kind, "target", { amount: 0 })]).length, 0);
-  for (const kind of ["dodge", "parry", "projectile-cancel", "bleed", "heal", "drain", "regeneration"])
+  for (const kind of ["dodge", "parry", "projectile-cancel", "bleed", "drain", "regeneration"])
     assert.equal(scene().draw(1.05, [damage(kind, "target")]).length, 0, kind);
   assert.equal(scene().draw(1.05, [damage("block", "target", { amount: 0 })]).length, 0);
 });

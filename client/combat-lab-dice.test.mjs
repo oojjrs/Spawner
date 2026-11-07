@@ -20,10 +20,10 @@ for (const file of ["./combat-lab.js", "../Combat.html"]) test(file + " 주사�
   for (const [sideIndex, side] of sides.entries()) {
     const profile = { key: sideIndex ? "spore" : "bean", name: side,
       counts: Object.fromEntries(SIMULATION_STATS.map(stat => [stat.key, stat.key === "power" ? 4 + sideIndex : 0])),
-      organs: { attack: 1, ranged: 0, heal: 0 } };
+      organs: { attack: 1, ranged: 0 } };
     rosters[side] = Array.from({ length: 5 }, (_, slot) => ({ ...structuredClone(profile), key: COMBAT_LAB_UNITS[slot + sideIndex].key }));
     selected[side] = 3; builds[side] = rosters[side][3];
-    inputs[side] = Object.fromEntries([...SIMULATION_STATS.map(stat => stat.key), "attack", "ranged", "heal", "appearance", "dnaAppearance"].map(key => [key, { value: null }]));
+    inputs[side] = Object.fromEntries([...SIMULATION_STATS.map(stat => stat.key), "attack", "ranged", "appearance", "dnaAppearance"].map(key => [key, { value: null }]));
   }
   let roll, changes = 0;
   const math = Object.create(Math); math.random = () => 0;

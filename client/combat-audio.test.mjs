@@ -161,7 +161,7 @@ test("게임 재생 경로는 공격자가 다른 종족이어도 피해자 위�
   const context = createContext({ SpawnerCombatAudio: combat, combatAudio: combat.create(),
     Spawner: { nestGrowthSounds: () => [] }, nestGrowthPlayback: {},
     connection: { active: true, online: true }, state: { simSeconds: 10, camera: { layer: 0 }, agents: [attacker, victim], rivals: [], corpses: [] },
-    audio: { available: () => true, play: (name, volume) => played.push({ name, volume }), stop() {}, setHarvest() {} },
+    audio: { available: () => true, play: (name, volume) => played.push({ name, volume }), playCombat: (name, volume) => played.push({ name, volume }), stop() {}, setHarvest() {} },
     audioTime: null, agentAudio: new Map(), deliveryAudio: new Map(), foodDeliveries: new Map(), AGENT_FOOTSTEPS_PER_CELL: 4,
     displayedAgent: unit => unit, interpolatedAgentPosition: unit => ({ x: unit.x, y: unit.y }), agentBirthPose: () => null,
     isHarvestingFood: () => false, audioVolume: (x, y) => { volumes.push({ x, y }); return .7; } });
@@ -186,11 +186,14 @@ test("게임 재생 경로는 공격자가 다른 종족이어도 피해자 위�
 test("게임·기획서와 로컬 실행 목록이 같은 전투 음원을 참조한다", () => {
   const local = createContext({});
   runInContext(readFileSync(new URL("./local-assets.js", import.meta.url), "utf8"), local);
-  const design = readFileSync(new URL("../Design.html", import.meta.url), "utf8");
+  const design = readFileSync(new URL("../DesignAssets/codex-units.html", import.meta.url), "utf8");
+  const units = readFileSync(new URL("../DesignAssets/sections/unit-appearance.js", import.meta.url), "utf8").replaceAll('\\"', '"');
   const html = readFileSync(new URL("../Spawner.html", import.meta.url), "utf8");
   assert.ok(html.indexOf("client/combat-audio.js") < html.indexOf("client/audio.js"));
   assert.ok(design.includes('src="client/combat-audio.js"'));
-  assert.equal([...design.matchAll(/data-combat-material=/g)].length, 51);
+  const materials = [...units.matchAll(/data-combat-material="([^"]+)"/g)].map(match => match[1]);
+  assert.ok(materials.length > 0);
+  assert.ok(materials.every(material => combat.cue(material, "hurt", 1)));
   for (const name of Object.values(combat.sources)) {
     assert.ok(existsSync(new URL("../" + name, import.meta.url)));
     assert.ok(local.SpawnerLocalAssetFiles.includes("./client/local-assets/" + name.slice("DesignAssets/".length) + ".js"));
@@ -216,7 +219,7 @@ test("이동음이 채널을 채워도 피격·사망음이 우선하며 모든 
   const button = { addEventListener() {}, setAttribute() {} };
   const context = createContext({ SpawnerCombatAudio: combat, AudioContext,
     SpawnerMusic: { create: () => ({ unlock() {}, suspend() {}, update() {} }) },
-    SpawnerAssets: { source: value => value },
+    SpawnerAssets: { load: async value => value },
     fetch: async name => ({ ok: true, arrayBuffer: async () => new TextEncoder().encode(name).buffer }),
     document: { hidden: false, getElementById: () => button, addEventListener: (name, callback) => { listeners[name] = callback; } },
     window: { addEventListener() {} }, performance, setTimeout, clearTimeout });

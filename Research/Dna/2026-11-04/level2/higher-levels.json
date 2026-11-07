@@ -16,13 +16,11 @@
     "harvestWithTwoCapacity": 4,
     "legsEvasion": 9,
     "evasionEvasion": 9,
-    "healingReceivedMultiplier": 1.3,
     "critPowerWithoutCritChance": 0,
     "noStunStunTime": 0,
     "noBleedBleedPower": 0,
     "noAreaAreaPower": 0,
-    "regenerationPerSecond": 0.4,
-    "regenerationWithHealingPerSecond": 0.52
+    "regenerationPerSecond": 0.4
   },
   "stages": [
     {
@@ -320,39 +318,6 @@
           }
         },
         {
-          "gene": "healing",
-          "label": "회복력",
-          "grade": 3,
-          "shape": [
-            0,
-            2,
-            1,
-            3
-          ],
-          "cost": 9,
-          "related": [],
-          "standaloneDelta": {
-            "scale": {
-              "before": 1,
-              "after": 1.01
-            },
-            "healing": {
-              "before": 0,
-              "after": 30
-            }
-          },
-          "relatedDelta": {
-            "scale": {
-              "before": 1,
-              "after": 1.01
-            },
-            "healing": {
-              "before": 0,
-              "after": 30
-            }
-          }
-        },
-        {
           "gene": "block",
           "label": "방어본능",
           "grade": 3,
@@ -522,12 +487,6 @@
           "genes": [
             "vision"
           ]
-        },
-        {
-          "role": "받는 회복량",
-          "genes": [
-            "healing"
-          ]
         }
       ],
       "examples": [
@@ -545,7 +504,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 1,
             "melee": false,
             "ranged": true,
@@ -553,7 +511,6 @@
             "meleeSpeed": 0,
             "rangedPower": 5.6,
             "rangedSpeed": 0.65,
-            "healer": false,
             "health": 20,
             "power": 5.6,
             "hits": 1,
@@ -580,7 +537,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -945,7 +901,6 @@
             "gatherCount": 2,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -953,7 +908,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 10,
             "power": 0,
             "hits": 0,
@@ -980,7 +934,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 75,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -1519,7 +1472,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -1527,7 +1479,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 30,
             "power": 0,
             "hits": 0,
@@ -1554,7 +1505,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -1979,7 +1929,6 @@
             "gatherCount": 0,
             "bladeCount": 1,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": true,
             "ranged": false,
@@ -1987,7 +1936,6 @@
             "meleeSpeed": 0.5,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 10,
             "hits": 4,
@@ -2014,7 +1962,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -2429,7 +2376,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 1,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -2437,7 +2383,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 0,
             "hits": 0,
@@ -2464,7 +2409,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -2869,7 +2813,6 @@
             "gatherCount": 1,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -2877,7 +2820,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 0,
             "hits": 0,
@@ -2904,7 +2846,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 90,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -4048,7 +3989,6 @@
             "gatherCount": 0,
             "bladeCount": 1,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": true,
             "ranged": false,
@@ -4056,7 +3996,6 @@
             "meleeSpeed": 0.6,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 6,
             "hits": 1,
@@ -4083,7 +4022,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -4590,7 +4528,6 @@
             "gatherCount": 0,
             "bladeCount": 1,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": true,
             "ranged": false,
@@ -4598,7 +4535,6 @@
             "meleeSpeed": 0.5,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 6,
             "hits": 1,
@@ -4625,7 +4561,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 12,
             "stunTime": 0.45,
             "bleed": 0,
@@ -5070,7 +5005,6 @@
             "gatherCount": 0,
             "bladeCount": 1,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": true,
             "ranged": false,
@@ -5078,7 +5012,6 @@
             "meleeSpeed": 0.5,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 6,
             "hits": 1,
@@ -5105,7 +5038,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 20,
@@ -5550,7 +5482,6 @@
             "gatherCount": 0,
             "bladeCount": 1,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": true,
             "ranged": false,
@@ -5558,7 +5489,6 @@
             "meleeSpeed": 0.5,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 6,
             "hits": 1,
@@ -5585,7 +5515,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -6032,7 +5961,6 @@
             "gatherCount": 0,
             "bladeCount": 1,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": true,
             "ranged": false,
@@ -6040,7 +5968,6 @@
             "meleeSpeed": 0.5,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 2,
             "hits": 1,
@@ -6067,7 +5994,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -6652,466 +6578,6 @@
           ]
         },
         {
-          "id": "recovery",
-          "title": "전투후 재생·받는 회복량",
-          "genes": [
-            "health",
-            "health",
-            "health",
-            "regeneration",
-            "healing"
-          ],
-          "birthCost": 41,
-          "stats": {
-            "gatherCount": 0,
-            "bladeCount": 0,
-            "antennaCount": 0,
-            "healerCount": 0,
-            "secretionCount": 0,
-            "melee": false,
-            "ranged": false,
-            "meleePower": 0,
-            "meleeSpeed": 0,
-            "rangedPower": 0,
-            "rangedSpeed": 0,
-            "healer": false,
-            "health": 40,
-            "power": 0,
-            "hits": 0,
-            "speed": 0,
-            "armor": 0,
-            "parry": 0,
-            "block": 0,
-            "evasion": 0,
-            "capacity": 0,
-            "harvest": 0,
-            "harvestTime": 0,
-            "movement": 0.25,
-            "vision": 1,
-            "scale": 1.05,
-            "roaming": false,
-            "comboPower": 0,
-            "critical": 0,
-            "criticalPower": 0,
-            "accuracy": 0,
-            "penetration": 0,
-            "blockPower": 50,
-            "counter": 0,
-            "counterPower": 0,
-            "tenacity": 0,
-            "reduction": 0,
-            "loadSpeed": 0,
-            "healing": 30,
-            "stun": 0,
-            "stunTime": 0,
-            "bleed": 0,
-            "bleedPower": 0,
-            "area": 0,
-            "areaPower": 0,
-            "lifesteal": 0,
-            "reflection": 0,
-            "regeneration": 0.4,
-            "comboSpeed": 0,
-            "focus": 0
-          },
-          "layouts": [
-            {
-              "stage2Plan": "current",
-              "pieces": [
-                {
-                  "gene": "health",
-                  "grade": 1,
-                  "rotation": 0,
-                  "shape": [
-                    0,
-                    1
-                  ]
-                },
-                {
-                  "gene": "health",
-                  "grade": 1,
-                  "rotation": 0,
-                  "shape": [
-                    0,
-                    1
-                  ]
-                },
-                {
-                  "gene": "health",
-                  "grade": 1,
-                  "rotation": 1,
-                  "shape": [
-                    0,
-                    1
-                  ]
-                },
-                {
-                  "gene": "healing",
-                  "grade": 3,
-                  "rotation": 2,
-                  "shape": [
-                    0,
-                    2,
-                    1,
-                    3
-                  ]
-                },
-                {
-                  "gene": "regeneration",
-                  "grade": 4,
-                  "rotation": 3,
-                  "shape": [
-                    0,
-                    1,
-                    0,
-                    1,
-                    2
-                  ]
-                }
-              ],
-              "searchVisits": 7,
-              "selection": "first legal witness; not an optimum or exhaustive count",
-              "paths": [
-                {
-                  "gene": "health",
-                  "points": [
-                    {
-                      "q": 0,
-                      "r": 0
-                    },
-                    {
-                      "q": 1,
-                      "r": 0
-                    },
-                    {
-                      "q": 1,
-                      "r": 1
-                    }
-                  ]
-                },
-                {
-                  "gene": "health",
-                  "points": [
-                    {
-                      "q": 1,
-                      "r": 1
-                    },
-                    {
-                      "q": 2,
-                      "r": 1
-                    },
-                    {
-                      "q": 2,
-                      "r": 2
-                    }
-                  ]
-                },
-                {
-                  "gene": "health",
-                  "points": [
-                    {
-                      "q": 2,
-                      "r": 2
-                    },
-                    {
-                      "q": 2,
-                      "r": 3
-                    },
-                    {
-                      "q": 1,
-                      "r": 4
-                    }
-                  ]
-                },
-                {
-                  "gene": "healing",
-                  "points": [
-                    {
-                      "q": 1,
-                      "r": 4
-                    },
-                    {
-                      "q": 0,
-                      "r": 5
-                    },
-                    {
-                      "q": 0,
-                      "r": 4
-                    },
-                    {
-                      "q": -1,
-                      "r": 4
-                    },
-                    {
-                      "q": 0,
-                      "r": 3
-                    }
-                  ]
-                },
-                {
-                  "gene": "regeneration",
-                  "points": [
-                    {
-                      "q": 0,
-                      "r": 3
-                    },
-                    {
-                      "q": -1,
-                      "r": 3
-                    },
-                    {
-                      "q": -1,
-                      "r": 2
-                    },
-                    {
-                      "q": -2,
-                      "r": 2
-                    },
-                    {
-                      "q": -2,
-                      "r": 1
-                    },
-                    {
-                      "q": -1,
-                      "r": 0
-                    }
-                  ]
-                }
-              ],
-              "occupied": 16,
-              "rotations": [
-                {
-                  "rotation": 0,
-                  "geometric": true,
-                  "native": true
-                },
-                {
-                  "rotation": 1,
-                  "geometric": true,
-                  "native": true
-                },
-                {
-                  "rotation": 2,
-                  "geometric": true,
-                  "native": true
-                },
-                {
-                  "rotation": 3,
-                  "geometric": true,
-                  "native": true
-                },
-                {
-                  "rotation": 4,
-                  "geometric": true,
-                  "native": true
-                },
-                {
-                  "rotation": 5,
-                  "geometric": true,
-                  "native": true
-                }
-              ]
-            },
-            {
-              "stage2Plan": "paired-capacity-l",
-              "pieces": [
-                {
-                  "gene": "health",
-                  "grade": 1,
-                  "rotation": 0,
-                  "shape": [
-                    0,
-                    1
-                  ]
-                },
-                {
-                  "gene": "health",
-                  "grade": 1,
-                  "rotation": 0,
-                  "shape": [
-                    0,
-                    1
-                  ]
-                },
-                {
-                  "gene": "health",
-                  "grade": 1,
-                  "rotation": 1,
-                  "shape": [
-                    0,
-                    1
-                  ]
-                },
-                {
-                  "gene": "healing",
-                  "grade": 3,
-                  "rotation": 2,
-                  "shape": [
-                    0,
-                    2,
-                    1,
-                    3
-                  ]
-                },
-                {
-                  "gene": "regeneration",
-                  "grade": 4,
-                  "rotation": 3,
-                  "shape": [
-                    0,
-                    1,
-                    0,
-                    1,
-                    2
-                  ]
-                }
-              ],
-              "searchVisits": 7,
-              "selection": "first legal witness; not an optimum or exhaustive count",
-              "paths": [
-                {
-                  "gene": "health",
-                  "points": [
-                    {
-                      "q": 0,
-                      "r": 0
-                    },
-                    {
-                      "q": 1,
-                      "r": 0
-                    },
-                    {
-                      "q": 1,
-                      "r": 1
-                    }
-                  ]
-                },
-                {
-                  "gene": "health",
-                  "points": [
-                    {
-                      "q": 1,
-                      "r": 1
-                    },
-                    {
-                      "q": 2,
-                      "r": 1
-                    },
-                    {
-                      "q": 2,
-                      "r": 2
-                    }
-                  ]
-                },
-                {
-                  "gene": "health",
-                  "points": [
-                    {
-                      "q": 2,
-                      "r": 2
-                    },
-                    {
-                      "q": 2,
-                      "r": 3
-                    },
-                    {
-                      "q": 1,
-                      "r": 4
-                    }
-                  ]
-                },
-                {
-                  "gene": "healing",
-                  "points": [
-                    {
-                      "q": 1,
-                      "r": 4
-                    },
-                    {
-                      "q": 0,
-                      "r": 5
-                    },
-                    {
-                      "q": 0,
-                      "r": 4
-                    },
-                    {
-                      "q": -1,
-                      "r": 4
-                    },
-                    {
-                      "q": 0,
-                      "r": 3
-                    }
-                  ]
-                },
-                {
-                  "gene": "regeneration",
-                  "points": [
-                    {
-                      "q": 0,
-                      "r": 3
-                    },
-                    {
-                      "q": -1,
-                      "r": 3
-                    },
-                    {
-                      "q": -1,
-                      "r": 2
-                    },
-                    {
-                      "q": -2,
-                      "r": 2
-                    },
-                    {
-                      "q": -2,
-                      "r": 1
-                    },
-                    {
-                      "q": -1,
-                      "r": 0
-                    }
-                  ]
-                }
-              ],
-              "occupied": 16,
-              "rotations": [
-                {
-                  "rotation": 0,
-                  "geometric": true,
-                  "native": true
-                },
-                {
-                  "rotation": 1,
-                  "geometric": true,
-                  "native": true
-                },
-                {
-                  "rotation": 2,
-                  "geometric": true,
-                  "native": true
-                },
-                {
-                  "rotation": 3,
-                  "geometric": true,
-                  "native": true
-                },
-                {
-                  "rotation": 4,
-                  "geometric": true,
-                  "native": true
-                },
-                {
-                  "rotation": 5,
-                  "geometric": true,
-                  "native": true
-                }
-              ]
-            }
-          ]
-        },
-        {
           "id": "combo-timing",
           "title": "연타·연격숙련·연타속도·집중",
           "genes": [
@@ -7128,7 +6594,6 @@
             "gatherCount": 0,
             "bladeCount": 1,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": true,
             "ranged": false,
@@ -7136,7 +6601,6 @@
             "meleeSpeed": 0.5,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 6,
             "hits": 4,
@@ -7163,7 +6627,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -7753,7 +7216,6 @@
   "limits": [
     "Catalog grouping describes existing genes; it does not approve their final shape assignments.",
     "Examples are placement and effect witnesses, not optimal builds or combat/income simulations.",
-    "Current catalog witnesses pass native validation. Stage2-A shape witnesses may require migration before game use.",
-    "Healing is received recovery; regeneration is out of combat after the existing five-second delay."
+    "Current catalog witnesses pass native validation. Stage2-A shape witnesses may require migration before game use."
   ]
 }

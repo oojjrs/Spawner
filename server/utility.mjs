@@ -340,7 +340,7 @@ export function createUtilityAI(context) {
     const missing = agent.stats.health - agent.health;
     if (missing > 0.01 && home) {
       const amount = agent.retreat ? Math.max(0, agent.retreat.recoverHealth - agent.health) : Math.min(missing, agent.stats.health / 4);
-      const time = homeTime + amount / (0.25 * (agent.dna ? 1 + agent.stats.dna.healing / 100 : 1));
+      const time = homeTime + amount / 0.25;
       add("recover", { ...home.at(-1), key: "home" }, home,
         { healingGain: 60 * missing / agent.stats.health * 10 / (10 + time) },
         { recoverHealth: Math.min(agent.stats.health, agent.health + amount) });

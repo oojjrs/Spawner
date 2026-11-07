@@ -5520,9 +5520,8 @@ function dnaCombatStats(counts, weights, inputRules) {
   const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
   const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : 0;
   const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
-  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0, healerCount: c.healer || 0,
-    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed, healer: !!n.healer,
-    healPower: c.healer ? c.healer + (n.healPower || 0) : 0,
+  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0,
+    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed,
     ...(rules.recovery ? { recovery: rules.recovery } : {}),
     health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
     power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,
@@ -5540,7 +5539,7 @@ function dnaCombatStats(counts, weights, inputRules) {
     counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,
     counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,
     tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),
-    healing: 10 * (n.healing || 0), stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
+    stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
     stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,
     bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,
     area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,
@@ -5567,7 +5566,8 @@ function unitDisplaySize(unit) {
   const count = Array.isArray(unit.dna?.pieces) ? unit.dna.pieces.length :
     Number.isFinite(unit.stats?.pieceCount) ? Math.max(0, unit.stats.pieceCount) : 0;
   const scale = 1 + .01 * count;
-  return (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean)*scale;
+  const size = (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean) * scale;
+  return UNIT_DISPLAY_SIZES.bean + (size - UNIT_DISPLAY_SIZES.bean) * .5;
 }
 
 function combatViewCell(width, height, units) {
@@ -5576,6 +5576,23 @@ function combatViewCell(width, height, units) {
 }
 
 function combatViewLayout(width, height, units) {
+  const located = units.map(unit => ({ unit, point: unit.combat?.position || unit.combatPosition })).filter(entry => entry.point);
+  if (located.length) {
+    const largest = units.reduce((size, unit) => Math.max(size, unitDisplaySize(unit)), .4);
+    const xs = located.flatMap(({ point }) => [point.x, point.homeX ?? point.x]);
+    const ys = located.flatMap(({ point }) => [point.y, point.homeY ?? point.y]);
+    const lowX = Math.min(-3.8, ...xs), highX = Math.max(3.8, ...xs), lowY = Math.min(-1, ...ys), highY = Math.max(1, ...ys);
+    const cell = Math.min(combatViewCell(width, height, units), width * .88 / (highX - lowX + largest * 1.3),
+      height * .72 / ((highY - lowY) * .5 + largest * 1.3));
+    const project = point => ({ x: width * .5 + (point.x - (lowX + highX) / 2) * cell,
+      y: height * .66 + (point.y - (lowY + highY) / 2) * cell * .5 });
+    const positions = new Map(located.map(({ unit, point }) => {
+      const { x, y } = project(point), size = unitDisplaySize(unit);
+      return [String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
+        top: y - size * cell * 1.2, bottom: y + size * cell * .18 } }];
+    }));
+    return { cell, positions, project };
+  }
   const teams = [0, 1].map(side => units.filter(unit => (unit.combat?.side ?? unit.side) === side));
   const count = Math.max(...teams.map(team => team.length));
   const positions = new Map();
@@ -8143,7 +8160,7 @@ function creatureHurtPose(agent, time) {
 }
 
 function unitMovementElapsedMs(agent, time) {
-  const start = Number.isFinite(agent.moveAnimationStartedAt) ? agent.moveAnimationStartedAt : agent.moveStartedAt;
+  const start = agent.combat?.position?.moving ? agent.combat.position.moveStartedAt : Number.isFinite(agent.moveAnimationStartedAt) ? agent.moveAnimationStartedAt : agent.moveStartedAt;
   return Number.isFinite(time) && Number.isFinite(start) ? Math.max(0, time - start) * 1000 : 0;
 }
 
@@ -8155,7 +8172,7 @@ function unitAnimationPose(agent, time) {
   const rpg = agent.combat?.version === 2;
   const hurt = (time - agent.hurtStartedAt) * 1000 * (rpg ? animations.hurt.durationMs / 120 : 1);
   const attack = agent.attack ? attackAnimationElapsed(agent.attack, time, AGENT_ATTACK_HIT_TIME, animations.attack.durationMs / 1000) * 1000 : -1;
-  const moving = agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
+  const moving = agent.combat?.position?.moving || agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
   if (rpg && attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
   else if (hurt >= 0 && hurt < animations.hurt.durationMs) { action = "hurt"; elapsed = hurt; }
   else if (attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
@@ -8176,6 +8193,10 @@ function unitAnimationPose(agent, time) {
 
 function creatureWalkPose(agent, time) {
   const animation = CREATURE_WALK_ANIMATIONS[agent.species];
+  if (animation && agent.health > 0 && agent.combat?.position?.moving) {
+    const elapsed = (time - agent.combat.position.moveStartedAt) * 1000;
+    return { action: "walk", animation, frame: unitAnimationFrame(animation, elapsed) };
+  }
   const elapsed = time - agent.moveStartedAt;
   if (!animation || agent.health <= 0 || agent.mode !== "walk" ||
     !(agent.moveDuration > 0) || !Number.isFinite(elapsed) || elapsed < 0 || elapsed >= agent.moveDuration) return null;
@@ -8297,6 +8318,7 @@ function unitActionState(agent, time, options = {}) {
     const delivery=agent.foodDelivery,start=finite(delivery.startedAt,time),end=delivery.arrivesAt,release=clips.throw?.releaseAtMs,ms=duration('throw');
     return state('throw',start,Number.isFinite(end)&&end>start&&Number.isFinite(release)&&release>0&&release<ms?[[start,0],[start+(end-start)*.24,release],[end,ms]]:undefined);
   }
+  if(agent.combat?.position?.moving)return state('walk',agent.combat.position.moveStartedAt);
   if(agent.mode==='harvest')return state('harvest',finite(agent.harvestStarted,agent.animationStartedAt,0));
   if(options.preview?.action==='jump')return state('jump',finite(options.preview.startedAt,time));
   if(agent.moveDuration>0&&Number.isFinite(agent.moveStartedAt)&&time>=agent.moveStartedAt&&time<agent.moveStartedAt+agent.moveDuration){

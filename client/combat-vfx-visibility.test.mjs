@@ -79,7 +79,7 @@ test("ongoing statuses follow refreshed recipients without restarting or extendi
 });
 
 test("visibility changes never replay impacts or restorations that were consumed off-screen", () => {
-  for (const kind of ["hit", "block", "area", "reflect", "bleed", "heal", "drain", "regeneration", "death"]) {
+  for (const kind of ["hit", "block", "area", "reflect", "bleed", "drain", "regeneration", "death"]) {
     const { environment, draw, detail, units } = scene();
     recordCombatVfx(environment, { kind, sourceId: "source", targetId: "target", at: 1,
       amount: kind === "death" ? 0 : 2, from: { x: 10, y: 10 }, to: { x: 12, y: 10 } });

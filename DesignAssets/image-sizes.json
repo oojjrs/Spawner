@@ -10478,16 +10478,6 @@
       },
       "note": "Approved lantern v2 original effect pixels. Source cells retained without resizing; display scale follows the registered 512px body canvas."
     },
-    "DesignAssets/Animations/CombatEffectsV2/healing.webp": {
-      "display": [
-        96,
-        96
-      ],
-      "grid": [
-        10,
-        6
-      ]
-    },
     "DesignAssets/Animations/CombatEffectsV2/bleed.webp": {
       "display": [
         64,

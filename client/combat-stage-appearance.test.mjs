@@ -148,7 +148,7 @@ test("representative deaths advance after frozen lethal simulation without chang
 test("bean idle uses intact canonical root or antenna art with metadata preserved", async () => {
   await harness(async ({ draw, settle }) => {
     for (const key of ["antenna", "feet"]) for (const side of [0, 1]) {
-      const trial = fixture("bean", { [key]: 1, dnaGather: true, healing: 2 }, side); trial.time = 0;
+      const trial = fixture("bean", { [key]: 1, dnaGather: true }, side); trial.time = 0;
       const before = JSON.stringify(trial.agents[side]);
       draw(trial); await settle();
       const sprite = draw(trial).find(call => call.image.calls?.length);

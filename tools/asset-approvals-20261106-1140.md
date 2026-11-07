@@ -5,8 +5,6 @@
 사용자 원문: “좋다 다 승인” (Sentinel_4eff16ba1bf0819196a4d6cd198a1a74, 2026-11-06T02:40:46.875210Z).
 직전에 제시한 최신 시각 시안의 승인이다. 게임 적용·배포 승인이 아니며 이번 기록 작업에서는 코드·적용·배포·사운드를 변경하지 않았다.
 
-- **치유 V2**: `art-review/healing-vfx-v2-20261106`; 영상 `healing-v2-comparison.mp4`; libfile_2c3a77b8a84481919799cdb2834e3888.
-  - 16개 원화 키포즈와 독립 상승 입자. 미세한 윤곽/알파 잡음과 마지막 입자의 제자리 소멸은 남으며 실제 유닛 가림·게임 타이밍은 미검수.
 - **출혈·흡혈 V2**: `art-review/bleed-drain-v2-20261106`; 영상 `bleed-animated-v2.mp4 / drain-animated-v2.mp4`; 출혈 libfile_234a271f1a70819189dc81b1f1978c41; 흡혈 libfile_935e7fe719b48191baa2569676ee8d5c.
   - 각 16프레임, 12fps. 프레임 간 윤곽 변화·약간의 튐·저농도 가장자리 glow가 남으며 실제 유닛 가림·게임 타이밍은 미검수.
 - **헤일로 기절 V3**: `art-review/stun-orbit-v3-halo-20261106`; 영상 `stun-orbit-review.mp4`; libfile_16b1151879ac8191b5e32394daa75973.

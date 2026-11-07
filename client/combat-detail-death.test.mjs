@@ -1,3 +1,4 @@
+import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -110,7 +111,7 @@ test("delayed snapshots compare death with authoritative living time, not the ex
 
 const gameSource = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 const helper = readFileSync(new URL("./combat-detail-dodge.test.mjs", import.meta.url), "utf8").split("const event = ")[0];
-const box = { assert, source: gameSource, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
+const box = { combatViewLayout, unitDisplaySize, assert, source: gameSource, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
   DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect };
 createContext(box); runInContext(helper.slice(helper.indexOf("function extract(")), box);
 function modal(tribe, secretion, side = 1, width = 1040) {

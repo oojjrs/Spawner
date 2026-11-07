@@ -72,17 +72,6 @@
       "cost": 7
     },
     {
-      "gene": "healer",
-      "label": "치유기관",
-      "shape": [
-        0,
-        1,
-        3
-      ],
-      "grade": 2,
-      "cost": 14
-    },
-    {
       "gene": "antenna",
       "label": "안테나",
       "shape": [
@@ -132,11 +121,6 @@
           1,
           5
         ],
-        "healer": [
-          0,
-          1,
-          3
-        ],
         "antenna": [
           0,
           1,
@@ -167,7 +151,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -175,7 +158,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 10,
             "power": 0,
             "hits": 0,
@@ -202,7 +184,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -322,7 +303,6 @@
               "native": true
             }
           ],
-          "healerHpPerSecond": 0,
           "note": "공격기관 없는 형상 비교입니다. 실제 근접 공격에는 칼날이 필요합니다."
         },
         {
@@ -340,7 +320,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -348,7 +327,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 10,
             "power": 0,
             "hits": 0,
@@ -375,7 +353,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -557,7 +534,6 @@
               "native": true
             }
           ],
-          "healerHpPerSecond": 0,
           "note": "공격기관 없는 형상 비교입니다. 실제 근접 공격에는 칼날이 필요합니다."
         },
         {
@@ -576,7 +552,6 @@
             "gatherCount": 0,
             "bladeCount": 1,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": true,
             "ranged": false,
@@ -584,7 +559,6 @@
             "meleeSpeed": 0.7,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 10,
             "power": 10,
             "hits": 1,
@@ -611,7 +585,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -818,8 +791,7 @@
               "geometric": true,
               "native": true
             }
-          ],
-          "healerHpPerSecond": 0
+          ]
         },
         {
           "id": "worker",
@@ -838,7 +810,6 @@
             "gatherCount": 2,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -846,7 +817,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 0,
             "hits": 0,
@@ -873,7 +843,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 75,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -1065,8 +1034,7 @@
               "geometric": true,
               "native": true
             }
-          ],
-          "healerHpPerSecond": 0
+          ]
         },
         {
           "id": "scout",
@@ -1084,7 +1052,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 1,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -1092,7 +1059,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 0,
             "hits": 0,
@@ -1119,7 +1085,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -1285,227 +1250,7 @@
               "geometric": true,
               "native": true
             }
-          ],
-          "healerHpPerSecond": 0
-        },
-        {
-          "id": "healer",
-          "title": "치유기관1 + 체력3",
-          "counts": {
-            "healer": 1,
-            "health": 3
-          },
-          "layoutsModuloRotation": 69,
-          "closedAtOriginModuloRotation": 0,
-          "extendableModuloRotation": 66,
-          "birthCost": 32,
-          "stats": {
-            "gatherCount": 0,
-            "bladeCount": 0,
-            "antennaCount": 0,
-            "healerCount": 1,
-            "secretionCount": 0,
-            "melee": false,
-            "ranged": false,
-            "meleePower": 0,
-            "meleeSpeed": 0,
-            "rangedPower": 0,
-            "rangedSpeed": 0,
-            "healer": true,
-            "health": 40,
-            "power": 0,
-            "hits": 0,
-            "speed": 0,
-            "armor": 0,
-            "parry": 0,
-            "block": 0,
-            "evasion": 0,
-            "capacity": 0,
-            "harvest": 0,
-            "harvestTime": 0,
-            "movement": 0.25,
-            "vision": 1,
-            "scale": 1.04,
-            "roaming": false,
-            "comboPower": 0,
-            "critical": 0,
-            "criticalPower": 0,
-            "accuracy": 0,
-            "penetration": 0,
-            "blockPower": 50,
-            "counter": 0,
-            "counterPower": 0,
-            "tenacity": 0,
-            "reduction": 0,
-            "loadSpeed": 0,
-            "healing": 0,
-            "stun": 0,
-            "stunTime": 0,
-            "bleed": 0,
-            "bleedPower": 0,
-            "area": 0,
-            "areaPower": 0,
-            "lifesteal": 0,
-            "reflection": 0,
-            "regeneration": 0,
-            "comboSpeed": 0,
-            "focus": 0
-          },
-          "representative": {
-            "pieces": [
-              {
-                "gene": "healer",
-                "grade": 2,
-                "rotation": 0,
-                "shape": [
-                  0,
-                  1,
-                  3
-                ]
-              },
-              {
-                "gene": "health",
-                "grade": 1,
-                "rotation": 3,
-                "shape": [
-                  0,
-                  1
-                ]
-              },
-              {
-                "gene": "health",
-                "grade": 1,
-                "rotation": 5,
-                "shape": [
-                  0,
-                  1
-                ]
-              },
-              {
-                "gene": "health",
-                "grade": 1,
-                "rotation": 0,
-                "shape": [
-                  0,
-                  1
-                ]
-              }
-            ],
-            "paths": [
-              {
-                "gene": "healer",
-                "points": [
-                  {
-                    "q": 0,
-                    "r": 0
-                  },
-                  {
-                    "q": 1,
-                    "r": 0
-                  },
-                  {
-                    "q": 1,
-                    "r": 1
-                  },
-                  {
-                    "q": 0,
-                    "r": 1
-                  }
-                ]
-              },
-              {
-                "gene": "health",
-                "points": [
-                  {
-                    "q": 0,
-                    "r": 1
-                  },
-                  {
-                    "q": -1,
-                    "r": 1
-                  },
-                  {
-                    "q": -1,
-                    "r": 0
-                  }
-                ]
-              },
-              {
-                "gene": "health",
-                "points": [
-                  {
-                    "q": -1,
-                    "r": 0
-                  },
-                  {
-                    "q": 0,
-                    "r": -1
-                  },
-                  {
-                    "q": 1,
-                    "r": -1
-                  }
-                ]
-              },
-              {
-                "gene": "health",
-                "points": [
-                  {
-                    "q": 1,
-                    "r": -1
-                  },
-                  {
-                    "q": 2,
-                    "r": -1
-                  },
-                  {
-                    "q": 2,
-                    "r": 0
-                  }
-                ]
-              }
-            ],
-            "occupied": 10,
-            "closedAtOrigin": false,
-            "inversionMatched": 10,
-            "inversionTotal": 10,
-            "boundingSpan": 8,
-            "extensions": 6,
-            "score": 1008
-          },
-          "nativeChecks": [
-            {
-              "rotation": 0,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 1,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 2,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 3,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 4,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 5,
-              "geometric": true,
-              "native": true
-            }
-          ],
-          "healerHpPerSecond": 0.5
+          ]
         },
         {
           "id": "tank",
@@ -1522,7 +1267,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -1530,7 +1274,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 40,
             "power": 0,
             "hits": 0,
@@ -1557,7 +1300,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -1754,8 +1496,7 @@
               "geometric": true,
               "native": true
             }
-          ],
-          "healerHpPerSecond": 0
+          ]
         }
       ]
     },
@@ -1778,11 +1519,6 @@
           0,
           0,
           1
-        ],
-        "healer": [
-          0,
-          1,
-          3
         ],
         "antenna": [
           0,
@@ -1870,7 +1606,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -1878,7 +1613,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 10,
             "power": 0,
             "hits": 0,
@@ -1905,7 +1639,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -2025,7 +1758,6 @@
               "native": false
             }
           ],
-          "healerHpPerSecond": 0,
           "note": "공격기관 없는 형상 비교입니다. 실제 근접 공격에는 칼날이 필요합니다."
         },
         {
@@ -2043,7 +1775,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -2051,7 +1782,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 10,
             "power": 0,
             "hits": 0,
@@ -2078,7 +1808,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -2260,7 +1989,6 @@
               "native": false
             }
           ],
-          "healerHpPerSecond": 0,
           "note": "공격기관 없는 형상 비교입니다. 실제 근접 공격에는 칼날이 필요합니다."
         },
         {
@@ -2279,7 +2007,6 @@
             "gatherCount": 0,
             "bladeCount": 1,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": true,
             "ranged": false,
@@ -2287,7 +2014,6 @@
             "meleeSpeed": 0.7,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 10,
             "power": 10,
             "hits": 1,
@@ -2314,7 +2040,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -2521,8 +2246,7 @@
               "geometric": true,
               "native": false
             }
-          ],
-          "healerHpPerSecond": 0
+          ]
         },
         {
           "id": "worker",
@@ -2541,7 +2265,6 @@
             "gatherCount": 2,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -2549,7 +2272,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 0,
             "hits": 0,
@@ -2576,7 +2298,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 75,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -2768,8 +2489,7 @@
               "geometric": true,
               "native": false
             }
-          ],
-          "healerHpPerSecond": 0
+          ]
         },
         {
           "id": "scout",
@@ -2787,7 +2507,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 1,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -2795,7 +2514,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 0,
             "hits": 0,
@@ -2822,7 +2540,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -2988,227 +2705,7 @@
               "geometric": true,
               "native": false
             }
-          ],
-          "healerHpPerSecond": 0
-        },
-        {
-          "id": "healer",
-          "title": "치유기관1 + 체력3",
-          "counts": {
-            "healer": 1,
-            "health": 3
-          },
-          "layoutsModuloRotation": 69,
-          "closedAtOriginModuloRotation": 0,
-          "extendableModuloRotation": 66,
-          "birthCost": 32,
-          "stats": {
-            "gatherCount": 0,
-            "bladeCount": 0,
-            "antennaCount": 0,
-            "healerCount": 1,
-            "secretionCount": 0,
-            "melee": false,
-            "ranged": false,
-            "meleePower": 0,
-            "meleeSpeed": 0,
-            "rangedPower": 0,
-            "rangedSpeed": 0,
-            "healer": true,
-            "health": 40,
-            "power": 0,
-            "hits": 0,
-            "speed": 0,
-            "armor": 0,
-            "parry": 0,
-            "block": 0,
-            "evasion": 0,
-            "capacity": 0,
-            "harvest": 0,
-            "harvestTime": 0,
-            "movement": 0.25,
-            "vision": 1,
-            "scale": 1.04,
-            "roaming": false,
-            "comboPower": 0,
-            "critical": 0,
-            "criticalPower": 0,
-            "accuracy": 0,
-            "penetration": 0,
-            "blockPower": 50,
-            "counter": 0,
-            "counterPower": 0,
-            "tenacity": 0,
-            "reduction": 0,
-            "loadSpeed": 0,
-            "healing": 0,
-            "stun": 0,
-            "stunTime": 0,
-            "bleed": 0,
-            "bleedPower": 0,
-            "area": 0,
-            "areaPower": 0,
-            "lifesteal": 0,
-            "reflection": 0,
-            "regeneration": 0,
-            "comboSpeed": 0,
-            "focus": 0
-          },
-          "representative": {
-            "pieces": [
-              {
-                "gene": "healer",
-                "grade": 2,
-                "rotation": 0,
-                "shape": [
-                  0,
-                  1,
-                  3
-                ]
-              },
-              {
-                "gene": "health",
-                "grade": 1,
-                "rotation": 3,
-                "shape": [
-                  0,
-                  1
-                ]
-              },
-              {
-                "gene": "health",
-                "grade": 1,
-                "rotation": 5,
-                "shape": [
-                  0,
-                  1
-                ]
-              },
-              {
-                "gene": "health",
-                "grade": 1,
-                "rotation": 0,
-                "shape": [
-                  0,
-                  1
-                ]
-              }
-            ],
-            "paths": [
-              {
-                "gene": "healer",
-                "points": [
-                  {
-                    "q": 0,
-                    "r": 0
-                  },
-                  {
-                    "q": 1,
-                    "r": 0
-                  },
-                  {
-                    "q": 1,
-                    "r": 1
-                  },
-                  {
-                    "q": 0,
-                    "r": 1
-                  }
-                ]
-              },
-              {
-                "gene": "health",
-                "points": [
-                  {
-                    "q": 0,
-                    "r": 1
-                  },
-                  {
-                    "q": -1,
-                    "r": 1
-                  },
-                  {
-                    "q": -1,
-                    "r": 0
-                  }
-                ]
-              },
-              {
-                "gene": "health",
-                "points": [
-                  {
-                    "q": -1,
-                    "r": 0
-                  },
-                  {
-                    "q": 0,
-                    "r": -1
-                  },
-                  {
-                    "q": 1,
-                    "r": -1
-                  }
-                ]
-              },
-              {
-                "gene": "health",
-                "points": [
-                  {
-                    "q": 1,
-                    "r": -1
-                  },
-                  {
-                    "q": 2,
-                    "r": -1
-                  },
-                  {
-                    "q": 2,
-                    "r": 0
-                  }
-                ]
-              }
-            ],
-            "occupied": 10,
-            "closedAtOrigin": false,
-            "inversionMatched": 10,
-            "inversionTotal": 10,
-            "boundingSpan": 8,
-            "extensions": 6,
-            "score": 1008
-          },
-          "nativeChecks": [
-            {
-              "rotation": 0,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 1,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 2,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 3,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 4,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 5,
-              "geometric": true,
-              "native": true
-            }
-          ],
-          "healerHpPerSecond": 0.5
+          ]
         },
         {
           "id": "tank",
@@ -3225,7 +2722,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -3233,7 +2729,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 40,
             "power": 0,
             "hits": 0,
@@ -3260,7 +2755,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -3457,8 +2951,7 @@
               "geometric": true,
               "native": true
             }
-          ],
-          "healerHpPerSecond": 0
+          ]
         }
       ]
     },
@@ -3481,11 +2974,6 @@
           0,
           0,
           0
-        ],
-        "healer": [
-          0,
-          1,
-          3
         ],
         "antenna": [
           0,
@@ -3573,7 +3061,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -3581,7 +3068,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 10,
             "power": 0,
             "hits": 0,
@@ -3608,7 +3094,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -3728,7 +3213,6 @@
               "native": false
             }
           ],
-          "healerHpPerSecond": 0,
           "note": "공격기관 없는 형상 비교입니다. 실제 근접 공격에는 칼날이 필요합니다."
         },
         {
@@ -3746,7 +3230,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -3754,7 +3237,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 10,
             "power": 0,
             "hits": 0,
@@ -3781,7 +3263,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -3963,7 +3444,6 @@
               "native": false
             }
           ],
-          "healerHpPerSecond": 0,
           "note": "공격기관 없는 형상 비교입니다. 실제 근접 공격에는 칼날이 필요합니다."
         },
         {
@@ -3982,7 +3462,6 @@
             "gatherCount": 0,
             "bladeCount": 1,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": true,
             "ranged": false,
@@ -3990,7 +3469,6 @@
             "meleeSpeed": 0.7,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 10,
             "power": 10,
             "hits": 1,
@@ -4017,7 +3495,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -4224,8 +3701,7 @@
               "geometric": true,
               "native": false
             }
-          ],
-          "healerHpPerSecond": 0
+          ]
         },
         {
           "id": "worker",
@@ -4244,7 +3720,6 @@
             "gatherCount": 2,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -4252,7 +3727,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 0,
             "hits": 0,
@@ -4279,7 +3753,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 75,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -4471,8 +3944,7 @@
               "geometric": true,
               "native": false
             }
-          ],
-          "healerHpPerSecond": 0
+          ]
         },
         {
           "id": "scout",
@@ -4490,7 +3962,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 1,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -4498,7 +3969,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 20,
             "power": 0,
             "hits": 0,
@@ -4525,7 +3995,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -4691,227 +4160,7 @@
               "geometric": true,
               "native": false
             }
-          ],
-          "healerHpPerSecond": 0
-        },
-        {
-          "id": "healer",
-          "title": "치유기관1 + 체력3",
-          "counts": {
-            "healer": 1,
-            "health": 3
-          },
-          "layoutsModuloRotation": 69,
-          "closedAtOriginModuloRotation": 0,
-          "extendableModuloRotation": 66,
-          "birthCost": 32,
-          "stats": {
-            "gatherCount": 0,
-            "bladeCount": 0,
-            "antennaCount": 0,
-            "healerCount": 1,
-            "secretionCount": 0,
-            "melee": false,
-            "ranged": false,
-            "meleePower": 0,
-            "meleeSpeed": 0,
-            "rangedPower": 0,
-            "rangedSpeed": 0,
-            "healer": true,
-            "health": 40,
-            "power": 0,
-            "hits": 0,
-            "speed": 0,
-            "armor": 0,
-            "parry": 0,
-            "block": 0,
-            "evasion": 0,
-            "capacity": 0,
-            "harvest": 0,
-            "harvestTime": 0,
-            "movement": 0.25,
-            "vision": 1,
-            "scale": 1.04,
-            "roaming": false,
-            "comboPower": 0,
-            "critical": 0,
-            "criticalPower": 0,
-            "accuracy": 0,
-            "penetration": 0,
-            "blockPower": 50,
-            "counter": 0,
-            "counterPower": 0,
-            "tenacity": 0,
-            "reduction": 0,
-            "loadSpeed": 0,
-            "healing": 0,
-            "stun": 0,
-            "stunTime": 0,
-            "bleed": 0,
-            "bleedPower": 0,
-            "area": 0,
-            "areaPower": 0,
-            "lifesteal": 0,
-            "reflection": 0,
-            "regeneration": 0,
-            "comboSpeed": 0,
-            "focus": 0
-          },
-          "representative": {
-            "pieces": [
-              {
-                "gene": "healer",
-                "grade": 2,
-                "rotation": 0,
-                "shape": [
-                  0,
-                  1,
-                  3
-                ]
-              },
-              {
-                "gene": "health",
-                "grade": 1,
-                "rotation": 3,
-                "shape": [
-                  0,
-                  1
-                ]
-              },
-              {
-                "gene": "health",
-                "grade": 1,
-                "rotation": 5,
-                "shape": [
-                  0,
-                  1
-                ]
-              },
-              {
-                "gene": "health",
-                "grade": 1,
-                "rotation": 0,
-                "shape": [
-                  0,
-                  1
-                ]
-              }
-            ],
-            "paths": [
-              {
-                "gene": "healer",
-                "points": [
-                  {
-                    "q": 0,
-                    "r": 0
-                  },
-                  {
-                    "q": 1,
-                    "r": 0
-                  },
-                  {
-                    "q": 1,
-                    "r": 1
-                  },
-                  {
-                    "q": 0,
-                    "r": 1
-                  }
-                ]
-              },
-              {
-                "gene": "health",
-                "points": [
-                  {
-                    "q": 0,
-                    "r": 1
-                  },
-                  {
-                    "q": -1,
-                    "r": 1
-                  },
-                  {
-                    "q": -1,
-                    "r": 0
-                  }
-                ]
-              },
-              {
-                "gene": "health",
-                "points": [
-                  {
-                    "q": -1,
-                    "r": 0
-                  },
-                  {
-                    "q": 0,
-                    "r": -1
-                  },
-                  {
-                    "q": 1,
-                    "r": -1
-                  }
-                ]
-              },
-              {
-                "gene": "health",
-                "points": [
-                  {
-                    "q": 1,
-                    "r": -1
-                  },
-                  {
-                    "q": 2,
-                    "r": -1
-                  },
-                  {
-                    "q": 2,
-                    "r": 0
-                  }
-                ]
-              }
-            ],
-            "occupied": 10,
-            "closedAtOrigin": false,
-            "inversionMatched": 10,
-            "inversionTotal": 10,
-            "boundingSpan": 8,
-            "extensions": 6,
-            "score": 1008
-          },
-          "nativeChecks": [
-            {
-              "rotation": 0,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 1,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 2,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 3,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 4,
-              "geometric": true,
-              "native": true
-            },
-            {
-              "rotation": 5,
-              "geometric": true,
-              "native": true
-            }
-          ],
-          "healerHpPerSecond": 0.5
+          ]
         },
         {
           "id": "tank",
@@ -4928,7 +4177,6 @@
             "gatherCount": 0,
             "bladeCount": 0,
             "antennaCount": 0,
-            "healerCount": 0,
             "secretionCount": 0,
             "melee": false,
             "ranged": false,
@@ -4936,7 +4184,6 @@
             "meleeSpeed": 0,
             "rangedPower": 0,
             "rangedSpeed": 0,
-            "healer": false,
             "health": 40,
             "power": 0,
             "hits": 0,
@@ -4963,7 +4210,6 @@
             "tenacity": 0,
             "reduction": 0,
             "loadSpeed": 0,
-            "healing": 0,
             "stun": 0,
             "stunTime": 0,
             "bleed": 0,
@@ -5160,8 +4406,7 @@
               "geometric": true,
               "native": true
             }
-          ],
-          "healerHpPerSecond": 0
+          ]
         }
       ]
     }

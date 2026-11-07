@@ -38,7 +38,7 @@ test("uncertain, hidden, moved-destination, canceled or non-projectile evidence 
     [shot(), hit({ projectileId: "other" })], [shot(), hit({ sourceId: "other" })],
     [shot(), hit(), { id: "cancel", kind: "projectile-cancel", projectileId: "p", at: .8 }]])
     assert.equal(heldHurtProjectileSide(unit(), frame(...events), 1.2), null);
-  for (const kind of ["bleed", "area", "reflect", "heal", "stun", "dodge", "parry", "attack", "counter", "projectile-cancel"])
+  for (const kind of ["bleed", "area", "reflect", "regeneration", "stun", "dodge", "parry", "attack", "counter", "projectile-cancel"])
     assert.equal(heldHurtProjectileSide(unit(), frame(shot(), hit({ kind })), 1.2), null, kind);
   for (const amount of [0, -1, NaN, Infinity]) assert.equal(heldHurtProjectileSide(unit(), frame(shot(), hit({ amount })), 1.2), null);
   assert.equal(heldHurtProjectileSide(unit(), frame(shot(), hit({ mode: "melee" })), 1.2), null);

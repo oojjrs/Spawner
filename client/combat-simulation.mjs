@@ -16,7 +16,7 @@ export const SIMULATION_STATS = Object.freeze([
   ["accuracy", "정밀", "공격"], ["evasion", "회피", "방어"], ["parry", "패링", "방어"],
   ["block", "블록", "방어"], ["blockPower", "블록 경감", "방어"], ["counter", "반격 확률", "반격"],
   ["counterPower", "반격 위력", "반격"], ["tenacity", "강인함", "생존"], ["stun", "기절 확률", "제어"],
-  ["stunDuration", "기절 시간", "제어"], ["drain", "흡혈", "생존"], ["healPower", "치유량", "생존"]
+  ["stunDuration", "기절 시간", "제어"], ["drain", "흡혈", "생존"]
 ].map(([key, label, group]) => Object.freeze({ key, label, group })));
 
 export const DEFAULT_SIMULATION_RULES = Object.freeze({ ...DNA_COMBAT_RULES,
@@ -62,7 +62,7 @@ function normalizeBuild(input) {
   plainObject(input, "build");
   if (typeof input.key !== "string" || !input.key.length || input.key.length > 100) throw new TypeError("build.key must be a nonempty string up to 100 characters");
   if (input.name !== undefined && (typeof input.name !== "string" || input.name.length > 100)) throw new TypeError("build.name must be a string up to 100 characters");
-  const native = input.counts === undefined && input.organs === undefined && input.healing === undefined;
+  const native = input.counts === undefined && input.organs === undefined;
   if (native && !Object.hasOwn(UNIT_COMBAT_STATS, input.key)) throw new RangeError("Unknown unit: " + input.key);
   const dna = input.dna === undefined ? undefined : validateDna(input.dna, input.dna?.level, input.dna?.budget);
   if (input.dna !== undefined && (!dna || !["bean", "spore", "pebble", "spring"].includes(input.key))) throw new RangeError("Invalid playable DNA");
@@ -75,10 +75,10 @@ function normalizeBuild(input) {
     counts[key] = value;
   }
   if (input.organs !== undefined) plainObject(input.organs, "organs");
-  const organs = { attack: 1, ranged: 0, heal: 0, armor: true, legs: true };
+  const organs = { attack: 1, ranged: 0, armor: true, legs: true };
   for (const [key, value] of Object.entries(input.organs || {})) {
     if (!Object.hasOwn(organs, key)) throw new TypeError("Unknown organ: " + key);
-    if (["attack", "ranged", "heal"].includes(key)) {
+    if (["attack", "ranged"].includes(key)) {
       const count = typeof value === "boolean" ? Number(value) : value;
       if (!Number.isSafeInteger(count) || count < 0 || count > 1) throw new RangeError("Organ count must be a nonnegative safe integer");
       organs[key] = count;
@@ -87,11 +87,9 @@ function normalizeBuild(input) {
       organs[key] = value;
     }
   }
-  const healing = input.healing === undefined ? 0 : input.healing;
-  if (!Number.isFinite(healing) || healing < 0 || healing > 1000000) throw new RangeError("healing must be a finite nonnegative percentage");
-  const pieceCount = Object.values(counts).reduce((sum, value) => sum + value, 0) + organs.attack + organs.ranged + organs.heal;
+  const pieceCount = Object.values(counts).reduce((sum, value) => sum + value, 0) + organs.attack + organs.ranged;
   if (!Number.isSafeInteger(pieceCount)) throw new RangeError("Total piece count must be a safe integer including organs");
-  return { key: input.key, name: input.name || input.key, organs, counts, healing, pieceCount, native, dna };
+  return { key: input.key, name: input.name || input.key, organs, counts, pieceCount, native, dna };
 }
 
 const geneKeys = Object.freeze({ vitality: "health", flatPen: "penetration", haste: "speed", rangedHaste: "rangedSpeed",
@@ -107,14 +105,15 @@ function derive(build, rules) {
     const role = creatureAttackRole(build.key);
     const stats = { ...unitCombatStats(build.key), speed: CREATURE_MOVEMENT[build.key].speed, resistance: 1 };
     const profile = combatProfile({ species: build.key, stats, attributes: {} });
-    return { ...stats, ...profile, melee: !!role?.melee, ranged: !!role?.ranged, canAttack: !!role };
+    return { ...stats, ...profile, critChance: profile.criticalChance, critMultiplier: profile.criticalMultiplier,
+      melee: !!role?.melee, ranged: !!role?.ranged, canAttack: !!role };
   }
   const counts = Object.fromEntries(Object.entries(build.counts).map(([key, value]) => [geneKeys[key] || key, value]));
-  Object.assign(counts, { blade: build.organs.attack, secretion: build.organs.ranged, healer: build.organs.heal });
-  const dna = { ...dnaCombatStats(counts, counts, rules), movement: .25, vision: 1, roaming: true, healing: build.healing };
+  Object.assign(counts, { blade: build.organs.attack, secretion: build.organs.ranged });
+  const dna = { ...dnaCombatStats(counts, counts, rules), movement: .25, vision: 1, roaming: true };
   const interval = speed => speed > 0 ? 1 / speed : Infinity;
   const result = { dna, HP: dna.health, health: dna.health, speed: dna.movement, loadedSpeed: dna.movement * .75, vision: dna.vision,
-    healing: dna.healing, healPower: dna.healPower, attackPower: dna.meleePower, defense: dna.armor, meleePower: dna.meleePower, rangedPower: dna.rangedPower,
+    attackPower: dna.meleePower, defense: dna.armor, meleePower: dna.meleePower, rangedPower: dna.rangedPower,
     attackSpeed: dna.meleeSpeed, meleeSpeed: dna.meleeSpeed, rangedSpeed: dna.rangedSpeed,
     attackInterval: interval(dna.meleeSpeed), rangedAttackInterval: interval(dna.rangedSpeed),
     targetAttackSpeed: dna.meleeSpeed, targetRangedSpeed: dna.rangedSpeed, windup: dna.focus, hitGap: dna.comboSpeed,
@@ -124,8 +123,8 @@ function derive(build, rules) {
     evasion: dna.evasion / 100, parry: dna.parry / 100, block: dna.block / 100, blockReduction: dna.blockPower / 100,
     counter: dna.counter / 100, counterMultiplier: dna.counterPower / 100, tenacity: dna.tenacity / 100,
     stunChance: dna.stun / 100, stunChancePerHit: dna.stun / 100, stunDuration: dna.stunTime, drain: dna.lifesteal / 100,
-    pieceCount: build.pieceCount, melee: dna.melee, ranged: dna.ranged, healer: dna.healer,
-    healerCount: dna.healerCount, canAttack: dna.meleePower > 0 && dna.meleeSpeed > 0 || dna.rangedPower > 0 && dna.rangedSpeed > 0 };
+    pieceCount: build.pieceCount, melee: dna.melee, ranged: dna.ranged,
+    canAttack: dna.meleePower > 0 && dna.meleeSpeed > 0 || dna.rangedPower > 0 && dna.rangedSpeed > 0 };
   for (const [key, value] of Object.entries(result)) if (typeof value === "number" && !Number.isFinite(value) &&
     !["attackInterval", "rangedAttackInterval", "recovery"].includes(key)) throw new RangeError("Derived " + key + " must be finite");
   return result;
@@ -151,7 +150,6 @@ export function createSimulationTrial(settings) {
   if (!["simultaneous", "left", "right"].includes(first)) throw new RangeError("Invalid first side");
   const distance = settings.distance === undefined ? 1 : settings.distance;
   if (!Number.isFinite(distance) || distance < 0 || distance > 20) throw new RangeError("distance must be between 0 and 20");
-  if (settings.support !== undefined && typeof settings.support !== "boolean") throw new TypeError("support must be boolean");
   let state = 2166136261;
   for (const char of String(seed)) state = Math.imul(state ^ char.charCodeAt(0), 16777619) >>> 0;
   function random() {
@@ -171,22 +169,17 @@ export function createSimulationTrial(settings) {
       key: build.key, name: build.name, labAppearance: !build.native, tribe: player ? build.key : undefined,
       species: !player && build.native ? build.key : undefined,
       dna: player && build.native ? build.dna || startingWorkerDna(build.key) : undefined,
-      x: 100 + (distance > 1 ? side * distance : 0), y: 100, renderFromX: 100, renderFromY: 100,
+      x: 100, y: 100, renderFromX: 100, renderFromY: 100,
       moveStartedAt: 0, moveDuration: 0, health: stats.health, stats, attributes: {},
       appearanceAttributes: player && build.native ? dnaAppearance(build.dna || startingWorkerDna(build.key)) : player ? { ...(stats.melee ? { blade: 1 } : {}), ...(stats.ranged ? { secretion: 1 } : {}) } : undefined,
       combatDisposition: "aggressive", mode: "fight", facing: side === 0 ? 1 : -1, animationStartedAt: 0,
-      hurtStartedAt: -Infinity, dnaHealReady: 2, dnaReactionReadyAt: rules.defensePreparation,
+      hurtStartedAt: -Infinity, dnaReactionReadyAt: rules.defensePreparation,
       attackReady: first !== "simultaneous" && first !== ownerId ? rules.initiativeDelay : 0,
       combat: null, attack: null, carrying: 0 };
   });
-  const supportAgents = settings.support ? agents.map(agent => ({ ...structuredClone(agent),
-    id: agent.id + "-support", health: agent.stats.health / 2, mode: "idle",
-    stats: { ...agent.stats, canAttack: false, melee: false, ranged: false, healer: false,
-      dna: { ...agent.stats.dna, melee: false, ranged: false, healer: false, power: 0, meleePower: 0, rangedPower: 0,
-        speed: 0, meleeSpeed: 0, rangedSpeed: 0, hits: 0 } } })) : [];
-  const participants = [...agents, ...supportAgents];
+  const participants = agents;
   const teamHealth = side => participants.filter(agent => agent.ownerId === side).reduce((sum, agent) => sum + agent.health, 0);
-  const environment = { games: new Map(), colonies: [], simSeconds: 0, combatRules: rules,
+  const environment = { games: new Map(), colonies: [], simSeconds: 0, combatRules: rules, combatSimulation: true, combatInitialDistance: distance,
     world: { size: 320, terrain: new Uint8Array(320 * 320) },
     combatRandom: random, damageRandom: settings.random === false ? () => .5 : () => .5 + (random() - .5) * rules.jitter / .2,
     onCombatEvent(event) {
@@ -210,29 +203,8 @@ export function createSimulationTrial(settings) {
       if (agent.health <= 0 || agent.combat) continue;
       const target = agents.find(other => other.ownerId !== agent.ownerId && other.health > 0 && other.x === agent.x && other.y === agent.y);
       if (!target) continue;
-      const species = agent.species;
-      try { agent.species = undefined; combat.engage(agent, target, environment.simSeconds); }
-      finally { agent.species = species; }
+      combat.engage(agent, target, environment.simSeconds);
     }
-  }
-  function approach(seconds) {
-    const living = agents.filter(agent => agent.health > 0);
-    const moves = living.flatMap(agent => {
-      if (agent.combat || agent.attack || !agent.stats.canAttack || environment.simSeconds < (agent.dnaStunnedUntil || 0)) return [];
-      const target = living.filter(other => other.ownerId !== agent.ownerId).sort((a, b) => Math.abs(a.x - agent.x) - Math.abs(b.x - agent.x) || a.id.localeCompare(b.id))[0];
-      if (!target || agent.stats.ranged && (!agent.stats.melee || Math.abs(agent.x - target.x) > 1) && Math.abs(agent.x - target.x) <= 3) return [];
-      return [{ agent, target, travel: Math.min(Math.abs(target.x - agent.x), (agent.stats.dna?.movement || agent.stats.speed) * seconds) }];
-    });
-    const positions = new Map();
-    for (const move of moves) {
-      const other = moves.find(entry => entry.agent === move.target && entry.target === move.agent);
-      const gap = Math.abs(move.target.x - move.agent.x);
-      const x = gap <= move.travel + (other?.travel || 0) + 1e-8 ?
-        other ? (move.agent.x + move.target.x) / 2 : move.target.x : move.agent.x + Math.sign(move.target.x - move.agent.x) * move.travel;
-      positions.set(move.agent, x);
-    }
-    for (const [agent, x] of positions) { agent.x = x; agent.renderFromX = x; }
-    for (const agent of supportAgents) agent.x = agents.find(other => agent.id === other.id + "-support").x;
   }
   function conclude() {
     const alive = ["left", "right"].map(side => participants.some(agent => agent.ownerId === side && agent.health > 0));
@@ -243,9 +215,8 @@ export function createSimulationTrial(settings) {
     else if (time >= rules.maxSeconds) { winner = "draw"; reason = "time-limit"; }
   }
   function tick(at) {
-    const elapsed = at - environment.simSeconds;
     environment.simSeconds = at; time = at;
-    approach(elapsed); enroll();
+    enroll();
     for (const agent of participants) combat.update(agent, at);
     conclude();
   }
@@ -267,9 +238,9 @@ export function createSimulationTrial(settings) {
   function finish() { return advance(rules.maxSeconds - time); }
   function result() { return { winner, reason, time, leftHealth: teamHealth("left"), rightHealth: teamHealth("right") }; }
   enroll(); conclude();
-  return { agents, supportAgents, history, advance, step, finish, result,
+  return { agents, history, advance, step, finish, result,
     get projectiles() { return participants.flatMap(source => (source.dnaProjectiles || []).map(visual => ({ source,
-      target: participants.find(agent => agent.id === source.attack?.targetId), launchedAt: visual.launchedAt, at: visual.hitAt,
+      target: participants.find(agent => agent.id === (visual.targetId || source.attack?.targetId)), launchedAt: visual.launchedAt, at: visual.hitAt,
       fromX: visual.fromX, fromY: visual.fromY, targetX: visual.targetX, targetY: visual.targetY }))).filter(shot => shot.target); },
     get vfx() { return snapshotCombatVfx(environment, time); },
     get time() { return time; }, get reason() { return reason; } };

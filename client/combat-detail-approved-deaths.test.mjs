@@ -10,7 +10,7 @@ import { createDetailCombatVfx, DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, dra
 import { CREATURE_IDLE_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, unitAnimationFrame, creatureHurtPose, creatureAttackPose } from './unit-animation.mjs';
 import { imageFrameGeometry } from './image-geometry.mjs';
 import { imageDimensions } from './image-audit.mjs';
-import { UNIT_DISPLAY_SIZES } from './unit-size.mjs';
+import { UNIT_DISPLAY_SIZES, combatViewLayout, unitDisplaySize } from './unit-size.mjs';
 
 // Cached alpha>=16 first-cell bounds are pinned to the audited original images.
 // They are test inputs for native size preparation, not replacement registration.
@@ -33,7 +33,7 @@ const fixtureRead = (path, encoding) => {
   const value = readFileSync(path, encoding);
   return typeof value === "string" && String(path).replaceAll("\\", "/").endsWith("/client/game.js") ? unitPresentationTestSource(value) : value;
 };
-const box = { assert,readFileSync:fixtureRead,createContext,runInContext,structuredClone,URL,createDetailCombatDeath,detailDeathForm,DETAIL_DEATH_CREATURES,detailCreatureDeathShadow,
+const box = { combatViewLayout, unitDisplaySize, assert,readFileSync:fixtureRead,createContext,runInContext,structuredClone,URL,createDetailCombatDeath,detailDeathForm,DETAIL_DEATH_CREATURES,detailCreatureDeathShadow,
   createCombatVfxCursor,createDetailCombatVfx,DETAIL_COMBAT_VFX_ASSETS,drawDetailVfxCell,drawDetailVitalEffect,CREATURE_IDLE_ANIMATIONS,CREATURE_DEATH_ANIMATIONS,
   CREATURE_ATTACK_ANIMATIONS,unitAnimationFrame,creatureHurtPose,creatureAttackPose,imageFrameGeometry,imageDimensions };
 createContext(box);runInContext(fixture.replaceAll('import.meta.url',JSON.stringify(new URL('./combat-detail-creature-death.test.mjs',import.meta.url).href)),box);

@@ -21,7 +21,8 @@ function fixture(ids, distance = 0) {
   const events = [], environment = { world: { terrain: new Uint8Array(320 * 320) },
     games: new Map([["a", game([source, ally])], ["b", game([target])]]),
     combatRandom: () => .01, damageRandom: () => .5, onCombatEvent: event => events.push(event) };
-  return { source, target, ally, events, environment, combat: createCombat(environment) };
+  const combat = createCombat(environment);
+  return { source, target, ally, events, environment, combat };
 }
 
 test("journal is bounded, immutable, ephemeral, and reports the unfiltered retained sequence", () => {
@@ -41,7 +42,7 @@ test("journal is bounded, immutable, ephemeral, and reports the unfiltered retai
   const actual = recordCombatVfx(environment, { kind: "stun", at: 10, endsAt: 20, amount: 0 });
   assert.equal(Object.isFrozen(actual), true);
   assert.ok(snapshotCombatVfx(environment, 15).events.some(event => event.kind === "stun"));
-  const isolated = recordCombatVfx({ onCombatEvent(event) { event.amount = 999; } }, { kind: "heal", at: 1, amount: 1 });
+  const isolated = recordCombatVfx({ onCombatEvent(event) { event.amount = 999; } }, { kind: "regeneration", at: 1, amount: 1 });
   assert.equal(isolated.amount, 1, "a failing or mutating presentation observer cannot affect the evidence or combat");
 });
 
@@ -53,6 +54,7 @@ test("server captures actual critical/combo/area/drain/reflect/death recipients 
   const collateral = { ...f.target, id: "collateral", health: 4, stats: { ...f.target.stats, dna: stats([]) } };
   f.environment.games.get("b").agents.push(collateral);
   f.combat.engage(f.source, f.target, 0); f.source.combat.targetId = f.target.id;
+  for (const unit of [f.source, f.target]) Object.assign(unit.combat.position, { x: unit.combat.side ? .4 : -.4, y: 0, fromX: unit.combat.side ? .4 : -.4, fromY: 0 });
   f.combat.update(f.source, 0); f.combat.update(f.source, .3); f.combat.update(f.source, .42);
   const first = f.events.find(event => event.kind === "hit" && event.hitIndex === 0);
   assert.equal(first.critical, true); assert.equal(first.amount, 15); assert.equal(first.at, .3);
@@ -70,6 +72,8 @@ test("server captures actual critical/combo/area/drain/reflect/death recipients 
 test("server bleed catch-up uses each real tick time and regeneration reports only actual recovery", () => {
   const f = fixture(["blade", "bleed", "stun"]);
   Object.assign(f.source.stats.dna, { bleed: 100, stun: 100 });
+  f.combat.engage(f.source, f.target, 0);
+  for (const unit of [f.source, f.target]) Object.assign(unit.combat.position, { x: unit.combat.side ? .4 : -.4, y: 0, fromX: unit.combat.side ? .4 : -.4, fromY: 0 });
   f.combat.update(f.source, 0); f.combat.update(f.source, .3);
   f.source.combat.nextAttackAt = Infinity;
   f.combat.update(f.target, 3.31);
@@ -78,26 +82,13 @@ test("server bleed catch-up uses each real tick time and regeneration reports on
   assert.equal(stun.amount, 0); assert.equal(stun.endsAt, .55);
   const applied = f.events.find(event => event.kind === "bleed-apply");
   assert.ok(f.events.filter(event => event.kind === "bleed").every(event => event.causeId === applied.id));
-  const healing = fixture(["regeneration"]);
-  healing.source.health = 99.8; healing.source.dnaRecoveryAt = 5;
-  healing.combat.update(healing.source, 6);
-  const regenerated = healing.events.find(event => event.kind === "regeneration");
+  const recovery = fixture(["regeneration"]);
+  recovery.source.health = 99.8; recovery.source.dnaRecoveryAt = 5;
+  recovery.combat.update(recovery.source, 6);
+  const regenerated = recovery.events.find(event => event.kind === "regeneration");
   assert.ok(Math.abs(regenerated.amount - .2) < 1e-9); assert.equal(regenerated.at, 6);
-  healing.combat.update(healing.source, 7);
-  assert.equal(healing.events.filter(event => event.kind === "regeneration").length, 1, "full health produces no recovery VFX");
-});
-
-test("retired healer genes emit no allied healing or healing VFX", () => {
-  const f = fixture(["healer", "healer"]);
-  f.source.health = 50; f.ally.health = 99.75;
-  const second = { ...f.ally, id: "ally-2", health: 99.9, stats: { ...f.ally.stats } };
-  f.environment.games.get("a").agents.push(second);
-  f.combat.update(f.source, 0);
-  const heals = f.events.filter(event => event.kind === "heal");
-  assert.deepEqual(heals, []);
-  assert.equal(f.ally.health, 99.75); assert.equal(second.health, 99.9);
-  assert.equal(f.source.stats.dna.healer, false);
-  assert.equal(f.source.health, 50);
+  recovery.combat.update(recovery.source, 7);
+  assert.equal(recovery.events.filter(event => event.kind === "regeneration").length, 1, "full health produces no recovery VFX");
 });
 
 test("server launch/arrival/cancel evidence follows real projectiles and retains zero-damage defense", () => {
@@ -134,7 +125,7 @@ test("room snapshots floor visibility coordinates and state deltas carry the eph
   assert.equal(snapshot.state.combatVfx.events[0].sourceId, null);
   const encoder = createStateEncoder(), decoder = createStateDecoder();
   decoder.decode(encoder.encode(snapshot, true));
-  recordCombatVfx(room, { kind: "heal", at: 1, amount: 1, sourceId: "visible", targetId: "visible", to: { x: 2, y: 3 } });
+  recordCombatVfx(room, { kind: "regeneration", at: 1, amount: 1, sourceId: "visible", targetId: "visible", to: { x: 2, y: 3 } });
   room.revision++;
   const next = snapshotRoom(room, false), decoded = decoder.decode(encoder.encode(next));
   assert.deepEqual(decoded.state.combatVfx, next.state.combatVfx);

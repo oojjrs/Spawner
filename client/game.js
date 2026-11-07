@@ -611,7 +611,7 @@
     beetleRenderingReady.catch(() => {});
     Promise.all([beetleCorpseSprite.decode(), beetleRenderingReady]).then(() => {
       const bounds = tribeArt.bounds(beetleCorpseSprite, false);
-      beetleCorpseScale = Spawner.UNIT_DISPLAY_SIZES["spiny-back-beetle"] * beetleCorpseSprite.naturalWidth /
+      beetleCorpseScale = Spawner.unitDisplaySize({ species: "spiny-back-beetle" }) * beetleCorpseSprite.naturalWidth /
         (unitDisplayScales.get("spiny-back-beetle") * Math.max(bounds.width, bounds.height));
     }).catch(() => {});
     talonOwlSheet.decode().then(() => {
@@ -3591,11 +3591,11 @@
       const audible = [...state.agents, ...state.rivals].filter(agent =>
         audioVolume(agent.x + .5, agent.y + .5) > 0 || agent.moveDuration > 0 && audioVolume(agent.renderFromX + .5, agent.renderFromY + .5) > 0);
       for (const event of globalThis.SpawnerCombatAudio.update(combatAudio,
-        audible.map(displayedAgent), (state.corpses || []).filter(corpse => audioVolume(corpse.x + .5, corpse.y + .5) > 0), time)) {
+        audible.map(displayedAgent), (state.corpses || []).filter(corpse => audioVolume(corpse.x + .5, corpse.y + .5) > 0), time, state.combatVfx)) {
         const unit = event.unit;
         const position = unit.kind === "corpse" ? { x: unit.renderX ?? unit.x, y: unit.renderY ?? unit.y } :
           interpolatedAgentPosition(unit);
-        audio.play(event.name, audioVolume(position.x + .5, position.y + .5));
+        audio.playCombat(event.name, audioVolume(position.x + .5, position.y + .5));
       }
       for (const event of globalThis.SpawnerMovementAudio?.update(movementAudio,
         audible.map(displayedAgent), time, Spawner) || []) {
@@ -4632,16 +4632,6 @@
           ctx.stroke(); ctx.restore();
           }
         }
-        const event = agent.dnaHealEvent;
-        if (event && state.simSeconds >= event.at && state.simSeconds - event.at < .7 && !drawnDnaEvents.has(event.sourceId + ":" + event.targetId + ":" + event.at)) {
-          drawnDnaEvents.add(event.sourceId + ":" + event.targetId + ":" + event.at);
-          const source = [...state.agents, ...state.rivals].find(other => other.id === event.sourceId);
-          if (!source) continue;
-          const start = worldToScreen(source.x + .5, source.y + .5), end = worldToScreen(event.x + .5, event.y + .5), age = (state.simSeconds - event.at) / .7;
-          ctx.save(); ctx.globalAlpha = 1 - age; ctx.strokeStyle = "#87ebc6"; ctx.lineWidth = Math.max(1.5, cell * .035);
-          ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(end.x, end.y); ctx.stroke();
-          ctx.beginPath(); ctx.arc(end.x, end.y, cell * (.15 + age * .2), 0, Math.PI * 2); ctx.stroke(); ctx.restore();
-        }
       }
 
       if (cell < 8) return;
@@ -4744,13 +4734,6 @@
           }
           ctx.stroke(); ctx.restore();
         }
-        if (cue.kind === "heal" && cue.channel === "restore" && cue.from && cue.to) {
-          const start = worldToScreen(cue.from.x + .5, cue.from.y + .5), end = worldToScreen(cue.to.x + .5, cue.to.y + .5);
-          const age = Math.min(1, cue.age / Math.max(.001, cue.endsAt - cue.at));
-          ctx.save(); ctx.globalAlpha = 1 - age; ctx.strokeStyle = "#87ebc6"; ctx.lineWidth = Math.max(1.5, cell * .035);
-          ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(end.x, end.y); ctx.stroke();
-          ctx.beginPath(); ctx.arc(end.x, end.y, cell * (.15 + age * .2), 0, Math.PI * 2); ctx.stroke(); ctx.restore();
-        }
       }
     }
 
@@ -4788,7 +4771,7 @@
 
     function prepareUnitDisplaySize(key, sprite, animation, size) {
       const bounds = tribeArt.bounds(sprite, animation.frameSize);
-      const metrics = Spawner.unitDisplayMetrics(Spawner.UNIT_DISPLAY_SIZES[key], animation, bounds, size);
+      const metrics = Spawner.unitDisplayMetrics(Spawner.unitDisplaySize({ species: key }), animation, bounds, size);
       unitDisplayScales.set(key, metrics.scale);
       unitDisplayBounds.set(key, metrics.bounds);
       if (metrics.groundShape) unitGroundShapes.set(key, metrics.groundShape);
@@ -4797,7 +4780,7 @@
     function prepareCreatureDeathSize(species, entry) {
       const animation = entry.animation;
       const bounds = tribeArt.bounds(entry.sprite, animation.frameSize);
-      entry.scale = Spawner.UNIT_DISPLAY_SIZES[species] * (animation.viewSize || animation.frameSize) /
+      entry.scale = Spawner.unitDisplaySize({ species }) * (animation.viewSize || animation.frameSize) /
         (1.4 * unitDisplayScales.get(species) * Math.max(bounds.width, bounds.height));
     }
 
@@ -4805,7 +4788,7 @@
       const tribe = unit.tribe || "bean";
       const kind = unit.species || tribe;
       const base = unitDisplayScales.get(kind) || 1;
-      const growth = Spawner.unitDisplaySize(unit) / (Spawner.UNIT_DISPLAY_SIZES[kind] || Spawner.UNIT_DISPLAY_SIZES.bean);
+      const growth = Spawner.unitDisplaySize(unit) / Spawner.unitDisplaySize({ species: kind });
       if (unit.species || !unitDisplayBounds.has(tribe)) return base * growth;
       const attributes = Spawner.unitDisplayAttributes(unit);
       if (tribe === "bean" && [...agentBaseParts.values(), ...agentParts.values()].some(part => !part.complete || !part.naturalWidth)) return base * growth;
@@ -4841,14 +4824,14 @@
       const contact = unitGroundContacts[key], bounds = unitDisplayBounds.get(key);
       if (!bounds) return;
       const scale = unitDisplayScale(agent), anchor = unitDisplayFloor(agent);
-      const growth = Spawner.unitDisplaySize(agent) / Spawner.UNIT_DISPLAY_SIZES[key];
+      const growth = Spawner.unitDisplaySize(agent) / Spawner.unitDisplaySize({ species: key });
       const appearance = Spawner.unitDisplayAttributes(agent);
       const spawn = agent.spawn ? Spawner.creatureSpawnPose(agent, state.simSeconds) : null;
       const renderPosition = interpolatedAgentPosition(agent), position = birth || spawn || renderPosition;
       let offsetX = (bounds.x + bounds.width * contact.x) * growth;
       let offsetY = (bounds.y + bounds.height * contact.y) * growth;
       let radiusX = bounds.width * contact.width / 2 * growth;
-      let radiusY = Spawner.UNIT_DISPLAY_SIZES[key] * contact.depth * growth;
+      let radiusY = Spawner.unitDisplaySize(agent) * contact.depth;
       let opacity = contact.opacity;
       const ground = unitGroundShapes.get(key);
       if (ground) { offsetX = 0; offsetY = 0; radiusX = ground.radiusX * growth; radiusY = ground.radiusY * growth; }
@@ -6880,7 +6863,7 @@
       const values = document.createElement("dl");
       values.className = "unit-dna-stats";
       Spawner.renderDnaDesignStats(values, stats, stats, false);
-      for (const key of ["melee", "ranged", "healer", "roaming", "harvestTime"]) {
+      for (const key of ["melee", "ranged", "roaming", "harvestTime"]) {
         for (const row of values.querySelectorAll('[data-stat="' + key + '"]')) row.remove();
       }
       const harvest = values.querySelector('dd[data-stat="harvest"]');
@@ -7639,8 +7622,9 @@
       }
       let hurt = Spawner.creatureHurtPose(agent, state.simSeconds);
       let attack = Spawner.creatureAttackPose(agent, state.simSeconds);
-      let pose = hurt || attack;
-      let entry = hurt ? creatureHurtSheets.get(agent.species) : attack ? (attack.action === "ranged" ? creatureRangedSheets : creatureAttackSheets).get(agent.species) : agent.species === "talon-owl" ? { sprite: talonOwlSheet, animation: Spawner.TALON_OWL_IDLE } : creatureIdleSheets.get(agent.species);
+      const walk = Spawner.creatureWalkPose(agent, state.simSeconds);
+      let pose = hurt || attack || walk;
+      let entry = hurt ? creatureHurtSheets.get(agent.species) : attack ? (attack.action === "ranged" ? creatureRangedSheets : creatureAttackSheets).get(agent.species) : walk ? creatureWalkSheets.get(agent.species) : agent.species === "talon-owl" ? { sprite: talonOwlSheet, animation: Spawner.TALON_OWL_IDLE } : creatureIdleSheets.get(agent.species);
       if (pose && (!entry?.sprite.complete || !entry.sprite.naturalWidth)) {
         hurt = null; attack = null; pose = null;
         entry = agent.species === "talon-owl" ? { sprite: talonOwlSheet, animation: Spawner.TALON_OWL_IDLE } : creatureIdleSheets.get(agent.species);
@@ -7654,7 +7638,7 @@
       animation = Spawner.imageFrameGeometry(animation, frame);
       const size = height * (agent.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) * (attack && !hurt ? animation.frameSize / animation.viewSize : 1) * (animation.registrationScale || 1);
       context.save(); context.translate(x, floor);
-      if (attack && !hurt ? attack.mirrorX : agent.facing > 0) context.scale(-1, 1);
+      if (attack && !hurt ? attack.mirrorX : Spawner.unitFrameMirror(animation.sourceFacing || animation.facing || "left", agent.facing)) context.scale(-1, 1);
       context.drawImage(entry.sprite, frame % animation.columns * animation.frameSize, Math.floor(frame / animation.columns) * animation.frameSize,
         animation.frameSize, animation.frameSize, -size * animation.pivotX / animation.frameSize, -size * animation.pivotY / animation.frameSize, size, size);
       context.restore(); return true;
@@ -7768,10 +7752,10 @@
         const impact = combatVisualEvent(agent), age = impact ? state.simSeconds - impact.at : Infinity;
         const hit = impact && String(impact.targetId) === String(agent.id) && ["hit", "stun"].includes(impact.kind);
         const opponent = positions.get(String(attack?.targetId ?? agent.combat.targetId));
-        const facing = agent.combat.side === 0 ? 1 : -1;
+        const facing = agent.combat.position ? agent.facing || (agent.combat.side === 0 ? 1 : -1) : agent.combat.side === 0 ? 1 : -1;
         const progress = attack ? clamp((state.simSeconds - attack.startedAt) / (attack.endsAt - attack.startedAt), 0, 1) : 0;
         const distance = opponent ? Math.hypot(opponent.x - point.x, opponent.y - point.y) : 0;
-        const lunge = attack && !Spawner.CREATURE_ATTACK_ANIMATIONS[agent.species]?.fixedSupport && state.simSeconds < attack.endsAt ? Math.sin(progress * Math.PI) * Math.min(30 * width / 1200, distance * .28) : 0;
+        const lunge = !agent.combat.position && attack && !Spawner.CREATURE_ATTACK_ANIMATIONS[agent.species]?.fixedSupport && state.simSeconds < attack.endsAt ? Math.sin(progress * Math.PI) * Math.min(30 * width / 1200, distance * .28) : 0;
         const recoil = hit && age >= 0 && age < .16 ? Math.sin(age / .16 * Math.PI) * 7 * width / 1200 : 0;
         const directionX = distance ? (opponent.x - point.x) / distance : facing;
         const directionY = distance ? (opponent.y - point.y) / distance : 0;
@@ -7831,7 +7815,7 @@
         if (Spawner.detailDefenseImageReady(image, command)) replacedDefenseIds.add(command.eventId);
       }
       const drawnImpacts = new Set();
-      for (const command of detailCombatVfx.commands(arenaUnits, vfxPositions, state.simSeconds, cell, { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds })) {
+      for (const command of detailCombatVfx.commands(arenaUnits, vfxPositions, state.simSeconds, cell, { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds, project: formation.project })) {
         // Replace only the defended event, and only after its new image is ready.
         if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         let image = detailVfxImages.get(command.image);
@@ -7857,7 +7841,7 @@
           // Reuse the existing short fallback, never infer an absent recipient.
           if (age >= 0 && age < .25 && !fallbackImpacts.some(entry => entry.impact.eventId === command.eventId)) {
             const target = arenaUnits.find(agent => String(agent.id) === String(command.targetId));
-            fallbackImpacts.push({ impact: { kind: "hit", eventId: command.eventId }, age,
+            fallbackImpacts.push({ impact: { kind: "hit", eventId: command.eventId, critical: command.critical }, age,
               primary: target ? Spawner.combatPrimary(target) : "blade", x: command.contactX ?? command.x, bodyY: command.contactY ?? command.y, lineWidth: 1 });
           }
         }
@@ -7869,9 +7853,9 @@
         if (defenseCommands.some(command => command.eventId === impact.eventId) ||
           !defense && state.combatVfx?.version === 1 && drawnImpacts.has(impact.eventId)) continue;
         context.save(); context.globalAlpha = 1 - age / .25;
-        context.strokeStyle = defense ? "#a6e4fa" : "#ffe1a0";
+        context.strokeStyle = impact.critical ? "#ffda8a" : defense ? "#a6e4fa" : "#ffe1a0";
         context.lineWidth = lineWidth; context.beginPath();
-        const reach = 10 + age * 18;
+        const reach = (10 + age * 18) * (impact.critical ? 1.3 : 1);
         context.moveTo(x - reach, bodyY + reach); context.lineTo(x + reach, bodyY - reach);
         context.moveTo(x - reach * .5, bodyY - reach * .75); context.lineTo(x + reach * .5, bodyY + reach * .75);
         context.stroke(); context.restore();
@@ -7890,16 +7874,15 @@
         vitals: vitalCommands, reservedLabels: dodgeLabels });
       for (const label of dodgeLabels) {
         if (label.labelHidden) continue;
-        // Keep independently triggered healing/bleed amounts readable as well.
         // Reserve a lane above their existing labels, or below the health bar
         // when the upper edge leaves no room. Never move the HP feedback.
         const healthLabels = vitalCommands.filter(command => command.kind !== "regeneration" && !command.labelHidden && String(command.targetId) === String(label.targetId));
         const top = Math.min(label.y, ...healthLabels.map(command => (command.labelTop ?? Math.max(20, Math.min(height - 20,
-          command.y - command.bodyHeight * .5 - 20 - (idleMotion.matches ? 0 : Math.min(1, command.age / .85) * 45) - command.lane * 24))) - 32));
+          command.y - command.bodyHeight * .5 - 14 - (idleMotion.matches ? 0 : Math.min(1, command.age / .85) * 14) - command.lane * 18))) - 32));
         const labelY = label.placed ? label.y : top < 20 ? Math.min(height - 20, label.floor + 36) : top;
         context.save(); context.globalAlpha = 1 - (label.age / .4) ** 2;
         context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
-        context.font = '700 ' + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
+        context.font = '700 ' + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
         context.lineWidth = 4; context.strokeStyle = "#203125"; context.fillStyle = "#d3f1ff";
         context.strokeText("회피", label.x, labelY); context.fillText("회피", label.x, labelY); context.restore();
       }

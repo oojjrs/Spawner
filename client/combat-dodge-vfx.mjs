@@ -58,10 +58,10 @@ export function drawCombatDodgeLabel(ctx, p, point, { width, height, vitals = []
   const labels = vitals.filter(c => c.kind !== "regeneration" && String(c.targetId) === String(p.targetId));
   const top = Math.min(point.y - point.height - 20, ...labels.map(c =>
     Math.max(20, Math.min(height - 20, c.y - c.bodyHeight * .5 - 20 -
-      (p.reducedMotion ? 0 : Math.min(1, c.age / .85) * 45) - c.lane * 24)) - 32));
+      (p.reducedMotion ? 0 : Math.min(1, c.age / .85) * 14) - c.lane * 18)) - 32));
   const y = top < 20 ? Math.min(height - 20, point.y + 36) : top;
   ctx.save(); ctx.globalAlpha = p.alpha; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.lineJoin = "round";
-  ctx.font = '700 ' + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
+  ctx.font = '700 ' + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
   ctx.lineWidth = 4; ctx.strokeStyle = "#203125"; ctx.fillStyle = "#d3f1ff";
   ctx.strokeText("회피", point.x, y); ctx.fillText("회피", point.x, y); ctx.restore();
 }

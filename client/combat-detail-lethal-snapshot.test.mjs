@@ -1,3 +1,4 @@
+import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -10,7 +11,7 @@ import { createDetailCombatVfx, DETAIL_COMBAT_VFX, DETAIL_COMBAT_VFX_ASSETS, dra
 
 const source = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
 const helper = readFileSync(new URL('./combat-detail-dodge.test.mjs', import.meta.url), 'utf8').split('const event = ')[0];
-const box = { assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
+const box = { combatViewLayout, unitDisplaySize, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
   DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect };
 createContext(box); runInContext(helper.slice(helper.indexOf('function extract(')), box);
 const fixture = readFileSync(new URL('./combat-detail-damage-labels.test.mjs', import.meta.url), 'utf8');
@@ -99,7 +100,7 @@ test('authoritative living-after-death, unseen or omitted targets and restore-to
     const scene = controller(), snapshotTime = reason === 'livingAfterDeath' ? 1.01 : .95;
     scene.draw(1.1, [], reason === 'unobserved' ? survivors : units, reason === 'unobserved' ? remaining : points, { ...viewport, snapshotTime });
     if (reason === 'clearedView') scene.detail.clearView();
-    const hit = event(reason === 'restore' ? 'heal' : 'hit', reason === 'redacted' ? { targetId: null } : {});
+    const hit = event(reason === 'restore' ? 'regeneration' : 'hit', reason === 'redacted' ? { targetId: null } : {});
     const events = reason === 'noDeath' ? [hit] : [hit, reason === 'redacted' ? { ...death, targetId: null } : death];
     const row = scene.draw(reason === 'backseek' ? 1.05 : 1.12, events, survivors, remaining,
       { ...viewport, scope: reason === 'changedView' ? 'other' : 'fight', snapshotTime: 1.05 }, reason === 'newStream' ? 'other' : 'stream');
@@ -137,8 +138,8 @@ test('consumers without a snapshot clock keep the conservative former paint-time
 });
 
 test('explicit target revocation removes cached damage and restoration tails without replay on reveal', () => {
-  for (const kind of ['hit', 'critical', 'bleed', 'heal', 'drain', 'regeneration']) for (const initiallyHidden of [false, true]) {
-    const scene = controller(), restore = ['heal', 'drain', 'regeneration'].includes(kind);
+  for (const kind of ['hit', 'critical', 'bleed', 'drain', 'regeneration']) for (const initiallyHidden of [false, true]) {
+    const scene = controller(), restore = ['drain', 'regeneration'].includes(kind);
     scene.draw(1.1, [], units, points, { ...viewport, snapshotTime: .95 });
     const hit = event(kind), packet = restore ? [hit] : [hit, death];
     const hidden = packet.map(cue => ({ ...cue, targetId: null }));

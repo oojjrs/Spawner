@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createCombatStage } from "./combat-stage.mjs";
+import { combatViewLayout } from "./unit-size.mjs";
 import { createSimulationTrial } from "./combat-simulation.mjs";
 
 function withStage(run, { reduced = false, width = 1040, height = 480, unavailable = false } = {}) {
@@ -29,12 +30,11 @@ function withStage(run, { reduced = false, width = 1040, height = 480, unavailab
   try { run({ stage, draw, calls }); }
   finally { globalThis.window = saved.window; globalThis.Image = saved.Image; globalThis.SpawnerAssets = saved.assets; }
 }
-function fixture({ support = false } = {}) {
+function fixture() {
   const agents = [0, 1].map(side => ({ id: side ? "right" : "left", tribe: "bean", health: 50,
     mode: "fight", facing: side ? -1 : 1, attributes: {}, animationStartedAt: 0,
     combat: { side, stunnedUntil: 0 }, stats: { health: 100, melee: true } }));
-  const supportAgents = support ? [{ ...agents[0], id: "left-support", combat: { ...agents[0].combat } }] : [];
-  return { agents, supportAgents, history: [], projectiles: [], time: 0, result: () => null,
+  return { agents, history: [], projectiles: [], time: 0, result: () => null,
     vfx: { version: 1, streamId: "trial", events: [] } };
 }
 const event = (kind, extra = {}) => ({ id: kind, kind, at: 1, amount: 2, sourceId: "left", targetId: "right", ...extra });
@@ -44,17 +44,16 @@ function arrive(trial, events, history = true) {
     damage: entry.kind === "bleed" ? entry.amount : -entry.amount, attackerId: entry.sourceId, targetId: entry.targetId });
 }
 
-test("stage shows actual journal-only drain and support healing once with existing visuals", () => {
+test("stage shows actual journal-only drain to distinct recipients once with existing visuals", () => {
   for (const reduced of [false, true]) for (const unavailable of [false, true]) withStage(({ draw, calls }) => {
-    const trial = fixture({ support: true }); draw(trial);
-    const heals = [event("heal", { targetId: "left-support" }), event("drain", { targetId: "left", toId: "left", fromId: "right" })];
-    arrive(trial, heals, false);
-    // Healing also exists in history; drain deliberately does not.
-    trial.history.push({ index: 0, kind: "heal", time: 1, damage: -2, attackerId: "left", targetId: "left-support" });
+    const trial = fixture(); draw(trial);
+    const restores = [event("drain", { id: "right-drain", targetId: "right" }), event("drain", { targetId: "left", toId: "left", fromId: "right" })];
+    arrive(trial, restores, false);
+    trial.history.push({ index: 0, kind: "drain", time: 1, damage: -2, attackerId: "left", targetId: "right" });
     const labels = draw(trial);
     assert.equal(labels.length, 2); assert.ok(labels.every(label => label.args[0] === "+2.0"));
-    labels.map(label => label.args[1]).sort((a, b) => a - b).forEach((x, index) =>
-      assert.ok(Math.abs(x - [1040 * .27, 1040 * .4][index]) < 1e-8));
+    assert.equal(new Set(labels.map(label => label.args[1])).size, 2);
+    assert.ok(labels.every(label => label.args[1] > 0 && label.args[1] < 1040));
     assert.equal(calls.filter(call => call.kind === "arc" && call.color === "#c1ffc4").length, 2);
     assert.equal(draw(trial).length, 2, "journal and history replay does not duplicate either restore");
   }, { reduced, unavailable });
@@ -69,8 +68,8 @@ test("stage bleed has one damage label and no impact, collision recoil, or camer
     assert.equal(calls.filter(call => call.kind === "line").length, 0);
     draw(trial, true);
     const translations = calls.filter(call => call.kind === "translate").map(call => call.args);
-    assert.ok(translations.some(([x]) => x === 1040 * .4));
-    assert.ok(translations.some(([x]) => x === 1040 * .6));
+    const formation = combatViewLayout(1040, 480, trial.agents);
+    for (const point of formation.positions.values()) assert.ok(translations.some(([x, y]) => x === point.x && y === point.y));
     assert.ok(!translations.some(([x, y]) => y === 0 && x !== 0), "bleed does not shake the scene");
   });
 });
@@ -91,27 +90,27 @@ test("standalone drain tails expire while paused and do not replay after reset o
   });
 });
 
-test("canonical false heals, missing recipients and dead recipients have no recovery cue; legacy heal is preserved", () => {
-  for (const kind of ["heal", "drain", "regeneration", "bleed"]) for (const amount of [0, -1]) withStage(({ draw }) => {
+test("canonical false recovery amounts, missing recipients and dead recipients have no recovery cue; unsupported legacy events are ignored", () => {
+  for (const kind of ["drain", "regeneration", "bleed"]) for (const amount of [0, -1]) withStage(({ draw }) => {
     const trial = fixture(); draw(trial); arrive(trial, [event(kind, { amount })]);
     assert.equal(draw(trial).length, 0, kind + amount);
   });
   for (const targetId of ["hidden", "right"]) withStage(({ draw }) => {
-    const trial = fixture(); draw(trial); arrive(trial, [event("heal", { targetId })]);
+    const trial = fixture(); draw(trial); arrive(trial, [event("regeneration", { targetId })]);
     if (targetId === "right") trial.agents[1].health = 0;
     assert.equal(draw(trial).length, 0);
   });
   withStage(({ draw, calls }) => {
-    const trial = fixture({ support: true }); trial.vfx = undefined; draw(trial);
-    trial.time = 1.05; trial.history.push({ index: 0, kind: "heal", time: 1, damage: -2, attackerId: "left", targetId: "left-support" });
-    assert.equal(draw(trial).length, 1);
-    assert.equal(calls.filter(call => call.kind === "arc" && call.color === "#c1ffc4").length, 1);
+    const trial = fixture(); trial.vfx = undefined; draw(trial);
+    trial.time = 1.05; trial.history.push({ index: 0, kind: "regeneration", time: 1, damage: -2, attackerId: "left", targetId: "right" });
+    assert.equal(draw(trial).length, 0);
+    assert.equal(calls.filter(call => call.kind === "arc" && call.color === "#c1ffc4").length, 0);
   });
 });
 
 test("small-screen recovery labels stay inside the canvas and reduced motion keeps fixed ring size", () => {
   withStage(({ draw, calls }) => {
-    const trial = fixture({ support: true }); draw(trial); arrive(trial, [event("heal", { targetId: "left-support", amount: .02 })]);
+    const trial = fixture(); draw(trial); arrive(trial, [event("drain", { targetId: "right", amount: .02 })]);
     const label = draw(trial)[0]; assert.equal(label.args[0], "+0.02"); assert.ok(label.args[2] >= 20 && label.args[2] <= 340);
     const radius = calls.find(call => call.kind === "arc" && call.color === "#c1ffc4").args[2];
     draw(trial);
@@ -119,23 +118,24 @@ test("small-screen recovery labels stay inside the canvas and reduced motion kee
   }, { reduced: true, width: 360, height: 360 });
 });
 
-test("real laboratory drain and ally-heal evidence render without changing deterministic simulation", () => {
+test("real laboratory drain evidence render without changing deterministic simulation", () => {
   withStage(({ draw }) => {
-    const settings = { left: { key: "bean", organs: { attack: 1, heal: 1 }, counts: { drain: 5, vitality: 5 } },
+    const settings = { left: { key: "bean", organs: { attack: 1 }, counts: { drain: 5, vitality: 5 } },
       right: { key: "pebble", organs: { attack: 1 }, counts: { vitality: 5 } }, distance: 1, random: false,
-      support: true, rules: { maxSeconds: 6 } };
+      rules: { maxSeconds: 6 } };
     const trial = createSimulationTrial(settings), control = createSimulationTrial(settings);
     trial.agents[0].health = control.agents[0].health = 45;
+    for (const current of [trial, control]) for (const unit of current.agents) Object.assign(unit.combat.position, { x: unit.combat.side ? .4 : -.4, y: 0, fromX: unit.combat.side ? .4 : -.4, fromY: 0 });
     draw(trial);
     const observed = new Set();
     for (let index = 0; index < 30 && !trial.result()?.reason; index++) {
       trial.advance(.1); control.advance(.1);
       const labels = draw(trial, true);
-      for (const event of trial.vfx.events) if (["drain", "heal"].includes(event.kind) && trial.time - event.at < .35 &&
+      for (const event of trial.vfx.events) if (["drain", "regeneration"].includes(event.kind) && trial.time - event.at < .35 &&
         labels.some(label => label.args[0] === "+" + event.amount.toFixed(1))) observed.add(event.kind);
       assert.deepEqual(trial.history, control.history); assert.deepEqual(trial.agents, control.agents);
-      assert.deepEqual(trial.supportAgents, control.supportAgents); assert.deepEqual(trial.result(), control.result());
+      assert.deepEqual(trial.result(), control.result());
     }
-    assert.deepEqual([...observed].sort(), ["drain", "heal"]);
+    assert.deepEqual([...observed].sort(), ["drain"]);
   });
 });

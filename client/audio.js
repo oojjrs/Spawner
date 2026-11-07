@@ -37,7 +37,7 @@
     let entryResume = entryAudio?.resumed || null;
     let worldGain = null;
     let welcomeGain = null;
-    let worldVolume = 1;
+    let worldVolume = 1, combatGeneration = 0;
     let loading = null;
     let muted = entryAudio?.muted || false;
     let active = true;
@@ -111,6 +111,7 @@
     }
 
     function stopWorld() {
+      combatGeneration++;
       stopGroup("world");
       harvests.clear();
     }
@@ -306,6 +307,21 @@
       playGroup(name, volume, "world");
     }
 
+    function playCombat(name, volume) {
+      if (!available() || volume <= 0 || !Object.hasOwn(sources, name)) return;
+      const at = context.currentTime, generation = combatGeneration;
+      prepareSound(name).then(() => {
+        if (!available() || generation !== combatGeneration || worldVolume <= 0 || context.currentTime - at > .2) return;
+        const source = context.createBufferSource(), gain = context.createGain();
+        source.buffer = buffers.get(name);
+        gain.gain.value = .7 * (levels[name] ?? 1) * Math.min(1, volume);
+        source.connect(gain); gain.connect(worldGain);
+        const voice = { source, gain, group: "world", name }; voices.add(voice);
+        source.onended = () => { voices.delete(voice); source.disconnect(); gain.disconnect(); };
+        source.start();
+      }).catch(() => {});
+    }
+
     function playWelcome(name, volume) {
       playGroup(name, volume, "welcome");
     }
@@ -390,6 +406,6 @@
     music.update(null);
     updateButton();
     unlock();
-    return { available, prepare, play, playWelcome, stopWelcome, playClick, setHarvest, setActive, setWorldVolume, stop, updateMusic: music.update, musicWaveform: music.waveform };
+    return { available, prepare, play, playCombat, playWelcome, stopWelcome, playClick, setHarvest, setActive, setWorldVolume, stop, updateMusic: music.update, musicWaveform: music.waveform };
   } });
 })();

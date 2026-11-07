@@ -1,7 +1,6 @@
 const root = "DesignAssets/Animations/CombatEffectsV2/";
 
 export const COMBAT_EFFECT_ANIMATIONS = Object.freeze({
-  heal: Object.freeze({ image: root + "healing.webp", frameWidth: 96, frameHeight: 96, columns: 10, frameCount: 60, frameMs: 1000 / 30, durationMs: 2000, loop: false, stillFrame: 24 }),
   bleed: Object.freeze({ image: root + "bleed.webp", frameWidth: 64, frameHeight: 64, columns: 4, frameCount: 16, frameMs: 1000 / 12, durationMs: 4000 / 3, loop: false, stillFrame: 6 }),
   drain: Object.freeze({ image: root + "drain.webp", frameWidth: 64, frameHeight: 64, columns: 4, frameCount: 16, frameMs: 1000 / 12, durationMs: 4000 / 3, loop: false, stillFrame: 6 }),
   stun: Object.freeze({ image: root + "stun.webp", frameWidth: 128, frameHeight: 80, columns: 9, frameCount: 72, frameMs: 1000 / 30, durationMs: 2400, loop: true, stillFrame: 0 })

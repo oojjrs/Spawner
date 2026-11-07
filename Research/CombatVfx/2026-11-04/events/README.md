@@ -1,6 +1,6 @@
 # Combat VFX event contract audit
 
-The server previously published the last combat reaction, last ranged impact and last heal through shared agent fields. A later same-tick stun/counter could overwrite a hit; a multi-recipient heal could overwrite the caster's earlier recipients. Critical and followup information, actual drain/reflection/area damage, bleed ticks, recovery, and unit deaths were not fully observable. The new journal records the actual decisions and HP changes without changing those decisions.
+The server previously published the last combat reaction, last ranged impact through shared agent fields. A later same-tick stun/counter could overwrite a hit. Critical and followup information, actual drain/reflection/area damage, bleed ticks, recovery, and unit deaths were not fully observable. The new journal records the actual decisions and HP changes without changing those decisions.
 
 The new semantic mapper and timing cursor are ready. The general-hit illustration is still `draft-pending-user-review`; this work does not approve it or generate a batch of other effects. The review scene reuses existing `UnitRangedV1` bodies and projectile pixels.
 
@@ -42,7 +42,6 @@ Snapshot metadata is `{version:1, streamId, latestSequence, oldestSequence, drop
 | Area damage | `area` / `impact` | One event per actual collateral recipient, linked to the main hit. |
 | Lifesteal | `drain` / `restore`, `phase:arrival` | `targetId/toId` is the healed attacker; `fromId` is the damaged victim. The cue starts when HP has already been restored, never after an invented travel delay. |
 | Reflection | `reflect` / `impact`, `phase:arrival` | `sourceId/fromId` is the reflecting defender; `targetId/toId` is the original attacker receiving real reflected damage. No second attack is invented. |
-| Healing | `heal` / `restore` | Every actual allocation keeps a distinct ID and beneficiary. Shared caster/recipient pointers cannot collapse multiple recipients. |
 | Regeneration | `regeneration` / `restore` | Actual recovered HP at the update that applies it, with the interval's `startedAt`; full health produces no event. |
 | Unit death | `death` / `death` | Actual positive-to-zero HP transition caused by recorded combat damage, linked to that exact damage event. |
 | Shot launch | `shoot` / `launch` | Shooter at the scheduled launch, never attack preparation or arrival. |
@@ -63,8 +62,7 @@ For an explicit review seek/replay, `combatVfxAt(events, time)` returns the real
 
 ## Existing engines and deliberate coverage limits
 
-- `server/combat.mjs`: instruments the existing unit-vs-unit RPG/DNA melee and ranged engines. Original legacy `lastEvent`, `dnaActionEvent`, `dnaHealEvent`, projectile visuals, attack states, HP formulas, XP, timing and random calls remain intact.
-- `server/dna-actions.mjs`: existing `dnaHealAllocations` already apportions scarce healing across recipients and applies recipient recovery. It required no rule change. The caller now records every allocation.
+- `server/combat.mjs`: instruments the existing unit-vs-unit RPG/DNA melee and ranged engines. Original legacy `lastEvent`, `dnaActionEvent`, projectile visuals, attack states, HP formulas, XP, timing and random calls remain intact.
 - `server/combat-stats.mjs`: existing mode selection, armor, injury, counters and power formulas required no change.
 - `client/combat-simulation.mjs`: exposes `trial.vfx` and records the existing actions separately from `history`. Lifesteal evidence uses the actual capped simultaneous recovery and links each share to its hit. Original result/history remain exact.
 - The experiment's simulation does **not calculate bleed, area, reflection or out-of-combat regeneration**. It does not emit fictional versions of those incidents. Those cases are audited against the actual server instead.
@@ -75,8 +73,8 @@ For an explicit review seek/replay, `combatVfxAt(events, time)` returns the real
 
 ## Validation and review
 
-- New semantic/timing tests: **8 passed** (`client/combat-vfx-events.test.mjs`): variants without duplicate damage, defense/stun semantics, drain/reflection direction, future render times, snapshot duplicates, lateness, reconnect/backseek, launch/flight/cancel, multiple same-time heal recipients, bounded/truncated history, actual simulation flight and capped drain.
-- New real-server journal tests: **6 passed** (`server/combat-vfx-journal.test.mjs`): immutability, observer isolation, save exclusion, bounds, visibility/delta transport, actual critical/followup/area/drain/reflect/death links, bleed catch-up times, capped regeneration, every heal recipient, real launch/arrival and zero-damage defense.
+- New semantic/timing tests: **8 passed** (`client/combat-vfx-events.test.mjs`): variants without duplicate damage, defense/stun semantics, drain/reflection direction, future render times, snapshot duplicates, lateness, reconnect/backseek, launch/flight/cancel, bounded/truncated history, actual simulation flight and capped drain.
+- New real-server journal tests: **6 passed** (`server/combat-vfx-journal.test.mjs`): immutability, observer isolation, save exclusion, bounds, visibility/delta transport, actual critical/followup/area/drain/reflect/death links, bleed catch-up times, capped regeneration, real launch/arrival and zero-damage defense.
 - New review tests: **3 passed** (`client/vfx-event-preview.test.mjs`): existing source registration/projectile pixels, actual 300ms launch and 633ms arrival, recovery ending while the projectile is still in flight, no premature HP loss, generated browser bundle matching the module.
 - Existing `combat-rpg`, `dna-actions`, `combat-simulation`, `combat-analysis`, `state-delta` and general-hit review tests pass. All nine related test files pass together.
 - [head-comparison.json](head-comparison.json): **38 baseline-vs-candidate comparisons passed**, including 28 real-server scenarios, eight experiment simulations, two legacy trials. Compared exact results, full agent state/HP checkpoints, damage/history rows and RNG sample counts. Real incidents covered every requested unit-combat category. The simulation's pure keyed sampler was counted in temporary instrumented copies; production sources and random outputs were unchanged.

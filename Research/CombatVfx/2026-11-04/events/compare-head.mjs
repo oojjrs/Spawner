@@ -39,7 +39,7 @@ function serverScenario(engine, scenario, seed, observe) {
     moveStartedAt: 0, moveDuration: 0, attributes: {}, combatDisposition: "aggressive",
     stats: { health: 100, speed: 1, vision: 4, dna: dna(genes) } });
   const source = unit("source", "a", scenario.regen ? ["regeneration"] :
-    ["blade", "secretion", "combo", "critical", "stun", "bleed", "area", "lifesteal", "healer", "healer"], 100);
+    ["blade", "secretion", "combo", "critical", "stun", "bleed", "area", "lifesteal"], 100);
   const target = unit("target", "b", ["blade", "reflection"], scenario.regen ? 110 : scenario.ranged ? 102 : 100);
   const ally = unit("ally", "a", [], 100), collateral = unit("collateral", "b", [], target.x);
   ally.health = 99.75; collateral.health = scenario.lethal ? .1 : 60;
@@ -70,9 +70,9 @@ function serverScenario(engine, scenario, seed, observe) {
 function simulationScenario(engine, seed, ranged) {
   globalThis[Symbol.for(drawKey)] = 0;
   const trial = engine.createSimulationTrial({ seed, random: true, support: true, distance: ranged ? 2 : 1,
-    left: { key: "bean", organs: { attack: ranged ? 0 : 1, ranged: ranged ? 1 : 0, heal: 2 },
+    left: { key: "bean", organs: { attack: ranged ? 0 : 1, ranged: ranged ? 1 : 0 },
       counts: { crit: 3, multiHit: 2, stun: 2, drain: 3, vitality: 5 } },
-    right: { key: "spore", organs: { heal: 1 }, counts: { parry: 3, block: 3, counter: 3, evasion: 2, vitality: 5 } },
+    right: { key: "spore", organs: {}, counts: { parry: 3, block: 3, counter: 3, evasion: 2, vitality: 5 } },
     rules: { maxSeconds: 8 } });
   const checkpoints = [];
   for (const duration of [.31, .4, 1, 1]) {
@@ -109,7 +109,7 @@ try {
     comparisons.push({ engine: "legacy-lab", seed, sha256: hash(before), historyRows: before.history.length });
   }
   for (const kind of ["hit", "critical", "followup", "miss", "parry", "block", "counter", "stun", "bleed-apply", "bleed",
-    "area", "drain", "reflect", "heal", "regeneration", "death", "shoot"])
+    "area", "drain", "reflect", "regeneration", "death", "shoot"])
     assert.ok(observed.has(kind), "Missing real-server coverage: " + kind);
   const report = { baseline: "HEAD core source in isolated copy", compared: comparisons.length,
     equality: "exact result + HP/state checkpoints + damage/history rows + random sample counts",

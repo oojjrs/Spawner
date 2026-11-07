@@ -17,18 +17,18 @@ import { imageAnimation, imageFrameGeometry } from "./image-geometry.mjs";
 import { unitDisplaySize, combatViewLayout, unitFrameMirror } from "./unit-size.mjs";
 import { unitRangedAppearance, unitRangedPose, unitRangedDisplaySize, unitRangedProjectile, unitRangedLifecycleAnimation } from "./unit-ranged.mjs";
 import { UNIT_IMAGE_BOUNDS } from "./unit-image-bounds.mjs";
-import { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, unitAnimationPose, unitAnimationFrame, creatureHurtPose, creatureAttackPose } from "./unit-animation.mjs";
+import { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_WALK_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, unitAnimationPose, unitAnimationFrame, creatureHurtPose, creatureAttackPose, creatureWalkPose } from "./unit-animation.mjs";
 import { TALON_OWL_IDLE, talonOwlIdleFrame } from "./talon-owl-idle.mjs";
 import { BEETLE_SPRITE, BEETLE_ATTACK_SPRITE, BEETLE_ANIMATIONS, BEETLE_NEUTRAL_ASSET, beetleAnimationFrame, beetleAnimationPose } from "../server/beetle-animation.mjs";
 
 const colors = ["#c4e19c", "#efba90"];
-const reactionLabels = { dodge: "회피", parry: "패링", block: "방어", stun: "기절", counter: "반격", heal: "치유", shoot: "사격" };
+const reactionLabels = { dodge: "회피", parry: "패링", block: "방어", stun: "기절", counter: "반격", shoot: "사격" };
 const beetleCorpse = imageAnimation({ image: "DesignAssets/Animations/BeetleDeath/dead-v2.png", frameSize: 185, columns: 1, pivotX: 95.5, pivotY: 163 });
 
 function stageAgent(agent) {
   const side = agent.combat?.side ?? agent.side;
   if (side === 0 || side === 1) {
-    const facing = side === 0 ? 1 : -1;
+    const facing = agent.combat?.position ? agent.facing || (side === 0 ? 1 : -1) : side === 0 ? 1 : -1;
     agent = { ...agent, facing, attack: agent.attack ? { ...agent.attack, directionX: facing } : agent.attack };
   }
   if (agent.labAppearance) agent = { ...agent, tribe: UNIT_ANIMATIONS[agent.key] ? agent.key : undefined,
@@ -99,7 +99,7 @@ function poseFor(agent, time, deathAge) {
     // made fast attacks land during windup and slow attacks finish before contact.
     return { ...beetle, animation: beetle.action === "attack" ? BEETLE_ATTACK_SPRITE : BEETLE_SPRITE };
   }
-  const pose = creatureHurtPose(agent, time) || creatureAttackPose(agent, time) || unitAnimationPose(agent, time);
+  const pose = creatureHurtPose(agent, time) || creatureAttackPose(agent, time) || creatureWalkPose(agent, time) || unitAnimationPose(agent, time);
   if (pose) return pose;
   const idle = UNIT_ANIMATIONS[agent.tribe]?.idle || CREATURE_IDLE_ANIMATIONS[agent.species];
   if (idle) return { action: "idle", animation: idle, frame: unitAnimationFrame(idle, time * 1000) };
@@ -140,13 +140,13 @@ export function createCombatStage(canvas) {
     context.drawImage(ground, (width - drawnWidth) / 2, (height - drawnHeight) / 2, drawnWidth, drawnHeight);
   }
   function position(agent, index, width, height, time) {
-    const direction = index === 0 ? 1 : -1;
+    const direction = agent.combat?.position ? agent.facing || (index === 0 ? 1 : -1) : index === 0 ? 1 : -1;
     const attack = agent.attack;
     // Registered support-locked attacks already move the body around a planted
     // foot. A second arena lunge would drag that contact across the ground.
     const fixedSupport = CREATURE_ATTACK_ANIMATIONS[stageAgent(agent).species]?.fixedSupport;
     let lunge = 0;
-    if (attack && attack.mode !== "ranged" && attack.attackMode !== "ranged" && !attack.dnaRanged && !fixedSupport && !reducedMotion.matches) {
+    if (!agent.combat?.position && attack && attack.mode !== "ranged" && attack.attackMode !== "ranged" && !attack.dnaRanged && !fixedSupport && !reducedMotion.matches) {
       if (attack.meleeContacts?.length > 1) {
         const elapsed = attackAnimationElapsed(attack, time, .3, 1);
         const windup = clamp(elapsed / .3), recovery = clamp((elapsed - .3) / .7);
@@ -177,7 +177,7 @@ export function createCombatStage(canvas) {
     const animations = UNIT_ANIMATIONS[agent.tribe];
     for (const animation of [animations?.idle, animations?.attack, animations?.hurt, animations?.death,
       agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : null, agent.species === "spiny-back-beetle" ? beetleCorpse : null,
-      CREATURE_IDLE_ANIMATIONS[agent.species], CREATURE_RANGED_ANIMATIONS[agent.species], CREATURE_ATTACK_ANIMATIONS[agent.species], CREATURE_HURT_ANIMATIONS[agent.species], CREATURE_DEATH_ANIMATIONS[agent.species]]) if (animation) image(animation.image);
+      CREATURE_IDLE_ANIMATIONS[agent.species], CREATURE_WALK_ANIMATIONS[agent.species], CREATURE_RANGED_ANIMATIONS[agent.species], CREATURE_ATTACK_ANIMATIONS[agent.species], CREATURE_HURT_ANIMATIONS[agent.species], CREATURE_DEATH_ANIMATIONS[agent.species]]) if (animation) image(animation.image);
     let pose = requested?.idleFallback && reducedMotion.matches ? { ...requested, frame: 0 } : requested;
     let source = pose?.animation.image || COMBAT_LAB_UNITS.find(unit => unit.key === agent.key)?.image || BEETLE_NEUTRAL_ASSET;
     let asset = image(source);
@@ -241,14 +241,14 @@ export function createCombatStage(canvas) {
     const heldSource = beanHeldHurtSource(agent), heldCell = 100 * formationScale(width, height);
     const composed = heldSource?.worldScale === "composed", antenna = heldSource?.image.endsWith("antenna.webp");
     const heldK = heldCell * unitDisplaySize(agent) / 247;
-    const heldDrawn = drawBeanHeldHurt(context, agent, time, image, { cell: heldCell, mirror: index === 1,
+    const heldDrawn = drawBeanHeldHurt(context, agent, time, image, { cell: heldCell, mirror: agent.facing < 0,
       ...(composed ? { sourceScaleX: heldK * 194 / 239, sourceScaleY: heldK * 154 / (antenna ? 214 : 203),
         nativePivotX: 256.1159793814433, nativePivotY: antenna ? 486.3336156597027 : 481.6334255599474 } : {}) }) ||
-      drawSpeciesHeldHurt(context, agent, time, image, { cell: heldCell, mirror: index === 1 });
+      drawSpeciesHeldHurt(context, agent, time, image, { cell: heldCell, mirror: agent.facing < 0 });
     const appearanceDrawn = heldDrawn || appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
-      100 * formationScale(width, height), index === 1, window.devicePixelRatio || 1);
+      100 * formationScale(width, height), agent.facing < 0, window.devicePixelRatio || 1);
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
-      { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), index === 1);
+      { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), agent.facing < 0);
     if (!appearanceDrawn && !representativeDrawn && !asset) drawUnitLoading(context, 0, -size * .4, Math.max(5, size * .07), clock);
     if (!appearanceDrawn && !representativeDrawn && asset) {
       const mirror = pose?.mirrorX ?? unitFrameMirror(geometry?.sourceFacing || geometry?.facing || (agent.species ? "left" : "right"), agent.facing);
@@ -284,92 +284,45 @@ export function createCombatStage(canvas) {
   function effectArt(effect, points, width, height, impactCovered = false) {
     const event = effect.event, age = clock - effect.born, progress = clamp(age / .85);
     const id = ["counter", "shoot"].includes(event.kind) ? event.attackerId : event.targetId;
-    const support = currentTrial.supportAgents?.find(agent => agent.id === event.targetId);
-    const point = support ? supportPoint(support, points, width, height) : points[id], x = point.x, y = point.y - height * (support ? .1 : .25);
+    const point = points[id], x = point.x, y = point.y - point.height * .5;
     context.save(); context.globalAlpha = 1 - progress ** 2;
-    if (event.kind === "heal") {
-      context.strokeStyle = "#c1ffc4"; context.lineWidth = 3;
-      context.beginPath(); context.arc(x, y, 15 + progress * 30, 0, Math.PI * 2); context.stroke();
-      context.beginPath(); context.moveTo(x - 8, y); context.lineTo(x + 8, y); context.moveTo(x, y - 8); context.lineTo(x, y + 8); context.stroke();
-    }
     if (age < .28 && !reducedMotion.matches && (event.damage > 0 && !impactCovered || ["parry", "block"].includes(event.kind))) {
-      const strength = clamp(age / .28), color = event.kind === "parry" ? "#b9e8f0" : event.kind === "block" ? "#c2dce8" : event.critical ? "#ffe1a0" : "#f7e9b4";
+      const strength = clamp(age / .28), color = event.kind === "parry" ? "#b9e8f0" : event.kind === "block" ? "#c2dce8" : event.critical ? "#ffda8a" : "#f7e9b4";
       context.strokeStyle = color; context.lineWidth = (1 - strength) * 3 + 1;
       for (let i = 0; i < 7; i++) {
         const angle = i * Math.PI * 2 / 7 + event.index * .7;
-        const radius = (8 + strength * 45) * width / 1040;
+        const radius = (8 + strength * 45) * width / 1040 * (event.critical ? 1.3 : 1);
         context.beginPath(); context.moveTo(x + Math.cos(angle) * radius * .45, y + Math.sin(angle) * radius * .45);
         context.lineTo(x + Math.cos(angle) * radius, y + Math.sin(angle) * radius); context.stroke();
       }
       if (event.damage > 0 && !impactCovered) {
         context.lineWidth = event.critical ? 5 : 3;
-        context.beginPath(); context.moveTo(x - 20, y + 20); context.lineTo(x + 20, y - 20); context.stroke();
+        const reach = event.critical ? 26 : 20;
+        context.beginPath(); context.moveTo(x - reach, y + reach); context.lineTo(x + reach, y - reach); context.stroke();
       }
     }
     if (["parry", "block"].includes(event.kind) && age < .45) {
       context.strokeStyle = event.kind === "parry" ? "#c3f1ff" : "#c5dfef"; context.lineWidth = 3;
       context.beginPath(); context.ellipse(x - point.direction * width * .035, y, width * .025, height * .11, 0, -.5 * Math.PI, .5 * Math.PI); context.stroke();
     }
-    const lift = reducedMotion.matches ? 0 : progress * 45;
-    const lane = effect.lane * 24;
-    const labelY = Math.max(20, Math.min(height - 20, y - height * .28 - lift - lane));
+    const lift = reducedMotion.matches ? 0 : progress * 14;
+    const lane = effect.lane * 18;
+    const labelY = Math.max(20, Math.min(height - 20, point.y - point.height - 14 - lift - lane));
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
-    context.font = (event.critical ? "800 " : "700 ") + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
+    context.font = (event.critical ? "800 " : "700 ") + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
     context.lineWidth = 4; context.strokeStyle = "#203125";
-    let label = event.kind === "heal" ? "+" + (-event.damage).toFixed(1) : event.damage > 0 ? "−" + event.damage.toFixed(1) : reactionLabels[event.kind];
-    if (event.kind === "stun" || event.kind === "counter") context.font = '700 16px "Malgun Gothic", sans-serif';
+    let label = event.damage > 0 ? "−" + event.damage.toFixed(1) : reactionLabels[event.kind];
+    if (event.kind === "stun" || event.kind === "counter") context.font = '700 12px "Malgun Gothic", sans-serif';
     if (label) {
       context.fillStyle = event.critical ? "#ffda8a" : ["parry", "block", "dodge"].includes(event.kind) ? "#d3f1ff" : event.kind === "counter" ? "#ffe0ae" : "#fff9df";
       context.strokeText(label, x, labelY); context.fillText(label, x, labelY);
     }
     if (event.critical && event.damage > 0) {
-      context.font = '800 13px "Malgun Gothic", sans-serif'; context.fillStyle = "#ffda8a";
-      context.fillText("치명", x, Math.max(12, labelY - 27));
+      context.font = '800 10px "Malgun Gothic", sans-serif'; context.fillStyle = "#ffda8a";
+      context.strokeText("치명", x, Math.max(12, labelY - 15));
+      context.fillText("치명", x, Math.max(12, labelY - 15));
     }
     context.restore();
-  }
-
-  function supportPoint(agent, points, width, height) {
-    return { ...viewLayout.positions.get(String(agent.id)), direction: (agent.combat?.side ?? agent.side) === 0 ? 1 : -1 };
-  }
-
-  function supportArt(agent, points, width, height, time) {
-    agent = stageAgent(agent);
-    if (agent.health <= 0 && !deathStarted.has(agent.id)) deathStarted.set(agent.id, clock);
-    const deathAge = agent.health > 0 ? 0 : clock - deathStarted.get(agent.id);
-    const point = supportPoint(agent, points, width, height), requested = poseFor(agent, time, deathAge);
-    const { pose, source, asset } = readyPose(agent, requested, time);
-    const geometry = pose && imageFrameGeometry(pose.animation, pose.frame);
-    const size = displaySize(agent, pose) * formationScale(width, height), shadowScale = size / Math.min(width * .34, height * .72, 290);
-    context.save(); context.translate(point.x, point.y);
-    drawUnitHealthRing(context, agent.health, agent.stats?.health, 0, 0,
-      Math.max(7, bodyDimensions(agent).width * 100 * formationScale(width, height) * .55), colors[(agent.combat?.side ?? agent.side)]);
-    const appearancePose = appearancePoses.get(String(agent.id));
-    const appearanceDrawn = appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
-      100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1, window.devicePixelRatio || 1);
-    const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
-      { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1);
-    if (!appearanceDrawn && !representativeDrawn && !asset) drawUnitLoading(context, 0, -size * .4, Math.max(5, size * .07), clock);
-    if (!appearanceDrawn && !representativeDrawn && asset) {
-      const mirror = pose?.mirrorX ?? unitFrameMirror(geometry?.sourceFacing || geometry?.facing || (agent.species ? "left" : "right"), agent.facing);
-      context.save(); context.scale(mirror ? -1 : 1, 1);
-      if (pose) { const { frameSize, columns, pivotX, pivotY, viewSize, registrationScale } = geometry;
-        const scale = size * (registrationScale || 1) / (viewSize || frameSize);
-        context.drawImage(asset, pose.frame % columns * frameSize, Math.floor(pose.frame / columns) * frameSize,
-          frameSize, frameSize, -pivotX * scale, -pivotY * scale, frameSize * scale, frameSize * scale);
-      } else {
-        const scale = Math.min(size / asset.naturalWidth, size / asset.naturalHeight);
-        context.drawImage(asset, -asset.naturalWidth * scale / 2, -asset.naturalHeight * .875 * scale,
-          asset.naturalWidth * scale, asset.naturalHeight * scale);
-      }
-      context.restore();
-    }
-    context.fillStyle = "#eef6dc"; context.font = '700 12px "Malgun Gothic", sans-serif'; context.textAlign = "center"; context.fillText("아군", 0, 29);
-    context.fillStyle = "#203125"; context.fillRect(-30, 7, 60, 5);
-    context.fillStyle = "#b8ef98"; context.fillRect(-30, 7, 60 * agent.health / agent.stats.health, 5);
-    context.restore();
-    const dimensions = bodyDimensions(agent), cell = 100 * formationScale(width, height);
-    return { ...point, width: dimensions.width * cell, height: dimensions.height * cell };
   }
 
   function projectileArt(projectile, points, time, height, flight) {
@@ -424,7 +377,7 @@ export function createCombatStage(canvas) {
     if (canvas.width !== Math.round(width * ratio) || canvas.height !== Math.round(height * ratio)) { canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio); }
     context.setTransform(ratio, 0, 0, ratio, 0, 0); background(width, height);
     if (!trial) return;
-    cameraUnits = [...trial.agents, ...(trial.supportAgents || [])].map(stageAgent);
+    cameraUnits = trial.agents.map(stageAgent);
     viewLayout = combatViewLayout(width, height, cameraUnits);
     const vfx = trial.vfx, liveFlightKeys = new Set();
     let liveFlights = [];
@@ -447,7 +400,7 @@ export function createCombatStage(canvas) {
     if (vfx?.version !== 1) dodgeCues = [];
     const ended = !!trial.result()?.reason;
     const time = trial.time || clock;
-    appearancePoses = appearanceWorld.prepare(context, [...trial.agents, ...(trial.supportAgents || [])].map(entry => {
+    appearancePoses = appearanceWorld.prepare(context, trial.agents.map(entry => {
       const agent = stageAgent(entry), deathAt = deathStarted.get(agent.id);
       return agent.health <= 0 ? { ...agent, deathStartedAt: time - (clock - (deathAt ?? clock)) } : agent;
     }), time, 100 * formationScale(width, height), ratio, { attackClock: "lab" });
@@ -462,13 +415,12 @@ export function createCombatStage(canvas) {
       return [String(agent.id), { ...point, width: bounds.width * cell, height: bounds.height * cell }];
     }));
     const points = Object.fromEntries(trial.agents.map(agent => [agent.id, fighter(agent, (agent.combat?.side ?? agent.side), width, height, time, ended)]));
-    for (const agent of trial.supportAgents || []) points[agent.id] = supportArt(agent, points, width, height, time);
     const defenseCommands = vfx?.version === 1 ? detailVfx.defenseCommands(new Map(Object.entries(points)), clock) : [];
     const replacedDefenseIds = new Set(defenseCommands.filter(command => detailDefenseImageReady(image(command.image), command)).map(command => command.eventId));
     const drawnFlights = new Set(), drawnImpacts = new Set(), flightCommands = new Map();
     if (vfx?.version === 1 && !reducedMotion.matches) {
       const commands = detailVfx.commands(trial.agents.map(stageAgent), new Map(Object.entries(points)), clock,
-        100 * formationScale(width, height), { scope: trial, width, height });
+        100 * formationScale(width, height), { scope: trial, width, height, project: viewLayout.project });
       for (const command of commands) {
         if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         const key = command.kind === "flight" && flightKey(command.sourceId, command.targetId, command.launchedAt, command.arrivesAt);
@@ -497,7 +449,7 @@ export function createCombatStage(canvas) {
     }
     for (const effect of effects) if (clock - effect.born < .85) {
       const event = effect.event;
-      if (vfx?.version === 1 && ["heal", "drain", "regeneration", "bleed", "block", "parry", "dodge", "miss", "evasion"].includes(event.kind)) continue;
+      if (vfx?.version === 1 && ["drain", "regeneration", "bleed", "block", "parry", "dodge", "miss", "evasion"].includes(event.kind)) continue;
       const covered = ["hit", "critical", "block", "area", "reflect"].includes(event.kind) &&
         drawnImpacts.has(impactKey(event.attackerId, event.targetId, event.time, event.damage));
       effectArt(effect, points, width, height, covered);
@@ -505,8 +457,7 @@ export function createCombatStage(canvas) {
     for (const command of defenseCommands) if (!drawDetailDefenseEffect(context, command, image(command.image), { reducedMotion: reducedMotion.matches }))
       drawDetailDefenseFallback(context, command);
     // Use actual HP changes, including drain (which has no history entry).
-    // Support recipients use the same displayed position as their own sprite.
-    const vitalCommands = detailVfx.vitalCommands([...trial.agents, ...(trial.supportAgents || [])].map(stageAgent),
+    const vitalCommands = detailVfx.vitalCommands(trial.agents.map(stageAgent),
       new Map(Object.entries(points)), clock, { scope: trial, width, height });
     for (const command of vitalCommands) drawDetailVitalEffect(context, command, { width, height, reducedMotion: reducedMotion.matches, image });
     drawDetailDefenseLabels(context, defenseCommands, { width, height, reducedMotion: reducedMotion.matches, vitals: vitalCommands });

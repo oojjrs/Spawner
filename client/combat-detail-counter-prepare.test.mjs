@@ -1,3 +1,4 @@
+import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -9,7 +10,7 @@ import { snapshotCombatVfx } from '../server/combat-vfx-journal.mjs';
 
 const source = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
 const helper = readFileSync(new URL('./combat-detail-dodge.test.mjs', import.meta.url), 'utf8').split('const event = ')[0];
-const box = { assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
+const box = { combatViewLayout, unitDisplaySize, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
   DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect };
 createContext(box); runInContext(helper.slice(helper.indexOf('function extract(')), box);
 function modal(options = {}) {

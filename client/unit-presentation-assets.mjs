@@ -110,7 +110,7 @@ export function createUnitPresentationAssets(options) {
   }
   function prepareDisplaySize(key, sprite, animation, size) {
     const bounds = tribeArt.bounds(sprite, animation.frameSize);
-    const metrics = unitDisplayMetrics(model.UNIT_DISPLAY_SIZES[key], animation, bounds, size);
+    const metrics = unitDisplayMetrics(model.unitDisplaySize({ species: key }), animation, bounds, size);
     displayScales.set(key, metrics.scale);
     displayBounds.set(key, metrics.bounds);
     if (metrics.groundShape) groundShapes.set(key, metrics.groundShape);
@@ -133,7 +133,7 @@ export function createUnitPresentationAssets(options) {
   function displayScale(unit) {
     const tribe = unit.tribe || "bean", kind = unit.species || tribe;
     const base = displayScales.get(kind) || 1;
-    const growth = model.unitDisplaySize(unit) / (model.UNIT_DISPLAY_SIZES[kind] || model.UNIT_DISPLAY_SIZES.bean);
+    const growth = model.unitDisplaySize(unit) / model.unitDisplaySize({ species: kind });
     if (unit.species) return base * growth;
     const attributes = model.unitDisplayAttributes(unit);
     const equipped = model.ATTRIBUTES.filter(attribute => attributes[attribute.key] > 0);

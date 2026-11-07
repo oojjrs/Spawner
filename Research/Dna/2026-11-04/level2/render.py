@@ -11,8 +11,8 @@ data=json.loads((root/'comparison.json').read_text())
 font=FontProperties(fname='/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc')
 plt.rcParams.update({'font.family':font.get_name(),'axes.unicode_minus':False,'svg.fonttype':'path'})
 background='#12261e';foreground='#edf1df';muted='#a6b9a8'
-colors={'power':'#8dccf0','speed':'#ebbc7d','capacity':'#b8a0d9','antenna':'#8ed7bd','healer':'#eca1b9','carapace':'#c4d48a'}
-order=['power','speed','capacity','antenna','healer','carapace']
+colors={'power':'#8dccf0','speed':'#ebbc7d','capacity':'#b8a0d9','antenna':'#8ed7bd','carapace':'#c4d48a'}
+order=['power','speed','capacity','antenna','carapace']
 gene_info={v['gene']:v for v in data['currentGenes']}
 directions=[(1,0),(0,1),(-1,1),(-1,0),(0,-1),(1,-1)]
 def xy(p):return (p['q']+p['r']/2,p['r']*math.sqrt(3)/2)

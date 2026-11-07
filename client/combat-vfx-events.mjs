@@ -2,7 +2,7 @@
 export const COMBAT_VFX_ART_STATUS = "draft-pending-user-review";
 const lifetime = { attack: .25, counter: .25, hit: .4, critical: .5, followup: .4,
   dodge: .4, parry: .45, block: .45, stun: .7, "bleed-apply": .5,
-  bleed: .4, area: .5, drain: .55, reflect: .45, heal: .55, regeneration: .55, death: .8, shoot: .18 };
+  bleed: .4, area: .5, drain: .55, reflect: .45, regeneration: .55, death: .8, shoot: .18 };
 
 export function normalizeCombatVfxEvent(input, scope = "legacy") {
   const at = input?.at ?? input?.time;
@@ -44,7 +44,7 @@ export function combatVfxCues(input, scope) {
       if (event.amount > 0) add(event.kind, "impact", event.toId ?? event.targetId, event.amount,
         { phase: "arrival" });
       break;
-    case "heal": case "drain": case "regeneration":
+    case "drain": case "regeneration":
       if (event.amount > 0) add(event.kind, "restore", event.toId ?? event.targetId, event.amount,
         { phase: "arrival" });
       break;

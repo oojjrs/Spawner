@@ -18,26 +18,30 @@ export const UNIT_COMBAT_STATS = Object.freeze(Object.fromEntries([
   ["spore", 18],
   ["pebble", 22],
   ["spring", 19],
-  ["flower-tail-bird", 8],
-  ["dew-rabbit", 10],
-  ["soil-mole", 14],
-  ["bundle-snail", 16],
-  ["cotton-sheep", 12],
-  ["rolling-acorn", 16],
-  ["bubble-toad", 28],
-  ["snare-vine", 34],
-  ["spiny-back-beetle", 32],
-  ["soil-boar", 36],
-  ["vine-turtle", 28],
-  ["shadow-weasel", 40],
-  ["talon-owl", 44],
-  ["spring-keeper", 36],
-  ["lantern-keeper", 38],
-  ["old-garden-snail", 42],
-  ["walking-forest", 48],
-  ["white-paw", 64],
-  ["spiny-back-leader", 54]
-].map(([key, combatStrength]) => [key, Object.freeze({ health: UNIT_MAX_HEALTH, combatStrength })])));
+  ["flower-tail-bird", 8, 18, 3, 4, 40, 10],
+  ["dew-rabbit", 10, 22, 3, 4, 40, 8],
+  ["soil-mole", 14, 10, 6, 10, 45, 12],
+  ["bundle-snail", 16, 3, 2, 24, 60, 5],
+  ["cotton-sheep", 12, 7, 3, 14, 50, 5],
+  ["rolling-acorn", 16, 12, 4, 18, 55, 8],
+  ["bubble-toad", 28, 10, 5, 12, 50, 10],
+  ["snare-vine", 34, 3, 12, 14, 50, 8],
+  ["spiny-back-beetle", 32, 6, 6, 22, 60, 8],
+  ["soil-boar", 36, 5, 6, 18, 55, 12],
+  ["vine-turtle", 28, 2, 4, 28, 65, 5],
+  ["shadow-weasel", 40, 22, 12, 5, 40, 20],
+  ["talon-owl", 44, 18, 14, 6, 45, 18],
+  ["spring-keeper", 36, 18, 18, 10, 50, 15],
+  ["lantern-keeper", 38, 16, 10, 14, 50, 15],
+  ["old-garden-snail", 42, 2, 3, 30, 65, 5],
+  ["walking-forest", 48, 2, 6, 28, 65, 8],
+  ["white-paw", 64, 20, 16, 12, 50, 20],
+  ["spiny-back-leader", 54, 10, 10, 28, 65, 12]
+].map(([key, combatStrength, evasion, parry, block, blockReduction, criticalChance]) => [key, Object.freeze({
+  health: UNIT_MAX_HEALTH, combatStrength, evasion: (evasion || 0) / 100, parry: (parry || 0) / 100,
+  block: (block || 0) / 100, blockReduction: (blockReduction || 0) / 100,
+  criticalChance: (criticalChance || 0) / 100, criticalMultiplier: 1.5
+})])));
 
 export function unitCombatStats(key) {
   return UNIT_COMBAT_STATS[key] || UNIT_COMBAT_STATS.bean;
@@ -64,15 +68,18 @@ export function combatPrimary(agent) {
 }
 
 export function combatProfile(agent) {
-  const dna = agent.stats?.dna;
+  const dna = agent.stats?.dna, base = unitCombatStats(agent.species || agent.tribe);
+  const chance = dna ? dna.critical / 100 : Number.isFinite(agent.stats?.criticalChance) ? agent.stats.criticalChance : base.criticalChance;
+  const multiplier = dna ? dna.criticalPower / 100 : Number.isFinite(agent.stats?.criticalMultiplier) ? agent.stats.criticalMultiplier : base.criticalMultiplier;
+  const criticalChance = dna ? (Number.isFinite(chance) ? chance : 0) : Math.max(0, Math.min(.75, chance));
+  const criticalMultiplier = dna ? (Number.isFinite(multiplier) ? multiplier : 1.5) : Math.max(1, Math.min(4, multiplier));
   if (dna) {
     const selected = dnaAttackStats(dna, agent.attack?.attackMode || (dna.melee ? "melee" : "ranged"));
     const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;
     return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: dna.armor,
       armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: dna.focus,
-      recovery: dna.recovery || 0 };
+      recovery: dna.recovery || 0, criticalChance, criticalMultiplier };
   }
-  const base = unitCombatStats(agent.species || agent.tribe);
   const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;
   const primary = combatPrimary(agent);
   const defaultInterval = primary === "blade" ? .95 : primary === "piercing" ? 1.65 : primary === "carapace" ? 1.4 : 1.25;
@@ -86,7 +93,9 @@ export function combatProfile(agent) {
   const reduction = equipped("carapace") ? .45 : Math.max(0, Math.min(.8, agent.stats?.damageReduction || 0));
   const defense = Number.isFinite(agent.stats?.defense) ? agent.stats.defense : 8 + strength * .4 + 100 * reduction / (1 - reduction);
   const armorPenetration = equipped("piercing") ? .5 : Math.max(0, Math.min(1, agent.stats?.armorPenetration || 0));
-  return { primary, attackPower: Math.max(1, attackPower), defense: Math.max(0, defense), armorPenetration,
+  const protection = Object.fromEntries(["evasion", "parry", "block", "blockReduction"].map(key => [key,
+    Math.max(0, Math.min(1, Number.isFinite(agent.stats?.[key]) ? agent.stats[key] : agent.species ? base[key] : 0))]));
+  return { primary, attackPower: Math.max(1, attackPower), defense: Math.max(0, defense), armorPenetration, ...protection, criticalChance, criticalMultiplier,
     attackSpeed, attackInterval, windup: (primary === "piercing" ? .65 : primary === "blade" ? .24 : .4),
     recovery: (primary === "blade" ? .3 : .45) };
 }
@@ -112,6 +121,8 @@ export function migrateCombatStats(agent) {
   if (agent.dna || agent.stats?.dna) return;
   const profile = unitCombatStats(agent.species || agent.tribe);
   const combatStrength = profile.combatStrength + (agent.species ? 0 : attributeCombatStrengthBonus(agent.attributes));
+  if (agent.species) for (const key of ["evasion", "parry", "block", "blockReduction", "criticalChance", "criticalMultiplier"])
+    if (!Number.isFinite(agent.stats[key])) agent.stats[key] = profile[key];
   if (agent.stats.combatStrength === combatStrength && agent.stats.health === UNIT_MAX_HEALTH) return;
   const health = UNIT_MAX_HEALTH;
   const ratio = Math.max(0, Math.min(1, agent.health / agent.stats.health));

@@ -42,9 +42,8 @@ function dnaCombatStats(counts, weights, inputRules) {
   const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
   const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : 0;
   const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
-  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0, healerCount: 0,
-    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed, healer: false,
-    healPower: 0,
+  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0,
+    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed,
     ...(rules.recovery ? { recovery: rules.recovery } : {}),
     health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
     power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,
@@ -62,7 +61,7 @@ function dnaCombatStats(counts, weights, inputRules) {
     counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,
     counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,
     tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),
-    healing: 10 * (n.healing || 0), stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
+    stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
     stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,
     bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,
     area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,
@@ -226,7 +225,6 @@ const ATTRIBUTE_DNA = (() => {
 
 return { ATTRIBUTE_DNA };
 })();
-
 modules["client/dna-editor.mjs"] = (() => {
 function dnaDesignStats(M,pieces) {
   const stats=M.stats(pieces),base={...M.stats([])},organPieces=pieces.filter(piece=>M.lookup.get(piece.gene)?.category==='organ'),organStats=M.stats(organPieces);
@@ -448,7 +446,6 @@ function createDnaEditor(container,dnaModel,onChange) {
 
 return { dnaDesignStats, renderDnaDesignStats, dnaEditorViewport, renderDnaComposition, createDnaEditor };
 })();
-
 modules["client/dna-starter-designs.mjs"] = (() => {
 const DNA_STARTER_DESIGNS = [
   {

@@ -1,3 +1,4 @@
+import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -10,7 +11,7 @@ const source=readFileSync(new URL('./game.js',import.meta.url),'utf8');
 const modalHelper=readFileSync(new URL('./combat-detail-dodge.test.mjs',import.meta.url),'utf8').split('const event = ')[0];
 const stageHelper=readFileSync(new URL('./combat-stage-vfx.test.mjs',import.meta.url),'utf8');
 function detail(){
- const box={assert,source,createContext,runInContext,createCombatVfxCursor,createDetailCombatVfx,DETAIL_COMBAT_VFX,DETAIL_COMBAT_VFX_ASSETS,drawDetailVfxCell,drawDetailVitalEffect};
+ const box={ combatViewLayout, unitDisplaySize,assert,source,createContext,runInContext,createCombatVfxCursor,createDetailCombatVfx,DETAIL_COMBAT_VFX,DETAIL_COMBAT_VFX_ASSETS,drawDetailVfxCell,drawDetailVitalEffect};
  createContext(box);runInContext(modalHelper.slice(modalHelper.indexOf('function extract(')),box);
  const view=box.modal();Object.assign(view.sandbox.Spawner,{combatDodgePose,drawCombatDodgeTrails,drawCombatDodgeGhosts,drawCombatDodgeLabel});return view;
 }

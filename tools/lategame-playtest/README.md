@@ -22,8 +22,6 @@ raids and combat. Tick size0.25seconds. Every five minutes produces a compressed
 full-world checkpoint. These large checkpoints stay outside the repository.
 
 Fields: food is cumulative delivered food, points current spendable DNA budget.
-Nonmilitary deaths include medic deaths. `damageSources` includes positive heal
-events: same-tribe entries must not be described as hostile damage.
 
 A40-minute cutoff alone does not validate battles against newly dispatched
 40-minute full-strength cohorts. State that limit unless an extended run is

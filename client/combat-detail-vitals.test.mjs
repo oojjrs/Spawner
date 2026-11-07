@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
+import { combatViewLayout } from "./unit-size.mjs";
 import { createCombatVfxCursor } from "./combat-vfx-events.mjs";
 import { createDetailCombatVfx, drawDetailVitalEffect, DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell } from "./combat-detail-vfx.mjs";
 import { createCombat } from "../server/combat.mjs";
@@ -36,7 +37,7 @@ function canvas() {
 }
 
 test("actual HP changes route to the recipient, not the damage source or original target", () => {
-  for (const kind of ["heal", "drain", "regeneration", "bleed"]) {
+  for (const kind of ["drain", "regeneration", "bleed"]) {
     const { draw, detail } = scene();
     const commands = draw(1.05, [event(kind, { toId: "ally", mode: "ranged", projectileId: "parent-shot" })]);
     assert.equal(commands.length, 1, kind);
@@ -47,23 +48,23 @@ test("actual HP changes route to the recipient, not the damage source or origina
 });
 
 test("zero, negative, cancelled, status-only, future, replayed and reconnect events do not invent HP feedback", () => {
-  for (const kind of ["heal", "drain", "regeneration", "bleed"]) for (const amount of [0, -1])
+  for (const kind of ["drain", "regeneration", "bleed"]) for (const amount of [0, -1])
     assert.equal(scene().draw(1.05, [event(kind, { amount })]).length, 0, kind + amount);
   for (const kind of ["bleed-apply", "stun", "projectile-cancel", "dodge", "parry"])
     assert.equal(scene().draw(1.05, [event(kind)]).length, 0, kind);
-  const { draw } = scene(), healing = event("heal");
-  assert.equal(draw(.9, [healing]).length, 0);
-  assert.equal(draw(1.05, [healing, healing]).length, 1);
-  assert.equal(draw(1.2, [healing]).length, 1);
-  assert.equal(draw(1.86, [healing]).length, 0);
-  assert.equal(draw(2, [healing]).length, 0);
-  assert.equal(draw(1.1, [healing]).length, 0, "backseek never replays an old heal");
-  assert.equal(draw(1.2, [healing], agents, points, view, "reconnect").length, 0);
+  const { draw } = scene(), recovery = event("regeneration");
+  assert.equal(draw(.9, [recovery]).length, 0);
+  assert.equal(draw(1.05, [recovery, recovery]).length, 1);
+  assert.equal(draw(1.2, [recovery]).length, 1);
+  assert.equal(draw(1.86, [recovery]).length, 0);
+  assert.equal(draw(2, [recovery]).length, 0);
+  assert.equal(draw(1.1, [recovery]).length, 0, "backseek never replays an old recovery");
+  assert.equal(draw(1.2, [recovery], agents, points, view, "reconnect").length, 0);
 });
 
 test("different simultaneous recipients remain separate and same-recipient labels have stable lanes", () => {
   const { draw } = scene();
-  const events = [event("heal"), event("heal", { id: "heal-2", targetId: "ally", amount: .25 }),
+  const events = [event("regeneration"), event("regeneration", { id: "recovery-2", targetId: "ally", amount: .25 }),
     event("drain", { targetId: "source", amount: .5 }), event("bleed", { amount: 1 })];
   const commands = draw(1.05, events);
   assert.equal(commands.length, 4);
@@ -72,7 +73,7 @@ test("different simultaneous recipients remain separate and same-recipient label
 });
 
 test("bleed can finish at observed death positions but restoration never appears on corpses or omitted units", () => {
-  const events = [event("bleed"), event("heal"), event("death", { amount: 0 })], { draw, detail } = scene();
+  const events = [event("bleed"), event("regeneration"), event("death", { amount: 0 })], { draw, detail } = scene();
   draw(.9, []);
   const survivors = agents.filter(agent => agent.id !== "target"), remaining = new Map([...points].filter(([id]) => id !== "target"));
   assert.equal(draw(1.05, events.slice(0, 2), survivors, remaining).length, 0, "living omitted recipient has no inferred anchor");
@@ -81,12 +82,12 @@ test("bleed can finish at observed death positions but restoration never appears
   const resized = draw(1.1, events, survivors, remaining, { ...view, width: 300, height: 175 });
   assert.equal(resized[0].x, lethal[0].x / 2); assert.equal(resized[0].y, lethal[0].y / 2);
   detail.clearView(); assert.equal(draw(1.15, events, survivors, remaining).length, 0);
-  assert.equal(scene().draw(1.05, [event("heal")], agents.map(a => ({ ...a, health: a.id === "target" ? 0 : 50 }))).length, 0);
+  assert.equal(scene().draw(1.05, [event("regeneration")], agents.map(a => ({ ...a, health: a.id === "target" ? 0 : 50 }))).length, 0);
   assert.equal(scene().draw(1.05, [event("bleed"), event("death", { amount: 0 })], [], new Map()).length, 0,
     "never-observed death has no invented position");
 });
 
-test("tick regeneration coalesces to one ring while discrete heals retain real fractional values", () => {
+test("tick regeneration coalesces to one ring while discrete drains retain real fractional values", () => {
   const { draw } = scene();
   const events = Array.from({ length: 6 }, (_, i) => event("regeneration", { id: "regen-" + i, at: 1 + i * .02, amount: .001 }));
   const commands = draw(1.1, events);
@@ -96,12 +97,12 @@ test("tick regeneration coalesces to one ring while discrete heals retain real f
   assert.equal(calls.filter(call => call.kind === "arc").length, 1);
   assert.equal(calls.filter(call => call.kind === "label").length, 0, "no stream of misleading rounded zero values");
   calls.length = 0;
-  drawDetailVitalEffect(context, { ...commands[0], kind: "heal", amount: .001 }, view);
+  drawDetailVitalEffect(context, { ...commands[0], kind: "drain", amount: .001 }, view);
   assert.equal(calls.find(call => call.kind === "label").args[0], "+0.001");
 });
 
-test("existing healing visuals and signed damage labels remain legible without false collision or motion", () => {
-  for (const width of [360, 1040]) for (const reducedMotion of [false, true]) for (const kind of ["heal", "drain", "bleed"]) {
+test("existing recovery visuals and signed damage labels remain legible without false collision or motion", () => {
+  for (const width of [360, 1040]) for (const reducedMotion of [false, true]) for (const kind of ["drain", "bleed"]) {
     const { draw } = scene(), [command] = draw(1.05, [event(kind)]), { context, calls } = canvas();
     drawDetailVitalEffect(context, command, { width, height: 480, reducedMotion });
     assert.equal(calls.filter(call => call.kind === "arc").length, kind === "bleed" ? 0 : 1);
@@ -118,8 +119,9 @@ function modal(reduced = false) {
     stats: { health: 100, melee: true }, combat: { id: "fight", side, stunnedUntil: 0 }, attributes: {} }));
   const sandbox = { state: { agents: units, rivals: [], simSeconds: 0, combatVfx: { version: 1 } },
     connection: { get simSeconds() { return sandbox.state.simSeconds; } },
-    Spawner: { combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade", CREATURE_ATTACK_ANIMATIONS: {},
+    Spawner: { combatViewLayout, drawUnitHealthRing() {}, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade", CREATURE_ATTACK_ANIMATIONS: {},
       drawDetailVfxCell, drawDetailVitalEffect }, detailCombatVfx: detail,
+    detailVfxImage: () => null,
     detailVfxImages: new Map(DETAIL_COMBAT_VFX_ASSETS.map(path => [path, { complete: true, naturalWidth: 1776 }])),
     selectedCombatUnits: () => units, combatOpen: {}, evolutionPanel: { hidden: true }, welcome: { hidden: true },
     combatPanel: { open: true }, combatWatch: { id: "fight" }, combatSelected: "source", combatSummary: {},
@@ -144,10 +146,10 @@ function modal(reduced = false) {
 
 test("the real detail modal renders incoming bleed and recovery once without adding hit recoil", () => {
   const { draw, calls, sandbox } = modal();
-  const events = [event("heal"), event("drain", { targetId: "source", fromId: "target", toId: "source" }), event("bleed")];
+  const events = [event("drain", { id: "target-drain" }), event("drain", { targetId: "source", fromId: "target", toId: "source" }), event("bleed")];
   const labels = draw(1.05, events);
   assert.equal(labels.length, 3); assert.equal(labels.filter(label => label.args[0] === "+2.0").length, 2);
-  assert.equal(labels.find(label => label.args[0] === "−2.0").args[1], 1040 * .61);
+  assert.ok(labels.find(label => label.args[0] === "−2.0").args[1] > 1040 / 2);
   assert.equal(calls.filter(call => call.kind === "image").length, 0);
   assert.equal(sandbox.combatVisualEvent(sandbox.state.agents[1]), null, "bleed is not a new collision pose");
   assert.equal(draw(1.15, [...events, ...events]).length, 3);
@@ -155,11 +157,11 @@ test("the real detail modal renders incoming bleed and recovery once without add
 });
 
 test("the real detail modal respects reduced motion for recovery rings and HP labels", () => {
-  const { draw, calls } = modal(true), events = [event("heal")];
+  const { draw, calls } = modal(true), events = [event("drain")];
   const first = draw(1.05, events)[0], initialArcs = calls.filter(call => call.kind === "arc").map(call => call.args);
   const later = draw(1.25, events)[0], laterArcs = calls.filter(call => call.kind === "arc").map(call => call.args);
   assert.deepEqual(later.args, first.args, "HP labels stay in place");
-  assert.deepEqual(laterArcs, initialArcs, "healing ring does not expand");
+  assert.deepEqual(laterArcs, initialArcs, "recovery ring does not expand");
 });
 
 function serverScene() {
@@ -168,7 +170,7 @@ function serverScene() {
   const unit = (id, ownerId, stats) => ({ id, ownerId, tribe: "bean", x: 100, y: 100, health: id === "target" ? 100 : 50,
     attributes: {}, combatDisposition: ownerId === "left" ? "aggressive" : "passive",
     stats: { health: 100, speed: 1, vision: 3, dna: stats }, moveStartedAt: 0, moveDuration: 0 });
-  const source = unit("source", "left", { ...dna(["blade", "healer"]), bleed: 100, bleedPower: 2, lifesteal: 100 });
+  const source = unit("source", "left", { ...dna(["blade"]), bleed: 100, bleedPower: 2, lifesteal: 100 });
   const target = unit("target", "right", dna([])), ally = unit("ally", "left", dna([])), units = [source, target, ally];
   let rolls = 0;
   const environment = { games: new Map(), colonies: [], world: { terrain: new Uint8Array(320 * 320) },
@@ -176,11 +178,13 @@ function serverScene() {
   for (const ownerId of ["left", "right"]) environment.games.set(ownerId, { agents: units.filter(a => a.ownerId === ownerId),
     receiveDamage(agent, amount) { agent.health = Math.max(0, agent.health - amount); } });
   const combat = createCombat(environment);
+  combat.engage(source, target, 0);
+  for (const unit of [source, target]) Object.assign(unit.combat.position, { x: unit.combat.side ? .4 : -.4, y: 0, fromX: unit.combat.side ? .4 : -.4, fromY: 0 });
   function tick(time) { environment.simSeconds = time; for (const unit of units) if (unit.health > 0) combat.update(unit, time); }
   return { source, target, ally, units, environment, tick, rolls: () => rolls };
 }
 
-test("real bleed, allied healing and lifesteal render exact evidence without altering combat or random calls", () => {
+test("real bleed and lifesteal render exact evidence without altering combat or random calls", () => {
   const live = serverScene(), control = serverScene(), { draw } = scene(), observed = new Set();
   for (let index = 0; index <= 40; index++) {
     const time = index * .05; live.tick(time); control.tick(time);
@@ -194,5 +198,5 @@ test("real bleed, allied healing and lifesteal render exact evidence without alt
     const outcomes = s => s.events.map(({ kind, at, amount, sourceId, targetId }) => ({ kind, at, amount, sourceId, targetId }));
     assert.deepEqual(outcomes(snapshot), outcomes(snapshotCombatVfx(control.environment, time)));
   }
-  assert.deepEqual([...observed].sort(), ["bleed", "drain", "heal"]);
+  assert.deepEqual([...observed].sort(), ["bleed", "drain"]);
 });

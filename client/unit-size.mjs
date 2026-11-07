@@ -12,7 +12,8 @@ export function unitDisplaySize(unit) {
   const count = Array.isArray(unit.dna?.pieces) ? unit.dna.pieces.length :
     Number.isFinite(unit.stats?.pieceCount) ? Math.max(0, unit.stats.pieceCount) : 0;
   const scale = 1 + .01 * count;
-  return (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean)*scale;
+  const size = (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean) * scale;
+  return UNIT_DISPLAY_SIZES.bean + (size - UNIT_DISPLAY_SIZES.bean) * .5;
 }
 
 export function combatViewCell(width, height, units) {
@@ -21,6 +22,23 @@ export function combatViewCell(width, height, units) {
 }
 
 export function combatViewLayout(width, height, units) {
+  const located = units.map(unit => ({ unit, point: unit.combat?.position || unit.combatPosition })).filter(entry => entry.point);
+  if (located.length) {
+    const largest = units.reduce((size, unit) => Math.max(size, unitDisplaySize(unit)), .4);
+    const xs = located.flatMap(({ point }) => [point.x, point.homeX ?? point.x]);
+    const ys = located.flatMap(({ point }) => [point.y, point.homeY ?? point.y]);
+    const lowX = Math.min(-3.8, ...xs), highX = Math.max(3.8, ...xs), lowY = Math.min(-1, ...ys), highY = Math.max(1, ...ys);
+    const cell = Math.min(combatViewCell(width, height, units), width * .88 / (highX - lowX + largest * 1.3),
+      height * .72 / ((highY - lowY) * .5 + largest * 1.3));
+    const project = point => ({ x: width * .5 + (point.x - (lowX + highX) / 2) * cell,
+      y: height * .66 + (point.y - (lowY + highY) / 2) * cell * .5 });
+    const positions = new Map(located.map(({ unit, point }) => {
+      const { x, y } = project(point), size = unitDisplaySize(unit);
+      return [String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
+        top: y - size * cell * 1.2, bottom: y + size * cell * .18 } }];
+    }));
+    return { cell, positions, project };
+  }
   const teams = [0, 1].map(side => units.filter(unit => (unit.combat?.side ?? unit.side) === side));
   const count = Math.max(...teams.map(team => team.length));
   const positions = new Map();

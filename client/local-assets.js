@@ -290,7 +290,6 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Animations/CombatDefenseV1/parry.png.js",
   "./client/local-assets/Animations/CombatEffectsV2/bleed.webp.js",
   "./client/local-assets/Animations/CombatEffectsV2/drain.webp.js",
-  "./client/local-assets/Animations/CombatEffectsV2/healing.webp.js",
   "./client/local-assets/Animations/CombatEffectsV2/stun.webp.js",
   "./client/local-assets/Animations/CombatVfxV4/bean.png.js",
   "./client/local-assets/Animations/CombatVfxV4/hit.png.js",

@@ -208,7 +208,7 @@ export function creatureHurtPose(agent, time) {
 }
 
 export function unitMovementElapsedMs(agent, time) {
-  const start = Number.isFinite(agent.moveAnimationStartedAt) ? agent.moveAnimationStartedAt : agent.moveStartedAt;
+  const start = agent.combat?.position?.moving ? agent.combat.position.moveStartedAt : Number.isFinite(agent.moveAnimationStartedAt) ? agent.moveAnimationStartedAt : agent.moveStartedAt;
   return Number.isFinite(time) && Number.isFinite(start) ? Math.max(0, time - start) * 1000 : 0;
 }
 
@@ -220,7 +220,7 @@ export function unitAnimationPose(agent, time) {
   const rpg = agent.combat?.version === 2;
   const hurt = (time - agent.hurtStartedAt) * 1000 * (rpg ? animations.hurt.durationMs / 120 : 1);
   const attack = agent.attack ? attackAnimationElapsed(agent.attack, time, AGENT_ATTACK_HIT_TIME, animations.attack.durationMs / 1000) * 1000 : -1;
-  const moving = agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
+  const moving = agent.combat?.position?.moving || agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
   if (rpg && attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
   else if (hurt >= 0 && hurt < animations.hurt.durationMs) { action = "hurt"; elapsed = hurt; }
   else if (attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
@@ -241,6 +241,10 @@ export function unitAnimationPose(agent, time) {
 
 export function creatureWalkPose(agent, time) {
   const animation = CREATURE_WALK_ANIMATIONS[agent.species];
+  if (animation && agent.health > 0 && agent.combat?.position?.moving) {
+    const elapsed = (time - agent.combat.position.moveStartedAt) * 1000;
+    return { action: "walk", animation, frame: unitAnimationFrame(animation, elapsed) };
+  }
   const elapsed = time - agent.moveStartedAt;
   if (!animation || agent.health <= 0 || agent.mode !== "walk" ||
     !(agent.moveDuration > 0) || !Number.isFinite(elapsed) || elapsed < 0 || elapsed >= agent.moveDuration) return null;

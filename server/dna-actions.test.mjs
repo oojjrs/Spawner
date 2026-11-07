@@ -95,5 +95,6 @@ test("ranged damage is the visible base and selected rate owns the shared cooldo
   f.combat.update(f.source,0); const ready=1+1/.6; assert.equal(f.source.attackReady,ready);
   f.combat.update(f.source,.7); assert.ok(Math.abs(f.target.health-98.6)<1e-8);
   f.source.x=f.target.x; f.combat.update(f.source,1.1); assert.equal(f.source.combat.nextAttackAt,ready);
+  for(const unit of [f.source,f.target]) Object.assign(unit.combat.position,{x:unit.combat.side?.4:-.4,y:0,fromX:unit.combat.side?.4:-.4,fromY:0});
   f.combat.update(f.source,ready); assert.equal(f.source.attack.attackMode,"melee"); assert.ok(Math.abs(f.source.combat.nextAttackAt-(ready+1+1/.6))<1e-9);
 });

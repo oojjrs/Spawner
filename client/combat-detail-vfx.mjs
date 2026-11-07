@@ -61,7 +61,7 @@ export function createDetailCombatVfx() {
       ["hit", "critical", "followup", "area", "reflect"].includes(cue.kind)) impacts.set(cue.id, cue);
     for (const [id, cue] of impacts) if (time < cue.at || time - cue.at >= .5) impacts.delete(id);
     for (const cue of frame.started || []) if (cue.amount > 0 &&
-      (cue.channel === "restore" && ["heal", "drain", "regeneration"].includes(cue.kind) ||
+      (cue.channel === "restore" && ["drain", "regeneration"].includes(cue.kind) ||
         cue.channel === "impact" && cue.kind === "bleed")) vitals.set(cue.id, cue);
     for (const [id, cue] of vitals) if (time < cue.at || time - cue.at >= .85) vitals.delete(id);
     // Block owns its residual number for the whole event, even after its shorter
@@ -130,7 +130,8 @@ export function createDetailCombatVfx() {
     }
     for (const shot of projectiles) {
       const source = byId.get(String(shot.sourceId)), target = positions.get(String(shot.targetId));
-      const from = positions.get(String(shot.sourceId));
+      const observed = positions.get(String(shot.sourceId));
+      const from = observed && shot.arenaFrom && view.project ? { ...observed, ...view.project(shot.arenaFrom) } : observed;
       if (!source || !from || !target) continue;
       let launch = flightAnchors.get(shot.id);
       if (!launch) {
@@ -187,18 +188,18 @@ export function createDetailCombatVfx() {
         const from = positions.get(String(cue.sourceId)) || anchors.get(String(cue.sourceId))?.point;
         const angle = from ? Math.atan2(point.y-point.height*.5-(from.y-from.height*.5), point.x-from.x) : Math.PI;
         const impact = creatureRangedEffectCommand(clip, "impact", { x: point.x, y: point.y-point.height*.5,
-          size: clip.bodyCanvas ? (source ? creatureRangedBodyCanvas(source) : anchors.get(String(cue.sourceId))?.bodyCanvas || 0)*cell : Math.min(444, Math.max(point.height,point.width)) * (cue.kind === "critical" ? 1.15 : 1),
+          size: (clip.bodyCanvas ? (source ? creatureRangedBodyCanvas(source) : anchors.get(String(cue.sourceId))?.bodyCanvas || 0)*cell : Math.min(444, Math.max(point.height,point.width))) * (cue.kind === "critical" ? 1.3 : 1),
           angle, age: time-cue.at });
         if (impact) result.push({ ...impact, eventId: cue.eventId, sourceId: cue.sourceId,
-          targetId: cue.targetId, eventAt: cue.eventAt ?? cue.at, amount: cue.amount });
+          targetId: cue.targetId, eventAt: cue.eventAt ?? cue.at, amount: cue.amount, critical: cue.kind === "critical" });
         continue;
       }
       const frame = detailVfxFrame(clip, (time - cue.at) * 1000);
       if (frame === null) continue;
       result.push({ image: clip.image, frame, x: point.x, y: point.y - point.height * .5,
-        size: Math.min(444, Math.max(point.height, point.width) * (clip === DETAIL_COMBAT_VFX.hit ? 1.35 : 1.65) * (cue.kind === "critical" ? 1.15 : 1)),
+        size: Math.min(444, Math.max(point.height, point.width) * (clip === DETAIL_COMBAT_VFX.hit ? 1.35 : 1.65) * (cue.kind === "critical" ? 1.3 : 1)),
         angle: 0, kind: "impact", eventId: cue.eventId, sourceId: cue.sourceId, targetId: cue.targetId,
-        eventAt: cue.eventAt ?? cue.at, amount: cue.amount });
+        eventAt: cue.eventAt ?? cue.at, amount: cue.amount, critical: cue.kind === "critical" });
     }
     return result;
   }
@@ -237,8 +238,8 @@ const vitalAmount = amount => amount >= .1 ? amount.toFixed(1) : Number(amount.t
 // A completely packed viewport can omit excess text; damage/events are untouched.
 export function layoutDetailCombatLabels(context, { vitals = [], defenses = [], dodges = [] }, { width, height, reducedMotion = false, positions = new Map() }) {
   const occupied = [...positions.values()].map(point => ({ left: point.x - point.width * .55 - 4,
-    right: point.x + point.width * .55 + 4, top: point.y - point.height - 46, bottom: point.y + 18 }));
-  const fontSize = Math.max(17, Math.min(30, width / 30)), overlaps = (a, b) =>
+    right: point.x + point.width * .55 + 4, top: point.y - point.height - 2, bottom: point.y + 18 }));
+  const fontSize = Math.max(12, Math.min(18, width / 65)), overlaps = (a, b) =>
     a.left < b.right + 4 && a.right > b.left - 4 && a.top < b.bottom + 4 && a.bottom > b.top - 4;
   let labelCount = 0;
   function place(command) {
@@ -252,24 +253,23 @@ export function layoutDetailCombatLabels(context, { vitals = [], defenses = [], 
       context.font = (critical ? "800 " : "700 ") + fontSize + 'px "Malgun Gothic", sans-serif';
       measured = context.measureText?.(text)?.width;
       if (critical) {
-        context.font = '800 13px "Malgun Gothic", sans-serif';
+        context.font = '800 10px "Malgun Gothic", sans-serif';
         tagWidth = context.measureText?.("치명")?.width || 0;
       }
     } finally { context.restore(); }
     const halfWidth = Math.max(critical ? 20 : 0, Number.isFinite(tagWidth) ? tagWidth / 2 : 0,
       Number.isFinite(measured) ? measured / 2 : text.length * fontSize * .34) + 4;
     if (halfWidth * 2 > width - 16) return { ...command, labelHidden: true };
-    const above = critical ? Math.max(fontSize / 2 + 3, 36) : fontSize / 2 + 3, below = fontSize / 2 + 3;
-    const lift = reducedMotion ? 0 : Math.min(1, command.age / .85) * 45;
-    const preferred = command.y - command.bodyHeight * .5 - 20 - lift;
+    const above = critical ? Math.max(fontSize / 2 + 3, 22) : fontSize / 2 + 3, below = fontSize / 2 + 3;
+    const lift = reducedMotion ? 0 : Math.min(1, command.age / .85) * 14;
+    const preferred = command.y - command.bodyHeight * .5 - 14 - lift;
     const center = Math.max(halfWidth + 8, Math.min(width - halfWidth - 8, command.x));
     const xs = [center, center - halfWidth * 2 - 16, center + halfWidth * 2 + 16];
     let rect;
     for (const x of xs) {
       if (x - halfWidth < 8 || x + halfWidth > width - 8) continue;
       const ys = [];
-      for (let y = Math.min(height - below - 8, preferred); y >= above + 8; y -= 8) ys.push(y);
-      for (let y = Math.max(above + 8, command.y + command.bodyHeight * .5 + 40 - lift); y <= height - below - 8; y += 8) ys.push(y);
+      for (let y = Math.min(height - below - 8, preferred); y >= Math.max(above + 8, preferred - 48); y -= 8) ys.push(y);
       for (const y of ys) {
         const candidate = { x, y, left: x - halfWidth, right: x + halfWidth, top: y - above, bottom: y + below };
         if (!occupied.some(other => overlaps(candidate, other))) { rect = candidate; break; }
@@ -284,7 +284,7 @@ export function layoutDetailCombatLabels(context, { vitals = [], defenses = [], 
   // same occupied rectangles. This also reserves blocked residual damage once.
   const placedDefenses = defenses.map(command => {
     const label = place({ ...command, caption: command.kind === "block" ? "방어" : "패링" });
-    const damage = command.kind === "block" && command.amount > 0 ? place(command) : null;
+    const damage = command.kind === "block" && command.amount > 0 ? place({ ...command, directDamage: true }) : null;
     return { ...command, labelX: label.labelX, labelY: label.labelY, labelHidden: !!label.labelHidden,
       damageX: damage?.labelX, damageY: damage?.labelY, damageHidden: !!damage?.labelHidden };
   });
@@ -300,7 +300,6 @@ export function layoutDetailVitalLabels(context, commands, options) {
   return layoutDetailCombatLabels(context, { vitals: commands }, options).vitals;
 }
 
-// Reuse the laboratory's existing healing ring/plus and signed HP labels.
 // Bleed is damage over time, not a new collision, projectile or attack recoil.
 export function drawDetailVitalEffect(context, command, options) {
   const { width, height, reducedMotion } = options;
@@ -318,19 +317,20 @@ export function drawDetailVitalEffect(context, command, options) {
     context.moveTo(command.x, command.y - 8 * scale); context.lineTo(command.x, command.y + 8 * scale); context.stroke();
   }
   if (command.kind !== "regeneration" && !command.labelHidden) {
-    const lift = reducedMotion ? 0 : progress * 45;
-    const labelY = command.labelY ?? Math.max(20, Math.min(height - 20, command.y - command.bodyHeight * .5 - 20 - lift - command.lane * 24));
+    const lift = reducedMotion ? 0 : progress * 14;
+    const labelY = command.labelY ?? Math.max(20, Math.min(height - 20, command.y - command.bodyHeight * .5 - 14 - lift - command.lane * 18));
     const labelX = command.labelX ?? command.x, critical = command.directDamage && command.critical;
     // Keep fractional positive HP changes readable without inventing zero.
     const amount = vitalAmount(command.amount);
     const label = (restore ? "+" : "−") + amount;
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
-    context.font = (critical ? "800 " : "700 ") + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
-    context.lineWidth = 4; context.strokeStyle = "#203125"; context.fillStyle = restore ? "#c1ffc4" : critical ? "#ffda8a" : "#fff9df";
+    context.font = (critical ? "800 " : "700 ") + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
+    context.lineWidth = 3; context.strokeStyle = "#203125"; context.fillStyle = restore ? "#c1ffc4" : critical ? "#ffda8a" : "#fff9df";
     context.strokeText(label, labelX, labelY); context.fillText(label, labelX, labelY);
     if (critical) {
-      context.font = '800 13px "Malgun Gothic", sans-serif';
-      context.fillText("치명", labelX, labelY - 27);
+      context.font = '800 10px "Malgun Gothic", sans-serif';
+      context.strokeText("치명", labelX, labelY - 15);
+      context.fillText("치명", labelX, labelY - 15);
     }
   }
   context.restore();
@@ -343,6 +343,7 @@ export function drawDetailVfxCell(context, image, command) {
   if (sourceX + cell > image.naturalWidth || sourceY + sourceHeight > image.naturalHeight) return false;
   const width = command.width || command.size, height = command.height || command.size;
   context.save();
+  if (command.critical) context.filter = "sepia(1) saturate(3) brightness(1.2)";
   if (command.muzzleClip) {
     const muzzle = command.muzzleClip;
     context.translate(muzzle.x, muzzle.y); context.rotate(muzzle.angle);
@@ -368,9 +369,11 @@ export function detailDefenseCommands(frame, positions, time) {
     const directionKnown = !!source && [source.x, source.y].every(Number.isFinite);
     seen.add(cue.eventId);
     const damage = (frame.active || []).find(item => item.eventId === cue.eventId && item.channel === 'impact' && item.amount > 0);
+    const amount = cue.kind === 'block' ? cue.residualAmount ?? damage?.amount ?? 0 : 0;
     output.push({ kind: cue.kind, eventId: cue.eventId, projectileId: cue.projectileId, targetId: cue.targetId, sourceId: cue.sourceId,
       image: DETAIL_DEFENSE_VFX[cue.kind], directionKnown, age, at: cue.at, eventAt: cue.eventAt ?? cue.at, x: target.x, y: target.y - target.height * .5, bodyWidth: target.width, bodyHeight: target.height,
-      towardSource: directionKnown ? Math.sign(source.x - target.x) || target.direction || 1 : 1, amount: cue.kind === 'block' ? cue.residualAmount ?? damage?.amount ?? 0 : 0 });
+      towardSource: directionKnown ? Math.sign(source.x - target.x) || target.direction || 1 : 1, amount,
+      critical: amount > 0 && !!(cue.critical || damage?.critical || damage?.kind === 'critical') });
   }
   return output;
 }
@@ -382,10 +385,11 @@ export function drawDetailDefenseEffect(context, command, image, { reducedMotion
   const t = command.age / .45;
   const scale = reducedMotion ? 1 : t < .10 ? .66 + t / .10 * .45 : t < .24 ? 1.11 - (t - .10) / .14 * .11 : 1 + (t - .24) * .15;
   const opacity = t < .35 ? 1 : Math.pow(1 - (t - .35) / .65, 1.2);
-  const size = Math.min(500, Math.max(32, command.bodyHeight * (command.kind === 'block' ? 2.12 : 2.25))) * scale;
+  const size = Math.min(500, Math.max(32, command.bodyHeight * (command.kind === 'block' ? 2.12 : 2.25))) * scale * (command.critical ? 1.3 : 1);
   const contactX = command.x + command.towardSource * command.bodyWidth * .40;
   const originX = command.kind === 'block' ? .36 : .52, originY = command.kind === 'block' ? .50 : .57;
   context.save(); context.translate(contactX, command.y); context.scale(-command.towardSource, 1);
+  if (command.critical) context.filter = "sepia(1) saturate(3) brightness(1.2)";
   context.globalAlpha = opacity;
   context.drawImage(image, -size * originX, -size * originY, size, size);
   // Only dissipating light fragments, never a reflected shot or additional hit.
@@ -396,7 +400,7 @@ export function drawDetailDefenseEffect(context, command, image, { reducedMotion
       const angle = command.kind === 'block' ? Math.PI * (.60 + i * .13) : Math.PI * (1.03 + i * .065);
       const radius = command.bodyHeight * (.33 + (i % 3) * .12) + spread;
       const x = Math.cos(angle) * radius, y = Math.sin(angle) * radius;
-      context.strokeStyle = command.kind === 'block' ? '#e0ffff' : '#fff1b1'; context.lineWidth = Math.max(1, command.bodyHeight * .025 * fade);
+      context.strokeStyle = command.critical ? '#ffda8a' : command.kind === 'block' ? '#e0ffff' : '#fff1b1'; context.lineWidth = Math.max(1, command.bodyHeight * .025 * fade);
       context.beginPath(); context.moveTo(x, y); context.lineTo(x + Math.cos(angle) * command.bodyHeight * .12 * fade, y + Math.sin(angle) * command.bodyHeight * .12 * fade); context.stroke();
     }
   }
@@ -405,39 +409,48 @@ export function drawDetailDefenseEffect(context, command, image, { reducedMotion
 
 export function drawDetailDefenseFallback(context, command) {
   if (!command.directionKnown || command.age < 0 || command.age >= .45) return false;
-  context.save(); context.globalAlpha = 1 - command.age / .45; context.strokeStyle = "#c3f1ff"; context.lineWidth = 3;
+  context.save(); context.globalAlpha = 1 - command.age / .45; context.strokeStyle = command.critical ? "#ffda8a" : "#c3f1ff"; context.lineWidth = 3;
   context.beginPath(); context.ellipse(command.x + command.towardSource * command.bodyWidth * .4, command.y,
-    Math.max(6, command.bodyWidth * .16), command.bodyHeight * .65, 0, -Math.PI / 2, Math.PI / 2); context.stroke(); context.restore(); return true;
+    Math.max(6, command.bodyWidth * .16) * (command.critical ? 1.3 : 1), command.bodyHeight * .65 * (command.critical ? 1.3 : 1), 0, -Math.PI / 2, Math.PI / 2); context.stroke(); context.restore(); return true;
 }
 export function drawDetailDefenseLabels(context, commands, { width, height, reducedMotion = false, vitals = [], reservedLabels = [] }) {
   const occupied = reservedLabels.map(label => ({ targetId: String(label.targetId), y: label.y }));
   for (const vital of vitals) if (vital.kind !== "regeneration" && !vital.labelHidden) {
     const y = vital.labelY ?? Math.max(20, Math.min(height - 20,
-      vital.y - vital.bodyHeight * .5 - 20 - (reducedMotion ? 0 : Math.min(1, vital.age / .85) * 45) - vital.lane * 24));
+      vital.y - vital.bodyHeight * .5 - 14 - (reducedMotion ? 0 : Math.min(1, vital.age / .85) * 14) - vital.lane * 18));
     occupied.push({ targetId: String(vital.targetId), y });
-    if (vital.directDamage && vital.critical) occupied.push({ targetId: String(vital.targetId), y: y - 27 });
+    if (vital.directDamage && vital.critical) occupied.push({ targetId: String(vital.targetId), y: y - 15 });
   }
   const lanes = new Map();
   for (const command of commands) {
     if (command.age < 0 || command.age >= .45) continue;
+    const critical = command.kind === "block" && command.amount > 0 && command.critical;
     const id = String(command.targetId), lane = lanes.get(id) || 0; lanes.set(id, lane + 1);
     const floor = command.y + command.bodyHeight * .5, lift = reducedMotion ? 0 : command.age * 28;
-    let damageY = command.damageY ?? command.y - command.bodyHeight * .5 - 20 - lift;
-    while (command.damageY === undefined && occupied.some(label => label.targetId === id && Math.abs(label.y - damageY) < 26)) damageY -= 28;
-    damageY = Math.max(20, damageY);
+    let damageY = command.damageY ?? command.y - command.bodyHeight * .5 - 14 - lift;
+    while (command.damageY === undefined && occupied.some(label => label.targetId === id &&
+      (Math.abs(label.y - damageY) < 26 || critical && Math.abs(label.y - (damageY - 15)) < 26))) damageY -= 28;
+    damageY = Math.max(critical ? 35 : 20, damageY);
     let labelY = command.labelY ?? floor + 34 + lane * 26;
-    if (labelY > height - 18) labelY = Math.max(20, damageY - 30 - lane * 26);
+    if (labelY > height - 18) labelY = Math.max(20, damageY - (critical ? 45 : 30) - lane * 26);
     context.save(); context.globalAlpha = 1 - (command.age / .45) ** 2;
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
-    context.font = '700 ' + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
-    context.lineWidth = 4; context.strokeStyle = "#203125"; context.fillStyle = command.kind === "block" ? "#d3f1ff" : "#fff1ba";
+    context.font = '700 ' + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
+    context.lineWidth = 3; context.strokeStyle = "#203125"; context.fillStyle = command.kind === "block" ? "#d3f1ff" : "#fff1ba";
     const label = command.kind === "block" ? "방어" : "패링";
     if (!command.labelHidden) {
       context.strokeText(label, command.labelX ?? command.x, labelY); context.fillText(label, command.labelX ?? command.x, labelY);
     }
     if (command.kind === "block" && command.amount > 0 && !command.damageHidden) {
       const damage = "−" + (command.amount >= .1 ? command.amount.toFixed(1) : Number(command.amount.toPrecision(2)).toString());
-      context.fillStyle = "#fff9df"; context.strokeText(damage, command.damageX ?? command.x, damageY); context.fillText(damage, command.damageX ?? command.x, damageY);
+      context.font = (critical ? "800 " : "700 ") + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
+      context.fillStyle = critical ? "#ffda8a" : "#fff9df"; context.strokeText(damage, command.damageX ?? command.x, damageY); context.fillText(damage, command.damageX ?? command.x, damageY);
+      if (critical) {
+        context.font = '800 10px "Malgun Gothic", sans-serif';
+        context.strokeText("치명", command.damageX ?? command.x, damageY - 15);
+        context.fillText("치명", command.damageX ?? command.x, damageY - 15);
+        occupied.push({ targetId: id, y: damageY - 15 });
+      }
       occupied.push({ targetId: id, y: damageY });
     }
     occupied.push({ targetId: id, y: labelY }); context.restore();

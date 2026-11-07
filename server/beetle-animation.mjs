@@ -152,6 +152,8 @@ export function beetleAnimationPose(agent, time) {
   } else if (!rpg && agent.mode === "attack" && (time - agent.attackStartedAt) * 1000 + 1e-6 < BEETLE_ANIMATIONS.attack.durationMs) {
     action = "attack";
     startedAt = agent.attackStartedAt;
+  } else if (agent.combat?.position?.moving) {
+    return { action: "walk", frame: beetleAnimationFrame("walk", (time - agent.combat.position.moveStartedAt) * 1000) };
   } else if (agent.mode === "walk" && agent.moveDuration > 0 &&
       time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration) {
     // The authored walk strip covers one cell (two gait cycles). Play the

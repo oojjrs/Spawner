@@ -1,3 +1,4 @@
+import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -13,7 +14,7 @@ import { createEncounters } from '../server/encounters.mjs';
 const source = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
 const extract = name => { const code=source.match(new RegExp('^    function '+name+'\\([^]*?^    }','m'))?.[0];assert.ok(code,name);return code; };
 const helper=readFileSync(new URL('./combat-detail-dodge.test.mjs',import.meta.url),'utf8').split('const event = ')[0];
-const box={assert,source,createContext,runInContext,createCombatVfxCursor,createDetailCombatVfx,DETAIL_COMBAT_VFX_ASSETS,drawDetailVfxCell,drawDetailVitalEffect};
+const box={ combatViewLayout, unitDisplaySize,assert,source,createContext,runInContext,createCombatVfxCursor,createDetailCombatVfx,DETAIL_COMBAT_VFX_ASSETS,drawDetailVfxCell,drawDetailVitalEffect};
 createContext(box);runInContext(helper.slice(helper.indexOf('function extract(')),box);
 const corpse=(species,extra={})=>({kind:'corpse',agentId:'target',id:'corpse:target',species,x:100,y:100,diedAt:1,decaysAt:4,facing:1,attributes:{},...extra});
 const sprite=animation=>({path:animation.image,complete:true,naturalWidth:imageDimensions(animation.image)[0],naturalHeight:imageDimensions(animation.image)[1]});

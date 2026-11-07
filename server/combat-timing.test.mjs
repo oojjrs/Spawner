@@ -15,6 +15,8 @@ function fixture(rate, hits, gap) {
     world: { terrain: new Uint8Array(320 * 320).fill(4) }, combatRandom: () => .99, damageRandom: () => .5 };
   for (const unit of units) environment.games.set(unit.id, { agents: [unit], receiveDamage(agent, amount) { agent.health -= amount; } });
   const combat = createCombat(environment);
+  combat.engage(units[0], units[1], 0);
+  units.forEach((unit, index) => Object.assign(unit.combat.position, { x: index ? .4 : -.4, y: 0, fromX: index ? .4 : -.4, fromY: 0 }));
   return { units, tick(time) { environment.simSeconds = time; for (const unit of units) combat.update(unit, time); } };
 }
 
@@ -25,24 +27,35 @@ test("slow DNA attacks finish their native tail and idle before the next cooldow
   assert.equal(attackAnimationElapsed(a.attack, .5, .3, 1.01), .5);
   f.tick(1.1); assert.equal(a.attack, null);
   assert.equal(unitActionState(a, 1.1).action, "idle");
-  f.tick(2); assert.equal(a.attack.startedAt, 2);
+  f.tick(2.99); assert.equal(a.attack, null);
+  f.tick(3); assert.equal(a.attack.startedAt, 3);
 });
 
-test("fast cooldown interrupts only the visual tail without dropping attacks", () => {
-  const f = fixture(2, 1, .12); f.tick(0); f.tick(.5);
-  assert.equal(f.units[0].attack.startedAt, .5);
-  f.tick(1); assert.equal(f.units[0].attack.startedAt, 1);
-  assert.equal(f.units[0].combat.attackCount, 3);
-  const health = f.units[1].health; f.tick(1); assert.equal(f.units[1].health, health);
+test("fast attacks complete their native tail before the full half-second interval", () => {
+  const f = fixture(2, 1, .12); f.tick(0); f.tick(.99);
+  const a = f.units[0]; assert.equal(a.attack.startedAt, 0);
+  f.tick(1); assert.equal(a.attack, null);
+  assert.equal(unitActionState(a, 1.2).action, "idle");
+  f.tick(1.49); assert.equal(a.attack, null);
+  f.tick(1.5); assert.equal(a.attack.startedAt, 1.5);
+  assert.equal(a.combat.attackCount, 2);
+  const health = f.units[1].health; f.tick(1.5); assert.equal(f.units[1].health, health);
 });
 
-test("a combo completes each contact before the next cycle even beyond its cooldown", () => {
-  const f = fixture(4, 3, .12); f.tick(0); f.tick(.3);
+test("a combo completes each contact and rests before the next cycle beyond its cooldown", () => {
+  const f = fixture(4, 3, .12); f.units[1].stats.dna.meleeSpeed = 0; f.tick(0); f.tick(.3);
   const attack = f.units[0].attack;
   assert.equal(attack.hitIndex, 1); assert.equal(attackAnimationElapsed(attack, .3, .3, 1.01), .3);
   f.tick(.42); assert.equal(attack.hitIndex, 2);
-  f.tick(.54); assert.equal(f.units[0].combat.attackCount, 2);
-  assert.equal(f.units[0].attack.startedAt, .54);
+  f.tick(.54); assert.equal(f.units[0].combat.attackCount, 1);
+  assert.equal(f.units[0].attack, attack);
+  assert.ok(Math.abs(attack.endsAt - 1.24) < 1e-9);
+  assert.ok(Math.abs(f.units[0].attackReady - 1.49) < 1e-9);
+  f.tick(1.24); assert.equal(f.units[0].attack, null);
+  assert.equal(unitActionState(f.units[0], 1.4).action, "idle");
+  f.tick(1.48); assert.equal(f.units[0].attack, null);
+  f.tick(1.49); assert.equal(f.units[0].combat.attackCount, 2);
+  assert.ok(Math.abs(f.units[0].attack.startedAt - 1.49) < 1e-9);
 });
 
 test("attack speed changes only cooldown in non-DNA profiles", () => {
@@ -63,10 +76,10 @@ test("the shared appearance clock uses clip-native tails and each recorded combo
 
 test("opposing units keep distinct cooldowns in the same authoritative combat", () => {
   const f = fixture(.5, 1, .12); f.units[1].stats.dna.meleeSpeed = 2;
-  f.tick(0); f.tick(.5);
-  assert.equal(f.units[0].attack.startedAt, 0); assert.equal(f.units[1].attack.startedAt, .5);
-  f.tick(2);
-  assert.equal(f.units[0].combat.attackCount, 2); assert.equal(f.units[1].combat.attackCount, 5);
+  f.tick(0); f.tick(1.5);
+  assert.equal(f.units[0].attack, null); assert.equal(f.units[1].attack.startedAt, 1.5);
+  f.tick(3);
+  assert.equal(f.units[0].combat.attackCount, 2); assert.equal(f.units[1].combat.attackCount, 3);
 });
 
 test("combo contact playback emits each authoritative contact once", () => {
@@ -113,7 +126,7 @@ test("five versus five journals preserve exact contacts, causal IDs, targets and
   for (const owner of ["left", "right"]) environment.games.set(owner, { agents: units.filter(unit => unit.ownerId === owner),
     receiveDamage(agent, amount) { agent.health = Math.max(0, agent.health - amount); } });
   const combat = createCombat(environment);
-  for (let frame = 0; frame <= 240; frame++) {
+  for (let frame = 0; frame <= 480; frame++) {
     const time = frame / 60; environment.simSeconds = time;
     for (const unit of units) combat.update(unit, time);
   }

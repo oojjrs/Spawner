@@ -1,3 +1,4 @@
+import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -38,8 +39,9 @@ function modal({ unavailable = [], rejectDraw = false, version = 1, units, initi
   detail.commands = (...args) => drawnCommands = commands(...args);
   const sandbox = { state: { agents, rivals: [], simSeconds: 0, combatVfx: { version } },
     connection: { get simSeconds() { return sandbox.state.simSeconds; } },
-    Spawner: { DETAIL_COMBAT_VFX_ASSETS, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade",
+    Spawner: { combatViewLayout, drawUnitHealthRing() {}, DETAIL_COMBAT_VFX_ASSETS, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade",
       CREATURE_ATTACK_ANIMATIONS: {}, drawDetailVitalEffect, drawDetailVfxCell: (...args) => !rejectDraw && drawDetailVfxCell(...args) },
+    detailVfxImage: path => sandbox.detailVfxImages.get(path),
     detailCombatVfx: detail, detailVfxImages: new Map(DETAIL_COMBAT_VFX_ASSETS.map(path => [path,
       { path, complete: !unavailable.includes(path), naturalWidth: 1776 }])),
     selectedCombatUnits: () => agents, combatOpen: {}, evolutionPanel: { hidden: true }, welcome: { hidden: true },
@@ -47,7 +49,7 @@ function modal({ unavailable = [], rejectDraw = false, version = 1, units, initi
     combatRoster: { dataset: { key: "source,target" }, children: [] }, combatHeading: {}, combatDetail: {}, combatGauge: {},
     combatCanvas: canvas, combatArenaUnits: units => units, combatStatsText: () => "", combatBackgroundAt: () => "grassland",
     combatBackgrounds: { grassland: "ground.png" }, combatUnitScale: () => 1,
-    unitDisplayBounds: new Map(["bean", "spore", "pebble", "spring"].map(key => [key, { width: .5, height: .8 }])), unitDisplayScales: new Map([["bean", 1]]),
+    unitDisplayBounds: new Map(["bean", "spore", "pebble", "spring"].map(key => [key, { width: unitDisplaySize({ tribe: key }), height: unitDisplaySize({ tribe: key }) }])), unitDisplayScales: new Map([["bean", 1]]),
     appearanceWorld: { prepare: () => new Map(), draw: () => false }, drawAgentAppearanceLayer() {},
     idleMotion: { matches: false }, window: { devicePixelRatio: 2 }, AGENT_HEIGHT: .8, clamp: (v, a, b) => Math.max(a, Math.min(b, v)),
     combatVfxFrame: { active: [], projectiles: [] }
@@ -89,6 +91,8 @@ function worldScene(mode, tribe) {
       receiveDamage(agent, amount) { agent.health = Math.max(0, agent.health - amount); } }])),
     combatRandom: () => { rolls++; return 0; }, damageRandom: () => { rolls++; return .5; } };
   const combat = createCombat(environment); combat.update(source, 0);
+  for (let time = .05; !source.attack && time < 10; time += .05) combat.update(source, time);
+  assert.ok(source.attack, mode + ":" + tribe + " begins an attack after approaching");
   const action = source.attack, at = action.hitAt;
   function resolve() {
     if (mode === "ranged") combat.update(source, action.launchedAt);
@@ -110,7 +114,7 @@ test("real melee and ranged misses label the blade-dominant defender without a f
     const result = view.draw(live.at + .05, snapshot);
     assert.equal(result.labels.length, 1); assert.equal(result.outlines.length, 1);
     assert.equal(result.commands.filter(command => command.kind === "impact" && command.targetId === "target").length, 0);
-    assert.equal(result.art.length, snapshot.events.filter(row => row.amount > 0).length, "only real damage gets artwork");
+    assert.equal(result.art.length, result.commands.filter(row => row.kind === "impact" && row.amount > 0).length, "only current real damage gets artwork");
     assert.equal(result.hits.length, 0); assert.equal(result.defense.length, 0);
     assert.equal(view.sandbox.combatVisualEvent(view.agents[1]).kind, "dodge");
     assert.notEqual(view.sandbox.combatVisualEvent(view.agents[0])?.kind, "dodge", "the attacker did not evade its own missed attack");
@@ -151,7 +155,7 @@ test("a dodge caption remains outlined, above the correct defender and readable 
     const { labels: [label], outlines: [outline] } = draw(1.05, [event()]);
     assert.ok(label.x > width / 2 && label.x < width); assert.ok(label.y >= 20 && label.y < height * .76);
     assert.equal(label.align, "center"); assert.equal(label.color, "#d3f1ff"); assert.equal(outline.color, "#203125");
-    assert.equal(outline.width, 4); assert.ok(parseFloat(label.font.split(" ")[1]) >= 17);
+    assert.equal(outline.width, 4); assert.ok(parseFloat(label.font.split(" ")[1]) >= 12 && parseFloat(label.font.split(" ")[1]) <= 18);
     assert.equal(label.x, outline.x); assert.equal(label.y, outline.y);
   }
 });
@@ -169,7 +173,7 @@ test("a hidden recipient, reconnect, or stale snapshot cannot invent or replay a
 test("simultaneous hidden-trait evasion and HP feedback keep separate readable lanes", () => {
   for (const width of [320, 1040]) for (const height of [240, 480]) for (const reduced of [false, true]) {
     const view = modal({ width, height }); view.sandbox.idleMotion.matches = reduced;
-    const events = [event("miss"), event("heal", { id: "heal", amount: 2 }), event("bleed", { id: "bleed", amount: 1 })];
+    const events = [event("miss"), event("drain", { id: "drain", amount: 2 }), event("bleed", { id: "bleed", amount: 1 })];
     const result = view.draw(1.05, events), dodge = result.labels[0];
     assert.equal(result.labels.length, 1); assert.equal(result.texts.length, 3);
     for (const text of result.texts.filter(text => text.text !== "회피")) {

@@ -16,7 +16,7 @@ are automated policies, not human usability tests or a proof that all maps are
 survivable. There is no teleport, invulnerability or injected combat stats.
 
 Source baseline: f7011761. Later balanced and candidate runs additionally include
-3c676b5b (actual DNA recovery cost) and 2d91e7e4 (ignore retreating heal targets).
+3c676b5b (actual DNA recovery cost).
 No stage after 25 minutes is covered by this world test.
 
 ## Policies and controls
@@ -24,24 +24,19 @@ No stage after 25 minutes is covered by this world test.
   soldiers from 2:30. Later 33P roaming workers and 37P roaming soldiers, targeting
   ten soldiers. This costly policy is a stress case, not the sole balance target.
 - `defender-run.mjs`: replaces later roaming soldiers with 40P armored guards.
-- `mixed-run.mjs`: additionally maintains one 19P medic.
-- `balanced-run.mjs`: cheap 17P workers first, six guards maximum, one medic.
+- `balanced-run.mjs`: cheap 17P workers first, six guards maximum.
   These controls retain the deployed 20/400/2000 nest prices.
 - Candidate comparisons use cheap workers, a research priority once four
   soldiers survive, and actual tier-three DNA after reaching level three.
   Nest prices 20/100/500 preserve a fivefold progression between levels.
   Separate economy-only and combined raid/economy cases distinguish effects.
 
-The unit designs are legal DNA paths. They are not full-board maxima. A medic
-has healing range two, and stopping at that distance is expected behavior.
+The unit designs are legal DNA paths. They are not full-board maxima.
 
 ## Reading results
 `summary.json` groups completed scenarios. `*-in-progress.json` is not a finished
 case. A completed 25-minute survival is not a win or a claim of later safety.
-Non-military deaths include medics as well as gathering workers.
-`damageSources` is a historical field name: it collects positive combat event
-amounts, including healing. A same-tribe source is friendly healing, not enemy
-damage. Raid kills count recorded raid states, not every wildlife kill.
+Raid kills count recorded raid states, not every wildlife kill.
 
 ## Final result
 
@@ -57,11 +52,9 @@ damage. Raid kills count recorded raid states, not every wildlife kill.
   toward surviving colonies over 25 minutes, with 60.75–104.25 combat seconds.
 - Spring seed 413 still failed at about 20 minutes. Its first raid killed two
   east-side gatherers before the defender arrived, reducing income to 4–6P/min.
-  The policy bought a medic before replacing workers and later waited for a 17P
-  worker at a 15P balance, although an 8P basic worker was affordable.
 - A separate **same-source** recovery-policy rerun of spring 413 survived 25
   minutes at 200/200 nest health, six soldiers, 71P. This policy replaces lost
-  gatherers with 8P basic workers and delays the medic until four soldiers.
+  gatherers with 8P basic workers.
   It remained level two. Do not replace the failed original result with this
   success or claim an unqualified 8/8 success rate.
 

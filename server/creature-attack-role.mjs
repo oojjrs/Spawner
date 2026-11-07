@@ -11,7 +11,9 @@ export const CREATURE_ATTACK_ROLES = Object.freeze(Object.fromEntries([
   ["spring-keeper", melee], ["lantern-keeper", { role: "ranged", melee: false, ranged: true }],
   ["old-garden-snail", melee], ["walking-forest", melee], ["white-paw", melee],
   ["spiny-back-leader", hybrid]
-].map(([key, value]) => [key, Object.freeze({ ...value })])));
+].map(([key, value]) => [key, Object.freeze({ ...value,
+  position: ["bundle-snail", "rolling-acorn", "spiny-back-beetle", "soil-boar", "vine-turtle", "old-garden-snail", "walking-forest", "spiny-back-leader"].includes(key) ? "front" :
+    ["flower-tail-bird", "soil-mole", "bubble-toad", "lantern-keeper"].includes(key) ? "back" : "middle" })])));
 
 export function creatureAttackRole(species) {
   return CREATURE_ATTACK_ROLES[species] || null;

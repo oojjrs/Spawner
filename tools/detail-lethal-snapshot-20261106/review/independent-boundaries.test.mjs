@@ -68,13 +68,13 @@ test('authoritatively newer living records, stale observations, omitted living a
 });
 
 test('initial redaction cannot infer a retained recipient and restore events cannot restore a corpse', () => {
-  for (const kind of ['hit', 'bleed', 'heal', 'drain', 'regeneration']) {
+  for (const kind of ['hit', 'bleed', 'drain', 'regeneration']) {
     const s = scene(); s.draw(1.1, .95); s.emit(kind); s.emit('death');
     const row = s.draw(1.12, 1.05, { ...offRoster, ids: ['source'] });
     assert.ok(row.packet.events.every(e => e.targetId === null));
     assert.equal(row.commands.length, 0, kind); assert.equal(row.labels.length, 0, kind);
   }
-  for (const kind of ['heal', 'drain', 'regeneration']) {
+  for (const kind of ['drain', 'regeneration']) {
     const s = scene(); s.draw(1.1, .95); s.emit(kind); s.emit('death');
     assert.equal(s.draw(1.12, 1.05, offRoster).labels.length, 0, kind);
   }
@@ -98,7 +98,7 @@ test('later target redaction suppresses already-started retained bleed labels', 
 });
 
 test('explicit recipient revocation is permanent for this event, including initially hidden and living recipients', () => {
-  for (const kind of ['hit', 'bleed', 'heal', 'drain', 'regeneration']) for (const initiallyHidden of [false, true]) {
+  for (const kind of ['hit', 'bleed', 'drain', 'regeneration']) for (const initiallyHidden of [false, true]) {
     const s = scene(); s.draw(1.1, .95); s.emit(kind);
     const first = s.draw(1.12, 1.05, initiallyHidden ? { ...offRoster, ids: ['source'] } : {});
     assert.equal(first.labels.length, initiallyHidden ? 0 : 1, kind);

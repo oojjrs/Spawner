@@ -54,8 +54,7 @@
           "reflection": 4,
           "regeneration": 9,
           "capacity": 1,
-          "harvestSpeed": 19,
-          "healing": 10
+          "harvestSpeed": 19
         }
       },
       {
@@ -94,8 +93,7 @@
           "reflection": 1,
           "regeneration": 10,
           "capacity": 2,
-          "harvestSpeed": 17,
-          "healing": 11
+          "harvestSpeed": 17
         }
       },
       {
@@ -134,8 +132,7 @@
           "reflection": 7,
           "regeneration": 8,
           "capacity": 9,
-          "harvestSpeed": 16,
-          "healing": 8
+          "harvestSpeed": 16
         }
       },
       {
@@ -174,8 +171,7 @@
           "reflection": 13,
           "regeneration": 14,
           "capacity": 17,
-          "harvestSpeed": 4,
-          "healing": 16
+          "harvestSpeed": 4
         }
       },
       {
@@ -214,8 +210,7 @@
           "reflection": 12,
           "regeneration": 12,
           "capacity": 12,
-          "harvestSpeed": 14,
-          "healing": 13
+          "harvestSpeed": 14
         }
       },
       {
@@ -254,8 +249,7 @@
           "reflection": 11,
           "regeneration": 1,
           "capacity": 6,
-          "harvestSpeed": 12,
-          "healing": 1
+          "harvestSpeed": 12
         }
       },
       {
@@ -294,8 +288,7 @@
           "reflection": 8,
           "regeneration": 11,
           "capacity": 8,
-          "harvestSpeed": 9,
-          "healing": 14
+          "harvestSpeed": 9
         }
       },
       {
@@ -334,8 +327,7 @@
           "reflection": 15,
           "regeneration": 18,
           "capacity": 13,
-          "harvestSpeed": 5,
-          "healing": 12
+          "harvestSpeed": 5
         }
       },
       {
@@ -374,8 +366,7 @@
           "reflection": 18,
           "regeneration": 2,
           "capacity": 11,
-          "harvestSpeed": 8,
-          "healing": 2
+          "harvestSpeed": 8
         }
       },
       {
@@ -414,8 +405,7 @@
           "reflection": 10,
           "regeneration": 5,
           "capacity": 14,
-          "harvestSpeed": 6,
-          "healing": 4
+          "harvestSpeed": 6
         }
       },
       {
@@ -454,8 +444,7 @@
           "reflection": 17,
           "regeneration": 15,
           "capacity": 16,
-          "harvestSpeed": 2,
-          "healing": 15
+          "harvestSpeed": 2
         }
       },
       {
@@ -494,8 +483,7 @@
           "reflection": 2,
           "regeneration": 7,
           "capacity": 7,
-          "harvestSpeed": 13,
-          "healing": 7
+          "harvestSpeed": 13
         }
       },
       {
@@ -534,8 +522,7 @@
           "reflection": 3,
           "regeneration": 4,
           "capacity": 3,
-          "harvestSpeed": 10,
-          "healing": 5
+          "harvestSpeed": 10
         }
       },
       {
@@ -574,8 +561,7 @@
           "reflection": 9,
           "regeneration": 13,
           "capacity": 4,
-          "harvestSpeed": 18,
-          "healing": 9
+          "harvestSpeed": 18
         }
       },
       {
@@ -614,8 +600,7 @@
           "reflection": 5,
           "regeneration": 16,
           "capacity": 5,
-          "harvestSpeed": 15,
-          "healing": 17
+          "harvestSpeed": 15
         }
       },
       {
@@ -654,8 +639,7 @@
           "reflection": 14,
           "regeneration": 17,
           "capacity": 19,
-          "harvestSpeed": 3,
-          "healing": 19
+          "harvestSpeed": 3
         }
       },
       {
@@ -694,8 +678,7 @@
           "reflection": 16,
           "regeneration": 19,
           "capacity": 18,
-          "harvestSpeed": 1,
-          "healing": 18
+          "harvestSpeed": 1
         }
       },
       {
@@ -734,8 +717,7 @@
           "reflection": 6,
           "regeneration": 6,
           "capacity": 10,
-          "harvestSpeed": 11,
-          "healing": 6
+          "harvestSpeed": 11
         }
       },
       {
@@ -774,8 +756,7 @@
           "reflection": 19,
           "regeneration": 3,
           "capacity": 15,
-          "harvestSpeed": 7,
-          "healing": 3
+          "harvestSpeed": 7
         }
       }
     ],
@@ -6524,7 +6505,6 @@
           "gatherCount": 0,
           "bladeCount": 0,
           "antennaCount": 0,
-          "healerCount": 0,
           "secretionCount": 0,
           "melee": false,
           "ranged": false,
@@ -6532,7 +6512,6 @@
           "meleeSpeed": 0,
           "rangedPower": 0,
           "rangedSpeed": 0,
-          "healer": false,
           "health": 600,
           "power": 0,
           "hits": 0,
@@ -6559,7 +6538,6 @@
           "tenacity": 0,
           "reduction": 0,
           "loadSpeed": 0,
-          "healing": 0,
           "stun": 0,
           "stunTime": 0,
           "bleed": 0,
@@ -6730,7 +6708,6 @@
           "gatherCount": 0,
           "bladeCount": 1,
           "antennaCount": 0,
-          "healerCount": 0,
           "secretionCount": 0,
           "melee": true,
           "ranged": false,
@@ -6738,7 +6715,6 @@
           "meleeSpeed": 0.5,
           "rangedPower": 0,
           "rangedSpeed": 0,
-          "healer": false,
           "health": 10,
           "power": 54,
           "hits": 1,
@@ -6765,7 +6741,6 @@
           "tenacity": 0,
           "reduction": 0,
           "loadSpeed": 0,
-          "healing": 0,
           "stun": 0,
           "stunTime": 0,
           "bleed": 0,
@@ -7046,7 +7021,6 @@
           "gatherCount": 0,
           "bladeCount": 1,
           "antennaCount": 0,
-          "healerCount": 0,
           "secretionCount": 0,
           "melee": true,
           "ranged": false,
@@ -7054,7 +7028,6 @@
           "meleeSpeed": 2.9000000000000004,
           "rangedPower": 0,
           "rangedSpeed": 0,
-          "healer": false,
           "health": 10,
           "power": 2,
           "hits": 1,
@@ -7081,7 +7054,6 @@
           "tenacity": 0,
           "reduction": 0,
           "loadSpeed": 0,
-          "healing": 0,
           "stun": 0,
           "stunTime": 0,
           "bleed": 0,
@@ -7276,7 +7248,6 @@
           "gatherCount": 0,
           "bladeCount": 0,
           "antennaCount": 0,
-          "healerCount": 0,
           "secretionCount": 0,
           "melee": false,
           "ranged": false,
@@ -7284,7 +7255,6 @@
           "meleeSpeed": 0,
           "rangedPower": 0,
           "rangedSpeed": 0,
-          "healer": false,
           "health": 10,
           "power": 0,
           "hits": 0,
@@ -7311,7 +7281,6 @@
           "tenacity": 0,
           "reduction": 0,
           "loadSpeed": 0,
-          "healing": 0,
           "stun": 0,
           "stunTime": 0,
           "bleed": 0,
@@ -7461,7 +7430,6 @@
           "gatherCount": 0,
           "bladeCount": 0,
           "antennaCount": 0,
-          "healerCount": 0,
           "secretionCount": 0,
           "melee": false,
           "ranged": false,
@@ -7469,7 +7437,6 @@
           "meleeSpeed": 0,
           "rangedPower": 0,
           "rangedSpeed": 0,
-          "healer": false,
           "health": 10,
           "power": 0,
           "hits": 0,
@@ -7496,7 +7463,6 @@
           "tenacity": 0,
           "reduction": 0,
           "loadSpeed": 0,
-          "healing": 0,
           "stun": 0,
           "stunTime": 0,
           "bleed": 0,
@@ -8089,7 +8055,6 @@
         "gatherCount": 0,
         "bladeCount": 1,
         "antennaCount": 0,
-        "healerCount": 0,
         "secretionCount": 0,
         "melee": true,
         "ranged": false,
@@ -8097,7 +8062,6 @@
         "meleeSpeed": 0.5,
         "rangedPower": 0,
         "rangedSpeed": 0,
-        "healer": false,
         "health": 500,
         "power": 6,
         "hits": 1,
@@ -8124,7 +8088,6 @@
         "tenacity": 0,
         "reduction": 0,
         "loadSpeed": 0,
-        "healing": 0,
         "stun": 0,
         "stunTime": 0,
         "bleed": 0,

@@ -1,3 +1,4 @@
+import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -10,7 +11,7 @@ const source = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
 const helperFile = readFileSync(new URL('./combat-detail-dodge.test.mjs', import.meta.url), 'utf8').split('const event = ')[0];
 const helper = helperFile.slice(helperFile.indexOf('function extract(')).replace('CREATURE_ATTACK_ANIMATIONS: {},',
   'CREATURE_ATTACK_ANIMATIONS: {}, detailDefenseImageReady, drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels,');
-const box = { assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
+const box = { combatViewLayout, unitDisplaySize, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
   DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect, detailDefenseImageReady,
   drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels };
 createContext(box); runInContext(helper, box);
@@ -57,10 +58,10 @@ test('lab stage-clock mapping keeps exact original event identity and residual a
  const c=detail.defenseCommands(points,10.1)[0];assert.ok(c);assert.equal(c.eventAt,1);assert.equal(c.amount,.7);assert.ok(Math.abs(c.age-.1)<1e-9);
  detail.consume({started:[],active:[]},10.46);assert.equal(detail.defenseCommands(points,10.46).length,0);
 });
-test('labels avoid nearby actual healing amount and stay still in reduced motion',()=>{
+test('labels avoid nearby actual recovery amount and stay still in reduced motion',()=>{
  const labels=[],ctx=new Proxy({fillText:(text,x,y)=>labels.push({text,x,y})},{get:(o,k)=>o[k]??(()=>{})});
  const command={kind:'block',targetId:'target',x:300,y:200,bodyHeight:100,age:.1,amount:.7};
- drawDetailDefenseLabels(ctx,[command],{width:1040,height:480,reducedMotion:true,vitals:[{kind:'heal',targetId:'target',y:200,bodyHeight:100,age:.1,lane:0}]});
+ drawDetailDefenseLabels(ctx,[command],{width:1040,height:480,reducedMotion:true,vitals:[{kind:'regeneration',targetId:'target',y:200,bodyHeight:100,age:.1,lane:0}]});
  const damage=labels.find(l=>l.text==='−0.7');assert.ok(Math.abs(damage.y-130)>=26);assert.ok(labels.find(l=>l.text==='방어').y>250);
 });
 

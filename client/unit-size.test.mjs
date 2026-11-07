@@ -7,8 +7,8 @@ import { UNIT_DISPLAY_SIZES, unitDisplaySize, combatViewCell, combatViewLayout }
 
 test("실제 DNA와 동일 조각 수 스탯은 모든 체급에서 같은 성장을 적용한다", () => {
   for (const [species, size] of Object.entries(UNIT_DISPLAY_SIZES)) for (const count of [0, 5, 20]) {
-    assert.equal(unitDisplaySize({ species, dna: { pieces: Array(count).fill({}) } }), size * (1 + .01 * count));
-    assert.equal(unitDisplaySize({ species, stats: { pieceCount: count } }), size * (1 + .01 * count));
+    assert.equal(unitDisplaySize({ species, dna: { pieces: Array(count).fill({}) } }), (.4 + (size * (1 + .01 * count) - .4) * .5));
+    assert.equal(unitDisplaySize({ species, stats: { pieceCount: count } }), (.4 + (size * (1 + .01 * count) - .4) * .5));
   }
   assert.equal(unitDisplaySize({ tribe: "bean", dna: { pieces: [] }, stats: { pieceCount: 20 } }), .4);
   for (const pieceCount of [-5, NaN, Infinity, undefined]) assert.equal(unitDisplaySize({ tribe: "bean", stats: { pieceCount } }), .4);
@@ -18,13 +18,14 @@ test("필드와 전투는 속성 보정 캐시에 DNA 성장을 중복하거나 
   const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
   const scope = createContext({ Spawner: { unitDisplayAttributes, UNIT_DISPLAY_SIZES, unitDisplaySize },
     unitDisplayScales: new Map([["bean", 2]]), unitAttributeScales: new Map(),
+    unitDisplayBounds: new Map([["bean", {}]]), agentBaseParts: new Map(), agentParts: new Map(),
     ATTRIBUTES: [{ key: "feet" }], combatAttributeArt: { ready: () => true },
     measureUnitDisplayScale: () => 3 });
   for (const name of ["unitDisplayScale", "combatUnitScale"])
     runInContext(source.match(new RegExp("^    function " + name + "\\([^]*?^    }", "m"))[0], scope);
   for (const count of [0, 20, 5, 0]) {
     const unit = { tribe: "bean", attributes: { feet: 1 }, dna: { pieces: Array(count).fill({}) } };
-    assert.equal(scope.unitDisplayScale(unit), 3 * (1 + .01 * count));
+    assert.ok(Math.abs(scope.unitDisplayScale(unit) - 3 * unitDisplaySize(unit) / .4) < 1e-12);
     assert.equal(scope.combatUnitScale(unit), scope.unitDisplayScale(unit));
   }
   assert.equal(scope.unitAttributeScales.size, 1);
@@ -166,4 +167,20 @@ test("인게임 전투는 선택과 대상 변경에도 전원을 원래 편성 
   const live = scope.combatArenaUnits(units), deceased = live[1];
   const corpse = { id: "corpse-999", agentId: deceased.id, kind: "corpse", combat: { ...deceased.combat } };
   assert.deepEqual(Array.from(scope.combatArenaUnits([...live.filter(unit => unit !== deceased), corpse]), unit => unit.agentId ?? unit.id), expected);
+});
+
+test("기본 새싹콩 크기를 유지하고 최소·최대와 DNA 성장 편차를 절반으로 압축한다", () => {
+  assert.equal(unitDisplaySize({ tribe: "bean" }), .4);
+  assert.ok(Math.abs(unitDisplaySize({ species: "flower-tail-bird" }) - .33) < 1e-12);
+  assert.ok(Math.abs(unitDisplaySize({ species: "white-paw" }) - .92) < 1e-12);
+  const ordered = Object.entries(UNIT_DISPLAY_SIZES).sort((a, b) => a[1] - b[1]);
+  for (let index = 1; index < ordered.length; index++) {
+    const [low, high] = [ordered[index - 1], ordered[index]];
+    const difference = unitDisplaySize({ species: high[0] }) - unitDisplaySize({ species: low[0] });
+    assert.ok(Math.abs(difference - (high[1] - low[1]) * .5) < 1e-12);
+  }
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) {
+    const plain = unitDisplaySize({ tribe }), grown = unitDisplaySize({ tribe, stats: { pieceCount: 100 } });
+    assert.ok(Math.abs(grown - plain - UNIT_DISPLAY_SIZES[tribe] * .5) < 1e-12);
+  }
 });

@@ -1,9 +1,11 @@
+import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
+import { createCombatStage } from "./combat-stage.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { createCombatVfxCursor } from "./combat-vfx-events.mjs";
-import { createDetailCombatVfx, DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect,
+import { createDetailCombatVfx, DETAIL_COMBAT_VFX_ASSETS, DETAIL_DEFENSE_VFX, drawDetailVfxCell, drawDetailVitalEffect,
   layoutDetailVitalLabels, layoutDetailCombatLabels, detailDefenseImageReady, drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels } from "./combat-detail-vfx.mjs";
 import { createCombat } from "../server/combat.mjs";
 import { ATTRIBUTE_DNA } from "../server/dna.mjs";
@@ -11,7 +13,7 @@ import { snapshotCombatVfx } from "../server/combat-vfx-journal.mjs";
 
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 const helper = readFileSync(new URL("./combat-detail-dodge.test.mjs", import.meta.url), "utf8").split("const event = ")[0];
-const box = { assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
+const box = { combatViewLayout, unitDisplaySize, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
   DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect };
 createContext(box); runInContext(helper.slice(helper.indexOf("function extract(")), box);
 function modal(options = {}) {
@@ -25,6 +27,22 @@ const amounts = result => Array.from(result.texts.filter(row => /^[+−]/.test(r
 const agents = ["source", "target", "other"].map(id => ({ id, tribe: "bean", health: 100 }));
 const positions = new Map(agents.map((agent, index) => [agent.id, { x: 100 + index * 180, y: 260, width: 60, height: 100 }]));
 const viewport = { scope: "fight", width: 600, height: 350, includeDirectDamage: true };
+test("damage stays just above its own head with compact text throughout the floating tail", () => {
+  const labels = [], context = new Proxy({ save() {}, restore() {}, measureText: text => ({ width: text.length * 8 }),
+    fillText(text, x, y) { labels.push({ text, x, y, font: this.font }); } }, { get: (target, key) => target[key] ?? (() => {}) });
+  const point = positions.get("target");
+  for (const age of [0, .4, .8]) {
+    const command = { kind: "hit", channel: "impact", directDamage: true, targetId: "target", amount: 5,
+      age, x: point.x, y: point.y - point.height * .5, bodyHeight: point.height, lane: 0 };
+    const [placed] = layoutDetailVitalLabels(context, [command], { width: 600, height: 350, positions });
+    assert.equal(placed.labelHidden, undefined);
+    assert.equal(placed.labelX, point.x);
+    assert.ok(placed.labelBottom < point.y - point.height);
+    assert.ok(placed.labelY > point.y - point.height - 45);
+    drawDetailVitalEffect(context, placed, { width: 600, height: 350, reducedMotion: false });
+    assert.ok(Number(labels.at(-1).font.match(/([\d.]+)px/)[1]) <= 18);
+  }
+});
 function controller() {
   const detail = createDetailCombatVfx(), cursor = createCombatVfxCursor();
   const draw = (time, events = [], units = agents, points = positions, view = viewport, streamId = "fight") => {
@@ -37,9 +55,12 @@ function controller() {
 test("actual modal displays direct damage independently of artwork and a real critical gets its existing gold tag", () => {
   for (const unavailable of [[], DETAIL_COMBAT_VFX_ASSETS]) for (const width of [320, 1040])
     for (const [kind, extra] of [["hit", {}], ["critical", {}], ["hit", { hitIndex: 1 }], ["area", {}], ["reflect", {}]]) {
-      const view = modal({ unavailable, width }), result = view.draw(1.08, [event(kind, extra)]);
+      const view = modal({ unavailable, width }), outlines = [], context = view.canvas.getContext("2d"), stroke = context.strokeText;
+      context.strokeText = function(text, x, y) { outlines.push({ text, x, y, color: this.strokeStyle }); stroke.call(this, text, x, y); };
+      const result = view.draw(1.08, [event(kind, extra)]);
       assert.deepEqual(amounts(result).map(row => row.text), ["−2.0"]);
       assert.equal(result.texts.filter(row => row.text === "치명").length, kind === "critical" ? 1 : 0);
+      assert.equal(outlines.filter(row => row.text === "치명" && row.color === "#203125").length, kind === "critical" ? 1 : 0);
       assert.equal(amounts(result)[0].color, kind === "critical" ? "#ffda8a" : "#fff9df");
       assert.equal(result.placed.filter(row => row.directDamage).length, 1);
       assert.equal(view.draw(1.6, [event(kind, extra)]).art.length, 0, "number tail never extends impact art");
@@ -89,11 +110,11 @@ test("direct labels retain only observed death positions and never invent an omi
   assert.equal(redacted.draw(1.1, [{ ...hit, sourceId: null, targetId: null }]).length, 0);
 });
 
-test("combined actual damage, healing, bleed and critical labels reserve distinct whole rectangles", () => {
+test("combined actual damage, recovery, bleed and critical labels reserve distinct whole rectangles", () => {
   for (const width of [320, 1040]) for (const reduced of [false, true]) {
     const view = modal({ width }); view.sandbox.idleMotion.matches = reduced;
     const events = [event("critical", { amount: 7 }), event("hit", { id: "extra", amount: .25 }),
-      event("heal", { amount: 3 }), event("bleed", { amount: .1 })];
+      event("drain", { amount: 3 }), event("bleed", { amount: .1 })];
     const result = view.draw(1.08, events), labels = result.placed.filter(row => !row.labelHidden);
     assert.equal(amounts(result).length, 4); assert.equal(labels.length, 4);
     for (const [i, a] of labels.entries()) {
@@ -120,7 +141,7 @@ test("dense compact placement omits excess text rather than piling it at the top
   }
 });
 
-const dna = genes => ATTRIBUTE_DNA.stats(genes.map(id => { const gene = ATTRIBUTE_DNA.lookup.get(id); return { gene: id, grade: gene.grade, shape: [...gene.steps], rotation: 0 }; }));
+const dna = genes => ATTRIBUTE_DNA.stats(genes.map(id => { const gene = ATTRIBUTE_DNA.lookup.get(id); return { gene: id, grade: gene.grade }; }));
 function actualScene(mode, tribe) {
   const unit = (id, ownerId, genes, x) => ({ id, ownerId, tribe, x, y: 100, health: id === "target" ? .75 : 100,
     attributes: {}, combatDisposition: "aggressive", moveStartedAt: 0, moveDuration: 0,
@@ -133,7 +154,10 @@ function actualScene(mode, tribe) {
     games: new Map(["left", "right"].map(owner => [owner, { agents: units.filter(agent => agent.ownerId === owner),
       receiveDamage(agent, amount) { agent.health = Math.max(0, agent.health - amount); } }])),
     combatRandom: () => { rolls++; return 0; }, damageRandom: () => .5 };
-  const combat = createCombat(environment); combat.update(source, 0); const attack = source.attack;
+  const combat = createCombat(environment); combat.update(source, 0);
+  for (let time = .05; !source.attack && time < 10; time += .05) combat.update(source, time);
+  assert.ok(source.attack, mode + ":" + tribe + " begins an attack after approaching");
+  const attack = source.attack;
   return { units, source, target, at: attack.hitAt, environment, rolls: () => rolls,
     resolve() { if (mode === "ranged") combat.update(source, attack.launchedAt); combat.update(mode === "ranged" ? target : source, attack.hitAt); } };
 }
@@ -141,7 +165,7 @@ function actualScene(mode, tribe) {
 test("real lethal melee/ranged critical labels use actual HP loss rather than nominal attack damage and preserve RNG", () => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const mode of ["melee", "ranged"]) {
     const live = actualScene(mode, tribe), control = actualScene(mode, tribe), scene = controller();
-    scene.draw(0, [], live.units, positions); live.resolve(); control.resolve();
+    scene.draw(live.at - .01, [], live.units, positions); live.resolve(); control.resolve();
     const snapshot = snapshotCombatVfx(live.environment, live.at), before = structuredClone(snapshot);
     const rows = scene.draw(live.at + .05, snapshot.events, live.units.filter(agent => agent.health > 0), new Map([["source", positions.get("source")]]));
     const damage = rows.find(row => row.directDamage && row.targetId === "target");
@@ -149,4 +173,132 @@ test("real lethal melee/ranged critical labels use actual HP loss rather than no
     assert.equal(live.target.health, 0); assert.deepEqual(live.units, control.units); assert.equal(live.rolls(), control.rolls());
     assert.deepEqual(snapshot, before);
   }
+});
+
+test("real blocked criticals retain defense, one gold damage caption and emphasized approved effects in both views", async () => {
+  for (const mode of ["melee", "ranged"]) {
+    const live = actualScene(mode, "bean");
+    live.source.stats.dna.meleePower = 4; live.source.stats.dna.rangedPower = 4;
+    live.target.health = 100; Object.assign(live.target.stats.dna, { block: 100, blockPower: 50 });
+    live.resolve();
+    const critical = snapshotCombatVfx(live.environment, live.at).events.find(row => row.sourceId === "source" && row.kind === "block");
+    assert.ok(critical?.critical && critical.amount > 0, mode + " resolves a real blocked critical");
+    for (const width of [320, 1040]) for (const unavailable of [[], [DETAIL_DEFENSE_VFX.block]]) for (const reduced of [false, true]) {
+      const view = modal({ width, unavailable }); view.sandbox.idleMotion.matches = reduced;
+      const result = view.draw(live.at + .08, [critical]);
+      assert.equal(result.texts.filter(row => row.text === "방어").length, 1);
+      const [damage] = amounts(result), tags = result.texts.filter(row => row.text === "치명");
+      assert.equal(amounts(result).length, 1); assert.equal(tags.length, 1);
+      assert.equal(damage.color, "#ffda8a"); assert.equal(tags[0].color, "#ffda8a");
+      assert.equal(tags[0].x, damage.x); assert.equal(tags[0].y, damage.y - 15);
+      assert.ok(tags[0].y >= 0 && damage.y < 480);
+      assert.equal(result.art.filter(row => row.image === DETAIL_DEFENSE_VFX.block).length, unavailable.length ? 0 : 1);
+      const repeat = view.draw(live.at + .08, [critical, critical]);
+      assert.equal(amounts(repeat).length, 1); assert.equal(repeat.texts.filter(row => row.text === "치명").length, 1);
+      assert.equal(view.draw(live.at + .46, [critical]).texts.filter(row => row.text === "치명").length, 0);
+    }
+    const cursor = createCombatVfxCursor(), detail = createDetailCombatVfx();
+    detail.consume(cursor.consume({ streamId: "critical", events: [] }, 0), 0);
+    detail.consume(cursor.consume({ streamId: "critical", events: [critical] }, live.at + .08), live.at + .08);
+    const command = detail.defenseCommands(positions, live.at + .08)[0];
+    assert.equal(command.critical, true);
+    const draws = [], ellipses = [], filters = [], ctx = new Proxy({ filter: "none",
+      save() { filters.push(this.filter); }, restore() { this.filter = filters.pop(); },
+      drawImage(...args) { draws.push({ args, filter: this.filter }); }, ellipse: (...args) => ellipses.push(args)
+    }, { get: (target, key) => target[key] ?? (() => {}) });
+    for (const flag of [false, true]) {
+      drawDetailDefenseEffect(ctx, { ...command, critical: flag }, { complete: true, naturalWidth: 1254 }, { reducedMotion: false });
+      drawDetailDefenseFallback(ctx, { ...command, critical: flag });
+    }
+    assert.ok(Math.abs(draws[1].args[3] / draws[0].args[3] - 1.3) < 1e-10);
+    assert.ok(Math.abs(ellipses[1][2] / ellipses[0][2] - 1.3) < 1e-10);
+    assert.equal(draws[0].filter, "none"); assert.equal(draws[1].filter, "sepia(1) saturate(3) brightness(1.2)");
+    assert.equal(ctx.filter, "none");
+    const previous = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets };
+    try {
+      for (const unavailable of [false, true]) for (const reduced of [false, true]) {
+        globalThis.window = { matchMedia: () => ({ matches: reduced }), devicePixelRatio: 1 };
+        delete globalThis.SpawnerAssets;
+        globalThis.Image = class {
+          complete = true; naturalWidth = 4096; naturalHeight = 4096;
+          set src(value) {
+            this.path = value;
+            if (!value.includes("CombatVfxV4/") && !value.includes("CombatDefenseV1/") || unavailable && value === DETAIL_DEFENSE_VFX.block) this.naturalWidth = 0;
+          }
+          get src() { return this.path; }
+        };
+        const labels = [], outlines = [], art = [], stack = [], context = new Proxy({
+          save() { stack.push({ fillStyle: this.fillStyle, font: this.font, filter: this.filter }); }, restore() { Object.assign(this, stack.pop()); },
+          drawImage(image, ...args) { art.push({ image: image.src, args, filter: this.filter }); },
+          fillText(text, x, y) { labels.push({ text, x, y, color: this.fillStyle }); },
+          strokeText(text, x, y) { outlines.push({ text, x, y, color: this.strokeStyle }); }
+        }, { get: (target, key) => target[key] ?? (() => {}) });
+        const trial = { agents: live.units.map((unit, side) => ({ ...unit, combat: { ...unit.combat, side } })), history: [], projectiles: [], time: 0, result: () => null,
+          vfx: { version: 1, streamId: "blocked-critical", events: [] } };
+        const stage = createCombatStage({ clientWidth: 1040, clientHeight: 480, getContext: () => context });
+        stage.render(trial, 100, false);
+        await Promise.resolve(); await Promise.resolve(); await Promise.resolve();
+        labels.length = 0; outlines.length = 0; art.length = 0;
+        trial.time = live.at + .08; trial.vfx.events = [critical];
+        trial.history = [{ index: 0, kind: "block", attackerId: "source", targetId: "target", time: live.at, damage: critical.amount, critical: true }];
+        stage.render(trial, 200, true);
+        await Promise.resolve(); await Promise.resolve(); await Promise.resolve();
+        labels.length = 0; outlines.length = 0; art.length = 0; stage.render(trial, 200, true);
+        assert.equal(labels.filter(row => row.text === "방어").length, 1);
+        assert.equal(labels.filter(row => row.text === "치명" && row.color === "#ffda8a").length, 1);
+        assert.equal(outlines.filter(row => row.text === "치명" && row.color === "#203125").length, 1);
+        assert.equal(labels.filter(row => row.text.startsWith("−") && row.color === "#ffda8a").length, 1);
+        assert.equal(art.filter(row => row.image === DETAIL_DEFENSE_VFX.block).length, unavailable ? 0 : 1);
+        if (!unavailable) assert.equal(art.find(row => row.image === DETAIL_DEFENSE_VFX.block).filter, "sepia(1) saturate(3) brightness(1.2)");
+      }
+    } finally { globalThis.window = previous.window; globalThis.Image = previous.Image; globalThis.SpawnerAssets = previous.assets; }
+  }
+});
+
+test("critical melee and every approved ranged impact use gold artwork at enlarged size without tinting ordinary hits", () => {
+  for (const mode of ["melee", "ranged"]) for (const kind of ["bean", "spore", "pebble", "spring", "bubble-toad", "lantern-keeper", "vine-turtle", "spiny-back-beetle", "spiny-back-leader"]) {
+    const units = [{ id: "source", ...( ["bean", "spore", "pebble", "spring"].includes(kind) ? { tribe: kind } : { species: kind }), health: 100 }, { id: "target", tribe: "bean", health: 100 }];
+    const results = [];
+    for (const critical of [false, true]) {
+      const cursor = createCombatVfxCursor(), detail = createDetailCombatVfx();
+      detail.consume(cursor.consume({ streamId: "critical-art", events: [] }, 0), 0);
+      const impact = event("hit", { critical, mode, amount: 3 });
+      detail.consume(cursor.consume({ streamId: "critical-art", events: [impact] }, 1.08), 1.08);
+      const commands = detail.commands(units, positions, 1.08, 100, { scope: "critical-art", width: 600, height: 350 });
+      assert.equal(commands.length, 1, kind + mode); assert.equal(commands[0].critical, critical);
+      const draws = [], filters = [], context = new Proxy({ filter: "none",
+        save() { filters.push(this.filter); }, restore() { this.filter = filters.pop(); },
+        drawImage(image, ...args) { draws.push({ filter: this.filter, args }); }
+      }, { get: (target, key) => target[key] ?? (() => {}) });
+      assert.ok(drawDetailVfxCell(context, { complete: true, naturalWidth: 4096, naturalHeight: 4096 }, commands[0]));
+      assert.equal(draws[0].filter, critical ? "sepia(1) saturate(3) brightness(1.2)" : "none");
+      assert.equal(context.filter, "none"); results.push(commands[0]);
+      detail.consume(cursor.consume({ streamId: "critical-art", events: [impact, impact] }, 1.08), 1.08);
+      assert.equal(detail.commands(units, positions, 1.08, 100, { scope: "critical-art", width: 600, height: 350 }).length, 1);
+      detail.consume(cursor.consume({ streamId: "critical-art", events: [impact] }, 1.51), 1.51);
+      assert.equal(detail.commands(units, positions, 1.51, 100, { scope: "critical-art", width: 600, height: 350 }).length, 0);
+    }
+    assert.ok(Math.abs(results[1].size / results[0].size - 1.3) < 1e-10, kind + mode + " critical emphasis");
+  }
+  const cursor = createCombatVfxCursor(), detail = createDetailCombatVfx();
+  detail.consume(cursor.consume({ streamId: "no-damage", events: [] }, 0), 0);
+  detail.consume(cursor.consume({ streamId: "no-damage", events: [event("hit", { critical: true, amount: 0 })] }, 1.08), 1.08);
+  assert.equal(detail.commands(agents, positions, 1.08, 100, viewport).length, 0);
+  assert.equal(detail.vitalCommands(agents, positions, 1.08, viewport).length, 0);
+});
+
+test("laboratory direct critical captions retain the dark outline at their existing size and position", () => {
+  const source = readFileSync(new URL("./combat-stage.mjs", import.meta.url), "utf8"), calls = [];
+  const context = new Proxy({
+    strokeText(text, x, y) { calls.push({ kind: "outline", text, x, y, color: this.strokeStyle, font: this.font }); },
+    fillText(text, x, y) { calls.push({ kind: "fill", text, x, y, color: this.fillStyle, font: this.font }); }
+  }, { get: (target, key) => target[key] ?? (() => {}) });
+  const scope = { context, clock: .08, reducedMotion: { matches: false }, clamp: value => Math.max(0, Math.min(1, value)) };
+  createContext(scope); runInContext(source.slice(source.indexOf("  function effectArt("), source.indexOf("  function projectileArt(")), scope);
+  scope.effectArt({ event: { kind: "hit", damage: 3, critical: true, targetId: "target", index: 0 }, born: 0, lane: 0 },
+    { target: { x: 400, y: 300, height: 100 } }, 1040, 480, true);
+  const [outline, fill] = calls.filter(row => row.text === "치명");
+  assert.equal(outline.kind, "outline"); assert.equal(outline.color, "#203125");
+  assert.equal(fill.kind, "fill"); assert.equal(fill.color, "#ffda8a");
+  assert.equal(outline.x, fill.x); assert.equal(outline.y, fill.y); assert.match(outline.font, /10px/);
 });

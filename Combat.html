@@ -68,7 +68,7 @@ main{padding:16px 8px 32px}.stage-hud{gap:8px 18px;padding:14px 12px 0}.stage-si
 
 .roster-actions{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.roster-actions button{min-height:32px;padding:4px 8px;font-size:11px;background:#2b4434;color:#e9edda;border-color:#a6bf8659}.roster-actions button:hover:not(:disabled){background:#3c5740;border-color:#a6bf8699}.roster-actions button:disabled{background:#304236;color:#bdcbbb;border-color:#627760;opacity:1;cursor:default}
 </style></head>
-<body><main></main><script src="./client/local-assets.js"></script><script src="./client/assets.js"></script><script src="./client/unit-appearance-lazy-assets.js"></script><script>(() => {
+<body><main></main><script src="./client/local-assets.js"></script><script src="./client/assets.js"></script><script src="./client/combat-audio.js"></script><script src="./client/unit-appearance-lazy-assets.js"></script><script>(() => {
 const modules = Object.create(null);
 modules["server/dna-combat-stats.mjs"] = (() => {
 const DNA_COMBAT_RULES = Object.freeze({
@@ -103,9 +103,8 @@ function dnaCombatStats(counts, weights, inputRules) {
   const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
   const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : 0;
   const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
-  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0, healerCount: 0,
-    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed, healer: false,
-    healPower: 0,
+  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0,
+    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed,
     ...(rules.recovery ? { recovery: rules.recovery } : {}),
     health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
     power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,
@@ -123,7 +122,7 @@ function dnaCombatStats(counts, weights, inputRules) {
     counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,
     counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,
     tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),
-    healing: 10 * (n.healing || 0), stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
+    stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
     stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,
     bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,
     area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,
@@ -379,7 +378,7 @@ function combatLabWithAppearance(build, appearance) {
 return { COMBAT_LAB_APPEARANCES, combatLabPlayable, combatLabCombinationDna, combatLabBladeCarapaceDna, combatLabAppearance, combatLabWithAppearance };
 })();
 modules["server/dna-actions.mjs"] = (() => {
-const DNA_ACTION_RULES = Object.freeze({ meleeRange: 1, rangedRange: 3, projectileSpeed: 6, rangedPowerBase: 1.4, healRange: 2, healInterval: 2, healPower: 1 });
+const DNA_ACTION_RULES = Object.freeze({ meleeRange: 1, rangedRange: 3, projectileSpeed: 6, rangedPowerBase: 1.4 });
 
 function dnaAttackMode(stats, distance) {
   if (stats.melee && distance <= DNA_ACTION_RULES.meleeRange) return "melee";
@@ -391,16 +390,6 @@ function dnaProjectileDuration(distance) {
   return Math.max(0, distance) / DNA_ACTION_RULES.projectileSpeed;
 }
 
-function dnaHealTarget(source, agents, team, distance) {
-  return agents.filter(target => target !== source && target.health > 0 && !target.hidden && !target.retreat &&
-    team(target) === team(source) && target.health < target.stats.health && distance(source, target) <= DNA_ACTION_RULES.healRange)
-    .sort((a, b) => a.health / a.stats.health - b.health / b.stats.health || String(a.id).localeCompare(String(b.id)))[0] || null;
-}
-
-function dnaHealAmount(target) {
-  return DNA_ACTION_RULES.healPower * (1 + (target.stats.dna?.healing || target.stats.healing || 0) / 100);
-}
-
 function dnaProjectileValid(source, target) {
   return !!source && !!target && source.health > 0 && target.health > 0 && !source.hidden && !target.hidden && !source.retreat && !target.retreat;
 }
@@ -409,21 +398,7 @@ function dnaAttackStats(stats, mode) {
   return { power: mode === "ranged" ? stats.rangedPower : stats.meleePower, speed: mode === "ranged" ? stats.rangedSpeed : stats.meleeSpeed };
 }
 
-function dnaHealAllocations(source, agents, team, distance) {
-  const stats = source.stats.dna || source.stats;
-  let remaining = Number(stats.healPower ?? stats.healerCount ?? stats.healer ?? 0);
-  const result = [], targets = agents.filter(target => target !== source && target.health > 0 && !target.hidden && !target.retreat &&
-    team(target) === team(source) && target.health < target.stats.health && distance(source, target) <= DNA_ACTION_RULES.healRange)
-    .sort((a, b) => a.health / a.stats.health - b.health / b.stats.health || String(a.id).localeCompare(String(b.id)));
-  for (const target of targets) {
-    if (remaining <= 1e-9) break;
-    const unit = dnaHealAmount(target), amount = Math.min(target.stats.health - target.health, remaining * unit);
-    if (amount > 0) { result.push({ target, amount }); remaining -= amount / unit; }
-  }
-  return result;
-}
-
-return { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaHealTarget, dnaHealAmount, dnaProjectileValid, dnaAttackStats, dnaHealAllocations };
+return { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaProjectileValid, dnaAttackStats };
 })();
 modules["server/creature-attack-role.mjs"] = (() => {
 const { DNA_ACTION_RULES } = modules["server/dna-actions.mjs"];
@@ -439,7 +414,9 @@ const CREATURE_ATTACK_ROLES = Object.freeze(Object.fromEntries([
   ["spring-keeper", melee], ["lantern-keeper", { role: "ranged", melee: false, ranged: true }],
   ["old-garden-snail", melee], ["walking-forest", melee], ["white-paw", melee],
   ["spiny-back-leader", hybrid]
-].map(([key, value]) => [key, Object.freeze({ ...value })])));
+].map(([key, value]) => [key, Object.freeze({ ...value,
+  position: ["bundle-snail", "rolling-acorn", "spiny-back-beetle", "soil-boar", "vine-turtle", "old-garden-snail", "walking-forest", "spiny-back-leader"].includes(key) ? "front" :
+    ["flower-tail-bird", "soil-mole", "bubble-toad", "lantern-keeper"].includes(key) ? "back" : "middle" })])));
 
 function creatureAttackRole(species) {
   return CREATURE_ATTACK_ROLES[species] || null;
@@ -657,26 +634,30 @@ const UNIT_COMBAT_STATS = Object.freeze(Object.fromEntries([
   ["spore", 18],
   ["pebble", 22],
   ["spring", 19],
-  ["flower-tail-bird", 8],
-  ["dew-rabbit", 10],
-  ["soil-mole", 14],
-  ["bundle-snail", 16],
-  ["cotton-sheep", 12],
-  ["rolling-acorn", 16],
-  ["bubble-toad", 28],
-  ["snare-vine", 34],
-  ["spiny-back-beetle", 32],
-  ["soil-boar", 36],
-  ["vine-turtle", 28],
-  ["shadow-weasel", 40],
-  ["talon-owl", 44],
-  ["spring-keeper", 36],
-  ["lantern-keeper", 38],
-  ["old-garden-snail", 42],
-  ["walking-forest", 48],
-  ["white-paw", 64],
-  ["spiny-back-leader", 54]
-].map(([key, combatStrength]) => [key, Object.freeze({ health: UNIT_MAX_HEALTH, combatStrength })])));
+  ["flower-tail-bird", 8, 18, 3, 4, 40, 10],
+  ["dew-rabbit", 10, 22, 3, 4, 40, 8],
+  ["soil-mole", 14, 10, 6, 10, 45, 12],
+  ["bundle-snail", 16, 3, 2, 24, 60, 5],
+  ["cotton-sheep", 12, 7, 3, 14, 50, 5],
+  ["rolling-acorn", 16, 12, 4, 18, 55, 8],
+  ["bubble-toad", 28, 10, 5, 12, 50, 10],
+  ["snare-vine", 34, 3, 12, 14, 50, 8],
+  ["spiny-back-beetle", 32, 6, 6, 22, 60, 8],
+  ["soil-boar", 36, 5, 6, 18, 55, 12],
+  ["vine-turtle", 28, 2, 4, 28, 65, 5],
+  ["shadow-weasel", 40, 22, 12, 5, 40, 20],
+  ["talon-owl", 44, 18, 14, 6, 45, 18],
+  ["spring-keeper", 36, 18, 18, 10, 50, 15],
+  ["lantern-keeper", 38, 16, 10, 14, 50, 15],
+  ["old-garden-snail", 42, 2, 3, 30, 65, 5],
+  ["walking-forest", 48, 2, 6, 28, 65, 8],
+  ["white-paw", 64, 20, 16, 12, 50, 20],
+  ["spiny-back-leader", 54, 10, 10, 28, 65, 12]
+].map(([key, combatStrength, evasion, parry, block, blockReduction, criticalChance]) => [key, Object.freeze({
+  health: UNIT_MAX_HEALTH, combatStrength, evasion: (evasion || 0) / 100, parry: (parry || 0) / 100,
+  block: (block || 0) / 100, blockReduction: (blockReduction || 0) / 100,
+  criticalChance: (criticalChance || 0) / 100, criticalMultiplier: 1.5
+})])));
 
 function unitCombatStats(key) {
   return UNIT_COMBAT_STATS[key] || UNIT_COMBAT_STATS.bean;
@@ -703,15 +684,18 @@ function combatPrimary(agent) {
 }
 
 function combatProfile(agent) {
-  const dna = agent.stats?.dna;
+  const dna = agent.stats?.dna, base = unitCombatStats(agent.species || agent.tribe);
+  const chance = dna ? dna.critical / 100 : Number.isFinite(agent.stats?.criticalChance) ? agent.stats.criticalChance : base.criticalChance;
+  const multiplier = dna ? dna.criticalPower / 100 : Number.isFinite(agent.stats?.criticalMultiplier) ? agent.stats.criticalMultiplier : base.criticalMultiplier;
+  const criticalChance = dna ? (Number.isFinite(chance) ? chance : 0) : Math.max(0, Math.min(.75, chance));
+  const criticalMultiplier = dna ? (Number.isFinite(multiplier) ? multiplier : 1.5) : Math.max(1, Math.min(4, multiplier));
   if (dna) {
     const selected = dnaAttackStats(dna, agent.attack?.attackMode || (dna.melee ? "melee" : "ranged"));
     const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;
     return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: dna.armor,
       armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: dna.focus,
-      recovery: dna.recovery || 0 };
+      recovery: dna.recovery || 0, criticalChance, criticalMultiplier };
   }
-  const base = unitCombatStats(agent.species || agent.tribe);
   const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;
   const primary = combatPrimary(agent);
   const defaultInterval = primary === "blade" ? .95 : primary === "piercing" ? 1.65 : primary === "carapace" ? 1.4 : 1.25;
@@ -725,7 +709,9 @@ function combatProfile(agent) {
   const reduction = equipped("carapace") ? .45 : Math.max(0, Math.min(.8, agent.stats?.damageReduction || 0));
   const defense = Number.isFinite(agent.stats?.defense) ? agent.stats.defense : 8 + strength * .4 + 100 * reduction / (1 - reduction);
   const armorPenetration = equipped("piercing") ? .5 : Math.max(0, Math.min(1, agent.stats?.armorPenetration || 0));
-  return { primary, attackPower: Math.max(1, attackPower), defense: Math.max(0, defense), armorPenetration,
+  const protection = Object.fromEntries(["evasion", "parry", "block", "blockReduction"].map(key => [key,
+    Math.max(0, Math.min(1, Number.isFinite(agent.stats?.[key]) ? agent.stats[key] : agent.species ? base[key] : 0))]));
+  return { primary, attackPower: Math.max(1, attackPower), defense: Math.max(0, defense), armorPenetration, ...protection, criticalChance, criticalMultiplier,
     attackSpeed, attackInterval, windup: (primary === "piercing" ? .65 : primary === "blade" ? .24 : .4),
     recovery: (primary === "blade" ? .3 : .45) };
 }
@@ -751,6 +737,8 @@ function migrateCombatStats(agent) {
   if (agent.dna || agent.stats?.dna) return;
   const profile = unitCombatStats(agent.species || agent.tribe);
   const combatStrength = profile.combatStrength + (agent.species ? 0 : attributeCombatStrengthBonus(agent.attributes));
+  if (agent.species) for (const key of ["evasion", "parry", "block", "blockReduction", "criticalChance", "criticalMultiplier"])
+    if (!Number.isFinite(agent.stats[key])) agent.stats[key] = profile[key];
   if (agent.stats.combatStrength === combatStrength && agent.stats.health === UNIT_MAX_HEALTH) return;
   const health = UNIT_MAX_HEALTH;
   const ratio = Math.max(0, Math.min(1, agent.health / agent.stats.health));
@@ -3203,6 +3191,8 @@ function beetleAnimationPose(agent, time) {
   } else if (!rpg && agent.mode === "attack" && (time - agent.attackStartedAt) * 1000 + 1e-6 < BEETLE_ANIMATIONS.attack.durationMs) {
     action = "attack";
     startedAt = agent.attackStartedAt;
+  } else if (agent.combat?.position?.moving) {
+    return { action: "walk", frame: beetleAnimationFrame("walk", (time - agent.combat.position.moveStartedAt) * 1000) };
   } else if (agent.mode === "walk" && agent.moveDuration > 0 &&
       time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration) {
     // The authored walk strip covers one cell (two gait cycles). Play the
@@ -3367,9 +3357,189 @@ function snapshotCombatVfx(environment, time, visibility) {
 
 return { COMBAT_VFX_JOURNAL_LIMIT, COMBAT_VFX_JOURNAL_SECONDS, combatVfxToken, recordCombatVfx, snapshotCombatVfx };
 })();
-modules["server/combat.mjs"] = (() => {
-const { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaHealTarget, dnaHealAmount, dnaHealAllocations, dnaProjectileValid } = modules["server/dna-actions.mjs"];
+modules["client/unit-size.mjs"] = (() => {
+const UNIT_DISPLAY_SIZES = Object.freeze({
+  bean: .40, spore: .38, pebble: .42, spring: .39,
+  "flower-tail-bird": .26, "dew-rabbit": .29, "cotton-sheep": .32,
+  "soil-mole": .35, "bundle-snail": .38, "rolling-acorn": .38,
+  "bubble-toad": .52, "vine-turtle": .52, "spiny-back-beetle": .58,
+  "snare-vine": .62, "soil-boar": .66, "shadow-weasel": .72, "talon-owl": .78,
+  "spring-keeper": .88, "lantern-keeper": .92, "old-garden-snail": 1.00, "walking-forest": 1.12,
+  "spiny-back-leader": 1.24, "white-paw": 1.44
+});
+
+function unitDisplaySize(unit) {
+  const count = Array.isArray(unit.dna?.pieces) ? unit.dna.pieces.length :
+    Number.isFinite(unit.stats?.pieceCount) ? Math.max(0, unit.stats.pieceCount) : 0;
+  const scale = 1 + .01 * count;
+  const size = (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean) * scale;
+  return UNIT_DISPLAY_SIZES.bean + (size - UNIT_DISPLAY_SIZES.bean) * .5;
+}
+
+function combatViewCell(width, height, units) {
+  const largest = units.reduce((size, unit) => Math.max(size, unitDisplaySize(unit)), 0) || UNIT_DISPLAY_SIZES.bean;
+  return Math.min(width * .24, height * .5) / largest;
+}
+
+function combatViewLayout(width, height, units) {
+  const located = units.map(unit => ({ unit, point: unit.combat?.position || unit.combatPosition })).filter(entry => entry.point);
+  if (located.length) {
+    const largest = units.reduce((size, unit) => Math.max(size, unitDisplaySize(unit)), .4);
+    const xs = located.flatMap(({ point }) => [point.x, point.homeX ?? point.x]);
+    const ys = located.flatMap(({ point }) => [point.y, point.homeY ?? point.y]);
+    const lowX = Math.min(-3.8, ...xs), highX = Math.max(3.8, ...xs), lowY = Math.min(-1, ...ys), highY = Math.max(1, ...ys);
+    const cell = Math.min(combatViewCell(width, height, units), width * .88 / (highX - lowX + largest * 1.3),
+      height * .72 / ((highY - lowY) * .5 + largest * 1.3));
+    const project = point => ({ x: width * .5 + (point.x - (lowX + highX) / 2) * cell,
+      y: height * .66 + (point.y - (lowY + highY) / 2) * cell * .5 });
+    const positions = new Map(located.map(({ unit, point }) => {
+      const { x, y } = project(point), size = unitDisplaySize(unit);
+      return [String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
+        top: y - size * cell * 1.2, bottom: y + size * cell * .18 } }];
+    }));
+    return { cell, positions, project };
+  }
+  const teams = [0, 1].map(side => units.filter(unit => (unit.combat?.side ?? unit.side) === side));
+  const count = Math.max(...teams.map(team => team.length));
+  const positions = new Map();
+  if (!count) return { cell: combatViewCell(width, height, units), positions };
+  const columnCount = Math.min(count, Math.ceil(Math.sqrt(count * 1.5))), rowCount = Math.ceil(count / columnCount);
+  const columns = Array(columnCount).fill(0), rows = Array(rowCount).fill(0);
+  teams.forEach(team => team.forEach((unit, index) => {
+    const size = unitDisplaySize(unit);
+    columns[index % columnCount] = Math.max(columns[index % columnCount], size * 1.3);
+    rows[Math.floor(index / columnCount)] = Math.max(rows[Math.floor(index / columnCount)], size);
+  }));
+  const gapX = Math.min(width * .035, width * .42 / (columnCount * 4));
+  const gapY = Math.min(height * .035, height * .36 / (rowCount * 4));
+  const totalWidth = columns.reduce((sum, value) => sum + value, 0);
+  const rowSpans = rows.slice(1).map((size, index) => rows[index] * .18 + size * 1.2);
+  const groundSpan = rowSpans.reduce((sum, value) => sum + value, 0);
+  const cell = Math.min(combatViewCell(width, height, units),
+    (width * .42 - gapX * (columnCount - 1)) / totalWidth,
+    height * .44 / (rows[0] * 1.2), height * .08 / (rows[rowCount - 1] * .18),
+    rowCount > 1 ? (height * .36 - gapY * (rowCount - 1)) / groundSpan : Infinity);
+  const gridWidth = totalWidth * cell + gapX * (columnCount - 1);
+  const gridHeight = groundSpan * cell + gapY * (rowCount - 1);
+  const firstFoot = height * .5 + (height * .36 - gridHeight) / 2;
+  teams.forEach((team, side) => team.forEach((unit, index) => {
+    const column = index % columnCount, row = Math.floor(index / columnCount), size = unitDisplaySize(unit);
+    const offsetX = columns.slice(0, column).reduce((sum, value) => sum + value, 0) * cell + gapX * column;
+    const offsetY = rowSpans.slice(0, row).reduce((sum, value) => sum + value, 0) * cell + gapY * row;
+    const x = width * (side ? .75 : .25) + (side ? -1 : 1) * (gridWidth / 2 - offsetX - columns[column] * cell / 2);
+    const y = firstFoot + offsetY;
+    positions.set(String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
+      top: y - size * cell * 1.2, bottom: y + size * cell * .18 } });
+  }));
+  return { cell, positions };
+}
+
+function unitFacing(unit) {
+  return (unit.attack?.directionX || unit.facing || 1) < 0 ? -1 : 1;
+}
+
+function unitFrameMirror(sourceFacing, facing) {
+  return (facing < 0) !== (sourceFacing === "left");
+}
+
+return { UNIT_DISPLAY_SIZES, unitDisplaySize, combatViewCell, combatViewLayout, unitFacing, unitFrameMirror };
+})();
+modules["server/combat-position.mjs"] = (() => {
+const { DNA_ACTION_RULES, dnaAttackMode } = modules["server/dna-actions.mjs"];
 const { creatureAttackRole, creatureAttackMode } = modules["server/creature-attack-role.mjs"];
+const { unitDisplaySize } = modules["client/unit-size.mjs"];
+
+function combatPositionRole(agent) {
+  const role = creatureAttackRole(agent.species);
+  if (role) return role.position;
+  if (agent.stats?.dna?.ranged && !agent.stats.dna.melee) return "back";
+  if (agent.attributes?.carapace > 0 || agent.dna?.pieces?.some(piece => piece.gene === "carapace")) return "front";
+  return "middle";
+}
+
+function combatPositionRadius(agent) {
+  return Math.max(.2, unitDisplaySize(agent) * .55);
+}
+
+function initializeCombatPosition(agent, units, time) {
+  if (!agent.combat || Number.isFinite(agent.combat.position?.x) && Number.isFinite(agent.combat.position?.y)) return;
+  const role = combatPositionRole(agent), side = agent.combat.side;
+  const same = units.filter(other => other !== agent && other.combat?.side === side && combatPositionRole(other) === role && other.combat.position);
+  const slot = same.length, lane = slot ? Math.ceil(slot / 2) * (slot % 2 ? -1 : 1) : 0;
+  const radius = units.reduce((value, other) => Math.max(value, combatPositionRadius(other)), .35);
+  const depth = role === "front" ? 0 : role === "back" ? 2 : 1;
+  const x = (side ? 1 : -1) * (radius + .8 + (depth + Math.floor(slot / 7)) * (radius * 2 + .3) + Math.max(0, (agent.combat.initialDistance || 1) - 1) / 2);
+  const y = lane * (radius * 2 + .2);
+  agent.combat.position = { x, y, homeX: x, homeY: y, fromX: x, fromY: y, at: time, fromAt: time, moving: false, moveStartedAt: time, role };
+}
+
+function combatSeparation(agent, target) {
+  const source = agent.combat?.position, destination = target.combat?.position;
+  if (agent.combat?.id === target.combat?.id && source && destination)
+    return Math.max(0, Math.hypot(source.x - destination.x, source.y - destination.y) - combatPositionRadius(agent) - combatPositionRadius(target));
+  return Math.abs(agent.x - target.x) + Math.abs(agent.y - target.y);
+}
+
+function combatPositionMode(agent, target) {
+  const distance = combatSeparation(agent, target);
+  if (agent.stats?.dna) return dnaAttackMode(agent.stats.dna, distance);
+  if (agent.species) return creatureAttackMode(agent, distance);
+  return distance <= DNA_ACTION_RULES.meleeRange ? "melee" : null;
+}
+
+function advanceCombatPositions(units, time) {
+  for (const unit of units) initializeCombatPosition(unit, units, time);
+  const positions = new Map(units.map(unit => [unit, { ...unit.combat.position }]));
+  const next = new Map();
+  for (const unit of units) {
+    const position = positions.get(unit), elapsed = Math.max(0, time - position.at);
+    if (!elapsed) { next.set(unit, { x: position.x, y: position.y }); continue; }
+    const enemies = units.filter(other => other.combat.side !== unit.combat.side);
+    const target = enemies.find(other => other.id === unit.attack?.targetId) || enemies.sort((a, b) => combatSeparation(unit, a) - combatSeparation(unit, b) || String(a.id).localeCompare(String(b.id)))[0];
+    const point = target && positions.get(target);
+    if (point) {
+      unit.combat.targetId = target.id;
+      const direction = Math.sign(point.x - position.x);
+      if (direction) unit.facing = direction;
+    }
+    if (!point || unit.attack || time < Math.max(unit.combat.stunnedUntil || 0, unit.dnaStunnedUntil || 0)) {
+      next.set(unit, { x: position.x, y: position.y }); continue;
+    }
+    const role = combatPositionRole(unit), capabilities = unit.stats?.dna || creatureAttackRole(unit.species);
+    const separation = combatSeparation(unit, target), dx = point.x - position.x, dy = point.y - position.y;
+    const length = Math.hypot(dx, dy) || 1;
+    if (capabilities && !capabilities.melee && !capabilities.ranged) { next.set(unit, { x: position.x, y: position.y }); continue; }
+    const closeMelee = capabilities?.melee && separation <= DNA_ACTION_RULES.meleeRange;
+    const desired = role === "back" && capabilities?.ranged && !closeMelee ? 2.3 : .75;
+    const retreat = role === "back" && capabilities?.ranged && !capabilities.melee && separation < 1.8;
+    const travel = Math.min(Math.abs(separation - desired), Math.max(.25, unit.stats?.dna?.movement || unit.stats?.speed || .5) * 3 * elapsed);
+    const direction = retreat ? -1 : separation > desired + .05 ? 1 : 0;
+    next.set(unit, { x: Math.max(-8, Math.min(8, position.x + dx / length * travel * direction)),
+      y: Math.max(-8, Math.min(8, position.y + dy / length * travel * direction)) });
+  }
+  for (let pass = 0; pass < 8; pass++) for (let i = 0; i < units.length; i++) for (let j = i + 1; j < units.length; j++) {
+    const a = units[i], b = units[j], first = next.get(a), second = next.get(b);
+    const dx = second.x - first.x, dy = second.y - first.y, gap = Math.hypot(dx, dy);
+    const minimum = combatPositionRadius(a) + combatPositionRadius(b) + .08;
+    if (gap >= minimum) continue;
+    const push = (minimum - gap) / 2, x = gap ? dx / gap : 0, y = gap ? dy / gap : 1;
+    first.x -= x * push; first.y -= y * push; second.x += x * push; second.y += y * push;
+  }
+  for (const unit of units) {
+    const previous = positions.get(unit), point = next.get(unit);
+    if (!(time > previous.at)) continue;
+    const moving = Math.hypot(point.x - previous.x, point.y - previous.y) > 1e-7;
+    unit.combat.position = { ...previous, ...point, fromX: previous.x, fromY: previous.y, fromAt: previous.at, at: time,
+      moving, moveStartedAt: moving && !previous.moving ? previous.at : previous.moveStartedAt };
+  }
+}
+
+return { combatPositionRole, combatPositionRadius, initializeCombatPosition, combatSeparation, combatPositionMode, advanceCombatPositions };
+})();
+modules["server/combat.mjs"] = (() => {
+const { DNA_ACTION_RULES, dnaAttackMode, dnaProjectileDuration, dnaProjectileValid } = modules["server/dna-actions.mjs"];
+const { creatureAttackRole, creatureAttackMode } = modules["server/creature-attack-role.mjs"];
+const { initializeCombatPosition, advanceCombatPositions, combatSeparation, combatPositionMode } = modules["server/combat-position.mjs"];
 const { dnaCanMove } = modules["server/dna-unit.mjs"];
 const { worldSize } = modules["server/world-size.mjs"];
 const { dropCarriedResources } = modules["server/resources.mjs"];
@@ -3448,14 +3618,14 @@ function createCombat(environment) {
   const size = worldSize(environment.world);
   const processed = new Map(), projectiles = new Set();
   const attackCauses = new WeakMap(), bleedCauses = new WeakMap();
-  let projectileTime = -Infinity;
+
   function attackStats(agent) {
     if (agent.stats?.dna) return agent.stats.dna;
     const role = creatureAttackRole(agent.species);
     if (!role?.ranged) return null;
     const profile = combatProfile(agent);
     return { melee: role.melee, ranged: true, focus: profile.windup, rangedSpeed: profile.attackSpeed,
-      hits: 1, comboSpeed: 0, accuracy: 0, critical: 0, lifesteal: 0, stun: 0, area: 0, bleed: 0 };
+      hits: 1, comboSpeed: 0, accuracy: 0, lifesteal: 0, stun: 0, area: 0, bleed: 0 };
   }
   function entries() {
     if (environment.unitIndex) return environment.unitIndex.entries();
@@ -3480,10 +3650,11 @@ function createCombat(environment) {
   function attach(agent, combat, side, time) {
     suspendDefenseWork(agent);
     dropCarriedResources(environment, agent);
-    agent.combat = { id: combat.id, x: combat.x, y: combat.y, teams: [...combat.teams], side, joinedAt: time,
+    agent.combat = { id: combat.id, x: combat.x, y: combat.y, teams: [...combat.teams], side, joinedAt: time, initialDistance: environment.combatInitialDistance || 1,
       version: 2, cycleStartedAt: time, nextAttackAt: Math.max(time, agent.attackReady || 0), targetId: null,
       stunnedUntil: 0, stunImmuneUntil: 0, parryReadyAt: time, blockReadyAt: time, attackCount: 0,
       nextEscapeAt: time + PEACEFUL_ESCAPE_INTERVAL, completedExchanges: 0 };
+    initializeCombatPosition(agent, entriesAt(combat.x, combat.y).map(entry => entry.agent), time);
     agent.renderFromX = agent.x; agent.renderFromY = agent.y;
     agent.moveDuration = 0; agent.moveBudget = 0;
     agent.attack = null; agent.attackTargetId = null;
@@ -3491,12 +3662,13 @@ function createCombat(environment) {
     agent.utility = null; agent.decisionPending = null;
     if (agent.foodDelivery?.receivedAt === null) agent.foodDelivery = null;
     agent.mode = "fight";
-    agent.facing = side === 0 ? -1 : 1;
+    agent.facing = side === 0 ? 1 : -1;
     environment.unitIndex?.update(agent);
   }
 
   function release(agent, time) {
     if (agent.stats?.dna) agent.dnaCombatEndedAt = time;
+    if (agent.combat?.position) agent.combatPosition = { ...agent.combat.position, moving: false };
     agent.combat = null;
     agent.attack = null; agent.attackTargetId = null; agent.attackHit = true;
     if (agent.health <= 0) return;
@@ -3514,7 +3686,7 @@ function createCombat(environment) {
     const game = environment.games.get(agent.ownerId);
     const defending = colonyDefenseTarget(agent, target, game?.agents, [game?.nest]);
     if (!settled(agent, time) || !settled(target, time) || agent.x !== target.x || agent.y !== target.y ||
-        agent.combat || !canPursueCombat(agent, target, time, defending)) return false;
+        agent.combat || !environment.combatSimulation && !canPursueCombat(agent, target, time, defending)) return false;
     let combat = target.combat;
     if (combat) {
       const side = combat.teams.indexOf(combatTeam(agent));
@@ -3630,15 +3802,19 @@ function createCombat(environment) {
     source.combat.lastEvent = event;
     if (target.combat?.id === combat.id) {
       target.combat.lastEvent = event;
-      if (["parry", "block", "stun"].includes(kind)) target.combat.lastReaction = event;
+      if (["miss", "parry", "block", "stun"].includes(kind)) target.combat.lastReaction = event;
     }
     // Hit evidence is captured at the HP mutation; stun/counter are separate cues.
     if (["stun", "counter"].includes(kind)) vfx(kind, at, source, target, 0, detail);
   }
 
   function beginAttack(attacker, target, time, counter) {
-    const combat = attacker.combat, mode = attacker.stats?.dna ? dnaAttackMode(attacker.stats.dna, 0) :
-      creatureAttackMode(attacker, 0) || "melee";
+    const combat = attacker.combat, mode = combatPositionMode(attacker, target);
+    if (!mode) {
+      const capabilities = attacker.stats?.dna || creatureAttackRole(attacker.species);
+      combat.nextAttackAt = capabilities && !capabilities.melee && !capabilities.ranged ? Infinity : Math.max(combat.nextAttackAt, time + .05);
+      return;
+    }
     const profile = combatProfile({ ...attacker, attack: { attackMode: mode } });
     if (!counter) combat.attackCount++;
     if (attacker.stats?.dna && !profile.attackSpeed) { combat.nextAttackAt = Infinity; return; }
@@ -3649,24 +3825,25 @@ function createCombat(environment) {
     const recovery = Math.max(profile.recovery, timing.durationMs / 1000 - (timing.hitTimeMs / 1000 || AGENT_ATTACK_HIT_TIME));
     const duration = windup + recovery;
     attacker.attack = { combatId: combat.id, startedAt: time, hitAt: time + windup, endsAt: time + duration,
-      speed: timing.durationMs / 1000 / duration, directionX: combat.side === 0 ? -1 : 1,
+      speed: timing.durationMs / 1000 / duration, directionX: Math.sign(target.combat.position.x - combat.position.x) || attacker.facing || 1,
       targetId: target.id, targetKind: "agent", targetX: combat.x, targetY: combat.y,
-      resolved: false, hit: false, counter, heavy, attackMode: mode, recovery };
+      resolved: false, hit: false, counter, heavy, attackMode: mode, recovery, interval: profile.attackInterval };
     if (attacker.stats?.dna) { attacker.attack.hitIndex = 0; attacker.attack.heavy = false; }
     if (attacker.stats?.dna && mode === "melee" && !counter) attacker.attack.meleeContacts = [attacker.attack.hitAt];
-    if (attacker.species && !attacker.stats?.dna && mode === "ranged") {
+    if (mode === "ranged") {
       attacker.attack.dnaRanged = true;
       attacker.attack.launchedAt = attacker.attack.hitAt;
-      attacker.attack.shotLaunches = [attacker.attack.hitAt];
+      attacker.attack.shotLaunches = [];
     }
     const causeId = combatVfxToken(environment, "attack");
     attackCauses.set(attacker.attack, causeId);
     if (!counter) vfx("attack", time, attacker, target, 0, { causeId, mode, endsAt: attacker.attack.hitAt });
     combat.cycleStartedAt = time;
-    combat.nextAttackAt = time + profile.attackInterval;
+    combat.nextAttackAt = attacker.attack.endsAt + profile.attackInterval;
     combat.targetId = target.id;
     combat.parryUntil = !counter && profile.primary === "blade" && time >= combat.parryReadyAt ? time + .2 : 0;
     attacker.attackReady = combat.nextAttackAt;
+    combat.position.moving = false;
     attacker.attackStartedAt = time; attacker.animationStartedAt = time;
     attacker.attackTargetId = target.id; attacker.attackHit = false;
     attacker.mode = attacker.species === "spiny-back-beetle" ? "attack" : "fight";
@@ -3674,11 +3851,23 @@ function createCombat(environment) {
     if (counter) emit(combat, "counter", time, attacker, target, 0, { causeId, mode, endsAt: attacker.attack.hitAt });
   }
 
-  function heal(agent, amount, at, kind, detail = {}) {
+  function restoreHealth(agent, amount, at, kind, detail = {}) {
     const previous = agent.health;
-    if (agent.health > 0) agent.health = Math.min(agent.stats.health, agent.health + amount * (1 + (agent.stats.dna?.healing || 0) / 100));
+    if (agent.health > 0) agent.health = Math.min(agent.stats.health, agent.health + amount);
     const restored = Math.max(0, agent.health - previous);
     if (restored > 0 && kind) vfx(kind, at, agent, agent, restored, { toId: agent.id, ...detail });
+  }
+
+  function neutralDefenseReaction(defender, accuracy, time, counter) {
+    if (!defender.species || defender.stats?.dna) return null;
+    const profile = combatProfile(defender), random = environment.combatRandom || Math.random;
+    const available = time >= Math.max(defender.combat?.stunnedUntil || 0, defender.dnaStunnedUntil || 0);
+    if (available && random() < Math.max(0, profile.evasion - accuracy / 100)) return { kind: "miss", multiplier: 0 };
+    if (available && !counter && time >= (defender.dnaReactionReadyAt || 0)) {
+      if (random() < profile.parry) return { kind: "parry", multiplier: 0 };
+      if (random() < profile.block) return { kind: "block", multiplier: 1 - profile.blockReduction };
+    }
+    return { kind: null, multiplier: 1 };
   }
 
   function dnaHit(attacker, target, time) {
@@ -3690,7 +3879,9 @@ function createCombat(environment) {
     let damage = combatDamage(attacker, defender, (environment.damageRandom || Math.random)(), environment.combatRules);
     let reaction = null;
     if (source && attack.hitIndex > 0) damage *= source.comboPower / 100;
-    if (random() * 100 < Math.max(0, (shield?.evasion || 0) - (source?.accuracy || 0))) { damage = 0; reaction = "miss"; }
+    const neutral = neutralDefenseReaction(defender, source?.accuracy || 0, time, attack.counter);
+    if (neutral) { damage *= neutral.multiplier; reaction = neutral.kind; }
+    else if (random() * 100 < Math.max(0, (shield?.evasion || 0) - (source?.accuracy || 0))) { damage = 0; reaction = "miss"; }
     else if (!attack.counter && shield && time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < shield.parry) { damage = 0; reaction = "parry"; }
     else if (!attack.counter && shield && time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < shield.block) { damage *= 1 - shield.blockPower / 100; reaction = "block"; }
     else if (!shield && !attack.counter) {
@@ -3703,8 +3894,8 @@ function createCombat(environment) {
     }
     if (["parry", "block"].includes(reaction) && environment.combatRules?.reactionCooldown)
       defender.dnaReactionReadyAt = time + environment.combatRules.reactionCooldown;
-    const critical = !!(damage > 0 && source && random() * 100 < source.critical);
-    if (critical) damage *= source.criticalPower / 100;
+    const offense = combatProfile(attacker), critical = damage > 0 && random() < offense.criticalChance;
+    if (critical) damage *= offense.criticalMultiplier;
     attack.damage = damage; attack.hit = damage > 0;
     const previous = defender.health;
     const evidence = { kind: reaction || "hit", at: time, critical, counter: !!attack.counter,
@@ -3712,7 +3903,7 @@ function createCombat(environment) {
     const hitEvent = damage > 0 ? receiveDamage(target, damage, attacker, evidence) : vfx(evidence.kind, time, attacker, defender, 0, evidence);
     if (damage > 0) defender.hurtStartedAt = time;
     const dealt = Math.max(0, previous - defender.health);
-    if (source && dealt > 0) heal(attacker, dealt * source.lifesteal / 100, time, "drain", {
+    if (source && dealt > 0) restoreHealth(attacker, dealt * source.lifesteal / 100, time, "drain", {
       causeId: hitEvent?.id, fromId: defender.id, from: { x: defender.x, y: defender.y } });
     combat.completedExchanges++; defender.combat.completedExchanges++;
     emit(combat, reaction || "hit", time, attacker, defender, damage);
@@ -3735,7 +3926,7 @@ function createCombat(environment) {
       for (const entry of others) receiveDamage(entry, damage * source.areaPower / 100, attacker,
         { kind: "area", at: time, causeId: hitEvent?.id, mode: attack.attackMode });
     }
-    if (!source && attack.heavy && reaction !== "parry" && defender.health > 0 && time >= defender.combat.stunImmuneUntil) {
+    if (!source && attack.heavy && damage > 0 && reaction !== "parry" && defender.health > 0 && time >= defender.combat.stunImmuneUntil) {
       const duration = .5 * (1 - (shield?.tenacity || 0) / 100), defense = defender.combat;
       defense.stunnedUntil = time + duration; defense.stunImmuneUntil = time + duration + (environment.combatRules?.stunImmunity ?? 2); defense.parryUntil = 0;
       defender.attack = null; defender.attackTargetId = null;
@@ -3749,11 +3940,13 @@ function createCombat(environment) {
         { kind: "reflect", at: time, causeId: hitEvent?.id, fromId: defender.id, toId: attacker.id });
     }
     if (defender.health > 0 && attacker.health > 0 && !attack.counter && reaction && reaction !== "miss" &&
-        (shield ? shield.power > 0 && time >= (defender.dnaCounterReadyAt || 0) && random() * 100 < shield.counter : true)) beginAttack(defender, attacker, time, true);
+        (shield ? shield.power > 0 && time >= (defender.dnaCounterReadyAt || 0) && random() * 100 < shield.counter : !defender.species)) beginAttack(defender, attacker, time, true);
     if (source && !attack.counter && attacker.health > 0 && defender.health > 0 && ++attack.hitIndex < source.hits) {
       attack.resolved = false; attack.hitAt = time + source.comboSpeed;
       if (attack.meleeContacts) attack.meleeContacts.push(attack.hitAt);
       attack.endsAt = Math.max(attack.endsAt, attack.hitAt + attack.recovery);
+      combat.nextAttackAt = Math.max(combat.nextAttackAt, attack.endsAt + attack.interval);
+      attacker.attackReady = combat.nextAttackAt;
     }
   }
 
@@ -3771,21 +3964,40 @@ function createCombat(environment) {
     agent.dnaRecoveryAt = time;
     if (agent.stats?.dna && !agent.combat && Number.isFinite(previous)) {
       const start = Math.max(previous, (agent.dnaCombatEndedAt || 0) + 5);
-      if (time > start) heal(agent, agent.stats.dna.regeneration * (time - start), time, "regeneration", { startedAt: start });
+      if (time > start) restoreHealth(agent, agent.stats.dna.regeneration * (time - start), time, "regeneration", { startedAt: start });
     }
   }
 
   function resolveHit(attacker, target, time) {
-    if (attacker.species && !attacker.stats?.dna && attacker.attack?.attackMode === "ranged") {
-      const attack = attacker.attack, combat = attacker.combat, defense = target.agent.combat;
-      attack.resolved = true; attacker.attackHit = true;
-      if (target.agent.health <= 0 || defense?.id !== combat.id) return;
-      const projectileId = combatVfxToken(environment, "projectile"), causeId = attackCauses.get(attack);
-      vfx("shoot", time, attacker, target.agent, 0, { projectileId, causeId, mode: "ranged", hitIndex: 0,
-        arrivesAt: time, from: { x: attacker.x, y: attacker.y }, to: { x: target.agent.x, y: target.agent.y } });
-      const outcome = projectileHit({ source: attacker, target, attack, hitIndex: 0, vfxId: projectileId }, time) || { damage: 0, kind: "miss" };
-      combat.completedExchanges++; defense.completedExchanges++;
-      emit(combat, outcome.kind, time, attacker, target.agent, outcome.damage, { causeId, mode: "ranged", projectileId });
+    const active = attacker.attack;
+    if (active.attackMode === "ranged") {
+      active.resolved = true; attacker.attackHit = true;
+      if (target.agent.health <= 0 || target.agent.combat?.id !== attacker.combat.id) return;
+      const from = attacker.combat.position, to = target.agent.combat.position;
+      const arrivesAt = time + Math.max(.1, dnaProjectileDuration(Math.hypot(to.x - from.x, to.y - from.y)));
+      const visual = { launchedAt: time, hitAt: arrivesAt, fromX: attacker.x, fromY: attacker.y,
+        targetX: target.agent.x, targetY: target.agent.y, targetId: target.agent.id,
+        arenaFrom: { x: from.x, y: from.y }, arenaTo: { x: to.x, y: to.y } };
+      const projectileId = combatVfxToken(environment, "projectile"), causeId = attackCauses.get(active);
+      active.shotLaunches.push(time);
+      attacker.dnaProjectiles = [...(attacker.dnaProjectiles || []), visual];
+      projectiles.add({ source: attacker, target, attack: active, hitIndex: active.hitIndex || 0, visual,
+        arrivesAt, launchedAt: time, launched: true, vfxId: projectileId });
+      vfx("shoot", time, attacker, target.agent, 0, { projectileId, causeId, mode: "ranged", hitIndex: active.hitIndex || 0,
+        arrivesAt, from: { x: attacker.x, y: attacker.y }, to: { x: target.agent.x, y: target.agent.y },
+        arenaFrom: visual.arenaFrom, arenaTo: visual.arenaTo });
+      const stats = attacker.stats?.dna;
+      if (stats && !active.counter && ++active.hitIndex < stats.hits) {
+        active.resolved = false; active.hitAt = time + stats.comboSpeed;
+        active.endsAt = Math.max(active.endsAt, active.hitAt + active.recovery);
+        attacker.combat.nextAttackAt = Math.max(attacker.combat.nextAttackAt, active.endsAt + active.interval);
+        attacker.attackReady = attacker.combat.nextAttackAt;
+      }
+      return;
+    }
+    if (combatSeparation(attacker, target.agent) > DNA_ACTION_RULES.meleeRange + 1e-8) {
+      active.resolved = true; attacker.attackHit = true;
+      vfx("miss", time, attacker, target.agent, 0, { causeId: attackCauses.get(active), mode: "melee", critical: false });
       return;
     }
     if (attacker.stats?.dna || target.agent.stats?.dna) return dnaHit(attacker, target, time);
@@ -3795,21 +4007,27 @@ function createCombat(environment) {
     const defense = defender.combat, profile = combatProfile(defender);
     let damage = combatDamage(attacker, defender, (environment.damageRandom || Math.random)(), environment.combatRules);
     let reaction = null;
-    if (!attack.counter && time < defense.parryUntil && time >= defense.parryReadyAt && profile.primary === "blade") {
+    const neutral = neutralDefenseReaction(defender, 0, time, attack.counter);
+    if (neutral) { damage *= neutral.multiplier; reaction = neutral.kind; }
+    else if (!attack.counter && time < defense.parryUntil && time >= defense.parryReadyAt && profile.primary === "blade") {
       damage = 0; defense.parryReadyAt = time + 3; defense.parryUntil = 0; reaction = "parry";
     } else if (!attack.counter && profile.primary === "carapace" && time >= defense.blockReadyAt && time >= defense.stunnedUntil) {
       damage = Math.max(1, Math.round(damage * (attack.heavy ? .55 : .2)));
       defense.blockReadyAt = time + 2.5; reaction = "block";
     }
-    attack.damage = damage; attack.hit = true;
+    if (["parry", "block"].includes(reaction) && environment.combatRules?.reactionCooldown)
+      defender.dnaReactionReadyAt = time + environment.combatRules.reactionCooldown;
+    const offense = combatProfile(attacker), critical = damage > 0 && (environment.combatRandom || Math.random)() < offense.criticalChance;
+    if (critical) damage *= offense.criticalMultiplier;
+    attack.damage = damage; attack.hit = damage > 0;
     const evidence = { kind: reaction || "hit", at: time, counter: !!attack.counter, mode: "melee",
-      critical: false, hitIndex: 0, causeId: attackCauses.get(attack) };
+      critical, hitIndex: 0, causeId: attackCauses.get(attack) };
     const hitEvent = damage > 0 ? receiveDamage(target, damage, attacker, evidence) : vfx(evidence.kind, time, attacker, defender, 0, evidence);
     if (damage > 0) defender.hurtStartedAt = time;
     combat.completedExchanges++; defense.completedExchanges++;
     emit(combat, reaction || "hit", time, attacker, defender, damage);
     if (defender.health <= 0) return;
-    if (attack.heavy && reaction !== "parry" && time >= defense.stunImmuneUntil) {
+    if (attack.heavy && damage > 0 && reaction !== "parry" && time >= defense.stunImmuneUntil) {
       defense.stunnedUntil = time + .5; defense.stunImmuneUntil = time + 2.5; defense.parryUntil = 0;
       defender.attack = null; defender.attackTargetId = null;
       defense.nextAttackAt = Math.max(defense.nextAttackAt, defense.stunnedUntil);
@@ -3817,7 +4035,7 @@ function createCombat(environment) {
       emit(combat, "stun", time, attacker, defender, damage,
         { causeId: hitEvent?.id, duration: .5, endsAt: time + .5 }); reaction = null;
     }
-    if (reaction && attacker.health > 0) beginAttack(defender, attacker, time, true);
+    if (reaction && reaction !== "miss" && !defender.species && attacker.health > 0) beginAttack(defender, attacker, time, true);
   }
 
 
@@ -3829,12 +4047,14 @@ function createCombat(environment) {
 
   function projectileHit(projectile, time) {
     const { source, target } = projectile, defender = target.agent;
-    if (!dnaProjectileValid(source, defender)) return;
+    if (!dnaProjectileValid({ ...source, retreat: null }, { ...defender, retreat: null })) return;
     const offense = attackStats(source), defense = defender.stats.dna, random = environment.combatRandom || Math.random;
     let damage = combatDamage({ ...source, attack: projectile.attack }, defender, (environment.damageRandom || Math.random)(), environment.combatRules);
     let reaction = null;
     if (projectile.hitIndex > 0) damage *= offense.comboPower / 100;
-    if (random() * 100 < Math.max(0, (defense?.evasion || 0) - offense.accuracy)) { damage = 0; reaction = "miss"; }
+    const neutral = neutralDefenseReaction(defender, offense.accuracy, time, projectile.attack.counter);
+    if (neutral) { damage *= neutral.multiplier; reaction = neutral.kind; }
+    else if (random() * 100 < Math.max(0, (defense?.evasion || 0) - offense.accuracy)) { damage = 0; reaction = "miss"; }
     else if (time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < (defense?.parry || 0)) { damage = 0; reaction = "parry"; }
     else if (time >= (defender.dnaReactionReadyAt || 0) && random() * 100 < (defense?.block || 0)) { damage *= 1 - defense.blockPower / 100; reaction = "block"; }
     else if (!defense) {
@@ -3844,15 +4064,15 @@ function createCombat(environment) {
     }
     if (["parry", "block"].includes(reaction) && environment.combatRules?.reactionCooldown)
       defender.dnaReactionReadyAt = time + environment.combatRules.reactionCooldown;
-    const critical = damage > 0 && random() * 100 < offense.critical;
-    if (critical) damage *= offense.criticalPower / 100;
+    const profile = combatProfile(source), critical = damage > 0 && random() < profile.criticalChance;
+    if (critical) damage *= profile.criticalMultiplier;
     const previous = defender.health;
     const evidence = { kind: reaction || "hit", at: time, mode: "ranged", critical, hitIndex: projectile.hitIndex,
       causeId: attackCauses.get(projectile.attack), projectileId: projectile.vfxId };
     const hitEvent = damage > 0 ? receiveDamage(target, damage, source, evidence) : vfx(evidence.kind, time, source, defender, 0, evidence);
     if (damage > 0) defender.hurtStartedAt = time;
     const dealt = Math.max(0, previous - defender.health);
-    heal(source, dealt * offense.lifesteal / 100, time, "drain", {
+    restoreHealth(source, dealt * offense.lifesteal / 100, time, "drain", {
       causeId: hitEvent?.id, fromId: defender.id, from: { x: defender.x, y: defender.y } });
     if (dealt > 0 && defense?.reflection > 0) receiveDamage({ agent: source, game: environment.games.get(source.ownerId) || null }, dealt * defense.reflection / 100, defender,
       { kind: "reflect", at: time, causeId: hitEvent?.id, fromId: defender.id, toId: source.id });
@@ -3875,15 +4095,15 @@ function createCombat(environment) {
     }
     source.dnaActionEvent = { kind: "ranged", at: time, sourceId: source.id, targetId: defender.id, damage: dealt, x: defender.x, y: defender.y };
     defender.dnaActionEvent = source.dnaActionEvent;
-    if (source.attack === projectile.attack) { source.attack.hit = dealt > 0; source.attack.resolved = true; }
+    if (source.attack === projectile.attack) { source.attack.hit = dealt > 0; if (!source.attack.combatId) source.attack.resolved = true; }
     return { damage: dealt, kind: reaction || "hit" };
   }
 
-  function updateDnaActions(agent, time) {
-    if (projectileTime !== time) {
-      projectileTime = time;
+  function updateProjectiles(time, combatId) {
       for (const projectile of [...projectiles].sort((a, b) => a.arrivesAt - b.arrivesAt)) {
-        if (!dnaProjectileValid(projectile.source, projectile.target.agent) ||
+        if (projectile.source.combat && projectile.source.combat.id !== combatId) continue;
+        if (!(projectile.launched ? dnaProjectileValid({ ...projectile.source, retreat: null }, { ...projectile.target.agent, retreat: null }) :
+            dnaProjectileValid(projectile.source, projectile.target.agent)) ||
             projectile.source.ownerId && !environment.games.get(projectile.source.ownerId)?.agents.includes(projectile.source) ||
             projectile.target.game && !projectile.target.game.agents.includes(projectile.target.agent) ||
             !projectile.launched && projectile.source.attack !== projectile.attack) {
@@ -3904,21 +4124,14 @@ function createCombat(environment) {
           projectiles.delete(projectile); projectile.source.dnaProjectiles = (projectile.source.dnaProjectiles || []).filter(item => item !== projectile.visual);
         }
       }
-    }
+  }
+
+  function updateDnaActions(agent, time) {
+    if (!agent.combat) updateProjectiles(time);
     const stats = attackStats(agent);
-    if (!stats || !stats.healer && !stats.ranged || !settled(agent, time) || agent.retreat ||
+    if (!stats || !stats.ranged || !settled(agent, time) || agent.retreat ||
         time < Math.max(agent.dnaStunnedUntil || 0, agent.combat?.stunnedUntil || 0)) return false;
-    if (stats.healer && time >= (agent.dnaHealReady || 0)) {
-      agent.dnaHealReady = time + DNA_ACTION_RULES.healInterval;
-      const allocations = dnaHealAllocations(agent, nearby(agent, DNA_ACTION_RULES.healRange).map(entry => entry.agent), combatTeam, distance);
-      for (const { target, amount } of allocations) {
-        target.health += amount;
-        const event = { kind: "heal", at: time, sourceId: agent.id, targetId: target.id, damage: -amount, x: target.x, y: target.y };
-        agent.dnaHealEvent = event; target.dnaHealEvent = event;
-        vfx("heal", time, agent, target, amount);
-      }
-    }
-    if (agent.attack?.dnaRanged) {
+    if (!agent.combat && agent.attack?.dnaRanged) {
       if (time < agent.attack.endsAt) return true;
       agent.attack = null; agent.attackTargetId = null;
     }
@@ -3935,14 +4148,13 @@ function createCombat(environment) {
     }).sort((a, b) => distance(agent, a.agent) - distance(agent, b.agent) || String(a.agent.id).localeCompare(String(b.agent.id)));
     const target = targets[0]; if (!target) return false;
     const separation = distance(agent, target.agent), windup = stats.focus, launchedAt = time + windup;
-    const arrivesAt = launchedAt + dnaProjectileDuration(separation), readyAt = time + Math.max(1 / stats.rangedSpeed, windup + (stats.hits - 1) * stats.comboSpeed);
-    // readyAt groups additions differently from the per-shot schedule and may
-    // round one step before its final launch. Do not retire/cancel that shot;
-    // keep the existing cooldown, exact launch times and recovery otherwise.
-    const lastLaunchAt = launchedAt + (stats.hits - 1) * stats.comboSpeed;
-    agent.attackReady = readyAt;
+    const arrivesAt = launchedAt + dnaProjectileDuration(separation), interval = 1 / stats.rangedSpeed;
+    const timing = CREATURE_ATTACK_TIMINGS[agent.species] || { durationMs: AGENT_ATTACK_DURATION * 1000 };
+    const recovery = Math.max(combatProfile(agent).recovery, timing.durationMs / 1000 - (timing.hitTimeMs / 1000 || AGENT_ATTACK_HIT_TIME));
+    const lastLaunchAt = launchedAt + (stats.hits - 1) * stats.comboSpeed, endsAt = lastLaunchAt + recovery;
+    agent.attackReady = endsAt + interval;
     agent.attack = { dnaRanged: true, attackMode: "ranged", startedAt: time, launchedAt, hitAt: arrivesAt, shotLaunches: [],
-      endsAt: Math.max(lastLaunchAt, Math.min(readyAt, lastLaunchAt + .15)), speed: 1, targetId: target.agent.id, targetKind: "agent", targetX: target.agent.x, targetY: target.agent.y,
+      endsAt, recovery, interval, speed: 1, targetId: target.agent.id, targetKind: "agent", targetX: target.agent.x, targetY: target.agent.y,
       fromX: agent.x, fromY: agent.y, directionX: Math.sign(target.agent.x - agent.x) || 1, resolved: false, hit: false };
     const causeId = combatVfxToken(environment, "attack");
     attackCauses.set(agent.attack, causeId);
@@ -3980,28 +4192,36 @@ function createCombat(environment) {
     for (const { agent: member } of participants) {
       if (member.combat.version !== 2) { const old = member.combat; attach(member, old, old.side, time); }
       dropCarriedResources(environment, member); member.moveBudget = 0;
-      member.facing = member.combat.side === 0 ? -1 : 1;
+      initializeCombatPosition(member, participants.map(entry => entry.agent), time);
     }
     let iterations = 0;
     while (iterations++ < 10000) {
       participants = members(combat).sort((a, b) => String(a.agent.id).localeCompare(String(b.agent.id)));
       if (new Set(participants.map(entry => entry.agent.combat.side)).size < 2) { finish(combat, time); processed.delete(combat.id); return true; }
       const events = participants.flatMap(({ agent: member }) => {
-        if (member.attack) return [{ agent: member, at: member.attack.resolved ?
-          Math.min(member.attack.endsAt, Math.max(member.attack.hitAt + combatProfile(member).recovery, member.combat.nextAttackAt)) : member.attack.hitAt,
-          kind: member.attack.resolved ? "end" : "hit" }];
+        if (member.attack) {
+          return [{ agent: member, at: member.attack.resolved ? member.attack.endsAt : member.attack.hitAt,
+            kind: member.attack.resolved ? "end" : "hit" }];
+        }
         return [{ agent: member, at: Math.max(member.combat.nextAttackAt, member.combat.stunnedUntil), kind: "start" }];
-      }).filter(event => event.at <= time + 1e-8).sort((a, b) => a.at - b.at ||
-        ({ hit: 0, end: 1, start: 2 }[a.kind] - { hit: 0, end: 1, start: 2 }[b.kind]) || String(a.agent.id).localeCompare(String(b.agent.id)));
-      if (!events.length) break;
-      const event = events[0], member = event.agent;
+      });
+      for (const projectile of projectiles) if (projectile.source.combat?.id === combat.id)
+        events.push({ agent: projectile.source, at: projectile.launched ? projectile.arrivesAt : projectile.launchedAt, kind: "projectile" });
+      events.push({ agent: participants[0].agent, at: Math.min(...participants.map(entry => entry.agent.combat.position.at)) + .05, kind: "move" });
+      const ready = events.filter(event => event.at <= time + 1e-8).sort((a, b) => a.at - b.at ||
+        ({ projectile: 0, move: 1, hit: 2, end: 3, start: 4 }[a.kind] - { projectile: 0, move: 1, hit: 2, end: 3, start: 4 }[b.kind]) || String(a.agent.id).localeCompare(String(b.agent.id)));
+      if (!ready.length) break;
+      const event = ready[0], member = event.agent;
+      advanceCombatPositions(participants.map(entry => entry.agent), event.at);
+      if (event.kind === "move" || event.kind === "projectile") { updateProjectiles(event.at, combat.id); continue; }
       const opponents = participants.filter(entry => entry.agent.combat.side !== member.combat.side);
       if (event.kind === "hit") {
         const target = opponents.find(entry => entry.agent.id === member.attack.targetId);
         if (target) resolveHit(member, target, event.at);
         else { member.attack.resolved = true; member.attackHit = true; }
       } else if (event.kind === "end") {
-        member.combat.nextAttackAt = Math.max(member.combat.nextAttackAt, event.at);
+        member.combat.nextAttackAt = Math.max(member.combat.nextAttackAt, event.at + (member.attack.interval ?? combatProfile(member).attackInterval));
+        member.attackReady = member.combat.nextAttackAt;
         member.attack = null; member.attackTargetId = null;
         member.mode = member.species === "spiny-back-beetle" ? "idle" : "fight";
       } else {
@@ -4013,12 +4233,14 @@ function createCombat(environment) {
           if (member.retreat && member.combat.completedExchanges >= COMBAT_RETREAT_EXCHANGES && event.at >= member.combat.nextEscapeAt &&
               escape(member, opponents, event.at, true)) continue;
         }
-        const target = opponents.find(entry => entry.agent.id === member.combat.targetId) || opponents.sort((a, b) =>
+        const target = opponents.sort((a, b) => combatSeparation(member, a.agent) - combatSeparation(member, b.agent) ||
           (member.species && combatDisposition(member) === "aggressive" ? Number(militaryAgent(b.agent, b.agent.tribe)) - Number(militaryAgent(a.agent, a.agent.tribe)) : 0) ||
           a.agent.combat.joinedAt - b.agent.combat.joinedAt || String(a.agent.id).localeCompare(String(b.agent.id)))[0];
         beginAttack(member, target.agent, event.at, false);
       }
     }
+    advanceCombatPositions(members(combat).map(entry => entry.agent), time);
+    updateProjectiles(time, combat.id);
     for (const { agent: member } of members(combat)) {
       if (peacefulCreature(member) && time >= member.combat.nextEscapeAt) {
         const opponents = members(combat).filter(entry => entry.agent.combat.side !== member.combat.side);
@@ -4262,7 +4484,7 @@ const SIMULATION_STATS = Object.freeze([
   ["accuracy", "정밀", "공격"], ["evasion", "회피", "방어"], ["parry", "패링", "방어"],
   ["block", "블록", "방어"], ["blockPower", "블록 경감", "방어"], ["counter", "반격 확률", "반격"],
   ["counterPower", "반격 위력", "반격"], ["tenacity", "강인함", "생존"], ["stun", "기절 확률", "제어"],
-  ["stunDuration", "기절 시간", "제어"], ["drain", "흡혈", "생존"], ["healPower", "치유량", "생존"]
+  ["stunDuration", "기절 시간", "제어"], ["drain", "흡혈", "생존"]
 ].map(([key, label, group]) => Object.freeze({ key, label, group })));
 
 const DEFAULT_SIMULATION_RULES = Object.freeze({ ...DNA_COMBAT_RULES,
@@ -4308,7 +4530,7 @@ function normalizeBuild(input) {
   plainObject(input, "build");
   if (typeof input.key !== "string" || !input.key.length || input.key.length > 100) throw new TypeError("build.key must be a nonempty string up to 100 characters");
   if (input.name !== undefined && (typeof input.name !== "string" || input.name.length > 100)) throw new TypeError("build.name must be a string up to 100 characters");
-  const native = input.counts === undefined && input.organs === undefined && input.healing === undefined;
+  const native = input.counts === undefined && input.organs === undefined;
   if (native && !Object.hasOwn(UNIT_COMBAT_STATS, input.key)) throw new RangeError("Unknown unit: " + input.key);
   const dna = input.dna === undefined ? undefined : validateDna(input.dna, input.dna?.level, input.dna?.budget);
   if (input.dna !== undefined && (!dna || !["bean", "spore", "pebble", "spring"].includes(input.key))) throw new RangeError("Invalid playable DNA");
@@ -4321,10 +4543,10 @@ function normalizeBuild(input) {
     counts[key] = value;
   }
   if (input.organs !== undefined) plainObject(input.organs, "organs");
-  const organs = { attack: 1, ranged: 0, heal: 0, armor: true, legs: true };
+  const organs = { attack: 1, ranged: 0, armor: true, legs: true };
   for (const [key, value] of Object.entries(input.organs || {})) {
     if (!Object.hasOwn(organs, key)) throw new TypeError("Unknown organ: " + key);
-    if (["attack", "ranged", "heal"].includes(key)) {
+    if (["attack", "ranged"].includes(key)) {
       const count = typeof value === "boolean" ? Number(value) : value;
       if (!Number.isSafeInteger(count) || count < 0 || count > 1) throw new RangeError("Organ count must be a nonnegative safe integer");
       organs[key] = count;
@@ -4333,11 +4555,9 @@ function normalizeBuild(input) {
       organs[key] = value;
     }
   }
-  const healing = input.healing === undefined ? 0 : input.healing;
-  if (!Number.isFinite(healing) || healing < 0 || healing > 1000000) throw new RangeError("healing must be a finite nonnegative percentage");
-  const pieceCount = Object.values(counts).reduce((sum, value) => sum + value, 0) + organs.attack + organs.ranged + organs.heal;
+  const pieceCount = Object.values(counts).reduce((sum, value) => sum + value, 0) + organs.attack + organs.ranged;
   if (!Number.isSafeInteger(pieceCount)) throw new RangeError("Total piece count must be a safe integer including organs");
-  return { key: input.key, name: input.name || input.key, organs, counts, healing, pieceCount, native, dna };
+  return { key: input.key, name: input.name || input.key, organs, counts, pieceCount, native, dna };
 }
 
 const geneKeys = Object.freeze({ vitality: "health", flatPen: "penetration", haste: "speed", rangedHaste: "rangedSpeed",
@@ -4353,14 +4573,15 @@ function derive(build, rules) {
     const role = creatureAttackRole(build.key);
     const stats = { ...unitCombatStats(build.key), speed: CREATURE_MOVEMENT[build.key].speed, resistance: 1 };
     const profile = combatProfile({ species: build.key, stats, attributes: {} });
-    return { ...stats, ...profile, melee: !!role?.melee, ranged: !!role?.ranged, canAttack: !!role };
+    return { ...stats, ...profile, critChance: profile.criticalChance, critMultiplier: profile.criticalMultiplier,
+      melee: !!role?.melee, ranged: !!role?.ranged, canAttack: !!role };
   }
   const counts = Object.fromEntries(Object.entries(build.counts).map(([key, value]) => [geneKeys[key] || key, value]));
-  Object.assign(counts, { blade: build.organs.attack, secretion: build.organs.ranged, healer: build.organs.heal });
-  const dna = { ...dnaCombatStats(counts, counts, rules), movement: .25, vision: 1, roaming: true, healing: build.healing };
+  Object.assign(counts, { blade: build.organs.attack, secretion: build.organs.ranged });
+  const dna = { ...dnaCombatStats(counts, counts, rules), movement: .25, vision: 1, roaming: true };
   const interval = speed => speed > 0 ? 1 / speed : Infinity;
   const result = { dna, HP: dna.health, health: dna.health, speed: dna.movement, loadedSpeed: dna.movement * .75, vision: dna.vision,
-    healing: dna.healing, healPower: dna.healPower, attackPower: dna.meleePower, defense: dna.armor, meleePower: dna.meleePower, rangedPower: dna.rangedPower,
+    attackPower: dna.meleePower, defense: dna.armor, meleePower: dna.meleePower, rangedPower: dna.rangedPower,
     attackSpeed: dna.meleeSpeed, meleeSpeed: dna.meleeSpeed, rangedSpeed: dna.rangedSpeed,
     attackInterval: interval(dna.meleeSpeed), rangedAttackInterval: interval(dna.rangedSpeed),
     targetAttackSpeed: dna.meleeSpeed, targetRangedSpeed: dna.rangedSpeed, windup: dna.focus, hitGap: dna.comboSpeed,
@@ -4370,8 +4591,8 @@ function derive(build, rules) {
     evasion: dna.evasion / 100, parry: dna.parry / 100, block: dna.block / 100, blockReduction: dna.blockPower / 100,
     counter: dna.counter / 100, counterMultiplier: dna.counterPower / 100, tenacity: dna.tenacity / 100,
     stunChance: dna.stun / 100, stunChancePerHit: dna.stun / 100, stunDuration: dna.stunTime, drain: dna.lifesteal / 100,
-    pieceCount: build.pieceCount, melee: dna.melee, ranged: dna.ranged, healer: dna.healer,
-    healerCount: dna.healerCount, canAttack: dna.meleePower > 0 && dna.meleeSpeed > 0 || dna.rangedPower > 0 && dna.rangedSpeed > 0 };
+    pieceCount: build.pieceCount, melee: dna.melee, ranged: dna.ranged,
+    canAttack: dna.meleePower > 0 && dna.meleeSpeed > 0 || dna.rangedPower > 0 && dna.rangedSpeed > 0 };
   for (const [key, value] of Object.entries(result)) if (typeof value === "number" && !Number.isFinite(value) &&
     !["attackInterval", "rangedAttackInterval", "recovery"].includes(key)) throw new RangeError("Derived " + key + " must be finite");
   return result;
@@ -4397,7 +4618,6 @@ function createSimulationTrial(settings) {
   if (!["simultaneous", "left", "right"].includes(first)) throw new RangeError("Invalid first side");
   const distance = settings.distance === undefined ? 1 : settings.distance;
   if (!Number.isFinite(distance) || distance < 0 || distance > 20) throw new RangeError("distance must be between 0 and 20");
-  if (settings.support !== undefined && typeof settings.support !== "boolean") throw new TypeError("support must be boolean");
   let state = 2166136261;
   for (const char of String(seed)) state = Math.imul(state ^ char.charCodeAt(0), 16777619) >>> 0;
   function random() {
@@ -4417,22 +4637,17 @@ function createSimulationTrial(settings) {
       key: build.key, name: build.name, labAppearance: !build.native, tribe: player ? build.key : undefined,
       species: !player && build.native ? build.key : undefined,
       dna: player && build.native ? build.dna || startingWorkerDna(build.key) : undefined,
-      x: 100 + (distance > 1 ? side * distance : 0), y: 100, renderFromX: 100, renderFromY: 100,
+      x: 100, y: 100, renderFromX: 100, renderFromY: 100,
       moveStartedAt: 0, moveDuration: 0, health: stats.health, stats, attributes: {},
       appearanceAttributes: player && build.native ? dnaAppearance(build.dna || startingWorkerDna(build.key)) : player ? { ...(stats.melee ? { blade: 1 } : {}), ...(stats.ranged ? { secretion: 1 } : {}) } : undefined,
       combatDisposition: "aggressive", mode: "fight", facing: side === 0 ? 1 : -1, animationStartedAt: 0,
-      hurtStartedAt: -Infinity, dnaHealReady: 2, dnaReactionReadyAt: rules.defensePreparation,
+      hurtStartedAt: -Infinity, dnaReactionReadyAt: rules.defensePreparation,
       attackReady: first !== "simultaneous" && first !== ownerId ? rules.initiativeDelay : 0,
       combat: null, attack: null, carrying: 0 };
   });
-  const supportAgents = settings.support ? agents.map(agent => ({ ...structuredClone(agent),
-    id: agent.id + "-support", health: agent.stats.health / 2, mode: "idle",
-    stats: { ...agent.stats, canAttack: false, melee: false, ranged: false, healer: false,
-      dna: { ...agent.stats.dna, melee: false, ranged: false, healer: false, power: 0, meleePower: 0, rangedPower: 0,
-        speed: 0, meleeSpeed: 0, rangedSpeed: 0, hits: 0 } } })) : [];
-  const participants = [...agents, ...supportAgents];
+  const participants = agents;
   const teamHealth = side => participants.filter(agent => agent.ownerId === side).reduce((sum, agent) => sum + agent.health, 0);
-  const environment = { games: new Map(), colonies: [], simSeconds: 0, combatRules: rules,
+  const environment = { games: new Map(), colonies: [], simSeconds: 0, combatRules: rules, combatSimulation: true, combatInitialDistance: distance,
     world: { size: 320, terrain: new Uint8Array(320 * 320) },
     combatRandom: random, damageRandom: settings.random === false ? () => .5 : () => .5 + (random() - .5) * rules.jitter / .2,
     onCombatEvent(event) {
@@ -4456,29 +4671,8 @@ function createSimulationTrial(settings) {
       if (agent.health <= 0 || agent.combat) continue;
       const target = agents.find(other => other.ownerId !== agent.ownerId && other.health > 0 && other.x === agent.x && other.y === agent.y);
       if (!target) continue;
-      const species = agent.species;
-      try { agent.species = undefined; combat.engage(agent, target, environment.simSeconds); }
-      finally { agent.species = species; }
+      combat.engage(agent, target, environment.simSeconds);
     }
-  }
-  function approach(seconds) {
-    const living = agents.filter(agent => agent.health > 0);
-    const moves = living.flatMap(agent => {
-      if (agent.combat || agent.attack || !agent.stats.canAttack || environment.simSeconds < (agent.dnaStunnedUntil || 0)) return [];
-      const target = living.filter(other => other.ownerId !== agent.ownerId).sort((a, b) => Math.abs(a.x - agent.x) - Math.abs(b.x - agent.x) || a.id.localeCompare(b.id))[0];
-      if (!target || agent.stats.ranged && (!agent.stats.melee || Math.abs(agent.x - target.x) > 1) && Math.abs(agent.x - target.x) <= 3) return [];
-      return [{ agent, target, travel: Math.min(Math.abs(target.x - agent.x), (agent.stats.dna?.movement || agent.stats.speed) * seconds) }];
-    });
-    const positions = new Map();
-    for (const move of moves) {
-      const other = moves.find(entry => entry.agent === move.target && entry.target === move.agent);
-      const gap = Math.abs(move.target.x - move.agent.x);
-      const x = gap <= move.travel + (other?.travel || 0) + 1e-8 ?
-        other ? (move.agent.x + move.target.x) / 2 : move.target.x : move.agent.x + Math.sign(move.target.x - move.agent.x) * move.travel;
-      positions.set(move.agent, x);
-    }
-    for (const [agent, x] of positions) { agent.x = x; agent.renderFromX = x; }
-    for (const agent of supportAgents) agent.x = agents.find(other => agent.id === other.id + "-support").x;
   }
   function conclude() {
     const alive = ["left", "right"].map(side => participants.some(agent => agent.ownerId === side && agent.health > 0));
@@ -4489,9 +4683,8 @@ function createSimulationTrial(settings) {
     else if (time >= rules.maxSeconds) { winner = "draw"; reason = "time-limit"; }
   }
   function tick(at) {
-    const elapsed = at - environment.simSeconds;
     environment.simSeconds = at; time = at;
-    approach(elapsed); enroll();
+    enroll();
     for (const agent of participants) combat.update(agent, at);
     conclude();
   }
@@ -4513,9 +4706,9 @@ function createSimulationTrial(settings) {
   function finish() { return advance(rules.maxSeconds - time); }
   function result() { return { winner, reason, time, leftHealth: teamHealth("left"), rightHealth: teamHealth("right") }; }
   enroll(); conclude();
-  return { agents, supportAgents, history, advance, step, finish, result,
+  return { agents, history, advance, step, finish, result,
     get projectiles() { return participants.flatMap(source => (source.dnaProjectiles || []).map(visual => ({ source,
-      target: participants.find(agent => agent.id === source.attack?.targetId), launchedAt: visual.launchedAt, at: visual.hitAt,
+      target: participants.find(agent => agent.id === (visual.targetId || source.attack?.targetId)), launchedAt: visual.launchedAt, at: visual.hitAt,
       fromX: visual.fromX, fromY: visual.fromY, targetX: visual.targetX, targetY: visual.targetY }))).filter(shot => shot.target); },
     get vfx() { return snapshotCombatVfx(environment, time); },
     get time() { return time; }, get reason() { return reason; } };
@@ -20999,75 +21192,6 @@ function unitDisplayAbilityMask(mask) {
 
 return { UNIT_DISPLAY_PRIORITY, UNIT_DISPLAY_MASKS, UNIT_DISPLAY_FORM_COUNT, unitDominantAppearanceMask, unitDisplayAttributesFrom, unitDisplayAttributes, unitCombinationAppearance, unitBladeCarapaceAppearance, unitDisplayAbilityMask };
 })();
-modules["client/unit-size.mjs"] = (() => {
-const UNIT_DISPLAY_SIZES = Object.freeze({
-  bean: .40, spore: .38, pebble: .42, spring: .39,
-  "flower-tail-bird": .26, "dew-rabbit": .29, "cotton-sheep": .32,
-  "soil-mole": .35, "bundle-snail": .38, "rolling-acorn": .38,
-  "bubble-toad": .52, "vine-turtle": .52, "spiny-back-beetle": .58,
-  "snare-vine": .62, "soil-boar": .66, "shadow-weasel": .72, "talon-owl": .78,
-  "spring-keeper": .88, "lantern-keeper": .92, "old-garden-snail": 1.00, "walking-forest": 1.12,
-  "spiny-back-leader": 1.24, "white-paw": 1.44
-});
-
-function unitDisplaySize(unit) {
-  const count = Array.isArray(unit.dna?.pieces) ? unit.dna.pieces.length :
-    Number.isFinite(unit.stats?.pieceCount) ? Math.max(0, unit.stats.pieceCount) : 0;
-  const scale = 1 + .01 * count;
-  return (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean)*scale;
-}
-
-function combatViewCell(width, height, units) {
-  const largest = units.reduce((size, unit) => Math.max(size, unitDisplaySize(unit)), 0) || UNIT_DISPLAY_SIZES.bean;
-  return Math.min(width * .24, height * .5) / largest;
-}
-
-function combatViewLayout(width, height, units) {
-  const teams = [0, 1].map(side => units.filter(unit => (unit.combat?.side ?? unit.side) === side));
-  const count = Math.max(...teams.map(team => team.length));
-  const positions = new Map();
-  if (!count) return { cell: combatViewCell(width, height, units), positions };
-  const columnCount = Math.min(count, Math.ceil(Math.sqrt(count * 1.5))), rowCount = Math.ceil(count / columnCount);
-  const columns = Array(columnCount).fill(0), rows = Array(rowCount).fill(0);
-  teams.forEach(team => team.forEach((unit, index) => {
-    const size = unitDisplaySize(unit);
-    columns[index % columnCount] = Math.max(columns[index % columnCount], size * 1.3);
-    rows[Math.floor(index / columnCount)] = Math.max(rows[Math.floor(index / columnCount)], size);
-  }));
-  const gapX = Math.min(width * .035, width * .42 / (columnCount * 4));
-  const gapY = Math.min(height * .035, height * .36 / (rowCount * 4));
-  const totalWidth = columns.reduce((sum, value) => sum + value, 0);
-  const rowSpans = rows.slice(1).map((size, index) => rows[index] * .18 + size * 1.2);
-  const groundSpan = rowSpans.reduce((sum, value) => sum + value, 0);
-  const cell = Math.min(combatViewCell(width, height, units),
-    (width * .42 - gapX * (columnCount - 1)) / totalWidth,
-    height * .44 / (rows[0] * 1.2), height * .08 / (rows[rowCount - 1] * .18),
-    rowCount > 1 ? (height * .36 - gapY * (rowCount - 1)) / groundSpan : Infinity);
-  const gridWidth = totalWidth * cell + gapX * (columnCount - 1);
-  const gridHeight = groundSpan * cell + gapY * (rowCount - 1);
-  const firstFoot = height * .5 + (height * .36 - gridHeight) / 2;
-  teams.forEach((team, side) => team.forEach((unit, index) => {
-    const column = index % columnCount, row = Math.floor(index / columnCount), size = unitDisplaySize(unit);
-    const offsetX = columns.slice(0, column).reduce((sum, value) => sum + value, 0) * cell + gapX * column;
-    const offsetY = rowSpans.slice(0, row).reduce((sum, value) => sum + value, 0) * cell + gapY * row;
-    const x = width * (side ? .75 : .25) + (side ? -1 : 1) * (gridWidth / 2 - offsetX - columns[column] * cell / 2);
-    const y = firstFoot + offsetY;
-    positions.set(String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
-      top: y - size * cell * 1.2, bottom: y + size * cell * .18 } });
-  }));
-  return { cell, positions };
-}
-
-function unitFacing(unit) {
-  return (unit.attack?.directionX || unit.facing || 1) < 0 ? -1 : 1;
-}
-
-function unitFrameMirror(sourceFacing, facing) {
-  return (facing < 0) !== (sourceFacing === "left");
-}
-
-return { UNIT_DISPLAY_SIZES, unitDisplaySize, combatViewCell, combatViewLayout, unitFacing, unitFrameMirror };
-})();
 modules["client/creature-approved-actions.mjs"] = (() => {
 const APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS = Object.freeze({
   "bubble-toad": {
@@ -22281,7 +22405,7 @@ function creatureHurtPose(agent, time) {
 }
 
 function unitMovementElapsedMs(agent, time) {
-  const start = Number.isFinite(agent.moveAnimationStartedAt) ? agent.moveAnimationStartedAt : agent.moveStartedAt;
+  const start = agent.combat?.position?.moving ? agent.combat.position.moveStartedAt : Number.isFinite(agent.moveAnimationStartedAt) ? agent.moveAnimationStartedAt : agent.moveStartedAt;
   return Number.isFinite(time) && Number.isFinite(start) ? Math.max(0, time - start) * 1000 : 0;
 }
 
@@ -22293,7 +22417,7 @@ function unitAnimationPose(agent, time) {
   const rpg = agent.combat?.version === 2;
   const hurt = (time - agent.hurtStartedAt) * 1000 * (rpg ? animations.hurt.durationMs / 120 : 1);
   const attack = agent.attack ? attackAnimationElapsed(agent.attack, time, AGENT_ATTACK_HIT_TIME, animations.attack.durationMs / 1000) * 1000 : -1;
-  const moving = agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
+  const moving = agent.combat?.position?.moving || agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
   if (rpg && attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
   else if (hurt >= 0 && hurt < animations.hurt.durationMs) { action = "hurt"; elapsed = hurt; }
   else if (attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
@@ -22314,6 +22438,10 @@ function unitAnimationPose(agent, time) {
 
 function creatureWalkPose(agent, time) {
   const animation = CREATURE_WALK_ANIMATIONS[agent.species];
+  if (animation && agent.health > 0 && agent.combat?.position?.moving) {
+    const elapsed = (time - agent.combat.position.moveStartedAt) * 1000;
+    return { action: "walk", animation, frame: unitAnimationFrame(animation, elapsed) };
+  }
   const elapsed = time - agent.moveStartedAt;
   if (!animation || agent.health <= 0 || agent.mode !== "walk" ||
     !(agent.moveDuration > 0) || !Number.isFinite(elapsed) || elapsed < 0 || elapsed >= agent.moveDuration) return null;
@@ -28114,6 +28242,7 @@ function unitActionState(agent, time, options = {}) {
     const delivery=agent.foodDelivery,start=finite(delivery.startedAt,time),end=delivery.arrivesAt,release=clips.throw?.releaseAtMs,ms=duration('throw');
     return state('throw',start,Number.isFinite(end)&&end>start&&Number.isFinite(release)&&release>0&&release<ms?[[start,0],[start+(end-start)*.24,release],[end,ms]]:undefined);
   }
+  if(agent.combat?.position?.moving)return state('walk',agent.combat.position.moveStartedAt);
   if(agent.mode==='harvest')return state('harvest',finite(agent.harvestStarted,agent.animationStartedAt,0));
   if(options.preview?.action==='jump')return state('jump',finite(options.preview.startedAt,time));
   if(agent.moveDuration>0&&Number.isFinite(agent.moveStartedAt)&&time>=agent.moveStartedAt&&time<agent.moveStartedAt+agent.moveDuration){
@@ -28309,7 +28438,6 @@ modules["client/combat-effect-assets.mjs"] = (() => {
 const root = "DesignAssets/Animations/CombatEffectsV2/";
 
 const COMBAT_EFFECT_ANIMATIONS = Object.freeze({
-  heal: Object.freeze({ image: root + "healing.webp", frameWidth: 96, frameHeight: 96, columns: 10, frameCount: 60, frameMs: 1000 / 30, durationMs: 2000, loop: false, stillFrame: 24 }),
   bleed: Object.freeze({ image: root + "bleed.webp", frameWidth: 64, frameHeight: 64, columns: 4, frameCount: 16, frameMs: 1000 / 12, durationMs: 4000 / 3, loop: false, stillFrame: 6 }),
   drain: Object.freeze({ image: root + "drain.webp", frameWidth: 64, frameHeight: 64, columns: 4, frameCount: 16, frameMs: 1000 / 12, durationMs: 4000 / 3, loop: false, stillFrame: 6 }),
   stun: Object.freeze({ image: root + "stun.webp", frameWidth: 128, frameHeight: 80, columns: 9, frameCount: 72, frameMs: 1000 / 30, durationMs: 2400, loop: true, stillFrame: 0 })
@@ -28625,10 +28753,10 @@ function drawCombatDodgeLabel(ctx, p, point, { width, height, vitals = [] } = {}
   const labels = vitals.filter(c => c.kind !== "regeneration" && String(c.targetId) === String(p.targetId));
   const top = Math.min(point.y - point.height - 20, ...labels.map(c =>
     Math.max(20, Math.min(height - 20, c.y - c.bodyHeight * .5 - 20 -
-      (p.reducedMotion ? 0 : Math.min(1, c.age / .85) * 45) - c.lane * 24)) - 32));
+      (p.reducedMotion ? 0 : Math.min(1, c.age / .85) * 14) - c.lane * 18)) - 32));
   const y = top < 20 ? Math.min(height - 20, point.y + 36) : top;
   ctx.save(); ctx.globalAlpha = p.alpha; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.lineJoin = "round";
-  ctx.font = '700 ' + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
+  ctx.font = '700 ' + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
   ctx.lineWidth = 4; ctx.strokeStyle = "#203125"; ctx.fillStyle = "#d3f1ff";
   ctx.strokeText("회피", point.x, y); ctx.fillText("회피", point.x, y); ctx.restore();
 }
@@ -28681,7 +28809,7 @@ modules["client/combat-vfx-events.mjs"] = (() => {
 const COMBAT_VFX_ART_STATUS = "draft-pending-user-review";
 const lifetime = { attack: .25, counter: .25, hit: .4, critical: .5, followup: .4,
   dodge: .4, parry: .45, block: .45, stun: .7, "bleed-apply": .5,
-  bleed: .4, area: .5, drain: .55, reflect: .45, heal: .55, regeneration: .55, death: .8, shoot: .18 };
+  bleed: .4, area: .5, drain: .55, reflect: .45, regeneration: .55, death: .8, shoot: .18 };
 
 function normalizeCombatVfxEvent(input, scope = "legacy") {
   const at = input?.at ?? input?.time;
@@ -28723,7 +28851,7 @@ function combatVfxCues(input, scope) {
       if (event.amount > 0) add(event.kind, "impact", event.toId ?? event.targetId, event.amount,
         { phase: "arrival" });
       break;
-    case "heal": case "drain": case "regeneration":
+    case "drain": case "regeneration":
       if (event.amount > 0) add(event.kind, "restore", event.toId ?? event.targetId, event.amount,
         { phase: "arrival" });
       break;
@@ -30846,7 +30974,7 @@ function createDetailCombatVfx() {
       ["hit", "critical", "followup", "area", "reflect"].includes(cue.kind)) impacts.set(cue.id, cue);
     for (const [id, cue] of impacts) if (time < cue.at || time - cue.at >= .5) impacts.delete(id);
     for (const cue of frame.started || []) if (cue.amount > 0 &&
-      (cue.channel === "restore" && ["heal", "drain", "regeneration"].includes(cue.kind) ||
+      (cue.channel === "restore" && ["drain", "regeneration"].includes(cue.kind) ||
         cue.channel === "impact" && cue.kind === "bleed")) vitals.set(cue.id, cue);
     for (const [id, cue] of vitals) if (time < cue.at || time - cue.at >= .85) vitals.delete(id);
     // Block owns its residual number for the whole event, even after its shorter
@@ -30915,7 +31043,8 @@ function createDetailCombatVfx() {
     }
     for (const shot of projectiles) {
       const source = byId.get(String(shot.sourceId)), target = positions.get(String(shot.targetId));
-      const from = positions.get(String(shot.sourceId));
+      const observed = positions.get(String(shot.sourceId));
+      const from = observed && shot.arenaFrom && view.project ? { ...observed, ...view.project(shot.arenaFrom) } : observed;
       if (!source || !from || !target) continue;
       let launch = flightAnchors.get(shot.id);
       if (!launch) {
@@ -30972,18 +31101,18 @@ function createDetailCombatVfx() {
         const from = positions.get(String(cue.sourceId)) || anchors.get(String(cue.sourceId))?.point;
         const angle = from ? Math.atan2(point.y-point.height*.5-(from.y-from.height*.5), point.x-from.x) : Math.PI;
         const impact = creatureRangedEffectCommand(clip, "impact", { x: point.x, y: point.y-point.height*.5,
-          size: clip.bodyCanvas ? (source ? creatureRangedBodyCanvas(source) : anchors.get(String(cue.sourceId))?.bodyCanvas || 0)*cell : Math.min(444, Math.max(point.height,point.width)) * (cue.kind === "critical" ? 1.15 : 1),
+          size: (clip.bodyCanvas ? (source ? creatureRangedBodyCanvas(source) : anchors.get(String(cue.sourceId))?.bodyCanvas || 0)*cell : Math.min(444, Math.max(point.height,point.width))) * (cue.kind === "critical" ? 1.3 : 1),
           angle, age: time-cue.at });
         if (impact) result.push({ ...impact, eventId: cue.eventId, sourceId: cue.sourceId,
-          targetId: cue.targetId, eventAt: cue.eventAt ?? cue.at, amount: cue.amount });
+          targetId: cue.targetId, eventAt: cue.eventAt ?? cue.at, amount: cue.amount, critical: cue.kind === "critical" });
         continue;
       }
       const frame = detailVfxFrame(clip, (time - cue.at) * 1000);
       if (frame === null) continue;
       result.push({ image: clip.image, frame, x: point.x, y: point.y - point.height * .5,
-        size: Math.min(444, Math.max(point.height, point.width) * (clip === DETAIL_COMBAT_VFX.hit ? 1.35 : 1.65) * (cue.kind === "critical" ? 1.15 : 1)),
+        size: Math.min(444, Math.max(point.height, point.width) * (clip === DETAIL_COMBAT_VFX.hit ? 1.35 : 1.65) * (cue.kind === "critical" ? 1.3 : 1)),
         angle: 0, kind: "impact", eventId: cue.eventId, sourceId: cue.sourceId, targetId: cue.targetId,
-        eventAt: cue.eventAt ?? cue.at, amount: cue.amount });
+        eventAt: cue.eventAt ?? cue.at, amount: cue.amount, critical: cue.kind === "critical" });
     }
     return result;
   }
@@ -31022,8 +31151,8 @@ const vitalAmount = amount => amount >= .1 ? amount.toFixed(1) : Number(amount.t
 // A completely packed viewport can omit excess text; damage/events are untouched.
 function layoutDetailCombatLabels(context, { vitals = [], defenses = [], dodges = [] }, { width, height, reducedMotion = false, positions = new Map() }) {
   const occupied = [...positions.values()].map(point => ({ left: point.x - point.width * .55 - 4,
-    right: point.x + point.width * .55 + 4, top: point.y - point.height - 46, bottom: point.y + 18 }));
-  const fontSize = Math.max(17, Math.min(30, width / 30)), overlaps = (a, b) =>
+    right: point.x + point.width * .55 + 4, top: point.y - point.height - 2, bottom: point.y + 18 }));
+  const fontSize = Math.max(12, Math.min(18, width / 65)), overlaps = (a, b) =>
     a.left < b.right + 4 && a.right > b.left - 4 && a.top < b.bottom + 4 && a.bottom > b.top - 4;
   let labelCount = 0;
   function place(command) {
@@ -31037,24 +31166,23 @@ function layoutDetailCombatLabels(context, { vitals = [], defenses = [], dodges 
       context.font = (critical ? "800 " : "700 ") + fontSize + 'px "Malgun Gothic", sans-serif';
       measured = context.measureText?.(text)?.width;
       if (critical) {
-        context.font = '800 13px "Malgun Gothic", sans-serif';
+        context.font = '800 10px "Malgun Gothic", sans-serif';
         tagWidth = context.measureText?.("치명")?.width || 0;
       }
     } finally { context.restore(); }
     const halfWidth = Math.max(critical ? 20 : 0, Number.isFinite(tagWidth) ? tagWidth / 2 : 0,
       Number.isFinite(measured) ? measured / 2 : text.length * fontSize * .34) + 4;
     if (halfWidth * 2 > width - 16) return { ...command, labelHidden: true };
-    const above = critical ? Math.max(fontSize / 2 + 3, 36) : fontSize / 2 + 3, below = fontSize / 2 + 3;
-    const lift = reducedMotion ? 0 : Math.min(1, command.age / .85) * 45;
-    const preferred = command.y - command.bodyHeight * .5 - 20 - lift;
+    const above = critical ? Math.max(fontSize / 2 + 3, 22) : fontSize / 2 + 3, below = fontSize / 2 + 3;
+    const lift = reducedMotion ? 0 : Math.min(1, command.age / .85) * 14;
+    const preferred = command.y - command.bodyHeight * .5 - 14 - lift;
     const center = Math.max(halfWidth + 8, Math.min(width - halfWidth - 8, command.x));
     const xs = [center, center - halfWidth * 2 - 16, center + halfWidth * 2 + 16];
     let rect;
     for (const x of xs) {
       if (x - halfWidth < 8 || x + halfWidth > width - 8) continue;
       const ys = [];
-      for (let y = Math.min(height - below - 8, preferred); y >= above + 8; y -= 8) ys.push(y);
-      for (let y = Math.max(above + 8, command.y + command.bodyHeight * .5 + 40 - lift); y <= height - below - 8; y += 8) ys.push(y);
+      for (let y = Math.min(height - below - 8, preferred); y >= Math.max(above + 8, preferred - 48); y -= 8) ys.push(y);
       for (const y of ys) {
         const candidate = { x, y, left: x - halfWidth, right: x + halfWidth, top: y - above, bottom: y + below };
         if (!occupied.some(other => overlaps(candidate, other))) { rect = candidate; break; }
@@ -31069,7 +31197,7 @@ function layoutDetailCombatLabels(context, { vitals = [], defenses = [], dodges 
   // same occupied rectangles. This also reserves blocked residual damage once.
   const placedDefenses = defenses.map(command => {
     const label = place({ ...command, caption: command.kind === "block" ? "방어" : "패링" });
-    const damage = command.kind === "block" && command.amount > 0 ? place(command) : null;
+    const damage = command.kind === "block" && command.amount > 0 ? place({ ...command, directDamage: true }) : null;
     return { ...command, labelX: label.labelX, labelY: label.labelY, labelHidden: !!label.labelHidden,
       damageX: damage?.labelX, damageY: damage?.labelY, damageHidden: !!damage?.labelHidden };
   });
@@ -31085,7 +31213,6 @@ function layoutDetailVitalLabels(context, commands, options) {
   return layoutDetailCombatLabels(context, { vitals: commands }, options).vitals;
 }
 
-// Reuse the laboratory's existing healing ring/plus and signed HP labels.
 // Bleed is damage over time, not a new collision, projectile or attack recoil.
 function drawDetailVitalEffect(context, command, options) {
   const { width, height, reducedMotion } = options;
@@ -31103,19 +31230,20 @@ function drawDetailVitalEffect(context, command, options) {
     context.moveTo(command.x, command.y - 8 * scale); context.lineTo(command.x, command.y + 8 * scale); context.stroke();
   }
   if (command.kind !== "regeneration" && !command.labelHidden) {
-    const lift = reducedMotion ? 0 : progress * 45;
-    const labelY = command.labelY ?? Math.max(20, Math.min(height - 20, command.y - command.bodyHeight * .5 - 20 - lift - command.lane * 24));
+    const lift = reducedMotion ? 0 : progress * 14;
+    const labelY = command.labelY ?? Math.max(20, Math.min(height - 20, command.y - command.bodyHeight * .5 - 14 - lift - command.lane * 18));
     const labelX = command.labelX ?? command.x, critical = command.directDamage && command.critical;
     // Keep fractional positive HP changes readable without inventing zero.
     const amount = vitalAmount(command.amount);
     const label = (restore ? "+" : "−") + amount;
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
-    context.font = (critical ? "800 " : "700 ") + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
-    context.lineWidth = 4; context.strokeStyle = "#203125"; context.fillStyle = restore ? "#c1ffc4" : critical ? "#ffda8a" : "#fff9df";
+    context.font = (critical ? "800 " : "700 ") + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
+    context.lineWidth = 3; context.strokeStyle = "#203125"; context.fillStyle = restore ? "#c1ffc4" : critical ? "#ffda8a" : "#fff9df";
     context.strokeText(label, labelX, labelY); context.fillText(label, labelX, labelY);
     if (critical) {
-      context.font = '800 13px "Malgun Gothic", sans-serif';
-      context.fillText("치명", labelX, labelY - 27);
+      context.font = '800 10px "Malgun Gothic", sans-serif';
+      context.strokeText("치명", labelX, labelY - 15);
+      context.fillText("치명", labelX, labelY - 15);
     }
   }
   context.restore();
@@ -31128,6 +31256,7 @@ function drawDetailVfxCell(context, image, command) {
   if (sourceX + cell > image.naturalWidth || sourceY + sourceHeight > image.naturalHeight) return false;
   const width = command.width || command.size, height = command.height || command.size;
   context.save();
+  if (command.critical) context.filter = "sepia(1) saturate(3) brightness(1.2)";
   if (command.muzzleClip) {
     const muzzle = command.muzzleClip;
     context.translate(muzzle.x, muzzle.y); context.rotate(muzzle.angle);
@@ -31153,9 +31282,11 @@ function detailDefenseCommands(frame, positions, time) {
     const directionKnown = !!source && [source.x, source.y].every(Number.isFinite);
     seen.add(cue.eventId);
     const damage = (frame.active || []).find(item => item.eventId === cue.eventId && item.channel === 'impact' && item.amount > 0);
+    const amount = cue.kind === 'block' ? cue.residualAmount ?? damage?.amount ?? 0 : 0;
     output.push({ kind: cue.kind, eventId: cue.eventId, projectileId: cue.projectileId, targetId: cue.targetId, sourceId: cue.sourceId,
       image: DETAIL_DEFENSE_VFX[cue.kind], directionKnown, age, at: cue.at, eventAt: cue.eventAt ?? cue.at, x: target.x, y: target.y - target.height * .5, bodyWidth: target.width, bodyHeight: target.height,
-      towardSource: directionKnown ? Math.sign(source.x - target.x) || target.direction || 1 : 1, amount: cue.kind === 'block' ? cue.residualAmount ?? damage?.amount ?? 0 : 0 });
+      towardSource: directionKnown ? Math.sign(source.x - target.x) || target.direction || 1 : 1, amount,
+      critical: amount > 0 && !!(cue.critical || damage?.critical || damage?.kind === 'critical') });
   }
   return output;
 }
@@ -31167,10 +31298,11 @@ function drawDetailDefenseEffect(context, command, image, { reducedMotion = fals
   const t = command.age / .45;
   const scale = reducedMotion ? 1 : t < .10 ? .66 + t / .10 * .45 : t < .24 ? 1.11 - (t - .10) / .14 * .11 : 1 + (t - .24) * .15;
   const opacity = t < .35 ? 1 : Math.pow(1 - (t - .35) / .65, 1.2);
-  const size = Math.min(500, Math.max(32, command.bodyHeight * (command.kind === 'block' ? 2.12 : 2.25))) * scale;
+  const size = Math.min(500, Math.max(32, command.bodyHeight * (command.kind === 'block' ? 2.12 : 2.25))) * scale * (command.critical ? 1.3 : 1);
   const contactX = command.x + command.towardSource * command.bodyWidth * .40;
   const originX = command.kind === 'block' ? .36 : .52, originY = command.kind === 'block' ? .50 : .57;
   context.save(); context.translate(contactX, command.y); context.scale(-command.towardSource, 1);
+  if (command.critical) context.filter = "sepia(1) saturate(3) brightness(1.2)";
   context.globalAlpha = opacity;
   context.drawImage(image, -size * originX, -size * originY, size, size);
   // Only dissipating light fragments, never a reflected shot or additional hit.
@@ -31181,7 +31313,7 @@ function drawDetailDefenseEffect(context, command, image, { reducedMotion = fals
       const angle = command.kind === 'block' ? Math.PI * (.60 + i * .13) : Math.PI * (1.03 + i * .065);
       const radius = command.bodyHeight * (.33 + (i % 3) * .12) + spread;
       const x = Math.cos(angle) * radius, y = Math.sin(angle) * radius;
-      context.strokeStyle = command.kind === 'block' ? '#e0ffff' : '#fff1b1'; context.lineWidth = Math.max(1, command.bodyHeight * .025 * fade);
+      context.strokeStyle = command.critical ? '#ffda8a' : command.kind === 'block' ? '#e0ffff' : '#fff1b1'; context.lineWidth = Math.max(1, command.bodyHeight * .025 * fade);
       context.beginPath(); context.moveTo(x, y); context.lineTo(x + Math.cos(angle) * command.bodyHeight * .12 * fade, y + Math.sin(angle) * command.bodyHeight * .12 * fade); context.stroke();
     }
   }
@@ -31190,39 +31322,48 @@ function drawDetailDefenseEffect(context, command, image, { reducedMotion = fals
 
 function drawDetailDefenseFallback(context, command) {
   if (!command.directionKnown || command.age < 0 || command.age >= .45) return false;
-  context.save(); context.globalAlpha = 1 - command.age / .45; context.strokeStyle = "#c3f1ff"; context.lineWidth = 3;
+  context.save(); context.globalAlpha = 1 - command.age / .45; context.strokeStyle = command.critical ? "#ffda8a" : "#c3f1ff"; context.lineWidth = 3;
   context.beginPath(); context.ellipse(command.x + command.towardSource * command.bodyWidth * .4, command.y,
-    Math.max(6, command.bodyWidth * .16), command.bodyHeight * .65, 0, -Math.PI / 2, Math.PI / 2); context.stroke(); context.restore(); return true;
+    Math.max(6, command.bodyWidth * .16) * (command.critical ? 1.3 : 1), command.bodyHeight * .65 * (command.critical ? 1.3 : 1), 0, -Math.PI / 2, Math.PI / 2); context.stroke(); context.restore(); return true;
 }
 function drawDetailDefenseLabels(context, commands, { width, height, reducedMotion = false, vitals = [], reservedLabels = [] }) {
   const occupied = reservedLabels.map(label => ({ targetId: String(label.targetId), y: label.y }));
   for (const vital of vitals) if (vital.kind !== "regeneration" && !vital.labelHidden) {
     const y = vital.labelY ?? Math.max(20, Math.min(height - 20,
-      vital.y - vital.bodyHeight * .5 - 20 - (reducedMotion ? 0 : Math.min(1, vital.age / .85) * 45) - vital.lane * 24));
+      vital.y - vital.bodyHeight * .5 - 14 - (reducedMotion ? 0 : Math.min(1, vital.age / .85) * 14) - vital.lane * 18));
     occupied.push({ targetId: String(vital.targetId), y });
-    if (vital.directDamage && vital.critical) occupied.push({ targetId: String(vital.targetId), y: y - 27 });
+    if (vital.directDamage && vital.critical) occupied.push({ targetId: String(vital.targetId), y: y - 15 });
   }
   const lanes = new Map();
   for (const command of commands) {
     if (command.age < 0 || command.age >= .45) continue;
+    const critical = command.kind === "block" && command.amount > 0 && command.critical;
     const id = String(command.targetId), lane = lanes.get(id) || 0; lanes.set(id, lane + 1);
     const floor = command.y + command.bodyHeight * .5, lift = reducedMotion ? 0 : command.age * 28;
-    let damageY = command.damageY ?? command.y - command.bodyHeight * .5 - 20 - lift;
-    while (command.damageY === undefined && occupied.some(label => label.targetId === id && Math.abs(label.y - damageY) < 26)) damageY -= 28;
-    damageY = Math.max(20, damageY);
+    let damageY = command.damageY ?? command.y - command.bodyHeight * .5 - 14 - lift;
+    while (command.damageY === undefined && occupied.some(label => label.targetId === id &&
+      (Math.abs(label.y - damageY) < 26 || critical && Math.abs(label.y - (damageY - 15)) < 26))) damageY -= 28;
+    damageY = Math.max(critical ? 35 : 20, damageY);
     let labelY = command.labelY ?? floor + 34 + lane * 26;
-    if (labelY > height - 18) labelY = Math.max(20, damageY - 30 - lane * 26);
+    if (labelY > height - 18) labelY = Math.max(20, damageY - (critical ? 45 : 30) - lane * 26);
     context.save(); context.globalAlpha = 1 - (command.age / .45) ** 2;
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
-    context.font = '700 ' + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
-    context.lineWidth = 4; context.strokeStyle = "#203125"; context.fillStyle = command.kind === "block" ? "#d3f1ff" : "#fff1ba";
+    context.font = '700 ' + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
+    context.lineWidth = 3; context.strokeStyle = "#203125"; context.fillStyle = command.kind === "block" ? "#d3f1ff" : "#fff1ba";
     const label = command.kind === "block" ? "방어" : "패링";
     if (!command.labelHidden) {
       context.strokeText(label, command.labelX ?? command.x, labelY); context.fillText(label, command.labelX ?? command.x, labelY);
     }
     if (command.kind === "block" && command.amount > 0 && !command.damageHidden) {
       const damage = "−" + (command.amount >= .1 ? command.amount.toFixed(1) : Number(command.amount.toPrecision(2)).toString());
-      context.fillStyle = "#fff9df"; context.strokeText(damage, command.damageX ?? command.x, damageY); context.fillText(damage, command.damageX ?? command.x, damageY);
+      context.font = (critical ? "800 " : "700 ") + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
+      context.fillStyle = critical ? "#ffda8a" : "#fff9df"; context.strokeText(damage, command.damageX ?? command.x, damageY); context.fillText(damage, command.damageX ?? command.x, damageY);
+      if (critical) {
+        context.font = '800 10px "Malgun Gothic", sans-serif';
+        context.strokeText("치명", command.damageX ?? command.x, damageY - 15);
+        context.fillText("치명", command.damageX ?? command.x, damageY - 15);
+        occupied.push({ targetId: id, y: damageY - 15 });
+      }
       occupied.push({ targetId: id, y: damageY });
     }
     occupied.push({ targetId: id, y: labelY }); context.restore();
@@ -31491,18 +31632,18 @@ const { imageAnimation, imageFrameGeometry } = modules["client/image-geometry.mj
 const { unitDisplaySize, combatViewLayout, unitFrameMirror } = modules["client/unit-size.mjs"];
 const { unitRangedAppearance, unitRangedPose, unitRangedDisplaySize, unitRangedProjectile, unitRangedLifecycleAnimation } = modules["client/unit-ranged.mjs"];
 const { UNIT_IMAGE_BOUNDS } = modules["client/unit-image-bounds.mjs"];
-const { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, unitAnimationPose, unitAnimationFrame, creatureHurtPose, creatureAttackPose } = modules["client/unit-animation.mjs"];
+const { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_WALK_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, unitAnimationPose, unitAnimationFrame, creatureHurtPose, creatureAttackPose, creatureWalkPose } = modules["client/unit-animation.mjs"];
 const { TALON_OWL_IDLE, talonOwlIdleFrame } = modules["client/talon-owl-idle.mjs"];
 const { BEETLE_SPRITE, BEETLE_ATTACK_SPRITE, BEETLE_ANIMATIONS, BEETLE_NEUTRAL_ASSET, beetleAnimationFrame, beetleAnimationPose } = modules["server/beetle-animation.mjs"];
 
 const colors = ["#c4e19c", "#efba90"];
-const reactionLabels = { dodge: "회피", parry: "패링", block: "방어", stun: "기절", counter: "반격", heal: "치유", shoot: "사격" };
+const reactionLabels = { dodge: "회피", parry: "패링", block: "방어", stun: "기절", counter: "반격", shoot: "사격" };
 const beetleCorpse = imageAnimation({ image: "DesignAssets/Animations/BeetleDeath/dead-v2.png", frameSize: 185, columns: 1, pivotX: 95.5, pivotY: 163 });
 
 function stageAgent(agent) {
   const side = agent.combat?.side ?? agent.side;
   if (side === 0 || side === 1) {
-    const facing = side === 0 ? 1 : -1;
+    const facing = agent.combat?.position ? agent.facing || (side === 0 ? 1 : -1) : side === 0 ? 1 : -1;
     agent = { ...agent, facing, attack: agent.attack ? { ...agent.attack, directionX: facing } : agent.attack };
   }
   if (agent.labAppearance) agent = { ...agent, tribe: UNIT_ANIMATIONS[agent.key] ? agent.key : undefined,
@@ -31573,7 +31714,7 @@ function poseFor(agent, time, deathAge) {
     // made fast attacks land during windup and slow attacks finish before contact.
     return { ...beetle, animation: beetle.action === "attack" ? BEETLE_ATTACK_SPRITE : BEETLE_SPRITE };
   }
-  const pose = creatureHurtPose(agent, time) || creatureAttackPose(agent, time) || unitAnimationPose(agent, time);
+  const pose = creatureHurtPose(agent, time) || creatureAttackPose(agent, time) || creatureWalkPose(agent, time) || unitAnimationPose(agent, time);
   if (pose) return pose;
   const idle = UNIT_ANIMATIONS[agent.tribe]?.idle || CREATURE_IDLE_ANIMATIONS[agent.species];
   if (idle) return { action: "idle", animation: idle, frame: unitAnimationFrame(idle, time * 1000) };
@@ -31614,13 +31755,13 @@ function createCombatStage(canvas) {
     context.drawImage(ground, (width - drawnWidth) / 2, (height - drawnHeight) / 2, drawnWidth, drawnHeight);
   }
   function position(agent, index, width, height, time) {
-    const direction = index === 0 ? 1 : -1;
+    const direction = agent.combat?.position ? agent.facing || (index === 0 ? 1 : -1) : index === 0 ? 1 : -1;
     const attack = agent.attack;
     // Registered support-locked attacks already move the body around a planted
     // foot. A second arena lunge would drag that contact across the ground.
     const fixedSupport = CREATURE_ATTACK_ANIMATIONS[stageAgent(agent).species]?.fixedSupport;
     let lunge = 0;
-    if (attack && attack.mode !== "ranged" && attack.attackMode !== "ranged" && !attack.dnaRanged && !fixedSupport && !reducedMotion.matches) {
+    if (!agent.combat?.position && attack && attack.mode !== "ranged" && attack.attackMode !== "ranged" && !attack.dnaRanged && !fixedSupport && !reducedMotion.matches) {
       if (attack.meleeContacts?.length > 1) {
         const elapsed = attackAnimationElapsed(attack, time, .3, 1);
         const windup = clamp(elapsed / .3), recovery = clamp((elapsed - .3) / .7);
@@ -31651,7 +31792,7 @@ function createCombatStage(canvas) {
     const animations = UNIT_ANIMATIONS[agent.tribe];
     for (const animation of [animations?.idle, animations?.attack, animations?.hurt, animations?.death,
       agent.tribe === "bean" ? AGENT_DEATH_ANIMATION : null, agent.species === "spiny-back-beetle" ? beetleCorpse : null,
-      CREATURE_IDLE_ANIMATIONS[agent.species], CREATURE_RANGED_ANIMATIONS[agent.species], CREATURE_ATTACK_ANIMATIONS[agent.species], CREATURE_HURT_ANIMATIONS[agent.species], CREATURE_DEATH_ANIMATIONS[agent.species]]) if (animation) image(animation.image);
+      CREATURE_IDLE_ANIMATIONS[agent.species], CREATURE_WALK_ANIMATIONS[agent.species], CREATURE_RANGED_ANIMATIONS[agent.species], CREATURE_ATTACK_ANIMATIONS[agent.species], CREATURE_HURT_ANIMATIONS[agent.species], CREATURE_DEATH_ANIMATIONS[agent.species]]) if (animation) image(animation.image);
     let pose = requested?.idleFallback && reducedMotion.matches ? { ...requested, frame: 0 } : requested;
     let source = pose?.animation.image || COMBAT_LAB_UNITS.find(unit => unit.key === agent.key)?.image || BEETLE_NEUTRAL_ASSET;
     let asset = image(source);
@@ -31715,14 +31856,14 @@ function createCombatStage(canvas) {
     const heldSource = beanHeldHurtSource(agent), heldCell = 100 * formationScale(width, height);
     const composed = heldSource?.worldScale === "composed", antenna = heldSource?.image.endsWith("antenna.webp");
     const heldK = heldCell * unitDisplaySize(agent) / 247;
-    const heldDrawn = drawBeanHeldHurt(context, agent, time, image, { cell: heldCell, mirror: index === 1,
+    const heldDrawn = drawBeanHeldHurt(context, agent, time, image, { cell: heldCell, mirror: agent.facing < 0,
       ...(composed ? { sourceScaleX: heldK * 194 / 239, sourceScaleY: heldK * 154 / (antenna ? 214 : 203),
         nativePivotX: 256.1159793814433, nativePivotY: antenna ? 486.3336156597027 : 481.6334255599474 } : {}) }) ||
-      drawSpeciesHeldHurt(context, agent, time, image, { cell: heldCell, mirror: index === 1 });
+      drawSpeciesHeldHurt(context, agent, time, image, { cell: heldCell, mirror: agent.facing < 0 });
     const appearanceDrawn = heldDrawn || appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
-      100 * formationScale(width, height), index === 1, window.devicePixelRatio || 1);
+      100 * formationScale(width, height), agent.facing < 0, window.devicePixelRatio || 1);
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
-      { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), index === 1);
+      { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), agent.facing < 0);
     if (!appearanceDrawn && !representativeDrawn && !asset) drawUnitLoading(context, 0, -size * .4, Math.max(5, size * .07), clock);
     if (!appearanceDrawn && !representativeDrawn && asset) {
       const mirror = pose?.mirrorX ?? unitFrameMirror(geometry?.sourceFacing || geometry?.facing || (agent.species ? "left" : "right"), agent.facing);
@@ -31758,92 +31899,45 @@ function createCombatStage(canvas) {
   function effectArt(effect, points, width, height, impactCovered = false) {
     const event = effect.event, age = clock - effect.born, progress = clamp(age / .85);
     const id = ["counter", "shoot"].includes(event.kind) ? event.attackerId : event.targetId;
-    const support = currentTrial.supportAgents?.find(agent => agent.id === event.targetId);
-    const point = support ? supportPoint(support, points, width, height) : points[id], x = point.x, y = point.y - height * (support ? .1 : .25);
+    const point = points[id], x = point.x, y = point.y - point.height * .5;
     context.save(); context.globalAlpha = 1 - progress ** 2;
-    if (event.kind === "heal") {
-      context.strokeStyle = "#c1ffc4"; context.lineWidth = 3;
-      context.beginPath(); context.arc(x, y, 15 + progress * 30, 0, Math.PI * 2); context.stroke();
-      context.beginPath(); context.moveTo(x - 8, y); context.lineTo(x + 8, y); context.moveTo(x, y - 8); context.lineTo(x, y + 8); context.stroke();
-    }
     if (age < .28 && !reducedMotion.matches && (event.damage > 0 && !impactCovered || ["parry", "block"].includes(event.kind))) {
-      const strength = clamp(age / .28), color = event.kind === "parry" ? "#b9e8f0" : event.kind === "block" ? "#c2dce8" : event.critical ? "#ffe1a0" : "#f7e9b4";
+      const strength = clamp(age / .28), color = event.kind === "parry" ? "#b9e8f0" : event.kind === "block" ? "#c2dce8" : event.critical ? "#ffda8a" : "#f7e9b4";
       context.strokeStyle = color; context.lineWidth = (1 - strength) * 3 + 1;
       for (let i = 0; i < 7; i++) {
         const angle = i * Math.PI * 2 / 7 + event.index * .7;
-        const radius = (8 + strength * 45) * width / 1040;
+        const radius = (8 + strength * 45) * width / 1040 * (event.critical ? 1.3 : 1);
         context.beginPath(); context.moveTo(x + Math.cos(angle) * radius * .45, y + Math.sin(angle) * radius * .45);
         context.lineTo(x + Math.cos(angle) * radius, y + Math.sin(angle) * radius); context.stroke();
       }
       if (event.damage > 0 && !impactCovered) {
         context.lineWidth = event.critical ? 5 : 3;
-        context.beginPath(); context.moveTo(x - 20, y + 20); context.lineTo(x + 20, y - 20); context.stroke();
+        const reach = event.critical ? 26 : 20;
+        context.beginPath(); context.moveTo(x - reach, y + reach); context.lineTo(x + reach, y - reach); context.stroke();
       }
     }
     if (["parry", "block"].includes(event.kind) && age < .45) {
       context.strokeStyle = event.kind === "parry" ? "#c3f1ff" : "#c5dfef"; context.lineWidth = 3;
       context.beginPath(); context.ellipse(x - point.direction * width * .035, y, width * .025, height * .11, 0, -.5 * Math.PI, .5 * Math.PI); context.stroke();
     }
-    const lift = reducedMotion.matches ? 0 : progress * 45;
-    const lane = effect.lane * 24;
-    const labelY = Math.max(20, Math.min(height - 20, y - height * .28 - lift - lane));
+    const lift = reducedMotion.matches ? 0 : progress * 14;
+    const lane = effect.lane * 18;
+    const labelY = Math.max(20, Math.min(height - 20, point.y - point.height - 14 - lift - lane));
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
-    context.font = (event.critical ? "800 " : "700 ") + Math.max(17, Math.min(30, width / 30)) + 'px "Malgun Gothic", sans-serif';
+    context.font = (event.critical ? "800 " : "700 ") + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
     context.lineWidth = 4; context.strokeStyle = "#203125";
-    let label = event.kind === "heal" ? "+" + (-event.damage).toFixed(1) : event.damage > 0 ? "−" + event.damage.toFixed(1) : reactionLabels[event.kind];
-    if (event.kind === "stun" || event.kind === "counter") context.font = '700 16px "Malgun Gothic", sans-serif';
+    let label = event.damage > 0 ? "−" + event.damage.toFixed(1) : reactionLabels[event.kind];
+    if (event.kind === "stun" || event.kind === "counter") context.font = '700 12px "Malgun Gothic", sans-serif';
     if (label) {
       context.fillStyle = event.critical ? "#ffda8a" : ["parry", "block", "dodge"].includes(event.kind) ? "#d3f1ff" : event.kind === "counter" ? "#ffe0ae" : "#fff9df";
       context.strokeText(label, x, labelY); context.fillText(label, x, labelY);
     }
     if (event.critical && event.damage > 0) {
-      context.font = '800 13px "Malgun Gothic", sans-serif'; context.fillStyle = "#ffda8a";
-      context.fillText("치명", x, Math.max(12, labelY - 27));
+      context.font = '800 10px "Malgun Gothic", sans-serif'; context.fillStyle = "#ffda8a";
+      context.strokeText("치명", x, Math.max(12, labelY - 15));
+      context.fillText("치명", x, Math.max(12, labelY - 15));
     }
     context.restore();
-  }
-
-  function supportPoint(agent, points, width, height) {
-    return { ...viewLayout.positions.get(String(agent.id)), direction: (agent.combat?.side ?? agent.side) === 0 ? 1 : -1 };
-  }
-
-  function supportArt(agent, points, width, height, time) {
-    agent = stageAgent(agent);
-    if (agent.health <= 0 && !deathStarted.has(agent.id)) deathStarted.set(agent.id, clock);
-    const deathAge = agent.health > 0 ? 0 : clock - deathStarted.get(agent.id);
-    const point = supportPoint(agent, points, width, height), requested = poseFor(agent, time, deathAge);
-    const { pose, source, asset } = readyPose(agent, requested, time);
-    const geometry = pose && imageFrameGeometry(pose.animation, pose.frame);
-    const size = displaySize(agent, pose) * formationScale(width, height), shadowScale = size / Math.min(width * .34, height * .72, 290);
-    context.save(); context.translate(point.x, point.y);
-    drawUnitHealthRing(context, agent.health, agent.stats?.health, 0, 0,
-      Math.max(7, bodyDimensions(agent).width * 100 * formationScale(width, height) * .55), colors[(agent.combat?.side ?? agent.side)]);
-    const appearancePose = appearancePoses.get(String(agent.id));
-    const appearanceDrawn = appearancePose && appearanceWorld.draw(context, agent, appearancePose, { x: 0, y: 0 },
-      100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1, window.devicePixelRatio || 1);
-    const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
-      { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1);
-    if (!appearanceDrawn && !representativeDrawn && !asset) drawUnitLoading(context, 0, -size * .4, Math.max(5, size * .07), clock);
-    if (!appearanceDrawn && !representativeDrawn && asset) {
-      const mirror = pose?.mirrorX ?? unitFrameMirror(geometry?.sourceFacing || geometry?.facing || (agent.species ? "left" : "right"), agent.facing);
-      context.save(); context.scale(mirror ? -1 : 1, 1);
-      if (pose) { const { frameSize, columns, pivotX, pivotY, viewSize, registrationScale } = geometry;
-        const scale = size * (registrationScale || 1) / (viewSize || frameSize);
-        context.drawImage(asset, pose.frame % columns * frameSize, Math.floor(pose.frame / columns) * frameSize,
-          frameSize, frameSize, -pivotX * scale, -pivotY * scale, frameSize * scale, frameSize * scale);
-      } else {
-        const scale = Math.min(size / asset.naturalWidth, size / asset.naturalHeight);
-        context.drawImage(asset, -asset.naturalWidth * scale / 2, -asset.naturalHeight * .875 * scale,
-          asset.naturalWidth * scale, asset.naturalHeight * scale);
-      }
-      context.restore();
-    }
-    context.fillStyle = "#eef6dc"; context.font = '700 12px "Malgun Gothic", sans-serif'; context.textAlign = "center"; context.fillText("아군", 0, 29);
-    context.fillStyle = "#203125"; context.fillRect(-30, 7, 60, 5);
-    context.fillStyle = "#b8ef98"; context.fillRect(-30, 7, 60 * agent.health / agent.stats.health, 5);
-    context.restore();
-    const dimensions = bodyDimensions(agent), cell = 100 * formationScale(width, height);
-    return { ...point, width: dimensions.width * cell, height: dimensions.height * cell };
   }
 
   function projectileArt(projectile, points, time, height, flight) {
@@ -31898,7 +31992,7 @@ function createCombatStage(canvas) {
     if (canvas.width !== Math.round(width * ratio) || canvas.height !== Math.round(height * ratio)) { canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio); }
     context.setTransform(ratio, 0, 0, ratio, 0, 0); background(width, height);
     if (!trial) return;
-    cameraUnits = [...trial.agents, ...(trial.supportAgents || [])].map(stageAgent);
+    cameraUnits = trial.agents.map(stageAgent);
     viewLayout = combatViewLayout(width, height, cameraUnits);
     const vfx = trial.vfx, liveFlightKeys = new Set();
     let liveFlights = [];
@@ -31921,7 +32015,7 @@ function createCombatStage(canvas) {
     if (vfx?.version !== 1) dodgeCues = [];
     const ended = !!trial.result()?.reason;
     const time = trial.time || clock;
-    appearancePoses = appearanceWorld.prepare(context, [...trial.agents, ...(trial.supportAgents || [])].map(entry => {
+    appearancePoses = appearanceWorld.prepare(context, trial.agents.map(entry => {
       const agent = stageAgent(entry), deathAt = deathStarted.get(agent.id);
       return agent.health <= 0 ? { ...agent, deathStartedAt: time - (clock - (deathAt ?? clock)) } : agent;
     }), time, 100 * formationScale(width, height), ratio, { attackClock: "lab" });
@@ -31936,13 +32030,12 @@ function createCombatStage(canvas) {
       return [String(agent.id), { ...point, width: bounds.width * cell, height: bounds.height * cell }];
     }));
     const points = Object.fromEntries(trial.agents.map(agent => [agent.id, fighter(agent, (agent.combat?.side ?? agent.side), width, height, time, ended)]));
-    for (const agent of trial.supportAgents || []) points[agent.id] = supportArt(agent, points, width, height, time);
     const defenseCommands = vfx?.version === 1 ? detailVfx.defenseCommands(new Map(Object.entries(points)), clock) : [];
     const replacedDefenseIds = new Set(defenseCommands.filter(command => detailDefenseImageReady(image(command.image), command)).map(command => command.eventId));
     const drawnFlights = new Set(), drawnImpacts = new Set(), flightCommands = new Map();
     if (vfx?.version === 1 && !reducedMotion.matches) {
       const commands = detailVfx.commands(trial.agents.map(stageAgent), new Map(Object.entries(points)), clock,
-        100 * formationScale(width, height), { scope: trial, width, height });
+        100 * formationScale(width, height), { scope: trial, width, height, project: viewLayout.project });
       for (const command of commands) {
         if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         const key = command.kind === "flight" && flightKey(command.sourceId, command.targetId, command.launchedAt, command.arrivesAt);
@@ -31971,7 +32064,7 @@ function createCombatStage(canvas) {
     }
     for (const effect of effects) if (clock - effect.born < .85) {
       const event = effect.event;
-      if (vfx?.version === 1 && ["heal", "drain", "regeneration", "bleed", "block", "parry", "dodge", "miss", "evasion"].includes(event.kind)) continue;
+      if (vfx?.version === 1 && ["drain", "regeneration", "bleed", "block", "parry", "dodge", "miss", "evasion"].includes(event.kind)) continue;
       const covered = ["hit", "critical", "block", "area", "reflect"].includes(event.kind) &&
         drawnImpacts.has(impactKey(event.attackerId, event.targetId, event.time, event.damage));
       effectArt(effect, points, width, height, covered);
@@ -31979,8 +32072,7 @@ function createCombatStage(canvas) {
     for (const command of defenseCommands) if (!drawDetailDefenseEffect(context, command, image(command.image), { reducedMotion: reducedMotion.matches }))
       drawDetailDefenseFallback(context, command);
     // Use actual HP changes, including drain (which has no history entry).
-    // Support recipients use the same displayed position as their own sprite.
-    const vitalCommands = detailVfx.vitalCommands([...trial.agents, ...(trial.supportAgents || [])].map(stageAgent),
+    const vitalCommands = detailVfx.vitalCommands(trial.agents.map(stageAgent),
       new Map(Object.entries(points)), clock, { scope: trial, width, height });
     for (const command of vitalCommands) drawDetailVitalEffect(context, command, { width, height, reducedMotion: reducedMotion.matches, image });
     drawDetailDefenseLabels(context, defenseCommands, { width, height, reducedMotion: reducedMotion.matches, vitals: vitalCommands });
@@ -32008,6 +32100,7 @@ const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index
 const rosters = Object.fromEntries(sides.map(side => [side, [builds[side]]]));
 const selected = { left: 0, right: 0 };
 const rules = { ...DEFAULT_SIMULATION_RULES };
+const audio = globalThis.SpawnerCombatAudio.createPlayer(), audioPlayback = globalThis.SpawnerCombatAudio.create();
 let trial, playing = false, lastFrame = 0, controlId = 0;
 const main = document.querySelector("main");
 main.replaceChildren();
@@ -32029,7 +32122,7 @@ function select(options, value) {
   element.value = value; return element;
 }
 function button(parent, label, action) {
-  const element = node("button", label); element.type = "button"; element.addEventListener("click", action); parent.append(element); return element;
+  const element = node("button", label); element.type = "button"; element.addEventListener("click", () => { audio.resume(); action(); }); parent.append(element); return element;
 }
 const header = node("header");
 const title = node("div"); title.append(node("div", "SPAWNER / COMBAT LAB", "eyebrow"), node("h1", "전투 실험실"));
@@ -32104,11 +32197,11 @@ function selectBuild(side) {
 function rosterSettings(side) {
   return rosters[side].map((build, index) => ({ ...structuredClone(build), name: (side === "left" ? "왼쪽 " : "오른쪽 ") + (index + 1) }));
 }
-function settings(seed) { return {left:rosterSettings("left"),right:rosterSettings("right"),selected:{...selected},rules:{...rules},seed,random:true,first:"simultaneous",distance:Number(elements.distance.value),support:false}; }
+function settings(seed) { return {left:rosterSettings("left"),right:rosterSettings("right"),selected:{...selected},rules:{...rules},seed,random:true,first:"simultaneous",distance:1,support:false}; }
 function changed() { reset(); }
 function settingError(error) { return /[가-힣]/.test(error.message) ? error.message : "입력 수치와 규칙의 상한·최소값을 확인해 주세요."; }
 function reset() {
-  playing=false;
+  playing=false; audio.stop(); globalThis.SpawnerCombatAudio.reset(audioPlayback);
   try {
     trial=createSimulationTrial(settings(1));
     elements.status.textContent="대결 준비";
@@ -32129,7 +32222,7 @@ function render() {
       const progress = agent?.health > 0 && agent.stats.canAttack && end > start ? Math.max(0, Math.min(1, (trial.time - start) / (end - start))) : 0;
       elements[side+"Gauge"].style.width=(100*progress)+"%";
       const reaction = agent?.combat?.lastReaction, event = agent?.combat?.lastEvent;
-      const labels = {dodge:"회피",parry:"패링",block:"블록",stun:"기절"};
+      const labels = {miss:"회피",dodge:"회피",parry:"패링",block:"블록",stun:"기절"};
       elements[side+"Reaction"].textContent = !agent ? "" : agent.health <= 0 ? "사망" : (agent.combat?.stunnedUntil || agent.dnaStunnedUntil || 0) > trial.time ? "기절" : reaction && trial.time - reaction.at < .65 ? labels[reaction.kind] || "" : event?.kind === "counter" && trial.time - event.at < .45 ? "반격" : agent.attack && trial.time < agent.attack.hitAt ? "공격 준비" : "";
     } catch(error) { elements.status.textContent=settingError(error); }
   }
@@ -32144,6 +32237,7 @@ reset();
 function frame(now) {
   const elapsed=lastFrame?Math.min(.1,(now-lastFrame)/1000):0;lastFrame=now;
   if(playing&&trial){trial.advance(elapsed);render();}
+  if (trial) for (const event of globalThis.SpawnerCombatAudio.update(audioPlayback, trial.agents, [], trial.time, trial.vfx)) audio.play(event.name, 1);
   combatStage.render(trial, now, playing);requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);

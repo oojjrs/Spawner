@@ -17,7 +17,7 @@ import { createCombat, combatDisposition, canPursueCombat, colonyDefenseTarget, 
 import { RESOURCE_TYPES, resourceDefinition, resourceTypeForCell, canHarvestResource, migrateResourceType, isColonyFood, isResourceHabitat, populateColonyFood, resourceHarvestSeconds, resourceHarvestMultiplier } from "./resources.mjs";
 import { burrowDistance, burrowApproaches } from "./burrows.mjs";
 import { commandCheat } from "./cheats.mjs";
-import { combatPrimary, migrateCombatStats } from "./combat-stats.mjs";
+import { combatPrimary, combatProfile, migrateCombatStats } from "./combat-stats.mjs";
 import { resourceHabitatSuitability } from "./resource-habitats.mjs";
 import { tribeHazardKind, tribeTerrainWalkable } from "./tribe-environment.mjs";
 import { createResourceStorage } from "./resource-storage.mjs";
@@ -275,7 +275,7 @@ export function createGame(environment, colony, savedGame) {
       }
       agent.moveAnimationStartedAt ??= agent.moveStartedAt;
       if (agent.attack?.dnaRanged) { agent.attack = null; agent.attackTargetId = null; }
-      agent.dnaHealEvent = null; agent.dnaActionEvent = null; agent.dnaProjectiles = [];
+      agent.dnaActionEvent = null; agent.dnaProjectiles = [];
       agent.attributeLevels = migrateAttributeLevels(agent.slots, agent.attributeLevels, state.nestLevel);
       agent.slots = migrateAttributeSlots(agent.slots);
       agent.combatPrimary = combatPrimary(agent);
@@ -1339,15 +1339,6 @@ export function createGame(environment, colony, savedGame) {
 
     function stepUtilityAgent(agent, elapsed) {
       let plan = agent.utility;
-      if (agent.stats?.dna?.healer && !agent.stats.dna.melee && !agent.stats.dna.ranged && !agent.carrying && !agent.retreat && !["flee", "recover"].includes(plan?.action)) {
-        const supportAgents = environment.unitIndex ? environment.unitIndex.nearby(agent.x, agent.y, agent.stats.vision).map(entry => entry.agent).filter(other => other.ownerId === agent.ownerId) : state.agents;
-        const target = supportAgents.filter(other => other !== agent && other.health > 0 && !other.hidden && !other.retreat && other.health < other.stats.health &&
-          Math.hypot(other.x - agent.x, other.y - agent.y) <= agent.stats.vision).sort((a, b) => a.health / a.stats.health - b.health / b.stats.health)[0];
-        if (target) {
-          if (Math.hypot(target.x - agent.x, target.y - agent.y) <= 2) return false;
-          plan = { action: "explore", target, route: [] };
-        }
-      }
       if (!plan) return false;
       const movingFor = state.simSeconds - agent.moveStartedAt;
       if (movingFor < agent.moveDuration) {
@@ -1390,14 +1381,16 @@ export function createGame(environment, colony, savedGame) {
         if (building && agent.dna && !agent.stats.dna.power) { agent.decisionPending = "targetLost"; return false; }
         if (building && burrowDistance(agent, target) <= 1) {
           if (state.simSeconds >= agent.attackReady) {
-            agent.attack = { startedAt: state.simSeconds, speed: agent.dna ? agent.stats.dna.speed : 1,
-              hitsRemaining: agent.dna ? agent.stats.dna.hits : 1, hitIndex: 0,
-              hitAt: state.simSeconds + (agent.dna ? agent.stats.dna.focus : AGENT_ATTACK_HIT_TIME),
-              endsAt: state.simSeconds + (agent.dna ? Math.max(1 / agent.stats.dna.speed, agent.stats.dna.focus + (agent.stats.dna.hits - 1) * agent.stats.dna.comboSpeed) : AGENT_ATTACK_DURATION),
+            const profile = combatProfile(agent), hits = agent.dna ? agent.stats.dna.hits : 1;
+            const hitAt = state.simSeconds + (agent.dna ? agent.stats.dna.focus : AGENT_ATTACK_HIT_TIME);
+            const recovery = Math.max(profile.recovery, AGENT_ATTACK_DURATION - AGENT_ATTACK_HIT_TIME);
+            agent.attack = { startedAt: state.simSeconds, speed: 1,
+              hitsRemaining: hits, hitIndex: 0, hitAt, recovery, meleeContacts: [hitAt],
+              endsAt: hitAt + (hits - 1) * (agent.dna ? agent.stats.dna.comboSpeed : 0) + recovery,
               targetId: target.id, targetKind: ["burrow", "nest"].includes(target.kind) ? target.kind : "agent", targetX: target.x, targetY: target.y,
               directionX: Math.sign(target.x - agent.x) || 1, damage: agent.stats.attack,
               resolved: false, hit: false };
-            agent.attackReady = agent.attack.endsAt;
+            agent.attackReady = agent.attack.endsAt + profile.attackInterval;
           }
           return false;
         }
@@ -1581,7 +1574,7 @@ export function createGame(environment, colony, savedGame) {
       ensureFoodAround(agent.x, agent.y, 4);
       const drops = [{ id: "corpse:" + agent.id, agentId: agent.id, colonyId: colony.id, name: agent.name,
         tribe: agent.tribe, bornAt: agent.bornAt, diedAt: state.simSeconds, decaysAt: state.simSeconds + CORPSE_LIFETIME,
-        facing: agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1,
+        facing: agent.combat?.position ? agent.facing || 1 : agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1,
         hurtStartedAt: agent.hurtStartedAt, hurtCount: agent.hurtCount,
         cost: agent.cost, kind: "corpse",
         stats: { pieceCount: agent.dna?.pieces.length ?? agent.stats?.pieceCount ?? 0 },
@@ -1643,7 +1636,10 @@ export function createGame(environment, colony, savedGame) {
         attack.resolved = attack.hitsRemaining <= 0;
         const damage = attack.damage * (agent.dna && attack.hitIndex > 0 ? agent.stats.dna.comboPower / 100 : 1);
         attack.hitIndex = (attack.hitIndex || 0) + 1;
-        attack.hitAt += agent.dna ? agent.stats.dna.comboSpeed : AGENT_ATTACK_DURATION;
+        if (!attack.resolved) {
+          attack.hitAt += agent.dna ? agent.stats.dna.comboSpeed : AGENT_ATTACK_DURATION;
+          if (attack.meleeContacts) attack.meleeContacts.push(attack.hitAt);
+        }
         const owner = [...environment.games.values()].find(game => attack.targetKind === "nest" ? game.nest?.id === attack.targetId : game.agents.some(target => target.id === attack.targetId));
         const target = attack.targetKind === "burrow" ? environment.creatureSystem?.burrows.find(burrow => burrow.id === attack.targetId) :
           attack.targetKind === "nest" ? owner?.nest : owner ? owner.agents.find(target => target.id === attack.targetId) :
@@ -1696,7 +1692,7 @@ export function createGame(environment, colony, savedGame) {
         if (agent.mode === "rest") {
           agent.straightSteps = 0;
           if (isColonyBoundaryCell(agent.x, agent.y)) {
-            agent.health = Math.min(agent.stats.health, agent.utility.recoverHealth, agent.health + elapsed * 0.25 * (agent.dna ? 1 + agent.stats.dna.healing / 100 : 1));
+            agent.health = Math.min(agent.stats.health, agent.utility.recoverHealth, agent.health + elapsed * 0.25);
             if (agent.health >= agent.utility.recoverHealth) agent.decisionPending = "completed";
           } else agent.mode = "recover";
         } else if (agent.mode === "unload") {

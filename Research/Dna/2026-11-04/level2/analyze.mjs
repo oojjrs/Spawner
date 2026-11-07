@@ -7,7 +7,7 @@ const expectedFirst = { gather:[0,0], health:[0,1], blade:[0,2], movement:[0,5],
 const first = M.catalog.filter(gene => gene.grade === 1);
 if (first.length !== 5 || first.some(gene => JSON.stringify(gene.steps) !== JSON.stringify(expectedFirst[gene.id])))
   throw new Error('The user-fixed level-one catalog changed; reconcile it before continuing.');
-const names = { power:'근접 공격력', speed:'근접 공속', capacity:'운반', antenna:'안테나', healer:'치유기관', carapace:'갑각',
+const names = { power:'근접 공격력', speed:'근접 공속', capacity:'운반', antenna:'안테나', carapace:'갑각',
   blade:'칼날', gather:'채집기관', movement:'이속', health:'체력' };
 const genes = M.catalog.filter(gene => gene.grade === 2);
 const current = Object.fromEntries(genes.map(gene => [gene.id, gene.steps]));
@@ -24,7 +24,6 @@ const cases = [
   { id:'fighter', title:'칼날1 + 공격력2 + 공속2', counts:{ blade:1, power:2, speed:2 } },
   { id:'worker', title:'채집2 + 운반1 + 체력1 + 이속1', counts:{ gather:2, capacity:1, health:1, movement:1 } },
   { id:'scout', title:'안테나1 + 이속2 + 체력1', counts:{ antenna:1, movement:2, health:1 } },
-  { id:'healer', title:'치유기관1 + 체력3', counts:{ healer:1, health:3 } },
   { id:'tank', title:'갑각2 + 체력3', counts:{ carapace:2, health:3 } }
 ];
 const mod = value => (value % 6 + 6) % 6;
@@ -87,7 +86,6 @@ function search(plan, specification) {
   });
   return { ...specification, layoutsModuloRotation:completed, closedAtOriginModuloRotation:closedAtOrigin,
     extendableModuloRotation:extendable, birthCost:3+dnaCost, stats, representative, nativeChecks,
-    healerHpPerSecond:(specification.counts.healer||0)/2,
     note:specification.id.includes('attack-pair') ? '공격기관 없는 형상 비교입니다. 실제 근접 공격에는 칼날이 필요합니다.' : undefined };
 }
 

@@ -68,7 +68,7 @@ test("snapshotted appearance and historical retired-organ rigs keep their compat
   assert.equal(unitDisplayAttributes({ species: "bubble-toad", attributes }), attributes);
   assert.deepEqual(unitDisplayAttributesFrom(null), {});
   assert.deepEqual(combatAttributeKeys(null), []);
-  assert.deepEqual(unitDisplayAttributesFrom({ legs: 3, dnaGather: true, healing: 2 }), { feet: 1, dnaGather: true, healing: 2 });
+  assert.deepEqual(unitDisplayAttributesFrom({ legs: 3, dnaGather: true }), { feet: 1, dnaGather: true });
 });
 
 test("production inventory has 40 targets, keeps archival 128 sources and never upgrades readiness", () => {

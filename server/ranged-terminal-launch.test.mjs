@@ -32,8 +32,8 @@ test("world ranged action cannot retire one roundoff step before its intended fi
     const f = fixture({ tribe }), launches = [...f.first.shotLaunches];
     const originalReadyAt = .1 + Math.max(1 / 4, .3 + 3 * .12);
     assert.ok(originalReadyAt < launches.at(-1), "fixture exercises the original rounding defect");
-    assert.equal(f.source.attackReady, originalReadyAt, "cooldown is unchanged");
-    assert.equal(f.first.endsAt, launches.at(-1));
+    assert.ok(Math.abs(f.source.attackReady - f.first.endsAt - .25) < 1e-9, "the full interval begins after recovery");
+    assert.ok(Math.abs(f.first.endsAt - launches.at(-1) - .7) < 1e-9);
     assert.equal(f.first.launchedAt, .4);
     for (const at of launches.slice(0, -1)) f.combat.update(f.source, at);
     f.combat.update(f.source, originalReadyAt);
@@ -42,7 +42,11 @@ test("world ranged action cannot retire one roundoff step before its intended fi
     f.combat.update(f.source, launches.at(-1));
     assert.deepEqual(firstEvents(f, "shoot").map(event => event.at), launches);
     assert.equal(firstEvents(f, "shoot").at(-1).hitIndex, 3);
-    assert.notEqual(f.source.attack, f.first, "normal retirement/replacement still occurs after the final launch");
+    assert.equal(f.source.attack, f.first, "the final shot keeps its native recovery");
+    f.combat.update(f.source, f.first.endsAt);
+    assert.equal(f.source.attack, null);
+    f.combat.update(f.source, f.source.attackReady - .001);
+    assert.equal(f.source.attack, null, "no next action during the interval");
     f.source.attack = null; f.source.attackReady = 100;
     for (const time of [launches.at(-1), launches.at(-1) + .001, launches.at(-1) + .5, 2]) f.advance(time);
     assert.equal(firstEvents(f, "shoot").length, 4, "no duplicate or delayed extra shot");
@@ -51,23 +55,17 @@ test("world ranged action cannot retire one roundoff step before its intended fi
   }
 });
 
-test("ranged schedules keep their cooldown, launch, flight, and ordinary recovery formulas", () => {
+test("ranged schedules preserve launch and flight while reserving rest before the next action", () => {
   for (const start of [0, .1, 1, 10.01, 100.07, 3600.04]) for (const hits of [1, 4, 13])
     for (const focus of [.08, .3]) for (const gap of [.06, .12]) for (const rate of [.5, 4]) {
       const f = fixture({ start, hits, focus, gap, rate }), first = f.first;
       const launch = start + focus, last = launch + (hits - 1) * gap;
-      const ready = start + Math.max(1 / rate, focus + (hits - 1) * gap);
-      const previousEnd = Math.min(ready, last + .15);
-      assert.equal(f.source.attackReady, ready);
+      assert.ok(Math.abs(f.source.attackReady - first.endsAt - 1 / rate) < 1e-9);
       assert.equal(first.launchedAt, launch);
       assert.deepEqual(first.shotLaunches, Array.from({ length: hits }, (_, i) => launch + i * gap));
       assert.deepEqual(f.source.dnaProjectiles.map(shot => shot.launchedAt), first.shotLaunches);
       assert.deepEqual(f.source.dnaProjectiles.map((shot, i) => shot.hitAt), Array.from({ length: hits }, (_, i) => first.hitAt + i * gap));
-      if (previousEnd >= last) assert.equal(first.endsAt, previousEnd);
-      else {
-        assert.equal(first.endsAt, last);
-        assert.ok(last - previousEnd <= Number.EPSILON * Math.max(1, start) * 4);
-      }
+      assert.ok(Math.abs(first.endsAt - last - .7) < 1e-9);
       assert.deepEqual(f.random, [], "scheduling consumes no new randomness");
     }
 });
@@ -98,7 +96,7 @@ test("replacing an in-flight source with its restored instance cancels old proje
   assert.equal(f.target.health, 100);
 });
 
-test("actual game snapshot and save preserve the clamped schedule, while restore clears in-flight actions", () => {
+test("actual game snapshot and save preserve the full interval schedule, while restore clears in-flight actions", () => {
   const f = fixture();
   const colony = { id: 1, ownerId: "terminal-save", tribe: "bean", x: 20, y: 20, occupiedCells: new Set(["2,2"]) };
   const room = { simSeconds: 0, world: { size: 80, seed: 13, generationVersion: 38,

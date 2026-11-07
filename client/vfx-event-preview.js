@@ -6,7 +6,7 @@ modules["client/combat-vfx-events.mjs"] = (() => {
 const COMBAT_VFX_ART_STATUS = "draft-pending-user-review";
 const lifetime = { attack: .25, counter: .25, hit: .4, critical: .5, followup: .4,
   dodge: .4, parry: .45, block: .45, stun: .7, "bleed-apply": .5,
-  bleed: .4, area: .5, drain: .55, reflect: .45, heal: .55, regeneration: .55, death: .8, shoot: .18 };
+  bleed: .4, area: .5, drain: .55, reflect: .45, regeneration: .55, death: .8, shoot: .18 };
 
 function normalizeCombatVfxEvent(input, scope = "legacy") {
   const at = input?.at ?? input?.time;
@@ -48,7 +48,7 @@ function combatVfxCues(input, scope) {
       if (event.amount > 0) add(event.kind, "impact", event.toId ?? event.targetId, event.amount,
         { phase: "arrival" });
       break;
-    case "heal": case "drain": case "regeneration":
+    case "drain": case "regeneration":
       if (event.amount > 0) add(event.kind, "restore", event.toId ?? event.targetId, event.amount,
         { phase: "arrival" });
       break;
@@ -141,7 +141,7 @@ function createCombatVfxCursor({ maxLateness = .35, maxEvents = 512 } = {}) {
   return { consume, reset() { clear(); streamId = null; previousTime = null; } };
 }
 
-return {COMBAT_VFX_ART_STATUS,normalizeCombatVfxEvent,combatVfxCues,combatVfxAt,createCombatVfxCursor};
+return { COMBAT_VFX_ART_STATUS, normalizeCombatVfxEvent, combatVfxCues, combatVfxAt, createCombatVfxCursor };
 })();
 modules["client/creature-approved-actions.mjs"] = (() => {
 const APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS = Object.freeze({
@@ -1528,10 +1528,77 @@ function unitDisplaySize(unit) {
   const count = Array.isArray(unit.dna?.pieces) ? unit.dna.pieces.length :
     Number.isFinite(unit.stats?.pieceCount) ? Math.max(0, unit.stats.pieceCount) : 0;
   const scale = 1 + .01 * count;
-  return (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean)*scale;
+  const size = (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean) * scale;
+  return UNIT_DISPLAY_SIZES.bean + (size - UNIT_DISPLAY_SIZES.bean) * .5;
 }
 
-return {UNIT_DISPLAY_SIZES,unitDisplaySize};
+function combatViewCell(width, height, units) {
+  const largest = units.reduce((size, unit) => Math.max(size, unitDisplaySize(unit)), 0) || UNIT_DISPLAY_SIZES.bean;
+  return Math.min(width * .24, height * .5) / largest;
+}
+
+function combatViewLayout(width, height, units) {
+  const located = units.map(unit => ({ unit, point: unit.combat?.position || unit.combatPosition })).filter(entry => entry.point);
+  if (located.length) {
+    const largest = units.reduce((size, unit) => Math.max(size, unitDisplaySize(unit)), .4);
+    const xs = located.flatMap(({ point }) => [point.x, point.homeX ?? point.x]);
+    const ys = located.flatMap(({ point }) => [point.y, point.homeY ?? point.y]);
+    const lowX = Math.min(-3.8, ...xs), highX = Math.max(3.8, ...xs), lowY = Math.min(-1, ...ys), highY = Math.max(1, ...ys);
+    const cell = Math.min(combatViewCell(width, height, units), width * .88 / (highX - lowX + largest * 1.3),
+      height * .72 / ((highY - lowY) * .5 + largest * 1.3));
+    const project = point => ({ x: width * .5 + (point.x - (lowX + highX) / 2) * cell,
+      y: height * .66 + (point.y - (lowY + highY) / 2) * cell * .5 });
+    const positions = new Map(located.map(({ unit, point }) => {
+      const { x, y } = project(point), size = unitDisplaySize(unit);
+      return [String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
+        top: y - size * cell * 1.2, bottom: y + size * cell * .18 } }];
+    }));
+    return { cell, positions, project };
+  }
+  const teams = [0, 1].map(side => units.filter(unit => (unit.combat?.side ?? unit.side) === side));
+  const count = Math.max(...teams.map(team => team.length));
+  const positions = new Map();
+  if (!count) return { cell: combatViewCell(width, height, units), positions };
+  const columnCount = Math.min(count, Math.ceil(Math.sqrt(count * 1.5))), rowCount = Math.ceil(count / columnCount);
+  const columns = Array(columnCount).fill(0), rows = Array(rowCount).fill(0);
+  teams.forEach(team => team.forEach((unit, index) => {
+    const size = unitDisplaySize(unit);
+    columns[index % columnCount] = Math.max(columns[index % columnCount], size * 1.3);
+    rows[Math.floor(index / columnCount)] = Math.max(rows[Math.floor(index / columnCount)], size);
+  }));
+  const gapX = Math.min(width * .035, width * .42 / (columnCount * 4));
+  const gapY = Math.min(height * .035, height * .36 / (rowCount * 4));
+  const totalWidth = columns.reduce((sum, value) => sum + value, 0);
+  const rowSpans = rows.slice(1).map((size, index) => rows[index] * .18 + size * 1.2);
+  const groundSpan = rowSpans.reduce((sum, value) => sum + value, 0);
+  const cell = Math.min(combatViewCell(width, height, units),
+    (width * .42 - gapX * (columnCount - 1)) / totalWidth,
+    height * .44 / (rows[0] * 1.2), height * .08 / (rows[rowCount - 1] * .18),
+    rowCount > 1 ? (height * .36 - gapY * (rowCount - 1)) / groundSpan : Infinity);
+  const gridWidth = totalWidth * cell + gapX * (columnCount - 1);
+  const gridHeight = groundSpan * cell + gapY * (rowCount - 1);
+  const firstFoot = height * .5 + (height * .36 - gridHeight) / 2;
+  teams.forEach((team, side) => team.forEach((unit, index) => {
+    const column = index % columnCount, row = Math.floor(index / columnCount), size = unitDisplaySize(unit);
+    const offsetX = columns.slice(0, column).reduce((sum, value) => sum + value, 0) * cell + gapX * column;
+    const offsetY = rowSpans.slice(0, row).reduce((sum, value) => sum + value, 0) * cell + gapY * row;
+    const x = width * (side ? .75 : .25) + (side ? -1 : 1) * (gridWidth / 2 - offsetX - columns[column] * cell / 2);
+    const y = firstFoot + offsetY;
+    positions.set(String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
+      top: y - size * cell * 1.2, bottom: y + size * cell * .18 } });
+  }));
+  return { cell, positions };
+}
+
+function unitFacing(unit) {
+  return (unit.attack?.directionX || unit.facing || 1) < 0 ? -1 : 1;
+}
+
+function unitFrameMirror(sourceFacing, facing) {
+  return (facing < 0) !== (sourceFacing === "left");
+}
+
+return { UNIT_DISPLAY_SIZES, unitDisplaySize, combatViewCell, combatViewLayout, unitFacing, unitFrameMirror };
 })();
 modules["client/creature-ranged.mjs"] = (() => {
 const { imageAnimation } = modules["client/image-geometry.mjs"];
@@ -1932,6 +1999,7 @@ const CREATURE_MOVEMENT_PROFILES = Object.freeze(Object.fromEntries([
 return {CREATURE_MOVEMENT_PROFILES};
 })();
 modules["client/unit-animation.mjs"] = (() => {
+const { unitFrameMirror } = modules["client/unit-size.mjs"];
 const { APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS, APPROVED_COTTON_SHEEP_WALK_ANIMATION } = modules["client/creature-approved-actions.mjs"];
 const { APPROVED_CREATURE_WALK_ANIMATIONS, APPROVED_CREATURE_DEATH_ANIMATIONS } = modules["client/creature-approved-animations.mjs"];
 const { CREATURE_RANGED_ANIMATIONS, CREATURE_RANGED_ASSETS, creatureRangedPose } = modules["client/creature-ranged.mjs"];
@@ -2127,8 +2195,8 @@ function creatureAttackPose(agent, time) {
       animation.hitTimeMs + (elapsed - timing.hitTimeMs) / (timing.durationMs - timing.hitTimeMs) * (animation.durationMs - animation.hitTimeMs);
   }
   if (!Number.isFinite(elapsed) || elapsed < 0 || elapsed + 1e-6 >= animation.durationMs) return null;
-  const direction = attack.directionX || agent.facing || -1;
-  return { action: "attack", animation, frame: unitAnimationFrame(animation, elapsed), mirrorX: direction > 0 };
+  const direction = attack.directionX || agent.facing || 1;
+  return { action: "attack", animation, frame: unitAnimationFrame(animation, elapsed), mirrorX: unitFrameMirror(animation.sourceFacing || animation.facing || "left", direction) };
 }
 
 function creatureHurtPose(agent, time) {
@@ -2141,7 +2209,7 @@ function creatureHurtPose(agent, time) {
 }
 
 function unitMovementElapsedMs(agent, time) {
-  const start = Number.isFinite(agent.moveAnimationStartedAt) ? agent.moveAnimationStartedAt : agent.moveStartedAt;
+  const start = agent.combat?.position?.moving ? agent.combat.position.moveStartedAt : Number.isFinite(agent.moveAnimationStartedAt) ? agent.moveAnimationStartedAt : agent.moveStartedAt;
   return Number.isFinite(time) && Number.isFinite(start) ? Math.max(0, time - start) * 1000 : 0;
 }
 
@@ -2153,7 +2221,7 @@ function unitAnimationPose(agent, time) {
   const rpg = agent.combat?.version === 2;
   const hurt = (time - agent.hurtStartedAt) * 1000 * (rpg ? animations.hurt.durationMs / 120 : 1);
   const attack = agent.attack ? attackAnimationElapsed(agent.attack, time, AGENT_ATTACK_HIT_TIME, animations.attack.durationMs / 1000) * 1000 : -1;
-  const moving = agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
+  const moving = agent.combat?.position?.moving || agent.moveDuration > 0 && time >= agent.moveStartedAt && time < agent.moveStartedAt + agent.moveDuration;
   if (rpg && attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
   else if (hurt >= 0 && hurt < animations.hurt.durationMs) { action = "hurt"; elapsed = hurt; }
   else if (attack >= 0 && attack < animations.attack.durationMs) { action = "attack"; elapsed = attack; }
@@ -2174,6 +2242,10 @@ function unitAnimationPose(agent, time) {
 
 function creatureWalkPose(agent, time) {
   const animation = CREATURE_WALK_ANIMATIONS[agent.species];
+  if (animation && agent.health > 0 && agent.combat?.position?.moving) {
+    const elapsed = (time - agent.combat.position.moveStartedAt) * 1000;
+    return { action: "walk", animation, frame: unitAnimationFrame(animation, elapsed) };
+  }
   const elapsed = time - agent.moveStartedAt;
   if (!animation || agent.health <= 0 || agent.mode !== "walk" ||
     !(agent.moveDuration > 0) || !Number.isFinite(elapsed) || elapsed < 0 || elapsed >= agent.moveDuration) return null;
@@ -2239,7 +2311,7 @@ function springKeeperFlightPose(agent, time) {
   return { animation, frame: unitAnimationFrame(animation, animation.takeoffDurationMs + animation.flightDurationMs + landing), stage: "landing" };
 }
 
-return {UNIT_ANIMATIONS,CREATURE_IDLE_ANIMATIONS,CREATURE_WALK_ANIMATIONS,CREATURE_ATTACK_ANIMATIONS,CREATURE_HURT_ANIMATIONS,CREATURE_DEATH_ANIMATIONS,UNIT_ANIMATION_ASSETS,unitAnimationFrame,creatureAttackPose,creatureHurtPose,unitMovementElapsedMs,unitAnimationPose,creatureWalkPose,creatureAnimationSpeed,unitMovementPosition,springKeeperFlightPose};
+return { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_WALK_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, UNIT_ANIMATION_ASSETS, unitAnimationFrame, creatureAttackPose, creatureHurtPose, unitMovementElapsedMs, unitAnimationPose, creatureWalkPose, creatureAnimationSpeed, unitMovementPosition, springKeeperFlightPose };
 })();
 modules["client/secretion-idle.mjs"] = (() => {
 const { unitAnimationPose } = modules["client/unit-animation.mjs"];

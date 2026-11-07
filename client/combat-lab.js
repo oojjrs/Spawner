@@ -9,6 +9,7 @@ const builds = Object.fromEntries(sides.map((side, index) => [side, { key: index
 const rosters = Object.fromEntries(sides.map(side => [side, [builds[side]]]));
 const selected = { left: 0, right: 0 };
 const rules = { ...DEFAULT_SIMULATION_RULES };
+const audio = globalThis.SpawnerCombatAudio.createPlayer(), audioPlayback = globalThis.SpawnerCombatAudio.create();
 let trial, playing = false, lastFrame = 0, controlId = 0;
 const main = document.querySelector("main");
 main.replaceChildren();
@@ -30,7 +31,7 @@ function select(options, value) {
   element.value = value; return element;
 }
 function button(parent, label, action) {
-  const element = node("button", label); element.type = "button"; element.addEventListener("click", action); parent.append(element); return element;
+  const element = node("button", label); element.type = "button"; element.addEventListener("click", () => { audio.resume(); action(); }); parent.append(element); return element;
 }
 const header = node("header");
 const title = node("div"); title.append(node("div", "SPAWNER / COMBAT LAB", "eyebrow"), node("h1", "전투 실험실"));
@@ -105,11 +106,11 @@ function selectBuild(side) {
 function rosterSettings(side) {
   return rosters[side].map((build, index) => ({ ...structuredClone(build), name: (side === "left" ? "왼쪽 " : "오른쪽 ") + (index + 1) }));
 }
-function settings(seed) { return {left:rosterSettings("left"),right:rosterSettings("right"),selected:{...selected},rules:{...rules},seed,random:true,first:"simultaneous",distance:Number(elements.distance.value),support:false}; }
+function settings(seed) { return {left:rosterSettings("left"),right:rosterSettings("right"),selected:{...selected},rules:{...rules},seed,random:true,first:"simultaneous",distance:1,support:false}; }
 function changed() { reset(); }
 function settingError(error) { return /[가-힣]/.test(error.message) ? error.message : "입력 수치와 규칙의 상한·최소값을 확인해 주세요."; }
 function reset() {
-  playing=false;
+  playing=false; audio.stop(); globalThis.SpawnerCombatAudio.reset(audioPlayback);
   try {
     trial=createSimulationTrial(settings(1));
     elements.status.textContent="대결 준비";
@@ -130,7 +131,7 @@ function render() {
       const progress = agent?.health > 0 && agent.stats.canAttack && end > start ? Math.max(0, Math.min(1, (trial.time - start) / (end - start))) : 0;
       elements[side+"Gauge"].style.width=(100*progress)+"%";
       const reaction = agent?.combat?.lastReaction, event = agent?.combat?.lastEvent;
-      const labels = {dodge:"회피",parry:"패링",block:"블록",stun:"기절"};
+      const labels = {miss:"회피",dodge:"회피",parry:"패링",block:"블록",stun:"기절"};
       elements[side+"Reaction"].textContent = !agent ? "" : agent.health <= 0 ? "사망" : (agent.combat?.stunnedUntil || agent.dnaStunnedUntil || 0) > trial.time ? "기절" : reaction && trial.time - reaction.at < .65 ? labels[reaction.kind] || "" : event?.kind === "counter" && trial.time - event.at < .45 ? "반격" : agent.attack && trial.time < agent.attack.hitAt ? "공격 준비" : "";
     } catch(error) { elements.status.textContent=settingError(error); }
   }
@@ -145,6 +146,7 @@ reset();
 function frame(now) {
   const elapsed=lastFrame?Math.min(.1,(now-lastFrame)/1000):0;lastFrame=now;
   if(playing&&trial){trial.advance(elapsed);render();}
+  if (trial) for (const event of globalThis.SpawnerCombatAudio.update(audioPlayback, trial.agents, [], trial.time, trial.vfx)) audio.play(event.name, 1);
   combatStage.render(trial, now, playing);requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);

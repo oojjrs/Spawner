@@ -29,7 +29,7 @@ test("drain arrives at the healed attacker and reflection arrives at the damaged
     assert.equal(cue.anchorId, "attacker"); assert.equal(cue.phase, "arrival"); assert.equal(cue.at, 2);
     assert.equal(cue.channel, channel); assert.equal(cue.amount, 3);
   }
-  for (const kind of ["bleed", "area", "heal", "regeneration", "death", "bleed-apply", "counter", "attack"])
+  for (const kind of ["bleed", "area", "regeneration", "regeneration", "death", "bleed-apply", "counter", "attack"])
     assert.equal(combatVfxCues(event(kind)).length, 1, kind + " has an explicit semantic mapping");
 });
 
@@ -79,9 +79,9 @@ test("launch, flight, arrival and cancellation are separate and never synthesize
     "legacy ranged means resolved impact, never launch");
 });
 
-test("same-time heal recipients stay distinct while duplicated source/target copies deduplicate", () => {
+test("same-time recovery recipients stay distinct while duplicated source/target copies deduplicate", () => {
   const cursor = createCombatVfxCursor(); cursor.consume(packet([]), 0);
-  const first = { kind: "heal", at: 1, sourceId: "healer", targetId: "ally-a", damage: -1 };
+  const first = { kind: "regeneration", at: 1, sourceId: "source", targetId: "ally-a", damage: -1 };
   const second = { ...first, targetId: "ally-b", damage: -.5 };
   const result = cursor.consume(packet([first, second, first, second]), 1);
   assert.deepEqual(result.started.map(cue => [cue.anchorId, cue.amount]), [["ally-a", 1], ["ally-b", .5]]);
@@ -114,6 +114,7 @@ test("real simulation launches before damage and emits actual capped drain separ
   const melee = createSimulationTrial({ left: { key: "bean", counts: { drain: 3, vitality: 2 } }, right: { key: "spore", counts: { vitality: 2 } }, random: false,
     rules: { maxSeconds: .31 } });
   melee.agents[0].health -= 2;
+  for (const unit of melee.agents) Object.assign(unit.combat.position, { x: unit.combat.side ? .4 : -.4, y: 0, fromX: unit.combat.side ? .4 : -.4, fromY: 0 });
   melee.finish();
   const drain = melee.vfx.events.find(item => item.kind === "drain");
   assert.ok(drain); assert.equal(drain.targetId, drain.toId); assert.notEqual(drain.fromId, drain.toId);
