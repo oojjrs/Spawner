@@ -1,0 +1,32 @@
+{
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "durationsMs": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "projectileIncluded": false,
+  "status": "approved-for-planning",
+  "tribe": "spring",
+  "form": "secretion",
+  "action": "walk",
+  "sheet": "walk-sheet.png",
+  "preview": "walk-preview.gif",
+  "sheetSHA256": "b83da42bf02a380d7be98e5ea681ccd889cb5175cb3e37fba55213bb14f29ee6",
+  "previewSHA256": "321a7b846756c799e93c572db6c0ff17d0663e365ff0b3b858e937a14a923557",
+  "durationMs": 800,
+  "method": "Approved full-body generated poses; original whole-frame packaging and bytes preserved.",
+  "integration": "Planning reference only; game runtime and deployment are unchanged.",
+  "gifRegenerationExact": true
+}

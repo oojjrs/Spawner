@@ -1,0 +1,32 @@
+{
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "durationsMs": [
+    80,
+    80,
+    80,
+    40,
+    40,
+    80,
+    100,
+    100
+  ],
+  "pivot": [
+    256,
+    448
+  ],
+  "projectileIncluded": false,
+  "status": "approved-for-planning",
+  "tribe": "spring",
+  "form": "secretion",
+  "action": "ranged-attack",
+  "sheet": "shoot-sheet.png",
+  "preview": "shoot-preview.gif",
+  "sheetSHA256": "f506aced908bc557e233b12e75f7f334ea882b3fd1db9f86617cf6978d1cd116",
+  "previewSHA256": "c1188aab9951863fcf964f6c3d129000a061f9edf1e196917f26f3d53fb817a9",
+  "durationMs": 600,
+  "method": "Approved full-body generated poses; original whole-frame packaging and bytes preserved.",
+  "integration": "Planning reference only; game runtime and deployment are unchanged.",
+  "gifRegenerationExact": true
+}
