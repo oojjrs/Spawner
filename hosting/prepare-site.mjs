@@ -49,7 +49,7 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
     clients.set("client/welcome-art.js", "globalThis.SpawnerWelcomeBackground = " + JSON.stringify(welcomePath) + ";\r\n");
   }
   const assets = new Map(), gameAssets = new Set();
-  for (const name of documentAssets) assets.set(name, readSource(name));
+  for (const name of documentAssets) assets.set(name, 0);
   for (const source of [...pages.values(), ...[...clients].filter(([name]) => gameClients.has(name)).map(([, source]) => source)]) {
     if (/data:[^;,\s]+;base64,/.test(source)) throw new Error("내장 자산을 DesignAssets 파일로 분리해 주세요.");
     const dependencies = source.replace(/modules\["client\/image-scales\.mjs"\] = \(\(\) => \{[\s\S]*?^\}\)\(\);/m, "")
@@ -60,7 +60,7 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
       gameAssets.add(name);
       if (assets.has(name)) continue;
       if (name.split("/").some(part => part === ".." || part === "")) throw new Error("잘못된 자산 경로입니다.");
-      assets.set(name, readSource(name));
+      assets.set(name, 0);
     }
   }
   // Review pages have their own sprites. Validate the entire publication, not
@@ -75,9 +75,21 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
     mkdirSync(dirname(path), { recursive: true });
     writeFileSync(path, value);
   }
-  const assetFiles = new Map([...assets].map(([name, bytes]) => [name,
-    createHash("sha256").update(bytes).digest("hex") + "." + name.split(".").at(-1)]));
   if (!/^[a-f0-9]{40}$/.test(revision)) throw new Error("게시된 소스 커밋이 필요합니다.");
+  // Keep only lengths and digests in memory. Full scene atlases plus document
+  // previews exceed a gigabyte; retaining every Buffer can kill publication.
+  const assetFiles = new Map();
+  mkdirSync(assetDirectory, { recursive: true });
+  const attributes = join(assetDirectory, ".gitattributes");
+  if (!existsSync(attributes)) writeFileSync(attributes, "* -text\r\n.gitattributes text eol=crlf\r\n", "utf8");
+  for (const name of assets.keys()) {
+    const bytes = readSource(name), file = createHash("sha256").update(bytes).digest("hex") + "." + name.split(".").at(-1);
+    assetFiles.set(name, file); assets.set(name, bytes.length);
+    const path = join(assetDirectory, file);
+    if (existsSync(path)) {
+      if (!readFileSync(path).equals(bytes)) throw new Error("기존 원본 자산의 해시가 다릅니다: " + path);
+    } else writeFileSync(path, bytes);
+  }
   const sourceAssetBase = "https://raw.githubusercontent.com/oojjrs/Spawner/" + revision + "/";
   const publishedAssets = execFileSync("git", ["show", "HEAD:dist/client/assets.js"], { cwd: destination, encoding: "utf8", maxBuffer: 128 * 1024 * 1024 });
   const assetPaths = new Map([...assetFiles].map(([name, file]) => [name,
@@ -102,7 +114,7 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
     for (const [assetName, assetPath] of assetPaths) if (!documentOriginalAssets.has(assetName)) source = source.replaceAll(assetName, assetPath);
     return source;
   }
-  for (const name of documentOriginalAssets) write(name, assets.get(name));
+  for (const name of documentOriginalAssets) write(name, readSource(name));
   for (const [name, source] of documents) write(name, documentSource(source));
   for (const [name, source] of clients) {
     if (name === "client/assets.js") {
@@ -119,15 +131,6 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
       write(name, gameClients.has(name) && name.endsWith(".js") ? script.replaceAll("new Image()", "globalThis.SpawnerAssets.image()") : script);
     }
   }
-  mkdirSync(assetDirectory, { recursive: true });
-  const attributes = join(assetDirectory, ".gitattributes");
-  if (!existsSync(attributes)) writeFileSync(attributes, "* -text\r\n.gitattributes text eol=crlf\r\n", "utf8");
-  for (const [name, bytes] of assets) {
-    const path = join(assetDirectory, assetFiles.get(name));
-    if (existsSync(path)) {
-      if (!readFileSync(path).equals(bytes)) throw new Error("기존 원본 자산의 해시가 다릅니다: " + path);
-    } else writeFileSync(path, bytes);
-  }
   const previousAssets = join(output, "game-assets");
   if (existsSync(previousAssets)) {
     for (const entry of readdirSync(previousAssets, { withFileTypes: true })) {
@@ -137,7 +140,7 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
     rmdirSync(previousAssets);
   }
   return { project_id: manifest.project_id, source_revision: revision, asset_base: assetBase, html_bytes: Buffer.byteLength(html), assets: assets.size,
-    asset_bytes: [...assets.values()].reduce((sum, bytes) => sum + bytes.length, 0), largest_asset_bytes: Math.max(...[...assets.values()].map(bytes => bytes.length)) };
+    asset_bytes: [...assets.values()].reduce((sum, length) => sum + length, 0), largest_asset_bytes: Math.max(...assets.values()) };
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

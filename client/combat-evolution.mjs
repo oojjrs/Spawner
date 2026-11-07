@@ -1,3 +1,4 @@
+import { UNIT_COMBINATION_FORMS } from "./unit-combination-forms.mjs";
 import { createUnitActionArt, unitActionArtDefinition, unitActionArtPose } from "./unit-action-art.mjs";
 import { unitDisplayAttributesFrom } from "./unit-display-appearance.mjs";
 
@@ -14,7 +15,7 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
   const art = createUnitActionArt(assetSource, createSurface, loadImage), prepared = new Set();
   async function prepare(tribe) {
     const key = tribe || "bean";
-    await Promise.all([{ blade: 1 }, { carapace: 1 }, { secretion: 1 }, { blade: 1, carapace: 1 }]
+    await Promise.all([{ blade: 1 }, { carapace: 1 }, { secretion: 1 }, ...UNIT_COMBINATION_FORMS.map(form => form.attributes)]
       .map(attributes => art.prepare({ tribe: key, attributes })));
     prepared.add(key);
   }

@@ -87,7 +87,7 @@ test("missing representative art keeps base fallback and never promotes incomple
   }, { unavailable: true });
 });
 
-test("mixed stat-only laboratory builds display blade while retaining real ranged shots and unchanged simulation", async () => {
+test("mixed stat-only laboratory builds display their blade-secretion body while retaining real ranged shots and unchanged simulation", async () => {
   await harness(async ({ draw, settle }) => {
     const settings = { left: { key: "bean", organs: { attack: 1, ranged: 1 }, counts: { vitality: 4 } },
       right: { key: "spring", organs: { attack: 1, ranged: 1 }, counts: { vitality: 4 } }, distance: 3, random: false };
@@ -97,7 +97,7 @@ test("mixed stat-only laboratory builds display blade while retaining real range
     for (let index = 0; index < 20; index++) {
       trial.advance(.1); control.advance(.1);
       const draws = draw(trial);
-      sawBlade ||= draws.some(call => paths(call.image).some(path => path.includes("/Sheets/blade/")));
+      sawBlade ||= draws.some(call => paths(call.image).some(path => path.includes("/SecretionCombosV1/bean/blade-secretion/")));
       sawFlight ||= draws.some(call => call.image.src?.includes("CombatVfxV4/bean.png"));
       assert.deepEqual(trial.agents, control.agents); assert.deepEqual(trial.history, control.history);
     }
@@ -111,7 +111,7 @@ test("failed art retries after the bounded wall-clock delay and recovers without
   const original = Date.now; let now = 10000; Date.now = () => now;
   try {
     await harness(async ({ draw, settle, recover, requested }) => {
-      const trial = fixture("pebble", { blade: 1, secretion: 1 });
+      const trial = fixture("pebble", { blade: 1, secretion: 1, antenna: 1 });
       draw(trial); await settle();
       assert.equal(draw(trial).some(call => call.image.calls?.length), false);
       const before = requested.length; recover();

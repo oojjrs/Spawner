@@ -1,0 +1,21 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><base href="/"><title>조합 공통 렌더러 검수</title><style>body{font:16px sans-serif;background:#e9e4d8;color:#24372b;margin:20px}main{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}article{background:#faf7ef;border:1px solid #bcb6a5;border-radius:12px;overflow:hidden}h2{font-size:14px;margin:8px}canvas{width:100%;height:230px}button,select{padding:10px;margin:4px}#status{padding:10px}</style><h1>조합 · 실제 공통 렌더러</h1><label>종족<select id="tribe"><option value="bean">새싹콩</option><option value="spore">포자버섯</option><option value="pebble">몽돌</option><option value="spring">샘방울</option></select></label><label>조합<select id="form"></select></label><button id="mirror">방향 전환</button><button id="end">마지막 프레임</button><div id="status"></div><main></main><script type="module">
+import { UNIT_COMBINATION_FORMS } from '/client/unit-combination-forms.mjs';
+import { createUnitActionArt, unitActionArtDefinition } from '/client/unit-action-art.mjs';
+const tribe=document.querySelector('#tribe'),form=document.querySelector('#form'),status=document.querySelector('#status'),main=document.querySelector('main');
+for(const item of UNIT_COMBINATION_FORMS)form.add(new Option(item.label,item.key));form.value='secretion-carapace';
+let rows=[],art,start=performance.now(),mirrored=false,ending=false,version=0;
+const surface=(w,h)=>Object.assign(document.createElement('canvas'),{width:w,height:h});
+async function load(){const current=++version;rows=[];main.replaceChildren();status.textContent='불러오는 중';art=createUnitActionArt(x=>x,surface,async path=>{const img=new Image();img.src=path;await img.decode();return img});
+const info=UNIT_COMBINATION_FORMS.find(item=>item.key===form.value),base={tribe:tribe.value,attributes:info.attributes,health:10,bornAt:0,animationStartedAt:0};
+const definition=unitActionArtDefinition(base);if(!definition){status.textContent='아직 등록되지 않은 조합';return;}
+for(const action of [...Object.keys(definition.actions),'harvest','carry','throw']){const source=action==='carry'?'walk':['harvest','throw'].includes(action)?(definition.actions.attack?'attack':'ranged'):action,clip=definition.actions[source],duration=clip.durationMs/1000,agent={...base};
+if(['walk','carry'].includes(action))Object.assign(agent,{moveStartedAt:0,moveDuration:duration,moveAnimationStartedAt:0,carrying:action==='carry'?2:0});
+if(['attack','ranged'].includes(action))agent.attack={startedAt:0,endsAt:duration,mode:action==='ranged'?'ranged':'melee'};
+if(action==='hurt')agent.hurtStartedAt=0;if(action==='birth')agent.birth={startedAt:0,readyAt:duration};if(action==='death')Object.assign(agent,{health:0,diedAt:0});
+if(action==='harvest')Object.assign(agent,{mode:'harvest',harvestStarted:0});if(action==='throw')Object.assign(agent,{mode:'unload',foodDelivery:{startedAt:0,arrivesAt:duration}});
+const card=document.createElement('article'),heading=document.createElement('h2');heading.textContent=`${action} · ${clip.frameCount}프레임`;card.append(heading);const canvas=surface(300,250);card.append(canvas);main.append(card);await art.prepare(agent,.001);if(current!==version)return;rows.push({canvas,agent,clip,action,duration});}
+start=performance.now();status.textContent=`${tribe.selectedOptions[0].textContent} ${info.label} · ${rows.length}개 상태 로드 완료`;
+}
+tribe.onchange=load;form.onchange=load;document.querySelector('#mirror').onclick=()=>mirrored=!mirrored;document.querySelector('#end').onclick=()=>ending=!ending;
+function draw(now){for(const {canvas,agent,clip,action,duration}of rows){const ctx=canvas.getContext('2d');ctx.clearRect(0,0,300,250);const time=ending?duration-.00001:((now-start)/1000)%duration;let cell=210,x=150,floor=230;if(action==='birth'){const scale=Math.min(280/clip.frameSize,210/clip.frameHeight);cell=scale*clip.referenceLength/.7;x=10+clip.pivotX*scale;floor=25+clip.pivotY*scale;if(mirrored)x=300-x;}art.draw(ctx,agent,time,x,floor,cell,mirrored,null);}requestAnimationFrame(draw)}load();requestAnimationFrame(draw);
+</script></html>

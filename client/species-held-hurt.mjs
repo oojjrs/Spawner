@@ -1,4 +1,4 @@
-import { unitDisplayAttributes, unitBladeCarapaceAppearance } from "./unit-display-appearance.mjs";
+import { unitDisplayAttributes, unitCombinationAppearance } from "./unit-display-appearance.mjs";
 import { unitDisplaySize, unitFrameMirror } from "./unit-size.mjs";
 import { UNIT_APPEARANCE_LEGACY_VISUAL_KEYS } from "../server/unit-appearance.mjs";
 import { BEAN_HURT_HOLD_SECONDS, BEAN_HURT_TOTAL_SECONDS, beanHeldHurtAmount } from "./bean-held-hurt.mjs";
@@ -8,7 +8,7 @@ import { SPECIES_HELD_HURT_SOURCES } from "./species-held-hurt-assets.mjs";
 // material-specific motion. This never changes simulation or action clocks.
 export const SPECIES_HELD_HURT_ASSETS = Object.freeze(Object.values(SPECIES_HELD_HURT_SOURCES).flatMap(forms => Object.values(forms).map(source => source.image)));
 export function speciesHeldHurtSource(agent) {
-  if (unitBladeCarapaceAppearance(agent)) return null;
+  if (unitCombinationAppearance(agent)) return null;
   if (!agent || agent.species) return null;
   const forms = SPECIES_HELD_HURT_SOURCES[agent.tribe || agent.key];
   if (!forms) return null;

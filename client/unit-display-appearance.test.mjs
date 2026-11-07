@@ -30,7 +30,7 @@ function design(ids) {
   return dna;
 }
 
-test("all 128 current trait combinations deterministically collapse to exactly 28 display forms", () => {
+test("all 128 current trait combinations deterministically collapse to exactly 40 display forms", () => {
   const forms = new Set();
   for (const tribe of UNIT_APPEARANCE_TRIBES) {
     const groups = new Map();
@@ -42,9 +42,9 @@ test("all 128 current trait combinations deterministically collapse to exactly 2
       assert.deepEqual(attributes, attributesFor(actual));
       forms.add(tribe + "/" + mask); groups.set(mask, (groups.get(mask) || 0) + 1);
     }
-    assert.deepEqual(UNIT_DISPLAY_MASKS.map(mask => groups.get(mask)), [1, 15, 8, 4, 2, 1, 1]);
+    assert.deepEqual(UNIT_DISPLAY_MASKS.map(mask => groups.get(mask)), [1, 13, 7, 4, 2, 1, 1, 1, 1, 1]);
   }
-  assert.equal(forms.size, 28); assert.equal(UNIT_DISPLAY_FORM_COUNT, 28);
+  assert.equal(forms.size, 40); assert.equal(UNIT_DISPLAY_FORM_COUNT, 40);
   for (const invalid of [null, undefined, NaN, -1, 32, .5]) assert.equal(unitDominantAppearanceMask(invalid), null);
 });
 
@@ -73,9 +73,9 @@ test("snapshotted appearance and historical retired-organ rigs keep their compat
   assert.deepEqual(unitDisplayAttributesFrom({ legs: 3, dnaGather: true, healing: 2 }), { feet: 1, dnaGather: true, healing: 2 });
 });
 
-test("production inventory has 28 targets, keeps archival 128 sources and never upgrades readiness", () => {
+test("production inventory has 40 targets, keeps archival 128 sources and never upgrades readiness", () => {
   const inventory = unitAppearanceInventory();
-  assert.equal(inventory.length, 28); assert.equal(unitAppearanceInventory({ includeLegacyCombinations: true }).length, 128);
+  assert.equal(inventory.length, 40); assert.equal(unitAppearanceInventory({ includeLegacyCombinations: true }).length, 128);
   assert.equal(inventory.filter(row => row.worldReady).length, 0);
   assert.ok(inventory.find(row => row.key === "bean/01").missingActions.includes("ranged"));
   assert.equal(unitDisplayAbilityMask(1), 31); assert.equal(unitDisplayAbilityMask(16), 30);
@@ -83,7 +83,7 @@ test("production inventory has 28 targets, keeps archival 128 sources and never 
 });
 
 test("a shared blade body requires hidden ranged actions and retains true melee/ranged clocks", () => {
-  const dna = design(["blade", "secretion"]), definition = unitAppearanceDefinition("bean", 1), original = definition.actions;
+  const dna = design(["blade", "secretion", "antenna"]), definition = unitAppearanceDefinition("bean", 1), original = definition.actions;
   const clip = { sourceId: definition.source.sourceId, image: "synthetic-test-only", frameSize: 512, columns: 1,
     frameCount: 1, durationsMs: [600], loop: false, pivotX: 256, pivotY: 448, launchAtMs: 200, hitTimeMs: 300 };
   const agent = { id: "dual", tribe: "bean", health: 10, dna, attributes: dnaAppearance(dna), mode: "fight", combat: { version: 2 },
@@ -92,7 +92,7 @@ test("a shared blade body requires hidden ranged actions and retains true melee/
     definition.actions = Object.fromEntries(unitAppearanceRequiredWorldActions(1).map(action => [action, { ...clip }]));
     assert.equal(unitAppearanceForAgent(agent), null, "a complete blade-only set cannot hide a missing ranged action");
     definition.actions.ranged = { ...clip };
-    assert.equal(unitAppearanceForAgent(agent).mask, 1); assert.equal(unitAppearanceForAgent(agent).actualMask, 17);
+    assert.equal(unitAppearanceForAgent(agent).mask, 1); assert.equal(unitAppearanceForAgent(agent).actualMask, 21);
     const ranged = unitAppearanceStatePose(agent, .2); assert.equal(ranged.action, "ranged"); assert.equal(ranged.state.elapsedMs, 200);
     const melee = { ...agent, attack: { ...agent.attack, mode: "melee", dnaRanged: false } };
     assert.equal(unitAppearanceStatePose(melee, .3).action, "attack");
@@ -189,6 +189,6 @@ test("design and template portrait sources accept loaded secretion Images and ex
   assert.equal(scope.agentImageSource({}), "data:image/png;base64,canvas");
   assert.equal(encodes, 1);
   scope.agentSprite = () => { throw new Error("DOM image must not use a cold-load canvas fallback"); };
-  assert.equal(scope.agentImageSource({ tribe: "bean", attributes: { secretion: 1, carapace: 1 } }),
+  assert.equal(scope.agentImageSource({ tribe: "bean", attributes: { secretion: 1, carapace: 1, antenna: 1 } }),
     "assets/" + UNIT_RANGED_FORMS.bean.idle.image);
 });

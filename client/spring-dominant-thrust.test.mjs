@@ -39,7 +39,7 @@ test("only the projected canonical spring blade uses the new adapter",()=>{
   assert.ok(springDominantThrustAppearance("spring",{blade:1}));
   for(const attributes of [{}, {blade:1,strength:1}, {blade:1,arms:1}, {blade:1,piercing:1}, {blade:1,carapace:1}, {blade:1,antenna:1}, {blade:1,feet:1}, {blade:1,secretion:1}])assert.equal(springDominantThrustAppearance("spring",attributes),false);
   for(const tribe of ["bean","spore","pebble"])assert.equal(springDominantThrustAppearance(tribe,{blade:1}),false);
-  for(let mask=1;mask<32;mask+=2){const attributes=Object.fromEntries(["blade","carapace","antenna","feet","secretion"].map((key,i)=>[key,(mask>>i)&1]));assert.equal(springDominantThrustAppearance("spring",unitDisplayAttributes(unit({attributes}))), mask !== 3);}
+  for(let mask=1;mask<32;mask+=2){const attributes=Object.fromEntries(["blade","carapace","antenna","feet","secretion"].map((key,i)=>[key,(mask>>i)&1]));assert.equal(springDominantThrustAppearance("spring",unitDisplayAttributes(unit({attributes}))), ![3, 17, 19].includes(mask));}
 });
 
 test("real compositor renders canonical attacks in the padded camera and caches each pose across agents",async()=>{

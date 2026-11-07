@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
-import { combatLabPlayable, combatLabAppearance, combatLabWithAppearance, combatLabBladeCarapaceDna } from './combat-lab-appearances.mjs';
+import { COMBAT_LAB_APPEARANCES, combatLabPlayable, combatLabAppearance, combatLabWithAppearance, combatLabBladeCarapaceDna } from './combat-lab-appearances.mjs';
 import { ATTRIBUTE_DNA } from '../server/dna.mjs';
 import { validateDna, dnaAppearance, dnaUnitStats } from '../server/dna-unit.mjs';
 import { startingWorkerDna } from '../server/tribe-start.mjs';
@@ -46,12 +46,12 @@ function fixture() {
   }
   const main = new Element('main');
   const scope = { COMBAT_LAB_UNITS, SIMULATION_STATS, DEFAULT_SIMULATION_RULES, deriveSimulationStats: build => deriveSimulationStats(plain(build)), createSimulationTrial: settings => createSimulationTrial(plain(settings)),
-    combatLabPlayable, combatLabAppearance, combatLabWithAppearance, structuredClone,
+    COMBAT_LAB_APPEARANCES, combatLabPlayable, combatLabAppearance, combatLabWithAppearance, structuredClone,
     document: { querySelector: () => main, createElement: tag => new Element(tag) },
     Option: class extends Element { constructor(label, value) { super('option', label); this.value = value; } },
     requestAnimationFrame() {}, createCombatStage: () => ({ render() {} }) };
   const code = readFileSync(new URL('./combat-lab.js', import.meta.url), 'utf8').replace(/^import .*;\r?\n/gm, '');
-  runInNewContext(code + '\nglobalThis.api = { inputs, rosters, selected, builds, reset, getTrial: () => trial };', scope);
+  runInNewContext(code + '\nglobalThis.api = { inputs, rosters, selected, builds, elements, reset, getTrial: () => trial };', scope);
   return { ...scope.api, nodes };
 }
 
@@ -85,4 +85,19 @@ test('DNA appearance controls preserve roster edits, cloning, reset, switching a
     assert.equal(f.inputs[side].dnaAppearance.value, 'native');
     assert.equal(f.inputs[side].dnaAppearance.disabled, !combatLabPlayable(f.rosters[side][0].key));
   }
+});
+
+
+test('lab range control changes only real start distance and resets the current trial', () => {
+  const f = fixture();
+  f.inputs.left.dnaAppearance.fire('change', 'blade-carapace');
+  f.inputs.right.dnaAppearance.fire('change', 'blade-carapace');
+  const before = plain(f.rosters);
+  assert.equal(f.elements.distance.value, '1');
+  let trial = f.getTrial(); assert.equal(trial.agents[0].x, trial.agents[1].x);
+  f.elements.distance.fire('change', '2');
+  trial = f.getTrial(); assert.equal(Math.abs(trial.agents[1].x - trial.agents[0].x), 2);
+  assert.deepEqual(plain(f.rosters), before);
+  f.elements.distance.fire('change', '1');
+  assert.equal(f.getTrial().time, 0); assert.equal(f.getTrial().agents[0].x, f.getTrial().agents[1].x);
 });

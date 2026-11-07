@@ -1,14 +1,14 @@
 import { drawUnitLoading } from "./unit-loading.mjs";
 import { UNIT_ACTION_ART } from "./unit-action-art-assets.mjs";
 import { UNIT_BIRTH_ART } from "./unit-birth-art-assets.mjs";
-import { unitDisplayAttributes, UNIT_DISPLAY_PRIORITY, unitBladeCarapaceAppearance } from "./unit-display-appearance.mjs";
+import { unitDisplayAttributes, UNIT_DISPLAY_PRIORITY, unitCombinationAppearance } from "./unit-display-appearance.mjs";
 import { unitDisplaySize, unitFrameMirror } from "./unit-size.mjs";
 import { unitActionState } from "./unit-appearance-state.mjs";
 
 function unitActionArtKey(agent) {
   if (!agent || agent.species) return null;
   const attributes = unitDisplayAttributes(agent);
-  const form = unitBladeCarapaceAppearance(agent) ? "blade-carapace" : UNIT_DISPLAY_PRIORITY.find(key => attributes[key] > 0) ||
+  const form = unitCombinationAppearance(agent) || UNIT_DISPLAY_PRIORITY.find(key => attributes[key] > 0) ||
     (attributes.strength > 0 || attributes.arms > 0 || agent.dna?.pieces?.some(piece => piece.gene === "gather") ? "gather" : attributes.piercing > 0 ? "secretion" : "base");
   return (agent.tribe || agent.key || "bean") + "/" + form;
 }
@@ -17,11 +17,27 @@ export function unitActionArtDefinition(agent) {
   return UNIT_ACTION_ART[unitActionArtKey(agent)] || null;
 }
 
+// Work reuses this same body's authored attack, never another form's rig.
+// These visual aliases do not emit combat events or change harvesting/cargo.
+const combinationWorkActions = new WeakMap();
+function actionsFor(agent, definition) {
+  if (!unitCombinationAppearance(agent)) return definition.actions;
+  if (!combinationWorkActions.has(definition)) {
+    const attack = definition.actions.attack || definition.actions.ranged;
+    combinationWorkActions.set(definition, attack ? { ...definition.actions,
+      harvest: { ...attack, loop: true },
+      throw: { ...attack, loop: false, releaseAtMs: attack.hitTimeMs ?? attack.launchAtMs ?? 300 },
+    } : definition.actions);
+  }
+  return combinationWorkActions.get(definition);
+}
+
 export function unitActionArtPose(agent, time) {
   const definition = unitActionArtDefinition(agent);
   if (!definition) return null;
   const birth = agent.birth && UNIT_BIRTH_ART[unitActionArtKey(agent)];
-  const actions = birth ? { ...definition.actions, birth } : definition.actions;
+  const authored = actionsFor(agent, definition);
+  const actions = birth ? { ...authored, birth } : authored;
   const state = unitActionState(agent, time, { animations: actions });
   if (!state) return null;
   const requested = state.action === "carry" && !definition.actions.carry ? "walk" : state.action;

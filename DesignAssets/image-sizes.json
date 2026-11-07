@@ -13150,13 +13150,13 @@
       ],
       "grid": [
         4,
-        2
+        3
       ],
       "nativeSource": {
-        "sha256": "d5aa9ba25f39f46885ea393e3fbeb78409d879e58a6b60c5df58ccbada045f4e",
+        "sha256": "a702254359bade5a9ce12cb8f04d0cf8ad77fdeab8b5371fd971c79bb8a78136",
         "dimensions": [
           2048,
-          1024
+          1536
         ],
         "frame": [
           512,
@@ -13385,6 +13385,1938 @@
       ],
       "nativeSource": {
         "sha256": "98e9fa905a5498ef509237a29315ac2b2ff6f33f0ba9eea7a4788bd204724746",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "b4e9050542db6d485936c2ef7124858e37657aa9dbc65bd556ea5c208211a2d3",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "7d23ca2f586f9696ba37db3e4e9ea50ea5eaaec501840f6394cea9039f749601",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "e264fe56d0c56b1271cdd2b786a052df4cfee77408e393054cb22b511281f510",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "9b4aebe20fe0cee286df45e4148bce9e15b2f36b05f313b25c7d1ae60bd7d853",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "d6c38f24e57d9fb783955f304980baae4dae9a1a5ea063a633c3822b6a6bbba2",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "0810057205e529c5f086f90777570e572436620ce4534202ba12d4d4df015563",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "bad299e18a8b7d4eba4123e0e1c71459948cee9b34ff338579a9890917dc2a8a",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "91250f6188993d7e33b3043b9e728515c172a02076b081a0daa509dfc6035ff8",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "3f8504ecc902d1d73ee2eb370337f75a69fb667de7916df190d1619e5e820e6a",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "59cfab71f3925c6648baf782e30d023f13332b80796e41564eb53a26c4132c1e",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "7a48cf24d078ce6ef62653516de43252f6b06fff2772a6b0fcf467f2b1e36720",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "6d5757577322c86c62eb81cf6a3cbb6c21813cce5c32150a918183ad0f313f64",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "9e96a50274322b39d552ff3e9bd57042b501d1d80d80a8f92d334d9334e350c6",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "8e18aee13d14bc3ea72ca9b1ede0bbedddd0f99e84af3412c096fe1db61656f6",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "dff5570e9a16a4352f0cc7714767038cff36e02741e5794b24815a04baa466ca",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "cd64f648d1af25e53a9f04cd8e5d9e1077be32cc099c457e472700f71c5568a5",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "50746d09eeaae611b6f6dfd352ffa050eac7af41ac183781a6972e5a7af9a0eb",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "230950bd011f0af9ce16fb782328cfd54b4bb1738b9bbcd89982f91ffc93bfdf",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "df448eb57e354d0b69574493e7615b320bb0a7a30903480918533c915b4a26dd",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "be8bfd71b414832f4d6febb3d539b3b9559de61e76dadd0892cc2cfdae6f25ce",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "ad206f340494a8cc4c10cf242823068428be2f6cfe1803929f0b13d17a00e804",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "c14b7371166303c588265233d4c917b67023c60c89b947ac1cb50ea1f5452dee",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "bf0dc1e44989025e3b43acde4143b11f7052c8fd3f731b79949154676352fa41",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "df6f9fb069e8d63e8692cb337dea106ba49f6ef596d8b7b50500118e2a69c859",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "cb76d687f15fcd1b3b2592c1ec16a0a6588497e0426c18debef81a8f089977bf",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "7f1e9c7d5c617ad1e26723cde0894200dd74ec7485ebf03adb32fef435dede30",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "0540f4939b2dcc33c9a7b03e6846939c38ca50d5c17d28b0cfd3721a1bedb36e",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "413622c93cd4e1b335b9528583240683c27fc8951c7d329eccb7bf48e0d3d938",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "c801e684d96b4b659ad061e783d379637fb3a06d0af2600cfcd0f6aa5af15f25",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "5e66276fa87e10f6983fb2ed51033bbf4550fc352f6538b7f732381b3fb48207",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "0d0a2858d9c2dec35a203923c0443e16c84738ca4ac4b7b7402caa9352d34836",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "03eb3c1ad35487515586c509b3e67bbec787543270ade7522c8f7c7a5b7095e6",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "fa21081b59ef5809e191babc21ec239f7d4d670f06f118b9bfc5a54eae4c19b7",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "e4f21509d6f258b346c48ba5c0c267529250b8c033071dcfe6d6b07c69497914",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "c58a441b5559a2d1795e161c862c69c53561f644a6c9121783b109b15659e2c2",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "f05cecd0c84b029f8a3f20152288bc808fb77ddba95dd2ef641e14d850350b77",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "cc304f8947a9ff2045c28850d9f390f1b095a3fe8d887a8097281d585a4b5118",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "e3351598de256f1124a3b04ec1199947c166a88af43d6ec880918e69d19ff4ab",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "ebd18e240a3e67ffeb89c7fe5e95dc576f2762294f0304c04b0fac7d96c372a0",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "2349646783bca80f776c4cf97b2cfad0efce07905e4a2c23eeb89c7f5e3ff4c4",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "995b11e1089f17b7e4649b196b7374e52a9481603203cdab9c16bf45019c0c03",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "91196625fe40b5f5621709875cc42e41d662b79ab9cf216ba26350766999391d",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "9cdd8f02038c655900cfcde9b957069bfc0cc5489c5b8d5442c06e03e331447e",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "743bf3f828a05c733357d8b86fbc3b77b0997384aebe14bd28ad4b7c816a860b",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "34c7456540441caa3bf8dfc51594a4975ee470febc910b0fa29c8a446f74dfa7",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "4b8914c3fea4abed9acc64cea4a4f5afdc4b6f8eb225c23fe8b4d37ff0e13b6c",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "090194e59b7afc836bc2731563b90b55df3463502061c8a98c692904ebd901f5",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "b982210a77fb50b20a6136276cedcd50cd818962028f64645732e670c51f91d9",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "ea1cfd37af6576fb3b7a585bd0cf1ffc521af20f4b606d01b48ef591640cfe0d",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "5e94e7fcfea6ed43212f06282b2ecc17e5e5d0b4f7f2da2ed3a362f0473607c5",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "9087c1c7dc6d136916e680eff61707e191b9d7d8ac89aeb91e9a182f28f8b10b",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/birth.png": {
+      "display": [
+        256,
+        170.666667
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "27bbe6a282161303cc394c3e05af4955c05d72dfef72273bb7a8ef32a5226132",
+        "dimensions": [
+          6144,
+          5120
+        ],
+        "frame": [
+          768,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "d58200e098bec3dc0ec4d0a31360e7c2222e8eb607f89686eb33de9f44a28e3c",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "00b571143d5a4264acd19fae6b57a761385ef1fdd73534629dee49c677566cc1",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "396a7d70265c3a5dc2928c9fd7294c0346d0f202a82d11ed15cccd2a488f9a52",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "e34c795937e618b2ad928ed17afa1b0e9d592b02146ea0ec1115d88e5b1b7446",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "2b4d69ef37910ee97e0011dcbaf869c70f24c9310f3ac3967c21ef10d60e76f4",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "09db45e0c666742e6405038aa32eeefe3fe289f6c0d5025871a9b918652ef636",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "282135a3396c7832abb3da162e6a3cedecb110344590aae4dc50abbf7003344b",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/birth.png": {
+      "display": [
+        256,
+        170.666667
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "f79d436af2ed53dd191731d4d7101840a026c0daa93271b81152994253db3e55",
+        "dimensions": [
+          6144,
+          5120
+        ],
+        "frame": [
+          768,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "ac8b90456299df2354790ebdd4a508894f989bdc2363408bbc62623c373a4ee8",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "f01985caa83496755db458a616c084fb6b60980eb13925db6f0d107ff82e5bf7",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "7a09036c2c5634f80cb76e496dd61ac05eae32cdac3d3dc29a56ed6a339ef345",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "3b36675a8d1961af04566b18768b9517cc3b1982d5b13c7c57231b5be1be2e55",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "cefb57a9fe949427f2c1629b171df6f6216d86bcf1510f858759200904a16c46",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "1c9ad79c99d30fba13d9e10038dec671177defddf3cb06c73b7947951a9d48d4",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "31da16edffaefc785a91e308fcd1077b8b6f8542834bf3b7feedd75bb400f6a0",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/birth.png": {
+      "display": [
+        256,
+        170.666667
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "bc013c796954ce900b4b7817f39268f0155cf9a8e4c60e9e6f0a811bce7eb03f",
+        "dimensions": [
+          6144,
+          5120
+        ],
+        "frame": [
+          768,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "ecfec8ebfb6ead4cce9806ce26af6a4a251a0519be347fea96ab0518c9f29347",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "1e36e4d766d805712e38b5911461b994e0a3986955fed307b3cb346d73226804",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "5ac690877ca5bb95a22cc1026ab9f90714ce07902d797adbd0cd3da274ca94b5",
+        "dimensions": [
+          480,
+          480
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "705b309e9164fa66ca40406cabc5bf1b5ea00490b3f91358dd224586d0bd1826",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "92b23ab75712e51b99f0ff58f8f2063190e44b28c2668f2c04201d2761283402",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "8ccb3af5a9fe0ffe5cbd7b1a9198a97dbbe9ed81ee5611a9c566a05c79fac79a",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "587fd81f24250c987365964ce7351511bb584616ee214d1696169dca5aa23d1e",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "e7c305b55fff44be22c7d57f5f937a615ceb655f41ce5e5ce66742aa94297ad5",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "25373b49ca64f24ad9f9cad544fe73e53552847b57eb2dcb0307f84c19467a9d",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "ba27b907a4a10556cb0894c3aa3cde7b5892a2909caf4e939b0b3540915701b6",
+        "dimensions": [
+          480,
+          480
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "8d9da5bee77b8f45d02144e26b661f74b586efe04d31dbe61be51427c3f07f8e",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "0e3e83e2c366ea470cb44c37763d97c63278b9cb8ab3535a75b44e5039fe82fb",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "0f69e17751b1e3479d48f35d92d480e2cd68c5ccdd37399eb53c23dfc7319e10",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "55bb07b080bac9954c7160acc6857767cdef0bd1b33ab3a1283f8fb53204b15e",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "c441ffa021f2f6b0b886b7c7146c159b04d2ef9fe1ea39054d8a7c49c98b1202",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "f3818a0099ac0338992940d54f5328952d65fc45b4bdaac2ebb5e2d5258b10a2",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "8512682a2d8249db9d94a900267cb46d876ee27dd89d61a5856913277fcd745a",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "09222cc5be9e59f049fb4a9cb8df3eead53696bf637bc9619ef0e1092e40d75b",
+        "dimensions": [
+          480,
+          480
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "e9059690ac292895166f2a2cd36cc8aeb78a1ac44fe857ca76f2980e849f425a",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "f4cf593665cce8e714726db7c446bf74615346e3bdda4f4ba9d8b46d79a45b83",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "628ab1e2a3eb74f849eafbac7377f1b2687f81336b54626ce480f20882d5aac2",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "1d8caa6e624de947b8f2a2c9478eace21cb57b345ef581f3744b07e0af4a9fdb",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "c462eb7cfdab4a7eeb7a2b120990dbf3b36c6356cc1e0fc2417028a796ab2186",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "d8dd963aa1a66434ddecf86ac53a9c0213a6d15e7818f723a8d9d5218465a916",
         "dimensions": [
           1920,
           1920

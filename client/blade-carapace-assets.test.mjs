@@ -53,3 +53,14 @@ test('birth registration anchors the finished body, never the full scene bounds'
 test('all 28 runtime assets have exact-byte native image policy registration', () => {
   assert.equal(auditImages(root, BLADE_CARAPACE_IMAGE_ASSETS), 28);
 });
+
+test('pebble walk uses the corrected grounded twelve-pose source', () => {
+  const walk = BLADE_CARAPACE_ACTION_ART['pebble/blade-carapace'].actions.walk;
+  const source = JSON.parse(readFileSync(resolve(root, 'AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/manifest.json')));
+  assert.equal(walk.frameCount, 12);
+  assert.equal(walk.durationMs, 840);
+  assert.deepEqual(walk.durationsMs, source.durationsMs);
+  assert.equal(walk.pivotY, 450);
+  assert.equal(walk.referenceLength, 406);
+  assert.equal(createHash('sha256').update(readFileSync(resolve(root, walk.image))).digest('hex'), source.sheetSHA256);
+});

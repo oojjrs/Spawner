@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
-import { combatLabPlayable, combatLabAppearance } from "./combat-lab-appearances.mjs";
+import { COMBAT_LAB_APPEARANCES, combatLabPlayable, combatLabAppearance } from "./combat-lab-appearances.mjs";
 import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
 import { SIMULATION_STATS, deriveSimulationStats } from "./combat-simulation.mjs";
 import { dnaUnitStats } from "../server/dna-unit.mjs";

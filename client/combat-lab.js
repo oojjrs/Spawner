@@ -1,4 +1,4 @@
-import { combatLabPlayable, combatLabAppearance, combatLabWithAppearance } from "./combat-lab-appearances.mjs";
+import { COMBAT_LAB_APPEARANCES, combatLabPlayable, combatLabAppearance, combatLabWithAppearance } from "./combat-lab-appearances.mjs";
 import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
 import { SIMULATION_STATS, DEFAULT_SIMULATION_RULES, deriveSimulationStats, createSimulationTrial } from "./combat-simulation.mjs";
 import { createCombatStage } from "./combat-stage.mjs";
@@ -53,6 +53,10 @@ elements.dice = button(stageCenter, "🎲", () => {
   changed();
 });
 elements.dice.className = "stage-dice"; elements.dice.setAttribute("aria-label", "주사위");
+// Use actual simulation distance so dual-capability builds can be tested in
+// both melee and ranged combat without changing their DNA or stats.
+elements.distance = control(stageCenter, "시작 거리", select([["1", "근접"], ["2", "원거리"]], "1"));
+elements.distance.addEventListener("change", changed);
 const stageView = node("div", null, "stage-view");
 elements.stage = node("canvas"); elements.stage.width = 1100; elements.stage.height = 400;
 elements.stage.setAttribute("aria-hidden", "true"); stageView.append(elements.stage); stage.append(stageView);
@@ -75,7 +79,7 @@ for (const side of sides) {
   hud.append(rosterActions);
   const appearance = control(hud, "외형", select(COMBAT_LAB_UNITS.map(unit => [unit.key, unit.name]), builds[side].key));
   appearance.addEventListener("change", () => { rosters[side][selected[side]] = { key: appearance.value }; selectBuild(side); changed(); }); inputs[side].appearance = appearance;
-  const dnaAppearance = control(hud, "DNA 외형", select([["native", "기본"], ["blade-carapace", "칼날+갑각"]], "native"));
+  const dnaAppearance = control(hud, "DNA 외형", select(COMBAT_LAB_APPEARANCES, "native"));
   inputs[side].dnaAppearance = dnaAppearance;
   dnaAppearance.disabled = !combatLabPlayable(builds[side].key);
   dnaAppearance.addEventListener("change", () => {
@@ -101,7 +105,7 @@ function selectBuild(side) {
 function rosterSettings(side) {
   return rosters[side].map((build, index) => ({ ...structuredClone(build), name: (side === "left" ? "왼쪽 " : "오른쪽 ") + (index + 1) }));
 }
-function settings(seed) { return {left:rosterSettings("left"),right:rosterSettings("right"),selected:{...selected},rules:{...rules},seed,random:true,first:"simultaneous",distance:1,support:false}; }
+function settings(seed) { return {left:rosterSettings("left"),right:rosterSettings("right"),selected:{...selected},rules:{...rules},seed,random:true,first:"simultaneous",distance:Number(elements.distance.value),support:false}; }
 function changed() { reset(); }
 function settingError(error) { return /[가-힣]/.test(error.message) ? error.message : "입력 수치와 규칙의 상한·최소값을 확인해 주세요."; }
 function reset() {

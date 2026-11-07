@@ -62,6 +62,11 @@ def main():
             rows = math.ceil(count / columns)
             assert Image.open(dest).size == (width * columns, height * rows)
             px, py, length = BIRTH[tribe] if action == 'birth' else REGISTRATION[tribe]
+            # Publication overrides may replace one action with a newly authored
+            # sheet. Preserve its measured ground and body scale independently.
+            px = record.get('pivotX', px)
+            py = record.get('pivotY', py)
+            length = record.get('referenceLength', length)
             clip = dict(image=dest.relative_to(ROOT).as_posix(), sourceFacing='right',
                 frameSize=width, frameHeight=height, columns=columns, frameCount=count,
                 durationsMs=record['durationsMs'], durationMs=sum(record['durationsMs']),

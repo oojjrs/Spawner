@@ -1,7 +1,8 @@
+import { UNIT_COMBINATION_FORMS } from "./unit-combination-forms.mjs";
 import { unitActionArtDefinition } from "./unit-action-art.mjs";
 
 export const WELCOME_UNIT_APPEARANCES = Object.freeze([
-  {}, { strength: 1 }, { feet: 1 }, { antenna: 1 }, { blade: 1 }, { secretion: 1 }, { carapace: 1 }, { blade: 1, carapace: 1 }
+  {}, { strength: 1 }, { feet: 1 }, { antenna: 1 }, { blade: 1 }, { secretion: 1 }, { carapace: 1 }, ...UNIT_COMBINATION_FORMS.map(form => form.attributes)
 ].map(attributes => Object.freeze(attributes)));
 
 export function welcomeUnitPerformance(agent, startedAt) {
