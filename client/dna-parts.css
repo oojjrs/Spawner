@@ -22,3 +22,8 @@
 @media(max-height:600px),(max-width:700px){.dna-catalog>.dna-library-section{max-height:35%}}
 
 .dna-editor[data-part="select"] .dna-board canvas{cursor:pointer}
+
+.dna-tools .dna-part-save{display:flex;align-items:center;justify-content:center;gap:7px;margin-left:14px;padding:0 12px;background:#b7d9a7;color:#14271b;border-color:#d2edbd;font-weight:700;box-shadow:0 0 0 1px #b7d9a733}
+.dna-tools .dna-part-save:not(:disabled):hover{background:#cceabd;border-color:#e2f5d5}
+.dna-tools .dna-part-save:disabled{background:#263b2c;color:#879780;border-color:#4c624b;box-shadow:none}
+@media(max-width:700px){.dna-tools{display:grid;grid-template-columns:repeat(4,38px)}.dna-tools .dna-part-save{grid-column:1/4;justify-self:start;margin-left:0}.dna-tools .dna-part-cancel{grid-column:4}.dna-board>.dna-organ-limit{top:100px}}

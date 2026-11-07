@@ -1,3 +1,36 @@
+## 부분 저장 버튼·연속 배치 업로드 범위 확정 · 01a1b3e4
+
+- 기록 ID: dna-part-finish-freeze-20261107-01a1b3e4. 기록·관측 시각 2026-11-07T12:03:29+09:00. 기록자·구현/검수/범위판단 Codex /root, 버튼 제안수용·업로드 결정 사용자. 출처 codex://threads/01a1b3e4-ea0e-7200-80ad-aa4212dc61dd 및 실제 버튼 캡처/원격 동기화 결과. 원발언 정확시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 최종 제품 범위는 client/dna-editor.mjs·client/runtime.js·Attribute.html의 연속배치/우클릭/버튼SVG 각3줄과 client/dna-parts.css의 버튼색·간격·상태/모바일 규칙5줄이다. 기존 부분 저장 문구 유지, 동작·도형을 뜻하는 영역선택 SVG와 연초록 배경, 이전도구와19px 간격을 적용했다. 모바일은 두 번째 줄에 배치하고 상태안내를 아래로 옮겨 겹침을 해소했다.
+- 검수: 실제 현재 게임/속성 제작기1600×1050 버튼 enabled·SVG·색 rgb183,217,167·조작안내 비겹침을 확인했다. 인게임390×844 첫 캡처에서 상태안내 겹침을 관측해 CSS 수정 후 버튼303~341/안내350부터로 직접 재확인했다. 최종3장 직접 열람·pageerror0. 아이콘 반영 후 공통모듈 동기화 검사1/1 통과. 이전 연속3회 실제배치/다음후보·입력6검수 결과는 유효한 동작 근거로 재사용한다. 현재 코드와 캡처의 차이 없는 범위만 보고한다.
+- 원격/보호: main 기존b408a767을 origin/main3a412931 위로 rebase해 b89dd5e3가 되었고 dirty/index/untracked37경로의 원바이트와 stage entries 복원을 직접확인했다. 보존stash8cd5f26a와 refs/codex-preserve/dna-part-repeat-head-20261107·dna-part-repeat-dirty-20261107을 유지한다. 다른 staged/미추적작업을 보존한 별도index에 제품4경로+본채팅6기록만 담는다. 요청/교정/검수/범위/보호/남은푸시 누락 대조완료. 실제 커밋·푸시 성공은 후속 readback으로 기록한다.
+## 부분 저장 버튼 강조·함께 업로드 승인 · 01a1b3e4
+
+- 기록 ID: dna-part-button-approved-20261107-01a1b3e4. 기록 시각 2026-11-07T11:59:24+09:00. 기록자·제안 Codex /root, 가시성 문제·제안수용·업로드 결정 사용자. 출처 codex://threads/01a1b3e4-ea0e-7200-80ad-aa4212dc61dd 의 ‘올리자’, ‘부분 저장 버튼이 티가 잘 안 나니까’, ‘그거까지 해서 올려’와 직전 제안(도구와 분리·영역 선택 아이콘·포인트색). 원발언 정확시각/항목ID 불명, H:/Spawner Windows PowerShell.
+- 최종 범위: 기존 연속배치·첫 우클릭 취소와 두 화면 공통 부분 저장 버튼 강조를 함께 커밋·origin/main 푸시한다. 버튼은 기존 부분 저장 문구를 유지하고 아이콘·간격·색만 바꾼다. 공용 dna-parts.css와 공통 편집기/두 실행본을 수정한다. 좁은 인게임 화면에서 도구 겹침도 함께 확인한다. Site배포는 이번 명시대상으로 확정하지 않는다.
+- 원격 확인: 시작 H:/Spawner main b408a767, fetch한 origin/main 3a412931, 로컬1/원격3커밋 분기. 원격3건은 승인 그림/유닛표 업데이트이며 현재 코드와 다른 경로다. 기존 로컬 전투로딩 커밋을 원격 위로 rebase하고 dirty/index/untracked 보존·복원 뒤 이번 범위만 별도index로 담는다. 연결 Projects 없음 근거를 재사용한다. 아직 커밋·푸시 성공 전이다.
+## 부분 저장 연속 배치 인게임 캡처 완료 · 01a1b3e4
+
+- 기록 ID: dna-part-repeat-screenshot-20261107-01a1b3e4. 기록·관측 시각 2026-11-07T11:55:46+09:00. 기록자·직접실행 Codex /root, 요청 사용자. 출처 codex://threads/01a1b3e4-ea0e-7200-80ad-aa4212dc61dd 의 부분 저장 불러오기 연속 배치 중 스크린샷 요청. 원발언 정확시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 실제 현재 Spawner.html의 별도 headless Edge 새방에서 둥지→기초 채집 설계 변경→초기화→운반1개 배치→부분 저장 선택/확정→자동 이름 운반1 저장→초기화→목록 불러오기를 직접 조작했다. 불러오기는 한 번만 실행한 뒤 회전하며3회 배치했고 각 단계 data-part=append/범례×1·×2·×3을 확인했다. 네 번째 유효 미리보기(data-preview=true)가 남은 상태를1600×1050로 캡처했으며 pageerror0이다.
+- 결과 literal $Trash/dna-part-repeat-01a1b3e4/ingame-continuous-part-placement.png를 직접 열어 오른쪽 부분저장 선택·상단취소·3개배치·다음후보를 확인했다. continuous-screenshot-result.json/capture-continuous.mjs가 같은 폴더에 있다. 화면·저장은 폐기 가능한 별도 브라우저 컨텍스트에만 있고 사용자 실제 저장/제품코드/게시 상태는 바꾸지 않았다. 이전 정적분기 검토에 실제 인게임 연속배치 관측 근거를 추가하며 우클릭 후 동작을 이번 캡처로 검증했다고 주장하지 않는다.
+## 인게임 속성 설계창 스크린샷 · 01a1b3e4
+
+- 기록 ID: dna-ingame-screenshot-20261107-01a1b3e4. 기록·관측 시각 2026-11-07T11:52:00+09:00. 기록자·실행 Codex /root, 캡처 요청 사용자. 출처 codex://threads/01a1b3e4-ea0e-7200-80ad-aa4212dc61dd 의 인게임 설계창 스샷 요청. 정확 발언시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 실제 현재 file:///H:/Spawner/Spawner.html을 별도 headless Edge 1600×1050에서 실행해 seed1 새방→새싹콩→게임 인원4/10→둥지 클릭→기초 채집 설계 변경으로 진입했다. 첫 시도는 둥지 패널을 열지 않아 숨겨진 버튼 클릭 시간초과였고, 둥지 클릭을 추가한 후 실제 설계창 캡처 성공·pageerror0. 사용자 브라우저/저장상태와 제품코드는 건드리지 않았다.
+- 결과 literal $Trash/dna-part-repeat-01a1b3e4/ingame-design.png를 직접 열어 속성 설계 제목·기초 채집 DNA·좌측미리보기/스탯·우측속성 목록을 확인했다. 이 캡처는 기본 설계 상태이며 부분 저장 연속배치 검증으로 확대하지 않는다. screenshot-result.json과 capture-ingame.mjs가 같은 임시 폴더에 있다.
+## 부분 저장 연속 배치·첫 우클릭 취소 완료 · 01a1b3e4 현재 요약
+
+- 기록 ID: dna-part-repeat-complete-20261107-01a1b3e4. 기록·관측 시각 2026-11-07T11:47:22+09:00. 기록자·수정/검수 Codex /root, 동작·제작기 동시반영 결정 사용자. 출처 codex://threads/01a1b3e4-ea0e-7200-80ad-aa4212dc61dd 및 현재 파일·표적 검사 출력. 원발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 반영: client/dna-editor.mjs와 client/runtime.js·Attribute.html 각각2줄만 수정했다. 부분 배치 commit은 partMode/partValue/회전을 보존하고 insertion만 끝으로 옮긴다. contextmenu는 활성 부분 모드를 취소하고 즉시 반환하므로 첫 우클릭은 DNA/undo 이력을 바꾸지 않으며 다음 우클릭은 기존 undo를 실행한다. 배치불가일 때도 모드를 유지하고 기존 회전·취소 경로를 쓴다.
+- 검수: 기존 표적 검사6개가 모두 통과했다(키보드/휠/우클릭·undo/redo, 입력칸 보호, 읽기전용, 설치범례의 이력/읽기전용, 저장설계 전체우클릭·원형redo, 제작기/인게임 공통모듈 정합). 부분 연속 배치/첫 취소는 실제 변경 분기와 상태 흐름을 직접 검토했으며 새 브라우저 화면 검수로 주장하지 않는다. 실제 형식검사 제품3파일 UTF8NoBom/CRLF OK, 메모리는 기존 Mixed/불일치줄 없음으로 원문을 보존했다. 변경전 보존본 대비 제품 각2줄 외 변경없음을 scoped diff에서 확인했다. 루틴 검수 호출 7.9초 내 완료.
+- 요청/양쪽실행면/회전보존/첫취소와이력/기존변경보호/실제검수누락 대조완료. 시작 기록의 수정전 상태는 본 결과로 대체한다. 제품3파일과 본채팅 메모리만 변경했고 다른 작업·index를 유지했다. 미스테이징·미커밋 상태이며 푸시/배포는 수행하지 않았다.
+## 부분 저장 연속 배치·첫 우클릭 취소 착수 · 01a1b3e4 현재 요약
+
+- 기록 ID: dna-part-repeat-start-20261107-01a1b3e4. 기록·관측 시각 2026-11-07T11:46:42+09:00. 기록자·원인 판단 Codex /root, 요청·결정 사용자. 출처 codex://threads/01a1b3e4-ea0e-7200-80ad-aa4212dc61dd 의 부분 저장 불러오기 연속 배치·첫 우클릭 부분 저장 상태 취소 요청과 속성 제작기 페이지 동시 수정 지시. 원 발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 확인: 공통 client/dna-editor.mjs의 commit이 첫 부분 배치 뒤 partMode/partValue를 해제하고, contextmenu는 partMode에서 무시되는 undo만 호출한다. 인게임 runtime.js와 Attribute.html이 이 공통 모듈을 각각 내장한다.
+- 구현 결정: 부분 배치 뒤 선택 묶음과 회전을 유지하고 삽입 지점만 끝으로 옮긴다. 우클릭은 활성 부분 모드를 먼저 취소하며 배치 결과·이력은 보존하고 다음 우클릭부터 기존 undo를 수행한다. 두 실행본의 해당 두 줄만 동기화하고 다른 dirty/staged 작업은 보존한다. 새 문구·레이아웃·커밋·푸시·배포는 범위에 없다.
+- 연결 Projects 조회 결과 nodes=[]로 보드 없음. 현재는 수정·검수 전이며 최종 결과로 상태를 갱신한다.
 ## 전투 점진 로딩 검수 완료 · 01a1a5fd 커밋 준비
 
 - 기록 ID: combat-loading-verified-20261107-01a1a5fd. 기록시각 2026-11-07T11:44:18+09:00. 기록자·검수 Codex /root, 구현 GPT-6.1 Sol low progressive_assets/unit_loading_ui, 통합검수 loading_integration. 요청·커밋결정 사용자, 출처 현재채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072 및 literal $Trash/combat-loading-20261107의 browser-result.json/game-browser-result.json/room-browser-result.json과 실제 렌더 캡처. 원발언 정확시각 불명.
