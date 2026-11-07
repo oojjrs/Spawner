@@ -1,0 +1,59 @@
+{
+  "status": "user-approved",
+  "sourceApproval": "user-approved",
+  "tribe": "spring",
+  "form": "gather",
+  "action": "death",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 8,
+  "durationsMs": [
+    120,
+    100,
+    140,
+    120,
+    140,
+    100,
+    120,
+    600
+  ],
+  "durationMs": 1440,
+  "loop": false,
+  "pivotX": 256,
+  "pivotY": 448,
+  "rootMotion": false,
+  "source": "DesignAssets/Tribes/spring/ApprovedGatherV1/source.png",
+  "sourceSHA256": "1b1d411adf398832e7c9e0b7ce7a8412e0ff3c0953a6c3860d1c2e343d49f201",
+  "sheet": "spring-gather-death-v1-sheet.png",
+  "preview": "spring-gather-death-v1-preview.gif",
+  "method": "Full-pose water lifecycle keyframes based on approved gatherer art and existing basic motion. Complete poses uniformly scaled and ground-registered; no body/organ cutouts. Exact approved neutral used for lifecycle handoff.",
+  "timingReference": "Existing 8-cel death-tail-repair-v6 timing, 1440ms total.",
+  "motionNote": "Body droops, eyes close, organs and feet melt into the same puddle, ripple settles. Final puddle holds; no fade or disappearance.",
+  "gifDurationsMs": [
+    120,
+    100,
+    140,
+    120,
+    140,
+    100,
+    120,
+    600
+  ],
+  "gifTimingNote": "GIF preserves the per-frame timings and total duration listed in durationsMs.",
+  "candidate": false,
+  "previewLoop": true,
+  "verification": {
+    "allFramesMatchSheet": true,
+    "previewRegeneratedFromSheetMatchesExactly": true,
+    "gifDecodedFrames": 8,
+    "gifDurationMs": 1440,
+    "singleConnectedBody": true,
+    "clippedFrames": 0,
+    "floorRange": [
+      448,
+      448
+    ],
+    "sheetSHA256": "836208b42680903df24a65acd145ed739a4fd0d307fea01a6666e189e570201c",
+    "previewSHA256": "b80e77c8708789758652ba0593eb6acefd3cd54fa4eb0d4a818eea1ed0fa4889"
+  }
+}
