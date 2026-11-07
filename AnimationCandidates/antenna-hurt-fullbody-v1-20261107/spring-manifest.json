@@ -1,0 +1,210 @@
+{
+  "reference": "AnimationCandidates/spring-antenna-walk-v6/Frames/00.png",
+  "referenceSha256": "e0fcc1aea70ecfcf72cd372c514818a87f87308460250c01910d0c2af76cc643",
+  "frameSize": 448,
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "durationsMs": [
+    700,
+    500,
+    40,
+    40,
+    80,
+    60,
+    40,
+    120
+  ],
+  "previewDurationMs": 1580,
+  "neutralPreviewLeadInMs": 700,
+  "hitHoldMs": 500,
+  "recoveryMs": 380,
+  "nativeCombatFacing": "right",
+  "impactFrom": "right",
+  "reactionTowards": "left",
+  "bodyPartComposition": false,
+  "bodyWarping": false,
+  "resamplingInSpritePackaging": false,
+  "cells": [
+    {
+      "index": 0,
+      "sourceBox": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "wholeFrameTranslation": [
+        2,
+        19
+      ],
+      "bboxAlpha128": [
+        78,
+        56,
+        366,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 76417
+    },
+    {
+      "index": 1,
+      "sourceBox": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "wholeFrameTranslation": [
+        2,
+        18
+      ],
+      "bboxAlpha128": [
+        24,
+        122,
+        356,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 78386
+    },
+    {
+      "index": 2,
+      "sourceBox": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "wholeFrameTranslation": [
+        2,
+        18
+      ],
+      "bboxAlpha128": [
+        25,
+        122,
+        357,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 78275
+    },
+    {
+      "index": 3,
+      "sourceBox": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "wholeFrameTranslation": [
+        2,
+        18
+      ],
+      "bboxAlpha128": [
+        50,
+        87,
+        342,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 75681
+    },
+    {
+      "index": 4,
+      "sourceBox": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "wholeFrameTranslation": [
+        2,
+        18
+      ],
+      "bboxAlpha128": [
+        71,
+        68,
+        364,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 77659
+    },
+    {
+      "index": 5,
+      "sourceBox": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "wholeFrameTranslation": [
+        2,
+        19
+      ],
+      "bboxAlpha128": [
+        79,
+        46,
+        359,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 76731
+    },
+    {
+      "index": 6,
+      "sourceBox": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "wholeFrameTranslation": [
+        2,
+        18
+      ],
+      "bboxAlpha128": [
+        77,
+        59,
+        364,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 76744
+    },
+    {
+      "index": 7,
+      "sourceBox": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "wholeFrameTranslation": [
+        2,
+        18
+      ],
+      "bboxAlpha128": [
+        79,
+        57,
+        367,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 76887
+    }
+  ],
+  "durationMs": 1580,
+  "timingNote": "700 ms neutral preview lead-in plus the 880 ms hurt action.",
+  "status": "approved-for-planning",
+  "tribe": "spring",
+  "form": "antenna",
+  "action": "hurt",
+  "sheet": "spring-antenna-hurt-sheet.png",
+  "preview": "spring-antenna-hurt-preview.gif",
+  "sheetSHA256": "440a7320f7195d1828a26080118f2b1bf3b7a0a950a3e98e19d00f0d87e04ea5",
+  "previewSHA256": "f878eabcaebd40daf8f4f8ed187d90d177eac0b89a5c6f09f1c9474f1ffeb9ef",
+  "approvalDate": "2026-11-07",
+  "integration": "Planning reference only; game runtime and deployment are unchanged."
+}

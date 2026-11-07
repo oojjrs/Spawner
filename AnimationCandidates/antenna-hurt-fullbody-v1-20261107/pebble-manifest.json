@@ -1,0 +1,210 @@
+{
+  "reference": "AnimationCandidates/pebble-antenna-walk-stable-v6/walk-sheet.png",
+  "referenceSha256": "fde8061b9f85dd5cb5f5e979a57f52cce21dba3f28d623056f7f29ebda60d31b",
+  "frameSize": 448,
+  "columns": 4,
+  "rows": 2,
+  "frameCount": 8,
+  "durationsMs": [
+    700,
+    500,
+    40,
+    40,
+    80,
+    60,
+    40,
+    120
+  ],
+  "previewDurationMs": 1580,
+  "neutralPreviewLeadInMs": 700,
+  "hitHoldMs": 500,
+  "recoveryMs": 380,
+  "nativeCombatFacing": "right",
+  "impactFrom": "right",
+  "reactionTowards": "left",
+  "bodyPartComposition": false,
+  "bodyWarping": false,
+  "resamplingInSpritePackaging": false,
+  "cells": [
+    {
+      "index": 0,
+      "sourceBox": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "wholeFrameTranslation": [
+        2,
+        57
+      ],
+      "bboxAlpha128": [
+        50,
+        134,
+        398,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 76963
+    },
+    {
+      "index": 1,
+      "sourceBox": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "wholeFrameTranslation": [
+        2,
+        53
+      ],
+      "bboxAlpha128": [
+        39,
+        115,
+        385,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 77021
+    },
+    {
+      "index": 2,
+      "sourceBox": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "wholeFrameTranslation": [
+        2,
+        55
+      ],
+      "bboxAlpha128": [
+        43,
+        121,
+        395,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 78942
+    },
+    {
+      "index": 3,
+      "sourceBox": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "wholeFrameTranslation": [
+        2,
+        56
+      ],
+      "bboxAlpha128": [
+        48,
+        128,
+        398,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 78774
+    },
+    {
+      "index": 4,
+      "sourceBox": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "wholeFrameTranslation": [
+        2,
+        58
+      ],
+      "bboxAlpha128": [
+        50,
+        130,
+        399,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 78057
+    },
+    {
+      "index": 5,
+      "sourceBox": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "wholeFrameTranslation": [
+        2,
+        58
+      ],
+      "bboxAlpha128": [
+        51,
+        131,
+        402,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 78879
+    },
+    {
+      "index": 6,
+      "sourceBox": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "wholeFrameTranslation": [
+        2,
+        58
+      ],
+      "bboxAlpha128": [
+        48,
+        132,
+        400,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 78479
+    },
+    {
+      "index": 7,
+      "sourceBox": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "wholeFrameTranslation": [
+        2,
+        58
+      ],
+      "bboxAlpha128": [
+        49,
+        134,
+        399,
+        420
+      ],
+      "connectedComponentsOver32Pixels": 1,
+      "opaquePixels": 77739
+    }
+  ],
+  "durationMs": 1580,
+  "timingNote": "700 ms neutral preview lead-in plus the 880 ms hurt action.",
+  "status": "approved-for-planning",
+  "tribe": "pebble",
+  "form": "antenna",
+  "action": "hurt",
+  "sheet": "pebble-antenna-hurt-sheet.png",
+  "preview": "pebble-antenna-hurt-preview.gif",
+  "sheetSHA256": "e6ee61e4a6e8a914436df3232cadf58f8edcba9c0b539e7585475ea48c39434a",
+  "previewSHA256": "94de9f2662316a5ee644fab11066a075186bbe495c814adf0a5f6cf27cc709e5",
+  "approvalDate": "2026-11-07",
+  "integration": "Planning reference only; game runtime and deployment are unchanged."
+}

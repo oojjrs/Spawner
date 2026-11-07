@@ -1,0 +1,257 @@
+{
+  "sourceReference": "AnimationCandidates/spring-secretion-cyan-v3/secretion-design.png",
+  "sourceReferenceSHA256": "58aa335871c82cd89cab67a45e5f49059155608897b963f52936f9e11b18732d",
+  "motionReference": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp",
+  "motionReferenceActualCell": 512,
+  "motionReferenceFrames": 64,
+  "motionReferencePeriodMs": 6400,
+  "method": "Built-in imagegen full-body redraw. Whole-frame integer atlas registration only. Neutral rest uses exact repeat of first whole pose. No body-part compositing, cuts, deformation, mirroring, or resampling. Source RGBA preserved within packed cells.",
+  "frameSize": 314,
+  "columns": 4,
+  "frameCount": 16,
+  "distinctGeneratedPoses": 14,
+  "durationsMs": [
+    1200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    100,
+    2500
+  ],
+  "durationMs": 6400,
+  "loop": true,
+  "registration": [
+    {
+      "sourceFrame": 0,
+      "sourceCrop": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "wholeFrameOffset": [
+        1,
+        0
+      ]
+    },
+    {
+      "sourceFrame": 1,
+      "sourceCrop": [
+        314,
+        0,
+        627,
+        314
+      ],
+      "wholeFrameOffset": [
+        1,
+        0
+      ]
+    },
+    {
+      "sourceFrame": 2,
+      "sourceCrop": [
+        627,
+        0,
+        940,
+        314
+      ],
+      "wholeFrameOffset": [
+        1,
+        0
+      ]
+    },
+    {
+      "sourceFrame": 3,
+      "sourceCrop": [
+        940,
+        0,
+        1254,
+        314
+      ],
+      "wholeFrameOffset": [
+        0,
+        0
+      ]
+    },
+    {
+      "sourceFrame": 4,
+      "sourceCrop": [
+        0,
+        314,
+        314,
+        627
+      ],
+      "wholeFrameOffset": [
+        0,
+        0
+      ]
+    },
+    {
+      "sourceFrame": 5,
+      "sourceCrop": [
+        314,
+        314,
+        627,
+        627
+      ],
+      "wholeFrameOffset": [
+        1,
+        0
+      ]
+    },
+    {
+      "sourceFrame": 6,
+      "sourceCrop": [
+        627,
+        314,
+        940,
+        627
+      ],
+      "wholeFrameOffset": [
+        0,
+        0
+      ]
+    },
+    {
+      "sourceFrame": 7,
+      "sourceCrop": [
+        940,
+        314,
+        1254,
+        627
+      ],
+      "wholeFrameOffset": [
+        0,
+        0
+      ]
+    },
+    {
+      "sourceFrame": 8,
+      "sourceCrop": [
+        0,
+        627,
+        314,
+        940
+      ],
+      "wholeFrameOffset": [
+        1,
+        0
+      ]
+    },
+    {
+      "sourceFrame": 9,
+      "sourceCrop": [
+        314,
+        627,
+        627,
+        940
+      ],
+      "wholeFrameOffset": [
+        2,
+        0
+      ]
+    },
+    {
+      "sourceFrame": 10,
+      "sourceCrop": [
+        627,
+        627,
+        940,
+        940
+      ],
+      "wholeFrameOffset": [
+        1,
+        0
+      ]
+    },
+    {
+      "sourceFrame": 11,
+      "sourceCrop": [
+        940,
+        627,
+        1254,
+        940
+      ],
+      "wholeFrameOffset": [
+        0,
+        0
+      ]
+    },
+    {
+      "sourceFrame": 12,
+      "sourceCrop": [
+        0,
+        940,
+        314,
+        1254
+      ],
+      "wholeFrameOffset": [
+        0,
+        -1
+      ]
+    },
+    {
+      "sourceFrame": 13,
+      "sourceCrop": [
+        314,
+        940,
+        627,
+        1254
+      ],
+      "wholeFrameOffset": [
+        1,
+        -1
+      ]
+    },
+    {
+      "sourceFrame": 0,
+      "sourceCrop": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "wholeFrameOffset": [
+        1,
+        0
+      ]
+    },
+    {
+      "sourceFrame": 0,
+      "sourceCrop": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "wholeFrameOffset": [
+        1,
+        0
+      ]
+    }
+  ],
+  "limitations": [
+    "The 6.4 s preview uses 14 generated active poses, not the reference's 64 native frames.",
+    "The approved PNG retains low-alpha (1–4) residue; GIF binary transparency removes it. Approved bytes are unchanged."
+  ],
+  "status": "approved-for-planning",
+  "tribe": "spring",
+  "form": "secretion",
+  "action": "idle",
+  "sheet": "spring-secretion-idle-redraw-v2-sheet.png",
+  "preview": "spring-secretion-idle-redraw-v2-preview.gif",
+  "sheetSHA256": "72470f0882cb54073ac08219e84bc738da8b98a6d33f94bfc3f5b9ba9a2618e2",
+  "previewSHA256": "8df97dd22da689537f66c3ceac631813def3c1faa4afb0a8e9218f93278cc494",
+  "approvalDate": "2026-11-07",
+  "integration": "Planning reference only; game runtime and deployment are unchanged."
+}
