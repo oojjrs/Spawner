@@ -24,6 +24,11 @@ const reactionLabels = { dodge: "회피", parry: "패링", block: "방어", stun
 const beetleCorpse = imageAnimation({ image: "DesignAssets/Animations/BeetleDeath/dead-v2.png", frameSize: 185, columns: 1, pivotX: 95.5, pivotY: 163 });
 
 function stageAgent(agent) {
+  const side = agent.combat?.side ?? agent.side;
+  if (side === 0 || side === 1) {
+    const facing = side === 0 ? 1 : -1;
+    agent = { ...agent, facing, attack: agent.attack ? { ...agent.attack, directionX: facing } : agent.attack };
+  }
   if (agent.labAppearance) agent = { ...agent, tribe: UNIT_ANIMATIONS[agent.key] ? agent.key : undefined,
     species: UNIT_ANIMATIONS[agent.key] ? undefined : agent.key };
   if (!agent.species && !agent.tribe && agent.key) agent = UNIT_ANIMATIONS[agent.key] ? { ...agent, tribe: agent.key } : { ...agent, species: agent.key };
@@ -254,8 +259,7 @@ export function createCombatStage(canvas) {
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
       { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), index === 1);
     if (!appearanceDrawn && !representativeDrawn && asset) {
-      const mirror = pose?.mirrorX !== undefined ? pose.mirrorX : agent.species === "spiny-back-beetle" ? pose?.action === "attack" ? index === 1 : index === 0 :
-        agent.species && CREATURE_ATTACK_ANIMATIONS[agent.species] ? index === 0 : index === 1;
+      const mirror = pose?.mirrorX ?? ((geometry?.facing || (agent.species ? "left" : "right")) === "right" ? agent.facing < 0 : agent.facing > 0);
       context.scale(mirror ? -1 : 1, 1);
       if (!alive && pose?.action !== "death" && pose?.action !== "dead") { context.globalAlpha = .38; context.rotate(-point.direction * .9); context.scale(.85, .85); }
       if (pose) {
@@ -355,8 +359,7 @@ export function createCombatStage(canvas) {
     const representativeDrawn = !appearanceDrawn && representativeArt.draw(context, agent, time, deathAge,
       { pose, asset, geometry, size, sizeFor: current => displaySize(agent, current) * formationScale(width, height) }, 100 * formationScale(width, height), (agent.combat?.side ?? agent.side) === 1);
     if (!appearanceDrawn && !representativeDrawn && asset) {
-      const mirror = pose?.mirrorX !== undefined ? pose.mirrorX : agent.species === "spiny-back-beetle" ? pose?.action === "attack" ? (agent.combat?.side ?? agent.side) === 1 : (agent.combat?.side ?? agent.side) === 0 :
-        agent.species && CREATURE_ATTACK_ANIMATIONS[agent.species] ? (agent.combat?.side ?? agent.side) === 0 : (agent.combat?.side ?? agent.side) === 1;
+      const mirror = pose?.mirrorX ?? ((geometry?.facing || (agent.species ? "left" : "right")) === "right" ? agent.facing < 0 : agent.facing > 0);
       context.save(); context.scale(mirror ? -1 : 1, 1);
       if (pose) { const { frameSize, columns, pivotX, pivotY, viewSize, registrationScale } = geometry;
         const scale = size * (registrationScale || 1) / (viewSize || frameSize);

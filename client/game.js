@@ -7923,7 +7923,7 @@
         const impact = combatVisualEvent(agent), age = impact ? state.simSeconds - impact.at : Infinity;
         const hit = impact && String(impact.targetId) === String(agent.id) && ["hit", "stun"].includes(impact.kind);
         const opponent = positions.get(String(attack?.targetId ?? agent.combat.targetId));
-        const facing = opponent ? Math.sign(opponent.x - point.x) || (agent.combat.side ? -1 : 1) : agent.combat.side ? -1 : 1;
+        const facing = agent.combat.side === 0 ? 1 : -1;
         const progress = attack ? clamp((state.simSeconds - attack.startedAt) / (attack.endsAt - attack.startedAt), 0, 1) : 0;
         const distance = opponent ? Math.hypot(opponent.x - point.x, opponent.y - point.y) : 0;
         const lunge = attack && !Spawner.CREATURE_ATTACK_ANIMATIONS[agent.species]?.fixedSupport && state.simSeconds < attack.endsAt ? Math.sin(progress * Math.PI) * Math.min(30 * width / 1200, distance * .28) : 0;

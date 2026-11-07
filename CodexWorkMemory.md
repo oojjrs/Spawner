@@ -175765,3 +175765,40 @@ Text: none. No lettering, labels, logo, watermark, UI, borders, health bars, peo
 
 - 기록 ID: neutral-stats-tier-sections-commit-freeze-20261107-01a1b35a. 기록 시각: 2026-11-07T09:32:18+09:00. 기록자·범위판단 Codex /root, 로컬커밋승인 사용자. 출처 현재채팅 01a1b35a-3508-75c3-ba00-bae7fae64183의 ‘커밋해’. 원발언정확시각·턴/항목ID 불명, H:/Spawner Windows PowerShell.
 - 후보는 Design.html의 중립실제수치/티어분리 섹션과 관련CSS2선택자 및 본채팅메모리뿐이다. HEAD의 타구간과 기록을 보존한 후보를 별도index에 구성해 기본index/다른변경/충돌상태를 보존한다. 실제브라우저검수 미완료·형식검사결과는 result기록과 동일하며 새실행검사를 시작하지 않는다. 연결Projects0 조회근거를 재사용한다. 새push/배포는 승인되지 않았다.
+
+
+## 전투 배치 방향 교정 착수 · 01a1b35f 현재 요약
+
+- 기록 ID: combat-facing-start-20261107-01a1b35f. 기록 시각 2026-11-07T09:22:13+09:00. 기록자·구현 판단 Codex /root, 요청·방향 결정 사용자. 출처 현재 채팅 01a1b35f-55ee-7bc2-9448-fea7af2ad1ef의 왼쪽 유닛은 오른쪽/오른쪽 유닛은 왼쪽을 보고 플레이어블4종·중립 모두 어느 진영이든 선제피격될 수 있다는 수정 지시. 원발언 정확시각·턴/항목 ID·PC식별 불명, H:/Spawner Windows PowerShell.
+- 직접 확인: server/combat.mjs attach/공격이 side0 facing/directionX=-1로 설정하지만 실험실 combat-stage.mjs는 side0을 화면 왼쪽에 놓는다. 실험실 중립 공격 pose.mirrorX가 서버 방향을 그대로 받아 idle와 다르게 바깥을 볼 수 있다. 인게임 패널은 현재 상대좌표로 facing을 계산하며 렌더용 combat.side를 기존 플레이어 렌더 관례에 맞춰 뒤집는다.
+- 범위·판단: 실험실 stageAgent의 렌더용 복사본에서 화면 진영에 맞춰 facing/attack.directionX를 정규화하고 원화 facing metadata를 우선해 양방향을 반전한다. 인게임 상세패널도 배치 진영으로 방향을 고정한다. 엔진/월드 방향·공격규칙·원화·문구는 바꾸지 않는다. 실제 엔진의 좌우/선공 전환과 대기·공격·선제피격·사망, 중립/4종 외형 및 두 소비자·내장 사본을 검수한다.
+- 보호·진행: 기존 다수 dirty/삭제/새파일과 동시 카메라/외형/애셋/메모리를 보존하며 정확한 국소변경만 한다. origin https://github.com/oojjrs/Spawner의 연결Projects nodes=[]/다음페이지없음. 새브랜치/stage/commit/push/배포는 요청하지 않았다. 아직 제품수정·검수 전이며 근거는 literal $Trash/combat-facing-01a1b35f.
+
+
+
+## 전투 배치 방향 교정 완료 · 01a1b35f 현재 요약
+
+- 기록 ID: combat-facing-complete-20261107-01a1b35f. 기록 시각 2026-11-07T09:28:37+09:00. 기록자·직접 구현/검수 Codex /root, 방향·대상 결정 사용자. 출처 현재 채팅 01a1b35f-55ee-7bc2-9448-fea7af2ad1ef 및 literal $Trash/combat-facing-01a1b35f의 source snapshot/browser-result.json·실제 캡처. 원발언 정확시각·턴/항목 ID·PC식별 불명, H:/Spawner Windows PowerShell. 본 결과가 combat-facing-start-20261107-01a1b35f의 미구현 상태를 대체하며 원기록은 보존한다.
+- 구현: 실험실 stageAgent가 실제 화면 side0=오른쪽 응시/side1=왼쪽 응시로 facing과 attack.directionX를 렌더용 복사본에 정규화한다. 일반/지원군 fallback은 animation.facing 메타데이터와 종족 기본 방향을 반영한다. 인게임 drawCombatPanel도 배치 진영으로 facing을 정한다. Combat.html 모듈과 Spawner.html 패널의 같은 부분만 동기화했으며 엔진·월드방향·공격규칙·애셋·UI문구는 바꾸지 않았다.
+- 실제 검수: 새 client/combat-stage-facing.test.mjs 5/5 통과. 실제 시뮬레이션 입력의 23종×양진영×선공3방식×대기/공격/피격/사망4상태=552몸체와 4종족7외형×양진영=56몸체의 방향/원시뮬레이션 불변을 확인했다. 별도 인게임 방향식은 잔존월드방향/반대타깃좌표와 무관함을 확인했다. headless Edge 실제 Combat.html의 대표5:5 좌우교환×대기/공격/피격 6장면에서60몸체 방향/본문체1회그리기 PASS, pageerror0. 실제 attack/교환hurt 캡처를 직접 보았다. 인게임 전체 앱의 브라우저 검수나 전게임 정상 판정은 하지 않았다.
+- 기존검사 구분: 함께 실행한 beetle/support 기존7검사 중5성공, 실제 beetle .08피해 journal 기대와 non-support-locked 45px lunge의 옛 asset경로 기대2건 실패다. 이번 수정 전 combat-stage.mjs snapshot loader로 해당 두 실패가 동일 재현됨을 직접 확인했다. 그 기존규칙/애셋·fixture를 이번 요청으로 임의 수정하지 않았다. 새 회귀의 첫 실패3건은 Bean/Species HeldHurt 원화가 오른쪽기준임을 oracle 목록에 빠뜨린 테스트 분류오류였으며 그 목록만 교정해 최종5/5통과했다.
+- 범위/상태: 제품4파일·새회귀1파일·관련메모리만 이번 변경이다. 기존·동시dirty/index·삭제·신규애셋과 기록을 보존한다. linkedProjects0, 새브랜치/build/stage/commit/push/배포 없음. 사용자 요청/원인/실제변경/검수와 기존실패·인게임브라우저미검수 한계의 누락점검을 마쳤다. 마지막 필수형식/국소diff 결과는 이 기록 직후 실제 도구 결과를 따른다.
+
+- 최종형식·동시변경 구분(2026-11-07T09:29:21+09:00, Codex /root, 같은 출처): 제품4·새회귀1 UTF8NoBom/CRLF OK, 3개 JS 구문·비교한 diff 공백검사 PASS. 메모리는 이번 변경 전부터 HEAD Mixed 대비 작업트리 CRLF였으므로 NeedsReview를 보호하고 정규화하지 않았다. 시작 snapshot 이후 다른 채팅의 DNA 부분저장 UI/내장모듈이 client/game.js·Spawner.html에 추가된 것을 diff에서 확인했다. 해당 동시훙크는 이번 방향수정으로 계산하거나 되돌리지 않는다. task diff에는 동시변경도 섞여 있으므로 작업 범위는 위 명시한 방향정규화/원화방향반전/패널facing 훙크·새회귀·본채팅기록만이다. 이 검수에서 stage/commit/push는 하지 않았고 6경로는 unstaged/untracked다.
+
+
+
+## 전투 배치 방향 커밋 분리 판단 · 01a1b35f
+
+- 기록 ID: combat-facing-commit-scope-20261107-01a1b35f. 기록 시각 2026-11-07T09:34:21+09:00. 기록자·분리 판단 Codex /root, 로컬커밋 승인 사용자. 출처 현재 채팅 01a1b35f-55ee-7bc2-9448-fea7af2ad1ef의 ‘커밋해’, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID·PC식별 불명.
+- 실제확인: 현재 HEAD는 Spawner.html이 client/game.js를 직접 읽는 작은 외부스크립트 진입점이며, working Spawner.html의 전체인라인화는 다른 작업이다. 따라서 HEAD의 client/game.js 방향식과 Combat.html/전투stage의 정확 방향훙크를 투영하고 큰 인라인 페이지·DNA/외형/포자폐기 작업은 합치지 않는다. 기본index의 다수staged/Design미병합상태는 그대로 보존한다. 기존 연결Projects0은재사용한다.
+- 관련회귀의 외부의존 분리: 최초 새회귀가 다른 작업의 미추적 unit-action-art-assets를 import하고 있음을 커밋대조에서 확인했다. 제품기능을 변경하지 않고 회귀만 기존 커밋의 중립애니메이션 카탈로그/4종족 stageAgent 호출계약으로 검사하도록 바꾼다. 앞선 552+56몸체/실제60몸체 검수근거는 당시 작업트리에서 실제통과한 기록으로 보존하고, 최종회귀는 공개되지 않은 다른 아트작업 없이 실행되는지 분리후 확인한다.
+- 후보: client/combat-stage.mjs·client/game.js·Combat.html·client/combat-stage-facing.test.mjs·본채팅메모리3절의5경로만 별도index에 준비한다. 새브랜치/다른작업정리/배포/push는 하지 않는다. HEAD가 움직이면 새부모에 동일훙크를 다시투영하며, 기존기본index·미병합항목·나머지working바이트는 보존한다. 현재커밋완료가아니다.
+
+
+## 전투 배치 방향 커밋 동결 · 01a1b35f
+
+- 기록 ID: combat-facing-commit-freeze-20261107-01a1b35f. 기록 시각 2026-11-07T09:40:13+09:00. 기록자·분리검수 Codex /root, 커밋결정 사용자. 출처 현재 채팅 01a1b35f-55ee-7bc2-9448-fea7af2ad1ef와 실제 candidate loader 결과, H:/Spawner Windows PowerShell. 원발언시각·항목ID 불명.
+- 최종회귀는 작업트리5/5 및 HEAD322d918+정확방향후보의 완전한 모듈소스를 Git객체에서 읽은 분리실행5/5 PASS다. 기존HEAD에 일부 사망clip의 UNIT_IMAGE_BOUNDS가 없는 별도문제로 최초 분리실행이 실패하여 회귀fixture의 해당사망조합만 등록경계가 있는 경우로 한정했다. 다른 대기/공격/피격23종·4플레이어블의 생존/사망 방향복사·원본불변은 유지한다. 그 경계누락을 제품에서 임의수정하지 않았고 앞선 현재작업트리 전체사망검수근거는 보존한다.
+- 동시 다른 Git보존작업 중 새회귀파일이 사라지고 제품이 이전내용으로 돌아온 것을 직접관측했다. literal $Trash의 기존태스크사본/후보는보존되어 있어 이번방향훙크·최종회귀·관련4기록만 현재본문에 재적용하며 다른본문/기본index·미병합·stash는 건드리지 않는다.
+- HEAD의 외부스크립트진입점이 client/game.js를 읽으므로 무관한 Spawner.html 인라인화를 포함하지 않고 제품3파일+회귀1+메모리1의5경로로 동결한다. 기본index는 전용복사본에서 이번훙크만 반영한뒤 나머지entry보존을 확인하고, compare-and-swap으로 같은main의부모가그대로일때만 원자적로컬커밋한다. 아직커밋성공을기록하지 않는다.
