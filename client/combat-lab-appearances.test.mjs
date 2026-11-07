@@ -13,7 +13,7 @@ import { unitActionArtDefinition } from './unit-action-art.mjs';
 const plain = value => JSON.parse(JSON.stringify(value));
 test('lab combo uses valid independently owned DNA and real melee/armor mechanics', () => {
   const first = combatLabBladeCarapaceDna(), second = combatLabBladeCarapaceDna();
-  assert.equal(first.version, 4);
+  assert.equal(first.version, 5);
   assert.ok(validateDna(first, first.level, first.budget));
   assert.ok(ATTRIBUTE_DNA.trace(first.pieces, first.level).valid);
   assert.equal(ATTRIBUTE_DNA.price(first.pieces), first.budget);

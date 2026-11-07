@@ -11,7 +11,10 @@ function fixture(mode, rolls, accuracy) {
   const source = { id: "a", ownerId: "left", tribe: "bean", x: 100, y: 100, health: 1000,
     stats: { health: 1000, speed: 1, vision: 3, ...(mode === "dna" ? { dna } : {}) },
     attributes: {}, combatDisposition: "aggressive", moveDuration: 0 };
-  if (mode === "ranged") { source.species = "lantern-keeper"; source.tribe = undefined; }
+  if (mode === "ranged") {
+    source.species = "lantern-keeper"; source.tribe = undefined;
+    source.stats.combat = { ...unitCombatStats(source.species).combat, hits: 1, accuracy, stun: 0, bleed: 0, area: 0, lifesteal: 0 };
+  }
   const target = { id: "b", ownerId: "right", species: "vine-turtle", x: 100, y: 100, health: 1000,
     stats: { ...unitCombatStats("vine-turtle"), health: 1000, speed: 1, vision: 3 },
     attributes: {}, combatDisposition: "aggressive", moveDuration: 0, attackReady: 100 };

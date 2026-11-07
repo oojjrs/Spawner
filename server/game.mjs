@@ -1132,7 +1132,7 @@ export function createGame(environment, colony, savedGame) {
       } else {
         while (state.simSeconds >= agent.harvestReady && agent.carrying < capacity && food?.amount > 0 &&
           resourceTypeForCell(food, worldMap) === resourceType) {
-          take(agent.dna ? agent.stats.dna.harvest : 1, agent.harvestReady);
+          take(1, agent.harvestReady);
           agent.harvestReady += harvestSeconds;
         }
       }

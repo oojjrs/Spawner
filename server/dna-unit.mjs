@@ -2,13 +2,13 @@ import { ATTRIBUTE_DNA } from "./dna.mjs";
 
 export function cloneDna(dna) {
   if (!dna) return null;
-  const value = dna.version === 4 ? dna : ATTRIBUTE_DNA.validate(dna);
+  const value = dna.version === 5 ? dna : ATTRIBUTE_DNA.validate(dna);
   if (!value) return null;
   return { version: value.version, pieces: value.pieces.map(ATTRIBUTE_DNA.clonePiece), budget: value.budget, level: value.level };
 }
 
 export function validateDna(dna, nestLevel, budget) {
-  if (!dna || dna.version !== 4 || !Array.isArray(dna.pieces)) return null;
+  if (!dna || dna.version !== 5 || !Array.isArray(dna.pieces)) return null;
   const organs = new Set();
   for (const piece of dna.pieces) {
     const gene = ATTRIBUTE_DNA.lookup.get(piece?.gene);
@@ -65,7 +65,7 @@ export function dnaCanMove(agent, x, y, colonies) {
 // Keep recovery checks tied to the current catalog and validation rules.
 export function basicGathererDna(nestLevel = 1) {
   const gene = ATTRIBUTE_DNA.lookup.get("gather");
-  const design = { version: 4, level: nestLevel, budget: 999999999,
+  const design = { version: 5, level: nestLevel, budget: 999999999,
     pieces: [{ gene: gene.id, grade: gene.grade, rotation: 0, q: 0, r: 0 }] };
   return validateDna(design, nestLevel, design.budget);
 }

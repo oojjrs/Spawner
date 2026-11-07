@@ -10,8 +10,6 @@ export const TRIBE_STARTING_UNITS = Object.freeze({
   spring: Object.freeze([["feet"], ["feet"], ["antenna"], []].map(slots => Object.freeze(slots)))
 });
 
-// Each tribe gets a modest legal level-one worker, priced through the same
-// DNA catalog as user designs (currently 17P each, including birth cost).
 export const STARTING_WORKER_GENES = Object.freeze({
   bean: Object.freeze(["gather", "capacity", "capacity", "capacity"]),
   spore: Object.freeze(["gather", "harvestSpeed", "capacity", "capacity"]),
@@ -26,5 +24,5 @@ export function startingWorkerDna(tribe = "bean") {
     return { gene: gene.id, grade: gene.grade, rotation: 0 };
   }), 1);
   if (!pieces) throw new Error("시작 일꾼 DNA가 1레벨 보드에 맞지 않습니다.");
-  return { version: 4, level: 1, budget: 30, pieces };
+  return { version: 5, level: 1, budget: 30, pieces };
 }

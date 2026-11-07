@@ -8035,7 +8035,7 @@
     function openUnitDesign(template, readOnly) {
       readOnly = readOnly || !!state.ending;
       designReturnFocus = document.activeElement;
-      unitDraft = { id: template ? template.id : null, tribe: template?.tribe || state.tribe || "bean", slots: template ? [...new Set((template.slots || []).map(key => key === "arms" ? "strength" : key))] : [], dna: !template || template.dna ? Spawner.cloneDna(template?.dna || { version: 4, pieces: [], budget: state.evolutionPoints, level: state.nestLevel }) : null, attributeLevels: { ...template?.attributeLevels }, combatPrimary: template?.combatPrimary ?? null, error: "", readOnly: !!readOnly, nameEdited: Spawner.isTemplateNameEdited(template) };
+      unitDraft = { id: template ? template.id : null, tribe: template?.tribe || state.tribe || "bean", slots: template ? [...new Set((template.slots || []).map(key => key === "arms" ? "strength" : key))] : [], dna: !template || template.dna ? Spawner.cloneDna(template?.dna || { version: 5, pieces: [], budget: state.evolutionPoints, level: state.nestLevel }) : null, attributeLevels: { ...template?.attributeLevels }, combatPrimary: template?.combatPrimary ?? null, error: "", readOnly: !!readOnly, nameEdited: Spawner.isTemplateNameEdited(template) };
       designName.value = template?.name || Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       designName.readOnly = !!readOnly;
       designPalette.hidden = !!readOnly || !!unitDraft.dna;

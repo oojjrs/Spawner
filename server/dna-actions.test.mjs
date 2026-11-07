@@ -22,15 +22,15 @@ test("level one opens gathering with four repeatable worker stats",()=>{
   assert.equal(stats(["armor"]).armor,3); assert.equal(stats(["evasion"]).evasion,9);
   assert.equal(stats(["carapace"]).armor,2); assert.equal(stats(["legs"]).evasion,9);
   const once=stats(["gather","antenna","blade","secretion"]), twice=stats(["gather","antenna","blade","secretion","gather","antenna","blade","secretion"]);
-  assert.equal(twice.capacity,2*once.capacity); assert.equal(twice.harvest,2*once.harvest); assert.equal(twice.meleePower,2*once.meleePower); assert.equal(twice.rangedPower,2*once.rangedPower); assert.equal(twice.meleeSpeed,once.meleeSpeed); assert.equal(twice.rangedSpeed,once.rangedSpeed);
+  assert.equal(twice.capacity,2*once.capacity); assert.equal(twice.harvest,1); assert.equal(twice.meleePower,2*once.meleePower); assert.equal(twice.rangedPower,2*once.rangedPower); assert.equal(twice.meleeSpeed,once.meleeSpeed); assert.equal(twice.rangedSpeed,once.rangedSpeed);
 });
 
 test("legacy snapshots survive schema restore while new designs require the current catalog",()=>{
   for(const entry of [{gene:"health",grade:1,shape:[0,1],rotation:0},{gene:"health",grade:2,shape:[0,1,2],rotation:0},{gene:"antenna",grade:1,shape:[0,1],rotation:0},{gene:"movement",grade:2,shape:[0,1,3],rotation:0}]) {
     const dna={version:3,pieces:[entry],budget:1000,level:2};
-    const migrated=ATTRIBUTE_DNA.validate(dna);assert.equal(migrated.version,4);assert.deepEqual(ATTRIBUTE_DNA.stats(migrated.pieces),ATTRIBUTE_DNA.stats(dna.pieces));assert.deepEqual(cloneDna(dna),migrated);assert.equal(validateDna(dna,2,1000),null);
+    const migrated=ATTRIBUTE_DNA.validate(dna);assert.equal(migrated.version,5);assert.deepEqual(ATTRIBUTE_DNA.stats(migrated.pieces),ATTRIBUTE_DNA.stats(dna.pieces));assert.deepEqual(cloneDna(dna),migrated);assert.equal(validateDna(dna,2,1000),null);
   }
-  assert.ok(validateDna({version:4,pieces:[piece("antenna")],budget:1000,level:2},2,1000));
+  assert.ok(validateDna({version:5,pieces:[piece("antenna")],budget:1000,level:2},2,1000));
   assert.equal(validateDna({version:3,pieces:[null],budget:100,level:1},1,100),null);
 });
 

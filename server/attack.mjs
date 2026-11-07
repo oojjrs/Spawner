@@ -12,13 +12,22 @@ export const AGENT_ATTACK_HIT_TIME = AGENT_ATTACK_FRAME_DURATIONS.slice(0, AGENT
 export const AGENT_ATTACK_DURATION = AGENT_ATTACK_FRAME_DURATIONS.reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
 export const AGENT_ATTACK_ASSET = "DesignAssets/Animations/UnitAttack/attack.png";
 
+export function attackAnimationSegments(attack, time, hitTime, duration) {
+  const contacts = attack.meleeContacts?.length ? attack.meleeContacts : [attack.hitAt];
+  const startFor = index => index ? Math.max(contacts[index] - hitTime,
+    contacts[index - 1] + (contacts[index] - contacts[index - 1]) * (duration - hitTime) / duration) : attack.startedAt;
+  let index = 0;
+  while (index < contacts.length - 1 && time >= startFor(index + 1)) index++;
+  const contact = contacts[index], start = startFor(index);
+  const end = Math.min(attack.endsAt, contact + duration - hitTime,
+    index < contacts.length - 1 ? startFor(index + 1) : Infinity);
+  return [[start, 0], [contact, hitTime], [end, hitTime + Math.max(0, end - contact)]];
+}
+
 export function attackAnimationElapsed(attack, time, hitTime, duration) {
   const elapsed = time - attack.startedAt;
   if (Number.isFinite(attack.recovery)) {
-    const contacts = attack.meleeContacts || [attack.hitAt];
-    let index = 0;
-    while (index < contacts.length - 1 && time > contacts[index] && time >= contacts[index + 1] - hitTime) index++;
-    const contact = contacts[index], start = index ? Math.max(contacts[index - 1], contact - hitTime) : attack.startedAt;
+    const [[start], [contact]] = attackAnimationSegments(attack, time, hitTime, duration);
     if (time < contact) return Math.max(0, (time - start) / Math.max(1e-9, contact - start) * hitTime);
     return Math.min(duration, hitTime + time - contact);
   }

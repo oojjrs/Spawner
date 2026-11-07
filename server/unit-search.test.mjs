@@ -21,7 +21,7 @@ for (const [name, source, entry] of [["게임 워커", worker, "client/worker.mj
 
 function fixture(api, genes) {
   const size = 32, colony = { id: 1, ownerId: "home", tribe: "bean", x: 10, y: 10, occupiedCells: new Set(Array.from({ length: 25 }, (_, index) => index % 5 + "," + Math.floor(index / 5))) };
-  const dna = { version: 4, level: 4, budget: 999, pieces: ATTRIBUTE_DNA.pack(genes.map(id => {
+  const dna = { version: 5, level: 4, budget: 999, pieces: ATTRIBUTE_DNA.pack(genes.map(id => {
     const gene = ATTRIBUTE_DNA.lookup.get(id);
     return { gene: id, grade: gene.grade, rotation: 0, q: 0, r: 0 };
   }), 4) };
@@ -46,7 +46,7 @@ function fixture(api, genes) {
 }
 
 function addEnemy(f) {
-  const dna = { version: 4, level: 1, budget: 30, pieces: [] }, stats = dnaUnitStats(dna);
+  const dna = { version: 5, level: 1, budget: 30, pieces: [] }, stats = dnaUnitStats(dna);
   const target = { id: "rival:1", ownerId: "rival", tribe: "bean", dna, stats, health: 1,
     x: 17, y: 12, carrying: 0, attributes: {}, slots: [] };
   f.enemies.push(target);

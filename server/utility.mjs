@@ -374,9 +374,10 @@ export function createUtilityAI(context) {
         const precise = synergy(agent, ["strength", "antenna"]) &&
           state.simSeconds - (agent.preciseHarvestTimes.get(key) ?? -Infinity) >= 30 ? 2 : 0;
         let best = null;
-        for (let count = 1; count <= Math.ceil(maximum); count++) {
+        const firstCargoCount = agent.dna ? Math.max(1, Math.ceil(maximum)) : 1;
+        for (let count = firstCargoCount; count <= Math.ceil(maximum); count++) {
           const amount = Math.min(count, maximum);
-          const harvestCycles = Math.ceil(amount / (agent.dna ? agent.stats.dna.harvest : 1));
+          const harvestCycles = Math.ceil(amount);
           let harvestTime = 1 + Math.max(0, harvestCycles - precise) * (context.harvestSeconds ? context.harvestSeconds(type, agent) : definition.harvestSeconds);
           if (present) {
             const ready = Math.max(0, agent.harvestReady - state.simSeconds);

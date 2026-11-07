@@ -1044,10 +1044,7 @@
 .dna-guide dt { color:#90aaa9; }.dna-guide dd { margin:0; text-align:right; }.dna-guide kbd { font:inherit; overflow-wrap:anywhere; }
 .dna-organ-limit { position:absolute; z-index:3; top:60px; left:50%; transform:translateX(-50%); width:max-content; max-width:calc(100% - 24px); margin:0; padding:10px 14px; border:1px solid #d4a1c6; border-radius:8px; background:#673d64; color:#fff1fb; box-shadow:0 4px 18px #0008; font-size:13px; font-weight:600; line-height:1.5; text-align:center; overflow-wrap:anywhere; pointer-events:none; }
 .dna-organ-limit[hidden] { display:none; }
-.dna-board canvas { display:block; width:100%; height:100%; touch-action:none; cursor:crosshair; }
-.dna-editor[data-preview="false"] .dna-board canvas { cursor:not-allowed; }
-.dna-editor[data-readonly="true"] .dna-board canvas { cursor:default; }
-.dna-board canvas.dna-dragging { cursor:grabbing; }
+.dna-board canvas { display:block; width:100%; height:100%; touch-action:none; cursor:default; }
 .dna-tools,.dna-view-tools { position:absolute; display:flex; gap:5px; top:10px; }
 .dna-tools { left:10px; }.dna-view-tools { right:10px; }
 .dna-tools button,.dna-view-tools button,.dna-rotation button { width:38px; min-height:38px; display:grid; place-items:center; padding:8px; background:#1c3029e8; }
