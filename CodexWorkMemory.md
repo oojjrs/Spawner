@@ -1,3 +1,45 @@
+## 몽돌 이동 V2 실행면 동기화 검수·푸시 범위 동결 · 01a1b418
+
+- 기록 ID: pebble-v2-all-surfaces-freeze-20261107-01a1b418. 기록·검수 시각 2026-11-07T14:13:03+09:00. 기록자·통합/검수/범위판단 Codex /root, 수정/업로드결정 사용자. 출처 현재채팅01a1b418-469e-79d0-9737-ddf91fe08f14 및 literal $Trash/pebble-v2-publish-01a1b418/{implementation.json,integration-check.json}, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
+- 완료된구현: 공용ApprovedActionsV1/pebble/gather/walk.png와localwrapper를승인V2원시트로교체하고registry/runtime.js/Combat.html을8열32프레임×40ms·pivot256,400·길이351로맞췄다. 출처manifest의해시/1280ms/원화정보와image-sizes의8×4/4096×2048을함께동기화했다. 기획서는동일V2,공격V1은기존승인원바이트와동일하다.
+- 직접검수: source/bundle2개카탈로그동일,승인PNG/실행PNG/localwrapper복호화bytes동일,공격바이트불변. 실제unitActionArtPose에서0/.04/.64/1.24/1.28초의프레임0/1/16/31/0과missing=false를확인했다. 기존unit-action-art6개+welcome-presentation11개총17검사통과. 기획서/GIF32프레임/형식이전결과는불변범위재사용한다. 실제시각전체플레이나공개배포완료로확대하지않는다.
+- 동결범위: 공용등록·walk이미지/localwrapper·행동manifest·image-sizes의해당1항목·runtime/Combat등록영역,기획서이동V2연결,승인V2시트/GIF/manifest와공격승인manifest,이채팅신규기록이다. HEAD에이미포함된초기공격이미지/20플레이스홀더/포자복원은중복변경하지않는다. 별도index에서HEAD에정확관련훙크만투영해동시전투/DNA/다른메모리를보존한다.
+- 현재HEAD064aa7e와fetch한origin/main일치·Projects0근거를재사용한다. 제목은‘몽돌 채집형 승인 이동과 공격 적용’으로한다. 요청·승인·이동기각/교정·기획/전체실행범위·검수/보호·남은커밋푸시를누락대조했다. 실제커밋/원격성공은readback후기록한다.
+## 몽돌 이동 V2 전체 실행면 동기화·업로드 승인 · 01a1b418 현재 요약
+
+- 기록 ID: pebble-v2-all-surfaces-push-start-20261107-01a1b418. 기록 시각 2026-11-07T14:10:48+09:00. 기록자·범위판단 Codex /root, 원발언자·수정/업로드승인 사용자. 출처 codex://threads/01a1b418-469e-79d0-9737-ddf91fe08f14 의 ‘다 하고 올려’. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 승인범위: 앞선미적용판정의인게임·웰컴헤더·전투실험실을승인이동V2/32프레임1280ms로맞추고승인공격V1을보존한다. 기획서의V2연결·두승인manifest·관련기록과필수실행지원만함께커밋하여전용origin/main에푸시한다. 동시전투/DNA/탄생다른훙크는제외한다.
+- 시작Git: H:/Spawner main 064aa7e,전용origin=https://github.com/oojjrs/Spawner. fetch뒤HEAD/origin0:0,공유index비어있음. 연결Projects재확인0개. 다른채팅의064aa7e가초기그림/플레이스홀더를이미담았으므로불변바이트를중복변경하지않는다.
+- 구현판단: 공용walk.png를승인V2시트원바이트로교체하고UNIT_ACTION_ART의동일walk계약을8열32프레임40ms·승인pivot에맞춘다. actions-manifest의해당출처/해시/시간과image-sizes의해당grid만갱신한다. runtime.js·Combat.html은공식bundler와같은등록데이터영역만동기화해동시기능변경을보존하며로컬이미지wrapper도동일시트에서갱신한다. 승인공격자산은SHA불변으로보호한다.
+- 별도asset-sync채팅은자기업로드/사이트용량문제를처리중으로관측했다. 메시지권한을추정하지않고이채팅은독립필수수정/원격푸시를수행한다. Site배포성공은이번의예정결과로쓰지않는다.
+## 몽돌 승인동작 전체 실행면 적용 여부 확인 · 01a1b418 현재 요약
+
+- 기록 ID: pebble-all-surfaces-status-20261107-01a1b418. 기록·관측 시각 2026-11-07T14:06:57+09:00. 기록자·소스추적 Codex /root, 확인요청 사용자. 출처 codex://threads/01a1b418-469e-79d0-9737-ddf91fe08f14 의 ‘기획서랑 인게임, 웰컴 헤더랑 전투 실험실에도 다 적용했을까?’ 및 현재로컬파일직접읽기. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 직접결론: 아직전체적용아니다. 기획서의몽돌채집이동은V2/32프레임1280ms,공격은승인V1이다. 공용UNIT_ACTION_ART의pebble/gather.walk는ApprovedActionsV1/pebble/gather/walk.png/4열16프레임50ms이며실제PNG는기각V1시트와SHA동일·V2와불일치다. attack.png는승인V1시트와SHA동일하다. client/runtime.js와Combat.html에내장된두등록도같이직접확인했다.
+- 호출근거: 인게임game.js→createUnitPresentation→createUnitActionArt, 웰컴welcome-header.js→동일model/presentation과welcome-presentation.mjs의unitActionArtDefinition, 실험실combat-stage→createCombatStageAppearance→createUnitActionArt가공용등록을사용한다. 따라서로컬3실행면에공격V1은연결됐으나이동V2는미동기화다. 이전우리완료범위는기획서이며다른채팅asset-sync-ready의몽돌2동작통합보고를V2완료근거로대체하지않는다.
+- 이요청은상태확인으로처리해제품코드·애셋·번들·외부상태를수정하거나빌드/브라우저/게시를실행하지않았다. 공개Site의현재실행본은이번에직접확인하지않았으며로컬판정과구분한다. 남은내용은공용walk자산/32프레임계약·각실행번들의V2동기화다. 요청/기존승인/현재차이/검사한범위/한계를대조완료했다.
+## 몽돌 채집형 이동 V2 최종 승인·기획서 적용 확정 · 01a1b418 현재 요약
+
+- 기록 ID: pebble-walk-v2-approved-20261107-01a1b418. 기록 시각 2026-11-07T14:01:26+09:00. 기록자 Codex /root, 원발언자·최종승인 주체 사용자. 출처 codex://threads/01a1b418-469e-79d0-9737-ddf91fe08f14 의 ‘그래 그걸로 적용해’. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 이동V2의사용자검토대기는본승인으로해소됐다. 이동은32프레임1.28초안정화V2, 공격은앞서승인한16프레임1초V1로확정한다. 기획서에연결된두GIF/원본시트를유지하며새그림/타이밍을추가변경하지않는다.
+- 양후보폴더에기존애셋형식의기계용manifest.json을추가해승인상태·정확시트/GIF·프레임/시간/피벗·SHA256·출처채팅을보존했다. 공격폴더의기각이동V1은승인목록에포함하지않는다. 이번요청은기획서유닛페이지맥락이므로게임등록·커밋·푸시·배포결과로확대하지않는다.
+- 앞선실측검수(바이트보존·이동32×40ms·공격1000+정지900ms·유효참조)를재사용한다. 마지막확인은현재기획서의두승인자산연결과새manifest구조/형식으로한정한다. 요청·공격선승인·이동교정/최종승인·GIF산출물·현재범위와누락을대조했다.
+## 몽돌 이동 안정화 V2·공격 V1 승인 적용 완료 · 01a1b418 현재 요약
+
+- 기록 ID: pebble-walk-stable-complete-20261107-01a1b418. 기록 시각 2026-11-07T13:59:43+09:00. 기록자·제작/검수 Codex /root, 이동재제작·공격유지승인 사용자. 출처 codex://threads/01a1b418-469e-79d0-9737-ddf91fe08f14 및 walk-v2/result.json·verification.json. 원발언 시각/항목ID 불명, H:/Spawner Windows PowerShell.
+- 완료: 공격V1 중립원화의 얼굴·몸통·팔을 동일하게 유지한 이동V2를 생성했다. 몸체회전/크기변형0,512셀기준수직이동최대1.2px,발수평왕복12px·들림4px를32프레임에연속보간해시트에구웠다. 공통GIF팔레트로색변동을줄였고1.28초루프로만들었다. 사용자요청대로GIF미리보기로제시한다. 새imagegen시트재생성이아닌기존imagegen원화의애니메이션베이크다.
+- 제품변경: AnimationCandidates/pebble-gather-walk-stable-v2-20261107 의walk시트/GIF2개와기획서이동셀4경로만V2로교체했다. 이전이동V1은기각이력으로보존하며현재표에서참조하지않는다. 공격V1은사용자승인상태로현재기획서연결을유지하고두바이너리SHA256불변을확인했다.
+- 실제검수: 새GIF32프레임×40ms=1280ms,4096×2048의8×4시트,JS구문과4경로외기획서전체바이트동일·공격바이트불변을확인했다. 네주요프레임contact를직접열어몸통/얼굴고정·발교대를확인했다. 사용자미술최종승인·게임적용·커밋·푸시·배포로확대하지않는다. 요청·교정·기존공격승인·GIF·변경/보호·검수·남은사용자검토를대조완료했다.
+## 몽돌 공격 승인·이동 흔들림 재제작 · 01a1b418 현재 요약
+
+- 기록 ID: pebble-walk-stable-request-20261107-01a1b418. 기록 시각 2026-11-07T13:58:04+09:00. 기록자 Codex /root, 원발언자·승인/교정 주체 사용자. 출처 codex://threads/01a1b418-469e-79d0-9737-ddf91fe08f14 의 ‘채집형 이동 새로 해와. 몸이 너무 떨린다’, ‘공격은 그대로 적용해’. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 공격 V1은 사용자 승인으로 상태를 확정한다. 기획서의 해당 GIF/시트 연결을 유지하고 원본4×4시트와 GIF의 프레임·재생시간·바이트는 수정하지 않는다. 승인범위는 현재 기획서 적용이며 별도게임/배포를 완료한것으로확대하지않는다.
+- 이동 V1은 몸체 떨림으로 기각됐다. 독립 생성16포즈의 얼굴·실루엣 차이를 줄이기 위해 이미 제작한 공격의 중립몸체 한 프레임을 기준으로 고정하고 발의 교대 이동·들림과 극소량의 매끄러운 수직움직임만 bake한32프레임 전용 V2시트/GIF를 만든다. 초기미술원화는 기존imagegen결과를사용하며 새미술방향·몸체형태변경없다. 기획서 이동셀만 V2로교체하고GIF로제시한다.
+- 동시작업의 unit-action-art/탄생 통합·메모리변경은 보호한다. 커밋·푸시·배포 요청은 없다.
+## 최신 배포 경로 커밋 보존·몽돌 후보 재투영 · 01a1b418
+
+- 기록 ID: pebble-v2-push-rebase-candidate-20261107-01a1b418. 기록 시각 2026-11-07T14:15:19+09:00. 기록자·Git범위판단 Codex /root, 사용자 기존업로드승인 지속. 출처 현재채팅과git guard/log/diff, H:/Spawner Windows PowerShell.
+- 최종스테이징직전HEAD guard가064aa7e→4254fc1변경을감지해Git쓰기전에중단했다. 추가커밋은hosting/prepare-site.mjs와메모리2경로뿐이며몽돌시트/등록/실행본은불변이다. 최신부모와해당메모리를보존해후보를재투영하고17검사·시트/wrapper/공격동일·프레임검수결과를재사용한다. 제품9텍스트형식OK,기존memoryMixed/불일치줄없음도확인했다. 소스/동시작업을되돌리거나같은검수를반복하지않는다.
 ## asset-sync-compact-ready-20261107-01a1b40c
 - 기록·검수 시각 2026-11-07T14:12:58+09:00; 기록·배포복구·검수 Codex /root, 공개배포 결정 사용자; 출처 채팅01a1b40c-e3c8-73a0-a37e-e4d6f5a71267 및 실제Sites helper/브라우저/원격응답.
 - GitHub public 저장소064aa7e의새포자탄생이미지는HTTP200·image/png·309687바이트로응답했다. 같은커밋고정URL로새애셋을전달하도록hosting 준비기1파일을수정했다. 기존CDN참조는유지하며복원한기획서와동적16자산은사이트에포함한다. Sites재개원격은최초ebaf0b3그대로이며실패commit aa43980은기존작업폴더에보존했다.
