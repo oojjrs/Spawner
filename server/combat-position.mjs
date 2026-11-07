@@ -17,9 +17,12 @@ export function combatPositionRadius(agent) {
 export function initializeCombatPosition(agent, units, time) {
   if (!agent.combat || Number.isFinite(agent.combat.position?.x) && Number.isFinite(agent.combat.position?.y)) return;
   const role = combatPositionRole(agent), side = agent.combat.side;
-  const same = units.filter(other => other !== agent && other.combat?.side === side && combatPositionRole(other) === role && other.combat.position);
+  const allies = units.filter(other => other === agent || other.health > 0 && (other.combat ?
+    other.combat.id === agent.combat.id && other.combat.side === side : agent.ownerId ?
+      other.ownerId === agent.ownerId : !other.ownerId && agent.species && other.species === agent.species));
+  const same = allies.filter(other => other !== agent && combatPositionRole(other) === role && other.combat?.position);
   const slot = same.length, lane = slot ? Math.ceil(slot / 2) * (slot % 2 ? -1 : 1) : 0;
-  const radius = units.reduce((value, other) => Math.max(value, combatPositionRadius(other)), .35);
+  const radius = allies.reduce((value, other) => Math.max(value, combatPositionRadius(other)), .35);
   const depth = role === "front" ? 0 : role === "back" ? 2 : 1;
   const x = (side ? 1 : -1) * (radius + .8 + (depth + Math.floor(slot / 7)) * (radius * 2 + .3) + Math.max(0, (agent.combat.initialDistance || 1) - 1) / 2);
   const y = lane * (radius * 2 + .2);

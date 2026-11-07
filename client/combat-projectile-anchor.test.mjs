@@ -110,3 +110,22 @@ test("authoritative cancellation removes a frozen flight without creating an imp
   assert.equal(draw(1.2, [launch, { ...launch, id: "cancel", kind: "projectile-cancel", at: 1.2 }]).length, 0);
   assert.equal(draw(2.1).length, 0);
 });
+
+test("an arena launch follows camera projection changes while ignoring shooter recoil", () => {
+  const { agents, positions, view, launch, draw } = scene("spore");
+  launch.arenaFrom = { x: -3, y: .8 };
+  view.project = point => ({ x: 700 + point.x * 100, y: 180 + point.y * 50 });
+  const sprite = unitRangedProjectile(agents[0]);
+  const first = head(draw(1)[0]);
+  close(first.x, 400 + (sprite.outletX - 256) * sprite.sourceScale * 2.5, "initial arena outlet x");
+  close(first.y, 220 + (sprite.outletY - 448) * sprite.sourceScale * 2.5, "initial arena outlet y");
+  Object.assign(positions.get("source"), { x: 900, y: 450 });
+  Object.assign(positions.get("target"), { x: 900, y: 330 });
+  view.project = point => ({ x: 600 + point.x * 60, y: 200 + point.y * 30 });
+  const command = draw(1.5, undefined, undefined, 300)[0], actual = head(command);
+  const originX = 420 + (sprite.outletX - 256) * sprite.sourceScale * 3;
+  const originY = 224 + (sprite.outletY - 448) * sprite.sourceScale * 3;
+  close(actual.x, (originX + 900) / 2, "current camera reprojects the original arena x");
+  close(actual.y, (originY + 260) / 2, "current camera reprojects the original arena y");
+  assert.deepEqual(draw(1.5, undefined, undefined, 300)[0], command);
+});

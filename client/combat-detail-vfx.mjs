@@ -103,7 +103,12 @@ export function createDetailCombatVfx() {
     for (const [id, anchor] of anchors) if (time < anchor.at || time - anchor.at >= .85) anchors.delete(id);
     for (const agent of agents) {
       const id = String(agent.id), point = positions.get(id);
-      if (point) anchors.set(id, { at: time, snapshotAt, point: { ...point }, width, height, clip: projectileClip(agent), bodyCanvas: creatureRangedBodyCanvas(agent) });
+      if (point) {
+        const arenaPoint = view.unproject && Number.isFinite(view.cell) && view.cell > 0 ?
+          { ...view.unproject(point), width: point.width / view.cell, height: point.height / view.cell } : null;
+        anchors.set(id, { at: time, snapshotAt, point: { ...point }, arenaPoint, width, height,
+          clip: projectileClip(agent), bodyCanvas: creatureRangedBodyCanvas(agent) });
+      }
     }
   }
   function recipientPoint(id, positions, time, view, retainDeath = true) {
@@ -115,6 +120,8 @@ export function createDetailCombatVfx() {
     // A living snapshot may still be painted after its eventual death time.
     // Compare the authoritative observation, not that extrapolated paint clock.
     if (!retainDeath || !anchor || deathAt === undefined || time < deathAt || anchor.snapshotAt > deathAt) return null;
+    if (anchor.arenaPoint && view.project && Number.isFinite(view.cell) && view.cell > 0)
+      return { ...view.project(anchor.arenaPoint), width: anchor.arenaPoint.width * view.cell, height: anchor.arenaPoint.height * view.cell };
     const width = view.width || 1, height = view.height || 1;
     return { x: anchor.point.x * width / anchor.width, y: anchor.point.y * height / anchor.height,
       width: anchor.point.width * width / anchor.width, height: anchor.point.height * height / anchor.height };
@@ -142,7 +149,8 @@ export function createDetailCombatVfx() {
         // The server supplies timing, not modal coordinates. Keep the first
         // visible outlet, even for a late snapshot; never invent an unseen pose.
         // Later recoil, recovery and other shots must not drag a fired shot.
-        launch = { clip, bodyCanvas: creatureRangedBodyCanvas(source), x: from.x / width, y: from.y / height,
+        launch = { clip, bodyCanvas: creatureRangedBodyCanvas(source), arenaFrom: shot.arenaFrom ? { ...shot.arenaFrom } : null,
+          x: from.x / width, y: from.y / height,
           // Only approved ranged bodies have a measured outlet. Other forms
           // use their displayed body centre without inventing a muzzle pose.
           offsetX: neutral ? neutral.x : sprite ? facing * (sprite.outletX - 256) * sprite.sourceScale / 100 : 0,
@@ -150,8 +158,9 @@ export function createDetailCombatVfx() {
           size: Math.max(from.height, from.width) * .85 / cell };
         flightAnchors.set(shot.id, launch);
       }
-      const startX = launch.x * width + launch.offsetX * cell;
-      const startY = launch.y * height + launch.offsetY * cell;
+      const origin = launch.arenaFrom && view.project ? view.project(launch.arenaFrom) : { x: launch.x * width, y: launch.y * height };
+      const startX = origin.x + launch.offsetX * cell;
+      const startY = origin.y + launch.offsetY * cell;
       const endY = target.y - target.height * .5, angle = Math.atan2(endY - startY, target.x - startX);
       const size = Math.min(444, launch.size * cell);
       if (launch.clip.flightAnchor) {

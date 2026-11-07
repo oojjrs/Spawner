@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { UNIT_DISPLAY_SIZES, unitDisplaySize, combatViewCell, combatViewLayout } from "./unit-size.mjs";
+import { createSimulationTrial } from "./combat-simulation.mjs";
 
 test("실제 DNA와 동일 조각 수 스탯은 모든 체급에서 같은 성장을 적용한다", () => {
   for (const [species, size] of Object.entries(UNIT_DISPLAY_SIZES)) for (const count of [0, 5, 20]) {
@@ -38,7 +39,7 @@ test("가장 큰 표시 유닛이 들어오면 줌아웃하고 나가면 기존 
   assert.ok(close > far);
   assert.equal(combatViewCell(1200, 560, small), close);
   assert.equal(combatViewCell(1200, 560, [...small, ...small]), close);
-  assert.ok(Math.abs(far * unitDisplaySize(large) - 280) < 1e-9);
+  assert.ok(far * unitDisplaySize(large) >= 112 && far * unitDisplaySize(large) < 150);
   const ratios = small.map(unit => far * unitDisplaySize(unit) / (close * unitDisplaySize(unit)));
   assert.ok(Math.abs(ratios[0] - ratios[1]) < 1e-9);
   for (const mode of ["idle", "fight", "hurt", "death"]) assert.equal(
@@ -53,7 +54,7 @@ test("실험실과 인게임은 실제 표시 편성과 높이를 공용 카메�
   const calls = [], camera = (...args) => { calls.push(args); return { cell: 137, positions: new Map() }; };
   const visible = { id: "visible", tribe: "bean", combat: { side: 0 } }, support = { id: "support", species: "white-paw" }, corpse = { id: "corpse", species: "walking-forest" };
   const scope = createContext({ combatViewLayout: camera, Spawner: { combatViewLayout: camera }, width: 1200, height: 560,
-    cameraUnits: [visible, support], arenaUnits: [visible], formationMembers: new Map([[corpse.id, { side: 1 }]]), deathCommands: [{ agentId: corpse.id, corpse }] });
+    cameraUnits: [visible], arenaUnits: [visible], formationMembers: new Map([[corpse.id, { side: 1 }]]), deathCommands: [{ agentId: corpse.id, corpse }] });
   runInContext(stage.match(/^    viewLayout = [^\r\n]+/m)[0], scope);
   runInContext(stage.match(/function formationScale\([^]*?\n  }/)[0], scope);
   assert.equal(scope.formationScale(1200, 560) * 100, 137);
@@ -63,8 +64,73 @@ test("실험실과 인게임은 실제 표시 편성과 높이를 공용 카메�
   runInContext(panel.match(/^      const cell = [^\r\n]+/m)[0] + "\nglobalThis.observedCell = cell;", scope);
   assert.equal(scope.observedCell, 137);
   assert.deepEqual(calls.map(([width, height, units]) => [width, height, Array.from(units, unit => unit.id)]),
-    [[1200, 560, ["visible", "support"]], [1200, 560, ["visible", "corpse"]]]);
-  assert.match(stage, /cameraUnits = \[\.\.\.trial\.agents, \.\.\.\(trial\.supportAgents \|\| \[\]\)\]\.map\(stageAgent\)/);
+    [[1200, 560, ["visible"]], [1200, 560, ["visible", "corpse"]]]);
+  assert.match(stage, /cameraUnits = trial\.agents\.map\(stageAgent\)/);
+});
+
+test("현재 전장 편성은 유닛 추가·삭제·체급 교체마다 배율과 중심을 다시 맞춘다", () => {
+  const pair = [0, 1].map(side => ({ id: String(side), tribe: "bean",
+    combat: { side, position: { x: side ? 1.15 : -1.15, y: 0, homeX: side ? 1.15 : -1.15, homeY: 0 } } }));
+  const close = combatViewLayout(1200, 560, pair);
+  assert.ok(Math.abs(close.cell * unitDisplaySize(pair[0]) - 112) < 1e-9);
+  const added = { id: "added", species: "white-paw", combat: { side: 1, position: { x: 5, y: 3 } } };
+  const far = combatViewLayout(1200, 560, [...pair, added]);
+  assert.ok(far.cell < close.cell);
+  assert.ok(far.positions.get("0").x > close.positions.get("0").x);
+  assert.equal(far.project({ x: 0, y: 0 }).x, 600);
+  const restored = combatViewLayout(1200, 560, pair);
+  assert.equal(restored.cell, close.cell); assert.deepEqual(restored.positions, close.positions);
+  const enlarged = combatViewLayout(1200, 560, pair.map(unit => unit.id === "1" ?
+    { ...unit, species: "white-paw", stats: { pieceCount: 100 } } : unit));
+  assert.ok(enlarged.cell < close.cell);
+});
+
+test("실제 꽃꼬리새·흰발 시작 편성은 큰 유닛이 나타나면 카메라가 더 멀어진다", () => {
+  for (const [width, height] of [[1130, 527], [494, 230]]) {
+    const layout = (left, right) => combatViewLayout(width, height,
+      createSimulationTrial({ left: left.map(key => ({ key })), right: right.map(key => ({ key })), random: false }).agents);
+    const flowers = layout(["flower-tail-bird"], ["flower-tail-bird"]);
+    const mixed = layout(["flower-tail-bird"], ["white-paw"]), large = layout(["white-paw"], ["white-paw"]);
+    assert.ok(mixed.cell < flowers.cell); assert.ok(large.cell < flowers.cell);
+    assert.ok(large.cell < mixed.cell);
+    assert.ok(Math.abs(large.cell * unitDisplaySize({ species: "white-paw" }) - height * .2) < 1e-9);
+    const team = Array(5).fill("flower-tail-bird"), before = layout(team, team);
+    const added = layout([...team, "white-paw"], team), changed = layout(["white-paw", ...team.slice(1)], team);
+    assert.ok(added.cell < before.cell); assert.ok(changed.cell < before.cell);
+    const removed = layout(team, team);
+    assert.equal(removed.cell, before.cell); assert.deepEqual(removed.positions, before.positions);
+  }
+});
+
+test("공격 자세와 수직 평행 이동은 편성 카메라 배율을 바꾸지 않는다", () => {
+  const units = [0, 1].map(side => ({ id: String(side), species: "cotton-sheep",
+    combat: { side, position: { x: side ? 1 : -1, y: side ? .5 : -.5 } } }));
+  const before = combatViewLayout(1200, 560, units);
+  const after = combatViewLayout(1200, 560, units.map(unit => ({ ...unit, mode: "attack", hurtStartedAt: 2,
+    attack: { startedAt: 1 }, combat: { ...unit.combat, position: { ...unit.combat.position } } })));
+  assert.equal(after.cell, before.cell); assert.deepEqual(after.positions, before.positions);
+  const translated = combatViewLayout(1200, 560, units.map(unit => ({ ...unit, combat: { ...unit.combat,
+    position: { x: unit.combat.position.x, y: unit.combat.position.y - 14 } } })));
+  assert.ok(Math.abs(translated.cell - before.cell) < 1e-9);
+  for (const unit of units) {
+    const first = before.positions.get(unit.id), second = translated.positions.get(unit.id);
+    assert.ok(Math.abs(first.x - second.x) < 1e-9); assert.ok(Math.abs(first.y - second.y) < 1e-9);
+    assert.deepEqual(before.project(unit.combat.position), { x: first.x, y: first.y });
+  }
+});
+
+test("현재 위치가 넓게 퍼진 혼합 체급도 큰 화면과 좁은 화면의 여백 안에 들어간다", () => {
+  for (const [width, height] of [[1200, 560], [360, 168]]) for (const count of [1, 5, 20]) {
+    const units = [0, 1].flatMap(side => Array.from({ length: count }, (_, slot) => ({ id: side + ":" + slot,
+      species: ["flower-tail-bird", "white-paw", "walking-forest"][slot % 3], stats: { pieceCount: slot * 5 },
+      combat: { side, position: { x: (side ? 1 : -1) * (1 + slot % 3), y: slot - count / 2 } } })));
+    const layout = combatViewLayout(width, height, units);
+    assert.equal(layout.positions.size, units.length);
+    for (const { bounds } of layout.positions.values()) {
+      assert.ok(bounds.left >= width * .06 - 1e-9 && bounds.right <= width * .94 + 1e-9);
+      assert.ok(bounds.top >= height * .19 - 1e-9 && bounds.bottom <= height * .91 + 1e-9);
+    }
+  }
 });
 
 test("공개 전투 번들과 인게임 모델의 동적 카메라가 원본과 같다", () => {
@@ -182,5 +248,70 @@ test("기본 새싹콩 크기를 유지하고 최소·최대와 DNA 성장 편�
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     const plain = unitDisplaySize({ tribe }), grown = unitDisplaySize({ tribe, stats: { pieceCount: 100 } });
     assert.ok(Math.abs(grown - plain - UNIT_DISPLAY_SIZES[tribe] * .5) < 1e-12);
+  }
+});
+
+test("상대 체급 교체는 전체 편성 줌을 갱신하고 상대 후열 이동은 내 전열을 끌고 가지 않는다", () => {
+  for (const [width, height] of [[1130, 527], [494, 230]]) for (const side of [0, 1]) {
+    const layout = (own, opponent) => {
+      const trial = createSimulationTrial({ left: { key: side ? opponent : own }, right: { key: side ? own : opponent }, random: false });
+      const view = combatViewLayout(width, height, trial.agents);
+      return { view, own: trial.agents.find(unit => unit.side === side), opponent: trial.agents.find(unit => unit.side !== side) };
+    };
+    const small = layout("white-paw", "flower-tail-bird"), medium = layout("white-paw", "lantern-keeper"), large = layout("white-paw", "white-paw");
+    assert.ok(small.view.cell > medium.view.cell && medium.view.cell > large.view.cell);
+    const restored = layout("white-paw", "flower-tail-bird");
+    assert.equal(restored.view.cell, small.view.cell); assert.deepEqual(restored.view.positions, small.view.positions);
+    const melee = layout("rolling-acorn", "rolling-acorn"), ranged = layout("rolling-acorn", "flower-tail-bird");
+    assert.equal(melee.own.combat.position.role, "front"); assert.equal(ranged.own.combat.position.role, "front");
+    assert.equal(melee.own.combat.position.x, ranged.own.combat.position.x);
+    assert.ok(Math.abs(ranged.view.positions.get(String(ranged.own.id)).x - width / 2) <
+      Math.abs(ranged.view.positions.get(String(ranged.opponent.id)).x - width / 2));
+    for (const { view } of [small, medium, large, melee, ranged]) {
+      assert.equal(view.project({ x: 0, y: 0 }).x, width / 2);
+      for (const { bounds } of view.positions.values()) {
+        assert.ok(bounds.left >= width * .06 - 1e-9 && bounds.right <= width * .94 + 1e-9);
+        assert.ok(bounds.top >= height * .19 - 1e-9 && bounds.bottom <= height * .91 + 1e-9);
+      }
+    }
+  }
+});
+
+test("같은 종 대결은 꽃꼬리새와 흰발의 실제 본체 최대변을 같은 화면 크기로 맞춘다", () => {
+  for (const [width, height] of [[1130, 527], [494, 230]]) {
+    const pixels = [];
+    for (const key of ["flower-tail-bird", "white-paw"]) {
+      const trial = createSimulationTrial({ left: { key }, right: { key }, random: false });
+      const view = combatViewLayout(width, height, trial.agents);
+      pixels.push(view.cell * unitDisplaySize(trial.agents[0]));
+      for (const unit of trial.agents) {
+        const point = unit.combat.position, screen = view.project(point);
+        assert.ok(screen.x > 0 && screen.x < width);
+        const restored = view.unproject(screen);
+        assert.ok(Math.abs(restored.x - point.x) < 1e-9 && Math.abs(restored.y - point.y) < 1e-9);
+      }
+    }
+    assert.ok(Math.abs(pixels[0] - pixels[1]) < 1e-9);
+    assert.ok(Math.abs(pixels[0] - height * .2) < 1e-9);
+  }
+});
+
+test("빈 공간 축약은 접근 이동을 상쇄하지 않고 현재 투영의 역변환을 보존한다", () => {
+  const trial = createSimulationTrial({ left: { key: "flower-tail-bird" }, right: { key: "flower-tail-bird" }, random: false });
+  const before = combatViewLayout(1130, 527, trial.agents);
+  const initial = trial.agents.map(unit => ({ ...unit.combat.position }));
+  trial.advance(.2);
+  const after = combatViewLayout(1130, 527, trial.agents);
+  assert.equal(after.cell, before.cell);
+  for (const [index, unit] of trial.agents.entries()) {
+    assert.ok(Math.abs(unit.combat.position.x) < Math.abs(initial[index].x));
+    const first = before.positions.get(String(unit.id)), second = after.positions.get(String(unit.id));
+    assert.ok(Math.abs(second.x - 565) < Math.abs(first.x - 565));
+    assert.ok(Math.abs(second.x - first.x) > 1);
+    for (const offset of [-54, -20, 0, 20, 54]) {
+      const screen = { x: second.x + offset, y: second.y + offset / 2 };
+      const restored = after.project(after.unproject(screen));
+      assert.ok(Math.abs(restored.x - screen.x) < 1e-8 && Math.abs(restored.y - screen.y) < 1e-8);
+    }
   }
 });

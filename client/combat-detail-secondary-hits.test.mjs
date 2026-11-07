@@ -120,3 +120,22 @@ test("real area-plus-reflection combat renders all actual damage without alterin
     ({ kind, at, amount, sourceId, targetId, sequence }));
   assert.deepEqual(outcomes(snapshot), outcomes(snapshotCombatVfx(control.environment, time)));
 });
+
+test("dead recipient effects reproject their observed arena position and body size after a camera change", () => {
+  const { draw, detail } = scene();
+  const initialView = { ...view, cell: 100, unproject: point => ({ x: (point.x - 100) / 100, y: (point.y - 200) / 50 }) };
+  draw(.9, [], agents, positions, initialView);
+  const changedView = { ...view, cell: 200, project: point => ({ x: 50 + point.x * 80, y: 100 + point.y * 20 }), includeDirectDamage: true };
+  const event = damage("area", "other"), death = { id: "death", kind: "death", targetId: "other", at: 1, amount: 0 };
+  const commands = draw(1.1, [event, death], [], new Map(), changedView);
+  assert.equal(commands.length, 1);
+  assert.equal(commands[0].x, 338);
+  assert.equal(commands[0].y, 24);
+  assert.equal(commands[0].size, 270);
+  const labels = detail.vitalCommands([], new Map(), 1.1, changedView);
+  assert.equal(labels.length, 1);
+  assert.equal(labels[0].x, 338);
+  assert.equal(labels[0].y, 24);
+  assert.equal(labels[0].bodyHeight, 200);
+  assert.equal(labels[0].targetId, "other");
+});

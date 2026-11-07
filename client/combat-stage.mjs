@@ -422,7 +422,7 @@ export function createCombatStage(canvas) {
     const drawnFlights = new Set(), drawnImpacts = new Set(), flightCommands = new Map();
     if (vfx?.version === 1 && !reducedMotion.matches) {
       const commands = detailVfx.commands(trial.agents.map(stageAgent), new Map(Object.entries(points)), clock,
-        100 * formationScale(width, height), { scope: trial, width, height, project: viewLayout.project });
+        100 * formationScale(width, height), { scope: trial, width, height, project: viewLayout.project, unproject: viewLayout.unproject, cell: viewLayout.cell });
       for (const command of commands) {
         if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         const key = command.kind === "flight" && flightKey(command.sourceId, command.targetId, command.launchedAt, command.arrivesAt);
@@ -460,7 +460,7 @@ export function createCombatStage(canvas) {
       drawDetailDefenseFallback(context, command);
     // Use actual HP changes, including drain (which has no history entry).
     const vitalCommands = detailVfx.vitalCommands(trial.agents.map(stageAgent),
-      new Map(Object.entries(points)), clock, { scope: trial, width, height });
+      new Map(Object.entries(points)), clock, { scope: trial, width, height, project: viewLayout.project, unproject: viewLayout.unproject, cell: viewLayout.cell });
     for (const command of vitalCommands) drawDetailVitalEffect(context, command, { width, height, reducedMotion: reducedMotion.matches, image });
     drawDetailDefenseLabels(context, defenseCommands, { width, height, reducedMotion: reducedMotion.matches, vitals: vitalCommands });
     for (const agent of trial.agents) if (agent.health > 0) {

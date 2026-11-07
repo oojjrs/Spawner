@@ -7727,6 +7727,13 @@
       // this open view's previously observed approved body routes are eligible.
       for (const entry of deathCommands) {
         const command = { ...entry, cell };
+        const member = formationMembers.get(String(entry.agentId)), projected = member?.position && formation.positions.get(String(entry.agentId));
+        if (projected) {
+          const kind = entry.corpse.species || entry.corpse.tribe || "bean", bounds = unitDisplayBounds.get(kind);
+          const growth = entry.scale / (unitDisplayScales.get(kind) || 1);
+          command.point = { x: projected.x, y: projected.y, width: (bounds?.width || .4) * growth * cell,
+            height: (bounds?.height || .4) * growth * cell };
+        }
         const { point } = command;
         context.save(); context.fillStyle = "#13251e3d";
         const shadow = Spawner.detailCreatureDeathShadow?.(command, creatureDeathSheets.get(command.corpse.species), idleMotion.matches);
@@ -7793,6 +7800,9 @@
         }
         drawDodgeBody(x, y);
         deathPresentation?.observe(agent, { ...point, x, y }, { scale: point.scale, facing });
+        if (agent.combat.position) formationMembers.set(String(agent.id), { ...agent.combat,
+          position: { ...agent.combat.position, ...(formation.unproject ? formation.unproject({ x, y }) : {
+            x: agent.combat.position.x + (x - point.x) / cell, y: agent.combat.position.y + (y - point.y) * 2 / cell }) } });
         // Persistent stun reads current status, never a replayed impact event.
         Spawner.drawCombatStun?.(context, agent, { ...point, x, y }, state.simSeconds,
           { width, height, reducedMotion: idleMotion.matches, image: detailVfxImage });
@@ -7817,7 +7827,7 @@
         if (Spawner.detailDefenseImageReady(image, command)) replacedDefenseIds.add(command.eventId);
       }
       const drawnImpacts = new Set();
-      for (const command of detailCombatVfx.commands(arenaUnits, vfxPositions, state.simSeconds, cell, { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds, project: formation.project })) {
+      for (const command of detailCombatVfx.commands(arenaUnits, vfxPositions, state.simSeconds, cell, { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds, project: formation.project, unproject: formation.unproject, cell })) {
         // Replace only the defended event, and only after its new image is ready.
         if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         let image = detailVfxImages.get(command.image);
@@ -7865,7 +7875,7 @@
       for (const command of defenseCommands) if (!Spawner.drawDetailDefenseEffect(context, command, defenseImages.get(command.eventId), { reducedMotion: idleMotion.matches }))
         Spawner.drawDetailDefenseFallback(context, command);
       let vitalCommands = detailCombatVfx.vitalCommands(arenaUnits, vfxPositions, state.simSeconds,
-        { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds, includeDirectDamage: true });
+        { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds, includeDirectDamage: true, project: formation.project, unproject: formation.unproject, cell });
       const labelLayout = Spawner.layoutDetailCombatLabels?.(context,
         { vitals: vitalCommands, defenses: defenseCommands, dodges: dodgeLabels },
         { width, height, reducedMotion: idleMotion.matches, positions: vfxPositions });

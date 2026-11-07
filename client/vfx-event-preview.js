@@ -1534,26 +1534,67 @@ function unitDisplaySize(unit) {
 
 function combatViewCell(width, height, units) {
   const largest = units.reduce((size, unit) => Math.max(size, unitDisplaySize(unit)), 0) || UNIT_DISPLAY_SIZES.bean;
-  return Math.min(width * .24, height * .5) / largest;
+  const average = units.length ? units.reduce((size, unit) => size + unitDisplaySize(unit), 0) / units.length : largest;
+  return Math.min(width * .18, height * .2) / (largest * .75 + average * .25);
+}
+
+function combatViewAxis(spans) {
+  const intervals = [];
+  for (const span of spans.sort((a, b) => a[0] - b[0])) {
+    const last = intervals.at(-1);
+    if (last && span[0] <= last[1]) last[1] = Math.max(last[1], span[1]);
+    else intervals.push([...span]);
+  }
+  const occupied = (from, to) => intervals.reduce((length, span) => length + Math.max(0, Math.min(to, span[1]) - Math.max(from, span[0])), 0);
+  const project = (value, gap) => value * gap + (value >= 0 ? occupied(0, value) : -occupied(value, 0)) * (1 - gap);
+  const unproject = (value, gap) => {
+    for (const span of intervals) {
+      const start = project(span[0], gap), end = start + span[1] - span[0];
+      if (value < start) return gap ? span[0] + (value - start) / gap : span[0];
+      if (value <= end) return span[0] + value - start;
+    }
+    const end = intervals.at(-1)[1];
+    return end + (value - project(end, gap)) / (gap || 1);
+  };
+  return { low: intervals[0][0], high: intervals.at(-1)[1], occupied, project, unproject };
 }
 
 function combatViewLayout(width, height, units) {
-  const located = units.map(unit => ({ unit, point: unit.combat?.position || unit.combatPosition })).filter(entry => entry.point);
+  const located = units.map(unit => ({ unit, point: unit.combat?.position || unit.combatPosition }))
+    .filter(entry => Number.isFinite(entry.point?.x) && Number.isFinite(entry.point?.y));
   if (located.length) {
-    const largest = units.reduce((size, unit) => Math.max(size, unitDisplaySize(unit)), .4);
-    const xs = located.flatMap(({ point }) => [point.x, point.homeX ?? point.x]);
-    const ys = located.flatMap(({ point }) => [point.y, point.homeY ?? point.y]);
-    const lowX = Math.min(-3.8, ...xs), highX = Math.max(3.8, ...xs), lowY = Math.min(-1, ...ys), highY = Math.max(1, ...ys);
-    const cell = Math.min(combatViewCell(width, height, units), width * .88 / (highX - lowX + largest * 1.3),
-      height * .72 / ((highY - lowY) * .5 + largest * 1.3));
-    const project = point => ({ x: width * .5 + (point.x - (lowX + highX) / 2) * cell,
-      y: height * .66 + (point.y - (lowY + highY) / 2) * cell * .5 });
+    const axes = home => {
+      const bodies = located.map(({ unit, point }) => {
+        const size = unitDisplaySize(unit);
+        const x = home && Number.isFinite(point.homeX) ? point.homeX : point.x;
+        const y = (home && Number.isFinite(point.homeY) ? point.homeY : point.y) * .5;
+        return { left: x - size * .65, right: x + size * .65, top: y - size * 1.2, bottom: y + size * .18 };
+      });
+      return { x: combatViewAxis(bodies.map(body => [body.left, body.right])),
+        y: combatViewAxis(bodies.map(body => [body.top, body.bottom])) };
+    };
+    const home = axes(true), current = axes(false);
+    const leftBody = home.x.occupied(home.x.low, 0), rightBody = home.x.occupied(0, home.x.high);
+    const verticalBody = home.y.occupied(home.y.low, home.y.high);
+    let cell = Math.min(combatViewCell(width, height, located.map(entry => entry.unit)),
+      width * .44 / leftBody, width * .44 / rightBody, height * .72 / verticalBody);
+    const gap = (span, body, available) => span > body ? Math.max(0, Math.min(1, (available - body) / (span - body))) : 1;
+    const gapX = Math.min(gap(Math.max(0, -home.x.low), leftBody, width * .44 / cell),
+      gap(Math.max(0, home.x.high), rightBody, width * .44 / cell));
+    const gapY = gap(home.y.high - home.y.low, verticalBody, height * .72 / cell);
+    const extentX = Math.max(Math.abs(current.x.project(current.x.low, gapX)), Math.abs(current.x.project(current.x.high, gapX)));
+    const lowY = current.y.project(current.y.low, gapY), highY = current.y.project(current.y.high, gapY);
+    cell = Math.min(cell, width * .44 / extentX, height * .72 / (highY - lowY));
+    const project = point => ({ x: width * .5 + current.x.project(point.x, gapX) * cell,
+      y: height * .55 + (current.y.project(point.y * .5, gapY) - (lowY + highY) / 2) * cell });
+    const unproject = point => ({ x: current.x.unproject((point.x - width * .5) / cell, gapX),
+      y: current.y.unproject((point.y - height * .55) / cell + (lowY + highY) / 2, gapY) * 2 });
     const positions = new Map(located.map(({ unit, point }) => {
       const { x, y } = project(point), size = unitDisplaySize(unit);
       return [String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
         top: y - size * cell * 1.2, bottom: y + size * cell * .18 } }];
     }));
-    return { cell, positions, project };
+    return { cell, positions, project, unproject };
   }
   const teams = [0, 1].map(side => units.filter(unit => (unit.combat?.side ?? unit.side) === side));
   const count = Math.max(...teams.map(team => team.length));
