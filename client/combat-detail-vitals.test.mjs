@@ -164,7 +164,7 @@ test("the real detail modal respects reduced motion for recovery rings and HP la
 
 function serverScene() {
   const dna = ids => ATTRIBUTE_DNA.stats(ids.map(id => { const gene = ATTRIBUTE_DNA.lookup.get(id);
-    return { gene: id, grade: gene.grade, shape: [...gene.steps], rotation: 0 }; }));
+    return { gene: id, grade: gene.grade, q: 0, r: 0, rotation: 0 }; }));
   const unit = (id, ownerId, stats) => ({ id, ownerId, tribe: "bean", x: 100, y: 100, health: id === "target" ? 100 : 50,
     attributes: {}, combatDisposition: ownerId === "left" ? "aggressive" : "passive",
     stats: { health: 100, speed: 1, vision: 3, dna: stats }, moveStartedAt: 0, moveDuration: 0 });

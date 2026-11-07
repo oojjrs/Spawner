@@ -460,7 +460,7 @@ test("등불지기 같은 셀 원거리 공격의 시전자·목표가 후퇴해
 test("soil-boar: 수동 DNA 원거리 기관은 자연중립 근딜 역할보다 우선한다", () => {
   const f = fixture("soil-boar", 2, "aggressive");
   const gene = ATTRIBUTE_DNA.lookup.get("secretion");
-  const dna = ATTRIBUTE_DNA.stats([{ gene: gene.id, grade: gene.grade, shape: [...gene.steps], rotation: 0 }]);
+  const dna = ATTRIBUTE_DNA.stats([{ gene: gene.id, grade: gene.grade, q: 0, r: 0, rotation: 0 }]);
   assert.equal(creatureAttackRole(f.source.species).role, "melee");
   assert.equal(creatureAttackMode(f.source, 2), null);
   near(combatProfile(f.source).attackInterval, 1.25);

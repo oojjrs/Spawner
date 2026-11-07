@@ -9,17 +9,9 @@ import { createCombat } from "./combat.mjs";
 import { unitDisplaySize } from "../client/unit-size.mjs";
 
 function design(ids, level) {
-  let pieces=[];
-  for (const id of ids) {
-    const gene=ATTRIBUTE_DNA.lookup.get(id);
-    let candidate=null;
-    for(let rotation=0;rotation<6;rotation++) {
-      const next=pieces.concat({gene:id,grade:gene.grade,rotation,shape:[...gene.steps]});
-      if(ATTRIBUTE_DNA.trace(next,level).valid&&!ATTRIBUTE_DNA.trace(next,level).closed){candidate=next;break;}
-    }
-    assert.ok(candidate,id);pieces=candidate;
-  }
-  return {version:3,pieces,level,budget:10000};
+  const pieces=ATTRIBUTE_DNA.pack(ids.map(id=>{const gene=ATTRIBUTE_DNA.lookup.get(id);return {gene:id,grade:gene.grade,rotation:0};}),level);
+  assert.ok(pieces);
+  return {version:4,pieces,level,budget:10000};
 }
 
 function fixture(level, tribe) {
@@ -155,21 +147,15 @@ test("DNA 연타는 같은 공격 주기 안에 후속 타격하고 범위 공�
   const lethal=combatFixture({...base,dna:{...base.dna,power:1000,meleePower:1000,area:1,areaPower:50}},target);lethal.tick(0);lethal.tick(lethal.a.attack.hitAt);
   assert.equal(lethal.b.health,0);assert.ok(lethal.c.health<100);
 });
-test("DNA 원이 중앙에 겹친 뒤 빈 선으로 계속 배치하고 겹치는 선은 거부한다",()=>{
-  const piece=(gene,rotation)=>{const entry=ATTRIBUTE_DNA.lookup.get(gene);return {gene,rotation,grade:entry.grade,shape:[...entry.steps]};};
-  const loop=[piece("movement",0),piece("movement",2),piece("movement",4)];
-  assert.equal(ATTRIBUTE_DNA.trace(loop,1).closed,true);
-  const pieces=loop.concat(piece("capacity",5)),dna={version:3,pieces,level:1,budget:10000};
-  assert.equal(ATTRIBUTE_DNA.trace(pieces,1).valid,true);
-  assert.equal(ATTRIBUTE_DNA.trace(pieces,1).closed,false);
+test("DNA 조각은 연결 없이 빈칸에 놓고 중간 조각을 지워도 다른 좌표를 유지한다",()=>{
+  const pieces=[{gene:"capacity",grade:1,rotation:0,q:-2,r:2},{gene:"health",grade:1,rotation:0,q:0,r:0},{gene:"capacity",grade:1,rotation:0,q:0,r:-2}];
+  const dna={version:4,pieces,level:1,budget:10000};
   assert.ok(validateDna(dna,1,10000));
-  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("movement",0)),1).reason,"collision");
-  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("capacity",1)),1).reason,"collision");
-  assert.equal(ATTRIBUTE_DNA.trace(loop.concat(piece("movement",5)),1).reason,"collision");
-  const overlap=[{gene:"gather",grade:1,rotation:0,shape:[0,3]}];
-  assert.equal(ATTRIBUTE_DNA.trace(overlap,1).reason,"collision");
-  const {game}=fixture(1);
-  const {templateId}=game.command({type:"design",templateId:null,name:"겹친 원",dna,birth:false});
+  assert.ok(validateDna({...dna,pieces:[...pieces].reverse()},1,10000));
+  assert.ok(validateDna({...dna,pieces:pieces.filter((_,index)=>index!==1)},1,10000));
+  assert.equal(ATTRIBUTE_DNA.trace(pieces.concat(pieces[0]),1).reason,"collision");
+  assert.equal(ATTRIBUTE_DNA.trace([{...pieces[0],q:-3}],1).reason,"boundary");
+  const {game}=fixture(1),{templateId}=game.command({type:"design",templateId:null,name:"독립 조각",dna,birth:false});
   const {agentId}=game.command({type:"birth",templateId});
   assert.deepEqual(game.agents.find(agent=>agent.id===agentId).dna.pieces,pieces);
 });

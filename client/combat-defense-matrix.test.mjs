@@ -26,7 +26,7 @@ const labelFor = { block: '방어', parry: '패링', miss: '회피' };
 const tribes = ['bean', 'spore', 'pebble', 'spring'];
 const dna = genes => ATTRIBUTE_DNA.stats(genes.map(id => {
   const gene = ATTRIBUTE_DNA.lookup.get(id);
-  return { gene: id, grade: gene.grade, shape: [...gene.steps], rotation: 0 };
+  return { gene: id, grade: gene.grade, q: 0, r: 0, rotation: 0 };
 }));
 
 // These are actual combat outcomes, not authored outcome packets. Each defender

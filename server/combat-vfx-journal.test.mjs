@@ -8,7 +8,7 @@ import { createStateEncoder, createStateDecoder } from "../client/state-delta.mj
 
 const stats = ids => ATTRIBUTE_DNA.stats(ids.map(id => {
   const gene = ATTRIBUTE_DNA.lookup.get(id);
-  return { gene: id, grade: gene.grade, shape: [...gene.steps], rotation: 0 };
+  return { gene: id, grade: gene.grade, q: 0, r: 0, rotation: 0 };
 }));
 function fixture(ids, distance = 0) {
   const unit = (id, ownerId, dna, x = 100) => ({ id, ownerId, tribe: "bean", x, y: 100,

@@ -5,7 +5,7 @@ import { validateDna, cloneDna } from "./dna-unit.mjs";
 import { createCombat } from "./combat.mjs";
 import { dnaAttackMode } from "./dna-actions.mjs";
 
-const piece = id => { const gene = ATTRIBUTE_DNA.lookup.get(id); return { gene:id, grade:gene.grade, shape:[...gene.steps], rotation:0 }; };
+const piece = id => { const gene = ATTRIBUTE_DNA.lookup.get(id); return { gene:id, grade:gene.grade, q:0,r:0,rotation:0 }; };
 const stats = ids => ATTRIBUTE_DNA.stats(ids.map(piece));
 function fixture(ids) {
   const source = { id:"source", ownerId:"a", tribe:"bean", x:100, y:100, health:10, attributes:{}, combatDisposition:"aggressive", moveStartedAt:0, moveDuration:0, stats:{ health:10, speed:1, vision:4, dna:stats(ids) } };
@@ -21,16 +21,16 @@ test("level one opens gathering with four repeatable worker stats",()=>{
   assert.ok(ATTRIBUTE_DNA.catalog.filter(g=>g.category!=="organ"&&!["capacity","harvestSpeed","health","movement"].includes(g.id)).every(g=>g.grade>=2));
   assert.equal(stats(["armor"]).armor,3); assert.equal(stats(["evasion"]).evasion,9);
   assert.equal(stats(["carapace"]).armor,2); assert.equal(stats(["legs"]).evasion,9);
-  const once=stats(["gather","antenna","blade","healer","secretion"]), twice=stats(["gather","antenna","blade","healer","secretion","gather","antenna","blade","healer","secretion"]);
-  assert.equal(twice.capacity,2*once.capacity); assert.equal(twice.harvest,2*once.harvest); assert.equal(twice.meleePower,2*once.meleePower); assert.equal(twice.rangedPower,2*once.rangedPower); assert.equal(twice.healerCount,2*once.healerCount); assert.equal(twice.meleeSpeed,once.meleeSpeed); assert.equal(twice.rangedSpeed,once.rangedSpeed);
+  const once=stats(["gather","antenna","blade","secretion"]), twice=stats(["gather","antenna","blade","secretion","gather","antenna","blade","secretion"]);
+  assert.equal(twice.capacity,2*once.capacity); assert.equal(twice.harvest,2*once.harvest); assert.equal(twice.meleePower,2*once.meleePower); assert.equal(twice.rangedPower,2*once.rangedPower); assert.equal(twice.meleeSpeed,once.meleeSpeed); assert.equal(twice.rangedSpeed,once.rangedSpeed);
 });
 
 test("legacy snapshots survive schema restore while new designs require the current catalog",()=>{
-  for(const entry of [{gene:"health",grade:1,shape:[0,1],rotation:0},{gene:"health",grade:2,shape:[0,1,2],rotation:0},{gene:"antenna",grade:1,shape:[0,1],rotation:0},{gene:"movement",grade:2,shape:[0,1,3],rotation:0},{gene:"healer",grade:1,shape:[0,5],rotation:0}]) {
+  for(const entry of [{gene:"health",grade:1,shape:[0,1],rotation:0},{gene:"health",grade:2,shape:[0,1,2],rotation:0},{gene:"antenna",grade:1,shape:[0,1],rotation:0},{gene:"movement",grade:2,shape:[0,1,3],rotation:0}]) {
     const dna={version:3,pieces:[entry],budget:1000,level:2};
-    assert.deepEqual(ATTRIBUTE_DNA.validate(dna),dna);assert.deepEqual(cloneDna(dna),dna);assert.equal(validateDna(dna,2,1000),null);
+    const migrated=ATTRIBUTE_DNA.validate(dna);assert.equal(migrated.version,4);assert.deepEqual(ATTRIBUTE_DNA.stats(migrated.pieces),ATTRIBUTE_DNA.stats(dna.pieces));assert.deepEqual(cloneDna(dna),migrated);assert.equal(validateDna(dna,2,1000),null);
   }
-  assert.ok(validateDna({version:3,pieces:[piece("antenna")],budget:1000,level:2},2,1000));
+  assert.ok(validateDna({version:4,pieces:[piece("antenna")],budget:1000,level:2},2,1000));
   assert.equal(validateDna({version:3,pieces:[null],budget:100,level:1},1,100),null);
 });
 
@@ -41,13 +41,6 @@ test("ranged shot hits outside contact after travel and spends one shared cycle"
   f.combat.update(f.source,.7); assert.ok(f.target.health<100); assert.equal(f.source.attackReady,2);
   assert.equal(dnaAttackMode(f.source.stats.dna,1),"melee");
   assert.equal(dnaAttackMode(stats(["secretion"]),0),"ranged");
-});
-
-test("retired support genes do not heal allies while ranged attacks keep running",()=>{
-  const f=fixture(["healer","secretion"]); f.source.health=5; f.combat.update(f.source,0);
-  assert.equal(f.ally.health,50); assert.equal(f.source.health,5); assert.equal(f.source.attack.attackMode,"ranged");
-  f.combat.update(f.source,1); assert.equal(f.ally.health,50);
-  f.combat.update(f.source,2); assert.equal(f.ally.health,50);
 });
 
 test("dead or hidden projectile participants cancel damage",()=>{
@@ -94,13 +87,13 @@ test("melee and ranged investment change only their own power and rate",()=>{
   assert.equal(melee.meleePower,6); assert.equal(melee.meleeSpeed,.6); assert.equal(melee.rangedPower,1.4); assert.equal(melee.rangedSpeed,.5);
   assert.equal(ranged.meleePower,2); assert.equal(ranged.meleeSpeed,.5); assert.ok(Math.abs(ranged.rangedPower-4.2)<1e-9); assert.equal(ranged.rangedSpeed,.6);
   assert.equal(stats(["secretion"]).power,1.4); assert.equal(stats(["secretion"]).speed,.5);
-  for(const id of ["rangedPower","rangedSpeed"]) { const g=ATTRIBUTE_DNA.lookup.get(id);assert.equal(g.grade,2);assert.equal(g.steps.length,3);assert.ok(ATTRIBUTE_DNA.trace([piece(id)],2).valid); }
+  for(const id of ["rangedPower","rangedSpeed"]) { const g=ATTRIBUTE_DNA.lookup.get(id);assert.equal(g.grade,2);assert.ok(g.cells.length>=3);assert.ok(ATTRIBUTE_DNA.trace([piece(id)],2).valid); }
 });
 
 test("ranged damage is the visible base and selected rate owns the shared cooldown",()=>{
   const f=fixture(["blade","secretion","power","speed","rangedSpeed"]); f.target.stats.defense=0; f.target.stats.attackPower=0;
-  f.combat.update(f.source,0); const ready=1/.6; assert.equal(f.source.attackReady,ready);
+  f.combat.update(f.source,0); const ready=1+1/.6; assert.equal(f.source.attackReady,ready);
   f.combat.update(f.source,.7); assert.ok(Math.abs(f.target.health-98.6)<1e-8);
-  f.source.x=f.target.x; f.combat.update(f.source,.8); assert.equal(f.source.combat.nextAttackAt,ready);
-  f.combat.update(f.source,ready); assert.equal(f.source.attack.attackMode,"melee"); assert.ok(Math.abs(f.source.combat.nextAttackAt-(ready+1/.6))<1e-9);
+  f.source.x=f.target.x; f.combat.update(f.source,1.1); assert.equal(f.source.combat.nextAttackAt,ready);
+  f.combat.update(f.source,ready); assert.equal(f.source.attack.attackMode,"melee"); assert.ok(Math.abs(f.source.combat.nextAttackAt-(ready+1+1/.6))<1e-9);
 });

@@ -79,7 +79,7 @@ test("secondary lethal hits use only observed death anchors and clear on view ch
 
 function serverScene() {
   const dna = ids => ATTRIBUTE_DNA.stats(ids.map(id => { const gene = ATTRIBUTE_DNA.lookup.get(id);
-    return { gene: id, grade: gene.grade, shape: [...gene.steps], rotation: 0 }; }));
+    return { gene: id, grade: gene.grade, q: 0, r: 0, rotation: 0 }; }));
   const unit = (id, ownerId, stats) => ({ id, ownerId, tribe: "bean", x: 100, y: 100, health: 100,
     combatDisposition: "aggressive", attributes: {}, stats: { health: 100, speed: 1, vision: 3, dna: stats },
     moveStartedAt: 0, moveDuration: 0 });

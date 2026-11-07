@@ -5,7 +5,7 @@ import { ATTRIBUTE_DNA } from "./dna.mjs";
 import { createGame } from "./game.mjs";
 
 const gene = ATTRIBUTE_DNA.lookup.get("secretion");
-const dna = ATTRIBUTE_DNA.stats([{ gene: "secretion", grade: gene.grade, shape: [...gene.steps], rotation: 0 }]);
+const dna = ATTRIBUTE_DNA.stats([{ gene: "secretion", grade: gene.grade, q: 0, r: 0, rotation: 0 }]);
 function fixture({ tribe = "bean", start = .1, hits = 4, focus = .3, gap = .12, rate = 4 } = {}) {
   const source = { id: "source", ownerId: "a", tribe, x: 100, y: 100, health: 100,
     attributes: { secretion: 1 }, combatDisposition: "aggressive", moveStartedAt: 0, moveDuration: 0,

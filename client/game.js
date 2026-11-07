@@ -7448,17 +7448,6 @@
       unitDraft.error = "";
       updateUnitDesign();
     });
-    const designDnaCatalog = designDnaHost.querySelector('.dna-catalog');
-    const designDnaPartsPanel = document.createElement('section'), designDnaPartsHeading = document.createElement('div');
-    designDnaPartsPanel.className = 'dna-library-section';
-    designDnaPartsPanel.dataset.visibleParts = '2';
-    designDnaPartsHeading.className = 'section-label';
-    designDnaPartsHeading.textContent = '부분 저장';
-    designDnaPartsHeading.id = 'design-dna-parts-label';
-    designDnaPartsPanel.setAttribute('aria-labelledby', designDnaPartsHeading.id);
-    designDnaPartsPanel.append(designDnaPartsHeading);
-    designDnaCatalog.prepend(designDnaPartsPanel);
-    const designDnaPartsLibrary = Spawner.createDnaPartLibrary(designDnaPartsPanel, Spawner.ATTRIBUTE_DNA, designDnaEditor);
     function dnaDesignValid(dna) {
       return !!Spawner.validateDna(dna, state.nestLevel, state.evolutionPoints);
     }
@@ -8039,7 +8028,7 @@
     function openUnitDesign(template, readOnly) {
       readOnly = readOnly || !!state.ending;
       designReturnFocus = document.activeElement;
-      unitDraft = { id: template ? template.id : null, tribe: template?.tribe || state.tribe || "bean", slots: template ? [...new Set((template.slots || []).map(key => key === "arms" ? "strength" : key))] : [], dna: !template || template.dna ? Spawner.cloneDna(template?.dna || { version: 3, pieces: [], budget: state.evolutionPoints, level: state.nestLevel }) : null, attributeLevels: { ...template?.attributeLevels }, combatPrimary: template?.combatPrimary ?? null, error: "", readOnly: !!readOnly, nameEdited: Spawner.isTemplateNameEdited(template) };
+      unitDraft = { id: template ? template.id : null, tribe: template?.tribe || state.tribe || "bean", slots: template ? [...new Set((template.slots || []).map(key => key === "arms" ? "strength" : key))] : [], dna: !template || template.dna ? Spawner.cloneDna(template?.dna || { version: 4, pieces: [], budget: state.evolutionPoints, level: state.nestLevel }) : null, attributeLevels: { ...template?.attributeLevels }, combatPrimary: template?.combatPrimary ?? null, error: "", readOnly: !!readOnly, nameEdited: Spawner.isTemplateNameEdited(template) };
       designName.value = template?.name || Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       designName.readOnly = !!readOnly;
       designPalette.hidden = !!readOnly || !!unitDraft.dna;

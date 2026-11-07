@@ -117,7 +117,7 @@ test("retained current visibility supports recovery after cue expiry without ret
   assert.equal(heldHurtProjectileSide(unit(), cursor.consume({ streamId: "a", events }, .9), .9), null);
 });
 
-const dna = genes => ATTRIBUTE_DNA.stats(genes.map(id => { const gene = ATTRIBUTE_DNA.lookup.get(id); return { gene: id, grade: gene.grade, shape: [...gene.steps], rotation: 0 }; }));
+const dna = genes => ATTRIBUTE_DNA.stats(genes.map(id => { const gene = ATTRIBUTE_DNA.lookup.get(id); return { gene: id, grade: gene.grade, q: 0, r: 0, rotation: 0 }; }));
 function realScene(tribe, side) {
   const make = (id, ownerId, genes, x) => ({ id, ownerId, tribe, x, y: 100, health: 100, facing: 1, attributes: {},
     combatDisposition: "aggressive", moveStartedAt: 0, moveDuration: 0,

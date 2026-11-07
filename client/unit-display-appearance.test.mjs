@@ -18,14 +18,12 @@ import { createSimulationTrial } from "./combat-simulation.mjs";
 const attributesFor = mask => Object.fromEntries(Object.entries(UNIT_APPEARANCE_BITS).filter(([, bit]) => mask & bit).map(([key]) => [key, 3]));
 const plain = value => JSON.parse(JSON.stringify(value));
 function design(ids) {
-  let pieces = [];
-  for (const id of ids) {
+  const pieces = ATTRIBUTE_DNA.pack(ids.map(id => {
     const gene = ATTRIBUTE_DNA.lookup.get(id);
-    pieces = Array.from({ length: 6 }, (_, rotation) => pieces.concat({ gene: id, grade: gene.grade, rotation, shape: gene.steps }))
-      .find(next => ATTRIBUTE_DNA.trace(next, 4).valid && !ATTRIBUTE_DNA.trace(next, 4).closed);
-    assert.ok(pieces, id);
-  }
-  const dna = { version: 3, pieces, level: 4, budget: 10000 };
+    return { gene: id, grade: gene.grade, rotation: 0 };
+  }), 4);
+  assert.ok(pieces);
+  const dna = { version: 4, pieces, level: 4, budget: 10000 };
   assert.ok(ATTRIBUTE_DNA.validate(dna));
   return dna;
 }

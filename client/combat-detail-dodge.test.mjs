@@ -74,7 +74,7 @@ function modal({ unavailable = [], rejectDraw = false, version = 1, units, initi
 
 const event = (kind = "miss", extra = {}) => ({ id: kind, kind, sourceId: "source", targetId: "target", at: 1, amount: 0, ...extra });
 const dnaStats = ids => ATTRIBUTE_DNA.stats(ids.map(id => {
-  const gene = ATTRIBUTE_DNA.lookup.get(id); return { gene: id, grade: gene.grade, shape: [...gene.steps], rotation: 0 };
+  const gene = ATTRIBUTE_DNA.lookup.get(id); return { gene: id, grade: gene.grade, q: 0, r: 0, rotation: 0 };
 }));
 function worldScene(mode, tribe) {
   const unit = (id, ownerId, genes, x) => ({ id, ownerId, tribe, x, y: 100, health: 100,

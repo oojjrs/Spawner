@@ -2,19 +2,19 @@ import { ATTRIBUTE_DNA } from "./dna.mjs";
 
 export function cloneDna(dna) {
   if (!dna) return null;
-  const value = dna.version === 3 ? dna : ATTRIBUTE_DNA.validate(dna);
+  const value = dna.version === 4 ? dna : ATTRIBUTE_DNA.validate(dna);
   if (!value) return null;
   return { version: value.version, pieces: value.pieces.map(ATTRIBUTE_DNA.clonePiece), budget: value.budget, level: value.level };
 }
 
 export function validateDna(dna, nestLevel, budget) {
-  if (!dna || dna.version !== 3 || !Array.isArray(dna.pieces)) return null;
+  if (!dna || dna.version !== 4 || !Array.isArray(dna.pieces)) return null;
   const organs = new Set();
   for (const piece of dna.pieces) {
     const gene = ATTRIBUTE_DNA.lookup.get(piece?.gene);
     if (!gene || gene.retired) return null;
-    if (piece.grade !== gene.grade || !Array.isArray(piece.shape) ||
-        JSON.stringify(piece.shape) !== JSON.stringify(ATTRIBUTE_DNA.shape(gene, gene.grade))) return null;
+    if (piece.grade !== gene.grade) return null;
+    if (!Number.isInteger(piece.q) || !Number.isInteger(piece.r) || piece.shape !== undefined || piece.cells !== undefined) return null;
     if (gene.category === "organ") {
       if (organs.has(gene.id)) return null;
       organs.add(gene.id);
@@ -65,7 +65,7 @@ export function dnaCanMove(agent, x, y, colonies) {
 // Keep recovery checks tied to the current catalog and validation rules.
 export function basicGathererDna(nestLevel = 1) {
   const gene = ATTRIBUTE_DNA.lookup.get("gather");
-  const design = { version: 3, level: nestLevel, budget: 999999999,
-    pieces: [{ gene: gene.id, grade: gene.grade, rotation: 0, shape: [...gene.steps] }] };
+  const design = { version: 4, level: nestLevel, budget: 999999999,
+    pieces: [{ gene: gene.id, grade: gene.grade, rotation: 0, q: 0, r: 0 }] };
   return validateDna(design, nestLevel, design.budget);
 }

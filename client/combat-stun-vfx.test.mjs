@@ -136,7 +136,7 @@ test("laboratory shares the status renderer, including zero-time pause, reset, e
     }, reduced);
 });
 
-const dna = genes => ATTRIBUTE_DNA.stats(genes.map(id => { const gene = ATTRIBUTE_DNA.lookup.get(id); return { gene: id, grade: gene.grade, shape: [...gene.steps], rotation: 0 }; }));
+const dna = genes => ATTRIBUTE_DNA.stats(genes.map(id => { const gene = ATTRIBUTE_DNA.lookup.get(id); return { gene: id, grade: gene.grade, q: 0, r: 0, rotation: 0 }; }));
 function actualScene(mode, tribe) {
   const make = (id, ownerId, genes, x) => ({ id, ownerId, tribe, x, y: 100, health: 100, attributes: { blade: 1 },
     combatDisposition: "aggressive", moveStartedAt: 0, moveDuration: 0,

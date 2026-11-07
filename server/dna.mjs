@@ -1,62 +1,27 @@
+import { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoardPack } from "./dna-board.mjs";
 import { dnaCombatStats } from "./dna-combat-stats.mjs";
 
 export const ATTRIBUTE_DNA = (() => {
-  const directions = [[1,0],[0,1],[-1,1],[-1,0],[0,-1],[1,-1]];
   const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};
-  const definitions = [
-    ['blade','organ',1,20],['carapace','stat',-1,10],['antenna','organ',0,20],['gather','organ',2,20],['legs','stat',-2,20],
-    ['power','stat',1,10],['combo','action',-1,14],['speed','stat',0,12],['comboPower','stat',2,12],['critical','stat',-2,12],['criticalPower','stat',1,10],['accuracy','stat',-1,10],['penetration','stat',0,12],
-    ['health','stat',-1,10],['armor','stat',2,10],['evasion','stat',-2,14],['parry','action',1,14],['block','action',0,12],['blockPower','stat',-1,10],['counter','action',2,14],['counterPower','stat',-2,10],['tenacity','stat',1,10],['reduction','stat',-1,12],
-    ['movement','stat',0,10],['capacity','stat',1,10],['harvest','stat',-1,10],['harvestSpeed','stat',2,10],['vision','stat',-2,10],['loadSpeed','stat',0,10],['healing','stat',1,10],
-    ['stun','action',-1,16],['stunTime','stat',2,12],['bleed','action',-2,16],['bleedPower','stat',1,12],['area','action',0,18],['areaPower','stat',-1,12],['lifesteal','action',2,16],['reflection','action',-2,16],['regeneration','action',1,14],['comboSpeed','stat',-1,12],['focus','stat',0,12],['healer','organ',-1,20],['secretion','organ',-2,20],['rangedPower','stat',-1,12],['rangedSpeed','stat',1,12],['healPower','stat',1,10]
-  ];
+  const definitions = [["blade","organ",20],["carapace","stat",10],["antenna","organ",20],["gather","organ",20],["legs","stat",20],["power","stat",10],["combo","action",14],["speed","stat",12],["comboPower","stat",12],["critical","stat",12],["criticalPower","stat",10],["accuracy","stat",10],["penetration","stat",12],["health","stat",10],["armor","stat",10],["evasion","stat",14],["parry","action",14],["block","action",12],["blockPower","stat",10],["counter","action",14],["counterPower","stat",10],["tenacity","stat",10],["reduction","stat",12],["movement","stat",10],["capacity","stat",10],["harvest","stat",10],["harvestSpeed","stat",10],["vision","stat",10],["loadSpeed","stat",10],null,["stun","action",16],["stunTime","stat",12],["bleed","action",16],["bleedPower","stat",12],["area","action",18],["areaPower","stat",12],["lifesteal","action",16],["reflection","action",16],["regeneration","action",14],["comboSpeed","stat",12],["focus","stat",12],null,["secretion","organ",20],["rangedPower","stat",12],["rangedSpeed","stat",12],null];
   const alphabet = 'ATGC';
-  const genes = definitions.map((entry,index) => ({id:entry[0],category:entry[1],turn:entry[2],price:entry[3]/2,code:alphabet[Math.floor(index/16)]+alphabet[Math.floor(index/4)%4]+alphabet[index%4],color:colors[entry[1]]}));
+  const genes = definitions.map((entry,index) => entry && ({id:entry[0],category:entry[1],price:entry[2]/2,code:alphabet[Math.floor(index/16)]+alphabet[Math.floor(index/4)%4]+alphabet[index%4],color:colors[entry[1]]})).filter(Boolean);
   const lookup = new Map(genes.map(gene=>[gene.id,gene]));
-  const specification=[{"gene":"gather","grade":1,"steps":[0,1],"order":1},{"gene":"health","grade":1,"steps":[0,4],"order":3},{"gene":"blade","grade":2,"steps":[0,2,3],"order":0},{"gene":"power","grade":2,"steps":[0,0,1],"order":1},{"gene":"speed","grade":2,"steps":[0,2,0],"order":2},{"gene":"capacity","grade":1,"steps":[0,0],"order":0},{"gene":"movement","grade":1,"steps":[0,2],"order":4},{"gene":"antenna","grade":2,"steps":[0,4,0],"order":8},{"gene":"carapace","grade":2,"steps":[0,5,1],"order":9},{"gene":"combo","grade":3,"steps":[0,1,5,0],"order":0},{"gene":"legs","grade":3,"steps":[0,1,0,4],"order":10,"retired":true},{"gene":"armor","grade":3,"steps":[0,1,2,0],"order":11,"retired":true},{"gene":"vision","grade":3,"steps":[0,1,2,4],"order":10},{"gene":"harvest","grade":2,"steps":[0,1,2],"order":10},{"gene":"harvestSpeed","grade":1,"steps":[0,5],"order":2},{"gene":"loadSpeed","grade":2,"steps":[0,5,4],"order":11},{"gene":"accuracy","grade":3,"steps":[0,1,0,2],"order":6},{"gene":"tenacity","grade":3,"steps":[0,1,0,1],"order":7},{"gene":"healing","grade":3,"steps":[0,2,1,3],"order":11},{"gene":"block","grade":3,"steps":[0,0,1,5],"order":8},{"gene":"evasion","grade":3,"steps":[0,1,1,2],"order":9},{"gene":"parry","grade":4,"steps":[0,1,2,0,1],"order":21},{"gene":"counter","grade":3,"steps":[0,1,0,4],"order":2},{"gene":"critical","grade":3,"steps":[0,2,1,0],"order":1},{"gene":"criticalPower","grade":4,"steps":[0,1,3,1,0],"order":24},{"gene":"penetration","grade":4,"steps":[0,1,2,0,2],"order":25},{"gene":"comboPower","grade":4,"steps":[0,1,3,1,2],"order":26},{"gene":"blockPower","grade":4,"steps":[0,1,2,3,1],"order":27},{"gene":"counterPower","grade":4,"steps":[0,1,5,1,0],"order":28},{"gene":"reduction","grade":4,"steps":[0,1,0,5,1],"order":29},{"gene":"stun","grade":3,"steps":[0,1,5,4],"order":3},{"gene":"stunTime","grade":4,"steps":[0,1,0,5,0],"order":31},{"gene":"bleed","grade":3,"steps":[0,1,2,1],"order":4},{"gene":"bleedPower","grade":4,"steps":[0,1,2,3,5],"order":33},{"gene":"area","grade":3,"steps":[0,1,0,5],"order":5},{"gene":"areaPower","grade":4,"steps":[0,1,0,2,3],"order":35},{"gene":"lifesteal","grade":4,"steps":[0,1,0,5,4],"order":36},{"gene":"reflection","grade":4,"steps":[0,1,2,1,3],"order":37},{"gene":"regeneration","grade":4,"steps":[0,1,0,1,2],"order":38},{"gene":"comboSpeed","grade":4,"steps":[0,1,2,3,4],"order":39},{"gene":"focus","grade":4,"steps":[0,2,0,1,5],"order":40},{"gene":"healer","grade":2,"steps":[0,2,1],"order":6,"retired":true},{"gene":"secretion","grade":2,"steps":[0,1,3],"order":3},{"gene":"rangedPower","grade":2,"steps":[0,0,2],"order":4},{"gene":"rangedSpeed","grade":2,"steps":[0,0,4],"order":5},{"gene":"healPower","grade":2,"steps":[0,4,4],"order":7,"retired":true}];
-  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.steps=entry.steps;gene.order=entry.order;if(entry.retired)gene.retired=true;if(gene.grade<=2)gene.price/=2;}
+  const specification=[{"gene":"gather","grade":1,"order":1},{"gene":"health","grade":1,"order":3},{"gene":"blade","grade":2,"order":0},{"gene":"power","grade":2,"order":1},{"gene":"speed","grade":2,"order":2},{"gene":"capacity","grade":1,"order":0},{"gene":"movement","grade":1,"order":4},{"gene":"antenna","grade":2,"order":8},{"gene":"carapace","grade":2,"order":9},{"gene":"combo","grade":3,"order":0},{"gene":"legs","grade":3,"order":10,"retired":true},{"gene":"armor","grade":3,"order":11,"retired":true},{"gene":"vision","grade":3,"order":10},{"gene":"harvest","grade":2,"order":10},{"gene":"harvestSpeed","grade":1,"order":2},{"gene":"loadSpeed","grade":2,"order":11},{"gene":"accuracy","grade":3,"order":6},{"gene":"tenacity","grade":3,"order":7},{"gene":"block","grade":3,"order":8},{"gene":"evasion","grade":3,"order":9},{"gene":"parry","grade":4,"order":21},{"gene":"counter","grade":3,"order":2},{"gene":"critical","grade":3,"order":1},{"gene":"criticalPower","grade":4,"order":24},{"gene":"penetration","grade":4,"order":25},{"gene":"comboPower","grade":4,"order":26},{"gene":"blockPower","grade":4,"order":27},{"gene":"counterPower","grade":4,"order":28},{"gene":"reduction","grade":4,"order":29},{"gene":"stun","grade":3,"order":3},{"gene":"stunTime","grade":4,"order":31},{"gene":"bleed","grade":3,"order":4},{"gene":"bleedPower","grade":4,"order":33},{"gene":"area","grade":3,"order":5},{"gene":"areaPower","grade":4,"order":35},{"gene":"lifesteal","grade":4,"order":36},{"gene":"reflection","grade":4,"order":37},{"gene":"regeneration","grade":4,"order":38},{"gene":"comboSpeed","grade":4,"order":39},{"gene":"focus","grade":4,"order":40},{"gene":"secretion","grade":2,"order":3},{"gene":"rangedPower","grade":2,"order":4},{"gene":"rangedSpeed","grade":2,"order":5}];
+  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.order=entry.order;if(entry.retired)gene.retired=true;if(gene.grade<=2)gene.price/=2;}
   const catalog=genes.filter(gene=>!gene.retired).sort((a,b)=>a.grade-b.grade||a.order-b.order);
 
-  const boardRadii=[2,3,4,5],profiles=new Map(),shapeCache=new Map();
+  for (const [index, gene] of genes.entries()) { gene.cells = DNA_BOARD_SHAPES[gene.id]; gene.fillColor = `hsl(${(index * 137.508 + 24) % 360} 48% 64%)`; }
+
+  for(const [id,color] of Object.entries({capacity:'#71cdb9',gather:'#d8ba77',harvestSpeed:'#df8d96',health:'#db9d7e',movement:'#a6a1dd'}))lookup.get(id).fillColor=color;
+
+  const boardRadii=[2,3,4,5];
   function boardRadius(level){return Number.isInteger(level)&&level>=1&&level<=4?boardRadii[level-1]:Infinity;}
   function inside(point,level){return Math.max(Math.abs(point.q),Math.abs(point.r),Math.abs(point.q+point.r))<=boardRadius(level);}
-  function legacyShape(gene,grade){
-    if(grade===1)return [0,gene.turn];
-    const identity=gene.id+':'+grade;if(shapeCache.has(identity))return shapeCache.get(identity);
-    if(!profiles.has(grade)){
-      const options=[],visited=new Set(['0,0','1,0']);
-      function visit(position,path,bends){
-        if(path.length===grade+1){if(bends>=grade-1)options.push(path.slice());return;}
-        for(const turn of [-2,-1,0,1,2]){const direction=((path[path.length-1]+turn)%6+6)%6,next=step(position,direction),id=key(next);if(visited.has(id))continue;visited.add(id);path.push(direction);visit(next,path,bends+(turn===0?0:1));path.pop();visited.delete(id);}
-      }
-      visit({q:1,r:0},[0],0);profiles.set(grade,options);
-    }
-    const options=profiles.get(grade),result=options[(genes.indexOf(gene)*17+grade*7)%options.length];shapeCache.set(identity,result);return result;
-  }
-  function shape(gene,grade){return gene.steps;}
-  function route(start,gene,grade,rotation,shapeSteps){const points=[{q:start.q,r:start.r}],directions=Array.isArray(shapeSteps)?shapeSteps:shape(gene,grade);for(const direction of directions)points.push(step(points[points.length-1],direction+rotation));return points;}
-
-  function key(point) {return point.q+','+point.r;}
-  function step(point,direction) {const delta=directions[((direction%6)+6)%6];return {q:point.q+delta[0],r:point.r+delta[1]};}
-  function trace(pieces,level){
-    const nodes=[{q:0,r:0}],paths=[],occupied=new Map([['0,0',{kind:'node',index:0}]]),outside=[],edges=new Set();let closed=false,issue='';
-    for(let index=0;index<pieces.length;index++){
-      const piece=pieces[index],gene=lookup.get(piece.gene),grade=piece.grade===undefined?1:piece.grade;
-      if(!gene||!Number.isInteger(piece.rotation)||piece.rotation<0||piece.rotation>5||!Number.isInteger(grade)||grade<1||grade>4)return {valid:false,reason:'invalid',nodes,paths,closed,at:index,outside};
-      if(Number.isInteger(level)&&grade>level&&!issue)issue='level';
-      closed=false;const start=nodes[nodes.length-1],points=route(start,gene,grade,piece.rotation,piece.shape),end=points[points.length-1];
-      for(let pointIndex=1;pointIndex<points.length;pointIndex++){
-        const point=points[pointIndex],last=pointIndex===points.length-1,contact=occupied.get(key(point)),edge=[key(points[pointIndex-1]),key(point)].sort().join(':');
-        if(edges.has(edge))return {valid:false,reason:'collision',nodes,paths,closed,at:index,problem:point,outside};
-        edges.add(edge);
-        if(contact&&(!last||contact.kind!=='node'))return {valid:false,reason:'collision',nodes,paths,closed,at:index,problem:point,outside};
-        if(!inside(point,level)){outside.push(point);if(!issue)issue='boundary';}
-        if(last&&contact)closed=true;else occupied.set(key(point),{kind:last?'node':'path',index:last?index+1:index});
-      }
-      paths.push({start,middle:points[1],end,points,gene:gene.id,rotation:piece.rotation,grade});nodes.push(end);
-    }
-    return {valid:!issue,reason:issue,nodes,paths,closed,occupied,outside};
-  }
+  function key(point){return point.q+','+point.r;}
+  function trace(pieces,level){return dnaBoardTrace(pieces,level,lookup,boardRadius);}
+  function boardCells(level){return dnaBoardCells(boardRadius(level));}
+  function pack(pieces,level){return dnaBoardPack(pieces,level,boardRadius);}
   function price(pieces){return pieces.reduce((sum,piece)=>{const gene=lookup.get(piece.gene),grade=piece.grade===undefined?1:piece.grade;return sum+Math.ceil((gene?.price||0)*(grade+2)/3);},0);}
   function cost(pieces){return 3+price(pieces);}
   function counts(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+1;return result;}
@@ -69,22 +34,39 @@ export const ATTRIBUTE_DNA = (() => {
       vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,
       loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0};
   }
-  function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,shape:piece.shape.slice()};}
+  function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,q:piece.q,r:piece.r};}
   function validate(value){
-    if(!value||![1,2,3].includes(value.version)||!Array.isArray(value.pieces)||value.pieces.length>2048||!Number.isFinite(value.budget)||value.budget<0||value.budget>999999999)return null;
-    const pieces=[];
+    if(!value||![1,2,3,4].includes(value.version)||!Array.isArray(value.pieces)||value.pieces.length>2048||!Number.isFinite(value.budget)||value.budget<0||value.budget>999999999)return null;
+    let level=value.level===undefined?1:value.level;
+    if(!Number.isInteger(level)||level<1||level>4)return null;
+    let pieces=[];
     for(const input of value.pieces){
-      const gene=lookup.get(input?.gene),grade=input?.grade===undefined?(value.version===3?gene?.grade:1):input.grade,rotation=input?.rotation;
-      if(!gene||!Number.isInteger(grade)||grade<1||grade>4||!Number.isInteger(rotation)||rotation<0||rotation>5)return null;
-      const original=Array.isArray(input.shape)?input.shape:value.version<3?legacyShape(gene,grade):shape(gene,grade);
-      if(original.length!==grade+1||!original.every(direction=>Number.isInteger(direction)&&direction>=-5&&direction<=5))return null;
-      pieces.push({gene:gene.id,grade,rotation,shape:original.map(direction=>(direction%6+6)%6)});
+      const gene=lookup.get(input?.gene),grade=input?.grade===undefined?(value.version>=3?gene?.grade:1):input.grade;
+      if(!gene||!Number.isInteger(grade)||grade<1||grade>4||!Number.isInteger(input.rotation)||input.rotation<0||input.rotation>5)return null;
+      if(value.version===4){
+        if(input.shape!==undefined||input.cells!==undefined)return null;
+        pieces.push({gene:gene.id,grade,rotation:input.rotation,q:input.q,r:input.r});
+      }else pieces.push({gene:gene.id,grade,rotation:input.rotation});
+    }
+    if(value.version<4){
+      const source=pieces;
+      pieces=pack(source,level);
+      while(!pieces&&level<4&&value.level===undefined)pieces=pack(source,++level);
+      if(!pieces){
+        const occupied=new Set(),positions=boardCells(level);let overflow=0;
+        pieces=source.map(input=>{
+          for(const position of positions)for(let rotation=0;rotation<6;rotation++){
+            const piece={...input,rotation,q:position.q,r:position.r},cells=dnaPieceCells(piece);
+            if(cells.some(cell=>!inside(cell,level)||occupied.has(key(cell))))continue;
+            for(const cell of cells)occupied.add(key(cell));return piece;
+          }
+          const index=overflow++;return {...input,q:boardRadius(level)+4+(index%Math.ceil(Math.sqrt(source.length)))*6,r:-boardRadius(level)+Math.floor(index/Math.ceil(Math.sqrt(source.length)))*6};
+        });
+      }
     }
     if(!trace(pieces).valid)return null;
-    let level=Number.isInteger(value.level)&&value.level>=1&&value.level<=4?value.level:1;
-    if(value.level===undefined){while(level<4&&!trace(pieces,level).valid)level++;}
-    return {version:3,pieces,budget:Math.floor(value.budget),level};
+    return {version:4,pieces,budget:Math.floor(value.budget),level};
   }
 
-  return {genes,catalog,lookup,trace,price,cost,counts,weights,stats,validate,clonePiece,step,key,shape,route,boardRadius,inside};
+  return {genes,catalog,lookup,trace,boardCells,pieceCells:dnaPieceCells,pack,price,cost,counts,weights,stats,validate,clonePiece,key,boardRadius,inside};
 })();

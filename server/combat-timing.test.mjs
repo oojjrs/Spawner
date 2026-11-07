@@ -95,7 +95,7 @@ test("an appearance clip returns to idle when its own native tail finishes", () 
 });
 
 test("five versus five journals preserve exact contacts, causal IDs, targets and projectile arrivals", () => {
-  const base = ATTRIBUTE_DNA.stats(["blade"].map(gene => { const entry = ATTRIBUTE_DNA.lookup.get(gene); return { gene, grade: entry.grade, shape: [...entry.steps], rotation: 0 }; }));
+  const base = ATTRIBUTE_DNA.stats(["blade"].map(gene => { const entry = ATTRIBUTE_DNA.lookup.get(gene); return { gene, grade: entry.grade, q: 0, r: 0, rotation: 0 }; }));
   const units = Array.from({ length: 10 }, (_, index) => ({ id: "unit-" + index, ownerId: index < 5 ? "left" : "right", tribe: "bean",
     x: index === 4 ? 98 : 100, y: 100, health: index === 5 ? 4 : 80, attributes: {}, combatDisposition: "aggressive", moveDuration: 0,
     stats: { health: 80, speed: 1, vision: 4, dna: { ...base, meleePower: 4, meleeSpeed: index % 2 ? 2 : .5,

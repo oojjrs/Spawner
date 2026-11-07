@@ -71,7 +71,7 @@ test("finished, canceled, malformed and legacy snapshots do not invent terminal 
 
 function worldFixture(tribe, hits = 4, start = 0) {
   const gene = ATTRIBUTE_DNA.lookup.get("secretion");
-  const dna = ATTRIBUTE_DNA.stats([{ gene: "secretion", grade: gene.grade, shape: [...gene.steps], rotation: 0 }]);
+  const dna = ATTRIBUTE_DNA.stats([{ gene: "secretion", grade: gene.grade, q: 0, r: 0, rotation: 0 }]);
   const source = { id: "source", ownerId: "a", tribe, x: 100, y: 100, health: 100,
     attributes: { secretion: 1 }, combatDisposition: "aggressive", moveStartedAt: 0, moveDuration: 0,
     stats: { health: 100, speed: 1, vision: 4, dna: { ...dna, rangedSpeed: 4, hits, focus: .3, comboSpeed: .12 } } };

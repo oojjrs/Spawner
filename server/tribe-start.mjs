@@ -21,19 +21,10 @@ export const STARTING_WORKER_GENES = Object.freeze({
 
 export function startingWorkerDna(tribe = "bean") {
   const genes = STARTING_WORKER_GENES[tribe] || STARTING_WORKER_GENES.bean;
-  const place = (index, pieces) => {
-    if (index === genes.length) return pieces;
-    const gene = ATTRIBUTE_DNA.lookup.get(genes[index]);
-    for (let rotation = 0; rotation < 6; rotation++) {
-      const next = [...pieces, { gene: gene.id, grade: gene.grade, rotation, shape: [...gene.steps] }];
-      const trace = ATTRIBUTE_DNA.trace(next, 1);
-      if (!trace.valid || trace.closed && index < genes.length - 1) continue;
-      const result = place(index + 1, next);
-      if (result) return result;
-    }
-    return null;
-  };
-  const pieces = place(0, []);
+  const pieces = ATTRIBUTE_DNA.pack(genes.map(id => {
+    const gene = ATTRIBUTE_DNA.lookup.get(id);
+    return { gene: gene.id, grade: gene.grade, rotation: 0 };
+  }), 1);
   if (!pieces) throw new Error("시작 일꾼 DNA가 1레벨 보드에 맞지 않습니다.");
-  return { version: 3, level: 1, budget: 30, pieces };
+  return { version: 4, level: 1, budget: 30, pieces };
 }
