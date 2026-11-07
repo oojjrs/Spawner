@@ -73,7 +73,8 @@
     const y = preview ? 0 : floor - (shape.pivotY ?? height * .875) * scale;
     if (panel.mirror) { context.translate(stageSize, 0); context.scale(-1, 1); }
     const columns = preview?.columns || animation.columns;
-    context.drawImage(sprite, animation.native ? 0 : frame % columns * size, animation.native ? 0 : Math.floor(frame / columns) * size,
+    const native = animation.native && !preview;
+    context.drawImage(sprite, native ? 0 : frame % columns * size, native ? 0 : Math.floor(frame / columns) * size,
       size, height, x, y, size * scale, height * scale);
     drawProjectile(context, animation, scale, phase);
     canvas.dataset.frame = String(index); panel.frame = frame; panel.dirty = false;
@@ -111,7 +112,7 @@
     });
     sprite.addEventListener('load', () => {
       if (panel.sprite !== sprite || !panel.visible) return;
-      panel.animation.initialize?.(sprite);
+      panel.animation.initialize?.(previewSources[panel.animation.image]?.sourceGeometry || sprite);
       panel.scale = sourceScale(panel.unit, panel.animation, panel.action);
       configureLightbox(panel); panel.ready = true; panel.frame = -1;
       draw(panel, performance.now()); schedule();
@@ -138,19 +139,17 @@
     panels.push(panel); canvasPanels.set(canvas, panel); observer.observe(canvas);
   }
   function initializeUnits() {
-    for (const row of document.querySelectorAll('.unit-matrix tr[id^="unit-"]')) {
-      const raw = row.id.slice(5), key = aliases[raw] || raw, unit = units[key];
+    for (const row of document.querySelectorAll('#codex-unit-appearance tr[id^="unit-"], #codex-unit-appearance tr[data-unit-key]')) {
+      const raw = row.dataset.unitKey || row.id.slice(5), key = aliases[raw] || raw, unit = units[key];
       if (!unit) continue;
       for (const cell of row.querySelectorAll('td[data-action]')) {
         const action = cell.dataset.action;
         let animation = unit.animations[action], element = cell.querySelector('.unit-matrix-preview');
-        if (!element && animation && action === 'ranged-attack') {
-          const figure = document.createElement('figure'), link = document.createElement('a'), thumbnail = document.createElement('img');
-          figure.className = 'unit-matrix-image'; link.href = animation.image; thumbnail.alt = '';
-          element = document.createElement('span'); element.className = 'unit-matrix-preview'; element.append(thumbnail); link.append(element); figure.append(link);
-          cell.querySelector('.unit-matrix-empty')?.replaceWith(figure); delete cell.dataset.missing;
-        }
         if (!element) continue;
+        if (element.dataset.planningClip) {
+          install(element, unit, JSON.parse(element.dataset.planningClip), action, true);
+          continue;
+        }
         if (action === 'base') animation = unit.base;
         if (action === 'birth' && unit.birthScene) animation = unit.birthScene;
         if (animation) install(element, unit, animation, action, action !== 'base');
@@ -200,8 +199,7 @@
   function activate() {
     const page = activePage();
     if (page && !initialized.has(page.id)) {
-      if (page.id === 'codex-units') initializeUnits();
-      if (page.id === 'codex-unit-appearance') initializeAppearance();
+      if (page.id === 'codex-units') { initializeUnits(); initializeAppearance(); }
       initialized.add(page.id);
     }
     for (const panel of panels) {

@@ -33,7 +33,7 @@ for(const [key,actions] of Object.entries(attributes)){
  }
  process.stdout.write(key+'\n');
 }
-const path=resolve(root,'Design.html'),html=readFileSync(path,'utf8'),start=html.indexOf('<details id="codex-unit-appearance">'),end=html.indexOf('<details id="codex-unit-tiers">',start);
+const path=resolve(root,'Design.html'),html=readFileSync(path,'utf8'),start=html.indexOf('<div id="codex-unit-appearance">'),end=html.indexOf('<details id="codex-unit-tiers">',start);
 if(start<0||end<0)throw Error('Appearance page not found');
 let block=html.slice(start,end),staticImages=new Map(),edits=[];
 for(const match of block.matchAll(/<img\b[^>]*>/g)){
