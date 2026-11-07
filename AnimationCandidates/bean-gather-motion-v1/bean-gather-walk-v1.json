@@ -1,0 +1,630 @@
+{
+  "status": "user-approved",
+  "artApproval": "user-approved",
+  "tribe": "bean",
+  "form": "gather",
+  "action": "walk",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 33,
+  "durationsMs": [
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40
+  ],
+  "durationMs": 1320,
+  "loop": true,
+  "pivotX": 256,
+  "pivotY": 448,
+  "rootMotion": false,
+  "timingReference": "sproutJumpOffset/sproutBodyPose/sproutHeadPose: 960ms hop + landing settle, 1320ms loop",
+  "method": "Recovered native high-resolution layers. Existing runtime motion functions. All body organs share one connected parent transform. Rendered at 2x target resolution and downsampled once.",
+  "notes": "Whole-body jump rather than foot walk, matching the basic footless form. No root translation; vertical hop is baked into this sheet. Runtime must not apply a second hop.",
+  "poses": [
+    {
+      "frame": 0,
+      "timeMs": 0,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "head": {
+        "leftRotation": 0,
+        "rightRotation": 0,
+        "leftScaleY": 1,
+        "rightScaleY": 1
+      },
+      "lift": 0
+    },
+    {
+      "frame": 1,
+      "timeMs": 40,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.9885807232129249,
+        "scaleY": 1.032626505105929
+      },
+      "head": {
+        "leftRotation": -0.06253413478636388,
+        "rightRotation": 0.06253413478636388,
+        "leftScaleY": 0.9562261056495452,
+        "rightScaleY": 0.9562261056495452
+      },
+      "lift": 12.029293874999954
+    },
+    {
+      "frame": 2,
+      "timeMs": 80,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.9626581313824112,
+        "scaleY": 1.106691053193111
+      },
+      "head": {
+        "leftRotation": -0.20449118528679575,
+        "rightRotation": 0.20449118528679575,
+        "leftScaleY": 0.856856170299243,
+        "rightScaleY": 0.856856170299243
+      },
+      "lift": 23.852763196648315
+    },
+    {
+      "frame": 3,
+      "timeMs": 120,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.9347350823045267,
+        "scaleY": 1.1864711934156378
+      },
+      "head": {
+        "leftRotation": -0.3574031207133059,
+        "rightRotation": 0.3574031207133059,
+        "leftScaleY": 0.7498178155006858,
+        "rightScaleY": 0.7498178155006858
+      },
+      "lift": 35.26810512676667
+    },
+    {
+      "frame": 4,
+      "timeMs": 160,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.9173144337753392,
+        "scaleY": 1.2362444749276025
+      },
+      "head": {
+        "leftRotation": -0.4528019102779048,
+        "rightRotation": 0.4528019102779048,
+        "leftScaleY": 0.6830386628054667,
+        "rightScaleY": 0.6830386628054667
+      },
+      "lift": 46.08
+    },
+    {
+      "frame": 5,
+      "timeMs": 200,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 56.10345329744369
+    },
+    {
+      "frame": 6,
+      "timeMs": 240,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 65.16696095415222
+    },
+    {
+      "frame": 7,
+      "timeMs": 280,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 73.11544384124024
+    },
+    {
+      "frame": 8,
+      "timeMs": 320,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 79.81290121277387
+    },
+    {
+      "frame": 9,
+      "timeMs": 360,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 85.14473771624019
+    },
+    {
+      "frame": 10,
+      "timeMs": 400,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 89.01972415080053
+    },
+    {
+      "frame": 11,
+      "timeMs": 440,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 91.37155842421036
+    },
+    {
+      "frame": 12,
+      "timeMs": 480,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 92.16
+    },
+    {
+      "frame": 13,
+      "timeMs": 520,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 91.37155842421036
+    },
+    {
+      "frame": 14,
+      "timeMs": 560,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 89.01972415080053
+    },
+    {
+      "frame": 15,
+      "timeMs": 600,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 85.14473771624019
+    },
+    {
+      "frame": 16,
+      "timeMs": 640,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 79.81290121277385
+    },
+    {
+      "frame": 17,
+      "timeMs": 680,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 73.11544384124024
+    },
+    {
+      "frame": 18,
+      "timeMs": 720,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 65.16696095415222
+    },
+    {
+      "frame": 19,
+      "timeMs": 760,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 56.10345329744367
+    },
+    {
+      "frame": 20,
+      "timeMs": 800,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 46.07999999999999
+    },
+    {
+      "frame": 21,
+      "timeMs": 840,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 35.268105126766685
+    },
+    {
+      "frame": 22,
+      "timeMs": 880,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 23.852763196648294
+    },
+    {
+      "frame": 23,
+      "timeMs": 920,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 12.029293874999953
+    },
+    {
+      "frame": 24,
+      "timeMs": 960,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.46,
+        "rightRotation": 0.46,
+        "leftScaleY": 0.6779999999999999,
+        "rightScaleY": 0.6779999999999999
+      },
+      "lift": 0
+    },
+    {
+      "frame": 25,
+      "timeMs": 1000,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.916,
+        "scaleY": 1.24
+      },
+      "head": {
+        "leftRotation": -0.19618776999046153,
+        "rightRotation": 0.19618776999046153,
+        "leftScaleY": 0.8626685610066769,
+        "rightScaleY": 0.8626685610066769
+      },
+      "lift": 0
+    },
+    {
+      "frame": 26,
+      "timeMs": 1040,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.923320811419985,
+        "scaleY": 1.2190833959429
+      },
+      "head": {
+        "leftRotation": 0.16382599045919588,
+        "rightRotation": -0.16382599045919588,
+        "leftScaleY": 1,
+        "rightScaleY": 1
+      },
+      "lift": 0
+    },
+    {
+      "frame": 27,
+      "timeMs": 1080,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.9412441773102931,
+        "scaleY": 1.1678737791134484
+      },
+      "head": {
+        "leftRotation": 0.2660937242527849,
+        "rightRotation": -0.2660937242527849,
+        "leftScaleY": 1,
+        "rightScaleY": 1
+      },
+      "lift": 0
+    },
+    {
+      "frame": 28,
+      "timeMs": 1120,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.9637114951164539,
+        "scaleY": 1.1036814425244175
+      },
+      "head": {
+        "leftRotation": 0.10401834848345148,
+        "rightRotation": -0.10401834848345148,
+        "leftScaleY": 1,
+        "rightScaleY": 1
+      },
+      "lift": 0
+    },
+    {
+      "frame": 29,
+      "timeMs": 1160,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.984664162283997,
+        "scaleY": 1.0438166791885801
+      },
+      "head": {
+        "leftRotation": -0.0769629022681708,
+        "rightRotation": 0.0769629022681708,
+        "leftScaleY": 0.9461259684122805,
+        "rightScaleY": 0.9461259684122805
+      },
+      "lift": 0
+    },
+    {
+      "frame": 30,
+      "timeMs": 1200,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 0.9980435762584523,
+        "scaleY": 1.0055897821187076
+      },
+      "head": {
+        "leftRotation": -0.10438645229942907,
+        "rightRotation": 0.10438645229942907,
+        "leftScaleY": 0.9269294833903996,
+        "rightScaleY": 0.9269294833903996
+      },
+      "lift": 0
+    },
+    {
+      "frame": 31,
+      "timeMs": 1240,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "head": {
+        "leftRotation": -0.03019193462379428,
+        "rightRotation": 0.03019193462379428,
+        "leftScaleY": 0.978865645763344,
+        "rightScaleY": 0.978865645763344
+      },
+      "lift": 0
+    },
+    {
+      "frame": 32,
+      "timeMs": 1280,
+      "body": {
+        "pivot": 0.8984375,
+        "scaleX": 1,
+        "scaleY": 1
+      },
+      "head": {
+        "leftRotation": 0.011844055895283664,
+        "rightRotation": -0.011844055895283664,
+        "leftScaleY": 1,
+        "rightScaleY": 1
+      },
+      "lift": 0
+    }
+  ],
+  "candidate": false,
+  "source": "DesignAssets/Tribes/sprout/ApprovedGatherV1/source.png",
+  "sourceSHA256": "f7ad5bd858150b62c7683c48745021b1e13f1b23fd42f5a86831be995518e16b",
+  "sheet": "bean-gather-walk-v1-sheet.png",
+  "preview": "bean-gather-walk-v1-preview.gif",
+  "sourceProvenance": {
+    "sourceCommit": "1ebb00c9a333941e7c302506f1cd725adbe5427c",
+    "components": [
+      {
+        "repositoryPath": "DesignAssets/Units/Parts/strength-1.png",
+        "ref": "9f9662c9^",
+        "size": [
+          1692,
+          636
+        ],
+        "sha256": "3cb88f4a9af4e001ad57861f80d3875a6e2c3dde5f2ee83836ee10f0fe4e01da"
+      },
+      {
+        "repositoryPath": "DesignAssets/Units/starter-sprout-bean.png",
+        "ref": "9f9662c9^",
+        "size": [
+          1144,
+          1668
+        ],
+        "sha256": "0bd1b394864222d33ef42583c15e059bcd0ed0fb4173d85f1f4226bf223f36a8"
+      }
+    ],
+    "runtimeReference": {
+      "file": "client/sprout-roots.mjs",
+      "currentCheckoutCommit": "754608d85d4724e1e694cbf2edb08073518e476e",
+      "sha256": "35ac4e5efc5794c22d50d33cf4871d1da261404986d936e0f5ad64d339f7f268"
+    }
+  },
+  "verification": {
+    "allFramesMatchSheet": true,
+    "previewRegeneratedFromSheetMatchesExactly": true,
+    "gifDecodedFrames": 33,
+    "gifDurationMs": 1320,
+    "singleConnectedBodyOver8px": true,
+    "clippedFrames": 0,
+    "floorRange": [
+      374,
+      448
+    ],
+    "sheetSHA256": "6c38836e54cfea18780d6460f919517212ca41a1459dd7b9315edb2e0e00f6bb",
+    "previewSHA256": "bd6f1534f23aeb53141436a16705db02a27bbfa0c7845016f57d85b39dc3f884"
+  }
+}
