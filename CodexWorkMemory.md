@@ -175743,3 +175743,25 @@ Text: none. No lettering, labels, logo, watermark, UI, borders, health bars, peo
 - 기록 ID: load-adaptation-hide-commit-freeze-20261107-01a1b340. 기록 시각 2026-11-07T08:57:25+09:00; 기록자·범위/분리 판단 Codex /root, 로컬 커밋 승인 사용자. 출처 현재채팅01a1b340-061d-7a50-b572-006be0a0a508의 「커밋해」, H:/Spawner Windows PowerShell host local. 원발언 정확시각·항목ID·딥링크 불명.
 - 확정 범위: client/game.js의 인게임 design-stats 호출과 client/attribute-editor.js의 제작기 stats 호출 각1곳의 표시용 loadSpeed:undefined, 관련 진단/숨김 결정/본 커밋범위3절만 같은 로컬 커밋에 포함한다. 이전 source·국소diff 대조와 두 제품 UTF8NoBom/CRLF OK 결과를 재사용한다. 기존 메모리의 Mixed HEAD 대비 CRLF 차이는 기존본문 정규화 없이 보존한다.
 - 분리/누락점검: 시작HEAD 4379830172557e537c9a5736d8cfb27f71b12d43에서 game.js의 다른 화면/게임 변경과 전체메모리의 다른채팅 기록은 후보에 넣지 않는다. 별도 index를 HEAD로 구성해 정확3경로만 동결하고 기존 작업파일·기본index·untracked를 보존한다. 연결Projects nodes=[] 결과를 재사용한다. 스탯 계산/감속/DNA목록 변경 없이 양쪽 표시만 숨긴 사용자결정과 실제2곳·관련기록을 대조했다. 새테스트/빌드/브라우저/푸시/배포는 실행하지 않는다. 현재 커밋성공 전이며 최종staged검수 후 로컬 commit한다.
+
+## 중립 유닛 실제 스탯·티어 분리 착수 · 01a1b35a 현재 요약
+
+- 기록 ID: neutral-stats-tier-sections-start-20261107-01a1b35a. 기록 시각: 2026-11-07T09:15:31+09:00. 기록자·구현판단 Codex /root, 요청·구성결정 사용자. 출처 현재 채팅 01a1b35a-3508-75c3-ba00-bae7fae64183의 중립 유닛 확정 수치 전체 표시·별도 표·각각 details·실제 스탯 위/티어 뒤 지시. 원발언 정확시각·턴/항목 ID 불명. H:/Spawner, Windows PowerShell.
+- 현재 근거: Design.html #codex-unit-tiers 안에 기존19종×34스탯 projectedStats와 원래 티어행/extraTiers가 있다. 첫 초상 파일명에서 .png만 제거하므로 .webp18종은 projectedStats키와 맞지 않아 티어가 남고 딱정벌레만 수치가 적용된다. 기존수치=기획값이며 현재 server/combat-stats.mjs의 runtime기본값과 동일하다고 주장하지 않는다.
+- 이번 범위: 사용자 지정 용어 그대로 ‘실제 스탯’/‘티어’ 두 접힘으로 분리하고 기존 머리글·종명·역할·기획수치·티어를 재사용한다. 위 실제 스탯은 처음 열고 아래 티어는 접으며, 실제 스탯에는 종합 티어 열을 넣지 않는다. 두 표의 정렬/좁은화면 묶음을 독립 유지하고 중복 ID를 피한다. 새 설명·툴팁문구·페이지·밸런스 재계산/게임구현은 추가하지 않는다. 사용자 직접 지정한 표/문구 배치 범위로 진행한다.
+- 보호/상태: Design.html과 CodexWorkMemory.md 및 다수 제품/애셋의 기존 동시 변경을 확인했다. 국소수정만 수행하고 stage/commit/push하지 않는다. origin=https://github.com/oojjrs/Spawner, 연결 Projects 조회결과0·다음페이지없음. 검수는 변경 표의646수치·티어19행·정렬·접힘·두 화면폭에 한정한다.
+
+## 중립 유닛 실제 스탯·티어 분리 반영 · 01a1b35a 최종 상태
+
+- 기록 ID: neutral-stats-tier-sections-result-20261107-01a1b35a. 기록 시각: 2026-11-07T09:20:09+09:00. 기록자·변경/관측 Codex /root, 구성요청/결정 사용자. 출처 현재 채팅 01a1b35a-3508-75c3-ba00-bae7fae64183와 실제 파일수정/형식검사/격리브라우저 실패출력. 원발언 정확시각·턴/항목 ID 불명. H:/Spawner Windows PowerShell. start기록의 검수예정은 본 실제결과로 대체한다.
+- 반영: Design.html #codex-unit-tiers를 처음 열린 ‘실제 스탯’과 처음 접힌 ‘티어’로 분리했다. 기존19종×34값 projectedStats를 보존해 png/webp 종명 연결을 처리한다. 원티어표는 유지하고 수치표에서 종합 티어만 제외한다. setupTable로 정렬·좁은폭묶음을 표별 독립 적용하고 ID/aria-labelledby를 분리했다. 직접지정용어와 기존문구 외 새설명·라벨은 없다.
+- 실제 검수: 공유형식검사 Design.html UTF8NoBom/CRLF OK. 공유메모리는 GitHead Mixed/현재CRLF 차이로 NeedsReview이며 기존본문을 일괄수정하지 않았다. snapshot 대비 diff에 이번CSS2선택자/중립표변경과 무관한 채집기관·애니메이션 동시수정/‘Stashed changes’ 충돌표시가 나타나 별도구간을 보존했다.
+- 한계: 격리headless Edge launch가 crashpad pipe오류로 즉시종료돼 0화면/0수치에서 중단했다. 646값대조·1440/390·정렬·접힘 검수스크립트는 준비됐지만 통과근거가 아니다. routine배치6.419초 이후 재시도하지 않았다. literal 루트 $Trash/neutral-stats-tier-sections-01a1b35a의 before.html/edit.mjs/verify.mjs/report.json이 근거다. 화면/정렬/전체페이지정상을 검증완료로 주장하지 않는다.
+- 누락점검: 두 표/수치·티어분리/순서/details/기존수치연결은 소스반영했다. 화면실행확인은 시작실패와 다른구간 동시충돌 관측으로 남는다. 게임구현·밸런스재계산·브랜치·stage·commit·push는 없다. 최종메모리 prepend는 다른프로세스의 파일매핑으로 실패해 기존바이트를 자르지 않는 공유쓰기 append로 기록한다.
+
+
+
+## 중립 유닛 표 분리 커밋 범위 확정 · 01a1b35a
+
+- 기록 ID: neutral-stats-tier-sections-commit-freeze-20261107-01a1b35a. 기록 시각: 2026-11-07T09:32:18+09:00. 기록자·범위판단 Codex /root, 로컬커밋승인 사용자. 출처 현재채팅 01a1b35a-3508-75c3-ba00-bae7fae64183의 ‘커밋해’. 원발언정확시각·턴/항목ID 불명, H:/Spawner Windows PowerShell.
+- 후보는 Design.html의 중립실제수치/티어분리 섹션과 관련CSS2선택자 및 본채팅메모리뿐이다. HEAD의 타구간과 기록을 보존한 후보를 별도index에 구성해 기본index/다른변경/충돌상태를 보존한다. 실제브라우저검수 미완료·형식검사결과는 result기록과 동일하며 새실행검사를 시작하지 않는다. 연결Projects0 조회근거를 재사용한다. 새push/배포는 승인되지 않았다.
