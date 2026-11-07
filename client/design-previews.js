@@ -304,7 +304,6 @@ globalThis.SpawnerDesignPreviews = Object.freeze({
   "DesignAssets/Planning/UnitPreviews/white-paw/attack-v2.webp": "DesignAssets/Planning/Thumbnails/Planning/UnitPreviews/white-paw/attack-v2.webp.webp",
   "DesignAssets/Planning/UnitPreviews/white-paw/hurt.webp": "DesignAssets/Planning/Thumbnails/Planning/UnitPreviews/white-paw/hurt.webp.webp",
   "DesignAssets/Planning/UnitPreviews/white-paw/idle-pivot-v2.webp": "DesignAssets/Planning/Thumbnails/Planning/UnitPreviews/white-paw/idle-pivot-v2.webp.webp",
-  "DesignAssets/ResourceConcepts/v1/resource-carapace.png": "DesignAssets/Planning/Thumbnails/ResourceConcepts/v1/resource-carapace.png.webp",
   "DesignAssets/Resources/clay-carry.png": "DesignAssets/Planning/Thumbnails/Resources/clay-carry.png.webp",
   "DesignAssets/Resources/clay.png": "DesignAssets/Planning/Thumbnails/Resources/clay.png.webp",
   "DesignAssets/Resources/dew-carry.png": "DesignAssets/Planning/Thumbnails/Resources/dew-carry.png.webp",

@@ -1619,8 +1619,6 @@
   },
   "shared": {
     "food": [
-      "DesignAssets/Foods/food-mushroom-cluster.png",
-      "DesignAssets/Foods/food-mushroom-single.png",
       "DesignAssets/Foods/food-berry-bush.png"
     ],
     "music": "DesignAssets/Audio/Bgm/catalog.json",

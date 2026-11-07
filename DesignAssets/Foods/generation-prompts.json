@@ -11,40 +11,6 @@
   "styleReference": "DesignAssets/Nests/nest-stage-03.png",
   "assets": [
     {
-      "file": "DesignAssets/Foods/food-mushroom-cluster.png",
-      "source": "D:\\.codex\\generated_images\\01a15964-c034-78d1-9ce2-1e5e419e018b\\exec-d0558e2a-934e-47cc-b2c3-3d6ecd74078f.png",
-      "rawSource": "$Trash/smooth-foods/food-mushroom-cluster-source.png",
-      "alphaBounds": "928x924+48+48",
-      "basePivot": [
-        0.5,
-        0.94921875
-      ],
-      "gameCanvas": [
-        1024,
-        1024
-      ],
-      "oldFootprintPreserved": true,
-      "role": "runtime cluster; idle/harvest must not use old pixel sheets",
-      "prompt": "Use case: stylized-concept. Asset type: production static transparent 2D strategy game food sprite, one mushroom cluster. Reference image 1 is the new in-game nest and is the style authority. Reference image 2 is the old mushroom cluster and is the identity/composition reference only. Redraw this golden honey-mushroom cluster from scratch as a smooth, high-resolution hand-painted botanical fantasy game illustration that belongs to the same world as the reference nest. Preserve a large umbrella cap behind and two smaller umbrella mushrooms lower left and lower right, warm honey-gold wavy caps with a few creamy golden patches, visible beige gills, thick ivory stems, sparse rounded sage-green moss/leaves at the feet. Three mushrooms total, compact triangular cluster. Soft warm upper-left light, smooth rounded gradients and fine dark deep-teal/olive contours with anti-aliased edges, charming calm storybook rendering. Keep broad simple highlights and limited organic detail like the nest, no speckled noise. Mild three-quarter top view, centered, full silhouette visible, compact near-square framing with 7% clear padding. True transparent alpha background. No soil disc, no ground tile, no broad cast shadow. No pixel art, no pixel grid, no blocky stair-step edges, no low-res texture, no dithering, no text, no labels, no watermark. This is a single static source illustration, not an animation sheet or preview."
-    },
-    {
-      "file": "DesignAssets/Foods/food-mushroom-single.png",
-      "source": "D:\\.codex\\generated_images\\01a15964-c034-78d1-9ce2-1e5e419e018b\\exec-b8e7e2fc-5ab8-4f25-aea1-fd4bb0bfe48b.png",
-      "rawSource": "$Trash/smooth-foods/food-mushroom-single-source.png",
-      "alphaBounds": "940x878+42+122",
-      "basePivot": [
-        0.5,
-        0.9765625
-      ],
-      "gameCanvas": [
-        1024,
-        1024
-      ],
-      "oldFootprintPreserved": false,
-      "role": "dedicated single mushroom; replaces 106px crop",
-      "prompt": "Use case: stylized-concept. Asset type: production static transparent 2D strategy game single honey-mushroom food sprite. Reference image 1 is the smooth illustrated in-game nest, the style authority. Reference image 2 is the approved new smooth honey-mushroom cluster, the exact mushroom species/style reference. Create one separate small honey-gold mushroom in precisely the same hand-painted style as the right-hand little mushroom in reference 2, not a cluster. One warm honey-gold rounded wavy umbrella cap, a few simple creamy golden cap highlights, clear beige gills, one thick ivory stem with a tiny softly scalloped collar, and only two small simple sage-green leaves touching its base. Smooth rounded gradients and slender deep-teal/olive contours, clean anti-aliased edges. Compact broad silhouette, wider cap and short thick stem, mild three-quarter top view, gently leaning organic form. Soft warm upper-left light. Complete isolated single mushroom centered with 8% clear padding in square canvas. Genuine transparent alpha, no ground disc, no broad shadow, no accompanying mushrooms, no face, no text, no watermark. Absolutely no pixel art, no stair-step/blocky edges, no grid, no dithering, no low-res texture. Single static source illustration only, not animation sheet or preview."
-    },
-    {
       "file": "DesignAssets/Foods/food-berry-bush.png",
       "source": "D:\\.codex\\generated_images\\01a15964-c034-78d1-9ce2-1e5e419e018b\\exec-4e5a910d-abea-4949-a19d-4050c8a97ee1.png",
       "rawSource": "$Trash/smooth-foods/food-berry-bush-source.png",

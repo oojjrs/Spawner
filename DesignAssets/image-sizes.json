@@ -1129,16 +1129,6 @@
         3
       ]
     },
-    "DesignAssets/Animations/Resources/HarvestV1/honey-mushrooms/sheet.png": {
-      "display": [
-        152.41846153846154,
-        152.41846153846154
-      ],
-      "grid": [
-        6,
-        4
-      ]
-    },
     "DesignAssets/Animations/RollingAcornIdle/v1/idle.webp": {
       "display": [
         280.4946996466431,
@@ -1217,16 +1207,6 @@
       "sourceMaximum": [
         632,
         632
-      ]
-    },
-    "DesignAssets/Animations/food-mushroom-pile-harvest.png": {
-      "display": [
-        144,
-        144
-      ],
-      "grid": [
-        8,
-        6
       ]
     },
     "DesignAssets/Attributes/SilhouettesV2/04-crescent.png": {
@@ -1479,50 +1459,10 @@
         1
       ]
     },
-    "DesignAssets/Foods/food-meat.png": {
-      "display": [
-        35.188363636363626,
-        35.18836363636364
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Foods/food-mushroom-pile.png": {
-      "display": [
-        123.84,
-        123.84
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Foods/food-mushroom-single.png": {
-      "display": [
-        34.944,
-        34.943999999999996
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
     "DesignAssets/Nests/nest-stage-01.png": {
       "display": [
         478.40662251655624,
         479.205298013245
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/ResourceConcepts/v1/resource-carapace.png": {
-      "display": [
-        27.12436363636363,
-        27.124363636363633
       ],
       "grid": [
         1,
