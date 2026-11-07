@@ -16,8 +16,8 @@ function surface(width, height) {
   return value;
 }
 
-test("six dominant forms share source-owned work and the actual delivery clock without mutating agents", () => {
-  for (const tribe of ["spore", "pebble", "spring"]) for (const form of ["antenna", "feet"]) {
+test("three antenna forms share source-owned work and the actual delivery clock without mutating agents", () => {
+  for (const tribe of ["spore", "pebble", "spring"]) for (const form of ["antenna"]) {
     const agent = unit(tribe, form), before = structuredClone(agent);
     assert.equal(minorTraitResourcePose(agent, "harvest", 10).compression, 0);
     assert.ok(minorTraitResourcePose(agent, "harvest", 10.36).compression > 0);
@@ -35,7 +35,7 @@ test("six dominant forms share source-owned work and the actual delivery clock w
 
 test("the cue excludes legacy compounds, other forms, moving units and interrupted actions", () => {
   const agent = unit();
-  for (const change of [{ tribe: "bean" }, { attributes: {} }, { attributes: { blade: 1, antenna: 1 } },
+  for (const change of [{ tribe: "bean" }, { attributes: {} }, { attributes: { feet: 1 } }, { attributes: { legs: 1 } }, { attributes: { blade: 1, antenna: 1 } },
     { attributes: { antenna: 1, strength: 1 } }, { health: 0 }, { birth: {} }, { species: "bee" },
     { moveStartedAt: 10, moveDuration: 1 }, { harvestStarted: 11 }])
     assert.equal(minorTraitResourcePose({ ...agent, ...change }, "harvest", 10.36), null);

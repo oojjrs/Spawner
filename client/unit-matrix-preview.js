@@ -5,6 +5,49 @@
   const resourceRegistrations = {
     'DesignAssets/Planning/Tribes/pebble/Previews/Resources/pebbles/carry-walk-sheet.webp': { frameSize: 106, pivotX: 53, pivotY: 93 }
   };
+  // Preview direction is a presentation choice, not a rewrite of native art.
+  const previewFacingData = globalThis.SpawnerUnitPreviewFacing || { forms: {}, images: {} };
+  const tribeLabels = { '새싹콩': 'bean', '포자버섯': 'spore', '몽돌': 'pebble', '샘방울': 'spring' };
+  function previewFormKey(element) {
+    const row = element.closest('tr');
+    if (!row) return null;
+    const id = row.dataset.unitKey || row.id?.replace(/^unit-/, '') || '';
+    const matched = id.match(/^(bean|spore|pebble|spring)(?:-(.+))?$/);
+    const tribe = aliases[id] || matched?.[1] || Object.entries(tribeLabels).find(([label]) =>
+      row.querySelector('th[scope="row"]')?.textContent.trim() === label)?.[1];
+    if (!tribe) return null;
+    const gene = row.closest('[data-appearance-gene]')?.dataset.appearanceGene;
+    const form = gene || matched?.[2] || 'base';
+    return tribe + '/' + (form === 'piercing' ? 'secretion' : form);
+  }
+  function previewSourceFacing(element, unit, animation, action) {
+    if (animation?.sourceFacing || animation?.facing) return animation.sourceFacing || animation.facing;
+    if (animation?.image && previewFacingData.images[animation.image]) return previewFacingData.images[animation.image];
+    // Legacy attribute previews have their own old source, which may differ
+    // from the newly registered action for the same form.
+    const variant = element.closest('[data-combat-clip]')?.dataset.variant;
+    if (variant) return ['blade', 'carapace'].includes(variant) ? 'left' : 'right';
+    const key = previewFormKey(element), normalized = action === 'ranged-attack' ? 'ranged' : action;
+    return previewFacingData.forms[key]?.[normalized] || (unit?.tribe || key ? 'right' : 'left');
+  }
+  function setPreviewFacing(element, unit, animation, action) {
+    const link = element.closest('a') || element.querySelector('a');
+    if (!link) return false;
+    const mirror = previewSourceFacing(element, unit, animation, action) !== 'left';
+    element.dataset.mirror = String(mirror); link.dataset.mirror = String(mirror);
+    const thumbnail = link.querySelector('img');
+    if (thumbnail) thumbnail.style.transform = mirror ? 'scaleX(-1)' : '';
+    return mirror;
+  }
+  function initializeDefaultFacing() {
+    for (const link of document.querySelectorAll('#codex-unit-appearance a.attribute-unit-full')) {
+      const row = link.closest('tr'), raw = row?.dataset.unitKey || row?.id?.replace(/^unit-/, ''), unit = units[aliases[raw] || raw];
+      const action = link.dataset.action || link.closest('td[data-action]')?.dataset.action || 'base';
+      const animation = action === 'base' ? unit?.base : unit?.animations?.[action];
+      if (unit || previewFormKey(link)) setPreviewFacing(link, unit, animation, action);
+    }
+  }
+  globalThis.SpawnerUnitPreviewDirection = { previewFormKey, previewSourceFacing, setPreviewFacing };
   let scheduled = null;
   function canvasBackingSize(canvas, extent) {
     const width = canvas.getBoundingClientRect().width || extent;
@@ -131,7 +174,7 @@
   function install(element, unit, animation, action, updateLightbox) {
     const thumbnail = element.querySelector('img'), link = element.closest('a') || element.querySelector('a');
     if (!thumbnail || !link || !animation) return;
-    if (!unit.tribe && (animation.sourceFacing || animation.facing) === 'left') element.dataset.mirror = 'true';
+    setPreviewFacing(element, unit, animation, action);
     if (element.closest('figure[data-work-action]')) animation = { ...animation, projectile: null, audioCues: null };
     const canvas = document.createElement('canvas'); canvas.width = canvas.height = 1; canvas.className = 'unit-matrix-canvas';
     thumbnail.after(canvas); thumbnail.style.display = 'none';
@@ -150,7 +193,7 @@
         let animation = unit.animations[sourceAction], element = cell.querySelector('.unit-matrix-preview');
         if (!element) {
           const link = cell.querySelector('a');
-          if (link && !unit.tribe && (animation?.sourceFacing || animation?.facing) === 'left') link.dataset.mirror = 'true';
+          if (link) setPreviewFacing(link, unit, animation, action);
           continue;
         }
         if (element.dataset.planningClip) {
@@ -206,7 +249,7 @@
   function activate() {
     const page = activePage();
     if (page && !initialized.has(page.id)) {
-      if (page.id === 'codex-units') { initializeUnits(); initializeAppearance(); }
+      if (page.id === 'codex-units') { initializeDefaultFacing(); initializeUnits(); initializeAppearance(); }
       initialized.add(page.id);
     }
     for (const panel of panels) {
@@ -265,6 +308,8 @@
       if (canvas.width !== width || canvas.height !== height) { canvas.width = width; canvas.height = height; }
       context.setTransform(width / sceneWidth, 0, 0, height / sceneHeight, 0, 0);
       context.clearRect(0, 0, sceneWidth, sceneHeight);
+      // Mirror both complete layers together in preview; world outlet coordinates stay untouched.
+      if (scene.mirror) { context.translate(sceneWidth, 0); context.scale(-1, 1); }
       clip.sceneLayers.layers.forEach((layer, position) => {
         const sample = layer.samples[index];
         if (!sample) return;
@@ -318,7 +363,7 @@
       const canvas = document.createElement('canvas');
       canvas.width = canvas.height = 1; canvas.className = 'unit-matrix-canvas'; canvas.style.display = 'none';
       canvas.style.objectFit = 'contain'; thumbnail.after(canvas);
-      const scene = { link, thumbnail, canvas, context: canvas.getContext('2d'), clip, generation: 0, visible: false, ready: false, frame: -1 };
+      const scene = { link, thumbnail, canvas, context: canvas.getContext('2d'), clip, mirror: clip.sourceFacing !== 'left', generation: 0, visible: false, ready: false, frame: -1 };
       scenes.push(scene); sceneByCanvas.set(link, scene); sceneObserver.observe(link);
     }
     function clearLightScene() {
@@ -337,7 +382,7 @@
         let canvas = document.getElementById('unit-lightbox-canvas');
         if (!canvas) { canvas = document.createElement('canvas'); canvas.id = 'unit-lightbox-canvas'; lightbox.querySelector('.lightbox-image').after(canvas); }
         lightbox.classList.remove('is-unit-animation');
-        lightScene = { canvas, context: canvas.getContext('2d'), clip: source.clip, generation: 0, visible: true, ready: false, frame: -1 };
+        lightScene = { canvas, context: canvas.getContext('2d'), clip: source.clip, mirror: source.mirror, generation: 0, visible: true, ready: false, frame: -1 };
         loadScene(lightScene);
       });
     });

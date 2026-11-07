@@ -24,9 +24,9 @@ test('new hits reset hold independently of outgoing attack, shooting and movemen
   const newer={...a,hurtStartedAt:10.5};assert.equal(beanHeldHurtPose(newer,10.95).amount,1);assert.equal(JSON.stringify(a),before);
  }
 });
-test('six dominant live silhouettes keep their source; legacy species, birth and death are excluded',()=>{
- assert.equal(Object.keys(BEAN_HELD_HURT_SOURCES).length,6);
- for(const key of ['base','blade','carapace','secretion','antenna','feet'])assert.equal(beanHeldHurtSource(unit({attributes:key==='base'?{}:{[key]:1}})),BEAN_HELD_HURT_SOURCES[key]);
+test('five dominant live silhouettes keep their source; legacy species, birth and death are excluded',()=>{
+ assert.equal(Object.keys(BEAN_HELD_HURT_SOURCES).length,5);
+ for(const key of ['base','blade','carapace','secretion','antenna'])assert.equal(beanHeldHurtSource(unit({attributes:key==='base'?{}:{[key]:1}})),BEAN_HELD_HURT_SOURCES[key]);
  assert.equal(beanHeldHurtSource(unit({attributes:{blade:1,secretion:1,feet:1}})),null);
  assert.equal(beanHeldHurtSource(unit({attributes:{blade:1,feet:1}})),BEAN_HELD_HURT_SOURCES.blade);
  for(const patch of [{species:'beetle'},{tribe:'spore'},{health:0},{birth:{startedAt:10}},{attributes:{strength:1}},{hurtStartedAt:NaN}])assert.equal(beanHeldHurtPose(unit(patch),10.2),null);
@@ -65,7 +65,7 @@ test('world/detail/lab hooks precede body fallback without clearing attack state
  assert.match(game,/const sourceHeight = frame \? frame.height \|\| frame.size/);
 });
 test('new native atlases are registered exactly and source pixel comparisons passed',()=>{
- assert.equal(auditImages(process.cwd(),BEAN_HELD_HURT_ASSETS),6);
+ assert.equal(auditImages(process.cwd(),BEAN_HELD_HURT_ASSETS),5);
  const qa=JSON.parse(fs.readFileSync('tools/bean-hurt-amplify-20261105/runtime-verification.json'));
  for(const r of qa.sources){assert.equal(r.frames,24);assert.equal(r.fixedLowerPixelsMaxError,0);assert.ok(r.minXDerivative>0);assert.ok(r.minYDerivative>0);assert.ok(r.exactAtlasRgba);}
 });
@@ -75,7 +75,7 @@ test('actual laboratory stage draws held body through overlapping attacks, refre
  const helpers=fs.readFileSync(new URL('./combat-stage-vfx.test.mjs',import.meta.url),'utf8');
  const box={assert,createCombatStage,globalThis,setImmediate};vm.createContext(box);
  vm.runInContext(helpers.slice(helpers.indexOf('const root ='),helpers.indexOf('\ntest(')),box);
- for(const key of ['base','blade','carapace','secretion','antenna','feet']) await box.withStage(async({draw,calls})=>{
+ for(const key of ['base','blade','carapace','secretion','antenna']) await box.withStage(async({draw,calls})=>{
   const {trial,target}=box.setup();target.attributes=key==='base'?{}:{[key]:1};target.stats={health:100};
   target.hurtStartedAt=1;target.attack={startedAt:1,hitAt:1.3,endsAt:2};trial.time=1.45;
   const before=JSON.stringify(trial.agents);await draw(trial);

@@ -69,12 +69,12 @@ test("archive fails closed on source, evidence, clock, cargo or readiness change
 test("archive adds no game action, runtime file, canonical target or readiness", () => {
   const manifest = read("DesignAssets/Animations/UnitAppearanceV1/manifest.json");
   assert.deepEqual(manifest.forms["bean/1f"].archivedBodyActions.harvest, archive);
-  assert.equal(UNIT_APPEARANCE_ASSETS["bean/1f"].archivedBodyActions, undefined);
+  assert.equal(UNIT_APPEARANCE_ASSETS["bean/1f"], undefined);
   assert.equal(unitAppearanceAnimation("bean", 31, "harvest"), null);
   assert.ok(unitAppearanceMissingActions("bean", 31).includes("harvest"));
   assert.equal(unitAppearanceReadiness({ source, ...motions }, 31).worldReady, false);
   assert.equal(UNIT_DISPLAY_MASKS.includes(31), false);
-  assert.equal(unitAppearanceInventory().length, 68);
+  assert.equal(unitAppearanceInventory().length, 64);
   assert.equal(unitAppearanceInventory().some(row => row.key === "bean/1f"), false);
   assert.equal(unitAppearanceInventory().some(row => row.worldReady), false);
   assert.equal(readFileSync(new URL("client/unit-appearance-lazy-assets.js", root), "utf8").includes(archive.clip.image), false);

@@ -29,9 +29,9 @@ function scene(source, reverse = false) {
 
 const forms = [
   { stats: { ranged: true, melee: true } },
-  ...["blade", "carapace", "antenna", "feet", "strength", "arms"].map(key => ({ attributes: { [key]: 1 } })),
+  ...["blade", "carapace", "antenna", "strength", "arms"].map(key => ({ attributes: { [key]: 1 } })),
   { appearanceAttributes: { antenna: 1 } },
-  ...["blade", "carapace", "antenna", "legs"].map(gene => ({ dna: { pieces: [{ gene }] } }))
+  ...["blade", "carapace", "antenna"].map(gene => ({ dna: { pieces: [{ gene }] } }))
 ];
 
 test("mixed and appendage forms use their own approved species effects without enabling ranged-body art", () => {

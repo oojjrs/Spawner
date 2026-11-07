@@ -20,12 +20,12 @@ test("필드와 전투는 속성 보정 캐시에 DNA 성장을 중복하거나 
   const scope = createContext({ Spawner: { unitDisplayAttributes, UNIT_DISPLAY_SIZES, unitDisplaySize },
     unitDisplayScales: new Map([["bean", 2]]), unitAttributeScales: new Map(),
     unitDisplayBounds: new Map([["bean", {}]]), agentBaseParts: new Map(), agentParts: new Map(),
-    ATTRIBUTES: [{ key: "feet" }], combatAttributeArt: { ready: () => true },
+    ATTRIBUTES: [{ key: "antenna" }], combatAttributeArt: { ready: () => true },
     measureUnitDisplayScale: () => 3 });
   for (const name of ["unitDisplayScale", "combatUnitScale"])
     runInContext(source.match(new RegExp("^    function " + name + "\\([^]*?^    }", "m"))[0], scope);
   for (const count of [0, 20, 5, 0]) {
-    const unit = { tribe: "bean", attributes: { feet: 1 }, dna: { pieces: Array(count).fill({}) } };
+    const unit = { tribe: "bean", attributes: { antenna: 1 }, dna: { pieces: Array(count).fill({}) } };
     assert.ok(Math.abs(scope.unitDisplayScale(unit) - 3 * unitDisplaySize(unit) / .4) < 1e-12);
     assert.equal(scope.combatUnitScale(unit), scope.unitDisplayScale(unit));
   }

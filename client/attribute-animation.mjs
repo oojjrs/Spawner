@@ -4,12 +4,12 @@ import { createUnitActionArt, unitActionArtDefinition } from "./unit-action-art.
 
 export const TRIBE_ATTRIBUTE_ASSETS = Object.freeze([...UNIT_ACTION_ART_ASSETS, ...UNIT_BIRTH_ART_ASSETS]);
 
-export function hasTribeAttributes(attributes) { return ["antenna", "strength", "arms", "feet"].some(key => attributes?.[key] > 0); }
+export function hasTribeAttributes(attributes) { return ["antenna", "strength", "arms"].some(key => attributes?.[key] > 0); }
 
 export function createTribeAttributeAnimation(assetSource, createSurface, loadImage) {
   const art = createUnitActionArt(assetSource, createSurface, loadImage);
   async function prepare(tribe) {
-    await Promise.all(["base", "strength", "antenna", "feet"].map(form => art.prepare({ tribe, attributes: form === "base" ? {} : { [form]: 1 } })));
+    await Promise.all(["base", "strength", "antenna"].map(form => art.prepare({ tribe, attributes: form === "base" ? {} : { [form]: 1 } })));
   }
   function frame(tribe, attributes, source, animation, index, action, time, motion, replacement, layer, sourceAgent) {
     return art.frame(sourceAgent || { tribe, attributes, health: 1, mode: "idle", bornAt: 0 }, time);

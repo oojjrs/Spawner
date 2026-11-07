@@ -1,3 +1,5 @@
+import { UNIT_ACTION_ART } from "./unit-action-art-assets.mjs";
+import { UNIT_BIRTH_ART } from "./unit-birth-art-assets.mjs";
 import { SECRETION_COMBO_IMAGE_ASSETS } from "./secretion-combo-assets.mjs";
 import { ANTENNA_COMBO_IMAGE_ASSETS } from "./antenna-combo-assets.mjs";
 import { DEFENSIVE_ATTACK_IMAGE_ASSETS } from "./defensive-attack-assets.mjs";
@@ -232,3 +234,19 @@ for (const name of [...localAssets].sort()) {
 writeGenerated(resolve(root, "client/local-assets.js"),
   "globalThis.SpawnerLocalAssetFiles = Object.freeze(" + JSON.stringify(localAssetFiles, null, 2) + ");\n");
 console.log(`ENV> CLIENT BUNDLE : ${Buffer.byteLength(content)} BYTES`);
+
+// Keep planning previews aligned with current source-facing metadata. Raw art,
+// pivots, event outlets and world/combat target directions are not rewritten.
+const previewFacing = { forms: {}, images: {} };
+for (const [key, definition] of Object.entries(UNIT_ACTION_ART)) {
+  if (key.endsWith('/feet')) continue;
+  const actions = { ...definition.actions, ...(UNIT_BIRTH_ART[key] ? { birth: UNIT_BIRTH_ART[key] } : {}) };
+  previewFacing.forms[key] = { base: definition.reference.sourceFacing || 'right' };
+  for (const [action, clip] of Object.entries(actions)) {
+    const facing = clip.sourceFacing || definition.reference.sourceFacing || 'right';
+    previewFacing.forms[key][action] = facing; previewFacing.images[clip.image] = facing;
+  }
+  previewFacing.images[definition.reference.image] = previewFacing.forms[key].base;
+}
+writeFileSync(resolve(root, 'client/unit-preview-facing-data.js'),
+  'globalThis.SpawnerUnitPreviewFacing=' + JSON.stringify(previewFacing) + ';\n');

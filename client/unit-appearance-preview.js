@@ -19,7 +19,7 @@
       try{
         context.clearRect(0,0,width,width);context.strokeStyle='#66826b';context.beginPath();context.moveTo(16,width*.84);context.lineTo(width-16,width*.84);context.stroke();
         const agent={id:'preview',tribe:selected.tribe,attributes:{},stats:{pieceCount:0}},pose=action==='neutral'?{action:'neutral',source:selected.definition.source,animation:{sourceId:selected.sourceId,image:selected.definition.source.image,frameSize:512,columns:1,frameCount:1,pivotX:256,pivotY:448},frame:0,geometry:{pivotX:256,pivotY:448}}:M.unitAppearancePose(selected.tribe,selected.mask,action,age);
-        if(pose){renderer.beginFrame(context,[{agent,pose,worldPixels:width*.9}],devicePixelRatio||1);await renderer.draw(context,agent,pose,{x:width/2,y:width*.84},width*.9,false,devicePixelRatio||1,()=>revision===token)}
+        if(pose){renderer.beginFrame(context,[{agent,pose,worldPixels:width*.9}],devicePixelRatio||1);await renderer.draw(context,agent,pose,{x:width/2,y:width*.84},width*.9,true,devicePixelRatio||1,()=>revision===token)}
         const encoded=source.stats(),decoded=renderer.stats();$('budget').textContent=`원본 ${(encoded.residentBytes/1048576).toFixed(2)} / ${(encoded.byteBudget/1048576).toFixed(0)} MiB · 디코딩 ${(decoded.residentPixels/1048576).toFixed(2)} / ${(decoded.pixelBudget/1048576).toFixed(0)} Mpx · 디코딩 ${decoded.decodes}회`;
       }catch(error){$('status').textContent='불러오기 실패: '+error.message;console.error(error)}finally{busy=false}
     }

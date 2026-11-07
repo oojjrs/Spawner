@@ -1,7 +1,7 @@
 import { imageDimensions } from "./image-audit.mjs";
 import { unitAppearanceReadiness } from "./unit-appearance.mjs";
 import { validateArchivedBodyAction } from "./unit-appearance-archive.mjs";
-import { existsSync, readFileSync, writeFileSync, mkdirSync, statSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync, mkdirSync, statSync, rmSync } from "node:fs";
 import { resolve, dirname, sep, extname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
@@ -87,7 +87,15 @@ for (const tribe of UNIT_APPEARANCE_TRIBES) for (let mask = 0; mask < 32; mask++
   const record = { source, actions, previewStatus: motions?.previewStatus || {},
     ...(motions?.archivedBodyActions ? { archivedBodyActions: motions.archivedBodyActions } : {}),
     ...(motions?.sceneActions ? { sceneActions: motions.sceneActions } : {}) };
-  record.readiness = unitAppearanceReadiness(record, mask); records[key] = record; runtime[key] = runtimeRecord(record);
+  record.readiness = unitAppearanceReadiness(record, mask); records[key] = record;
+  // Keep source provenance for old saves and review history, not retired art in production.
+  if (!(mask & UNIT_APPEARANCE_BITS.feet)) runtime[key] = runtimeRecord(record);
+}
+// Remove generated browser copies as well, so retired variants cannot ship as stale lazy files.
+// Authored source art and its provenance remain in DesignAssets for historical review.
+for (const tribe of UNIT_APPEARANCE_TRIBES) for (let mask = 0; mask < 32; mask++) {
+  if (mask & UNIT_APPEARANCE_BITS.feet)
+    rmSync(resolve(root, "client/unit-appearance-files/Animations/UnitAppearanceV1", unitAppearanceKey(tribe, mask)), { recursive: true, force: true });
 }
 const manifestRoot = resolve(root, "DesignAssets/Animations/UnitAppearanceV1");
 writeText(resolve(manifestRoot, "manifest.json"), JSON.stringify({ version: 1, slots: 128, bits: UNIT_APPEARANCE_BITS, forms: records }, null, 2) + "\n");

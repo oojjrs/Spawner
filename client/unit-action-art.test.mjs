@@ -40,10 +40,9 @@ test("채집형과 안테나는 승인된 자기 몸체의 전투 클립을 사�
   assert.equal(pose.animation.durationsMs.slice(0, pose.frame).reduce((sum, value) => sum + value, 0), pose.animation.hitTimeMs);
 });
 
-test("안테나와 발의 기준 원화는 해당 외형의 마스크를 사용한다", () => {
+test("안테나의 기준 원화는 해당 외형의 마스크를 사용한다", () => {
   assert.match(UNIT_ACTION_ART["bean/antenna"].reference.image, /ApprovedActionsV1\/bean\/antenna\/idle/);
-  assert.match(UNIT_ACTION_ART["bean/feet"].reference.image, /bean\/08\/Source/);
-  for (const tribe of ["spore", "pebble", "spring"]) for (const form of ["antenna", "feet"]) {
+  for (const tribe of ["spore", "pebble", "spring"]) for (const form of ["antenna"]) {
     assert.match(UNIT_ACTION_ART[tribe + "/" + form].reference.image, new RegExp("/" + tribe + "/" + form + "/"));
   }
 });

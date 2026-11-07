@@ -21,6 +21,8 @@
     if (canvas.width !== backing || canvas.height !== backing) canvas.width = canvas.height = backing;
     const context = canvas.getContext('2d');
     context.setTransform(backing / 96, 0, 0, backing / 96, 0, 0); context.clearRect(0, 0, 96, 96);
+    // Canonical previews face left; keep cargo and throw travel on that side.
+    context.translate(96, 0); context.scale(-1, 1);
     const phase = now % duration / duration;
     let x = 62, y = 66 + Math.sin(phase * Math.PI * 4) * 1.5;
     if (action === 'throw') {

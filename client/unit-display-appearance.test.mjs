@@ -28,7 +28,7 @@ function design(ids) {
   return dna;
 }
 
-test("all 128 current trait combinations deterministically collapse to exactly 68 display forms", () => {
+test("all 128 current trait combinations deterministically collapse to exactly 64 display forms", () => {
   const forms = new Set();
   for (const tribe of UNIT_APPEARANCE_TRIBES) {
     const groups = new Map();
@@ -40,9 +40,9 @@ test("all 128 current trait combinations deterministically collapse to exactly 6
       assert.deepEqual(attributes, attributesFor(actual));
       forms.add(tribe + "/" + mask); groups.set(mask, (groups.get(mask) || 0) + 1);
     }
-    assert.deepEqual(UNIT_DISPLAY_MASKS.map(mask => groups.get(mask)), [1, 2, 2, 2, 2, 1, ...Array(11).fill(2)]);
+    assert.deepEqual(UNIT_DISPLAY_MASKS.map(mask => groups.get(mask)), Array(16).fill(2));
   }
-  assert.equal(forms.size, 68); assert.equal(UNIT_DISPLAY_FORM_COUNT, 68);
+  assert.equal(forms.size, 64); assert.equal(UNIT_DISPLAY_FORM_COUNT, 64);
   for (const invalid of [null, undefined, NaN, -1, 32, .5]) assert.equal(unitDominantAppearanceMask(invalid), null);
 });
 
@@ -64,16 +64,17 @@ test("snapshotted appearance and historical retired-organ rigs keep their compat
   assert.deepEqual(unitDisplayAttributes(unit), { antenna: 1 });
   assert.deepEqual(unitDisplayAttributes({ ...unit, appearanceAttributes: {} }), {});
   const legacy = { blade: 1, antenna: 1, strength: 1, feet: 1 };
-  assert.equal(unitDisplayAttributesFrom(legacy), legacy, "historical compound rigs keep their existing attribute data");
+  assert.deepEqual(unitDisplayAttributesFrom(legacy), { blade: 1, antenna: 1, strength: 1 });
+  assert.equal(legacy.feet, 1, "saved mechanics remain untouched");
   assert.equal(unitDisplayAttributes({ species: "bubble-toad", attributes }), attributes);
   assert.deepEqual(unitDisplayAttributesFrom(null), {});
   assert.deepEqual(combatAttributeKeys(null), []);
-  assert.deepEqual(unitDisplayAttributesFrom({ legs: 3, dnaGather: true }), { feet: 1, dnaGather: true });
+  assert.deepEqual(unitDisplayAttributesFrom({ legs: 3, dnaGather: true }), { dnaGather: true });
 });
 
-test("production inventory has 68 targets, keeps archival 128 sources and never upgrades readiness", () => {
+test("production inventory has 64 targets, keeps archival 128 sources and never upgrades readiness", () => {
   const inventory = unitAppearanceInventory();
-  assert.equal(inventory.length, 68); assert.equal(unitAppearanceInventory({ includeLegacyCombinations: true }).length, 128);
+  assert.equal(inventory.length, 64); assert.equal(unitAppearanceInventory({ includeLegacyCombinations: true }).length, 128);
   assert.equal(inventory.filter(row => row.worldReady).length, 0);
   assert.ok(inventory.find(row => row.key === "bean/15").missingActions.includes("ranged"));
   assert.equal(unitDisplayAbilityMask(1), 9); assert.equal(unitDisplayAbilityMask(16), 24);

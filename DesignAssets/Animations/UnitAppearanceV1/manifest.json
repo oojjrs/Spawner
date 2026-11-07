@@ -6933,7 +6933,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -7057,18 +7056,24 @@
           "pivotX": 256,
           "pivotY": 448,
           "events": [],
-          "sourceHash": "54cb430a848400e1f6742a737f135467de1852600b8555e42ae16c484d351682",
+          "sourceHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
           "cameraMapping": {
             "verified": true,
-            "sourceHash": "54cb430a848400e1f6742a737f135467de1852600b8555e42ae16c484d351682",
+            "sourceHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
             "pixelsPerWorld": 1112.2889190188587,
             "scale": 0.4603120567375886,
             "offsetX": 138.1601134751773,
             "offsetY": 241.78019858156028,
             "method": "preserve-existing-game-fixed-native-camera",
-            "verification": "tools/native-appearance-registration-20261104/report.json"
+            "verification": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/rig.json"
           },
-          "imageHash": "54cb430a848400e1f6742a737f135467de1852600b8555e42ae16c484d351682"
+          "provenance": {
+            "kind": "approved-idle-part-rig",
+            "rig": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/rig.json",
+            "sourceImage": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/approved-idle-key.png",
+            "sourceHash": "f0283fc0996e528bfe73e91c705e4e55f90f045182344684203a8e2e1fc8ca11"
+          },
+          "imageHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d"
         },
         "jump": {
           "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
@@ -7228,123 +7233,7 @@
         }
       },
       "previewStatus": {},
-      "sceneActions": {
-        "birth": {
-          "contractVersion": 1,
-          "kind": "native-body-with-external-legacy-scene",
-          "tribe": "spore",
-          "mask": 0,
-          "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
-          "runtimeEnabled": true,
-          "independentBodyAction": false,
-          "integrationStatus": "legacy-scene-body-adapter",
-          "body": {
-            "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
-            "image": "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp",
-            "sourceHash": "93696aac1e9eb471a1aae0ba8932eec01e369d0d64d064218a01b4b1c2ce9761",
-            "frameSize": 192,
-            "columns": 4,
-            "frameCount": 22,
-            "durationsMs": [
-              180,
-              80,
-              80,
-              80,
-              80,
-              80,
-              80,
-              80,
-              80,
-              160,
-              160,
-              160,
-              160,
-              160,
-              160,
-              160,
-              160,
-              80,
-              80,
-              80,
-              80,
-              700
-            ],
-            "loop": false,
-            "pivotX": 133.33333333333331,
-            "pivotY": 162,
-            "cameraMapping": {
-              "verified": true,
-              "sourceHash": "93696aac1e9eb471a1aae0ba8932eec01e369d0d64d064218a01b4b1c2ce9761",
-              "pixelsPerWorld": 217.05366357069144,
-              "scale": 2.3588636633781053,
-              "offsetX": -58.51515511708067,
-              "offsetY": 65.86408653274697,
-              "method": "preserve-existing-game-fixed-native-birth-body-camera"
-            }
-          },
-          "externalRoot": {
-            "module": "client/birth.mjs",
-            "export": "sporeBirthPlacement",
-            "ownsWorldTravel": true,
-            "targetFloorWorld": 0.808
-          },
-          "deformation": {
-            "kind": "spore-affine-body-v1",
-            "module": "client/birth.mjs",
-            "moduleHash": "0e8009e12eaa98126aab60833a8c5cd397be78b51b974cd9bfd26571f15d5c36",
-            "export": "sporeBirthMotion",
-            "nativeHeight": 59.666666666666664,
-            "nativeOutletX": 150,
-            "nativeOutletY": 133.33333333333331,
-            "nativeCenterX": 133.33333333333331,
-            "nativePivotY": 162,
-            "rowStep": null
-          },
-          "visibility": {
-            "firstBodyFrame": 2,
-            "lastFramePolicy": "handoff-to-registered-idle",
-            "lastFrame": 21
-          },
-          "nativeFrameSampling": "fixed-native-frame-canvas-copy",
-          "legacyPixelStage": {
-            "displayScale": 0.9037825952078233,
-            "nativeWorldPerPixelBeforeDisplay": 0.005097636994742031,
-            "agentHeight": 0.7,
-            "canonicalFrameSize": 512,
-            "referenceHeight": null,
-            "unitHeight": 179,
-            "unitPivotY": null,
-            "commonFloorOffsetFromHalfCell": 0.44
-          },
-          "floorOffsetWorld": 0,
-          "separatedSceneAssets": [
-            {
-              "role": "nest",
-              "image": "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/nest-stationary.png",
-              "sourceHash": "3e52fe5ba79971314cfe0d6937df6253c2cef1f65aaf7c1ba84001eda4dc9fe2"
-            }
-          ],
-          "legacyReference": {
-            "file": "client/game.js",
-            "function": "drawSporeBirth",
-            "sourceHash": "fcfa816a72c568cbeeaf74768ef58434a2c7db53a658798c089bbe5dc2104715",
-            "capture": "tools/native-appearance-registration-20261104/legacy-body-reference.json"
-          },
-          "ownership": {
-            "bodyOnly": true,
-            "originalPixelsPreserved": true,
-            "perFrameFit": false,
-            "sceneRootInsideBodyClip": false,
-            "nestsOrWaterInsideBodyClip": false,
-            "dnaGrowthApplications": 1
-          },
-          "validation": {
-            "cameraVerified": true,
-            "runtimeRendererConnected": true,
-            "report": "tools/native-appearance-registration-20261104/scene-render-report.json"
-          }
-        }
-      },
+      "sceneActions": {},
       "readiness": {
         "sourceApproved": true,
         "cameraVerified": true,
@@ -7486,7 +7375,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -7635,7 +7523,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -7784,7 +7671,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -7934,7 +7820,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -8084,7 +7969,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -8233,7 +8117,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -8383,7 +8266,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -8533,7 +8415,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -8683,7 +8564,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -8834,7 +8714,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -8985,7 +8864,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -9152,7 +9030,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -9302,7 +9179,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -9452,7 +9328,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"
@@ -9603,7 +9478,6 @@
           "walk": "pending",
           "jump": "pending",
           "hurt": "pending",
-          "birth": "pending",
           "death": "pending",
           "attack": "pending",
           "ranged": "pending"

@@ -44,10 +44,11 @@ test("contact is 300ms, contact hold ends at 360ms and the attack ends at 1000ms
 test("other tribes, spring attachment masks and ranged modes keep the existing timing", () => {
   const cases = [
     ...["bean", "spore", "pebble"].map(tribe => ({ ...base, tribe })),
-    ...["blade", "carapace", "secretion", "antenna", "feet", "legs", "strength", "arms"].map(key => ({ ...base, attributes: { [key]: 1 } })),
-    { ...base, appearanceAttributes: { feet: 1 } },
+    ...["blade", "carapace", "secretion", "antenna", "strength", "arms"].map(key => ({ ...base, attributes: { [key]: 1 } })),
     ...[{ dnaRanged: true }, { mode: "ranged" }, { attackMode: "ranged" }].map(flags => ({ ...base, attack: { ...base.attack, ...flags } }))
   ];
+  for (const attributes of [{ feet: 1 }, { legs: 1 }])
+    assert.equal(unitAnimationPose({ ...base, attributes }, .45).animation, unitAnimationPose(base, .45).animation);
   for (const agent of cases) {
     const pose = unitAnimationPose(agent, .45), clip = UNIT_ANIMATIONS[agent.tribe].attack;
     assert.equal(pose.animation, clip);

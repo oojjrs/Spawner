@@ -57,7 +57,7 @@ export function beanHeldHurtSource(agent) {
   if (!agent || agent.species || (agent.tribe || agent.key || "bean") !== "bean") return null;
   const attributes=unitDisplayAttributes(agent);
   if (UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key=>attributes[key]>0)) return null;
-  const key=["blade","secretion","carapace","antenna","feet"].find(key=>attributes[key]>0) ||
+  const key=["blade","secretion","carapace","antenna"].find(key=>attributes[key]>0) ||
     (agent.stats?.ranged && !agent.stats?.melee ? "secretion" : "base");
   return BEAN_HELD_HURT_SOURCES[key] || null;
 }

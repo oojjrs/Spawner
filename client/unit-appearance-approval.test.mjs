@@ -52,12 +52,16 @@ test("the spore art approval is bound to exactly the fourteen reviewed source or
     assert.deepEqual(manifest.forms[key].readiness, {
       sourceApproved: true, cameraVerified: false, actionSetComplete: false, worldReady: false, ready: false
     });
+    if (parseInt(mask, 16) & 8) {
+      assert.equal(UNIT_APPEARANCE_ASSETS[key], undefined, "retired artwork stays out of the runtime");
+      continue;
+    }
     assert.deepEqual(UNIT_APPEARANCE_ASSETS[key].readiness, manifest.forms[key].readiness);
     assert.equal(UNIT_APPEARANCE_ASSETS[key].source.image, undefined);
     assert.deepEqual(UNIT_APPEARANCE_ASSETS[key].actions, {});
   }
   assert.equal(manifest.forms["spore/00"].source.approvalState, "existing-reference");
   assert.equal(manifest.forms["spore/10"].source.approvalRef.callId, "call_855ca484695d4a3eb76d94115969162d");
-  assert.deepEqual(UNIT_DISPLAY_MASKS, [0, 1, 16, 2, 4, 8, 3, 18, 17, 19, 5, 20, 6, 21, 7, 22, 23]);
-  assert.equal(UNIT_DISPLAY_FORM_COUNT, 68);
+  assert.deepEqual(UNIT_DISPLAY_MASKS, [0, 1, 16, 2, 4, 3, 18, 17, 19, 5, 20, 6, 21, 7, 22, 23]);
+  assert.equal(UNIT_DISPLAY_FORM_COUNT, 64);
 });

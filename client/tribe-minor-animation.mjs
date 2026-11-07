@@ -8,7 +8,7 @@ function minorForm(agent, attributes) {
   if (!agent || agent.species || agent.kind !== "corpse" && (agent.dna?.version !== 3 || !Array.isArray(agent.dna.pieces))) return null;
   if ([agent.attributes, agent.appearanceAttributes].some(values => UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key => values?.[key] > 0))) return null;
   if (["blade", "secretion", "carapace", "piercing", "guard", "arms"].some(key => attributes?.[key] > 0)) return null;
-  return attributes?.antenna > 0 ? "antenna" : attributes?.feet > 0 ? "feet" : null;
+  return attributes?.antenna > 0 ? "antenna" : null;
 }
 
 export function tribeMinorAnimation(agent, attributes, action) {

@@ -24,7 +24,7 @@ test('blade-carapace matches the exact current organ set across all tribes and h
   for (const tribe of tribes) for (let mask = 0; mask < 32; mask++) {
     const attributes = Object.fromEntries(Object.entries(UNIT_APPEARANCE_BITS).filter(([, bit]) => mask & bit).map(([key]) => [key, 3]));
     const agent = { tribe, attributes }, before = JSON.stringify(agent);
-    const expected = UNIT_COMBINATION_MASKS.includes(mask & ~8) ? mask & ~8 : [1, 16, 2, 4, 8].find(bit => mask & bit) || 0;
+    const expected = UNIT_COMBINATION_MASKS.includes(mask & ~8) ? mask & ~8 : [1, 16, 2, 4].find(bit => mask & bit) || 0;
     assert.equal(unitDominantAppearanceMask(mask), expected);
     assert.equal(unitAppearanceMaskFromAttributes(unitDisplayAttributes(agent)), expected);
     assert.equal(unitBladeCarapaceAppearance(agent), (mask & ~8) === 3);
@@ -32,7 +32,7 @@ test('blade-carapace matches the exact current organ set across all tribes and h
     assert.equal(JSON.stringify(agent), before);
     forms.add(tribe + '/' + expected);
   }
-  assert.equal(forms.size, 68); assert.equal(UNIT_DISPLAY_FORM_COUNT, 68);
+  assert.equal(forms.size, 64); assert.equal(UNIT_DISPLAY_FORM_COUNT, 64);
   assert.equal(unitDisplayAbilityMask(3), 11);
   assert.equal(unitDisplayAbilityMask(1) & 16, 0, 'ranged combinations now own distinct bodies');
 });
@@ -82,7 +82,7 @@ for (const tribe of tribes) test(`${tribe}: six authored actions, carry fallback
 });
 
 test('welcome roster includes all four combinations and shows their own idle', () => {
-  assert.equal(WELCOME_UNIT_APPEARANCES.length, 18);
+  assert.equal(WELCOME_UNIT_APPEARANCES.length, 17);
   const index = WELCOME_UNIT_APPEARANCES.findIndex(attributes => unitBladeCarapaceAppearance({ attributes }));
   assert.ok(index >= 0);
   const next = createWelcomeRoster(tribes, [], WELCOME_UNIT_APPEARANCES.length, () => .5), selected = new Set();

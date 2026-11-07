@@ -141,7 +141,156 @@ function createCombatVfxCursor({ maxLateness = .35, maxEvents = 512 } = {}) {
   return { consume, reset() { clear(); streamId = null; previousTime = null; } };
 }
 
-return { COMBAT_VFX_ART_STATUS, normalizeCombatVfxEvent, combatVfxCues, combatVfxAt, createCombatVfxCursor };
+return {COMBAT_VFX_ART_STATUS,normalizeCombatVfxEvent,combatVfxCues,combatVfxAt,createCombatVfxCursor};
+})();
+modules["client/unit-size.mjs"] = (() => {
+const UNIT_DISPLAY_SIZES = Object.freeze({
+  bean: .40, spore: .38, pebble: .42, spring: .39,
+  "flower-tail-bird": .26, "dew-rabbit": .29, "cotton-sheep": .32,
+  "soil-mole": .35, "bundle-snail": .38, "rolling-acorn": .38,
+  "bubble-toad": .52, "vine-turtle": .52, "spiny-back-beetle": .58,
+  "snare-vine": .62, "soil-boar": .66, "shadow-weasel": .72, "talon-owl": .78,
+  "spring-keeper": .88, "lantern-keeper": .92, "old-garden-snail": 1.00, "walking-forest": 1.12,
+  "spiny-back-leader": 1.24, "white-paw": 1.44
+});
+
+function unitDisplaySize(unit) {
+  const count = Array.isArray(unit.dna?.pieces) ? unit.dna.pieces.length :
+    Number.isFinite(unit.stats?.pieceCount) ? Math.max(0, unit.stats.pieceCount) : 0;
+  const scale = 1 + .01 * count;
+  const size = (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean) * scale;
+  return UNIT_DISPLAY_SIZES.bean + (size - UNIT_DISPLAY_SIZES.bean) * .5;
+}
+
+function combatViewCell(width, height) {
+  return Math.min(width * .18, height * .2) / UNIT_DISPLAY_SIZES.bean;
+}
+
+function combatViewAxis(spans) {
+  const intervals = [];
+  for (const span of spans.sort((a, b) => a[0] - b[0])) {
+    const last = intervals.at(-1);
+    if (last && span[0] <= last[1]) last[1] = Math.max(last[1], span[1]);
+    else intervals.push([...span]);
+  }
+  const occupied = (from, to) => intervals.reduce((length, span) => length + Math.max(0, Math.min(to, span[1]) - Math.max(from, span[0])), 0);
+  const project = (value, gap) => value * gap + (value >= 0 ? occupied(0, value) : -occupied(value, 0)) * (1 - gap);
+  const unproject = (value, gap) => {
+    for (const span of intervals) {
+      const start = project(span[0], gap), end = start + span[1] - span[0];
+      if (value < start) return gap ? span[0] + (value - start) / gap : span[0];
+      if (value <= end) return span[0] + value - start;
+    }
+    const end = intervals.at(-1)[1];
+    return end + (value - project(end, gap)) / (gap || 1);
+  };
+  return { low: intervals[0][0], high: intervals.at(-1)[1], occupied, project, unproject };
+}
+
+function combatViewLayout(width, height, units, camera) {
+  if (!camera) return combatViewFormation(width, height, units);
+  if (!camera.layout) {
+    camera.layout = combatViewFormation(width, height, units);
+    camera.width = width; camera.height = height;
+  }
+  const initial = camera.layout, ratio = Math.min(width / camera.width, height / camera.height);
+  const offsetX = (width - camera.width * ratio) / 2, offsetY = (height - camera.height * ratio) / 2;
+  const resize = point => ({ x: point.x * ratio + offsetX, y: point.y * ratio + offsetY });
+  const project = initial.project && (point => resize(initial.project(point)));
+  const unproject = initial.unproject && (point => initial.unproject({ x: (point.x - offsetX) / ratio, y: (point.y - offsetY) / ratio }));
+  const cell = initial.cell * ratio;
+  const positions = new Map(units.map(unit => {
+    const point = unit.combat?.position || unit.combatPosition;
+    const origin = initial.positions.get(String(unit.id)) || { x: camera.width * ((unit.combat?.side ?? unit.side) ? .75 : .25), y: camera.height * .68 };
+    const { x, y } = project && Number.isFinite(point?.x) && Number.isFinite(point?.y) ? project(point) : resize(origin);
+    const size = unitDisplaySize(unit);
+    return [String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
+      top: y - size * cell * 1.2, bottom: y + size * cell * .18 } }];
+  }));
+  return { cell, positions, project, unproject };
+}
+
+function combatViewFormation(width, height, units) {
+  const located = units.map(unit => ({ unit, point: unit.combat?.position || unit.combatPosition }))
+    .filter(entry => Number.isFinite(entry.point?.x) && Number.isFinite(entry.point?.y));
+  if (located.length) {
+    const axes = home => {
+      const bodies = located.map(({ unit, point }) => {
+        const size = unitDisplaySize(unit);
+        const x = home && Number.isFinite(point.homeX) ? point.homeX : point.x;
+        const y = (home && Number.isFinite(point.homeY) ? point.homeY : point.y) * .5;
+        return { left: x - size * .65, right: x + size * .65, top: y - size * 1.2, bottom: y + size * .18 };
+      });
+      return { x: combatViewAxis(bodies.map(body => [body.left, body.right])),
+        y: combatViewAxis(bodies.map(body => [body.top, body.bottom])) };
+    };
+    const home = axes(true), current = axes(false);
+    const leftBody = home.x.occupied(home.x.low, 0), rightBody = home.x.occupied(0, home.x.high);
+    const verticalBody = home.y.occupied(home.y.low, home.y.high);
+    let cell = Math.min(combatViewCell(width, height, located.map(entry => entry.unit)),
+      width * .44 / leftBody, width * .44 / rightBody, height * .72 / verticalBody);
+    const gap = (span, body, available) => span > body ? Math.max(0, Math.min(1, (available - body) / (span - body))) : 1;
+    const gapX = Math.min(gap(Math.max(0, -home.x.low), leftBody, width * .44 / cell),
+      gap(Math.max(0, home.x.high), rightBody, width * .44 / cell));
+    const gapY = gap(home.y.high - home.y.low, verticalBody, height * .72 / cell);
+    const extentX = Math.max(Math.abs(current.x.project(current.x.low, gapX)), Math.abs(current.x.project(current.x.high, gapX)));
+    const lowY = current.y.project(current.y.low, gapY), highY = current.y.project(current.y.high, gapY);
+    cell = Math.min(cell, width * .44 / extentX, height * .72 / (highY - lowY));
+    const project = point => ({ x: width * .5 + current.x.project(point.x, gapX) * cell,
+      y: height * .55 + (current.y.project(point.y * .5, gapY) - (lowY + highY) / 2) * cell });
+    const unproject = point => ({ x: current.x.unproject((point.x - width * .5) / cell, gapX),
+      y: current.y.unproject((point.y - height * .55) / cell + (lowY + highY) / 2, gapY) * 2 });
+    const positions = new Map(located.map(({ unit, point }) => {
+      const { x, y } = project(point), size = unitDisplaySize(unit);
+      return [String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
+        top: y - size * cell * 1.2, bottom: y + size * cell * .18 } }];
+    }));
+    return { cell, positions, project, unproject };
+  }
+  const teams = [0, 1].map(side => units.filter(unit => (unit.combat?.side ?? unit.side) === side));
+  const count = Math.max(...teams.map(team => team.length));
+  const positions = new Map();
+  if (!count) return { cell: combatViewCell(width, height, units), positions };
+  const columnCount = Math.min(count, Math.ceil(Math.sqrt(count * 1.5))), rowCount = Math.ceil(count / columnCount);
+  const columns = Array(columnCount).fill(0), rows = Array(rowCount).fill(0);
+  teams.forEach(team => team.forEach((unit, index) => {
+    const size = unitDisplaySize(unit);
+    columns[index % columnCount] = Math.max(columns[index % columnCount], size * 1.3);
+    rows[Math.floor(index / columnCount)] = Math.max(rows[Math.floor(index / columnCount)], size);
+  }));
+  const gapX = Math.min(width * .035, width * .42 / (columnCount * 4));
+  const gapY = Math.min(height * .035, height * .36 / (rowCount * 4));
+  const totalWidth = columns.reduce((sum, value) => sum + value, 0);
+  const rowSpans = rows.slice(1).map((size, index) => rows[index] * .18 + size * 1.2);
+  const groundSpan = rowSpans.reduce((sum, value) => sum + value, 0);
+  const cell = Math.min(combatViewCell(width, height, units),
+    (width * .42 - gapX * (columnCount - 1)) / totalWidth,
+    height * .44 / (rows[0] * 1.2), height * .08 / (rows[rowCount - 1] * .18),
+    rowCount > 1 ? (height * .36 - gapY * (rowCount - 1)) / groundSpan : Infinity);
+  const gridWidth = totalWidth * cell + gapX * (columnCount - 1);
+  const gridHeight = groundSpan * cell + gapY * (rowCount - 1);
+  const firstFoot = height * .5 + (height * .36 - gridHeight) / 2;
+  teams.forEach((team, side) => team.forEach((unit, index) => {
+    const column = index % columnCount, row = Math.floor(index / columnCount), size = unitDisplaySize(unit);
+    const offsetX = columns.slice(0, column).reduce((sum, value) => sum + value, 0) * cell + gapX * column;
+    const offsetY = rowSpans.slice(0, row).reduce((sum, value) => sum + value, 0) * cell + gapY * row;
+    const x = width * (side ? .75 : .25) + (side ? -1 : 1) * (gridWidth / 2 - offsetX - columns[column] * cell / 2);
+    const y = firstFoot + offsetY;
+    positions.set(String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
+      top: y - size * cell * 1.2, bottom: y + size * cell * .18 } });
+  }));
+  return { cell, positions };
+}
+
+function unitFacing(unit) {
+  return (unit.attack?.directionX || unit.facing || 1) < 0 ? -1 : 1;
+}
+
+function unitFrameMirror(sourceFacing, facing) {
+  return (facing < 0) !== (sourceFacing === "left");
+}
+
+return {UNIT_DISPLAY_SIZES,unitDisplaySize,combatViewCell,combatViewLayout,unitFacing,unitFrameMirror};
 })();
 modules["client/creature-approved-actions.mjs"] = (() => {
 const APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS = Object.freeze({
@@ -1513,159 +1662,10 @@ const UNIT_IMAGE_BOUNDS = Object.freeze({
 
 return {UNIT_IMAGE_BOUNDS};
 })();
-modules["client/unit-size.mjs"] = (() => {
-const UNIT_DISPLAY_SIZES = Object.freeze({
-  bean: .40, spore: .38, pebble: .42, spring: .39,
-  "flower-tail-bird": .26, "dew-rabbit": .29, "cotton-sheep": .32,
-  "soil-mole": .35, "bundle-snail": .38, "rolling-acorn": .38,
-  "bubble-toad": .52, "vine-turtle": .52, "spiny-back-beetle": .58,
-  "snare-vine": .62, "soil-boar": .66, "shadow-weasel": .72, "talon-owl": .78,
-  "spring-keeper": .88, "lantern-keeper": .92, "old-garden-snail": 1.00, "walking-forest": 1.12,
-  "spiny-back-leader": 1.24, "white-paw": 1.44
-});
-
-function unitDisplaySize(unit) {
-  const count = Array.isArray(unit.dna?.pieces) ? unit.dna.pieces.length :
-    Number.isFinite(unit.stats?.pieceCount) ? Math.max(0, unit.stats.pieceCount) : 0;
-  const scale = 1 + .01 * count;
-  const size = (UNIT_DISPLAY_SIZES[unit.species || unit.tribe || "bean"] || UNIT_DISPLAY_SIZES.bean) * scale;
-  return UNIT_DISPLAY_SIZES.bean + (size - UNIT_DISPLAY_SIZES.bean) * .5;
-}
-
-function combatViewCell(width, height) {
-  return Math.min(width * .18, height * .2) / UNIT_DISPLAY_SIZES.bean;
-}
-
-function combatViewAxis(spans) {
-  const intervals = [];
-  for (const span of spans.sort((a, b) => a[0] - b[0])) {
-    const last = intervals.at(-1);
-    if (last && span[0] <= last[1]) last[1] = Math.max(last[1], span[1]);
-    else intervals.push([...span]);
-  }
-  const occupied = (from, to) => intervals.reduce((length, span) => length + Math.max(0, Math.min(to, span[1]) - Math.max(from, span[0])), 0);
-  const project = (value, gap) => value * gap + (value >= 0 ? occupied(0, value) : -occupied(value, 0)) * (1 - gap);
-  const unproject = (value, gap) => {
-    for (const span of intervals) {
-      const start = project(span[0], gap), end = start + span[1] - span[0];
-      if (value < start) return gap ? span[0] + (value - start) / gap : span[0];
-      if (value <= end) return span[0] + value - start;
-    }
-    const end = intervals.at(-1)[1];
-    return end + (value - project(end, gap)) / (gap || 1);
-  };
-  return { low: intervals[0][0], high: intervals.at(-1)[1], occupied, project, unproject };
-}
-
-function combatViewLayout(width, height, units, camera) {
-  if (!camera) return combatViewFormation(width, height, units);
-  if (!camera.layout) {
-    camera.layout = combatViewFormation(width, height, units);
-    camera.width = width; camera.height = height;
-  }
-  const initial = camera.layout, ratio = Math.min(width / camera.width, height / camera.height);
-  const offsetX = (width - camera.width * ratio) / 2, offsetY = (height - camera.height * ratio) / 2;
-  const resize = point => ({ x: point.x * ratio + offsetX, y: point.y * ratio + offsetY });
-  const project = initial.project && (point => resize(initial.project(point)));
-  const unproject = initial.unproject && (point => initial.unproject({ x: (point.x - offsetX) / ratio, y: (point.y - offsetY) / ratio }));
-  const cell = initial.cell * ratio;
-  const positions = new Map(units.map(unit => {
-    const point = unit.combat?.position || unit.combatPosition;
-    const origin = initial.positions.get(String(unit.id)) || { x: camera.width * ((unit.combat?.side ?? unit.side) ? .75 : .25), y: camera.height * .68 };
-    const { x, y } = project && Number.isFinite(point?.x) && Number.isFinite(point?.y) ? project(point) : resize(origin);
-    const size = unitDisplaySize(unit);
-    return [String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
-      top: y - size * cell * 1.2, bottom: y + size * cell * .18 } }];
-  }));
-  return { cell, positions, project, unproject };
-}
-
-function combatViewFormation(width, height, units) {
-  const located = units.map(unit => ({ unit, point: unit.combat?.position || unit.combatPosition }))
-    .filter(entry => Number.isFinite(entry.point?.x) && Number.isFinite(entry.point?.y));
-  if (located.length) {
-    const axes = home => {
-      const bodies = located.map(({ unit, point }) => {
-        const size = unitDisplaySize(unit);
-        const x = home && Number.isFinite(point.homeX) ? point.homeX : point.x;
-        const y = (home && Number.isFinite(point.homeY) ? point.homeY : point.y) * .5;
-        return { left: x - size * .65, right: x + size * .65, top: y - size * 1.2, bottom: y + size * .18 };
-      });
-      return { x: combatViewAxis(bodies.map(body => [body.left, body.right])),
-        y: combatViewAxis(bodies.map(body => [body.top, body.bottom])) };
-    };
-    const home = axes(true), current = axes(false);
-    const leftBody = home.x.occupied(home.x.low, 0), rightBody = home.x.occupied(0, home.x.high);
-    const verticalBody = home.y.occupied(home.y.low, home.y.high);
-    let cell = Math.min(combatViewCell(width, height, located.map(entry => entry.unit)),
-      width * .44 / leftBody, width * .44 / rightBody, height * .72 / verticalBody);
-    const gap = (span, body, available) => span > body ? Math.max(0, Math.min(1, (available - body) / (span - body))) : 1;
-    const gapX = Math.min(gap(Math.max(0, -home.x.low), leftBody, width * .44 / cell),
-      gap(Math.max(0, home.x.high), rightBody, width * .44 / cell));
-    const gapY = gap(home.y.high - home.y.low, verticalBody, height * .72 / cell);
-    const extentX = Math.max(Math.abs(current.x.project(current.x.low, gapX)), Math.abs(current.x.project(current.x.high, gapX)));
-    const lowY = current.y.project(current.y.low, gapY), highY = current.y.project(current.y.high, gapY);
-    cell = Math.min(cell, width * .44 / extentX, height * .72 / (highY - lowY));
-    const project = point => ({ x: width * .5 + current.x.project(point.x, gapX) * cell,
-      y: height * .55 + (current.y.project(point.y * .5, gapY) - (lowY + highY) / 2) * cell });
-    const unproject = point => ({ x: current.x.unproject((point.x - width * .5) / cell, gapX),
-      y: current.y.unproject((point.y - height * .55) / cell + (lowY + highY) / 2, gapY) * 2 });
-    const positions = new Map(located.map(({ unit, point }) => {
-      const { x, y } = project(point), size = unitDisplaySize(unit);
-      return [String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
-        top: y - size * cell * 1.2, bottom: y + size * cell * .18 } }];
-    }));
-    return { cell, positions, project, unproject };
-  }
-  const teams = [0, 1].map(side => units.filter(unit => (unit.combat?.side ?? unit.side) === side));
-  const count = Math.max(...teams.map(team => team.length));
-  const positions = new Map();
-  if (!count) return { cell: combatViewCell(width, height, units), positions };
-  const columnCount = Math.min(count, Math.ceil(Math.sqrt(count * 1.5))), rowCount = Math.ceil(count / columnCount);
-  const columns = Array(columnCount).fill(0), rows = Array(rowCount).fill(0);
-  teams.forEach(team => team.forEach((unit, index) => {
-    const size = unitDisplaySize(unit);
-    columns[index % columnCount] = Math.max(columns[index % columnCount], size * 1.3);
-    rows[Math.floor(index / columnCount)] = Math.max(rows[Math.floor(index / columnCount)], size);
-  }));
-  const gapX = Math.min(width * .035, width * .42 / (columnCount * 4));
-  const gapY = Math.min(height * .035, height * .36 / (rowCount * 4));
-  const totalWidth = columns.reduce((sum, value) => sum + value, 0);
-  const rowSpans = rows.slice(1).map((size, index) => rows[index] * .18 + size * 1.2);
-  const groundSpan = rowSpans.reduce((sum, value) => sum + value, 0);
-  const cell = Math.min(combatViewCell(width, height, units),
-    (width * .42 - gapX * (columnCount - 1)) / totalWidth,
-    height * .44 / (rows[0] * 1.2), height * .08 / (rows[rowCount - 1] * .18),
-    rowCount > 1 ? (height * .36 - gapY * (rowCount - 1)) / groundSpan : Infinity);
-  const gridWidth = totalWidth * cell + gapX * (columnCount - 1);
-  const gridHeight = groundSpan * cell + gapY * (rowCount - 1);
-  const firstFoot = height * .5 + (height * .36 - gridHeight) / 2;
-  teams.forEach((team, side) => team.forEach((unit, index) => {
-    const column = index % columnCount, row = Math.floor(index / columnCount), size = unitDisplaySize(unit);
-    const offsetX = columns.slice(0, column).reduce((sum, value) => sum + value, 0) * cell + gapX * column;
-    const offsetY = rowSpans.slice(0, row).reduce((sum, value) => sum + value, 0) * cell + gapY * row;
-    const x = width * (side ? .75 : .25) + (side ? -1 : 1) * (gridWidth / 2 - offsetX - columns[column] * cell / 2);
-    const y = firstFoot + offsetY;
-    positions.set(String(unit.id), { x, y, bounds: { left: x - size * cell * .65, right: x + size * cell * .65,
-      top: y - size * cell * 1.2, bottom: y + size * cell * .18 } });
-  }));
-  return { cell, positions };
-}
-
-function unitFacing(unit) {
-  return (unit.attack?.directionX || unit.facing || 1) < 0 ? -1 : 1;
-}
-
-function unitFrameMirror(sourceFacing, facing) {
-  return (facing < 0) !== (sourceFacing === "left");
-}
-
-return { UNIT_DISPLAY_SIZES, unitDisplaySize, combatViewCell, combatViewLayout, unitFacing, unitFrameMirror };
-})();
 modules["client/creature-ranged.mjs"] = (() => {
 const { imageAnimation } = modules["client/image-geometry.mjs"];
 const { UNIT_IMAGE_BOUNDS } = modules["client/unit-image-bounds.mjs"];
-const { unitDisplaySize } = modules["client/unit-size.mjs"];
+const { unitDisplaySize, unitFrameMirror, unitFacing } = modules["client/unit-size.mjs"];
 
 // Approved 2026-11-06. Native cels are unchanged; registration is the exact
 // inverse of the approved melee seed's lossless resize-and-padding transform.
@@ -1821,12 +1821,13 @@ function creatureRangedPose(agent, time) {
   let frame = 0;
   while (frame < animation.frameCount-1 && elapsed >= animation.durationsMs[frame]) elapsed -= animation.durationsMs[frame++];
   return { action: "ranged", animation, frame, shotIndex, launchAt: launch,
-    mirrorX: (attack.directionX || agent.facing || -1) > 0 };
+    mirrorX: unitFrameMirror(animation.sourceFacing || animation.facing || "left", attack.directionX || agent.facing || 1) };
 }
 
 // Offsets are in world cells relative to the same idle-normalized body pivot
 // used by the world, detail and laboratory renderers. The journal owns timing.
-function creatureRangedOutlet(agent, facing = agent.attack?.directionX || agent.facing || -1) {
+function creatureRangedOutlet(agent, facing) {
+  facing ||= unitFacing(agent);
   const animation = CREATURE_RANGED_ANIMATIONS[agent.species];
   if (!animation) return null;
   const idle = imageAnimation({ image: animation.idleImage, frameSize: 512, viewSize: 512 });
@@ -1834,16 +1835,53 @@ function creatureRangedOutlet(agent, facing = agent.attack?.directionX || agent.
   const length = Math.max(bounds.width, bounds.height) * idle.frameSize / bounds.frameSize;
   const scale = unitDisplaySize(agent) * idle.viewSize /
     ((idle.registrationScale || 1) * length * animation.viewSize);
-  return { x: -Math.sign(facing || -1) * (animation.outletX-animation.pivotX) * scale,
+  return { x: (unitFrameMirror(animation.sourceFacing || animation.facing || "left", facing) ? -1 : 1) * (animation.outletX-animation.pivotX) * scale,
     y: (animation.outletY-animation.pivotY) * scale };
 }
 
 return {CREATURE_RANGED_ANIMATIONS,CREATURE_RANGED_ASSETS,creatureRangedPose,creatureRangedOutlet};
 })();
+modules["client/unit-combination-forms.mjs"] = (() => {
+// Authored whole-body combinations, using the current four-organ selection.
+// This catalogue never alters simulation attributes or DNA.
+const UNIT_COMBINATION_FORMS = Object.freeze([
+  { key: "blade-carapace", label: "칼날+갑각", mask: 3, attributes: { blade: 1, carapace: 1 } },
+  { key: "secretion-carapace", label: "분비+갑각", mask: 18, attributes: { secretion: 1, carapace: 1 } },
+  { key: "blade-secretion", label: "칼날+분비", mask: 17, attributes: { blade: 1, secretion: 1 } },
+  { key: "blade-secretion-carapace", label: "칼날+분비+갑각", mask: 19, attributes: { blade: 1, secretion: 1, carapace: 1 } },
+  { key: "blade-antenna", label: "칼날+안테나", mask: 5, attributes: { blade: 1, antenna: 1 } },
+  { key: "secretion-antenna", label: "분비+안테나", mask: 20, attributes: { secretion: 1, antenna: 1 } },
+  { key: "carapace-antenna", label: "갑각+안테나", mask: 6, attributes: { carapace: 1, antenna: 1 } },
+  { key: "blade-secretion-antenna", label: "칼날+분비+안테나", mask: 21, attributes: { blade: 1, secretion: 1, antenna: 1 } },
+  { key: "blade-carapace-antenna", label: "칼날+갑각+안테나", mask: 7, attributes: { blade: 1, carapace: 1, antenna: 1 } },
+  { key: "secretion-carapace-antenna", label: "분비+갑각+안테나", mask: 22, attributes: { secretion: 1, carapace: 1, antenna: 1 } },
+  { key: "blade-secretion-carapace-antenna", label: "칼날+분비+갑각+안테나", mask: 23, attributes: { blade: 1, secretion: 1, carapace: 1, antenna: 1 } },
+].map(form => Object.freeze({ ...form, attributes: Object.freeze(form.attributes) })));
+
+const UNIT_COMBINATION_MASKS = Object.freeze(UNIT_COMBINATION_FORMS.map(form => form.mask));
+
+const ANTENNA_COMBINATION_FORMS = Object.freeze(UNIT_COMBINATION_FORMS.filter(form => form.attributes.antenna));
+
+return {UNIT_COMBINATION_FORMS,UNIT_COMBINATION_MASKS,ANTENNA_COMBINATION_FORMS};
+})();
 modules["server/unit-appearance.mjs"] = (() => {
 const UNIT_APPEARANCE_BITS = Object.freeze({ blade: 1, carapace: 2, antenna: 4, feet: 8, secretion: 16 });
 const UNIT_APPEARANCE_LEGACY_VISUAL_KEYS = Object.freeze(["strength", "arms", "piercing", "guard"]);
 const UNIT_APPEARANCE_TRIBES = Object.freeze(["bean", "spore", "pebble", "spring"]);
+const UNIT_APPEARANCE_ORGANS = Object.freeze(["blade", "secretion", "carapace", "antenna"]);
+const UNIT_APPEARANCE_FORMS = Object.freeze(["base", "gather", ...Array.from({ length: 15 }, (_, index) =>
+  UNIT_APPEARANCE_ORGANS.filter((key, bit) => (index + 1) & (1 << bit)).join("-"))]);
+
+function unitAppearanceForm(agent) {
+  if (!agent || agent.species) return null;
+  const attributes = agent.appearanceAttributes || agent.attributes;
+  const pieces = agent.dna?.pieces || [];
+  const organs = UNIT_APPEARANCE_ORGANS.filter(key => attributes ? attributes[key] > 0 : pieces.some(piece => piece.gene === key));
+  if (organs.length) return organs.join("-");
+  // Retired feet/legs data stays in saves, but never selects a legged body.
+  if (attributes?.gather > 0 || attributes?.strength > 0 || attributes?.arms > 0 || pieces.some(piece => piece.gene === "gather")) return "gather";
+  return attributes?.piercing > 0 ? "secretion" : "base";
+}
 
 function unitAppearanceKey(tribe, mask) {
   return UNIT_APPEARANCE_TRIBES.includes(tribe) && Number.isInteger(mask) && mask >= 0 && mask < 32 ?
@@ -1863,32 +1901,42 @@ function unitAppearanceMaskFromDna(dna) {
   for (const piece of dna.pieces) mask |= UNIT_APPEARANCE_BITS[piece.gene === "legs" ? "feet" : piece.gene] || 0;
   return mask;
 }
-return {UNIT_APPEARANCE_BITS,UNIT_APPEARANCE_LEGACY_VISUAL_KEYS,UNIT_APPEARANCE_TRIBES,unitAppearanceKey,unitAppearanceMaskFromAttributes,unitAppearanceMaskFromDna};
+
+return {UNIT_APPEARANCE_BITS,UNIT_APPEARANCE_LEGACY_VISUAL_KEYS,UNIT_APPEARANCE_TRIBES,UNIT_APPEARANCE_ORGANS,UNIT_APPEARANCE_FORMS,unitAppearanceForm,unitAppearanceKey,unitAppearanceMaskFromAttributes,unitAppearanceMaskFromDna};
 })();
 modules["client/unit-display-appearance.mjs"] = (() => {
-const { UNIT_APPEARANCE_BITS, UNIT_APPEARANCE_TRIBES, UNIT_APPEARANCE_LEGACY_VISUAL_KEYS, unitAppearanceMaskFromDna } = modules["server/unit-appearance.mjs"];
+const { UNIT_COMBINATION_FORMS, UNIT_COMBINATION_MASKS } = modules["client/unit-combination-forms.mjs"];
+const { UNIT_APPEARANCE_BITS, UNIT_APPEARANCE_TRIBES, UNIT_APPEARANCE_LEGACY_VISUAL_KEYS, unitAppearanceMaskFromDna, unitAppearanceMaskFromAttributes, unitAppearanceForm } = modules["server/unit-appearance.mjs"];
 
 // Rendering only. Never assign this projection to a simulation agent, DNA,
 // snapshot, stats, or save. Lower-priority abilities remain fully effective.
-const UNIT_DISPLAY_PRIORITY = Object.freeze(["blade", "secretion", "carapace", "antenna", "feet"]);
-const UNIT_DISPLAY_MASKS = Object.freeze([0, ...UNIT_DISPLAY_PRIORITY.map(key => UNIT_APPEARANCE_BITS[key])]);
+const UNIT_DISPLAY_PRIORITY = Object.freeze(["blade", "secretion", "carapace", "antenna"]);
+const UNIT_DISPLAY_MASKS = Object.freeze([0, ...UNIT_DISPLAY_PRIORITY.map(key => UNIT_APPEARANCE_BITS[key]), ...UNIT_COMBINATION_MASKS]);
 const UNIT_DISPLAY_FORM_COUNT = UNIT_APPEARANCE_TRIBES.length * UNIT_DISPLAY_MASKS.length;
 
 function unitDominantAppearanceMask(mask) {
   if (!Number.isInteger(mask) || mask < 0 || mask >= 32) return null;
+  const organs = mask & ~UNIT_APPEARANCE_BITS.feet;
+  if (UNIT_COMBINATION_MASKS.includes(organs)) return organs;
   return UNIT_DISPLAY_PRIORITY.map(key => UNIT_APPEARANCE_BITS[key]).find(bit => mask & bit) || 0;
 }
 
 function unitDisplayAttributesFrom(attributes = {}) {
-  attributes ||= {};
+  // Preserve saved mechanics while removing the retired visual attachment.
+  attributes = { ...(attributes || {}) };
+  delete attributes.feet;
+  delete attributes.legs;
   // Old saves using retired organs retain their authored compatibility rigs,
   // without applying the current priority policy. Current DNA cannot produce
-  // these keys and always uses one of the six canonical silhouettes.
+  // these keys and uses the canonical silhouettes plus the authored combinations.
   if (UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key => attributes[key] > 0)) return attributes;
-  const dominant = UNIT_DISPLAY_PRIORITY.find(key => attributes[key] > 0 || key === "feet" && attributes.legs > 0);
+  const dominant = UNIT_DISPLAY_PRIORITY.find(key => attributes[key] > 0);
   const result = { ...attributes };
   for (const key of [...UNIT_DISPLAY_PRIORITY, "legs"]) delete result[key];
-  if (dominant) result[dominant] = 1;
+  const mask = unitAppearanceMaskFromAttributes(attributes);
+  const combination = UNIT_COMBINATION_FORMS.find(form => form.mask === (mask & ~UNIT_APPEARANCE_BITS.feet));
+  if (combination) Object.assign(result, combination.attributes);
+  else if (dominant) result[dominant] = 1;
   return result;
 }
 
@@ -1902,8 +1950,19 @@ function unitDisplayAttributes(agent) {
     { ...display, strength: display.strength || display.arms || 1 } : display;
 }
 
-// A shared blade silhouette can also shoot. Production readiness must include
-// every action needed by builds that map to that silhouette, not just its name.
+// Match the same four-organ selector used by the actual sprite catalogue.
+// Retired feet and stat-only organs never replace a registered combination.
+function unitCombinationAppearance(agent) {
+  const selected = unitAppearanceForm(agent);
+  return UNIT_COMBINATION_FORMS.some(form => form.key === selected) ? selected : null;
+}
+
+function unitBladeCarapaceAppearance(agent) {
+  return unitCombinationAppearance(agent) === "blade-carapace";
+}
+
+// Readiness includes all abilities of historical builds that share this body.
+// Separate organ combinations retain their own authored silhouette.
 function unitDisplayAbilityMask(mask) {
   if (!UNIT_DISPLAY_MASKS.includes(mask)) return null;
   let abilities = 0;
@@ -1911,7 +1970,7 @@ function unitDisplayAbilityMask(mask) {
   return abilities;
 }
 
-return {UNIT_DISPLAY_PRIORITY,UNIT_DISPLAY_MASKS,UNIT_DISPLAY_FORM_COUNT,unitDominantAppearanceMask,unitDisplayAttributesFrom,unitDisplayAttributes,unitDisplayAbilityMask};
+return {UNIT_DISPLAY_PRIORITY,UNIT_DISPLAY_MASKS,UNIT_DISPLAY_FORM_COUNT,unitDominantAppearanceMask,unitDisplayAttributesFrom,unitDisplayAttributes,unitCombinationAppearance,unitBladeCarapaceAppearance,unitDisplayAbilityMask};
 })();
 modules["client/toad-hop.mjs"] = (() => {
 // Approved original-cel v5 hop. All timing is normalized to a server cell move;
@@ -2027,7 +2086,7 @@ function agentAttackFrame(attack, time) {
   return -1;
 }
 
-return { AGENT_ATTACK_FRAME_DURATIONS, AGENT_HURT_FRAME_DURATIONS, AGENT_HURT_DURATION, AGENT_ATTACK_HIT_FRAME, AGENT_ATTACK_HIT_TIME, AGENT_ATTACK_DURATION, AGENT_ATTACK_ASSET, attackAnimationSegments, attackAnimationElapsed, agentAttackFrame };
+return {AGENT_ATTACK_FRAME_DURATIONS,AGENT_HURT_FRAME_DURATIONS,AGENT_HURT_DURATION,AGENT_ATTACK_HIT_FRAME,AGENT_ATTACK_HIT_TIME,AGENT_ATTACK_DURATION,AGENT_ATTACK_ASSET,attackAnimationSegments,attackAnimationElapsed,agentAttackFrame};
 })();
 modules["server/creature-attack.mjs"] = (() => {
 const CREATURE_ATTACK_TIMINGS = Object.freeze({
@@ -2076,7 +2135,7 @@ const NEUTRAL_UNIT_STATS = Object.freeze(Object.fromEntries([
   ["spiny-back-leader",{"health":310,"power":60,"armor":40,"speed":0.84,"movement":0.88,"vision":5.4,"combo":0.05,"comboPower":62,"critical":8,"criticalPower":180,"accuracy":5,"penetration":7,"comboSpeed":0.42,"focus":0.28,"evasion":7,"parry":10,"block":14,"blockPower":50,"counter":15,"counterPower":145,"tenacity":34,"reduction":6,"stun":5,"stunTime":0.5,"bleed":5,"bleedPower":3,"area":1,"areaPower":30,"lifesteal":0,"reflection":10,"regeneration":0.3,"capacity":15,"harvestSpeed":1.47}]
 ].map(([key, stats]) => [key, Object.freeze(stats)])));
 
-return { NEUTRAL_UNIT_STATS };
+return {NEUTRAL_UNIT_STATS};
 })();
 modules["server/creature-movement-profiles.mjs"] = (() => {
 const { NEUTRAL_UNIT_STATS } = modules["server/neutral-unit-stats.mjs"];
@@ -2102,7 +2161,7 @@ const CREATURE_MOVEMENT_PROFILES = Object.freeze(Object.fromEntries([
   ["spiny-back-leader", 1.4, 120]
 ].map(([species, speed, restSeconds]) => [species, Object.freeze({ speed: NEUTRAL_UNIT_STATS[species]?.movement ?? speed, restSeconds })])));
 
-return { CREATURE_MOVEMENT_PROFILES };
+return {CREATURE_MOVEMENT_PROFILES};
 })();
 modules["client/unit-animation.mjs"] = (() => {
 const { unitFrameMirror } = modules["client/unit-size.mjs"];
@@ -2417,14 +2476,100 @@ function springKeeperFlightPose(agent, time) {
   return { animation, frame: unitAnimationFrame(animation, animation.takeoffDurationMs + animation.flightDurationMs + landing), stage: "landing" };
 }
 
-return { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_WALK_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, UNIT_ANIMATION_ASSETS, unitAnimationFrame, creatureAttackPose, creatureHurtPose, unitMovementElapsedMs, unitAnimationPose, creatureWalkPose, creatureAnimationSpeed, unitMovementPosition, springKeeperFlightPose };
+return {UNIT_ANIMATIONS,CREATURE_IDLE_ANIMATIONS,CREATURE_WALK_ANIMATIONS,CREATURE_ATTACK_ANIMATIONS,CREATURE_HURT_ANIMATIONS,CREATURE_DEATH_ANIMATIONS,UNIT_ANIMATION_ASSETS,unitAnimationFrame,creatureAttackPose,creatureHurtPose,unitMovementElapsedMs,unitAnimationPose,creatureWalkPose,creatureAnimationSpeed,unitMovementPosition,springKeeperFlightPose};
+})();
+modules["client/bean-secretion-idle-assets.mjs"] = (() => {
+const BEAN_SECRETION_IDLE_ANIMATION = Object.freeze({
+  "image": "DesignAssets/Animations/BeanSecretionIdleV4/idle.webp",
+  "frameSize": 128,
+  "viewSize": 128,
+  "columns": 8,
+  "frameCount": 64,
+  "pivotX": 64,
+  "pivotY": 112,
+  "durationsMs": [
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50
+  ],
+  "durationMs": 3200,
+  "loop": true,
+  "rangedBody": true,
+  "secretionIdle": true,
+  "nativeSecretionIdle": true
+});
+
+return {BEAN_SECRETION_IDLE_ANIMATION};
 })();
 modules["client/secretion-idle.mjs"] = (() => {
-const { unitAnimationPose } = modules["client/unit-animation.mjs"];
+const { unitAnimationPose, unitAnimationFrame } = modules["client/unit-animation.mjs"];
+const { BEAN_SECRETION_IDLE_ANIMATION } = modules["client/bean-secretion-idle-assets.mjs"];
 
 // Native, losslessly cropped own-source cels. viewSize preserves the original
 // 512 camera: cropping transparent pixels must never enlarge the living body.
 const UNIT_SECRETION_IDLE_ANIMATIONS = Object.freeze(Object.fromEntries(Object.entries({
+  "bean": BEAN_SECRETION_IDLE_ANIMATION,
   "spore": {
     "image": "DesignAssets/Animations/SecretionIdleV1/spore/idle.webp",
     "frameSize": 208,
@@ -2865,7 +3010,7 @@ const UNIT_SECRETION_IDLE_ANIMATIONS = Object.freeze(Object.fromEntries(Object.e
 const UNIT_SECRETION_IDLE_ASSETS = Object.freeze(Object.values(UNIT_SECRETION_IDLE_ANIMATIONS).map(clip => clip.image));
 
 function unitSecretionIdlePose(agent, time, appearance) {
-  const tribe = agent?.tribe || agent?.key, animation = UNIT_SECRETION_IDLE_ANIMATIONS[tribe];
+  const tribe = agent?.tribe || agent?.key, animation = appearance?.idleAnimation || UNIT_SECRETION_IDLE_ANIMATIONS[tribe];
   if (!animation || !appearance?.idle || appearance.idle.image !== `DesignAssets/Animations/UnitRangedV1/${tribe}/Source/neutral.png` ||
       agent.species || agent.birth || !(agent.health > 0) || !Number.isFinite(time) ||
       ["harvest", "unload", "jump"].includes(agent.mode) ||
@@ -2873,7 +3018,10 @@ function unitSecretionIdlePose(agent, time, appearance) {
   const body = unitAnimationPose(agent, time);
   if (body && body.action !== "idle") return null;
   const epoch = Number.isFinite(agent.animationStartedAt) ? agent.animationStartedAt : Number.isFinite(agent.bornAt) ? agent.bornAt : 0;
-  const elapsed = Math.max(0, (time - epoch) * 1000), sample = Math.floor((elapsed % animation.durationMs + 1e-7) / 100) % 64;
+  const elapsed = Math.max(0, (time - epoch) * 1000);
+  if (animation.nativeSecretionIdle) return { action: "idle", animation, frame: unitAnimationFrame(animation, elapsed),
+    mirrorX: agent.facing < 0, idleFallback: appearance.idle };
+  const sample = Math.floor((elapsed % animation.durationMs + 1e-7) / 100) % 64;
   return { action: "idle", animation, frame: animation.frames[sample], sample, mirrorX: agent.facing < 0,
     idleFallback: appearance.idle };
 }
@@ -3612,7 +3760,7 @@ const UNIT_SECRETION_LIFECYCLE_ANIMATIONS = Object.freeze(Object.fromEntries(
 const UNIT_SECRETION_LIFECYCLE_ASSETS = Object.freeze(Object.values(UNIT_SECRETION_LIFECYCLE_ANIMATIONS)
   .flatMap(form => Object.values(form).map(animation => animation.image)));
 
-return { UNIT_SECRETION_LIFECYCLE_ANIMATIONS, UNIT_SECRETION_LIFECYCLE_ASSETS };
+return {UNIT_SECRETION_LIFECYCLE_ANIMATIONS,UNIT_SECRETION_LIFECYCLE_ASSETS};
 })();
 modules["client/unit-ranged-assets.mjs"] = (() => {
 const { SPRING_SECRETION_ASSETS } = modules["client/spring-secretion-assets.mjs"];
@@ -4035,12 +4183,13 @@ return {secretionResourceMotion,unitSecretionResourcePose,secretionResourceFrame
 })();
 modules["client/unit-ranged.mjs"] = (() => {
 const { UNIT_SECRETION_IDLE_ASSETS, unitSecretionIdlePose } = modules["client/secretion-idle.mjs"];
+const { BEAN_SECRETION_IDLE_ANIMATION } = modules["client/bean-secretion-idle-assets.mjs"];
 const { drawBeanSecretionBirth } = modules["client/bean-secretion-birth.mjs"];
 const { UNIT_SECRETION_WALK_ANIMATIONS, unitSecretionWalkPose } = modules["client/secretion-walk.mjs"];
 const { UNIT_SECRETION_LIFECYCLE_ANIMATIONS, UNIT_SECRETION_LIFECYCLE_ASSETS } = modules["client/secretion-lifecycle.mjs"];
 const { unitDisplayAttributes } = modules["client/unit-display-appearance.mjs"];
 const { UNIT_RANGED_ASSETS } = modules["client/unit-ranged-assets.mjs"];
-const { unitDisplaySize } = modules["client/unit-size.mjs"];
+const { unitDisplaySize, unitFrameMirror, unitFacing } = modules["client/unit-size.mjs"];
 const { unitSecretionResourcePose, secretionResourceFrame } = modules["client/secretion-resource-motion.mjs"];
 
 const root = "DesignAssets/Animations/UnitRangedV1/bean/";
@@ -4056,7 +4205,7 @@ const UNIT_RANGED_FORMS = Object.freeze({
   ...Object.fromEntries(Object.entries(UNIT_RANGED_ASSETS).map(([tribe, form]) =>
     [tribe, Object.freeze({ ...form, hurt: UNIT_RANGED_HURT_ANIMATIONS[tribe], walk: UNIT_SECRETION_WALK_ANIMATIONS[tribe],
       lifecycle: UNIT_SECRETION_LIFECYCLE_ANIMATIONS[tribe] || null })])),
-  bean: Object.freeze({ birthBody: drawBeanSecretionBirth, lifecycle: UNIT_SECRETION_LIFECYCLE_ANIMATIONS.bean, hurt: UNIT_RANGED_HURT_ANIMATIONS.bean, walk: UNIT_SECRETION_WALK_ANIMATIONS.bean,
+  bean: Object.freeze({ idleAnimation: BEAN_SECRETION_IDLE_ANIMATION, birthBody: drawBeanSecretionBirth, lifecycle: UNIT_SECRETION_LIFECYCLE_ANIMATIONS.bean, hurt: UNIT_RANGED_HURT_ANIMATIONS.bean, walk: UNIT_SECRETION_WALK_ANIMATIONS.bean,
   idle: { image: root + "Source/neutral.png", frameSize: 512, viewSize: 512, columns: 1,
     pivotX: 256, pivotY: 448, frameCount: 1, durationMs: 600, durationsMs: [600], loop: true, rangedBody: true },
   animation: { image: root + "shoot.webp", frameSize: 512, viewSize: 512, columns: 6,
@@ -4106,7 +4255,7 @@ function unitRangedAttackOrIdlePose(agent, time) {
   const appearance = unitRangedAppearance(agent);
   if (!appearance || agent.health <= 0) return null;
   const active = unitRangedAttack(agent), animation = appearance.animation;
-  const idle = () => ({ action: "idle", animation: appearance.idle, frame: 0, mirrorX: agent.facing < 0 });
+  const idle = () => ({ action: "idle", animation: appearance.idle, frame: 0, mirrorX: unitFrameMirror(appearance.idle.sourceFacing, unitFacing(agent)) });
   if (!active || !Number.isFinite(time) || time < active.attack.startedAt) return idle();
   // The world computes readyAt and the final launch with differently grouped
   // additions. Permit only floating-point roundoff, not a delayed recovery.
@@ -4136,7 +4285,7 @@ function unitRangedAttackOrIdlePose(agent, time) {
   if (Math.abs(time - launch) <= epsilon) elapsed = launchAt;
   let frame = 0;
   while (frame < animation.frameCount - 1 && elapsed >= animation.durationsMs[frame]) elapsed -= animation.durationsMs[frame++];
-  return { action: "shoot", animation, frame, mirrorX: (active.attack.directionX || agent.facing) < 0 };
+  return { action: "shoot", animation, frame, mirrorX: unitFrameMirror(animation.sourceFacing, active.attack.directionX || unitFacing(agent)) };
 }
 
 function unitRangedCombatPose(agent, time) {
@@ -4152,7 +4301,7 @@ function unitRangedCombatPose(agent, time) {
   if (age < 0 || age >= duration) return pose;
   let elapsed = age / duration * animation.durationMs, frame = 0;
   while (frame < animation.frameCount - 1 && elapsed >= animation.durationsMs[frame]) elapsed -= animation.durationsMs[frame++];
-  return { action: "hurt", animation, frame, mirrorX: agent.facing < 0 };
+  return { action: "hurt", animation, frame, mirrorX: unitFrameMirror(animation.sourceFacing, unitFacing(agent)) };
 }
 
 function unitRangedPose(agent, time) {

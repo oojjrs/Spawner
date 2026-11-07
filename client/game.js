@@ -9353,7 +9353,7 @@
     }
 
     async function prepareTribeRendering(colonies) {
-      await Promise.all(Spawner.PLAYER_TRIBES.flatMap(tribe => ["base", "strength", "blade", "secretion", "carapace", "antenna", "feet"].map(form =>
+      await Promise.all(Spawner.PLAYER_TRIBES.flatMap(tribe => ["base", "strength", "blade", "secretion", "carapace", "antenna"].map(form =>
         unitPresentation.prepareAnimation({ tribe: tribe.key, appearanceAttributes: form === "base" ? {} : { [form]: 1 } }))));
       await colonyAppearances[0].sprite.decode();
       await Promise.all([...new Set(colonies.map(colony => colony.tribe).filter(key => key && key !== "bean"))].map(async key => {

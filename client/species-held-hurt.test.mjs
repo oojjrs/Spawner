@@ -21,13 +21,13 @@ const retiredBirthMetadataHashes = {
 const currentInputHash = (path, original) => retiredBirthMetadataHashes[path] || original;
 
 const tribes=['spore','pebble','spring'];
-const forms=['base','blade','carapace','secretion','antenna','feet'];
+const forms=['base','blade','carapace','secretion','antenna'];
 const unit=(tribe='spore',key='base',patch={})=>({id:'candidate',tribe,health:10,hurtStartedAt:10,facing:1,attributes:key==='base'?{}:{[key]:1},...patch});
 const images=new Map(SPECIES_HELD_HURT_ASSETS.map(path=>{const[width,height]=imageDimensions(path);return[path,{path,width,height,complete:true}]}));
 const context=()=>({calls:[],save(){},restore(){},translate(...a){this.calls.push(['translate',...a])},scale(...a){this.calls.push(['scale',...a])},drawImage(...a){this.calls.push(['draw',...a])}});
 
-test('eighteen own-source forms use the same real-time half-second hold and recovery',()=>{
- assert.equal(SPECIES_HELD_HURT_ASSETS.length,18);
+test('fifteen own-source forms use the same real-time half-second hold and recovery',()=>{
+ assert.equal(SPECIES_HELD_HURT_ASSETS.length,15);
  for(const tribe of tribes)for(const form of forms){
   const a=unit(tribe,form);
   for(const age of [0,.01,.12,.3,.499999,.5]){const p=speciesHeldHurtPose(a,10+age);assert.equal(p.source,SPECIES_HELD_HURT_SOURCES[tribe][form]);assert.equal(p.amount,1);assert.equal(p.hold,true);}
@@ -40,7 +40,7 @@ test('dominance and legacy guards do not replace unsupported artwork',()=>{
   for(const key of ['strength','arms','piercing','guard'])assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{[key]:1}})),null,key);
   assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{blade:1,secretion:1,carapace:1,feet:1}})),null);
   assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{blade:1,feet:1}})),SPECIES_HELD_HURT_SOURCES[tribe].blade);
-  assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{legs:1}})),SPECIES_HELD_HURT_SOURCES[tribe].feet);
+  assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{legs:1}})),SPECIES_HELD_HURT_SOURCES[tribe].base);
   // Combinations use their own authored hurt while a single gland keeps its source.
   assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{secretion:1,carapace:1,feet:1}})),null);
   assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{secretion:1,feet:1}})),SPECIES_HELD_HURT_SOURCES[tribe].secretion);
@@ -132,9 +132,9 @@ test('actual laboratory stage draws each held source once through attack overlap
   trial.time=2.281;await draw(trial);assert.equal(held().length,0);
  });
 });
-test('all eighteen native atlases are registered without promoting unfinished action sets',async()=>{
+test('all fifteen native atlases are registered without promoting unfinished action sets',async()=>{
  const{auditImages}=await import('./image-audit.mjs');const{unitAppearanceInventory}=await import('./unit-appearance.mjs');
- assert.equal(auditImages(process.cwd(),SPECIES_HELD_HURT_ASSETS),18);assert.equal(unitAppearanceInventory().filter(r=>r.worldReady).length,0);
+ assert.equal(auditImages(process.cwd(),SPECIES_HELD_HURT_ASSETS),15);assert.equal(unitAppearanceInventory().filter(r=>r.worldReady).length,0);
 });
 
 test('six live V7 blade and carapace sources preserve rig landmarks and material constraints',()=>{

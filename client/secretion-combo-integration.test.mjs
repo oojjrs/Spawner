@@ -19,20 +19,20 @@ const originalForms = UNIT_COMBINATION_FORMS.filter(form => !form.attributes.ant
 const forms = originalForms.filter(form => form.attributes.secretion);
 const make = (tribe, form) => ({ tribe, attributes: form.attributes, health: 20, bornAt: 0 });
 
-test('exact authored masks select 68 silhouettes without changing extra-trait or legacy routing', () => {
+test('exact authored masks select 64 silhouettes without changing extra-trait or legacy routing', () => {
   const seen = new Set();
   for (const tribe of UNIT_APPEARANCE_TRIBES) for (let mask = 0; mask < 32; mask++) {
     const form = UNIT_COMBINATION_FORMS.find(row => row.mask === (mask & ~8));
     const attributes = Object.fromEntries(Object.entries(UNIT_APPEARANCE_BITS).filter(([, bit]) => mask & bit).map(([key]) => [key, 2]));
     const unit = { tribe, attributes }, original = JSON.stringify(unit);
-    const expected = form?.mask ?? [1, 16, 2, 4, 8].find(bit => mask & bit) ?? 0;
+    const expected = form?.mask ?? [1, 16, 2, 4].find(bit => mask & bit) ?? 0;
     assert.equal(unitCombinationAppearance(unit), form?.key || null);
     assert.equal(unitDominantAppearanceMask(mask), expected);
     assert.equal(unitAppearanceMaskFromAttributes(unitDisplayAttributes(unit)), expected);
     assert.equal(JSON.stringify(unit), original); seen.add(tribe + '/' + expected);
     if (form?.attributes.secretion && !form.attributes.antenna) assert.equal(unitActionArtDefinition(unit), SECRETION_COMBO_ACTION_ART[tribe + '/' + form.key]);
   }
-  assert.equal(seen.size, 68); assert.equal(UNIT_DISPLAY_FORM_COUNT, 68);
+  assert.equal(seen.size, 64); assert.equal(UNIT_DISPLAY_FORM_COUNT, 64);
   for (const form of forms) {
     const unit = make('bean', form);
     assert.equal(unitCombinationAppearance({ ...unit, appearanceAttributes: {} }), null);
@@ -112,7 +112,7 @@ test('observing combo poses never changes combat outcomes or launch-event stream
 });
 
 test('welcome includes twelve new identities with authored idle performance', () => {
-  assert.equal(WELCOME_UNIT_APPEARANCES.length, 18);
+  assert.equal(WELCOME_UNIT_APPEARANCES.length, 17);
   for (const tribe of UNIT_APPEARANCE_TRIBES) for (const form of forms) {
     assert.ok(WELCOME_UNIT_APPEARANCES.some(attributes => unitCombinationAppearance({ attributes }) === form.key));
     const performance = welcomeUnitPerformance(make(tribe, form), 10);

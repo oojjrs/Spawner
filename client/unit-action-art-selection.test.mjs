@@ -47,7 +47,7 @@ test("채집은 독립형이며 기존 혼합 DNA·시체 외형 스냅샷·중�
   assert.equal(unitAppearanceForm({ attributes: { blade: 1 }, appearanceAttributes: {} }), "base");
   assert.equal(unitAppearanceForm({ dna: { pieces: [{ gene: "gather" }] }, attributes: {} }), "gather");
   assert.equal(unitAppearanceForm({ attributes: { strength: 1 } }), "gather");
-  assert.equal(unitAppearanceForm({ attributes: { feet: 1 } }), "feet");
+  assert.equal(unitAppearanceForm({ attributes: { feet: 1 } }), "base");
   assert.equal(unitAppearanceForm({ attributes: { piercing: 1 } }), "secretion");
   assert.equal(unitActionArtDefinition({ species: "soil-boar", attributes: { blade: 1 } }), null);
   assert.equal(unitActionArtDefinition(null), null);

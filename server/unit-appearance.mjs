@@ -11,7 +11,7 @@ export function unitAppearanceForm(agent) {
   const pieces = agent.dna?.pieces || [];
   const organs = UNIT_APPEARANCE_ORGANS.filter(key => attributes ? attributes[key] > 0 : pieces.some(piece => piece.gene === key));
   if (organs.length) return organs.join("-");
-  if (attributes ? attributes.feet > 0 || attributes.legs > 0 : pieces.some(piece => piece.gene === "legs")) return "feet";
+  // Retired feet/legs data stays in saves, but never selects a legged body.
   if (attributes?.gather > 0 || attributes?.strength > 0 || attributes?.arms > 0 || pieces.some(piece => piece.gene === "gather")) return "gather";
   return attributes?.piercing > 0 ? "secretion" : "base";
 }

@@ -5,9 +5,9 @@ import vm from 'node:vm';
 import { execFileSync } from 'node:child_process';
 
 function harness(count = 1, suppliedClip = null) {
-  const images = [], observers = [], mutations = [], events = {}, draws = [], transforms = [], clears = [], canvases = [];
+  const images = [], observers = [], mutations = [], events = {}, draws = [], transforms = [], mirrors = [], clears = [], canvases = [];
   const classes = new Set(['is-open']);
-  const context = { setTransform(...args) { transforms.push(args); }, clearRect(...args) { clears.push(args); }, drawImage(...args) { draws.push(args); } };
+  const context = { translate(...args) { mirrors.push(["translate", ...args]); }, scale(...args) { mirrors.push(["scale", ...args]); }, setTransform(...args) { transforms.push(args); }, clearRect(...args) { clears.push(args); }, drawImage(...args) { draws.push(args); } };
   const canvas = () => { const value = { width: 1, height: 1, style: {}, dataset: {}, getContext: () => context, getBoundingClientRect: () => ({ width: 512 }) }; canvases.push(value); return value; };
   const thumbnail = { style: {}, after() {} };
   const layers = [
@@ -33,7 +33,7 @@ function harness(count = 1, suppliedClip = null) {
     MutationObserver: class { constructor(callback) { mutations.push(callback); } observe() {} }, requestAnimationFrame: () => 1, cancelAnimationFrame() {}, addEventListener() {}, queueMicrotask,
     SpawnerUnitMatrixData: { units: {}, attributes: {}, bounds: {} } };
   vm.runInNewContext(fs.readFileSync(new URL('./unit-matrix-preview.js', import.meta.url), 'utf8'), sandbox);
-  return { api: sandbox.SpawnerBirthScenePreview, images, observers, mutations, links, link, thumbnail, draws, transforms, clears, canvases, document, events, classes };
+  return { api: sandbox.SpawnerBirthScenePreview, images, observers, mutations, links, link, thumbnail, draws, transforms, mirrors, clears, canvases, document, events, classes };
 }
 const settle = () => new Promise(resolve => setImmediate(resolve));
 test('birth scenes load only on visibility, draw rectangular atlas cells and exact timeline samples', async () => {
@@ -144,6 +144,8 @@ for (const { tribe, form, clip } of publishedScenes) test(`${tribe} ${form}: rea
   assert.equal(scene.canvas.width, 512);
   assert.equal(scene.canvas.height, Math.round(512 * clip.frameHeight / clip.frameSize));
   assert.equal(scene.canvas.style.objectFit, 'contain');
+  assert.equal(scene.mirror, clip.sourceFacing !== 'left');
+  if (scene.mirror) assert.deepEqual(h.mirrors.slice(-2), [['translate', clip.frameSize, 0], ['scale', -1, 1]]);
   let time = 0;
   for (let index = 0; index < clip.durationsMs.length; index++) {
     h.api.drawScene(scene, time);
@@ -160,6 +162,7 @@ for (const { tribe, form, clip } of publishedScenes) test(`${tribe} ${form}: rea
   assert.equal(lightCanvas.id, 'unit-lightbox-canvas');
   assert.equal(lightCanvas.width, 512);
   assert.equal(lightCanvas.height, Math.round(512 * clip.frameHeight / clip.frameSize));
+  if (scene.mirror) assert.deepEqual(h.mirrors.slice(-2), [['translate', clip.frameSize, 0], ['scale', -1, 1]]);
   assert.equal(lightCanvas.style.width, undefined); // existing CSS/zoom continues to own sizing
   assert.equal(lightCanvas.style.height, undefined);
   assert.ok(h.classes.has('is-unit-animation'));

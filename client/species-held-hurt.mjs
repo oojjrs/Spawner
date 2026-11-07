@@ -17,7 +17,7 @@ export function speciesHeldHurtSource(agent) {
   const stats = agent.stats?.dna || agent.stats;
   // The shared projection chooses one current live silhouette. A missing
   // source must fall through, never silently borrow another form's body.
-  const key = ["blade", "secretion", "carapace", "antenna", "feet"].find(key => attributes[key] > 0) ||
+  const key = ["blade", "secretion", "carapace", "antenna"].find(key => attributes[key] > 0) ||
     (stats?.ranged && !stats?.melee ? "secretion" : "base");
   return forms[key] || null;
 }

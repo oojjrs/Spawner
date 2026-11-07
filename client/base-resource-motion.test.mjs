@@ -39,8 +39,9 @@ test("work preserves event precedence and excludes every other current or legacy
       { mode: "jump" }, { harvestStarted: 11 }, { harvestStarted: NaN }, { harvestStarted: undefined },
       { hurtStartedAt: 10.1 }, { attack: { startedAt: 10, hitAt: 10.3, endsAt: 11 } },
       { moveStartedAt: 10, moveDuration: 1 }, { stats: { ranged: true, melee: false } },
-      ...["blade", "secretion", "carapace", "antenna", "feet", "legs", "strength", "arms"].map(key => ({ attributes: { [key]: 1 } }))])
+      ...["blade", "secretion", "carapace", "antenna", "strength", "arms"].map(key => ({ attributes: { [key]: 1 } }))])
       assert.equal(unitBaseResourcePose({ ...base, ...patch }, 10.2), null, JSON.stringify(patch));
+    for (const key of ["feet", "legs"]) assert.ok(unitBaseResourcePose({ ...base, attributes: { [key]: 1 } }, 10.2), "retired attachments use the current base body");
     assert.equal(unitBaseResourcePose(base, NaN), null);
     assert.equal(unitBaseResourcePose(base, Infinity), null);
     assert.ok(unitBaseResourcePose({ ...base, moveStartedAt: 9, moveDuration: .5 }, 10.2));

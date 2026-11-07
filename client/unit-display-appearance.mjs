@@ -3,7 +3,7 @@ import { UNIT_APPEARANCE_BITS, UNIT_APPEARANCE_TRIBES, UNIT_APPEARANCE_LEGACY_VI
 
 // Rendering only. Never assign this projection to a simulation agent, DNA,
 // snapshot, stats, or save. Lower-priority abilities remain fully effective.
-export const UNIT_DISPLAY_PRIORITY = Object.freeze(["blade", "secretion", "carapace", "antenna", "feet"]);
+export const UNIT_DISPLAY_PRIORITY = Object.freeze(["blade", "secretion", "carapace", "antenna"]);
 export const UNIT_DISPLAY_MASKS = Object.freeze([0, ...UNIT_DISPLAY_PRIORITY.map(key => UNIT_APPEARANCE_BITS[key]), ...UNIT_COMBINATION_MASKS]);
 export const UNIT_DISPLAY_FORM_COUNT = UNIT_APPEARANCE_TRIBES.length * UNIT_DISPLAY_MASKS.length;
 
@@ -15,15 +15,18 @@ export function unitDominantAppearanceMask(mask) {
 }
 
 export function unitDisplayAttributesFrom(attributes = {}) {
-  attributes ||= {};
+  // Preserve saved mechanics while removing the retired visual attachment.
+  attributes = { ...(attributes || {}) };
+  delete attributes.feet;
+  delete attributes.legs;
   // Old saves using retired organs retain their authored compatibility rigs,
   // without applying the current priority policy. Current DNA cannot produce
   // these keys and uses the canonical silhouettes plus the authored combinations.
   if (UNIT_APPEARANCE_LEGACY_VISUAL_KEYS.some(key => attributes[key] > 0)) return attributes;
-  const dominant = UNIT_DISPLAY_PRIORITY.find(key => attributes[key] > 0 || key === "feet" && attributes.legs > 0);
+  const dominant = UNIT_DISPLAY_PRIORITY.find(key => attributes[key] > 0);
   const result = { ...attributes };
   for (const key of [...UNIT_DISPLAY_PRIORITY, "legs"]) delete result[key];
-  const mask = unitAppearanceMaskFromAttributes({ ...attributes, feet: Math.max(attributes.feet || 0, attributes.legs || 0) });
+  const mask = unitAppearanceMaskFromAttributes(attributes);
   const combination = UNIT_COMBINATION_FORMS.find(form => form.mask === (mask & ~UNIT_APPEARANCE_BITS.feet));
   if (combination) Object.assign(result, combination.attributes);
   else if (dominant) result[dominant] = 1;

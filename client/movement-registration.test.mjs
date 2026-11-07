@@ -34,10 +34,10 @@ test('ordinary neutral movement is linear, including turtles and weasels',()=>{
  for(const species of ['vine-turtle','soil-mole','shadow-weasel','white-paw','spiny-back-beetle'])
   for(const t of [.05,.1,.5,.9,1]){const p=unitMovementPosition(agent(species),t);near(p.x,t);near(p.y,2*t);}
 });
-test('bean preparation and footed movement preserve their native trajectories',()=>{
+test('retired feet reuse the base bean preparation and trajectory',()=>{
  const a={...agent(undefined),tribe:'bean',attributes:{}};
  near(unitMovementPosition(a,.1).x,0);near(unitMovementPosition(a,.59).x,.5);
- a.attributes.feet=1;near(unitMovementPosition(a,.1).x,.1);
+ a.attributes.feet=1;near(unitMovementPosition(a,.1).x,0);
  a.appearanceAttributes={};near(unitMovementPosition(a,.1).x,0);
  near(unitMovementPosition(a,.1,true).x,.1);
 });

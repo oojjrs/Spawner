@@ -30,13 +30,13 @@ const make = (tribe, form) => ({ tribe, attributes: form.attributes, health: 20,
 test('antenna catalogue covers seven exact organ sets and preserves all historical mask inputs', () => {
   assert.deepEqual(forms.map(form => form.mask), [5, 20, 6, 21, 7, 22, 23]);
   assert.equal(UNIT_COMBINATION_FORMS.length, 11);
-  assert.equal(UNIT_DISPLAY_FORM_COUNT, 68);
+  assert.equal(UNIT_DISPLAY_FORM_COUNT, 64);
   const selected = new Set();
   for (const tribe of tribes) for (let mask = 0; mask < 32; mask++) {
     const attributes = Object.fromEntries(Object.entries(UNIT_APPEARANCE_BITS).filter(([, bit]) => mask & bit).map(([key]) => [key, 3]));
     const agent = { tribe, attributes }, before = JSON.stringify(agent), orgMask = mask & ~8;
     const form = UNIT_COMBINATION_FORMS.find(form => form.mask === orgMask);
-    const expectedMask = form?.mask ?? [1, 16, 2, 4, 8].find(bit => mask & bit) ?? 0;
+    const expectedMask = form?.mask ?? [1, 16, 2, 4].find(bit => mask & bit) ?? 0;
     assert.equal(unitDominantAppearanceMask(mask), expectedMask);
     assert.equal(unitAppearanceMaskFromAttributes(unitDisplayAttributes(agent)), expectedMask);
     assert.equal(unitCombinationAppearance(agent), form?.key || null);
@@ -44,7 +44,7 @@ test('antenna catalogue covers seven exact organ sets and preserves all historic
     assert.equal(unitActionArtSelection(agent, { [key]: definition }).definition, definition);
     assert.equal(JSON.stringify(agent), before); selected.add(tribe + '/' + expectedMask);
   }
-  assert.equal(selected.size, 68);
+  assert.equal(selected.size, 64);
   for (const form of forms) {
     const agent = make('bean', form);
     assert.equal(unitCombinationAppearance({ ...agent, appearanceAttributes: {} }), null);
@@ -261,7 +261,7 @@ test('antenna planning has 28 complete rows and 84 matching work previews', () =
     }
   }
   assert.equal(count, 84); assert.ok(html.includes('44개 복합 외형·280개 기본 동작'));
-  assert.equal(WELCOME_UNIT_APPEARANCES.length, 18);
+  assert.equal(WELCOME_UNIT_APPEARANCES.length, 17);
 });
 
 test('existing combinations and antenna singles preserve original actions except audited attack and carry fixes', async () => {
