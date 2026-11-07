@@ -26,9 +26,6 @@
     }, async path => {
       const image = new Image(); image.src = assetSource(path); await image.decode(); return image;
     });
-    const sporeDominantBirthArt = Spawner.createSporeDominantBirthArt((width, height) => {
-      const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
-    }, agentRangedImage);
     const springDominantBirthArt = Spawner.createSpringDominantBirthArt((width, height) => {
       const surface = document.createElement("canvas"); surface.width = width; surface.height = height; return surface;
     });
@@ -4315,39 +4312,6 @@
       if (frame === shape.frameCount - 1) {
         drawAgentAppearanceLayer(ctx, now, { ...agent, birth: null }, cell, topLeft, { x: birth.x, y: birth.y, progress: 1 }, null, outlineColor);
         return;
-      }
-      const form = Spawner.sporeDominantBirthForm?.(agent);
-      if (form && combatAttributeArt.ready("spore")) {
-        const facing = agent.combat ? agent.combat.side === 0 ? -1 : 1 : agent.facing || 1;
-        const neutral = { ...agent, birth: null, attack: null, support: null, hurtStartedAt: -Infinity,
-          mode: "idle", moveDuration: 0, facing: 1, combat: agent.combat ? { ...agent.combat, side: 1 } : null };
-        const body = combatAttributeArt.frame(neutral, state.simSeconds, 1);
-        const sprite = sporeDominantBirthArt.frame(body, agent, birth.elapsed, birth.scale, facing, birth.facing);
-        const needsStalk = frame >= 3 && frame <= 8;
-        const stalk = needsStalk ? sporeDominantBirthArt.stalk(sporeBirthFrames.get(frame), frame) : null;
-        if (sprite && (!needsStalk || stalk)) {
-          const centerX = topLeft.x + cell / 2, floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
-          if (stalk) {
-            const pixel = birth.scale * cell;
-            ctx.save(); ctx.translate(centerX, floor); ctx.scale(birth.facing, 1);
-            if (outlineColor) drawSelectionOutline(stalk, -shape.pivotX * pixel, -shape.pivotY * pixel,
-              shape.frameSize * pixel, shape.frameSize * pixel, null, outlineColor);
-            ctx.drawImage(stalk, -shape.pivotX * pixel, -shape.pivotY * pixel, shape.frameSize * pixel, shape.frameSize * pixel);
-            ctx.restore();
-          }
-          const camera = sprite.combatCamera, pixel = cell * AGENT_HEIGHT * 2 / (camera?.units || 512);
-          const x = -(camera?.pivotX ?? 256) * pixel, y = -(camera?.pivotY ?? 448) * pixel;
-          const width = sprite.width * pixel, height = sprite.height * pixel;
-          const motion = Spawner.sporeDominantBirthMotion(birth.elapsed);
-          const spinHeight = shape.unitHeight * Spawner.imageScale(shape.image) * birth.scale * cell;
-          ctx.save(); ctx.translate(centerX, floor); ctx.scale(facing < 0 ? -1 : 1, 1);
-          ctx.scale(motion.scaleX, motion.scaleY);
-          ctx.translate(0, -spinHeight * .5); ctx.rotate(motion.rotation); ctx.translate(0, spinHeight * .5);
-          ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
-          if (outlineColor) drawSelectionOutline(sprite, x, y, width, height, null, outlineColor);
-          ctx.drawImage(sprite, x, y, width, height); ctx.restore();
-          return;
-        }
       }
       const lifecycle = Spawner.unitRangedLifecycleAnimation?.(agent, "birth");
       const lifecycleSheet = lifecycle && agentRangedImage(lifecycle.image);

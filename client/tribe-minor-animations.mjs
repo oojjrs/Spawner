@@ -40,41 +40,6 @@ export const TRIBE_MINOR_ANIMATIONS = Object.freeze({
         "pivotX": 64,
         "pivotY": 112,
         "durationMs": 1440
-      },
-      "birth": {
-        "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/birth.webp",
-        "frameSize": 128,
-        "columns": 4,
-        "frameCount": 22,
-        "durationsMs": [
-          180,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          80,
-          80,
-          80,
-          80,
-          700
-        ],
-        "loop": false,
-        "pivotX": 64,
-        "pivotY": 112,
-        "durationMs": 3120,
-        "worldPerPixelBeforeDisplay": 0.003975934736630178
       }
     },
     "feet": {
@@ -117,41 +82,6 @@ export const TRIBE_MINOR_ANIMATIONS = Object.freeze({
         "pivotX": 64,
         "pivotY": 112,
         "durationMs": 1440
-      },
-      "birth": {
-        "image": "DesignAssets/Animations/TribeMinorV1/spore/feet/birth.webp",
-        "frameSize": 128,
-        "columns": 4,
-        "frameCount": 22,
-        "durationsMs": [
-          180,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          80,
-          80,
-          80,
-          80,
-          700
-        ],
-        "loop": false,
-        "pivotX": 64,
-        "pivotY": 112,
-        "durationMs": 3120,
-        "worldPerPixelBeforeDisplay": 0.003975934736630178
       }
     }
   },

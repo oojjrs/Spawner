@@ -1947,16 +1947,6 @@
         6
       ]
     },
-    "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth.webp": {
-      "display": [
-        445.8849194667563,
-        445.8849194667563
-      ],
-      "grid": [
-        4,
-        6
-      ]
-    },
     "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/nest-stationary.png": {
       "display": [
         444.51536403837804,
@@ -6760,16 +6750,6 @@
         2
       ]
     },
-    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/piercing/birth.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        10
-      ]
-    },
     "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/piercing/death.webp": {
       "display": [
         256,
@@ -7038,16 +7018,6 @@
       "grid": [
         8,
         2
-      ]
-    },
-    "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/guard/birth.webp": {
-      "display": [
-        256,
-        256
-      ],
-      "grid": [
-        8,
-        10
       ]
     },
     "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/guard/death.webp": {
@@ -9441,16 +9411,6 @@
         2
       ]
     },
-    "DesignAssets/Animations/UnitRangedV1/spore/birth.png": {
-      "display": [
-        144,
-        144
-      ],
-      "grid": [
-        4,
-        6
-      ]
-    },
     "DesignAssets/Animations/UnitRangedV1/spore/death.png": {
       "display": [
         72.3859011627907,
@@ -10798,36 +10758,6 @@
         2
       ]
     },
-    "DesignAssets/Animations/TribeMinorV1/spore/antenna/birth.webp": {
-      "display": [
-        128,
-        128
-      ],
-      "grid": [
-        4,
-        6
-      ]
-    },
-    "DesignAssets/Animations/TribeMinorV1/spore/feet/birth.webp": {
-      "display": [
-        128,
-        128
-      ],
-      "grid": [
-        4,
-        6
-      ]
-    },
-    "DesignAssets/Planning/ApprovedAnimations96/spore-birth-calibrated-v7--antenna-birth-scene-preview.webp": {
-      "display": [
-        96,
-        96
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
     "DesignAssets/Planning/ApprovedAnimations96/SheetGifHandoff-20261106--spore-antenna-walk-preview.webp": {
       "display": [
         96,
@@ -10859,16 +10789,6 @@
       ]
     },
     "DesignAssets/Planning/ApprovedAnimations96/SheetGifHandoff-20261106--pebble-antenna-death-preview.webp": {
-      "display": [
-        96,
-        96
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Planning/ApprovedAnimations96/spore-birth-calibrated-v7--feet-birth-scene-preview.webp": {
       "display": [
         96,
         96
@@ -11499,46 +11419,6 @@
       ]
     },
     "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--shadow-weasel.webp": {
-      "display": [
-        96,
-        96
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Animations/SporeCombatBirthV9/blade/birth.webp": {
-      "display": [
-        128,
-        128
-      ],
-      "grid": [
-        4,
-        6
-      ]
-    },
-    "DesignAssets/Animations/SporeCombatBirthV9/carapace/birth.webp": {
-      "display": [
-        128,
-        128
-      ],
-      "grid": [
-        4,
-        6
-      ]
-    },
-    "DesignAssets/Planning/ApprovedAnimations96/spore-combat-birth-v9-blade.webp": {
-      "display": [
-        96,
-        96
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Planning/ApprovedAnimations96/spore-combat-birth-v9-carapace.webp": {
       "display": [
         96,
         96

@@ -84,7 +84,7 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Animations/CombatAttributesV7/spore/Sheets/carapace/idle.webp.js",
   "./client/local-assets/Animations/CombatAttributesV7/spore/Sheets/carapace/walk.webp.js",
   "./client/local-assets/Animations/CombatAttributesV7/spore/Sheets/piercing/attack.webp.js",
-  "./client/local-assets/Animations/CombatAttributesV7/spore/Sheets/piercing/birth.webp.js",
+
   "./client/local-assets/Animations/CombatAttributesV7/spore/Sheets/piercing/death.webp.js",
   "./client/local-assets/Animations/CombatAttributesV7/spore/Sheets/piercing/hurt.webp.js",
   "./client/local-assets/Animations/CombatAttributesV7/spore/Sheets/piercing/idle.webp.js",
@@ -383,8 +383,8 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Animations/SpeciesHeldHurtV1/spring-blade.webp.js",
   "./client/local-assets/Animations/SpeciesHeldHurtV1/spring-carapace.webp.js",
   "./client/local-assets/Animations/SpeciesHeldHurtV1/spring-secretion.webp.js",
-  "./client/local-assets/Animations/SporeCombatBirthV9/blade/birth.webp.js",
-  "./client/local-assets/Animations/SporeCombatBirthV9/carapace/birth.webp.js",
+
+
   "./client/local-assets/Animations/SproutDeathV2/blade/death.webp.js",
   "./client/local-assets/Animations/SproutDeathV2/carapace/death.webp.js",
   "./client/local-assets/Animations/SproutDeathV2/secretion/death.webp.js",
@@ -394,10 +394,10 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Animations/TribeMinorV1/pebble/antenna/walk.webp.js",
   "./client/local-assets/Animations/TribeMinorV1/pebble/feet/birth.webp.js",
   "./client/local-assets/Animations/TribeMinorV1/pebble/feet/walk.webp.js",
-  "./client/local-assets/Animations/TribeMinorV1/spore/antenna/birth.webp.js",
+
   "./client/local-assets/Animations/TribeMinorV1/spore/antenna/death.webp.js",
   "./client/local-assets/Animations/TribeMinorV1/spore/antenna/walk.webp.js",
-  "./client/local-assets/Animations/TribeMinorV1/spore/feet/birth.webp.js",
+
   "./client/local-assets/Animations/TribeMinorV1/spore/feet/death.webp.js",
   "./client/local-assets/Animations/TribeMinorV1/spore/feet/walk.webp.js",
   "./client/local-assets/Animations/TribeMinorV1/spring/antenna/birth.webp.js",

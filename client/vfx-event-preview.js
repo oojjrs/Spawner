@@ -3419,7 +3419,7 @@ return {AGENT_DEATH_ANIMATION,AGENT_DEATH_ANIMATIONS,agentDeathAnimation,agentDe
 modules["client/secretion-lifecycle.mjs"] = (() => {
 const { SPRING_SECRETION_ASSETS } = modules["client/spring-secretion-assets.mjs"];
 const { APPROVED_SPROUT_DEATH_ANIMATIONS } = modules["client/sprout-death-animations.mjs"];
-const { SPORE_BIRTH_ANIMATION, PEBBLE_BIRTH_ANIMATION, SPRING_BIRTH_ANIMATION } = modules["client/birth.mjs"];
+const { PEBBLE_BIRTH_ANIMATION, SPRING_BIRTH_ANIMATION } = modules["client/birth.mjs"];
 const { UNIT_ANIMATIONS } = modules["client/unit-animation.mjs"];
 const { AGENT_DEATH_ANIMATION } = modules["client/agent-death.mjs"];
 
@@ -3427,7 +3427,7 @@ const { AGENT_DEATH_ANIMATION } = modules["client/agent-death.mjs"];
 // pixels. Keep the body's camera and clock; this is not a world-ready rig.
 const bodies = {
   bean: { death: AGENT_DEATH_ANIMATION },
-  spore: { birth: SPORE_BIRTH_ANIMATION, death: UNIT_ANIMATIONS.spore.death },
+  spore: { death: UNIT_ANIMATIONS.spore.death },
   pebble: { birth: PEBBLE_BIRTH_ANIMATION, death: UNIT_ANIMATIONS.pebble.death },
   spring: { birth: SPRING_BIRTH_ANIMATION, death: UNIT_ANIMATIONS.spring.death }
 };

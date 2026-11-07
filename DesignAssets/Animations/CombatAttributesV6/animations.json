@@ -1,7 +1,7 @@
 {
   "frameSize": 256,
   "variantCount": 16,
-  "animationCount": 32,
+  "animationCount": 8,
   "records": [
     {
       "tribe": "sprout",

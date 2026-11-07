@@ -6504,7 +6504,7 @@ function evolutionPose(rig,action,time){
   if(rig.tribe==='spore'){pose.sy=1-fall*.59;pose.sx=1+fall*.06;}
   if(rig.tribe==='spring'){pose.sy=1-fall*.78;pose.sx=1+fall*.12;pose.water=6*(1-fall);}
  }
- 
+
  return pose;
 }
 function bodyTransform(ctx,rig,pose){
@@ -6540,7 +6540,7 @@ function renderEvolutionFrame(ctx,rig,images,action,time){
   ctx.restore();
  }
 
- 
+
 
  ctx.restore();return pose;
 }
@@ -8617,45 +8617,7 @@ const COMBAT_EVOLUTION_CATALOG = Object.freeze({
           230
         ]
       },
-      "birth": {
-        "action": "birth",
-        "image": "DesignAssets/Animations/SporeCombatBirthV9/blade/birth.webp",
-        "frameSize": 128,
-        "columns": 4,
-        "frameCount": 22,
-        "pivotX": 64,
-        "pivotY": 112,
-        "durationsMs": [
-          180,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          80,
-          80,
-          80,
-          80,
-          700
-        ],
-        "durationMs": 3120,
-        "loop": false,
-        "contactMs": null,
-        "nativeToCanonicalRatio": 0.5364004935660144,
-        "sourceFrameSize": 512,
-        "handoffAt": 2.42
-      },
+
       "death": {
         "action": "death",
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/death.webp",
@@ -8874,100 +8836,7 @@ const COMBAT_EVOLUTION_CATALOG = Object.freeze({
           230
         ]
       },
-      "birth": {
-        "action": "birth",
-        "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/piercing/birth.webp",
-        "frameSize": 256,
-        "columns": 8,
-        "frameCount": 78,
-        "durationsMs": [
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40,
-          40
-        ],
-        "durationMs": 3120,
-        "loop": false,
-        "contactMs": null,
-        "pivot": [
-          128,
-          230
-        ]
-      },
+
       "death": {
         "action": "death",
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/piercing/death.webp",
@@ -9186,45 +9055,7 @@ const COMBAT_EVOLUTION_CATALOG = Object.freeze({
           230
         ]
       },
-      "birth": {
-        "action": "birth",
-        "image": "DesignAssets/Animations/SporeCombatBirthV9/carapace/birth.webp",
-        "frameSize": 128,
-        "columns": 4,
-        "frameCount": 22,
-        "pivotX": 64,
-        "pivotY": 112,
-        "durationsMs": [
-          180,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          80,
-          80,
-          80,
-          80,
-          700
-        ],
-        "durationMs": 3120,
-        "loop": false,
-        "contactMs": null,
-        "nativeToCanonicalRatio": 0.5364004935660144,
-        "sourceFrameSize": 512,
-        "handoffAt": 2.42
-      },
+
       "death": {
         "action": "death",
         "image": "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/death.webp",
@@ -11072,7 +10903,7 @@ const COMBAT_EVOLUTION_ASSETS = Object.freeze([
   "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/walk.webp",
   "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/attack.webp",
   "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/hurt.webp",
-  "DesignAssets/Animations/SporeCombatBirthV9/blade/birth.webp",
+
   "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/blade/death.webp",
   "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/spore-blade.png",
   "DesignAssets/Animations/CombatAttributesV7/spore/piercing/rig.json",
@@ -11088,7 +10919,7 @@ const COMBAT_EVOLUTION_ASSETS = Object.freeze([
   "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/piercing/walk.webp",
   "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/piercing/attack.webp",
   "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/piercing/hurt.webp",
-  "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/piercing/birth.webp",
+
   "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/piercing/death.webp",
   "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/spore-piercing.png",
   "DesignAssets/Animations/CombatAttributesV7/spore/carapace/rig.json",
@@ -11104,7 +10935,7 @@ const COMBAT_EVOLUTION_ASSETS = Object.freeze([
   "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/walk.webp",
   "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/attack.webp",
   "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/hurt.webp",
-  "DesignAssets/Animations/SporeCombatBirthV9/carapace/birth.webp",
+
   "DesignAssets/Animations/CombatAttributesV7/spore/Sheets/carapace/death.webp",
   "DesignAssets/Animations/CombatAttributesV7/RuntimeParts/spore-carapace.png",
   "DesignAssets/Animations/CombatAttributesV7/pebble/blade/rig.json",
@@ -23887,41 +23718,6 @@ const TRIBE_MINOR_ANIMATIONS = Object.freeze({
         "pivotX": 64,
         "pivotY": 112,
         "durationMs": 1440
-      },
-      "birth": {
-        "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/birth.webp",
-        "frameSize": 128,
-        "columns": 4,
-        "frameCount": 22,
-        "durationsMs": [
-          180,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          80,
-          80,
-          80,
-          80,
-          700
-        ],
-        "loop": false,
-        "pivotX": 64,
-        "pivotY": 112,
-        "durationMs": 3120,
-        "worldPerPixelBeforeDisplay": 0.003975934736630178
       }
     },
     "feet": {
@@ -23964,41 +23760,6 @@ const TRIBE_MINOR_ANIMATIONS = Object.freeze({
         "pivotX": 64,
         "pivotY": 112,
         "durationMs": 1440
-      },
-      "birth": {
-        "image": "DesignAssets/Animations/TribeMinorV1/spore/feet/birth.webp",
-        "frameSize": 128,
-        "columns": 4,
-        "frameCount": 22,
-        "durationsMs": [
-          180,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          160,
-          80,
-          80,
-          80,
-          80,
-          700
-        ],
-        "loop": false,
-        "pivotX": 64,
-        "pivotY": 112,
-        "durationMs": 3120,
-        "worldPerPixelBeforeDisplay": 0.003975934736630178
       }
     }
   },
@@ -26830,7 +26591,7 @@ return { AGENT_DEATH_ANIMATION, AGENT_DEATH_ANIMATIONS, agentDeathAnimation, age
 modules["client/secretion-lifecycle.mjs"] = (() => {
 const { SPRING_SECRETION_ASSETS } = modules["client/spring-secretion-assets.mjs"];
 const { APPROVED_SPROUT_DEATH_ANIMATIONS } = modules["client/sprout-death-animations.mjs"];
-const { SPORE_BIRTH_ANIMATION, PEBBLE_BIRTH_ANIMATION, SPRING_BIRTH_ANIMATION } = modules["client/birth.mjs"];
+const { PEBBLE_BIRTH_ANIMATION, SPRING_BIRTH_ANIMATION } = modules["client/birth.mjs"];
 const { UNIT_ANIMATIONS } = modules["client/unit-animation.mjs"];
 const { AGENT_DEATH_ANIMATION } = modules["client/agent-death.mjs"];
 
@@ -26838,7 +26599,7 @@ const { AGENT_DEATH_ANIMATION } = modules["client/agent-death.mjs"];
 // pixels. Keep the body's camera and clock; this is not a world-ready rig.
 const bodies = {
   bean: { death: AGENT_DEATH_ANIMATION },
-  spore: { birth: SPORE_BIRTH_ANIMATION, death: UNIT_ANIMATIONS.spore.death },
+  spore: { death: UNIT_ANIMATIONS.spore.death },
   pebble: { birth: PEBBLE_BIRTH_ANIMATION, death: UNIT_ANIMATIONS.pebble.death },
   spring: { birth: SPRING_BIRTH_ANIMATION, death: UNIT_ANIMATIONS.spring.death }
 };

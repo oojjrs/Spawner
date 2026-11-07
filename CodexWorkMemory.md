@@ -1,3 +1,9 @@
+## 포자 탄생 폐기 현재 이력 병합·최종 직렬화 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-current-merge-619ef6c2-01a1b33b. 기록 시각: 2026-11-07T10:36:10+09:00. 기록자·충돌범위판단 Codex /root, push 승인 사용자. 출처 현재 채팅과 실제 merge-tree/current.index, H:/Spawner Windows PowerShell. 원발언시각·항목ID 불명.
+- main이 619ef6c2993937f1326aaccbb530c5315db40f91로 이동해 기존 검토 draft c324f09d9ab3c1e55f04bd0c345ebcb6c1f4b885를 객체 안에서 병합했다. 충돌 CodexWorkMemory.md, Combat.html, Design.html, DesignAssets/image-sizes.json, client/combat-evolution.mjs, client/design-previews.js, client/runtime.js, client/unit-matrix-previews.js는 새 전용클립/UI의 현재 구현을 바탕으로 정확한 퇴역 항목만 제거하고 메모리 원기록을 합쳤다. 이전 generic birth guard를 새 구현으로 되돌려 넣지 않으며 현재 모듈을 유지한다. 실제 후보 209경로이며 구형145삭제는 유지한다.
+- 기존 기본형과 이후 원격 승인 채집형 V3는 보존한다. 실제 index/참조 갱신 직전 잠금과 기대HEAD를 확인하며 working/untracked를 파일이동 없이 보존하고, 원본 index/작업 snapshot Git복구참조를 유지한다. 다른 작업 파일은 덮지 않고 정확한 퇴역 파일만 영구삭제하며 Design의 같은 비어 있는 새 V3 셀만 현재 승인 원격 내용으로 동기화한다. 아직 실제 commit/push 전이다.
+
 ## 승인3동작 원본 푸시 재개 · 01a1b0eb 현재 요약
 
 - 기록 ID: assets-three-push-resume-20261107-01a1b0eb. 기록 시각 2026-11-07T10:22:34+09:00. 기록자·소스대조/범위판단 Codex /root, 푸시 결정 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7의 ‘푸시해’ 직접 지시와 Git HEAD c2457a4387e239dd1c7e03307dff07ad8db672d4, 공개 v43 영수증. 사용자 발언의 정확 시각·항목ID 불명, H:/Spawner Windows PowerShell.
@@ -175955,3 +175961,95 @@ Text: none. No lettering, labels, logo, watermark, UI, borders, health bars, peo
 - 기록 ID: unit-animation-clips-only-upstream-preserve-01a1b324. 기록 시각 2026-11-07T10:00:19+09:00. 기록자·동결/검수 Codex /root, 전용 클립 전환과 push·배포 결정 사용자. 출처 현재채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe와 01a1b33b의 명시 조율 메시지, candidate.json/candidate-check.json·회귀6실측. H:/Spawner Windows PowerShell; 원발언정확시각·항목ID불명.
 - 원격 b4b0e05에 새로 추가 승인된 spore-gather-birth-v3는 최초 퇴역145목록 밖의 후속 작업으로 보존한다. 구형 V7/V9 폐기와 구분하며 해당 채팅이 폐기 한정을 마쳐 먼저push하는 동안 이쪽 main/index 이동은 계속 멈춘다. 여기서는 새탄생 연결이나 새 애니 제작을 추가하지 않는다.
 - 전용 클립 후보30경로는 관련native3의 원본/manifest·wrapper를 필수지원으로 포함하되 다른 작업의 게임/편집기/기획서·애셋삭제는 포함하지 않는다. 폐기 후보ac59e395 기반 별도tree aa476fa57에서 회귀6통과·wrapper8 원본bytes일치·runtime/Combat/preview구문과 staged공백검사 통과를 확인했다. 이후 실제push tip으로 투영할 때 변경된통합부분만검수하며 불변렌더/형식결과는 재사용한다. 아직본채팅rootpush·새Site배포성공을 주장하지 않는다.
+
+
+## 포자 탄생 폐기 최종 원격 기준 갱신 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-push-basis-b4b0e054-01a1b33b. 기록 시각: 2026-11-07T09:41:37+09:00. 기록자·통합판단 Codex /root, push 승인 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0와 실제 fetch/replay/projection 결과, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
+- 동시 Git 변경을 감지하여 이전 draft 부모는 적용하지 않았다. 최신 main 322d91880a8d48e8d0f7b74584fe3b01de5797d8, 원격 b4b0e054790d1f04c11e9f1f28e114c54d53cce5, 로컬 3/원격 3 차이를 기준으로 작업 파일/index/참조 이동 없이 재배치 864dc0c38b3b5c4cde716c74b0c49bcf2af8771f를 계산했다. 기존 로컬 커밋은 모두 보존하며 최신 원격의 승인 자산·문서 변경도 후보의 바탕에 유지한다. 삭제145·관련 소스/생성66 및 본채팅 기록 범위는 같고 다른 미커밋 작업은 제외한다.
+- 본 후보로 stage/commit/push 전에 원본 index·기존 작업 파일·미추적 항목을 Git 객체와 hash로 보존하고, 실제 적용 직전 HEAD/index/working hash를 대조한다. 구형 raster를 파일로 checkout하거나 새 branch를 만들지 않는다. 커밋 subject는 ‘포자버섯 구형 탄생 애셋과 참조 제거’로 검토한다. 아직 실제 commit/push 성공 기록이 아니다.
+
+## 포자버섯 구형 탄생 영구 삭제 완료 · 01a1b33b 현재 요약
+
+- 기록 ID: spore-birth-purge-complete-20261107-01a1b33b. 기록·최종 관측 시각: 2026-11-07T09:15:16+09:00. 기록자·실행/확인 Codex /root, 유일 보존본·영구폐기 결정 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0와 literal $Trash/spore-birth-purge-01a1b33b 실제 영수증. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell. 아래 이전 진행/질문대기/후보잔존 상태는 이 최종 실측으로 대체하며 원기록은 보존한다.
+- 유효 결정: 유닛 페이지 기본 포자버섯의 빙글빙글 회전하는 탄생만 현재 버전이다. 이외 포자 탄생은 $Trash에서도 영구폐기하며 보관 사본·구형 등록·Git 이력의 옛 승인 기록으로 복구하지 않는다. V7 안테나/발과 V9 칼날/갑피를 포함한 이전 승인·적용 기록은 폐기 결정으로 대체됐다.
+- 완료: 실제 삭제 고유경로2723개, 빈 폴더237개. 구형 이미지/시트/GIF/프레임/임베딩·등록·생성 분기 및 사본/구형 배포압축본을 제거했다. 현재 기본형의 원본2개·프리뷰/썸네일3개·필수 임베딩2개 SHA256은 동일하며 JSON은 현재본의 시간/geometry만 유지하고 구형 source/atlas 링크를 제거했다. 새 bitmap 제작이나 다른 동작·종족 수정은 없다.
+- 재복원 차단: 사용자 승인으로 배포채팅01a1b0eb에 폐기 결정을 전달했고 해당 채팅이 실제 수락했다. 재생성됐던 후보7파일의 포자 탄생 항목/분기만 국소 제거하고 관련 JS/MJS/JSON 구문을 확인했다. 최종 final-readback.json에서 제품 retired참조0·candidate retired참조0·빈modules[]0을 직접 확인했다. 앞선 전경로 실물검사도 보존본 외 구형 spore birth 이미지/시트/GIF/영상/임베딩0이었다. 삭제 로그·해시·과거경로 기록은 실제 사용 가능한 애셋이 아니다.
+- 미해결 구현 구분: birth-game.webp는 회전까지 담은 완성 장면 캡처이지만 기존 게임용 birth-unit.webp는 몸체동작 시트이며 game.js/birth.mjs가 세계 비행·회전을 합성하던 구조다. 사용자는 이 코드 회전을 문제 삼았다. 이를 승인으로 해석하거나 본 폐기 작업이 완성 회전 프레임의 새 게임용 애셋 제작/연결까지 했다고 보고하지 않는다. 별도 전용 클립 전환 작업과 혼동하지 않는다.
+- 검수/경계: 제품65텍스트 형식OK·기존 memory의 HEAD Mixed 대비현재CRLF NeedsReview보호, 제품국소diff공백검사OK, JSON41/JS21/HTML inline12구문OK 및 후보6코드/JSON구문OK. 본 채팅에서 stage/commit/push/배포·Git역사재작성·일반빌드/전게임플레이검수는 실행하지 않았다. 관련 현재결정·실제실행·검수·잔여구조문제의 누락점검을 완료했다.
+
+## 포자버섯 탄생 영구 폐기 결정 · 01a1b33b 현재 요약
+
+- 기록 ID: spore-birth-purge-current-20261107-01a1b33b. 기록·마지막 관측 시각: 2026-11-07T08:59:29+09:00. 기록자·실행 관측 Codex /root, 유일 보존본·영구 폐기 결정 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0, H:/Spawner Windows PowerShell. 원 발언 정확시각·항목ID·PC식별 불명. 아래 기존 원기록을 보존하며 본 결정의 대체 관계를 우선 적용한다.
+- 현재 유효한 사용자 결정: 유닛 페이지 기본 포자버섯 탄생의 빙글빙글 회전형만 보존한다. 다른 포자 탄생은 전부 구형이며 $Trash를 포함해 영구 삭제하고 사본·백업으로도 남기거나 Git 과거 기록에서 되살려 사용하지 않는다. 이 지시는 이전 안테나/발 V7·칼날/갑피 V9 승인 보존·게임 적용 기록을 현재 사용 근거로 삼는 것을 명시적으로 대체한다.
+- 보존 계약: Design.html unit-spore-tribe birth의 Planning/Tribes/spore/Previews/birth-game.webp와 Planning/UnitPreviews/spore-tribe/birth.webp; 실제 원본 Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp와 nest-stationary.png 및 필수 JSON/임베딩/현행 썸네일만 유지한다. 회전·22프레임·3120ms와 두 바퀴 sporeBirthMotion은 그대로다. 관련7바이너리 SHA256 동일 및 기본 셀 링크 보존을 직접 확인했다.
+- 실행 관측: 이름 경로로 2639파일, SHA256으로 찾은 숨은 사본30파일을 실제 unlink하여 총2669개를 삭제했다. 구형 기본 시안·정적 합성본·전투/분비/안테나/발 탄생, 원본/시트/GIF/프레임/등록/임베딩 및 구형 참조를 담은 압축본28개를 포함한다. 제품의 오래된 시트 선택·생성 분기와 유닛 외형 탄생 연결도 제거했다. 구형 픽셀·실행 코드를 보관용으로 복사하지 않았으며 조사 영수증에는 경로·해시·결과만 남긴다.
+- 검수·동시작업: 제품 수정 후보65텍스트의 JSON41·JS/MJS21·HTML내스크립트12 구문 검사를 통과했다. 다른 활성 배포 채팅 01a1b0eb-5c79-76a2-96c3-b18db3b182c7의 $Trash/assets-three-v43-20261107 후보12텍스트가 Git 기준 재생성으로 다시 나타남을 관측했다. 그 채팅에 폐기 결정 전달은 도구가 사용자 명시승인을 요구하여 질문 대기 중이다. 다른 동작·종족과 보호된 동시 코드를 변경하지 않고 이 탄생 참조만 정리한다. 로컬 삭제이며 Git 역사재작성·push·배포는 이번 채팅에서 실행하지 않았다.
+
+## 포자버섯 탄생 애셋 전수 조사 착수 · 01a1b33b
+
+- 기록 ID: spore-birth-inventory-start-20261107-01a1b33b. 기록 시각: 2026-11-07T08:41:54+09:00. 기록자·조사판단 Codex /root, 요청·향후 폐기 의도 주체 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0, H:/Spawner Windows PowerShell. 원 발언 정확시각·항목ID·PC식별 불명.
+- 사용자 요청: 포자버섯 탄생 애니로 기록된 애셋을 모두 가져와 검토한다. 현재 버전 하나 외에 파기할 의도를 밝혔으나 이번 단계는 전체 후보와 실제 참조를 조사·제시하며 생존본 확정이나 파일 삭제는 실행하지 않는다.
+- 관측·범위: 기본형 birth-size-v3, 안테나/발 승인 V7, 칼날/갑피 승인 V9, CombatAttributes 구형·분비형·미리보기·임베딩·AnimationCandidates 및 literal $Trash를 구분한다. 높은 버전 번호만으로 서로 다른 외형 승인본을 대체 판정하지 않는다. 초기 dirty 및 삭제·untracked와 동시 작업을 보존한다. Unity 프로젝트가 아닌 웹 프로젝트로 확인하여 GUID 추적은 미적용이다.
+
+## 포자 탄생 유일 보존본·영구 폐기 결정 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-decision-20261107-01a1b33b. 기록 시각: 2026-11-07T08:46:12+09:00. 기록자 Codex /root, 명시적 보존·폐기 결정 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0의 후속 지시 두 건, H:/Spawner Windows PowerShell. 원 발언 정확시각·항목ID 불명.
+- 사용자 확정: 지금 유닛 페이지 기본 포자버섯 탄생으로 설정된 빙글빙글 회전하는 버전만 현재 버전이다. 이외 포자 탄생 애셋은 구형이며 literal $Trash에서도 전부 삭제하여 다시 참조할 수 없게 하고 메모리에 확실히 기록한다. 이는 착수 기록의 삭제 미실행 경계를 대체하는 현재 영구삭제 승인이다.
+- 현재 직접 근거: Design.html unit-spore-tribe birth 셀은 Planning/Tribes/spore/Previews/birth-game.webp와 Planning/UnitPreviews/spore-tribe/birth.webp를 사용한다. 실제 몸체는 client/birth.mjs의 birth-size-v3/birth-unit.webp와 nest-stationary.png이며 sporeBirthMotion의 Math.PI*4 회전을 사용한다. 이 두 원본·현행 프리뷰 및 필수 임베딩은 보존한다.
+- 폐기 해석·기록 대체: 사용자 ‘외엔 전부 구형’ 기준으로 V1/V2 원화 시안·구형 size-v3 정적 합성본·CombatAttributes 포자 birth·분비 birth·안테나/발 V7·칼날/갑피 V9와 모든 사본/재생·생성 등록을 제거한다. 이 결정은 이 파일의 이전 V7/V9 승인 보존·적용 기록을 현재 사용 근거로 삼지 못하게 명시적으로 대체한다. 다른 동작·종족과 게임 시간/회전은 보존한다. Git 과거 이력·이미 게시된 원격 상태는 현 로컬 삭제와 구분하며 이번 요청만으로 역사재작성·push·배포하지 않는다.
+
+## 탄생 회전의 코드 합성 구조에 대한 사용자 지적 · 01a1b33b
+
+- 기록 ID: spore-birth-code-spin-objection-20261107-01a1b33b. 기록 시각: 2026-11-07T09:02:00+09:00. 기록자·구현설명 Codex /root, 지적·질문 주체 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0의 코드에서 회전시키는 이유에 대한 지적. 원 발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 직접 구현 사실: 기본 몸체 시트는 갓 펼침 등 로컬 동작이며 게임은 client/birth.mjs sporeBirthMotion(Math.PI*4)과 client/game.js ctx.rotate로 비행·회전·착지를 합성한다. 유닛 페이지 birth-game.webp는 그 완성 장면을 캡처하여 회전이 픽셀 프레임에 포함된 재생 애니이며 게임은 이 프리뷰를 직접 재생하지 않는다. ‘현행 회전형’과 ‘몸체 원본 시트’를 같은 완성 애니라고 불명확하게 설명한 점을 바로잡았다.
+- 사용자 판단/경계: 사용자는 회전을 실제 애니 대신 코드에서 합성하는 현 구조를 문제 삼았다. 이 지적을 현 구조 승인으로 해석하지 않는다. 새 애니 제작·몸체/월드 카메라 계약 변경은 아직 실행하지 않았으며 구형 영구 폐기 작업은 계속한다.
+- 채팅 전달: 사용자는 ‘최신 애셋 반영과 기획서·게임 배포’ 채팅으로 폐기 결정 전달을 명시 승인했고 send_message_to_thread가 대상01a1b0eb에 성공했다. 앞선 질문대기 상태를 대체하며 실제 반영·재생성중단 여부는 대상 응답/파일 근거로 후속 확인한다.
+
+## 구형 추가 사본 정리·병렬 작업 보호 보정 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-supplement-20261107-01a1b33b. 기록 시각: 2026-11-07T09:11:19+09:00. 기록자·실행/범위판단 Codex /root, 영구폐기 결정 사용자. 출처 현재 채팅 및 literal $Trash/spore-birth-purge-01a1b33b의 supplemental-receipt.json·restored-asset-purge.json·검사도구 결과, H:/Spawner Windows PowerShell. 원발언 시각·항목ID 불명.
+- 추가실행: 새로 나타난 구형 코드/후보/백업 참조55경로를 삭제하고 빈 폴더237개를 제거했다. 이 중 활성 클립 전환 작업의 prepare.mjs는 애셋이 아닌 제작도구이므로 실제 원채팅01a1b324의 fileChange 생성본문과 후속mask교정을 확인하여 도구를 보존 복원했다. 폐기된 SPORE_COMBAT_BIRTH_ANIMATIONS import/등록2줄은 제거하여 구형 애셋은 복원하지 않았고 node --check를 통과했다. 실제 삭제 고유경로는 이 도구를 제외한2723개다.
+- 현재 실물 읽기: 작업폴더·literal $Trash를 포함한 전경로의 spore birth 이미지/시트/GIF/동영상/그림 임베딩은 현행보존본 외0이다. 이후 생긴 실제구형 자산을 별도로 지운 것은0이며 원본보존hash7개는 앞선검사에서동일했다. 제품의 retired문자열·빈modules[]도0으로확인했다. 자산이없는 과거경로기록·삭제계획과 실제사용가능한애셋을구분한다.
+- 형식/범위: 수정후65제품텍스트UTF8NoBom·CRLF OK와제품국소 git diff --check성공. 메모리는기존HEAD Mixed와현재CRLF차이로NeedsReview이며다른본문을정규화하지않았다. JSON41·JS21·inline-script12의앞선성공결과는재사용하며일반게임빌드/전체테스트/브라우저검수를했다고확대하지않는다.
+- 병렬조율: 대상배포채팅은 실제commentary에서‘포자구형탄생을되살리지않고후보에서도제거’를확인했다. 후보전용retirement/projection이생겼으며root제품재생·기본소스/프리뷰원본은보호했다. 아직대상의최종후보반영완료/원격배포완료로기록하지않는다. prepare도구보정외다른기능/목록/상태를임의복원하지않았다.
+
+## 구형 포자 탄생 폐기분 커밋·푸시 승인 및 분리 범위 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-push-scope-20261107-01a1b33b. 기록 시각: 2026-11-07T09:24:33+09:00. 기록자·분리판단 Codex /root, Git완료 승인 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0의 ‘푸시까지 해’, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
+- 승인 범위는 직전 완료한 구형 포자 탄생 삭제·필수 등록/생성/프리뷰/게임 참조 제거 및 본채팅6기록이다. 원본실물2723경로 삭제 중 Git추적항목과 관련 소스/metadata/생성사본 및 이 기록만 독립커밋하고 전용origin/main에push한다. 새유효탄생제작, 코드회전교체, 다른클립전환/카메라/DNA/중립표/새애셋 작업은 포함하지 않는다. 기존로컬커밋은branchhistory로보존한다.
+- 관측: Git2.45.2.windows.1, main15a6284와fetch origin/maincdce2ae는로컬2/원격1갈라짐. 처음defaultindex238staged·Designunmerged는동시Git복원중관측이고현재실제cached0·unmerged0이며진행중rebase/merge없음을확인했다. 이index상태는임의해결하지않았다. 관련Projects0은기존정확조회재사용한다.
+- 구형asset을파일로다시checkout하지않고Git객체에서재배치후보를계산하는방법을검토중이다. 첫exactOID git replay는참조/파일/index변경없음·stdout없음으로끝났다. branch범위를준git replay --onto origin/main origin/main..main은자동승인검토가‘defaultmain재작성·무관커밋변경위험/기존stage충돌’을이유로거절했다. 우회실행하지않고설치2.45공식문서의working tree/indexuntouched·updates no references및현재cleanindex를근거로안전한계산단계의승인을재검토한다. 실제branch이동/commit/push성공전이다.
+
+## 포자 탄생 폐기 푸시 후보 동결 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-push-freeze-20261107-01a1b33b. 기록 시각: 2026-11-07T09:33:41+09:00. 기록자·후보분리/검수 Codex /root, commit/push 승인 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0의 푸시 지시 및 실제 projection/prepared/git replay 결과, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
+- 범위 동결: origin/main cdce2ae 위로 기존 로컬2커밋의 변경을 그대로 재배치 계산한 e7ea7db를 부모로, Git추적 구형145삭제와 관련소스/JSON/임베딩/생성66 및 본채팅8절만 후보에 포함한다. 실행원본2723경로의 Trash항목은Git추적대상이아니며다시보관하지않는다. 새3동작·전용클립전환·카메라·중립표·미커밋DNA/UI는후보에서제외한다. Design의새원격콩채집공격V3/사망V2도그대로보존한다.
+- 재배치 계산: 설치Git2.45로컬공식문서의‘workingtree/indexuntouched·updatesnoreferences’및현재cached0/U0를확인한동일명령재검토가허용돼update-ref제안만생성했다. 앞선자동검토거절은안전성증거로계산단계만해소됐고,아직실제branch/index이동·commit/push완료가아니다. 새로운브랜치·구형assetcheckout은하지않았다.
+- 후보검수: baselineGit객체를문자열로읽어퇴역훙크만투영하고66텍스트의JSON41/JS22/inline12구문검사및구형모듈/빈modules[]참조0을직접확인했다. 원본7binary와기본회전형프리뷰/참조는기존확인근거를유지하며새작화/완성회전게임클립교체는미실행이다. 본문/index/미추적사본은원래작업경로에보존한채Git객체/별도index에서만후보를구성한다. 실제커밋전최종범위·형식·stageddiff검사를한번실행하고전용origin/mainpush후정확원격tip과시작checkout을대조한다.
+
+## 포자 탄생 폐기 실제 커밋 범위 211경로 확정 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-final-scope-20261107-01a1b33b. 기록 시각: 2026-11-07T09:47:37+09:00. 기록자·최종범위/검수 Codex /root, push 승인 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0와 실제 별도index diff, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
+- 실제211경로=구형145삭제+관련변경/메모리66이다. 준비목록212중 client/unit-appearance-preview-runtime.js는 원격기준 내용과 Gitblob이 이미 같아 변경없이 제외한다. 소스·JSON·임베딩·Design·관련생성물과 본채팅 기록만 포함하고 다른미커밋작업은제외한다. 최종별도index의 diff공백검사0과위212후보구문/구형참조0근거를대조했다.
+- 동시Git대응: main의후속로컬커밋들도그대로재배치해보존하며원격 b4b0e05 기반후보81f4e45를계산했다. 다른채팅이원래dirty를stash중인동안본채팅기록이숨겨져최신stash6a0d9e69를문자열로읽어원본8절을복구해후보에합쳤다. 그stash의퇴역145애셋0을확인했고stash/reference는건드리지않았다. Git원본/작업복원은다른소유채팅에명시승인된메시지로조율중이다. 아직본커밋의실제push전이다.
+
+## 포자 탄생 폐기 게시 범위 210경로 최종 동결 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-publish-freeze210-20261107-01a1b33b. 기록 시각: 2026-11-07T09:53:30+09:00. 기록자·최종범위/검수 Codex /root, push 승인 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0 및 최종 별도index/tree aeb3f3ee362c15fa748d5923d1c1d7794b5510d6, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
+- 최종210경로=구형145삭제+관련변경/메모리65다. 준비212중 unit-appearance-preview-runtime.js와 비어 있는 외부 로더 Spawner.html은 원격 내용과 같아 변경하지 않는다. 앞선212/211 draft범위는 이 최종scope로 대체한다. 기존생성runtime/Combat/VFX와선택코드/기획연결만동기화하며구형bitmap을임시파일로복원하지않았다. 모든JSON41은원래문자열의퇴역항목만삭제해무관한재정렬을제외했고기존정리객체와JSON의미동일을확인했다.
+- 이력 기준: 시작 main 80fe722626609b0795a145a7ce2596aab726c72f, 최신확인origin/main b4b0e054790d1f04c11e9f1f28e114c54d53cce5, 기존로컬커밋보존재배치 6015e3453ef93a6be464808c1edcb8ed39642ca4 위에이번범위를동결한다. 다른채팅의stash/index/working/untracked와사용중실행파일은직접정리하지않으며보존snapshot을Git객체/별도index로확보한뒤정확HEAD/index/hash가맞을때만main을갱신한다. 비강제push와remote readback·시작checkout일치까지이어서완료한다.
+- 검수/누락점검: 후보JSON41/JS22/HTML스크립트9구문OK, JSON퇴역전용oracleOK, 제품stageddiff공백0을확인했다. 현행원본/완성프리뷰보존과구형source/임베딩/등록제거,본채팅원기록8절의stash문자열회수·추가결정기록의원자적포함을대조했다. format은최종같은후보만check-only로수행한다. 새그림/완성회전게임클립제작·전용클립전환/카메라/DNA/중립표의미커밋변경은이번commit에넣지않는다. 아직실제commit/push성공기록이아니다.
+
+## 폐기 이후 새 원격 채집형 탄생 V3 보존 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-new-upstream-v3-20261107-01a1b33b. 기록 시각: 2026-11-07T10:01:25+09:00. 기록자·통합범위 판단 Codex /root, 기존구형폐기/push 승인 사용자. 출처 현재 채팅과원격b4b0e05(09:38:20+09:00) README·tree·Design 직접조회, H:/Spawner Windows PowerShell. 신규승인 원발언 정확시각·항목ID·원채팅은미확인이다.
+- 새로운원격변경: 최초퇴역145목록밖의 AnimationCandidates/spore-gather-birth-v3는별도채집형의승인탄생V3로09:38:20에게시됐다. README는78프레임·3120ms,시트에회전/착지변형포함·월드이동미포함,게임적용은별도라고기록한다. 이를실행중인기본형교체완료나원발언추정으로확대하지않는다.
+- 보호판단: 이후추가된원격작업은보호하고이번초기목록의구형V7/V9/CombatAttributes/분비탄생과구분한다. 구형단순birth이름규칙으로신규V3를삭제/누락하지않는다. Design정리는퇴역목록경로를가진셀만비우고새V3셀을보존한다. 실제적용guard는이신규경로를처음차단하여main/index변경없이멈췄고,정확퇴역목록검사로좁혔다. 원격의새파일만없는경로에수입하고현재Design의비어있는동일포자채집탄생셀에승인원격셀만병합하며다른UI행/열/변경은보존한다.
+- 원결정유지: 최초구형실물2723삭제·Git145삭제및기본회전형보존,V7/V9과거승인복원금지는유효하다. 미래신규원격작업까지영구적으로금지했다고확대하지않는다. 본후보는여전히210경로의독립폐기범위이며후속신규승인V3보호를반영했다. 두관련Git채팅에이경계와조율결과를전달했다. 실제commit/push전이다.
+
+## 동시 재배치 완료 확인·동일 트리 후보 재사용 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-parent-tree-equality-20261107-01a1b33b. 기록 시각: 2026-11-07T10:04:57+09:00. 기록자·이력대조 Codex /root, push 승인 사용자. 출처 현재 채팅과git rev-parse/diff실측, H:/Spawner Windows PowerShell. 원발언시각·항목ID 불명.
+- 동시 Git 작업이main을 5633e897ad04396e3d6873ee8522c50828776055로재배치완료했다. 그tree는계산후보 6015e3453ef93a6be464808c1edcb8ed39642ca4의tree와정확히같고diff0이다. 검토완료210경로의바이트·범위·검수결과는그대로재사용하고부모만실제main으로맞춘다. 이제이번적용은기본main역사재작성이아닌검토한폐기커밋의fast-forward다. 현재index의기존staged/U0도이전실측을따르며적용직전재확인한다.
+- 원격의새승인포자채집형V3는보존하고현재dirty Design의동일채집탄생셀이비어있는경우에만원격승인셀을합친다. 그외현재본문·미추적항목과다른작업의stash는유지한다. 실제commit/push전이며형식/diff검사는변경된메모리델타만재확인한다.

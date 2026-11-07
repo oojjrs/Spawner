@@ -26,43 +26,6 @@
     "method": "source organ clipped by existing cap lip and visible underside; face/top/silhouette untouched"
   },
   "actions": {
-    "birth": {
-      "image": "DesignAssets/Animations/UnitRangedV1/spore/birth.png",
-      "hash": "9dd64e9a93ff10f2a5443d2832694a8782f91985da7a565ea1d9be7e8c9f2638",
-      "bodySource": "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp",
-      "bodySourceHash": "93696aac1e9eb471a1aae0ba8932eec01e369d0d64d064218a01b4b1c2ce9761",
-      "nativeFrameSize": 192,
-      "columns": 4,
-      "frameCount": 22,
-      "durationsMs": [
-        180,
-        80,
-        80,
-        80,
-        80,
-        80,
-        80,
-        80,
-        80,
-        160,
-        160,
-        160,
-        160,
-        160,
-        160,
-        160,
-        160,
-        80,
-        80,
-        80,
-        80,
-        700
-      ],
-      "pivot": [
-        133.33333333333331,
-        162
-      ]
-    },
     "death": {
       "image": "DesignAssets/Animations/UnitRangedV1/spore/death.png",
       "hash": "7f8149064c6f275efdf4cba7a1bd428c11cabbddc04e7bb80d7ad8f02d9c8db1",

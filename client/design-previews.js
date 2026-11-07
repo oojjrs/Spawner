@@ -94,19 +94,19 @@ globalThis.SpawnerDesignPreviews = Object.freeze({
   "DesignAssets/Planning/Animations/CombatAttributesV7/pebble/piercing/idle.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/pebble/piercing/idle.webp.webp",
   "DesignAssets/Planning/Animations/CombatAttributesV7/pebble/piercing/walk.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/pebble/piercing/walk.webp.webp",
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/blade/attack.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/blade/attack.webp.webp",
-  "DesignAssets/Planning/Animations/CombatAttributesV7/spore/blade/birth.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/blade/birth.webp.webp",
+
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/blade/death.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/blade/death.webp.webp",
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/blade/hurt.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/blade/hurt.webp.webp",
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/blade/idle.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/blade/idle.webp.webp",
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/blade/walk.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/blade/walk.webp.webp",
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/carapace/attack.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/carapace/attack.webp.webp",
-  "DesignAssets/Planning/Animations/CombatAttributesV7/spore/carapace/birth.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/carapace/birth.webp.webp",
+
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/carapace/death.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/carapace/death.webp.webp",
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/carapace/hurt.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/carapace/hurt.webp.webp",
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/carapace/idle.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/carapace/idle.webp.webp",
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/carapace/walk.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/carapace/walk.webp.webp",
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/piercing/attack.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/piercing/attack.webp.webp",
-  "DesignAssets/Planning/Animations/CombatAttributesV7/spore/piercing/birth.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/piercing/birth.webp.webp",
+
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/piercing/death.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/piercing/death.webp.webp",
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/piercing/hurt.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/piercing/hurt.webp.webp",
   "DesignAssets/Planning/Animations/CombatAttributesV7/spore/piercing/idle.webp": "DesignAssets/Planning/Thumbnails/Planning/Animations/CombatAttributesV7/spore/piercing/idle.webp.webp",
@@ -357,8 +357,8 @@ globalThis.SpawnerDesignPreviews = Object.freeze({
   "DesignAssets/Animations/CottonSheepWalk/ApprovedV4/preview-quarter-speed.gif": "DesignAssets/Planning/ApprovedAnimations96/cotton-sheep-walk-v4.webp",
   "DesignAssets/Animations/ApprovedRearSupportAttack/vine-turtle/attack-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--vine-turtle.webp",
   "DesignAssets/Animations/ApprovedRearSupportAttack/shadow-weasel/attack-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--shadow-weasel.webp",
-  "AnimationCandidates/spore-combat-birth-v9/blade-birth-scene-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/spore-combat-birth-v9-blade.webp",
-  "AnimationCandidates/spore-combat-birth-v9/carapace-birth-scene-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/spore-combat-birth-v9-carapace.webp",
+
+
   "AnimationCandidates/spore-gather-motion-v1/spore-gather-idle-v1-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/spore-gather-idle-v1.webp",
   "AnimationCandidates/spore-gather-motion-v1/spore-gather-walk-v1-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/spore-gather-walk-v1.webp",
   "AnimationCandidates/bean-secretion-idle-v4/bean-secretion-idle-v4-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/bean-secretion-idle-v4.webp"

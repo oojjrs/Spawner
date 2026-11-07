@@ -130,7 +130,6 @@
     "walk": "pending",
     "jump": "pending",
     "hurt": "pending",
-    "birth": "pending",
     "death": "pending",
     "attack": "pending",
     "ranged": "pending"

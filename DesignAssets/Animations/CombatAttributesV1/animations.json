@@ -1,7 +1,7 @@
 {
   "canvas": 192,
   "variants": 48,
-  "animationCount": 344,
+  "animationCount": 239,
   "records": [
     {
       "tribe": "sprout",
@@ -2852,50 +2852,6 @@
       "attributes": [
         "blade"
       ],
-      "action": "birth",
-      "image": "spore/Sheets/blade/birth.png",
-      "frameSize": 192,
-      "columns": 8,
-      "frameCount": 24,
-      "durationsMs": [
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50
-      ],
-      "durationMs": 1200,
-      "loop": false,
-      "contactMs": null,
-      "pivot": [
-        96,
-        172.8
-      ]
-    },
-    {
-      "tribe": "spore",
-      "attributes": [
-        "blade"
-      ],
       "action": "death",
       "image": "spore/Sheets/blade/death.png",
       "frameSize": 192,
@@ -3096,50 +3052,6 @@
         20
       ],
       "durationMs": 760,
-      "loop": false,
-      "contactMs": null,
-      "pivot": [
-        96,
-        172.8
-      ]
-    },
-    {
-      "tribe": "spore",
-      "attributes": [
-        "piercing"
-      ],
-      "action": "birth",
-      "image": "spore/Sheets/piercing/birth.png",
-      "frameSize": 192,
-      "columns": 8,
-      "frameCount": 24,
-      "durationsMs": [
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50
-      ],
-      "durationMs": 1200,
       "loop": false,
       "contactMs": null,
       "pivot": [
@@ -3404,50 +3316,6 @@
       "attributes": [
         "carapace"
       ],
-      "action": "birth",
-      "image": "spore/Sheets/carapace/birth.png",
-      "frameSize": 192,
-      "columns": 8,
-      "frameCount": 24,
-      "durationsMs": [
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50
-      ],
-      "durationMs": 1200,
-      "loop": false,
-      "contactMs": null,
-      "pivot": [
-        96,
-        172.8
-      ]
-    },
-    {
-      "tribe": "spore",
-      "attributes": [
-        "carapace"
-      ],
       "action": "death",
       "image": "spore/Sheets/carapace/death.png",
       "frameSize": 192,
@@ -3690,50 +3558,6 @@
       "durationMs": 1000,
       "loop": false,
       "contactMs": 300,
-      "pivot": [
-        96,
-        172.8
-      ]
-    },
-    {
-      "tribe": "spore",
-      "attributes": [
-        "guard"
-      ],
-      "action": "birth",
-      "image": "spore/Sheets/guard/birth.png",
-      "frameSize": 192,
-      "columns": 8,
-      "frameCount": 24,
-      "durationsMs": [
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50
-      ],
-      "durationMs": 1200,
-      "loop": false,
-      "contactMs": null,
       "pivot": [
         96,
         172.8
@@ -4000,50 +3824,6 @@
       "attributes": [
         "regeneration"
       ],
-      "action": "birth",
-      "image": "spore/Sheets/regeneration/birth.png",
-      "frameSize": 192,
-      "columns": 8,
-      "frameCount": 24,
-      "durationsMs": [
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50
-      ],
-      "durationMs": 1200,
-      "loop": false,
-      "contactMs": null,
-      "pivot": [
-        96,
-        172.8
-      ]
-    },
-    {
-      "tribe": "spore",
-      "attributes": [
-        "regeneration"
-      ],
       "action": "death",
       "image": "spore/Sheets/regeneration/death.png",
       "frameSize": 192,
@@ -4291,51 +4071,6 @@
       "durationMs": 1000,
       "loop": false,
       "contactMs": 300,
-      "pivot": [
-        96,
-        172.8
-      ]
-    },
-    {
-      "tribe": "spore",
-      "attributes": [
-        "blade",
-        "carapace"
-      ],
-      "action": "birth",
-      "image": "spore/Sheets/blade-carapace/birth.png",
-      "frameSize": 192,
-      "columns": 8,
-      "frameCount": 24,
-      "durationsMs": [
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50
-      ],
-      "durationMs": 1200,
-      "loop": false,
-      "contactMs": null,
       "pivot": [
         96,
         172.8
@@ -4605,51 +4340,6 @@
         "piercing",
         "guard"
       ],
-      "action": "birth",
-      "image": "spore/Sheets/piercing-guard/birth.png",
-      "frameSize": 192,
-      "columns": 8,
-      "frameCount": 24,
-      "durationsMs": [
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50
-      ],
-      "durationMs": 1200,
-      "loop": false,
-      "contactMs": null,
-      "pivot": [
-        96,
-        172.8
-      ]
-    },
-    {
-      "tribe": "spore",
-      "attributes": [
-        "piercing",
-        "guard"
-      ],
       "action": "death",
       "image": "spore/Sheets/piercing-guard/death.png",
       "frameSize": 192,
@@ -4902,52 +4592,6 @@
       "durationMs": 1000,
       "loop": false,
       "contactMs": 300,
-      "pivot": [
-        96,
-        172.8
-      ]
-    },
-    {
-      "tribe": "spore",
-      "attributes": [
-        "blade",
-        "piercing",
-        "carapace"
-      ],
-      "action": "birth",
-      "image": "spore/Sheets/blade-piercing-carapace/birth.png",
-      "frameSize": 192,
-      "columns": 8,
-      "frameCount": 24,
-      "durationsMs": [
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50
-      ],
-      "durationMs": 1200,
-      "loop": false,
-      "contactMs": null,
       "pivot": [
         96,
         172.8
@@ -5258,52 +4902,6 @@
       "durationMs": 1200,
       "loop": false,
       "contactMs": 480,
-      "pivot": [
-        96,
-        172.8
-      ]
-    },
-    {
-      "tribe": "spore",
-      "attributes": [
-        "guard",
-        "carapace",
-        "regeneration"
-      ],
-      "action": "birth",
-      "image": "spore/Sheets/guard-carapace-regeneration/birth.png",
-      "frameSize": 192,
-      "columns": 8,
-      "frameCount": 24,
-      "durationsMs": [
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50,
-        50
-      ],
-      "durationMs": 1200,
-      "loop": false,
-      "contactMs": null,
       "pivot": [
         96,
         172.8

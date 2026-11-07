@@ -1,6 +1,6 @@
 import { SPRING_SECRETION_ASSETS } from "./spring-secretion-assets.mjs";
 import { APPROVED_SPROUT_DEATH_ANIMATIONS } from "./sprout-death-animations.mjs";
-import { SPORE_BIRTH_ANIMATION, PEBBLE_BIRTH_ANIMATION, SPRING_BIRTH_ANIMATION } from "./birth.mjs";
+import { PEBBLE_BIRTH_ANIMATION, SPRING_BIRTH_ANIMATION } from "./birth.mjs";
 import { UNIT_ANIMATIONS } from "./unit-animation.mjs";
 import { AGENT_DEATH_ANIMATION } from "./agent-death.mjs";
 
@@ -8,7 +8,7 @@ import { AGENT_DEATH_ANIMATION } from "./agent-death.mjs";
 // pixels. Keep the body's camera and clock; this is not a world-ready rig.
 const bodies = {
   bean: { death: AGENT_DEATH_ANIMATION },
-  spore: { birth: SPORE_BIRTH_ANIMATION, death: UNIT_ANIMATIONS.spore.death },
+  spore: { death: UNIT_ANIMATIONS.spore.death },
   pebble: { birth: PEBBLE_BIRTH_ANIMATION, death: UNIT_ANIMATIONS.pebble.death },
   spring: { birth: SPRING_BIRTH_ANIMATION, death: UNIT_ANIMATIONS.spring.death }
 };

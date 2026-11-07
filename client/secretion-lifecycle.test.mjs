@@ -22,7 +22,7 @@ test('lifecycle hook preserves dominant selection, authored geometry/timing and 
   for(const key of ['frameSize','frameCount','columns','pivotX','pivotY','viewSize','registrationScale'])assert.equal(clip[key],base[key]);
   assert.deepEqual(clip.durationsMs,base.durationsMs);assert.ok(UNIT_RANGED_IMAGE_ASSETS.includes(clip.image));
  }
- assert.equal(unitRangedLifecycleAnimation(agent({birth:{startedAt:1}}),'birth'),clips.spore.birth);
+ assert.equal(unitRangedLifecycleAnimation(agent({birth:{startedAt:1}}),'birth'),null);
  assert.equal(unitRangedLifecycleAnimation(agent({health:0}),'death'),clips.spore.death);
  assert.equal(unitRangedLifecycleAnimation(agent({health:undefined,kind:'corpse'}),'death'),clips.spore.death);
  for(const a of [agent(),agent({species:'bubble-toad',health:0}),agent({health:0,attributes:{blade:1,secretion:1}})])assert.equal(unitRangedLifecycleAnimation(a,'death'),null);
@@ -31,32 +31,6 @@ test('lifecycle hook preserves dominant selection, authored geometry/timing and 
  assert.equal(unitRangedLifecycleAnimation(agent({tribe:'bean',birth:{}}),'birth'),null);
  assert.equal(unitRangedPose(agent({health:0}),2),null);
  assert.equal(unitAppearanceInventory().some(item=>item.worldReady),false);
-});
-
-test('actual birth draw preserves mirror/scene motion, missing-art fallback and exact idle handoff',()=>{
- let available=true;const draws=[],scales=[],handoffs=[],outlines=[],sheet={path:clips.spore.birth.image},base={path:'existing-birth-frame'};
- const scope=createContext({Spawner:{SPORE_BIRTH_ANIMATION,unitRangedLifecycleAnimation,sporeBirthMotion,imageScale},
-  SpawnerAppearance:{unitAppearanceBirthSceneForAgent:()=>null},idleMotion:{matches:false},
-  tribeArt:{animationFrame:()=>null},sporeBirthSheet:{},sporeBirthFrames:new Map(Array.from({length:22},(_,i)=>[i,base])),
-  agentRangedImage:()=>available?sheet:null,AGENT_HEIGHT:.7,
-  drawAgentAppearanceLayer:(...args)=>handoffs.push(args),drawSelectionOutline:(...args)=>outlines.push(args)});
- runInContext(extract('drawSporeBirth'),scope);
- const ctx=new Proxy({drawImage:(...args)=>draws.push(args),scale:(...args)=>scales.push(args)},{get:(o,k)=>o[k]||(()=>{})});
- const a=agent({birth:{startedAt:1}}),before=structuredClone(a);
- for(const facing of [-1,1])for(const frame of [2,8,9,20]){
-  draws.length=0;scales.length=0;
-  const birth={unitVisible:true,frame,elapsed:1.3,scale:.004,facing,x:2,y:3};
-  scope.drawSporeBirth(ctx,0,a,birth,{x:10,y:20},100,'outline');
-  assert.equal(draws[0][0],sheet);assert.deepEqual(draws[0].slice(1,5),[frame%4*192,Math.floor(frame/4)*192,192,192]);assert.deepEqual(scales[0],[facing,1]);
-  assert.equal(outlines.at(-1).at(-2).index,frame);
-  available=false;draws.length=0;scope.drawSporeBirth(ctx,0,a,birth,{x:10,y:20},100,null);assert.equal(draws[0][0],base);available=true;
- }
- for(const reduced of [false,true]){
-  scope.idleMotion.matches=reduced;draws.length=0;
-  scope.drawSporeBirth(ctx,0,a,{unitVisible:true,frame:reduced?8:21,x:2,y:3},{x:10,y:20},100,null);
-  assert.equal(draws.length,0);assert.equal(handoffs.at(-1)[2].birth,null);assert.deepEqual(handoffs.at(-1)[2].attributes,a.attributes);
- }
- assert.deepEqual(a,before);
 });
 
 test('world/detail corpse draw changes only the art sheet and retains frame, scale and fallback',()=>{
