@@ -37,19 +37,29 @@ test('all twelve defensive attacks are registered as transparent native own-body
   }
 });
 
-test('only the authorized attack slot changes in each defensive body', () => {
+test('defensive bodies preserve other slots except explicitly audited births', () => {
   const baseline = JSON.parse(read('tools/defensive-attacks-integration-20261107/existing-art-baseline.json'));
   for (const [key, before] of Object.entries(baseline.definitions)) {
     const after = UNIT_ACTION_ART[key];
     assert.deepEqual(after.reference, before.reference, key);
     for (const [name, clip] of Object.entries(before.actions)) if (name !== 'attack') {
+      if (key === 'pebble/carapace-antenna' && name === 'birth') {
+        const corrected = JSON.parse(read('AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/publication-manifest.json')).actions.birth;
+        assert.equal(hash(read(after.actions.birth.image)), corrected.sheetSHA256);
+        assert.deepEqual(after.actions.birth.durationsMs, clip.durationsMs);
+        assert.equal(after.actions.birth.referenceLength, 155); assert.equal(after.actions.birth.pivotX, 392.5); assert.equal(after.actions.birth.pivotY, 439);
+        continue;
+      }
       const { sceneLayers, ...preserved } = after.actions[name];
       assert.deepEqual(preserved, clip, key + '/' + name);
       if (sceneLayers) { assert.equal(name, 'birth'); assert.ok(['bean/carapace-antenna', 'spore/carapace-antenna'].includes(key)); }
     }
     assert.deepEqual(Object.keys(after.actions).sort(), [...new Set([...Object.keys(before.actions), 'attack'])].sort());
   }
-  for (const [path, sha] of Object.entries(baseline.sourceImages)) assert.equal(hash(read(path)), sha, path);
+  for (const [path, sha] of Object.entries(baseline.sourceImages)) {
+    if (path === UNIT_ACTION_ART['pebble/carapace-antenna'].actions.birth.image) continue; // Audited v2 hash is checked above.
+    assert.equal(hash(read(path)), sha, path);
+  }
 });
 
 for (const tribe of tribes) for (const form of forms) test(`${tribe}/${form}: actual defensive attack drives its own hit frame without gameplay writes`, () => {

@@ -1,0 +1,201 @@
+{
+  "technicalChecksPassed": true,
+  "firstSixOriginalPixelIdentical": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "allEightFramePixelHashesUnique": true,
+  "finalExactBorderPixels": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "previewChecks": {
+    "preview": {
+      "frames": 8,
+      "loop": 0,
+      "durationsMs": [
+        330,
+        250,
+        200,
+        130,
+        130,
+        200,
+        250,
+        650
+      ]
+    },
+    "gif": {
+      "frames": 8,
+      "loop": 0,
+      "durationsMs": [
+        330,
+        250,
+        200,
+        130,
+        130,
+        200,
+        250,
+        650
+      ]
+    }
+  },
+  "finalBodies": {
+    "6": {
+      "bounds": [
+        312,
+        316,
+        460,
+        439
+      ],
+      "heightWidthRatio": 0.831081081081081,
+      "ratioRelativeToIdle": 0.9977876106194691,
+      "measurementRegion": [
+        [
+          312,
+          382
+        ],
+        [
+          318,
+          354
+        ],
+        [
+          341,
+          332
+        ],
+        [
+          373,
+          317
+        ],
+        [
+          391,
+          316
+        ],
+        [
+          416,
+          326
+        ],
+        [
+          440,
+          347
+        ],
+        [
+          457,
+          373
+        ],
+        [
+          464,
+          398
+        ],
+        [
+          451,
+          422
+        ],
+        [
+          435,
+          440
+        ],
+        [
+          351,
+          440
+        ],
+        [
+          325,
+          426
+        ]
+      ]
+    },
+    "7": {
+      "bounds": [
+        315,
+        309,
+        470,
+        439
+      ],
+      "heightWidthRatio": 0.8387096774193549,
+      "ratioRelativeToIdle": 1.0069464268722048,
+      "measurementRegion": [
+        [
+          315,
+          380
+        ],
+        [
+          322,
+          350
+        ],
+        [
+          345,
+          329
+        ],
+        [
+          370,
+          314
+        ],
+        [
+          395,
+          309
+        ],
+        [
+          422,
+          320
+        ],
+        [
+          450,
+          342
+        ],
+        [
+          468,
+          369
+        ],
+        [
+          474,
+          398
+        ],
+        [
+          457,
+          424
+        ],
+        [
+          437,
+          440
+        ],
+        [
+          349,
+          440
+        ],
+        [
+          324,
+          423
+        ]
+      ]
+    }
+  },
+  "idleBounds": [
+    50,
+    110,
+    457,
+    449
+  ],
+  "idleHeightWidthRatio": 0.8329238329238329,
+  "oldFinalHeightWidthRatio": 0.9316770186335404,
+  "nestLeftRegionAlphaIoU": {
+    "6": 0.975265231888451,
+    "7": 0.9774693546753115
+  },
+  "nestNote": "The first6scenes are byte-identical. Imagegen preserved the nest design/location in the final2scenes; those complete scene pixels are not byte-identical. No code splicing of creature/nest pixels.",
+  "bodyPartsComposited": false,
+  "browserPlaybackVerified": false,
+  "packedContactReviewed": true,
+  "finalBodyAnchorVerified": true,
+  "sha256Verified": true,
+  "finalBodyProportionsWithinOnePercentOfIdle": true
+}

@@ -1,0 +1,177 @@
+{
+  "tribe": "pebble",
+  "form": "carapace-antenna",
+  "status": "completed-under-user-delegated-correction",
+  "sourceAppearance": "AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/pebble-carapace-antenna-appearance.png",
+  "sourceAppearanceSHA256": "838ff61ea3f69a85e19b1563875e567d212a3e4b0d0ac1b1f6b3367c214792b8",
+  "sourceBirth": "AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/pebble-carapace-antenna-birth-v1-sheet.png",
+  "sourceBirthSHA256": "88efe65d7cc4c9a361daea6f4e395f65100539bd512d8cec9df63ec4efa60503",
+  "sourceFacing": "right",
+  "method": "Built-in imagegen edited the final two complete scenes. Frames0-5 are exact original full-frame copies; frames6-7 are complete edited scene cells uniformly resized. No body-part or body/nest compositing.",
+  "actions": {
+    "birth": {
+      "sheet": "AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/pebble-carapace-antenna-birth-proportion-v2-sheet.png",
+      "preview": "AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/pebble-carapace-antenna-birth-proportion-v2-preview.webp",
+      "gif": "AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/pebble-carapace-antenna-birth-proportion-v2-preview.gif",
+      "cover": "AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/pebble-carapace-antenna-birth-proportion-v2-cover.png",
+      "sheetSHA256": "497b0105e98f9168509a630a87a6a122a7b0c466db690aae435e9d5e020b3da6",
+      "previewSHA256": "3046047e2e3f2d63e28c8b16ffbf16d6a7396fa3f7c7079d65b6d87e3c3f7554",
+      "gifSHA256": "8e699d383fff61ef81e7ce5943e7ea71c50476d4b169ebc46f68274b11d04f25",
+      "sourceSHA256": "e2be30dfaa682f7efd15b20b919cbf7e075d1cb29143d48367590811885ead39",
+      "frameSize": 512,
+      "frameHeight": 512,
+      "columns": 4,
+      "frameCount": 8,
+      "durationsMs": [
+        330,
+        250,
+        200,
+        130,
+        130,
+        200,
+        250,
+        650
+      ],
+      "durationMs": 2140,
+      "loop": false,
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "sourceFacing": "right",
+      "pivotX": 392.5,
+      "pivotY": 439,
+      "referenceLength": 155,
+      "viewSize": 155,
+      "fullScene": true,
+      "bodyBounds": [
+        [
+          32,
+          209,
+          394,
+          424
+        ],
+        [
+          31,
+          209,
+          394,
+          424
+        ],
+        [
+          32,
+          209,
+          394,
+          434
+        ],
+        [
+          32,
+          209,
+          475,
+          450
+        ],
+        [
+          32,
+          209,
+          476,
+          447
+        ],
+        [
+          31,
+          209,
+          470,
+          443
+        ],
+        [
+          32,
+          206,
+          460,
+          439
+        ],
+        [
+          32,
+          206,
+          470,
+          439
+        ]
+      ],
+      "sceneIncludesNest": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": "final-body-floor",
+      "finalBodyAnchorPending": false,
+      "finalBodyBounds": [
+        315,
+        309,
+        470,
+        439
+      ],
+      "finalBodyMeasurement": "Alpha >= 16 within manually traced complete-character outline; nest-contact pixels excluded for measurement only. No artwork masking/compositing.",
+      "finalBodyMeasurementRegion": [
+        [
+          315,
+          380
+        ],
+        [
+          322,
+          350
+        ],
+        [
+          345,
+          329
+        ],
+        [
+          370,
+          314
+        ],
+        [
+          395,
+          309
+        ],
+        [
+          422,
+          320
+        ],
+        [
+          450,
+          342
+        ],
+        [
+          468,
+          369
+        ],
+        [
+          474,
+          398
+        ],
+        [
+          457,
+          424
+        ],
+        [
+          437,
+          440
+        ],
+        [
+          349,
+          440
+        ],
+        [
+          324,
+          423
+        ]
+      ],
+      "coverSHA256": "716afcebc5db8bc143ce6d403de577ae4265f02a638eac1d4010d8447188af38"
+    }
+  },
+  "emptySceneOuterBorderTrimPixels": 1,
+  "replacedFrames": [
+    6,
+    7
+  ],
+  "unchangedFrames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "otherActionsChanged": false
+}

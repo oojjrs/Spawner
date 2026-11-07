@@ -24,3 +24,13 @@ Unique layer PNGs total 42,822,842 bytes. Decoded RGBA minimum across all 14 for
 ## Reproduction
 
 Source packages, hashes, composition evidence and generators are under AnimationCandidates/birth-scene-layers-v1-20261107. Use the original authoring sources via SPAWNER_SOURCE/SPORE_BUILD_SOURCE when running generators. Registration is additive through scripts/register-antenna-combos.py; scripts/publish-antenna-combo-docs.py republishes existing rows without new columns. User camera, formation, VFX and unknown original-worktree changes are preserved.
+
+## Concurrent remote changes and second correction
+
+Preserved upstream commits 57b3f1b2, e91aee10 and cb006f13 (DNA v5 pricing, tribe efficiency, editor and combat clocks); rebuilt generated runtime/lab. Post-merge focused suite passed 128/128, including new upstream tests. Antenna expectations now use DNA v5 and the tribe base armor rather than incorrectly requiring zero base armor.
+
+The independently reviewed pebble carapace+antenna birth v2 corrects the final two body poses to within 0.7% of idle aspect. First six scene frames, 8-frame/2140ms clock, and all other actions remain unchanged. Last two nest images were redrawn as part of whole scenes, not claimed byte-identical.
+
+Independent browser audit also observed Chromium error code 9 after static one-form fixture failure. This is recorded as a renderer crash limitation, not merely a CDP observation timeout. The animation code or memory as cause is not established. Full live audit remains open.
+
+Pebble correction verification: 57 integration tests passed, including direct source-pixel identity for first six frames and measured final body aspect/floor/reference.
