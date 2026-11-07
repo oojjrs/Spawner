@@ -74,7 +74,7 @@ test("archive adds no game action, runtime file, canonical target or readiness",
   assert.ok(unitAppearanceMissingActions("bean", 31).includes("harvest"));
   assert.equal(unitAppearanceReadiness({ source, ...motions }, 31).worldReady, false);
   assert.equal(UNIT_DISPLAY_MASKS.includes(31), false);
-  assert.equal(unitAppearanceInventory().length, 40);
+  assert.equal(unitAppearanceInventory().length, 68);
   assert.equal(unitAppearanceInventory().some(row => row.key === "bean/1f"), false);
   assert.equal(unitAppearanceInventory().some(row => row.worldReady), false);
   assert.equal(readFileSync(new URL("client/unit-appearance-lazy-assets.js", root), "utf8").includes(archive.clip.image), false);

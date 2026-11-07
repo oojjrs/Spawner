@@ -1,15 +1,16 @@
 import { drawUnitLoading } from "./unit-loading.mjs";
 import { UNIT_ACTION_ART } from "./unit-action-art-assets.mjs";
 import { UNIT_BIRTH_ART } from "./unit-birth-art-assets.mjs";
-import { unitDisplayAttributes, UNIT_DISPLAY_PRIORITY, unitCombinationAppearance } from "./unit-display-appearance.mjs";
+import { unitDisplayAttributes, UNIT_DISPLAY_PRIORITY } from "./unit-display-appearance.mjs";
 import { unitDisplaySize, unitFrameMirror } from "./unit-size.mjs";
 import { unitActionState } from "./unit-appearance-state.mjs";
+import { UNIT_COMBINATION_FORMS } from "./unit-combination-forms.mjs";
 import { unitAppearanceForm } from "../server/unit-appearance.mjs";
 
 function unitActionArtFallbackKey(agent) {
   if (!agent || agent.species) return null;
   const attributes = unitDisplayAttributes(agent);
-  const form = unitCombinationAppearance(agent) || UNIT_DISPLAY_PRIORITY.find(key => attributes[key] > 0) ||
+  const form = UNIT_DISPLAY_PRIORITY.find(key => attributes[key] > 0) ||
     (attributes.strength > 0 || attributes.arms > 0 || agent.dna?.pieces?.some(piece => piece.gene === "gather") ? "gather" : attributes.piercing > 0 ? "secretion" : "base");
   return (agent.tribe || agent.key || "bean") + "/" + form;
 }
@@ -30,10 +31,10 @@ export function unitActionArtDefinition(agent) {
 // Work reuses this same body's authored attack, never another form's rig.
 // These visual aliases do not emit combat events or change harvesting/cargo.
 const combinationWorkActions = new WeakMap();
-function actionsFor(agent, definition) {
-  if (!unitCombinationAppearance(agent)) return definition.actions;
+function actionsFor(definition, key) {
+  if (!UNIT_COMBINATION_FORMS.some(form => key.endsWith("/" + form.key))) return definition.actions;
   if (!combinationWorkActions.has(definition)) {
-    const attack = definition.actions.attack || definition.actions.ranged;
+    const attack = definition.actions.attack || definition.actions.ranged || definition.actions.walk;
     combinationWorkActions.set(definition, attack ? { ...definition.actions,
       harvest: { ...attack, loop: true },
       throw: { ...attack, loop: false, releaseAtMs: attack.hitTimeMs ?? attack.launchAtMs ?? 300 },
@@ -47,7 +48,7 @@ export function unitActionArtPose(agent, time) {
   if (!selection) return null;
   const { definition, key } = selection;
   const birth = agent.birth && UNIT_BIRTH_ART[key];
-  const authored = actionsFor(agent, definition);
+  const authored = actionsFor(definition, key);
   const actions = birth ? { ...authored, birth } : authored;
   const state = unitActionState(agent, time, { animations: actions });
   if (!state) return null;

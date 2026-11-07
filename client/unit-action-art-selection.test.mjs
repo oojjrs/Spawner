@@ -57,6 +57,7 @@ test("미등록 조합은 요청 키를 보존하고 등록 즉시 정확한 세
   for (const tribe of tribes) {
     const agent = { tribe, attributes: { blade: 1, carapace: 1, antenna: 1 } };
     const catalog = { ...UNIT_ACTION_ART };
+    delete catalog[tribe + "/blade-carapace-antenna"];
     const before = unitActionArtSelection(agent, catalog);
     assert.equal(before.requestedKey, tribe + "/blade-carapace-antenna");
     assert.equal(before.key, tribe + "/blade");
@@ -88,7 +89,8 @@ test("승인 칼날 갑각은 모든 동작에서 같은 세트를 유지하고 
       assert.equal(pose.missing, !definition.actions[action]);
     }
     const fallback = { ...agent, attributes: { blade: 1, carapace: 1, antenna: 1 }, birth: { startedAt: 0, readyAt: 2 } };
-    assert.equal(unitActionArtPose(fallback, .05).animation, UNIT_BIRTH_ART[tribe + "/blade"] || UNIT_ACTION_ART[tribe + "/blade"].actions.birth);
+    const selected = unitActionArtSelection(fallback, UNIT_ACTION_ART);
+    assert.equal(unitActionArtPose(fallback, .05).animation, UNIT_BIRTH_ART[selected.key] || selected.definition.actions.birth);
   }
 });
 

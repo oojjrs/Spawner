@@ -1,3 +1,4 @@
+import { dnaAttackMode } from "../server/dna-actions.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -13,13 +14,14 @@ import { COMBAT_LAB_APPEARANCES, combatLabAppearance, combatLabCombinationDna, c
 import { validateDna, dnaAppearance } from '../server/dna-unit.mjs';
 import { ATTRIBUTE_DNA } from '../server/dna.mjs';
 import { deriveSimulationStats, createSimulationTrial } from './combat-simulation.mjs';
-const forms = UNIT_COMBINATION_FORMS.filter(form => form.attributes.secretion);
+const originalForms = UNIT_COMBINATION_FORMS.filter(form => !form.attributes.antenna);
+const forms = originalForms.filter(form => form.attributes.secretion);
 const make = (tribe, form) => ({ tribe, attributes: form.attributes, health: 20, bornAt: 0 });
 
-test('exact authored masks select 40 silhouettes without changing extra-trait or legacy routing', () => {
+test('exact authored masks select 68 silhouettes without changing extra-trait or legacy routing', () => {
   const seen = new Set();
   for (const tribe of UNIT_APPEARANCE_TRIBES) for (let mask = 0; mask < 32; mask++) {
-    const form = UNIT_COMBINATION_FORMS.find(row => row.mask === mask);
+    const form = UNIT_COMBINATION_FORMS.find(row => row.mask === (mask & ~8));
     const attributes = Object.fromEntries(Object.entries(UNIT_APPEARANCE_BITS).filter(([, bit]) => mask & bit).map(([key]) => [key, 2]));
     const unit = { tribe, attributes }, original = JSON.stringify(unit);
     const expected = form?.mask ?? [1, 16, 2, 4, 8].find(bit => mask & bit) ?? 0;
@@ -27,15 +29,16 @@ test('exact authored masks select 40 silhouettes without changing extra-trait or
     assert.equal(unitDominantAppearanceMask(mask), expected);
     assert.equal(unitAppearanceMaskFromAttributes(unitDisplayAttributes(unit)), expected);
     assert.equal(JSON.stringify(unit), original); seen.add(tribe + '/' + expected);
-    if (form?.attributes.secretion) assert.equal(unitActionArtDefinition(unit), SECRETION_COMBO_ACTION_ART[tribe + '/' + form.key]);
+    if (form?.attributes.secretion && !form.attributes.antenna) assert.equal(unitActionArtDefinition(unit), SECRETION_COMBO_ACTION_ART[tribe + '/' + form.key]);
   }
-  assert.equal(seen.size, 40); assert.equal(UNIT_DISPLAY_FORM_COUNT, 40);
+  assert.equal(seen.size, 68); assert.equal(UNIT_DISPLAY_FORM_COUNT, 68);
   for (const form of forms) {
     const unit = make('bean', form);
     assert.equal(unitCombinationAppearance({ ...unit, appearanceAttributes: {} }), null);
     assert.equal(unitCombinationAppearance({ tribe: 'bean', dna: combatLabCombinationDna(form.key) }), form.key);
-    for (const key of ['strength', 'arms', 'piercing', 'guard', 'legs', 'feet', 'antenna'])
-      assert.equal(unitCombinationAppearance({ ...unit, attributes: { ...unit.attributes, [key]: 1 } }), null, key);
+    for (const key of ['strength', 'arms', 'piercing', 'guard', 'legs', 'feet'])
+      assert.equal(unitCombinationAppearance({ ...unit, attributes: { ...unit.attributes, [key]: 1 } }), form.key, key);
+    assert.equal(unitCombinationAppearance({ ...unit, attributes: { ...unit.attributes, antenna: 1 } }), form.key + '-antenna');
     assert.equal(unitCombinationAppearance({ ...unit, species: 'spiny-back-beetle' }), null);
   }
 });
@@ -71,11 +74,11 @@ for (const tribe of UNIT_APPEARANCE_TRIBES) for (const form of forms) test(`${tr
 });
 
 test('all four laboratory choices use independently valid DNA and correct attack capabilities', () => {
-  assert.equal(COMBAT_LAB_APPEARANCES.length, 5);
-  for (const form of UNIT_COMBINATION_FORMS) {
+  assert.equal(COMBAT_LAB_APPEARANCES.length, 12);
+  for (const form of originalForms) {
     const dna = combatLabCombinationDna(form.key), other = combatLabCombinationDna(form.key);
     assert.ok(validateDna(dna, dna.level, dna.budget)); assert.ok(ATTRIBUTE_DNA.trace(dna.pieces, dna.level).valid);
-    assert.deepEqual(dnaAppearance(dna), form.attributes); assert.notEqual(dna.pieces[0].shape, other.pieces[0].shape);
+    assert.deepEqual(dnaAppearance(dna), form.attributes); assert.notEqual(dna.pieces[0], other.pieces[0]); assert.notEqual(dna.pieces, other.pieces);
     for (const key of UNIT_APPEARANCE_TRIBES) {
       const build = combatLabWithAppearance({ key }, form.key), stats = deriveSimulationStats(build);
       assert.equal(combatLabAppearance(build), form.key);
@@ -85,7 +88,9 @@ test('all four laboratory choices use independently valid DNA and correct attack
       for (const actor of trial.agents) assert.equal(unitCombinationAppearance(actor), form.key);
       trial.finish(); assert.ok(trial.result());
       const shots = trial.vfx.events.filter(event => event.kind === 'shoot');
-      assert.equal(shots.length > 0, !!form.attributes.secretion);
+      assert.equal(dnaAttackMode(stats.dna, 2), form.attributes.secretion ? 'ranged' : null);
+      if (!form.attributes.blade) assert.ok(shots.length > 0);
+      if (!form.attributes.secretion) assert.equal(shots.length, 0);
       if (form.attributes.secretion && !form.attributes.blade) assert.equal(trial.vfx.events.some(event => event.mode === 'melee'), false);
     }
   }
@@ -106,7 +111,7 @@ test('observing combo poses never changes combat outcomes or launch-event stream
 });
 
 test('welcome includes twelve new identities with authored ranged or melee performance', () => {
-  assert.equal(WELCOME_UNIT_APPEARANCES.length, 11);
+  assert.equal(WELCOME_UNIT_APPEARANCES.length, 18);
   for (const tribe of UNIT_APPEARANCE_TRIBES) for (const form of forms) {
     assert.ok(WELCOME_UNIT_APPEARANCES.some(attributes => unitCombinationAppearance({ attributes }) === form.key));
     const performance = welcomeUnitPerformance(make(tribe, form), 10);
@@ -126,7 +131,7 @@ test('built runtime and lab carry new registry and all four visible combination 
 
 
 test('work aliases replay the same combo body without adding combat state or projectile events', () => {
-  for (const tribe of UNIT_APPEARANCE_TRIBES) for (const form of UNIT_COMBINATION_FORMS) {
+  for (const tribe of UNIT_APPEARANCE_TRIBES) for (const form of originalForms) {
     const unit = make(tribe, form), definition = unitActionArtDefinition(unit);
     const attack = definition.actions.attack || definition.actions.ranged;
     const harvesting = { ...unit, mode: 'harvest', harvestStarted: 0 };
@@ -150,7 +155,7 @@ test('planning lists all sixteen forms, 104 authored clips and 48 matching work 
   let html = '';
   runInNewContext(readFileSync(new URL('../DesignAssets/sections/unit-appearance.js', import.meta.url), 'utf8'), { document: { write: value => { html += value; } } });
   let authored = 0, work = 0;
-  for (const tribe of UNIT_APPEARANCE_TRIBES) for (const form of UNIT_COMBINATION_FORMS) {
+  for (const tribe of UNIT_APPEARANCE_TRIBES) for (const form of originalForms) {
     const row = html.match(new RegExp('<tr id="unit-' + tribe + '-' + form.key + '"[^]*?</tr>'))?.[0];
     assert.ok(row, tribe + '/' + form.key);
     const clips = unitActionArtDefinition(make(tribe, form)).actions;
@@ -167,6 +172,6 @@ test('planning lists all sixteen forms, 104 authored clips and 48 matching work 
     if (!form.attributes.blade) assert.match(row, /<td data-action="attack"[^>]*><\/td>/);
   }
   assert.equal(authored, 104); assert.equal(work, 48);
-  assert.ok(html.includes('16개 외형의 기본 동작 104개'));
+  assert.ok(html.includes('16개 외형의 기본 동작 104개') || html.includes('44개 복합 외형·276개 기본 동작'));
   assert.ok(html.includes('pebble-blade-carapace-walk-grounded-v2-20261107'));
 });

@@ -27,7 +27,8 @@ test('new hits reset hold independently of outgoing attack, shooting and movemen
 test('six dominant live silhouettes keep their source; legacy species, birth and death are excluded',()=>{
  assert.equal(Object.keys(BEAN_HELD_HURT_SOURCES).length,6);
  for(const key of ['base','blade','carapace','secretion','antenna','feet'])assert.equal(beanHeldHurtSource(unit({attributes:key==='base'?{}:{[key]:1}})),BEAN_HELD_HURT_SOURCES[key]);
- assert.equal(beanHeldHurtSource(unit({attributes:{blade:1,secretion:1,feet:1}})),BEAN_HELD_HURT_SOURCES.blade);
+ assert.equal(beanHeldHurtSource(unit({attributes:{blade:1,secretion:1,feet:1}})),null);
+ assert.equal(beanHeldHurtSource(unit({attributes:{blade:1,feet:1}})),BEAN_HELD_HURT_SOURCES.blade);
  for(const patch of [{species:'beetle'},{tribe:'spore'},{health:0},{birth:{startedAt:10}},{attributes:{strength:1}},{hurtStartedAt:NaN}])assert.equal(beanHeldHurtPose(unit(patch),10.2),null);
 });
 test('both hit sides use separate cells while preserving source orientation and read-only state',()=>{

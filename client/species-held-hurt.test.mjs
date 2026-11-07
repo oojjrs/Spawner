@@ -28,11 +28,12 @@ test('eighteen own-source forms use the same real-time half-second hold and reco
 test('dominance and legacy guards do not replace unsupported artwork',()=>{
  for(const tribe of ['spore','pebble','spring']){
   for(const key of ['strength','arms','piercing','guard'])assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{[key]:1}})),null,key);
-  assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{blade:1,secretion:1,carapace:1,feet:1}})),SPECIES_HELD_HURT_SOURCES[tribe].blade);
+  assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{blade:1,secretion:1,carapace:1,feet:1}})),null);
+  assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{blade:1,feet:1}})),SPECIES_HELD_HURT_SOURCES[tribe].blade);
   assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{legs:1}})),SPECIES_HELD_HURT_SOURCES[tribe].feet);
-  // A secretion-dominant current form retains its own gland and does not
-  // accidentally select base just because lower-priority traits exist.
-  assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{secretion:1,carapace:1,feet:1}})),SPECIES_HELD_HURT_SOURCES[tribe].secretion);
+  // Combinations use their own authored hurt while a single gland keeps its source.
+  assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{secretion:1,carapace:1,feet:1}})),null);
+  assert.equal(speciesHeldHurtSource(unit(tribe,'base',{attributes:{secretion:1,feet:1}})),SPECIES_HELD_HURT_SOURCES[tribe].secretion);
   for(const patch of [{health:0},{kind:'corpse'},{birth:{startedAt:10}},{species:'beetle'},{hurtStartedAt:NaN}])assert.equal(speciesHeldHurtPose(unit(tribe,'base',patch),10.2),null);
  }
  assert.equal(speciesHeldHurtSource(unit('bean')),null);

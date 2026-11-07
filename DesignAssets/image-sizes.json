@@ -15316,6 +15316,4206 @@
           480
         ]
       }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "5429b388602008afa704a24511e49f48afd3e0dc60b2c432ea35fa1c0dfb3d51",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "ada13242eea235a90e4a5e2e58fa8d33e1eab730ae70a80c5387defc240f8063",
+        "dimensions": [
+          480,
+          480
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "8bce08dd19ed77b2a6972ccc49669f9e2dcb3dae1483e477140fb11ff514a3ec",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "7ca79e521f765a4eb534447babe766872d491fcd2b5b0aa3ac17307b44293a3d",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "4c5ead3ac3bc1bfbed0aa9b50ceb5ed7a8b231a7e4134c441f7b3d23bc42145b",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "1be3a9178da98bf727536fd7f6798c3ae408f729f2f3de6402357bc1a5848c9f",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "3fb519c6d3f2438d7c72567ec3cb00fe1eefc76cdf3468660c0ef679904a4192",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "d3ee488c019a49d57551edf63e7b8011986f9355d221445ea8784a68828ba490",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "ed8fbea43e6bad9400576f35e6e88be887b10dfcbf17e04668c7cff5a188dcea",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "33ef872a664c5ae3aec1b7e50faae49354b3da43f4e7bf5f9255345f89419a82",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "bfca4e616a5d0fdd0734bad7ef05d645bded642dab3cc13b6ec18e8946dc869e",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "7677a2569cae7f6166e4db16e7285824d491f4d1b9eba47411b01dc340e67678",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "2a1d4e7ef8975380e591527e87b29b7a839001902d5e2615bb78830d02d81e41",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "86d8ed61f7ac02758b8a49e6519c8f0a22ce10106b408e61a93947389fdcfad9",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "6c2d46cfd978a47c30f59ccd5bd040ef158f809199eb5cf178cb835637fd0b7b",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "fd000841802e043e2e5bf1d2422faba9e75e7dd45c2e1dc83a61c7cfec03bb9e",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "2287c25e740d53f87d845a718e78754c0a71a14a005d399b9e1d2b6902ce00e5",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "7e57d94b862b00a1f1d21b0d1ec183447a857e21a7d561863cbdd73d96f3c1b1",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/carapace-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "45d8677c4658afbd1de02175c93d0c458e0695f2b474be4bf4cffeed9c40839c",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "6aca916d055907238276578e503b5c86c59a13d415a9a2387e61cd8326b7fc35",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "d219e405b0b69ca73b0c91e3f95124b407283b0516b77285f693f754dd720730",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "a4d8aa5ecb45638e0d4ae68b617d83070ca91597a420ed86f08093edaf390f6c",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "b4918836a8af9d7e3f91d1858ee559e71187353a0cc05f5e87e74f21d8f39b58",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "e1984d70aad758f3416c1b046663e160204a3e9763313b9ae90fa0fbff4456bc",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "2264e4003d618340c61f3bc2b84b2b63d26c81a613d8da4ee05f7970adc81ee0",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "5fb141dc4e28695de9ae848b97fcad61f4b09fd29a95d872347fb23f2ffc46b9",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "9465f98b71a9c2cf3404746204c3bd1c08bce51bdd5892d77f98dfb980a58ce7",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "7537f79daa7012aef2ae2ae3dd7a61adf7763303613551c7913303f6e117a9bb",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "47bf5cc92aa587d3335573c2a2f6775f035c76a75f4168422810782bb382349c",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "e89762ace0548b1abdaf27e8358b2f7656022f7032c1667a207bc4d699ab6277",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "af65e80fe4e89f4bd721a137be77baa897ecc60566aadc635e98449ac44920f2",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "d2e0914cc7ed5ebd93a5756b1d590fa2907b5739f24e0c5f269b1733e72e77cb",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "1cd6dbb0e24b794a47a17ff11f5b723d0091f9855abb8ae0c7c7a6c2f79b0f0f",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "29f840db8834730b1fb3a8502e3524d6464f03fbe44940cdc9f97568bd3feece",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "03962cb8cf47b154c6bffa2aa42312f83cad0ebcd6cbaa75e628931d054929d8",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "f80355d1168fd6259a41011d6fea883c38121c5c79209d919d06bee249a59ca1",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "ae039ac69503de8630fbdd6b38dbcbc9bf47f2b35276a79a32d39756d0d0e79a",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "c2ad03109547c30539889fa0e8cbbbb10d1e3268adbb475fe164cfa8e74ffc15",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "b436d0e3bc9bab1bc7d375917019a9699dda1137a1e3c6886382123ebcd4bc65",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-antenna/birth.png": {
+      "display": [
+        256,
+        170.666667
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "bb8a31b8c48fbd416751064c06c5bb9e33dd257ce963e6aa55c77298bcdb2677",
+        "dimensions": [
+          6144,
+          5120
+        ],
+        "frame": [
+          768,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "cef6ff88360881432de5e0ca88978abe5c770b01ea49d69f66e96be62409d6f7",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "b809dbf3ab66a2c2588bb78402b2740212bfc9cb24d52f0b688b6083c302077a",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "21b5e3c8bc8d157b29ce595523571d79af62700722b719b8d48450d5dcbd33f4",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "5d930cb6c5085f0071806b4a13bdf2df2fd86df2830469b738d49a1fc1974219",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "98cf9f3b07d6aa0961e184789fdc3a10f6fc5a22feec51163df49eba2aa3b089",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/carapace-antenna/birth.png": {
+      "display": [
+        256,
+        170.666667
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "eb900f8fbd9131804f6723056f7390635ebd7a3f14e9602d7acbd82ae23294d4",
+        "dimensions": [
+          6144,
+          5120
+        ],
+        "frame": [
+          768,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "01423cc82ad011f3dcf4d06c2fa48dcf5802fe4508184af18f5ffbad26313746",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "4947cca8813d84347994f08c230c42ea00fc09afdcb99c2ea748e06b2ce659f7",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "f8c8ed2538bc6440b74fb9e8b0ff29aef63316d92f56a346da4b374896a26a02",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "b199243f6073426bec4fe9476a5341ba8826f8dff75d0362ed1e937ed9207dcd",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "e26173563acf1b2816f2681d80fc4f93d60188b0d2954016a9858b7a919b7fd5",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "134c412f1c83891ce27c3eaf193c5deb361fb2eb6682b451f5565eb31251abc8",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "d6276c5984162bc72d8d834aa5c0c11de766c58f1e532f93d7d0bfdbb2b3df57",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "a58e517704235fec7570879cfa11194d101783c8c1b460bed71a2e9c67809859",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "a330c839f58dbddee586e916efa12ad7036efd296f2f91d5e4ac18953f3897e0",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "18e48306def974f087dbbc5eb2f72b42c2d5557568e667bf6a1916006411a8c6",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "46152e2c8798b49cd9351e5ea53bc3194fcbb5737275e13f33088c7637d20211",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "ce95b1b322c8f9370db2b38ad35f5e899ade523d7cdd7af4ea01eb67a09eb103",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "7bf39ca699e3623e89345e04d8cf3d408e89798c4a17ffc1e885676a4d78ce79",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "aed596addbbe2aae4063465b19cdfa1c1bdf7d5c4c9ea1f68aa68a0ba5fa59bd",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "31868fb67b40f249e761dd72651bb89940016cca0f1f21fa9b776e92a2449960",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "306f56d893aa1e3afd42053075b6b04eed3e9101198985f9188f1f330c78915f",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "838ff61ea3f69a85e19b1563875e567d212a3e4b0d0ac1b1f6b3367c214792b8",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "27ccca80d2ac316a90923bb9320dbc60f1c33ff5affdcaab4b88169e0bf695b9",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "54e5a94f61e0b9be43fb3b1459e922d161e5042c7863d38cd152ba5d21cb94d7",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "88efe65d7cc4c9a361daea6f4e395f65100539bd512d8cec9df63ec4efa60503",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "5e62c012791d351ded20f7c16e7276c0427ce5c003213b8202dc1a64b867d788",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "f263de0201aec166aaac75cbbadce9644cdc5f9375e6de4bb33cfb1fa355d537",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "c5c8e28b66e3fb28695d11973560ab75fb5f312673f847ba72a5a91256c339e9",
+        "dimensions": [
+          480,
+          480
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "062ff7162ae5d149092d715b659f603892ffdd366dd57b7033c3370b667dda4a",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "96aa8c25cf96afbf33e55ea8576b72c6ad0233ebefbb757895e3192e60f841a4",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "19c1a4f22f618079a211d79680fd871a52dfccda6af3079df7a120b6ca37601e",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "44b3888781bd4185fdad61312007e406ac0ebce40332c5714c67ebe69e139d75",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "c205285e91d100922b97ec77961d067ced4aed8fe30413b397d82bbb843cd510",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "e6a7a996c796dcffd4cff2614e2902ff5b841821dae4f37e07d51d5437ceff83",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "95075e8883ffadbf4975fdae9345581015be83a83d0feecee409e3e80978dff1",
+        "dimensions": [
+          480,
+          480
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "d3afa14eea5a9fa27b7aa9c640e6d10a1d7f93d390db39fb2f1d4596ae3328e7",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "02244c743ca260d43179efd5e99265ffa4b355d3446c990fc9c2fe29e30b83af",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "7560e4544ed1dd8dc4b2b067310024266ab672db1d14cde92ddf6460616d1815",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "5b667efb860e1d34351e5c141cfad8003fd737f51c6c491adf6f35513013644e",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "d65fd00ade71a8033dd3a04fdf8674633f6c300885efb7c489d022d689c31183",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "97940df6e172a73cbb807fc13d0559d6a58ecd02a64b6d5e11d4af580d7f0900",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "210b9aacd1762d4342e21dfc72f9709f09c87894675ffe1112c85622e8097934",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "bd7a36d790ae6bbb0e10cccad1362d0d6482d2adc3ee4b336f20ddf032569d32",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "60d36dd2414868955c22100c0ea095245a559bfaeae46a166fab81ab17652583",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "2b47112fe44974d58a65d59ce28ca242a4d0816f1d54b15d3035cdae0a033a04",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "069687b8aa694302931ce0c6f4178123a5328e5fa1705f6003c2aad9a76cfd53",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "3795588e28d215f741ed062260bdb3ebf0faac0cabf2fb8f5b56ebb824e642b8",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "8fdc2554dfe295f4bbc7d8830951b5340310f8ab08708bfc46fef7ce40d5287f",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "19ad7a48d86aa6373ff5c56042bf2bae1156a934aae0f3e6b5acbf050ff66c17",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "b9eab0291bcac0fc1a10b998e3fb7c35bda1a3155b3dd706eb71e7890021a32a",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-carapace-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "943757c36589e66420e987c27c947552a61274fcf8698b9cb20b2f9db08440ae",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "0e18b50825a5209b7c21cbc436c0d50ec211cb425a4dcba6b2b9dea146594292",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-carapace-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "9e110daf693bbd0e4e3ad1a2fe83001645df2143257bf8b8176c20ab65f3dc4a",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/secretion-carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "c3e9c92cea62b414e97225e0812b224c192af5ebf180a8bc88ce9b625d2a4017",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        8
+      ],
+      "nativeSource": {
+        "sha256": "56b49ad9324ddfa75f9eff5e09ed5507adb9a3b1d119b05c7399f6e3888a5ca0",
+        "dimensions": [
+          4096,
+          4096
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "29289ee2cecb22834c324d1b74d5ca034b6dc1bd7601af35616fa7ae7986d7a5",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "97b303a52e7f7692ef2370c531c3a52aebd36e7763be6dcd564793ff4cb9b051",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "c7a6dd253f7230725561f938e860af076493fd92688a807a2f98b651b3e61642",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        3
+      ],
+      "nativeSource": {
+        "sha256": "7395537ed9a7a42602194ecda917d73531483d3203ffcfe29a090f1d5d04f9fe",
+        "dimensions": [
+          4096,
+          1536
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "b1fce29b5b0a034890502dc07c7eb48090a9635449196f6fe6b3bff2d25494f8",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        15
+      ],
+      "nativeSource": {
+        "sha256": "e84f8ef152641f92d2fdba915bbbfb5d832e924bf3192fdc0e58b91efb0bf451",
+        "dimensions": [
+          4096,
+          7680
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        8,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "cb08e2a75183f9cd6072a813028e1d188f2190252272d6e7c7cf236a78e4eca7",
+        "dimensions": [
+          4096,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "38cb4023a9cdb75eefdc7716cb01584a55c4fd26934dd334efcfe06be4602a63",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "674a870120e38cdbebabd7332b293a07ecdb65587fd7ddeb019991feddeb302f",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "ea354c5e1e536bd2f8826eea84814c031f7426736d06576650fe78760ec72c86",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "6f0a0f701f7444a0c9285b40cfd9a379f8e35e1e0a78b73caea434d8d45752ab",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "7786f0902f5e8a4b3ccb1889a2fe2cf39fcbcfe19adab83cc99f9c142f7166ba",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "c536f88f229b419a9b3e0fef34d841381bde2cd93b3e497285cd7bcb2567346f",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "d4bcf5e2853977a29494dd3ef283449e18b0d2ef39440a03de5d00453c97e0d8",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "db2661b156854f0bd11f24d19a3df5fe3b99c5afc44d6c4e4a8d5acc2f953c17",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "d2e6172edfcb7b0007d1d3a3bc86b53317be94ab973be55a4e56d8e7340b0448",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "46f8beb47ff73561aece866124ca31827a3159ea0be5aa63feaf653c2de6a01a",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "b9f44fe605f645ffa0fbd8e7c9f61b4b0cf1b3f1d592c0c1eafe98ad49a93eaf",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "15c116e2fee03087dfc5eb7c578b99c95a544712812e6b9ce6f7d0f4be21f1f8",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "8792d099e23097352f1964541aa051cfd482aab2e66fe375f7ba9510202ab6fc",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "add1e6339476d677ef83f5461ffadb0b56612d6339b1ca50671e324404039e80",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "ac7965b748b9d281b19f88a240fa53201819285a8f0e17f68ebcfa2269963d72",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "81eced0aa10396d22e6df349b0ae6dc549969f42ef5337acbc973c98954631a7",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "2e813edc2b02986d5489ab3fe19cacba89420f1e464ee7a48c02ae88d06d725a",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "73a22d255cef9b177cbf38ff79c7b520a42cc4c28e33e4f093d405108cb7972f",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "2e28d438971721909a673da7ffde3c2140e91b7309c7a1214b180fd50ba149ed",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "2fd3e4324384c102c591d07bd8ebc52170c600b0d4d99e388e197e0773f5a684",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-antenna/birth.png": {
+      "display": [
+        256,
+        170.666667
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "86b836d2bd36d0d2ff872c9319a3565dd9a4b6f05eeed211655737fd393281f7",
+        "dimensions": [
+          6144,
+          5120
+        ],
+        "frame": [
+          768,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "abb3fb878badc60dfeff72b3db0bd71e290c657666b4924824e48a173bb7f26b",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "8b1b841a0f115f83fdf2571c035a652fbe87aa3ad52454b1371b63848c4df29c",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "0a045d8e27ef4df9aa6c4ac90463fb89be654956b320752cb8d7dfcce8057500",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "5767544f9978c530fda268c7f7ce15dc58bbc05a9802ead29415d0101f2525ce",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "3465df9e1fdf47cb059e6ed01f700b403ffce557647bcea21e34a5caf2b93c72",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "0fc6cfefe1c712d03cc92991ebdd0b82d26cef6bbf24f814f907e5ef9a6ec49f",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "9d5912c04a42caec07c3d71ecd2b71f36798466709005f8da365352a9bb59f46",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "7d32ed3dcec3dad5e5b8dd1031e1e36d234e244edd2cbed7b525381258809c51",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "e889d6674d6f55bd2ff092a9808c48365d9ded65d59f7dea1c7cd67be80b3aa7",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "d387f5b5ce2859de347288f5e4f2a63fcb0a6690279333ee8568ae4455d89789",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "9f6c33f4c0428403bcfbb809afdfb3bf696a19442f8b4cc5f49dd9a1e7fba953",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "ecd719252dc176755909f94454d7931431afcb35564735cf071a966e60ec264f",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "b22677ef5940cbd9087b6abde3b885adc7fa39cd0d679de3c553912f38a934e5",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "e2044f1f96a7173b9efab99ae285283ca10179481d659aa82c79774788d5bf0e",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "b1afa86210c6315ef20234616a10c504301f0837161d0b0825ff182afe4a85c2",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "nativeSource": {
+        "sha256": "e331481bed062b9ad62b89948f231bdbbb3072ba7a15a4fb40327b89f47d1830",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "3cf10cfb52c54a50f1ce6ea518ad488c9f302eeba823c2974b5c9cf4045fe78c",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "9954862c9cdd46e599bb92ba1fcde9aaf26324b29500492e1978d556a3de3c83",
+        "dimensions": [
+          480,
+          480
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "66a0681a81fbdb26ba07cb3460d5eb893392a8a344a8d1e923973eed063ecc64",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "e12a44d73fda204a0cb2a1b1ce49c3475961a3b220a896536d471023c52f884e",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "31a3011f8affb7f53332b1174f3afb2000e8e4f7671dce3d69068d8b1d9b1753",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "def4980876a14670f872c4445fea0151d71b690b4b459d21697129c784367406",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "83da4254abdd3f1ebde0f5bc91eea97e5a4d41ef6ce66474c46595e8222a604b",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "8d1598022d85a64deb8db512dca1bec97ddf5fb3cc4cfc804b606b17ba9d9087",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "adba815990124d5cb6914433d2461953e241d4eff73237bf9449e9525c134fff",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "0304bcd4e4b1fc265aba1b0ba7d9d507451808b6715d1ca8e4c661f587f776fd",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-carapace-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "a16c512e7ddc2f1c44e26d269070a6d6e46698b7904134eea70391dac8276666",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "b44bc6ab95522385450233fdd9a65092e924f43d00c0d61050403aee8f8505dd",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-carapace-antenna/birth.png": {
+      "display": [
+        256,
+        170.666667
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "5af5b6a8d47965cda8913750d15801e5a3c739c879862f7f5e2bb1cf82e3f88e",
+        "dimensions": [
+          6144,
+          5120
+        ],
+        "frame": [
+          768,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "a224c418946c91b3885e9329dbffcb342b5a8872320c4fc2ca276c8e61bc8c85",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "8abfcdd4cfb013b75aacdc08e760e0875424eec83f12c821a6d08816a0062b34",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "c9ca7cfa9a7e1e83beef49f55c7dfa40d45f535c21777b2f614e465d264698ab",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "a2e123375fcebad837720ac60afa1e0036728a3cc2f9a0d1db38569a7459a896",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "0d8abc7d35e8d7198101c7b6b8be290112d96341103b68e83eb7b888b7e5a4d6",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "4136841feafacb69d605c8dc73841e61df8746caead97b03a2880f5bccb012bf",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "514538e61e36e51588835f312ab91218e64d270d69e4163a5d4c4eb01a3b1064",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-antenna/birth.png": {
+      "display": [
+        256,
+        170.666667
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "f688b70747c4c205aa76e50a1013010f3a537e108c135caaaca313a62f56a14a",
+        "dimensions": [
+          6144,
+          5120
+        ],
+        "frame": [
+          768,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "cc5d13ba61c9e1c8f03139b030d795a4a5e0890297333eceee8793508576c108",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "7de8e8304ca55526f4d6a55f4b08fdcd432fd3e5ced2e5aee03aed421181cfa0",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "4a45f43696896d66fa881394e0221a774dc42ba4d9c9fac29125eb5ad5b75bd5",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "2f5284aa9b97a6511f6917210eb6970597f0a08e8026dfa8c6bf56e7b4851d12",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-carapace-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "d510cd14a4a2f4946ceff7abdcef15775fa2e3fbf767d0f4edc99ab1e85bcc1b",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "9397655bec0f5a18617ca2cb4c40e9e0351611c9b2ecde1276de68c691602cbc",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-carapace-antenna/birth.png": {
+      "display": [
+        256,
+        170.666667
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "b088567e28a6b0b0fcf2acd2e1e418d863ef929683f8f0f6d82e3b7618121133",
+        "dimensions": [
+          6144,
+          5120
+        ],
+        "frame": [
+          768,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/secretion-carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "fb6308e1eb57906d8eef03bb53da387fbf4bb61ff2d5183c988b88e80c5ba371",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "d5e130b34095fe1854913da8ca23250b45b8dedad62c5042915803ad5c5619d7",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "166e3c6cb7fe187213821ff8b3a9438ddb8b895f41e6902d4c37c97369b94861",
+        "dimensions": [
+          512,
+          512
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "0a2067ad2165406a67843bc8ba923b7d2908f2b633d2d3e05b471c37973afbc4",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-carapace-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "1e0c5de2d964fcd8c8dcecf18e7009ee1c56985d6fcd63978d2ac5d7b83e2d0c",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-carapace-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "bda62b391f0369f27a1232995b21d364fb4328b6c80cae402ecb051b04aeb920",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "5148cf2b00aa0f716399088cda22a0b5a6cfd7aad358f337419a76696970275c",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-carapace-antenna/birth.png": {
+      "display": [
+        256,
+        170.666667
+      ],
+      "grid": [
+        8,
+        10
+      ],
+      "nativeSource": {
+        "sha256": "5c83648bd8c02b06f424d9ce9c426211c8eeb78c9bc284230e3c8cee9fa74908",
+        "dimensions": [
+          6144,
+          5120
+        ],
+        "frame": [
+          768,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "b2139aa0abccbde5c5cc6227f0a87bdb4270f8279220a66e826318ed23d898d6",
+        "dimensions": [
+          2048,
+          2048
+        ],
+        "frame": [
+          512,
+          512
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "1fc7383df8d3039e76a237446d07431e2b06a3e99de024588862f9e5803f8f57",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "b2d4bf38bc406f404ff792d3a5bc280d03dc41d07540829abfb1975186bf5fd1",
+        "dimensions": [
+          480,
+          480
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "df9fc4b8a5e21a95aefd8a8d3d5b794e836affbc27b21e7db04dc1c49fed8819",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "f221a60e431447aafc5d312c7c25fa00fbd9dc575968ef97cb369e79d8463f87",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "f7c69c9f0816ef0f99a424bbfeb7f8b72cd21c30d84827740c9b65a8f865917a",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "567423c30f48971101d3fb5c6226bd22f9e0ed4076b110818450a762eebd4c54",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "b2ae63642eb206cac70368bb89b3543724c3a3902335b14829920b7eab333ea5",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "1c37aff64a25c308dbce4ecc9840a1413216a5d5e0e017929aa8353e692da6a5",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "02fbc2262436d8c77f62c86031f11510ff714a8dc4be4d30b1d6be9198646a0a",
+        "dimensions": [
+          480,
+          480
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "0c04f073eed6c10f56cb57306bfad947db3d5e0c851627d0483c66e26962d94f",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "f54fcabb1178eee6a3235d6dd3ba54886cb6538df0bb764f63ee3a72b15e4e86",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "97ef8988ab5097d7cd72c58274aec740cbd50034fddf111f7d86d05bcdfdded0",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "9724bd50ac7eb50e24cfc7cf76acb3e080bacffdc5913a86885cd8552b1a4449",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "f1df65fdd4c17508bf358e52f86935afc3fe0c7a5cdfe5df7885069135827eee",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "1f65463848288f1fb64bab2e3fa5c5b91615b2c5a869c1a53d39214c368497a7",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/idle.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "6b41415104a12123ebeb8fff6725f7531e476e131e447e6216a0713fc56a1526",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/portrait.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        1,
+        1
+      ],
+      "nativeSource": {
+        "sha256": "5a2b19ac7cdcd75f865c04a5a1a39f8352d45d24f30ef81a9bd6cc6dd81f5439",
+        "dimensions": [
+          480,
+          480
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/walk.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "9bb9eeb70a2d20de097dcc1d13df24cc7159017f92f9f218ffd0238f9f91225e",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/attack.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "d771f4f851a0fe265b2518a97b8251711d476fd0cf84e2efa3b26ff45cd1290e",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/ranged.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "1b064ed9780eba3c6756984da831945519dd062e3da9540f4c2914a5e430d22e",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/hurt.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "b1f63f9f5faa97825a43d125fcda707cd07dff4f10316f56b597a4a3d29b335d",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "f066680ae39fe2281779ae5625ea058ce7ee18714d2eb0308d8e8cda10b47e9a",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/death.png": {
+      "display": [
+        256,
+        256.0
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "nativeSource": {
+        "sha256": "2b58b285fae8ed6f7defe2b55fca2e369d8e60a12ef6dfcc13a8d1a82f547037",
+        "dimensions": [
+          1920,
+          1920
+        ],
+        "frame": [
+          480,
+          480
+        ]
+      }
     }
   }
 }

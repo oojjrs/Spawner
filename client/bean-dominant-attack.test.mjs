@@ -28,7 +28,7 @@ test("only projected canonical bean blade opts into its own-art attack",()=>{
  assert.equal(beanDominantAttackAppearance("bean",{blade:1}),true);
  for(const extra of ["strength","arms","piercing","antenna","carapace","feet","legs","secretion"])assert.equal(beanDominantAttackAppearance("bean",{blade:1,[extra]:1}),false);
  for(const tribe of ["spore","pebble","spring"])assert.equal(beanDominantAttackAppearance(tribe,{blade:1}),false);
- for(let mask=1;mask<32;mask+=2){const attributes=Object.fromEntries(["blade","carapace","antenna","feet","secretion"].map((k,i)=>[k,(mask>>i)&1]));assert.equal(beanDominantAttackAppearance("bean",unitDisplayAttributes(unit({attributes}))), ![3, 17, 19].includes(mask));}
+ for(let mask=1;mask<32;mask+=2){const attributes=Object.fromEntries(["blade","carapace","antenna","feet","secretion"].map((k,i)=>[k,(mask>>i)&1]));assert.equal(beanDominantAttackAppearance("bean",unitDisplayAttributes(unit({attributes}))), [1, 9].includes(mask));}
 });
 
 test("canonical melee renders source blades, compressed body and eyes once per shared cached pose",async()=>{

@@ -28,7 +28,7 @@ function design(ids) {
   return dna;
 }
 
-test("all 128 current trait combinations deterministically collapse to exactly 40 display forms", () => {
+test("all 128 current trait combinations deterministically collapse to exactly 68 display forms", () => {
   const forms = new Set();
   for (const tribe of UNIT_APPEARANCE_TRIBES) {
     const groups = new Map();
@@ -40,9 +40,9 @@ test("all 128 current trait combinations deterministically collapse to exactly 4
       assert.deepEqual(attributes, attributesFor(actual));
       forms.add(tribe + "/" + mask); groups.set(mask, (groups.get(mask) || 0) + 1);
     }
-    assert.deepEqual(UNIT_DISPLAY_MASKS.map(mask => groups.get(mask)), [1, 13, 7, 4, 2, 1, 1, 1, 1, 1]);
+    assert.deepEqual(UNIT_DISPLAY_MASKS.map(mask => groups.get(mask)), [1, 2, 2, 2, 2, 1, ...Array(11).fill(2)]);
   }
-  assert.equal(forms.size, 40); assert.equal(UNIT_DISPLAY_FORM_COUNT, 40);
+  assert.equal(forms.size, 68); assert.equal(UNIT_DISPLAY_FORM_COUNT, 68);
   for (const invalid of [null, undefined, NaN, -1, 32, .5]) assert.equal(unitDominantAppearanceMask(invalid), null);
 });
 
@@ -50,12 +50,12 @@ test("projection does not mutate actual DNA, mechanical attributes, hidden abili
   const dna = design(["blade", "secretion", "carapace", "antenna", "legs"]);
   const unit = { tribe: "bean", dna, attributes: dnaAppearance(dna), stats: dnaUnitStats(dna) };
   const saved = JSON.stringify(unit), stats = dnaUnitStats(dna);
-  assert.deepEqual(unitDisplayAttributes(unit), { blade: 1 });
+  assert.deepEqual(unitDisplayAttributes(unit), { blade: 1, secretion: 1, carapace: 1, antenna: 1 });
   assert.equal(dnaAttackMode(stats, 1), "melee"); assert.equal(dnaAttackMode(stats, 2), "ranged");
   assert.ok(stats.roaming); assert.ok(stats.armor > 0); assert.ok(stats.evasion > 0);
   assert.deepEqual(dnaUnitStats(dna), stats); assert.equal(JSON.stringify(unit), saved);
-  assert.deepEqual(unitDisplayAttributes(JSON.parse(saved)), { blade: 1 });
-  assert.deepEqual(unitDisplayAttributes({ dna }), { blade: 1 });
+  assert.deepEqual(unitDisplayAttributes(JSON.parse(saved)), { blade: 1, secretion: 1, carapace: 1, antenna: 1 });
+  assert.deepEqual(unitDisplayAttributes({ dna }), { blade: 1, secretion: 1, carapace: 1, antenna: 1 });
 });
 
 test("snapshotted appearance and historical retired-organ rigs keep their compatibility contracts", () => {
@@ -71,13 +71,13 @@ test("snapshotted appearance and historical retired-organ rigs keep their compat
   assert.deepEqual(unitDisplayAttributesFrom({ legs: 3, dnaGather: true }), { feet: 1, dnaGather: true });
 });
 
-test("production inventory has 40 targets, keeps archival 128 sources and never upgrades readiness", () => {
+test("production inventory has 68 targets, keeps archival 128 sources and never upgrades readiness", () => {
   const inventory = unitAppearanceInventory();
-  assert.equal(inventory.length, 40); assert.equal(unitAppearanceInventory({ includeLegacyCombinations: true }).length, 128);
+  assert.equal(inventory.length, 68); assert.equal(unitAppearanceInventory({ includeLegacyCombinations: true }).length, 128);
   assert.equal(inventory.filter(row => row.worldReady).length, 0);
-  assert.ok(inventory.find(row => row.key === "bean/01").missingActions.includes("ranged"));
-  assert.equal(unitDisplayAbilityMask(1), 31); assert.equal(unitDisplayAbilityMask(16), 30);
-  assert.equal(unitDisplayAbilityMask(3), 3);
+  assert.ok(inventory.find(row => row.key === "bean/15").missingActions.includes("ranged"));
+  assert.equal(unitDisplayAbilityMask(1), 9); assert.equal(unitDisplayAbilityMask(16), 24);
+  assert.equal(unitDisplayAbilityMask(3), 11);
 });
 
 test("a shared blade body requires hidden ranged actions and retains true melee/ranged clocks", () => {
@@ -98,13 +98,14 @@ test("a shared blade body requires hidden ranged actions and retains true melee/
   } finally { definition.actions = original; }
 });
 
-test("secretion dominance reuses approved shooting art while hidden blade never changes to a ranged body", () => {
+test("single secretion retains its approved shooting art and combinations never borrow that body", () => {
   for (const tribe of UNIT_APPEARANCE_TRIBES) {
-    const unit = { tribe, attributes: { secretion: 3, carapace: 2, antenna: 1, feet: 2 }, stats: { ranged: true }, health: 10,
+    const unit = { tribe, attributes: { secretion: 3, feet: 2 }, stats: { ranged: true }, health: 10,
       attack: { startedAt: 0, launchedAt: .2, hitAt: .4, endsAt: .6, mode: "ranged", dnaRanged: true } };
     assert.equal(unitRangedAppearance(unit), UNIT_RANGED_FORMS[tribe]);
     assert.equal(unitRangedPose(unit, .2).action, "shoot");
-    assert.equal(unitRangedAppearance({ ...unit, attributes: { ...unit.attributes, blade: 1 } }), null);
+    for (const extra of [{ blade: 1 }, { carapace: 2, antenna: 1 }])
+      assert.equal(unitRangedAppearance({ ...unit, attributes: { ...unit.attributes, ...extra } }), null);
     assert.deepEqual(combatAttributeKeys(unitDisplayAttributes(unit)), []);
   }
 });
@@ -187,6 +188,6 @@ test("design and template portrait sources accept loaded secretion Images and ex
   assert.equal(scope.agentImageSource({}), "data:image/png;base64,canvas");
   assert.equal(encodes, 1);
   scope.agentSprite = () => { throw new Error("DOM image must not use a cold-load canvas fallback"); };
-  assert.equal(scope.agentImageSource({ tribe: "bean", attributes: { secretion: 1, carapace: 1, antenna: 1 } }),
+  assert.equal(scope.agentImageSource({ tribe: "bean", attributes: { secretion: 1 } }),
     "assets/" + UNIT_RANGED_FORMS.bean.idle.image);
 });

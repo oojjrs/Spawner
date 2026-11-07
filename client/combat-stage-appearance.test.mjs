@@ -20,7 +20,7 @@ function surface(width = 512, height = 512) {
   }, { get: (target, key) => key in target ? target[key] : () => {} });
   canvas.getContext = () => context; return canvas;
 }
-async function harness(run, { unavailable = false } = {}) {
+async function harness(run, { unavailable = false, authoredCombination = false } = {}) {
   const saved = Object.fromEntries(["window", "document", "Image", "SpawnerAssets", "Path2D"].map(key => [key, globalThis[key]]));
   const requested = [];
   let missing = unavailable;
@@ -31,7 +31,14 @@ async function harness(run, { unavailable = false } = {}) {
     readFileSync(new URL("../" + path, import.meta.url)).toString("base64") : path };
   globalThis.Image = class {
     complete = true; naturalWidth = 4096; naturalHeight = 4096;
-    set src(value) { this.path = value; requested.push(value); this.naturalWidth = missing && /CombatAttributesV7|Attributes\/v[12]/.test(value) ? 0 : 4096; }
+    set src(value) {
+      this.path = value; requested.push(value);
+      if (authoredCombination && value.includes('/AntennaCombosV1/')) {
+        const png = readFileSync(new URL('../' + value, import.meta.url));
+        this.naturalWidth = missing ? 0 : png.readUInt32BE(16);
+        this.naturalHeight = png.readUInt32BE(20);
+      } else this.naturalWidth = missing && /CombatAttributesV7|Attributes\/v[12]/.test(value) ? 0 : 4096;
+    }
     get src() { return this.path; }
     async decode() { if (!this.naturalWidth) throw new Error("missing fixture art"); }
   };
@@ -117,9 +124,9 @@ test("failed art retries after the bounded wall-clock delay and recovers without
       const before = requested.length; recover();
       draw(trial); await settle(); assert.equal(requested.length, before, "no retry loop each frame");
       now += 2001; draw(trial); await settle();
-      assert.ok(draw(trial).some(call => paths(call.image).some(path => path.includes("/Sheets/blade/"))));
+      assert.ok(draw(trial).some(call => paths(call.image).some(path => path.includes("/AntennaCombosV1/pebble/blade-secretion-antenna/"))));
       assert.ok(requested.length > before);
-    }, { unavailable: true });
+    }, { unavailable: true, authoredCombination: true });
   } finally { Date.now = original; }
 });
 

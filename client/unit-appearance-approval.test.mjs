@@ -58,6 +58,6 @@ test("the spore art approval is bound to exactly the fourteen reviewed source or
   }
   assert.equal(manifest.forms["spore/00"].source.approvalState, "existing-reference");
   assert.equal(manifest.forms["spore/10"].source.approvalRef.callId, "call_855ca484695d4a3eb76d94115969162d");
-  assert.deepEqual(UNIT_DISPLAY_MASKS, [0, 1, 16, 2, 4, 8, 3, 18, 17, 19]);
-  assert.equal(UNIT_DISPLAY_FORM_COUNT, 40);
+  assert.deepEqual(UNIT_DISPLAY_MASKS, [0, 1, 16, 2, 4, 8, 3, 18, 17, 19, 5, 20, 6, 21, 7, 22, 23]);
+  assert.equal(UNIT_DISPLAY_FORM_COUNT, 68);
 });

@@ -1,7 +1,9 @@
+import { ANTENNA_COMBO_ACTION_ART } from "./antenna-combo-assets.mjs";
 import { SECRETION_COMBO_ACTION_ART } from "./secretion-combo-assets.mjs";
 import { BLADE_CARAPACE_ACTION_ART } from "./blade-carapace-assets.mjs";
 
 export const UNIT_ACTION_ART = Object.freeze({
+  ...ANTENNA_COMBO_ACTION_ART,
   ...BLADE_CARAPACE_ACTION_ART,
   ...SECRETION_COMBO_ACTION_ART,
   "bean/base": {

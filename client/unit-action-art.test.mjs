@@ -66,7 +66,7 @@ test("완성 프레임 하나만 그리며 다른 몸체나 기관을 합성하�
   const canvas = surface(512, 512), context = canvas.getContext("2d");
   assert.equal(art.draw(context, agent, .3, 256, 448, 100, false, null), true);
   assert.equal(context.calls.length, 1);
-  assert.match(context.calls[0][0].image, /sprout\/Sheets\/blade\/attack/);
+  assert.equal(context.calls[0][0].image, "DesignAssets/Animations/AntennaCombosV1/bean/blade-antenna/attack.png");
 });
 
 test("전투 외형은 기존 파츠 콜백을 호출하지 않고 전용 시트를 재생한다", async () => {

@@ -1,3 +1,4 @@
+import { UNIT_COMBINATION_MASKS } from "./unit-combination-forms.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
@@ -18,22 +19,22 @@ function declaration(text, name, indent) {
   assert.ok(match, name); return match[0];
 }
 
-test('only exact 03 gains a combination silhouette across all tribes and masks', () => {
+test('blade-carapace matches the exact current organ set across all tribes and historical masks', () => {
   const forms = new Set();
   for (const tribe of tribes) for (let mask = 0; mask < 32; mask++) {
     const attributes = Object.fromEntries(Object.entries(UNIT_APPEARANCE_BITS).filter(([, bit]) => mask & bit).map(([key]) => [key, 3]));
     const agent = { tribe, attributes }, before = JSON.stringify(agent);
-    const expected = [3, 17, 18, 19].includes(mask) ? mask : [1, 16, 2, 4, 8].find(bit => mask & bit) || 0;
+    const expected = UNIT_COMBINATION_MASKS.includes(mask & ~8) ? mask & ~8 : [1, 16, 2, 4, 8].find(bit => mask & bit) || 0;
     assert.equal(unitDominantAppearanceMask(mask), expected);
     assert.equal(unitAppearanceMaskFromAttributes(unitDisplayAttributes(agent)), expected);
-    assert.equal(unitBladeCarapaceAppearance(agent), mask === 3);
-    assert.equal(unitActionArtDefinition(agent) === definitionFor(tribe), mask === 3);
+    assert.equal(unitBladeCarapaceAppearance(agent), (mask & ~8) === 3);
+    assert.equal(unitActionArtDefinition(agent) === definitionFor(tribe), (mask & ~8) === 3);
     assert.equal(JSON.stringify(agent), before);
     forms.add(tribe + '/' + expected);
   }
-  assert.equal(forms.size, 40); assert.equal(UNIT_DISPLAY_FORM_COUNT, 40);
-  assert.equal(unitDisplayAbilityMask(3), 3);
-  assert.equal(unitDisplayAbilityMask(1) & 16, 16, 'ordinary blade still represents hidden secretion');
+  assert.equal(forms.size, 68); assert.equal(UNIT_DISPLAY_FORM_COUNT, 68);
+  assert.equal(unitDisplayAbilityMask(3), 11);
+  assert.equal(unitDisplayAbilityMask(1) & 16, 0, 'ranged combinations now own distinct bodies');
 });
 
 test('snapshot, DNA, retired organs and legs aliases preserve exact-mask boundaries', () => {
@@ -41,13 +42,13 @@ test('snapshot, DNA, retired organs and legs aliases preserve exact-mask boundar
   assert.ok(unitBladeCarapaceAppearance({ ...base, attributes: { blade: 5, carapace: 7, legs: 0 } }));
   assert.ok(unitBladeCarapaceAppearance({ tribe: 'bean', dna: { pieces: [{ gene: 'blade' }, { gene: 'carapace' }, { gene: 'gather' }] } }));
   assert.ok(unitBladeCarapaceAppearance({ ...base, attributes: { secretion: 1 }, appearanceAttributes: base.attributes }));
-  for (const extra of ['strength', 'arms', 'piercing', 'guard', 'legs', 'feet', 'antenna', 'secretion']) {
+  for (const extra of ['antenna', 'secretion']) {
     const agent = { ...base, attributes: { ...base.attributes, [extra]: 1 } };
     assert.equal(unitBladeCarapaceAppearance(agent), false, extra);
     assert.notEqual(unitActionArtDefinition(agent), definitionFor('bean'), extra);
   }
   for (const agent of [{ ...base, appearanceAttributes: {} }, { ...base, appearanceAttributes: { blade: 1 } },
-    { ...base, species: 'bubble-toad' }, { dna: { pieces: [{ gene: 'blade' }, { gene: 'carapace' }, { gene: 'legs' }] } }]) {
+    { ...base, species: 'bubble-toad' }]) {
     assert.equal(unitBladeCarapaceAppearance(agent), false);
   }
   assert.equal(unitActionArtDefinition({ ...base, species: 'bubble-toad' }), null);
@@ -81,11 +82,11 @@ for (const tribe of tribes) test(`${tribe}: six authored actions, carry fallback
 });
 
 test('welcome roster includes all four combinations and performs their own attack', () => {
-  assert.equal(WELCOME_UNIT_APPEARANCES.length, 11);
+  assert.equal(WELCOME_UNIT_APPEARANCES.length, 18);
   const index = WELCOME_UNIT_APPEARANCES.findIndex(attributes => unitBladeCarapaceAppearance({ attributes }));
   assert.ok(index >= 0);
   const next = createWelcomeRoster(tribes, [], WELCOME_UNIT_APPEARANCES.length, () => .5), selected = new Set();
-  for (let i = 0; i < 44; i++) { const choice = next(); if (choice.variant === index) selected.add(choice.key); }
+  for (let i = 0; i < 72; i++) { const choice = next(); if (choice.variant === index) selected.add(choice.key); }
   assert.deepEqual([...selected].sort(), [...tribes].sort());
   for (const tribe of tribes) {
     const performance = welcomeUnitPerformance(agentFor(tribe), 10);
