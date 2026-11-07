@@ -1,0 +1,43 @@
+{
+  "source": "DesignAssets/Animations/BeanHeldHurtV1/antenna.webp",
+  "sourceSHA256": "a6ea59ca582697bef68d5543e941617eac3f2d76d29201dde3dfcc7bc627c186",
+  "approval": "tools/bean-hurt-amplify-20261105/APPROVED.md",
+  "preview": "antenna.webp",
+  "frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "side": "first registered impact side; original atlas retains both sides",
+  "frameSize": [
+    340,
+    344
+  ],
+  "durationsMs": [
+    500,
+    33,
+    34,
+    33,
+    33,
+    27,
+    30,
+    30,
+    40,
+    40,
+    40,
+    40
+  ],
+  "durationMs": 880,
+  "loop": true,
+  "purpose": "planning-table preview only; original source and game runtime unchanged",
+  "losslessVisiblePixelsVerified": true
+}
