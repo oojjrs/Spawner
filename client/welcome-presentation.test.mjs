@@ -3,32 +3,33 @@ import test from "node:test";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 import assert from "node:assert/strict";
-import { WELCOME_UNIT_APPEARANCES, welcomeUnitPerformance, createWelcomeRoster, welcomeCreatureScale, prepareWelcomeChoice, welcomeTravelMotion, drawWelcomeChoice } from "./welcome-presentation.mjs";
+import { WELCOME_UNIT_APPEARANCES, WELCOME_NEUTRAL_SHARE, welcomeUnitPerformance, createWelcomeRoster, welcomeCreatureScale, prepareWelcomeChoice, welcomeTravelMotion, drawWelcomeChoice } from "./welcome-presentation.mjs";
 import { CREATURE_IDLE_ANIMATIONS, unitMovementPosition, creatureAnimationSpeed, unitAnimationPose } from "./unit-animation.mjs";
 import { unitStats } from "../server/attributes.mjs";
 import { unitActionArtDefinition, unitActionArtPose } from "./unit-action-art.mjs";
 import { UNIT_ACTION_ART } from "./unit-action-art-assets.mjs";
 
-test("opening base forms consume four identities from a full appearance bag", () => {
-  let seed = 37;
-  const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32);
-  const tribes = ["bean", "spore", "pebble", "spring"];
-  const species = ["boar", "toad", "weasel", "white-paw"];
-  const expected = [...tribes.flatMap(key => WELCOME_UNIT_APPEARANCES.map((_, variant) => key + ":" + variant)), ...species.map(key => key + ":0")].sort();
-  const next = createWelcomeRoster(tribes, species, WELCOME_UNIT_APPEARANCES.length, random);
-  const choices = Array.from({ length: expected.length * 40 }, next);
-  const identities = choices.map(choice => choice.key + ":" + choice.variant);
-  assert.deepEqual(choices.slice(0, 4), tribes.map(key => ({ key, variant: 0 })));
-  assert.deepEqual(identities.slice(4, expected.length).sort(), expected.filter(identity => !tribes.some(key => identity === key + ":0")));
-  for (let i = 0; i < choices.length; i += expected.length)
-    assert.deepEqual(identities.slice(i, i + expected.length).sort(), expected);
-  for (let i = 4; i < choices.length; i++) {
-    assert.notEqual(identities[i], identities[i - 1]);
-    assert.notEqual(identities[i], identities[i - 2]);
-    const recent = choices.slice(i - 2, i).map(choice => choice.key);
-    const remaining = choices.slice(i, Math.ceil((i + 1) / expected.length) * expected.length);
-    if (remaining.some(choice => !recent.includes(choice.key))) assert.ok(!recent.includes(choices[i].key));
+const tribes = ["bean", "spore", "pebble", "spring"];
+const species = [...Object.keys(CREATURE_IDLE_ANIMATIONS), "talon-owl", "spiny-back-beetle"];
+const seeded = initial => { let seed=initial; return () => ((seed=(seed*1664525+1013904223)>>>0)/2**32); };
+test("first four remain fixed and later categories favor neutral species independently of variant count", () => {
+  assert.equal(WELCOME_NEUTRAL_SHARE,.8);
+  for (const variants of [1, WELCOME_UNIT_APPEARANCES.length, 80]) for (const seed of [37,749,123456]) {
+    const next=createWelcomeRoster(tribes,species,variants,seeded(seed));
+    assert.deepEqual(Array.from({length:4},next),tribes.map(key=>({key,variant:0})));
+    const choices=Array.from({length:10000},next),neutral=choices.filter(choice=>species.includes(choice.key));
+    assert.ok(neutral.length>7800&&neutral.length<8200,variants+" variants: "+neutral.length);
+    assert.ok(choices.every(choice=>Object.isFrozen(choice)));
   }
+});
+test("category threshold, duplicate inputs and missing categories have deterministic behavior",()=>{
+  for(const [value,expected]of [[.799999,"neutral"],[.8,"playable"]]){
+    const next=createWelcomeRoster([...tribes,"bean"],[...species,"bean",species[0]],17,()=>value);
+    Array.from({length:4},next);for(let i=0;i<40;i++)assert.equal(tribes.includes(next().key),expected==="playable");
+  }
+  const onlyNeutral=createWelcomeRoster([],species,17,seeded(1));assert.ok(Array.from({length:100},onlyNeutral).every(choice=>species.includes(choice.key)));
+  const onlyPlayable=createWelcomeRoster(tribes,[],17,seeded(1));assert.ok(Array.from({length:100},onlyPlayable).every(choice=>tribes.includes(choice.key)));
+  assert.equal(createWelcomeRoster([],[],17,seeded(1))(),null);
 });
 
 test("creatures keep their relative sizes while tall poses fit the mobile header", () => {
@@ -42,34 +43,21 @@ test("creatures keep their relative sizes while tall poses fit the mobile header
   assert.ok(leader * idle.registrationScale * (idle.pivotY - 100) / idle.frameSize <= 168 + 1e-6);
 });
 
-test("all 87 appearance identities complete every round across different shuffle seeds", () => {
-  const tribes = ["bean", "spore", "pebble", "spring"];
-  const species = [...Object.keys(CREATURE_IDLE_ANIMATIONS), "talon-owl", "spiny-back-beetle"];
-  const expected = [...tribes.flatMap(key => WELCOME_UNIT_APPEARANCES.map((_, variant) => key + ":" + variant)), ...species.map(key => key + ":0")].sort();
-  assert.equal(expected.length, 87);
-  const initialOrders = new Set();
-  for (const initialSeed of [37, 749, 123456]) {
-    let seed = initialSeed;
-    const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32);
-    const next = createWelcomeRoster(tribes, species, WELCOME_UNIT_APPEARANCES.length, random);
-    const choices = Array.from({ length: expected.length * 12 }, next);
-    const identities = choices.map(choice => choice.key + ":" + choice.variant);
-    assert.deepEqual(choices.slice(0, 4), tribes.map(key => ({ key, variant: 0 })));
-    const remainder = choices.slice(4, expected.length);
-    assert.equal(remainder.filter(choice => tribes.includes(choice.key) && choice.variant > 0).length, 64);
-    assert.deepEqual(remainder.filter(choice => species.includes(choice.key)).map(choice => choice.key).sort(), [...species].sort());
-    assert.deepEqual(identities.slice(4, expected.length).sort(), expected.filter(identity => !tribes.some(key => identity === key + ":0")));
-    initialOrders.add(identities.slice(4, expected.length).join(","));
-    for (let start = 0; start < choices.length; start += expected.length) assert.deepEqual(identities.slice(start, start + expected.length).sort(), expected);
-    for (let i = 4; i < choices.length; i++) {
-      assert.notEqual(identities[i], identities[i - 1]);
-      assert.notEqual(identities[i], identities[i - 2]);
-      const recent = choices.slice(i - 2, i).map(choice => choice.key);
-      const remaining = choices.slice(i, Math.ceil((i + 1) / expected.length) * expected.length);
-      if (remaining.some(choice => !recent.includes(choice.key))) assert.ok(!recent.includes(choices[i].key));
-    }
-  }
-  assert.equal(initialOrders.size, 3);
+test("independent bags retain all 87 identities and deterministic sequence diversity",()=>{
+ const allPlayable=tribes.flatMap(key=>WELCOME_UNIT_APPEARANCES.map((_,variant)=>key+":"+variant)).sort();
+ const firstPlayable=allPlayable.filter(identity=>!tribes.some(key=>identity===key+":0"));
+ const orders=new Set();
+ for(const seed of [37,749,123456]){
+  const next=createWelcomeRoster(tribes,species,17,seeded(seed)),repeat=createWelcomeRoster(tribes,species,17,seeded(seed));
+  const choices=Array.from({length:3000},next);assert.deepEqual(choices,Array.from({length:3000},repeat));
+  const later=choices.slice(4),neutrals=later.filter(choice=>species.includes(choice.key)),players=later.filter(choice=>tribes.includes(choice.key));
+  for(let i=0;i+species.length<=neutrals.length;i+=species.length)assert.deepEqual(neutrals.slice(i,i+species.length).map(choice=>choice.key).sort(),[...species].sort());
+  assert.deepEqual(players.slice(0,firstPlayable.length).map(choice=>choice.key+":"+choice.variant).sort(),firstPlayable);
+  for(let i=firstPlayable.length;i+allPlayable.length<=players.length;i+=allPlayable.length)assert.deepEqual(players.slice(i,i+allPlayable.length).map(choice=>choice.key+":"+choice.variant).sort(),allPlayable);
+  assert.equal(new Set(choices.map(choice=>choice.key+":"+choice.variant)).size,87);
+  orders.add(choices.slice(4,24).map(choice=>choice.key+":"+choice.variant).join(","));
+ }
+ assert.equal(orders.size,3);
 });
 
 test("welcome movement keeps exact cue stamps and exposes the final landing cell", () => {
@@ -234,4 +222,12 @@ test("actual welcome header uses idle in the center for tribes and neutral speci
       assert.ok(!scope.result.agent.attack);
     }
   }
+});
+
+test("compiled welcome sequence matches the weighted source roster exactly",()=>{
+ const scope={console,setTimeout,clearTimeout,URL,performance};
+ runInNewContext(readFileSync(new URL('./runtime.js',import.meta.url),'utf8'),scope);
+ const actual=scope.Spawner.createWelcomeRoster(tribes,species,WELCOME_UNIT_APPEARANCES.length,seeded(20261107));
+ const expected=createWelcomeRoster(tribes,species,WELCOME_UNIT_APPEARANCES.length,seeded(20261107));
+ assert.deepEqual(JSON.parse(JSON.stringify(Array.from({length:2000},actual))),Array.from({length:2000},expected));
 });

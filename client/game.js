@@ -4565,6 +4565,8 @@
       if (corpse.species !== "spiny-back-beetle") {
         context.rotate(Math.PI / 2);
         context.scale(corpse.facing < 0 ? -1 : 1, 1);
+      } else {
+        context.scale(Spawner.unitFrameMirror(beetleCorpseAnimation.sourceFacing || beetleCorpseAnimation.facing || "left", corpse.facing) ? -1 : 1, 1);
       }
       const shape = corpse.species === "talon-owl" ? Spawner.TALON_OWL_IDLE : beetleCorpseAnimation;
       const left = -size * shape.pivotX / shape.frameSize;

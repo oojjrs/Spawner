@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { unitFacing, unitFrameMirror } from "./unit-size.mjs";
+import { UNIT_COMBINATION_FORMS } from "./unit-combination-forms.mjs";
 import { UNIT_ACTION_ART } from "./unit-action-art-assets.mjs";
 import { createUnitActionArt, unitActionArtPose } from "./unit-action-art.mjs";
 import { drawBeanHeldHurt } from "./bean-held-hurt.mjs";
@@ -38,13 +39,15 @@ test("원본 방향 보정과 전장 반전은 프레임 순서와 발 접점을
   const art = createUnitActionArt(value => value, surface, async image => ({ image }));
   for (const key of Object.keys(UNIT_ACTION_ART)) {
     const [tribe, form] = key.split("/");
-    const attributes = form === "base" ? {} : { [form === "gather" ? "strength" : form]: 1 };
+    const attributes = UNIT_COMBINATION_FORMS.find(candidate => candidate.key === form)?.attributes ||
+      (form === "base" ? {} : { [form === "gather" ? "strength" : form]: 1 });
     const agent = { tribe, attributes, health: 10, mode: "idle" };
     await art.prepare(agent);
     const pose = unitActionArtPose(agent, .2), right = surface(600, 600), left = surface(600, 600);
     assert.ok(art.draw(right.getContext(), agent, .2, 231, 450, 100, false, null));
     assert.ok(art.draw(left.getContext(), agent, .2, 231, 450, 100, true, null));
     const a = right.calls.at(-1), b = left.calls.at(-1);
+    assert.equal(pose.reference, UNIT_ACTION_ART[key].reference, key + " selects its own registered form");
     assert.ok(a && b, key); assert.deepEqual(a.args, b.args); assert.equal(a.scale, -b.scale);
     assert.equal(a.x, 231); assert.equal(a.y, 450); assert.equal(b.x, 231); assert.equal(b.y, 450);
     assert.equal(a.scale, pose.animation.sourceFacing === "left" ? -1 : 1);

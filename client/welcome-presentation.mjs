@@ -13,18 +13,29 @@ export function welcomeUnitPerformance(agent, startedAt) {
   return { agent: performer, action: "idle", animation, durationMs };
 }
 
+// Select the category before the appearance so adding playable forms cannot
+// crowd out the neutral species. Each category keeps its own shuffle bag.
+export const WELCOME_NEUTRAL_SHARE = .8;
 export function createWelcomeRoster(tribes, species, variants, random = Math.random) {
-  const pool = [...new Set(tribes)].flatMap(key => Array.from({ length: variants }, (_, variant) => ({ key, variant })))
-    .concat([...new Set(species)].filter(key => !tribes.includes(key)).map(key => ({ key, variant: 0 })));
+  const playable = [...new Set(tribes)];
+  const pools = {
+    playable: playable.flatMap(key => Array.from({ length: variants }, (_, variant) => ({ key, variant }))),
+    neutral: [...new Set(species)].filter(key => !playable.includes(key)).map(key => ({ key, variant: 0 }))
+  };
+  const bags = { playable: [], neutral: [] }, rounds = { playable: 0, neutral: 0 };
   let number = 0;
-  let bag = [];
   const recent = [];
   return function next() {
     let choice;
-    if (number < tribes.length) choice = { key: tribes[number], variant: 0 };
+    if (number < playable.length) choice = { key: playable[number], variant: 0 };
     else {
+      const category = pools.neutral.length && (!pools.playable.length || random() < WELCOME_NEUTRAL_SHARE) ? "neutral" : "playable";
+      let bag = bags[category];
       if (!bag.length) {
-        bag = number === tribes.length ? pool.filter(candidate => candidate.variant !== 0 || !tribes.includes(candidate.key)) : [...pool];
+        const candidates = category === "playable" && rounds.playable === 0 ? pools.playable.filter(candidate => candidate.variant !== 0) : pools[category];
+        bag = bags[category] = [...(candidates.length ? candidates : pools[category])];
+        rounds[category]++;
+        if (!bag.length) return null;
         for (let i = bag.length - 1; i > 0; i--) {
           const j = Math.floor(random() * (i + 1));
           [bag[i], bag[j]] = [bag[j], bag[i]];
