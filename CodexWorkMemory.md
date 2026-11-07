@@ -1,3 +1,16 @@
+## 전투 실험실 하단 제거·커밋 범위 동결 · 01a1b370 현재 요약
+
+- 기록 ID: combat-lower-remove-freeze-01a1b370. 기록 시각 2026-11-07T09:43:41+09:00. 기록자·구현/분리/검수 판단 Codex /root, 삭제·로컬 커밋 결정 사용자. 출처 현재 채팅 01a1b370-0281-7a21-8c35-2f5c3f176368의 첨부 화면·요청 및 실제 source/생성물/형식 도구 결과. 원발언 정확 시각·항목 ID·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 구현 완료: main은 기존 header와 stage만 만들며 전장 아래 비교 설정·양쪽 능력치·실험 규칙·곡선·반복 실험·사건 기록 및 전용 이벤트/렌더/배치 코드를 제거했다. 삭제된 조작은 기존 초깃값(시드1·동시 시작·피해 변동 적용·거리1·지원 없음·1배속)을 사용한다. 편성/외형/주사위5:5·전투 조작 및 전장 연출은 유지하고 문구를 새로 추가하지 않았다.
+- 실제 확인: 제품 client/combat-lab.js·client/combat-lab.css·Combat.html은 UTF8NoBom/CRLF 형식 OK다. 공유 메모리는 HEAD와 현재 모두 Mixed여서 NeedsReview이며 기존본문을 정규화하지 않는다. 최초 checker 인수전달 실패를 고쳤고 두 번째 checker의 이 메모리 상태 때문에 실행 스크립트가 멈춰 브라우저/런타임 확인에는 도달하지 않았다. 검수를 확대하지 않고 최종 staged 내용·공백 검사로 범위를 확인한다.
+- 범위/누락 점검: 제품3경로와 이 채팅 start/freeze2절만 같은 로컬 커밋에 포함한다. 다른 공유 기록과 Spawner.html·runtime.js·combat-stage.mjs·game.js·server/DNA 및 새 동시 파일/index는 제외·보존한다. 별도index의 메모리후보는 HEAD의 기존 바이트에 이번2절만 앞붙이며 기본index를 건드리지 않는다. 연결 Projects0 결과를 재사용한다. 메시지는 전투 실험실 하단 실험 패널 제거, 현재 main에서 새 브랜치·push/배포 없이 진행하며 커밋 성공은 아직 미확인이다.
+
+## 전투 실험실 하단 영역 제거 착수 · 01a1b370 현재 요약
+
+- 기록 ID: combat-lower-remove-start-01a1b370. 기록 시각 2026-11-07T09:40:05+09:00. 기록자·구현/범위 판단 Codex /root, 삭제·로컬 커밋 결정 사용자. 출처 현재 채팅 01a1b370-0281-7a21-8c35-2f5c3f176368의 첨부 화면과 하단 전부 삭제·커밋 요청. 원발언 정확 시각·항목 ID·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 확정 범위: 첨부 화면의 전장·편성/외형·주사위·다음 사건/자동 전투/끝까지/초기화는 유지하고 그 아래 비교 설정, 양쪽 능력치 편집, 실험 규칙, 투자 곡선, 반복 실험, 사건 기록 UI와 전용 갱신 코드를 제거한다. 삭제되는 설정은 기존 초깃값으로 유지하며 새 문구를 추가하지 않는다. source JS/CSS와 Combat.html의 해당 inline/CSS만 좁게 동기화한다.
+- 현재 근거: 전용 origin oojjrs/Spawner, 연결 Projects nodes=[]·hasNextPage=false. 기존/동시 Spawner.html·runtime.js·다른 메모리와 일반 index를 보존한다. 관련 메모리만 분리해 제품 변경과 원자적으로 로컬 커밋하며 새 브랜치·push/배포는 없다. 구현·검수·커밋은 아직 대기다.
+
 ## DNA 조각 교환 로컬 커밋 범위 확정 · 01a1b342 현재 요약
 
 - 기록 ID: dna-level1-shape-swap-commit-freeze-20261107-01a1b342. 기록 시각 2026-11-07T09:02:20+09:00. 기록자·분리/범위판단 Codex /root, 로컬커밋승인 사용자. 출처 현재 채팅 01a1b342-551b-7c40-a4f4-60130e6efa4e의 ‘커밋’과 실제 Git/검수결과. 원발언 정확 시각·항목 ID·PC 식별 불명, H:/Spawner Windows PowerShell.

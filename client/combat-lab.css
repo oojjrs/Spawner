@@ -14,11 +14,8 @@ h2{font-size:17px;margin:0 0 12px}
 .eyebrow{font-size:10px;font-weight:800;letter-spacing:2.8px;color:#71825a}
 p{margin:0;color:#6d796e;font-size:12px;line-height:1.7}
 .status{padding:10px 16px;border:1px solid #c6d9a33b;border-radius:24px;background:#132a2059;color:#d5e5bc;font-weight:650;max-width:230px;font-size:12px;overflow-wrap:anywhere;text-align:center;justify-self:center;align-self:center;grid-column:2;grid-row:1}
-.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:18px 0}
 .field{display:grid;gap:5px;font-size:11px;color:#74806a;min-width:0}
 .field>span{overflow-wrap:anywhere}
-.field input[type=number]{width:100%;min-width:0}
-.controls>.field{flex:1 1 125px;max-width:250px}
 .stage{position:relative;overflow:hidden;border:1px solid #394f3c;border-radius:20px;background:#263c2e;box-shadow:0 12px 32px #293e281a;color:#e9edda}
 .stage-hud{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(110px,auto) minmax(0,1fr);gap:20px;padding:22px 28px 0;background:linear-gradient(#253c30, #2d4434)}
 .stage-center{grid-column:2;grid-row:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-width:0}
@@ -53,36 +50,6 @@ p{margin:0;color:#6d796e;font-size:12px;line-height:1.7}
 .stage[data-state=playing] .stage-footer .actions button:nth-child(2){background:#e3ce9f;border-color:#e3ce9f}
 .stage[data-state=invalid] .stage-view{opacity:.5}
 .phase{display:block;color:#9caf8e;font-size:11px;min-height:18px;font-variant-numeric:tabular-nums;white-space:nowrap}
-.arena{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.fighter,.panel{min-width:0;background:#fffefb;border:1px solid #d6ddcf;border-radius:14px;padding:20px;box-shadow:0 4px 16px #24351a03}
-.fighter{border-top:3px solid #9ab77c}
-.fighter.right{border-top-color:#cfaa89}
-.fighter>h2{font-size:13px;color:#587044;margin-bottom:14px}
-.fighter.right>h2{color:#997252}
-.organs{display:flex;flex-wrap:wrap;gap:12px}
-.organs .field{display:flex;align-items:center;flex-direction:row-reverse;gap:6px;min-height:36px}
-.organs input{width:17px;height:17px;accent-color:#567644}
-.pieces{display:block;font-size:12px;font-weight:700;margin:10px 0;color:#577446}
-.pieces[data-over=true]{color:#b14738}
-.derived{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:6px 10px;font-size:12px;line-height:1.5;margin:12px 0 18px}
-.derived dt{color:#73816a}
-.derived dd{margin:0;text-align:right;font-weight:650;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-details>summary{cursor:pointer;font-size:13px;font-weight:700;padding:10px 0}
-.stat-group{border-top:1px solid #e7eddf}
-.stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:5px 0 14px}
-.stat-grid input{font-size:16px;font-weight:650}
-.rule-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding-top:12px}
-.panel{margin-top:18px}
-.panel .actions button:first-child{background:#36582f;color:#fff;border-color:#36582f}
-canvas{max-width:100%}
-.panel>canvas{display:block;width:100%;height:250px;background:#f9fbf6;border-radius:8px}
-.panel>output{display:block;font-size:13px;line-height:1.8;overflow-wrap:anywhere}
-.batch-result{white-space:pre-line;color:#466634}
-.scroll{max-height:320px;overflow:auto}
-table{border-collapse:collapse;width:100%;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}
-th,td{padding:10px 12px;border-bottom:1px solid #eef1e8;text-align:left}
-th{font-weight:600;color:#819073;background:#fafbf8;position:sticky;top:0}
-tbody tr:last-child td{border-bottom:0}
 [hidden]{display:none!important}
 @media(max-width:700px){
 main{padding:20px 12px 40px}header{margin-bottom:16px}h1{font-size:25px}p{font-size:11px}
@@ -91,17 +58,11 @@ main{padding:20px 12px 40px}header{margin-bottom:16px}h1{font-size:25px}p{font-s
 .stage-side select{font-size:16px;min-height:35px}.hp{margin-top:9px}.hp strong{font-size:13px}.reaction{margin-top:5px;height:17px;font-size:10px}
 .stage-footer{flex-direction:column;align-items:stretch;gap:10px;padding:12px}
 .stage-footer .actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.stage-footer button{padding:8px 4px;font-size:11px;min-height:40px}
-.phase{text-align:center;font-size:10px;min-height:14px}.arena{grid-template-columns:1fr;gap:14px}.fighter,.panel{padding:16px;border-radius:12px}
-.controls{gap:9px;margin:16px 0}.controls>.field{flex-basis:100px;max-width:none}.rule-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.stat-grid{gap:8px}.organs{gap:10px}.panel .actions button{flex:1 1 120px}th,td{padding:10px 8px}
+.phase{text-align:center;font-size:10px;min-height:14px}
 }
 @media(max-width:360px){
 main{padding:16px 8px 32px}.stage-hud{gap:8px 18px;padding:14px 12px 0}.stage-side select{font-size:15px}
-.stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.derived{font-size:11px}.controls{gap:8px}.rule-grid{gap:8px}.field{font-size:11px}button,select,input[type=number]{padding:8px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
-.controls>.support-field{display:flex;flex-direction:row-reverse;align-items:center;justify-content:flex-end;gap:6px;min-height:42px}
-.support-field input{width:17px;height:17px;margin:0;accent-color:#567644}
-.organs input[type=number]{width:64px;height:42px}
 
 .roster-actions{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.roster-actions button{min-height:32px;padding:4px 8px;font-size:11px;background:#2b4434;color:#e9edda;border-color:#a6bf8659}.roster-actions button:hover:not(:disabled){background:#3c5740;border-color:#a6bf8699}.roster-actions button:disabled{background:#304236;color:#bdcbbb;border-color:#627760;opacity:1;cursor:default}
