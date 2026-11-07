@@ -7,5 +7,5 @@ test("1레벨은 기존 다섯 종류의 세 칸 조각으로 빈칸을 채우�
   const catalog=M.catalog.filter(g=>g.grade===1);
   assert.deepEqual(catalog.map(g=>[g.id,g.cells.length]),[['capacity',3],['gather',3],['harvestSpeed',3],['health',3],['movement',3]]);
   const pieces=M.pack(catalog.map(g=>({gene:g.id,grade:g.grade,rotation:0})),1),stats=M.stats(pieces);
-  assert.equal(M.trace(pieces,1).valid,true);assert.equal(stats.capacity,2);assert.equal(stats.harvestTime,4/1.1);assert.equal(stats.health,20);assert.equal(stats.movement,.29);assert.equal(M.price(pieces),17);assert.equal(birthCost({dna:{pieces}},'bean'),20);
+  assert.equal(M.trace(pieces,1).valid,true);assert.equal(stats.capacity,2);assert.equal(stats.harvestTime,4/1.1);assert.equal(stats.health,20);assert.equal(stats.movement,.29);assert.equal(M.price(pieces),28);assert.equal(birthCost({dna:{pieces}},'bean'),31);
 });

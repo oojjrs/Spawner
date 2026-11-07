@@ -35,12 +35,12 @@ test("기관은 종류별 하나이고 스탯·가격·낮은 레벨 제한은 �
   for(const id of ['gather','blade','secretion','antenna']){assert.equal(validateDna(arrangement([id,id],4),4,1000),null);assert.ok(validateDna(arrangement([id],4),4,1000));}
   assert.ok(validateDna(arrangement(['gather','blade','secretion','antenna'],4),4,1000));
   assert.equal(validateDna(arrangement(['blade'],2),1,1000),null);
-  const stats=M.stats([piece('carapace'),piece('block')]);assert.equal(stats.armor,2);assert.equal(stats.block,15);assert.equal(M.price([piece('carapace')]),4);assert.equal(M.cost([]),3);
+  const stats=M.stats([piece('carapace'),piece('block')]);assert.equal(stats.armor,2);assert.equal(stats.block,15);assert.equal(M.price([piece('carapace')]),7);assert.equal(M.cost([]),3);
 });
 
 test("기본 설계와 네 부족 시작 유닛은 새 좌표로 생성되고 비용을 유지한다",()=>{
   for(const entry of DNA_STARTER_DESIGNS){assert.equal(entry.design.version,4);assert.ok(validateDna(entry.design,entry.design.level,1000),entry.id);}
-  for(const tribe of ['bean','spore','pebble','spring']){const dna=startingWorkerDna(tribe);assert.equal(dna.version,4);assert.ok(validateDna(dna,1,30));assert.equal(M.cost(dna.pieces),17);assert.ok(dna.pieces.every(p=>p.shape===undefined&&Number.isInteger(p.q)&&Number.isInteger(p.r)));}
+  for(const tribe of ['bean','spore','pebble','spring']){const dna=startingWorkerDna(tribe);assert.equal(dna.version,4);assert.ok(validateDna(dna,1,30));assert.equal(M.cost(dna.pieces),26);assert.ok(dna.pieces.every(p=>p.shape===undefined&&Number.isInteger(p.q)&&Number.isInteger(p.r)));}
 });
 
 test("예전 저장은 조각·등급·스탯·지불 비용을 보존하며 좌표 형식으로 한 번 변환한다",()=>{

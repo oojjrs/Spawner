@@ -93,7 +93,7 @@ test("저장한 설계의 좌표와 현재 설계 내부 이력만 복구한다"
 
 test("공통 가격과 실제 탄생비는 제작기 비용과 같다",t=>{
   const {editor,root}=fixture(t);assert.equal(root.querySelector('.dna-cost strong').textContent,'3');selectGene(root,'gather');place(root);const dna=editor.getDesign();
-  for(const tribe of ['bean','spore','pebble','spring'])assert.equal(birthCost({dna},tribe),8);assert.equal(root.querySelector('.dna-cost strong').textContent,'8');
+  for(const tribe of ['bean','spore','pebble','spring'])assert.equal(birthCost({dna},tribe),11);assert.equal(root.querySelector('.dna-cost strong').textContent,'11');
 });
 
 test("공통 스탯 표시는 기본0 숨김과 합산·괄호 증감·색상을 양쪽에 동일하게 제공한다",t=>{

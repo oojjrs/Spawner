@@ -66,32 +66,32 @@ test("같은 DNA는 네 종족 모두 기본비 3포인트로 저장하고 실�
   const dna=design(["gather","health"],2);
   for(const tribe of ["bean","spring","pebble","spore"]) {
     assert.equal(birthCost({dna:design([],1)},tribe),3,tribe);
-    assert.equal(birthCost({dna},tribe),11,tribe);
-    assert.equal(birthCost({dna,tribe}),11,tribe);
+    assert.equal(birthCost({dna},tribe),16,tribe);
+    assert.equal(birthCost({dna,tribe}),16,tribe);
     const {game}=fixture(2,tribe),saved=JSON.parse(game.save());
     saved.state.agents=[];game.restore(JSON.stringify(saved));
     const points=game.snapshot().evolutionPoints;
     const {templateId}=game.command({type:"design",templateId:null,name:"공통 일꾼",dna,birth:false});
     assert.equal(game.snapshot().evolutionPoints,points,tribe);
     const {agentId}=game.command({type:"birth",templateId});
-    assert.equal(game.snapshot().evolutionPoints,points-11,tribe);
-    assert.equal(game.agents.find(agent=>agent.id===agentId).cost,11,tribe);
+    assert.equal(game.snapshot().evolutionPoints,points-16,tribe);
+    assert.equal(game.agents.find(agent=>agent.id===agentId).cost,16,tribe);
   }
 });
 
-test("채집 DNA는 8포인트로 탄생하고 7포인트에서는 자원을 차감하지 않는다",()=>{
-  for(const points of [7,8]){
+test("채집 DNA는 11포인트로 탄생하고 10포인트에서는 자원을 차감하지 않는다",()=>{
+  for(const points of [10,11]){
     const {game}=fixture(1),saved=JSON.parse(game.save());
     saved.state.evolutionPoints=points;saved.state.agents=[];game.restore(JSON.stringify(saved));
     const {templateId}=game.command({type:"design",templateId:null,name:"채집 DNA",dna:design(["gather"],1),birth:false});
     assert.equal(game.snapshot().evolutionPoints,points);
-    if(points===7){
+    if(points===10){
       assert.throws(()=>game.command({type:"birth",templateId}),/진화 포인트/);
-      assert.equal(game.snapshot().evolutionPoints,7);
+      assert.equal(game.snapshot().evolutionPoints,10);
       assert.equal(game.agents.length,0);
     }else{
       const {agentId}=game.command({type:"birth",templateId});
-      assert.equal(game.agents.find(agent=>agent.id===agentId).cost,8);
+      assert.equal(game.agents.find(agent=>agent.id===agentId).cost,11);
       assert.equal(game.snapshot().evolutionPoints,0);
     }
   }

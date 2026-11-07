@@ -11,17 +11,17 @@ const build=n=>({version:4,pieces:M.pack(Array.from({length:n},()=>({gene:"gathe
 test("stack prices are order independent and every split pays extra body bases",()=>{
   assert.equal(birthCost({dna:build(0)},"bean"),3);
   for(let n=1;n<=6;n++){
-    assert.equal(birthCost({dna:build(n)},"bean"),3+5*n);
-    if(n>1)assert.ok(birthCost({dna:build(n)},"bean")<8*n);
+    assert.equal(birthCost({dna:build(n)},"bean"),3+8*n);
+    if(n>1)assert.ok(birthCost({dna:build(n)},"bean")<11*n);
     for(let left=1;left<n;left++)assert.equal(birthCost({dna:build(left)},"bean")+birthCost({dna:build(n-left)},"bean")-birthCost({dna:build(n)},"bean"),3);
   }
   const mixed=[piece("gather"),piece("antenna"),piece("rangedPower"),piece("health")];
   assert.equal(M.price(mixed),M.price([...mixed].reverse()));
-  assert.equal(M.price([piece("antenna")]),7);
-  assert.equal(M.price([piece("rangedPower")]),4);
+  assert.equal(M.price([piece("antenna")]),12);
+  assert.equal(M.price([piece("rangedPower")]),7);
   assert.equal(validateDna(build(6),1,60),null);
   assert.deepEqual(M.validate(build(6)),build(6));
-  assert.equal(validateDna(build(4),1,100),null);assert.equal(validateDna(build(5),1,100),null);assert.equal(birthCost({dna:build(5)},"bean"),28);
+  assert.equal(validateDna(build(4),1,100),null);assert.equal(validateDna(build(5),1,100),null);assert.equal(birthCost({dna:build(5)},"bean"),43);
 });
 
 test("physical organ copies preserve basic role throughput without extra hits or attack rate",()=>{

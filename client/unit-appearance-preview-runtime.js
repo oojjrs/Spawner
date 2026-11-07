@@ -5787,7 +5787,7 @@ const ATTRIBUTE_DNA = (() => {
   const genes = definitions.map((entry,index) => entry && ({id:entry[0],category:entry[1],price:entry[2]/2,code:alphabet[Math.floor(index/16)]+alphabet[Math.floor(index/4)%4]+alphabet[index%4],color:colors[entry[1]]})).filter(Boolean);
   const lookup = new Map(genes.map(gene=>[gene.id,gene]));
   const specification=[{"gene":"gather","grade":1,"order":1},{"gene":"health","grade":1,"order":3},{"gene":"blade","grade":2,"order":0},{"gene":"power","grade":2,"order":1},{"gene":"speed","grade":2,"order":2},{"gene":"capacity","grade":1,"order":0},{"gene":"movement","grade":1,"order":4},{"gene":"antenna","grade":2,"order":8},{"gene":"carapace","grade":2,"order":9},{"gene":"combo","grade":3,"order":0},{"gene":"legs","grade":3,"order":10,"retired":true},{"gene":"armor","grade":3,"order":11,"retired":true},{"gene":"vision","grade":3,"order":10},{"gene":"harvest","grade":2,"order":10},{"gene":"harvestSpeed","grade":1,"order":2},{"gene":"loadSpeed","grade":2,"order":11},{"gene":"accuracy","grade":3,"order":6},{"gene":"tenacity","grade":3,"order":7},{"gene":"block","grade":3,"order":8},{"gene":"evasion","grade":3,"order":9},{"gene":"parry","grade":4,"order":21},{"gene":"counter","grade":3,"order":2},{"gene":"critical","grade":3,"order":1},{"gene":"criticalPower","grade":4,"order":24},{"gene":"penetration","grade":4,"order":25},{"gene":"comboPower","grade":4,"order":26},{"gene":"blockPower","grade":4,"order":27},{"gene":"counterPower","grade":4,"order":28},{"gene":"reduction","grade":4,"order":29},{"gene":"stun","grade":3,"order":3},{"gene":"stunTime","grade":4,"order":31},{"gene":"bleed","grade":3,"order":4},{"gene":"bleedPower","grade":4,"order":33},{"gene":"area","grade":3,"order":5},{"gene":"areaPower","grade":4,"order":35},{"gene":"lifesteal","grade":4,"order":36},{"gene":"reflection","grade":4,"order":37},{"gene":"regeneration","grade":4,"order":38},{"gene":"comboSpeed","grade":4,"order":39},{"gene":"focus","grade":4,"order":40},{"gene":"secretion","grade":2,"order":3},{"gene":"rangedPower","grade":2,"order":4},{"gene":"rangedSpeed","grade":2,"order":5}];
-  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.order=entry.order;if(entry.retired)gene.retired=true;if(gene.grade<=2)gene.price/=2;}
+  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.order=entry.order;if(entry.retired)gene.retired=true;gene.price=piecePrice({gene:gene.id,grade:gene.grade});}
   const catalog=genes.filter(gene=>!gene.retired).sort((a,b)=>a.grade-b.grade||a.order-b.order);
 
   for (const [index, gene] of genes.entries()) { gene.cells = DNA_BOARD_SHAPES[gene.id]; gene.fillColor = `hsl(${(index * 137.508 + 24) % 360} 48% 64%)`; }
@@ -5801,7 +5801,12 @@ const ATTRIBUTE_DNA = (() => {
   function trace(pieces,level){return dnaBoardTrace(pieces,level,lookup,boardRadius);}
   function boardCells(level){return dnaBoardCells(boardRadius(level));}
   function pack(pieces,level){return dnaBoardPack(pieces,level,boardRadius);}
-  function price(pieces){return pieces.reduce((sum,piece)=>{const gene=lookup.get(piece.gene),grade=piece.grade===undefined?1:piece.grade;return sum+Math.ceil((gene?.price||0)*(grade+2)/3);},0);}
+  function piecePrice(piece){
+    const gene=lookup.get(piece.gene),grade=piece.grade===undefined?1:piece.grade;
+    if(!gene)return 0;
+    return (gene.category==='organ'?[0,8,12,11,15]:[0,5,7,11,15])[grade]||0;
+  }
+  function price(pieces){return Math.ceil(pieces.reduce((sum,piece)=>sum+piecePrice(piece),0));}
   function cost(pieces){return 3+price(pieces);}
   function counts(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+1;return result;}
   function weights(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+(piece.grade===undefined?1:piece.grade);return result;}
@@ -5847,9 +5852,8 @@ const ATTRIBUTE_DNA = (() => {
     return {version:4,pieces,budget:Math.floor(value.budget),level};
   }
 
-  return {genes,catalog,lookup,trace,boardCells,pieceCells:dnaPieceCells,pack,price,cost,counts,weights,stats,validate,clonePiece,key,boardRadius,inside};
+  return {genes,catalog,lookup,trace,boardCells,pieceCells:dnaPieceCells,pack,piecePrice,price,cost,counts,weights,stats,validate,clonePiece,key,boardRadius,inside};
 })();
-
 return { ATTRIBUTE_DNA };
 })();
 modules["client/unit-appearance.mjs"] = (() => {

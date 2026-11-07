@@ -18,7 +18,7 @@ function fixture(tribe = "bean", player = true) {
 
 const workerDna = {...startingWorkerDna(),pieces:startingWorkerDna().pieces.slice(0,1)};
 
-test("네 부족 모두 시작 지원금으로 채집 DNA 일꾼 세 마리를 만들고 6P를 남긴다",()=>{
+test("네 부족 모두 시작 지원금으로 채집 DNA 일꾼 두 마리를 만들고 8P를 남긴다",()=>{
   assert.equal(PLAYER_STARTING_POINTS,30);
   for(const tribe of ["bean","spore","pebble","spring"]){
     const {game}=fixture(tribe);
@@ -26,13 +26,13 @@ test("네 부족 모두 시작 지원금으로 채집 DNA 일꾼 세 마리를 �
     assert.equal(game.agents.length,TRIBE_STARTING_UNITS[tribe].length,tribe);
     const {templateId}=game.command({type:"design",templateId:null,name:"채집 DNA",dna:workerDna,birth:false});
     assert.equal(game.snapshot().evolutionPoints,30,tribe);
-    for(let i=0;i<3;i++){
-      const {agentId}=game.command({type:"birth",templateId});
-      assert.equal(game.agents.find(agent=>agent.id===agentId).cost,8,tribe);
-    }
-    assert.equal(game.snapshot().evolutionPoints,6,tribe);
+    const {agentId}=game.command({type:"birth",templateId});
+    assert.equal(game.agents.find(agent=>agent.id===agentId).cost,11,tribe);
+    assert.equal(game.snapshot().evolutionPoints,19,tribe);
+    game.command({type:"birth",templateId});
+    assert.equal(game.snapshot().evolutionPoints,8,tribe);
     assert.throws(()=>game.command({type:"birth",templateId}));
-    assert.equal(game.snapshot().evolutionPoints,6,tribe);
+    assert.equal(game.snapshot().evolutionPoints,8,tribe);
   }
 });
 
@@ -104,9 +104,9 @@ test("시작 개체는 특별 능력치 없는 기본 채집 DNA이며 복제·�
       assert.equal(agent.stats.dna.roaming,false);
       assert.equal(agent.stats.dna.melee,false);
       assert.equal(agent.stats.dna.ranged,false);
-      assert.equal(agent.cost,17);
+      assert.equal(agent.cost,26);
     }
-    const funded=JSON.parse(game.save()); funded.state.evolutionPoints=17; game.restore(JSON.stringify(funded));
+    const funded=JSON.parse(game.save()); funded.state.evolutionPoints=26; game.restore(JSON.stringify(funded));
     const source=game.agents[0];
     const {agentId}=game.command({type:"birth",agentId:source.id});
     const born=game.agents.find(agent=>agent.id===agentId);
@@ -129,7 +129,7 @@ test("모든 종족은 같은 총비용의 기초 일꾼 네 마리로 시작하
  for(const tribe of ["bean","spore","pebble","spring"]){
   const {game}=fixture(tribe);
   assert.equal(game.agents.length,4);
-  assert.equal(game.agents.reduce((sum,a)=>sum+a.cost,0),68);
+  assert.equal(game.agents.reduce((sum,a)=>sum+a.cost,0),104);
   assert.ok(game.agents.every(a=>a.stats.capacity>=3));
   patterns.push(startingWorkerDna(tribe).pieces.map(p=>p.gene).sort().join(','));
  }
