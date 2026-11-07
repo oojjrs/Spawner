@@ -1,3 +1,24 @@
+## 로컬 잔여 변경 전체 업로드 범위 동결 · 01a1b40c
+
+- 기록 ID: all-local-push-freeze-20261107-01a1b40c. 기록·관측 시각 2026-11-07T12:31:34+09:00. 기록자·Git실행/검수 Codex /root, 전체 업로드 결정 사용자. 출처 codex://threads/01a1b40c-e3c8-73a0-a37e-e4d6f5a71267 및 literal $Trash/all-local-push-01a1b40c/preservation.json·실제 git 응답. 원 발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 동기화 완료: 원격63e001b로 fast-forward 후 원래34경로·index entry를 그대로 복원했다. stash에서 변환된 줄끝은 보존 원바이트로 되돌려 원본 해시/삭제 상태와 index 동일성을 직접 확인했다. refs/codex-preserve/all-local-push-01a1b40c 및 원파일/index 보존본은 유지한다.
+- 최종 범위는 시작 시 확인한 전체34경로와 본채팅 메모리다. 요청·변경범위·보호·원격상태·남은작업을 대조했으며 기존 코드/자산/기록 내용은 임의 수정하지 않는다. 최종 형식검사와 staged diff/check 뒤 한국어 커밋 및 정확 origin/main fetch/push/readback을 수행한다. 빌드/게임 테스트 성공을 주장하지 않는다.
+- 확인된 기존 한계: 삭제된 spore-gather-birth-v3의 scene-preview.gif/scene-sheet.png를 DesignAssets/sections/unit-appearance.js의 포자 채집형 탄생 칸이 여전히 참조한다. 이전 design-split 기록에도 같은 누락이 명시돼 있다. 현재 요청은 전체 Git 업로드이므로 자산복원·기획표 내용수정은 추가하지 않고 이 한계를 보고한다. 아직 커밋·푸시 성공기록은 아니다.
+
+## 로컬 잔여 변경 전체 업로드 착수 · 01a1b40c 현재 요약
+
+- 기록 ID: all-local-push-start-20261107-01a1b40c. 기록·관측 시각 2026-11-07T12:30:08+09:00. 기록자·범위판단 Codex /root, 원 발언자·업로드 결정 사용자. 출처 codex://threads/01a1b40c-e3c8-73a0-a37e-e4d6f5a71267 의 “로컬에 안 올린게 뭐지? 다 올려”. 원 발언 정확시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 사용자 요청에 따라 현재 저장소의 잔여 staged/unstaged/untracked 전체34경로를 같은 업로드 범위로 확정했다. 포자·분비 동작/전투·시작 설계 코드와 관련 검사, 구형 미리보기5페이지 및 포자 탄생 후보7파일 삭제, 신규 gather-work-animation 모듈과 기존 작업기록을 포함한다. 기존 바이트는 보존하며 별도 기능수정·배포는 수행하지 않는다.
+- 시작 checkout main 70e7d0bf8dd4d143a9208947e789767146b0a75b, 전용 원격 https://github.com/oojjrs/Spawner. fetch한 origin/main 63e001b까지 원격만2커밋이며 로컬전용0. 원격19경로는 로컬변경과 겹치지 않는다. index/원바이트/미추적을 보존해 fast-forward 후 복원한다. repository.projectsV2 nodes=[]를 직접 확인했다.
+- 현재는 커밋·푸시 전이다. 최종 정확 staged 범위와 형식검사, push 뒤 원격/시작checkout 일치를 확인하고 실제 결과로 상태를 갱신한다.
+
+## 부분 저장 연속 배치·버튼 강조 푸시 완료 · 01a1b3e4 현재 요약
+
+- 기록 ID: dna-part-pushed-20261107-01a1b3e4. 기록·원격 관측 시각 2026-11-07T12:07:19+09:00. 기록자·Git실행/검수 Codex /root, 버튼강조 포함 업로드 결정 사용자. 출처 codex://threads/01a1b3e4-ea0e-7200-80ad-aa4212dc61dd 및 literal $Trash/dna-part-repeat-01a1b3e4/push-result.json·실제 push/ls-remote/HEAD 응답. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 완료: 70e7d0bf8dd4d143a9208947e789767146b0a75b ‘부분 저장 연속 배치와 버튼 강조 수정’을 origin/main에 푸시했다. 정확 원격 main과 시작 checkout main HEAD 일치를 직접확인했다. 제품4파일과 본채팅6기록을 담은 메모리까지5파일 +47/-9이며, 두 화면 연속배치·첫우클릭취소·부분저장 아이콘/포인트색/간격·모바일배치를 포함한다.
+- 동기화/보호: 푸시 전 원격 이미지커밋이 두 차례 추가되어 ac684f3과3fe7d7e까지 보존 통합했다. 기존 전투로딩 로컬커밋도 이력으로 유지해 최종2919541e가 부모다. 매 재배치에서 stash/별도index/원파일을 보존했고 마지막34경로 원바이트·index entries 복원을 확인한 뒤 푸시했다. 보존refs/stash는 유지한다. 첫 커밋 객체쓰기의 샌드박스 제한은 승인된 범위로 권한상승해 완료했으며 작업파일을 넓혀 수정하지 않았다.
+- 검수: 동결 기록의 실제 PC양화면/모바일 캡처와 최종 공통모듈1검사, 기존 입력6검사·실제3회연속배치 근거를 재사용했다. 최종 제품4파일 UTF8NoBom/CRLF OK, 메모리는 기존 Mixed/불일치줄없음 원문보존, 별도index의 정확5파일 staged diff/check 통과. 실제 보존복원의 경고4줄은 기존 보호대상 공백이며 임의 정리하지 않았다.
+- 요청/추가승인/버튼이유/실제변경/검수/공유변경보호/원격반영 누락 대조완료. 앞선 커밋·푸시대기 상태는 본 결과로 완료 처리한다. Site배포는 하지 않았다. 이 사후 성공기록은 로컬에 남기고 메모리 전용 추가커밋은 만들지 않는다.
 ## 부분 저장 버튼·연속 배치 업로드 범위 확정 · 01a1b3e4
 
 - 기록 ID: dna-part-finish-freeze-20261107-01a1b3e4. 기록·관측 시각 2026-11-07T12:03:29+09:00. 기록자·구현/검수/범위판단 Codex /root, 버튼 제안수용·업로드 결정 사용자. 출처 codex://threads/01a1b3e4-ea0e-7200-80ad-aa4212dc61dd 및 실제 버튼 캡처/원격 동기화 결과. 원발언 정확시각·항목 ID 불명, H:/Spawner Windows PowerShell.
@@ -19,6 +40,12 @@
 - 기록 ID: dna-ingame-screenshot-20261107-01a1b3e4. 기록·관측 시각 2026-11-07T11:52:00+09:00. 기록자·실행 Codex /root, 캡처 요청 사용자. 출처 codex://threads/01a1b3e4-ea0e-7200-80ad-aa4212dc61dd 의 인게임 설계창 스샷 요청. 정확 발언시각·항목 ID 불명, H:/Spawner Windows PowerShell.
 - 실제 현재 file:///H:/Spawner/Spawner.html을 별도 headless Edge 1600×1050에서 실행해 seed1 새방→새싹콩→게임 인원4/10→둥지 클릭→기초 채집 설계 변경으로 진입했다. 첫 시도는 둥지 패널을 열지 않아 숨겨진 버튼 클릭 시간초과였고, 둥지 클릭을 추가한 후 실제 설계창 캡처 성공·pageerror0. 사용자 브라우저/저장상태와 제품코드는 건드리지 않았다.
 - 결과 literal $Trash/dna-part-repeat-01a1b3e4/ingame-design.png를 직접 열어 속성 설계 제목·기초 채집 DNA·좌측미리보기/스탯·우측속성 목록을 확인했다. 이 캡처는 기본 설계 상태이며 부분 저장 연속배치 검증으로 확대하지 않는다. screenshot-result.json과 capture-ingame.mjs가 같은 임시 폴더에 있다.
+## 전투 점진 로딩 로컬 커밋 완료 · 01a1a5fd 현재 요약
+
+- 기록 ID: combat-loading-committed-20261107-01a1a5fd. 기록·관측시각 2026-11-07T11:48:18+09:00. 기록자·검수 Codex /root, 로컬커밋결정 사용자. 출처 현재채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072 및 literal $Trash/combat-loading-20261107/commit-result.json/concurrent-preservation.json/최종readback 도구결과.
+- 완료: local main b408a7670e234cf348f6d346e3afddfeff9ee56f ‘전투 자산 비동기 로딩과 진행 표시 수정’, 부모 b803dcebae479b2a8e9fce3604fc05c54e359ce2. 관련17경로 +489/-354와 메모리19줄을 원자적으로 커밋했다. 이번지시는커밋까지라푸시없음. HEAD일치·공유index준비본해시일치·제품16파일해시보존을실제readback으로확인했다.
+- 분리보호: 생성runtime마지막workerSource와globalexport의3way충돌은기존targetworkerSource전체를보존하고우리spinnerexport한개만적용해해결했다. freeze후다른작업의dna-editor module2줄이workingruntime에추가돼CAS가중단했고, 해당module외전체바이트동일을확인한뒤그변경을커밋에서제외·원본보존했다. 새branch나제품파일덮어쓰기는없었다.
+- 검수근거는 combat-loading-verified-20261107-01a1a5fd 기록 그대로이다. 최종tribe-art manifest awaitload1줄 동기화는 실제UI성공후소스동일·구문·형식검사로확인했으며새브라우저재실행으로과장하지않는다. 마지막범위누락점검완료. 본커밋후사실은로컬에기록하고자동메모리후속커밋은하지않는다.
 ## 부분 저장 연속 배치·첫 우클릭 취소 완료 · 01a1b3e4 현재 요약
 
 - 기록 ID: dna-part-repeat-complete-20261107-01a1b3e4. 기록·관측 시각 2026-11-07T11:47:22+09:00. 기록자·수정/검수 Codex /root, 동작·제작기 동시반영 결정 사용자. 출처 codex://threads/01a1b3e4-ea0e-7200-80ad-aa4212dc61dd 및 현재 파일·표적 검사 출력. 원발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
@@ -38,18 +65,13 @@
 - 비동기 보완: 각 중립종의 크기·프레임은 자기 시트만 기다린다. 딱정벌레시체 크기는 동일종 준비Promise에 의존한다. 실제 cold 검수에서 발견한 idle.bodyBounds[0] 미준비접근은 크기/파츠 준비검사와 유효양수캐시로 수정했다. 미준비그림자는 건너뛴다. 월드데이터·색지형은 먼저 준비하고 지역atlas를 비동기로 만든다. 이전방worker취소/세대검사를 적용하고 지역worker IndexedDB캐시를 유지했다. 플레이 중 탐색상태를 덮어쓰는 기존 layout restore는 제외했다. 로컬효과음/부족manifest도 개별load를 기다린다.
 - 실제검수: file://Combat에서 왼쪽reference강제지연 중 spinner1+준비된오른쪽body, 편성추가/제거 조작 확인. 해제후spinner0, 주사위양쪽5명, 자동전투0.58초20사건진행과끝까지종료, 세로타원0, pageerror0. 고의자산실패1회후2번째요청data복구. file://Spawner 실제entry의game.js1회실행, 지연 중 spinner1+준비된중립종1, 해제후body2/spinner0/pageerror0. 별도실제새방seed1생성→부족4선택→시작→game인원4/10진입과오류0. 메인이 최종 로딩/준비완료 캡처를 직접 확인했다. 신규 독립비동기검사 통과. 기존외형검사의5실패는 수정전baseline에서도 동일하게 재현되어 이번로딩회귀로 분류하지 않았다.
 - 범위·보호: 소스14경로와 Combat.html/runtime 생성본2경로, 관련메모리만 커밋후보. 전체빌드 없이 대상module만동기화하고 보호module/inline/nestedworker바이트를검증했다. Spawner.html/preview-runtime은변경없음. staged다른작업·동시커밋·메모리다른채팅기록은분리한다. 공유index를보존하는별도index와HEAD CAS로로컬main커밋예정이며현재기록은커밋성공주장이아니다. 요청/판단/변경/검수/잔여작업대조완료, 남은작업은최종범위검토및로컬커밋이다.
-## 전투 점진 로딩과 타원 제거 시작 · 01a1a5fd 현재 작업
+## 유닛 표 동작·미사용 칸·방향 정리 푸시 완료 · 01a1b3ae 현재 요약
 
-- 기록 ID: combat-loading-start-20261107-01a1a5fd. 기록시각 2026-11-07T11:28:23+09:00. 기록자·구현판단 Codex /root, 요청·커밋결정 사용자. 출처 현재채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072의 “로딩이 오래 걸리는데, 일단 띄울 수 있는 것부터 띄우고, 다 비동기 로딩으로 전환하고, 유닛 로딩 중이면 로딩 progress 동글동글하게 그거 보여주고”, 타원 지목 첨부 ae6392aa 및 “빨리 고치고 커밋해”. 원발언 정확시각·항목ID 불명.
-- 범위: 실험실과 인게임의 화면·준비된 유닛을 먼저 표시하고 자산을 독립 비동기 로드한다. 로드 중인 유닛에는 작은 회전 원형 표시를 사용한다. 전투 종료 시 살아 있는 유닛 몸 전체를 둘러싸던 세로 반투명 타원을 제거하며 발밑 체력 링은 유지한다. 카메라·스탯·공격주기·편집기능은 이번에 변경하지 않는다.
-- 판단·보호: assets.js 전체 file 자산 로드와 game/실험실 ready 대기가 초기표시를 막고, unit-action-art.prepare는 전체 pending을 기다린다. 요청별 로딩과 실제 준비 여부를 분리해 확인한다. 사용자 지정 GPT-6.1 Sol low 워커가 구현하고 메인은 코드·실화면을 검수한다. 현재 다른 작업의 staged/unstaged/untracked와 같은 파일의 다른 hunks를 보존한다. 이번 명시지시는 로컬 커밋까지이며 별도 푸시는 하지 않는다. 관련 보드0 확인 재사용. 구현 전 원본은 literal $Trash/combat-loading-20261107/before에 보존했다.
-## 전투 수정 main 푸시 완료 · 01a1a5fd 현재 요약
+- 기록 ID: unit-table-final-pushed-20261107-01a1b3ae. 기록·원격 관측 시각 2026-11-07T11:34:56+09:00. 기록자·Git 실행/검수 Codex /root, 변경·즉시 커밋/기존 업로드·메모리 보완 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 및 explicit-cells/final-commit-result.json, 실제 push/ls-remote/rev-parse 결과. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 실제 완료: b803dcebae479b2a8e9fce3604fc05c54e359ce2 ‘유닛 표 미사용 칸과 작업 동작 및 기본 방향 정리’를 origin/main에 푸시했다. 시작 checkout HEAD와 정확한 원격 main이 모두 같은 커밋이다. 제품5파일과 관련 메모리6기록을 포함하는6경로 +146/-21이며 별도 배포는 수행하지 않았다.
+- 검수/보호: unit-table-final-check의 표108표시·작업48칸·중립18반전 및 화면 결과를 재사용했고 최종 staged diff와 check를 확인했다. 처음 private index 제품 blob이 Git의 줄끝 필터를 거치지 않은 것은 최종 동결 전에 정상 필터로 다시 담아 전체파일 잡음을 제거했다. 제품5파일 형식 OK, 기존 혼합줄끝 메모리는 동일 Mixed/불일치줄없음으로 보고돼 원본 HEAD 본문을 바이트보존하고 관련 기록만 추가했다. 공유 index 보존본 일치 true, 작업파일 덮기없음. 다른 작업의 변경과 staged 상태를 유지했다.
+- 요청·지정 칸/우선순위·미제작/영구미사용 구별·재사용 방식·한계·검수·실제 Git 결과까지 메모리 누락 비교 완료. 이 사후 성공 영수증은 로컬에 남기고 자동 메모리 전용 후속커밋 없이 다음 승인 관련 커밋으로 이월한다.
 
-- 기록 ID: combat-repair-pushed-20261107-01a1a5fd. 기록·실제관측시각 2026-11-07T11:21:57+09:00. 기록자·Git검수 Codex /root, 푸시결정 사용자. 출처 현재채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 전체작업·검수·즉시업로드·재개 지시와 실제도구결과; literal $Trash/combat-repair-20261107의 commit-result.json/push-result.json/preservation-result.json.
-- 완료: ca7033225283f8ea70e727847bf98782a0a52f87 ‘전투 주기와 유닛 배치 및 방향 수정’을 전용 origin/main에 푸시했다. 부모2d88dfeeace0b9faeb9d7439e8e9735a95c6289b의병행승인커밋을유지했고 시작local main과정확remote main readback은모두ca70332로일치했다. 별도branch/Site배포없음.
-- 범위/보호: 전투33경로 +4709/-284, 관련메모리6섹션45줄만포함. 별도index·HEAD CAS로공용index의다른entry를보존했고 완료후실제entry가준비한보존본과동일함을직접확인했다. Git완료과정working제품파일덮기0. 초기staging의memory혼합줄끝정규화는폐기하고원본바이트를보존해45줄추가만최종검토했다. 임시스크립트PowerShell정규식보간과검수출력buffer오류는각각리터럴처리/충분한buffer로수정해후속검사완료했으며제품오류로혼동하지않는다.
-- 검수: 관련61·simulation16·dice3 검사가각검수범위에서통과했고최신채집동작교집합과방향metadata만표적재검증했다. 양쪽5대5연속snapshot·lab주사위자동종료·공통엔진접점/타깃/효과고유성검수는앞선근거대로통과했다. 전체저장소전수검사나미완성에셋전부완료로확대하지않으며이전구형rig해시검사이력도보존했다.
-- 본결과는commit후확인한사실로로컬memory에만기록한다. 자동memory-only후속commit/amend없이다음승인된관련commit에넘긴다. 요청·판단·변경·검수·보호·푸시결과누락점검완료.
 ## 유닛 표 지정 칸·작업 동작·방향 검수 완료 · 01a1b3ae 현재 요약
 
 - 기록 ID: unit-table-final-check-20261107-01a1b3ae. 기록 시각·요약 근거 시각 2026-11-07T11:32:39+09:00. 기록자·검수 주체 Codex /root, 변경/즉시 커밋 및 메모리 보완 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 및 literal $Trash/unit-table-header-01a1b3ae/explicit-cells/render-result.json, direction-result.json, work-desktop.png, work-lightbox.png, work-narrow.png. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
@@ -58,6 +80,12 @@
 - 검수: 격리된 Edge 실화면에서 작업48칸·placeholder108칸, 중립76칸 전부, 지정12개 빈칸, 묶음순서, 운반 확대 자원과512px표시 확인. desktop/narrow 화면과 스크롤 뒤 헤더 고정을 직접 확인했고 pageerror0/관찰한 matrix로딩실패0이다. 별도 GIF2종 보완 후 해당 표 transform과 확대 is-unit-mirrored를 표적 재확인했다. 기존 미제작 클립은 새로 만들었다고 하지 않으며 새싹콩 안테나 운반은 기존 기본 외형을 사용한다.
 - 마감: task 관련6경로와 위 결정 기록만 별도 index로 동결해 커밋·푸시한다. 공유 index와 다른 채팅 변경은 보존한다. 성공 여부는 후속 실제 Git 결과로 갱신한다.
 
+## DesignAssets 폴더 교정 푸시 완료 · 01a1b3b0 현재 요약
+
+- 기록 ID: design-assets-relocation-pushed-20261107-01a1b3b0. 기록·원격확인 시각 2026-11-07T11:31:02+09:00. 기록자·Git실측 Codex /root, 교정/기존푸시결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 와 relocation-commit.json·실제push/ls-remote. 원발언 정확시각·항목ID 불명,H:/Spawner Windows PowerShell.
+- 완료:5f0431d8abeb57ac1b0a71f72720c99202113364 ‘기획서 파일을 DesignAssets로 이동’를 origin/main에 푸시했고 원격/시작local HEAD 일치·unmerged0을 확인했다.23문서파일rename과루트/빌드경로·관련메모리24줄만포함한다. 처음로컬후보의메모리Git필터정규화는푸시전에원래Mixed바이트로교정해기존본문변경0·24추가0삭제로확인했다.
+- 구조는루트Design.html→DesignAssets의7페이지→sections의13섹션이며별도Design디렉터리는제거했다. 형식/경로치환외23파일내용동일·file://7페이지로딩오류0확인. 다른채팅CSS/유닛표미커밋변경은새경로작업트리에보존하고커밋에서제외했다. 요청/교정/검수/보호/푸시결과점검완료. 이사후영수증은로컬기록이며추가memory-only커밋·배포없음.
+
 ## 유닛 작업 동작 재사용과 중립 미사용 칸·기본 방향 확정 · 01a1b3ae 현재 요약
 
 - 기록 ID: unit-table-work-neutral-20261107-01a1b3ae. 기록 시각 2026-11-07T11:30:23+09:00. 기록자·구현 판단 Codex /root, 동작 재사용·표시 범위·커밋 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 의 칼날/분비/갑각 작업 동작 재사용, 안테나 idle 채집, 중립 탄생/채집/운반/투척 no image, 왼쪽 공격 방향 반전, 모두 완료 후 즉시 커밋 및 메모리 보완 직접 지시. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
@@ -65,12 +93,36 @@
 - 중립19종 탄생/채집/운반/투척76칸은 모두 영구 미사용 no image 대상이다. 기존 근접전용12종 원거리·기본형16칸·채집기관 원거리4칸 지정은 유지한다. 공격 원본 방향이 왼쪽인 중립18종은 표와 확대 기본 재생을 오른쪽으로 반전하고 이미 오른쪽인 가시등딱정벌레는 유지한다. 제작 대상 빈칸 전체를 일괄 채우지 않는다.
 - 갱신 관계: unit-table-explicit-cells 및 secretion-melee-empty, carapace-order 기록의 결정을 보존하며 작업 동작48칸만 이번 재사용 승인으로 채운다. 병행 경로교정으로 현재 문서 위치는 DesignAssets/codex-units.html, DesignAssets/sections/unit-appearance.js, DesignAssets/design.css이다. 실제 검수와 커밋/푸시 결과는 확인 후 기록한다.
 
+## 문서 폴더 교정 검수·커밋 범위 동결 · 01a1b3b0
+
+- 기록 ID: design-assets-relocation-freeze-20261107-01a1b3b0. 기록 시각 2026-11-07T11:29:53+09:00. 기록자·직접검수 Codex /root, 같은 결과의 수정·푸시 결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 의 ‘고쳐’ 및 앞선 ‘얼른 해서 올려라’와 실제 relocation-verification.json. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 직접 확인:23개 문서파일을 기존 DesignAssets로 옮기고 경로치환 이외 바이트동일, 기존 Design폴더없음, UTF8NoBom/CRLF, build구문, file://7페이지 로딩과 오류0을 확인했다. 루트메뉴7/문서3단계/13섹션 구조는 유지한다.
+- Git후보는 HEAD의문서23파일을경로치환한rename과루트/빌드참조수정·본채팅관련메모리만이다. 옮겨진CSS/유닛표의다른채팅미커밋변경은후보에서제외하고작업트리의새경로에동일하게남긴다. 기존다른index/미추적/자산은보존한다. Projects0조회재사용,새브랜치·사이트배포없음. 요청/교정/검수/보호/남은푸시대조를마쳤으며실제성공은후기록한다.
+
+## 전투 점진 로딩과 타원 제거 시작 · 01a1a5fd 현재 작업
+
+- 기록 ID: combat-loading-start-20261107-01a1a5fd. 기록시각 2026-11-07T11:28:23+09:00. 기록자·구현판단 Codex /root, 요청·커밋결정 사용자. 출처 현재채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072의 “로딩이 오래 걸리는데, 일단 띄울 수 있는 것부터 띄우고, 다 비동기 로딩으로 전환하고, 유닛 로딩 중이면 로딩 progress 동글동글하게 그거 보여주고”, 타원 지목 첨부 ae6392aa 및 “빨리 고치고 커밋해”. 원발언 정확시각·항목ID 불명.
+- 범위: 실험실과 인게임의 화면·준비된 유닛을 먼저 표시하고 자산을 독립 비동기 로드한다. 로드 중인 유닛에는 작은 회전 원형 표시를 사용한다. 전투 종료 시 살아 있는 유닛 몸 전체를 둘러싸던 세로 반투명 타원을 제거하며 발밑 체력 링은 유지한다. 카메라·스탯·공격주기·편집기능은 이번에 변경하지 않는다.
+- 판단·보호: assets.js 전체 file 자산 로드와 game/실험실 ready 대기가 초기표시를 막고, unit-action-art.prepare는 전체 pending을 기다린다. 요청별 로딩과 실제 준비 여부를 분리해 확인한다. 사용자 지정 GPT-6.1 Sol low 워커가 구현하고 메인은 코드·실화면을 검수한다. 현재 다른 작업의 staged/unstaged/untracked와 같은 파일의 다른 hunks를 보존한다. 이번 명시지시는 로컬 커밋까지이며 별도 푸시는 하지 않는다. 관련 보드0 확인 재사용. 구현 전 원본은 literal $Trash/combat-loading-20261107/before에 보존했다.
+## 문서 폴더 위치 교정 · 01a1b3b0 현재 요약
+
+- 기록 ID: design-assets-folder-fix-20261107-01a1b3b0. 기록 시각 2026-11-07T11:28:15+09:00. 기록자·경로교정 Codex /root, 교정결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 의 ‘DesignAssets 폴더가 있는데 Design 폴더는 왜 또 만들어?’ 및 ‘고쳐’ 직접 요청. 원 발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 이전 별도 Design 디렉터리 생성 판단을 철회한다. Design.html만 루트에 두고 기존23개 페이지/섹션/공용파일을 기존 DesignAssets 아래 동일 상대구조로 옮긴다. 새 별도문서디렉터리는 만들지 않는다. 루트→페이지→섹션3단계와 페이지메뉴7개는 유지하며 URL/빌드 경로만 고친다.
+- 이동 직전의 동시 CSS/유닛표 미커밋 내용까지 바이트보존 사본으로 보호한다. 대상충돌0 및 Windows절대경로범위를 확인하고 파일별이동했으며 원래폴더는 비었을때만 제거한다. 직전23파일/루트/빌드 사본과 경로목록은 literal $Trash/design-split-01a1b3b0/before-folder-fix. 이전 같은 결과의 푸시 승인에 따른 교정이지만 다른 변경을 묶거나 별도배포하지 않는다. 검사·푸시성공은 아직 미확인이다.
+
 ## 갑각·안테나 순서와 갑각 공격 칸 교정 · 01a1b3ae
 
 - 기록 ID: unit-table-carapace-order-20261107-01a1b3ae. 기록 시각 2026-11-07T11:22:01+09:00. 기록자·코드 대조/적용 Codex /root, 순서교체·공격칸삭제 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 의 “안테나랑 갑각 순서 바꿔야겠다. 그리고 갑각의 근딜원딜 칸 다 지워. 갑각 우선순위 낮지 않았던가?” 및 첨부 이미지. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
 - 직접 근거: client/unit-display-appearance.mjs의 UNIT_DISPLAY_PRIORITY는 blade,secretion,carapace,antenna,feet이다. 갑각은 칼날·분비보다 낮고 안테나보다 높다. 따라서 갑각 대표외형에는 근접/원거리 기관이 없으며 칼날·분비가 있으면 그 상위 외형이 표시된다. 칼날에는 하위 분비를 숨겨도 원거리 동작이 필요하다는 직전 사용자 설명과도 일치한다.
 - 적용: 표 tbody의 갑각 묶음을 안테나 앞으로 이동한다. 갑각4종 attack 이미지4개를 표에서 제거하고 ranged-attack 기존 빈4칸과 함께8칸을 비운다. td/열은 보존하고 빈칸에 플레이스홀더를 추가하지 않는다. 실제 자산·게임 코드·우선순위 값은 바꾸지 않는다. 기존 기본형16/채집기관원거리4 no image와 칼날모든빈칸유지·분비근접4빈칸 결정을 함께 유지한다.
 
+## 전투 수정 main 푸시 완료 · 01a1a5fd 현재 요약
+
+- 기록 ID: combat-repair-pushed-20261107-01a1a5fd. 기록·실제관측시각 2026-11-07T11:21:57+09:00. 기록자·Git검수 Codex /root, 푸시결정 사용자. 출처 현재채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 전체작업·검수·즉시업로드·재개 지시와 실제도구결과; literal $Trash/combat-repair-20261107의 commit-result.json/push-result.json/preservation-result.json.
+- 완료: ca7033225283f8ea70e727847bf98782a0a52f87 ‘전투 주기와 유닛 배치 및 방향 수정’을 전용 origin/main에 푸시했다. 부모2d88dfeeace0b9faeb9d7439e8e9735a95c6289b의병행승인커밋을유지했고 시작local main과정확remote main readback은모두ca70332로일치했다. 별도branch/Site배포없음.
+- 범위/보호: 전투33경로 +4709/-284, 관련메모리6섹션45줄만포함. 별도index·HEAD CAS로공용index의다른entry를보존했고 완료후실제entry가준비한보존본과동일함을직접확인했다. Git완료과정working제품파일덮기0. 초기staging의memory혼합줄끝정규화는폐기하고원본바이트를보존해45줄추가만최종검토했다. 임시스크립트PowerShell정규식보간과검수출력buffer오류는각각리터럴처리/충분한buffer로수정해후속검사완료했으며제품오류로혼동하지않는다.
+- 검수: 관련61·simulation16·dice3 검사가각검수범위에서통과했고최신채집동작교집합과방향metadata만표적재검증했다. 양쪽5대5연속snapshot·lab주사위자동종료·공통엔진접점/타깃/효과고유성검수는앞선근거대로통과했다. 전체저장소전수검사나미완성에셋전부완료로확대하지않으며이전구형rig해시검사이력도보존했다.
+- 본결과는commit후확인한사실로로컬memory에만기록한다. 자동memory-only후속commit/amend없이다음승인된관련commit에넘긴다. 요청·판단·변경·검수·보호·푸시결과누락점검완료.
 ## 분비기관 근접 공격 칸 비우기 지정 · 01a1b3ae
 
 - 기록 ID: unit-table-secretion-melee-empty-20261107-01a1b3ae. 기록 시각 2026-11-07T11:20:58+09:00. 기록자·적용 Codex /root, 칸 비우기 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 의 분비기관 스크린샷 및 “여긴 근접 공격 다 비워. 포자버섯 근접공격은 삭제하고 비우고” 직접 지시. 원 발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
@@ -82,81 +134,23 @@
 - 최신 명시 대상: 기본형4종의 원거리공격/채집/운반/투척16칸, 채집기관4종의 원거리공격4칸을 이미지 없음 플레이스홀더로 표시한다. 기본형 모든작업도 미정이라 비워두겠다는 이전 correction의 해석은 이20칸에 한해 사용자 지정으로 대체한다. 칼날은 표현 우선순위가 높은 외형이라 모든 동작이 필요한 것으로 유지하며 기존 빈칸은 제작 대상이므로 표시하지 않는다. 다른 제작대상 빈칸이나 기존 이미지에는 적용하지 않는다.
 - 구조/경계: 전달받은 최신 guideline-design-generation.review.md 정본을 직접 재독했고 루트→페이지→섹션3단계·페이지 메뉴만·본문 파일분리 규칙을 적용한다. 현재 분리된 Design/design.css의 선택자2개만 기존 아이콘 규칙에 추가한다. 원본 그림·문구·헤더·페이지/섹션 구조는 수정하지 않는다. 이전 근거리전용 중립12종 원거리 표시도 유지한다. 현재 요청/후속 지정은 같은 작업으로 이어서 처리한다.
 
-## 미사용 칸만 표시 교정 푸시 완료 · 01a1b3ae 현재 요약
-
-- 기록 ID: unit-table-unavailable-pushed-20261107-01a1b3ae. 기록·관측 시각 2026-11-07T11:15:39+09:00. 기록자·Git 실행 Codex /root, 교정·기존 업로드 및 메모리 근거 판단 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b, correction/commit-result.json, 실제 push/ls-remote/rev-parse. 사용자 발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
-- 실제 완료: bff43c88d0fabec81cec00b5c21ae16e6ca2574e 「유닛 표 미사용 이미지 표시 범위 수정」을 origin/main에 푸시했고 원격과 시작 main tip이 동일하다. 기존 모든빈칸 규칙은 제거됐으며 승인 역할상 근거리 전용 중립12종의 원거리 칸만 흐린 아이콘을 표시한다. 플레이어48작업·혼합외형사격·중립원거리7종과 제작 여부 불명확한 다른 빈칸은 비워둔다. 헤더 고정은 유지한다.
-- 검수/보호: 12종 역할 일치·12셀 존재·플레이어 제외·전체빈칸 selector 제거와 형식 및 최종 staged diff/check를 확인했다. 병행 분리CSS에도 같은 selector를 반영했다. 다른 staged/unstaged/untracked와 최신 Git 이력을 유지했고2경로에 이번 selector와 관련3기록만 포함했다. 요청·판단근거/추론·교정·실제검수·원격일치 누락을 대조했으며 앞선 correction/freeze의 업로드대기는 본 확인으로 완료다. 이 사후 기록은 로컬 보존하고 메모리만 후속 커밋하지 않는다.
-
-## 문서 폴더 교정 검수·커밋 범위 동결 · 01a1b3b0
-
-- 기록 ID: design-assets-relocation-freeze-20261107-01a1b3b0. 기록 시각 2026-11-07T11:29:53+09:00. 기록자·직접검수 Codex /root, 같은 결과의 수정·푸시 결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 의 ‘고쳐’ 및 앞선 ‘얼른 해서 올려라’와 실제 relocation-verification.json. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
-- 직접 확인:23개 문서파일을 기존 DesignAssets로 옮기고 경로치환 이외 바이트동일, 기존 Design폴더없음, UTF8NoBom/CRLF, build구문, file://7페이지 로딩과 오류0을 확인했다. 루트메뉴7/문서3단계/13섹션 구조는 유지한다.
-- Git후보는 HEAD의문서23파일을경로치환한rename과루트/빌드참조수정·본채팅관련메모리만이다. 옮겨진CSS/유닛표의다른채팅미커밋변경은후보에서제외하고작업트리의새경로에동일하게남긴다. 기존다른index/미추적/자산은보존한다. Projects0조회재사용,새브랜치·사이트배포없음. 요청/교정/검수/보호/남은푸시대조를마쳤으며실제성공은후기록한다.
-
-## 문서 폴더 위치 교정 · 01a1b3b0 현재 요약
-
-- 기록 ID: design-assets-folder-fix-20261107-01a1b3b0. 기록 시각 2026-11-07T11:28:15+09:00. 기록자·경로교정 Codex /root, 교정결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 의 ‘DesignAssets 폴더가 있는데 Design 폴더는 왜 또 만들어?’ 및 ‘고쳐’ 직접 요청. 원 발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
-- 이전 별도 Design 디렉터리 생성 판단을 철회한다. Design.html만 루트에 두고 기존23개 페이지/섹션/공용파일을 기존 DesignAssets 아래 동일 상대구조로 옮긴다. 새 별도문서디렉터리는 만들지 않는다. 루트→페이지→섹션3단계와 페이지메뉴7개는 유지하며 URL/빌드 경로만 고친다.
-- 이동 직전의 동시 CSS/유닛표 미커밋 내용까지 바이트보존 사본으로 보호한다. 대상충돌0 및 Windows절대경로범위를 확인하고 파일별이동했으며 원래폴더는 비었을때만 제거한다. 직전23파일/루트/빌드 사본과 경로목록은 literal $Trash/design-split-01a1b3b0/before-folder-fix. 이전 같은 결과의 푸시 승인에 따른 교정이지만 다른 변경을 묶거나 별도배포하지 않는다. 검사·푸시성공은 아직 미확인이다.
-
 ## 공개 기획서3단계 지침 수신·정본 재독 · 01a1b3b0
 
 - 기록 ID: design-guideline-reloaded-20261107-01a1b3b0. 기록 시각 2026-11-07T11:18:53+09:00. 기록자·대조 판단 Codex /root. 출처 codex://threads/01a1b3b5-9122-7193-a5db-a3713d9feaad 에서 사용자 명시 전파 승인을 근거로 전달한 현재 메시지와 https://oojjrs.github.io/codex/guideline-design-generation.review.md 직접 재조회. 원 사용자 발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
 - 전달된 게시 커밋153a957a는 전달자 보고로 구분한다. 직접 읽은 공개 정본에서 루트는 목차/최소레이아웃만, 페이지/모든섹션 각각파일, 루트→페이지→섹션3단계, 섹션 중첩/추가중간헤더 금지, summary가 섹션헤더, 메뉴는페이지만/섹션은페이지본문자동통합 규칙을 확인했다. 이 기준을 이후 승인된 Design 작업에도 적용한다.
 - 현재 루트의본문없음/메뉴7개와 파일7페이지·13섹션을 대조했고, 앞서 본 채팅에서 직접 확인·푸시한2d88dfe의 평탄한 섹션 연결 근거를 재사용한다. 완료한 구조개편을 재시작하거나 다른 작업범위로 확대하지 않는다. 이번 통지 수신으로 제품파일·Git·외부게시를 추가 변경하지 않았으며 수신기록만 로컬 메모리에 남긴다.
 
+## Design 삼단계 파일 구조 지침 수신 · 현재 채팅
+
+- 기록 ID: gather-work-design-structure-guideline-20261107. 기록 시각 2026-11-07T11:18:35+09:00; 기록자 Codex /root, 지침 배포·전파 결정 사용자(전달 채팅의 명시적 승인 보고), 적용 경계 판단 Codex. 출처 전달 채팅 01a1b3b5-9122-7193-a5db-a3713d9feaad → 현재 채팅 01a1b349-c2f5-7410-817c-1a43af3819a8, H:/Spawner Windows PowerShell. 원발언 시각·항목ID 미제공.
+- 직접 확인: https://oojjrs.github.io/codex/guideline-design-generation.review.md 정본을 다시 읽었다. 최상위 Design.html은 목차·링크/최소 공통 레이아웃만, 모든 페이지·섹션은 분량과 무관하게 별도 파일, Design.html→페이지→섹션 3단계, 섹션 내부 중간 헤더/하위 섹션/중첩 details 금지, 메뉴는 페이지만, 페이지가 섹션을 순서대로 자동 합성한다. 게시 커밋 153a957aeb20cf6670af277ef27fa422019d0d4c는 전달자가 보고한 값이며 이 채팅은 정본 본문을 직접 확인했다.
+- 적용 경계: 본 채팅의 승인 애니/치유 변경은 5f4dc98로 이미 푸시 완료했다. 현재 진행 중인 다른 채팅의 전체 문서 분할을 중복 개편하지 않고 이후 이 채팅에서 승인받는 관련 문서 갱신은 새 구조의 해당 섹션 파일에 한정한다. 전달 자체를 완료 작업의 재커밋·재배포나 승인 범위 밖 전면 개편 권한으로 해석하지 않았다. 새 제품 코드·기획 문구·문서 구조 변경이나 추가 검수는 실행하지 않았다.
 ## 기획서3단계 파일 분리 푸시 완료 · 01a1b3b0 현재 요약
 
 - 기록 ID: design-split-pushed-20261107-01a1b3b0. 기록·원격 확인 시각 2026-11-07T11:17:11+09:00. 기록자·Git실측 Codex /root, 푸시 결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 및 실제 commit-result.json·push·ls-remote 응답. 원 발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
 - 완료: 2d88dfeeace0b9faeb9d7439e8e9735a95c6289b ‘기획서 페이지와 섹션 파일 분리’를 전용 origin/main에 푸시했다. 원격 readback과 시작 checkout HEAD가 같은 커밋이며 미해결 index0이다. 부모 bff43c8의 동시 CSS 의미 교정까지 통합한27경로이고 다른 코드/자산/삭제와 index는 보존했다.
 - 최종 구조/검수: Design.html→7페이지→13섹션, 섹션 중첩0/섹션메뉴0이며 각 섹션은 자신의 페이지 안에 연속 표시된다. 마지막 지도오류 수정후 참조952개보존·수정3페이지·지도규칙행생성·유닛43행·확대/닫기·pageerror0 확인. 기존2개 누락포자이미지 참조 한계는 유지한다. staging 검사의 새 CSS 빈줄공백1곳만 제거했다. 별도 사이트배포는 없으며 이 성공영수증은 커밋뒤 결과로 로컬 기록해 후속 memory-only커밋을 만들지 않는다.
 
-## 병행 승인 커밋 통합·최종 검수 범위 정정 · 01a1a5fd
-
-- 기록 ID: combat-repair-final-integration-20261107-01a1a5fd. 기록 시각 2026-11-07T11:16:25+09:00. 기록자·최종통합판단 Codex /root, 사용자 기존수정·검수·업로드 승인 지속. 출처현재채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의재개 및 실제Git/검사응답, finish_checks/finish_projection. 새사용자결정을추가하지않음.
-- 동결이후 다른채팅의DNA부분저장·치유기관폐기와채집12애니메이션, 승인원본이미지·기획서커밋이main에합쳐졌다. 원격과로컬분기1/1을관측했으나 재배치준비중다른작업에서이력을합쳐동일해졌으므로우리준비rebase는guard에서중단했고실행하지않았다. 최신부모기준으로후보를재투영하며다른승인커밋을유지한다. 최종부모ID는projection-manifest/commit-result에실측으로남기며옛cd3bd8f/34경로예정은현재33경로로대체한다.
-- 새HEAD에서치유기관폐기가확정되어옛simulation치유2검사만현재카탈로그기관0·치유량0·실제heal사건없음계약으로갱신했다. 기능복원·검사삭제·skip없이현재소스16/16과정확후보16/16통과. 같은태스크소스의기존타이밍/VFX61·dice3·양쪽실제5대5검수근거를재사용한다. 새채집코드가겹치는appearance/facing/timing25개재검수에서24통과,추가된12클립방향정보누락1개를검출해별도최소metadata보완을마무리중이다. 동작·시트·재생시간을임의변경하지않고그실제검수결과후동결한다.
-- 11:11:23경메모리최종부모기록의쓰기시도는다른프로세스의파일잠금으로실패해저장되지않았다. 그실패출력을성공기록으로간주하지않으며본기록으로통합이유/후보검수/남은정보를보완한다. 다른메모리/기획서/index는보호한다. 아직commit/push성공기록아님.
-## 전투 주기·실제 프로필·지면 배치 검수 완료 및 커밋 동결 · 01a1a5fd 현재 요약
-
-- 기록 ID: combat-repair-freeze-20261107-01a1a5fd. 기록 시각 2026-11-07T11:06:58+09:00. 기록자·검수 및 범위판단 Codex /root, 수정·검수·업로드 결정 사용자. 출처 현재채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 전체작업·즉시업로드/공중배치/타원질문/재개 발언과 실제도구응답; 구현 worker attack_timing, lab_profiles, grounded_formation 및 마무리 finish_checks, finish_projection. 사용자 정확발언시각·항목ID 불명, H:/Spawner Windows PowerShell.
-- 결과: 공격주기 nextAttackAt와 원본 애니 후반을 분리했다. 느린 공속은 동작 뒤 idle, 빠른 주기는 시각후반만 끊으며 미완료연타·명시회복 제약은 유지한다. 독립 공속·접점·방어·반격·기절·사망·타깃전환·발사/도착을 공통엔진으로 처리한다. lab 기본/주사위는 실제 중립 프로필과 네 종족 시작DNA를 사용하며 명시DNA/수치 편집입력은 유지한다. 확정되지 않은 신규스탯·가짜시작지연은 넣지 않았다. 기존 오른쪽 기본방향 정규화·동적줌·상단HP바제거·로컬초기화 수정도 포함한다.
-- 배치: 크기에따라 팀별열수를다르게 고르던 규칙을 인원수기반 공통배치로 바꿨다.5대5는 양쪽3명·2명 두줄, 발접점높이50~86% 지면, 공통줌과체급비례·비겹침을 유지한다. 인게임한쪽3명표시제한과선택우선재배치를제거하고 전원·고정순서·관측사망슬롯을사용한다.
-- 실제검수: 메인이 현재소스표적61/61을 직접실행해통과했고 worker dice는source/Combat20회씩3/3통과. 실제혼합5대5 양쪽화면60개연속engine snapshot에서 본체누락·잘림·공중발판0, 대형공격17시점같은편본체겹침·잘림0, lab실제주사위5대5자동종료 및 page/console/network오류0. 초기game누락4건은승리후combat=null 정상퇴장도대상으로잡은검수오라클오류였으며 회원필터교정followup0으로대체, 원결과보존. 메인이 lab/game 혼합이미지직접확인. server240frame5대5검사는실제10명source/target,효과ID고유,접점시각일치,retarget,방어·반격·기절·사망,투사체도착시각을확인했다.
-- 게시후보검수: 다른미커밋DNA/기획서변경을제외하고HEAD+본범위만투영했다. 후보 ESM로더검사 simulation16·appearance4·timing10 총30/30통과, 현재dirty DNA치유폐기로생긴기존검사실패는후보에서발생하지않는다. 이전구형rig해시보존검사불일치기록은원문유지하며이번에무관한자산을수정해가리지않았다. 생성3종구문/의존순서/원본동일성 및중첩worker2단계대조완료. 후보34파일 diffcheck0, 태스크텍스트UTF8NoBom/CRLF검수통과,공유memory기존혼합줄끝원문보존.
-- 범위/보호: client/game.js의전투/facing만, Spawner.html의비실행placeholder type만,생성번들의전투관련module/필수HEAD의존성만투영한다. 다른DNA편집기·기획서·자산·공용index·미추적작업은보존한다. 관련메모리는이기록과같은채팅의후속미커밋기록만같이담는다. 별도branch/배포없음. 현재HEAD cd3bd8f는다른채팅의이력을포함하며이를되돌리지않고전용origin/main으로추가commit/push한다. 성공은아직선기록하지않고 실제원격readback후로컬기록한다.
-- 타원질문답변: 실험실 fighter의 ended&&alive에서그리는큰반투명타원은종료후생존강조이며발밑체력링과별개다. 실제시작일꾼둘은공격기관이없어no-offense로즉시종료하므로양쪽켜진다. 사용자는무엇인지질문했으며삭제지시는없어그표시를임의삭제하지않았다.
-- 근거: literal $Trash/combat-repair-20261107의 game-lifecycle-followup.json, lab-lifecycle.json, live-engine.json, game-mixed.png, lab-mixed.png 및projection manifest/guard/diffcheck; 이전원본방향56쌍검수기록은바뀌지않은그림/방향근거로재사용했다. 요청·판단·변경·실제검수·제한·다음Git단계 누락점검완료.
-## 전투 주기·실제 스탯·지면 배치 수정과 푸시 승인 · 01a1a5fd 현재 요약
-
-- 기록 ID: combat-repair-authorized-20261107-01a1a5fd. 기록 시각 2026-11-07T10:41:19+09:00. 기록자·진단 및 구현판단 Codex /root, 수정·전체 검수·업로드 결정 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 ‘다 작업하고 전부 점검해서 이상 없게 해서 가져오고 바로 올려’ 및 후속 공중 배치 스크린샷 질문. 인간 발언 정확시각·항목ID 불명. H:/Spawner, Windows PowerShell.
-- 확인: lab 주사위는 외형 key만 바꾸고 공통 DNA 편집값을 복사하며 중립 species도 버려 실제 원종 스탯과 다르다. 서버 DNA recovery가 공격주기의 남은 시간을 채우고 beginAttack과 공용 appearance state가 그 endsAt까지 클립을 늘려 idle이 사라졌다. Git 기록상 늘임은 f9395086, DNA 잔여 recovery는 a8ab58f3부터이며 adaa42a2 공통화는 이를 유지했다. 최근 공통화가 최초 원인이라는 판단은 하지 않는다. 앞선 검수에서 이 동작을 놓친 책임과 실제 결과를 구분해 보고했다.
-- 배치 원인: 현재 combatViewLayout은 팀별로 가장 큰 cell을 얻는 열 수를 따로 고른다. 같은5명도 종별 크기에 따라2열3줄/3열2줄이 바뀌고 발판 기준이 화면 위10%부터 계산되어 언덕·공중에 놓인다. 후속 수정판단은 종 구성과 무관한 인원수 기반 고정 대형, 5명은3명·2명 두 줄, 양쪽 거울 대칭, 아래 지면 발판·공통 줌으로 맞추는 것이다. corpses가 제공되는 동안 슬롯을 보존하며 실제 소비 경로를 함께 검토한다.
-- 수정 계약: 실제 인게임 스탯/시작DNA를 lab 기본형에 사용하고 명시 편집값은 유지한다. 새 밸런스 수치·가짜 랜덤 지연은 넣지 않는다. 공격 주기와 native 애니 후반을 분리하고 공속만으로 동작을 느리게 늘이지 않는다. 각자의 cooldown, focus/연타/반격/기절/타깃 전환과 애니·VFX 판정을 대조한다. 빠른 공속에서도 native 후반 때문에 임의 공속 상한을 추가하지 않고 다음 동작이 후반을 끊을 수 있도록 검토한다.
-- 위임/검수: 사용자가 지정한 gpt-6.1-sol low 세 워커가 타이밍,lab 프로필,지면 배치를 분리 수행하고 메인은 소스·실제 양쪽 N:N 및 애니·이펙트 검수 결과를 대조한다. 현재 성공/커밋/푸시를 선기록하지 않는다. 이전 facing/카메라/주사위 미커밋 결과를 후보 범위로 이어받되 현재 main의 동시 작업은 의미별 분리하며 다른 변경과 index를 보호한다. 전용 origin https://github.com/oojjrs/Spawner 확인, 브랜치 생성 및 새 배포는 하지 않는다. 관련 기록을 수정 커밋에 함께 담고 검증 후 origin/main 푸시 및 시작 checkout 일치를 확인한다.
-## 유닛 오른쪽 기본 방향·전투 배치·로컬 초기화 검수 완료 · 현재 채팅
-
-- 기록 ID: combat-facing-spacing-complete-20261107-01a1a5fd. 기록 시각 2026-11-07T10:19:55+09:00. 기록자·구현/최종검수 Codex /root, 동작별 오른쪽 기준 통일·배치/줌 조정·상단HP제거·초기화수리 결정 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 직접 지시와 $Trash/combat-facing-20261107/final-result.json, pixel-facing-result.json 및 $Trash/combat-formation-20261107/{lab,game}-pixels.json 실제결과. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell. 읽기전용 서브검수 facing_audit는 요청된 gpt-6.1-sol/low로 수행했다.
-- 방향 결과: unitFacing은 모델의 실제 공격/이동 방향을 +1오른쪽/-1왼쪽으로 해석하고 공용 unitFrameMirror는 원본 방향과 전장 표시 방향을 결합한다. 원본128개에 sourceFacing을 명시했다(기본/분비/소기관82right, 왼쪽기준 칼날/갑각 및 해당동작46left). 이미 오른쪽인 기본 대기·이동·점프·우측공격은 유지한다. 왼쪽 기준 완성프레임은 최종 출력에서 접점을 중심으로 반전하며 atlas전체/프레임순서/시간/기관/승인해시를 바꾸지 않는다. registry에서 sourceFacing을 제외한 전체 데이터가 직전 사본과 정확히 일치함을 최종 확인했다. 정면형의 모호한 시선은 외형군 reference 기준을 따른다는 앞선 판단을 유지하며 공격변위 부호만으로 원본방향을 판정하지 않았다.
-- 코드 결과: 필드·실험실·인게임·통합 appearance·피격·시체·원거리 발사구·초상화 공용프레임에 같은 방향 계약을 사용한다. 렌더러가 combat.side를 모델facing으로 역해석하던 부분과 상세화면의 가짜side 재할당을 제거했다. 월드/전장의 서로 다른 side좌표계 자체는 보존했다. 피격에서는 논리적 screenSide와 원본보정 후 sourceSide를 분리해 알려진 hitSide 및 기본 정면 피격의 좌우 그룹을 보존한다. 중립 원본left 보정과 발사구 x변환도 같은 함수로 처리하고 방향미지정 기본값은 오른쪽이다. 공개28개 관련모듈 사본이 현재원본과 일치함을 확인했다.
-- 배치/HP/초기화: 양 진영 가변 크기 격자와 여유영역을 공용 combatViewLayout으로 계산한다. 최대 유닛 체급 기준 기본줌에 편성의 공간제약을 함께 적용해 넓게 펼치고 상대비례/배경을 유지한다. 실험실 상단 HP숫자·굵은바·갱신/CSS를 제거했고 공격준비선·전장체력링은 보존했다. 입장스크립트 placeholder는 비실행type으로 명시해 entry.js가 한 번만 로드한다. 실제 로컬 인게임은 입장전 model/assets/gameScript 모두없음, 입장후 gameScript1개·정상welcome·빈오류상태를 확인했다. 앞선 SpawnerAssets.ready undefined와 중복초기화는 최종검수에서 발생하지 않았다.
-- 실제 렌더검수: 두 로컬 화면6편성×4플레이어=48건에서 카메라 전환/본체 상대크기를 확인했다. 작은/대형/최대성장 편성의 실제 alpha 픽셀 겹침0, 대형공격17시점에서 모든 표시 유닛의 잘림0·같은편 본체 겹침0이었다. 실제 스크린샷을 직접 열어 배치와 보정된 포자/샘방울 contact sheet를 확인했다. 실험실 실제 주사위로 양쪽5명 편성 후 자동전투가 약28초/153+사건 후 ended까지 진행, 양쪽로스터5와 page/console/network오류0. 인게임 실제 입장/전투패널도 오류0. 방향 픽셀은4종×7형태×idle/attack요청56쌍을 실제소스 모듈·원본이미지로 그려 좌우대칭을 확인했다. 미등록 동작의 자기원화 fallback도 포함하며 새 동작을 제작/승인했다고 주장하지 않는다.
-- 검수 oracle/수정 이력: 초기AA축소채널비교는 투명경계/서브픽셀 샘플링 차이로 실패했다. 해당 probe를 보존하고 원본2배 정수배율/nearest 샘플링으로 원본 프레임의 정확한 좌우 대응56쌍을 확인해 모두 일치했다. 제품 AA설정을 바꾸어 통과시키지 않았다. 실제 주사위검수에서는 복구한 구handler의 batchBusy 참조가 현재 축약UI에 없어 오류가 발생했고 이를 제거했으며 회귀 harness에서도 가짜batchBusy를 제거해 실제상태계약으로 검수했다. 공개 레거시 adapter 사본과 실제 source가 달라 art 준비 observer가 실패한 것은 해당공용렌더 adapter 사본만 현재소스로 동기화해 해결했다.
-- 테스트/남은 항목: 관련46개 고유회귀 중45개 통과. 기존 species-held-hurt의 V7 rig provenance 검사1개는 여전히 실패한다. spore/pebble/spring×blade/carapace6개 sourceRig의 현재SHA가 과거rigHash와 다르며, 그 기대해시가 이번수정전사본과 그대로 같음을 입증했다. 이 채팅은 rig파일/해시기록을 임의 수정해 검사만 통과시키지 않았다. 실제 게임 오류로 관측된 것은 아니며 전체검사무오류로 주장하지 않는다. 최종24텍스트UTF8NoBom/CRLF와 CRLF를허용한 scoped diff-check 통과, 범위/해시/public검사는 final-result.json에 보존했다.
-- 누락점검/완료상태: 최신 ‘이미 오른쪽인 동작 유지·왼쪽 동작만 반전’ 교정과 이전 배치/동적줌·상단HP·로컬오류·5:5검수 요청을 모두 대조했다. 제품20/회귀4와 본채팅기록이 이번작업범위다. 다른 채팅의 외형전환·승인애셋/포자퇴역·문서·DNA/Git작업을 보존했으며 원본그림 재생성·전체build·브랜치·stage·commit·push를 이 채팅에서 실행하지 않았다. 기존리그검사 한계와 실제두화면/전투성공을 구분해 최종응답한다.
-## 유닛 기본 방향 통일 판단 · 현재 채팅
-
-- 기록 ID: combat-facing-unification-start-20261107-01a1a5fd. 기록 시각 2026-11-07T09:52:05+09:00. 기록자·방향 구현판단 Codex /root, 오른쪽기본방향과 왼쪽애니반전 결정 사용자. 출처 현재채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 두 직접 지시와 source contact sheet·read-only subworker facing_audit(명시된 gpt-6.1-sol/low) 조사. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
-- 요구 교정: 플레이어블4종족을 통째로 뒤집지 않는다. 기존 오른쪽 기본형 idle/jump/walk/attack은 유지하고 왼쪽을 바라보는 동작의 출력 프레임만 오른쪽 기본으로 정규화한다. 진영/월드 좌표의 side 의미는 서로 달라 side부호 자체를 통일하지 않고 실제 바라볼 facing(+1오른쪽/-1왼쪽)을 공통으로 사용한다.
-- 관측: 기본21클립, 기관·원거리38클립, 기관공격8클립의 실제0/중간/접촉주변 프레임을 $Trash/combat-facing-20261107 contact sheet로 확인했다. 기본형은 우측 attack 폴더 및 우측 진행을 유지한다. V7 칼날/갑각 계열은 사용자가 지적한 왼쪽 기준 외형군으로 분리해 reference와 각action에 sourceFacing=left를 명시하고 완성된 단일 프레임을 접점 주위에서 반전한다. 정면형 외형은 방향이 시각적으로 불명확하므로 같은 외형군의 reference 방향을 따른다는 Codex판단이다. 기본/분비/소기관 원본은 right로 명시한다. 공격변위 부호만으로 시선 방향을 판정하지 않는다.
-- 구현: 공용 unitFacing/unitFrameMirror에서 모델의 실제 방향과 원본의 방향을 분리한다. 최종 출력에서 원본left 보정과 전장left 표시 반전을 한 번씩 결합해 시간/프레임순서/피벗/기관부착점을 유지한다. 원본atlas 전체반전·그림재생성·좌우그룹물리재배열은 하지 않는다. 방향별피격은 합성된 반전 여부로 sourceSide를 선택해 좌우피격 의미를 유지한다. 초상화/미리보기도 같은 정규화된 완성프레임을 사용한다. 중립의 left 원본도 공용함수의 sourceFacing으로 명시해 표시방향은 같은 계약으로 계산한다.
-- 동시상태: 작업중 파일세트가 legacy<->unit-action-art 경로로 바뀌었고 일부 카메라·메모리 변경이 사라졌다가 다시 나타났다. 현재 실제 unit-action-art가 공용단일출력경로인 상태를 기준으로 최소수정하고 구architecture를 복구하지 않는다. 초기 HTML prefix복구는 guard가 현재tail변경을 감지해 쓰기 전에 중단됐다. 이후 현재파일의 입장구조가 정상이고 game inline본문이 제거된 것을 확인했다. 앞선 prefix기록의 실행예정은 완료로 해석하지 않는다. 배치/HP/입장 수정 요청도 계속 보존하고 최종현재파일을 재검수한다.
-## 로컬 입장 HTML 추가 손상 확인·최소 복구 · 현재 채팅
-
-- 기록 ID: combat-entry-prefix-repair-20261107-01a1a5fd. 기록 시각 2026-11-07T09:36:55+09:00. 기록자·관측/복구 판단 Codex /root, 초기화 수리 승인 사용자. 출처 현재 채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072 및 실제 로컬 입장 검수.
-- 검수에서 입장 버튼 null 오류가 발생했다. 현재 Spawner.html은 doctype 다음에 raw game.js 본문이 들어가고 원래 head/body/입장UI/runtime placeholder가 사라져 있었다. 이번 apply를 작업전7사본에 재실행한 dry-run 기대결과에는 온전한 입장 구조가 남으며, 현재 raw본문은 현재client/game.js 및 아래의 정상game placeholder본문과 정확히 같다. music-catalog placeholder 이후 tail은 이번 기대결과와 정확히 일치한다. 손상 발생 주체·원인은 확정하지 않는다.
-- 현재 요청의 인게임 로컬 초기화 수리 범위로 판단해 doctype부터 첫music placeholder 직전까지만 기대결과의 정상 head/body/runtime 구조로 교체한다. 정확히 같은 tail은 그대로 보존한다. 추가손상 사본을 task $Trash에 저장하고 현재바이트가 검사시점과 일치할 때만 쓴다. 이전 보호변경 및 우리 배치/type수정이 포함된 기대prefix를 사용하며 전체파일rollback이나 다른작업수정은 하지 않는다.
 ## 문서3단계 분리 검수 완료·푸시 동결 · 01a1b3b0 현재 요약
 
 - 기록 ID: design-split-push-freeze-20261107-01a1b3b0. 기록 시각 2026-11-07T11:16:26+09:00. 기록자·검수/범위 판단 Codex /root, 구조·푸시 결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 의 ‘얼른 해서 올려라 바쁘다’와 실제 도구 결과. 원 발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
@@ -164,12 +158,54 @@
 - 실제 검수: 변경 텍스트 CRLF/UTF8NoBom, JS구문, 자산참조952개 누락/추가0 확인. 초기 평탄화로 지도 root 아래에서 규칙표를 찾던 null 오류를 문서 범위 조회로 고쳤다. 최종 로컬 Edge에서 지도 규칙행 생성·수정된3페이지·유닛43행·이미지 확대/닫기·menu7/sectionmenu0·pageerror0을 확인했다. 처음 규칙표 검사는 원래 접힌 행을 visible로 기다려 실패한 검수 코드 오류였으며 attached로 교정해 확인했다. 앞선 나머지4페이지 확인과 desktop/mobile 캡처를 재사용한다.
 - 범위: 분리되는 현재 Design 내용 및 공용파일, 필수 build/design-page 경로 보정, 이 채팅 메모리만 커밋한다. 다른 코드/자산/삭제/index/미추적/메모리변경은 제외한다. 기존문서의 미커밋5행도 전체 문서 구조이동에 필요한 기존내용 보존으로 분리파일에 그대로 옮긴다. Projects0 결과 재사용. 기존 삭제된 포자탄생2파일 참조 한계는 유지한다. 사용자 마지막 지시로 앞선 미커밋종료 상태를 푸시승인으로 대체하며 배포는 추가하지 않는다. 실제 커밋/푸시 성공은 확인 후 기록한다.
 
+## 병행 승인 커밋 통합·최종 검수 범위 정정 · 01a1a5fd
+
+- 기록 ID: combat-repair-final-integration-20261107-01a1a5fd. 기록 시각 2026-11-07T11:16:25+09:00. 기록자·최종통합판단 Codex /root, 사용자 기존수정·검수·업로드 승인 지속. 출처현재채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의재개 및 실제Git/검사응답, finish_checks/finish_projection. 새사용자결정을추가하지않음.
+- 동결이후 다른채팅의DNA부분저장·치유기관폐기와채집12애니메이션, 승인원본이미지·기획서커밋이main에합쳐졌다. 원격과로컬분기1/1을관측했으나 재배치준비중다른작업에서이력을합쳐동일해졌으므로우리준비rebase는guard에서중단했고실행하지않았다. 최신부모기준으로후보를재투영하며다른승인커밋을유지한다. 최종부모ID는projection-manifest/commit-result에실측으로남기며옛cd3bd8f/34경로예정은현재33경로로대체한다.
+- 새HEAD에서치유기관폐기가확정되어옛simulation치유2검사만현재카탈로그기관0·치유량0·실제heal사건없음계약으로갱신했다. 기능복원·검사삭제·skip없이현재소스16/16과정확후보16/16통과. 같은태스크소스의기존타이밍/VFX61·dice3·양쪽실제5대5검수근거를재사용한다. 새채집코드가겹치는appearance/facing/timing25개재검수에서24통과,추가된12클립방향정보누락1개를검출해별도최소metadata보완을마무리중이다. 동작·시트·재생시간을임의변경하지않고그실제검수결과후동결한다.
+- 11:11:23경메모리최종부모기록의쓰기시도는다른프로세스의파일잠금으로실패해저장되지않았다. 그실패출력을성공기록으로간주하지않으며본기록으로통합이유/후보검수/남은정보를보완한다. 다른메모리/기획서/index는보호한다. 아직commit/push성공기록아님.
 ## 문서3단계 분리 검수 완료·푸시 동결 · 01a1b3b0 현재 요약
 
 - 기록 ID: design-split-push-freeze-20261107-01a1b3b0. 기록 시각 2026-11-07T11:15:58+09:00. 기록자·검수/범위 판단 Codex /root, 구조·푸시 결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 의 ‘얼른 해서 올려라 바쁘다’와 실제 도구 결과. 원 발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
 - 최종 결과: Design.html→7페이지→13섹션의3단계다. 메뉴7개/섹션메뉴0, 각섹션은 정확히 한 페이지에서만 직접 로딩하며 섹션 안에 섹션 참조0이다. 문구·동작·이미지는 현재 기획서에서 옮겼다. 분리 중 원격/동시 커밋의 채집12클립·치유DNA정리·샘방울피격도 현재 index 문서와 대조해 새 섹션에 반영했고 CSS의 동시 빈칸 의미 교정도 보존한다.
 - 실제 검수: 변경 텍스트 CRLF/UTF8NoBom, JS구문, 자산참조952개 누락/추가0 확인. 초기 평탄화로 지도 root 아래에서 규칙표를 찾던 null 오류를 문서 범위 조회로 고쳤다. 최종 로컬 Edge에서 지도 규칙행 생성·수정된3페이지·유닛43행·이미지 확대/닫기·menu7/sectionmenu0·pageerror0을 확인했다. 처음 규칙표 검사는 원래 접힌 행을 visible로 기다려 실패한 검수 코드 오류였으며 attached로 교정해 확인했다. 앞선 나머지4페이지 확인과 desktop/mobile 캡처를 재사용한다.
 - 범위: 분리되는 현재 Design 내용 및 공용파일, 필수 build/design-page 경로 보정, 이 채팅 메모리만 커밋한다. 다른 코드/자산/삭제/index/미추적/메모리변경은 제외한다. 기존문서의 미커밋5행도 전체 문서 구조이동에 필요한 기존내용 보존으로 분리파일에 그대로 옮긴다. Projects0 결과 재사용. 기존 삭제된 포자탄생2파일 참조 한계는 유지한다. 사용자 마지막 지시로 앞선 미커밋종료 상태를 푸시승인으로 대체하며 배포는 추가하지 않는다. 실제 커밋/푸시 성공은 확인 후 기록한다.
+
+## 미사용 칸만 표시 교정 푸시 완료 · 01a1b3ae 현재 요약
+
+- 기록 ID: unit-table-unavailable-pushed-20261107-01a1b3ae. 기록·관측 시각 2026-11-07T11:15:39+09:00. 기록자·Git 실행 Codex /root, 교정·기존 업로드 및 메모리 근거 판단 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b, correction/commit-result.json, 실제 push/ls-remote/rev-parse. 사용자 발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 실제 완료: bff43c88d0fabec81cec00b5c21ae16e6ca2574e 「유닛 표 미사용 이미지 표시 범위 수정」을 origin/main에 푸시했고 원격과 시작 main tip이 동일하다. 기존 모든빈칸 규칙은 제거됐으며 승인 역할상 근거리 전용 중립12종의 원거리 칸만 흐린 아이콘을 표시한다. 플레이어48작업·혼합외형사격·중립원거리7종과 제작 여부 불명확한 다른 빈칸은 비워둔다. 헤더 고정은 유지한다.
+- 검수/보호: 12종 역할 일치·12셀 존재·플레이어 제외·전체빈칸 selector 제거와 형식 및 최종 staged diff/check를 확인했다. 병행 분리CSS에도 같은 selector를 반영했다. 다른 staged/unstaged/untracked와 최신 Git 이력을 유지했고2경로에 이번 selector와 관련3기록만 포함했다. 요청·판단근거/추론·교정·실제검수·원격일치 누락을 대조했으며 앞선 correction/freeze의 업로드대기는 본 확인으로 완료다. 이 사후 기록은 로컬 보존하고 메모리만 후속 커밋하지 않는다.
+
+## 미사용 동작 표시 교정 검수·푸시 동결 · 01a1b3ae
+
+- 기록 ID: unit-table-unavailable-freeze-20261107-01a1b3ae. 기록 시각 2026-11-07T11:14:40+09:00. 기록자·구현/검수 Codex /root, 의미 교정 및 기존 업로드 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 와 correction/check.json 및 형식 검사·fetch 결과. 사용자 발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 실제 결과: 모든 빈칸 selector를 근거리 전용12종 ranged-attack 빈칸의 명시 ID목록으로 교체했다. 카탈로그12종 동일·해당12개 셀 존재/비어있음·전체빈칸규칙 제거·플레이어 칸 제외를 확인했다. 현행 분리CSS UTF8NoBom/CRLF OK, 기존 memory Mixed NeedsReview는 원문 보존했다. 새 레이아웃/그림 변경이 없어 selector 범위 검수로 한정했다.
+- Git/보호: 이전 관측의 분기는 병행 동기화로 해소돼 시작 main과 fetch한 origin/main이 5f4dc981f6f086a62809f8677c62d3a435da35e2로 일치한다. 최신 승인 행/기존 로컬 이력을 보존하고 이번 CSS selector 한 곳과 본 채팅 미반영 기록만2경로로 동결한다. 분리된 현행 Design/design.css에도 같은 교정을 유지하고 다른 페이지 분리 파일 전체는 게시하지 않는다. 요청·교정·근거/추론·검수·보호범위 누락 점검 완료, 아직 교정 푸시 전이다.
+
+## 승인 채집 동작·치유 퇴역 푸시 완료 · 현재 채팅
+
+- 기록 ID: gather-work-pushed-20261107. 기록 시각 2026-11-07T11:14:20+09:00; 기록자·Git 실행/확인 Codex /root, 승인·적용·push·검수 축소 결정 사용자. 출처 현재 채팅 01a1b349-c2f5-7410-817c-1a43af3819a8, H:/Spawner Windows PowerShell, publication.json 및 실제 git push/ls-remote 응답. 발언 정확시각·항목ID 미제공.
+- 실제 완료: 5f4dc981f6f086a62809f8677c62d3a435da35e2 「채집기관 작업 애니 적용과 치유 DNA 정리」를 origin/main에 푸시했다. push 직후 원격 refs/heads/main과 시작 체크아웃 main이 같은 해시임을 확인했다. 원격 3e8b73c 위에 기존 로컬 DNA 부분 저장 커밋을 4a9d052c2830015e22d59342fb65b4ddb2971a68로 rebase해 보존한 뒤 본 범위를 연결했다. 원래 인덱스는 refs/codex-preserve/gather-work-20261107-1794017604963 및 task 임시 백업에 보존했고 다른 staged·미커밋 변경은 유지했다.
+- 포함: 승인 4종족×3동작 12클립, 96px 미리보기/표지24개, 원본/참고 GIF20개, 전용클립 등록·게임 운반물 중복억제·투척 시계, 기획표, healer/healPower 퇴역과 기존 DNA 읽기 호환·관련 회귀다. 현재 외형 우선순위 및 상위4외형의 별도 작업48개 요구는 유지하며 그48개를 완료했다고 주장하지 않는다. 기존 192프레임/운반12·투척4/33회귀 성공을 재사용했다. 최종 소스 반복검수는 하지 않았고 실제 충돌 번들 구문과 staged diff만 확인했다.
+- 후속 범위/차단 정정: 작업 중 별도 채팅이 Design.html을 분할 문서 진입점으로 바꿨다. 분할된 유닛·속성·세계 파일까지 함께 수정하려던 실행은 자동 승인 검토가 부수 변경 범위 불명확 사유로 거절했다. 그 추가 변경 코드를 제거한 안전한 대안으로 승인된 기존 Git 문서 범위만 커밋했고 로컬의 새 분할 파일과 진입점은 덮지 않았다. 본 채팅은 분할 문서 파일을 수정·stage·push하지 않았다. 임시 후보 전용 어댑터는 커밋하지 않았고 Site 배포는 실행하지 않았다.
+- 누락 점검: 현재 재개 지시·실제 적용/검수·rebase/기존 작업 보존·원격 일치·별도 48개 미제작 경계를 대조했다. 푸시 이후에만 확인 가능한 이 결과는 로컬 기록으로 남기고 메모리 전용 후속 커밋은 만들지 않는다.
+## 승인 채집 동작 적용·치유 퇴역 동결 · 현재 채팅
+
+- 기록 ID: gather-work-final-freeze-20261107. 기록 시각 2026-11-07T10:42:54+09:00; 기록자·구현/충돌해결 Codex /root, 시각승인·게임/기획서 적용·push 및 검수축소 결정 사용자. 출처 현재 채팅 01a1b349-c2f5-7410-817c-1a43af3819a8, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 미제공.
+- 최신 사용자 교정: 이미 통과한 검수는 충돌 없는 rebase 후 반복하지 않는다. 불필요한 후보 재구성/검수를 늘리고 지연을 다른 채팅 탓처럼 설명한 판단은 철회했다. 사용자가 승인한 세 채팅에 순서와 교정을 전달했고 포자 폐기 dd1e1d2 원격반영 후 본 작업을 잇는다.
+- 적용 범위: 승인한 네 종족 GIF의 harvest/carry/throw 12클립, 원본/참고 GIF, 96px 기획서 시트·표지, 공통 UNIT_ACTION_ART 등록·운반물 중복억제·투척 방출시계다. 기본형은 채집기관이 없어 작업/원거리 칸을 비우고 구작업은 참고 원본만 보존한다. 기존 기본28 미리보기/점프열삭제/외형표 통합은 부모이력에 적용되어 보존한다. 상위 blade/secretion/carapace/antenna의 자기외형 작업48개는 추후 제작 요구이며 이번12개를 그들에 재사용하거나 완료했다고 주장하지 않는다.
+- 치유: healer/healPower만 현행카탈로그 퇴역·복원DNA효과0·선택/기획표에서 제외한다. ID/GCT와 구DNA 읽기, healing 수혜배율·regeneration·lifesteal 및 기존효과원본은 보존한다. 속성 작업 채팅에 사용자 승인으로 전파했고 그 채팅의 부분저장 등 별도기능은 포함하지 않는다.
+- 실제 검수 근거: 최종 공통경로의 192개 월드 프레임 RGBA 원본일치, 운반12/투척4 중복억제, 상위외형·죽음 우선 및 모델무변이, 브라우저오류0(render-result.json). 관련 기존33회귀 통과(retirement-tests.log). 해당 결과를 재사용한다. 최신main과 6텍스트 실제충돌만 최신내용+우리 최소변경으로 해결했고 게임 번들은 기존 공식 build --runtime-only로 정상생성했다. 원본 재생성·검수 전수반복·Site 배포를 수행하지 않는다.
+- 동결/누락점검: 요청·승인·교정·결과·48개 미완료경계·Git 순서를 대조했다. 관련 source/기획표/정책/로더/공개번들·12클립·기획미리보기24·참고20 및 이 채팅 기록만 별도index에 담으며 병행 UI/방향/배치/부분저장 미커밋내용과 다른 메모리 기록은 보존한다. 아직 본커밋 push 성공기록은 아니며 최종staged검수 후 한국어커밋·정확 origin/main fetch/rebase/push/readback으로 마감한다.
+
+## 빈 칸 표시 의미 교정 · 01a1b3ae 현재 요약
+
+- 기록 ID: unit-table-unavailable-correction-20261107-01a1b3ae. 기록 시각 2026-11-07T11:12:19+09:00. 기록자·과거 근거 대조/추정 Codex /root, 교정·메모리 근거 판단 지시 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 의 “만들어넣어야 하는데 없는 것에도 채우면 안 되고, 앞으로도 안 만들 거에만” 및 “메모리 뒤져서 내가 지금까지 한 말을 근거로 추정해” 지시. 사용자 정확 발언 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 대체 결정: cd3bd8f의 모든 td:empty 자동표시 판단은 잘못됐으며 본 교정으로 철회한다. 이미지 부재를 제작 제외로 취급하지 않는다. 헤더 고정은 유지하고 기존 흐린 아이콘은 명시 미사용 셀에만 둔다. 이전 user 질문은 메모리로 판단하라는 최신 지시로 닫고 추가 확인을 요구하지 않는다.
+- 근거/추론: gather-work-four-approved-push-20261107 및 gather-work-native-registry-20261107은 칼날·분비·안테나·갑각4외형×4종족×3작업48클립을 후속 제작 대상으로 남긴다. bean-integrated-forms-approved-20261104-01a1a155에는 분비+칼날/갑피 혼합 외형과 조건부 사격 승인이 있고 client/blade-ranged.mjs에도 경로가 있어 비분비 외형 원거리도 일괄 제외하지 않는다. 기본형 운반/모든 플레이어 유닛 채집 및 생활 중립 보따리달팽이의 먹이 운반 기록까지 있어 다른 빈 작업칸은 비워 둔다. 폐기된 구형 탄생도 제작 포기 근거로 바꾸지 않는다.
+- 확정 비사용 범위: neutral-attack-role-implementation-start-20261105-01a1a0bf의 사용자 역할 승인과 server/creature-attack-role.mjs는 중립7종의 원거리 가능·나머지12종의 근거리 전용을 일치해서 명시한다. 이12종의 ranged-attack 빈 칸만 CSS의 명시 ID목록으로 표시한다. 원거리7종·모든 플레이어 동작·나머지 불명확 빈 칸은 제작 대상 또는 계획 미확정으로 보존한다. 새 제작 취소를 추정해 확정하지 않는다.
+- 작업 범위: 병행 분리된 Design/design.css의 같은 규칙만 현행 화면에 수정하며 페이지 분리 전체는 포함하지 않는다. 커밋된 단일 Design.html에는 같은 selector 교정만 투영하고 본 채팅 관련 기록과 함께 기존 즉시 업로드 승인 범위에서 수정 푸시한다. 아직 교정 검수/푸시 성공 전이다.
 
 ## 문서3단계 고정·섹션 중첩 금지 확정 · 01a1b3b0 현재 요약
 
@@ -190,62 +226,16 @@
 - 앞선15개 독립 탐색페이지 판단을 철회한다. Design.html의 메뉴는 원래7개 페이지 그대로 두고 선택 페이지 HTML을 본문 프레임에 로드한다. 하위8섹션은 파일만 분리하며 원래 위치·접힘·목차 범위를 그대로 해당 페이지 안에 삽입한다. file://에서도 열 수 있도록 섹션은 동기 script 기반 HTML 조각으로 저장하고 별도 섹션 메뉴/링크/탐색페이지를 제거한다. 기존 본문과 실제스탯/티어 공용 계산은 분리 전 원문을 보존한다.
 - 부모 루트가 메뉴/해시/뒤로 가기를 관리하고 하위 페이지가 미리보기·본문을 실행한다. 새 문구·게임 구현 변경 없이 파일 구조만 분리한다. 이전 기록의15개 페이지 및 섹션 탐색 설계는 이 명시 교정으로 대체된다. 실제 렌더/누락 검수는 아직 대기다.
 
-## 기획서 15개 페이지 분리·풀 완료 · 01a1b3b0 현재 요약
+## 전투 주기·실제 프로필·지면 배치 검수 완료 및 커밋 동결 · 01a1a5fd 현재 요약
 
-- 기록 ID: design-split-implemented-20261107-01a1b3b0. 기록 시각 2026-11-07T11:04:40+09:00. 기록자·구현 판단 Codex /root, 구조 분리 결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 의 현재 요청 및 직접 Git/파일 조작 결과. 원 발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
-- Git 관측: 최초 f546eed 충돌 한 곳은 upstream의 등록된 애니메이션을 유지해 해소했다. pull 중 원격이51faf24로 전진해 Design 로컬 변경 때문에 중단됐고, Design만 원본·base·remote·index 증거로 보존해 새 포자 분비형 탄생 셀을 합친 뒤 fast-forward했다. 최종 local/origin51faf24, unmerged0, 원격 변경 경로 외 모든 index 항목 동일을 직접 확인했다. 보존 stash와 다른 작업은 유지했다.
-- 구조: 최상위 Design.html은 기존 제목·목차 링크만 남겼고 Design/ 아래 기존7페이지와 이름 있는 하위8섹션을 총15개 HTML로 나눴다. 기존 내용·자산·페이지별 스크립트는 이동하고 CSS·라이트박스·탐색을 공용 파일로 분리했다. 원래 이름 없는 유닛 단일 비교표는 행 단위로 해체하지 않는다. 실제 스탯/티어는 같은 표 데이터와 계산을 공유해 별도 페이지에서 표시한다. 기존 해시를 새 소속 파일로 연결하고 build.mjs의 지도/자원/지형 출력 위치도 새 파일로 바꾼다.
-- 상태: 구조 편집은 로컬 미커밋이며 커밋·푸시·배포 권한으로 확대하지 않는다. 현재 분리 전 원본과 Git 보존본은 literal $Trash/design-split-01a1b3b0. 링크·문서 누락·렌더 확인은 아직 미완료다. 이 기록은 이전 start 기록의 진행 상태를 갱신하며 원기록을 보존한다.
-
-## 원격 풀·충돌 해소 및 기획서 페이지·섹션 분리 진행 · 01a1b3b0 현재 요약
-
-- 기록 ID: design-split-start-20261107-01a1b3b0. 기록 시각 2026-11-07T10:53:33+09:00. 기록자·구조 분리 판단 Codex /root, 요청·결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 의 현재 요청 2건. 원 발언 정확 시각·항목 ID·PC 식별 불명, H:/Spawner Windows PowerShell.
-- 사용자 요청: 원격 변경을 pull하고 충돌을 해소한다. 이어 Design.html을 최상위로 두고 기존 페이지뿐 아니라 각 섹션도 별도 서브페이지 파일로 모두 나누어 링크한다. 기존 문구·이미지·미리보기와 다른 채팅의 변경은 보존한다. 이 추가 구조 편집은 커밋·푸시·배포 요청으로 확대하지 않는다.
-- 직접 관측: main과 fetch한 origin/main은 f546eed이며 진행 중 merge/rebase 메타데이터는 없다. Design.html 한 곳에 Updated upstream/Stashed changes 충돌이 있고 다른 staged·untracked 작업과 보존 stash들이 있다. 연결 Projects는 0개다. 먼저 충돌 양쪽의 승인 자산 참조를 대조해 최소 해소한 뒤 페이지/섹션을 분리한다. 보존본은 literal $Trash/design-split-01a1b3b0에 둔다. 아직 pull 완료·충돌 해소·구조 분리 성공을 기록하지 않는다.
-
-## 미사용 동작 표시 교정 검수·푸시 동결 · 01a1b3ae
-
-- 기록 ID: unit-table-unavailable-freeze-20261107-01a1b3ae. 기록 시각 2026-11-07T11:14:40+09:00. 기록자·구현/검수 Codex /root, 의미 교정 및 기존 업로드 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 와 correction/check.json 및 형식 검사·fetch 결과. 사용자 발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
-- 실제 결과: 모든 빈칸 selector를 근거리 전용12종 ranged-attack 빈칸의 명시 ID목록으로 교체했다. 카탈로그12종 동일·해당12개 셀 존재/비어있음·전체빈칸규칙 제거·플레이어 칸 제외를 확인했다. 현행 분리CSS UTF8NoBom/CRLF OK, 기존 memory Mixed NeedsReview는 원문 보존했다. 새 레이아웃/그림 변경이 없어 selector 범위 검수로 한정했다.
-- Git/보호: 이전 관측의 분기는 병행 동기화로 해소돼 시작 main과 fetch한 origin/main이 5f4dc981f6f086a62809f8677c62d3a435da35e2로 일치한다. 최신 승인 행/기존 로컬 이력을 보존하고 이번 CSS selector 한 곳과 본 채팅 미반영 기록만2경로로 동결한다. 분리된 현행 Design/design.css에도 같은 교정을 유지하고 다른 페이지 분리 파일 전체는 게시하지 않는다. 요청·교정·근거/추론·검수·보호범위 누락 점검 완료, 아직 교정 푸시 전이다.
-
-## 빈 칸 표시 의미 교정 · 01a1b3ae 현재 요약
-
-- 기록 ID: unit-table-unavailable-correction-20261107-01a1b3ae. 기록 시각 2026-11-07T11:12:19+09:00. 기록자·과거 근거 대조/추정 Codex /root, 교정·메모리 근거 판단 지시 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 의 “만들어넣어야 하는데 없는 것에도 채우면 안 되고, 앞으로도 안 만들 거에만” 및 “메모리 뒤져서 내가 지금까지 한 말을 근거로 추정해” 지시. 사용자 정확 발언 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
-- 대체 결정: cd3bd8f의 모든 td:empty 자동표시 판단은 잘못됐으며 본 교정으로 철회한다. 이미지 부재를 제작 제외로 취급하지 않는다. 헤더 고정은 유지하고 기존 흐린 아이콘은 명시 미사용 셀에만 둔다. 이전 user 질문은 메모리로 판단하라는 최신 지시로 닫고 추가 확인을 요구하지 않는다.
-- 근거/추론: gather-work-four-approved-push-20261107 및 gather-work-native-registry-20261107은 칼날·분비·안테나·갑각4외형×4종족×3작업48클립을 후속 제작 대상으로 남긴다. bean-integrated-forms-approved-20261104-01a1a155에는 분비+칼날/갑피 혼합 외형과 조건부 사격 승인이 있고 client/blade-ranged.mjs에도 경로가 있어 비분비 외형 원거리도 일괄 제외하지 않는다. 기본형 운반/모든 플레이어 유닛 채집 및 생활 중립 보따리달팽이의 먹이 운반 기록까지 있어 다른 빈 작업칸은 비워 둔다. 폐기된 구형 탄생도 제작 포기 근거로 바꾸지 않는다.
-- 확정 비사용 범위: neutral-attack-role-implementation-start-20261105-01a1a0bf의 사용자 역할 승인과 server/creature-attack-role.mjs는 중립7종의 원거리 가능·나머지12종의 근거리 전용을 일치해서 명시한다. 이12종의 ranged-attack 빈 칸만 CSS의 명시 ID목록으로 표시한다. 원거리7종·모든 플레이어 동작·나머지 불명확 빈 칸은 제작 대상 또는 계획 미확정으로 보존한다. 새 제작 취소를 추정해 확정하지 않는다.
-- 작업 범위: 병행 분리된 Design/design.css의 같은 규칙만 현행 화면에 수정하며 페이지 분리 전체는 포함하지 않는다. 커밋된 단일 Design.html에는 같은 selector 교정만 투영하고 본 채팅 관련 기록과 함께 기존 즉시 업로드 승인 범위에서 수정 푸시한다. 아직 교정 검수/푸시 성공 전이다.
-
-## 유닛 표 헤더·빈 칸 아이콘 푸시 완료 · 01a1b3ae 현재 요약
-
-- 기록 ID: unit-table-header-pushed-20261107-01a1b3ae. 기록·최종 관측 시각 2026-11-07T11:02:42+09:00. 기록자·Git 실행 Codex /root, 수정·업로드·재개 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 와 실제 git push/ls-remote/rev-parse 및 $Trash/unit-table-header-01a1b3ae/commit-result.json. 사용자 정확 발언 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
-- 완료: cd3bd8f47a053151b44a746aad558525aafe8732 「유닛 표 헤더 고정과 빈 이미지 표시 수정」을 origin/main에 푸시했다. 원격 readback과 시작 checkout main 모두 동일 commit이다. 최신 부모51faf243의 다른 변경을 유지했고 Design.html CSS2곳과 본 채팅3기록만2경로로 커밋했다. 헤더는 내부 세로스크롤에 고정되고 빈 td에는20% 불투명도 빗금 사진 아이콘을 표시한다.
-- 보호·검수: 공용 index를 보존한 별도 index로 커밋했고 공용 memory index에는 본3기록만 더해 나머지 staged내용을 유지했다. 최종 남은 Design8행/메모리354추가218삭제는 이전 작업이며 unmerged경로0이다. 기존 형식검사 및 desktop 세로고정 측정과 최종 staged diff/check 통과를 재사용한다. 아이콘·모바일 전체 화면 검수는 앞선 브라우저 실행 실패로 미완료이며 Site배포는 실행하지 않았다. 요청/결정/실행/한계/보호·원격일치 누락을 대조했다. 앞선 푸시대기 상태는 본 실제 결과로 완료 처리하고 이 사후 기록은 로컬에 남겨 별도 memory-only 커밋을 만들지 않는다.
-
-## 승인 채집 동작 적용·치유 퇴역 동결 · 현재 채팅
-
-- 기록 ID: gather-work-final-freeze-20261107. 기록 시각 2026-11-07T10:42:54+09:00; 기록자·구현/충돌해결 Codex /root, 시각승인·게임/기획서 적용·push 및 검수축소 결정 사용자. 출처 현재 채팅 01a1b349-c2f5-7410-817c-1a43af3819a8, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 미제공.
-- 최신 사용자 교정: 이미 통과한 검수는 충돌 없는 rebase 후 반복하지 않는다. 불필요한 후보 재구성/검수를 늘리고 지연을 다른 채팅 탓처럼 설명한 판단은 철회했다. 사용자가 승인한 세 채팅에 순서와 교정을 전달했고 포자 폐기 dd1e1d2 원격반영 후 본 작업을 잇는다.
-- 적용 범위: 승인한 네 종족 GIF의 harvest/carry/throw 12클립, 원본/참고 GIF, 96px 기획서 시트·표지, 공통 UNIT_ACTION_ART 등록·운반물 중복억제·투척 방출시계다. 기본형은 채집기관이 없어 작업/원거리 칸을 비우고 구작업은 참고 원본만 보존한다. 기존 기본28 미리보기/점프열삭제/외형표 통합은 부모이력에 적용되어 보존한다. 상위 blade/secretion/carapace/antenna의 자기외형 작업48개는 추후 제작 요구이며 이번12개를 그들에 재사용하거나 완료했다고 주장하지 않는다.
-- 치유: healer/healPower만 현행카탈로그 퇴역·복원DNA효과0·선택/기획표에서 제외한다. ID/GCT와 구DNA 읽기, healing 수혜배율·regeneration·lifesteal 및 기존효과원본은 보존한다. 속성 작업 채팅에 사용자 승인으로 전파했고 그 채팅의 부분저장 등 별도기능은 포함하지 않는다.
-- 실제 검수 근거: 최종 공통경로의 192개 월드 프레임 RGBA 원본일치, 운반12/투척4 중복억제, 상위외형·죽음 우선 및 모델무변이, 브라우저오류0(render-result.json). 관련 기존33회귀 통과(retirement-tests.log). 해당 결과를 재사용한다. 최신main과 6텍스트 실제충돌만 최신내용+우리 최소변경으로 해결했고 게임 번들은 기존 공식 build --runtime-only로 정상생성했다. 원본 재생성·검수 전수반복·Site 배포를 수행하지 않는다.
-- 동결/누락점검: 요청·승인·교정·결과·48개 미완료경계·Git 순서를 대조했다. 관련 source/기획표/정책/로더/공개번들·12클립·기획미리보기24·참고20 및 이 채팅 기록만 별도index에 담으며 병행 UI/방향/배치/부분저장 미커밋내용과 다른 메모리 기록은 보존한다. 아직 본커밋 push 성공기록은 아니며 최종staged검수 후 한국어커밋·정확 origin/main fetch/rebase/push/readback으로 마감한다.
-
-## 승인 작업 동작의 공통 전용클립 경로 확정 · 현재 채팅
-
-- 기록 ID: gather-work-native-registry-20261107. 기록 시각 2026-11-07T10:17:52.0947015+09:00. 기록자·구현경로 판단 Codex /root, 네종족 시각승인·게임적용·push 결정 사용자. 출처 현재채팅01a1b349-c2f5-7410-817c-1a43af3819a8 및 직접 HEAD/native registry 관찰,H:/Spawner Windows PowerShell. 정확한 발언시각·턴/항목 ID 미제공.
-- 판단: 병행 전용클립 전환이 main의 c2457a4에 들어와 이제 기존 UNIT_ACTION_ART의 네 gather.actions에 승인 harvest/carry/throw를 등록할 수 있다. 별도 전용렌더러를 제품에 추가하지 않고 공통 UnitActionArt/UnitActionState로 재생한다. carry는 자기 전용 carry가 있을 때 우선하고 없으면 종전 walk호환을 유지한다. throw의 releaseAtMs540을 기존 납품24%시점에 맞추는 공통 시계 앵커를 넣는다. clip.embeddedCargo와 실제행동/이미지준비상태로 기존 운반물/투척표시 중복만 막으며 장부·속도·능력은 그대로 둔다. 상위대표외형4종의48작업은 자기 registry 항목에서 나중에 제공할 계약으로 남는다.
-- 검수 근거·대체: 이전 격리 80fe후보의 별도native adapter에서는 192 world RGBA비교/상태가드/변이없음·오류0과 실제PNG를 확인했다. 이후 공통registry 구현으로 전환하므로 이 결과를 최종새코드 성공으로 확대하지 않는다. 새 공통경로에 맞춰 필요한 렌더/퇴역 검수를 다시 한정한다. 이전 adapter는 task임시자료이고제품commit에서제외한다. 첫후보의CRLF혼합은 전용후보8개만공통-Fix로교정했고보호중작업파일은정규화하지않았다.
-- 현재원격의존: 구형포자탄생 퇴역채팅은 새원격승인gather-birth-V3를 현재구형목록과 구분해보존하도록후보를수정중이다. 초기 ce67614 후보를그대로게시하지않으며그채팅의실제최종main을기준으로최종생성물을구성한다. 다른작업의후보commit을이채팅에서무단으로branch에적용하지않는다.
-- 치유 실제인계: DNA 기능 및 스탯 재구성 채팅은 완료 응답에서 치유도안/선택지 제외·기본3도안·편집기격리검수를 보고했다. 본채팅은 healer/healPower의현행카탈로그퇴역·복원DNA의효과0·표에서2행삭제와공개사본동기화,관련회귀기대값을자체범위로끝낸다. healing/재생/흡혈과codeGCT 등기존ID/가닥복원은 유지한다. 부분저장/목록등그채팅의다른변경을본commit에동봉하지않는다.
-## 네 종족 작업 동작 승인·게임 적용·푸시 수신 · 현재 채팅
-
-- 기록 ID: gather-work-four-approved-push-20261107. 기록 시각 2026-11-07T09:43:46.6392414+09:00, 기록자·적용/격리 판단 Codex /root, 원발언자·시각승인·기획서/게임적용·push 결정 사용자. 출처 현재채팅01a1b349-c2f5-7410-817c-1a43af3819a8의 ‘좋아. 넷 다 승인. 기획서랑 인게임 다 적용하고 푸시까지 쫙 해.’ 정확한 발언/턴 시각 미제공,H:/Spawner Windows PowerShell.
-- 현재승인: bean/spore/pebble/spring의 채집→운반→투척 GIF 네개, 각3동작8키포즈=12클립이다. 기존 생성시안을 승인본으로 전진시킨다. 상위대표외형4종×4종족×3작업=48개는 아직 미제작인 별도후속 요구이며 이번 네시안승인을 그48개 승인으로 확대하지 않는다. 현재요청의 push에는 필요한 정확 관련 stage/commit이 포함되며 Site배포를 임의로 추가하지 않는다.
-- 적용판단: 승인된 전체캐릭터시트를 게임의 실제 상태/시계로 재생하고 내장 운반물·투척물과 기존 별도props 중복을 방지한다. 게임의 채집량/납품시점/자원장부는 보존한다. native source는 DesignAssets/Animations/GatherWorkV1로 복사하고 기획서96px/원본시트/GIF를 함께 보존한다. 자기대표외형이 gather인 경우만 이번12클립을 쓰며 칼날/분비/안테나/갑각에 잘못 덮지 않는다.
-- 실제격리사유: 병행 전용클립 게시채팅의 Git보존 중 본채팅의 untracked98애셋이 live에서 사라졌고 현재 refs/stash 6a0d9e6의 세번째부모에서 모두확인했다. 전역stash를 적용하거나타작업을되돌리지않고 본채팅의 세개폴더98경로만 literal $Trash/gather-work-approved-20261107/recovered로읽어복원했다. 원본내장imagegen출력도별도유지된다. 병행채팅이 공유파일잠금후복구중인상태를확인했으며 새승인후보는 HEAD기반별도파일집합/전용index로만구성한다. 다른전용클립전환/그리드/부분보관함변경은포함하지않는다.
-- 치유: healer/healPower퇴역두canonical수정과유지할healing/재생/흡혈판단을 사용자승인으로DNA 기능 및 스탯 재구성01a1a10e에전달했고, 그채팅은 치유도안/선택지를제외한다고직접응답했다. 현재그채팅은HTML통합손상을복구중이라그파일을추가로덮지않는다. 본채팅의네승인동작commit과별도로미확인복구상태를완료라하지않는다.
+- 기록 ID: combat-repair-freeze-20261107-01a1a5fd. 기록 시각 2026-11-07T11:06:58+09:00. 기록자·검수 및 범위판단 Codex /root, 수정·검수·업로드 결정 사용자. 출처 현재채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 전체작업·즉시업로드/공중배치/타원질문/재개 발언과 실제도구응답; 구현 worker attack_timing, lab_profiles, grounded_formation 및 마무리 finish_checks, finish_projection. 사용자 정확발언시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 결과: 공격주기 nextAttackAt와 원본 애니 후반을 분리했다. 느린 공속은 동작 뒤 idle, 빠른 주기는 시각후반만 끊으며 미완료연타·명시회복 제약은 유지한다. 독립 공속·접점·방어·반격·기절·사망·타깃전환·발사/도착을 공통엔진으로 처리한다. lab 기본/주사위는 실제 중립 프로필과 네 종족 시작DNA를 사용하며 명시DNA/수치 편집입력은 유지한다. 확정되지 않은 신규스탯·가짜시작지연은 넣지 않았다. 기존 오른쪽 기본방향 정규화·동적줌·상단HP바제거·로컬초기화 수정도 포함한다.
+- 배치: 크기에따라 팀별열수를다르게 고르던 규칙을 인원수기반 공통배치로 바꿨다.5대5는 양쪽3명·2명 두줄, 발접점높이50~86% 지면, 공통줌과체급비례·비겹침을 유지한다. 인게임한쪽3명표시제한과선택우선재배치를제거하고 전원·고정순서·관측사망슬롯을사용한다.
+- 실제검수: 메인이 현재소스표적61/61을 직접실행해통과했고 worker dice는source/Combat20회씩3/3통과. 실제혼합5대5 양쪽화면60개연속engine snapshot에서 본체누락·잘림·공중발판0, 대형공격17시점같은편본체겹침·잘림0, lab실제주사위5대5자동종료 및 page/console/network오류0. 초기game누락4건은승리후combat=null 정상퇴장도대상으로잡은검수오라클오류였으며 회원필터교정followup0으로대체, 원결과보존. 메인이 lab/game 혼합이미지직접확인. server240frame5대5검사는실제10명source/target,효과ID고유,접점시각일치,retarget,방어·반격·기절·사망,투사체도착시각을확인했다.
+- 게시후보검수: 다른미커밋DNA/기획서변경을제외하고HEAD+본범위만투영했다. 후보 ESM로더검사 simulation16·appearance4·timing10 총30/30통과, 현재dirty DNA치유폐기로생긴기존검사실패는후보에서발생하지않는다. 이전구형rig해시보존검사불일치기록은원문유지하며이번에무관한자산을수정해가리지않았다. 생성3종구문/의존순서/원본동일성 및중첩worker2단계대조완료. 후보34파일 diffcheck0, 태스크텍스트UTF8NoBom/CRLF검수통과,공유memory기존혼합줄끝원문보존.
+- 범위/보호: client/game.js의전투/facing만, Spawner.html의비실행placeholder type만,생성번들의전투관련module/필수HEAD의존성만투영한다. 다른DNA편집기·기획서·자산·공용index·미추적작업은보존한다. 관련메모리는이기록과같은채팅의후속미커밋기록만같이담는다. 별도branch/배포없음. 현재HEAD cd3bd8f는다른채팅의이력을포함하며이를되돌리지않고전용origin/main으로추가commit/push한다. 성공은아직선기록하지않고 실제원격readback후로컬기록한다.
+- 타원질문답변: 실험실 fighter의 ended&&alive에서그리는큰반투명타원은종료후생존강조이며발밑체력링과별개다. 실제시작일꾼둘은공격기관이없어no-offense로즉시종료하므로양쪽켜진다. 사용자는무엇인지질문했으며삭제지시는없어그표시를임의삭제하지않았다.
+- 근거: literal $Trash/combat-repair-20261107의 game-lifecycle-followup.json, lab-lifecycle.json, live-engine.json, game-mixed.png, lab-mixed.png 및projection manifest/guard/diffcheck; 이전원본방향56쌍검수기록은바뀌지않은그림/방향근거로재사용했다. 요청·판단·변경·실제검수·제한·다음Git단계 누락점검완료.
 ## DNA 부분 저장·선택 영역·목록 높이 완료 및 푸시 동결 · 01a1a10e 현재 요약
 
 - 기록 ID: dna-part-save-final-freeze-20261107-01a1a10e. 기록 시각 2026-11-07T11:05:58+09:00. 기록자 Codex /root/dna_finish_git, 구현·검수 취합 /root, 요청·결정 사용자. 출처 codex://threads/01a1a10e-176c-7cb3-a1cf-2ad477deffc4 및 본 작업 source/실제 게임 검수 결과. 원발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
@@ -253,54 +243,18 @@
 - 검수 근거: 실제 인게임 선택 영역 사진 $Trash/dna-selection-area-20261107/actual-game-selection-area.png 및 목록 높이 $Trash/dna-part-list-height-20261107 결과를 메인이 직접 확인했다. 인게임0개 숨김·1줄105px·5개201px/scroll489, Attribute5개280px/scroll472. 기존 소스 구문·렌더·국소 보존 검수를 재사용한다. 전체 빌드·광범위 테스트는 실행하지 않았다.
 - 범위 동결: 13개 제품/실행 지원 경로와 본 채팅 미반영 메모리만 최신 main에 투영한다. 다른 runtime/game 훙크·자산·문서·메모리와 공용 index/미추적은 보존한다. 연결 Projects0 확인을 재사용한다. 사용자 ‘다 올려’와 재개 지시에 따라 origin/main에 커밋·푸시하며 Site는 메인 단계다. 실제 커밋·푸시 성공은 아직 아니며 확인 뒤 로컬 사후 기록으로 남긴다. 요청·변경이유·검수·미완료·보호 범위의 누락을 대조했다.
 
-## 치유 퇴역·갑각 2레벨 확인·부분 저장 통합 복구 진행 · 01a1a10e
+## 기획서 15개 페이지 분리·풀 완료 · 01a1b3b0 현재 요약
 
-- 기록 ID: dna-part-save-healer-retirement-recovery-20261107-01a1a10e. 기록 시각: 2026-11-07T09:45:15+09:00. 기록자·조율/직접검수 Codex /root, 퇴역·재확인 결정 사용자. 출처 현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의 「갑각을 거기로 옮겨도」「치유기관 관련 내용은 다 삭제하고 갑각을 2레벨로 옮긴다음 새로 다 확인해야지…대체가 안될텐데」 및 문구질문 call_ea19a0c35b364dad94eed042c1f80ffb 회신, 01a1b349-c2f5-7410-817c-1a43af3819a8의 사용자승인 퇴역 전파. 개별 원발언 시각/항목ID 불명, H:/Spawner Windows PowerShell.
-- 새 현재조건: healer/전용강화healPower를 신규선택·초기도안·새부분조합 적용에서 제외한다. 기존 사용자저장 형상/ID/코드는 소실방지를위한 legacy조회로만유지한다. healing은받는회복증폭이며이퇴역과별개다. 기본치유사도안은제거해 채집꾼/근접전사/원거리전사3개만남긴다. 이전본채팅의기본4개·치유사제공계획은이결정으로대체되며 기존연구의치유형추천은현신규제공안이아니다.
-- 직접관측/판단: 현재canonical에서갑각은이미 grade2/shape[0,5,1]이다. 사용자발언을치유기관shape[0,2,1]로갑각을단순치환하라는승인으로해석하지않는다. 갑각2레벨정책으로남은현재3개초기도안의유효성·기능·끝점확장가능성을다시확인한다. 과거91칸전체전역최적성이나새3렙형상실행검수로확대하지않는다.
-- 실제중간검수: actualAttribute 포인터첫/끝선택·원본불변저장·자동부분탭·새로고침지속·전체회전추가·1회undo·저장/삭제실패보존을C가확인했다. 메인은실제스크린샷으로기본목록/부분목록을확인했고 standalone강화미리보기0누락을발견해원본전체stats-선택구간제외stats 기여분으로수정했다(근공강화단독+4 actual확인). budget만변하는인게임context에서선택취소하지않도록수정했다. 기존Attribute body min-width980에따른680폭넘침은범위밖이라수정하지않는다.
-- 통합실수/복구: C작업용inline동기화가병행변경된script type=text/plain태그를못찾고Spawner앞부분을손상시켰다. 메인이즉시공개·쓰기중단/국소복구조율했고, 도중병행작업이정상candidate(empty data-srcstub)로교체한것을확인했다. C가그새정상본을잘못복구대상삼은추가쓰기도즉시되돌렸다. 현재정상candidate직전backup SHA b0640105ea81b9a3c5a847210ec2fdd9acb38c0f051bd04a833befa560633a90 + 부분CSS링크55bytes만추가한현재SHA88a8b3f0d01ca37f09a13a54412c942c391469dcd9a319f036726e1b2b31d52c를C확인했고 메인도html/head/body와빈runtime/game data-srcstub를직접읽었다. 앞으로Spawner inline재삽입은금지하며현재entry.js/static참조구조를보존한다. HEAD전체복원/공용Git조작은하지않았다.
-- 별도동시교체관측: 09:36경mtime의editor/attribute가기능추가전으로바뀌고새parts/helper/CSS/starter파일이없어진사실을메인과A/B가확인했다. 이전검수성공만으로현재구현완료라고주장하지않는다. 교체행위자/명령은미확정이다. 현재canonical치유퇴역도유실되어A가사용자최신조건에맞춰최소재적용했고 catalog치유false/효과0/갑각grade2를실측했다.
-- 현재진행/보호: taskTrash/recovery에완성source들을재구성했다. A는baseline==freshlive조건으로editor/parts를재적용하고helper/CSS/Attribute-only/runtime필요모듈만안전복구, B는attribute/3도안과game현소스에insert-only공용목록연결을담당한다. C는제품쓰기중단/temp자료만제공한다. 현재다른작업source·정상emptySpawnerstub·판저장데이터를보존한다. 전체build/stage/commit/push/deploy는이채팅에서승인·실행하지않았다. 최종구현/인게임host실행은아직미확인이다.
+- 기록 ID: design-split-implemented-20261107-01a1b3b0. 기록 시각 2026-11-07T11:04:40+09:00. 기록자·구현 판단 Codex /root, 구조 분리 결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 의 현재 요청 및 직접 Git/파일 조작 결과. 원 발언 정확 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- Git 관측: 최초 f546eed 충돌 한 곳은 upstream의 등록된 애니메이션을 유지해 해소했다. pull 중 원격이51faf24로 전진해 Design 로컬 변경 때문에 중단됐고, Design만 원본·base·remote·index 증거로 보존해 새 포자 분비형 탄생 셀을 합친 뒤 fast-forward했다. 최종 local/origin51faf24, unmerged0, 원격 변경 경로 외 모든 index 항목 동일을 직접 확인했다. 보존 stash와 다른 작업은 유지했다.
+- 구조: 최상위 Design.html은 기존 제목·목차 링크만 남겼고 Design/ 아래 기존7페이지와 이름 있는 하위8섹션을 총15개 HTML로 나눴다. 기존 내용·자산·페이지별 스크립트는 이동하고 CSS·라이트박스·탐색을 공용 파일로 분리했다. 원래 이름 없는 유닛 단일 비교표는 행 단위로 해체하지 않는다. 실제 스탯/티어는 같은 표 데이터와 계산을 공유해 별도 페이지에서 표시한다. 기존 해시를 새 소속 파일로 연결하고 build.mjs의 지도/자원/지형 출력 위치도 새 파일로 바꾼다.
+- 상태: 구조 편집은 로컬 미커밋이며 커밋·푸시·배포 권한으로 확대하지 않는다. 현재 분리 전 원본과 Git 보존본은 literal $Trash/design-split-01a1b3b0. 링크·문서 누락·렌더 확인은 아직 미완료다. 이 기록은 이전 start 기록의 진행 상태를 갱신하며 원기록을 보존한다.
 
-## DNA 부분 저장·기본 3도안 통합 완료 및 최종 실제 검수 · 01a1a10e 현재 요약
+## 유닛 표 헤더·빈 칸 아이콘 푸시 완료 · 01a1b3ae 현재 요약
 
-- 기록 ID: dna-part-save-complete-20261107-01a1a10e. 기록·최종현물확인 시각: 2026-11-07T09:54:30+09:00. 기록자·독립검수/취합 Codex /root, 구현워커 /root/dna_part_editor·/root/dna_attribute_library·/root/dna_part_integration(gpt-6.1-sol low), 최종기능·치유퇴역 결정 사용자. 출처현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의구현승인/필수문구승인/속성템플릿기존영역표시/인게임판독립보존/치유제거·갑각2렙재확인 지시와 실제source·브라우저·VM결과. 개별원발언정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
-- 현재완료: 속성제작기와인게임공용편집기에 부분저장버튼→첫/끝DNA전체조각선택→순서상연속범위하이라이트·1/2표시→독립형상/선택구간의원본설계기여효과미리보기→이름입력/사본저장 흐름을연결했다. 포인터hover/키보드범위후보,취소,원본불변,묶음회전/끝점추가·전체1회undo,경계·등급·충돌·기관중복·퇴역DNA새적용차단을구현했다. budget-only변화는선택/저장미리보기/append상태를보존하며레벨/readonly변경·load는취소한다.
-- 목록/지속: createDnaPartLibrary/createDnaPartStore가 spawner.dna.parts.v1 localStorage를읽고쓴다. 방/판독립·같은origin브라우저에서속성/게임이공유한다. 별도부분탭·미니어처·불러오기/삭제·저장후자동탭·타탭storage갱신·저장실패시사본성공오인방지/삭제행보존을포함한다. 다른기기/계정동기화기능은아니다. 기존전체도안/현재design키와사용자저장형상을보존한다.
-- 기본도안/최신조건: 기존속성템플릿제목·영역에 immutable 기본채집꾼/기본근접전사/기본원거리전사만표시한다. 치유사신규도안은없다. 최신실제데이터3개는각7/19·17/37·17/37칸이며현canonical기하합법·끝에서유용한조각2개추가가능조건을B가재확인했다. 메인은최종dynamicimport로starter3명/갑각grade2/신규치유catalog없음/필수4source존재/game공용목록연결/CSS링크를다시직접확인했다. 갑각shape051은이미2레벨이었으며치유기관shape로대체하지않았다.
-- 치유퇴역실행: canonical dna의healer/healPower retired true·combatstats healerfalse/healerCount0/healPower0, 공용Attribute/mainruntime와내장mainWorker/decisionWorker의DNA두모듈씩도동일canonical로맞췄다. A가양worker의legacy치유DNA입력에false/0/0을VM으로직접확인했다. geneID/옛형상은legacy보존용이며신규제공하지않는다. healing(받는회복증폭)과regen/lifesteal은그대로다. 다른채팅소유문서/실험실표현퇴역전체를본채팅이추가완료했다고주장하지않는다.
-- 실제검수증거: C actualAttribute 포인터범위선택→원본불변저장→parts자동노출→reload지속→회전추가→undo·저장/삭제실패보존을통과했다. 후속actualAttribute 근접강화단독기여4(+4)·평상시취소hidden을통과했다. B최종game-only-qa는실제game.js마운트구간+실제compiledruntime+game/partsCSS의격리harness에서part불러오기/append·design조각반영·budget99999→100000후select유지·부분저장2개·reload새인스턴스2개보존, pageerror0/requestfailed0을1.3초에확인했다. 메인은 game-host-latest.png를직접열람해2개저장항목과미니어처/조작표시를확인했다. 전체인게임진입→한판완주/전투승률검수는이범위에없다.
-- 통합오류복구최종: 이전미완료기록 dna-part-save-healer-retirement-recovery-20261107-01a1a10e의파일유실/실행차단상태를대체한다. source가돌아온경우동일바이트/데이터를보존하고중복삽입하지않았다. runtime의C국소동기화잔류인중복DNA wrapper36bytes와잘린modules접두사1곳만byteguard·backup후수정해VM globalSpawner/editor/parts/store정상실행을확인했다. 내장workerSource값외본문bytes동일도A가확인했다. 최종runtime SHA60a8643c33928e112b2b13da88312a9136cb6ed25404edb94265539f135801ae. 정상Spawner empty data-src/entry.js구조는그대로며부분CSS링크만추가했다. 이후전체inline복구/unsafe sync를실행하지않았다. QA하네스metaUTF8누락도temp에서만교정했다.
-- 범위/마감: 새dna-parts.mjs·dna-part-library.mjs·dna-starter-designs.mjs·dna-parts.css, sharededitor/attributehost/game마운트/build노출/Attribute번들/runtime/canonical퇴역최소부위와rootmemory만본과제범위다. 다른애셋/HTML문서/기존game·runtime변경을보존했다. 관련source구문·UTF8NoBom/CRLF·국소diff/모듈동일성확인을워커가수행했고실제화면증거는literal $Trash/dna-part-save-20261107/integration에있다. 기존Attribute body min-width980의680폭넘침은범위밖으로남겼다. 연결GitHubProjects조회는nodes0/hasNextPagefalse였다. 본채팅은전체build/stage/commit/push/deploy/branch작업을수행하지않았고로컬변경으로완료했다. 새3렙6칸/91칸체계의제품적용·전역최적증명은계속별도미완료다.
-
-
-## DNA 선택 명확화·오른쪽 통합 목록·실제 인게임 캡처 착수 · 01a1a10e
-
-- 기록 ID: dna-part-selection-visibility-start-20261107-01a1a10e. 기록 시각: 2026-11-07T10:24:48+09:00. 기록자·구현판단/분담 Codex /root, 개선요청·목록위치·캡처결정 사용자. 출처현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의 「부분 저장 좋아, 현재 선택된 걸 좀 더 명쾌하게」「부분 저장된 리스트를 오른편에 리스팅에 같이 표시…인게임 스샷 들고와봐 판정하게」. 원발언정확시각·항목ID 불명,H:/Spawner Windows PowerShell.
-- 현재승인범위: 부분선택범위를시각적으로더명확히한다. 저장부분목록을속성제작기/인게임오른쪽DNA목록에기존개별DNA와동시에보이게배치한다. 기존상호배타탭은통합표시로대체하고왼쪽속성템플릿전체도안목록은유지한다. 부분목록은상단일부높이와자체스크롤로개별DNA선택공간을보존한다. 기존승인 ‘부분 저장’ 표시/불러오기/삭제를요청위치로재배치하며신규설명문구를추가하지않는다.
-- Codex판단: 선택구간에밝은외곽강조와가닥원색보존,현재hover조각/확정첫조각/끝후보를구분한다. 원래기관색·두께구분·저장기하/데이터·비용·효과를바꾸지않는다. 사용자는실제인게임설계창의원본DNA선택과오른쪽저장묶음동시표시화면으로판정한다. 이전격리마운트이미지만다시내는것은이번명시캡처요구충족이아니다.
-- 분담/보호: 기존gpt-6.1-sol low워커A editor선택렌더/국소번들, B 속성/game오른쪽목록+공통helper/CSS, C 제품쓰기금지/실제게임Playwright캡처와동작검수만담당한다. 메인조율·검수/메모리. 모든현재dirty/source/다른작업을보존하며sourcefreshread·uniqueanchor·쓰기직전bytesguard,새temp는literal $Trash/dna-selection-visibility-20261107에둔다. Spawner의현재entry.js와emptydata-src구조를보존하고embeddedHTML쓰기·전체build·Git·배포는하지않는다. 이전parts기능/치유퇴역·갑각grade2·판독립localStorage조건도유지한다.
-- 상태: 구현중이며새UI검수/실제인게임캡처는아직없다. 이전속성페이지/격리검수결과를새변경성공으로확대하지않는다. A/B완료후C가실제게임입장/설계modal열기와독립브라우저테스트상태로대표DNA/저장묶음을보여캡처할예정이다. 실제사용자데스크탑/CUA/UIA/사이드패널은제어하지않는다.
-
-## DNA 선택 강조·오른쪽 통합 목록 적용 및 실제 인게임 이미지 전달 완료 · 01a1a10e 현재 요약
-
-- 기록 ID: dna-part-selection-visibility-complete-20261107-01a1a10e. 기록·실제이미지직접열람 시각: 2026-11-07T10:28:04+09:00. 기록자·독립정적/시각검수 Codex /root, 구현A /root/dna_part_editor·목록B /root/dna_attribute_library·실제게임캡처C /root/dna_part_integration(gpt-6.1-sol low), 개선/위치/캡처요청 및최종판정주체 사용자. 출처현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의선택명확화·오른쪽동시목록·인게임사진요청, actual-game-result.json 및실제PNG두개. 원발언정확시각·항목ID 불명,H:/Spawner Windows PowerShell.
-- 적용완료: 선택된전체DNA가닥에어두운받침+밝은cream외곽,현재hover가닥은흰외곽을그리며DNA원색/기관두께구분을유지한다. 비선택가닥은.12로약화한다. 선택중기존끝점plus/노드표시는숨기고선택범위의시작·끝경계원을표시한다. 첫선택은사각1,끝후보는원형2를선중점양쪽18px에두어가닥/접점과구분하고한조각범위에도두표시가겹치지않는다. 키/포인터선택·저장기하/효과/가격/스토리지는바꾸지않았다.
-- 목록완료: 속성제작기/인게임오른쪽catalog상단에저장부분section,아래에개별DNA필터/목록을동시에표시한다. 저장section은최대35%높이/별도스크롤,개별gene리스트는남은영역스크롤이다. 기존교대설계도/부분탭과속성제작기왼쪽부분패널은제거했고왼쪽기존전체속성템플릿목록/기본3도안은보존했다. 새부분저장직후해당row를선택강조하고list내scroll로노출한다. 기존승인문구만요청위치로재배치했다.
-- 실제사진/검수: C가정상actual Spawner.html입장버튼→entry/assets/game전체초기화를실행하고실제openUnitDesign/modal/render로캡처했다. HTTP응답의테스트전용read-only QA노출과독립browsercontext의기본근접전사6조각/저장묶음3개fixture만주입했으며하네스로UI를대체하거나제품파일을수정하지않았다. actual-game-selection.png는실제HUD배경/설계창에서중간3조각선택후보·사각1/원2·원래가닥색과비선택흐림·오른쪽저장부분/개별DNA를동시에보인다. actual-game-parts.png는평소편집상태의두목록을보인다. 두1600x1050 PNG를메인이직접열어가독/선택범위·표시공존을확인했다.
-- 캡처관측/한계: partRows3/genes15·viewportoverflowfalse·pageerror0·requestfailed0. console에는리소스404두건이있었으나URL이수집되지않아원인/발생전후는미확인으로남겼고별도제품수리를하지않았다. 전체네트워크무오류/한판완주검수라고주장하지않는다. 이번시각안의재미·가독최종판정은사용자에게남긴다.
-- 범위/동기화: source client/dna-editor.mjs·attribute-editor.js·game.js의해당공용목록마운트·dna-part-library.mjs·dna-parts.css와Attribute전용번들/runtime의editor/helper블록만변경했다. 마지막runtimeSHA f7eaf6f9d82610958b368130133976614d0216788a4c357e66b238ea8104459a, 각모듈1개/source일치·구문·UTF8NoBomCRLF·국소diff를A/B가확인했다. runtime해당블록외bytes동일,다른canonical/내장worker/애셋/다른작업·Spawner의emptydata-src/entry.js구조를보존했다. 기록 dna-part-selection-visibility-start-20261107-01a1a10e의미완료상태는본결과로대체한다.
-- 산출물: literal $Trash/dna-selection-visibility-20261107/{actual-game-selection.png,actual-game-parts.png,actual-game-result.json} 및대상baseline/스크립트. 현재로컬적용이며이채팅에서전체build·stage·commit·push·배포·브랜치/기존데이터조작을하지않았다. 사용자에게실제선택사진을인라인으로제공하고평소화면도연결한다.
-
-
-## DNA 부분 저장의 +접점 선택 보완 완료 · 01a1a10e 현재 요약
-
-- 기록 ID: dna-part-endpoint-hit-complete-20261107-01a1a10e. 기록 시각: 2026-11-07T10:34:05+09:00. 기록자·독립소스검수/취합 Codex /root, 구현 /root/dna_part_editor·실제브라우저검수 /root/dna_attribute_library(gpt-6.1-sol low), 원발언자·요청결정 사용자. 출처현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의 「흠. 좋아. + 부분을 눌러도 잘 선택되게 해야돼」와 실제source/result.json. 원발언정확시각·항목ID 불명,H:/Spawner Windows PowerShell.
-- 적용: 부분범위선택 hitPart에서model.nodes의원전체를선분보다먼저hit-test한다. 원점25/기관20/스탯14×현재view.scale에mouse7/touch12px여유를더하며중심이가장가까운접점을택한다. 미배치previewghost는선택대상에넣지않았다. 공유접점에서는실제선hover/명시키보드이동으로설정된partCursorHint가있을때연결된현재조각을유지하고,그외첫직접선택은outgoing/최종끝점은incoming,두번째선택은첫범위와진행방향에맞춘결정론적인접조각을택한다. 초기cursor0을실제hover로오인하지않고cancel때hint를초기화한다.
-- 보존/동기화: 일반편집의+배치·기존선분선택·범위하이라이트/1·2·저장/가격/기하와오른쪽통합목록은유지한다. source client/dna-editor.mjs와Attribute전용번들/runtime의editor1블록만동기화했다. runtime외블록bytes동일,최종SHA38e7688a477b81804db1cd231d72fc937686c6433b7c947848db12470e784da5. Spawner/다른module/canonical/내장worker/애셋·다른dirty변경은바꾸지않았다. A가source/runtime구문·UTF8NoBomCRLF3파일/국소diff/모듈동기화를확인했다. 메인은실제hitPart·hint분기소스를독립검수했다.
-- 실제브라우저결과: B가actualAttribute페이지의실제editor와모델/viewport좌표로원점center→blade,끝점center→power,최초공유접점→outgoing antenna,antenna선hover후공유원click→antenna유지,1.7배zoom의큰원반경82%점→blade,기존선분→antenna 6건을1.18초에검수했다. 각2click후partSavecallback의gene1개를확인했고원본DNA normalizedtuple불변, pageerror0/requestfailed0이다. 첫시도원본비교의JSON객체키순서오라클차이는테스트에서만교정했으며제품동작을바꾸어맞추지않았다.
-- 결과/마감: 속성제작기/인게임공용편집기에로컬적용완료. 이번에는인게임전체새캡처/한판실행을반복하지않았고actualAttribute 6입력검수와양쪽공용모듈동일성으로확인했다. 임시자료 literal $Trash/dna-endpoint-selection-20261107/result.json 및baseline/스크립트. Git/stage/commit/push/배포·전체build/새문구는이번범위가아니다. 이전선택시각·오른쪽목록·실제인게임이미지결과는보존한다.
+- 기록 ID: unit-table-header-pushed-20261107-01a1b3ae. 기록·최종 관측 시각 2026-11-07T11:02:42+09:00. 기록자·Git 실행 Codex /root, 수정·업로드·재개 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 와 실제 git push/ls-remote/rev-parse 및 $Trash/unit-table-header-01a1b3ae/commit-result.json. 사용자 정확 발언 시각·항목 ID 불명, H:/Spawner Windows PowerShell.
+- 완료: cd3bd8f47a053151b44a746aad558525aafe8732 「유닛 표 헤더 고정과 빈 이미지 표시 수정」을 origin/main에 푸시했다. 원격 readback과 시작 checkout main 모두 동일 commit이다. 최신 부모51faf243의 다른 변경을 유지했고 Design.html CSS2곳과 본 채팅3기록만2경로로 커밋했다. 헤더는 내부 세로스크롤에 고정되고 빈 td에는20% 불투명도 빗금 사진 아이콘을 표시한다.
+- 보호·검수: 공용 index를 보존한 별도 index로 커밋했고 공용 memory index에는 본3기록만 더해 나머지 staged내용을 유지했다. 최종 남은 Design8행/메모리354추가218삭제는 이전 작업이며 unmerged경로0이다. 기존 형식검사 및 desktop 세로고정 측정과 최종 staged diff/check 통과를 재사용한다. 아이콘·모바일 전체 화면 검수는 앞선 브라우저 실행 실패로 미완료이며 Site배포는 실행하지 않았다. 요청/결정/실행/한계/보호·원격일치 누락을 대조했다. 앞선 푸시대기 상태는 본 실제 결과로 완료 처리하고 이 사후 기록은 로컬에 남겨 별도 memory-only 커밋을 만들지 않는다.
 
 ## 유닛 표 수정 푸시 재개 · 01a1b3ae 현재 요약
 
@@ -315,6 +269,12 @@
 - 실제 검사: Design.html UTF8NoBom/CRLF 검사 OK. 기존 memory UTF8NoBom/Mixed는 NeedsReview로 보고돼 원문을 보존했다. 독립 headless Edge의 첫 desktop 측정은 세로400px 스크롤과 헤더 상단 고정·본문 이동 단정을 통과한 뒤, 가로300px를 최대스크롤과 무관하게 가정한 임시 검수코드 단정에서 중단됐다. 그 단정을 실제 scrollLeft 기준으로 고쳤지만 다음 실행은 sandbox Edge 시작 시 파이프 오류로 끝났다. 아이콘·모바일·스크린샷 전체 검수 완료로 주장하지 않으며 추가 검사 재시도는 하지 않는다.
 - 보호/동결: origin/main fetch 후 f546eed9ccf705aada1fd5e17b56a1d6e446905a와 로컬 main이0/0이었다. 병행 작업의 stash 복원으로 Design.html에 Updated upstream/Stashed changes 충돌 및 기존 변경이 index에 나타났다. 이 충돌 영역·기존 코드/자산/메모리는 고치거나 커밋하지 않는다. 별도 index에 최신 부모의 CSS 두 변경과 본 채팅 두 기록만 투영한다. 요청/이유/실제 검사/미완료 검수/보호 범위 누락 점검을 마쳤으며 커밋·푸시 성공은 아직 아니다.
 
+## 원격 풀·충돌 해소 및 기획서 페이지·섹션 분리 진행 · 01a1b3b0 현재 요약
+
+- 기록 ID: design-split-start-20261107-01a1b3b0. 기록 시각 2026-11-07T10:53:33+09:00. 기록자·구조 분리 판단 Codex /root, 요청·결정 사용자. 출처 codex://threads/01a1b3b0-9441-7b80-95cc-d96d61056d49 의 현재 요청 2건. 원 발언 정확 시각·항목 ID·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 사용자 요청: 원격 변경을 pull하고 충돌을 해소한다. 이어 Design.html을 최상위로 두고 기존 페이지뿐 아니라 각 섹션도 별도 서브페이지 파일로 모두 나누어 링크한다. 기존 문구·이미지·미리보기와 다른 채팅의 변경은 보존한다. 이 추가 구조 편집은 커밋·푸시·배포 요청으로 확대하지 않는다.
+- 직접 관측: main과 fetch한 origin/main은 f546eed이며 진행 중 merge/rebase 메타데이터는 없다. Design.html 한 곳에 Updated upstream/Stashed changes 충돌이 있고 다른 staged·untracked 작업과 보존 stash들이 있다. 연결 Projects는 0개다. 먼저 충돌 양쪽의 승인 자산 참조를 대조해 최소 해소한 뒤 페이지/섹션을 분리한다. 보존본은 literal $Trash/design-split-01a1b3b0에 둔다. 아직 pull 완료·충돌 해소·구조 분리 성공을 기록하지 않는다.
+
 ## 유닛 표 헤더 고정·빈 이미지 표시 진행 · 01a1b3ae 현재 요약
 
 - 기록 ID: unit-table-header-scope-20261107-01a1b3ae. 기록 시각 2026-11-07T10:48:12+09:00. 기록자·원인 판단 Codex /root, 변경·즉시 업로드 결정 사용자. 출처 codex://threads/01a1b3ae-373e-7252-9b7a-e090c61ff64b 의 현재 요청 3건. 사용자 발언 정확 시각·항목 ID 불명. H:/Spawner Windows PowerShell.
@@ -322,11 +282,34 @@
 - 확인/판단: Design.html의 통합 appearance-table은 sticky 헤더가 있지만 overflow:auto 컨테이너의 높이가 무제한이다. 해당 표 래퍼에 화면 기준 최대 높이를 추가하고 td:empty에만 흐린 빗금 사진 SVG 배경을 CSS로 표시한다. 기존 이미지·빈 셀·행·열 데이터와 다른 작업의 14행 수정은 보존한다.
 - Git 범위: 전용 H:/Spawner origin https://github.com/oojjrs/Spawner main. 연결 Projects 0. 이번 CSS 두 변경과 본 채팅 관련 메모리만 부모 이력에 투영해 커밋·푸시한다. 다른 채팅의 코드·자산·메모리·미추적 변경 및 공용 index는 보호한다. 별도 Site 재배포는 하지 않는다. 성공은 실제 확인 뒤 기록한다.
 
-## 포자 탄생 폐기 현재 이력 병합·최종 직렬화 · 01a1b33b
+## 전투 주기·실제 스탯·지면 배치 수정과 푸시 승인 · 01a1a5fd 현재 요약
 
-- 기록 ID: spore-birth-purge-current-merge-619ef6c2-01a1b33b. 기록 시각: 2026-11-07T10:36:10+09:00. 기록자·충돌범위판단 Codex /root, push 승인 사용자. 출처 현재 채팅과 실제 merge-tree/current.index, H:/Spawner Windows PowerShell. 원발언시각·항목ID 불명.
-- main이 619ef6c2993937f1326aaccbb530c5315db40f91로 이동해 기존 검토 draft c324f09d9ab3c1e55f04bd0c345ebcb6c1f4b885를 객체 안에서 병합했다. 충돌 CodexWorkMemory.md, Combat.html, Design.html, DesignAssets/image-sizes.json, client/combat-evolution.mjs, client/design-previews.js, client/runtime.js, client/unit-matrix-previews.js는 새 전용클립/UI의 현재 구현을 바탕으로 정확한 퇴역 항목만 제거하고 메모리 원기록을 합쳤다. 이전 generic birth guard를 새 구현으로 되돌려 넣지 않으며 현재 모듈을 유지한다. 실제 후보 209경로이며 구형145삭제는 유지한다.
-- 기존 기본형과 이후 원격 승인 채집형 V3는 보존한다. 실제 index/참조 갱신 직전 잠금과 기대HEAD를 확인하며 working/untracked를 파일이동 없이 보존하고, 원본 index/작업 snapshot Git복구참조를 유지한다. 다른 작업 파일은 덮지 않고 정확한 퇴역 파일만 영구삭제하며 Design의 같은 비어 있는 새 V3 셀만 현재 승인 원격 내용으로 동기화한다. 아직 실제 commit/push 전이다.
+- 기록 ID: combat-repair-authorized-20261107-01a1a5fd. 기록 시각 2026-11-07T10:41:19+09:00. 기록자·진단 및 구현판단 Codex /root, 수정·전체 검수·업로드 결정 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 ‘다 작업하고 전부 점검해서 이상 없게 해서 가져오고 바로 올려’ 및 후속 공중 배치 스크린샷 질문. 인간 발언 정확시각·항목ID 불명. H:/Spawner, Windows PowerShell.
+- 확인: lab 주사위는 외형 key만 바꾸고 공통 DNA 편집값을 복사하며 중립 species도 버려 실제 원종 스탯과 다르다. 서버 DNA recovery가 공격주기의 남은 시간을 채우고 beginAttack과 공용 appearance state가 그 endsAt까지 클립을 늘려 idle이 사라졌다. Git 기록상 늘임은 f9395086, DNA 잔여 recovery는 a8ab58f3부터이며 adaa42a2 공통화는 이를 유지했다. 최근 공통화가 최초 원인이라는 판단은 하지 않는다. 앞선 검수에서 이 동작을 놓친 책임과 실제 결과를 구분해 보고했다.
+- 배치 원인: 현재 combatViewLayout은 팀별로 가장 큰 cell을 얻는 열 수를 따로 고른다. 같은5명도 종별 크기에 따라2열3줄/3열2줄이 바뀌고 발판 기준이 화면 위10%부터 계산되어 언덕·공중에 놓인다. 후속 수정판단은 종 구성과 무관한 인원수 기반 고정 대형, 5명은3명·2명 두 줄, 양쪽 거울 대칭, 아래 지면 발판·공통 줌으로 맞추는 것이다. corpses가 제공되는 동안 슬롯을 보존하며 실제 소비 경로를 함께 검토한다.
+- 수정 계약: 실제 인게임 스탯/시작DNA를 lab 기본형에 사용하고 명시 편집값은 유지한다. 새 밸런스 수치·가짜 랜덤 지연은 넣지 않는다. 공격 주기와 native 애니 후반을 분리하고 공속만으로 동작을 느리게 늘이지 않는다. 각자의 cooldown, focus/연타/반격/기절/타깃 전환과 애니·VFX 판정을 대조한다. 빠른 공속에서도 native 후반 때문에 임의 공속 상한을 추가하지 않고 다음 동작이 후반을 끊을 수 있도록 검토한다.
+- 위임/검수: 사용자가 지정한 gpt-6.1-sol low 세 워커가 타이밍,lab 프로필,지면 배치를 분리 수행하고 메인은 소스·실제 양쪽 N:N 및 애니·이펙트 검수 결과를 대조한다. 현재 성공/커밋/푸시를 선기록하지 않는다. 이전 facing/카메라/주사위 미커밋 결과를 후보 범위로 이어받되 현재 main의 동시 작업은 의미별 분리하며 다른 변경과 index를 보호한다. 전용 origin https://github.com/oojjrs/Spawner 확인, 브랜치 생성 및 새 배포는 하지 않는다. 관련 기록을 수정 커밋에 함께 담고 검증 후 origin/main 푸시 및 시작 checkout 일치를 확인한다.
+## 포자 구형 폐기 푸시 통지 수신·후속 순서 유지 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-three-retirement-push-notice-20261107-01a1b0eb. 기록 시각 2026-11-07T10:38:22+09:00. 기록자·수신 상태 정리 Codex /root. 출처 codex://threads/01a1b33b-9e82-7271-a015-c57dd7ef99f0 의 현재 위임 메시지. 원 소유 채팅 실행·readback 정확시각 불명, H:/Spawner Windows PowerShell.
+- 소유 채팅 보고: 승인된 구형 포자 탄생 폐기209경로 변경을 dd1e1d2ed2807483562c822a3d488cf2482deefd로 origin/main에 푸시했고 원격과 시작 H:/Spawner main 일치를 확인했다. 기존 퇴역145파일은 Git 트리와 실제 경로 모두0이며, 619ef6c까지의 새 승인 등록 이력과 이후 spore-gather-birth-v3는 커밋에서 보존했다고 보고했다. 본 채팅의 직접 재검증 결과로 바꾸어 쓰지 않는다.
+- 보호 경계: 현재 작업트리 V3 후보7파일 삭제는 기존 미커밋 변경으로 남아 있다는 소유 채팅 설명을 받았다. 이7개를 퇴역145와 혼동해 stage/commit하거나 복원하지 않는다. 기존 구형145와 파츠합성 대체 경로도 되살리지 않는다. 다른 채팅의 스태시·작업·미추적 파일은 그대로 보존한다.
+- 본 채팅 상태/순서: v43 배포와 ed725b2 원본 푸시는 앞서 직접 확인해 완료한 상태이며 재실행하지 않는다. 먼저 폐기 채팅, 다음01a1b349의 네 종족 채집·운반·투척12클립/치유 DNA 축소라는 전달된 순서를 유지한다. 본 통지 수신 후 별도 검사·후보 재생성·main/index 이동·push·답신 도구 실행은 없다. 이 기록은 로컬에만 남기며 memory-only 커밋을 만들지 않는다.
+
+## 완료한 3동작 보존·후속 Git 순서 양보 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-three-git-order-yield-20261107-01a1b0eb. 기록 시각 2026-11-07T10:33:31+09:00. 기록자·현재 상태 기록 Codex /root. 출처 codex://threads/01a1b349-c2f5-7410-817c-1a43af3819a8 에서 사용자 ‘세 채팅에 전파해서 순서 맞춰’ 승인을 받아 보낸 현재 위임 메시지. 본 채팅의 사용자 새 Git 지시가 아니며 전달된 협업 순서로 수락한다. 원 인간 발언 정확 시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 실제 완료 상태: 이 채팅의 요청3동작은 Sites v43 배포 성공, 원본 ed725b2d6218d831a68d7bb9e788459d6d0e461f origin/main 푸시 및 2026-11-07T10:27:09+09:00 원격/시작 로컬 tip 일치 확인까지 끝났다. 재배포·후보 재생성·반복 검수·동일 커밋/푸시는 하지 않는다. 이후 다른 채팅이 이동시킨 현재 main tip을 이 기록에서 새로 조회하거나 추정하지 않는다.
+- 순서 수락: 공용 main/index 이동과 추가 push를 이 채팅에서 실행하지 않는다. 먼저 포자버섯 구형 탄생 영구 삭제 채팅01a1b33b-9e82-7271-a015-c57dd7ef99f0이 검토한 폐기분을 최신 origin/main에 rebase해 push하고, 다음으로01a1b349가 승인된 네 종족 채집·운반·투척12클립과 치유 DNA 축소를 push하도록 양보한다. 본 작업·보존본·스냅샷은 유지한다.
+- 검수 교정: 소유 채팅이 전달한 사용자 교정은 이미 통과한 검사·후보 생성을 반복하지 말고 rebase 후 바로 push하며, 실제 충돌이 생긴 경우에만 해당 충돌 범위를 확인하라는 것이다. 본 채팅은 이미 완료됐으므로 이 통지 후 추가 검사나 Git 명령을 실행하지 않았고, 답신 도구도 사용하지 않는다. 이 상태 기록만 로컬 memory에 남기며 별도 memory-only 커밋을 만들지 않는다.
+
+## 승인3동작 원본 커밋·푸시 완료 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-three-pushed-20261107-01a1b0eb. 기록·최종 관측 시각 2026-11-07T10:27:09+09:00. 기록자·Git 실측 Codex /root, 푸시 결정 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7의 ‘푸시해’ 직접 지시와 실제 push/ls-remote/rev-parse 응답, literal $Trash/assets-three-v43-20261107/followup-three/push-result.json. 사용자 발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 완료: ed725b2d6218d831a68d7bb9e788459d6d0e461f ‘새싹콩·포자 승인 애니메이션 등록 보완’을 전용 origin/main에 푸시했다. 원격 readback과 시작한 로컬 main 모두 같은 tip이고 공용 index pending경로0이다. 이전 원본 Git 대기 상태는 이 세 동작 후속에 한해 해제한다.
+- 실제 범위: 새 구조 부모 c2457a4에 이미 담긴 native3·wrapper3·재생등록3은 동일성을 확인해 재커밋하지 않았다. 빠진 Planning96 3개·Design 정확3셀·Planning policy3키(기존 native3키 보존)·preview map3개·생성 도구/정의 모듈4개·관련 메모리만 총11경로에 담았다. 구형 legacy 호출부/테스트와 미완료 다른 변경은 보존했고 별도 포자 탄생 폐기 커밋은 본11경로 커밋에 포함하지 않았다.
+- 검수/복구: 최종 scoped staged diff/check 통과, 변경 텍스트7개 CRLF UTF8NoBom OK; memory는 기존 HEAD Mixed 기준을 유지했다. 실제 게임 프레임·native3 SHA·wrapper 동일성의 기존 검수 결과를 재사용했다. 작업/인덱스 보존본 followup-three/preserve-before-commit을 유지한다. 전체 secretion test의 기존 spring 기대값 불일치 이력도 이전 기록에 보존했다.
+- 배포 구분: 요청3동작은 이미 Sites v43 https://spawner.oojjrs.chatgpt.site 에서 배포 성공했다. 이번 푸시 지시에서는 새 배포를 하지 않았으며 v43 source는 1ffde0f31e0926816864e400ec2a349ae375e5d0이다. 새 원격 포자 채집 탄생V3는 보존했고 별도 게임 연결로 범위를 늘리지 않았다. 본 성공 기록은 커밋 뒤 알게 된 사실로 로컬에만 기록하며 자동 memory-only 후속 커밋·amend를 만들지 않는다.
 
 ## 승인3동작 원본 푸시 재개 · 01a1b0eb 현재 요약
 
@@ -364,13 +347,30 @@
 - 격리문제/판단: candidateDesignAssets가livejunction이던초기build는다른migration의v42birth6정책삭제로멈췄고,정책을HEAD+우리6개로격리한뒤기존birth파일6실물삭제로멈췄다. root파일/정책을되돌리는대신temp사본의그6개만GitHEAD바이트로복원하여현재공개v42행동을유지하고우리3만더한다. 새정책6/네이티브3·로더3은최신source와일치,기존32보존검수성공. 공개기존코드와미완료live구조를섞어배포하지않는다.
 - test경계: 기존secretion-idle.test의bean정적-only단정을새V4기대로최소갱신하고해당block검수성공. 요청한기존test1회는bean진입전옛spring기대64sample에서현재승인1frame와불일치로실패했다. spring제품/기대는현재3동작밖이므로고치지않고전체test통과로보고하지않는다. 실제3동작렌더증거를재사용하며불필요검수를넓히지않는다. 아직최종bundle/push/배포는진행중.
 
-## 승인3동작 v43 공개 배포 완료·원본 Git 대기 · 01a1b0eb 현재 요약
+## 유닛 오른쪽 기본 방향·전투 배치·로컬 초기화 검수 완료 · 현재 채팅
 
-- 기록 ID: assets-three-published-20261107-01a1b0eb. 기록 시각 2026-11-07T09:45:45+09:00; 기록자·native배포실측/대기상태기록 Codex /root,세동작반영·재배포결정 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7과SiteNative성공응답·site-published/site-verification·타채팅waitsnapshot,H:/Spawner Windows PowerShell. 원발언정확시각·항목ID불명.
-- 실제공개완료: v43/source 1ffde0f31e0926816864e400ec2a349ae375e5d0/deployment appgdep_6aee7356705c81918cb690bafec8f744가2026-11-07T00:40:07.235039+00:00에succeeded, https://spawner.oojjrs.chatgpt.site. immutableRootGitTree e6a146c23e12c48586bb78e3fcd6a98a0a5bc7c0의검증된세동작+구형포자birth제거를별도SitesSourceRepo에서한국어commit·push·원격readback·archive저장·배포했다. Rootmain/index는coord요청후이동하지않았다. archive94894080B/176files,asset707개,새native3원본bytes일치·퇴역mapping0·미참조localhash0. rootGitcommit됐다는주장없이tree입력임을정확기록한다.
-- 적용/검수: bean분비idleV4 64f/3200ms,sporegatheridleV1 64f/6400ms·walk16f/1120ms 전부반영. beanworld64/combat대표frame·loop/coldfallback·neutral512원계약,spore두publicfactory각8샘플·가드22/운반/portrait검수성공. 구형포자birth145tracked탈참조와기본회전판/필수8보호,생성물5구문·빈modules[]0/퇴역ref0/native3등록·531canonicalasset확인. 기존spring단정이낡은legacytest1회실패는해당증거에유지하며전체suite성공이라고확대하지않는다.
-- 원본Git미완료경계: commit.cjs실행은다른작업의HEAD전진가드에서안전중단되어rootcommit성공없음. 01a1b33b퇴역채팅이사용자‘푸시까지해’승인을받아145삭제+67text를먼저commit/push하고actualtip전달을요청했으므로rootmain/index를중복변경하지않고대기한다. 현재그채팅은공용main을반복이동하는‘파츠 합성 애니 폐기와 전용 클립 재생 전환’과메시지조율을위한사용자승인을질문한상태로확인했다. 받은메시지자체는답신권한이아니므로이쪽에서무승인채팅메시지를보내지않았다. 공개배포는이미별도SourceRepo로완료했고원본저장소의세동작commit/push만미완료다.
-- 재개점: 그actualtip통지뒤native3/preview3·source/정책/로더/기획3cell만새parent에투영해rootcommit/push한다. 145폐기와59제거를다시적용/복원하지말고현재기본birth보존상태를유지한다. b/followup-three의onlytemp계획과bean/spore/registration결과·source-edits·정확projection을재사용한다. 보호untracked새registry전체는commit하지않고호환2행만해당owner작업에보존했다. 이전freeze의외부배포대기는본성공으로대체,rootGit미완료는정확히유지. 요청/결정/실제변경/검수/외부성공/남은외부조율누락점검완료.
+- 기록 ID: combat-facing-spacing-complete-20261107-01a1a5fd. 기록 시각 2026-11-07T10:19:55+09:00. 기록자·구현/최종검수 Codex /root, 동작별 오른쪽 기준 통일·배치/줌 조정·상단HP제거·초기화수리 결정 사용자. 출처 현재 채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 직접 지시와 $Trash/combat-facing-20261107/final-result.json, pixel-facing-result.json 및 $Trash/combat-formation-20261107/{lab,game}-pixels.json 실제결과. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell. 읽기전용 서브검수 facing_audit는 요청된 gpt-6.1-sol/low로 수행했다.
+- 방향 결과: unitFacing은 모델의 실제 공격/이동 방향을 +1오른쪽/-1왼쪽으로 해석하고 공용 unitFrameMirror는 원본 방향과 전장 표시 방향을 결합한다. 원본128개에 sourceFacing을 명시했다(기본/분비/소기관82right, 왼쪽기준 칼날/갑각 및 해당동작46left). 이미 오른쪽인 기본 대기·이동·점프·우측공격은 유지한다. 왼쪽 기준 완성프레임은 최종 출력에서 접점을 중심으로 반전하며 atlas전체/프레임순서/시간/기관/승인해시를 바꾸지 않는다. registry에서 sourceFacing을 제외한 전체 데이터가 직전 사본과 정확히 일치함을 최종 확인했다. 정면형의 모호한 시선은 외형군 reference 기준을 따른다는 앞선 판단을 유지하며 공격변위 부호만으로 원본방향을 판정하지 않았다.
+- 코드 결과: 필드·실험실·인게임·통합 appearance·피격·시체·원거리 발사구·초상화 공용프레임에 같은 방향 계약을 사용한다. 렌더러가 combat.side를 모델facing으로 역해석하던 부분과 상세화면의 가짜side 재할당을 제거했다. 월드/전장의 서로 다른 side좌표계 자체는 보존했다. 피격에서는 논리적 screenSide와 원본보정 후 sourceSide를 분리해 알려진 hitSide 및 기본 정면 피격의 좌우 그룹을 보존한다. 중립 원본left 보정과 발사구 x변환도 같은 함수로 처리하고 방향미지정 기본값은 오른쪽이다. 공개28개 관련모듈 사본이 현재원본과 일치함을 확인했다.
+- 배치/HP/초기화: 양 진영 가변 크기 격자와 여유영역을 공용 combatViewLayout으로 계산한다. 최대 유닛 체급 기준 기본줌에 편성의 공간제약을 함께 적용해 넓게 펼치고 상대비례/배경을 유지한다. 실험실 상단 HP숫자·굵은바·갱신/CSS를 제거했고 공격준비선·전장체력링은 보존했다. 입장스크립트 placeholder는 비실행type으로 명시해 entry.js가 한 번만 로드한다. 실제 로컬 인게임은 입장전 model/assets/gameScript 모두없음, 입장후 gameScript1개·정상welcome·빈오류상태를 확인했다. 앞선 SpawnerAssets.ready undefined와 중복초기화는 최종검수에서 발생하지 않았다.
+- 실제 렌더검수: 두 로컬 화면6편성×4플레이어=48건에서 카메라 전환/본체 상대크기를 확인했다. 작은/대형/최대성장 편성의 실제 alpha 픽셀 겹침0, 대형공격17시점에서 모든 표시 유닛의 잘림0·같은편 본체 겹침0이었다. 실제 스크린샷을 직접 열어 배치와 보정된 포자/샘방울 contact sheet를 확인했다. 실험실 실제 주사위로 양쪽5명 편성 후 자동전투가 약28초/153+사건 후 ended까지 진행, 양쪽로스터5와 page/console/network오류0. 인게임 실제 입장/전투패널도 오류0. 방향 픽셀은4종×7형태×idle/attack요청56쌍을 실제소스 모듈·원본이미지로 그려 좌우대칭을 확인했다. 미등록 동작의 자기원화 fallback도 포함하며 새 동작을 제작/승인했다고 주장하지 않는다.
+- 검수 oracle/수정 이력: 초기AA축소채널비교는 투명경계/서브픽셀 샘플링 차이로 실패했다. 해당 probe를 보존하고 원본2배 정수배율/nearest 샘플링으로 원본 프레임의 정확한 좌우 대응56쌍을 확인해 모두 일치했다. 제품 AA설정을 바꾸어 통과시키지 않았다. 실제 주사위검수에서는 복구한 구handler의 batchBusy 참조가 현재 축약UI에 없어 오류가 발생했고 이를 제거했으며 회귀 harness에서도 가짜batchBusy를 제거해 실제상태계약으로 검수했다. 공개 레거시 adapter 사본과 실제 source가 달라 art 준비 observer가 실패한 것은 해당공용렌더 adapter 사본만 현재소스로 동기화해 해결했다.
+- 테스트/남은 항목: 관련46개 고유회귀 중45개 통과. 기존 species-held-hurt의 V7 rig provenance 검사1개는 여전히 실패한다. spore/pebble/spring×blade/carapace6개 sourceRig의 현재SHA가 과거rigHash와 다르며, 그 기대해시가 이번수정전사본과 그대로 같음을 입증했다. 이 채팅은 rig파일/해시기록을 임의 수정해 검사만 통과시키지 않았다. 실제 게임 오류로 관측된 것은 아니며 전체검사무오류로 주장하지 않는다. 최종24텍스트UTF8NoBom/CRLF와 CRLF를허용한 scoped diff-check 통과, 범위/해시/public검사는 final-result.json에 보존했다.
+- 누락점검/완료상태: 최신 ‘이미 오른쪽인 동작 유지·왼쪽 동작만 반전’ 교정과 이전 배치/동적줌·상단HP·로컬오류·5:5검수 요청을 모두 대조했다. 제품20/회귀4와 본채팅기록이 이번작업범위다. 다른 채팅의 외형전환·승인애셋/포자퇴역·문서·DNA/Git작업을 보존했으며 원본그림 재생성·전체build·브랜치·stage·commit·push를 이 채팅에서 실행하지 않았다. 기존리그검사 한계와 실제두화면/전투성공을 구분해 최종응답한다.
+## 승인 작업 동작의 공통 전용클립 경로 확정 · 현재 채팅
+
+- 기록 ID: gather-work-native-registry-20261107. 기록 시각 2026-11-07T10:17:52.0947015+09:00. 기록자·구현경로 판단 Codex /root, 네종족 시각승인·게임적용·push 결정 사용자. 출처 현재채팅01a1b349-c2f5-7410-817c-1a43af3819a8 및 직접 HEAD/native registry 관찰,H:/Spawner Windows PowerShell. 정확한 발언시각·턴/항목 ID 미제공.
+- 판단: 병행 전용클립 전환이 main의 c2457a4에 들어와 이제 기존 UNIT_ACTION_ART의 네 gather.actions에 승인 harvest/carry/throw를 등록할 수 있다. 별도 전용렌더러를 제품에 추가하지 않고 공통 UnitActionArt/UnitActionState로 재생한다. carry는 자기 전용 carry가 있을 때 우선하고 없으면 종전 walk호환을 유지한다. throw의 releaseAtMs540을 기존 납품24%시점에 맞추는 공통 시계 앵커를 넣는다. clip.embeddedCargo와 실제행동/이미지준비상태로 기존 운반물/투척표시 중복만 막으며 장부·속도·능력은 그대로 둔다. 상위대표외형4종의48작업은 자기 registry 항목에서 나중에 제공할 계약으로 남는다.
+- 검수 근거·대체: 이전 격리 80fe후보의 별도native adapter에서는 192 world RGBA비교/상태가드/변이없음·오류0과 실제PNG를 확인했다. 이후 공통registry 구현으로 전환하므로 이 결과를 최종새코드 성공으로 확대하지 않는다. 새 공통경로에 맞춰 필요한 렌더/퇴역 검수를 다시 한정한다. 이전 adapter는 task임시자료이고제품commit에서제외한다. 첫후보의CRLF혼합은 전용후보8개만공통-Fix로교정했고보호중작업파일은정규화하지않았다.
+- 현재원격의존: 구형포자탄생 퇴역채팅은 새원격승인gather-birth-V3를 현재구형목록과 구분해보존하도록후보를수정중이다. 초기 ce67614 후보를그대로게시하지않으며그채팅의실제최종main을기준으로최종생성물을구성한다. 다른작업의후보commit을이채팅에서무단으로branch에적용하지않는다.
+- 치유 실제인계: DNA 기능 및 스탯 재구성 채팅은 완료 응답에서 치유도안/선택지 제외·기본3도안·편집기격리검수를 보고했다. 본채팅은 healer/healPower의현행카탈로그퇴역·복원DNA의효과0·표에서2행삭제와공개사본동기화,관련회귀기대값을자체범위로끝낸다. healing/재생/흡혈과codeGCT 등기존ID/가닥복원은 유지한다. 부분저장/목록등그채팅의다른변경을본commit에동봉하지않는다.
+## 유닛 통합·기본형 크기 비교 기록과 푸시 완료 · 01a1b35b 현재 요약
+
+- 기록 ID: units-merge-pushed-20261107-01a1b35b. 기록·원격검증 시각 2026-11-07T10:07:38+09:00. 기록자·수정/검수/Git실행 Codex /root, 유닛정리·최종기본형만유지·결정기록/푸시 승인 사용자. 출처 현재채팅01a1b35b-7258-7133-9641-23883b1facdb 및 push/{freeze,commit-result,publication-qa,final-state}.json,실제git push와ls-remote 응답. 원발언정확시각·턴/항목ID·PC식별불명,H:/Spawner Windows PowerShell.
+- 실제완료: bd9d3714382ffba99db71381ab04dd20c7a76fbf 「유닛 페이지 통합과 크기 비교 기본형 정리」, parent5633e897ad04396e3d6873ee8522c50828776055, tree295aff1747d703c019a8e005faee73f742247e51. 문서/프리뷰·생성기/28매핑/관련기록5텍스트와기존미리보기56개,정확61경로를원자적커밋했다. https://github.com/oojjrs/Spawner/commit/bd9d3714382ffba99db71381ab04dd20c7a76fbf . 전용origin/main에푸시후ls-remote·origin/main·시작체크아웃main이모두동일commit임을확인했고본범위staged경로0이다. 관련이전6기록은부모이력에이미존재해중복하지않고당시누락된푸시/투영/통합정정/동결4절을같이포함했다.
+- 유효결정/적용: 플레이어블4종기본스탯제거·유닛/외형43행한페이지통합·비교맨마지막·플레이어블각기본형1개4개+중립19개총23작은순이다. 처음맨위배치판단은사용자교정으로,43종기관포함비교는최신기본형지시로대체됐고원기록은보존한다. 새문구·그림/스탯·게임동작변경은없다. 새채집원화/동작·게임/전체번들의다른미커밋내용은제외하고기존승인미디어를옮겼다. 기관포자탄생은기존폐기결정대로빈칸으로보존하고완성기본형만참조한다.
+- 실제검수/보호: 최종게시후보의43행/23카드/기본형대기프레임변화/맨마지막·5열/가로넘침0·JS오류0을HEAD데이터와후보코드만적용한독립숨김브라우저에서확인하고두PNG를직접열었다. staged범위61·공백검사·3스크립트구문·ID/필수참조검사통과,제품4텍스트UTF8NoBom/CRLF OK다. 후보memory의기존HEAD Mixed원문에추가4절만CRLF로붙여보존했으므로temp-NewFile CRLF검사에서는Mismatch였고기존본문을고치지않았다. 최종저장/원격의23개와실작업경로23개·마지막위치도확인했다. 기존/동시index와미커밋/미추적변경은그대로남겼고refs/codex-preserve/units-01a1b35b-1794013182405의복구근거를유지한다. 전체게임검수나별도배포를실행했다고주장하지않는다.
+- 누락점검: 원요청·후속2교정·최종기본형기준·실제수정/검수·보호·커밋/푸시/정확원격과로컬일치·실수한원격퇴역7파일가져오기와즉시삭제정정을대조했다. 이번채팅의요청범위는완료했다. 다른채팅의전체포자퇴역Git/새동작/배포작업완료는별개다. commit후에만알수있는본결과는로컬기록으로보존하고memory-only후속커밋/게시이력수정을자동수행하지않는다.
 
 ## 유닛 통합·기본형 비교 푸시 동결 · 01a1b35b 현재 요약
 
@@ -385,18 +385,40 @@
 - 실제통합: 기존local5커밋을origin/main b4b0e05위로git replay한5633e89로main을CAS이동했다. 기존index와변경/미추적229실물·142부재경로를refs/codex-preserve/units-01a1b35b-1794013182405/9e2f50f에원문보존했고default index기존stage0을유지했다. Design은dirty보호로유지했으며원격clean15파일만가져왔다. 원본local5개commit순서/제목동일과기존142부재경로재생성0을직접확인했다.
 - 의미있는정정: clean15개중원격에뒤늦게들어온spore-gather-birth-v3의7파일을일시가져온것은기본회전형외모든포자탄생폐기결정과충돌했다. 동기화전에없었고이번도구가새로만든7파일만그대로Git필터bytes와대조한뒤즉시unlink했고기존파일/다른작업은삭제하지않았다. 초기snapshot부재142검사만으로는새원격퇴역경로를잡지못함을기록한다. 기획후보의기관별포자birth5칸도현재폐기결정대로빈칸을유지하여해당원격참조를다시게시하지않는다. Git에서의전체퇴역제거는별도폐기채팅의승인작업이며이번유닛정리에서완료했다고주장하지않는다.
 
+## 유닛 기본 방향 통일 판단 · 현재 채팅
+
+- 기록 ID: combat-facing-unification-start-20261107-01a1a5fd. 기록 시각 2026-11-07T09:52:05+09:00. 기록자·방향 구현판단 Codex /root, 오른쪽기본방향과 왼쪽애니반전 결정 사용자. 출처 현재채팅01a1a5fd-bf0b-70a3-abf8-267f88676072의 두 직접 지시와 source contact sheet·read-only subworker facing_audit(명시된 gpt-6.1-sol/low) 조사. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 요구 교정: 플레이어블4종족을 통째로 뒤집지 않는다. 기존 오른쪽 기본형 idle/jump/walk/attack은 유지하고 왼쪽을 바라보는 동작의 출력 프레임만 오른쪽 기본으로 정규화한다. 진영/월드 좌표의 side 의미는 서로 달라 side부호 자체를 통일하지 않고 실제 바라볼 facing(+1오른쪽/-1왼쪽)을 공통으로 사용한다.
+- 관측: 기본21클립, 기관·원거리38클립, 기관공격8클립의 실제0/중간/접촉주변 프레임을 $Trash/combat-facing-20261107 contact sheet로 확인했다. 기본형은 우측 attack 폴더 및 우측 진행을 유지한다. V7 칼날/갑각 계열은 사용자가 지적한 왼쪽 기준 외형군으로 분리해 reference와 각action에 sourceFacing=left를 명시하고 완성된 단일 프레임을 접점 주위에서 반전한다. 정면형 외형은 방향이 시각적으로 불명확하므로 같은 외형군의 reference 방향을 따른다는 Codex판단이다. 기본/분비/소기관 원본은 right로 명시한다. 공격변위 부호만으로 시선 방향을 판정하지 않는다.
+- 구현: 공용 unitFacing/unitFrameMirror에서 모델의 실제 방향과 원본의 방향을 분리한다. 최종 출력에서 원본left 보정과 전장left 표시 반전을 한 번씩 결합해 시간/프레임순서/피벗/기관부착점을 유지한다. 원본atlas 전체반전·그림재생성·좌우그룹물리재배열은 하지 않는다. 방향별피격은 합성된 반전 여부로 sourceSide를 선택해 좌우피격 의미를 유지한다. 초상화/미리보기도 같은 정규화된 완성프레임을 사용한다. 중립의 left 원본도 공용함수의 sourceFacing으로 명시해 표시방향은 같은 계약으로 계산한다.
+- 동시상태: 작업중 파일세트가 legacy<->unit-action-art 경로로 바뀌었고 일부 카메라·메모리 변경이 사라졌다가 다시 나타났다. 현재 실제 unit-action-art가 공용단일출력경로인 상태를 기준으로 최소수정하고 구architecture를 복구하지 않는다. 초기 HTML prefix복구는 guard가 현재tail변경을 감지해 쓰기 전에 중단됐다. 이후 현재파일의 입장구조가 정상이고 game inline본문이 제거된 것을 확인했다. 앞선 prefix기록의 실행예정은 완료로 해석하지 않는다. 배치/HP/입장 수정 요청도 계속 보존하고 최종현재파일을 재검수한다.
+## 전투 실험실 하단 제거 로컬 커밋 완료 · 01a1b370 현재 요약
+
+- 기록 ID: combat-lower-remove-commit-01a1b370. 기록·Git readback 시각 2026-11-07T09:47:34+09:00. 기록자·직접 실행/검수 Codex /root, 삭제·로컬 커밋 결정 사용자. 출처 현재 채팅 01a1b370-0281-7a21-8c35-2f5c3f176368 및 literal $Trash/combat-lower-remove-01a1b370/commit-result.json·staged.diff. 원발언 정확 시각·항목 ID·PC 식별 불명, H:/Spawner Windows PowerShell.
+- 확인 완료: main 커밋 80fe722626609b0795a145a7ce2596aab726c72f (전투 실험실 하단 실험 패널 제거), parent a37cb3bcd070ec5eb47b62deac0fe61fe42eef16, tree 1093de68da34560a72c0cace03557150e88210fa. 제품3경로와 이번 start/freeze2절만 정확4경로로 원자적 커밋했으며 다른 작업/공유기록은 보존했다. 기본index의 네 경로만 새HEAD blob으로 맞춰 역방향 staged변경이 생기지 않게 했고 다른 index항목은 유지했다.
+- 실제 검수: 제품3개 UTF8NoBom/CRLF 형식 OK와 최종 staged 내용·공백 검사 통과(기존 CRLF를 인정하는 cr-at-eol 설정). 메모리의 기존 Mixed는 보존했으며 브라우저/런타임 검수 성공으로 확대하지 않는다. 연결 Projects0이고 새 브랜치·push/배포는 없다. 요청/결정/결과/한계 누락 점검을 완료했다. freeze의 커밋 미확인을 이 readback으로 대체하며 원기록은 남긴다. 이 커밋 뒤에만 알 수 있는 결과는 로컬 기록으로 유지하고 메모리만의 추가 커밋은 만들지 않는다.
+
+## 승인3동작 v43 공개 배포 완료·원본 Git 대기 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-three-published-20261107-01a1b0eb. 기록 시각 2026-11-07T09:45:45+09:00; 기록자·native배포실측/대기상태기록 Codex /root,세동작반영·재배포결정 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7과SiteNative성공응답·site-published/site-verification·타채팅waitsnapshot,H:/Spawner Windows PowerShell. 원발언정확시각·항목ID불명.
+- 실제공개완료: v43/source 1ffde0f31e0926816864e400ec2a349ae375e5d0/deployment appgdep_6aee7356705c81918cb690bafec8f744가2026-11-07T00:40:07.235039+00:00에succeeded, https://spawner.oojjrs.chatgpt.site. immutableRootGitTree e6a146c23e12c48586bb78e3fcd6a98a0a5bc7c0의검증된세동작+구형포자birth제거를별도SitesSourceRepo에서한국어commit·push·원격readback·archive저장·배포했다. Rootmain/index는coord요청후이동하지않았다. archive94894080B/176files,asset707개,새native3원본bytes일치·퇴역mapping0·미참조localhash0. rootGitcommit됐다는주장없이tree입력임을정확기록한다.
+- 적용/검수: bean분비idleV4 64f/3200ms,sporegatheridleV1 64f/6400ms·walk16f/1120ms 전부반영. beanworld64/combat대표frame·loop/coldfallback·neutral512원계약,spore두publicfactory각8샘플·가드22/운반/portrait검수성공. 구형포자birth145tracked탈참조와기본회전판/필수8보호,생성물5구문·빈modules[]0/퇴역ref0/native3등록·531canonicalasset확인. 기존spring단정이낡은legacytest1회실패는해당증거에유지하며전체suite성공이라고확대하지않는다.
+- 원본Git미완료경계: commit.cjs실행은다른작업의HEAD전진가드에서안전중단되어rootcommit성공없음. 01a1b33b퇴역채팅이사용자‘푸시까지해’승인을받아145삭제+67text를먼저commit/push하고actualtip전달을요청했으므로rootmain/index를중복변경하지않고대기한다. 현재그채팅은공용main을반복이동하는‘파츠 합성 애니 폐기와 전용 클립 재생 전환’과메시지조율을위한사용자승인을질문한상태로확인했다. 받은메시지자체는답신권한이아니므로이쪽에서무승인채팅메시지를보내지않았다. 공개배포는이미별도SourceRepo로완료했고원본저장소의세동작commit/push만미완료다.
+- 재개점: 그actualtip통지뒤native3/preview3·source/정책/로더/기획3cell만새parent에투영해rootcommit/push한다. 145폐기와59제거를다시적용/복원하지말고현재기본birth보존상태를유지한다. b/followup-three의onlytemp계획과bean/spore/registration결과·source-edits·정확projection을재사용한다. 보호untracked새registry전체는commit하지않고호환2행만해당owner작업에보존했다. 이전freeze의외부배포대기는본성공으로대체,rootGit미완료는정확히유지. 요청/결정/실제변경/검수/외부성공/남은외부조율누락점검완료.
+
 ## 유닛 통합 게시 후보의 기존 자산 참조 보존 · 01a1b35b
 
 - 기록 ID: units-merge-push-projection-20261107-01a1b35b. 기록 시각 2026-11-07T09:45:09+09:00. 기록자·후보분리 판단 Codex /root, 기록/푸시 승인 사용자. 출처 현재채팅01a1b35b-7258-7133-9641-23883b1facdb와 push/candidate-report.json 및 실제HEAD객체. 원발언시각·턴/항목ID·PC식별불명,H:/Spawner Windows PowerShell.
 - 관측/판단: Git완료대기중실작업경로의유닛HTML과관련JS가다시HEAD형태가된것을관측했다. 원인행위자를단정하지않고승인형태사본을보존했다. 최신기본이력의기존유닛23행과외형20행미디어를각동작별로승인된43행레이아웃에이동하고23개최종크기그리드/전용CSS/목차/확대연결만투영한다. 미커밋채집새작화·UnitBase96표지·새애니/런타임작업은이번게시에서제외하고기존이력의원본·미리보기를참조한다. 새관련assets를임의게시하지않는다.
 - 후보근거: 기존43행내용은페이지하나에합치고4종기본스탯을제거하며비교23개를맨마지막에남긴후보를만들었다. 후보HTML지역의파일참조는모두현재Git이력에존재하여새미추적자산의존0이다. 프리뷰에는공통표통합에필요한기존selector/데이터연결과두그리기보정만최신HEAD와3way결합하고표지생성기는div범위탐색1줄을맞춘다. 본문문구는기존승인형태를재사용한다. 아직커밋/푸시성공이아니다.
 
-## 유닛 통합 결정 기록·푸시 승인 범위 · 01a1b35b 현재 요약
+## 네 종족 작업 동작 승인·게임 적용·푸시 수신 · 현재 채팅
 
-- 기록 ID: units-merge-push-authorized-20261107-01a1b35b. 기록 시각 2026-11-07T09:38:59+09:00. 기록자·범위분리 판단 Codex /root, 기록·커밋/푸시 승인 사용자. 출처 현재 채팅01a1b35b-7258-7133-9641-23883b1facdb의 “결정사항 기록 잘 남기고 푸시까지 쭉 해”. 원발언정확시각·턴/항목ID·PC식별불명,H:/Spawner Windows PowerShell.
-- 유효결정: 유닛에외형내용통합·플레이어블4종기본스탯삭제·크기비교맨마지막·4종족각기본1개+중립19종=23개작은순이다. 최초상단배치판단은사용자교정으로폐기했고43개전체비교는기본형만유지지시로23개에대체됐다. 제품문구/자산새생성이나능력치변경은없다. 이번내용과관련기록을같은커밋으로전용origin/main에푸시하며다른게임/아트작업을임의포함하지않는다.
-- 현재범위/통합: Design.html와프리뷰활성화/표지생성기,본채팅기록6절을기본후보로한다. 선행미커밋외형표통합·기본표지/재생데이터와병행승인동작이같은본문에겹쳐최신HEAD에서필요한의존성/요청범위를분리한다. 원격fetch후HEAD3개/원격2개분기가있으며병행구형탄생폐기채팅이동일main재배치를수행중인것을wait_threads로직접확인했다. 그branch/index/lock을건드리지않고후보와기록을먼저준비한다. 최초index는해당4경로HEAD기준이며기존변경을보호한다. board조회Projects0을재사용한다.
-
+- 기록 ID: gather-work-four-approved-push-20261107. 기록 시각 2026-11-07T09:43:46.6392414+09:00, 기록자·적용/격리 판단 Codex /root, 원발언자·시각승인·기획서/게임적용·push 결정 사용자. 출처 현재채팅01a1b349-c2f5-7410-817c-1a43af3819a8의 ‘좋아. 넷 다 승인. 기획서랑 인게임 다 적용하고 푸시까지 쫙 해.’ 정확한 발언/턴 시각 미제공,H:/Spawner Windows PowerShell.
+- 현재승인: bean/spore/pebble/spring의 채집→운반→투척 GIF 네개, 각3동작8키포즈=12클립이다. 기존 생성시안을 승인본으로 전진시킨다. 상위대표외형4종×4종족×3작업=48개는 아직 미제작인 별도후속 요구이며 이번 네시안승인을 그48개 승인으로 확대하지 않는다. 현재요청의 push에는 필요한 정확 관련 stage/commit이 포함되며 Site배포를 임의로 추가하지 않는다.
+- 적용판단: 승인된 전체캐릭터시트를 게임의 실제 상태/시계로 재생하고 내장 운반물·투척물과 기존 별도props 중복을 방지한다. 게임의 채집량/납품시점/자원장부는 보존한다. native source는 DesignAssets/Animations/GatherWorkV1로 복사하고 기획서96px/원본시트/GIF를 함께 보존한다. 자기대표외형이 gather인 경우만 이번12클립을 쓰며 칼날/분비/안테나/갑각에 잘못 덮지 않는다.
+- 실제격리사유: 병행 전용클립 게시채팅의 Git보존 중 본채팅의 untracked98애셋이 live에서 사라졌고 현재 refs/stash 6a0d9e6의 세번째부모에서 모두확인했다. 전역stash를 적용하거나타작업을되돌리지않고 본채팅의 세개폴더98경로만 literal $Trash/gather-work-approved-20261107/recovered로읽어복원했다. 원본내장imagegen출력도별도유지된다. 병행채팅이 공유파일잠금후복구중인상태를확인했으며 새승인후보는 HEAD기반별도파일집합/전용index로만구성한다. 다른전용클립전환/그리드/부분보관함변경은포함하지않는다.
+- 치유: healer/healPower퇴역두canonical수정과유지할healing/재생/흡혈판단을 사용자승인으로DNA 기능 및 스탯 재구성01a1a10e에전달했고, 그채팅은 치유도안/선택지를제외한다고직접응답했다. 현재그채팅은HTML통합손상을복구중이라그파일을추가로덮지않는다. 본채팅의네승인동작commit과별도로미확인복구상태를완료라하지않는다.
 ## 전투 실험실 하단 제거·커밋 범위 동결 · 01a1b370 현재 요약
 
 - 기록 ID: combat-lower-remove-freeze-01a1b370. 기록 시각 2026-11-07T09:43:41+09:00. 기록자·구현/분리/검수 판단 Codex /root, 삭제·로컬 커밋 결정 사용자. 출처 현재 채팅 01a1b370-0281-7a21-8c35-2f5c3f176368의 첨부 화면·요청 및 실제 source/생성물/형식 도구 결과. 원발언 정확 시각·항목 ID·PC 식별 불명, H:/Spawner Windows PowerShell.
@@ -410,6 +432,17 @@
 - 확정 범위: 첨부 화면의 전장·편성/외형·주사위·다음 사건/자동 전투/끝까지/초기화는 유지하고 그 아래 비교 설정, 양쪽 능력치 편집, 실험 규칙, 투자 곡선, 반복 실험, 사건 기록 UI와 전용 갱신 코드를 제거한다. 삭제되는 설정은 기존 초깃값으로 유지하며 새 문구를 추가하지 않는다. source JS/CSS와 Combat.html의 해당 inline/CSS만 좁게 동기화한다.
 - 현재 근거: 전용 origin oojjrs/Spawner, 연결 Projects nodes=[]·hasNextPage=false. 기존/동시 Spawner.html·runtime.js·다른 메모리와 일반 index를 보존한다. 관련 메모리만 분리해 제품 변경과 원자적으로 로컬 커밋하며 새 브랜치·push/배포는 없다. 구현·검수·커밋은 아직 대기다.
 
+## 유닛 통합 결정 기록·푸시 승인 범위 · 01a1b35b 현재 요약
+
+- 기록 ID: units-merge-push-authorized-20261107-01a1b35b. 기록 시각 2026-11-07T09:38:59+09:00. 기록자·범위분리 판단 Codex /root, 기록·커밋/푸시 승인 사용자. 출처 현재 채팅01a1b35b-7258-7133-9641-23883b1facdb의 “결정사항 기록 잘 남기고 푸시까지 쭉 해”. 원발언정확시각·턴/항목ID·PC식별불명,H:/Spawner Windows PowerShell.
+- 유효결정: 유닛에외형내용통합·플레이어블4종기본스탯삭제·크기비교맨마지막·4종족각기본1개+중립19종=23개작은순이다. 최초상단배치판단은사용자교정으로폐기했고43개전체비교는기본형만유지지시로23개에대체됐다. 제품문구/자산새생성이나능력치변경은없다. 이번내용과관련기록을같은커밋으로전용origin/main에푸시하며다른게임/아트작업을임의포함하지않는다.
+- 현재범위/통합: Design.html와프리뷰활성화/표지생성기,본채팅기록6절을기본후보로한다. 선행미커밋외형표통합·기본표지/재생데이터와병행승인동작이같은본문에겹쳐최신HEAD에서필요한의존성/요청범위를분리한다. 원격fetch후HEAD3개/원격2개분기가있으며병행구형탄생폐기채팅이동일main재배치를수행중인것을wait_threads로직접확인했다. 그branch/index/lock을건드리지않고후보와기록을먼저준비한다. 최초index는해당4경로HEAD기준이며기존변경을보호한다. board조회Projects0을재사용한다.
+
+## 로컬 입장 HTML 추가 손상 확인·최소 복구 · 현재 채팅
+
+- 기록 ID: combat-entry-prefix-repair-20261107-01a1a5fd. 기록 시각 2026-11-07T09:36:55+09:00. 기록자·관측/복구 판단 Codex /root, 초기화 수리 승인 사용자. 출처 현재 채팅 01a1a5fd-bf0b-70a3-abf8-267f88676072 및 실제 로컬 입장 검수.
+- 검수에서 입장 버튼 null 오류가 발생했다. 현재 Spawner.html은 doctype 다음에 raw game.js 본문이 들어가고 원래 head/body/입장UI/runtime placeholder가 사라져 있었다. 이번 apply를 작업전7사본에 재실행한 dry-run 기대결과에는 온전한 입장 구조가 남으며, 현재 raw본문은 현재client/game.js 및 아래의 정상game placeholder본문과 정확히 같다. music-catalog placeholder 이후 tail은 이번 기대결과와 정확히 일치한다. 손상 발생 주체·원인은 확정하지 않는다.
+- 현재 요청의 인게임 로컬 초기화 수리 범위로 판단해 doctype부터 첫music placeholder 직전까지만 기대결과의 정상 head/body/runtime 구조로 교체한다. 정확히 같은 tail은 그대로 보존한다. 추가손상 사본을 task $Trash에 저장하고 현재바이트가 검사시점과 일치할 때만 쓴다. 이전 보호변경 및 우리 배치/type수정이 포함된 기대prefix를 사용하며 전체파일rollback이나 다른작업수정은 하지 않는다.
 ## DNA 조각 교환 로컬 커밋 범위 확정 · 01a1b342 현재 요약
 
 - 기록 ID: dna-level1-shape-swap-commit-freeze-20261107-01a1b342. 기록 시각 2026-11-07T09:02:20+09:00. 기록자·분리/범위판단 Codex /root, 로컬커밋승인 사용자. 출처 현재 채팅 01a1b342-551b-7c40-a4f4-60130e6efa4e의 ‘커밋’과 실제 Git/검수결과. 원발언 정확 시각·항목 ID·PC 식별 불명, H:/Spawner Windows PowerShell.
@@ -176215,6 +176248,37 @@ Text: none. No lettering, labels, logo, watermark, UI, borders, health bars, peo
 - 동시 다른 Git보존작업 중 새회귀파일이 사라지고 제품이 이전내용으로 돌아온 것을 직접관측했다. literal $Trash의 기존태스크사본/후보는보존되어 있어 이번방향훙크·최종회귀·관련4기록만 현재본문에 재적용하며 다른본문/기본index·미병합·stash는 건드리지 않는다.
 - HEAD의 외부스크립트진입점이 client/game.js를 읽으므로 무관한 Spawner.html 인라인화를 포함하지 않고 제품3파일+회귀1+메모리1의5경로로 동결한다. 기본index는 전용복사본에서 이번훙크만 반영한뒤 나머지entry보존을 확인하고, compare-and-swap으로 같은main의부모가그대로일때만 원자적로컬커밋한다. 아직커밋성공을기록하지 않는다.
 
+## 포자 탄생 폐기 최종 원격 기준 갱신 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-push-basis-b4b0e054-01a1b33b. 기록 시각: 2026-11-07T09:41:37+09:00. 기록자·통합판단 Codex /root, push 승인 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0와 실제 fetch/replay/projection 결과, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
+- 동시 Git 변경을 감지하여 이전 draft 부모는 적용하지 않았다. 최신 main 322d91880a8d48e8d0f7b74584fe3b01de5797d8, 원격 b4b0e054790d1f04c11e9f1f28e114c54d53cce5, 로컬 3/원격 3 차이를 기준으로 작업 파일/index/참조 이동 없이 재배치 864dc0c38b3b5c4cde716c74b0c49bcf2af8771f를 계산했다. 기존 로컬 커밋은 모두 보존하며 최신 원격의 승인 자산·문서 변경도 후보의 바탕에 유지한다. 삭제145·관련 소스/생성66 및 본채팅 기록 범위는 같고 다른 미커밋 작업은 제외한다.
+- 본 후보로 stage/commit/push 전에 원본 index·기존 작업 파일·미추적 항목을 Git 객체와 hash로 보존하고, 실제 적용 직전 HEAD/index/working hash를 대조한다. 구형 raster를 파일로 checkout하거나 새 branch를 만들지 않는다. 커밋 subject는 ‘포자버섯 구형 탄생 애셋과 참조 제거’로 검토한다. 아직 실제 commit/push 성공 기록이 아니다.
+
+
+## 전투 배치 방향 로컬 커밋 완료 · 01a1b35f 현재 요약
+
+- 기록 ID: combat-facing-committed-20261107-01a1b35f. 기록·직접관측 시각 2026-11-07T09:44:07+09:00. 기록자·커밋/확인 Codex /root, 로컬커밋승인 사용자. 출처 현재 채팅 01a1b35f-55ee-7bc2-9448-fea7af2ad1ef의 ‘커밋해’와 literal $Trash/combat-facing-01a1b35f/commit-result.json. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell. freeze/scope의 미완료를 이 실제결과로 대체하고 원기록은 보존한다.
+- 결과: main에 a37cb3bcd070ec5eb47b62deac0fe61fe42eef16 「전투 뷰 유닛 좌우 방향 수정」 로컬커밋 생성. parent 322d91880a8d48e8d0f7b74584fe3b01de5797d8, tree 777ec75e193fa524e67ca98c495da5ed1965ed91. 전투source2/Combat내장stage1/최종회귀1/관련메모리4절의 정확5경로·155추가/9삭제만 포함함을 staged diff와 commit tree로 직접확인했다. 전용index/commit-tree/update-ref CAS를 사용했고 기본index의 다른모든경로·미병합entry가 정확보존됨을 전후대조했다. working의 방향훙크와 최종회귀도 현재보존을 직접확인했다.
+- 검수: 최종분리회귀5/5 PASS·staged CR허용공백검사PASS, 현재제품3/새회귀1 UTF8NoBom/CRLF OK. 메모리기존 Mixed/ExpectedMixed는 NeedsReview를 보호하며 정규화하지 않았다. 실제브라우저6장면/기존2실패/일부HEAD사망clip경계누락의 구분은 앞선 complete/freeze 기록을 유지한다. Projects0 재사용.
+- 누락점검: 원방향요청·관련5회귀·정확scope·사용자커밋승인·기본index보존과 성공OID를 대조했다. push/배포는 요청·실행하지 않았다. 커밋뒤에만확인된 본결과는 로컬메모리에 남겨 다음 승인된 관련커밋으로 이월하며 memory-only 후속커밋/amend는 만들지 않는다.
+
+## 치유 퇴역·갑각 2레벨 확인·부분 저장 통합 복구 진행 · 01a1a10e
+
+- 기록 ID: dna-part-save-healer-retirement-recovery-20261107-01a1a10e. 기록 시각: 2026-11-07T09:45:15+09:00. 기록자·조율/직접검수 Codex /root, 퇴역·재확인 결정 사용자. 출처 현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의 「갑각을 거기로 옮겨도」「치유기관 관련 내용은 다 삭제하고 갑각을 2레벨로 옮긴다음 새로 다 확인해야지…대체가 안될텐데」 및 문구질문 call_ea19a0c35b364dad94eed042c1f80ffb 회신, 01a1b349-c2f5-7410-817c-1a43af3819a8의 사용자승인 퇴역 전파. 개별 원발언 시각/항목ID 불명, H:/Spawner Windows PowerShell.
+- 새 현재조건: healer/전용강화healPower를 신규선택·초기도안·새부분조합 적용에서 제외한다. 기존 사용자저장 형상/ID/코드는 소실방지를위한 legacy조회로만유지한다. healing은받는회복증폭이며이퇴역과별개다. 기본치유사도안은제거해 채집꾼/근접전사/원거리전사3개만남긴다. 이전본채팅의기본4개·치유사제공계획은이결정으로대체되며 기존연구의치유형추천은현신규제공안이아니다.
+- 직접관측/판단: 현재canonical에서갑각은이미 grade2/shape[0,5,1]이다. 사용자발언을치유기관shape[0,2,1]로갑각을단순치환하라는승인으로해석하지않는다. 갑각2레벨정책으로남은현재3개초기도안의유효성·기능·끝점확장가능성을다시확인한다. 과거91칸전체전역최적성이나새3렙형상실행검수로확대하지않는다.
+- 실제중간검수: actualAttribute 포인터첫/끝선택·원본불변저장·자동부분탭·새로고침지속·전체회전추가·1회undo·저장/삭제실패보존을C가확인했다. 메인은실제스크린샷으로기본목록/부분목록을확인했고 standalone강화미리보기0누락을발견해원본전체stats-선택구간제외stats 기여분으로수정했다(근공강화단독+4 actual확인). budget만변하는인게임context에서선택취소하지않도록수정했다. 기존Attribute body min-width980에따른680폭넘침은범위밖이라수정하지않는다.
+- 통합실수/복구: C작업용inline동기화가병행변경된script type=text/plain태그를못찾고Spawner앞부분을손상시켰다. 메인이즉시공개·쓰기중단/국소복구조율했고, 도중병행작업이정상candidate(empty data-srcstub)로교체한것을확인했다. C가그새정상본을잘못복구대상삼은추가쓰기도즉시되돌렸다. 현재정상candidate직전backup SHA b0640105ea81b9a3c5a847210ec2fdd9acb38c0f051bd04a833befa560633a90 + 부분CSS링크55bytes만추가한현재SHA88a8b3f0d01ca37f09a13a54412c942c391469dcd9a319f036726e1b2b31d52c를C확인했고 메인도html/head/body와빈runtime/game data-srcstub를직접읽었다. 앞으로Spawner inline재삽입은금지하며현재entry.js/static참조구조를보존한다. HEAD전체복원/공용Git조작은하지않았다.
+- 별도동시교체관측: 09:36경mtime의editor/attribute가기능추가전으로바뀌고새parts/helper/CSS/starter파일이없어진사실을메인과A/B가확인했다. 이전검수성공만으로현재구현완료라고주장하지않는다. 교체행위자/명령은미확정이다. 현재canonical치유퇴역도유실되어A가사용자최신조건에맞춰최소재적용했고 catalog치유false/효과0/갑각grade2를실측했다.
+- 현재진행/보호: taskTrash/recovery에완성source들을재구성했다. A는baseline==freshlive조건으로editor/parts를재적용하고helper/CSS/Attribute-only/runtime필요모듈만안전복구, B는attribute/3도안과game현소스에insert-only공용목록연결을담당한다. C는제품쓰기중단/temp자료만제공한다. 현재다른작업source·정상emptySpawnerstub·판저장데이터를보존한다. 전체build/stage/commit/push/deploy는이채팅에서승인·실행하지않았다. 최종구현/인게임host실행은아직미확인이다.
+
+## 포자 탄생 폐기 실제 커밋 범위 211경로 확정 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-final-scope-20261107-01a1b33b. 기록 시각: 2026-11-07T09:47:37+09:00. 기록자·최종범위/검수 Codex /root, push 승인 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0와 실제 별도index diff, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
+- 실제211경로=구형145삭제+관련변경/메모리66이다. 준비목록212중 client/unit-appearance-preview-runtime.js는 원격기준 내용과 Gitblob이 이미 같아 변경없이 제외한다. 소스·JSON·임베딩·Design·관련생성물과 본채팅 기록만 포함하고 다른미커밋작업은제외한다. 최종별도index의 diff공백검사0과위212후보구문/구형참조0근거를대조했다.
+- 동시Git대응: main의후속로컬커밋들도그대로재배치해보존하며원격 b4b0e05 기반후보81f4e45를계산했다. 다른채팅이원래dirty를stash중인동안본채팅기록이숨겨져최신stash6a0d9e69를문자열로읽어원본8절을복구해후보에합쳤다. 그stash의퇴역145애셋0을확인했고stash/reference는건드리지않았다. Git원본/작업복원은다른소유채팅에명시승인된메시지로조율중이다. 아직본커밋의실제push전이다.
+
+
 ## 기본 채집형 전투 애니메이션 확인 · 01a1b324 현재 요약
 
 - 기록 ID: gather-combat-animation-inspection-20261107-01a1b324. 기록·근거 확인 시각: 2026-11-07T08:19:24+09:00. 기록자·소스 조사/판단 Codex /root, 질문·설명 사용자. 출처 현재 채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe의 기본 채집 유닛 반격 전투 애니 및 채집 기관 유지/기존 기본 애니 재사용 가능 여부 질문. 원발언 정확시각·턴/항목ID·PC식별 불명, H:/Spawner Windows PowerShell host local.
@@ -176280,90 +176344,30 @@ Text: none. No lettering, labels, logo, watermark, UI, borders, health bars, peo
 - Git stash의 runtime.js 파일 잠금으로 작업트리 정리가 중간 실패했다. refs/codex/preservation/clip-publish-filelock-01a1b324에 원래 tracked/index/untracked 스냅샷을 보존했다. snapshot과 현재 HEAD가 같거나 파일이 없던 353경로만 복구했고 이미 복구된5경로와 이후 변경12경로는 보존했다. 메모리 전체쓰기 실패 후 이 채팅 원기록8절만 동결본에서 append로 복구한다. 다른 채팅의 최신 폐기·복구 결과가 우선하며 전체stash를 다시 적용하거나 구형 포자 탄생을 승인으로 되살리지 않는다.
 - 01a1b33b의 사용자 승인 조율 메시지를 받아 현재 main/index 이동을 멈추고 포자 구형 탄생 폐기 push를 기다린다. 원본 main과 Sites 소스의 다른 작업을 보존하면서 별도 candidate index에서 전용 클립만 준비한다. 아직 이 채팅 commit/push·Site 배포 완료는 미확인이다. 이전 6회귀·148샘플/28형태 렌더 및8wrapper byte 검증은 해당 입력에서 통과했으며 새 통합본은 필요한 부분만 재확인한다.
 
-## 새 승인 원격 탄생 보존·전용 클립 통합 검수 · 01a1b324
-
-- 기록 ID: unit-animation-clips-only-upstream-preserve-01a1b324. 기록 시각 2026-11-07T10:00:19+09:00. 기록자·동결/검수 Codex /root, 전용 클립 전환과 push·배포 결정 사용자. 출처 현재채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe와 01a1b33b의 명시 조율 메시지, candidate.json/candidate-check.json·회귀6실측. H:/Spawner Windows PowerShell; 원발언정확시각·항목ID불명.
-- 원격 b4b0e05에 새로 추가 승인된 spore-gather-birth-v3는 최초 퇴역145목록 밖의 후속 작업으로 보존한다. 구형 V7/V9 폐기와 구분하며 해당 채팅이 폐기 한정을 마쳐 먼저push하는 동안 이쪽 main/index 이동은 계속 멈춘다. 여기서는 새탄생 연결이나 새 애니 제작을 추가하지 않는다.
-- 전용 클립 후보30경로는 관련native3의 원본/manifest·wrapper를 필수지원으로 포함하되 다른 작업의 게임/편집기/기획서·애셋삭제는 포함하지 않는다. 폐기 후보ac59e395 기반 별도tree aa476fa57에서 회귀6통과·wrapper8 원본bytes일치·runtime/Combat/preview구문과 staged공백검사 통과를 확인했다. 이후 실제push tip으로 투영할 때 변경된통합부분만검수하며 불변렌더/형식결과는 재사용한다. 아직본채팅rootpush·새Site배포성공을 주장하지 않는다.
-
-
-## 포자 탄생 폐기 최종 원격 기준 갱신 · 01a1b33b
-
-- 기록 ID: spore-birth-purge-push-basis-b4b0e054-01a1b33b. 기록 시각: 2026-11-07T09:41:37+09:00. 기록자·통합판단 Codex /root, push 승인 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0와 실제 fetch/replay/projection 결과, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
-- 동시 Git 변경을 감지하여 이전 draft 부모는 적용하지 않았다. 최신 main 322d91880a8d48e8d0f7b74584fe3b01de5797d8, 원격 b4b0e054790d1f04c11e9f1f28e114c54d53cce5, 로컬 3/원격 3 차이를 기준으로 작업 파일/index/참조 이동 없이 재배치 864dc0c38b3b5c4cde716c74b0c49bcf2af8771f를 계산했다. 기존 로컬 커밋은 모두 보존하며 최신 원격의 승인 자산·문서 변경도 후보의 바탕에 유지한다. 삭제145·관련 소스/생성66 및 본채팅 기록 범위는 같고 다른 미커밋 작업은 제외한다.
-- 본 후보로 stage/commit/push 전에 원본 index·기존 작업 파일·미추적 항목을 Git 객체와 hash로 보존하고, 실제 적용 직전 HEAD/index/working hash를 대조한다. 구형 raster를 파일로 checkout하거나 새 branch를 만들지 않는다. 커밋 subject는 ‘포자버섯 구형 탄생 애셋과 참조 제거’로 검토한다. 아직 실제 commit/push 성공 기록이 아니다.
-
-## 포자버섯 구형 탄생 영구 삭제 완료 · 01a1b33b 현재 요약
-
-- 기록 ID: spore-birth-purge-complete-20261107-01a1b33b. 기록·최종 관측 시각: 2026-11-07T09:15:16+09:00. 기록자·실행/확인 Codex /root, 유일 보존본·영구폐기 결정 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0와 literal $Trash/spore-birth-purge-01a1b33b 실제 영수증. 원발언 정확시각·항목ID·PC식별 불명, H:/Spawner Windows PowerShell. 아래 이전 진행/질문대기/후보잔존 상태는 이 최종 실측으로 대체하며 원기록은 보존한다.
-- 유효 결정: 유닛 페이지 기본 포자버섯의 빙글빙글 회전하는 탄생만 현재 버전이다. 이외 포자 탄생은 $Trash에서도 영구폐기하며 보관 사본·구형 등록·Git 이력의 옛 승인 기록으로 복구하지 않는다. V7 안테나/발과 V9 칼날/갑피를 포함한 이전 승인·적용 기록은 폐기 결정으로 대체됐다.
-- 완료: 실제 삭제 고유경로2723개, 빈 폴더237개. 구형 이미지/시트/GIF/프레임/임베딩·등록·생성 분기 및 사본/구형 배포압축본을 제거했다. 현재 기본형의 원본2개·프리뷰/썸네일3개·필수 임베딩2개 SHA256은 동일하며 JSON은 현재본의 시간/geometry만 유지하고 구형 source/atlas 링크를 제거했다. 새 bitmap 제작이나 다른 동작·종족 수정은 없다.
-- 재복원 차단: 사용자 승인으로 배포채팅01a1b0eb에 폐기 결정을 전달했고 해당 채팅이 실제 수락했다. 재생성됐던 후보7파일의 포자 탄생 항목/분기만 국소 제거하고 관련 JS/MJS/JSON 구문을 확인했다. 최종 final-readback.json에서 제품 retired참조0·candidate retired참조0·빈modules[]0을 직접 확인했다. 앞선 전경로 실물검사도 보존본 외 구형 spore birth 이미지/시트/GIF/영상/임베딩0이었다. 삭제 로그·해시·과거경로 기록은 실제 사용 가능한 애셋이 아니다.
-- 미해결 구현 구분: birth-game.webp는 회전까지 담은 완성 장면 캡처이지만 기존 게임용 birth-unit.webp는 몸체동작 시트이며 game.js/birth.mjs가 세계 비행·회전을 합성하던 구조다. 사용자는 이 코드 회전을 문제 삼았다. 이를 승인으로 해석하거나 본 폐기 작업이 완성 회전 프레임의 새 게임용 애셋 제작/연결까지 했다고 보고하지 않는다. 별도 전용 클립 전환 작업과 혼동하지 않는다.
-- 검수/경계: 제품65텍스트 형식OK·기존 memory의 HEAD Mixed 대비현재CRLF NeedsReview보호, 제품국소diff공백검사OK, JSON41/JS21/HTML inline12구문OK 및 후보6코드/JSON구문OK. 본 채팅에서 stage/commit/push/배포·Git역사재작성·일반빌드/전게임플레이검수는 실행하지 않았다. 관련 현재결정·실제실행·검수·잔여구조문제의 누락점검을 완료했다.
-
-## 포자버섯 탄생 영구 폐기 결정 · 01a1b33b 현재 요약
-
-- 기록 ID: spore-birth-purge-current-20261107-01a1b33b. 기록·마지막 관측 시각: 2026-11-07T08:59:29+09:00. 기록자·실행 관측 Codex /root, 유일 보존본·영구 폐기 결정 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0, H:/Spawner Windows PowerShell. 원 발언 정확시각·항목ID·PC식별 불명. 아래 기존 원기록을 보존하며 본 결정의 대체 관계를 우선 적용한다.
-- 현재 유효한 사용자 결정: 유닛 페이지 기본 포자버섯 탄생의 빙글빙글 회전형만 보존한다. 다른 포자 탄생은 전부 구형이며 $Trash를 포함해 영구 삭제하고 사본·백업으로도 남기거나 Git 과거 기록에서 되살려 사용하지 않는다. 이 지시는 이전 안테나/발 V7·칼날/갑피 V9 승인 보존·게임 적용 기록을 현재 사용 근거로 삼는 것을 명시적으로 대체한다.
-- 보존 계약: Design.html unit-spore-tribe birth의 Planning/Tribes/spore/Previews/birth-game.webp와 Planning/UnitPreviews/spore-tribe/birth.webp; 실제 원본 Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp와 nest-stationary.png 및 필수 JSON/임베딩/현행 썸네일만 유지한다. 회전·22프레임·3120ms와 두 바퀴 sporeBirthMotion은 그대로다. 관련7바이너리 SHA256 동일 및 기본 셀 링크 보존을 직접 확인했다.
-- 실행 관측: 이름 경로로 2639파일, SHA256으로 찾은 숨은 사본30파일을 실제 unlink하여 총2669개를 삭제했다. 구형 기본 시안·정적 합성본·전투/분비/안테나/발 탄생, 원본/시트/GIF/프레임/등록/임베딩 및 구형 참조를 담은 압축본28개를 포함한다. 제품의 오래된 시트 선택·생성 분기와 유닛 외형 탄생 연결도 제거했다. 구형 픽셀·실행 코드를 보관용으로 복사하지 않았으며 조사 영수증에는 경로·해시·결과만 남긴다.
-- 검수·동시작업: 제품 수정 후보65텍스트의 JSON41·JS/MJS21·HTML내스크립트12 구문 검사를 통과했다. 다른 활성 배포 채팅 01a1b0eb-5c79-76a2-96c3-b18db3b182c7의 $Trash/assets-three-v43-20261107 후보12텍스트가 Git 기준 재생성으로 다시 나타남을 관측했다. 그 채팅에 폐기 결정 전달은 도구가 사용자 명시승인을 요구하여 질문 대기 중이다. 다른 동작·종족과 보호된 동시 코드를 변경하지 않고 이 탄생 참조만 정리한다. 로컬 삭제이며 Git 역사재작성·push·배포는 이번 채팅에서 실행하지 않았다.
-
-## 포자버섯 탄생 애셋 전수 조사 착수 · 01a1b33b
-
-- 기록 ID: spore-birth-inventory-start-20261107-01a1b33b. 기록 시각: 2026-11-07T08:41:54+09:00. 기록자·조사판단 Codex /root, 요청·향후 폐기 의도 주체 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0, H:/Spawner Windows PowerShell. 원 발언 정확시각·항목ID·PC식별 불명.
-- 사용자 요청: 포자버섯 탄생 애니로 기록된 애셋을 모두 가져와 검토한다. 현재 버전 하나 외에 파기할 의도를 밝혔으나 이번 단계는 전체 후보와 실제 참조를 조사·제시하며 생존본 확정이나 파일 삭제는 실행하지 않는다.
-- 관측·범위: 기본형 birth-size-v3, 안테나/발 승인 V7, 칼날/갑피 승인 V9, CombatAttributes 구형·분비형·미리보기·임베딩·AnimationCandidates 및 literal $Trash를 구분한다. 높은 버전 번호만으로 서로 다른 외형 승인본을 대체 판정하지 않는다. 초기 dirty 및 삭제·untracked와 동시 작업을 보존한다. Unity 프로젝트가 아닌 웹 프로젝트로 확인하여 GUID 추적은 미적용이다.
-
-## 포자 탄생 유일 보존본·영구 폐기 결정 · 01a1b33b
-
-- 기록 ID: spore-birth-purge-decision-20261107-01a1b33b. 기록 시각: 2026-11-07T08:46:12+09:00. 기록자 Codex /root, 명시적 보존·폐기 결정 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0의 후속 지시 두 건, H:/Spawner Windows PowerShell. 원 발언 정확시각·항목ID 불명.
-- 사용자 확정: 지금 유닛 페이지 기본 포자버섯 탄생으로 설정된 빙글빙글 회전하는 버전만 현재 버전이다. 이외 포자 탄생 애셋은 구형이며 literal $Trash에서도 전부 삭제하여 다시 참조할 수 없게 하고 메모리에 확실히 기록한다. 이는 착수 기록의 삭제 미실행 경계를 대체하는 현재 영구삭제 승인이다.
-- 현재 직접 근거: Design.html unit-spore-tribe birth 셀은 Planning/Tribes/spore/Previews/birth-game.webp와 Planning/UnitPreviews/spore-tribe/birth.webp를 사용한다. 실제 몸체는 client/birth.mjs의 birth-size-v3/birth-unit.webp와 nest-stationary.png이며 sporeBirthMotion의 Math.PI*4 회전을 사용한다. 이 두 원본·현행 프리뷰 및 필수 임베딩은 보존한다.
-- 폐기 해석·기록 대체: 사용자 ‘외엔 전부 구형’ 기준으로 V1/V2 원화 시안·구형 size-v3 정적 합성본·CombatAttributes 포자 birth·분비 birth·안테나/발 V7·칼날/갑피 V9와 모든 사본/재생·생성 등록을 제거한다. 이 결정은 이 파일의 이전 V7/V9 승인 보존·적용 기록을 현재 사용 근거로 삼지 못하게 명시적으로 대체한다. 다른 동작·종족과 게임 시간/회전은 보존한다. Git 과거 이력·이미 게시된 원격 상태는 현 로컬 삭제와 구분하며 이번 요청만으로 역사재작성·push·배포하지 않는다.
-
-## 탄생 회전의 코드 합성 구조에 대한 사용자 지적 · 01a1b33b
-
-- 기록 ID: spore-birth-code-spin-objection-20261107-01a1b33b. 기록 시각: 2026-11-07T09:02:00+09:00. 기록자·구현설명 Codex /root, 지적·질문 주체 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0의 코드에서 회전시키는 이유에 대한 지적. 원 발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
-- 직접 구현 사실: 기본 몸체 시트는 갓 펼침 등 로컬 동작이며 게임은 client/birth.mjs sporeBirthMotion(Math.PI*4)과 client/game.js ctx.rotate로 비행·회전·착지를 합성한다. 유닛 페이지 birth-game.webp는 그 완성 장면을 캡처하여 회전이 픽셀 프레임에 포함된 재생 애니이며 게임은 이 프리뷰를 직접 재생하지 않는다. ‘현행 회전형’과 ‘몸체 원본 시트’를 같은 완성 애니라고 불명확하게 설명한 점을 바로잡았다.
-- 사용자 판단/경계: 사용자는 회전을 실제 애니 대신 코드에서 합성하는 현 구조를 문제 삼았다. 이 지적을 현 구조 승인으로 해석하지 않는다. 새 애니 제작·몸체/월드 카메라 계약 변경은 아직 실행하지 않았으며 구형 영구 폐기 작업은 계속한다.
-- 채팅 전달: 사용자는 ‘최신 애셋 반영과 기획서·게임 배포’ 채팅으로 폐기 결정 전달을 명시 승인했고 send_message_to_thread가 대상01a1b0eb에 성공했다. 앞선 질문대기 상태를 대체하며 실제 반영·재생성중단 여부는 대상 응답/파일 근거로 후속 확인한다.
-
-## 구형 추가 사본 정리·병렬 작업 보호 보정 · 01a1b33b
-
-- 기록 ID: spore-birth-purge-supplement-20261107-01a1b33b. 기록 시각: 2026-11-07T09:11:19+09:00. 기록자·실행/범위판단 Codex /root, 영구폐기 결정 사용자. 출처 현재 채팅 및 literal $Trash/spore-birth-purge-01a1b33b의 supplemental-receipt.json·restored-asset-purge.json·검사도구 결과, H:/Spawner Windows PowerShell. 원발언 시각·항목ID 불명.
-- 추가실행: 새로 나타난 구형 코드/후보/백업 참조55경로를 삭제하고 빈 폴더237개를 제거했다. 이 중 활성 클립 전환 작업의 prepare.mjs는 애셋이 아닌 제작도구이므로 실제 원채팅01a1b324의 fileChange 생성본문과 후속mask교정을 확인하여 도구를 보존 복원했다. 폐기된 SPORE_COMBAT_BIRTH_ANIMATIONS import/등록2줄은 제거하여 구형 애셋은 복원하지 않았고 node --check를 통과했다. 실제 삭제 고유경로는 이 도구를 제외한2723개다.
-- 현재 실물 읽기: 작업폴더·literal $Trash를 포함한 전경로의 spore birth 이미지/시트/GIF/동영상/그림 임베딩은 현행보존본 외0이다. 이후 생긴 실제구형 자산을 별도로 지운 것은0이며 원본보존hash7개는 앞선검사에서동일했다. 제품의 retired문자열·빈modules[]도0으로확인했다. 자산이없는 과거경로기록·삭제계획과 실제사용가능한애셋을구분한다.
-- 형식/범위: 수정후65제품텍스트UTF8NoBom·CRLF OK와제품국소 git diff --check성공. 메모리는기존HEAD Mixed와현재CRLF차이로NeedsReview이며다른본문을정규화하지않았다. JSON41·JS21·inline-script12의앞선성공결과는재사용하며일반게임빌드/전체테스트/브라우저검수를했다고확대하지않는다.
-- 병렬조율: 대상배포채팅은 실제commentary에서‘포자구형탄생을되살리지않고후보에서도제거’를확인했다. 후보전용retirement/projection이생겼으며root제품재생·기본소스/프리뷰원본은보호했다. 아직대상의최종후보반영완료/원격배포완료로기록하지않는다. prepare도구보정외다른기능/목록/상태를임의복원하지않았다.
-
-## 구형 포자 탄생 폐기분 커밋·푸시 승인 및 분리 범위 · 01a1b33b
-
-- 기록 ID: spore-birth-purge-push-scope-20261107-01a1b33b. 기록 시각: 2026-11-07T09:24:33+09:00. 기록자·분리판단 Codex /root, Git완료 승인 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0의 ‘푸시까지 해’, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
-- 승인 범위는 직전 완료한 구형 포자 탄생 삭제·필수 등록/생성/프리뷰/게임 참조 제거 및 본채팅6기록이다. 원본실물2723경로 삭제 중 Git추적항목과 관련 소스/metadata/생성사본 및 이 기록만 독립커밋하고 전용origin/main에push한다. 새유효탄생제작, 코드회전교체, 다른클립전환/카메라/DNA/중립표/새애셋 작업은 포함하지 않는다. 기존로컬커밋은branchhistory로보존한다.
-- 관측: Git2.45.2.windows.1, main15a6284와fetch origin/maincdce2ae는로컬2/원격1갈라짐. 처음defaultindex238staged·Designunmerged는동시Git복원중관측이고현재실제cached0·unmerged0이며진행중rebase/merge없음을확인했다. 이index상태는임의해결하지않았다. 관련Projects0은기존정확조회재사용한다.
-- 구형asset을파일로다시checkout하지않고Git객체에서재배치후보를계산하는방법을검토중이다. 첫exactOID git replay는참조/파일/index변경없음·stdout없음으로끝났다. branch범위를준git replay --onto origin/main origin/main..main은자동승인검토가‘defaultmain재작성·무관커밋변경위험/기존stage충돌’을이유로거절했다. 우회실행하지않고설치2.45공식문서의working tree/indexuntouched·updates no references및현재cleanindex를근거로안전한계산단계의승인을재검토한다. 실제branch이동/commit/push성공전이다.
-
-## 포자 탄생 폐기 푸시 후보 동결 · 01a1b33b
-
-- 기록 ID: spore-birth-purge-push-freeze-20261107-01a1b33b. 기록 시각: 2026-11-07T09:33:41+09:00. 기록자·후보분리/검수 Codex /root, commit/push 승인 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0의 푸시 지시 및 실제 projection/prepared/git replay 결과, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
-- 범위 동결: origin/main cdce2ae 위로 기존 로컬2커밋의 변경을 그대로 재배치 계산한 e7ea7db를 부모로, Git추적 구형145삭제와 관련소스/JSON/임베딩/생성66 및 본채팅8절만 후보에 포함한다. 실행원본2723경로의 Trash항목은Git추적대상이아니며다시보관하지않는다. 새3동작·전용클립전환·카메라·중립표·미커밋DNA/UI는후보에서제외한다. Design의새원격콩채집공격V3/사망V2도그대로보존한다.
-- 재배치 계산: 설치Git2.45로컬공식문서의‘workingtree/indexuntouched·updatesnoreferences’및현재cached0/U0를확인한동일명령재검토가허용돼update-ref제안만생성했다. 앞선자동검토거절은안전성증거로계산단계만해소됐고,아직실제branch/index이동·commit/push완료가아니다. 새로운브랜치·구형assetcheckout은하지않았다.
-- 후보검수: baselineGit객체를문자열로읽어퇴역훙크만투영하고66텍스트의JSON41/JS22/inline12구문검사및구형모듈/빈modules[]참조0을직접확인했다. 원본7binary와기본회전형프리뷰/참조는기존확인근거를유지하며새작화/완성회전게임클립교체는미실행이다. 본문/index/미추적사본은원래작업경로에보존한채Git객체/별도index에서만후보를구성한다. 실제커밋전최종범위·형식·stageddiff검사를한번실행하고전용origin/mainpush후정확원격tip과시작checkout을대조한다.
-
-## 포자 탄생 폐기 실제 커밋 범위 211경로 확정 · 01a1b33b
-
-- 기록 ID: spore-birth-purge-final-scope-20261107-01a1b33b. 기록 시각: 2026-11-07T09:47:37+09:00. 기록자·최종범위/검수 Codex /root, push 승인 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0와 실제 별도index diff, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
-- 실제211경로=구형145삭제+관련변경/메모리66이다. 준비목록212중 client/unit-appearance-preview-runtime.js는 원격기준 내용과 Gitblob이 이미 같아 변경없이 제외한다. 소스·JSON·임베딩·Design·관련생성물과 본채팅 기록만 포함하고 다른미커밋작업은제외한다. 최종별도index의 diff공백검사0과위212후보구문/구형참조0근거를대조했다.
-- 동시Git대응: main의후속로컬커밋들도그대로재배치해보존하며원격 b4b0e05 기반후보81f4e45를계산했다. 다른채팅이원래dirty를stash중인동안본채팅기록이숨겨져최신stash6a0d9e69를문자열로읽어원본8절을복구해후보에합쳤다. 그stash의퇴역145애셋0을확인했고stash/reference는건드리지않았다. Git원본/작업복원은다른소유채팅에명시승인된메시지로조율중이다. 아직본커밋의실제push전이다.
-
 ## 포자 탄생 폐기 게시 범위 210경로 최종 동결 · 01a1b33b
 
 - 기록 ID: spore-birth-purge-publish-freeze210-20261107-01a1b33b. 기록 시각: 2026-11-07T09:53:30+09:00. 기록자·최종범위/검수 Codex /root, push 승인 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0 및 최종 별도index/tree aeb3f3ee362c15fa748d5923d1c1d7794b5510d6, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 불명.
 - 최종210경로=구형145삭제+관련변경/메모리65다. 준비212중 unit-appearance-preview-runtime.js와 비어 있는 외부 로더 Spawner.html은 원격 내용과 같아 변경하지 않는다. 앞선212/211 draft범위는 이 최종scope로 대체한다. 기존생성runtime/Combat/VFX와선택코드/기획연결만동기화하며구형bitmap을임시파일로복원하지않았다. 모든JSON41은원래문자열의퇴역항목만삭제해무관한재정렬을제외했고기존정리객체와JSON의미동일을확인했다.
 - 이력 기준: 시작 main 80fe722626609b0795a145a7ce2596aab726c72f, 최신확인origin/main b4b0e054790d1f04c11e9f1f28e114c54d53cce5, 기존로컬커밋보존재배치 6015e3453ef93a6be464808c1edcb8ed39642ca4 위에이번범위를동결한다. 다른채팅의stash/index/working/untracked와사용중실행파일은직접정리하지않으며보존snapshot을Git객체/별도index로확보한뒤정확HEAD/index/hash가맞을때만main을갱신한다. 비강제push와remote readback·시작checkout일치까지이어서완료한다.
 - 검수/누락점검: 후보JSON41/JS22/HTML스크립트9구문OK, JSON퇴역전용oracleOK, 제품stageddiff공백0을확인했다. 현행원본/완성프리뷰보존과구형source/임베딩/등록제거,본채팅원기록8절의stash문자열회수·추가결정기록의원자적포함을대조했다. format은최종같은후보만check-only로수행한다. 새그림/완성회전게임클립제작·전용클립전환/카메라/DNA/중립표의미커밋변경은이번commit에넣지않는다. 아직실제commit/push성공기록이아니다.
+
+## DNA 부분 저장·기본 3도안 통합 완료 및 최종 실제 검수 · 01a1a10e 현재 요약
+
+- 기록 ID: dna-part-save-complete-20261107-01a1a10e. 기록·최종현물확인 시각: 2026-11-07T09:54:30+09:00. 기록자·독립검수/취합 Codex /root, 구현워커 /root/dna_part_editor·/root/dna_attribute_library·/root/dna_part_integration(gpt-6.1-sol low), 최종기능·치유퇴역 결정 사용자. 출처현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의구현승인/필수문구승인/속성템플릿기존영역표시/인게임판독립보존/치유제거·갑각2렙재확인 지시와 실제source·브라우저·VM결과. 개별원발언정확시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 현재완료: 속성제작기와인게임공용편집기에 부분저장버튼→첫/끝DNA전체조각선택→순서상연속범위하이라이트·1/2표시→독립형상/선택구간의원본설계기여효과미리보기→이름입력/사본저장 흐름을연결했다. 포인터hover/키보드범위후보,취소,원본불변,묶음회전/끝점추가·전체1회undo,경계·등급·충돌·기관중복·퇴역DNA새적용차단을구현했다. budget-only변화는선택/저장미리보기/append상태를보존하며레벨/readonly변경·load는취소한다.
+- 목록/지속: createDnaPartLibrary/createDnaPartStore가 spawner.dna.parts.v1 localStorage를읽고쓴다. 방/판독립·같은origin브라우저에서속성/게임이공유한다. 별도부분탭·미니어처·불러오기/삭제·저장후자동탭·타탭storage갱신·저장실패시사본성공오인방지/삭제행보존을포함한다. 다른기기/계정동기화기능은아니다. 기존전체도안/현재design키와사용자저장형상을보존한다.
+- 기본도안/최신조건: 기존속성템플릿제목·영역에 immutable 기본채집꾼/기본근접전사/기본원거리전사만표시한다. 치유사신규도안은없다. 최신실제데이터3개는각7/19·17/37·17/37칸이며현canonical기하합법·끝에서유용한조각2개추가가능조건을B가재확인했다. 메인은최종dynamicimport로starter3명/갑각grade2/신규치유catalog없음/필수4source존재/game공용목록연결/CSS링크를다시직접확인했다. 갑각shape051은이미2레벨이었으며치유기관shape로대체하지않았다.
+- 치유퇴역실행: canonical dna의healer/healPower retired true·combatstats healerfalse/healerCount0/healPower0, 공용Attribute/mainruntime와내장mainWorker/decisionWorker의DNA두모듈씩도동일canonical로맞췄다. A가양worker의legacy치유DNA입력에false/0/0을VM으로직접확인했다. geneID/옛형상은legacy보존용이며신규제공하지않는다. healing(받는회복증폭)과regen/lifesteal은그대로다. 다른채팅소유문서/실험실표현퇴역전체를본채팅이추가완료했다고주장하지않는다.
+- 실제검수증거: C actualAttribute 포인터범위선택→원본불변저장→parts자동노출→reload지속→회전추가→undo·저장/삭제실패보존을통과했다. 후속actualAttribute 근접강화단독기여4(+4)·평상시취소hidden을통과했다. B최종game-only-qa는실제game.js마운트구간+실제compiledruntime+game/partsCSS의격리harness에서part불러오기/append·design조각반영·budget99999→100000후select유지·부분저장2개·reload새인스턴스2개보존, pageerror0/requestfailed0을1.3초에확인했다. 메인은 game-host-latest.png를직접열람해2개저장항목과미니어처/조작표시를확인했다. 전체인게임진입→한판완주/전투승률검수는이범위에없다.
+- 통합오류복구최종: 이전미완료기록 dna-part-save-healer-retirement-recovery-20261107-01a1a10e의파일유실/실행차단상태를대체한다. source가돌아온경우동일바이트/데이터를보존하고중복삽입하지않았다. runtime의C국소동기화잔류인중복DNA wrapper36bytes와잘린modules접두사1곳만byteguard·backup후수정해VM globalSpawner/editor/parts/store정상실행을확인했다. 내장workerSource값외본문bytes동일도A가확인했다. 최종runtime SHA60a8643c33928e112b2b13da88312a9136cb6ed25404edb94265539f135801ae. 정상Spawner empty data-src/entry.js구조는그대로며부분CSS링크만추가했다. 이후전체inline복구/unsafe sync를실행하지않았다. QA하네스metaUTF8누락도temp에서만교정했다.
+- 범위/마감: 새dna-parts.mjs·dna-part-library.mjs·dna-starter-designs.mjs·dna-parts.css, sharededitor/attributehost/game마운트/build노출/Attribute번들/runtime/canonical퇴역최소부위와rootmemory만본과제범위다. 다른애셋/HTML문서/기존game·runtime변경을보존했다. 관련source구문·UTF8NoBom/CRLF·국소diff/모듈동일성확인을워커가수행했고실제화면증거는literal $Trash/dna-part-save-20261107/integration에있다. 기존Attribute body min-width980의680폭넘침은범위밖으로남겼다. 연결GitHubProjects조회는nodes0/hasNextPagefalse였다. 본채팅은전체build/stage/commit/push/deploy/branch작업을수행하지않았고로컬변경으로완료했다. 새3렙6칸/91칸체계의제품적용·전역최적증명은계속별도미완료다.
+
+
+## 새 승인 원격 탄생 보존·전용 클립 통합 검수 · 01a1b324
+
+- 기록 ID: unit-animation-clips-only-upstream-preserve-01a1b324. 기록 시각 2026-11-07T10:00:19+09:00. 기록자·동결/검수 Codex /root, 전용 클립 전환과 push·배포 결정 사용자. 출처 현재채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe와 01a1b33b의 명시 조율 메시지, candidate.json/candidate-check.json·회귀6실측. H:/Spawner Windows PowerShell; 원발언정확시각·항목ID불명.
+- 원격 b4b0e05에 새로 추가 승인된 spore-gather-birth-v3는 최초 퇴역145목록 밖의 후속 작업으로 보존한다. 구형 V7/V9 폐기와 구분하며 해당 채팅이 폐기 한정을 마쳐 먼저push하는 동안 이쪽 main/index 이동은 계속 멈춘다. 여기서는 새탄생 연결이나 새 애니 제작을 추가하지 않는다.
+- 전용 클립 후보30경로는 관련native3의 원본/manifest·wrapper를 필수지원으로 포함하되 다른 작업의 게임/편집기/기획서·애셋삭제는 포함하지 않는다. 폐기 후보ac59e395 기반 별도tree aa476fa57에서 회귀6통과·wrapper8 원본bytes일치·runtime/Combat/preview구문과 staged공백검사 통과를 확인했다. 이후 실제push tip으로 투영할 때 변경된통합부분만검수하며 불변렌더/형식결과는 재사용한다. 아직본채팅rootpush·새Site배포성공을 주장하지 않는다.
 
 ## 폐기 이후 새 원격 채집형 탄생 V3 보존 · 01a1b33b
 
@@ -176377,3 +176381,105 @@ Text: none. No lettering, labels, logo, watermark, UI, borders, health bars, peo
 - 기록 ID: spore-birth-purge-parent-tree-equality-20261107-01a1b33b. 기록 시각: 2026-11-07T10:04:57+09:00. 기록자·이력대조 Codex /root, push 승인 사용자. 출처 현재 채팅과git rev-parse/diff실측, H:/Spawner Windows PowerShell. 원발언시각·항목ID 불명.
 - 동시 Git 작업이main을 5633e897ad04396e3d6873ee8522c50828776055로재배치완료했다. 그tree는계산후보 6015e3453ef93a6be464808c1edcb8ed39642ca4의tree와정확히같고diff0이다. 검토완료210경로의바이트·범위·검수결과는그대로재사용하고부모만실제main으로맞춘다. 이제이번적용은기본main역사재작성이아닌검토한폐기커밋의fast-forward다. 현재index의기존staged/U0도이전실측을따르며적용직전재확인한다.
 - 원격의새승인포자채집형V3는보존하고현재dirty Design의동일채집탄생셀이비어있는경우에만원격승인셀을합친다. 그외현재본문·미추적항목과다른작업의stash는유지한다. 실제commit/push전이며형식/diff검사는변경된메모리델타만재확인한다.
+
+
+## 전용 클립 전환 main 푸시 완료·폐기 배포 대기 · 01a1b324 현재 요약
+
+- 기록 ID: unit-animation-clips-only-pushed-01a1b324. 기록 시각 2026-11-07T10:08:51+09:00. 기록자·commit/push/readback Codex /root, 실행결정 사용자. 출처 현재채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe, 실제Git실행과 $Trash/clip-publish-01a1b324/push.json·candidate-check.json. H:/Spawner Windows PowerShell; 원발언정확시각·항목ID불명.
+- 실제 완료: c2457a4387e239dd1c7e03307dff07ad8db672d4, parent bd9d3714382ffba99db71381ab04dd20c7a76fbf, tree34cf32490738e4c08b4b3ca80de8f9b6d1ca821e, 한국어메시지 파츠 합성 애니 제거와 전용 클립 재생 적용. 분리30경로/관련원기록10절을원자적커밋했고 origin main과시작체크아웃main이동일sha임을ls-remote/readback확인했다. 기본index는이30경로만새blob으로반영했고unmerged/staged0,다른미커밋작업보존. 최근5로컬커밋은재배치된기존이력을그대로보존했다.
+- 실제검수: 최종후보wrapper8원본bytes일치·생성3종구문·staged공백0,불변직접클립소스의회귀6·기존148샘플/28형태렌더근거재사용. 전용클립없는채집형의공격/피격은자기정지원화만쓴다.
+- 정정/남은일: bd9d371은유닛페이지통합커밋이지01a1b33b의폐기커밋이아니다. 같은원격tip이라는이유로폐기push완료로잘못판단해그채팅의hold요청중main을전진시켰다. 사용자에게정정했고이제추가main/index이동을멈춘다. 구형포자birth폐기와새승인V3보존을합친실제push뒤배포해야v43의퇴역제거를되살리지않는다. Site재배포는아직미완료이며postcommit사실은로컬기록으로만남기고메모리만추가commit하지않는다.
+
+
+## v43 공개본 보존을 통한 독립 배포 결정 · 01a1b324
+
+- 기록 ID: unit-animation-clips-only-live-base-deploy-01a1b324. 기록 시각 2026-11-07T10:11:58+09:00. 기록자·배포격리 판단 Codex /root, 배포결정 사용자. 출처 현재채팅, source helper로연v43 Sites source1ffde0f31e0926816864e400ec2a349ae375e5d0와공개assetmap707실측. H:/Spawner Windows PowerShell; 원발언정확시각·항목ID불명.
+- rootc2457a4 push는완료했으나구형폐기채팅은아직root통합중이다. rootHEAD전체를패키징하면v43에서이미제거된구형birth가다시포함될수있다. 기다리거나구형을되살리지않고,기존Sites소스v43의미변경코드/707자산경로를그대로보존하며c2457a4의전용클립모듈·game세함수/preload·welcome두호출과필요이미지등록만정확투영한다. main/index는추가이동하지않는다.
+- 출판물의새문구/페이지추가없이기존공개본에이번동작전환만합친다. Site소스를한국어commit·push·readback한뒤그같은commit에서archive저장/배포한다. root최신전체배포라고주장하지않으며,구형폐기/새native3의공개상태를보존하는이번범위배포로한정한다.
+
+
+## v43 기반 전용 클립 배포 후보 동결 · 01a1b324
+
+- 기록 ID: unit-animation-clips-only-site-freeze-01a1b324. 기록 시각 2026-11-07T10:17:33+09:00. 기록자·격리구현/검수 Codex /root, 배포결정 사용자. 출처 현재채팅, Sites source1ffde0f·rootc2457a4, site-patch.json/site-probe.json 실측, H:/Spawner Windows PowerShell. 원발언정확시각·항목ID불명.
+- 실제후보: Sites기존707자산경로와runtime의이번범위밖120모듈원문을보존하고전용클립3모듈/관련기존모듈·game3함수/prepare와welcome2호출만반영했다. 추가자산은채집형자기원화3PNG뿐이며9경로=제품텍스트6+PNG3이다. 기존퇴역module/mapping을되살리지않았고새native3등록을그대로유지했다. 전용클립128이미지전부매핑됨.
+- 검수: 생성6종구문/참조·diff공백0,텍스트5개형식OK이고runtime은기존Mixed형식때문에checker가NeedsReview이나범위밖120모듈의바이트원문을복원/대조해보존했다. 브라우저첫시도는sandbox시작실패,밖에서재시도중배포용Image치환이assets.js팩토리자체를재귀호출하게한오류를발견해원래newImage팩토리만복구했다. 수정후같은격리headless검사에서오류0,공격채집형drawImage1/알파1875픽셀/자기정지원화frame0/model·preview초기화통과했다. 이전6회귀/148샘플/28형태는해당소스입력에서성공한근거로만유지한다.
+- 미완료: 아직새Site버전save/deploy전이며rootmain/index추가이동은없다. 이배포는v43에서이번전용클립전환만투영한결과이고,다른채팅의최신root전체배포라고하지않는다. 사용자요청/결정/보호/실제검수/남은외부조치누락점검후이9경로를동결한다.
+
+
+## 전용 클립 전환 푸시·v44 공개 배포 완료 · 01a1b324 현재 요약
+
+- 기록 ID: unit-animation-clips-only-published-v44-01a1b324. 기록 시각 2026-11-07T10:20:20+09:00. 기록자·직접Git/배포실행·readback Codex /root, 결정 사용자. 출처 현재채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe, push.json/site-patch.json/site-probe.json/publication.json·최종ls-remote/native응답실측. H:/Spawner Windows PowerShell; 원발언정확시각·항목ID·PC식별불명.
+- 실제완료: root main c2457a4387e239dd1c7e03307dff07ad8db672d4(파츠 합성 애니 제거와 전용 클립 재생 적용)을origin에push했으며최종시작체크아웃HEAD=ls-remote main=c2457a4·기본staged0를확인했다. 다른작업의미커밋/추가파일과복구스냅샷은보존한다. root관련10절은제품변경과원자적commit했고이후사실은이로컬기록에남기며메모리만추가commit하지않는다.
+- 실제출판: Sites source 46a9e07ef61f268ff605c836d83b47a2071d48ec(전용 클립 재생 전환 배포)을push/readback한동일소스로95324160B/179파일archive를만들어v44 appgprj_6ada1cedf2848191938f196c4f346ee9~appgver_3a49b75de7c48191a7cee43e1f024938를저장했다. deployment appgdep_6aee7c712cb881919a9de8b63b46cc76는2026-11-07T01:18:57.196670+00:00 succeeded, https://spawner.oojjrs.chatgpt.site. 기존public접근유지. 새Site/브랜치/강제push/별도자산CDNpush없음.
+- 배포범위/검수: 기존v43의707자산매핑/native3·퇴역제거/이번범위밖120runtime모듈바이트를보존하며c2457a4전용클립재생만투영했다. 9경로(텍스트6·채집정지원화PNG3),클립128이미지전부등록/구형모듈재등장0. 생성구문/공백검사·6회귀와수정후격리브라우저의오류0/단일drawImage1·자기정지원화frame0검사를확인했다. 기존148샘플/28형태검증은그소스입력에서의성공이며라이브44전체를다시렌더했다고확대하지않는다. runtime기존Mixed는checkerNeedsReview를원문120모듈비교로검토해유지했다.
+- 현재유효: 파츠를합성해애니로쓰지않고외형별전용시트를불러재생한다. 해당외형의동작이없으면자기원화고정이며다른기관없는몸체애니를빌리지않는다. 사용자요청은새애니제작이아니므로이번에새애니를제작하지않았다. 위pushed/site-freeze/live-base-deploy기록의배포미완료상태는이실제성공으로대체하며원기록보존. 다른채팅의구형폐기rootcommit은그채팅소유이며v44는root최신전체배포라고하지않는다. 이번요청의push·배포·검수·보호·한계누락점검완료,본범위남은작업없음.
+
+## DNA 선택 명확화·오른쪽 통합 목록·실제 인게임 캡처 착수 · 01a1a10e
+
+- 기록 ID: dna-part-selection-visibility-start-20261107-01a1a10e. 기록 시각: 2026-11-07T10:24:48+09:00. 기록자·구현판단/분담 Codex /root, 개선요청·목록위치·캡처결정 사용자. 출처현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의 「부분 저장 좋아, 현재 선택된 걸 좀 더 명쾌하게」「부분 저장된 리스트를 오른편에 리스팅에 같이 표시…인게임 스샷 들고와봐 판정하게」. 원발언정확시각·항목ID 불명,H:/Spawner Windows PowerShell.
+- 현재승인범위: 부분선택범위를시각적으로더명확히한다. 저장부분목록을속성제작기/인게임오른쪽DNA목록에기존개별DNA와동시에보이게배치한다. 기존상호배타탭은통합표시로대체하고왼쪽속성템플릿전체도안목록은유지한다. 부분목록은상단일부높이와자체스크롤로개별DNA선택공간을보존한다. 기존승인 ‘부분 저장’ 표시/불러오기/삭제를요청위치로재배치하며신규설명문구를추가하지않는다.
+- Codex판단: 선택구간에밝은외곽강조와가닥원색보존,현재hover조각/확정첫조각/끝후보를구분한다. 원래기관색·두께구분·저장기하/데이터·비용·효과를바꾸지않는다. 사용자는실제인게임설계창의원본DNA선택과오른쪽저장묶음동시표시화면으로판정한다. 이전격리마운트이미지만다시내는것은이번명시캡처요구충족이아니다.
+- 분담/보호: 기존gpt-6.1-sol low워커A editor선택렌더/국소번들, B 속성/game오른쪽목록+공통helper/CSS, C 제품쓰기금지/실제게임Playwright캡처와동작검수만담당한다. 메인조율·검수/메모리. 모든현재dirty/source/다른작업을보존하며sourcefreshread·uniqueanchor·쓰기직전bytesguard,새temp는literal $Trash/dna-selection-visibility-20261107에둔다. Spawner의현재entry.js와emptydata-src구조를보존하고embeddedHTML쓰기·전체build·Git·배포는하지않는다. 이전parts기능/치유퇴역·갑각grade2·판독립localStorage조건도유지한다.
+- 상태: 구현중이며새UI검수/실제인게임캡처는아직없다. 이전속성페이지/격리검수결과를새변경성공으로확대하지않는다. A/B완료후C가실제게임입장/설계modal열기와독립브라우저테스트상태로대표DNA/저장묶음을보여캡처할예정이다. 실제사용자데스크탑/CUA/UIA/사이드패널은제어하지않는다.
+
+## 포자 탄생 폐기 현재 이력 병합·최종 직렬화 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-current-merge-c2457a43-01a1b33b. 기록 시각: 2026-11-07T10:25:00+09:00. 기록자·충돌범위판단 Codex /root, push 승인 사용자. 출처 현재 채팅과 실제 merge-tree/current.index, H:/Spawner Windows PowerShell. 원발언시각·항목ID 불명.
+- main이 c2457a4387e239dd1c7e03307dff07ad8db672d4로 이동해 기존 검토 draft c324f09d9ab3c1e55f04bd0c345ebcb6c1f4b885를 객체 안에서 병합했다. 충돌 CodexWorkMemory.md, Combat.html, Design.html, DesignAssets/image-sizes.json, client/combat-evolution.mjs, client/runtime.js, client/unit-matrix-previews.js는 새 전용클립/UI의 현재 구현을 바탕으로 정확한 퇴역 항목만 제거하고 메모리 원기록을 합쳤다. 이전 generic birth guard를 새 구현으로 되돌려 넣지 않으며 현재 모듈을 유지한다. 실제 후보 209경로이며 구형145삭제는 유지한다.
+- 기존 기본형과 이후 원격 승인 채집형 V3는 보존한다. 실제 index/참조 갱신 직전 잠금과 기대HEAD를 확인하며 working/untracked를 파일이동 없이 보존하고, 원본 index/작업 snapshot Git복구참조를 유지한다. 다른 작업 파일은 덮지 않고 정확한 퇴역 파일만 영구삭제하며 Design의 같은 비어 있는 새 V3 셀만 현재 승인 원격 내용으로 동기화한다. 아직 실제 commit/push 전이다.
+
+
+## DNA 선택 강조·오른쪽 통합 목록 적용 및 실제 인게임 이미지 전달 완료 · 01a1a10e 현재 요약
+
+- 기록 ID: dna-part-selection-visibility-complete-20261107-01a1a10e. 기록·실제이미지직접열람 시각: 2026-11-07T10:28:04+09:00. 기록자·독립정적/시각검수 Codex /root, 구현A /root/dna_part_editor·목록B /root/dna_attribute_library·실제게임캡처C /root/dna_part_integration(gpt-6.1-sol low), 개선/위치/캡처요청 및최종판정주체 사용자. 출처현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의선택명확화·오른쪽동시목록·인게임사진요청, actual-game-result.json 및실제PNG두개. 원발언정확시각·항목ID 불명,H:/Spawner Windows PowerShell.
+- 적용완료: 선택된전체DNA가닥에어두운받침+밝은cream외곽,현재hover가닥은흰외곽을그리며DNA원색/기관두께구분을유지한다. 비선택가닥은.12로약화한다. 선택중기존끝점plus/노드표시는숨기고선택범위의시작·끝경계원을표시한다. 첫선택은사각1,끝후보는원형2를선중점양쪽18px에두어가닥/접점과구분하고한조각범위에도두표시가겹치지않는다. 키/포인터선택·저장기하/효과/가격/스토리지는바꾸지않았다.
+- 목록완료: 속성제작기/인게임오른쪽catalog상단에저장부분section,아래에개별DNA필터/목록을동시에표시한다. 저장section은최대35%높이/별도스크롤,개별gene리스트는남은영역스크롤이다. 기존교대설계도/부분탭과속성제작기왼쪽부분패널은제거했고왼쪽기존전체속성템플릿목록/기본3도안은보존했다. 새부분저장직후해당row를선택강조하고list내scroll로노출한다. 기존승인문구만요청위치로재배치했다.
+- 실제사진/검수: C가정상actual Spawner.html입장버튼→entry/assets/game전체초기화를실행하고실제openUnitDesign/modal/render로캡처했다. HTTP응답의테스트전용read-only QA노출과독립browsercontext의기본근접전사6조각/저장묶음3개fixture만주입했으며하네스로UI를대체하거나제품파일을수정하지않았다. actual-game-selection.png는실제HUD배경/설계창에서중간3조각선택후보·사각1/원2·원래가닥색과비선택흐림·오른쪽저장부분/개별DNA를동시에보인다. actual-game-parts.png는평소편집상태의두목록을보인다. 두1600x1050 PNG를메인이직접열어가독/선택범위·표시공존을확인했다.
+- 캡처관측/한계: partRows3/genes15·viewportoverflowfalse·pageerror0·requestfailed0. console에는리소스404두건이있었으나URL이수집되지않아원인/발생전후는미확인으로남겼고별도제품수리를하지않았다. 전체네트워크무오류/한판완주검수라고주장하지않는다. 이번시각안의재미·가독최종판정은사용자에게남긴다.
+- 범위/동기화: source client/dna-editor.mjs·attribute-editor.js·game.js의해당공용목록마운트·dna-part-library.mjs·dna-parts.css와Attribute전용번들/runtime의editor/helper블록만변경했다. 마지막runtimeSHA f7eaf6f9d82610958b368130133976614d0216788a4c357e66b238ea8104459a, 각모듈1개/source일치·구문·UTF8NoBomCRLF·국소diff를A/B가확인했다. runtime해당블록외bytes동일,다른canonical/내장worker/애셋/다른작업·Spawner의emptydata-src/entry.js구조를보존했다. 기록 dna-part-selection-visibility-start-20261107-01a1a10e의미완료상태는본결과로대체한다.
+- 산출물: literal $Trash/dna-selection-visibility-20261107/{actual-game-selection.png,actual-game-parts.png,actual-game-result.json} 및대상baseline/스크립트. 현재로컬적용이며이채팅에서전체build·stage·commit·push·배포·브랜치/기존데이터조작을하지않았다. 사용자에게실제선택사진을인라인으로제공하고평소화면도연결한다.
+
+
+## 전용 클립 완료 상태 보존·후속 Git 순서 양보 · 01a1b324 현재 요약
+
+- 기록 ID: unit-animation-clips-only-coordination-hold-01a1b349. 기록 시각 2026-11-07T10:33:31+09:00. 기록자·전달 지시 반영 Codex /root, 원결정 사용자(조율 채팅의 명시 승인 전달). 출처 현재채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe가 받은 codex://threads/01a1b349-c2f5-7410-817c-1a43af3819a8 조율 메시지. H:/Spawner Windows PowerShell; 원발언 정확시각·항목ID·PC 식별 불명.
+- 현재 지시: 공용 main/index 이동·push를 추가 수행하지 않고, 01a1b33b의 검토된 구형 포자 탄생 폐기분 rebase/push가 먼저, 다음 01a1b349의 승인12클립·치유 DNA 축소 push 순서를 따른다. 이미 통과한 검사·후보 생성은 반복하지 않으며 충돌이 생긴 범위만 필요한 검수를 한다. 새 원화/애니 제작·범위 확대·답신 메시지는 요청되지 않았다.
+- 완료 근거 유지: unit-animation-clips-only-published-v44-01a1b324의 root c2457a4 push/readback과 Sites source46a9e07·v44 succeeded는 앞선 직접 실행으로 확인된 결과다. 이번 전달을 이유로 그 commit/push/배포/검사를 재실행하지 않는다. 기존 작업/스냅샷과 다른 채팅의 후속 원격 변경을 보존하며 이 턴은 메모리만 갱신한다. 다른 채팅 작업의 성공이나 현재 원격 tip을 새로 확인했다고 주장하지 않는다.
+
+## DNA 부분 저장의 +접점 선택 보완 완료 · 01a1a10e 현재 요약
+
+- 기록 ID: dna-part-endpoint-hit-complete-20261107-01a1a10e. 기록 시각: 2026-11-07T10:34:05+09:00. 기록자·독립소스검수/취합 Codex /root, 구현 /root/dna_part_editor·실제브라우저검수 /root/dna_attribute_library(gpt-6.1-sol low), 원발언자·요청결정 사용자. 출처현재채팅01a1a10e-176c-7cb3-a1cf-2ad477deffc4의 「흠. 좋아. + 부분을 눌러도 잘 선택되게 해야돼」와 실제source/result.json. 원발언정확시각·항목ID 불명,H:/Spawner Windows PowerShell.
+- 적용: 부분범위선택 hitPart에서model.nodes의원전체를선분보다먼저hit-test한다. 원점25/기관20/스탯14×현재view.scale에mouse7/touch12px여유를더하며중심이가장가까운접점을택한다. 미배치previewghost는선택대상에넣지않았다. 공유접점에서는실제선hover/명시키보드이동으로설정된partCursorHint가있을때연결된현재조각을유지하고,그외첫직접선택은outgoing/최종끝점은incoming,두번째선택은첫범위와진행방향에맞춘결정론적인접조각을택한다. 초기cursor0을실제hover로오인하지않고cancel때hint를초기화한다.
+- 보존/동기화: 일반편집의+배치·기존선분선택·범위하이라이트/1·2·저장/가격/기하와오른쪽통합목록은유지한다. source client/dna-editor.mjs와Attribute전용번들/runtime의editor1블록만동기화했다. runtime외블록bytes동일,최종SHA38e7688a477b81804db1cd231d72fc937686c6433b7c947848db12470e784da5. Spawner/다른module/canonical/내장worker/애셋·다른dirty변경은바꾸지않았다. A가source/runtime구문·UTF8NoBomCRLF3파일/국소diff/모듈동기화를확인했다. 메인은실제hitPart·hint분기소스를독립검수했다.
+- 실제브라우저결과: B가actualAttribute페이지의실제editor와모델/viewport좌표로원점center→blade,끝점center→power,최초공유접점→outgoing antenna,antenna선hover후공유원click→antenna유지,1.7배zoom의큰원반경82%점→blade,기존선분→antenna 6건을1.18초에검수했다. 각2click후partSavecallback의gene1개를확인했고원본DNA normalizedtuple불변, pageerror0/requestfailed0이다. 첫시도원본비교의JSON객체키순서오라클차이는테스트에서만교정했으며제품동작을바꾸어맞추지않았다.
+- 결과/마감: 속성제작기/인게임공용편집기에로컬적용완료. 이번에는인게임전체새캡처/한판실행을반복하지않았고actualAttribute 6입력검수와양쪽공용모듈동일성으로확인했다. 임시자료 literal $Trash/dna-endpoint-selection-20261107/result.json 및baseline/스크립트. Git/stage/commit/push/배포·전체build/새문구는이번범위가아니다. 이전선택시각·오른쪽목록·실제인게임이미지결과는보존한다.
+
+## 포자 탄생 폐기 현재 이력 병합·최종 직렬화 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-current-merge-619ef6c2-01a1b33b. 기록 시각: 2026-11-07T10:36:10+09:00. 기록자·충돌범위판단 Codex /root, push 승인 사용자. 출처 현재 채팅과 실제 merge-tree/current.index, H:/Spawner Windows PowerShell. 원발언시각·항목ID 불명.
+- main이 619ef6c2993937f1326aaccbb530c5315db40f91로 이동해 기존 검토 draft c324f09d9ab3c1e55f04bd0c345ebcb6c1f4b885를 객체 안에서 병합했다. 충돌 CodexWorkMemory.md, Combat.html, Design.html, DesignAssets/image-sizes.json, client/combat-evolution.mjs, client/design-previews.js, client/runtime.js, client/unit-matrix-previews.js는 새 전용클립/UI의 현재 구현을 바탕으로 정확한 퇴역 항목만 제거하고 메모리 원기록을 합쳤다. 이전 generic birth guard를 새 구현으로 되돌려 넣지 않으며 현재 모듈을 유지한다. 실제 후보 209경로이며 구형145삭제는 유지한다.
+- 기존 기본형과 이후 원격 승인 채집형 V3는 보존한다. 실제 index/참조 갱신 직전 잠금과 기대HEAD를 확인하며 working/untracked를 파일이동 없이 보존하고, 원본 index/작업 snapshot Git복구참조를 유지한다. 다른 작업 파일은 덮지 않고 정확한 퇴역 파일만 영구삭제하며 Design의 같은 비어 있는 새 V3 셀만 현재 승인 원격 내용으로 동기화한다. 아직 실제 commit/push 전이다.
+
+
+## 포자 탄생 구형 폐기 푸시 완료 · 01a1b33b
+
+- 기록 ID: spore-birth-purge-pushed-dd1e1d2-01a1b33b. 기록 시각: 2026-11-07T10:37:50+09:00. 기록자 Codex /root, 폐기·영구삭제·메모리·push 결정 소유자 사용자. 출처 현재 채팅 01a1b33b-9e82-7271-a015-c57dd7ef99f0의 사용자 요청과 Git push/ls-remote 실제 출력. 원발언 초 단위 시각·항목ID는 불명.
+- 결과: 구형 포자 탄생 애셋과 참조 제거를 dd1e1d2ed2807483562c822a3d488cf2482deefd로 커밋하여 Spawner 전용 origin/main에 정상 푸시했다. 부모는 619ef6c2993937f1326aaccbb530c5315db40f91이며 최신 승인 애니 등록·전용 클립 구현을 보존했다. 푸시 후 원격 refs/heads/main과 시작 체크아웃 HEAD가 같은 dd1e1d2임을 읽어 확인했다. index 변경 0개.
+- 커밋 범위 209경로, 기존 퇴역145파일은 커밋 트리와 실제 파일 모두 남은 수 0개. 앞서 영구삭제한 서로 다른2723경로와 구형 참조 정리, 이 채팅 원기록을 포함했다. 기본형 birth-unit.webp는 존재한다. 이후 별도 승인된 채집형 V3는 커밋에서 보존했다. 작업트리의 V3 후보7파일 삭제를 포함한 다른 기존·동시 변경과 미추적 파일은 덮거나 스태시 처리하지 않고 그대로 두었다. 보존 참조 refs/codex-preserve/spore-birth-01a1b33b-1794015374287 유지.
+- 승인된 두 채팅에 폐기 커밋·재개 순서를 전달했다. 게임의 회전을 이 작업에서 새 프레임 애니로 제작했다고 주장하지 않는다. 본 완료 기록은 커밋 후 확인된 사실이므로 메모리 전용 후속 커밋을 만들지 않고 작업트리에 남긴다.
+
+## 구형 탄생 폐기 푸시 인계 수신 · 01a1b324 현재 요약
+
+- 기록 ID: unit-animation-clips-only-purge-handoff-dd1e1d2-01a1b324. 기록 시각 2026-11-07T10:38:22+09:00. 기록자·인계 기록 Codex /root, 폐기/순서 결정 사용자. 출처 현재채팅01a1b324-ab9a-76f3-b0f8-2a14dbe39bbe가 받은 codex://threads/01a1b33b-9e82-7271-a015-c57dd7ef99f0 인계 메시지. H:/Spawner Windows PowerShell; 원발언 정확시각·항목ID·PC 식별 불명.
+- 전달된 실행 보고: 구형 포자 탄생 폐기 dd1e1d2ed2807483562c822a3d488cf2482deefd를 origin/main에 push했고 시작 main/원격 동일·index 비움, c2457a4 전용클립과619ef6c까지 승인등록 이력 보존, 구형145와 참조만 제거했다고 해당 실행 채팅이 보고했다. 새 spore-gather-birth-v3는 커밋에서 보존했으며 작업트리 후보7파일 삭제는 별개 변경으로 보존했다고 전달받았다. 이는 이 턴의 독립 Git readback 결과가 아닌 원 실행 채팅의 인계 보고로 구분한다.
+- 현재 범위: 이 채팅은 이미 c2457a4 push·v44 배포를 직접 확인해 완료했고 이번 인계로 재실행할 작업은 없다. 공용 main/index·stash·미추적 파일을 건드리지 않고 후속12클립/치유 DNA 축소는01a1b349의 순서를 유지한다. 과거 구형145·파츠 합성 경로를 복원하지 않으며 검사/후보생성/새 애니 제작·배포를 추가 실행하지 않는다. 앞선 coordination-hold 기록의 폐기 push 대기는 이 인계에 한해 해소됐고 원기록은 보존한다.
+
+## DNA 부분 저장·선택 표시 및 분리 문서 게시 완료 · 01a1a10e 현재 요약
+
+- 기록 ID: dna-part-selection-publication-complete-20261107-01a1a10e. 기록 시각 2026-11-07T11:19:05+09:00. 기록자 Codex /root, 구현 /root/dna_finish_git 및 /root/dna_site_patch (gpt-6.1-sol low), 결정 사용자. 출처 codex://threads/01a1a10e-176c-7cb3-a1cf-2ad477deffc4. 원발언 정확 시각 불명. 앞선 final-freeze 및 미푸시/미배포 상태를 아래 직접 관측 결과로 갱신한다.
+- 완료: 부분 저장 선택 범위를 육각 점유면 색과 이어진 외곽선으로 표시하고 비선택 DNA를 흐리게 했다. 선택 커서는 pointer, 접점 선택 지원, 빈 부분 목록 숨김, 내용 높이에 맞춤, Attribute 3줄·게임 2줄 이후 스크롤이다. 실제 게임 스크린샷은 $Trash/dna-selection-area-20261107/actual-game-selection-area.png. 렌더 결과와 소스·출력 일치 검수를 재사용했다.
+- Git: 최초 DNA 커밋13c61df는 병행 원격 통합으로4a9d052에 재배치돼 게시됐고 내용 동일함을 확인했다. 문서 구조는2d88dfeeace0b9faeb9d7439e8e9735a95c6289b로 게시됐다. 최종 직접 원격 readback과 시작 checkout main이2d88dfe로 일치했다. 다른 작업이 이미 동일 구조 closure를 게시한 것을 확인하여 중복 커밋/무관 아트 역수정을 하지 않았다.
+- 문서 통합: 사용자가 '해당 이미지 칸만 옮겨서 푸시까지 완료', 이어 '문서 구조가 바뀌었으니 ... 그 구조에 맞게 재작업 ... 수정작업해서 올리도록'을 명시 승인했다. 샘방울 분비형 피격1칸을 최신 실제 본문 Design/sections/unit-appearance.js로 옮겼고, 분리파일23개·직접참조 누락0·관련자산3개 존재와 해당 수정의 원격 포함을 확인했다. 구조 관련 작업파일 변경0. 추가 문구 없이 승인된 이미지 참조를 그대로 이전했다.
+- Sites: 기존 공개 audience를 유지한 v45 source ebaf0b3ef7aeb46479dc5d1268816f2c58d55d8f, deployment appgdep_6aee897721a4819192a4bdf4c77a3440의 succeeded를2026-11-07T02:14:29.479387Z native 결과로 확인했다. URL https://spawner.oojjrs.chatgpt.site . 기존 공개본의 비소유 영역은 byte-preserve했다. 투영본 라이브러리 로딩순서 문제는 게시 전에 교정하고 VM 초기화와 JS 구문을 확인했다. 임시 source metadata 불일치 자동승인 거절은 최신 official helper opening 결과로 재동기화 후 해결됐으며 미해결 승인거절 없음.
+- 지침 전달: 사용자 승인에 따른 별도 chat01a1b3b5의 Design 지침 배포 전달을 받아 현재 작업 경계에서 https://oojjrs.github.io/codex/guideline-design-generation.review.md 정본을 다시 읽었다. 최상위 목차·페이지·독립 섹션 구조의 현재 실제 콘텐츠 위치에 이번 좁은 수정을 반영했다. 다른 프로젝트나 범위외 일괄개편은 수행하지 않았다.
+- 최종 누락 대조: 사용자 요청·승인·수정·검수·Git·공개배포 결과를 기록했다. 제품과 관련 문서 게시의 남은 작업 없음. 이 사후 결과는 로컬 메모리에 남기며 결과 기록만을 위한 추가 커밋은 만들지 않는다. 다른 작업의 index·작업파일·미추적 항목은 보존했다.

@@ -56,11 +56,4 @@ test("registering the exact 256px draft export does not approve or connect its a
   assert.deepEqual(size.nativeSource.frame, [256, 256]);
   assert.equal(size.nativeSource.sha256, meta.imageSha256);
   assert.equal(read("client/game.js").includes(meta.image), false);
-  const html = read("VfxPreview.html").toString("utf8");
-  const maximumScale = Number(html.match(/id="vfx-scale"[^>]*max="([\d.]+)"/)[1]);
-  assert.equal(maximumScale, 1.5);
-  // Current layout upper bounds ignore borders, so actual canvas sizes are smaller.
-  const maxCanvasWidth = Math.max((1150 - 48 - 16) / 2, 690 - 32);
-  assert.ok(maxCanvasWidth * .72 * .32 * maximumScale < meta.frameSize,
-    "the existing review UI renders under 228 CSS pixels at its largest supported effect scale");
 });

@@ -5487,6 +5487,71 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
 
 return {UNIT_APPEARANCE_ASSETS};
 })();
+modules["server/dna-combat-stats.mjs"] = (() => {
+const DNA_COMBAT_RULES = Object.freeze({
+  powerCurve: "linear", powerBase: 2, powerGain: 2, powerKnee: 2,
+  rangedPowerBase: 1.4, rangedPowerGain: 1.4, rangedPowerKnee: 2,
+  rangedAttackRateBase: .5, rangedHasteCap: 7, rangedHasteKnee: 70,
+  healthBase: 10, healthPerPoint: 10, armorPerPoint: 1, armorCap: 1, armorKnee: 100,
+  flatPenPerPoint: 1, percentPenCap: .8, percentPenKnee: 4,
+  attackRateBase: .5, hasteCap: 7, hasteKnee: 70, maxActionRate: 4,
+  windupBase: .3, focusPerPoint: .02, windupMinimum: .08,
+  hitGapBase: .12, hitSpeedPerPoint: .005, hitGapMinimum: .06, recovery: 0,
+  defensePreparation: 0, reactionCooldown: 0, counterCooldown: 0,
+  followupBase: .5, comboPerPoint: .05, followupCap: 1,
+  critCap: .75, critKnee: 18.75, critMultiplierBase: 1.5, critMultiplierCap: 4, critPowerKnee: 25,
+  accuracyCap: .6, accuracyKnee: 20, dodgeCap: .6, dodgeKnee: 20,
+  parryCap: .6, parryKnee: 15, blockCap: .75, blockKnee: 15,
+  blockReductionBase: .5, blockReductionCap: .9, blockPowerKnee: 10,
+  counterCap: 1, counterKnee: 10, counterMultiplierBase: 1, counterMultiplierCap: 2,
+  counterPowerKnee: 10, counterWindup: .12,
+  tenacityCap: .75, tenacityKnee: 15, stunCap: .3, stunKnee: 10,
+  stunDurationBase: .25, stunDurationPerPoint: .05, stunDurationCap: 1, stunImmunity: 2,
+  drainCap: .2, drainKnee: 20, jitter: .2
+});
+
+function dnaCombatStats(counts, weights, inputRules) {
+  const rules = inputRules || DNA_COMBAT_RULES, n = weights, c = counts;
+  const capped = (count, cap, knee) => count ? Math.min(cap, cap * count / (knee || 1)) : 0;
+  const powerGain = (count, gain, knee) => rules.powerCurve === "log" ?
+    gain * Math.log1p(count / knee) / Math.log1p(1 / knee) : gain * count;
+  const melee = !!c.blade, ranged = !!c.secretion, attack = melee || ranged;
+  const meleePower = melee ? rules.powerBase * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : 0;
+  const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
+  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : 0;
+  const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
+  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0, healerCount: c.healer || 0,
+    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed, healer: !!n.healer,
+    healPower: c.healer ? c.healer + (n.healPower || 0) : 0,
+    ...(rules.recovery ? { recovery: rules.recovery } : {}),
+    health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
+    power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,
+    armor: rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),
+    parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),
+    block: 100 * capped(n.block || 0, rules.blockCap, rules.blockKnee),
+    evasion: 100 * capped((n.evasion || 0) + (n.legs || 0), rules.dodgeCap, rules.dodgeKnee),
+    comboPower: attack ? 100 * Math.min(rules.followupCap, rules.followupBase + rules.comboPerPoint * (n.comboPower || 0)) : 0,
+    critical: attack ? 100 * capped(n.critical || 0, rules.critCap, rules.critKnee) : 0,
+    criticalPower: attack ? 100 * (rules.critMultiplierBase + capped(n.criticalPower || 0, rules.critMultiplierCap - rules.critMultiplierBase, rules.critPowerKnee)) : 0,
+    accuracy: attack ? 100 * capped(n.accuracy || 0, rules.accuracyCap, rules.accuracyKnee) : 0,
+    penetration: attack ? rules.flatPenPerPoint * (n.penetration || 0) : 0,
+    ...(n.percentPen ? { armorPenetration: capped(n.percentPen, rules.percentPenCap, rules.percentPenKnee) } : {}),
+    blockPower: 100 * (rules.blockReductionBase + capped(n.blockPower || 0, rules.blockReductionCap - rules.blockReductionBase, rules.blockPowerKnee)),
+    counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,
+    counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,
+    tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),
+    healing: 10 * (n.healing || 0), stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
+    stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,
+    bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,
+    area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,
+    lifesteal: attack ? 100 * capped(n.lifesteal || 0, rules.drainCap, rules.drainKnee) : 0,
+    reflection: Math.min(30, 3 * (n.reflection || 0)), regeneration: .1 * (n.regeneration || 0),
+    comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : 0,
+    focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : 0 };
+}
+
+return { DNA_COMBAT_RULES, dnaCombatStats };
+})();
 modules["client/unit-size.mjs"] = (() => {
 const UNIT_DISPLAY_SIZES = Object.freeze({
   bean: .40, spore: .38, pebble: .42, spring: .39,
@@ -5555,71 +5620,6 @@ function unitFrameMirror(sourceFacing, facing) {
 }
 
 return { UNIT_DISPLAY_SIZES, unitDisplaySize, combatViewCell, combatViewLayout, unitFacing, unitFrameMirror };
-})();
-modules["server/dna-combat-stats.mjs"] = (() => {
-const DNA_COMBAT_RULES = Object.freeze({
-  powerCurve: "linear", powerBase: 2, powerGain: 2, powerKnee: 2,
-  rangedPowerBase: 1.4, rangedPowerGain: 1.4, rangedPowerKnee: 2,
-  rangedAttackRateBase: .5, rangedHasteCap: 7, rangedHasteKnee: 70,
-  healthBase: 10, healthPerPoint: 10, armorPerPoint: 1, armorCap: 1, armorKnee: 100,
-  flatPenPerPoint: 1, percentPenCap: .8, percentPenKnee: 4,
-  attackRateBase: .5, hasteCap: 7, hasteKnee: 70, maxActionRate: 4,
-  windupBase: .3, focusPerPoint: .02, windupMinimum: .08,
-  hitGapBase: .12, hitSpeedPerPoint: .005, hitGapMinimum: .06, recovery: 0,
-  defensePreparation: 0, reactionCooldown: 0, counterCooldown: 0,
-  followupBase: .5, comboPerPoint: .05, followupCap: 1,
-  critCap: .75, critKnee: 18.75, critMultiplierBase: 1.5, critMultiplierCap: 4, critPowerKnee: 25,
-  accuracyCap: .6, accuracyKnee: 20, dodgeCap: .6, dodgeKnee: 20,
-  parryCap: .6, parryKnee: 15, blockCap: .75, blockKnee: 15,
-  blockReductionBase: .5, blockReductionCap: .9, blockPowerKnee: 10,
-  counterCap: 1, counterKnee: 10, counterMultiplierBase: 1, counterMultiplierCap: 2,
-  counterPowerKnee: 10, counterWindup: .12,
-  tenacityCap: .75, tenacityKnee: 15, stunCap: .3, stunKnee: 10,
-  stunDurationBase: .25, stunDurationPerPoint: .05, stunDurationCap: 1, stunImmunity: 2,
-  drainCap: .2, drainKnee: 20, jitter: .2
-});
-
-function dnaCombatStats(counts, weights, inputRules) {
-  const rules = inputRules || DNA_COMBAT_RULES, n = weights, c = counts;
-  const capped = (count, cap, knee) => count ? Math.min(cap, cap * count / (knee || 1)) : 0;
-  const powerGain = (count, gain, knee) => rules.powerCurve === "log" ?
-    gain * Math.log1p(count / knee) / Math.log1p(1 / knee) : gain * count;
-  const melee = !!c.blade, ranged = !!c.secretion, attack = melee || ranged;
-  const meleePower = melee ? rules.powerBase * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : 0;
-  const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
-  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : 0;
-  const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
-  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0, healerCount: 0,
-    melee, ranged, meleePower, meleeSpeed, rangedPower, rangedSpeed, healer: false,
-    healPower: 0,
-    ...(rules.recovery ? { recovery: rules.recovery } : {}),
-    health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
-    power: melee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 0, speed: melee ? meleeSpeed : rangedSpeed,
-    armor: rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),
-    parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),
-    block: 100 * capped(n.block || 0, rules.blockCap, rules.blockKnee),
-    evasion: 100 * capped((n.evasion || 0) + (n.legs || 0), rules.dodgeCap, rules.dodgeKnee),
-    comboPower: attack ? 100 * Math.min(rules.followupCap, rules.followupBase + rules.comboPerPoint * (n.comboPower || 0)) : 0,
-    critical: attack ? 100 * capped(n.critical || 0, rules.critCap, rules.critKnee) : 0,
-    criticalPower: attack ? 100 * (rules.critMultiplierBase + capped(n.criticalPower || 0, rules.critMultiplierCap - rules.critMultiplierBase, rules.critPowerKnee)) : 0,
-    accuracy: attack ? 100 * capped(n.accuracy || 0, rules.accuracyCap, rules.accuracyKnee) : 0,
-    penetration: attack ? rules.flatPenPerPoint * (n.penetration || 0) : 0,
-    ...(n.percentPen ? { armorPenetration: capped(n.percentPen, rules.percentPenCap, rules.percentPenKnee) } : {}),
-    blockPower: 100 * (rules.blockReductionBase + capped(n.blockPower || 0, rules.blockReductionCap - rules.blockReductionBase, rules.blockPowerKnee)),
-    counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,
-    counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,
-    tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),
-    healing: 10 * (n.healing || 0), stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
-    stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,
-    bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,
-    area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,
-    lifesteal: attack ? 100 * capped(n.lifesteal || 0, rules.drainCap, rules.drainKnee) : 0,
-    reflection: Math.min(30, 3 * (n.reflection || 0)), regeneration: .1 * (n.regeneration || 0),
-    comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : 0,
-    focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : 0 };
-}
-
-return { DNA_COMBAT_RULES, dnaCombatStats };
 })();
 modules["server/dna.mjs"] = (() => {
 const { dnaCombatStats } = modules["server/dna-combat-stats.mjs"];
@@ -6168,73 +6168,6 @@ function createUnitAppearanceSource(options = {}) {
 }
 
 return {UNIT_APPEARANCE_BYTE_BUDGETS,createUnitAppearanceSource};
-})();
-modules["server/attack.mjs"] = (() => {
-const AGENT_ATTACK_FRAME_DURATIONS = Object.freeze([
-  .06, .07, .06, .08, .03, .05, .05, .05, .05, .05, .05, .07, .08, .09, .10, .06
-]);
-
-const AGENT_HURT_FRAME_DURATIONS = Object.freeze([
-  .02, .03, .03, .03, .4, .03, .03, .03, .02, .02, .02, .02, .02, .02, .02, .02
-]);
-const AGENT_HURT_DURATION = AGENT_HURT_FRAME_DURATIONS.reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
-
-const AGENT_ATTACK_HIT_FRAME = 5;
-const AGENT_ATTACK_HIT_TIME = AGENT_ATTACK_FRAME_DURATIONS.slice(0, AGENT_ATTACK_HIT_FRAME).reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
-const AGENT_ATTACK_DURATION = AGENT_ATTACK_FRAME_DURATIONS.reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
-const AGENT_ATTACK_ASSET = "DesignAssets/Animations/UnitAttack/attack.png";
-
-function attackAnimationElapsed(attack, time, hitTime, duration) {
-  const elapsed = time - attack.startedAt;
-  if (Number.isFinite(attack.recovery)) {
-    const contacts = attack.meleeContacts || [attack.hitAt];
-    let index = 0;
-    while (index < contacts.length - 1 && time > contacts[index] && time >= contacts[index + 1] - hitTime) index++;
-    const contact = contacts[index], start = index ? Math.max(contacts[index - 1], contact - hitTime) : attack.startedAt;
-    if (time < contact) return Math.max(0, (time - start) / Math.max(1e-9, contact - start) * hitTime);
-    return Math.min(duration, hitTime + time - contact);
-  }
-
-  // DNA melee follow-ups move hitAt forward without beginning a new action.
-  // Keep the contact already reached, then finish recovery and prepare the next
-  // swing using only the server's recorded contacts, not current unit stats.
-  const contacts = attack.meleeContacts;
-  if (attack.combatId && !attack.exchange && Array.isArray(contacts) && contacts.length &&
-      Number.isFinite(attack.startedAt) && Number.isFinite(attack.endsAt) && attack.endsAt >= attack.hitAt &&
-      hitTime > 0 && duration > hitTime &&
-      contacts.at(-1) === attack.hitAt && contacts[0] > attack.startedAt &&
-      contacts.every((at, index) => Number.isFinite(at) && (!index || at > contacts[index - 1]))) {
-    if (time > attack.endsAt || time === attack.endsAt && attack.endsAt > attack.hitAt) return duration;
-    const recoveryShare = (duration - hitTime) / duration;
-    const startFor = index => index ? contacts[index - 1] +
-      (contacts[index] - contacts[index - 1]) * recoveryShare : attack.startedAt;
-    let swing = 0;
-    while (swing < contacts.length - 1 && time >= startFor(swing + 1)) swing++;
-    const start = startFor(swing), hit = contacts[swing];
-    const end = swing + 1 < contacts.length ? startFor(swing + 1) : attack.endsAt;
-    return time <= hit ? (time - start) / (hit - start) * hitTime :
-      hitTime + Math.min(1, (time - hit) / (end - hit)) * (duration - hitTime);
-  }
-  if (!attack.combatId || attack.exchange || !Number.isFinite(attack.hitAt) || !Number.isFinite(attack.endsAt) ||
-      !(attack.hitAt > attack.startedAt) || !(attack.endsAt > attack.hitAt)) return elapsed * (attack.speed || 1);
-  if (time >= attack.endsAt) return duration;
-  if (time <= attack.hitAt) return elapsed / (attack.hitAt - attack.startedAt) * hitTime;
-  return hitTime + Math.min(1, (time - attack.hitAt) / (attack.endsAt - attack.hitAt)) * (duration - hitTime);
-}
-
-function agentAttackFrame(attack, time) {
-  if (!attack) return -1;
-  const elapsed = attackAnimationElapsed(attack, time, AGENT_ATTACK_HIT_TIME, AGENT_ATTACK_DURATION);
-  if (elapsed < 0 || elapsed + 1e-8 >= AGENT_ATTACK_DURATION) return -1;
-  let end = 0;
-  for (let index = 0; index < AGENT_ATTACK_FRAME_DURATIONS.length; index++) {
-    end += AGENT_ATTACK_FRAME_DURATIONS[index];
-    if (elapsed + 1e-8 < end) return index;
-  }
-  return -1;
-}
-
-return { AGENT_ATTACK_FRAME_DURATIONS, AGENT_HURT_FRAME_DURATIONS, AGENT_HURT_DURATION, AGENT_ATTACK_HIT_FRAME, AGENT_ATTACK_HIT_TIME, AGENT_ATTACK_DURATION, AGENT_ATTACK_ASSET, attackAnimationElapsed, agentAttackFrame };
 })();
 modules["client/creature-approved-actions.mjs"] = (() => {
 const APPROVED_REAR_SUPPORT_ATTACK_ANIMATIONS = Object.freeze({
@@ -7836,6 +7769,73 @@ function toadHopMotion(progress) {
 }
 
 return { TOAD_HOP, toadHopMotion };
+})();
+modules["server/attack.mjs"] = (() => {
+const AGENT_ATTACK_FRAME_DURATIONS = Object.freeze([
+  .06, .07, .06, .08, .03, .05, .05, .05, .05, .05, .05, .07, .08, .09, .10, .06
+]);
+
+const AGENT_HURT_FRAME_DURATIONS = Object.freeze([
+  .02, .03, .03, .03, .4, .03, .03, .03, .02, .02, .02, .02, .02, .02, .02, .02
+]);
+const AGENT_HURT_DURATION = AGENT_HURT_FRAME_DURATIONS.reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
+
+const AGENT_ATTACK_HIT_FRAME = 5;
+const AGENT_ATTACK_HIT_TIME = AGENT_ATTACK_FRAME_DURATIONS.slice(0, AGENT_ATTACK_HIT_FRAME).reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
+const AGENT_ATTACK_DURATION = AGENT_ATTACK_FRAME_DURATIONS.reduce((sum, duration) => sum + Math.round(duration * 1000), 0) / 1000;
+const AGENT_ATTACK_ASSET = "DesignAssets/Animations/UnitAttack/attack.png";
+
+function attackAnimationElapsed(attack, time, hitTime, duration) {
+  const elapsed = time - attack.startedAt;
+  if (Number.isFinite(attack.recovery)) {
+    const contacts = attack.meleeContacts || [attack.hitAt];
+    let index = 0;
+    while (index < contacts.length - 1 && time > contacts[index] && time >= contacts[index + 1] - hitTime) index++;
+    const contact = contacts[index], start = index ? Math.max(contacts[index - 1], contact - hitTime) : attack.startedAt;
+    if (time < contact) return Math.max(0, (time - start) / Math.max(1e-9, contact - start) * hitTime);
+    return Math.min(duration, hitTime + time - contact);
+  }
+
+  // DNA melee follow-ups move hitAt forward without beginning a new action.
+  // Keep the contact already reached, then finish recovery and prepare the next
+  // swing using only the server's recorded contacts, not current unit stats.
+  const contacts = attack.meleeContacts;
+  if (attack.combatId && !attack.exchange && Array.isArray(contacts) && contacts.length &&
+      Number.isFinite(attack.startedAt) && Number.isFinite(attack.endsAt) && attack.endsAt >= attack.hitAt &&
+      hitTime > 0 && duration > hitTime &&
+      contacts.at(-1) === attack.hitAt && contacts[0] > attack.startedAt &&
+      contacts.every((at, index) => Number.isFinite(at) && (!index || at > contacts[index - 1]))) {
+    if (time > attack.endsAt || time === attack.endsAt && attack.endsAt > attack.hitAt) return duration;
+    const recoveryShare = (duration - hitTime) / duration;
+    const startFor = index => index ? contacts[index - 1] +
+      (contacts[index] - contacts[index - 1]) * recoveryShare : attack.startedAt;
+    let swing = 0;
+    while (swing < contacts.length - 1 && time >= startFor(swing + 1)) swing++;
+    const start = startFor(swing), hit = contacts[swing];
+    const end = swing + 1 < contacts.length ? startFor(swing + 1) : attack.endsAt;
+    return time <= hit ? (time - start) / (hit - start) * hitTime :
+      hitTime + Math.min(1, (time - hit) / (end - hit)) * (duration - hitTime);
+  }
+  if (!attack.combatId || attack.exchange || !Number.isFinite(attack.hitAt) || !Number.isFinite(attack.endsAt) ||
+      !(attack.hitAt > attack.startedAt) || !(attack.endsAt > attack.hitAt)) return elapsed * (attack.speed || 1);
+  if (time >= attack.endsAt) return duration;
+  if (time <= attack.hitAt) return elapsed / (attack.hitAt - attack.startedAt) * hitTime;
+  return hitTime + Math.min(1, (time - attack.hitAt) / (attack.endsAt - attack.hitAt)) * (duration - hitTime);
+}
+
+function agentAttackFrame(attack, time) {
+  if (!attack) return -1;
+  const elapsed = attackAnimationElapsed(attack, time, AGENT_ATTACK_HIT_TIME, AGENT_ATTACK_DURATION);
+  if (elapsed < 0 || elapsed + 1e-8 >= AGENT_ATTACK_DURATION) return -1;
+  let end = 0;
+  for (let index = 0; index < AGENT_ATTACK_FRAME_DURATIONS.length; index++) {
+    end += AGENT_ATTACK_FRAME_DURATIONS[index];
+    if (elapsed + 1e-8 < end) return index;
+  }
+  return -1;
+}
+
+return { AGENT_ATTACK_FRAME_DURATIONS, AGENT_HURT_FRAME_DURATIONS, AGENT_HURT_DURATION, AGENT_ATTACK_HIT_FRAME, AGENT_ATTACK_HIT_TIME, AGENT_ATTACK_DURATION, AGENT_ATTACK_ASSET, attackAnimationElapsed, agentAttackFrame };
 })();
 modules["server/creature-attack.mjs"] = (() => {
 const CREATURE_ATTACK_TIMINGS = Object.freeze({

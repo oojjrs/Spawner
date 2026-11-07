@@ -16,7 +16,7 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
   const html = readSource("Spawner.html").toString("utf8")
     .replace(/^  <script src="\.\/client\/local-assets\.js"><\/script>\r?\n/m, "");
   const pages = new Map([["Spawner.html", html]]);
-  for (const name of ["Attribute.html", "NeutralStats.html", "DnaLayouts.html", "UnitPreview.html", "VfxPreview.html", "Combat.html", "BeanRigPreview.html"]) {
+  for (const name of ["Attribute.html", "Combat.html"]) {
     if (existsSync(join(root, name))) {
       const page = readSource(name).toString("utf8");
       pages.set(name, name === "Attribute.html" ? page.replace(/(src|href)="(client\/[^\"]+)"/g, '$1="./$2"') : page);
@@ -46,6 +46,9 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
   // only the assets found by the main game's runtime build.
   auditImages(root, [...assets.keys()].filter(name => /\.(?:png|webp|gif|jpe?g)$/i.test(name)));
   const output = join(destination, "dist");
+  for (const name of ["VfxPreview.html", "UnitPreview.html", "NeutralStats.html", "DnaLayouts.html", "BeanRigPreview.html"]) {
+    if (existsSync(join(output, name))) unlinkSync(join(output, name));
+  }
   function write(name, value) {
     const path = join(output, name);
     mkdirSync(dirname(path), { recursive: true });

@@ -38,7 +38,7 @@ test("네 부족 모두 시작 지원금으로 채집 DNA 일꾼 세 마리를 �
 
 test("기존 플레이어 저장에는 진행을 보존하면서 한 번만 30P를 지급한다",()=>{
   const {game,environment,colony}=fixture();
-  game.command({type:"design",templateId:null,name:"보존할 설계",dna:workerDna,birth:false});
+  const {templateId}=game.command({type:"design",templateId:null,name:"보존할 설계",dna:workerDna,birth:false});
   const legacy=JSON.parse(game.save());
   delete legacy.state.startingPointsGranted;
   legacy.state.evolutionPoints=7;legacy.state.simSeconds=123;
@@ -48,7 +48,7 @@ test("기존 플레이어 저장에는 진행을 보존하면서 한 번만 30P�
   assert.equal(restored.snapshot().simSeconds,123);
   assert.deepEqual(restored.agents.map(agent=>agent.id),legacy.state.agents.map(agent=>agent.id));
   assert.equal(restored.agents[0].health,legacy.state.agents[0].health);
-  assert.equal(restored.snapshot().templates[0].name,"보존할 설계");
+  assert.equal(restored.snapshot().templates.find(template=>template.id===templateId).name,"보존할 설계");
   const saved=restored.save();
   assert.equal(JSON.parse(saved).state.startingPointsGranted,true);
   assert.equal(createGame(environment,colony,saved).snapshot().evolutionPoints,37);
@@ -88,8 +88,15 @@ test("시작 개체는 특별 능력치 없는 기본 채집 DNA이며 복제·�
   for(const tribe of ["bean","spore","pebble","spring"]){
     const {game}=fixture(tribe);
     const dna=startingWorkerDna(tribe),stats=dnaUnitStats(dna);
+    const [template]=game.snapshot().templates;
+    assert.equal(game.snapshot().templates.length,1);
+    assert.equal(template.id,1);
+    assert.equal(template.name,"기초 채집");
+    assert.deepEqual(template.dna,dna);
     assert.ok(validateDna(dna,1,30));
     for(const agent of game.agents){
+      assert.equal(agent.templateId,template.id);
+      assert.deepEqual(agent.slots,template.slots);
       assert.deepEqual(agent.dna,dna);
       assert.deepEqual(agent.stats.dna,stats.dna);
       assert.equal(agent.stats.vision,1);
@@ -103,12 +110,16 @@ test("시작 개체는 특별 능력치 없는 기본 채집 DNA이며 복제·�
     const source=game.agents[0];
     const {agentId}=game.command({type:"birth",agentId:source.id});
     const born=game.agents.find(agent=>agent.id===agentId);
+    assert.equal(born.templateId,template.id);
+    assert.equal(game.snapshot().templates.length,1);
     assert.deepEqual(born.dna,source.dna);
     assert.deepEqual(born.stats.dna,source.stats.dna);
     assert.equal(game.snapshot().evolutionPoints,0);
     const before=game.agents.map(agent=>({id:agent.id,dna:agent.dna,stats:agent.stats.dna}));
     game.restore(game.save());
     assert.deepEqual(game.agents.map(agent=>({id:agent.id,dna:agent.dna,stats:agent.stats.dna})),before);
+    assert.equal(game.snapshot().templates.length,1);
+    assert.deepEqual(game.snapshot().templates[0].dna,dna);
   }
 });
 

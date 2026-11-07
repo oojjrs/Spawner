@@ -23,7 +23,16 @@ test('three secretion idles use own 64-sample source rhythm, native crop and sta
   assert.equal(unitRangedPose(a,12.1).idleFallback,UNIT_RANGED_FORMS[tribe].idle);
   assert.equal(UNIT_RANGED_FORMS[tribe].idle.image,source(tribe),'resource/birth neutral contract remains intact');
  }
- assert.equal(unitRangedPose(agent('bean'),12).animation,UNIT_RANGED_FORMS.bean.idle,'no duplicate bean breathing');
+ const bean=agent('bean'),beanIdle=UNIT_SECRETION_IDLE_ANIMATIONS.bean,beanForm=UNIT_RANGED_FORMS.bean;
+ assert.equal(unitRangedPose(bean,12).animation,beanForm.idleAnimation);
+ assert.equal(beanForm.idleAnimation.image,beanIdle.image);
+ assert.equal(beanIdle.nativeSecretionIdle,true);assert.equal(beanIdle.frameCount,64);assert.equal(beanIdle.durationMs,3200);assert.equal(beanIdle.loop,true);
+ assert.ok(beanIdle.durationsMs.every(ms=>ms===50));
+ for(let i=0;i<64;i++)assert.equal(unitRangedPose(bean,10+(i+.01)*.05).frame,i);
+ assert.equal(unitRangedPose({...bean,animationStartedAt:0},3.2).frame,0);
+ assert.equal(beanForm.idle.image,source('bean'));assert.equal(beanForm.idle.frameSize,512);
+ assert.equal(beanForm.idle.pivotX,256);assert.equal(beanForm.idle.pivotY,448);
+ assert.equal(unitRangedPose({...bean,birth:{}},12).animation,beanForm.idle,'birth retains its source512 fallback');
 });
 test('shoot, hurt, resource, live movement and lifecycle take precedence without stale idle replay',()=>{
  for(const tribe of tribes){const a=agent(tribe),appearance=UNIT_RANGED_FORMS[tribe];

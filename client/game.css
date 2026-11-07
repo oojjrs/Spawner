@@ -377,8 +377,6 @@
       background: linear-gradient(90deg, #8b754c, var(--amber));
       transition: width 160ms ease;
     }
-    .first-design { position: fixed; left: 50%; bottom: var(--discovery-toasts-bottom); z-index: 4; translate: -50% 0; padding: 0; font: inherit; cursor: pointer; }
-    .first-design[hidden] { display: none; }
     .colony-menu { right: var(--info-panel-right); bottom: 64px; width: min(400px, calc(100vw - var(--info-panel-right) - 12px)); max-height: calc(100dvh - 80px); padding: 12px; }
     #colony-menu > .panel-header { align-items: flex-start; padding-right: 36px; }
     #colony-menu-close { position: absolute; top: 12px; right: 12px; }
@@ -658,7 +656,7 @@
     .design-status { margin: 0; color: var(--amber); font-size: .75rem; }
     .design-status:empty { display: none; }
     .design-footer[hidden], .attribute-palette[hidden] { display: none; }
-    .template-spawn:focus-visible, .template-edit:focus-visible, .template-delete:focus-visible, .nest-rename-open:focus-visible, .nest-name-input:focus-visible, .nest-growth-info:focus-visible, .template-add:focus-visible, .design-slot:focus-visible, .attribute-choice:focus-visible, .attribute-info:focus-visible, .primary-action:focus-visible, .secondary-action:focus-visible, .first-design:focus-visible, .design-name-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .template-spawn:focus-visible, .template-edit:focus-visible, .template-delete:focus-visible, .nest-rename-open:focus-visible, .nest-name-input:focus-visible, .nest-growth-info:focus-visible, .template-add:focus-visible, .design-slot:focus-visible, .attribute-choice:focus-visible, .attribute-info:focus-visible, .primary-action:focus-visible, .secondary-action:focus-visible, .design-name-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
     @media (max-width: 600px) {
       .evolution-panel { padding: 16px; }
       .design-body { grid-template-columns: 1fr; gap: 8px; --ui-icon-size: 28px; }

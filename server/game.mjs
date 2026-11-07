@@ -2180,9 +2180,17 @@ export function createGame(environment, colony, savedGame) {
     if (savedGame !== undefined) restore(savedGame);
     else {
       grantStartingPoints();
+      const template = { id: null, name: "기초 채집", slots: [], dna: startingWorkerDna(colony.tribe), revision: 1 };
+      if (colony.ownerId === environment.hostId) {
+        const { templateId } = command({ type: "design", templateId: null, name: template.name, dna: template.dna, birth: false });
+        const stored = state.templates.find(candidate => candidate.id === templateId);
+        stored.dna = cloneDna(template.dna);
+        Object.assign(template, stored);
+      }
       for (const _ of TRIBE_STARTING_UNITS[colony.tribe] || TRIBE_STARTING_UNITS.bean) {
-        const agent = spawnAgent({ id: null, name: "기초 채집", slots: [], dna: startingWorkerDna(colony.tribe), revision: 1 }, "colony");
+        const agent = spawnAgent({ ...template, id: null }, "colony");
         if (!agent) throw new Error("둥지 주변에 초기 개체를 배치할 공간이 없습니다.");
+        agent.templateId = template.id;
         agent.appearanceAttributes = agentAppearanceAttributes(agent);
       }
       updatePerception();

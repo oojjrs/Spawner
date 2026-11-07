@@ -1,8 +1,10 @@
-import { unitAnimationPose } from "./unit-animation.mjs";
+import { unitAnimationPose, unitAnimationFrame } from "./unit-animation.mjs";
+import { BEAN_SECRETION_IDLE_ANIMATION } from "./bean-secretion-idle-assets.mjs";
 
 // Native, losslessly cropped own-source cels. viewSize preserves the original
 // 512 camera: cropping transparent pixels must never enlarge the living body.
 export const UNIT_SECRETION_IDLE_ANIMATIONS = Object.freeze(Object.fromEntries(Object.entries({
+  "bean": BEAN_SECRETION_IDLE_ANIMATION,
   "spore": {
     "image": "DesignAssets/Animations/SecretionIdleV1/spore/idle.webp",
     "frameSize": 208,
@@ -443,7 +445,7 @@ export const UNIT_SECRETION_IDLE_ANIMATIONS = Object.freeze(Object.fromEntries(O
 export const UNIT_SECRETION_IDLE_ASSETS = Object.freeze(Object.values(UNIT_SECRETION_IDLE_ANIMATIONS).map(clip => clip.image));
 
 export function unitSecretionIdlePose(agent, time, appearance) {
-  const tribe = agent?.tribe || agent?.key, animation = UNIT_SECRETION_IDLE_ANIMATIONS[tribe];
+  const tribe = agent?.tribe || agent?.key, animation = appearance?.idleAnimation || UNIT_SECRETION_IDLE_ANIMATIONS[tribe];
   if (!animation || !appearance?.idle || appearance.idle.image !== `DesignAssets/Animations/UnitRangedV1/${tribe}/Source/neutral.png` ||
       agent.species || agent.birth || !(agent.health > 0) || !Number.isFinite(time) ||
       ["harvest", "unload", "jump"].includes(agent.mode) ||
@@ -451,7 +453,10 @@ export function unitSecretionIdlePose(agent, time, appearance) {
   const body = unitAnimationPose(agent, time);
   if (body && body.action !== "idle") return null;
   const epoch = Number.isFinite(agent.animationStartedAt) ? agent.animationStartedAt : Number.isFinite(agent.bornAt) ? agent.bornAt : 0;
-  const elapsed = Math.max(0, (time - epoch) * 1000), sample = Math.floor((elapsed % animation.durationMs + 1e-7) / 100) % 64;
+  const elapsed = Math.max(0, (time - epoch) * 1000);
+  if (animation.nativeSecretionIdle) return { action: "idle", animation, frame: unitAnimationFrame(animation, elapsed),
+    mirrorX: agent.facing < 0, idleFallback: appearance.idle };
+  const sample = Math.floor((elapsed % animation.durationMs + 1e-7) / 100) % 64;
   return { action: "idle", animation, frame: animation.frames[sample], sample, mirrorX: agent.facing < 0,
     idleFallback: appearance.idle };
 }

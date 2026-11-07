@@ -6928,7 +6928,7 @@
       unitPanelTitle.textContent = agent.name;
       const attributes = document.getElementById("agent-attributes");
       const slots = agent.slots || [];
-      const signature = JSON.stringify([agent.tribe, agent.species, slots, agent.attributeLevels, agent.attributes, agent.dna]);
+      const signature = JSON.stringify([agent.tribe, agent.species, slots, agent.attributeLevels, agent.attributes, agent.dna, agent.stats?.dna]);
       if (attributes.dataset.signature !== signature) {
         attributes.dataset.signature = signature;
         attributes.classList.toggle("unit-dna-composition", !!agent.dna);
@@ -7388,7 +7388,6 @@
     const templateDeleteTitle = document.getElementById("template-delete-title").textContent;
     const nestUpgrade = document.getElementById("nest-upgrade");
     const nestStatus = document.getElementById("nest-status");
-    const firstDesign = document.getElementById("first-design");
     const designBackdrop = document.getElementById("design-backdrop");
     const designForm = document.getElementById("unit-design-form");
     const designName = document.getElementById("design-name");
@@ -8233,8 +8232,7 @@
       collapseControlsGuide();
       nestStatus.textContent = "";
       updateColonyPanel();
-      if (!state.ending && !state.templates.length) openUnitDesign(null);
-      else colonyMenuClose.focus();
+      colonyMenuClose.focus();
     }
 
     const resourceInventoryRows = new Map();
@@ -8317,8 +8315,6 @@
       document.getElementById("nest-upgrade-help").dataset.help = nestGrowthBenefits();
       nestUpgrade.setAttribute("aria-label", state.nestLevel >= NEST_LEVELS.length ? "최고 둥지 레벨" : "둥지 성장, 진화 포인트 " + upgradeCost() + "점");
       nestUpgrade.disabled = !!state.ending || connection.busy || !connection.online || state.nestHealth === 0 || state.nestLevel >= NEST_LEVELS.length || state.evolutionPoints < upgradeCost();
-      firstDesign.hidden = !!state.ending || state.templates.length > 0 || !evolutionPanel.hidden;
-      if (!firstDesign.hidden) firstDesign.querySelector("img").src = agentImageSource({ tribe: state.tribe, attributes: attributeCounts([]), carrying: 0 });
       renderUnitTemplates();
       for (const card of templateList.querySelectorAll("[data-template-id]")) {
         const template = state.templates.find((candidate) => candidate.id === Number(card.dataset.templateId));
@@ -9020,10 +9016,6 @@
         event.preventDefault();
         controls[0].focus();
       }
-    });
-    firstDesign.addEventListener("click", () => {
-      openColonyPanel(colonyEntries.find((entry) => entry.id === connection.colonyId));
-      moveToColony();
     });
     document.getElementById("nest-growth-info").addEventListener("click", () => openCodex("nest:colony"));
     nestUpgrade.addEventListener("focus", () => showHelpTooltip(document.getElementById("nest-upgrade-help")));

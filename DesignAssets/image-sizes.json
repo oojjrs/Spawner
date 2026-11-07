@@ -11438,6 +11438,16 @@
         8
       ]
     },
+    "DesignAssets/Planning/ApprovedAnimations96/bean-secretion-idle-v4.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
     "DesignAssets/Tribes/spore/ApprovedGatherMotionV1/idle.webp": {
       "display": [
         128,
@@ -11448,6 +11458,16 @@
         8
       ]
     },
+    "DesignAssets/Planning/ApprovedAnimations96/spore-gather-idle-v1.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
     "DesignAssets/Tribes/spore/ApprovedGatherMotionV1/walk.webp": {
       "display": [
         128,
@@ -11456,6 +11476,16 @@
       "grid": [
         8,
         2
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/spore-gather-walk-v1.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
       ]
     },
     "DesignAssets/Planning/Attributes/Units/pebble-strength.png": {
@@ -11472,36 +11502,6 @@
       "display": [
         144,
         144
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Planning/ApprovedAnimations96/bean-secretion-idle-v4.webp": {
-      "display": [
-        96,
-        96
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Planning/ApprovedAnimations96/spore-gather-idle-v1.webp": {
-      "display": [
-        96,
-        96
-      ],
-      "grid": [
-        1,
-        1
-      ]
-    },
-    "DesignAssets/Planning/ApprovedAnimations96/spore-gather-walk-v1.webp": {
-      "display": [
-        96,
-        96
       ],
       "grid": [
         1,

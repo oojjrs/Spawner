@@ -3446,7 +3446,7 @@ const UNIT_SECRETION_LIFECYCLE_ANIMATIONS = Object.freeze(Object.fromEntries(
 const UNIT_SECRETION_LIFECYCLE_ASSETS = Object.freeze(Object.values(UNIT_SECRETION_LIFECYCLE_ANIMATIONS)
   .flatMap(form => Object.values(form).map(animation => animation.image)));
 
-return {UNIT_SECRETION_LIFECYCLE_ANIMATIONS,UNIT_SECRETION_LIFECYCLE_ASSETS};
+return { UNIT_SECRETION_LIFECYCLE_ANIMATIONS, UNIT_SECRETION_LIFECYCLE_ASSETS };
 })();
 modules["client/unit-ranged-assets.mjs"] = (() => {
 const { SPRING_SECRETION_ASSETS } = modules["client/spring-secretion-assets.mjs"];

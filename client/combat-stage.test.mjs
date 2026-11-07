@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createCombatStage } from "./combat-stage.mjs";
+import { unitDisplaySize } from "./unit-size.mjs";
 
 function renderGrowth(left, right, support, sourceUrl) {
   const originalWindow = globalThis.window, originalImage = globalThis.Image, originalAssets = globalThis.SpawnerAssets;
@@ -87,4 +88,24 @@ test("원거리 key-only 몸체와 탄체도 동일한 DNA 우선순위를 따�
 
 test("실제 엔진이 교전 상태를 해제한 생존자와 사망자를 계속 그린다", () => {
   assert.ok(renderGrowth({combat:null,side:0,health:0},{combat:null,side:1}).length>0);
+});
+
+for (const species of ["flower-tail-bird", "dew-rabbit", "soil-mole", "rolling-acorn"]) test("대형 편성에 맞춰 " + species + " 본체도 공통 배율로 축소한다", () => {
+  const subject = { tribe: undefined, species, stats: { health: 100, pieceCount: 14 } };
+  const small = { tribe: undefined, species: "flower-tail-bird" };
+  const baseline = renderGrowth(subject, small, false)[0].width;
+  for (const opponent of [
+    { tribe: undefined, species: "white-paw" },
+    { tribe: undefined, species: "spiny-back-leader" },
+    { tribe: undefined, species: "white-paw", stats: { health: 100, pieceCount: 100 } },
+    { tribe: undefined, species: "white-paw", health: 0 }
+  ]) near(renderGrowth(subject, opponent, false)[0].width / baseline,
+    Math.max(unitDisplaySize(subject), unitDisplaySize(small)) / Math.max(unitDisplaySize(subject), unitDisplaySize(opponent)));
+  near(renderGrowth(subject, small, false)[0].width, baseline);
+});
+
+test("신규 중립종 사망 경계가 누락돼도 전투 렌더를 계속한다", () => {
+  const draws = renderGrowth({ tribe: undefined, species: "bubble-toad", health: 0 }, {}, false);
+  assert.ok(draws.length > 0);
+  assert.ok(draws.every(draw => Number.isFinite(draw.width) && Number.isFinite(draw.height)));
 });

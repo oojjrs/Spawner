@@ -38,7 +38,7 @@ async function harness(run, { unavailable = false } = {}) {
   const canvas = surface(1040, 480); canvas.clientWidth = 1040; canvas.clientHeight = 480;
   const stage = createCombatStage(canvas);
   const draw = (trial, now = trial.time * 1000) => { canvas.calls.length = 0; stage.render(trial, now, false); return canvas.calls; };
-  try { await run({ stage, draw, requested, recover: () => { missing = false; }, settle: () => new Promise(resolve => setImmediate(resolve)) }); }
+  try { await run({ stage, draw, requested, recover: () => { missing = false; }, settle: async () => { for (let turn = 0; turn < 20; turn++) await new Promise(resolve => setImmediate(resolve)); } }); }
   finally { for (const [key, value] of Object.entries(saved)) globalThis[key] = value; }
 }
 function fixture(tribe, visual, side = 0) {
