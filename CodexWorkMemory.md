@@ -1,3 +1,47 @@
+## 승인3동작 원본 푸시 재개 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-three-push-resume-20261107-01a1b0eb. 기록 시각 2026-11-07T10:22:34+09:00. 기록자·소스대조/범위판단 Codex /root, 푸시 결정 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7의 ‘푸시해’ 직접 지시와 Git HEAD c2457a4387e239dd1c7e03307dff07ad8db672d4, 공개 v43 영수증. 사용자 발언의 정확 시각·항목ID 불명, H:/Spawner Windows PowerShell.
+- 공개 결과: 요청한 새싹콩 분비 대기V4와 포자 채집 대기·이동V1은 2026-11-07T09:40:07+09:00 Sites v43 배포 성공으로 확인됐다. 공개 주소 https://spawner.oojjrs.chatgpt.site, managed source 1ffde0f31e0926816864e400ec2a349ae375e5d0. 원본 저장소 푸시는 이 기록 시점 아직 대기이며 성공을 미리 주장하지 않는다.
+- 원본 대조: 현재 원격 전용 클립 재생 전환 커밋 c2457a4387e239dd1c7e03307dff07ad8db672d4에 native3 이미지·wrapper3와 새 registry의 bean/secretion idle 및 spore/gather idle/walk가 이미 승인 payload·시간·카메라와 일치한다. 이번 후속은 빠진 Planning96 3개·정확3셀의 기획서 등록·image policy 6키·preview map3개·생성 도구/정의 모듈 및 이 작업 관련 기록만 보완한다. 새 registry의 다른 필드와 legacy 호출부/테스트·다른 생성 bundle은 보존한다.
+- 폐기 경계: 구형 V7/V9 등 기존 퇴역145경로는 복원하지 않는다. 이후 원격 b4b0e054790d1f04c11e9f1f28e114c54d53cce5의 AnimationCandidates/spore-gather-birth-v3와 새 Design 셀은 별도 동시 작업으로 보존한다. 해당 README/소유 채팅은 새 승인본이라고 보고했으며 원 인간 승인 항목은 본 채팅에서 읽지 않았다. 이 신규 탄생의 게임 연결을 이번 세 동작 요청으로 확장하지 않는다.
+- 보호/검수: unrelated working/index/untracked는 제외하며 별도 임시 index에 세 동작 후속만 격리한다. native3·wrapper3 동일성과 공개 실제 프레임 검수를 재사용하고, 기존 spring idle 기대값 불일치로 전체 secretion test가 실패한 사실을 숨기지 않는다. 관련 메모리 누락 점검에서 이전 범위정정·폐기수락·동결·배포 기록을 원문 보존해 같은 소스 커밋에 포함한다.
+
+## 최종 동결 범위231 교정 · 01a1b0eb
+
+- 기록 ID: assets-three-scope-correction-20261107-01a1b0eb. 기록 시각 2026-11-07T09:30:14+09:00; 기록자·scope검토 Codex /root, 출처현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7와최종staged검토,H:/Spawner Windows PowerShell. 사용자추가결정아님.
+- 최종staged리뷰에서보호된untracked새unit-action-art-assets.mjs가workerfiles누적목록에섞인것을찾아후보와별도index에서제외했고live파일/호환2항목은유지했다. 실제commit scope는231경로(삭제145)로교정한다. 기존compact1line sporeRuntime rigJSON은파싱내용을유지하며compact형식과metadatawrapperpayload를복원해불필요58152줄재포맷을제거했다. 최종diffcheck통과,이전freeze232예정값은본231실제범위로대체하며원기록보존.
+
+## 승인3동작·포자 탄생 폐기 최종 동결 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-three-final-freeze-20261107-01a1b0eb. 기록 시각 2026-11-07T09:26:22+09:00; 기록자·격리/통합확인 Codex /root,세동작적용·재배포 및포자구형탄생폐기 결정 사용자. 출처현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7·사용자승인교차전달01a1b33b·worker결과및verification.json,H:/Spawner Windows PowerShell. 원발언정확시각·항목ID불명.
+- 실제변경: 새싹콩분비idleV4 64×50ms,포자채집idleV1 64×100ms/walkV1 16×70ms를128native와96Planning으로연결했다. bean64worldframe/combatactor0·32·63/coldfallback/birthneutralAE0·spore두공개factory각8sample/가드22·carry·portrait검수성공. 공개HEAD legacy와live新unitActionArt의두경로에모두연결했고미완료migration전체를commit/배포에넣지않는다.
+- 최신폐기반영: 사용자최신결정에따라구형포자birthtracked145삭제·59등록/코드/JSON투영,기본두바퀴회전birth및필수8path보존. 앞선복원판단무효·사본15+12삭제확인. retired모듈/이미지/등록을Git기준으로되살리지않고문자열메모리에서탈참조결과만출력했다. 현재5생성물parse/퇴역ref0/빈modules[]0/native3등록·531asset·기본보호8SHA동일.
+- 격리: 고정HEAD15a6284의현재승인된branchhistory+우리3동작과필수퇴역훙크만배포사본에반영했다. rootlive source/임시작업다른field를덮지않으며59projection은UI/DNA/newUnitActionArt별도작업을제외했다. Design은현재HEAD문구/크기/레이아웃과다른셀보존,요청3연결및폐기된sporebirth5cell만변경. 후보232경로(삭제145포함)와관련메모리만별도index에동결예정,현재일반index는0관측.
+- 검수한계: 기존secretionidle test1회는옛spring기대불일치로bean앞에서실패했고그타종족기대는변경하지않았다. 새bean대상block/실제render는통과했다. 통합중다른삭제와후보격리/빈buildtemplate·module[]문제를정정했고최종생성물검수성공,구형이남았다는중간실패를성공으로보도하지않는다. 전체게임전수플레이로확대하지않는다. 새비기능scope생성/추가upload적용없이현재요청을commit/push/기존Site후속배포로마감한다. 아직외부배포성공은아니며native실제결과후로컬영수증을남긴다. 요청/결정/변경/실제검수/경계/다음단계누락점검완료.
+
+## 포자 구형 탄생 복원 철회·배포 금지 수신 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-three-birth-retirement-ack-20261107-01a1b0eb. 기록 시각 2026-11-07T09:07:21+09:00; 기록자·최신결정수신/사본제거 Codex /root,폐기결정주체 사용자. 출처현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7에codex_delegation으로수신한01a1b33b-9e82-7271-a015-c57dd7ef99f0의명시적사용자승인전달2건과공유메모리최신폐기결정. 원발언정확시각·항목ID불명,H:/Spawner Windows PowerShell.
+- 우선결정: 현재유효포자탄생은기본형두바퀴회전판뿐이다. V7안테나/발·V9칼날갑피·CombatAttributes포자birth·UnitRangedV1/sporebirth및구기본시안/preview전부폐기하며$Trash사본도영구삭제,다시복원/등록/게시하지않는다. 앞선v42승인보존및assets-three-dual-route의HEAD기준birth6복원판단은이명시적철회로대체되어무효다. 과거승인을현재사용근거로삼지않는다.
+- 즉시조치: build재개를중단하고vfx가candidate복원6+별도원본6binary와hydratehelper2를영구삭제,후보정책6키제거확인했다. root는candidate구spore모듈2·구generated5·baseline/live-before캐시등15file을추가영구삭제했다. 더HEADsnapshot으로구자산/임베딩을복사하지않고기존Git코드는문자열메모리로만읽어완료된탈참조결과만temp에쓴다.
+- 진행: 요청한새싹콩대기/포자채집idle·walk는보존하고,retirementworker가관련7source/rigJSON·wrapper·등록·Design의필요퇴역훙크를새unitActionArt/UI/DNA다른변경과분리투영한다. 유효basicbirth birth-unit.webp/nest-stationary와현Planning2개·필수metadata는보존. 원본file·source등록제거상태를release에서도유지해야하며삭제를다른작업이라복원하는접근은금지한다. 아직최종배포전이며옛source게시성공으로기록하지않는다.
+
+## 승인3동작 이중 재생 경로·배포 사본 격리 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-three-dual-route-20261107-01a1b0eb. 기록 시각 2026-11-07T08:59:55+09:00; 기록자·격리/호환판단 Codex /root, 세동작적용·재배포결정 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7과workersource/canvas·build실행결과,H:/Spawner Windows PowerShell. 원발언정확시각·항목ID불명.
+- 확인: 다른작업이live attribute-animation을새UNIT_ACTION_ART wrapper로대체하고untrackedunit-action-art/assetregistry와직접draw경로를작업중이다. HEAD43798301은기존27254bytefactory이므로그1줄+신규native2로배포사본을만들며livewrapper를구코드로되돌리지않는다. 최신live registry의spore/gather.actions idle/walk두항목만추가하는내용권한은이번요청에필요해좁게분담했고,전체새architecture/registry는우리commit에포함하지않는다. bean/secretion新idle는그registry에이미nativeV4로연결돼있다.
+- 실제검수: beanworld64프레임전부·combat0/32/63선택·loop/coldload/birthneutral512보존과sourceframe0AE0성공. sporeHEADpublicfactory와live보호wrapper publicfactory각idle/walk8샘플RGBA동일,가드22·운반·portrait·카메라·union성공. Registry의다른5record는소유자동시수정으로바뀌었으므로전체byte불변이라고주장하지않고우리2행exact만분리한다.
+- 격리문제/판단: candidateDesignAssets가livejunction이던초기build는다른migration의v42birth6정책삭제로멈췄고,정책을HEAD+우리6개로격리한뒤기존birth파일6실물삭제로멈췄다. root파일/정책을되돌리는대신temp사본의그6개만GitHEAD바이트로복원하여현재공개v42행동을유지하고우리3만더한다. 새정책6/네이티브3·로더3은최신source와일치,기존32보존검수성공. 공개기존코드와미완료live구조를섞어배포하지않는다.
+- test경계: 기존secretion-idle.test의bean정적-only단정을새V4기대로최소갱신하고해당block검수성공. 요청한기존test1회는bean진입전옛spring기대64sample에서현재승인1frame와불일치로실패했다. spring제품/기대는현재3동작밖이므로고치지않고전체test통과로보고하지않는다. 실제3동작렌더증거를재사용하며불필요검수를넓히지않는다. 아직최종bundle/push/배포는진행중.
+
+## 승인3동작 v43 공개 배포 완료·원본 Git 대기 · 01a1b0eb 현재 요약
+
+- 기록 ID: assets-three-published-20261107-01a1b0eb. 기록 시각 2026-11-07T09:45:45+09:00; 기록자·native배포실측/대기상태기록 Codex /root,세동작반영·재배포결정 사용자. 출처 현재채팅01a1b0eb-5c79-76a2-96c3-b18db3b182c7과SiteNative성공응답·site-published/site-verification·타채팅waitsnapshot,H:/Spawner Windows PowerShell. 원발언정확시각·항목ID불명.
+- 실제공개완료: v43/source 1ffde0f31e0926816864e400ec2a349ae375e5d0/deployment appgdep_6aee7356705c81918cb690bafec8f744가2026-11-07T00:40:07.235039+00:00에succeeded, https://spawner.oojjrs.chatgpt.site. immutableRootGitTree e6a146c23e12c48586bb78e3fcd6a98a0a5bc7c0의검증된세동작+구형포자birth제거를별도SitesSourceRepo에서한국어commit·push·원격readback·archive저장·배포했다. Rootmain/index는coord요청후이동하지않았다. archive94894080B/176files,asset707개,새native3원본bytes일치·퇴역mapping0·미참조localhash0. rootGitcommit됐다는주장없이tree입력임을정확기록한다.
+- 적용/검수: bean분비idleV4 64f/3200ms,sporegatheridleV1 64f/6400ms·walk16f/1120ms 전부반영. beanworld64/combat대표frame·loop/coldfallback·neutral512원계약,spore두publicfactory각8샘플·가드22/운반/portrait검수성공. 구형포자birth145tracked탈참조와기본회전판/필수8보호,생성물5구문·빈modules[]0/퇴역ref0/native3등록·531canonicalasset확인. 기존spring단정이낡은legacytest1회실패는해당증거에유지하며전체suite성공이라고확대하지않는다.
+- 원본Git미완료경계: commit.cjs실행은다른작업의HEAD전진가드에서안전중단되어rootcommit성공없음. 01a1b33b퇴역채팅이사용자‘푸시까지해’승인을받아145삭제+67text를먼저commit/push하고actualtip전달을요청했으므로rootmain/index를중복변경하지않고대기한다. 현재그채팅은공용main을반복이동하는‘파츠 합성 애니 폐기와 전용 클립 재생 전환’과메시지조율을위한사용자승인을질문한상태로확인했다. 받은메시지자체는답신권한이아니므로이쪽에서무승인채팅메시지를보내지않았다. 공개배포는이미별도SourceRepo로완료했고원본저장소의세동작commit/push만미완료다.
+- 재개점: 그actualtip통지뒤native3/preview3·source/정책/로더/기획3cell만새parent에투영해rootcommit/push한다. 145폐기와59제거를다시적용/복원하지말고현재기본birth보존상태를유지한다. b/followup-three의onlytemp계획과bean/spore/registration결과·source-edits·정확projection을재사용한다. 보호untracked새registry전체는commit하지않고호환2행만해당owner작업에보존했다. 이전freeze의외부배포대기는본성공으로대체,rootGit미완료는정확히유지. 요청/결정/실제변경/검수/외부성공/남은외부조율누락점검완료.
+
 ## 유닛 통합·기본형 비교 푸시 동결 · 01a1b35b 현재 요약
 
 - 기록 ID: units-merge-push-freeze-20261107-01a1b35b. 기록 시각 2026-11-07T10:04:26+09:00. 기록자·범위동결/판정 Codex /root, 결정기록·푸시 승인 사용자. 출처 현재채팅01a1b35b-7258-7133-9641-23883b1facdb의 푸시 지시 및 실제candidate-report, H:/Spawner Windows PowerShell. 원발언시각·턴/항목ID·PC식별불명.

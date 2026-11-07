@@ -358,5 +358,8 @@ globalThis.SpawnerDesignPreviews = Object.freeze({
   "DesignAssets/Animations/ApprovedRearSupportAttack/vine-turtle/attack-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--vine-turtle.webp",
   "DesignAssets/Animations/ApprovedRearSupportAttack/shadow-weasel/attack-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/rear-support-attack--shadow-weasel.webp",
   "AnimationCandidates/spore-combat-birth-v9/blade-birth-scene-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/spore-combat-birth-v9-blade.webp",
-  "AnimationCandidates/spore-combat-birth-v9/carapace-birth-scene-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/spore-combat-birth-v9-carapace.webp"
+  "AnimationCandidates/spore-combat-birth-v9/carapace-birth-scene-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/spore-combat-birth-v9-carapace.webp",
+  "AnimationCandidates/spore-gather-motion-v1/spore-gather-idle-v1-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/spore-gather-idle-v1.webp",
+  "AnimationCandidates/spore-gather-motion-v1/spore-gather-walk-v1-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/spore-gather-walk-v1.webp",
+  "AnimationCandidates/bean-secretion-idle-v4/bean-secretion-idle-v4-preview.gif": "DesignAssets/Planning/ApprovedAnimations96/bean-secretion-idle-v4.webp"
 });
