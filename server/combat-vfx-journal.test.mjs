@@ -93,20 +93,26 @@ test("server bleed catch-up uses each real tick time and regeneration reports on
 
 test("server launch/arrival/cancel evidence follows real projectiles and retains zero-damage defense", () => {
   const f = fixture(["secretion"], 2);
-  f.target.stats.dna.parry = 100;
+  f.target.stats.dna.evasion = 100;
   f.combat.update(f.source, 0);
+  const { startedAt, launchedAt, hitAt, endsAt } = f.source.attack;
+  assert.ok(startedAt < launchedAt && launchedAt < hitAt && launchedAt < endsAt);
   assert.equal(f.events.some(event => event.kind === "shoot"), false);
-  f.combat.update(f.source, .3);
+  f.combat.update(f.source, launchedAt);
   const launch = f.events.find(event => event.kind === "shoot");
-  assert.equal(launch.at, .3); assert.equal(launch.arrivesAt, .3 + 2 / 6);
-  f.combat.update(f.source, .64);
-  const impact = f.events.find(event => event.kind === "parry");
+  assert.equal(launch.at, launchedAt); assert.equal(launch.arrivesAt, hitAt);
+  assert.ok(Math.abs(hitAt - launchedAt - 2 / 6) < 1e-9);
+  assert.equal(f.events.some(event => event.kind === "miss"), false);
+  f.combat.update(f.source, hitAt);
+  const impact = f.events.find(event => event.kind === "miss");
   assert.equal(impact.at, launch.arrivesAt); assert.equal(impact.amount, 0);
   assert.equal(impact.projectileId, launch.projectileId); assert.equal(f.target.health, 100);
-  const count = f.events.length; f.combat.update(f.source, .64); assert.equal(f.events.length, count);
+  const count = f.events.length; f.combat.update(f.source, hitAt); assert.equal(f.events.length, count);
+  f.combat.update(f.source, endsAt); assert.equal(f.events.length, count);
   const cancelled = fixture(["secretion"], 2);
   cancelled.combat.update(cancelled.source, 0); cancelled.source.hidden = true;
-  cancelled.combat.update(cancelled.source, .1);
+  const attack = cancelled.source.attack;
+  cancelled.combat.update(cancelled.source, (attack.startedAt + attack.launchedAt) / 2);
   assert.ok(cancelled.events.some(event => event.kind === "projectile-cancel"));
   assert.equal(cancelled.events.some(event => ["shoot", "hit"].includes(event.kind)), false);
 });

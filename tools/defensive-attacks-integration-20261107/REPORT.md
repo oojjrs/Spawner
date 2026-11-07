@@ -25,3 +25,9 @@
 Unknown pre-existing `CodexWorkMemory.md` edits and unrelated untracked artwork were not changed or staged. Original 12-form action metadata and asset hashes are captured in `existing-art-baseline.json`. Attack-only replacements are tested against that baseline.
 
 The user subsequently requested push first, then the full animation audit. Push/deployment results are verified separately and reported immediately when available.
+
+## Concurrent update reconciliation
+
+Before push, main advanced through three user-authored camera, formation and VFX commits to 0b0b8536. Their changes were merged without replacing the dirty original checkout. The combined game and laboratory were rebuilt from the merged source.
+
+The subsequent visual audit identified appearance-continuity defects in bean/antenna and bean/carapace: foliage and body proportions change between idle and attack. These are known follow-up corrections, not visually approved clips. The user explicitly requested pushing the completed implementation first and then the comprehensive animation audit.

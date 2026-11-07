@@ -4714,6 +4714,18 @@
       }
       const cues = [...combatVfxFrame.active.filter(cue => !worldRangedImpacts.has(cue.id)), ...worldRangedImpacts.values()];
       for (const cue of cues) {
+        if (cue.kind === "reflect" && cue.channel === "impact" && cue.amount > 0 && cue.to) {
+          const target = visibleAgents().find(agent => String(agent.id) === String(cue.targetId));
+          const point = worldToScreen(cue.to.x + .5, cue.to.y + .5), size = Spawner.unitDisplaySize(target || {}) * cell;
+          const command = Spawner.combatReflectionCommand(cue, { x: point.x, y: point.y + size * .5, height: size },
+            state.simSeconds, cue.from ? Math.sign(cue.from.x - cue.to.x) : 0);
+          if (command) {
+            let image = detailVfxImages.get(command.image);
+            if (!image) { image = globalThis.SpawnerAssets.image(); image.src = assetSource(command.image); detailVfxImages.set(command.image, image); }
+            Spawner.drawDetailVfxCell(ctx, image, command);
+          }
+          continue;
+        }
         if (cue.channel === "impact" && cue.mode === "ranged" && ["hit","critical","followup"].includes(cue.kind) &&
             cue.amount > 0 && cue.to && !defended.has(cue.eventId)) {
           const source = visibleAgents().find(agent => String(agent.id) === String(cue.sourceId));
@@ -7580,7 +7592,7 @@
         const cue = matches.findLast(cue => ["defense", "status"].includes(cue.channel) && cue.kind !== "dodge" && String(cue.targetId) === String(agent.id)) ||
           matches.findLast(cue => cue.channel === "impact" && String(cue.targetId) === String(agent.id)) ||
           matches.findLast(cue => cue.kind === "dodge") || matches.at(-1);
-        return cue ? { ...cue, kind: ["critical", "followup", "area", "reflect"].includes(cue.kind) ? "hit" : cue.kind, damage: cue.amount } : null;
+        return cue ? { ...cue, effectKind: cue.kind, kind: ["critical", "followup", "area", "reflect"].includes(cue.kind) ? "hit" : cue.kind, damage: cue.amount } : null;
       }
       const relevant = event => event && ["hit", "counter", "parry", "block", "stun"].includes(event.kind) &&
         (event.kind === "counter" ? String(event.sourceId) === String(agent.id) :
@@ -7711,7 +7723,7 @@
         livingAgents: [...state.agents, ...state.rivals] });
       const deathCommands = deathPresentation?.commands(state.corpses, corpsePlaybackTime(), { width, height, cell: 1 }) || [];
       const formation = Spawner.combatViewLayout(width, height, combatArenaUnits([...arenaUnits, ...deathCommands.map(command => ({ ...command.corpse,
-        id: command.agentId, combat: formationMembers.get(String(command.agentId)) }))]));
+        id: command.agentId, combat: formationMembers.get(String(command.agentId)) }))]), combatWatch.camera ||= {});
       const cell = formation.cell;
       const appearancePoses = appearanceWorld.prepare(context, arenaUnits, state.simSeconds, cell, pixelRatio);
       const positions = new Map();
@@ -7727,6 +7739,13 @@
       // this open view's previously observed approved body routes are eligible.
       for (const entry of deathCommands) {
         const command = { ...entry, cell };
+        const member = formationMembers.get(String(entry.agentId)), projected = member?.position && formation.positions.get(String(entry.agentId));
+        if (projected) {
+          const kind = entry.corpse.species || entry.corpse.tribe || "bean", bounds = unitDisplayBounds.get(kind);
+          const growth = entry.scale / (unitDisplayScales.get(kind) || 1);
+          command.point = { x: projected.x, y: projected.y, width: (bounds?.width || .4) * growth * cell,
+            height: (bounds?.height || .4) * growth * cell };
+        }
         const { point } = command;
         context.save(); context.fillStyle = "#13251e3d";
         const shadow = Spawner.detailCreatureDeathShadow?.(command, creatureDeathSheets.get(command.corpse.species), idleMotion.matches);
@@ -7793,6 +7812,9 @@
         }
         drawDodgeBody(x, y);
         deathPresentation?.observe(agent, { ...point, x, y }, { scale: point.scale, facing });
+        if (agent.combat.position) formationMembers.set(String(agent.id), { ...agent.combat,
+          position: { ...agent.combat.position, ...(formation.unproject ? formation.unproject({ x, y }) : {
+            x: agent.combat.position.x + (x - point.x) / cell, y: agent.combat.position.y + (y - point.y) * 2 / cell }) } });
         // Persistent stun reads current status, never a replayed impact event.
         Spawner.drawCombatStun?.(context, agent, { ...point, x, y }, state.simSeconds,
           { width, height, reducedMotion: idleMotion.matches, image: detailVfxImage });
@@ -7803,7 +7825,7 @@
           cue.kind === "dodge" && cue.channel === "defense" && String(cue.targetId) === String(agent.id));
         if (dodge && state.simSeconds >= dodge.at && state.simSeconds < dodge.endsAt)
           dodgeLabels.push({ targetId: agent.id, x, y: Math.max(20, y - point.height - 20), floor: y, age: state.simSeconds - dodge.at });
-        if (impact && !["dodge", "counter"].includes(impact.kind) && String(impact.targetId) === String(agent.id) && age >= 0 && age < .25)
+        if (impact && impact.effectKind !== "reflect" && !["dodge", "counter"].includes(impact.kind) && String(impact.targetId) === String(agent.id) && age >= 0 && age < .25)
           fallbackImpacts.push({ impact, age, primary, x, bodyY, lineWidth: context.lineWidth });
         context.restore();
       }
@@ -7817,7 +7839,7 @@
         if (Spawner.detailDefenseImageReady(image, command)) replacedDefenseIds.add(command.eventId);
       }
       const drawnImpacts = new Set();
-      for (const command of detailCombatVfx.commands(arenaUnits, vfxPositions, state.simSeconds, cell, { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds, project: formation.project })) {
+      for (const command of detailCombatVfx.commands(arenaUnits, vfxPositions, state.simSeconds, cell, { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds, project: formation.project, unproject: formation.unproject, cell })) {
         // Replace only the defended event, and only after its new image is ready.
         if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         let image = detailVfxImages.get(command.image);
@@ -7836,7 +7858,7 @@
           context.save(); context.fillStyle = "#b6ed84"; context.strokeStyle = "#e0ffb7"; context.lineWidth = Math.max(1, radius * .55);
           context.beginPath(); context.moveTo(x - directionX * radius * 4, y - directionY * radius * 4); context.lineTo(x, y); context.stroke();
           context.beginPath(); context.arc(x, y, radius, 0, Math.PI * 2); context.fill(); context.restore();
-        } else if (command.kind === "impact" && command.amount > 0) {
+        } else if (command.kind === "impact" && command.effectKind !== "reflect" && command.amount > 0) {
           const age = state.simSeconds - command.eventAt;
           // The actor loop has only one reaction per living fighter. A killing
           // hit or another simultaneous hit still has its own observed point.
@@ -7865,7 +7887,7 @@
       for (const command of defenseCommands) if (!Spawner.drawDetailDefenseEffect(context, command, defenseImages.get(command.eventId), { reducedMotion: idleMotion.matches }))
         Spawner.drawDetailDefenseFallback(context, command);
       let vitalCommands = detailCombatVfx.vitalCommands(arenaUnits, vfxPositions, state.simSeconds,
-        { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds, includeDirectDamage: true });
+        { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds, includeDirectDamage: true, project: formation.project, unproject: formation.unproject, cell });
       const labelLayout = Spawner.layoutDetailCombatLabels?.(context,
         { vitals: vitalCommands, defenses: defenseCommands, dodges: dodgeLabels },
         { width, height, reducedMotion: idleMotion.matches, positions: vfxPositions });

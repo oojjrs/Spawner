@@ -1,4 +1,5 @@
-import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
+import { combatViewLayout, unitDisplaySize, unitFrameMirror } from "./unit-size.mjs";
+import { drawUnitAttackRing } from "./unit-attack-ring.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -6,7 +7,7 @@ import { createContext, runInContext } from 'node:vm';
 import { createDetailCombatDeath, detailDeathForm, DETAIL_DEATH_CREATURES, detailCreatureDeathShadow } from './combat-detail-death.mjs';
 import { createCombatVfxCursor } from './combat-vfx-events.mjs';
 import { createDetailCombatVfx, DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect } from './combat-detail-vfx.mjs';
-import { CREATURE_IDLE_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, unitAnimationFrame, creatureHurtPose, creatureAttackPose } from './unit-animation.mjs';
+import { CREATURE_IDLE_ANIMATIONS, CREATURE_DEATH_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, unitAnimationFrame, creatureHurtPose, creatureAttackPose, creatureWalkPose } from './unit-animation.mjs';
 import { imageFrameGeometry } from './image-geometry.mjs';
 import { imageDimensions } from './image-audit.mjs';
 import { createEncounters } from '../server/encounters.mjs';
@@ -14,7 +15,7 @@ import { createEncounters } from '../server/encounters.mjs';
 const source = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
 const extract = name => { const code=source.match(new RegExp('^    function '+name+'\\([^]*?^    }','m'))?.[0];assert.ok(code,name);return code; };
 const helper=readFileSync(new URL('./combat-detail-dodge.test.mjs',import.meta.url),'utf8').split('const event = ')[0];
-const box={ combatViewLayout, unitDisplaySize,assert,source,createContext,runInContext,createCombatVfxCursor,createDetailCombatVfx,DETAIL_COMBAT_VFX_ASSETS,drawDetailVfxCell,drawDetailVitalEffect};
+const box={ combatViewLayout, unitDisplaySize,drawUnitAttackRing,assert,source,createContext,runInContext,createCombatVfxCursor,createDetailCombatVfx,DETAIL_COMBAT_VFX_ASSETS,drawDetailVfxCell,drawDetailVitalEffect};
 createContext(box);runInContext(helper.slice(helper.indexOf('function extract(')),box);
 const corpse=(species,extra={})=>({kind:'corpse',agentId:'target',id:'corpse:target',species,x:100,y:100,diedAt:1,decaysAt:4,facing:1,attributes:{},...extra});
 const sprite=animation=>({path:animation.image,complete:true,naturalWidth:imageDimensions(animation.image)[0],naturalHeight:imageDimensions(animation.image)[1]});
@@ -30,7 +31,7 @@ function modal(species,side=1,scale=1.35) {
  Object.assign(scope,{creatureDeathSheets:new Map([[species,entry]]),creatureIdleSheets:new Map([[species,idleEntry]]),creatureHurtSheets:new Map(),creatureAttackSheets:new Map(),groundShadow:{path:'existing-ground-shadow'},
   combatUnitScale:()=>scale,drawSelectionOutline(){}});
  scope.unitDisplayBounds.set(species,{width:.8,height:.7});scope.unitDisplayScales.set(species,scale);
- Object.assign(scope.Spawner,{createDetailCombatDeath,detailCreatureDeathShadow,CREATURE_DEATH_ANIMATIONS,CREATURE_ATTACK_ANIMATIONS,unitAnimationFrame,imageFrameGeometry,creatureHurtPose,creatureAttackPose});
+ Object.assign(scope.Spawner,{createDetailCombatDeath,detailCreatureDeathShadow,CREATURE_DEATH_ANIMATIONS,CREATURE_ATTACK_ANIMATIONS,unitAnimationFrame,imageFrameGeometry,creatureHurtPose,creatureAttackPose,creatureWalkPose,unitFrameMirror});
  runInContext(['drawCreatureDeath','drawCreatureCorpse','drawAgentCorpse','drawCombatCreature'].map(extract).join('\n'),scope);
  const ctx=view.canvas.getContext('2d'),saved=[],draws=[];let matrix={x:0,y:0,sx:1,sy:1};
  const oldSave=ctx.save.bind(ctx),oldRestore=ctx.restore.bind(ctx);ctx.filter='none';
@@ -88,11 +89,22 @@ test('creature support uses the exact existing world radii and death-age opacity
 
 test('pause, reduced motion, resize, missing death art and ending continuation preserve original corpse age',()=>{
  for(const species of DETAIL_DEATH_CREATURES){
-  const view=modal(species);view.kill();const first=view.draw(1.1);assert.deepEqual(view.draw(1.1),first);
+  const view=modal(species);
+  for(const [index,agent] of view.agents.entries())agent.combat.position={x:index?1:-1,y:0};
+  view.draw(.9);view.kill();const first=view.draw(1.1);assert.deepEqual(view.draw(1.1),first);
   view.sandbox.idleMotion.matches=true;const reduced=view.draw(1.12),a=view.entry.animation,body=reduced.find(d=>d.image===a.image),last=a.frameCount-1;
   assert.deepEqual(body.args.slice(0,4),[last%a.columns*a.frameSize,Math.floor(last/a.columns)*a.frameSize,a.frameSize,a.frameSize]);
   view.sandbox.idleMotion.matches=false;view.entry.sprite.complete=false;assert.equal(view.draw(1.2).filter(d=>d.image===a.image).length,0);
   view.entry.sprite.complete=true;const recovered=view.draw(1.5).find(d=>d.image===a.image);assert.equal(recovered.args[0],unitAnimationFrame(a,500)%a.columns*a.frameSize);
+  view.agents.push({...view.agents[0],id:'reinforcement',dna:{pieces:Array(400).fill({})},combat:{...view.agents[0].combat,position:{x:8,y:4}}});
+  const expanded=view.draw(1.5).find(d=>d.image===a.image),record=view.sandbox.state.corpses[0];
+  const formation=combatViewLayout(view.canvas.clientWidth,view.canvas.clientHeight,[...view.agents.filter(agent=>agent.health>0),
+   {...record,id:record.agentId,combat:view.sandbox.combatWatch.formationMembers.get(String(record.agentId))}]);
+  const projected=formation.positions.get(String(record.agentId));
+  assert.equal(expanded.matrix.x,projected.x);assert.equal(expanded.matrix.y,projected.y);
+  assert.ok(expanded.args[6]<recovered.args[6]);assert.notEqual(expanded.matrix.x,recovered.matrix.x);
+  view.agents.pop();const restored=view.draw(1.5).find(d=>d.image===a.image);
+  assert.deepEqual(restored.matrix,recovered.matrix);assert.equal(restored.args[6],recovered.args[6]);
   view.canvas.clientWidth/=2;view.canvas.clientHeight/=2;const smaller=view.draw(1.5).find(d=>d.image===a.image);
   assert.equal(smaller.matrix.x,recovered.matrix.x/2);assert.equal(smaller.matrix.y,recovered.matrix.y/2);assert.equal(smaller.args[6],recovered.args[6]/2);
   view.sandbox.endingOffset=1;assert.equal(view.draw(1.5).filter(d=>d.image===a.image).length,1);

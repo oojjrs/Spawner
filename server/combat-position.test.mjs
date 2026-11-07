@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createSimulationTrial } from "../client/combat-simulation.mjs";
-import { combatPositionRadius } from "./combat-position.mjs";
+import { combatPositionRadius, combatPositionRole } from "./combat-position.mjs";
 import { createGame } from "./game.mjs";
 
 const passive = { key: "bean", organs: { attack: 0, ranged: 0 }, counts: { vitality: 500 } };
@@ -11,6 +11,30 @@ function advanceUntil(trial, predicate, seconds) {
   while (!predicate() && !trial.reason && trial.time < seconds) trial.advance(1 / 60);
   assert.ok(predicate(), "the expected combat event occurs");
 }
+
+test("each team keeps its own role and initial spacing regardless of the opposing roster", () => {
+  const own = ["dew-rabbit", "dew-rabbit"].map(key => ({ key }));
+  for (const side of [0, 1]) {
+    let initial;
+    for (const opponent of [["flower-tail-bird"], ["lantern-keeper"], ["white-paw", "walking-forest"]]) {
+      const other = opponent.map(key => ({ key }));
+      const trial = createSimulationTrial({ left: side ? other : own, right: side ? own : other, random: false });
+      const units = trial.agents.filter(unit => unit.side === side);
+      const positions = units.map(unit => ({ x: unit.combat.position.x, y: unit.combat.position.y, role: unit.combat.position.role }));
+      assert.ok(units.every(unit => combatPositionRole(unit) === "middle"));
+      if (initial) assert.deepEqual(positions, initial);
+      else initial = positions;
+    }
+  }
+  for (const keys of [["dew-rabbit", "white-paw"], ["white-paw", "dew-rabbit"]]) {
+    const trial = createSimulationTrial({ left: keys.map(key => ({ key })), right: { key: "flower-tail-bird" }, random: false });
+    const units = trial.agents.filter(unit => unit.side === 0), radius = Math.max(...units.map(combatPositionRadius), .35);
+    near(units[0].combat.position.x, units[1].combat.position.x);
+    near(Math.abs(units[0].combat.position.y - units[1].combat.position.y), radius * 2 + .2);
+    assert.ok(Math.hypot(units[0].combat.position.x - units[1].combat.position.x,
+      units[0].combat.position.y - units[1].combat.position.y) > units.reduce((sum, unit) => sum + combatPositionRadius(unit), 0));
+  }
+});
 
 test("both teams start by role and move in the shared battlefield without changing map cells", () => {
   const builds = ["vine-turtle", "spiny-back-leader", "shadow-weasel", "dew-rabbit", "lantern-keeper"].map(key => ({ key }));
