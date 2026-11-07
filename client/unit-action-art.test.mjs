@@ -16,7 +16,7 @@ function surface(width, height) {
   return { width, height, getContext: () => context };
 }
 
-test("채집형은 승인 전투 클립을 사용하고 미제작 동작만 원화를 유지한다", () => {
+test("채집형과 안테나는 승인된 자기 몸체의 전투 클립을 사용한다", () => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     const agent = { tribe, dna: startingWorkerDna(tribe), health: 10, mode: "fight", attack: { startedAt: 100 } };
     const definition = unitActionArtDefinition(agent);
@@ -34,9 +34,10 @@ test("채집형은 승인 전투 클립을 사용하고 미제작 동작만 원�
   }
   const agent = { tribe: "bean", attributes: { antenna: 1 }, health: 10, mode: "fight", attack: { startedAt: 100 } };
   const pose = unitActionArtPose(agent, 100.3);
-  assert.equal(pose.animation, UNIT_ACTION_ART["bean/antenna"].reference);
-  assert.equal(pose.missing, true);
-  assert.equal(pose.frame, 0);
+  assert.equal(pose.animation, UNIT_ACTION_ART["bean/antenna"].actions.attack);
+  assert.equal(pose.missing, false);
+  assert.equal(pose.animation.defensiveRetaliation, true);
+  assert.equal(pose.animation.durationsMs.slice(0, pose.frame).reduce((sum, value) => sum + value, 0), pose.animation.hitTimeMs);
 });
 
 test("안테나와 발의 기준 원화는 해당 외형의 마스크를 사용한다", () => {

@@ -1,0 +1,4 @@
+{
+  "antenna": {"mask":4,"size":768,"pivotX":383.5,"pivotY":654,"referenceLength":333,"sourceFacing":"right","idle":"DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png","generated":"exec-c45e3a53-a459-40d3-8010-67f6e47bd94d.png"},
+  "carapace": {"mask":2,"size":256,"pivotX":128,"pivotY":230,"referenceLength":145,"sourceFacing":"left","idle":"DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/idle.webp","generated":"exec-d51b7ea8-3e98-45d7-bf35-421ee47af56b.png"}
+}

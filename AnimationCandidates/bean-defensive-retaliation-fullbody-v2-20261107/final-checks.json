@@ -1,0 +1,196 @@
+[
+  {
+    "form": "antenna",
+    "frameCount": 16,
+    "durationMs": 1000,
+    "hitTimeMs": 300,
+    "hitFrameIndex": 5,
+    "firstAndLastExactRegisteredIdle": true,
+    "webpEveryTimelineSampleVisibleRGBAExactSheet": true,
+    "fixedSingleScale": 1.2966567322613496,
+    "neutralSupport": [
+      382.34915611814347,
+      654
+    ],
+    "referenceGeometry": {
+      "pivotX": 383.5,
+      "pivotY": 654,
+      "referenceLength": 333,
+      "sourceFacing": "right",
+      "sourceFacingSign": 1,
+      "sourceScale": 0.12012012012012012
+    },
+    "alpha16Areas": [
+      56805,
+      56613,
+      54013,
+      54994,
+      56312,
+      56267,
+      55844,
+      56805
+    ],
+    "areaRatioToActualIdle": [
+      1.0,
+      0.9966,
+      0.9508,
+      0.9681,
+      0.9913,
+      0.9905,
+      0.9831,
+      1.0
+    ],
+    "poseBounds": [
+      [
+        264,
+        321,
+        503,
+        654
+      ],
+      [
+        261,
+        313,
+        499,
+        654
+      ],
+      [
+        244,
+        347,
+        486,
+        654
+      ],
+      [
+        228,
+        337,
+        481,
+        654
+      ],
+      [
+        275,
+        329,
+        546,
+        654
+      ],
+      [
+        231,
+        319,
+        470,
+        654
+      ],
+      [
+        277,
+        317,
+        512,
+        654
+      ],
+      [
+        264,
+        321,
+        503,
+        654
+      ]
+    ],
+    "clippedFrames": 0,
+    "forbiddenAddedOrgans": false,
+    "visualAnatomyReview": "Actual registered identity directly compared: antenna has zero crown leaves; carapace keeps compact original crown and overlapping leaf armor.",
+    "sheetSHA256": "71672a4b76d39d15c34146b1816494867b4d8016b7fb75afbfd098074446954b",
+    "previewSHA256": "2e72a5b0787283a9e558d7ae6595fc2eca49a33a818486983e99e49780cf15d9"
+  },
+  {
+    "form": "carapace",
+    "frameCount": 16,
+    "durationMs": 1000,
+    "hitTimeMs": 300,
+    "hitFrameIndex": 5,
+    "firstAndLastExactRegisteredIdle": true,
+    "webpEveryTimelineSampleVisibleRGBAExactSheet": true,
+    "fixedSingleScale": 0.5375999288143589,
+    "neutralSupport": [
+      136.59545454545454,
+      232
+    ],
+    "referenceGeometry": {
+      "pivotX": 128,
+      "pivotY": 230,
+      "referenceLength": 145,
+      "sourceFacing": "left",
+      "sourceFacingSign": -1,
+      "sourceScale": 0.27586206896551724
+    },
+    "alpha16Areas": [
+      13863,
+      13512,
+      13102,
+      13623,
+      13512,
+      12979,
+      13330,
+      13863
+    ],
+    "areaRatioToActualIdle": [
+      1.0,
+      0.9747,
+      0.9451,
+      0.9827,
+      0.9747,
+      0.9362,
+      0.9616,
+      1.0
+    ],
+    "poseBounds": [
+      [
+        63,
+        106,
+        208,
+        232
+      ],
+      [
+        66,
+        102,
+        207,
+        232
+      ],
+      [
+        64,
+        115,
+        213,
+        232
+      ],
+      [
+        65,
+        112,
+        217,
+        232
+      ],
+      [
+        53,
+        113,
+        205,
+        232
+      ],
+      [
+        55,
+        112,
+        199,
+        232
+      ],
+      [
+        66,
+        109,
+        211,
+        232
+      ],
+      [
+        63,
+        106,
+        208,
+        232
+      ]
+    ],
+    "clippedFrames": 0,
+    "forbiddenAddedOrgans": false,
+    "visualAnatomyReview": "Actual registered identity directly compared: antenna has zero crown leaves; carapace keeps compact original crown and overlapping leaf armor.",
+    "sheetSHA256": "bfff1b0b0541e0500f54b30b250c30ad5a592f080d97b01c47bb38f3acffc550",
+    "previewSHA256": "c79d0a32d3a0f6a4e16cbc0ebc401cff165e3bd7cb01c9d96954cce79fd15951"
+  }
+]

@@ -1,0 +1,181 @@
+{
+  "tribe": "bean",
+  "form": "antenna",
+  "mask": 4,
+  "action": "attack",
+  "sheet": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/antenna/bean-antenna-attack-v2-sheet.png",
+  "preview": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/antenna/bean-antenna-attack-v2-transparent-preview.webp",
+  "gif": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/antenna/bean-antenna-attack-v2-preview.gif",
+  "frameSize": 768,
+  "columns": 8,
+  "frameCount": 16,
+  "framePoseIndices": [
+    0,
+    1,
+    2,
+    2,
+    3,
+    4,
+    4,
+    4,
+    4,
+    4,
+    5,
+    5,
+    6,
+    7,
+    0,
+    0
+  ],
+  "durationsMs": [
+    60,
+    70,
+    60,
+    80,
+    30,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    70,
+    80,
+    90,
+    100,
+    60
+  ],
+  "durationMs": 1000,
+  "loop": false,
+  "pivotX": 383.5,
+  "pivotY": 654,
+  "referenceLength": 333,
+  "sourceFacing": "right",
+  "sourceFacingSign": 1,
+  "sourceScale": 0.12012012012012012,
+  "hitTimeMs": 300,
+  "hitAtMs": 300,
+  "contactMs": 300,
+  "hitFrameIndex": 5,
+  "hitPoseIndex": 4,
+  "sheetSHA256": "71672a4b76d39d15c34146b1816494867b4d8016b7fb75afbfd098074446954b",
+  "previewSHA256": "2e72a5b0787283a9e558d7ae6595fc2eca49a33a818486983e99e49780cf15d9",
+  "gifSHA256": "87683d6b423d68d7ae55783e0b6dc5ff716098b7722a2dddde3fd1d9ba272ba8",
+  "previewLoop": true,
+  "previewLoopCount": 0,
+  "fullScene": false,
+  "defensiveRetaliation": true,
+  "meleeBodyOnly": true,
+  "rangedBody": false,
+  "referenceGeometry": {
+    "basis": "Exact current registered idle frame 0 and runtime reference geometry, not UnitAppearanceV1 neutral. All poses use a single uniform whole-cel scale. First and last time samples are exact source RGBA pixels.",
+    "alphaThreshold": 16,
+    "neutralBounds": [
+      264,
+      321,
+      503,
+      654
+    ],
+    "pivotX": 383.5,
+    "pivotY": 654,
+    "referenceLength": 333,
+    "sourceFacing": "right",
+    "sourceFacingSign": 1,
+    "sourceScale": 0.12012012012012012
+  },
+  "records": [
+    {
+      "pose": 0,
+      "exactRegisteredIdleFrame0": true
+    },
+    {
+      "pose": 1,
+      "sourceRect": [
+        563,
+        79,
+        754,
+        350
+      ],
+      "uniformWholeCelScale": 1.2966567322613496,
+      "wholeCelTranslation": [
+        256,
+        308
+      ]
+    },
+    {
+      "pose": 2,
+      "sourceRect": [
+        1004,
+        107,
+        1197,
+        352
+      ],
+      "uniformWholeCelScale": 1.2966567322613496,
+      "wholeCelTranslation": [
+        240,
+        342
+      ]
+    },
+    {
+      "pose": 3,
+      "sourceRect": [
+        1454,
+        100,
+        1656,
+        352
+      ],
+      "uniformWholeCelScale": 1.2966567322613496,
+      "wholeCelTranslation": [
+        224,
+        332
+      ]
+    },
+    {
+      "pose": 4,
+      "sourceRect": [
+        141,
+        537,
+        358,
+        795
+      ],
+      "uniformWholeCelScale": 1.2966567322613496,
+      "wholeCelTranslation": [
+        270,
+        324
+      ]
+    },
+    {
+      "pose": 5,
+      "sourceRect": [
+        568,
+        529,
+        760,
+        795
+      ],
+      "uniformWholeCelScale": 1.2966567322613496,
+      "wholeCelTranslation": [
+        226,
+        314
+      ]
+    },
+    {
+      "pose": 6,
+      "sourceRect": [
+        1009,
+        525,
+        1197,
+        792
+      ],
+      "uniformWholeCelScale": 1.2966567322613496,
+      "wholeCelTranslation": [
+        273,
+        312
+      ]
+    },
+    {
+      "pose": 7,
+      "exactRegisteredIdleFrame0": true
+    }
+  ],
+  "method": "Imagegen whole-body redraw from actual registered idle. Code only crops complete cels, uniformly scales each entire cel by one fixed atlas scale, translates whole cels and packs. No body-part assembly, mirroring, warping, interpolation, or anatomy edits."
+}

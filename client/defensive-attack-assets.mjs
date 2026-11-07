@@ -2,10 +2,10 @@
 export const DEFENSIVE_ATTACK_ART = Object.freeze({
   "bean/antenna": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/bean/antenna/attack.png",
-    "sourceManifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v1-20261107/antenna/publication-manifest.json",
+    "sourceManifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/antenna/publication-manifest.json",
     "sourceFacing": "right",
-    "frameSize": 512,
-    "frameHeight": 512,
+    "frameSize": 768,
+    "frameHeight": 768,
     "columns": 8,
     "frameCount": 16,
     "durationsMs": [
@@ -27,10 +27,10 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
       60
     ],
     "durationMs": 1000,
-    "pivotX": 256.9503722084367,
-    "pivotY": 448,
-    "referenceLength": 231,
-    "viewSize": 231,
+    "pivotX": 383.5,
+    "pivotY": 654,
+    "referenceLength": 333,
+    "viewSize": 333,
     "registrationScale": 1,
     "loop": false,
     "hitTimeMs": 300,
@@ -38,10 +38,10 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
   },
   "bean/carapace": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/bean/carapace/attack.png",
-    "sourceManifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v1-20261107/carapace/publication-manifest.json",
-    "sourceFacing": "right",
-    "frameSize": 512,
-    "frameHeight": 512,
+    "sourceManifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/carapace/publication-manifest.json",
+    "sourceFacing": "left",
+    "frameSize": 256,
+    "frameHeight": 256,
     "columns": 8,
     "frameCount": 16,
     "durationsMs": [
@@ -63,10 +63,10 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
       60
     ],
     "durationMs": 1000,
-    "pivotX": 258.59413202933985,
-    "pivotY": 448,
-    "referenceLength": 218,
-    "viewSize": 218,
+    "pivotX": 128,
+    "pivotY": 230,
+    "referenceLength": 145,
+    "viewSize": 145,
     "registrationScale": 1,
     "loop": false,
     "hitTimeMs": 300,

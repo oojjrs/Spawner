@@ -169,6 +169,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/UnitAttack/attack.png",
+        "referenceLength": 331,
         "sourceFacing": "right",
         "frameSize": 632,
         "frameHeight": 632,
@@ -231,6 +232,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
+        "referenceLength": 173,
         "sourceFacing": "right",
         "frameSize": 316,
         "frameHeight": 316,
@@ -4181,6 +4183,7 @@ const baseUnitActionArt = Object.freeze({
         "pivotX": 256,
         "pivotY": 448,
         "viewSize": 512,
+        "referenceLength": 195,
         "registrationScale": 1,
         "loop": false
       },
@@ -4317,6 +4320,7 @@ const baseUnitActionArt = Object.freeze({
         "pivotX": 256,
         "pivotY": 448,
         "viewSize": 512,
+        "referenceLength": 195,
         "registrationScale": 1,
         "loop": true
       },
@@ -4393,6 +4397,7 @@ const baseUnitActionArt = Object.freeze({
         "pivotX": 256,
         "pivotY": 448,
         "viewSize": 512,
+        "referenceLength": 195,
         "registrationScale": 1,
         "loop": false,
         "releaseAtMs": 144
@@ -6757,9 +6762,10 @@ const baseUnitActionArt = Object.freeze({
           120,
           600
         ],
-        "pivotX": 258.5,
-        "pivotY": 453.5943396226415,
+        "pivotX": 261,
+        "pivotY": 453,
         "viewSize": 517,
+        "referenceLength": 406,
         "registrationScale": 1.0095238095238095,
         "loop": false
       },
@@ -9012,6 +9018,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SecretionApprovedV2/spring/death.webp",
+        "referenceLength": 50,
         "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,

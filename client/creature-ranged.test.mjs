@@ -175,8 +175,8 @@ test("new body registration exactly inverts the approved melee seed transform wi
   }
 });
 
-test("the actual combat stage selects every approved body release without changing simulation state", () => {
-  const saved = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets };
+test("the actual combat stage selects every approved body release without changing simulation state", async () => {
+  const saved = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets, document: globalThis.document };
   globalThis.window = { matchMedia: () => ({ matches: false }), devicePixelRatio: 1 };
   globalThis.Image = class {
     complete = true;
@@ -186,6 +186,10 @@ test("the actual combat stage selects every approved body release without changi
     get src() { return this.source; }
   };
   globalThis.SpawnerAssets = { source: path => path };
+  // The warm render also prepares the player target's representative artwork.
+  globalThis.document = { createElement: () => ({ width: 0, height: 0, getContext: () =>
+    new Proxy({ getImageData: (_x, _y, width, height) => ({ data: new Uint8ClampedArray(width * height * 4).fill(255) }) },
+      { get: (target, name) => target[name] || (() => {}) }) }) };
   try {
     for (const key of species) for (const direction of [-1, 1]) {
       const calls = [], context = new Proxy({}, { get: (target, name) => target[name] || ((...args) => calls.push({ name, args })) });
@@ -198,6 +202,10 @@ test("the actual combat stage selects every approved body release without changi
         vfx: { version: 1, streamId: "trial", events: [] } };
       const before = JSON.stringify(trial);
       stage.render(trial, 100, false);
+      // Asset URLs are assigned asynchronously. Measure only after that load queue settles.
+      await new Promise(resolve => setImmediate(resolve));
+      calls.length = 0;
+      stage.render(trial, 100, false);
       const rendered = calls.filter(c => c.name === "drawImage" && c.args[0]?.src === CREATURE_RANGED_ANIMATIONS[key].image);
       assert.equal(rendered.length, 1, key);
       assert.deepEqual(rendered[0].args.slice(1, 5), [0, 512, 512, 512]);
@@ -205,5 +213,6 @@ test("the actual combat stage selects every approved body release without changi
     }
   } finally {
     globalThis.window = saved.window; globalThis.Image = saved.Image; globalThis.SpawnerAssets = saved.assets;
+    if (saved.document === undefined) delete globalThis.document; else globalThis.document = saved.document;
   }
 });

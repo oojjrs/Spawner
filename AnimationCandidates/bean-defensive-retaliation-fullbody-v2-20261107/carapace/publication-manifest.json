@@ -1,0 +1,214 @@
+{
+  "tribe": "bean",
+  "form": "carapace",
+  "mask": 2,
+  "status": "completed-under-user-delegated-correction",
+  "sourceAppearance": "DesignAssets/Animations/CombatAttributesV7/sprout/Sheets/carapace/idle.webp",
+  "sourceAppearanceFrame": 0,
+  "sourceAppearanceSHA256": "08614f960dd0cf3580d3857f92d503f85027da0ae127c2eb608c9acf0f75622a",
+  "sourceExtractSHA256": "eb7218083baf00ac2499d25d906fae1564e4606077cb66b430bd55f07a26dadb",
+  "sourceBaseAttack": "DesignAssets/Animations/UnitAttack/attack.png",
+  "sourceBaseAttackTiming": "DesignAssets/Animations/UnitAttack/attack.json",
+  "actions": {
+    "attack": {
+      "tribe": "bean",
+      "form": "carapace",
+      "mask": 2,
+      "action": "attack",
+      "sheet": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/carapace/bean-carapace-attack-v2-sheet.png",
+      "preview": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/carapace/bean-carapace-attack-v2-transparent-preview.webp",
+      "gif": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/carapace/bean-carapace-attack-v2-preview.gif",
+      "frameSize": 256,
+      "columns": 8,
+      "frameCount": 16,
+      "framePoseIndices": [
+        0,
+        1,
+        2,
+        2,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        5,
+        5,
+        6,
+        7,
+        0,
+        0
+      ],
+      "durationsMs": [
+        60,
+        70,
+        60,
+        80,
+        30,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        70,
+        80,
+        90,
+        100,
+        60
+      ],
+      "durationMs": 1000,
+      "loop": false,
+      "pivotX": 128,
+      "pivotY": 230,
+      "referenceLength": 145,
+      "sourceFacing": "left",
+      "sourceFacingSign": -1,
+      "sourceScale": 0.27586206896551724,
+      "hitTimeMs": 300,
+      "hitAtMs": 300,
+      "contactMs": 300,
+      "hitFrameIndex": 5,
+      "hitPoseIndex": 4,
+      "sheetSHA256": "bfff1b0b0541e0500f54b30b250c30ad5a592f080d97b01c47bb38f3acffc550",
+      "previewSHA256": "c79d0a32d3a0f6a4e16cbc0ebc401cff165e3bd7cb01c9d96954cce79fd15951",
+      "gifSHA256": "e20573ba608bca55141840ecbed380d71a8b9c86ce82ca8420154a13fa228263",
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "fullScene": false,
+      "defensiveRetaliation": true,
+      "meleeBodyOnly": true,
+      "rangedBody": false,
+      "referenceGeometry": {
+        "basis": "Exact current registered idle frame 0 and runtime reference geometry, not UnitAppearanceV1 neutral. All poses use a single uniform whole-cel scale. First and last time samples are exact source RGBA pixels.",
+        "alphaThreshold": 16,
+        "neutralBounds": [
+          63,
+          106,
+          208,
+          232
+        ],
+        "pivotX": 128,
+        "pivotY": 230,
+        "referenceLength": 145,
+        "sourceFacing": "left",
+        "sourceFacingSign": -1,
+        "sourceScale": 0.27586206896551724
+      },
+      "manifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/carapace/bean-carapace-attack-v2.json"
+    }
+  },
+  "geometry": {
+    "pivotX": 128,
+    "pivotY": 230,
+    "referenceLength": 145,
+    "sourceFacing": "left",
+    "sourceFacingSign": -1,
+    "sourceScale": 0.27586206896551724
+  },
+  "defensiveRetaliation": true,
+  "rangedBodyOnly": false,
+  "projectileBakedIntoBodySheet": false,
+  "gameIntegration": false,
+  "deployment": false,
+  "verification": {
+    "form": "carapace",
+    "frameCount": 16,
+    "durationMs": 1000,
+    "hitTimeMs": 300,
+    "hitFrameIndex": 5,
+    "firstAndLastExactRegisteredIdle": true,
+    "webpEveryTimelineSampleVisibleRGBAExactSheet": true,
+    "fixedSingleScale": 0.5375999288143589,
+    "neutralSupport": [
+      136.59545454545454,
+      232
+    ],
+    "referenceGeometry": {
+      "pivotX": 128,
+      "pivotY": 230,
+      "referenceLength": 145,
+      "sourceFacing": "left",
+      "sourceFacingSign": -1,
+      "sourceScale": 0.27586206896551724
+    },
+    "alpha16Areas": [
+      13863,
+      13512,
+      13102,
+      13623,
+      13512,
+      12979,
+      13330,
+      13863
+    ],
+    "areaRatioToActualIdle": [
+      1.0,
+      0.9747,
+      0.9451,
+      0.9827,
+      0.9747,
+      0.9362,
+      0.9616,
+      1.0
+    ],
+    "poseBounds": [
+      [
+        63,
+        106,
+        208,
+        232
+      ],
+      [
+        66,
+        102,
+        207,
+        232
+      ],
+      [
+        64,
+        115,
+        213,
+        232
+      ],
+      [
+        65,
+        112,
+        217,
+        232
+      ],
+      [
+        53,
+        113,
+        205,
+        232
+      ],
+      [
+        55,
+        112,
+        199,
+        232
+      ],
+      [
+        66,
+        109,
+        211,
+        232
+      ],
+      [
+        63,
+        106,
+        208,
+        232
+      ]
+    ],
+    "clippedFrames": 0,
+    "forbiddenAddedOrgans": false,
+    "visualAnatomyReview": "Actual registered identity directly compared: antenna has zero crown leaves; carapace keeps compact original crown and overlapping leaf armor.",
+    "sheetSHA256": "bfff1b0b0541e0500f54b30b250c30ad5a592f080d97b01c47bb38f3acffc550",
+    "previewSHA256": "c79d0a32d3a0f6a4e16cbc0ebc401cff165e3bd7cb01c9d96954cce79fd15951"
+  },
+  "supersedes": "AnimationCandidates/bean-defensive-retaliation-fullbody-v1-20261107/carapace/publication-manifest.json",
+  "sourceBaseAttackSHA256": "5843746f0f742afe688d6623a031f79c27982beab599c7bff9c54f7a91ce1662",
+  "sourceBaseAttackTimingSHA256": "06074701fb8b0f9c3fc41eeca495f150df79a252963fabe063f267612a205f21"
+}

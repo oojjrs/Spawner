@@ -1,0 +1,97 @@
+{
+  "form": "carapace",
+  "frameCount": 16,
+  "durationMs": 1000,
+  "hitTimeMs": 300,
+  "hitFrameIndex": 5,
+  "firstAndLastExactRegisteredIdle": true,
+  "webpEveryTimelineSampleVisibleRGBAExactSheet": true,
+  "fixedSingleScale": 0.5375999288143589,
+  "neutralSupport": [
+    136.59545454545454,
+    232
+  ],
+  "referenceGeometry": {
+    "pivotX": 128,
+    "pivotY": 230,
+    "referenceLength": 145,
+    "sourceFacing": "left",
+    "sourceFacingSign": -1,
+    "sourceScale": 0.27586206896551724
+  },
+  "alpha16Areas": [
+    13863,
+    13512,
+    13102,
+    13623,
+    13512,
+    12979,
+    13330,
+    13863
+  ],
+  "areaRatioToActualIdle": [
+    1.0,
+    0.9747,
+    0.9451,
+    0.9827,
+    0.9747,
+    0.9362,
+    0.9616,
+    1.0
+  ],
+  "poseBounds": [
+    [
+      63,
+      106,
+      208,
+      232
+    ],
+    [
+      66,
+      102,
+      207,
+      232
+    ],
+    [
+      64,
+      115,
+      213,
+      232
+    ],
+    [
+      65,
+      112,
+      217,
+      232
+    ],
+    [
+      53,
+      113,
+      205,
+      232
+    ],
+    [
+      55,
+      112,
+      199,
+      232
+    ],
+    [
+      66,
+      109,
+      211,
+      232
+    ],
+    [
+      63,
+      106,
+      208,
+      232
+    ]
+  ],
+  "clippedFrames": 0,
+  "forbiddenAddedOrgans": false,
+  "visualAnatomyReview": "Actual registered identity directly compared: antenna has zero crown leaves; carapace keeps compact original crown and overlapping leaf armor.",
+  "sheetSHA256": "bfff1b0b0541e0500f54b30b250c30ad5a592f080d97b01c47bb38f3acffc550",
+  "previewSHA256": "c79d0a32d3a0f6a4e16cbc0ebc401cff165e3bd7cb01c9d96954cce79fd15951"
+}

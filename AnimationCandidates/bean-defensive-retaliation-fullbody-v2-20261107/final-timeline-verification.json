@@ -1,0 +1,22 @@
+[
+  {
+    "form": "antenna",
+    "decodedPNGToPoseAll16RGBAEqual": true,
+    "decodedPNGToWebPAll16VisibleRGBAEqual": true,
+    "decodedPNGStartAndFinalTwoEqualRegisteredIdle": true,
+    "durationMs": 1000,
+    "hitTimeMs": 300,
+    "referenceScaleRatioToIdle": 1,
+    "neutralFloorShiftToIdle": 0
+  },
+  {
+    "form": "carapace",
+    "decodedPNGToPoseAll16RGBAEqual": true,
+    "decodedPNGToWebPAll16VisibleRGBAEqual": true,
+    "decodedPNGStartAndFinalTwoEqualRegisteredIdle": true,
+    "durationMs": 1000,
+    "hitTimeMs": 300,
+    "referenceScaleRatioToIdle": 1,
+    "neutralFloorShiftToIdle": 0
+  }
+]

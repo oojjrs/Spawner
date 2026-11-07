@@ -1,0 +1,214 @@
+{
+  "tribe": "bean",
+  "form": "antenna",
+  "mask": 4,
+  "status": "completed-under-user-delegated-correction",
+  "sourceAppearance": "DesignAssets/Animations/ApprovedActionsV1/bean/antenna/idle.png",
+  "sourceAppearanceFrame": 0,
+  "sourceAppearanceSHA256": "915aea163ca6c43656b30232dbfddf8fb6f5ed5c610213f9e5f1ffe02526f808",
+  "sourceExtractSHA256": "a48f7c45eb97ac883ef44a35d0ef94941821caac2598f76a7b483ae9643fa60a",
+  "sourceBaseAttack": "DesignAssets/Animations/UnitAttack/attack.png",
+  "sourceBaseAttackTiming": "DesignAssets/Animations/UnitAttack/attack.json",
+  "actions": {
+    "attack": {
+      "tribe": "bean",
+      "form": "antenna",
+      "mask": 4,
+      "action": "attack",
+      "sheet": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/antenna/bean-antenna-attack-v2-sheet.png",
+      "preview": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/antenna/bean-antenna-attack-v2-transparent-preview.webp",
+      "gif": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/antenna/bean-antenna-attack-v2-preview.gif",
+      "frameSize": 768,
+      "columns": 8,
+      "frameCount": 16,
+      "framePoseIndices": [
+        0,
+        1,
+        2,
+        2,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        5,
+        5,
+        6,
+        7,
+        0,
+        0
+      ],
+      "durationsMs": [
+        60,
+        70,
+        60,
+        80,
+        30,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        70,
+        80,
+        90,
+        100,
+        60
+      ],
+      "durationMs": 1000,
+      "loop": false,
+      "pivotX": 383.5,
+      "pivotY": 654,
+      "referenceLength": 333,
+      "sourceFacing": "right",
+      "sourceFacingSign": 1,
+      "sourceScale": 0.12012012012012012,
+      "hitTimeMs": 300,
+      "hitAtMs": 300,
+      "contactMs": 300,
+      "hitFrameIndex": 5,
+      "hitPoseIndex": 4,
+      "sheetSHA256": "71672a4b76d39d15c34146b1816494867b4d8016b7fb75afbfd098074446954b",
+      "previewSHA256": "2e72a5b0787283a9e558d7ae6595fc2eca49a33a818486983e99e49780cf15d9",
+      "gifSHA256": "87683d6b423d68d7ae55783e0b6dc5ff716098b7722a2dddde3fd1d9ba272ba8",
+      "previewLoop": true,
+      "previewLoopCount": 0,
+      "fullScene": false,
+      "defensiveRetaliation": true,
+      "meleeBodyOnly": true,
+      "rangedBody": false,
+      "referenceGeometry": {
+        "basis": "Exact current registered idle frame 0 and runtime reference geometry, not UnitAppearanceV1 neutral. All poses use a single uniform whole-cel scale. First and last time samples are exact source RGBA pixels.",
+        "alphaThreshold": 16,
+        "neutralBounds": [
+          264,
+          321,
+          503,
+          654
+        ],
+        "pivotX": 383.5,
+        "pivotY": 654,
+        "referenceLength": 333,
+        "sourceFacing": "right",
+        "sourceFacingSign": 1,
+        "sourceScale": 0.12012012012012012
+      },
+      "manifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/antenna/bean-antenna-attack-v2.json"
+    }
+  },
+  "geometry": {
+    "pivotX": 383.5,
+    "pivotY": 654,
+    "referenceLength": 333,
+    "sourceFacing": "right",
+    "sourceFacingSign": 1,
+    "sourceScale": 0.12012012012012012
+  },
+  "defensiveRetaliation": true,
+  "rangedBodyOnly": false,
+  "projectileBakedIntoBodySheet": false,
+  "gameIntegration": false,
+  "deployment": false,
+  "verification": {
+    "form": "antenna",
+    "frameCount": 16,
+    "durationMs": 1000,
+    "hitTimeMs": 300,
+    "hitFrameIndex": 5,
+    "firstAndLastExactRegisteredIdle": true,
+    "webpEveryTimelineSampleVisibleRGBAExactSheet": true,
+    "fixedSingleScale": 1.2966567322613496,
+    "neutralSupport": [
+      382.34915611814347,
+      654
+    ],
+    "referenceGeometry": {
+      "pivotX": 383.5,
+      "pivotY": 654,
+      "referenceLength": 333,
+      "sourceFacing": "right",
+      "sourceFacingSign": 1,
+      "sourceScale": 0.12012012012012012
+    },
+    "alpha16Areas": [
+      56805,
+      56613,
+      54013,
+      54994,
+      56312,
+      56267,
+      55844,
+      56805
+    ],
+    "areaRatioToActualIdle": [
+      1.0,
+      0.9966,
+      0.9508,
+      0.9681,
+      0.9913,
+      0.9905,
+      0.9831,
+      1.0
+    ],
+    "poseBounds": [
+      [
+        264,
+        321,
+        503,
+        654
+      ],
+      [
+        261,
+        313,
+        499,
+        654
+      ],
+      [
+        244,
+        347,
+        486,
+        654
+      ],
+      [
+        228,
+        337,
+        481,
+        654
+      ],
+      [
+        275,
+        329,
+        546,
+        654
+      ],
+      [
+        231,
+        319,
+        470,
+        654
+      ],
+      [
+        277,
+        317,
+        512,
+        654
+      ],
+      [
+        264,
+        321,
+        503,
+        654
+      ]
+    ],
+    "clippedFrames": 0,
+    "forbiddenAddedOrgans": false,
+    "visualAnatomyReview": "Actual registered identity directly compared: antenna has zero crown leaves; carapace keeps compact original crown and overlapping leaf armor.",
+    "sheetSHA256": "71672a4b76d39d15c34146b1816494867b4d8016b7fb75afbfd098074446954b",
+    "previewSHA256": "2e72a5b0787283a9e558d7ae6595fc2eca49a33a818486983e99e49780cf15d9"
+  },
+  "supersedes": "AnimationCandidates/bean-defensive-retaliation-fullbody-v1-20261107/antenna/publication-manifest.json",
+  "sourceBaseAttackSHA256": "5843746f0f742afe688d6623a031f79c27982beab599c7bff9c54f7a91ce1662",
+  "sourceBaseAttackTimingSHA256": "06074701fb8b0f9c3fc41eeca495f150df79a252963fabe063f267612a205f21"
+}

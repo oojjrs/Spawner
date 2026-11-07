@@ -165,10 +165,10 @@ modules["client/defensive-attack-assets.mjs"] = (() => {
 const DEFENSIVE_ATTACK_ART = Object.freeze({
   "bean/antenna": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/bean/antenna/attack.png",
-    "sourceManifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v1-20261107/antenna/publication-manifest.json",
+    "sourceManifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/antenna/publication-manifest.json",
     "sourceFacing": "right",
-    "frameSize": 512,
-    "frameHeight": 512,
+    "frameSize": 768,
+    "frameHeight": 768,
     "columns": 8,
     "frameCount": 16,
     "durationsMs": [
@@ -190,10 +190,10 @@ const DEFENSIVE_ATTACK_ART = Object.freeze({
       60
     ],
     "durationMs": 1000,
-    "pivotX": 256.9503722084367,
-    "pivotY": 448,
-    "referenceLength": 231,
-    "viewSize": 231,
+    "pivotX": 383.5,
+    "pivotY": 654,
+    "referenceLength": 333,
+    "viewSize": 333,
     "registrationScale": 1,
     "loop": false,
     "hitTimeMs": 300,
@@ -201,10 +201,10 @@ const DEFENSIVE_ATTACK_ART = Object.freeze({
   },
   "bean/carapace": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/bean/carapace/attack.png",
-    "sourceManifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v1-20261107/carapace/publication-manifest.json",
-    "sourceFacing": "right",
-    "frameSize": 512,
-    "frameHeight": 512,
+    "sourceManifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v2-20261107/carapace/publication-manifest.json",
+    "sourceFacing": "left",
+    "frameSize": 256,
+    "frameHeight": 256,
     "columns": 8,
     "frameCount": 16,
     "durationsMs": [
@@ -226,10 +226,10 @@ const DEFENSIVE_ATTACK_ART = Object.freeze({
       60
     ],
     "durationMs": 1000,
-    "pivotX": 258.59413202933985,
-    "pivotY": 448,
-    "referenceLength": 218,
-    "viewSize": 218,
+    "pivotX": 128,
+    "pivotY": 230,
+    "referenceLength": 145,
+    "viewSize": 145,
     "registrationScale": 1,
     "loop": false,
     "hitTimeMs": 300,
@@ -14256,6 +14256,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/UnitAttack/attack.png",
+        "referenceLength": 331,
         "sourceFacing": "right",
         "frameSize": 632,
         "frameHeight": 632,
@@ -14318,6 +14319,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
+        "referenceLength": 173,
         "sourceFacing": "right",
         "frameSize": 316,
         "frameHeight": 316,
@@ -18268,6 +18270,7 @@ const baseUnitActionArt = Object.freeze({
         "pivotX": 256,
         "pivotY": 448,
         "viewSize": 512,
+        "referenceLength": 195,
         "registrationScale": 1,
         "loop": false
       },
@@ -18404,6 +18407,7 @@ const baseUnitActionArt = Object.freeze({
         "pivotX": 256,
         "pivotY": 448,
         "viewSize": 512,
+        "referenceLength": 195,
         "registrationScale": 1,
         "loop": true
       },
@@ -18480,6 +18484,7 @@ const baseUnitActionArt = Object.freeze({
         "pivotX": 256,
         "pivotY": 448,
         "viewSize": 512,
+        "referenceLength": 195,
         "registrationScale": 1,
         "loop": false,
         "releaseAtMs": 144
@@ -20844,9 +20849,10 @@ const baseUnitActionArt = Object.freeze({
           120,
           600
         ],
-        "pivotX": 258.5,
-        "pivotY": 453.5943396226415,
+        "pivotX": 261,
+        "pivotY": 453,
         "viewSize": 517,
+        "referenceLength": 406,
         "registrationScale": 1.0095238095238095,
         "loop": false
       },
@@ -23099,6 +23105,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SecretionApprovedV2/spring/death.webp",
+        "referenceLength": 50,
         "sourceFacing": "right",
         "frameSize": 128,
         "frameHeight": 128,
