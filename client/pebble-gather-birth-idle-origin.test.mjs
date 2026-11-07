@@ -152,6 +152,9 @@ test('built game, standalone preview and combat share the corrected idle clock a
   assert.equal(scope.Spawner.unitActionArtPose(actor, 102.62).frame, 0);
   assert.equal(scope.Spawner.unitActionArtPose(actor, 103.619).frame, 0);
   assert.equal(scope.Spawner.unitActionArtPose(actor, 103.62).frame, 1);
+  // This preview intentionally imports shared seeds from the previously loaded runtime.
+  runInNewContext(readFileSync('client/unit-appearance-preview-runtime.js', 'utf8'), scope);
+  assert.equal(scope.SpawnerAppearance.unitActionState(actor, 102.62, options).startedAt, 102.62);
   function moduleText(text, name) {
     const start = text.indexOf('modules["' + name + '"]');
     assert.ok(start >= 0, name);

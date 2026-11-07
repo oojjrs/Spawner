@@ -15,5 +15,7 @@ The old clock entered the tilted idle frame 11 immediately after birth. The corr
 - Full client, combat and standalone appearance builds completed. Source and generated JavaScript syntax and diff checks pass. Unrelated generator drift was discarded.
 - Actual native draw boundary contact was independently inspected in both directions. This is not continuous browser playback: the browser tool transport still failed before opening a page.
 
-## Existing preview limitation
-Executing the complete standalone appearance runtime in a VM fails on baseline and candidate because its builder omits client/unit-size.mjs before a module destructures UNIT_DISPLAY_SIZES. preview-baseline-limit.txt records the baseline error. This separate existing defect was handed to the audit owner. The new test compares the compiled state module itself and does not claim the entire standalone page executes successfully.
+## Preview harness prerequisite correction
+The initial bare-VM probe omitted the required globalThis.Spawner runtime and therefore failed on UNIT_DISPLAY_SIZES. The preview builder intentionally aliases shared seed modules from that runtime; Spawner.html loads runtime.js first through the sequential loader. This is not evidence of a product defect. preview-baseline-limit.txt retains only that invalid standalone-harness observation.
+
+The corrected integration test executes the full game runtime first, then the complete appearance preview bundle in the same VM, and invokes the actual preview unitActionState API. It passes and selects the corrected readyAt origin. The earlier defect diagnosis was withdrawn; no preview builder or product workaround was added.
