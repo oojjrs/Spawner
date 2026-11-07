@@ -23,7 +23,7 @@ function design(ids) {
     return { gene: id, grade: gene.grade, rotation: 0 };
   }), 4);
   assert.ok(pieces);
-  const dna = { version: 4, pieces, level: 4, budget: 10000 };
+  const dna = { version: 5, pieces, level: 4, budget: 10000 };
   assert.ok(ATTRIBUTE_DNA.validate(dna));
   return dna;
 }

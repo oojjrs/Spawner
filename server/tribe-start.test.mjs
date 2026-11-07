@@ -18,7 +18,7 @@ function fixture(tribe = "bean", player = true) {
 
 const workerDna = {...startingWorkerDna(),pieces:startingWorkerDna().pieces.slice(0,1)};
 
-test("네 부족 모두 시작 지원금으로 채집 DNA 일꾼 세 마리를 만들고 6P를 남긴다",()=>{
+test("네 부족 모두 시작 지원금으로 채집 DNA 일꾼 두 마리를 만들고 8P를 남긴다",()=>{
   assert.equal(PLAYER_STARTING_POINTS,30);
   for(const tribe of ["bean","spore","pebble","spring"]){
     const {game}=fixture(tribe);
@@ -26,13 +26,13 @@ test("네 부족 모두 시작 지원금으로 채집 DNA 일꾼 세 마리를 �
     assert.equal(game.agents.length,TRIBE_STARTING_UNITS[tribe].length,tribe);
     const {templateId}=game.command({type:"design",templateId:null,name:"채집 DNA",dna:workerDna,birth:false});
     assert.equal(game.snapshot().evolutionPoints,30,tribe);
-    for(let i=0;i<3;i++){
-      const {agentId}=game.command({type:"birth",templateId});
-      assert.equal(game.agents.find(agent=>agent.id===agentId).cost,8,tribe);
-    }
-    assert.equal(game.snapshot().evolutionPoints,6,tribe);
+    const {agentId}=game.command({type:"birth",templateId});
+    assert.equal(game.agents.find(agent=>agent.id===agentId).cost,11,tribe);
+    assert.equal(game.snapshot().evolutionPoints,19,tribe);
+    game.command({type:"birth",templateId});
+    assert.equal(game.snapshot().evolutionPoints,8,tribe);
     assert.throws(()=>game.command({type:"birth",templateId}));
-    assert.equal(game.snapshot().evolutionPoints,6,tribe);
+    assert.equal(game.snapshot().evolutionPoints,8,tribe);
   }
 });
 
@@ -87,7 +87,7 @@ test("초반 둥지 성장은 반드시 채집이 필요하고 이후 비용은 
 test("시작 개체는 특별 능력치 없는 기본 채집 DNA이며 복제·저장에도 보존된다",()=>{
   for(const tribe of ["bean","spore","pebble","spring"]){
     const {game}=fixture(tribe);
-    const dna=startingWorkerDna(tribe),stats=dnaUnitStats(dna);
+    const dna=startingWorkerDna(tribe),stats=dnaUnitStats(dna,tribe);
     const [template]=game.snapshot().templates;
     assert.equal(game.snapshot().templates.length,1);
     assert.equal(template.id,1);
@@ -104,9 +104,9 @@ test("시작 개체는 특별 능력치 없는 기본 채집 DNA이며 복제·�
       assert.equal(agent.stats.dna.roaming,false);
       assert.equal(agent.stats.dna.melee,false);
       assert.equal(agent.stats.dna.ranged,false);
-      assert.equal(agent.cost,17);
+      assert.equal(agent.cost,26);
     }
-    const funded=JSON.parse(game.save()); funded.state.evolutionPoints=17; game.restore(JSON.stringify(funded));
+    const funded=JSON.parse(game.save()); funded.state.evolutionPoints=26; game.restore(JSON.stringify(funded));
     const source=game.agents[0];
     const {agentId}=game.command({type:"birth",agentId:source.id});
     const born=game.agents.find(agent=>agent.id===agentId);
@@ -129,7 +129,7 @@ test("모든 종족은 같은 총비용의 기초 일꾼 네 마리로 시작하
  for(const tribe of ["bean","spore","pebble","spring"]){
   const {game}=fixture(tribe);
   assert.equal(game.agents.length,4);
-  assert.equal(game.agents.reduce((sum,a)=>sum+a.cost,0),68);
+  assert.equal(game.agents.reduce((sum,a)=>sum+a.cost,0),104);
   assert.ok(game.agents.every(a=>a.stats.capacity>=3));
   patterns.push(startingWorkerDna(tribe).pieces.map(p=>p.gene).sort().join(','));
  }
@@ -142,4 +142,24 @@ test("이미 지급된 기존50P 저장을 새 시작값30P로 강제 변경하�
  const old=JSON.parse(game.save());old.state.evolutionPoints=50;old.state.startingPointsGranted=true;
  const restored=createGame(environment,colony,JSON.stringify(old));
  assert.equal(restored.snapshot().evolutionPoints,50);
+});
+
+test("종족 재조정 이전 저장은 체력 비율과 사망을 보존하며 재복원으로 회복되지 않는다", () => {
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) {
+    const { game, environment, colony } = fixture(tribe);
+    const saved = JSON.parse(game.save());
+    const ratios = [1, .5, .2, 0];
+    for (const [index, agent] of saved.state.agents.entries()) {
+      agent.stats = dnaUnitStats(agent.dna);
+      agent.health = agent.stats.health * ratios[index];
+    }
+    const restored = createGame(environment, colony, JSON.stringify(saved));
+    for (let pass = 0; pass < 2; pass++) {
+      for (const [index, agent] of restored.agents.entries()) {
+        assert.ok(Math.abs(agent.health / agent.stats.health - ratios[index]) < 1e-9, tribe + ":" + index);
+        assert.deepEqual(agent.stats.dna, dnaUnitStats(agent.dna, tribe).dna);
+      }
+      restored.restore(restored.save());
+    }
+  }
 });

@@ -5,6 +5,7 @@ import { startingWorkerDna } from "../server/tribe-start.mjs";
 import { dnaUnitStats, dnaAppearance, validateDna } from "../server/dna-unit.mjs";
 import { createCombat } from "../server/combat.mjs";
 import { DNA_COMBAT_RULES, dnaCombatStats } from "../server/dna-combat-stats.mjs";
+import { tribeDnaStats } from "../server/tribe-dna-stats.mjs";
 import { snapshotCombatVfx } from "../server/combat-vfx-journal.mjs";
 
 
@@ -99,7 +100,7 @@ const geneKeys = Object.freeze({ vitality: "health", flatPen: "penetration", has
 function derive(build, rules) {
   if (build.native) {
     if (["bean", "spore", "pebble", "spring"].includes(build.key)) {
-      const stats = dnaUnitStats(build.dna || startingWorkerDna(build.key));
+      const stats = dnaUnitStats(build.dna || startingWorkerDna(build.key), build.key);
       return { ...stats, canAttack: stats.dna.power > 0 && stats.dna.speed > 0,
         canInitiate: stats.dna.melee || stats.dna.ranged };
     }
@@ -116,7 +117,7 @@ function derive(build, rules) {
   }
   const counts = Object.fromEntries(Object.entries(build.counts).map(([key, value]) => [geneKeys[key] || key, value]));
   Object.assign(counts, { blade: build.organs.attack, secretion: build.organs.ranged });
-  const dna = { ...dnaCombatStats(counts, counts, rules), movement: .25, vision: 1, roaming: true };
+  const dna = { ...dnaCombatStats(counts, counts, rules, build.key), movement: .25 * tribeDnaStats(build.key).base.movement, vision: 1, roaming: true };
   const interval = speed => speed > 0 ? 1 / speed : Infinity;
   const result = { dna, HP: dna.health, health: dna.health, speed: dna.movement, loadedSpeed: dna.movement * .75, vision: dna.vision,
     attackPower: dna.meleePower, defense: dna.armor, meleePower: dna.meleePower, rangedPower: dna.rangedPower,

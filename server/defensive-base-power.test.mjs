@@ -18,7 +18,7 @@ const close = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-8
 function design(genes) {
   const pieces = ATTRIBUTE_DNA.pack(genes.map(id => ({ gene: id, grade: ATTRIBUTE_DNA.lookup.get(id).grade, rotation: 0 })), 4);
   assert.ok(pieces);
-  return { version: 4, level: 4, budget: 9999, pieces };
+  return ATTRIBUTE_DNA.validate({ version: 1, level: 4, budget: 9999, pieces });
 }
 
 function unit(id, ownerId, tribe, dna) {

@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { tribeDnaStats } from '../server/tribe-dna-stats.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
@@ -52,17 +53,17 @@ test('antenna catalogue covers seven exact organ sets and preserves all historic
   }
 });
 
-test('DNA v4 antenna combinations preserve actual ability rules and independent board pieces', () => {
+test('DNA v5 antenna combinations preserve actual ability rules and independent board pieces', () => {
   assert.equal(COMBAT_LAB_APPEARANCES.length, 14);
   for (const form of forms) {
     const dna = combatLabCombinationDna(form.key), other = combatLabCombinationDna(form.key);
-    assert.equal(dna.version, 4); assert.ok(validateDna(dna, dna.level, dna.budget));
+    assert.equal(dna.version, 5); assert.ok(validateDna(dna, dna.level, dna.budget));
     assert.deepEqual(dnaAppearance(dna), form.attributes); assert.notEqual(dna.pieces, other.pieces); assert.notEqual(dna.pieces[0], other.pieces[0]);
     for (const tribe of tribes) {
       const build = combatLabWithAppearance({ key: tribe }, form.key), stats = deriveSimulationStats(build);
       assert.equal(!!stats.dna.melee, !!form.attributes.blade);
       assert.equal(!!stats.dna.ranged, !!form.attributes.secretion);
-      assert.equal(stats.dna.armor > 0, !!form.attributes.carapace);
+      assert.equal(stats.dna.armor > tribeDnaStats(tribe).base.armor, !!form.attributes.carapace);
       assert.equal(!!stats.dna.roaming, true);
       assert.equal(!!stats.canAttack, true);
       assert.equal(!!stats.canInitiate, !!(form.attributes.blade || form.attributes.secretion));

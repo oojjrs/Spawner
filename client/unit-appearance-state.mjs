@@ -1,4 +1,4 @@
-import { attackAnimationElapsed } from '../server/attack.mjs';
+import { attackAnimationElapsed, attackAnimationSegments } from '../server/attack.mjs';
 import { UNIT_ANIMATIONS, unitMovementElapsedMs } from './unit-animation.mjs';
 import { unitAppearanceForAgent, unitAppearancePose } from './unit-appearance.mjs';
 
@@ -31,14 +31,12 @@ export function unitActionState(agent, time, options = {}) {
     const contact=ranged?finite(attack.launchedAt,options.attackClock==='lab'?attack.hitAt:undefined):attack.hitAt;
     const cue=ranged?(clips.ranged?.launchAtMs??200):(clips.attack?.hitTimeMs??300);
     if(Number.isFinite(attack.recovery)&&Number.isFinite(contact)) {
-      const clock=ranged?{...attack,hitAt:contact,meleeContacts:attack.shotLaunches||[contact]}:attack;
+      const clock=ranged?{...attack,hitAt:contact,meleeContacts:attack.shotLaunches?.length?attack.shotLaunches:[contact]}:attack;
       const elapsed=attackAnimationElapsed(clock,time,cue/1000,ms/1000)*1000;
       if(elapsed>=ms)return null;
-      const contacts=clock.meleeContacts||[contact];
-      let index=0;while(index<contacts.length-1&&time>contacts[index]&&time>=contacts[index+1]-cue/1000)index++;
-      const hit=contacts[index],swing=index?Math.max(contacts[index-1],hit-cue/1000):start;
-      const tail=Math.min(end,hit+(ms-cue)/1000);
-      return {...state(action,start,[[swing,0],[hit,cue],[tail,Math.min(ms,cue+Math.max(0,tail-hit)*1000)]]),elapsedMs:elapsed,hasLaunchAnchor:true,eventAnchors:contacts.map(at=>({atMs:cue,at}))};
+      const contacts=clock.meleeContacts?.length?clock.meleeContacts:[contact];
+      const segments=attackAnimationSegments(clock,time,cue/1000,ms/1000).map(([at,elapsed])=>[at,elapsed*1000]);
+      return {...state(action,start,segments),elapsedMs:elapsed,hasLaunchAnchor:true,eventAnchors:contacts.map(at=>({atMs:cue,at}))};
     }
     const anchored=Number.isFinite(contact)&&contact>start&&contact<end;
     return state(action,start,anchored?[[start,0],[contact,cue],[end,ms]]:[[start,0],[end,ms]],{hasLaunchAnchor:!ranged||anchored});

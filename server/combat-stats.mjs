@@ -60,7 +60,7 @@ function neutralCombatStats(key) {
 }
 
 export function combatAbilityStats(agent) {
-  return agent.stats?.dna || agent.stats?.combat || null;
+  return agent.stats?.dna || agent.stats?.combat || UNIT_COMBAT_STATS[agent.species]?.combat || null;
 }
 
 export function unitCombatStats(key) {

@@ -318,7 +318,7 @@ export function createCombat(environment) {
     if (mode === "ranged") {
       attacker.attack.dnaRanged = true;
       attacker.attack.launchedAt = attacker.attack.hitAt;
-      attacker.attack.shotLaunches = [];
+      attacker.attack.shotLaunches = [attacker.attack.hitAt];
     }
     const causeId = combatVfxToken(environment, "attack");
     attackCauses.set(attacker.attack, causeId);
@@ -477,7 +477,6 @@ export function createCombat(environment) {
         targetX: target.agent.x, targetY: target.agent.y, targetId: target.agent.id,
         arenaFrom: { x: from.x, y: from.y }, arenaTo: { x: to.x, y: to.y } };
       const projectileId = combatVfxToken(environment, "projectile"), causeId = attackCauses.get(active);
-      active.shotLaunches.push(time);
       attacker.dnaProjectiles = [...(attacker.dnaProjectiles || []), visual];
       projectiles.add({ source: attacker, target, attack: active, hitIndex: active.hitIndex || 0, visual,
         arrivesAt, launchedAt: time, launched: true, vfxId: projectileId });
@@ -487,6 +486,7 @@ export function createCombat(environment) {
       const stats = combatAbilityStats(attacker);
       if (stats && !active.counter && ++active.hitIndex < active.hitCount) {
         active.resolved = false; active.hitAt = time + stats.comboSpeed;
+        active.shotLaunches.push(active.hitAt);
         active.endsAt = Math.max(active.endsAt, active.hitAt + active.recovery);
         attacker.combat.nextAttackAt = Number.isFinite(active.defenseResetAt) ? Math.max(active.endsAt, active.defenseResetAt) :
           Math.max(attacker.combat.nextAttackAt, active.endsAt + active.interval);

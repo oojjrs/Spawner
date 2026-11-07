@@ -63,3 +63,24 @@ test("기존 중립 저장은 손상 비율과 행동 시각을 보존하며 반
     agent.health = 0; migrateCombatStats(agent); assert.equal(agent.health, 0);
   }
 });
+
+
+test("중립 기본 수치는 원래 기획의 6가지 스탯 순위를 뒤집지 않는다", () => {
+  const ranks = [["flower-tail-bird",1,3,1,16,14,17],["dew-rabbit",2,2,2,13,16,13],["soil-mole",6,6,7,8,6,1],["bundle-snail",10,5,15,4,4,3],["cotton-sheep",7,1,5,6,7,10],["rolling-acorn",3,4,12,10,10,2],["bubble-toad",8,7,6,11,9,8],["snare-vine",11,10,11,5,1,12],["spiny-back-beetle",9,8,14,9,8,4],["soil-boar",14,14,13,7,11,6],["vine-turtle",16,9,16,3,5,5],["shadow-weasel",5,15,4,19,18,14],["talon-owl",4,16,3,15,13,19],["spring-keeper",12,12,8,17,15,18],["lantern-keeper",13,11,9,14,17,15],["old-garden-snail",18,13,18,2,2,7],["walking-forest",19,18,19,1,3,11],["white-paw",15,19,10,18,19,16],["spiny-back-leader",17,17,17,12,12,9]];
+  for (const [index, field] of ["health", "power", "armor", "speed", "movement", "vision"].entries()) {
+    const ordered = [...ranks].sort((a, b) => a[index + 1] - b[index + 1]);
+    for (let i = 1; i < ordered.length; i++)
+      assert.ok(NEUTRAL_UNIT_STATS[ordered[i][0]][field] > NEUTRAL_UNIT_STATS[ordered[i - 1][0]][field], field + ":" + ordered[i][0]);
+  }
+});
+
+test("중립 연타는 최대 2타이고 빠른 연타도 타격 간격을 확보한다", () => {
+  for (const [key, stats] of Object.entries(NEUTRAL_UNIT_STATS)) {
+    assert.ok(stats.combo >= 0 && stats.combo <= 1, key);
+    if (stats.combo > 0) assert.ok(stats.comboSpeed >= .28, key);
+  }
+  assert.equal(NEUTRAL_UNIT_STATS["shadow-weasel"].combo, 1);
+  assert.equal(NEUTRAL_UNIT_STATS["white-paw"].combo, 1);
+  for (const key of ["cotton-sheep", "bundle-snail", "vine-turtle", "old-garden-snail", "walking-forest"])
+    assert.equal(NEUTRAL_UNIT_STATS[key].combo, 0, key);
+});

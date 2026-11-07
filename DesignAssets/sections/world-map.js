@@ -4183,82 +4183,6 @@ document.write(
 "\n" +
 "return { NEST_LEVELS, nestUpgradeCost, materialCapacity };\n" +
 "})();\n" +
-"modules[\"server/dna-board.mjs\"] = (() => {\n" +
-"const DNA_BOARD_SHAPES = Object.freeze({\"capacity\":[[0,0],[1,0],[2,0]],\"health\":[[0,0],[1,0],[1,-1]],\"movement\":[[0,0],[1,0],[0,1]],\"harvestSpeed\":[[0,0],[1,0],[2,-1]],\"gather\":[[0,0],[1,0],[1,1]],\"blade\":[[0,0],[0,1],[1,-1],[1,0]],\"power\":[[0,0],[0,1],[0,2],[1,2]],\"speed\":[[0,0],[0,1],[0,2],[1,-1],[1,1]],\"secretion\":[[0,0],[0,1],[1,-2],[1,-1],[2,-3]],\"rangedPower\":[[0,0],[0,1],[0,2],[1,1],[1,2]],\"rangedSpeed\":[[0,0],[0,1],[0,2],[1,2],[1,3]],\"antenna\":[[0,0],[0,1],[0,2],[1,1]],\"carapace\":[[0,0],[0,1],[0,2],[1,-1],[2,-1]],\"harvest\":[[0,0],[0,1],[0,2],[1,0],[1,2]],\"loadSpeed\":[[0,0],[0,1],[0,3],[1,1],[1,2]],\"combo\":[[0,0],[0,1],[0,2],[1,-1],[1,0]],\"critical\":[[0,0],[0,1],[1,-2],[1,-1],[2,-2]],\"counter\":[[0,0],[0,1],[0,2],[0,3],[1,-1]],\"stun\":[[0,0],[0,1],[0,2],[0,3],[1,3]],\"bleed\":[[0,0],[0,1],[0,2],[0,3]],\"area\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[2,0]],\"accuracy\":[[0,0],[0,1],[1,-2],[1,-1],[1,1],[2,0]],\"tenacity\":[[0,0],[0,1],[0,2],[1,-2],[1,-1]],\"block\":[[0,0],[0,1],[1,-1],[2,-3],[2,-2]],\"evasion\":[[0,0],[0,1],[1,1],[2,1],[2,2]],\"vision\":[[0,0],[0,1],[1,-1],[1,0],[1,1],[2,-1]],\"legs\":[[0,0],[1,-2],[1,-1],[1,0],[1,1],[2,-1]],\"armor\":[[0,0],[0,1],[1,-1],[1,1],[2,-1],[2,0]],\"parry\":[[0,0],[0,1],[0,2],[1,-2],[1,-1],[1,0]],\"criticalPower\":[[0,0],[0,1],[0,2],[1,-2],[1,-1],[2,-1]],\"penetration\":[[0,0],[0,1],[0,2],[1,-1],[1,1],[2,0]],\"comboPower\":[[0,0],[0,1],[1,-1],[1,0],[2,0],[2,1]],\"blockPower\":[[0,0],[0,1],[1,0],[1,1],[1,2],[2,-1]],\"counterPower\":[[0,0],[0,1],[0,2],[1,-1],[2,-1],[3,-2]],\"reduction\":[[0,0],[0,1],[1,-2],[1,-1],[2,-3],[2,-2]],\"stunTime\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[2,-2]],\"bleedPower\":[[0,0],[0,1],[0,2],[1,-2],[1,-1],[2,-2]],\"areaPower\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[1,2]],\"lifesteal\":[[0,0],[0,1],[0,2],[0,3],[1,-1],[1,0]],\"reflection\":[[0,0],[0,1],[0,2],[1,0],[1,1],[1,2]],\"regeneration\":[[0,0],[0,1],[1,0],[2,-2],[2,-1],[3,-1]],\"comboSpeed\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[2,-1]],\"focus\":[[0,0],[0,1],[1,-2],[1,-1],[2,-2],[2,-1]]});\n" +
-"\n" +
-"function dnaBoardCells(radius) {\n" +
-"  const cells = [];\n" +
-"  for (let r = -radius; r <= radius; r++) for (let q = -radius; q <= radius; q++) {\n" +
-"    if (Math.max(Math.abs(q), Math.abs(r), Math.abs(q + r)) <= radius) cells.push({ q, r });\n" +
-"  }\n" +
-"  return cells;\n" +
-"}\n" +
-"\n" +
-"function dnaPieceCells(piece) {\n" +
-"  const shape = DNA_BOARD_SHAPES[piece.gene];\n" +
-"  if (!shape) return [];\n" +
-"  return shape.map(cell => {\n" +
-"    let [q, r] = cell;\n" +
-"    for (let turn = 0; turn < piece.rotation; turn++) [q, r] = [-r, q + r];\n" +
-"    return { q: q + piece.q, r: r + piece.r };\n" +
-"  });\n" +
-"}\n" +
-"\n" +
-"function dnaBoardTrace(pieces, level, lookup, radius) {\n" +
-"  const paths = [], occupied = new Map(), outside = [], nodes = [];\n" +
-"  let reason = '', at = -1;\n" +
-"  const limit = radius(level), total = Number.isFinite(limit) ? 1 + 3 * limit * (limit + 1) : 0;\n" +
-"  for (let index = 0; index < pieces.length; index++) {\n" +
-"    const piece = pieces[index], gene = lookup.get(piece?.gene);\n" +
-"    if (!gene || !Number.isInteger(piece.q) || !Number.isInteger(piece.r) || Math.abs(piece.q) > 1000 || Math.abs(piece.r) > 1000 ||\n" +
-"        !Number.isInteger(piece.rotation) || piece.rotation < 0 || piece.rotation > 5 || !Number.isInteger(piece.grade) || piece.grade < 1 || piece.grade > 4) {\n" +
-"      return { valid: false, reason: 'invalid', paths, nodes, occupied, outside, filled: occupied.size, total, complete: false, at: index };\n" +
-"    }\n" +
-"    if (Number.isInteger(level) && Math.max(piece.grade, gene.grade) > level && !reason) { reason = 'level'; at = index; }\n" +
-"    const points = dnaPieceCells(piece), start = { q: piece.q, r: piece.r };\n" +
-"    for (const point of points) {\n" +
-"      const key = point.q + ',' + point.r;\n" +
-"      if (occupied.has(key) && !reason) { reason = 'collision'; at = index; }\n" +
-"      if (Math.max(Math.abs(point.q), Math.abs(point.r), Math.abs(point.q + point.r)) > limit) {\n" +
-"        outside.push(point);\n" +
-"        if (!reason) { reason = 'boundary'; at = index; }\n" +
-"      }\n" +
-"      occupied.set(key, { kind: 'cell', index });\n" +
-"    }\n" +
-"    paths.push({ ...piece, start, points, end: points[points.length - 1] });\n" +
-"    nodes.push(start);\n" +
-"  }\n" +
-"  return { valid: !reason, reason, paths, nodes, occupied, outside, filled: occupied.size, total, complete: !reason && total > 0 && occupied.size === total, at };\n" +
-"}\n" +
-"\n" +
-"function dnaBoardPack(pieces, level, radius) {\n" +
-"  const cells = dnaBoardCells(radius(level)), positions = cells.slice().sort((a, b) =>\n" +
-"    Math.max(Math.abs(a.q), Math.abs(a.r), Math.abs(a.q + a.r)) - Math.max(Math.abs(b.q), Math.abs(b.r), Math.abs(b.q + b.r)) || a.r - b.r || a.q - b.q);\n" +
-"  const keys = new Set(cells.map(cell => cell.q + ',' + cell.r));\n" +
-"  if (pieces.reduce((sum, piece) => sum + (DNA_BOARD_SHAPES[piece.gene]?.length || cells.length + 1), 0) > cells.length) return null;\n" +
-"  const ordered = pieces.map((piece, index) => ({ piece, index })).sort((a, b) => DNA_BOARD_SHAPES[b.piece.gene].length - DNA_BOARD_SHAPES[a.piece.gene].length);\n" +
-"  const occupied = new Set(), result = new Array(pieces.length);\n" +
-"  let remaining = 40000;\n" +
-"  function place(index) {\n" +
-"    if (index === ordered.length) return true;\n" +
-"    const { piece, index: original } = ordered[index];\n" +
-"    for (const point of positions) for (let turn = 0; turn < 6; turn++) {\n" +
-"      if (--remaining < 0) return false;\n" +
-"      const next = { gene: piece.gene, grade: piece.grade, rotation: (piece.rotation + turn) % 6, q: point.q, r: point.r };\n" +
-"      const footprint = dnaPieceCells(next).map(cell => cell.q + ',' + cell.r);\n" +
-"      if (footprint.some(key => !keys.has(key) || occupied.has(key))) continue;\n" +
-"      footprint.forEach(key => occupied.add(key));\n" +
-"      result[original] = next;\n" +
-"      if (place(index + 1)) return true;\n" +
-"      footprint.forEach(key => occupied.delete(key));\n" +
-"    }\n" +
-"    return false;\n" +
-"  }\n" +
-"  return place(0) ? result : null;\n" +
-"}\n" +
-"\n" +
-"return { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoardPack };\n" +
-"})();\n" +
 "modules[\"server/dna-combat-stats.mjs\"] = (() => {\n" +
 "const DNA_COMBAT_RULES = Object.freeze({\n" +
 "  basicPower: 1,\n" +
@@ -4326,30 +4250,65 @@ document.write(
 "return { DNA_COMBAT_RULES, dnaCombatStats };\n" +
 "})();\n" +
 "modules[\"server/dna.mjs\"] = (() => {\n" +
-"const { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoardPack } = modules[\"server/dna-board.mjs\"];\n" +
 "const { dnaCombatStats } = modules[\"server/dna-combat-stats.mjs\"];\n" +
 "\n" +
 "const ATTRIBUTE_DNA = (() => {\n" +
+"  const directions = [[1,0],[0,1],[-1,1],[-1,0],[0,-1],[1,-1]];\n" +
 "  const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};\n" +
-"  const definitions = [[\"blade\",\"organ\",20],[\"carapace\",\"stat\",10],[\"antenna\",\"organ\",20],[\"gather\",\"organ\",20],[\"legs\",\"stat\",20],[\"power\",\"stat\",10],[\"combo\",\"action\",14],[\"speed\",\"stat\",12],[\"comboPower\",\"stat\",12],[\"critical\",\"stat\",12],[\"criticalPower\",\"stat\",10],[\"accuracy\",\"stat\",10],[\"penetration\",\"stat\",12],[\"health\",\"stat\",10],[\"armor\",\"stat\",10],[\"evasion\",\"stat\",14],[\"parry\",\"action\",14],[\"block\",\"action\",12],[\"blockPower\",\"stat\",10],[\"counter\",\"action\",14],[\"counterPower\",\"stat\",10],[\"tenacity\",\"stat\",10],[\"reduction\",\"stat\",12],[\"movement\",\"stat\",10],[\"capacity\",\"stat\",10],[\"harvest\",\"stat\",10],[\"harvestSpeed\",\"stat\",10],[\"vision\",\"stat\",10],[\"loadSpeed\",\"stat\",10],null,[\"stun\",\"action\",16],[\"stunTime\",\"stat\",12],[\"bleed\",\"action\",16],[\"bleedPower\",\"stat\",12],[\"area\",\"action\",18],[\"areaPower\",\"stat\",12],[\"lifesteal\",\"action\",16],[\"reflection\",\"action\",16],[\"regeneration\",\"action\",14],[\"comboSpeed\",\"stat\",12],[\"focus\",\"stat\",12],null,[\"secretion\",\"organ\",20],[\"rangedPower\",\"stat\",12],[\"rangedSpeed\",\"stat\",12],null];\n" +
+"  const definitions = [\n" +
+"    ['blade','organ',1,20],['carapace','stat',-1,10],['antenna','organ',0,20],['gather','organ',2,20],['legs','stat',-2,20],\n" +
+"    ['power','stat',1,10],['combo','action',-1,14],['speed','stat',0,12],['comboPower','stat',2,12],['critical','stat',-2,12],['criticalPower','stat',1,10],['accuracy','stat',-1,10],['penetration','stat',0,12],\n" +
+"    ['health','stat',-1,10],['armor','stat',2,10],['evasion','stat',-2,14],['parry','action',1,14],['block','action',0,12],['blockPower','stat',-1,10],['counter','action',2,14],['counterPower','stat',-2,10],['tenacity','stat',1,10],['reduction','stat',-1,12],\n" +
+"    ['movement','stat',0,10],['capacity','stat',1,10],['harvest','stat',-1,10],['harvestSpeed','stat',2,10],['vision','stat',-2,10],['loadSpeed','stat',0,10],null,\n" +
+"    ['stun','action',-1,16],['stunTime','stat',2,12],['bleed','action',-2,16],['bleedPower','stat',1,12],['area','action',0,18],['areaPower','stat',-1,12],['lifesteal','action',2,16],['reflection','action',-2,16],['regeneration','action',1,14],['comboSpeed','stat',-1,12],['focus','stat',0,12],null,['secretion','organ',-2,20],['rangedPower','stat',-1,12],['rangedSpeed','stat',1,12],null\n" +
+"  ];\n" +
 "  const alphabet = 'ATGC';\n" +
-"  const genes = definitions.map((entry,index) => entry && ({id:entry[0],category:entry[1],price:entry[2]/2,code:alphabet[Math.floor(index/16)]+alphabet[Math.floor(index/4)%4]+alphabet[index%4],color:colors[entry[1]]})).filter(Boolean);\n" +
+"  const genes = definitions.map((entry,index) => entry && ({id:entry[0],category:entry[1],turn:entry[2],price:entry[3]/2,code:alphabet[Math.floor(index/16)]+alphabet[Math.floor(index/4)%4]+alphabet[index%4],color:colors[entry[1]]})).filter(Boolean);\n" +
 "  const lookup = new Map(genes.map(gene=>[gene.id,gene]));\n" +
-"  const specification=[{\"gene\":\"gather\",\"grade\":1,\"order\":1},{\"gene\":\"health\",\"grade\":1,\"order\":3},{\"gene\":\"blade\",\"grade\":2,\"order\":0},{\"gene\":\"power\",\"grade\":2,\"order\":1},{\"gene\":\"speed\",\"grade\":2,\"order\":2},{\"gene\":\"capacity\",\"grade\":1,\"order\":0},{\"gene\":\"movement\",\"grade\":1,\"order\":4},{\"gene\":\"antenna\",\"grade\":2,\"order\":8},{\"gene\":\"carapace\",\"grade\":2,\"order\":9},{\"gene\":\"combo\",\"grade\":3,\"order\":0},{\"gene\":\"legs\",\"grade\":3,\"order\":10,\"retired\":true},{\"gene\":\"armor\",\"grade\":3,\"order\":11,\"retired\":true},{\"gene\":\"vision\",\"grade\":3,\"order\":10},{\"gene\":\"harvest\",\"grade\":2,\"order\":10},{\"gene\":\"harvestSpeed\",\"grade\":1,\"order\":2},{\"gene\":\"loadSpeed\",\"grade\":2,\"order\":11},{\"gene\":\"accuracy\",\"grade\":3,\"order\":6},{\"gene\":\"tenacity\",\"grade\":3,\"order\":7},{\"gene\":\"block\",\"grade\":3,\"order\":8},{\"gene\":\"evasion\",\"grade\":3,\"order\":9},{\"gene\":\"parry\",\"grade\":4,\"order\":21},{\"gene\":\"counter\",\"grade\":3,\"order\":2},{\"gene\":\"critical\",\"grade\":3,\"order\":1},{\"gene\":\"criticalPower\",\"grade\":4,\"order\":24},{\"gene\":\"penetration\",\"grade\":4,\"order\":25},{\"gene\":\"comboPower\",\"grade\":4,\"order\":26},{\"gene\":\"blockPower\",\"grade\":4,\"order\":27},{\"gene\":\"counterPower\",\"grade\":4,\"order\":28},{\"gene\":\"reduction\",\"grade\":4,\"order\":29},{\"gene\":\"stun\",\"grade\":3,\"order\":3},{\"gene\":\"stunTime\",\"grade\":4,\"order\":31},{\"gene\":\"bleed\",\"grade\":3,\"order\":4},{\"gene\":\"bleedPower\",\"grade\":4,\"order\":33},{\"gene\":\"area\",\"grade\":3,\"order\":5},{\"gene\":\"areaPower\",\"grade\":4,\"order\":35},{\"gene\":\"lifesteal\",\"grade\":4,\"order\":36},{\"gene\":\"reflection\",\"grade\":4,\"order\":37},{\"gene\":\"regeneration\",\"grade\":4,\"order\":38},{\"gene\":\"comboSpeed\",\"grade\":4,\"order\":39},{\"gene\":\"focus\",\"grade\":4,\"order\":40},{\"gene\":\"secretion\",\"grade\":2,\"order\":3},{\"gene\":\"rangedPower\",\"grade\":2,\"order\":4},{\"gene\":\"rangedSpeed\",\"grade\":2,\"order\":5}];\n" +
-"  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.order=entry.order;if(entry.retired)gene.retired=true;if(gene.grade<=2)gene.price/=2;}\n" +
+"  const specification=[{\"gene\":\"gather\",\"grade\":1,\"steps\":[0,1],\"order\":1},{\"gene\":\"health\",\"grade\":1,\"steps\":[0,4],\"order\":3},{\"gene\":\"blade\",\"grade\":2,\"steps\":[0,2,3],\"order\":0},{\"gene\":\"power\",\"grade\":2,\"steps\":[0,0,1],\"order\":1},{\"gene\":\"speed\",\"grade\":2,\"steps\":[0,2,0],\"order\":2},{\"gene\":\"capacity\",\"grade\":1,\"steps\":[0,0],\"order\":0},{\"gene\":\"movement\",\"grade\":1,\"steps\":[0,2],\"order\":4},{\"gene\":\"antenna\",\"grade\":2,\"steps\":[0,4,0],\"order\":8},{\"gene\":\"carapace\",\"grade\":2,\"steps\":[0,5,1],\"order\":9},{\"gene\":\"combo\",\"grade\":3,\"steps\":[0,1,5,0],\"order\":0},{\"gene\":\"legs\",\"grade\":3,\"steps\":[0,1,0,4],\"order\":10,\"retired\":true},{\"gene\":\"armor\",\"grade\":3,\"steps\":[0,1,2,0],\"order\":11,\"retired\":true},{\"gene\":\"vision\",\"grade\":3,\"steps\":[0,1,2,4],\"order\":10},{\"gene\":\"harvest\",\"grade\":2,\"steps\":[0,1,2],\"order\":10},{\"gene\":\"harvestSpeed\",\"grade\":1,\"steps\":[0,5],\"order\":2},{\"gene\":\"loadSpeed\",\"grade\":2,\"steps\":[0,5,4],\"order\":11},{\"gene\":\"accuracy\",\"grade\":3,\"steps\":[0,1,0,2],\"order\":6},{\"gene\":\"tenacity\",\"grade\":3,\"steps\":[0,1,0,1],\"order\":7},{\"gene\":\"block\",\"grade\":3,\"steps\":[0,0,1,5],\"order\":8},{\"gene\":\"evasion\",\"grade\":3,\"steps\":[0,1,1,2],\"order\":9},{\"gene\":\"parry\",\"grade\":4,\"steps\":[0,1,2,0,1],\"order\":21},{\"gene\":\"counter\",\"grade\":3,\"steps\":[0,1,0,4],\"order\":2},{\"gene\":\"critical\",\"grade\":3,\"steps\":[0,2,1,0],\"order\":1},{\"gene\":\"criticalPower\",\"grade\":4,\"steps\":[0,1,3,1,0],\"order\":24},{\"gene\":\"penetration\",\"grade\":4,\"steps\":[0,1,2,0,2],\"order\":25},{\"gene\":\"comboPower\",\"grade\":4,\"steps\":[0,1,3,1,2],\"order\":26},{\"gene\":\"blockPower\",\"grade\":4,\"steps\":[0,1,2,3,1],\"order\":27},{\"gene\":\"counterPower\",\"grade\":4,\"steps\":[0,1,5,1,0],\"order\":28},{\"gene\":\"reduction\",\"grade\":4,\"steps\":[0,1,0,5,1],\"order\":29},{\"gene\":\"stun\",\"grade\":3,\"steps\":[0,1,5,4],\"order\":3},{\"gene\":\"stunTime\",\"grade\":4,\"steps\":[0,1,0,5,0],\"order\":31},{\"gene\":\"bleed\",\"grade\":3,\"steps\":[0,1,2,1],\"order\":4},{\"gene\":\"bleedPower\",\"grade\":4,\"steps\":[0,1,2,3,5],\"order\":33},{\"gene\":\"area\",\"grade\":3,\"steps\":[0,1,0,5],\"order\":5},{\"gene\":\"areaPower\",\"grade\":4,\"steps\":[0,1,0,2,3],\"order\":35},{\"gene\":\"lifesteal\",\"grade\":4,\"steps\":[0,1,0,5,4],\"order\":36},{\"gene\":\"reflection\",\"grade\":4,\"steps\":[0,1,2,1,3],\"order\":37},{\"gene\":\"regeneration\",\"grade\":4,\"steps\":[0,1,0,1,2],\"order\":38},{\"gene\":\"comboSpeed\",\"grade\":4,\"steps\":[0,1,2,3,4],\"order\":39},{\"gene\":\"focus\",\"grade\":4,\"steps\":[0,2,0,1,5],\"order\":40},{\"gene\":\"secretion\",\"grade\":2,\"steps\":[0,1,3],\"order\":3},{\"gene\":\"rangedPower\",\"grade\":2,\"steps\":[0,0,2],\"order\":4},{\"gene\":\"rangedSpeed\",\"grade\":2,\"steps\":[0,0,4],\"order\":5}];\n" +
+"  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.steps=entry.steps;gene.order=entry.order;if(entry.retired)gene.retired=true;if(gene.grade<=2)gene.price/=2;}\n" +
 "  const catalog=genes.filter(gene=>!gene.retired).sort((a,b)=>a.grade-b.grade||a.order-b.order);\n" +
 "\n" +
-"  for (const [index, gene] of genes.entries()) { gene.cells = DNA_BOARD_SHAPES[gene.id]; gene.fillColor = `hsl(${(index * 137.508 + 24) % 360} 48% 64%)`; }\n" +
-"\n" +
-"  for(const [id,color] of Object.entries({capacity:'#71cdb9',gather:'#d8ba77',harvestSpeed:'#df8d96',health:'#db9d7e',movement:'#a6a1dd'}))lookup.get(id).fillColor=color;\n" +
-"\n" +
-"  const boardRadii=[2,3,4,5];\n" +
+"  const boardRadii=[2,3,4,5],profiles=new Map(),shapeCache=new Map();\n" +
 "  function boardRadius(level){return Number.isInteger(level)&&level>=1&&level<=4?boardRadii[level-1]:Infinity;}\n" +
 "  function inside(point,level){return Math.max(Math.abs(point.q),Math.abs(point.r),Math.abs(point.q+point.r))<=boardRadius(level);}\n" +
-"  function key(point){return point.q+','+point.r;}\n" +
-"  function trace(pieces,level){return dnaBoardTrace(pieces,level,lookup,boardRadius);}\n" +
-"  function boardCells(level){return dnaBoardCells(boardRadius(level));}\n" +
-"  function pack(pieces,level){return dnaBoardPack(pieces,level,boardRadius);}\n" +
+"  function legacyShape(gene,grade){\n" +
+"    if(grade===1)return [0,gene.turn];\n" +
+"    const identity=gene.id+':'+grade;if(shapeCache.has(identity))return shapeCache.get(identity);\n" +
+"    if(!profiles.has(grade)){\n" +
+"      const options=[],visited=new Set(['0,0','1,0']);\n" +
+"      function visit(position,path,bends){\n" +
+"        if(path.length===grade+1){if(bends>=grade-1)options.push(path.slice());return;}\n" +
+"        for(const turn of [-2,-1,0,1,2]){const direction=((path[path.length-1]+turn)%6+6)%6,next=step(position,direction),id=key(next);if(visited.has(id))continue;visited.add(id);path.push(direction);visit(next,path,bends+(turn===0?0:1));path.pop();visited.delete(id);}\n" +
+"      }\n" +
+"      visit({q:1,r:0},[0],0);profiles.set(grade,options);\n" +
+"    }\n" +
+"    const options=profiles.get(grade),result=options[(genes.indexOf(gene)*17+grade*7)%options.length];shapeCache.set(identity,result);return result;\n" +
+"  }\n" +
+"  function shape(gene,grade){return gene.steps;}\n" +
+"  function route(start,gene,grade,rotation,shapeSteps){const points=[{q:start.q,r:start.r}],directions=Array.isArray(shapeSteps)?shapeSteps:shape(gene,grade);for(const direction of directions)points.push(step(points[points.length-1],direction+rotation));return points;}\n" +
+"\n" +
+"  function key(point) {return point.q+','+point.r;}\n" +
+"  function step(point,direction) {const delta=directions[((direction%6)+6)%6];return {q:point.q+delta[0],r:point.r+delta[1]};}\n" +
+"  function trace(pieces,level){\n" +
+"    const nodes=[{q:0,r:0}],paths=[],occupied=new Map([['0,0',{kind:'node',index:0}]]),outside=[],edges=new Set();let closed=false,issue='';\n" +
+"    for(let index=0;index<pieces.length;index++){\n" +
+"      const piece=pieces[index],gene=lookup.get(piece.gene),grade=piece.grade===undefined?1:piece.grade;\n" +
+"      if(!gene||!Number.isInteger(piece.rotation)||piece.rotation<0||piece.rotation>5||!Number.isInteger(grade)||grade<1||grade>4)return {valid:false,reason:'invalid',nodes,paths,closed,at:index,outside};\n" +
+"      if(Number.isInteger(level)&&grade>level&&!issue)issue='level';\n" +
+"      closed=false;const start=nodes[nodes.length-1],points=route(start,gene,grade,piece.rotation,piece.shape),end=points[points.length-1];\n" +
+"      for(let pointIndex=1;pointIndex<points.length;pointIndex++){\n" +
+"        const point=points[pointIndex],last=pointIndex===points.length-1,contact=occupied.get(key(point)),edge=[key(points[pointIndex-1]),key(point)].sort().join(':');\n" +
+"        if(edges.has(edge))return {valid:false,reason:'collision',nodes,paths,closed,at:index,problem:point,outside};\n" +
+"        edges.add(edge);\n" +
+"        if(contact&&(!last||contact.kind!=='node'))return {valid:false,reason:'collision',nodes,paths,closed,at:index,problem:point,outside};\n" +
+"        if(!inside(point,level)){outside.push(point);if(!issue)issue='boundary';}\n" +
+"        if(last&&contact)closed=true;else occupied.set(key(point),{kind:last?'node':'path',index:last?index+1:index});\n" +
+"      }\n" +
+"      paths.push({start,middle:points[1],end,points,gene:gene.id,rotation:piece.rotation,grade});nodes.push(end);\n" +
+"    }\n" +
+"    return {valid:!issue,reason:issue,nodes,paths,closed,occupied,outside};\n" +
+"  }\n" +
 "  function price(pieces){return pieces.reduce((sum,piece)=>{const gene=lookup.get(piece.gene),grade=piece.grade===undefined?1:piece.grade;return sum+Math.ceil((gene?.price||0)*(grade+2)/3);},0);}\n" +
 "  function cost(pieces){return 3+price(pieces);}\n" +
 "  function counts(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+1;return result;}\n" +
@@ -4362,41 +4321,24 @@ document.write(
 "      vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,\n" +
 "      loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0};\n" +
 "  }\n" +
-"  function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,q:piece.q,r:piece.r};}\n" +
+"  function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,shape:piece.shape.slice()};}\n" +
 "  function validate(value){\n" +
-"    if(!value||![1,2,3,4].includes(value.version)||!Array.isArray(value.pieces)||value.pieces.length>2048||!Number.isFinite(value.budget)||value.budget<0||value.budget>999999999)return null;\n" +
-"    let level=value.level===undefined?1:value.level;\n" +
-"    if(!Number.isInteger(level)||level<1||level>4)return null;\n" +
-"    let pieces=[];\n" +
+"    if(!value||![1,2,3].includes(value.version)||!Array.isArray(value.pieces)||value.pieces.length>2048||!Number.isFinite(value.budget)||value.budget<0||value.budget>999999999)return null;\n" +
+"    const pieces=[];\n" +
 "    for(const input of value.pieces){\n" +
-"      const gene=lookup.get(input?.gene),grade=input?.grade===undefined?(value.version>=3?gene?.grade:1):input.grade;\n" +
-"      if(!gene||!Number.isInteger(grade)||grade<1||grade>4||!Number.isInteger(input.rotation)||input.rotation<0||input.rotation>5)return null;\n" +
-"      if(value.version===4){\n" +
-"        if(input.shape!==undefined||input.cells!==undefined)return null;\n" +
-"        pieces.push({gene:gene.id,grade,rotation:input.rotation,q:input.q,r:input.r});\n" +
-"      }else pieces.push({gene:gene.id,grade,rotation:input.rotation});\n" +
-"    }\n" +
-"    if(value.version<4){\n" +
-"      const source=pieces;\n" +
-"      pieces=pack(source,level);\n" +
-"      while(!pieces&&level<4&&value.level===undefined)pieces=pack(source,++level);\n" +
-"      if(!pieces){\n" +
-"        const occupied=new Set(),positions=boardCells(level);let overflow=0;\n" +
-"        pieces=source.map(input=>{\n" +
-"          for(const position of positions)for(let rotation=0;rotation<6;rotation++){\n" +
-"            const piece={...input,rotation,q:position.q,r:position.r},cells=dnaPieceCells(piece);\n" +
-"            if(cells.some(cell=>!inside(cell,level)||occupied.has(key(cell))))continue;\n" +
-"            for(const cell of cells)occupied.add(key(cell));return piece;\n" +
-"          }\n" +
-"          const index=overflow++;return {...input,q:boardRadius(level)+4+(index%Math.ceil(Math.sqrt(source.length)))*6,r:-boardRadius(level)+Math.floor(index/Math.ceil(Math.sqrt(source.length)))*6};\n" +
-"        });\n" +
-"      }\n" +
+"      const gene=lookup.get(input?.gene),grade=input?.grade===undefined?(value.version===3?gene?.grade:1):input.grade,rotation=input?.rotation;\n" +
+"      if(!gene||!Number.isInteger(grade)||grade<1||grade>4||!Number.isInteger(rotation)||rotation<0||rotation>5)return null;\n" +
+"      const original=Array.isArray(input.shape)?input.shape:value.version<3?legacyShape(gene,grade):shape(gene,grade);\n" +
+"      if(original.length!==grade+1||!original.every(direction=>Number.isInteger(direction)&&direction>=-5&&direction<=5))return null;\n" +
+"      pieces.push({gene:gene.id,grade,rotation,shape:original.map(direction=>(direction%6+6)%6)});\n" +
 "    }\n" +
 "    if(!trace(pieces).valid)return null;\n" +
-"    return {version:4,pieces,budget:Math.floor(value.budget),level};\n" +
+"    let level=Number.isInteger(value.level)&&value.level>=1&&value.level<=4?value.level:1;\n" +
+"    if(value.level===undefined){while(level<4&&!trace(pieces,level).valid)level++;}\n" +
+"    return {version:3,pieces,budget:Math.floor(value.budget),level};\n" +
 "  }\n" +
 "\n" +
-"  return {genes,catalog,lookup,trace,boardCells,pieceCells:dnaPieceCells,pack,price,cost,counts,weights,stats,validate,clonePiece,key,boardRadius,inside};\n" +
+"  return {genes,catalog,lookup,trace,price,cost,counts,weights,stats,validate,clonePiece,step,key,shape,route,boardRadius,inside};\n" +
 "})();\n" +
 "\n" +
 "return { ATTRIBUTE_DNA };\n" +
@@ -4422,25 +4364,25 @@ document.write(
 "})();\n" +
 "modules[\"server/neutral-unit-stats.mjs\"] = (() => {\n" +
 "const NEUTRAL_UNIT_STATS = Object.freeze(Object.fromEntries([\n" +
-"  [\"flower-tail-bird\", {\"health\":30,\"power\":3,\"armor\":2,\"speed\":1,\"movement\":0.947,\"vision\":7.525,\"combo\":1.069,\"comboPower\":51.138,\"critical\":5.831,\"criticalPower\":139.311,\"accuracy\":13,\"penetration\":1.201,\"comboSpeed\":0.113,\"focus\":0.223,\"evasion\":13.147,\"parry\":5.195,\"block\":0,\"blockPower\":50,\"counter\":2.232,\"counterPower\":85.37,\"tenacity\":0,\"reduction\":0,\"stun\":0,\"stunTime\":0.2,\"bleed\":2.006,\"bleedPower\":2.303,\"area\":0.004,\"areaPower\":16.08,\"lifesteal\":0.152,\"reflection\":0.365,\"regeneration\":0.9,\"capacity\":1,\"harvestSpeed\":1.9}],\n" +
-"  [\"dew-rabbit\", {\"health\":57,\"power\":2.51,\"armor\":4,\"speed\":0.88,\"movement\":1.011,\"vision\":6.517,\"combo\":0.941,\"comboPower\":48.686,\"critical\":4.863,\"criticalPower\":136.751,\"accuracy\":9,\"penetration\":0.099,\"comboSpeed\":0.136,\"focus\":0.238,\"evasion\":11.984,\"parry\":4.418,\"block\":0.42,\"blockPower\":50,\"counter\":0.074,\"counterPower\":82.337,\"tenacity\":2.311,\"reduction\":0.028,\"stun\":0.043,\"stunTime\":0.251,\"bleed\":0.204,\"bleedPower\":1.24,\"area\":0,\"areaPower\":15,\"lifesteal\":0.066,\"reflection\":0,\"regeneration\":1,\"capacity\":2,\"harvestSpeed\":1.839}],\n" +
-"  [\"soil-mole\", {\"health\":102,\"power\":6,\"armor\":14,\"speed\":0.68,\"movement\":0.648,\"vision\":2,\"combo\":0.397,\"comboPower\":55.846,\"critical\":9.102,\"criticalPower\":156.97,\"accuracy\":11,\"penetration\":6.249,\"comboSpeed\":0.176,\"focus\":0.254,\"evasion\":4.559,\"parry\":3.693,\"block\":10.54,\"blockPower\":50,\"counter\":2.992,\"counterPower\":104.146,\"tenacity\":18.635,\"reduction\":2.25,\"stun\":3.619,\"stunTime\":0.445,\"bleed\":10.649,\"bleedPower\":3.697,\"area\":0.248,\"areaPower\":25.126,\"lifesteal\":2.186,\"reflection\":1.409,\"regeneration\":0.8,\"capacity\":9,\"harvestSpeed\":1.807}],\n" +
-"  [\"bundle-snail\", {\"health\":126,\"power\":5,\"armor\":30,\"speed\":0.52,\"movement\":0.55,\"vision\":3.289,\"combo\":0.102,\"comboPower\":40.732,\"critical\":1.287,\"criticalPower\":149.186,\"accuracy\":1,\"penetration\":0.345,\"comboSpeed\":0.21,\"focus\":0.394,\"evasion\":1.155,\"parry\":0.088,\"block\":16.881,\"blockPower\":50,\"counter\":0.277,\"counterPower\":100.069,\"tenacity\":22.548,\"reduction\":5.444,\"stun\":0.842,\"stunTime\":0.317,\"bleed\":0.639,\"bleedPower\":1.498,\"area\":0.328,\"areaPower\":21.877,\"lifesteal\":0.631,\"reflection\":5.443,\"regeneration\":1.4,\"capacity\":17,\"harvestSpeed\":1.307}],\n" +
-"  [\"cotton-sheep\", {\"health\":214,\"power\":1.97,\"armor\":10,\"speed\":0.6,\"movement\":0.692,\"vision\":5.693,\"combo\":0.232,\"comboPower\":43.51,\"critical\":1,\"criticalPower\":135,\"accuracy\":2,\"penetration\":0,\"comboSpeed\":0.201,\"focus\":0.319,\"evasion\":5.528,\"parry\":0.571,\"block\":5.155,\"blockPower\":50,\"counter\":0,\"counterPower\":80,\"tenacity\":16.662,\"reduction\":4.694,\"stun\":0.557,\"stunTime\":0.287,\"bleed\":0,\"bleedPower\":1,\"area\":0.64,\"areaPower\":20.32,\"lifesteal\":0.016,\"reflection\":4.593,\"regeneration\":1.2,\"capacity\":12,\"harvestSpeed\":1.74}],\n" +
-"  [\"rolling-acorn\", {\"health\":65,\"power\":4,\"armor\":24,\"speed\":0.76,\"movement\":0.81,\"vision\":2.793,\"combo\":0.594,\"comboPower\":46.15,\"critical\":3.966,\"criticalPower\":152.981,\"accuracy\":0,\"penetration\":2.491,\"comboSpeed\":0.16,\"focus\":0.42,\"evasion\":8.633,\"parry\":2.409,\"block\":13.605,\"blockPower\":50,\"counter\":1.579,\"counterPower\":96.125,\"tenacity\":6.562,\"reduction\":0.25,\"stun\":2.497,\"stunTime\":0.346,\"bleed\":2.899,\"bleedPower\":2.578,\"area\":0.179,\"areaPower\":23.481,\"lifesteal\":0,\"reflection\":3.814,\"regeneration\":0.1,\"capacity\":6,\"harvestSpeed\":1.67}],\n" +
-"  [\"bubble-toad\", {\"health\":114,\"power\":7,\"armor\":12,\"speed\":0.8,\"movement\":0.772,\"vision\":5.098,\"combo\":0.703,\"comboPower\":53.522,\"critical\":7.954,\"criticalPower\":161.135,\"accuracy\":6,\"penetration\":3.288,\"comboSpeed\":0.152,\"focus\":0.302,\"evasion\":9.726,\"parry\":1.854,\"block\":6.397,\"blockPower\":50,\"counter\":5.892,\"counterPower\":108.343,\"tenacity\":14.677,\"reduction\":1.361,\"stun\":7.238,\"stunTime\":0.65,\"bleed\":3.917,\"bleedPower\":2.855,\"area\":1.596,\"areaPower\":39.326,\"lifesteal\":3.584,\"reflection\":1.903,\"regeneration\":1.1,\"capacity\":8,\"harvestSpeed\":1.553}],\n" +
-"  [\"snare-vine\", {\"health\":166,\"power\":12.54,\"armor\":22,\"speed\":0.56,\"movement\":0.3,\"vision\":6.25,\"combo\":0.162,\"comboPower\":58.119,\"critical\":12.853,\"criticalPower\":179.273,\"accuracy\":12,\"penetration\":10.02,\"comboSpeed\":0.193,\"focus\":0.207,\"evasion\":2.746,\"parry\":0,\"block\":9.094,\"blockPower\":50,\"counter\":7.062,\"counterPower\":121.534,\"tenacity\":20.597,\"reduction\":1.778,\"stun\":2.008,\"stunTime\":0.631,\"bleed\":15.853,\"bleedPower\":4.553,\"area\":1.406,\"areaPower\":33.82,\"lifesteal\":6,\"reflection\":7.351,\"regeneration\":1.8,\"capacity\":13,\"harvestSpeed\":1.365}],\n" +
-"  [\"spiny-back-beetle\", {\"health\":120,\"power\":8,\"armor\":28,\"speed\":0.72,\"movement\":0.733,\"vision\":3.712,\"combo\":0.492,\"comboPower\":60.347,\"critical\":10.303,\"criticalPower\":174.538,\"accuracy\":8,\"penetration\":11.45,\"comboSpeed\":0.168,\"focus\":0.269,\"evasion\":6.532,\"parry\":8.802,\"block\":15.218,\"blockPower\":50,\"counter\":16.148,\"counterPower\":140.262,\"tenacity\":26.427,\"reduction\":3.361,\"stun\":3.034,\"stunTime\":0.422,\"bleed\":14.029,\"bleedPower\":4.266,\"area\":0.524,\"areaPower\":30.26,\"lifesteal\":1.798,\"reflection\":10.734,\"regeneration\":0.2,\"capacity\":11,\"harvestSpeed\":1.511}],\n" +
-"  [\"soil-boar\", {\"health\":150,\"power\":25,\"armor\":26,\"speed\":0.64,\"movement\":0.846,\"vision\":4.448,\"combo\":0.31,\"comboPower\":68.893,\"critical\":15.586,\"criticalPower\":194.173,\"accuracy\":7,\"penetration\":8.676,\"comboSpeed\":0.184,\"focus\":0.286,\"evasion\":3.63,\"parry\":3.023,\"block\":12.044,\"blockPower\":50,\"counter\":8.331,\"counterPower\":135.474,\"tenacity\":28.354,\"reduction\":4,\"stun\":8.097,\"stunTime\":0.49,\"bleed\":12.293,\"bleedPower\":4.84,\"area\":0.768,\"areaPower\":41.2,\"lifesteal\":2.613,\"reflection\":3.106,\"regeneration\":0.5,\"capacity\":14,\"harvestSpeed\":1.417}],\n" +
-"  [\"vine-turtle\", {\"health\":465,\"power\":19.9,\"armor\":32,\"speed\":0.48,\"movement\":0.601,\"vision\":4.094,\"combo\":0.054,\"comboPower\":37.759,\"critical\":1.785,\"criticalPower\":165.459,\"accuracy\":5,\"penetration\":5.169,\"comboSpeed\":0.219,\"focus\":0.336,\"evasion\":1.917,\"parry\":1.36,\"block\":24,\"blockPower\":50,\"counter\":11.166,\"counterPower\":126.105,\"tenacity\":30.275,\"reduction\":7.111,\"stun\":5.654,\"stunTime\":0.511,\"bleed\":6.297,\"bleedPower\":3.415,\"area\":1.227,\"areaPower\":37.47,\"lifesteal\":0.866,\"reflection\":9.537,\"regeneration\":1.5,\"capacity\":16,\"harvestSpeed\":1.159}],\n" +
-"  [\"shadow-weasel\", {\"health\":96,\"power\":26,\"armor\":8,\"speed\":1.12,\"movement\":1.071,\"vision\":6.778,\"combo\":1.643,\"comboPower\":72.989,\"critical\":18.489,\"criticalPower\":184.128,\"accuracy\":15,\"penetration\":16.24,\"comboSpeed\":0.098,\"focus\":0.149,\"evasion\":14.332,\"parry\":9.822,\"block\":1.953,\"blockPower\":50,\"counter\":14.391,\"counterPower\":117.045,\"tenacity\":8.625,\"reduction\":0.444,\"stun\":1.568,\"stunTime\":0.397,\"bleed\":21.84,\"bleedPower\":5.418,\"area\":0.076,\"areaPower\":28.519,\"lifesteal\":4.713,\"reflection\":0.043,\"regeneration\":0.7,\"capacity\":7,\"harvestSpeed\":1.706}],\n" +
-"  [\"talon-owl\", {\"health\":127,\"power\":37.93,\"armor\":6,\"speed\":0.96,\"movement\":0.915,\"vision\":8,\"combo\":1.345,\"comboPower\":64.686,\"critical\":17.017,\"criticalPower\":189.097,\"accuracy\":18,\"penetration\":14.561,\"comboSpeed\":0.12,\"focus\":0.192,\"evasion\":10.843,\"parry\":7.828,\"block\":1.107,\"blockPower\":50,\"counter\":9.699,\"counterPower\":112.646,\"tenacity\":4.464,\"reduction\":0.111,\"stun\":1.179,\"stunTime\":0.372,\"bleed\":19.761,\"bleedPower\":5.129,\"area\":0.122,\"areaPower\":26.806,\"lifesteal\":4.129,\"reflection\":0.165,\"regeneration\":0.4,\"capacity\":3,\"harvestSpeed\":1.594}],\n" +
-"  [\"spring-keeper\", {\"health\":342,\"power\":29.71,\"armor\":16,\"speed\":1.04,\"movement\":0.979,\"vision\":7.765,\"combo\":1.491,\"comboPower\":66.804,\"critical\":11.554,\"criticalPower\":145.614,\"accuracy\":16,\"penetration\":4.182,\"comboSpeed\":0.105,\"focus\":0.134,\"evasion\":16.759,\"parry\":6.901,\"block\":2.922,\"blockPower\":50,\"counter\":3.856,\"counterPower\":92.337,\"tenacity\":10.661,\"reduction\":0.694,\"stun\":0.154,\"stunTime\":0.468,\"bleed\":7.647,\"bleedPower\":3.134,\"area\":0.042,\"areaPower\":18.822,\"lifesteal\":0.434,\"reflection\":2.468,\"regeneration\":1.3,\"capacity\":4,\"harvestSpeed\":1.87}],\n" +
-"  [\"lantern-keeper\", {\"health\":319,\"power\":24.32,\"armor\":18,\"speed\":0.92,\"movement\":1.041,\"vision\":7.032,\"combo\":1.204,\"comboPower\":62.534,\"critical\":6.863,\"criticalPower\":142.302,\"accuracy\":14,\"penetration\":0.715,\"comboSpeed\":0.128,\"focus\":0.163,\"evasion\":15.536,\"parry\":6.023,\"block\":3.994,\"blockPower\":50,\"counter\":0.598,\"counterPower\":88.735,\"tenacity\":12.678,\"reduction\":1,\"stun\":0.327,\"stunTime\":0.532,\"bleed\":1.248,\"bleedPower\":1.762,\"area\":0.018,\"areaPower\":17.397,\"lifesteal\":0.275,\"reflection\":0.639,\"regeneration\":1.6,\"capacity\":5,\"harvestSpeed\":1.774}],\n" +
-"  [\"old-garden-snail\", {\"health\":652,\"power\":47.37,\"armor\":36,\"speed\":0.44,\"movement\":0.422,\"vision\":4.781,\"combo\":0.018,\"comboPower\":34.457,\"critical\":2.414,\"criticalPower\":169.931,\"accuracy\":3,\"penetration\":1.794,\"comboSpeed\":0.229,\"focus\":0.374,\"evasion\":0,\"parry\":0.286,\"block\":20.352,\"blockPower\":50,\"counter\":1.033,\"counterPower\":130.754,\"tenacity\":32.189,\"reduction\":8.028,\"stun\":4.251,\"stunTime\":0.553,\"bleed\":5.052,\"bleedPower\":2.031,\"area\":0.909,\"areaPower\":32.028,\"lifesteal\":1.138,\"reflection\":6.362,\"regeneration\":1.7,\"capacity\":19,\"harvestSpeed\":1.241}],\n" +
-"  [\"walking-forest\", {\"health\":941,\"power\":81.71,\"armor\":44,\"speed\":0.4,\"movement\":0.492,\"vision\":5.976,\"combo\":0,\"comboPower\":30,\"critical\":3.146,\"criticalPower\":199.352,\"accuracy\":4,\"penetration\":7.418,\"comboSpeed\":0.24,\"focus\":0.355,\"evasion\":0.485,\"parry\":0.931,\"block\":22.154,\"blockPower\":50,\"counter\":4.823,\"counterPower\":150.028,\"tenacity\":36,\"reduction\":9,\"stun\":9,\"stunTime\":0.612,\"bleed\":9.099,\"bleedPower\":3.981,\"area\":1.8,\"areaPower\":45,\"lifesteal\":1.449,\"reflection\":8.41,\"regeneration\":1.9,\"capacity\":18,\"harvestSpeed\":1}],\n" +
-"  [\"white-paw\", {\"health\":220,\"power\":74.46,\"armor\":20,\"speed\":1.08,\"movement\":1.1,\"vision\":7.281,\"combo\":1.8,\"comboPower\":75,\"critical\":20,\"criticalPower\":210,\"accuracy\":17,\"penetration\":18,\"comboSpeed\":0.09,\"focus\":0.12,\"evasion\":18,\"parry\":12,\"block\":7.712,\"blockPower\":50,\"counter\":12.73,\"counterPower\":145.115,\"tenacity\":24.492,\"reduction\":2.778,\"stun\":4.929,\"stunTime\":0.573,\"bleed\":24,\"bleedPower\":6,\"area\":0.42,\"areaPower\":35.634,\"lifesteal\":5.337,\"reflection\":0.987,\"regeneration\":0.6,\"capacity\":10,\"harvestSpeed\":1.633}],\n" +
-"  [\"spiny-back-leader\", {\"health\":339,\"power\":35.12,\"armor\":34,\"speed\":0.84,\"movement\":0.881,\"vision\":5.401,\"combo\":0.819,\"comboPower\":70.953,\"critical\":14.198,\"criticalPower\":204.629,\"accuracy\":10,\"penetration\":12.964,\"comboSpeed\":0.144,\"focus\":0.178,\"evasion\":7.568,\"parry\":10.889,\"block\":18.593,\"blockPower\":50,\"counter\":18,\"counterPower\":155,\"tenacity\":34.097,\"reduction\":6.25,\"stun\":6.423,\"stunTime\":0.592,\"bleed\":17.765,\"bleedPower\":5.709,\"area\":1.062,\"areaPower\":43.091,\"lifesteal\":3.079,\"reflection\":12,\"regeneration\":0.3,\"capacity\":15,\"harvestSpeed\":1.466}]\n" +
+"  [\"flower-tail-bird\",{\"health\":30,\"power\":9.6,\"armor\":0,\"speed\":1,\"movement\":0.95,\"vision\":7.53,\"combo\":0.15,\"comboPower\":45,\"critical\":3,\"criticalPower\":150,\"accuracy\":7,\"penetration\":0,\"comboSpeed\":0.34,\"focus\":0.34,\"evasion\":12,\"parry\":4,\"block\":0,\"blockPower\":50,\"counter\":0,\"counterPower\":105,\"tenacity\":0,\"reduction\":0,\"stun\":0,\"stunTime\":0.2,\"bleed\":0,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":0.9,\"capacity\":1,\"harvestSpeed\":1.9}],\n" +
+"  [\"dew-rabbit\",{\"health\":44,\"power\":9.3,\"armor\":1,\"speed\":0.88,\"movement\":1.01,\"vision\":6.52,\"combo\":0.1,\"comboPower\":45,\"critical\":3,\"criticalPower\":150,\"accuracy\":4,\"penetration\":0,\"comboSpeed\":0.4,\"focus\":0.36,\"evasion\":11,\"parry\":4,\"block\":0,\"blockPower\":50,\"counter\":0,\"counterPower\":102.5,\"tenacity\":2,\"reduction\":0,\"stun\":0,\"stunTime\":0.22,\"bleed\":0,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":1,\"capacity\":2,\"harvestSpeed\":1.84}],\n" +
+"  [\"soil-mole\",{\"health\":100,\"power\":16,\"armor\":10,\"speed\":0.68,\"movement\":0.65,\"vision\":2,\"combo\":0,\"comboPower\":50,\"critical\":5,\"criticalPower\":155,\"accuracy\":5,\"penetration\":3,\"comboSpeed\":0.5,\"focus\":0.38,\"evasion\":4,\"parry\":3,\"block\":5,\"blockPower\":50,\"counter\":1,\"counterPower\":117.5,\"tenacity\":18,\"reduction\":2,\"stun\":2,\"stunTime\":0.36,\"bleed\":2,\"bleedPower\":1,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":0.8,\"capacity\":9,\"harvestSpeed\":1.81}],\n" +
+"  [\"bundle-snail\",{\"health\":135,\"power\":10.5,\"armor\":30,\"speed\":0.52,\"movement\":0.55,\"vision\":3.29,\"combo\":0,\"comboPower\":40,\"critical\":0,\"criticalPower\":150,\"accuracy\":0,\"penetration\":0,\"comboSpeed\":0.58,\"focus\":0.54,\"evasion\":1,\"parry\":0,\"block\":12,\"blockPower\":50,\"counter\":0,\"counterPower\":115,\"tenacity\":22,\"reduction\":5,\"stun\":0,\"stunTime\":0.26,\"bleed\":0,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":1,\"regeneration\":1.4,\"capacity\":17,\"harvestSpeed\":1.31}],\n" +
+"  [\"cotton-sheep\",{\"health\":120,\"power\":9,\"armor\":5,\"speed\":0.6,\"movement\":0.69,\"vision\":5.69,\"combo\":0,\"comboPower\":40,\"critical\":0,\"criticalPower\":150,\"accuracy\":1,\"penetration\":0,\"comboSpeed\":0.56,\"focus\":0.46,\"evasion\":5,\"parry\":0,\"block\":2,\"blockPower\":50,\"counter\":0,\"counterPower\":100,\"tenacity\":16,\"reduction\":4,\"stun\":0,\"stunTime\":0.24,\"bleed\":0,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":1.2,\"capacity\":12,\"harvestSpeed\":1.74}],\n" +
+"  [\"rolling-acorn\",{\"health\":55,\"power\":10,\"armor\":20,\"speed\":0.76,\"movement\":0.81,\"vision\":2.79,\"combo\":0,\"comboPower\":45,\"critical\":2,\"criticalPower\":155,\"accuracy\":0,\"penetration\":1,\"comboSpeed\":0.46,\"focus\":0.56,\"evasion\":8,\"parry\":2,\"block\":8,\"blockPower\":50,\"counter\":0,\"counterPower\":112.5,\"tenacity\":6,\"reduction\":0,\"stun\":1,\"stunTime\":0.28,\"bleed\":0,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":0.1,\"capacity\":6,\"harvestSpeed\":1.67}],\n" +
+"  [\"bubble-toad\",{\"health\":125,\"power\":17,\"armor\":8,\"speed\":0.8,\"movement\":0.77,\"vision\":5.1,\"combo\":0,\"comboPower\":45,\"critical\":4,\"criticalPower\":155,\"accuracy\":3,\"penetration\":2,\"comboSpeed\":0.44,\"focus\":0.44,\"evasion\":9,\"parry\":2,\"block\":2,\"blockPower\":50,\"counter\":2,\"counterPower\":120,\"tenacity\":14,\"reduction\":1,\"stun\":6,\"stunTime\":0.56,\"bleed\":0,\"bleedPower\":0,\"area\":1,\"areaPower\":25,\"lifesteal\":0,\"reflection\":0,\"regeneration\":1.1,\"capacity\":8,\"harvestSpeed\":1.55}],\n" +
+"  [\"snare-vine\",{\"health\":155,\"power\":24,\"armor\":18,\"speed\":0.56,\"movement\":0.3,\"vision\":6.25,\"combo\":0,\"comboPower\":50,\"critical\":7,\"criticalPower\":165,\"accuracy\":6,\"penetration\":5,\"comboSpeed\":0.54,\"focus\":0.32,\"evasion\":2,\"parry\":0,\"block\":4,\"blockPower\":50,\"counter\":3,\"counterPower\":127.5,\"tenacity\":20,\"reduction\":1,\"stun\":0,\"stunTime\":0.54,\"bleed\":4,\"bleedPower\":2,\"area\":1,\"areaPower\":20,\"lifesteal\":5,\"reflection\":3,\"regeneration\":1.8,\"capacity\":13,\"harvestSpeed\":1.36}],\n" +
+"  [\"spiny-back-beetle\",{\"health\":130,\"power\":18,\"armor\":25,\"speed\":0.72,\"movement\":0.73,\"vision\":3.71,\"combo\":0,\"comboPower\":50,\"critical\":5,\"criticalPower\":160,\"accuracy\":4,\"penetration\":6,\"comboSpeed\":0.48,\"focus\":0.4,\"evasion\":6,\"parry\":8,\"block\":10,\"blockPower\":50,\"counter\":12,\"counterPower\":137.5,\"tenacity\":26,\"reduction\":3,\"stun\":1,\"stunTime\":0.34,\"bleed\":3,\"bleedPower\":1,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":8,\"regeneration\":0.2,\"capacity\":11,\"harvestSpeed\":1.51}],\n" +
+"  [\"soil-boar\",{\"health\":180,\"power\":31,\"armor\":22,\"speed\":0.64,\"movement\":0.85,\"vision\":4.45,\"combo\":0,\"comboPower\":61,\"critical\":10,\"criticalPower\":170,\"accuracy\":3,\"penetration\":4,\"comboSpeed\":0.52,\"focus\":0.42,\"evasion\":3,\"parry\":3,\"block\":6,\"blockPower\":50,\"counter\":4,\"counterPower\":135,\"tenacity\":28,\"reduction\":3,\"stun\":8,\"stunTime\":0.4,\"bleed\":2,\"bleedPower\":2,\"area\":1,\"areaPower\":30,\"lifesteal\":0,\"reflection\":0,\"regeneration\":0.5,\"capacity\":14,\"harvestSpeed\":1.42}],\n" +
+"  [\"vine-turtle\",{\"health\":295,\"power\":19,\"armor\":38,\"speed\":0.48,\"movement\":0.6,\"vision\":4.09,\"combo\":0,\"comboPower\":40,\"critical\":1,\"criticalPower\":160,\"accuracy\":2,\"penetration\":3,\"comboSpeed\":0.6,\"focus\":0.48,\"evasion\":1,\"parry\":1,\"block\":24,\"blockPower\":50,\"counter\":6,\"counterPower\":130,\"tenacity\":30,\"reduction\":8,\"stun\":4,\"stunTime\":0.42,\"bleed\":0,\"bleedPower\":1,\"area\":1,\"areaPower\":25,\"lifesteal\":0,\"reflection\":6,\"regeneration\":1.5,\"capacity\":16,\"harvestSpeed\":1.16}],\n" +
+"  [\"shadow-weasel\",{\"health\":88,\"power\":41,\"armor\":3,\"speed\":1.12,\"movement\":1.07,\"vision\":6.78,\"combo\":1,\"comboPower\":63,\"critical\":14,\"criticalPower\":165,\"accuracy\":9,\"penetration\":10,\"comboSpeed\":0.3,\"focus\":0.24,\"evasion\":13,\"parry\":9,\"block\":0,\"blockPower\":50,\"counter\":10,\"counterPower\":125,\"tenacity\":8,\"reduction\":0,\"stun\":0,\"stunTime\":0.32,\"bleed\":8,\"bleedPower\":3,\"area\":0,\"areaPower\":0,\"lifesteal\":3,\"reflection\":0,\"regeneration\":0.7,\"capacity\":7,\"harvestSpeed\":1.71}],\n" +
+"  [\"talon-owl\",{\"health\":85,\"power\":59,\"armor\":2,\"speed\":0.96,\"movement\":0.92,\"vision\":8,\"combo\":0.9,\"comboPower\":55,\"critical\":12,\"criticalPower\":170,\"accuracy\":14,\"penetration\":8,\"comboSpeed\":0.36,\"focus\":0.3,\"evasion\":10,\"parry\":7,\"block\":0,\"blockPower\":50,\"counter\":5,\"counterPower\":122.5,\"tenacity\":4,\"reduction\":0,\"stun\":0,\"stunTime\":0.3,\"bleed\":6,\"bleedPower\":2,\"area\":0,\"areaPower\":0,\"lifesteal\":2,\"reflection\":0,\"regeneration\":0.4,\"capacity\":3,\"harvestSpeed\":1.59}],\n" +
+"  [\"spring-keeper\",{\"health\":177,\"power\":30.4,\"armor\":14,\"speed\":1.07,\"movement\":0.98,\"vision\":7.76,\"combo\":0.95,\"comboPower\":60,\"critical\":6,\"criticalPower\":150,\"accuracy\":11.5,\"penetration\":2,\"comboSpeed\":0.32,\"focus\":0.21,\"evasion\":17.5,\"parry\":6,\"block\":1,\"blockPower\":50,\"counter\":1,\"counterPower\":110,\"tenacity\":10,\"reduction\":0,\"stun\":0,\"stunTime\":0.38,\"bleed\":1,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":1.3,\"capacity\":4,\"harvestSpeed\":1.87}],\n" +
+"  [\"lantern-keeper\",{\"health\":178,\"power\":29.9,\"armor\":15,\"speed\":0.92,\"movement\":1.04,\"vision\":7.03,\"combo\":0.65,\"comboPower\":54,\"critical\":4,\"criticalPower\":150,\"accuracy\":8,\"penetration\":0,\"comboSpeed\":0.38,\"focus\":0.26,\"evasion\":15.5,\"parry\":5,\"block\":1,\"blockPower\":50,\"counter\":0,\"counterPower\":107.5,\"tenacity\":12,\"reduction\":0,\"stun\":0,\"stunTime\":0.44,\"bleed\":0,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":1.6,\"capacity\":5,\"harvestSpeed\":1.77}],\n" +
+"  [\"old-garden-snail\",{\"health\":420,\"power\":30.5,\"armor\":48,\"speed\":0.44,\"movement\":0.42,\"vision\":4.78,\"combo\":0,\"comboPower\":40,\"critical\":1,\"criticalPower\":160,\"accuracy\":1,\"penetration\":1,\"comboSpeed\":0.62,\"focus\":0.52,\"evasion\":0,\"parry\":0,\"block\":16,\"blockPower\":50,\"counter\":0,\"counterPower\":132.5,\"tenacity\":32,\"reduction\":10,\"stun\":2,\"stunTime\":0.46,\"bleed\":0,\"bleedPower\":0,\"area\":1,\"areaPower\":0,\"lifesteal\":0,\"reflection\":2,\"regeneration\":1.7,\"capacity\":19,\"harvestSpeed\":1.24}],\n" +
+"  [\"walking-forest\",{\"health\":850,\"power\":68,\"armor\":55,\"speed\":0.4,\"movement\":0.49,\"vision\":5.98,\"combo\":0,\"comboPower\":40,\"critical\":2,\"criticalPower\":175,\"accuracy\":2,\"penetration\":4,\"comboSpeed\":0.64,\"focus\":0.5,\"evasion\":0,\"parry\":1,\"block\":20,\"blockPower\":50,\"counter\":2,\"counterPower\":142.5,\"tenacity\":36,\"reduction\":12,\"stun\":10,\"stunTime\":0.52,\"bleed\":1,\"bleedPower\":1,\"area\":2,\"areaPower\":35,\"lifesteal\":0,\"reflection\":4,\"regeneration\":1.9,\"capacity\":18,\"harvestSpeed\":1}],\n" +
+"  [\"white-paw\",{\"health\":255,\"power\":75,\"armor\":16,\"speed\":1.08,\"movement\":1.1,\"vision\":7.28,\"combo\":1,\"comboPower\":65,\"critical\":16,\"criticalPower\":185,\"accuracy\":12,\"penetration\":12,\"comboSpeed\":0.28,\"focus\":0.2,\"evasion\":18,\"parry\":12,\"block\":3,\"blockPower\":50,\"counter\":8,\"counterPower\":140,\"tenacity\":24,\"reduction\":2,\"stun\":3,\"stunTime\":0.48,\"bleed\":10,\"bleedPower\":4,\"area\":0,\"areaPower\":20,\"lifesteal\":4,\"reflection\":0,\"regeneration\":0.6,\"capacity\":10,\"harvestSpeed\":1.63}],\n" +
+"  [\"spiny-back-leader\",{\"health\":310,\"power\":60,\"armor\":40,\"speed\":0.84,\"movement\":0.88,\"vision\":5.4,\"combo\":0.05,\"comboPower\":62,\"critical\":8,\"criticalPower\":180,\"accuracy\":5,\"penetration\":7,\"comboSpeed\":0.42,\"focus\":0.28,\"evasion\":7,\"parry\":10,\"block\":14,\"blockPower\":50,\"counter\":15,\"counterPower\":145,\"tenacity\":34,\"reduction\":6,\"stun\":5,\"stunTime\":0.5,\"bleed\":5,\"bleedPower\":3,\"area\":1,\"areaPower\":30,\"lifesteal\":0,\"reflection\":10,\"regeneration\":0.3,\"capacity\":15,\"harvestSpeed\":1.47}]\n" +
 "].map(([key, stats]) => [key, Object.freeze(stats)])));\n" +
 "\n" +
 "return { NEUTRAL_UNIT_STATS };\n" +
@@ -4567,7 +4509,7 @@ document.write(
 "}\n" +
 "\n" +
 "function combatAbilityStats(agent) {\n" +
-"  return agent.stats?.dna || agent.stats?.combat || null;\n" +
+"  return agent.stats?.dna || agent.stats?.combat || UNIT_COMBAT_STATS[agent.species]?.combat || null;\n" +
 "}\n" +
 "\n" +
 "function unitCombatStats(key) {\n" +

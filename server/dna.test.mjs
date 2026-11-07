@@ -11,7 +11,7 @@ import { unitDisplaySize } from "../client/unit-size.mjs";
 function design(ids, level) {
   const pieces=ATTRIBUTE_DNA.pack(ids.map(id=>{const gene=ATTRIBUTE_DNA.lookup.get(id);return {gene:id,grade:gene.grade,rotation:0};}),level);
   assert.ok(pieces);
-  return {version:4,pieces,level,budget:10000};
+  return {version:5,pieces,level,budget:10000};
 }
 
 function fixture(level, tribe) {
@@ -23,9 +23,9 @@ function fixture(level, tribe) {
   return {game,environment,colony};
 }
 
-test("DNA 판은 처음 반경을 유지하며 한 레벨마다 한 겹 늘어난다",()=>{
-  assert.deepEqual([1,2,3,4].map(ATTRIBUTE_DNA.boardRadius),[2,3,4,5]);
-  assert.deepEqual([1,2,3,4].map(level=>{let count=0;for(let q=-6;q<=6;q++)for(let r=-6;r<=6;r++)if(ATTRIBUTE_DNA.inside({q,r},level))count++;return count;}),[19,37,61,91]);
+test("DNA 판은 반경 3에서 시작해 한 레벨마다 한 겹 늘어난다",()=>{
+  assert.deepEqual([1,2,3,4].map(ATTRIBUTE_DNA.boardRadius),[3,4,5,6]);
+  assert.deepEqual([1,2,3,4].map(level=>{let count=0;for(let q=-6;q<=6;q++)for(let r=-6;r<=6;r++)if(ATTRIBUTE_DNA.inside({q,r},level))count++;return count;}),[37,61,91,127]);
 });
 
 test("DNA 명령은 포인트·등급·형태 위조를 거부하고 현재 판 안의 설계만 저장한다",()=>{
@@ -66,32 +66,32 @@ test("같은 DNA는 네 종족 모두 기본비 3포인트로 저장하고 실�
   const dna=design(["gather","health"],2);
   for(const tribe of ["bean","spring","pebble","spore"]) {
     assert.equal(birthCost({dna:design([],1)},tribe),3,tribe);
-    assert.equal(birthCost({dna},tribe),11,tribe);
-    assert.equal(birthCost({dna,tribe}),11,tribe);
+    assert.equal(birthCost({dna},tribe),16,tribe);
+    assert.equal(birthCost({dna,tribe}),16,tribe);
     const {game}=fixture(2,tribe),saved=JSON.parse(game.save());
     saved.state.agents=[];game.restore(JSON.stringify(saved));
     const points=game.snapshot().evolutionPoints;
     const {templateId}=game.command({type:"design",templateId:null,name:"공통 일꾼",dna,birth:false});
     assert.equal(game.snapshot().evolutionPoints,points,tribe);
     const {agentId}=game.command({type:"birth",templateId});
-    assert.equal(game.snapshot().evolutionPoints,points-11,tribe);
-    assert.equal(game.agents.find(agent=>agent.id===agentId).cost,11,tribe);
+    assert.equal(game.snapshot().evolutionPoints,points-16,tribe);
+    assert.equal(game.agents.find(agent=>agent.id===agentId).cost,16,tribe);
   }
 });
 
-test("채집 DNA는 8포인트로 탄생하고 7포인트에서는 자원을 차감하지 않는다",()=>{
-  for(const points of [7,8]){
+test("채집 DNA는 11포인트로 탄생하고 10포인트에서는 자원을 차감하지 않는다",()=>{
+  for(const points of [10,11]){
     const {game}=fixture(1),saved=JSON.parse(game.save());
     saved.state.evolutionPoints=points;saved.state.agents=[];game.restore(JSON.stringify(saved));
     const {templateId}=game.command({type:"design",templateId:null,name:"채집 DNA",dna:design(["gather"],1),birth:false});
     assert.equal(game.snapshot().evolutionPoints,points);
-    if(points===7){
+    if(points===10){
       assert.throws(()=>game.command({type:"birth",templateId}),/진화 포인트/);
-      assert.equal(game.snapshot().evolutionPoints,7);
+      assert.equal(game.snapshot().evolutionPoints,10);
       assert.equal(game.agents.length,0);
     }else{
       const {agentId}=game.command({type:"birth",templateId});
-      assert.equal(game.agents.find(agent=>agent.id===agentId).cost,8);
+      assert.equal(game.agents.find(agent=>agent.id===agentId).cost,11);
       assert.equal(game.snapshot().evolutionPoints,0);
     }
   }
@@ -149,12 +149,12 @@ test("DNA 연타는 같은 공격 주기 안에 후속 타격하고 범위 공�
 });
 test("DNA 조각은 연결 없이 빈칸에 놓고 중간 조각을 지워도 다른 좌표를 유지한다",()=>{
   const pieces=[{gene:"capacity",grade:1,rotation:0,q:-2,r:2},{gene:"health",grade:1,rotation:0,q:0,r:0},{gene:"capacity",grade:1,rotation:0,q:0,r:-2}];
-  const dna={version:4,pieces,level:1,budget:10000};
+  const dna={version:5,pieces,level:1,budget:10000};
   assert.ok(validateDna(dna,1,10000));
   assert.ok(validateDna({...dna,pieces:[...pieces].reverse()},1,10000));
   assert.ok(validateDna({...dna,pieces:pieces.filter((_,index)=>index!==1)},1,10000));
   assert.equal(ATTRIBUTE_DNA.trace(pieces.concat(pieces[0]),1).reason,"collision");
-  assert.equal(ATTRIBUTE_DNA.trace([{...pieces[0],q:-3}],1).reason,"boundary");
+  assert.equal(ATTRIBUTE_DNA.trace([{...pieces[0],q:-4}],1).reason,"boundary");
   const {game}=fixture(1),{templateId}=game.command({type:"design",templateId:null,name:"독립 조각",dna,birth:false});
   const {agentId}=game.command({type:"birth",templateId});
   assert.deepEqual(game.agents.find(agent=>agent.id===agentId).dna.pieces,pieces);

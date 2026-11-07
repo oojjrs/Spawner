@@ -27,7 +27,7 @@ export function combatLabCombinationDna(appearance) {
     return { gene: gene.id, grade: gene.grade, rotation: 0 };
   }), level);
   if (!pieces) throw new Error(form.label + " DNA를 보드에 배치할 수 없습니다.");
-  return { version: 4, level, budget: ATTRIBUTE_DNA.price(pieces), pieces };
+  return { version: 5, level, budget: ATTRIBUTE_DNA.price(pieces), pieces };
 }
 
 export function combatLabBladeCarapaceDna() { return combatLabCombinationDna("blade-carapace"); }
