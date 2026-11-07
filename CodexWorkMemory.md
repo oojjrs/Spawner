@@ -1,3 +1,21 @@
+## 칼날+갑각 실험실 DNA 호환 오류 수정 승인 · 01a1b418
+
+- 기록 ID: lab-blade-dna-fix-start-20261107-01a1b418. 기록 시각 2026-11-07T16:02:45+09:00. 기록자·수정 판단 Codex /root, 오류수정 승인 사용자. 출처 현재 채팅 01a1b418-469e-79d0-9737-ddf91fe08f14의 ‘고쳐’ 및 pull-design-audit-result 기록. H:/Spawner Windows PowerShell, 원발언 정확 시각·항목 ID 불명.
+- 직전 검수의 실제 오류를 수정한다. combatLabBladeCarapaceDna의 삭제된 shape/한붓배치 API를 현재 ATTRIBUTE_DNA.pack·q/r·version4로 전환하고 기존등급·보드레벨4·실제가격/능력치·복제독립성을 유지한다. 같은 검사의 구형shape assertion과 새 오디오의 누락 mock을 갱신하며 새로운 제품문구를 추가하지 않는다.
+- 범위는 외형DNA 생성 모듈, 해당 기존검사, Combat.html의 해당 내장모듈, 관련메모리다. 동시 전투/DNA/외형선택 변경을 보존한다. 검수는 기존2사례 및 실제실험실에서 4부족 선택·전투종료로 제한하며 커밋/푸시/배포를 요청으로 확대하지 않는다.
+## 칼날+갑각 실험실 DNA 호환 수정·4부족 실제 전투 확인 완료 · 01a1b418 현재 요약
+
+- 기록 ID: lab-blade-dna-fix-complete-20261107-01a1b418. 기록 시각 2026-11-07T16:04:51+09:00. 기록자·구현/직접검수 Codex /root, 수정 승인 사용자. 출처 현재 채팅 01a1b418-469e-79d0-9737-ddf91fe08f14 및 literal 임시 폴더 lab-blade-dna-fix-01a1b418의 before/browser-result.json/pebble-combat.png·실제 테스트 응답. H:/Spawner Windows PowerShell, 원발언 정확 시각·항목 ID 불명.
+- lab-blade-dna-fix-start 구현완료로 직전 pull 검수의 실험실 호환 오류 상태를 대체한다. 칼날·갑각 catalog 등급을 현재 pack으로 배치하고 좌표형 version4를 반환한다. 기존 level4·가격·능력치와 선택별 독립 생성은 유지한다. Combat.html의 해당 내장 모듈만 동기화했고 모듈 밖 모든 바이트가 작업 시작본과 동일함을 확인했다.
+- 기존 회귀검사2개 모두 통과: 유효 DNA/가격/근접·갑각능력/부족별전투, 편성추가·복제독립/삭제/초기화/기본복귀/중립차단/주사위. 구형shape assertion을 version4/조각독립 기준으로 교정하고 기존검사에 누락된 오디오 fixture를 추가했다. 다른 제품 수정이나 전체검사로 확대하지 않았다.
+- 실제 격리 Edge의 Combat.html에서 네 부족 각각 양쪽 칼날+갑각 선택·전용이미지 draw·다음사건0.60초/2사건·끝까지12.90초/20사건 및 사망승패종료를 모두 확인했다. pageerror0. 몽돌 양쪽 실제표시 스크린샷 직접열람 완료. 이전 API TypeError는 재현되지 않는다.
+- 최종 소스2개 UTF8NoBom/CRLF OK, 메모리는 기존Mixed/불일치줄없음이다. Combat의7개 LF줄은 시작전 보관본과 텍스트가 정확히 같고 이번변경 밖의 기존 형식 불일치이므로 수정하지 않았다. 관련 diff 및 내장모듈외 바이트보존검수 완료. 로컬미커밋 상태로 남기며 커밋·푸시·배포는 하지 않았다. 요청/원인/구현/실제검수/보호/현재상태 누락 대조완료.
+
+## 칼날+갑각 실험실 DNA 호환 수정 커밋 범위 동결 · 01a1b418
+
+- 기록 ID: lab-blade-dna-fix-commit-freeze-20261107-01a1b418. 기록 시각 2026-11-07T16:09:27+09:00. 기록자·범위분리/검수 Codex /root, 로컬커밋 승인 사용자. 출처 현재 채팅 01a1b418-469e-79d0-9737-ddf91fe08f14의 ‘커밋’, H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.
+- 대상은 직전 완료한 version4 pack 기반 칼날+갑각 생성 소스·기존검사와 Combat.html의 같은 내장 모듈, 이 수정의 시작/완료/현재 기록4경로다. Combat와메모리는HEAD 기준으로 관련영역만별도index에투영한다. 동시전투·외형선택·새DNAversion5전환 및 기타기록은 보호하고 포함하지 않는다. 당시실행면과다른소스간변경을되돌리지않는다.
+- 기존 2개 회귀검사와 실제4부족 선택/이미지출력/12.90초20사건사망종료·pageerror0, 소스형식/정확내장영역만수정 결과를 재사용한다. 기존Combat7줄형식차이는범위밖이며HEAD투영으로포함되지않는다. 연결Projects0개 조사근거를 재사용한다. 제목은 ‘전투 실험실 칼날·갑각 DNA 생성 수정’으로한다. 요청·수정·검수·보호범위·미커밋상태누락대조완료, 실제커밋성공은추후확인한다.
 ## 전투 커밋 최신 DNA 이력 합류 · 01a1b411 최종 범위
 
 - 기록 ID: combat-commit-new-base-20261107-01a1b411. 기록 시각 2026-11-07T14:47:48+09:00. 기록자·충돌예방/범위판단 Codex /root, 사용자로컬커밋승인 지속. 출처 codex://threads/01a1b411-4b0d-7c70-b663-ed61ec7ca4fb 및실제HEADguard/두분담의재투영. 원발언 정확시각·항목ID 불명, H:/Spawner Windows PowerShell.

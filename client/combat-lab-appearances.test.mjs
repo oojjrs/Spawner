@@ -13,10 +13,11 @@ import { unitActionArtDefinition } from './unit-action-art.mjs';
 const plain = value => JSON.parse(JSON.stringify(value));
 test('lab combo uses valid independently owned DNA and real melee/armor mechanics', () => {
   const first = combatLabBladeCarapaceDna(), second = combatLabBladeCarapaceDna();
+  assert.equal(first.version, 4);
   assert.ok(validateDna(first, first.level, first.budget));
   assert.ok(ATTRIBUTE_DNA.trace(first.pieces, first.level).valid);
   assert.equal(ATTRIBUTE_DNA.price(first.pieces), first.budget);
-  assert.notEqual(first.pieces, second.pieces); assert.notEqual(first.pieces[0].shape, second.pieces[0].shape);
+  assert.notEqual(first.pieces, second.pieces); assert.notEqual(first.pieces[0], second.pieces[0]);
   assert.deepEqual(dnaAppearance(first), { blade: 1, carapace: 1 });
   for (const key of ['bean', 'spore', 'pebble', 'spring']) {
     const build = combatLabWithAppearance({ key, name: key }, 'blade-carapace');
@@ -47,6 +48,7 @@ function fixture() {
   const main = new Element('main');
   const scope = { COMBAT_LAB_UNITS, SIMULATION_STATS, DEFAULT_SIMULATION_RULES, deriveSimulationStats: build => deriveSimulationStats(plain(build)), createSimulationTrial: settings => createSimulationTrial(plain(settings)),
     COMBAT_LAB_APPEARANCES, combatLabPlayable, combatLabAppearance, combatLabWithAppearance, structuredClone,
+    SpawnerCombatAudio: { createPlayer: () => ({ resume() {}, stop() {} }), create: () => ({}), reset() {} },
     document: { querySelector: () => main, createElement: tag => new Element(tag) },
     Option: class extends Element { constructor(label, value) { super('option', label); this.value = value; } },
     requestAnimationFrame() {}, createCombatStage: () => ({ render() {} }) };

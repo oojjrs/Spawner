@@ -344,21 +344,12 @@ function combatLabCombinationDna(appearance) {
   const form = UNIT_COMBINATION_FORMS.find(form => form.key === appearance);
   if (!form) throw new Error("지원하지 않는 DNA 외형입니다.");
   const genes = Object.keys(form.attributes), level = 4;
-  function place(index, pieces) {
-    if (index === genes.length) return pieces;
-    const gene = ATTRIBUTE_DNA.lookup.get(genes[index]);
-    for (let rotation = 0; rotation < 6; rotation++) {
-      const next = [...pieces, { gene: gene.id, grade: gene.grade, rotation, shape: [...ATTRIBUTE_DNA.shape(gene, gene.grade)] }];
-      const trace = ATTRIBUTE_DNA.trace(next, level);
-      if (!trace.valid || trace.closed && index < genes.length - 1) continue;
-      const result = place(index + 1, next);
-      if (result) return result;
-    }
-    return null;
-  }
-  const pieces = place(0, []);
+  const pieces = ATTRIBUTE_DNA.pack(genes.map(id => {
+    const gene = ATTRIBUTE_DNA.lookup.get(id);
+    return { gene: gene.id, grade: gene.grade, rotation: 0 };
+  }), level);
   if (!pieces) throw new Error(form.label + " DNA를 보드에 배치할 수 없습니다.");
-  return { version: 3, level, budget: ATTRIBUTE_DNA.price(pieces), pieces };
+  return { version: 4, level, budget: ATTRIBUTE_DNA.price(pieces), pieces };
 }
 
 function combatLabBladeCarapaceDna() { return combatLabCombinationDna("blade-carapace"); }
