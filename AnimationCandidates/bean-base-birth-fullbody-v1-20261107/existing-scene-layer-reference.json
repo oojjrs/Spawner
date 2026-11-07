@@ -1,0 +1,1710 @@
+{
+  "image": "DesignAssets/Animations/AntennaCombosV1/bean/blade-antenna/birth.png",
+  "sourceFacing": "right",
+  "frameSize": 512,
+  "frameHeight": 512,
+  "columns": 8,
+  "frameCount": 117,
+  "durationsMs": [
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    20,
+    20,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    20,
+    20,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    20,
+    20,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    20,
+    20,
+    40,
+    10,
+    20,
+    10,
+    30,
+    10,
+    15,
+    25,
+    10,
+    30,
+    20,
+    20,
+    10,
+    30,
+    30,
+    10,
+    40,
+    10,
+    30,
+    40,
+    40,
+    30,
+    10,
+    40,
+    40,
+    40,
+    40,
+    10,
+    30,
+    30,
+    10,
+    40,
+    20,
+    20,
+    40,
+    10,
+    30,
+    40,
+    40,
+    40,
+    40,
+    10,
+    30,
+    40,
+    40,
+    40,
+    40,
+    40,
+    10,
+    650
+  ],
+  "durationMs": 4500,
+  "pivotX": 430.2299461451247,
+  "pivotY": 446,
+  "referenceLength": 41.09375,
+  "viewSize": 41.09375,
+  "registrationScale": 1,
+  "loop": false,
+  "fullScene": true,
+  "worldTravelIncludedInPixels": true,
+  "sceneIncludesNest": true,
+  "sceneAnchor": "final-body-floor",
+  "sceneLayers": {
+    "version": 1,
+    "layers": [
+      {
+        "role": "environment",
+        "image": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+        "frameSize": 434,
+        "frameHeight": 424,
+        "columns": 8,
+        "frameCount": 107,
+        "samples": [
+          {
+            "frame": 0,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 16,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 17,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 18,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 19,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 20,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 21,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 22,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 23,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 24,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 25,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 26,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 28,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 29,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 30,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 31,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 32,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 33,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 34,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 35,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 37,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 38,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 39,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 40,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 41,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 42,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 43,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 44,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 45,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 46,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 47,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 48,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 49,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 50,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 51,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 52,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 53,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 54,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 55,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 56,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 57,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 58,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 59,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 60,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 61,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 62,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 63,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 64,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 65,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 66,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 67,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 68,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 69,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 70,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 71,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 72,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 73,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 74,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 75,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 76,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 77,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 78,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 79,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 80,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 81,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 82,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 83,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 84,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 85,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 86,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 87,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 88,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 89,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 90,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 91,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 92,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 93,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 94,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 95,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 96,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 97,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 98,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 99,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 100,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 101,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 102,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 103,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 104,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 105,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 105,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 106,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 106,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 106,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 106,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 106,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 106,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              49,
+              29,
+              434,
+              424
+            ]
+          }
+        ]
+      },
+      {
+        "role": "body",
+        "wholeBody": true,
+        "image": "DesignAssets/Animations/BirthSceneLayersV1/feaa7a2068651798837fc5296d08623ad04b81c1572178fba3f50895d8e2dc72.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16,
+        "samples": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          {
+            "frame": 0,
+            "destination": [
+              390,
+              376,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              390,
+              375.621652746626,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              390,
+              372.02194887881063,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              390,
+              370.8652872756387,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              390,
+              370.06265060240963,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              390,
+              368.39815420141974,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              390,
+              367.0214181951773,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              390,
+              361.8620435881769,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              390,
+              358.64815494409623,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              390,
+              356.6259328759106,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              390,
+              356.3325301204819,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              390,
+              355.2888554216868,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              390,
+              352.99277108433733,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              390,
+              352.16556224899597,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              390,
+              349.784437751004,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              390,
+              349.65301204819275,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              390,
+              350.61696582247356,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              390,
+              353.73493975903614,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              390,
+              356.8529136955987,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              390,
+              357.8168674698795,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              390,
+              357.97899416596425,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              390,
+              361.2464706562877,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              390,
+              366.9084337349398,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              390,
+              372.57039681359186,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              390,
+              375.8378733039153,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              390,
+              376,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              390,
+              376,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              390,
+              376,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              390,
+              375.97295303663634,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              390,
+              375.4590607327268,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              390,
+              375.0722891566265,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              390,
+              374.6855175805262,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              390,
+              374.1716252766167,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              390,
+              374.144578313253,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              390,
+              374.2572951807229,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              390,
+              374.66734337349396,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              390,
+              375.21098192771086,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              390,
+              375.7100903614458,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              390,
+              375.98654819277107,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              390,
+              376,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              390,
+              376,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              390,
+              376,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              390,
+              376,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              390,
+              376,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              390,
+              376,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              390,
+              376,
+              80,
+              80
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              390,
+              376,
+              80,
+              80
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

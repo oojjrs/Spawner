@@ -1,0 +1,39 @@
+{
+  "sceneFrames": 116,
+  "sceneDurationMs": 3850,
+  "bodyFrames": 16,
+  "bodyDurationMs": 1260,
+  "bodyFirstVisibleMs": 2590,
+  "bodyFinalNeutralMs": 3610,
+  "bodyLastFrameEqualsActualIdleFrame0_RGBA": true,
+  "bodyLastFrameRGBA_SHA256": "41830b686e34cdffe157b54821e576a7dac1bc588e73ddbe9f38f69155d3eb93",
+  "actualIdleExtractSHA256": "1c1d2fb5343613d4d483f894e3842483de9c83bbbaabd96ed2ebeb2f225ec81c",
+  "actualIdleOriginalFileSHA256": "46a613676ad252c703e4a4391e3482109f11990bd2dd877e879986ae87576cfb",
+  "environmentSHA256": "b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48",
+  "environmentSamplesExactPrior116": true,
+  "allLayerSamplesWithinValidFrameRanges": true,
+  "environmentFrameRange": [
+    0,
+    106
+  ],
+  "bodyFrameRange": [
+    0,
+    15
+  ],
+  "nativeIdlePivot": [
+    315.5,
+    553.268115942029
+  ],
+  "nativeIdleReferenceLength": 247,
+  "sceneFinalPivot": [
+    430,
+    446
+  ],
+  "sceneReferenceLength": 32,
+  "uniformBodySceneScale": 0.12955465587044535,
+  "finalBodyWorldPixelScaleEqualsIdle": true,
+  "finalBodyWorldOriginEqualsIdle": true,
+  "bodyPartsAssembled": false,
+  "runtimeRegistrationChanged": false,
+  "browserPlaybackVerified": false
+}

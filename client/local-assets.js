@@ -1059,5 +1059,7 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Units/Parts/strength-2.png.js",
   "./client/local-assets/Units/spiny-back-beetle.png.js",
   "./client/local-assets/Units/starter-sprout-bean.png.js",
-  "./client/local-assets/evolution-point-symbol.png.js"
+  "./client/local-assets/evolution-point-symbol.png.js",
+  "./client/local-assets/Animations/BirthSceneLayersV1/178ff651e68c5a0fe41c745fdf7014e5751d817815b6a50400fe65f4dbfc5d0b.png.js",
+  "./client/local-assets/Animations/BirthSceneLayersV1/638a6a835b0bc2367c75892b47de7e46b49322130f4e0f58e4450590c31a250c.png.js"
 ]);

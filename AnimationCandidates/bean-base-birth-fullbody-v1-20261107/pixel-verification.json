@@ -1,0 +1,108 @@
+{
+  "PNGAtlasAll116FramesEqualRenderedFrames": true,
+  "WebPAll116TimelineSamplesVisibleRGBAEqualPNG": true,
+  "WebPDurationMs": 3850,
+  "sceneClippedFrames": 0,
+  "bodyAll16RGBAEqualWholePoses": true,
+  "bodyDistinctWholePoses": 16,
+  "bodyBounds": [
+    [
+      222,
+      375,
+      408,
+      554
+    ],
+    [
+      219,
+      359,
+      412,
+      554
+    ],
+    [
+      221,
+      329,
+      409,
+      554
+    ],
+    [
+      225,
+      326,
+      407,
+      554
+    ],
+    [
+      223,
+      324,
+      409,
+      554
+    ],
+    [
+      222,
+      325,
+      409,
+      554
+    ],
+    [
+      214,
+      322,
+      417,
+      554
+    ],
+    [
+      210,
+      317,
+      422,
+      554
+    ],
+    [
+      212,
+      317,
+      418,
+      554
+    ],
+    [
+      216,
+      321,
+      414,
+      554
+    ],
+    [
+      213,
+      336,
+      419,
+      554
+    ],
+    [
+      209,
+      349,
+      422,
+      554
+    ],
+    [
+      218,
+      323,
+      412,
+      554
+    ],
+    [
+      218,
+      319,
+      413,
+      554
+    ],
+    [
+      215,
+      316,
+      415,
+      554
+    ],
+    [
+      215,
+      307,
+      416,
+      554
+    ]
+  ],
+  "bodyFinalExactActualIdleRGBA": true,
+  "bodyFinalRGBA_SHA256": "41830b686e34cdffe157b54821e576a7dac1bc588e73ddbe9f38f69155d3eb93"
+}

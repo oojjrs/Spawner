@@ -1,0 +1,11 @@
+{
+  "runtimeTimelineBoundaries": 116,
+  "runtimeDrawsBothFacings": 232,
+  "wholeBodyDrawCountZeroBefore2590AndExactlyOneAfter": true,
+  "onlyTwoSharedLayerImagesLoaded": true,
+  "bodyFrameRangeValid": true,
+  "idleHandoffAt3850Ms": true,
+  "finalBodyDestinationMatchesActualIdleTo1eMinus10": true,
+  "noRemovedPartRendererInvoked": true,
+  "browserPlaybackVerified": false
+}

@@ -1,0 +1,257 @@
+{
+  "tribe": "bean",
+  "form": "base",
+  "action": "birth-body",
+  "frameSize": 631,
+  "frameHeight": 631,
+  "columns": 8,
+  "frameCount": 16,
+  "durationsMs": [
+    40,
+    25,
+    35,
+    50,
+    30,
+    60,
+    60,
+    70,
+    70,
+    90,
+    90,
+    60,
+    70,
+    70,
+    200,
+    240
+  ],
+  "durationMs": 1260,
+  "appearanceAtMs": 2590,
+  "totalSceneDurationMs": 3850,
+  "loop": false,
+  "pivotX": 315.5,
+  "pivotY": 553.268115942029,
+  "referenceLength": 247,
+  "sourceFacing": "right",
+  "source": "Sources/approved-idle-frame0.png",
+  "sourceRegisteredIdle": "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp",
+  "sourceRegisteredIdleFrame": 0,
+  "sheet": "bean-base-birth-body-v1-sheet.png",
+  "preview": "bean-base-birth-body-v1-preview.webp",
+  "records": [
+    {
+      "index": 0,
+      "sourceRect": [
+        54,
+        105,
+        259,
+        303
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        218,
+        371
+      ]
+    },
+    {
+      "index": 1,
+      "sourceRect": [
+        344,
+        85,
+        555,
+        300
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        216,
+        355
+      ]
+    },
+    {
+      "index": 2,
+      "sourceRect": [
+        638,
+        54,
+        843,
+        299
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        218,
+        326
+      ]
+    },
+    {
+      "index": 3,
+      "sourceRect": [
+        936,
+        34,
+        1136,
+        282
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        222,
+        322
+      ]
+    },
+    {
+      "index": 4,
+      "sourceRect": [
+        55,
+        356,
+        258,
+        607
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        220,
+        321
+      ]
+    },
+    {
+      "index": 5,
+      "sourceRect": [
+        350,
+        348,
+        556,
+        598
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        218,
+        321
+      ]
+    },
+    {
+      "index": 6,
+      "sourceRect": [
+        630,
+        335,
+        853,
+        587
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        210,
+        319
+      ]
+    },
+    {
+      "index": 7,
+      "sourceRect": [
+        921,
+        346,
+        1154,
+        603
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        206,
+        314
+      ]
+    },
+    {
+      "index": 8,
+      "sourceRect": [
+        44,
+        674,
+        270,
+        932
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        208,
+        313
+      ]
+    },
+    {
+      "index": 9,
+      "sourceRect": [
+        341,
+        684,
+        558,
+        939
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        212,
+        317
+      ]
+    },
+    {
+      "index": 10,
+      "sourceRect": [
+        628,
+        701,
+        853,
+        939
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        210,
+        332
+      ]
+    },
+    {
+      "index": 11,
+      "sourceRect": [
+        921,
+        716,
+        1153,
+        940
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        206,
+        346
+      ]
+    },
+    {
+      "index": 12,
+      "sourceRect": [
+        49,
+        1011,
+        263,
+        1263
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        214,
+        320
+      ]
+    },
+    {
+      "index": 13,
+      "sourceRect": [
+        344,
+        1007,
+        557,
+        1264
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        215,
+        315
+      ]
+    },
+    {
+      "index": 14,
+      "sourceRect": [
+        632,
+        1006,
+        850,
+        1265
+      ],
+      "fixedWholeCelScale": 0.9456993011416753,
+      "wholeCelTranslation": [
+        212,
+        313
+      ]
+    },
+    {
+      "index": 15,
+      "exactRegisteredIdleFrame0": true
+    }
+  ],
+  "method": "Sixteen complete imagegen-painted bodies. Only complete-cel cropping, one fixed uniform scale and whole-cel registration. Final body is the exact current registered idle frame0. No body-part extraction, rigging, warping, code leaf rotation, recombination or interpolation."
+}
