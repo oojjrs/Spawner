@@ -1,5 +1,6 @@
 import { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoardPack } from "./dna-board.mjs";
 import { dnaCombatStats } from "./dna-combat-stats.mjs";
+import { tribeDnaStats } from "./tribe-dna-stats.mjs";
 
 export const ATTRIBUTE_DNA = (() => {
   const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};
@@ -31,11 +32,11 @@ export const ATTRIBUTE_DNA = (() => {
   function cost(pieces){return 3+price(pieces);}
   function counts(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+1;return result;}
   function weights(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+(piece.grade===undefined?1:piece.grade);return result;}
-  function stats(pieces){
-    const n=weights(pieces),c=counts(pieces),gather=!!c.gather;
-    return {...dnaCombatStats(c,n),gatherCount:c.gather||0,antennaCount:c.antenna||0,
+  function stats(pieces,tribe){
+    const n=weights(pieces),c=counts(pieces),gather=!!c.gather,profile=tribeDnaStats(tribe);
+    return {...dnaCombatStats(c,n,undefined,tribe),gatherCount:c.gather||0,antennaCount:c.antenna||0,
       capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(2*c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,
-      harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),
+      harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25*profile.base.movement+.04*(n.movement||0)*(profile.growth.movement??1),
       vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,
       loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0};
   }

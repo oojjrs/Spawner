@@ -352,9 +352,11 @@ export function createGame(environment, colony, savedGame) {
       agent.nextDecisionAt = Number.isFinite(agent.nextDecisionAt) ? agent.nextDecisionAt : state.simSeconds;
       for (const key of ["level", "growthActivity", "activeSlots", "perceptionExperienceReady", "experienceContributions", "experienceKillAwarded"]) delete agent[key];
       migrateCombatStats(agent);
-      agent.stats = agent.dna ? dnaUnitStats(agent.dna) : unitStats(attributeCounts(agent.slots, agent.attributeLevels), agent.tribe);
+      const healthRatio = agent.dna && Number.isFinite(agent.stats?.health) && agent.stats.health > 0 ?
+        Math.max(0, Math.min(1, agent.health / agent.stats.health)) : null;
+      agent.stats = agent.dna ? dnaUnitStats(agent.dna, agent.tribe) : unitStats(attributeCounts(agent.slots, agent.attributeLevels), agent.tribe);
       agent.attributes = agent.dna ? { ...dnaAppearance(agent.dna), dnaGather: agent.stats.harvest > 0 } : attributeCounts(agent.slots, agent.attributeLevels);
-      agent.health = Math.min(agent.health, agent.stats.health);
+      agent.health = healthRatio === null ? Math.min(agent.health, agent.stats.health) : agent.stats.health * healthRatio;
       agent.appearanceAttributes = agentAppearanceAttributes(agent);
       agent.stats.resistance = 1;
       agent.shield = 0;
@@ -1495,8 +1497,8 @@ export function createGame(environment, colony, savedGame) {
       const position = birthCell ? availableSpawnCells().find(cell => cell.x === birthCell.x && cell.y === birthCell.y) :
         chooseSpawnPosition(template.id !== null || newborn);
       if (!position) return null;
-      const attributes = template.dna ? { ...dnaAppearance(template.dna), dnaGather: dnaUnitStats(template.dna).harvest > 0 } : attributeCounts(template.slots, template.attributeLevels);
-      const stats = template.dna ? dnaUnitStats(template.dna) : unitStats(attributes, colony.tribe);
+      const attributes = template.dna ? { ...dnaAppearance(template.dna), dnaGather: dnaUnitStats(template.dna, colony.tribe).harvest > 0 } : attributeCounts(template.slots, template.attributeLevels);
+      const stats = template.dna ? dnaUnitStats(template.dna, colony.tribe) : unitStats(attributes, colony.tribe);
       const agent = {
         dna: cloneDna(template.dna),
         tribe: colony.tribe || "bean",

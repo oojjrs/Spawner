@@ -1,5 +1,5 @@
-export function dnaDesignStats(M,pieces) {
-  const stats=M.stats(pieces),base={...M.stats([])},organPieces=pieces.filter(piece=>M.lookup.get(piece.gene)?.category==='organ'),organStats=M.stats(organPieces);
+export function dnaDesignStats(M,pieces,tribe) {
+  const stats=M.stats(pieces,tribe),base={...M.stats([],tribe)},organPieces=pieces.filter(piece=>M.lookup.get(piece.gene)?.category==='organ'),organStats=M.stats(organPieces,tribe);
   for(const key of ['harvestTime','comboSpeed','focus'])if(stats[key]>0)base[key]=organStats[key];
   return {stats,base};
 }
@@ -99,7 +99,7 @@ export function createDnaEditor(container,dnaModel,onChange) {
   const find=selector=>root.querySelector(selector),canvas=find('canvas'),board=find('.dna-board'),context=canvas.getContext('2d');
   const fill=document.createElement('output');fill.className='dna-fill';board.append(fill);
   const view={x:0,y:0,scale:1,width:0,height:0};
-  let pieces=[],level=1,budget=0,readOnly=false,contextSet=false,filter='all',selected=M.catalog[0].id,rotation=0,anchor={q:0,r:0},moving=-1,history=[],future=[],model=M.trace([],1),preview,frame=0,destroyed=false,pointer=null,hover=null,keyboardPlacement=false,offset={q:0,r:0};
+  let tribe, pieces=[],level=1,budget=0,readOnly=false,contextSet=false,filter='all',selected=M.catalog[0].id,rotation=0,anchor={q:0,r:0},moving=-1,history=[],future=[],model=M.trace([],1),preview,frame=0,destroyed=false,pointer=null,hover=null,keyboardPlacement=false,offset={q:0,r:0};
   function button(parent,label,glyph,action){const element=document.createElement('button');element.type='button';element.title=label;element.setAttribute('aria-label',label);element.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+glyph+'"/></svg>';element.onclick=action;parent.append(element);return element;}
   const undoButton=button(find('.dna-tools'),'되돌리기','M9 5 4 10l5 5M4 10h9a6 6 0 0 1 0 12',undo);
   const redoButton=button(find('.dna-tools'),'다시 실행','m15 5 5 5-5 5m5-5h-9a6 6 0 0 0 0 12',redo);
@@ -210,7 +210,7 @@ export function createDnaEditor(container,dnaModel,onChange) {
   const observer=new ResizeObserver(resize);observer.observe(board);state();resize();
   return {
     load(design,locked){const value=M.validate(design);if(!value)return false;pieces=value.pieces.map(M.clonePiece);if(!contextSet){level=value.level;budget=value.budget;}readOnly=locked===true;history=pieces.map((_,index)=>pieces.slice(0,index).map(M.clonePiece));future=[];moving=-1;hover=null;keyboardPlacement=false;anchor={q:0,r:0};offset={q:0,r:0};selected=M.catalog.find(gene=>gene.grade<=level&&!(gene.category==='organ'&&pieces.some(piece=>piece.gene===gene.id)))?.id||M.catalog[0].id;rotation=0;state();fit();return true;},
-    context(nextLevel,nextBudget,locked){const previousLevel=level,previousBudget=budget,previousReadOnly=readOnly;if(Number.isInteger(nextLevel)&&nextLevel>=1&&nextLevel<=4)level=nextLevel;if(Number.isFinite(nextBudget)&&nextBudget>=0)budget=Math.floor(nextBudget);contextSet=true;readOnly=locked===true;if(previousLevel===level&&previousBudget===budget&&previousReadOnly===readOnly)return;if(readOnly||M.lookup.get(selected).grade>level){moving=-1;selected=M.catalog[0].id;}state();if(previousLevel!==level)fit();},
+    context(nextLevel,nextBudget,locked,nextTribe){const previousLevel=level,previousBudget=budget,previousReadOnly=readOnly,previousTribe=tribe;tribe=nextTribe;if(Number.isInteger(nextLevel)&&nextLevel>=1&&nextLevel<=4)level=nextLevel;if(Number.isFinite(nextBudget)&&nextBudget>=0)budget=Math.floor(nextBudget);contextSet=true;readOnly=locked===true;if(previousLevel===level&&previousBudget===budget&&previousReadOnly===readOnly&&previousTribe===tribe)return;if(readOnly||M.lookup.get(selected).grade>level){moving=-1;selected=M.catalog[0].id;}state();if(previousLevel!==level)fit();},
     getDesign,clearHistory,fit,zoom,
     destroy(){destroyed=true;observer.disconnect();if(frame)cancelAnimationFrame(frame);root.remove();}
   };

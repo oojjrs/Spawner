@@ -33,8 +33,8 @@ export function dnaAppearance(dna) {
   return attributes;
 }
 
-export function dnaUnitStats(dna) {
-  const stats = ATTRIBUTE_DNA.stats(dna.pieces);
+export function dnaUnitStats(dna, tribe) {
+  const stats = ATTRIBUTE_DNA.stats(dna.pieces, tribe);
   return { ...stats, dna: stats, health: stats.health, speed: stats.movement, loadedSpeed: stats.movement * stats.loadSpeed / 100,
     capacity: stats.capacity, vision: stats.vision, attack: stats.power, attackPower: stats.power, attackSpeed: stats.speed,
     defense: stats.armor, attackBonus: 0, armorPenetration: stats.penetration, damageReduction: 0,

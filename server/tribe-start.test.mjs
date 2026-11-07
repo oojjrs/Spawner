@@ -87,7 +87,7 @@ test("초반 둥지 성장은 반드시 채집이 필요하고 이후 비용은 
 test("시작 개체는 특별 능력치 없는 기본 채집 DNA이며 복제·저장에도 보존된다",()=>{
   for(const tribe of ["bean","spore","pebble","spring"]){
     const {game}=fixture(tribe);
-    const dna=startingWorkerDna(tribe),stats=dnaUnitStats(dna);
+    const dna=startingWorkerDna(tribe),stats=dnaUnitStats(dna,tribe);
     const [template]=game.snapshot().templates;
     assert.equal(game.snapshot().templates.length,1);
     assert.equal(template.id,1);
@@ -142,4 +142,24 @@ test("이미 지급된 기존50P 저장을 새 시작값30P로 강제 변경하�
  const old=JSON.parse(game.save());old.state.evolutionPoints=50;old.state.startingPointsGranted=true;
  const restored=createGame(environment,colony,JSON.stringify(old));
  assert.equal(restored.snapshot().evolutionPoints,50);
+});
+
+test("종족 재조정 이전 저장은 체력 비율과 사망을 보존하며 재복원으로 회복되지 않는다", () => {
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) {
+    const { game, environment, colony } = fixture(tribe);
+    const saved = JSON.parse(game.save());
+    const ratios = [1, .5, .2, 0];
+    for (const [index, agent] of saved.state.agents.entries()) {
+      agent.stats = dnaUnitStats(agent.dna);
+      agent.health = agent.stats.health * ratios[index];
+    }
+    const restored = createGame(environment, colony, JSON.stringify(saved));
+    for (let pass = 0; pass < 2; pass++) {
+      for (const [index, agent] of restored.agents.entries()) {
+        assert.ok(Math.abs(agent.health / agent.stats.health - ratios[index]) < 1e-9, tribe + ":" + index);
+        assert.deepEqual(agent.stats.dna, dnaUnitStats(agent.dna, tribe).dna);
+      }
+      restored.restore(restored.save());
+    }
+  }
 });

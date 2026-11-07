@@ -85,7 +85,38 @@ function dnaBoardPack(pieces, level, radius) {
 
 return { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoardPack };
 })();
+modules["server/tribe-dna-stats.mjs"] = (() => {
+const TRIBE_DNA_STATS = Object.freeze(Object.fromEntries(Object.entries({
+  bean: {
+    base: { health: 1, armor: 0, meleePower: 1, rangedPower: 1, meleeSpeed: 1, rangedSpeed: 1, movement: 1 },
+    growth: {}
+  },
+  pebble: {
+    base: { health: 1.2, armor: 6, meleePower: .85, rangedPower: .85, meleeSpeed: .9, rangedSpeed: .9, movement: .9 },
+    growth: { health: 1.2, carapace: 1.6, armor: 1.6, power: .85, rangedPower: .85, speed: .9, rangedSpeed: .9,
+      block: 1.2, tenacity: 1.2, reduction: 1.15, reflection: 1.2, regeneration: 1.2, evasion: .8, movement: .85 }
+  },
+  spore: {
+    base: { health: .9, armor: 0, meleePower: .85, rangedPower: 1.15, meleeSpeed: .95, rangedSpeed: 1.05, movement: 1 },
+    growth: { health: .85, carapace: .85, armor: .85, power: .8, rangedPower: 1.25, speed: .9, rangedSpeed: 1.15,
+      accuracy: 1.2, penetration: 1.1, critical: 1.1, evasion: .9, block: .85, regeneration: .9, movement: .95 }
+  },
+  spring: {
+    base: { health: .95, armor: 0, meleePower: 1.1, rangedPower: .85, meleeSpeed: 1.05, rangedSpeed: .95, movement: 1.1 },
+    growth: { health: .95, carapace: .8, armor: .8, power: 1.2, rangedPower: .8, speed: 1.15, rangedSpeed: .9,
+      evasion: 1.2, parry: 1.1, counter: 1.15, lifesteal: 1.15, regeneration: 1.05, focus: 1.1, movement: 1.15 }
+  }
+}).map(([tribe, profile]) => [tribe, Object.freeze({ base: Object.freeze(profile.base), growth: Object.freeze(profile.growth) })])));
+
+function tribeDnaStats(tribe) {
+  return Object.hasOwn(TRIBE_DNA_STATS, tribe) ? TRIBE_DNA_STATS[tribe] : TRIBE_DNA_STATS.bean;
+}
+
+return { TRIBE_DNA_STATS, tribeDnaStats };
+})();
 modules["server/dna-combat-stats.mjs"] = (() => {
+const { tribeDnaStats } = modules["server/tribe-dna-stats.mjs"];
+
 const DNA_COMBAT_RULES = Object.freeze({
   basicPower: 1,
   powerCurve: "linear", powerBase: 2, powerGain: 2, powerKnee: 2,
@@ -109,23 +140,24 @@ const DNA_COMBAT_RULES = Object.freeze({
   drainCap: .2, drainKnee: 20, jitter: .2
 });
 
-function dnaCombatStats(counts, weights, inputRules) {
-  const rules = inputRules || DNA_COMBAT_RULES, n = weights, c = counts;
+function dnaCombatStats(counts, weights, inputRules, tribe) {
+  const rules = inputRules || DNA_COMBAT_RULES, profile = tribeDnaStats(tribe), base = profile.base, c = counts;
+  const n = Object.fromEntries(Object.entries(weights).map(([key, value]) => [key, value * (profile.growth[key] ?? 1)]));
   const capped = (count, cap, knee) => count ? Math.min(cap, cap * count / (knee || 1)) : 0;
   const powerGain = (count, gain, knee) => rules.powerCurve === "log" ?
     gain * Math.log1p(count / knee) / Math.log1p(1 / knee) : gain * count;
   const melee = !!c.blade, ranged = !!c.secretion, attack = melee || ranged, defensiveMelee = !attack;
   // A basic body can defend itself without gaining an offensive organ or its upgrades.
-  const meleePower = melee ? rules.powerBase * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : defensiveMelee ? rules.basicPower : 0;
-  const rangedPower = ranged ? rules.rangedPowerBase * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
-  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : defensiveMelee ? Math.min(rules.maxActionRate, rules.attackRateBase) : 0;
-  const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
+  const meleePower = melee ? rules.powerBase * base.meleePower * c.blade + powerGain(n.power || 0, rules.powerGain, rules.powerKnee) : defensiveMelee ? rules.basicPower : 0;
+  const rangedPower = ranged ? rules.rangedPowerBase * base.rangedPower * c.secretion + powerGain(n.rangedPower || 0, rules.rangedPowerGain, rules.rangedPowerKnee) : 0;
+  const meleeSpeed = melee ? Math.min(rules.maxActionRate, rules.attackRateBase * base.meleeSpeed * (1 + capped(n.speed || 0, rules.hasteCap, rules.hasteKnee))) : defensiveMelee ? Math.min(rules.maxActionRate, rules.attackRateBase) : 0;
+  const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * base.rangedSpeed * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
   return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0,
     melee, ranged, defensiveMelee, meleePower, meleeSpeed, rangedPower, rangedSpeed,
     ...(rules.recovery ? { recovery: rules.recovery } : {}),
-    health: rules.healthBase + rules.healthPerPoint * (n.health || 0),
+    health: rules.healthBase * base.health + rules.healthPerPoint * (n.health || 0),
     power: melee || defensiveMelee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 1, speed: melee || defensiveMelee ? meleeSpeed : rangedSpeed,
-    armor: rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),
+    armor: base.armor + rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),
     parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),
     block: 100 * capped(n.block || 0, rules.blockCap, rules.blockKnee),
     evasion: 100 * capped((n.evasion || 0) + (n.legs || 0), rules.dodgeCap, rules.dodgeKnee),
@@ -154,6 +186,7 @@ return { DNA_COMBAT_RULES, dnaCombatStats };
 modules["server/dna.mjs"] = (() => {
 const { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoardPack } = modules["server/dna-board.mjs"];
 const { dnaCombatStats } = modules["server/dna-combat-stats.mjs"];
+const { tribeDnaStats } = modules["server/tribe-dna-stats.mjs"];
 
 const ATTRIBUTE_DNA = (() => {
   const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};
@@ -185,11 +218,11 @@ const ATTRIBUTE_DNA = (() => {
   function cost(pieces){return 3+price(pieces);}
   function counts(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+1;return result;}
   function weights(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+(piece.grade===undefined?1:piece.grade);return result;}
-  function stats(pieces){
-    const n=weights(pieces),c=counts(pieces),gather=!!c.gather;
-    return {...dnaCombatStats(c,n),gatherCount:c.gather||0,antennaCount:c.antenna||0,
+  function stats(pieces,tribe){
+    const n=weights(pieces),c=counts(pieces),gather=!!c.gather,profile=tribeDnaStats(tribe);
+    return {...dnaCombatStats(c,n,undefined,tribe),gatherCount:c.gather||0,antennaCount:c.antenna||0,
       capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?Math.min(2*c.gather+(n.harvest||0),c.gather+(n.capacity||0)):0,
-      harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25+.04*(n.movement||0),
+      harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25*profile.base.movement+.04*(n.movement||0)*(profile.growth.movement??1),
       vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,
       loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0};
   }
@@ -229,11 +262,12 @@ const ATTRIBUTE_DNA = (() => {
 
   return {genes,catalog,lookup,trace,boardCells,pieceCells:dnaPieceCells,pack,piecePrice,price,cost,counts,weights,stats,validate,clonePiece,key,boardRadius,inside};
 })();
+
 return { ATTRIBUTE_DNA };
 })();
 modules["client/dna-editor.mjs"] = (() => {
-function dnaDesignStats(M,pieces) {
-  const stats=M.stats(pieces),base={...M.stats([])},organPieces=pieces.filter(piece=>M.lookup.get(piece.gene)?.category==='organ'),organStats=M.stats(organPieces);
+function dnaDesignStats(M,pieces,tribe) {
+  const stats=M.stats(pieces,tribe),base={...M.stats([],tribe)},organPieces=pieces.filter(piece=>M.lookup.get(piece.gene)?.category==='organ'),organStats=M.stats(organPieces,tribe);
   for(const key of ['harvestTime','comboSpeed','focus'])if(stats[key]>0)base[key]=organStats[key];
   return {stats,base};
 }
@@ -333,7 +367,7 @@ function createDnaEditor(container,dnaModel,onChange) {
   const find=selector=>root.querySelector(selector),canvas=find('canvas'),board=find('.dna-board'),context=canvas.getContext('2d');
   const fill=document.createElement('output');fill.className='dna-fill';board.append(fill);
   const view={x:0,y:0,scale:1,width:0,height:0};
-  let pieces=[],level=1,budget=0,readOnly=false,contextSet=false,filter='all',selected=M.catalog[0].id,rotation=0,anchor={q:0,r:0},moving=-1,history=[],future=[],model=M.trace([],1),preview,frame=0,destroyed=false,pointer=null,hover=null,keyboardPlacement=false,offset={q:0,r:0};
+  let tribe, pieces=[],level=1,budget=0,readOnly=false,contextSet=false,filter='all',selected=M.catalog[0].id,rotation=0,anchor={q:0,r:0},moving=-1,history=[],future=[],model=M.trace([],1),preview,frame=0,destroyed=false,pointer=null,hover=null,keyboardPlacement=false,offset={q:0,r:0};
   function button(parent,label,glyph,action){const element=document.createElement('button');element.type='button';element.title=label;element.setAttribute('aria-label',label);element.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+glyph+'"/></svg>';element.onclick=action;parent.append(element);return element;}
   const undoButton=button(find('.dna-tools'),'되돌리기','M9 5 4 10l5 5M4 10h9a6 6 0 0 1 0 12',undo);
   const redoButton=button(find('.dna-tools'),'다시 실행','m15 5 5 5-5 5m5-5h-9a6 6 0 0 0 0 12',redo);
@@ -444,7 +478,7 @@ function createDnaEditor(container,dnaModel,onChange) {
   const observer=new ResizeObserver(resize);observer.observe(board);state();resize();
   return {
     load(design,locked){const value=M.validate(design);if(!value)return false;pieces=value.pieces.map(M.clonePiece);if(!contextSet){level=value.level;budget=value.budget;}readOnly=locked===true;history=pieces.map((_,index)=>pieces.slice(0,index).map(M.clonePiece));future=[];moving=-1;hover=null;keyboardPlacement=false;anchor={q:0,r:0};offset={q:0,r:0};selected=M.catalog.find(gene=>gene.grade<=level&&!(gene.category==='organ'&&pieces.some(piece=>piece.gene===gene.id)))?.id||M.catalog[0].id;rotation=0;state();fit();return true;},
-    context(nextLevel,nextBudget,locked){const previousLevel=level,previousBudget=budget,previousReadOnly=readOnly;if(Number.isInteger(nextLevel)&&nextLevel>=1&&nextLevel<=4)level=nextLevel;if(Number.isFinite(nextBudget)&&nextBudget>=0)budget=Math.floor(nextBudget);contextSet=true;readOnly=locked===true;if(previousLevel===level&&previousBudget===budget&&previousReadOnly===readOnly)return;if(readOnly||M.lookup.get(selected).grade>level){moving=-1;selected=M.catalog[0].id;}state();if(previousLevel!==level)fit();},
+    context(nextLevel,nextBudget,locked,nextTribe){const previousLevel=level,previousBudget=budget,previousReadOnly=readOnly,previousTribe=tribe;tribe=nextTribe;if(Number.isInteger(nextLevel)&&nextLevel>=1&&nextLevel<=4)level=nextLevel;if(Number.isFinite(nextBudget)&&nextBudget>=0)budget=Math.floor(nextBudget);contextSet=true;readOnly=locked===true;if(previousLevel===level&&previousBudget===budget&&previousReadOnly===readOnly&&previousTribe===tribe)return;if(readOnly||M.lookup.get(selected).grade>level){moving=-1;selected=M.catalog[0].id;}state();if(previousLevel!==level)fit();},
     getDesign,clearHistory,fit,zoom,
     destroy(){destroyed=true;observer.disconnect();if(frame)cancelAnimationFrame(frame);root.remove();}
   };

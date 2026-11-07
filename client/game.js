@@ -6872,7 +6872,7 @@
 
     function renderAgentDnaHelp(container, agent, composition) {
       const list = composition.querySelector(".unit-dna-list").cloneNode(true);
-      const stats = agent.stats?.dna || Spawner.ATTRIBUTE_DNA.stats(agent.dna.pieces);
+      const stats = agent.stats?.dna || Spawner.ATTRIBUTE_DNA.stats(agent.dna.pieces, agent.tribe);
       const values = document.createElement("dl");
       values.className = "unit-dna-stats";
       Spawner.renderDnaDesignStats(values, stats, stats, false);
@@ -6883,7 +6883,7 @@
       if (harvest) harvest.textContent = Number((stats.harvestTime > 0 ? stats.harvest / stats.harvestTime : 0).toFixed(3)) + "개/초";
       const capacity = values.querySelector('dt[data-stat="capacity"]');
       if (capacity) capacity.textContent = "운반량";
-      const { base } = Spawner.dnaDesignStats(Spawner.ATTRIBUTE_DNA, agent.dna.pieces);
+      const { base } = Spawner.dnaDesignStats(Spawner.ATTRIBUTE_DNA, agent.dna.pieces, agent.tribe);
       for (const row of values.querySelectorAll("[data-stat]")) {
         const key = row.dataset.stat;
         const difference = Number((Number(stats[key]) - Number(base[key])).toFixed(3));
@@ -7449,12 +7449,12 @@
     }
     function updateDnaDesign() {
       combatPrimaryRow.hidden = true;
-      designDnaEditor.context(state.nestLevel, state.evolutionPoints, unitDraft.readOnly || !!state.ending);
+      designDnaEditor.context(state.nestLevel, state.evolutionPoints, unitDraft.readOnly || !!state.ending, unitDraft.tribe);
       unitDraft.dna.level = state.nestLevel;
       unitDraft.dna.budget = state.evolutionPoints;
       if (!unitDraft.nameEdited && !unitDraft.readOnly) designName.value = Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       document.getElementById("design-preview-image").style.setProperty("--dna-scale", String(1 + unitDraft.dna.pieces.length * .01));
-      const { stats, base } = Spawner.dnaDesignStats(Spawner.ATTRIBUTE_DNA, unitDraft.dna.pieces);
+      const { stats, base } = Spawner.dnaDesignStats(Spawner.ATTRIBUTE_DNA, unitDraft.dna.pieces, unitDraft.tribe);
       const counts = Spawner.dnaAppearance(unitDraft.dna);
       prepareAgentTemplate(unitDraft).catch(() => {});
       document.getElementById("design-preview-image").src = agentImageSource({ tribe: unitDraft.tribe, dna: unitDraft.dna, attributes: counts, carrying: 0 });
@@ -8044,7 +8044,7 @@
       designDnaHost.hidden = !unitDraft.dna;
       document.getElementById("design-preview-image").style.removeProperty("--dna-scale");
       if (unitDraft.dna) {
-        designDnaEditor.context(state.nestLevel, state.evolutionPoints, unitDraft.readOnly || !!state.ending);
+        designDnaEditor.context(state.nestLevel, state.evolutionPoints, unitDraft.readOnly || !!state.ending, unitDraft.tribe);
         designDnaEditor.load(unitDraft.dna, unitDraft.readOnly || !!state.ending);
       }
       designSave.hidden = !!readOnly;
