@@ -205,7 +205,7 @@ export function createDnaEditor(container,dnaModel,onChange,onAction) {
       if(gene.grade>level||(filter!=='all'&&gene.group!==filter))continue;
       const item=document.createElement('button');item.type='button';item.className='dna-gene';const blocked=organBlocked(gene.id),fits=geneFits(gene),available=!readOnly&&!blocked&&fits;
       const availability=readOnly?'읽기 전용':blocked?'이미 배치됨':!fits?'공간 부족':'배치 가능';
-      item.setAttribute('aria-label',names[gene.id]+' · '+availability);item.title=dnaGeneTooltip(M,pieces,gene.id,tribe,names)+(available?'':'\n'+availability);item.dataset.gene=gene.id;item.dataset.category=gene.category;item.disabled=false;item.setAttribute('aria-disabled',String(!available));item.dataset.blocked=String(blocked||!fits);item.dataset.availability=available?'available':'blocked';item.setAttribute('aria-pressed',String(selected===gene.id));item.style.setProperty('--dna-gene-color',gene.fillColor);
+      item.setAttribute('aria-label',names[gene.id]+' · '+availability);item.title=dnaGeneTooltip(M,pieces,gene.id,tribe,names)+(available?'':'\n'+availability);item.dataset.gene=gene.id;item.dataset.category=gene.category;if(gene.category==='organ')item.dataset.placed=String(pieces.some(piece=>piece.gene===gene.id));item.disabled=false;item.setAttribute('aria-disabled',String(!available));item.dataset.blocked=String(blocked||!fits);item.dataset.availability=available?'available':'blocked';item.setAttribute('aria-pressed',String(selected===gene.id));item.style.setProperty('--dna-gene-color',gene.fillColor);
       const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 44 38');svg.innerHTML=dnaGeneShapeSvg(M,gene);
       const name=document.createElement('strong');name.textContent=names[gene.id];const cost=document.createElement('span');cost.className='dna-gene-cost';cost.textContent=String(M.piecePrice({gene:gene.id,grade:gene.grade}));const badge=document.createElement('small');badge.className='dna-gene-availability';badge.textContent=(available?'✓ ':'× ')+availability;item.append(svg,name,cost,badge);
       item.addEventListener('pointerenter',()=>{if(blocked){warningGene=gene.id;renderControls();}});item.addEventListener('pointerleave',()=>{warningGene=null;renderControls();});item.addEventListener('focus',()=>{if(blocked){warningGene=gene.id;renderControls();}});item.addEventListener('blur',()=>{warningGene=null;renderControls();});
@@ -228,11 +228,11 @@ export function createDnaEditor(container,dnaModel,onChange,onAction) {
   function requestDraw(){if(!frame&&!destroyed)frame=requestAnimationFrame(()=>{frame=0;if(!destroyed)draw();});}
   function screen(point){const p=dnaWorld(point);return {x:p.x*view.scale+view.x,y:p.y*view.scale+view.y};}
   function polygon(points){context.beginPath();points.forEach((p,index)=>index?context.lineTo(p.x,p.y):context.moveTo(p.x,p.y));context.closePath();}
-  function drawPiece(piece,alpha,color,highlight){
-    const cells=M.pieceCells(piece);context.save();
-    context.globalAlpha=alpha*.12;context.fillStyle=color;
+  function drawPiece(piece,alpha,color,highlight,placement){
+    const cells=M.pieceCells(piece),organ=!placement&&M.lookup.get(piece.gene).category==='organ';context.save();
+    context.globalAlpha=alpha*(organ?.32:.12);context.fillStyle=color;
     for(const cell of cells){polygon(dnaHex(screen(cell),32*view.scale));context.fill();}
-    context.globalAlpha=alpha*(highlight?.8:.32);context.beginPath();for(const [a,b] of dnaOutline(cells)){context.moveTo(a.x*view.scale+view.x,a.y*view.scale+view.y);context.lineTo(b.x*view.scale+view.x,b.y*view.scale+view.y);}context.strokeStyle=color;context.lineWidth=highlight?2:1;context.stroke();
+    context.globalAlpha=alpha*(organ?.95:highlight?.8:.32);context.beginPath();for(const [a,b] of dnaOutline(cells)){context.moveTo(a.x*view.scale+view.x,a.y*view.scale+view.y);context.lineTo(b.x*view.scale+view.x,b.y*view.scale+view.y);}context.strokeStyle=organ?'#f1d58c':color;context.lineWidth=organ?3:highlight?2:1;context.stroke();context.strokeStyle=color;
     function strand(points,width,opacity){context.globalAlpha=alpha*opacity;context.beginPath();points.forEach((p,index)=>index?context.lineTo(p.x*view.scale+view.x,p.y*view.scale+view.y):context.moveTo(p.x*view.scale+view.x,p.y*view.scale+view.y));context.lineWidth=width*view.scale;context.stroke();}
     context.lineCap='round';context.lineJoin='round';
     for(const chain of dnaChains(cells)){const strands=dnaStrands(chain);for(const rung of strands.rungs)strand(rung,1.7,.65);strand(strands.two,2.8,.65);strand(strands.one,7,.12);strand(strands.one,3.5,1);}
@@ -242,8 +242,8 @@ export function createDnaEditor(container,dnaModel,onChange,onAction) {
     context.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);context.clearRect(0,0,view.width,view.height);
     for(const cell of M.boardCells(level)){polygon(dnaHex(screen(cell),32*view.scale));context.fillStyle='#102922';context.fill();context.strokeStyle='#3a574c';context.lineWidth=1;context.stroke();}
     const hovered=hover?model.occupied.get(M.key(hover))?.index:-1;
-    for(let index=0;index<pieces.length;index++)drawPiece(pieces[index],index===moving?.18:.88,M.lookup.get(pieces[index].gene).fillColor,index===hovered&&moving<0);
-    if(!readOnly&&preview.piece&&(hover||moving>=0||keyboardPlacement)&&(moving>=0||offset||hovered===undefined||hovered===-1))drawPiece(preview.piece,.9,preview.valid?DNA_PLACEMENT_COLORS.available:DNA_PLACEMENT_COLORS.blocked,true);
+    for(let index=0;index<pieces.length;index++)drawPiece(pieces[index],index===moving?.18:.88,M.lookup.get(pieces[index].gene).fillColor,index===hovered&&moving<0,false);
+    if(!readOnly&&preview.piece&&(hover||moving>=0||keyboardPlacement)&&(moving>=0||offset||hovered===undefined||hovered===-1))drawPiece(preview.piece,.9,preview.valid?DNA_PLACEMENT_COLORS.available:DNA_PLACEMENT_COLORS.blocked,true,true);
   }
   function commit(){if(readOnly||!selected)return;const proposed=candidate();if(!proposed.valid){keyboardPlacement=!hover;preview=proposed;renderControls();requestDraw();return;}if(moving>=0&&JSON.stringify(proposed.pieces[moving])===JSON.stringify(pieces[moving])){cancel();return;}checkpoint();pieces=proposed.pieces;moving=-1;offset=null;if(M.lookup.get(selected).category==='organ'){selected=null;rotation=0;keyboardPlacement=false;}changed('place');}
   function cancel(){moving=-1;pointer=null;selected=null;rotation=0;hover=null;keyboardPlacement=false;offset=null;state();}

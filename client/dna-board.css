@@ -38,6 +38,8 @@
 .dna-editor .dna-gene[data-availability="available"]{background:#183344;border-color:#5faedb;color:#e5f3ff}
 .dna-editor .dna-gene[data-availability="blocked"]{background:#252d32;border-color:#66717b;border-style:dashed;color:#b5bfc8;opacity:1;cursor:default}
 .dna-editor .dna-gene[aria-pressed="true"]{box-shadow:inset 0 0 0 2px #9bdaff;border-color:#9bdaff}
+.dna-editor .dna-gene[data-category="organ"][data-placed="false"]{background:#44381f;border-color:#dfbf70;box-shadow:inset 3px 0 0 #f1d58c;color:#fff1c7}
+.dna-editor .dna-gene[data-category="organ"][data-placed="false"][aria-pressed="true"]{border-color:#9bdaff;box-shadow:inset 3px 0 0 #f1d58c,inset 0 0 0 2px #9bdaff}
 .dna-editor .dna-gene:focus-visible{outline:2px solid #c6eaff;outline-offset:2px}
 .dna-editor .dna-gene-availability{grid-column:2 / -1;color:#9bdaff;font-size:10px;line-height:1.2}
 .dna-editor .dna-gene[data-availability="blocked"] .dna-gene-availability{color:#bdc7cf}
