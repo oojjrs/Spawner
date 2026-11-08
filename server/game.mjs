@@ -1,6 +1,6 @@
 import { canRetreat } from "./survival.mjs";
 import { AGENT_DEATH_WARNING, agentRemainingLifespan } from "./lifespan.mjs";
-import { DNA_STARTER_DESIGNS } from "../client/dna-starter-designs.mjs";
+import { nestDefenderDesign, isNestDefender } from "./nest-defender.mjs";
 import { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, dnaCanSearch, basicGathererDna } from "./dna-unit.mjs";
 import { CONQUEST_PACING, militaryAgent } from "./conquest-pacing.mjs";
 import { isTemplateNameEdited, suggestTemplateName } from "./unit-template-names.mjs";
@@ -1232,7 +1232,8 @@ export function createGame(environment, colony, savedGame) {
         decisionTargets = state.rivals.filter(enemy => !enemy.hidden && visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)).concat(visibleBurrows(), visibleNests());
         decisionTargetRevision = environment.targetRevision || 0;
       }
-      return decisionTargets.filter(enemy => enemy.health > 0 && dnaCanSearch(agent, enemy, state.simSeconds));
+      return decisionTargets.filter(enemy => enemy.health > 0 && (dnaCanSearch(agent, enemy, state.simSeconds) ||
+        isNestDefender(agent) && colonyDefenseTarget(agent, enemy, state.agents, defenseStructures())));
     }
 
     function defenseStructures() {
@@ -1505,6 +1506,7 @@ export function createGame(environment, colony, savedGame) {
         templateId: template.id,
         templateName: template.name,
         templateRevision: template.revision,
+        defenseMode: template.defenseMode === "nest" ? "nest" : null,
         productionRole: template.productionRole || null,
         combatPrimary: combatPrimary(template),
         slots: [...template.slots],
@@ -1902,15 +1904,12 @@ export function createGame(environment, colony, savedGame) {
     }
 
     function addNestStarterDesigns() {
-      if (state.nestLevel !== 2 || environment.hostId && colony.ownerId !== environment.hostId) return;
-      for (const starter of DNA_STARTER_DESIGNS) {
-        if (starter.design.level !== 2 || state.templates.length >= 100) continue;
-        const dna = cloneDna(starter.design);
-        if (state.templates.some(template => JSON.stringify(template.dna?.pieces) === JSON.stringify(dna.pieces))) continue;
-        let name = starter.name, suffix = 2;
-        while (state.templates.some(template => template.name === name)) name = starter.name + " " + suffix++;
-        command({ type: "design", templateId: null, name, dna, birth: false });
-      }
+      if (state.nestLevel !== 2 || environment.hostId && colony.ownerId !== environment.hostId ||
+          state.templates.length >= 100 || state.templates.some(template => template.defenseMode === "nest")) return;
+      const starter = nestDefenderDesign(colony.tribe);
+      let name = starter.name, suffix = 2;
+      while (state.templates.some(template => template.name === name)) name = starter.name + " " + suffix++;
+      command({ type: "design", templateId: null, name, dna: starter.design, defenseMode: "nest", birth: false });
     }
 
     function command(action) {
@@ -1978,6 +1977,7 @@ export function createGame(environment, colony, savedGame) {
         for (const key of action.slots) if (!unlockedAttributeLevels[key]) unlockedAttributeLevels[key] = 1;
         const primary = combatPrimary({ dna, slots: action.slots, combatPrimary: action.combatPrimary === undefined ? previous?.combatPrimary : action.combatPrimary });
         const template = { id: previous ? previous.id : state.nextTemplateId, name, dna: cloneDna(dna), combatPrimary: primary,
+          defenseMode: (action.defenseMode ?? previous?.defenseMode) === "nest" ? "nest" : null,
           nameEdited: typeof action.nameEdited === "boolean" ? action.nameEdited :
             isTemplateNameEdited(previous?.name === name ? previous : { name, slots: action.slots }),
           slots: [...action.slots], attributeLevels: Object.fromEntries(action.slots.map(key => [key, unlockedAttributeLevels[key]])),
@@ -1996,7 +1996,8 @@ export function createGame(environment, colony, savedGame) {
           const agent = state.agents.find(candidate => candidate.id === action.agentId && candidate.health > 0);
           if (!agent) throw new Error("복제할 생명체를 찾을 수 없습니다.");
           const attributeLevels = migrateAttributeLevels(agent.slots, agent.attributeLevels, state.nestLevel);
-          const previous = state.templates.find(template => JSON.stringify(template.dna || null) === JSON.stringify(agent.dna || null) && combatPrimary(template) === combatPrimary(agent) && template.slots.length === agent.slots.length &&
+          const previous = state.templates.find(template => JSON.stringify(template.dna || null) === JSON.stringify(agent.dna || null) && (template.defenseMode === "nest") === (agent.defenseMode === "nest") &&
+            combatPrimary(template) === combatPrimary(agent) && template.slots.length === agent.slots.length &&
             agent.slots.every(key => template.slots.includes(key) && (template.attributeLevels[key] || 1) === attributeLevels[key]));
           if (!previous && state.templates.length >= 100) throw new Error("설계는 최대 100개까지 저장할 수 있습니다.");
           let name = agent.templateName, suffix = 2;
@@ -2005,7 +2006,7 @@ export function createGame(environment, colony, savedGame) {
             name = agent.templateName.slice(0, 24 - ending.length) + ending;
           }
           const template = previous || { id: state.nextTemplateId, name, dna: cloneDna(agent.dna), slots: [...agent.slots], attributeLevels, combatPrimary: combatPrimary(agent),
-            unlockedAttributeLevels: { ...attributeLevels }, revision: 1, productionRole: agent.productionRole || null };
+            unlockedAttributeLevels: { ...attributeLevels }, revision: 1, productionRole: agent.productionRole || null, defenseMode: agent.defenseMode === "nest" ? "nest" : null };
           const agentId = birth({ ...template, slots: [...agent.slots] }, true);
           if (!previous) {
             state.templates.push(template);

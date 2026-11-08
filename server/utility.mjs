@@ -1,3 +1,4 @@
+import { isNestDefender } from "./nest-defender.mjs";
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
 import { dnaCanHunt, dnaCanSearch } from "./dna-unit.mjs";
 import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
@@ -273,11 +274,14 @@ export function createUtilityAI(context) {
 
   function evaluate(agent, retain, immediate) {
     const supply = colonySupply(state, context.tribe);
+    const guard = isNestDefender(agent);
     const gathers = !agent.dna || agent.stats.dna.harvest > 0;
     const attacks = combatDisposition(agent) === "aggressive";
     const warrior = !canRetreat(agent);
     const hunts = attacks;
-    const visible = enemies().filter(enemy => enemy.health > 0 && dnaCanSearch(agent, enemy, state.simSeconds));
+    const visible = enemies().filter(enemy => enemy.health > 0 &&
+      (dnaCanSearch(agent, enemy, state.simSeconds) || guard &&
+        colonyDefenseTarget(agent, enemy, state.agents, context.defenseStructures?.())));
     const safety = assess(agent, visible);
     const defenseTargets = visible.filter(enemy => colonyDefenseTarget(agent, enemy, state.agents, context.defenseStructures?.()));
     const suspendedWork = agent.suspendedWork || (retain && agent.utility?.resuming ? agent.utility : null);
@@ -394,7 +398,7 @@ export function createUtilityAI(context) {
     const knownFoods = immediate ? [] : foodWithinRange.filter(food => food.amount > 0 && isFood(resourceType(food)) && canHarvest(food, agent));
     const assignedForagers = supply.urgency > 0 ? colonyForagers(state, knownFoods, deliveryCells()) : new Set();
     const collecting = candidates.some(candidate => candidate.action === "collect" && candidate.damage < agent.health * .25);
-    const searchKind = hunts ? "enemy" : gathers ? "resource" : null;
+    const searchKind = guard ? null : hunts ? "enemy" : gathers ? "resource" : null;
     if (!immediate && searchKind && !agent.carrying && (hunts || !collecting)) {
       const cells = hunts ? dnaCanHunt(agent) ?
         [...new Map([...frontier, ...patrolByIndex.values()].map(cell => [indexOf(cell), cell])).values()] : neighbors(agent) : frontier;
@@ -420,6 +424,10 @@ export function createUtilityAI(context) {
           hunts ? { combatGain: gain } : { informationGain: gain }, {});
         if (++count >= 12) break;
       }
+    }
+    // The beginner defender stays home instead of wandering after neutral wildlife.
+    if (guard && !immediate && !agent.retreat && !agent.combat && home && home.length > 1) {
+      add("explore", { ...home.at(-1), key: "guard-home" }, home, { informationGain: 1 }, {});
     }
     for (const enemy of new Set([...defenseTargets, ...visible.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 6)])) {
       const defending = defenseTargets.includes(enemy);

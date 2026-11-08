@@ -7885,7 +7885,434 @@ function snapshotCombatVfx(environment, time, visibility) {
 
 return { COMBAT_VFX_JOURNAL_LIMIT, COMBAT_VFX_JOURNAL_SECONDS, combatVfxToken, recordCombatVfx, snapshotCombatVfx };
 })();
+modules["server/nest-defender.mjs"] = (() => {
+// Ordinary, editable DNA. These level-two designs use the same prices and combat rules as player designs.
+const designs = {
+  "bean": {
+    "version": 6,
+    "level": 2,
+    "budget": 0,
+    "pieces": [
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": -4,
+        "r": 3
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 3,
+        "q": 4,
+        "r": -2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": 0,
+        "r": -4
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 5,
+        "q": -4,
+        "r": 2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 2,
+        "q": 2,
+        "r": 2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 3,
+        "r": -4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -1,
+        "r": -3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -3,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 3,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 4,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 0,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 2,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -3,
+        "r": 2
+      },
+      {
+        "gene": "regeneration",
+        "grade": 1,
+        "rotation": 3,
+        "q": 0,
+        "r": -1
+      }
+    ]
+  },
+  "spore": {
+    "version": 6,
+    "level": 2,
+    "budget": 0,
+    "pieces": [
+      {
+        "gene": "secretion",
+        "grade": 2,
+        "rotation": 0,
+        "q": 1,
+        "r": -3
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 1,
+        "q": -4,
+        "r": 1
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 0,
+        "q": 3,
+        "r": -4
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": -2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 3,
+        "q": 1,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 1,
+        "r": -4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": -2,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 4,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -3,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -1,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 1,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": -1,
+        "r": 3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 1,
+        "r": 3
+      },
+      {
+        "gene": "regeneration",
+        "grade": 1,
+        "rotation": 2,
+        "q": 3,
+        "r": -1
+      }
+    ]
+  },
+  "pebble": {
+    "version": 6,
+    "level": 2,
+    "budget": 0,
+    "pieces": [
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": 0,
+        "r": -3
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 3,
+        "q": 4,
+        "r": -4
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 2,
+        "q": 1,
+        "r": 1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -4,
+        "r": 2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 2,
+        "q": 2,
+        "r": 2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 4,
+        "r": -3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 1,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 4,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -1,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -3,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -4,
+        "r": 3
+      },
+      {
+        "gene": "regeneration",
+        "grade": 1,
+        "rotation": 5,
+        "q": -2,
+        "r": -1
+      }
+    ]
+  },
+  "spring": {
+    "version": 6,
+    "level": 2,
+    "budget": 0,
+    "pieces": [
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": -4,
+        "r": 3
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 3,
+        "q": 4,
+        "r": -2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": 0,
+        "r": -4
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 5,
+        "q": -4,
+        "r": 2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 2,
+        "q": 2,
+        "r": 2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 3,
+        "r": -4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -1,
+        "r": -3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -3,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 3,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 4,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 0,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 2,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -3,
+        "r": 2
+      },
+      {
+        "gene": "regeneration",
+        "grade": 1,
+        "rotation": 3,
+        "q": 0,
+        "r": -1
+      }
+    ]
+  }
+};
+
+function nestDefenderDesign(tribe = "bean") {
+  const design = designs[tribe] || designs.bean;
+  return { name: "둥지 수비대", design: { ...design, pieces: design.pieces.map(piece => ({ ...piece })) } };
+}
+
+// The saved role follows this design's offspring, not every carapace unit.
+// Adding antenna/gather or removing the weapon restores the normal DNA behavior.
+function isNestDefender(unit) {
+  return unit.defenseMode === "nest" && !!unit.dna &&
+    unit.dna.pieces.some(piece => ["blade", "secretion"].includes(piece.gene)) &&
+    !unit.dna.pieces.some(piece => ["antenna", "gather"].includes(piece.gene));
+}
+
+return { nestDefenderDesign, isNestDefender };
+})();
 modules["server/combat.mjs"] = (() => {
+const { isNestDefender } = modules["server/nest-defender.mjs"];
 const { basicRecoveryRate, UNIT_RECOVERY_RULES: SHARED_UNIT_RECOVERY_RULES } = modules["server/unit-recovery.mjs"];
 const { DNA_ACTION_RULES, dnaAttackMode, dnaDefensiveMelee, dnaProjectileDuration, dnaProjectileValid } = modules["server/dna-actions.mjs"];
 const { creatureAttackRole, creatureAttackMode } = modules["server/creature-attack-role.mjs"];
@@ -7923,6 +8350,7 @@ const COMBAT_EXCHANGE_DAMAGE_VERSION = 5;
 const species = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
 
 function combatDisposition(agent) {
+  if (isNestDefender(agent)) return "passive";
   if ((agent.dna || agent.stats?.dna) && agent.ownerId) return dnaCanAttack(agent) ? "aggressive" : "passive";
   const type = species.get(agent.species);
   let disposition = agent.combatDisposition || type?.combatDisposition;
@@ -7968,7 +8396,8 @@ function canTargetCombat(agent, target, time, defending) {
 }
 
 function canPursueCombat(agent, target, time, defending) {
-  return dnaCanSearch(agent, target, time) && canTargetCombat(agent, target, time, defending);
+  return (dnaCanSearch(agent, target, time) || !!defending && isNestDefender(agent)) &&
+    canTargetCombat(agent, target, time, defending);
 }
 
 function peacefulEscapeChance(suppression) {
@@ -8560,11 +8989,15 @@ function createCombat(environment) {
     if (!stats.ranged || agent.combat || agent.attack || time < (agent.attackReady || 0) || time < (agent.dnaScanReady || 0)) return false;
     agent.dnaScanReady = time + .25;
     const targets = nearby(agent, DNA_ACTION_RULES.rangedRange).filter(entry => {
-      const target = entry.agent, defending = agent.utility?.action === "fight" && agent.utility.target?.id === target.id ||
-        target.attack?.targetId === agent.id;
+      const target = entry.agent;
+      const game = isNestDefender(agent) ? environment.games.get(agent.ownerId) : null;
+      const guardDefending = !!game?.isVisible?.(target.x, target.y) &&
+        colonyDefenseTarget(agent, target, game.agents, [game.nest]);
+      const defending = isNestDefender(agent) ? guardDefending :
+        agent.utility?.action === "fight" && agent.utility.target?.id === target.id || target.attack?.targetId === agent.id;
       const actor = agent.species && !agent.stats?.dna && defending && combatDisposition(agent) === "peaceful" ?
         { ...agent, combatDisposition: "passive" } : agent;
-      return (environment.combatSimulation || dnaCanSearch(agent, target, time)) &&
+      return (environment.combatSimulation || dnaCanSearch(agent, target, time) || guardDefending) &&
         dnaProjectileValid(agent, target) && canTargetCombat(actor, target, time, defending) &&
         (!agent.species || agent.stats?.dna || creatureAttackMode(agent, distance(agent, target)) === "ranged") &&
         distance(agent, target) > 0 && distance(agent, target) <= DNA_ACTION_RULES.rangedRange;

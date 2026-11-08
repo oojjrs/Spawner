@@ -36,7 +36,8 @@ export function restoreRoomDesigns(room, designs) {
     if (design.tribe !== colony.tribe || Object.values(room.designIds).includes(design.id)) continue;
     const source = design.template;
     let template = state.templates.find(candidate => !room.designIds[JSON.stringify([room.hostId, candidate.id])] &&
-      candidate.name === source.name && JSON.stringify(candidate.dna) === JSON.stringify(source.dna) &&
+      candidate.name === source.name && (candidate.defenseMode === "nest") === (source.defenseMode === "nest") &&
+      JSON.stringify(candidate.dna) === JSON.stringify(source.dna) &&
       JSON.stringify(candidate.slots) === JSON.stringify(source.slots));
     if (!template) {
       if (state.templates.length >= 100) continue;

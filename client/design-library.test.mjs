@@ -85,3 +85,17 @@ test("수동 순서는 새 판의 기본 설계 재사용 후에도 그대로 �
   assert.equal(Object.hasOwn(legacy[0], 'order'), false);
   assert.deepEqual(orderLibraryDesigns([{ id: 'a', updatedAt: 10 }, { id: 'b', updatedAt: 20 }, { id: 'new', updatedAt: 30 }], ['missing', 'a', 'b']).map(design => design.id), ['a', 'b', 'new']);
 });
+
+test('같은 이름·DNA라도 일반 설계와 둥지 수비 역할은 따로 보존한다', () => {
+  for (const defender of [true, false]) {
+    const value = fixture();
+    value.state.templates[0].dna = value.dna;
+    value.state.templates[0].defenseMode = defender ? 'nest' : null;
+    restoreRoomDesigns(value.room, [{ id: 'saved-role', tribe: 'bean', template: {
+      name: '기초 채집', dna: value.dna, slots: [], defenseMode: defender ? null : 'nest' } }]);
+    assert.equal(value.state.templates.length, 2);
+    assert.equal(value.state.templates[0].defenseMode, defender ? 'nest' : null);
+    assert.equal(value.state.templates[1].defenseMode, defender ? null : 'nest');
+    assert.equal(value.state.templates[1].name, '기초 채집 2');
+  }
+});

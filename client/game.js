@@ -8130,9 +8130,11 @@
         const issues = templateProductionIssues(template), spawn = card.querySelector(".template-spawn");
         spawn.disabled = issues.length > 0;
         const productionIssue = issues.length ? "생산 불가\n" + issues.join("\n") : "";
-        if (card.dataset.tooltip !== productionIssue) card.title = productionIssue;
+        const roleHint = Spawner.nestDefenseHint(template);
+        const templateHint = [roleHint, productionIssue].filter(Boolean).join("\n");
+        if (card.dataset.tooltip !== templateHint) card.title = templateHint;
         card.tabIndex = spawn.disabled ? 0 : -1;
-        card.setAttribute("aria-label", template.name + (productionIssue ? " · " + productionIssue : ""));
+        card.setAttribute("aria-label", template.name + (templateHint ? " · " + templateHint : ""));
         // Disabled buttons do not reliably receive pointer/focus events. The
         // focusable card owns the explanation, including its disabled image.
         spawn.style.pointerEvents = spawn.disabled ? "none" : "";

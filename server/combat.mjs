@@ -1,3 +1,4 @@
+import { isNestDefender } from "./nest-defender.mjs";
 import { basicRecoveryRate, UNIT_RECOVERY_RULES as SHARED_UNIT_RECOVERY_RULES } from "./unit-recovery.mjs";
 import { DNA_ACTION_RULES, dnaAttackMode, dnaDefensiveMelee, dnaProjectileDuration, dnaProjectileValid } from "./dna-actions.mjs";
 import { creatureAttackRole, creatureAttackMode } from "./creature-attack-role.mjs";
@@ -35,6 +36,7 @@ export const COMBAT_EXCHANGE_DAMAGE_VERSION = 5;
 const species = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
 
 export function combatDisposition(agent) {
+  if (isNestDefender(agent)) return "passive";
   if ((agent.dna || agent.stats?.dna) && agent.ownerId) return dnaCanAttack(agent) ? "aggressive" : "passive";
   const type = species.get(agent.species);
   let disposition = agent.combatDisposition || type?.combatDisposition;
@@ -80,7 +82,8 @@ function canTargetCombat(agent, target, time, defending) {
 }
 
 export function canPursueCombat(agent, target, time, defending) {
-  return dnaCanSearch(agent, target, time) && canTargetCombat(agent, target, time, defending);
+  return (dnaCanSearch(agent, target, time) || !!defending && isNestDefender(agent)) &&
+    canTargetCombat(agent, target, time, defending);
 }
 
 export function peacefulEscapeChance(suppression) {
@@ -672,11 +675,15 @@ export function createCombat(environment) {
     if (!stats.ranged || agent.combat || agent.attack || time < (agent.attackReady || 0) || time < (agent.dnaScanReady || 0)) return false;
     agent.dnaScanReady = time + .25;
     const targets = nearby(agent, DNA_ACTION_RULES.rangedRange).filter(entry => {
-      const target = entry.agent, defending = agent.utility?.action === "fight" && agent.utility.target?.id === target.id ||
-        target.attack?.targetId === agent.id;
+      const target = entry.agent;
+      const game = isNestDefender(agent) ? environment.games.get(agent.ownerId) : null;
+      const guardDefending = !!game?.isVisible?.(target.x, target.y) &&
+        colonyDefenseTarget(agent, target, game.agents, [game.nest]);
+      const defending = isNestDefender(agent) ? guardDefending :
+        agent.utility?.action === "fight" && agent.utility.target?.id === target.id || target.attack?.targetId === agent.id;
       const actor = agent.species && !agent.stats?.dna && defending && combatDisposition(agent) === "peaceful" ?
         { ...agent, combatDisposition: "passive" } : agent;
-      return (environment.combatSimulation || dnaCanSearch(agent, target, time)) &&
+      return (environment.combatSimulation || dnaCanSearch(agent, target, time) || guardDefending) &&
         dnaProjectileValid(agent, target) && canTargetCombat(actor, target, time, defending) &&
         (!agent.species || agent.stats?.dna || creatureAttackMode(agent, distance(agent, target)) === "ranged") &&
         distance(agent, target) > 0 && distance(agent, target) <= DNA_ACTION_RULES.rangedRange;

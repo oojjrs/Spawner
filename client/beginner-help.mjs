@@ -1,3 +1,4 @@
+import { nestDefenderDesign, isNestDefender } from "../server/nest-defender.mjs";
 import { NEST_LEVELS, nestUpgradeCost } from "../server/nests.mjs";
 import { birthCost } from "../server/attributes.mjs";
 import { ATTRIBUTE_DNA } from "../server/dna.mjs";
@@ -12,14 +13,14 @@ const gatherGenes = new Set(["gather"]);
 
 function productionOffer(state, military) {
   const genes = military ? combatGenes : gatherGenes;
-  const templates = state.templates.filter(template => hasGene(template, genes) && ATTRIBUTE_DNA.trace(template.dna.pieces, state.nestLevel).valid);
+  const templates = state.templates.filter(template => (military ? isNestDefender(template) : hasGene(template, genes)) && ATTRIBUTE_DNA.trace(template.dna.pieces, state.nestLevel).valid);
   templates.sort((a, b) => birthCost(a, state.tribe) - birthCost(b, state.tribe));
   let template = templates[0];
   if (!template) {
-    const starter = DNA_STARTER_DESIGNS.find(entry => entry.id === (military ? "melee" : "gatherer"));
+    const starter = military ? nestDefenderDesign(state.tribe) : DNA_STARTER_DESIGNS.find(entry => entry.id === "gatherer");
     let name = starter.name, suffix = 2;
     while (state.templates.some(entry => entry.name === name)) name = starter.name + " " + suffix++;
-    template = { name, dna: { ...starter.design, level: state.nestLevel }, slots: [] };
+    template = { name, dna: { ...starter.design, level: state.nestLevel }, slots: [], defenseMode: military ? "nest" : null };
   }
   const cost = birthCost(template, state.tribe);
   const issue = state.agents.filter(agent => agent.health > 0).length >= NEST_LEVELS[state.nestLevel - 1].unitCapacity ?
@@ -27,7 +28,14 @@ function productionOffer(state, military) {
       "진화 포인트가 " + Math.ceil(cost - state.evolutionPoints) + "P 부족합니다." : "";
   return { label: template.name + " 생산 · " + cost + "P", disabled: !!issue || !template.id && state.templates.length >= 100,
     issue, command: template.id ? { type: "birth", templateId: template.id, combatPrimary: template.combatPrimary } :
-      { type: "design", templateId: null, name: template.name, dna: template.dna, birth: true } };
+      { type: "design", templateId: null, name: template.name, dna: template.dna, defenseMode: template.defenseMode, birth: true } };
+}
+
+export function nestDefenseHint(template) {
+  if (template.defenseMode !== "nest") return "";
+  return isNestDefender(template) ?
+    "둥지 수비: 주변에서 대기하고 아군이 공격받으면 맞섭니다. 더듬이·채집 기관을 넣거나 무기를 빼면 일반 행동으로 바뀝니다." :
+    "수비 역할 해제됨: 더듬이·채집 기관 없이 칼날이나 분비 기관이 있어야 둥지를 지킵니다.";
 }
 
 export function beginnerHelpOffer(state, progress, signals) {
@@ -44,7 +52,8 @@ export function beginnerHelpOffer(state, progress, signals) {
     offers.push({ key: "gatherer", message: "채집을 맡을 개체를 준비해볼까요?", action: productionOffer(state, false), guide: "attribute:gather" });
   if (state.nestLevel === 1 && state.evolutionPoints > 80) offers.push({ key: "upgrade", message: "둥지를 성장시킬 수 있습니다.",
     action: { label: "성장 · " + nestUpgradeCost(1, state.tribe) + "P", command: { type: "upgrade" } }, guide: "nest:colony" });
-  if (state.nestLevel >= 2 && !fighters.length) offers.push({ key: "military", message: "둥지를 지킬 전사를 준비해볼까요?",
+  if (state.nestLevel >= 2 && !fighters.length) offers.push({ key: "military", message: "첫 흙두더지에 대비해 둥지 수비대 한 마리를 준비해보세요.",
+    detail: "둥지 주변을 지키며 공격받으면 맞섭니다. 이후 더 강한 습격에는 설계 보강이나 추가 병력이 필요해요.",
     action: productionOffer(state, true), guide: "nest:colony" });
   if (state.nestLevel >= 3) offers.push({ key: "board-" + state.nestLevel, message: "DNA 보드가 넓어졌어요. 새 조각으로 설계를 다듬어보세요.", guide: "nest:colony" });
   if (state.simSeconds < 60 || signals.replay) {
