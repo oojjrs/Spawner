@@ -1,3 +1,13 @@
+## 렌더·문서 검사 완료 [movement-doc-complete-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:22:29+09:00; 확인·기록 Codex /root, 출처현재채팅과담당보고.
+- DesignAssets/sections/unit-appearance.js의솜양walk큐(source/volume0.44/times0,156.25)와흰발walkvolume0.117만기존정의와맞췄다. client/movement-audio.test.mjs7개통과로22종원본해시·문서·음량·오프라인등록확인. 담당 /root/client_suite_audit 제품파일고정선언,솜양독립연결검사741d49 및후속7/7보고. 새문구/원본음향변경없음.
+
+## 검사·복구 결과 [movement-white-paw-fix-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:21:24+09:00; 사용자전체점검지시,확인·기록Codex /root. 출처현재채팅및명시담당도구근거.
+- 솜양큐복구후22종검사에서 white-paw문서volume0.114와현행승인movement-audio정의0.117의추가불일치확인. 같은기존연결정합화범위로해당셀volume만0.117로맞추도록담당에게승인한다. 새문구/음원생성없음.
+
 ## 검사·복구 결과 [root-client-complete-01a1b8b3]
 
 - 기록 시각 2026-11-08T13:21:24+09:00; 사용자전체점검지시,확인·기록Codex /root. 출처현재채팅및명시담당도구근거.
@@ -25,6 +35,11 @@
 - 폐기 자원치트 호출과 foragerMemory 전달 기대를 제거하되 종족 전환 상태/소유권 및 비동기 결과·Map/Set 전달 검사는 유지한다. 이전 재고는 현재 키 자체가 삭제되는 이행을 검사한다. DNA40종 및 체력 조각+20은 현행 카탈로그/스탯 계약을 따른다.
 - cheats 검사는 배포 준비 함수에 가짜revision/모든파일을runtime으로 주는 불완전 저장소 mock 대신 실제 productionRuntime 변환을 실행해 UI·worker치트제거와 직접명령거부를 유지한다. 실제 사이트 준비/배포는 최종 절차로 별도 확인한다.
 - neutral-stat-balance의 11월4일 감사는 appliedToGame=false인 과거 제안이다. 현재 소스 해시/현행DNA형식과 직접 비교하는 폐기 검사2개와 제안의 현재엔진 비교3행을 제거하고 당시 감사 수치·제안·검토 기록 자체 검사는 유지한다. 현재 스탯/DNA는 기존 server combat-critical-stats, DNA와경제검사 및 client neutral-stat-model에서 별도 검증한다. 과거감사JSON이나현재밸런스는변경하지않는다.
+
+## 추가 점검 판단 [movement-doc-fix-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:14:02+09:00; 판단·분담·기록 Codex /root, 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e 및 담당 보고.
+- /root/client_suite_audit가 실제 sections/unit-appearance.js의 cotton-sheep 이동 셀에 기존 음향 data-audio-cues 연결이 누락된 사실을 확인했다. 현재 허용된 전체 점검·복구 범위에서 승인된 movement-audio 정의의 큐 연결만 복구하고 새 문구나 원본 음향은 만들지 않는다. 해당 섹션 제품 수정과 관련 검증은 담당에게 맡기고 빌드 산출물은 메인이 관리한다.
 
 ## 클라이언트 잔여 검사 메인 분담 [root-client-start-01a1b8b3]
 

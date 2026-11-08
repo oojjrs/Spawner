@@ -1,8 +1,10 @@
+import { readDesignSection } from "./design-test-fixture.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { createContext, runInContext } from "node:vm";
+import { runInContext } from "node:vm";
+import { createGameTestContext as createContext } from "./game-runtime-test-fixture.mjs";
 import * as units from "./unit-animation.mjs";
 import * as beetle from "../server/beetle-animation.mjs";
 
@@ -18,7 +20,7 @@ function agent(key) {
 }
 
 test("이동음 22종은 생성 원본 그대로 게임 로더와 기획서에 연결한다", () => {
-  const design = readFileSync(new URL("../Design.html", import.meta.url), "utf8");
+  const design = readDesignSection("unit-appearance");
   const loaders = readFileSync(new URL("./local-assets.js", import.meta.url), "utf8");
   assert.equal(Object.keys(audio.definitions).length, 22);
   for (const [key, definition] of Object.entries(audio.definitions)) {
