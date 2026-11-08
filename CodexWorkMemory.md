@@ -1,3 +1,8 @@
+## 바닥 자원 렌더 순서 검사 완료 [drop-render-complete-01a1b8b3]
+
+- 기록·확인 시각 2026-11-08T13:11:26+09:00; 결정 사용자 현재 채팅의 전체 점검·작업별 완료 지시, 기록 Codex /root. 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e.
+- server/resource-drops.test.mjs 4검사 통과. 폐기된 drawCombatAgents 추출 대신 실제 drawWorldObjects와 drawCombatDust 경로를 호출해 바닥 자원이 전투 먼지 및 전투 뒤 유닛보다 먼저 그려짐을 검증한다. 제품 코드는 변경하지 않았다. 담당 /root/economy_tests_finish 최종 대상검사 도구5df5de 및 메인 diff7be05b 대조. 형식·diff ef91b2 통과.
+
 ## 전투 뒤 작업 복귀 검사 완료 [work-resume-complete-01a1b8b3]
 
 - 기록·확인 시각 2026-11-08T13:11:26+09:00; 결정 사용자 현재 채팅의 전체 점검·작업별 완료 지시, 기록 Codex /root. 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e.

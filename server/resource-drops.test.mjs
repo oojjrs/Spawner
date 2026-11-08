@@ -107,16 +107,16 @@ test("도구 없는 포자 일꾼도 내려놓은 목재를 회수하며 같은 
   assert.equal(playback.effects.size, 0);
 });
 
-test("실제 그리기 경로는 전투 중과 전투 뒤 선택 상태에서 모두 바닥 자원을 유닛보다 먼저 그린다", () => {
+test("실제 그리기 경로는 바닥 자원을 전투 먼지와 전투 뒤 유닛보다 먼저 그린다", () => {
   const source = readFileSync(new URL("../client/game.js", import.meta.url), "utf8");
-  const declarations = ["drawDroppedResource", "drawWorldObjects", "drawCombatAgents"].map(name => {
+  const declarations = ["drawDroppedResource", "drawWorldObjects", "drawCombatDust"].map(name => {
     const match = source.match(new RegExp("^    function " + name + "\\([^]*?^    }", "m"));
     assert.ok(match, name);
     return match[0];
   }).join("\n");
   for (const mode of ["combat", "idle", "selected"]) {
     const draws = [];
-    const agent = { x: 5, y: 5, combat: mode === "combat" ? { id: "battle" } : null };
+    const agent = { x: 5, y: 5, combat: mode === "combat" ? { id: "battle", x: 5, y: 5 } : null };
     const cell = { x: 5, y: 5, resourceType: "tree", dropped: true, amount: 2 };
     const pebbleBirthRuntime = createPebbleBirthRuntime({
       source: path => path,
@@ -124,9 +124,10 @@ test("실제 그리기 경로는 전투 중과 전투 뒤 선택 상태에서 �
       createCanvas: () => assert.fail("a non-birth frame must not allocate birth canvases")
     });
     const context = createContext({
-      state: { agents: [agent], rivals: [], simSeconds: 0, camera: { zoom: 64 },
+      state: { agents: [agent], rivals: [], simSeconds: 0, camera: { zoom: 64 }, visible: new Set([5 * 160 + 5]),
         selection: mode === "selected" ? { kind: "agent" } : null },
       pebbleBirthRuntime, displayedAgent: value => value,
+      combatGroups: () => new Map(mode === "combat" ? [["battle", [agent]]] : []), idleMotion: { matches: true },
       viewport: { width: 640, height: 640 }, WORLD_SIZE: 160, AGENT_HEIGHT: .4,
       screenToWorld: (x, y) => ({ x: x / 64, y: y / 64 }), worldToScreen: (x, y) => ({ x: x * 64, y: y * 64 }),
       colonyEntries: [], worldMap: { burrows: [] }, forest: { revealed: new Map() },
@@ -136,9 +137,15 @@ test("실제 그리기 경로는 전투 중과 전투 뒤 선택 상태에서 �
       agentRenderCandidates: () => [agent], visibleAgents: () => [agent], interpolatedAgentPosition: value => value,
       agentBirthPose: () => null, resourceNodeCells: () => [cell], objectOutlineColor: () => null,
       drawGroundShadow() {}, drawCorpses() {}, drawSelectedAgentMovement() {}, drawAgent: () => draws.push("unit"),
-      ctx: { save() {}, restore() {}, drawImage: () => draws.push("drop") }
+      ctx: { save() {}, restore() {}, drawImage: () => draws.push("drop"),
+        beginPath() {}, ellipse() {}, arc() {}, translate() {}, scale() {},
+        createRadialGradient: () => ({ addColorStop() {} }), fill: () => draws.push("dust") }
     });
-    runInContext(declarations + "\ndrawWorldObjects(0); drawCombatAgents(0);", context);
-    assert.deepEqual(draws, ["drop", "drop", "unit"], mode);
+    runInContext(declarations + "\ndrawWorldObjects(0); drawCombatDust();", context);
+    if (mode === "combat") {
+      assert.deepEqual(draws.slice(0, 2), ["drop", "drop"]);
+      assert.ok(draws.length > 2);
+      assert.ok(draws.slice(2).every(draw => draw === "dust"));
+    } else assert.deepEqual(draws, ["drop", "drop", "unit"], mode);
   }
 });
