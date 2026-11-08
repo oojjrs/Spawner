@@ -1,3 +1,8 @@
+## 전투 뒤 작업 복귀 검사 완료 [work-resume-complete-01a1b8b3]
+
+- 기록·확인 시각 2026-11-08T13:11:26+09:00; 결정 사용자 현재 채팅의 전체 점검·작업별 완료 지시, 기록 Codex /root. 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e.
+- server/colony-defense 및 utility 2파일70검사 통과. 전사 부상 후 회복 대신 작업 복귀, 소진·타종족 자원 무효화, 실제 타격 이후 사체1개·사후 반격 없음·새 목표를 검사한다. 수동 개체 탈출과 전사 계약을 구분하고 타격 대기는160틱으로 제한했다. 담당 /root/economy_tests_finish 결과 economy-results.json; 마지막 utility1개117ms(4fcbcf), 형식·diff ef91b2 및 메인 diff7be05b 대조.
+
 ## 월드 자원 이행 검사 완료 [world-complete-01a1b8b3]
 
 - 기록·확인 시각 2026-11-08T13:11:26+09:00; 결정 사용자 현재 채팅의 전체 점검·작업별 완료 지시, 기록 Codex /root. 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e.

@@ -18,7 +18,7 @@ for (const [name, source, entry] of [["게임 워커", worker, "client/worker.mj
 }
 
 function fixture(api, mode, victim) {
-  const colony = { id: 1, ownerId: "defenders", tribe: "bean", x: 11, y: 10, occupiedCells: new Set(["2,2"]) };
+  const colony = { id: 1, ownerId: "defenders", tribe: "spore", x: 11, y: 10, occupiedCells: new Set(["2,2"]) };
   const tree = { x: 18, y: 12, amount: 12, initialAmount: 12, resourceType: "tree", kind: "resource" };
   const environment = { simSeconds: 0, hostId: colony.ownerId, colonies: [colony], games: new Map(),
     food: new Map([["18,12", tree]]), foodSpots: new Map(),
@@ -195,29 +195,25 @@ for (const [surface, api] of surfaces) {
     assert.equal(f.soldier.utility?.action, "collect");
     assert.equal(f.soldier.utility?.target.key, "18,12");
   });
-  for (const invalid of ["depleted", "locked"]) {
+  for (const invalid of ["depleted", "foreign"]) {
     test(surface + ": " + invalid + "인 원래 채집 목표는 복귀하지 않고 작업 기억을 해제한다", () => {
       const f = fixture(api, "harvest", "nest");
       tick(f, .1);
       if (invalid === "depleted") f.tree.amount = 0;
-      else f.soldier.attributes.blade = 0;
+      else f.tree.resourceType = "clay";
       f.enemy.health = 0;
       tick(f, .1);
       assert.ok(f.soldier.utility?.action !== "collect" || f.soldier.utility.target.key !== "18,12");
       assert.equal(f.soldier.suspendedWork, null);
     });
   }
-  test(surface + ": 회복이 필요한 동안 작업을 기억하고 회복 후 원래 채집으로 복귀한다", () => {
+  test(surface + ": 방어가 끝난 전사는 부상해도 회복 대신 원래 채집으로 복귀한다", () => {
     const f = fixture(api, "harvest", "nest");
     tick(f, .1);
     f.enemy.health = 0;
     f.soldier.health = 50;
     tick(f, .1);
-    assert.equal(f.soldier.suspendedWork?.target.key, "18,12");
-    assert.equal(f.soldier.utility?.action, "recover");
-    f.soldier.health = f.soldier.stats.health;
-    f.soldier.decisionPending = "completed";
-    tick(f, .1);
+    assert.equal(f.soldier.health, 50);
     assert.equal(f.soldier.utility?.action, "collect");
     assert.equal(f.soldier.utility?.target.key, "18,12");
     assert.equal(f.soldier.suspendedWork, null);

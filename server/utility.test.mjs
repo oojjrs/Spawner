@@ -178,11 +178,10 @@ test("체력·생산 비용·자원이 손실 위험을 높인다", () => {
   assert.ok(riskValue({ ...agent, carrying: 8 }, 3) > base);
 });
 
-test("적 처치는 6번째 프레임에 소유 군락에 전달하고 교전 종료 후 목표를 갱신한다", () => {
+test("적 처치는 타격 시점에 소유 군락에 전달하고 사망 후 반격 없이 목표를 갱신한다", () => {
   const f = fixture([]);
   f.environment.damageRandom = () => .5;
   f.agent.combatDisposition = "aggressive";
-  f.game.agents.splice(1);
   f.agent.personality = Object.freeze({ boldness: 1, aggression: 1, curiosity: 0 });
   const colony = { id: 2, ownerId: "second", x: 70, y: 70, occupiedCells: new Set(["2,2"]) };
   f.environment.colonies.push(colony);
@@ -190,26 +189,25 @@ test("적 처치는 6번째 프레임에 소유 군락에 전달하고 교전 �
   f.environment.games.set("second", other);
   other.agents.splice(1);
   const target = other.agents[0];
-  Object.assign(target, { x: f.agent.x, y: f.agent.y, health: 1, renderFromX: f.agent.x, renderFromY: f.agent.y });
-  other.prepare(0);
-  advance(f, 0.1);
+  Object.assign(target, { x: f.agent.x, y: f.agent.y, health: 1, birth: null,
+    renderFromX: f.agent.x, renderFromY: f.agent.y, moveDuration: 0 });
+  other.prepare(f.environment.simSeconds);
+  for (let step = 0; step < 160 && !f.agent.attack; step++) advance(f, .1);
+  assert.ok(f.agent.attack);
+  const hitAt = f.agent.attack.hitAt;
+  for (let step = 0; step < 160 && f.environment.simSeconds + .1 < hitAt - 1e-8; step++) advance(f, .1);
   assert.equal(target.health, 1);
-  advance(f, 0.2);
-  assert.equal(target.health, 1);
-  advance(f, 0.1);
+  advance(f, .1);
+  assert.equal(target.health, 0);
   assert.equal(other.agents.length, 0);
-  assert.ok([...f.environment.food.values()].some(food => food.kind === "corpse"));
-  const finishedAt = f.agent.attack.exchangeEndsAt;
-  advance(f, finishedAt - f.environment.simSeconds);
-  const pending = f.agent.combat.pendingCounter;
-  assert.equal(pending.exchange.targetHealth, 1);
-  assert.equal(pending.exchange.targetStrength, 10);
-  assert.equal(pending.exchange.counterDamage, 10);
+  assert.equal([...f.environment.food.values()].filter(food => food.kind === "corpse" && food.agentId === target.id).length, 1);
+  advance(f, .1);
+  assert.equal(f.agent.combat, null);
   assert.equal(f.agent.health, 100);
-  advance(f, pending.hitAt - f.environment.simSeconds);
-  assert.equal(f.agent.health, 90);
-  advance(f, pending.endsAt - f.environment.simSeconds + .1);
-  assert.equal(f.agent.lastDecisionReason, "combatEnded");
+  assert.ok(f.agent.lastDecisionAt >= hitAt);
+  assert.ok(f.agent.utility);
+  assert.notEqual(f.agent.utility.action, "fight");
+  assert.notEqual(f.agent.utility.target?.id, target.id);
 });
 
 test("이동 완료 후 준비와 채집 주기를 마쳐야 자원을 얻는다", () => {
@@ -308,7 +306,7 @@ test("시작 유닛과 설계 유닛은 같은 상태에서 같은 후보와 점
 test("탈출 의사는 저장 후에도 유지되고 회복과 안전 대기 뒤에만 재교전을 허용한다", () => {
   const f = fixture([]);
   f.agent.health = 69;
-  f.agent.combatDisposition = "aggressive";
+  f.agent.combatDisposition = "passive";
   const opponent = enemy(f, 48, 42);
   opponent.ownerId = "rival";
   opponent.health = opponent.stats.health = 100;
@@ -319,14 +317,14 @@ test("탈출 의사는 저장 후에도 유지되고 회복과 안전 대기 뒤
   assert.equal(f.agent.retreat.recoverHealth, 70);
   advance(f, .1);
   assert.equal(f.agent.utility.action, "recover");
-  assert.equal(canPursueCombat(f.agent, opponent, f.environment.simSeconds), false);
+  assert.equal(canPursueCombat(f.agent, opponent, f.environment.simSeconds, true), false);
   advance(f, 4.2);
   assert.ok(f.agent.health >= 70);
   assert.ok(f.agent.retreat);
-  assert.equal(canPursueCombat(f.agent, opponent, f.environment.simSeconds), false);
+  assert.equal(canPursueCombat(f.agent, opponent, f.environment.simSeconds, true), false);
   advance(f, 5.2);
   assert.equal(f.agent.retreat, null);
-  assert.equal(canPursueCombat(f.agent, opponent, f.environment.simSeconds), true);
+  assert.equal(canPursueCombat(f.agent, opponent, f.environment.simSeconds, true), true);
 });
 
 test("위급한 유닛은 채집 유지 보너스와 성향보다 생존을 우선한다", () => {
