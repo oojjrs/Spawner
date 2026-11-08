@@ -402,6 +402,7 @@ export function createGame(environment, colony, savedGame) {
         agent.shield -= absorbed;
         damage -= absorbed;
       }
+      if (damage > 0 && agent.health > 0) agent.dnaLastDamageAt = state.simSeconds;
       agent.health = Math.max(0, agent.health - damage);
       if (!environmental && damage > 0) {
         agent.hurtStartedAt = state.simSeconds;

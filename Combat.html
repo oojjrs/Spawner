@@ -4288,7 +4288,7 @@ const ATTRIBUTE_DNA = (() => {
     const n=weights(pieces),c=counts(pieces),gather=!!c.gather,profile=tribeDnaStats(tribe);
     return {...dnaCombatStats(c,n,undefined,tribe),gatherCount:c.gather||0,antennaCount:c.antenna||0,
       capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?1:0,
-      harvestTime:gather?3/(1+.1*(n.harvestSpeed||0)):0,movement:.25*profile.base.movement+.04*(n.movement||0)*(profile.growth.movement??1),
+      harvestTime:gather?3/(1+.5*(n.harvestSpeed||0)):0,movement:.25*profile.base.movement+(gather?.11:.04)*(n.movement||0)*(profile.growth.movement??1),
       vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion||c.carapace),
       lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed:gather?75:0};
   }
@@ -4445,6 +4445,22 @@ function combatLabWithAppearance(build, appearance) {
 }
 
 return { COMBAT_LAB_APPEARANCES, combatLabPlayable, combatLabCombinationDna, combatLabBladeCarapaceDna, combatLabAppearance, combatLabWithAppearance };
+})();
+modules["server/unit-recovery.mjs"] = (() => {
+// Pure numbers shared by combat and design previews. Neutral ownership and
+// recovery eligibility remain the responsibility of the combat engine.
+const UNIT_RECOVERY_RULES = Object.freeze({ delay: 5, base: .05, healthFraction: .005, scaledCap: .3 });
+
+function basicRecoveryRate(maxHealth) {
+  return Number.isFinite(maxHealth) && maxHealth > 0 ? UNIT_RECOVERY_RULES.base +
+    Math.min(maxHealth * UNIT_RECOVERY_RULES.healthFraction, UNIT_RECOVERY_RULES.scaledCap) : 0;
+}
+
+function totalRecoveryRate(maxHealth, additional = 0) {
+  return basicRecoveryRate(maxHealth) + (Number.isFinite(additional) ? Math.max(0, additional) : 0);
+}
+
+return { UNIT_RECOVERY_RULES, basicRecoveryRate, totalRecoveryRate };
 })();
 modules["server/dna-actions.mjs"] = (() => {
 const DNA_ACTION_RULES = Object.freeze({ meleeRange: 1, rangedRange: 3, projectileSpeed: 6, rangedPowerBase: 1.4 });
@@ -4932,30 +4948,122 @@ function tribeSafeTerrain(tribe, terrain, hazard) {
 
 return { tribeHazardKind, tribeTerrainWalkable, tribeTerrainSpeedMultiplier, tribeSafeTerrain };
 })();
-modules["server/neutral-unit-stats.mjs"] = (() => {
-const NEUTRAL_UNIT_STATS = Object.freeze(Object.fromEntries([
-  ["flower-tail-bird",{"health":30,"power":9.6,"armor":0,"speed":1,"movement":0.95,"vision":7.53,"combo":0.15,"comboPower":45,"critical":3,"criticalPower":150,"accuracy":7,"penetration":0,"comboSpeed":0.34,"focus":0.34,"evasion":12,"parry":4,"block":0,"blockPower":50,"counter":0,"counterPower":105,"tenacity":0,"reduction":0,"stun":0,"stunTime":0.2,"bleed":0,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":0.9,"capacity":1,"harvestSpeed":1.9}],
-  ["dew-rabbit",{"health":44,"power":9.3,"armor":1,"speed":0.88,"movement":1.01,"vision":6.52,"combo":0.1,"comboPower":45,"critical":3,"criticalPower":150,"accuracy":4,"penetration":0,"comboSpeed":0.4,"focus":0.36,"evasion":11,"parry":4,"block":0,"blockPower":50,"counter":0,"counterPower":102.5,"tenacity":2,"reduction":0,"stun":0,"stunTime":0.22,"bleed":0,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":1,"capacity":2,"harvestSpeed":1.84}],
-  ["soil-mole",{"health":100,"power":16,"armor":10,"speed":0.68,"movement":0.65,"vision":2,"combo":0,"comboPower":50,"critical":5,"criticalPower":155,"accuracy":5,"penetration":3,"comboSpeed":0.5,"focus":0.38,"evasion":4,"parry":3,"block":5,"blockPower":50,"counter":1,"counterPower":117.5,"tenacity":18,"reduction":2,"stun":2,"stunTime":0.36,"bleed":2,"bleedPower":1,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":0.8,"capacity":9,"harvestSpeed":1.81}],
-  ["bundle-snail",{"health":135,"power":10.5,"armor":30,"speed":0.52,"movement":0.55,"vision":3.29,"combo":0,"comboPower":40,"critical":0,"criticalPower":150,"accuracy":0,"penetration":0,"comboSpeed":0.58,"focus":0.54,"evasion":1,"parry":0,"block":12,"blockPower":50,"counter":0,"counterPower":115,"tenacity":22,"reduction":5,"stun":0,"stunTime":0.26,"bleed":0,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":1,"regeneration":1.4,"capacity":17,"harvestSpeed":1.31}],
-  ["cotton-sheep",{"health":120,"power":9,"armor":5,"speed":0.6,"movement":0.69,"vision":5.69,"combo":0,"comboPower":40,"critical":0,"criticalPower":150,"accuracy":1,"penetration":0,"comboSpeed":0.56,"focus":0.46,"evasion":5,"parry":0,"block":2,"blockPower":50,"counter":0,"counterPower":100,"tenacity":16,"reduction":4,"stun":0,"stunTime":0.24,"bleed":0,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":1.2,"capacity":12,"harvestSpeed":1.74}],
-  ["rolling-acorn",{"health":55,"power":10,"armor":20,"speed":0.76,"movement":0.81,"vision":2.79,"combo":0,"comboPower":45,"critical":2,"criticalPower":155,"accuracy":0,"penetration":1,"comboSpeed":0.46,"focus":0.56,"evasion":8,"parry":2,"block":8,"blockPower":50,"counter":0,"counterPower":112.5,"tenacity":6,"reduction":0,"stun":1,"stunTime":0.28,"bleed":0,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":0.1,"capacity":6,"harvestSpeed":1.67}],
-  ["bubble-toad",{"health":125,"power":17,"armor":8,"speed":0.8,"movement":0.77,"vision":5.1,"combo":0,"comboPower":45,"critical":4,"criticalPower":155,"accuracy":3,"penetration":2,"comboSpeed":0.44,"focus":0.44,"evasion":9,"parry":2,"block":2,"blockPower":50,"counter":2,"counterPower":120,"tenacity":14,"reduction":1,"stun":6,"stunTime":0.56,"bleed":0,"bleedPower":0,"area":1,"areaPower":25,"lifesteal":0,"reflection":0,"regeneration":1.1,"capacity":8,"harvestSpeed":1.55}],
-  ["snare-vine",{"health":155,"power":24,"armor":18,"speed":0.56,"movement":0.3,"vision":6.25,"combo":0,"comboPower":50,"critical":7,"criticalPower":165,"accuracy":6,"penetration":5,"comboSpeed":0.54,"focus":0.32,"evasion":2,"parry":0,"block":4,"blockPower":50,"counter":3,"counterPower":127.5,"tenacity":20,"reduction":1,"stun":0,"stunTime":0.54,"bleed":4,"bleedPower":2,"area":1,"areaPower":20,"lifesteal":5,"reflection":3,"regeneration":1.8,"capacity":13,"harvestSpeed":1.36}],
-  ["spiny-back-beetle",{"health":130,"power":18,"armor":25,"speed":0.72,"movement":0.73,"vision":3.71,"combo":0,"comboPower":50,"critical":5,"criticalPower":160,"accuracy":4,"penetration":6,"comboSpeed":0.48,"focus":0.4,"evasion":6,"parry":8,"block":10,"blockPower":50,"counter":12,"counterPower":137.5,"tenacity":26,"reduction":3,"stun":1,"stunTime":0.34,"bleed":3,"bleedPower":1,"area":0,"areaPower":0,"lifesteal":0,"reflection":8,"regeneration":0.2,"capacity":11,"harvestSpeed":1.51}],
-  ["soil-boar",{"health":180,"power":31,"armor":22,"speed":0.64,"movement":0.85,"vision":4.45,"combo":0,"comboPower":61,"critical":10,"criticalPower":170,"accuracy":3,"penetration":4,"comboSpeed":0.52,"focus":0.42,"evasion":3,"parry":3,"block":6,"blockPower":50,"counter":4,"counterPower":135,"tenacity":28,"reduction":3,"stun":8,"stunTime":0.4,"bleed":2,"bleedPower":2,"area":1,"areaPower":30,"lifesteal":0,"reflection":0,"regeneration":0.5,"capacity":14,"harvestSpeed":1.42}],
-  ["vine-turtle",{"health":295,"power":19,"armor":38,"speed":0.48,"movement":0.6,"vision":4.09,"combo":0,"comboPower":40,"critical":1,"criticalPower":160,"accuracy":2,"penetration":3,"comboSpeed":0.6,"focus":0.48,"evasion":1,"parry":1,"block":24,"blockPower":50,"counter":6,"counterPower":130,"tenacity":30,"reduction":8,"stun":4,"stunTime":0.42,"bleed":0,"bleedPower":1,"area":1,"areaPower":25,"lifesteal":0,"reflection":6,"regeneration":1.5,"capacity":16,"harvestSpeed":1.16}],
-  ["shadow-weasel",{"health":88,"power":41,"armor":3,"speed":1.12,"movement":1.07,"vision":6.78,"combo":1,"comboPower":63,"critical":14,"criticalPower":165,"accuracy":9,"penetration":10,"comboSpeed":0.3,"focus":0.24,"evasion":13,"parry":9,"block":0,"blockPower":50,"counter":10,"counterPower":125,"tenacity":8,"reduction":0,"stun":0,"stunTime":0.32,"bleed":8,"bleedPower":3,"area":0,"areaPower":0,"lifesteal":3,"reflection":0,"regeneration":0.7,"capacity":7,"harvestSpeed":1.71}],
-  ["talon-owl",{"health":85,"power":59,"armor":2,"speed":0.96,"movement":0.92,"vision":8,"combo":0.9,"comboPower":55,"critical":12,"criticalPower":170,"accuracy":14,"penetration":8,"comboSpeed":0.36,"focus":0.3,"evasion":10,"parry":7,"block":0,"blockPower":50,"counter":5,"counterPower":122.5,"tenacity":4,"reduction":0,"stun":0,"stunTime":0.3,"bleed":6,"bleedPower":2,"area":0,"areaPower":0,"lifesteal":2,"reflection":0,"regeneration":0.4,"capacity":3,"harvestSpeed":1.59}],
-  ["spring-keeper",{"health":177,"power":30.4,"armor":14,"speed":1.07,"movement":0.98,"vision":7.76,"combo":0.95,"comboPower":60,"critical":6,"criticalPower":150,"accuracy":11.5,"penetration":2,"comboSpeed":0.32,"focus":0.21,"evasion":17.5,"parry":6,"block":1,"blockPower":50,"counter":1,"counterPower":110,"tenacity":10,"reduction":0,"stun":0,"stunTime":0.38,"bleed":1,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":1.3,"capacity":4,"harvestSpeed":1.87}],
-  ["lantern-keeper",{"health":178,"power":29.9,"armor":15,"speed":0.92,"movement":1.04,"vision":7.03,"combo":0.65,"comboPower":54,"critical":4,"criticalPower":150,"accuracy":8,"penetration":0,"comboSpeed":0.38,"focus":0.26,"evasion":15.5,"parry":5,"block":1,"blockPower":50,"counter":0,"counterPower":107.5,"tenacity":12,"reduction":0,"stun":0,"stunTime":0.44,"bleed":0,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":1.6,"capacity":5,"harvestSpeed":1.77}],
-  ["old-garden-snail",{"health":420,"power":30.5,"armor":48,"speed":0.44,"movement":0.42,"vision":4.78,"combo":0,"comboPower":40,"critical":1,"criticalPower":160,"accuracy":1,"penetration":1,"comboSpeed":0.62,"focus":0.52,"evasion":0,"parry":0,"block":16,"blockPower":50,"counter":0,"counterPower":132.5,"tenacity":32,"reduction":10,"stun":2,"stunTime":0.46,"bleed":0,"bleedPower":0,"area":1,"areaPower":0,"lifesteal":0,"reflection":2,"regeneration":1.7,"capacity":19,"harvestSpeed":1.24}],
-  ["walking-forest",{"health":850,"power":68,"armor":55,"speed":0.4,"movement":0.49,"vision":5.98,"combo":0,"comboPower":40,"critical":2,"criticalPower":175,"accuracy":2,"penetration":4,"comboSpeed":0.64,"focus":0.5,"evasion":0,"parry":1,"block":20,"blockPower":50,"counter":2,"counterPower":142.5,"tenacity":36,"reduction":12,"stun":10,"stunTime":0.52,"bleed":1,"bleedPower":1,"area":2,"areaPower":35,"lifesteal":0,"reflection":4,"regeneration":1.9,"capacity":18,"harvestSpeed":1}],
-  ["white-paw",{"health":255,"power":75,"armor":16,"speed":1.08,"movement":1.1,"vision":7.28,"combo":1,"comboPower":65,"critical":16,"criticalPower":185,"accuracy":12,"penetration":12,"comboSpeed":0.28,"focus":0.2,"evasion":18,"parry":12,"block":3,"blockPower":50,"counter":8,"counterPower":140,"tenacity":24,"reduction":2,"stun":3,"stunTime":0.48,"bleed":10,"bleedPower":4,"area":0,"areaPower":20,"lifesteal":4,"reflection":0,"regeneration":0.6,"capacity":10,"harvestSpeed":1.63}],
-  ["spiny-back-leader",{"health":310,"power":60,"armor":40,"speed":0.84,"movement":0.88,"vision":5.4,"combo":0.05,"comboPower":62,"critical":8,"criticalPower":180,"accuracy":5,"penetration":7,"comboSpeed":0.42,"focus":0.28,"evasion":7,"parry":10,"block":14,"blockPower":50,"counter":15,"counterPower":145,"tenacity":34,"reduction":6,"stun":5,"stunTime":0.5,"bleed":5,"bleedPower":3,"area":1,"areaPower":30,"lifesteal":0,"reflection":10,"regeneration":0.3,"capacity":15,"harvestSpeed":1.47}]
-].map(([key, stats]) => [key, Object.freeze(stats)])));
+modules["server/neutral-stat-limits.mjs"] = (() => {
+const NEUTRAL_STAT_LIMITS = Object.freeze(Object.fromEntries([
+  ["health",{"min":9,"max":732}],
+  ["power",{"min":1,"max":232.59999999999997}],
+  ["armor",{"min":0,"max":806}],
+  ["speed",{"min":0.5,"max":3.3022500000000004}],
+  ["movement",{"min":0.225,"max":3.4374999999999996}],
+  ["vision",{"min":1,"max":12}],
+  ["combo",{"min":0,"max":19}],
+  ["comboPower",{"min":0,"max":100}],
+  ["critical",{"min":0,"max":90}],
+  ["criticalPower",{"min":0,"max":500}],
+  ["accuracy",{"min":0,"max":60}],
+  ["penetration",{"min":0,"max":286}],
+  ["comboSpeed",{"min":0.12,"max":0.06}],
+  ["focus",{"min":0.3,"max":0.08}],
+  ["evasion",{"min":0,"max":60}],
+  ["parry",{"min":0,"max":60}],
+  ["block",{"min":0,"max":90}],
+  ["blockPower",{"min":50,"max":90}],
+  ["counter",{"min":0,"max":100}],
+  ["counterPower",{"min":0,"max":200}],
+  ["tenacity",{"min":0,"max":75}],
+  ["reduction",{"min":0,"max":40}],
+  ["stun",{"min":0,"max":60}],
+  ["stunTime",{"min":0,"max":1.5}],
+  ["bleed",{"min":0,"max":75}],
+  ["bleedPower",{"min":0,"max":53}],
+  ["area",{"min":0,"max":8}],
+  ["areaPower",{"min":0,"max":100}],
+  ["lifesteal",{"min":0,"max":40}],
+  ["reflection",{"min":0,"max":75}],
+  ["regeneration",{"min":0,"max":18.599999999999998}],
+  ["capacity",{"min":0,"max":31}],
+  ["harvestSpeed",{"min":0,"max":5.166666666666667}]
+].map(([field, limits]) => [field, Object.freeze(limits)])));
 
-return { NEUTRAL_UNIT_STATS };
+return { NEUTRAL_STAT_LIMITS };
+})();
+modules["server/neutral-unit-stats.mjs"] = (() => {
+const { NEUTRAL_STAT_LIMITS } = modules["server/neutral-stat-limits.mjs"];
+
+const NEUTRAL_STAT_FIELDS = Object.freeze(["health","power","armor","speed","movement","vision","combo","comboPower","critical","criticalPower","accuracy","penetration","comboSpeed","focus","evasion","parry","block","blockPower","counter","counterPower","tenacity","reduction","stun","stunTime","bleed","bleedPower","area","areaPower","lifesteal","reflection","regeneration","capacity","harvestSpeed"]);
+
+const NEUTRAL_UNIT_TIERS = Object.freeze(Object.fromEntries([
+  ["flower-tail-bird",[1,1,3,1,16,14,17,14,8,8,3,14,5,16,12,15,12,1,1,7,3,1,1,1,1,5,6,2,2,4,4,9,1,19]],
+  ["dew-rabbit",[2,2,2,2,13,16,13,13,7,7,2,10,2,13,11,14,11,2,2,2,2,2,2,2,2,2,2,1,1,3,1,10,2,17]],
+  ["soil-mole",[6,6,6,7,8,6,1,8,10,11,8,12,11,8,10,7,10,11,11,8,8,10,10,12,9,12,11,8,8,12,7,8,9,16]],
+  ["bundle-snail",[5,10,5,15,4,4,3,4,4,2,6,2,3,4,2,3,2,15,16,3,7,12,15,6,4,3,3,9,6,7,13,14,17,4]],
+  ["cotton-sheep",[4,7,1,5,6,7,10,6,5,1,1,3,1,5,6,8,4,7,7,1,1,9,14,5,3,1,1,12,5,2,12,12,12,14]],
+  ["rolling-acorn",[3,3,4,12,10,10,2,10,6,6,7,1,7,10,1,11,8,13,12,6,6,4,4,10,5,6,7,7,7,1,11,1,6,12]],
+  ["bubble-toad",[7,8,7,6,11,9,8,11,9,10,9,7,8,11,7,12,7,8,8,11,9,8,8,17,19,7,8,18,16,15,8,11,8,9]],
+  ["snare-vine",[9,11,10,11,5,1,12,5,11,14,13,13,14,6,13,5,1,10,10,12,12,11,9,9,18,15,14,17,13,19,15,18,13,5]],
+  ["spiny-back-beetle",[8,9,8,14,9,8,4,9,12,12,12,9,15,9,9,9,16,14,14,18,16,14,12,11,8,14,13,11,11,11,18,2,11,8]],
+  ["soil-boar",[10,14,14,13,7,11,6,7,16,16,16,8,13,7,8,6,9,12,13,13,15,15,13,18,11,13,15,13,17,13,10,5,14,6]],
+  ["vine-turtle",[13,16,9,16,3,5,5,3,3,3,10,6,10,3,5,4,6,19,17,15,13,16,17,15,12,9,10,16,15,8,17,15,16,2]],
+  ["shadow-weasel",[11,5,15,4,19,18,14,18,18,18,14,16,18,18,17,16,17,4,4,17,11,5,5,8,7,18,17,5,10,17,2,7,7,13]],
+  ["talon-owl",[12,4,16,3,15,13,19,16,14,17,15,19,17,15,14,13,15,3,3,14,10,3,3,7,6,17,16,6,9,16,3,4,3,10]],
+  ["spring-keeper",[15,12,12,8,17,15,18,17,15,13,5,17,9,17,18,18,14,5,5,9,5,6,6,3,10,10,9,4,4,6,9,13,4,18]],
+  ["lantern-keeper",[14,13,11,9,14,17,15,15,13,9,4,15,4,14,16,17,13,6,6,4,4,7,7,4,13,4,4,3,3,5,5,16,5,15]],
+  ["old-garden-snail",[16,18,13,18,2,2,7,2,2,4,11,4,6,2,3,1,3,17,18,5,14,17,18,13,14,8,5,14,12,9,14,17,19,3]],
+  ["walking-forest",[19,19,18,19,1,3,11,1,1,5,17,5,12,1,4,2,5,18,19,10,18,19,19,19,17,11,12,19,19,10,16,19,18,1]],
+  ["white-paw",[18,15,19,10,18,19,16,19,19,19,19,18,19,19,19,19,19,9,9,16,17,13,11,14,15,19,19,10,14,18,6,6,10,11]],
+  ["spiny-back-leader",[17,17,17,17,12,12,9,12,17,15,18,11,16,12,15,10,18,16,15,19,19,18,16,16,16,16,18,15,18,14,19,3,15,7]]
+].map(([key, values]) => [key, Object.freeze({ tier:values[0], ...Object.fromEntries(NEUTRAL_STAT_FIELDS.map((field, index) => [field, values[index + 1]])) })])));
+
+const NEUTRAL_STAT_CURVES = Object.freeze({
+  health:[null,850,2],
+  power:[null,75,1.5],
+  armor:[null,55,2],
+  speed:[null,1.12,1],
+  movement:[null,1.1,1],
+  vision:[null,8,1],
+  combo:[null,1,2],
+  comboPower:[50,65,1],
+  critical:[null,16,2],
+  criticalPower:[200,250,1],
+  accuracy:[null,14,2],
+  penetration:[null,12,2],
+  comboSpeed:[0.12,0.06,1],
+  focus:[0.3,0.08,1],
+  evasion:[null,18,2],
+  parry:[null,12,2],
+  block:[null,24,2],
+  blockPower:[50,75,1],
+  counter:[null,15,2],
+  counterPower:[100,145,1],
+  tenacity:[null,36,2],
+  reduction:[null,12,2],
+  stun:[null,10,2],
+  stunTime:[0.35,0.56,1],
+  bleed:[null,10,2],
+  bleedPower:[1,4,1],
+  area:[null,2,2],
+  areaPower:[60,80,1],
+  lifesteal:[null,5,2],
+  reflection:[null,10,2],
+  regeneration:[null,1.9,2],
+  capacity:[null,19,1],
+  harvestSpeed:[null,1.9,1]
+});
+
+function neutralTierStat(field, tier) {
+  const limits = NEUTRAL_STAT_LIMITS[field], curve = NEUTRAL_STAT_CURVES[field];
+  if (!limits || !curve || !Number.isInteger(tier) || tier < 1 || tier > 19) throw new Error("Invalid neutral stat tier");
+  const low = Math.min(limits.min, limits.max), high = Math.max(limits.min, limits.max);
+  const clamp = value => Math.max(low, Math.min(high, value));
+  const first = clamp(curve[0] ?? limits.min), last = clamp(curve[1]);
+  const value = first + (last - first) * ((tier - 1) / 18) ** curve[2];
+  return clamp(Math.round(value * 1000000) / 1000000);
+}
+
+const NEUTRAL_UNIT_STATS = Object.freeze(Object.fromEntries(Object.entries(NEUTRAL_UNIT_TIERS)
+  .map(([key, ranks]) => [key, Object.freeze(Object.fromEntries(NEUTRAL_STAT_FIELDS.map(field => [field, neutralTierStat(field, ranks[field])])))])));
+
+return { NEUTRAL_STAT_FIELDS, NEUTRAL_UNIT_TIERS, neutralTierStat, NEUTRAL_UNIT_STATS };
 })();
 modules["server/combat-stats.mjs"] = (() => {
 const { NEUTRAL_UNIT_STATS } = modules["server/neutral-unit-stats.mjs"];
@@ -5012,11 +5120,11 @@ function neutralCombatStats(key) {
   const combat = Object.freeze({ ...stats, melee: role.melee, ranged: role.ranged,
     meleePower: role.melee ? stats.power : 0, rangedPower: role.ranged ? stats.power : 0,
     meleeSpeed: role.melee ? stats.speed : 0, rangedSpeed: role.ranged ? stats.speed : 0,
-    hits: 1 + stats.combo, recovery: 0, blockPower: 50 });
+    hits: 1 + stats.combo, recovery: 0 });
   return { health: stats.health, attack: stats.power, attackPower: stats.power, defense: stats.armor,
     attackSpeed: stats.speed, speed: stats.movement, vision: stats.vision, capacity: stats.capacity,
     harvestSpeed: stats.harvestSpeed, criticalChance: stats.critical / 100, criticalMultiplier: stats.criticalPower / 100,
-    evasion: stats.evasion / 100, parry: stats.parry / 100, block: stats.block / 100, blockReduction: .5, combat };
+    evasion: stats.evasion / 100, parry: stats.parry / 100, block: stats.block / 100, blockReduction: stats.blockPower / 100, combat };
 }
 
 function combatAbilityStats(agent) {
@@ -5051,20 +5159,18 @@ function combatProfile(agent) {
   const base = unitCombatStats(agent.species || agent.tribe);
   if (agent.species && !agent.stats?.dna && !agent.stats?.combat && base.combat) agent = { ...agent, stats: { ...base, ...agent.stats } };
   const dna = agent.stats?.dna, abilities = combatAbilityStats(agent);
-  const chance = dna ? dna.critical / 100 : Number.isFinite(agent.stats?.criticalChance) ? agent.stats.criticalChance : base.criticalChance;
-  const multiplier = dna ? dna.criticalPower / 100 : Number.isFinite(agent.stats?.criticalMultiplier) ? agent.stats.criticalMultiplier : base.criticalMultiplier;
-  const criticalChance = dna ? (Number.isFinite(chance) ? chance : 0) : Math.max(0, Math.min(.75, chance));
-  const criticalMultiplier = dna ? (Number.isFinite(multiplier) ? multiplier : 1.5) : Math.max(1, Math.min(4, multiplier));
+  const chance = abilities ? abilities.critical / 100 : Number.isFinite(agent.stats?.criticalChance) ? agent.stats.criticalChance : base.criticalChance;
+  const multiplier = abilities ? abilities.criticalPower / 100 : Number.isFinite(agent.stats?.criticalMultiplier) ? agent.stats.criticalMultiplier : base.criticalMultiplier;
+  const criticalChance = abilities ? (Number.isFinite(chance) ? chance : 0) : Math.max(0, Math.min(.75, chance));
+  const criticalMultiplier = abilities ? (Number.isFinite(multiplier) ? multiplier : 1.5) : Math.max(1, Math.min(4, multiplier));
   if (abilities) {
     const selected = dnaAttackStats(abilities, agent.attack?.attackMode || (abilities.melee || dnaDefensiveMelee(dna) ? "melee" : "ranged"));
-    if (!dna && Number.isFinite(agent.stats.attackPower)) selected.power = agent.stats.attackPower;
-    if (!dna && Number.isFinite(agent.stats.attackSpeed)) selected.speed = agent.stats.attackSpeed;
     const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;
-    return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: dna ? abilities.armor : agent.stats.defense,
+    return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: abilities.armor,
       armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: abilities.focus,
-      evasion: dna ? abilities.evasion / 100 : agent.stats.evasion,
-      parry: dna ? abilities.parry / 100 : agent.stats.parry, block: dna ? abilities.block / 100 : agent.stats.block,
-      recovery: abilities.recovery || 0, blockReduction: dna && Number.isFinite(abilities.blockPower) ? Math.max(0, Math.min(.9, abilities.blockPower / 100)) : .5, criticalChance, criticalMultiplier };
+      evasion: abilities.evasion / 100,
+      parry: abilities.parry / 100, block: abilities.block / 100,
+      recovery: abilities.recovery || 0, blockReduction: Number.isFinite(abilities.blockPower) ? Math.max(0, Math.min(.9, abilities.blockPower / 100)) : .5, criticalChance, criticalMultiplier };
   }
   const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;
   const primary = combatPrimary(agent);
@@ -5111,6 +5217,7 @@ function migrateCombatStats(agent) {
     const ratio = Math.max(0, Math.min(1, agent.health / previous));
     agent.stats = { ...agent.stats, ...profile };
     agent.health = profile.health * ratio;
+    if (agent.attack?.targetKind === "nest" && !agent.attack.hit) agent.attack.damage = profile.attackPower;
     return;
   }
   const combatStrength = profile.combatStrength + (agent.species ? 0 : attributeCombatStrengthBonus(agent.attributes));
@@ -7779,6 +7886,7 @@ function snapshotCombatVfx(environment, time, visibility) {
 return { COMBAT_VFX_JOURNAL_LIMIT, COMBAT_VFX_JOURNAL_SECONDS, combatVfxToken, recordCombatVfx, snapshotCombatVfx };
 })();
 modules["server/combat.mjs"] = (() => {
+const { basicRecoveryRate, UNIT_RECOVERY_RULES: SHARED_UNIT_RECOVERY_RULES } = modules["server/unit-recovery.mjs"];
 const { DNA_ACTION_RULES, dnaAttackMode, dnaDefensiveMelee, dnaProjectileDuration, dnaProjectileValid } = modules["server/dna-actions.mjs"];
 const { creatureAttackRole, creatureAttackMode } = modules["server/creature-attack-role.mjs"];
 const { initializeCombatPosition, advanceCombatPositions, combatSeparation, combatPositionMode } = modules["server/combat-position.mjs"];
@@ -7803,6 +7911,13 @@ const COMBAT_ESCAPE_GRACE = 2;
 const COMBAT_RETREAT_EXCHANGES = 2;
 const COMBAT_EXCHANGE_PAUSE = 1;
 const COMBAT_TURN_ORDER_VERSION = 1;
+const UNIT_RECOVERY_RULES = SHARED_UNIT_RECOVERY_RULES;
+
+function outOfCombatRecoveryRate(agent) {
+  // Neutral creatures retain their individually balanced native regeneration.
+  const basic = agent.ownerId ? basicRecoveryRate(agent.stats?.health) : 0;
+  return basic + Math.max(0, combatAbilityStats(agent)?.regeneration || 0);
+}
 const COMBAT_EXCHANGE_DAMAGE_VERSION = 5;
 
 const species = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
@@ -7925,7 +8040,7 @@ function createCombat(environment) {
   }
 
   function release(agent, time) {
-    if (combatAbilityStats(agent)) agent.dnaCombatEndedAt = time;
+    agent.dnaCombatEndedAt = time;
     if (agent.combat?.position) agent.combatPosition = { ...agent.combat.position, moving: false };
     agent.combat = null;
     agent.attack = null; agent.attackTargetId = null; agent.attackHit = true;
@@ -8048,6 +8163,8 @@ function createCombat(environment) {
     const previousHealth = entry.agent.health;
     if (entry.game) entry.game.receiveDamage(entry.agent, damage);
     else environment.creatureSystem.receiveDamage(entry.agent, damage);
+    if (entry.agent.health < previousHealth) entry.agent.dnaLastDamageAt = Math.max(entry.agent.dnaLastDamageAt || 0,
+      Number.isFinite(evidence?.at) ? evidence.at : environment.simSeconds || 0);
     if (entry.agent.health <= 0) { entry.agent.attack = null; entry.agent.attackTargetId = null; }
     if (evidence) {
       if (["hit", "block", "area"].includes(evidence.kind)) activateDefense(entry.agent, attacker, evidence.at);
@@ -8255,12 +8372,18 @@ function createCombat(environment) {
       }
       if (time >= bleed.endsAt) agent.dnaBleed = null;
     }
+    if (agent.attack) agent.dnaLastAttackAt = Math.max(agent.dnaLastAttackAt || 0,
+      agent.attack.endsAt || agent.attack.startedAt || time);
     const previous = agent.dnaRecoveryAt;
     agent.dnaRecoveryAt = time;
-    if (combatAbilityStats(agent) && !agent.combat && Number.isFinite(previous)) {
-      const start = Math.max(previous, (agent.dnaCombatEndedAt || 0) + 5);
-      if (time > start) restoreHealth(agent, combatAbilityStats(agent).regeneration * (time - start), time, "regeneration", { startedAt: start });
-    }
+    if (bleed) agent.dnaLastDamageAt = Math.max(agent.dnaLastDamageAt || 0, Math.min(time, bleed.endsAt));
+    if (agent.health <= 0 || agent.combat || creatureSpawning(agent, time) || agent.birth && time < agent.birth.readyAt ||
+        bleed && time <= bleed.endsAt || agent.attack && time < agent.attack.endsAt || !Number.isFinite(previous)) return;
+    const start = Math.max(previous, agent.birth?.readyAt || 0,
+      Math.max(agent.dnaCombatEndedAt || 0, agent.dnaLastAttackAt || 0, agent.dnaLastDamageAt || 0,
+        agent.hurtStartedAt || 0) + UNIT_RECOVERY_RULES.delay);
+    const rate = outOfCombatRecoveryRate(agent);
+    if (time > start && rate > 0) restoreHealth(agent, rate * (time - start), time, "regeneration", { startedAt: start });
   }
 
   function resolveHit(attacker, target, time) {
@@ -8480,6 +8603,9 @@ function createCombat(environment) {
   }
 
   function update(agent, time) {
+    // Capture even an expired attack before ranged cleanup clears it after a long tick.
+    if (agent.attack) agent.dnaLastAttackAt = Math.max(agent.dnaLastAttackAt || 0,
+      agent.attack.endsAt || agent.attack.startedAt || time);
     if (!canRetreat(agent)) updateRetreat(agent, time, false);
     const rangedBusy = updateDnaActions(agent, time);
     updateEffects(agent, time);
@@ -8558,7 +8684,7 @@ function createCombat(environment) {
   return { update, engage, release };
 }
 
-return { COMBAT_DISPOSITIONS, PEACEFUL_ESCAPE_CHANCE, PEACEFUL_ESCAPE_INTERVAL, COMBAT_ESCAPE_GRACE, COMBAT_RETREAT_EXCHANGES, COMBAT_EXCHANGE_PAUSE, COMBAT_TURN_ORDER_VERSION, COMBAT_EXCHANGE_DAMAGE_VERSION, combatDisposition, combatTeam, suspendDefenseWork, colonyDefenseTarget, canPursueCombat, peacefulEscapeChance, createCombat };
+return { COMBAT_DISPOSITIONS, PEACEFUL_ESCAPE_CHANCE, PEACEFUL_ESCAPE_INTERVAL, COMBAT_ESCAPE_GRACE, COMBAT_RETREAT_EXCHANGES, COMBAT_EXCHANGE_PAUSE, COMBAT_TURN_ORDER_VERSION, UNIT_RECOVERY_RULES, outOfCombatRecoveryRate, COMBAT_EXCHANGE_DAMAGE_VERSION, combatDisposition, combatTeam, suspendDefenseWork, colonyDefenseTarget, canPursueCombat, peacefulEscapeChance, createCombat };
 })();
 modules["server/player-tribes.mjs"] = (() => {
 const PLAYER_TRIBES = Object.freeze([

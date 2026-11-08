@@ -1,3 +1,4 @@
+import { basicRecoveryRate, UNIT_RECOVERY_RULES as SHARED_UNIT_RECOVERY_RULES } from "./unit-recovery.mjs";
 import { DNA_ACTION_RULES, dnaAttackMode, dnaDefensiveMelee, dnaProjectileDuration, dnaProjectileValid } from "./dna-actions.mjs";
 import { creatureAttackRole, creatureAttackMode } from "./creature-attack-role.mjs";
 import { initializeCombatPosition, advanceCombatPositions, combatSeparation, combatPositionMode } from "./combat-position.mjs";
@@ -22,6 +23,13 @@ export const COMBAT_ESCAPE_GRACE = 2;
 export const COMBAT_RETREAT_EXCHANGES = 2;
 export const COMBAT_EXCHANGE_PAUSE = 1;
 export const COMBAT_TURN_ORDER_VERSION = 1;
+export const UNIT_RECOVERY_RULES = SHARED_UNIT_RECOVERY_RULES;
+
+export function outOfCombatRecoveryRate(agent) {
+  // Neutral creatures retain their individually balanced native regeneration.
+  const basic = agent.ownerId ? basicRecoveryRate(agent.stats?.health) : 0;
+  return basic + Math.max(0, combatAbilityStats(agent)?.regeneration || 0);
+}
 export const COMBAT_EXCHANGE_DAMAGE_VERSION = 5;
 
 const species = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
@@ -144,7 +152,7 @@ export function createCombat(environment) {
   }
 
   function release(agent, time) {
-    if (combatAbilityStats(agent)) agent.dnaCombatEndedAt = time;
+    agent.dnaCombatEndedAt = time;
     if (agent.combat?.position) agent.combatPosition = { ...agent.combat.position, moving: false };
     agent.combat = null;
     agent.attack = null; agent.attackTargetId = null; agent.attackHit = true;
@@ -267,6 +275,8 @@ export function createCombat(environment) {
     const previousHealth = entry.agent.health;
     if (entry.game) entry.game.receiveDamage(entry.agent, damage);
     else environment.creatureSystem.receiveDamage(entry.agent, damage);
+    if (entry.agent.health < previousHealth) entry.agent.dnaLastDamageAt = Math.max(entry.agent.dnaLastDamageAt || 0,
+      Number.isFinite(evidence?.at) ? evidence.at : environment.simSeconds || 0);
     if (entry.agent.health <= 0) { entry.agent.attack = null; entry.agent.attackTargetId = null; }
     if (evidence) {
       if (["hit", "block", "area"].includes(evidence.kind)) activateDefense(entry.agent, attacker, evidence.at);
@@ -474,12 +484,18 @@ export function createCombat(environment) {
       }
       if (time >= bleed.endsAt) agent.dnaBleed = null;
     }
+    if (agent.attack) agent.dnaLastAttackAt = Math.max(agent.dnaLastAttackAt || 0,
+      agent.attack.endsAt || agent.attack.startedAt || time);
     const previous = agent.dnaRecoveryAt;
     agent.dnaRecoveryAt = time;
-    if (combatAbilityStats(agent) && !agent.combat && Number.isFinite(previous)) {
-      const start = Math.max(previous, (agent.dnaCombatEndedAt || 0) + 5);
-      if (time > start) restoreHealth(agent, combatAbilityStats(agent).regeneration * (time - start), time, "regeneration", { startedAt: start });
-    }
+    if (bleed) agent.dnaLastDamageAt = Math.max(agent.dnaLastDamageAt || 0, Math.min(time, bleed.endsAt));
+    if (agent.health <= 0 || agent.combat || creatureSpawning(agent, time) || agent.birth && time < agent.birth.readyAt ||
+        bleed && time <= bleed.endsAt || agent.attack && time < agent.attack.endsAt || !Number.isFinite(previous)) return;
+    const start = Math.max(previous, agent.birth?.readyAt || 0,
+      Math.max(agent.dnaCombatEndedAt || 0, agent.dnaLastAttackAt || 0, agent.dnaLastDamageAt || 0,
+        agent.hurtStartedAt || 0) + UNIT_RECOVERY_RULES.delay);
+    const rate = outOfCombatRecoveryRate(agent);
+    if (time > start && rate > 0) restoreHealth(agent, rate * (time - start), time, "regeneration", { startedAt: start });
   }
 
   function resolveHit(attacker, target, time) {
@@ -699,6 +715,9 @@ export function createCombat(environment) {
   }
 
   function update(agent, time) {
+    // Capture even an expired attack before ranged cleanup clears it after a long tick.
+    if (agent.attack) agent.dnaLastAttackAt = Math.max(agent.dnaLastAttackAt || 0,
+      agent.attack.endsAt || agent.attack.startedAt || time);
     if (!canRetreat(agent)) updateRetreat(agent, time, false);
     const rangedBusy = updateDnaActions(agent, time);
     updateEffects(agent, time);

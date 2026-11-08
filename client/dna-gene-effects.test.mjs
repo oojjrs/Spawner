@@ -49,6 +49,6 @@ test('종족별 실제 증가량과 중복 배치·상한·하한을 반영한�
 test('기관이 켜는 기존 강화 효과와 원거리 전환의 손실도 숨기지 않는다',()=>{
   const result=dnaGeneEffects(M,[piece('power')],'blade','bean');close(effect(result,'meleePower').before,1);close(effect(result,'meleePower').after,10);
   const ranged=dnaGeneEffects(M,[],'secretion','bean');assert.equal(effect(ranged,'meleePower').delta,-1);assert.equal(effect(ranged,'meleeSpeed').delta,-.5);
-  const gather=dnaGeneEffects(M,[],'gather','bean');assert.equal(effect(gather,'capacity').delta,1);assert.equal(effect(gather,'harvestTime').delta,4);
+  const gather=dnaGeneEffects(M,[],'gather','bean');assert.equal(effect(gather,'capacity').delta,1);assert.equal(effect(gather,'harvestTime').delta,3);
   const text=dnaGeneTooltip(M,[piece('blade')],'area','bean',dnaGeneNames);assert.match(text,/추가 대상 0명 → 3명/);assert.doesNotMatch(text,/3칸/);
 });

@@ -1,3 +1,4 @@
+import { basicRecoveryRate, totalRecoveryRate, UNIT_RECOVERY_RULES } from "../server/unit-recovery.mjs";
 import { createDnaAudio } from "./dna-audio.mjs";
 import { dnaGeneTooltip } from "./dna-gene-effects.mjs";
 
@@ -19,7 +20,7 @@ export function renderDnaDesignStats(container, stats, base, showScale) {
     ["counterPower", "반격위력", "%"], ["tenacity", "강인함", "%"], ["reduction", "완충", "%"],
     ["stun", "기절", "%"], ["stunTime", "기절연장", "초"], ["bleed", "출혈", "%"],
     ["bleedPower", "출혈강도", ""], ["area", "범위공격", "칸"], ["areaPower", "확산위력", "%"], ["lifesteal", "흡혈", "%"],
-    ["reflection", "반사", "%"], ["regeneration", "재생", "/초"], ["comboSpeed", "연타 간격", "초"], ["focus", "공격 준비", "초"],
+    ["reflection", "반사", "%"], ["regeneration", "비전투 총회복", "/초"], ["comboSpeed", "연타 간격", "초"], ["focus", "공격 준비", "초"],
     ["scale", "크기", "배"], ["melee", "칼날", ""], ["ranged", "분비기관", ""], ["hunting", "안테나", ""]
   ];
   const format = value => String(Number(value.toFixed(3)));
@@ -28,13 +29,18 @@ export function renderDnaDesignStats(container, stats, base, showScale) {
     if (key === "scale" && !showScale) continue;
     if (stats[key] === undefined || base[key] === undefined) continue;
     const divisor = key === "lifespan" ? 60 : 1;
-    const value = Number(stats[key]) / divisor, initial = Number(base[key]) / divisor;
+    const value = key === "regeneration" ? totalRecoveryRate(stats.health, stats.regeneration) : Number(stats[key]) / divisor;
+    const initial = key === "regeneration" ? totalRecoveryRate(base.health, base.regeneration) : Number(base[key]) / divisor;
     if (initial === 0 && value === 0) continue;
     const term = document.createElement("dt");
     term.textContent = label;
     term.dataset.stat = key;
     const description = document.createElement("dd");
     description.dataset.stat = key;
+    if (key === "regeneration") {
+      term.title = description.title = '기본 '+format(basicRecoveryRate(stats.health))+'/초 + 추가 '+format(stats.regeneration)+
+        '/초. 공격·피격·교전 종료 후 '+UNIT_RECOVERY_RULES.delay+'초부터 회복하며, 전투·출혈 중에는 회복하지 않습니다.';
+    }
     const difference = Number((value - initial).toFixed(3));
     term.className = difference !== 0 ? "design-stat-changed" : "";
     const result = document.createElement("span");

@@ -43,7 +43,7 @@ test("실제 배치한 운반3과 운반7은 새 단가로 생산비를 계산�
   for(const distance of [1,2,3]){
     assert.ok(income(large,distance)>income(small,distance),'distance '+distance);
   }
-  assert.ok(Math.abs(income(large,3)-480/62)<1e-9);
+  assert.ok(Math.abs(income(large,3)-480/54)<1e-9);
 });
 
 test("운반7의 새 생산비46를 실제 차감하고 과거 지불액은 복원과 복제에서 보존한다",()=>{
@@ -63,11 +63,11 @@ test("운반7의 새 생산비46를 실제 차감하고 과거 지불액은 복�
   assert.equal(game.agents.find(a=>a.id===agentId).cost,29);assert.equal(game.snapshot().evolutionPoints,0);
 });
 
-test("기관1개와 운반8개는 기본비를 포함해51P이며 기존 채집 주기를 유지한다",()=>{
+test("기관1개와 운반8개는51P이며 기본3초 채집 주기를 적용한다",()=>{
   const pieces=M.pack(['gather',...Array(8).fill('capacity')].map(gene=>({gene,grade:1,rotation:0})),2);
   assert.ok(pieces);const dna={version:6,level:2,budget:0,pieces};assert.ok(validateDna(dna,2,100));
   const cost=birthCost({dna},'bean'),rate=income(dna,3);
   assert.equal(cost,51);
-  assert.ok(Math.abs(rate-540/66)<1e-9);
-  assert.equal(Math.ceil(cost/9)*66,396);
+  assert.ok(Math.abs(rate-540/57)<1e-9);
+  assert.equal(Math.ceil(cost/9)*57,342);
 });

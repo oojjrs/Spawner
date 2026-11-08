@@ -228,7 +228,7 @@ test("범례는 종류별 개수와 실효 변화량을 표시하고 칸 수 배
   const {editor,root}=fixture(t),legend=root.querySelector('.dna-legend');editor.context(4,1000,false);
   const pieces=ATTRIBUTE_DNA.pack(['gather','capacity','capacity','harvestSpeed','harvestSpeed','health','movement','antenna','block','armor'].map(id=>piece(id,0)),4);editor.load({version:6,pieces,level:4,budget:1000},false);
   const rows=()=>Object.fromEntries(legend.children.map(row=>[row.dataset.gene,row.children.slice(1).map(child=>child.textContent)]));
-  assert.deepEqual(rows(),{capacity:['×2',' (운반 +2개)'],gather:['×1',' (채집 기능 해금)'],harvestSpeed:['×2',' (채집 시간 -1.5초)'],health:['×1',' (체력 +20)'],movement:['×1',' (이동 +'+Number((ATTRIBUTE_DNA.stats([piece('gather',0),piece('movement',0)]).movement-ATTRIBUTE_DNA.stats([piece('gather',0)]).movement).toFixed(3))+'칸/초)'],antenna:['×1'],block:['×1',' (방어본능 +25%)'],armor:['×1',' (방어 +30)']});
+  assert.deepEqual(rows(),{capacity:['×2',' (운반 +2개)'],gather:['×1',' (채집 기능 해금)'],harvestSpeed:['×2',' (채집 시간 '+Number((ATTRIBUTE_DNA.stats([piece('gather',0),piece('harvestSpeed',0),piece('harvestSpeed',0)]).harvestTime-ATTRIBUTE_DNA.stats([piece('gather',0)]).harvestTime).toFixed(3))+'초)'],health:['×1',' (체력 +20)'],movement:['×1',' (이동 +'+Number((ATTRIBUTE_DNA.stats([piece('gather',0),piece('movement',0)]).movement-ATTRIBUTE_DNA.stats([piece('gather',0)]).movement).toFixed(3))+'칸/초)'],antenna:['×1'],block:['×1',' (방어본능 +25%)'],armor:['×1',' (방어 +30)']});
   assert.equal(legend.hidden,false);assert.equal(root.querySelector('.dna-board').children.some(child=>child.className==='dna-fill'),false);
   root.dispatch('keydown',{key:'Delete'});assert.equal(rows().armor,undefined);root.dispatch('keydown',{key:'z',ctrlKey:true});assert.deepEqual(rows().armor,['×1',' (방어 +30)']);editor.load({version:6,pieces:[],level:4,budget:1000},false);assert.equal(legend.hidden,true);
 });
@@ -268,4 +268,19 @@ test("공간 부족과 기관 중복은 텍스트로 표시하고 재배치 후 
   const pieces=ATTRIBUTE_DNA.pack(['gather',...Array(7).fill('capacity'),'movement'].map(id=>piece(id,0)),1);
   editor.load(design(pieces),false);assert.equal(item('health').dataset.availability,'blocked');assert.match(item('health').title,/공간 부족/);
   root.dispatch('keydown',{key:'Delete'});assert.equal(item('movement').dataset.availability,'available');
+});
+
+test('설계 패널은 원본 재생을 변경하지 않고 비전투 총량과 기본·추가 설명을 표시한다',t=>{
+  const {element}=fixture(t),container=element();
+  for(const tribe of ['bean','spore','pebble','spring'])for(const genes of [[],['health'],['health','regeneration'],Array(5).fill('health')]) {
+    const {stats,base}=dnaDesignStats(ATTRIBUTE_DNA,genes.map(id=>piece(id,0)),tribe);
+    const saved=structuredClone({stats,base});
+    renderDnaDesignStats(container,stats,base,false);
+    assert.deepEqual({stats,base},saved);
+    const term=container.children.find(el=>el.dataset.stat==='regeneration');
+    const value=container.children.find(el=>el.dataset.stat==='regeneration'&&el.children.length);
+    assert.equal(term.textContent,'비전투 총회복');
+    assert.equal(value.children[0].textContent,String(Number((.05+Math.min(stats.health*.005,.3)+stats.regeneration).toFixed(3)))+'/초');
+    assert.match(value.title,/기본 .*추가/);assert.match(value.title,/5초/);assert.match(value.title,/전투·출혈 중/);
+  }
 });
