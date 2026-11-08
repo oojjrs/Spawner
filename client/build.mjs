@@ -109,12 +109,13 @@ function writeDesignWorld() {
   const model = `(() => {\n${bundle(["server/map.mjs","server/nests.mjs","server/attributes.mjs","server/tribe-production.mjs","server/conquest-economy.mjs"])}\nconst map = modules["server/map.mjs"];\nglobalThis.SpawnerDesignWorld = { ...map, ...modules["server/conquest-pacing.mjs"], ...modules["server/nests.mjs"], ...modules["server/attributes.mjs"], ...modules["server/tribe-production.mjs"], ...modules["server/conquest-economy.mjs"], ENCOUNTER_PLANS:map.ENCOUNTER_PLANS.map(modules["server/conquest-pacing.mjs"].conquestEncounterPlan), generateWorld: (seed, onProgress) => map.generateMapWorld(seed, onProgress, undefined, true) };\n})();`;
   const values = '<table class="map-legend-table" id="conquest-rules" style="word-break:keep-all"><colgroup><col style="width:92px"><col></colgroup><tbody>' +
     '<tr><th>새싹콩</th><td>0–' + CONQUEST_PACING.quietUntil + '초 · 중립 ≈' + CONQUEST_PACING.neutralConflictAt + '초 · 종족 ' + CONQUEST_PACING.tribeContactAt + '초+ · 정찰 &lt;' + CONQUEST_PACING.tribeContactAt + '초</td></tr>' +
-    '<tr><th>둥지</th><td>Lv.2 ' + CONQUEST_PACING.nestCosts[0] + 'P · Lv.3 ' + CONQUEST_PACING.nestCosts[1] + 'P · Lv.4 ' + CONQUEST_PACING.nestCosts[2] + 'P · AI ≥' + CONQUEST_PACING.aiLevelFourAt + '초</td></tr>' +
-    '<tr><th>일꾼:군사</th><td>80:20 → 30:70 · 30–40 · 60–70</td></tr>' +
+    '<tr><th>둥지</th><td>Lv.2 ' + CONQUEST_PACING.nestCosts[0] + 'P · Lv.3 ' + CONQUEST_PACING.nestCosts[1] + 'P · Lv.4 ' + CONQUEST_PACING.nestCosts[2] + 'P · AI는 일꾼 편성과 교체 예비금을 확보한 뒤 성장</td></tr>' +
+    '<tr><th>AI 편성</th><td>일꾼 6/4/6/10 · Lv.2부터 둥지 수비 1/1/3 · Lv.4 강화 일꾼 8기 이후 출정</td></tr>' +
     '</tbody></table>';
   if (design.includes('id="conquest-rules"')) design = design.replace(/<table[^>]*id="conquest-rules"[^>]*>[\s\S]*?<\/table>/,values);
   else design = design.replace('<details class="map-encounter-rules" id="world-encounter-rules">',values + '\n<details class="map-encounter-rules" id="world-encounter-rules">');
-  const updated = design.replace(/(<script id="design-world-model"[^>]*>)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\n" + model + "\n" + end).replace(/\r?\n/g, "\r\n");
+  const newline = original.includes("\r\n") ? "\r\n" : "\n";
+  const updated = design.replace(/(<script id="design-world-model"[^>]*>)[\s\S]*?(<\/script>)/, (match, start, end) => start + "\n" + model + "\n" + end).replace(/\r?\n/g, newline);
   if (updated !== original) writeDesignSection(path, updated);
 }
 

@@ -6,7 +6,8 @@
     "start": "node hosting/serve.mjs",
     "build": "node client/build.mjs",
     "audit:images": "node client/image-audit.mjs",
-    "balance": "node server/balance.mjs"
+    "balance": "node server/balance.mjs",
+    "balance:ai": "node server/balance-ai.mjs"
   },
   "engines": { "node": ">=22" }
 }

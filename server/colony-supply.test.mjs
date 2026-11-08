@@ -2,7 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { colonySupply, colonyForagers, recordColonyIncome, restoreColonyIncome } from "./colony-supply.mjs";
 import { createUtilityAI } from "./utility.mjs";
-import { attributeCounts, unitStats } from "./attributes.mjs";
+import { attributeCounts, unitStats, birthCost } from "./attributes.mjs";
+import { basicGathererDna } from "./dna-unit.mjs";
 
 function fixture(points) {
   const attributes = attributeCounts(["feet"]);
@@ -114,4 +115,18 @@ test("복원 수급 이력은 미래·음수·기한 밖 항목을 제거하고 
   restoreColonyIncome(state, {});
   assert.deepEqual(state.foodIncome, []);
   assert.equal(state.foodIncomeStartedAt, 100);
+});
+
+
+test("DNA 군락의 회복 예비금은 실제 기본 채집 DNA 비용이며 기존 슬롯 군락은 유지한다", () => {
+  const { state } = fixture(0);
+  const legacyReserve = birthCost({ slots: ["strength"] }, "bean");
+  assert.equal(colonySupply(state, "bean").reserve, legacyReserve);
+  state.agents[0].dna = basicGathererDna();
+  assert.equal(colonySupply(state, "bean").reserve, 11);
+  state.agents = [];
+  assert.equal(colonySupply(state, "bean").reserve, 11);
+  state.agents = [{ health: 10 }];
+  state.templates = [{ dna: basicGathererDna() }];
+  assert.equal(colonySupply(state, "bean").reserve, 11);
 });

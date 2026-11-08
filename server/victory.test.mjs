@@ -77,7 +77,7 @@ test("상대가 회생할 수 있으면 승리하지 않고 회생 수단까지 
   const last = enemies[0];
   const data = JSON.parse(last.save());
   data.state.agents = [];
-  data.state.evolutionPoints = 3;
+  data.state.evolutionPoints = 11;
   last.restore(JSON.stringify(data));
   assert.equal(room.games.get(room.hostId).checkEnding(), null);
   data.state.evolutionPoints = 0;

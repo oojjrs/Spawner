@@ -1,5 +1,9 @@
+import { basicGathererDna } from "./dna-unit.mjs";
 import { militaryAgent } from "./conquest-pacing.mjs";
 import { HARVEST_ATTRIBUTE_KEYS, birthCost, unitCarryCapacity, unitTravelSpeed } from "./attributes.mjs";
+
+// Recovery design and price are catalog constants, not per-decision work.
+const DNA_RECOVERY_COST = birthCost({ dna:basicGathererDna() });
 
 export function recordColonyIncome(state, amount) {
   if (!(amount > 0) || !Number.isFinite(amount)) return;
@@ -20,7 +24,8 @@ export function restoreColonyIncome(state, saved) {
 
 export function colonySupply(state, tribe) {
   const living = state.agents.filter(agent => agent.health > 0);
-  const reserve = birthCost({ slots:["strength"] }, tribe);
+  const dnaEconomy = !living.length || living.some(agent => agent.dna) || state.templates?.some(template => template.dna);
+  const reserve = dnaEconomy ? DNA_RECOVERY_COST : birthCost({ slots:["strength"] }, tribe);
   const gap = Number.isFinite(state.lastFoodAt) ? Math.max(0, state.simSeconds - state.lastFoodAt) : 0;
   if (state.evolutionPoints >= reserve * 3 || !living.length) state.supplyInterrupted = false;
   else if (gap > 30) state.supplyInterrupted = true;

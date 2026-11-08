@@ -23,7 +23,7 @@ document.write(
 "    </figcaption>\n" +
 "    <aside class=\"map-logic\" id=\"map-logic\" aria-label=\"배치 로직 설명\" hidden><span class=\"map-logic-current\">현재 미리보기</span><h3 id=\"map-logic-title\"></h3><div id=\"map-logic-body\"></div></aside>\n" +
 "  </figure>\n" +
-"  <table class=\"map-legend-table\" id=\"conquest-rules\" style=\"word-break:keep-all\"><colgroup><col style=\"width:92px\"><col></colgroup><tbody><tr><th>새싹콩</th><td>0–120초 · 중립 ≈300초 · 종족 420초+ · 정찰 &lt;420초</td></tr><tr><th>둥지</th><td>Lv.2 80P · Lv.3 200P · Lv.4 500P · AI ≥1200초</td></tr><tr><th>일꾼:군사</th><td>80:20 → 30:70 · 30–40 · 60–70</td></tr></tbody></table>\n" +
+"  <table class=\"map-legend-table\" id=\"conquest-rules\" style=\"word-break:keep-all\"><colgroup><col style=\"width:92px\"><col></colgroup><tbody><tr><th>새싹콩</th><td>0–120초 · 중립 ≈300초 · 종족 420초+ · 정찰 &lt;420초</td></tr><tr><th>둥지</th><td>Lv.2 40P · Lv.3 100P · Lv.4 300P · AI는 일꾼 편성과 교체 예비금을 확보한 뒤 성장</td></tr><tr><th>AI 편성</th><td>일꾼 6/4/6/10 · Lv.2부터 둥지 수비 1/1/3 · Lv.4 강화 일꾼 8기 이후 출정</td></tr></tbody></table>\n" +
 "\n" +
 "  <template id=\"map-mountain-textures\"><div class=\"map-mountain-textures\">\n" +
 "    <figure><a href=\"DesignAssets/Terrain/low-mountain-ground.png\" style=\"--terrain-color:#263029\"><img alt=\"낮은 산 바닥\" width=\"1024\" height=\"1024\" data-original-src=\"DesignAssets/Terrain/low-mountain-ground.png\" data-src=\"DesignAssets/Planning/Thumbnails/Terrain/low-mountain-ground.png.webp\" decoding=\"async\"></a><figcaption>낮은 산<small>low-mountain-ground.png</small></figcaption></figure>\n" +
@@ -342,10 +342,10 @@ document.write(
 "const { correctStartingEconomy, measureStartingEconomy } = modules[\"server/start-economy.mjs\"];\n" +
 "\n" +
 "const RESOURCE_ECONOMY = Object.freeze([\n" +
-"  { tribe: \"bean\", key: \"clay\", coverage: .035, amount: 12, harvestSeconds: 4 },\n" +
-"  { tribe: \"spore\", key: \"tree\", coverage: null, amount: 30, harvestSeconds: 6 },\n" +
-"  { tribe: \"pebble\", key: \"pebbles\", coverage: .045, amount: 12, harvestSeconds: 6 },\n" +
-"  { tribe: \"spring\", key: \"dew\", coverage: null, amount: 1, harvestSeconds: 2 }\n" +
+"  { tribe: \"bean\", key: \"clay\", coverage: .035, amount: 12, harvestSeconds: 3 },\n" +
+"  { tribe: \"spore\", key: \"tree\", coverage: null, amount: 30, harvestSeconds: 3 },\n" +
+"  { tribe: \"pebble\", key: \"pebbles\", coverage: .045, amount: 12, harvestSeconds: 3 },\n" +
+"  { tribe: \"spring\", key: \"dew\", coverage: null, amount: 1, harvestSeconds: 3 }\n" +
 "].map(entry => Object.freeze(entry)));\n" +
 "\n" +
 "const RESOURCE_NODE_AMOUNT = 5000;\n" +
@@ -2574,7 +2574,7 @@ document.write(
 "modules[\"server/conquest-pacing.mjs\"] = (() => {\n" +
 "const CONQUEST_PACING = Object.freeze({ quietUntil:120, guidanceAt:160, neutralConflictAt:300, tribeContactAt:420,\n" +
 "  expertLevelFourAt:600, aiLevelFourAt:1200, activePopulation:36, inefficientPopulation:70,\n" +
-"  workerShare:Object.freeze([.8,.65,.45,.3]), nestCosts:Object.freeze([80,200,500,null]),\n" +
+"  workerShare:Object.freeze([.8,.65,.45,.3]), nestCosts:Object.freeze([40,100,300,null]),\n" +
 "  attributeCosts:Object.freeze([0,0,8,16,24]), aiUpgradeAt:Object.freeze([0,270,690,1200]),\n" +
 "  productionInterval:3, frontierSamples:48 });\n" +
 "\n" +
@@ -8260,19 +8260,19 @@ document.write(
 "    growth: {}\n" +
 "  },\n" +
 "  pebble: {\n" +
-"    base: { health: 1.2, armor: 6, meleePower: .85, rangedPower: .85, meleeSpeed: .9, rangedSpeed: .9, movement: .9 },\n" +
+"    base: { health: 1.2, armor: 6, meleePower: .85, rangedPower: .85, meleeSpeed: .9, rangedSpeed: .9, movement: .9, gatherCapacity: 2, loadSpeed: 65 },\n" +
 "    growth: { health: 1.2, carapace: 1.6, armor: 1.6, power: .85, rangedPower: .85, speed: .9, rangedSpeed: .9,\n" +
-"      block: 1.2, tenacity: 1.2, reduction: 1.15, reflection: 1.2, regeneration: 1.2, evasion: .8, movement: .85 }\n" +
+"      block: 1.2, tenacity: 1.2, reduction: 1.15, reflection: 1.2, regeneration: 1.2, evasion: .8, movement: .85, gatherMovement: 1.2 }\n" +
 "  },\n" +
 "  spore: {\n" +
-"    base: { health: .9, armor: 0, meleePower: .85, rangedPower: 1.15, meleeSpeed: .95, rangedSpeed: 1.05, movement: 1 },\n" +
+"    base: { health: .9, armor: 0, meleePower: .85, rangedPower: 1.15, meleeSpeed: .95, rangedSpeed: 1.05, movement: 1, gatherMovement: .55 },\n" +
 "    growth: { health: .85, carapace: .85, armor: .85, power: .8, rangedPower: 1.25, speed: .9, rangedSpeed: 1.15,\n" +
 "      accuracy: 1.2, penetration: 1.1, critical: 1.1, evasion: .9, block: .85, regeneration: .9, movement: .95 }\n" +
 "  },\n" +
 "  spring: {\n" +
-"    base: { health: .95, armor: 0, meleePower: 1.1, rangedPower: .85, meleeSpeed: 1.05, rangedSpeed: .95, movement: 1.1 },\n" +
+"    base: { health: .95, armor: 0, meleePower: 1.1, rangedPower: .85, meleeSpeed: 1.05, rangedSpeed: .95, movement: 1 },\n" +
 "    growth: { health: .95, carapace: .8, armor: .8, power: 1.2, rangedPower: .8, speed: 1.15, rangedSpeed: .9,\n" +
-"      evasion: 1.2, parry: 1.1, counter: 1.15, lifesteal: 1.15, regeneration: 1.05, focus: 1.1, movement: 1.15 }\n" +
+"      evasion: 1.2, parry: 1.1, counter: 1.15, lifesteal: 1.15, regeneration: 1.05, focus: 1.1, movement: 1.15, gatherMovement: .9 }\n" +
 "  }\n" +
 "}).map(([tribe, profile]) => [tribe, Object.freeze({ base: Object.freeze(profile.base), growth: Object.freeze(profile.growth) })])));\n" +
 "\n" +
@@ -8294,7 +8294,7 @@ document.write(
 "  flatPenPerPoint: 5, percentPenCap: .8, percentPenKnee: 4,\n" +
 "  attackRateBase: .5, hasteCap: 7, hasteKnee: 70, maxActionRate: 4,\n" +
 "  windupBase: .3, focusPerPoint: .04, windupMinimum: .08,\n" +
-"  hitGapBase: .12, hitSpeedPerPoint: .01, hitGapMinimum: .06, recovery: 0,\n" +
+"  hitGapBase: .18, hitSpeedPerPoint: .02, hitGapMinimum: .06, recovery: 0,\n" +
 "  defensePreparation: 0, reactionCooldown: 0, counterCooldown: 0,\n" +
 "  followupBase: .5, comboPerPoint: .05, followupCap: 1,\n" +
 "  critCap: .9, critKnee: 9, critMultiplierBase: 2, critMultiplierCap: 5, critPowerKnee: 20,\n" +
@@ -8322,6 +8322,8 @@ document.write(
 "  const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * base.rangedSpeed * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;\n" +
 "  return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0,\n" +
 "    melee, ranged, defensiveMelee, meleePower, meleeSpeed, rangedPower, rangedSpeed,\n" +
+"    meleeTimingRate: melee && rules.attackRateBase * base.meleeSpeed > 0 ? meleeSpeed / (rules.attackRateBase * base.meleeSpeed) : 1,\n" +
+"    rangedTimingRate: ranged && rules.rangedAttackRateBase * base.rangedSpeed > 0 ? rangedSpeed / (rules.rangedAttackRateBase * base.rangedSpeed) : 1,\n" +
 "    ...(rules.recovery ? { recovery: rules.recovery } : {}),\n" +
 "    health: rules.healthBase * base.health + rules.healthPerPoint * (n.health || 0),\n" +
 "    power: melee || defensiveMelee ? meleePower : rangedPower, hits: attack ? 1 + (c.combo || 0) : 1, speed: melee || defensiveMelee ? meleeSpeed : rangedSpeed,\n" +
@@ -8335,10 +8337,10 @@ document.write(
 "    accuracy: attack ? 100 * capped(n.accuracy || 0, rules.accuracyCap, rules.accuracyKnee) : 0,\n" +
 "    penetration: attack ? rules.flatPenPerPoint * (n.penetration || 0) : 0,\n" +
 "    ...(n.percentPen ? { armorPenetration: capped(n.percentPen, rules.percentPenCap, rules.percentPenKnee) } : {}),\n" +
-"    blockPower: 100 * Math.min(rules.blockReductionCap, rules.blockReductionBase + .05 * (c.blockPower || 0)),\n" +
+"    blockPower: 100 * Math.min(rules.blockReductionCap, rules.blockReductionBase + .15 * (c.blockPower || 0)),\n" +
 "    counter: (attack || c.carapace) ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,\n" +
 "    counterPower: (attack || c.carapace) ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,\n" +
-"    tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),\n" +
+"    tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 4 * (n.reduction || 0)),\n" +
 "    stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,\n" +
 "    stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,\n" +
 "    bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,\n" +
@@ -8356,6 +8358,7 @@ document.write(
 "const { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoardPack } = modules[\"server/dna-board.mjs\"];\n" +
 "const { dnaCombatStats } = modules[\"server/dna-combat-stats.mjs\"];\n" +
 "const { tribeDnaStats } = modules[\"server/tribe-dna-stats.mjs\"];\n" +
+"const { RESOURCE_ECONOMY } = modules[\"server/economy.mjs\"];\n" +
 "\n" +
 "const ATTRIBUTE_DNA = (() => {\n" +
 "  const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};\n" +
@@ -8394,11 +8397,12 @@ document.write(
 "  function weights(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+(piece.grade===undefined?1:piece.grade);return result;}\n" +
 "  function stats(pieces,tribe){\n" +
 "    const n=weights(pieces),c=counts(pieces),gather=!!c.gather,profile=tribeDnaStats(tribe);\n" +
+"    const resource=RESOURCE_ECONOMY.find(entry=>entry.tribe===tribe)||RESOURCE_ECONOMY[0],harvestReduction=gather?Math.min(100,10*(n.harvestSpeed||0)):0;\n" +
 "    return {...dnaCombatStats(c,n,undefined,tribe),gatherCount:c.gather||0,antennaCount:c.antenna||0,\n" +
-"      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?1:0,\n" +
-"      harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25*profile.base.movement+.04*(n.movement||0)*(profile.growth.movement??1),\n" +
+"      capacity:gather?c.gather*(profile.base.gatherCapacity??1)+(n.capacity||0):0,harvest:gather?1:0,\n" +
+"      harvestReduction,harvestTime:gather?resource.harvestSeconds*(100-harvestReduction)/100:0,movement:.25*(gather?(profile.base.gatherMovement??profile.base.movement):profile.base.movement)+(gather?.11:.04)*(n.movement||0)*(profile.growth[gather?'gatherMovement':'movement']??profile.growth.movement??1),\n" +
 "      vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion||c.carapace),\n" +
-"      lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed:gather?75:0};\n" +
+"      lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed:gather?(profile.base.loadSpeed??75):0};\n" +
 "  }\n" +
 "  function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,q:piece.q,r:piece.r};}\n" +
 "  function validate(value){\n" +
@@ -8461,30 +8465,122 @@ document.write(
 "\n" +
 "return { TRIBE_UNIT_STATS, ATTRIBUTE_STAT_VALUES };\n" +
 "})();\n" +
-"modules[\"server/neutral-unit-stats.mjs\"] = (() => {\n" +
-"const NEUTRAL_UNIT_STATS = Object.freeze(Object.fromEntries([\n" +
-"  [\"flower-tail-bird\",{\"health\":30,\"power\":9.6,\"armor\":0,\"speed\":1,\"movement\":0.95,\"vision\":7.53,\"combo\":0.15,\"comboPower\":45,\"critical\":3,\"criticalPower\":150,\"accuracy\":7,\"penetration\":0,\"comboSpeed\":0.34,\"focus\":0.34,\"evasion\":12,\"parry\":4,\"block\":0,\"blockPower\":50,\"counter\":0,\"counterPower\":105,\"tenacity\":0,\"reduction\":0,\"stun\":0,\"stunTime\":0.2,\"bleed\":0,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":0.9,\"capacity\":1,\"harvestSpeed\":1.9}],\n" +
-"  [\"dew-rabbit\",{\"health\":44,\"power\":9.3,\"armor\":1,\"speed\":0.88,\"movement\":1.01,\"vision\":6.52,\"combo\":0.1,\"comboPower\":45,\"critical\":3,\"criticalPower\":150,\"accuracy\":4,\"penetration\":0,\"comboSpeed\":0.4,\"focus\":0.36,\"evasion\":11,\"parry\":4,\"block\":0,\"blockPower\":50,\"counter\":0,\"counterPower\":102.5,\"tenacity\":2,\"reduction\":0,\"stun\":0,\"stunTime\":0.22,\"bleed\":0,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":1,\"capacity\":2,\"harvestSpeed\":1.84}],\n" +
-"  [\"soil-mole\",{\"health\":100,\"power\":16,\"armor\":10,\"speed\":0.68,\"movement\":0.65,\"vision\":2,\"combo\":0,\"comboPower\":50,\"critical\":5,\"criticalPower\":155,\"accuracy\":5,\"penetration\":3,\"comboSpeed\":0.5,\"focus\":0.38,\"evasion\":4,\"parry\":3,\"block\":5,\"blockPower\":50,\"counter\":1,\"counterPower\":117.5,\"tenacity\":18,\"reduction\":2,\"stun\":2,\"stunTime\":0.36,\"bleed\":2,\"bleedPower\":1,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":0.8,\"capacity\":9,\"harvestSpeed\":1.81}],\n" +
-"  [\"bundle-snail\",{\"health\":135,\"power\":10.5,\"armor\":30,\"speed\":0.52,\"movement\":0.55,\"vision\":3.29,\"combo\":0,\"comboPower\":40,\"critical\":0,\"criticalPower\":150,\"accuracy\":0,\"penetration\":0,\"comboSpeed\":0.58,\"focus\":0.54,\"evasion\":1,\"parry\":0,\"block\":12,\"blockPower\":50,\"counter\":0,\"counterPower\":115,\"tenacity\":22,\"reduction\":5,\"stun\":0,\"stunTime\":0.26,\"bleed\":0,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":1,\"regeneration\":1.4,\"capacity\":17,\"harvestSpeed\":1.31}],\n" +
-"  [\"cotton-sheep\",{\"health\":120,\"power\":9,\"armor\":5,\"speed\":0.6,\"movement\":0.69,\"vision\":5.69,\"combo\":0,\"comboPower\":40,\"critical\":0,\"criticalPower\":150,\"accuracy\":1,\"penetration\":0,\"comboSpeed\":0.56,\"focus\":0.46,\"evasion\":5,\"parry\":0,\"block\":2,\"blockPower\":50,\"counter\":0,\"counterPower\":100,\"tenacity\":16,\"reduction\":4,\"stun\":0,\"stunTime\":0.24,\"bleed\":0,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":1.2,\"capacity\":12,\"harvestSpeed\":1.74}],\n" +
-"  [\"rolling-acorn\",{\"health\":55,\"power\":10,\"armor\":20,\"speed\":0.76,\"movement\":0.81,\"vision\":2.79,\"combo\":0,\"comboPower\":45,\"critical\":2,\"criticalPower\":155,\"accuracy\":0,\"penetration\":1,\"comboSpeed\":0.46,\"focus\":0.56,\"evasion\":8,\"parry\":2,\"block\":8,\"blockPower\":50,\"counter\":0,\"counterPower\":112.5,\"tenacity\":6,\"reduction\":0,\"stun\":1,\"stunTime\":0.28,\"bleed\":0,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":0.1,\"capacity\":6,\"harvestSpeed\":1.67}],\n" +
-"  [\"bubble-toad\",{\"health\":125,\"power\":17,\"armor\":8,\"speed\":0.8,\"movement\":0.77,\"vision\":5.1,\"combo\":0,\"comboPower\":45,\"critical\":4,\"criticalPower\":155,\"accuracy\":3,\"penetration\":2,\"comboSpeed\":0.44,\"focus\":0.44,\"evasion\":9,\"parry\":2,\"block\":2,\"blockPower\":50,\"counter\":2,\"counterPower\":120,\"tenacity\":14,\"reduction\":1,\"stun\":6,\"stunTime\":0.56,\"bleed\":0,\"bleedPower\":0,\"area\":1,\"areaPower\":25,\"lifesteal\":0,\"reflection\":0,\"regeneration\":1.1,\"capacity\":8,\"harvestSpeed\":1.55}],\n" +
-"  [\"snare-vine\",{\"health\":155,\"power\":24,\"armor\":18,\"speed\":0.56,\"movement\":0.3,\"vision\":6.25,\"combo\":0,\"comboPower\":50,\"critical\":7,\"criticalPower\":165,\"accuracy\":6,\"penetration\":5,\"comboSpeed\":0.54,\"focus\":0.32,\"evasion\":2,\"parry\":0,\"block\":4,\"blockPower\":50,\"counter\":3,\"counterPower\":127.5,\"tenacity\":20,\"reduction\":1,\"stun\":0,\"stunTime\":0.54,\"bleed\":4,\"bleedPower\":2,\"area\":1,\"areaPower\":20,\"lifesteal\":5,\"reflection\":3,\"regeneration\":1.8,\"capacity\":13,\"harvestSpeed\":1.36}],\n" +
-"  [\"spiny-back-beetle\",{\"health\":130,\"power\":18,\"armor\":25,\"speed\":0.72,\"movement\":0.73,\"vision\":3.71,\"combo\":0,\"comboPower\":50,\"critical\":5,\"criticalPower\":160,\"accuracy\":4,\"penetration\":6,\"comboSpeed\":0.48,\"focus\":0.4,\"evasion\":6,\"parry\":8,\"block\":10,\"blockPower\":50,\"counter\":12,\"counterPower\":137.5,\"tenacity\":26,\"reduction\":3,\"stun\":1,\"stunTime\":0.34,\"bleed\":3,\"bleedPower\":1,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":8,\"regeneration\":0.2,\"capacity\":11,\"harvestSpeed\":1.51}],\n" +
-"  [\"soil-boar\",{\"health\":180,\"power\":31,\"armor\":22,\"speed\":0.64,\"movement\":0.85,\"vision\":4.45,\"combo\":0,\"comboPower\":61,\"critical\":10,\"criticalPower\":170,\"accuracy\":3,\"penetration\":4,\"comboSpeed\":0.52,\"focus\":0.42,\"evasion\":3,\"parry\":3,\"block\":6,\"blockPower\":50,\"counter\":4,\"counterPower\":135,\"tenacity\":28,\"reduction\":3,\"stun\":8,\"stunTime\":0.4,\"bleed\":2,\"bleedPower\":2,\"area\":1,\"areaPower\":30,\"lifesteal\":0,\"reflection\":0,\"regeneration\":0.5,\"capacity\":14,\"harvestSpeed\":1.42}],\n" +
-"  [\"vine-turtle\",{\"health\":295,\"power\":19,\"armor\":38,\"speed\":0.48,\"movement\":0.6,\"vision\":4.09,\"combo\":0,\"comboPower\":40,\"critical\":1,\"criticalPower\":160,\"accuracy\":2,\"penetration\":3,\"comboSpeed\":0.6,\"focus\":0.48,\"evasion\":1,\"parry\":1,\"block\":24,\"blockPower\":50,\"counter\":6,\"counterPower\":130,\"tenacity\":30,\"reduction\":8,\"stun\":4,\"stunTime\":0.42,\"bleed\":0,\"bleedPower\":1,\"area\":1,\"areaPower\":25,\"lifesteal\":0,\"reflection\":6,\"regeneration\":1.5,\"capacity\":16,\"harvestSpeed\":1.16}],\n" +
-"  [\"shadow-weasel\",{\"health\":88,\"power\":41,\"armor\":3,\"speed\":1.12,\"movement\":1.07,\"vision\":6.78,\"combo\":1,\"comboPower\":63,\"critical\":14,\"criticalPower\":165,\"accuracy\":9,\"penetration\":10,\"comboSpeed\":0.3,\"focus\":0.24,\"evasion\":13,\"parry\":9,\"block\":0,\"blockPower\":50,\"counter\":10,\"counterPower\":125,\"tenacity\":8,\"reduction\":0,\"stun\":0,\"stunTime\":0.32,\"bleed\":8,\"bleedPower\":3,\"area\":0,\"areaPower\":0,\"lifesteal\":3,\"reflection\":0,\"regeneration\":0.7,\"capacity\":7,\"harvestSpeed\":1.71}],\n" +
-"  [\"talon-owl\",{\"health\":85,\"power\":59,\"armor\":2,\"speed\":0.96,\"movement\":0.92,\"vision\":8,\"combo\":0.9,\"comboPower\":55,\"critical\":12,\"criticalPower\":170,\"accuracy\":14,\"penetration\":8,\"comboSpeed\":0.36,\"focus\":0.3,\"evasion\":10,\"parry\":7,\"block\":0,\"blockPower\":50,\"counter\":5,\"counterPower\":122.5,\"tenacity\":4,\"reduction\":0,\"stun\":0,\"stunTime\":0.3,\"bleed\":6,\"bleedPower\":2,\"area\":0,\"areaPower\":0,\"lifesteal\":2,\"reflection\":0,\"regeneration\":0.4,\"capacity\":3,\"harvestSpeed\":1.59}],\n" +
-"  [\"spring-keeper\",{\"health\":177,\"power\":30.4,\"armor\":14,\"speed\":1.07,\"movement\":0.98,\"vision\":7.76,\"combo\":0.95,\"comboPower\":60,\"critical\":6,\"criticalPower\":150,\"accuracy\":11.5,\"penetration\":2,\"comboSpeed\":0.32,\"focus\":0.21,\"evasion\":17.5,\"parry\":6,\"block\":1,\"blockPower\":50,\"counter\":1,\"counterPower\":110,\"tenacity\":10,\"reduction\":0,\"stun\":0,\"stunTime\":0.38,\"bleed\":1,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":1.3,\"capacity\":4,\"harvestSpeed\":1.87}],\n" +
-"  [\"lantern-keeper\",{\"health\":178,\"power\":29.9,\"armor\":15,\"speed\":0.92,\"movement\":1.04,\"vision\":7.03,\"combo\":0.65,\"comboPower\":54,\"critical\":4,\"criticalPower\":150,\"accuracy\":8,\"penetration\":0,\"comboSpeed\":0.38,\"focus\":0.26,\"evasion\":15.5,\"parry\":5,\"block\":1,\"blockPower\":50,\"counter\":0,\"counterPower\":107.5,\"tenacity\":12,\"reduction\":0,\"stun\":0,\"stunTime\":0.44,\"bleed\":0,\"bleedPower\":0,\"area\":0,\"areaPower\":0,\"lifesteal\":0,\"reflection\":0,\"regeneration\":1.6,\"capacity\":5,\"harvestSpeed\":1.77}],\n" +
-"  [\"old-garden-snail\",{\"health\":420,\"power\":30.5,\"armor\":48,\"speed\":0.44,\"movement\":0.42,\"vision\":4.78,\"combo\":0,\"comboPower\":40,\"critical\":1,\"criticalPower\":160,\"accuracy\":1,\"penetration\":1,\"comboSpeed\":0.62,\"focus\":0.52,\"evasion\":0,\"parry\":0,\"block\":16,\"blockPower\":50,\"counter\":0,\"counterPower\":132.5,\"tenacity\":32,\"reduction\":10,\"stun\":2,\"stunTime\":0.46,\"bleed\":0,\"bleedPower\":0,\"area\":1,\"areaPower\":0,\"lifesteal\":0,\"reflection\":2,\"regeneration\":1.7,\"capacity\":19,\"harvestSpeed\":1.24}],\n" +
-"  [\"walking-forest\",{\"health\":850,\"power\":68,\"armor\":55,\"speed\":0.4,\"movement\":0.49,\"vision\":5.98,\"combo\":0,\"comboPower\":40,\"critical\":2,\"criticalPower\":175,\"accuracy\":2,\"penetration\":4,\"comboSpeed\":0.64,\"focus\":0.5,\"evasion\":0,\"parry\":1,\"block\":20,\"blockPower\":50,\"counter\":2,\"counterPower\":142.5,\"tenacity\":36,\"reduction\":12,\"stun\":10,\"stunTime\":0.52,\"bleed\":1,\"bleedPower\":1,\"area\":2,\"areaPower\":35,\"lifesteal\":0,\"reflection\":4,\"regeneration\":1.9,\"capacity\":18,\"harvestSpeed\":1}],\n" +
-"  [\"white-paw\",{\"health\":255,\"power\":75,\"armor\":16,\"speed\":1.08,\"movement\":1.1,\"vision\":7.28,\"combo\":1,\"comboPower\":65,\"critical\":16,\"criticalPower\":185,\"accuracy\":12,\"penetration\":12,\"comboSpeed\":0.28,\"focus\":0.2,\"evasion\":18,\"parry\":12,\"block\":3,\"blockPower\":50,\"counter\":8,\"counterPower\":140,\"tenacity\":24,\"reduction\":2,\"stun\":3,\"stunTime\":0.48,\"bleed\":10,\"bleedPower\":4,\"area\":0,\"areaPower\":20,\"lifesteal\":4,\"reflection\":0,\"regeneration\":0.6,\"capacity\":10,\"harvestSpeed\":1.63}],\n" +
-"  [\"spiny-back-leader\",{\"health\":310,\"power\":60,\"armor\":40,\"speed\":0.84,\"movement\":0.88,\"vision\":5.4,\"combo\":0.05,\"comboPower\":62,\"critical\":8,\"criticalPower\":180,\"accuracy\":5,\"penetration\":7,\"comboSpeed\":0.42,\"focus\":0.28,\"evasion\":7,\"parry\":10,\"block\":14,\"blockPower\":50,\"counter\":15,\"counterPower\":145,\"tenacity\":34,\"reduction\":6,\"stun\":5,\"stunTime\":0.5,\"bleed\":5,\"bleedPower\":3,\"area\":1,\"areaPower\":30,\"lifesteal\":0,\"reflection\":10,\"regeneration\":0.3,\"capacity\":15,\"harvestSpeed\":1.47}]\n" +
-"].map(([key, stats]) => [key, Object.freeze(stats)])));\n" +
+"modules[\"server/neutral-stat-limits.mjs\"] = (() => {\n" +
+"const NEUTRAL_STAT_LIMITS = Object.freeze(Object.fromEntries([\n" +
+"  [\"health\",{\"min\":9,\"max\":732}],\n" +
+"  [\"power\",{\"min\":1,\"max\":232.59999999999997}],\n" +
+"  [\"armor\",{\"min\":0,\"max\":806}],\n" +
+"  [\"speed\",{\"min\":0.5,\"max\":3.3022500000000004}],\n" +
+"  [\"movement\",{\"min\":0.1375,\"max\":3.525}],\n" +
+"  [\"vision\",{\"min\":1,\"max\":12}],\n" +
+"  [\"combo\",{\"min\":0,\"max\":19}],\n" +
+"  [\"comboPower\",{\"min\":0,\"max\":100}],\n" +
+"  [\"critical\",{\"min\":0,\"max\":90}],\n" +
+"  [\"criticalPower\",{\"min\":0,\"max\":500}],\n" +
+"  [\"accuracy\",{\"min\":0,\"max\":60}],\n" +
+"  [\"penetration\",{\"min\":0,\"max\":286}],\n" +
+"  [\"comboSpeed\",{\"min\":0.18,\"max\":0.06}],\n" +
+"  [\"focus\",{\"min\":0.3,\"max\":0.08}],\n" +
+"  [\"evasion\",{\"min\":0,\"max\":60}],\n" +
+"  [\"parry\",{\"min\":0,\"max\":60}],\n" +
+"  [\"block\",{\"min\":0,\"max\":90}],\n" +
+"  [\"blockPower\",{\"min\":50,\"max\":90}],\n" +
+"  [\"counter\",{\"min\":0,\"max\":100}],\n" +
+"  [\"counterPower\",{\"min\":0,\"max\":200}],\n" +
+"  [\"tenacity\",{\"min\":0,\"max\":75}],\n" +
+"  [\"reduction\",{\"min\":0,\"max\":40}],\n" +
+"  [\"stun\",{\"min\":0,\"max\":60}],\n" +
+"  [\"stunTime\",{\"min\":0,\"max\":1.5}],\n" +
+"  [\"bleed\",{\"min\":0,\"max\":75}],\n" +
+"  [\"bleedPower\",{\"min\":0,\"max\":53}],\n" +
+"  [\"area\",{\"min\":0,\"max\":8}],\n" +
+"  [\"areaPower\",{\"min\":0,\"max\":100}],\n" +
+"  [\"lifesteal\",{\"min\":0,\"max\":40}],\n" +
+"  [\"reflection\",{\"min\":0,\"max\":75}],\n" +
+"  [\"regeneration\",{\"min\":0,\"max\":18.599999999999998}],\n" +
+"  [\"capacity\",{\"min\":0,\"max\":32}],\n" +
+"  [\"harvestSpeed\",{\"min\":0,\"max\":100}]\n" +
+"].map(([field, limits]) => [field, Object.freeze(limits)])));\n" +
 "\n" +
-"return { NEUTRAL_UNIT_STATS };\n" +
+"return { NEUTRAL_STAT_LIMITS };\n" +
+"})();\n" +
+"modules[\"server/neutral-unit-stats.mjs\"] = (() => {\n" +
+"const { NEUTRAL_STAT_LIMITS } = modules[\"server/neutral-stat-limits.mjs\"];\n" +
+"\n" +
+"const NEUTRAL_STAT_FIELDS = Object.freeze([\"health\",\"power\",\"armor\",\"speed\",\"movement\",\"vision\",\"combo\",\"comboPower\",\"critical\",\"criticalPower\",\"accuracy\",\"penetration\",\"comboSpeed\",\"focus\",\"evasion\",\"parry\",\"block\",\"blockPower\",\"counter\",\"counterPower\",\"tenacity\",\"reduction\",\"stun\",\"stunTime\",\"bleed\",\"bleedPower\",\"area\",\"areaPower\",\"lifesteal\",\"reflection\",\"regeneration\",\"capacity\",\"harvestSpeed\"]);\n" +
+"\n" +
+"const NEUTRAL_UNIT_TIERS = Object.freeze(Object.fromEntries([\n" +
+"  [\"flower-tail-bird\",[1,1,3,1,16,14,17,14,8,8,3,14,5,16,12,15,12,1,1,7,3,1,1,1,1,5,6,2,2,4,4,9,1,19]],\n" +
+"  [\"dew-rabbit\",[2,2,2,2,13,16,13,13,7,7,2,10,2,13,11,14,11,2,2,2,2,2,2,2,2,2,2,1,1,3,1,10,2,17]],\n" +
+"  [\"soil-mole\",[6,6,6,7,8,6,1,8,10,11,8,12,11,8,10,7,10,11,11,8,8,10,10,12,9,12,11,8,8,12,7,8,9,16]],\n" +
+"  [\"bundle-snail\",[5,10,5,15,4,4,3,4,4,2,6,2,3,4,2,3,2,15,16,3,7,12,15,6,4,3,3,9,6,7,13,14,17,4]],\n" +
+"  [\"cotton-sheep\",[4,7,1,5,6,7,10,6,5,1,1,3,1,5,6,8,4,7,7,1,1,9,14,5,3,1,1,12,5,2,12,12,12,14]],\n" +
+"  [\"rolling-acorn\",[3,3,4,12,10,10,2,10,6,6,7,1,7,10,1,11,8,13,12,6,6,4,4,10,5,6,7,7,7,1,11,1,6,12]],\n" +
+"  [\"bubble-toad\",[7,8,7,6,11,9,8,11,9,10,9,7,8,11,7,12,7,8,8,11,9,8,8,17,19,7,8,18,16,15,8,11,8,9]],\n" +
+"  [\"snare-vine\",[9,11,10,11,5,1,12,5,11,14,13,13,14,6,13,5,1,10,10,12,12,11,9,9,18,15,14,17,13,19,15,18,13,5]],\n" +
+"  [\"spiny-back-beetle\",[8,9,8,14,9,8,4,9,12,12,12,9,15,9,9,9,16,14,14,18,16,14,12,11,8,14,13,11,11,11,18,2,11,8]],\n" +
+"  [\"soil-boar\",[10,14,14,13,7,11,6,7,16,16,16,8,13,7,8,6,9,12,13,13,15,15,13,18,11,13,15,13,17,13,10,5,14,6]],\n" +
+"  [\"vine-turtle\",[13,16,9,16,3,5,5,3,3,3,10,6,10,3,5,4,6,19,17,15,13,16,17,15,12,9,10,16,15,8,17,15,16,2]],\n" +
+"  [\"shadow-weasel\",[11,5,15,4,19,18,14,18,18,18,14,16,18,18,17,16,17,4,4,17,11,5,5,8,7,18,17,5,10,17,2,7,7,13]],\n" +
+"  [\"talon-owl\",[12,4,16,3,15,13,19,16,14,17,15,19,17,15,14,13,15,3,3,14,10,3,3,7,6,17,16,6,9,16,3,4,3,10]],\n" +
+"  [\"spring-keeper\",[15,12,12,8,17,15,18,17,15,13,5,17,9,17,18,18,14,5,5,9,5,6,6,3,10,10,9,4,4,6,9,13,4,18]],\n" +
+"  [\"lantern-keeper\",[14,13,11,9,14,17,15,15,13,9,4,15,4,14,16,17,13,6,6,4,4,7,7,4,13,4,4,3,3,5,5,16,5,15]],\n" +
+"  [\"old-garden-snail\",[16,18,13,18,2,2,7,2,2,4,11,4,6,2,3,1,3,17,18,5,14,17,18,13,14,8,5,14,12,9,14,17,19,3]],\n" +
+"  [\"walking-forest\",[19,19,18,19,1,3,11,1,1,5,17,5,12,1,4,2,5,18,19,10,18,19,19,19,17,11,12,19,19,10,16,19,18,1]],\n" +
+"  [\"white-paw\",[18,15,19,10,18,19,16,19,19,19,19,18,19,19,19,19,19,9,9,16,17,13,11,14,15,19,19,10,14,18,6,6,10,11]],\n" +
+"  [\"spiny-back-leader\",[17,17,17,17,12,12,9,12,17,15,18,11,16,12,15,10,18,16,15,19,19,18,16,16,16,16,18,15,18,14,19,3,15,7]]\n" +
+"].map(([key, values]) => [key, Object.freeze({ tier:values[0], ...Object.fromEntries(NEUTRAL_STAT_FIELDS.map((field, index) => [field, values[index + 1]])) })])));\n" +
+"\n" +
+"const NEUTRAL_STAT_CURVES = Object.freeze({\n" +
+"  health:[null,850,2],\n" +
+"  power:[null,75,1.5],\n" +
+"  armor:[null,55,2],\n" +
+"  speed:[null,1.12,1],\n" +
+"  movement:[.225,1.1,1],\n" +
+"  vision:[null,8,1],\n" +
+"  combo:[null,1,2],\n" +
+"  comboPower:[50,65,1],\n" +
+"  critical:[null,16,2],\n" +
+"  criticalPower:[200,250,1],\n" +
+"  accuracy:[null,14,2],\n" +
+"  penetration:[null,12,2],\n" +
+"  comboSpeed:[0.12,0.06,1],\n" +
+"  focus:[0.3,0.08,1],\n" +
+"  evasion:[null,18,2],\n" +
+"  parry:[null,12,2],\n" +
+"  block:[null,24,2],\n" +
+"  blockPower:[50,75,1],\n" +
+"  counter:[null,15,2],\n" +
+"  counterPower:[100,145,1],\n" +
+"  tenacity:[null,36,2],\n" +
+"  reduction:[null,12,2],\n" +
+"  stun:[null,10,2],\n" +
+"  stunTime:[0.35,0.56,1],\n" +
+"  bleed:[null,10,2],\n" +
+"  bleedPower:[1,4,1],\n" +
+"  area:[null,2,2],\n" +
+"  areaPower:[60,80,1],\n" +
+"  lifesteal:[null,5,2],\n" +
+"  reflection:[null,10,2],\n" +
+"  regeneration:[null,1.9,2],\n" +
+"  capacity:[null,19,1],\n" +
+"  harvestSpeed:[null,1.9,1]\n" +
+"});\n" +
+"\n" +
+"function neutralTierStat(field, tier) {\n" +
+"  const limits = NEUTRAL_STAT_LIMITS[field], curve = NEUTRAL_STAT_CURVES[field];\n" +
+"  if (!limits || !curve || !Number.isInteger(tier) || tier < 1 || tier > 19) throw new Error(\"Invalid neutral stat tier\");\n" +
+"  const low = Math.min(limits.min, limits.max), high = Math.max(limits.min, limits.max);\n" +
+"  const clamp = value => Math.max(low, Math.min(high, value));\n" +
+"  const first = clamp(curve[0] ?? limits.min), last = clamp(curve[1]);\n" +
+"  const value = first + (last - first) * ((tier - 1) / 18) ** curve[2];\n" +
+"  return clamp(Math.round(value * 1000000) / 1000000);\n" +
+"}\n" +
+"\n" +
+"const NEUTRAL_UNIT_STATS = Object.freeze(Object.fromEntries(Object.entries(NEUTRAL_UNIT_TIERS)\n" +
+"  .map(([key, ranks]) => [key, Object.freeze(Object.fromEntries(NEUTRAL_STAT_FIELDS.map(field => [field, neutralTierStat(field, ranks[field])])))])));\n" +
+"\n" +
+"return { NEUTRAL_STAT_FIELDS, NEUTRAL_UNIT_TIERS, neutralTierStat, NEUTRAL_UNIT_STATS };\n" +
 "})();\n" +
 "modules[\"server/dna-actions.mjs\"] = (() => {\n" +
 "const DNA_ACTION_RULES = Object.freeze({ meleeRange: 1, rangedRange: 3, projectileSpeed: 6, rangedPowerBase: 1.4 });\n" +
@@ -8508,7 +8604,8 @@ document.write(
 "}\n" +
 "\n" +
 "function dnaAttackStats(stats, mode) {\n" +
-"  return { power: mode === \"ranged\" ? stats.rangedPower : stats.meleePower, speed: mode === \"ranged\" ? stats.rangedSpeed : stats.meleeSpeed };\n" +
+"  return { power: mode === \"ranged\" ? stats.rangedPower : stats.meleePower, speed: mode === \"ranged\" ? stats.rangedSpeed : stats.meleeSpeed,\n" +
+"    timingRate: (mode === \"ranged\" ? stats.rangedTimingRate : stats.meleeTimingRate) || 1 };\n" +
 "}\n" +
 "\n" +
 "return { DNA_ACTION_RULES, dnaDefensiveMelee, dnaAttackMode, dnaProjectileDuration, dnaProjectileValid, dnaAttackStats };\n" +
@@ -8536,7 +8633,7 @@ document.write(
 "}\n" +
 "\n" +
 "function creatureAttackMode(agent, separation) {\n" +
-"  const role = creatureAttackRole(agent.species);\n" +
+"  const role = agent.stats?.combat || creatureAttackRole(agent.species);\n" +
 "  if (!role || !Number.isFinite(separation) || separation < 0) return null;\n" +
 "  if (role.melee && separation <= DNA_ACTION_RULES.meleeRange) return \"melee\";\n" +
 "  if (role.ranged && separation <= DNA_ACTION_RULES.rangedRange) return \"ranged\";\n" +
@@ -8600,11 +8697,11 @@ document.write(
 "  const combat = Object.freeze({ ...stats, melee: role.melee, ranged: role.ranged,\n" +
 "    meleePower: role.melee ? stats.power : 0, rangedPower: role.ranged ? stats.power : 0,\n" +
 "    meleeSpeed: role.melee ? stats.speed : 0, rangedSpeed: role.ranged ? stats.speed : 0,\n" +
-"    hits: 1 + stats.combo, recovery: 0, blockPower: 50 });\n" +
+"    hits: 1 + stats.combo, recovery: 0 });\n" +
 "  return { health: stats.health, attack: stats.power, attackPower: stats.power, defense: stats.armor,\n" +
 "    attackSpeed: stats.speed, speed: stats.movement, vision: stats.vision, capacity: stats.capacity,\n" +
 "    harvestSpeed: stats.harvestSpeed, criticalChance: stats.critical / 100, criticalMultiplier: stats.criticalPower / 100,\n" +
-"    evasion: stats.evasion / 100, parry: stats.parry / 100, block: stats.block / 100, blockReduction: .5, combat };\n" +
+"    evasion: stats.evasion / 100, parry: stats.parry / 100, block: stats.block / 100, blockReduction: stats.blockPower / 100, combat };\n" +
 "}\n" +
 "\n" +
 "function combatAbilityStats(agent) {\n" +
@@ -8639,20 +8736,19 @@ document.write(
 "  const base = unitCombatStats(agent.species || agent.tribe);\n" +
 "  if (agent.species && !agent.stats?.dna && !agent.stats?.combat && base.combat) agent = { ...agent, stats: { ...base, ...agent.stats } };\n" +
 "  const dna = agent.stats?.dna, abilities = combatAbilityStats(agent);\n" +
-"  const chance = dna ? dna.critical / 100 : Number.isFinite(agent.stats?.criticalChance) ? agent.stats.criticalChance : base.criticalChance;\n" +
-"  const multiplier = dna ? dna.criticalPower / 100 : Number.isFinite(agent.stats?.criticalMultiplier) ? agent.stats.criticalMultiplier : base.criticalMultiplier;\n" +
-"  const criticalChance = dna ? (Number.isFinite(chance) ? chance : 0) : Math.max(0, Math.min(.75, chance));\n" +
-"  const criticalMultiplier = dna ? (Number.isFinite(multiplier) ? multiplier : 1.5) : Math.max(1, Math.min(4, multiplier));\n" +
+"  const chance = abilities ? abilities.critical / 100 : Number.isFinite(agent.stats?.criticalChance) ? agent.stats.criticalChance : base.criticalChance;\n" +
+"  const multiplier = abilities ? abilities.criticalPower / 100 : Number.isFinite(agent.stats?.criticalMultiplier) ? agent.stats.criticalMultiplier : base.criticalMultiplier;\n" +
+"  const criticalChance = abilities ? (Number.isFinite(chance) ? chance : 0) : Math.max(0, Math.min(.75, chance));\n" +
+"  const criticalMultiplier = abilities ? (Number.isFinite(multiplier) ? multiplier : 1.5) : Math.max(1, Math.min(4, multiplier));\n" +
 "  if (abilities) {\n" +
 "    const selected = dnaAttackStats(abilities, agent.attack?.attackMode || (abilities.melee || dnaDefensiveMelee(dna) ? \"melee\" : \"ranged\"));\n" +
-"    if (!dna && Number.isFinite(agent.stats.attackPower)) selected.power = agent.stats.attackPower;\n" +
-"    if (!dna && Number.isFinite(agent.stats.attackSpeed)) selected.speed = agent.stats.attackSpeed;\n" +
 "    const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;\n" +
-"    return { primary: selected.power > 0 ? \"blade\" : null, attackPower: selected.power, defense: dna ? abilities.armor : agent.stats.defense,\n" +
-"      armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: abilities.focus,\n" +
-"      evasion: dna ? abilities.evasion / 100 : agent.stats.evasion,\n" +
-"      parry: dna ? abilities.parry / 100 : agent.stats.parry, block: dna ? abilities.block / 100 : agent.stats.block,\n" +
-"      recovery: abilities.recovery || 0, blockReduction: dna && Number.isFinite(abilities.blockPower) ? Math.max(0, Math.min(.9, abilities.blockPower / 100)) : .5, criticalChance, criticalMultiplier };\n" +
+"    const timingRate = dna ? selected.timingRate : 1;\n" +
+"    return { primary: selected.power > 0 ? \"blade\" : null, attackPower: selected.power, defense: abilities.armor,\n" +
+"      armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: abilities.focus / timingRate, timingRate,\n" +
+"      evasion: abilities.evasion / 100,\n" +
+"      parry: abilities.parry / 100, block: abilities.block / 100,\n" +
+"      recovery: (abilities.recovery || 0) / timingRate, blockReduction: Number.isFinite(abilities.blockPower) ? Math.max(0, Math.min(.9, abilities.blockPower / 100)) : .5, criticalChance, criticalMultiplier };\n" +
 "  }\n" +
 "  const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;\n" +
 "  const primary = combatPrimary(agent);\n" +
@@ -8699,6 +8795,7 @@ document.write(
 "    const ratio = Math.max(0, Math.min(1, agent.health / previous));\n" +
 "    agent.stats = { ...agent.stats, ...profile };\n" +
 "    agent.health = profile.health * ratio;\n" +
+"    if (agent.attack?.targetKind === \"nest\" && !agent.attack.hit) agent.attack.damage = profile.attackPower;\n" +
 "    return;\n" +
 "  }\n" +
 "  const combatStrength = profile.combatStrength + (agent.species ? 0 : attributeCombatStrengthBonus(agent.attributes));\n" +
@@ -8878,6 +8975,81 @@ document.write(
 "\n" +
 "return { ATTRIBUTES, attributeUnlockLevel, isAttributeUnlocked, HARVEST_ATTRIBUTE_KEYS, COMBAT_ATTRIBUTE_KEYS, ATTRIBUTE_SYNERGIES_ENABLED, ATTRIBUTE_COMBINATIONS, migrateAttributeSlots, attributeLevelLimit, migrateAttributeLevels, attributeCounts, hasSynergy, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitMovementSpeed, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier, birthCost };\n" +
 "})();\n" +
+"modules[\"server/dna-unit.mjs\"] = (() => {\n" +
+"const { ATTRIBUTE_DNA } = modules[\"server/dna.mjs\"];\n" +
+"\n" +
+"function cloneDna(dna) {\n" +
+"  if (!dna) return null;\n" +
+"  const value = dna.version === 6 ? dna : ATTRIBUTE_DNA.validate(dna);\n" +
+"  if (!value) return null;\n" +
+"  return { version: value.version, pieces: value.pieces.map(ATTRIBUTE_DNA.clonePiece), budget: value.budget, level: value.level };\n" +
+"}\n" +
+"\n" +
+"function validateDna(dna, nestLevel, budget) {\n" +
+"  if (!dna || dna.version !== 6 || !Array.isArray(dna.pieces)) return null;\n" +
+"  const organs = new Set();\n" +
+"  for (const piece of dna.pieces) {\n" +
+"    const gene = ATTRIBUTE_DNA.lookup.get(piece?.gene);\n" +
+"    if (!gene || gene.retired) return null;\n" +
+"    if (piece.grade !== gene.grade) return null;\n" +
+"    if (!Number.isInteger(piece.q) || !Number.isInteger(piece.r) || piece.shape !== undefined || piece.cells !== undefined) return null;\n" +
+"    if (gene.category === \"organ\") {\n" +
+"      if (organs.has(gene.id)) return null;\n" +
+"      organs.add(gene.id);\n" +
+"    }\n" +
+"  }\n" +
+"  const result = ATTRIBUTE_DNA.validate({ ...dna, level: nestLevel, budget: Math.min(999999999, budget) });\n" +
+"  if (!result || !ATTRIBUTE_DNA.trace(result.pieces, nestLevel).valid || ATTRIBUTE_DNA.price(result.pieces) > budget) return null;\n" +
+"  return result;\n" +
+"}\n" +
+"\n" +
+"function dnaAppearance(dna) {\n" +
+"  const counts = ATTRIBUTE_DNA.counts(dna.pieces), attributes = {};\n" +
+"  for (const [gene, key] of [[\"blade\", \"blade\"], [\"carapace\", \"carapace\"], [\"antenna\", \"antenna\"], [\"legs\", \"feet\"], [\"secretion\", \"secretion\"]]) {\n" +
+"    if (counts[gene]) attributes[key] = counts[gene];\n" +
+"  }\n" +
+"  return attributes;\n" +
+"}\n" +
+"\n" +
+"function dnaUnitStats(dna, tribe) {\n" +
+"  const stats = ATTRIBUTE_DNA.stats(dna.pieces, tribe);\n" +
+"  return { ...stats, dna: stats, health: stats.health, speed: stats.movement, loadedSpeed: stats.movement * stats.loadSpeed / 100,\n" +
+"    capacity: stats.capacity, vision: stats.vision, attack: stats.power, attackPower: stats.power, attackSpeed: stats.speed,\n" +
+"    defense: stats.armor, attackBonus: 0, armorPenetration: stats.penetration, damageReduction: 0,\n" +
+"    combatStrength: 0, resistance: 1, movementMultiplier: 1, harvestSpeedMultiplier: 1 };\n" +
+"}\n" +
+"\n" +
+"function dnaCanMove(agent, x, y, colonies) {\n" +
+"  return Number.isInteger(x) && Number.isInteger(y) && x >= 0 && y >= 0;\n" +
+"}\n" +
+"\n" +
+"function dnaCanAttack(agent) {\n" +
+"  return !!(agent.stats?.dna?.melee || agent.stats?.dna?.ranged || agent.stats?.dna?.hunting ||\n" +
+"    agent.dna?.pieces?.some(piece => piece.gene === \"carapace\"));\n" +
+"}\n" +
+"\n" +
+"function dnaCanHunt(agent) {\n" +
+"  return !agent.dna && !agent.stats?.dna || !!agent.stats?.dna?.hunting;\n" +
+"}\n" +
+"\n" +
+"function dnaCanSearch(agent, target, time) {\n" +
+"  if (dnaCanHunt(agent)) return true;\n" +
+"  const x = Math.max(target.x, Math.min(agent.x, target.x + (target.width || 1) - 1));\n" +
+"  const y = Math.max(target.y, Math.min(agent.y, target.y + (target.height || 1) - 1));\n" +
+"  return Math.hypot(x - agent.x, y - agent.y) <= (agent.stats?.vision || 0) + (agent.waveUntil > time ? 4 : 0);\n" +
+"}\n" +
+"\n" +
+"// The cheapest productive DNA design, not an empty non-gathering body.\n" +
+"// Keep recovery checks tied to the current catalog and validation rules.\n" +
+"function basicGathererDna(nestLevel = 1) {\n" +
+"  const gene = ATTRIBUTE_DNA.lookup.get(\"gather\");\n" +
+"  const design = { version: 6, level: nestLevel, budget: 999999999,\n" +
+"    pieces: [{ gene: gene.id, grade: gene.grade, rotation: 0, q: 0, r: 0 }] };\n" +
+"  return validateDna(design, nestLevel, design.budget);\n" +
+"}\n" +
+"\n" +
+"return { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, dnaCanAttack, dnaCanHunt, dnaCanSearch, basicGathererDna };\n" +
+"})();\n" +
 "modules[\"server/unit-template-names.mjs\"] = (() => {\n" +
 "const UNIT_TEMPLATE_ROLES = [\n" +
 "  [[\"blade\", \"piercing\"], \"돌격병\"],\n" +
@@ -8915,68 +9087,6 @@ document.write(
 "\n" +
 "return { isTemplateNameEdited, suggestTemplateName };\n" +
 "})();\n" +
-"modules[\"server/colony-supply.mjs\"] = (() => {\n" +
-"const { militaryAgent } = modules[\"server/conquest-pacing.mjs\"];\n" +
-"const { HARVEST_ATTRIBUTE_KEYS, birthCost, unitCarryCapacity, unitTravelSpeed } = modules[\"server/attributes.mjs\"];\n" +
-"\n" +
-"function recordColonyIncome(state, amount) {\n" +
-"  if (!(amount > 0) || !Number.isFinite(amount)) return;\n" +
-"  const bucket = Math.floor(state.simSeconds / 5) * 5;\n" +
-"  const history = (state.foodIncome || []).filter(entry => entry[0] > state.simSeconds - 60);\n" +
-"  if (history.at(-1)?.[0] === bucket) history.at(-1)[1] += amount;\n" +
-"  else history.push([bucket, amount]);\n" +
-"  state.foodIncome = history;\n" +
-"}\n" +
-"\n" +
-"function restoreColonyIncome(state, saved) {\n" +
-"  state.foodIncomeStartedAt = Number.isFinite(saved.foodIncomeStartedAt) && saved.foodIncomeStartedAt >= 0 &&\n" +
-"    saved.foodIncomeStartedAt <= state.simSeconds ? saved.foodIncomeStartedAt : state.simSeconds;\n" +
-"  state.foodIncome = (Array.isArray(saved.foodIncome) ? saved.foodIncome : []).filter(entry => Array.isArray(entry) &&\n" +
-"    Number.isFinite(entry[0]) && entry[0] >= 0 && entry[0] <= state.simSeconds && entry[0] > state.simSeconds - 60 &&\n" +
-"    Number.isFinite(entry[1]) && entry[1] > 0).sort((first, second) => first[0] - second[0]).slice(-13).map(entry => [entry[0], entry[1]]);\n" +
-"}\n" +
-"\n" +
-"function colonySupply(state, tribe) {\n" +
-"  const living = state.agents.filter(agent => agent.health > 0);\n" +
-"  const reserve = birthCost({ slots:[\"strength\"] }, tribe);\n" +
-"  const gap = Number.isFinite(state.lastFoodAt) ? Math.max(0, state.simSeconds - state.lastFoodAt) : 0;\n" +
-"  if (state.evolutionPoints >= reserve * 3 || !living.length) state.supplyInterrupted = false;\n" +
-"  else if (gap > 30) state.supplyInterrupted = true;\n" +
-"  const interruption = state.supplyInterrupted ? Math.max(.5, Math.min(1, (gap - 30) / 60)) : 0;\n" +
-"  const urgency = Math.max(interruption, living.length <= 2 ? Math.max(0, 1 - state.evolutionPoints / reserve) : 0);\n" +
-"  const observedSeconds = Number.isFinite(state.foodIncomeStartedAt) ? Math.max(0, state.simSeconds - state.foodIncomeStartedAt) : 0;\n" +
-"  const income = (state.foodIncome || []).filter(entry => entry[0] > state.simSeconds - 60 && entry[0] <= state.simSeconds)\n" +
-"    .reduce((sum, entry) => sum + entry[1], 0);\n" +
-"  const incomeRate = income / Math.max(1, Math.min(60, observedSeconds));\n" +
-"  return { living:living.length, reserve, urgency, interruption, incomeRate, maintenanceRate:0, rateDeficit:0,\n" +
-"    incomeObserved:observedSeconds >= 30, forecastBalance:state.evolutionPoints + incomeRate * 120 - reserve };\n" +
-"}\n" +
-"\n" +
-"function colonyForagers(state, foods, homes) {\n" +
-"  let workers = state.agents.filter(agent => !militaryAgent(agent,agent.tribe) && agent.health >= agent.stats.health * .6 && !agent.retreat && !agent.combat &&\n" +
-"    !(agent.birth?.readyAt > state.simSeconds));\n" +
-"  const ordinary = workers.filter(agent => !HARVEST_ATTRIBUTE_KEYS.some(key => agent.attributes?.[key] > 0));\n" +
-"  if (ordinary.length >= 2) workers = ordinary;\n" +
-"  const distance = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);\n" +
-"  const ranked = workers.map(agent => {\n" +
-"    const outward = foods.reduce((best, food) => Math.min(best, distance(agent, food)), Infinity);\n" +
-"    const speed = unitTravelSpeed(agent, agent.carrying);\n" +
-"    let efficiency = Infinity;\n" +
-"    const travel = foods.reduce((best, food) => {\n" +
-"      const capacity = unitCarryCapacity(agent, food.resourceType);\n" +
-"      const returnSpeed = unitTravelSpeed(agent, capacity, food.resourceType);\n" +
-"      const seconds = distance(agent, food) / speed + homes.reduce((home, cell) => Math.min(home, distance(food, cell) / returnSpeed), Infinity);\n" +
-"      efficiency = Math.min(efficiency, seconds / Math.max(.01, capacity));\n" +
-"      return Math.min(best, seconds);\n" +
-"    }, Infinity);\n" +
-"    return { agent, feasible:Number.isFinite(travel), reachable:Number.isFinite(outward / speed), efficiency };\n" +
-"  }).sort((a,b) => a.efficiency - b.efficiency || String(a.agent.id).localeCompare(String(b.agent.id)));\n" +
-"  const feasible = ranked.filter(entry=>entry.feasible), assigned = feasible.length ? feasible : ranked.filter(entry=>entry.reachable);\n" +
-"  return new Set(assigned.slice(0, Math.max(1, Math.ceil(workers.length / 2))).map(entry => entry.agent.id));\n" +
-"}\n" +
-"\n" +
-"return { recordColonyIncome, restoreColonyIncome, colonySupply, colonyForagers };\n" +
-"})();\n" +
 "modules[\"server/tribe-start.mjs\"] = (() => {\n" +
 "const { ATTRIBUTE_DNA } = modules[\"server/dna.mjs\"];\n" +
 "\n" +
@@ -9009,47 +9119,824 @@ document.write(
 "\n" +
 "return { PLAYER_STARTING_POINTS, TRIBE_STARTING_UNITS, STARTING_WORKER_GENES, startingWorkerDna };\n" +
 "})();\n" +
-"modules[\"server/tribe-production.mjs\"] = (() => {\n" +
-"const { AGENT_DEATH_WARNING, agentRemainingLifespan } = modules[\"server/lifespan.mjs\"];\n" +
-"const { birthCost, isAttributeUnlocked } = modules[\"server/attributes.mjs\"];\n" +
-"const { suggestTemplateName } = modules[\"server/unit-template-names.mjs\"];\n" +
-"const { colonySupply } = modules[\"server/colony-supply.mjs\"];\n" +
-"const { NEST_LEVELS } = modules[\"server/nests.mjs\"];\n" +
-"const { TRIBE_STARTING_UNITS } = modules[\"server/tribe-start.mjs\"];\n" +
-"const { CONQUEST_PACING, TRIBE_PACING, colonyWorkerShare, militaryAgent } = modules[\"server/conquest-pacing.mjs\"];\n" +
+"modules[\"server/tribe-worker-designs.mjs\"] = (() => {\n" +
+"const { cloneDna } = modules[\"server/dna-unit.mjs\"];\n" +
 "\n" +
-"function productionTemplate(slots,role,state) {\n" +
-" const previous=state.templates.find(template=>!template.dna&&template.productionRole===role&&template.slots.length===slots.length&&slots.every(key=>template.slots.includes(key)));\n" +
-" if(previous)return previous;\n" +
-" return {id:null,name:suggestTemplateName(slots,state.templates),slots:[...slots],attributeLevels:Object.fromEntries(slots.map(key=>[key,1])),revision:1,productionRole:role};\n" +
+"const designs = {\n" +
+"  1: {\"version\":6,\"pieces\":[{\"gene\":\"capacity\",\"grade\":1,\"rotation\":1,\"q\":0,\"r\":-3},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":0,\"q\":-3,\"r\":0},{\"gene\":\"movement\",\"grade\":1,\"rotation\":0,\"q\":-2,\"r\":2},{\"gene\":\"gather\",\"grade\":1,\"rotation\":3,\"q\":0,\"r\":0},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":2,\"q\":2,\"r\":-2},{\"gene\":\"movement\",\"grade\":1,\"rotation\":0,\"q\":0,\"r\":2}],\"budget\":1000,\"level\":1},\n" +
+"  2: {\"version\":6,\"pieces\":[{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":0,\"r\":-4},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":3,\"q\":3,\"r\":-3},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":1,\"q\":4,\"r\":-4},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":4,\"q\":3,\"r\":0},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":2,\"q\":4,\"r\":0},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":5,\"q\":0,\"r\":3},{\"gene\":\"gather\",\"grade\":1,\"rotation\":4,\"q\":-1,\"r\":4},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":-4,\"r\":3},{\"gene\":\"movement\",\"grade\":1,\"rotation\":0,\"q\":-2,\"r\":2},{\"gene\":\"movement\",\"grade\":1,\"rotation\":0,\"q\":1,\"r\":0},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":2,\"q\":1,\"r\":-2},{\"gene\":\"movement\",\"grade\":1,\"rotation\":0,\"q\":-3,\"r\":0}],\"budget\":1000,\"level\":2},\n" +
+"  3: {\"version\":6,\"pieces\":[{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":0,\"r\":-5},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":2,\"r\":-5},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":3,\"q\":5,\"r\":-4},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":1,\"q\":5,\"r\":-3},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":4,\"q\":4,\"r\":1},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":1,\"r\":1},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":0,\"r\":2},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":-1,\"r\":3},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":-2,\"r\":4},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":-4,\"r\":4},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":0,\"q\":-5,\"r\":4},{\"gene\":\"movement\",\"grade\":1,\"rotation\":0,\"q\":3,\"r\":-1},{\"gene\":\"movement\",\"grade\":1,\"rotation\":1,\"q\":2,\"r\":-2},{\"gene\":\"gather\",\"grade\":1,\"rotation\":0,\"q\":0,\"r\":0},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":2,\"q\":0,\"r\":1},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":1,\"q\":-4,\"r\":1},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":4,\"q\":-3,\"r\":2},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":2,\"q\":-2,\"r\":-2},{\"gene\":\"movement\",\"grade\":1,\"rotation\":0,\"q\":-1,\"r\":-3},{\"gene\":\"movement\",\"grade\":1,\"rotation\":1,\"q\":0,\"r\":-2}],\"budget\":1000,\"level\":3},\n" +
+"  4: {\"version\":6,\"pieces\":[{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":0,\"r\":-6},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":3,\"q\":3,\"r\":-5},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":4,\"r\":-6},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":0,\"q\":3,\"r\":-4},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":4,\"r\":-4},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":1,\"q\":-1,\"r\":-5},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":1,\"q\":-3,\"r\":-3},{\"gene\":\"gather\",\"grade\":1,\"rotation\":5,\"q\":-6,\"r\":0},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":5,\"q\":-5,\"r\":1},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":-6,\"r\":2},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":5,\"q\":-6,\"r\":5},{\"gene\":\"lifespan\",\"grade\":3,\"rotation\":5,\"q\":-6,\"r\":6},{\"gene\":\"movement\",\"grade\":1,\"rotation\":0,\"q\":0,\"r\":5},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":3,\"q\":2,\"r\":4},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":1,\"q\":4,\"r\":0},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":1,\"q\":6,\"r\":-2},{\"gene\":\"movement\",\"grade\":1,\"rotation\":1,\"q\":4,\"r\":-1},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":2,\"q\":-2,\"r\":4},{\"gene\":\"movement\",\"grade\":1,\"rotation\":1,\"q\":-1,\"r\":-3},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":0,\"r\":-4},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":3,\"q\":-2,\"r\":0},{\"gene\":\"movement\",\"grade\":1,\"rotation\":0,\"q\":-3,\"r\":2},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":0,\"q\":-1,\"r\":-2},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":3,\"q\":2,\"r\":-1},{\"gene\":\"harvestSpeed\",\"grade\":1,\"rotation\":1,\"q\":3,\"r\":-2},{\"gene\":\"capacity\",\"grade\":1,\"rotation\":5,\"q\":1,\"r\":2},{\"gene\":\"movement\",\"grade\":1,\"rotation\":0,\"q\":-1,\"r\":3},{\"gene\":\"movement\",\"grade\":1,\"rotation\":1,\"q\":-1,\"r\":1}],\"budget\":1000,\"level\":4}\n" +
+"};\n" +
+"\n" +
+"function tribeWorkerDesign(level) {\n" +
+"  return designs[level] ? cloneDna(designs[level]) : null;\n" +
 "}\n" +
 "\n" +
-"function tribeProductionTemplate(state,tribe) {\n" +
-" const profile=TRIBE_PACING[tribe],initial=TRIBE_STARTING_UNITS[tribe];if(!profile||!initial)return null;\n" +
-" if(state.agents.filter(agent=>agent.health>0).length>=NEST_LEVELS[state.nestLevel-1].unitCapacity)return null;\n" +
-" const living=state.agents.filter(agent=>agent.health>0);\n" +
-" if(!living.length){const worker=productionTemplate([profile.native].filter(Boolean),\"worker\",state);if(state.evolutionPoints>=birthCost(worker,tribe))return worker;\n" +
-"  const basic=productionTemplate([],\"worker\",state);return state.evolutionPoints>=birthCost(basic,tribe)?basic:null;}\n" +
-" const young=living.filter(agent=>agentRemainingLifespan(agent,state.simSeconds)>AGENT_DEATH_WARNING);\n" +
-" const target=NEST_LEVELS[state.nestLevel-1].unitCapacity;\n" +
-" const militaryAllowed=state.simSeconds>=CONQUEST_PACING.neutralConflictAt*profile.tempo;\n" +
-" const workerTarget=militaryAllowed?Math.floor(target*colonyWorkerShare(state.nestLevel,state.simSeconds,tribe)):target;\n" +
-" const workers=young.filter(agent=>!militaryAgent(agent,tribe)),soldiers=young.filter(agent=>militaryAgent(agent,tribe));\n" +
-" let role=null;\n" +
-" if(workers.length<workerTarget)role=\"worker\";\n" +
-" else if(militaryAllowed&&soldiers.length<target-workerTarget)role=\"military\";\n" +
-" if(!role)return null;\n" +
-" const supply=colonySupply(state,tribe),replacing=young.length<initial.length;\n" +
-" if(!replacing&&young.length>=initial.length&&(!supply.incomeObserved||supply.rateDeficit>0))return null;\n" +
-" const armies=[profile.army,[\"piercing\",\"blade\",\"feet\",\"carapace\"],[\"feet\",profile.army[0]],\n" +
-"  [\"carapace\",profile.army[0]]].map(slots=>[...new Set(slots.filter(key=>isAttributeUnlocked(key,state.nestLevel,tribe)))].slice(0,state.nestLevel));\n" +
-" const count=slots=>soldiers.filter(agent=>slots.every(key=>agent.slots.includes(key))).length;\n" +
-" const army=armies.filter(slots=>slots.length).sort((first,second)=>count(first)-count(second))[0];\n" +
-" const slots=role===\"worker\"?[profile.native,\"strength\",\"feet\"]:army;\n" +
-" const allowed=[...new Set(slots.filter(key=>isAttributeUnlocked(key,state.nestLevel,tribe)))].slice(0,state.nestLevel);\n" +
-" const template=productionTemplate(allowed,role,state);\n" +
-" const reserve=replacing?0:supply.reserve;\n" +
-" return state.evolutionPoints+1e-8>=birthCost(template,tribe)+reserve?template:null;\n" +
+"return { tribeWorkerDesign };\n" +
+"})();\n" +
+"modules[\"server/tribe-designs.mjs\"] = (() => {\n" +
+"const { ATTRIBUTE_DNA } = modules[\"server/dna.mjs\"];\n" +
+"const { cloneDna, dnaAppearance, validateDna } = modules[\"server/dna-unit.mjs\"];\n" +
+"const { STARTING_WORKER_GENES } = modules[\"server/tribe-start.mjs\"];\n" +
+"const { suggestTemplateName } = modules[\"server/unit-template-names.mjs\"];\n" +
+"const { tribeWorkerDesign } = modules[\"server/tribe-worker-designs.mjs\"];\n" +
+"\n" +
+"const TRIBE_INVASION = Object.freeze({\n" +
+"  bean: Object.freeze({ weights: Object.freeze([3, 2, 3, 2]) }),\n" +
+"  spore: Object.freeze({ weights: Object.freeze([1, 1, 6, 2]) }),\n" +
+"  pebble: Object.freeze({ weights: Object.freeze([5, 3, 1, 1]) }),\n" +
+"  spring: Object.freeze({ weights: Object.freeze([5, 2, 2, 1]) })\n" +
+"});\n" +
+"\n" +
+"const placements = Object.freeze({\n" +
+"  \"bean:1\": [[0,0,0],[0,-1,3],[1,-1,5],[0,1,1]],\n" +
+"  \"worker:2\": [[0,0,0],[0,-1,3],[1,-1,5],[0,1,1],[-1,-1,2],[-2,1,1],[2,-3,3],[3,-1,1],[3,-3,1],[0,3,1],[-3,1,1]],\n" +
+"  \"military:2:0\": [[0,0,0],[-2,1,2],[-3,3,0],[3,-3,1],[0,-1,1],[0,1,0],[0,-2,2],[1,-2,5],[0,-3,2]],\n" +
+"  \"military:2:1\": [[0,0,0],[-2,1,1],[0,-3,1],[1,-4,0],[0,-1,1],[0,1,0],[0,-2,0],[-1,-1,2],[1,2,1]],\n" +
+"  \"military:2:2\": [[1,0,3],[-4,0,5],[2,0,5],[-2,-2,0],[-2,0,2],[-2,2,0],[2,1,1],[-3,2,2],[2,-2,3]],\n" +
+"  \"military:2:3\": [[0,0,0],[0,-3,5],[-3,0,0],[-4,1,1],[0,-1,1],[0,-2,3],[0,1,0],[1,-2,5],[-2,1,1]],\n" +
+"  \"worker:3\": [[-1,5,3],[2,-2,2],[1,4,3],[0,1,3],[0,2,1],[3,-4,3],[3,2,3],[-3,1,4],[-1,-2,1],[5,-4,3],[3,0,4],[-2,2,2],[1,-3,1],[-3,4,5],[0,-5,1],[-5,5,3],[-4,-1,0]],\n" +
+"  \"bean:3:0\": [[0,4,4],[-1,2,2],[-1,-1,2],[-4,5,0],[3,1,3],[0,5,4],[-1,-3,4],[-1,1,5],[1,-3,1],[3,-5,0],[2,-5,2],[-5,5,4],[5,-1,3],[-3,2,4],[2,0,1]],\n" +
+"  \"bean:3:1\": [[-1,1,2],[1,2,0],[-1,-3,1],[-4,2,4],[0,0,0],[0,-1,1],[4,-3,0],[0,-2,2],[1,-2,4],[2,-1,0],[2,0,0],[-1,3,1],[1,-1,0],[-4,4,0],[2,-3,5]],\n" +
+"  \"bean:3:2\": [[-1,1,2],[0,-3,4],[4,0,0],[0,-5,2],[0,0,0],[0,-1,1],[2,2,0],[0,-2,3],[1,-2,4],[2,-2,5],[-2,0,4],[-2,4,0],[1,-1,0],[4,-5,0],[-3,0,1]],\n" +
+"  \"bean:3:3\": [[3,-3,0],[-4,1,0],[-2,-1,0],[-5,0,1],[-3,5,4],[5,0,1],[1,-4,5],[-3,3,5],[-3,4,3],[-1,-1,1],[2,2,4],[3,-4,2],[0,3,1],[-3,-2,5],[1,0,5]],\n" +
+"  \"worker:4\": [[0,1,1],[-6,4,5],[-3,-1,3],[-1,3,3],[-6,2,5],[0,-5,2],[-1,-2,3],[3,1,4],[2,1,3],[-2,1,2],[5,-1,4],[5,1,4],[3,-3,1],[3,3,4],[0,4,2],[0,-3,0],[2,-3,0],[-5,0,0],[-2,3,2],[2,3,1],[-6,6,5],[-1,5,2],[1,-2,1],[-2,-1,1]],\n" +
+"  \"bean:4:0\": [[-1,1,2],[-2,-1,2],[-2,4,0],[1,3,2],[0,-1,1],[1,-1,3],[5,-5,1],[-2,-2,3],[-5,0,0],[2,-2,0],[-2,0,2],[2,0,0],[2,-3,5],[-4,4,1],[0,-2,3],[0,-5,2],[3,-2,5],[0,0,0]],\n" +
+"  \"bean:4:1\": [[0,1,1],[3,0,0],[2,2,1],[-2,3,1],[0,-1,1],[-1,1,0],[1,-5,0],[2,-4,4],[4,-5,1],[-2,0,2],[-2,2,2],[3,-3,0],[-1,-2,3],[-3,-1,2],[0,-2,3],[0,4,0],[3,-2,0],[0,0,0]],\n" +
+"  \"bean:4:2\": [[-1,3,5],[-4,2,4],[-5,3,5],[2,-1,4],[6,-2,1],[0,3,4],[0,-3,5],[-2,0,5],[-3,-1,3],[4,-4,1],[3,-1,2],[5,0,1],[-6,6,0],[-2,2,4],[-3,4,0],[4,-6,1],[5,-5,0],[0,4,1]],\n" +
+"  \"bean:4:3\": [[-1,1,2],[4,-4,5],[-2,-3,0],[-3,-2,2],[0,-1,1],[1,-1,3],[-5,2,0],[1,3,0],[-5,5,0],[2,-2,0],[-2,0,3],[2,0,0],[2,-3,4],[3,-3,0],[0,-2,3],[-3,4,1],[-1,3,1],[0,0,0]],\n" +
+"  \"spore:1\": [[0,0,0],[0,-1,2],[1,-1,5],[0,1,1]],\n" +
+"  \"spore:3:0\": [[-5,3,1],[-1,5,4],[1,0,2],[5,-5,1],[-5,0,4],[3,-5,1],[3,-1,5],[1,-2,5],[-1,-2,2],[-3,2,3],[-1,1,3],[-3,3,0],[0,-3,4],[2,1,5],[0,2,1]],\n" +
+"  \"spore:3:1\": [[0,-1,3],[0,-3,0],[2,-1,0],[-3,5,0],[1,4,2],[-5,1,5],[3,-3,1],[0,3,4],[-4,3,0],[-1,-3,2],[3,0,1],[5,-1,1],[-5,3,0],[1,-5,2],[2,-4,4]],\n" +
+"  \"spore:3:2\": [[-2,-3,2],[3,2,4],[2,1,4],[3,-5,3],[-5,0,0],[-4,0,0],[2,-1,0],[0,5,4],[1,-2,3],[-3,1,4],[-3,2,0],[4,-2,5],[-3,3,0],[1,2,3],[2,-3,0]],\n" +
+"  \"spore:3:3\": [[4,-1,1],[-1,-2,1],[-4,3,4],[-4,0,5],[3,2,3],[4,-5,1],[-3,4,5],[0,2,1],[0,3,0],[-2,2,5],[-2,-3,5],[0,-2,5],[4,-4,0],[1,-1,0],[-3,1,1]],\n" +
+"  \"spore:4:0\": [[-1,1,2],[3,-2,5],[-3,-1,0],[-1,3,1],[0,-1,1],[1,-1,3],[5,-5,1],[-4,0,2],[2,3,0],[2,-2,0],[-2,0,2],[2,0,0],[2,-3,5],[-4,4,1],[0,-2,3],[0,4,0],[-3,5,1],[0,0,0]],\n" +
+"  \"spore:4:1\": [[0,1,1],[3,-2,0],[4,0,0],[2,1,1],[0,-1,1],[-1,1,0],[1,-5,0],[-2,3,1],[3,-5,0],[-2,0,2],[-2,2,2],[3,-3,0],[-1,-2,3],[4,-4,4],[0,-2,3],[1,3,1],[-4,-1,1],[0,0,0]],\n" +
+"  \"spore:4:2\": [[1,-6,2],[4,-5,3],[2,-4,1],[0,4,4],[-6,0,4],[-6,1,5],[1,-1,2],[3,-2,1],[1,4,5],[-3,-1,5],[-2,-1,2],[-4,3,5],[1,-2,3],[3,2,5],[-5,6,5],[-2,4,0],[2,1,4],[-4,2,2]],\n" +
+"  \"spore:4:3\": [[-1,1,2],[4,-4,5],[-2,-3,0],[1,3,2],[0,-1,1],[1,-1,3],[-5,0,0],[5,-1,0],[-5,2,0],[2,-2,0],[-2,0,3],[2,0,0],[2,-3,4],[3,-3,0],[0,-2,3],[-1,3,1],[-5,5,0],[0,0,0]],\n" +
+"  \"pebble:1\": [[0,0,0],[0,-1,2],[1,-1,5],[0,1,1]],\n" +
+"  \"pebble:3:0\": [[-3,3,2],[3,-3,4],[-3,-1,4],[3,-5,2],[3,0,1],[2,0,1],[-1,-1,3],[5,-4,1],[1,-2,0],[2,2,5],[-3,2,5],[-4,0,1],[1,3,1],[-2,3,5],[-4,2,1]],\n" +
+"  \"pebble:3:1\": [[2,-3,3],[0,5,3],[-3,4,5],[5,-4,1],[5,-5,2],[-1,-4,5],[0,2,4],[-2,0,4],[3,-3,2],[-4,0,1],[-2,3,4],[2,1,5],[-3,-2,1],[-5,2,1],[2,-1,5]],\n" +
+"  \"pebble:3:2\": [[-2,5,0],[0,1,5],[3,-2,3],[0,-5,0],[-5,5,3],[-4,5,3],[1,-2,5],[0,3,0],[0,2,3],[-3,0,0],[0,-3,4],[3,0,5],[-3,5,4],[-4,-1,0],[2,2,5]],\n" +
+"  \"pebble:3:3\": [[5,0,4],[1,2,3],[3,1,3],[-3,3,0],[0,-5,5],[4,-4,2],[0,4,2],[2,1,3],[3,-2,5],[-4,-1,0],[4,-2,2],[-1,0,5],[-2,-2,5],[-4,3,4],[-3,1,0]],\n" +
+"  \"pebble:4:0\": [[-1,1,2],[-2,-1,2],[-2,4,0],[1,3,2],[0,-1,1],[1,-1,3],[-2,-3,0],[-4,4,1],[-5,0,0],[2,-2,0],[-2,0,2],[2,0,0],[2,-3,5],[2,-5,5],[0,-2,3],[3,-2,5],[5,-1,0],[0,0,0]],\n" +
+"  \"pebble:4:1\": [[0,1,1],[-2,3,1],[2,2,1],[1,-4,0],[0,-1,1],[-1,1,0],[5,-5,0],[4,-2,0],[-4,-1,1],[-2,0,2],[-2,2,2],[3,-3,0],[-1,-2,3],[0,4,0],[0,-2,3],[3,-2,1],[0,-5,5],[0,0,0]],\n" +
+"  \"pebble:4:2\": [[-2,2,2],[3,-1,0],[-4,0,0],[-3,1,2],[0,-1,1],[-1,1,0],[5,0,1],[-1,-4,2],[3,2,1],[0,-3,4],[0,2,0],[1,-3,4],[3,-3,0],[-3,5,0],[0,-2,2],[3,-2,0],[-3,-2,2],[0,0,0]],\n" +
+"  \"pebble:4:3\": [[-1,1,2],[-1,3,1],[5,-5,1],[1,3,2],[0,-1,1],[1,-1,3],[-5,0,0],[-4,1,1],[-5,5,0],[2,-2,0],[-2,0,3],[2,0,0],[2,-3,4],[3,-3,0],[0,-2,3],[-2,-1,4],[-3,4,1],[0,0,0]],\n" +
+"  \"spring:1\": [[0,0,0],[0,-1,1],[0,1,1],[1,-2,5]],\n" +
+"  \"spring:3:0\": [[-1,3,4],[4,-2,2],[-1,-1,4],[-3,-2,5],[-5,4,5],[0,5,2],[1,-2,5],[-5,0,0],[0,2,4],[3,2,4],[-4,0,5],[0,-4,1],[-5,3,5],[2,-4,4],[1,2,1]],\n" +
+"  \"spring:3:1\": [[0,2,5],[3,-2,4],[-3,1,0],[5,0,2],[5,-1,1],[4,-1,1],[2,-3,0],[2,-1,5],[-4,4,5],[-1,2,2],[-5,5,4],[-2,-1,2],[-2,5,5],[1,-4,3],[1,-1,3]],\n" +
+"  \"spring:3:2\": [[-1,-2,3],[-2,-3,5],[4,-4,2],[2,-2,4],[-5,5,3],[-4,0,0],[3,1,2],[0,-1,4],[1,4,2],[0,1,0],[-1,0,3],[4,-1,3],[-3,5,4],[2,-1,4],[1,0,3]],\n" +
+"  \"spring:3:3\": [[2,0,2],[2,-5,2],[-3,-1,3],[-5,2,1],[0,4,4],[5,0,1],[-4,1,0],[-1,2,2],[-3,2,5],[1,-2,1],[3,-2,3],[5,-2,4],[-1,3,1],[0,-2,4],[4,-1,3]],\n" +
+"  \"spring:4:0\": [[-4,0,1],[1,-1,4],[4,-5,4],[-6,6,0],[-2,1,3],[-6,5,5],[0,5,1],[4,-1,1],[2,-4,5],[-1,2,4],[-1,3,3],[1,0,1],[1,-6,2],[3,-2,1],[-4,-2,1],[2,3,3],[-1,-2,5],[-6,1,0]],\n" +
+"  \"spring:4:1\": [[0,1,1],[2,1,0],[1,-5,0],[-2,3,1],[0,-1,1],[-1,1,0],[3,-5,0],[4,-4,4],[-4,-1,1],[-2,0,2],[-2,2,2],[3,-3,0],[-1,-2,3],[4,0,0],[0,-2,3],[1,4,0],[3,-1,0],[0,0,0]],\n" +
+"  \"spring:4:2\": [[-1,4,3],[-5,3,5],[-2,0,1],[-6,3,1],[2,-1,0],[1,0,0],[0,-3,1],[0,-1,5],[2,-5,4],[3,-5,1],[-4,6,3],[-1,1,0],[4,-4,0],[-2,2,1],[0,4,1],[-3,-1,2],[4,-1,5],[5,1,4]],\n" +
+"  \"spring:4:3\": [[-1,1,2],[-1,3,1],[5,-5,1],[-2,-1,4],[0,-1,1],[1,-1,3],[2,3,0],[-3,4,1],[-5,5,0],[2,-2,0],[-2,0,3],[2,0,0],[2,-3,4],[3,-3,0],[0,-2,3],[0,5,0],[-4,1,2],[0,0,0]]\n" +
+"});\n" +
+"\n" +
+"const designs = new Map();\n" +
+"const repeat = (gene, count) => Array(count).fill(gene);\n" +
+"\n" +
+"function workerGenes(tribe, level) {\n" +
+"  if (level === 1) return STARTING_WORKER_GENES[tribe];\n" +
+"  const genes = [\"gather\", ...repeat(\"capacity\", level + 1), ...repeat(\"harvestSpeed\", level * 2),\n" +
+"    ...repeat(\"movement\", level), ...repeat(\"health\", level === 4 ? 2 : 1)];\n" +
+"  if (level >= 3) genes.push(\"lifespan\", \"lifespan\");\n" +
+"  if (level === 4) genes.push(\"regeneration\", \"health\");\n" +
+"  return genes;\n" +
+"}\n" +
+"\n" +
+"function militaryGenes(tribe, level, variant) {\n" +
+"  const genes = [\"antenna\", \"health\", \"movement\", \"vision\"];\n" +
+"  if (level >= 3) genes.push(\"lifespan\", \"lifespan\", \"movement\");\n" +
+"  if (level === 4) genes.push(\"health\", \"movement\");\n" +
+"  if (variant === 0) genes.push(\"blade\", \"power\", \"power\", \"speed\", \"health\");\n" +
+"  if (variant === 1) genes.push(\"blade\", \"carapace\", \"carapace\", \"power\", \"health\");\n" +
+"  if (variant === 2) genes.push(\"secretion\", \"rangedPower\", \"rangedPower\", \"rangedSpeed\", \"movement\");\n" +
+"  if (variant === 3) genes.push(\"blade\", \"secretion\", \"power\", \"rangedPower\", \"carapace\");\n" +
+"  if (level >= 3) genes.push(variant === 1 ? \"block\" : variant === 2 ? \"area\" : \"combo\");\n" +
+"  if (level >= 3) {\n" +
+"    if (tribe === \"pebble\") genes.push(\"carapace\", \"health\");\n" +
+"    else if (tribe === \"spore\") genes.push(variant >= 2 ? \"rangedPower\" : \"health\", \"movement\");\n" +
+"    else if (tribe === \"spring\") genes.push(\"movement\", variant === 2 ? \"rangedSpeed\" : \"speed\");\n" +
+"    else genes.push(\"health\", variant === 2 ? \"rangedPower\" : \"power\");\n" +
+"  }\n" +
+"  if (level === 4) genes.push(variant === 1 ? \"reflection\" : variant === 2 ? \"penetration\" : \"lifesteal\");\n" +
+"  return genes;\n" +
+"}\n" +
+"\n" +
+"function tribeDesign(tribe, level, variant) {\n" +
+"  if (!TRIBE_INVASION[tribe] || !Number.isInteger(level) || level < 1 || level > 4 ||\n" +
+"      !Number.isInteger(variant) || variant < -1 || variant > 3 || variant >= 0 && level < 2) return null;\n" +
+"  if (variant < 0) return tribeWorkerDesign(level);\n" +
+"  const key = tribe + \":\" + level + \":\" + variant;\n" +
+"  if (!designs.has(key)) {\n" +
+"    const genes = variant < 0 ? workerGenes(tribe, level) : militaryGenes(tribe, level, variant);\n" +
+"    const placementKey = variant < 0 ? level === 1 ? tribe + \":1\" : \"worker:\" + level :\n" +
+"      level === 2 ? \"military:2:\" + variant : key;\n" +
+"    const layout = placements[placementKey];\n" +
+"    const pieces = genes.map((gene, index) => ({ gene, grade: ATTRIBUTE_DNA.lookup.get(gene).grade,\n" +
+"      q: layout[index][0], r: layout[index][1], rotation: layout[index][2] }));\n" +
+"    const dna = pieces && validateDna({ version: 6, level, budget: 999999999, pieces }, level, 999999999);\n" +
+"    if (!dna) throw new Error(\"Invalid tribe DNA: \" + key);\n" +
+"    designs.set(key, dna);\n" +
+"  }\n" +
+"  return cloneDna(designs.get(key));\n" +
+"}\n" +
+"\n" +
+"function sameTribeDesign(first, second) {\n" +
+"  if (!first.dna || !second.dna) return false;\n" +
+"  return JSON.stringify(first.dna.pieces) === JSON.stringify(second.dna.pieces);\n" +
+"}\n" +
+"\n" +
+"function tribeDnaTemplate(dna, role, state) {\n" +
+"  const previous = state.templates.find(template => sameTribeDesign(template, { dna }));\n" +
+"  if (previous) return { ...previous, productionRole: role };\n" +
+"  const slots = Object.keys(dnaAppearance(dna));\n" +
+"  return { id: null, name: suggestTemplateName(slots, state.templates), dna, slots,\n" +
+"    attributeLevels: Object.fromEntries(slots.map(key => [key, 1])), revision: 1, productionRole: role };\n" +
+"}\n" +
+"\n" +
+"return { TRIBE_INVASION, tribeDesign, sameTribeDesign, tribeDnaTemplate };\n" +
+"})();\n" +
+"modules[\"server/tribe-combat-templates.mjs\"] = (() => {\n" +
+"const { ATTRIBUTE_DNA } = modules[\"server/dna.mjs\"];\n" +
+"const { cloneDna } = modules[\"server/dna-unit.mjs\"];\n" +
+"\n" +
+"const TRIBE_COMBAT_ROLES = Object.freeze([\n" +
+"  Object.freeze({ key: \"vanguard\", name: \"균형 전사\" }),\n" +
+"  Object.freeze({ key: \"flurry\", name: \"연타 돌격병\" }),\n" +
+"  Object.freeze({ key: \"breaker\", name: \"관통 전사\" }),\n" +
+"  Object.freeze({ key: \"duelist\", name: \"회피 결투가\" }),\n" +
+"  Object.freeze({ key: \"sentinel\", name: \"반격 수호자\" }),\n" +
+"  Object.freeze({ key: \"marksman\", name: \"정밀 사수\" }),\n" +
+"  Object.freeze({ key: \"artillery\", name: \"광역 포격수\" }),\n" +
+"  Object.freeze({ key: \"suppressor\", name: \"기절 제압병\" }),\n" +
+"  Object.freeze({ key: \"bleeder\", name: \"출혈 사냥꾼\" }),\n" +
+"  Object.freeze({ key: \"drainer\", name: \"흡혈 투사\" })\n" +
+"]);\n" +
+"\n" +
+"const recipes = Object.freeze({\n" +
+"  vanguard: Object.freeze({\"blade\":1,\"carapace\":1,\"health\":5,\"power\":3,\"speed\":1,\"block\":1,\"tenacity\":1,\"accuracy\":1}),\n" +
+"  flurry: Object.freeze({\"blade\":1,\"health\":4,\"power\":2,\"combo\":1,\"comboPower\":1,\"speed\":2,\"focus\":1,\"accuracy\":1}),\n" +
+"  breaker: Object.freeze({\"blade\":1,\"carapace\":1,\"health\":5,\"power\":3,\"penetration\":2,\"speed\":1}),\n" +
+"  duelist: Object.freeze({\"blade\":1,\"health\":5,\"power\":3,\"speed\":1,\"evasion\":3,\"parry\":1}),\n" +
+"  sentinel: Object.freeze({\"blade\":1,\"carapace\":2,\"health\":5,\"power\":2,\"block\":1,\"counter\":1,\"reflection\":1}),\n" +
+"  marksman: Object.freeze({\"secretion\":1,\"carapace\":1,\"health\":4,\"rangedPower\":5,\"rangedSpeed\":2,\"accuracy\":2,\"penetration\":1}),\n" +
+"  artillery: Object.freeze({\"secretion\":1,\"carapace\":1,\"health\":4,\"rangedPower\":3,\"rangedSpeed\":1,\"area\":1}),\n" +
+"  suppressor: Object.freeze({\"secretion\":1,\"health\":5,\"rangedPower\":6,\"rangedSpeed\":2,\"stun\":2,\"tenacity\":1}),\n" +
+"  bleeder: Object.freeze({\"blade\":1,\"health\":5,\"power\":2,\"speed\":1,\"combo\":1,\"bleed\":2,\"bleedPower\":1,\"evasion\":1}),\n" +
+"  drainer: Object.freeze({\"blade\":1,\"carapace\":1,\"health\":5,\"power\":3,\"lifesteal\":1,\"speed\":2})\n" +
+"});\n" +
+"\n" +
+"const weights = Object.freeze({\n" +
+"  bean: Object.freeze([3,2,2,1,2,2,1,1,1,1]),\n" +
+"  spore: Object.freeze([1,1,1,1,1,4,3,3,2,1]),\n" +
+"  pebble: Object.freeze([3,1,2,1,4,1,2,1,2,2]),\n" +
+"  spring: Object.freeze([2,3,2,3,1,1,1,2,2,3])\n" +
+"});\n" +
+"\n" +
+"const placements = Object.freeze({\n" +
+"  \"bean:vanguard\": [[1,-2,4],[2,-2,0],[-3,2,2],[0,3,0],[0,-4,2],[4,-4,5],[-5,4,1],[-1,-1,3],[1,1,0],[3,-3,4],[-2,3,1],[0,0,0],[0,-1,3],[-1,1,2],[-3,0,3],[-4,5,1],[-1,5,1],[3,-1,0],[1,0,5]],\n" +
+"  \"bean:flurry\": [[0,-2,3],[-3,-1,2],[4,-1,0],[-4,1,1],[-4,3,1],[3,-3,0],[0,3,0],[2,0,0],[0,0,0],[0,-4,4],[2,-4,4],[0,-1,3],[1,1,2],[3,-4,0],[-2,5,1],[0,5,1],[3,-6,0],[-3,0,0]],\n" +
+"  \"bean:breaker\": [[-3,0,3],[-4,2,0],[2,2,4],[0,-3,1],[2,0,3],[-4,-2,5],[5,1,3],[2,4,2],[1,4,5],[1,1,1],[-4,4,2],[-3,6,5],[-2,1,4],[-4,1,3],[3,-2,0],[-1,-4,4],[0,-1,1],[-6,3,5]],\n" +
+"  \"bean:duelist\": [[0,-2,3],[4,-4,4],[-3,-1,2],[3,1,0],[-4,4,0],[5,-2,0],[2,-1,0],[1,-3,4],[3,-2,5],[-3,2,2],[0,-1,2],[1,-1,4],[-1,1,0],[0,0,0],[0,-4,4],[1,4,0],[-1,5,1],[-2,-4,2],[-2,0,0]],\n" +
+"  \"bean:sentinel\": [[-1,-1,2],[-2,1,2],[1,1,1],[0,-4,3],[1,-4,4],[2,-4,5],[4,-4,0],[4,-2,0],[-1,-2,3],[-3,3,1],[0,-1,3],[-1,1,1],[0,0,0],[-1,3,1],[-4,-1,1],[5,0,0],[3,-6,0],[3,-3,0]],\n" +
+"  \"bean:marksman\": [[5,0,3],[-2,1,5],[2,-3,4],[-3,-2,4],[0,-3,2],[5,-6,0],[-6,5,4],[-2,0,2],[-3,2,1],[3,-1,2],[-5,0,5],[5,-4,3],[0,1,3],[2,1,1],[-3,4,1],[-1,4,1],[5,-3,1],[1,-4,2],[0,-5,3],[-6,0,1],[0,6,4]],\n" +
+"  \"bean:artillery\": [[1,-1,5],[-1,1,1],[1,2,0],[0,-4,2],[3,-4,4],[4,-4,0],[0,-2,2],[2,-1,0],[-2,0,2],[0,-3,0],[0,0,0],[-2,2,2],[5,-2,0],[5,0,0],[-3,-2,2],[0,-1,1]],\n" +
+"  \"bean:suppressor\": [[-1,-1,3],[5,-4,0],[-3,-3,5],[3,-4,2],[-3,-2,2],[6,-1,3],[0,4,5],[0,-1,5],[-1,0,2],[-2,2,5],[3,-1,2],[1,2,2],[3,1,1],[4,1,4],[-6,5,5],[-2,5,5],[-3,2,2],[-6,2,5],[0,-3,4],[0,-5,0],[4,-4,1],[-6,6,5]],\n" +
+"  \"bean:bleeder\": [[2,4,4],[1,-3,0],[-2,-3,2],[3,-1,0],[4,-3,0],[5,0,1],[0,0,2],[-1,4,5],[-2,0,5],[-6,2,5],[-3,1,3],[-2,5,5],[-6,4,0],[-3,4,0],[1,0,2],[-1,-3,5],[2,-1,2],[-1,-5,0],[-6,3,5]],\n" +
+"  \"bean:drainer\": [[1,-1,3],[-1,1,2],[-1,2,1],[-2,-2,2],[-4,0,2],[-4,2,2],[1,3,0],[2,-2,0],[-1,-1,2],[2,0,0],[0,0,0],[0,-3,4],[2,-3,4],[3,-3,0],[-2,5,0],[0,5,1],[3,-5,0],[0,-1,1]],\n" +
+"  \"spore:vanguard\": [[-1,0,3],[0,6,5],[-2,-2,5],[2,-3,4],[-1,-4,2],[3,-2,1],[0,-5,0],[0,1,4],[-3,-2,2],[1,1,1],[-3,2,3],[-1,1,3],[3,2,4],[-5,6,5],[-3,3,2],[-1,6,4],[-2,2,1],[4,-3,0],[1,-2,1],[5,1,4],[-6,1,0]],\n" +
+"  \"spore:flurry\": [[4,2,2],[-4,3,4],[-3,4,0],[-4,0,3],[0,5,2],[-6,3,4],[0,-3,1],[2,-1,2],[1,2,5],[4,-4,3],[4,1,0],[0,-5,2],[-1,-2,3],[4,-3,0],[4,-2,2],[1,3,3],[-3,0,3],[-2,2,1],[2,-6,1],[1,-1,3]],\n" +
+"  \"spore:breaker\": [[2,-4,0],[6,-4,2],[6,-3,1],[-6,4,0],[0,2,5],[4,1,2],[0,1,2],[6,-1,1],[-3,1,5],[-2,1,2],[0,0,5],[-5,-1,0],[0,-4,4],[3,-4,4],[6,-6,2],[-6,0,1],[0,4,0],[-3,4,1],[4,0,3],[-4,-2,5]],\n" +
+"  \"spore:duelist\": [[-1,5,4],[-2,-2,1],[-1,1,3],[-5,4,0],[-5,2,4],[-2,-3,2],[-1,4,3],[0,-4,1],[1,-6,2],[3,-1,3],[2,2,1],[2,-4,4],[5,-1,1],[4,2,4],[5,-6,1],[6,-6,1],[2,0,3],[-3,2,5],[-3,5,5],[-3,6,0],[6,-3,1]],\n" +
+"  \"spore:sentinel\": [[-3,0,3],[3,-1,0],[-1,2,4],[-2,3,1],[0,2,1],[-5,4,4],[-2,1,1],[3,3,2],[-5,0,1],[3,0,0],[2,-2,1],[-1,-2,0],[6,-3,3],[-1,-5,0],[3,-4,5],[-2,-2,4],[0,5,3],[-4,1,5],[1,2,0],[-1,-3,5]],\n" +
+"  \"spore:marksman\": [[5,0,3],[-2,1,5],[2,-3,4],[-3,-2,4],[0,-3,2],[5,-6,0],[-6,5,4],[-2,0,2],[-3,2,1],[3,-1,2],[-5,0,5],[5,-4,3],[0,1,3],[2,1,1],[-3,4,1],[-1,4,1],[5,-3,1],[1,-4,2],[0,-5,3],[-6,0,1],[0,6,4]],\n" +
+"  \"spore:artillery\": [[1,-1,5],[-1,1,1],[-2,2,1],[1,2,0],[0,-4,2],[3,-4,4],[0,-2,2],[2,-1,0],[0,-3,0],[0,0,0],[-2,0,3],[5,-5,1],[5,-3,0],[4,-2,1],[0,-1,1]],\n" +
+"  \"spore:suppressor\": [[-1,3,4],[-5,1,1],[-5,-1,1],[-3,0,3],[0,-3,3],[1,-5,3],[3,-3,1],[-2,2,4],[5,-3,3],[2,0,1],[6,-4,1],[-3,4,4],[3,-4,3],[-2,5,2],[0,6,4],[6,0,3],[-2,-2,1],[2,-5,1],[-4,2,3],[6,-6,3],[-1,5,4]],\n" +
+"  \"spore:bleeder\": [[0,2,0],[3,-1,4],[1,-4,0],[0,-5,2],[1,-6,0],[4,-4,3],[6,-1,2],[-2,-3,0],[-3,-1,0],[0,1,2],[0,-1,0],[-5,0,4],[-1,3,0],[-4,4,3],[-4,6,3],[-3,4,0],[1,0,1],[3,1,5],[5,-2,5],[2,4,5],[-6,1,5]],\n" +
+"  \"spore:drainer\": [[-5,3,0],[-3,1,0],[5,-3,2],[2,-3,1],[4,0,5],[1,0,5],[-3,-2,0],[0,-2,4],[2,4,2],[-2,4,5],[-5,2,0],[-1,5,5],[-5,6,5],[3,1,3],[-5,0,0],[3,3,5],[-1,-4,1],[-1,-1,1],[-6,0,5],[-6,6,3]],\n" +
+"  \"pebble:vanguard\": [[1,-2,4],[2,-2,0],[-3,2,2],[0,3,0],[0,-4,2],[4,-4,5],[-5,4,1],[-1,-1,3],[1,1,0],[3,-3,4],[-2,3,1],[0,0,0],[0,-1,3],[-1,1,2],[-3,0,3],[-4,5,1],[-1,5,1],[3,-1,0],[1,0,5]],\n" +
+"  \"pebble:flurry\": [[0,-2,3],[-3,-1,2],[4,-1,0],[-4,1,1],[-4,3,1],[4,1,1],[3,-3,0],[0,3,0],[2,0,0],[0,0,0],[0,-4,4],[2,-4,4],[0,-1,3],[1,1,2],[3,-4,0],[-2,5,1],[0,5,1],[3,-6,0],[-3,0,0]],\n" +
+"  \"pebble:breaker\": [[-3,0,3],[-4,2,0],[2,2,4],[0,-3,1],[2,0,3],[-4,-2,5],[5,1,3],[2,4,2],[1,4,5],[1,1,1],[-4,4,2],[-3,6,5],[-2,1,4],[-4,1,3],[3,-2,0],[-1,-4,4],[0,-1,1],[-6,3,5]],\n" +
+"  \"pebble:duelist\": [[0,-2,3],[4,-4,4],[-3,-1,2],[3,1,0],[-4,4,0],[5,-2,0],[2,-1,0],[1,-3,4],[3,-2,5],[-3,2,2],[0,-1,2],[1,-1,4],[-1,1,0],[0,0,0],[0,-4,4],[1,4,0],[-1,5,1],[-2,-4,2],[-2,0,0]],\n" +
+"  \"pebble:sentinel\": [[-1,-1,2],[-2,1,2],[0,-4,3],[1,-4,4],[2,-4,5],[4,-4,0],[4,-2,0],[1,1,1],[-1,-2,3],[0,-1,3],[-1,1,1],[0,0,0],[-1,3,2],[-4,-1,1],[5,0,0],[2,1,1],[3,-3,0]],\n" +
+"  \"pebble:marksman\": [[5,0,3],[-2,1,5],[2,-3,4],[-3,-2,4],[0,-3,2],[5,-6,0],[-6,5,4],[-2,0,2],[-3,2,1],[3,-1,2],[-5,0,5],[5,-4,3],[0,1,3],[2,1,1],[-3,4,1],[-1,4,1],[5,-3,1],[1,-4,2],[0,-5,3],[-6,0,1],[0,6,4]],\n" +
+"  \"pebble:artillery\": [[1,-1,5],[-1,1,1],[1,2,0],[0,-4,2],[3,-4,4],[4,-4,0],[0,-2,2],[2,-1,0],[-2,0,2],[0,-3,0],[0,0,0],[-2,2,2],[5,-2,0],[5,0,0],[-3,-2,2],[0,-1,1]],\n" +
+"  \"pebble:suppressor\": [[-1,-1,3],[5,-4,0],[-3,-3,5],[3,-4,2],[-3,-2,2],[6,-1,3],[0,4,5],[0,-1,5],[-1,0,2],[-2,2,5],[3,-1,2],[1,2,2],[3,1,1],[4,1,4],[-6,5,5],[-2,5,5],[-3,2,2],[-6,2,5],[0,-3,4],[0,-5,0],[4,-4,1],[-6,6,5]],\n" +
+"  \"pebble:bleeder\": [[2,4,4],[1,-3,0],[-2,-3,2],[3,-1,0],[4,-3,0],[5,0,1],[0,0,2],[-1,4,5],[-2,0,5],[-6,2,5],[-3,1,3],[-2,5,5],[-6,4,0],[-3,4,0],[1,0,2],[-1,-3,5],[2,-1,2],[-1,-5,0],[-6,3,5]],\n" +
+"  \"pebble:drainer\": [[1,-1,3],[-1,1,2],[-1,2,1],[-2,-2,2],[-4,0,2],[-4,2,2],[1,3,0],[2,-2,0],[-1,-1,2],[2,0,0],[0,0,0],[0,-3,4],[2,-3,4],[3,-3,0],[-2,5,0],[0,5,1],[3,-5,0],[0,-1,1]],\n" +
+"  \"spring:vanguard\": [[1,-2,4],[2,-2,0],[-3,2,2],[0,3,0],[0,-4,2],[4,-4,5],[-5,4,1],[-1,-1,3],[1,1,0],[3,-3,4],[-2,3,1],[0,0,0],[0,-1,3],[-1,1,2],[-3,0,3],[-4,5,1],[-1,5,1],[3,-1,0],[1,0,5]],\n" +
+"  \"spring:flurry\": [[0,-2,3],[4,-4,4],[-3,-1,2],[4,-1,0],[-4,1,1],[3,-3,0],[0,3,0],[2,0,0],[0,0,0],[0,-4,4],[0,-1,3],[1,1,2],[1,-4,0],[-5,4,0],[-2,5,1],[1,-6,0],[-3,0,0]],\n" +
+"  \"spring:breaker\": [[-1,1,0],[0,-2,3],[3,-2,0],[3,0,0],[-1,3,0],[0,-4,4],[-4,0,2],[-1,-1,2],[-2,2,1],[0,-3,3],[0,0,0],[1,-3,5],[3,-3,0],[4,-5,1],[2,3,0],[-3,3,2],[0,-1,1]],\n" +
+"  \"spring:duelist\": [[0,-2,3],[0,-4,3],[4,-4,4],[-3,-1,2],[3,1,0],[-4,4,0],[2,-1,0],[1,-3,4],[-3,2,2],[0,-1,2],[1,-1,4],[-1,1,0],[0,0,0],[3,-2,0],[1,4,0],[-1,5,1],[6,-6,1],[-2,0,0]],\n" +
+"  \"spring:sentinel\": [[-1,-1,2],[-2,1,2],[1,1,1],[0,-4,3],[1,-4,4],[2,-4,5],[4,-4,0],[4,-2,0],[-1,-2,3],[-3,3,1],[0,-1,3],[-1,1,1],[0,0,0],[-1,3,1],[-4,-1,1],[5,0,0],[3,-6,0],[3,-3,0]],\n" +
+"  \"spring:marksman\": [[2,1,4],[3,-2,3],[-4,4,0],[-3,2,0],[-5,6,3],[-1,6,5],[-5,4,3],[6,-1,2],[-4,1,5],[-1,2,4],[-5,0,4],[2,2,5],[-1,-1,3],[1,-6,3],[0,4,5],[6,-2,3],[1,-4,5],[4,-4,5],[3,2,2],[-1,4,0],[-4,2,4],[-6,2,5],[5,-3,2]],\n" +
+"  \"spring:artillery\": [[1,-1,5],[-1,1,1],[0,-4,2],[3,-4,4],[4,-4,0],[4,-2,0],[4,0,0],[0,-2,2],[2,-1,0],[-2,0,2],[-2,2,1],[0,-3,0],[0,0,0],[1,2,1],[-2,5,1],[0,5,1],[-3,-2,2],[0,-1,1]],\n" +
+"  \"spring:suppressor\": [[-4,2,5],[-4,4,0],[-2,4,5],[-6,5,0],[-2,3,3],[-6,3,4],[-6,4,5],[0,2,3],[4,1,2],[-1,-1,3],[3,1,5],[-1,-4,0],[0,-1,0],[2,-2,3],[2,-1,1],[1,5,5],[2,-6,2],[5,-3,0],[6,-6,2],[-3,-1,4],[0,5,2],[-5,0,5],[-1,6,3],[3,-6,0]],\n" +
+"  \"spring:bleeder\": [[2,4,4],[1,-3,0],[-2,-3,2],[3,-1,0],[4,-3,0],[5,0,1],[0,0,2],[-1,4,5],[-2,0,5],[-6,2,5],[-3,1,3],[-2,5,5],[-6,4,0],[-3,4,0],[1,0,2],[-1,-3,5],[2,-1,2],[-1,-5,0],[-6,3,5]],\n" +
+"  \"spring:drainer\": [[1,-1,3],[-1,1,2],[-1,2,1],[-2,-2,2],[-4,0,2],[-4,2,2],[2,-2,0],[-1,-1,2],[2,0,0],[0,0,0],[0,-3,4],[2,-3,4],[3,-3,0],[2,3,0],[-2,5,0],[3,-5,0],[0,-1,1]]\n" +
+"});\n" +
+"\n" +
+"const designs = new Map();\n" +
+"\n" +
+"function tribeCombatTemplate(key, role) {\n" +
+"  if (!Object.hasOwn(weights, key) || !Object.hasOwn(recipes, role)) return null;\n" +
+"  const id = key + \":\" + role;\n" +
+"  if (!designs.has(id)) {\n" +
+"    const source = recipes[role];\n" +
+"    const counts = { ...source, antenna:1, movement:2, vision:1, lifespan:1 };\n" +
+"    if (key==='spore' && counts.blade) { counts.health++; counts.power++; }\n" +
+"    if (key==='spring' && counts.secretion) { counts.rangedPower++; counts.health++; }\n" +
+"    if (key==='pebble' && role==='flurry') counts.health++;\n" +
+"    if (key==='spring' && role==='flurry') counts.speed--;\n" +
+"    if (key==='spring' && role==='breaker') counts.penetration--;\n" +
+"    if (key==='spore' && role==='suppressor') counts.rangedPower--;\n" +
+"    if (key==='spore' && role==='artillery') counts.rangedPower--;\n" +
+"    if (key==='spring' && role==='duelist') counts.power--;\n" +
+"    if (key==='pebble' && role==='sentinel') counts.carapace--;\n" +
+"    if (key==='spring' && role==='drainer') counts.health--;\n" +
+"    const genes = Object.entries(counts).flatMap(([gene, count]) => Array(count).fill(gene));\n" +
+"    const pieces = genes.map((gene, index) => ({ gene, grade: ATTRIBUTE_DNA.lookup.get(gene).grade,\n" +
+"      q: placements[id][index][0], r: placements[id][index][1], rotation: placements[id][index][2] }));\n" +
+"    designs.set(id, { version: 6, level: 4, budget: ATTRIBUTE_DNA.price(pieces), pieces });\n" +
+"  }\n" +
+"  const index = TRIBE_COMBAT_ROLES.findIndex(entry => entry.key === role);\n" +
+"  return { key, template: role, name: TRIBE_COMBAT_ROLES[index].name, weight: weights[key][index], dna: cloneDna(designs.get(id)) };\n" +
+"}\n" +
+"\n" +
+"function tribeCombatTemplates(tribe) {\n" +
+"  return Object.hasOwn(weights, tribe) ? TRIBE_COMBAT_ROLES.map(role => tribeCombatTemplate(tribe, role.key)) : [];\n" +
+"}\n" +
+"\n" +
+"return { TRIBE_COMBAT_ROLES, tribeCombatTemplate, tribeCombatTemplates };\n" +
+"})();\n" +
+"modules[\"server/tribe-defense-designs.mjs\"] = (() => {\n" +
+"const { ATTRIBUTE_DNA } = modules[\"server/dna.mjs\"];\n" +
+"const { cloneDna } = modules[\"server/dna-unit.mjs\"];\n" +
+"\n" +
+"const recipes = [\n" +
+"  { antenna: 1, blade: 1, health: 3, power: 2, carapace: 1, movement: 1 },\n" +
+"  { antenna: 1, secretion: 1, health: 3, rangedPower: 3, movement: 1 },\n" +
+"  { antenna: 1, blade: 1, health: 4, power: 3, carapace: 1, movement: 1, combo: 1 },\n" +
+"  { antenna: 1, secretion: 1, health: 4, rangedPower: 4, movement: 1, rangedSpeed: 1 }\n" +
+"];\n" +
+"const placements = [\n" +
+"  [[0,0,0],[0,-1,1],[-2,1,1],[2,-3,5],[3,-1,0],[0,1,0],[0,-2,2],[1,-2,0],[0,-3,1]],\n" +
+"  [[0,0,0],[0,-1,3],[1,1,0],[3,-2,0],[-3,1,3],[-1,1,0],[0,-2,5],[-2,0,1],[-2,3,0]],\n" +
+"  [[0,-1,3],[-1,1,1],[0,-3,4],[1,-3,5],[3,-3,5],[-3,0,1],[0,-2,3],[1,-2,0],[2,0,0],[-2,1,2],[0,3,0],[0,0,0]],\n" +
+"  [[0,0,0],[0,-1,3],[-2,2,1],[3,-1,5],[-3,0,2],[0,-4,2],[-1,1,0],[0,-2,4],[1,-2,5],[-2,0,1],[0,4,0],[1,1,1]]\n" +
+"];\n" +
+"const formations = { bean: [0, 0, 0], spore: [1, 0, 1], pebble: [0, 0, 1], spring: [0, 0, 1] };\n" +
+"const designs = recipes.map((counts, index) => {\n" +
+"  const genes = Object.entries(counts).flatMap(([gene, count]) => Array(count).fill(gene));\n" +
+"  const pieces = genes.map((gene, i) => ({ gene, grade: ATTRIBUTE_DNA.lookup.get(gene).grade,\n" +
+"    q: placements[index][i][0], r: placements[index][i][1], rotation: placements[index][i][2] }));\n" +
+"  return { version: 6, level: index < 2 ? 2 : 3, budget: ATTRIBUTE_DNA.price(pieces), pieces };\n" +
+"});\n" +
+"\n" +
+"function tribeDefenseDesign(tribe, level, index) {\n" +
+"  if (!formations[tribe] || level < 2) return null;\n" +
+"  return cloneDna(designs[(level >= 3 ? 2 : 0) + formations[tribe][index % 3]]);\n" +
+"}\n" +
+"\n" +
+"function tribeDefenseAgent(agent) {\n" +
+"  return !!agent.dna && (agent.dna.level < 4 || designs.some(design =>\n" +
+"    JSON.stringify(design.pieces) === JSON.stringify(agent.dna.pieces)));\n" +
+"}\n" +
+"\n" +
+"return { tribeDefenseDesign, tribeDefenseAgent };\n" +
+"})();\n" +
+"modules[\"server/nest-defender.mjs\"] = (() => {\n" +
+"// Ordinary, editable DNA. These level-two designs use the same prices and combat rules as player designs.\n" +
+"const designs = {\n" +
+"  \"bean\": {\n" +
+"    \"version\": 6,\n" +
+"    \"level\": 2,\n" +
+"    \"budget\": 0,\n" +
+"    \"pieces\": [\n" +
+"      {\n" +
+"        \"gene\": \"blade\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -4,\n" +
+"        \"r\": 3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"carapace\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 3,\n" +
+"        \"q\": 4,\n" +
+"        \"r\": -2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": -4\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 5,\n" +
+"        \"q\": -4,\n" +
+"        \"r\": 2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 2,\n" +
+"        \"r\": 2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 3,\n" +
+"        \"r\": -4\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": -1,\n" +
+"        \"r\": -3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": -3,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 3,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": 4,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": 0\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 2,\n" +
+"        \"r\": 1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -3,\n" +
+"        \"r\": 2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"regeneration\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 3,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": -1\n" +
+"      }\n" +
+"    ]\n" +
+"  },\n" +
+"  \"spore\": {\n" +
+"    \"version\": 6,\n" +
+"    \"level\": 2,\n" +
+"    \"budget\": 0,\n" +
+"    \"pieces\": [\n" +
+"      {\n" +
+"        \"gene\": \"secretion\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 1,\n" +
+"        \"r\": -3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"carapace\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": -4,\n" +
+"        \"r\": 1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"rangedPower\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 3,\n" +
+"        \"r\": -4\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"rangedPower\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -2,\n" +
+"        \"r\": -2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"rangedPower\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 3,\n" +
+"        \"q\": 1,\n" +
+"        \"r\": 0\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 1,\n" +
+"        \"r\": -4\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": -2,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": 4,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -3,\n" +
+"        \"r\": 1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -1,\n" +
+"        \"r\": 1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 1,\n" +
+"        \"r\": 1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": -1,\n" +
+"        \"r\": 3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 1,\n" +
+"        \"r\": 3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"regeneration\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 3,\n" +
+"        \"r\": -1\n" +
+"      }\n" +
+"    ]\n" +
+"  },\n" +
+"  \"pebble\": {\n" +
+"    \"version\": 6,\n" +
+"    \"level\": 2,\n" +
+"    \"budget\": 0,\n" +
+"    \"pieces\": [\n" +
+"      {\n" +
+"        \"gene\": \"blade\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": -3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"carapace\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 3,\n" +
+"        \"q\": 4,\n" +
+"        \"r\": -4\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 1,\n" +
+"        \"r\": 1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 4,\n" +
+"        \"q\": -4,\n" +
+"        \"r\": 2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 2,\n" +
+"        \"r\": 2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": 4,\n" +
+"        \"r\": -3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 1,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": 4,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -1,\n" +
+"        \"r\": 0\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -3,\n" +
+"        \"r\": 1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -4,\n" +
+"        \"r\": 3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"regeneration\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 5,\n" +
+"        \"q\": -2,\n" +
+"        \"r\": -1\n" +
+"      }\n" +
+"    ]\n" +
+"  },\n" +
+"  \"spring\": {\n" +
+"    \"version\": 6,\n" +
+"    \"level\": 2,\n" +
+"    \"budget\": 0,\n" +
+"    \"pieces\": [\n" +
+"      {\n" +
+"        \"gene\": \"blade\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -4,\n" +
+"        \"r\": 3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"carapace\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 3,\n" +
+"        \"q\": 4,\n" +
+"        \"r\": -2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": -4\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 5,\n" +
+"        \"q\": -4,\n" +
+"        \"r\": 2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 2,\n" +
+"        \"r\": 2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 3,\n" +
+"        \"r\": -4\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": -1,\n" +
+"        \"r\": -3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": -3,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 3,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": 4,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": 0\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 2,\n" +
+"        \"r\": 1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -3,\n" +
+"        \"r\": 2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"regeneration\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 3,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": -1\n" +
+"      }\n" +
+"    ]\n" +
+"  }\n" +
+"};\n" +
+"\n" +
+"function nestDefenderDesign(tribe = \"bean\") {\n" +
+"  const design = designs[tribe] || designs.bean;\n" +
+"  return { name: \"둥지 수비대\", design: { ...design, pieces: design.pieces.map(piece => ({ ...piece })) } };\n" +
+"}\n" +
+"\n" +
+"// The saved role follows this design's offspring, not every carapace unit.\n" +
+"// Adding antenna/gather or removing the weapon restores the normal DNA behavior.\n" +
+"function isNestDefender(unit) {\n" +
+"  return unit.defenseMode === \"nest\" && !!unit.dna &&\n" +
+"    unit.dna.pieces.some(piece => [\"blade\", \"secretion\"].includes(piece.gene)) &&\n" +
+"    !unit.dna.pieces.some(piece => [\"antenna\", \"gather\"].includes(piece.gene));\n" +
+"}\n" +
+"\n" +
+"return { nestDefenderDesign, isNestDefender };\n" +
+"})();\n" +
+"modules[\"server/tribe-strategy.mjs\"] = (() => {\n" +
+"const { AGENT_DEATH_WARNING, agentRemainingLifespan } = modules[\"server/lifespan.mjs\"];\n" +
+"const { militaryAgent } = modules[\"server/conquest-pacing.mjs\"];\n" +
+"const { dnaUnitStats } = modules[\"server/dna-unit.mjs\"];\n" +
+"const { birthCost } = modules[\"server/attributes.mjs\"];\n" +
+"const { nestUpgradeCost } = modules[\"server/nests.mjs\"];\n" +
+"const { tribeDesign } = modules[\"server/tribe-designs.mjs\"];\n" +
+"\n" +
+"function tribeWorkerTarget(state) {\n" +
+"  return [6, 4, 6, 10][state.nestLevel - 1];\n" +
+"}\n" +
+"\n" +
+"function tribeUpgradeReady(state, tribe) {\n" +
+"  if (state.nestLevel >= 4) return false;\n" +
+"  const workers = tribeWorkers(state, tribe);\n" +
+"  if (workers.length < tribeWorkerTarget(state)) return false;\n" +
+"  if (state.nestLevel > 1 && workers.filter(agent => agent.dna?.level === state.nestLevel).length < 3) return false;\n" +
+"  const reserve = birthCost({ dna: tribeDesign(tribe, state.nestLevel, -1) }, tribe);\n" +
+"  return state.evolutionPoints >= nestUpgradeCost(state.nestLevel, tribe) + reserve;\n" +
+"}\n" +
+"\n" +
+"function tribeWorkers(state, tribe) {\n" +
+"  return state.agents.filter(agent => agent.health > 0 &&\n" +
+"    agentRemainingLifespan(agent, state.simSeconds) > AGENT_DEATH_WARNING && !militaryAgent(agent, tribe) &&\n" +
+"    (!agent.dna || agent.dna.pieces.some(piece => piece.gene === \"gather\")));\n" +
+"}\n" +
+"\n" +
+"function tribeStrongWorkers(state, tribe) {\n" +
+"  return tribeWorkers(state, tribe).filter(agent => {\n" +
+"    const stats = agent.stats || (agent.dna && dnaUnitStats(agent.dna, tribe));\n" +
+"    return agent.dna?.level === 4 && stats?.capacity >= 10 && stats.dna?.harvestReduction >= 80 && stats.speed >= .7 &&\n" +
+"      agent.health >= stats.health * .5 &&\n" +
+"      (!agent.birth || agent.birth.readyAt <= state.simSeconds);\n" +
+"  });\n" +
+"}\n" +
+"\n" +
+"function tribeInvasionReady(state, tribe) {\n" +
+"  return state.nestLevel === 4 && tribeStrongWorkers(state, tribe).length >= 8;\n" +
+"}\n" +
+"\n" +
+"function tribeDefenseCount(state) {\n" +
+"  return [0, 2, 3, 3][state.nestLevel - 1];\n" +
+"}\n" +
+"\n" +
+"return { tribeWorkerTarget, tribeUpgradeReady, tribeWorkers, tribeStrongWorkers, tribeInvasionReady, tribeDefenseCount };\n" +
+"})();\n" +
+"modules[\"server/tribe-production.mjs\"] = (() => {\n" +
+"const { birthCost } = modules[\"server/attributes.mjs\"];\n" +
+"const { basicGathererDna } = modules[\"server/dna-unit.mjs\"];\n" +
+"const { suggestTemplateName } = modules[\"server/unit-template-names.mjs\"];\n" +
+"const { NEST_LEVELS } = modules[\"server/nests.mjs\"];\n" +
+"const { militaryAgent } = modules[\"server/conquest-pacing.mjs\"];\n" +
+"const { TRIBE_INVASION, tribeDesign, sameTribeDesign, tribeDnaTemplate } = modules[\"server/tribe-designs.mjs\"];\n" +
+"const { tribeCombatTemplates } = modules[\"server/tribe-combat-templates.mjs\"];\n" +
+"const { tribeDefenseDesign } = modules[\"server/tribe-defense-designs.mjs\"];\n" +
+"const { nestDefenderDesign } = modules[\"server/nest-defender.mjs\"];\n" +
+"const { tribeWorkers, tribeStrongWorkers, tribeInvasionReady, tribeDefenseCount, tribeWorkerTarget } = modules[\"server/tribe-strategy.mjs\"];\n" +
+"\n" +
+"function tribeProductionTemplate(state, tribe) {\n" +
+"  const profile = TRIBE_INVASION[tribe];\n" +
+"  if (!profile) return null;\n" +
+"  const living = state.agents.filter(agent => agent.health > 0);\n" +
+"  if (living.length >= NEST_LEVELS[state.nestLevel - 1].unitCapacity) return null;\n" +
+"  const workers = tribeWorkers(state, tribe);\n" +
+"  const soldiers = living.filter(agent => militaryAgent(agent, tribe));\n" +
+"  const recovering = !living.some(agent => !militaryAgent(agent, tribe) &&\n" +
+"    (!agent.dna || agent.dna.pieces.some(piece => piece.gene === \"gather\")));\n" +
+"  const target = tribeWorkerTarget(state);\n" +
+"  const current = workers.filter(agent => agent.dna?.level === state.nestLevel);\n" +
+"  const productive = living.filter(agent => !militaryAgent(agent, tribe) && agent.dna?.pieces.some(piece => piece.gene === \"gather\"));\n" +
+"  const defending = productive.length >= 3 && current.length >= 1;\n" +
+"  const defenseTarget = state.nestLevel < 4 ? Math.min(1, tribeDefenseCount(state)) : tribeDefenseCount(state);\n" +
+"  if (defending && soldiers.length < defenseTarget) {\n" +
+"    const dna = state.nestLevel === 2 ? nestDefenderDesign(tribe).design : tribeDefenseDesign(tribe, state.nestLevel, soldiers.length);\n" +
+"    const template = tribeDnaTemplate(dna, \"military\", state);\n" +
+"    if (state.nestLevel === 2) template.defenseMode = \"nest\";\n" +
+"    const reserve = birthCost({ dna: basicGathererDna(state.nestLevel) }, tribe);\n" +
+"    return state.evolutionPoints >= birthCost(template, tribe) + reserve ? template : null;\n" +
+"  }\n" +
+"  const strengthening = state.nestLevel === 4 && tribeStrongWorkers(state, tribe).length < 8 && workers.length < 12;\n" +
+"  if (workers.length < target || strengthening || state.nestLevel > 1 && state.nestLevel < 4 && current.length < 3) {\n" +
+"    for (let level = state.nestLevel; level >= 1; level--) {\n" +
+"      const dna = tribeDesign(tribe, level, -1);\n" +
+"      const template = tribeDnaTemplate(dna, \"worker\", state);\n" +
+"      if (state.evolutionPoints >= birthCost(template, tribe)) return template;\n" +
+"      if (!recovering) return null;\n" +
+"    }\n" +
+"    const basic = tribeDnaTemplate(basicGathererDna(state.nestLevel), \"worker\", state);\n" +
+"    if (state.evolutionPoints >= birthCost(basic, tribe)) return basic;\n" +
+"    const legacy = { id: null, name: suggestTemplateName([], state.templates), slots: [], attributeLevels: {}, revision: 1, productionRole: \"worker\" };\n" +
+"    return !workers.length && state.templates.some(template => !template.dna) &&\n" +
+"      state.evolutionPoints >= birthCost(legacy, tribe) ? legacy : null;\n" +
+"  }\n" +
+"  if (!tribeInvasionReady(state, tribe)) return null;\n" +
+"  const templates = tribeCombatTemplates(tribe).map(design => {\n" +
+"    const template = tribeDnaTemplate(design.dna, \"military\", state);\n" +
+"    return { template, weight: design.weight, count: soldiers.filter(agent => sameTribeDesign(agent, template)).length };\n" +
+"  });\n" +
+"  templates.sort((a, b) => a.count / a.weight - b.count / b.weight || b.weight - a.weight);\n" +
+"  const template = templates[0].template;\n" +
+"  const reserve = birthCost({ dna: tribeDesign(tribe, state.nestLevel, -1) }, tribe);\n" +
+"  return state.evolutionPoints >= birthCost(template, tribe) + reserve ? template : null;\n" +
 "}\n" +
 "\n" +
 "return { tribeProductionTemplate };\n" +
@@ -9237,7 +10124,7 @@ document.write(
 "    if (!room.foodSpots.has(regionKey)) room.foodSpots.set(regionKey, { cells: [] });\n" +
 "    room.foodSpots.get(regionKey).cells.push(cell);\n" +
 "  }\n" +
-"  cell.amount = Math.round((cell.amount + agent.carrying) * 10) / 10;\n" +
+"  cell.amount = Math.round((cell.amount + agent.carrying) * 1e9) / 1e9;\n" +
 "  cell.initialAmount = cell.amount;\n" +
 "  agent.carrying = 0;\n" +
 "  agent.carryingType = null;\n" +

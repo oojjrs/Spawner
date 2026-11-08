@@ -1,3 +1,4 @@
+import { resourceEvolutionPoints } from "./resource-points.mjs";
 import { nestUpgradeCost } from "./nests.mjs";
 import { ATTRIBUTE_DNA } from "./dna.mjs";
 import { PLAYER_STARTING_POINTS } from "./tribe-start.mjs";
@@ -41,7 +42,7 @@ export function colonyRaidPressure(delivered, seconds, approaches, firstAt, trib
   const cost = ids => ATTRIBUTE_DNA.cost(ids.map(gene => ({ gene, grade:ATTRIBUTE_DNA.lookup.get(gene).grade })));
   const investment = Math.max(1, nestUpgradeCost(1, tribe) + cost(["gather", "capacity", "capacity", "health"]) +
     2 * cost(["blade", "power", "health", "health", "movement"]) - PLAYER_STARTING_POINTS);
-  const rate = delivered * 60 / Math.max(1, seconds);
+  const rate = resourceEvolutionPoints(delivered) * 60 / Math.max(1, seconds);
   const low = investment * 60 / (COLONY_RAID_PRESSURE.openingSeconds * 1.5), high = investment * 60 / COLONY_RAID_PRESSURE.openingSeconds;
   const production = Math.max(0, Math.min(1, (rate - low) / (high - low)));
   const nearby = approaches.filter(seconds => seconds <= COLONY_RAID_PRESSURE.nearbySeconds).length;

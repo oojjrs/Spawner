@@ -6531,7 +6531,7 @@ function dropCarriedResources(room, agent) {
     if (!room.foodSpots.has(regionKey)) room.foodSpots.set(regionKey, { cells: [] });
     room.foodSpots.get(regionKey).cells.push(cell);
   }
-  cell.amount = Math.round((cell.amount + agent.carrying) * 10) / 10;
+  cell.amount = Math.round((cell.amount + agent.carrying) * 1e9) / 1e9;
   cell.initialAmount = cell.amount;
   agent.carrying = 0;
   agent.carryingType = null;

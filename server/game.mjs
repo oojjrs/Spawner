@@ -15,6 +15,8 @@ import { createPersonality, personalityLabels, createUtilityAI } from "./utility
 import { NEST_RECOVERY, NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
 import { TRIBE_STARTING_UNITS, PLAYER_STARTING_POINTS, startingWorkerDna } from "./tribe-start.mjs";
 import { colonySupply, recordColonyIncome, restoreColonyIncome } from "./colony-supply.mjs";
+import { recordWorkerRoute } from "./worker-route.mjs";
+import { RESOURCE_EVOLUTION_POINTS, resourceEvolutionPoints } from "./resource-points.mjs";
 import { agentBirthDuration } from "./birth.mjs";
 import { unitAppearanceForm } from "./unit-appearance.mjs";
 import { CORPSE_LIFETIME, placeCorpse, expireCorpses } from "./corpses.mjs";
@@ -1115,8 +1117,8 @@ export function createGame(environment, colony, savedGame) {
       const take = (amount, completedAt) => {
         const collected = Math.min(amount, Math.max(0, capacity - agent.carrying), Math.max(0, food?.amount || 0));
         if (collected > 0) {
-          food.amount = Math.round((food.amount - collected) * 10) / 10;
-          agent.carrying = Math.round((agent.carrying + collected) * 10) / 10;
+          food.amount = Math.round((food.amount - collected) * 1e9) / 1e9;
+          agent.carrying = Math.round((agent.carrying + collected) * 1e9) / 1e9;
           agent.carryingType = resourceType;
           agent.harvestResult = {
             sequence: (agent.harvestResult?.sequence || 0) + 1, resourceType, x: food.x, y: food.y,
@@ -1191,6 +1193,10 @@ export function createGame(environment, colony, savedGame) {
 
     function depositFood(agent) {
       if (!hasActiveNest()) return;
+      if (agent.dna && agent.stats.dna.harvest > 0 && deliveryCapacity() > 0) {
+        recordWorkerRoute(state, agent, cell => unitTerrainSpeedMultiplier(agent,
+          worldMap.terrain[cell.y * WORLD_SIZE + cell.x]) * (hazardAt(cell.x, cell.y) ? .5 : 1));
+      }
       if (agent.returnPath.length > 0) {
         agent.rememberedRoute = agent.returnPath
           .map((cell) => ({ ...cell }))
@@ -1204,13 +1210,13 @@ export function createGame(environment, colony, savedGame) {
       agent.foodDelivery = deposited > 0 ? {
         ...agent.foodDelivery, ...deliveryDestination(agent), colonyId: colony.id, x: agent.x + 0.5, y: agent.y + 0.5,
         startedAt: agent.foodDelivery?.startedAt ?? agent.unloadReady - 1,
-        arrivesAt: agent.unloadReady, receivedAt: state.simSeconds, amount: deposited, resourceType
+        arrivesAt: agent.unloadReady, receivedAt: state.simSeconds, amount: deposited, points: resourceEvolutionPoints(deposited), resourceType
       } : null;
       state.colonyFood += deposited;
       if (deposited > 0) state.lastFoodAt = state.simSeconds;
-      recordColonyIncome(state, deposited);
-      state.evolutionPoints += deposited;
-      agent.carrying = Math.round((agent.carrying - deposited) * 10) / 10;
+      recordColonyIncome(state, resourceEvolutionPoints(deposited));
+      state.evolutionPoints += resourceEvolutionPoints(deposited);
+      agent.carrying = Math.round((agent.carrying - deposited) * 1e9) / 1e9;
       if (agent.carrying <= 0) agent.carryingType = null;
       if (deposited > 0) registerRoadJourney(agent);
       agent.mode = "search";
@@ -1501,7 +1507,7 @@ export function createGame(environment, colony, savedGame) {
     }
 
     function deliveryCapacity() {
-      return Math.max(0, pointCapacity() - state.evolutionPoints);
+      return Math.max(0, pointCapacity() - state.evolutionPoints) / RESOURCE_EVOLUTION_POINTS;
     }
 
     function upgradeCost() {
@@ -1817,7 +1823,8 @@ export function createGame(environment, colony, savedGame) {
     function automaticBirth(template, role) {
       const site = automaticSpawnSites()[0];
       if (!site || state.agents.filter(agent => agent.health > 0).length >= NEST_LEVELS[state.nestLevel - 1].unitCapacity || state.evolutionPoints < birthCost(template,colony.tribe) ||
-          !template.dna && (template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key,state.nestLevel,colony.tribe)))) return null;
+          (template.dna ? !validateDna(template.dna,state.nestLevel,state.evolutionPoints) :
+            template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key,state.nestLevel,colony.tribe)))) return null;
       const matches = candidate => template.dna ? sameTribeDesign(candidate, template) : !candidate.dna &&
         combatPrimary(candidate) === combatPrimary(template) && candidate.slots.length === template.slots.length && template.slots.every(key =>
           candidate.slots.includes(key) && (candidate.attributeLevels?.[key] || 1) === (template.attributeLevels?.[key] || 1));
@@ -1855,7 +1862,8 @@ export function createGame(environment, colony, savedGame) {
       }
       for (const template of [...state.templates]) {
         if (template.automatic !== true || state.agents.some(agent => agent.health > 0 && agent.templateId === template.id)) continue;
-        const obsolete = !template.dna && (template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key,state.nestLevel,colony.tribe)));
+        const obsolete = template.dna ? !validateDna(template.dna,state.nestLevel,999999999) :
+          template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key,state.nestLevel,colony.tribe));
         const duplicate = state.templates.some(candidate => candidate.id !== template.id && (template.dna ? sameTribeDesign(candidate, template) :
           !candidate.dna && combatPrimary(candidate) === combatPrimary(template) && candidate.slots.length === template.slots.length &&
           template.slots.every(key => candidate.slots.includes(key) && (candidate.attributeLevels?.[key] || 1) >= (template.attributeLevels?.[key] || 1))));
@@ -1920,7 +1928,7 @@ export function createGame(environment, colony, savedGame) {
       const alive = state.agents.filter(agent => agent.health > 0);
       const carriedPoints = alive.reduce((total, agent) => total + Math.max(0, agent.carrying || 0), 0);
       const canGather = alive.some(agent => agent.stats.capacity > 0 && (!agent.dna || agent.stats.dna.harvest > 0));
-      const surviving = hasActiveNest() && (canGather || state.evolutionPoints + carriedPoints >= recoveryBirthCost());
+      const surviving = hasActiveNest() && (canGather || state.evolutionPoints + resourceEvolutionPoints(carriedPoints) >= recoveryBirthCost());
       if (surviving) {
         if (colony.ownerId !== environment.hostId) return null;
         if (!endings.length || endings.some(ending => !ending || ending.reason === "victory")) return null;

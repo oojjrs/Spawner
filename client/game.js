@@ -4197,8 +4197,8 @@
             ctx.font = "bold " + Math.max(20, Math.min(32, cell * 0.48)) + "px sans-serif";
             ctx.textAlign = "left";
             ctx.textBaseline = "middle";
-            ctx.fillText("+" + delivery.amount, end.x + 4, y);
-          } else drawEvolutionPoints(delivery.amount, end.x, y, icon, Math.max(26, Math.min(38, cell * 0.62)));
+            ctx.fillText("+" + (delivery.points ?? delivery.amount), end.x + 4, y);
+          } else drawEvolutionPoints(delivery.points ?? delivery.amount, end.x, y, icon, Math.max(26, Math.min(38, cell * 0.62)));
         }
         ctx.restore();
       }
@@ -9470,7 +9470,7 @@
         ["탄생한 생명", report.bornCount.toLocaleString("ko-KR") + "개체"],
         ["탐사한 땅", report.exploredCells.toLocaleString("ko-KR") + "칸"],
         ["발견한 대상", report.discoveryCount.toLocaleString("ko-KR") + "종"],
-        ["둥지 성장", "Lv." + report.nestLevel], ["모은 진화 포인트", report.colonyFood.toLocaleString("ko-KR")]];
+        ["둥지 성장", "Lv." + report.nestLevel], ["모은 자원(개)", report.colonyFood.toLocaleString("ko-KR")]];
       const fragment = document.createDocumentFragment();
       for (const [label, value] of values) {
         const entry = document.createElement("div");
