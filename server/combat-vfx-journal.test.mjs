@@ -49,7 +49,7 @@ test("journal is bounded, immutable, ephemeral, and reports the unfiltered retai
 test("server captures actual critical/combo/area/drain/reflect/death recipients and causal links", () => {
   const f = fixture(["blade", "combo", "critical", "area", "lifesteal"]);
   f.source.health = 50;
-  Object.assign(f.source.stats.dna, { meleePower: 10, critical: 100, lifesteal: 100, areaPower: 100 });
+  Object.assign(f.source.stats.dna, { meleePower: 10, critical: 100, criticalPower: 150, lifesteal: 100, areaPower: 100 });
   f.target.stats.dna.reflection = 50;
   const collateral = { ...f.target, id: "collateral", health: 4, stats: { ...f.target.stats, dna: stats([]) } };
   f.environment.games.get("b").agents.push(collateral);
@@ -71,7 +71,7 @@ test("server captures actual critical/combo/area/drain/reflect/death recipients 
 
 test("server bleed catch-up uses each real tick time and regeneration reports only actual recovery", () => {
   const f = fixture(["blade", "bleed", "stun"]);
-  Object.assign(f.source.stats.dna, { bleed: 100, stun: 100 });
+  Object.assign(f.source.stats.dna, { bleed: 100, stun: 100, stunTime: .25 });
   f.combat.engage(f.source, f.target, 0);
   for (const unit of [f.source, f.target]) Object.assign(unit.combat.position, { x: unit.combat.side ? .4 : -.4, y: 0, fromX: unit.combat.side ? .4 : -.4, fromY: 0 });
   f.combat.update(f.source, 0); f.combat.update(f.source, .3);

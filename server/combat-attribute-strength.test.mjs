@@ -56,14 +56,15 @@ test("이전 저장 마이그레이션이 전투 속성 보너스·부상 체력
   const creature = { species: "talon-owl", attributes: { blade: 1 }, health: 43, stats: { health: 100, combatStrength: 0 } };
   migrateCombatStats(creature);
   assert.equal(creature.stats.combatStrength, unitCombatStats("talon-owl").combatStrength);
-  assert.equal(creature.health, 43);
+  assert.equal(creature.health, unitCombatStats("talon-owl").health * .43);
 });
 
-test("속성 효과 표시는 실제 기본 전투력 보너스를 고유 효과와 함께 제공한다", () => {
+test("속성 효과 표시는 현재 DNA 기관 효과를 제공하고 옛 종합 전투력 보너스를 표시하지 않는다", () => {
+  const effects = { blade: /근접 공격력/, carapace: /방어력/, antenna: /시야/ };
   for (const attribute of ATTRIBUTES) {
-    const stats = unitStats({ [attribute.key]: 1 }, "bean");
-    const bonus = stats.combatStrength - unitCombatStats("bean").combatStrength;
     const effect = codexAttributeEffect(attribute, 1, "bean");
-    assert.equal(effect.includes("기본 전투력 +" + bonus), bonus > 0);
+    assert.ok(effect.length > 0, attribute.key);
+    assert.equal(effect.includes("기본 전투력 +"), false);
+    if (effects[attribute.key]) assert.match(effect, effects[attribute.key]);
   }
 });

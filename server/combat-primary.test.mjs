@@ -28,7 +28,7 @@ test("동일 슬롯의 다른 주력 설계는 저장과 탄생 및 개체 복�
   const { game } = fixture();
   const blade = design(game, "칼날 주력", "blade"), piercing = design(game, "관통 주력", "piercing");
   const saved = JSON.parse(game.save()).state;
-  assert.deepEqual(saved.templates.map(template => template.combatPrimary), ["blade", "piercing"]);
+  assert.deepEqual(saved.templates.filter(template => [blade.templateId, piercing.templateId].includes(template.id)).map(template => template.combatPrimary), ["blade", "piercing"]);
   assert.equal(game.agents.find(agent => agent.id === blade.agentId).combatPrimary, "blade");
   assert.equal(game.agents.find(agent => agent.id === piercing.agentId).combatPrimary, "piercing");
   assert.equal(game.command({ type: "birth", agentId: piercing.agentId }).templateId, piercing.templateId);
@@ -54,7 +54,7 @@ test("직렬화 복원은 설계와 출생 개체의 독립적인 주력을 보�
 
 test("옛 저장과 제거된 주력은 장착 속성으로 이행하고 옛 교환 예약은 취소한다", () => {
   const { game } = fixture(), original = design(game, "이행 설계", "piercing");
-  const saved = JSON.parse(game.save()), template = saved.state.templates[0];
+  const saved = JSON.parse(game.save()), template = saved.state.templates.find(value => value.id === original.templateId);
   const agent = saved.state.agents.find(value => value.id === original.agentId);
   delete template.combatPrimary;
   agent.slots = ["carapace"];
@@ -64,7 +64,7 @@ test("옛 저장과 제거된 주력은 장착 속성으로 이행하고 옛 교
   agent.attack = { exchange: { counterApplied: false }, targetId: "old-target" };
   game.restore(JSON.stringify(saved));
   const restored = game.agents.find(value => value.id === original.agentId);
-  assert.equal(game.snapshot().templates[0].combatPrimary, "blade");
+  assert.equal(game.snapshot().templates.find(value => value.id === original.templateId).combatPrimary, "blade");
   assert.equal(restored.combatPrimary, "carapace");
   assert.equal(restored.combat, null);
   assert.equal(restored.attack, null);
@@ -85,7 +85,7 @@ test("새 전투 예약은 저장 복원 뒤 한 번 명중하고 같은 시각 
   source.combatDisposition = target.combatDisposition = "aggressive";
   const combat = createCombat(environment);
   assert.equal(combat.engage(source, target, 0), true);
-  combat.update(source, 0);
+  for (let step = 0; step <= 400 && !source.attack; step++) combat.update(source, step / 20);
   const reserved = structuredClone(source.attack), nextAttackAt = source.combat.nextAttackAt;
   assert.ok(reserved && !reserved.resolved);
   const saved = game.save();

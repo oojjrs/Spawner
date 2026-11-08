@@ -1,3 +1,8 @@
+## 검사·복구 결과 [server-attack-complete-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:21:24+09:00; 사용자전체점검지시,확인·기록Codex /root. 출처현재채팅및명시담당도구근거.
+- 추가서버타격8파일 attack,combat-attribute-strength,combat-attributes,combat-critical-stats,combat-primary,combat-rpg,combat-vfx-journal,creature-attack-role 고유114개통과. 최초공격이아닌접근·발사·도달시간으로분리,종별능력fixture와체력·반격공식·이미발사한투사체의퇴각후도달계약을검증했다. 담당 /root/combat_tests_finish 자체형식·범위diff11e9e7완료. 삭제/skip0.
+
 ## 검사·복구 결과 [lab-carapace-complete-01a1b8b3]
 
 - 기록 시각 2026-11-08T13:21:24+09:00; 사용자전체점검지시,확인·기록Codex /root. 출처현재채팅및명시담당도구근거.

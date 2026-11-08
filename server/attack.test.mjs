@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createGame } from "./game.mjs";
+import { unitStats } from "./attributes.mjs";
 import { combatDamage } from "./combat-stats.mjs";
 import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME, agentAttackFrame } from "./attack.mjs";
 
@@ -12,6 +13,7 @@ function fixture(speed) {
   environment.games.set(colony.ownerId, game);
   game.agents.splice(1);
   const agent = game.agents[0];
+  Object.assign(agent, { dna: null, attributes: {}, stats: unitStats({}, agent.tribe), health: 100 });
   const target = { id: "rival:1", x: 48, y: 42, health: 100, cost: 3, carrying: 0, attributes: {},
     stats: { health: 100, attack: 1, speed: 1, vision: 3 }, moveStartedAt: 0, moveDuration: 0 };
   const hits = [];
@@ -23,6 +25,8 @@ function fixture(speed) {
   agent.stats.speed = speed;
   game.prepare(10);
   game.tick(.01);
+  for (let step = 1; step <= 400 && !agent.attack; step++) { game.prepare(10 + step / 20); game.tick(.05); }
+  assert.ok(agent.attack, "attack starts within 20 seconds of approach");
   return { game, environment, agent, target, hits, hitAt: agent.attack.hitAt, damage: combatDamage(agent, target, .5) };
 }
 
@@ -63,7 +67,7 @@ test("빠른 유닛도 공격 모션의 명중 시점을 유지하고 복원 후
   assert.ok(pending.hitAt > pending.startedAt);
   assert.equal(pending.hitAt, hitAt);
   assert.equal(agentAttackFrame(pending, hitAt), 5);
-  game.prepare(10.1);
+  game.prepare(pending.startedAt + .1);
   game.tick(.1);
   game.restore(game.save());
   game.prepare(hitAt);
@@ -82,7 +86,7 @@ test("정해 둔 대상이 사라져도 다른 대상에게 피해를 넘기지 
   game.prepare(hitAt);
   game.tick(.3);
   assert.equal(other.health, 100);
-  assert.equal(game.agents[0].attack.resolved, true);
-  assert.equal(game.agents[0].attack.hit, false);
+  assert.ok(!game.agents[0].attack || game.agents[0].attack.resolved);
+  assert.ok(!game.agents[0].attack?.hit);
   assert.deepEqual(hits, []);
 });

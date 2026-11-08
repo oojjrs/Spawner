@@ -24,6 +24,13 @@ function fixture(units) {
   return { combat, tick, environment };
 }
 
+function until(f, predicate) {
+  const startedAt = f.environment.simSeconds;
+  for (let step = 0; step <= 400 && !predicate(); step++) f.tick(startedAt + step / 20);
+  assert.ok(predicate(), "combat event within 20 seconds");
+}
+const near = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-8, `${actual} != ${expected}`);
+
 test("primary migration and equipped fallback preserve explicit choices", () => {
   assert.equal(combatPrimary({ slots: ["carapace", "blade"] }), "blade");
   assert.equal(combatPrimary({ slots: ["piercing"], combatPrimary: undefined }), "piercing");
@@ -39,55 +46,58 @@ test("primary migration and equipped fallback preserve explicit choices", () => 
 test("all units attack independently and repeated same-time calls do not advance combat", () => {
   const a = unit("a", "left", null), b = unit("b", "right", null), c = unit("c", "left", null);
   const f = fixture([a, b, c]); f.tick(0);
-  assert.ok(a.attack && b.attack && c.attack);
-  f.tick(.4);
+  until(f, () => [a, b, c].every(agent => agent.combat.attackCount > 0 && agent.combat.completedExchanges > 0));
   assert.ok(a.health < 10000 && b.health < 10000);
   const health = [a.health, b.health, c.health];
-  f.tick(.4, true); assert.deepEqual([a.health, b.health, c.health], health);
+  f.tick(f.environment.simSeconds, true); assert.deepEqual([a.health, b.health, c.health], health);
 });
 
 test("block consumes the defender attack and counter cannot trigger another counter", () => {
   const a = unit("a", "left", "carapace"), b = unit("b", "right", "carapace");
-  const f = fixture([a, b]); f.tick(0); f.tick(.4);
+  b.attackReady = 1000;
+  const f = fixture([a, b]); until(f, () => a.attack);
+  const hitAt = a.attack.hitAt; f.tick(hitAt);
   assert.equal(b.attack.counter, true);
-  assert.equal(b.combat.attackCount, 1);
-  assert.equal(b.combat.nextAttackAt, .4 + combatProfile(b).attackInterval);
-  f.tick(.52);
+  assert.equal(b.combat.attackCount, 0);
+  near(b.combat.nextAttackAt, b.attack.endsAt + combatProfile(b).attackInterval);
+  f.tick(b.attack.hitAt);
   assert.equal(a.combat.blockReadyAt, 0);
-  assert.equal(b.combat.blockReadyAt, 2.9);
-  assert.equal(b.combat.attackCount, 1);
+  near(b.combat.blockReadyAt, hitAt + 2.5);
+  assert.equal(b.combat.attackCount, 0);
 });
 
 test("parry nullifies one hit and starts its independent cooldown", () => {
   const a = unit("a", "left", null), b = unit("b", "right", "blade");
-  const f = fixture([a, b]); f.tick(0);
-  a.attack.hitAt = .1; f.tick(.1);
+  b.attackReady = 1000;
+  const f = fixture([a, b]); until(f, () => a.attack);
+  const hitAt = a.attack.hitAt; b.combat.parryUntil = hitAt + .1; f.tick(hitAt);
   assert.equal(b.health, 10000);
   assert.equal(b.attack.counter, true);
-  assert.equal(b.combat.parryReadyAt, 3.1);
-  assert.equal(b.combat.nextAttackAt, .1 + combatProfile(b).attackInterval);
+  near(b.combat.parryReadyAt, hitAt + 3);
+  near(b.combat.nextAttackAt, b.attack.endsAt + combatProfile(b).attackInterval);
 });
 
 test("heavy thrust cancels preparation while shared immunity prevents repeated cancellation", () => {
   const a = unit("a", "left", "piercing"), b = unit("b", "right", null), c = unit("c", "left", "piercing");
-  const f = fixture([a, b, c]); f.tick(0);
-  a.attack.heavy = true; a.attack.hitAt = .1;
-  c.attack.heavy = true; c.attack.hitAt = .2;
-  f.tick(.1);
-  assert.equal(b.combat.stunnedUntil, .6);
-  assert.equal(b.combat.stunImmuneUntil, 2.6);
+  const f = fixture([a, b, c]); until(f, () => a.attack && b.attack && c.attack);
+  const firstAt = f.environment.simSeconds + .01, nextAt = firstAt + .1, readyAt = b.combat.nextAttackAt;
+  a.attack.heavy = true; a.attack.hitAt = firstAt;
+  c.attack.heavy = true; c.attack.hitAt = nextAt;
+  f.tick(firstAt);
+  near(b.combat.stunnedUntil, firstAt + .5);
+  near(b.combat.stunImmuneUntil, firstAt + 2.5);
   assert.equal(b.attack, null);
-  f.tick(.2);
-  assert.equal(b.combat.stunnedUntil, .6);
-  assert.equal(b.combat.nextAttackAt, 1.25);
-  f.tick(.6); assert.equal(b.attack, null);
-  f.tick(1.25); assert.ok(b.attack);
+  f.tick(nextAt);
+  near(b.combat.stunnedUntil, firstAt + .5);
+  assert.equal(b.combat.nextAttackAt, readyAt);
+  f.tick(firstAt + .5); assert.equal(b.attack, null);
+  f.tick(readyAt); assert.ok(b.attack);
 });
 
 test("lethal hit deletes an unresolved victim attack without a postmortem counter", () => {
   const a = unit("a", "left", null), b = unit("b", "right", null);
-  const f = fixture([a, b]); f.tick(0); b.health = 1;
-  f.tick(.4);
+  const f = fixture([a, b]); until(f, () => a.attack && b.attack); b.health = 1;
+  f.tick(a.attack.hitAt);
   assert.equal(b.health, 0); assert.equal(b.attack, null);
   assert.equal(a.health, 10000); assert.equal(a.combat, null);
 });
@@ -115,17 +125,18 @@ test("RPG attack applies attributes once without injury penalty", () => {
 
 test("combat events affect only source and target while block reaction survives counter", () => {
   const a = unit("a", "left", null), b = unit("b", "right", "carapace"), c = unit("c", "left", null);
-  const f = fixture([a, b, c]); f.tick(0);
-  a.attack.hitAt = .1; f.tick(.1);
+  b.attackReady = c.attackReady = 1000;
+  const f = fixture([a, b, c]); until(f, () => a.attack);
+  const hitAt = a.attack.hitAt; f.tick(hitAt);
   assert.equal(b.combat.lastReaction.kind, "block");
   assert.equal(b.combat.lastEvent.kind, "counter");
   assert.equal(c.combat.lastEvent, undefined);
-  const previousId = b.combat.lastEvent.id, sequence = b.combat.eventSequence;
+  const previousId = b.combat.lastEvent.id, sequence = a.combat.eventSequence;
   const restored = fixture([a, b, c]);
-  a.attack.resolved = false; a.attack.hitAt = .15;
+  a.attack.resolved = false; a.attack.hitAt = hitAt + .05;
   b.combat.blockReadyAt = 0;
-  restored.tick(.15);
-  assert.ok(b.combat.eventSequence > sequence);
+  restored.tick(hitAt + .05);
+  assert.ok(a.combat.eventSequence > sequence);
   assert.notEqual(b.combat.lastEvent.id, previousId);
   assert.equal(c.combat.lastEvent, undefined);
 });
@@ -171,13 +182,16 @@ test("captured peaceful creatures defend themselves and escape without losing wo
   const f = fixture([a, b]); f.tick(0);
   assert.equal(a.combat, undefined); assert.equal(b.combat, undefined);
   assert.equal(a.attack, undefined); assert.equal(b.attack, undefined);
-  a.combatDisposition = "aggressive"; f.tick(.1); f.tick(.5);
+  a.combatDisposition = "aggressive"; f.tick(.1);
+  until(f, () => a.health < 10000 && b.health < 10000);
   assert.ok(a.health < 10000); assert.ok(b.health < 10000);
   assert.deepEqual(a.suspendedWork, { action: "collect", target: { x: 102, y: 100 }, plannedCargo: 2 });
-  f.environment.combatRandom = () => 0; f.tick(1.6);
+  f.environment.combatRandom = () => 0;
+  until(f, () => !b.combat);
+  const escapedAt = b.moveStartedAt;
   assert.equal(a.combat, null); assert.equal(b.combat, null);
   assert.equal(a.decisionPending, "combatEnded");
-  assert.equal(a.nextDecisionAt, 1.6);
+  assert.equal(a.nextDecisionAt, escapedAt);
   assert.equal(a.suspendedWork.action, "collect");
   assert.equal(Math.abs(b.x - 100) + Math.abs(b.y - 100), 1);
   assert.equal(b.renderFromX, 100); assert.equal(b.renderFromY, 100);
