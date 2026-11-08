@@ -65,7 +65,7 @@ test("봄지기 날갯짓 소리의 강세는 이륙과 비행 하강 스트로�
   assert.equal(audio.update(playback, [agent], 6.1, animations).length, 0);
 });
 
-test("서버는 봄지기의 연속 비행 시작을 유지하고 멈춘 뒤 다시 움직일 때 새 이륙을 알린다", () => {
+test("서버는 봄지기의 배회 후 휴식을 유지하고 다시 움직일 때 새 이륙을 알린다", () => {
   const cells = [];
   for (let y = 90; y <= 110; y++) for (let x = 90; x <= 110; x++) cells.push(y * 320 + x);
   const residents = [];
@@ -82,13 +82,9 @@ test("서버는 봄지기의 연속 비행 시작을 유지하고 멈춘 뒤 다
   room.simSeconds = agent.moveStartedAt + agent.moveDuration;
   system.tick();
   assert.equal(agent.flightStartedAt, started);
-  assert.equal(agent.flightStoppedAt, null);
-  for (const [dx, dy] of [[1,0],[-1,0],[0,1],[0,-1]]) residents.push({ x: agent.x + dx, y: agent.y + dy, health: 10 });
-  room.simSeconds = agent.moveStartedAt + agent.moveDuration;
-  system.tick();
   assert.equal(agent.mode, "idle");
   assert.equal(agent.flightStoppedAt, room.simSeconds);
-  residents.length = 0;
+  assert.equal(agent.nextActionAt - room.simSeconds, 30);
   room.simSeconds = agent.nextActionAt;
   system.tick();
   assert.equal(agent.mode, "walk");
