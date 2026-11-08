@@ -42,25 +42,3 @@ test('봄지기는 전투 중에도 실제 이륙 뒤 비행 프레임을 반복
   agent.combat.position.moving = false;
   assert.equal(creaturePresentationPose(model, agent, 6.8, false, resources, 'walk'), null);
 });
-
-test('전투 상세창의 모든 중립 이동 크기와 방향은 필드 렌더와 일치한다', () => {
-  const game = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
-  const draw = game.match(/^    function drawCombatCreature\([^]*?^    }/m)[0];
-  for (const species of Object.keys(animation.CREATURE_WALK_ANIMATIONS)) for (const direction of [-1, 1]) {
-    const agent = { ...moving(species), facing: direction }, time = 5.5;
-    const world = creaturePresentationPose(model, agent, time, false, resources, 'walk');
-    const calls = [], scales = [];
-    const context = { save() {}, restore() {}, translate() {}, scale(...values) { scales.push(values); },
-      drawImage(...args) { calls.push(args); } };
-    runInNewContext(draw + '\ndrawCombatCreature(context, agent, 100, 200, 80);', {
-      Spawner: model, context, agent, state: { simSeconds: time },
-      creatureWalkSheets: resources.walk, creatureIdleSheets: resources.idle,
-      creatureAttackSheets: new Map(), creatureHurtSheets: new Map(), creatureRangedSheets: new Map(),
-      unitDisplayBounds: new Map([[species, {}]]), talonOwlSheet: { complete: true, naturalWidth: 8192 },
-    });
-    assert.equal(calls.length, 1, species);
-    assert.ok(Math.abs(calls[0][7] - 80 * world.sizePerCell) < 1e-8, species + ': same body scale');
-    assert.equal(scales.some(([x]) => x === -1), world.mirrorX, species + ': same facing');
-    assert.equal(calls[0][0].src, world.sprite.src, species + ': same movement sheet');
-  }
-});

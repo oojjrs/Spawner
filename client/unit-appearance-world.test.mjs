@@ -17,16 +17,6 @@ test("current partial action sets stay on the legacy renderer and load no new bi
   assert.equal(fetches, 0); assert.equal(world.stats().decoded.residentPixels, 0);
 });
 
-test("original body-only birth scenes preserve eligibility without completing a world action set", () => {
-  for (const tribe of ["spore", "pebble", "spring"]) {
-    const unit = { ...agent, tribe }, scene = unitAppearanceBirthSceneForAgent(unit);
-    assert.equal(scene?.tribe, tribe); assert.equal(scene.mask, 0);
-    assert.equal(scene.independentBodyAction, false); assert.equal(unitAppearanceForAgent(unit), null);
-    assert.equal(unitAppearanceBirthSceneForAgent({ ...unit, attributes: { feet: 1 } }), null);
-    assert.equal(unitAppearanceBirthSceneForAgent({ ...unit, appearanceAttributes: { strength: 1 } }), null);
-    assert.equal(unitAppearanceBirthSceneForAgent({ ...unit, dna: { ...agent.dna, version: 2 } }), null);
-  }
-});
 
 test("a complete synthetic fixture switches only after decode and keeps birth and legacy DNA out", async () => {
   const definition = UNIT_APPEARANCE_ASSETS["bean/00"], originalActions = definition.actions;

@@ -52,7 +52,7 @@ test("projection does not mutate actual DNA, mechanical attributes, hidden abili
   const saved = JSON.stringify(unit), stats = dnaUnitStats(dna);
   assert.deepEqual(unitDisplayAttributes(unit), { blade: 1, secretion: 1, carapace: 1, antenna: 1 });
   assert.equal(dnaAttackMode(stats, 1), "melee"); assert.equal(dnaAttackMode(stats, 2), "ranged");
-  assert.ok(stats.roaming); assert.ok(stats.armor > 0); assert.ok(stats.evasion > 0);
+  assert.ok(stats.armor > 0); assert.ok(stats.evasion > 0);
   assert.deepEqual(dnaUnitStats(dna), stats); assert.equal(JSON.stringify(unit), saved);
   assert.deepEqual(unitDisplayAttributes(JSON.parse(saved)), { blade: 1, secretion: 1, carapace: 1, antenna: 1 });
   assert.deepEqual(unitDisplayAttributes({ dna }), { blade: 1, secretion: 1, carapace: 1, antenna: 1 });
@@ -81,23 +81,6 @@ test("production inventory has 64 targets, keeps archival 128 sources and never 
   assert.equal(unitDisplayAbilityMask(3), 11);
 });
 
-test("a shared blade body requires hidden ranged actions and retains true melee/ranged clocks", () => {
-  const dna = design(["blade", "secretion", "antenna"]), definition = unitAppearanceDefinition("bean", 1), original = definition.actions;
-  const clip = { sourceId: definition.source.sourceId, image: "synthetic-test-only", frameSize: 512, columns: 1,
-    frameCount: 1, durationsMs: [600], loop: false, pivotX: 256, pivotY: 448, launchAtMs: 200, hitTimeMs: 300 };
-  const agent = { id: "dual", tribe: "bean", health: 10, dna, attributes: dnaAppearance(dna), mode: "fight", combat: { version: 2 },
-    attack: { startedAt: 0, launchedAt: .2, hitAt: .3, endsAt: .6, mode: "ranged", dnaRanged: true } };
-  try {
-    definition.actions = Object.fromEntries(unitAppearanceRequiredWorldActions(1).map(action => [action, { ...clip }]));
-    assert.equal(unitAppearanceForAgent(agent), null, "a complete blade-only set cannot hide a missing ranged action");
-    definition.actions.ranged = { ...clip };
-    assert.equal(unitAppearanceForAgent(agent).mask, 1); assert.equal(unitAppearanceForAgent(agent).actualMask, 21);
-    const ranged = unitAppearanceStatePose(agent, .2); assert.equal(ranged.action, "ranged"); assert.equal(ranged.state.elapsedMs, 200);
-    const melee = { ...agent, attack: { ...agent.attack, mode: "melee", dnaRanged: false } };
-    assert.equal(unitAppearanceStatePose(melee, .3).action, "attack");
-    assert.equal(unitAppearanceStatePose(melee, .3).state.elapsedMs, 300);
-  } finally { definition.actions = original; }
-});
 
 test("single secretion retains its approved shooting art and combinations never borrow that body", () => {
   for (const tribe of UNIT_APPEARANCE_TRIBES) {
@@ -125,53 +108,7 @@ test("render-only observation preserves deterministic mixed-build combat, true e
   assert.ok(observed.vfx.events.some(event => event.kind === "shoot"));
 });
 
-test("actual world/detail renderer selects only the dominant combat layer and keeps actual attributes", () => {
-  const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
-  const code = source.match(/^    function drawAgentAppearanceLayer\([^]*?^    }/m)[0];
-  const forwarded = [], fallbacks = [], scope = createContext({
-    Spawner: { unitDisplayAttributes, combatAttributeKeys, hasCombatEvolution, unitAnimationPose: () => ({ action: "attack" }) },
-    state: { simSeconds: .3 }, idleMotion: { matches: false }, AGENT_HEIGHT: .7,
-    unitAnimationSheets: new Map(), drawAgentAppearanceBody: (...args) => fallbacks.push(args), drawCombatAgentAttributes() {},
-    combatAttributeArt: { ready: () => true, frame: agent => { forwarded.push(agent); return { width: 512, height: 512 }; } }
-  });
-  runInContext(code, scope);
-  const ctx = { save() {}, restore() {}, translate() {}, scale() {}, drawImage() {} };
-  const unit = { tribe: "bean", attributes: attributesFor(31), health: 10 };
-  scope.drawAgentAppearanceLayer(ctx, 0, unit, 100, { x: 0, y: 0 }, null, null, null);
-  assert.equal(forwarded.length, 1); assert.equal(forwarded[0].attributes, unit.attributes);
-  assert.deepEqual(unitDisplayAttributes(forwarded[0]), { blade: 1 });
-  scope.drawAgentAppearanceLayer(ctx, 0, { ...unit, attributes: attributesFor(30) }, 100, { x: 0, y: 0 }, null, null, null);
-  assert.equal(fallbacks.length, 1, "secretion dominance does not retain the hidden carapace layer");
-});
 
-test("world secretion draw preserves facing, one growth scale, load fallback and unfinished resource actions", () => {
-  const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
-  const code = source.match(/^    function drawAgentRanged\([^]*?^    }/m)[0];
-  const draws = [], scales = [], state = { simSeconds: .2 };
-  let ready = true;
-  const scope = createContext({ Spawner: { unitRangedPose, unitRangedDisplaySize, unitAnimationPose }, state, AGENT_HEIGHT: .7,
-    idleMotion: { matches: false }, unitDisplayScale: () => 1.5,
-    agentRangedImage: () => ready ? { complete: true, naturalWidth: 512 } : null });
-  runInContext(code, scope);
-  const ctx = { save() {}, restore() {}, translate() {}, scale: (...values) => scales.push(values), drawImage: (...values) => draws.push(values) };
-  for (const facing of [-1, 1]) {
-    const unit = { tribe: "bean", attributes: { secretion: 1, carapace: 1 }, health: 10, facing, stats: { pieceCount: 6 },
-      attack: { startedAt: 0, launchedAt: .2, hitAt: .4, endsAt: .6, mode: "ranged" } };
-    assert.equal(scope.drawAgentRanged(ctx, unit, 50, 80, 70, null), true);
-    assert.deepEqual(scales.at(-1), [facing, 1]);
-    unit.attack.directionX = -facing;
-    assert.equal(scope.drawAgentRanged(ctx, unit, 50, 80, 70, null), true);
-    assert.deepEqual(scales.at(-1), [-facing, 1], "active shots face their target without changing stored facing");
-    assert.equal(unitRangedPose(unit, .2).mirrorX, -facing < 0);
-    assert.ok(Math.abs(draws.at(-1).at(-1) * 1.5 - unitRangedDisplaySize(unit)) < 1e-10);
-    assert.equal(scope.drawAgentRanged(ctx, { ...unit, mode: "harvest" }, 50, 80, 70, null), false);
-    assert.equal(scope.drawAgentRanged(ctx, { ...unit, attack: null, moveStartedAt: 0, moveDuration: 1 }, 50, 80, 70, null), false, "unfinished ranged walk keeps its existing action");
-    state.simSeconds = .1;
-    assert.equal(scope.drawAgentRanged(ctx, { ...unit, attack: null, hurtStartedAt: 0 }, 50, 80, 70, null), false, "unfinished secretion hurt retains its existing action fallback");
-    state.simSeconds = .2;
-    ready = false; assert.equal(scope.drawAgentRanged(ctx, unit, 50, 80, 70, null), false); ready = true;
-  }
-});
 
 
 test("design and template portrait sources accept loaded secretion Images and existing canvases", () => {

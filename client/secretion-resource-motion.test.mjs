@@ -1,3 +1,4 @@
+import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -76,49 +77,5 @@ test("shared work mesh remains positive, exact at entry/recovery and planted at 
       const pose = secretionResourceMotion(tribe, "throw", clock);
       assert.equal(pose.compression, 0); assert.equal(pose.sweep, 0);
     }
-  }
-});
-
-test("rendering caches only successful own-source frames, bounds memory, reduced motion and recovery", () => {
-  for (const tribe of tribes) {
-    const source = { ...image }, pose = unitRangedPose(agent(tribe), 10.36);
-    const frame = unitRangedResourceFrame(source, pose, surface);
-    assert.equal(frame.width, 512); assert.ok(frame.draws.length > 20);
-    assert.ok(frame.draws.every(call => call[0] === source));
-    assert.equal(unitRangedResourceFrame(source, pose, () => assert.fail("shared cache")), frame);
-    assert.equal(unitRangedResourceFrame(source, pose, surface, true), source);
-    assert.equal(unitRangedResourceFrame({ ...source, complete: false }, pose, surface), null);
-    const retry = { ...image };
-    assert.equal(unitRangedResourceFrame(retry, pose, () => { throw Error("unavailable canvas"); }), null);
-    assert.ok(unitRangedResourceFrame(retry, pose, surface));
-    for (let i = 1; i < 12; i++) unitRangedResourceFrame(source, unitRangedPose(agent(tribe), 10 + i * .02), surface);
-    assert.notEqual(unitRangedResourceFrame(source, pose, surface), frame, "old frame evicted");
-  }
-});
-
-test("actual world/detail body function renders both actions/facings and keeps source-load fallback", () => {
-  const code = readFileSync(new URL("./game.js", import.meta.url), "utf8").match(/^    function drawAgentRanged\([^]*?^    }/m)[0];
-  const state = { simSeconds: 10.24 }, draws = [], scales = [], idleMotion = { matches: false };
-  let available = true;
-  const scope = createContext({ Spawner: { unitRangedPose, unitRangedResourceFrame, unitRangedDisplaySize, unitAnimationPose },
-    state, AGENT_HEIGHT: .7, idleMotion, unitDisplayScale: () => 1, document: { createElement: () => surface(512, 512) },
-    agentRangedImage: path => available ? { ...image, path } : null });
-  runInContext(code, scope);
-  const context = { save() {}, restore() {}, translate() {}, scale(...args) { scales.push(args); }, drawImage(...args) { draws.push(args); } };
-  for (const tribe of tribes) for (const facing of [-1, 1]) for (const mode of ["harvest", "unload"]) {
-    const unit = agent(tribe, { mode, facing, foodDelivery: delivery() }), before = structuredClone(unit);
-    assert.equal(scope.drawAgentRanged(context, unit, 50, 80, 70, null), true);
-    assert.ok(draws.at(-1)[0].draws.length > 20); assert.deepEqual(scales.at(-1), [facing, 1]);
-    idleMotion.matches = true; scope.drawAgentRanged(context, unit, 50, 80, 70, null);
-    assert.equal(draws.at(-1)[0].path, UNIT_RANGED_FORMS[tribe].idle.image); idleMotion.matches = false;
-    available = false; assert.equal(scope.drawAgentRanged(context, unit, 50, 80, 70, null), false); available = true;
-    assert.deepEqual(unit, before);
-  }
-  for (const tribe of tribes) for (const receivedAt of [null, 11]) {
-    state.simSeconds = 11.15;
-    const unit = agent(tribe, { mode: "unload", foodDelivery: { ...delivery(), receivedAt } });
-    assert.equal(scope.drawAgentRanged(context, unit, 50, 80, 70, null), true);
-    assert.equal(draws.at(-1)[0].path, UNIT_RANGED_FORMS[tribe].idle.image, "late unload snapshot stays on neutral own source");
-    assert.equal(unitRangedPose(unit, state.simSeconds).action, "idle");
   }
 });

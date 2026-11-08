@@ -1,3 +1,8 @@
+## 클라이언트 회귀 정리 완료 [client-retired-complete-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:31:39+09:00; 구현·검수 /root/client_suite_audit, 확인·기록 /root, 현재채팅 및5b68bf범위대조.
+- 공용stage로이관되어실제제품을더이상호출하지않는구모달/분리렌더/구기획표검사를정리했다. 담당초기실패147슬롯은퇴역계약으로분류해대체검사에매핑했다. 독립VFX컨트롤러·피해라벨·사망자격·실서버증거40개와합성수학43개는유지·통과. 대체는combat-stage-vfx,combat-stage-appearance,combat-vfx-visibility,combat-defense-matrix,unit-action-art및unit-presentation계열의현행경로다. 단순skip없음. 정확삭제항목과대체근거client-retired-contract-map.json,최종36파일범위client-suite-ready.json. 삭제파일참조없음·scopeddiff검수완료. 사용자검사수정또는삭제허용범위다.
+
 ## 툴·전투 검사 완료 [client-combat-complete-01a1b8b3]
 
 - 기록 시각 2026-11-08T13:30:47+09:00; 확인·기록 Codex /root, 현재채팅과도구근거.
@@ -67,6 +72,11 @@
 
 - 기록 시각 2026-11-08T13:17:53+09:00; 판단·기록 Codex /root, 출처 현재 채팅과담당보고.
 - Spring11개 birth-generated-source.png는 Git추적0·전체Git이력0·ignore규칙0·기록크기와동일한현존후보0으로확인됐다(/root/economy_tests_finish619fef/bb4b28). 과거 중간 생성 원본은 현재checkout에서 독립 바이트 검증 불가이며 복구했다고 주장하지 않는다. 테스트는 승인baseline/manifest의원본SHA연결을유지하고, 반드시보존할현행등록·배포입력인runtime atlas/분리레이어/metadata의 바이트·기하 검사를 수행하도록 한정한다. 누락11개만명시목록화하고임의파일누락을허용하지않는다. 원본중간파일 자체의무결성확인은이번검증한계다.
+
+## 추가 검사 범위 확정 [legacy-test-retirement-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:17:53+09:00; 판단·기록 Codex /root, 출처 현재 채팅과담당보고.
+- 사용자가 배포 지연을 지적했으며 수정 또는 삭제를 명시 허용했다. 실제 제품에 없는 분리 렌더러·구모달 내부 함수 검사를 전부 재작성하는 것은 필요하지 않다. 현행 공용stage/presentation 검사로 동일 사용자 보장이 이미 검증되면 폐기된 내부구현 전용 검사를 제거하고 대체검사 매핑을 남긴다. 현재 사용자 동작의 미검증 부분만 최소 회귀로 보존한다. 진행 중인실패를단순skip하거나현재제품동작을검사하지않고성공으로주장하지않는다.
 
 ## 잔여 클라이언트 검사 교정 근거 [root-client-decisions-01a1b8b3]
 

@@ -71,43 +71,9 @@ test("shared renderer preserves the approved palette and three-square motif, res
   assert.equal(drawCombatStun(context, agent(), point, 2, screen), false); assert.equal(calls.length, 0);
 });
 
-const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
-const helperFile = readFileSync(new URL("./combat-detail-dodge.test.mjs", import.meta.url), "utf8").split("const event = ")[0];
-const box = { combatViewLayout, unitDisplaySize, drawUnitAttackRing, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
-  DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect };
-createContext(box); runInContext(helperFile.slice(helperFile.indexOf("function extract(")), box);
-function detail(options) {
-  const view = box.modal(options), rendered = [];
-  view.sandbox.Spawner.drawCombatStun = (...args) => {
-    const pose = combatStunPose(...args.slice(1));
-    if (drawCombatStun(...args)) rendered.push(pose);
-  };
-  return { ...view, draw(time, events = []) {
-    rendered.length = 0;
-    view.sandbox.combatRoster.dataset.key = view.agents.filter(unit => unit.health > 0 && unit.combat?.id === "fight").map(unit => unit.id).join(",");
-    const result = view.draw(time, events); return { ...result, rendered: structuredClone(rendered) };
-  } };
-}
 const units = tribe => [0, 1].map(side => ({ id: side ? "target" : "source", tribe, health: 100,
   attributes: {}, stats: { health: 100 }, combat: { side, stunnedUntil: 0 } }));
 
-test("real detail drawing shows only the stunned actor in both directions and sizes, without replay dependency", () => {
-  for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const side of [0, 1])
-    for (const width of [320, 1040]) for (const reduced of [false, true]) {
-      const view = detail({ units: units(tribe), width });
-      view.sandbox.idleMotion.matches = reduced; view.agents[side].combat.stunnedUntil = 2;
-      const state = structuredClone(view.agents), first = view.draw(1);
-      assert.equal(first.rendered.length, 1); assert.equal(first.rendered[0].targetId, view.agents[side].id);
-      assert.deepEqual(view.draw(1).rendered, first.rendered, "paused paints are stable");
-      assert.ok(first.art.every(draw => draw.image === COMBAT_EFFECT_ANIMATIONS.stun.image), "a status without a journal does not invent damage art");
-      const next = view.draw(1.2).rendered;
-      if (reduced) assert.deepEqual(next[0].dots, first.rendered[0].dots);
-      else assert.notDeepEqual(next[0].dots, first.rendered[0].dots);
-      assert.equal(view.draw(2, [{ id: "stale", kind: "stun", at: 2, sourceId: "source", targetId: "target", amount: 0 }]).rendered.length, 0);
-      assert.deepEqual(structuredClone(view.agents), state);
-      view.agents[side].health = 0; assert.equal(view.draw(1.5).rendered.length, 0);
-    }
-});
 
 async function withLab(run, reduced) {
   const saved = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets };
@@ -166,18 +132,3 @@ function actualScene(mode, tribe) {
   return { units, target, environment, at: action.hitAt, rolls: () => rolls,
     resolve() { if (mode === "ranged") combat.update(source, action.launchedAt); combat.update(mode === "ranged" ? target : source, action.hitAt); } };
 }
-
-test("actual melee and ranged stuns drive detail status without changing damage, journal or RNG", () => {
-  for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const mode of ["melee", "ranged"]) {
-    const live = actualScene(mode, tribe), control = actualScene(mode, tribe); live.resolve(); control.resolve();
-    assert.ok(live.target.combat, mode + ":" + tribe + ":" + live.target.health);
-    const snapshot = snapshotCombatVfx(live.environment, live.at), before = structuredClone(snapshot), until = live.target.combat.stunnedUntil;
-    assert.ok(until > live.at); assert.ok(snapshot.events.some(event => event.kind === "stun" && event.amount === 0));
-    const view = detail({ units: live.units.slice(0, 2), initialSnapshot: snapshot });
-    view.agents[1].combat.stunnedUntil = until;
-    const result = view.draw(live.at + .01, snapshot);
-    assert.equal(result.rendered.length, 1); assert.equal(result.rendered[0].targetId, "target");
-    assert.equal(result.rendered[0].until, until); assert.equal(view.draw(until, snapshot).rendered.length, 0);
-    assert.deepEqual(live.units, control.units); assert.deepEqual(snapshot, before); assert.equal(live.rolls(), control.rolls());
-  }
-});

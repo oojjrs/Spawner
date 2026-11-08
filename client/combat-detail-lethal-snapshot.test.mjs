@@ -10,31 +10,6 @@ import { snapshotCombatVfx } from '../server/combat-vfx-journal.mjs';
 import { createCombatVfxCursor } from './combat-vfx-events.mjs';
 import { createDetailCombatVfx, DETAIL_COMBAT_VFX, DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect } from './combat-detail-vfx.mjs';
 
-const source = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
-const helper = readFileSync(new URL('./combat-detail-dodge.test.mjs', import.meta.url), 'utf8').split('const event = ')[0];
-const box = { combatViewLayout, unitDisplaySize, drawUnitAttackRing, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
-  DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect };
-createContext(box); runInContext(helper.slice(helper.indexOf('function extract(')), box);
-const fixture = readFileSync(new URL('./combat-detail-damage-labels.test.mjs', import.meta.url), 'utf8');
-const actualScene = new Function('ATTRIBUTE_DNA', 'createCombat', 'assert', fixture.slice(fixture.indexOf('const dna = '),
-  fixture.indexOf('\ntest("real lethal melee/ranged')) + '\nreturn actualScene;')(ATTRIBUTE_DNA, createCombat, assert);
-const delay = Number(source.match(/const MOVEMENT_DELAY = ([\d.]+)/)[1]);
-const extrapolate = (lastPaint, snapshot, elapsed) => Math.max(lastPaint, snapshot + Math.min(.3, elapsed) - delay);
-const amountRows = row => Array.from(row.texts.filter(c => /^[+−]/.test(c.text)));
-
-function modal(options = {}) {
-  const view = box.modal(options), context = view.canvas.getContext("2d"), criticalHits = [];
-  const stroke = context.stroke.bind(context);
-  context.stroke = () => { stroke(); if (context.strokeStyle === "#ffda8a") criticalHits.push({ path: context.path, color: context.strokeStyle }); };
-  view.sandbox.connection = { simSeconds: 0 };
-  return { ...view, paint(time, snapshotTime, events = []) {
-    view.sandbox.connection.simSeconds = snapshotTime;
-    criticalHits.length = 0;
-    const result = view.draw(time, events);
-    return { ...result, hits: [...result.hits, ...criticalHits] };
-  } };
-}
-
 const units = ['source', 'target'].map(id => ({ id, tribe: 'bean', health: 10 }));
 const points = new Map(units.map((unit, i) => [unit.id, { x: 100 + i * 200, y: 250, width: 70, height: 100 }]));
 const survivors = [units[0]], remaining = new Map([['source', points.get('source')]]);
@@ -52,37 +27,6 @@ function controller() {
 }
 
 // Actual game snapshots preserve the prior paint clock between server packets.
-test('real lethal melee/ranged critical feedback survives normal render extrapolation in both arena directions', () => {
-  assert.equal(delay, .15);
-  assert.ok(source.includes('Math.min(0.3, (now - connection.receivedAt) / 1000) - MOVEMENT_DELAY'));
-  assert.ok(source.includes('if (!firstSnapshot && !state.ending) state.simSeconds = renderedAt;'));
-  for (const tribe of ['bean', 'spore', 'pebble', 'spring']) for (const mode of ['melee', 'ranged'])
-    for (const reverse of [false, true]) for (const missing of [false, true]) {
-      const live = actualScene(mode, tribe), control = actualScene(mode, tribe), initial = structuredClone(live.units);
-      const snapshotAt = live.at - .05, paintAt = extrapolate(0, snapshotAt, .3);
-      assert.ok(paintAt > live.at);
-      const view = modal({ units: initial, unavailable: missing ? DETAIL_COMBAT_VFX_ASSETS : [],
-        initialSnapshot: snapshotCombatVfx(live.environment, snapshotAt) });
-      if (reverse) {
-        view.agents.reverse(); view.agents.forEach((unit, side) => unit.combat.side = side);
-        view.sandbox.combatRoster.dataset.key = "target,source";
-      }
-      view.paint(paintAt, snapshotAt, snapshotCombatVfx(live.environment, snapshotAt));
-      live.resolve(); control.resolve();
-      view.agents.find(unit => unit.id === 'target').health = 0; view.sandbox.combatRoster.dataset.key = 'source';
-      const snapshot = snapshotCombatVfx(live.environment, live.at + .05), original = structuredClone(snapshot);
-      const at = extrapolate(paintAt, live.at + .05, .22), row = view.paint(at, live.at + .05, snapshot);
-      const impacts = row.commands.filter(c => c.kind === 'impact');
-      assert.equal(impacts.length, 1, tribe + '/' + mode);
-      assert.equal(impacts[0].amount, .75); assert.equal(impacts[0].eventAt, live.at);
-      assert.equal(impacts[0].image, DETAIL_COMBAT_VFX[mode === 'melee' ? 'hit' : tribe].image);
-      assert.equal(row.art.length, missing ? 0 : 1); assert.equal(row.hits.length, missing ? 1 : 0);
-      assert.deepEqual(amountRows(row).map(c => c.text), ['−0.8']);
-      assert.equal(row.texts.filter(c => c.text === '치명').length, 1);
-      assert.deepEqual(view.paint(at, live.at + .05, snapshot), row, 'pause/repeated snapshot does not replay');
-      assert.deepEqual(snapshot, original); assert.deepEqual(live.units, control.units); assert.equal(live.rolls(), control.rolls());
-    }
-});
 
 test('existing direct, secondary and bleed effects retain their own recipient, age and opt-in contract', () => {
   for (const hit of [event('hit'), event('critical'), event('hit', { hitIndex: 1 }), event('area'),
@@ -113,23 +57,6 @@ test('authoritative living-after-death, unseen or omitted targets and restore-to
   }
 });
 
-test('current-age recovery, resized retained points and original expiry do not extend the killing effect', () => {
-  const view = modal({ unavailable: DETAIL_COMBAT_VFX_ASSETS });
-  view.paint(1.1, .95); view.agents[1].health = 0; view.sandbox.combatRoster.dataset.key = 'source';
-  const events = [event('hit'), death], first = view.paint(1.12, 1.05, events);
-  assert.equal(first.hits.length, 1); const initial = first.commands[0];
-  view.sandbox.detailVfxImages.get(initial.image).complete = true;
-  const recovered = view.paint(1.2, 1.1, events);
-  assert.equal(recovered.art.length, 1); assert.equal(recovered.hits.length, 0); assert.ok(recovered.art[0].args[0] + recovered.art[0].args[1] > 0);
-  view.canvas.clientWidth /= 2; view.canvas.clientHeight /= 2; view.sandbox.idleMotion.matches = true;
-  const resized = view.paint(1.2, 1.1, events);
-  assert.equal(resized.commands[0].x, recovered.commands[0].x / 2);
-  assert.equal(resized.commands[0].y, recovered.commands[0].y / 2);
-  assert.equal(amountRows(resized).length, 1);
-  assert.equal(view.paint(1.51, 1.4, events).art.length, 0);
-  assert.equal(amountRows(view.paint(1.6, 1.5, events)).length, 1);
-  assert.equal(amountRows(view.paint(1.851, 1.8, events)).length, 0);
-});
 
 test('consumers without a snapshot clock keep the conservative former paint-time check', () => {
   for (const snapshotTime of [undefined, NaN, Infinity]) {

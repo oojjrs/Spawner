@@ -8,42 +8,9 @@ import { createCombatVfxCursor } from './combat-vfx-events.mjs';
 import { createDetailCombatVfx, DETAIL_COMBAT_VFX, DETAIL_COMBAT_VFX_ASSETS, DETAIL_DEFENSE_VFX,
   drawDetailVfxCell, drawDetailVitalEffect, detailDefenseCommands, detailDefenseImageReady,
   drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels } from './combat-detail-vfx.mjs';
-const source = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
-const helperFile = readFileSync(new URL('./combat-detail-dodge.test.mjs', import.meta.url), 'utf8').split('const event = ')[0];
-const helper = helperFile.slice(helperFile.indexOf('function extract(')).replace('CREATURE_ATTACK_ANIMATIONS: {},',
-  'CREATURE_ATTACK_ANIMATIONS: {}, detailDefenseImageReady, drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels,');
-const box = { combatViewLayout, unitDisplaySize, drawUnitAttackRing, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
-  DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect, detailDefenseImageReady,
-  drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels };
-createContext(box); runInContext(helper, box);
 const event = (kind, extra = {}) => ({ id:kind, kind, at:1, sourceId:'source', targetId:'target', amount:0, ...extra });
 const points = new Map([['source',{x:100,y:250,width:70,height:90}],['target',{x:300,y:250,width:70,height:90}]]);
 const image = kind => ({complete:true,naturalWidth:1254,path:DETAIL_DEFENSE_VFX[kind]});
-test('actual modal replaces block impact with approved artwork and separated defense/damage labels',()=>{
- const view=box.modal(), result=view.draw(1.08,[event('block',{amount:.7})]);
- assert.ok(result.art.some(row=>row.image===DETAIL_DEFENSE_VFX.block));
- assert.ok(!result.art.some(row=>row.image===DETAIL_COMBAT_VFX.hit.image));
- const label=result.texts.find(t=>t.text==='방어'), damage=result.texts.find(t=>t.text==='−0.7');
- assert.ok(label);assert.ok(damage);assert.ok(Math.abs(label.y-damage.y)>=26);
-});
-test('parry uses its approved image and label with no hit image, damage text or reflected shot',()=>{
- const result=box.modal().draw(1.08,[event('parry')]);
- assert.ok(result.art.some(row=>row.image===DETAIL_DEFENSE_VFX.parry));
- assert.ok(result.texts.some(t=>t.text==='패링'));
- assert.ok(!result.art.some(row=>row.image===DETAIL_COMBAT_VFX.hit.image));
- assert.ok(!result.texts.some(t=>t.text.startsWith('−')));assert.equal(result.flights.length,0);
-});
-test('loading defense art keeps actual residual damage impact and readable label',()=>{
- const result=box.modal({unavailable:[DETAIL_DEFENSE_VFX.block]}).draw(1.08,[event('block',{amount:.7})]);
- assert.ok(result.art.some(row=>row.image===DETAIL_COMBAT_VFX.hit.image));
- assert.ok(!result.art.some(row=>row.image===DETAIL_DEFENSE_VFX.block));
- assert.ok(result.texts.some(t=>t.text==='방어'));assert.ok(result.texts.some(t=>t.text==='−0.7'));
-});
-test('same-target unrelated real hit survives exact defense event replacement',()=>{
- const result=box.modal().draw(1.08,[event('block',{amount:.7}),event('hit',{id:'unrelated',amount:5})]);
- assert.equal(result.art.filter(row=>row.image===DETAIL_DEFENSE_VFX.block).length,1);
- assert.equal(result.art.filter(row=>row.image===DETAIL_COMBAT_VFX.hit.image).length,1);
-});
 test('defense uses observed outcome time, expires once, and redacted direction does not draw',()=>{
  const cursor=createCombatVfxCursor(),detail=createDetailCombatVfx();cursor.consume({streamId:'a',events:[]},0);
  const e=event('parry');

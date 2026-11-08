@@ -31,40 +31,9 @@ test("only projected canonical bean blade opts into its own-art attack",()=>{
  for(let mask=1;mask<32;mask+=2){const attributes=Object.fromEntries(["blade","carapace","antenna","feet","secretion"].map((k,i)=>[k,(mask>>i)&1]));assert.equal(beanDominantAttackAppearance("bean",unitDisplayAttributes(unit({attributes}))), [1, 9].includes(mask));}
 });
 
-test("canonical melee renders source blades, compressed body and eyes once per shared cached pose",async()=>{
- const {renderer}=await art(),agent=unit(),before=JSON.stringify(agent),sprite=renderer.frame(agent,10.300001);
- assert.equal(sprite.width,512);assert.equal(sprite.height,512);assert.equal(sprite.combatCamera,undefined);
- assert.ok(paths(sprite).includes("DesignAssets/Animations/CombatAttributesV7/sprout/blade/AttackParts/body.png"));
- assert.ok(paths(sprite).includes("DesignAssets/Animations/CombatAttributesV7/sprout/blade/AttackParts/foliage-left.png"));
- assert.ok(sprite.calls.length>100);assert.ok(paths(sprite).every(path=>!path.includes("UnitAppearanceV1")&&!path.endsWith("/attack.png")));
- assert.equal(renderer.frame(unit({id:"other",attack:{startedAt:20,speed:1}}),20.300001),sprite);assert.equal(JSON.stringify(agent),before);
-});
 
-test("hidden secretion retains ranged recoil and never triggers a melee blade swing",async()=>{
- const {renderer}=await art(),attributes={blade:1,secretion:1,antenna:1,carapace:1,feet:1};
- assert.ok(paths(renderer.frame(unit({attributes}),10.3)).some(path=>path.includes("AttackParts")));
- for(const flag of [{mode:"ranged"},{attackMode:"ranged"},{dnaRanged:true}]){
-  const agent=unit({attributes,attack:{startedAt:10,launchedAt:10.3,hitAt:10.6,endsAt:11,...flag}});
-  assert.equal(combatEvolutionPose(agent,10.3,animations).action,"ranged");assert.deepEqual(paths(renderer.frame(agent,10.3)),[animations.idle.image]);
- }
-});
 
-test("cancel, hurt, birth, death, walk, harvest, neutral species and portrait preserve existing paths",async()=>{
- const {renderer}=await art();renderer.frame(unit(),10.3);
- for(const patch of [{attack:null},{attack:null,hurtStartedAt:10.2},{birth:{startedAt:10,readyAt:11}},{health:0,diedAt:10.1},{attack:null,moveStartedAt:10,moveDuration:1},{attack:null,mode:"harvest",harvestStarted:10},{species:"beetle"},{attack:{startedAt:11,speed:1}}]){
-  assert.ok(!paths(renderer.frame(unit(patch),10.3)).some(path=>path.includes("sprout/blade/AttackParts/body.png")),JSON.stringify(patch));
- }
- assert.deepEqual(paths(renderer.portrait(unit())),[animations.idle.image]);assert.ok(paths(renderer.frame(unit(),10.3)).some(path=>path.includes("AttackParts")));
-});
 
-test("missing or mismatched source registration falls back without poisoning the pose cache",async()=>{
- for(const key of ["ready","badSize"]){const h=harness();h.state[key]=key!=="ready";const {renderer}=await art(h);
-  assert.deepEqual(paths(renderer.frame(unit(),10.3)),[animations.attack.image]);h.state[key]=key==="ready";
-  assert.ok(paths(renderer.frame(unit(),10.3)).some(path=>path.includes("AttackParts")));
- }
- const rig=definition(),im=images(rig);for(const scale of [Infinity,NaN,"0.357",0,-1])assert.equal(prepareBeanDominantAttack({...rig,scale},im),null);assert.equal(prepareBeanDominantAttack({...rig,approvedSource:"pending.png"},im),null);
- assert.equal(prepareBeanDominantAttack({...rig,root:[239,368]},im),null);delete im["attack-foliage-left"];assert.equal(prepareBeanDominantAttack(rig,im),null);
-});
 
 test("all sampled meshes stay positive, neutral endpoints match, and source geometry stays unchanged",()=>{
  const rig=definition(),before=JSON.stringify(rig),prepared=prepareBeanDominantAttack(rig,images(rig));assert.ok(prepared);
@@ -74,31 +43,4 @@ test("all sampled meshes stay positive, neutral endpoints match, and source geom
  }
  for(const time of [-1,1001,Infinity,NaN])assert.equal(sampleBeanDominantAttack(prepared,time),null);
  assert.equal(sampleBeanDominantAttack({...prepared,meshes:{...prepared.meshes,body:{...prepared.meshes.body,areas:prepared.meshes.body.areas.map(x=>-x)}}},300),null);assert.equal(JSON.stringify(rig),before);
-});
-
-test("real hit clocks, accelerated attacks, multi-hit samples and restored state are read-only",async()=>{
- const {renderer}=await art();
- for(const start of [0,10,500])for(const duration of [.15,.6,1.2]){
-  const agent=unit({combat:{version:2},attack:{combatId:"bean-clock",startedAt:start,hitAt:start+duration*.3,endsAt:start+duration}}),copy=JSON.parse(JSON.stringify(agent));
-  for(const time of [start,start+duration*.3,start+duration*.6]){
-   assert.deepEqual(combatEvolutionPose(agent,time,animations),combatEvolutionPose(copy,time,animations));assert.equal(renderer.frame(agent,time),renderer.frame(copy,time));
-   assert.ok(paths(renderer.frame(agent,time)).some(path=>path.includes("AttackParts")));
-  }
-  assert.equal(combatEvolutionPose(agent,start+duration*.3,animations).sampleTime,300);
-  assert.deepEqual(paths(renderer.frame({...agent,attack:null},start+duration)),[animations.idle.image]);
- }
- for(const contacts of [[10.08],[10.08,10.2,10.32,10.44]]){
-  const agent=unit({combat:{version:2},attack:{combatId:"bean-combo",startedAt:10,hitAt:contacts.at(-1),endsAt:contacts.at(-1),meleeContacts:contacts}}),before=JSON.stringify(agent);
-  const expected=renderer.frame(agent,contacts[0]);
-  for(const at of contacts){assert.equal(combatEvolutionPose(agent,at,animations).sampleTime,300);assert.equal(renderer.frame(agent,at),expected);}
-  assert.deepEqual(paths(renderer.frame(agent,contacts.at(-1)+.0001)),[animations.idle.image]);
-  assert.equal(JSON.stringify(agent),before);
- }
-});
-
-test("draw errors discard the private candidate and restore context before using the existing sheet",async()=>{
- const h=harness(),{renderer}=await art(h);h.state.drawFailure=true;assert.deepEqual(paths(renderer.frame(unit(),10.3)),[animations.attack.image]);
- h.state.drawFailure=false;assert.ok(paths(renderer.frame(unit(),10.3)).some(path=>path.includes("AttackParts")));
- const rig=definition(),im=images(rig);im["attack-body"].file="sprout/blade/AttackParts/body.png";const prepared=prepareBeanDominantAttack(rig,im),context=h.surface(512,512).getContext("2d");context.translate(12,34);const before=context.getTransform();h.state.drawFailure=true;
- assert.equal(renderBeanDominantAttack(context,sampleBeanDominantAttack(prepared,300)),false);assert.deepEqual(context.getTransform(),before);
 });

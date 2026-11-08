@@ -31,41 +31,9 @@ test("only projected canonical spore blade opts into its own-art attack",()=>{
  for(let mask=1;mask<32;mask+=2){const attributes=Object.fromEntries(["blade","carapace","antenna","feet","secretion"].map((k,i)=>[k,(mask>>i)&1]));assert.equal(sporeDominantAttackAppearance("spore",unitDisplayAttributes(unit({attributes}))), [1, 9].includes(mask));}
 });
 
-test("canonical melee renders source cap, animated stem and eyes once per shared cached pose",async()=>{
- const {renderer}=await art(),agent=unit(),before=JSON.stringify(agent),sprite=renderer.frame(agent,10.300001);
- assert.equal(sprite.width,512);assert.equal(sprite.height,512);assert.equal(sprite.combatCamera,undefined);
- assert.ok(paths(sprite).includes("DesignAssets/Animations/CombatAttributesV7/spore/blade/AttackParts/body.png"));
- assert.ok(paths(sprite).includes("DesignAssets/Animations/CombatAttributesV7/spore/blade/AttackParts/cap-left.png"));
- assert.equal(sprite.calls.length,101);assert.ok(paths(sprite).every(path=>!path.includes("UnitAppearanceV1")&&!path.endsWith("/attack.png")));
- assert.equal(renderer.frame(unit({id:"other",attack:{startedAt:20,speed:1}}),20.300001),sprite);assert.equal(JSON.stringify(agent),before);
-});
 
-test("hidden secretion retains ranged recoil and never triggers a melee blade cap",async()=>{
- const {renderer}=await art(),attributes={blade:1,secretion:1,antenna:1,carapace:1,feet:1};
- assert.ok(paths(renderer.frame(unit({attributes}),10.3)).some(path=>path.includes("AttackParts")));
- for(const flag of [{mode:"ranged"},{attackMode:"ranged"},{dnaRanged:true}]){
-  const agent=unit({attributes,attack:{startedAt:10,launchedAt:10.3,hitAt:10.6,endsAt:11,...flag}});
-  assert.equal(combatEvolutionPose(agent,10.3,animations).action,"ranged");
-  const rendered=paths(renderer.frame(agent,10.3));assert.ok(rendered.length>0);assert.ok(rendered.every(path=>path===animations.idle.image));
- }
-});
 
-test("cancel, hurt, birth, death, walk, harvest, neutral species and portrait preserve existing paths",async()=>{
- const {renderer}=await art();renderer.frame(unit(),10.3);
- for(const patch of [{attack:null},{attack:null,hurtStartedAt:10.2},{birth:{startedAt:10,readyAt:11}},{health:0,diedAt:10.1},{attack:null,moveStartedAt:10,moveDuration:1},{attack:null,mode:"harvest",harvestStarted:10},{species:"beetle"},{attack:{startedAt:11,speed:1}}]){
-  assert.ok(!paths(renderer.frame(unit(patch),10.3)).some(path=>path.includes("spore/blade/AttackParts/body.png")),JSON.stringify(patch));
- }
- assert.deepEqual(paths(renderer.portrait(unit())),[animations.idle.image]);assert.ok(paths(renderer.frame(unit(),10.3)).some(path=>path.includes("AttackParts")));
-});
 
-test("missing or mismatched source registration falls back without poisoning the pose cache",async()=>{
- for(const key of ["ready","badSize"]){const h=harness();h.state[key]=key!=="ready";const {renderer}=await art(h);
-  assert.deepEqual(paths(renderer.frame(unit(),10.3)),[animations.attack.image]);h.state[key]=key==="ready";
-  assert.ok(paths(renderer.frame(unit(),10.3)).some(path=>path.includes("AttackParts")));
- }
- const rig=definition(),im=images(rig);for(const scale of [Infinity,NaN,"0.357",0,-1])assert.equal(prepareSporeDominantAttack({...rig,scale},im),null);assert.equal(prepareSporeDominantAttack({...rig,approvedSource:"pending.png"},im),null);
- assert.equal(prepareSporeDominantAttack({...rig,root:[212,318]},im),null);delete im["attack-cap-left"];assert.equal(prepareSporeDominantAttack(rig,im),null);
-});
 
 test("all sampled meshes stay positive, neutral endpoints match, and source geometry stays unchanged",()=>{
  const rig=definition(),before=JSON.stringify(rig),prepared=prepareSporeDominantAttack(rig,images(rig));assert.ok(prepared);
@@ -100,23 +68,4 @@ test("horizontal cap swing crosses the target side without vertical chopping or 
  assert.equal(cap(before).matrix[1],0);assert.equal(cap(hit).matrix[1],0);
  assert.equal(cap(before).matrix[5],cap(hit).matrix[5]);
  for(const id of ["foot-0","foot-1"])assert.deepEqual(before.find(call=>call.image===prepared.images[id]).matrix,hit.find(call=>call.image===prepared.images[id]).matrix);
-});
-
-test("real hit clocks, accelerated attacks, multi-hit samples and restored state are read-only",async()=>{
- const {renderer}=await art();
- for(const start of [0,10,500])for(const duration of [.15,.6,1.2]){
-  const agent=unit({combat:{version:2},attack:{startedAt:start,hitAt:start+duration*.3,endsAt:start+duration}}),copy=JSON.parse(JSON.stringify(agent));
-  for(const time of [start,start+duration*.3,start+duration*.6]){
-   assert.deepEqual(combatEvolutionPose(agent,time,animations),combatEvolutionPose(copy,time,animations));assert.equal(renderer.frame(agent,time),renderer.frame(copy,time));
-   assert.ok(paths(renderer.frame(agent,time)).some(path=>path.includes("AttackParts")));
-  }
-  assert.deepEqual(paths(renderer.frame({...agent,attack:null},start+duration)),[animations.idle.image]);
- }
-});
-
-test("draw errors discard the private candidate and restore context before using the existing sheet",async()=>{
- const h=harness(),{renderer}=await art(h);h.state.drawFailure=true;assert.deepEqual(paths(renderer.frame(unit(),10.3)),[animations.attack.image]);
- h.state.drawFailure=false;assert.ok(paths(renderer.frame(unit(),10.3)).some(path=>path.includes("AttackParts")));
- const rig=definition(),im=images(rig);im["attack-body"].file="spore/blade/AttackParts/body.png";const prepared=prepareSporeDominantAttack(rig,im),context=h.surface(512,512).getContext("2d");context.translate(12,34);const before=context.getTransform();h.state.drawFailure=true;
- assert.equal(renderSporeDominantAttack(context,sampleSporeDominantAttack(prepared,300)),false);assert.deepEqual(context.getTransform(),before);
 });

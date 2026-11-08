@@ -57,47 +57,10 @@ test("all source-strip transforms remain monotone and finite through the attack"
   }
 });
 
-test("the renderer returns a padded camera while preserving the original portrait scale and ground pivot",async()=>{
-  const renderer=await art(),result=renderer.frame(agent,10.300001,null,body);
-  assert.equal(result.width,896);assert.equal(result.height,640);assert.deepEqual(result.combatCamera,SPRING_THRUST_CAMERA);
-  assert.equal(result.combatCamera.pivotX-result.combatCamera.offsetX,256);
-  assert.equal(result.combatCamera.pivotY-result.combatCamera.offsetY,448);
-  assert.equal(result.combatCamera.units,512);
-});
 
-test("padded attack frames are shared by pose rather than absolute time, and do not poison fallback caches",async()=>{
-  const renderer=await art(),a=renderer.frame(agent,10.300001,null,body);
-  assert.equal(renderer.frame({...agent,id:"other",attack:{startedAt:20,speed:1}},20.300001,null,body),a);
-  const fallback=(ctx,pose,layer)=>ctx.drawImage(layer||"full");fallback.splitFeet=true;
-  const old=renderer.frame(agent,10.300001,null,fallback);assert.equal(old.width,512);assert.equal(old.combatCamera,undefined);
-  assert.equal(renderer.frame(agent,10.300001,null,body),a);
-});
 
-test("a temporarily missing body socket is retried at the same pose and recovers",async()=>{
-  const renderer=await art();let ready=false,calls=0;
-  const paint=(ctx,pose,layer)=>{calls++;ctx.drawImage(layer||"full");return ready&&layer==="combat-body"?{source:[270.7,325.4],target:[262.3,359.8]}:null;};
-  paint.splitFeet=true;paint.springThrust=true;
-  const fallback=renderer.frame(agent,10.300001,null,paint),firstCalls=calls;
-  ready=true;const recovered=renderer.frame(agent,10.300001,null,paint);
-  assert.notEqual(recovered,fallback);assert.ok(calls>firstCalls);
-  const recoveredCalls=calls;assert.equal(renderer.frame(agent,10.300001,null,paint),recovered);assert.equal(calls,recoveredCalls);
-});
 
-test("cancel, hurt, death, idle, walk, harvest and ranged shots keep the ordinary camera",async()=>{
-  const renderer=await art();renderer.frame(agent,10.300001,null,body);
-  for(const changes of [{attack:null},{attack:null,hurtStartedAt:10.2},{health:0,diedAt:10.2},{attack:null,moveStartedAt:10,moveDuration:1},{attack:null,mode:"harvest",harvestStarted:10},
-    {attack:{...agent.attack,mode:"ranged"}}]){
-    const result=renderer.frame({...agent,...changes},10.300001,null,body);assert.equal(result.width,512);assert.equal(result.combatCamera,undefined);
-  }
-});
 
-test("invalid or unavailable body sockets keep the ordinary attachment fallback without throwing",async()=>{
-  for(const value of [null,{}, {source:[1],target:[1,2]}, {source:[1,NaN],target:[2,3]}]){
-    const renderer=await art(),paint=(ctx,pose,layer)=>{ctx.drawImage(layer||"full");return layer==="combat-body"?value:null;};paint.splitFeet=true;paint.springThrust=true;
-    const result=renderer.frame(agent,10.300001,null,paint);assert.equal(result.width,896);
-    assert.ok(JSON.stringify(result).includes("RuntimeParts/spring-blade.png"));
-  }
-});
 
 function gameHarness(ready,frameCamera=SPRING_THRUST_CAMERA){
   const source=unitPresentationTestSource(readFileSync(new URL("./game.js",import.meta.url),"utf8")),match=source.match(/^    function drawAgentAppearanceLayer\([^]*?^    }/m);
@@ -113,25 +76,7 @@ function gameHarness(ready,frameCamera=SPRING_THRUST_CAMERA){
   return{scope,context,calls,flags,sockets,motions,outlines,layers,sprite};
 }
 
-test("the actual world/detail caller honors padded placement in both directions, sizes and DPRs",()=>{
-  for(const appearance of [attributes,{blade:1,strength:1,feet:1},{blade:1,strength:1},{blade:1,antenna:1,strength:1}])for(const size of [12,70,200])for(const facing of [-1,1])for(const dpr of [1,2,3]){
-    const h=gameHarness(true),cell=size/1.4;
-    // DPR belongs to the outer context. The sprite rectangle remains in CSS units.
-    h.context.scale(dpr,dpr);h.scope.drawAgentAppearanceLayer(h.context,0,{...agent,attributes:appearance,facing},cell,{x:100,y:200},null,null,"selected");
-    assert.equal(h.flags[0],true);assert.deepEqual(json(h.sockets[0]),{source:[1,2],target:[3,4]});assert.equal(h.motions[0][3],300);
-    const draw=h.calls.at(-1);assert.equal(draw[0],"image");const [x,y,w,height]=draw.slice(2),s=size/512;
-    assert.ok(Math.abs(x+448*s)<1e-10);assert.ok(Math.abs(y+512*s)<1e-10);
-    assert.ok(Math.abs(w-896*s)<1e-10);assert.ok(Math.abs(height-640*s)<1e-10);
-    assert.deepEqual(h.calls.at(-2),["scale",facing,1]);assert.deepEqual(h.outlines[0].slice(1,5),[x,y,w,height]);
-  }
-});
 
-test("a loading attack sheet uses the original portrait and 512 camera, then switches when ready",()=>{
-  const waiting=gameHarness(false,null);waiting.scope.drawAgentAppearanceLayer(waiting.context,0,agent,100,{x:0,y:0},null,null,null);
-  assert.equal(waiting.flags[0],false);assert.equal(waiting.motions.length,0);assert.deepEqual(waiting.layers,["combat-body"]);
-  assert.deepEqual(waiting.calls.at(-1).slice(2),[-70,-122.5,140,140]);
-  const loaded=gameHarness(true);loaded.scope.drawAgentAppearanceLayer(loaded.context,0,agent,100,{x:0,y:0},null,null,null);assert.equal(loaded.flags[0],true);assert.equal(loaded.motions.length,1);
-});
 
 
 test("registered blade axes retain the authored strike while calibrating only the new forms",()=>{
@@ -165,46 +110,3 @@ test("lower-body settling uses positive transforms and rejects unreviewed correc
 
 // Deliberately absent pixels: neither an unregistered blade nor an invalid body
 // settlement may become a successful reusable thrust frame.
-test("new-form missing pixels are retried and narrow forms keep the ordinary camera",async()=>{
-  const renderer=await art();
-  for(const attrs of [{blade:1,strength:1,feet:1},{blade:1,strength:1},{blade:1,antenna:1,strength:1}]){
-    const candidate={...agent,attributes:attrs},a=renderer.frame(candidate,10.300001,null,body),b=renderer.frame(candidate,10.300001,null,body);
-    assert.notEqual(a,b);assert.deepEqual(a.combatCamera,SPRING_THRUST_CAMERA);
-  }
-  for(const attrs of [{blade:1,antenna:1},{blade:1,antenna:1,feet:1}]){
-    const result=renderer.frame({...agent,attributes:attrs},10.300001,null,body);assert.equal(result.width,512);assert.equal(result.combatCamera,undefined);
-  }
-});
-
-
-test("new-form successful frames recover from missing pixels, share grade/arms geometry and survive frame-cache eviction",async()=>{
-  let ready=false,reads=0;
-  const create=(width,height)=>{
-    const canvas=surface(width,height),ctx=canvas.getContext("2d");
-    ctx.getImageData=()=>{
-      if(width===1024)reads++;
-      const pixels=new Uint8ClampedArray(width*height*4);
-      const feature=width===512&&JSON.stringify(canvas.calls).includes("RuntimeParts/spring-blade.png");
-      if(width===512&&!feature)pixels[(448*512+0)*4+3]=255;
-      if(ready){
-        if(width===1024){for(let y=820;y<900;y++)for(let x=300;x<740;x++)pixels[(y*width+x)*4+3]=255;}
-        else if(feature)pixels[(157*512+441)*4+3]=255;
-      }
-      return{data:pixels};
-    };
-    return canvas;
-  };
-  const renderer=await art(create),attrs={blade:1,strength:1},candidate={...agent,attributes:attrs};
-  const waiting=renderer.frame(candidate,10.300001,null,body);ready=true;
-  const recovered=renderer.frame(candidate,10.300001,null,body);assert.notEqual(recovered,waiting);
-  assert.equal(renderer.frame(candidate,10.300001,null,body),recovered);
-  const firstReads=reads;
-  // Different non-geometric grades force distinct final-frame keys without
-  // repeating source-pixel registration for this same morphology and pose.
-  for(let strength=2;strength<=50;strength++)renderer.frame({...candidate,attributes:{...attrs,strength}},10.300001,null,body);
-  assert.equal(reads,firstReads);
-  assert.notEqual(renderer.frame(candidate,10.300001,null,body),recovered,"the padded frame budget evicted the original sprite");
-  assert.equal(reads,firstReads,"numeric pose registration survives final-frame eviction");
-  const alias=renderer.frame({...candidate,attributes:{blade:1,arms:1}},10.300001,null,body);
-  assert.deepEqual(alias.combatCamera,SPRING_THRUST_CAMERA);assert.equal(reads,firstReads);
-});

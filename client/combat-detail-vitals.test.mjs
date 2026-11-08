@@ -114,56 +114,8 @@ test("existing recovery visuals and signed damage labels remain legible without 
   }
 });
 
-function modal(reduced = false) {
-  const { context, calls } = canvas(), detail = createDetailCombatVfx(), cursor = createCombatVfxCursor();
-  const units = [0, 1].map(side => ({ id: side ? "target" : "source", tribe: "bean", health: 50,
-    stats: { health: 100, melee: true }, combat: { id: "fight", side, stunnedUntil: 0 }, attributes: {} }));
-  const sandbox = { state: { agents: units, rivals: [], simSeconds: 0, combatVfx: { version: 1 } },
-    connection: { get simSeconds() { return sandbox.state.simSeconds; } },
-    Spawner: { combatViewLayout, drawUnitHealthRing() {}, drawUnitAttackRing, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade", CREATURE_ATTACK_ANIMATIONS: {},
-      drawDetailVfxCell, drawDetailVitalEffect }, detailCombatVfx: detail,
-    detailVfxImage: () => null,
-    detailVfxImages: new Map(DETAIL_COMBAT_VFX_ASSETS.map(path => [path, { complete: true, naturalWidth: 1776 }])),
-    selectedCombatUnits: () => units, combatOpen: {}, evolutionPanel: { hidden: true }, welcome: { hidden: true },
-    combatPanel: { open: true }, combatWatch: { id: "fight" }, combatSelected: "source", combatSummary: {},
-    combatRoster: { dataset: { key: "source,target" }, children: [] }, combatHeading: {}, combatDetail: {}, combatGauge: {},
-    combatCanvas: { clientWidth: 1040, clientHeight: 480, dataset: {}, style: {}, getContext: () => context },
-    combatArenaUnits: a => a, combatStatsText: () => "", combatBackgroundAt: () => "grassland", combatBackgrounds: { grassland: "ground.png" },
-    combatUnitScale: () => 1, unitDisplayBounds: new Map([["bean", { width: .5, height: .8 }]]), unitDisplayScales: new Map([["bean", 1]]),
-    appearanceWorld: { prepare: () => new Map(), draw: () => false }, drawAgentAppearanceLayer() {},
-    window: { devicePixelRatio: 2 }, idleMotion: { matches: reduced }, AGENT_HEIGHT: .8,
-    clamp: (v, a, b) => Math.max(a, Math.min(b, v)), combatVfxFrame: {} };
-  const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
-  const extract = (a, b) => source.slice(source.indexOf("    function " + a + "("), source.indexOf("    function " + b + "("));
-  createContext(sandbox); runInContext(extract("combatVisualEvent", "combatBackgroundAt") + extract("drawCombatPanel", "templateDescription"), sandbox);
-  function draw(time, events = []) {
-    calls.length = 0; sandbox.state.simSeconds = time;
-    sandbox.combatVfxFrame = cursor.consume({ streamId: "fight", events }, time); detail.consume(sandbox.combatVfxFrame, time);
-    sandbox.drawCombatPanel(time * 1000);
-    return calls.filter(call => call.kind === "label");
-  }
-  draw(0); return { draw, calls, sandbox };
-}
 
-test("the real detail modal renders incoming bleed and recovery once without adding hit recoil", () => {
-  const { draw, calls, sandbox } = modal();
-  const events = [event("drain", { id: "target-drain" }), event("drain", { targetId: "source", fromId: "target", toId: "source" }), event("bleed")];
-  const labels = draw(1.05, events);
-  assert.equal(labels.length, 3); assert.equal(labels.filter(label => label.args[0] === "+2.0").length, 2);
-  assert.ok(labels.find(label => label.args[0] === "−2.0").args[1] > 1040 / 2);
-  assert.equal(calls.filter(call => call.kind === "image").length, 0);
-  assert.equal(sandbox.combatVisualEvent(sandbox.state.agents[1]), null, "bleed is not a new collision pose");
-  assert.equal(draw(1.15, [...events, ...events]).length, 3);
-  assert.equal(draw(1.9, events).length, 0);
-});
 
-test("the real detail modal respects reduced motion for recovery rings and HP labels", () => {
-  const { draw, calls } = modal(true), events = [event("drain")];
-  const first = draw(1.05, events)[0], initialArcs = calls.filter(call => call.kind === "arc").map(call => call.args);
-  const later = draw(1.25, events)[0], laterArcs = calls.filter(call => call.kind === "arc").map(call => call.args);
-  assert.deepEqual(later.args, first.args, "HP labels stay in place");
-  assert.deepEqual(laterArcs, initialArcs, "recovery ring does not expand");
-});
 
 function serverScene() {
   const dna = ids => ATTRIBUTE_DNA.stats(ids.map(id => { const gene = ATTRIBUTE_DNA.lookup.get(id);

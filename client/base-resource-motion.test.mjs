@@ -110,21 +110,3 @@ test("motion cache is bounded and participates in the shared desktop/mobile budg
   assert.notEqual(unitBaseResourceFrame(source, pose, surface), first);
   const budget = TRIBE_CANVAS_CACHE_BUDGET.stats(); assert.ok(budget.pixels <= budget.pixelBudget);
 });
-test("actual world body dispatch renders both actions, scales/facings/outlines and load fallback", () => {
-  const code = readFileSync(new URL("./game.js", import.meta.url), "utf8");
-  assert.ok(code.indexOf("const resourcePose = drawAgentBaseResource(") > code.indexOf("if (drawAgentRanged(ctx"));
-  const state = { simSeconds: 10.24 }, idleMotion = { matches: false }, draws = [], scales = [], outlines = [];
-  const unitAnimationSheets = new Map(tribes.map(t => [t, new Map([["idle", { sprite: image(t), scale: 1.3 }]])]));
-  const scope = createContext({ Spawner: { unitBaseResourcePose, unitBaseResourceFrame }, state, idleMotion, unitAnimationSheets,
-    document: { createElement: () => surface(0, 0) }, drawSelectionOutline: (...args) => outlines.push(args) });
-  runInContext(code.match(/^    function drawAgentBaseResource\([^]*?^    }/m)[0], scope);
-  const ctx = { save() {}, restore() {}, translate() {}, scale: (...args) => scales.push(args), drawImage: (...args) => draws.push(args) };
-  for (const tribe of tribes) for (const facing of [-1, 1]) for (const mode of ["harvest", "unload"]) {
-    const unit = agent(tribe, { facing, mode, foodDelivery: delivery() });
-    assert.ok(scope.drawAgentBaseResource(ctx, unit, 20, 50, 70, "#fff"));
-    assert.deepEqual(scales.at(-1), [facing, 1]); assert.equal(draws.at(-1).at(-1), 91);
-    assert.equal(outlines.at(-1)[0], draws.at(-1)[0]);
-    const entry = unitAnimationSheets.get(tribe).get("idle");
-    entry.sprite.complete = false; assert.equal(scope.drawAgentBaseResource(ctx, unit, 20, 50, 70, null), false); entry.sprite.complete = true;
-  }
-});

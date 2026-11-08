@@ -33,33 +33,7 @@ test("three antenna forms share source-owned work and the actual delivery clock 
   }
 });
 
-test("the cue excludes legacy compounds, other forms, moving units and interrupted actions", () => {
-  const agent = unit();
-  for (const change of [{ tribe: "bean" }, { attributes: {} }, { attributes: { feet: 1 } }, { attributes: { legs: 1 } }, { attributes: { blade: 1, antenna: 1 } },
-    { attributes: { antenna: 1, strength: 1 } }, { health: 0 }, { birth: {} }, { species: "bee" },
-    { moveStartedAt: 10, moveDuration: 1 }, { harvestStarted: 11 }])
-    assert.equal(minorTraitResourcePose({ ...agent, ...change }, "harvest", 10.36), null);
-  for (const action of ["idle", "walk", "hurt", "birth", "death", "attack", "carry"])
-    assert.equal(minorTraitResourcePose(agent, action, 10.36), null);
-  assert.equal(minorTraitResourcePose(agent, "harvest", NaN), null);
-});
 
-test("production pose preserves native idle frames and yields immediately to hurt or walking", async () => {
-  for (const tribe of ["spore", "pebble", "spring"]) {
-    const art = createTribeAttributeAnimation(path => "data:application/json;base64," +
-      readFileSync(new URL("../" + path, import.meta.url)).toString("base64"), surface, async () => ({}));
-    await art.prepare(tribe);
-    const agent = unit(tribe);
-    art.pose(agent, { action: "idle", animation: UNIT_ANIMATIONS[tribe].idle, frame: 23 }, 10);
-    const current = unitAnimationPose(agent, 10.101), posed = art.pose(agent, current, 10.101);
-    assert.equal(posed.sourceAction, "idle"); assert.equal(posed.sourceFrame, 24);
-    assert.ok(posed.minorTraitResource); assert.equal(current.minorTraitResource, undefined);
-    const hurt = { ...agent, hurtStartedAt: 10.11 };
-    assert.equal(art.pose(hurt, unitAnimationPose(hurt, 10.12), 10.12).minorTraitResource, null);
-    const walk = { ...agent, mode: "walk", moveStartedAt: 10.2, moveDuration: 1 };
-    assert.equal(art.pose(walk, unitAnimationPose(walk, 10.21), 10.21).minorTraitResource, null);
-  }
-});
 
 test("native support remains exact, strips cannot fold, and neutral/failure frames are not cached as motion", () => {
   const image = surface(1024, 1024), animation = { frameSize: 512 }, track = { floor: 126 };
@@ -86,16 +60,4 @@ test("native support remains exact, strips cannot fold, and neutral/failure fram
   assert.equal(minorTraitResourceFrame({ ...image, complete: false }, animation, track, motion, surface), null);
   assert.equal(minorTraitResourceFrame(image, animation, track, motion, () => { throw new Error("no canvas"); }), null);
   assert.ok(minorTraitResourceFrame(image, animation, track, motion, surface));
-});
-
-test("reduced-motion preference keeps the existing native composition", async () => {
-  const previous = globalThis.matchMedia;
-  globalThis.matchMedia = () => ({ matches: true });
-  try {
-    const art = createTribeAttributeAnimation(path => "data:application/json;base64," +
-      readFileSync(new URL("../" + path, import.meta.url)).toString("base64"), surface, async () => ({}));
-    await art.prepare("spore");
-    const agent = unit(), current = unitAnimationPose(agent, 10.36);
-    assert.equal(art.pose(agent, current, 10.36).minorTraitResource, null);
-  } finally { if (previous) globalThis.matchMedia = previous; else delete globalThis.matchMedia; }
 });

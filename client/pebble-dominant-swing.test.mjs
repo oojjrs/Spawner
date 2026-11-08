@@ -39,13 +39,6 @@ test('feet use identical approved pixels and transforms through the complete swe
  for(let time=0;time<=1000;time+=20){const ctx=context();assert.ok(renderPebbleDominantSwing(ctx,samplePebbleDominantSwing(p,time)));assert.deepEqual(feet(ctx),feet(neutral));assert.deepEqual(ctx.getTransform(),[1,0,0,1,0,0]);}
  const ctx=context(true);ctx.translate(5,8);const before=ctx.getTransform();assert.equal(renderPebbleDominantSwing(ctx,samplePebbleDominantSwing(p,300)),false);assert.deepEqual(ctx.getTransform(),before);
 });
-test('existing authoritative contact clock selects the new 300 ms contact without gameplay writes',()=>{
- const animations=COMBAT_EVOLUTION_CATALOG['pebble/blade'].animations;
- for(const startedAt of [0,10,200])for(const duration of [.15,.6,1,2]){
-  const agent={id:'clock',tribe:'pebble',attributes:{blade:1},health:10,bornAt:0,hurtStartedAt:-Infinity,combat:{version:2},attack:{combatId:'test-clock',startedAt,hitAt:startedAt+duration*.3,endsAt:startedAt+duration}},before=JSON.stringify(agent);
-  const pose=combatEvolutionPose(agent,agent.attack.hitAt,animations);assert.equal(pose.action,'attack');assert.equal(pose.sampleTime,300);assert.equal(JSON.stringify(agent),before);
- }
-});
 
 const unit = patch => ({id:'pebble-swing',tribe:'pebble',attributes:{blade:1},health:10,bornAt:0,hurtStartedAt:-Infinity,attack:{combatId:'swing',startedAt:10,hitAt:10.3,endsAt:11},...patch});
 async function production() {
@@ -58,36 +51,3 @@ async function production() {
   const renderer=createCombatEvolutionArt(file=>'data:application/json;base64,'+fs.readFileSync(new URL('../'+file,import.meta.url)).toString('base64'),surface,load);
   await renderer.prepare('pebble');return {renderer,state,body};
 }
-test('production uses approved body at 300 ms and shares only equivalent canonical pose caches',async()=>{
- const {renderer,body}=await production(),agent=unit(),before=JSON.stringify(agent),sprite=renderer.frame(agent,10.3);
- assert.equal(sprite.width,512);assert.equal(sprite.height,512);assert.equal(sprite.combatCamera,undefined);assert.ok(sprite.calls.some(c=>c.id===body));
- assert.equal(sprite.calls.filter(c=>c.id.endsWith('/foot-0.png')).length,1);assert.equal(sprite.calls.filter(c=>c.id.endsWith('/foot-1.png')).length,1);
- assert.equal(renderer.frame(unit({id:'another',attack:{combatId:'another',startedAt:20,hitAt:20.3,endsAt:21}}),20.3),sprite);
- assert.equal(renderer.frame(unit({attributes:{blade:1,carapace:1,secretion:1,antenna:1,feet:1}}),10.3),sprite);assert.equal(JSON.stringify(agent),before);
-});
-test('production preserves hidden ranged shots, cancellation, all non-melee actions and armor',async()=>{
- const {renderer,body}=await production(),animations=COMBAT_EVOLUTION_CATALOG['pebble/blade'].animations;
- renderer.frame(unit(),10.3);
- for(const patch of [{attack:null},{attack:null,hurtStartedAt:10.2},{birth:{startedAt:10,readyAt:11}},{health:0,diedAt:10.1},{attack:null,moveStartedAt:10,moveDuration:1},{attack:null,mode:'harvest',harvestStarted:10},{species:'beetle'},{attack:{startedAt:11,speed:1}},{attributes:{carapace:1}}])assert.ok(!renderer.frame(unit(patch),10.3).calls.some(c=>c.id===body),JSON.stringify(patch));
- assert.deepEqual(renderer.portrait(unit()).calls.map(c=>c.id),[animations.idle.image]);
- for(const flag of [{mode:'ranged'},{attackMode:'ranged'},{dnaRanged:true}]){
-  const agent=unit({attributes:{blade:1,secretion:1},attack:{combatId:'ranged',startedAt:10,launchedAt:10.3,hitAt:10.6,endsAt:11,...flag}});
-  assert.deepEqual(renderer.frame(agent,10.3).calls.map(c=>c.id),[animations.idle.image]);
- }
- assert.ok(renderer.frame(unit(),10.3).calls.some(c=>c.id===body));
-});
-test('missing, mismatched or failed drawing returns the old sheet and retries without cache poisoning',async()=>{
- for(const key of ['ready','badSize','fail']){
-  const {renderer,state,body}=await production();state[key]=key!=='ready';
-  assert.deepEqual(renderer.frame(unit(),10.3).calls.map(c=>c.id),[COMBAT_EVOLUTION_CATALOG['pebble/blade'].animations.attack.image]);
-  state[key]=key==='ready';assert.ok(renderer.frame(unit(),10.3).calls.some(c=>c.id===body));
- }
-});
-test('each authoritative multi-hit contact keeps the same approved pose and leaves the attack unchanged',async()=>{
- const {renderer,body}=await production(),animations=COMBAT_EVOLUTION_CATALOG['pebble/blade'].animations;
- for(const start of [0,10,500])for(const gap of [.03,.12,.6])for(const count of [1,4]){
-  const contacts=Array.from({length:count},(_,i)=>start+.08+i*gap),agent=unit({attack:{combatId:'multi',startedAt:start,hitAt:contacts.at(-1),endsAt:contacts.at(-1)+.35,meleeContacts:contacts}}),before=JSON.stringify(agent);
-  for(const time of contacts){assert.equal(combatEvolutionPose(agent,time,animations).sampleTime,300);assert.ok(renderer.frame(agent,time).calls.some(c=>c.id===body));}
-  assert.equal(JSON.stringify(agent),before);
- }
-});
