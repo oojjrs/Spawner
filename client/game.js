@@ -7915,13 +7915,6 @@
       designSlots.replaceChildren(fragment);
     }
 
-    const dnaHelp = document.createElement("p");
-    dnaHelp.textContent = "조각은 클릭해서 배치·삭제하고, 드래그로 옮길 수 있어요. 변경은 자동 저장됩니다.";
-    designDnaHost.querySelector(".dna-guide").append(dnaHelp);
-    const gatherHelp = document.createElement("p");
-    gatherHelp.textContent = "채집에는 채집기관이 필요합니다.";
-    designDnaHost.querySelector(".dna-guide").append(gatherHelp);
-
     function updateUnitDesign() {
       if (!unitDraft || evolutionPanel.hidden) return;
       if (unitDraft.dna) { updateDnaDesign(); return; }

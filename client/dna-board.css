@@ -1,5 +1,16 @@
-.dna-editor .dna-guide[open]{width:360px;max-height:calc(100% - 80px)}
-.dna-editor .dna-guide dd{word-break:keep-all}
+.dna-editor .dna-guide{max-height:calc(100% - 20px);scrollbar-width:thin}
+.dna-editor .dna-guide[open]{width:292px}
+.dna-editor .dna-guide summary{display:grid;place-items:center;box-sizing:border-box;width:40px;height:40px;padding:6px;list-style:none}
+.dna-editor .dna-guide summary::-webkit-details-marker{display:none}
+.dna-editor .dna-guide[open] summary{border-color:#a4d6b3;background:#304c3a}
+.dna-editor .dna-guide svg{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.dna-editor .dna-guide .dna-input-mouse{height:28px;color:#d3e8df}
+.dna-editor .dna-guide .dna-input-active{fill:#a4d6b3;stroke:none}
+.dna-editor .dna-guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin-top:8px;padding:8px;border:1px solid #38534f;border-radius:10px;background:#12251ff5;box-shadow:0 8px 24px #0005;pointer-events:auto}
+.dna-editor .dna-guide-item{display:flex;align-items:center;justify-content:space-between;gap:7px;min-height:38px;padding:4px 7px;border:1px solid #38534f88;border-radius:6px;color:#a4d6b3}
+.dna-editor .dna-guide-input{display:flex;align-items:center;justify-content:flex-end;gap:3px;color:#e4eeec}
+.dna-editor .dna-guide kbd,.dna-editor .dna-add kbd{display:grid;place-items:center;box-sizing:border-box;min-width:20px;height:24px;padding:0 4px;border:1px solid currentColor;border-bottom-width:3px;border-radius:4px;font:600 11px/1 system-ui,sans-serif}
+.dna-editor .dna-add{display:flex;align-items:center;justify-content:center;gap:9px}
 .dna-editor .dna-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
 .dna-editor .dna-filters [data-category]{--dna-category:var(--dna-filter-color,var(--dna-mint));--dna-category-background:color-mix(in srgb,var(--dna-category) 13%,#17271f);color:var(--dna-category);white-space:nowrap;min-width:0}
 .dna-editor .dna-gene[aria-disabled="true"]{opacity:.35;cursor:default}
@@ -14,7 +25,7 @@
  .dna-editor .dna-gene{width:92px;min-width:92px;height:92px;min-height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:3px;aspect-ratio:auto}
  .dna-editor .dna-gene>svg{width:50px;height:44px}.dna-editor .dna-gene strong{display:block;font-size:10px;line-height:1.2;text-align:center}.dna-editor .dna-gene-cost{display:block;font-size:10px}
  .dna-editor .dna-legend{max-width:calc(100% - 90px);bottom:9px;font-size:11px}.dna-editor .dna-legend>span{grid-template-columns:23px max-content minmax(0,1fr);gap:4px}.dna-editor .dna-legend svg{width:23px;height:23px}.dna-editor .dna-tools{display:flex}
- .dna-editor .dna-guide{font-size:11px}.dna-editor .dna-guide summary{padding:10px 7px}.dna-editor .dna-status{top:88px}
+ .dna-editor .dna-status{top:88px}
  body:has(.attribute-editor-host){min-width:320px;overflow:auto}
  body:has(.attribute-editor-host) header{height:62px;padding:0 12px;gap:8px}body:has(.attribute-editor-host) h1{font-size:17px}
  .workspace:has(.attribute-editor-host){height:auto;min-height:calc(100dvh - 62px);display:flex;flex-direction:column}

@@ -1,3 +1,19 @@
+## 유닛 설계 안내 커밋 범위 확정 [dna-guide-icons-commit-01a1ba27]
+
+- 기록 2026-11-08T17:10:34+09:00; 커밋 승인 사용자, 범위분리·기록 Codex /root. 출처 codex://threads/01a1ba27-6064-7680-93c4-643c165a21be 후속 커밋 요청. H:/Spawner Windows PowerShell, 원발언 정확시각·항목ID 미제공.
+- 안내 아이콘/키 표시·기본접힘·설명 두 문단 제거·추가 버튼 아이콘, 해당 CSS, runtime/Attribute의 같은 편집기 모듈과 이채팅 기록3개를 커밋한다. DNA 판이동/WASD·방 버전·전투·AI·경제 병행 변경은 제외하며 원래 작업폴더를 보존한다.
+- 앞 PC/모바일·Attribute 화면 확인과 UTF8NoBom/CRLF 6파일 및 scoped 공백검사 통과 근거 재사용. 커밋 후보는 HEAD의 편집기에 이번 UI 훙크만 적용하고 공식 bundle 함수로 해당 모듈만 생성한다. 관련 Projects 없음은 이채팅 실제 조회 결과 재사용. 준비·범위기록이며 커밋 성공을 미리 기록하지 않는다.
+## 유닛 설계 조작 안내 아이콘 교체 완료 [dna-guide-icons-complete-01a1ba27]
+
+- 기록·최종관측 2026-11-08T17:00:01+09:00; 요청 사용자, 구현·검수·기록 Codex /root. 출처 codex://threads/01a1ba27-6064-7680-93c4-643c165a21be 및 실제 헤드리스 Edge 결과. start의 진행 상태를 로컬 완료로 갱신한다.
+- 안내 제목/내용의 화면 문자를 마우스 토글·8개 동작 아이콘과 마우스 버튼·Q/E/Enter/Ctrl+Z/Y 키 표시로 교체, 기본 접힘. 아래 클릭·드래그·자동저장/채집기관 설명 두 문단 삭제, 조각 추가도 +/Enter 아이콘 표시. 기존 접근성 명칭과 편집 동작 유지.
+- 공식 client/build.mjs의 bundle 함수를 사용해 dna-editor 모듈만 runtime.js/Attribute.html에 동기화하여 다른 생성 모듈/병행 작업 바이트 보존. client/dna-board.css에 공통 아이콘 배치만 반영.
+- 격리 헤드리스 실제 게임 설계 패널/공용 runtime과 실제 Attribute.html 확인. 1440/390px 접힘·펼침, 한글 안내문 부재, 8개 아이콘, 키 표시, 아이콘 셀 가로 넘침 없음, 브라우저 오류0. 두 화면 직접 열람. 패널 하네스는 생명체 외형을 연결하지 않아 그 미리보기는 검증대상 아님. 근거 literal Trash/dna-guide-icons-01a1ba27/visual-result.json 및 open/closed 스크린샷. 전체 게임 진행 검증을 주장하지 않는다. 스테이징·커밋·배포 수행 없음.
+## 유닛 설계 조작 안내 아이콘 교체 진행 [dna-guide-icons-start-01a1ba27]
+
+- 기록 2026-11-08T16:57:16+09:00; 요청·결정 사용자, 구현 판단·기록 Codex /root. 출처 codex://threads/01a1ba27-6064-7680-93c4-643c165a21be 현재 요청·첨부. H:/Spawner Windows PowerShell, 원발언 정확시각·항목ID 미제공.
+- 사용자: 유닛 설계창 조작 안내 글자를 없애고 아이콘으로 교체, 설명 추가 중단. 판단: 펼쳐진 조작 안내를 기본 접힘의 마우스 아이콘으로 바꾸고 내부 조작은 동작 아이콘·마우스 버튼·키 표시로 표현. 하단 클릭/드래그/자동저장·채집기관 설명 두 문단 삭제, 조각 추가 버튼도 아이콘으로 교체. 새 설명 문구는 추가하지 않는다.
+- 기존 dna-editor의 판 드래그/WASD/F 이동과 game.js의 방 버전 표시 등 병행 변경 보존. 본 작업은 UI 표시와 필요한 공식 생성물 동기화만 수행하고 동작 로직·Git 완료는 범위 밖. 연결 Projects 실제조회 nodes=[]/hasNextPage=false. 구현·화면확인 진행 중.
 ## 셀 전투 공격·방어 검사 커밋 범위 확정 [cell-combat-commit-01a1ba10]
 
 - 기록 2026-11-08T16:50:01+09:00; 커밋 승인 사용자, 범위분리 판단·기록 Codex /root. 출처 현재 채팅 커밋 요청, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 미제공. 이채팅의 셀진입전사격제거와 방어검사수정을 함께 로컬커밋한다.

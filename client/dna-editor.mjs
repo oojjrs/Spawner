@@ -117,7 +117,7 @@ export function renderDnaComposition(container,M,dna) {
 
 export function createDnaEditor(container,dnaModel,onChange,onAction) {
   const M=dnaModel,names=dnaGeneNames,root=document.createElement('section');root.className='dna-editor';root.tabIndex=0;
-  root.innerHTML='<div class="dna-board"><canvas aria-label="DNA 편집 영역" tabindex="0"></canvas><div class="dna-legend" hidden></div><div class="dna-tools"></div><details class="dna-guide" open><summary>조작 안내</summary><dl><dt>DNA 선택</dt><dd><kbd>목록 클릭 / 휠 클릭</kbd></dd><dt>회전·배치</dt><dd>회전: <kbd>휠 위·아래 / Q·E</kbd> · 배치: <kbd>빈칸 좌클릭 / Enter</kbd></dd><dt>이동·삭제</dt><dd>이동: <kbd>배치한 DNA 드래그</kbd> · 삭제: <kbd>배치한 DNA 좌클릭</kbd></dd><dt>선택 취소</dt><dd><kbd>우클릭</kbd></dd><dt>되돌리기·다시 실행</dt><dd>되돌리기: <kbd>Ctrl+Z</kbd> · 다시 실행: <kbd>Ctrl+Y</kbd></dd></dl></details><output class="dna-status dna-organ-limit" aria-live="polite" hidden></output><output class="dna-placement" aria-live="polite" hidden></output><output class="dna-cost">비용 <strong></strong></output></div><aside class="dna-catalog"><div class="dna-filters"></div><div class="dna-list"></div></aside><div class="dna-dock"><div class="dna-rotation"></div><button class="dna-add" type="button">조각 추가</button></div>';
+  root.innerHTML='<div class="dna-board"><canvas aria-label="DNA 편집 영역" tabindex="0"></canvas><div class="dna-legend" hidden></div><div class="dna-tools"></div><details class="dna-guide"><summary aria-label="조작 안내"></summary><div class="dna-guide-grid"></div></details><output class="dna-status dna-organ-limit" aria-live="polite" hidden></output><output class="dna-placement" aria-live="polite" hidden></output><output class="dna-cost">비용 <strong></strong></output></div><aside class="dna-catalog"><div class="dna-filters"></div><div class="dna-list"></div></aside><div class="dna-dock"><div class="dna-rotation"></div><button class="dna-add" type="button" aria-label="조각 추가"></button></div>';
   container.replaceChildren(root);
   const find=selector=>root.querySelector(selector),canvas=find('canvas'),board=find('.dna-board'),context=canvas.getContext('2d');
   const sound=typeof onAction==='function'?null:createDnaAudio(),playSound=onAction||sound.play;
@@ -130,7 +130,21 @@ export function createDnaEditor(container,dnaModel,onChange,onAction) {
   const clearButton=button(find('.dna-tools'),'초기화','M5 10a8 8 0 1 1 1 8M5 4v6h6',()=>{if(readOnly||!pieces.length)return;checkpoint();pieces=[];moving=-1;changed('remove');});
   const leftButton=button(find('.dna-rotation'),'왼쪽 회전','m8 3-5 5 5 5M3 8h10a7 7 0 1 1-6 11',()=>rotate(-1));
   const rightButton=button(find('.dna-rotation'),'오른쪽 회전','m16 3 5 5-5 5m5-5H11a7 7 0 1 0 6 11',()=>rotate(1));
-  const addButton=find('.dna-add');addButton.onclick=commit;
+  const icon=path=>'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+path+'"/></svg>';
+  const mouse=part=>'<svg class="dna-input-mouse" viewBox="0 0 24 28" aria-hidden="true"><rect x="5" y="2" width="14" height="24" rx="7"/><path d="M5 12h14M12 2v10"/>'+({left:'<path class="dna-input-active" d="M11 3a6 6 0 0 0-5 6v2h5Z"/>',right:'<path class="dna-input-active" d="M13 3a6 6 0 0 1 5 6v2h-5Z"/>',middle:'<rect class="dna-input-active" x="10" y="5" width="4" height="8" rx="2"/>',wheel:'<path d="m2 5 2-3 2 3M4 2v7m14 14 2 3 2-3m-2 3v-7"/>'}[part]||'')+'</svg>';
+  const key=value=>'<kbd>'+value+'</kbd>';
+  find('.dna-guide summary').innerHTML=mouse('middle');
+  find('.dna-guide-grid').innerHTML=[
+    ['DNA 선택','M4 3v16l4-4 4 6 3-2-4-6h6Z',mouse('left')+mouse('middle')],
+    ['회전·배치','m8 3-5 5 5 5M3 8h10a7 7 0 1 1-6 11',mouse('wheel')+key('Q')+key('E')],
+    ['회전·배치','M5 3h14v18H5ZM8 12h8m-4-4v8',mouse('left')+key('↵')],
+    ['이동·삭제','M12 3v18M3 12h18m-12-6 3-3 3 3m-6 12 3 3 3-3M6 9l-3 3 3 3m12-6 3 3-3 3',mouse('left')+icon('M3 12h18m-4-4 4 4-4 4M7 8l-4 4 4 4')],
+    ['이동·삭제','M5 7h14M9 7V4h6v3M7 7l1 14h8l1-14M10 10v7m4-7v7',mouse('left')],
+    ['선택 취소','m6 6 12 12M6 18 18 6',mouse('right')],
+    ['되돌리기','M9 5 4 10l5 5M4 10h9a6 6 0 0 1 0 12',key('Ctrl')+key('Z')],
+    ['다시 실행','m15 5 5 5-5 5m5-5h-9a6 6 0 0 0 0 12',key('Ctrl')+key('Y')]
+  ].map(([label,path,input])=>'<div class="dna-guide-item" aria-label="'+label+'">'+icon(path)+'<span class="dna-guide-input">'+input+'</span></div>').join('');
+  const addButton=find('.dna-add');addButton.innerHTML=icon('M12 5v14M5 12h14')+key('↵');addButton.onclick=commit;
   for(const element of [undoButton,redoButton,removeButton,clearButton,leftButton,rightButton,addButton])element.dataset.dnaSound='true';
   function getDesign(){return {version:6,pieces:pieces.map(M.clonePiece),level,budget};}
   function snapshot(){return pieces.map(M.clonePiece);}
