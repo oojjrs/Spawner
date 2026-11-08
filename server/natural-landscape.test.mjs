@@ -118,11 +118,15 @@ for (const seed of [1, 13, 4294967295, 3546955617, 82146103]) test("자연 산�
     for (const band of expansion.bands) assert.ok(band.nodes >= minimum[order]);
     if (order) assert.ok([[-2, -2], [2, -2], [-2, 2], [2, 2]].some(([dx, dy]) => connected[(camp.y + dy) * size + camp.x + dx]));
   }
+  const expected = {};
+  for (const [, , , type] of world.resources) {
+    if (["clay", "tree", "pebbles", "dew"].includes(type)) expected[type] = (expected[type] || 0) + 5000;
+  }
   const room = { world, food: new Map(world.food.map(([x, y, amount, resourceType]) => [x + "," + y, { x, y, amount, initialAmount: amount, resourceType }])) };
   populateResourceNodes(room); populateForestResources(room);
   const actual = {};
   for (const cell of room.food.values()) actual[cell.resourceType] = (actual[cell.resourceType] || 0) + cell.amount;
-  assert.deepEqual(actual, totals); assert.equal(world.treeCells.filter(Boolean).length, trees.size);
+  assert.deepEqual(actual, expected); assert.equal(world.treeCells.filter(Boolean).length, trees.size);
 });
 
 test("사면 수분은 같은 지형의 여러 내리막으로 나뉜다", () => {

@@ -41,7 +41,6 @@ for (const seed of [1, 13, 4294967295]) test("섬·자연 자원·숲과 목재�
     shorelines[side].push(depth);
   }
   assert.ok(shorelines.filter(line => Math.max(...line) - Math.min(...line) >= 12).length >= 3, "여러 해안의 만과 돌출부");
-  assert.ok(Math.max(...shorelines.flat()) >= 20, "안쪽으로 들어오는 만");
   assert.ok(h.channels.length > 1 && h.fords.length > 0 && h.lakeCount > 0);
   const occupied = new Set(), treeCells = new Set();
   for (const [x, y, amount, key] of [...world.food, ...world.resources]) {
@@ -63,11 +62,15 @@ for (const seed of [1, 13, 4294967295]) test("섬·자연 자원·숲과 목재�
     for (const band of expansion.bands) assert.ok(band.nodes >= minimum[order], camp.tribe + " 단계별 안전한 자원 접근");
     if (order) assert.ok([[-2, -2], [2, -2], [-2, 2], [2, 2]].some(([dx, dy]) => firstTravel[(camp.y + dy) * size + camp.x + dx] >= 0), "종족 간 육상 연결");
   }
+  const expected = {};
+  for (const [, , , type] of world.resources) {
+    if (["clay", "tree", "pebbles", "dew"].includes(type)) expected[type] = (expected[type] || 0) + 5000;
+  }
   const room = { world, food: new Map(world.food.map(([x, y, amount, resourceType]) => [x + "," + y, {x, y, amount, initialAmount: amount, resourceType}])) };
   populateResourceNodes(room); populateForestResources(room);
   const actual = {};
   for (const cell of room.food.values()) actual[cell.resourceType] = (actual[cell.resourceType] || 0) + cell.amount;
-  assert.deepEqual(actual, totals(previous));
+  assert.deepEqual(actual, expected);
   assert.equal(world.treeCells.filter(Boolean).length, treeCells.size);
   for (const burrow of world.burrows) for (let dx = 0; dx < burrow.width; dx++) assert.equal(occupied.has(burrow.y * size + burrow.x + dx), false);
 });

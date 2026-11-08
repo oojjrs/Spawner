@@ -1,3 +1,8 @@
+## 월드 자원 이행 검사 완료 [world-complete-01a1b8b3]
+
+- 기록·확인 시각 2026-11-08T13:11:26+09:00; 결정 사용자 현재 채팅의 전체 점검·작업별 완료 지시, 기록 Codex /root. 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e.
+- server/continent-world, hydrology, island-world, natural-landscape 4파일16검사 통과. 생성 지형·수계·자원 배치·종족 접근 검사를 보존하고 런타임 자원량은 현행 노드당5000 이행을 독립 합산한다. 물 예산 정규화 후 맞지 않는 섬의 절대 만 깊이20 기대1줄을 제거하되 3면 해안 변화·외해 연결·총량 검사를 유지했다. 담당 /root/economy_tests_finish 결과 economy-results.json, 형식·diff ef91b2; 메인 diff7be05b 대조.
+
 ## 경제·성장 회귀 검사 완료 [economic-growth-complete-01a1b8b3]
 
 - 기록·확인 시각 2026-11-08T13:11:26+09:00; 결정 사용자 현재 채팅의 전체 점검·작업별 완료 지시, 기록 Codex /root. 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e.

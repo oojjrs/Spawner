@@ -69,11 +69,15 @@ for (const seed of [1, 13, 4294967295]) test("대륙·분산 산지·하구·자
     for (const band of expansion.bands) assert.ok(band.nodes >= minimum[order]);
     if (order) assert.ok([[-2, -2], [2, -2], [-2, 2], [2, 2]].some(([dx, dy]) => travel[(camp.y + dy) * size + camp.x + dx] >= 0));
   }
+  const expected = {};
+  for (const [, , , type] of world.resources) {
+    if (["clay", "tree", "pebbles", "dew"].includes(type)) expected[type] = (expected[type] || 0) + 5000;
+  }
   const room = { world, food: new Map(world.food.map(([x, y, amount, resourceType]) => [x + "," + y, {x, y, amount, initialAmount: amount, resourceType}])) };
   populateResourceNodes(room); populateForestResources(room);
   const actual = {};
   for (const cell of room.food.values()) actual[cell.resourceType] = (actual[cell.resourceType] || 0) + cell.amount;
-  assert.deepEqual(actual, Object.fromEntries(Object.entries(totals(previous)).filter(([key]) => !REMOVED_RESOURCE_TYPES.includes(key))));
+  assert.deepEqual(actual, expected);
   assert.ok([...room.food.values()].every(cell => !REMOVED_RESOURCE_TYPES.includes(cell.resourceType)));
   assert.equal(world.treeCells.filter(Boolean).length, trees.size);
 });

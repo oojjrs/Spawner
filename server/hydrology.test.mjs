@@ -51,11 +51,15 @@ for (const seed of [1, 13, 4294967295]) test("수계·자원 총량·도하·빈
     occupied.add(index);
   }
   for (const plan of world.encounters) for (const index of plan.spawnPoints || []) assert.equal(occupied.has(index), false);
+  const expected = {};
+  for (const [, , , type] of world.resources) {
+    if (["clay", "tree", "pebbles", "dew"].includes(type)) expected[type] = (expected[type] || 0) + 5000;
+  }
   const room = { world, food: new Map(world.food.map(([x, y, amount, resourceType]) => [x + "," + y, {x, y, amount, initialAmount: amount, resourceType}])) };
   populateResourceNodes(room); populateForestResources(room);
   const actual = {};
   for (const cell of room.food.values()) actual[cell.resourceType] = (actual[cell.resourceType] || 0) + cell.amount;
-  assert.deepEqual(actual, amounts(previous));
+  assert.deepEqual(actual, expected);
   assert.equal(world.treeCells.filter(Boolean).length, world.resources.filter(point => point[3] === "tree").length);
   const dryLand = world.terrain.filter(type => type >= 2 && type !== 10).length;
   assert.ok(occupied.size < dryLand / 4);
