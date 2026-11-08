@@ -2,6 +2,7 @@ import { ATTRIBUTE_DNA } from "./dna.mjs";
 import { cloneDna, dnaAppearance, validateDna } from "./dna-unit.mjs";
 import { STARTING_WORKER_GENES } from "./tribe-start.mjs";
 import { suggestTemplateName } from "./unit-template-names.mjs";
+import { tribeWorkerDesign } from "./tribe-worker-designs.mjs";
 
 export const TRIBE_INVASION = Object.freeze({
   bean: Object.freeze({ weights: Object.freeze([3, 2, 3, 2]) }),
@@ -90,6 +91,7 @@ function militaryGenes(tribe, level, variant) {
 export function tribeDesign(tribe, level, variant) {
   if (!TRIBE_INVASION[tribe] || !Number.isInteger(level) || level < 1 || level > 4 ||
       !Number.isInteger(variant) || variant < -1 || variant > 3 || variant >= 0 && level < 2) return null;
+  if (variant < 0) return tribeWorkerDesign(level);
   const key = tribe + ":" + level + ":" + variant;
   if (!designs.has(key)) {
     const genes = variant < 0 ? workerGenes(tribe, level) : militaryGenes(tribe, level, variant);

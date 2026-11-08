@@ -67,7 +67,7 @@ test("포인트가 없으면 부활시키지 않고 기본 채집 DNA 비용만 
 
 test("수명 경고에 들어온 초기 개체를 만료 전에 보충하며 같은 시간에 연속 생산하지 않는다", () => {
   const room=fixture(), game=room.games.get("bean");room.hostId="manual";
-  change(game,state=>{state.evolutionPoints=52;for(const agent of state.agents){agent.bornAt=0;agent.lifespan=300;}});
+  change(game,state=>{state.evolutionPoints=72;for(const agent of state.agents){agent.bornAt=0;agent.lifespan=300;}});
   game.prepare(240);
   assert.ok(game.produce());
   assert.equal(game.agents.length,5);
@@ -77,16 +77,27 @@ test("수명 경고에 들어온 초기 개체를 만료 전에 보충하며 같
   assert.ok(game.produce());
 });
 
-test("건강한 초기 일꾼 네 기를 유지하며 첫 둥지 성장 비용을 모은다", () => {
+test("일꾼 여섯 기와 교체 예비금을 확보한 뒤 첫 둥지를 성장시킨다", () => {
   const room=fixture(), game=room.games.get("bean");room.hostId="manual";
   change(game,state=>{state.evolutionPoints=26;});
   assert.equal(game.produce(),null);
   change(game,state=>{state.simSeconds=60;state.foodIncomeStartedAt=0;state.foodIncome=[[55,60]];state.productionReadyAt=0;});
   assert.equal(game.produce(),null);
   assert.equal(game.agents.length,4);
-  change(game,state=>{state.simSeconds=63;state.evolutionPoints=40;});
+  change(game,state=>{state.simSeconds=63;state.evolutionPoints=72;});
+  assert.ok(game.produce());
+  game.prepare(66);
+  assert.ok(game.produce());
+  assert.equal(game.agents.length,6);
+  change(game,state=>{state.evolutionPoints=75;});
+  game.prepare(69);
+  assert.equal(game.produce(),null);
+  assert.equal(game.nestLevel,1);
+  change(game,state=>{state.evolutionPoints=76;});
+  game.prepare(72);
   assert.equal(game.produce(),null);
   assert.equal(game.nestLevel,2);
+  assert.equal(game.snapshot().evolutionPoints,36);
 });
 
 test("둥지가 파괴되거나 탄생 공간이 없으면 비용을 차감하지 않는다", () => {
@@ -112,7 +123,7 @@ test("자동 생산 대기 시간은 저장 복원 후 유지하고 이전 저�
   room.games.set("bean",restored);
   restored.prepare(60.5);
   assert.equal(restored.produce(),null);
-  change(restored,state=>{state.evolutionPoints=26;});
+  change(restored,state=>{state.evolutionPoints=36;});
   restored.prepare(60+CONQUEST_PACING.productionInterval);
   assert.ok(restored.produce());
   assert.equal(restored.nestLevel,1);

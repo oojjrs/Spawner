@@ -8,6 +8,7 @@ import { tribeProductionTemplate } from "./tribe-production.mjs";
 import { TRIBE_INVASION, tribeDesign } from "./tribe-designs.mjs";
 import { tribeCombatTemplates } from "./tribe-combat-templates.mjs";
 import { tribeDefenseDesign } from "./tribe-defense-designs.mjs";
+import { nestDefenderDesign } from "./nest-defender.mjs";
 import { ATTRIBUTE_DNA } from "./dna.mjs";
 import { dnaUnitStats, validateDna } from "./dna-unit.mjs";
 import { birthCost } from "./attributes.mjs";
@@ -72,10 +73,15 @@ for (const [surface, api] of surfaces) {
       for (const level of [1, 2, 3]) {
         Object.assign(state, stateFor(tribe, 3600));
         state.nestLevel = level;
-        for (let i = 0; i < [0, 2, 3][level - 1]; i++) {
+        for (const agent of state.agents) {
+          agent.dna = tribeDesign(tribe, level, -1);
+          agent.stats = dnaUnitStats(agent.dna, tribe);
+          agent.health = agent.stats.health;
+        }
+        for (let i = 0; i < [0, 1, 1][level - 1]; i++) {
           const defender = api.tribeProductionTemplate(state, tribe);
           assert.equal(defender.productionRole, "military");
-          assert.equal(JSON.stringify(defender.dna.pieces), JSON.stringify(tribeDefenseDesign(tribe, level, i).pieces));
+          assert.equal(JSON.stringify(defender.dna.pieces), JSON.stringify((level === 2 ? nestDefenderDesign(tribe).design : tribeDefenseDesign(tribe, level, i)).pieces));
           state.agents.push({ ...defender, health: 100, bornAt: 3600, lifespan: 300 });
         }
         assert.equal(api.tribeProductionTemplate(state, tribe), null);
@@ -98,7 +104,7 @@ for (const [surface, api] of surfaces) {
       assert.equal(replacement.productionRole, "worker");
       const stats = dnaUnitStats(replacement.dna, tribe);
       assert.equal(replacement.dna.level, 4);
-      assert.ok(stats.capacity >= 6 && stats.dna.harvestReduction >= 80 && stats.health >= 60);
+      assert.ok(stats.capacity >= 10 && stats.dna.harvestReduction >= 80 && stats.speed >= .7);
       assert.equal(stats.dna.melee || stats.dna.ranged || stats.dna.hunting, false);
       state.evolutionPoints = birthCost(replacement, tribe) - 1;
       assert.equal(api.tribeProductionTemplate(state, tribe), null);
@@ -142,12 +148,10 @@ for (const [surface, api] of surfaces) {
     assert.ok(f.game.produce());
     assert.equal(f.game.nestLevel, 2);
     f.game.prepare(63);
-    assert.ok(f.game.produce());
-    f.game.prepare(66);
     assert.equal(f.game.produce(), null);
     assert.equal(f.game.nestLevel, 3);
-    assert.equal(f.game.agents.filter(agent => agent.productionRole === "military").length, 2);
-    assert.equal(f.game.snapshot().evolutionPoints, 264);
+    assert.equal(f.game.agents.filter(agent => agent.productionRole === "military").length, 1);
+    assert.equal(f.game.snapshot().evolutionPoints, 312);
   });
 
   test(surface + " · 약한 일꾼 열 기는 원정 준비로 세지 않고 강화 일꾼을 보충한다", () => {

@@ -1,5 +1,12 @@
 [
   {
+    "version_number": 89,
+    "label": "v89",
+    "notes": [
+      "AI 일꾼 설계·생산 순서와 출정 판정 수정."
+    ]
+  },
+  {
     "version_number": 88,
     "label": "v88",
     "notes": [

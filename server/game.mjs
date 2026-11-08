@@ -6,9 +6,9 @@ import { CONQUEST_PACING, militaryAgent } from "./conquest-pacing.mjs";
 import { isTemplateNameEdited, suggestTemplateName } from "./unit-template-names.mjs";
 import { suggestAgentName } from "./agent-names.mjs";
 import { tribeProductionTemplate } from "./tribe-production.mjs";
-import { TRIBE_INVASION, sameTribeDesign } from "./tribe-designs.mjs";
+import { TRIBE_INVASION, sameTribeDesign, tribeDesign } from "./tribe-designs.mjs";
 import { tribeDefenseAgent } from "./tribe-defense-designs.mjs";
-import { tribeWorkers, tribeInvasionReady } from "./tribe-strategy.mjs";
+import { tribeWorkers, tribeInvasionReady, tribeUpgradeReady } from "./tribe-strategy.mjs";
 import { worldSize } from "./world-size.mjs";
 import { ATTRIBUTES, ATTRIBUTE_SYNERGIES_ENABLED, isAttributeUnlocked, attributeCounts, migrateAttributeSlots, migrateAttributeLevels, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier, birthCost, hasSynergy } from "./attributes.mjs";
 import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
@@ -1832,7 +1832,7 @@ export function createGame(environment, colony, savedGame) {
         } else {
           if (!previous && state.templates.length >= 100) return null;
           const design = command({type:"design",templateId:previous?.id ?? null,name:previous?.name || template.name,
-            slots:[...template.slots],dna:template.dna,combatPrimary:combatPrimary(template),birth:false});
+            slots:[...template.slots],dna:template.dna,defenseMode:template.defenseMode,combatPrimary:combatPrimary(template),birth:false});
           stored = state.templates.find(candidate => candidate.id === design.templateId);
           stored.productionRole = role;
           stored.automatic = true;
@@ -1876,7 +1876,7 @@ export function createGame(environment, colony, savedGame) {
         const agentId = automaticBirth(template,template.productionRole);
         if (agentId) return agentId;
       }
-      if (state.nestLevel < NEST_LEVELS.length && state.evolutionPoints >= upgradeCost()) {
+      if (tribeUpgradeReady(state, colony.tribe)) {
         command({type:"upgrade"});
         return null;
       }
@@ -2265,7 +2265,9 @@ export function createGame(environment, colony, savedGame) {
     if (savedGame !== undefined) restore(savedGame);
     else {
       grantStartingPoints();
-      const template = { id: null, name: "기초 채집", slots: [], dna: startingWorkerDna(colony.tribe), revision: 1 };
+      const automated = environment.hostId && colony.ownerId !== environment.hostId && TRIBE_INVASION[colony.tribe];
+      const template = { id: null, name: "기초 채집", slots: [],
+        dna: automated ? tribeDesign(colony.tribe, 1, -1) : startingWorkerDna(colony.tribe), revision: 1 };
       if (colony.ownerId === environment.hostId) {
         const { templateId } = command({ type: "design", templateId: null, name: template.name, dna: template.dna, birth: false });
         const stored = state.templates.find(candidate => candidate.id === templateId);
