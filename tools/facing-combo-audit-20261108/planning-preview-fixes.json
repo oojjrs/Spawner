@@ -1,0 +1,52 @@
+{
+  "previews": [
+    {
+      "key": "bean/carapace-antenna",
+      "path": "AnimationCandidates/bean-defensive-retaliation-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-attack-v1-transparent-preview.webp",
+      "beforeSha256": "e0f980dc2dc517762de9968163521bc6978b755414ef3f463f6a52897ac455c8",
+      "afterSha256": "7693561fd7e7dacff7c0c66b871e282ffc0d580a8035c1a7f03d318b6ea8cb7b",
+      "frames": 8,
+      "durations": [
+        60,
+        70,
+        140,
+        30,
+        250,
+        120,
+        80,
+        250
+      ],
+      "loop": 0,
+      "verification": "Exact horizontal reflection of alpha and every nontransparent RGB pixel; all frame durations and loop retained. WebP re-encoding changes unused RGB under fully transparent pixels."
+    },
+    {
+      "key": "spore/carapace-antenna",
+      "path": "AnimationCandidates/spore-defensive-attack-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-counterattack-v1-preview.webp",
+      "beforeSha256": "8fe0f5cbf14f6fe89dc416a4a6883cac9ee3a676c8bb48176221ea4aaa8d979f",
+      "afterSha256": "adc4aee88860ba82f3cbf47ea9405e1b46be0355d361c12d87e5c6be1b911ef7",
+      "frames": 16,
+      "durations": [
+        60,
+        70,
+        60,
+        80,
+        30,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        70,
+        80,
+        90,
+        100,
+        60
+      ],
+      "loop": 0,
+      "verification": "Exact horizontal reflection of alpha and every nontransparent RGB pixel; all frame durations and loop retained. WebP re-encoding changes unused RGB under fully transparent pixels."
+    }
+  ],
+  "birthPathReferencesFixed": 3,
+  "attackHrefAliasesFixed": 6
+}

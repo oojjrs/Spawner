@@ -50,3 +50,43 @@ test('animated preview links without atlas geometry stay native in the lightbox'
  const html=fs.readFileSync(new URL('../DesignAssets/codex-units.html',import.meta.url),'utf8');
  assert.ok(html.includes('if(!element.dataset.durations||(!element.dataset.columns&&!element.dataset.nativeAnimation&&!element.dataset.runtimeGeometry))return;'));
 });
+
+test('all 44 combination planning rows resolve work previews using their declared source action',()=>{
+ let html='';vm.runInNewContext(fs.readFileSync(new URL('../DesignAssets/sections/unit-appearance.js',import.meta.url),'utf8'),{document:{write:value=>html+=value}});
+ const forms=['blade-carapace','secretion-carapace','blade-secretion','blade-secretion-carapace','blade-antenna','secretion-antenna','carapace-antenna','blade-secretion-antenna','blade-carapace-antenna','secretion-carapace-antenna','blade-secretion-carapace-antenna'];
+ let cells=0,workCells=0,formerlyFallback=0;
+ for(const tribe of ['bean','spore','pebble','spring'])for(const form of forms){
+  const row=html.match(new RegExp('<tr id="unit-'+tribe+'-'+form+'">([\\s\\S]*?)</tr>'))?.[1];assert.ok(row,tribe+'/'+form);
+  for(const cell of row.matchAll(/<td data-action="([^"]+)"[^>]*>([\s\S]*?)<\/td>/g)){
+   const anchor=cell[2].match(/<a\b([^>]*)>/)?.[1];if(!anchor)continue;
+   const action=anchor.match(/data-action="([^"]+)"/)?.[1]||cell[1];
+   const source=cell[2].match(/data-work-source="([^"]+)"/)?.[1];
+   const {link,img}=linkFor(tribe+'/'+form,action);const closest=link.closest.bind(link);
+   link.closest=selector=>selector==='figure[data-work-source]'?(source?{dataset:{workSource:source}}:null):closest(selector);
+   const sourceAction=source||action,normalized=sourceAction==='ranged-attack'?'ranged':sourceAction;
+   const expected=context.SpawnerUnitPreviewFacing.forms[tribe+'/'+form][normalized];assert.ok(expected,tribe+'/'+form+'/'+normalized);
+   assert.equal(previewSourceFacing(link,undefined,undefined,action),expected);
+   assert.equal(setPreviewFacing(link,undefined,undefined,action),expected!=='left');
+   assert.equal(img.style.transform,expected==='left'?'':'scaleX(-1)');cells++;
+   if(source){workCells++;if(!context.SpawnerUnitPreviewFacing.forms[tribe+'/'+form][action==='ranged-attack'?'ranged':action])formerlyFallback++;}
+  }
+ }
+ assert.equal(cells,456);assert.equal(workCells,132);assert.equal(formerlyFallback,36);
+});
+
+test('defensive antenna planning aliases open the registered left-facing sheet and pebble birth preview exists',()=>{
+ let html='';vm.runInNewContext(fs.readFileSync(new URL('../DesignAssets/sections/unit-appearance.js',import.meta.url),'utf8'),{document:{write:value=>html+=value}});
+ for(const tribe of ['bean','spore']){
+  const row=html.match(new RegExp('<tr id="unit-'+tribe+'-carapace-antenna">([\\s\\S]*?)</tr>'))[1];
+  const registered='DesignAssets/Animations/DefensiveAttackV1/'+tribe+'/carapace-antenna/attack.png';
+  for(const action of ['attack','harvest','throw']){
+   const cell=row.match(new RegExp('<td data-action="'+action+'"[^>]*>([\\s\\S]*?)</td>'))[1];
+   assert.ok(cell.includes('href="'+registered+'"'),tribe+'/'+action);
+  }
+ }
+ const row=html.match(/<tr id="unit-pebble-blade-carapace">([\s\S]*?)<\/tr>/)[1];
+ const birth=row.match(/<td data-action="birth"[^>]*>([\s\S]*?)<\/td>/)[1];
+ const preview=birth.match(/data-preview="([^"]+)"/)[1];
+ assert.equal(preview,'AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-carapace/birth-preview.webp');
+ assert.ok(fs.existsSync(new URL('../'+preview,import.meta.url)));
+});

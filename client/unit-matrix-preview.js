@@ -27,7 +27,8 @@
     // from the newly registered action for the same form.
     const variant = element.closest('[data-combat-clip]')?.dataset.variant;
     if (variant) return ['blade', 'carapace'].includes(variant) ? 'left' : 'right';
-    const key = previewFormKey(element), normalized = action === 'ranged-attack' ? 'ranged' : action;
+    const sourceAction = element.closest('figure[data-work-source]')?.dataset.workSource || action;
+    const key = previewFormKey(element), normalized = sourceAction === 'ranged-attack' ? 'ranged' : sourceAction;
     return previewFacingData.forms[key]?.[normalized] || (unit?.tribe || key ? 'right' : 'left');
   }
   function setPreviewFacing(element, unit, animation, action) {
