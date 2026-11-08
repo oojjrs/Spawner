@@ -13,7 +13,7 @@ import { ATTRIBUTE_DNA } from "../server/dna.mjs";
 import { snapshotCombatVfx } from "../server/combat-vfx-journal.mjs";
 
 const event = (kind = "hit", extra = {}) => ({ id: kind, kind, at: 1, sourceId: "source", targetId: "target", amount: 2, ...extra });
-const amounts = result => Array.from(result.texts.filter(row => /^(반사 )?[+−]/.test(row.text)));
+const amounts = result => Array.from(result.texts.filter(row => /^(반사 피해 )?[+−]/.test(row.text)));
 const agents = ["source", "target", "other"].map(id => ({ id, tribe: "bean", health: 100 }));
 const positions = new Map(agents.map((agent, index) => [agent.id, { x: 100 + index * 180, y: 260, width: 60, height: 100 }]));
 const viewport = { scope: "fight", width: 600, height: 350, includeDirectDamage: true };

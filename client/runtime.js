@@ -92017,7 +92017,98 @@ function unitRangedProjectile(agent) {
 
 return { UNIT_RANGED_HURT_ANIMATIONS, UNIT_RANGED_FORMS, UNIT_RANGED_IMAGE_ASSETS, UNIT_RANGED_ANIMATIONS, unitRangedAppearance, unitRangedAttack, unitRangedBirthAppearance, unitRangedLifecycleAnimation, unitRangedPose, unitRangedResourceFrame, unitRangedDisplaySize, unitRangedProjectile };
 })();
+modules["client/combat-reflection-vfx.mjs"] = (() => {
+// Reflection is a return of damage, never a defensive shield on its recipient.
+// These marks only explain an observed journal event; they cannot change HP,
+// create a projectile, or infer a hidden reflector's position.
+function reflectionReturnCommand(cue, target, time, source, { reducedMotion = false } = {}) {
+  const age = time - cue.at;
+  const valid = point => point && [point.x, point.y, point.height].every(Number.isFinite) && point.height > 0;
+  if (cue.kind !== "reflect" || !(cue.amount > 0) || !Number.isFinite(cue.amount) || !Number.isFinite(age) || age < 0 || time >= cue.at + .45 || !valid(target)) return null;
+  const origin = cue.sourceId != null && String(cue.sourceId) !== String(cue.targetId) && valid(source) ?
+    { x: source.x, y: source.y - source.height * .5, height: source.height, width: source.width || source.height * .6 } : null;
+  return { renderer: "reflection-return", image: null, kind: "impact", effectKind: "reflect",
+    x: target.x, y: target.y - target.height * .5, size: Math.max(12, Math.min(90, target.height * .42)),
+    bodyWidth: target.width || target.height * .6, origin, age, reducedMotion,
+    eventId: cue.eventId, sourceId: cue.sourceId, targetId: cue.targetId,
+    eventAt: cue.eventAt ?? cue.at, amount: cue.amount, critical: false };
+}
+
+function reflectionReturnPath(command) {
+  if (!command.origin) return null;
+  const from = command.origin, dx = command.x - from.x, dy = command.y - from.y;
+  const distance = Math.hypot(dx, dy);
+  if (distance < 4) return null;
+  const ux = dx / distance, uy = dy / distance;
+  const startInset = Math.min(distance * .2, from.width * .4);
+  const endInset = Math.min(distance * .15, command.bodyWidth * .25);
+  const start = { x: from.x + ux * startInset, y: from.y + uy * startInset };
+  const end = { x: command.x - ux * endInset, y: command.y - uy * endInset };
+  const lift = Math.min(36, distance * .16);
+  const control = { x: (start.x + end.x) * .5, y: (start.y + end.y) * .5 - lift };
+  const progress = command.reducedMotion ? 1 : Math.min(1, Math.max(0, command.age / .18));
+  const sample = t => ({ x: (1-t)**2*start.x + 2*(1-t)*t*control.x + t*t*end.x,
+    y: (1-t)**2*start.y + 2*(1-t)*t*control.y + t*t*end.y });
+  const head = sample(progress);
+  const angle = Math.atan2((1-progress)*(control.y-start.y)+progress*(end.y-control.y),
+    (1-progress)*(control.x-start.x)+progress*(end.x-control.x));
+  return { start, end, control, progress, head, angle, sample };
+}
+
+function drawReflectionReturn(context, command) {
+  if (command.renderer !== "reflection-return" || !(command.amount > 0) || !Number.isFinite(command.age) || command.age < 0 || command.age >= .45) return false;
+  const progress = command.age / .45, path = reflectionReturnPath(command);
+  const weight = Math.max(1.5, Math.min(3.5, command.size * .06));
+  context.save();
+  context.lineCap = "round"; context.lineJoin = "round";
+  context.strokeStyle = "#e3baff"; context.fillStyle = "#f5dcff";
+  if (path) {
+    // Keep the causal route visible while the brighter arrow travels back.
+    context.globalAlpha = (1 - progress) * .4;
+    context.lineWidth = weight;
+    context.beginPath(); context.moveTo(path.start.x, path.start.y);
+    context.quadraticCurveTo(path.control.x, path.control.y, path.end.x, path.end.y); context.stroke();
+    context.globalAlpha = (1 - progress) ** .55;
+    context.lineWidth = weight * 1.4;
+    const tail = command.reducedMotion ? 0 : Math.max(0, path.progress - .38);
+    context.beginPath();
+    const start = path.sample(tail); context.moveTo(start.x, start.y);
+    for (let step = 1; step <= 8; step++) {
+      const point = path.sample(tail + (path.progress - tail) * step / 8);
+      context.lineTo(point.x, point.y);
+    }
+    context.stroke();
+    const arrow = Math.max(5, Math.min(11, command.size * .22));
+    context.beginPath(); context.moveTo(path.head.x, path.head.y);
+    context.lineTo(path.head.x - Math.cos(path.angle - .55) * arrow, path.head.y - Math.sin(path.angle - .55) * arrow);
+    context.lineTo(path.head.x - Math.cos(path.angle + .55) * arrow, path.head.y - Math.sin(path.angle + .55) * arrow);
+    context.closePath(); context.fill();
+    // A small outward flare identifies the reflecting body, not a second hit.
+    context.globalAlpha = command.reducedMotion ? .65 : Math.max(0, 1 - command.age / .22);
+    context.lineWidth = weight;
+    const radius = Math.max(5, Math.min(20, command.origin.height * .15));
+    const angle = Math.atan2(path.end.y-path.start.y, path.end.x-path.start.x);
+    context.beginPath(); context.arc(path.start.x, path.start.y, radius, angle - 1.1, angle + 1.1); context.stroke();
+  }
+  // The original attacker receives a compact, distinct damage burst. No shield
+  // artwork is reused, including when an endpoint or image asset is unavailable.
+  context.globalAlpha = (1 - progress) ** .7;
+  context.lineWidth = weight;
+  const radius = command.size * (command.reducedMotion ? .42 : .28 + progress * .25);
+  context.beginPath();
+  for (let ray = 0; ray < 6; ray++) {
+    const angle = ray * Math.PI / 3 + Math.PI / 6;
+    context.moveTo(command.x + Math.cos(angle) * radius * .45, command.y + Math.sin(angle) * radius * .45);
+    context.lineTo(command.x + Math.cos(angle) * radius, command.y + Math.sin(angle) * radius);
+  }
+  context.stroke(); context.restore();
+  return true;
+}
+
+return { reflectionReturnCommand, reflectionReturnPath, drawReflectionReturn };
+})();
 modules["client/combat-detail-vfx.mjs"] = (() => {
+const { reflectionReturnCommand, drawReflectionReturn } = modules["client/combat-reflection-vfx.mjs"];
 const { CREATURE_RANGED_EFFECTS, CREATURE_RANGED_EFFECT_ASSETS, creatureRangedEffectCommand, creatureRangedBodyCanvas, creatureRangedFlightPoint, creatureRangedChargeCommand } = modules["client/creature-ranged-vfx.mjs"];
 const { CREATURE_RANGED_ANIMATIONS, creatureRangedOutlet } = modules["client/creature-ranged.mjs"];
 const { unitRangedProjectile } = modules["client/unit-ranged.mjs"];
@@ -92055,16 +92146,8 @@ function projectileClip(agent) {
   // its separate ranged-body animation. Mixed and appendage builds still fire.
   return agent && !agent.species && ["bean", "spore", "pebble", "spring"].includes(tribe) ? DETAIL_COMBAT_VFX[tribe] : null;
 }
-function combatReflectionCommand(cue, point, time, direction) {
-  const age = time - cue.at;
-  if (!(cue.amount > 0) || age < 0 || age >= .45 || !point) return null;
-  const progress = age / .45;
-  const size = Math.min(300, Math.max(24, point.height * 1.45)) * (1 + Math.sin(progress * Math.PI) * .12);
-  return { image: DETAIL_DEFENSE_VFX.block, columns: 1, frame: 0,
-    x: point.x, y: point.y - point.height * .5, size, angle: 0, mirrorX: direction > 0,
-    filter: "hue-rotate(90deg) saturate(1.3)", alpha: (1 - progress) ** .65,
-    kind: "impact", effectKind: "reflect", eventId: cue.eventId, sourceId: cue.sourceId, targetId: cue.targetId,
-    eventAt: cue.eventAt ?? cue.at, amount: cue.amount, critical: false };
+function combatReflectionCommand(cue, point, time, from, options) {
+  return reflectionReturnCommand(cue, point, time, from, options);
 }
 function createDetailCombatVfx() {
   const impacts = new Map(), vitals = new Map(), deaths = new Map(), anchors = new Map(), flightAnchors = new Map(), defenses = new Map();
@@ -92218,7 +92301,7 @@ function createDetailCombatVfx() {
       const source = byId.get(String(cue.sourceId));
       if (cue.kind === "reflect") {
         const from = positions.get(String(cue.sourceId));
-        const reflection = combatReflectionCommand(cue, point, time, from ? Math.sign(from.x - point.x) : 0);
+        const reflection = combatReflectionCommand(cue, point, time, from, view);
         if (reflection) result.push(reflection);
         continue;
       }
@@ -92290,7 +92373,7 @@ function layoutDetailCombatLabels(context, { vitals = [], defenses = [], dodges 
     if (command.kind === "regeneration") return command;
     if (++labelCount > 32 || width < 32 || height < 48) return { ...command, labelHidden: true };
     const critical = command.directDamage && command.critical;
-    const text = command.caption ?? ((command.kind === "reflect" ? "반사 " : "") + (command.channel === "restore" ? "+" : "−") + vitalAmount(command.amount));
+    const text = command.caption ?? ((command.kind === "reflect" ? "반사 피해 " : "") + (command.channel === "restore" ? "+" : "−") + vitalAmount(command.amount));
     let measured, tagWidth = 0;
     context.save();
     try {
@@ -92366,7 +92449,7 @@ function drawDetailVitalEffect(context, command, options) {
     const labelX = command.labelX ?? command.x, critical = command.directDamage && command.critical;
     // Keep fractional positive HP changes readable without inventing zero.
     const amount = vitalAmount(command.amount);
-    const label = (command.kind === "reflect" ? "반사 " : "") + (restore ? "+" : "−") + amount;
+    const label = (command.kind === "reflect" ? "반사 피해 " : "") + (restore ? "+" : "−") + amount;
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
     context.font = (critical ? "800 " : "700 ") + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
     context.lineWidth = 3; context.strokeStyle = "#203125"; context.fillStyle = restore ? "#c1ffc4" : command.kind === "reflect" ? "#d6b5ff" : critical ? "#ffda8a" : "#fff9df";
@@ -92380,6 +92463,7 @@ function drawDetailVitalEffect(context, command, options) {
   context.restore();
 }
 function drawDetailVfxCell(context, image, command, rendering) {
+  if (command.renderer === "reflection-return") return drawReflectionReturn(context, command);
   if (!image?.complete || !image.naturalWidth) return false;
   const columns = command.columns || 4, cell = command.frameWidth || image.naturalWidth / columns;
   const sourceHeight = command.frameHeight || (columns === 1 ? image.naturalHeight : cell);
@@ -93287,7 +93371,7 @@ function createCombatStage(canvas) {
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
     context.font = (event.critical ? "800 " : "700 ") + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
     context.lineWidth = 4; context.strokeStyle = "#203125";
-    let label = event.damage > 0 ? (event.kind === "reflect" ? "반사 −" : "−") + event.damage.toFixed(1) : reactionLabels[event.kind];
+    let label = event.damage > 0 ? (event.kind === "reflect" ? "반사 피해 −" : "−") + event.damage.toFixed(1) : reactionLabels[event.kind];
     if (event.kind === "stun" || event.kind === "counter") context.font = '700 12px "Malgun Gothic", sans-serif';
     if (label) {
       context.fillStyle = event.kind === "reflect" ? "#d6b5ff" : event.critical ? "#ffda8a" : ["parry", "block", "dodge"].includes(event.kind) ? "#d3f1ff" : event.kind === "counter" ? "#ffe0ae" : "#fff9df";
@@ -93405,10 +93489,11 @@ function createCombatStage(canvas) {
     let defenseCommands = vfx?.version === 1 ? detailVfx.defenseCommands(new Map(Object.entries(points)), clock) : [];
     const replacedDefenseIds = new Set(defenseCommands.filter(command => detailDefenseImageReady(image(command.image), command)).map(command => command.eventId));
     const drawnFlights = new Set(), drawnImpacts = new Set(), flightCommands = new Map();
-    if (vfx?.version === 1 && !reducedMotion.matches) {
+    if (vfx?.version === 1) {
       const commands = detailVfx.commands(trial.agents.map(stageAgent), new Map(Object.entries(points)), clock,
-        100 * formationScale(width, height), { scope: trial, width, height, simulationTime: trial.time, snapshotTime: Number.isFinite(trial.snapshotTime) ? clock - Math.max(0, trial.time - trial.snapshotTime) : clock, project: viewLayout.project, unproject: viewLayout.unproject, cell: viewLayout.cell });
+        100 * formationScale(width, height), { scope: trial, width, height, reducedMotion: reducedMotion.matches, simulationTime: trial.time, snapshotTime: Number.isFinite(trial.snapshotTime) ? clock - Math.max(0, trial.time - trial.snapshotTime) : clock, project: viewLayout.project, unproject: viewLayout.unproject, cell: viewLayout.cell });
       for (const command of commands) {
+        if (reducedMotion.matches && command.effectKind !== "reflect") continue;
         if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         const key = command.kind === "flight" && flightKey(command.sourceId, command.targetId, command.launchedAt, command.arrivesAt);
         if (key) flightCommands.set(key, command);

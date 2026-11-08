@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createCombatVfxCursor } from "./combat-vfx-events.mjs";
-import { createDetailCombatVfx, DETAIL_COMBAT_VFX, DETAIL_DEFENSE_VFX } from "./combat-detail-vfx.mjs";
+import { createDetailCombatVfx, DETAIL_COMBAT_VFX } from "./combat-detail-vfx.mjs";
 import { createCombat } from "../server/combat.mjs";
 import { ATTRIBUTE_DNA } from "../server/dna.mjs";
 import { snapshotCombatVfx } from "../server/combat-vfx-journal.mjs";
@@ -28,8 +28,8 @@ test("area and reflection remain visually distinct at the actual damaged recipie
       const event = damage(kind, "other", { mode, projectileId: "parent-shot", critical: true });
       const commands = draw(1.05, [event], [source, ...agents.slice(1)]);
       assert.equal(commands.length, 1, tribe + ":" + mode + ":" + kind);
-      assert.equal(commands[0].image, kind === "reflect" ? DETAIL_DEFENSE_VFX.block : DETAIL_COMBAT_VFX.hit.image);
-      if (kind === "reflect") { assert.equal(commands[0].effectKind, "reflect"); assert.match(commands[0].filter, /hue-rotate/); }
+      assert.equal(commands[0].image, kind === "reflect" ? null : DETAIL_COMBAT_VFX.hit.image);
+      if (kind === "reflect") { assert.equal(commands[0].effectKind, "reflect"); assert.equal(commands[0].renderer, "reflection-return"); assert.equal(commands[0].origin.x, positions.get("source").x); }
       assert.equal(commands[0].kind, "impact");
       assert.equal(commands[0].targetId, "other");
       assert.equal(commands[0].x, positions.get("other").x);
@@ -45,7 +45,7 @@ test("simultaneous direct, splash and reflected hits remain distinct and never r
     damage("reflect", "source", { sourceId: "target", fromId: "target", toId: "source" })];
   const commands = draw(1.05, events);
   assert.deepEqual(commands.map(command => [command.targetId, command.image]).sort(), [
-    ["other", DETAIL_COMBAT_VFX.hit.image], ["source", DETAIL_DEFENSE_VFX.block], ["target", DETAIL_COMBAT_VFX.spring.image]
+    ["other", DETAIL_COMBAT_VFX.hit.image], ["source", null], ["target", DETAIL_COMBAT_VFX.spring.image]
   ]);
   assert.equal(draw(1.1, [...events.toReversed(), ...events]).length, 3);
   assert.equal(draw(1.42, events).length, 3, "every approved clip keeps its authored tail");
@@ -98,6 +98,8 @@ function serverScene() {
   combat.engage(source, target, 0);
   for (const agent of units) if (agent.combat?.position) Object.assign(agent.combat.position,
     { x: agent.ownerId === "left" ? -.4 : .4, y: 0, fromX: agent.ownerId === "left" ? -.4 : .4, fromY: 0 });
+  // Isolate this source's area/return exchange from the other combatants' own attacks.
+  for (const agent of units) if (agent !== source && agent.combat) agent.combat.nextAttackAt = Infinity;
   const tick = time => { environment.simSeconds = time; for (const agent of units) if (agent.health > 0) combat.update(agent, time); };
   return { units, source, environment, tick, rolls: () => rolls };
 }

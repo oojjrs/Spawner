@@ -366,7 +366,7 @@ export function createCombatStage(canvas) {
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
     context.font = (event.critical ? "800 " : "700 ") + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
     context.lineWidth = 4; context.strokeStyle = "#203125";
-    let label = event.damage > 0 ? (event.kind === "reflect" ? "반사 −" : "−") + event.damage.toFixed(1) : reactionLabels[event.kind];
+    let label = event.damage > 0 ? (event.kind === "reflect" ? "반사 피해 −" : "−") + event.damage.toFixed(1) : reactionLabels[event.kind];
     if (event.kind === "stun" || event.kind === "counter") context.font = '700 12px "Malgun Gothic", sans-serif';
     if (label) {
       context.fillStyle = event.kind === "reflect" ? "#d6b5ff" : event.critical ? "#ffda8a" : ["parry", "block", "dodge"].includes(event.kind) ? "#d3f1ff" : event.kind === "counter" ? "#ffe0ae" : "#fff9df";
@@ -484,10 +484,11 @@ export function createCombatStage(canvas) {
     let defenseCommands = vfx?.version === 1 ? detailVfx.defenseCommands(new Map(Object.entries(points)), clock) : [];
     const replacedDefenseIds = new Set(defenseCommands.filter(command => detailDefenseImageReady(image(command.image), command)).map(command => command.eventId));
     const drawnFlights = new Set(), drawnImpacts = new Set(), flightCommands = new Map();
-    if (vfx?.version === 1 && !reducedMotion.matches) {
+    if (vfx?.version === 1) {
       const commands = detailVfx.commands(trial.agents.map(stageAgent), new Map(Object.entries(points)), clock,
-        100 * formationScale(width, height), { scope: trial, width, height, simulationTime: trial.time, snapshotTime: Number.isFinite(trial.snapshotTime) ? clock - Math.max(0, trial.time - trial.snapshotTime) : clock, project: viewLayout.project, unproject: viewLayout.unproject, cell: viewLayout.cell });
+        100 * formationScale(width, height), { scope: trial, width, height, reducedMotion: reducedMotion.matches, simulationTime: trial.time, snapshotTime: Number.isFinite(trial.snapshotTime) ? clock - Math.max(0, trial.time - trial.snapshotTime) : clock, project: viewLayout.project, unproject: viewLayout.unproject, cell: viewLayout.cell });
       for (const command of commands) {
+        if (reducedMotion.matches && command.effectKind !== "reflect") continue;
         if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         const key = command.kind === "flight" && flightKey(command.sourceId, command.targetId, command.launchedAt, command.arrivesAt);
         if (key) flightCommands.set(key, command);

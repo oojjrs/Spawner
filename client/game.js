@@ -4585,13 +4585,13 @@
         if (cue.kind === "reflect" && cue.channel === "impact" && cue.amount > 0 && cue.to) {
           const target = visibleAgents().find(agent => String(agent.id) === String(cue.targetId));
           const point = worldToScreen(cue.to.x + .5, cue.to.y + .5), size = Spawner.unitDisplaySize(target || {}) * cell;
+          const source = visibleAgents().find(agent => String(agent.id) === String(cue.sourceId));
+          const origin = cue.from && source && worldToScreen(cue.from.x + .5, cue.from.y + .5);
+          const sourceSize = Spawner.unitDisplaySize(source || {}) * cell;
           const command = Spawner.combatReflectionCommand(cue, { x: point.x, y: point.y + size * .5, height: size },
-            state.simSeconds, cue.from ? Math.sign(cue.from.x - cue.to.x) : 0);
-          if (command) {
-            let image = detailVfxImages.get(command.image);
-            if (!image) { image = globalThis.SpawnerAssets.image(); image.src = assetSource(command.image); detailVfxImages.set(command.image, image); }
-            Spawner.drawDetailVfxCell(ctx, image, command, detailVfxRendering);
-          }
+            state.simSeconds, origin && { x: origin.x, y: origin.y + sourceSize * .5, height: sourceSize },
+            { reducedMotion: idleMotion.matches });
+          if (command) Spawner.drawDetailVfxCell(ctx, null, command, detailVfxRendering);
           continue;
         }
         if (cue.channel === "impact" && cue.mode === "ranged" && ["hit","critical","followup"].includes(cue.kind) &&

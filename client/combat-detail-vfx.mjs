@@ -1,3 +1,4 @@
+import { reflectionReturnCommand, drawReflectionReturn } from "./combat-reflection-vfx.mjs";
 import { CREATURE_RANGED_EFFECTS, CREATURE_RANGED_EFFECT_ASSETS, creatureRangedEffectCommand, creatureRangedBodyCanvas, creatureRangedFlightPoint, creatureRangedChargeCommand } from "./creature-ranged-vfx.mjs";
 import { CREATURE_RANGED_ANIMATIONS, creatureRangedOutlet } from "./creature-ranged.mjs";
 import { unitRangedProjectile } from "./unit-ranged.mjs";
@@ -35,16 +36,8 @@ function projectileClip(agent) {
   // its separate ranged-body animation. Mixed and appendage builds still fire.
   return agent && !agent.species && ["bean", "spore", "pebble", "spring"].includes(tribe) ? DETAIL_COMBAT_VFX[tribe] : null;
 }
-export function combatReflectionCommand(cue, point, time, direction) {
-  const age = time - cue.at;
-  if (!(cue.amount > 0) || age < 0 || age >= .45 || !point) return null;
-  const progress = age / .45;
-  const size = Math.min(300, Math.max(24, point.height * 1.45)) * (1 + Math.sin(progress * Math.PI) * .12);
-  return { image: DETAIL_DEFENSE_VFX.block, columns: 1, frame: 0,
-    x: point.x, y: point.y - point.height * .5, size, angle: 0, mirrorX: direction > 0,
-    filter: "hue-rotate(90deg) saturate(1.3)", alpha: (1 - progress) ** .65,
-    kind: "impact", effectKind: "reflect", eventId: cue.eventId, sourceId: cue.sourceId, targetId: cue.targetId,
-    eventAt: cue.eventAt ?? cue.at, amount: cue.amount, critical: false };
+export function combatReflectionCommand(cue, point, time, from, options) {
+  return reflectionReturnCommand(cue, point, time, from, options);
 }
 export function createDetailCombatVfx() {
   const impacts = new Map(), vitals = new Map(), deaths = new Map(), anchors = new Map(), flightAnchors = new Map(), defenses = new Map();
@@ -198,7 +191,7 @@ export function createDetailCombatVfx() {
       const source = byId.get(String(cue.sourceId));
       if (cue.kind === "reflect") {
         const from = positions.get(String(cue.sourceId));
-        const reflection = combatReflectionCommand(cue, point, time, from ? Math.sign(from.x - point.x) : 0);
+        const reflection = combatReflectionCommand(cue, point, time, from, view);
         if (reflection) result.push(reflection);
         continue;
       }
@@ -270,7 +263,7 @@ export function layoutDetailCombatLabels(context, { vitals = [], defenses = [], 
     if (command.kind === "regeneration") return command;
     if (++labelCount > 32 || width < 32 || height < 48) return { ...command, labelHidden: true };
     const critical = command.directDamage && command.critical;
-    const text = command.caption ?? ((command.kind === "reflect" ? "반사 " : "") + (command.channel === "restore" ? "+" : "−") + vitalAmount(command.amount));
+    const text = command.caption ?? ((command.kind === "reflect" ? "반사 피해 " : "") + (command.channel === "restore" ? "+" : "−") + vitalAmount(command.amount));
     let measured, tagWidth = 0;
     context.save();
     try {
@@ -346,7 +339,7 @@ export function drawDetailVitalEffect(context, command, options) {
     const labelX = command.labelX ?? command.x, critical = command.directDamage && command.critical;
     // Keep fractional positive HP changes readable without inventing zero.
     const amount = vitalAmount(command.amount);
-    const label = (command.kind === "reflect" ? "반사 " : "") + (restore ? "+" : "−") + amount;
+    const label = (command.kind === "reflect" ? "반사 피해 " : "") + (restore ? "+" : "−") + amount;
     context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
     context.font = (critical ? "800 " : "700 ") + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
     context.lineWidth = 3; context.strokeStyle = "#203125"; context.fillStyle = restore ? "#c1ffc4" : command.kind === "reflect" ? "#d6b5ff" : critical ? "#ffda8a" : "#fff9df";
@@ -360,6 +353,7 @@ export function drawDetailVitalEffect(context, command, options) {
   context.restore();
 }
 export function drawDetailVfxCell(context, image, command, rendering) {
+  if (command.renderer === "reflection-return") return drawReflectionReturn(context, command);
   if (!image?.complete || !image.naturalWidth) return false;
   const columns = command.columns || 4, cell = command.frameWidth || image.naturalWidth / columns;
   const sourceHeight = command.frameHeight || (columns === 1 ? image.naturalHeight : cell);

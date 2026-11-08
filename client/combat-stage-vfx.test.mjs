@@ -158,17 +158,18 @@ test("general melee impact uses approved hit cells and real simulation journals 
 });
 
 test("secondary damage distinguishes reflection and preserves its caption without artwork", async () => {
-  for (const kind of ["area", "reflect"]) for (const unavailable of [false, true]) {
+  for (const kind of ["area", "reflect"]) for (const unavailable of [false, true]) for (const reduced of (kind === "reflect" ? [false, true] : [false])) {
     await withStage(async ({ draw, calls }) => {
       const { trial, resolve } = setup("spring");
       await draw(trial); resolve(kind, 2);
       const art = await draw(trial);
       assert.equal(art.length, unavailable || kind === "reflect" ? 0 : 1);
       if (art.length) assert.ok(art[0].args[0].src.endsWith(root + "hit.png"));
-      if (kind === "reflect") assert.equal(calls.filter(call => call.name === "drawImage" && call.args[0]?.src?.endsWith("CombatDefenseV1/block.png")).length, unavailable ? 0 : 1);
-      assert.ok(calls.some(call => call.name === "fillText" && call.args[0] === (kind === "reflect" ? "반사 −2.0" : "−2.0")));
-      assert.equal(calls.filter(call => call.name === "lineTo").length, unavailable && kind !== "reflect" ? 8 : 0);
-    }, { unavailable });
+      if (kind === "reflect") assert.equal(calls.filter(call => call.name === "drawImage" && call.args[0]?.src?.endsWith("CombatDefenseV1/block.png")).length, 0);
+      assert.ok(calls.some(call => call.name === "fillText" && call.args[0] === (kind === "reflect" ? "반사 피해 −2.0" : "−2.0")));
+      if (kind === "reflect") assert.ok(calls.some(call => call.name === "quadraticCurveTo"), "return route is visible without an image");
+      else assert.equal(calls.filter(call => call.name === "lineTo").length, unavailable ? 8 : 0);
+    }, { unavailable, reduced });
   }
 });
 
