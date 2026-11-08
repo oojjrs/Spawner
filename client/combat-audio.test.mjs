@@ -1,7 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
-import { createContext, runInContext } from "node:vm";
+import { runInContext } from "node:vm";
+import { createGameTestContext as createContext } from "./game-runtime-test-fixture.mjs";
 import { createGame } from "../server/game.mjs";
 import { createCreatures } from "../server/creatures.mjs";
 import { AGENT_ATTACK_HIT_TIME } from "../server/attack.mjs";

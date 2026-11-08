@@ -28,7 +28,7 @@ async function fixture() {
   const scope = createContext({ AudioContext, performance, setTimeout, clearTimeout,
     SpawnerCombatAudio: { sources: { "beetle-attack": "beetle-attack.mp3" } },
     SpawnerMusic: { create: () => ({ unlock() {}, suspend() {}, update() {} }) },
-    SpawnerAssets: { source: file => file },
+    SpawnerAssets: { source: file => file, load: async file => file },
     fetch: async file => ({ ok: true, arrayBuffer: async () => file }),
     document: { hidden: false, getElementById: () => button, addEventListener() {} },
     window: { addEventListener() {} } });
@@ -62,7 +62,7 @@ test("줌 음량 변경은 재생 중인 전투·채집음에 즉시 반영하�
   sound.audio.setHarvest(new Map([["clay", .5]]));
   const harvest = sound.started.at(-1);
   const world = attack.output.output;
-  const attackLevel = attack.output.gain.value;
+  const attackLevel = attack.output.gain.value, harvestLevel = harvest.output.gain.value;
   assert.equal(harvest.output.output, world);
   assert.equal(world.output, sound.clock.destination);
   assert.equal(click.output.output, sound.clock.destination);
@@ -70,13 +70,13 @@ test("줌 음량 변경은 재생 중인 전투·채집음에 즉시 반영하�
   const starts = sound.started.length;
   sound.audio.setWorldVolume(.25);
   assert.equal(attack.output.gain.value * world.gain.value, attackLevel * .25);
-  assert.equal(harvest.output.gain.value * world.gain.value, .1);
+  assert.equal(harvest.output.gain.value * world.gain.value, harvestLevel * .25);
   assert.equal(click.output.gain.value, .3);
   assert.equal(discovery.output.gain.value, .65);
   assert.equal(sound.started.length, starts);
   sound.audio.setWorldVolume(1);
   assert.equal(attack.output.gain.value * world.gain.value, attackLevel);
-  assert.equal(harvest.output.gain.value * world.gain.value, .4);
+  assert.equal(harvest.output.gain.value * world.gain.value, harvestLevel);
 });
 
 test("3단계와 그보다 먼 줌은 무음이며 3단계보다 가까워질 때만 공간음을 허용한다", async () => {

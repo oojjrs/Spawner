@@ -1,3 +1,8 @@
+## 렌더·문서 검사 완료 [client-fixture-complete-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:22:29+09:00; 확인·기록 Codex /root, 출처현재채팅과담당보고.
+- client/{agent-movement,background,combat-audio,pebble-birth,spore-birth,spring-birth,room-entry,zoom-audio,soil-harvest-audio,neutral-selection,combat-corpse-facing,dominant-corpse-facing,bean-feet-death}.test.mjs와test전용game-runtime-test-fixture,design-test-fixture,unit-presentation-test-harness,corpse-test-fixture를완료고정했다. 초기31실패해결,공용helper최종영향agent/background20/20통과. 현재공용presentation에맞춰방향·원본셀·불투명도·좌표·로딩재시도·스냅샷불변을검사하며제품모킹우회가아닌협력객체fixture교정이다. 담당 /root/client_suite_audit자체검수보고와메인범위대조.
+
 ## 렌더·문서 검사 완료 [movement-doc-complete-01a1b8b3]
 
 - 기록 시각 2026-11-08T13:22:29+09:00; 확인·기록 Codex /root, 출처현재채팅과담당보고.
@@ -35,6 +40,11 @@
 - 폐기 자원치트 호출과 foragerMemory 전달 기대를 제거하되 종족 전환 상태/소유권 및 비동기 결과·Map/Set 전달 검사는 유지한다. 이전 재고는 현재 키 자체가 삭제되는 이행을 검사한다. DNA40종 및 체력 조각+20은 현행 카탈로그/스탯 계약을 따른다.
 - cheats 검사는 배포 준비 함수에 가짜revision/모든파일을runtime으로 주는 불완전 저장소 mock 대신 실제 productionRuntime 변환을 실행해 UI·worker치트제거와 직접명령거부를 유지한다. 실제 사이트 준비/배포는 최종 절차로 별도 확인한다.
 - neutral-stat-balance의 11월4일 감사는 appliedToGame=false인 과거 제안이다. 현재 소스 해시/현행DNA형식과 직접 비교하는 폐기 검사2개와 제안의 현재엔진 비교3행을 제거하고 당시 감사 수치·제안·검토 기록 자체 검사는 유지한다. 현재 스탯/DNA는 기존 server combat-critical-stats, DNA와경제검사 및 client neutral-stat-model에서 별도 검증한다. 과거감사JSON이나현재밸런스는변경하지않는다.
+
+## 추가 점검 판단 [client-ledger-correction-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:14:02+09:00; 판단·분담·기록 Codex /root, 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e 및 담당 보고.
+- 클라이언트 초기333실패의 정확 소유·해결 ledger는 client-suite-ledger.json에 저장했다. 이전 원화39라는 담당 보고는 오류로 정정한다: 초기36슬롯 중 환경1통과로35남음+환경해결후 새로 드러난 원본PNG누락1. 이시점 전체 초기슬롯 해결49(테스트fixture30,환경19), 남은284(클라이언트179/원화35/메인15/전투55)이며 이후 완료 보고와 합쳐 갱신한다.
 
 ## 추가 점검 판단 [movement-doc-fix-01a1b8b3]
 
@@ -75,6 +85,12 @@
 - 기록·확인 시각 2026-11-08T13:09:52+09:00; 판단·기록 Codex /root, 발견 /root/combat_tests_finish. 출처 현재 채팅·도구1aaa2f/76867f. 사용자 모든 경로 점검·복구 지시에 포함되는 실제 제품 불일치다.
 - server/dna-unit.mjs의 dnaCanAttack은 갑각을 공격 가능으로 판정하고 도감도 기본 공격력1로 적을 찾는다고 설명하지만 client/combat-simulation.mjs는 melee/ranged만 선공 가능으로 계산해 갑각끼리 실험을 no-offense로 끝낸다. 전투 엔진이 실제로 engage=true인 것과 모순된다.
 - 전투 담당에게 기존 공용 dnaCanAttack을 재사용하는 최소 제품 수정과 갑각/무공격 DNA를 구분하는 회귀 검사를 맡긴다. 임의의 밸런스 변경은 하지 않으며 번들 생성은 메인이 최종 소스에서 수행한다. 제품 수정은 테스트 교정과 별도 커밋한다.
+
+## 클라이언트 회귀 검사 환경·현행 계약 분리 [test-client-start-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:03:55+09:00; 담당 Codex /root/client_suite_audit 진단, 메인 기록. 전체333실패중52건combatPanel.close,12건unitPresentation,9건combatPanel,9건drawUnitAttackRing 등은현재game.js함수의협력객체가없는구형추출fixture다. 구부속지렌더경로의null width/calls와방향/승인자료계약도별도추적한다.
+- 기본python/py는Python3.14이며PIL없음. 설치된Codex동봉Python3.12/Pillow13을확인했고테스트자식환경PATH/PYTHONHOME만맞춰PIL미설치13건이모두통과했다. 시스템PATH나제품파일은변경하지않는다. 추가Python3/인코딩과canvas모듈탐색문제도테스트환경과제품실패를구분한다.
+- 클라이언트담당은실패한client검사와테스트전용지원파일에서실제공용렌더러/준비gate/새스냅샷계약을검사하도록fixture를정합화한다. 승인된방향정규화·증빙해시검사는원본승인/변환기록으로독립검증하며현재값복붙이나일괄skip/삭제를하지않는다. 이미폐기된renderer전용검사는동일보장의현행경로검사로옮긴다. 제품버그나제품경로수정이필요하면메인에보고해별도판단한다. 형식과수정된실패만후속검수하고커밋은렌더fixture/원화증빙/기동·환경등실제작업별로분리한다.
 
 ## 회생 포인트 경계 검사 해결 완료 [test-economy-complete-01a1b8b3]
 

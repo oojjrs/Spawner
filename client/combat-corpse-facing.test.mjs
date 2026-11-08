@@ -1,3 +1,5 @@
+import { corpseRenderer } from "./corpse-test-fixture.mjs";
+import { unitActionArtPose } from "./unit-action-art.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -52,54 +54,33 @@ test("전투 외형 사체는 사망 직전 표시 방향을 스냅샷과 저장
   }
 });
 
-function corpseRenderer() {
-  const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
-  const sprite = { width: 512, height: 512 }, calls = [];
-  const scope = createContext({
-    Spawner: { unitDisplayAttributes, hasCombatEvolution, COMBAT_ATTRIBUTE_KEYS: ["blade", "piercing", "carapace"] },
-    combatAttributeArt: { ready: () => true, frame: () => sprite },
-    corpsePlaybackTime: () => 10, AGENT_HEIGHT: .8,
-    agentDeathFrame: () => -1,
-    drawCreatureCorpse: () => "creature", drawSelectionOutline: (...args) => calls.push(["outline", ...args])
-  });
-  runInContext(source.match(/^    function drawAgentCorpse\([^]*?^    }/m)[0], scope);
-  let alpha = .8;
-  const stack = [];
-  const context = {
-    get globalAlpha() { return alpha; }, set globalAlpha(value) { alpha = value; },
-    save() { stack.push(alpha); }, restore() { alpha = stack.pop(); },
-    translate: (...args) => calls.push(["translate", ...args]),
-    scale: (...args) => calls.push(["scale", ...args]),
-    drawImage: (...args) => calls.push(["image", alpha, ...args])
-  };
-  return { scope, context, sprite, calls };
-}
-
-test("전투 부속지가 달린 사체만 살아 있을 때와 같은 좌우 방향으로 그린다", () => {
-  const { scope, context, sprite, calls } = corpseRenderer();
-  for (const tribe of ["bean", "spore", "pebble", "spring"]) {
-    for (const attributes of [{ blade: 1 }, { carapace: 1, feet: 1, antenna: 1 },
-      { blade: 1, piercing: 1, carapace: 1, feet: 2, strength: 1 }]) {
-      for (const facing of [-1, 1, undefined]) {
-        calls.length = 0;
-        const corpse = { tribe, facing, attributes, diedAt: 10 };
-        assert.equal(scope.drawAgentCorpse(context, corpse, 40, 80, 100, "outline", .5), true);
-        assert.deepEqual(calls.find(call => call[0] === "translate"), ["translate", 40, 80]);
-        assert.deepEqual(calls.find(call => call[0] === "scale"), ["scale", facing < 0 ? -1 : 1, 1]);
-        assert.deepEqual(calls.find(call => call[0] === "image"), ["image", .4, sprite, -80, -140, 160, 160]);
-        assert.equal(calls.filter(call => call[0] === "outline").length, 1);
-        assert.equal(context.globalAlpha, .8);
-      }
+test("전투 외형 사체는 완성 사망 프레임과 원본 방향을 한 번만 적용한다", async t => {
+  const render = corpseRenderer(t);
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const attributes of [{ blade: 1 }, { carapace: 1, antenna: 1 }])
+    for (const facing of [-1, 1, undefined]) {
+      const corpse = { tribe, facing, attributes, health: 0, kind: "corpse", diedAt: 10, decaysAt: 13 };
+      const pose = unitActionArtPose(corpse, 10.1);
+      await render.presentation.prepareAnimation(corpse, 10.1);
+      assert.equal(render.draw(corpse, 10.1, .5).action, "death");
+      assert.equal(render.draws.length, 1);
+      assert.equal(render.draws[0][0].src, pose.animation.image);
+      const target = facing < 0 ? "left" : "right";
+      assert.deepEqual(render.scales, [[pose.animation.sourceFacing === target ? 1 : -1, 1]]);
+      assert.deepEqual(render.translations, [[40, 80]]);
+      assert.deepEqual(render.context.alphas, [.4]);
+      assert.equal(render.outlines.length, 1);
+      assert.equal(render.context.globalAlpha, .8);
     }
-  }
 });
 
-test("기본형·일반 부속지와 중립 생물의 사체 경로는 바꾸지 않는다", () => {
-  const { scope, context, calls } = corpseRenderer();
-  for (const attributes of [{}, { feet: 1, antenna: 1 }]) {
-    calls.length = 0;
-    assert.equal(scope.drawAgentCorpse(context, { tribe: "bean", facing: -1, attributes }, 0, 0, 100, null, 1), false);
-    assert.deepEqual(calls, []);
+test("기본형과 일반 외형도 완성 사망 프레임을 쓰며 중립 생물은 전용 렌더러에 위임한다", async t => {
+  const render = corpseRenderer(t);
+  for (const attributes of [{}, { antenna: 1 }, { feet: 1 }]) {
+    const corpse = { tribe: "bean", facing: -1, attributes, health: 0, diedAt: 10 };
+    await render.presentation.prepareAnimation(corpse, 10.1);
+    assert.equal(render.draw(corpse, 10.1, 1).action, "death");
+    assert.equal(render.draws.length, 1);
   }
-  assert.equal(scope.drawAgentCorpse(context, { species: "soil-boar", facing: -1, attributes: {} }, 0, 0, 100, null, 1), "creature");
+  assert.equal(render.draw({ species: "soil-boar", facing: -1 }, 10.1, 1), "creature");
+  assert.equal(render.draws.length, 0);
 });

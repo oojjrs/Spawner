@@ -3,7 +3,8 @@ import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import { cloneDna } from "../server/dna-unit.mjs";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { createContext, runInContext } from "node:vm";
+import { runInContext } from "node:vm";
+import { createGameTestContext as createContext } from "./game-runtime-test-fixture.mjs";
 
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 const server = readFileSync(new URL("../server/game.mjs", import.meta.url), "utf8");
@@ -28,7 +29,7 @@ function fixture(faction) {
     selectObject: () => { state.selection = null; }, closeColonyMenu() {},
     ctx: { save() {}, restore() {}, setLineDash() {}, beginPath() {}, moveTo() {}, lineTo(x, y) { strokes.push([x, y]); },
       ellipse() {}, stroke() {}, fill() {} }, clamp: (n, low, high) => Math.max(low, Math.min(high, n)) });
-  for (const name of ["agentById", "isAgentSelectable", "selectableObjectAt", "updateSelection", "updateCameraFollow",
+  for (const name of ["combatGroups", "agentById", "isAgentSelectable", "selectableObjectAt", "updateSelection", "updateCameraFollow",
     "selectedMovementAgents", "drawSelectedAgentTarget", "drawSelectedAgentMovement"])
     runInContext(declaration(name), scope);
   return { scope, state, creature, own, strokes };

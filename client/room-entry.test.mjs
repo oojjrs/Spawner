@@ -319,7 +319,7 @@ function gameEntry() {
     setEvolutionText: (element, value) => { element.textContent = value; },
     pebbleBirthRuntime: { enter: async () => ({ stale: false }) }, rememberRoom() {},
     prepareTribeRendering: async () => {}, prepareAgentRendering: () => assets.promise,
-    prepareDetailVfx: () => effects.promise,
+    combatStage: { prepare: () => effects.promise },
     applySnapshot: () => { calls.push('snapshot'); context.connection.online = true; },
     terrainRendering: {}, closeEvolutionPanel() {}, closeColonyMenu() {}, selectObject() {}, state: {},
     document: { body: { dataset: { screen: 'welcome' } }, querySelector: () => app, getElementById: () => ({}) },

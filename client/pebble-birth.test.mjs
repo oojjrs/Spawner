@@ -1,7 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { createContext, runInContext } from "node:vm";
+import { runInContext } from "node:vm";
+import { createGameTestContext as createContext } from "./game-runtime-test-fixture.mjs";
 import { createNestGrowthPlayback, nestGrowthSounds } from "./nest-growth.mjs";
 import { PEBBLE_BIRTH_ANIMATION, pebbleBirthPlacement } from "./birth.mjs";
 

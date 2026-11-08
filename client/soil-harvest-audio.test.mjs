@@ -1,7 +1,9 @@
+import { readDesignSection } from "./design-test-fixture.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { createContext, runInContext } from "node:vm";
+import { runInContext } from "node:vm";
+import { createGameTestContext as createContext } from "./game-runtime-test-fixture.mjs";
 import { RESOURCE_TYPES } from "../server/resources.mjs";
 
 function audioFixture() {
@@ -23,7 +25,7 @@ function audioFixture() {
   const context = createContext({ document, AudioContext, window: { addEventListener() {} },
     SpawnerCombatAudio: { sources: { "beetle-death": "death.mp3" } },
     SpawnerMusic: { create: () => ({ update() {}, unlock() {}, suspend() {} }) },
-    SpawnerAssets: { source: value => value },
+    SpawnerAssets: { source: value => value, load: async value => value },
     fetch: async source => ({ ok: true, arrayBuffer: async () => ({ source }) }), setTimeout, performance });
   runInContext(readFileSync(new URL("./audio.js", import.meta.url), "utf8"), context);
   return { api: context.SpawnerAudio.create(), starts, stops, listeners, document, clock: () => clock };
@@ -105,7 +107,7 @@ test("화면의 비옥토 채집 개체만 흙 채널에 합산하며 채집 종
 
 
 test("현행 자원은 기획서의 채집 원본을 각각 재생하고 로컬 실행에도 포함된다", async () => {
-  const design = readFileSync(new URL("../Design.html", import.meta.url), "utf8");
+  const design = readDesignSection("food");
   const local = readFileSync(new URL("./local-assets.js", import.meta.url), "utf8");
   const sound = audioFixture();
   await sound.api.playClick();

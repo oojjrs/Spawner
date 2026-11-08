@@ -290,7 +290,7 @@ test("전투 확대 중 배경은 처음과 크기 변경 때만 그리고 창·
   const gameSource = readFileSync(new URL("./game.js", import.meta.url), "utf8");
   const renderSource = gameSource.match(/^    function render\(now\) \{[^]*?^    \}/m)?.[0];
   assert.ok(renderSource);
-  const calls = new Map(), audioTimes = [], modalTimes = [], frameTimes = [], effectTimes = [];
+  const calls = new Map(), audioTimes = [], modalTimes = [], frameTimes = [];
   const record = name => calls.set(name, (calls.get(name) || 0) + 1);
   const state = { lastFrame: 0, simSeconds: 0, ending: null, camera: { zoom: 4 }, agents: [], rivals: [], encounterSignals: [], combatVfx: {} };
   const delivery = { arrivesAt: 9.96 }, connection = { active: true, synchronizing: false, receivedAt: 0, simSeconds: 10 };
@@ -300,7 +300,6 @@ test("전투 확대 중 배경은 처음과 크기 변경 때만 그리고 창·
     foodDeliveries: new Map([["delivery", delivery]]), MOVEMENT_DELAY: .15, colonyEntries: [],
     appearanceWorldPoses: null, appearanceWorld: { prepare() { record("prepare"); return new Map(); } },
     combatVfxFrame: null, combatVfxCursor: { consume(packet, time) { record("vfx"); return { time }; } },
-    detailCombatVfx: { consume(frame, time) { assert.equal(frame.time, time); effectTimes.push(time); } },
     pebbleWorldDrawing: false, ctx: { clearRect: () => record("clear"), fillRect() {} },
     performance: { now: () => state.lastFrame },
     SpawnerFrameTiming: { allow: () => true, record: now => frameTimes.push(now) },
@@ -309,7 +308,7 @@ test("전투 확대 중 배경은 처음과 크기 변경 때만 그리고 창·
     "updateCameraTransition", "updateCameraFollow", "updateTreeMotion", "updateSelection", "updateHover", "drawTerrain", "drawGrid",
     "drawHazards", "drawTravelTraceLayer", "drawWorldBounds", "drawFlashes", "drawWorldObjects", "drawCombatAgents", "drawAttackImpacts",
     "drawCombatDust", "drawAgentGroups", "drawFoodDeliveries", "drawBurrowStatus", "drawFog", "positionHelpTooltip", "drawColonyImages",
-    "drawAgentAvatars", "scheduleRender"]) scope[name] = () => record(name);
+    "drawAgentAvatars", "updateBeginnerHelp", "updateCombatMarkers", "scheduleRender"]) scope[name] = () => record(name);
   runInContext(renderSource, scope);
   const expectedPaints = [1, 1, 2, 2, 3, 4, 5, 6, 6], times = expectedPaints.map((value, index) => 100 + index * 16);
   for (const [index, now] of times.entries()) {
@@ -320,17 +319,16 @@ test("전투 확대 중 배경은 처음과 크기 변경 때만 그리고 창·
     connection.receivedAt = now;
     connection.simSeconds = 10 + now / 1000;
     scope.render(now);
-    for (const name of ["prepare", "clear", "drawTerrain", "drawWorldObjects", "drawCombatAgents", "drawFog"])
+    for (const name of ["prepare", "clear", "drawTerrain", "drawWorldObjects", "drawFog"])
       assert.equal(calls.get(name), expectedPaints[index], name + " frame " + index);
     assert.equal(audioTimes.length, index + 1);
-    assert.equal(effectTimes.length, index + 1);
+    assert.equal(calls.get("updateCombatMarkers"), index + 1);
     assert.equal(modalTimes.length, index + 1);
     assert.equal(calls.get("vfx"), index + 1);
     assert.equal(calls.get("scheduleRender"), index + 1);
     assert.equal(state.lastFrame, now);
     assert.ok(Math.abs(state.simSeconds - (10 + now / 1000 - .15)) < 1e-9);
     assert.equal(audioTimes.at(-1), state.simSeconds);
-    assert.equal(effectTimes.at(-1), state.simSeconds);
     if (index === 1) assert.equal(delivery.receivedAtFrame, now);
   }
   assert.deepEqual(modalTimes, times);
