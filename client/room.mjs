@@ -76,7 +76,7 @@ export function createRoom(title, seed, tribe, onProgress, cheats, beginnerHelpE
   if (tribe === undefined) tribe = "bean";
   if (tribe !== null && !PLAYER_TRIBES.some(entry => entry.key === tribe)) throw new Error("시작할 부족을 선택해 주세요.");
   const room = { id: crypto.randomUUID(), title: requireName(title, 24),
-    hostId: crypto.randomUUID(), seed, cheats: cheats === true, beginnerHelp: beginnerHelpState({ enabled: beginnerHelpEnabled }), simSeconds: 0, revision: 0, updatedAt: Date.now(),
+    lastPlayedVersion: null, hostId: crypto.randomUUID(), seed, cheats: cheats === true, beginnerHelp: beginnerHelpState({ enabled: beginnerHelpEnabled }), simSeconds: 0, revision: 0, updatedAt: Date.now(),
     world: generateWorld(seed, undefined, progress => onProgress?.(progress * .8)), colonies: [], games: new Map(), food: new Map(), foodSpots: new Map() };
   for (const [x, y, amount, resourceType] of room.world.food) room.food.set(x + "," + y, { x, y, amount, initialAmount: amount, resourceType, terrain: terrainTypes[room.world.terrain[y * (room.world.size || 320) + x]] });
   populateResourceNodes(room);
@@ -94,6 +94,7 @@ export function createRoom(title, seed, tribe, onProgress, cheats, beginnerHelpE
 
 export function saveRoom(room) {
   return { version: 2, id: room.id, title: room.title, hostId: room.hostId, seed: room.seed, world: room.world,
+    lastPlayedVersion: room.lastPlayedVersion ?? null,
     cheats: room.cheats === true, beginnerHelp: beginnerHelpState(room.beginnerHelp), designIds: { ...room.designIds },
     worldGenerationVersion: room.world.generationVersion,
     simulationUpdates: [...room.games].map(([owner, game]) => [owner, simulationUpdates.get(room)?.get(game) || null]),
@@ -137,6 +138,7 @@ export function restoreRoom(saved) {
   } else world = generateWorld(saved.seed, saved.worldGenerationVersion ?? 1);
   const size = (world.size || 320);
   const room = { id: saved.id, title: requireName(saved.title, 24),
+    lastPlayedVersion: Number.isSafeInteger(saved.lastPlayedVersion) && saved.lastPlayedVersion >= 0 ? saved.lastPlayedVersion : null,
     hostId: saved.hostId, seed: saved.seed, cheats: saved.cheats === true, simSeconds: saved.simSeconds, revision: 0, updatedAt: saved.updatedAt,
     beginnerHelp: beginnerHelpState(saved.beginnerHelp || { enabled: saved.beginnerHelpEnabled }), designIds: { ...saved.designIds },
     resourceVersion: Number.isInteger(saved.resourceVersion) ? saved.resourceVersion : 0,

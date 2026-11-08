@@ -11,7 +11,7 @@ test("현재 시작 DNA 일꾼은 틱 간격이 달라도 1초 이동 후 쉬면
   environment.games.set("test", game);
   game.agents.splice(1);
   const agent = game.agents[0];
-  assert.equal(agent.stats.speed, .25);
+  assert.equal(agent.stats.speed, .5);
   const elapsed = [0.07, 0.11, 0.13, 0.09];
   let previous = null, moves = 0, rests = 0;
   for (let index = 0; index < 240; index++) {
@@ -29,7 +29,7 @@ test("현재 시작 DNA 일꾼은 틱 간격이 달라도 1초 이동 후 쉬면
     if (previous) assert.ok(Math.abs(agent.moveStartedAt - previous.readyAt) < 1e-7,
       "이동 후 휴지 시간을 지키면서 틱 대기 시간이 누적되면 안 됩니다.");
     previous = { step: agent.stepCount, endsAt: agent.moveStartedAt + agent.moveDuration,
-      readyAt: agent.moveStartedAt + 4 };
+      readyAt: agent.moveStartedAt + 1.5 };
     moves++;
   }
   assert.ok(moves >= 5);
@@ -47,7 +47,7 @@ function firstStep(terrain, movementType, species) {
   const agent = game.agents[0];
   agent.movementType = movementType;
   agent.species = species;
-  assert.equal(agent.stats.speed, .25);
+  assert.equal(agent.stats.speed, .5);
   let startedAt = null;
   for (let index = 0; index < 240; index++) {
     const previous = agent.stepCount;
@@ -64,13 +64,13 @@ function firstStep(terrain, movementType, species) {
 }
 
 test("지상 개체는 동작을 1초로 유지하고 저산 60%·고산 40%·능선 90%에 맞춰 이동 간격을 늘린다", () => {
-  assert.ok(Math.abs(firstStep(4, undefined, undefined) - 4) < 1e-7);
-  for (const [terrain, period] of [[6, 4 / .6], [7, 10], [8, 4 / .9]])
+  assert.ok(Math.abs(firstStep(4, undefined, undefined) - 1.5) < 1e-7);
+  for (const [terrain, period] of [[6, (1 + 2 / .6) / 2], [7, 3], [8, (1 + 2 / .9) / 2]])
     assert.ok(Math.abs(firstStep(terrain, undefined, undefined) - period) < 1e-7);
 });
 
 test("비행 이동 방식과 비행 종은 동작을 1초로 유지하고 숲·고산에서만 이동 간격을 늘린다", () => {
-  for (const [terrain, period] of [[5, 5], [6, 4], [7, 5], [8, 4]]) {
+  for (const [terrain, period] of [[5, 1.75], [6, 1.5], [7, 1.75], [8, 1.5]]) {
     assert.ok(Math.abs(firstStep(terrain, "flying", undefined) - period) < 1e-7);
     for (const species of ["flower-tail-bird", "talon-owl"])
       assert.ok(Math.abs(firstStep(terrain, undefined, species) - period) < 1e-7);
@@ -85,7 +85,7 @@ test("지상 개체는 빠른 평지 우회로를 고르고 비행 개체는 산
     explored: new Set(Array.from({ length: size * size }, (_, index) => index)) };
   const ai = createUtilityAI({ state, size, homeCells: () => [], deliveryCells: () => [],
     walkable: (x, y) => y >= 0 && y <= 2, hazardAt: () => 0, enemies: () => [], synergy: () => false,
-    terrainAt: (x, y) => y === 1 && x > 0 && x < 6 ? 6 : 4, canHarvest: () => true });
+    terrainAt: (x, y) => y === 1 && x > 0 && x < 6 ? 7 : 4, canHarvest: () => true });
   const target = { x: 6, y: 1 };
   const ground = ai.nextStep(agent, target);
   assert.notEqual(ground.y, 1);

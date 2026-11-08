@@ -57,6 +57,7 @@ export async function openStorage() {
 
   function roomListing(room) {
     return { id: room.id, title: room.title, seed: room.seed, updatedAt: room.updatedAt, simSeconds: room.simSeconds, ending: room.ending || null,
+      lastPlayedVersion: room.lastPlayedVersion ?? null,
       hostId: room.hostId, colonies: room.colonies.map(colony => ({ ownerId: colony.ownerId, tribe: colony.tribe })), worldPreview: roomWorldPreview(room) };
   }
 

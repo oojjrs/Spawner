@@ -1,7 +1,9 @@
 import { dnaCanAttack } from "./dna-unit.mjs";
-import { DNA_ACTION_RULES, dnaAttackMode, dnaDefensiveMelee } from "./dna-actions.mjs";
-import { creatureAttackRole, creatureAttackMode } from "./creature-attack-role.mjs";
+import { DNA_ACTION_RULES, dnaDefensiveMelee } from "./dna-actions.mjs";
+import { creatureAttackRole } from "./creature-attack-role.mjs";
 import { unitDisplaySize } from "../client/unit-size.mjs";
+
+export const COMBAT_MELEE_RANGE = .12;
 
 export function combatPositionRole(agent) {
   const role = creatureAttackRole(agent.species);
@@ -12,7 +14,7 @@ export function combatPositionRole(agent) {
 }
 
 export function combatPositionRadius(agent) {
-  return Math.max(.2, unitDisplaySize(agent) * .55);
+  return Math.max(.12, unitDisplaySize(agent) * (agent.species ? .5 : .35));
 }
 
 export function initializeCombatPosition(agent, units, time) {
@@ -39,9 +41,10 @@ export function combatSeparation(agent, target) {
 
 export function combatPositionMode(agent, target) {
   const distance = combatSeparation(agent, target);
-  if (agent.stats?.dna) return dnaAttackMode(agent.stats.dna, distance, agent.combat?.defending || dnaCanAttack(agent));
-  if (agent.species) return creatureAttackMode(agent, distance);
-  return distance <= DNA_ACTION_RULES.meleeRange ? "melee" : null;
+  const capabilities = agent.stats?.dna || agent.stats?.combat || creatureAttackRole(agent.species);
+  const defensiveMelee = dnaDefensiveMelee(agent.stats?.dna) && (agent.combat?.defending || dnaCanAttack(agent));
+  if ((!capabilities || capabilities.melee || defensiveMelee) && distance <= COMBAT_MELEE_RANGE + 1e-8) return "melee";
+  return capabilities?.ranged && distance <= DNA_ACTION_RULES.rangedRange ? "ranged" : null;
 }
 
 export function advanceCombatPositions(units, time) {
@@ -67,11 +70,10 @@ export function advanceCombatPositions(units, time) {
     const length = Math.hypot(dx, dy) || 1;
     const defensiveMelee = dnaDefensiveMelee(unit.stats?.dna) && (unit.combat.defending || dnaCanAttack(unit));
     if (capabilities && !capabilities.melee && !capabilities.ranged && !defensiveMelee) { next.set(unit, { x: position.x, y: position.y }); continue; }
-    const closeMelee = capabilities?.melee && separation <= DNA_ACTION_RULES.meleeRange;
-    const desired = role === "back" && capabilities?.ranged && !closeMelee ? 2.3 : .75;
-    const retreat = role === "back" && capabilities?.ranged && !capabilities.melee && separation < 1.8;
-    const travel = Math.min(Math.abs(separation - desired), Math.max(.25, unit.stats?.dna?.movement || unit.stats?.speed || .5) * 3 * elapsed);
-    const direction = retreat ? -1 : separation > desired + .05 ? 1 : 0;
+    const closeMelee = capabilities?.melee && separation <= COMBAT_MELEE_RANGE;
+    const desired = role === "back" && capabilities?.ranged && !closeMelee ? 2.3 : .08;
+    const travel = Math.min(Math.max(0, separation - desired), Math.max(.25, unit.stats?.dna?.movement || unit.stats?.speed || .5) * 3 * elapsed);
+    const direction = separation > desired + 1e-8 ? 1 : 0;
     next.set(unit, { x: Math.max(-8, Math.min(8, position.x + dx / length * travel * direction)),
       y: Math.max(-8, Math.min(8, position.y + dy / length * travel * direction)) });
   }

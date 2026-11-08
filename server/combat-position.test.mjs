@@ -1,7 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createSimulationTrial } from "../client/combat-simulation.mjs";
-import { combatPositionRadius, combatPositionRole } from "./combat-position.mjs";
+import { combatPositionRadius, combatPositionRole, combatSeparation } from "./combat-position.mjs";
+import { unitDisplaySize } from "../client/unit-size.mjs";
 import { createGame } from "./game.mjs";
 
 const passive = { key: "bean", organs: { attack: 0, ranged: 0 }, counts: { vitality: 500 } };
@@ -92,6 +93,41 @@ test("a melee windup cannot damage a target that leaves its reach", () => {
   trial.advance(attack.hitAt - trial.time + .02);
   near(target.health, health);
   assert.ok(trial.vfx.events.some(event => event.kind === "miss" && event.sourceId === source.id));
+});
+
+test("melee fighters reach body contact before starting attacks across sizes and sides", () => {
+  for (const key of ["bean", "spore", "pebble", "spring", "dew-rabbit", "white-paw"]) for (const side of [0, 1]) {
+    const fighter = { key, counts: { vitality: 80 } };
+    const trial = createSimulationTrial({ left: side ? passive : fighter, right: side ? fighter : passive, random: false });
+    const source = trial.agents[side], target = trial.agents[1 - side];
+    advanceUntil(trial, () => !!source.attack, 20);
+    assert.equal(source.attack.attackMode, "melee");
+    assert.ok(combatSeparation(source, target) < unitDisplaySize(source) * .4, key + " attacks within a fraction of its body size");
+    const health = target.health;
+    advanceUntil(trial, () => target.health < health, 25);
+  }
+});
+
+test("ranged fighters stand their ground while melee opponents close and keep firing at contact", () => {
+  for (const key of ["bean", "spore", "pebble", "spring", "lantern-keeper"]) for (const side of [0, 1]) {
+    const ranged = { key, organs: { attack: 0, ranged: 1 }, counts: { vitality: 500 } };
+    const melee = { key: "bean", counts: { vitality: 500 } };
+    const trial = createSimulationTrial({ left: side ? melee : ranged, right: side ? ranged : melee, random: false });
+    const source = trial.agents[side], target = trial.agents[1 - side];
+    const toward = side ? -1 : 1;
+    let previous = source.combat.position.x, shotsAtContact = 0, eventsSeen = 0;
+    while (!trial.reason && trial.time < 20 && shotsAtContact < 2) {
+      trial.advance(1 / 60);
+      const position = source.combat?.position;
+      if (!position) break;
+      assert.ok((position.x - previous) * toward >= -1e-7, key + " never steps away from the approaching opponent");
+      previous = position.x;
+      for (const event of trial.vfx.events.slice(eventsSeen)) if (event.kind === "shoot" && event.sourceId === source.id &&
+          combatSeparation(source, target) < unitDisplaySize(target) * .4) shotsAtContact++;
+      eventsSeen = trial.vfx.events.length;
+    }
+    assert.ok(shotsAtContact >= 2, key + " keeps shooting in close combat");
+  }
 });
 
 test("the real game snapshot and save restore retain authoritative battlefield positions", () => {

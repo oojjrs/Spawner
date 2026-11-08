@@ -2,7 +2,7 @@ import { isNestDefender } from "./nest-defender.mjs";
 import { basicRecoveryRate, UNIT_RECOVERY_RULES as SHARED_UNIT_RECOVERY_RULES } from "./unit-recovery.mjs";
 import { DNA_ACTION_RULES, dnaAttackMode, dnaDefensiveMelee, dnaProjectileDuration, dnaProjectileValid } from "./dna-actions.mjs";
 import { creatureAttackRole } from "./creature-attack-role.mjs";
-import { initializeCombatPosition, advanceCombatPositions, combatSeparation, combatPositionMode } from "./combat-position.mjs";
+import { COMBAT_MELEE_RANGE, initializeCombatPosition, advanceCombatPositions, combatSeparation, combatPositionMode } from "./combat-position.mjs";
 import { dnaCanMove, dnaCanSearch, dnaCanAttack } from "./dna-unit.mjs";
 import { worldSize } from "./world-size.mjs";
 import { dropCarriedResources } from "./resources.mjs";
@@ -530,7 +530,7 @@ export function createCombat(environment) {
       }
       return;
     }
-    if (combatSeparation(attacker, target.agent) > DNA_ACTION_RULES.meleeRange + 1e-8) {
+    if (combatSeparation(attacker, target.agent) > COMBAT_MELEE_RANGE + 1e-8) {
       active.resolved = true; attacker.attackHit = true;
       vfx("miss", time, attacker, target.agent, 0, { causeId: attackCauses.get(active), mode: "melee", critical: false });
       return;

@@ -9970,7 +9970,10 @@
           const seed = document.createElement("small");
           seed.className = "room-seed-label";
           seed.textContent = "시드 " + room.seed;
-          text.append(title, detail, seed);
+          const playedVersion = document.createElement("small");
+          playedVersion.className = "room-play-version";
+          playedVersion.textContent = Number.isSafeInteger(room.lastPlayedVersion) && room.lastPlayedVersion >= 0 ? "마지막 플레이 v" + room.lastPlayedVersion : "버전 기록 없음";
+          text.append(title, detail, playedVersion, seed);
           const join = document.createElement("button");
           join.type = "button";
           join.className = room.ending ? "secondary-action" : "primary-action";

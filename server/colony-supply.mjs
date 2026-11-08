@@ -1,6 +1,6 @@
 import { basicGathererDna } from "./dna-unit.mjs";
 import { militaryAgent } from "./conquest-pacing.mjs";
-import { HARVEST_ATTRIBUTE_KEYS, birthCost, unitCarryCapacity, unitTravelSpeed } from "./attributes.mjs";
+import { HARVEST_ATTRIBUTE_KEYS, birthCost, unitCarryCapacity, unitTravelSpeed, unitMovementInterval } from "./attributes.mjs";
 
 // Recovery design and price are catalog constants, not per-decision work.
 const DNA_RECOVERY_COST = birthCost({ dna:basicGathererDna() });
@@ -52,7 +52,7 @@ export function colonyForagers(state, foods, homes) {
     const travel = foods.reduce((best, food) => {
       const capacity = unitCarryCapacity(agent, food.resourceType);
       const returnSpeed = unitTravelSpeed(agent, capacity, food.resourceType);
-      const seconds = distance(agent, food) / speed + homes.reduce((home, cell) => Math.min(home, distance(food, cell) / returnSpeed), Infinity);
+      const seconds = distance(agent, food) * unitMovementInterval(speed) + homes.reduce((home, cell) => Math.min(home, distance(food, cell) * unitMovementInterval(returnSpeed)), Infinity);
       efficiency = Math.min(efficiency, seconds / Math.max(.01, capacity));
       return Math.min(best, seconds);
     }, Infinity);

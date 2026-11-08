@@ -117,9 +117,9 @@ function derive(build, rules) {
   }
   const counts = Object.fromEntries(Object.entries(build.counts).map(([key, value]) => [geneKeys[key] || key, value]));
   Object.assign(counts, { blade: build.organs.attack, secretion: build.organs.ranged });
-  const dna = { ...dnaCombatStats(counts, counts, rules, build.key), movement: .25 * tribeDnaStats(build.key).base.movement, vision: 1, roaming: true };
+  const dna = { ...dnaCombatStats(counts, counts, rules, build.key), movement: tribeDnaStats(build.key).base.movement, vision: 1, roaming: true };
   const interval = speed => speed > 0 ? 1 / speed : Infinity;
-  const result = { dna, HP: dna.health, health: dna.health, speed: dna.movement, loadedSpeed: dna.movement * .75, vision: dna.vision,
+  const result = { dna, HP: dna.health, health: dna.health, speed: dna.movement, loadedSpeed: dna.movement * tribeDnaStats(build.key).base.loadSpeed / 100, vision: dna.vision,
     attackPower: dna.meleePower, defense: dna.armor, meleePower: dna.meleePower, rangedPower: dna.rangedPower,
     attackSpeed: dna.meleeSpeed, meleeSpeed: dna.meleeSpeed, rangedSpeed: dna.rangedSpeed,
     attackInterval: interval(dna.meleeSpeed), rangedAttackInterval: interval(dna.rangedSpeed),

@@ -28,7 +28,7 @@ test("stack prices are order independent and every split pays extra body bases",
 test("physical organ copies preserve basic role throughput without extra hits or attack rate",()=>{
   const six=id=>M.stats(Array.from({length:6},()=>piece(id)));
   const gather=six("gather"),blade=six("blade"),ranged=six("secretion"),antenna=six("antenna");
-  assert.equal(gather.capacity,6);assert.equal(gather.harvest,1);assert.equal(gather.harvestTime,3);assert.equal(gather.loadSpeed,75);assert.equal(gather.health,10);
+  assert.equal(gather.capacity,6);assert.equal(gather.harvest,1);assert.equal(gather.harvestTime,1);assert.equal(gather.loadSpeed,80);assert.equal(gather.health,10);
   assert.equal(blade.meleePower,12);assert.equal(blade.meleeSpeed,.5);assert.equal(blade.hits,1);assert.equal(blade.rangedPower,0);
   assert.ok(Math.abs(ranged.rangedPower-8.4)<1e-9);assert.equal(ranged.rangedSpeed,.5);assert.equal(ranged.hits,1);assert.equal(ranged.meleePower,0);
   assert.equal(antenna.vision,1);
@@ -53,11 +53,11 @@ function gameFixture(n,dna,tribe){
 
 test("real gather loop collects one at a time until full and deposits the whole load",()=>{
   for(const n of [1,6]){
-    const f=gameFixture(n,undefined,'bean');f.tick(1);assert.equal(f.agent.carrying,0);for(let count=1;count<=n;count++){f.tick(1+3*count);assert.equal(f.agent.carrying,count);assert.equal(f.food.amount,20-count);assert.equal(f.agent.harvestResult.amount,1);}
+    const f=gameFixture(n,undefined,'bean');f.tick(1);assert.equal(f.agent.carrying,0);for(let count=1;count<=n;count++){f.tick(1+count);assert.equal(f.agent.carrying,count);assert.equal(f.food.amount,20-count);assert.equal(f.agent.harvestResult.amount,1);}
     assert.equal(f.food.amount,20-n);assert.equal(f.agent.carrying,n);assert.equal(f.agent.harvestResult.amount,1);
-    assert.equal(unitTravelSpeed(f.agent,n,"clay"),.1875);
-    Object.assign(f.agent,{x:40,y:40,renderFromX:40,renderFromY:40,mode:"unload",unloadReady:2+3*n,nextDecisionAt:100000,decisionPending:null,moveDuration:0,utility:{action:"return",target:{x:40,y:40},route:[]}});
-    const before=f.game.snapshot().evolutionPoints;f.tick(2+3*n);assert.equal(f.agent.carrying,0);assert.equal(f.game.snapshot().evolutionPoints,before+n);assert.equal(f.agent.foodDelivery.amount,n);
+    assert.equal(unitTravelSpeed(f.agent,n,"clay"),.4);
+    Object.assign(f.agent,{x:40,y:40,renderFromX:40,renderFromY:40,mode:"unload",unloadReady:2+n,nextDecisionAt:100000,decisionPending:null,moveDuration:0,utility:{action:"return",target:{x:40,y:40},route:[]}});
+    const before=f.game.snapshot().evolutionPoints;f.tick(2+n);assert.equal(f.agent.carrying,0);assert.equal(f.game.snapshot().evolutionPoints,before+n);assert.equal(f.agent.foodDelivery.amount,n);
     const paid=f.agent.cost;f.game.restore(f.game.save());assert.equal(f.game.agents.find(a=>a.id===f.agent.id).cost,paid);
   }
 });
@@ -73,7 +73,7 @@ test("historical paid cost and DNA survive restore while new births require the 
 test("운반은 한도만 늘리고 채집 속도는 1개를 캐는 시간을 줄인다",()=>{
   for(const [capacity,speed] of [[1,0],[4,0],[4,2]]){
     const genes=['gather',...Array(capacity-1).fill('capacity'),...Array(speed).fill('harvestSpeed')],dna={version:6,pieces:M.pack(genes.map(piece),1),level:1,budget:500};assert.ok(validateDna(dna,1,500));
-    const stats=M.stats(dna.pieces),f=gameFixture(capacity,dna,'bean'),interval=3*(100-10*speed)/100;assert.equal(stats.harvest,1);assert.equal(stats.capacity,capacity);assert.equal(stats.harvestTime,interval);f.tick(1);
+    const stats=M.stats(dna.pieces),f=gameFixture(capacity,dna,'bean'),interval=(100-10*speed)/100;assert.equal(stats.harvest,1);assert.equal(stats.capacity,capacity);assert.equal(stats.harvestTime,interval);f.tick(1);
     for(let count=1;count<=capacity;count++){f.tick(1+interval*count-.001);assert.equal(f.agent.carrying,count-1);f.tick(1+interval*count+.001);assert.equal(f.agent.carrying,count);assert.equal(f.food.amount,20-count);assert.equal(f.agent.harvestResult.amount,1);if(count<capacity)assert.equal(f.agent.mode,'harvest');}
   }
   assert.equal(M.stats([piece('capacity')]).harvest,0);assert.equal(M.stats([piece('gather'),piece('harvest'),piece('capacity')]).harvest,1);assert.equal(M.catalog.some(g=>g.id==='harvest'),false);
@@ -83,14 +83,14 @@ test("DNA 수집 계획은 한도까지 1개씩 캐는 시간과 자원 부족�
   const dna={version:6,pieces:M.pack(['gather','capacity','capacity','capacity'].map(piece),1),level:1,budget:500},size=14,stats=dnaUnitStats(dna),agent={id:'worker',tribe:'bean',x:1,y:1,dna,stats,attributes:{},slots:[],carrying:0,health:stats.health,bornAt:0,lifespan:180,cost:28,personality:{boldness:0,aggression:0,curiosity:0}},food={x:3,y:1,key:'3,1',resourceType:'clay',amount:20},home={x:1,y:1};
   const state={simSeconds:0,evolutionPoints:0,colonyFood:0,lastFoodAt:0,nestLevel:1,agents:[agent],knownFood:new Map([[food.key,food]]),resourceInventory:{},markers:[],explored:new Set(Array.from({length:size*size},(_,index)=>index))};
   const ai=createUtilityAI({state,size,tribe:'bean',homeCells:()=>[home],deliveryCells:()=>[home],walkable:(x,y)=>y===1,hazardAt:()=>0,enemies:()=>[],synergy:()=>false,canHarvest:()=>true,terrainAt:()=>4,materialSpace:()=>200,isFood:()=>true,harvestSeconds:()=>stats.dna.harvestTime});
-  const full=ai.evaluate(agent,false).find(p=>p.action==='collect');assert.ok(full);assert.equal(full.plannedCargo,4);assert.ok(Math.abs(full.deliverySeconds-(2/.25+1+3*4+2/.1875+1))<1e-9);
+  const full=ai.evaluate(agent,false).find(p=>p.action==='collect');assert.ok(full);assert.equal(full.plannedCargo,4);assert.ok(Math.abs(full.deliverySeconds-(2*1.5+1+4+2*1.75+1))<1e-9);
   food.amount=2;const partial=ai.evaluate(agent,false).find(p=>p.action==='collect');assert.equal(partial.plannedCargo,2);
-  food.amount=20;stats.dna.harvestTime=0;const instant=ai.evaluate(agent,false).find(p=>p.action==='collect');assert.equal(instant.plannedCargo,4);assert.ok(Math.abs(instant.deliverySeconds-(2/.25+1+2/.1875+1))<1e-9);
+  food.amount=20;stats.dna.harvestTime=0;const instant=ai.evaluate(agent,false).find(p=>p.action==='collect');assert.equal(instant.plannedCargo,4);assert.ok(Math.abs(instant.deliverySeconds-(2*1.5+1+2*1.75+1))<1e-9);
 });
 
 
 test("종족별 채집 간격은 기본 시간의 백분율로 줄고 100%부터 즉시 한도까지 채집한다",()=>{
-  for(const [tribe,base] of [['bean',3],['spore',3],['pebble',3],['spring',3]])for(const speed of [0,1,5,9,10,11]){
+  for(const [tribe,base] of [['bean',1],['spore',1],['pebble',1],['spring',1]])for(const speed of [0,1,5,9,10,11]){
     const genes=['gather','capacity','capacity','capacity',...Array(speed).fill('harvestSpeed')];
     const dna={version:6,pieces:M.pack(genes.map(piece),4),level:4,budget:1000};assert.ok(validateDna(dna,4,1000));
     const capacity=tribe==='pebble'?5:4,f=gameFixture(capacity,dna,tribe),interval=base*Math.max(0,100-speed*10)/100;

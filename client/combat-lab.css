@@ -66,3 +66,7 @@ main{padding:16px 8px 32px}.stage-hud{gap:8px 18px;padding:14px 12px 0}.stage-si
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
 
 .roster-actions{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.roster-actions button{min-height:32px;padding:4px 8px;font-size:11px;background:#2b4434;color:#e9edda;border-color:#a6bf8659}.roster-actions button:hover:not(:disabled){background:#3c5740;border-color:#a6bf8699}.roster-actions button:disabled{background:#304236;color:#bdcbbb;border-color:#627760;opacity:1;cursor:default}
+.stage-center>.status{order:-1}
+.stage-view>.combat-result{position:absolute;top:50%;left:0;right:0;width:100%;justify-self:stretch;translate:0 -50%;z-index:1;padding:24px 12px;border:0;border-radius:0;max-width:none;text-align:center;font-size:clamp(36px,6vw,64px);font-weight:800;letter-spacing:.15em;color:#f6da88;background:linear-gradient(90deg,transparent,#10251feb 25%,#10251feb 75%,transparent);text-shadow:0 3px 16px #000b;pointer-events:none;animation:combat-result-enter .45s ease-out both}
+@keyframes combat-result-enter{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.stage-view>.combat-result{animation:none}}

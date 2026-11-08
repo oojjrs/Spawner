@@ -12,7 +12,7 @@ const selected = { left: 0, right: 0 };
 const rules = { ...DEFAULT_SIMULATION_RULES };
 const audio = globalThis.SpawnerCombatAudio.createPlayer(), audioPlayback = globalThis.SpawnerCombatAudio.create();
 let trial, playing = false, lastFrame = 0, controlId = 0;
-let stageReady = false, stagePreparation = null, stageError = null;
+let stageReady = false, stagePreparation = null, stageError = null, resultStartedAt = null;
 const main = document.querySelector("main");
 main.replaceChildren();
 function node(tag, text, className) {
@@ -137,6 +137,7 @@ function reset() {
     trial=createSimulationTrial(settings(1));
     elements.status.textContent="대결 준비";
   } catch(error) { trial=null;elements.status.textContent=settingError(error); }
+  resultStartedAt = null;
   stageReady = false;
   stageError = null;
   const preparingTrial = trial;
@@ -181,6 +182,20 @@ function frame(now) {
   const elapsed=lastFrame?Math.min(.1,(now-lastFrame)/1000):0;lastFrame=now;
   if(playing&&trial){trial.advance(elapsed);render();}
   if (trial) for (const event of globalThis.SpawnerCombatAudio.update(audioPlayback, trial.agents, [], trial.time, trial.vfx)) audio.play(event.name, 1);
+  const ended = !!trial?.result()?.reason;
+  if (ended && resultStartedAt === null) resultStartedAt = now;
+  const resultVisible = ended && now - resultStartedAt < 3000;
+  const statusClass = resultVisible ? "status combat-result" : "status";
+  if (resultVisible) {
+    if (elements.status.className !== statusClass) elements.status.dataset.resultText = elements.status.textContent;
+    elements.status.textContent = elements.status.dataset.resultText.split(" · ")[0];
+  } else if (ended && elements.status.className === "status combat-result") {
+    elements.status.textContent = elements.status.dataset.resultText;
+  }
+  if (elements.status.className !== statusClass) {
+    elements.status.className = statusClass;
+    (resultVisible ? stageView : stageCenter).append(elements.status);
+  }
   if (stageReady) combatStage.render(trial, now, playing);
   requestAnimationFrame(frame);
 }

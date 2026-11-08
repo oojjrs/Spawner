@@ -2,7 +2,7 @@ import { isNestDefender } from "./nest-defender.mjs";
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
 import { dnaCanHunt, dnaCanSearch } from "./dna-unit.mjs";
 import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
-import { unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier } from "./attributes.mjs";
+import { unitCarryCapacity, unitTravelSpeed, unitMovementInterval, unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { resourceDefinition, resourceTypeForCell } from "./resources.mjs";
 import { burrowApproaches } from "./burrows.mjs";
 import { combatDisposition, canPursueCombat, colonyDefenseTarget } from "./combat.mjs";
@@ -64,7 +64,7 @@ export function createUtilityAI(context) {
       value *= 0.5;
       if (synergy(agent, ["feet", "shell"])) value *= 3;
     }
-    return value * unitTerrainSpeedMultiplier(agent, terrainAt(cell.x, cell.y));
+    return 1 / unitMovementInterval(value * unitTerrainSpeedMultiplier(agent, terrainAt(cell.x, cell.y)));
   }
 
   function push(queue, entry) {
@@ -167,7 +167,7 @@ export function createUtilityAI(context) {
       if (combatDisposition(enemy) !== "aggressive" && !(fighting && combatDisposition(enemy) === "passive") &&
           !(enemy.combat && enemy.combat.teams[1 - enemy.combat.side] === ("colony:" + agent.ownerId))) continue;
       const gap = Math.max(0, distance(cell, enemy) - 1);
-      const reach = Math.max(0, seconds - gap / Math.max(0.1, enemy.species ? enemy.stats.speed : unitTravelSpeed(enemy, enemy.carrying)));
+      const reach = Math.max(0, seconds - gap / Math.max(0.1, enemy.species ? enemy.stats.speed : 1 / unitMovementInterval(unitTravelSpeed(enemy, enemy.carrying))));
       if (!reach) continue;
       if (enemy.species && !enemy.raid && (encounterTerritory(enemy) ? !withinEncounterTerritory(enemy, cell, true) :
           Math.hypot(cell.x - enemy.homeX, cell.y - enemy.homeY) > 8)) continue;
@@ -190,7 +190,7 @@ export function createUtilityAI(context) {
     if (["flee", "return", "recover"].includes(intention)) return 0;
     if (intention === "fight" && ally.utility.target?.id !== enemy.id) return 0;
     return (intention === "fight" ? 1 : 0.5) *
-      limit(1 - Math.max(0, distance(ally, enemy) - 1) / unitTravelSpeed(ally, ally.carrying) / 10);
+      limit(1 - Math.max(0, distance(ally, enemy) - 1) * unitMovementInterval(unitTravelSpeed(ally, ally.carrying)) / 10);
   }
 
   function predictedDamage(agent, cells, action, visible, carrying, horizon) {
@@ -458,7 +458,7 @@ export function createUtilityAI(context) {
         Math.max(0.01, combatDamage(unit, target)));
       const support = allies.reduce((sum, ally) => sum + power(ally, enemy) * participation(ally, enemy), 0);
       const opponents = visible.filter(other => other === enemy || distance(other, enemy) <= 5)
-        .reduce((sum, other) => sum + power(other, agent) * limit(1 - Math.max(0, distance(other, enemy) - 1) / (other.species ? other.stats.speed : unitTravelSpeed(other, other.carrying)) / 10), 0);
+        .reduce((sum, other) => sum + power(other, agent) * limit(1 - Math.max(0, distance(other, enemy) - 1) / (other.species ? other.stats.speed : 1 / unitMovementInterval(unitTravelSpeed(other, other.carrying))) / 10), 0);
       const own = power(agent, enemy), withMe = (support + own) / (support + own + opponents);
       const withoutMe = support / Math.max(0.01, support + opponents);
       const homeThreat = homeCells().some(cell => distance(cell, enemy) <= 3);

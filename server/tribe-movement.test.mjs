@@ -52,10 +52,10 @@ test("네 종족 기본형·운반형은 빈손·절반 적재·만재에서도 
       const startedAt=agent.moveStartedAt;
       nextStep(fixture);
       const period=agent.moveStartedAt-startedAt;
-      assert.ok(Math.abs(period-1/speeds[index])<1e-8,tribe+":"+load);
+      assert.ok(Math.abs((period-1)*2-(1/speeds[index]-1))<1e-8,tribe+":"+load);
       assert.equal(agent.moveDuration,1);
       assert.equal(agent.moveAnimationStartedAt,agent.moveStartedAt);
-      if (tribe==="bean" && load===0) assert.ok(Math.abs(period-agent.moveDuration-1)<1e-8);
+      if (tribe==="bean" && load===0) assert.ok(Math.abs(period-agent.moveDuration-.5)<1e-8);
       const snapshot=JSON.parse(JSON.stringify(game.snapshot())).agents[0];
       assert.equal(snapshot.moveAnimationStartedAt,agent.moveAnimationStartedAt);
     }
@@ -73,7 +73,7 @@ test("이속 속성이 붙은 네 종족 기본형·운반형도 느린 동작�
       assert.ok(Math.abs(agent.moveDuration-duration)<1e-10,tribe+":"+load);
       const startedAt=agent.moveStartedAt;
       nextStep(fixture);
-      assert.ok(Math.abs(agent.moveStartedAt-startedAt-1/speeds[index])<1e-8,tribe+":"+load);
+      assert.ok(Math.abs((agent.moveStartedAt-startedAt-duration)*2-(1/speeds[index]-duration))<1e-8,tribe+":"+load);
       assert.ok(agent.moveDuration<=1/speeds[index]+1e-10);
       assert.equal(agent.moveAnimationStartedAt,duration<1?startedAt:agent.moveStartedAt);
     }
@@ -90,7 +90,7 @@ test("네 종족 만재·발 속성·운반형은 산지에서도 동작을 늘�
       const startedAt=agent.moveStartedAt;
       nextStep(fixture);
       assert.equal(agent.moveDuration,1);
-      assert.ok(Math.abs(agent.moveStartedAt-startedAt-1/(speed*multipliers[index]))<1e-8,tribe+":"+terrain);
+      assert.ok(Math.abs((agent.moveStartedAt-startedAt-1)*2-(1/(speed*multipliers[index])-1))<1e-8,tribe+":"+terrain);
       assert.equal(agent.moveAnimationStartedAt,agent.moveStartedAt);
     }
   }
@@ -162,8 +162,8 @@ function worker(tribe,id) {
     stats:{...unitStats({},tribe),capacity:4},attributes:{},personality:{boldness:0,aggression:0,curiosity:0}};
 }
 
-test("AI는 빈손 출발과 예상 적재 귀환을 따로 계산하고 샘방울은 긴 왕복에서 만재보다 3개 운반을 고른다",()=>{
-  for (const [tribe,empty,loaded,expectedCargo] of [["bean",.5,.4,4],["spring",.9,.275,3],
+test("AI는 빈손 출발과 예상 적재 귀환을 따로 계산하고 1초 채집에서 네 종족 모두 한도까지 운반한다",()=>{
+  for (const [tribe,empty,loaded,expectedCargo] of [["bean",.5,.4,4],["spring",.9,.275,4],
     ["pebble",.35,.3,4],["spore",.5,.4,4]]) {
     const size=14,agent=worker(tribe,"worker");
     const home={x:1,y:1},food={x:11,y:1,key:"11,1",resourceType:"clay",amount:20};
@@ -177,21 +177,21 @@ test("AI는 빈손 출발과 예상 적재 귀환을 따로 계산하고 샘방�
     assert.ok(collect,tribe);
     assert.equal(collect.plannedCargo,expectedCargo,tribe);
     const returning=empty+(loaded-empty)*expectedCargo/4;
-    const expected=10/empty+1+expectedCargo*4+10/returning+1;
+    const expected=5*(1+1/empty)+1+expectedCargo+5*(1+1/returning)+1;
     assert.ok(Math.abs(collect.deliverySeconds-expected)<1e-10,tribe);
     for (const load of [.5,1]) {
       Object.assign(agent,{x:11,carrying:4*load,carryingType:"clay",utility:null});
       const returning=ai.evaluate(agent,false).find(candidate=>candidate.action==="return");
       assert.ok(returning,tribe);
       const speed=empty+(loaded-empty)*load;
-      assert.ok(Math.abs(returning.deliverySeconds-(10/speed+1))<1e-10,tribe);
+      assert.ok(Math.abs(returning.deliverySeconds-(5*(1+1/speed)+1))<1e-10,tribe);
     }
   }
 });
 
 test("기본 자원 한 개의 AI 왕복 시간에 종족 속도·채집 시간·레벨 보너스를 반영한다",()=>{
-  for (const [tribe,type,empty,loaded,harvest] of [["bean","clay",.5,.4,4],["spring","dew",.9,.275,2],
-    ["spore","tree",.5,.4,6],["pebble","pebbles",.35,.3,6]]) {
+  for (const [tribe,type,empty,loaded,harvest] of [["bean","clay",.5,.4,1],["spring","dew",.9,.275,1],
+    ["spore","tree",.5,.4,1],["pebble","pebbles",.35,.3,1]]) {
     for (const ranks of [0,5]) {
       const size=14,agent=worker(tribe,"native-worker"),home={x:1,y:1};
       agent.stats.capacity=1;
@@ -208,7 +208,7 @@ test("기본 자원 한 개의 AI 왕복 시간에 종족 속도·채집 시간�
       const collect=ai.evaluate(agent,false).find(candidate=>candidate.action==="collect");
       assert.ok(collect,tribe);
       assert.equal(collect.plannedCargo,1,tribe);
-      const expected=10/(empty*(1+ranks*.02))+1+harvest/(1+ranks*.03)+10/(loaded*(1+ranks*.02))+1;
+      const expected=5*(1+1/(empty*(1+ranks*.02)))+1+harvest/(1+ranks*.03)+5*(1+1/(loaded*(1+ranks*.02)))+1;
       assert.ok(Math.abs(collect.deliverySeconds-expected)<1e-9,tribe+":"+ranks);
     }
   }

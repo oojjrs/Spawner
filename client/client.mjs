@@ -7,6 +7,7 @@ export function createClient(onState, onError, onSaved, workerSource) {
   let nextId = 0;
   const stateDecoder = createStateDecoder();
   let fatalError = null;
+  const releaseVersion = JSON.parse(document.getElementById("site-release")?.textContent || "null")?.version_number ?? null;
   worker.onmessage = event => {
     if (workerUrl) { URL.revokeObjectURL(workerUrl); workerUrl = null; }
     const message = event.data;
@@ -34,7 +35,7 @@ export function createClient(onState, onError, onSaved, workerSource) {
       return new Promise((resolve, reject) => {
         const id = ++nextId;
         requests.set(id, { resolve, reject, onProgress });
-        worker.postMessage({ id, type, data });
+        worker.postMessage({ id, type, data: type === "enter" || type === "resume" ? { ...data, releaseVersion } : data });
       });
     }
   };

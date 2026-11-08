@@ -15,7 +15,7 @@ const pieces = genes => genes.map(gene => ({ gene, grade: ATTRIBUTE_DNA.lookup.g
 test("새싹콩의 기존 기본·증가 수치와 종족 미지정 호출을 보존한다", () => {
   const genes = pieces(["blade", "secretion", "health", "power", "rangedPower", "speed", "rangedSpeed", "carapace"]);
   const stats = ATTRIBUTE_DNA.stats(genes, "bean");
-  for (const [key, expected] of Object.entries({ health: 30, meleePower: 10, rangedPower: 4.2, meleeSpeed: .6, rangedSpeed: .6, armor: 20, movement: .25 }))
+  for (const [key, expected] of Object.entries({ health: 30, meleePower: 10, rangedPower: 4.2, meleeSpeed: .6, rangedSpeed: .6, armor: 20, movement: .5 }))
     close(stats[key], expected);
   assert.deepEqual(ATTRIBUTE_DNA.stats(genes), stats);
   assert.deepEqual(ATTRIBUTE_DNA.stats(genes, "unknown"), stats);
@@ -69,20 +69,32 @@ test("설계 수치·실험실·실제 유닛이 같은 종족의 DNA 수치를 
 test("몽돌의 이동 조각 증가량과 종족별 채집 기본값·실제 적재 속도가 일치한다",()=>{
   const gains=Object.fromEntries(tribes.map(tribe=>[tribe,ATTRIBUTE_DNA.stats(pieces(['gather','movement']),tribe).movement-ATTRIBUTE_DNA.stats(pieces(['gather']),tribe).movement]));
   for(const tribe of tribes.filter(tribe=>tribe!=='pebble'))assert.ok(gains.pebble>gains[tribe]);
-  close(ATTRIBUTE_DNA.stats(pieces(['gather','movement']),'pebble').movement,.357);
-  close(ATTRIBUTE_DNA.stats(pieces(['movement']),'pebble').movement,.259);
-  close(ATTRIBUTE_DNA.stats(pieces(['gather']),'spore').movement,.1375);
-  close(ATTRIBUTE_DNA.stats(pieces(['gather','movement']),'spore').movement,.242);
-  close(ATTRIBUTE_DNA.stats([],'spore').movement,.25);
-  for(const [tribe,empty,loaded] of [['spore',.1375,.103125],['pebble',.225,.14625]]){
+  close(ATTRIBUTE_DNA.stats(pieces(['gather','movement']),'pebble').movement,.482);
+  close(ATTRIBUTE_DNA.stats(pieces(['movement']),'pebble').movement,.384);
+  close(ATTRIBUTE_DNA.stats(pieces(['gather']),'spore').movement,.5);
+  close(ATTRIBUTE_DNA.stats(pieces(['gather','movement']),'spore').movement,.6045);
+  close(ATTRIBUTE_DNA.stats([],'spore').movement,.5);
+  for(const [tribe,empty,loaded] of [['bean',.5,.4],['spore',.5,.4],['pebble',.35,.3],['spring',.9,.275]]){
     const dna={pieces:pieces(['gather','capacity'])},stats=dnaUnitStats(dna,tribe),agent={tribe,dna,stats};
     close(unitTravelSpeed(agent,0,undefined),empty);close(unitTravelSpeed(agent,stats.capacity,undefined),loaded);
   }
-  close(ATTRIBUTE_DNA.stats(pieces(['gather']),'spring').movement,.25);
-  close(ATTRIBUTE_DNA.stats(pieces(['gather','movement']),'spring').movement,.349);
-  close(ATTRIBUTE_DNA.stats(pieces(['movement']),'spring').movement,.296);
+  close(ATTRIBUTE_DNA.stats(pieces(['gather']),'spring').movement,.9);
+  close(ATTRIBUTE_DNA.stats(pieces(['gather','movement']),'spring').movement,.999);
+  close(ATTRIBUTE_DNA.stats(pieces(['movement']),'spring').movement,.946);
   for(const tribe of tribes){
     const genes=pieces(['gather']),stats=ATTRIBUTE_DNA.stats(genes,tribe);
-    assert.equal(stats.capacity,tribe==='pebble'?2:1);assert.equal(stats.harvest,1);assert.equal(stats.harvestTime,3);assert.equal(ATTRIBUTE_DNA.cost(genes),11);
+    assert.equal(stats.capacity,tribe==='pebble'?2:1);assert.equal(stats.harvest,1);assert.equal(stats.harvestTime,1);assert.equal(ATTRIBUTE_DNA.cost(genes),11);
+  }
+});
+
+test("기존 종족 이동 컨셉은 DNA의 빈짐·절반·만재와 이동 강화 후에도 유지된다",()=>{
+  for(const [tribe,empty,loaded] of [["bean",.5,.4],["spore",.5,.4],["pebble",.35,.3],["spring",.9,.275]]){
+    for(const movement of [0,1,4]){
+      const dna={pieces:pieces(["gather","capacity",...Array(movement).fill("movement")])},stats=dnaUnitStats(dna,tribe),agent={tribe,dna,stats};
+      const expected=empty+movement*(tribe==="pebble"?.132:tribe==="spring"?.099:tribe==="spore"?.1045:.11);
+      close(stats.speed,expected);
+      for(const load of [0,.5,1])close(unitTravelSpeed(agent,stats.capacity*load,undefined),expected*(1+(loaded/empty-1)*load));
+    }
+    close(ATTRIBUTE_DNA.stats([],tribe).movement,empty);
   }
 });

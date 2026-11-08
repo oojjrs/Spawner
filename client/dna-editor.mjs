@@ -126,6 +126,7 @@ export function createDnaEditor(container,dnaModel,onChange,onAction,statsContai
   const tooltip=document.createElement('div');tooltip.className='control-tooltip dna-piece-tooltip';tooltip.setAttribute('role','tooltip');tooltip.hidden=true;root.append(tooltip);
   const view={x:0,y:0,scale:1,width:0,height:0};
   let hoveredPiece=null;
+  const panKeys=new Set();let panTime=0;
   let tribe, pieces=[],level=1,budget=0,readOnly=false,contextSet=false,filter='all',selected=M.catalog[0].id,rotation=0,anchor={q:0,r:0},moving=-1,history=[],future=[],model=M.trace([],1),preview,frame=0,destroyed=false,pointer=null,hover=null,keyboardPlacement=false,warningGene=null,boardFull=false,offset=null,cursor=null;
   function button(parent,label,glyph,action){const element=document.createElement('button');element.type='button';element.title=label;element.setAttribute('aria-label',label);element.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+glyph+'"/></svg>';element.onclick=action;parent.append(element);return element;}
   const undoButton=button(find('.dna-tools'),'되돌리기','M9 5 4 10l5 5M4 10h9a6 6 0 0 1 0 12',undo);
@@ -239,18 +240,36 @@ export function createDnaEditor(container,dnaModel,onChange,onAction,statsContai
   function renderControls(){
     renderPieceHover();
     addButton.disabled=readOnly||!preview.valid;leftButton.disabled=readOnly||!selected;rightButton.disabled=readOnly||!selected;undoButton.disabled=readOnly||!history.length;redoButton.disabled=readOnly||!future.length;removeButton.disabled=readOnly||!pieces.length;clearButton.disabled=readOnly||!pieces.length;
-    const duplicate=warningGene&&organBlocked(warningGene)?warningGene:preview.reason==='organ-limit'?selected:null,status=find('.dna-status'),active=hover||moving>=0||keyboardPlacement;
+    const duplicate=warningGene&&organBlocked(warningGene)?warningGene:preview.reason==='organ-limit'?selected:null,status=find('.dna-status'),active=!(pointer?.panning&&pointer.moved)&&(hover||moving>=0||keyboardPlacement);
     const reason=duplicate?'organ-limit':!model.valid?model.reason:boardFull&&moving<0?'full':active?preview.reason:'';
     const labels={full:'꽉 찼습니다',collision:'경로가 겹칩니다',boundary:'판을 벗어납니다',level:'둥지 레벨이 부족합니다'};
     status.textContent=duplicate?names[duplicate]+(names[duplicate].endsWith('기관')?'은':' 기관은')+' 하나만 배치할 수 있습니다':labels[reason]||'';status.hidden=readOnly||!status.textContent;status.dataset.kind=reason;
     const placement=find('.dna-placement'),occupied=hover?model.occupied.get(M.key(hover))?.index:-1;
     const showing=!readOnly&&preview.piece&&active&&(moving>=0||offset||occupied===undefined||occupied===-1);
+    canvas.style.cursor=pointer?.panning&&pointer.moved?'grabbing':readOnly||moving<0&&(occupied===undefined||occupied===-1)?'grab':'default';
     placement.hidden=!showing;placement.dataset.state=preview.valid?'available':'blocked';
     placement.textContent=preview.valid?'✓ 배치 가능':preview.reason==='stat-cap'?'× 배치 불가':'× 배치 불가 · '+(duplicate?'같은 기관은 하나만':labels[preview.reason]||'공간을 확인해 주세요');
     canvas.setAttribute('aria-label','DNA 편집 영역'+(showing?' · '+placement.textContent:''));
     find('.dna-cost strong').textContent=String(M.cost(pieces));root.dataset.readonly=String(readOnly);root.dataset.preview=String(preview.valid);root.dataset.filled=String(model.filled);root.dataset.total=String(model.total);root.dataset.moving=String(moving);root.dataset.anchor=anchor.q+','+anchor.r;
   }
-  function requestDraw(){if(!frame&&!destroyed)frame=requestAnimationFrame(()=>{frame=0;if(!destroyed)draw();});}
+  function requestDraw(){if(!frame&&!destroyed)frame=requestAnimationFrame(time=>{
+    if(destroyed)return;
+    if(root.getClientRects?.().length===0)stopPan();
+    if(panKeys.size){
+      const dx=Number(panKeys.has('d'))-Number(panKeys.has('a')),dy=Number(panKeys.has('s'))-Number(panKeys.has('w')),length=Math.hypot(dx,dy);
+      const distance=420*Math.min(.05,panTime?(time-panTime)/1000:1/60);panTime=time;
+      if(length)panBy(dx/length*distance,dy/length*distance);
+    }
+    frame=0;draw();if(panKeys.size)requestDraw();
+  });}
+  function stopPan(){panKeys.clear();panTime=0;}
+  function panBy(dx,dy){
+    if(!view.width||!view.height)return;
+    const radius=M.boardRadius(level),halfWidth=34*Math.sqrt(3)*(radius+.5)*view.scale,halfHeight=(51*radius+34)*view.scale;
+    view.x=Math.max(48-halfWidth,Math.min(view.width-48+halfWidth,view.x+dx));
+    view.y=Math.max(48-halfHeight,Math.min(view.height-48+halfHeight,view.y+dy));
+    if(hover&&cursor)pointAt(cursor);else requestDraw();
+  }
   function screen(point){const p=dnaWorld(point);return {x:p.x*view.scale+view.x,y:p.y*view.scale+view.y};}
   function polygon(points){context.beginPath();points.forEach((p,index)=>index?context.lineTo(p.x,p.y):context.moveTo(p.x,p.y));context.closePath();}
   function drawPiece(piece,alpha,color,highlight,placement){
@@ -268,10 +287,10 @@ export function createDnaEditor(container,dnaModel,onChange,onAction,statsContai
     for(const cell of M.boardCells(level)){polygon(dnaHex(screen(cell),32*view.scale));context.fillStyle='#102922';context.fill();context.strokeStyle='#3a574c';context.lineWidth=1;context.stroke();}
     const hovered=hover?model.occupied.get(M.key(hover))?.index:-1;
     for(let index=0;index<pieces.length;index++)drawPiece(pieces[index],index===moving?.18:.88,M.lookup.get(pieces[index].gene).fillColor,index===hovered&&moving<0,false);
-    if(!readOnly&&preview.piece&&(hover||moving>=0||keyboardPlacement)&&(moving>=0||offset||hovered===undefined||hovered===-1))drawPiece(preview.piece,.9,preview.valid?DNA_PLACEMENT_COLORS.available:DNA_PLACEMENT_COLORS.blocked,true,true);
+    if(!readOnly&&!(pointer?.panning&&pointer.moved)&&preview.piece&&(hover||moving>=0||keyboardPlacement)&&(moving>=0||offset||hovered===undefined||hovered===-1))drawPiece(preview.piece,.9,preview.valid?DNA_PLACEMENT_COLORS.available:DNA_PLACEMENT_COLORS.blocked,true,true);
   }
   function commit(){if(readOnly||!selected)return;const proposed=candidate();if(!proposed.valid){keyboardPlacement=!hover;preview=proposed;renderControls();requestDraw();return;}if(moving>=0&&JSON.stringify(proposed.pieces[moving])===JSON.stringify(pieces[moving])){cancel();return;}checkpoint();pieces=proposed.pieces;moving=-1;offset=null;if(M.lookup.get(selected).category==='organ'){selected=null;rotation=0;keyboardPlacement=false;}changed('place');}
-  function cancel(){moving=-1;pointer=null;selected=null;rotation=0;hover=null;keyboardPlacement=false;offset=null;state();}
+  function cancel(){releasePointer();moving=-1;selected=null;rotation=0;hover=null;keyboardPlacement=false;offset=null;state();}
   function center(){const points=M.pieceCells({gene:selected,rotation,q:0,r:0}).map(dnaWorld);return {x:(Math.min(...points.map(p=>p.x))+Math.max(...points.map(p=>p.x)))/2,y:(Math.min(...points.map(p=>p.y))+Math.max(...points.map(p=>p.y)))/2};}
   function rotate(delta){if(readOnly||!selected)return;rotation=(rotation+delta+6)%6;playSound('rotate');if(offset){offset=center();if(cursor&&hover&&!keyboardPlacement){pointAt(cursor);return;}}preview=candidate();renderControls();requestDraw();}
   function undo(){if(readOnly)return;if(moving>=0){cancel();return;}if(!history.length)return;future.push(snapshot());const next=history.pop(),action=next.length<pieces.length?'remove':'place';pieces=next;changed(action);}
@@ -279,9 +298,10 @@ export function createDnaEditor(container,dnaModel,onChange,onAction,statsContai
   function remove(){if(readOnly||!pieces.length)return;checkpoint();pieces.splice(moving>=0?moving:pieces.length-1,1);moving=-1;offset=null;changed('remove');}
   function cycleGene(){if(readOnly)return;const items=[...find('.dna-list').children].filter(item=>!item.disabled&&item.dataset.blocked!=='true');if(!items.length)return;const index=items.findIndex(item=>item.dataset.gene===selected);items[(index+1)%items.length].onclick();}
   function fit(){
+    stopPan();
     if(!view.width||!view.height)return;Object.assign(view,dnaEditorViewport(M,level,null,null,view.width,view.height));
     if(model.outside.length){const points=M.boardCells(level).concat(pieces.flatMap(M.pieceCells)).map(dnaWorld),minX=Math.min(...points.map(p=>p.x))-52,maxX=Math.max(...points.map(p=>p.x))+52,minY=Math.min(...points.map(p=>p.y))-52,maxY=Math.max(...points.map(p=>p.y))+52;view.scale=Math.max(.005,Math.min((view.width-40)/(maxX-minX),(view.height-150)/(maxY-minY)));view.x=view.width/2-(minX+maxX)*view.scale/2;view.y=66+(view.height-150)/2-(minY+maxY)*view.scale/2;}
-    requestDraw();
+    if(hover&&cursor)pointAt(cursor);else requestDraw();
   }
   function zoom(factor){if(!Number.isFinite(factor)||factor<=0||!view.width||!view.height)return;const next=Math.max(.005,Math.min(2.7,view.scale*factor)),ratio=next/view.scale,x=view.width/2,y=view.height/2;view.x=x-(x-view.x)*ratio;view.y=y-(y-view.y)*ratio;view.scale=next;if(hover&&cursor)pointAt(cursor);else requestDraw();}
   function resize(){const bounds=board.getBoundingClientRect();if(!bounds.width||!bounds.height||(view.width===bounds.width&&view.height===bounds.height))return;view.width=bounds.width;view.height=bounds.height;canvas.width=Math.ceil(bounds.width*devicePixelRatio);canvas.height=Math.ceil(bounds.height*devicePixelRatio);fit();}
@@ -291,15 +311,26 @@ export function createDnaEditor(container,dnaModel,onChange,onAction,statsContai
     return {q:rq,r:rr};
   }
   function pointAt(event){cursor={clientX:event.clientX,clientY:event.clientY};keyboardPlacement=false;hover=eventCell(event);anchor=eventCell(event,offset);preview=candidate();renderControls();requestDraw();}
+  function releasePointer(){const previous=pointer;pointer=null;if(previous&&canvas.hasPointerCapture?.(previous.id))canvas.releasePointerCapture(previous.id);return previous;}
+  function movePointer(event){
+    if(!pointer||pointer.id!==event.pointerId)return;
+    if(Math.hypot(event.clientX-pointer.x,event.clientY-pointer.y)>4)pointer.moved=true;
+    if(pointer.panning&&pointer.moved){hover=null;keyboardPlacement=false;panBy(pointer.viewX+event.clientX-pointer.x-view.x,pointer.viewY+event.clientY-pointer.y-view.y);renderControls();}
+    else pointAt(event);
+  }
+  function cancelPointer(){const previous=releasePointer();if(!previous)return;if(previous.panning){hover=null;renderControls();requestDraw();}else cancel();}
   canvas.addEventListener('pointerdown',event=>{
-    if(event.button===1){event.preventDefault();event.stopPropagation();cycleGene();return;}if(event.button!==0||pointer||readOnly)return;
+    if(event.button===1){event.preventDefault();event.stopPropagation();cycleGene();return;}if(event.button!==0||pointer)return;
+    event.preventDefault();stopPan();
     root.focus({preventScroll:true});const point=eventCell(event),hit=model.occupied.get(M.key(point))?.index;let picked=false;
-    if(moving<0&&hit!==undefined){moving=hit;selected=pieces[hit].gene;rotation=pieces[hit].rotation;offset=center();picked=true;renderCatalog();}
-    pointer={id:event.pointerId,x:event.clientX,y:event.clientY,picked,moved:false};pointAt(event);canvas.setPointerCapture(event.pointerId);
+    const panning=readOnly||moving<0&&hit===undefined;
+    if(!readOnly&&moving<0&&hit!==undefined){moving=hit;selected=pieces[hit].gene;rotation=pieces[hit].rotation;offset=center();picked=true;renderCatalog();}
+    pointer={id:event.pointerId,x:event.clientX,y:event.clientY,viewX:view.x,viewY:view.y,panning,picked,moved:false};pointAt(event);canvas.setPointerCapture(event.pointerId);
   });
-  canvas.addEventListener('pointermove',event=>{if(pointer&&pointer.id===event.pointerId&&Math.hypot(event.clientX-pointer.x,event.clientY-pointer.y)>4)pointer.moved=true;pointAt(event);});
-  canvas.addEventListener('pointerup',event=>{if(!pointer||pointer.id!==event.pointerId)return;const previous=pointer;pointer=null;pointAt(event);const dragged=previous.moved||Math.hypot(event.clientX-previous.x,event.clientY-previous.y)>4;if(previous.picked&&!dragged){const pickedOffset=offset;remove();offset=pickedOffset;}else commit();});
-  canvas.addEventListener('pointercancel',()=>{pointer=null;cancel();});
+  canvas.addEventListener('pointermove',event=>{if(pointer){movePointer(event);return;}pointAt(event);});
+  canvas.addEventListener('pointerup',event=>{if(!pointer||pointer.id!==event.pointerId)return;movePointer(event);const previous=releasePointer();if(previous.panning&&previous.moved){hover=null;renderControls();requestDraw();return;}pointAt(event);if(readOnly)return;if(previous.picked&&!previous.moved){const pickedOffset=offset;remove();offset=pickedOffset;}else commit();});
+  canvas.addEventListener('pointercancel',cancelPointer);
+  canvas.addEventListener('lostpointercapture',cancelPointer);
   canvas.addEventListener('pointerleave',()=>{if(pointer)return;hover=null;renderControls();requestDraw();});
   canvas.addEventListener('auxclick',event=>{if(event.button===1){event.preventDefault();event.stopPropagation();}});
   canvas.addEventListener('wheel',event=>{if(event.ctrlKey||event.metaKey||event.altKey)return;event.preventDefault();event.stopPropagation();if(event.deltaY)rotate(event.deltaY>0?1:-1);},{passive:false});
@@ -307,21 +338,24 @@ export function createDnaEditor(container,dnaModel,onChange,onAction,statsContai
   root.addEventListener('pointerdown',event=>{if(event.button===3){event.preventDefault();event.stopPropagation();undo();}});
   root.addEventListener('keydown',event=>{
     if(['INPUT','SELECT','TEXTAREA'].includes(event.target.tagName)||event.target.isContentEditable)return;const key=event.key.toLowerCase();
+    const panKey=/^Key[WASD]$/.test(event.code)?event.code.slice(3).toLowerCase():key;
+    if(!event.ctrlKey&&!event.metaKey&&!event.altKey&&['w','a','s','d'].includes(panKey)){event.preventDefault();event.stopPropagation();if(!pointer){panKeys.add(panKey);requestDraw();}return;}
     if((key==='enter'||key===' ')&&event.target.closest?.('button,summary'))return;
     if((event.ctrlKey||event.metaKey)&&['z','y'].includes(key)){event.preventDefault();event.stopPropagation();key==='y'||event.shiftKey?redo():undo();return;}
     if(event.ctrlKey||event.metaKey||event.altKey||!['q','e','r','arrowleft','arrowright','arrowup','arrowdown','enter',' ','delete','backspace','browserback','f','escape'].includes(key))return;
-    event.preventDefault();event.stopPropagation();if(readOnly)return;
-    if(key==='q')rotate(-1);else if(key==='e'||key==='r')rotate(1);else if(key==='enter'||key===' ')commit();else if(key==='backspace'||key==='browserback')undo();else if(key==='f')fit();else if(key==='escape')cancel();else if(key==='delete')remove();else {anchor={q:anchor.q+(key==='arrowleft'?-1:key==='arrowright'?1:0),r:anchor.r+(key==='arrowup'?-1:key==='arrowdown'?1:0)};hover=null;keyboardPlacement=true;preview=candidate();renderControls();requestDraw();}
+    event.preventDefault();event.stopPropagation();if(key==='f'){fit();return;}if(readOnly)return;
+    if(key==='q')rotate(-1);else if(key==='e'||key==='r')rotate(1);else if(key==='enter'||key===' ')commit();else if(key==='backspace'||key==='browserback')undo();else if(key==='escape')cancel();else if(key==='delete')remove();else {anchor={q:anchor.q+(key==='arrowleft'?-1:key==='arrowright'?1:0),r:anchor.r+(key==='arrowup'?-1:key==='arrowdown'?1:0)};hover=null;keyboardPlacement=true;preview=candidate();renderControls();requestDraw();}
   });
-  function blur(){hover=null;renderPieceHover();}
+  root.addEventListener('keyup',event=>{const key=/^Key[WASD]$/.test(event.code)?event.code.slice(3).toLowerCase():event.key.toLowerCase();if(!panKeys.delete(key))return;event.preventDefault();event.stopPropagation();if(!panKeys.size)panTime=0;});
   root.addEventListener('focusout',blur);
+  function blur(){stopPan();cancelPointer();hover=null;renderPieceHover();}
   globalThis.addEventListener?.('blur',blur);
   const dialog=root.closest?.('dialog');dialog?.addEventListener('close',blur);
   const observer=new ResizeObserver(resize);observer.observe(board);state();resize();
   return {
-    load(design,locked){const value=M.validate(design);if(!value)return false;pieces=value.pieces.map(M.clonePiece);if(!contextSet){level=value.level;budget=value.budget;}readOnly=locked===true;history=pieces.map((_,index)=>pieces.slice(0,index).map(M.clonePiece));future=[];moving=-1;hover=null;keyboardPlacement=false;anchor={q:0,r:0};offset=null;selected=M.catalog.find(gene=>gene.grade<=level&&!(gene.category==='organ'&&pieces.some(piece=>piece.gene===gene.id)))?.id||M.catalog[0].id;rotation=0;state();fit();return true;},
-    context(nextLevel,nextBudget,locked,nextTribe){const previousLevel=level,previousBudget=budget,previousReadOnly=readOnly,previousTribe=tribe;tribe=nextTribe;if(Number.isInteger(nextLevel)&&nextLevel>=1&&nextLevel<=4)level=nextLevel;if(Number.isFinite(nextBudget)&&nextBudget>=0)budget=Math.floor(nextBudget);contextSet=true;readOnly=locked===true;if(previousLevel===level&&previousBudget===budget&&previousReadOnly===readOnly&&previousTribe===tribe)return;if(readOnly||M.lookup.get(selected)?.grade>level){moving=-1;selected=M.catalog[0].id;}state();if(previousLevel!==level)fit();},
+    load(design,locked){const value=M.validate(design);if(!value)return false;releasePointer();stopPan();pieces=value.pieces.map(M.clonePiece);if(!contextSet){level=value.level;budget=value.budget;}readOnly=locked===true;history=pieces.map((_,index)=>pieces.slice(0,index).map(M.clonePiece));future=[];moving=-1;hover=null;keyboardPlacement=false;anchor={q:0,r:0};offset=null;selected=M.catalog.find(gene=>gene.grade<=level&&!(gene.category==='organ'&&pieces.some(piece=>piece.gene===gene.id)))?.id||M.catalog[0].id;rotation=0;state();fit();return true;},
+    context(nextLevel,nextBudget,locked,nextTribe){const previousLevel=level,previousBudget=budget,previousReadOnly=readOnly,previousTribe=tribe;tribe=nextTribe;if(Number.isInteger(nextLevel)&&nextLevel>=1&&nextLevel<=4)level=nextLevel;if(Number.isFinite(nextBudget)&&nextBudget>=0)budget=Math.floor(nextBudget);contextSet=true;readOnly=locked===true;if(previousLevel===level&&previousBudget===budget&&previousReadOnly===readOnly&&previousTribe===tribe)return;if(previousLevel!==level||previousReadOnly!==readOnly){releasePointer();stopPan();}if(readOnly||M.lookup.get(selected)?.grade>level){moving=-1;selected=M.catalog[0].id;}state();if(previousLevel!==level)fit();},
     getDesign,clearHistory,fit,zoom,
-    destroy(){destroyed=true;hover=null;renderPieceHover();globalThis.removeEventListener?.('blur',blur);dialog?.removeEventListener('close',blur);sound?.destroy();observer.disconnect();if(frame)cancelAnimationFrame(frame);root.remove();}
+    destroy(){destroyed=true;hover=null;renderPieceHover();stopPan();releasePointer();globalThis.removeEventListener?.('blur',blur);dialog?.removeEventListener('close',blur);sound?.destroy();observer.disconnect();if(frame)cancelAnimationFrame(frame);root.remove();}
   };
 }

@@ -9,8 +9,8 @@ import { birthCost } from "../server/attributes.mjs";
 function fixture(t, dimensions, model) {
   if(!dimensions)dimensions={width:0,height:0};
   if(!model)model=ATTRIBUTE_DNA;
-  const draws=[],pending=[];
-  const drawing={setTransform(){},clearRect(){draws.length=0;},save(){},restore(){},translate(){},beginPath(){},closePath(){},moveTo(){},lineTo(){},fill(){},arc(x,y,radius){draws.push({kind:'arc',x,y,radius});},stroke(){draws.push({kind:'stroke',color:this.strokeStyle});}};
+  const draws=[],vertices=[],pending=[];
+  const drawing={setTransform(){},clearRect(){draws.length=0;vertices.length=0;},save(){},restore(){},translate(){},beginPath(){},closePath(){},moveTo(x,y){vertices.push({x,y});},lineTo(){},fill(){},arc(x,y,radius){draws.push({kind:'arc',x,y,radius});},stroke(){draws.push({kind:'stroke',color:this.strokeStyle});}};
   class Element {
     constructor(){this.children=[];this.classList={add(){}};this.dataset={};this.style={setProperty(){}};this.attributes={};this.selectors=new Map();this.listeners=new Map();}
     setPointerCapture(){}
@@ -35,7 +35,7 @@ function fixture(t, dimensions, model) {
   }
   const container=new Element(),changes=[];
   const editor=createDnaEditor(container,model,value=>changes.push(value));
-  return {editor,changes,root:container.children[0],draws,element:()=>new Element(),draw(){for(const callback of pending.splice(0))callback();}};
+  return {editor,changes,root:container.children[0],draws,vertices,element:()=>new Element(),draw(time){for(const callback of pending.splice(0))callback(time);}};
 }
 
 function selectGene(root,id){const item=root.querySelector('.dna-list').children.find(value=>value.dataset.gene===id);assert.ok(item,id);item.onclick();}
@@ -68,6 +68,40 @@ test("기존 과다배치는 보존하고 이동·삭제·되돌리기 때 상�
   canvas.dispatch('pointerdown',point);canvas.dispatch('pointerup',point);assert.equal(editor.getDesign().pieces.length,2);assert.equal(item().attributes['aria-disabled'],'false');
   root.dispatch('keydown',{key:'z',ctrlKey:true});assert.equal(editor.getDesign().pieces.length,3);assert.equal(item().attributes['aria-disabled'],'true');
   root.dispatch('keydown',{key:'y',ctrlKey:true});assert.equal(editor.getDesign().pieces.length,2);assert.equal(item().attributes['aria-disabled'],'false');
+});
+
+test("빈 영역 드래그는 판만 옮기고 이동한 좌표에서 클릭 배치와 F 복귀가 맞는다",t=>{
+  const {editor,root,changes,vertices,draw}=fixture(t,{width:800,height:600}),canvas=root.querySelector('canvas');
+  selectGene(root,'vision');draw();const before={...vertices[0]},v=dnaEditorViewport(ATTRIBUTE_DNA,1,null,null,800,600);
+  const start={button:0,pointerId:1,clientX:10,clientY:300},end={...start,clientX:110,clientY:210};
+  canvas.dispatch('pointerdown',start);canvas.dispatch('pointermove',end);draw();
+  assert.equal(canvas.style.cursor,'grabbing');assert.ok(Math.abs(vertices[0].x-before.x-100)<1e-8);assert.ok(Math.abs(vertices[0].y-before.y+90)<1e-8);
+  canvas.dispatch('pointerup',end);assert.equal(changes.length,0);assert.equal(editor.getDesign().pieces.length,0);
+  const point={...start,clientX:v.x+100,clientY:v.y-90};canvas.dispatch('pointerdown',point);canvas.dispatch('pointerup',point);
+  assert.equal(changes.length,1);assert.deepEqual(editor.getDesign().pieces,[piece('vision',0)]);
+  root.dispatch('keydown',{key:'f'});draw();assert.deepEqual(vertices[0],before);
+  root.dispatch('keydown',{key:'z',ctrlKey:true});assert.equal(editor.getDesign().pieces.length,0);
+});
+
+test("WASD는 읽기전용에서도 판을 옮기며 키해제·포커스이탈·입력칸에서는 멈춘다",t=>{
+  const {editor,root,vertices,draw,changes}=fixture(t,{width:800,height:600});editor.load(design([piece('vision',0)]),true);draw(100);const before={...vertices[0]},value=editor.getDesign();
+  for(const [key,axis,direction] of [['w','y',-1],['a','x',-1],['s','y',1],['d','x',1]]){
+    root.dispatch('keydown',{key:'f'});draw(100);root.dispatch('keydown',{key});draw(116);draw(166);root.dispatch('keyup',{key});draw(182);
+    assert.ok((vertices[0][axis]-before[axis])*direction>0);
+  }
+  const stopped={...vertices[0]};draw(200);assert.deepEqual(vertices[0],stopped);
+  root.dispatch('keydown',{key:'ㅁ',code:'KeyA'});draw(216);root.dispatch('focusout',{});draw(232);const blurred={...vertices[0]};draw(300);assert.deepEqual(vertices[0],blurred);
+  for(const tagName of ['INPUT','TEXTAREA','SELECT'])root.dispatch('keydown',{key:'d',code:'KeyD',target:{tagName}});
+  root.dispatch('keydown',{key:'d',ctrlKey:true});draw(400);assert.deepEqual(vertices[0],blurred);
+  root.dispatch('keydown',{key:'f'});draw(416);assert.deepEqual(vertices[0],before);assert.deepEqual(editor.getDesign(),value);assert.equal(changes.length,0);
+});
+
+test("패닝 취소와 다른 포인터는 배치하지 않고 읽기전용 조각에서도 드래그한다",t=>{
+  const {editor,root,vertices,draw,changes}=fixture(t,{width:800,height:600}),canvas=root.querySelector('canvas'),value=design([piece('vision',0)]),v=dnaEditorViewport(ATTRIBUTE_DNA,1,null,null,800,600);
+  editor.load(value,true);draw();const before={...vertices[0]},start={button:0,pointerId:1,clientX:v.x,clientY:v.y},end={...start,clientX:v.x+80,clientY:v.y+60};
+  canvas.dispatch('pointerdown',start);canvas.dispatch('pointermove',{...end,pointerId:2});draw();assert.deepEqual(vertices[0],before);
+  canvas.dispatch('pointermove',end);draw();assert.ok(Math.abs(vertices[0].x-before.x-80)<1e-8);
+  canvas.dispatch('pointercancel',end);canvas.dispatch('pointerup',end);assert.deepEqual(editor.getDesign(),value);assert.equal(changes.length,0);assert.notEqual(canvas.style.cursor,'grabbing');
 });
 
 test("현재 둥지 레벨과 예산은 불러온 설계로 우회하지 않는다",t=>{

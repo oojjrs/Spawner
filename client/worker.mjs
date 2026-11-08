@@ -64,6 +64,14 @@ async function persist() {
   }
 }
 
+function recordPlayVersion(version) {
+  if (!running) return;
+  const value = Number.isSafeInteger(version) && version >= 0 ? version : null;
+  if (room.lastPlayedVersion === value) return;
+  room.lastPlayedVersion = value;
+  dirty = true;
+}
+
 function publish(includeWorld) {
   if (room && visible) postMessage({ type: "state", packet: stateEncoder.encode({ ...snapshotRoom(room, includeWorld),
     sampledAt: performance.timeOrigin + performance.now() - Math.max(0, Date.now() - lastTick) }, includeWorld) });
@@ -73,7 +81,7 @@ async function handle(type, data, id) {
   if (type === "session") return { roomId: await storage.setting("roomId") };
   if (type === "list") {
     return (await storage.list()).map(saved => ({ id: saved.id, title: saved.title, seed: saved.seed,
-      updatedAt: saved.updatedAt, simSeconds: saved.simSeconds, ending: saved.ending || null,
+      updatedAt: saved.updatedAt, simSeconds: saved.simSeconds, ending: saved.ending || null, lastPlayedVersion: saved.lastPlayedVersion ?? null,
       tribe: saved.colonies.find(colony => colony.ownerId === saved.hostId)?.tribe, worldPreview: saved.worldPreview })).sort((a, b) => b.updatedAt - a.updatedAt);
   }
   if (type === "create") {
@@ -103,6 +111,7 @@ async function handle(type, data, id) {
     lastSave = lastTick;
     const packet = snapshotRoom(room, true);
     running = data.visible && room.colonies.find(colony => colony.ownerId === room.hostId).tribe !== null && !packet.state.ending;
+    recordPlayVersion(data.releaseVersion);
     dirty = true;
     await persist();
     return stateEncoder.encode({ ...packet, sampledAt: performance.timeOrigin + performance.now() }, true);
@@ -128,6 +137,8 @@ async function handle(type, data, id) {
     lastTick = Date.now();
     lastSave = lastTick;
     running = !!room && visible && room.colonies.find(colony => colony.ownerId === room.hostId).tribe !== null && !room.games.get(room.hostId).ending;
+    recordPlayVersion(data.releaseVersion);
+    await persist();
     publish(false);
     return null;
   }

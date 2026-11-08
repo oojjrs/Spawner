@@ -49,7 +49,13 @@
   document.body.append(dialog);
   const controls = document.getElementById("sound-controls");
   function placeVersion() {
-    const target = document.body.dataset.screen === "entry" ? document.body : controls || document.body;
+    const screen = document.body.dataset.screen;
+    if (screen !== "entry" && screen !== "welcome") {
+      if (dialog.open) dialog.close();
+      button.remove();
+      return;
+    }
+    const target = screen === "entry" ? document.body : controls || document.body;
     if (button.parentElement === target) return;
     if (target === controls) target.prepend(button);
     else target.append(button);

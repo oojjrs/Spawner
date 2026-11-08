@@ -3,7 +3,7 @@ export const NEUTRAL_STAT_LIMITS = Object.freeze(Object.fromEntries([
   ["power",{"min":1,"max":232.59999999999997}],
   ["armor",{"min":0,"max":806}],
   ["speed",{"min":0.5,"max":3.3022500000000004}],
-  ["movement",{"min":0.1375,"max":3.525}],
+  ["movement",{"min":0.35,"max":3.65}],
   ["vision",{"min":1,"max":12}],
   ["combo",{"min":0,"max":19}],
   ["comboPower",{"min":0,"max":100}],
