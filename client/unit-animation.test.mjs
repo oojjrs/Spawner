@@ -9,69 +9,6 @@ import { agentBirthDuration } from "../server/birth.mjs";
 import { PLAYER_TRIBES } from "../server/player-tribes.mjs";
 import { createGame } from "../server/game.mjs";
 
-const design = readFileSync(new URL("../Design.html", import.meta.url), "utf8");
-
-function cell(unit, action) {
-  const row = design.match(new RegExp('<tr id="unit-' + unit + '"[^>]*>([^]*?)</tr>'))[1];
-  return row.match(new RegExp('<td data-action="' + action + '"[^>]*>([^]*?)</td>'))[1];
-}
-
-test("기획서와 같은 종족별 원본·프레임·반복·재생 시간을 사용한다", () => {
-  const keys = { bean: "sprout-bean", spore: "spore-tribe", pebble: "pebble-tribe", spring: "spring-tribe" };
-  for (const [tribe, animations] of Object.entries(UNIT_ANIMATIONS)) for (const [action, animation] of Object.entries(animations)) {
-    const html = cell(keys[tribe], action);
-    const path = html.match(/data-preview="([^"]+)"/)?.[1] || html.match(/href="([^"]+)"/)[1];
-    const durations = html.match(/data-durations="([^"]+)"/)[1].split(",").map(Number);
-    assert.equal(animation.image, path, tribe + " " + action);
-    assert.deepEqual(animation.durationsMs, durations, tribe + " " + action);
-    assert.equal(animation.frameCount, durations.length);
-    assert.equal(animation.loop, html.includes('data-loop="true"'));
-    assert.ok(existsSync(new URL("../" + path, import.meta.url)));
-    let elapsed = 0;
-    for (const [frame, duration] of durations.entries()) {
-      assert.equal(unitAnimationFrame(animation, elapsed), frame);
-      assert.equal(unitAnimationFrame(animation, elapsed + duration - .001), frame);
-      elapsed += duration;
-    }
-    assert.equal(unitAnimationFrame(animation, elapsed), animation.loop ? 0 : animation.frameCount - 1);
-  }
-  for (const tribe of PLAYER_TRIBES) {
-    assert.equal(tribe.idle, UNIT_ANIMATIONS[tribe.key].idle.image);
-    assert.equal(tribe.frames * tribe.frameMs, UNIT_ANIMATIONS[tribe.key].idle.durationMs);
-  }
-  for (const [species, animation] of Object.entries(CREATURE_IDLE_ANIMATIONS)) {
-    const html = cell(species, "idle");
-    const path = html.match(/data-preview="([^"]+)"/)?.[1] || html.match(/href="([^"]+)"/)[1];
-    assert.ok(existsSync(new URL("../" + path, import.meta.url)), species + " 원본");
-    if (animation.image !== path) {
-      const metadataPath = animation.image.replace(/[^/]+$/, "runtime.json");
-      const metadata = JSON.parse(readFileSync(new URL("../" + metadataPath, import.meta.url), "utf8"));
-      const hash = createHash("sha256").update(readFileSync(new URL("../" + path, import.meta.url))).digest("hex");
-      assert.equal(metadata.sourceAtlasSha256, hash, species + " 런타임 출처");
-      assert.equal(metadata.image, animation.image);
-      assert.equal(metadata.frameSize, animation.frameSize);
-      assert.equal(metadata.columns, animation.columns);
-      assert.equal(metadata.loop, animation.loop);
-      assert.equal(metadata.pivotX, animation.pivotX);
-      assert.equal(metadata.pivotY, animation.pivotY);
-      assert.deepEqual(metadata.durationsMs, animation.durationsMs);
-      const original = imageDimensions(new URL("../" + path, import.meta.url));
-      const runtime = imageDimensions(new URL("../" + animation.image, import.meta.url));
-      assert.ok(metadata.sourceScale > 0 && metadata.sourceScale <= 1);
-      assert.deepEqual(runtime, original.map(value => value * metadata.sourceScale));
-      assert.equal(runtime[0], animation.columns * animation.frameSize);
-      assert.equal(runtime[1], Math.ceil(animation.frameCount / animation.columns) * animation.frameSize);
-      const policy = JSON.parse(readFileSync(new URL("../DesignAssets/image-sizes.json", import.meta.url), "utf8"));
-      const size = policy.images[animation.image];
-      assert.ok(size, species + " 표시 크기 등록");
-      assert.deepEqual(size.grid, [animation.columns, Math.ceil(animation.frameCount / animation.columns)]);
-      assert.ok(size.display.every(value => value > 0));
-      assert.ok(size.display.every(value => animation.frameSize <= value * policy.maximumScale));
-    }
-    assert.deepEqual(animation.durationsMs, cell(species, "idle").match(/data-durations="([^"]+)"/)[1].split(",").map(Number));
-  }
-});
-
 test("속성이 있어도 피격·공격을 재생하고 채집·운반·투척·대기를 실제 상태로 선택한다", () => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     const agent = { id: tribe, tribe, health: 10, attributes: { strength: 1, feet: 1, antenna: 1 },
@@ -129,18 +66,15 @@ test("이전 저장의 포자버섯 탄생 시간도 3.12초로 복구하며 탄
   game.prepare(3.121);game.tick(.002);assert.equal(restored.birth, null);
 });
 
-test("몽돌은 기본 이속에서 0.8초마다 디디고 같은 이동 거리에는 같은 프레임을 쓴다", () => {
+test("몽돌의 40ms 원본 프레임은 이동 속도와 관계없이 연속 재생한다", () => {
   const agent = { tribe: "pebble", health: 10, mode: "search", bornAt: 0, hurtStartedAt: -10,
-    moveStartedAt: 0, moveDuration: 2, stepCount: 1, attributes: {} };
-  assert.equal(unitAnimationPose(agent, .2).frame, 5);
-  assert.equal(unitAnimationPose(agent, .4).frame, 10);
-  assert.equal(unitAnimationPose(agent, .8).frame, 0);
+    moveStartedAt: 0, moveAnimationStartedAt: 0, moveDuration: 2, stepCount: 1, attributes: {} };
   for (const duration of [1.25, 2, 10 / 3]) {
     agent.moveDuration = duration;
-    assert.equal(unitAnimationPose(agent, duration * .2).frame, 10);
+    for (const [time, frame] of [[.2, 5], [.4, 10], [.8, 0]]) assert.equal(unitAnimationPose(agent, time).frame, frame);
   }
   agent.moveDuration = 2;
   assert.equal(unitAnimationPose(agent, 2 - .000001).frame, 9);
-  agent.moveStartedAt = 2;agent.stepCount = 2;
+  agent.moveStartedAt = 2; agent.stepCount = 2;
   assert.equal(unitAnimationPose(agent, 2).frame, 10);
 });

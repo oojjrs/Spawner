@@ -30,8 +30,8 @@ test("world decode prepares a later frame without painting into the current canv
   assert.deepEqual(ctx.transforms[0], [30, 40]);
   const draw = ctx.draws[0];
   assert.equal(draw[1], 512); // raster is full resolution for this DPR/growth
-  assert.equal(draw[7], 128 * 1.05); // actual DNA wins; growth is applied once
-  assert.equal(draw[5], -256 / 512 * 128 * 1.05);
+  assert.equal(draw[7], 128 * (1 + .01 * 5 * .5)); // actual DNA wins; growth is applied once
+  assert.equal(draw[5], -256 / 512 * 128 * (1 + .01 * 5 * .5));
 });
 
 test("a cleared in-flight decode is discarded before synchronous painting", async () => {

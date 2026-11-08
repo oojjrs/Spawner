@@ -1,3 +1,4 @@
+import {fileURLToPath} from 'node:url';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -40,7 +41,7 @@ test('원본 좌향 기준은 추가 반전 없이 왼쪽을 보고 게임의 �
     assert.deepEqual(clip.durationsMs,original.durationsMs,key+'/'+action+'/clock');
     paths.push(clip.image);
   }
-  assert.equal(auditImages(new URL('..',import.meta.url).pathname,paths),12);
+  assert.equal(auditImages(fileURLToPath(new URL('..',import.meta.url)),paths),12);
 });
 
 test('분비물+갑각 두 몽돌 조합은 복구한 raw와 탄생까지 좌향 원본으로 등록된다',()=>{

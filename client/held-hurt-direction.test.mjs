@@ -98,7 +98,7 @@ test("arena/default fallback and missing images keep their original rendering co
   for (const combat of [null, { id: "fight", side: 0 }, { id: "fight", side: 1 }]) {
     const agent = unit({ combat }), events = combat ? frame(shot(), hit()) : frame();
     const result = world(agent, events), source = beanHeldHurtSource(agent), draw = result.calls.find(call => call.kind === "draw");
-    const index = source.times.length;
+    const index = source.sourceFacing === "left" ? 0 : source.times.length;
     assert.equal(draw.args[0], index % source.columns * source.frameWidth); assert.equal(draw.args[1], Math.floor(index / source.columns) * source.frameHeight);
   }
   assert.equal(world(unit(), frame(shot(), hit()), 1.3, () => null).drawn, false);
@@ -145,7 +145,7 @@ test("real noncombat ranged hits select the correct bank without changing server
     assert.ok(live.target.health < 100); assert.equal(heldHurtProjectileSide(live.target, current, live.at + .3), side);
     const view = world(live.target, current, live.at + .3); assert.equal(view.drawn, true);
     const source = beanHeldHurtSource(live.target) || speciesHeldHurtSource(live.target), draw = view.calls.find(call => call.kind === "draw");
-    const index = side > 0 ? source.times.length : 0;
+    const index = side * (source.sourceFacing === "left" ? -1 : 1) > 0 ? source.times.length : 0;
     assert.equal(draw.args[0], index % source.columns * source.frameWidth); assert.equal(draw.args[1], Math.floor(index / source.columns) * source.frameHeight);
     assert.deepEqual(live.units, control.units); assert.equal(live.rolls(), control.rolls()); assert.deepEqual(snapshot, before);
   }

@@ -1,10 +1,12 @@
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {resolve,sep} from 'node:path';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import fs from 'node:fs';
 import {runInNewContext} from 'node:vm';
 test('production body transforms preserve target facing across all 87 appearances', async () => {
-const root = process.env.SPAWNER_REPO || new URL('../', import.meta.url).pathname;
-const load = name => import(root + 'client/' + name + '.mjs');
+const root = resolve(process.env.SPAWNER_REPO || fileURLToPath(new URL('../', import.meta.url))) + sep;
+const load = name => import(pathToFileURL(root + 'client/' + name + '.mjs'));
 const {WELCOME_UNIT_APPEARANCES,welcomeTravelMotion}=await load('welcome-presentation');
 const {UNIT_ACTION_ART}=await load('unit-action-art-assets');
 const {unitActionArtPose}=await load('unit-action-art');
@@ -12,9 +14,9 @@ const {createUnitPresentation}=await load('unit-presentation');
 const {createCombatStage}=await load('combat-stage');
 const animation=await load('unit-animation');
 const {COMBAT_LAB_UNITS}=await load('combat-lab');
-const {unitStats}=await import(root+'server/attributes.mjs');
+const {unitStats}=await import(pathToFileURL(root+'server/attributes.mjs'));
 const {TALON_OWL_IDLE}=await load('talon-owl-idle');
-const beetle=await import(root+'server/beetle-animation.mjs');
+const beetle=await import(pathToFileURL(root+'server/beetle-animation.mjs'));
 const {CREATURE_RANGED_ANIMATIONS}=await load('creature-ranged');
 const {UNIT_COMBINATION_FORMS}=await load('unit-combination-forms');
 const forms=['base','gather','antenna','blade','secretion','carapace',...UNIT_COMBINATION_FORMS.map(x=>x.key)];

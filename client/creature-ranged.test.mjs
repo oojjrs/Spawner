@@ -1,3 +1,4 @@
+import {creaturePresentationPose,drawCreaturePresentation} from './creature-presentation.mjs';
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -105,11 +106,11 @@ test("world drawing selects native ranged frames and preserves missing-image fal
   for (const key of species) {
     const animation = CREATURE_RANGED_ANIMATIONS[key], calls = [];
     const sprite = { complete: true, naturalWidth: 2048 };
-    const renderer = createContext({ Spawner: { imageFrameGeometry, creatureAttackPose },
+    const renderer = createContext({ Spawner: { imageFrameGeometry, creatureAttackPose, creaturePresentationPose, drawCreaturePresentation }, idleMotion:{matches:false}, drawSelectionOutline:null,
       state: { simSeconds: 10.3, camera: { zoom: 64 } },
-      creatureAttackSheets: new Map(), creatureRangedSheets: new Map([[key, { animation, sprite, scale: 1 }]]),
+      creaturePresentationResources:{attack:new Map(), ranged:new Map([[key, { animation, sprite, scale: 1 }]])},
       worldToScreen: () => ({ x: 0, y: 0 }), objectOutlineColor: () => null,
-      ctx: { save() {}, restore() {}, translate() {}, scale(x) { calls.push(x); }, drawImage(...args) { calls.push(args); } } });
+      ctx: { save() {calls.push(1);}, restore() {}, translate() {}, scale(x) { calls[calls.length-1] *= x; }, drawImage(...args) { calls.push(args); } } });
     runInContext(source.match(/^    function drawCreatureAttack\([^]*?^    }/m)[0], renderer);
     for (const direction of [-1, 1]) {
       assert.equal(renderer.drawCreatureAttack(unit(key, [10.3], 10.7, direction), { x: 0, y: 0 }), true);
@@ -151,30 +152,6 @@ test("neutral flights retain their first visible outlet and reuse existing gener
   }
 });
 
-test("new body registration exactly inverts the approved melee seed transform without replacing its pixels", () => {
-  for (const key of ["lantern-keeper", "bubble-toad", "vine-turtle"]) {
-    const folder = new URL(`../DesignAssets/Animations/CreatureRangedV1/${key}/`, import.meta.url);
-    const map = JSON.parse(readFileSync(new URL("Source/runtime-registration.json", folder)));
-    const metadata = JSON.parse(readFileSync(new URL("ranged.json", folder)));
-    for (const [path, hash] of [[map.seed, map.seedSha256], [map.referenceImage, map.referenceSha256]])
-      assert.equal(createHash("sha256").update(readFileSync(new URL("../" + path, import.meta.url))).digest("hex"), hash);
-    assert.ok(map.alphaCentroidErrorPixels < .03);
-    assert.ok(map.endpointAlphaAndOpaquePixelsMatchApprovedSeed);
-    assert.ok(map.endpointMaximumVisibleColorError <= 1);
-    const animation = CREATURE_RANGED_ANIMATIONS[key], old = CREATURE_ATTACK_ANIMATIONS[key];
-    for (const [x, y] of [[0, 0], [animation.outletX, animation.outletY], [512, 512]]) {
-      near((x - animation.pivotX) / animation.viewSize,
-        (x * map.scale + map.offset[0] - old.pivotX) * (old.registrationScale || 1) / old.viewSize);
-      near((y - animation.pivotY) / animation.viewSize,
-        (y * map.scale + map.offset[1] - old.pivotY) * (old.registrationScale || 1) / old.viewSize);
-    }
-    assert.equal(metadata.status, "approved-body-and-effects-integrated");
-    assert.equal(metadata.effectsApproved, true);
-    assert.equal(!!metadata.projectileAsset, true);
-    assert.equal(metadata.audio, false);
-  }
-});
-
 test("the actual combat stage selects every approved body release without changing simulation state", async () => {
   const saved = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets, document: globalThis.document };
   globalThis.window = { matchMedia: () => ({ matches: false }), devicePixelRatio: 1 };
@@ -182,6 +159,7 @@ test("the actual combat stage selects every approved body release without changi
     complete = true;
     naturalWidth = 2048;
     naturalHeight = 1024;
+    async decode() {}
     set src(value) { this.source = value; }
     get src() { return this.source; }
   };

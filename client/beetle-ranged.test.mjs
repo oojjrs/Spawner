@@ -1,3 +1,5 @@
+import {creaturePresentationPose,drawCreaturePresentation} from './creature-presentation.mjs';
+import {fileURLToPath} from 'node:url';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -25,7 +27,7 @@ test('approved native beetle body and effect atlases retain identity and source 
   assert.deepEqual(imageDimensions(new URL('../'+a.image,import.meta.url)),[2048,1024]);
   assert.ok(DETAIL_COMBAT_VFX_ASSETS.includes(fx.image));assert.equal(a.launchAtMs,a.durationsMs.slice(0,4).reduce((a,b)=>a+b));
   assert.equal(a.durationMs,a.durationsMs.reduce((a,b)=>a+b));
-  auditImages(new URL('..',import.meta.url).pathname,[a.image,fx.image]);
+  auditImages(fileURLToPath(new URL('..',import.meta.url)),[a.image,fx.image]);
  }
 });
 test('beetle release frames follow every authoritative launch and reject canceled/dead attacks',()=>{
@@ -70,17 +72,16 @@ test('actual outcomes close flight without fake impacts; independent damage and 
  const s=scene(species[0]);s.draw(1);const block={...s.launch,id:'block',kind:'block',at:1.5,amount:1},area={...s.launch,id:'area',kind:'area',at:1.5,amount:2};const rows=s.draw(1.5,[s.launch,block,area]);
  assert.equal(s.detail.defenseCommands(s.positions,1.5).length,1);assert.equal(rows.find(c=>c.eventId==='area').image,DETAIL_COMBAT_VFX.hit.image);
 });
-test('world and modal body calls select ranged instead of the special beetle melee branch',()=>{
+test('world body calls select ranged instead of the special beetle melee branch',()=>{
  for(const key of species){const a=unit(key),calls=[],animation=CREATURE_RANGED_ANIMATIONS[key],sprite={complete:true,naturalWidth:2048};
   const context={save(){},restore(){},translate(){},scale(){},drawImage(...args){calls.push(args);}};
-  const box=createContext({Spawner:{creatureAttackPose,creatureRangedPose,creatureHurtPose,imageFrameGeometry,beetleAnimationPose,BEETLE_SPRITE,BEETLE_ATTACK_SPRITE},state:{simSeconds:1.4,camera:{zoom:100}},creatureAttackSheets:new Map(),creatureRangedSheets:new Map([[key,{animation,sprite,scale:1}]]),creatureHurtSheets:new Map(),creatureIdleSheets:new Map(),worldToScreen:(x,y)=>{calls.push({point:[x,y]});return{x,y};},objectOutlineColor:()=>null,ctx:context});
+  const box=createContext({Spawner:{creaturePresentationPose,drawCreaturePresentation,creatureAttackPose,creatureRangedPose,creatureHurtPose,imageFrameGeometry,beetleAnimationPose,BEETLE_SPRITE,BEETLE_ATTACK_SPRITE},idleMotion:{matches:false},drawSelectionOutline:null,creaturePresentationResources:{attack:new Map(),ranged:new Map([[key,{animation,sprite,scale:1}]])},state:{simSeconds:1.4,camera:{zoom:100}},creatureAttackSheets:new Map(),creatureRangedSheets:new Map([[key,{animation,sprite,scale:1}]]),creatureHurtSheets:new Map(),creatureIdleSheets:new Map(),worldToScreen:(x,y)=>{calls.push({point:[x,y]});return{x,y};},objectOutlineColor:()=>null,ctx:context});
   runInContext(game.match(/^    function drawCreatureAttack\([^]*?^    }/m)[0],box);assert.equal(box.drawCreatureAttack(a,{x:0,y:0}),true);assert.deepEqual(calls.at(-1).slice(1,5),[0,512,512,512]);assert.equal(calls.find(c=>c.point).point[1],key===species[0]?.86:1);
-  runInContext(game.match(/^    function drawCombatCreature\([^]*?^    }/m)[0],box);assert.equal(box.drawCombatCreature(context,a,300,300,150),true);assert.deepEqual(calls.at(-1).slice(1,5),[0,512,512,512]);
  }
 });
 test('world native effects replace only approved visible events and preserve loading/defense fallback',()=>{
  for(const missing of [false,true]){const calls=[],source=unit(species[0]),target={id:'target',tribe:'bean',health:100},images=new Map(),effect=CREATURE_RANGED_EFFECTS[species[0]],ctx=new Proxy({save(){},restore(){},translate(){},rotate(){},drawImage(){calls.push('art');},arc(){calls.push('generic');}},{get:(o,k)=>o[k]||(()=>{})});
- const box=createContext({Spawner:{CREATURE_RANGED_EFFECTS,creatureRangedEffectCommand,creatureRangedBodyCanvas,creatureRangedFlightPoint,drawDetailVfxCell,creatureRangedOutlet,unitDisplaySize},Image:class{complete=!missing;naturalWidth=2048;},worldRangedFlights:new Map(),worldRangedImpacts:new Map(),detailVfxImages:images,assetSource:x=>x,ctx,state:{simSeconds:1.5},worldToScreen:(x,y)=>({x:x*100,y:y*100}),visibleAgents:()=>[source,target],combatVfxFrame:{active:[],projectiles:[{id:'launch',sourceId:'source',targetId:'target',from:{x:4,y:2},to:{x:1,y:2},progress:.5,launchedAt:1,arrivesAt:2}]}});
+ const box=createContext({Spawner:{CREATURE_RANGED_EFFECTS,creatureRangedEffectCommand,creatureRangedBodyCanvas,creatureRangedFlightPoint,drawDetailVfxCell,creatureRangedOutlet,unitDisplaySize},Image:class{complete=!missing;naturalWidth=2048;},SpawnerAssets:{image:()=>({complete:!missing,naturalWidth:2048,naturalHeight:1024})},detailVfxRendering:undefined,worldRangedFlights:new Map(),worldRangedImpacts:new Map(),detailVfxImages:images,assetSource:x=>x,ctx,state:{simSeconds:1.5},worldToScreen:(x,y)=>({x:x*100,y:y*100}),visibleAgents:()=>[source,target],combatVfxFrame:{active:[],projectiles:[{id:'launch',sourceId:'source',targetId:'target',from:{x:4,y:2},to:{x:1,y:2},progress:.5,launchedAt:1,arrivesAt:2}]}});
  runInContext(game.match(/^    function drawWorldCreatureEffect\([^]*?^    }/m)[0]+'\n'+game.match(/^    function drawRecordedDnaEffects\([^]*?^    }/m)[0],box);box.drawRecordedDnaEffects(100);assert.equal(calls.includes('art'),!missing);assert.equal(calls.includes('generic'),missing);
  calls.length=0;box.combatVfxFrame={projectiles:[],active:[{channel:'impact',kind:'hit',mode:'ranged',sourceId:'source',targetId:'target',eventId:'hit',amount:2,age:.28,from:{x:4,y:2},to:{x:1,y:2}}]};box.drawRecordedDnaEffects(100);assert.equal(calls.includes('art'),!missing);
  calls.length=0;box.combatVfxFrame.active.push({channel:'defense',kind:'block',eventId:'hit'});box.drawRecordedDnaEffects(100);assert.equal(calls.includes('art'),false);

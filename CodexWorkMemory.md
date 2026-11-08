@@ -1,3 +1,23 @@
+## 최종 범위·검수 확인 [vfx-hosting-correction-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:35:05+09:00; 확인·기록 Codex /root, 현재채팅과각도구/담당완료보고대조.
+- 앞선vfx-preview-fix기록에서배포폴더에파일이있다는이유로두VFX생성물을현행게시입력이라고기록한것은정정한다. hosting/prepare-site.mjs는VfxPreview.html을제거하며현재진입문서의의존성에VFX검토생성물이없다. 기존dist사본의존재는잔존파일이고공식준비결과에도두파일변경이없음을확인했다. 따라서이번VFX검토툴수정은로컬소스/저장소범위이며이를공개도구로추가노출하지않는다. 공개게임·기획서·Combat/Attribute게시범위는기존정책을유지한다.
+
+## 최종 범위·검수 확인 [final-qa-limits-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:35:05+09:00; 확인·기록 Codex /root, 현재채팅과각도구/담당완료보고대조.
+- 실제기동은로컬파일과HTTP각4종족총8경로게임화면·00:00:01진행·pageerror0/이미지실패0확인. 최신샘방울로컬완료스크린샷직접열람으로화면확인,Combat산출물구문및현행simulation일치d22a65통과. 최종공개사이트4종족실제UI는외부게시후확인할절차이며아직성공으로기록하지않는다. 중간원본PNG11개는Git이력에도없어독립바이트검증불가,현존90개파일과271프레임검증및승인SHA연결로한계를명시했다.
+
+## 최종 범위·검수 확인 [final-scope-check-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:35:05+09:00; 확인·기록 Codex /root, 현재채팅과각도구/담당완료보고대조.
+- 최종소스검토:로컬전투배경등록3개복구,갑각선공실험실판정,기획이동음향2셀연결,Windows픽셀검사경로와VFX검토생성물을수정했다. 서버전체기준106파일1110개와별도combat62개에서발견된실패는대상수정재검증으로해결했다. 클라이언트초기333실패모든슬롯은교정/환경해결/퇴역계약대체로처리됐으며client-suite-ledger-final.json에remaining0이다. 최종전체검사를새로한번실행한것은아니고원래전체실행+변경/실패재검증을조합했다. skip으로숨긴실패없음. 역사감사및퇴역렌더검사는삭제했고현행공용stage/원화/엔진검사에대체근거를연결했다.
+
+## 최종 범위·검수 확인 [client-art-followup-complete-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:35:05+09:00; 확인·기록 Codex /root, 현재채팅과각도구/담당완료보고대조.
+- 추가client11파일초기21실패는18교정통과·퇴역내부계약3제거/대체매핑으로해결했다. 기존38통과와합쳐현재56개성공근거,0실패/0skip. 87외형의world/welcome/combat방향회귀도통과. 마지막VFX는JSON산출물과함수포함원본의표현차이를JSON계약으로비교해e66909에서1/1성공79ms. 형식/scopeddiff002e16/42fcf9통과. 결과art-extra-results.json. 메인45baad로11파일범위대조.
+
 ## 클라이언트 회귀 정리 완료 [client-last-fixtures-complete-01a1b8b3]
 
 - 기록 시각 2026-11-08T13:31:39+09:00; 구현·검수 /root/client_suite_audit, 확인·기록 /root, 현재채팅 및5b68bf범위대조.
@@ -32,6 +52,10 @@
 
 - 기록 시각 2026-11-08T13:27:49+09:00; 구현·검수 /root/economy_tests_finish, 확인·기록 /root, 현재채팅근거.
 - 원화·방향13검사파일의초기36실패를해결했다. 현재82개고유검사는기존전체통과와실패대상후속검증을합쳐82통과/0실패/0skip이며한번의새전체실행은아니다. 테스트12파일및approved-art-source지원함수변경,승인원본SHA에서허용변환체인·Spring특정복구증빙을따라현바이트검증. 폐기secretion렌더통합3검사제거,현행unit-action-art의렌더/재시도/선택검사로대체매핑. Spring원본11중간파일은바이트검증불가이며승인manifest연결만확인;현존90파일과271프레임Canvas검증유지. 근거art-results.json,dee071/9ece42/96c4f8,메인diff7a7a3e·helper4f2ef9대조.
+
+## 남은 원화·프레임 검사 분담 [client-art-followup-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:26:44+09:00; 분담·기록 Codex /root, 목록 /root/client_suite_audit. 원화13파일완료후 /root/economy_tests_finish에게 client/bean-held-hurt,held-hurt-direction,creature-attack,creature-ranged,creature-arc-vfx,beetle-ranged,native-left-facing,facing-render-regression,unit-animation,unit-appearance-renderer,vfx-event-preview의11검사파일·초기21실패를인계한다. 방향정규화·현행원화크기·퇴역원본·WindowsURL을검사하고제품추가변경은먼저보고한다. 기존공용렌더검사로보장되는퇴역내부검사는삭제와대체매핑원칙을그대로적용한다.
 
 ## 렌더·문서 검사 완료 [client-fixture-complete-01a1b8b3]
 

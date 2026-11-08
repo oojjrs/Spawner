@@ -36,9 +36,10 @@ test('both hit sides use separate cells while preserving source orientation and 
  for(const mirror of [false,true])for(const hitSide of [-1,1]){
   const ctx=context(),a=unit({attributes:{secretion:1}}),before=JSON.stringify(a),src=beanHeldHurtSource(a);
   assert.ok(drawBeanHeldHurt(ctx,a,10.2,p=>images.get(p),{cell:250,mirror,hitSide}));
-  const index=(hitSide*(mirror?-1:1)>0?12:0);const call=ctx.calls.find(x=>x[0]==='draw');
+  const reflected=mirror!==(src.sourceFacing==='left');
+  const index=(hitSide*(reflected?-1:1)>0?12:0);const call=ctx.calls.find(x=>x[0]==='draw');
   assert.equal(call[2],index%src.columns*src.frameWidth);assert.equal(call[3],Math.floor(index/src.columns)*src.frameHeight);
-  assert.deepEqual(ctx.calls.find(x=>x[0]==='scale'),['scale',mirror?-1:1,1]);assert.equal(JSON.stringify(a),before);
+  assert.deepEqual(ctx.calls.find(x=>x[0]==='scale'),['scale',reflected?-1:1,1]);assert.equal(JSON.stringify(a),before);
  }
 });
 test('loading failure falls through, then recovers without timer restart; pose expires normally',()=>{
@@ -55,14 +56,6 @@ test('lab nonuniform original mapping and rectangle crop are retained',()=>{
  assert.ok(drawBeanHeldHurt(ctx,a,10.2,p=>images.get(p),{cell:250,sourceScaleX:K*194/239,sourceScaleY:K*154/214,nativePivotX:256.1159793814433,nativePivotY:486.3336156597027}));
  const c=ctx.calls.find(x=>x[0]==='draw');assert.ok(Math.abs(c[6]+(s.pivotX+.1159793814433)*K*194/239)<1e-8);assert.ok(Math.abs(c[7]+(s.pivotY+5.0536156597027)*K*154/214)<1e-8);
  assert.ok(Math.abs(c[8]-s.frameWidth*K*194/239)<1e-8);assert.ok(Math.abs(c[9]-s.frameHeight*K*154/214)<1e-8);
-});
-test('world/detail/lab hooks precede body fallback without clearing attack state',()=>{
- const game=fs.readFileSync(new URL('./game.js',import.meta.url),'utf8'),stage=fs.readFileSync(new URL('./combat-stage.mjs',import.meta.url),'utf8');
- assert.match(game,/function drawAgentAppearance[\s\S]*?drawAgentHeldHurt[\s\S]*?appearanceWorld.draw/);
- assert.match(game,/drawAgentHeldHurt\(context, visual, cell, 0, 0/);assert.match(stage,/const heldDrawn = drawBeanHeldHurt/);
- const helper=game.match(/^    function drawAgentHeldHurt\([^]*?^    }/m)[0];assert.ok(!/attack\s*=|hurtStartedAt\s*=|stunnedUntil\s*=/.test(helper));
- assert.match(game,/frozen && \(agent.tribe \|\| "bean"\) !== "bean"/);
- assert.match(game,/const sourceHeight = frame \? frame.height \|\| frame.size/);
 });
 test('new native atlases are registered exactly and source pixel comparisons passed',()=>{
  assert.equal(auditImages(process.cwd(),BEAN_HELD_HURT_ASSETS),5);

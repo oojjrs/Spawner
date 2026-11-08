@@ -13,8 +13,8 @@ for (const name of ["vfx-event-preview-data.js", "vfx-event-preview.js"])
 const data = JSON.parse(JSON.stringify(scope.SpawnerVfxEventPreviewData));
 
 test("ranged review uses existing approved body, exact projectile pixels and registered outlet", () => {
-  assert.deepEqual(data.sourceForm, UNIT_RANGED_FORMS.bean);
-  assert.deepEqual(data.targetForm, UNIT_RANGED_FORMS.spore);
+  assert.deepEqual(data.sourceForm, JSON.parse(JSON.stringify(UNIT_RANGED_FORMS.bean)));
+  assert.deepEqual(data.targetForm, JSON.parse(JSON.stringify(UNIT_RANGED_FORMS.spore)));
   const sprite = unitRangedProjectile(data.source);
   assert.equal(sprite.image, data.sourceForm.projectile.image);
   assert.deepEqual(imageDimensions(new URL("../" + sprite.image, import.meta.url)), [sprite.width, sprite.height]);
