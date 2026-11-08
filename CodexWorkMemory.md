@@ -1,3 +1,8 @@
+## 검사·복구 결과 [root-client-complete-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:21:24+09:00; 사용자전체점검지시,확인·기록Codex /root. 출처현재채팅및명시담당도구근거.
+- 메인소유client9파일은55기존검사중역사감사를현재엔진과비교하던폐기2개제거,현행53개통과. 첫실행51/53통과351eec/fc1294,추가실패2개를현재치트진입거부와구형template속성이행경계로교정해2/2통과ebacec(18.27초). 핵심은실제배포치트4종직접명령거부,종족왕복/상태보존,Map/Set워커,현재DNA UI,소모형중립/30초봄지기휴식,사체캐시해제,재고키제거다. 형식9a1fad통과. 과거감사JSON은변경없음.
+
 ## 검사·복구 결과 [server-ai-complete-01a1b8b3]
 
 - 기록 시각 2026-11-08T13:21:24+09:00; 사용자전체점검지시,확인·기록Codex /root. 출처현재채팅및명시담당도구근거.
@@ -12,6 +17,18 @@
 
 - 기록 시각 2026-11-08T13:21:24+09:00; 사용자전체점검지시,확인·기록Codex /root. 출처현재채팅및명시담당도구근거.
 - 전투 실험실의 실제DNA만 dnaCanAttack 재사용으로 선공판정을맞췄다. defensive-base-power35개전부통과(270.9ms), 갑각선공·무기관/안테나/채집피격반응·no-offense경계를검사했다. client/build-combat.mjs로 Combat.html6행을동기화했고원본/산출물형식OK. 담당검수11e9e7,메인diff396765/format9a1fad.
+
+## 잔여 클라이언트 검사 교정 근거 [root-client-decisions-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:15:28+09:00; 판단·기록 Codex /root, 현재 채팅·도구943cbe/b9f7a0/1bd2bf/3814cd/2fe6cc/cc6c6f/e72e45. 현행 원본 및 원결정 기록을 읽고 다음으로 범위를 고정한다.
+- 중립 재생성 검사는 사용자 소모형 정책(11월8일11:57:56기록)을 따라 처치 후 재생성 없음·최초 관측으로 막힌 자리 재시도 없음으로 교정한다. 봄지기는 기존30초 휴식 뒤 새 이륙을 검증하며 즉시 연속 배회 전제를 제거한다. 사체는 폐기 combatAttributeArt 대신 실제 death.attributeFrames 캐시 제거를 확인한다.
+- 폐기 자원치트 호출과 foragerMemory 전달 기대를 제거하되 종족 전환 상태/소유권 및 비동기 결과·Map/Set 전달 검사는 유지한다. 이전 재고는 현재 키 자체가 삭제되는 이행을 검사한다. DNA40종 및 체력 조각+20은 현행 카탈로그/스탯 계약을 따른다.
+- cheats 검사는 배포 준비 함수에 가짜revision/모든파일을runtime으로 주는 불완전 저장소 mock 대신 실제 productionRuntime 변환을 실행해 UI·worker치트제거와 직접명령거부를 유지한다. 실제 사이트 준비/배포는 최종 절차로 별도 확인한다.
+- neutral-stat-balance의 11월4일 감사는 appliedToGame=false인 과거 제안이다. 현재 소스 해시/현행DNA형식과 직접 비교하는 폐기 검사2개와 제안의 현재엔진 비교3행을 제거하고 당시 감사 수치·제안·검토 기록 자체 검사는 유지한다. 현재 스탯/DNA는 기존 server combat-critical-stats, DNA와경제검사 및 client neutral-stat-model에서 별도 검증한다. 과거감사JSON이나현재밸런스는변경하지않는다.
+
+## 클라이언트 잔여 검사 메인 분담 [root-client-start-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:12:11+09:00; 분담·기록 Codex /root, 현황 /root/client_suite_audit. client/dna-editor, tribe-switch, cheats, decision-workers, resource-integration, creature-spawn, spring-keeper-flight, corpse-resources, neutral-stat-balance 9검사 파일은 메인이 담당한다. 기존 실패15건이며 폐기 치트API, 변경된 자료/실제 이동, 과거 감사 스냅샷과 현재 구현의 혼합을 각각 독립 근거로 확인한다. 제품 변경은 실제 결함이 확인된 경우에만 별도 판단하고 작업별 기록·커밋한다.
 
 ## 바닥 자원 렌더 순서 검사 완료 [drop-render-complete-01a1b8b3]
 

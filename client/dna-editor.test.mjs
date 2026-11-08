@@ -47,7 +47,7 @@ test("현재 둥지 레벨과 예산은 불러온 설계로 우회하지 않는�
   const {editor,root}=fixture(t);editor.context(1,0,false);editor.load({version:6,pieces:[],level:4,budget:1000},false);
   assert.equal(editor.getDesign().level,1);assert.equal(editor.getDesign().budget,0);
   assert.deepEqual(root.querySelector('.dna-list').children.map(i=>i.dataset.gene),ATTRIBUTE_DNA.catalog.filter(g=>g.grade<=1).map(g=>g.id));
-  editor.context(4,250,false);assert.equal(root.querySelector('.dna-list').children.length,39);assert.equal(editor.getDesign().budget,250);
+  editor.context(4,250,false);assert.equal(root.querySelector('.dna-list').children.length,40);assert.equal(editor.getDesign().budget,250);
 });
 
 test("조각을 떨어진 칸에 놓고 회전·삭제·undo·redo가 독립 좌표를 보존한다",t=>{
@@ -121,7 +121,7 @@ test("공통 스탯 표시는 기본0 숨김과 합산·괄호 증감·색상을
   assert.ok(game.children.some(item=>item.dataset.stat==='scale'));assert.equal(tool.children.some(item=>item.dataset.stat==='scale'),false);
   assert.equal(tool.children.some(item=>item.dataset.stat==='rangedPower'),false);
   const health=tool.children.filter(item=>item.dataset.stat==='health');assert.equal(health[0].className,'design-stat-changed');
-  assert.equal(health[1].children[0].className,'design-stat-value design-stat-changed');assert.equal(health[1].children[1].textContent,' (+10)');
+  assert.equal(health[1].children[0].className,'design-stat-value design-stat-changed');assert.equal(health[1].children[1].textContent,' (+20)');
 });
 
 function sharedModuleSource(name){
@@ -228,7 +228,7 @@ test("범례는 종류별 개수와 실효 변화량을 표시하고 칸 수 배
   const {editor,root}=fixture(t),legend=root.querySelector('.dna-legend');editor.context(4,1000,false);
   const pieces=ATTRIBUTE_DNA.pack(['gather','capacity','capacity','harvestSpeed','harvestSpeed','health','movement','antenna','block','armor'].map(id=>piece(id,0)),4);editor.load({version:6,pieces,level:4,budget:1000},false);
   const rows=()=>Object.fromEntries(legend.children.map(row=>[row.dataset.gene,row.children.slice(1).map(child=>child.textContent)]));
-  assert.deepEqual(rows(),{capacity:['×2',' (운반 +2개)'],gather:['×1',' (채집 기능 해금)'],harvestSpeed:['×2',' (채집 시간 -0.667초)'],health:['×1',' (체력 +10)'],movement:['×1',' (이동 +0.04칸/초)'],antenna:['×1'],block:['×1',' (방어본능 +25%)'],armor:['×1',' (방어 +30)']});
+  assert.deepEqual(rows(),{capacity:['×2',' (운반 +2개)'],gather:['×1',' (채집 기능 해금)'],harvestSpeed:['×2',' (채집 시간 -0.667초)'],health:['×1',' (체력 +20)'],movement:['×1',' (이동 +0.04칸/초)'],antenna:['×1'],block:['×1',' (방어본능 +25%)'],armor:['×1',' (방어 +30)']});
   assert.equal(legend.hidden,false);assert.equal(root.querySelector('.dna-board').children.some(child=>child.className==='dna-fill'),false);
   root.dispatch('keydown',{key:'Delete'});assert.equal(rows().armor,undefined);root.dispatch('keydown',{key:'z',ctrlKey:true});assert.deepEqual(rows().armor,['×1',' (방어 +30)']);editor.load({version:6,pieces:[],level:4,budget:1000},false);assert.equal(legend.hidden,true);
 });
