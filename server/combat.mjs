@@ -284,7 +284,6 @@ export function createCombat(environment) {
     if (!dnaDefensiveMelee(defender.stats?.dna) || defender.health <= 0 || !attacker ||
         !combat || combatTeam(defender) === combatTeam(attacker) || combat.defending) return;
     combat.defending = true;
-    // The initial passive wait is infinite. Receiving an attack opens only this fight's normal attack cycle.
     combat.nextAttackAt = Math.max(time, combat.waitingForAttack ? time : combat.nextAttackAt);
     delete combat.waitingForAttack;
     defender.attackReady = combat.nextAttackAt;
@@ -714,6 +713,7 @@ export function createCombat(environment) {
     let participants = members(combat).sort((a, b) => String(a.agent.id).localeCompare(String(b.agent.id)));
     for (const { agent: member } of participants) {
       if (member.combat.version !== 2) { const old = member.combat; attach(member, old, old.side, time); }
+      activateDefense(member, participants.find(entry => entry.agent.combat.side !== member.combat.side)?.agent, time);
       dropCarriedResources(environment, member); member.moveBudget = 0;
       initializeCombatPosition(member, participants.map(entry => entry.agent), time);
     }

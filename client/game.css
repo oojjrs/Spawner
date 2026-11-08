@@ -972,7 +972,12 @@
 .combat-panel h2 { margin:0; font-size:24px; }
 .combat-panel button { padding:8px 12px; border:1px solid #6b8d7b; border-radius:6px; background:#294439; color:#fff1cd; }
 .combat-panel header button { min-width:64px; min-height:44px; }
-.combat-panel canvas { grid-row:3; display:block; width:100%; height:100%; min-height:0; margin:0; border-radius:8px; background:#344735 center/cover no-repeat; }
+.combat-panel canvas { grid-row:3; grid-column:1; display:block; width:100%; height:100%; min-height:0; margin:0; border-radius:8px; background:#344735 center/cover no-repeat; }
+.combat-result { grid-area:3 / 1; z-index:1; align-self:center; justify-self:stretch; padding:24px 12px; text-align:center; font-size:clamp(36px,6vw,64px); font-weight:800; letter-spacing:.15em; color:#f6da88; background:linear-gradient(90deg,transparent,#10251feb 25%,#10251feb 75%,transparent); text-shadow:0 3px 16px #000b; pointer-events:none; animation:combat-result-enter .45s ease-out both; }
+.combat-result[hidden] { display:none; }
+.combat-result[data-result="defeat"] { color:#f2a995; }
+@keyframes combat-result-enter { from { opacity:0; transform:scale(.88); } to { opacity:1; transform:scale(1); } }
+@media (prefers-reduced-motion:reduce) { .combat-result { animation:none; } }
 .combat-summary { grid-row:2; margin:0; align-self:center; font-size:15px; line-height:1.7; overflow-wrap:anywhere; }
 .combat-roster { grid-row:6; display:flex; min-width:0; overflow-x:auto; gap:8px; }
 .combat-roster button { flex:1; min-width:max-content; white-space:nowrap; }

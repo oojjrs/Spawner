@@ -7450,13 +7450,17 @@
     combatSummary.className = "combat-summary";
     const combatCanvas = document.createElement("canvas");
     combatCanvas.setAttribute("aria-label", "전투 중인 유닛");
+    const combatResult = document.createElement("div");
+    combatResult.className = "combat-result";
+    combatResult.setAttribute("role", "status");
+    combatResult.hidden = true;
     const combatRoster = document.createElement("div");
     combatRoster.className = "combat-roster";
     const combatDetail = document.createElement("p");
     const combatGauge = document.createElement("progress");
     combatGauge.max = 1;
     combatGauge.setAttribute("aria-label", "다음 공격");
-    combatPanel.append(combatHeader, combatSummary, combatCanvas, combatRoster, combatDetail, combatGauge);
+    combatPanel.append(combatHeader, combatSummary, combatCanvas, combatResult, combatRoster, combatDetail, combatGauge);
     document.body.append(combatPanel);
     const combatStage = Spawner.createCombatStage(combatCanvas);
     let combatWatch = null;
@@ -7465,8 +7469,10 @@
     combatClose.addEventListener("click", () => combatPanel.close());
     combatPanel.addEventListener("keydown", event => event.stopPropagation());
     combatPanel.addEventListener("close", () => {
+      if (combatPanel.open) return;
       combatStage.clear();
       combatWatch = null;
+      combatResult.hidden = true;
       updateCombatMarkers();
       const focus = combatReturnFocus?.isConnected && !combatReturnFocus.hidden ? combatReturnFocus : unitPanel.querySelector("button:not([hidden])");
       focus?.focus({ preventScroll: true });
@@ -7485,7 +7491,11 @@
       } finally { button.disabled = false; }
       if (connection.roomId !== roomId || !connection.active || !combatGroups().has(combat.id)) return;
       combatStage.clear();
-      combatWatch = { id: combat.id, roomId, x: combat.x, y: combat.y, summary: "", scene, members: new Map(), survivors: new Map() };
+      combatWatch = { id: combat.id, roomId, x: combat.x, y: combat.y, summary: "", scene,
+        members: new Map(units.map(agent => [String(agent.id), { agent: { ...agent, combat: { ...agent.combat,
+          position: agent.combat.position && { ...agent.combat.position } } }, at: connection.simSeconds }])), survivors: new Map(),
+        side: (units.find(agent => state.agents.some(own => own.id === agent.id)) || units[0]).combat.side };
+      combatResult.hidden = true;
       combatSelected = String(units[0].id);
       combatReturnFocus = button;
       stopMapMovement();
@@ -7546,6 +7556,12 @@
     function drawCombatPanel(now) {
       if (!combatPanel.open || !combatWatch) return;
       if (combatWatch.roomId !== connection.roomId || !connection.active) { combatPanel.close(); return; }
+      if (combatWatch.endedAt != null) {
+        if (now - combatWatch.endedAt >= 3000) { combatPanel.close(); return; }
+        combatWatch.scene.time = combatWatch.endedTime + (now - combatWatch.endedAt) / 1000;
+        combatStage.render(combatWatch.scene, now, true);
+        return;
+      }
       const present = [...state.agents, ...state.rivals];
       const units = present.filter(agent => agent.health > 0 && agent.combat?.id === combatWatch.id);
       if (!units.some(agent => String(agent.id) === combatSelected)) combatSelected = units.length ? String(units[0].id) : null;
@@ -7609,6 +7625,18 @@
       combatGauge.value = selected ? clamp(1 - ((selected.combat.nextAttackAt || state.simSeconds) - state.simSeconds) / profile.attackInterval, 0, 1) : 0;
       if (units.length) { combatWatch.x = units[0].combat.x; combatWatch.y = units[0].combat.y; }
       scene.background = "DesignAssets/Combat/" + combatBackgroundAt(combatWatch.x, combatWatch.y) + ".webp";
+      if (!units.length) {
+        const survivors = [...combatWatch.survivors.values()];
+        const remainingSides = new Set(survivors.map(agent => agent.combat.side));
+        const winner = remainingSides.size === 1 ? survivors[0].combat.side : null;
+        const result = winner === null ? "ended" : winner === combatWatch.side ? "victory" : "defeat";
+        combatWatch.endedAt = now;
+        combatWatch.endedTime = scene.time;
+        scene.result = () => ({ reason: result });
+        combatResult.dataset.result = result;
+        combatResult.textContent = result === "victory" ? "승리" : result === "defeat" ? "패배" : "전투 종료";
+        combatResult.hidden = false;
+      }
       combatStage.render(scene, now, true);
     }
     function templateDescription(slots, levels) {

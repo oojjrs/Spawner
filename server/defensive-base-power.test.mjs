@@ -4,7 +4,7 @@ import { DNA_COMBAT_RULES } from "./dna-combat-stats.mjs";
 import { ATTRIBUTE_DNA } from "./dna.mjs";
 import { dnaUnitStats } from "./dna-unit.mjs";
 import { dnaAttackMode } from "./dna-actions.mjs";
-import { combatDamage, combatProfile } from "./combat-stats.mjs";
+import { combatDamage, combatProfile, unitCombatStats } from "./combat-stats.mjs";
 import { combatDisposition, canPursueCombat, createCombat } from "./combat.mjs";
 import { combatPositionRadius } from "./combat-position.mjs";
 import { startingWorkerDna } from "./tribe-start.mjs";
@@ -100,11 +100,9 @@ test("all twelve basic appearance trials preserve power-1 hits and carapace init
       right: { key: "bean", counts: {} }, first: "left", random: false });
     trial.finish();
     assert.equal(trial.reason, "death");
-    assert.equal(trial.history.find(event => event.kind === "attack").attackerId, genes.includes("carapace") ? "left" : "right");
-    const incoming = trial.history.find(event => event.kind === "hit" && event.targetId === "left");
+    assert.ok(trial.history.some(event => event.kind === "attack" && event.attackerId === "left"));
     const outgoing = trial.history.filter(event => event.kind === "hit" && event.attackerId === "left");
     assert.ok(outgoing.length > 0);
-    if (!genes.includes("carapace")) assert.ok(outgoing[0].time > incoming.time);
     for (const event of outgoing) close(event.damage, 1);
     close(trial.result().rightHealth, Math.max(0, 10 - outgoing.length));
     assert.equal(trial.history.some(event => event.kind === "counter"), false);
@@ -114,24 +112,13 @@ test("all twelve basic appearance trials preserve power-1 hits and carapace init
 for (const tribe of tribes) for (const genes of forms) test(`${tribe} ${genes.join("+") || "empty"}: uses power 1 with the appropriate initiation permission`, () => {
   const f = fixture(tribe, genes), { attacker, defender } = f;
   assert.equal(canPursueCombat({ ...defender, combat: null }, { ...attacker, combat: null }, 0), genes.includes("carapace"));
-  if (genes.includes("carapace")) {
-    f.tick(0); assert.equal(defender.attack.counter, false); close(defender.attack.startedAt, 0);
-    f.tick(.299); assert.equal(attacker.health, 10);
-    f.tick(.3); close(attacker.health, 9);
-    const hits = f.events.filter(event => event.kind === "hit" && event.sourceId === defender.id);
-    assert.equal(hits.length, 1); close(hits[0].amount, 1);
-    const count = f.events.length; f.tick(.3); assert.equal(f.events.length, count);
-    return;
-  }
-  f.tick(0); f.tick(.299);
-  assert.equal(defender.attack, null); assert.equal(defender.combat.defending, undefined);
-  assert.equal(f.events.some(event => event.kind === "attack" && event.sourceId === defender.id), false);
+  f.tick(0);
+  assert.equal(defender.combat.defending, true);
+  assert.equal(defender.attack.counter, false); close(defender.attack.startedAt, 0);
+  assert.equal(defender.health, defender.stats.health);
+  f.tick(.299); assert.equal(attacker.health, 10);
   f.tick(.3);
-  assert.ok(defender.health > 0 && defender.health < defender.stats.health);
-  assert.equal(defender.combat.defending, true); assert.equal(defender.attack.attackMode, "melee");
-  assert.equal(defender.attack.counter, false); close(defender.attack.startedAt, .3);
-  close(defender.attack.hitAt, .6); assert.equal(attacker.health, 10);
-  f.tick(.6); close(attacker.health, 9);
+  close(attacker.health, 9);
   const hits = f.events.filter(event => event.kind === "hit" && event.sourceId === defender.id);
   assert.equal(hits.length, 1); close(hits[0].amount, 1);
   assert.equal(f.events.some(event => event.kind === "counter"), false);
@@ -159,30 +146,39 @@ test("no-offense teams never initiate even when simulation initiative chooses th
   }
 });
 
-test("joining a teammate's fight does not authorize an unhurt basic unit to attack", () => {
-  const attacker = unit("a", "right", "bean", design(["blade"]));
-  const defender = unit("b", "left", "bean", design([]));
-  const bystander = unit("c", "left", "bean", design([]));
-  const f = engine([attacker, defender, bystander]);
-  f.combat.engage(attacker, defender, 0);
-  for (const [agent, x, y] of [[attacker, 0, 0], [defender, .9, 0], [bystander, 4, 4]])
-    Object.assign(agent.combat.position, { x, y, fromX: x, fromY: y });
-  f.tick(0); f.tick(.3); f.tick(.6);
-  assert.equal(defender.combat.defending, true); assert.equal(bystander.combat.defending, undefined);
-  assert.equal(bystander.attack, null); assert.equal(bystander.health, bystander.stats.health);
+for (const tribe of tribes) for (const readyAt of [0, 10]) test(tribe + ": three workers join a beetle fight with enemy cooldown " + readyAt, () => {
+  const workers = [0, 1, 2].map(index => unit("worker-" + index, "left", tribe, startingWorkerDna(tribe)));
+  const stats = unitCombatStats("spiny-back-beetle");
+  const beetle = { id: "beetle", species: "spiny-back-beetle", stats, health: stats.health, x: 100, y: 100,
+    moveStartedAt: 0, moveDuration: 0, attackReady: readyAt };
+  const f = engine([...workers, beetle]);
+  f.tick(0);
+  assert.ok(workers.every(worker => worker.combat.id === beetle.combat.id && worker.combat.defending));
+  const positions = workers.map(worker => worker.combat.position.x);
+  f.tick(.05);
+  assert.ok(workers.every((worker, index) => worker.combat.position.x < positions[index] && worker.health === worker.stats.health));
+  if (readyAt === 0) return;
+  for (let step = 1; step <= 200 && !workers.every(worker => f.events.some(event => event.kind === "attack" && event.sourceId === worker.id)); step++) f.tick(step / 20);
+  for (const worker of workers) {
+    const attack = f.events.find(event => event.kind === "attack" && event.sourceId === worker.id);
+    assert.ok(attack, worker.id);
+    const hit = f.events.find(event => event.amount > 0 && event.targetId === worker.id);
+    assert.ok(!hit || attack.at <= hit.at, worker.id);
+  }
 });
 
-test("ranged impact unlocks melee response without granting ranged range or projectiles", () => {
+test("basic participants approach ranged opponents before impact without gaining projectiles", () => {
   const f = fixture("spring", ["antenna"], ["secretion"]);
   const { attacker, defender } = f;
   const gap = combatPositionRadius(attacker) + combatPositionRadius(defender) + 2;
   Object.assign(defender.combat.position, { x: gap, fromX: gap });
   f.tick(0); f.tick(.3);
-  assert.equal(attacker.attack.attackMode, "ranged"); assert.equal(defender.combat.defending, undefined);
+  assert.equal(attacker.attack.attackMode, "ranged"); assert.equal(defender.combat.defending, true);
+  assert.ok(defender.combat.position.x < gap);
   const arrival = attacker.dnaProjectiles[0].hitAt;
-  f.tick(arrival - .001); assert.equal(defender.combat.defending, undefined);
+  f.tick(arrival - .001); assert.equal(defender.combat.defending, true);
   f.tick(arrival);
-  assert.equal(defender.combat.defending, true); assert.equal(defender.attack, null);
+  assert.equal(defender.combat.defending, true);
   assert.equal(dnaAttackMode(defender.stats.dna, 2, true), null);
   const position = defender.combat.position.x; f.tick(arrival + .15); assert.ok(defender.combat.position.x < position);
   Object.assign(defender.combat.position, { x: attacker.combat.position.x + combatPositionRadius(attacker) + combatPositionRadius(defender) + .5 });
@@ -191,23 +187,23 @@ test("ranged impact unlocks melee response without granting ranged range or proj
   assert.equal(f.events.some(event => event.sourceId === defender.id && event.kind === "shoot"), false);
 });
 
-test("lethal first hits never start a defensive attack, and later lethal hits cancel it", () => {
+test("lethal hits cancel basic attacks without postmortem damage", () => {
   const lethal = fixture(); lethal.defender.health = 2;
   lethal.tick(0); lethal.tick(.3); lethal.tick(10);
   assert.equal(lethal.defender.health, 0); assert.equal(lethal.defender.attack, null);
-  assert.equal(lethal.events.some(event => event.sourceId === lethal.defender.id && event.kind === "attack"), false);
+  assert.equal(lethal.events.some(event => event.sourceId === lethal.defender.id && event.amount > 0), false);
   const combo = fixture(); combo.attacker.stats.dna.hits = 3; combo.attacker.stats.dna.comboPower = 100;
   combo.defender.health = 4; combo.tick(0); combo.tick(.3);
   assert.ok(combo.defender.attack); combo.tick(.42); combo.tick(2);
   assert.equal(combo.defender.health, 0); assert.equal(combo.defender.attack, null);
-  assert.equal(combo.events.some(event => event.sourceId === combo.defender.id && event.amount > 0), false);
+  assert.equal(combo.events.some(event => event.sourceId === combo.defender.id && event.amount > 0 && event.at >= .42), false);
 });
 
 test("stun delays a surviving basic response, and blocked or evaded attacks still allow defense", () => {
   const stunned = fixture(); Object.assign(stunned.attacker.stats.dna, { stun: 100, stunTime: .5 });
   stunned.tick(0); stunned.tick(.3); assert.equal(stunned.defender.attack, null);
   stunned.tick(.799); assert.equal(stunned.defender.attack, null);
-  stunned.tick(.8); close(stunned.defender.attack.startedAt, .8);
+  stunned.tick(3); close(stunned.defender.attack.startedAt, 3);
   for (const defense of ["block", "parry", "evasion"]) {
     const f = fixture(); f.defender.stats.dna[defense] = 100;
     f.tick(0); f.tick(.3); assert.equal(f.defender.combat.defending, true, defense);
@@ -216,7 +212,7 @@ test("stun delays a surviving basic response, and blocked or evaded attacks stil
   }
 });
 
-test("retaliation uses bounded normal cycles and releases permission when combat ends", () => {
+test("basic participants keep normal attack cycles and rejoin subsequent combat", () => {
   const f = fixture();
   for (const agent of f.units) agent.health = agent.stats.health = 100;
   f.tick(0); f.tick(12);
@@ -227,21 +223,29 @@ test("retaliation uses bounded normal cycles and releases permission when combat
   f.combat.release(f.defender, 12); f.combat.release(f.attacker, 12);
   f.defender.attackReady = f.attacker.attackReady = 12;
   assert.ok(f.combat.engage(f.attacker, f.defender, 12));
-  assert.equal(f.defender.combat.defending, undefined); f.tick(12.01); assert.equal(f.defender.attack, null);
+  assert.equal(f.defender.combat.defending, undefined); f.tick(12.01); assert.equal(f.defender.combat.defending, true);
+  for (let step = 1; step <= 100 && !f.defender.attack; step++) f.tick(12.01 + step / 20);
+  assert.ok(f.defender.attack);
 });
 
-test("saved defensive windups resume once, while a dormant saved body remains non-offensive", () => {
+test("saved basic windups resume once without duplicate damage", () => {
   for (const at of [0, .3]) {
     const f = fixture(); f.tick(0); if (at) f.tick(at);
     const saved = JSON.parse(JSON.stringify(f.units)), restored = engine(saved);
     const defender = saved.find(agent => agent.id === "defender"), attacker = saved.find(agent => agent.id === "attacker");
-    if (!at) {
-      restored.tick(.1); assert.equal(defender.attack, null); assert.equal(defender.combat.defending, undefined);
-    } else {
-      assert.equal(defender.combat.defending, true); restored.tick(.6); close(attacker.health, 9);
-      const events = restored.events.length; restored.tick(.6); assert.equal(restored.events.length, events);
-    }
+    assert.equal(defender.combat.defending, true); restored.tick(.6); close(attacker.health, 9);
+    const events = restored.events.length; restored.tick(.6); assert.equal(restored.events.length, events);
   }
+});
+
+test("old saved participants waiting for damage join the current attack cycle", () => {
+  const f = fixture();
+  f.defender.combat.waitingForAttack = true;
+  f.defender.combat.nextAttackAt = Infinity;
+  f.tick(.1);
+  assert.equal(f.defender.combat.waitingForAttack, undefined);
+  assert.equal(f.defender.attack.startedAt, .1);
+  assert.equal(f.defender.health, f.defender.stats.health);
 });
 
 test("military organs retain their original attack formulas and base bodies do not activate upgrade genes", () => {
