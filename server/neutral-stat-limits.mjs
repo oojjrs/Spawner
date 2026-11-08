@@ -11,7 +11,7 @@ export const NEUTRAL_STAT_LIMITS = Object.freeze(Object.fromEntries([
   ["criticalPower",{"min":0,"max":500}],
   ["accuracy",{"min":0,"max":60}],
   ["penetration",{"min":0,"max":286}],
-  ["comboSpeed",{"min":0.12,"max":0.06}],
+  ["comboSpeed",{"min":0.18,"max":0.06}],
   ["focus",{"min":0.3,"max":0.08}],
   ["evasion",{"min":0,"max":60}],
   ["parry",{"min":0,"max":60}],

@@ -19,5 +19,6 @@ export function dnaProjectileValid(source, target) {
 }
 
 export function dnaAttackStats(stats, mode) {
-  return { power: mode === "ranged" ? stats.rangedPower : stats.meleePower, speed: mode === "ranged" ? stats.rangedSpeed : stats.meleeSpeed };
+  return { power: mode === "ranged" ? stats.rangedPower : stats.meleePower, speed: mode === "ranged" ? stats.rangedSpeed : stats.meleeSpeed,
+    timingRate: (mode === "ranged" ? stats.rangedTimingRate : stats.meleeTimingRate) || 1 };
 }

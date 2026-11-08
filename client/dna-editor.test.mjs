@@ -43,6 +43,33 @@ function piece(gene,rotation){const entry=ATTRIBUTE_DNA.lookup.get(gene);return 
 function design(pieces){return {version:6,pieces,level:1,budget:0};}
 function place(root){root.querySelector('.dna-add').onclick();}
 
+test("상한 조각의 추가는 막고 선행기관 없는 첫 강화와 종족별 상한은 구분한다",t=>{
+  const {editor,root}=fixture(t),item=id=>root.querySelector('.dna-list').children.find(value=>value.dataset.gene===id);
+  editor.context(4,1000,false,'bean');
+  selectGene(root,'critical');place(root);assert.equal(editor.getDesign().pieces.length,1);
+  const value={version:6,level:4,budget:1000,pieces:ATTRIBUTE_DNA.pack(Array.from({length:3},()=>piece('critical',0)),4)};
+  editor.load(value,false);assert.equal(item('critical').attributes['aria-disabled'],'true');
+  selectGene(root,'critical');root.dispatch('keydown',{key:'Enter'});place(root);assert.deepEqual(editor.getDesign().pieces,value.pieces);
+  editor.load({...value,pieces:ATTRIBUTE_DNA.pack(Array.from({length:3},()=>piece('block',0)),4)},false);
+  assert.equal(item('block').attributes['aria-disabled'],'false');editor.context(4,1000,false,'pebble');assert.equal(item('block').attributes['aria-disabled'],'true');
+});
+
+test("기존 과다배치는 보존하고 이동·삭제·되돌리기 때 상한을 다시 계산한다",t=>{
+  const {editor,root}=fixture(t,{width:800,height:600}),canvas=root.querySelector('canvas');editor.context(4,1000,false,'bean');
+  const pieces=ATTRIBUTE_DNA.pack(Array.from({length:4},()=>piece('critical',0)),4),value={version:6,level:4,budget:1000,pieces};
+  editor.load(value,false);editor.clearHistory();assert.deepEqual(editor.getDesign(),value);
+  const v=dnaEditorViewport(ATTRIBUTE_DNA,4,null,null,800,600),point={button:0,pointerId:1,clientX:v.x+34*Math.sqrt(3)*(pieces[0].q+pieces[0].r/2)*v.scale,clientY:v.y+51*pieces[0].r*v.scale};
+  canvas.dispatch('pointerdown',point);assert.equal(root.dataset.moving,'0');
+  const cells=ATTRIBUTE_DNA.pieceCells(pieces[0]).map(cell=>({x:34*Math.sqrt(3)*(cell.q+cell.r/2),y:51*cell.r}));
+  canvas.dispatch('pointermove',{...point,clientX:v.x+(Math.min(...cells.map(cell=>cell.x))+Math.max(...cells.map(cell=>cell.x)))/2*v.scale,clientY:v.y+(Math.min(...cells.map(cell=>cell.y))+Math.max(...cells.map(cell=>cell.y)))/2*v.scale});
+  assert.equal(root.querySelector('.dna-add').disabled,false);canvas.dispatch('pointercancel',{});assert.deepEqual(editor.getDesign(),value);
+  editor.load({...value,pieces:pieces.slice(0,3)},false);editor.clearHistory();
+  const item=()=>root.querySelector('.dna-list').children.find(entry=>entry.dataset.gene==='critical');
+  canvas.dispatch('pointerdown',point);canvas.dispatch('pointerup',point);assert.equal(editor.getDesign().pieces.length,2);assert.equal(item().attributes['aria-disabled'],'false');
+  root.dispatch('keydown',{key:'z',ctrlKey:true});assert.equal(editor.getDesign().pieces.length,3);assert.equal(item().attributes['aria-disabled'],'true');
+  root.dispatch('keydown',{key:'y',ctrlKey:true});assert.equal(editor.getDesign().pieces.length,2);assert.equal(item().attributes['aria-disabled'],'false');
+});
+
 test("현재 둥지 레벨과 예산은 불러온 설계로 우회하지 않는다",t=>{
   const {editor,root}=fixture(t);editor.context(1,0,false);editor.load({version:6,pieces:[],level:4,budget:1000},false);
   assert.equal(editor.getDesign().level,1);assert.equal(editor.getDesign().budget,0);

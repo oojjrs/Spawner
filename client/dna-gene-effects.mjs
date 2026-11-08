@@ -46,6 +46,14 @@ export function dnaGeneEffects(M,pieces,geneId,tribe) {
     conditional:missing.length?difference(M.stats(activated,tribe),M.stats([...activated,piece],tribe),primary[geneId]||geneId):[]};
 }
 
+export function dnaGeneCapped(M,pieces,geneId,tribe) {
+  const gene=M.lookup.get(geneId);
+  if(!gene||gene.category==='organ')return false;
+  const result=dnaGeneEffects(M,pieces,geneId,tribe);
+  const effects=result.missing.length?result.conditional:result.effects;
+  return effects.length>0&&effects.every(effect=>Math.abs(effect.delta)<1e-9);
+}
+
 function effectLine(effect) {
   const {label,unit,delta}=effect;
   if(effect.key==='harvestReduction')return label+' '+(delta===0?'+0':format(-delta))+'%p';

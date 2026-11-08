@@ -329,15 +329,16 @@ export function createCombat(environment) {
     if (!counter) combat.attackCount++;
     if (combatAbilityStats(attacker) && !profile.attackSpeed) { combat.nextAttackAt = Infinity; return; }
     const heavy = !counter && profile.primary === "piercing" && combat.attackCount % 3 === 0;
-    const windup = counter ? (environment.combatRules?.counterWindup ?? .12) : profile.windup + (heavy ? .15 : 0);
+    const timingRate = profile.timingRate || 1;
+    const windup = counter ? (environment.combatRules?.counterWindup ?? .12) / timingRate : profile.windup + (heavy ? .15 : 0);
     const timing = CREATURE_ATTACK_TIMINGS[attacker.species] || (attacker.species === "spiny-back-beetle" ? BEETLE_ANIMATIONS.attack :
       { durationMs: AGENT_ATTACK_DURATION * 1000 });
-    const recovery = Math.max(profile.recovery, timing.durationMs / 1000 - (timing.hitTimeMs / 1000 || AGENT_ATTACK_HIT_TIME));
+    const recovery = Math.max(profile.recovery, (timing.durationMs / 1000 - (timing.hitTimeMs / 1000 || AGENT_ATTACK_HIT_TIME)) / timingRate);
     const duration = windup + recovery;
     attacker.attack = { combatId: combat.id, startedAt: time, hitAt: time + windup, endsAt: time + duration,
       speed: timing.durationMs / 1000 / duration, directionX: Math.sign(target.combat.position.x - combat.position.x) || attacker.facing || 1,
       targetId: target.id, targetKind: "agent", targetX: combat.x, targetY: combat.y,
-      resolved: false, hit: false, counter, heavy, attackMode: mode, recovery, interval: profile.attackInterval };
+      resolved: false, hit: false, counter, heavy, attackMode: mode, recovery, timingRate, interval: profile.attackInterval };
     if (combatAbilityStats(attacker)) {
       attacker.attack.hitIndex = 0; attacker.attack.heavy = false;
       attacker.attack.hitCount = counter ? 1 : actionCount(combatAbilityStats(attacker).hits);

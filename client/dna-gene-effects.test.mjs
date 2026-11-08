@@ -3,10 +3,22 @@ import assert from 'node:assert/strict';
 import { ATTRIBUTE_DNA as M } from '../server/dna.mjs';
 import { dnaUnitStats } from '../server/dna-unit.mjs';
 import { dnaGeneNames } from './dna-editor.mjs';
-import { dnaGeneEffects, dnaGeneTooltip, DNA_EFFECT_ROWS } from './dna-gene-effects.mjs';
+import { dnaGeneEffects, dnaGeneTooltip, dnaGeneCapped, DNA_EFFECT_ROWS } from './dna-gene-effects.mjs';
 const piece=gene=>({gene,grade:M.lookup.get(gene).grade,rotation:0,q:0,r:0});
 const close=(a,b)=>assert.ok(Math.abs(a-b)<1e-9,`${a} != ${b}`);
 const effect=(result,key)=>result.effects.find(value=>value.key===key);
+
+test('상한은 누적 효과로 판단하고 미배치 선행 속성 때문에 첫 조각을 막지 않는다',()=>{
+  for(const gene of M.catalog)assert.equal(dnaGeneCapped(M,[],gene.id,'bean'),false,gene.id);
+  for(const [gene,count] of [['critical',3],['blockPower',3],['reduction',3],['comboSpeed',2],['focus',2],['areaPower',1],['harvestSpeed',10]]){
+    const capped=Array.from({length:count},()=>piece(gene));
+    assert.equal(dnaGeneCapped(M,capped,gene,'bean'),true,gene);
+    assert.equal(dnaGeneCapped(M,capped.slice(1),gene,'bean'),false,gene);
+  }
+  assert.equal(dnaGeneCapped(M,Array.from({length:3},()=>piece('critical')),'critical','spore'),true);
+  assert.equal(dnaGeneCapped(M,Array.from({length:3},()=>piece('block')),'block','pebble'),true);
+  assert.equal(dnaGeneCapped(M,Array.from({length:3},()=>piece('block')),'block','bean'),false);
+});
 
 for(const tribe of ['bean','spore','pebble','spring'])test(`${tribe}: 모든 40개 속성의 수치는 실제 유닛 계산과 같다`,()=>{
   for(const gene of M.catalog)for(const pieces of [[],['blade','secretion','gather','carapace','combo','block','critical','stun','bleed','area'].filter(id=>id!==gene.id).map(piece)]){

@@ -14,14 +14,15 @@ export const AGENT_ATTACK_ASSET = "DesignAssets/Animations/UnitAttack/attack.png
 
 export function attackAnimationSegments(attack, time, hitTime, duration) {
   const contacts = attack.meleeContacts?.length ? attack.meleeContacts : [attack.hitAt];
-  const startFor = index => index ? Math.max(contacts[index] - hitTime,
+  const rate = Number.isFinite(attack.timingRate) && attack.timingRate > 0 ? attack.timingRate : 1;
+  const startFor = index => index ? Math.max(contacts[index] - hitTime / rate,
     contacts[index - 1] + (contacts[index] - contacts[index - 1]) * (duration - hitTime) / duration) : attack.startedAt;
   let index = 0;
   while (index < contacts.length - 1 && time >= startFor(index + 1)) index++;
   const contact = contacts[index], start = startFor(index);
-  const end = Math.min(attack.endsAt, contact + duration - hitTime,
+  const end = Math.min(attack.endsAt, contact + (duration - hitTime) / rate,
     index < contacts.length - 1 ? startFor(index + 1) : Infinity);
-  return [[start, 0], [contact, hitTime], [end, hitTime + Math.max(0, end - contact)]];
+  return [[start, 0], [contact, hitTime], [end, hitTime + Math.max(0, end - contact) * rate]];
 }
 
 export function attackAnimationElapsed(attack, time, hitTime, duration) {
@@ -29,7 +30,8 @@ export function attackAnimationElapsed(attack, time, hitTime, duration) {
   if (Number.isFinite(attack.recovery)) {
     const [[start], [contact]] = attackAnimationSegments(attack, time, hitTime, duration);
     if (time < contact) return Math.max(0, (time - start) / Math.max(1e-9, contact - start) * hitTime);
-    return Math.min(duration, hitTime + time - contact);
+    const rate = Number.isFinite(attack.timingRate) && attack.timingRate > 0 ? attack.timingRate : 1;
+    return Math.min(duration, hitTime + (time - contact) * rate);
   }
 
   // DNA melee follow-ups move hitAt forward without beginning a new action.

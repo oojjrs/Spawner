@@ -455,35 +455,35 @@
       }
     },
     "comboSpeed": {
-      "min": 0.12,
+      "min": 0.18,
       "max": 0.06,
       "upper": 0.06,
       "descending": true,
       "exact": true,
       "perTribe": {
         "bean": {
-          "min": 0.12,
+          "min": 0.18,
           "max": 0.06,
           "upper": 0.06,
           "exact": true,
           "witness": "comboSpeed"
         },
         "pebble": {
-          "min": 0.12,
+          "min": 0.18,
           "max": 0.06,
           "upper": 0.06,
           "exact": true,
           "witness": "comboSpeed"
         },
         "spore": {
-          "min": 0.12,
+          "min": 0.18,
           "max": 0.06,
           "upper": 0.06,
           "exact": true,
           "witness": "comboSpeed"
         },
         "spring": {
-          "min": 0.12,
+          "min": 0.18,
           "max": 0.06,
           "upper": 0.06,
           "exact": true,

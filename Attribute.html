@@ -4125,7 +4125,7 @@ const DNA_COMBAT_RULES = Object.freeze({
   flatPenPerPoint: 5, percentPenCap: .8, percentPenKnee: 4,
   attackRateBase: .5, hasteCap: 7, hasteKnee: 70, maxActionRate: 4,
   windupBase: .3, focusPerPoint: .04, windupMinimum: .08,
-  hitGapBase: .12, hitSpeedPerPoint: .01, hitGapMinimum: .06, recovery: 0,
+  hitGapBase: .18, hitSpeedPerPoint: .02, hitGapMinimum: .06, recovery: 0,
   defensePreparation: 0, reactionCooldown: 0, counterCooldown: 0,
   followupBase: .5, comboPerPoint: .05, followupCap: 1,
   critCap: .9, critKnee: 9, critMultiplierBase: 2, critMultiplierCap: 5, critPowerKnee: 20,
@@ -4153,6 +4153,8 @@ function dnaCombatStats(counts, weights, inputRules, tribe) {
   const rangedSpeed = ranged ? Math.min(rules.maxActionRate, rules.rangedAttackRateBase * base.rangedSpeed * (1 + capped(n.rangedSpeed || 0, rules.rangedHasteCap, rules.rangedHasteKnee))) : 0;
   return { bladeCount: c.blade || 0, secretionCount: c.secretion || 0,
     melee, ranged, defensiveMelee, meleePower, meleeSpeed, rangedPower, rangedSpeed,
+    meleeTimingRate: melee && rules.attackRateBase * base.meleeSpeed > 0 ? meleeSpeed / (rules.attackRateBase * base.meleeSpeed) : 1,
+    rangedTimingRate: ranged && rules.rangedAttackRateBase * base.rangedSpeed > 0 ? rangedSpeed / (rules.rangedAttackRateBase * base.rangedSpeed) : 1,
     ...(rules.recovery ? { recovery: rules.recovery } : {}),
     health: rules.healthBase * base.health + rules.healthPerPoint * (n.health || 0),
     power: melee || defensiveMelee ? meleePower : rangedPower, hits: attack ? 1 + (c.combo || 0) : 1, speed: melee || defensiveMelee ? meleeSpeed : rangedSpeed,
@@ -4166,10 +4168,10 @@ function dnaCombatStats(counts, weights, inputRules, tribe) {
     accuracy: attack ? 100 * capped(n.accuracy || 0, rules.accuracyCap, rules.accuracyKnee) : 0,
     penetration: attack ? rules.flatPenPerPoint * (n.penetration || 0) : 0,
     ...(n.percentPen ? { armorPenetration: capped(n.percentPen, rules.percentPenCap, rules.percentPenKnee) } : {}),
-    blockPower: 100 * Math.min(rules.blockReductionCap, rules.blockReductionBase + .05 * (c.blockPower || 0)),
+    blockPower: 100 * Math.min(rules.blockReductionCap, rules.blockReductionBase + .15 * (c.blockPower || 0)),
     counter: (attack || c.carapace) ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,
     counterPower: (attack || c.carapace) ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,
-    tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),
+    tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 4 * (n.reduction || 0)),
     stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
     stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,
     bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,
@@ -4647,6 +4649,14 @@ function dnaGeneEffects(M,pieces,geneId,tribe) {
     conditional:missing.length?difference(M.stats(activated,tribe),M.stats([...activated,piece],tribe),primary[geneId]||geneId):[]};
 }
 
+function dnaGeneCapped(M,pieces,geneId,tribe) {
+  const gene=M.lookup.get(geneId);
+  if(!gene||gene.category==='organ')return false;
+  const result=dnaGeneEffects(M,pieces,geneId,tribe);
+  const effects=result.missing.length?result.conditional:result.effects;
+  return effects.length>0&&effects.every(effect=>Math.abs(effect.delta)<1e-9);
+}
+
 function effectLine(effect) {
   const {label,unit,delta}=effect;
   if(effect.key==='harvestReduction')return label+' '+(delta===0?'+0':format(-delta))+'%p';
@@ -4668,12 +4678,12 @@ function dnaGeneTooltip(M,pieces,geneId,tribe,names) {
   return lines.join('\n')||names[geneId]||'';
 }
 
-return { DNA_EFFECT_ROWS, dnaGeneEffects, dnaGeneTooltip };
+return { DNA_EFFECT_ROWS, dnaGeneEffects, dnaGeneCapped, dnaGeneTooltip };
 })();
 modules["client/dna-editor.mjs"] = (() => {
 const { basicRecoveryRate, totalRecoveryRate, UNIT_RECOVERY_RULES } = modules["server/unit-recovery.mjs"];
 const { createDnaAudio } = modules["client/dna-audio.mjs"];
-const { dnaGeneTooltip } = modules["client/dna-gene-effects.mjs"];
+const { dnaGeneTooltip, dnaGeneCapped } = modules["client/dna-gene-effects.mjs"];
 
 const DNA_PLACEMENT_COLORS = Object.freeze({available:'#6bc7ff',blocked:'#ff7b89'});
 
@@ -4829,9 +4839,11 @@ function createDnaEditor(container,dnaModel,onChange,onAction) {
     if(moving>=0)proposed[moving]=piece;else proposed.push(piece);
     const result=M.trace(proposed,level);
     if(gene.category==='organ'&&pieces.some((other,index)=>index!==moving&&other.gene===selected)){result.valid=false;result.reason='organ-limit';}
+    if(moving<0&&geneCapped(selected)){result.valid=false;result.reason='stat-cap';}
     return {piece,pieces:proposed,result,valid:result.valid,reason:result.reason};
   }
   function organBlocked(id){return M.lookup.get(id)?.category==='organ'&&pieces.some((piece,index)=>piece.gene===id&&index!==moving);}
+  function geneCapped(id){return !(moving>=0&&pieces[moving].gene===id)&&dnaGeneCapped(M,pieces,id,tribe);}
   function geneFits(gene){
     const occupied=new Set(pieces.flatMap((piece,index)=>index===moving&&piece.gene===gene.id?[]:M.pieceCells(piece)).map(M.key));
     const available=new Set(M.boardCells(level).filter(cell=>!occupied.has(M.key(cell))).map(M.key));
@@ -4840,7 +4852,7 @@ function createDnaEditor(container,dnaModel,onChange,onAction) {
   }
   function hasPlacement(){
     const cells=M.boardCells(level),available=new Set(cells.filter(cell=>!model.occupied.has(M.key(cell))).map(M.key));
-    for(const gene of M.catalog){if(gene.grade>level||organBlocked(gene.id)||gene.cells.length>available.size)continue;for(const cell of cells)for(let rotation=0;rotation<6;rotation++)if(M.pieceCells({gene:gene.id,rotation,q:cell.q,r:cell.r}).every(point=>available.has(M.key(point))))return true;}
+    for(const gene of M.catalog){if(gene.grade>level||organBlocked(gene.id)||geneCapped(gene.id)||gene.cells.length>available.size)continue;for(const cell of cells)for(let rotation=0;rotation<6;rotation++)if(M.pieceCells({gene:gene.id,rotation,q:cell.q,r:cell.r}).every(point=>available.has(M.key(point))))return true;}
     return false;
   }
   function state(){model=M.trace(pieces,level);preview=candidate();boardFull=model.valid&&!hasPlacement();renderCatalog();renderLegend();renderControls();requestDraw();}
@@ -4876,13 +4888,13 @@ function createDnaEditor(container,dnaModel,onChange,onAction) {
     const list=find('.dna-list');list.replaceChildren();
     for(const gene of M.catalog){
       if(gene.grade>level||(filter!=='all'&&gene.group!==filter))continue;
-      const item=document.createElement('button');item.type='button';item.className='dna-gene';const blocked=organBlocked(gene.id),fits=geneFits(gene),available=!readOnly&&!blocked&&fits;
-      const availability=readOnly?'읽기 전용':blocked?'이미 배치됨':!fits?'공간 부족':'배치 가능';
-      item.setAttribute('aria-label',names[gene.id]+' · '+availability);item.title=dnaGeneTooltip(M,pieces,gene.id,tribe,names)+(available?'':'\n'+availability);item.dataset.gene=gene.id;item.dataset.category=gene.category;if(gene.category==='organ')item.dataset.placed=String(pieces.some(piece=>piece.gene===gene.id));item.disabled=false;item.setAttribute('aria-disabled',String(!available));item.dataset.blocked=String(blocked||!fits);item.dataset.availability=available?'available':'blocked';item.setAttribute('aria-pressed',String(selected===gene.id));item.style.setProperty('--dna-gene-color',gene.fillColor);
+      const item=document.createElement('button');item.type='button';item.className='dna-gene';const blocked=organBlocked(gene.id),capped=geneCapped(gene.id),fits=geneFits(gene),available=!readOnly&&!blocked&&!capped&&fits;
+      const availability=readOnly?'읽기 전용':blocked?'이미 배치됨':capped?'':!fits?'공간 부족':'배치 가능';
+      item.setAttribute('aria-label',names[gene.id]+(availability?' · '+availability:''));item.title=dnaGeneTooltip(M,pieces,gene.id,tribe,names)+(available||!availability?'':'\n'+availability);item.dataset.gene=gene.id;item.dataset.category=gene.category;if(gene.category==='organ')item.dataset.placed=String(pieces.some(piece=>piece.gene===gene.id));item.disabled=false;item.setAttribute('aria-disabled',String(!available));item.dataset.blocked=String(blocked||capped||!fits);item.dataset.availability=available?'available':'blocked';item.setAttribute('aria-pressed',String(selected===gene.id));item.style.setProperty('--dna-gene-color',gene.fillColor);
       const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 44 38');svg.innerHTML=dnaGeneShapeSvg(M,gene);
       const name=document.createElement('strong');name.textContent=names[gene.id];const cost=document.createElement('span');cost.className='dna-gene-cost';cost.textContent=String(M.piecePrice({gene:gene.id,grade:gene.grade}));const badge=document.createElement('small');badge.className='dna-gene-availability';badge.textContent=(available?'✓ ':'× ')+availability;item.append(svg,name,cost,badge);
       item.addEventListener('pointerenter',()=>{if(blocked){warningGene=gene.id;renderControls();}});item.addEventListener('pointerleave',()=>{warningGene=null;renderControls();});item.addEventListener('focus',()=>{if(blocked){warningGene=gene.id;renderControls();}});item.addEventListener('blur',()=>{warningGene=null;renderControls();});
-      item.onclick=()=>{if(readOnly)return;if(blocked){warningGene=gene.id;renderControls();return;}if(!fits)return;moving=-1;offset=null;selected=gene.id;rotation=0;state();root.focus({preventScroll:true});};list.append(item);
+      item.onclick=()=>{if(readOnly)return;if(blocked){warningGene=gene.id;renderControls();return;}if(capped||!fits)return;moving=-1;offset=null;selected=gene.id;rotation=0;state();root.focus({preventScroll:true});};list.append(item);
     }
   }
   function renderControls(){
@@ -4894,7 +4906,7 @@ function createDnaEditor(container,dnaModel,onChange,onAction) {
     const placement=find('.dna-placement'),occupied=hover?model.occupied.get(M.key(hover))?.index:-1;
     const showing=!readOnly&&preview.piece&&active&&(moving>=0||offset||occupied===undefined||occupied===-1);
     placement.hidden=!showing;placement.dataset.state=preview.valid?'available':'blocked';
-    placement.textContent=preview.valid?'✓ 배치 가능':'× 배치 불가 · '+(duplicate?'같은 기관은 하나만':labels[preview.reason]||'공간을 확인해 주세요');
+    placement.textContent=preview.valid?'✓ 배치 가능':preview.reason==='stat-cap'?'× 배치 불가':'× 배치 불가 · '+(duplicate?'같은 기관은 하나만':labels[preview.reason]||'공간을 확인해 주세요');
     canvas.setAttribute('aria-label','DNA 편집 영역'+(showing?' · '+placement.textContent:''));
     find('.dna-cost strong').textContent=String(M.cost(pieces));root.dataset.readonly=String(readOnly);root.dataset.preview=String(preview.valid);root.dataset.filled=String(model.filled);root.dataset.total=String(model.total);root.dataset.moving=String(moving);root.dataset.anchor=anchor.q+','+anchor.r;
   }

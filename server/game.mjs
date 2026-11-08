@@ -1426,10 +1426,12 @@ export function createGame(environment, colony, savedGame) {
         if (building && burrowDistance(agent, target) <= 1) {
           if (state.simSeconds >= agent.attackReady) {
             const profile = combatProfile(agent), hits = agent.dna ? agent.stats.dna.hits : 1;
-            const hitAt = state.simSeconds + (agent.dna ? agent.stats.dna.focus : AGENT_ATTACK_HIT_TIME);
-            const recovery = Math.max(profile.recovery, AGENT_ATTACK_DURATION - AGENT_ATTACK_HIT_TIME);
-            agent.attack = { startedAt: state.simSeconds, speed: 1,
-              hitsRemaining: hits, hitIndex: 0, hitAt, recovery, meleeContacts: [hitAt],
+            const timingRate = profile.timingRate || 1;
+            const windup = agent.dna ? profile.windup : AGENT_ATTACK_HIT_TIME;
+            const hitAt = state.simSeconds + windup;
+            const recovery = Math.max(profile.recovery, (AGENT_ATTACK_DURATION - AGENT_ATTACK_HIT_TIME) / timingRate);
+            agent.attack = { startedAt: state.simSeconds, speed: AGENT_ATTACK_DURATION / (windup + recovery),
+              hitsRemaining: hits, hitIndex: 0, hitAt, recovery, timingRate, meleeContacts: [hitAt],
               endsAt: hitAt + (hits - 1) * (agent.dna ? agent.stats.dna.comboSpeed : 0) + recovery,
               targetId: target.id, targetKind: ["burrow", "nest"].includes(target.kind) ? target.kind : "agent", targetX: target.x, targetY: target.y,
               directionX: Math.sign(target.x - agent.x) || 1, damage: agent.stats.attack,

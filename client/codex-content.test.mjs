@@ -47,7 +47,7 @@ test("DNA 설명은 기관·레벨·가격·종족별 실제 효과와 퇴역 �
   assert.ok(details("rangedPower", "spore").effect.includes("+3.5"));
   assert.deepEqual(details("secretion", "spore").effects, [["원거리 공격력", 1.61], ["원거리 공속", "0.525회/초"]]);
   assert.ok(details("power", "spring").effect.includes("+9.6"));
-  assert.deepEqual(details("blockPower", "bean").effects, [["방어 위력", "+5%p"]]);
+  assert.deepEqual(details("blockPower", "bean").effects, [["방어 위력", "+15%p"]]);
   for (const gene of CODEX_GENES) for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     const value = details(gene.key, tribe);
     assert.ok(!/NaN|undefined|Infinity/.test(JSON.stringify(value)), gene.key);

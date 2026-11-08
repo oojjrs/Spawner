@@ -98,11 +98,12 @@ export function combatProfile(agent) {
   if (abilities) {
     const selected = dnaAttackStats(abilities, agent.attack?.attackMode || (abilities.melee || dnaDefensiveMelee(dna) ? "melee" : "ranged"));
     const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;
+    const timingRate = dna ? selected.timingRate : 1;
     return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: abilities.armor,
-      armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: abilities.focus,
+      armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: abilities.focus / timingRate, timingRate,
       evasion: abilities.evasion / 100,
       parry: abilities.parry / 100, block: abilities.block / 100,
-      recovery: abilities.recovery || 0, blockReduction: Number.isFinite(abilities.blockPower) ? Math.max(0, Math.min(.9, abilities.blockPower / 100)) : .5, criticalChance, criticalMultiplier };
+      recovery: (abilities.recovery || 0) / timingRate, blockReduction: Number.isFinite(abilities.blockPower) ? Math.max(0, Math.min(.9, abilities.blockPower / 100)) : .5, criticalChance, criticalMultiplier };
   }
   const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;
   const primary = combatPrimary(agent);
