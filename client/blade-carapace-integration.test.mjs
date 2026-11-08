@@ -5,6 +5,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { UNIT_APPEARANCE_BITS, unitAppearanceMaskFromAttributes } from '../server/unit-appearance.mjs';
 import { unitBladeCarapaceAppearance, unitDisplayAttributes, unitDominantAppearanceMask, UNIT_DISPLAY_FORM_COUNT, unitDisplayAbilityMask } from './unit-display-appearance.mjs';
 import { unitActionArtDefinition, unitActionArtPose } from './unit-action-art.mjs';
+import { UNIT_BIRTH_ART } from './unit-birth-art-assets.mjs';
 import { BLADE_CARAPACE_ACTION_ART } from './blade-carapace-assets.mjs';
 import { beanHeldHurtSource } from './bean-held-hurt.mjs';
 import { speciesHeldHurtSource } from './species-held-hurt.mjs';
@@ -66,7 +67,7 @@ for (const tribe of tribes) test(`${tribe}: six authored actions, carry fallback
   };
   for (const [action, state] of Object.entries(states)) {
     const pose = unitActionArtPose({ ...agent, ...state }, .1);
-    assert.equal(pose.action, action); assert.equal(pose.animation, definition.actions[action]); assert.equal(pose.missing, false);
+    assert.equal(pose.action, action); assert.equal(pose.animation, action === 'birth' ? UNIT_BIRTH_ART[tribe + '/blade-carapace'] || definition.actions.birth : definition.actions[action]); assert.equal(pose.missing, false);
     assert.ok(existsSync(new URL('../' + pose.animation.image, import.meta.url)));
     assert.ok(pose.frame >= 0 && pose.frame < pose.animation.frameCount);
   }

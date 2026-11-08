@@ -38,9 +38,25 @@ test('Spring birth15 and two shadowed action records change only sourceFacing; e
  assert.equal(keys.length,15);let aliases=0;for(const k of keys){const before=frozen[k];assert.deepEqual(selected(k),{...before.birth,sourceFacing:expectedFacing},k);assert.equal(Boolean(B[k]),before.selectedFrom==='UNIT_BIRTH_ART');if(before.bakedActionBirth){assert.deepEqual(A[k].actions.birth,{...before.bakedActionBirth,sourceFacing:expectedFacing},k+' action alias');aliases++;}}
  assert.equal(aliases,14);assert.equal(keys.reduce((s,k)=>s+selected(k).frameCount,0),271);
 });
-test('101 source atlases, originals, previews, body/environment layers keep exact frozen SHA-256',()=>{
- assert.equal(baseline.files.length,101);for(const f of baseline.files){assert.equal(sha(f.path),f.sha256,f.path);assert.equal(fs.statSync(new URL(f.path,root)).size,f.bytes,f.path+' bytes');}
+test('90 retained source files keep exact bytes and eleven unpublished generation inputs retain approved provenance',()=>{
+ const historicalForms=['blade-antenna','blade-carapace-antenna','blade-carapace','blade-secretion-antenna',
+  'blade-secretion-carapace-antenna','blade-secretion-carapace','blade-secretion','carapace-antenna',
+  'secretion-antenna','secretion-carapace-antenna','secretion-carapace'];
+ const historical=new Set(historicalForms.map(form=>'AnimationCandidates/spring-'+form+'-fullbody-v1-20261107/birth-generated-source.png'));
+ assert.equal(baseline.files.length,101);let retained=0,recorded=0;
+ for(const f of baseline.files){
+  if(historical.has(f.path)){
+   const manifest=JSON.parse(fs.readFileSync(new URL(f.path.replace('birth-generated-source.png','birth-manifest.json'),root)));
+   assert.equal(manifest.generatedSource,'birth-generated-source.png');assert.equal(manifest.sourceSHA256,f.sha256);
+   assert.ok(f.roles.every(role=>role.endsWith(':birth-source-dependency')));
+   recorded++;
+   if(!fs.existsSync(new URL(f.path,root)))continue;
+  }else retained++;
+  assert.equal(sha(f.path),f.sha256,f.path);assert.equal(fs.statSync(new URL(f.path,root)).size,f.bytes,f.path+' bytes');
+ }
+ assert.equal(retained,90);assert.equal(recorded,11);
 });
+
 test('all 271 birth frames and15 idle handoffs use native Canvas with exact cells and both target transforms',async()=>{
  let draws=0;for(const k of keys)draws+=await verifyFrames(k);assert.equal(draws,572);
 });

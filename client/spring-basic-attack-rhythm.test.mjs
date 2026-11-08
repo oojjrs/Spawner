@@ -1,4 +1,5 @@
 import test from "node:test";
+import { approvedAttackSource } from "./test-support/approved-art-source.mjs";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
@@ -11,7 +12,7 @@ const source = "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3
 const base = { id: "spring-basic", tribe: "spring", health: 10, bornAt: 0, attributes: {}, attack: { startedAt: 0, speed: 1 } };
 const readJson = path => JSON.parse(readFileSync(new URL("../" + path, import.meta.url), "utf8"));
 
-test("approved spring basic rhythm keeps every source pose, camera and pixel unchanged", () => {
+test("approved spring basic rhythm preserves camera and timing through the documented whole-body repair", () => {
   const candidate = readJson("client/test-support/spring-basic-approved.json");
   assert.deepEqual(durations, candidate.singleAttack.durationsMs);
   const clip = unitAnimationPose(base, .3).animation;
@@ -22,7 +23,7 @@ test("approved spring basic rhythm keeps every source pose, camera and pixel unc
   assert.equal(clip.frameSize, 516);
   assert.equal(clip.durationMs, 1000);
   assert.equal(durations.slice(0, 5).reduce((sum, ms) => sum + ms, 0), 300);
-  assert.equal(createHash("sha256").update(readFileSync(new URL("../" + source, import.meta.url))).digest("hex"), candidate.sourceSha256);
+  assert.equal(createHash("sha256").update(readFileSync(new URL("../" + source, import.meta.url))).digest("hex"), approvedAttackSource(source,candidate.sourceSha256).sha256);
   let start = 0;
   for (const [frame, ms] of durations.entries()) {
     assert.equal(unitAnimationPose(base, (start + ms / 2) / 1000).frame, frame);

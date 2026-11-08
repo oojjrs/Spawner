@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {approvedArtSource} from './test-support/approved-art-source.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -15,9 +16,9 @@ test('ten approved bean walk replacements retain exact PNG bytes, clocks and nat
  assert.equal(approval.approvedForms.length,10);
  for(const {form,sha256} of approval.approvedForms){
   const clip=UNIT_ACTION_ART['bean/'+form].actions.walk,meta=json(base+'/'+form+'/manifest.json');
-  assert.equal(sha(clip.image),sha256);assert.equal(sha(meta.sheet),sha256);
-  assert.equal(sha(meta.originalSource),meta.originalSourceSHA256);
-  assert.equal(clip.sourceFacing,'right');assert.equal(meta.previewTargetFacing,'left');
+  assert.equal(sha(clip.image),approvedArtSource(clip.image,sha256).sha256);assert.equal(sha(meta.sheet),approvedArtSource(meta.sheet,sha256).sha256);
+  assert.equal(sha(meta.originalSource),approvedArtSource(meta.originalSource,meta.originalSourceSHA256).sha256);
+  assert.equal(clip.sourceFacing,'left');assert.equal(meta.previewTargetFacing,'left');
   assert.equal(clip.frameSize,512);assert.equal(clip.frameHeight,512);assert.equal(clip.columns,8);assert.equal(clip.frameCount,24);
   assert.deepEqual(clip.durationsMs,Array(24).fill(40));assert.equal(clip.durationMs,960);assert.equal(clip.loop,true);
   for(const k of ['pivotX','pivotY','referenceLength'])assert.equal(clip[k],meta[k]);

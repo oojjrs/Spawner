@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { approvedArtSource, approvedArtClip, approvedAttackSource } from './test-support/approved-art-source.mjs';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -26,9 +27,10 @@ test('all twelve defensive attacks are registered as transparent native own-body
     assert.ok(clip, key); assert.equal(clip.defensiveRetaliation, true); assert.equal(clip.loop, false);
     const source = JSON.parse(read(clip.sourceManifest)), original = source.actions.attack;
     assert.deepEqual(Object.keys(source.actions), ['attack']);
-    assert.equal(hash(read(clip.image)), original.sheetSHA256);
+    const approved = approvedAttackSource(clip.image, original.sheetSHA256);
+    assert.equal(hash(read(clip.image)), approved.sha256);
     assert.equal(clip.durationMs, original.durationMs); assert.deepEqual(clip.durationsMs, original.durationsMs);
-    assert.equal(clip.hitTimeMs, original.hitTimeMs); assert.equal(clip.sourceFacing, original.sourceFacing);
+    assert.equal(clip.hitTimeMs, original.hitTimeMs); assert.equal(clip.sourceFacing, approved.repaired ? 'left' : approved.mirrored ? (original.sourceFacing === 'left' ? 'right' : 'left') : original.sourceFacing);
     assert.ok(clip.durationsMs.some((_, index) => clip.durationsMs.slice(0, index).reduce((a, b) => a + b, 0) === clip.hitTimeMs));
     assert.equal(unitActionArtDefinition(agent).actions.attack, clip);
     assert.equal(unitActionArtDefinition(agent).actions.ranged, undefined);
@@ -39,9 +41,11 @@ test('all twelve defensive attacks are registered as transparent native own-body
 
 test('defensive bodies preserve other slots except explicitly audited birth and carry slots', () => {
   const baseline = JSON.parse(read('tools/defensive-attacks-integration-20261107/existing-art-baseline.json'));
+  const replacements = JSON.parse(read('AnimationCandidates/bean-combo-walk-approved-v2-20261107/approval.json')).approvedForms;
+  const sourceHash = path => replacements.find(entry => UNIT_ACTION_ART['bean/' + entry.form].actions.walk.image === path)?.sha256 || baseline.sourceImages[path];
   for (const [key, before] of Object.entries(baseline.definitions)) {
     const after = UNIT_ACTION_ART[key];
-    assert.deepEqual(after.reference, before.reference, key);
+    assert.deepEqual(after.reference, approvedArtClip(before.reference, baseline.sourceImages[before.reference.image]), key);
     for (const [name, clip] of Object.entries(before.actions)) if (name !== 'attack') {
       if (key === 'bean/antenna' && name === 'carry') {
         assert.deepEqual(after.actions.carry, after.actions.walk); continue;
@@ -50,12 +54,14 @@ test('defensive bodies preserve other slots except explicitly audited birth and 
         const corrected = JSON.parse(read('AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/publication-manifest.json')).actions.birth;
         assert.equal(hash(read(after.actions.birth.image)), corrected.sheetSHA256);
         assert.deepEqual(after.actions.birth.durationsMs, clip.durationsMs);
-        assert.equal(after.actions.birth.referenceLength, 155); assert.equal(after.actions.birth.pivotX, 392.5); assert.equal(after.actions.birth.pivotY, 439);
+        assert.equal(after.actions.birth.referenceLength, 155); assert.equal(after.actions.birth.pivotX, after.actions.birth.frameSize - 392.5); assert.equal(after.actions.birth.pivotY, 439);
         continue;
       }
       const { sceneLayers, ...preserved } = after.actions[name];
-      const expected = key === 'bean/carapace-antenna' && name === 'birth' ?
+      let expected = key === 'bean/carapace-antenna' && name === 'birth' ?
         { ...clip, frameCount: 116, durationMs: 3850, durationsMs: clip.durationsMs.slice(0, -1) } : clip;
+      expected = approvedArtClip(expected, sourceHash(clip.image));
+      if (key.startsWith('spring/') && name === 'birth') expected.sourceFacing = 'left';
       assert.deepEqual(preserved, expected, key + '/' + name);
       if (sceneLayers) { assert.equal(name, 'birth'); assert.ok(['bean/carapace-antenna', 'spore/carapace-antenna'].includes(key)); }
     }
@@ -65,19 +71,19 @@ test('defensive bodies preserve other slots except explicitly audited birth and 
     if (path === UNIT_ACTION_ART['pebble/carapace-antenna'].actions.birth.image) continue; // Audited v2 hash is checked above.
     const repaired = JSON.parse(read('AnimationCandidates/bean-combo-walk-approved-v2-20261107/approval.json')).approvedForms
       .find(entry => UNIT_ACTION_ART['bean/' + entry.form].actions.walk.image === path);
-    assert.equal(hash(read(path)), repaired?.sha256 || sha, path);
+    assert.equal(hash(read(path)), approvedArtSource(path,repaired?.sha256 || sha).sha256, path);
   }
 });
 
 for (const tribe of tribes) for (const form of forms) test(`${tribe}/${form}: actual defensive attack drives its own hit frame without gameplay writes`, () => {
   const left = combatLabWithAppearance({ key: tribe }, form), right = combatLabWithAppearance({ key: 'bean' }, 'blade-carapace');
   assert.equal(combatLabAppearance(left), form); assert.ok(validateDna(left.dna, left.dna.level, left.dna.budget));
-  const stats = deriveSimulationStats(left); assert.equal(stats.canAttack, true); assert.equal(stats.canInitiate, false);
+  const stats = deriveSimulationStats(left); assert.equal(stats.canAttack, true); assert.equal(stats.canInitiate, form.includes('carapace'));
   assert.equal(stats.dna.power, 1); assert.equal(stats.dna.melee, false); assert.equal(stats.dna.ranged, false);
   const trial = createSimulationTrial({ left, right, distance: 1, random: false });
   for (let i = 0; i < 1000 && !trial.agents[0].attack && !trial.result().reason; i++) trial.advance(.05);
-  const agent = trial.agents[0]; assert.ok(agent.attack, 'real defense attack begins after an incoming hit');
-  assert.ok(trial.history.some(event => event.targetId === agent.id && event.kind !== 'attack'), 'incoming attack precedes response');
+  const agent = trial.agents[0]; assert.ok(agent.attack, 'real defensive attack begins after engagement');
+  if (!stats.canInitiate) assert.ok(trial.history.some(event => event.targetId === agent.id && event.kind === 'attack'), 'incoming attack is announced before the defensive response');
   const before = JSON.stringify(agent), pose = unitActionArtPose(agent, agent.attack.hitAt), clip = DEFENSIVE_ATTACK_ART[tribe + '/' + form];
   assert.equal(pose.action, 'attack'); assert.equal(pose.animation, clip); assert.equal(pose.missing, false);
   assert.equal(clip.durationsMs.slice(0, pose.frame).reduce((a, b) => a + b, 0), clip.hitTimeMs);

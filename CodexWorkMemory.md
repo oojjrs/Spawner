@@ -1,3 +1,8 @@
+## 원화 검사 완료 [art-complete-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:27:49+09:00; 구현·검수 /root/economy_tests_finish, 확인·기록 /root, 현재채팅근거.
+- 원화·방향13검사파일의초기36실패를해결했다. 현재82개고유검사는기존전체통과와실패대상후속검증을합쳐82통과/0실패/0skip이며한번의새전체실행은아니다. 테스트12파일및approved-art-source지원함수변경,승인원본SHA에서허용변환체인·Spring특정복구증빙을따라현바이트검증. 폐기secretion렌더통합3검사제거,현행unit-action-art의렌더/재시도/선택검사로대체매핑. Spring원본11중간파일은바이트검증불가이며승인manifest연결만확인;현존90파일과271프레임Canvas검증유지. 근거art-results.json,dee071/9ece42/96c4f8,메인diff7a7a3e·helper4f2ef9대조.
+
 ## 렌더·문서 검사 완료 [client-fixture-complete-01a1b8b3]
 
 - 기록 시각 2026-11-08T13:22:29+09:00; 확인·기록 Codex /root, 출처현재채팅과담당보고.
@@ -33,6 +38,16 @@
 - 기록 시각 2026-11-08T13:21:24+09:00; 사용자전체점검지시,확인·기록Codex /root. 출처현재채팅및명시담당도구근거.
 - 전투 실험실의 실제DNA만 dnaCanAttack 재사용으로 선공판정을맞췄다. defensive-base-power35개전부통과(270.9ms), 갑각선공·무기관/안테나/채집피격반응·no-offense경계를검사했다. client/build-combat.mjs로 Combat.html6행을동기화했고원본/산출물형식OK. 담당검수11e9e7,메인diff396765/format9a1fad.
 
+## 추가 검사 범위 확정 [art-attack-repair-proof-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:17:53+09:00; 판단·기록 Codex /root, 출처 현재 채팅과담당보고.
+- Spring기본/antenna/carapace-antenna 공격은단순반사가아닌승인nativeWholeBodyRepair다. 담당이 attack-metadata-changes.json before/after와 attack-validation.json source/outputSHA·geometryUnchanged·timingUnchanged·checksPass 일치를확인했다. mirror일반허용에포함하지않고해당복구증빙을명시적으로연결하는검사를수행한다.
+
+## 추가 검사 범위 확정 [art-intermediate-policy-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:17:53+09:00; 판단·기록 Codex /root, 출처 현재 채팅과담당보고.
+- Spring11개 birth-generated-source.png는 Git추적0·전체Git이력0·ignore규칙0·기록크기와동일한현존후보0으로확인됐다(/root/economy_tests_finish619fef/bb4b28). 과거 중간 생성 원본은 현재checkout에서 독립 바이트 검증 불가이며 복구했다고 주장하지 않는다. 테스트는 승인baseline/manifest의원본SHA연결을유지하고, 반드시보존할현행등록·배포입력인runtime atlas/분리레이어/metadata의 바이트·기하 검사를 수행하도록 한정한다. 누락11개만명시목록화하고임의파일누락을허용하지않는다. 원본중간파일 자체의무결성확인은이번검증한계다.
+
 ## 잔여 클라이언트 검사 교정 근거 [root-client-decisions-01a1b8b3]
 
 - 기록 시각 2026-11-08T13:15:28+09:00; 판단·기록 Codex /root, 현재 채팅·도구943cbe/b9f7a0/1bd2bf/3814cd/2fe6cc/cc6c6f/e72e45. 현행 원본 및 원결정 기록을 읽고 다음으로 범위를 고정한다.
@@ -50,6 +65,10 @@
 
 - 기록 시각 2026-11-08T13:14:02+09:00; 판단·분담·기록 Codex /root, 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e 및 담당 보고.
 - /root/client_suite_audit가 실제 sections/unit-appearance.js의 cotton-sheep 이동 셀에 기존 음향 data-audio-cues 연결이 누락된 사실을 확인했다. 현재 허용된 전체 점검·복구 범위에서 승인된 movement-audio 정의의 큐 연결만 복구하고 새 문구나 원본 음향은 만들지 않는다. 해당 섹션 제품 수정과 관련 검증은 담당에게 맡기고 빌드 산출물은 메인이 관리한다.
+
+## 승인 원화 변환 증빙 공통 검사 지원 [art-helper-start-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:12:11+09:00; 판단·기록 Codex /root, 제안 /root/economy_tests_finish. 원화13파일에 반복되는 승인 해시 검사는 테스트 전용 client/test-support/approved-art-source.mjs에서 원래 승인 SHA부터 명시된 허용 mirror-each-cell 변환기록의 before/after 연결을 검증한다. 현재 해시 복사로 기대값을 바꾸지 않으며 파일 범위와 변환 조건을 고정한다. 폐기 secretion idle 월드 draw 경로는 현행 UNIT_ACTION_ART 라우팅 계약 검사로 대체한다. 제품·원화는 변경하지 않는다.
 
 ## 클라이언트 잔여 검사 메인 분담 [root-client-start-01a1b8b3]
 
@@ -79,6 +98,12 @@
 
 - 기록·확인 시각 2026-11-08T13:11:26+09:00; 결정 사용자 현재 채팅의 전체 점검·작업별 완료 지시, 기록 Codex /root. 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e.
 - server/combat.test.mjs 62개는 접근 후 공격 시작, 근접 명중과 원거리 도달 분리, 독립 공격 간격, 사망 후 공격 취소 및 구형 저장 복원 보존을 검사한다. 최초55실패를 모두 수정했고 마지막 구형 딱정벌레1개도 체력 정확 보존으로 강화 후 통과(97.8791ms, combat-after5.tap). 테스트 삭제·skip 없음. 담당 /root/combat_tests_finish 자체 형식·diff 검수와 메인 diff 대조8479ef/fbe2b5 완료.
+
+## 원화 승인·방향 변환 검사 분담 [test-art-handoff-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:09:52+09:00; 분담·기록 Codex /root, 진단 /root/client_suite_audit, 후속 담당 /root/economy_tests_finish. 출처 현재 채팅 및 클라이언트 전체 검사 근거.
+- 경제/월드14파일 작업이 완료되어 원화·방향 증빙 검사13파일을 별도 맡긴다. bean-combo-walk-repairs, bean-dominant-hop, blade-carapace-assets, blade-carapace-integration, defensive-attack-integration, minor-held-hurt, secretion-idle, secretion-walk, species-held-hurt, spring-basic-attack-rhythm, pebble-native-facing, spring-birth-native-facing, talon-owl-idle 대상이다.
+- 승인 출처와 실제 변환 기록을 독립 기준으로 삼고 현재 해시를 그대로 복사하지 않는다. 기존 Python3.12/Pillow13, PYTHONUTF8 및 canvas 모듈 경로는 검사 자식 프로세스에만 적용한다. 제품 파일·원화·기록은 변경하지 않으며 증빙 누락이나 제품 결함은 메인에 먼저 보고한다.
 
 ## 전투 실험실 갑각 선공 불일치 수정 결정 [lab-carapace-start-01a1b8b3]
 

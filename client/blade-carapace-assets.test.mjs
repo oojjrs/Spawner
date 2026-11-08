@@ -37,14 +37,20 @@ test('all four blade+carapace forms expose six full-body clips and portraits, wi
 });
 
 test('birth registration anchors the finished body, never the full scene bounds', () => {
-  for (const definition of Object.values(BLADE_CARAPACE_ACTION_ART)) {
+  for (const tribe of tribes) {
+    const definition = BLADE_CARAPACE_ACTION_ART[tribe + "/blade-carapace"];
     const birth = definition.actions.birth;
     assert.equal(birth.fullScene, true);
     assert.equal(birth.sceneIncludesNest, true);
     assert.equal(birth.worldTravelIncludedInPixels, true);
     assert.equal(birth.sceneAnchor, 'final-body-floor');
     assert.ok(birth.referenceLength < definition.reference.referenceLength);
-    assert.ok(birth.sourceFacing === 'left' ? birth.pivotX < birth.frameSize / 2 : birth.pivotX > birth.frameSize / 2);
+    const baseline = JSON.parse(readFileSync(resolve(root, 'tools/spring-native-facing-20261108/remaining-facing-spring-birth-current-catalog.json')));
+    if (tribe === 'spring') {
+      assert.equal(birth.pivotX, baseline['spring/blade-carapace'].birth.pivotX);
+      assert.equal(birth.pivotY, baseline['spring/blade-carapace'].birth.pivotY);
+    } else assert.ok(birth.sourceFacing === 'left' ? birth.pivotX < birth.frameSize / 2 : birth.pivotX > birth.frameSize / 2);
+    assert.ok(birth.pivotX > 0 && birth.pivotX < birth.frameSize);
     assert.ok(birth.pivotY > birth.frameHeight / 2);
   }
   const spore = BLADE_CARAPACE_ACTION_ART['spore/blade-carapace'].actions.birth;

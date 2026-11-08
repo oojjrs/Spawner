@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { BEAN_DOMINANT_HOP_ANIMATIONS, beanDominantHopPose, beanDominantHopFrame } from './bean-dominant-hop.mjs';
+import { unitActionArtDefinition, unitActionArtPose } from './unit-action-art.mjs';
 import { createCombatEvolutionArt } from './combat-evolution.mjs';
 import { COMBAT_ATTRIBUTE_ASSETS } from './combat-attribute-assets.mjs';
 import { imageDimensions, auditImages } from './image-audit.mjs';
@@ -52,39 +53,43 @@ test('every atlas is registered and all approved source hashes still match',()=>
   assert.ok(COMBAT_ATTRIBUTE_ASSETS.includes(clip.image));assert.deepEqual(imageDimensions(clip.image),[2048,1536]);
   assert.equal(provenance.physicalFrameCount,11);assert.deepEqual(provenance.playbackFrames,clip.frames);assert.equal(provenance.standaloneReady,false);
   assert.equal(provenance.sha256,createHash('sha256').update(readFileSync(clip.image)).digest('hex'));
-  for(const [file,hash]of Object.entries(provenance.sources))assert.equal(createHash('sha256').update(readFileSync(file)).digest('hex'),hash,file);
+  for(const [file,hash]of Object.entries(provenance.sources)){const bytes=readFileSync(file);
+   const source=file.endsWith('.json')?bytes.toString('utf8').replace(/\r\n/g,'\n'):bytes;
+   assert.equal(createHash('sha256').update(source).digest('hex'),hash,file);}
   assert.ok(provenance.frames.every(f=>f.edge===0&&f.minRatio>.1&&f.opaqueFeetExact&&f.floor<=f.baselineFloor));
  }
 });
-async function fixture(){const images=new Map(),read=file=>readFileSync(file);let resolveHop;
- const load=async file=>{const dimensions=imageDimensions(file),img={file,width:dimensions[0],height:dimensions[1],complete:true};images.set(file,img);if(file.includes('/BeanDominantHopV1/'))await new Promise(resolve=>{resolveHop=resolve;});return img;};
- const art=createCombatEvolutionArt(file=>'data:application/json;base64,'+read(file).toString('base64'),surface,load);await art.prepare('bean');
- return{art,images,finish:async()=>{resolveHop?.();await new Promise(r=>setImmediate(r));}};}
-test('real shared renderer loads lazily, preserves fallback, combat/resource priority and interruption',async()=>{
- for(const form of forms){const f=await fixture(),agent=unit(form),clip=BEAN_DOMINANT_HOP_ANIMATIONS[form];
-  const pending=f.art.frame(agent,10.2);assert.equal(pending.calls.length,1);assert.ok(pending.calls[0].image.file.endsWith('/idle.webp'));
-  await f.finish();const ready=f.art.frame(agent,10.2,()=>assert.fail('no extra organ layer'));assert.equal(ready.calls[0].image.file,clip.image);
-  assert.equal(f.art.frame({...agent,id:'other',mode:'return',carrying:4},10.2),ready);
+async function fixture(){
+ const loads=[];
+ const art=createCombatEvolutionArt(file=>file,surface,async file=>{
+  loads.push(file);const [width,height]=imageDimensions(file);return{file,width,height,complete:true};
+ });
+ return{art,loads};
+}
+
+test('shared renderer selects current whole-body movement and keeps action interruption and portrait ownership',async()=>{
+ for(const form of forms){const f=await fixture(),agent=unit(form),definition=unitActionArtDefinition(agent);
+  await f.art.prepareAgent(agent,10.2);
+  assert.equal(f.art.frame(agent,10.2).calls[0].image.file,definition.actions.walk.image);
+  assert.equal(f.art.portrait(agent).calls[0].image.file,definition.actions.idle.image);
   for(const patch of [{moveDuration:0},{hurtStartedAt:10.1},{attack:{startedAt:10,speed:1}},{health:0,diedAt:10},
     {birth:{startedAt:10,readyAt:11}},{mode:'harvest',harvestStarted:10},{mode:'unload',foodDelivery:{startedAt:10,arrivesAt:11,amount:2}}]){
-   const sprite=f.art.frame({...agent,...patch},10.2);assert.ok(sprite);assert.ok(sprite.calls.every(c=>c.image.file!==clip.image),JSON.stringify(patch));
+   const actor={...agent,...patch},before=JSON.stringify(actor),pose=unitActionArtPose(actor,10.2);
+   await f.art.prepareAgent(actor,10.2);
+   const sprite=f.art.frame(actor,10.2);assert.ok(sprite);
+   const sources=pose.animation.sceneLayers?.layers.map(layer=>layer.image)||[pose.animation.image];
+   assert.ok(sprite.calls.every(call=>sources.includes(call.image.file)));
+   assert.equal(JSON.stringify(actor),before);
   }
-  assert.ok(f.art.frame(agent,11).calls.every(c=>c.image.file!==clip.image),'no stale hop after move ends');
-  const image=f.images.get(clip.image);image.complete=false;assert.ok(f.art.frame(agent,10.3).calls.every(c=>c.image.file!==clip.image));image.complete=true;
-  assert.equal(f.art.frame(agent,10.3).calls[0].image.file,clip.image);
-  assert.ok(f.art.portrait(agent).calls.every(c=>c.image.file!==clip.image));
  }
 });
 
-test('an unavailable optional hop atlas has a bounded retry delay while idle remains visible',async t=>{
- t.mock.timers.enable({apis:['Date'],now:10000});let attempts=0,available=false;
- const load=async file=>{if(file.includes('/BeanDominantHopV1/')){attempts++;if(!available)throw Error('unavailable optional atlas');}
-  const [width,height]=imageDimensions(file);return{file,width,height,complete:true};};
- const art=createCombatEvolutionArt(file=>'data:application/json;base64,'+readFileSync(file).toString('base64'),surface,load);
- await art.prepare('bean');const agent=unit('blade');
- art.frame(agent,10.2);await new Promise(r=>setImmediate(r));assert.equal(attempts,1);
- for(let i=0;i<60;i++){const fallback=art.frame(agent,10.2+i*.001);assert.ok(fallback.calls.every(c=>!c.image.file?.includes('/BeanDominantHopV1/')));}
- assert.equal(attempts,1);
- t.mock.timers.tick(1001);available=true;art.frame(agent,10.2);await new Promise(r=>setImmediate(r));
- assert.equal(attempts,2);assert.equal(art.frame(agent,10.2).calls[0].image.file,BEAN_DOMINANT_HOP_ANIMATIONS.blade.image);
+test('current whole-body renderer has no dependency on the retired optional hop atlas',async()=>{
+ for(const form of forms){const f=await fixture(),agent=unit(form);
+  await f.art.prepareAgent(agent,10.2);
+  for(let i=0;i<24;i++)assert.ok(f.art.frame(agent,10+(i+.01)/24));
+  await f.art.prepareAgent(agent,11);
+  assert.equal(f.art.frame(agent,11).calls[0].image.file,unitActionArtDefinition(agent).actions.idle.image);
+  assert.ok(f.loads.every(path=>!path.includes('/BeanDominantHopV1/')));
+ }
 });

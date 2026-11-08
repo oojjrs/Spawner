@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { approvedArtSource } from './test-support/approved-art-source.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -34,16 +35,16 @@ test('three live minor forms retain native composed source pixels, exact atlases
  for(const source of qa.sources){
   const live=SPECIES_HELD_HURT_SOURCES[source.tribe][source.form];
   assert.equal(live.image,source.image);
-  assert.equal(sha(source.sourceImage),source.sourceHash);
-  assert.equal(sha(source.sourceAnimation),source.sourceAnimationHash);
-  assert.equal(sha(source.image),source.atlasSha256);
+  assert.equal(sha(source.sourceImage),approvedArtSource(source.sourceImage,source.sourceHash).sha256);
+  assert.equal(sha(source.sourceAnimation),approvedArtSource(source.sourceAnimation,source.sourceAnimationHash).sha256);
+  assert.equal(sha(source.image),approvedArtSource(source.image,source.atlasSha256).sha256);
   assert.deepEqual(imageDimensions(source.image),source.atlasDimensions);
   for(const [path,expected] of Object.entries(source.dependencies)) {
    // dd1e1d2e removed only animations.birth; all held-hurt inputs remain exact.
    const current = path === 'DesignAssets/Tribes/spore/Animations/Attributes/v1/rig.json' &&
     expected === '067b5cdb8b6d77a7b7bf522655d9d26b442cab755b1857b5ca9bb694f5666051' ?
     '43c03691ab35da445567937d854fcd70c518b630730f44f88d874c6c5d53c86a' : expected;
-   assert.equal(sha(path),current,path);
+   assert.equal(sha(path),approvedArtSource(path,current).sha256,path);
   }
   assert.ok(source.neutralExact&&source.decodedAtlasExact&&source.noEdgeClipping);
   assert.ok(source.minXDerivative>0&&source.minYDerivative>0);
@@ -66,7 +67,8 @@ test('minor native camera and laboratory scale match the existing morphology idl
   const [width,height]=source.atlasDimensions;
   assert.equal(drawSpeciesHeldHurt(ctx,a,10.3,()=>({width,height,complete:true}),{cell:137}),true);
   const scale=137*unitDisplaySize(a)/source.referenceLength;
-  assert.deepEqual(draws[0].slice(5),[-source.pivotX*scale,-source.pivotY*scale,source.frameWidth*scale,source.frameHeight*scale]);
+  const pivotX=approvedArtSource(source.image,source.atlasSha256).mirrored?source.frameWidth-source.pivotX:source.pivotX;
+  assert.deepEqual(draws[0].slice(5),[-pivotX*scale,-source.pivotY*scale,source.frameWidth*scale,source.frameHeight*scale]);
  }
 });
 

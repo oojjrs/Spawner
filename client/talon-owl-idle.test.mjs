@@ -15,7 +15,10 @@ test("갈퀴부엉이는 기존 idle 뒤 표정을 450ms 유지하고 기본 자
 
 test("게임의 프레임 크기와 재생 시간이 승인된 원화 시트와 일치한다", () => {
   const manifest = JSON.parse(readFileSync(new URL("../DesignAssets/Animations/TalonOwlIdle/PerchedV4/idle.json", import.meta.url), "utf8"));
-  assert.equal(TALON_OWL_IDLE.frameSize, manifest.frameSize[0]);
+  const registered = JSON.parse(readFileSync(new URL('../tools/image-audit-registration-20261104/evidence.json', import.meta.url), 'utf8')).rows.find(row => row.image === TALON_OWL_IDLE.image);
+  assert.deepEqual([TALON_OWL_IDLE.frameSize, TALON_OWL_IDLE.frameSize], registered.frame);
+  assert.deepEqual([TALON_OWL_IDLE.columns * TALON_OWL_IDLE.frameSize, Math.ceil(TALON_OWL_IDLE.frameCount / TALON_OWL_IDLE.columns) * TALON_OWL_IDLE.frameSize], registered.dimensions);
+  assert.equal(manifest.frameSize[0] * TALON_OWL_IDLE.registrationScale, TALON_OWL_IDLE.frameSize);
   assert.equal(TALON_OWL_IDLE.columns, manifest.columns);
   assert.equal(TALON_OWL_IDLE.frameCount, manifest.frameCount);
   assert.equal(TALON_OWL_IDLE.durationMs, manifest.durationMs);

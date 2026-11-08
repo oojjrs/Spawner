@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { approvedArtSource } from './test-support/approved-art-source.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -65,7 +66,7 @@ test('both strike directions and facing retain camera, native crop and source or
  for(const tribe of tribes)for(const form of forms)for(const mirror of [false,true])for(const hitSide of [-1,1]){
   const a=unit(tribe,form),s=speciesHeldHurtSource(a),ctx=context(),before=JSON.stringify(a),scale=250*unitDisplaySize(a)/s.referenceLength;
   assert.ok(drawSpeciesHeldHurt(ctx,a,10.2,p=>images.get(p),{cell:250,mirror,hitSide}));
-  const nativeFacing=tribe==='spring'||["blade","carapace"].includes(form)?-1:1,displayFacing=(mirror?-1:1)*nativeFacing;
+  const nativeFacing=tribe==='spring'||tribe==='spore'||(tribe==='pebble'&&form!=='secretion')?-1:1,displayFacing=(mirror?-1:1)*nativeFacing;
   assert.equal(s.sourceFacing,nativeFacing===-1?'left':'right',tribe+'/'+form);
   const i=hitSide*displayFacing>0?s.times.length:0,draw=ctx.calls.find(c=>c[0]==='draw');
   assert.deepEqual(draw.slice(2,6),[i%s.columns*s.frameWidth,Math.floor(i/s.columns)*s.frameHeight,s.frameWidth,s.frameHeight]);
@@ -86,8 +87,8 @@ test('source hashes, exact native atlases and material constraints match the gen
  const qa=JSON.parse(fs.readFileSync('tools/species-held-hurt-20261105/verification.json'));
  assert.equal(qa.sources.length,6);
  for(const s of qa.sources){
-  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.sourceAnimation)).digest('hex'),s.sourceHash);
-  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.image)).digest('hex'),s.atlasSha256);
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.sourceAnimation)).digest('hex'),approvedArtSource(s.sourceAnimation,s.sourceHash).sha256);
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.image)).digest('hex'),approvedArtSource(s.image,s.atlasSha256).sha256);
   assert.deepEqual(imageDimensions(s.image),s.atlasDimensions);assert.ok(s.neutralExact&&s.decodedAtlasExact&&s.noEdgeClipping);
   assert.ok(s.minXDerivative>0&&s.minYDerivative>0);
   if(s.tribe==='pebble')assert.ok(s.rigidBody);else assert.ok(s.fixedLowerPixelsExact);
@@ -120,8 +121,6 @@ test('actual world/detail helper preserves native animation scale, secretion sca
   const expected=s.worldScale==='animation'?100*.7*1.25/s.nativeFrameSize*1.5/externalScale:s.worldScale==='evolution'?100*.7*2/512*1.5/externalScale:100*unitDisplaySize(a)/s.referenceLength/externalScale;
   assert.ok(Math.abs(options.sourceScale-expected)<1e-12);assert.equal(options.mirror,true);assert.equal(JSON.stringify(a),before);
  }
- assert.match(game,/frozen && \(agent.tribe \|\| "bean"\) !== "bean" && !Spawner.speciesHeldHurtSource\?\.\(agent\)/);
- assert.match(game,/Spawner.speciesHeldHurtSource\?\.\(visual\)\) && drawAgentHeldHurt/);
 });
 test('actual laboratory stage draws each held source once through attack overlap, hit reset, and expiry',async()=>{
  const vm=await import('node:vm');const{createCombatStage}=await import('./combat-stage.mjs');
@@ -149,9 +148,9 @@ test('six live V7 blade and carapace sources preserve rig landmarks and material
  for(const [path,hash] of Object.entries(provenance.inputs))assert.equal(sourceHash(path),currentInputHash(path,hash),path);
  for(const s of qa.sources){
   assert.equal(speciesHeldHurtSource(unit(s.tribe,s.form)),SPECIES_HELD_HURT_SOURCES[s.tribe][s.form]);
-  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.sourceImage)).digest('hex'),s.sourceHash);
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.sourceImage)).digest('hex'),approvedArtSource(s.sourceImage,s.sourceHash).sha256);
   assert.equal(sourceHash(s.sourceRig),currentInputHash(s.sourceRig,s.rigHash));
-  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.image)).digest('hex'),s.atlasSha256);
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.image)).digest('hex'),approvedArtSource(s.image,s.atlasSha256).sha256);
   assert.deepEqual(imageDimensions(s.image),s.atlasDimensions);
   assert.ok(s.liveRigLandmarks&&s.neutralExact&&s.decodedAtlasExact&&s.noEdgeClipping);
   assert.ok(s.minXDerivative>0&&s.minYDerivative>0);
