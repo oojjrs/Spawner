@@ -65,11 +65,49 @@ for (const [surface, api] of surfaces) {
     }
   });
 
-  test(surface + " · 안테나만으로는 채집·적 수색·선공을 하지 않는다", () => {
+  test(surface + " · 안테나만 있어도 탐색이 끝난 지역을 순찰하며 채집·선공하지 않는다", () => {
     const f = fixture(api, ["antenna"]);
     addEnemy(f);
     assert.equal(api.combatDisposition(f.agent), "passive");
-    assert.ok(f.ai.evaluate(f.agent, false).every(plan => !["collect", "fight", "explore"].includes(plan.action)));
+    const plans = f.ai.evaluate(f.agent, false);
+    assert.equal(plans[0].action, "explore");
+    assert.match(plans[0].target.key, /^scout-search:/);
+    assert.ok(plans[0].route.length > 1);
+    assert.ok(plans.every(plan => !["collect", "fight"].includes(plan.action)));
+  });
+
+  test(surface + " · 안테나 정찰은 자신의 시야 밖 미탐색 경계로 나간다", () => {
+    const f = fixture(api, ["antenna"]);
+    for (const index of [...f.state.explored]) if (index % f.size > 20) f.state.explored.delete(index);
+    const plan = f.ai.evaluate(f.agent, false)[0];
+    assert.equal(plan.action, "explore");
+    assert.match(plan.target.key, /^scout-search:/);
+    assert.equal(plan.target.x, 20);
+    assert.ok(Math.hypot(plan.target.x - f.agent.x, plan.target.y - f.agent.y) > f.agent.stats.vision);
+  });
+
+  test(surface + " · 실제 게임 틱은 비전투 안테나 정찰을 이동시키고 저장 후 경로를 유지한다", () => {
+    const f = fixture(api, ["antenna"]);
+    const environment = { hostId: "home", simSeconds: 0, world: { size: f.size, seed: 13,
+      terrain: new Uint8Array(f.size * f.size).fill(4), hazards: new Uint8Array(f.size * f.size) },
+      colonies: [f.colony], games: new Map(), food: new Map(), foodSpots: new Map() };
+    const game = api.createGame(environment, f.colony);
+    environment.games.set("home", game);
+    const saved = JSON.parse(game.save());
+    saved.state.agents = [{ ...saved.state.agents[0], dna: f.agent.dna, x: 15, y: 12,
+      renderFromX: 15, renderFromY: 12, birth: null, utility: null }];
+    game.restore(JSON.stringify(saved));
+    const agent = game.agents[0];
+    agent.moveBudget = 1;
+    game.prepare(.1);
+    game.tick(.1);
+    assert.equal(agent.utility.action, "explore");
+    assert.match(agent.utility.target.key, /^scout-search:/);
+    assert.notDeepEqual([agent.x, agent.y], [15, 12]);
+    assert.equal(api.combatDisposition(agent), "passive");
+    const targetKey = agent.utility.target.key;
+    game.restore(game.save());
+    assert.equal(game.agents[0].utility.target.key, targetKey);
   });
 
   test(surface + " · 안테나를 단 근접·원거리·갑각 전투형은 공유 시야의 적을 공격 대상으로 삼는다", () => {

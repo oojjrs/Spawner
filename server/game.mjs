@@ -1,4 +1,3 @@
-import { sameTribeDesign } from "./tribe-designs.mjs";
 import { canRetreat } from "./survival.mjs";
 import { AGENT_DEATH_WARNING, agentRemainingLifespan } from "./lifespan.mjs";
 import { nestDefenderDesign, isNestDefender } from "./nest-defender.mjs";
@@ -7,6 +6,9 @@ import { CONQUEST_PACING, militaryAgent } from "./conquest-pacing.mjs";
 import { isTemplateNameEdited, suggestTemplateName } from "./unit-template-names.mjs";
 import { suggestAgentName } from "./agent-names.mjs";
 import { tribeProductionTemplate } from "./tribe-production.mjs";
+import { TRIBE_INVASION, sameTribeDesign } from "./tribe-designs.mjs";
+import { tribeDefenseAgent } from "./tribe-defense-designs.mjs";
+import { tribeWorkers, tribeInvasionReady } from "./tribe-strategy.mjs";
 import { worldSize } from "./world-size.mjs";
 import { ATTRIBUTES, ATTRIBUTE_SYNERGIES_ENABLED, isAttributeUnlocked, attributeCounts, migrateAttributeSlots, migrateAttributeLevels, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier, birthCost, hasSynergy } from "./attributes.mjs";
 import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
@@ -121,7 +123,7 @@ export function createGame(environment, colony, savedGame) {
     let footprintCleanupAt = 0;
     let navigationCache = null;
     const utilityAI = createUtilityAI({ state, tribe: colony.tribe, size: WORLD_SIZE, homeCells: colonyBoundaryCells,
-      deliveryCells: colonyDeliveryCells, permanentVisionSources, defenseStructures,
+      deliveryCells: colonyDeliveryCells, permanentVisionSources, defenseStructures, invasionTarget, defenseOnly, defenseTarget,
       canMove: (agent, x, y) => dnaCanMove(agent, x, y, colonyEntries),
       terrainAt: (x, y) => worldMap.terrain[y * WORLD_SIZE + x],
       walkable: (x, y) => state.explored.has(y * WORLD_SIZE + x) && isWalkable(x, y),
@@ -196,8 +198,9 @@ export function createGame(environment, colony, savedGame) {
     }
 
     function revealAround(x, y, radius, observer) {
-      for (let dy = -radius; dy <= radius; dy++) {
-        for (let dx = -radius; dx <= radius; dx++) {
+      const extent = Math.floor(radius);
+      for (let dy = -extent; dy <= extent; dy++) {
+        for (let dx = -extent; dx <= extent; dx++) {
           const cx = x + dx, cy = y + dy;
           if (cx < 0 || cy < 0 || cx >= WORLD_SIZE || cy >= WORLD_SIZE || dx * dx + dy * dy > radius * radius) continue;
           const index = cy * WORLD_SIZE + cx;
@@ -276,7 +279,7 @@ export function createGame(environment, colony, savedGame) {
     function initializeAgent(agent) {
       agent.dna = cloneDna(agent.dna);
       if (agent.productionRole === "scout") agent.productionRole = null;
-      if (agent.utility?.action === "explore" && !/^(enemy|resource)-search:/.test(agent.utility.target?.key || "")) {
+      if (agent.utility?.action === "explore" && !/^(enemy|resource|scout)-search:/.test(agent.utility.target?.key || "")) {
         agent.utility = null;
         agent.mode = "search";
         agent.decisionPending = "restore";
@@ -1231,6 +1234,26 @@ export function createGame(environment, colony, savedGame) {
           (target.y + Math.floor(index / target.width)) * WORLD_SIZE + target.x + index % target.width).some(index => visibleCells.has(index)));
     }
 
+    function defenseOnly(agent) {
+      return !!environment.hostId && colony.ownerId !== environment.hostId && militaryAgent(agent, colony.tribe) &&
+        (tribeDefenseAgent(agent) || !tribeInvasionReady(state, colony.tribe));
+    }
+
+    function defenseTarget(agent, target) {
+      const defending = colonyDefenseTarget(agent, target, state.agents, defenseStructures());
+      if (!defenseOnly(agent)) return defending;
+      return colonyBoundaryCells().some(cell => Math.abs(cell.x - target.x) + Math.abs(cell.y - target.y) <= 6) &&
+        (defending || combatDisposition(target) === "aggressive");
+    }
+
+    function invasionTarget(agent) {
+      if (!environment.hostId || colony.ownerId === environment.hostId || state.ending || !hasActiveNest() ||
+          !tribeInvasionReady(state, colony.tribe) || tribeDefenseAgent(agent) ||
+          !TRIBE_INVASION[colony.tribe] || !militaryAgent(agent, colony.tribe)) return null;
+      const target = environment.games.get(environment.hostId)?.nest;
+      return target?.health > 0 ? target : null;
+    }
+
     function combatTargets(agent) {
       if (!decisionTargets || decisionTargetRevision !== (environment.targetRevision || 0)) {
         decisionTargets = state.rivals.filter(enemy => !enemy.hidden && visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)).concat(visibleBurrows(), visibleNests());
@@ -1247,8 +1270,8 @@ export function createGame(environment, colony, savedGame) {
     function scheduledDecisionEvent(agent) {
       const targets = combatTargets(agent);
       if (!agent.retreat && !(agent.utility?.action === "fight" && agent.utility.defending &&
-          targets.some(target => target.id === agent.utility.target.id && colonyDefenseTarget(agent, target, state.agents, defenseStructures()))) &&
-          targets.some(target => colonyDefenseTarget(agent, target, state.agents, defenseStructures()))) return "defense";
+          targets.some(target => target.id === agent.utility.target.id && defenseTarget(agent, target))) &&
+          targets.some(target => defenseTarget(agent, target))) return "defense";
       if (agent.decisionPending || agent.retreat || hazardAt(agent.x, agent.y) || targets.some(target => !target.kind || target.kind === "agent") ||
           state.simSeconds >= agent.nextDecisionAt) return decisionEvent(agent);
       const plan = agent.utility, food = plan?.action === "collect" ? state.knownFood.get(plan.target.key) : null;
@@ -1279,7 +1302,7 @@ export function createGame(environment, colony, savedGame) {
         candidate.target && dnaCanMove(agent, candidate.target.x, candidate.target.y, colonyEntries) && canFollowUtility(agent, candidate));
       const best = candidates[0];
       if (best?.defending && !combatTargets(agent).some(target => target.id === best.target.id &&
-          colonyDefenseTarget(agent,target,state.agents,defenseStructures()))) {
+          defenseTarget(agent, target))) {
         agent.decisionPending = "targetLost";
         return;
       }
@@ -1318,8 +1341,10 @@ export function createGame(environment, colony, savedGame) {
     }
 
     function canFollowUtility(agent, plan) {
+      if (defenseOnly(agent) && (plan.action === "explore" || plan.action === "fight" && !plan.defending)) return false;
       if (!canRetreat(agent) && ["flee", "recover"].includes(plan.action)) return false;
-      if (plan.action === "fight") return combatTargets(agent).some(target => target.id === plan.target?.id);
+      if (plan.action === "fight") return combatTargets(agent).some(target => target.id === plan.target?.id &&
+        (!defenseOnly(agent) || defenseTarget(agent, target)));
       if (!(plan.action === "explore" && String(plan.target?.key).startsWith("enemy-search:"))) return true;
       return !!plan.target && dnaCanSearch(agent, plan.target, state.simSeconds);
     }
@@ -1389,7 +1414,7 @@ export function createGame(environment, colony, savedGame) {
         if (!target) { agent.decisionPending = "targetLost"; return false; }
         const building = ["burrow", "nest"].includes(target.kind);
         if (!building && !canPursueCombat(agent, target, state.simSeconds,
-            colonyDefenseTarget(agent, target, state.agents, defenseStructures())) || combatDisposition(agent) === "peaceful") {
+            defenseTarget(agent, target)) || combatDisposition(agent) === "peaceful") {
           agent.decisionPending = "targetLost"; return false;
         }
         if (!building && agent.x === target.x && agent.y === target.y) {
@@ -1843,10 +1868,9 @@ export function createGame(environment, colony, savedGame) {
       automaticManagement();
       if (!hasActiveNest()) return null;
       const template = tribeProductionTemplate(state,colony.tribe);
-      const workers = state.agents.filter(agent => agent.health > 0 &&
-        !militaryAgent(agent,colony.tribe));
-      const replacing = !workers.length || workers.every(agent => agentRemainingLifespan(agent, state.simSeconds) <= AGENT_DEATH_WARNING);
-      if (replacing && template) {
+      const workers = tribeWorkers(state, colony.tribe);
+      const replacing = workers.length < 2;
+      if (template && (replacing || template.productionRole === "military" && !tribeInvasionReady(state, colony.tribe))) {
         const agentId = automaticBirth(template,template.productionRole);
         if (agentId) return agentId;
       }
@@ -1875,9 +1899,7 @@ export function createGame(environment, colony, savedGame) {
       const dna = basicGathererDna(state.nestLevel);
       let cost = dna ? birthCost({ dna }, colony.tribe) : Infinity;
       // Existing legacy templates can still be edited to a plain gatherer.
-      // Autonomous tribes also retain their legacy production fallback.
-      const legacyRecovery = state.templates.some(template => !template.dna) ||
-        environment.hostId && colony.ownerId !== environment.hostId;
+      const legacyRecovery = state.templates.some(template => !template.dna);
       if (legacyRecovery) cost = Math.min(cost, birthCost({ slots: [] }, colony.tribe));
       return cost;
     }

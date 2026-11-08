@@ -113,6 +113,9 @@ for (const [surface, api] of surfaces) {
     f.room.simSeconds = 360;
     f.game.prepare(360);
     f.room.creatureSystem.tick();
+    f.room.simSeconds = f.room.creatureSystem.save().raidCooldowns[0].nextRaidAt;
+    f.game.prepare(f.room.simSeconds);
+    f.room.creatureSystem.tick();
     const agent = f.room.creatureSystem.agents.find(unit => unit.raid);
     assert.ok(agent);
     const base=unitCombatStats("soil-mole");

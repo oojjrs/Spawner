@@ -1,7 +1,7 @@
 import { nestUpgradeCost } from "./nests.mjs";
 import { ATTRIBUTE_DNA } from "./dna.mjs";
 import { PLAYER_STARTING_POINTS } from "./tribe-start.mjs";
-import { CONQUEST_PACING } from "./conquest-pacing.mjs";
+import { CONQUEST_PACING, militaryAgent } from "./conquest-pacing.mjs";
 
 export const COLONY_RAID_CADENCE = Object.freeze([
   Object.freeze({ elapsed:0, fastInterval:120, slowInterval:150, concurrent:1 }),
@@ -9,12 +9,29 @@ export const COLONY_RAID_CADENCE = Object.freeze([
   Object.freeze({ elapsed:420, fastInterval:60, slowInterval:90, concurrent:3 })
 ]);
 
-export function colonyRaidCadence(seconds, pressure) {
+export function colonyRaidCadence(seconds, pressure, readiness) {
   const elapsed = seconds - CONQUEST_PACING.neutralConflictAt;
   const phase = COLONY_RAID_CADENCE.findLast(entry => elapsed >= entry.elapsed) || COLONY_RAID_CADENCE[0];
   const value = Number.isFinite(pressure) ? Math.max(0, Math.min(1, pressure)) : .5;
-  return { interval:5 * Math.round((phase.slowInterval - value * (phase.slowInterval - phase.fastInterval)) / 5),
-    concurrent:phase.concurrent };
+  const interval = 5 * Math.round((phase.slowInterval - value * (phase.slowInterval - phase.fastInterval)) / 5);
+  return { interval:readiness?.recovering ? Math.max(180, interval) : interval,
+    concurrent:readiness ? Math.min(phase.concurrent, readiness.concurrent) : phase.concurrent };
+}
+
+export function colonyRaidReadiness(game, colony, seconds, lastFoodAt) {
+  if (!Number.isInteger(game.nestLevel)) return null;
+  const living = game.agents.filter(agent => agent.health > 0 && !(agent.birth?.readyAt > seconds));
+  const workers = living.filter(agent => agent.stats?.capacity > 0 && (!agent.dna || agent.stats?.dna?.harvest > 0));
+  const defense = living.filter(agent => militaryAgent(agent, colony.tribe) &&
+    Math.hypot(agent.x - colony.x - 2, agent.y - colony.y - 2) <= 12)
+    .reduce((sum, agent) => sum + Math.max(0, agent.cost || 0) * Math.min(1, agent.health / Math.max(1, agent.stats?.health || agent.health)), 0);
+  const nest = game.nest;
+  const recovering = workers.length < 3 || nest?.health < nest?.maxHealth * .6 ||
+    Number.isFinite(game.colonyFood) && seconds - lastFoodAt >= 90;
+  let stage = 0;
+  if (!recovering && seconds >= 720 && game.nestLevel >= 3 && workers.length >= 6 && defense >= 240) stage = 1;
+  if (!recovering && seconds >= 1800 && game.nestLevel === 4 && workers.length >= 8 && defense >= 450) stage = 2;
+  return { recovering, stage, concurrent:!recovering && game.nestLevel === 4 && defense >= 450 ? 2 : 1 };
 }
 
 export const COLONY_RAID_PRESSURE = Object.freeze({ openingSeconds:120, nearbySeconds:60, exposedBurrows:2,

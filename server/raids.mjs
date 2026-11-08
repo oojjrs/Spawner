@@ -1,7 +1,7 @@
 import { prepareRaidCreature, RAID_CREATURE_STAGES } from "./raid-combat-scale.mjs";
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
 import { worldSize } from "./world-size.mjs";
-import { COLONY_RAID_PRESSURE, colonyRaidPressure, colonyRaidCadence } from "./raid-pressure.mjs";
+import { COLONY_RAID_PRESSURE, colonyRaidPressure, colonyRaidCadence, colonyRaidReadiness } from "./raid-pressure.mjs";
 
 export const BEETLE_RAIDS = Object.freeze({ firstAt:CONQUEST_PACING.neutralConflictAt, firstSpread:30, defenders:3 });
 
@@ -12,6 +12,8 @@ export function createBeetleRaids(environment, state, actions, restoring) {
   if (restoring) {
     if (!Array.isArray(state.raidCooldowns) || new Set(state.raidCooldowns.map(entry => entry?.colonyId)).size !== state.raidCooldowns.length ||
         state.raidCooldowns.some(entry => !Number.isInteger(entry?.colonyId) || !Number.isFinite(entry.nextRaidAt) || entry.nextRaidAt < 0 ||
+          ["lastFood", "lastFoodAt"].some(key => entry[key] !== undefined && (!Number.isFinite(entry[key]) || entry[key] < 0)) ||
+          ["recovering", "hadRaid"].some(key => entry[key] !== undefined && typeof entry[key] !== "boolean") ||
           entry.opening && (entry.opening.version !== 1 || !Number.isFinite(entry.opening.rate) || entry.opening.rate < 0 ||
             !Number.isFinite(entry.opening.pressure) || entry.opening.pressure < 0 || entry.opening.pressure > 1 ||
             !Number.isInteger(entry.opening.nearby) || entry.opening.nearby < 0 ||
@@ -127,6 +129,17 @@ export function createBeetleRaids(environment, state, actions, restoring) {
         state.raidCooldowns.push(cooldown);
       }
       const game = environment.games.get(colony.ownerId);
+      if (Number.isFinite(game.colonyFood)) {
+        if (cooldown.lastFoodAt === undefined || game.colonyFood > (cooldown.lastFood || 0)) cooldown.lastFoodAt = now;
+        cooldown.lastFood = game.colonyFood;
+      }
+      const readiness = colonyRaidReadiness(game, colony, now, cooldown.lastFoodAt);
+      const cadence = colonyRaidCadence(now, cooldown.opening?.pressure, readiness);
+      const raiders = state.agents.filter(agent => agent.health > 0 && agent.raid?.colonyId === colony.id);
+      if (readiness && (readiness.recovering && !cooldown.recovering || cooldown.hadRaid && !raiders.length))
+        cooldown.nextRaidAt = Math.max(cooldown.nextRaidAt, now + cadence.interval);
+      cooldown.recovering = readiness?.recovering === true;
+      cooldown.hadRaid = raiders.length > 0;
       if (!cooldown.opening && now >= COLONY_RAID_PRESSURE.openingSeconds && Number.isFinite(game.colonyFood)) {
         const options = approaches.get(colony.id) || [];
         cooldown.opening = colonyRaidPressure(game.colonyFood, Math.max(now, COLONY_RAID_PRESSURE.openingSeconds),
@@ -137,8 +150,7 @@ export function createBeetleRaids(environment, state, actions, restoring) {
       }
       if (now < BEETLE_RAIDS.firstAt || now + 1e-8 < cooldown.nextRaidAt || now < (checks.get(colony.id) || 0)) continue;
       checks.set(colony.id, now + 5);
-      const cadence = colonyRaidCadence(now, cooldown.opening?.pressure);
-      if (state.agents.filter(agent => agent.health > 0 && agent.raid?.colonyId === colony.id).length >= cadence.concurrent) continue;
+      if (raiders.length >= cadence.concurrent) continue;
       let record = origins.get(colony.id);
       if (!record || record.health <= 0) record = source(colony);
       if (!record) { exhausted.add(colony.id); continue; }
@@ -151,7 +163,8 @@ export function createBeetleRaids(environment, state, actions, restoring) {
       const cells = path(agent, boundary(colony), false);
       if (!cells) continue;
       agent.raid = { colonyId:colony.id, phase:"outbound", departedAt:now };
-      const stage = prepareRaidCreature(agent, now);
+      const stage = prepareRaidCreature(agent, now, readiness?.stage);
+      cooldown.hadRaid = true;
       agent.attackTargetId = null; agent.attackHit = true;
       if (now >= agent.moveStartedAt + agent.moveDuration) actions.idle(agent, 0);
       routes.set(agent.id, { phase:"outbound", path:cells, cursor:1, retryAt:now });

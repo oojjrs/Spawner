@@ -50,23 +50,24 @@ test("모든 종족의 AI 생산은 실제 속성 비용을 지불하고 탄생 
   }
 });
 
-test("포인트가 없으면 부활시키지 않고 기본 개체 비용만 있으면 그 비용으로 재생산한다", () => {
+test("포인트가 없으면 부활시키지 않고 기본 채집 DNA 비용만 있으면 그 비용으로 재생산한다", () => {
   const room=fixture();room.hostId="manual";
   for (const [tribe,game] of room.games) {
     change(game,state=>{state.agents=[];state.evolutionPoints=0;});
     assert.equal(game.produce(),null,tribe);
     assert.equal(game.agents.length,0);
-    const cost=birthCost({slots:[]},tribe);
+    const cost=11;
     change(game,state=>{state.evolutionPoints=cost;state.productionReadyAt=0;});
     assert.ok(game.produce(),tribe);
     assert.deepEqual(game.agents[0].slots,[]);
+    assert.equal(game.agents[0].stats.dna.harvest,1);
     assert.equal(game.snapshot().evolutionPoints,0);
   }
 });
 
 test("수명 경고에 들어온 초기 개체를 만료 전에 보충하며 같은 시간에 연속 생산하지 않는다", () => {
   const room=fixture(), game=room.games.get("bean");room.hostId="manual";
-  change(game,state=>{state.evolutionPoints=19;for(const agent of state.agents){agent.bornAt=0;agent.lifespan=300;}});
+  change(game,state=>{state.evolutionPoints=52;for(const agent of state.agents){agent.bornAt=0;agent.lifespan=300;}});
   game.prepare(240);
   assert.ok(game.produce());
   assert.equal(game.agents.length,5);
@@ -76,13 +77,16 @@ test("수명 경고에 들어온 초기 개체를 만료 전에 보충하며 같
   assert.ok(game.produce());
 });
 
-test("수입이 관측되기 전에는 건강한 초기 군락을 유지하고 수입 여유가 생기면 증식한다", () => {
+test("건강한 초기 일꾼 네 기를 유지하며 첫 둥지 성장 비용을 모은다", () => {
   const room=fixture(), game=room.games.get("bean");room.hostId="manual";
-  change(game,state=>{state.evolutionPoints=19;});
+  change(game,state=>{state.evolutionPoints=26;});
   assert.equal(game.produce(),null);
   change(game,state=>{state.simSeconds=60;state.foodIncomeStartedAt=0;state.foodIncome=[[55,60]];state.productionReadyAt=0;});
-  assert.ok(game.produce());
-  assert.equal(game.agents.length,5);
+  assert.equal(game.produce(),null);
+  assert.equal(game.agents.length,4);
+  change(game,state=>{state.simSeconds=63;state.evolutionPoints=40;});
+  assert.equal(game.produce(),null);
+  assert.equal(game.nestLevel,2);
 });
 
 test("둥지가 파괴되거나 탄생 공간이 없으면 비용을 차감하지 않는다", () => {
@@ -102,16 +106,17 @@ test("둥지가 파괴되거나 탄생 공간이 없으면 비용을 차감하�
 
 test("자동 생산 대기 시간은 저장 복원 후 유지하고 이전 저장에는 새 기본값을 적용한다", () => {
   const room=fixture(), game=room.games.get("bean");room.hostId="manual";
-  change(game,state=>{state.agents=[];state.evolutionPoints=30;});
+  change(game,state=>{state.agents=[];state.evolutionPoints=30;state.simSeconds=60;});
   assert.ok(game.produce());
   const saved=game.save(), colony=room.colonies[0], restored=createGame(room,colony,saved);
   room.games.set("bean",restored);
-  restored.prepare(.5);
+  restored.prepare(60.5);
   assert.equal(restored.produce(),null);
-  restored.prepare(CONQUEST_PACING.productionInterval);
+  change(restored,state=>{state.evolutionPoints=26;});
+  restored.prepare(60+CONQUEST_PACING.productionInterval);
   assert.ok(restored.produce());
   assert.equal(restored.nestLevel,1);
-  change(restored,state=>{delete state.productionReadyAt;state.agents=[];});
+  change(restored,state=>{delete state.productionReadyAt;state.agents=[];state.evolutionPoints=26;});
   assert.ok(restored.produce());
 });
 

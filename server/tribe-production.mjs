@@ -1,53 +1,55 @@
-import { tribeCombatTemplates } from "./tribe-combat-templates.mjs";
-import { sameTribeDesign, tribeDnaTemplate } from "./tribe-designs.mjs";
 import { AGENT_DEATH_WARNING, agentRemainingLifespan } from "./lifespan.mjs";
-import { birthCost, isAttributeUnlocked } from "./attributes.mjs";
+import { birthCost } from "./attributes.mjs";
+import { basicGathererDna } from "./dna-unit.mjs";
 import { suggestTemplateName } from "./unit-template-names.mjs";
-import { colonySupply } from "./colony-supply.mjs";
 import { NEST_LEVELS } from "./nests.mjs";
-import { TRIBE_STARTING_UNITS } from "./tribe-start.mjs";
-import { CONQUEST_PACING, TRIBE_PACING, colonyWorkerShare, militaryAgent } from "./conquest-pacing.mjs";
+import { militaryAgent } from "./conquest-pacing.mjs";
+import { TRIBE_INVASION, tribeDesign, sameTribeDesign, tribeDnaTemplate } from "./tribe-designs.mjs";
+import { tribeCombatTemplates } from "./tribe-combat-templates.mjs";
+import { tribeDefenseDesign } from "./tribe-defense-designs.mjs";
+import { tribeWorkers, tribeStrongWorkers, tribeInvasionReady, tribeDefenseCount } from "./tribe-strategy.mjs";
 
-function productionTemplate(slots,role,state) {
- const previous=state.templates.find(template=>!template.dna&&template.productionRole===role&&template.slots.length===slots.length&&slots.every(key=>template.slots.includes(key)));
- if(previous)return previous;
- return {id:null,name:suggestTemplateName(slots,state.templates),slots:[...slots],attributeLevels:Object.fromEntries(slots.map(key=>[key,1])),revision:1,productionRole:role};
-}
-
-export function tribeProductionTemplate(state,tribe) {
- const profile=TRIBE_PACING[tribe],initial=TRIBE_STARTING_UNITS[tribe];if(!profile||!initial)return null;
- if(state.agents.filter(agent=>agent.health>0).length>=NEST_LEVELS[state.nestLevel-1].unitCapacity)return null;
- const living=state.agents.filter(agent=>agent.health>0);
- if(!living.length){const worker=productionTemplate([profile.native].filter(Boolean),"worker",state);if(state.evolutionPoints>=birthCost(worker,tribe))return worker;
-  const basic=productionTemplate([],"worker",state);return state.evolutionPoints>=birthCost(basic,tribe)?basic:null;}
- const young=living.filter(agent=>agentRemainingLifespan(agent,state.simSeconds)>AGENT_DEATH_WARNING);
- const target=NEST_LEVELS[state.nestLevel-1].unitCapacity;
- const militaryAllowed=state.simSeconds>=CONQUEST_PACING.neutralConflictAt*profile.tempo;
- const workerTarget=militaryAllowed?Math.floor(target*colonyWorkerShare(state.nestLevel,state.simSeconds,tribe)):target;
- const workers=young.filter(agent=>!militaryAgent(agent,tribe)),soldiers=young.filter(agent=>militaryAgent(agent,tribe));
- let role=null;
- if(workers.length<workerTarget)role="worker";
- else if(militaryAllowed&&soldiers.length<target-workerTarget)role="military";
- if(!role)return null;
- const supply=colonySupply(state,tribe),replacing=young.length<initial.length;
- if(!replacing&&young.length>=initial.length&&(!supply.incomeObserved||supply.rateDeficit>0))return null;
- if (role === "military" && state.nestLevel === 4) {
+export function tribeProductionTemplate(state, tribe) {
+  const profile = TRIBE_INVASION[tribe];
+  if (!profile) return null;
+  const living = state.agents.filter(agent => agent.health > 0);
+  if (living.length >= NEST_LEVELS[state.nestLevel - 1].unitCapacity) return null;
+  const young = living.filter(agent => agentRemainingLifespan(agent, state.simSeconds) > AGENT_DEATH_WARNING);
+  const workers = tribeWorkers(state, tribe);
+  const soldiers = young.filter(agent => militaryAgent(agent, tribe));
+  const recovering = !living.some(agent => !militaryAgent(agent, tribe) &&
+    (!agent.dna || agent.dna.pieces.some(piece => piece.gene === "gather")));
+  const target = [4, 6, 8, 10][state.nestLevel - 1];
+  const improved = workers.some(agent => agent.dna?.pieces.filter(piece => piece.gene === "movement").length >= 2);
+  const defending = workers.length >= target || workers.length >= 4 && improved && !soldiers.length;
+  if (defending && soldiers.length < tribeDefenseCount(state)) {
+    const dna = tribeDefenseDesign(tribe, state.nestLevel, soldiers.length);
+    const template = tribeDnaTemplate(dna, "military", state);
+    const reserve = birthCost({ dna: basicGathererDna(state.nestLevel) }, tribe);
+    return state.evolutionPoints >= birthCost(template, tribe) + reserve ? template : null;
+  }
+  const strengthening = state.nestLevel === 4 && tribeStrongWorkers(state, tribe).length < 8 && workers.length < 12;
+  if (workers.length < target || strengthening) {
+    if (!recovering && state.simSeconds - (state.foodIncomeStartedAt ?? 0) < 30) return null;
+    for (let level = state.nestLevel; level >= 1; level--) {
+      const dna = tribeDesign(tribe, level, -1);
+      const template = tribeDnaTemplate(dna, "worker", state);
+      if (state.evolutionPoints >= birthCost(template, tribe)) return template;
+      if (!recovering) return null;
+    }
+    const basic = tribeDnaTemplate(basicGathererDna(state.nestLevel), "worker", state);
+    if (state.evolutionPoints >= birthCost(basic, tribe)) return basic;
+    const legacy = { id: null, name: suggestTemplateName([], state.templates), slots: [], attributeLevels: {}, revision: 1, productionRole: "worker" };
+    return !workers.length && state.templates.some(template => !template.dna) &&
+      state.evolutionPoints >= birthCost(legacy, tribe) ? legacy : null;
+  }
+  if (!tribeInvasionReady(state, tribe)) return null;
   const templates = tribeCombatTemplates(tribe).map(design => {
     const template = tribeDnaTemplate(design.dna, "military", state);
     return { template, weight: design.weight, count: soldiers.filter(agent => sameTribeDesign(agent, template)).length };
   });
   templates.sort((a, b) => a.count / a.weight - b.count / b.weight || b.weight - a.weight);
   const template = templates[0].template;
-  const reserve = replacing ? 0 : supply.reserve;
-  return state.evolutionPoints + 1e-8 >= birthCost(template, tribe) + reserve ? template : null;
- }
- const armies=[profile.army,["piercing","blade","feet","carapace"],["feet",profile.army[0]],
-  ["carapace",profile.army[0]]].map(slots=>[...new Set(slots.filter(key=>isAttributeUnlocked(key,state.nestLevel,tribe)))].slice(0,state.nestLevel));
- const count=slots=>soldiers.filter(agent=>slots.every(key=>agent.slots.includes(key))).length;
- const army=armies.filter(slots=>slots.length).sort((first,second)=>count(first)-count(second))[0];
- const slots=role==="worker"?[profile.native,"strength","feet"]:army;
- const allowed=[...new Set(slots.filter(key=>isAttributeUnlocked(key,state.nestLevel,tribe)))].slice(0,state.nestLevel);
- const template=productionTemplate(allowed,role,state);
- const reserve=replacing?0:supply.reserve;
- return state.evolutionPoints+1e-8>=birthCost(template,tribe)+reserve?template:null;
+  const reserve = birthCost({ dna: tribeDesign(tribe, state.nestLevel, -1) }, tribe);
+  return state.evolutionPoints >= birthCost(template, tribe) + reserve ? template : null;
 }
