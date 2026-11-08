@@ -8728,6 +8728,7 @@
       }
     });
     document.getElementById("nest-growth-info").addEventListener("click", () => openCodex("nest:colony"));
+    document.getElementById("nest-codex").addEventListener("click", () => openCodex("nest:colony"));
     nestUpgrade.addEventListener("focus", () => showHelpTooltip(document.getElementById("nest-upgrade-help")));
     nestUpgrade.addEventListener("blur", hideHelpTooltip);
     nestUpgrade.addEventListener("click", async () => {
