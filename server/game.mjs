@@ -1132,7 +1132,10 @@ export function createGame(environment, colony, savedGame) {
           }
         }
       };
-      if (!agent.harvestPrepared) {
+      if (harvestSeconds === 0) {
+        agent.harvestPrepared = true;
+        take(capacity - agent.carrying, agent.harvestReady);
+      } else if (!agent.harvestPrepared) {
         agent.harvestPrepared = true;
         if (synergy(agent, ["strength", "antenna"]) && state.simSeconds - (agent.preciseHarvestTimes.get(key) ?? -Infinity) >= 30) {
           take(2, agent.harvestReady);

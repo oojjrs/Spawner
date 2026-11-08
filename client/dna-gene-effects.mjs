@@ -10,7 +10,7 @@ export const DNA_EFFECT_ROWS = [
   ['stun','기절 확률','%'],['stunTime','기절 지속시간','초'],['bleed','출혈 확률','%'],['bleedPower','출혈 피해','/초'],
   ['area','범위공격 추가 대상','명'],['areaPower','범위공격 피해 배율','%'],['lifesteal','준 피해 흡혈률','%'],
   ['reflection','피해 반사율','%'],['regeneration','체력 재생','/초'],['comboSpeed','추가 타격 간격','초'],['focus','공격 준비시간','초'],
-  ['capacity','운반량','개'],['harvest','회당 채집량','개'],['harvestTime','채집 시간','초'],['loadSpeed','적재 시 이동속도 비율','%'],
+  ['capacity','운반량','개'],['harvest','회당 채집량','개'],['harvestTime','채집 시간','초'],['harvestReduction','채집 시간','%'],['loadSpeed','적재 시 이동속도 비율','%'],
   ['movement','이동속도','칸/초'],['vision','시야','칸'],['lifespan','수명','초']
 ];
 
@@ -25,7 +25,7 @@ const requirements = {
   stun:[attack], stunTime:[attack,['stun']], bleed:[attack], bleedPower:[attack,['bleed']],
   area:[attack], areaPower:[attack,['area']], lifesteal:[attack], focus:[attack]
 };
-const primary = {blade:'meleePower',secretion:'rangedPower',carapace:'armor',gather:'capacity',power:'meleePower',speed:'meleeSpeed',combo:'hits',harvestSpeed:'harvestTime'};
+const primary = {blade:'meleePower',secretion:'rangedPower',carapace:'armor',gather:'capacity',power:'meleePower',speed:'meleeSpeed',combo:'hits',harvestSpeed:'harvestReduction'};
 const format = value => String(Number(value.toFixed(3)));
 
 function difference(before,after,requiredKey) {
@@ -48,6 +48,7 @@ export function dnaGeneEffects(M,pieces,geneId,tribe) {
 
 function effectLine(effect) {
   const {label,unit,delta}=effect;
+  if(effect.key==='harvestReduction')return label+' '+(delta===0?'+0':format(-delta))+'%p';
   return label+' '+(delta>=0?'+':'')+format(delta)+(unit==='%'?'%p':unit);
 }
 

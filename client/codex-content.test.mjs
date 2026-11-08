@@ -56,7 +56,7 @@ test("DNA 설명은 기관·레벨·가격·종족별 실제 효과와 퇴역 �
 });
 
 test("DNA 공통 효과는 반복하지 않고 실제 종족 차이가 있는 효과만 나눈다", () => {
-  for (const key of ["antenna", "gather", "capacity", "harvestSpeed", "vision", "lifespan", "blockPower", "combo", "area"]) {
+  for (const key of ["antenna", "capacity", "gather", "harvestSpeed", "vision", "lifespan", "blockPower", "combo", "area"]) {
     assert.deepEqual(codexGeneTribeEffects(codexResolveEntry("attribute:" + key).value), [], key);
   }
   for (const key of ["blade", "secretion", "health", "power", "carapace", "movement", "regeneration", "focus"]) {

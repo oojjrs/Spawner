@@ -1,10 +1,10 @@
 import { correctStartingEconomy, measureStartingEconomy } from "./start-economy.mjs";
 
 export const RESOURCE_ECONOMY = Object.freeze([
-  { tribe: "bean", key: "clay", coverage: .035, amount: 12, harvestSeconds: 4 },
-  { tribe: "spore", key: "tree", coverage: null, amount: 30, harvestSeconds: 6 },
-  { tribe: "pebble", key: "pebbles", coverage: .045, amount: 12, harvestSeconds: 6 },
-  { tribe: "spring", key: "dew", coverage: null, amount: 1, harvestSeconds: 2 }
+  { tribe: "bean", key: "clay", coverage: .035, amount: 12, harvestSeconds: 3 },
+  { tribe: "spore", key: "tree", coverage: null, amount: 30, harvestSeconds: 3 },
+  { tribe: "pebble", key: "pebbles", coverage: .045, amount: 12, harvestSeconds: 3 },
+  { tribe: "spring", key: "dew", coverage: null, amount: 1, harvestSeconds: 3 }
 ].map(entry => Object.freeze(entry)));
 
 export const RESOURCE_NODE_AMOUNT = 5000;

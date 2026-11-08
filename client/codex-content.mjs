@@ -169,7 +169,9 @@ export function codexGeneDetails(gene, tribe) {
   if (gene.id === "blade") effects = [["근접 공격력", Number(stats.meleePower.toFixed(3))], ["근접 공속", Number(stats.meleeSpeed.toFixed(3)) + "회/초"]];
   if (gene.id === "secretion") effects = [["원거리 공격력", Number(stats.rangedPower.toFixed(3))], ["원거리 공속", Number(stats.rangedSpeed.toFixed(3)) + "회/초"]];
   if (gene.id === "gather") effects = [["채집량", stats.harvest + "개"], ["운반량", stats.capacity + "개"], ["채집 시간", stats.harvestTime + "초"]];
+  if (gene.id === "harvestSpeed") effects = [["채집 시간", "-" + (stats.harvestReduction - base.harvestReduction) + "%"]];
   const limits = {
+    harvestSpeed: "100%",
     speed: DNA_COMBAT_RULES.maxActionRate + "회/초", rangedSpeed: DNA_COMBAT_RULES.maxActionRate + "회/초",
     vision: "12칸", critical: "90%", parry: "60%", block: "90%", blockPower: "90%", evasion: "60%",
     accuracy: "60%", tenacity: "75%", counter: "100%", reduction: "40%", stun: "60%", stunTime: "1.5초",
@@ -189,7 +191,7 @@ export function codexGeneTribeEffects(gene) {
 }
 
 export function codexStatRows(stats) {
-  return codexStatFields.filter(([key]) => Number.isFinite(stats[key]) && stats[key] !== 0)
+  return codexStatFields.filter(([key]) => Number.isFinite(stats[key]) && (stats[key] !== 0 || key === "harvestTime" && stats.harvest > 0))
     .map(([key, name, unit]) => [name, Number((stats[key] / (key === "lifespan" ? 60 : 1)).toFixed(3)) + unit]);
 }
 

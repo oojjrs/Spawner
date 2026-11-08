@@ -8,7 +8,7 @@ import { RESOURCE_TYPES } from "./resources.mjs";
 import { generateWorld } from "./world.mjs";
 import { populateResourceNodes, populateForestResources } from "./resources.mjs";
 
-const harvestSeconds = { tree:6, dew:2, pebbles:6, clay:4 };
+const harvestSeconds = { tree:3, dew:3, pebbles:3, clay:3 };
 
 test("속성 조합 보너스는 모두 중지하고 개별 속성 효과와 생산비는 유지한다", () => {
   assert.equal(ATTRIBUTE_SYNERGIES_ENABLED, false);

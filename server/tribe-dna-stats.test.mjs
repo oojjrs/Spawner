@@ -63,3 +63,11 @@ test("설계 수치·실험실·실제 유닛이 같은 종족의 DNA 수치를 
     for (const key of ["health", "meleePower", "rangedPower", "meleeSpeed", "rangedSpeed", "armor", "movement"]) close(overrides[key], actual[key]);
   }
 });
+
+
+test("몽돌의 이동 강화는 채집 일꾼에서 가장 큰 상대 개선을 주고 다른 개체는 유지한다",()=>{
+  const ratios=Object.fromEntries(tribes.map(tribe=>[tribe,ATTRIBUTE_DNA.stats(pieces(['gather','movement']),tribe).movement/ATTRIBUTE_DNA.stats(pieces(['gather']),tribe).movement]));
+  for(const tribe of tribes.filter(tribe=>tribe!=='pebble'))assert.ok(ratios.pebble>ratios[tribe]);
+  close(ATTRIBUTE_DNA.stats(pieces(['gather','movement']),'pebble').movement,.357);
+  close(ATTRIBUTE_DNA.stats(pieces(['movement']),'pebble').movement,.259);
+});

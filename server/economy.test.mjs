@@ -12,7 +12,7 @@ test("네 종족의 기본 자원과 승인된 자원 채집 시간을 적용한
   }
   assert.equal(canHarvestResource({ resourceType: "pebbles" }, { generationVersion: 10 }, {}, "pebble"), true);
   for (const generationVersion of [undefined,10,11,15,32]) {
-    for (const [type,seconds] of [["clay",4],["dew",2],["tree",6],["pebbles",6]]) {
+    for (const [type,seconds] of [["clay",3],["dew",3],["tree",3],["pebbles",3]]) {
       assert.equal(resourceHarvestSeconds(type,{generationVersion}),seconds,type+":"+generationVersion);
     }
   }

@@ -6,7 +6,7 @@ export const DNA_PLACEMENT_COLORS = Object.freeze({available:'#6bc7ff',blocked:'
 
 export function dnaDesignStats(M,pieces,tribe) {
   const stats=M.stats(pieces,tribe),base={...M.stats([],tribe)},organPieces=pieces.filter(piece=>M.lookup.get(piece.gene)?.category==='organ'),organStats=M.stats(organPieces,tribe);
-  for(const key of ['harvestTime','comboSpeed','focus'])if(stats[key]>0)base[key]=organStats[key];
+  for(const key of ['harvestTime','comboSpeed','focus'])if(key==='harvestTime'?stats.harvest>0:stats[key]>0)base[key]=organStats[key];
   return {stats,base};
 }
 
@@ -174,7 +174,7 @@ export function createDnaEditor(container,dnaModel,onChange,onAction) {
       const count=document.createElement('span');count.textContent='×'+counts[gene.id];
       const key=keys[gene.id]||gene.id,without=M.stats(pieces.filter(piece=>piece.gene!==gene.id),tribe);
       const difference=Number(((stats[key]-without[key])/(key==='lifespan'?60:1)).toFixed(3)),unit=units[key]||(percentages.includes(key)?'%':'');
-      const effect=unlocks[gene.id]||((labels[key]||names[gene.id])+' '+(difference>=0?'+':'')+difference+unit);
+      const effect=gene.id==='harvestSpeed'?labels.harvestTime+' -'+stats.harvestReduction+'%':unlocks[gene.id]||((labels[key]||names[gene.id])+' '+(difference>=0?'+':'')+difference+unit);
       const delta=document.createElement('span');delta.className='dna-legend-delta';delta.textContent=' ('+effect+')';
       item.append(svg,count);if(gene.id!=='antenna')item.append(delta);legend.append(item);
     }

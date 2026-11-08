@@ -2,6 +2,7 @@ import { AGENT_LIFESPAN, AGENT_LIFESPAN_BONUS } from "./lifespan.mjs";
 import { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoardPack } from "./dna-board.mjs";
 import { dnaCombatStats } from "./dna-combat-stats.mjs";
 import { tribeDnaStats } from "./tribe-dna-stats.mjs";
+import { RESOURCE_ECONOMY } from "./economy.mjs";
 
 export const ATTRIBUTE_DNA = (() => {
   const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};
@@ -40,9 +41,10 @@ export const ATTRIBUTE_DNA = (() => {
   function weights(pieces){const result={};for(const piece of pieces)result[piece.gene]=(result[piece.gene]||0)+(piece.grade===undefined?1:piece.grade);return result;}
   function stats(pieces,tribe){
     const n=weights(pieces),c=counts(pieces),gather=!!c.gather,profile=tribeDnaStats(tribe);
+    const resource=RESOURCE_ECONOMY.find(entry=>entry.tribe===tribe)||RESOURCE_ECONOMY[0],harvestReduction=gather?Math.min(100,10*(n.harvestSpeed||0)):0;
     return {...dnaCombatStats(c,n,undefined,tribe),gatherCount:c.gather||0,antennaCount:c.antenna||0,
       capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?1:0,
-      harvestTime:gather?3/(1+.5*(n.harvestSpeed||0)):0,movement:.25*profile.base.movement+(gather?.11:.04)*(n.movement||0)*(profile.growth.movement??1),
+      harvestReduction,harvestTime:gather?resource.harvestSeconds*(100-harvestReduction)/100:0,movement:.25*profile.base.movement+(gather?.11:.04)*(n.movement||0)*(profile.growth[gather?'gatherMovement':'movement']??profile.growth.movement??1),
       vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion||c.carapace),
       lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed:gather?75:0};
   }

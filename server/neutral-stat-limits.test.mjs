@@ -11,7 +11,7 @@ const tribes = ["bean", "pebble", "spore", "spring"];
 const epsilon = 1e-9;
 function value(field, stats, gene) {
   if (field === "combo") return stats.hits - 1;
-  if (field === "harvestSpeed") return stats.harvestTime > 0 ? 1 / stats.harvestTime : 0;
+  if (field === "harvestSpeed") return stats.harvestReduction;
   if (field === "power" && gene === "rangedPower") return stats.rangedPower;
   if (field === "speed" && gene === "rangedSpeed") return stats.rangedSpeed;
   return stats[field];

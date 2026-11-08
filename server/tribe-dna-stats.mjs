@@ -6,7 +6,7 @@ export const TRIBE_DNA_STATS = Object.freeze(Object.fromEntries(Object.entries({
   pebble: {
     base: { health: 1.2, armor: 6, meleePower: .85, rangedPower: .85, meleeSpeed: .9, rangedSpeed: .9, movement: .9 },
     growth: { health: 1.2, carapace: 1.6, armor: 1.6, power: .85, rangedPower: .85, speed: .9, rangedSpeed: .9,
-      block: 1.2, tenacity: 1.2, reduction: 1.15, reflection: 1.2, regeneration: 1.2, evasion: .8, movement: .85 }
+      block: 1.2, tenacity: 1.2, reduction: 1.15, reflection: 1.2, regeneration: 1.2, evasion: .8, movement: .85, gatherMovement: 1.2 }
   },
   spore: {
     base: { health: .9, armor: 0, meleePower: .85, rangedPower: 1.15, meleeSpeed: .95, rangedSpeed: 1.05, movement: 1 },

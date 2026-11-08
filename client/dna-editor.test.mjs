@@ -122,6 +122,11 @@ test("공통 스탯 표시는 기본0 숨김과 합산·괄호 증감·색상을
   assert.equal(tool.children.some(item=>item.dataset.stat==='rangedPower'),false);
   const health=tool.children.filter(item=>item.dataset.stat==='health');assert.equal(health[0].className,'design-stat-changed');
   assert.equal(health[1].children[0].className,'design-stat-value design-stat-changed');assert.equal(health[1].children[1].textContent,' (+20)');
+  for(const tribe of ['bean','spore','pebble','spring']){
+    const capped=dnaDesignStats(ATTRIBUTE_DNA,[piece('gather',0),...Array.from({length:10},()=>piece('harvestSpeed',0))],tribe),output=element();
+    assert.equal(capped.stats.harvestTime,0);assert.ok(capped.base.harvestTime>0);renderDnaDesignStats(output,capped.stats,capped.base,false);
+    assert.equal(output.children.filter(item=>item.dataset.stat==='harvestTime')[1].children[0].textContent,'0초');
+  }
 });
 
 function sharedModuleSource(name){
@@ -228,7 +233,7 @@ test("범례는 종류별 개수와 실효 변화량을 표시하고 칸 수 배
   const {editor,root}=fixture(t),legend=root.querySelector('.dna-legend');editor.context(4,1000,false);
   const pieces=ATTRIBUTE_DNA.pack(['gather','capacity','capacity','harvestSpeed','harvestSpeed','health','movement','antenna','block','armor'].map(id=>piece(id,0)),4);editor.load({version:6,pieces,level:4,budget:1000},false);
   const rows=()=>Object.fromEntries(legend.children.map(row=>[row.dataset.gene,row.children.slice(1).map(child=>child.textContent)]));
-  assert.deepEqual(rows(),{capacity:['×2',' (운반 +2개)'],gather:['×1',' (채집 기능 해금)'],harvestSpeed:['×2',' (채집 시간 '+Number((ATTRIBUTE_DNA.stats([piece('gather',0),piece('harvestSpeed',0),piece('harvestSpeed',0)]).harvestTime-ATTRIBUTE_DNA.stats([piece('gather',0)]).harvestTime).toFixed(3))+'초)'],health:['×1',' (체력 +20)'],movement:['×1',' (이동 +'+Number((ATTRIBUTE_DNA.stats([piece('gather',0),piece('movement',0)]).movement-ATTRIBUTE_DNA.stats([piece('gather',0)]).movement).toFixed(3))+'칸/초)'],antenna:['×1'],block:['×1',' (방어본능 +25%)'],armor:['×1',' (방어 +30)']});
+  assert.deepEqual(rows(),{capacity:['×2',' (운반 +2개)'],gather:['×1',' (채집 기능 해금)'],harvestSpeed:['×2',' (채집 시간 -20%)'],health:['×1',' (체력 +20)'],movement:['×1',' (이동 +'+Number((ATTRIBUTE_DNA.stats([piece('gather',0),piece('movement',0)]).movement-ATTRIBUTE_DNA.stats([piece('gather',0)]).movement).toFixed(3))+'칸/초)'],antenna:['×1'],block:['×1',' (방어본능 +25%)'],armor:['×1',' (방어 +30)']});
   assert.equal(legend.hidden,false);assert.equal(root.querySelector('.dna-board').children.some(child=>child.className==='dna-fill'),false);
   root.dispatch('keydown',{key:'Delete'});assert.equal(rows().armor,undefined);root.dispatch('keydown',{key:'z',ctrlKey:true});assert.deepEqual(rows().armor,['×1',' (방어 +30)']);editor.load({version:6,pieces:[],level:4,budget:1000},false);assert.equal(legend.hidden,true);
 });

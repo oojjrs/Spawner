@@ -35,11 +35,12 @@ test('기관이 없어도 배치할 조각의 증가량을 한 줄로 안내한�
 
 test('종족별 실제 증가량과 중복 배치·상한·하한을 반영한다',()=>{
   for(const [tribe,gain] of [['bean',8],['spore',6.4],['pebble',6.8],['spring',9.6]])close(effect(dnaGeneEffects(M,[piece('blade')],'power',tribe),'meleePower').delta,gain);
+  for(const tribe of ['bean','spore','pebble','spring'])assert.match(dnaGeneTooltip(M,[piece('gather')],'harvestSpeed',tribe,dnaGeneNames),/^채집 시간 -10%p$/);
   const repeated=[piece('gather'),piece('harvestSpeed'),piece('harvestSpeed')];
   const harvest=effect(dnaGeneEffects(M,repeated,'harvestSpeed','bean'),'harvestTime');
   close(harvest.before,M.stats(repeated,'bean').harvestTime);close(harvest.after,M.stats([...repeated,piece('harvestSpeed')],'bean').harvestTime);assert.ok(harvest.delta<0);
-  assert.ok(Math.abs(harvest.delta)<Math.abs(effect(dnaGeneEffects(M,[piece('gather')],'harvestSpeed','bean'),'harvestTime').delta));
-  for(const [id,base] of [['critical',[piece('blade')]],['vision',[]],['focus',[piece('blade')]],['blockPower',[piece('block')]]]){
+  close(harvest.delta,effect(dnaGeneEffects(M,[piece('gather')],'harvestSpeed','bean'),'harvestTime').delta);
+  for(const [id,base] of [['critical',[piece('blade')]],['harvestSpeed',[piece('gather')]],['vision',[]],['focus',[piece('blade')]],['blockPower',[piece('block')]]]){
     const text=dnaGeneTooltip(M,[...base,...Array.from({length:30},()=>piece(id))],id,'bean',dnaGeneNames);
     assert.match(text,/\+0/);assert.equal(text.split('\n').length,1);
   }
