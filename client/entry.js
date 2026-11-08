@@ -72,12 +72,15 @@
     globalThis.SpawnerLocalAssetSources ||= Object.create(null);
     if (!seed.music) {
       seed.music = globalThis.SpawnerMusic.create();
-      seed.muted = false;
+      const settings = globalThis.SpawnerSoundSettings;
+      seed.muted = settings ? settings.read().effectiveVolume === 0 : false;
+      seed.music.setVolume?.(settings?.read().effectiveVolume ?? 1);
       const sound = document.getElementById("sound-toggle");
       let settlePriority;
       seed.priority = new Promise(resolve => { settlePriority = resolve; });
       function updateSound() {
         sound.disabled = false;
+        sound.textContent = seed.muted ? "꺼짐" : "켜짐";
         sound.setAttribute("aria-label", seed.muted ? "소리 켜기" : "소리 끄기");
         sound.setAttribute("aria-pressed", String(!seed.muted));
         sound.title = seed.muted ? "배경음악·효과음 켜기" : "배경음악·효과음 끄기";
@@ -88,7 +91,15 @@
           if (!seed.muted && !document.hidden && document.body.dataset.screen === "welcome") seed.music.unlock(seed.context);
         }).catch(() => settlePriority(false));
       }
+      function applySettings() {
+        seed.muted = settings.read().effectiveVolume === 0;
+        seed.music.setVolume?.(settings.read().effectiveVolume);
+        updateSound();
+        resumeMusic();
+      }
+      const unsubscribe = settings?.subscribe(applySettings);
       function toggleSound() {
+        if (settings) { settings.toggleMute(); return; }
         seed.muted = !seed.muted;
         updateSound();
         resumeMusic();
@@ -98,6 +109,7 @@
       document.addEventListener("visibilitychange", resumeMusic);
       window.addEventListener("pagehide", hideMusic);
       seed.cleanup = () => {
+        unsubscribe?.();
         sound.removeEventListener("click", toggleSound);
         document.removeEventListener("visibilitychange", resumeMusic);
         window.removeEventListener("pagehide", hideMusic);

@@ -13,6 +13,7 @@
     const channels = [];
     let context = null;
     let output = null;
+    let masterVolume = 1;
     let analyser = null;
     let analysisActive = false;
     let analysisConnected = false;
@@ -225,6 +226,7 @@
       context = audioContext;
       if (!output) {
         output = context.createGain();
+        output.gain.value = masterVolume;
         output.connect(context.destination);
         if (analysisActive) setAnalysisActive(true);
       }
@@ -242,6 +244,12 @@
       }
       enabled = true;
       if (!pending && gapTimer === null && (!active || active.audio.paused || !playlists[mode]?.includes(active.track))) start();
+    }
+
+    function setVolume(value) {
+      if (typeof value !== "number" || !Number.isFinite(value)) return;
+      masterVolume = Math.max(0, Math.min(1, value));
+      if (output) output.gain.value = masterVolume;
     }
 
     function suspend() {
@@ -270,7 +278,7 @@
     }
 
     function analysisAvailable() {
-      return analysisActive && enabled && !!analyser && context.state === "running" &&
+      return analysisActive && enabled && masterVolume > 0 && !!analyser && context.state === "running" &&
         channels.some(channel => !channel.audio.paused && !channel.audio.ended &&
           !channel.audio.muted && channel.audio.volume > 0 && channel.audio.readyState >= 3);
     }
@@ -288,7 +296,7 @@
       return true;
     }
 
-    return { ready, update, unlock, suspend, waveform: Object.freeze({
+    return { ready, update, unlock, suspend, setVolume, waveform: Object.freeze({
       read: readWaveform, readSpectrum, setActive: setAnalysisActive,
       get sampleRate() { return context?.sampleRate || 0; }
     }) };

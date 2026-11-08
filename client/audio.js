@@ -39,11 +39,14 @@
     let context = null;
     let entryResume = entryAudio?.resumed || null;
     let resumeAttempt = 0;
+    let effectsGain = null;
     let worldGain = null;
     let welcomeGain = null;
     let worldVolume = 1, combatGeneration = 0;
     let loading = null;
-    let muted = entryAudio?.muted || false;
+    const settings = globalThis.SpawnerSoundSettings;
+    let volume = settings?.read().effectiveVolume ?? 1;
+    let muted = settings ? volume === 0 : entryAudio?.muted || false;
     let active = true;
     let failed = !entryAudio?.context && !globalThis.AudioContext;
     const harvests = new Map();
@@ -100,6 +103,9 @@
 
     function updateButton() {
       button.disabled = failed;
+      button.textContent = failed ? "사용 불가" : muted ? "꺼짐" : "켜짐";
+      const slider = document.getElementById("sound-volume");
+      if (slider) slider.disabled = failed;
       button.setAttribute("aria-label", failed ? "소리 사용 불가" : muted ? "소리 켜기" : "소리 끄기");
       button.setAttribute("aria-pressed", String(!muted && !failed));
       button.title = failed ? "소리 사용 불가" : muted ? "배경음악·효과음 켜기" : "배경음악·효과음 끄기";
@@ -145,9 +151,12 @@
       context = entryAudio?.context || new AudioContext();
       worldGain = context.createGain();
       worldGain.gain.value = worldVolume;
-      worldGain.connect(context.destination);
       welcomeGain = context.createGain();
-      welcomeGain.connect(context.destination);
+      effectsGain = context.createGain();
+      effectsGain.gain.value = muted ? 0 : volume;
+      effectsGain.connect(context.destination);
+      worldGain.connect(effectsGain);
+      welcomeGain.connect(effectsGain);
       for (let index = 0; index < 8; index++) {
         const gain = context.createGain();
         gain.gain.value = 0;
@@ -309,7 +318,7 @@
         source.buffer = buffers.get(name);
         if (!discoveryGain) {
           discoveryGain = context.createGain();
-          discoveryGain.connect(context.destination);
+          discoveryGain.connect(effectsGain);
         }
         discoveryGain.gain.value = 0.65 * Math.min(1, volume);
         source.connect(discoveryGain);
@@ -373,7 +382,7 @@
       source.buffer = buffers.get(name);
       gain.gain.value = 0.65;
       source.connect(gain);
-      gain.connect(context.destination);
+      gain.connect(effectsGain);
       const voice = { source, gain, group: "ui", name };
       voices.add(voice);
       source.onended = () => { voices.delete(voice); source.disconnect(); gain.disconnect(); };
@@ -391,7 +400,7 @@
       if (!clickGain) {
         clickGain = context.createGain();
         clickGain.gain.value = 0.3;
-        clickGain.connect(context.destination);
+        clickGain.connect(effectsGain);
       }
       source.connect(clickGain);
       source.onended = () => {
@@ -422,11 +431,27 @@
       }
     }
 
-    button.addEventListener("click", () => {
-      muted = !muted;
+    function applySettings() {
+      const wasMuted = muted;
+      volume = settings.read().effectiveVolume;
+      muted = volume === 0;
+      if (effectsGain) effectsGain.gain.value = volume;
+      music.setVolume?.(volume);
       if (muted) { stop(); stopClick(); music.suspend(); }
-      else { unlock(true); playClick(); }
+      else if (wasMuted) unlock(true);
       updateButton();
+    }
+    settings?.subscribe(applySettings);
+    music.setVolume?.(muted ? 0 : volume);
+    button.addEventListener("click", () => {
+      if (settings) settings.toggleMute();
+      else {
+        muted = !muted;
+        if (muted) { stop(); stopClick(); music.suspend(); }
+        else unlock(true);
+        updateButton();
+      }
+      if (!muted) playClick();
     });
     document.addEventListener("click", event => {
       unlock(true);

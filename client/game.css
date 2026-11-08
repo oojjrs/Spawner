@@ -692,7 +692,20 @@
       .design-footer { margin-top: 14px; padding-top: 12px; }
     }
     .sound-toggle { position: absolute; top: 16px; right: 16px; z-index: 3; display: grid; place-items: center; width: 60px; height: 60px; padding: 12px; border: 1px solid #75c4b680; border-radius: 16px; color: #e7f7f2; background: #172522f2; box-shadow: 0 4px 16px #0006; cursor: pointer; }
-    .welcome-heading > #sound-toggle, .tribe-selection-heading > #sound-toggle { position: static; flex-shrink: 0; }
+    .sound-controls { position: absolute; top: 16px; right: 16px; z-index: 4; }
+    .sound-controls > .sound-toggle { position: static; }
+    .welcome-audio > .sound-controls, .tribe-selection-heading > .sound-controls { position: relative; top: auto; right: auto; flex-shrink: 0; }
+    .sound-settings { position: absolute; top: calc(100% + 8px); right: 0; width: min(276px, calc(100vw - 32px)); padding: 16px; border: 1px solid #75c4b680; border-radius: 14px; background: #172522; color: #e7f7f2; box-shadow: 0 6px 24px #0009; }
+    .sound-settings[hidden] { display: none; }
+    .sound-settings h2 { margin: 0 0 8px; font-size: .9rem; font-weight: 600; }
+    .sound-setting-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px; font-size: .8rem; }
+    .sound-setting-row output { font-variant-numeric: tabular-nums; }
+    .sound-mute-toggle { min-width: 64px; min-height: 44px; padding: 8px 12px; border: 1px solid #75c4b680; border-radius: 9px; background: #244039; color: #e7f7f2; font: inherit; cursor: pointer; touch-action: manipulation; }
+    .sound-mute-toggle[aria-pressed="false"] { color: #d3dcda; background: #20282b; }
+    .sound-mute-toggle:focus-visible, #sound-volume:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    #sound-volume { display: block; width: 100%; height: 44px; margin: 0; accent-color: var(--accent); cursor: pointer; touch-action: pan-y; }
+    .sound-settings #sound-volume-hint { margin: 4px 0 0; color: #b9cbc5; font-size: .7rem; line-height: 1.5; }
+    .sound-mute-toggle:disabled, #sound-volume:disabled { cursor: default; opacity: .55; }
     .sound-toggle.room-exit { top: 88px; }
     .reload-toast { position: fixed; top: 16px; left: 50%; z-index: 20; width: max-content; max-width: calc(100vw - 32px); margin: 0; padding: 10px 18px; border: 1px solid #75c4b680; border-radius: 12px; background: #172522f2; color: #e7f7f2; box-shadow: 0 4px 16px #0006; font-size: .85rem; line-height: 1.5; text-align: center; word-break: keep-all; pointer-events: none; opacity: 0; visibility: hidden; transform: translateX(-50%); transition: opacity .18s, visibility 0s .18s; }
     .reload-toast.is-visible { opacity: 1; visibility: visible; transition-delay: 0s; }
@@ -725,8 +738,8 @@
     .welcome-waveform { display: block; width: 100%; height: 110px; margin-top: 8px; background: transparent; pointer-events: none; }
     .welcome-waveform[hidden] { display: none; }
     .welcome-audio { display: flex; justify-content: flex-end; margin-bottom: 10px; }
-    .welcome-audio > #sound-toggle { position: static; width: 44px; height: 44px; padding: 9px; border-radius: 12px; }
-    .welcome-audio > #sound-toggle svg { width: 24px; height: 24px; }
+    .welcome-audio .sound-controls > .sound-toggle { position: static; width: 44px; height: 44px; padding: 9px; border-radius: 12px; }
+    .welcome-audio .sound-controls > .sound-toggle svg { width: 24px; height: 24px; }
     .welcome-heading > .welcome-brand { margin: 0; color: var(--accent); letter-spacing: .28em; font-size: .8rem; outline: none; }
     .welcome p { color: var(--muted); font-size: .85rem; line-height: 1.6; }
     .welcome form { display: grid; gap: 10px; }

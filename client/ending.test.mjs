@@ -200,7 +200,7 @@ test("엔딩 진입은 재생 중인 브금을 정지하거나 다른 곡으로 
   const music = context.SpawnerMusic.create();
   music.update({ simSeconds: 1, agents: [{ id: "last", health: 1, action: "fight" }], rivals: [] });
   music.unlock({ currentTime: 0, state: "running", destination: {},
-    createGain: () => ({ connect() {} }), createMediaElementSource: () => ({ connect() {} }) });
+    createGain: () => ({ gain: { value: 1 }, connect() {} }), createMediaElementSource: () => ({ connect() {} }) });
   await Promise.resolve();
   await Promise.resolve();
   const before = sounds.map(sound => [sound.src, sound.pauses, sound.plays]);

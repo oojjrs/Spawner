@@ -64,9 +64,9 @@ test("줌 음량 변경은 재생 중인 전투·채집음에 즉시 반영하�
   const world = attack.output.output;
   const attackLevel = attack.output.gain.value, harvestLevel = harvest.output.gain.value;
   assert.equal(harvest.output.output, world);
-  assert.equal(world.output, sound.clock.destination);
-  assert.equal(click.output.output, sound.clock.destination);
-  assert.equal(discovery.output.output, sound.clock.destination);
+  assert.equal(world.output.output, sound.clock.destination);
+  assert.equal(click.output.output, world.output);
+  assert.equal(discovery.output.output, world.output);
   const starts = sound.started.length;
   sound.audio.setWorldVolume(.25);
   assert.equal(attack.output.gain.value * world.gain.value, attackLevel * .25);
@@ -170,7 +170,7 @@ test("웰컴 효과음은 게임 줌과 독립이고 채널 재사용은 출력 
   const channel = welcome.output;
   assert.equal(welcome.buffer.file, "DesignAssets/Audio/bean-footstep.mp3");
   assert.equal(channel.gain.value, .6);
-  assert.equal(channel.output.output, sound.clock.destination);
+  assert.equal(channel.output.output.output, sound.clock.destination);
   assert.equal(channel.output.gain.value, 1);
   assert.equal(channel.outputs.size, 1);
   sound.audio.setWorldVolume(1);
