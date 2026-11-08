@@ -1,3 +1,32 @@
+## 효과음·BGM 분리 완료범위 동결 [audio-channels-freeze-01a1bacf]
+
+- 기록·현재요약 관측 2026-11-08T20:13:45+09:00; 완료범위 승인 사용자, 범위분리·검수·기록 Codex /root. 출처 codex://threads/01a1bacf-6b18-7d73-83e5-29292c619046 현재 완료요청과실제도구. H:/Spawner main cceda46ba0eeb75a5005047e8e255b687f000a81, Windows local. 원발언정확시각·항목ID불명.
+- 최종후보는 Spawner.html, client/audio-settings.js, audio.js, entry.js, game.css의현재해당변경과 game.js의방처리중두슬라이더예외한줄, audio-settings.test.mjs 및이채팅기록5개로8경로다. game.js의방버전표시와다른제품·메모리변경은현재작업사본에보존하고후보에서제외한다. 서비스배포·새버전·패치노트추가는요청범위가아니다.
+- 앞26/26오디오검사및8텍스트UTF8NoBom/CRLF정상근거를재사용한다. 게임/CSS의분리hunk는검수된동일바이트이며새기능변경없음. 화면검수의Edge실행실패한계를유지한다. 앞기록에서달러기호가빠진검수근거의정확한경로는H:/$Trash/audio-channels-01a1bacf/visual-result.json이다.
+- 요청·라벨승인·기능·검사결과·실제렌더한계·병행내용보존·관련기록원자포함을대조했다. 연결Projects없음의앞조회근거를재사용한다. 후보는literal $Trash/audio-channels-01a1bacf/finish에보존하며이후내용동결한다.
+
+## 효과음·BGM 볼륨 분리 로컬 완료 [audio-channels-complete-01a1bacf]
+
+- 기록·현재요약 관측 2026-11-08T20:05:19+09:00; 요구·문구 승인 사용자, 구현·검수·기록 Codex /root. 출처 codex://threads/01a1bacf-6b18-7d73-83e5-29292c619046의요청/라벨승인및실제도구결과. H:/Spawner Windows PowerShell local. 원발언 정확시각·항목ID 불명. start/labels/implemented를 로컬구현완료로 갱신한다.
+- 효과음/BGM 각각0~100% 게이지·즉시gain반영·자동저장, 기존단일값 양쪽이관, 전체음소거와각채널0선택보존을 구현했다. 시작음악·전체오디오인계·방처리중두게이지활성연결포함. 변경은제품6파일(Spawner.html, client/audio-settings.js, audio.js, entry.js, game.js, game.css), 기존검사1파일, 이채팅메모리다. 시작사본대비diff에서기존게임/CSS병행내용이그대로유지됐고관련오디오구간만수정됐음을확인했다.
+- 실제검사 node --test client/audio-settings.test.mjs client/audio-entry-resume.test.mjs 총26/26통과. 독립채널출력·음소거·기존저장이관·개별0/저장복원·초기BGM·재개경로를포함한다.8개수정텍스트모두공통검사UTF8NoBom/CRLF정상.검증배치7.33초,검증입력재실행없음.
+- 화면검수는격리headless Edge가launch에서종료(TransactNamedPipe0x6D)되어실행하지못했다. PC/390렌더·스크린샷·실제청취성공을주장하지않는다. 오류근거는literal /audio-channels-01a1bacf/visual-result.json. 코드검사와DOM/CSS계약확인은통과했으며실제렌더확인은잔여한계다.
+- 요청·승인라벨·실제변경·검수통과와화면검수한계·기존변경보존을최종대조했다. 로컬수정상태로남겼으며스테이징·커밋은수행하지않았다. 연결Projects없음.
+## 효과음·BGM 분리 구현 [audio-channels-implemented-01a1bacf]
+
+- 기록 2026-11-08T20:04:20+09:00; 구현판단·기록 Codex /root, 승인 사용자. 출처 현재채팅01a1bacf-6b18-7d73-83e5-29292c619046 도구변경 및 labels 승인. H:/Spawner local. 원발언 정확시각 불명.
+- Spawner.html의 전체 음량을 승인된 효과음/BGM 두 슬라이더로 교체하고 공통 적용 안내를 제거했다. audio-settings는 채널별 현재·마지막 가청값과 전체 음소거를 저장하고 기존 v1 단일값을 양쪽으로 이관한다. 한 채널0은 다른 채널에 영향없고 모두0에서 켜기는 각 마지막값 복원, 전체 음소거 해제는 개별0 선택 유지다.
+- audio.js의 효과음gain/available과 music gain을 분리하고 entry.js의 초기음악도 BGM값을 적용한다. 개별 음량변경은 음악 재시작 없이gain만 갱신하며 모두무음/전체mute때만suspend한다. 설정슬라이더 CSS·방처리중 조작예외를 두채널에 적용했다. 기존 오디오설정 검사를 갱신하고 사용자 요구인 독립동작/기존저장값 보존 조건을 추가했다. 생성번들은 해당 직접로드파일을 포함하지 않아 수정없음.
+- 검수 계획: 기존 오디오설정·입장재개 검사와 실제 설정DOM/CSS/controller를 격리 headless Edge 1440/390화면에서 게이지분리·키보드·저장복원을 확인, 공통형식검사와시작사본대비diff를1회수행. 전체게임실행·전체빌드로 확대하지 않는다. 아직검수결과전.
+## 효과음·BGM 라벨 승인 [audio-channels-labels-01a1bacf]
+
+- 기록 2026-11-08T20:00:34+09:00; 문구·위치 승인 사용자, 구현·기록 Codex /root. 출처 현재채팅01a1bacf-6b18-7d73-83e5-29292c619046 질문 call_24c7015af2aa42d5aad9c9c4c139b41d의 ‘이 문구로 반영’ 응답. H:/Spawner local. 원발언 정확시각 불명.
+- 소리 설정의 전체 소리 아래 두 슬라이더 라벨 ‘효과음’, ‘BGM’을 명시승인했다. 기존 공통 적용 안내는 삭제하며 추가 설명문구는 넣지 않는다. audio-channels-start의 로컬 구현범위를 계속한다.
+## 효과음·BGM 볼륨 분리 진행 [audio-channels-start-01a1bacf]
+
+- 기록·현재요약 관측 2026-11-08T20:00:03+09:00; 요구·결정 주체 사용자, 조사·구현판단·기록 Codex /root. 출처 codex://threads/01a1bacf-6b18-7d73-83e5-29292c619046 현재 요청 ‘설정에서 볼륨은 효과음하고 브금 게이지 따로 줄 수 없냐?’. H:/Spawner Windows PowerShell local. 원발언 정확시각·항목ID 불명.
+- 기존 단일 volume이 효과음 gain과 BGM에 함께 적용된다. 효과음/BGM 두 슬라이더와 독립 저장·즉시 반영, 기존 전체 음소거 유지로 해석한다. 기존 저장값은 두 채널에 동일 이관해 전환 시 음량을 보존한다. 초기 입장 음악부터 전체 오디오 인계까지 연결하며 개별 음원 밸런스·줌감쇠는 유지한다. 새 표시문구는 문서지침6에 따라 정확한 라벨 승인만 확인하며 로직 작업은 진행한다.
+- 대상 Spawner.html, client/audio-settings.js, audio.js, entry.js, game.js, game.css 및 기존 오디오 설정 검사. game.js/CSS·메모리에 병행변경이 있어 작업 시작 사본과 해당 구간만 보존·수정한다. 연결 Projects nodes=[]/hasNextPage=false 확인. 로컬 수정 후 제한된 기능·화면검수 예정이며 실행완료 전, 스테이징·커밋 요청 없음.
 ## 종족 번영도 완료범위 동결 [tribe-prosperity-freeze-01a1bac5]
 
 - 기록·현재요약 관측 2026-11-08T20:08:31+09:00; 완료범위·배포제외 결정 사용자, 분리·검수·기록 Codex /root. 출처 codex://threads/01a1bac5-ae4b-7972-904e-e7d24eab3d09 최신교정과실제도구. H:/Spawner main 7021f85cb74c81d217d05137329cac6501f21f54, Windows host local. 원발언 정확시각·항목ID 불명. 서비스배포는최신교정으로범위에서제외한다.

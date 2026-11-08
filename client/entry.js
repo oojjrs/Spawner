@@ -76,8 +76,8 @@
     if (!seed.music) {
       seed.music = globalThis.SpawnerMusic.create();
       const settings = globalThis.SpawnerSoundSettings;
-      seed.muted = settings ? settings.read().effectiveVolume === 0 : false;
-      seed.music.setVolume?.(settings?.read().effectiveVolume ?? 1);
+      seed.muted = settings ? settings.read().effectiveMuted : false;
+      seed.music.setVolume?.(settings?.read().effectiveMusicVolume ?? 1);
       const sound = document.getElementById("sound-toggle");
       let settlePriority;
       seed.priority = new Promise(resolve => { settlePriority = resolve; });
@@ -95,10 +95,11 @@
         }).catch(() => settlePriority(false));
       }
       function applySettings() {
-        seed.muted = settings.read().effectiveVolume === 0;
-        seed.music.setVolume?.(settings.read().effectiveVolume);
+        const wasMuted = seed.muted, value = settings.read();
+        seed.muted = value.effectiveMuted;
+        seed.music.setVolume?.(value.effectiveMusicVolume);
         updateSound();
-        resumeMusic();
+        if (seed.muted || wasMuted) resumeMusic();
       }
       const unsubscribe = settings?.subscribe(applySettings);
       function toggleSound() {

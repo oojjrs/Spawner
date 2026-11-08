@@ -309,11 +309,15 @@
               <button class="sound-mute-toggle" id="sound-toggle" type="button" aria-label="소리 끄기" aria-pressed="true" title="배경음악·효과음 끄기">켜짐</button>
             </div>
             <div class="sound-setting-row">
-              <label for="sound-volume">음량</label>
-              <output id="sound-volume-value" for="sound-volume">100%</output>
+              <label for="sound-effects-volume">효과음</label>
+              <output id="sound-effects-volume-value" for="sound-effects-volume">100%</output>
             </div>
-            <input id="sound-volume" type="range" min="0" max="100" step="1" value="100" aria-describedby="sound-volume-hint">
-            <p id="sound-volume-hint">배경음악과 효과음에 함께 적용됩니다.</p>
+            <input class="sound-volume" id="sound-effects-volume" type="range" min="0" max="100" step="1" value="100">
+            <div class="sound-setting-row">
+              <label for="sound-music-volume">BGM</label>
+              <output id="sound-music-volume-value" for="sound-music-volume">100%</output>
+            </div>
+            <input class="sound-volume" id="sound-music-volume" type="range" min="0" max="100" step="1" value="100">
           </section>
         </div>
       </div>

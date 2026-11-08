@@ -45,8 +45,9 @@
     let worldVolume = 1, combatGeneration = 0;
     let loading = null;
     const settings = globalThis.SpawnerSoundSettings;
-    let volume = settings?.read().effectiveVolume ?? 1;
-    let muted = settings ? volume === 0 : entryAudio?.muted || false;
+    let volume = settings?.read().effectiveEffectsVolume ?? 1;
+    let musicVolume = settings?.read().effectiveMusicVolume ?? 1;
+    let muted = settings ? settings.read().effectiveMuted : entryAudio?.muted || false;
     let active = true;
     let failed = !entryAudio?.context && !globalThis.AudioContext;
     const harvests = new Map();
@@ -104,8 +105,10 @@
     function updateButton() {
       button.disabled = failed;
       button.textContent = failed ? "사용 불가" : muted ? "꺼짐" : "켜짐";
-      const slider = document.getElementById("sound-volume");
-      if (slider) slider.disabled = failed;
+      for (const id of ["sound-effects-volume", "sound-music-volume"]) {
+        const slider = document.getElementById(id);
+        if (slider) slider.disabled = failed;
+      }
       button.setAttribute("aria-label", failed ? "소리 사용 불가" : muted ? "소리 켜기" : "소리 끄기");
       button.setAttribute("aria-pressed", String(!muted && !failed));
       button.title = failed ? "소리 사용 불가" : muted ? "배경음악·효과음 켜기" : "배경음악·효과음 끄기";
@@ -236,7 +239,7 @@
     }
 
     function available() {
-      return active && !muted && !failed && !document.hidden && prepared && context?.state === "running";
+      return active && !muted && volume > 0 && !failed && !document.hidden && prepared && context?.state === "running";
     }
 
     function setActive(value) {
@@ -433,16 +436,19 @@
 
     function applySettings() {
       const wasMuted = muted;
-      volume = settings.read().effectiveVolume;
-      muted = volume === 0;
+      const value = settings.read();
+      volume = value.effectiveEffectsVolume;
+      musicVolume = value.effectiveMusicVolume;
+      muted = value.effectiveMuted;
       if (effectsGain) effectsGain.gain.value = volume;
-      music.setVolume?.(volume);
-      if (muted) { stop(); stopClick(); music.suspend(); }
+      music.setVolume?.(musicVolume);
+      if (volume === 0) { stop(); stopClick(); }
+      if (muted) music.suspend();
       else if (wasMuted) unlock(true);
       updateButton();
     }
     settings?.subscribe(applySettings);
-    music.setVolume?.(muted ? 0 : volume);
+    music.setVolume?.(muted ? 0 : musicVolume);
     button.addEventListener("click", () => {
       if (settings) settings.toggleMute();
       else {

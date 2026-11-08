@@ -8962,7 +8962,7 @@
 
     function setLobbyBusy(busy) {
       lobbyBusy = busy;
-      welcome.querySelectorAll("input:not(#sound-volume), button:not(#sound-toggle):not(#sound-settings-toggle), select, textarea").forEach(control => { control.disabled = busy; });
+      welcome.querySelectorAll("input:not(.sound-volume), button:not(#sound-toggle):not(#sound-settings-toggle), select, textarea").forEach(control => { control.disabled = busy; });
       roomsDeleteAll.disabled = busy || roomCount === 0;
       roomsDeleteAll.hidden = roomCount === 0;
       document.getElementById("rooms-refresh").hidden = roomCount === 0;
