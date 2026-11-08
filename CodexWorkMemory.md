@@ -1,3 +1,13 @@
+## 툴·전투 검사 완료 [vfx-preview-complete-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:30:47+09:00; 확인·기록 Codex /root, 현재채팅과도구근거.
+- 공식runtime-only생성후현재몸체정의로sourceForm/targetForm만맞췄다. 도구8ff7dc에서기존HEAD와모든시나리오이벤트·이름·시간·숫자·기타필드가동일함을직접비교했고runtime구문과두파일UTF8NoBom/CRLF검사통과. 생성물동기화외서버/애니메이션원본변경없음.
+
+## VFX 검토 툴 생성물 동기화 [vfx-preview-fix-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:29:34+09:00; 발견 /root/economy_tests_finish, 판단·기록 /root. 도구5f84ea에서현재검토툴생성스크립트와배포입력포함여부확인. client/vfx-event-preview.js의좌향mapper및data의bean/spore몸체정의가현행원본과어긋난다.
+- 공식 tools/build-vfx-event-preview.mjs --runtime-only로프레젠테이션을동기화하고data의sourceForm/targetForm만현재UNIT_RANGED_FORMS로정합화한다. 승인된서버이벤트fixture·시나리오이름·시간·수치·원화는유지한다. 이두생성물은게시입력에포함되므로완료커밋에서배포본을다시준비해야한다.
+
 ## 원화 검사 완료 [art-path-complete-01a1b8b3]
 
 - 기록 시각 2026-11-08T13:27:49+09:00; 구현·검수 /root/economy_tests_finish, 확인·기록 /root, 현재채팅근거.

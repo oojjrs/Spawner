@@ -174,14 +174,96 @@ globalThis.SpawnerVfxEventPreviewData = {
     }
   },
   "sourceForm": {
+    "idleAnimation": {
+      "image": "DesignAssets/Animations/BeanSecretionIdleV4/idle.webp",
+      "frameSize": 128,
+      "viewSize": 128,
+      "columns": 8,
+      "frameCount": 64,
+      "pivotX": 64,
+      "pivotY": 112,
+      "durationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMs": 3200,
+      "loop": true,
+      "rangedBody": true,
+      "secretionIdle": true,
+      "nativeSecretionIdle": true,
+      "sourceFacing": "left"
+    },
     "lifecycle": {
       "death": {
-        "image": "DesignAssets/Animations/UnitRangedV1/bean/death.png",
-        "frameSize": 316,
+        "sourceFacing": "left",
+        "image": "DesignAssets/Animations/SproutDeathV2/secretion/death.webp",
+        "frameSize": 83,
         "columns": 4,
         "frameCount": 16,
-        "pivotX": 158,
-        "pivotY": 276.5,
+        "pivotX": 41.5,
+        "pivotY": 72.625,
         "durationsMs": [
           160,
           80,
@@ -200,10 +282,14 @@ globalThis.SpawnerVfxEventPreviewData = {
           120,
           1000
         ],
-        "viewSize": 316,
+        "viewSize": 139.00053884913171,
         "registrationScale": 1.2307692307692308,
         "bodyReferenceImage": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
-        "secretionLifecycle": true
+        "secretionLifecycle": true,
+        "action": "death",
+        "durationMs": 2260,
+        "loop": false,
+        "nativeSecretionLifecycle": true
       }
     },
     "hurt": {
@@ -215,6 +301,7 @@ globalThis.SpawnerVfxEventPreviewData = {
       "pivotY": 448,
       "frameCount": 16,
       "durationMs": 760,
+      "sourceFacing": "left",
       "durationsMs": [
         20,
         30,
@@ -243,6 +330,7 @@ globalThis.SpawnerVfxEventPreviewData = {
       "pivotX": 256,
       "pivotY": 448,
       "columns": 4,
+      "sourceFacing": "left",
       "frameCount": 24,
       "durationsMs": [
         40,
@@ -277,6 +365,7 @@ globalThis.SpawnerVfxEventPreviewData = {
     },
     "idle": {
       "image": "DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png",
+      "sourceFacing": "left",
       "frameSize": 512,
       "viewSize": 512,
       "columns": 1,
@@ -292,6 +381,7 @@ globalThis.SpawnerVfxEventPreviewData = {
     },
     "animation": {
       "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+      "sourceFacing": "left",
       "frameSize": 512,
       "viewSize": 512,
       "columns": 6,
@@ -355,7 +445,8 @@ globalThis.SpawnerVfxEventPreviewData = {
         600
       ],
       "loop": true,
-      "rangedBody": true
+      "rangedBody": true,
+      "sourceFacing": "left"
     },
     "animation": {
       "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
@@ -400,7 +491,8 @@ globalThis.SpawnerVfxEventPreviewData = {
       "pivotY": 448,
       "viewSize": 512,
       "loop": false,
-      "rangedBody": true
+      "rangedBody": true,
+      "sourceFacing": "left"
     },
     "reference": {
       "width": 195,
@@ -422,6 +514,7 @@ globalThis.SpawnerVfxEventPreviewData = {
       "pivotY": 448,
       "frameCount": 16,
       "durationMs": 760,
+      "sourceFacing": "left",
       "durationsMs": [
         20,
         30,
@@ -450,6 +543,7 @@ globalThis.SpawnerVfxEventPreviewData = {
       "pivotX": 256,
       "pivotY": 448,
       "columns": 4,
+      "sourceFacing": "left",
       "frameCount": 16,
       "durationsMs": [
         70,
@@ -476,6 +570,7 @@ globalThis.SpawnerVfxEventPreviewData = {
     },
     "lifecycle": {
       "death": {
+        "sourceFacing": "left",
         "image": "DesignAssets/Animations/UnitRangedV1/spore/death.png",
         "frameSize": 553,
         "columns": 4,
@@ -747,14 +842,96 @@ globalThis.SpawnerVfxEventPreviewData = {
         }
       },
       "sourceForm": {
+        "idleAnimation": {
+          "image": "DesignAssets/Animations/BeanSecretionIdleV4/idle.webp",
+          "frameSize": 128,
+          "viewSize": 128,
+          "columns": 8,
+          "frameCount": 64,
+          "pivotX": 64,
+          "pivotY": 112,
+          "durationsMs": [
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50
+          ],
+          "durationMs": 3200,
+          "loop": true,
+          "rangedBody": true,
+          "secretionIdle": true,
+          "nativeSecretionIdle": true,
+          "sourceFacing": "left"
+        },
         "lifecycle": {
           "death": {
-            "image": "DesignAssets/Animations/UnitRangedV1/bean/death.png",
-            "frameSize": 316,
+            "sourceFacing": "left",
+            "image": "DesignAssets/Animations/SproutDeathV2/secretion/death.webp",
+            "frameSize": 83,
             "columns": 4,
             "frameCount": 16,
-            "pivotX": 158,
-            "pivotY": 276.5,
+            "pivotX": 41.5,
+            "pivotY": 72.625,
             "durationsMs": [
               160,
               80,
@@ -773,10 +950,14 @@ globalThis.SpawnerVfxEventPreviewData = {
               120,
               1000
             ],
-            "viewSize": 316,
+            "viewSize": 139.00053884913171,
             "registrationScale": 1.2307692307692308,
             "bodyReferenceImage": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
-            "secretionLifecycle": true
+            "secretionLifecycle": true,
+            "action": "death",
+            "durationMs": 2260,
+            "loop": false,
+            "nativeSecretionLifecycle": true
           }
         },
         "hurt": {
@@ -788,6 +969,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "frameCount": 16,
           "durationMs": 760,
+          "sourceFacing": "left",
           "durationsMs": [
             20,
             30,
@@ -816,6 +998,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotX": 256,
           "pivotY": 448,
           "columns": 4,
+          "sourceFacing": "left",
           "frameCount": 24,
           "durationsMs": [
             40,
@@ -850,6 +1033,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "idle": {
           "image": "DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png",
+          "sourceFacing": "left",
           "frameSize": 512,
           "viewSize": 512,
           "columns": 1,
@@ -865,6 +1049,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "animation": {
           "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+          "sourceFacing": "left",
           "frameSize": 512,
           "viewSize": 512,
           "columns": 6,
@@ -928,7 +1113,8 @@ globalThis.SpawnerVfxEventPreviewData = {
             600
           ],
           "loop": true,
-          "rangedBody": true
+          "rangedBody": true,
+          "sourceFacing": "left"
         },
         "animation": {
           "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
@@ -973,7 +1159,8 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "viewSize": 512,
           "loop": false,
-          "rangedBody": true
+          "rangedBody": true,
+          "sourceFacing": "left"
         },
         "reference": {
           "width": 195,
@@ -995,6 +1182,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "frameCount": 16,
           "durationMs": 760,
+          "sourceFacing": "left",
           "durationsMs": [
             20,
             30,
@@ -1023,6 +1211,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotX": 256,
           "pivotY": 448,
           "columns": 4,
+          "sourceFacing": "left",
           "frameCount": 16,
           "durationsMs": [
             70,
@@ -1049,6 +1238,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "lifecycle": {
           "death": {
+            "sourceFacing": "left",
             "image": "DesignAssets/Animations/UnitRangedV1/spore/death.png",
             "frameSize": 553,
             "columns": 4,
@@ -1320,14 +1510,96 @@ globalThis.SpawnerVfxEventPreviewData = {
         }
       },
       "sourceForm": {
+        "idleAnimation": {
+          "image": "DesignAssets/Animations/BeanSecretionIdleV4/idle.webp",
+          "frameSize": 128,
+          "viewSize": 128,
+          "columns": 8,
+          "frameCount": 64,
+          "pivotX": 64,
+          "pivotY": 112,
+          "durationsMs": [
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50
+          ],
+          "durationMs": 3200,
+          "loop": true,
+          "rangedBody": true,
+          "secretionIdle": true,
+          "nativeSecretionIdle": true,
+          "sourceFacing": "left"
+        },
         "lifecycle": {
           "death": {
-            "image": "DesignAssets/Animations/UnitRangedV1/bean/death.png",
-            "frameSize": 316,
+            "sourceFacing": "left",
+            "image": "DesignAssets/Animations/SproutDeathV2/secretion/death.webp",
+            "frameSize": 83,
             "columns": 4,
             "frameCount": 16,
-            "pivotX": 158,
-            "pivotY": 276.5,
+            "pivotX": 41.5,
+            "pivotY": 72.625,
             "durationsMs": [
               160,
               80,
@@ -1346,10 +1618,14 @@ globalThis.SpawnerVfxEventPreviewData = {
               120,
               1000
             ],
-            "viewSize": 316,
+            "viewSize": 139.00053884913171,
             "registrationScale": 1.2307692307692308,
             "bodyReferenceImage": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
-            "secretionLifecycle": true
+            "secretionLifecycle": true,
+            "action": "death",
+            "durationMs": 2260,
+            "loop": false,
+            "nativeSecretionLifecycle": true
           }
         },
         "hurt": {
@@ -1361,6 +1637,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "frameCount": 16,
           "durationMs": 760,
+          "sourceFacing": "left",
           "durationsMs": [
             20,
             30,
@@ -1389,6 +1666,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotX": 256,
           "pivotY": 448,
           "columns": 4,
+          "sourceFacing": "left",
           "frameCount": 24,
           "durationsMs": [
             40,
@@ -1423,6 +1701,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "idle": {
           "image": "DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png",
+          "sourceFacing": "left",
           "frameSize": 512,
           "viewSize": 512,
           "columns": 1,
@@ -1438,6 +1717,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "animation": {
           "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+          "sourceFacing": "left",
           "frameSize": 512,
           "viewSize": 512,
           "columns": 6,
@@ -1501,7 +1781,8 @@ globalThis.SpawnerVfxEventPreviewData = {
             600
           ],
           "loop": true,
-          "rangedBody": true
+          "rangedBody": true,
+          "sourceFacing": "left"
         },
         "animation": {
           "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
@@ -1546,7 +1827,8 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "viewSize": 512,
           "loop": false,
-          "rangedBody": true
+          "rangedBody": true,
+          "sourceFacing": "left"
         },
         "reference": {
           "width": 195,
@@ -1568,6 +1850,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "frameCount": 16,
           "durationMs": 760,
+          "sourceFacing": "left",
           "durationsMs": [
             20,
             30,
@@ -1596,6 +1879,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotX": 256,
           "pivotY": 448,
           "columns": 4,
+          "sourceFacing": "left",
           "frameCount": 16,
           "durationsMs": [
             70,
@@ -1622,6 +1906,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "lifecycle": {
           "death": {
+            "sourceFacing": "left",
             "image": "DesignAssets/Animations/UnitRangedV1/spore/death.png",
             "frameSize": 553,
             "columns": 4,
@@ -1893,14 +2178,96 @@ globalThis.SpawnerVfxEventPreviewData = {
         }
       },
       "sourceForm": {
+        "idleAnimation": {
+          "image": "DesignAssets/Animations/BeanSecretionIdleV4/idle.webp",
+          "frameSize": 128,
+          "viewSize": 128,
+          "columns": 8,
+          "frameCount": 64,
+          "pivotX": 64,
+          "pivotY": 112,
+          "durationsMs": [
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50
+          ],
+          "durationMs": 3200,
+          "loop": true,
+          "rangedBody": true,
+          "secretionIdle": true,
+          "nativeSecretionIdle": true,
+          "sourceFacing": "left"
+        },
         "lifecycle": {
           "death": {
-            "image": "DesignAssets/Animations/UnitRangedV1/bean/death.png",
-            "frameSize": 316,
+            "sourceFacing": "left",
+            "image": "DesignAssets/Animations/SproutDeathV2/secretion/death.webp",
+            "frameSize": 83,
             "columns": 4,
             "frameCount": 16,
-            "pivotX": 158,
-            "pivotY": 276.5,
+            "pivotX": 41.5,
+            "pivotY": 72.625,
             "durationsMs": [
               160,
               80,
@@ -1919,10 +2286,14 @@ globalThis.SpawnerVfxEventPreviewData = {
               120,
               1000
             ],
-            "viewSize": 316,
+            "viewSize": 139.00053884913171,
             "registrationScale": 1.2307692307692308,
             "bodyReferenceImage": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
-            "secretionLifecycle": true
+            "secretionLifecycle": true,
+            "action": "death",
+            "durationMs": 2260,
+            "loop": false,
+            "nativeSecretionLifecycle": true
           }
         },
         "hurt": {
@@ -1934,6 +2305,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "frameCount": 16,
           "durationMs": 760,
+          "sourceFacing": "left",
           "durationsMs": [
             20,
             30,
@@ -1962,6 +2334,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotX": 256,
           "pivotY": 448,
           "columns": 4,
+          "sourceFacing": "left",
           "frameCount": 24,
           "durationsMs": [
             40,
@@ -1996,6 +2369,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "idle": {
           "image": "DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png",
+          "sourceFacing": "left",
           "frameSize": 512,
           "viewSize": 512,
           "columns": 1,
@@ -2011,6 +2385,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "animation": {
           "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+          "sourceFacing": "left",
           "frameSize": 512,
           "viewSize": 512,
           "columns": 6,
@@ -2074,7 +2449,8 @@ globalThis.SpawnerVfxEventPreviewData = {
             600
           ],
           "loop": true,
-          "rangedBody": true
+          "rangedBody": true,
+          "sourceFacing": "left"
         },
         "animation": {
           "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
@@ -2119,7 +2495,8 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "viewSize": 512,
           "loop": false,
-          "rangedBody": true
+          "rangedBody": true,
+          "sourceFacing": "left"
         },
         "reference": {
           "width": 195,
@@ -2141,6 +2518,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "frameCount": 16,
           "durationMs": 760,
+          "sourceFacing": "left",
           "durationsMs": [
             20,
             30,
@@ -2169,6 +2547,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotX": 256,
           "pivotY": 448,
           "columns": 4,
+          "sourceFacing": "left",
           "frameCount": 16,
           "durationsMs": [
             70,
@@ -2195,6 +2574,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "lifecycle": {
           "death": {
+            "sourceFacing": "left",
             "image": "DesignAssets/Animations/UnitRangedV1/spore/death.png",
             "frameSize": 553,
             "columns": 4,
@@ -2466,14 +2846,96 @@ globalThis.SpawnerVfxEventPreviewData = {
         }
       },
       "sourceForm": {
+        "idleAnimation": {
+          "image": "DesignAssets/Animations/BeanSecretionIdleV4/idle.webp",
+          "frameSize": 128,
+          "viewSize": 128,
+          "columns": 8,
+          "frameCount": 64,
+          "pivotX": 64,
+          "pivotY": 112,
+          "durationsMs": [
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50
+          ],
+          "durationMs": 3200,
+          "loop": true,
+          "rangedBody": true,
+          "secretionIdle": true,
+          "nativeSecretionIdle": true,
+          "sourceFacing": "left"
+        },
         "lifecycle": {
           "death": {
-            "image": "DesignAssets/Animations/UnitRangedV1/bean/death.png",
-            "frameSize": 316,
+            "sourceFacing": "left",
+            "image": "DesignAssets/Animations/SproutDeathV2/secretion/death.webp",
+            "frameSize": 83,
             "columns": 4,
             "frameCount": 16,
-            "pivotX": 158,
-            "pivotY": 276.5,
+            "pivotX": 41.5,
+            "pivotY": 72.625,
             "durationsMs": [
               160,
               80,
@@ -2492,10 +2954,14 @@ globalThis.SpawnerVfxEventPreviewData = {
               120,
               1000
             ],
-            "viewSize": 316,
+            "viewSize": 139.00053884913171,
             "registrationScale": 1.2307692307692308,
             "bodyReferenceImage": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
-            "secretionLifecycle": true
+            "secretionLifecycle": true,
+            "action": "death",
+            "durationMs": 2260,
+            "loop": false,
+            "nativeSecretionLifecycle": true
           }
         },
         "hurt": {
@@ -2507,6 +2973,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "frameCount": 16,
           "durationMs": 760,
+          "sourceFacing": "left",
           "durationsMs": [
             20,
             30,
@@ -2535,6 +3002,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotX": 256,
           "pivotY": 448,
           "columns": 4,
+          "sourceFacing": "left",
           "frameCount": 24,
           "durationsMs": [
             40,
@@ -2569,6 +3037,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "idle": {
           "image": "DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png",
+          "sourceFacing": "left",
           "frameSize": 512,
           "viewSize": 512,
           "columns": 1,
@@ -2584,6 +3053,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "animation": {
           "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+          "sourceFacing": "left",
           "frameSize": 512,
           "viewSize": 512,
           "columns": 6,
@@ -2647,7 +3117,8 @@ globalThis.SpawnerVfxEventPreviewData = {
             600
           ],
           "loop": true,
-          "rangedBody": true
+          "rangedBody": true,
+          "sourceFacing": "left"
         },
         "animation": {
           "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
@@ -2692,7 +3163,8 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "viewSize": 512,
           "loop": false,
-          "rangedBody": true
+          "rangedBody": true,
+          "sourceFacing": "left"
         },
         "reference": {
           "width": 195,
@@ -2714,6 +3186,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "frameCount": 16,
           "durationMs": 760,
+          "sourceFacing": "left",
           "durationsMs": [
             20,
             30,
@@ -2742,6 +3215,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotX": 256,
           "pivotY": 448,
           "columns": 4,
+          "sourceFacing": "left",
           "frameCount": 16,
           "durationsMs": [
             70,
@@ -2768,6 +3242,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "lifecycle": {
           "death": {
+            "sourceFacing": "left",
             "image": "DesignAssets/Animations/UnitRangedV1/spore/death.png",
             "frameSize": 553,
             "columns": 4,
@@ -3039,14 +3514,96 @@ globalThis.SpawnerVfxEventPreviewData = {
         }
       },
       "sourceForm": {
+        "idleAnimation": {
+          "image": "DesignAssets/Animations/BeanSecretionIdleV4/idle.webp",
+          "frameSize": 128,
+          "viewSize": 128,
+          "columns": 8,
+          "frameCount": 64,
+          "pivotX": 64,
+          "pivotY": 112,
+          "durationsMs": [
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50
+          ],
+          "durationMs": 3200,
+          "loop": true,
+          "rangedBody": true,
+          "secretionIdle": true,
+          "nativeSecretionIdle": true,
+          "sourceFacing": "left"
+        },
         "lifecycle": {
           "death": {
-            "image": "DesignAssets/Animations/UnitRangedV1/bean/death.png",
-            "frameSize": 316,
+            "sourceFacing": "left",
+            "image": "DesignAssets/Animations/SproutDeathV2/secretion/death.webp",
+            "frameSize": 83,
             "columns": 4,
             "frameCount": 16,
-            "pivotX": 158,
-            "pivotY": 276.5,
+            "pivotX": 41.5,
+            "pivotY": 72.625,
             "durationsMs": [
               160,
               80,
@@ -3065,10 +3622,14 @@ globalThis.SpawnerVfxEventPreviewData = {
               120,
               1000
             ],
-            "viewSize": 316,
+            "viewSize": 139.00053884913171,
             "registrationScale": 1.2307692307692308,
             "bodyReferenceImage": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
-            "secretionLifecycle": true
+            "secretionLifecycle": true,
+            "action": "death",
+            "durationMs": 2260,
+            "loop": false,
+            "nativeSecretionLifecycle": true
           }
         },
         "hurt": {
@@ -3080,6 +3641,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "frameCount": 16,
           "durationMs": 760,
+          "sourceFacing": "left",
           "durationsMs": [
             20,
             30,
@@ -3108,6 +3670,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotX": 256,
           "pivotY": 448,
           "columns": 4,
+          "sourceFacing": "left",
           "frameCount": 24,
           "durationsMs": [
             40,
@@ -3142,6 +3705,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "idle": {
           "image": "DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png",
+          "sourceFacing": "left",
           "frameSize": 512,
           "viewSize": 512,
           "columns": 1,
@@ -3157,6 +3721,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "animation": {
           "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+          "sourceFacing": "left",
           "frameSize": 512,
           "viewSize": 512,
           "columns": 6,
@@ -3220,7 +3785,8 @@ globalThis.SpawnerVfxEventPreviewData = {
             600
           ],
           "loop": true,
-          "rangedBody": true
+          "rangedBody": true,
+          "sourceFacing": "left"
         },
         "animation": {
           "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
@@ -3265,7 +3831,8 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "viewSize": 512,
           "loop": false,
-          "rangedBody": true
+          "rangedBody": true,
+          "sourceFacing": "left"
         },
         "reference": {
           "width": 195,
@@ -3287,6 +3854,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "frameCount": 16,
           "durationMs": 760,
+          "sourceFacing": "left",
           "durationsMs": [
             20,
             30,
@@ -3315,6 +3883,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotX": 256,
           "pivotY": 448,
           "columns": 4,
+          "sourceFacing": "left",
           "frameCount": 16,
           "durationsMs": [
             70,
@@ -3341,6 +3910,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "lifecycle": {
           "death": {
+            "sourceFacing": "left",
             "image": "DesignAssets/Animations/UnitRangedV1/spore/death.png",
             "frameSize": 553,
             "columns": 4,
@@ -3612,14 +4182,96 @@ globalThis.SpawnerVfxEventPreviewData = {
         }
       },
       "sourceForm": {
+        "idleAnimation": {
+          "image": "DesignAssets/Animations/BeanSecretionIdleV4/idle.webp",
+          "frameSize": 128,
+          "viewSize": 128,
+          "columns": 8,
+          "frameCount": 64,
+          "pivotX": 64,
+          "pivotY": 112,
+          "durationsMs": [
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50,
+            50
+          ],
+          "durationMs": 3200,
+          "loop": true,
+          "rangedBody": true,
+          "secretionIdle": true,
+          "nativeSecretionIdle": true,
+          "sourceFacing": "left"
+        },
         "lifecycle": {
           "death": {
-            "image": "DesignAssets/Animations/UnitRangedV1/bean/death.png",
-            "frameSize": 316,
+            "sourceFacing": "left",
+            "image": "DesignAssets/Animations/SproutDeathV2/secretion/death.webp",
+            "frameSize": 83,
             "columns": 4,
             "frameCount": 16,
-            "pivotX": 158,
-            "pivotY": 276.5,
+            "pivotX": 41.5,
+            "pivotY": 72.625,
             "durationsMs": [
               160,
               80,
@@ -3638,10 +4290,14 @@ globalThis.SpawnerVfxEventPreviewData = {
               120,
               1000
             ],
-            "viewSize": 316,
+            "viewSize": 139.00053884913171,
             "registrationScale": 1.2307692307692308,
             "bodyReferenceImage": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
-            "secretionLifecycle": true
+            "secretionLifecycle": true,
+            "action": "death",
+            "durationMs": 2260,
+            "loop": false,
+            "nativeSecretionLifecycle": true
           }
         },
         "hurt": {
@@ -3653,6 +4309,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "frameCount": 16,
           "durationMs": 760,
+          "sourceFacing": "left",
           "durationsMs": [
             20,
             30,
@@ -3681,6 +4338,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotX": 256,
           "pivotY": 448,
           "columns": 4,
+          "sourceFacing": "left",
           "frameCount": 24,
           "durationsMs": [
             40,
@@ -3715,6 +4373,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "idle": {
           "image": "DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png",
+          "sourceFacing": "left",
           "frameSize": 512,
           "viewSize": 512,
           "columns": 1,
@@ -3730,6 +4389,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "animation": {
           "image": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+          "sourceFacing": "left",
           "frameSize": 512,
           "viewSize": 512,
           "columns": 6,
@@ -3793,7 +4453,8 @@ globalThis.SpawnerVfxEventPreviewData = {
             600
           ],
           "loop": true,
-          "rangedBody": true
+          "rangedBody": true,
+          "sourceFacing": "left"
         },
         "animation": {
           "image": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
@@ -3838,7 +4499,8 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "viewSize": 512,
           "loop": false,
-          "rangedBody": true
+          "rangedBody": true,
+          "sourceFacing": "left"
         },
         "reference": {
           "width": 195,
@@ -3860,6 +4522,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotY": 448,
           "frameCount": 16,
           "durationMs": 760,
+          "sourceFacing": "left",
           "durationsMs": [
             20,
             30,
@@ -3888,6 +4551,7 @@ globalThis.SpawnerVfxEventPreviewData = {
           "pivotX": 256,
           "pivotY": 448,
           "columns": 4,
+          "sourceFacing": "left",
           "frameCount": 16,
           "durationsMs": [
             70,
@@ -3914,6 +4578,7 @@ globalThis.SpawnerVfxEventPreviewData = {
         },
         "lifecycle": {
           "death": {
+            "sourceFacing": "left",
             "image": "DesignAssets/Animations/UnitRangedV1/spore/death.png",
             "frameSize": 553,
             "columns": 4,
