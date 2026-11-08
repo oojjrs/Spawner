@@ -73,7 +73,7 @@ test("historical paid cost and DNA survive restore while new births require the 
 test("운반은 한도만 늘리고 채집 속도는 1개를 캐는 시간을 줄인다",()=>{
   for(const [capacity,speed] of [[1,0],[4,0],[4,2]]){
     const genes=['gather',...Array(capacity-1).fill('capacity'),...Array(speed).fill('harvestSpeed')],dna={version:6,pieces:M.pack(genes.map(piece),1),level:1,budget:500};assert.ok(validateDna(dna,1,500));
-    const stats=M.stats(dna.pieces),f=gameFixture(capacity,dna),interval=3/(1+.1*speed);assert.equal(stats.harvest,1);assert.equal(stats.capacity,capacity);assert.equal(stats.harvestTime,interval);f.tick(1);
+    const stats=M.stats(dna.pieces),f=gameFixture(capacity,dna),interval=3/(1+.5*speed);assert.equal(stats.harvest,1);assert.equal(stats.capacity,capacity);assert.equal(stats.harvestTime,interval);f.tick(1);
     for(let count=1;count<=capacity;count++){f.tick(1+interval*count-.001);assert.equal(f.agent.carrying,count-1);f.tick(1+interval*count+.001);assert.equal(f.agent.carrying,count);assert.equal(f.food.amount,20-count);assert.equal(f.agent.harvestResult.amount,1);if(count<capacity)assert.equal(f.agent.mode,'harvest');}
   }
   assert.equal(M.stats([piece('capacity')]).harvest,0);assert.equal(M.stats([piece('gather'),piece('harvest'),piece('capacity')]).harvest,1);assert.equal(M.catalog.some(g=>g.id==='harvest'),false);

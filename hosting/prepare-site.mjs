@@ -5,14 +5,16 @@ import { dirname, resolve, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { productionRuntime } from "../client/production.mjs";
 import { auditImages } from "../client/image-audit.mjs";
+import { createRelease, releasePage } from "./release.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const assetBase = "https://oojjrs.github.io/spawner-assets/";
 
-export function prepareSite(destination, readSource, revision, assetDirectory) {
+export function prepareSite(destination, readSource, revision, assetDirectory, releaseInput) {
   const manifest = JSON.parse(readFileSync(join(destination, ".openai/hosting.json"), "utf8"));
   const sourceManifest = JSON.parse(readFileSync(join(root, ".openai/hosting.json"), "utf8"));
   if (manifest.project_id !== sourceManifest.project_id || manifest.static?.directory !== "dist") throw new Error("Spawner Site를 확인해 주세요.");
+  const release = createRelease(releaseInput, manifest.project_id, revision, new Date());
   const html = readSource("Spawner.html").toString("utf8")
     .replace(/^  <script src="\.\/client\/local-assets\.js"><\/script>\r?\n/m, "");
   const pages = new Map([["Spawner.html", html]]);
@@ -108,8 +110,10 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
       unlinkSync(target);
     }
   }
-  write("index.html", html);
-  for (const [name, page] of pages) write(name, page);
+  const releasedHtml = releasePage(html, release);
+  write("index.html", releasedHtml);
+  write("release.json", JSON.stringify(release, null, 2) + "\r\n");
+  for (const [name, page] of pages) write(name, name === "Spawner.html" ? releasedHtml : page);
   function documentSource(source) {
     for (const [assetName, assetPath] of assetPaths) if (!documentOriginalAssets.has(assetName)) source = source.replaceAll(assetName, assetPath);
     return source;
@@ -139,15 +143,17 @@ export function prepareSite(destination, readSource, revision, assetDirectory) {
     }
     rmdirSync(previousAssets);
   }
-  return { project_id: manifest.project_id, source_revision: revision, asset_base: assetBase, html_bytes: Buffer.byteLength(html), assets: assets.size,
+  return { project_id: manifest.project_id, source_revision: revision, version_number: release.version_number, release_label: release.label,
+    asset_base: assetBase, html_bytes: Buffer.byteLength(releasedHtml), assets: assets.size,
     asset_bytes: [...assets.values()].reduce((sum, length) => sum + length, 0), largest_asset_bytes: Math.max(...assets.values()) };
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const destination = process.argv[2] ? resolve(process.argv[2]) : null;
   const assetDirectory = process.argv[3] ? resolve(process.argv[3]) : null;
-  if (!destination || !assetDirectory || process.argv.length !== 4) throw new Error("Sites 체크아웃과 공개 자산 폴더의 절대 경로가 필요합니다.");
+  const releaseInput = process.argv[4] ? JSON.parse(readFileSync(resolve(process.argv[4]), "utf8")) : null;
+  if (!destination || !assetDirectory || !releaseInput || process.argv.length !== 5) throw new Error("Sites 체크아웃, 공개 자산 폴더, 최신 Sites 정보와 승인된 notes를 담은 JSON 경로가 필요합니다.");
   const revision = execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).trim();
   function tracked(name) { return execFileSync("git", ["show", revision + ":" + name], { cwd: root, maxBuffer: 128 * 1024 * 1024 }); }
-  console.log("ENV> SITE PREPARED : " + JSON.stringify(prepareSite(destination, tracked, revision, assetDirectory)));
+  console.log("ENV> SITE PREPARED : " + JSON.stringify(prepareSite(destination, tracked, revision, assetDirectory, releaseInput)));
 }

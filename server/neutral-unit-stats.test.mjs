@@ -1,20 +1,38 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { NEUTRAL_UNIT_STATS } from "./neutral-unit-stats.mjs";
+import { NEUTRAL_UNIT_STATS, NEUTRAL_UNIT_TIERS, NEUTRAL_STAT_FIELDS, neutralTierStat } from "./neutral-unit-stats.mjs";
 import { unitCombatStats, combatProfile, migrateCombatStats, combatAbilityStats } from "./combat-stats.mjs";
 import { CREATURE_MOVEMENT } from "./creature-movement.mjs";
 import { deriveSimulationStats } from "../client/combat-simulation.mjs";
 import { creatureAttackRole } from "./creature-attack-role.mjs";
 
+import { NEUTRAL_STAT_LIMITS } from "./neutral-stat-limits.mjs";
+import { CODEX_NEUTRAL_DESIGNS } from "../client/codex-neutral-data.mjs";
+
 const design = readFileSync(new URL("../DesignAssets/codex-unit-tiers.html", import.meta.url), "utf8");
 const fields = JSON.parse(design.match(/const fields = (\[[^\r\n]+\]);/)[1]).slice(3);
-const rows = JSON.parse(design.match(/const projectedStats = new Map\((\[[^\r\n]+\])\);/)[1]);
 
-test("기획서의 중립 19종 전체 수치는 공용 원본과 일치한다", () => {
-  assert.equal(rows.length, 19);
-  assert.equal(fields.length, 33);
-  for (const [key, values] of rows) assert.deepEqual(NEUTRAL_UNIT_STATS[key], Object.fromEntries(fields.map((field, index) => [field, values[index]])), key);
+test("기획서의 19종 33개 스탯 티어가 공용 능력치 배정에 보존된다", () => {
+  const extra = JSON.parse(design.match(/const extraTiers = (\[[\s\S]+?\n  \]);/)[1]);
+  assert.equal(CODEX_NEUTRAL_DESIGNS.length, 19);
+  assert.deepEqual(NEUTRAL_STAT_FIELDS, fields);
+  for (const [index, unit] of CODEX_NEUTRAL_DESIGNS.entries()) {
+    const expected = [...unit.tiers.slice(1), ...extra[index]];
+    assert.equal(NEUTRAL_UNIT_TIERS[unit.key].tier, unit.tiers[0]);
+    for (const [i, field] of fields.entries()) assert.equal(NEUTRAL_UNIT_TIERS[unit.key][field], expected[i], unit.key + ":" + field);
+  }
+});
+
+test("모든 중립 스탯은 네 종족 기본값과 합법 DNA 최대 배치 사이에 있다", () => {
+  for (const field of fields) {
+    const limits = NEUTRAL_STAT_LIMITS[field], low = Math.min(limits.min, limits.max), high = Math.max(limits.min, limits.max);
+    for (const [species, stats] of Object.entries(NEUTRAL_UNIT_STATS))
+      assert.ok(stats[field] >= low && stats[field] <= high, species + ":" + field);
+    const values = Array.from({ length:19 }, (_, index) => neutralTierStat(field, index + 1));
+    const direction = limits.max < limits.min ? -1 : 1;
+    for (let i = 1; i < values.length; i++) assert.ok(direction * (values[i] - values[i - 1]) > 0, field + ":" + (i + 1));
+  }
 });
 
 test("중립 생성 프로필과 실험실은 같은 체력·공격·방어·공속·이동·시야를 사용한다", () => {
@@ -40,12 +58,12 @@ test("중립 특수 능력은 DNA 정체성을 부여하지 않고 같은 전투
     assert.equal(abilities.hits, 1 + expected.combo);
     assert.equal(abilities.melee, role.melee);
     assert.equal(abilities.ranged, role.ranged);
-    for (const field of fields) assert.equal(abilities[field], field === "blockPower" ? 50 : expected[field], key + ":" + field);
+    for (const field of fields) assert.equal(abilities[field], expected[field], key + ":" + field);
     const profile = combatProfile(agent);
     assert.equal(profile.attackInterval, 1 / expected.speed);
     assert.equal(profile.criticalChance, expected.critical / 100);
     assert.equal(profile.criticalMultiplier, expected.criticalPower / 100);
-    assert.equal(profile.blockReduction, .5);
+    assert.equal(profile.blockReduction, expected.blockPower / 100);
   }
 });
 
@@ -74,13 +92,9 @@ test("중립 기본 수치는 원래 기획의 6가지 스탯 순위를 뒤집�
   }
 });
 
-test("중립 연타는 최대 2타이고 빠른 연타도 타격 간격을 확보한다", () => {
-  for (const [key, stats] of Object.entries(NEUTRAL_UNIT_STATS)) {
-    assert.ok(stats.combo >= 0 && stats.combo <= 1, key);
-    if (stats.combo > 0) assert.ok(stats.comboSpeed >= .28, key);
+test("연타속도와 집중은 기획 티어가 높을수록 타격·준비 시간이 짧다", () => {
+  for (const field of ["comboSpeed", "focus"]) {
+    const ordered = Object.keys(NEUTRAL_UNIT_STATS).sort((a, b) => NEUTRAL_UNIT_TIERS[a][field] - NEUTRAL_UNIT_TIERS[b][field]);
+    for (let i = 1; i < ordered.length; i++) assert.ok(NEUTRAL_UNIT_STATS[ordered[i]][field] < NEUTRAL_UNIT_STATS[ordered[i - 1]][field], field + ":" + ordered[i]);
   }
-  assert.equal(NEUTRAL_UNIT_STATS["shadow-weasel"].combo, 1);
-  assert.equal(NEUTRAL_UNIT_STATS["white-paw"].combo, 1);
-  for (const key of ["cotton-sheep", "bundle-snail", "vine-turtle", "old-garden-snail", "walking-forest"])
-    assert.equal(NEUTRAL_UNIT_STATS[key].combo, 0, key);
 });

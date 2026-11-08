@@ -151,13 +151,13 @@ export function createBeetleRaids(environment, state, actions, restoring) {
       const cells = path(agent, boundary(colony), false);
       if (!cells) continue;
       agent.raid = { colonyId:colony.id, phase:"outbound", departedAt:now };
-      prepareRaidCreature(agent, now);
+      const stage = prepareRaidCreature(agent, now);
       agent.attackTargetId = null; agent.attackHit = true;
       if (now >= agent.moveStartedAt + agent.moveDuration) actions.idle(agent, 0);
       routes.set(agent.id, { phase:"outbound", path:cells, cursor:1, retryAt:now });
       record.raidSequence++;
       record.nextRaidAt = Math.max(now + cadence.interval,
-        agent.raidCombatScale.stage < 2 ? RAID_CREATURE_STAGES[agent.raidCombatScale.stage + 1].at : 0);
+        stage < 2 ? RAID_CREATURE_STAGES[stage + 1].at : 0);
       cooldown.nextRaidAt = record.nextRaidAt;
     }
     for (const id of routes.keys()) if (!state.agents.some(agent => agent.id === id && agent.health > 0 && agent.raid)) routes.delete(id);

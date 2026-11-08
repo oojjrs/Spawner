@@ -13,11 +13,12 @@ function strength(value) {
   return { stats: { combatStrength: value } };
 }
 
-test("방어숙련은 조각당 5%p를 더하고 DNA 블록 감경에만 최대90%까지 적용한다", () => {
+test("방어숙련은 조각당 5%p를 더하고 중립도 종별 블록 감경을 사용한다", () => {
   for (const species of Object.keys(UNIT_COMBAT_STATS)) {
-    assert.equal(unitCombatStats(species).blockReduction, .5);
+    const expected=unitCombatStats(species).combat?.blockPower/100||.5;
+    assert.equal(unitCombatStats(species).blockReduction, expected);
     for (const blockReduction of [0, .4, .65, .9, 1])
-      assert.equal(combatProfile({ species, stats: { blockReduction } }).blockReduction, .5);
+      assert.equal(combatProfile({ species, stats: { blockReduction } }).blockReduction, expected);
   }
   for (const [count, expected] of [[0, 50], [1, 55], [2, 60], [8, 90], [20, 90]]) {
     const stats = dnaCombatStats({ blockPower: count }, { blockPower: count * 4 });
@@ -29,8 +30,20 @@ test("방어숙련은 조각당 5%p를 더하고 DNA 블록 감경에만 최대9
   const agent = { species: "vine-turtle", health: 37, attackReady: 9,
     stats: { health: 100, combatStrength: 28, block: .28, blockReduction: .65 } };
   migrateCombatStats(agent);
-  assert.equal(agent.stats.blockReduction, .5);
+  assert.equal(agent.stats.blockReduction, unitCombatStats(agent.species).combat.blockPower/100);
   assert.deepEqual([agent.health, agent.attackReady, agent.stats.block], [unitCombatStats(agent.species).health * .37, 9, unitCombatStats(agent.species).block]);
+});
+
+test("중립 전투 프로필은 중복 필드 대신 같은 종 능력치의 공격·방어·블록 값을 사용한다", () => {
+  const base=unitCombatStats("spiny-back-beetle");
+  const combat={...base.combat,meleePower:17,rangedPower:13,meleeSpeed:1.7,rangedSpeed:1.3,armor:72,evasion:21,parry:32,block:43,blockPower:85};
+  const agent={species:"spiny-back-beetle",stats:{...base,combat,attackPower:1,attackSpeed:.1,defense:0,evasion:0,parry:0,block:0,blockReduction:.5}};
+  for(const mode of ["melee","ranged"]) {
+    agent.attack={attackMode:mode};
+    const profile=combatProfile(agent);
+    assert.equal(profile.attackPower,mode==="melee"?17:13);assert.equal(profile.attackSpeed,mode==="melee"?1.7:1.3);
+    assert.equal(profile.defense,72);assert.equal(profile.evasion,.21);assert.equal(profile.parry,.32);assert.equal(profile.block,.43);assert.equal(profile.blockReduction,.85);
+  }
 });
 
 test("근접 폭딜·원거리 다수 제어·갑각 방어 투자는 서로 다른 강점을 만든다", () => {

@@ -1,0 +1,5110 @@
+{
+  "version": 1,
+  "radius": 6,
+  "cells": 127,
+  "sources": {
+    "server/dna.mjs": "3af8fe5cc5932f7d357c148ca627eab95205d2f41a356f294dc0bd709ae39603",
+    "server/dna-board.mjs": "e8ca2af66e138e639f0f70323a250fca2a8740ca3a493d6fb940adee1bd0806e",
+    "server/dna-combat-stats.mjs": "0c57d7c213cd307624bae9702ef9819acccc8ca7d69a3697f798257c197612d9",
+    "server/tribe-dna-stats.mjs": "4441b2eca3d282d031bb3e8c026e17773140f433248388504ad80e2f19ea139e",
+    "server/dna-unit.mjs": "461a737b520791c5b93e4347cc6ad2240a54e1eaf66b5f3b8e6f816806020dc7"
+  },
+  "limits": {
+    "health": {
+      "min": 9,
+      "max": 732,
+      "upper": 732,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 10,
+          "max": 610,
+          "upper": 610,
+          "exact": true,
+          "witness": "health"
+        },
+        "pebble": {
+          "min": 12,
+          "max": 732,
+          "upper": 732,
+          "exact": true,
+          "witness": "health"
+        },
+        "spore": {
+          "min": 9,
+          "max": 519,
+          "upper": 519,
+          "exact": true,
+          "witness": "health"
+        },
+        "spring": {
+          "min": 9.5,
+          "max": 579.5,
+          "upper": 579.5,
+          "exact": true,
+          "witness": "health"
+        }
+      }
+    },
+    "power": {
+      "min": 1,
+      "max": 232.59999999999997,
+      "upper": 232.59999999999997,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 1,
+          "max": 194,
+          "upper": 194,
+          "exact": true,
+          "witness": "power"
+        },
+        "pebble": {
+          "min": 1,
+          "max": 164.89999999999998,
+          "upper": 164.89999999999998,
+          "exact": true,
+          "witness": "power"
+        },
+        "spore": {
+          "min": 1,
+          "max": 155.3,
+          "upper": 155.3,
+          "exact": true,
+          "witness": "power"
+        },
+        "spring": {
+          "min": 1,
+          "max": 232.59999999999997,
+          "upper": 232.59999999999997,
+          "exact": true,
+          "witness": "power"
+        }
+      }
+    },
+    "armor": {
+      "min": 0,
+      "max": 806,
+      "upper": 806,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 500,
+          "upper": 500,
+          "exact": true,
+          "witness": "carapace"
+        },
+        "pebble": {
+          "min": 6,
+          "max": 806,
+          "upper": 806,
+          "exact": true,
+          "witness": "carapace"
+        },
+        "spore": {
+          "min": 0,
+          "max": 425,
+          "upper": 425,
+          "exact": true,
+          "witness": "carapace"
+        },
+        "spring": {
+          "min": 0,
+          "max": 400,
+          "upper": 400,
+          "exact": true,
+          "witness": "carapace"
+        }
+      }
+    },
+    "speed": {
+      "min": 0.5,
+      "max": 3.3022500000000004,
+      "upper": 3.3022500000000004,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0.5,
+          "max": 2.8,
+          "upper": 2.8,
+          "exact": true,
+          "witness": "speed"
+        },
+        "pebble": {
+          "min": 0.5,
+          "max": 2.313,
+          "upper": 2.313,
+          "exact": true,
+          "witness": "speed"
+        },
+        "spore": {
+          "min": 0.5,
+          "max": 3.0607499999999996,
+          "upper": 3.1814999999999993,
+          "exact": false,
+          "witness": "rangedSpeed"
+        },
+        "spring": {
+          "min": 0.5,
+          "max": 3.3022500000000004,
+          "upper": 3.3022500000000004,
+          "exact": true,
+          "witness": "speed"
+        }
+      }
+    },
+    "movement": {
+      "min": 0.225,
+      "max": 3.4374999999999996,
+      "upper": 3.4374999999999996,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0.25,
+          "max": 3,
+          "upper": 3,
+          "exact": true,
+          "witness": "movementGather"
+        },
+        "pebble": {
+          "min": 0.225,
+          "max": 2.5625,
+          "upper": 2.5625,
+          "exact": true,
+          "witness": "movementGather"
+        },
+        "spore": {
+          "min": 0.25,
+          "max": 2.8625,
+          "upper": 2.8625,
+          "exact": true,
+          "witness": "movementGather"
+        },
+        "spring": {
+          "min": 0.275,
+          "max": 3.4374999999999996,
+          "upper": 3.4374999999999996,
+          "exact": true,
+          "witness": "movementGather"
+        }
+      }
+    },
+    "vision": {
+      "min": 1,
+      "max": 12,
+      "upper": 12,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 1,
+          "max": 12,
+          "upper": 12,
+          "exact": true,
+          "witness": "vision"
+        },
+        "pebble": {
+          "min": 1,
+          "max": 12,
+          "upper": 12,
+          "exact": true,
+          "witness": "vision"
+        },
+        "spore": {
+          "min": 1,
+          "max": 12,
+          "upper": 12,
+          "exact": true,
+          "witness": "vision"
+        },
+        "spring": {
+          "min": 1,
+          "max": 12,
+          "upper": 12,
+          "exact": true,
+          "witness": "vision"
+        }
+      }
+    },
+    "combo": {
+      "min": 0,
+      "max": 19,
+      "upper": 19,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 19,
+          "upper": 19,
+          "exact": true,
+          "witness": "combo"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 19,
+          "upper": 19,
+          "exact": true,
+          "witness": "combo"
+        },
+        "spore": {
+          "min": 0,
+          "max": 19,
+          "upper": 19,
+          "exact": true,
+          "witness": "combo"
+        },
+        "spring": {
+          "min": 0,
+          "max": 19,
+          "upper": 19,
+          "exact": true,
+          "witness": "combo"
+        }
+      }
+    },
+    "comboPower": {
+      "min": 0,
+      "max": 100,
+      "upper": 100,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 100,
+          "upper": 100,
+          "exact": true,
+          "witness": "comboPower"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 100,
+          "upper": 100,
+          "exact": true,
+          "witness": "comboPower"
+        },
+        "spore": {
+          "min": 0,
+          "max": 100,
+          "upper": 100,
+          "exact": true,
+          "witness": "comboPower"
+        },
+        "spring": {
+          "min": 0,
+          "max": 100,
+          "upper": 100,
+          "exact": true,
+          "witness": "comboPower"
+        }
+      }
+    },
+    "critical": {
+      "min": 0,
+      "max": 90,
+      "upper": 90,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 89.99999999999999,
+          "upper": 89.99999999999999,
+          "exact": true,
+          "witness": "critical"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 89.99999999999999,
+          "upper": 89.99999999999999,
+          "exact": true,
+          "witness": "critical"
+        },
+        "spore": {
+          "min": 0,
+          "max": 90,
+          "upper": 90,
+          "exact": true,
+          "witness": "critical"
+        },
+        "spring": {
+          "min": 0,
+          "max": 89.99999999999999,
+          "upper": 89.99999999999999,
+          "exact": true,
+          "witness": "critical"
+        }
+      }
+    },
+    "criticalPower": {
+      "min": 0,
+      "max": 500,
+      "upper": 500,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 500,
+          "upper": 500,
+          "exact": true,
+          "witness": "criticalPower"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 500,
+          "upper": 500,
+          "exact": true,
+          "witness": "criticalPower"
+        },
+        "spore": {
+          "min": 0,
+          "max": 500,
+          "upper": 500,
+          "exact": true,
+          "witness": "criticalPower"
+        },
+        "spring": {
+          "min": 0,
+          "max": 500,
+          "upper": 500,
+          "exact": true,
+          "witness": "criticalPower"
+        }
+      }
+    },
+    "accuracy": {
+      "min": 0,
+      "max": 60,
+      "upper": 60,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "accuracy"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "accuracy"
+        },
+        "spore": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "accuracy"
+        },
+        "spring": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "accuracy"
+        }
+      }
+    },
+    "penetration": {
+      "min": 0,
+      "max": 286,
+      "upper": 286,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 260,
+          "upper": 260,
+          "exact": true,
+          "witness": "penetration"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 260,
+          "upper": 260,
+          "exact": true,
+          "witness": "penetration"
+        },
+        "spore": {
+          "min": 0,
+          "max": 286,
+          "upper": 286,
+          "exact": true,
+          "witness": "penetration"
+        },
+        "spring": {
+          "min": 0,
+          "max": 260,
+          "upper": 260,
+          "exact": true,
+          "witness": "penetration"
+        }
+      }
+    },
+    "comboSpeed": {
+      "min": 0.12,
+      "max": 0.06,
+      "upper": 0.06,
+      "descending": true,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0.12,
+          "max": 0.06,
+          "upper": 0.06,
+          "exact": true,
+          "witness": "comboSpeed"
+        },
+        "pebble": {
+          "min": 0.12,
+          "max": 0.06,
+          "upper": 0.06,
+          "exact": true,
+          "witness": "comboSpeed"
+        },
+        "spore": {
+          "min": 0.12,
+          "max": 0.06,
+          "upper": 0.06,
+          "exact": true,
+          "witness": "comboSpeed"
+        },
+        "spring": {
+          "min": 0.12,
+          "max": 0.06,
+          "upper": 0.06,
+          "exact": true,
+          "witness": "comboSpeed"
+        }
+      }
+    },
+    "focus": {
+      "min": 0.3,
+      "max": 0.08,
+      "upper": 0.08,
+      "descending": true,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0.3,
+          "max": 0.08,
+          "upper": 0.08,
+          "exact": true,
+          "witness": "focus"
+        },
+        "pebble": {
+          "min": 0.3,
+          "max": 0.08,
+          "upper": 0.08,
+          "exact": true,
+          "witness": "focus"
+        },
+        "spore": {
+          "min": 0.3,
+          "max": 0.08,
+          "upper": 0.08,
+          "exact": true,
+          "witness": "focus"
+        },
+        "spring": {
+          "min": 0.3,
+          "max": 0.08,
+          "upper": 0.08,
+          "exact": true,
+          "witness": "focus"
+        }
+      }
+    },
+    "evasion": {
+      "min": 0,
+      "max": 60,
+      "upper": 60,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "evasion"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "evasion"
+        },
+        "spore": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "evasion"
+        },
+        "spring": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "evasion"
+        }
+      }
+    },
+    "parry": {
+      "min": 0,
+      "max": 60,
+      "upper": 60,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "parry"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "parry"
+        },
+        "spore": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "parry"
+        },
+        "spring": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "parry"
+        }
+      }
+    },
+    "block": {
+      "min": 0,
+      "max": 90,
+      "upper": 90,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 90,
+          "upper": 90,
+          "exact": true,
+          "witness": "block"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 90,
+          "upper": 90,
+          "exact": true,
+          "witness": "block"
+        },
+        "spore": {
+          "min": 0,
+          "max": 90,
+          "upper": 90,
+          "exact": true,
+          "witness": "block"
+        },
+        "spring": {
+          "min": 0,
+          "max": 90,
+          "upper": 90,
+          "exact": true,
+          "witness": "block"
+        }
+      }
+    },
+    "blockPower": {
+      "min": 50,
+      "max": 90,
+      "upper": 90,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 50,
+          "max": 90,
+          "upper": 90,
+          "exact": true,
+          "witness": "blockPower"
+        },
+        "pebble": {
+          "min": 50,
+          "max": 90,
+          "upper": 90,
+          "exact": true,
+          "witness": "blockPower"
+        },
+        "spore": {
+          "min": 50,
+          "max": 90,
+          "upper": 90,
+          "exact": true,
+          "witness": "blockPower"
+        },
+        "spring": {
+          "min": 50,
+          "max": 90,
+          "upper": 90,
+          "exact": true,
+          "witness": "blockPower"
+        }
+      }
+    },
+    "counter": {
+      "min": 0,
+      "max": 100,
+      "upper": 100,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 100,
+          "upper": 100,
+          "exact": true,
+          "witness": "counter"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 100,
+          "upper": 100,
+          "exact": true,
+          "witness": "counter"
+        },
+        "spore": {
+          "min": 0,
+          "max": 100,
+          "upper": 100,
+          "exact": true,
+          "witness": "counter"
+        },
+        "spring": {
+          "min": 0,
+          "max": 100,
+          "upper": 100,
+          "exact": true,
+          "witness": "counter"
+        }
+      }
+    },
+    "counterPower": {
+      "min": 0,
+      "max": 200,
+      "upper": 200,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 200,
+          "upper": 200,
+          "exact": true,
+          "witness": "counterPower"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 200,
+          "upper": 200,
+          "exact": true,
+          "witness": "counterPower"
+        },
+        "spore": {
+          "min": 0,
+          "max": 200,
+          "upper": 200,
+          "exact": true,
+          "witness": "counterPower"
+        },
+        "spring": {
+          "min": 0,
+          "max": 200,
+          "upper": 200,
+          "exact": true,
+          "witness": "counterPower"
+        }
+      }
+    },
+    "tenacity": {
+      "min": 0,
+      "max": 75,
+      "upper": 75,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 75,
+          "upper": 75,
+          "exact": true,
+          "witness": "tenacity"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 75,
+          "upper": 75,
+          "exact": true,
+          "witness": "tenacity"
+        },
+        "spore": {
+          "min": 0,
+          "max": 75,
+          "upper": 75,
+          "exact": true,
+          "witness": "tenacity"
+        },
+        "spring": {
+          "min": 0,
+          "max": 75,
+          "upper": 75,
+          "exact": true,
+          "witness": "tenacity"
+        }
+      }
+    },
+    "reduction": {
+      "min": 0,
+      "max": 40,
+      "upper": 40,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 40,
+          "upper": 40,
+          "exact": true,
+          "witness": "reduction"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 40,
+          "upper": 40,
+          "exact": true,
+          "witness": "reduction"
+        },
+        "spore": {
+          "min": 0,
+          "max": 40,
+          "upper": 40,
+          "exact": true,
+          "witness": "reduction"
+        },
+        "spring": {
+          "min": 0,
+          "max": 40,
+          "upper": 40,
+          "exact": true,
+          "witness": "reduction"
+        }
+      }
+    },
+    "stun": {
+      "min": 0,
+      "max": 60,
+      "upper": 60,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "stun"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "stun"
+        },
+        "spore": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "stun"
+        },
+        "spring": {
+          "min": 0,
+          "max": 60,
+          "upper": 60,
+          "exact": true,
+          "witness": "stun"
+        }
+      }
+    },
+    "stunTime": {
+      "min": 0,
+      "max": 1.5,
+      "upper": 1.5,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 1.5,
+          "upper": 1.5,
+          "exact": true,
+          "witness": "stunTime"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 1.5,
+          "upper": 1.5,
+          "exact": true,
+          "witness": "stunTime"
+        },
+        "spore": {
+          "min": 0,
+          "max": 1.5,
+          "upper": 1.5,
+          "exact": true,
+          "witness": "stunTime"
+        },
+        "spring": {
+          "min": 0,
+          "max": 1.5,
+          "upper": 1.5,
+          "exact": true,
+          "witness": "stunTime"
+        }
+      }
+    },
+    "bleed": {
+      "min": 0,
+      "max": 75,
+      "upper": 75,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 75,
+          "upper": 75,
+          "exact": true,
+          "witness": "bleed"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 75,
+          "upper": 75,
+          "exact": true,
+          "witness": "bleed"
+        },
+        "spore": {
+          "min": 0,
+          "max": 75,
+          "upper": 75,
+          "exact": true,
+          "witness": "bleed"
+        },
+        "spring": {
+          "min": 0,
+          "max": 75,
+          "upper": 75,
+          "exact": true,
+          "witness": "bleed"
+        }
+      }
+    },
+    "bleedPower": {
+      "min": 0,
+      "max": 53,
+      "upper": 53,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 53,
+          "upper": 53,
+          "exact": true,
+          "witness": "bleedPower"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 53,
+          "upper": 53,
+          "exact": true,
+          "witness": "bleedPower"
+        },
+        "spore": {
+          "min": 0,
+          "max": 53,
+          "upper": 53,
+          "exact": true,
+          "witness": "bleedPower"
+        },
+        "spring": {
+          "min": 0,
+          "max": 53,
+          "upper": 53,
+          "exact": true,
+          "witness": "bleedPower"
+        }
+      }
+    },
+    "area": {
+      "min": 0,
+      "max": 8,
+      "upper": 8,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 8,
+          "upper": 8,
+          "exact": true,
+          "witness": "area"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 8,
+          "upper": 8,
+          "exact": true,
+          "witness": "area"
+        },
+        "spore": {
+          "min": 0,
+          "max": 8,
+          "upper": 8,
+          "exact": true,
+          "witness": "area"
+        },
+        "spring": {
+          "min": 0,
+          "max": 8,
+          "upper": 8,
+          "exact": true,
+          "witness": "area"
+        }
+      }
+    },
+    "areaPower": {
+      "min": 0,
+      "max": 100,
+      "upper": 100,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 100,
+          "upper": 100,
+          "exact": true,
+          "witness": "areaPower"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 100,
+          "upper": 100,
+          "exact": true,
+          "witness": "areaPower"
+        },
+        "spore": {
+          "min": 0,
+          "max": 100,
+          "upper": 100,
+          "exact": true,
+          "witness": "areaPower"
+        },
+        "spring": {
+          "min": 0,
+          "max": 100,
+          "upper": 100,
+          "exact": true,
+          "witness": "areaPower"
+        }
+      }
+    },
+    "lifesteal": {
+      "min": 0,
+      "max": 40,
+      "upper": 40,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 40,
+          "upper": 40,
+          "exact": true,
+          "witness": "lifesteal"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 40,
+          "upper": 40,
+          "exact": true,
+          "witness": "lifesteal"
+        },
+        "spore": {
+          "min": 0,
+          "max": 40,
+          "upper": 40,
+          "exact": true,
+          "witness": "lifesteal"
+        },
+        "spring": {
+          "min": 0,
+          "max": 40,
+          "upper": 40,
+          "exact": true,
+          "witness": "lifesteal"
+        }
+      }
+    },
+    "reflection": {
+      "min": 0,
+      "max": 75,
+      "upper": 75,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 75,
+          "upper": 75,
+          "exact": true,
+          "witness": "reflection"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 75,
+          "upper": 75,
+          "exact": true,
+          "witness": "reflection"
+        },
+        "spore": {
+          "min": 0,
+          "max": 75,
+          "upper": 75,
+          "exact": true,
+          "witness": "reflection"
+        },
+        "spring": {
+          "min": 0,
+          "max": 75,
+          "upper": 75,
+          "exact": true,
+          "witness": "reflection"
+        }
+      }
+    },
+    "regeneration": {
+      "min": 0,
+      "max": 18.599999999999998,
+      "upper": 18.599999999999998,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 15.5,
+          "upper": 15.5,
+          "exact": true,
+          "witness": "regeneration"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 18.599999999999998,
+          "upper": 18.599999999999998,
+          "exact": true,
+          "witness": "regeneration"
+        },
+        "spore": {
+          "min": 0,
+          "max": 13.950000000000001,
+          "upper": 13.950000000000001,
+          "exact": true,
+          "witness": "regeneration"
+        },
+        "spring": {
+          "min": 0,
+          "max": 16.275000000000002,
+          "upper": 16.275000000000002,
+          "exact": true,
+          "witness": "regeneration"
+        }
+      }
+    },
+    "capacity": {
+      "min": 0,
+      "max": 31,
+      "upper": 31,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 31,
+          "upper": 31,
+          "exact": true,
+          "witness": "capacity"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 31,
+          "upper": 31,
+          "exact": true,
+          "witness": "capacity"
+        },
+        "spore": {
+          "min": 0,
+          "max": 31,
+          "upper": 31,
+          "exact": true,
+          "witness": "capacity"
+        },
+        "spring": {
+          "min": 0,
+          "max": 31,
+          "upper": 31,
+          "exact": true,
+          "witness": "capacity"
+        }
+      }
+    },
+    "harvestSpeed": {
+      "min": 0,
+      "max": 5.166666666666667,
+      "upper": 5.166666666666667,
+      "descending": false,
+      "exact": true,
+      "perTribe": {
+        "bean": {
+          "min": 0,
+          "max": 5.166666666666667,
+          "upper": 5.166666666666667,
+          "exact": true,
+          "witness": "harvestSpeed"
+        },
+        "pebble": {
+          "min": 0,
+          "max": 5.166666666666667,
+          "upper": 5.166666666666667,
+          "exact": true,
+          "witness": "harvestSpeed"
+        },
+        "spore": {
+          "min": 0,
+          "max": 5.166666666666667,
+          "upper": 5.166666666666667,
+          "exact": true,
+          "witness": "harvestSpeed"
+        },
+        "spring": {
+          "min": 0,
+          "max": 5.166666666666667,
+          "upper": 5.166666666666667,
+          "exact": true,
+          "witness": "harvestSpeed"
+        }
+      }
+    }
+  },
+  "witnesses": {
+    "health": {
+      "gene": "health",
+      "prefix": [],
+      "areaUpper": 31,
+      "capCount": null,
+      "count": 30,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 30,
+      "seconds": 0.042284300000000004,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 0,
+          "q": -2,
+          "r": -4
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 0,
+          "q": 1,
+          "r": 3
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": 1,
+          "r": -5
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": 6,
+          "r": -5
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": -3,
+          "r": -3
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": 1,
+          "r": -3
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": 4,
+          "r": -3
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": 6,
+          "r": -3
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": -1,
+          "r": -2
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": 2,
+          "r": -2
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": -5,
+          "r": -1
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": -3,
+          "r": -1
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": 4,
+          "r": -1
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": 6,
+          "r": -1
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": -1,
+          "r": 0
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": 2,
+          "r": 0
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": -5,
+          "r": 1
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": -3,
+          "r": 1
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": 0,
+          "r": 1
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": 4,
+          "r": 1
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": -5,
+          "r": 3
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 1,
+          "q": 0,
+          "r": 3
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "q": 1,
+          "r": -6
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "q": 4,
+          "r": -6
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "q": 6,
+          "r": -6
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "q": 4,
+          "r": -4
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "q": -2,
+          "r": 3
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "q": -4,
+          "r": 5
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "q": -2,
+          "r": 5
+        },
+        {
+          "gene": "health",
+          "grade": 1,
+          "rotation": 2,
+          "q": 1,
+          "r": 5
+        }
+      ]
+    },
+    "power": {
+      "gene": "power",
+      "prefix": [
+        "blade"
+      ],
+      "areaUpper": 24,
+      "capCount": null,
+      "count": 24,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 24,
+      "seconds": 1.2672808,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": -6,
+          "r": 3
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 0,
+          "q": 4,
+          "r": -6
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 0,
+          "q": 4,
+          "r": -4
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 0,
+          "q": 2,
+          "r": -3
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 0,
+          "q": 1,
+          "r": 0
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 0,
+          "q": -6,
+          "r": 2
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 1,
+          "q": -1,
+          "r": -4
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 1,
+          "q": 0,
+          "r": -3
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 1,
+          "q": 6,
+          "r": -2
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 2,
+          "q": 0,
+          "r": 0
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 2,
+          "q": -1,
+          "r": 3
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 2,
+          "q": 0,
+          "r": 4
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 2,
+          "q": 2,
+          "r": 4
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 3,
+          "q": 3,
+          "r": -1
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 3,
+          "q": -2,
+          "r": 0
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 3,
+          "q": -4,
+          "r": 1
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 3,
+          "q": -4,
+          "r": 6
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 4,
+          "q": 4,
+          "r": 1
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 5,
+          "q": -2,
+          "r": -4
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 5,
+          "q": 0,
+          "r": -4
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 5,
+          "q": 1,
+          "r": -3
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 5,
+          "q": -5,
+          "r": -1
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 5,
+          "q": -2,
+          "r": 3
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 5,
+          "q": -1,
+          "r": 4
+        },
+        {
+          "gene": "power",
+          "grade": 2,
+          "rotation": 5,
+          "q": 1,
+          "r": 4
+        }
+      ]
+    },
+    "rangedPower": {
+      "gene": "rangedPower",
+      "prefix": [
+        "secretion"
+      ],
+      "areaUpper": 24,
+      "capCount": null,
+      "count": 24,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 24,
+      "seconds": 3.327478,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "secretion",
+          "grade": 2,
+          "rotation": 0,
+          "q": 1,
+          "r": -2
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 0,
+          "q": -2,
+          "r": -3
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 0,
+          "q": 5,
+          "r": -2
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 0,
+          "q": -1,
+          "r": 4
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 1,
+          "q": 6,
+          "r": -6
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 1,
+          "q": 2,
+          "r": -5
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 1,
+          "q": 1,
+          "r": -1
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 1,
+          "q": -4,
+          "r": 1
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 1,
+          "q": 3,
+          "r": 2
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 1,
+          "q": -3,
+          "r": 3
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 2,
+          "q": -2,
+          "r": -2
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 2,
+          "q": 5,
+          "r": -1
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 2,
+          "q": -1,
+          "r": 5
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 3,
+          "q": 1,
+          "r": -4
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 3,
+          "q": -5,
+          "r": 2
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 3,
+          "q": 2,
+          "r": 3
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 4,
+          "q": 3,
+          "r": -3
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 4,
+          "q": -3,
+          "r": -2
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 4,
+          "q": 4,
+          "r": -1
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 4,
+          "q": -2,
+          "r": 2
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 4,
+          "q": -2,
+          "r": 5
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 4,
+          "q": -6,
+          "r": 6
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 5,
+          "q": 1,
+          "r": -5
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 5,
+          "q": -5,
+          "r": 1
+        },
+        {
+          "gene": "rangedPower",
+          "grade": 2,
+          "rotation": 5,
+          "q": 2,
+          "r": 2
+        }
+      ]
+    },
+    "carapace": {
+      "gene": "carapace",
+      "prefix": [],
+      "areaUpper": 25,
+      "capCount": null,
+      "count": 25,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 25,
+      "seconds": 8.2650469,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 0,
+          "q": 2,
+          "r": -2
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 0,
+          "q": -2,
+          "r": 0
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 0,
+          "q": 3,
+          "r": 0
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 0,
+          "q": -6,
+          "r": 6
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 1,
+          "q": -4,
+          "r": -1
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 1,
+          "q": -6,
+          "r": 1
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 1,
+          "q": 1,
+          "r": 1
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 1,
+          "q": -1,
+          "r": 3
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 2,
+          "q": 6,
+          "r": -6
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 2,
+          "q": -1,
+          "r": -5
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 2,
+          "q": 1,
+          "r": -5
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 2,
+          "q": 3,
+          "r": -5
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 2,
+          "q": -3,
+          "r": 2
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 3,
+          "q": 0,
+          "r": -1
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 3,
+          "q": 5,
+          "r": -1
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 3,
+          "q": 5,
+          "r": 1
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 4,
+          "q": 6,
+          "r": -2
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 4,
+          "q": -5,
+          "r": 2
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 4,
+          "q": 0,
+          "r": 4
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 4,
+          "q": -2,
+          "r": 6
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 5,
+          "q": -2,
+          "r": -3
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 5,
+          "q": 0,
+          "r": -3
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 5,
+          "q": 2,
+          "r": -3
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 5,
+          "q": -4,
+          "r": 4
+        },
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 5,
+          "q": 1,
+          "r": 5
+        }
+      ]
+    },
+    "speed": {
+      "gene": "speed",
+      "prefix": [
+        "blade"
+      ],
+      "areaUpper": 24,
+      "capCount": null,
+      "count": 23,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 23,
+      "seconds": 0.5978105,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": -6,
+          "r": 5
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 0,
+          "q": -3,
+          "r": -3
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 0,
+          "q": 1,
+          "r": -3
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 0,
+          "q": -5,
+          "r": -1
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 0,
+          "q": 2,
+          "r": 1
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 1,
+          "q": -3,
+          "r": 0
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 1,
+          "q": 1,
+          "r": 0
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 2,
+          "q": 1,
+          "r": -6
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 2,
+          "q": 3,
+          "r": -6
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 2,
+          "q": 5,
+          "r": -6
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 2,
+          "q": -1,
+          "r": 1
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 3,
+          "q": 6,
+          "r": -4
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 3,
+          "q": 6,
+          "r": -2
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 3,
+          "q": 6,
+          "r": 0
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 3,
+          "q": 0,
+          "r": 3
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 3,
+          "q": 3,
+          "r": 3
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 4,
+          "q": 0,
+          "r": 0
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 4,
+          "q": -4,
+          "r": 5
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 4,
+          "q": -2,
+          "r": 6
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 4,
+          "q": 0,
+          "r": 6
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 5,
+          "q": -2,
+          "r": -1
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 5,
+          "q": 2,
+          "r": -1
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 5,
+          "q": -6,
+          "r": 2
+        },
+        {
+          "gene": "speed",
+          "grade": 2,
+          "rotation": 5,
+          "q": -6,
+          "r": 4
+        }
+      ]
+    },
+    "rangedSpeed": {
+      "gene": "rangedSpeed",
+      "prefix": [
+        "secretion"
+      ],
+      "areaUpper": 24,
+      "capCount": null,
+      "count": 21,
+      "solverStatus": "FEASIBLE",
+      "countUpper": 22,
+      "seconds": 10.04019,
+      "exact": false,
+      "pieces": [
+        {
+          "gene": "secretion",
+          "grade": 2,
+          "rotation": 0,
+          "q": -3,
+          "r": -3
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 0,
+          "q": 4,
+          "r": -1
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 0,
+          "q": -5,
+          "r": 0
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 0,
+          "q": 3,
+          "r": 2
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 1,
+          "q": 0,
+          "r": -5
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 1,
+          "q": 2,
+          "r": -4
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 1,
+          "q": -6,
+          "r": 3
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 1,
+          "q": -5,
+          "r": 5
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 2,
+          "q": -1,
+          "r": -1
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 2,
+          "q": 2,
+          "r": -1
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 2,
+          "q": 0,
+          "r": 1
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 2,
+          "q": -1,
+          "r": 4
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 3,
+          "q": 6,
+          "r": -4
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 3,
+          "q": -4,
+          "r": -1
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 3,
+          "q": 4,
+          "r": 1
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 4,
+          "q": 1,
+          "r": -5
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 4,
+          "q": 5,
+          "r": -5
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 4,
+          "q": -3,
+          "r": 2
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 4,
+          "q": -2,
+          "r": 4
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 5,
+          "q": -1,
+          "r": 0
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 5,
+          "q": 2,
+          "r": 0
+        },
+        {
+          "gene": "rangedSpeed",
+          "grade": 2,
+          "rotation": 5,
+          "q": 0,
+          "r": 6
+        }
+      ],
+      "refinement": {
+        "method": "upper-count feasibility with board rotation symmetry",
+        "status": "UNKNOWN",
+        "seconds": 10.299265400000001,
+        "candidate": 22
+      }
+    },
+    "movement": {
+      "gene": "movement",
+      "prefix": [],
+      "areaUpper": 31,
+      "capCount": null,
+      "count": 25,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 25,
+      "seconds": 0.20776170000000002,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": -1,
+          "r": -4
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 2,
+          "r": -4
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 5,
+          "r": -4
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 0,
+          "r": -2
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 2,
+          "r": -2
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 5,
+          "r": -2
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": -2,
+          "r": 0
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 0,
+          "r": 0
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 5,
+          "r": 0
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": -2,
+          "r": 3
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 0,
+          "r": 3
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 2,
+          "r": 3
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": -4,
+          "r": 5
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": -2,
+          "r": 5
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 0,
+          "r": 5
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": 1,
+          "r": -5
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": 4,
+          "r": -5
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -3,
+          "r": -2
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": 3,
+          "r": -1
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -5,
+          "r": 0
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": 1,
+          "r": 1
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": 3,
+          "r": 1
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -5,
+          "r": 2
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -3,
+          "r": 2
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -5,
+          "r": 4
+        }
+      ]
+    },
+    "vision": {
+      "gene": "vision",
+      "prefix": [],
+      "areaUpper": 31,
+      "capCount": 22,
+      "count": 22,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 22,
+      "seconds": 0.0297397,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 0,
+          "q": 1,
+          "r": -6
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 0,
+          "q": 1,
+          "r": -5
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 0,
+          "q": 2,
+          "r": -4
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 0,
+          "q": 1,
+          "r": -3
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 0,
+          "q": -3,
+          "r": -1
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 0,
+          "q": 3,
+          "r": -1
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 0,
+          "q": -5,
+          "r": 0
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 0,
+          "q": -5,
+          "r": 1
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 0,
+          "q": 1,
+          "r": 1
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 0,
+          "q": -4,
+          "r": 2
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 0,
+          "q": 0,
+          "r": 2
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 0,
+          "q": -4,
+          "r": 3
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 1,
+          "q": -1,
+          "r": -5
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 1,
+          "q": 0,
+          "r": -5
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 1,
+          "q": 6,
+          "r": -5
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 1,
+          "q": -6,
+          "r": 2
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 1,
+          "q": -5,
+          "r": 2
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 2,
+          "q": -2,
+          "r": -4
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 2,
+          "q": 3,
+          "r": -2
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 2,
+          "q": 6,
+          "r": 0
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 2,
+          "q": 0,
+          "r": 3
+        },
+        {
+          "gene": "vision",
+          "grade": 1,
+          "rotation": 2,
+          "q": 2,
+          "r": 3
+        }
+      ]
+    },
+    "combo": {
+      "gene": "combo",
+      "prefix": [
+        "blade"
+      ],
+      "areaUpper": 20,
+      "capCount": null,
+      "count": 19,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 19,
+      "seconds": 0.24517840000000002,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": -6,
+          "r": 3
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 0,
+          "q": 5,
+          "r": -5
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 0,
+          "q": 5,
+          "r": -2
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 0,
+          "q": 3,
+          "r": -1
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 0,
+          "q": 1,
+          "r": 1
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 0,
+          "q": -1,
+          "r": 3
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 0,
+          "q": -3,
+          "r": 4
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 1,
+          "q": 0,
+          "r": -6
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 1,
+          "q": 2,
+          "r": -6
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 1,
+          "q": 4,
+          "r": -6
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 1,
+          "q": -3,
+          "r": -3
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 1,
+          "q": -1,
+          "r": -3
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 1,
+          "q": 1,
+          "r": -3
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 1,
+          "q": 3,
+          "r": -3
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 1,
+          "q": -4,
+          "r": 0
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 1,
+          "q": -2,
+          "r": 0
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 1,
+          "q": 0,
+          "r": 0
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 1,
+          "q": 4,
+          "r": 1
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 1,
+          "q": 1,
+          "r": 4
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 2,
+          "q": -4,
+          "r": 5
+        }
+      ]
+    },
+    "comboPower": {
+      "gene": "comboPower",
+      "prefix": [
+        "blade",
+        "combo"
+      ],
+      "areaUpper": 14,
+      "capCount": 3,
+      "count": 3,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 3,
+      "seconds": 0.10645370000000001,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": -5,
+          "r": 1
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 2,
+          "q": 4,
+          "r": -5
+        },
+        {
+          "gene": "comboPower",
+          "grade": 4,
+          "rotation": 0,
+          "q": -1,
+          "r": -2
+        },
+        {
+          "gene": "comboPower",
+          "grade": 4,
+          "rotation": 2,
+          "q": 2,
+          "r": 0
+        },
+        {
+          "gene": "comboPower",
+          "grade": 4,
+          "rotation": 3,
+          "q": 0,
+          "r": 2
+        }
+      ]
+    },
+    "critical": {
+      "gene": "critical",
+      "prefix": [
+        "blade"
+      ],
+      "areaUpper": 20,
+      "capCount": 3,
+      "count": 3,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 3,
+      "seconds": 0.0757047,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": -5,
+          "r": 3
+        },
+        {
+          "gene": "critical",
+          "grade": 3,
+          "rotation": 1,
+          "q": 2,
+          "r": -5
+        },
+        {
+          "gene": "critical",
+          "grade": 3,
+          "rotation": 2,
+          "q": -1,
+          "r": -3
+        },
+        {
+          "gene": "critical",
+          "grade": 3,
+          "rotation": 5,
+          "q": 1,
+          "r": 2
+        }
+      ]
+    },
+    "criticalPower": {
+      "gene": "criticalPower",
+      "prefix": [
+        "blade",
+        "critical"
+      ],
+      "areaUpper": 14,
+      "capCount": 5,
+      "count": 5,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 5,
+      "seconds": 0.1830832,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 3,
+          "q": 3,
+          "r": 0
+        },
+        {
+          "gene": "critical",
+          "grade": 3,
+          "rotation": 0,
+          "q": -6,
+          "r": 4
+        },
+        {
+          "gene": "criticalPower",
+          "grade": 4,
+          "rotation": 0,
+          "q": -1,
+          "r": 2
+        },
+        {
+          "gene": "criticalPower",
+          "grade": 4,
+          "rotation": 2,
+          "q": -1,
+          "r": -1
+        },
+        {
+          "gene": "criticalPower",
+          "grade": 4,
+          "rotation": 3,
+          "q": 3,
+          "r": -5
+        },
+        {
+          "gene": "criticalPower",
+          "grade": 4,
+          "rotation": 4,
+          "q": -3,
+          "r": -1
+        },
+        {
+          "gene": "criticalPower",
+          "grade": 4,
+          "rotation": 5,
+          "q": -4,
+          "r": 6
+        }
+      ]
+    },
+    "accuracy": {
+      "gene": "accuracy",
+      "prefix": [
+        "blade"
+      ],
+      "areaUpper": 20,
+      "capCount": 7,
+      "count": 7,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 7,
+      "seconds": 0.1039312,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": -1,
+          "r": -5
+        },
+        {
+          "gene": "accuracy",
+          "grade": 3,
+          "rotation": 0,
+          "q": 3,
+          "r": -1
+        },
+        {
+          "gene": "accuracy",
+          "grade": 3,
+          "rotation": 2,
+          "q": 5,
+          "r": -6
+        },
+        {
+          "gene": "accuracy",
+          "grade": 3,
+          "rotation": 3,
+          "q": 0,
+          "r": 0
+        },
+        {
+          "gene": "accuracy",
+          "grade": 3,
+          "rotation": 3,
+          "q": 2,
+          "r": 2
+        },
+        {
+          "gene": "accuracy",
+          "grade": 3,
+          "rotation": 4,
+          "q": 2,
+          "r": -1
+        },
+        {
+          "gene": "accuracy",
+          "grade": 3,
+          "rotation": 4,
+          "q": -5,
+          "r": 3
+        },
+        {
+          "gene": "accuracy",
+          "grade": 3,
+          "rotation": 5,
+          "q": -4,
+          "r": 4
+        }
+      ]
+    },
+    "penetration": {
+      "gene": "penetration",
+      "prefix": [
+        "blade"
+      ],
+      "areaUpper": 15,
+      "capCount": null,
+      "count": 13,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 13,
+      "seconds": 0.5431992,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": -2,
+          "r": 5
+        },
+        {
+          "gene": "penetration",
+          "grade": 4,
+          "rotation": 0,
+          "q": 1,
+          "r": -2
+        },
+        {
+          "gene": "penetration",
+          "grade": 4,
+          "rotation": 0,
+          "q": 4,
+          "r": -2
+        },
+        {
+          "gene": "penetration",
+          "grade": 4,
+          "rotation": 0,
+          "q": -2,
+          "r": -1
+        },
+        {
+          "gene": "penetration",
+          "grade": 4,
+          "rotation": 1,
+          "q": 1,
+          "r": 0
+        },
+        {
+          "gene": "penetration",
+          "grade": 4,
+          "rotation": 1,
+          "q": 4,
+          "r": 0
+        },
+        {
+          "gene": "penetration",
+          "grade": 4,
+          "rotation": 1,
+          "q": -5,
+          "r": 1
+        },
+        {
+          "gene": "penetration",
+          "grade": 4,
+          "rotation": 1,
+          "q": 0,
+          "r": 3
+        },
+        {
+          "gene": "penetration",
+          "grade": 4,
+          "rotation": 2,
+          "q": -4,
+          "r": 4
+        },
+        {
+          "gene": "penetration",
+          "grade": 4,
+          "rotation": 3,
+          "q": 3,
+          "r": -5
+        },
+        {
+          "gene": "penetration",
+          "grade": 4,
+          "rotation": 3,
+          "q": 6,
+          "r": -5
+        },
+        {
+          "gene": "penetration",
+          "grade": 4,
+          "rotation": 3,
+          "q": 0,
+          "r": -4
+        },
+        {
+          "gene": "penetration",
+          "grade": 4,
+          "rotation": 4,
+          "q": -4,
+          "r": 0
+        },
+        {
+          "gene": "penetration",
+          "grade": 4,
+          "rotation": 5,
+          "q": -3,
+          "r": 4
+        }
+      ]
+    },
+    "comboSpeed": {
+      "gene": "comboSpeed",
+      "prefix": [
+        "blade",
+        "combo"
+      ],
+      "areaUpper": 14,
+      "capCount": 2,
+      "count": 2,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 2,
+      "seconds": 0.0952549,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": 3,
+          "r": -4
+        },
+        {
+          "gene": "combo",
+          "grade": 3,
+          "rotation": 2,
+          "q": 1,
+          "r": -4
+        },
+        {
+          "gene": "comboSpeed",
+          "grade": 4,
+          "rotation": 2,
+          "q": -2,
+          "r": 2
+        },
+        {
+          "gene": "comboSpeed",
+          "grade": 4,
+          "rotation": 5,
+          "q": -2,
+          "r": 3
+        }
+      ]
+    },
+    "focus": {
+      "gene": "focus",
+      "prefix": [
+        "blade"
+      ],
+      "areaUpper": 15,
+      "capCount": 2,
+      "count": 2,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 2,
+      "seconds": 0.057892900000000004,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": -3,
+          "r": -3
+        },
+        {
+          "gene": "focus",
+          "grade": 4,
+          "rotation": 1,
+          "q": 3,
+          "r": -3
+        },
+        {
+          "gene": "focus",
+          "grade": 4,
+          "rotation": 2,
+          "q": 1,
+          "r": -1
+        }
+      ]
+    },
+    "evasion": {
+      "gene": "evasion",
+      "prefix": [],
+      "areaUpper": 21,
+      "capCount": 9,
+      "count": 9,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 9,
+      "seconds": 0.067899,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "evasion",
+          "grade": 3,
+          "rotation": 0,
+          "q": 0,
+          "r": -6
+        },
+        {
+          "gene": "evasion",
+          "grade": 3,
+          "rotation": 0,
+          "q": 3,
+          "r": -6
+        },
+        {
+          "gene": "evasion",
+          "grade": 3,
+          "rotation": 0,
+          "q": -1,
+          "r": -3
+        },
+        {
+          "gene": "evasion",
+          "grade": 3,
+          "rotation": 0,
+          "q": 3,
+          "r": -3
+        },
+        {
+          "gene": "evasion",
+          "grade": 3,
+          "rotation": 0,
+          "q": -4,
+          "r": -2
+        },
+        {
+          "gene": "evasion",
+          "grade": 3,
+          "rotation": 0,
+          "q": 1,
+          "r": 0
+        },
+        {
+          "gene": "evasion",
+          "grade": 3,
+          "rotation": 0,
+          "q": -5,
+          "r": 1
+        },
+        {
+          "gene": "evasion",
+          "grade": 3,
+          "rotation": 0,
+          "q": -1,
+          "r": 1
+        },
+        {
+          "gene": "evasion",
+          "grade": 3,
+          "rotation": 5,
+          "q": -2,
+          "r": 6
+        }
+      ]
+    },
+    "parry": {
+      "gene": "parry",
+      "prefix": [],
+      "areaUpper": 15,
+      "capCount": 4,
+      "count": 4,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 4,
+      "seconds": 0.0726615,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "parry",
+          "grade": 4,
+          "rotation": 1,
+          "q": 5,
+          "r": -1
+        },
+        {
+          "gene": "parry",
+          "grade": 4,
+          "rotation": 1,
+          "q": -1,
+          "r": 1
+        },
+        {
+          "gene": "parry",
+          "grade": 4,
+          "rotation": 2,
+          "q": 6,
+          "r": -6
+        },
+        {
+          "gene": "parry",
+          "grade": 4,
+          "rotation": 3,
+          "q": 2,
+          "r": 3
+        }
+      ]
+    },
+    "block": {
+      "gene": "block",
+      "prefix": [],
+      "areaUpper": 21,
+      "capCount": 5,
+      "count": 5,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 5,
+      "seconds": 0.0728734,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "block",
+          "grade": 3,
+          "rotation": 0,
+          "q": -2,
+          "r": -2
+        },
+        {
+          "gene": "block",
+          "grade": 3,
+          "rotation": 0,
+          "q": -1,
+          "r": 2
+        },
+        {
+          "gene": "block",
+          "grade": 3,
+          "rotation": 1,
+          "q": -4,
+          "r": 0
+        },
+        {
+          "gene": "block",
+          "grade": 3,
+          "rotation": 2,
+          "q": -3,
+          "r": 4
+        },
+        {
+          "gene": "block",
+          "grade": 3,
+          "rotation": 3,
+          "q": 4,
+          "r": 1
+        }
+      ]
+    },
+    "blockPower": {
+      "gene": "blockPower",
+      "prefix": [
+        "block"
+      ],
+      "areaUpper": 15,
+      "capCount": 8,
+      "count": 8,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 8,
+      "seconds": 0.0764596,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "block",
+          "grade": 3,
+          "rotation": 0,
+          "q": 0,
+          "r": 0
+        },
+        {
+          "gene": "blockPower",
+          "grade": 4,
+          "rotation": 0,
+          "q": 0,
+          "r": -5
+        },
+        {
+          "gene": "blockPower",
+          "grade": 4,
+          "rotation": 1,
+          "q": -4,
+          "r": 3
+        },
+        {
+          "gene": "blockPower",
+          "grade": 4,
+          "rotation": 2,
+          "q": 6,
+          "r": -4
+        },
+        {
+          "gene": "blockPower",
+          "grade": 4,
+          "rotation": 2,
+          "q": 4,
+          "r": -1
+        },
+        {
+          "gene": "blockPower",
+          "grade": 4,
+          "rotation": 2,
+          "q": 0,
+          "r": 4
+        },
+        {
+          "gene": "blockPower",
+          "grade": 4,
+          "rotation": 3,
+          "q": 0,
+          "r": -1
+        },
+        {
+          "gene": "blockPower",
+          "grade": 4,
+          "rotation": 3,
+          "q": -3,
+          "r": 2
+        },
+        {
+          "gene": "blockPower",
+          "grade": 4,
+          "rotation": 5,
+          "q": 3,
+          "r": -4
+        }
+      ]
+    },
+    "counter": {
+      "gene": "counter",
+      "prefix": [
+        "carapace",
+        "block"
+      ],
+      "areaUpper": 19,
+      "capCount": 4,
+      "count": 4,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 4,
+      "seconds": 0.19488770000000002,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 0,
+          "q": -3,
+          "r": 4
+        },
+        {
+          "gene": "block",
+          "grade": 3,
+          "rotation": 2,
+          "q": 0,
+          "r": -2
+        },
+        {
+          "gene": "counter",
+          "grade": 3,
+          "rotation": 1,
+          "q": 3,
+          "r": -5
+        },
+        {
+          "gene": "counter",
+          "grade": 3,
+          "rotation": 2,
+          "q": 3,
+          "r": 0
+        },
+        {
+          "gene": "counter",
+          "grade": 3,
+          "rotation": 3,
+          "q": -4,
+          "r": 2
+        },
+        {
+          "gene": "counter",
+          "grade": 3,
+          "rotation": 4,
+          "q": 5,
+          "r": -1
+        }
+      ]
+    },
+    "counterPower": {
+      "gene": "counterPower",
+      "prefix": [
+        "carapace",
+        "block",
+        "counter"
+      ],
+      "areaUpper": 13,
+      "capCount": 3,
+      "count": 3,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 3,
+      "seconds": 0.24182840000000003,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "carapace",
+          "grade": 2,
+          "rotation": 3,
+          "q": 5,
+          "r": -3
+        },
+        {
+          "gene": "block",
+          "grade": 3,
+          "rotation": 4,
+          "q": 1,
+          "r": 1
+        },
+        {
+          "gene": "counter",
+          "grade": 3,
+          "rotation": 0,
+          "q": 3,
+          "r": 0
+        },
+        {
+          "gene": "counterPower",
+          "grade": 4,
+          "rotation": 1,
+          "q": -1,
+          "r": 3
+        },
+        {
+          "gene": "counterPower",
+          "grade": 4,
+          "rotation": 3,
+          "q": 0,
+          "r": 2
+        },
+        {
+          "gene": "counterPower",
+          "grade": 4,
+          "rotation": 5,
+          "q": -4,
+          "r": 1
+        }
+      ]
+    },
+    "tenacity": {
+      "gene": "tenacity",
+      "prefix": [],
+      "areaUpper": 21,
+      "capCount": 5,
+      "count": 5,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 5,
+      "seconds": 0.0663817,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "tenacity",
+          "grade": 3,
+          "rotation": 1,
+          "q": -2,
+          "r": 0
+        },
+        {
+          "gene": "tenacity",
+          "grade": 3,
+          "rotation": 3,
+          "q": 4,
+          "r": -1
+        },
+        {
+          "gene": "tenacity",
+          "grade": 3,
+          "rotation": 3,
+          "q": 3,
+          "r": 3
+        },
+        {
+          "gene": "tenacity",
+          "grade": 3,
+          "rotation": 3,
+          "q": 0,
+          "r": 4
+        },
+        {
+          "gene": "tenacity",
+          "grade": 3,
+          "rotation": 4,
+          "q": 1,
+          "r": -3
+        }
+      ]
+    },
+    "reduction": {
+      "gene": "reduction",
+      "prefix": [],
+      "areaUpper": 15,
+      "capCount": 5,
+      "count": 5,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 5,
+      "seconds": 0.0396088,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "reduction",
+          "grade": 4,
+          "rotation": 0,
+          "q": 3,
+          "r": -3
+        },
+        {
+          "gene": "reduction",
+          "grade": 4,
+          "rotation": 0,
+          "q": -3,
+          "r": 2
+        },
+        {
+          "gene": "reduction",
+          "grade": 4,
+          "rotation": 1,
+          "q": 2,
+          "r": -5
+        },
+        {
+          "gene": "reduction",
+          "grade": 4,
+          "rotation": 3,
+          "q": 2,
+          "r": 2
+        },
+        {
+          "gene": "reduction",
+          "grade": 4,
+          "rotation": 5,
+          "q": -4,
+          "r": -1
+        }
+      ]
+    },
+    "stun": {
+      "gene": "stun",
+      "prefix": [
+        "blade"
+      ],
+      "areaUpper": 20,
+      "capCount": 4,
+      "count": 4,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 4,
+      "seconds": 0.045405400000000005,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": -4,
+          "r": 5
+        },
+        {
+          "gene": "stun",
+          "grade": 3,
+          "rotation": 0,
+          "q": 5,
+          "r": -3
+        },
+        {
+          "gene": "stun",
+          "grade": 3,
+          "rotation": 2,
+          "q": 3,
+          "r": -6
+        },
+        {
+          "gene": "stun",
+          "grade": 3,
+          "rotation": 2,
+          "q": 1,
+          "r": -3
+        },
+        {
+          "gene": "stun",
+          "grade": 3,
+          "rotation": 5,
+          "q": -2,
+          "r": 3
+        }
+      ]
+    },
+    "stunTime": {
+      "gene": "stunTime",
+      "prefix": [
+        "blade",
+        "stun"
+      ],
+      "areaUpper": 14,
+      "capCount": 3,
+      "count": 3,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 3,
+      "seconds": 0.1687814,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": 0,
+          "r": -1
+        },
+        {
+          "gene": "stun",
+          "grade": 3,
+          "rotation": 2,
+          "q": 1,
+          "r": -3
+        },
+        {
+          "gene": "stunTime",
+          "grade": 4,
+          "rotation": 2,
+          "q": -2,
+          "r": 1
+        },
+        {
+          "gene": "stunTime",
+          "grade": 4,
+          "rotation": 3,
+          "q": -4,
+          "r": 0
+        },
+        {
+          "gene": "stunTime",
+          "grade": 4,
+          "rotation": 5,
+          "q": 3,
+          "r": -2
+        }
+      ]
+    },
+    "bleed": {
+      "gene": "bleed",
+      "prefix": [
+        "blade"
+      ],
+      "areaUpper": 20,
+      "capCount": 5,
+      "count": 5,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 5,
+      "seconds": 0.0645875,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": -2,
+          "r": 1
+        },
+        {
+          "gene": "bleed",
+          "grade": 3,
+          "rotation": 2,
+          "q": 3,
+          "r": -5
+        },
+        {
+          "gene": "bleed",
+          "grade": 3,
+          "rotation": 2,
+          "q": -1,
+          "r": 3
+        },
+        {
+          "gene": "bleed",
+          "grade": 3,
+          "rotation": 2,
+          "q": 1,
+          "r": 4
+        },
+        {
+          "gene": "bleed",
+          "grade": 3,
+          "rotation": 4,
+          "q": 1,
+          "r": 5
+        },
+        {
+          "gene": "bleed",
+          "grade": 3,
+          "rotation": 5,
+          "q": -5,
+          "r": 0
+        }
+      ]
+    },
+    "bleedPower": {
+      "gene": "bleedPower",
+      "prefix": [
+        "blade",
+        "bleed"
+      ],
+      "areaUpper": 14,
+      "capCount": null,
+      "count": 13,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 13,
+      "seconds": 3.8561496,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": -3,
+          "r": -1
+        },
+        {
+          "gene": "bleed",
+          "grade": 3,
+          "rotation": 4,
+          "q": 4,
+          "r": 2
+        },
+        {
+          "gene": "bleedPower",
+          "grade": 4,
+          "rotation": 0,
+          "q": 4,
+          "r": -6
+        },
+        {
+          "gene": "bleedPower",
+          "grade": 4,
+          "rotation": 0,
+          "q": -3,
+          "r": -3
+        },
+        {
+          "gene": "bleedPower",
+          "grade": 4,
+          "rotation": 0,
+          "q": 3,
+          "r": -3
+        },
+        {
+          "gene": "bleedPower",
+          "grade": 4,
+          "rotation": 0,
+          "q": -4,
+          "r": 3
+        },
+        {
+          "gene": "bleedPower",
+          "grade": 4,
+          "rotation": 1,
+          "q": 3,
+          "r": -6
+        },
+        {
+          "gene": "bleedPower",
+          "grade": 4,
+          "rotation": 1,
+          "q": 1,
+          "r": -1
+        },
+        {
+          "gene": "bleedPower",
+          "grade": 4,
+          "rotation": 2,
+          "q": 2,
+          "r": 4
+        },
+        {
+          "gene": "bleedPower",
+          "grade": 4,
+          "rotation": 3,
+          "q": 4,
+          "r": 1
+        },
+        {
+          "gene": "bleedPower",
+          "grade": 4,
+          "rotation": 3,
+          "q": -4,
+          "r": 6
+        },
+        {
+          "gene": "bleedPower",
+          "grade": 4,
+          "rotation": 4,
+          "q": -6,
+          "r": 2
+        },
+        {
+          "gene": "bleedPower",
+          "grade": 4,
+          "rotation": 5,
+          "q": -2,
+          "r": -4
+        },
+        {
+          "gene": "bleedPower",
+          "grade": 4,
+          "rotation": 5,
+          "q": -6,
+          "r": 3
+        },
+        {
+          "gene": "bleedPower",
+          "grade": 4,
+          "rotation": 5,
+          "q": -1,
+          "r": 4
+        }
+      ]
+    },
+    "area": {
+      "gene": "area",
+      "prefix": [
+        "blade"
+      ],
+      "areaUpper": 20,
+      "capCount": 3,
+      "count": 3,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 3,
+      "seconds": 0.0291427,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": -3,
+          "r": -1
+        },
+        {
+          "gene": "area",
+          "grade": 3,
+          "rotation": 0,
+          "q": 4,
+          "r": -5
+        },
+        {
+          "gene": "area",
+          "grade": 3,
+          "rotation": 1,
+          "q": 5,
+          "r": -2
+        },
+        {
+          "gene": "area",
+          "grade": 3,
+          "rotation": 1,
+          "q": 2,
+          "r": -1
+        }
+      ]
+    },
+    "areaPower": {
+      "gene": "areaPower",
+      "prefix": [
+        "blade",
+        "area"
+      ],
+      "areaUpper": 14,
+      "capCount": 1,
+      "count": 1,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 1,
+      "seconds": 0.0785985,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": 0,
+          "r": 0
+        },
+        {
+          "gene": "area",
+          "grade": 3,
+          "rotation": 1,
+          "q": -2,
+          "r": 3
+        },
+        {
+          "gene": "areaPower",
+          "grade": 4,
+          "rotation": 5,
+          "q": -1,
+          "r": 0
+        }
+      ]
+    },
+    "lifesteal": {
+      "gene": "lifesteal",
+      "prefix": [
+        "blade"
+      ],
+      "areaUpper": 15,
+      "capCount": 3,
+      "count": 3,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 3,
+      "seconds": 0.0792169,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "blade",
+          "grade": 2,
+          "rotation": 0,
+          "q": 0,
+          "r": -6
+        },
+        {
+          "gene": "lifesteal",
+          "grade": 4,
+          "rotation": 1,
+          "q": 4,
+          "r": -5
+        },
+        {
+          "gene": "lifesteal",
+          "grade": 4,
+          "rotation": 2,
+          "q": -1,
+          "r": 0
+        },
+        {
+          "gene": "lifesteal",
+          "grade": 4,
+          "rotation": 3,
+          "q": -1,
+          "r": 5
+        }
+      ]
+    },
+    "reflection": {
+      "gene": "reflection",
+      "prefix": [],
+      "areaUpper": 15,
+      "capCount": 4,
+      "count": 4,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 4,
+      "seconds": 0.069097,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "reflection",
+          "grade": 4,
+          "rotation": 0,
+          "q": -5,
+          "r": 5
+        },
+        {
+          "gene": "reflection",
+          "grade": 4,
+          "rotation": 3,
+          "q": 4,
+          "r": -3
+        },
+        {
+          "gene": "reflection",
+          "grade": 4,
+          "rotation": 3,
+          "q": -1,
+          "r": -2
+        },
+        {
+          "gene": "reflection",
+          "grade": 4,
+          "rotation": 5,
+          "q": 1,
+          "r": 4
+        }
+      ]
+    },
+    "regeneration": {
+      "gene": "regeneration",
+      "prefix": [],
+      "areaUpper": 31,
+      "capCount": null,
+      "count": 31,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 31,
+      "seconds": 0.5395433000000001,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 0,
+          "q": 0,
+          "r": -1
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 0,
+          "q": -6,
+          "r": 0
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 0,
+          "q": 1,
+          "r": 0
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 0,
+          "q": -3,
+          "r": 1
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 1,
+          "q": 3,
+          "r": -6
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 1,
+          "q": -1,
+          "r": -5
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 1,
+          "q": -2,
+          "r": -2
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 1,
+          "q": 6,
+          "r": -1
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 1,
+          "q": -4,
+          "r": 3
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 1,
+          "q": 2,
+          "r": 3
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 2,
+          "q": 2,
+          "r": -6
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 2,
+          "q": 6,
+          "r": -6
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 2,
+          "q": 4,
+          "r": -3
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 2,
+          "q": 6,
+          "r": -2
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 2,
+          "q": 4,
+          "r": -1
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 2,
+          "q": 1,
+          "r": 3
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 2,
+          "q": -2,
+          "r": 5
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 3,
+          "q": 0,
+          "r": -3
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 3,
+          "q": 6,
+          "r": -3
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 3,
+          "q": -1,
+          "r": 0
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 4,
+          "q": -4,
+          "r": -1
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 4,
+          "q": -5,
+          "r": 2
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 4,
+          "q": 2,
+          "r": 2
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 4,
+          "q": 3,
+          "r": 3
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 4,
+          "q": -6,
+          "r": 4
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 5,
+          "q": 3,
+          "r": -4
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 5,
+          "q": 0,
+          "r": -2
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 5,
+          "q": -2,
+          "r": 2
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 5,
+          "q": -3,
+          "r": 4
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 5,
+          "q": -6,
+          "r": 6
+        },
+        {
+          "gene": "regeneration",
+          "grade": 1,
+          "rotation": 5,
+          "q": -2,
+          "r": 6
+        }
+      ]
+    },
+    "capacity": {
+      "gene": "capacity",
+      "prefix": [
+        "gather"
+      ],
+      "areaUpper": 30,
+      "capCount": null,
+      "count": 30,
+      "solverStatus": "FEASIBLE",
+      "countUpper": 30,
+      "seconds": 10.050300100000001,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 3,
+          "q": 2,
+          "r": -3
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 0,
+          "q": -6,
+          "r": 5
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 0,
+          "q": -4,
+          "r": 5
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 1,
+          "q": 4,
+          "r": -4
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 1,
+          "q": -4,
+          "r": -2
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 1,
+          "q": 4,
+          "r": -2
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 1,
+          "q": 4,
+          "r": 0
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 1,
+          "q": 0,
+          "r": 1
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 1,
+          "q": -5,
+          "r": 2
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 1,
+          "q": 0,
+          "r": 3
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 2,
+          "q": 1,
+          "r": -6
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 2,
+          "q": -1,
+          "r": -4
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 2,
+          "q": 0,
+          "r": -2
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 2,
+          "q": -2,
+          "r": 0
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 3,
+          "q": 3,
+          "r": -5
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 3,
+          "q": 2,
+          "r": -1
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 3,
+          "q": -4,
+          "r": 4
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 3,
+          "q": -2,
+          "r": 4
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 3,
+          "q": 1,
+          "r": 5
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 4,
+          "q": 5,
+          "r": -3
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 4,
+          "q": -3,
+          "r": -1
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 4,
+          "q": 5,
+          "r": -1
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 4,
+          "q": 5,
+          "r": 1
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 4,
+          "q": 1,
+          "r": 2
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 5,
+          "q": 4,
+          "r": -5
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 5,
+          "q": 0,
+          "r": -4
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 5,
+          "q": -1,
+          "r": 0
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 5,
+          "q": -6,
+          "r": 1
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 5,
+          "q": -3,
+          "r": 2
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 5,
+          "q": 2,
+          "r": 3
+        },
+        {
+          "gene": "capacity",
+          "grade": 1,
+          "rotation": 5,
+          "q": -2,
+          "r": 6
+        }
+      ],
+      "refinement": {
+        "method": "upper-count feasibility with board rotation symmetry and explicit uncovered cells",
+        "status": "OPTIMAL",
+        "seconds": 0.1440307,
+        "candidate": 30
+      }
+    },
+    "harvestSpeed": {
+      "gene": "harvestSpeed",
+      "prefix": [
+        "gather"
+      ],
+      "areaUpper": 30,
+      "capCount": null,
+      "count": 29,
+      "solverStatus": "OPTIMAL",
+      "countUpper": 29,
+      "seconds": 0.5742037,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "q": 4,
+          "r": -6
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 0,
+          "q": -1,
+          "r": -2
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 0,
+          "q": -2,
+          "r": -1
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 0,
+          "q": -3,
+          "r": 0
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 0,
+          "q": 1,
+          "r": 2
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 0,
+          "q": 0,
+          "r": 3
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 0,
+          "q": -1,
+          "r": 4
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 0,
+          "q": -6,
+          "r": 5
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 0,
+          "q": -4,
+          "r": 5
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 0,
+          "q": -2,
+          "r": 5
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 1,
+          "q": 5,
+          "r": -5
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 1,
+          "q": 6,
+          "r": -5
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 1,
+          "q": 2,
+          "r": -2
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 1,
+          "q": 3,
+          "r": -2
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 1,
+          "q": -5,
+          "r": 1
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 1,
+          "q": -4,
+          "r": 1
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 1,
+          "q": -3,
+          "r": 1
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 2,
+          "q": 1,
+          "r": -6
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 2,
+          "q": 3,
+          "r": -6
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 2,
+          "q": 4,
+          "r": -5
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 2,
+          "q": -1,
+          "r": -4
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 2,
+          "q": 1,
+          "r": -4
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 2,
+          "q": 4,
+          "r": -4
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 2,
+          "q": -3,
+          "r": -2
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 2,
+          "q": 6,
+          "r": -2
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 2,
+          "q": -3,
+          "r": -1
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 2,
+          "q": 6,
+          "r": -1
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 2,
+          "q": 6,
+          "r": 0
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 2,
+          "q": 0,
+          "r": 1
+        },
+        {
+          "gene": "harvestSpeed",
+          "grade": 1,
+          "rotation": 2,
+          "q": 0,
+          "r": 2
+        }
+      ]
+    },
+    "movementGather": {
+      "gene": "movement",
+      "targetGene": "movement",
+      "prefix": [
+        "gather"
+      ],
+      "areaUpper": 30,
+      "priorUpper": 25,
+      "capCount": null,
+      "count": 25,
+      "countUpper": 25,
+      "solverStatus": "OPTIMAL",
+      "seconds": 0.18113890000000002,
+      "exact": true,
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "q": -1,
+          "r": -1
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 0,
+          "r": -5
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 5,
+          "r": -4
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": -2,
+          "r": -3
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 1,
+          "r": -3
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 3,
+          "r": -2
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 5,
+          "r": -2
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": -4,
+          "r": -1
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 1,
+          "r": 0
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 3,
+          "r": 0
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 5,
+          "r": 0
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 1,
+          "r": 2
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 3,
+          "r": 2
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 0,
+          "q": 1,
+          "r": 4
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": 2,
+          "r": -5
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": 4,
+          "r": -5
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -1,
+          "r": -2
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -5,
+          "r": 1
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -3,
+          "r": 1
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -1,
+          "r": 1
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -5,
+          "r": 3
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -3,
+          "r": 3
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -1,
+          "r": 3
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -5,
+          "r": 5
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -3,
+          "r": 5
+        },
+        {
+          "gene": "movement",
+          "grade": 1,
+          "rotation": 1,
+          "q": -1,
+          "r": 5
+        }
+      ]
+    }
+  }
+}

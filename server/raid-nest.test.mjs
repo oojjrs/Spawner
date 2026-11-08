@@ -5,7 +5,7 @@ import { runInNewContext } from "node:vm";
 import { createGame } from "./game.mjs";
 import { createCreatures } from "./creatures.mjs";
 import { createUnitIndex } from "./unit-index.mjs";
-import { applyRaidCombatScale } from "./raid-combat-scale.mjs";
+import { prepareRaidCreature } from "./raid-combat-scale.mjs";
 import { unitCombatStats, combatProfile, combatDamage } from "./combat-stats.mjs";
 
 const runtime = readFileSync(new URL("../client/runtime.js", import.meta.url), "utf8");
@@ -106,7 +106,7 @@ for (const [surface, api] of surfaces) {
     assert.equal(f.game.nest.health, 50);
   });
   if (!api.createCreatures) continue;
-  test(surface + ": actual dispatch and restore retain the new opening cohort", () => {
+  test(surface + ": actual dispatch and restore use the species baseline", () => {
     const f = fixture(api);
     f.room.creatureSystem = api.createCreatures(f.room, null);
     f.room.creatureSystem.save().raidCooldowns[0].nextRaidAt = 300;
@@ -115,16 +115,17 @@ for (const [surface, api] of surfaces) {
     f.room.creatureSystem.tick();
     const agent = f.room.creatureSystem.agents.find(unit => unit.raid);
     assert.ok(agent);
-    assert.equal(agent.raidCombatScale.version, 4);
-    assert.equal(agent.stats.health, 16);
-    assert.equal(agent.stats.attackPower, .75);
-    f.room.creatureSystem.receiveDamage(agent, 2);
+    const base=unitCombatStats("soil-mole");
+    assert.equal(agent.raidCombatScale, undefined);
+    assert.equal(agent.stats.health, base.health);
+    assert.equal(agent.stats.attackPower, base.attackPower);
+    f.room.creatureSystem.receiveDamage(agent, base.health*.25);
     const saved = JSON.parse(JSON.stringify(f.room.creatureSystem.save()));
     f.room.creatureSystem = api.createCreatures(f.room, saved);
     const restored = f.room.creatureSystem.agents.find(unit => unit.id === agent.id);
-    assert.equal(restored.health, 14);
-    assert.equal(restored.stats.health, 16);
-    assert.equal(restored.stats.attackPower, .75);
+    assert.ok(Math.abs(restored.health-base.health*.75)<1e-8);
+    assert.equal(restored.stats.health, base.health);
+    assert.equal(restored.stats.attackPower, base.attackPower);
   });
   for (const indexed of [false, true]) {
     function raid(phase) {
@@ -190,33 +191,14 @@ for (const [surface, api] of surfaces) {
   }
 }
 
-test("opening raid scales the current species, including actual unit and nest attack power", () => {
-  const base = unitCombatStats("spiny-back-beetle"), agent = { species: "spiny-back-beetle", health: base.health, stats: { ...base }, attributes: {} };
-  const target = { health: 10, stats: { health: 10, defense: 0 }, attributes: {} };
-  const fullDamage = combatDamage(agent, target, .5);
-  applyRaidCombatScale(agent, 300);
-  assert.equal(agent.health, base.health * .1);
-  assert.equal(combatProfile(agent).attackPower, base.attackPower * .025);
-  assert.ok(Math.abs(combatDamage(agent, target, .5) / fullDamage - .025) < 1e-12);
-  agent.health /= 2;
-  const saved = JSON.stringify(agent);
-  applyRaidCombatScale(agent);
-  assert.equal(JSON.stringify(agent), saved);
-});
-
-test("new early cohorts progress without changing existing version-two injuries", () => {
-  const base = unitCombatStats("spiny-back-beetle");
-  for (const [time, health, damage] of [[479.99, .1, .025], [480, .2, .05], [719.99, .2, .05], [720, .4, .2]]) {
-    const agent = { species: "spiny-back-beetle", health: base.health, stats: { ...base }, attributes: {} };
-    applyRaidCombatScale(agent, time);
-    assert.equal(agent.raidCombatScale.version, 3);
-    assert.equal(agent.stats.health, base.health * health);
-    assert.equal(agent.stats.attackPower, base.attackPower * damage);
+test("raid attacks use canonical unit damage at every species stage", () => {
+  for(const time of [300,480,720,2400]) {
+    const base=unitCombatStats("spiny-back-beetle"),agent={species:"spiny-back-beetle",health:base.health,stats:{...base},attributes:{}};
+    prepareRaidCreature(agent,time);
+    const expected=unitCombatStats(agent.species),wild={species:agent.species,health:expected.health,stats:{...expected},attributes:{}};
+    const target={health:10,stats:{health:10,defense:0},attributes:{}};
+    assert.equal(agent.health,expected.health);
+    assert.equal(combatProfile(agent).attackPower,expected.attackPower);
+    assert.equal(combatDamage(agent,target,.5),combatDamage(wild,target,.5));
   }
-  const previous = { species: "spiny-back-beetle", health: 13, stats: { ...base, health: 26, attackPower: 1.8 },
-    attributes: {}, raidCombatScale: { version: 2, stage: 0 } };
-  applyRaidCombatScale(previous);
-  assert.equal(previous.health, 13);
-  assert.equal(previous.stats.health, 26);
-  assert.equal(previous.stats.attackPower, 1.8);
 });

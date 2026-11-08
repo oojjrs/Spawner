@@ -3,10 +3,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 import { createCreatures } from "./creatures.mjs";
-import { prepareRaidCreature, applyRaidCombatScale, RAID_CREATURE_STAGES } from "./raid-combat-scale.mjs";
+import { prepareRaidCreature, RAID_CREATURE_STAGES } from "./raid-combat-scale.mjs";
 import { combatDisposition } from "./combat.mjs";
-import { dnaUnitStats } from "./dna-unit.mjs";
-import { startingWorkerDna } from "./tribe-start.mjs";
 import { unitCombatStats, combatProfile } from "./combat-stats.mjs";
 import { creatureAttackMode } from "./creature-attack-role.mjs";
 import { combatPositionRole } from "./combat-position.mjs";
@@ -14,7 +12,7 @@ import { combatPositionRole } from "./combat-position.mjs";
 const runtime = readFileSync(new URL("../client/runtime.js", import.meta.url), "utf8");
 const worker = JSON.parse(runtime.match(/const workerSource = ("[^\r\n]+");/)[1]);
 const decision = JSON.parse(worker.match(/^globalThis.SpawnerDecisionWorkerSource = ("[^\n]+");/)[1]);
-const surfaces = [["source", { createCreatures, prepareRaidCreature, applyRaidCombatScale, combatDisposition, creatureAttackMode, combatPositionRole }]];
+const surfaces = [["source", { createCreatures, prepareRaidCreature, combatDisposition, creatureAttackMode, combatPositionRole }]];
 for (const [name, source, entry] of [["game worker", worker, "client/worker.mjs"], ["decision worker", decision, "client/decision-worker.mjs"]]) {
   const context = { Map, Set, Uint8Array, setTimeout, clearTimeout, performance };
   runInNewContext(source.slice(0, source.indexOf('modules["' + entry + '"]')) +
@@ -35,45 +33,27 @@ function fixture(api) {
 
 for (const [name, api] of surfaces) {
   if (!api.createCreatures) {
-    test(name + ": combat helpers preserve the opening melee role", () => {
+    test(name + ": combat helpers use the species role for raiders", () => {
       const base = unitCombatStats("spiny-back-beetle");
       const raider = { species:"spiny-back-beetle", stats:{ ...base }, health:130 };
       prepareRaidCreature(raider, 300);
-      assert.equal(api.creatureAttackMode(raider, 2), null);
+      assert.equal(api.creatureAttackMode(raider, 2), "ranged");
       assert.equal(api.creatureAttackMode(raider, .5), "melee");
-      assert.equal(api.combatPositionRole(raider), "middle");
+      assert.equal(api.combatPositionRole(raider), "back");
       assert.equal(api.combatDisposition(raider), "aggressive");
     });
     continue;
   }
-  test(name + ": three or four starting workers defeat the first raider in every tribe without casualties", () => {
-    for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const count of [3, 4]) for (const seed of [1, 12, 24]) {
-      const { room, system } = fixture(api);
-      let randomState = seed;
-      room.combatRandom = room.damageRandom = () => ((randomState = Math.imul(1664525, randomState) + 1013904223 >>> 0) / 4294967296);
-      room.simSeconds = system.save().raidCooldowns[0].nextRaidAt; system.tick();
-      const raider = system.agents.find(agent => agent.raid), startedAt = room.simSeconds;
-      const workers = Array.from({ length:count }, (_, index) => {
-        const dna = startingWorkerDna(tribe), stats = dnaUnitStats(dna, tribe);
-        return { id:"worker:" + index, ownerId:"owner", tribe, dna, stats, health:stats.health,
-          attributes:{}, x:20, y:20, moveStartedAt:0, moveDuration:0, mode:"idle" };
-      });
-      Object.assign(raider, { x:20, y:20, renderFromX:20, renderFromY:20, moveStartedAt:0, moveDuration:0 });
-      const game = room.games.get("owner");
-      game.agents = workers;
-      game.receiveDamage = (agent, damage) => { agent.health = Math.max(0, agent.health - damage); };
-      const combat = room.combatSystem;
-      assert.equal(combat.engage(raider, workers[0], startedAt), true);
-      let seconds = 0;
-      for (; seconds < 35 && raider.health > 0 && workers.some(agent => agent.health > 0); seconds += .05) {
-        room.simSeconds = startedAt + seconds;
-        combat.update(raider, room.simSeconds);
-        for (const agent of workers) combat.update(agent, room.simSeconds);
+  test(name + ": every raid wave uses its wild species stats at every departure time", () => {
+    for (const time of [300,479.999,480,719.999,720,1080,1500,1800,2100,2400,100000]) {
+      const {room,system}=fixture(api);
+      room.simSeconds=time;
+      const {raiders}=system.spawnRaid(1);
+      for(const agent of system.agents.filter(entry=>raiders.includes(entry.id))) {
+        const expected=unitCombatStats(agent.species);
+        for(const [key,value] of Object.entries(expected)) assert.equal(JSON.stringify(agent.stats[key]),JSON.stringify(value),name+":"+time+":"+key);
+        assert.equal(agent.raidCombatScale,undefined);
       }
-      const context = tribe + "/" + count + "/" + seed;
-      assert.equal(raider.health, 0, context);
-      assert.ok(workers.every(agent => agent.health / agent.stats.health >= .35), context);
-      assert.ok(seconds <= 35, context);
     }
   });
   test(name + ": natural sorties progress through mole, beetle and boar without replenishment", () => {
@@ -97,28 +77,29 @@ for (const [name, api] of surfaces) {
     assert.equal(system.agents.filter(agent => agent.health > 0 && agent.raid).length, 0);
   });
 
-  test(name + ": opening melee role, injury and species survive later-time restore and retirement", () => {
+  test(name + ": species role and fractional injury survive later-time restore and retirement", () => {
     const { room, system } = fixture(api);
     room.simSeconds = system.save().raidCooldowns[0].nextRaidAt; system.tick();
     const raider = system.agents.find(agent => agent.raid);
-    assert.equal(raider.stats.health, 16);
-    assert.equal(raider.stats.attackPower, .75);
-    assert.equal(api.creatureAttackMode(raider, 2), null);
+    const base=unitCombatStats("soil-mole");
+    assert.equal(raider.stats.health, base.health);
+    assert.equal(raider.stats.attackPower, base.attackPower);
+    assert.equal(api.creatureAttackMode(raider, 2), "ranged");
     assert.equal(api.creatureAttackMode(raider, .5), "melee");
-    assert.equal(api.combatPositionRole(raider), "middle");
+    assert.equal(api.combatPositionRole(raider), "back");
     assert.equal(api.combatDisposition({ species:"soil-mole" }), "peaceful");
-    system.receiveDamage(raider, 4);
+    system.receiveDamage(raider, base.health*.25);
     const saved = structuredClone(system.save());
     room.simSeconds = 2400;
     const restored = api.createCreatures(room, saved), resumed = restored.agents.find(agent => agent.id === raider.id);
     assert.equal(resumed.species, "soil-mole");
-    assert.equal(resumed.health, 12);
-    assert.equal(resumed.stats.health, 16);
+    assert.ok(Math.abs(resumed.health-base.health*.75)<1e-8);
+    assert.equal(resumed.stats.health, base.health);
     const retired = structuredClone(restored.save());
     delete retired.agents.find(agent => agent.id === raider.id).raid;
     const again = api.createCreatures(room, retired).agents.find(agent => agent.id === raider.id);
-    assert.equal(again.health, 12);
-    assert.equal(again.stats.attackPower, .75);
+    assert.ok(Math.abs(again.health-base.health*.75)<1e-8);
+    assert.equal(again.stats.attackPower, base.attackPower);
     assert.equal(again.species, "soil-mole");
   });
 
@@ -139,31 +120,16 @@ for (const [name, api] of surfaces) {
   });
 }
 
-test("new cohort boundaries preserve injury and old version-one through three beetles", () => {
-  for (const [index, stage] of RAID_CREATURE_STAGES.entries()) {
-    const base = unitCombatStats("spiny-back-beetle");
-    const agent = { species:"spiny-back-beetle", stats:{ ...base }, health:65, attributes:{} };
-    prepareRaidCreature(agent, stage.at);
-    assert.equal(agent.raidCombatScale.stage, index);
-    assert.equal(agent.species, stage.species);
-    assert.equal(agent.health, stage.health / 2);
-    assert.equal(combatProfile(agent).attackPower, stage.power);
-    assert.equal(agent.stats.combat.power, stage.power);
-    const saved = structuredClone(agent);
-    for (let repeat = 0; repeat < 3; repeat++) applyRaidCombatScale(agent);
-    assert.deepEqual(agent, saved);
-    agent.health = 0; applyRaidCombatScale(agent); assert.equal(agent.health, 0);
-    if (index > 0) {
-      prepareRaidCreature(agent, stage.at - .001);
-      assert.equal(agent.raidCombatScale.stage, index - 1);
-    }
-  }
-  for (const [version, maximum, power] of [[1,26,1.8], [2,26,1.8], [3,13,.45]]) {
-    const agent = { species:"spiny-back-beetle", stats:{ ...unitCombatStats("spiny-back-beetle"), health:maximum },
-      health:maximum / 2, attributes:{}, raidCombatScale:{ version, stage:0 } };
-    applyRaidCombatScale(agent);
-    assert.equal(agent.species, "spiny-back-beetle");
-    assert.equal(agent.health, maximum / 2);
-    assert.ok(Math.abs(agent.stats.attackPower - power) < 1e-9);
+test("species boundaries preserve injury without creating a difficulty marker", () => {
+  for(const [index,stage] of RAID_CREATURE_STAGES.entries()) {
+    const base=unitCombatStats("spiny-back-beetle"),agent={species:"spiny-back-beetle",stats:{...base},health:base.health/2,attributes:{}};
+    assert.equal(prepareRaidCreature(agent,stage.at),index);
+    const expected=unitCombatStats(stage.species);
+    assert.equal(agent.species,stage.species);
+    assert.equal(agent.health,expected.health/2);
+    assert.equal(combatProfile(agent).attackPower,expected.attackPower);
+    assert.deepEqual(agent.stats.combat,expected.combat);
+    assert.equal(agent.raidCombatScale,undefined);
+    if(index>0) assert.equal(prepareRaidCreature(agent,stage.at-.001),index-1);
   }
 });

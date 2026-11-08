@@ -24,7 +24,7 @@ test('capacity and gathering speed improve throughput while preserving one resou
  assert.equal(M.stats(hauler).harvestTime,3);
  const advanced=pieces(['gather','capacity','capacity','capacity','harvestSpeed']);
  assert.equal(M.stats(advanced).capacity,4);assert.equal(M.stats(advanced).harvest,1);
- assert.equal(M.stats(advanced).harvestTime,3/1.1);
+ assert.equal(M.stats(advanced).harvestTime,3/1.5);
  for(const tribe of ['bean','spore','pebble','spring']) {
   assert.equal(nestUpgradeCost(2,tribe),tribe==='pebble'?75:100);
   assert.equal(nestUpgradeCost(3,tribe),tribe==='pebble'?225:300);

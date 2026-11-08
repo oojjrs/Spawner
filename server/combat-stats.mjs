@@ -52,11 +52,11 @@ function neutralCombatStats(key) {
   const combat = Object.freeze({ ...stats, melee: role.melee, ranged: role.ranged,
     meleePower: role.melee ? stats.power : 0, rangedPower: role.ranged ? stats.power : 0,
     meleeSpeed: role.melee ? stats.speed : 0, rangedSpeed: role.ranged ? stats.speed : 0,
-    hits: 1 + stats.combo, recovery: 0, blockPower: 50 });
+    hits: 1 + stats.combo, recovery: 0 });
   return { health: stats.health, attack: stats.power, attackPower: stats.power, defense: stats.armor,
     attackSpeed: stats.speed, speed: stats.movement, vision: stats.vision, capacity: stats.capacity,
     harvestSpeed: stats.harvestSpeed, criticalChance: stats.critical / 100, criticalMultiplier: stats.criticalPower / 100,
-    evasion: stats.evasion / 100, parry: stats.parry / 100, block: stats.block / 100, blockReduction: .5, combat };
+    evasion: stats.evasion / 100, parry: stats.parry / 100, block: stats.block / 100, blockReduction: stats.blockPower / 100, combat };
 }
 
 export function combatAbilityStats(agent) {
@@ -91,20 +91,18 @@ export function combatProfile(agent) {
   const base = unitCombatStats(agent.species || agent.tribe);
   if (agent.species && !agent.stats?.dna && !agent.stats?.combat && base.combat) agent = { ...agent, stats: { ...base, ...agent.stats } };
   const dna = agent.stats?.dna, abilities = combatAbilityStats(agent);
-  const chance = dna ? dna.critical / 100 : Number.isFinite(agent.stats?.criticalChance) ? agent.stats.criticalChance : base.criticalChance;
-  const multiplier = dna ? dna.criticalPower / 100 : Number.isFinite(agent.stats?.criticalMultiplier) ? agent.stats.criticalMultiplier : base.criticalMultiplier;
-  const criticalChance = dna ? (Number.isFinite(chance) ? chance : 0) : Math.max(0, Math.min(.75, chance));
-  const criticalMultiplier = dna ? (Number.isFinite(multiplier) ? multiplier : 1.5) : Math.max(1, Math.min(4, multiplier));
+  const chance = abilities ? abilities.critical / 100 : Number.isFinite(agent.stats?.criticalChance) ? agent.stats.criticalChance : base.criticalChance;
+  const multiplier = abilities ? abilities.criticalPower / 100 : Number.isFinite(agent.stats?.criticalMultiplier) ? agent.stats.criticalMultiplier : base.criticalMultiplier;
+  const criticalChance = abilities ? (Number.isFinite(chance) ? chance : 0) : Math.max(0, Math.min(.75, chance));
+  const criticalMultiplier = abilities ? (Number.isFinite(multiplier) ? multiplier : 1.5) : Math.max(1, Math.min(4, multiplier));
   if (abilities) {
     const selected = dnaAttackStats(abilities, agent.attack?.attackMode || (abilities.melee || dnaDefensiveMelee(dna) ? "melee" : "ranged"));
-    if (!dna && Number.isFinite(agent.stats.attackPower)) selected.power = agent.stats.attackPower;
-    if (!dna && Number.isFinite(agent.stats.attackSpeed)) selected.speed = agent.stats.attackSpeed;
     const attackInterval = selected.speed > 0 ? 1 / selected.speed : Infinity;
-    return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: dna ? abilities.armor : agent.stats.defense,
+    return { primary: selected.power > 0 ? "blade" : null, attackPower: selected.power, defense: abilities.armor,
       armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: abilities.focus,
-      evasion: dna ? abilities.evasion / 100 : agent.stats.evasion,
-      parry: dna ? abilities.parry / 100 : agent.stats.parry, block: dna ? abilities.block / 100 : agent.stats.block,
-      recovery: abilities.recovery || 0, blockReduction: dna && Number.isFinite(abilities.blockPower) ? Math.max(0, Math.min(.9, abilities.blockPower / 100)) : .5, criticalChance, criticalMultiplier };
+      evasion: abilities.evasion / 100,
+      parry: abilities.parry / 100, block: abilities.block / 100,
+      recovery: abilities.recovery || 0, blockReduction: Number.isFinite(abilities.blockPower) ? Math.max(0, Math.min(.9, abilities.blockPower / 100)) : .5, criticalChance, criticalMultiplier };
   }
   const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;
   const primary = combatPrimary(agent);
@@ -151,6 +149,7 @@ export function migrateCombatStats(agent) {
     const ratio = Math.max(0, Math.min(1, agent.health / previous));
     agent.stats = { ...agent.stats, ...profile };
     agent.health = profile.health * ratio;
+    if (agent.attack?.targetKind === "nest" && !agent.attack.hit) agent.attack.damage = profile.attackPower;
     return;
   }
   const combatStrength = profile.combatStrength + (agent.species ? 0 : attributeCombatStrengthBonus(agent.attributes));

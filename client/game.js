@@ -762,6 +762,7 @@
       evolutionPoints: 0,
       explored: new Set(), visible: new Set(), markers: [],
       discoveries: [], discoveryReadCount: 0,
+      tribeExtinctions: [],
       nestLevel: 1,
       templates: [],
       nextTemplateId: 1,
@@ -6040,26 +6041,38 @@
     function showDiscoveryToast(entry) {
       const toast = document.createElement("div");
       toast.className = "discovery-toast";
-      const open = document.createElement("button");
-      open.type = "button";
-      open.className = "discovery-toast-open";
+      const extinction = entry.kind === "extinction";
       const combat = entry.kind === "combat";
-      open.setAttribute("aria-label", combat ? "전투 위치로 이동" : entry.name + " · 발견 위치로 이동");
-      const label = document.createElement("small");
-      label.textContent = combat ? "전투" : "발견";
-      open.append(createDiscoveryImage(entry), label);
-      open.addEventListener("click", () => {
-        dismissDiscoveryToast(toast);
-        focusDiscovery(entry);
-      });
+      if (extinction) {
+        toast.classList.add("tribe-extinction-toast");
+        toast.setAttribute("role", "status");
+        const label = document.createElement("span");
+        const tribe = Spawner.PLAYER_TRIBES.find(tribe => tribe.key === entry.tribe);
+        label.textContent = tribe ? `${tribe.name} 종족이 멸망했습니다.` : "아직 만나지 못한 종족이 멸망했습니다.";
+        toast.append(label);
+      } else {
+        const open = document.createElement("button");
+        open.type = "button";
+        open.className = "discovery-toast-open";
+        open.setAttribute("aria-label", combat ? "전투 위치로 이동" : entry.name + " · 발견 위치로 이동");
+        const label = document.createElement("small");
+        label.textContent = combat ? "전투" : "발견";
+        open.append(createDiscoveryImage(entry), label);
+        open.addEventListener("click", () => {
+          dismissDiscoveryToast(toast);
+          focusDiscovery(entry);
+        });
+        toast.append(open);
+      }
       const close = document.createElement("button");
       close.type = "button";
       close.className = "discovery-toast-close";
-      close.setAttribute("aria-label", combat ? "전투 알림 닫기" : entry.name + " 발견 알림 닫기");
+      close.setAttribute("aria-label", extinction ? "멸망 알림 닫기" : combat ? "전투 알림 닫기" : entry.name + " 발견 알림 닫기");
       close.textContent = "×";
       close.addEventListener("click", () => dismissDiscoveryToast(toast));
-      toast.append(open, close);
-      discoveryToasts.append(toast);
+      toast.append(close);
+      if (extinction) discoveryToasts.prepend(toast);
+      else discoveryToasts.append(toast);
       discoveryToastTimers.set(toast, setTimeout(() => dismissDiscoveryToast(toast), 120000));
       audio.play("discovery", 1);
     }
@@ -6069,7 +6082,7 @@
       showDiscoveryToast(discoveryToastQueue.shift());
     }
 
-    function updateNotifications(previousKeys, firstSnapshot) {
+    function updateNotifications(previousKeys, firstSnapshot, previousExtinctionIds) {
       if (firstSnapshot) clearDiscoveryToasts();
       const added = firstSnapshot ? [] : state.discoveries.filter(entry => !previousKeys.has(entry.key));
       for (const agent of [...state.agents, ...state.rivals]) {
@@ -6080,6 +6093,9 @@
           x: combat.x, y: combat.y, agent });
       }
       discoveryToastQueue.push(...added);
+      if (!firstSnapshot) for (const entry of state.tribeExtinctions || []) {
+        if (!previousExtinctionIds.has(entry.id)) showDiscoveryToast({ ...entry, kind: "extinction" });
+      }
       showNextDiscoveryToast();
     }
 
@@ -9594,6 +9610,7 @@
       }
       const selection = state.selection;
       const previousDiscoveryKeys = new Set(state.discoveries.map(entry => entry.key));
+      const previousExtinctionIds = new Set((state.tribeExtinctions || []).map(entry => entry.id));
       const firstSnapshot = connection.revision < 0 || connection.synchronizing || colonyChanged;
       const endingStarted = !firstSnapshot && !state.ending && !!packet.state.ending;
       const knownColonies = new Set(colonyEntries.map(colony => colony.id));
@@ -9694,7 +9711,7 @@
         state.lastFrame = performance.now();
       }
       audio.setActive(!document.hidden);
-      updateNotifications(previousDiscoveryKeys, firstSnapshot);
+      updateNotifications(previousDiscoveryKeys, firstSnapshot, previousExtinctionIds);
       renderColonyList();
       updateColonyPanel();
       updateEnding(endingStarted);

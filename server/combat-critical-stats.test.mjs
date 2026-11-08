@@ -30,13 +30,25 @@ test("DNA critical percentages and custom multipliers retain their existing valu
   }
 });
 
-test("native critical overrides are bounded while missing values fall back to the species", () => {
-  for (const [chance, multiplier, expectedChance, expectedMultiplier] of [[0, 1, 0, 1], [.3, 2.5, .3, 2.5], [-2, -3, 0, 1], [8, 9, .75, 4], [NaN, Infinity, NEUTRAL_UNIT_STATS["white-paw"].critical / 100, NEUTRAL_UNIT_STATS["white-paw"].criticalPower / 100]]) {
-    const profile = combatProfile({ species: "white-paw", stats: { criticalChance: chance, criticalMultiplier: multiplier } });
-    assert.equal(profile.criticalChance, expectedChance); assert.equal(profile.criticalMultiplier, expectedMultiplier);
+test("neutral critical chances and multipliers come from one ability table", () => {
+  const species="white-paw",base=unitCombatStats(species);
+  for(const [criticalChance,criticalMultiplier] of [[0,1],[.3,2.5],[-2,-3],[8,9],[NaN,Infinity]]) {
+    const profile=combatProfile({species,stats:{criticalChance,criticalMultiplier}});
+    assert.equal(profile.criticalChance,base.combat.critical/100);
+    assert.equal(profile.criticalMultiplier,base.combat.criticalPower/100);
   }
-  const missing = combatProfile({ species: "white-paw" });
-  assert.equal(missing.criticalChance, NEUTRAL_UNIT_STATS["white-paw"].critical / 100); assert.equal(missing.criticalMultiplier, NEUTRAL_UNIT_STATS["white-paw"].criticalPower / 100);
+  const abilities={...base.combat,critical:90,criticalPower:500};
+  const actual=combatProfile({species,stats:{...base,combat:abilities,criticalChance:.01,criticalMultiplier:1.1}});
+  assert.equal(actual.criticalChance,.9);assert.equal(actual.criticalMultiplier,5);
+  const missing=combatProfile({species});
+  assert.equal(missing.criticalChance,base.combat.critical/100);assert.equal(missing.criticalMultiplier,base.combat.criticalPower/100);
+});
+
+test("legacy bodies without ability tables retain bounded critical overrides", () => {
+  for(const [chance,multiplier,expectedChance,expectedMultiplier] of [[0,1,0,1],[.3,2.5,.3,2.5],[-2,-3,0,1],[8,9,.75,4]]) {
+    const profile=combatProfile({tribe:"bean",stats:{criticalChance:chance,criticalMultiplier:multiplier}});
+    assert.equal(profile.criticalChance,expectedChance);assert.equal(profile.criticalMultiplier,expectedMultiplier);
+  }
 });
 
 test("neutral save migration reapplies species stats while preserving health ratio and timing", () => {
@@ -48,4 +60,15 @@ test("neutral save migration reapplies species stats while preserving health rat
   saved.stats.criticalChance = 0; saved.stats.criticalMultiplier = 2.1;
   migrateCombatStats(saved);
   assert.deepEqual(saved, before);
+});
+
+
+test("neutral restore refreshes pending nest damage without rewriting resolved hits or attack timing", () => {
+  for(const [kind,hit] of [["nest",false],["nest",true],["unit",false]]) {
+    const agent={species:"soil-mole",health:8,stats:{health:16},attack:{targetKind:kind,damage:.75,hit,startedAt:10,hitAt:11,endsAt:12},attackReadyAt:14};
+    migrateCombatStats(agent);
+    assert.equal(agent.attack.damage,kind==="nest"&&!hit?unitCombatStats("soil-mole").attackPower:.75);
+    assert.deepEqual([agent.attack.startedAt,agent.attack.hitAt,agent.attack.endsAt,agent.attackReadyAt],[10,11,12,14]);
+    assert.equal(agent.health,unitCombatStats("soil-mole").health/2);
+  }
 });

@@ -1,4 +1,4 @@
-import { applyRaidCombatScale, prepareRaidCreature } from "./raid-combat-scale.mjs";
+import { prepareRaidCreature } from "./raid-combat-scale.mjs";
 import { worldSize } from "./world-size.mjs";
 import { beginCreatureSpawn, creatureSpawning } from "./creature-spawn.mjs";
 import { createEncounters } from "./encounters.mjs";
@@ -222,10 +222,8 @@ export function createCreatures(environment, saved) {
   }
 
   for (const agent of state.agents) {
-    // Keep each raid cohort at its departure difficulty, including saved stragglers.
-    if (!agent.raidCombatScale && agent.raid && Number.isFinite(agent.raid.departedAt))
-      applyRaidCombatScale(agent, agent.raid.departedAt);
-    else if (!applyRaidCombatScale(agent)) migrateCombatStats(agent);
+    migrateCombatStats(agent);
+    delete agent.raidCombatScale;
     applyCreatureMovement(agent);
   }
 

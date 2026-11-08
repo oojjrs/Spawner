@@ -1,7 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { unitStats } from "./attributes.mjs";
-import { applyRaidCombatScale } from "./raid-combat-scale.mjs";
 import { createGame } from "./game.mjs";
 import { createCreatures } from "./creatures.mjs";
 import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
@@ -83,7 +82,6 @@ test("습격한 딱정벌레는 인접한 둥지를 공격 프레임에 한 번 
   Object.assign(beetle, { x: 45, y: 42, renderFromX: 45, renderFromY: 42, mode: "idle",
     moveStartedAt: 180, moveDuration: 0, nextActionAt: 180,
     raid: { colonyId: 1, phase: "active", departedAt: 180, activeUntil: 240 } });
-  applyRaidCombatScale(beetle, beetle.raid.departedAt);
   const remaining = game.nest.health - beetle.stats.attack;
   room.simSeconds = 180;
   room.creatureSystem.tick();

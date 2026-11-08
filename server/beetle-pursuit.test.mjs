@@ -1,6 +1,5 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { applyRaidCombatScale } from "./raid-combat-scale.mjs";
 import { NEUTRAL_UNIT_STATS } from "./neutral-unit-stats.mjs";
 import { createCreatures } from "./creatures.mjs";
 import { createUnitIndex } from "./unit-index.mjs";
@@ -17,7 +16,6 @@ function fixture(phase, health, indexed) {
   Object.assign(agent, { x: 10, y: 12, renderFromX: 10, renderFromY: 12, homeX: 25, homeY: 12,
     moveStartedAt: 720, moveDuration: 0, mode: "idle", nextActionAt: 738,
     raid: { colonyId: 1, phase, departedAt: 700, activeUntil: phase === "active" ? 750 : null } });
-  applyRaidCombatScale(agent, agent.raid.departedAt);
   room.creatureSystem.receiveDamage(agent, agent.stats.health * (1 - health / 100));
   agent.stats.vision = 8; agent.stats.combat = { ...agent.stats.combat, ranged: false };
   const target = { id: "unit", ownerId: "owner", x: 6, y: 12, renderFromX: 6, renderFromY: 12,

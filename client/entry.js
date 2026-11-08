@@ -5,6 +5,7 @@
   const welcome = document.getElementById("welcome");
   const tribeSelection = document.getElementById("tribe-selection");
   const scripts = [...document.querySelectorAll("script[data-src]")].map(script => script.dataset.src);
+  const releaseCacheKey = document.currentScript?.src ? new URL(document.currentScript.src).searchParams.get("v") : null;
   let cursor = 0;
   const loaded = new Set();
   let loading = false;
@@ -32,7 +33,9 @@
   function loadScript(source) {
     return new Promise((resolve, reject) => {
       const script = document.createElement("script");
-      script.src = source;
+      const url = new URL(source, document.baseURI);
+      if (releaseCacheKey) url.searchParams.set("v", releaseCacheKey);
+      script.src = url.href;
       script.async = false;
       script.onload = () => resolve();
       script.onerror = () => { script.remove(); reject(new Error(source)); };

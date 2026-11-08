@@ -1,21 +1,74 @@
-export const NEUTRAL_UNIT_STATS = Object.freeze(Object.fromEntries([
-  ["flower-tail-bird",{"health":30,"power":9.6,"armor":0,"speed":1,"movement":0.95,"vision":7.53,"combo":0.15,"comboPower":45,"critical":3,"criticalPower":150,"accuracy":7,"penetration":0,"comboSpeed":0.34,"focus":0.34,"evasion":12,"parry":4,"block":0,"blockPower":50,"counter":0,"counterPower":105,"tenacity":0,"reduction":0,"stun":0,"stunTime":0.2,"bleed":0,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":0.9,"capacity":1,"harvestSpeed":1.9}],
-  ["dew-rabbit",{"health":44,"power":9.3,"armor":1,"speed":0.88,"movement":1.01,"vision":6.52,"combo":0.1,"comboPower":45,"critical":3,"criticalPower":150,"accuracy":4,"penetration":0,"comboSpeed":0.4,"focus":0.36,"evasion":11,"parry":4,"block":0,"blockPower":50,"counter":0,"counterPower":102.5,"tenacity":2,"reduction":0,"stun":0,"stunTime":0.22,"bleed":0,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":1,"capacity":2,"harvestSpeed":1.84}],
-  ["soil-mole",{"health":100,"power":16,"armor":10,"speed":0.68,"movement":0.65,"vision":2,"combo":0,"comboPower":50,"critical":5,"criticalPower":155,"accuracy":5,"penetration":3,"comboSpeed":0.5,"focus":0.38,"evasion":4,"parry":3,"block":5,"blockPower":50,"counter":1,"counterPower":117.5,"tenacity":18,"reduction":2,"stun":2,"stunTime":0.36,"bleed":2,"bleedPower":1,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":0.8,"capacity":9,"harvestSpeed":1.81}],
-  ["bundle-snail",{"health":135,"power":10.5,"armor":30,"speed":0.52,"movement":0.55,"vision":3.29,"combo":0,"comboPower":40,"critical":0,"criticalPower":150,"accuracy":0,"penetration":0,"comboSpeed":0.58,"focus":0.54,"evasion":1,"parry":0,"block":12,"blockPower":50,"counter":0,"counterPower":115,"tenacity":22,"reduction":5,"stun":0,"stunTime":0.26,"bleed":0,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":1,"regeneration":1.4,"capacity":17,"harvestSpeed":1.31}],
-  ["cotton-sheep",{"health":120,"power":9,"armor":5,"speed":0.6,"movement":0.69,"vision":5.69,"combo":0,"comboPower":40,"critical":0,"criticalPower":150,"accuracy":1,"penetration":0,"comboSpeed":0.56,"focus":0.46,"evasion":5,"parry":0,"block":2,"blockPower":50,"counter":0,"counterPower":100,"tenacity":16,"reduction":4,"stun":0,"stunTime":0.24,"bleed":0,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":1.2,"capacity":12,"harvestSpeed":1.74}],
-  ["rolling-acorn",{"health":55,"power":10,"armor":20,"speed":0.76,"movement":0.81,"vision":2.79,"combo":0,"comboPower":45,"critical":2,"criticalPower":155,"accuracy":0,"penetration":1,"comboSpeed":0.46,"focus":0.56,"evasion":8,"parry":2,"block":8,"blockPower":50,"counter":0,"counterPower":112.5,"tenacity":6,"reduction":0,"stun":1,"stunTime":0.28,"bleed":0,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":0.1,"capacity":6,"harvestSpeed":1.67}],
-  ["bubble-toad",{"health":125,"power":17,"armor":8,"speed":0.8,"movement":0.77,"vision":5.1,"combo":0,"comboPower":45,"critical":4,"criticalPower":155,"accuracy":3,"penetration":2,"comboSpeed":0.44,"focus":0.44,"evasion":9,"parry":2,"block":2,"blockPower":50,"counter":2,"counterPower":120,"tenacity":14,"reduction":1,"stun":6,"stunTime":0.56,"bleed":0,"bleedPower":0,"area":1,"areaPower":25,"lifesteal":0,"reflection":0,"regeneration":1.1,"capacity":8,"harvestSpeed":1.55}],
-  ["snare-vine",{"health":155,"power":24,"armor":18,"speed":0.56,"movement":0.3,"vision":6.25,"combo":0,"comboPower":50,"critical":7,"criticalPower":165,"accuracy":6,"penetration":5,"comboSpeed":0.54,"focus":0.32,"evasion":2,"parry":0,"block":4,"blockPower":50,"counter":3,"counterPower":127.5,"tenacity":20,"reduction":1,"stun":0,"stunTime":0.54,"bleed":4,"bleedPower":2,"area":1,"areaPower":20,"lifesteal":5,"reflection":3,"regeneration":1.8,"capacity":13,"harvestSpeed":1.36}],
-  ["spiny-back-beetle",{"health":130,"power":18,"armor":25,"speed":0.72,"movement":0.73,"vision":3.71,"combo":0,"comboPower":50,"critical":5,"criticalPower":160,"accuracy":4,"penetration":6,"comboSpeed":0.48,"focus":0.4,"evasion":6,"parry":8,"block":10,"blockPower":50,"counter":12,"counterPower":137.5,"tenacity":26,"reduction":3,"stun":1,"stunTime":0.34,"bleed":3,"bleedPower":1,"area":0,"areaPower":0,"lifesteal":0,"reflection":8,"regeneration":0.2,"capacity":11,"harvestSpeed":1.51}],
-  ["soil-boar",{"health":180,"power":31,"armor":22,"speed":0.64,"movement":0.85,"vision":4.45,"combo":0,"comboPower":61,"critical":10,"criticalPower":170,"accuracy":3,"penetration":4,"comboSpeed":0.52,"focus":0.42,"evasion":3,"parry":3,"block":6,"blockPower":50,"counter":4,"counterPower":135,"tenacity":28,"reduction":3,"stun":8,"stunTime":0.4,"bleed":2,"bleedPower":2,"area":1,"areaPower":30,"lifesteal":0,"reflection":0,"regeneration":0.5,"capacity":14,"harvestSpeed":1.42}],
-  ["vine-turtle",{"health":295,"power":19,"armor":38,"speed":0.48,"movement":0.6,"vision":4.09,"combo":0,"comboPower":40,"critical":1,"criticalPower":160,"accuracy":2,"penetration":3,"comboSpeed":0.6,"focus":0.48,"evasion":1,"parry":1,"block":24,"blockPower":50,"counter":6,"counterPower":130,"tenacity":30,"reduction":8,"stun":4,"stunTime":0.42,"bleed":0,"bleedPower":1,"area":1,"areaPower":25,"lifesteal":0,"reflection":6,"regeneration":1.5,"capacity":16,"harvestSpeed":1.16}],
-  ["shadow-weasel",{"health":88,"power":41,"armor":3,"speed":1.12,"movement":1.07,"vision":6.78,"combo":1,"comboPower":63,"critical":14,"criticalPower":165,"accuracy":9,"penetration":10,"comboSpeed":0.3,"focus":0.24,"evasion":13,"parry":9,"block":0,"blockPower":50,"counter":10,"counterPower":125,"tenacity":8,"reduction":0,"stun":0,"stunTime":0.32,"bleed":8,"bleedPower":3,"area":0,"areaPower":0,"lifesteal":3,"reflection":0,"regeneration":0.7,"capacity":7,"harvestSpeed":1.71}],
-  ["talon-owl",{"health":85,"power":59,"armor":2,"speed":0.96,"movement":0.92,"vision":8,"combo":0.9,"comboPower":55,"critical":12,"criticalPower":170,"accuracy":14,"penetration":8,"comboSpeed":0.36,"focus":0.3,"evasion":10,"parry":7,"block":0,"blockPower":50,"counter":5,"counterPower":122.5,"tenacity":4,"reduction":0,"stun":0,"stunTime":0.3,"bleed":6,"bleedPower":2,"area":0,"areaPower":0,"lifesteal":2,"reflection":0,"regeneration":0.4,"capacity":3,"harvestSpeed":1.59}],
-  ["spring-keeper",{"health":177,"power":30.4,"armor":14,"speed":1.07,"movement":0.98,"vision":7.76,"combo":0.95,"comboPower":60,"critical":6,"criticalPower":150,"accuracy":11.5,"penetration":2,"comboSpeed":0.32,"focus":0.21,"evasion":17.5,"parry":6,"block":1,"blockPower":50,"counter":1,"counterPower":110,"tenacity":10,"reduction":0,"stun":0,"stunTime":0.38,"bleed":1,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":1.3,"capacity":4,"harvestSpeed":1.87}],
-  ["lantern-keeper",{"health":178,"power":29.9,"armor":15,"speed":0.92,"movement":1.04,"vision":7.03,"combo":0.65,"comboPower":54,"critical":4,"criticalPower":150,"accuracy":8,"penetration":0,"comboSpeed":0.38,"focus":0.26,"evasion":15.5,"parry":5,"block":1,"blockPower":50,"counter":0,"counterPower":107.5,"tenacity":12,"reduction":0,"stun":0,"stunTime":0.44,"bleed":0,"bleedPower":0,"area":0,"areaPower":0,"lifesteal":0,"reflection":0,"regeneration":1.6,"capacity":5,"harvestSpeed":1.77}],
-  ["old-garden-snail",{"health":420,"power":30.5,"armor":48,"speed":0.44,"movement":0.42,"vision":4.78,"combo":0,"comboPower":40,"critical":1,"criticalPower":160,"accuracy":1,"penetration":1,"comboSpeed":0.62,"focus":0.52,"evasion":0,"parry":0,"block":16,"blockPower":50,"counter":0,"counterPower":132.5,"tenacity":32,"reduction":10,"stun":2,"stunTime":0.46,"bleed":0,"bleedPower":0,"area":1,"areaPower":0,"lifesteal":0,"reflection":2,"regeneration":1.7,"capacity":19,"harvestSpeed":1.24}],
-  ["walking-forest",{"health":850,"power":68,"armor":55,"speed":0.4,"movement":0.49,"vision":5.98,"combo":0,"comboPower":40,"critical":2,"criticalPower":175,"accuracy":2,"penetration":4,"comboSpeed":0.64,"focus":0.5,"evasion":0,"parry":1,"block":20,"blockPower":50,"counter":2,"counterPower":142.5,"tenacity":36,"reduction":12,"stun":10,"stunTime":0.52,"bleed":1,"bleedPower":1,"area":2,"areaPower":35,"lifesteal":0,"reflection":4,"regeneration":1.9,"capacity":18,"harvestSpeed":1}],
-  ["white-paw",{"health":255,"power":75,"armor":16,"speed":1.08,"movement":1.1,"vision":7.28,"combo":1,"comboPower":65,"critical":16,"criticalPower":185,"accuracy":12,"penetration":12,"comboSpeed":0.28,"focus":0.2,"evasion":18,"parry":12,"block":3,"blockPower":50,"counter":8,"counterPower":140,"tenacity":24,"reduction":2,"stun":3,"stunTime":0.48,"bleed":10,"bleedPower":4,"area":0,"areaPower":20,"lifesteal":4,"reflection":0,"regeneration":0.6,"capacity":10,"harvestSpeed":1.63}],
-  ["spiny-back-leader",{"health":310,"power":60,"armor":40,"speed":0.84,"movement":0.88,"vision":5.4,"combo":0.05,"comboPower":62,"critical":8,"criticalPower":180,"accuracy":5,"penetration":7,"comboSpeed":0.42,"focus":0.28,"evasion":7,"parry":10,"block":14,"blockPower":50,"counter":15,"counterPower":145,"tenacity":34,"reduction":6,"stun":5,"stunTime":0.5,"bleed":5,"bleedPower":3,"area":1,"areaPower":30,"lifesteal":0,"reflection":10,"regeneration":0.3,"capacity":15,"harvestSpeed":1.47}]
-].map(([key, stats]) => [key, Object.freeze(stats)])));
+import { NEUTRAL_STAT_LIMITS } from "./neutral-stat-limits.mjs";
+
+export const NEUTRAL_STAT_FIELDS = Object.freeze(["health","power","armor","speed","movement","vision","combo","comboPower","critical","criticalPower","accuracy","penetration","comboSpeed","focus","evasion","parry","block","blockPower","counter","counterPower","tenacity","reduction","stun","stunTime","bleed","bleedPower","area","areaPower","lifesteal","reflection","regeneration","capacity","harvestSpeed"]);
+
+export const NEUTRAL_UNIT_TIERS = Object.freeze(Object.fromEntries([
+  ["flower-tail-bird",[1,1,3,1,16,14,17,14,8,8,3,14,5,16,12,15,12,1,1,7,3,1,1,1,1,5,6,2,2,4,4,9,1,19]],
+  ["dew-rabbit",[2,2,2,2,13,16,13,13,7,7,2,10,2,13,11,14,11,2,2,2,2,2,2,2,2,2,2,1,1,3,1,10,2,17]],
+  ["soil-mole",[6,6,6,7,8,6,1,8,10,11,8,12,11,8,10,7,10,11,11,8,8,10,10,12,9,12,11,8,8,12,7,8,9,16]],
+  ["bundle-snail",[5,10,5,15,4,4,3,4,4,2,6,2,3,4,2,3,2,15,16,3,7,12,15,6,4,3,3,9,6,7,13,14,17,4]],
+  ["cotton-sheep",[4,7,1,5,6,7,10,6,5,1,1,3,1,5,6,8,4,7,7,1,1,9,14,5,3,1,1,12,5,2,12,12,12,14]],
+  ["rolling-acorn",[3,3,4,12,10,10,2,10,6,6,7,1,7,10,1,11,8,13,12,6,6,4,4,10,5,6,7,7,7,1,11,1,6,12]],
+  ["bubble-toad",[7,8,7,6,11,9,8,11,9,10,9,7,8,11,7,12,7,8,8,11,9,8,8,17,19,7,8,18,16,15,8,11,8,9]],
+  ["snare-vine",[9,11,10,11,5,1,12,5,11,14,13,13,14,6,13,5,1,10,10,12,12,11,9,9,18,15,14,17,13,19,15,18,13,5]],
+  ["spiny-back-beetle",[8,9,8,14,9,8,4,9,12,12,12,9,15,9,9,9,16,14,14,18,16,14,12,11,8,14,13,11,11,11,18,2,11,8]],
+  ["soil-boar",[10,14,14,13,7,11,6,7,16,16,16,8,13,7,8,6,9,12,13,13,15,15,13,18,11,13,15,13,17,13,10,5,14,6]],
+  ["vine-turtle",[13,16,9,16,3,5,5,3,3,3,10,6,10,3,5,4,6,19,17,15,13,16,17,15,12,9,10,16,15,8,17,15,16,2]],
+  ["shadow-weasel",[11,5,15,4,19,18,14,18,18,18,14,16,18,18,17,16,17,4,4,17,11,5,5,8,7,18,17,5,10,17,2,7,7,13]],
+  ["talon-owl",[12,4,16,3,15,13,19,16,14,17,15,19,17,15,14,13,15,3,3,14,10,3,3,7,6,17,16,6,9,16,3,4,3,10]],
+  ["spring-keeper",[15,12,12,8,17,15,18,17,15,13,5,17,9,17,18,18,14,5,5,9,5,6,6,3,10,10,9,4,4,6,9,13,4,18]],
+  ["lantern-keeper",[14,13,11,9,14,17,15,15,13,9,4,15,4,14,16,17,13,6,6,4,4,7,7,4,13,4,4,3,3,5,5,16,5,15]],
+  ["old-garden-snail",[16,18,13,18,2,2,7,2,2,4,11,4,6,2,3,1,3,17,18,5,14,17,18,13,14,8,5,14,12,9,14,17,19,3]],
+  ["walking-forest",[19,19,18,19,1,3,11,1,1,5,17,5,12,1,4,2,5,18,19,10,18,19,19,19,17,11,12,19,19,10,16,19,18,1]],
+  ["white-paw",[18,15,19,10,18,19,16,19,19,19,19,18,19,19,19,19,19,9,9,16,17,13,11,14,15,19,19,10,14,18,6,6,10,11]],
+  ["spiny-back-leader",[17,17,17,17,12,12,9,12,17,15,18,11,16,12,15,10,18,16,15,19,19,18,16,16,16,16,18,15,18,14,19,3,15,7]]
+].map(([key, values]) => [key, Object.freeze({ tier:values[0], ...Object.fromEntries(NEUTRAL_STAT_FIELDS.map((field, index) => [field, values[index + 1]])) })])));
+
+const NEUTRAL_STAT_CURVES = Object.freeze({
+  health:[null,850,2],
+  power:[null,75,1.5],
+  armor:[null,55,2],
+  speed:[null,1.12,1],
+  movement:[null,1.1,1],
+  vision:[null,8,1],
+  combo:[null,1,2],
+  comboPower:[50,65,1],
+  critical:[null,16,2],
+  criticalPower:[200,250,1],
+  accuracy:[null,14,2],
+  penetration:[null,12,2],
+  comboSpeed:[0.12,0.06,1],
+  focus:[0.3,0.08,1],
+  evasion:[null,18,2],
+  parry:[null,12,2],
+  block:[null,24,2],
+  blockPower:[50,75,1],
+  counter:[null,15,2],
+  counterPower:[100,145,1],
+  tenacity:[null,36,2],
+  reduction:[null,12,2],
+  stun:[null,10,2],
+  stunTime:[0.35,0.56,1],
+  bleed:[null,10,2],
+  bleedPower:[1,4,1],
+  area:[null,2,2],
+  areaPower:[60,80,1],
+  lifesteal:[null,5,2],
+  reflection:[null,10,2],
+  regeneration:[null,1.9,2],
+  capacity:[null,19,1],
+  harvestSpeed:[null,1.9,1]
+});
+
+export function neutralTierStat(field, tier) {
+  const limits = NEUTRAL_STAT_LIMITS[field], curve = NEUTRAL_STAT_CURVES[field];
+  if (!limits || !curve || !Number.isInteger(tier) || tier < 1 || tier > 19) throw new Error("Invalid neutral stat tier");
+  const low = Math.min(limits.min, limits.max), high = Math.max(limits.min, limits.max);
+  const clamp = value => Math.max(low, Math.min(high, value));
+  const first = clamp(curve[0] ?? limits.min), last = clamp(curve[1]);
+  const value = first + (last - first) * ((tier - 1) / 18) ** curve[2];
+  return clamp(Math.round(value * 1000000) / 1000000);
+}
+
+export const NEUTRAL_UNIT_STATS = Object.freeze(Object.fromEntries(Object.entries(NEUTRAL_UNIT_TIERS)
+  .map(([key, ranks]) => [key, Object.freeze(Object.fromEntries(NEUTRAL_STAT_FIELDS.map(field => [field, neutralTierStat(field, ranks[field])])))])));

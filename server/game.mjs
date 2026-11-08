@@ -83,6 +83,8 @@ export function createGame(environment, colony, savedGame) {
       discoveries: [],
       discoveredKinds: new Set(),
       discoveryReadCount: 0,
+      knownTribes: new Set(),
+      tribeExtinctions: [],
       markers: [],
       rulesVersion: 2,
       nestLevel: 1,
@@ -175,6 +177,7 @@ export function createGame(environment, colony, savedGame) {
     function discoverObjects() {
       for (const target of state.rivals) {
         if (target.health <= 0 || target.hidden || !visibleCells.has(target.y * WORLD_SIZE + target.x)) continue;
+        if (!target.species && target.tribe) state.knownTribes.add(target.tribe);
         recordDiscovery("creature:" + (target.species || "bean"), "creature",
           target.species ? target.name : "다른 군체의 콩", target, discoveryObserver(target));
       }
@@ -184,6 +187,8 @@ export function createGame(environment, colony, savedGame) {
       }
       for (const entry of environment.colonies) {
         const target = { x: entry.x + 2, y: entry.y + 2 };
+        if (entry.id !== colony.id && entry.tribe && state.explored.has(target.y * WORLD_SIZE + target.x))
+          state.knownTribes.add(entry.tribe);
         if (entry.id === colony.id || !visibleCells.has(target.y * WORLD_SIZE + target.x)) continue;
         recordDiscovery("colony", "colony", "다른 군체의 둥지", target, discoveryObserver(target));
       }
@@ -1870,14 +1875,21 @@ export function createGame(environment, colony, savedGame) {
 
     function checkEnding() {
       if (state.ending || colony.tribe === null) return state.ending;
+      const opponents = colony.ownerId === environment.hostId ?
+        environment.colonies.filter(entry => entry.tribe && entry.ownerId !== colony.ownerId) : [];
+      const endings = opponents.map(entry => environment.games.get(entry.ownerId)?.checkEnding());
+      for (const [index, opponent] of opponents.entries()) {
+        const ending = endings[index];
+        if (!ending || ending.reason === "victory" || state.tribeExtinctions.some(entry => entry.colonyId === opponent.id)) continue;
+        state.tribeExtinctions.push({ colonyId: opponent.id, endedAt: ending.endedAt,
+          tribe: state.knownTribes.has(opponent.tribe) ? opponent.tribe : null });
+      }
       const alive = state.agents.filter(agent => agent.health > 0);
       const carriedPoints = alive.reduce((total, agent) => total + Math.max(0, agent.carrying || 0), 0);
       const canGather = alive.some(agent => agent.stats.capacity > 0 && (!agent.dna || agent.stats.dna.harvest > 0));
       const surviving = hasActiveNest() && (canGather || state.evolutionPoints + carriedPoints >= recoveryBirthCost());
       if (surviving) {
         if (colony.ownerId !== environment.hostId) return null;
-        const opponents = environment.colonies.filter(entry => entry.tribe && entry.tribe !== colony.tribe);
-        const endings = opponents.map(entry => environment.games.get(entry.ownerId)?.checkEnding());
         if (!endings.length || endings.some(ending => !ending || ending.reason === "victory")) return null;
       }
       state.ending = { endedAt: state.simSeconds,
@@ -2063,6 +2075,7 @@ export function createGame(environment, colony, savedGame) {
       return {
         simSeconds: state.simSeconds, colonyFood: state.colonyFood, encounterSignals: environment.creatureSystem?.signals || [], burrows: environment.creatureSystem?.burrows || [],
         discoveries: state.discoveries.map(entry => ({ ...entry })), discoveryReadCount: state.discoveryReadCount,
+        tribeExtinctions: state.tribeExtinctions.map((entry, index) => ({ id: index + 1, tribe: entry.tribe, endedAt: entry.endedAt })),
         evolutionPoints: state.evolutionPoints, nestLevel: state.nestLevel, unitCapacity: NEST_LEVELS[state.nestLevel - 1].unitCapacity, tribe: colony.tribe,
         ending: state.ending ? { ...state.ending } : null,
         nestHealth: state.nestHealth, nestMaxHealth: NEST_LEVELS[state.nestLevel - 1].health,
@@ -2095,6 +2108,8 @@ export function createGame(environment, colony, savedGame) {
         value?.collection === "Map" ? new Map(value.entries) :
         value?.collection === "Set" ? new Set(value.entries) : value) : saved;
       Object.assign(state, data.state);
+      state.knownTribes = data.state.knownTribes instanceof Set ? new Set(data.state.knownTribes) : new Set();
+      state.tribeExtinctions = Array.isArray(data.state.tribeExtinctions) ? data.state.tribeExtinctions.map(entry => ({ ...entry })) : [];
       state.startingPointsGranted = data.state.startingPointsGranted === true;
       for (const key of ["buildings", "nextBuildingId", "constructionProductionReadyAt", "constructionHelpResult", "constructionHelpBuildings", "constructionMaterialNeeds", "foragerMemory", "nestExperienceContributions", "resourceInventory", "resourceStores", "resourceInventoryLimits", "resourceCapacity"]) delete state[key];
       state.corpses = [];
