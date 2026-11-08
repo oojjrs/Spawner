@@ -7,6 +7,26 @@
     1080
   ],
   "images": {
+    "DesignAssets/UI/Lifespan/leaf-alive.png": {
+      "display": [
+        40,
+        40
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
+    "DesignAssets/UI/Lifespan/leaf-dead.png": {
+      "display": [
+        40,
+        40
+      ],
+      "grid": [
+        1,
+        1
+      ]
+    },
     "DesignAssets/Animations/UnitRangedV1/bean/walk.webp": {
       "display": [
         256,

@@ -306,6 +306,11 @@
     .corpse-metrics [data-help] { cursor: help; }
     .corpse-metrics [data-help]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
     #corpse-attributes [data-help] { cursor: help; }
+    .agent-life { position: relative; display: inline-block; width: 40px; height: 40px; vertical-align: middle; cursor: help; }
+    .agent-life:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+    .agent-item .agent-life { position: absolute; top: 7px; right: 7px; }
+    .agent-life img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+    .unit-name-row .agent-life { flex: none; width: 30px; height: 30px; }
     .agent-item strong { max-width: 100%; overflow: hidden; font-size: 0.75rem; text-overflow: ellipsis; white-space: nowrap; }
     .evolution-stat { width: 100%; font-family: inherit; cursor: pointer; }
     .evolution-stat:hover, .evolution-stat[aria-expanded="true"] { border-color: var(--accent); background: #75c4b618; }

@@ -1043,6 +1043,8 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp.js",
   "./client/local-assets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp.js",
   "./client/local-assets/UI/hp-heart.png.js",
+  "./client/local-assets/UI/Lifespan/leaf-alive.png.js",
+  "./client/local-assets/UI/Lifespan/leaf-dead.png.js",
   "./client/local-assets/UI/movement-speed.png.js",
   "./client/local-assets/Units/BaseParts/body.png.js",
   "./client/local-assets/Units/BaseParts/green-foot.png.js",

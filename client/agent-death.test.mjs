@@ -62,6 +62,24 @@ test("전투 사망은 사체 생성부터 재생하고 3초까지 마지막 자
   }
 });
 
+test("실제 자연사와 타격 사체는 체력 필드 없이도 공용 사망 동작을 재생한다", () => {
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const cause of ["lifespan", "damage"]) {
+    const { game, agent } = fixture();
+    agent.tribe = tribe;
+    if (cause === "lifespan") { game.prepare(300); game.tick(0); }
+    else { game.prepare(10); game.receiveDamage(agent, 10000); }
+    const corpse = game.snapshot().corpses.find(entry => entry.agentId === agent.id);
+    assert.ok(corpse);
+    assert.equal(corpse.health, undefined);
+    const first = unitActionArtPose(corpse, corpse.diedAt);
+    const later = unitActionArtPose(corpse, corpse.diedAt + .5);
+    assert.equal(first.action, "death");
+    assert.equal(first.missing, false);
+    assert.equal(later.action, "death");
+    assert.notEqual(later.frame, first.frame);
+  }
+});
+
 test("각 부족의 사망 그림을 고르고 오래된 사체는 마지막 자세를 유지한다", () => {
   for (const tribe of ["spore", "pebble", "spring"]) {
     assert.equal(agentDeathAnimation({ kind: "corpse", tribe }), AGENT_DEATH_ANIMATIONS[tribe]);
@@ -76,7 +94,7 @@ test("각 부족의 사망 그림을 고르고 오래된 사체는 마지막 자
 
 test("월드 사체와 목록 아이콘은 같은 완성 사망 애셋과 재생 프레임을 사용한다", async t => {
   const render = presentationRenderer(t), context = render.context;
-  const corpse = { id: "corpse:1", agentId: "1", kind: "corpse", tribe: "bean", health: 0, x: 5, y: 5, diedAt: 10, decaysAt: 13 };
+  const corpse = { id: "corpse:1", agentId: "1", kind: "corpse", tribe: "bean", x: 5, y: 5, diedAt: 10, decaysAt: 13 };
   const scope = createContext({ AGENT_HEIGHT: .7, Spawner: {}, unitPresentation: render.presentation,
     corpsePlaybackTime: () => render.state.simSeconds,
     state: { corpses: [corpse], agents: [], rivals: [], camera: { zoom: 100 } }, ctx: context,
@@ -88,7 +106,7 @@ test("월드 사체와 목록 아이콘은 같은 완성 사망 애셋과 재생
     agentSprite() { throw new Error("사체에 서 있는 유닛 그림을 사용했습니다."); } });
   for (const name of ["drawAgentCorpse", "drawCorpses", "drawAgentAvatars"])
     runInContext(source.match(new RegExp("^    function " + name + "\\([^]*?^    }", "m"))[0], scope);
-  for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const time of [10, 12.26]) {
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const time of [10, 10.5, 12.26]) {
     corpse.tribe = tribe;
     render.state.simSeconds = time;
     const pose = unitActionArtPose(corpse, time);

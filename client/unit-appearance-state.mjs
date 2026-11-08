@@ -19,7 +19,7 @@ export function unitActionState(agent, time, options = {}) {
     const [a,b]=[clock[segment],clock[segment+1]];
     return {action,startedAt,durationMs:ms,segments:clock,elapsedMs:Math.max(0,interpolate(time,a[0],b[0],a[1],b[1])),unitId:agent.id,...details};
   }
-  if(agent.health<=0||agent.mode==='death')return state('death',finite(agent.deathStartedAt,agent.diedAt,agent.animationStartedAt,agent.bornAt,0));
+  if(agent.kind==='corpse'||agent.health<=0||agent.mode==='death')return state('death',finite(agent.deathStartedAt,agent.diedAt,agent.animationStartedAt,agent.bornAt,0));
   if(agent.birth){const start=finite(agent.birth.startedAt,agent.bornAt,0),end=finite(agent.birth.readyAt,start+duration('birth')/1000);if(time<end)return state('birth',start,[[start,0],[end,duration('birth')]])}
   const attack=agent.attack;
   function attacking() {

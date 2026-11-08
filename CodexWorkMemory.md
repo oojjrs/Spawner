@@ -21,6 +21,21 @@
 - 기록 2026-11-08T13:55:50+09:00; 기록·구현 판단 Codex /root, 요청·결정 사용자. 출처 codex://threads/01a1b981-f290-7b72-9c36-d424b97e4b1a, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID 불명.
 - 사용자: 속성 설계창 조작 안내를 처음에 접어 두지 말 것. 기존 dna-wheel-guide-approved-20261104-01a1a129의 기본 접힘 결정만 이 요청으로 대체한다. 기존 문구와 사용자 접기·펼치기는 유지한다.
 - 관측·판단: 공용 createDnaEditor의 details에 open이 없어 닫혀 생성된다. client/dna-editor.mjs 및 현재 소비되는 runtime.js/Attribute.html의 같은 마크업에 open만 동기화한다. 병행 runtime 및 메모리 변경을 보존하며 전체 재생성은 필요하지 않다. 연결 Projects 0개. 구현·검수 전이며 커밋 요청 없음.
+## 수명 나뭇잎·사망 동작 복구 결과 [lifespan-leaf-result-01a1b97a]
+
+- 기록·최종 관측 2026-11-08T13:52:27+09:00; 구현·검수·기록 Codex /root, 요구 결정 사용자. 출처 현재 채팅 01a1b97a-6506-7732-9949-ae9d6183d6fa, H:/Spawner. 원 발언 시각·항목 ID 미제공. 앞 start 기록의 구현을 로컬 완료로 갱신한다.
+- 변경: 삭제 전 7dcccba9^의 leaf-alive/dead 원본 PNG 2개와 기존40px표시등록을 복구하고 로컬 자산 wrapper/목록·빌더에 연결. 우측 카드40px(기존 모바일24px)·선택창30px 잎 게이지 및 잎 hover/키보드 수명 도움말을 복구. 비율은 현행 agentRemainingLifespan을 써 구저장 유예 시작시각도 반영한다. 기존 남은/전체 숫자와 기본300초·DNA120초 보너스는 유지.
+- 사망: unitActionState에서 kind:corpse를 사망으로 우선 판정. 실제 health/mode 없는 서버 사체를 그대로 월드/목록 공용 원화에서 재생하며 기존3초 사체 정책 유지. 테스트의 인위적 health:0을 제거하고4종족 자연사·타격 사체8조건 및 초반/중간/마지막 월드/목록 원본 프레임을 검증했다.
+- 검수: 첫 runtime 생성은 복구 이미지의 표시크기등록 누락으로 실패했고 이전 승인등록2개를 복원한 뒤 공식 --runtime-only 생성 성공. node --test client/agent-death.test.mjs client/unit-appearance-state.test.mjs 13/13 통과(320ms), skip0. UI 검수는 격리 headless Chrome의 실제 새방 생성이4초 클릭 대기한도를 넘어 지형생성73%에서 중지, pageerror0; 잎 배치와 브라우저 사망 장면의 실제 화면 확인은 미완료다. 오류를 제품기동실패로 단정하지 않는다. 재검수 반복 없이 현재 근거/한계를 남긴다.
+- 기존 자원패널 변경과 도중 나타난 설계보관/room/storage/worker 변경은 보존. 이번 파일은 미스테이징·미커밋. 요청·판단·변경·검사·한계 대조 완료, 바로 다음 공유형식/scoped diff 점검 결과는 도구출력에 남긴다. 자료 literal $Trash/lifespan-leaf-01a1b97a.
+
+## 수명 나뭇잎·사망 동작 복구 진행 [lifespan-leaf-start-01a1b97a]
+
+- 기록 2026-11-08T13:49:38+09:00; 기록·판단 Codex /root, 요청·결정 사용자. 출처 현재 채팅 01a1b97a-6506-7732-9949-ae9d6183d6fa, H:/Spawner Windows. 원 발언 시각·항목 ID 미제공.
+- 사용자: 이전 구현을 확인하여 나뭇잎 수명 표시를 복구하고 우측 유닛칸에도 표시하며 죽을 때 애니메이션을 재생할 것.
+- 관측: 제거 전 7dcccba9^에 leaf-alive/dead 원화·agent-life 목록/선택창 게이지가 존재한다. 현재는 선택창 숫자만 있음. 실제 server/game.dropCorpse는 health/mode 없는 kind:corpse를 전달하지만 unitActionState는 health<=0 또는 mode:death만 판정해 idle을 선택한다. 기존 렌더 검사는 실제 사체에 없는 health:0을 넣어 이 결함을 놓쳤다.
+- 구현 판단: 이전 두 원화를 바이트 그대로 복구하고 목록/선택창의 잎 비율·수명 툴팁을 현행 lifespanStartedAt 계산에 연결한다. 사체 종류를 공용 동작에서 사망으로 인식하고 실제 서버 사체로 자연사/타격사와 월드/목록 프레임을 검사한다. 자원 정보창 병행 변경은 보존하며 새 문구/원화/수명 밸런스 변경 없음. 연결 Projects 없음.
+
 ## 유전자 설계의 판 삭제 후 보존 진행 [design-preservation-01a1b979]
 
 - 기록 시각 2026-11-08T13:49:05+09:00; 기록·구현 판단 Codex /root, 결정 사용자. 출처 codex://threads/01a1b979-83c5-7e90-aed2-7b5d353084c4, H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.

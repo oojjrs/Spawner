@@ -165,6 +165,11 @@
     const resourceLocation = document.getElementById("resource-location");
     const resourceLocationHelp = resourceLocation.dataset.help;
     const agentDetails = document.getElementById("agent-details");
+    const agentLife = createAgentLife();
+    agentLife.id = "agent-life";
+    agentLife.tabIndex = 0;
+    agentLife.hidden = true;
+    agentNameDisplay.append(agentLife);
     const agentBirth = document.getElementById("agent-birth");
     const agentDesign = document.getElementById("agent-design");
     const unitActionStatus = document.getElementById("unit-action-status");
@@ -6401,6 +6406,37 @@
       return Math.floor(total / 60) + "분 " + total % 60 + "초";
     }
 
+    function createAgentLife() {
+      const life = document.createElement("span");
+      life.className = "agent-life";
+      life.setAttribute("role", "img");
+      life.dataset.help = "";
+      for (const [state, source] of [["dead", "DesignAssets/UI/Lifespan/leaf-dead.png"], ["alive", "DesignAssets/UI/Lifespan/leaf-alive.png"]]) {
+        const image = document.createElement("img");
+        image.className = "agent-life-" + state;
+        image.alt = "";
+        image.src = assetSource(source);
+        life.append(image);
+      }
+      return life;
+    }
+
+    function updateAgentLife(life, agent) {
+      const corpse = agent.kind === "corpse";
+      const remaining = corpse ? Math.max(0, agent.decaysAt - corpsePlaybackTime()) : Spawner.agentRemainingLifespan(agent, state.simSeconds);
+      life.hidden = !Number.isFinite(remaining);
+      if (life.hidden) return remaining;
+      const personality = agent.personalityLabels;
+      const help = corpse ? agent.name + "의 사체 · 사라짐까지 " + formatLifetime(Math.ceil(remaining)) :
+        agent.name + " · 남은 수명 " + formatLifetime(Math.ceil(remaining)) + (personality ? "\n대담함 " + personality.boldness + " · 호전성 " + personality.aggression + " · 호기심 " + personality.curiosity : "");
+      const previousHelp = life.dataset.help;
+      life.dataset.help = help;
+      life.setAttribute("aria-label", help);
+      life.querySelector(".agent-life-alive").style.clipPath = "inset(" + (corpse ? 100 : (1 - clamp(remaining / agent.lifespan, 0, 1)) * 100) + "% 0 0)";
+      if (helpTooltipTarget === life && previousHelp !== help) showHelpTooltip(life);
+      return remaining;
+    }
+
     function selectedAgentTemplate() {
       const agent = state.selection?.kind === "agent" ? state.selection.target : null;
       return agent && state.agents.includes(agent) ? {
@@ -6718,6 +6754,7 @@
       document.getElementById("unit-codex").hidden = false;
       resourceLocation.hidden = resourceDetails.hidden && terrainDetails.hidden && foreignColonyDetails.hidden;
       agentDetails.hidden = !agent;
+      agentLife.hidden = !agent || !!agent.species || !Number.isFinite(agent.lifespan);
       agentRenameOpen.hidden = !agent || !state.agents.includes(agent);
       agentRenameOpen.disabled = !!state.ending || connection.busy || !connection.online;
       agentNameInput.disabled = connection.busy;
@@ -6730,6 +6767,7 @@
       collapseControlsGuide();
       if (!agent) return;
       unitPanelTitle.textContent = agent.name;
+      if (!agentLife.hidden) updateAgentLife(agentLife, agent);
       let lifespan = agentDetails.querySelector(".agent-lifespan");
       if (!lifespan) {
         lifespan = document.createElement("dl");
@@ -6918,6 +6956,14 @@
             "<strong data-agent-name></strong>" +
             "<span data-agent-mode></span>" +
             "<small data-agent-carry></small>";
+          const life = createAgentLife();
+          button.append(life);
+          life.addEventListener("pointerenter", () => showHelpTooltip(life));
+          life.addEventListener("pointerleave", () => {
+            if (document.activeElement !== button) hideHelpTooltip();
+          });
+          button.addEventListener("focus", () => showHelpTooltip(life));
+          button.addEventListener("blur", hideHelpTooltip);
           const avatar = button.querySelector("[data-agent-avatar]");
           agentAvatars.set(agent.id, { canvas: avatar, context: avatar.getContext("2d") });
           button.addEventListener("click", () => {
@@ -6928,7 +6974,7 @@
               moveCameraTo(current.x + 0.5, current.y + 0.5, zoomForLayer(INITIAL_ZOOM_LAYER));
             } else if (current) selectAgent(current);
           });
-          agentListButtons.set(id, { button, name: button.querySelector("[data-agent-name]"),
+          agentListButtons.set(id, { button, life, name: button.querySelector("[data-agent-name]"),
             mode: button.querySelector("[data-agent-mode]"), carry: button.querySelector("[data-agent-carry]") });
         }
         let next = agentList.firstElementChild;
@@ -6946,6 +6992,7 @@
         if (!entry) continue;
         const button = entry.button;
         const corpse = agent.kind === "corpse";
+        updateAgentLife(entry.life, agent);
         button.className = "agent-item" + (corpse ? " is-corpse" : "") +
           (isSelectedObject(corpse ? "corpse" : "agent", agent) ? " is-selected" : "");
         if (corpse) {
