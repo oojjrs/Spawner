@@ -286,9 +286,23 @@ test('existing combinations and antenna singles preserve original actions except
         clip.sourceFacing = 'left'; clip.pivotX = clip.frameSize - clip.pivotX;
       }
     }
+    const labelAudit = [...JSON.parse(read('tools/spring-native-facing-20261108/original-clips.json')), ...JSON.parse(read('tools/spring-native-facing-20261108/additional-original-clips.json'))];
+    const correctedImages = new Set(labelAudit.map(row => row.before.image));
+    for (const clip of new Set([expected.reference, ...Object.values(expected.actions)]))
+      if (correctedImages.has(clip.image)) clip.sourceFacing = 'left';
+    const furtherNormalized = JSON.parse(read('tools/secretion-source-normalization-20261108/pixel-changes.json')).changes;
+    for (const clip of new Set([expected.reference, ...Object.values(expected.actions)]))
+      if (furtherNormalized[clip.image]) { clip.sourceFacing='left'; clip.pivotX=clip.frameSize-clip.pivotX; }
     assert.deepEqual(UNIT_ACTION_ART[key], expected, key);
   }
-  for (const [key, clip] of Object.entries(baseline.birth)) assert.deepEqual(UNIT_BIRTH_ART[key], clip, key);
+  const restoredBirth = JSON.parse(read('tools/birth-resolution-20261108/registered-clips.json'));
+  for (const [key, clip] of Object.entries(baseline.birth)) {
+    if (restoredBirth[key]) {
+      const {sceneLayers,...nativeGeometry} = UNIT_BIRTH_ART[key];
+      assert.deepEqual(nativeGeometry,clip,key+' preserves native registration');
+      assert.deepEqual(sceneLayers,restoredBirth[key].sceneLayers,key+' verified source layers');
+    } else assert.deepEqual(UNIT_BIRTH_ART[key],clip,key);
+  }
   const approvedHashes = new Map();
   for (const form of ['blade-carapace', 'blade-secretion', 'secretion-carapace', 'blade-secretion-carapace']) {
     const approved = JSON.parse(read('AnimationCandidates/pebble-combo-birth-roll-v2-20261107/' + form + '/publication-manifest.json'));
@@ -296,7 +310,7 @@ test('existing combinations and antenna singles preserve original actions except
   }
   for (const entry of JSON.parse(read('AnimationCandidates/bean-combo-walk-approved-v2-20261107/approval.json')).approvedForms)
     approvedHashes.set(UNIT_ACTION_ART['bean/' + entry.form].actions.walk.image, entry.sha256);
-  const normalized = JSON.parse(read('tools/source-facing-normalization-20261108/pixel-changes.json')).changes;
+  const normalized = {...JSON.parse(read('tools/source-facing-normalization-20261108/pixel-changes.json')).changes, ...JSON.parse(read('tools/secretion-source-normalization-20261108/pixel-changes.json')).changes, ...JSON.parse(read('tools/spring-native-facing-20261108/attack-metadata-changes.json')).changes};
   for (const [image, hash] of Object.entries(baseline.sourceImages))
     assert.equal(sha(image), normalized[image]?.afterSha256 || approvedHashes.get(image) || hash, image);
 });

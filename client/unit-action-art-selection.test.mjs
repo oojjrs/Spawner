@@ -85,7 +85,7 @@ test("승인 칼날 갑각은 모든 동작에서 같은 세트를 유지하고 
       const pose = unitActionArtPose({ ...agent, ...state }, .05);
       assert.equal(pose.action, action);
       assert.equal(pose.reference, definition.reference);
-      assert.equal(pose.animation, definition.actions[action] || definition.reference);
+      assert.equal(pose.animation, action === "birth" ? UNIT_BIRTH_ART[tribe + "/blade-carapace"] || definition.actions.birth : definition.actions[action] || definition.reference);
       assert.equal(pose.missing, !definition.actions[action]);
     }
     const fallback = { ...agent, attributes: { blade: 1, carapace: 1, antenna: 1 }, birth: { startedAt: 0, readyAt: 2 } };

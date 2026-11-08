@@ -1,0 +1,234 @@
+[
+  {
+    "path": "DesignAssets/Animations/BirthResolutionV1/bean-seed-a.png",
+    "sha256": "6421dd75ddf0a46bd3daf42447a6cd775a99791750970f995fac7afe8fe57206",
+    "frameSize": 322,
+    "frameHeight": 424,
+    "columns": 11,
+    "frameCount": 97
+  },
+  {
+    "path": "DesignAssets/Animations/BirthResolutionV1/bean-seed-b.png",
+    "sha256": "e50a44f728594ff149356f275e7b56839c820fc06d2b6694ff7accf0ead49d79",
+    "frameSize": 211,
+    "frameHeight": 342,
+    "columns": 14,
+    "frameCount": 97
+  },
+  {
+    "path": "DesignAssets/Animations/BirthResolutionV1/bean-gather-body.png",
+    "sha256": "5a629a0870ae2b285a1f1d57544bc05fed96dfe15e58765511e58ec0d4210cce",
+    "frameSize": 337,
+    "frameHeight": 353,
+    "columns": 4,
+    "frameCount": 16
+  },
+  {
+    "path": "DesignAssets/Animations/BirthResolutionV1/bean-secretion-body.png",
+    "sha256": "12b465c932f8785afe4db2105afede1489a1cc30e424e91aadd26cd76ec040c5",
+    "frameSize": 355,
+    "frameHeight": 379,
+    "columns": 4,
+    "frameCount": 16
+  },
+  {
+    "path": "DesignAssets/Animations/BirthResolutionV1/bean-antenna-body.png",
+    "sha256": "3b22084cb9ce2ce407346824eb057d74fa83105cca88321ebacbd90190aabd4c",
+    "frameSize": 308,
+    "frameHeight": 344,
+    "columns": 4,
+    "frameCount": 16
+  },
+  {
+    "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-body.png",
+    "sha256": "cfc0da4e709972885c26688fc438b4fb135e2b816e619606ef61d64965dea79f",
+    "frameSize": 320,
+    "frameHeight": 320,
+    "columns": 4,
+    "frameCount": 16
+  },
+  {
+    "path": "DesignAssets/Animations/BirthResolutionV1/bean-carapace-body.png",
+    "sha256": "713ace0c72d41b6c253ca8edbc21483eda621274aaeaa01d090de75b61c7516a",
+    "frameSize": 317,
+    "frameHeight": 319,
+    "columns": 4,
+    "frameCount": 16
+  },
+  {
+    "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-carapace-body.png",
+    "sha256": "d171441ac8bc43412055984e1e6f02d537ef5e4427ccd135d5158887d0a69619",
+    "frameSize": 321,
+    "frameHeight": 309,
+    "columns": 4,
+    "frameCount": 16
+  },
+  {
+    "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-body.png",
+    "sha256": "aa619820f0584ea79b7157c98d358321e9bb5a053ff0666872372e0981cc8d29",
+    "frameSize": 285,
+    "frameHeight": 291,
+    "columns": 4,
+    "frameCount": 16
+  },
+  {
+    "path": "DesignAssets/Animations/BirthResolutionV1/bean-secretion-carapace-body.png",
+    "sha256": "bd72251de6ace24b5abc1dcfedaf5086df117b1dd02044c34baaaf3565f0ead0",
+    "frameSize": 257,
+    "frameHeight": 239,
+    "columns": 4,
+    "frameCount": 16
+  },
+  {
+    "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-carapace-body.png",
+    "sha256": "fdcb38c79df751bbaf30f5a6ea2ce1ca1dd1bf1c8acc577879db1d233b50d059",
+    "frameSize": 283,
+    "frameHeight": 304,
+    "columns": 4,
+    "frameCount": 16
+  },
+  {
+    "frameSize": 319,
+    "frameHeight": 335,
+    "columns": 4,
+    "frameCount": 16,
+    "path": "DesignAssets/Animations/BirthResolutionV1/pebble-gather-body.png",
+    "sha256": "f998088001d9353e04af415bb78088d38e380931e9ef07cfa6fddcd24540e99d"
+  },
+  {
+    "frameSize": 179,
+    "frameHeight": 142,
+    "columns": 6,
+    "frameCount": 78,
+    "path": "DesignAssets/Animations/BirthResolutionV1/pebble-blade-body.png",
+    "sha256": "e6a8f8d4b8b7d6298aebfd917c058fd97de9c8c5bba7b5e094424a95abc6b1c0"
+  },
+  {
+    "frameSize": 192,
+    "frameHeight": 162,
+    "columns": 6,
+    "frameCount": 78,
+    "path": "DesignAssets/Animations/BirthResolutionV1/pebble-carapace-body.png",
+    "sha256": "dacd3e3e9b3db54af03e350e59b96c50941b2f0cea12c6e3b70d1992aff930eb"
+  },
+  {
+    "frameSize": 104,
+    "frameHeight": 109,
+    "columns": 7,
+    "frameCount": 35,
+    "path": "DesignAssets/Animations/BirthResolutionV1/pebble-secretion-body.png",
+    "sha256": "cdce4ce21ba34b98e19195acc130b2753eb98100664ee046c55c7d23046de582"
+  },
+  {
+    "frameSize": 343,
+    "frameHeight": 317,
+    "columns": 6,
+    "frameCount": 34,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spring-blade-body.png",
+    "sha256": "40f2a4421d188caaef7709369ada2cae82533cf046c3156557deb2fdf7f0a2f3"
+  },
+  {
+    "frameSize": 326,
+    "frameHeight": 312,
+    "columns": 6,
+    "frameCount": 34,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spring-carapace-body.png",
+    "sha256": "72edf91e27c16b037d64b4765357bdb793c7e44b5c269b96d1c6d2daa4b65a89"
+  },
+  {
+    "frameSize": 503,
+    "frameHeight": 496,
+    "columns": 2,
+    "frameCount": 13,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spring-secretion-body.png",
+    "sha256": "b2c6d62189f1ddbf34e066b6fde5d086efad6b741a5a39cb551e9960e523b1c4"
+  },
+  {
+    "frameSize": 411,
+    "frameHeight": 425,
+    "columns": 8,
+    "frameCount": 37,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spore-blade-carapace-body.png",
+    "sha256": "a5b2dde2a764a3d7d6cc189a79765a50f4836e478444266c386878efef27ae5f"
+  },
+  {
+    "frameSize": 475,
+    "frameHeight": 457,
+    "columns": 5,
+    "frameCount": 37,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-body.png",
+    "sha256": "eb76c81ce5631432c0d0fc9ffd27518b94727c344e455d53cbf0a30b60197e34"
+  },
+  {
+    "frameSize": 455,
+    "frameHeight": 453,
+    "columns": 5,
+    "frameCount": 37,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-carapace-body.png",
+    "sha256": "e363019528a33526256d286a90b4b1db6f5c1957b321eea4d3087d2cf324b84f"
+  },
+  {
+    "frameSize": 491,
+    "frameHeight": 454,
+    "columns": 5,
+    "frameCount": 37,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-carapace-body.png",
+    "sha256": "8478c07213ed7474520f0c290eb5af364298f49a51b94d8749f7e7cb6eabf409"
+  },
+  {
+    "frameSize": 475,
+    "frameHeight": 426,
+    "columns": 6,
+    "frameCount": 42,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spore-gather-body.png",
+    "sha256": "951e683de943890c544138f5f13217355afb6f9db345a337db73799bae674cb7"
+  },
+  {
+    "frameSize": 35,
+    "frameHeight": 39,
+    "columns": 3,
+    "frameCount": 6,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spore-gather-stalk.png",
+    "sha256": "00c1891bb95110a4161c7bb9e82fe3b7390b5256cd23afbe7ad8c8f6ef28f2d0"
+  },
+  {
+    "frameSize": 418,
+    "frameHeight": 416,
+    "columns": 5,
+    "frameCount": 38,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-body.png",
+    "sha256": "c6ec8d479bb7d15c5698ef6fad231bfad1474b956b49625d2a2ede44b84f8750"
+  },
+  {
+    "frameSize": 35,
+    "frameHeight": 39,
+    "columns": 3,
+    "frameCount": 6,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-stalk.png",
+    "sha256": "00c1891bb95110a4161c7bb9e82fe3b7390b5256cd23afbe7ad8c8f6ef28f2d0"
+  },
+  {
+    "frameSize": 35,
+    "frameHeight": 39,
+    "columns": 3,
+    "frameCount": 6,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spore-combat-stalk.png",
+    "sha256": "00c1891bb95110a4161c7bb9e82fe3b7390b5256cd23afbe7ad8c8f6ef28f2d0"
+  },
+  {
+    "frameSize": 418,
+    "frameHeight": 355,
+    "columns": 7,
+    "frameCount": 52,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spore-blade-body.png",
+    "sha256": "2adcba5a30e42819789c4bac73863286ae8a73e410d84ce979a70a08137ed1c5"
+  },
+  {
+    "frameSize": 383,
+    "frameHeight": 370,
+    "columns": 7,
+    "frameCount": 52,
+    "path": "DesignAssets/Animations/BirthResolutionV1/spore-carapace-body.png",
+    "sha256": "d825ec397143d3582e913d02e10e4c5a9549b9cb7db0b37808e021e36dec3e30"
+  }
+]

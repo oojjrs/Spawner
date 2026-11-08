@@ -1,0 +1,23 @@
+{
+  "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace-antenna/attack.png": "447098fee6876335ee822e372448d11f6c271a41ee2db662f9510f2942c7417a",
+  "DesignAssets/Animations/DefensiveAttackV1/spring/antenna/attack.png": "98af159a97b0820b6ecdf7d6804fefc56ebb62c8bcf0be3c210e98c1246767d6",
+  "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp": "38cbbdc1d88de4a69b519c895ae0cb6619e4162f42ae43671f467fc0c9f26a44",
+  "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/attack.png": "ef27388e824bf12c625cf0b6659e607eaa06bd02e8d2cea7f360581eb9f18abf",
+  "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/attack.png": "a6a5eeb557b2a817883019fd32297bac3cb7865a8925bc5956c0867db84a328b",
+  "DesignAssets/Animations/DefensiveAttackV1/spring/carapace-antenna/attack.png": "0411b243c15e156bbc1cc5561f850a3262b4f00995277eb504b7e3aaacb136a8",
+  "DesignAssets/Animations/ApprovedActionsV1/spring/gather/attack.png": "bae3fcde90f63645d1094d27486856161eb9d4843127e6048c8beb17d89102ac",
+  "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/idle.png": "075f154e1dc1ed11847dde7b4f637cdf9a6b4d977586b96584f14cbd4c79c7b6",
+  "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/walk.png": "ccbc7d1c1f2b4bb8d12ccbb5b235ec4a99d076a2b34b8a4c8fc9628198cbbb79",
+  "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/ranged.png": "8f921fc8be663e7c5fee75fe4981ca91976646f6f637484cbf9bede221f56c98",
+  "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/hurt.png": "06d6db69c2e571d46241fc620ccdafe09bf0ded01df78a47059118b6204e3d49",
+  "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/death.png": "f6357080e027f60cede487abd8540ba83878349123cdcd7bef7cfa238fbe95d5",
+  "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/idle.png": "74cb83bcd2d2fd8e6a77fcf8949d6177420b6515c9ccf8934c6adeab0428048d",
+  "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/walk.png": "b153853342613c59e556d31201b0beadc41f6e05ce9e97fcdb7c42a50d5267ef",
+  "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/ranged.png": "6b8aa37f6a870500673cc5c4f1e4174ee3dd8d1cc1572356f07a154a1e2dcaea",
+  "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/hurt.png": "e22a875312382a3d1ec542d26ef3df44833b292cd298d481637afab37665d995",
+  "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/birth.png": "18cea969547d111272f46304fb0bed69d1be6b3c8c701af85bcabd7da808cb6e",
+  "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/death.png": "5140d5fc98b58e4285bd2c37fc33b102642ba8b54608774985372c1afb42768b",
+  "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/portrait.png": "5cbe76591e5db043e628cc10064b46ff5b2e2c15efb5a728645df22861d0f958",
+  "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/portrait.png": "db09608ea6aa3233f30e075940e91386c44e762a4856351316dd4ce33c4f55ad",
+  "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/secretion-carapace/birth.png": "18cea969547d111272f46304fb0bed69d1be6b3c8c701af85bcabd7da808cb6e"
+}

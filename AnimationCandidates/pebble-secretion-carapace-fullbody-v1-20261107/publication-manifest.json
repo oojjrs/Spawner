@@ -25,12 +25,14 @@
       "sheet": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-idle-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-idle-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-idle-v1-preview.gif",
-      "sheetSHA256": "df6f9fb069e8d63e8692cb337dea106ba49f6ef596d8b7b50500118e2a69c859",
-      "previewSHA256": "f0d677e0cb6d3ef9a005d1da8b8f694e0cd1b1b3aa63695c3c3a9815f6c56aee",
-      "gifSHA256": "9bf65ea5de00b8676217ec7ffe448418dd1e0aad9fb5c1f74fcb051fbd256a45",
+      "sheetSHA256": "74cb83bcd2d2fd8e6a77fcf8949d6177420b6515c9ccf8934c6adeab0428048d",
+      "previewSHA256": "ac4c8eecb93521e6ae5a4f598d42d64d1708440716a1b6553435612a0a042aec",
+      "gifSHA256": "cd77ed2b4728e4f6443b05498a9515796a20c2f2d48bf4213d3960a3fe412b0b",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left",
+      "pivotX": 256
     },
     "walk": {
       "durationsMs": [
@@ -51,12 +53,14 @@
       "sheet": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-walk-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-walk-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-walk-v1-preview.gif",
-      "sheetSHA256": "7f1e9c7d5c617ad1e26723cde0894200dd74ec7485ebf03adb32fef435dede30",
-      "previewSHA256": "3d3b5cb7a4b60ee3499ec0b6b648ccec863e96fbf4ce45625928f51929870e03",
-      "gifSHA256": "aed52e4b52ed8584244336875957aa37f4f82c8de3fd8d50727b19397f6ed494",
+      "sheetSHA256": "b153853342613c59e556d31201b0beadc41f6e05ce9e97fcdb7c42a50d5267ef",
+      "previewSHA256": "b604d9524023efbb4a7191ce5a659abcfaf9b6963e1f781d0bf2d3114f32a391",
+      "gifSHA256": "fee49e6c21bd66ca2073c1624dea24638db7ea1e974e59847c49bdb0c45f727b",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left",
+      "pivotX": 256
     },
     "ranged-attack": {
       "durationsMs": [
@@ -77,16 +81,18 @@
       "sheet": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-ranged-attack-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-ranged-attack-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-ranged-attack-v1-preview.gif",
-      "sheetSHA256": "0540f4939b2dcc33c9a7b03e6846939c38ca50d5c17d28b0cfd3721a1bedb36e",
-      "previewSHA256": "e7f8e385812147ba482d50130b2ea8afa8297068258101542ab3b5dcdfc129f1",
-      "gifSHA256": "910107e6a3863ff8a81444e869a2398f7aa424ac23002813a08e77a1383e9841",
+      "sheetSHA256": "6b8aa37f6a870500673cc5c4f1e4174ee3dd8d1cc1572356f07a154a1e2dcaea",
+      "previewSHA256": "c411cbbfa23b5ca8f71d3053f39335b35cb1914a78f6a863312d834a48a0b27f",
+      "gifSHA256": "a341f00df8deb7f88401a4796ea76d39521343e031550d43c61c7bd1fba84481",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
       "launchAtMs": 470,
       "launchFrameIndex": 3,
       "rangedBody": true,
-      "launchTimingSource": "Integration visual review: charge frames 1–2, release recoil frame 3; 180+140+150 ms."
+      "launchTimingSource": "Integration visual review: charge frames 1–2, release recoil frame 3; 180+140+150 ms.",
+      "sourceFacing": "left",
+      "pivotX": 256
     },
     "hurt": {
       "durationsMs": [
@@ -107,12 +113,14 @@
       "sheet": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-hurt-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-hurt-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-hurt-v1-preview.gif",
-      "sheetSHA256": "413622c93cd4e1b335b9528583240683c27fc8951c7d329eccb7bf48e0d3d938",
-      "previewSHA256": "316702e6d2b48d808e4b66fe24a8f1e6a660714f397d73715e4b1c4b0cfbceee",
-      "gifSHA256": "3795e29870c980d36490e5e222651549dba4a1f4923cd79bb511e0b1614ddccf",
+      "sheetSHA256": "e22a875312382a3d1ec542d26ef3df44833b292cd298d481637afab37665d995",
+      "previewSHA256": "e7cca06d9932c816bfed0fa1d85250f8aba8cc951604914d23dd43ef58303ddc",
+      "gifSHA256": "c060422b0b19dea91bee36741d9deb3fb6c310f2ebaeac5beeb93d8455db3957",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left",
+      "pivotX": 256
     },
     "birth": {
       "durationsMs": [
@@ -138,14 +146,14 @@
       "frameCount": 14,
       "sheet": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/secretion-carapace/birth.png",
       "preview": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/secretion-carapace/birth-preview.webp",
-      "sheetSHA256": "e181a8f3a3e9958085729b3a0cd255c9dc8952cfb8db32f48a811bd422140426",
-      "previewSHA256": "b0897537112a88648e4001cf0dbebe4e65996dc5ddec41e812518a674031240a",
+      "sheetSHA256": "18cea969547d111272f46304fb0bed69d1be6b3c8c701af85bcabd7da808cb6e",
+      "previewSHA256": "9f74a94b43e2d6e8c80597fc2a39d99f7416f431ed8008958064389c7e3e6726",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": true,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameHeight": 512,
-      "pivotX": 383,
+      "pivotX": 129,
       "pivotY": 441,
       "referenceLength": 184,
       "viewSize": 184,
@@ -216,12 +224,14 @@
       "sheet": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-death-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-death-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-death-v1-preview.gif",
-      "sheetSHA256": "5e66276fa87e10f6983fb2ed51033bbf4550fc352f6538b7f732381b3fb48207",
-      "previewSHA256": "a883cb79ac07edf3600dc4ddfabaaadf058d89c372653be6fece9e2d5d3bfd50",
-      "gifSHA256": "839126689dea22127edc1e75183f98a3f4cae8792b16b4e26ddf2f28c5bba8eb",
+      "sheetSHA256": "5140d5fc98b58e4285bd2c37fc33b102642ba8b54608774985372c1afb42768b",
+      "previewSHA256": "70f4a263d3b4f7739f8f84f14872f54ef6b9f4150ae323ab87ed033d33bbc105",
+      "gifSHA256": "68a42be0808fd14de739a5cc96abd2b2d0524aa121ca387c30e32031c79ad4ef",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left",
+      "pivotX": 256
     }
   },
   "rangedBodyOnly": true,
@@ -233,5 +243,6 @@
     "previewLoopsVerified": true,
     "previewTimelinesVerified": true
   },
-  "note": "Completed forms published for document review under delegated production. Birth is full scene. Work previews reuse existing body animations and shared cargo overlay. Runtime integration is separate."
+  "note": "Completed forms published for document review under delegated production. Birth is full scene. Work previews reuse existing body animations and shared cargo overlay. Runtime integration is separate.",
+  "sourceFacing": "left"
 }

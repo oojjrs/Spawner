@@ -1,0 +1,289 @@
+{
+  "renderer": "@napi-rs/canvas; not live browser/game",
+  "forms": 24,
+  "frames": 2100,
+  "draws": 4200,
+  "results": [
+    {
+      "key": "bean/antenna",
+      "frames": 116,
+      "draws": 232,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/bean-seed-b.png",
+        "DesignAssets/Animations/BirthResolutionV1/bean-antenna-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "bean/blade-carapace",
+      "frames": 116,
+      "draws": 232,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+        "DesignAssets/Animations/BirthResolutionV1/bean-blade-carapace-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "bean/blade-secretion-carapace",
+      "frames": 116,
+      "draws": 232,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+        "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-carapace-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "bean/blade-secretion",
+      "frames": 116,
+      "draws": 232,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+        "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "bean/blade",
+      "frames": 116,
+      "draws": 232,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/bean-seed-a.png",
+        "DesignAssets/Animations/BirthResolutionV1/bean-blade-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "bean/carapace",
+      "frames": 116,
+      "draws": 232,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/bean-seed-a.png",
+        "DesignAssets/Animations/BirthResolutionV1/bean-carapace-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "bean/gather",
+      "frames": 116,
+      "draws": 232,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/bean-seed-b.png",
+        "DesignAssets/Animations/BirthResolutionV1/bean-gather-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "bean/secretion-carapace",
+      "frames": 116,
+      "draws": 232,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+        "DesignAssets/Animations/BirthResolutionV1/bean-secretion-carapace-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "bean/secretion",
+      "frames": 116,
+      "draws": 232,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/bean-seed-b.png",
+        "DesignAssets/Animations/BirthResolutionV1/bean-secretion-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "pebble/blade",
+      "frames": 79,
+      "draws": 158,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/pebble-blade-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "pebble/carapace",
+      "frames": 79,
+      "draws": 158,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/pebble-carapace-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "pebble/gather",
+      "frames": 66,
+      "draws": 132,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/pebble-gather-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "pebble/secretion",
+      "frames": 48,
+      "draws": 96,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/pebble-secretion-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "spore/blade-carapace",
+      "frames": 78,
+      "draws": 156,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+        "DesignAssets/Animations/BirthResolutionV1/spore-blade-carapace-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "spore/blade-secretion-carapace",
+      "frames": 78,
+      "draws": 156,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+        "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-carapace-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "spore/blade-secretion",
+      "frames": 78,
+      "draws": 156,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+        "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "spore/blade",
+      "frames": 94,
+      "draws": 188,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/spore-combat-stalk.png",
+        "DesignAssets/Animations/BirthResolutionV1/spore-blade-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "spore/carapace",
+      "frames": 94,
+      "draws": 188,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/spore-combat-stalk.png",
+        "DesignAssets/Animations/BirthResolutionV1/spore-carapace-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "spore/gather",
+      "frames": 78,
+      "draws": 156,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/spore-gather-stalk.png",
+        "DesignAssets/Animations/BirthResolutionV1/spore-gather-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "spore/secretion-carapace",
+      "frames": 78,
+      "draws": 156,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+        "DesignAssets/Animations/BirthResolutionV1/spore-secretion-carapace-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "spore/secretion",
+      "frames": 78,
+      "draws": 156,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/spore-secretion-stalk.png",
+        "DesignAssets/Animations/BirthResolutionV1/spore-secretion-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "spring/blade",
+      "frames": 36,
+      "draws": 72,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/spring-blade-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "spring/carapace",
+      "frames": 36,
+      "draws": 72,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/spring-carapace-body.png"
+      ],
+      "ready": true
+    },
+    {
+      "key": "spring/secretion",
+      "frames": 56,
+      "draws": 112,
+      "dpr": 2,
+      "cell": 288,
+      "requested": [
+        "DesignAssets/Animations/BirthResolutionV1/spring-secretion-body.png"
+      ],
+      "ready": true
+    }
+  ]
+}

@@ -40,7 +40,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         120,
         120,
@@ -109,7 +109,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         70,
         70,
@@ -321,7 +321,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         540,
         30,
@@ -710,7 +710,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         590,
         90,

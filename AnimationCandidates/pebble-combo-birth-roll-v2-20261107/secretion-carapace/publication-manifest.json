@@ -26,14 +26,14 @@
       "frameCount": 14,
       "sheet": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/secretion-carapace/birth.png",
       "preview": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/secretion-carapace/birth-preview.webp",
-      "sheetSHA256": "e181a8f3a3e9958085729b3a0cd255c9dc8952cfb8db32f48a811bd422140426",
-      "previewSHA256": "b0897537112a88648e4001cf0dbebe4e65996dc5ddec41e812518a674031240a",
+      "sheetSHA256": "18cea969547d111272f46304fb0bed69d1be6b3c8c701af85bcabd7da808cb6e",
+      "previewSHA256": "9f74a94b43e2d6e8c80597fc2a39d99f7416f431ed8008958064389c7e3e6726",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": true,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameHeight": 512,
-      "pivotX": 383,
+      "pivotX": 129,
       "pivotY": 441,
       "referenceLength": 184,
       "viewSize": 184,
@@ -121,5 +121,6 @@
     }
   ],
   "independentReview": "Approved by audit_all_animations; continuous browser playback not claimed.",
-  "originalSourceSheet": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-birth-v1-sheet.png"
+  "originalSourceSheet": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-birth-v1-sheet.png",
+  "sourceFacing": "left"
 }

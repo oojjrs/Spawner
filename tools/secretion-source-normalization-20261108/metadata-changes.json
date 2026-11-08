@@ -1,0 +1,17 @@
+{
+  "status": "completed",
+  "forms": [
+    "pebble/secretion-carapace",
+    "pebble/secretion-carapace-antenna"
+  ],
+  "files": [
+    "client/secretion-combo-assets.mjs",
+    "client/antenna-combo-assets.mjs",
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/secretion-carapace/publication-manifest.json",
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+    "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+    "client/unit-preview-facing-data.js"
+  ],
+  "nativePixelFiles": 25,
+  "previewFiles": 21
+}

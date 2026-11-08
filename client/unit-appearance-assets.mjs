@@ -2892,7 +2892,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
     "actions": {
       "idle": {
         "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
-        "image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp",
+        "image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp", "sourceFacing": "left",
         "imageHash": "42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86",
         "frameSize": 512,
         "columns": 4,
@@ -2978,7 +2978,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       },
       "walk": {
         "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
-        "image": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp",
+        "image": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp", "sourceFacing": "left",
         "imageHash": "0c165ddad0dfaf87f1928885270b6e207e5d997cd3d97dd062dc8ee6b7e92fac",
         "frameSize": 512,
         "columns": 4,
@@ -3054,8 +3054,8 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       },
       "attack": {
         "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
-        "image": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
-        "imageHash": "f6bf977bbfd72490410192c6c70e6ec17accb294f3f69e5b0626936760547e58",
+        "image": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp", "sourceFacing": "left",
+        "imageHash": "38cbbdc1d88de4a69b519c895ae0cb6619e4162f42ae43671f467fc0c9f26a44",
         "frameSize": 516,
         "columns": 4,
         "frameCount": 16,
@@ -3082,7 +3082,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 453.07317073170736,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "f6bf977bbfd72490410192c6c70e6ec17accb294f3f69e5b0626936760547e58",
+          "sourceHash": "38cbbdc1d88de4a69b519c895ae0cb6619e4162f42ae43671f467fc0c9f26a44",
           "pixelsPerWorld": 738.4615384615385,
           "scale": 0.6933333333333334,
           "offsetX": 77.12,
@@ -3092,7 +3092,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       },
       "hurt": {
         "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
-        "image": "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp",
+        "image": "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp", "sourceFacing": "left",
         "imageHash": "761914e25e0f4def4dc01f4fcadc711db0058a0919a750407a5b35930e5d9ba6",
         "frameSize": 516,
         "columns": 4,
@@ -3130,7 +3130,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       },
       "death": {
         "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
-        "image": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+        "image": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "sourceFacing": "left",
         "imageHash": "85be0868a66a515983d14d2e10dfdd58f3978cc113e512e52e67bcaac07ca593",
         "frameSize": 516,
         "columns": 4,

@@ -1,0 +1,12 @@
+{
+  "imagesHashed": 24864,
+  "targets": {
+    "a859be2cc6aa5865822867de8ae353766376f2e631364be862d3c85fd9d1c492": "idle",
+    "1218712d62b806b9eb49759251bbced0266e72b5c60e843bba5e9e00778968d2": "walk",
+    "0aac8f78101371b045010f58cbce29154cd8e5a9fa5d3294e3fea76b6285ece1": "ranged-attack",
+    "359e79cfda6c6bd3e41fba01de158d69bb3ac23dfbd85f72b7f5e80ea6d94485": "hurt",
+    "aea312dd9493dcef4500aef5815276c564b13da9c5421a3affeefce5f0d33b34": "birth",
+    "1ced66835853c196b9966edec1c51a52abe22c9016e9cf1cf18cf5c859e49b70": "death"
+  },
+  "found": []
+}

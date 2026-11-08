@@ -40,7 +40,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         120,
         120,
@@ -109,7 +109,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         70,
         70,
@@ -151,9 +151,9 @@
       "sheet": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-sheet.png",
       "preview": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-preview.webp",
       "gif": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-preview.gif",
-      "sheetSHA256": "7ca79e521f765a4eb534447babe766872d491fcd2b5b0aa3ac17307b44293a3d",
-      "previewSHA256": "8d11a1103fafdbdf6c0d486537029b09fffd1c9d08edef14c1d3a6fedfe817d0",
-      "gifSHA256": "dfd6aeb6f01f3d0ce4aa2a8ecedce54b272d55021c9b7294e7519f82ad69c8f5",
+      "sheetSHA256": "ef27388e824bf12c625cf0b6659e607eaa06bd02e8d2cea7f360581eb9f18abf",
+      "previewSHA256": "6a056b0a3f9e6fda86b9702f5c1117ad0d5ef6dac5a5c7c22ce9ad96bcc9a7ec",
+      "gifSHA256": "3511426e1b7f50d67dbce641bcadb959f4a90868d53dbecaedd243b76e85612e",
       "durationsMs": [
         60,
         70,
@@ -178,7 +178,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         560,
         70,
@@ -250,7 +250,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         540,
         30,
@@ -639,7 +639,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         590,
         90,

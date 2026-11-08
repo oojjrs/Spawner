@@ -1,0 +1,16 @@
+{
+  "form": "pebble/secretion-carapace-antenna",
+  "action": "birth",
+  "reason": "Packed birth raw source hash not found among 24864 sibling repository images; keep packed/runtime and previews unchanged.",
+  "sourceSHA256": "aea312dd9493dcef4500aef5815276c564b13da9c5421a3affeefce5f0d33b34",
+  "rawCellWidth": null,
+  "packedCellWidth": 512,
+  "packScale": 1.0865384615384615,
+  "packCrop": [
+    9,
+    139,
+    441,
+    340
+  ],
+  "packTranslationX": 21
+}

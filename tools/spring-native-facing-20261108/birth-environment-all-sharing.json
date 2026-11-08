@@ -1,0 +1,60 @@
+{
+  "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png": [
+    "bean/blade-antenna",
+    "bean/blade-carapace-antenna",
+    "bean/blade-secretion-antenna",
+    "bean/blade-secretion-carapace-antenna",
+    "bean/carapace-antenna",
+    "bean/secretion-antenna",
+    "bean/secretion-carapace-antenna",
+    "bean/blade-carapace",
+    "bean/secretion-carapace",
+    "bean/blade-secretion",
+    "bean/blade-secretion-carapace",
+    "bean/base"
+  ],
+  "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png": [
+    "spore/blade-antenna",
+    "spore/blade-carapace-antenna",
+    "spore/blade-secretion-antenna",
+    "spore/blade-secretion-carapace-antenna",
+    "spore/carapace-antenna",
+    "spore/secretion-antenna",
+    "spore/secretion-carapace-antenna",
+    "spore/blade-carapace",
+    "spore/secretion-carapace",
+    "spore/blade-secretion",
+    "spore/blade-secretion-carapace"
+  ],
+  "DesignAssets/Animations/BirthSceneLayersV1/c945d053d51e8a1102d2264c6496c0904587b00c0e2808e9c0733e29f76c3f9b.png": [
+    "spring/blade-antenna"
+  ],
+  "DesignAssets/Animations/BirthSceneLayersV1/89dafdbbd6e9ac8406e38ef9e03612d301f5ea800b3f007c9dd2e78083422450.png": [
+    "spring/blade-secretion-antenna"
+  ],
+  "DesignAssets/Animations/BirthSceneLayersV1/4d353f7e6a238450931a51d99db2651dc60c48da430df70d434d5e426ea43fe1.png": [
+    "spring/blade-secretion-carapace-antenna"
+  ],
+  "DesignAssets/Animations/BirthSceneLayersV1/ebfe66874cde38398024d9306618457503a386074f2b3ba377c365c6c1cba9c1.png": [
+    "spring/secretion-antenna"
+  ],
+  "DesignAssets/Animations/BirthResolutionV1/bean-seed-b.png": [
+    "bean/gather",
+    "bean/secretion",
+    "bean/antenna"
+  ],
+  "DesignAssets/Animations/BirthResolutionV1/bean-seed-a.png": [
+    "bean/blade",
+    "bean/carapace"
+  ],
+  "DesignAssets/Animations/BirthResolutionV1/spore-gather-stalk.png": [
+    "spore/gather"
+  ],
+  "DesignAssets/Animations/BirthResolutionV1/spore-combat-stalk.png": [
+    "spore/blade",
+    "spore/carapace"
+  ],
+  "DesignAssets/Animations/BirthResolutionV1/spore-secretion-stalk.png": [
+    "spore/secretion"
+  ]
+}

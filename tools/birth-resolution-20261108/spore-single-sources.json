@@ -1,0 +1,2844 @@
+[
+  {
+    "key": "spore/gather",
+    "source": "/workspace/shared/spore-gather-birth-v3/spore-gather-birth-v3-sheet.png",
+    "sourceSHA256": "360f8bc3f6b51c054e1af721bec4cfa1f175f335d83327a5d7ca379cc30da282",
+    "trace": "/workspace/shared/spore-gather-birth-v3/scene-runtime-trace.json",
+    "nativeBodyLength": 426,
+    "reconstruction": [
+      {
+        "frame": 0,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 1,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 2,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 3,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 4,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 5,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 6,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 7,
+        "alpha128IoU": 0.9682242990654205,
+        "newBounds": [
+          316,
+          331,
+          343,
+          357
+        ],
+        "oldBounds": [
+          316,
+          331,
+          343,
+          357
+        ],
+        "alphaIoU": 0.8761467889908257,
+        "maxDifference": 255,
+        "meanVisibleDifference": 12.080275229357799
+      },
+      {
+        "frame": 8,
+        "alpha128IoU": 0.9682242990654205,
+        "newBounds": [
+          316,
+          331,
+          343,
+          357
+        ],
+        "oldBounds": [
+          316,
+          331,
+          343,
+          357
+        ],
+        "alphaIoU": 0.8761467889908257,
+        "maxDifference": 255,
+        "meanVisibleDifference": 12.080275229357799
+      },
+      {
+        "frame": 9,
+        "alpha128IoU": 0.9709618874773139,
+        "newBounds": [
+          323,
+          348,
+          351,
+          374
+        ],
+        "oldBounds": [
+          323,
+          348,
+          351,
+          374
+        ],
+        "alphaIoU": 0.892128279883382,
+        "maxDifference": 255,
+        "meanVisibleDifference": 12.879737609329446
+      },
+      {
+        "frame": 10,
+        "alpha128IoU": 0.9709618874773139,
+        "newBounds": [
+          323,
+          348,
+          351,
+          374
+        ],
+        "oldBounds": [
+          323,
+          348,
+          351,
+          374
+        ],
+        "alphaIoU": 0.892128279883382,
+        "maxDifference": 255,
+        "meanVisibleDifference": 12.879737609329446
+      },
+      {
+        "frame": 11,
+        "alpha128IoU": 0.9714285714285714,
+        "newBounds": [
+          323,
+          350,
+          355,
+          381
+        ],
+        "oldBounds": [
+          322,
+          349,
+          355,
+          381
+        ],
+        "alphaIoU": 0.8875661375661376,
+        "maxDifference": 255,
+        "meanVisibleDifference": 12.709656084656086
+      },
+      {
+        "frame": 12,
+        "alpha128IoU": 0.9714285714285714,
+        "newBounds": [
+          323,
+          350,
+          355,
+          381
+        ],
+        "oldBounds": [
+          322,
+          349,
+          355,
+          381
+        ],
+        "alphaIoU": 0.8875661375661376,
+        "maxDifference": 255,
+        "meanVisibleDifference": 12.709656084656086
+      },
+      {
+        "frame": 13,
+        "alpha128IoU": 0.9801652892561984,
+        "newBounds": [
+          322,
+          350,
+          356,
+          384
+        ],
+        "oldBounds": [
+          322,
+          350,
+          356,
+          384
+        ],
+        "alphaIoU": 0.8822768434670116,
+        "maxDifference": 255,
+        "meanVisibleDifference": 12.629042690815007
+      },
+      {
+        "frame": 14,
+        "alpha128IoU": 0.9801652892561984,
+        "newBounds": [
+          322,
+          350,
+          356,
+          384
+        ],
+        "oldBounds": [
+          322,
+          350,
+          356,
+          384
+        ],
+        "alphaIoU": 0.8822768434670116,
+        "maxDifference": 255,
+        "meanVisibleDifference": 12.629042690815007
+      },
+      {
+        "frame": 15,
+        "alpha128IoU": 0.9746621621621622,
+        "newBounds": [
+          322,
+          351,
+          353,
+          385
+        ],
+        "oldBounds": [
+          322,
+          351,
+          353,
+          385
+        ],
+        "alphaIoU": 0.8751642575558476,
+        "maxDifference": 255,
+        "meanVisibleDifference": 13.686925098554534
+      },
+      {
+        "frame": 16,
+        "alpha128IoU": 0.9746621621621622,
+        "newBounds": [
+          322,
+          351,
+          353,
+          385
+        ],
+        "oldBounds": [
+          322,
+          351,
+          353,
+          385
+        ],
+        "alphaIoU": 0.8751642575558476,
+        "maxDifference": 255,
+        "meanVisibleDifference": 13.686925098554534
+      },
+      {
+        "frame": 17,
+        "alpha128IoU": 0.9779286926994907,
+        "newBounds": [
+          322,
+          352,
+          351,
+          387
+        ],
+        "oldBounds": [
+          321,
+          352,
+          351,
+          387
+        ],
+        "alphaIoU": 0.8723684210526316,
+        "maxDifference": 255,
+        "meanVisibleDifference": 14.16842105263158
+      },
+      {
+        "frame": 18,
+        "alpha128IoU": 0.9779286926994907,
+        "newBounds": [
+          322,
+          352,
+          351,
+          387
+        ],
+        "oldBounds": [
+          321,
+          352,
+          351,
+          387
+        ],
+        "alphaIoU": 0.8723684210526316,
+        "maxDifference": 255,
+        "meanVisibleDifference": 14.16842105263158
+      },
+      {
+        "frame": 19,
+        "alpha128IoU": 0.9762308998302207,
+        "newBounds": [
+          322,
+          351,
+          350,
+          387
+        ],
+        "oldBounds": [
+          322,
+          351,
+          350,
+          387
+        ],
+        "alphaIoU": 0.8733509234828496,
+        "maxDifference": 255,
+        "meanVisibleDifference": 13.154023746701847
+      },
+      {
+        "frame": 20,
+        "alpha128IoU": 0.9762308998302207,
+        "newBounds": [
+          322,
+          351,
+          350,
+          387
+        ],
+        "oldBounds": [
+          322,
+          351,
+          350,
+          387
+        ],
+        "alphaIoU": 0.8733509234828496,
+        "maxDifference": 255,
+        "meanVisibleDifference": 13.154023746701847
+      },
+      {
+        "frame": 21,
+        "alpha128IoU": 0.9689542483660131,
+        "newBounds": [
+          317,
+          339,
+          346,
+          366
+        ],
+        "oldBounds": [
+          317,
+          339,
+          346,
+          366
+        ],
+        "alphaIoU": 0.8748317631224765,
+        "maxDifference": 255,
+        "meanVisibleDifference": 12.289030955585464
+      },
+      {
+        "frame": 22,
+        "alpha128IoU": 0.9801652892561984,
+        "newBounds": [
+          318,
+          313,
+          346,
+          340
+        ],
+        "oldBounds": [
+          318,
+          313,
+          347,
+          340
+        ],
+        "alphaIoU": 0.885752688172043,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.901209677419354
+      },
+      {
+        "frame": 23,
+        "alpha128IoU": 0.9735099337748344,
+        "newBounds": [
+          320,
+          291,
+          347,
+          319
+        ],
+        "oldBounds": [
+          319,
+          291,
+          347,
+          319
+        ],
+        "alphaIoU": 0.8865153538050734,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.069425901201603
+      },
+      {
+        "frame": 24,
+        "alpha128IoU": 0.9815126050420168,
+        "newBounds": [
+          322,
+          272,
+          350,
+          300
+        ],
+        "oldBounds": [
+          322,
+          271,
+          350,
+          300
+        ],
+        "alphaIoU": 0.8674698795180723,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.62516733601071
+      },
+      {
+        "frame": 25,
+        "alpha128IoU": 0.9955290611028316,
+        "newBounds": [
+          324,
+          254,
+          354,
+          286
+        ],
+        "oldBounds": [
+          324,
+          254,
+          354,
+          286
+        ],
+        "alphaIoU": 0.8654073199527745,
+        "maxDifference": 255,
+        "meanVisibleDifference": 11.650236127508855
+      },
+      {
+        "frame": 26,
+        "alpha128IoU": 0.9666666666666667,
+        "newBounds": [
+          331,
+          240,
+          359,
+          273
+        ],
+        "oldBounds": [
+          331,
+          240,
+          359,
+          273
+        ],
+        "alphaIoU": 0.8664302600472813,
+        "maxDifference": 255,
+        "meanVisibleDifference": 11.679078014184396
+      },
+      {
+        "frame": 27,
+        "alpha128IoU": 0.9866468842729971,
+        "newBounds": [
+          335,
+          230,
+          365,
+          262
+        ],
+        "oldBounds": [
+          335,
+          230,
+          365,
+          262
+        ],
+        "alphaIoU": 0.8887573964497042,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.28757396449704
+      },
+      {
+        "frame": 28,
+        "alpha128IoU": 0.9823269513991163,
+        "newBounds": [
+          342,
+          226,
+          373,
+          256
+        ],
+        "oldBounds": [
+          342,
+          226,
+          373,
+          256
+        ],
+        "alphaIoU": 0.9077844311377246,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.565868263473053
+      },
+      {
+        "frame": 29,
+        "alpha128IoU": 0.9920634920634921,
+        "newBounds": [
+          349,
+          227,
+          386,
+          257
+        ],
+        "oldBounds": [
+          349,
+          227,
+          386,
+          257
+        ],
+        "alphaIoU": 0.9059196617336153,
+        "maxDifference": 255,
+        "meanVisibleDifference": 6.925739957716702
+      },
+      {
+        "frame": 30,
+        "alpha128IoU": 0.9854497354497355,
+        "newBounds": [
+          361,
+          226,
+          395,
+          260
+        ],
+        "oldBounds": [
+          361,
+          226,
+          395,
+          260
+        ],
+        "alphaIoU": 0.9171038824763903,
+        "maxDifference": 255,
+        "meanVisibleDifference": 7.238195173137461
+      },
+      {
+        "frame": 31,
+        "alpha128IoU": 0.9907651715039578,
+        "newBounds": [
+          370,
+          228,
+          399,
+          266
+        ],
+        "oldBounds": [
+          370,
+          228,
+          399,
+          266
+        ],
+        "alphaIoU": 0.9035639412997903,
+        "maxDifference": 255,
+        "meanVisibleDifference": 7.677148846960168
+      },
+      {
+        "frame": 32,
+        "alpha128IoU": 0.9842726081258192,
+        "newBounds": [
+          378,
+          235,
+          411,
+          269
+        ],
+        "oldBounds": [
+          378,
+          235,
+          411,
+          269
+        ],
+        "alphaIoU": 0.896875,
+        "maxDifference": 255,
+        "meanVisibleDifference": 7.051822916666667
+      },
+      {
+        "frame": 33,
+        "alpha128IoU": 0.9914738124238733,
+        "newBounds": [
+          381,
+          238,
+          420,
+          268
+        ],
+        "oldBounds": [
+          381,
+          238,
+          420,
+          268
+        ],
+        "alphaIoU": 0.9228515625,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.979736328125
+      },
+      {
+        "frame": 34,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          389,
+          241,
+          424,
+          276
+        ],
+        "oldBounds": [
+          389,
+          241,
+          424,
+          276
+        ],
+        "alphaIoU": 0.9228515625,
+        "maxDifference": 255,
+        "meanVisibleDifference": 5.291015625
+      },
+      {
+        "frame": 35,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          402,
+          241,
+          432,
+          280
+        ],
+        "oldBounds": [
+          402,
+          241,
+          432,
+          280
+        ],
+        "alphaIoU": 0.923671497584541,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.302898550724637
+      },
+      {
+        "frame": 36,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          408,
+          245,
+          443,
+          281
+        ],
+        "oldBounds": [
+          408,
+          245,
+          443,
+          281
+        ],
+        "alphaIoU": 0.9216634429400387,
+        "maxDifference": 255,
+        "meanVisibleDifference": 5.046905222437137
+      },
+      {
+        "frame": 37,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          417,
+          253,
+          459,
+          287
+        ],
+        "oldBounds": [
+          417,
+          253,
+          459,
+          287
+        ],
+        "alphaIoU": 0.9182222222222223,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.387555555555555
+      },
+      {
+        "frame": 38,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          428,
+          259,
+          468,
+          294
+        ],
+        "oldBounds": [
+          428,
+          259,
+          468,
+          294
+        ],
+        "alphaIoU": 0.9238263950398583,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.538529672276351
+      },
+      {
+        "frame": 39,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          441,
+          265,
+          477,
+          304
+        ],
+        "oldBounds": [
+          441,
+          265,
+          477,
+          304
+        ],
+        "alphaIoU": 0.9201053555750659,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.9956101843722562
+      },
+      {
+        "frame": 40,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          451,
+          272,
+          483,
+          315
+        ],
+        "oldBounds": [
+          451,
+          272,
+          483,
+          315
+        ],
+        "alphaIoU": 0.9257950530035336,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.9909452296819787
+      },
+      {
+        "frame": 41,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          460,
+          284,
+          496,
+          323
+        ],
+        "oldBounds": [
+          460,
+          284,
+          496,
+          323
+        ],
+        "alphaIoU": 0.9182058047493403,
+        "maxDifference": 255,
+        "meanVisibleDifference": 5.039357959542656
+      },
+      {
+        "frame": 42,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          467,
+          297,
+          505,
+          334
+        ],
+        "oldBounds": [
+          467,
+          297,
+          505,
+          334
+        ],
+        "alphaIoU": 0.9367764915405165,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.593499554764025
+      },
+      {
+        "frame": 43,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          473,
+          308,
+          513,
+          343
+        ],
+        "oldBounds": [
+          473,
+          308,
+          513,
+          343
+        ],
+        "alphaIoU": 0.9244444444444444,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.696666666666666
+      },
+      {
+        "frame": 44,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          478,
+          319,
+          521,
+          352
+        ],
+        "oldBounds": [
+          478,
+          319,
+          521,
+          352
+        ],
+        "alphaIoU": 0.918656056587091,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.333775419982317
+      },
+      {
+        "frame": 45,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          485,
+          331,
+          528,
+          363
+        ],
+        "oldBounds": [
+          485,
+          331,
+          528,
+          363
+        ],
+        "alphaIoU": 0.9244444444444444,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.449333333333333
+      },
+      {
+        "frame": 46,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          492,
+          344,
+          535,
+          376
+        ],
+        "oldBounds": [
+          492,
+          344,
+          535,
+          376
+        ],
+        "alphaIoU": 0.9330357142857143,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.1203125
+      },
+      {
+        "frame": 47,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          498,
+          357,
+          541,
+          389
+        ],
+        "oldBounds": [
+          498,
+          357,
+          541,
+          389
+        ],
+        "alphaIoU": 0.9330357142857143,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.1203125
+      },
+      {
+        "frame": 48,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          503,
+          371,
+          546,
+          403
+        ],
+        "oldBounds": [
+          503,
+          371,
+          546,
+          403
+        ],
+        "alphaIoU": 0.9330357142857143,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.1203125
+      },
+      {
+        "frame": 49,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          507,
+          386,
+          550,
+          418
+        ],
+        "oldBounds": [
+          507,
+          386,
+          550,
+          418
+        ],
+        "alphaIoU": 0.9330357142857143,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.1203125
+      },
+      {
+        "frame": 50,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          510,
+          402,
+          553,
+          434
+        ],
+        "oldBounds": [
+          510,
+          402,
+          553,
+          434
+        ],
+        "alphaIoU": 0.9330357142857143,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.1203125
+      },
+      {
+        "frame": 51,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          512,
+          419,
+          555,
+          451
+        ],
+        "oldBounds": [
+          512,
+          419,
+          555,
+          451
+        ],
+        "alphaIoU": 0.9330357142857143,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.1203125
+      },
+      {
+        "frame": 52,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          436,
+          557,
+          468
+        ],
+        "oldBounds": [
+          514,
+          436,
+          557,
+          468
+        ],
+        "alphaIoU": 0.9361702127659575,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.5494237588652484
+      },
+      {
+        "frame": 53,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          512,
+          448,
+          559,
+          477
+        ],
+        "oldBounds": [
+          512,
+          448,
+          559,
+          477
+        ],
+        "alphaIoU": 0.9329805996472663,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.010361552028218
+      },
+      {
+        "frame": 54,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          512,
+          447,
+          558,
+          477
+        ],
+        "oldBounds": [
+          512,
+          447,
+          558,
+          477
+        ],
+        "alphaIoU": 0.9491071428571428,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.7703125
+      },
+      {
+        "frame": 55,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          446,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          446,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9391226499552372,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.812667860340197
+      },
+      {
+        "frame": 56,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          443,
+          557,
+          477
+        ],
+        "oldBounds": [
+          515,
+          443,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9347442680776014,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.056657848324515
+      },
+      {
+        "frame": 57,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9300699300699301,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.141826923076923
+      },
+      {
+        "frame": 58,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9352580927384077,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.0039370078740157
+      },
+      {
+        "frame": 59,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          445,
+          558,
+          477
+        ],
+        "oldBounds": [
+          514,
+          445,
+          558,
+          477
+        ],
+        "alphaIoU": 0.9399477806788512,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.5158833768494344
+      },
+      {
+        "frame": 60,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          513,
+          445,
+          558,
+          477
+        ],
+        "oldBounds": [
+          513,
+          445,
+          558,
+          477
+        ],
+        "alphaIoU": 0.9366869037294016,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.199479618386817
+      },
+      {
+        "frame": 61,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          513,
+          445,
+          558,
+          477
+        ],
+        "oldBounds": [
+          513,
+          445,
+          558,
+          477
+        ],
+        "alphaIoU": 0.9364664926022629,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.376414273281114
+      },
+      {
+        "frame": 62,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          513,
+          445,
+          558,
+          477
+        ],
+        "oldBounds": [
+          513,
+          445,
+          558,
+          477
+        ],
+        "alphaIoU": 0.9391833188531712,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.899000868809731
+      },
+      {
+        "frame": 63,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          445,
+          558,
+          477
+        ],
+        "oldBounds": [
+          514,
+          445,
+          558,
+          477
+        ],
+        "alphaIoU": 0.9399477806788512,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.543733681462141
+      },
+      {
+        "frame": 64,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9355400696864111,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.491289198606272
+      },
+      {
+        "frame": 65,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9373368146214099,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.876631853785901
+      },
+      {
+        "frame": 66,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9373368146214099,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.876631853785901
+      },
+      {
+        "frame": 67,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9373368146214099,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.876631853785901
+      },
+      {
+        "frame": 68,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9373368146214099,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.876631853785901
+      },
+      {
+        "frame": 69,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9373368146214099,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.876631853785901
+      },
+      {
+        "frame": 70,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9373368146214099,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.876631853785901
+      },
+      {
+        "frame": 71,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9373368146214099,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.876631853785901
+      },
+      {
+        "frame": 72,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9373368146214099,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.876631853785901
+      },
+      {
+        "frame": 73,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9373368146214099,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.876631853785901
+      },
+      {
+        "frame": 74,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9373368146214099,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.876631853785901
+      },
+      {
+        "frame": 75,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9373368146214099,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.876631853785901
+      },
+      {
+        "frame": 76,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9373368146214099,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.876631853785901
+      },
+      {
+        "frame": 77,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "oldBounds": [
+          514,
+          444,
+          557,
+          477
+        ],
+        "alphaIoU": 0.9373368146214099,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.876631853785901
+      }
+    ]
+  },
+  {
+    "key": "spore/secretion",
+    "source": "/workspace/scratch/cdf786db13f9/art-review/spore-secretion-fullbody-v1-20261107/birth-v1/spore-secretion-birth-fullbody-v1-sheet.png",
+    "sourceSHA256": "0fc82becf26ffb993c36ae207b236d536f3eaab30783590f783bdd3654a498d8",
+    "trace": "/workspace/scratch/cdf786db13f9/art-review/spore-secretion-fullbody-v1-20261107/birth-v1/scene-runtime-trace.json",
+    "nativeBodyLength": 275,
+    "reconstruction": [
+      {
+        "frame": 0,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 1,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 2,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 3,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 4,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 5,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 6,
+        "alpha128IoU": 0.0,
+        "newBounds": null,
+        "oldBounds": null,
+        "alphaIoU": 0.0,
+        "maxDifference": 0,
+        "meanVisibleDifference": 0
+      },
+      {
+        "frame": 7,
+        "alpha128IoU": 0.9568221070811744,
+        "newBounds": [
+          316,
+          331,
+          344,
+          357
+        ],
+        "oldBounds": [
+          315,
+          331,
+          345,
+          357
+        ],
+        "alphaIoU": 0.5952380952380952,
+        "maxDifference": 255,
+        "meanVisibleDifference": 7.030714285714286
+      },
+      {
+        "frame": 8,
+        "alpha128IoU": 0.9568221070811744,
+        "newBounds": [
+          316,
+          331,
+          344,
+          357
+        ],
+        "oldBounds": [
+          315,
+          331,
+          345,
+          357
+        ],
+        "alphaIoU": 0.5952380952380952,
+        "maxDifference": 255,
+        "meanVisibleDifference": 7.030714285714286
+      },
+      {
+        "frame": 9,
+        "alpha128IoU": 0.9679595278246206,
+        "newBounds": [
+          323,
+          348,
+          351,
+          374
+        ],
+        "oldBounds": [
+          322,
+          348,
+          351,
+          374
+        ],
+        "alphaIoU": 0.6066176470588235,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.541590073529411
+      },
+      {
+        "frame": 10,
+        "alpha128IoU": 0.9679595278246206,
+        "newBounds": [
+          323,
+          348,
+          351,
+          374
+        ],
+        "oldBounds": [
+          322,
+          348,
+          351,
+          374
+        ],
+        "alphaIoU": 0.6066176470588235,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.541590073529411
+      },
+      {
+        "frame": 11,
+        "alpha128IoU": 0.9716981132075472,
+        "newBounds": [
+          323,
+          350,
+          356,
+          380
+        ],
+        "oldBounds": [
+          322,
+          349,
+          356,
+          380
+        ],
+        "alphaIoU": 0.6313485113835376,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.44023642732049
+      },
+      {
+        "frame": 12,
+        "alpha128IoU": 0.9716981132075472,
+        "newBounds": [
+          323,
+          350,
+          356,
+          380
+        ],
+        "oldBounds": [
+          322,
+          349,
+          356,
+          380
+        ],
+        "alphaIoU": 0.6313485113835376,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.44023642732049
+      },
+      {
+        "frame": 13,
+        "alpha128IoU": 0.9813374805598756,
+        "newBounds": [
+          322,
+          350,
+          357,
+          383
+        ],
+        "oldBounds": [
+          322,
+          350,
+          357,
+          383
+        ],
+        "alphaIoU": 0.6361256544502618,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.274432809773124
+      },
+      {
+        "frame": 14,
+        "alpha128IoU": 0.9813374805598756,
+        "newBounds": [
+          322,
+          350,
+          357,
+          383
+        ],
+        "oldBounds": [
+          322,
+          350,
+          357,
+          383
+        ],
+        "alphaIoU": 0.6361256544502618,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.274432809773124
+      },
+      {
+        "frame": 15,
+        "alpha128IoU": 0.9746434231378764,
+        "newBounds": [
+          322,
+          351,
+          354,
+          384
+        ],
+        "oldBounds": [
+          322,
+          351,
+          354,
+          384
+        ],
+        "alphaIoU": 0.634906500445236,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.694122885129119
+      },
+      {
+        "frame": 16,
+        "alpha128IoU": 0.9746434231378764,
+        "newBounds": [
+          322,
+          351,
+          354,
+          384
+        ],
+        "oldBounds": [
+          322,
+          351,
+          354,
+          384
+        ],
+        "alphaIoU": 0.634906500445236,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.694122885129119
+      },
+      {
+        "frame": 17,
+        "alpha128IoU": 0.9791666666666666,
+        "newBounds": [
+          322,
+          352,
+          351,
+          386
+        ],
+        "oldBounds": [
+          321,
+          352,
+          351,
+          386
+        ],
+        "alphaIoU": 0.6363636363636364,
+        "maxDifference": 255,
+        "meanVisibleDifference": 9.735823582358236
+      },
+      {
+        "frame": 18,
+        "alpha128IoU": 0.9791666666666666,
+        "newBounds": [
+          322,
+          352,
+          351,
+          386
+        ],
+        "oldBounds": [
+          321,
+          352,
+          351,
+          386
+        ],
+        "alphaIoU": 0.6363636363636364,
+        "maxDifference": 255,
+        "meanVisibleDifference": 9.735823582358236
+      },
+      {
+        "frame": 19,
+        "alpha128IoU": 0.9711538461538461,
+        "newBounds": [
+          322,
+          351,
+          350,
+          386
+        ],
+        "oldBounds": [
+          321,
+          351,
+          350,
+          386
+        ],
+        "alphaIoU": 0.6403985507246377,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.657835144927537
+      },
+      {
+        "frame": 20,
+        "alpha128IoU": 0.9711538461538461,
+        "newBounds": [
+          322,
+          351,
+          350,
+          386
+        ],
+        "oldBounds": [
+          321,
+          351,
+          350,
+          386
+        ],
+        "alphaIoU": 0.6403985507246377,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.657835144927537
+      },
+      {
+        "frame": 21,
+        "alpha128IoU": 0.9702380952380952,
+        "newBounds": [
+          316,
+          338,
+          348,
+          366
+        ],
+        "oldBounds": [
+          315,
+          338,
+          348,
+          366
+        ],
+        "alphaIoU": 0.7643312101910829,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.01088110403397
+      },
+      {
+        "frame": 22,
+        "alpha128IoU": 0.9730538922155688,
+        "newBounds": [
+          316,
+          312,
+          348,
+          341
+        ],
+        "oldBounds": [
+          316,
+          312,
+          349,
+          341
+        ],
+        "alphaIoU": 0.7715196599362381,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.57173219978746
+      },
+      {
+        "frame": 23,
+        "alpha128IoU": 0.976083707025411,
+        "newBounds": [
+          317,
+          289,
+          349,
+          318
+        ],
+        "oldBounds": [
+          317,
+          289,
+          349,
+          319
+        ],
+        "alphaIoU": 0.7767094017094017,
+        "maxDifference": 255,
+        "meanVisibleDifference": 7.523504273504273
+      },
+      {
+        "frame": 24,
+        "alpha128IoU": 0.9863636363636363,
+        "newBounds": [
+          320,
+          270,
+          350,
+          299
+        ],
+        "oldBounds": [
+          320,
+          270,
+          350,
+          299
+        ],
+        "alphaIoU": 0.7596153846153846,
+        "maxDifference": 255,
+        "meanVisibleDifference": 9.201655982905983
+      },
+      {
+        "frame": 25,
+        "alpha128IoU": 0.9885550786838341,
+        "newBounds": [
+          325,
+          252,
+          356,
+          284
+        ],
+        "oldBounds": [
+          325,
+          252,
+          356,
+          284
+        ],
+        "alphaIoU": 0.8246187363834423,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.788943355119825
+      },
+      {
+        "frame": 26,
+        "alpha128IoU": 0.9815864022662889,
+        "newBounds": [
+          331,
+          238,
+          361,
+          274
+        ],
+        "oldBounds": [
+          330,
+          238,
+          361,
+          274
+        ],
+        "alphaIoU": 0.8212351029252438,
+        "maxDifference": 255,
+        "meanVisibleDifference": 8.285482123510292
+      },
+      {
+        "frame": 27,
+        "alpha128IoU": 0.9786628733997155,
+        "newBounds": [
+          336,
+          232,
+          366,
+          264
+        ],
+        "oldBounds": [
+          335,
+          232,
+          366,
+          264
+        ],
+        "alphaIoU": 0.8405639913232104,
+        "maxDifference": 255,
+        "meanVisibleDifference": 7.445227765726681
+      },
+      {
+        "frame": 28,
+        "alpha128IoU": 0.980225988700565,
+        "newBounds": [
+          343,
+          228,
+          376,
+          259
+        ],
+        "oldBounds": [
+          343,
+          228,
+          376,
+          259
+        ],
+        "alphaIoU": 0.8415948275862069,
+        "maxDifference": 255,
+        "meanVisibleDifference": 6.838631465517241
+      },
+      {
+        "frame": 29,
+        "alpha128IoU": 0.98,
+        "newBounds": [
+          348,
+          228,
+          386,
+          261
+        ],
+        "oldBounds": [
+          348,
+          228,
+          386,
+          261
+        ],
+        "alphaIoU": 0.826251180358829,
+        "maxDifference": 255,
+        "meanVisibleDifference": 6.705382436260623
+      },
+      {
+        "frame": 30,
+        "alpha128IoU": 0.988621997471555,
+        "newBounds": [
+          359,
+          229,
+          392,
+          261
+        ],
+        "oldBounds": [
+          359,
+          229,
+          392,
+          261
+        ],
+        "alphaIoU": 0.8444022770398482,
+        "maxDifference": 255,
+        "meanVisibleDifference": 6.407020872865275
+      },
+      {
+        "frame": 31,
+        "alpha128IoU": 0.9836065573770492,
+        "newBounds": [
+          367,
+          228,
+          400,
+          266
+        ],
+        "oldBounds": [
+          367,
+          228,
+          400,
+          267
+        ],
+        "alphaIoU": 0.8353831598864712,
+        "maxDifference": 255,
+        "meanVisibleDifference": 5.884578997161778
+      },
+      {
+        "frame": 32,
+        "alpha128IoU": 0.9910941475826972,
+        "newBounds": [
+          376,
+          233,
+          407,
+          265
+        ],
+        "oldBounds": [
+          376,
+          233,
+          407,
+          265
+        ],
+        "alphaIoU": 0.8526615969581749,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.95175855513308
+      },
+      {
+        "frame": 33,
+        "alpha128IoU": 0.9986910994764397,
+        "newBounds": [
+          380,
+          238,
+          420,
+          268
+        ],
+        "oldBounds": [
+          380,
+          238,
+          420,
+          268
+        ],
+        "alphaIoU": 0.7774750227066304,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.531562216167121
+      },
+      {
+        "frame": 34,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          394,
+          242,
+          425,
+          272
+        ],
+        "oldBounds": [
+          394,
+          242,
+          425,
+          272
+        ],
+        "alphaIoU": 0.8222637979420019,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.3889148737137513
+      },
+      {
+        "frame": 35,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          402,
+          240,
+          433,
+          280
+        ],
+        "oldBounds": [
+          402,
+          240,
+          433,
+          280
+        ],
+        "alphaIoU": 0.8149861239592969,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.7345050878815913
+      },
+      {
+        "frame": 36,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          412,
+          249,
+          443,
+          282
+        ],
+        "oldBounds": [
+          412,
+          249,
+          443,
+          282
+        ],
+        "alphaIoU": 0.8225957049486461,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.8758169934640523
+      },
+      {
+        "frame": 37,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          418,
+          255,
+          457,
+          286
+        ],
+        "oldBounds": [
+          418,
+          255,
+          457,
+          286
+        ],
+        "alphaIoU": 0.8253521126760563,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.922300469483568
+      },
+      {
+        "frame": 38,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          430,
+          261,
+          467,
+          292
+        ],
+        "oldBounds": [
+          430,
+          261,
+          467,
+          292
+        ],
+        "alphaIoU": 0.812093023255814,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.4632558139534884
+      },
+      {
+        "frame": 39,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          443,
+          268,
+          474,
+          303
+        ],
+        "oldBounds": [
+          443,
+          268,
+          474,
+          303
+        ],
+        "alphaIoU": 0.8243494423791822,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.863382899628253
+      },
+      {
+        "frame": 40,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          452,
+          274,
+          482,
+          314
+        ],
+        "oldBounds": [
+          452,
+          274,
+          482,
+          314
+        ],
+        "alphaIoU": 0.8115134633240483,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.9229340761374187
+      },
+      {
+        "frame": 41,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          461,
+          286,
+          492,
+          321
+        ],
+        "oldBounds": [
+          461,
+          286,
+          492,
+          321
+        ],
+        "alphaIoU": 0.8183503243744208,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.2409638554216866
+      },
+      {
+        "frame": 42,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          469,
+          299,
+          501,
+          329
+        ],
+        "oldBounds": [
+          469,
+          299,
+          501,
+          329
+        ],
+        "alphaIoU": 0.8296089385474861,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.4508845437616387
+      },
+      {
+        "frame": 43,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          474,
+          309,
+          511,
+          340
+        ],
+        "oldBounds": [
+          474,
+          309,
+          511,
+          340
+        ],
+        "alphaIoU": 0.8197945845004668,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.815826330532213
+      },
+      {
+        "frame": 44,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          481,
+          321,
+          520,
+          352
+        ],
+        "oldBounds": [
+          481,
+          321,
+          520,
+          352
+        ],
+        "alphaIoU": 0.8230337078651685,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.7354868913857677
+      },
+      {
+        "frame": 45,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          487,
+          333,
+          527,
+          363
+        ],
+        "oldBounds": [
+          487,
+          333,
+          527,
+          363
+        ],
+        "alphaIoU": 0.8273584905660377,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.4245283018867925
+      },
+      {
+        "frame": 46,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          494,
+          345,
+          534,
+          375
+        ],
+        "oldBounds": [
+          494,
+          345,
+          534,
+          375
+        ],
+        "alphaIoU": 0.7530434782608696,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.198478260869566
+      },
+      {
+        "frame": 47,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          499,
+          359,
+          539,
+          389
+        ],
+        "oldBounds": [
+          499,
+          359,
+          539,
+          389
+        ],
+        "alphaIoU": 0.7530434782608696,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.198478260869566
+      },
+      {
+        "frame": 48,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          504,
+          373,
+          544,
+          403
+        ],
+        "oldBounds": [
+          504,
+          373,
+          544,
+          403
+        ],
+        "alphaIoU": 0.7530434782608696,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.198478260869566
+      },
+      {
+        "frame": 49,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          509,
+          388,
+          549,
+          418
+        ],
+        "oldBounds": [
+          509,
+          388,
+          549,
+          418
+        ],
+        "alphaIoU": 0.7530434782608696,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.198478260869566
+      },
+      {
+        "frame": 50,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          512,
+          404,
+          552,
+          434
+        ],
+        "oldBounds": [
+          512,
+          404,
+          552,
+          434
+        ],
+        "alphaIoU": 0.7530434782608696,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.198478260869566
+      },
+      {
+        "frame": 51,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          420,
+          554,
+          450
+        ],
+        "oldBounds": [
+          514,
+          420,
+          554,
+          450
+        ],
+        "alphaIoU": 0.7530434782608696,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.198478260869566
+      },
+      {
+        "frame": 52,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          438,
+          555,
+          468
+        ],
+        "oldBounds": [
+          515,
+          438,
+          555,
+          468
+        ],
+        "alphaIoU": 0.7525951557093425,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.1007785467128026
+      },
+      {
+        "frame": 53,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          512,
+          451,
+          557,
+          476
+        ],
+        "oldBounds": [
+          512,
+          451,
+          557,
+          476
+        ],
+        "alphaIoU": 0.8204419889502762,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.6017495395948433
+      },
+      {
+        "frame": 54,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          513,
+          450,
+          556,
+          476
+        ],
+        "oldBounds": [
+          513,
+          450,
+          556,
+          476
+        ],
+        "alphaIoU": 0.8158379373848987,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.9541896869244937
+      },
+      {
+        "frame": 55,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          514,
+          449,
+          555,
+          476
+        ],
+        "oldBounds": [
+          514,
+          449,
+          555,
+          476
+        ],
+        "alphaIoU": 0.8069029850746269,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.1156716417910446
+      },
+      {
+        "frame": 56,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          516,
+          445,
+          554,
+          476
+        ],
+        "oldBounds": [
+          516,
+          445,
+          554,
+          476
+        ],
+        "alphaIoU": 0.842512077294686,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.8466183574879227
+      },
+      {
+        "frame": 57,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          516,
+          445,
+          554,
+          476
+        ],
+        "oldBounds": [
+          516,
+          445,
+          554,
+          476
+        ],
+        "alphaIoU": 0.8450433108758422,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.602502406159769
+      },
+      {
+        "frame": 58,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          446,
+          554,
+          476
+        ],
+        "oldBounds": [
+          515,
+          446,
+          554,
+          476
+        ],
+        "alphaIoU": 0.8589371980676328,
+        "maxDifference": 255,
+        "meanVisibleDifference": 2.4120772946859903
+      },
+      {
+        "frame": 59,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          446,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          446,
+          555,
+          476
+        ],
+        "alphaIoU": 0.8325449385052034,
+        "maxDifference": 255,
+        "meanVisibleDifference": 4.028855250709555
+      },
+      {
+        "frame": 60,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          446,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          446,
+          555,
+          476
+        ],
+        "alphaIoU": 0.7823008849557522,
+        "maxDifference": 255,
+        "meanVisibleDifference": 3.134513274336283
+      },
+      {
+        "frame": 61,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 62,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 63,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 64,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 65,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 66,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 67,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 68,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 69,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 70,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 71,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 72,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 73,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 74,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 75,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 76,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      },
+      {
+        "frame": 77,
+        "alpha128IoU": 1.0,
+        "newBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "oldBounds": [
+          515,
+          444,
+          555,
+          476
+        ],
+        "alphaIoU": 0.6974474474474475,
+        "maxDifference": 255,
+        "meanVisibleDifference": 10.08201951951952
+      }
+    ]
+  }
+]

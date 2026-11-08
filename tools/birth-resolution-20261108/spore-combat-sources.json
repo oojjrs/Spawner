@@ -1,0 +1,34 @@
+[
+  {
+    "key": "spore/blade",
+    "source": "/workspace/shared/birth-reauthorization-20261107/AnimationCandidates/spore-combat-birth-v9/blade-birth-body-sheet.png",
+    "sourceSHA256": "d36b42c234be5406cc5a8aff3ad4d7150ffaf4bf475b5b2105689cfc77bfdd12",
+    "contract": "/workspace/shared/birth-reauthorization-20261107/AnimationCandidates/spore-combat-birth-v9/scene-contract.json",
+    "method": "Original approved v9 whole-body pixels. Original rigid rotation and landing transform baked at native density. No anatomy reconstruction. Original native connective stalk remains scene art. Lossless common transparent crop and RGBA dedup after transform.",
+    "fullBodyCrop": [
+      179,
+      191,
+      597,
+      546
+    ],
+    "sourceFrames": 22,
+    "sceneFrames": 94,
+    "uniqueNativeFrames": 52
+  },
+  {
+    "key": "spore/carapace",
+    "source": "/workspace/shared/birth-reauthorization-20261107/AnimationCandidates/spore-combat-birth-v9/carapace-birth-body-sheet.png",
+    "sourceSHA256": "292a3a15c447127b4aba270e0b87bd8674891335bd64525049e0f3d604cf0deb",
+    "contract": "/workspace/shared/birth-reauthorization-20261107/AnimationCandidates/spore-combat-birth-v9/scene-contract.json",
+    "method": "Original approved v9 whole-body pixels. Original rigid rotation and landing transform baked at native density. No anatomy reconstruction. Original native connective stalk remains scene art. Lossless common transparent crop and RGBA dedup after transform.",
+    "fullBodyCrop": [
+      172,
+      185,
+      555,
+      555
+    ],
+    "sourceFrames": 22,
+    "sceneFrames": 94,
+    "uniqueNativeFrames": 52
+  }
+]

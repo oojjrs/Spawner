@@ -1,0 +1,472 @@
+{
+  "action": "idle",
+  "sheet": "spring-blade-secretion-antenna-idle-v1-sheet.png",
+  "preview": "spring-blade-secretion-antenna-idle-v1-preview.gif",
+  "webpPreview": "spring-blade-secretion-antenna-idle-v1-preview.webp",
+  "generatedSource": "idle-generated-source.png",
+  "sourceSHA256": "374cebe68ecd8b22190b644f8dc5e636b2822daff738c6ce3dea64361c7da31a",
+  "sheetSHA256": "1c37aff64a25c308dbce4ecc9840a1413216a5d5e0e017929aa8353e692da6a5",
+  "previewSHA256": "531c5d6992ec36542bcfe6537ff3ec8e121975606dfb673bc1ee52a11f064f8e",
+  "frameCount": 16,
+  "distinctDrawnPoses": 15,
+  "frameSize": 480,
+  "columns": 4,
+  "rows": 4,
+  "durationsMs": [
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120
+  ],
+  "actionDurationMs": 1920,
+  "actionLoop": true,
+  "previewDurationsMs": [
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120,
+    120
+  ],
+  "previewDurationMs": 1920,
+  "previewLoop": true,
+  "scope": "full-body",
+  "projectileIncluded": false,
+  "pivot": [
+    216.0,
+    369
+  ],
+  "firstLastExact": true,
+  "qa": {
+    "decodedGIFFrames": 16,
+    "decodedGIFDurationMs": 1920,
+    "maxGIFQuantizationRMSE": 1.1322943818325824,
+    "allRawCelsPixelExact": true,
+    "bodyClippedFrames": 0,
+    "rawAlphaChanged": false,
+    "frames": [
+      {
+        "index": 0,
+        "sourceIndex": 0,
+        "sourceCrop": [
+          0,
+          0,
+          316,
+          312
+        ],
+        "wholeCellOffset": [
+          53,
+          109
+        ],
+        "bboxAlpha128": [
+          133,
+          186,
+          318,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 1,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 1,
+        "sourceIndex": 1,
+        "sourceCrop": [
+          316,
+          0,
+          632,
+          312
+        ],
+        "wholeCellOffset": [
+          62,
+          108
+        ],
+        "bboxAlpha128": [
+          129,
+          182,
+          319,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 0,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 2,
+        "sourceIndex": 2,
+        "sourceCrop": [
+          632,
+          0,
+          947,
+          312
+        ],
+        "wholeCellOffset": [
+          71,
+          108
+        ],
+        "bboxAlpha128": [
+          130,
+          174,
+          315,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 0,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 3,
+        "sourceIndex": 3,
+        "sourceCrop": [
+          947,
+          0,
+          1263,
+          312
+        ],
+        "wholeCellOffset": [
+          76,
+          109
+        ],
+        "bboxAlpha128": [
+          130,
+          170,
+          319,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 1,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 4,
+        "sourceIndex": 4,
+        "sourceCrop": [
+          0,
+          312,
+          316,
+          623
+        ],
+        "wholeCellOffset": [
+          50,
+          112
+        ],
+        "bboxAlpha128": [
+          129,
+          171,
+          318,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 1,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 5,
+        "sourceIndex": 5,
+        "sourceCrop": [
+          316,
+          312,
+          632,
+          623
+        ],
+        "wholeCellOffset": [
+          59,
+          111
+        ],
+        "bboxAlpha128": [
+          122,
+          172,
+          320,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 1,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 6,
+        "sourceIndex": 6,
+        "sourceCrop": [
+          632,
+          312,
+          947,
+          623
+        ],
+        "wholeCellOffset": [
+          67,
+          111
+        ],
+        "bboxAlpha128": [
+          124,
+          174,
+          323,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 1,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 7,
+        "sourceIndex": 7,
+        "sourceCrop": [
+          947,
+          312,
+          1263,
+          623
+        ],
+        "wholeCellOffset": [
+          69,
+          111
+        ],
+        "bboxAlpha128": [
+          122,
+          178,
+          321,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 1,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 8,
+        "sourceIndex": 8,
+        "sourceCrop": [
+          0,
+          623,
+          316,
+          934
+        ],
+        "wholeCellOffset": [
+          54,
+          121
+        ],
+        "bboxAlpha128": [
+          124,
+          184,
+          320,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 1,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 9,
+        "sourceIndex": 9,
+        "sourceCrop": [
+          316,
+          623,
+          632,
+          934
+        ],
+        "wholeCellOffset": [
+          58,
+          121
+        ],
+        "bboxAlpha128": [
+          120,
+          185,
+          316,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 1,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 10,
+        "sourceIndex": 10,
+        "sourceCrop": [
+          632,
+          623,
+          947,
+          934
+        ],
+        "wholeCellOffset": [
+          65,
+          121
+        ],
+        "bboxAlpha128": [
+          121,
+          186,
+          319,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 1,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 11,
+        "sourceIndex": 11,
+        "sourceCrop": [
+          947,
+          623,
+          1263,
+          934
+        ],
+        "wholeCellOffset": [
+          66,
+          121
+        ],
+        "bboxAlpha128": [
+          121,
+          185,
+          318,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 0,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 12,
+        "sourceIndex": 12,
+        "sourceCrop": [
+          0,
+          934,
+          316,
+          1246
+        ],
+        "wholeCellOffset": [
+          52,
+          116
+        ],
+        "bboxAlpha128": [
+          123,
+          180,
+          321,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 1,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 13,
+        "sourceIndex": 13,
+        "sourceCrop": [
+          316,
+          934,
+          632,
+          1246
+        ],
+        "wholeCellOffset": [
+          61,
+          115
+        ],
+        "bboxAlpha128": [
+          123,
+          177,
+          321,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 1,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 14,
+        "sourceIndex": 14,
+        "sourceCrop": [
+          632,
+          934,
+          947,
+          1246
+        ],
+        "wholeCellOffset": [
+          68,
+          116
+        ],
+        "bboxAlpha128": [
+          125,
+          181,
+          321,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 1,
+        "outputEdgeAlphaMax": 0
+      },
+      {
+        "index": 15,
+        "sourceIndex": 0,
+        "sourceCrop": [
+          0,
+          0,
+          316,
+          312
+        ],
+        "wholeCellOffset": [
+          53,
+          109
+        ],
+        "bboxAlpha128": [
+          133,
+          186,
+          318,
+          368
+        ],
+        "majorConnectedComponents": 1,
+        "sourceRGBAExact": true,
+        "sourceCellBoundaryMaxAlpha": 1,
+        "outputEdgeAlphaMax": 0
+      }
+    ],
+    "decodedWebPFrames": 16
+  },
+  "pivotX": 216.0,
+  "pivotY": 369,
+  "referenceLength": 186,
+  "referenceBodyBBox": [
+    132,
+    185,
+    318,
+    369
+  ],
+  "referenceFrameIndex": 0,
+  "referenceLengthMethod": "Alpha >= 16 max(width,height) of neutral whole-body silhouette; birth measures landed final body only, excluding nest.",
+  "registrationScale": 1,
+  "fullScene": false,
+  "sceneIncludesNest": false,
+  "sourceFacing": "left"
+}

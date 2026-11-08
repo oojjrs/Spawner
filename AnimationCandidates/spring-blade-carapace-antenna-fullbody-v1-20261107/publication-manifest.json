@@ -40,7 +40,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         120,
         120,
@@ -109,7 +109,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         70,
         70,
@@ -151,9 +151,9 @@
       "sheet": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-sheet.png",
       "preview": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-preview.webp",
       "gif": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-preview.gif",
-      "sheetSHA256": "e12a44d73fda204a0cb2a1b1ce49c3475961a3b220a896536d471023c52f884e",
-      "previewSHA256": "05a27da5c0e4f5c7c8e9cce4d9fe3f6b43c1724781755083f0056c721dff57e1",
-      "gifSHA256": "3229f87329c7b522f279c576466a7e3461d5084b9302867aeead86678845b21d",
+      "sheetSHA256": "a6a5eeb557b2a817883019fd32297bac3cb7865a8925bc5956c0867db84a328b",
+      "previewSHA256": "0f690a233bb494cf972f196e7cffa87b4c693b6e0131adc0ea9d89cb82d79c58",
+      "gifSHA256": "0e748e18bd57315948d08581198bdb04ffab7ef69a6758324c7a12c7b3e1a33c",
       "durationsMs": [
         60,
         70,
@@ -178,7 +178,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         560,
         70,
@@ -250,7 +250,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         540,
         30,
@@ -395,7 +395,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         590,
         90,

@@ -1,0 +1,23 @@
+{
+  "sources": {
+    "base": {
+      "image": "DesignAssets/Animations/SpeciesHeldHurtV1/spring-base.webp",
+      "sha256": "a336193e209958844d8000e39f2d4ad2d84822957cf2b90edd3bbf5c405cda35",
+      "unchangedFromHead": true,
+      "directionalFrames": 28
+    },
+    "secretion": {
+      "image": "DesignAssets/Animations/SpeciesHeldHurtV1/spring-secretion.webp",
+      "sha256": "845ed4846f465903332341923da3ab02bd74b49c13d1dddd2c1201f7c942c653",
+      "unchangedFromHead": true,
+      "directionalFrames": 28
+    },
+    "antenna": {
+      "image": "DesignAssets/Animations/MinorHeldHurtV1/spring-antenna.webp",
+      "sha256": "9150ee0a84557a68b41b1b4473c1d59e01eb201b7890294cc32517250d088162",
+      "unchangedFromHead": true,
+      "directionalFrames": 28
+    }
+  },
+  "metadataFiles": []
+}

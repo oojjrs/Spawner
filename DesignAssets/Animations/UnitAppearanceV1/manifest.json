@@ -10447,7 +10447,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86"
+          "imageHash": "42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86",
+          "sourceFacing": "left"
         },
         "walk": {
           "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
@@ -10488,7 +10489,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "0c165ddad0dfaf87f1928885270b6e207e5d997cd3d97dd062dc8ee6b7e92fac"
+          "imageHash": "0c165ddad0dfaf87f1928885270b6e207e5d997cd3d97dd062dc8ee6b7e92fac",
+          "sourceFacing": "left"
         },
         "jump": {
           "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
@@ -10559,7 +10561,7 @@
           "pivotX": 258,
           "pivotY": 453.07317073170736,
           "events": [],
-          "sourceHash": "f6bf977bbfd72490410192c6c70e6ec17accb294f3f69e5b0626936760547e58",
+          "sourceHash": "38cbbdc1d88de4a69b519c895ae0cb6619e4162f42ae43671f467fc0c9f26a44",
           "cameraMapping": {
             "verified": true,
             "sourceHash": "f6bf977bbfd72490410192c6c70e6ec17accb294f3f69e5b0626936760547e58",
@@ -10570,7 +10572,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "f6bf977bbfd72490410192c6c70e6ec17accb294f3f69e5b0626936760547e58"
+          "imageHash": "38cbbdc1d88de4a69b519c895ae0cb6619e4162f42ae43671f467fc0c9f26a44",
+          "sourceFacing": "left"
         },
         "hurt": {
           "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
@@ -10611,7 +10614,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "761914e25e0f4def4dc01f4fcadc711db0058a0919a750407a5b35930e5d9ba6"
+          "imageHash": "761914e25e0f4def4dc01f4fcadc711db0058a0919a750407a5b35930e5d9ba6",
+          "sourceFacing": "left"
         },
         "death": {
           "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
@@ -10644,7 +10648,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "85be0868a66a515983d14d2e10dfdd58f3978cc113e512e52e67bcaac07ca593"
+          "imageHash": "85be0868a66a515983d14d2e10dfdd58f3978cc113e512e52e67bcaac07ca593",
+          "sourceFacing": "left"
         }
       },
       "previewStatus": {},

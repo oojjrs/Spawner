@@ -1,0 +1,11 @@
+{
+  "pixel-changes.json": 25,
+  "preview-changes.json": 21,
+  "siblingOriginalsUnchanged": true,
+  "deferredBirthFilesUnchanged": [
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/birth.png",
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-birth-v1-sheet.png",
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-birth-v1-preview.webp",
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-birth-v1-preview.gif"
+  ]
+}

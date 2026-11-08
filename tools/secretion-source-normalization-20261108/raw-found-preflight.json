@@ -1,0 +1,854 @@
+[
+  {
+    "action": "birth",
+    "image": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/birth-generated.png",
+    "beforeSha256": "aea312dd9493dcef4500aef5815276c564b13da9c5421a3affeefce5f0d33b34",
+    "matchesOriginalManifestSourceSha": true,
+    "dimensions": [
+      1774,
+      887
+    ],
+    "cellRectangles": [
+      [
+        0,
+        0,
+        444,
+        444
+      ],
+      [
+        444,
+        0,
+        887,
+        444
+      ],
+      [
+        887,
+        0,
+        1330,
+        444
+      ],
+      [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      [
+        0,
+        444,
+        444,
+        887
+      ],
+      [
+        444,
+        444,
+        887,
+        887
+      ],
+      [
+        887,
+        444,
+        1330,
+        887
+      ],
+      [
+        1330,
+        444,
+        1774,
+        887
+      ]
+    ],
+    "rawFrameWidths": [
+      444,
+      443,
+      443,
+      444,
+      444,
+      443,
+      443,
+      444
+    ],
+    "rawFrameHeights": [
+      444,
+      444,
+      444,
+      444,
+      443,
+      443,
+      443,
+      443
+    ],
+    "packedCellWidth": 512,
+    "packedCellHeight": 512,
+    "originalPackCrop": [
+      9,
+      139,
+      441,
+      340
+    ],
+    "mirroredPackCropByFrame": [
+      [
+        3,
+        139,
+        435,
+        340
+      ],
+      [
+        2,
+        139,
+        434,
+        340
+      ],
+      [
+        2,
+        139,
+        434,
+        340
+      ],
+      [
+        3,
+        139,
+        435,
+        340
+      ],
+      [
+        3,
+        139,
+        435,
+        340
+      ],
+      [
+        2,
+        139,
+        434,
+        340
+      ],
+      [
+        2,
+        139,
+        434,
+        340
+      ],
+      [
+        3,
+        139,
+        435,
+        340
+      ]
+    ],
+    "packScale": 1.0865384615384615,
+    "originalPackTranslationX": 21,
+    "gridEvidence": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pack.py:13",
+    "status": "prepared_not_applied"
+  },
+  {
+    "action": "death",
+    "image": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/death-generated.png",
+    "beforeSha256": "1ced66835853c196b9966edec1c51a52abe22c9016e9cf1cf18cf5c859e49b70",
+    "matchesOriginalManifestSourceSha": true,
+    "dimensions": [
+      1774,
+      887
+    ],
+    "cellRectangles": [
+      [
+        0,
+        0,
+        444,
+        444
+      ],
+      [
+        444,
+        0,
+        887,
+        444
+      ],
+      [
+        887,
+        0,
+        1330,
+        444
+      ],
+      [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      [
+        0,
+        444,
+        444,
+        887
+      ],
+      [
+        444,
+        444,
+        887,
+        887
+      ],
+      [
+        887,
+        444,
+        1330,
+        887
+      ],
+      [
+        1330,
+        444,
+        1774,
+        887
+      ]
+    ],
+    "rawFrameWidths": [
+      444,
+      443,
+      443,
+      444,
+      444,
+      443,
+      443,
+      444
+    ],
+    "rawFrameHeights": [
+      444,
+      444,
+      444,
+      444,
+      443,
+      443,
+      443,
+      443
+    ],
+    "packedCellWidth": 512,
+    "packedCellHeight": 512,
+    "originalPackCrop": [
+      17,
+      68,
+      435,
+      402
+    ],
+    "mirroredPackCropByFrame": [
+      [
+        9,
+        68,
+        427,
+        402
+      ],
+      [
+        8,
+        68,
+        426,
+        402
+      ],
+      [
+        8,
+        68,
+        426,
+        402
+      ],
+      [
+        9,
+        68,
+        427,
+        402
+      ],
+      [
+        9,
+        68,
+        427,
+        402
+      ],
+      [
+        8,
+        68,
+        426,
+        402
+      ],
+      [
+        8,
+        68,
+        426,
+        402
+      ],
+      [
+        9,
+        68,
+        427,
+        402
+      ]
+    ],
+    "packScale": 1.1243781094527363,
+    "originalPackTranslationX": 21,
+    "gridEvidence": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pack.py:13",
+    "status": "prepared_not_applied"
+  },
+  {
+    "action": "hurt",
+    "image": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/hurt-generated.png",
+    "beforeSha256": "359e79cfda6c6bd3e41fba01de158d69bb3ac23dfbd85f72b7f5e80ea6d94485",
+    "matchesOriginalManifestSourceSha": true,
+    "dimensions": [
+      1774,
+      887
+    ],
+    "cellRectangles": [
+      [
+        0,
+        0,
+        444,
+        444
+      ],
+      [
+        444,
+        0,
+        887,
+        444
+      ],
+      [
+        887,
+        0,
+        1330,
+        444
+      ],
+      [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      [
+        0,
+        444,
+        444,
+        887
+      ],
+      [
+        444,
+        444,
+        887,
+        887
+      ],
+      [
+        887,
+        444,
+        1330,
+        887
+      ],
+      [
+        1330,
+        444,
+        1774,
+        887
+      ]
+    ],
+    "rawFrameWidths": [
+      444,
+      443,
+      443,
+      444,
+      444,
+      443,
+      443,
+      444
+    ],
+    "rawFrameHeights": [
+      444,
+      444,
+      444,
+      444,
+      443,
+      443,
+      443,
+      443
+    ],
+    "packedCellWidth": 512,
+    "packedCellHeight": 512,
+    "originalPackCrop": [
+      14,
+      25,
+      417,
+      385
+    ],
+    "mirroredPackCropByFrame": [
+      [
+        27,
+        25,
+        430,
+        385
+      ],
+      [
+        26,
+        25,
+        429,
+        385
+      ],
+      [
+        26,
+        25,
+        429,
+        385
+      ],
+      [
+        27,
+        25,
+        430,
+        385
+      ],
+      [
+        27,
+        25,
+        430,
+        385
+      ],
+      [
+        26,
+        25,
+        429,
+        385
+      ],
+      [
+        26,
+        25,
+        429,
+        385
+      ],
+      [
+        27,
+        25,
+        430,
+        385
+      ]
+    ],
+    "packScale": 1.1221122112211221,
+    "originalPackTranslationX": 30,
+    "gridEvidence": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pack.py:13",
+    "status": "prepared_not_applied"
+  },
+  {
+    "action": "idle",
+    "image": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/idle-generated.png",
+    "beforeSha256": "a859be2cc6aa5865822867de8ae353766376f2e631364be862d3c85fd9d1c492",
+    "matchesOriginalManifestSourceSha": true,
+    "dimensions": [
+      1774,
+      887
+    ],
+    "cellRectangles": [
+      [
+        0,
+        0,
+        444,
+        444
+      ],
+      [
+        444,
+        0,
+        887,
+        444
+      ],
+      [
+        887,
+        0,
+        1330,
+        444
+      ],
+      [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      [
+        0,
+        444,
+        444,
+        887
+      ],
+      [
+        444,
+        444,
+        887,
+        887
+      ],
+      [
+        887,
+        444,
+        1330,
+        887
+      ],
+      [
+        1330,
+        444,
+        1774,
+        887
+      ]
+    ],
+    "rawFrameWidths": [
+      444,
+      443,
+      443,
+      444,
+      444,
+      443,
+      443,
+      444
+    ],
+    "rawFrameHeights": [
+      444,
+      444,
+      444,
+      444,
+      443,
+      443,
+      443,
+      443
+    ],
+    "packedCellWidth": 512,
+    "packedCellHeight": 512,
+    "originalPackCrop": [
+      24,
+      57,
+      431,
+      382
+    ],
+    "mirroredPackCropByFrame": [
+      [
+        13,
+        57,
+        420,
+        382
+      ],
+      [
+        12,
+        57,
+        419,
+        382
+      ],
+      [
+        12,
+        57,
+        419,
+        382
+      ],
+      [
+        13,
+        57,
+        420,
+        382
+      ],
+      [
+        13,
+        57,
+        420,
+        382
+      ],
+      [
+        12,
+        57,
+        419,
+        382
+      ],
+      [
+        12,
+        57,
+        419,
+        382
+      ],
+      [
+        13,
+        57,
+        420,
+        382
+      ]
+    ],
+    "packScale": 1.1486486486486487,
+    "originalPackTranslationX": 22,
+    "gridEvidence": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pack.py:13",
+    "status": "prepared_not_applied"
+  },
+  {
+    "action": "ranged-attack",
+    "image": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/ranged-attack-generated.png",
+    "beforeSha256": "0aac8f78101371b045010f58cbce29154cd8e5a9fa5d3294e3fea76b6285ece1",
+    "matchesOriginalManifestSourceSha": true,
+    "dimensions": [
+      1774,
+      887
+    ],
+    "cellRectangles": [
+      [
+        0,
+        0,
+        444,
+        444
+      ],
+      [
+        444,
+        0,
+        887,
+        444
+      ],
+      [
+        887,
+        0,
+        1330,
+        444
+      ],
+      [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      [
+        0,
+        444,
+        444,
+        887
+      ],
+      [
+        444,
+        444,
+        887,
+        887
+      ],
+      [
+        887,
+        444,
+        1330,
+        887
+      ],
+      [
+        1330,
+        444,
+        1774,
+        887
+      ]
+    ],
+    "rawFrameWidths": [
+      444,
+      443,
+      443,
+      444,
+      444,
+      443,
+      443,
+      444
+    ],
+    "rawFrameHeights": [
+      444,
+      444,
+      444,
+      444,
+      443,
+      443,
+      443,
+      443
+    ],
+    "packedCellWidth": 512,
+    "packedCellHeight": 512,
+    "originalPackCrop": [
+      26,
+      64,
+      416,
+      381
+    ],
+    "mirroredPackCropByFrame": [
+      [
+        28,
+        64,
+        418,
+        381
+      ],
+      [
+        27,
+        64,
+        417,
+        381
+      ],
+      [
+        27,
+        64,
+        417,
+        381
+      ],
+      [
+        28,
+        64,
+        418,
+        381
+      ],
+      [
+        28,
+        64,
+        418,
+        381
+      ],
+      [
+        27,
+        64,
+        417,
+        381
+      ],
+      [
+        27,
+        64,
+        417,
+        381
+      ],
+      [
+        28,
+        64,
+        418,
+        381
+      ]
+    ],
+    "packScale": 1.1764705882352942,
+    "originalPackTranslationX": 27,
+    "gridEvidence": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pack.py:13",
+    "status": "prepared_not_applied"
+  },
+  {
+    "action": "walk",
+    "image": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/walk-generated.png",
+    "beforeSha256": "1218712d62b806b9eb49759251bbced0266e72b5c60e843bba5e9e00778968d2",
+    "matchesOriginalManifestSourceSha": true,
+    "dimensions": [
+      1774,
+      887
+    ],
+    "cellRectangles": [
+      [
+        0,
+        0,
+        444,
+        444
+      ],
+      [
+        444,
+        0,
+        887,
+        444
+      ],
+      [
+        887,
+        0,
+        1330,
+        444
+      ],
+      [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      [
+        0,
+        444,
+        444,
+        887
+      ],
+      [
+        444,
+        444,
+        887,
+        887
+      ],
+      [
+        887,
+        444,
+        1330,
+        887
+      ],
+      [
+        1330,
+        444,
+        1774,
+        887
+      ]
+    ],
+    "rawFrameWidths": [
+      444,
+      443,
+      443,
+      444,
+      444,
+      443,
+      443,
+      444
+    ],
+    "rawFrameHeights": [
+      444,
+      444,
+      444,
+      444,
+      443,
+      443,
+      443,
+      443
+    ],
+    "packedCellWidth": 512,
+    "packedCellHeight": 512,
+    "originalPackCrop": [
+      23,
+      60,
+      434,
+      384
+    ],
+    "mirroredPackCropByFrame": [
+      [
+        10,
+        60,
+        421,
+        384
+      ],
+      [
+        9,
+        60,
+        420,
+        384
+      ],
+      [
+        9,
+        60,
+        420,
+        384
+      ],
+      [
+        10,
+        60,
+        421,
+        384
+      ],
+      [
+        10,
+        60,
+        421,
+        384
+      ],
+      [
+        9,
+        60,
+        420,
+        384
+      ],
+      [
+        9,
+        60,
+        420,
+        384
+      ],
+      [
+        10,
+        60,
+        421,
+        384
+      ]
+    ],
+    "packScale": 1.1295681063122924,
+    "originalPackTranslationX": 24,
+    "gridEvidence": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pack.py:13",
+    "status": "prepared_not_applied"
+  }
+]

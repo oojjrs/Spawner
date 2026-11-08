@@ -1,0 +1,1533 @@
+{
+  "changes": {
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/idle-generated.png": {
+      "kind": "rawUnevenCellMirror",
+      "beforeSha256": "a859be2cc6aa5865822867de8ae353766376f2e631364be862d3c85fd9d1c492",
+      "afterSha256": "524e610f46be161d2ca8b7b22eeb35c511cb2439f11819bc821097fe8ff1d243",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "exactRgbaMirror": true
+    },
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/walk-generated.png": {
+      "kind": "rawUnevenCellMirror",
+      "beforeSha256": "1218712d62b806b9eb49759251bbced0266e72b5c60e843bba5e9e00778968d2",
+      "afterSha256": "67048bcbe0dd58045d08db36c69bb66fe1961bdd670b1fca06c4e8ce5781dbe3",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "exactRgbaMirror": true
+    },
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/ranged-attack-generated.png": {
+      "kind": "rawUnevenCellMirror",
+      "beforeSha256": "0aac8f78101371b045010f58cbce29154cd8e5a9fa5d3294e3fea76b6285ece1",
+      "afterSha256": "7fc95c73c282f9600ec217d845dd541c1e724dd94ab20d135809b80cb2697616",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "exactRgbaMirror": true
+    },
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/hurt-generated.png": {
+      "kind": "rawUnevenCellMirror",
+      "beforeSha256": "359e79cfda6c6bd3e41fba01de158d69bb3ac23dfbd85f72b7f5e80ea6d94485",
+      "afterSha256": "c63d6a83eb2b194ff1c546d838d213a7974fbdbe57cb02b43fecbc7a2dbc71a5",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "exactRgbaMirror": true
+    },
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/birth-generated.png": {
+      "kind": "rawUnevenCellMirror",
+      "beforeSha256": "aea312dd9493dcef4500aef5815276c564b13da9c5421a3affeefce5f0d33b34",
+      "afterSha256": "e7a2a8b150dc61b5dd833f721c51fc54703f616e5416e76bb6572465503e6fc0",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "exactRgbaMirror": true
+    },
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/death-generated.png": {
+      "kind": "rawUnevenCellMirror",
+      "beforeSha256": "1ced66835853c196b9966edec1c51a52abe22c9016e9cf1cf18cf5c859e49b70",
+      "afterSha256": "436d7e40e645ed48a96dc258f42065d2f9ecce47311f6ccf8165cce7b3f83e23",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "exactRgbaMirror": true
+    },
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-birth-v1-sheet.png": {
+      "kind": "packedBirthCellMirror",
+      "beforeSha256": "9d5912c04a42caec07c3d71ecd2b71f36798466709005f8da365352a9bb59f46",
+      "afterSha256": "e6eba50b4020c4ade20bda580168eceb633d3b7446730bc2e20267996c0cb846",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "exactRgbaMirror": true,
+      "exactNormalizedRawRepack": true
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/birth.png": {
+      "kind": "packedBirthCellMirror",
+      "beforeSha256": "9d5912c04a42caec07c3d71ecd2b71f36798466709005f8da365352a9bb59f46",
+      "afterSha256": "e6eba50b4020c4ade20bda580168eceb633d3b7446730bc2e20267996c0cb846",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "exactRgbaMirror": true,
+      "exactNormalizedRawRepack": true
+    },
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-birth-v1-preview.webp": {
+      "kind": "birthPreviewMirror",
+      "beforeSha256": "539416df8c6c6a20ccf0dd8317f05180709f03404bc296bb54604cea4d21a178",
+      "afterSha256": "2f6533c6cf210f8a9a3fc7c83c31863814ee3b2b58785de149cd9aabe4e0b72c",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        330,
+        250,
+        200,
+        130,
+        130,
+        200,
+        250,
+        650
+      ],
+      "loop": 0,
+      "exactVisibleRgbaMirror": true,
+      "alphaExact": true
+    },
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-birth-v1-preview.gif": {
+      "kind": "birthPreviewMirror",
+      "beforeSha256": "a2a0661e472186fae8340a374ec644ec0491e1a621074b3965fb5b3af915c1b8",
+      "afterSha256": "5ad5e6f365eb0ad2e620a7e9f0d1a1ba11d3833e2c21f86760e4a2b7397f9511",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        330,
+        250,
+        200,
+        130,
+        130,
+        200,
+        250,
+        650
+      ],
+      "loop": 0,
+      "exactVisibleRgbaMirror": true,
+      "alphaExact": true
+    },
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-birth-v1-cover.png": {
+      "kind": "birthPreviewMirror",
+      "beforeSha256": "71cd9e9957566f0347908e4186f1844e34ad48f5484a91b98a3f1c9fb736476e",
+      "afterSha256": "a78fe8b510d44b832974c42c0daac5ffdce08b818f5a7231aac69b021406b776",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 1,
+      "durationsMs": [
+        null
+      ],
+      "loop": null,
+      "exactVisibleRgbaMirror": true,
+      "alphaExact": true
+    }
+  },
+  "recipes": {
+    "idle": {
+      "rawImage": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/idle-generated.png",
+      "rawAfterSha256": "524e610f46be161d2ca8b7b22eeb35c511cb2439f11819bc821097fe8ff1d243",
+      "packedImage": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-idle-v1-sheet.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "rawDimensions": [
+        1774,
+        887
+      ],
+      "packedFrameDimensions": [
+        512,
+        512
+      ],
+      "packScale": 1.1486486486486487,
+      "originalPackCrop": [
+        24,
+        57,
+        431,
+        382
+      ],
+      "packCropByFrame": [
+        [
+          13,
+          57,
+          420,
+          382
+        ],
+        [
+          12,
+          57,
+          419,
+          382
+        ],
+        [
+          12,
+          57,
+          419,
+          382
+        ],
+        [
+          13,
+          57,
+          420,
+          382
+        ],
+        [
+          13,
+          57,
+          420,
+          382
+        ],
+        [
+          12,
+          57,
+          419,
+          382
+        ],
+        [
+          12,
+          57,
+          419,
+          382
+        ],
+        [
+          13,
+          57,
+          420,
+          382
+        ]
+      ],
+      "originalPackTranslationX": 22,
+      "resizedCropDimensions": [
+        468,
+        373
+      ],
+      "packTranslationByFrame": [
+        [
+          22,
+          86
+        ],
+        [
+          22,
+          86
+        ],
+        [
+          22,
+          86
+        ],
+        [
+          22,
+          86
+        ],
+        [
+          22,
+          86
+        ],
+        [
+          22,
+          86
+        ],
+        [
+          22,
+          86
+        ],
+        [
+          22,
+          86
+        ]
+      ],
+      "calculation": "cropX=(rawFrameWidth-oldCropRight, rawFrameWidth-oldCropLeft); translationX=512-oldTranslationX-round(oldCropWidth*packScale); Y, scale, frame order unchanged.",
+      "packedRgbaSha256": "a6b7719066e936710443099e37030aa52c38d5b3ab1b91ec1f9d5d053cda243d",
+      "exactExistingPackedPixelsReproduced": true
+    },
+    "walk": {
+      "rawImage": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/walk-generated.png",
+      "rawAfterSha256": "67048bcbe0dd58045d08db36c69bb66fe1961bdd670b1fca06c4e8ce5781dbe3",
+      "packedImage": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-walk-v1-sheet.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "rawDimensions": [
+        1774,
+        887
+      ],
+      "packedFrameDimensions": [
+        512,
+        512
+      ],
+      "packScale": 1.1295681063122924,
+      "originalPackCrop": [
+        23,
+        60,
+        434,
+        384
+      ],
+      "packCropByFrame": [
+        [
+          10,
+          60,
+          421,
+          384
+        ],
+        [
+          9,
+          60,
+          420,
+          384
+        ],
+        [
+          9,
+          60,
+          420,
+          384
+        ],
+        [
+          10,
+          60,
+          421,
+          384
+        ],
+        [
+          10,
+          60,
+          421,
+          384
+        ],
+        [
+          9,
+          60,
+          420,
+          384
+        ],
+        [
+          9,
+          60,
+          420,
+          384
+        ],
+        [
+          10,
+          60,
+          421,
+          384
+        ]
+      ],
+      "originalPackTranslationX": 24,
+      "resizedCropDimensions": [
+        464,
+        366
+      ],
+      "packTranslationByFrame": [
+        [
+          24,
+          96
+        ],
+        [
+          24,
+          96
+        ],
+        [
+          24,
+          95
+        ],
+        [
+          24,
+          96
+        ],
+        [
+          24,
+          94
+        ],
+        [
+          24,
+          93
+        ],
+        [
+          24,
+          93
+        ],
+        [
+          24,
+          93
+        ]
+      ],
+      "calculation": "cropX=(rawFrameWidth-oldCropRight, rawFrameWidth-oldCropLeft); translationX=512-oldTranslationX-round(oldCropWidth*packScale); Y, scale, frame order unchanged.",
+      "packedRgbaSha256": "68bec7af2e2f58dd69d673320a11b4fea0773ba80e75ecb7a28d2291e467714b",
+      "exactExistingPackedPixelsReproduced": true
+    },
+    "ranged-attack": {
+      "rawImage": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/ranged-attack-generated.png",
+      "rawAfterSha256": "7fc95c73c282f9600ec217d845dd541c1e724dd94ab20d135809b80cb2697616",
+      "packedImage": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-ranged-attack-v1-sheet.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "rawDimensions": [
+        1774,
+        887
+      ],
+      "packedFrameDimensions": [
+        512,
+        512
+      ],
+      "packScale": 1.1764705882352942,
+      "originalPackCrop": [
+        26,
+        64,
+        416,
+        381
+      ],
+      "packCropByFrame": [
+        [
+          28,
+          64,
+          418,
+          381
+        ],
+        [
+          27,
+          64,
+          417,
+          381
+        ],
+        [
+          27,
+          64,
+          417,
+          381
+        ],
+        [
+          28,
+          64,
+          418,
+          381
+        ],
+        [
+          28,
+          64,
+          418,
+          381
+        ],
+        [
+          27,
+          64,
+          417,
+          381
+        ],
+        [
+          27,
+          64,
+          417,
+          381
+        ],
+        [
+          28,
+          64,
+          418,
+          381
+        ]
+      ],
+      "originalPackTranslationX": 27,
+      "resizedCropDimensions": [
+        459,
+        373
+      ],
+      "packTranslationByFrame": [
+        [
+          26,
+          86
+        ],
+        [
+          26,
+          86
+        ],
+        [
+          26,
+          86
+        ],
+        [
+          26,
+          86
+        ],
+        [
+          26,
+          86
+        ],
+        [
+          26,
+          86
+        ],
+        [
+          26,
+          86
+        ],
+        [
+          26,
+          86
+        ]
+      ],
+      "calculation": "cropX=(rawFrameWidth-oldCropRight, rawFrameWidth-oldCropLeft); translationX=512-oldTranslationX-round(oldCropWidth*packScale); Y, scale, frame order unchanged.",
+      "packedRgbaSha256": "9dbcb062aa6fe4282f51f1b517d3e5ed9e6910fda59419c43283c1aec308bafb",
+      "exactExistingPackedPixelsReproduced": true
+    },
+    "hurt": {
+      "rawImage": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/hurt-generated.png",
+      "rawAfterSha256": "c63d6a83eb2b194ff1c546d838d213a7974fbdbe57cb02b43fecbc7a2dbc71a5",
+      "packedImage": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-hurt-v1-sheet.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "rawDimensions": [
+        1774,
+        887
+      ],
+      "packedFrameDimensions": [
+        512,
+        512
+      ],
+      "packScale": 1.1221122112211221,
+      "originalPackCrop": [
+        14,
+        25,
+        417,
+        385
+      ],
+      "packCropByFrame": [
+        [
+          27,
+          25,
+          430,
+          385
+        ],
+        [
+          26,
+          25,
+          429,
+          385
+        ],
+        [
+          26,
+          25,
+          429,
+          385
+        ],
+        [
+          27,
+          25,
+          430,
+          385
+        ],
+        [
+          27,
+          25,
+          430,
+          385
+        ],
+        [
+          26,
+          25,
+          429,
+          385
+        ],
+        [
+          26,
+          25,
+          429,
+          385
+        ],
+        [
+          27,
+          25,
+          430,
+          385
+        ]
+      ],
+      "originalPackTranslationX": 30,
+      "resizedCropDimensions": [
+        452,
+        404
+      ],
+      "packTranslationByFrame": [
+        [
+          30,
+          55
+        ],
+        [
+          30,
+          55
+        ],
+        [
+          30,
+          55
+        ],
+        [
+          30,
+          55
+        ],
+        [
+          30,
+          55
+        ],
+        [
+          30,
+          55
+        ],
+        [
+          30,
+          55
+        ],
+        [
+          30,
+          55
+        ]
+      ],
+      "calculation": "cropX=(rawFrameWidth-oldCropRight, rawFrameWidth-oldCropLeft); translationX=512-oldTranslationX-round(oldCropWidth*packScale); Y, scale, frame order unchanged.",
+      "packedRgbaSha256": "8fd8772fa3b1efbd4229b742ea339b049f86103e8ee513174a025c56025569f7",
+      "exactExistingPackedPixelsReproduced": true
+    },
+    "birth": {
+      "rawImage": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/birth-generated.png",
+      "rawAfterSha256": "e7a2a8b150dc61b5dd833f721c51fc54703f616e5416e76bb6572465503e6fc0",
+      "packedImage": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-birth-v1-sheet.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "rawDimensions": [
+        1774,
+        887
+      ],
+      "packedFrameDimensions": [
+        512,
+        512
+      ],
+      "packScale": 1.0865384615384615,
+      "originalPackCrop": [
+        9,
+        139,
+        441,
+        340
+      ],
+      "packCropByFrame": [
+        [
+          3,
+          139,
+          435,
+          340
+        ],
+        [
+          2,
+          139,
+          434,
+          340
+        ],
+        [
+          2,
+          139,
+          434,
+          340
+        ],
+        [
+          3,
+          139,
+          435,
+          340
+        ],
+        [
+          3,
+          139,
+          435,
+          340
+        ],
+        [
+          2,
+          139,
+          434,
+          340
+        ],
+        [
+          2,
+          139,
+          434,
+          340
+        ],
+        [
+          3,
+          139,
+          435,
+          340
+        ]
+      ],
+      "originalPackTranslationX": 21,
+      "resizedCropDimensions": [
+        469,
+        218
+      ],
+      "packTranslationByFrame": [
+        [
+          22,
+          240
+        ],
+        [
+          22,
+          240
+        ],
+        [
+          22,
+          240
+        ],
+        [
+          22,
+          240
+        ],
+        [
+          22,
+          240
+        ],
+        [
+          22,
+          240
+        ],
+        [
+          22,
+          240
+        ],
+        [
+          22,
+          240
+        ]
+      ],
+      "calculation": "cropX=(rawFrameWidth-oldCropRight, rawFrameWidth-oldCropLeft); translationX=512-oldTranslationX-round(oldCropWidth*packScale); Y, scale, frame order unchanged.",
+      "packedRgbaSha256": "d752d1f8ab5bf5f73ee61247c40619ae8765641dbdaf992e3a4cfce79ad806f8",
+      "exactExistingPackedPixelsReproduced": true
+    },
+    "death": {
+      "rawImage": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/death-generated.png",
+      "rawAfterSha256": "436d7e40e645ed48a96dc258f42065d2f9ecce47311f6ccf8165cce7b3f83e23",
+      "packedImage": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-death-v1-sheet.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "rawDimensions": [
+        1774,
+        887
+      ],
+      "packedFrameDimensions": [
+        512,
+        512
+      ],
+      "packScale": 1.1243781094527363,
+      "originalPackCrop": [
+        17,
+        68,
+        435,
+        402
+      ],
+      "packCropByFrame": [
+        [
+          9,
+          68,
+          427,
+          402
+        ],
+        [
+          8,
+          68,
+          426,
+          402
+        ],
+        [
+          8,
+          68,
+          426,
+          402
+        ],
+        [
+          9,
+          68,
+          427,
+          402
+        ],
+        [
+          9,
+          68,
+          427,
+          402
+        ],
+        [
+          8,
+          68,
+          426,
+          402
+        ],
+        [
+          8,
+          68,
+          426,
+          402
+        ],
+        [
+          9,
+          68,
+          427,
+          402
+        ]
+      ],
+      "originalPackTranslationX": 21,
+      "resizedCropDimensions": [
+        470,
+        376
+      ],
+      "packTranslationByFrame": [
+        [
+          21,
+          83
+        ],
+        [
+          21,
+          83
+        ],
+        [
+          21,
+          83
+        ],
+        [
+          21,
+          83
+        ],
+        [
+          21,
+          83
+        ],
+        [
+          21,
+          83
+        ],
+        [
+          21,
+          83
+        ],
+        [
+          21,
+          83
+        ]
+      ],
+      "calculation": "cropX=(rawFrameWidth-oldCropRight, rawFrameWidth-oldCropLeft); translationX=512-oldTranslationX-round(oldCropWidth*packScale); Y, scale, frame order unchanged.",
+      "packedRgbaSha256": "e88fb1e0d37db6363ad3e7c5002a90ac73fb86b81614caee0b906351b8868900",
+      "exactExistingPackedPixelsReproduced": true
+    }
+  },
+  "status": "completed",
+  "birthAliasPlan": [
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-birth-v1-sheet.png",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/birth.png"
+  ],
+  "packScript": {
+    "path": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pack.py",
+    "beforeSha256": "dca34f1aa802f8ccca037020bc79f0f2c25701c2b418c384f66fb00202ef2c8b",
+    "afterSha256": "6c485591e08b902438b66f7f4b91d5970003e763890b4ec9193e9d1a303d3a06",
+    "verification": "Executed original pack.py with secretion-carapace-antenna argument; all six sheets reproduced byte-identically from normalized uneven raw cells; no legacy JOBS import or metadata writes."
+  }
+}

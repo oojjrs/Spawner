@@ -241,8 +241,8 @@ globalThis.SpawnerUnitAppearanceFiles = Object.freeze({
   },
   "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp": {
     "script": "client/unit-appearance-files/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp.js",
-    "bytes": 425488,
-    "hash": "f6bf977bbfd72490410192c6c70e6ec17accb294f3f69e5b0626936760547e58",
+    "bytes": 870994,
+    "hash": "38cbbdc1d88de4a69b519c895ae0cb6619e4162f42ae43671f467fc0c9f26a44",
     "mime": "image/webp"
   },
   "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp": {

@@ -13,9 +13,9 @@
       "sheet": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-sheet.png",
       "preview": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-preview.webp",
       "gif": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-preview.gif",
-      "sheetSHA256": "f6379aca3e582969a22284b8b7f0cf79a7a4dfa015e8de5275985b76786651b0",
-      "previewSHA256": "fd42afe0616dd19d8c82794967a88902cecb017ffd33678f0d352a43a8f8551c",
-      "gifSHA256": "6eed8300ed0b05e18f57af5e3950d4efb0209527604fcd046eb4fb89e627621e",
+      "sheetSHA256": "0411b243c15e156bbc1cc5561f850a3262b4f00995277eb504b7e3aaacb136a8",
+      "previewSHA256": "7f8174b251f639d6daf7f4224774cadbdec68d158dbc4ebe0b964452032b52f7",
+      "gifSHA256": "3d3e79a90a3f1d6ae1164da10d8950f1ff7ee850c1fa89c0608760a9169ae565",
       "durationsMs": [
         60,
         70,
@@ -40,7 +40,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         560,
         70,

@@ -1,0 +1,1403 @@
+{
+  "tool": "Built-in image_gen, no CLI fallback",
+  "changes": "Whole-body middle action poses redrawn leftward; original complete first/last cels kept; ImageMagick crops, uniform scales and packs complete cels without flipping or warping. No application code modified.",
+  "visualQA": "All seven contact sheets reviewed on dark composited background. No visible blue/cyan noise or detached body fragments. Peak actions face left.",
+  "allPass": true,
+  "assets": [
+    {
+      "key": "pebble/carapace-antenna",
+      "source": "/workspace/scratch/cdf786db13f9/attack-publish-merge/DesignAssets/Animations/DefensiveAttackV1/pebble/carapace-antenna/attack.png",
+      "output": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/pebble-carapace-antenna/attack.png",
+      "sourceSHA256": "13b278e903cea46afad400c25b742e294f498a4a95fd9c02bb9f44946fb488c6",
+      "outputSHA256": "447098fee6876335ee822e372448d11f6c271a41ee2db662f9510f2942c7417a",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "frameSize": 512,
+      "frameHeight": 512,
+      "frameCount": 8,
+      "columns": 4,
+      "geometryUnchanged": true,
+      "timingUnchanged": true,
+      "sourceFacingRequired": "left",
+      "checksPass": true,
+      "frames": [
+        {
+          "frame": 0,
+          "visibleBBox": [
+            47,
+            115,
+            420,
+            451
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        },
+        {
+          "frame": 1,
+          "visibleBBox": [
+            45,
+            130,
+            420,
+            451
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 2,
+          "visibleBBox": [
+            47,
+            129,
+            421,
+            450
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 3,
+          "visibleBBox": [
+            44,
+            143,
+            421,
+            451
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 4,
+          "visibleBBox": [
+            57,
+            135,
+            435,
+            451
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 5,
+          "visibleBBox": [
+            53,
+            132,
+            425,
+            451
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 6,
+          "visibleBBox": [
+            52,
+            122,
+            422,
+            450
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 7,
+          "visibleBBox": [
+            46,
+            114,
+            425,
+            450
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        }
+      ]
+    },
+    {
+      "key": "spring/antenna",
+      "source": "/workspace/scratch/cdf786db13f9/attack-publish-merge/DesignAssets/Animations/DefensiveAttackV1/spring/antenna/attack.png",
+      "output": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/spring-antenna/attack.png",
+      "sourceSHA256": "239156eacf1ff293b13971d6f630d92244a30a0fe7aed30bd91757917711a524",
+      "outputSHA256": "98af159a97b0820b6ecdf7d6804fefc56ebb62c8bcf0be3c210e98c1246767d6",
+      "dimensions": [
+        1920,
+        1920
+      ],
+      "frameSize": 480,
+      "frameHeight": 480,
+      "frameCount": 16,
+      "columns": 4,
+      "geometryUnchanged": true,
+      "timingUnchanged": true,
+      "sourceFacingRequired": "left",
+      "checksPass": true,
+      "frames": [
+        {
+          "frame": 0,
+          "visibleBBox": [
+            166,
+            177,
+            317,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        },
+        {
+          "frame": 1,
+          "visibleBBox": [
+            161,
+            189,
+            320,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 2,
+          "visibleBBox": [
+            148,
+            192,
+            328,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 3,
+          "visibleBBox": [
+            133,
+            183,
+            336,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 4,
+          "visibleBBox": [
+            129,
+            192,
+            364,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 5,
+          "visibleBBox": [
+            94,
+            211,
+            403,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 6,
+          "visibleBBox": [
+            110,
+            208,
+            380,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 7,
+          "visibleBBox": [
+            126,
+            201,
+            356,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 8,
+          "visibleBBox": [
+            139,
+            196,
+            364,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 9,
+          "visibleBBox": [
+            142,
+            193,
+            349,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 10,
+          "visibleBBox": [
+            148,
+            187,
+            324,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 11,
+          "visibleBBox": [
+            156,
+            177,
+            329,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 12,
+          "visibleBBox": [
+            165,
+            177,
+            318,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 13,
+          "visibleBBox": [
+            163,
+            178,
+            317,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 14,
+          "visibleBBox": [
+            158,
+            176,
+            316,
+            367
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 15,
+          "visibleBBox": [
+            166,
+            177,
+            317,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        }
+      ]
+    },
+    {
+      "key": "spring/base",
+      "source": "/workspace/scratch/cdf786db13f9/attack-publish-merge/DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
+      "output": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/spring-base/attack.webp",
+      "sourceSHA256": "f6bf977bbfd72490410192c6c70e6ec17accb294f3f69e5b0626936760547e58",
+      "outputSHA256": "38cbbdc1d88de4a69b519c895ae0cb6619e4162f42ae43671f467fc0c9f26a44",
+      "dimensions": [
+        2064,
+        2064
+      ],
+      "frameSize": 516,
+      "frameHeight": 516,
+      "frameCount": 16,
+      "columns": 4,
+      "geometryUnchanged": true,
+      "timingUnchanged": true,
+      "sourceFacingRequired": "left",
+      "checksPass": true,
+      "frames": [
+        {
+          "frame": 0,
+          "visibleBBox": [
+            144,
+            164,
+            374,
+            452
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        },
+        {
+          "frame": 1,
+          "visibleBBox": [
+            132,
+            172,
+            373,
+            452
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 2,
+          "visibleBBox": [
+            129,
+            165,
+            362,
+            451
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 3,
+          "visibleBBox": [
+            124,
+            163,
+            352,
+            452
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 4,
+          "visibleBBox": [
+            127,
+            166,
+            355,
+            452
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 5,
+          "visibleBBox": [
+            73,
+            215,
+            383,
+            452
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 6,
+          "visibleBBox": [
+            55,
+            220,
+            395,
+            452
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 7,
+          "visibleBBox": [
+            70,
+            213,
+            396,
+            452
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 8,
+          "visibleBBox": [
+            109,
+            204,
+            406,
+            451
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 9,
+          "visibleBBox": [
+            104,
+            193,
+            389,
+            452
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 10,
+          "visibleBBox": [
+            104,
+            184,
+            371,
+            452
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 11,
+          "visibleBBox": [
+            124,
+            176,
+            371,
+            453
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 12,
+          "visibleBBox": [
+            137,
+            168,
+            382,
+            452
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 13,
+          "visibleBBox": [
+            136,
+            165,
+            372,
+            452
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 14,
+          "visibleBBox": [
+            136,
+            164,
+            368,
+            452
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 15,
+          "visibleBBox": [
+            144,
+            164,
+            374,
+            452
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        }
+      ]
+    },
+    {
+      "key": "spring/blade-antenna",
+      "source": "/workspace/scratch/cdf786db13f9/attack-publish-merge/DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/attack.png",
+      "output": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/spring-blade-antenna/attack.png",
+      "sourceSHA256": "7ca79e521f765a4eb534447babe766872d491fcd2b5b0aa3ac17307b44293a3d",
+      "outputSHA256": "ef27388e824bf12c625cf0b6659e607eaa06bd02e8d2cea7f360581eb9f18abf",
+      "dimensions": [
+        1920,
+        1920
+      ],
+      "frameSize": 480,
+      "frameHeight": 480,
+      "frameCount": 16,
+      "columns": 4,
+      "geometryUnchanged": true,
+      "timingUnchanged": true,
+      "sourceFacingRequired": "left",
+      "checksPass": true,
+      "frames": [
+        {
+          "frame": 0,
+          "visibleBBox": [
+            144,
+            216,
+            306,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        },
+        {
+          "frame": 1,
+          "visibleBBox": [
+            142,
+            215,
+            305,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 2,
+          "visibleBBox": [
+            138,
+            222,
+            308,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 3,
+          "visibleBBox": [
+            155,
+            233,
+            335,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 4,
+          "visibleBBox": [
+            161,
+            231,
+            346,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 5,
+          "visibleBBox": [
+            112,
+            227,
+            345,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 6,
+          "visibleBBox": [
+            72,
+            232,
+            335,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 7,
+          "visibleBBox": [
+            84,
+            225,
+            321,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 8,
+          "visibleBBox": [
+            119,
+            215,
+            325,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 9,
+          "visibleBBox": [
+            120,
+            218,
+            305,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 10,
+          "visibleBBox": [
+            138,
+            216,
+            306,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 11,
+          "visibleBBox": [
+            146,
+            209,
+            306,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 12,
+          "visibleBBox": [
+            144,
+            215,
+            303,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 13,
+          "visibleBBox": [
+            144,
+            215,
+            304,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 14,
+          "visibleBBox": [
+            144,
+            216,
+            303,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 15,
+          "visibleBBox": [
+            144,
+            216,
+            306,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        }
+      ]
+    },
+    {
+      "key": "spring/blade-carapace-antenna",
+      "source": "/workspace/scratch/cdf786db13f9/attack-publish-merge/DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/attack.png",
+      "output": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/spring-blade-carapace-antenna/attack.png",
+      "sourceSHA256": "e12a44d73fda204a0cb2a1b1ce49c3475961a3b220a896536d471023c52f884e",
+      "outputSHA256": "a6a5eeb557b2a817883019fd32297bac3cb7865a8925bc5956c0867db84a328b",
+      "dimensions": [
+        1920,
+        1920
+      ],
+      "frameSize": 480,
+      "frameHeight": 480,
+      "frameCount": 16,
+      "columns": 4,
+      "geometryUnchanged": true,
+      "timingUnchanged": true,
+      "sourceFacingRequired": "left",
+      "checksPass": true,
+      "frames": [
+        {
+          "frame": 0,
+          "visibleBBox": [
+            134,
+            189,
+            306,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        },
+        {
+          "frame": 1,
+          "visibleBBox": [
+            128,
+            188,
+            317,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 2,
+          "visibleBBox": [
+            127,
+            201,
+            324,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 3,
+          "visibleBBox": [
+            127,
+            215,
+            320,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 4,
+          "visibleBBox": [
+            130,
+            218,
+            322,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 5,
+          "visibleBBox": [
+            107,
+            221,
+            317,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 6,
+          "visibleBBox": [
+            64,
+            216,
+            311,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 7,
+          "visibleBBox": [
+            60,
+            217,
+            312,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 8,
+          "visibleBBox": [
+            81,
+            211,
+            312,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 9,
+          "visibleBBox": [
+            128,
+            211,
+            307,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 10,
+          "visibleBBox": [
+            129,
+            195,
+            308,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 11,
+          "visibleBBox": [
+            133,
+            186,
+            311,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 12,
+          "visibleBBox": [
+            128,
+            188,
+            312,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 13,
+          "visibleBBox": [
+            128,
+            188,
+            309,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 14,
+          "visibleBBox": [
+            128,
+            188,
+            310,
+            370
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 15,
+          "visibleBBox": [
+            134,
+            189,
+            306,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        }
+      ]
+    },
+    {
+      "key": "spring/carapace-antenna",
+      "source": "/workspace/scratch/cdf786db13f9/attack-publish-merge/DesignAssets/Animations/DefensiveAttackV1/spring/carapace-antenna/attack.png",
+      "output": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/spring-carapace-antenna/attack.png",
+      "sourceSHA256": "f6379aca3e582969a22284b8b7f0cf79a7a4dfa015e8de5275985b76786651b0",
+      "outputSHA256": "0411b243c15e156bbc1cc5561f850a3262b4f00995277eb504b7e3aaacb136a8",
+      "dimensions": [
+        1920,
+        1920
+      ],
+      "frameSize": 480,
+      "frameHeight": 480,
+      "frameCount": 16,
+      "columns": 4,
+      "geometryUnchanged": true,
+      "timingUnchanged": true,
+      "sourceFacingRequired": "left",
+      "checksPass": true,
+      "frames": [
+        {
+          "frame": 0,
+          "visibleBBox": [
+            158,
+            188,
+            332,
+            367
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        },
+        {
+          "frame": 1,
+          "visibleBBox": [
+            153,
+            195,
+            330,
+            369
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 2,
+          "visibleBBox": [
+            149,
+            202,
+            327,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 3,
+          "visibleBBox": [
+            142,
+            205,
+            324,
+            366
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 4,
+          "visibleBBox": [
+            145,
+            206,
+            332,
+            367
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 5,
+          "visibleBBox": [
+            124,
+            217,
+            323,
+            367
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 6,
+          "visibleBBox": [
+            98,
+            218,
+            331,
+            366
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 7,
+          "visibleBBox": [
+            109,
+            208,
+            317,
+            367
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 8,
+          "visibleBBox": [
+            148,
+            205,
+            327,
+            366
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 9,
+          "visibleBBox": [
+            148,
+            199,
+            329,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 10,
+          "visibleBBox": [
+            143,
+            194,
+            321,
+            366
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 11,
+          "visibleBBox": [
+            145,
+            195,
+            324,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 12,
+          "visibleBBox": [
+            151,
+            191,
+            327,
+            366
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 13,
+          "visibleBBox": [
+            149,
+            192,
+            326,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 14,
+          "visibleBBox": [
+            149,
+            191,
+            325,
+            368
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 15,
+          "visibleBBox": [
+            158,
+            188,
+            332,
+            367
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        }
+      ]
+    },
+    {
+      "key": "spring/gather",
+      "source": "/workspace/scratch/cdf786db13f9/attack-publish-merge/DesignAssets/Animations/ApprovedActionsV1/spring/gather/attack.png",
+      "output": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/spring-gather/attack.png",
+      "sourceSHA256": "e9b385429ae6b813b00e7590dbff7eed063b270df5ba7347d3bcf771c0c3503b",
+      "outputSHA256": "bae3fcde90f63645d1094d27486856161eb9d4843127e6048c8beb17d89102ac",
+      "dimensions": [
+        4096,
+        1024
+      ],
+      "frameSize": 512,
+      "frameHeight": 512,
+      "frameCount": 16,
+      "columns": 8,
+      "geometryUnchanged": true,
+      "timingUnchanged": true,
+      "sourceFacingRequired": "left",
+      "checksPass": true,
+      "frames": [
+        {
+          "frame": 0,
+          "visibleBBox": [
+            119,
+            183,
+            394,
+            449
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        },
+        {
+          "frame": 1,
+          "visibleBBox": [
+            115,
+            182,
+            381,
+            449
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 2,
+          "visibleBBox": [
+            104,
+            192,
+            373,
+            449
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 3,
+          "visibleBBox": [
+            90,
+            203,
+            363,
+            450
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 4,
+          "visibleBBox": [
+            93,
+            213,
+            377,
+            450
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 5,
+          "visibleBBox": [
+            71,
+            235,
+            381,
+            449
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 6,
+          "visibleBBox": [
+            44,
+            254,
+            382,
+            448
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 7,
+          "visibleBBox": [
+            57,
+            251,
+            378,
+            449
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 8,
+          "visibleBBox": [
+            95,
+            231,
+            379,
+            449
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 9,
+          "visibleBBox": [
+            104,
+            212,
+            374,
+            450
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 10,
+          "visibleBBox": [
+            112,
+            198,
+            376,
+            450
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 11,
+          "visibleBBox": [
+            117,
+            192,
+            381,
+            449
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 12,
+          "visibleBBox": [
+            122,
+            182,
+            390,
+            449
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 13,
+          "visibleBBox": [
+            122,
+            181,
+            390,
+            449
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 14,
+          "visibleBBox": [
+            122,
+            182,
+            390,
+            449
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": null,
+          "endpointAlphaEqual": null
+        },
+        {
+          "frame": 15,
+          "visibleBBox": [
+            119,
+            183,
+            394,
+            449
+          ],
+          "edgeVisiblePixels": 0,
+          "endpointVisibleRGBAEqual": true,
+          "endpointAlphaEqual": true
+        }
+      ]
+    }
+  ]
+}

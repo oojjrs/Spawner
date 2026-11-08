@@ -1,0 +1,99 @@
+{
+  "correction": "Earlier audit omitted separate held-hurt priority atlases; this supplement closes that gap for the 28 candidates.",
+  "heldPriority": [
+    "game.js drawAgentAppearance checks drawAgentHeldHurt before appearanceWorld and returns when drawn.",
+    "combat-stage.mjs draws held hurt before appearanceWorld.",
+    "Both held source selectors exclude combination appearances."
+  ],
+  "held": {
+    "bean/base": {
+      "path": "DesignAssets/Animations/BeanHeldHurtV1/base.webp",
+      "framesReviewed": 24,
+      "result": "No left/right neutral asymmetry conflict observed; two blocks are opposite impact-side reactions, not different body facing."
+    },
+    "bean/secretion": {
+      "path": "DesignAssets/Animations/BeanHeldHurtV1/secretion.webp",
+      "framesReviewed": 24,
+      "result": "No left/right neutral asymmetry conflict observed; two blocks are opposite impact-side reactions, not different body facing."
+    },
+    "spore/base": {
+      "path": "DesignAssets/Animations/SpeciesHeldHurtV1/spore-base.webp",
+      "framesReviewed": 28,
+      "result": "No left/right neutral asymmetry conflict observed; two blocks are opposite impact-side reactions, not different body facing."
+    },
+    "spore/secretion": {
+      "path": "DesignAssets/Animations/SpeciesHeldHurtV1/spore-secretion.webp",
+      "framesReviewed": 28,
+      "result": "No left/right neutral asymmetry conflict observed; two blocks are opposite impact-side reactions, not different body facing."
+    },
+    "spore/antenna": {
+      "path": "DesignAssets/Animations/MinorHeldHurtV1/spore-antenna.webp",
+      "framesReviewed": 28,
+      "result": "No left/right neutral asymmetry conflict observed; two blocks are opposite impact-side reactions, not different body facing."
+    }
+  },
+  "rangedPriority": "World unit-presentation drawAgentRanged returns false; UNIT_ACTION_ART remains primary. Combat-stage chooses unitRangedPose for legacy/fallback presentation; appearanceWorld/held may take precedence. Audited these secondary sources rather than assuming they are unreachable.",
+  "rangedReviewed": {
+    "bean": {
+      "idleAnimation": {
+        "path": "DesignAssets/Animations/BeanSecretionIdleV4/idle.webp",
+        "framesReviewed": 64,
+        "result": "No opposite-side nozzle/neutral mismatch observed."
+      },
+      "hurt": {
+        "path": "DesignAssets/Animations/UnitRangedV1/bean/hurt.png",
+        "framesReviewed": 16,
+        "result": "No opposite-side nozzle/neutral mismatch observed."
+      },
+      "walk": {
+        "path": "DesignAssets/Animations/UnitRangedV1/bean/walk.webp",
+        "framesReviewed": 24,
+        "result": "No opposite-side nozzle/neutral mismatch observed."
+      },
+      "idle": {
+        "path": "DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png",
+        "framesReviewed": 1,
+        "result": "No opposite-side nozzle/neutral mismatch observed."
+      },
+      "animation": {
+        "path": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+        "framesReviewed": 24,
+        "result": "No opposite-side nozzle/neutral mismatch observed."
+      },
+      "lifecycle/death": {
+        "path": "DesignAssets/Animations/SproutDeathV2/secretion/death.webp",
+        "framesReviewed": 16,
+        "result": "No opposite-side nozzle/neutral mismatch observed."
+      }
+    },
+    "spore": {
+      "idle": {
+        "path": "DesignAssets/Animations/UnitRangedV1/spore/Source/neutral.png",
+        "framesReviewed": 1,
+        "result": "No opposite-side nozzle/neutral mismatch observed."
+      },
+      "animation": {
+        "path": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
+        "framesReviewed": 30,
+        "result": "No opposite-side nozzle/neutral mismatch observed."
+      },
+      "hurt": {
+        "path": "DesignAssets/Animations/UnitRangedV1/spore/hurt.png",
+        "framesReviewed": 16,
+        "result": "No opposite-side nozzle/neutral mismatch observed."
+      },
+      "walk": {
+        "path": "DesignAssets/Animations/UnitRangedV1/spore/walk.webp",
+        "framesReviewed": 16,
+        "result": "No opposite-side nozzle/neutral mismatch observed."
+      },
+      "lifecycle/death": {
+        "path": "DesignAssets/Animations/UnitRangedV1/spore/death.png",
+        "framesReviewed": 8,
+        "result": "No opposite-side nozzle/neutral mismatch observed."
+      }
+    }
+  },
+  "newDirectionalMismatchObserved": false,
+  "transformWarning": "Include five held atlas files in relevant form plans. Mirroring pixels reverses impact-side deformation; preserve physical hit-side semantics by checking/switching the two frame blocks or equivalent authored arrangement, not blindly mirroring and retaining block semantics. Registry metadata/render policy belongs to technical owner."
+}

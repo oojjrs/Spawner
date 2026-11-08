@@ -1,0 +1,407 @@
+(node:44) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tools/spring-native-facing-20261108/head-source-loader.mjs", pathToFileURL("./")); register("./tools/spring-native-facing-20261108/head-source-loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ birth adapter selects only the live secretion bean and preserves other form/lifecycle priorities (9.239019ms)
+✔ source-space foliage uses original independent head transforms and exact neutral source (4.504069ms)
+✖ actual bean birth keeps complete authored seed/fragment/impact scene and cold-load fallback (2.657542ms)
+✖ terminal actual birth and idle draw share the exact world transform for facing, growth and zoom (2.112095ms)
+✖ entire authored birth keeps finite positive leaf/body transforms with no action-clock mutation (1.542161ms)
+(node:45) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tools/spring-native-facing-20261108/head-source-loader.mjs", pathToFileURL("./")); register("./tools/spring-native-facing-20261108/head-source-loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 네 종족의 모든 전투·일반 속성 조합이 종족 탄생 경로를 공유한다 (8.34783ms)
+✔ 전투 속성은 종족별 탄생 경로·등장 시각·프레임을 바꾸지 않는다 (8.540516ms)
+✔ 세 종족의 마지막 탄생 프레임은 전투 탄생을 다시 재생하지 않는다 (3.406049ms)
+✖ 전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 그리고 크기와 발 위치를 유지한다 (1.37188ms)
+(node:46) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./tools/spring-native-facing-20261108/head-source-loader.mjs", pathToFileURL("./")); register("./tools/spring-native-facing-20261108/head-source-loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ only living canonical spring blade/carapace bodies opt in, preserving dominant projection and legacy fallback (3.229197ms)
+✔ common water mapping has no fold and retains the support and lower face band (4.471235ms)
+✔ padded camera pins the real pre-detach outlet for both facings and current display scales (32.977787ms)
+✔ sampler keeps source-only colors without row seams and supplies an exact idle identity after settling (38.743748ms)
+✔ pixel read failure, invalid input and blank art preserve fallback and allow recovery (7.472285ms)
+✖ actual scene hook preserves facing, water, pivot, idle clock, attributes and terminal handoff (1.986669ms)
+✖ actual scene falls back when unready or unreadable and reduced motion uses the settled body (1.050053ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 8
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 575.194229
+
+✖ failing tests:
+
+test at client/bean-secretion-birth.test.mjs:31:1
+✖ birth adapter selects only the live secretion bean and preserves other form/lifecycle priorities (9.239019ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + null
+  - {
+  -   animation: {
+  -     columns: 6,
+  -     durationMs: 600,
+  -     durationsMs: [
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25
+  -     ],
+  -     frameCount: 24,
+  -     frameSize: 512,
+  -     image: 'DesignAssets/Animations/UnitRangedV1/bean/shoot.webp',
+  -     launchAtMs: 200,
+  -     loop: false,
+  -     pivotX: 256,
+  -     pivotY: 448,
+  -     rangedBody: true,
+  -     viewSize: 512
+  -   },
+  -   birthBody: [Function: drawBeanSecretionBirth],
+  -   hurt: {
+  -     columns: 4,
+  -     durationMs: 760,
+  -     durationsMs: [
+  -       20,
+  -       30,
+  -       30,
+  -       30,
+  -       400,
+  -       30,
+  -       30,
+  -       30,
+  -       20,
+  -       20,
+  -       20,
+  -       20,
+  -       20,
+  -       20,
+  -       20,
+  -       20
+  -     ],
+  -     frameCount: 16,
+  -     frameSize: 512,
+  -     image: 'DesignAssets/Animations/UnitRangedV1/bean/hurt.png',
+  -     loop: false,
+  -     pivotX: 256,
+  -     pivotY: 448,
+  -     rangedBody: true,
+  -     viewSize: 512
+  -   },
+  -   idle: {
+  -     columns: 1,
+  -     durationMs: 600,
+  -     durationsMs: [
+  -       600
+  -     ],
+  -     frameCount: 1,
+  -     frameSize: 512,
+  -     image: 'DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png',
+  -     loop: true,
+  -     pivotX: 256,
+  -     pivotY: 448,
+  -     rangedBody: true,
+  -     viewSize: 512
+  -   },
+  -   idleAnimation: {
+  -     columns: 8,
+  -     durationMs: 3200,
+  -     durationsMs: [
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50
+  -     ],
+  -     frameCount: 64,
+  -     frameSize: 128,
+  -     image: 'DesignAssets/Animations/BeanSecretionIdleV4/idle.webp',
+  -     loop: true,
+  -     nativeSecretionIdle: true,
+  -     pivotX: 64,
+  -     pivotY: 112,
+  -     rangedBody: true,
+  -     secretionIdle: true,
+  -     viewSize: 128
+  -   },
+  -   lifecycle: {
+  -     death: {
+  -       action: 'death',
+  -       bodyReferenceImage: 'DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp',
+  -       columns: 4,
+  -       durationMs: 2260,
+  -       durationsMs: [
+  -         160,
+  -         80,
+  -         80,
+  -         70,
+  -         70,
+  -         60,
+  -         60,
+  -         60,
+  -         60,
+  -         60,
+  -         80,
+  -         90,
+  -         100,
+  -         110,
+  -         120,
+  -         1000
+  -       ],
+  -       frameCount: 16,
+  -       frameSize: 83,
+  -       image: 'DesignAssets/Animations/SproutDeathV2/secretion/death.webp',
+  -       loop: false,
+  -       nativeSecretionLifecycle: true,
+  -       pivotX: 41.5,
+  -       pivotY: 72.625,
+  -       registrationScale: 1.2307692307692308,
+  -       secretionLifecycle: true,
+  -       viewSize: 139.00053884913171
+  -     }
+  -   },
+  -   projectile: {
+  -     height: 36,
+  -     image: 'DesignAssets/Animations/UnitRangedV1/bean/projectile.png',
+  -     outletX: 368,
+  -     outletY: 322,
+  -     width: 62
+  -   },
+  -   reference: {
+  -     height: 206,
+  -     width: 202
+  -   },
+  -   walk: {
+  -     columns: 4,
+  -     cyclesPerCell: 1,
+  -     durationMs: 960,
+  -     durationsMs: [
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40
+  -     ],
+  -     frameCount: 24,
+  -     frameSize: 512,
+  -     image: 'DesignAssets/Animations/UnitRangedV1/bean/walk.webp',
+  -     loop: true,
+  -     pivotX: 256,
+  -     pivotY: 448,
+  -     rangedBody: true,
+  -     viewSize: 512
+  -   }
+  - }
+
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/bean-secretion-birth.test.mjs:33:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: [Object],
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/bean-secretion-birth.test.mjs:48:1
+✖ actual bean birth keeps complete authored seed/fragment/impact scene and cold-load fallback (2.657542ms)
+  ReferenceError [Error]: drawAgentAppearanceBody is not defined
+      at Object.drawAgentBirth (evalmachine.<anonymous>:2:7)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/bean-secretion-birth.test.mjs:52:29)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at client/bean-secretion-birth.test.mjs:61:1
+✖ terminal actual birth and idle draw share the exact world transform for facing, growth and zoom (2.112095ms)
+  TypeError [Error]: Spawner.unitFacing is not a function
+      at Object.drawAgentRangedBirth (evalmachine.<anonymous>:7:30)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/bean-secretion-birth.test.mjs:66:24)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at client/bean-secretion-birth.test.mjs:75:1
+✖ entire authored birth keeps finite positive leaf/body transforms with no action-clock mutation (1.542161ms)
+  TypeError [Error]: Spawner.unitFacing is not a function
+      at Object.drawAgentRangedBirth (evalmachine.<anonymous>:7:30)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/bean-secretion-birth.test.mjs:78:74)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at client/combat-birth.test.mjs:80:1
+✖ 전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 그리고 크기와 발 위치를 유지한다 (1.37188ms)
+  ReferenceError [Error]: drawAgentAppearanceBody is not defined
+      at Object.drawAgentBirth (evalmachine.<anonymous>:20:7)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/combat-birth.test.mjs:98:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at client/spring-dominant-birth.test.mjs:12:1
+✖ only living canonical spring blade/carapace bodies opt in, preserving dominant projection and legacy fallback (3.229197ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  null !== 'blade'
+
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/spring-dominant-birth.test.mjs:13:158)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 'blade',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/spring-dominant-birth.test.mjs:67:1
+✖ actual scene hook preserves facing, water, pivot, idle clock, attributes and terminal handoff (1.986669ms)
+  TypeError [Error]: Spawner.unitFacing is not a function
+      at Object.drawSpringBirth (evalmachine.<anonymous>:10:32)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/spring-dominant-birth.test.mjs:69:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at client/spring-dominant-birth.test.mjs:75:1
+✖ actual scene falls back when unready or unreadable and reduced motion uses the settled body (1.050053ms)
+  TypeError [Error]: Spawner.unitFacing is not a function
+      at Object.drawSpringBirth (evalmachine.<anonymous>:10:32)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/spring-dominant-birth.test.mjs:77:32)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

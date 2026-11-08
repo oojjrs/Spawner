@@ -1,0 +1,504 @@
+✔ spore base birth keeps body-only source and authored timing (6.731004ms)
+✔ spore endpoint has uniform scale, centered horizontal bounds and grounded feet (454.297264ms)
+✔ spore runtime draws the corrected body equally in both facings (24.819728ms)
+✔ pebble base birth keeps body-only source and authored timing (2.792438ms)
+✔ pebble endpoint has uniform scale, centered horizontal bounds and grounded feet (368.169685ms)
+✔ pebble runtime draws the corrected body equally in both facings (5.587454ms)
+✔ spring base birth keeps body-only source and authored timing (1.022344ms)
+✔ spring endpoint has uniform scale, centered horizontal bounds and grounded feet (246.980361ms)
+✔ spring runtime draws the corrected body equally in both facings (3.625091ms)
+✔ base DNA selects its full 3.85 second birth rather than the idle fallback (7.224705ms)
+✔ all authored boundaries draw one whole body after emergence in both facings (11.406642ms)
+✔ final whole-body pixels and registration match the actual current idle (711.743068ms)
+✔ offline publication includes both layers and the independently verified fallback (12.362048ms)
+✔ failed layer uses the complete-scene fallback without reviving part rigs (1.144466ms)
+✔ design and compiled runtime use the same layered base birth with left-facing preview (97.598892ms)
+✔ many simultaneous base births reuse two decoded atlases and keep each body clock (3.897756ms)
+✔ all eleven bean combo births retain the 3850 ms motion clock and enter idle at readyAt (48.926049ms)
+✔ all eleven trimmed births preserve baked fallback crops in both facings through the final body (103.029299ms)
+✖ birth adapter selects only the live secretion bean and preserves other form/lifecycle priorities (7.804465ms)
+✔ source-space foliage uses original independent head transforms and exact neutral source (2.416661ms)
+✖ actual bean birth keeps complete authored seed/fragment/impact scene and cold-load fallback (2.741963ms)
+✖ terminal actual birth and idle draw share the exact world transform for facing, growth and zoom (2.261371ms)
+✖ entire authored birth keeps finite positive leaf/body transforms with no action-clock mutation (1.347307ms)
+✔ 복원한 탄생은 크기·방향·위치·타이밍과 기존 실패 대체 이미지를 보존한다 (3.264257ms)
+✔ 새 전신 레이어는 배포 자산에 포함되고 원본 해시와 크기를 유지한다 (70.963734ms)
+✔ 복원된 모든 프레임은 같은 시계와 양방향에서 원본 crop을 직접 그린다 (167.891042ms)
+✔ 단일 전신 레이어 실패는 기존 이미지로 복귀하고 회복하면 고해상도를 다시 사용한다 (1.396138ms)
+✔ whole-body scene uses master frame timing, arbitrary readyAt and final hold (6.645518ms)
+✔ null body samples draw only environment and no outline; whole body gets one outline (1.224445ms)
+✔ scene mirroring uses authored facing once, without extra travel or body rotations (0.805644ms)
+✔ partial layers are not ready and never trigger baked or idle downloads (8.474417ms)
+✔ layer failure falls back atomically, retries with backoff and returns to layers (2.060113ms)
+✔ failure of layers and baked fallback remains unready then retries safely (1.035975ms)
+✔ invalid schema and invalid sample destinations use legacy baked rendering (18.204625ms)
+✔ undersized decoded layer atlas fails over instead of drawing partial body (0.878622ms)
+✔ unlayered birth keeps exact baked crop, reference loading and callback behavior (8.325828ms)
+✔ timeless ready keeps reference semantics while timed scene readiness skips idle decode (0.749981ms)
+✔ scene samples follow mapped pose.frame rather than elapsed frame index (0.478038ms)
+✔ layers without their own reference length still load the legacy scale reference (8.761463ms)
+✔ malformed layer contracts fall back safely without loading any partial layer (70.492496ms)
+✔ slow fallback finishing after recovery cannot replace the whole-body scene (2.928379ms)
+✔ the original 14 bean/spore layered births render 1358 boundaries in both facings without hot-path promises or idle decode (139.634837ms)
+ℹ Stub-only runtime: 1358 boundaries, 2716 facing draws, 134.6 ms; decoded atlas estimate 518425600 bytes; snapshot f95f4901fea1fa4f1763340bdfb98d4c9d368d49465434e2e1452449fc26a79b. No pixel decode or browser rendering measured.
+✔ birth scenes load only on visibility, draw rectangular atlas cells and exact timeline samples (19.367058ms)
+✔ failed scene layer restores the original preview and releases both decoded atlases (15.268694ms)
+✔ offscreen pending loads cannot resurrect a scene (1.854999ms)
+✔ lightbox shares live atlases and keeps the original fallback until both layers load (4.092885ms)
+✔ visible scene work is bounded and queued panels advance when earlier rows leave (1.667471ms)
+✔ closing lightbox releases its references; hiding document releases remaining atlases (6.063245ms)
+✔ all 18 real publication payloads preserve complete bodies, frame counts and hashed atlases (3.843175ms)
+✔ spring blade-antenna: real scene transforms and every master sample render in table and rectangular lightbox (3.044301ms)
+✔ bean blade-antenna: real scene transforms and every master sample render in table and rectangular lightbox (8.477072ms)
+✔ bean carapace-antenna: real scene transforms and every master sample render in table and rectangular lightbox (14.228284ms)
+✔ bean blade-carapace-antenna: real scene transforms and every master sample render in table and rectangular lightbox (8.025832ms)
+✔ bean secretion-antenna: real scene transforms and every master sample render in table and rectangular lightbox (8.025863ms)
+✔ spore blade-antenna: real scene transforms and every master sample render in table and rectangular lightbox (7.235782ms)
+✔ spore carapace-antenna: real scene transforms and every master sample render in table and rectangular lightbox (10.430235ms)
+✔ spring secretion-antenna: real scene transforms and every master sample render in table and rectangular lightbox (2.108284ms)
+✔ bean blade-secretion-antenna: real scene transforms and every master sample render in table and rectangular lightbox (7.780209ms)
+✔ bean secretion-carapace-antenna: real scene transforms and every master sample render in table and rectangular lightbox (9.32599ms)
+✔ bean blade-secretion-carapace-antenna: real scene transforms and every master sample render in table and rectangular lightbox (9.722547ms)
+✔ spore secretion-antenna: real scene transforms and every master sample render in table and rectangular lightbox (6.776211ms)
+✔ spore blade-carapace-antenna: real scene transforms and every master sample render in table and rectangular lightbox (2.950752ms)
+✔ spore blade-secretion-antenna: real scene transforms and every master sample render in table and rectangular lightbox (9.145312ms)
+✔ spore secretion-carapace-antenna: real scene transforms and every master sample render in table and rectangular lightbox (2.963221ms)
+✔ spore blade-secretion-carapace-antenna: real scene transforms and every master sample render in table and rectangular lightbox (13.07182ms)
+✔ spring blade-secretion-antenna: real scene transforms and every master sample render in table and rectangular lightbox (2.592702ms)
+✔ spring blade-secretion-carapace-antenna: real scene transforms and every master sample render in table and rectangular lightbox (1.70033ms)
+✔ 네 종족의 모든 전투·일반 속성 조합이 종족 탄생 경로를 공유한다 (10.469293ms)
+✔ 전투 속성은 종족별 탄생 경로·등장 시각·프레임을 바꾸지 않는다 (14.167713ms)
+✔ 세 종족의 마지막 탄생 프레임은 전투 탄생을 다시 재생하지 않는다 (4.952969ms)
+✖ 전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 그리고 크기와 발 위치를 유지한다 (1.872485ms)
+✔ pebble corrected birth preserves authored clock and enters its own idle (2.604169ms)
+✔ first six whole scenes are pixel-identical and final body registration matches idle proportions (272.910409ms)
+✔ native pebble adapter draws all 272 samples in both facings directly, without a scene scratch or packed image (585.370223ms)
+✔ legacy registered clips still use the existing packed path and one reusable scratch (13.20032ms)
+✔ malformed native metadata or any changed legacy registration fails closed, never loading old packed art (71.313077ms)
+✔ native preparation rejects bad decoded dimensions and can retry, without silently swapping to packed (8.269093ms)
+✔ native source handle snapshots and context restoration survive outline failures and reentrant calls (10.901284ms)
+✔ timeout pins original first choice on world/avatar; late readiness only helps new births (19.965264ms)
+✔ native world-occlusion route and independent avatar keep restored failures handled without source swap (10.246403ms)
+✔ 몽돌은 돌굴의 48프레임을 재생하고 구르기 전 출구와 착지 후 빈 칸에 고정된다 (3.620264ms)
+✔ 몽돌 탄생음은 0.25초에 한 번만 재생하고 새싹콩 효과음은 호출하지 않는다 (5.888105ms)
+✔ Pebble gather idle begins at actual birth completion before and after server tick, snapshot, save and restore (104.894563ms)
+✔ restoring an active birth preserves the completion origin; old completed saves and founders are not backfilled (44.762078ms)
+✔ the retained-birth fallback and persisted marker cannot shift the other 67 forms or legacy DNA (5.790801ms)
+✔ the server does not persist a marker for another tribe or a non-gather Pebble birth (111.58776ms)
+✔ explicit combat and preview clocks win, while ordinary preview and founder actors retain bornAt (0.852053ms)
+✔ idle return keeps the birth origin instead of restarting the neutral hold; non-idle cues remain identical (0.913504ms)
+✔ built game, standalone preview and combat share the corrected idle clock and the game worker persists it (84.351762ms)
+✔ 포자버섯은 목표보다 높은 곳까지 떠오르고 1초 넘는 비행 후 착지한다 (2.021515ms)
+✔ 포자버섯의 연속 탄생은 좌우와 출발 높이가 바뀌며 재생마다 같은 경로를 쓴다 (4.770889ms)
+✔ 포자버섯 탄생음은 착지 강세에 맞춰 한 번만 나고 씨앗 방출·파열·등장음은 섞이지 않는다 (5.500701ms)
+✔ spring/blade-antenna: only eight whole-scene translations change, original pixels and final landing stay exact (12.870231ms)
+✔ spring/secretion-antenna: only eight whole-scene translations change, original pixels and final landing stay exact (13.178949ms)
+✔ spring/blade-secretion-antenna: only eight whole-scene translations change, original pixels and final landing stay exact (5.019227ms)
+✔ spring/blade-secretion-carapace-antenna: only eight whole-scene translations change, original pixels and final landing stay exact (5.275397ms)
+✔ spring/blade-antenna: approved partial scene, persistent sources and original fallback (20.087425ms)
+✔ spring/blade-antenna: real DNA5, both facings, every frame boundary, idle exit and demand-only loading (16.494482ms)
+✔ spring/blade-antenna: either missing or undersized layer atomically restores original flat scene (8.171769ms)
+✔ spring/secretion-antenna: approved partial scene, persistent sources and original fallback (17.760607ms)
+✔ spring/secretion-antenna: real DNA5, both facings, every frame boundary, idle exit and demand-only loading (6.20827ms)
+✔ spring/secretion-antenna: either missing or undersized layer atomically restores original flat scene (3.243816ms)
+✔ spring/blade-secretion-antenna: approved partial scene, persistent sources and original fallback (18.863402ms)
+✔ spring/blade-secretion-antenna: real DNA5, both facings, every frame boundary, idle exit and demand-only loading (8.354229ms)
+✔ spring/blade-secretion-antenna: either missing or undersized layer atomically restores original flat scene (8.446365ms)
+✔ spring/blade-secretion-carapace-antenna: approved partial scene, persistent sources and original fallback (27.414492ms)
+✔ spring/blade-secretion-carapace-antenna: real DNA5, both facings, every frame boundary, idle exit and demand-only loading (5.88418ms)
+✔ spring/blade-secretion-carapace-antenna: either missing or undersized layer atomically restores original flat scene (11.339583ms)
+✔ 샘방울 물목은 분리 전 흘림턱에 붙어 있고 착지 후에는 선택한 빈 칸에 고정된다 (1.476758ms)
+✔ 샘방울 탄생음은 착지 강세에 맞춰 한 번만 나고 씨앗 방출·파열·등장음은 섞이지 않는다 (6.223172ms)
+✖ only living canonical spring blade/carapace bodies opt in, preserving dominant projection and legacy fallback (2.225478ms)
+✔ common water mapping has no fold and retains the support and lower face band (8.436241ms)
+✔ padded camera pins the real pre-detach outlet for both facings and current display scales (60.30493ms)
+✔ sampler keeps source-only colors without row seams and supplies an exact idle identity after settling (93.357007ms)
+✔ pixel read failure, invalid input and blank art preserve fallback and allow recovery (10.958388ms)
+✖ actual scene hook preserves facing, water, pivot, idle clock, attributes and terminal handoff (2.444261ms)
+✖ actual scene falls back when unready or unreadable and reduced motion uses the settled body (1.078108ms)
+✔ 17개 외형은 네 종족에서 기관 순서·개수와 관계없이 정확한 세트를 선택한다 (5.433051ms)
+✔ 채집은 독립형이며 기존 혼합 DNA·시체 외형 스냅샷·중립과 퇴역기관을 구분한다 (0.455505ms)
+✔ 미등록 조합은 요청 키를 보존하고 등록 즉시 정확한 세트로 전환한다 (2.177526ms)
+✔ 승인 칼날 갑각은 모든 동작에서 같은 세트를 유지하고 미제작 동작만 원화를 쓴다 (2.745057ms)
+✔ 실제 그리기는 칼날 갑각 완성 프레임 하나를 사용한다 (29.874958ms)
+✔ 인게임 실행본도 동일한 조합 선택과 채집 분리를 사용한다 (76.094597ms)
+✔ 채집형과 안테나는 승인된 자기 몸체의 전투 클립을 사용한다 (5.852813ms)
+✔ 안테나의 기준 원화는 해당 외형의 마스크를 사용한다 (0.224352ms)
+✔ 모든 전용 클립은 존재하는 단일 시트와 유효한 프레임을 가리킨다 (2.929381ms)
+✔ 완성 프레임 하나만 그리며 다른 몸체나 기관을 합성하지 않는다 (9.874232ms)
+✔ 전투 외형은 기존 파츠 콜백을 호출하지 않고 전용 시트를 재생한다 (8.901179ms)
+✔ 몸체와 잎 및 부속지의 런타임 합성 API는 동작하지 않는다 (0.672447ms)
+ℹ tests 129
+ℹ suites 0
+ℹ pass 121
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1595.434984
+
+✖ failing tests:
+
+test at client/bean-secretion-birth.test.mjs:31:1
+✖ birth adapter selects only the live secretion bean and preserves other form/lifecycle priorities (7.804465ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + null
+  - {
+  -   animation: {
+  -     columns: 6,
+  -     durationMs: 600,
+  -     durationsMs: [
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25,
+  -       25
+  -     ],
+  -     frameCount: 24,
+  -     frameSize: 512,
+  -     image: 'DesignAssets/Animations/UnitRangedV1/bean/shoot.webp',
+  -     launchAtMs: 200,
+  -     loop: false,
+  -     pivotX: 256,
+  -     pivotY: 448,
+  -     rangedBody: true,
+  -     viewSize: 512
+  -   },
+  -   birthBody: [Function: drawBeanSecretionBirth],
+  -   hurt: {
+  -     columns: 4,
+  -     durationMs: 760,
+  -     durationsMs: [
+  -       20,
+  -       30,
+  -       30,
+  -       30,
+  -       400,
+  -       30,
+  -       30,
+  -       30,
+  -       20,
+  -       20,
+  -       20,
+  -       20,
+  -       20,
+  -       20,
+  -       20,
+  -       20
+  -     ],
+  -     frameCount: 16,
+  -     frameSize: 512,
+  -     image: 'DesignAssets/Animations/UnitRangedV1/bean/hurt.png',
+  -     loop: false,
+  -     pivotX: 256,
+  -     pivotY: 448,
+  -     rangedBody: true,
+  -     viewSize: 512
+  -   },
+  -   idle: {
+  -     columns: 1,
+  -     durationMs: 600,
+  -     durationsMs: [
+  -       600
+  -     ],
+  -     frameCount: 1,
+  -     frameSize: 512,
+  -     image: 'DesignAssets/Animations/UnitRangedV1/bean/Source/neutral.png',
+  -     loop: true,
+  -     pivotX: 256,
+  -     pivotY: 448,
+  -     rangedBody: true,
+  -     viewSize: 512
+  -   },
+  -   idleAnimation: {
+  -     columns: 8,
+  -     durationMs: 3200,
+  -     durationsMs: [
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50,
+  -       50
+  -     ],
+  -     frameCount: 64,
+  -     frameSize: 128,
+  -     image: 'DesignAssets/Animations/BeanSecretionIdleV4/idle.webp',
+  -     loop: true,
+  -     nativeSecretionIdle: true,
+  -     pivotX: 64,
+  -     pivotY: 112,
+  -     rangedBody: true,
+  -     secretionIdle: true,
+  -     viewSize: 128
+  -   },
+  -   lifecycle: {
+  -     death: {
+  -       action: 'death',
+  -       bodyReferenceImage: 'DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp',
+  -       columns: 4,
+  -       durationMs: 2260,
+  -       durationsMs: [
+  -         160,
+  -         80,
+  -         80,
+  -         70,
+  -         70,
+  -         60,
+  -         60,
+  -         60,
+  -         60,
+  -         60,
+  -         80,
+  -         90,
+  -         100,
+  -         110,
+  -         120,
+  -         1000
+  -       ],
+  -       frameCount: 16,
+  -       frameSize: 83,
+  -       image: 'DesignAssets/Animations/SproutDeathV2/secretion/death.webp',
+  -       loop: false,
+  -       nativeSecretionLifecycle: true,
+  -       pivotX: 41.5,
+  -       pivotY: 72.625,
+  -       registrationScale: 1.2307692307692308,
+  -       secretionLifecycle: true,
+  -       viewSize: 139.00053884913171
+  -     }
+  -   },
+  -   projectile: {
+  -     height: 36,
+  -     image: 'DesignAssets/Animations/UnitRangedV1/bean/projectile.png',
+  -     outletX: 368,
+  -     outletY: 322,
+  -     width: 62
+  -   },
+  -   reference: {
+  -     height: 206,
+  -     width: 202
+  -   },
+  -   walk: {
+  -     columns: 4,
+  -     cyclesPerCell: 1,
+  -     durationMs: 960,
+  -     durationsMs: [
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40,
+  -       40
+  -     ],
+  -     frameCount: 24,
+  -     frameSize: 512,
+  -     image: 'DesignAssets/Animations/UnitRangedV1/bean/walk.webp',
+  -     loop: true,
+  -     pivotX: 256,
+  -     pivotY: 448,
+  -     rangedBody: true,
+  -     viewSize: 512
+  -   }
+  - }
+
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/bean-secretion-birth.test.mjs:33:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: [Object],
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/bean-secretion-birth.test.mjs:48:1
+✖ actual bean birth keeps complete authored seed/fragment/impact scene and cold-load fallback (2.741963ms)
+  ReferenceError [Error]: drawAgentAppearanceBody is not defined
+      at Object.drawAgentBirth (evalmachine.<anonymous>:2:7)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/bean-secretion-birth.test.mjs:52:29)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at client/bean-secretion-birth.test.mjs:61:1
+✖ terminal actual birth and idle draw share the exact world transform for facing, growth and zoom (2.261371ms)
+  TypeError [Error]: Spawner.unitFacing is not a function
+      at Object.drawAgentRangedBirth (evalmachine.<anonymous>:7:30)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/bean-secretion-birth.test.mjs:66:24)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at client/bean-secretion-birth.test.mjs:75:1
+✖ entire authored birth keeps finite positive leaf/body transforms with no action-clock mutation (1.347307ms)
+  TypeError [Error]: Spawner.unitFacing is not a function
+      at Object.drawAgentRangedBirth (evalmachine.<anonymous>:7:30)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/bean-secretion-birth.test.mjs:78:74)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at client/combat-birth.test.mjs:80:1
+✖ 전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 그리고 크기와 발 위치를 유지한다 (1.872485ms)
+  ReferenceError [Error]: drawAgentAppearanceBody is not defined
+      at Object.drawAgentBirth (evalmachine.<anonymous>:20:7)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/combat-birth.test.mjs:98:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at client/spring-dominant-birth.test.mjs:12:1
+✖ only living canonical spring blade/carapace bodies opt in, preserving dominant projection and legacy fallback (2.225478ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  null !== 'blade'
+
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/spring-dominant-birth.test.mjs:13:158)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 'blade',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at client/spring-dominant-birth.test.mjs:67:1
+✖ actual scene hook preserves facing, water, pivot, idle clock, attributes and terminal handoff (2.444261ms)
+  TypeError [Error]: Spawner.unitFacing is not a function
+      at Object.drawSpringBirth (evalmachine.<anonymous>:10:32)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/spring-dominant-birth.test.mjs:69:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at client/spring-dominant-birth.test.mjs:75:1
+✖ actual scene falls back when unready or unreadable and reduced motion uses the settled body (1.078108ms)
+  TypeError [Error]: Spawner.unitFacing is not a function
+      at Object.drawSpringBirth (evalmachine.<anonymous>:10:32)
+      at TestContext.<anonymous> (file:///workspace/scratch/cdf786db13f9/Spawner/client/spring-dominant-birth.test.mjs:77:32)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

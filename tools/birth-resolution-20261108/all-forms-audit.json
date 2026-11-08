@@ -1,0 +1,605 @@
+{
+  "forms": [
+    {
+      "key": "bean/blade-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 41.09375,
+      "clipFrameCount": 116,
+      "durationMs": 3850
+    },
+    {
+      "key": "bean/blade-carapace-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 43.59375,
+      "clipFrameCount": 116,
+      "durationMs": 3850
+    },
+    {
+      "key": "bean/blade-secretion-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 43.59375,
+      "clipFrameCount": 116,
+      "durationMs": 3850
+    },
+    {
+      "key": "bean/blade-secretion-carapace-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 43.59375,
+      "clipFrameCount": 116,
+      "durationMs": 3850
+    },
+    {
+      "key": "bean/carapace-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 40.46875,
+      "clipFrameCount": 116,
+      "durationMs": 3850
+    },
+    {
+      "key": "bean/secretion-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 37.96875,
+      "clipFrameCount": 116,
+      "durationMs": 3850
+    },
+    {
+      "key": "bean/secretion-carapace-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 40.9375,
+      "clipFrameCount": 116,
+      "durationMs": 3850
+    },
+    {
+      "key": "pebble/blade-antenna",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 157,
+      "clipFrameCount": 8,
+      "durationMs": 2140
+    },
+    {
+      "key": "pebble/blade-carapace-antenna",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 170,
+      "clipFrameCount": 8,
+      "durationMs": 2140
+    },
+    {
+      "key": "pebble/blade-secretion-antenna",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 175,
+      "clipFrameCount": 8,
+      "durationMs": 2140
+    },
+    {
+      "key": "pebble/blade-secretion-carapace-antenna",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 166,
+      "clipFrameCount": 8,
+      "durationMs": 2140
+    },
+    {
+      "key": "pebble/carapace-antenna",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 155,
+      "clipFrameCount": 8,
+      "durationMs": 2140
+    },
+    {
+      "key": "pebble/secretion-antenna",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 150,
+      "clipFrameCount": 8,
+      "durationMs": 2140
+    },
+    {
+      "key": "pebble/secretion-carapace-antenna",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 174,
+      "clipFrameCount": 8,
+      "durationMs": 2140
+    },
+    {
+      "key": "spore/blade-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 42,
+      "clipFrameCount": 78,
+      "durationMs": 3120
+    },
+    {
+      "key": "spore/blade-carapace-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 44,
+      "clipFrameCount": 78,
+      "durationMs": 3120
+    },
+    {
+      "key": "spore/blade-secretion-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 40,
+      "clipFrameCount": 78,
+      "durationMs": 3120
+    },
+    {
+      "key": "spore/blade-secretion-carapace-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 44,
+      "clipFrameCount": 78,
+      "durationMs": 3120
+    },
+    {
+      "key": "spore/carapace-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 39,
+      "clipFrameCount": 78,
+      "durationMs": 3120
+    },
+    {
+      "key": "spore/secretion-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 45,
+      "clipFrameCount": 78,
+      "durationMs": 3120
+    },
+    {
+      "key": "spore/secretion-carapace-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 37,
+      "clipFrameCount": 78,
+      "durationMs": 3120
+    },
+    {
+      "key": "spring/blade-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 128,
+      "clipFrameCount": 16,
+      "durationMs": 1790
+    },
+    {
+      "key": "spring/blade-carapace-antenna",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 130,
+      "clipFrameCount": 16,
+      "durationMs": 1790
+    },
+    {
+      "key": "spring/blade-secretion-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 145,
+      "clipFrameCount": 16,
+      "durationMs": 1790
+    },
+    {
+      "key": "spring/blade-secretion-carapace-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 129,
+      "clipFrameCount": 16,
+      "durationMs": 1790
+    },
+    {
+      "key": "spring/carapace-antenna",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 114,
+      "clipFrameCount": 16,
+      "durationMs": 1790
+    },
+    {
+      "key": "spring/secretion-antenna",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 117,
+      "clipFrameCount": 16,
+      "durationMs": 1790
+    },
+    {
+      "key": "spring/secretion-carapace-antenna",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 130,
+      "clipFrameCount": 16,
+      "durationMs": 1790
+    },
+    {
+      "key": "bean/blade-carapace",
+      "status": "restored-native-body",
+      "previousReferenceLength": 43.59375,
+      "clipFrameCount": 116,
+      "durationMs": 3850,
+      "nativeBodyAlpha128Dimensions": [
+        262,
+        277
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/bean-blade-carapace-body.png"
+    },
+    {
+      "key": "spore/blade-carapace",
+      "status": "restored-native-body",
+      "previousReferenceLength": 46,
+      "clipFrameCount": 78,
+      "durationMs": 3120,
+      "nativeBodyAlpha128Dimensions": [
+        295,
+        212
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/spore-blade-carapace-body.png"
+    },
+    {
+      "key": "pebble/blade-carapace",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 141,
+      "clipFrameCount": 13,
+      "durationMs": 2140
+    },
+    {
+      "key": "spring/blade-carapace",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 107,
+      "clipFrameCount": 16,
+      "durationMs": 1790
+    },
+    {
+      "key": "bean/secretion-carapace",
+      "status": "restored-native-body",
+      "previousReferenceLength": 34.375,
+      "clipFrameCount": 116,
+      "durationMs": 3850,
+      "nativeBodyAlpha128Dimensions": [
+        217,
+        218
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/bean-secretion-carapace-body.png"
+    },
+    {
+      "key": "bean/blade-secretion",
+      "status": "restored-native-body",
+      "previousReferenceLength": 40.9375,
+      "clipFrameCount": 116,
+      "durationMs": 3850,
+      "nativeBodyAlpha128Dimensions": [
+        241,
+        261
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-body.png"
+    },
+    {
+      "key": "bean/blade-secretion-carapace",
+      "status": "restored-native-body",
+      "previousReferenceLength": 43.59375,
+      "clipFrameCount": 116,
+      "durationMs": 3850,
+      "nativeBodyAlpha128Dimensions": [
+        250,
+        277
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-carapace-body.png"
+    },
+    {
+      "key": "spore/secretion-carapace",
+      "status": "restored-native-body",
+      "previousReferenceLength": 37,
+      "clipFrameCount": 78,
+      "durationMs": 3120,
+      "nativeBodyAlpha128Dimensions": [
+        295,
+        266
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-carapace-body.png"
+    },
+    {
+      "key": "spore/blade-secretion",
+      "status": "restored-native-body",
+      "previousReferenceLength": 41,
+      "clipFrameCount": 78,
+      "durationMs": 3120,
+      "nativeBodyAlpha128Dimensions": [
+        295,
+        235
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-body.png"
+    },
+    {
+      "key": "spore/blade-secretion-carapace",
+      "status": "restored-native-body",
+      "previousReferenceLength": 44,
+      "clipFrameCount": 78,
+      "durationMs": 3120,
+      "nativeBodyAlpha128Dimensions": [
+        295,
+        225
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-carapace-body.png"
+    },
+    {
+      "key": "pebble/secretion-carapace",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 184,
+      "clipFrameCount": 14,
+      "durationMs": 2140
+    },
+    {
+      "key": "pebble/blade-secretion",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 160,
+      "clipFrameCount": 14,
+      "durationMs": 2140
+    },
+    {
+      "key": "pebble/blade-secretion-carapace",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 176,
+      "clipFrameCount": 14,
+      "durationMs": 2140
+    },
+    {
+      "key": "spring/secretion-carapace",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 129,
+      "clipFrameCount": 16,
+      "durationMs": 1790
+    },
+    {
+      "key": "spring/blade-secretion",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 125,
+      "clipFrameCount": 16,
+      "durationMs": 1790
+    },
+    {
+      "key": "spring/blade-secretion-carapace",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 141,
+      "clipFrameCount": 16,
+      "durationMs": 1790
+    },
+    {
+      "key": "bean/base",
+      "status": "existing-native-layers",
+      "previousReferenceLength": 32,
+      "clipFrameCount": 116,
+      "durationMs": 3850
+    },
+    {
+      "key": "bean/gather",
+      "status": "restored-native-body",
+      "previousReferenceLength": 31,
+      "clipFrameCount": 116,
+      "durationMs": 3850,
+      "nativeBodyAlpha128Dimensions": [
+        214,
+        236
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/bean-gather-body.png"
+    },
+    {
+      "key": "bean/blade",
+      "status": "restored-native-body",
+      "previousReferenceLength": 64,
+      "clipFrameCount": 116,
+      "durationMs": 3850,
+      "nativeBodyAlpha128Dimensions": [
+        251,
+        188
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/bean-blade-body.png"
+    },
+    {
+      "key": "bean/carapace",
+      "status": "restored-native-body",
+      "previousReferenceLength": 57,
+      "clipFrameCount": 116,
+      "durationMs": 3850,
+      "nativeBodyAlpha128Dimensions": [
+        225,
+        202
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/bean-carapace-body.png"
+    },
+    {
+      "key": "bean/secretion",
+      "status": "restored-native-body",
+      "previousReferenceLength": 32,
+      "clipFrameCount": 116,
+      "durationMs": 3850,
+      "nativeBodyAlpha128Dimensions": [
+        200,
+        204
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/bean-secretion-body.png"
+    },
+    {
+      "key": "bean/antenna",
+      "status": "restored-native-body",
+      "previousReferenceLength": 48,
+      "clipFrameCount": 116,
+      "durationMs": 3850,
+      "nativeBodyAlpha128Dimensions": [
+        157,
+        220
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/bean-antenna-body.png"
+    },
+    {
+      "key": "spore/base",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 79,
+      "clipFrameCount": 22,
+      "durationMs": 3120
+    },
+    {
+      "key": "spore/gather",
+      "status": "restored-native-body",
+      "previousReferenceLength": 45,
+      "clipFrameCount": 78,
+      "durationMs": 3120,
+      "nativeBodyAlpha128Dimensions": [
+        426,
+        314
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/spore-gather-body.png"
+    },
+    {
+      "key": "spore/blade",
+      "status": "restored-native-body",
+      "previousReferenceLength": 62,
+      "clipFrameCount": 94,
+      "durationMs": 3120,
+      "nativeBodyAlpha128Dimensions": [
+        367,
+        227
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/spore-blade-body.png"
+    },
+    {
+      "key": "spore/carapace",
+      "status": "restored-native-body",
+      "previousReferenceLength": 59,
+      "clipFrameCount": 94,
+      "durationMs": 3120,
+      "nativeBodyAlpha128Dimensions": [
+        354,
+        244
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/spore-carapace-body.png"
+    },
+    {
+      "key": "spore/secretion",
+      "status": "restored-native-body",
+      "previousReferenceLength": 40,
+      "clipFrameCount": 78,
+      "durationMs": 3120,
+      "nativeBodyAlpha128Dimensions": [
+        275,
+        224
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-body.png"
+    },
+    {
+      "key": "spore/antenna",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 43,
+      "clipFrameCount": 94,
+      "durationMs": 3120
+    },
+    {
+      "key": "pebble/base",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 93,
+      "clipFrameCount": 48,
+      "durationMs": 2620
+    },
+    {
+      "key": "pebble/gather",
+      "status": "restored-native-body",
+      "previousReferenceLength": 64,
+      "clipFrameCount": 66,
+      "durationMs": 2620,
+      "nativeBodyAlpha128Dimensions": [
+        243,
+        162
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/pebble-gather-body.png"
+    },
+    {
+      "key": "pebble/blade",
+      "status": "restored-native-body",
+      "previousReferenceLength": 83,
+      "clipFrameCount": 79,
+      "durationMs": 2620,
+      "nativeBodyAlpha128Dimensions": [
+        166,
+        134
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/pebble-blade-body.png"
+    },
+    {
+      "key": "pebble/carapace",
+      "status": "restored-native-body",
+      "previousReferenceLength": 91,
+      "clipFrameCount": 79,
+      "durationMs": 2620,
+      "nativeBodyAlpha128Dimensions": [
+        181,
+        144
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/pebble-carapace-body.png"
+    },
+    {
+      "key": "pebble/secretion",
+      "status": "restored-native-body",
+      "previousReferenceLength": 44,
+      "clipFrameCount": 48,
+      "durationMs": 2620,
+      "nativeBodyAlpha128Dimensions": [
+        91,
+        68
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/pebble-secretion-body.png"
+    },
+    {
+      "key": "pebble/antenna",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 241,
+      "clipFrameCount": 17,
+      "durationMs": 2620
+    },
+    {
+      "key": "spring/base",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 105,
+      "clipFrameCount": 13,
+      "durationMs": 1790
+    },
+    {
+      "key": "spring/gather",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 275,
+      "clipFrameCount": 13,
+      "durationMs": 1790
+    },
+    {
+      "key": "spring/blade",
+      "status": "restored-native-body",
+      "previousReferenceLength": 115,
+      "clipFrameCount": 36,
+      "durationMs": 1790,
+      "nativeBodyAlpha128Dimensions": [
+        327,
+        302
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/spring-blade-body.png"
+    },
+    {
+      "key": "spring/carapace",
+      "status": "restored-native-body",
+      "previousReferenceLength": 110,
+      "clipFrameCount": 36,
+      "durationMs": 1790,
+      "nativeBodyAlpha128Dimensions": [
+        313,
+        296
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/spring-carapace-body.png"
+    },
+    {
+      "key": "spring/secretion",
+      "status": "restored-native-body",
+      "previousReferenceLength": 65,
+      "clipFrameCount": 56,
+      "durationMs": 1790,
+      "nativeBodyAlpha128Dimensions": [
+        298,
+        363
+      ],
+      "nativeBodyImage": "DesignAssets/Animations/BirthResolutionV1/spring-secretion-body.png"
+    },
+    {
+      "key": "spring/antenna",
+      "status": "retained-existing-no-verified-larger-source",
+      "previousReferenceLength": 105,
+      "clipFrameCount": 13,
+      "durationMs": 1790
+    }
+  ],
+  "counts": {
+    "retained-existing-no-verified-larger-source": 25,
+    "restored-native-body": 24,
+    "existing-native-layers": 19
+  }
+}

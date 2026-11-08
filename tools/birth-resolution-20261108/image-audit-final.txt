@@ -1,0 +1,6 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> audit:images
+> node client/image-audit.mjs
+
+ENV> SOURCE IMAGE SIZE : 1494 FILES PASSED (TARGET 100%, MAX 150%)

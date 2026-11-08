@@ -1,0 +1,558 @@
+{
+  "tribe": "spring",
+  "form": "carapace-antenna",
+  "action": "attack",
+  "generatedWith": "built-in image_gen",
+  "method": "Coherent generated full-body cels. Whole-cell crop and integer registration only. No anatomy assembly, warp, rotation, resampling or alpha cleanup in deliverable sheet. Last output cel repeats whole first cel exactly.",
+  "source": "attack-generated-source.png",
+  "sourceSHA256": "cb5420bc9cf5a5ed000d31023af84997b08da98e51e6e1ffe12cc338dd30f7c7",
+  "sheet": "attack-sheet.png",
+  "sheetSHA256": "0411b243c15e156bbc1cc5561f850a3262b4f00995277eb504b7e3aaacb136a8",
+  "frames": [
+    {
+      "index": 0,
+      "sourceIndex": 0,
+      "sourceCrop": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "wholeCellOffset": [
+        83,
+        112
+      ],
+      "bboxAlpha16": [
+        158,
+        188,
+        333,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 1,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 1,
+      "sourceIndex": 1,
+      "sourceCrop": [
+        314,
+        0,
+        627,
+        314
+      ],
+      "wholeCellOffset": [
+        83,
+        112
+      ],
+      "bboxAlpha16": [
+        155,
+        198,
+        332,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 1,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 2,
+      "sourceIndex": 2,
+      "sourceCrop": [
+        627,
+        0,
+        940,
+        314
+      ],
+      "wholeCellOffset": [
+        83,
+        112
+      ],
+      "bboxAlpha16": [
+        149,
+        208,
+        333,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 1,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 3,
+      "sourceIndex": 3,
+      "sourceCrop": [
+        940,
+        0,
+        1254,
+        314
+      ],
+      "wholeCellOffset": [
+        83,
+        113
+      ],
+      "bboxAlpha16": [
+        145,
+        210,
+        333,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 0,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 4,
+      "sourceIndex": 4,
+      "sourceCrop": [
+        0,
+        314,
+        314,
+        627
+      ],
+      "wholeCellOffset": [
+        83,
+        115
+      ],
+      "bboxAlpha16": [
+        149,
+        209,
+        345,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 0,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 5,
+      "sourceIndex": 5,
+      "sourceCrop": [
+        314,
+        314,
+        627,
+        627
+      ],
+      "wholeCellOffset": [
+        83,
+        116
+      ],
+      "bboxAlpha16": [
+        139,
+        219,
+        367,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 1,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 6,
+      "sourceIndex": 6,
+      "sourceCrop": [
+        627,
+        314,
+        940,
+        627
+      ],
+      "wholeCellOffset": [
+        83,
+        116
+      ],
+      "bboxAlpha16": [
+        139,
+        215,
+        357,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 0,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 7,
+      "sourceIndex": 7,
+      "sourceCrop": [
+        940,
+        314,
+        1254,
+        627
+      ],
+      "wholeCellOffset": [
+        83,
+        115
+      ],
+      "bboxAlpha16": [
+        146,
+        211,
+        349,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 1,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 8,
+      "sourceIndex": 8,
+      "sourceCrop": [
+        0,
+        627,
+        314,
+        940
+      ],
+      "wholeCellOffset": [
+        83,
+        114
+      ],
+      "bboxAlpha16": [
+        149,
+        209,
+        345,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 1,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 9,
+      "sourceIndex": 9,
+      "sourceCrop": [
+        314,
+        627,
+        627,
+        940
+      ],
+      "wholeCellOffset": [
+        83,
+        113
+      ],
+      "bboxAlpha16": [
+        150,
+        207,
+        339,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 1,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 10,
+      "sourceIndex": 10,
+      "sourceCrop": [
+        627,
+        627,
+        940,
+        940
+      ],
+      "wholeCellOffset": [
+        83,
+        112
+      ],
+      "bboxAlpha16": [
+        151,
+        198,
+        327,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 1,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 11,
+      "sourceIndex": 11,
+      "sourceCrop": [
+        940,
+        627,
+        1254,
+        940
+      ],
+      "wholeCellOffset": [
+        83,
+        111
+      ],
+      "bboxAlpha16": [
+        148,
+        195,
+        326,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 1,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 12,
+      "sourceIndex": 12,
+      "sourceCrop": [
+        0,
+        940,
+        314,
+        1254
+      ],
+      "wholeCellOffset": [
+        83,
+        110
+      ],
+      "bboxAlpha16": [
+        151,
+        195,
+        330,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 1,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 13,
+      "sourceIndex": 13,
+      "sourceCrop": [
+        314,
+        940,
+        627,
+        1254
+      ],
+      "wholeCellOffset": [
+        83,
+        110
+      ],
+      "bboxAlpha16": [
+        148,
+        192,
+        331,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 1,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 14,
+      "sourceIndex": 14,
+      "sourceCrop": [
+        627,
+        940,
+        940,
+        1254
+      ],
+      "wholeCellOffset": [
+        83,
+        110
+      ],
+      "bboxAlpha16": [
+        150,
+        188,
+        333,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 0,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    },
+    {
+      "index": 15,
+      "sourceIndex": 0,
+      "sourceCrop": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "wholeCellOffset": [
+        83,
+        112
+      ],
+      "bboxAlpha16": [
+        158,
+        188,
+        333,
+        368
+      ],
+      "sourceBoundaryMaxAlpha": 1,
+      "sourceRGBAExact": true,
+      "majorConnectedComponents": 1,
+      "outputEdgeAlphaMax": 0
+    }
+  ],
+  "distinctSourceCelsUsed": 15,
+  "publication": {
+    "tribe": "spring",
+    "form": "carapace-antenna",
+    "label": "샘방울 갑각 + 안테나 반격",
+    "status": "completed-under-user-delegated-production",
+    "sourceAppearance": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/appearance-source.png",
+    "sourceAppearanceSHA256": "95075e8883ffadbf4975fdae9345581015be83a83d0feecee409e3e80978dff1",
+    "bodyPartComposition": false,
+    "antennaIncluded": true,
+    "rangedIncluded": false,
+    "actions": {
+      "attack": {
+        "sheet": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-sheet.png",
+        "preview": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-preview.webp",
+        "gif": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-preview.gif",
+        "sheetSHA256": "0411b243c15e156bbc1cc5561f850a3262b4f00995277eb504b7e3aaacb136a8",
+        "previewSHA256": "7f8174b251f639d6daf7f4224774cadbdec68d158dbc4ebe0b964452032b52f7",
+        "gifSHA256": "3d3e79a90a3f1d6ae1164da10d8950f1ff7ee850c1fa89c0608760a9169ae565",
+        "durationsMs": [
+          60,
+          70,
+          60,
+          80,
+          30,
+          100,
+          100,
+          100,
+          40,
+          40,
+          40,
+          40,
+          40,
+          50,
+          60,
+          90
+        ],
+        "durationMs": 1000,
+        "loop": false,
+        "frameSize": 480,
+        "frameHeight": 480,
+        "columns": 4,
+        "frameCount": 16,
+        "sourceFacing": "left",
+        "previewDurationsMs": [
+          560,
+          70,
+          60,
+          80,
+          30,
+          100,
+          100,
+          100,
+          40,
+          40,
+          40,
+          40,
+          40,
+          50,
+          60,
+          590
+        ],
+        "previewDurationMs": 2000,
+        "previewLoop": true,
+        "pivotX": 252.0,
+        "pivotY": 368,
+        "referenceLength": 180,
+        "referenceLengthMethod": "Alpha >= 16 max(width,height) of neutral full-body silhouette.",
+        "referenceBodyBBox": [
+          158,
+          188,
+          333,
+          368
+        ],
+        "referenceFrameIndex": 0,
+        "registrationScale": 1,
+        "fullScene": false,
+        "projectileIncluded": false,
+        "attackType": "melee",
+        "attackRole": "retaliation",
+        "hitTimeMs": 300,
+        "hitAtMs": 300,
+        "hitFrameIndex": 5,
+        "impactHoldMs": 300,
+        "worldTravelIncludedInPixels": false
+      }
+    },
+    "runtimeInstruction": "Add or replace attack only, preserving other approved actions. This animation does not grant proactive targeting. Use only melee retaliation for forms lacking blade/secretion.",
+    "baseMotionReference": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp"
+  },
+  "qa": {
+    "sourceRGBAExact": true,
+    "clippedFrames": 0,
+    "rangedActions": 0,
+    "bodyPartComposition": false,
+    "visuallyInspectedOnDarkAndLight": true
+  },
+  "appearanceReference": {
+    "image": "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/idle.png",
+    "sourceFacing": "left",
+    "frameSize": 480,
+    "frameHeight": 480,
+    "columns": 4,
+    "frameCount": 16,
+    "durationsMs": [
+      120,
+      120,
+      120,
+      120,
+      120,
+      120,
+      120,
+      120,
+      120,
+      120,
+      120,
+      120,
+      120,
+      120,
+      120,
+      120
+    ],
+    "durationMs": 1920,
+    "pivotX": 216,
+    "pivotY": 369,
+    "referenceLength": 182,
+    "viewSize": 182,
+    "registrationScale": 1,
+    "loop": true
+  },
+  "baseMotionReference": {
+    "image": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
+    "sourceFacing": "left",
+    "frameSize": 516,
+    "frameHeight": 516,
+    "columns": 4,
+    "frameCount": 16,
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      70,
+      80,
+      90,
+      100,
+      60
+    ],
+    "pivotX": 258,
+    "pivotY": 453.07317073170736,
+    "viewSize": 516,
+    "registrationScale": 1.0061349693251533,
+    "loop": false
+  }
+}

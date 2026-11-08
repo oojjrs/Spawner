@@ -10326,7 +10326,8 @@
           "angle": -0.0070653919915632645,
           "visible": true
         }
-      ]
+      ],
+      "sourceFacing": "left"
     },
     "hurt": {
       "image": "Base/spring/hurt.webp",

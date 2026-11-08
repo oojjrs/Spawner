@@ -1,0 +1,1386 @@
+{
+  "operation": "Common alpha-positive union plus two transparent padding pixels, exact RGBA cel deduplication, and source-coordinate-preserving layer destinations. No resizing or changed timeline.",
+  "paddingPixels": 2,
+  "maximumTextureSizeTarget": 4096,
+  "totals": {
+    "assetCount": 26,
+    "changedAssets": 24,
+    "decodedBytesBefore": 646571056,
+    "decodedBytesAfter": 403019856,
+    "sourceCellsChecked": 813,
+    "visibleSamplesChecked": 1772,
+    "maximumCoordinateError": 1.1368683772161603e-13,
+    "maximumTextureDimensionBefore": 6144,
+    "maximumTextureDimensionAfter": 3816,
+    "nonSceneLayerFieldsUnchanged": true,
+    "untargetedLayersUnchanged": true,
+    "decodedReductionPercent": 37.66812599170848,
+    "decodedMiBBefore": 616.6182098388672,
+    "decodedMiBAfter": 384.3496856689453,
+    "decodedBytesBeforeAll26Compaction": 918257152,
+    "decodedMiBBeforeAll26Compaction": 875.71826171875,
+    "cumulativeDecodedReductionPercent": 56.110349358868916
+  },
+  "runtimeValidation": {
+    "focusedTestsPassed": 39,
+    "actualCompactPebbleDraws": 544,
+    "actualCompactPebbleImageLoads": 4,
+    "actualCompactPebbleScratchAllocations": 0,
+    "actualCompactPebbleCopies": 0,
+    "report": "tools/birth-resolution-20261108/compact-runtime-tests.txt",
+    "liveBrowserValidation": "Not performed by this worker."
+  },
+  "assets": [
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/bean-seed-a.png",
+      "status": "compacted",
+      "before": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-seed-a.png",
+        "sha256": "c564ab7c987f9e9144f69dbae54719d3e8ef6f59bf527f1cc8d4783d69bded91",
+        "frameSize": 322,
+        "frameHeight": 424,
+        "columns": 8,
+        "frameCount": 97
+      },
+      "after": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-seed-a.png",
+        "sha256": "6421dd75ddf0a46bd3daf42447a6cd775a99791750970f995fac7afe8fe57206",
+        "frameSize": 322,
+        "frameHeight": 424,
+        "columns": 11,
+        "frameCount": 97
+      },
+      "dimensionsBefore": [
+        2576,
+        5512
+      ],
+      "dimensionsAfter": [
+        3542,
+        3816
+      ],
+      "decodedBytesBefore": 56795648,
+      "decodedBytesAfter": 54065088,
+      "decodedReductionPercent": 4.807692307692313,
+      "commonAlphaBounds": [
+        0,
+        0,
+        322,
+        424
+      ],
+      "commonCropRect": [
+        0,
+        0,
+        322,
+        424
+      ],
+      "sourceCellCount": 97,
+      "uniqueCellCount": 97,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 232,
+      "hiddenSampleCountPreserved": 0,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/bean-seed-b.png",
+      "status": "compacted",
+      "before": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-seed-b.png",
+        "sha256": "a7cf58576da922ba36f2885396b70e897bc5380c33f755911a458b525a3e3ec1",
+        "frameSize": 211,
+        "frameHeight": 342,
+        "columns": 8,
+        "frameCount": 97
+      },
+      "after": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-seed-b.png",
+        "sha256": "e50a44f728594ff149356f275e7b56839c820fc06d2b6694ff7accf0ead49d79",
+        "frameSize": 211,
+        "frameHeight": 342,
+        "columns": 14,
+        "frameCount": 97
+      },
+      "dimensionsBefore": [
+        1688,
+        4446
+      ],
+      "dimensionsAfter": [
+        2954,
+        2394
+      ],
+      "decodedBytesBefore": 30019392,
+      "decodedBytesAfter": 28287504,
+      "decodedReductionPercent": 5.769230769230771,
+      "commonAlphaBounds": [
+        0,
+        0,
+        211,
+        342
+      ],
+      "commonCropRect": [
+        0,
+        0,
+        211,
+        342
+      ],
+      "sourceCellCount": 97,
+      "uniqueCellCount": 97,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 348,
+      "hiddenSampleCountPreserved": 0,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/bean-gather-body.png",
+      "status": "compacted",
+      "before": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-gather-body.png",
+        "sha256": "0648d38589dfb6e392662e527c5826adfbb59570563256873efe4562ab179a8b",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16
+      },
+      "after": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-gather-body.png",
+        "sha256": "5a629a0870ae2b285a1f1d57544bc05fed96dfe15e58765511e58ec0d4210cce",
+        "frameSize": 337,
+        "frameHeight": 353,
+        "columns": 4,
+        "frameCount": 16
+      },
+      "dimensionsBefore": [
+        4096,
+        1024
+      ],
+      "dimensionsAfter": [
+        1348,
+        1412
+      ],
+      "decodedBytesBefore": 16777216,
+      "decodedBytesAfter": 7613504,
+      "decodedReductionPercent": 54.61997985839844,
+      "commonAlphaBounds": [
+        81,
+        161,
+        414,
+        512
+      ],
+      "commonCropRect": [
+        79,
+        159,
+        416,
+        512
+      ],
+      "sourceCellCount": 16,
+      "uniqueCellCount": 16,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 46,
+      "hiddenSampleCountPreserved": 70,
+      "maximumCoordinateError": 5.684341886080802e-14
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/bean-secretion-body.png",
+      "status": "compacted",
+      "before": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-secretion-body.png",
+        "sha256": "dd141713e7c8b94663a1a9805351c3ce1422eedc623ede7a98ee8706e8af609e",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16
+      },
+      "after": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-secretion-body.png",
+        "sha256": "12b465c932f8785afe4db2105afede1489a1cc30e424e91aadd26cd76ec040c5",
+        "frameSize": 355,
+        "frameHeight": 379,
+        "columns": 4,
+        "frameCount": 16
+      },
+      "dimensionsBefore": [
+        4096,
+        1024
+      ],
+      "dimensionsAfter": [
+        1420,
+        1516
+      ],
+      "decodedBytesBefore": 16777216,
+      "decodedBytesAfter": 8610880,
+      "decodedReductionPercent": 48.67515563964844,
+      "commonAlphaBounds": [
+        86,
+        123,
+        437,
+        498
+      ],
+      "commonCropRect": [
+        84,
+        121,
+        439,
+        500
+      ],
+      "sourceCellCount": 16,
+      "uniqueCellCount": 16,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 46,
+      "hiddenSampleCountPreserved": 70,
+      "maximumCoordinateError": 5.684341886080802e-14
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/bean-antenna-body.png",
+      "status": "compacted",
+      "before": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-antenna-body.png",
+        "sha256": "cc290464a5a85dcc5f32aca6a35f33bdccc435e36449a7264f71474e9209172c",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16
+      },
+      "after": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-antenna-body.png",
+        "sha256": "3b22084cb9ce2ce407346824eb057d74fa83105cca88321ebacbd90190aabd4c",
+        "frameSize": 308,
+        "frameHeight": 344,
+        "columns": 4,
+        "frameCount": 16
+      },
+      "dimensionsBefore": [
+        4096,
+        1024
+      ],
+      "dimensionsAfter": [
+        1232,
+        1376
+      ],
+      "decodedBytesBefore": 16777216,
+      "decodedBytesAfter": 6780928,
+      "decodedReductionPercent": 59.58251953125,
+      "commonAlphaBounds": [
+        104,
+        170,
+        408,
+        512
+      ],
+      "commonCropRect": [
+        102,
+        168,
+        410,
+        512
+      ],
+      "sourceCellCount": 16,
+      "uniqueCellCount": 16,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 46,
+      "hiddenSampleCountPreserved": 70,
+      "maximumCoordinateError": 5.684341886080802e-14
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-body.png",
+      "status": "compacted",
+      "before": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-body.png",
+        "sha256": "cfc0da4e709972885c26688fc438b4fb135e2b816e619606ef61d64965dea79f",
+        "frameSize": 320,
+        "frameHeight": 320,
+        "columns": 4,
+        "frameCount": 16
+      },
+      "after": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-body.png",
+        "sha256": "cfc0da4e709972885c26688fc438b4fb135e2b816e619606ef61d64965dea79f",
+        "frameSize": 320,
+        "frameHeight": 320,
+        "columns": 4,
+        "frameCount": 16
+      },
+      "dimensionsBefore": [
+        1280,
+        1280
+      ],
+      "dimensionsAfter": [
+        1280,
+        1280
+      ],
+      "decodedBytesBefore": 6553600,
+      "decodedBytesAfter": 6553600,
+      "decodedReductionPercent": 0.0,
+      "commonAlphaBounds": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "commonCropRect": [
+        0,
+        0,
+        320,
+        320
+      ],
+      "sourceCellCount": 16,
+      "uniqueCellCount": 16,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 46,
+      "hiddenSampleCountPreserved": 70,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/bean-carapace-body.png",
+      "status": "compacted",
+      "before": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-carapace-body.png",
+        "sha256": "08143b14af1ab376560a8d67843a71dfce3acc11e811e5e2e6a5f533e7e73365",
+        "frameSize": 320,
+        "frameHeight": 320,
+        "columns": 4,
+        "frameCount": 16
+      },
+      "after": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-carapace-body.png",
+        "sha256": "713ace0c72d41b6c253ca8edbc21483eda621274aaeaa01d090de75b61c7516a",
+        "frameSize": 317,
+        "frameHeight": 319,
+        "columns": 4,
+        "frameCount": 16
+      },
+      "dimensionsBefore": [
+        1280,
+        1280
+      ],
+      "dimensionsAfter": [
+        1268,
+        1276
+      ],
+      "decodedBytesBefore": 6553600,
+      "decodedBytesAfter": 6471872,
+      "decodedReductionPercent": 1.2470703124999982,
+      "commonAlphaBounds": [
+        0,
+        0,
+        315,
+        317
+      ],
+      "commonCropRect": [
+        0,
+        0,
+        317,
+        319
+      ],
+      "sourceCellCount": 16,
+      "uniqueCellCount": 16,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 46,
+      "hiddenSampleCountPreserved": 70,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-carapace-body.png",
+      "status": "compacted",
+      "before": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-carapace-body.png",
+        "sha256": "7b4d8d9b72b97e2328fdbb54dee8569cbc94c28fdf55017d83f0acf0c5b11fa5",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16
+      },
+      "after": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-carapace-body.png",
+        "sha256": "d171441ac8bc43412055984e1e6f02d537ef5e4427ccd135d5158887d0a69619",
+        "frameSize": 321,
+        "frameHeight": 309,
+        "columns": 4,
+        "frameCount": 16
+      },
+      "dimensionsBefore": [
+        4096,
+        1024
+      ],
+      "dimensionsAfter": [
+        1284,
+        1236
+      ],
+      "decodedBytesBefore": 16777216,
+      "decodedBytesAfter": 6348096,
+      "decodedReductionPercent": 62.16239929199219,
+      "commonAlphaBounds": [
+        121,
+        148,
+        438,
+        453
+      ],
+      "commonCropRect": [
+        119,
+        146,
+        440,
+        455
+      ],
+      "sourceCellCount": 16,
+      "uniqueCellCount": 16,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 46,
+      "hiddenSampleCountPreserved": 70,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-body.png",
+      "status": "compacted",
+      "before": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-body.png",
+        "sha256": "e3258fa375157ae2daf3fec99de901a23f6d6609fabded5f5d36348b6a61bcb1",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16
+      },
+      "after": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-body.png",
+        "sha256": "aa619820f0584ea79b7157c98d358321e9bb5a053ff0666872372e0981cc8d29",
+        "frameSize": 285,
+        "frameHeight": 291,
+        "columns": 4,
+        "frameCount": 16
+      },
+      "dimensionsBefore": [
+        4096,
+        1024
+      ],
+      "dimensionsAfter": [
+        1140,
+        1164
+      ],
+      "decodedBytesBefore": 16777216,
+      "decodedBytesAfter": 5307840,
+      "decodedReductionPercent": 68.36280822753906,
+      "commonAlphaBounds": [
+        141,
+        166,
+        422,
+        453
+      ],
+      "commonCropRect": [
+        139,
+        164,
+        424,
+        455
+      ],
+      "sourceCellCount": 16,
+      "uniqueCellCount": 16,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 46,
+      "hiddenSampleCountPreserved": 70,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/bean-secretion-carapace-body.png",
+      "status": "compacted",
+      "before": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-secretion-carapace-body.png",
+        "sha256": "1b2656de473d509e1fd8bf1e3f78d9652d36ae914a6efb79f6d02ef038979d35",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16
+      },
+      "after": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-secretion-carapace-body.png",
+        "sha256": "bd72251de6ace24b5abc1dcfedaf5086df117b1dd02044c34baaaf3565f0ead0",
+        "frameSize": 257,
+        "frameHeight": 239,
+        "columns": 4,
+        "frameCount": 16
+      },
+      "dimensionsBefore": [
+        4096,
+        1024
+      ],
+      "dimensionsAfter": [
+        1028,
+        956
+      ],
+      "decodedBytesBefore": 16777216,
+      "decodedBytesAfter": 3931072,
+      "decodedReductionPercent": 76.56898498535156,
+      "commonAlphaBounds": [
+        131,
+        217,
+        384,
+        452
+      ],
+      "commonCropRect": [
+        129,
+        215,
+        386,
+        454
+      ],
+      "sourceCellCount": 16,
+      "uniqueCellCount": 16,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 46,
+      "hiddenSampleCountPreserved": 70,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-carapace-body.png",
+      "status": "compacted",
+      "before": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-carapace-body.png",
+        "sha256": "493ad749a5ad1dffdc934e2f634c9e7586c6a30f3e03284f237da013d4682cbb",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 16
+      },
+      "after": {
+        "path": "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-carapace-body.png",
+        "sha256": "fdcb38c79df751bbaf30f5a6ea2ce1ca1dd1bf1c8acc577879db1d233b50d059",
+        "frameSize": 283,
+        "frameHeight": 304,
+        "columns": 4,
+        "frameCount": 16
+      },
+      "dimensionsBefore": [
+        4096,
+        1024
+      ],
+      "dimensionsAfter": [
+        1132,
+        1216
+      ],
+      "decodedBytesBefore": 16777216,
+      "decodedBytesAfter": 5506048,
+      "decodedReductionPercent": 67.181396484375,
+      "commonAlphaBounds": [
+        131,
+        153,
+        410,
+        453
+      ],
+      "commonCropRect": [
+        129,
+        151,
+        412,
+        455
+      ],
+      "sourceCellCount": 16,
+      "uniqueCellCount": 16,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 46,
+      "hiddenSampleCountPreserved": 70,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/pebble-gather-body.png",
+      "status": "compacted",
+      "before": {
+        "frameSize": 416,
+        "frameHeight": 416,
+        "columns": 4,
+        "frameCount": 16,
+        "path": "DesignAssets/Animations/BirthResolutionV1/pebble-gather-body.png",
+        "sha256": "66cac8365a656b58e1784abc5b75f4a50ba42e0bfbac6502bc7afc252339d136"
+      },
+      "after": {
+        "frameSize": 319,
+        "frameHeight": 335,
+        "columns": 4,
+        "frameCount": 16,
+        "path": "DesignAssets/Animations/BirthResolutionV1/pebble-gather-body.png",
+        "sha256": "f998088001d9353e04af415bb78088d38e380931e9ef07cfa6fddcd24540e99d"
+      },
+      "dimensionsBefore": [
+        1664,
+        1664
+      ],
+      "dimensionsAfter": [
+        1276,
+        1340
+      ],
+      "decodedBytesBefore": 11075584,
+      "decodedBytesAfter": 6839360,
+      "decodedReductionPercent": 38.24831268491125,
+      "commonAlphaBounds": [
+        51,
+        81,
+        366,
+        412
+      ],
+      "commonCropRect": [
+        49,
+        79,
+        368,
+        414
+      ],
+      "sourceCellCount": 16,
+      "uniqueCellCount": 16,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 66,
+      "hiddenSampleCountPreserved": 0,
+      "maximumCoordinateError": 5.684341886080802e-14
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/pebble-blade-body.png",
+      "status": "compacted",
+      "before": {
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 4,
+        "frameCount": 79,
+        "path": "DesignAssets/Animations/BirthResolutionV1/pebble-blade-body.png",
+        "sha256": "8a5d2d5f8beeb0f00d04ea08cb12d288bf4af7ddd3e7704717ed32d05f54dbd5"
+      },
+      "after": {
+        "frameSize": 179,
+        "frameHeight": 142,
+        "columns": 6,
+        "frameCount": 78,
+        "path": "DesignAssets/Animations/BirthResolutionV1/pebble-blade-body.png",
+        "sha256": "e6a8f8d4b8b7d6298aebfd917c058fd97de9c8c5bba7b5e094424a95abc6b1c0"
+      },
+      "dimensionsBefore": [
+        1024,
+        5120
+      ],
+      "dimensionsAfter": [
+        1074,
+        1846
+      ],
+      "decodedBytesBefore": 20971520,
+      "decodedBytesAfter": 7930416,
+      "decodedReductionPercent": 62.184829711914055,
+      "commonAlphaBounds": [
+        22,
+        96,
+        197,
+        234
+      ],
+      "commonCropRect": [
+        20,
+        94,
+        199,
+        236
+      ],
+      "sourceCellCount": 79,
+      "uniqueCellCount": 78,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 79,
+      "hiddenSampleCountPreserved": 0,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/pebble-carapace-body.png",
+      "status": "compacted",
+      "before": {
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 4,
+        "frameCount": 79,
+        "path": "DesignAssets/Animations/BirthResolutionV1/pebble-carapace-body.png",
+        "sha256": "89bdcde2ec18645162c04619000eac94c14ca796aa41b402d3aa091da8041982"
+      },
+      "after": {
+        "frameSize": 192,
+        "frameHeight": 162,
+        "columns": 6,
+        "frameCount": 78,
+        "path": "DesignAssets/Animations/BirthResolutionV1/pebble-carapace-body.png",
+        "sha256": "dacd3e3e9b3db54af03e350e59b96c50941b2f0cea12c6e3b70d1992aff930eb"
+      },
+      "dimensionsBefore": [
+        1024,
+        5120
+      ],
+      "dimensionsAfter": [
+        1152,
+        2106
+      ],
+      "decodedBytesBefore": 20971520,
+      "decodedBytesAfter": 9704448,
+      "decodedReductionPercent": 53.7255859375,
+      "commonAlphaBounds": [
+        25,
+        75,
+        213,
+        233
+      ],
+      "commonCropRect": [
+        23,
+        73,
+        215,
+        235
+      ],
+      "sourceCellCount": 79,
+      "uniqueCellCount": 78,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 79,
+      "hiddenSampleCountPreserved": 0,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/pebble-secretion-body.png",
+      "status": "compacted",
+      "before": {
+        "frameSize": 151,
+        "frameHeight": 151,
+        "columns": 8,
+        "frameCount": 48,
+        "path": "DesignAssets/Animations/BirthResolutionV1/pebble-secretion-body.png",
+        "sha256": "54eb72bb1312b786822e330871df8ff6087a2d6769d023210d46129be19d6177"
+      },
+      "after": {
+        "frameSize": 104,
+        "frameHeight": 109,
+        "columns": 7,
+        "frameCount": 35,
+        "path": "DesignAssets/Animations/BirthResolutionV1/pebble-secretion-body.png",
+        "sha256": "cdce4ce21ba34b98e19195acc130b2753eb98100664ee046c55c7d23046de582"
+      },
+      "dimensionsBefore": [
+        1208,
+        906
+      ],
+      "dimensionsAfter": [
+        728,
+        545
+      ],
+      "decodedBytesBefore": 4377792,
+      "decodedBytesAfter": 1587040,
+      "decodedReductionPercent": 63.747935032089245,
+      "commonAlphaBounds": [
+        26,
+        41,
+        126,
+        146
+      ],
+      "commonCropRect": [
+        24,
+        39,
+        128,
+        148
+      ],
+      "sourceCellCount": 48,
+      "uniqueCellCount": 35,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 48,
+      "hiddenSampleCountPreserved": 0,
+      "maximumCoordinateError": 5.684341886080802e-14
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/spring-blade-body.png",
+      "status": "already-compact-spring-preserved",
+      "before": {
+        "frameSize": 343,
+        "frameHeight": 317,
+        "columns": 6,
+        "frameCount": 34,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spring-blade-body.png",
+        "sha256": "40f2a4421d188caaef7709369ada2cae82533cf046c3156557deb2fdf7f0a2f3"
+      },
+      "after": {
+        "frameSize": 343,
+        "frameHeight": 317,
+        "columns": 6,
+        "frameCount": 34,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spring-blade-body.png",
+        "sha256": "40f2a4421d188caaef7709369ada2cae82533cf046c3156557deb2fdf7f0a2f3"
+      },
+      "dimensionsBefore": [
+        2058,
+        1902
+      ],
+      "dimensionsAfter": [
+        2058,
+        1902
+      ],
+      "decodedBytesBefore": 15657264,
+      "decodedBytesAfter": 15657264
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/spring-carapace-body.png",
+      "status": "already-compact-spring-preserved",
+      "before": {
+        "frameSize": 326,
+        "frameHeight": 312,
+        "columns": 6,
+        "frameCount": 34,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spring-carapace-body.png",
+        "sha256": "72edf91e27c16b037d64b4765357bdb793c7e44b5c269b96d1c6d2daa4b65a89"
+      },
+      "after": {
+        "frameSize": 326,
+        "frameHeight": 312,
+        "columns": 6,
+        "frameCount": 34,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spring-carapace-body.png",
+        "sha256": "72edf91e27c16b037d64b4765357bdb793c7e44b5c269b96d1c6d2daa4b65a89"
+      },
+      "dimensionsBefore": [
+        1956,
+        1872
+      ],
+      "dimensionsAfter": [
+        1956,
+        1872
+      ],
+      "decodedBytesBefore": 14646528,
+      "decodedBytesAfter": 14646528
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/spring-secretion-body.png",
+      "status": "compacted",
+      "before": {
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 13,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spring-secretion-body.png",
+        "sha256": "1e6cd8aff0bc09d0e85f51f300a60db4c83f667076aa89268df2b9c4b7737b23"
+      },
+      "after": {
+        "frameSize": 503,
+        "frameHeight": 496,
+        "columns": 2,
+        "frameCount": 13,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spring-secretion-body.png",
+        "sha256": "b2c6d62189f1ddbf34e066b6fde5d086efad6b741a5a39cb551e9960e523b1c4"
+      },
+      "dimensionsBefore": [
+        2048,
+        2048
+      ],
+      "dimensionsAfter": [
+        1006,
+        3472
+      ],
+      "decodedBytesBefore": 16777216,
+      "decodedBytesAfter": 13971328,
+      "decodedReductionPercent": 16.724395751953125,
+      "commonAlphaBounds": [
+        11,
+        0,
+        512,
+        494
+      ],
+      "commonCropRect": [
+        9,
+        0,
+        512,
+        496
+      ],
+      "sourceCellCount": 13,
+      "uniqueCellCount": 13,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 56,
+      "hiddenSampleCountPreserved": 0,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/spore-blade-carapace-body.png",
+      "status": "compacted",
+      "before": {
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 37,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-blade-carapace-body.png",
+        "sha256": "92812004cc9978f263b277a02e1ab0fb52bc8d7009fde2b756d8c778ed9c2a56"
+      },
+      "after": {
+        "frameSize": 411,
+        "frameHeight": 425,
+        "columns": 8,
+        "frameCount": 37,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-blade-carapace-body.png",
+        "sha256": "a5b2dde2a764a3d7d6cc189a79765a50f4836e478444266c386878efef27ae5f"
+      },
+      "dimensionsBefore": [
+        4096,
+        2560
+      ],
+      "dimensionsAfter": [
+        3288,
+        2125
+      ],
+      "decodedBytesBefore": 41943040,
+      "decodedBytesAfter": 27948000,
+      "decodedReductionPercent": 33.36677551269531,
+      "commonAlphaBounds": [
+        59,
+        89,
+        466,
+        512
+      ],
+      "commonCropRect": [
+        57,
+        87,
+        468,
+        512
+      ],
+      "sourceCellCount": 37,
+      "uniqueCellCount": 37,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 71,
+      "hiddenSampleCountPreserved": 7,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-body.png",
+      "status": "compacted",
+      "before": {
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 37,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-body.png",
+        "sha256": "82e50da26a609ec03693936a0b6db587030fbf396e8d6624ceae4e3ec2d809b8"
+      },
+      "after": {
+        "frameSize": 475,
+        "frameHeight": 457,
+        "columns": 5,
+        "frameCount": 37,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-body.png",
+        "sha256": "eb76c81ce5631432c0d0fc9ffd27518b94727c344e455d53cbf0a30b60197e34"
+      },
+      "dimensionsBefore": [
+        4096,
+        2560
+      ],
+      "dimensionsAfter": [
+        2375,
+        3656
+      ],
+      "decodedBytesBefore": 41943040,
+      "decodedBytesAfter": 34732000,
+      "decodedReductionPercent": 17.192459106445312,
+      "commonAlphaBounds": [
+        18,
+        57,
+        489,
+        512
+      ],
+      "commonCropRect": [
+        16,
+        55,
+        491,
+        512
+      ],
+      "sourceCellCount": 37,
+      "uniqueCellCount": 37,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 71,
+      "hiddenSampleCountPreserved": 7,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-carapace-body.png",
+      "status": "compacted",
+      "before": {
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 37,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-carapace-body.png",
+        "sha256": "565cd0d71ba9d93acc99af89831aac6a96d1453856b89e04ab165d9ef461d800"
+      },
+      "after": {
+        "frameSize": 455,
+        "frameHeight": 453,
+        "columns": 5,
+        "frameCount": 37,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-carapace-body.png",
+        "sha256": "e363019528a33526256d286a90b4b1db6f5c1957b321eea4d3087d2cf324b84f"
+      },
+      "dimensionsBefore": [
+        4096,
+        2560
+      ],
+      "dimensionsAfter": [
+        2275,
+        3624
+      ],
+      "decodedBytesBefore": 41943040,
+      "decodedBytesAfter": 32978400,
+      "decodedReductionPercent": 21.373367309570312,
+      "commonAlphaBounds": [
+        27,
+        55,
+        478,
+        504
+      ],
+      "commonCropRect": [
+        25,
+        53,
+        480,
+        506
+      ],
+      "sourceCellCount": 37,
+      "uniqueCellCount": 37,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 71,
+      "hiddenSampleCountPreserved": 7,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-carapace-body.png",
+      "status": "compacted",
+      "before": {
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 37,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-carapace-body.png",
+        "sha256": "04b4aef19d2dc2629048912b9767ef653886a79a7d80429877546e5afcd223f6"
+      },
+      "after": {
+        "frameSize": 491,
+        "frameHeight": 454,
+        "columns": 5,
+        "frameCount": 37,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-carapace-body.png",
+        "sha256": "8478c07213ed7474520f0c290eb5af364298f49a51b94d8749f7e7cb6eabf409"
+      },
+      "dimensionsBefore": [
+        4096,
+        2560
+      ],
+      "dimensionsAfter": [
+        2455,
+        3632
+      ],
+      "decodedBytesBefore": 41943040,
+      "decodedBytesAfter": 35666240,
+      "decodedReductionPercent": 14.965057373046875,
+      "commonAlphaBounds": [
+        10,
+        60,
+        497,
+        512
+      ],
+      "commonCropRect": [
+        8,
+        58,
+        499,
+        512
+      ],
+      "sourceCellCount": 37,
+      "uniqueCellCount": 37,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 71,
+      "hiddenSampleCountPreserved": 7,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/spore-gather-body.png",
+      "status": "compacted",
+      "before": {
+        "frameSize": 768,
+        "frameHeight": 768,
+        "columns": 8,
+        "frameCount": 42,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-gather-body.png",
+        "sha256": "5a0d69e5fc7884b84d248617e4d496070a4e62212068f8b8a41ca8dd132e1054"
+      },
+      "after": {
+        "frameSize": 475,
+        "frameHeight": 426,
+        "columns": 6,
+        "frameCount": 42,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-gather-body.png",
+        "sha256": "951e683de943890c544138f5f13217355afb6f9db345a337db73799bae674cb7"
+      },
+      "dimensionsBefore": [
+        6144,
+        4608
+      ],
+      "dimensionsAfter": [
+        2850,
+        2982
+      ],
+      "decodedBytesBefore": 113246208,
+      "decodedBytesAfter": 33994800,
+      "decodedReductionPercent": 69.98151143391927,
+      "commonAlphaBounds": [
+        148,
+        174,
+        619,
+        596
+      ],
+      "commonCropRect": [
+        146,
+        172,
+        621,
+        598
+      ],
+      "sourceCellCount": 42,
+      "uniqueCellCount": 42,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 71,
+      "hiddenSampleCountPreserved": 7,
+      "maximumCoordinateError": 1.1368683772161603e-13
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/spore-gather-stalk.png",
+      "status": "compacted",
+      "before": {
+        "frameSize": 192,
+        "frameHeight": 192,
+        "columns": 6,
+        "frameCount": 6,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-gather-stalk.png",
+        "sha256": "ded4584bc906a7b8da1fed7ad1e2244ce6c26b11b6556de686069326e8c11558"
+      },
+      "after": {
+        "frameSize": 35,
+        "frameHeight": 39,
+        "columns": 3,
+        "frameCount": 6,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-gather-stalk.png",
+        "sha256": "00c1891bb95110a4161c7bb9e82fe3b7390b5256cd23afbe7ad8c8f6ef28f2d0"
+      },
+      "dimensionsBefore": [
+        1152,
+        192
+      ],
+      "dimensionsAfter": [
+        105,
+        78
+      ],
+      "decodedBytesBefore": 884736,
+      "decodedBytesAfter": 32760,
+      "decodedReductionPercent": 96.29720052083334,
+      "commonAlphaBounds": [
+        114,
+        101,
+        145,
+        136
+      ],
+      "commonCropRect": [
+        112,
+        99,
+        147,
+        138
+      ],
+      "sourceCellCount": 6,
+      "uniqueCellCount": 6,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 12,
+      "hiddenSampleCountPreserved": 66,
+      "maximumCoordinateError": 5.684341886080802e-14
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-body.png",
+      "status": "compacted",
+      "before": {
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 38,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-body.png",
+        "sha256": "e09ef6a81899253c77aa529c53de1ed787d5e2802b9a823b2f9f19a0fe23e1e4"
+      },
+      "after": {
+        "frameSize": 418,
+        "frameHeight": 416,
+        "columns": 5,
+        "frameCount": 38,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-body.png",
+        "sha256": "c6ec8d479bb7d15c5698ef6fad231bfad1474b956b49625d2a2ede44b84f8750"
+      },
+      "dimensionsBefore": [
+        4096,
+        2560
+      ],
+      "dimensionsAfter": [
+        2090,
+        3328
+      ],
+      "decodedBytesBefore": 41943040,
+      "decodedBytesAfter": 27822080,
+      "decodedReductionPercent": 33.6669921875,
+      "commonAlphaBounds": [
+        49,
+        98,
+        463,
+        510
+      ],
+      "commonCropRect": [
+        47,
+        96,
+        465,
+        512
+      ],
+      "sourceCellCount": 38,
+      "uniqueCellCount": 38,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 71,
+      "hiddenSampleCountPreserved": 7,
+      "maximumCoordinateError": 0
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-stalk.png",
+      "status": "compacted",
+      "before": {
+        "frameSize": 192,
+        "frameHeight": 192,
+        "columns": 6,
+        "frameCount": 6,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-stalk.png",
+        "sha256": "ded4584bc906a7b8da1fed7ad1e2244ce6c26b11b6556de686069326e8c11558"
+      },
+      "after": {
+        "frameSize": 35,
+        "frameHeight": 39,
+        "columns": 3,
+        "frameCount": 6,
+        "path": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-stalk.png",
+        "sha256": "00c1891bb95110a4161c7bb9e82fe3b7390b5256cd23afbe7ad8c8f6ef28f2d0"
+      },
+      "dimensionsBefore": [
+        1152,
+        192
+      ],
+      "dimensionsAfter": [
+        105,
+        78
+      ],
+      "decodedBytesBefore": 884736,
+      "decodedBytesAfter": 32760,
+      "decodedReductionPercent": 96.29720052083334,
+      "commonAlphaBounds": [
+        114,
+        101,
+        145,
+        136
+      ],
+      "commonCropRect": [
+        112,
+        99,
+        147,
+        138
+      ],
+      "sourceCellCount": 6,
+      "uniqueCellCount": 6,
+      "allVisibleRGBAExact": true,
+      "sampleCount": 12,
+      "hiddenSampleCountPreserved": 66,
+      "maximumCoordinateError": 5.684341886080802e-14
+    }
+  ],
+  "detailedLocalEvidenceSHA256": "78542f3067dea3a1ab770920205b7e515d5e625575716374d7966ccbcc752dba",
+  "priorSpringCompaction": {
+    "spring/blade": {
+      "originalSourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-body-birth-review-20261106/blade/birth-body-sheet.png",
+      "originalSHA256": "ec19050bbdce2400ea6c3cfd800d8a23976c1a5993e5b189447013c8150ac4d0",
+      "outputPath": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/native-body-atlases/spring-blade-compact.png",
+      "outputSHA256": "40f2a4421d188caaef7709369ada2cae82533cf046c3156557deb2fdf7f0a2f3",
+      "originalCell": [
+        1024,
+        1024
+      ],
+      "commonAlphaBounds": [
+        323,
+        395,
+        662,
+        708
+      ],
+      "commonCropRect": [
+        321,
+        393,
+        664,
+        710
+      ],
+      "compactCell": [
+        343,
+        317
+      ],
+      "sourceFrameCount": 36,
+      "uniqueFrameCount": 34,
+      "deduplicatedFrameCount": 2,
+      "columns": 6,
+      "originalAtlasDimensions": [
+        6144,
+        6144
+      ],
+      "compactAtlasDimensions": [
+        2058,
+        1902
+      ],
+      "maximumTextureDimensionBefore": 6144,
+      "maximumTextureDimensionAfter": 2058,
+      "decodedRGBABeforeBytes": 150994944,
+      "decodedRGBAAfterBytes": 15657264,
+      "decodedRGBAReductionBytes": 135337680,
+      "decodedRGBAReductionPercent": 89.6306037902832,
+      "allSourceVisibleRGBAExact": true,
+      "allSamplesSameVisibleSceneRectangleWithinDoublePrecision": true,
+      "maximumCoordinateError": 5.684341886080802e-14,
+      "canvasRasterVerification": {
+        "drawComparisons": 288,
+        "pixelExactComparisons": 13,
+        "maximumDifferentPixels": 93,
+        "maximumChannelDifference": 255,
+        "maximumAlphaDifference": 1,
+        "maximumPremultipliedChannelDifference": 1.9764705882352942,
+        "note": "Source visible RGBA exact; final Canvas raster is not byte-identical after equivalent cropped sampling. At the tested four scales and two facings, max alpha rounding difference 1/255 and max premultiplied color difference below 2/255."
+      }
+    },
+    "spring/carapace": {
+      "originalSourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-body-birth-review-20261106/carapace/birth-body-sheet.png",
+      "originalSHA256": "0bffac4fb726f6bfddde51495a5360cf9d4657539d941648641ee4934a1e6c10",
+      "outputPath": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/native-body-atlases/spring-carapace-compact.png",
+      "outputSHA256": "72edf91e27c16b037d64b4765357bdb793c7e44b5c269b96d1c6d2daa4b65a89",
+      "originalCell": [
+        1024,
+        1024
+      ],
+      "commonAlphaBounds": [
+        314,
+        403,
+        636,
+        711
+      ],
+      "commonCropRect": [
+        312,
+        401,
+        638,
+        713
+      ],
+      "compactCell": [
+        326,
+        312
+      ],
+      "sourceFrameCount": 36,
+      "uniqueFrameCount": 34,
+      "deduplicatedFrameCount": 2,
+      "columns": 6,
+      "originalAtlasDimensions": [
+        6144,
+        6144
+      ],
+      "compactAtlasDimensions": [
+        1956,
+        1872
+      ],
+      "maximumTextureDimensionBefore": 6144,
+      "maximumTextureDimensionAfter": 1956,
+      "decodedRGBABeforeBytes": 150994944,
+      "decodedRGBAAfterBytes": 14646528,
+      "decodedRGBAReductionBytes": 136348416,
+      "decodedRGBAReductionPercent": 90.29998779296875,
+      "allSourceVisibleRGBAExact": true,
+      "allSamplesSameVisibleSceneRectangleWithinDoublePrecision": true,
+      "maximumCoordinateError": 5.684341886080802e-14,
+      "canvasRasterVerification": {
+        "drawComparisons": 288,
+        "pixelExactComparisons": 27,
+        "maximumDifferentPixels": 116,
+        "maximumChannelDifference": 255,
+        "maximumAlphaDifference": 1,
+        "maximumPremultipliedChannelDifference": 1.992156862745098,
+        "note": "Source visible RGBA exact; final Canvas raster is not byte-identical after equivalent cropped sampling. At the tested four scales and two facings, max alpha rounding difference 1/255 and max premultiplied color difference below 2/255."
+      }
+    }
+  }
+}

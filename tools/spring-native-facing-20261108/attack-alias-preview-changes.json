@@ -1,0 +1,660 @@
+{
+  "changes": {
+    "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-sheet.png": {
+      "kind": "exactSourceAlias",
+      "key": "spring/blade-antenna",
+      "oldImage": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-sheet.png",
+      "newImage": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-sheet.png",
+      "beforeSha256": "7ca79e521f765a4eb534447babe766872d491fcd2b5b0aa3ac17307b44293a3d",
+      "afterSha256": "ef27388e824bf12c625cf0b6659e607eaa06bd02e8d2cea7f360581eb9f18abf",
+      "sourcePath": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/attack.png",
+      "byteExactNewSource": true
+    },
+    "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-sheet.png": {
+      "kind": "exactSourceAlias",
+      "key": "spring/blade-carapace-antenna",
+      "oldImage": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-sheet.png",
+      "newImage": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-sheet.png",
+      "beforeSha256": "e12a44d73fda204a0cb2a1b1ce49c3475961a3b220a896536d471023c52f884e",
+      "afterSha256": "a6a5eeb557b2a817883019fd32297bac3cb7865a8925bc5956c0867db84a328b",
+      "sourcePath": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/attack.png",
+      "byteExactNewSource": true
+    },
+    "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1-sheet.png": {
+      "kind": "exactSourceAlias",
+      "key": "spring/gather",
+      "oldImage": "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1-sheet.png",
+      "newImage": "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1-sheet.png",
+      "beforeSha256": "e9b385429ae6b813b00e7590dbff7eed063b270df5ba7347d3bcf771c0c3503b",
+      "afterSha256": "bae3fcde90f63645d1094d27486856161eb9d4843127e6048c8beb17d89102ac",
+      "sourcePath": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/attack.png",
+      "byteExactNewSource": true
+    },
+    "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-sheet.png": {
+      "kind": "exactSourceAlias",
+      "key": "pebble/carapace-antenna",
+      "oldImage": "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-sheet.png",
+      "newImage": "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-sheet.png",
+      "beforeSha256": "13b278e903cea46afad400c25b742e294f498a4a95fd9c02bb9f44946fb488c6",
+      "afterSha256": "447098fee6876335ee822e372448d11f6c271a41ee2db662f9510f2942c7417a",
+      "sourcePath": "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace-antenna/attack.png",
+      "byteExactNewSource": true
+    },
+    "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/attack-sheet.png": {
+      "kind": "exactSourceAlias",
+      "key": "spring/antenna",
+      "oldImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/attack-sheet.png",
+      "newImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/attack-sheet.png",
+      "beforeSha256": "239156eacf1ff293b13971d6f630d92244a30a0fe7aed30bd91757917711a524",
+      "afterSha256": "98af159a97b0820b6ecdf7d6804fefc56ebb62c8bcf0be3c210e98c1246767d6",
+      "sourcePath": "DesignAssets/Animations/DefensiveAttackV1/spring/antenna/attack.png",
+      "byteExactNewSource": true
+    },
+    "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-sheet.png": {
+      "kind": "exactSourceAlias",
+      "key": "spring/carapace-antenna",
+      "oldImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-sheet.png",
+      "newImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-sheet.png",
+      "beforeSha256": "f6379aca3e582969a22284b8b7f0cf79a7a4dfa015e8de5275985b76786651b0",
+      "afterSha256": "0411b243c15e156bbc1cc5561f850a3262b4f00995277eb504b7e3aaacb136a8",
+      "sourcePath": "DesignAssets/Animations/DefensiveAttackV1/spring/carapace-antenna/attack.png",
+      "byteExactNewSource": true
+    },
+    "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/references/base-attack.webp": {
+      "kind": "exactSourceAlias",
+      "key": "spring/base",
+      "oldImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/references/base-attack.webp",
+      "newImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/references/base-attack.webp",
+      "beforeSha256": "f6bf977bbfd72490410192c6c70e6ec17accb294f3f69e5b0626936760547e58",
+      "afterSha256": "38cbbdc1d88de4a69b519c895ae0cb6619e4162f42ae43671f467fc0c9f26a44",
+      "sourcePath": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
+      "byteExactNewSource": true
+    },
+    "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-preview.webp": {
+      "kind": "regeneratedPreview",
+      "key": "pebble/carapace-antenna",
+      "oldImage": "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-preview.webp",
+      "beforeSha256": "b7cd32a1c534be241831c3cb88f69a76e7891bbad9c369edc681ee547b93ea40",
+      "afterSha256": "8ea4ee30090985c0e9f3724006f244c9246d58a24bb06295d9a61520efd2fe0a",
+      "sourcePath": "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace-antenna/attack.png",
+      "sourceSha256": "447098fee6876335ee822e372448d11f6c271a41ee2db662f9510f2942c7417a",
+      "format": "WEBP",
+      "width": 512,
+      "height": 512,
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        110,
+        110,
+        70,
+        110,
+        80,
+        110,
+        230
+      ],
+      "loop": 0,
+      "verification": {
+        "dimensionsUnchanged": true,
+        "frameCountUnchanged": true,
+        "timingUnchanged": true,
+        "loopUnchanged": true,
+        "exactEncodedFrames": true
+      },
+      "paletteQuantized": false,
+      "gifAlphaThreshold": null
+    },
+    "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-cover.png": {
+      "kind": "regeneratedPreview",
+      "key": "pebble/carapace-antenna",
+      "oldImage": "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-cover.png",
+      "newImage": "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-cover.png",
+      "beforeSha256": "3ac8b2279af7dc72f2426491e6c63751ca93b83a9524cd9f40ab7f4facd98cc9",
+      "afterSha256": "9ea45cc0afecc9871d980a1614d0011f4934d13f71ef295511d9153f340f9509",
+      "sourcePath": "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace-antenna/attack.png",
+      "sourceSha256": "447098fee6876335ee822e372448d11f6c271a41ee2db662f9510f2942c7417a",
+      "format": "PNG",
+      "width": 512,
+      "height": 512,
+      "frameCount": 1,
+      "durationsMs": [
+        null
+      ],
+      "loop": null,
+      "verification": {
+        "dimensionsUnchanged": true,
+        "frameCountUnchanged": true,
+        "timingUnchanged": true,
+        "loopUnchanged": true,
+        "exactEncodedFrames": true
+      },
+      "paletteQuantized": false,
+      "gifAlphaThreshold": null
+    },
+    "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/attack-preview.webp": {
+      "kind": "regeneratedPreview",
+      "key": "spring/antenna",
+      "oldImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/attack-preview.webp",
+      "newImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/attack-preview.webp",
+      "beforeSha256": "33b81df1e83dbee7032c07c68f78dabdce76bde1676bd826a216bebff5220ee2",
+      "afterSha256": "978f3e34d545f423c9f6dd6f9d12443184ef5dadae18489ec21b03c3af44f4b3",
+      "sourcePath": "DesignAssets/Animations/DefensiveAttackV1/spring/antenna/attack.png",
+      "sourceSha256": "98af159a97b0820b6ecdf7d6804fefc56ebb62c8bcf0be3c210e98c1246767d6",
+      "format": "WEBP",
+      "width": 480,
+      "height": 480,
+      "frameCount": 16,
+      "durationsMs": [
+        560,
+        70,
+        60,
+        80,
+        30,
+        100,
+        100,
+        100,
+        40,
+        40,
+        40,
+        40,
+        40,
+        50,
+        60,
+        590
+      ],
+      "loop": 0,
+      "verification": {
+        "dimensionsUnchanged": true,
+        "frameCountUnchanged": true,
+        "timingUnchanged": true,
+        "loopUnchanged": true,
+        "exactEncodedFrames": true
+      },
+      "paletteQuantized": false,
+      "gifAlphaThreshold": null
+    },
+    "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-preview.webp": {
+      "kind": "regeneratedPreview",
+      "key": "spring/carapace-antenna",
+      "oldImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-preview.webp",
+      "newImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-preview.webp",
+      "beforeSha256": "fd42afe0616dd19d8c82794967a88902cecb017ffd33678f0d352a43a8f8551c",
+      "afterSha256": "7f8174b251f639d6daf7f4224774cadbdec68d158dbc4ebe0b964452032b52f7",
+      "sourcePath": "DesignAssets/Animations/DefensiveAttackV1/spring/carapace-antenna/attack.png",
+      "sourceSha256": "0411b243c15e156bbc1cc5561f850a3262b4f00995277eb504b7e3aaacb136a8",
+      "format": "WEBP",
+      "width": 480,
+      "height": 480,
+      "frameCount": 16,
+      "durationsMs": [
+        560,
+        70,
+        60,
+        80,
+        30,
+        100,
+        100,
+        100,
+        40,
+        40,
+        40,
+        40,
+        40,
+        50,
+        60,
+        590
+      ],
+      "loop": 0,
+      "verification": {
+        "dimensionsUnchanged": true,
+        "frameCountUnchanged": true,
+        "timingUnchanged": true,
+        "loopUnchanged": true,
+        "exactEncodedFrames": true
+      },
+      "paletteQuantized": false,
+      "gifAlphaThreshold": null
+    },
+    "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-preview.webp": {
+      "kind": "regeneratedPreview",
+      "key": "spring/blade-antenna",
+      "oldImage": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-preview.webp",
+      "newImage": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-preview.webp",
+      "beforeSha256": "8d11a1103fafdbdf6c0d486537029b09fffd1c9d08edef14c1d3a6fedfe817d0",
+      "afterSha256": "6a056b0a3f9e6fda86b9702f5c1117ad0d5ef6dac5a5c7c22ce9ad96bcc9a7ec",
+      "sourcePath": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/attack.png",
+      "sourceSha256": "ef27388e824bf12c625cf0b6659e607eaa06bd02e8d2cea7f360581eb9f18abf",
+      "format": "WEBP",
+      "width": 480,
+      "height": 480,
+      "frameCount": 16,
+      "durationsMs": [
+        560,
+        70,
+        60,
+        80,
+        30,
+        60,
+        20,
+        20,
+        20,
+        20,
+        30,
+        40,
+        50,
+        70,
+        100,
+        770
+      ],
+      "loop": 0,
+      "verification": {
+        "dimensionsUnchanged": true,
+        "frameCountUnchanged": true,
+        "timingUnchanged": true,
+        "loopUnchanged": true,
+        "exactEncodedFrames": true
+      },
+      "paletteQuantized": false,
+      "gifAlphaThreshold": null
+    },
+    "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-preview.webp": {
+      "kind": "regeneratedPreview",
+      "key": "spring/blade-carapace-antenna",
+      "oldImage": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-preview.webp",
+      "newImage": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-preview.webp",
+      "beforeSha256": "05a27da5c0e4f5c7c8e9cce4d9fe3f6b43c1724781755083f0056c721dff57e1",
+      "afterSha256": "0f690a233bb494cf972f196e7cffa87b4c693b6e0131adc0ea9d89cb82d79c58",
+      "sourcePath": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/attack.png",
+      "sourceSha256": "a6a5eeb557b2a817883019fd32297bac3cb7865a8925bc5956c0867db84a328b",
+      "format": "WEBP",
+      "width": 480,
+      "height": 480,
+      "frameCount": 16,
+      "durationsMs": [
+        560,
+        70,
+        60,
+        80,
+        30,
+        60,
+        20,
+        20,
+        20,
+        20,
+        30,
+        40,
+        50,
+        70,
+        100,
+        770
+      ],
+      "loop": 0,
+      "verification": {
+        "dimensionsUnchanged": true,
+        "frameCountUnchanged": true,
+        "timingUnchanged": true,
+        "loopUnchanged": true,
+        "exactEncodedFrames": true
+      },
+      "paletteQuantized": false,
+      "gifAlphaThreshold": null
+    },
+    "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-preview.gif": {
+      "kind": "regeneratedPreview",
+      "key": "pebble/carapace-antenna",
+      "oldImage": "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-preview.gif",
+      "beforeSha256": "d5ffbafe8e101a7836769ee6eaf0fcd614469fb71e51ea4919b2ffe492a9a237",
+      "afterSha256": "6d1b56228d5752e4e0175ae350e8e13e09804528ba12768a97816e046ce5b989",
+      "sourcePath": "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace-antenna/attack.png",
+      "sourceSha256": "447098fee6876335ee822e372448d11f6c271a41ee2db662f9510f2942c7417a",
+      "format": "GIF",
+      "width": 512,
+      "height": 512,
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        110,
+        110,
+        70,
+        110,
+        80,
+        110,
+        230
+      ],
+      "loop": 0,
+      "verification": {
+        "dimensionsUnchanged": true,
+        "frameCountUnchanged": true,
+        "timingUnchanged": true,
+        "loopUnchanged": true,
+        "exactEncodedFrames": true
+      },
+      "paletteQuantized": true,
+      "gifAlphaThreshold": 128
+    },
+    "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/attack-preview.gif": {
+      "kind": "regeneratedPreview",
+      "key": "spring/antenna",
+      "oldImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/attack-preview.gif",
+      "newImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/attack-preview.gif",
+      "beforeSha256": "8d8c5b86bb49387434df2cad5a1753dc7880dae7abe2f5c1425a49677ef27490",
+      "afterSha256": "80f6feab68c619d3f7e262dbffb3732da26d3bfc4d67af82cd3867e23eea7569",
+      "sourcePath": "DesignAssets/Animations/DefensiveAttackV1/spring/antenna/attack.png",
+      "sourceSha256": "98af159a97b0820b6ecdf7d6804fefc56ebb62c8bcf0be3c210e98c1246767d6",
+      "format": "GIF",
+      "width": 480,
+      "height": 480,
+      "frameCount": 16,
+      "durationsMs": [
+        560,
+        70,
+        60,
+        80,
+        30,
+        100,
+        100,
+        100,
+        40,
+        40,
+        40,
+        40,
+        40,
+        50,
+        60,
+        590
+      ],
+      "loop": 0,
+      "verification": {
+        "dimensionsUnchanged": true,
+        "frameCountUnchanged": true,
+        "timingUnchanged": true,
+        "loopUnchanged": true,
+        "exactEncodedFrames": true
+      },
+      "paletteQuantized": true,
+      "gifAlphaThreshold": 128
+    },
+    "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-preview.gif": {
+      "kind": "regeneratedPreview",
+      "key": "spring/carapace-antenna",
+      "oldImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-preview.gif",
+      "newImage": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-preview.gif",
+      "beforeSha256": "6eed8300ed0b05e18f57af5e3950d4efb0209527604fcd046eb4fb89e627621e",
+      "afterSha256": "3d3e79a90a3f1d6ae1164da10d8950f1ff7ee850c1fa89c0608760a9169ae565",
+      "sourcePath": "DesignAssets/Animations/DefensiveAttackV1/spring/carapace-antenna/attack.png",
+      "sourceSha256": "0411b243c15e156bbc1cc5561f850a3262b4f00995277eb504b7e3aaacb136a8",
+      "format": "GIF",
+      "width": 480,
+      "height": 480,
+      "frameCount": 16,
+      "durationsMs": [
+        560,
+        70,
+        60,
+        80,
+        30,
+        100,
+        100,
+        100,
+        40,
+        40,
+        40,
+        40,
+        40,
+        50,
+        60,
+        590
+      ],
+      "loop": 0,
+      "verification": {
+        "dimensionsUnchanged": true,
+        "frameCountUnchanged": true,
+        "timingUnchanged": true,
+        "loopUnchanged": true,
+        "exactEncodedFrames": true
+      },
+      "paletteQuantized": true,
+      "gifAlphaThreshold": 128
+    },
+    "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-preview.gif": {
+      "kind": "regeneratedPreview",
+      "key": "spring/blade-antenna",
+      "oldImage": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-preview.gif",
+      "newImage": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-preview.gif",
+      "beforeSha256": "dfd6aeb6f01f3d0ce4aa2a8ecedce54b272d55021c9b7294e7519f82ad69c8f5",
+      "afterSha256": "3511426e1b7f50d67dbce641bcadb959f4a90868d53dbecaedd243b76e85612e",
+      "sourcePath": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/attack.png",
+      "sourceSha256": "ef27388e824bf12c625cf0b6659e607eaa06bd02e8d2cea7f360581eb9f18abf",
+      "format": "GIF",
+      "width": 480,
+      "height": 480,
+      "frameCount": 16,
+      "durationsMs": [
+        560,
+        70,
+        60,
+        80,
+        30,
+        60,
+        20,
+        20,
+        20,
+        20,
+        30,
+        40,
+        50,
+        70,
+        100,
+        770
+      ],
+      "loop": 0,
+      "verification": {
+        "dimensionsUnchanged": true,
+        "frameCountUnchanged": true,
+        "timingUnchanged": true,
+        "loopUnchanged": true,
+        "exactEncodedFrames": true
+      },
+      "paletteQuantized": true,
+      "gifAlphaThreshold": 128
+    },
+    "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-preview.gif": {
+      "kind": "regeneratedPreview",
+      "key": "spring/blade-carapace-antenna",
+      "oldImage": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-preview.gif",
+      "newImage": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-preview.gif",
+      "beforeSha256": "3229f87329c7b522f279c576466a7e3461d5084b9302867aeead86678845b21d",
+      "afterSha256": "0e748e18bd57315948d08581198bdb04ffab7ef69a6758324c7a12c7b3e1a33c",
+      "sourcePath": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/attack.png",
+      "sourceSha256": "a6a5eeb557b2a817883019fd32297bac3cb7865a8925bc5956c0867db84a328b",
+      "format": "GIF",
+      "width": 480,
+      "height": 480,
+      "frameCount": 16,
+      "durationsMs": [
+        560,
+        70,
+        60,
+        80,
+        30,
+        60,
+        20,
+        20,
+        20,
+        20,
+        30,
+        40,
+        50,
+        70,
+        100,
+        770
+      ],
+      "loop": 0,
+      "verification": {
+        "dimensionsUnchanged": true,
+        "frameCountUnchanged": true,
+        "timingUnchanged": true,
+        "loopUnchanged": true,
+        "exactEncodedFrames": true
+      },
+      "paletteQuantized": true,
+      "gifAlphaThreshold": 128
+    },
+    "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1-preview.gif": {
+      "kind": "regeneratedPreview",
+      "key": "spring/gather",
+      "oldImage": "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1-preview.gif",
+      "newImage": "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1-preview.gif",
+      "beforeSha256": "624ec27c089fe2113f562bad700ce7d7e2a15086b1e62ac04daed09f8b056319",
+      "afterSha256": "2f138cc0aba4ec60d8d0f04498078bc0b90cfb97fc46db20f96eae4b70b45a84",
+      "sourcePath": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/attack.png",
+      "sourceSha256": "bae3fcde90f63645d1094d27486856161eb9d4843127e6048c8beb17d89102ac",
+      "format": "GIF",
+      "width": 512,
+      "height": 512,
+      "frameCount": 16,
+      "durationsMs": [
+        60,
+        70,
+        60,
+        80,
+        30,
+        60,
+        20,
+        10,
+        20,
+        10,
+        40,
+        40,
+        50,
+        70,
+        100,
+        280
+      ],
+      "loop": 0,
+      "verification": {
+        "dimensionsUnchanged": true,
+        "frameCountUnchanged": true,
+        "timingUnchanged": true,
+        "loopUnchanged": true,
+        "exactEncodedFrames": true
+      },
+      "paletteQuantized": true,
+      "gifAlphaThreshold": 128
+    }
+  },
+  "failures": {},
+  "missing": [],
+  "plan": {
+    "aliases": {
+      "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-sheet.png": "spring/blade-antenna",
+      "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-sheet.png": "spring/blade-carapace-antenna",
+      "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1-sheet.png": "spring/gather",
+      "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-sheet.png": "pebble/carapace-antenna",
+      "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/attack-sheet.png": "spring/antenna",
+      "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-sheet.png": "spring/carapace-antenna",
+      "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/references/base-attack.webp": "spring/base"
+    },
+    "previews": {
+      "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-preview.webp": {
+        "key": "pebble/carapace-antenna",
+        "manifest": "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/publication-manifest.json",
+        "field": "preview"
+      },
+      "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-preview.gif": {
+        "key": "pebble/carapace-antenna",
+        "manifest": "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/publication-manifest.json",
+        "field": "gif"
+      },
+      "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/pebble-carapace-antenna-defensive-attack-v1-cover.png": {
+        "key": "pebble/carapace-antenna",
+        "manifest": "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/publication-manifest.json",
+        "field": "cover"
+      },
+      "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/attack-preview.webp": {
+        "key": "spring/antenna",
+        "manifest": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/publication-manifest.json",
+        "field": "preview"
+      },
+      "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/attack-preview.gif": {
+        "key": "spring/antenna",
+        "manifest": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/publication-manifest.json",
+        "field": "gif"
+      },
+      "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-preview.webp": {
+        "key": "spring/carapace-antenna",
+        "manifest": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+        "field": "preview"
+      },
+      "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/attack-preview.gif": {
+        "key": "spring/carapace-antenna",
+        "manifest": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+        "field": "gif"
+      },
+      "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-preview.webp": {
+        "key": "spring/blade-antenna",
+        "manifest": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/publication-manifest.json",
+        "field": "preview"
+      },
+      "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-melee-v1-preview.gif": {
+        "key": "spring/blade-antenna",
+        "manifest": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/publication-manifest.json",
+        "field": "gif"
+      },
+      "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-preview.webp": {
+        "key": "spring/blade-carapace-antenna",
+        "manifest": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+        "field": "preview"
+      },
+      "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-melee-v1-preview.gif": {
+        "key": "spring/blade-carapace-antenna",
+        "manifest": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+        "field": "gif"
+      },
+      "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1-preview.gif": {
+        "key": "spring/gather",
+        "manifest": "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1.json",
+        "field": "preview"
+      }
+    },
+    "sources": {
+      "pebble/carapace-antenna": {
+        "path": "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace-antenna/attack.png",
+        "beforeSha256": "13b278e903cea46afad400c25b742e294f498a4a95fd9c02bb9f44946fb488c6",
+        "afterSha256": "447098fee6876335ee822e372448d11f6c271a41ee2db662f9510f2942c7417a"
+      },
+      "spring/antenna": {
+        "path": "DesignAssets/Animations/DefensiveAttackV1/spring/antenna/attack.png",
+        "beforeSha256": "239156eacf1ff293b13971d6f630d92244a30a0fe7aed30bd91757917711a524",
+        "afterSha256": "98af159a97b0820b6ecdf7d6804fefc56ebb62c8bcf0be3c210e98c1246767d6"
+      },
+      "spring/base": {
+        "path": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
+        "beforeSha256": "f6bf977bbfd72490410192c6c70e6ec17accb294f3f69e5b0626936760547e58",
+        "afterSha256": "38cbbdc1d88de4a69b519c895ae0cb6619e4162f42ae43671f467fc0c9f26a44"
+      },
+      "spring/blade-antenna": {
+        "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/attack.png",
+        "beforeSha256": "7ca79e521f765a4eb534447babe766872d491fcd2b5b0aa3ac17307b44293a3d",
+        "afterSha256": "ef27388e824bf12c625cf0b6659e607eaa06bd02e8d2cea7f360581eb9f18abf"
+      },
+      "spring/blade-carapace-antenna": {
+        "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/attack.png",
+        "beforeSha256": "e12a44d73fda204a0cb2a1b1ce49c3475961a3b220a896536d471023c52f884e",
+        "afterSha256": "a6a5eeb557b2a817883019fd32297bac3cb7865a8925bc5956c0867db84a328b"
+      },
+      "spring/carapace-antenna": {
+        "path": "DesignAssets/Animations/DefensiveAttackV1/spring/carapace-antenna/attack.png",
+        "beforeSha256": "f6379aca3e582969a22284b8b7f0cf79a7a4dfa015e8de5275985b76786651b0",
+        "afterSha256": "0411b243c15e156bbc1cc5561f850a3262b4f00995277eb504b7e3aaacb136a8"
+      },
+      "spring/gather": {
+        "path": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/attack.png",
+        "beforeSha256": "e9b385429ae6b813b00e7590dbff7eed063b270df5ba7347d3bcf771c0c3503b",
+        "afterSha256": "bae3fcde90f63645d1094d27486856161eb9d4843127e6048c8beb17d89102ac"
+      }
+    }
+  },
+  "status": "completed"
+}

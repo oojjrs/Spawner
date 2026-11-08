@@ -1,0 +1,60 @@
+{
+  "head": "17c3f02101dbb444083cc05b5179778d11045043",
+  "working": {
+    "failedTests": [
+      "birth adapter selects only the live secretion bean and preserves other form/lifecycle priorities",
+      "actual bean birth keeps complete authored seed/fragment/impact scene and cold-load fallback",
+      "terminal actual birth and idle draw share the exact world transform for facing, growth and zoom",
+      "entire authored birth keeps finite positive leaf/body transforms with no action-clock mutation",
+      "전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 그리고 크기와 발 위치를 유지한다",
+      "only living canonical spring blade/carapace bodies opt in, preserving dominant projection and legacy fallback",
+      "actual scene hook preserves facing, water, pivot, idle clock, attributes and terminal handoff",
+      "actual scene falls back when unready or unreadable and reduced motion uses the settled body"
+    ],
+    "counts": [
+      "ℹ tests 16",
+      "ℹ pass 8",
+      "ℹ fail 8"
+    ]
+  },
+  "baseline": {
+    "failedTests": [
+      "birth adapter selects only the live secretion bean and preserves other form/lifecycle priorities",
+      "actual bean birth keeps complete authored seed/fragment/impact scene and cold-load fallback",
+      "terminal actual birth and idle draw share the exact world transform for facing, growth and zoom",
+      "entire authored birth keeps finite positive leaf/body transforms with no action-clock mutation",
+      "전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 그리고 크기와 발 위치를 유지한다",
+      "only living canonical spring blade/carapace bodies opt in, preserving dominant projection and legacy fallback",
+      "actual scene hook preserves facing, water, pivot, idle clock, attributes and terminal handoff",
+      "actual scene falls back when unready or unreadable and reduced motion uses the settled body"
+    ],
+    "counts": [
+      "ℹ tests 16",
+      "ℹ pass 8",
+      "ℹ fail 8"
+    ]
+  },
+  "sameFailureNames": true,
+  "method": "Tracked JavaScript loaded read-only via git show HEAD:path; no checkout, branch or source mutation. Unchanged game.js and neutral assets are read from the sole working folder.",
+  "workingErrorSignatures": [
+    "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+    "ReferenceError [Error]: drawAgentAppearanceBody is not defined",
+    "TypeError [Error]: Spawner.unitFacing is not a function",
+    "TypeError [Error]: Spawner.unitFacing is not a function",
+    "ReferenceError [Error]: drawAgentAppearanceBody is not defined",
+    "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+    "TypeError [Error]: Spawner.unitFacing is not a function",
+    "TypeError [Error]: Spawner.unitFacing is not a function"
+  ],
+  "baselineErrorSignatures": [
+    "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+    "ReferenceError [Error]: drawAgentAppearanceBody is not defined",
+    "TypeError [Error]: Spawner.unitFacing is not a function",
+    "TypeError [Error]: Spawner.unitFacing is not a function",
+    "ReferenceError [Error]: drawAgentAppearanceBody is not defined",
+    "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:",
+    "TypeError [Error]: Spawner.unitFacing is not a function",
+    "TypeError [Error]: Spawner.unitFacing is not a function"
+  ],
+  "sameErrorSignatures": true
+}

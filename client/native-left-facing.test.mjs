@@ -42,3 +42,21 @@ test('원본 좌향 기준은 추가 반전 없이 왼쪽을 보고 게임의 �
   }
   assert.equal(auditImages(new URL('..',import.meta.url).pathname,paths),12);
 });
+
+test('분비물+갑각 두 몽돌 조합은 복구한 raw와 탄생까지 좌향 원본으로 등록된다',()=>{
+  const folder=new URL('../tools/secretion-source-normalization-20261108/',import.meta.url);
+  const read=name=>JSON.parse(readFileSync(new URL(name,folder)));
+  const native=read('pixel-changes.json'), previews=read('preview-changes.json'), raw=read('raw-changes.json'), original=read('catalog-before.json');
+  assert.equal(native.status,'completed');assert.equal(previews.status,'completed');assert.equal(raw.status,'completed');
+  assert.equal(Object.keys(native.changes).length,25);assert.equal(Object.keys(previews.changes).length,21);assert.equal(Object.keys(raw.changes).length,11);
+  for(const [path,c]of Object.entries({...native.changes,...previews.changes,...raw.changes}))assert.equal(sha(c.newImage||path),c.afterSha256,path);
+  for(const recipe of Object.values(raw.recipes))assert.equal(recipe.exactExistingPackedPixelsReproduced,true);
+  for(const key of ['pebble/secretion-carapace','pebble/secretion-carapace-antenna'])for(const[action,c]of Object.entries(UNIT_ACTION_ART[key].actions)){
+    const b=original.find(r=>r.key===key&&r.action===action);
+    assert.equal(c.sourceFacing,'left',key+'/'+action);
+    assert.equal(c.pivotX,b.frameSize-b.pivotX,key+'/'+action);
+    assert.equal(unitFrameMirror(c.sourceFacing,-1),false);
+    for(const field of ['pivotY','frameSize','frameHeight','columns','frameCount','durationMs','referenceLength','viewSize','loop'])assert.equal(c[field],b[field],key+'/'+action+'/'+field);
+    assert.deepEqual(c.durationsMs,b.durationsMs);
+  }
+});

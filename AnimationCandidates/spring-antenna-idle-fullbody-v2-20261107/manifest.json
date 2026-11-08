@@ -39,5 +39,6 @@
   "previewLibraryVersion": 1,
   "encoding": "Approved corrected GIF version with alpha threshold 128, reserved transparency index 255 and disposal 2. Original sheet unchanged.",
   "opaquePixelsOutsideSourceMask": 0,
-  "missingOpaquePixels": 0
+  "missingOpaquePixels": 0,
+  "sourceFacing": "left"
 }

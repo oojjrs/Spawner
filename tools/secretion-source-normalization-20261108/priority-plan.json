@@ -1,0 +1,54 @@
+[
+  {
+    "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/idle.png",
+    "kind": "atlas"
+  },
+  {
+    "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/walk.png",
+    "kind": "atlas"
+  },
+  {
+    "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/ranged.png",
+    "kind": "atlas"
+  },
+  {
+    "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/hurt.png",
+    "kind": "atlas"
+  },
+  {
+    "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/death.png",
+    "kind": "atlas"
+  },
+  {
+    "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/idle.png",
+    "kind": "atlas"
+  },
+  {
+    "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/walk.png",
+    "kind": "atlas"
+  },
+  {
+    "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/ranged.png",
+    "kind": "atlas"
+  },
+  {
+    "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/hurt.png",
+    "kind": "atlas"
+  },
+  {
+    "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/birth.png",
+    "kind": "sceneAtlas"
+  },
+  {
+    "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/death.png",
+    "kind": "atlas"
+  },
+  {
+    "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/portrait.png",
+    "kind": "portrait"
+  },
+  {
+    "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/portrait.png",
+    "kind": "portrait"
+  }
+]

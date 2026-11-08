@@ -63,7 +63,8 @@
       "gifDecodedFrames": 16,
       "webpDecodedFrames": 16,
       "timelineMaxGIFRGBRMSE": 1.462945,
-      "maximumOuterEdgeAlpha": 0
+      "maximumOuterEdgeAlpha": 0,
+      "sourceFacing": "left"
     },
     "walk": {
       "sheet": "spring-blade-carapace-walk-v1-sheet.png",
@@ -121,7 +122,8 @@
       "gifDecodedFrames": 16,
       "webpDecodedFrames": 16,
       "timelineMaxGIFRGBRMSE": 1.454387,
-      "maximumOuterEdgeAlpha": 0
+      "maximumOuterEdgeAlpha": 0,
+      "sourceFacing": "left"
     },
     "attack": {
       "sheet": "spring-blade-carapace-melee-v1-sheet.png",
@@ -237,7 +239,8 @@
       "gifDecodedFrames": 16,
       "webpDecodedFrames": 16,
       "timelineMaxGIFRGBRMSE": 1.319564,
-      "maximumOuterEdgeAlpha": 0
+      "maximumOuterEdgeAlpha": 0,
+      "sourceFacing": "left"
     },
     "birth": {
       "sheet": "spring-blade-carapace-birth-v1-sheet.png",
@@ -354,7 +357,8 @@
       "gifDecodedFrames": 16,
       "webpDecodedFrames": 16,
       "timelineMaxGIFRGBRMSE": 1.547993,
-      "maximumOuterEdgeAlpha": 0
+      "maximumOuterEdgeAlpha": 0,
+      "sourceFacing": "left"
     }
   },
   "rangedAttack": null,

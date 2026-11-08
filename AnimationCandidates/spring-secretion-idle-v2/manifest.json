@@ -253,5 +253,6 @@
   "sheetSHA256": "72470f0882cb54073ac08219e84bc738da8b98a6d33f94bfc3f5b9ba9a2618e2",
   "previewSHA256": "8df97dd22da689537f66c3ceac631813def3c1faa4afb0a8e9218f93278cc494",
   "approvalDate": "2026-11-07",
-  "integration": "Planning reference only; game runtime and deployment are unchanged."
+  "integration": "Planning reference only; game runtime and deployment are unchanged.",
+  "sourceFacing": "left"
 }

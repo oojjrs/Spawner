@@ -18,7 +18,7 @@ test('all eleven bean combo births retain the 3850 ms motion clock and enter idl
   assert.equal(entries.length, 11);
   assert.equal(UNIT_BIRTH_ART['bean/base'].durationMs, 3850);
   for (const [key, definition] of entries) {
-    const animation = definition.actions.birth;
+    const animation = UNIT_BIRTH_ART[key] || definition.actions.birth;
     const form = UNIT_COMBINATION_FORMS.find(value => key.endsWith('/' + value.key));
     assert.ok(form, key);
     const agent = { tribe: 'bean', attributes: form.attributes, health: 10,
@@ -47,7 +47,7 @@ test('all eleven bean combo births retain the 3850 ms motion clock and enter idl
 
 test('all eleven trimmed births preserve baked fallback crops in both facings through the final body', async () => {
   for (const [key, definition] of entries) {
-    const animation = definition.actions.birth;
+    const animation = UNIT_BIRTH_ART[key] || definition.actions.birth;
     const form = UNIT_COMBINATION_FORMS.find(value => key.endsWith('/' + value.key));
     const agent = { tribe: 'bean', attributes: form.attributes, health: 10,
       birth: { startedAt: 10, readyAt: 13.85 } };

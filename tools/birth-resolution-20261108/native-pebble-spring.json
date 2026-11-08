@@ -1,0 +1,6025 @@
+{
+  "scope": "34 pebble/spring registered forms, source inspection only. No product code or original image changed.",
+  "readyMappings": [
+    "pebble/gather",
+    "pebble/blade",
+    "pebble/carapace",
+    "pebble/secretion",
+    "spring/blade",
+    "spring/carapace",
+    "spring/secretion"
+  ],
+  "allFormCount": 34,
+  "mappingSpace": "samples destination is in the current legacy birth cell coordinate system, not world coordinates. Preserve current clip pivot, scene, clock, referenceLength and sourceFacing. Each samples index corresponds to one current playback sample; frame is native source cell index.",
+  "schemaNotes": [
+    "nativeBodyFrames.image names are proposed deployment paths only. Copy localSourcePath bytes before registering.",
+    "nativeBodyFrames.frameCount counts source cells, while samples.length equals existing playback frameCount.",
+    "Do not draw old packed source plus new native source together. All four pebble forms have a separate packed-body runtime path that must also switch.",
+    "Seven mappings restore detail lost during prior whole-cell downsampling. They do not invent detail beyond original source artwork.",
+    "Spring composite forms have no higher-resolution original equivalent. Record their native limit rather than applying an upscale."
+  ],
+  "visualEvidence": {
+    "finalSceneContact": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/current-pebble-spring-final-contact.jpg",
+    "detailContact": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/native-pebble-spring-detail-contact.jpg",
+    "inspected": true,
+    "finding": "Directly inspected both contacts. Preserved sources retain surface, edge and facial detail; they are the same whole-body poses. Review contact enlarges small source for visibility, not for deployment."
+  },
+  "forms": {
+    "pebble/blade-antenna": {
+      "key": "pebble/blade-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationMs": 2140,
+        "referenceLength": 157,
+        "finalFrame": {
+          "alpha128BBox": [
+            33,
+            243,
+            481,
+            446
+          ],
+          "opaqueSize": [
+            448,
+            203
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 157
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "source-limited-no-higher-native-body",
+      "reason": "Available original is a complete scene, already packed at scale >= 1. Source body is not larger than runtime birth body. No separate high-resolution whole-body birth track exists in this inspected package.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/Sources/birth-generated.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/manifest.json",
+        "packScale": null,
+        "packCrop": null
+      }
+    },
+    "pebble/blade-carapace-antenna": {
+      "key": "pebble/blade-carapace-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationMs": 2140,
+        "referenceLength": 170,
+        "finalFrame": {
+          "alpha128BBox": [
+            35,
+            237,
+            476,
+            438
+          ],
+          "opaqueSize": [
+            441,
+            201
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 170
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "source-limited-no-higher-native-body",
+      "reason": "Available original is a complete scene, already packed at scale >= 1. Source body is not larger than runtime birth body. No separate high-resolution whole-body birth track exists in this inspected package.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/Sources/birth-generated.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/manifest.json",
+        "packScale": null,
+        "packCrop": null
+      }
+    },
+    "pebble/blade-secretion-antenna": {
+      "key": "pebble/blade-secretion-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationMs": 2140,
+        "referenceLength": 175,
+        "finalFrame": {
+          "alpha128BBox": [
+            33,
+            241,
+            472,
+            436
+          ],
+          "opaqueSize": [
+            439,
+            195
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 175
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "source-limited-no-higher-native-body",
+      "reason": "Available original is a complete scene, already packed at scale >= 1. Source body is not larger than runtime birth body. No separate high-resolution whole-body birth track exists in this inspected package.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/Sources/birth-generated.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/manifest.json",
+        "packScale": null,
+        "packCrop": null
+      }
+    },
+    "pebble/blade-secretion-carapace-antenna": {
+      "key": "pebble/blade-secretion-carapace-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationMs": 2140,
+        "referenceLength": 166,
+        "finalFrame": {
+          "alpha128BBox": [
+            32,
+            237,
+            481,
+            438
+          ],
+          "opaqueSize": [
+            449,
+            201
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 166
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "source-limited-no-higher-native-body",
+      "reason": "Available original is a complete scene, already packed at scale >= 1. Source body is not larger than runtime birth body. No separate high-resolution whole-body birth track exists in this inspected package.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/birth-generated.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/manifest.json",
+        "packScale": null,
+        "packCrop": null
+      }
+    },
+    "pebble/carapace-antenna": {
+      "key": "pebble/carapace-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationMs": 2140,
+        "referenceLength": 155,
+        "finalFrame": {
+          "alpha128BBox": [
+            33,
+            207,
+            469,
+            438
+          ],
+          "opaqueSize": [
+            436,
+            231
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 155
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "source-limited-no-higher-native-body",
+      "reason": "Available original is a complete scene, already packed at scale >= 1. Source body is not larger than runtime birth body. No separate high-resolution whole-body birth track exists in this inspected package.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/Sources/birth-generated.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/manifest.json",
+        "packScale": null,
+        "packCrop": null
+      }
+    },
+    "pebble/secretion-antenna": {
+      "key": "pebble/secretion-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationMs": 2140,
+        "referenceLength": 150,
+        "finalFrame": {
+          "alpha128BBox": [
+            40,
+            250,
+            473,
+            439
+          ],
+          "opaqueSize": [
+            433,
+            189
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 150
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "source-limited-no-higher-native-body",
+      "reason": "Available original is a complete scene, already packed at scale >= 1. Source body is not larger than runtime birth body. No separate high-resolution whole-body birth track exists in this inspected package.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/Sources/birth-generated.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/manifest.json",
+        "packScale": null,
+        "packCrop": null
+      }
+    },
+    "pebble/secretion-carapace-antenna": {
+      "key": "pebble/secretion-carapace-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 8,
+        "durationMs": 2140,
+        "referenceLength": 174,
+        "finalFrame": {
+          "alpha128BBox": [
+            33,
+            250,
+            480,
+            443
+          ],
+          "opaqueSize": [
+            447,
+            193
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 174
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "source-limited-no-higher-native-body",
+      "reason": "Available original is a complete scene, already packed at scale >= 1. Source body is not larger than runtime birth body. No separate high-resolution whole-body birth track exists in this inspected package.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/Sources/birth-generated.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/manifest.json",
+        "packScale": null,
+        "packCrop": null
+      }
+    },
+    "spring/blade-antenna": {
+      "key": "spring/blade-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png",
+        "frameSize": 480,
+        "frameHeight": 480,
+        "columns": 4,
+        "frameCount": 16,
+        "durationMs": 1790,
+        "referenceLength": 128,
+        "finalFrame": {
+          "alpha128BBox": [
+            114,
+            110,
+            330,
+            331
+          ],
+          "opaqueSize": [
+            216,
+            221
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": true,
+        "finalBodyMaxDimension": 128
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "already-native-source-limited",
+      "reason": "All eleven spring compound births were whole source cells pasted at integer (67,67), without source resizing. Existing body layers preserve that same resolution. Repacking the complete generated source cannot add body detail.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/birth-generated-source.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/birth-manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/package_spring_antenna.py",
+        "packScale": 1
+      }
+    },
+    "spring/blade-carapace-antenna": {
+      "key": "spring/blade-carapace-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/birth.png",
+        "frameSize": 480,
+        "frameHeight": 480,
+        "columns": 4,
+        "frameCount": 16,
+        "durationMs": 1790,
+        "referenceLength": 130,
+        "finalFrame": {
+          "alpha128BBox": [
+            127,
+            120,
+            334,
+            347
+          ],
+          "opaqueSize": [
+            207,
+            227
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 130
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "already-native-source-limited",
+      "reason": "All eleven spring compound births were whole source cells pasted at integer (67,67), without source resizing. Existing body layers preserve that same resolution. Repacking the complete generated source cannot add body detail.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/package_spring_antenna.py",
+        "packScale": 1
+      }
+    },
+    "spring/blade-secretion-antenna": {
+      "key": "spring/blade-secretion-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png",
+        "frameSize": 480,
+        "frameHeight": 480,
+        "columns": 4,
+        "frameCount": 16,
+        "durationMs": 1790,
+        "referenceLength": 145,
+        "finalFrame": {
+          "alpha128BBox": [
+            85,
+            109,
+            311,
+            348
+          ],
+          "opaqueSize": [
+            226,
+            239
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": true,
+        "finalBodyMaxDimension": 145
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "already-native-source-limited",
+      "reason": "All eleven spring compound births were whole source cells pasted at integer (67,67), without source resizing. Existing body layers preserve that same resolution. Repacking the complete generated source cannot add body detail.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/birth-generated-source.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/birth-manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/package_spring_antenna.py",
+        "packScale": 1
+      }
+    },
+    "spring/blade-secretion-carapace-antenna": {
+      "key": "spring/blade-secretion-carapace-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png",
+        "frameSize": 480,
+        "frameHeight": 480,
+        "columns": 4,
+        "frameCount": 16,
+        "durationMs": 1790,
+        "referenceLength": 129,
+        "finalFrame": {
+          "alpha128BBox": [
+            116,
+            127,
+            336,
+            340
+          ],
+          "opaqueSize": [
+            220,
+            213
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": true,
+        "finalBodyMaxDimension": 129
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "already-native-source-limited",
+      "reason": "All eleven spring compound births were whole source cells pasted at integer (67,67), without source resizing. Existing body layers preserve that same resolution. Repacking the complete generated source cannot add body detail.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/package_spring_antenna.py",
+        "packScale": 1
+      }
+    },
+    "spring/carapace-antenna": {
+      "key": "spring/carapace-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/birth.png",
+        "frameSize": 480,
+        "frameHeight": 480,
+        "columns": 4,
+        "frameCount": 16,
+        "durationMs": 1790,
+        "referenceLength": 114,
+        "finalFrame": {
+          "alpha128BBox": [
+            121,
+            140,
+            327,
+            347
+          ],
+          "opaqueSize": [
+            206,
+            207
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 114
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "already-native-source-limited",
+      "reason": "All eleven spring compound births were whole source cells pasted at integer (67,67), without source resizing. Existing body layers preserve that same resolution. Repacking the complete generated source cannot add body detail.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/package_spring_antenna.py",
+        "packScale": 1
+      }
+    },
+    "spring/secretion-antenna": {
+      "key": "spring/secretion-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png",
+        "frameSize": 480,
+        "frameHeight": 480,
+        "columns": 4,
+        "frameCount": 16,
+        "durationMs": 1790,
+        "referenceLength": 117,
+        "finalFrame": {
+          "alpha128BBox": [
+            105,
+            109,
+            310,
+            332
+          ],
+          "opaqueSize": [
+            205,
+            223
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": true,
+        "finalBodyMaxDimension": 117
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "already-native-source-limited",
+      "reason": "All eleven spring compound births were whole source cells pasted at integer (67,67), without source resizing. Existing body layers preserve that same resolution. Repacking the complete generated source cannot add body detail.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/birth-generated-source.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/birth-manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/package_spring_antenna.py",
+        "packScale": 1
+      }
+    },
+    "spring/secretion-carapace-antenna": {
+      "key": "spring/secretion-carapace-antenna",
+      "current": {
+        "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/birth.png",
+        "frameSize": 480,
+        "frameHeight": 480,
+        "columns": 4,
+        "frameCount": 16,
+        "durationMs": 1790,
+        "referenceLength": 130,
+        "finalFrame": {
+          "alpha128BBox": [
+            122,
+            139,
+            345,
+            354
+          ],
+          "opaqueSize": [
+            223,
+            215
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 130
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "already-native-source-limited",
+      "reason": "All eleven spring compound births were whole source cells pasted at integer (67,67), without source resizing. Existing body layers preserve that same resolution. Repacking the complete generated source cannot add body detail.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/package_spring_antenna.py",
+        "packScale": 1
+      }
+    },
+    "pebble/blade-carapace": {
+      "key": "pebble/blade-carapace",
+      "current": {
+        "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 13,
+        "durationMs": 2140,
+        "referenceLength": 141,
+        "finalFrame": {
+          "alpha128BBox": [
+            49,
+            252,
+            480,
+            439
+          ],
+          "opaqueSize": [
+            431,
+            187
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 141
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "source-limited-no-higher-native-body",
+      "reason": "Available original is a complete scene, already packed at scale >= 1. Source body is not larger than runtime birth body. No separate high-resolution whole-body birth track exists in this inspected package.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/Sources/birth-generated.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/manifest.json",
+        "packScale": null,
+        "packCrop": null
+      }
+    },
+    "spring/blade-carapace": {
+      "key": "spring/blade-carapace",
+      "current": {
+        "image": "DesignAssets/Animations/BladeCarapaceV1/spring/birth.png",
+        "frameSize": 480,
+        "frameHeight": 480,
+        "columns": 4,
+        "frameCount": 16,
+        "durationMs": 1790,
+        "referenceLength": 107,
+        "finalFrame": {
+          "alpha128BBox": [
+            101,
+            107,
+            340,
+            350
+          ],
+          "opaqueSize": [
+            239,
+            243
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 107
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "already-native-source-limited",
+      "reason": "All eleven spring compound births were whole source cells pasted at integer (67,67), without source resizing. Existing body layers preserve that same resolution. Repacking the complete generated source cannot add body detail.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/birth-generated-source.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/birth-manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/package_spring_remaining.py",
+        "packScale": 1
+      }
+    },
+    "pebble/secretion-carapace": {
+      "key": "pebble/secretion-carapace",
+      "current": {
+        "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 14,
+        "durationMs": 2140,
+        "referenceLength": 184,
+        "finalFrame": {
+          "alpha128BBox": [
+            34,
+            217,
+            479,
+            440
+          ],
+          "opaqueSize": [
+            445,
+            223
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 184
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "source-limited-no-higher-native-body",
+      "reason": "Available original is a complete scene, already packed at scale >= 1. Source body is not larger than runtime birth body. No separate high-resolution whole-body birth track exists in this inspected package.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/Sources/birth-generated.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/manifest.json",
+        "packScale": null,
+        "packCrop": null
+      }
+    },
+    "pebble/blade-secretion": {
+      "key": "pebble/blade-secretion",
+      "current": {
+        "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 14,
+        "durationMs": 2140,
+        "referenceLength": 160,
+        "finalFrame": {
+          "alpha128BBox": [
+            33,
+            235,
+            463,
+            443
+          ],
+          "opaqueSize": [
+            430,
+            208
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 160
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "source-limited-no-higher-native-body",
+      "reason": "Available original is a complete scene, already packed at scale >= 1. Source body is not larger than runtime birth body. No separate high-resolution whole-body birth track exists in this inspected package.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/Sources/birth-generated.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/manifest.json",
+        "packScale": null,
+        "packCrop": null
+      }
+    },
+    "pebble/blade-secretion-carapace": {
+      "key": "pebble/blade-secretion-carapace",
+      "current": {
+        "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 14,
+        "durationMs": 2140,
+        "referenceLength": 176,
+        "finalFrame": {
+          "alpha128BBox": [
+            33,
+            225,
+            471,
+            432
+          ],
+          "opaqueSize": [
+            438,
+            207
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 176
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "source-limited-no-higher-native-body",
+      "reason": "Available original is a complete scene, already packed at scale >= 1. Source body is not larger than runtime birth body. No separate high-resolution whole-body birth track exists in this inspected package.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/birth-generated.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/manifest.json",
+        "packScale": null,
+        "packCrop": null
+      }
+    },
+    "spring/secretion-carapace": {
+      "key": "spring/secretion-carapace",
+      "current": {
+        "image": "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/birth.png",
+        "frameSize": 480,
+        "frameHeight": 480,
+        "columns": 4,
+        "frameCount": 16,
+        "durationMs": 1790,
+        "referenceLength": 129,
+        "finalFrame": {
+          "alpha128BBox": [
+            91,
+            92,
+            342,
+            368
+          ],
+          "opaqueSize": [
+            251,
+            276
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 129
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "already-native-source-limited",
+      "reason": "All eleven spring compound births were whole source cells pasted at integer (67,67), without source resizing. Existing body layers preserve that same resolution. Repacking the complete generated source cannot add body detail.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/birth-generated-source.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/birth-manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/package_spring_remaining.py",
+        "packScale": 1
+      }
+    },
+    "spring/blade-secretion": {
+      "key": "spring/blade-secretion",
+      "current": {
+        "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/birth.png",
+        "frameSize": 480,
+        "frameHeight": 480,
+        "columns": 4,
+        "frameCount": 16,
+        "durationMs": 1790,
+        "referenceLength": 125,
+        "finalFrame": {
+          "alpha128BBox": [
+            97,
+            113,
+            342,
+            362
+          ],
+          "opaqueSize": [
+            245,
+            249
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 125
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "already-native-source-limited",
+      "reason": "All eleven spring compound births were whole source cells pasted at integer (67,67), without source resizing. Existing body layers preserve that same resolution. Repacking the complete generated source cannot add body detail.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/birth-generated-source.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/birth-manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/package_spring_remaining.py",
+        "packScale": 1
+      }
+    },
+    "spring/blade-secretion-carapace": {
+      "key": "spring/blade-secretion-carapace",
+      "current": {
+        "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/birth.png",
+        "frameSize": 480,
+        "frameHeight": 480,
+        "columns": 4,
+        "frameCount": 16,
+        "durationMs": 1790,
+        "referenceLength": 141,
+        "finalFrame": {
+          "alpha128BBox": [
+            100,
+            110,
+            342,
+            361
+          ],
+          "opaqueSize": [
+            242,
+            251
+          ]
+        },
+        "fullScene": true,
+        "hasSceneLayers": false,
+        "finalBodyMaxDimension": 141
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "already-native-source-limited",
+      "reason": "All eleven spring compound births were whole source cells pasted at integer (67,67), without source resizing. Existing body layers preserve that same resolution. Repacking the complete generated source cannot add body detail.",
+      "sourceProvenance": {
+        "sourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/birth-generated-source.png",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/birth-manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/package_spring_remaining.py",
+        "packScale": 1
+      }
+    },
+    "pebble/base": {
+      "key": "pebble/base",
+      "current": {
+        "image": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
+        "frameSize": 151,
+        "frameHeight": 151,
+        "columns": 8,
+        "frameCount": 48,
+        "durationMs": 2620,
+        "referenceLength": 93,
+        "finalFrame": {
+          "alpha128BBox": [
+            30,
+            68,
+            121,
+            136
+          ],
+          "opaqueSize": [
+            91,
+            68
+          ]
+        },
+        "fullScene": false,
+        "hasSceneLayers": false
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "no-verified-larger-source-mapping",
+      "reason": "Current native body-only sheet was verified; no surviving higher-resolution equivalent whole-body sequence with matching poses and clock was found in inspected paths. Do not substitute idle art or earlier rejected poses.",
+      "sourceProvenance": {
+        "path": "/workspace/scratch/cdf786db13f9/Spawner/DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/rig.json",
+        "note": "Rig references removed source attachments and pitch cells; current native atlas is 151px. No matched complete high-resolution sequence was found."
+      }
+    },
+    "pebble/gather": {
+      "key": "pebble/gather",
+      "current": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 66,
+        "durationMs": 2620,
+        "referenceLength": 64,
+        "finalFrame": {
+          "alpha128BBox": [
+            419,
+            408,
+            482,
+            450
+          ],
+          "opaqueSize": [
+            63,
+            42
+          ]
+        },
+        "fullScene": false,
+        "hasSceneLayers": false
+      },
+      "recoverableHigherResolution": true,
+      "status": "native-mapping-ready",
+      "usesPebblePackedBirthRuntime": true,
+      "packedRuntimeImage": "DesignAssets/Animations/PebblePackedBirthV1/gather.png",
+      "currentBodyOnlyImage": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/birth.png",
+      "localSourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/Sources/gather-complete-body-atlas.png",
+      "localSourceSHA256": "66cac8365a656b58e1784abc5b75f4a50ba42e0bfbac6502bc7afc252339d136",
+      "nativeBodyFrames": {
+        "image": "DesignAssets/Animations/BirthResolutionV1/pebble-gather-body.png",
+        "frameSize": 416,
+        "frameHeight": 416,
+        "columns": 4,
+        "frameCount": 16,
+        "samples": [
+          {
+            "frame": 0,
+            "destination": [
+              178.92000000000002,
+              169.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              178.92000000000002,
+              169.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              178.92000000000002,
+              169.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              178.92000000000002,
+              169.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              179.4721066558111,
+              170.08849989822917,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              181.08425809077954,
+              171.51491960105838,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              183.69020150620804,
+              173.82063912070018,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              187.22368410339914,
+              176.94703846936702,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              191.6184530836556,
+              180.83549765927134,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              196.80825564828007,
+              185.4273967026257,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              202.72683899857526,
+              190.6641156116426,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              209.3079503358437,
+              196.48703439853452,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              216.4853368613882,
+              202.83753307551396,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              224.19274577651134,
+              209.65699165479342,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              232.36392428251582,
+              216.8867901485854,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              240.93261958070428,
+              224.4683085691024,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              249.83257887237943,
+              232.34292692855692,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              258.9975493588439,
+              240.45202523916143,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              268.36127824140044,
+              248.73698351312848,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              277.85751272135155,
+              257.13918176267043,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              287.4200000000001,
+              265.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              296.98248727864853,
+              274.0608182373295,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              306.47872175859965,
+              282.46301648687154,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              315.8424506411562,
+              290.7479747608386,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              325.00742112762066,
+              298.8570730714431,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              333.9073804192958,
+              306.7316914308976,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              342.47607571748426,
+              314.3132098514146,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              350.64725422348874,
+              321.54300834520654,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              358.3546631386119,
+              328.36246692448606,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              365.5320496641564,
+              334.7129656014655,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              372.1131610014248,
+              340.53588438835743,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              378.03174435171996,
+              345.7726032973743,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              383.22154691634444,
+              350.3645023407287,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              387.6163158966009,
+              354.252961530633,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              391.149798493792,
+              357.37936087929984,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              393.75574190922043,
+              359.68508039894164,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              395.36789334418893,
+              361.11150010177073,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              395.92,
+              361.6,
+              108.16,
+              108.16
+            ]
+          }
+        ]
+      },
+      "sourceProvenance": {
+        "manifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/publication-manifest.json",
+        "path": "AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/Sources/gather-complete-body-atlas.png",
+        "sourceSHA256": "66cac8365a656b58e1784abc5b75f4a50ba42e0bfbac6502bc7afc252339d136",
+        "generator": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/render-gather.mjs",
+        "mapping": "sourceSamples[].sourceFrame and wholeCellDestination, indexed by current playback frame. Preserve runtime clip durations, pivot, scene, facing and referenceLength.",
+        "upstreamResampling": "The whole-body source is older artwork. This restores detail lost when it was drawn into the current small birth sprite, not newly generated detail."
+      },
+      "packing": {
+        "action": "Use existing approved whole-body atlas unchanged."
+      },
+      "nativeSourceFinalFrame": {
+        "alpha128BBox": [
+          87,
+          178,
+          330,
+          340
+        ],
+        "opaqueSize": [
+          243,
+          162
+        ]
+      },
+      "sourceCellToSceneScale": [
+        0.26,
+        0.26
+      ],
+      "equivalence": {
+        "report": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/equivalence-pebble-gather.json",
+        "currentComparator": "Existing restored packed runtime body",
+        "sampleCount": 66,
+        "pixelExactSamples": 18,
+        "minimumAlpha128IoU": 1,
+        "meanAlpha128IoU": 1.0,
+        "maximumRGBAMeanDifferenceOnBody": 0.0025572333170969315,
+        "finalCurrentBBox": [
+          419,
+          408,
+          482,
+          450
+        ],
+        "finalReconstructedBBox": [
+          419,
+          408,
+          482,
+          450
+        ],
+        "notes": "Existing source-authored whole-cell mapping; nonzero color differences arise from historical different rasterizers/quantization. No claim of all-pixel equivalence. Dimensions and clock are preserved."
+      }
+    },
+    "pebble/blade": {
+      "key": "pebble/blade",
+      "current": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/blade/birth.png",
+        "frameSize": 512,
+        "frameHeight": 620,
+        "columns": 8,
+        "frameCount": 79,
+        "durationMs": 2620,
+        "referenceLength": 83,
+        "finalFrame": {
+          "alpha128BBox": [
+            205,
+            483,
+            288,
+            550
+          ],
+          "opaqueSize": [
+            83,
+            67
+          ]
+        },
+        "fullScene": false,
+        "hasSceneLayers": false
+      },
+      "recoverableHigherResolution": true,
+      "status": "native-mapping-ready",
+      "usesPebblePackedBirthRuntime": true,
+      "packedRuntimeImage": "DesignAssets/Animations/PebblePackedBirthV1/blade.png",
+      "currentBodyOnlyImage": "DesignAssets/Animations/ApprovedActionsV1/pebble/blade/birth.png",
+      "localSourcePath": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/native-body-atlases/pebble-blade.png",
+      "localSourceSHA256": "8a5d2d5f8beeb0f00d04ea08cb12d288bf4af7ddd3e7704717ed32d05f54dbd5",
+      "nativeBodyFrames": {
+        "image": "DesignAssets/Animations/BirthResolutionV1/pebble-blade-body.png",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 4,
+        "frameCount": 79,
+        "samples": [
+          {
+            "frame": 0,
+            "destination": [
+              192,
+              305,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              192,
+              305,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              192,
+              305,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              192,
+              306,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              192,
+              306,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              192,
+              307,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              192,
+              308,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              192,
+              309,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              192,
+              310,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              192,
+              311,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              192,
+              313,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              192,
+              314,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              192,
+              316,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              192,
+              317,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              192,
+              319,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              192,
+              321,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 16,
+            "destination": [
+              192,
+              323,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 17,
+            "destination": [
+              192,
+              325,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 18,
+            "destination": [
+              192,
+              328,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 19,
+            "destination": [
+              192,
+              330,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 20,
+            "destination": [
+              192,
+              332,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 21,
+            "destination": [
+              192,
+              335,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 22,
+            "destination": [
+              192,
+              337,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 23,
+            "destination": [
+              192,
+              340,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 24,
+            "destination": [
+              192,
+              342,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 25,
+            "destination": [
+              192,
+              345,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 26,
+            "destination": [
+              192,
+              347,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              192,
+              350,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 28,
+            "destination": [
+              192,
+              353,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 29,
+            "destination": [
+              192,
+              356,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 30,
+            "destination": [
+              192,
+              359,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 31,
+            "destination": [
+              192,
+              361,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 32,
+            "destination": [
+              192,
+              364,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 33,
+            "destination": [
+              192,
+              367,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 34,
+            "destination": [
+              192,
+              370,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 35,
+            "destination": [
+              192,
+              373,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              192,
+              376,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 37,
+            "destination": [
+              192,
+              379,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 38,
+            "destination": [
+              192,
+              381,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 39,
+            "destination": [
+              192,
+              384,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 40,
+            "destination": [
+              192,
+              387,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 41,
+            "destination": [
+              192,
+              390,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 42,
+            "destination": [
+              192,
+              393,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 43,
+            "destination": [
+              192,
+              395,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 44,
+            "destination": [
+              192,
+              398,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 45,
+            "destination": [
+              192,
+              400,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 46,
+            "destination": [
+              192,
+              403,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 47,
+            "destination": [
+              192,
+              405,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 48,
+            "destination": [
+              192,
+              408,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 49,
+            "destination": [
+              192,
+              410,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 50,
+            "destination": [
+              192,
+              412,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 51,
+            "destination": [
+              192,
+              415,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 52,
+            "destination": [
+              192,
+              417,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 53,
+            "destination": [
+              192,
+              419,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 54,
+            "destination": [
+              192,
+              421,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 55,
+            "destination": [
+              192,
+              423,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 56,
+            "destination": [
+              192,
+              424,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 57,
+            "destination": [
+              192,
+              426,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 58,
+            "destination": [
+              192,
+              427,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 59,
+            "destination": [
+              192,
+              429,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 60,
+            "destination": [
+              192,
+              430,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 61,
+            "destination": [
+              192,
+              431,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 62,
+            "destination": [
+              192,
+              432,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 63,
+            "destination": [
+              192,
+              433,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 64,
+            "destination": [
+              192,
+              434,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 65,
+            "destination": [
+              192,
+              434,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 66,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 67,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 68,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 69,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 70,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 71,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 72,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 73,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 74,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 75,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 76,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 77,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 78,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          }
+        ]
+      },
+      "sourceProvenance": {
+        "manifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/publication-manifest.json",
+        "path": "AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/Sources/blade-approved-uneven-birth.webp",
+        "sourceSHA256": "e1ed8209b8175e51e3bce4b66f8486b7e84d7930ad5d8c9e853c3f2acfa1aafe",
+        "generator": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/pack.py",
+        "mapping": "sourceSamples[].sourceFrame and wholeCellDestination, indexed by current playback frame. Preserve runtime clip durations, pivot, scene, facing and referenceLength.",
+        "upstreamResampling": "The whole-body source is older artwork. This restores detail lost when it was drawn into the current small birth sprite, not newly generated detail."
+      },
+      "packing": {
+        "decodedWebPFramesPixelExact": 79,
+        "action": "Losslessly place full 256px decoded frames; no resizing, alpha manipulation, recoloring or anatomy edit."
+      },
+      "nativeSourceFinalFrame": {
+        "alpha128BBox": [
+          26,
+          96,
+          192,
+          230
+        ],
+        "opaqueSize": [
+          166,
+          134
+        ]
+      },
+      "sourceCellToSceneScale": [
+        0.5,
+        0.5
+      ],
+      "equivalence": {
+        "report": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/equivalence-pebble-blade.json",
+        "currentComparator": "Existing restored packed runtime body",
+        "sampleCount": 79,
+        "pixelExactSamples": 0,
+        "minimumAlpha128IoU": 0.9969340827797649,
+        "meanAlpha128IoU": 0.9996338009290547,
+        "maximumRGBAMeanDifferenceOnBody": 2.606404695075274,
+        "finalCurrentBBox": [
+          205,
+          483,
+          288,
+          550
+        ],
+        "finalReconstructedBBox": [
+          205,
+          483,
+          288,
+          550
+        ],
+        "notes": "Existing source-authored whole-cell mapping; nonzero color differences arise from historical different rasterizers/quantization. No claim of all-pixel equivalence. Dimensions and clock are preserved."
+      }
+    },
+    "pebble/carapace": {
+      "key": "pebble/carapace",
+      "current": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/carapace/birth.png",
+        "frameSize": 512,
+        "frameHeight": 620,
+        "columns": 8,
+        "frameCount": 79,
+        "durationMs": 2620,
+        "referenceLength": 91,
+        "finalFrame": {
+          "alpha128BBox": [
+            206,
+            478,
+            296,
+            550
+          ],
+          "opaqueSize": [
+            90,
+            72
+          ]
+        },
+        "fullScene": false,
+        "hasSceneLayers": false
+      },
+      "recoverableHigherResolution": true,
+      "status": "native-mapping-ready",
+      "usesPebblePackedBirthRuntime": true,
+      "packedRuntimeImage": "DesignAssets/Animations/PebblePackedBirthV1/carapace.png",
+      "currentBodyOnlyImage": "DesignAssets/Animations/ApprovedActionsV1/pebble/carapace/birth.png",
+      "localSourcePath": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/native-body-atlases/pebble-carapace.png",
+      "localSourceSHA256": "89bdcde2ec18645162c04619000eac94c14ca796aa41b402d3aa091da8041982",
+      "nativeBodyFrames": {
+        "image": "DesignAssets/Animations/BirthResolutionV1/pebble-carapace-body.png",
+        "frameSize": 256,
+        "frameHeight": 256,
+        "columns": 4,
+        "frameCount": 79,
+        "samples": [
+          {
+            "frame": 0,
+            "destination": [
+              192,
+              305,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              192,
+              305,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              192,
+              305,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              192,
+              306,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              192,
+              306,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              192,
+              307,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              192,
+              308,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              192,
+              309,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              192,
+              310,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              192,
+              311,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              192,
+              313,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              192,
+              314,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              192,
+              316,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              192,
+              317,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              192,
+              319,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              192,
+              321,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 16,
+            "destination": [
+              192,
+              323,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 17,
+            "destination": [
+              192,
+              325,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 18,
+            "destination": [
+              192,
+              328,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 19,
+            "destination": [
+              192,
+              330,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 20,
+            "destination": [
+              192,
+              332,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 21,
+            "destination": [
+              192,
+              335,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 22,
+            "destination": [
+              192,
+              337,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 23,
+            "destination": [
+              192,
+              340,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 24,
+            "destination": [
+              192,
+              342,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 25,
+            "destination": [
+              192,
+              345,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 26,
+            "destination": [
+              192,
+              347,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              192,
+              350,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 28,
+            "destination": [
+              192,
+              353,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 29,
+            "destination": [
+              192,
+              356,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 30,
+            "destination": [
+              192,
+              359,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 31,
+            "destination": [
+              192,
+              361,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 32,
+            "destination": [
+              192,
+              364,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 33,
+            "destination": [
+              192,
+              367,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 34,
+            "destination": [
+              192,
+              370,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 35,
+            "destination": [
+              192,
+              373,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              192,
+              376,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 37,
+            "destination": [
+              192,
+              379,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 38,
+            "destination": [
+              192,
+              381,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 39,
+            "destination": [
+              192,
+              384,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 40,
+            "destination": [
+              192,
+              387,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 41,
+            "destination": [
+              192,
+              390,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 42,
+            "destination": [
+              192,
+              393,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 43,
+            "destination": [
+              192,
+              395,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 44,
+            "destination": [
+              192,
+              398,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 45,
+            "destination": [
+              192,
+              400,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 46,
+            "destination": [
+              192,
+              403,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 47,
+            "destination": [
+              192,
+              405,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 48,
+            "destination": [
+              192,
+              408,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 49,
+            "destination": [
+              192,
+              410,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 50,
+            "destination": [
+              192,
+              412,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 51,
+            "destination": [
+              192,
+              415,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 52,
+            "destination": [
+              192,
+              417,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 53,
+            "destination": [
+              192,
+              419,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 54,
+            "destination": [
+              192,
+              421,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 55,
+            "destination": [
+              192,
+              423,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 56,
+            "destination": [
+              192,
+              424,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 57,
+            "destination": [
+              192,
+              426,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 58,
+            "destination": [
+              192,
+              427,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 59,
+            "destination": [
+              192,
+              429,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 60,
+            "destination": [
+              192,
+              430,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 61,
+            "destination": [
+              192,
+              431,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 62,
+            "destination": [
+              192,
+              432,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 63,
+            "destination": [
+              192,
+              433,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 64,
+            "destination": [
+              192,
+              434,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 65,
+            "destination": [
+              192,
+              434,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 66,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 67,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 68,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 69,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 70,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 71,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 72,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 73,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 74,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 75,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 76,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 77,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          },
+          {
+            "frame": 78,
+            "destination": [
+              192,
+              435,
+              128,
+              128
+            ]
+          }
+        ]
+      },
+      "sourceProvenance": {
+        "manifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/publication-manifest.json",
+        "path": "AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/Sources/carapace-approved-uneven-birth.webp",
+        "sourceSHA256": "2f334ddd3591c8a82ac3be88d606792d1a26b4cdf129fda5542178499bf521e2",
+        "generator": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/pack.py",
+        "mapping": "sourceSamples[].sourceFrame and wholeCellDestination, indexed by current playback frame. Preserve runtime clip durations, pivot, scene, facing and referenceLength.",
+        "upstreamResampling": "The whole-body source is older artwork. This restores detail lost when it was drawn into the current small birth sprite, not newly generated detail."
+      },
+      "packing": {
+        "decodedWebPFramesPixelExact": 79,
+        "action": "Losslessly place full 256px decoded frames; no resizing, alpha manipulation, recoloring or anatomy edit."
+      },
+      "nativeSourceFinalFrame": {
+        "alpha128BBox": [
+          28,
+          86,
+          209,
+          230
+        ],
+        "opaqueSize": [
+          181,
+          144
+        ]
+      },
+      "sourceCellToSceneScale": [
+        0.5,
+        0.5
+      ],
+      "equivalence": {
+        "report": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/equivalence-pebble-carapace.json",
+        "currentComparator": "Existing restored packed runtime body",
+        "sampleCount": 79,
+        "pixelExactSamples": 0,
+        "minimumAlpha128IoU": 0.9958133971291866,
+        "meanAlpha128IoU": 0.9995105094517543,
+        "maximumRGBAMeanDifferenceOnBody": 4.772688079327441,
+        "finalCurrentBBox": [
+          206,
+          478,
+          296,
+          550
+        ],
+        "finalReconstructedBBox": [
+          206,
+          478,
+          296,
+          550
+        ],
+        "notes": "Existing source-authored whole-cell mapping; nonzero color differences arise from historical different rasterizers/quantization. No claim of all-pixel equivalence. Dimensions and clock are preserved."
+      }
+    },
+    "pebble/secretion": {
+      "key": "pebble/secretion",
+      "current": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/secretion/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 48,
+        "durationMs": 2620,
+        "referenceLength": 44,
+        "finalFrame": {
+          "alpha128BBox": [
+            428,
+            419,
+            472,
+            452
+          ],
+          "opaqueSize": [
+            44,
+            33
+          ]
+        },
+        "fullScene": false,
+        "hasSceneLayers": false
+      },
+      "recoverableHigherResolution": true,
+      "status": "native-mapping-ready",
+      "usesPebblePackedBirthRuntime": true,
+      "packedRuntimeImage": "DesignAssets/Animations/PebblePackedBirthV1/secretion.png",
+      "currentBodyOnlyImage": "DesignAssets/Animations/ApprovedActionsV1/pebble/secretion/birth.png",
+      "localSourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/Sources/secretion-approved-complete-body-atlas.png",
+      "localSourceSHA256": "54eb72bb1312b786822e330871df8ff6087a2d6769d023210d46129be19d6177",
+      "nativeBodyFrames": {
+        "image": "DesignAssets/Animations/BirthResolutionV1/pebble-secretion-body.png",
+        "frameSize": 151,
+        "frameHeight": 151,
+        "columns": 8,
+        "frameCount": 48,
+        "samples": [
+          {
+            "frame": 0,
+            "destination": [
+              197,
+              187,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              197,
+              187,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              197,
+              187,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              198,
+              188,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              199,
+              189,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              202,
+              192,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              205,
+              195,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              210,
+              199,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              215,
+              204,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              221,
+              209,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              227,
+              215,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              235,
+              222,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              242,
+              229,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              250,
+              237,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              259,
+              244,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              268,
+              253,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 16,
+            "destination": [
+              277,
+              261,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 17,
+            "destination": [
+              286,
+              270,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 18,
+            "destination": [
+              296,
+              278,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 19,
+            "destination": [
+              306,
+              287,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 20,
+            "destination": [
+              315,
+              296,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 21,
+            "destination": [
+              325,
+              305,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 22,
+            "destination": [
+              334,
+              314,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 23,
+            "destination": [
+              343,
+              322,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 24,
+            "destination": [
+              352,
+              330,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 25,
+            "destination": [
+              361,
+              338,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 26,
+            "destination": [
+              369,
+              346,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              376,
+              353,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 28,
+            "destination": [
+              384,
+              359,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 29,
+            "destination": [
+              390,
+              365,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 30,
+            "destination": [
+              396,
+              371,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 31,
+            "destination": [
+              401,
+              376,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 32,
+            "destination": [
+              406,
+              380,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 33,
+            "destination": [
+              409,
+              383,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 34,
+            "destination": [
+              412,
+              385,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 35,
+            "destination": [
+              413,
+              387,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 36,
+            "destination": [
+              414,
+              387,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 37,
+            "destination": [
+              414,
+              387,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 38,
+            "destination": [
+              414,
+              387,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 39,
+            "destination": [
+              414,
+              387,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 40,
+            "destination": [
+              414,
+              387,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 41,
+            "destination": [
+              414,
+              387,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 42,
+            "destination": [
+              414,
+              387,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 43,
+            "destination": [
+              414,
+              387,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 44,
+            "destination": [
+              414,
+              387,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 45,
+            "destination": [
+              414,
+              387,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 46,
+            "destination": [
+              414,
+              387,
+              72,
+              72
+            ]
+          },
+          {
+            "frame": 47,
+            "destination": [
+              414,
+              387,
+              72,
+              72
+            ]
+          }
+        ]
+      },
+      "sourceProvenance": {
+        "manifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/publication-manifest.json",
+        "path": "AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/Sources/secretion-approved-complete-body-atlas.png",
+        "sourceSHA256": "54eb72bb1312b786822e330871df8ff6087a2d6769d023210d46129be19d6177",
+        "generator": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/pack.py",
+        "mapping": "sourceSamples[].sourceFrame and wholeCellDestination, indexed by current playback frame. Preserve runtime clip durations, pivot, scene, facing and referenceLength.",
+        "upstreamResampling": "The whole-body source is older artwork. This restores detail lost when it was drawn into the current small birth sprite, not newly generated detail."
+      },
+      "packing": {
+        "action": "Use existing approved whole-body atlas unchanged."
+      },
+      "nativeSourceFinalFrame": {
+        "alpha128BBox": [
+          30,
+          68,
+          121,
+          136
+        ],
+        "opaqueSize": [
+          91,
+          68
+        ]
+      },
+      "sourceCellToSceneScale": [
+        0.4768211920529801,
+        0.4768211920529801
+      ],
+      "equivalence": {
+        "report": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/equivalence-pebble-secretion.json",
+        "currentComparator": "Existing restored packed runtime body",
+        "sampleCount": 48,
+        "pixelExactSamples": 0,
+        "minimumAlpha128IoU": 0.9920398009950249,
+        "meanAlpha128IoU": 0.9974513630784303,
+        "maximumRGBAMeanDifferenceOnBody": 3.380952380952381,
+        "finalCurrentBBox": [
+          428,
+          419,
+          472,
+          452
+        ],
+        "finalReconstructedBBox": [
+          428,
+          419,
+          472,
+          452
+        ],
+        "notes": "Existing source-authored whole-cell mapping; nonzero color differences arise from historical different rasterizers/quantization. No claim of all-pixel equivalence. Dimensions and clock are preserved."
+      }
+    },
+    "pebble/antenna": {
+      "key": "pebble/antenna",
+      "current": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/birth.png",
+        "frameSize": 360,
+        "frameHeight": 360,
+        "columns": 8,
+        "frameCount": 17,
+        "durationMs": 2620,
+        "referenceLength": 241,
+        "finalFrame": {
+          "alpha128BBox": [
+            60,
+            119,
+            299,
+            309
+          ],
+          "opaqueSize": [
+            239,
+            190
+          ]
+        },
+        "fullScene": false,
+        "hasSceneLayers": false
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "no-verified-larger-source-mapping",
+      "reason": "Current native body-only sheet was verified; no surviving higher-resolution equivalent whole-body sequence with matching poses and clock was found in inspected paths. Do not substitute idle art or earlier rejected poses.",
+      "sourceProvenance": {
+        "path": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/SheetGifHandoff-20261106/manifest.json",
+        "note": "Published approved 17-frame source is already 360px. Earlier crisp-v3 eight-cell generated source is a different sequence; not automatically interchangeable."
+      }
+    },
+    "spring/base": {
+      "key": "spring/base",
+      "current": {
+        "image": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+        "frameSize": 236,
+        "frameHeight": 236,
+        "columns": 4,
+        "frameCount": 13,
+        "durationMs": 1790,
+        "referenceLength": 105,
+        "finalFrame": {
+          "alpha128BBox": [
+            111,
+            103,
+            190,
+            206
+          ],
+          "opaqueSize": [
+            79,
+            103
+          ]
+        },
+        "fullScene": false,
+        "hasSceneLayers": false
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "no-verified-larger-source-mapping",
+      "reason": "Current native body-only sheet was verified; no surviving higher-resolution equivalent whole-body sequence with matching poses and clock was found in inspected paths. Do not substitute idle art or earlier rejected poses.",
+      "sourceProvenance": {
+        "path": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3",
+        "note": "Archived base and antenna birth frames are themselves 236x236, not 512px. The preview generator scales those 236px frames up."
+      }
+    },
+    "spring/gather": {
+      "key": "spring/gather",
+      "current": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 13,
+        "durationMs": 1790,
+        "referenceLength": 275,
+        "finalFrame": {
+          "alpha128BBox": [
+            119,
+            184,
+            393,
+            448
+          ],
+          "opaqueSize": [
+            274,
+            264
+          ]
+        },
+        "fullScene": false,
+        "hasSceneLayers": false
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "already-large-body-only-cels",
+      "reason": "spring gather uses its approved 512px body-only atlas directly, with final body reference length 275. Source generated cels were already scaled up in packaging; no further scene downscale is present.",
+      "sourceProvenance": {
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/spring-gather-actions-v1/pack-lifecycle.mjs",
+        "manifest": "/workspace/scratch/cdf786db13f9/art-review/spring-gather-actions-v1/spring-gather-birth-v1.json"
+      }
+    },
+    "spring/blade": {
+      "key": "spring/blade",
+      "current": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/blade/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 6,
+        "frameCount": 36,
+        "durationMs": 1790,
+        "referenceLength": 115,
+        "finalFrame": {
+          "alpha128BBox": [
+            366,
+            330,
+            481,
+            436
+          ],
+          "opaqueSize": [
+            115,
+            106
+          ]
+        },
+        "fullScene": false,
+        "hasSceneLayers": false
+      },
+      "recoverableHigherResolution": true,
+      "status": "native-mapping-ready",
+      "usesPebblePackedBirthRuntime": false,
+      "currentBodyOnlyImage": "DesignAssets/Animations/ApprovedActionsV1/spring/blade/birth.png",
+      "localSourcePath": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/native-body-atlases/spring-blade-compact.png",
+      "localSourceSHA256": "40f2a4421d188caaef7709369ada2cae82533cf046c3156557deb2fdf7f0a2f3",
+      "nativeBodyFrames": {
+        "image": "DesignAssets/Animations/BirthResolutionV1/spring-blade-body.png",
+        "frameSize": 343,
+        "frameHeight": 317,
+        "columns": 6,
+        "frameCount": 34,
+        "samples": [
+          {
+            "frame": 0,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              319.7874581099196,
+              195.9165423927614,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              324.7908283280058,
+              197.6504197869406,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              331.46198861878736,
+              205.35654153884823,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 16,
+            "destination": [
+              338.13314890956894,
+              219.2275606922819,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 17,
+            "destination": [
+              344.80430920035064,
+              239.2634772472417,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 18,
+            "destination": [
+              351.47546949113223,
+              265.4642912037275,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 19,
+            "destination": [
+              358.1466297819138,
+              297.83000256173943,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 20,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 21,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 22,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 23,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 24,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 25,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 26,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 28,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 29,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 30,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 31,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 31,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 32,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 32,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          },
+          {
+            "frame": 33,
+            "destination": [
+              363.15,
+              326.15,
+              120.05,
+              110.94999999999999
+            ]
+          }
+        ]
+      },
+      "sourceProvenance": {
+        "manifest": "/workspace/scratch/cdf786db13f9/art-review/spring-combat-fullscene-v1-20261107/manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/spring-combat-fullscene-v1-20261107/render.mjs",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-body-birth-review-20261106/manifest.json",
+        "mapping": "frames[].bodyCel; destination rootX - 512*.35, rootY - 704*.35, 1024*.35, 1024*.35. Use existing runtime durations, ending 390ms not source review hold 700ms.",
+        "upstreamResampling": "1024px files are approved captures of existing runtime bodies, not independently drawn 1024px artwork. They preserve information lost by the subsequent .35 scene rasterization; original native art is lower resolution.",
+        "compactPacking": "Exact RGBA full-body cells with one common alpha-empty outer crop and exact-frame dedup. All source-authored destination offsets adjusted by common crop offset at unchanged scale."
+      },
+      "sourceCellToSceneScale": [
+        0.35,
+        0.35
+      ],
+      "nativeSourceFinalFrame": {
+        "alpha128BBox": [
+          330,
+          404,
+          657,
+          706
+        ],
+        "opaqueSize": [
+          327,
+          302
+        ]
+      },
+      "equivalence": {
+        "report": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/equivalence-spring-blade.json",
+        "currentComparator": "Registered body-only birth atlas",
+        "sampleCount": 36,
+        "pixelExactSamples": 10,
+        "minimumAlpha128IoU": 0.9899967731526299,
+        "meanAlpha128IoU": 0.9961389286294042,
+        "maximumRGBAMeanDifferenceOnBody": 1.5506934812760056,
+        "finalCurrentBBox": [
+          366,
+          330,
+          481,
+          436
+        ],
+        "finalReconstructedBBox": [
+          366,
+          330,
+          481,
+          436
+        ],
+        "notes": "Existing source-authored whole-cell mapping; nonzero color differences arise from historical different rasterizers/quantization. No claim of all-pixel equivalence. Dimensions and clock are preserved."
+      },
+      "compactSource": {
+        "originalSourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-body-birth-review-20261106/blade/birth-body-sheet.png",
+        "originalSourceSHA256": "ec19050bbdce2400ea6c3cfd800d8a23976c1a5993e5b189447013c8150ac4d0",
+        "originalNativeBodyFrames": {
+          "image": "DesignAssets/Animations/BirthResolutionV1/spring-blade-body.png",
+          "frameSize": 1024,
+          "frameHeight": 1024,
+          "columns": 6,
+          "frameCount": 36,
+          "samples": [
+            {
+              "frame": 0,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 2,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 3,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 4,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 5,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 6,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 7,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 8,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 9,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 10,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 11,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 12,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 13,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 14,
+              "destination": [
+                212.4408283280058,
+                60.10041978694062,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 15,
+              "destination": [
+                219.1119886187874,
+                67.80654153884825,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 16,
+              "destination": [
+                225.78314890956898,
+                81.67756069228193,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 17,
+              "destination": [
+                232.45430920035062,
+                101.71347724724171,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 18,
+              "destination": [
+                239.1254694911322,
+                127.91429120372754,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 19,
+              "destination": [
+                245.7966297819138,
+                160.28000256173948,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 20,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 21,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 22,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 23,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 24,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 25,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 26,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 27,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 28,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 29,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 30,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 31,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 32,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 33,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 34,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 35,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            }
+          ]
+        },
+        "commonCropRect": [
+          321,
+          393,
+          664,
+          710
+        ],
+        "sourceToCompactFrame": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          31,
+          32,
+          32,
+          33
+        ],
+        "originalAtlasDimensions": [
+          6144,
+          6144
+        ],
+        "compactAtlasDimensions": [
+          2058,
+          1902
+        ],
+        "decodedRGBABeforeBytes": 150994944,
+        "decodedRGBAAfterBytes": 15657264,
+        "decodedRGBAReductionPercent": 89.6306037902832,
+        "proof": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/native-spring-compact-proof.json"
+      }
+    },
+    "spring/carapace": {
+      "key": "spring/carapace",
+      "current": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/carapace/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 6,
+        "frameCount": 36,
+        "durationMs": 1790,
+        "referenceLength": 110,
+        "finalFrame": {
+          "alpha128BBox": [
+            362,
+            333,
+            471,
+            436
+          ],
+          "opaqueSize": [
+            109,
+            103
+          ]
+        },
+        "fullScene": false,
+        "hasSceneLayers": false
+      },
+      "recoverableHigherResolution": true,
+      "status": "native-mapping-ready",
+      "usesPebblePackedBirthRuntime": false,
+      "currentBodyOnlyImage": "DesignAssets/Animations/ApprovedActionsV1/spring/carapace/birth.png",
+      "localSourcePath": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/native-body-atlases/spring-carapace-compact.png",
+      "localSourceSHA256": "72edf91e27c16b037d64b4765357bdb793c7e44b5c269b96d1c6d2daa4b65a89",
+      "nativeBodyFrames": {
+        "image": "DesignAssets/Animations/BirthResolutionV1/spring-carapace-body.png",
+        "frameSize": 326,
+        "frameHeight": 312,
+        "columns": 6,
+        "frameCount": 34,
+        "samples": [
+          {
+            "frame": 0,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 13,
+            "destination": [
+              316.6374581099196,
+              198.7165423927614,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 14,
+            "destination": [
+              321.6408283280058,
+              200.4504197869406,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 15,
+            "destination": [
+              328.3119886187874,
+              208.15654153884824,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 16,
+            "destination": [
+              334.98314890956897,
+              222.02756069228192,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 17,
+            "destination": [
+              341.6543092003506,
+              242.0634772472417,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 18,
+            "destination": [
+              348.3254694911322,
+              268.26429120372757,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 19,
+            "destination": [
+              354.9966297819138,
+              300.6300025617395,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 20,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 21,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 22,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 23,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 24,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 25,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 26,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 27,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 28,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 29,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 30,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 31,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 31,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 32,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 32,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          },
+          {
+            "frame": 33,
+            "destination": [
+              360.0,
+              328.95000000000005,
+              114.1,
+              109.19999999999999
+            ]
+          }
+        ]
+      },
+      "sourceProvenance": {
+        "manifest": "/workspace/scratch/cdf786db13f9/art-review/spring-combat-fullscene-v1-20261107/manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/spring-combat-fullscene-v1-20261107/render.mjs",
+        "sourceManifest": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-body-birth-review-20261106/manifest.json",
+        "mapping": "frames[].bodyCel; destination rootX - 512*.35, rootY - 704*.35, 1024*.35, 1024*.35. Use existing runtime durations, ending 390ms not source review hold 700ms.",
+        "upstreamResampling": "1024px files are approved captures of existing runtime bodies, not independently drawn 1024px artwork. They preserve information lost by the subsequent .35 scene rasterization; original native art is lower resolution.",
+        "compactPacking": "Exact RGBA full-body cells with one common alpha-empty outer crop and exact-frame dedup. All source-authored destination offsets adjusted by common crop offset at unchanged scale."
+      },
+      "sourceCellToSceneScale": [
+        0.35,
+        0.35
+      ],
+      "nativeSourceFinalFrame": {
+        "alpha128BBox": [
+          318,
+          412,
+          631,
+          708
+        ],
+        "opaqueSize": [
+          313,
+          296
+        ]
+      },
+      "equivalence": {
+        "report": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/equivalence-spring-carapace.json",
+        "currentComparator": "Registered body-only birth atlas",
+        "sampleCount": 36,
+        "pixelExactSamples": 10,
+        "minimumAlpha128IoU": 0.9932701131844601,
+        "meanAlpha128IoU": 0.997333234758885,
+        "maximumRGBAMeanDifferenceOnBody": 1.0082876085962507,
+        "finalCurrentBBox": [
+          362,
+          333,
+          471,
+          436
+        ],
+        "finalReconstructedBBox": [
+          362,
+          333,
+          471,
+          436
+        ],
+        "notes": "Existing source-authored whole-cell mapping; nonzero color differences arise from historical different rasterizers/quantization. No claim of all-pixel equivalence. Dimensions and clock are preserved."
+      },
+      "compactSource": {
+        "originalSourcePath": "/workspace/scratch/cdf786db13f9/Spawner/AnimationCandidates/spring-body-birth-review-20261106/carapace/birth-body-sheet.png",
+        "originalSourceSHA256": "0bffac4fb726f6bfddde51495a5360cf9d4657539d941648641ee4934a1e6c10",
+        "originalNativeBodyFrames": {
+          "image": "DesignAssets/Animations/BirthResolutionV1/spring-carapace-body.png",
+          "frameSize": 1024,
+          "frameHeight": 1024,
+          "columns": 6,
+          "frameCount": 36,
+          "samples": [
+            {
+              "frame": 0,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 1,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 2,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 3,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 4,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 5,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 6,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 7,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 8,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 9,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 10,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 11,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 12,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 13,
+              "destination": [
+                207.4374581099196,
+                58.3665423927614,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 14,
+              "destination": [
+                212.4408283280058,
+                60.10041978694062,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 15,
+              "destination": [
+                219.1119886187874,
+                67.80654153884825,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 16,
+              "destination": [
+                225.78314890956898,
+                81.67756069228193,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 17,
+              "destination": [
+                232.45430920035062,
+                101.71347724724171,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 18,
+              "destination": [
+                239.1254694911322,
+                127.91429120372754,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 19,
+              "destination": [
+                245.7966297819138,
+                160.28000256173948,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 20,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 21,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 22,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 23,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 24,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 25,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 26,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 27,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 28,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 29,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 30,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 31,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 32,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 33,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 34,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            },
+            {
+              "frame": 35,
+              "destination": [
+                250.8,
+                188.60000000000002,
+                358.4,
+                358.4
+              ]
+            }
+          ]
+        },
+        "commonCropRect": [
+          312,
+          401,
+          638,
+          713
+        ],
+        "sourceToCompactFrame": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          31,
+          32,
+          32,
+          33
+        ],
+        "originalAtlasDimensions": [
+          6144,
+          6144
+        ],
+        "compactAtlasDimensions": [
+          1956,
+          1872
+        ],
+        "decodedRGBABeforeBytes": 150994944,
+        "decodedRGBAAfterBytes": 14646528,
+        "decodedRGBAReductionPercent": 90.29998779296875,
+        "proof": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/native-spring-compact-proof.json"
+      }
+    },
+    "spring/secretion": {
+      "key": "spring/secretion",
+      "current": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/birth.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 56,
+        "durationMs": 1790,
+        "referenceLength": 65,
+        "finalFrame": {
+          "alpha128BBox": [
+            403,
+            370,
+            457,
+            435
+          ],
+          "opaqueSize": [
+            54,
+            65
+          ]
+        },
+        "fullScene": false,
+        "hasSceneLayers": false
+      },
+      "recoverableHigherResolution": true,
+      "status": "native-mapping-ready",
+      "usesPebblePackedBirthRuntime": false,
+      "currentBodyOnlyImage": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/birth.png",
+      "localSourcePath": "/workspace/scratch/cdf786db13f9/art-review/spring-secretion-birth-fullscene-v1-20261107/spring-secretion-birth-footless-body-v1-sheet.png",
+      "localSourceSHA256": "1e6cd8aff0bc09d0e85f51f300a60db4c83f667076aa89268df2b9c4b7737b23",
+      "nativeBodyFrames": {
+        "image": "DesignAssets/Animations/BirthResolutionV1/spring-secretion-body.png",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "frameCount": 13,
+        "samples": [
+          {
+            "frame": 0,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 0,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 1,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 2,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 3,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 4,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              304.52,
+              196.10000000000002,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              312.3523076923077,
+              198.20701183431953,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              322.7953846153846,
+              207.57150887573965,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              333.2384615384616,
+              224.42760355029588,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              343.6815384615385,
+              248.77529585798817,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              354.12461538461537,
+              280.6145857988165,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 5,
+            "destination": [
+              364.56769230769225,
+              319.94547337278107,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 6,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 7,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 8,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 9,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 10,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 11,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          },
+          {
+            "frame": 12,
+            "destination": [
+              372.4,
+              354.36,
+              92.16,
+              92.16
+            ]
+          }
+        ]
+      },
+      "sourceProvenance": {
+        "manifest": "/workspace/scratch/cdf786db13f9/art-review/spring-secretion-birth-fullscene-v1-20261107/manifest.json",
+        "generator": "/workspace/scratch/cdf786db13f9/art-review/spring-secretion-birth-fullscene-v1-20261107/render.mjs",
+        "bodyManifest": "/workspace/scratch/cdf786db13f9/art-review/spring-secretion-birth-fullscene-v1-20261107/body-manifest.json",
+        "mapping": "frames[0:56].bodyCel/bodyX/bodyY/bodyScale. Last 57th sample is 650ms review-only hold; omit it. Preserve current 1790ms durations.",
+        "upstreamResampling": "Generated ~314x326 full cells were uniformly scaled 1.47 during prior approved body packaging. Use existing 512px body rather than inventing new resolution. Source detail remains far higher than current 54x65px final raster."
+      },
+      "sourceCellToSceneScale": [
+        0.18,
+        0.18
+      ],
+      "nativeSourceFinalFrame": {
+        "alpha128BBox": [
+          172,
+          86,
+          470,
+          449
+        ],
+        "opaqueSize": [
+          298,
+          363
+        ]
+      },
+      "equivalence": {
+        "report": "/workspace/scratch/cdf786db13f9/Spawner/tools/birth-resolution-20261108/equivalence-spring-secretion.json",
+        "currentComparator": "Registered body-only birth atlas",
+        "sampleCount": 56,
+        "pixelExactSamples": 20,
+        "minimumAlpha128IoU": 0.9681846537741734,
+        "meanAlpha128IoU": 0.9895349730964333,
+        "maximumRGBAMeanDifferenceOnBody": 5.887228260869565,
+        "finalCurrentBBox": [
+          403,
+          370,
+          457,
+          435
+        ],
+        "finalReconstructedBBox": [
+          403,
+          370,
+          457,
+          435
+        ],
+        "notes": "Existing source-authored whole-cell mapping; nonzero color differences arise from historical different rasterizers/quantization. No claim of all-pixel equivalence. Dimensions and clock are preserved."
+      }
+    },
+    "spring/antenna": {
+      "key": "spring/antenna",
+      "current": {
+        "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/birth.png",
+        "frameSize": 236,
+        "frameHeight": 236,
+        "columns": 4,
+        "frameCount": 13,
+        "durationMs": 1790,
+        "referenceLength": 105,
+        "finalFrame": {
+          "alpha128BBox": [
+            111,
+            103,
+            191,
+            206
+          ],
+          "opaqueSize": [
+            80,
+            103
+          ]
+        },
+        "fullScene": false,
+        "hasSceneLayers": false
+      },
+      "recoverableHigherResolution": false,
+      "usesPebblePackedBirthRuntime": false,
+      "status": "no-verified-larger-source-mapping",
+      "reason": "Current native body-only sheet was verified; no surviving higher-resolution equivalent whole-body sequence with matching poses and clock was found in inspected paths. Do not substitute idle art or earlier rejected poses.",
+      "sourceProvenance": {
+        "path": "/workspace/scratch/cdf786db13f9/art-review/spring-lifecycle-faithful-v3",
+        "note": "Archived base and antenna birth frames are themselves 236x236, not 512px. The preview generator scales those 236px frames up."
+      }
+    }
+  }
+}

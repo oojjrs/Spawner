@@ -229,7 +229,8 @@
     "dimensions": [
       512,
       256
-    ]
+    ],
+    "sourceFacing": "left"
   },
   {
     "name": "spring-antenna-birth",
@@ -306,7 +307,8 @@
     "dimensions": [
       512,
       256
-    ]
+    ],
+    "sourceFacing": "left"
   },
   {
     "name": "spring-feet-birth",

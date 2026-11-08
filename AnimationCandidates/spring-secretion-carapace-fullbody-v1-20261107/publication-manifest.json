@@ -70,7 +70,8 @@
       "previewLoopCount": 0,
       "sheetSHA256": "1e36e4d766d805712e38b5911461b994e0a3986955fed307b3cb346d73226804",
       "previewSHA256": "83c58319cae39db506334c119cedbb24f384a7a81be794e59175a8b289a8e2d4",
-      "gifSHA256": "3c4f326a52fd432b0ca22d872f0caebfb4d8accb8fc4e34e465a55e342f8c023"
+      "gifSHA256": "3c4f326a52fd432b0ca22d872f0caebfb4d8accb8fc4e34e465a55e342f8c023",
+      "sourceFacing": "left"
     },
     "walk": {
       "frameSize": 480,
@@ -136,7 +137,8 @@
       "previewLoopCount": 0,
       "sheetSHA256": "705b309e9164fa66ca40406cabc5bf1b5ea00490b3f91358dd224586d0bd1826",
       "previewSHA256": "4414634893e7632fecc50ea44c2e159cecfd8cf656d12c0cadfed5cb59dfb702",
-      "gifSHA256": "1fad2622227082ef937ec2a207fd29ae9b34c56a8c1357158341bdb8b74229ce"
+      "gifSHA256": "1fad2622227082ef937ec2a207fd29ae9b34c56a8c1357158341bdb8b74229ce",
+      "sourceFacing": "left"
     },
     "ranged-attack": {
       "frameSize": 480,
@@ -272,7 +274,8 @@
       "previewLoopCount": 0,
       "sheetSHA256": "8ccb3af5a9fe0ffe5cbd7b1a9198a97dbbe9ed81ee5611a9c566a05c79fac79a",
       "previewSHA256": "e6c8a4848d26ae98ad014426d062c2405a0ebb1965b2b71da42d11c7743a35ab",
-      "gifSHA256": "1badb4d3d1800f791ff008a9f0d8cc2a937957b8dc08fd0d0f97d8b26c0e6273"
+      "gifSHA256": "1badb4d3d1800f791ff008a9f0d8cc2a937957b8dc08fd0d0f97d8b26c0e6273",
+      "sourceFacing": "left"
     },
     "birth": {
       "frameSize": 480,
@@ -406,7 +409,8 @@
       "previewLoopCount": 0,
       "sheetSHA256": "e7c305b55fff44be22c7d57f5f937a615ceb655f41ce5e5ce66742aa94297ad5",
       "previewSHA256": "e520dbc857a9bae34955dae86eb3d06e38e6689218855424129903ddad9e65bb",
-      "gifSHA256": "5e496e27c0e2e2669e697b54ee2c82f5e3a0ff657d0bc5dfec291e02899ffcf1"
+      "gifSHA256": "5e496e27c0e2e2669e697b54ee2c82f5e3a0ff657d0bc5dfec291e02899ffcf1",
+      "sourceFacing": "left"
     }
   },
   "gameIntegration": false,

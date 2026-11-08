@@ -3094,7 +3094,8 @@
             ]
           }
         }
-      ]
+      ],
+      "sourceFacing": "left"
     },
     "walk": {
       "image": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp",
@@ -3860,7 +3861,8 @@
             ]
           }
         }
-      ]
+      ],
+      "sourceFacing": "left"
     },
     "jump": {
       "image": "DesignAssets/Tribes/spring/Animations/Units/jump/jump.webp",
@@ -5392,7 +5394,8 @@
             ]
           }
         }
-      ]
+      ],
+      "sourceFacing": "left"
     },
     "hurt": {
       "image": "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp",
@@ -6158,7 +6161,8 @@
             ]
           }
         }
-      ]
+      ],
+      "sourceFacing": "left"
     },
     "death": {
       "image": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
@@ -6548,7 +6552,8 @@
             ]
           }
         }
-      ]
+      ],
+      "sourceFacing": "left"
     },
     "birth": {
       "image": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",

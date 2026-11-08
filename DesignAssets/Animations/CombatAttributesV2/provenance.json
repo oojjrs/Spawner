@@ -1174,7 +1174,8 @@
         true
       ],
       "source": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
-      "frameSize": 512
+      "frameSize": 512,
+      "sourceFacing": "left"
     },
     {
       "tribe": "spring",

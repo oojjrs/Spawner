@@ -72,5 +72,6 @@
     ],
     "sheetSHA256": "e9b385429ae6b813b00e7590dbff7eed063b270df5ba7347d3bcf771c0c3503b",
     "previewSHA256": "624ec27c089fe2113f562bad700ce7d7e2a15086b1e62ac04daed09f8b056319"
-  }
+  },
+  "sourceFacing": "left"
 }

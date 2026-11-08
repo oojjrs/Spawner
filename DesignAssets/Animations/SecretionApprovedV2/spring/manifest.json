@@ -163,6 +163,7 @@
       ],
       "referenceHeight": 201,
       "canonicalCamera": 512
-    }
+    },
+    "sourceFacing": "left"
   }
 ]

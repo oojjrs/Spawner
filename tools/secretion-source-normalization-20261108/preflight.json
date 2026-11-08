@@ -1,0 +1,126 @@
+{
+  "explicit": [
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/idle.png",
+      "kind": "atlas"
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/walk.png",
+      "kind": "atlas"
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/ranged.png",
+      "kind": "atlas"
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/hurt.png",
+      "kind": "atlas"
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/birth.png",
+      "kind": "packedSceneAtlas"
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/death.png",
+      "kind": "atlas"
+    },
+    {
+      "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/idle.png",
+      "kind": "atlas"
+    },
+    {
+      "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/walk.png",
+      "kind": "atlas"
+    },
+    {
+      "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/ranged.png",
+      "kind": "atlas"
+    },
+    {
+      "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/hurt.png",
+      "kind": "atlas"
+    },
+    {
+      "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/birth.png",
+      "kind": "sceneAtlas"
+    },
+    {
+      "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/death.png",
+      "kind": "atlas"
+    },
+    {
+      "image": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/portrait.png",
+      "kind": "portrait"
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/portrait.png",
+      "kind": "portrait"
+    }
+  ],
+  "exactAliases": [
+    {
+      "image": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-ranged-attack-v1-sheet.png",
+      "aliasOf": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/ranged.png"
+    },
+    {
+      "image": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-idle-v1-sheet.png",
+      "aliasOf": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/idle.png"
+    },
+    {
+      "image": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-walk-v1-sheet.png",
+      "aliasOf": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/walk.png"
+    },
+    {
+      "image": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-hurt-v1-sheet.png",
+      "aliasOf": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/hurt.png"
+    },
+    {
+      "image": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-birth-v1-sheet.png",
+      "aliasOf": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/birth.png"
+    },
+    {
+      "image": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-death-v1-sheet.png",
+      "aliasOf": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/death.png"
+    },
+    {
+      "image": "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-appearance.png",
+      "aliasOf": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/portrait.png"
+    },
+    {
+      "image": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-idle-v1-sheet.png",
+      "aliasOf": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/idle.png"
+    },
+    {
+      "image": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-hurt-v1-sheet.png",
+      "aliasOf": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/hurt.png"
+    },
+    {
+      "image": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-walk-v1-sheet.png",
+      "aliasOf": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/walk.png"
+    },
+    {
+      "image": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-death-v1-sheet.png",
+      "aliasOf": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/death.png"
+    },
+    {
+      "image": "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/pebble-secretion-carapace-ranged-attack-v1-sheet.png",
+      "aliasOf": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/ranged.png"
+    },
+    {
+      "image": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/secretion-carapace/birth.png",
+      "aliasOf": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/birth.png"
+    }
+  ],
+  "missingCovers": [
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-idle-v1-cover.png",
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-walk-v1-cover.png",
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-ranged-attack-v1-cover.png",
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-hurt-v1-cover.png",
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-birth-v1-cover.png",
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/pebble-secretion-carapace-antenna-death-v1-cover.png"
+  ],
+  "manifests": [
+    "AnimationCandidates/pebble-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/publication-manifest.json"
+  ]
+}

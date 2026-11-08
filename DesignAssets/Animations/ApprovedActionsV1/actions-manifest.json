@@ -136,7 +136,7 @@
       "sha256": "064d6b34196b02b5092a079c73fbed3bca065645e3e141eeaa8033be007c3d88",
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -159,7 +159,7 @@
       "sha256": "72470f0882cb54073ac08219e84bc738da8b98a6d33f94bfc3f5b9ba9a2618e2",
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 314,
         "frameHeight": 314,
         "columns": 4,
@@ -182,7 +182,7 @@
       "sha256": "4d956f01d6c0e47f4f7b4ec61496621394aac27d6ee746f7b62d426a5cde67ee",
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 352,
         "frameHeight": 352,
         "columns": 4,
@@ -1371,7 +1371,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -1492,7 +1492,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -1547,9 +1547,9 @@
     {
       "slot": "spring/gather/attack",
       "source": "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1-sheet.png",
-      "sourceSha256": "e9b385429ae6b813b00e7590dbff7eed063b270df5ba7347d3bcf771c0c3503b",
+      "sourceSha256": "bae3fcde90f63645d1094d27486856161eb9d4843127e6048c8beb17d89102ac",
       "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/attack.png",
-      "sha256": "e9b385429ae6b813b00e7590dbff7eed063b270df5ba7347d3bcf771c0c3503b",
+      "sha256": "bae3fcde90f63645d1094d27486856161eb9d4843127e6048c8beb17d89102ac",
       "provenance": {
         "kind": "source-byte-copy",
         "sourceMetadata": [
@@ -1565,7 +1565,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -1639,7 +1639,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -1710,7 +1710,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -2217,7 +2217,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 314,
         "frameHeight": 314,
         "columns": 4,
@@ -2290,7 +2290,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -2421,7 +2421,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -3132,7 +3132,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 352,
         "frameHeight": 352,
         "columns": 4,
@@ -3205,7 +3205,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 448,
         "frameHeight": 448,
         "columns": 4,
@@ -4552,7 +4552,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -5687,7 +5687,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 352,
         "frameHeight": 352,
         "columns": 4,
@@ -5725,7 +5725,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/walk.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -5767,7 +5767,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 352,
         "frameHeight": 352,
         "columns": 4,

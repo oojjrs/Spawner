@@ -1,0 +1,11 @@
+{
+  "status": "completed",
+  "files": [
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+    "AnimationCandidates/pebble-secretion-carapace-antenna-fullbody-v1-20261107/manifest.json",
+    "client/antenna-combo-assets.mjs"
+  ],
+  "birthPivotX": 118.0,
+  "rawSourcesLocated": 6,
+  "perFramePackingVerified": 48
+}

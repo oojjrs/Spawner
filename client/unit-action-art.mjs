@@ -71,7 +71,8 @@ export function unitActionArtPose(agent, time) {
 
 export function createUnitActionArt(assetSource, createSurface, loadImage) {
   const images = new Map(), pending = new Map(), bounds = new Map(), retryAfter = new Map();
-  // Only opt-in birth scenes may composite an environment and one intact body.
+  // Birth scenes use an environment plus one intact body (v1), or a native
+  // body-only source (v2). Neither mode splits anatomy or adds a second clock.
   // Weak keys avoid retaining decoded scene metadata after catalogs are replaced.
   const sceneDefinitions = new WeakMap(), layerRecency = new Map();
   const maxLayerImages = 64;
@@ -80,9 +81,11 @@ export function createUnitActionArt(assetSource, createSurface, loadImage) {
     if (sceneDefinitions.has(animation)) return sceneDefinitions.get(animation);
     const scene = animation.sceneLayers, layers = scene.layers;
     const positiveInteger = value => Number.isSafeInteger(value) && value > 0;
-    const valid = positiveInteger(animation.frameCount) && Number.isFinite(animation.pivotX) && Number.isFinite(animation.pivotY) && scene.version === 1 && Array.isArray(layers) && layers.length === 2 &&
-      layers[0]?.role === "environment" && layers[1]?.role === "body" && layers[1].wholeBody === true && layers[0].wholeBody !== true &&
-      layers[0].image !== layers[1].image && layers.every(layer => layer.image !== animation.image) &&
+    const valid = positiveInteger(animation.frameCount) && Number.isFinite(animation.pivotX) && Number.isFinite(animation.pivotY) && Array.isArray(layers) && (
+        scene.version === 1 && layers.length === 2 && layers[0]?.role === "environment" &&
+          layers[1]?.role === "body" && layers[1].wholeBody === true && layers[0].wholeBody !== true && layers[0].image !== layers[1].image ||
+        scene.version === 2 && layers.length === 1 && layers[0]?.role === "body" && layers[0].wholeBody === true
+      ) && layers.every(layer => layer.image !== animation.image) &&
       layers.every(layer => typeof layer.image === "string" && layer.image.length > 0 &&
         positiveInteger(layer.frameSize) && positiveInteger(layer.frameHeight) &&
         positiveInteger(layer.columns) && positiveInteger(layer.frameCount) &&
@@ -211,7 +214,8 @@ export function createUnitActionArt(assetSource, createSurface, loadImage) {
     const scale = cell * unitDisplaySize(agent) / (animation.referenceLength || reference.length) * (animation.referenceLength ? 1 : cameraScale);
     const crop = { x: pose.frame % animation.columns * width, y: Math.floor(pose.frame / animation.columns) * height, width, height };
     const destination = { x: -animation.pivotX * scale, y: -animation.pivotY * scale, width: width * scale, height: height * scale };
-    context.save(); context.translate(x, floor); context.scale(unitFrameMirror(animation.sourceFacing, mirror ? -1 : 1) ? -1 : 1, 1);
+    context.save(); context.imageSmoothingEnabled = true; context.imageSmoothingQuality = "high";
+    context.translate(x, floor); context.scale(unitFrameMirror(animation.sourceFacing, mirror ? -1 : 1) ? -1 : 1, 1);
     if (layered) {
       for (const layer of layers) {
         touchLayer(layer);

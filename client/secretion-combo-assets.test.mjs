@@ -34,7 +34,7 @@ test('published secretion combinations expose exact source clips and portraits',
     if(source.hitTimeMs!==undefined) assert.equal(clip.hitTimeMs,source.hitTimeMs);
     assert.ok(clip.durationsMs.some((_,i)=>clip.durationsMs.slice(0,i).reduce((a,b)=>a+b,0)===clip.hitTimeMs));
    }
-   assert.equal(clip.sourceFacing,'right');
+   assert.equal(clip.sourceFacing,source.sourceFacing || 'right');
    assert.ok(clip.referenceLength>0&&clip.referenceLength===clip.viewSize);
    assert.deepEqual(imageDimensions(resolve(root,clip.image)),[clip.frameSize*clip.columns,clip.frameHeight*Math.ceil(clip.frameCount/clip.columns)]);
   }
@@ -48,7 +48,7 @@ test('birth includes nest/travel and anchors the finished body; ranged uses exac
   assert.equal(birth.worldTravelIncludedInPixels,true);
   assert.equal(birth.sceneAnchor,'final-body-floor');
   assert.ok(birth.referenceLength<definition.reference.referenceLength);
-  assert.ok(birth.pivotX>birth.frameSize/2&&birth.pivotY>birth.frameHeight/2);
+  assert.ok((birth.sourceFacing==='left'?birth.pivotX<birth.frameSize/2:birth.pivotX>birth.frameSize/2)&&birth.pivotY>birth.frameHeight/2);
   assert.equal(ranged.rangedBody,true);
   assert.ok(ranged.launchAtMs>0&&ranged.launchAtMs<ranged.durationMs);
   let elapsed=0;const starts=ranged.durationsMs.map(ms=>{const start=elapsed;elapsed+=ms;return start;});

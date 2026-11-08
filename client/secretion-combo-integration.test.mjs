@@ -7,6 +7,7 @@ import { UNIT_APPEARANCE_BITS, UNIT_APPEARANCE_TRIBES, unitAppearanceMaskFromAtt
 import { UNIT_COMBINATION_FORMS, UNIT_COMBINATION_MASKS } from './unit-combination-forms.mjs';
 import { unitCombinationAppearance, unitDisplayAttributes, unitDominantAppearanceMask, UNIT_DISPLAY_FORM_COUNT } from './unit-display-appearance.mjs';
 import { SECRETION_COMBO_ACTION_ART } from './secretion-combo-assets.mjs';
+import { UNIT_BIRTH_ART } from './unit-birth-art-assets.mjs';
 import { unitActionArtDefinition, unitActionArtPose } from './unit-action-art.mjs';
 import { beanHeldHurtSource } from './bean-held-hurt.mjs';
 import { speciesHeldHurtSource } from './species-held-hurt.mjs';
@@ -56,7 +57,9 @@ for (const tribe of UNIT_APPEARANCE_TRIBES) for (const form of forms) test(`${tr
   };
   for (const action of expected) {
     const pose = unitActionArtPose({ ...unit, ...samples[action] }, .1);
-    assert.equal(pose.action, action); assert.equal(pose.animation, clips[action]); assert.equal(pose.missing, false);
+    assert.equal(pose.action, action);
+    const expectedClip = action === 'birth' ? UNIT_BIRTH_ART[tribe + '/' + form.key] || clips.birth : clips[action];
+    assert.equal(pose.animation, expectedClip); assert.equal(pose.missing, false);
   }
   const rangedAtRelease = unitActionArtPose({ ...unit, ...samples.ranged }, .2);
   const cue = clips.ranged.launchAtMs;

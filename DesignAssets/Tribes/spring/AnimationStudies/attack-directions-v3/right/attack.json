@@ -47,5 +47,12 @@
     1,
     0
   ],
-  "runtimeRegistration": {"frameSize":164,"pivotX":82,"pivotY":144,"viewSize":164,"registrationScale":1.0061349693251533}
+  "runtimeRegistration": {
+    "frameSize": 164,
+    "pivotX": 82,
+    "pivotY": 144,
+    "viewSize": 164,
+    "registrationScale": 1.0061349693251533
+  },
+  "sourceFacing": "left"
 }

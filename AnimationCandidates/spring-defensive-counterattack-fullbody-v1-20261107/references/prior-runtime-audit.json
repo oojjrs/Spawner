@@ -1,0 +1,82 @@
+{
+  "baseMotion": {
+    "image": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
+    "sourceFacing": "left",
+    "frameSize": 516,
+    "frameHeight": 516,
+    "columns": 4,
+    "frameCount": 16,
+    "durationsMs": [
+      60,
+      70,
+      60,
+      80,
+      30,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      70,
+      80,
+      90,
+      100,
+      60
+    ],
+    "pivotX": 258,
+    "pivotY": 453.07317073170736,
+    "viewSize": 516,
+    "registrationScale": 1.0061349693251533,
+    "loop": false
+  },
+  "baseMotionSHA256": "f6bf977bbfd72490410192c6c70e6ec17accb294f3f69e5b0626936760547e58",
+  "priorAttackSlots": {
+    "carapace": {
+      "image": "DesignAssets/Animations/CombatAttributesV7/spring/Sheets/carapace/attack.webp",
+      "sourceFacing": "left",
+      "frameSize": 256,
+      "frameHeight": 256,
+      "columns": 8,
+      "frameCount": 24,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        30,
+        30,
+        40,
+        40,
+        50,
+        50,
+        60,
+        60,
+        80,
+        80,
+        80,
+        60
+      ],
+      "pivotX": 128,
+      "pivotY": 230,
+      "viewSize": 256,
+      "registrationScale": 1,
+      "loop": false
+    },
+    "antenna": null,
+    "carapace-antenna": null
+  },
+  "findings": {
+    "carapace": "Existing 24-cell squash-based attack is replaced by a directionally readable full-body contact counterattack.",
+    "antenna": "No attack slot before this task.",
+    "carapace-antenna": "No attack slot before this task."
+  }
+}

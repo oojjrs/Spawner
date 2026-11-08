@@ -1,0 +1,10 @@
+✔ all eleven bean combo births retain the 3850 ms motion clock and enter idle at readyAt (21.494114ms)
+✔ all eleven trimmed births preserve baked fallback crops in both facings through the final body (59.882964ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 201.647415

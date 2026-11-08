@@ -55,5 +55,6 @@
     "floorY": 448,
     "originalApprovedBytesUnchanged": true
   },
-  "integration": "Planning preview only. Game runtime and deployment are unchanged."
+  "integration": "Planning preview only. Game runtime and deployment are unchanged.",
+  "sourceFacing": "left"
 }

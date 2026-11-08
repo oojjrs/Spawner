@@ -1,0 +1,977 @@
+{
+  "scope": 28,
+  "finding": "No new side-swapped neutral or incompatible front/back source identified in reviewed body clips. Whole-body frame mirroring remains a candidate for all 28, but shared birth environment atlases/scene layout must be handled separately and consistently, not mirrored per appearance.",
+  "limitations": [
+    "Layered births: reviewed every unique source layer frame; baked composite fallback sampled first/middle/end, not every baked frame.",
+    "Does not certify rendering registration/pivot/scene placement after a future transform.",
+    "Previous ranged-direction uncertainty remains."
+  ],
+  "entries": [
+    {
+      "key": "bean/blade-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/bean/blade-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/feaa7a2068651798837fc5296d08623ad04b81c1572178fba3f50895d8e2dc72.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+          "allConsumers": [
+            "bean/blade-antenna",
+            "bean/blade-carapace-antenna",
+            "bean/blade-secretion-antenna",
+            "bean/blade-secretion-carapace-antenna",
+            "bean/carapace-antenna",
+            "bean/secretion-antenna",
+            "bean/secretion-carapace-antenna",
+            "bean/blade-carapace",
+            "bean/secretion-carapace",
+            "bean/blade-secretion",
+            "bean/blade-secretion-carapace",
+            "bean/base"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/bean/blade-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "bean/blade-carapace-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/79de88f6e96abaffcfca8b35e080ed08fc8e82e402adb256e5e6f91c76c68c10.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+          "allConsumers": [
+            "bean/blade-antenna",
+            "bean/blade-carapace-antenna",
+            "bean/blade-secretion-antenna",
+            "bean/blade-secretion-carapace-antenna",
+            "bean/carapace-antenna",
+            "bean/secretion-antenna",
+            "bean/secretion-carapace-antenna",
+            "bean/blade-carapace",
+            "bean/secretion-carapace",
+            "bean/blade-secretion",
+            "bean/blade-secretion-carapace",
+            "bean/base"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "bean/blade-secretion-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/06d19a033b831451da2c194676455b97c3ccf1f3f91b2313272042716e421e15.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+          "allConsumers": [
+            "bean/blade-antenna",
+            "bean/blade-carapace-antenna",
+            "bean/blade-secretion-antenna",
+            "bean/blade-secretion-carapace-antenna",
+            "bean/carapace-antenna",
+            "bean/secretion-antenna",
+            "bean/secretion-carapace-antenna",
+            "bean/blade-carapace",
+            "bean/secretion-carapace",
+            "bean/blade-secretion",
+            "bean/blade-secretion-carapace",
+            "bean/base"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "bean/blade-secretion-carapace-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/a1f0c0a6415f2acd1eac1a749fdeecfc398e3c9b06e76c38bc4d9f4f65fd0079.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+          "allConsumers": [
+            "bean/blade-antenna",
+            "bean/blade-carapace-antenna",
+            "bean/blade-secretion-antenna",
+            "bean/blade-secretion-carapace-antenna",
+            "bean/carapace-antenna",
+            "bean/secretion-antenna",
+            "bean/secretion-carapace-antenna",
+            "bean/blade-carapace",
+            "bean/secretion-carapace",
+            "bean/blade-secretion",
+            "bean/blade-secretion-carapace",
+            "bean/base"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "bean/carapace-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/bean/carapace-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/fc7cc058cbfbe50514d1bfc4abd6b098da3b392a05359f865c9a786e79afc960.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+          "allConsumers": [
+            "bean/blade-antenna",
+            "bean/blade-carapace-antenna",
+            "bean/blade-secretion-antenna",
+            "bean/blade-secretion-carapace-antenna",
+            "bean/carapace-antenna",
+            "bean/secretion-antenna",
+            "bean/secretion-carapace-antenna",
+            "bean/blade-carapace",
+            "bean/secretion-carapace",
+            "bean/blade-secretion",
+            "bean/blade-secretion-carapace",
+            "bean/base"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/bean/carapace-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "bean/secretion-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/bean/secretion-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/41504167e08d82d67d7eeb62a3b0c708cba7a3396e4d2c45acf995ca3ec77690.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+          "allConsumers": [
+            "bean/blade-antenna",
+            "bean/blade-carapace-antenna",
+            "bean/blade-secretion-antenna",
+            "bean/blade-secretion-carapace-antenna",
+            "bean/carapace-antenna",
+            "bean/secretion-antenna",
+            "bean/secretion-carapace-antenna",
+            "bean/blade-carapace",
+            "bean/secretion-carapace",
+            "bean/blade-secretion",
+            "bean/blade-secretion-carapace",
+            "bean/base"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/bean/secretion-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "bean/secretion-carapace-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/bean/secretion-carapace-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/6eb3772024439756ae332954cdc0f39560920e2633d6947671840f6671993ac8.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+          "allConsumers": [
+            "bean/blade-antenna",
+            "bean/blade-carapace-antenna",
+            "bean/blade-secretion-antenna",
+            "bean/blade-secretion-carapace-antenna",
+            "bean/carapace-antenna",
+            "bean/secretion-antenna",
+            "bean/secretion-carapace-antenna",
+            "bean/blade-carapace",
+            "bean/secretion-carapace",
+            "bean/blade-secretion",
+            "bean/blade-secretion-carapace",
+            "bean/base"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/bean/secretion-carapace-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "spore/blade-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/spore/blade-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/0a087ce9ab5b831980be1b42c98563ffc3de01c3a1f4313dd4a332453b9d9d8f.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+          "allConsumers": [
+            "spore/blade-antenna",
+            "spore/blade-carapace-antenna",
+            "spore/blade-secretion-antenna",
+            "spore/blade-secretion-carapace-antenna",
+            "spore/carapace-antenna",
+            "spore/secretion-antenna",
+            "spore/secretion-carapace-antenna",
+            "spore/blade-carapace",
+            "spore/secretion-carapace",
+            "spore/blade-secretion",
+            "spore/blade-secretion-carapace"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/spore/blade-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "spore/blade-carapace-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/spore/blade-carapace-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/8c6f88bf86ab65466e1bedc34dd40ceffd3f2f9958404283e164b0b58d7b21b1.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+          "allConsumers": [
+            "spore/blade-antenna",
+            "spore/blade-carapace-antenna",
+            "spore/blade-secretion-antenna",
+            "spore/blade-secretion-carapace-antenna",
+            "spore/carapace-antenna",
+            "spore/secretion-antenna",
+            "spore/secretion-carapace-antenna",
+            "spore/blade-carapace",
+            "spore/secretion-carapace",
+            "spore/blade-secretion",
+            "spore/blade-secretion-carapace"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/spore/blade-carapace-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "spore/blade-secretion-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/fb1e5c6fee96b4e1e562b3f342c606a2cbd188f202eb8858de199ba5fcbc22aa.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+          "allConsumers": [
+            "spore/blade-antenna",
+            "spore/blade-carapace-antenna",
+            "spore/blade-secretion-antenna",
+            "spore/blade-secretion-carapace-antenna",
+            "spore/carapace-antenna",
+            "spore/secretion-antenna",
+            "spore/secretion-carapace-antenna",
+            "spore/blade-carapace",
+            "spore/secretion-carapace",
+            "spore/blade-secretion",
+            "spore/blade-secretion-carapace"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "spore/blade-secretion-carapace-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-carapace-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/d8e342c948e0fe6664aa3b0b564cb9f3b6b6e6a3573c5847e49c3b6f0e082ce2.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+          "allConsumers": [
+            "spore/blade-antenna",
+            "spore/blade-carapace-antenna",
+            "spore/blade-secretion-antenna",
+            "spore/blade-secretion-carapace-antenna",
+            "spore/carapace-antenna",
+            "spore/secretion-antenna",
+            "spore/secretion-carapace-antenna",
+            "spore/blade-carapace",
+            "spore/secretion-carapace",
+            "spore/blade-secretion",
+            "spore/blade-secretion-carapace"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/spore/blade-secretion-carapace-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "spore/carapace-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/spore/carapace-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/4ee35e38c111d5807aa869fad0c6710dfdc0b85e9576b1ffc0abe390736d5267.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+          "allConsumers": [
+            "spore/blade-antenna",
+            "spore/blade-carapace-antenna",
+            "spore/blade-secretion-antenna",
+            "spore/blade-secretion-carapace-antenna",
+            "spore/carapace-antenna",
+            "spore/secretion-antenna",
+            "spore/secretion-carapace-antenna",
+            "spore/blade-carapace",
+            "spore/secretion-carapace",
+            "spore/blade-secretion",
+            "spore/blade-secretion-carapace"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/spore/carapace-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "spore/secretion-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/spore/secretion-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/b54eae3d0a281f0182602fcb89f889e97875af1a6f35bb249240211411f9578d.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+          "allConsumers": [
+            "spore/blade-antenna",
+            "spore/blade-carapace-antenna",
+            "spore/blade-secretion-antenna",
+            "spore/blade-secretion-carapace-antenna",
+            "spore/carapace-antenna",
+            "spore/secretion-antenna",
+            "spore/secretion-carapace-antenna",
+            "spore/blade-carapace",
+            "spore/secretion-carapace",
+            "spore/blade-secretion",
+            "spore/blade-secretion-carapace"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/spore/secretion-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "spore/secretion-carapace-antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Animations/AntennaCombosV1/spore/secretion-carapace-antenna/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/1f9a208fdb80c8d6a210f2827915a43ca37385c8a72aec8f9718f8f684aa12eb.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+          "allConsumers": [
+            "spore/blade-antenna",
+            "spore/blade-carapace-antenna",
+            "spore/blade-secretion-antenna",
+            "spore/blade-secretion-carapace-antenna",
+            "spore/carapace-antenna",
+            "spore/secretion-antenna",
+            "spore/secretion-carapace-antenna",
+            "spore/blade-carapace",
+            "spore/secretion-carapace",
+            "spore/blade-secretion",
+            "spore/blade-secretion-carapace"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/AntennaCombosV1/spore/secretion-carapace-antenna/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "bean/blade-carapace",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": true,
+      "birthPath": "DesignAssets/Animations/BladeCarapaceV1/bean/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthResolutionV1/bean-blade-carapace-body.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+          "allConsumers": [
+            "bean/blade-antenna",
+            "bean/blade-carapace-antenna",
+            "bean/blade-secretion-antenna",
+            "bean/blade-secretion-carapace-antenna",
+            "bean/carapace-antenna",
+            "bean/secretion-antenna",
+            "bean/secretion-carapace-antenna",
+            "bean/blade-carapace",
+            "bean/secretion-carapace",
+            "bean/blade-secretion",
+            "bean/blade-secretion-carapace",
+            "bean/base"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/BladeCarapaceV1/bean/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "spore/blade-carapace",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": true,
+      "birthPath": "DesignAssets/Animations/BladeCarapaceV1/spore/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthResolutionV1/spore-blade-carapace-body.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+          "allConsumers": [
+            "spore/blade-antenna",
+            "spore/blade-carapace-antenna",
+            "spore/blade-secretion-antenna",
+            "spore/blade-secretion-carapace-antenna",
+            "spore/carapace-antenna",
+            "spore/secretion-antenna",
+            "spore/secretion-carapace-antenna",
+            "spore/blade-carapace",
+            "spore/secretion-carapace",
+            "spore/blade-secretion",
+            "spore/blade-secretion-carapace"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/BladeCarapaceV1/spore/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "bean/secretion-carapace",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": true,
+      "birthPath": "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthResolutionV1/bean-secretion-carapace-body.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+          "allConsumers": [
+            "bean/blade-antenna",
+            "bean/blade-carapace-antenna",
+            "bean/blade-secretion-antenna",
+            "bean/blade-secretion-carapace-antenna",
+            "bean/carapace-antenna",
+            "bean/secretion-antenna",
+            "bean/secretion-carapace-antenna",
+            "bean/blade-carapace",
+            "bean/secretion-carapace",
+            "bean/blade-secretion",
+            "bean/blade-secretion-carapace",
+            "bean/base"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "bean/blade-secretion",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": true,
+      "birthPath": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-body.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+          "allConsumers": [
+            "bean/blade-antenna",
+            "bean/blade-carapace-antenna",
+            "bean/blade-secretion-antenna",
+            "bean/blade-secretion-carapace-antenna",
+            "bean/carapace-antenna",
+            "bean/secretion-antenna",
+            "bean/secretion-carapace-antenna",
+            "bean/blade-carapace",
+            "bean/secretion-carapace",
+            "bean/blade-secretion",
+            "bean/blade-secretion-carapace",
+            "bean/base"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "bean/blade-secretion-carapace",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": true,
+      "birthPath": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthResolutionV1/bean-blade-secretion-carapace-body.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+          "allConsumers": [
+            "bean/blade-antenna",
+            "bean/blade-carapace-antenna",
+            "bean/blade-secretion-antenna",
+            "bean/blade-secretion-carapace-antenna",
+            "bean/carapace-antenna",
+            "bean/secretion-antenna",
+            "bean/secretion-carapace-antenna",
+            "bean/blade-carapace",
+            "bean/secretion-carapace",
+            "bean/blade-secretion",
+            "bean/blade-secretion-carapace",
+            "bean/base"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "spore/secretion-carapace",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": true,
+      "birthPath": "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthResolutionV1/spore-secretion-carapace-body.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+          "allConsumers": [
+            "spore/blade-antenna",
+            "spore/blade-carapace-antenna",
+            "spore/blade-secretion-antenna",
+            "spore/blade-secretion-carapace-antenna",
+            "spore/carapace-antenna",
+            "spore/secretion-antenna",
+            "spore/secretion-carapace-antenna",
+            "spore/blade-carapace",
+            "spore/secretion-carapace",
+            "spore/blade-secretion",
+            "spore/blade-secretion-carapace"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "spore/blade-secretion",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": true,
+      "birthPath": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-body.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+          "allConsumers": [
+            "spore/blade-antenna",
+            "spore/blade-carapace-antenna",
+            "spore/blade-secretion-antenna",
+            "spore/blade-secretion-carapace-antenna",
+            "spore/carapace-antenna",
+            "spore/secretion-antenna",
+            "spore/secretion-carapace-antenna",
+            "spore/blade-carapace",
+            "spore/secretion-carapace",
+            "spore/blade-secretion",
+            "spore/blade-secretion-carapace"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "spore/blade-secretion-carapace",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": true,
+      "birthPath": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthResolutionV1/spore-blade-secretion-carapace-body.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/95de17ba9d0a9489df2c25c32ad7ace2026dd48e10b5cbd0ceb6bc4e1eb7c62d.png",
+          "allConsumers": [
+            "spore/blade-antenna",
+            "spore/blade-carapace-antenna",
+            "spore/blade-secretion-antenna",
+            "spore/blade-secretion-carapace-antenna",
+            "spore/carapace-antenna",
+            "spore/secretion-antenna",
+            "spore/secretion-carapace-antenna",
+            "spore/blade-carapace",
+            "spore/secretion-carapace",
+            "spore/blade-secretion",
+            "spore/blade-secretion-carapace"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/portrait.png",
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "bean/base",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": true,
+      "birthPath": "DesignAssets/Animations/BirthSceneLayersV1/638a6a835b0bc2367c75892b47de7e46b49322130f4e0f58e4450590c31a250c.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthSceneLayersV1/178ff651e68c5a0fe41c745fdf7014e5751d817815b6a50400fe65f4dbfc5d0b.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+          "allConsumers": [
+            "bean/blade-antenna",
+            "bean/blade-carapace-antenna",
+            "bean/blade-secretion-antenna",
+            "bean/blade-secretion-carapace-antenna",
+            "bean/carapace-antenna",
+            "bean/secretion-antenna",
+            "bean/secretion-carapace-antenna",
+            "bean/blade-carapace",
+            "bean/secretion-carapace",
+            "bean/blade-secretion",
+            "bean/blade-secretion-carapace",
+            "bean/base"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": null,
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "bean/gather",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": true,
+      "birthPath": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthResolutionV1/bean-gather-body.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthResolutionV1/bean-seed-b.png",
+          "allConsumers": [
+            "bean/gather",
+            "bean/secretion",
+            "bean/antenna"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": null,
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [
+        {
+          "action": "harvest",
+          "path": "DesignAssets/Animations/GatherWorkV1/bean/harvest.webp",
+          "reusesOtherAction": false
+        },
+        {
+          "action": "carry",
+          "path": "DesignAssets/Animations/GatherWorkV1/bean/carry.webp",
+          "reusesOtherAction": false
+        },
+        {
+          "action": "throw",
+          "path": "DesignAssets/Animations/GatherWorkV1/bean/throw.webp",
+          "reusesOtherAction": false
+        }
+      ],
+      "notes": []
+    },
+    {
+      "key": "bean/secretion",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": true,
+      "birthPath": "DesignAssets/Animations/ApprovedActionsV1/bean/secretion/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthResolutionV1/bean-secretion-body.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthResolutionV1/bean-seed-b.png",
+          "allConsumers": [
+            "bean/gather",
+            "bean/secretion",
+            "bean/antenna"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": null,
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [
+        {
+          "action": "harvest",
+          "path": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+          "reusesOtherAction": true
+        },
+        {
+          "action": "carry",
+          "path": "DesignAssets/Animations/UnitRangedV1/bean/walk.webp",
+          "reusesOtherAction": true
+        },
+        {
+          "action": "throw",
+          "path": "DesignAssets/Animations/UnitRangedV1/bean/shoot.webp",
+          "reusesOtherAction": true
+        }
+      ],
+      "notes": [
+        "Secretion nozzle disappears in late collapsed death frames; non-directional design loss, not a horizontal reversal."
+      ]
+    },
+    {
+      "key": "spore/base",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": false,
+      "birthPath": "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp",
+      "birthBodyLayers": [],
+      "birthEnvironmentLayers": [],
+      "birthReview": "all frames",
+      "hurtDeathReview": "all configured frames",
+      "portrait": null,
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [],
+      "notes": []
+    },
+    {
+      "key": "spore/secretion",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": true,
+      "birthPath": "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/birth.png",
+      "birthBodyLayers": [
+        "DesignAssets/Animations/BirthResolutionV1/spore-secretion-body.png"
+      ],
+      "birthEnvironmentLayers": [
+        {
+          "path": "DesignAssets/Animations/BirthResolutionV1/spore-secretion-stalk.png",
+          "allConsumers": [
+            "spore/secretion"
+          ]
+        }
+      ],
+      "birthReview": "all unique body-layer frames + all unique environment frames, composite 0/middle/end",
+      "hurtDeathReview": "all configured frames",
+      "portrait": null,
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [
+        {
+          "action": "harvest",
+          "path": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
+          "reusesOtherAction": true
+        },
+        {
+          "action": "carry",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/walk.png",
+          "reusesOtherAction": true
+        },
+        {
+          "action": "throw",
+          "path": "DesignAssets/Animations/UnitRangedV1/spore/shoot.webp",
+          "reusesOtherAction": true
+        }
+      ],
+      "notes": []
+    },
+    {
+      "key": "spore/antenna",
+      "bodyFamilyMirrorCandidate": true,
+      "newDirectionalMismatchObserved": false,
+      "birthOverride": true,
+      "birthPath": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/birth.png",
+      "birthBodyLayers": [],
+      "birthEnvironmentLayers": [],
+      "birthReview": "all frames",
+      "hurtDeathReview": "all configured frames",
+      "portrait": null,
+      "runtimePortrait": "reference/idle via attribute-animation.mjs portrait -> art.draw; reference first frame inspected",
+      "work": [
+        {
+          "action": "harvest",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/idle.png",
+          "reusesOtherAction": true
+        },
+        {
+          "action": "carry",
+          "path": "DesignAssets/Animations/TribeMinorV1/spore/antenna/walk.webp",
+          "reusesOtherAction": true
+        },
+        {
+          "action": "throw",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/idle.png",
+          "reusesOtherAction": true
+        }
+      ],
+      "notes": []
+    }
+  ]
+}

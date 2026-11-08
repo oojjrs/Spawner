@@ -1,0 +1,58 @@
+[
+  {
+    "key": "pebble/carapace-antenna",
+    "sourcePath": "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace-antenna/attack.png",
+    "candidatePath": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/pebble-carapace-antenna/attack.png",
+    "sha256": "447098fee6876335ee822e372448d11f6c271a41ee2db662f9510f2942c7417a",
+    "geometryAndTimingUnchanged": true,
+    "sourceFacing": "left"
+  },
+  {
+    "key": "spring/antenna",
+    "sourcePath": "DesignAssets/Animations/DefensiveAttackV1/spring/antenna/attack.png",
+    "candidatePath": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/spring-antenna/attack.png",
+    "sha256": "98af159a97b0820b6ecdf7d6804fefc56ebb62c8bcf0be3c210e98c1246767d6",
+    "geometryAndTimingUnchanged": true,
+    "sourceFacing": "left"
+  },
+  {
+    "key": "spring/base",
+    "sourcePath": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
+    "candidatePath": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/spring-base/attack.webp",
+    "sha256": "38cbbdc1d88de4a69b519c895ae0cb6619e4162f42ae43671f467fc0c9f26a44",
+    "geometryAndTimingUnchanged": true,
+    "sourceFacing": "left"
+  },
+  {
+    "key": "spring/blade-antenna",
+    "sourcePath": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/attack.png",
+    "candidatePath": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/spring-blade-antenna/attack.png",
+    "sha256": "ef27388e824bf12c625cf0b6659e607eaa06bd02e8d2cea7f360581eb9f18abf",
+    "geometryAndTimingUnchanged": true,
+    "sourceFacing": "left"
+  },
+  {
+    "key": "spring/blade-carapace-antenna",
+    "sourcePath": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/attack.png",
+    "candidatePath": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/spring-blade-carapace-antenna/attack.png",
+    "sha256": "a6a5eeb557b2a817883019fd32297bac3cb7865a8925bc5956c0867db84a328b",
+    "geometryAndTimingUnchanged": true,
+    "sourceFacing": "left"
+  },
+  {
+    "key": "spring/carapace-antenna",
+    "sourcePath": "DesignAssets/Animations/DefensiveAttackV1/spring/carapace-antenna/attack.png",
+    "candidatePath": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/spring-carapace-antenna/attack.png",
+    "sha256": "0411b243c15e156bbc1cc5561f850a3262b4f00995277eb504b7e3aaacb136a8",
+    "geometryAndTimingUnchanged": true,
+    "sourceFacing": "left"
+  },
+  {
+    "key": "spring/gather",
+    "sourcePath": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/attack.png",
+    "candidatePath": "/workspace/scratch/cdf786db13f9/art-review/attack-left-source-repair-20261108/spring-gather/attack.png",
+    "sha256": "bae3fcde90f63645d1094d27486856161eb9d4843127e6048c8beb17d89102ac",
+    "geometryAndTimingUnchanged": true,
+    "sourceFacing": "left"
+  }
+]

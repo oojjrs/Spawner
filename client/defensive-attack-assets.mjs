@@ -167,7 +167,7 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
   "pebble/carapace-antenna": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace-antenna/attack.png",
     "sourceManifest": "AnimationCandidates/pebble-carapace-antenna-defensive-attack-v1-20261107/publication-manifest.json",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "frameSize": 512,
     "frameHeight": 512,
     "columns": 4,
@@ -303,7 +303,7 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
   "spring/antenna": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/spring/antenna/attack.png",
     "sourceManifest": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/publication-manifest.json",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "frameSize": 480,
     "frameHeight": 480,
     "columns": 4,
@@ -375,7 +375,7 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
   "spring/carapace-antenna": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/spring/carapace-antenna/attack.png",
     "sourceManifest": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "frameSize": 480,
     "frameHeight": 480,
     "columns": 4,

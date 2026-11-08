@@ -28,5 +28,6 @@
   "durationMs": 800,
   "method": "Approved full-body generated poses; original whole-frame packaging and bytes preserved.",
   "integration": "Planning reference only; game runtime and deployment are unchanged.",
-  "gifRegenerationExact": true
+  "gifRegenerationExact": true,
+  "sourceFacing": "left"
 }

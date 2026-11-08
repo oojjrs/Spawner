@@ -1523,7 +1523,8 @@
       "pivot": [
         128,
         230
-      ]
+      ],
+      "sourceFacing": "left"
     },
     {
       "tribe": "spring",
@@ -1920,7 +1921,8 @@
       "pivot": [
         128,
         230
-      ]
+      ],
+      "sourceFacing": "left"
     },
     {
       "tribe": "spring",
