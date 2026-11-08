@@ -7392,7 +7392,7 @@
       unitDraft.dna = Spawner.cloneDna(dna);
       unitDraft.error = "";
       updateUnitDesign();
-    }, audio.playDna);
+    }, audio.playDna, document.getElementById("design-stats"));
     function dnaDesignValid(dna) {
       return !!Spawner.validateDna(dna, state.nestLevel, state.evolutionPoints);
     }

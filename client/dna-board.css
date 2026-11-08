@@ -47,3 +47,5 @@
 .dna-editor .dna-placement[data-state="blocked"]{border-color:#ff7b89;background:#341820f5;color:#ffb8c1}
 .dna-editor .dna-placement[hidden]{display:none}
 @media(max-width:700px){.dna-editor .dna-gene{height:108px;min-height:108px}.dna-editor .dna-gene-availability{font-size:9px}}
+
+.stats [data-stat].design-stat-highlight,.design-preview [data-stat].design-stat-highlight{background:#d9b65a2b;box-shadow:inset 0 1px #f0ce7d99,inset 0 -1px #f0ce7d99}

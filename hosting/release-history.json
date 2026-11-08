@@ -1,5 +1,12 @@
 [
   {
+    "version_number": 90,
+    "label": "v90",
+    "notes": [
+      "장착 DNA 툴팁과 영향받는 스탯 강조 추가."
+    ]
+  },
+  {
     "version_number": 89,
     "label": "v89",
     "notes": [

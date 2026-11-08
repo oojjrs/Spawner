@@ -9,7 +9,7 @@
   function button(id,glyph,label){$(id).innerHTML=icon(glyph);$(id).setAttribute('aria-label',copy[label]);$(id).title=copy[label];}
   function persist(design){try{localStorage.setItem(storage,JSON.stringify(design));localStorage.setItem(libraryStorage,JSON.stringify(library));}catch{}}
   function refresh(design){const {stats,base}=shared.dnaDesignStats(M,design.pieces);shared.renderDnaDesignStats($('stats'),{...stats,loadSpeed:undefined},base,false);$('sequence').textContent=design.pieces.map(piece=>M.lookup.get(piece.gene).code).join(' ');$('nest-level').value=String(design.level);const valid=M.trace(design.pieces,design.level).valid;$('save-template').disabled=!valid;$('export').disabled=!valid;if(valid)persist(design);}
-  const editor=shared.createDnaEditor($('editor'),M,refresh);
+  const editor=shared.createDnaEditor($('editor'),M,refresh,undefined,$('stats'));
   $('editor').querySelector('.dna-catalog').prepend($('progression'));
   $('progression').hidden=false;
   function loadDesign(design){const value=M.validate(design);if(!value)return false;editor.context(value.level,0,false);if(!editor.load(value,false))return false;refresh(editor.getDesign());editor.fit();$('file-status').textContent='';$('file-status').hidden=true;return true;}
