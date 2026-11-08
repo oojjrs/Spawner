@@ -223,9 +223,8 @@ test("이전 저장의 고기와 양분·갑각 재고·운반을 제거한다",
     amount: 4, initialAmount: 4, diedAt: 120, decaysAt: 420 });
   f.game.restore(JSON.stringify(saved));
   const snapshot = f.game.snapshot();
-  assert.equal(snapshot.resourceInventory.nutrients, undefined);
-  assert.equal(snapshot.resourceInventory.meat, undefined);
-  assert.equal(snapshot.resourceInventory.carapace, undefined);
+  assert.equal(snapshot.resourceInventory, undefined);
+  assert.equal(snapshot.resourceStores, undefined);
   assert.equal(f.game.agents[0].carryingType, null);
   assert.equal(f.game.agents[0].carrying, 0);
   assert.equal(f.game.agents[0].foodDelivery, null);

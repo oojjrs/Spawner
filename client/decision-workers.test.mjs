@@ -16,8 +16,7 @@ function fixture() {
   const game = { agents: [agent], buildings: [], nest: null,
     planDecisions() { throw new Error("AI must not execute on the game worker"); },
     save() { throw new Error("AI must not serialize the whole game"); },
-    decisionSnapshot() { return { state: { agents: this.agents, explored: new Set([1]), knownFood: new Map() } }; },
-    rememberForagers(value) { this.foragers = value; }
+    decisionSnapshot() { return { state: { agents: this.agents, explored: new Set([1]), knownFood: new Map() } }; }
   };
   const room = { simSeconds: 1, hostId: "owner", world: { size: 160 }, food: new Map(), colonies: [],
     games: new Map([["owner", game]]), creatureSystem: { agents: [], burrows: [] } };
@@ -25,7 +24,7 @@ function fixture() {
   function answer(worker) {
     const packet = worker.messages.findLast(message => message.type === "plan");
     worker.emit({ results: packet.requests.map(request => ({ ...request, time: room.simSeconds,
-      candidates: [{ action: "wait", target: { key: "wait" } }], foragerMemory: { time: room.simSeconds, ids: [agent.id] } })) });
+      candidates: [{ action: "wait", target: { key: "wait" } }] })) });
   }
   function restore() {
     planner.dispose();
@@ -49,7 +48,6 @@ test("별도 판단 워커는 게임 계산을 실행하지 않고 Map과 Set �
     assert.equal(f.planner.request("owner", f.agent, "periodic"), undefined);
     f.answer(worker);
     assert.deepEqual(f.planner.request("owner", f.agent, "periodic"), [{ action: "wait", target: { key: "wait" } }]);
-    assert.deepEqual(f.game.foragers.ids, [f.agent.id]);
   } finally { f.restore(); }
 });
 

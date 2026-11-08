@@ -1,10 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
-import { fileURLToPath } from "node:url";
 import { createRoom, chooseRoomTribe, saveRoom, restoreRoom, snapshotRoom, commandRoom, tickRoom } from "./room.mjs";
-import { prepareSite } from "../hosting/prepare-site.mjs";
+import { productionRuntime } from "./production.mjs";
 
 test("개발판 치트는 새 방과 기존 저장의 치트 설정에 관계없이 사용할 수 있다", () => {
   const normal = createRoom("개발 방", 13, "bean", null);
@@ -59,18 +58,13 @@ test("멸망 치트는 탄생 중인 유닛까지 같은 시점에 사망시키�
 });
 
 test("개발·배포 구분은 빌드에서만 처리하고 배포판은 치트 UI와 실행 코드를 포함하지 않는다", () => {
-  const destination = new URL("../$Trash/cheats-production/", import.meta.url);
-  mkdirSync(new URL(".openai/", destination), { recursive: true });
-  writeFileSync(new URL(".openai/hosting.json", destination), readFileSync(new URL("../.openai/hosting.json", import.meta.url)));
   const runtime = readFileSync(new URL("./runtime.js", import.meta.url), "utf8");
   assert.equal(runtime.includes("DEVELOPMENT"), false);
   assert.ok(runtime.includes("cheat-extinction"));
   assert.equal(runtime.includes("room-cheats"), false);
-  prepareSite(fileURLToPath(destination), name => Buffer.from(name === "Spawner.html" ?
-    '<script src="./client/runtime.js"></script>' : runtime), "cheats-test");
-  const production = readFileSync(new URL("dist/client/runtime.js", destination), "utf8");
+  const production = productionRuntime(runtime);
   assert.equal(production.includes("DEVELOPMENT"), false);
-  for (const ui of ["치트 활성화", 'checkbox.id = "room-cheats"', 'panel.id = "cheat-panel"', "cheat-evolution-points", "cheat-resources", "cheat-upgrade", "cheat-heal", "cheat-extinction"]) {
+  for (const ui of ["치트 활성화", 'checkbox.id = "room-cheats"', 'panel.id = "cheat-panel"', "cheat-evolution-points", "cheat-resources", "cheat-heal", "cheat-extinction"]) {
     assert.equal(production.includes(ui), false);
   }
   const browser = createContext({});
@@ -88,7 +82,8 @@ test("개발·배포 구분은 빌드에서만 처리하고 배포판은 치트 
   assert.equal(room.cheats, false);
   room.cheats = true;
   const before = room.games.get(room.hostId).save();
-  assert.throws(() => model.commandRoom(room, { type: "cheat-extinction" }), /지원하지 않는 요청/);
+  for (const type of ["cheat-extinction", "cheat-evolution-points", "cheat-upgrade", "cheat-heal"])
+    assert.throws(() => model.commandRoom(room, { type }), /지원하지 않는 요청/);
   assert.equal(room.games.get(room.hostId).save(), before);
   const saved = model.saveRoom(room);
   saved.cheats = true;

@@ -5,6 +5,7 @@ import { createContext, runInContext } from "node:vm";
 import { createRoom, chooseRoomTribe, saveRoom, restoreRoom, snapshotRoom, commandRoom, tickRoom } from "./room.mjs";
 import { productionRuntime } from "./production.mjs";
 import { PLAYER_TRIBES } from "../server/player-tribes.mjs";
+import { migrateAttributeSlots, migrateAttributeLevels } from "../server/attributes.mjs";
 import { PLAYER_STARTING_POINTS } from "../server/tribe-start.mjs";
 
 const switchTribe = (room, tribe) => commandRoom(room, { type: "cheat-switch-tribe", tribe });
@@ -16,7 +17,6 @@ test("종족을 왕복 전환해도 모든 군락의 진행과 개체 소유권�
   for (const [index, tribe] of PLAYER_TRIBES.entries()) {
     switchTribe(room, tribe.key);
     commandRoom(room, { type: "cheat-evolution-points" });
-    commandRoom(room, { type: "cheat-resources" });
     for (let level = 0; level < index; level++) commandRoom(room, { type: "cheat-upgrade" });
     commandRoom(room, { type: "design", templateId: null, name: tribe.name + " 설계", slots: [], birth: true });
     const game = room.games.get(room.hostId);
@@ -64,7 +64,6 @@ test("전환한 종족의 저장은 미지급 시작 지원금을 한 번만 적
   commandRoom(room, { type: "design", templateId: null, name: "샘방울 설계", slots: [], birth: false });
   switchTribe(room, "spore");
   commandRoom(room, { type: "cheat-evolution-points" });
-  commandRoom(room, { type: "cheat-resources" });
   commandRoom(room, { type: "cheat-upgrade" });
   commandRoom(room, { type: "design", templateId: null, name: "포자 설계", slots: [], birth: true });
   const before = snapshotRoom(room, false);
@@ -78,7 +77,12 @@ test("전환한 종족의 저장은 미지급 시작 지원금을 한 번만 적
   assert.equal(JSON.parse(restored.games.get(restored.hostId).save()).state.startingPointsGranted, true);
   const reopened = restoreRoom(structuredClone(saveRoom(restored)));
   assert.equal(snapshotRoom(reopened, false).state.evolutionPoints, after.state.evolutionPoints);
-  for (const key of ["resourceInventory", "nestLevel", "nestHealth", "templates", "explored", "discoveries"])
+  const templates = before.state.templates.map(template => ({ ...template,
+    slots: migrateAttributeSlots(template.slots),
+    attributeLevels: migrateAttributeLevels(template.slots, template.attributeLevels, before.state.nestLevel),
+    unlockedAttributeLevels: migrateAttributeLevels(Object.keys(template.unlockedAttributeLevels), template.unlockedAttributeLevels, before.state.nestLevel) }));
+  assert.deepEqual(after.state.templates, templates);
+  for (const key of ["resourceInventory", "nestLevel", "nestHealth", "explored", "discoveries"])
     assert.deepEqual(after.state[key], before.state[key]);
   assert.deepEqual(after.state.agents.map(agent => agent.id), before.state.agents.map(agent => agent.id));
   switchTribe(restored, "spring");
