@@ -55,6 +55,7 @@ export function prepareSite(destination, readSource, revision, assetDirectory, r
   for (const source of [...pages.values(), ...[...clients].filter(([name]) => gameClients.has(name)).map(([, source]) => source)]) {
     if (/data:[^;,\s]+;base64,/.test(source)) throw new Error("내장 자산을 DesignAssets 파일로 분리해 주세요.");
     const dependencies = source.replace(/modules\["client\/image-scales\.mjs"\] = \(\(\) => \{[\s\S]*?^\}\)\(\);/m, "")
+      .replace(/(["']sourceBatch["']\s*:\s*)["']DesignAssets\/[^"'\r\n]+["']/g, "$1null")
       .replace(/\b[A-Za-z_$][\w$]*\.approvedSource\s*(?:===|!==)\s*["']DesignAssets\/[^"'\r\n]+["']/g, "");
     for (const match of dependencies.matchAll(/["'](DesignAssets\/[^"'?#\r\n]+)["']/g)) {
       const name = match[1];
