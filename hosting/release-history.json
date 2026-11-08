@@ -1,5 +1,12 @@
 [
   {
+    "version_number": 91,
+    "label": "v91",
+    "notes": [
+      "종족 선택 화면에 주자원과 특성 설명 추가."
+    ]
+  },
+  {
     "version_number": 90,
     "label": "v90",
     "notes": [

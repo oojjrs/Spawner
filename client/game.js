@@ -9277,6 +9277,21 @@
         tag.textContent = tagText;
         footer.append(tag);
       }
+      const description = document.createElement("span");
+      description.id = "tribe-description-" + tribe.key;
+      description.className = "tribe-choice-description";
+      for (const text of {
+        bean: ["주자원은 비옥토입니다.", "능력치가 고르게 균형 잡혀 있습니다."],
+        spore: ["주자원은 목재입니다.", "원거리 공격에 강합니다."],
+        pebble: ["주자원은 자갈입니다.", "체력과 방어력이 높습니다."],
+        spring: ["주자원은 이슬방울입니다.", "근접 공격에 강합니다."]
+      }[tribe.key]) {
+        const line = document.createElement("span");
+        line.textContent = text;
+        description.append(line);
+      }
+      footer.append(description);
+      button.setAttribute("aria-describedby", description.id);
       button.append(preview, footer);
       button.addEventListener("click", () => {
         if (lobbyBusy || !tribeRoomId) return;
