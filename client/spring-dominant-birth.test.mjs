@@ -4,14 +4,15 @@ import {readFileSync} from 'node:fs';
 import {createContext,runInContext} from 'node:vm';
 import {springDominantBirthForm,springDominantBirthPose,springDominantBirthRow,springDominantBirthPixels,createSpringDominantBirthArt,SPRING_DOMINANT_BIRTH_SETTLED_AT} from './spring-dominant-birth.mjs';
 import {SPRING_BIRTH_ANIMATION,springBirthPlacement,springBirthMotion} from './birth.mjs';
+import {unitFacing} from './unit-size.mjs';
 const agent=(patch={})=>({id:'spring',tribe:'spring',health:10,birth:{startedAt:0},attributes:{blade:1},bornAt:0,...patch});
 const profiles={blade:{top:150,tip:383.5},carapace:{top:156,tip:219.5}};
 function source(){const data=new Uint8ClampedArray(512*512*4);for(let y=150;y<452;y++)for(let x=70;x<405;x++){const i=(y*512+x)*4;data.set([25,170,205,255],i);}return data;}
 function canvas(width,height,data=new Uint8ClampedArray(width*height*4)){const ctx={getImageData:()=>({data}),createImageData:(w,h)=>({data:new Uint8ClampedArray(w*h*4),width:w,height:h}),putImageData:im=>{data=im.data;}};return {width,height,getContext:()=>ctx};}
 
-test('only living canonical spring blade/carapace bodies opt in, preserving dominant projection and legacy fallback',()=>{
- for(const [attributes,form] of [[{blade:1},'blade'],[{blade:1,secretion:1,carapace:1,antenna:1,feet:1},'blade'],[{carapace:1,antenna:1},'carapace']])assert.equal(springDominantBirthForm(agent({attributes})),form);
- for(const patch of [{tribe:'bean'},{species:'bubble-toad'},{health:0},{birth:null},{attributes:{}},{attributes:{secretion:1}},{attributes:{blade:1,strength:1}},{attributes:{blade:1,piercing:1}}])assert.equal(springDominantBirthForm(agent(patch)),null);
+test('only living single-organ spring bodies opt in; authored combinations keep their own birth',()=>{
+ for(const [attributes,form] of [[{blade:1},'blade'],[{blade:1,feet:1},'blade'],[{carapace:1},'carapace'],[{carapace:1,legs:1},'carapace']])assert.equal(springDominantBirthForm(agent({attributes})),form);
+ for(const patch of [{tribe:'bean'},{species:'bubble-toad'},{health:0},{birth:null},{attributes:{}},{attributes:{secretion:1}},{attributes:{blade:1,strength:1}},{attributes:{blade:1,piercing:1}},{attributes:{blade:1,secretion:1,carapace:1,antenna:1,feet:1}},{attributes:{carapace:1,antenna:1}}])assert.equal(springDominantBirthForm(agent(patch)),null);
 });
 
 test('common water mapping has no fold and retains the support and lower face band',()=>{
@@ -56,7 +57,7 @@ test('pixel read failure, invalid input and blank art preserve fallback and allo
 
 const game=readFileSync(new URL('./game.js',import.meta.url),'utf8'),draw=game.match(/^    function drawSpringBirth\([^]*?^    }/m)[0];
 function scene(){const draws=[],water=[],calls=[],handoffs=[],scales=[],outlines=[],sprite={width:670,height:750,combatCamera:{pivotX:555,pivotY:763}},base={complete:true,naturalWidth:944};let available=true,ready=true;
- const scope=createContext({Spawner:{springDominantBirthForm,springBirthMotion,drawSpringBirthWater:(...x)=>water.push(x),drawSpringBirthSurface:(...x)=>draws.push(['fallback',...x]),unitRangedLifecycleAnimation:()=>null},
+ const scope=createContext({Spawner:{unitFacing,springDominantBirthForm,springBirthMotion,drawSpringBirthWater:(...x)=>water.push(x),drawSpringBirthSurface:(...x)=>draws.push(['fallback',...x]),unitRangedLifecycleAnimation:()=>null},
  SPRING_BIRTH_ANIMATION,AGENT_HEIGHT:.7,idleMotion:{matches:false},state:{simSeconds:.7},unitDisplayScale:()=>.352,
  combatAttributeArt:{ready:()=>ready,frame:(...args)=>{calls.push(args);return sprite;}},springDominantBirthArt:{frame:(...args)=>{calls.push(args);return available?sprite:null;}},
  springBirthSheet:base,tribeArt:{animationFrame:()=>null},agentRangedImage:()=>null,SpawnerAppearance:{unitAppearanceBirthSceneForAgent:()=>null},

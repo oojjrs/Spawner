@@ -39,7 +39,7 @@
 - 몽돌 실제 원본 4개에 대한 544회 전용 렌더 통과. scratch allocation/copy 0.
 - 이미지 정책 감사 1494개 통과. 방향 담당 요청분의 보존 SHA도 함께 동기화했다.
 - `git diff --check` 대상 파일 통과.
-- 넓은 탄생 회귀: 129개 중 121통과, 8실패. 실패는 변경하지 않은 `bean-secretion-birth.test.mjs`, `combat-birth.test.mjs`, `spring-dominant-birth.test.mjs`의 이전 legacy 선택 기대값과 `unitFacing`/`drawAgentAppearanceBody` mock 누락 등이다. 관련 테스트와 구현 파일은 현재 HEAD와 동일함을 확인했다. 전체 회귀 통과로 보고하지 않는다.
+- 최초 넓은 탄생 회귀 기록: 129개 중 121통과, 8실패. 실패는 변경하지 않은 `bean-secretion-birth.test.mjs`, `combat-birth.test.mjs`, `spring-dominant-birth.test.mjs`의 이전 legacy 선택 기대값과 `unitFacing`/`drawAgentAppearanceBody` mock 누락 등이다. 관련 테스트와 구현 파일은 현재 HEAD와 동일함을 확인했다. 이는 수리 전 결과이며, 아래 후속 테스트 수리 후 관련 회귀는 모두 통과했다.
 
 Chromium 실행은 앞서 sandbox socket 오류 뒤 승인 검토 상태 변경 오류로 실행되지 않았다. 로컬 실제 게임 브라우저·배포 후 확인은 아직 하지 않았다. Node Canvas 확인을 브라우저/라이브 게임 검증으로 부르지 않는다. 공용 runtime/wrapper 재빌드 및 게시도 통합 담당자가 처리해야 한다.
 
@@ -54,3 +54,14 @@ Chromium 실행은 앞서 sandbox socket 오류 뒤 승인 검토 상태 변경 
 - `compact-proof-summary.json`: 무손실 crop/중복 제거 증거 요약과 상세 검증 기록의 SHA. 셀별 대량 검증 원본은 작업 컴퓨터에 보존하고 게시 목록에서는 제외했다.
 
 수정 제품 파일: `unit-action-art.mjs`, `unit-birth-art-assets.mjs`, `pebble-packed-birth.mjs`, `image-sizes.json`, `BirthResolutionV1/` 29PNG. 테스트는 `birth-resolution.test.mjs`, `pebble-birth-resolution.test.mjs`를 추가하고 `unit-action-art-selection.test.mjs`, `bean-combo-birth-timing.test.mjs`의 실제 복구 클립 선택 기대값을 갱신했다. Git add/commit/push는 수행하지 않았다.
+
+## 후속: 실패 테스트 수리
+
+사용자의 실패 테스트 수정 요청에 따라 테스트를 삭제하거나 건너뛰지 않고 4개 테스트 파일만 고쳤다. 제품 구현은 변경하지 않았다.
+
+- `client/bean-secretion-birth.test.mjs`: 단일 분비물과 별도 복합 외형을 구분하는 현재 선택 기준을 반영했다. 실제 `unitFacing` 의존성을 연결했다. 폐기된 파츠 콜백 횟수 대신 실제 `createUnitPresentation`의 장면 레이어·실패 대체·전신 1회 표시와 공통 앵커를 검증한다. 남아 있는 레거시 helper는 자신의 idle 등록과의 정합성을 계속 검사한다.
+- `client/combat-birth.test.mjs`: 이미 구워진 탄생 동작에 예전 회전·높이를 다시 적용하도록 요구하던 기대값을 수정했다. 실제 표시 경로를 호출해 전신 1개, 양 방향, 원본 crop·목적 사각형, 공통 앵커, 중복 회전 없음, 원본 agent 불변을 검증한다.
+- `client/spring-dominant-birth.test.mjs`: 실제 `unitFacing` 의존성을 연결하고 단일기관 helper가 등록된 복합 외형을 가로채지 않는 현재 계약을 검사한다. 원본 샘플러·실패 대체·물 효과·reduced motion·idle handoff 검사는 유지한다.
+- `server/birth.test.mjs`: 서버까지 확장했을 때 드러난 오래된 fixture 2개도 수정했다. 포인트·공간 부족의 원자성은 유효한 DNA 없는 설계로 해당 guard에 직접 도달하도록 만들었고, 동일 설계 재사용 fixture에는 현재 비교 대상인 DNA·전투 주속성도 포함했다. 한도 거부와 실패 후 상태 불변 검사는 그대로 유지한다.
+
+수리 후 클라이언트 탄생·표시 129/129, 클라이언트·서버 탄생 관련 전체 147/147 통과. 실패했던 3개 클라이언트 파일의 16/16 검사도 통과했다. 삭제·skip·todo 없음. `git diff --check` 통과. 최종 실행 기록은 `birth-regression-repaired.txt`, `legacy-tests-after.txt`에 있다.

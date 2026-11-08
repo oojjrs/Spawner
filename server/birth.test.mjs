@@ -114,12 +114,16 @@ test("자동 저장 이름은 중복 번호와 24자 제한을 지킨다", () =>
 test("포인트나 탄생 공간이 부족하면 새 설계와 ID도 남기지 않는다", () => {
   for (const reason of ["points", "space"]) {
     const { game, environment } = fixture();
-    const source = game.agents[0];
-    if (reason === "points") {
-      const saved = JSON.parse(game.save());
-      saved.state.evolutionPoints = 0;
-      game.restore(JSON.stringify(saved));
-    } else environment.world.terrain.fill(0);
+    // A valid legacy design reaches the point/space guard itself. Starting
+    // workers now have DNA, whose budget validation deliberately runs first.
+    const created = game.command({ type: "design", templateId: null, name: "부족 조건 검증", slots: ["antenna"], birth: true });
+    const source = game.agents.find(agent => agent.id === created.agentId);
+    assert.equal(source.dna, null);
+    const saved = JSON.parse(game.save());
+    saved.state.templates = []; // The failed clone would otherwise create a new design.
+    if (reason === "points") saved.state.evolutionPoints = 0;
+    game.restore(JSON.stringify(saved));
+    if (reason === "space") environment.world.terrain.fill(0);
     const birthState = () => {
       const { templates, nextTemplateId, nextAgentId, evolutionPoints, agents } = JSON.parse(game.save()).state;
       return { templates, nextTemplateId, nextAgentId, evolutionPoints, agents };
@@ -130,7 +134,7 @@ test("포인트나 탄생 공간이 부족하면 새 설계와 ID도 남기지 �
   }
 });
 
-test("설계 100개 한도에서는 신규 설계를 거부하고 같은 속성의 기존 설계는 재사용한다", () => {
+test("설계 100개 한도에서는 신규 설계를 거부하고 같은 DNA·속성의 기존 설계는 재사용한다", () => {
   const { game } = fixture();
   const source = game.agents[0];
   const saved = JSON.parse(game.save());
@@ -143,6 +147,8 @@ test("설계 100개 한도에서는 신규 설계를 거부하고 같은 속성�
   assert.equal(game.save(), before);
   saved.state.templates[99].slots = [...source.slots];
   saved.state.templates[99].attributeLevels = { ...source.attributeLevels };
+  saved.state.templates[99].dna = structuredClone(source.dna);
+  saved.state.templates[99].combatPrimary = source.combatPrimary;
   game.restore(JSON.stringify(saved));
   const copied = game.command({ type: "birth", agentId: source.id });
   assert.equal(copied.templateId, 100);

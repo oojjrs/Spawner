@@ -1,0 +1,24 @@
+✔ birth adapter selects only the live secretion bean and preserves other form/lifecycle priorities (2.160707ms)
+✔ source-space foliage uses original independent head transforms and exact neutral source (1.880703ms)
+✔ actual bean birth delegates once to the authored scene and preserves the baked fallback (8.879927ms)
+✔ retained legacy birth helper settles to its own idle registration across facing, growth and zoom (4.198862ms)
+✔ entire authored birth keeps finite positive leaf/body transforms with no action-clock mutation (23.574134ms)
+✔ 네 종족의 모든 전투·일반 속성 조합이 종족 탄생 경로를 공유한다 (10.759157ms)
+✔ 전투 속성은 종족별 탄생 경로·등장 시각·프레임을 바꾸지 않는다 (11.020483ms)
+✔ 세 종족의 마지막 탄생 프레임은 전투 탄생을 다시 재생하지 않는다 (5.32676ms)
+✔ 전사 새싹콩은 완성 전신 하나를 공통 앵커에 그리고 탄생 변환을 중복 적용하지 않는다 (20.865137ms)
+✔ only living single-organ spring bodies opt in; authored combinations keep their own birth (2.42638ms)
+✔ common water mapping has no fold and retains the support and lower face band (4.4138ms)
+✔ padded camera pins the real pre-detach outlet for both facings and current display scales (29.190768ms)
+✔ sampler keeps source-only colors without row seams and supplies an exact idle identity after settling (27.842489ms)
+✔ pixel read failure, invalid input and blank art preserve fallback and allow recovery (7.335953ms)
+✔ actual scene hook preserves facing, water, pivot, idle clock, attributes and terminal handoff (2.008071ms)
+✔ actual scene falls back when unready or unreadable and reduced motion uses the settled body (1.023144ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 234.384112

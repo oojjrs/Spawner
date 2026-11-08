@@ -1,3 +1,7 @@
+import { createUnitPresentation } from "./unit-presentation.mjs";
+import { unitActionArtPose } from "./unit-action-art.mjs";
+import { unitFacing, unitFrameMirror, unitDisplaySize } from "./unit-size.mjs";
+import { imageDimensions } from "./image-audit.mjs";
 import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
@@ -77,28 +81,50 @@ test("세 종족의 마지막 탄생 프레임은 전투 탄생을 다시 재생
   }
 });
 
-test("전사 새싹콩은 공통 탄생 동작에 완성 외형을 한 번만 그리고 크기와 발 위치를 유지한다", () => {
-  const draws = [], transforms = [];
-  const sprite = { width: 512, height: 512 };
-  const context = createContext({ AGENT_HEIGHT: .7, Spawner: { unitDisplayAttributes, hasCombatEvolution },
-    combatAttributeArt: { ready: () => true },
-    agentSprite(agent, layer) { assert.equal(layer, "full"); return sprite; },
-    drawBirthSeed() {}, drawBirthFragments() {}, drawBirthImpact() {},
-    drawAgentFeet() { assert.fail("중복 발"); }, drawAgentTail() { assert.fail("중복 꼬리"); },
-    drawAgentHead() { assert.fail("중복 머리"); }, drawSelectionOutline() {} });
-  runInContext(declaration("drawAgentRangedBirth") + "\n" + declaration("drawAgentBirth"), context);
-  const drawing = { save() {}, restore() {}, translate(...values) { transforms.push(["translate", ...values]); },
-    rotate(...values) { transforms.push(["rotate", ...values]); }, scale(...values) { transforms.push(["scale", ...values]); },
-    drawImage(...values) { draws.push(values); } };
-  for (let mask = 1; mask < 16; mask++) {
-    const agent = { tribe: "bean", attributes: { ...attributes(combatKeys, mask), feet: 1, antenna: 1 } };
-    for (const elapsed of [2.59, 2.8, 3.21, 3.849]) {
-      const birth = { ...agentBirthMotion(elapsed, 2, 3), x: 2, y: 3, fromX: 0, fromY: 0, targetX: 2, targetY: 3 };
-      draws.length = 0; transforms.length = 0;
-      context.drawAgentBirth(drawing, 0, agent, birth, { x: 0, y: 0 }, 100, null);
-      assert.deepEqual(draws, [[sprite, -70, -122.5, 140, 140]]);
-      assert.deepEqual(transforms, [["translate", 50, 80.8 - birth.lift * 100], ["rotate", birth.rotation],
-        ["scale", birth.scaleX, birth.scaleY]]);
+test("전사 새싹콩은 완성 전신 하나를 공통 앵커에 그리고 탄생 변환을 중복 적용하지 않는다", async () => {
+  const previous = globalThis.SpawnerAssets;
+  globalThis.SpawnerAssets = { source: path => path, image: () => ({ async decode() {
+    [this.width, this.height] = imageDimensions(this.src);
+  } }) };
+  try {
+    let time = 0;
+    const surface = (width, height) => ({ width, height, getContext: () => ({ drawImage() {},
+      getImageData: () => ({ data: new Uint8ClampedArray(width * height * 4).fill(255) }) }) });
+    const presentation = createUnitPresentation({ model: {}, height: .7, time: () => time,
+      displayScale: () => 1, createSurface: surface });
+    const scope = createContext({ drawAgentAppearanceBody: (...args) => presentation.drawAgentAppearanceBody(...args) });
+    runInContext(declaration("drawAgentBirth"), scope);
+    for (let mask = 1; mask < 16; mask++) for (const facing of [-1, 1]) {
+      const agent = { tribe: "bean", health: 10, facing, birth: { startedAt: 0, readyAt: 3.85 },
+        attributes: { ...attributes(combatKeys, mask), feet: 1, antenna: 1 } };
+      const before = structuredClone(agent);
+      await presentation.prepareAnimation(agent, 0);
+      for (time of [2.60, 2.8, 3.21, 3.849]) {
+        const birth = { ...agentBirthMotion(time, 2, 3), x: 2, y: 3, fromX: 0, fromY: 0, targetX: 2, targetY: 3 };
+        const draws = [], transforms = [];
+        const drawing = { save() {}, restore() {}, translate(...v) { transforms.push(["translate", ...v]); },
+          rotate() { assert.fail("이미 구워진 탄생 회전 중복 적용"); }, scale(...v) { transforms.push(["scale", ...v]); },
+          drawImage(...v) { draws.push(v); } };
+        scope.drawAgentBirth(drawing, 0, agent, birth, { x: 0, y: 0 }, 100, null);
+        const pose = unitActionArtPose(agent, time), clip = pose.animation;
+        const layers = clip.sceneLayers.layers.filter(layer => layer.samples[pose.frame]);
+        assert.deepEqual(draws.map(call => call[0].src), layers.map(layer => layer.image));
+        assert.equal(layers.filter(layer => layer.wholeBody).length, 1);
+        const scale = 100 * unitDisplaySize(agent) / clip.referenceLength;
+        for (let i = 0; i < layers.length; i++) {
+          const layer = layers[i], sample = layer.samples[pose.frame];
+          assert.deepEqual(draws[i].slice(1, 5), [sample.frame % layer.columns * layer.frameSize,
+            Math.floor(sample.frame / layer.columns) * layer.frameHeight, layer.frameSize, layer.frameHeight]);
+          assert.deepEqual(draws[i].slice(5), [(sample.destination[0] - clip.pivotX) * scale,
+            (sample.destination[1] - clip.pivotY) * scale, sample.destination[2] * scale, sample.destination[3] * scale]);
+        }
+        assert.deepEqual(transforms, [["translate", 50, 100 * (.5 + .7 * .44)],
+          ["scale", unitFrameMirror(clip.sourceFacing, unitFacing(agent)) ? -1 : 1, 1]]);
+      }
+      assert.deepEqual(agent, before);
     }
+  } finally {
+    if (previous === undefined) delete globalThis.SpawnerAssets;
+    else globalThis.SpawnerAssets = previous;
   }
 });
