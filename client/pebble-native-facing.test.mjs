@@ -1,3 +1,4 @@
+import {afterPebbleScreenReview} from './test-support/approved-art-source.mjs';
 // Independent regression: immutable Git pixels, exact metadata, and native Node Canvas.
 // Native raster tests below use real source images, not mock contexts or a browser.
 import test from 'node:test';
@@ -60,7 +61,7 @@ test('metadata: held base/antenna retain 14-frame clocks and reflected pivots, w
 });
 
 test('metadata: unselected Pebble forms and partial-form non-birth clips remain exact; user blade removals and bean gather clock survive',()=>{
- for(const[key,old]of Object.entries(baseline.UNIT_ACTION_ART).filter(([k])=>k.startsWith('pebble/'))){if(full.includes(key))continue;const expected=structuredClone(old);if(key===partial)expected.actions.birth=expectedClip(old.actions.birth);if(key==='pebble/secretion')for(const clip of [expected.reference,...Object.values(expected.actions)])clip.sourceFacing='left';assert.deepEqual(A[key],expected,key);}
+ for(const[key,old]of Object.entries(baseline.UNIT_ACTION_ART).filter(([k])=>k.startsWith('pebble/'))){if(full.includes(key))continue;const expected=structuredClone(old);if(key===partial)expected.actions.birth=expectedClip(old.actions.birth);if(key==='pebble/secretion')for(const clip of [expected.reference,...Object.values(expected.actions)])clip.sourceFacing='left';compare(A[key],afterPebbleScreenReview(key,expected),key);}
  for(const[key,old]of Object.entries(baseline.UNIT_BIRTH_ART).filter(([k])=>k.startsWith('pebble/')&&!full.includes(k)))assert.deepEqual(B[key],key==='pebble/secretion'?{...old,sourceFacing:'left'}:old,key);
  for(const f of ['secretion','blade','carapace'])assert.deepEqual(H.pebble[f],f==='secretion'?{...baseline.SPECIES_HELD_HURT_SOURCES.pebble[f],sourceFacing:'left'}:baseline.SPECIES_HELD_HURT_SOURCES.pebble[f],'held/'+f);
  for(const tribe of ['bean','spore','pebble','spring'])assert.equal(Object.hasOwn(A[tribe+'/blade'].actions,'ranged'),false,tribe+' unsupported ranged stays removed');

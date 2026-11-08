@@ -1,3 +1,4 @@
+import {afterPebbleScreenReview} from './test-support/approved-art-source.mjs';
 // Contract: reflect exactly the two user-selected complete families, without
 // treating source-facing labels or a single pose as visual direction evidence.
 import test from 'node:test';
@@ -73,7 +74,7 @@ test('the other 42 combination registrations preserve baseline plus only the lat
  for(const tribe of ['bean','spore','pebble','spring'])for(const form of UNIT_COMBINATION_FORMS){
   const key=tribe+'/'+form.key;if(selected.includes(key))continue;
   assert.ok(baseline[key],key+' baseline exists');
-  compare(UNIT_ACTION_ART[key],laterFamily(key,baseline[key]),key+' complete chronological registration');
+  compare(UNIT_ACTION_ART[key],afterPebbleScreenReview(key,laterFamily(key,baseline[key])),key+' complete chronological registration');
   untouched++;
  }
  assert.equal(untouched,42);

@@ -1,0 +1,51 @@
+{
+  "status": "completed",
+  "selectedForms": [
+    "pebble/blade-antenna"
+  ],
+  "sourceImages": 14,
+  "temporalPreviews": 12,
+  "unchangedOtherRuntimeForms": 67,
+  "protectedUntrackedFiles": 16,
+  "protectedHashesVerified": true,
+  "timingFrameOrderDimensionsVerified": true,
+  "nativeSourceFacing": "left",
+  "gameplayFacingLogicChanged": false,
+  "assetAndMetadataPaths": {
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-appearance.png": "eadacc5b6d2bc13ad99917509e3b051a242e53869b62ee1d0ef640ed236febf5",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-preview.gif": "6e56ad3b3dc3cd9550fb121ae2888e5b828b9e5d3981a4e7628bd92bc285e32d",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-preview.webp": "3745d343cb49cee02f9fc53933b562eef959e75f265c46fd3450dcd485a5d573",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-sheet.png": "71ea375dd6170aec9ae842afe8a585b995c553868db7777f237c18396860c6eb",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-preview.gif": "3ec1fe13f0137a950c1ae2616a803c1e22f17a81c375665fe43a36886d2e7aab",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-preview.webp": "cf9fa46ddfc4794fa9bae6c2005edffff878a5082e79570c476349e08dce6926",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-sheet.png": "b14deb5e2b594daa4c87b4ee06ceb072a7d690c4a01ca78b50f3ef1fc1cc2be4",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-preview.gif": "91f4b5f364bd255aca94ec08377c929f2a28020f4039feee63928bc72bcb7cb7",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-preview.webp": "ef01e1d814ee4df937b2d9444b607bc72f336375dc8df07cdddbcd02eb687b0c",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-sheet.png": "9710e8cafdcda571398cc045355e979a8735289962f9a7be8c38c63a4e943121",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-preview.gif": "def7eda8ba87a22dd9208862c4df67224af1bb33c4b63163abecc6a559596270",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-preview.webp": "8322268c148ea5f70a51352f9ceb74b603077a3eedb764ba42002174e2de700b",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-sheet.png": "a481fc1815ec76a472cfd426ad438ef4d8e6235c01a0311e768cbb24dae7eb7b",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-preview.gif": "8a6a084cfdd582536dd111d55b37681e37bcbf4705f5f8f980b6803b4b17b8ae",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-preview.webp": "3e8e15b3c5778db7160619e8088f15e0dc07a4553940754f4fd5ce8b7baad40a",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-sheet.png": "1f90cb865ea0793a7146d862a4dc5d1c7d659ff2ac05589c5388acecd665777a",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-preview.gif": "ae67fcbe7cf1468c4b6573ee73360d03379972363c3076805e4ce2950cc575a9",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-preview.webp": "d758e3c573faf07899f2b8099d083ec58df259de43e7cde2f27d504e71fe5bc4",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-sheet.png": "19fe1041653815aab5131b2cdf61cc0dc633fb7524dedb3dadb5a1503e611764",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json": "f13f6b9e055b7ecf22289c9e8810a5ee863f1e30bdff2235df5cb9f6e4421b2c",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/attack.png": "71ea375dd6170aec9ae842afe8a585b995c553868db7777f237c18396860c6eb",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/birth.png": "b14deb5e2b594daa4c87b4ee06ceb072a7d690c4a01ca78b50f3ef1fc1cc2be4",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/death.png": "9710e8cafdcda571398cc045355e979a8735289962f9a7be8c38c63a4e943121",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/hurt.png": "a481fc1815ec76a472cfd426ad438ef4d8e6235c01a0311e768cbb24dae7eb7b",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/idle.png": "1f90cb865ea0793a7146d862a4dc5d1c7d659ff2ac05589c5388acecd665777a",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/portrait.png": "eadacc5b6d2bc13ad99917509e3b051a242e53869b62ee1d0ef640ed236febf5",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/walk.png": "19fe1041653815aab5131b2cdf61cc0dc633fb7524dedb3dadb5a1503e611764",
+    "DesignAssets/image-sizes.json": "4964740e3a22d3a48675bd33c010c20a400bd63789dc934bef026d8d57149433",
+    "client/antenna-combo-assets.mjs": "b4c04215b933462e8a3f44819fd6c1901562d307ead6768b3a6e8ee1361a553a"
+  },
+  "notes": [
+    "Six complete native actions plus reference/portrait/appearance aliases mirrored.",
+    "Full birth scene and final body coordinates mirrored together. No shared layer assets used.",
+    "Historical untracked raw sources, covers, generation prompts and manifest.json byte-preserved; publication output geometry updated without rerunning historical packer.",
+    "Parent owns planning HTML, offline wrappers, generated bundles, tests, commit and push."
+  ]
+}

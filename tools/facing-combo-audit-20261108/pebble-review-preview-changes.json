@@ -1,0 +1,437 @@
+{
+  "status": "completed",
+  "changes": {
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-preview.webp",
+      "beforeSha256": "3eccd8e9ed48291eac14d1bc47e9e7beaac488a533eb0ecd55b40c7c8d6c5f4a",
+      "afterSha256": "3745d343cb49cee02f9fc53933b562eef959e75f265c46fd3450dcd485a5d573",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        110,
+        110,
+        70,
+        110,
+        80,
+        110,
+        230
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-preview.gif",
+      "beforeSha256": "3ab5dae74a2d73ce33bb24417fba23ba6ba2e25420e5d94765611e04c5bf6931",
+      "afterSha256": "6e56ad3b3dc3cd9550fb121ae2888e5b828b9e5d3981a4e7628bd92bc285e32d",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        110,
+        110,
+        70,
+        110,
+        80,
+        110,
+        230
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-preview.webp",
+      "beforeSha256": "95decb8e5e011318a5110c82e5c10aafaf4aa13a3b21cb3e252f81ce60079fff",
+      "afterSha256": "d758e3c573faf07899f2b8099d083ec58df259de43e7cde2f27d504e71fe5bc4",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-preview.gif",
+      "beforeSha256": "40c1e8aaa61c8d3f3fb1ca012ee29ce7ff4adc6f0679347751ad918f2de41376",
+      "afterSha256": "8a6a084cfdd582536dd111d55b37681e37bcbf4705f5f8f980b6803b4b17b8ae",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        220,
+        150,
+        150,
+        110,
+        90,
+        150,
+        150,
+        220
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-preview.gif",
+      "beforeSha256": "7ef9ecad5a968469e19e1963536dd7a63e0118fff0888209d8ebf5d5931e2016",
+      "afterSha256": "def7eda8ba87a22dd9208862c4df67224af1bb33c4b63163abecc6a559596270",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        70,
+        90,
+        90,
+        130,
+        120,
+        130,
+        240
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-preview.webp",
+      "beforeSha256": "d48592fe577301533d03e0cfe7f105036209835c7c8655b77af02d8b2b67f94c",
+      "afterSha256": "ef01e1d814ee4df937b2d9444b607bc72f336375dc8df07cdddbcd02eb687b0c",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        180,
+        140,
+        150,
+        180,
+        180,
+        160,
+        200,
+        750
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-preview.gif",
+      "beforeSha256": "963dba8f6761a2eddb10f90aa086e816620ca1e13ea98fc617b9dc771bbd4309",
+      "afterSha256": "91f4b5f364bd255aca94ec08377c929f2a28020f4039feee63928bc72bcb7cb7",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        180,
+        140,
+        150,
+        180,
+        180,
+        160,
+        200,
+        750
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-preview.webp",
+      "beforeSha256": "6c08221a2b25e55aa84104de6fd6ce6b0ceb1cbf303bec6847a1f2437208675b",
+      "afterSha256": "3e8e15b3c5778db7160619e8088f15e0dc07a4553940754f4fd5ce8b7baad40a",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        220,
+        150,
+        150,
+        110,
+        90,
+        150,
+        150,
+        220
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-preview.gif",
+      "beforeSha256": "52d283877541ea197377f95609fb11c6e03f528565976f9c61a2e84f742fb226",
+      "afterSha256": "3ec1fe13f0137a950c1ae2616a803c1e22f17a81c375665fe43a36886d2e7aab",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        330,
+        250,
+        200,
+        130,
+        130,
+        200,
+        250,
+        650
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-preview.webp",
+      "beforeSha256": "0e2f9fd3159d6e70756598ebdec76137dfa2585139800d466ae4e2551bd1ce8c",
+      "afterSha256": "8322268c148ea5f70a51352f9ceb74b603077a3eedb764ba42002174e2de700b",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        70,
+        90,
+        90,
+        130,
+        120,
+        130,
+        240
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-preview.webp",
+      "beforeSha256": "f5a4374b30e0cb58372c7510943898ecab9f22ad673e6ddf1904e5d4b5306ca5",
+      "afterSha256": "cf9fa46ddfc4794fa9bae6c2005edffff878a5082e79570c476349e08dce6926",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        330,
+        250,
+        200,
+        130,
+        130,
+        200,
+        250,
+        650
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-preview.gif",
+      "beforeSha256": "0bdfe3ef539322146991e60b0f9d8eefa899fc9f0c3cbcaa1e13c688ae3afb3f",
+      "afterSha256": "ae67fcbe7cf1468c4b6573ee73360d03379972363c3076805e4ce2950cc575a9",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    }
+  }
+}

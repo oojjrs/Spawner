@@ -1,0 +1,26 @@
+{
+  "client/runtime.js": {
+    "modules": [
+      "client/antenna-combo-assets.mjs"
+    ],
+    "worktreeModules": [
+      "client/antenna-combo-assets.mjs"
+    ],
+    "ownedSha256": "b788d30277e73dc781672d1326ecb3f74f58449b86931bcd34bb65e9c050673c",
+    "worktreeBeforeSha256": "22171b78d1c6e27c7e6f948c88c158f0af9588f5fa3af99a107f1f880bb83be7",
+    "worktreeAfterSha256": "84ad4998abb9af7a2f46be74ae19cce81f3fad74e77ec1711f8391bc83aaf49d",
+    "userUnownedBytesPreserved": true
+  },
+  "Combat.html": {
+    "modules": [
+      "client/antenna-combo-assets.mjs"
+    ],
+    "worktreeModules": [
+      "client/antenna-combo-assets.mjs"
+    ],
+    "ownedSha256": "cab311c2600043410283c10bce2cdc49c9dbae2ee3bc0a232043504fee2c31de",
+    "worktreeBeforeSha256": "4a6e2c15bba39b1f71209d17a3902fb71c4a015dd2e1cc7f1060d93f730ec1f9",
+    "worktreeAfterSha256": "ed7a39e7b0fd1d1372e1c213f082b7ef3d11117a38c451ee006511fc6f1103d8",
+    "userUnownedBytesPreserved": true
+  }
+}

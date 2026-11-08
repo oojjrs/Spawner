@@ -1,3 +1,4 @@
+import {afterPebbleScreenReview} from './test-support/approved-art-source.mjs';
 // User reviewed the simple-reflection column, using the viewer's screen direction.
 // Keep this correction separate from earlier audits, including earlier reflections.
 import test from 'node:test';
@@ -64,7 +65,7 @@ test('the other 42 combinations retain their complete pre-review registrations',
  let untouched=0;
  for(const[key,before]of Object.entries(baseline)){
   if(selected.includes(key))continue;
-  assert.deepEqual(current(key),before,key+' preserved');untouched++;
+  compare(current(key),afterPebbleScreenReview(key,before),key+' preserved plus exact later review');untouched++;
  }
  assert.equal(untouched,42);
 });

@@ -11,6 +11,7 @@ const audits = ["bean-spore-image-changes.json", "bean-spore-extra-image-changes
 const confirmedStages = [
   "../../tools/confirmed-facing-20261108/bean-spore-image-changes.json",
   "../../tools/facing-combo-audit-20261108/bean-reflect-image-changes.json",
+  "../../tools/facing-combo-audit-20261108/pebble-review-image-changes.json",
 ].map(path => JSON.parse(readFileSync(new URL(path, import.meta.url))));
 function confirmedSource(source) {
   let current = source;
@@ -95,4 +96,31 @@ export function approvedAttackSource(path, approvedHash) {
   assert.equal(proof.geometryUnchanged, true); assert.equal(proof.timingUnchanged, true);
   assert.equal(proof.checksPass, true); assert.equal(proof.sourceFacingRequired, "left");
   return { ...source, sha256: record.afterSha256, repaired: true };
+}
+
+// Preserve historical family baselines while composing only the later reviewed form.
+export function afterPebbleScreenReview(key, family) {
+  if (key !== "pebble/blade-antenna") return family;
+  const stage = confirmedStages.at(-1);
+  assert.equal(stage.status, "completed");
+  const reflect = original => {
+    const clip = structuredClone(original), width = clip.frameSize ?? clip.frameWidth;
+    const change = stage.changes[clip.image];
+    assert.ok(change, key + " explicitly reviewed source");
+    assert.deepEqual(change.selectedUsers, [key]);
+    assert.equal(change.verification.exactRgbaMirror, true);
+    assert.equal(change.verification.alphaExact, true);
+    clip.sourceFacing = "left";
+    if (Number.isFinite(clip.pivotX)) clip.pivotX = width - clip.pivotX;
+    if (Number.isFinite(clip.outletX)) clip.outletX = width - clip.outletX;
+    if (Number.isFinite(clip.scene?.outletX)) clip.scene.outletX = width - clip.scene.outletX;
+    for (const layer of clip.sceneLayers?.layers || []) for (const sample of layer.samples)
+      if (sample) sample.destination[0] = width - sample.destination[0] - sample.destination[2];
+    return clip;
+  };
+  const rewrite = value => typeof value === "string" ? (stage.pathMap[value] || value)
+    : Array.isArray(value) ? value.map(rewrite)
+    : value && typeof value === "object" ? Object.fromEntries(Object.entries(value).map(([k,v]) => [k,rewrite(v)])) : value;
+  return rewrite({ ...family, reference: reflect(family.reference),
+    actions: Object.fromEntries(Object.entries(family.actions).map(([action,clip]) => [action,reflect(clip)])) });
 }

@@ -1,3 +1,4 @@
+import {afterPebbleScreenReview} from './test-support/approved-art-source.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -112,7 +113,7 @@ test('제외 6형태와 비선택 종족의 registry는 변하지 않는다',()=
   else if(key==='pebble/carapace-antenna')expected.actions.birth=exactRemainingClip(expected.actions.birth);
   if(remainingBirthLabels.has(key)&&expected.actions.birth)expected.actions.birth=exactRemainingClip(expected.actions.birth);
   if(key==='pebble/secretion')for(const clip of [expected.reference,...Object.values(expected.actions)])clip.sourceFacing='left';
-  assert.deepEqual(UNIT_ACTION_ART[key],expected,key+' only exact approved native transforms and upstream contracts may change');
+  assert.deepEqual(UNIT_ACTION_ART[key],afterPebbleScreenReview(key,expected),key+' only exact approved native transforms and upstream contracts may change');
  }
  for(const key of Object.keys(before.UNIT_BIRTH_ART))if(!plan.candidateForms.includes(key)){const original=before.UNIT_BIRTH_ART[key],expected=remainingFullForms.has(key)||remainingBirthLabels.has(key)?exactRemainingClip(original):original;assert.deepEqual(UNIT_BIRTH_ART[key],key==='pebble/secretion'?{...expected,sourceFacing:'left'}:expected,key);}
  for(const t of ['pebble','spring']){const expected=structuredClone(before.UNIT_RANGED_FORMS[t]);if(t==='pebble'){for(const a of ['birth','death'])expected.lifecycle[a].sourceFacing='left';for(const a of ['idle','animation','walk','hurt'])expected[a].sourceFacing='left';}else expected.lifecycle.birth.sourceFacing='left';assert.deepEqual(clean(UNIT_RANGED_FORMS[t]),expected,t+' ranged keeps independent lifecycle source convention');}

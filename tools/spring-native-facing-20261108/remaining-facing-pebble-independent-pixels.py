@@ -133,10 +133,30 @@ for path,record in changes['previewChanges'].items():
     result['maxGifMeanError']=max(result['maxGifMeanError'],worst)
     result['previews'].append({'path':path,'frames':src.n_frames,'timingLoopDimensionsPreserved':True,'exactVisibleRGBA':exact,'maxPaletteMeanError':worst})
     src.close();dst.close();del raw,a,b
+# A later visual review explicitly reflects only this previously protected family.
+# Keep every protected path covered, proving its exact per-cell mirror against Git.
+later=json.loads((ROOT/'tools/facing-combo-audit-20261108/pebble-review-image-changes.json').read_text())
+assert later['status']=='completed'
 for path in cfg.get('protected',[]):
     raw=git(path);expected=hashlib.sha256(raw).hexdigest();actual=hashlib.sha256((ROOT/path).read_bytes()).hexdigest()
-    assert actual==expected,(path,'unselected source bytes changed')
-    result['protectedFiles']+=1;result['protectedSources'].append({'path':path,'sha256':actual})
+    correction=later['changes'].get(path)
+    if correction:
+        assert correction['selectedUsers']==['pebble/blade-antenna'],(path,'exact later owner')
+        assert correction['beforeSha256']==expected,(path,'later mirror starts at immutable baseline')
+        assert correction['newImage']==path,(path,'expected in-place later mirror')
+        assert actual==correction['afterSha256'],(path,'later output hash')
+        src=Image.open(io.BytesIO(raw));dst=Image.open(ROOT/path)
+        assert src.size==dst.size,(path,'later dimensions')
+        width=correction['frameWidth'];height=correction['frameHeight']
+        assert src.width%width==0 and src.height%height==0,(path,'later complete cell grid')
+        rectangles=[[x,y,x+width,y+height] for y in range(0,src.height,height) for x in range(0,src.width,width)]
+        assert correction['cellRectangles']==rectangles,(path,'later covers every source cell')
+        for left,top,right,bottom in rectangles:
+            check(rgba(ImageOps.mirror(src.crop((left,top,right,bottom)))),rgba(dst.crop((left,top,right,bottom))),(path,'independent later mirror',left,top))
+        src.close();dst.close()
+    else:
+        assert actual==expected,(path,'unselected source bytes changed')
+    result['protectedFiles']+=1;result['protectedSources'].append({'path':path,'sha256':actual,'laterIndependentMirror':bool(correction)})
 assert set(cfg['registered'])<=set(static),'Missing registered source coverage'
 (HERE/'remaining-facing-pebble-independent-pixel-report.json').write_text(json.dumps(result,indent=2)+'\n')
 summary={k:v for k,v in result.items() if k not in ['sources','previews','protectedSources']}

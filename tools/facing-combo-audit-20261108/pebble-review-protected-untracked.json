@@ -1,0 +1,18 @@
+{
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/generation-prompts.json": "23b37bd7e629e92d60c997ee5ef995ee5cab2f7dceedeafe61b28f31efac15e9",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/manifest.json": "c7400bd3c3e5a8036f9a2f2f8782c9e19c8c021d443d593e0c0f265654bbc6e3",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-cover.png": "03bde407d580c0f9d119e572b93c2d23153a587b84d6872ceae157f1b2042e95",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-cover.png": "bc391b930ce257079d9ce6e4a6d759622f7a6b77afede5ac11a00ac6aa779e49",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-cover.png": "f8c8ed2538bc6440b74fb9e8b0ff29aef63316d92f56a346da4b374896a26a02",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-cover.png": "b4e12b738e61e518882413f7248fb74a4148c75a3c57f992c521faf7d860eefe",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pack.py": "dca34f1aa802f8ccca037020bc79f0f2c25701c2b418c384f66fb00202ef2c8b",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/qa-contact.png": "4a8445f4a48c66cf8c6dea0d9f7b71bea1b586217c8bc0688c2e951c94da84ac",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-cover.png": "3d33d5518f3ee7b3ddb3ff0d8c3649ae1b5477304395a5670ff21f86f9b5b7b6",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-cover.png": "c1e54ea3cf1527f015f06dba69def55d8f28912ac510daca6e559650e3d9cf4e",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/Sources/birth-generated.png": "f8dd597bc40360f70dd40105fcb00307bd9bc97baf5dad1210471c2c1efbce0b",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/Sources/hurt-generated.png": "5368d7ce513707601ccff74b59bab28731945117a895a879e020a255ad95dee4",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/Sources/walk-generated.png": "3daa7e379d436c728ae5c64010820c06e3dfb7c90a101daf2a0b23851d3d6c11",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/Sources/attack-generated.png": "5c754d8e4a188cd5a8b61908fc4635146a473c0410a0ad1093941703c4f4336c",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/Sources/death-generated.png": "75e18d832de01a7c5da09b219c283afe655574f65ee4e3dbb33b7d65f007c0d0",
+  "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/Sources/idle-generated.png": "fdc8ac3f85fcf98abe03bfaa3506b12ca8400093e7a54f7ea8da5a3ff40ff9fd"
+}

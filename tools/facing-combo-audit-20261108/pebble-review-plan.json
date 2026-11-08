@@ -1,0 +1,1076 @@
+{
+  "status": "approved",
+  "candidateForms": [
+    "pebble/blade-antenna"
+  ],
+  "entries": [
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/idle.png",
+      "beforeSha256": "4947cca8813d84347994f08c230c42ea00fc09afdcb99c2ea748e06b2ce659f7",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/idle.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "atlas"
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/walk.png",
+      "beforeSha256": "b199243f6073426bec4fe9476a5341ba8826f8dff75d0362ed1e937ed9207dcd",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/walk.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "atlas"
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/attack.png",
+      "beforeSha256": "e26173563acf1b2816f2681d80fc4f93d60188b0d2954016a9858b7a919b7fd5",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/attack.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "atlas"
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/hurt.png",
+      "beforeSha256": "134c412f1c83891ce27c3eaf193c5deb361fb2eb6682b451f5565eb31251abc8",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/hurt.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "atlas"
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/birth.png",
+      "beforeSha256": "d6276c5984162bc72d8d834aa5c0c11de766c58f1e532f93d7d0bfdbb2b3df57",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/birth.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "atlas"
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/death.png",
+      "beforeSha256": "a58e517704235fec7570879cfa11194d101783c8c1b460bed71a2e9c67809859",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/death.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "atlas"
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/portrait.png",
+      "beforeSha256": "f8c8ed2538bc6440b74fb9e8b0ff29aef63316d92f56a346da4b374896a26a02",
+      "dimensions": [
+        512,
+        512
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 1,
+        "cellCount": 1
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/portrait.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "portrait"
+      ]
+    },
+    {
+      "image": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-sheet.png",
+      "beforeSha256": "4947cca8813d84347994f08c230c42ea00fc09afdcb99c2ea748e06b2ce659f7",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-sheet.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ]
+    },
+    {
+      "image": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-sheet.png",
+      "beforeSha256": "b199243f6073426bec4fe9476a5341ba8826f8dff75d0362ed1e937ed9207dcd",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-sheet.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ]
+    },
+    {
+      "image": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-sheet.png",
+      "beforeSha256": "a58e517704235fec7570879cfa11194d101783c8c1b460bed71a2e9c67809859",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-sheet.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ]
+    },
+    {
+      "image": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-appearance.png",
+      "beforeSha256": "f8c8ed2538bc6440b74fb9e8b0ff29aef63316d92f56a346da4b374896a26a02",
+      "dimensions": [
+        512,
+        512
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 1,
+        "cellCount": 1
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-appearance.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ]
+    },
+    {
+      "image": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-sheet.png",
+      "beforeSha256": "134c412f1c83891ce27c3eaf193c5deb361fb2eb6682b451f5565eb31251abc8",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-sheet.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ]
+    },
+    {
+      "image": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-sheet.png",
+      "beforeSha256": "d6276c5984162bc72d8d834aa5c0c11de766c58f1e532f93d7d0bfdbb2b3df57",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-sheet.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ]
+    },
+    {
+      "image": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-sheet.png",
+      "beforeSha256": "e26173563acf1b2816f2681d80fc4f93d60188b0d2954016a9858b7a919b7fd5",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "destination": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-sheet.png",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ]
+    }
+  ],
+  "previews": {
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-preview.webp": {
+      "beforeSha256": "3eccd8e9ed48291eac14d1bc47e9e7beaac488a533eb0ecd55b40c7c8d6c5f4a",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ]
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-preview.gif": {
+      "beforeSha256": "3ab5dae74a2d73ce33bb24417fba23ba6ba2e25420e5d94765611e04c5bf6931",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ]
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-preview.webp": {
+      "beforeSha256": "95decb8e5e011318a5110c82e5c10aafaf4aa13a3b21cb3e252f81ce60079fff",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ]
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "40c1e8aaa61c8d3f3fb1ca012ee29ce7ff4adc6f0679347751ad918f2de41376",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ]
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "7ef9ecad5a968469e19e1963536dd7a63e0118fff0888209d8ebf5d5931e2016",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ]
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-preview.webp": {
+      "beforeSha256": "d48592fe577301533d03e0cfe7f105036209835c7c8655b77af02d8b2b67f94c",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ]
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-preview.gif": {
+      "beforeSha256": "963dba8f6761a2eddb10f90aa086e816620ca1e13ea98fc617b9dc771bbd4309",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ]
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-preview.webp": {
+      "beforeSha256": "6c08221a2b25e55aa84104de6fd6ce6b0ceb1cbf303bec6847a1f2437208675b",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ]
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-preview.gif": {
+      "beforeSha256": "52d283877541ea197377f95609fb11c6e03f528565976f9c61a2e84f742fb226",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ]
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-preview.webp": {
+      "beforeSha256": "0e2f9fd3159d6e70756598ebdec76137dfa2585139800d466ae4e2551bd1ce8c",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ]
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-preview.webp": {
+      "beforeSha256": "f5a4374b30e0cb58372c7510943898ecab9f22ad673e6ddf1904e5d4b5306ca5",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ]
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-preview.gif": {
+      "beforeSha256": "0bdfe3ef539322146991e60b0f9d8eefa899fc9f0c3cbcaa1e13c688ae3afb3f",
+      "users": [
+        {
+          "owner": "pebble/blade-antenna",
+          "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ]
+    }
+  },
+  "publicationPacking": [
+    {
+      "owner": "pebble/blade-antenna",
+      "manifest": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/publication-manifest.json"
+    }
+  ]
+}

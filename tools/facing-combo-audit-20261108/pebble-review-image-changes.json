@@ -1,0 +1,1085 @@
+{
+  "status": "completed",
+  "changes": {
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/idle.png": {
+      "beforeSha256": "4947cca8813d84347994f08c230c42ea00fc09afdcb99c2ea748e06b2ce659f7",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "atlas"
+      ],
+      "oldImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/idle.png",
+      "newImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/idle.png",
+      "afterSha256": "1f90cb865ea0793a7146d862a4dc5d1c7d659ff2ac05589c5388acecd665777a",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/walk.png": {
+      "beforeSha256": "b199243f6073426bec4fe9476a5341ba8826f8dff75d0362ed1e937ed9207dcd",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "atlas"
+      ],
+      "oldImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/walk.png",
+      "newImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/walk.png",
+      "afterSha256": "19fe1041653815aab5131b2cdf61cc0dc633fb7524dedb3dadb5a1503e611764",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/attack.png": {
+      "beforeSha256": "e26173563acf1b2816f2681d80fc4f93d60188b0d2954016a9858b7a919b7fd5",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "atlas"
+      ],
+      "oldImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/attack.png",
+      "newImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/attack.png",
+      "afterSha256": "71ea375dd6170aec9ae842afe8a585b995c553868db7777f237c18396860c6eb",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/hurt.png": {
+      "beforeSha256": "134c412f1c83891ce27c3eaf193c5deb361fb2eb6682b451f5565eb31251abc8",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "atlas"
+      ],
+      "oldImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/hurt.png",
+      "newImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/hurt.png",
+      "afterSha256": "a481fc1815ec76a472cfd426ad438ef4d8e6235c01a0311e768cbb24dae7eb7b",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/birth.png": {
+      "beforeSha256": "d6276c5984162bc72d8d834aa5c0c11de766c58f1e532f93d7d0bfdbb2b3df57",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "atlas"
+      ],
+      "oldImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/birth.png",
+      "newImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/birth.png",
+      "afterSha256": "b14deb5e2b594daa4c87b4ee06ceb072a7d690c4a01ca78b50f3ef1fc1cc2be4",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/death.png": {
+      "beforeSha256": "a58e517704235fec7570879cfa11194d101783c8c1b460bed71a2e9c67809859",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "atlas"
+      ],
+      "oldImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/death.png",
+      "newImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/death.png",
+      "afterSha256": "9710e8cafdcda571398cc045355e979a8735289962f9a7be8c38c63a4e943121",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/portrait.png": {
+      "beforeSha256": "f8c8ed2538bc6440b74fb9e8b0ff29aef63316d92f56a346da4b374896a26a02",
+      "dimensions": [
+        512,
+        512
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 1,
+        "cellCount": 1
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "portrait"
+      ],
+      "oldImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/portrait.png",
+      "newImage": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/portrait.png",
+      "afterSha256": "eadacc5b6d2bc13ad99917509e3b051a242e53869b62ee1d0ef640ed236febf5",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-sheet.png": {
+      "beforeSha256": "4947cca8813d84347994f08c230c42ea00fc09afdcb99c2ea748e06b2ce659f7",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ],
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-sheet.png",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-sheet.png",
+      "afterSha256": "1f90cb865ea0793a7146d862a4dc5d1c7d659ff2ac05589c5388acecd665777a",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-sheet.png": {
+      "beforeSha256": "b199243f6073426bec4fe9476a5341ba8826f8dff75d0362ed1e937ed9207dcd",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ],
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-sheet.png",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-sheet.png",
+      "afterSha256": "19fe1041653815aab5131b2cdf61cc0dc633fb7524dedb3dadb5a1503e611764",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-sheet.png": {
+      "beforeSha256": "a58e517704235fec7570879cfa11194d101783c8c1b460bed71a2e9c67809859",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ],
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-sheet.png",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-sheet.png",
+      "afterSha256": "9710e8cafdcda571398cc045355e979a8735289962f9a7be8c38c63a4e943121",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-appearance.png": {
+      "beforeSha256": "f8c8ed2538bc6440b74fb9e8b0ff29aef63316d92f56a346da4b374896a26a02",
+      "dimensions": [
+        512,
+        512
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 1,
+        "cellCount": 1
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ],
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-appearance.png",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-appearance.png",
+      "afterSha256": "eadacc5b6d2bc13ad99917509e3b051a242e53869b62ee1d0ef640ed236febf5",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-sheet.png": {
+      "beforeSha256": "134c412f1c83891ce27c3eaf193c5deb361fb2eb6682b451f5565eb31251abc8",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ],
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-sheet.png",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-sheet.png",
+      "afterSha256": "a481fc1815ec76a472cfd426ad438ef4d8e6235c01a0311e768cbb24dae7eb7b",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-sheet.png": {
+      "beforeSha256": "d6276c5984162bc72d8d834aa5c0c11de766c58f1e532f93d7d0bfdbb2b3df57",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ],
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-sheet.png",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-sheet.png",
+      "afterSha256": "b14deb5e2b594daa4c87b4ee06ceb072a7d690c4a01ca78b50f3ef1fc1cc2be4",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    },
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-sheet.png": {
+      "beforeSha256": "e26173563acf1b2816f2681d80fc4f93d60188b0d2954016a9858b7a919b7fd5",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "operation": "mirror-each-cell",
+      "destinationPolicy": "in_place_user_confirmed_reflection",
+      "selectedUsers": [
+        "pebble/blade-antenna"
+      ],
+      "protectedUsers": [],
+      "roles": [
+        "source-alias"
+      ],
+      "oldImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-sheet.png",
+      "newImage": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-sheet.png",
+      "afterSha256": "71ea375dd6170aec9ae842afe8a585b995c553868db7777f237c18396860c6eb",
+      "verification": {
+        "exactRgbaMirror": true,
+        "alphaExact": true,
+        "dimensionsUnchanged": true,
+        "originalPreserved": false,
+        "method": "independent per-cell RGBA hashes before and after encoding"
+      }
+    }
+  },
+  "pathMap": {
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/idle.png": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/idle.png",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/walk.png": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/walk.png",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/attack.png": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/attack.png",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/hurt.png": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/hurt.png",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/birth.png": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/birth.png",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/death.png": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/death.png",
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/portrait.png": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/portrait.png",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-sheet.png": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-idle-v1-sheet.png",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-sheet.png": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-walk-v1-sheet.png",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-sheet.png": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-death-v1-sheet.png",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-appearance.png": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-appearance.png",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-sheet.png": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-hurt-v1-sheet.png",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-sheet.png": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-birth-v1-sheet.png",
+    "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-sheet.png": "AnimationCandidates/pebble-blade-antenna-fullbody-v1-20261107/pebble-blade-antenna-attack-v1-sheet.png"
+  }
+}

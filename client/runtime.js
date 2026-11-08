@@ -21451,7 +21451,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         220
       ],
       "durationMs": 1240,
-      "pivotX": 255.0,
+      "pivotX": 257.0,
       "pivotY": 449,
       "referenceLength": 414,
       "viewSize": 414,
@@ -21477,7 +21477,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           220
         ],
         "durationMs": 1240,
-        "pivotX": 255.0,
+        "pivotX": 257.0,
         "pivotY": 449,
         "referenceLength": 414,
         "viewSize": 414,
@@ -21502,7 +21502,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           110
         ],
         "durationMs": 880,
-        "pivotX": 255.5,
+        "pivotX": 256.5,
         "pivotY": 451,
         "referenceLength": 419,
         "viewSize": 419,
@@ -21527,7 +21527,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           230
         ],
         "durationMs": 980,
-        "pivotX": 279.0,
+        "pivotX": 233.0,
         "pivotY": 449,
         "referenceLength": 396,
         "viewSize": 396,
@@ -21553,7 +21553,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           240
         ],
         "durationMs": 1030,
-        "pivotX": 257.5,
+        "pivotX": 254.5,
         "pivotY": 450,
         "referenceLength": 417,
         "viewSize": 417,
@@ -21578,7 +21578,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 403.5,
+        "pivotX": 108.5,
         "pivotY": 447,
         "referenceLength": 157,
         "viewSize": 157,
@@ -21607,7 +21607,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           750
         ],
         "durationMs": 1940,
-        "pivotX": 264.0,
+        "pivotX": 248.0,
         "pivotY": 446,
         "referenceLength": 408,
         "viewSize": 408,
