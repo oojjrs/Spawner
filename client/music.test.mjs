@@ -206,6 +206,7 @@ test("멸망한 방에서 나오는 즉시 평화 브금으로 전환하고 삭�
     state: { ending: { endedAt: 10 } }, welcome: { hidden: true }, welcomeStatus: {}, lobbyBusy: false,
     endedRoomIds: ["ended"], endingReport: { querySelectorAll: () => [] }, endingToolbar: { querySelectorAll: () => [] },
     roomExit: {}, roomExitDialog: { open: false }, roomTransition: false,
+    pebbleRoomEntryVersion: 0, pebbleBirthRuntime: { leave() {} }, pendingCreatedRoom: null,
     confirmRoomExit: async () => true, confirmDelete: async () => true, randomRoomSeed() {},
     history: { state: { spawnerRoomId: "ended" }, replaceState(value) { this.state = value; } },
     client: { async call(type) { commands.push(type); return { roomIds: ["ended"] }; } },

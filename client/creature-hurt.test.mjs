@@ -1,3 +1,4 @@
+import { readDesignSection } from "./design-test-fixture.mjs";
 import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -13,7 +14,7 @@ import { createContext, runInContext } from "node:vm";
 test("모든 일반·유니크 생물의 피격이 원화 등록과 전투 시간을 유지한다", () => {
   const creatures = Object.keys(UNIT_COMBAT_STATS).filter(key => key !== "spiny-back-beetle" && !PLAYER_TRIBES.some(tribe => tribe.key === key));
   assert.deepEqual(Object.keys(CREATURE_HURT_ANIMATIONS).sort(), creatures.sort());
-  const design = readFileSync(new URL("../Design.html", import.meta.url), "utf8");
+  const design = readDesignSection("unit-appearance");
   const reference = JSON.parse(readFileSync(new URL("../DesignAssets/Animations/UnitHurt/V3/hurt.json", import.meta.url), "utf8"));
   for (const [species, animation] of Object.entries(CREATURE_HURT_ANIMATIONS)) {
     const idle = CREATURE_IDLE_ANIMATIONS[species] || TALON_OWL_IDLE;
@@ -61,6 +62,8 @@ test("게임은 이동·대기보다 피격을 먼저 그린다", () => {
   const context = createContext({ displayedAgent: agent => agent, state: { camera: { zoom: 64 } }, viewport: { width: 500, height: 500 },
     interpolatedAgentPosition: () => ({ x: 1, y: 1 }), worldToScreen: () => ({ x: 64, y: 64 }), agentBirthPose: () => null,
     drawAgentConstruction: () => false, drawCreatureSpawn: () => false,
+    creatureIdleSheets: new Map([["dew-rabbit", { sprite: { complete: true, naturalWidth: 512 } }]]),
+    unitDisplayBounds: new Map([["dew-rabbit", {}]]),
     drawCreatureHurt: () => { calls.push("hurt"); return true; }, drawCreatureWalk: () => { calls.push("walk"); return true; } });
   runInContext(declaration, context);
   context.drawAgentUnscaledBody(0, { species: "dew-rabbit" });

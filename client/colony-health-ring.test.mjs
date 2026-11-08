@@ -52,6 +52,6 @@ test('ground HP pass is above colony ground and below nest sprites, actors and f
   const scene = source.slice(source.indexOf('      drawTerrain();'));
   assert.ok(scene.indexOf('drawColonyGround(entry,') < scene.indexOf('drawColonyHealthRing(entry)'));
   assert.ok(scene.indexOf('drawColonyHealthRing(entry)') < scene.indexOf('drawWorldObjects(now)'));
-  assert.ok(scene.indexOf('drawColonyHealthRing(entry)') < scene.indexOf('drawCombatAgents(now)'));
+  assert.ok(scene.indexOf('drawColonyHealthRing(entry)') < scene.indexOf('drawCombatPanel(now)'));
   assert.ok(scene.indexOf('drawColonyHealthRing(entry)') < scene.indexOf('drawFog(now)'));
 });

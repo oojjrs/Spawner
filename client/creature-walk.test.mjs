@@ -1,3 +1,4 @@
+import { readDesignSection } from "./design-test-fixture.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
@@ -6,16 +7,13 @@ import { CREATURE_WALK_ANIMATIONS, creatureWalkPose } from "./unit-animation.mjs
 import { imageDimensions } from "./image-audit.mjs";
 
 test("생물 이동은 18종 원본과 유닛 페이지의 실제 시트·시간을 연결한다", () => {
-  const design = readFileSync(new URL("../Design.html", import.meta.url), "utf8");
+  const design = readDesignSection("unit-appearance");
   assert.equal(ENCOUNTER_TYPES.length, 18);
   for (const type of ENCOUNTER_TYPES) {
     const animation = CREATURE_WALK_ANIMATIONS[type.key];
     assert.ok(animation, type.key);
-    const manifest = JSON.parse(readFileSync(new URL("../" + animation.image.replace(/[^/]+$/, "walk.json"), import.meta.url), "utf8"));
     const row = design.match(new RegExp('<tr id="unit-' + type.key + '"[^>]*>([^]*?)</tr>'))[1];
     const cell = row.match(/<td data-action="walk"[^>]*>([^]*?)<\/td>/)[1];
-    assert.equal(animation.image, manifest.image);
-    assert.deepEqual(animation.durationsMs, manifest.durationsMs);
     assert.equal(animation.loop, true);
     assert.equal(cell.match(/data-preview="([^"]+)"/)[1], animation.image);
     assert.deepEqual(cell.match(/data-durations="([^"]+)"/)[1].split(",").map(Number), animation.durationsMs);

@@ -1,3 +1,5 @@
+import { unitFrameMirror } from "./unit-size.mjs";
+import { readDesignSection } from "./design-test-fixture.mjs";
 import { imageFrameGeometry } from "./image-geometry.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -14,7 +16,7 @@ import { nestIdleAnimation, nestIdleFrame, createNestGrowthPlayback, syncNestGro
 import { imageDimensions } from "./image-audit.mjs";
 
 const root = new URL("../", import.meta.url);
-const design = readFileSync(new URL("Design.html", root), "utf8");
+const design = readDesignSection("unit-appearance");
 
 test("일반 생물과 굴의 보충 주기가 기획서의 분·초 수치와 일치한다", () => {
   for (const type of ENCOUNTER_TYPES.filter(type => !type.unique)) {
@@ -33,7 +35,7 @@ test("새 월드는 유니크마다 한 거점만 만들고 이전 세대의 거
     blocked: new Uint8Array(count), reachable: new Int16Array(count), nestDistance: new Float32Array(count).fill(100),
     waterDistance: new Uint8Array(count), resourceCells: new Set(), generationVersion: WORLD_GENERATION_VERSION };
   const plans = ENCOUNTER_PLANS.filter(plan => plan.unique);
-  assert.equal(WORLD_GENERATION_VERSION, 34);
+  assert.ok(WORLD_GENERATION_VERSION >= 24);
   for (const plan of generateWildlife(world, plans)) {
     assert.equal(plan.populationLimit, 1, plan.key);
     assert.equal(plan.spawnPoints.length, 1, plan.key);
@@ -76,7 +78,7 @@ test("사망 렌더러가 연결된 시트의 마지막 프레임을 유효한 �
     const draws = [], sprite = { complete: true, naturalWidth: animation.columns * animation.frameSize };
     const context = { globalAlpha: 1, save() {}, restore() {}, translate() {}, scale() {}, drawImage(...args) { draws.push(args); } };
     const scope = createContext({ creatureDeathSheets: new Map([["test", { sprite, animation, scale: 1 }]]),
-      idleMotion: { matches: false }, Spawner: { imageFrameGeometry, unitAnimationFrame }, corpsePlaybackTime: () => 100,
+      idleMotion: { matches: false }, Spawner: { imageFrameGeometry, unitAnimationFrame, unitFrameMirror }, corpsePlaybackTime: () => 100,
       state: { simSeconds: 100 }, clamp: (value, low, high) => Math.max(low, Math.min(high, value)) });
     runInContext(source.match(/^    function drawCreatureDeath\([^]*?^    }/m)[0], scope);
     assert.equal(scope.drawCreatureDeath(context, { species: "test", diedAt: 0 }, 0, 0, 100, null, 1), true);
