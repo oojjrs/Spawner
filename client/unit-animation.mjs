@@ -243,6 +243,8 @@ export function creatureWalkPose(agent, time) {
   const animation = CREATURE_WALK_ANIMATIONS[agent.species];
   if (animation && agent.health > 0 && agent.combat?.position?.moving) {
     const elapsed = (time - agent.combat.position.moveStartedAt) * 1000;
+    if (!Number.isFinite(elapsed) || elapsed < 0) return null;
+    if (agent.species === "spring-keeper") return springKeeperFlightPose(agent, time);
     return { action: "walk", animation, frame: unitAnimationFrame(animation, elapsed) };
   }
   const elapsed = time - agent.moveStartedAt;
@@ -290,12 +292,16 @@ export function unitMovementPosition(agent, time, reducedMotion = false) {
 }
 
 export function springKeeperFlightPose(agent, time) {
-  if (agent.species !== "spring-keeper" || !(agent.health > 0) || !(agent.moveDuration > 0)) return null;
+  const combatMoving = agent.combat?.position?.moving;
+  if (agent.species !== "spring-keeper" || !(agent.health > 0) || !combatMoving && !(agent.moveDuration > 0)) return null;
   const animation = CREATURE_WALK_ANIMATIONS[agent.species];
-  const elapsed = time - agent.moveStartedAt;
+  const moveStartedAt = combatMoving ? agent.combat.position.moveStartedAt : agent.moveStartedAt;
+  const elapsed = time - moveStartedAt;
   if (!Number.isFinite(elapsed) || elapsed < 0) return null;
-  const startedAt = Number.isFinite(agent.flightStartedAt) ? agent.flightStartedAt : agent.moveStartedAt;
-  if (agent.mode === "walk" && elapsed < agent.moveDuration) {
+  // Combat movement has its own continuous clock and does not set field mode,
+  // moveDuration or flightStartedAt. Reuse the same takeoff/flight strip there.
+  const startedAt = combatMoving ? moveStartedAt : Number.isFinite(agent.flightStartedAt) ? agent.flightStartedAt : agent.moveStartedAt;
+  if (combatMoving || agent.mode === "walk" && elapsed < agent.moveDuration) {
     const age = Math.max(0, (time - startedAt) * 1000);
     const takeoff = age < animation.takeoffDurationMs;
     const frameTime = takeoff ? age : animation.takeoffDurationMs +

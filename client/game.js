@@ -7714,7 +7714,7 @@
       let animation = pose?.animation || entry.animation;
       const frame = pose?.frame ?? Spawner.unitAnimationFrame(animation, (state.simSeconds - (agent.animationStartedAt || 0)) * 1000);
       animation = Spawner.imageFrameGeometry(animation, frame);
-      const size = height * (agent.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) * (attack && !hurt ? animation.frameSize / animation.viewSize : 1) * (animation.registrationScale || 1);
+      const size = height * (agent.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) * ((attack || walk) && !hurt ? animation.frameSize / (animation.viewSize || animation.frameSize) : 1) * (animation.registrationScale || 1);
       context.save(); context.translate(x, floor);
       if (attack && !hurt ? attack.mirrorX : Spawner.unitFrameMirror(animation.sourceFacing || animation.facing || "left", agent.facing)) context.scale(-1, 1);
       context.drawImage(entry.sprite, frame % animation.columns * animation.frameSize, Math.floor(frame / animation.columns) * animation.frameSize,
