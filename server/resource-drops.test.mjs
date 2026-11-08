@@ -7,6 +7,7 @@ import { createGame } from "./game.mjs";
 import { RESOURCE_TYPES, dropCarriedResources, populateForestResources } from "./resources.mjs";
 import { saveRoom, restoreRoom } from "../client/room.mjs";
 import { createHarvestPlayback, syncHarvestPlayback } from "../client/harvest.mjs";
+import { createPebbleBirthRuntime } from "../client/pebble-birth-runtime.mjs";
 
 function unit(id, ownerId, disposition, type) {
   return { id, ownerId, combatDisposition: disposition, tribe: "bean", x: 46, y: 42,
@@ -117,8 +118,15 @@ test("실제 그리기 경로는 전투 중과 전투 뒤 선택 상태에서 �
     const draws = [];
     const agent = { x: 5, y: 5, combat: mode === "combat" ? { id: "battle" } : null };
     const cell = { x: 5, y: 5, resourceType: "tree", dropped: true, amount: 2 };
+    const pebbleBirthRuntime = createPebbleBirthRuntime({
+      source: path => path,
+      image: () => assert.fail("a non-birth frame must not load birth images"),
+      createCanvas: () => assert.fail("a non-birth frame must not allocate birth canvases")
+    });
     const context = createContext({
-      state: { camera: { zoom: 64 }, selection: mode === "selected" ? { kind: "agent" } : null },
+      state: { agents: [agent], rivals: [], simSeconds: 0, camera: { zoom: 64 },
+        selection: mode === "selected" ? { kind: "agent" } : null },
+      pebbleBirthRuntime, displayedAgent: value => value,
       viewport: { width: 640, height: 640 }, WORLD_SIZE: 160, AGENT_HEIGHT: .4,
       screenToWorld: (x, y) => ({ x: x / 64, y: y / 64 }), worldToScreen: (x, y) => ({ x: x * 64, y: y * 64 }),
       colonyEntries: [], worldMap: { burrows: [] }, forest: { revealed: new Map() },

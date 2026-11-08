@@ -5,6 +5,7 @@ import { REMOVED_RESOURCE_TYPES, RESOURCE_TYPES, FOOD_HABITATS, resourceDefiniti
 import { RESOURCE_HARVEST_ANIMATIONS } from "../client/harvest-assets.mjs";
 import { generateWorld } from "./world.mjs";
 import { createRoom, saveRoom, restoreRoom } from "../client/room.mjs";
+import { RESOURCE_NODE_AMOUNT } from "./economy.mjs";
 
 const retired = ["carapace", "honey-mushrooms", "tree-fruit", "berry-bush", "seed-pods", "root-bulbs", "nutrient-moss"];
 
@@ -21,14 +22,26 @@ test("기획서에서 삭제한 식물 자원은 목록·채집·애니메이션
   }
 });
 
-test("자원 저장 버전과 관계없이 삭제 자원을 제거하고 나머지 수량은 보존한다", () => {
-  const room = { resourceVersion: 1, world: { resources: retired.map((key, index) => [index, 0, 10, key]) },
-    food: new Map([...retired.map((resourceType, x) => [x + ",0", { x, y: 0, resourceType, amount: 10 }]),
-      ["10,0", { x: 10, y: 0, resourceType: "clay", amount: 17 }]]) };
-  populateResourceNodes(room);
-  assert.deepEqual([...room.food.keys()], ["10,0"]);
-  assert.equal(room.food.get("10,0").amount, 17);
-  assert.deepEqual(room.world.resources, []);
+test("모든 저장 버전에서 폐기 자원을 제거하고 현재 버전의 잔량은 그대로 보존한다", () => {
+  for (const resourceVersion of [undefined, 0, 1, 2, 3, 4]) {
+    const room = { resourceVersion, world: { size: 16, generationVersion: 41,
+      terrain: new Uint8Array(256).fill(4), resources: retired.map((key, index) => [index, 0, 10, key]) },
+      food: new Map([...retired.map((resourceType, x) => [x + ",0", { x, y: 0, resourceType, amount: 10 }]),
+        ["10,0", { x: 10, y: 0, resourceType: "clay", amount: 17, initialAmount: 20 }]]) };
+    populateResourceNodes(room);
+    assert.deepEqual([...room.food.keys()], ["10,0"], String(resourceVersion));
+    const cell = room.food.get("10,0");
+    assert.deepEqual([cell.amount, cell.initialAmount], resourceVersion >= 4 ? [17, 20] :
+      [RESOURCE_NODE_AMOUNT, RESOURCE_NODE_AMOUNT], String(resourceVersion));
+    assert.equal(room.resourceVersion, 4);
+    assert.deepEqual(room.world.resources, []);
+    // Re-running cleanup must not refill a node already migrated to version 4.
+    cell.amount--;
+    const remaining = cell.amount;
+    populateResourceNodes(room);
+    assert.equal(cell.amount, remaining);
+    assert.deepEqual([...room.food.keys()], ["10,0"]);
+  }
 });
 
 test("새 맵에는 삭제 자원을 배치하지 않고 기존 맵의 지형·둥지 위치를 보존한다", () => {

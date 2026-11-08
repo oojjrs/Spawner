@@ -44,12 +44,28 @@ test("시작 자원 보정은 전역 자원 점유율과 생물의 빈 등장 �
     assert.ok(Math.abs(current.amount - before.amount) < before.amount * .02);
   }
   const pebble = corrected.economy.starts.find(entry => entry.tribe === "pebble");
-  assert.ok(pebble.cells > pebble.before.cells);
+  assert.deepEqual(pebble.before, previous.economy.starts.find(entry => entry.tribe === "pebble"));
+  // This start already has enough sites. Correction may redistribute them to
+  // improve access and weighted supply instead of increasing the local count.
+  assert.ok(pebble.before.cells >= 16);
+  assert.ok(pebble.movedCells > 0);
   assert.ok(pebble.cells >= 16);
   assert.ok(pebble.nearestSeconds <= 4);
   assert.ok(Math.abs(pebble.weightedAmount - pebble.targetWeightedAmount) < Math.abs(pebble.before.weightedAmount - pebble.targetWeightedAmount));
   const occupied = new Set(corrected.resources.map(([x, y]) => y * 320 + x));
   for (const plan of corrected.encounters) for (const index of plan.spawnPoints) assert.equal(occupied.has(index), false);
+});
+
+test("시작 자갈이 부족한 지역은 최소 16칸과 가까운 채집 경로를 확보한다", () => {
+  const world = generateWorld(731047, 15);
+  const pebble = world.economy.starts.find(entry => entry.tribe === "pebble");
+  assert.ok(pebble.before.cells < 16, "the fixture must exercise an undersupplied start");
+  assert.ok(pebble.cells >= 16);
+  assert.ok(pebble.cells > pebble.before.cells);
+  assert.ok(pebble.nearestSeconds <= 4);
+  assert.ok(pebble.nearestSeconds < pebble.before.nearestSeconds);
+  assert.ok(Math.abs(pebble.weightedAmount - pebble.targetWeightedAmount) <
+    Math.abs(pebble.before.weightedAmount - pebble.targetWeightedAmount));
 });
 
 test("19세대 맵의 자원 칸·매장량을 집계하고 비옥토·자갈을 전역에 분산한다", () => {

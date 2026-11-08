@@ -60,7 +60,7 @@ test("준비 1초와 비옥토 채집 주기를 지킨 성공 틱에 수량·적
     assert.equal(f.agent.carryingType, resourceType);
     assert.deepEqual(f.agent.harvestResult, {
       sequence: 1, resourceType, x: 46, y: 42, amount: 1, remaining: 4, initialAmount: 5,
-      kind: f.food.kind, terrain: "grassland", completedAt
+      dropped: false, kind: f.food.kind, terrain: "grassland", completedAt
     });
     assert.deepEqual(f.game.snapshot().agents[0].harvestResult, f.agent.harvestResult);
   }

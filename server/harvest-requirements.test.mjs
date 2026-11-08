@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { ATTRIBUTES, attributeCounts } from "./attributes.mjs";
-import { RESOURCE_TYPES, canHarvestResource, resourceHarvestRequirements, resourceHarvestSeconds } from "./resources.mjs";
+import { RESOURCE_TYPES, canHarvestResource, resourceHarvestRequirements } from "./resources.mjs";
 import { createGame } from "./game.mjs";
 import { generateWorld } from "./world.mjs";
 
@@ -73,13 +73,31 @@ test("폐기한 열매·뿌리·이끼는 현재 속성을 모두 갖춰도 수�
 test("필요한 속성을 갖춘 개체만 실제 준비·수확을 마치고 종류별 적재물을 얻는다", () => {
   for (const [key, slots] of Object.entries(requirements)) {
     const f = fixture(key, slots);
+    assert.ok(f.agent.dna, key + " retains the tribe's starting DNA");
+    assert.equal(f.agent.stats.dna.harvest, 1, key);
+    const harvestSeconds = f.agent.stats.dna.harvestTime;
+    assert.ok(Number.isFinite(harvestSeconds) && harvestSeconds > 0, key);
     advanceTo(f, 0);
     assert.equal(f.agent.mode, "harvest", key);
+    assert.equal(f.agent.harvestReady, 121, key + " preparation deadline");
+    advanceTo(f, 0.999);
+    assert.equal(f.agent.harvestPrepared, false, key);
+    assert.equal(f.food.amount, 6, key);
+    assert.equal(f.agent.carrying, 0, key);
     advanceTo(f, 1);
-    advanceTo(f, 1 + resourceHarvestSeconds(key, f.environment.world) + 0.001);
+    assert.equal(f.agent.harvestPrepared, true, key);
+    assert.equal(f.agent.harvestReady, 121 + harvestSeconds, key + " DNA harvest deadline");
+    advanceTo(f, 1 + harvestSeconds - 0.001);
+    assert.equal(f.food.amount, 6, key + " no early depletion");
+    assert.equal(f.agent.carrying, 0, key + " no early cargo");
+    assert.equal(f.agent.harvestResult, null, key);
+    advanceTo(f, 1 + harvestSeconds);
     assert.equal(f.food.amount, 5, key);
     assert.equal(f.agent.carrying, 1, key);
     assert.equal(f.agent.carryingType, key);
+    assert.equal(f.agent.harvestResult.completedAt, 121 + harvestSeconds, key);
+    assert.equal(f.agent.harvestResult.amount, 1, key);
+    assert.equal(f.agent.harvestResult.remaining, 5, key);
   }
 });
 
