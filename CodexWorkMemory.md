@@ -1,3 +1,13 @@
+## 속성 설계 조작 안내 기본 펼침 완료 [dna-guide-open-result-01a1b981]
+
+- 기록·최종 구현 관측 2026-11-08T13:56:22+09:00; 구현·기록 Codex /root, 결정 사용자. 출처 codex://threads/01a1b981-f290-7b72-9c36-d424b97e4b1a, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID 불명. dna-guide-open-01a1b981의 로컬 수정 완료.
+- 공용 편집기와 현재 게임 runtime·Attribute.html 내장본의 details 1곳씩에 open 속성만 추가했다. 생성 시 안내가 펼쳐지며 기존 native summary 접기·펼치기, 문구·단축키는 유지한다. 각 원본에서 대상이 정확히 1곳임을 확인한 뒤 문자열만 교체하여 병행 변경과 파일 형식을 보존했다.
+- 요청·과거 기본접힘 결정 대체·수정 범위·잔여사항 대조 완료. 마지막 형식/scoped diff 검사는 바로 다음 도구 결과로 남긴다. 실제 브라우저 화면 검사는 수행하지 않았다. 커밋하지 않은 로컬 변경이다.
+## 속성 설계 조작 안내 기본 펼침 진행 [dna-guide-open-01a1b981]
+
+- 기록 2026-11-08T13:55:50+09:00; 기록·구현 판단 Codex /root, 요청·결정 사용자. 출처 codex://threads/01a1b981-f290-7b72-9c36-d424b97e4b1a, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID 불명.
+- 사용자: 속성 설계창 조작 안내를 처음에 접어 두지 말 것. 기존 dna-wheel-guide-approved-20261104-01a1a129의 기본 접힘 결정만 이 요청으로 대체한다. 기존 문구와 사용자 접기·펼치기는 유지한다.
+- 관측·판단: 공용 createDnaEditor의 details에 open이 없어 닫혀 생성된다. client/dna-editor.mjs 및 현재 소비되는 runtime.js/Attribute.html의 같은 마크업에 open만 동기화한다. 병행 runtime 및 메모리 변경을 보존하며 전체 재생성은 필요하지 않다. 연결 Projects 0개. 구현·검수 전이며 커밋 요청 없음.
 ## 자원 선택 정보창 복구 확인 [resource-panel-result-01a1b976]
 
 - 기록 시각 2026-11-08T13:48:34+09:00; 구현·확인·기록 Codex /root, 결정 사용자. 출처 현재 채팅 01a1b976-8849-7bc1-b1e2-fa2b93fbbcd7, H:/Spawner. 위 resource-panel-01a1b976의 로컬 복구를 완료했다.
