@@ -1,0 +1,8 @@
+{
+  "engine": "actual native Node Canvas, not browser",
+  "phases": 4,
+  "draws": 12,
+  "exactWelcomeWorldRasterMatches": 4,
+  "leftTargetNative": true,
+  "rightTargetMirrored": true
+}

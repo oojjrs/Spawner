@@ -46,10 +46,13 @@ function exactRemainingClip(original){
  return out;
 }
 
-const imagePairs=new Map();
+const confirmedFacing=JSON.parse(readFileSync(new URL('../tools/confirmed-facing-20261108/bean-spore-image-changes.json',import.meta.url))).changes;
+const confirmedForms=new Set(['bean/blade-carapace-antenna','bean/blade-secretion-carapace-antenna']);
+const confirmedLabel=label=>[...confirmedForms].some(k=>label===k||label.startsWith(k+'.'));
+const imagePairs=new Map(), extraImagePairs=[];
 function mapImages(a,b,label){
  if(!a||typeof a!=='object')return;
- if(typeof a.image==='string'){assert.ok(b?.image,label);const old=imagePairs.get(a.image);if(old)assert.equal(old,b.image,label+' consistent alias');imagePairs.set(a.image,b.image);}
+ if(typeof a.image==='string'){assert.ok(b?.image,label);const old=imagePairs.get(a.image);if(old&&old!==b.image){assert.ok(confirmedLabel(label)||Object.values(confirmedFacing).some(c=>c.newImage===old||c.newImage===b.image),label+' only confirmed copy-on-write split');extraImagePairs.push([a.image,b.image]);}else imagePairs.set(a.image,b.image);}
  if(typeof a.portrait==='string')imagePairs.set(a.portrait,b.portrait);
  for(const[k,v]of Object.entries(a))if(v&&typeof v==='object')mapImages(v,b?.[k],label+'.'+k);
 }
@@ -58,7 +61,7 @@ for(const k of heldKeys)mapImages(held(before,k),held(current,k),k+'.held');
 for(const t of ['bean','spore']){mapImages(before.UNIT_RANGED_FORMS[t],clean(UNIT_RANGED_FORMS[t]),t+'.ranged');mapImages(before.UNIT_SECRETION_IDLE_ANIMATIONS[t],UNIT_SECRETION_IDLE_ANIMATIONS[t],t+'.secretionIdle');}
 function verifyClip(old,now,label){
  assert.equal(now.sourceFacing,'left',label+' sourceFacing');
- near(now.pivotX,(old.frameSize??old.frameWidth)-old.pivotX,label+' pivotX');
+ near(now.pivotX,confirmedLabel(label)?old.pivotX:(old.frameSize??old.frameWidth)-old.pivotX,label+' pivotX');
  assert.deepEqual(now.durationsMs,label==='bean/gather.walk'?upstreamGatherWalkDurations:old.durationsMs,label+' preserves approved clock');
  for(const key of ['frameSize','frameHeight','frameWidth','columns','frameCount','durationMs','loop','hitTimeMs','launchAtMs','releaseAtMs','pivotY','referenceLength','viewSize','registrationScale','times'])
   assert.deepEqual(now[key],old[key],label+' preserves '+key);
@@ -71,7 +74,7 @@ function verifyClip(old,now,label){
   old.sceneLayers.layers.forEach((layer,i)=>{
    const next=now.sceneLayers.layers[i];for(const key of ['role','wholeBody','frameSize','frameHeight','columns','frameCount'])assert.deepEqual(next[key],layer[key],label+' layer '+key);
    assert.equal(next.samples.length,layer.samples.length);
-   layer.samples.forEach((sample,j)=>{const got=next.samples[j];if(sample===null){assert.equal(got,null);return;}assert.equal(got.frame,sample.frame);const[x,y,w,h]=sample.destination;near(got.destination[0],old.frameSize-x-w,label+' layer sample x');assert.deepEqual(got.destination.slice(1),[y,w,h]);});
+   layer.samples.forEach((sample,j)=>{const got=next.samples[j];if(sample===null){assert.equal(got,null);return;}assert.equal(got.frame,sample.frame);const[x,y,w,h]=sample.destination;near(got.destination[0],confirmedLabel(label)?x:old.frameSize-x-w,label+' layer sample x');assert.deepEqual(got.destination.slice(1),[y,w,h]);});
   });
  }
 }
@@ -97,17 +100,18 @@ test('제외 6형태와 비선택 종족의 registry는 변하지 않는다',()=
   if(remainingFullForms.has(key)){expected.reference=exactRemainingClip(expected.reference);for(const action of Object.keys(expected.actions))expected.actions[action]=exactRemainingClip(expected.actions[action]);}
   else if(key==='pebble/carapace-antenna')expected.actions.birth=exactRemainingClip(expected.actions.birth);
   if(remainingBirthLabels.has(key)&&expected.actions.birth)expected.actions.birth=exactRemainingClip(expected.actions.birth);
+  if(key==='pebble/secretion')for(const clip of [expected.reference,...Object.values(expected.actions)])clip.sourceFacing='left';
   assert.deepEqual(UNIT_ACTION_ART[key],expected,key+' only exact approved native transforms and upstream contracts may change');
  }
- for(const key of Object.keys(before.UNIT_BIRTH_ART))if(!plan.candidateForms.includes(key)){const original=before.UNIT_BIRTH_ART[key],expected=remainingFullForms.has(key)||remainingBirthLabels.has(key)?exactRemainingClip(original):original;assert.deepEqual(UNIT_BIRTH_ART[key],expected,key);}
- for(const t of ['pebble','spring']){const expected=structuredClone(before.UNIT_RANGED_FORMS[t]);if(t==='pebble')for(const a of ['birth','death'])expected.lifecycle[a].sourceFacing='right';else expected.lifecycle.birth.sourceFacing='left';assert.deepEqual(clean(UNIT_RANGED_FORMS[t]),expected,t+' ranged keeps independent lifecycle source convention');}
+ for(const key of Object.keys(before.UNIT_BIRTH_ART))if(!plan.candidateForms.includes(key)){const original=before.UNIT_BIRTH_ART[key],expected=remainingFullForms.has(key)||remainingBirthLabels.has(key)?exactRemainingClip(original):original;assert.deepEqual(UNIT_BIRTH_ART[key],key==='pebble/secretion'?{...expected,sourceFacing:'left'}:expected,key);}
+ for(const t of ['pebble','spring']){const expected=structuredClone(before.UNIT_RANGED_FORMS[t]);if(t==='pebble'){for(const a of ['birth','death'])expected.lifecycle[a].sourceFacing='left';for(const a of ['idle','animation','walk','hurt'])expected[a].sourceFacing='left';}else expected.lifecycle.birth.sourceFacing='left';assert.deepEqual(clean(UNIT_RANGED_FORMS[t]),expected,t+' ranged keeps independent lifecycle source convention');}
 });
 test('공유 환경은 새 content-address 경로, bean-seed-b는 후보만 copy-on-write한다',()=>{
  const old='DesignAssets/Animations/BirthResolutionV1/bean-seed-b.png',replacement=imagePairs.get(old);assert.ok(replacement&&replacement!==old);
  const layers=k=>(UNIT_BIRTH_ART[k]||UNIT_ACTION_ART[k].actions.birth).sceneLayers.layers;
  for(const k of ['bean/gather','bean/secretion'])assert.equal(layers(k).find(l=>l.role==='environment').image,replacement);
  assert.equal(layers('bean/antenna').find(l=>l.role==='environment').image,old);
- for(const [oldPath,newPath]of imagePairs)if(oldPath.includes('/BirthSceneLayersV1/')){assert.notEqual(newPath,oldPath);assert.match(newPath,/\/[a-f0-9]{64}\.png$/);}
+ for(const [oldPath,newPath]of imagePairs)if(oldPath.includes('/BirthSceneLayersV1/')){if(newPath===oldPath)assert.ok(Object.values(confirmedFacing).some(c=>c.newImage===newPath),'only confirmed family may return to prior content-addressed pixels');else assert.notEqual(newPath,oldPath);assert.match(newPath,/\/[a-f0-9]{64}\.png$/);}
 });
 // Independently decode the immutable Git baseline and current files. The plan's
 // SHA must match the Git blob before it can be used as an expected pixel source.
@@ -125,23 +129,35 @@ for old,new in x['pairs']:
   continue
  assert r is not None, 'Missing baseline grid '+old
  raw=subprocess.check_output(['git','show',x['commit']+':'+old]);assert hashlib.sha256(raw).hexdigest()==r['sha256'], 'Git/plan baseline mismatch '+old
- src=Image.open(io.BytesIO(raw));dst=Image.open(new);assert src.size==dst.size,(old,'dimensions')
+ src=Image.open(io.BytesIO(raw));size=src.size
  if old in soil: assert hashlib.sha256(open(new,'rb').read()).hexdigest()==soil[old]['sha256'],(old,'approved fertile-soil prop bytes')
  g=next((v for v in r['gridVariants'] if all(v.get(k) for k in ['frameWidth','frameHeight','columns'])), {'frameWidth':src.width,'frameHeight':src.height,'columns':1})
  w,h,cols=int(g['frameWidth']),int(g['frameHeight']),int(g['columns']);assert src.width%w==0 and src.height%h==0,old
  n=x['held'].get(old);cap=(src.width//w)*(src.height//h)
- for i in range(cap):
-  source=(i+n if i<n else i-n) if n and i<2*n else i
-  sx,sy=(source%cols)*w,(source//cols)*h;dx,dy=(i%cols)*w,(i//cols)*h
-  a=np.array(ImageOps.mirror(src.crop((sx,sy,sx+w,sy+h))).convert('RGBA'));b=np.array(dst.crop((dx,dy,dx+w,dy+h)).convert('RGBA'));a[a[:,:,3]==0,:3]=0;b[b[:,:,3]==0,:3]=0
+ def digest(cell,index):
+  a=np.array(cell.convert('RGBA'));a[a[:,:,3]==0,:3]=0
   if old in soil:
-   # Only the user-requested soil props changed after the approved mirror.
+   dx,dy=(index%cols)*w,(index//cols)*h
+   # Mask only approved fertile-soil prop edits on both sides.
    for left,top,bw,bh in soil[old]['boxes']:
     x0,y0=max(0,left-dx),max(0,top-dy);x1,y1=min(w,left+bw-dx),min(h,top+bh-dy)
-    if x1>x0 and y1>y0: a[y0:y1,x0:x1]=b[y0:y1,x0:x1]
-  assert np.array_equal(a,b),(old,new,'cell',i,'decoded visible RGBA differs outside approved soil props from independent cell mirror/block swap',int(np.count_nonzero(a!=b)))
+    if x1>x0 and y1>y0:a[y0:y1,x0:x1]=0
+  return hashlib.sha256(a.tobytes()).digest()
+ expected=[]
+ for i in range(cap):
+  source=(i+n if i<n else i-n) if n and i<2*n else i
+  sx,sy=(source%cols)*w,(source//cols)*h
+  cell=src.crop((sx,sy,sx+w,sy+h))
+  expected.append(digest(cell if new in x['confirmedDestinations'] else ImageOps.mirror(cell),i))
+ src.close();del src,raw,cell
+ import gc;gc.collect()
+ # Decode one atlas at a time, particularly the 25M-pixel legacy WebP sheets.
+ dst=Image.open(new);assert dst.size==size,(old,'dimensions')
+ for i in range(cap):
+  dx,dy=(i%cols)*w,(i//cols)*h
+  assert expected[i]==digest(dst.crop((dx,dy,dx+w,dy+h)),i),(old,new,'cell',i,'visible RGBA differs from immutable baseline cell reflection')
   counts['cells']+=1
- src.close();dst.close();del raw,a,b
+ dst.close();del dst,expected;gc.collect()
  counts['files']+=1;counts['heldFiles']+=bool(n)
 for p in x['protected']:
  old=subprocess.check_output(['git','show',x['commit']+':'+p]);assert hashlib.sha256(open(p,'rb').read()).digest()==hashlib.sha256(old).digest(),('protected pixels changed',p);counts['protectedFiles']+=1
@@ -153,7 +169,15 @@ test('실제 RGBA 픽셀은 셀별 반전이며 held hurt는 두 블록을 교�
  const heldMap=Object.fromEntries(heldKeys.map(k=>{const s=held(before,k);return[s.image,s.times.length];}));
  const protectedPaths=new Set();function collect(x){if(!x||typeof x!=='object')return;if(x.image)protectedPaths.add(x.image);if(x.portrait)protectedPaths.add(x.portrait);Object.values(x).forEach(collect);}
  for(const k of plan.preservedForms){collect(before.UNIT_ACTION_ART[k]);collect(before.UNIT_BIRTH_ART[k]);}
- const result=execFileSync('python',['-c',pixelCheck],{cwd:root,input:JSON.stringify({commit:baselineCommit,files:plan.files,soilEdits,pairs:[...imagePairs],held:heldMap,protected:[...protectedPaths],unchangedProjectiles:[...unchangedProjectiles]}),maxBuffer:1024*1024,timeout:600000}).toString();const counts=JSON.parse(result);assert.equal(counts.heldFiles,5);assert.equal(counts.files,imagePairs.size-unchangedProjectiles.size);console.log('bean/spore independent pixel coverage',counts);
+ // Release decoded atlas memory between files. A single Python process retains
+ // native image arenas across large birth sheets and can exceed the CI limit.
+ const counts={files:0,cells:0,heldFiles:0,protectedFiles:0};
+ const batches=[...[...imagePairs,...extraImagePairs].map(pair=>({pairs:[pair],protected:[]})),{pairs:[],protected:[...protectedPaths]}];
+ for(const batch of batches){
+  const result=execFileSync('python',['-c',pixelCheck],{cwd:root,input:JSON.stringify({commit:baselineCommit,files:plan.files,soilEdits,...batch,confirmedDestinations:Object.values(confirmedFacing).map(c=>c.newImage),held:heldMap,unchangedProjectiles:[...unchangedProjectiles]}),maxBuffer:1024*1024,timeout:600000}).toString();
+  for(const[key,value]of Object.entries(JSON.parse(result)))counts[key]+=value;
+ }
+ assert.equal(counts.heldFiles,5);assert.equal(counts.files,imagePairs.size+extraImagePairs.length-unchangedProjectiles.size);console.log('bean/spore independent pixel coverage',counts);
 });
 function agentFor(key){const[tribe,form]=key.split('/');return{tribe,attributes:UNIT_COMBINATION_FORMS.find(f=>f.key===form)?.attributes||(form==='base'?{}:form==='gather'?{strength:1}:{[form]:1}),health:10,bornAt:0};}
 function stateAgent(key,action,clip){const a=agentFor(key),seconds=clip.durationsMs.reduce((x,y)=>x+y,0)/1000;

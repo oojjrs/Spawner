@@ -1,0 +1,22 @@
+bean/spore independent pixel coverage { files: 244, cells: 7494, heldFiles: 5, protectedFiles: 58 }
+✔ bean/spore 28형태의 184 actions와 reference, birth override는 좌향 등록 및 타이밍·격자를 보존한다 (10.239991ms)
+✔ 제외 6형태와 비선택 종족의 registry는 변하지 않는다 (42.448602ms)
+✔ 공유 환경은 새 content-address 경로, bean-seed-b는 후보만 copy-on-write한다 (0.886181ms)
+✔ 실제 RGBA 픽셀은 셀별 반전이며 held hurt는 두 블록을 교환하고 제외6형태 픽셀은 보존한다 (178798.028062ms)
+✔ 실사용 188 route의 첫·끝 pose는 752 production draw에서 양방향과 birth override를 확인한다 (96.831081ms)
+✔ 우선 held hurt 5개는 양쪽 facing 및 피격 방향의 264 draw에서 교환된 원본 블록을 선택한다 (7.41378ms)
+✔ the two user-selected combo families preserve 15 clips except exact approved source-space reflection (7.535228ms)
+✔ all 52 selected source/alias outputs retain verified reflected hashes and all three shared originals remain unchanged (132.628704ms)
+✔ the other 42 combination registrations stay exactly equal to the pre-correction baseline (4.828354ms)
+✔ pebble secretion corrects labels only: every registered action, reference, effective birth, held source and packed catalog keeps exact geometry/clocks (1.856827ms)
+✔ pebble secretion label correction preserves all registered source, layer, portrait and packed image bytes (9.074927ms)
+✔ native Canvas: nine production action routes and held-hit sides retain original left art and mirror for right targets (4820.7549ms)
+✔ native Canvas: actual welcome enter/perform/exit and stationary ranged match world rendering (563.751106ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 184883.768767

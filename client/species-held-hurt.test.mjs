@@ -66,7 +66,7 @@ test('both strike directions and facing retain camera, native crop and source or
  for(const tribe of tribes)for(const form of forms)for(const mirror of [false,true])for(const hitSide of [-1,1]){
   const a=unit(tribe,form),s=speciesHeldHurtSource(a),ctx=context(),before=JSON.stringify(a),scale=250*unitDisplaySize(a)/s.referenceLength;
   assert.ok(drawSpeciesHeldHurt(ctx,a,10.2,p=>images.get(p),{cell:250,mirror,hitSide}));
-  const nativeFacing=tribe==='spring'||tribe==='spore'||(tribe==='pebble'&&form!=='secretion')?-1:1,displayFacing=(mirror?-1:1)*nativeFacing;
+  const nativeFacing=['spring','spore','pebble'].includes(tribe)?-1:1,displayFacing=(mirror?-1:1)*nativeFacing;
   assert.equal(s.sourceFacing,nativeFacing===-1?'left':'right',tribe+'/'+form);
   const i=hitSide*displayFacing>0?s.times.length:0,draw=ctx.calls.find(c=>c[0]==='draw');
   assert.deepEqual(draw.slice(2,6),[i%s.columns*s.frameWidth,Math.floor(i/s.columns)*s.frameHeight,s.frameWidth,s.frameHeight]);

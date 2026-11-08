@@ -1,0 +1,34 @@
+{
+  "key": "bean/blade-carapace-antenna",
+  "engine": "actual native Node @napi-rs/canvas; not browser or mock",
+  "routes": 1,
+  "actionDraws": 6,
+  "birthIdleHandoffs": 2,
+  "heldDraws": 0,
+  "layerFallbackDraws": 6,
+  "packedNativeDraws": 0,
+  "packedFallbackDraws": 0,
+  "referenceChecks": 0,
+  "portraitChecks": 1,
+  "routeCoverage": [
+    {
+      "action": "birth",
+      "image": "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/birth.png",
+      "registeredFrames": 116,
+      "sampledFrames": [
+        0,
+        58,
+        115
+      ],
+      "draws": 6,
+      "layered": true
+    }
+  ],
+  "sourcePaths": [
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/birth.png",
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/idle.png",
+    "DesignAssets/Animations/AntennaCombosV1/bean/blade-carapace-antenna/portrait.png",
+    "DesignAssets/Animations/BirthSceneLayersV1/79de88f6e96abaffcfca8b35e080ed08fc8e82e402adb256e5e6f91c76c68c10.png",
+    "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png"
+  ]
+}

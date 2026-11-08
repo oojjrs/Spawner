@@ -758,7 +758,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "44fd4b740374ef81c8c781d9aa4f4ee2c64ff37d2a20dcde66a458b39615e74a",
+      "sourceHash": "a4d8aa5ecb45638e0d4ae68b617d83070ca91597a420ed86f08093edaf390f6c",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -776,47 +776,56 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       ],
       "coreReference": {
         "sourceId": "unit-appearance-v1-bean-07-neutral-v1",
-        "verified": true,
+        "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/07/Source/neutral.png",
         "coreBounds": null,
         "landmarks": {
           "leftEye": [
-            217,
+            221,
             365.5
           ],
           "rightEye": [
-            291,
+            295,
             365.5
           ],
           "supportPoint": [
-            254.5,
+            257.5,
             448.5
           ],
           "supportPixelBounds": [
-            200,
+            203,
             441,
             109,
             8
           ],
           "faceMidpoint": [
-            254,
+            258,
             365.5
           ]
         },
         "canonicalSpeciesSize": 0.4,
-        "canonicalCoreLongest": 204.8
+        "canonicalCoreLongest": 204.8,
+        "verified": true,
+        "measurement": {
+          "alphaThreshold": 16,
+          "sourcePixelBounds": {
+            "x": 99,
+            "y": 170,
+            "width": 259,
+            "height": 279
+          },
+          "eyeDistance": 74,
+          "fullCoreObservability": "partly-covered-or-replaced-by-traits"
+        },
+        "verificationScope": "camera-and-observed-landmarks"
       },
       "provenance": {
         "kind": "imagegen-integrated-neutral",
-        "referenceVerified": false,
-        "reuseAuthorized": false
+        "sourceBatch": "DesignAssets/Animations/UnitAppearanceV1/SourceBatches/bean-bcs03-af-v1.png",
+        "sourceBatchHash": "47146cc88c172e1fb13a5fd2880fcf7285dcc8b1f741e7a494916d1695867fd9",
+        "sourceCell": 1
       },
       "image": "DesignAssets/Animations/UnitAppearanceV1/bean/07/Source/neutral.png",
-      "sourceFacing": "left",
-      "sourceNormalization": {
-        "operation": "lossless native cell horizontal reflection",
-        "beforeSha256": "1d472b1a15f25475131e2367e5eb589b4f9d910d66d8a93e59b62a3f32507beb",
-        "sourceFacing": "left"
-      }
+      "sourceFacing": "left"
     },
     "actions": {},
     "previewStatus": {},
@@ -1427,7 +1436,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "fa2833a9381401f6ff2e3a7533752520f3a4201bbc6ba46a9868bd53d15e9cfb",
+      "sourceHash": "29289ee2cecb22834c324d1b74d5ca034b6dc1bd7601af35616fa7ae7986d7a5",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -1446,47 +1455,56 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       ],
       "coreReference": {
         "sourceId": "unit-appearance-v1-bean-17-neutral-v1",
-        "verified": true,
+        "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/17/Source/neutral.png",
         "coreBounds": null,
         "landmarks": {
           "leftEye": [
-            216.5,
+            220.5,
             368.5
           ],
           "rightEye": [
-            291.5,
+            295.5,
             368.5
           ],
           "supportPoint": [
-            254.5,
+            257.5,
             447.5
           ],
           "supportPixelBounds": [
-            203,
+            206,
             440,
             103,
             8
           ],
           "faceMidpoint": [
-            254,
+            258,
             368.5
           ]
         },
         "canonicalSpeciesSize": 0.4,
-        "canonicalCoreLongest": 204.8
+        "canonicalCoreLongest": 204.8,
+        "verified": true,
+        "measurement": {
+          "alphaThreshold": 16,
+          "sourcePixelBounds": {
+            "x": 97,
+            "y": 169,
+            "width": 259,
+            "height": 279
+          },
+          "eyeDistance": 75,
+          "fullCoreObservability": "partly-covered-or-replaced-by-traits"
+        },
+        "verificationScope": "camera-and-observed-landmarks"
       },
       "provenance": {
         "kind": "imagegen-integrated-neutral",
-        "referenceVerified": false,
-        "reuseAuthorized": false
+        "sourceBatch": "DesignAssets/Animations/UnitAppearanceV1/SourceBatches/bean-bcs13-af-v1.png",
+        "sourceBatchHash": "84897efe9663bbf0492f3bad61c7b404c2fbaca4c1b24db424cc26af9ac606d8",
+        "sourceCell": 1
       },
       "image": "DesignAssets/Animations/UnitAppearanceV1/bean/17/Source/neutral.png",
-      "sourceFacing": "left",
-      "sourceNormalization": {
-        "operation": "lossless native cell horizontal reflection",
-        "beforeSha256": "9a42c0245c6ac9c44ffa4dbdb67d09c16f49b605b5c80f3735302f53693a19d6",
-        "sourceFacing": "left"
-      }
+      "sourceFacing": "left"
     },
     "actions": {},
     "previewStatus": {},

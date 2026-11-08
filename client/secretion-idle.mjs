@@ -153,6 +153,7 @@ export const UNIT_SECRETION_IDLE_ANIMATIONS = Object.freeze(Object.fromEntries(O
 },
   "pebble": {
     "image": "DesignAssets/Animations/SecretionIdleV1/pebble/idle.webp",
+    "sourceFacing": "left",
     "frameSize": 236,
     "viewSize": 512,
     "columns": 4,

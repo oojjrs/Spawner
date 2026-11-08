@@ -6,6 +6,17 @@ const audits = ["bean-spore-image-changes.json", "bean-spore-extra-image-changes
   "bean-spore-global-source-alias-changes.json", "remaining-facing-pebble-image-changes.json"]
   .map(name => ({ name, document: JSON.parse(readFileSync(new URL(name, directory))) }));
 
+// Later user-confirmed corrections are applied once after the historical audit chain.
+const confirmedFacing = JSON.parse(readFileSync(new URL("../../tools/confirmed-facing-20261108/bean-spore-image-changes.json", import.meta.url))).changes;
+function confirmedSource(source) {
+  const change = confirmedFacing[source.path];
+  if (!change || change.beforeSha256 !== source.sha256) return source;
+  assert.equal(change.verification.exactRgbaMirror, true);
+  assert.equal(change.verification.alphaExact, true);
+  return { ...source, path: change.newImage, sha256: change.afterSha256,
+    mirrored: !source.mirrored, confirmedFacingCorrection: true };
+}
+
 export function approvedArtSource(path, approvedHash) {
   let current = { path, sha256: approvedHash, mirrored: false };
   const visited = new Set();
@@ -14,7 +25,7 @@ export function approvedArtSource(path, approvedHash) {
       const record = document.changes[current.path];
       return record?.beforeSha256 === current.sha256 && record.afterSha256 !== current.sha256 ? [{ name, document, record }] : [];
     });
-    if (!matches.length) return current;
+    if (!matches.length) return confirmedSource(current);
     assert.equal(matches.length, 1, path + " unique approved transform");
     const { name, document, record } = matches[0];
     assert.equal(document.status, "completed", name);
@@ -47,6 +58,8 @@ export function approvedArtSource(path, approvedHash) {
 
 export function approvedArtClip(clip, approvedHash) {
   const source = approvedArtSource(clip.image, approvedHash);
+  if (source.confirmedFacingCorrection) return { ...clip, image: source.path, sourceFacing: "left",
+    ...(source.mirrored && Number.isFinite(clip.pivotX) ? { pivotX: (clip.frameSize ?? clip.frameWidth) - clip.pivotX } : {}) };
   if (!source.mirrored) {
     const labels = JSON.parse(readFileSync(new URL("label-changes.json", directory)));
     if (!labels.images.includes(source.path)) return { ...clip, image: source.path };

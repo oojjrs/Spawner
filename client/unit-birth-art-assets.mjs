@@ -10112,7 +10112,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
     "durationMs": 2620,
     "loop": false,
     "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/secretion/birth.png",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "referenceLength": 44,
     "sceneLayers": {
       "version": 2,

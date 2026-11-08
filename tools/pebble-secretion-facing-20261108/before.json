@@ -1,0 +1,1803 @@
+{
+  "before": {
+    "action": {
+      "reference": {
+        "image": "DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png",
+        "sourceFacing": "right",
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 1,
+        "frameCount": 1,
+        "durationsMs": [
+          600
+        ],
+        "pivotX": 256,
+        "pivotY": 448,
+        "viewSize": 512,
+        "registrationScale": 1,
+        "loop": true
+      },
+      "actions": {
+        "idle": {
+          "image": "DesignAssets/Animations/SecretionIdleV1/pebble/idle.webp",
+          "sourceFacing": "right",
+          "frameSize": 236,
+          "frameHeight": 236,
+          "columns": 4,
+          "frameCount": 24,
+          "durationsMs": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ],
+          "frames": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            0,
+            19,
+            20,
+            21,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            22,
+            23,
+            22,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "pivotX": 114,
+          "pivotY": 173,
+          "viewSize": 512,
+          "registrationScale": 1,
+          "loop": true
+        },
+        "ranged": {
+          "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+          "sourceFacing": "right",
+          "frameSize": 512,
+          "frameHeight": 512,
+          "columns": 6,
+          "frameCount": 30,
+          "durationsMs": [
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "pivotX": 256,
+          "pivotY": 448,
+          "viewSize": 512,
+          "registrationScale": 1,
+          "loop": false
+        },
+        "hurt": {
+          "image": "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-secretion.webp",
+          "sourceFacing": "right",
+          "frameSize": 288,
+          "frameHeight": 192,
+          "columns": 4,
+          "frameCount": 14,
+          "durationsMs": [
+            500,
+            30,
+            40,
+            30,
+            30,
+            30,
+            30,
+            30,
+            40,
+            40,
+            40,
+            20,
+            10,
+            10
+          ],
+          "pivotX": 141,
+          "pivotY": 186,
+          "viewSize": 512,
+          "referenceLength": 217,
+          "loop": false
+        },
+        "walk": {
+          "image": "DesignAssets/Animations/UnitRangedV1/pebble/walk.webp",
+          "sourceFacing": "right",
+          "frameSize": 512,
+          "frameHeight": 512,
+          "columns": 4,
+          "frameCount": 20,
+          "durationsMs": [
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40
+          ],
+          "pivotX": 256,
+          "pivotY": 448,
+          "viewSize": 512,
+          "registrationScale": 1,
+          "loop": true
+        },
+        "birth": {
+          "image": "DesignAssets/Animations/UnitRangedV1/pebble/birth.png",
+          "sourceFacing": "right",
+          "frameSize": 151,
+          "frameHeight": 151,
+          "columns": 8,
+          "frameCount": 48,
+          "durationsMs": [
+            80,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            700
+          ],
+          "pivotX": 75.5,
+          "pivotY": 135.6640625,
+          "viewSize": 151,
+          "registrationScale": 1,
+          "loop": false
+        },
+        "death": {
+          "image": "DesignAssets/Animations/UnitRangedV1/pebble/death.png",
+          "sourceFacing": "right",
+          "frameSize": 517,
+          "frameHeight": 517,
+          "columns": 4,
+          "frameCount": 8,
+          "durationsMs": [
+            120,
+            100,
+            140,
+            120,
+            140,
+            100,
+            120,
+            600
+          ],
+          "pivotX": 261,
+          "pivotY": 453,
+          "viewSize": 517,
+          "referenceLength": 406,
+          "registrationScale": 1.0095238095238095,
+          "loop": false
+        },
+        "harvest": {
+          "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+          "sourceFacing": "right",
+          "frameSize": 512,
+          "frameHeight": 512,
+          "columns": 6,
+          "frameCount": 30,
+          "durationsMs": [
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "pivotX": 256,
+          "pivotY": 448,
+          "viewSize": 512,
+          "registrationScale": 1,
+          "loop": true
+        },
+        "carry": {
+          "image": "DesignAssets/Animations/UnitRangedV1/pebble/walk.webp",
+          "sourceFacing": "right",
+          "frameSize": 512,
+          "frameHeight": 512,
+          "columns": 4,
+          "frameCount": 20,
+          "durationsMs": [
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40,
+            40
+          ],
+          "pivotX": 256,
+          "pivotY": 448,
+          "viewSize": 512,
+          "registrationScale": 1,
+          "loop": true
+        },
+        "throw": {
+          "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+          "sourceFacing": "right",
+          "frameSize": 512,
+          "frameHeight": 512,
+          "columns": 6,
+          "frameCount": 30,
+          "durationsMs": [
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "pivotX": 256,
+          "pivotY": 448,
+          "viewSize": 512,
+          "registrationScale": 1,
+          "loop": false,
+          "releaseAtMs": 144
+        }
+      }
+    },
+    "birth": {
+      "pivotX": 449.89861751152074,
+      "pivotY": 452.6589861751152,
+      "scene": {
+        "outletX": 233,
+        "outletY": 254,
+        "travelStartMs": 120,
+        "travelEndMs": 1480
+      },
+      "frameSize": 512,
+      "frameHeight": 512,
+      "columns": 8,
+      "frameCount": 48,
+      "durationsMs": [
+        80,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        700
+      ],
+      "durationMs": 2620,
+      "loop": false,
+      "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/secretion/birth.png",
+      "sourceFacing": "right",
+      "referenceLength": 44,
+      "sceneLayers": {
+        "version": 2,
+        "layers": [
+          {
+            "image": "DesignAssets/Animations/BirthResolutionV1/pebble-secretion-body.png",
+            "frameSize": 104,
+            "frameHeight": 109,
+            "columns": 7,
+            "frameCount": 35,
+            "samples": [
+              {
+                "frame": 0,
+                "destination": [
+                  208.4437086092715,
+                  205.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 0,
+                "destination": [
+                  208.4437086092715,
+                  205.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 0,
+                "destination": [
+                  208.4437086092715,
+                  205.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  209.4437086092715,
+                  206.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  210.4437086092715,
+                  207.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  213.4437086092715,
+                  210.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  216.4437086092715,
+                  213.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  221.4437086092715,
+                  217.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  226.4437086092715,
+                  222.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  232.4437086092715,
+                  227.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  238.4437086092715,
+                  233.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  246.4437086092715,
+                  240.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  253.4437086092715,
+                  247.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  261.44370860927154,
+                  255.59602649006624,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  270.44370860927154,
+                  262.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  279.44370860927154,
+                  271.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  288.44370860927154,
+                  279.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  297.44370860927154,
+                  288.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 16,
+                "destination": [
+                  307.44370860927154,
+                  296.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 17,
+                "destination": [
+                  317.44370860927154,
+                  305.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 18,
+                "destination": [
+                  326.44370860927154,
+                  314.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 19,
+                "destination": [
+                  336.44370860927154,
+                  323.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 20,
+                "destination": [
+                  345.44370860927154,
+                  332.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 21,
+                "destination": [
+                  354.44370860927154,
+                  340.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 22,
+                "destination": [
+                  363.44370860927154,
+                  348.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 23,
+                "destination": [
+                  372.44370860927154,
+                  356.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 24,
+                "destination": [
+                  380.44370860927154,
+                  364.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  387.44370860927154,
+                  371.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  395.44370860927154,
+                  377.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  401.44370860927154,
+                  383.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  407.44370860927154,
+                  389.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 25,
+                "destination": [
+                  412.44370860927154,
+                  394.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 26,
+                "destination": [
+                  417.44370860927154,
+                  398.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 26,
+                "destination": [
+                  420.44370860927154,
+                  401.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 17,
+                "destination": [
+                  423.44370860927154,
+                  403.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 17,
+                "destination": [
+                  424.44370860927154,
+                  405.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 17,
+                "destination": [
+                  425.44370860927154,
+                  405.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 27,
+                "destination": [
+                  425.44370860927154,
+                  405.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 27,
+                "destination": [
+                  425.44370860927154,
+                  405.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 27,
+                "destination": [
+                  425.44370860927154,
+                  405.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 28,
+                "destination": [
+                  425.44370860927154,
+                  405.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 29,
+                "destination": [
+                  425.44370860927154,
+                  405.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 30,
+                "destination": [
+                  425.44370860927154,
+                  405.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 31,
+                "destination": [
+                  425.44370860927154,
+                  405.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 32,
+                "destination": [
+                  425.44370860927154,
+                  405.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 33,
+                "destination": [
+                  425.44370860927154,
+                  405.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 34,
+                "destination": [
+                  425.44370860927154,
+                  405.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              },
+              {
+                "frame": 34,
+                "destination": [
+                  425.44370860927154,
+                  405.5960264900662,
+                  49.58940397350993,
+                  51.973509933774835
+                ]
+              }
+            ],
+            "role": "body",
+            "wholeBody": true
+          }
+        ]
+      }
+    },
+    "held": {
+      "image": "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-secretion.webp",
+      "frameWidth": 288,
+      "frameHeight": 192,
+      "columns": 4,
+      "pivotX": 141,
+      "pivotY": 186,
+      "times": [
+        0,
+        0.5,
+        0.5333333333,
+        0.5666666667,
+        0.6,
+        0.6333333333,
+        0.66,
+        0.69,
+        0.72,
+        0.76,
+        0.8,
+        0.84,
+        0.86,
+        0.875
+      ],
+      "referenceLength": 217,
+      "worldScale": "source",
+      "nativeFrameSize": 512,
+      "sourcePadding": 64,
+      "sourceAnimation": "DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png",
+      "sourceHash": "d688e4e363ac109847d9832551f0e0abb6f5ff810e5cd6c0bc16ddbe7b5960d8",
+      "sourceFrame": 0,
+      "material": "rigid-rock",
+      "sourceFacing": "right"
+    },
+    "packed": {
+      "animation": {
+        "pivotX": 449.89861751152074,
+        "pivotY": 452.6589861751152,
+        "scene": {
+          "outletX": 233,
+          "outletY": 254,
+          "travelStartMs": 120,
+          "travelEndMs": 1480
+        },
+        "frameSize": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "frameCount": 48,
+        "durationsMs": [
+          80,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          40,
+          700
+        ],
+        "durationMs": 2620,
+        "loop": false,
+        "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/secretion/birth.png",
+        "sourceFacing": "right",
+        "referenceLength": 44
+      },
+      "atlasSize": [
+        256,
+        529
+      ],
+      "frames": [
+        {
+          "frame": 0,
+          "bounds": [
+            209,
+            218,
+            258,
+            254
+          ],
+          "reused": false,
+          "packed": [
+            172,
+            60
+          ]
+        },
+        {
+          "frame": 1,
+          "bounds": [
+            209,
+            218,
+            258,
+            254
+          ],
+          "reused": false,
+          "packed": [
+            4,
+            105
+          ]
+        },
+        {
+          "frame": 2,
+          "bounds": [
+            209,
+            218,
+            258,
+            254
+          ],
+          "reused": false,
+          "packed": [
+            61,
+            105
+          ]
+        },
+        {
+          "frame": 3,
+          "bounds": [
+            210,
+            219,
+            259,
+            255
+          ],
+          "reused": false,
+          "packed": [
+            118,
+            105
+          ]
+        },
+        {
+          "frame": 4,
+          "bounds": [
+            211,
+            220,
+            260,
+            256
+          ],
+          "reused": false,
+          "packed": [
+            175,
+            105
+          ]
+        },
+        {
+          "frame": 5,
+          "bounds": [
+            214,
+            225,
+            264,
+            259
+          ],
+          "reused": false,
+          "packed": [
+            174,
+            324
+          ]
+        },
+        {
+          "frame": 6,
+          "bounds": [
+            217,
+            228,
+            267,
+            262
+          ],
+          "reused": false,
+          "packed": [
+            4,
+            367
+          ]
+        },
+        {
+          "frame": 7,
+          "bounds": [
+            222,
+            231,
+            270,
+            266
+          ],
+          "reused": false,
+          "packed": [
+            172,
+            237
+          ]
+        },
+        {
+          "frame": 8,
+          "bounds": [
+            226,
+            238,
+            276,
+            271
+          ],
+          "reused": false,
+          "packed": [
+            60,
+            409
+          ]
+        },
+        {
+          "frame": 9,
+          "bounds": [
+            233,
+            241,
+            281,
+            276
+          ],
+          "reused": false,
+          "packed": [
+            4,
+            281
+          ]
+        },
+        {
+          "frame": 10,
+          "bounds": [
+            239,
+            247,
+            287,
+            282
+          ],
+          "reused": false,
+          "packed": [
+            60,
+            281
+          ]
+        },
+        {
+          "frame": 11,
+          "bounds": [
+            247,
+            252,
+            295,
+            289
+          ],
+          "reused": false,
+          "packed": [
+            62,
+            4
+          ]
+        },
+        {
+          "frame": 12,
+          "bounds": [
+            253,
+            248,
+            303,
+            296
+          ],
+          "reused": false,
+          "packed": [
+            4,
+            4
+          ]
+        },
+        {
+          "frame": 13,
+          "bounds": [
+            262,
+            269,
+            310,
+            304
+          ],
+          "reused": false,
+          "packed": [
+            116,
+            281
+          ]
+        },
+        {
+          "frame": 14,
+          "bounds": [
+            271,
+            278,
+            320,
+            311
+          ],
+          "reused": false,
+          "packed": [
+            118,
+            409
+          ]
+        },
+        {
+          "frame": 15,
+          "bounds": [
+            280,
+            287,
+            328,
+            320
+          ],
+          "reused": false,
+          "packed": [
+            175,
+            409
+          ]
+        },
+        {
+          "frame": 16,
+          "bounds": [
+            289,
+            295,
+            337,
+            328
+          ],
+          "reused": false,
+          "packed": [
+            4,
+            451
+          ]
+        },
+        {
+          "frame": 17,
+          "bounds": [
+            297,
+            304,
+            347,
+            337
+          ],
+          "reused": false,
+          "packed": [
+            60,
+            451
+          ]
+        },
+        {
+          "frame": 18,
+          "bounds": [
+            308,
+            311,
+            356,
+            345
+          ],
+          "reused": false,
+          "packed": [
+            62,
+            367
+          ]
+        },
+        {
+          "frame": 19,
+          "bounds": [
+            318,
+            318,
+            366,
+            354
+          ],
+          "reused": false,
+          "packed": [
+            4,
+            149
+          ]
+        },
+        {
+          "frame": 20,
+          "bounds": [
+            327,
+            330,
+            376,
+            363
+          ],
+          "reused": false,
+          "packed": [
+            118,
+            451
+          ]
+        },
+        {
+          "frame": 21,
+          "bounds": [
+            337,
+            339,
+            386,
+            372
+          ],
+          "reused": false,
+          "packed": [
+            175,
+            451
+          ]
+        },
+        {
+          "frame": 22,
+          "bounds": [
+            346,
+            346,
+            394,
+            381
+          ],
+          "reused": false,
+          "packed": [
+            172,
+            281
+          ]
+        },
+        {
+          "frame": 23,
+          "bounds": [
+            355,
+            353,
+            403,
+            389
+          ],
+          "reused": false,
+          "packed": [
+            60,
+            149
+          ]
+        },
+        {
+          "frame": 24,
+          "bounds": [
+            363,
+            362,
+            413,
+            397
+          ],
+          "reused": false,
+          "packed": [
+            4,
+            324
+          ]
+        },
+        {
+          "frame": 25,
+          "bounds": [
+            373,
+            370,
+            421,
+            405
+          ],
+          "reused": false,
+          "packed": [
+            62,
+            324
+          ]
+        },
+        {
+          "frame": 26,
+          "bounds": [
+            381,
+            380,
+            430,
+            413
+          ],
+          "reused": false,
+          "packed": [
+            4,
+            492
+          ]
+        },
+        {
+          "frame": 27,
+          "bounds": [
+            388,
+            385,
+            436,
+            420
+          ],
+          "reused": false,
+          "packed": [
+            118,
+            324
+          ]
+        },
+        {
+          "frame": 28,
+          "bounds": [
+            396,
+            393,
+            444,
+            426
+          ],
+          "reused": false,
+          "packed": [
+            61,
+            492
+          ]
+        },
+        {
+          "frame": 29,
+          "bounds": [
+            402,
+            399,
+            450,
+            432
+          ],
+          "reused": false,
+          "packed": [
+            117,
+            492
+          ]
+        },
+        {
+          "frame": 30,
+          "bounds": [
+            407,
+            405,
+            457,
+            438
+          ],
+          "reused": false,
+          "packed": [
+            173,
+            492
+          ]
+        },
+        {
+          "frame": 31,
+          "bounds": [
+            413,
+            409,
+            461,
+            443
+          ],
+          "reused": false,
+          "packed": [
+            118,
+            367
+          ]
+        },
+        {
+          "frame": 32,
+          "bounds": [
+            418,
+            413,
+            466,
+            447
+          ],
+          "reused": false,
+          "packed": [
+            174,
+            367
+          ]
+        },
+        {
+          "frame": 33,
+          "bounds": [
+            421,
+            416,
+            469,
+            450
+          ],
+          "reused": false,
+          "packed": [
+            4,
+            409
+          ]
+        },
+        {
+          "frame": 34,
+          "bounds": [
+            424,
+            416,
+            472,
+            452
+          ],
+          "reused": false,
+          "packed": [
+            116,
+            149
+          ]
+        },
+        {
+          "frame": 35,
+          "bounds": [
+            425,
+            418,
+            473,
+            454
+          ],
+          "reused": false,
+          "packed": [
+            172,
+            149
+          ]
+        },
+        {
+          "frame": 36,
+          "bounds": [
+            426,
+            418,
+            474,
+            454
+          ],
+          "reused": true,
+          "packed": [
+            4,
+            193
+          ]
+        },
+        {
+          "frame": 37,
+          "bounds": [
+            426,
+            418,
+            474,
+            454
+          ],
+          "reused": true,
+          "packed": [
+            60,
+            193
+          ]
+        },
+        {
+          "frame": 38,
+          "bounds": [
+            426,
+            418,
+            474,
+            454
+          ],
+          "reused": true,
+          "packed": [
+            116,
+            193
+          ]
+        },
+        {
+          "frame": 39,
+          "bounds": [
+            426,
+            418,
+            474,
+            454
+          ],
+          "reused": true,
+          "packed": [
+            172,
+            193
+          ]
+        },
+        {
+          "frame": 40,
+          "bounds": [
+            426,
+            418,
+            474,
+            454
+          ],
+          "reused": true,
+          "packed": [
+            4,
+            237
+          ]
+        },
+        {
+          "frame": 41,
+          "bounds": [
+            426,
+            418,
+            474,
+            454
+          ],
+          "reused": true,
+          "packed": [
+            60,
+            237
+          ]
+        },
+        {
+          "frame": 42,
+          "bounds": [
+            426,
+            418,
+            474,
+            454
+          ],
+          "reused": true,
+          "packed": [
+            116,
+            237
+          ]
+        },
+        {
+          "frame": 43,
+          "bounds": [
+            426,
+            417,
+            474,
+            454
+          ],
+          "reused": true,
+          "packed": [
+            118,
+            4
+          ]
+        },
+        {
+          "frame": 44,
+          "bounds": [
+            426,
+            417,
+            474,
+            454
+          ],
+          "reused": true,
+          "packed": [
+            174,
+            4
+          ]
+        },
+        {
+          "frame": 45,
+          "bounds": [
+            426,
+            417,
+            474,
+            454
+          ],
+          "reused": true,
+          "packed": [
+            4,
+            60
+          ]
+        },
+        {
+          "frame": 46,
+          "bounds": [
+            426,
+            417,
+            474,
+            454
+          ],
+          "reused": true,
+          "packed": [
+            60,
+            60
+          ]
+        },
+        {
+          "frame": 47,
+          "bounds": [
+            426,
+            417,
+            474,
+            454
+          ],
+          "reused": true,
+          "packed": [
+            116,
+            60
+          ]
+        }
+      ],
+      "path": "DesignAssets/Animations/PebblePackedBirthV1/secretion.png"
+    }
+  },
+  "hashes": {
+    "DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png": "d688e4e363ac109847d9832551f0e0abb6f5ff810e5cd6c0bc16ddbe7b5960d8",
+    "DesignAssets/Animations/SecretionIdleV1/pebble/idle.webp": "efbf6b83f31479ada534dcd4f3e595d28382b12eb15d18dbf84199f2fd04e268",
+    "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp": "c401bca78452c95c08b582517e1fc29444c10afa9c83e302d71736f738e3cede",
+    "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-secretion.webp": "9a79a6294dc523f341e1afed18bec2b49a7ecfbeb90b499695b206ae2e3cb634",
+    "DesignAssets/Animations/UnitRangedV1/pebble/walk.webp": "bceec6e78824a416bf8f31177468d7486ecbd3d7a84bdbcbd40d096a4f237b26",
+    "DesignAssets/Animations/UnitRangedV1/pebble/birth.png": "664e75e6d6a946dbbc09b4cd9516cbcdc45e42df6d9c565a8a255ab1c4864d59",
+    "DesignAssets/Animations/UnitRangedV1/pebble/death.png": "4cdf00f309490960ab54a91e44d14f05bf49bde6d282ca7ea1d12b7722836e9c",
+    "DesignAssets/Animations/ApprovedActionsV1/pebble/secretion/birth.png": "d06a22904c8733f6710508ee1e1a37d4027e900cfdd9cb7131f45ea304c55527",
+    "DesignAssets/Animations/BirthResolutionV1/pebble-secretion-body.png": "cdce4ce21ba34b98e19195acc130b2753eb98100664ee046c55c7d23046de582",
+    "DesignAssets/Animations/PebblePackedBirthV1/secretion.png": "af4e99f85f1e3838b43af5300fa681226751c6e53bfba40f7f1470227fae2d0e"
+  }
+}

@@ -6045,7 +6045,7 @@ const baseUnitActionArt = Object.freeze({
   "pebble/secretion": {
     "reference": {
       "image": "DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 1,
@@ -6062,7 +6062,7 @@ const baseUnitActionArt = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionIdleV1/pebble/idle.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 236,
         "frameHeight": 236,
         "columns": 4,
@@ -6207,7 +6207,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 6,
@@ -6252,7 +6252,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-secretion.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 288,
         "frameHeight": 192,
         "columns": 4,
@@ -6281,7 +6281,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/walk.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -6316,7 +6316,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 151,
         "frameHeight": 151,
         "columns": 8,
@@ -6379,7 +6379,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 517,
         "frameHeight": 517,
         "columns": 4,
@@ -6403,7 +6403,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "harvest": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 6,
@@ -6448,7 +6448,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "carry": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/walk.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -6483,7 +6483,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "throw": {
         "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 6,

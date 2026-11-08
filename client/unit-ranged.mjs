@@ -15,7 +15,7 @@ export const UNIT_RANGED_HURT_ANIMATIONS = Object.freeze(Object.fromEntries(
   ["bean", "spore", "pebble", "spring"].map(tribe => [tribe, Object.freeze({
     image: "DesignAssets/Animations/UnitRangedV1/" + tribe + "/hurt.png", frameSize: 512, viewSize: 512, columns: 4,
     pivotX: 256, pivotY: 448, frameCount: 16, durationMs: 760,
-    ...(["bean", "spore"].includes(tribe) ? { sourceFacing: "left" } : {}),
+    ...(["bean", "spore", "pebble"].includes(tribe) ? { sourceFacing: "left" } : {}),
     durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20], loop: false, rangedBody: true
   })])));
 export const UNIT_RANGED_FORMS = Object.freeze({

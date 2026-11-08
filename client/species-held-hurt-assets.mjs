@@ -237,7 +237,7 @@ export const SPECIES_HELD_HURT_SOURCES = Object.freeze({
       "sourceHash": "d688e4e363ac109847d9832551f0e0abb6f5ff810e5cd6c0bc16ddbe7b5960d8",
       "sourceFrame": 0,
       "material": "rigid-rock",
-      "sourceFacing": "right"
+      "sourceFacing": "left"
     },
     "blade": {
       "image": "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-blade.webp",

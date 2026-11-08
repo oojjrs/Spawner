@@ -2079,7 +2079,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         100
       ],
       "durationMs": 6400,
-      "pivotX": 254.07651715039577,
+      "pivotX": 257.9234828496042,
       "pivotY": 449,
       "referenceLength": 279,
       "viewSize": 279,
@@ -2161,7 +2161,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           100
         ],
         "durationMs": 6400,
-        "pivotX": 254.07651715039577,
+        "pivotX": 257.9234828496042,
         "pivotY": 449,
         "referenceLength": 279,
         "viewSize": 279,
@@ -2202,7 +2202,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40
         ],
         "durationMs": 960,
-        "pivotX": 254.07651715039577,
+        "pivotX": 257.9234828496042,
         "pivotY": 449,
         "referenceLength": 279,
         "viewSize": 279,
@@ -2235,7 +2235,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           60
         ],
         "durationMs": 1000,
-        "pivotX": 254.07651715039577,
+        "pivotX": 257.9234828496042,
         "pivotY": 449,
         "referenceLength": 279,
         "viewSize": 279,
@@ -2269,7 +2269,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           20
         ],
         "durationMs": 760,
-        "pivotX": 254.07651715039577,
+        "pivotX": 257.9234828496042,
         "pivotY": 449,
         "referenceLength": 279,
         "viewSize": 279,
@@ -2402,7 +2402,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           10
         ],
         "durationMs": 3850,
-        "pivotX": 81.69945580474933,
+        "pivotX": 430.30054419525067,
         "pivotY": 446.15625,
         "referenceLength": 43.59375,
         "viewSize": 43.59375,
@@ -2417,7 +2417,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           "layers": [
             {
               "role": "environment",
-              "image": "DesignAssets/Animations/BirthSceneLayersV1/b787fdc93791ddae38dc4fc6b6efdd3e0abb8a747c96d7c2511fec74b7caaecd.png",
+              "image": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
               "frameSize": 434,
               "frameHeight": 424,
               "columns": 8,
@@ -2426,7 +2426,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 0,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2435,7 +2435,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 1,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2444,7 +2444,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 2,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2453,7 +2453,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 3,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2462,7 +2462,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 4,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2471,7 +2471,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 5,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2480,7 +2480,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 6,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2489,7 +2489,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 7,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2498,7 +2498,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 8,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2507,7 +2507,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 9,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2516,7 +2516,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 10,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2525,7 +2525,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 11,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2534,7 +2534,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 12,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2543,7 +2543,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 13,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2552,7 +2552,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2561,7 +2561,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2570,7 +2570,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 16,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2579,7 +2579,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 17,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2588,7 +2588,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 18,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2597,7 +2597,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 19,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2606,7 +2606,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 20,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2615,7 +2615,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 21,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2624,7 +2624,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 22,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2633,7 +2633,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 23,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2642,7 +2642,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 24,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2651,7 +2651,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 25,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2660,7 +2660,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 26,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2669,7 +2669,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 27,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2678,7 +2678,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 28,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2687,7 +2687,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 29,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2696,7 +2696,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 30,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2705,7 +2705,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 31,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2714,7 +2714,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 32,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2723,7 +2723,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 33,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2732,7 +2732,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 34,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2741,7 +2741,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 35,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2750,7 +2750,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 36,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2759,7 +2759,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 37,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2768,7 +2768,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 38,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2777,7 +2777,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 39,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2786,7 +2786,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 40,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2795,7 +2795,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 41,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2804,7 +2804,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 42,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2813,7 +2813,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 43,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2822,7 +2822,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 44,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2831,7 +2831,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 45,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2840,7 +2840,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 46,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2849,7 +2849,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 47,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2858,7 +2858,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 48,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2867,7 +2867,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 49,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2876,7 +2876,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 50,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2885,7 +2885,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 51,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2894,7 +2894,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 52,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2903,7 +2903,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 53,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2912,7 +2912,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 54,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2921,7 +2921,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 55,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2930,7 +2930,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 56,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2939,7 +2939,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 57,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2948,7 +2948,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 58,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2957,7 +2957,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 59,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2966,7 +2966,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 60,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2975,7 +2975,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 61,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2984,7 +2984,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 62,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -2993,7 +2993,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 63,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3002,7 +3002,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 64,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3011,7 +3011,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 65,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3020,7 +3020,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 66,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3029,7 +3029,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 67,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3038,7 +3038,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 68,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3047,7 +3047,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 69,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3056,7 +3056,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 70,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3065,7 +3065,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 71,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3074,7 +3074,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 72,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3083,7 +3083,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 73,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3092,7 +3092,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 74,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3101,7 +3101,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 75,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3110,7 +3110,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 76,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3119,7 +3119,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 77,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3128,7 +3128,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 78,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3137,7 +3137,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 79,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3146,7 +3146,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 80,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3155,7 +3155,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 81,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3164,7 +3164,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 82,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3173,7 +3173,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 83,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3182,7 +3182,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 84,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3191,7 +3191,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 85,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3200,7 +3200,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 86,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3209,7 +3209,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 87,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3218,7 +3218,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 88,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3227,7 +3227,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 89,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3236,7 +3236,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 90,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3245,7 +3245,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 91,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3254,7 +3254,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 92,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3263,7 +3263,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 93,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3272,7 +3272,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 94,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3281,7 +3281,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 95,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3290,7 +3290,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 96,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3299,7 +3299,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 97,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3308,7 +3308,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 98,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3317,7 +3317,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 99,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3326,7 +3326,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 100,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3335,7 +3335,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 101,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3344,7 +3344,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 102,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3353,7 +3353,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 103,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3362,16 +3362,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 104,
                   "destination": [
-                    29,
-                    29,
-                    434,
-                    424
-                  ]
-                },
-                {
-                  "frame": 105,
-                  "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3380,7 +3371,16 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 105,
                   "destination": [
+                    49,
                     29,
+                    434,
+                    424
+                  ]
+                },
+                {
+                  "frame": 105,
+                  "destination": [
+                    49,
                     29,
                     434,
                     424
@@ -3389,16 +3389,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 106,
                   "destination": [
-                    29,
-                    29,
-                    434,
-                    424
-                  ]
-                },
-                {
-                  "frame": 106,
-                  "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3407,16 +3398,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 106,
                   "destination": [
-                    29,
-                    29,
-                    434,
-                    424
-                  ]
-                },
-                {
-                  "frame": 106,
-                  "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3425,7 +3407,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 106,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3434,7 +3416,25 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 106,
                   "destination": [
+                    49,
                     29,
+                    434,
+                    424
+                  ]
+                },
+                {
+                  "frame": 106,
+                  "destination": [
+                    49,
+                    29,
+                    434,
+                    424
+                  ]
+                },
+                {
+                  "frame": 106,
+                  "destination": [
+                    49,
                     29,
                     434,
                     424
@@ -3443,16 +3443,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 0,
                   "destination": [
-                    29,
-                    29,
-                    434,
-                    424
-                  ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -3461,7 +3452,16 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 0,
                   "destination": [
+                    49,
                     29,
+                    434,
+                    424
+                  ]
+                },
+                {
+                  "frame": 0,
+                  "destination": [
+                    49,
                     29,
                     434,
                     424
@@ -3472,7 +3472,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
             {
               "role": "body",
               "wholeBody": true,
-              "image": "DesignAssets/Animations/BirthSceneLayersV1/67bc33be6947df0465793af86e73197076d84ef0542115a40ebc987419373b40.png",
+              "image": "DesignAssets/Animations/BirthSceneLayersV1/79de88f6e96abaffcfca8b35e080ed08fc8e82e402adb256e5e6f91c76c68c10.png",
               "frameSize": 512,
               "frameHeight": 512,
               "columns": 8,
@@ -3551,7 +3551,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 0,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -3560,7 +3560,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 0,
                   "destination": [
-                    42,
+                    390,
                     375.621652746626,
                     80,
                     80
@@ -3569,7 +3569,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 1,
                   "destination": [
-                    42,
+                    390,
                     372.02194887881063,
                     80,
                     80
@@ -3578,7 +3578,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 1,
                   "destination": [
-                    42,
+                    390,
                     370.8652872756387,
                     80,
                     80
@@ -3587,7 +3587,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 2,
                   "destination": [
-                    42,
+                    390,
                     370.06265060240963,
                     80,
                     80
@@ -3596,7 +3596,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 2,
                   "destination": [
-                    42,
+                    390,
                     368.39815420141974,
                     80,
                     80
@@ -3605,7 +3605,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 3,
                   "destination": [
-                    42,
+                    390,
                     367.0214181951773,
                     80,
                     80
@@ -3614,7 +3614,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 3,
                   "destination": [
-                    42,
+                    390,
                     361.8620435881769,
                     80,
                     80
@@ -3623,7 +3623,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 4,
                   "destination": [
-                    42,
+                    390,
                     358.64815494409623,
                     80,
                     80
@@ -3632,7 +3632,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 4,
                   "destination": [
-                    42,
+                    390,
                     356.6259328759106,
                     80,
                     80
@@ -3641,7 +3641,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 5,
                   "destination": [
-                    42,
+                    390,
                     356.3325301204819,
                     80,
                     80
@@ -3650,7 +3650,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 5,
                   "destination": [
-                    42,
+                    390,
                     355.2888554216868,
                     80,
                     80
@@ -3659,7 +3659,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 6,
                   "destination": [
-                    42,
+                    390,
                     352.99277108433733,
                     80,
                     80
@@ -3668,7 +3668,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 6,
                   "destination": [
-                    42,
+                    390,
                     352.16556224899597,
                     80,
                     80
@@ -3677,7 +3677,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 6,
                   "destination": [
-                    42,
+                    390,
                     349.784437751004,
                     80,
                     80
@@ -3686,7 +3686,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 7,
                   "destination": [
-                    42,
+                    390,
                     349.65301204819275,
                     80,
                     80
@@ -3695,7 +3695,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 7,
                   "destination": [
-                    42,
+                    390,
                     350.61696582247356,
                     80,
                     80
@@ -3704,7 +3704,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 8,
                   "destination": [
-                    42,
+                    390,
                     353.73493975903614,
                     80,
                     80
@@ -3713,7 +3713,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 8,
                   "destination": [
-                    42,
+                    390,
                     356.8529136955987,
                     80,
                     80
@@ -3722,7 +3722,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 9,
                   "destination": [
-                    42,
+                    390,
                     357.8168674698795,
                     80,
                     80
@@ -3731,7 +3731,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 9,
                   "destination": [
-                    42,
+                    390,
                     357.97899416596425,
                     80,
                     80
@@ -3740,7 +3740,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 9,
                   "destination": [
-                    42,
+                    390,
                     361.2464706562877,
                     80,
                     80
@@ -3749,7 +3749,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 10,
                   "destination": [
-                    42,
+                    390,
                     366.9084337349398,
                     80,
                     80
@@ -3758,7 +3758,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 10,
                   "destination": [
-                    42,
+                    390,
                     372.57039681359186,
                     80,
                     80
@@ -3767,7 +3767,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 10,
                   "destination": [
-                    42,
+                    390,
                     375.8378733039153,
                     80,
                     80
@@ -3776,7 +3776,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 11,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -3785,7 +3785,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 11,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -3794,7 +3794,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 12,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -3803,7 +3803,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 12,
                   "destination": [
-                    42,
+                    390,
                     375.97295303663634,
                     80,
                     80
@@ -3812,7 +3812,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 12,
                   "destination": [
-                    42,
+                    390,
                     375.4590607327268,
                     80,
                     80
@@ -3821,7 +3821,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 13,
                   "destination": [
-                    42,
+                    390,
                     375.0722891566265,
                     80,
                     80
@@ -3830,7 +3830,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 13,
                   "destination": [
-                    42,
+                    390,
                     374.6855175805262,
                     80,
                     80
@@ -3839,7 +3839,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 13,
                   "destination": [
-                    42,
+                    390,
                     374.1716252766167,
                     80,
                     80
@@ -3848,7 +3848,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    42,
+                    390,
                     374.144578313253,
                     80,
                     80
@@ -3857,7 +3857,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    42,
+                    390,
                     374.2572951807229,
                     80,
                     80
@@ -3866,7 +3866,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    42,
+                    390,
                     374.66734337349396,
                     80,
                     80
@@ -3875,7 +3875,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    42,
+                    390,
                     375.21098192771086,
                     80,
                     80
@@ -3884,7 +3884,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    42,
+                    390,
                     375.7100903614458,
                     80,
                     80
@@ -3893,7 +3893,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    42,
+                    390,
                     375.98654819277107,
                     80,
                     80
@@ -3902,7 +3902,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -3911,7 +3911,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -3920,7 +3920,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -3929,7 +3929,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -3938,7 +3938,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -3947,7 +3947,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -3956,7 +3956,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -3993,7 +3993,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           1000
         ],
         "durationMs": 2260,
-        "pivotX": 254.07651715039577,
+        "pivotX": 257.9234828496042,
         "pivotY": 449,
         "referenceLength": 279,
         "viewSize": 279,
@@ -6124,7 +6124,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         100
       ],
       "durationMs": 6400,
-      "pivotX": 254.1292134831461,
+      "pivotX": 257.8707865168539,
       "pivotY": 448,
       "referenceLength": 279,
       "viewSize": 279,
@@ -6206,7 +6206,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           100
         ],
         "durationMs": 6400,
-        "pivotX": 254.1292134831461,
+        "pivotX": 257.8707865168539,
         "pivotY": 448,
         "referenceLength": 279,
         "viewSize": 279,
@@ -6247,7 +6247,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           40
         ],
         "durationMs": 960,
-        "pivotX": 254.1292134831461,
+        "pivotX": 257.8707865168539,
         "pivotY": 448,
         "referenceLength": 279,
         "viewSize": 279,
@@ -6280,7 +6280,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           60
         ],
         "durationMs": 1000,
-        "pivotX": 254.1292134831461,
+        "pivotX": 257.8707865168539,
         "pivotY": 448,
         "referenceLength": 279,
         "viewSize": 279,
@@ -6322,7 +6322,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           25
         ],
         "durationMs": 600,
-        "pivotX": 254.1292134831461,
+        "pivotX": 257.8707865168539,
         "pivotY": 448,
         "referenceLength": 279,
         "viewSize": 279,
@@ -6357,7 +6357,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           20
         ],
         "durationMs": 760,
-        "pivotX": 254.1292134831461,
+        "pivotX": 257.8707865168539,
         "pivotY": 448,
         "referenceLength": 279,
         "viewSize": 279,
@@ -6490,7 +6490,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           10
         ],
         "durationMs": 3850,
-        "pivotX": 81.70768960674155,
+        "pivotX": 430.29231039325845,
         "pivotY": 446.0,
         "referenceLength": 43.59375,
         "viewSize": 43.59375,
@@ -6505,7 +6505,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           "layers": [
             {
               "role": "environment",
-              "image": "DesignAssets/Animations/BirthSceneLayersV1/b787fdc93791ddae38dc4fc6b6efdd3e0abb8a747c96d7c2511fec74b7caaecd.png",
+              "image": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
               "frameSize": 434,
               "frameHeight": 424,
               "columns": 8,
@@ -6514,7 +6514,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 0,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6523,7 +6523,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 1,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6532,7 +6532,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 2,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6541,7 +6541,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 3,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6550,7 +6550,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 4,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6559,7 +6559,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 5,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6568,7 +6568,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 6,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6577,7 +6577,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 7,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6586,7 +6586,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 8,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6595,7 +6595,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 9,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6604,7 +6604,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 10,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6613,7 +6613,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 11,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6622,7 +6622,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 12,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6631,7 +6631,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 13,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6640,7 +6640,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6649,7 +6649,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6658,7 +6658,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 16,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6667,7 +6667,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 17,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6676,7 +6676,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 18,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6685,7 +6685,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 19,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6694,7 +6694,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 20,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6703,7 +6703,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 21,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6712,7 +6712,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 22,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6721,7 +6721,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 23,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6730,7 +6730,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 24,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6739,7 +6739,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 25,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6748,7 +6748,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 26,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6757,7 +6757,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 27,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6766,7 +6766,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 28,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6775,7 +6775,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 29,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6784,7 +6784,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 30,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6793,7 +6793,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 31,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6802,7 +6802,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 32,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6811,7 +6811,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 33,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6820,7 +6820,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 34,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6829,7 +6829,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 35,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6838,7 +6838,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 36,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6847,7 +6847,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 37,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6856,7 +6856,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 38,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6865,7 +6865,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 39,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6874,7 +6874,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 40,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6883,7 +6883,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 41,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6892,7 +6892,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 42,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6901,7 +6901,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 43,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6910,7 +6910,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 44,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6919,7 +6919,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 45,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6928,7 +6928,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 46,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6937,7 +6937,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 47,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6946,7 +6946,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 48,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6955,7 +6955,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 49,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6964,7 +6964,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 50,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6973,7 +6973,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 51,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6982,7 +6982,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 52,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -6991,7 +6991,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 53,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7000,7 +7000,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 54,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7009,7 +7009,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 55,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7018,7 +7018,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 56,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7027,7 +7027,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 57,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7036,7 +7036,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 58,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7045,7 +7045,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 59,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7054,7 +7054,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 60,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7063,7 +7063,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 61,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7072,7 +7072,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 62,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7081,7 +7081,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 63,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7090,7 +7090,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 64,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7099,7 +7099,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 65,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7108,7 +7108,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 66,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7117,7 +7117,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 67,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7126,7 +7126,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 68,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7135,7 +7135,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 69,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7144,7 +7144,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 70,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7153,7 +7153,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 71,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7162,7 +7162,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 72,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7171,7 +7171,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 73,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7180,7 +7180,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 74,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7189,7 +7189,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 75,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7198,7 +7198,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 76,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7207,7 +7207,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 77,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7216,7 +7216,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 78,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7225,7 +7225,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 79,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7234,7 +7234,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 80,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7243,7 +7243,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 81,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7252,7 +7252,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 82,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7261,7 +7261,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 83,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7270,7 +7270,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 84,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7279,7 +7279,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 85,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7288,7 +7288,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 86,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7297,7 +7297,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 87,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7306,7 +7306,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 88,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7315,7 +7315,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 89,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7324,7 +7324,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 90,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7333,7 +7333,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 91,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7342,7 +7342,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 92,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7351,7 +7351,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 93,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7360,7 +7360,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 94,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7369,7 +7369,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 95,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7378,7 +7378,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 96,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7387,7 +7387,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 97,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7396,7 +7396,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 98,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7405,7 +7405,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 99,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7414,7 +7414,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 100,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7423,7 +7423,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 101,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7432,7 +7432,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 102,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7441,7 +7441,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 103,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7450,16 +7450,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 104,
                   "destination": [
-                    29,
-                    29,
-                    434,
-                    424
-                  ]
-                },
-                {
-                  "frame": 105,
-                  "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7468,7 +7459,16 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 105,
                   "destination": [
+                    49,
                     29,
+                    434,
+                    424
+                  ]
+                },
+                {
+                  "frame": 105,
+                  "destination": [
+                    49,
                     29,
                     434,
                     424
@@ -7477,16 +7477,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 106,
                   "destination": [
-                    29,
-                    29,
-                    434,
-                    424
-                  ]
-                },
-                {
-                  "frame": 106,
-                  "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7495,16 +7486,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 106,
                   "destination": [
-                    29,
-                    29,
-                    434,
-                    424
-                  ]
-                },
-                {
-                  "frame": 106,
-                  "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7513,7 +7495,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 106,
                   "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7522,7 +7504,25 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 106,
                   "destination": [
+                    49,
                     29,
+                    434,
+                    424
+                  ]
+                },
+                {
+                  "frame": 106,
+                  "destination": [
+                    49,
+                    29,
+                    434,
+                    424
+                  ]
+                },
+                {
+                  "frame": 106,
+                  "destination": [
+                    49,
                     29,
                     434,
                     424
@@ -7531,16 +7531,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 0,
                   "destination": [
-                    29,
-                    29,
-                    434,
-                    424
-                  ]
-                },
-                {
-                  "frame": 0,
-                  "destination": [
-                    29,
+                    49,
                     29,
                     434,
                     424
@@ -7549,7 +7540,16 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 0,
                   "destination": [
+                    49,
                     29,
+                    434,
+                    424
+                  ]
+                },
+                {
+                  "frame": 0,
+                  "destination": [
+                    49,
                     29,
                     434,
                     424
@@ -7560,7 +7560,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
             {
               "role": "body",
               "wholeBody": true,
-              "image": "DesignAssets/Animations/BirthSceneLayersV1/f8293335616d5651cfbc90fee70b86dcecde248fbf078bef69c1e13daf5022b3.png",
+              "image": "DesignAssets/Animations/BirthSceneLayersV1/a1f0c0a6415f2acd1eac1a749fdeecfc398e3c9b06e76c38bc4d9f4f65fd0079.png",
               "frameSize": 512,
               "frameHeight": 512,
               "columns": 8,
@@ -7639,7 +7639,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 0,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -7648,7 +7648,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 0,
                   "destination": [
-                    42,
+                    390,
                     375.621652746626,
                     80,
                     80
@@ -7657,7 +7657,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 1,
                   "destination": [
-                    42,
+                    390,
                     372.02194887881063,
                     80,
                     80
@@ -7666,7 +7666,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 1,
                   "destination": [
-                    42,
+                    390,
                     370.8652872756387,
                     80,
                     80
@@ -7675,7 +7675,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 2,
                   "destination": [
-                    42,
+                    390,
                     370.06265060240963,
                     80,
                     80
@@ -7684,7 +7684,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 2,
                   "destination": [
-                    42,
+                    390,
                     368.39815420141974,
                     80,
                     80
@@ -7693,7 +7693,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 3,
                   "destination": [
-                    42,
+                    390,
                     367.0214181951773,
                     80,
                     80
@@ -7702,7 +7702,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 3,
                   "destination": [
-                    42,
+                    390,
                     361.8620435881769,
                     80,
                     80
@@ -7711,7 +7711,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 4,
                   "destination": [
-                    42,
+                    390,
                     358.64815494409623,
                     80,
                     80
@@ -7720,7 +7720,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 4,
                   "destination": [
-                    42,
+                    390,
                     356.6259328759106,
                     80,
                     80
@@ -7729,7 +7729,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 5,
                   "destination": [
-                    42,
+                    390,
                     356.3325301204819,
                     80,
                     80
@@ -7738,7 +7738,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 5,
                   "destination": [
-                    42,
+                    390,
                     355.2888554216868,
                     80,
                     80
@@ -7747,7 +7747,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 6,
                   "destination": [
-                    42,
+                    390,
                     352.99277108433733,
                     80,
                     80
@@ -7756,7 +7756,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 6,
                   "destination": [
-                    42,
+                    390,
                     352.16556224899597,
                     80,
                     80
@@ -7765,7 +7765,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 6,
                   "destination": [
-                    42,
+                    390,
                     349.784437751004,
                     80,
                     80
@@ -7774,7 +7774,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 7,
                   "destination": [
-                    42,
+                    390,
                     349.65301204819275,
                     80,
                     80
@@ -7783,7 +7783,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 7,
                   "destination": [
-                    42,
+                    390,
                     350.61696582247356,
                     80,
                     80
@@ -7792,7 +7792,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 8,
                   "destination": [
-                    42,
+                    390,
                     353.73493975903614,
                     80,
                     80
@@ -7801,7 +7801,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 8,
                   "destination": [
-                    42,
+                    390,
                     356.8529136955987,
                     80,
                     80
@@ -7810,7 +7810,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 9,
                   "destination": [
-                    42,
+                    390,
                     357.8168674698795,
                     80,
                     80
@@ -7819,7 +7819,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 9,
                   "destination": [
-                    42,
+                    390,
                     357.97899416596425,
                     80,
                     80
@@ -7828,7 +7828,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 9,
                   "destination": [
-                    42,
+                    390,
                     361.2464706562877,
                     80,
                     80
@@ -7837,7 +7837,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 10,
                   "destination": [
-                    42,
+                    390,
                     366.9084337349398,
                     80,
                     80
@@ -7846,7 +7846,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 10,
                   "destination": [
-                    42,
+                    390,
                     372.57039681359186,
                     80,
                     80
@@ -7855,7 +7855,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 10,
                   "destination": [
-                    42,
+                    390,
                     375.8378733039153,
                     80,
                     80
@@ -7864,7 +7864,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 11,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -7873,7 +7873,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 11,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -7882,7 +7882,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 12,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -7891,7 +7891,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 12,
                   "destination": [
-                    42,
+                    390,
                     375.97295303663634,
                     80,
                     80
@@ -7900,7 +7900,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 12,
                   "destination": [
-                    42,
+                    390,
                     375.4590607327268,
                     80,
                     80
@@ -7909,7 +7909,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 13,
                   "destination": [
-                    42,
+                    390,
                     375.0722891566265,
                     80,
                     80
@@ -7918,7 +7918,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 13,
                   "destination": [
-                    42,
+                    390,
                     374.6855175805262,
                     80,
                     80
@@ -7927,7 +7927,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 13,
                   "destination": [
-                    42,
+                    390,
                     374.1716252766167,
                     80,
                     80
@@ -7936,7 +7936,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    42,
+                    390,
                     374.144578313253,
                     80,
                     80
@@ -7945,7 +7945,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    42,
+                    390,
                     374.2572951807229,
                     80,
                     80
@@ -7954,7 +7954,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    42,
+                    390,
                     374.66734337349396,
                     80,
                     80
@@ -7963,7 +7963,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    42,
+                    390,
                     375.21098192771086,
                     80,
                     80
@@ -7972,7 +7972,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    42,
+                    390,
                     375.7100903614458,
                     80,
                     80
@@ -7981,7 +7981,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 14,
                   "destination": [
-                    42,
+                    390,
                     375.98654819277107,
                     80,
                     80
@@ -7990,7 +7990,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -7999,7 +7999,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -8008,7 +8008,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -8017,7 +8017,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -8026,7 +8026,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -8035,7 +8035,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -8044,7 +8044,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
                 {
                   "frame": 15,
                   "destination": [
-                    42,
+                    390,
                     376,
                     80,
                     80
@@ -8081,7 +8081,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           1000
         ],
         "durationMs": 2260,
-        "pivotX": 254.1292134831461,
+        "pivotX": 257.8707865168539,
         "pivotY": 448,
         "referenceLength": 279,
         "viewSize": 279,

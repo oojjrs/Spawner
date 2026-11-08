@@ -60,9 +60,9 @@ test('metadata: held base/antenna retain 14-frame clocks and reflected pivots, w
 });
 
 test('metadata: unselected Pebble forms and partial-form non-birth clips remain exact; user blade removals and bean gather clock survive',()=>{
- for(const[key,old]of Object.entries(baseline.UNIT_ACTION_ART).filter(([k])=>k.startsWith('pebble/'))){if(full.includes(key))continue;const expected=structuredClone(old);if(key===partial)expected.actions.birth=expectedClip(old.actions.birth);assert.deepEqual(A[key],expected,key);}
- for(const[key,old]of Object.entries(baseline.UNIT_BIRTH_ART).filter(([k])=>k.startsWith('pebble/')&&!full.includes(k)))assert.deepEqual(B[key],old,key);
- for(const f of ['secretion','blade','carapace'])assert.deepEqual(H.pebble[f],baseline.SPECIES_HELD_HURT_SOURCES.pebble[f],'held/'+f);
+ for(const[key,old]of Object.entries(baseline.UNIT_ACTION_ART).filter(([k])=>k.startsWith('pebble/'))){if(full.includes(key))continue;const expected=structuredClone(old);if(key===partial)expected.actions.birth=expectedClip(old.actions.birth);if(key==='pebble/secretion')for(const clip of [expected.reference,...Object.values(expected.actions)])clip.sourceFacing='left';assert.deepEqual(A[key],expected,key);}
+ for(const[key,old]of Object.entries(baseline.UNIT_BIRTH_ART).filter(([k])=>k.startsWith('pebble/')&&!full.includes(k)))assert.deepEqual(B[key],key==='pebble/secretion'?{...old,sourceFacing:'left'}:old,key);
+ for(const f of ['secretion','blade','carapace'])assert.deepEqual(H.pebble[f],f==='secretion'?{...baseline.SPECIES_HELD_HURT_SOURCES.pebble[f],sourceFacing:'left'}:baseline.SPECIES_HELD_HURT_SOURCES.pebble[f],'held/'+f);
  for(const tribe of ['bean','spore','pebble','spring'])assert.equal(Object.hasOwn(A[tribe+'/blade'].actions,'ranged'),false,tribe+' unsupported ranged stays removed');
  assert.deepEqual(A['bean/gather'].actions.walk.durationsMs,[...Array(23).fill(40),20,20,40,25,25,20,20,10,10,10]);
 });
@@ -70,7 +70,7 @@ test('metadata: unselected Pebble forms and partial-form non-birth clips remain 
 test('metadata: packed gather keeps atlas coordinates and clocks while source-space bounds reflect around the full cell',async()=>{
  const source=execFileSync('git',['show',commit+':client/pebble-packed-birth-catalog.mjs'],{cwd:root,encoding:'utf8',maxBuffer:4*1024*1024});
  const {PEBBLE_PACKED_BIRTH_CATALOG:old}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
- for(const f of ['blade','carapace','secretion'])assert.deepEqual(P[f],old[f],f+' packed unchanged');
+ for(const f of ['blade','carapace','secretion'])assert.deepEqual(P[f],f==='secretion'?{...old[f],animation:{...old[f].animation,sourceFacing:'left'}}:old[f],f+' packed unchanged except secretion facing label');
  const expected=structuredClone(old.gather),width=expected.animation.frameSize;expected.animation=expectedClip(expected.animation);
  for(const frame of expected.frames){const[x1,y1,x2,y2]=frame.bounds;frame.bounds=[width-x2,y1,width-x1,y2];}
  compare(P.gather,expected,'packed gather');const{sceneLayers,...withoutLayers}=B['pebble/gather'];compare(P.gather.animation,withoutLayers,'packed animation matches current birth');assert.equal(P.gather.frames.length,66);

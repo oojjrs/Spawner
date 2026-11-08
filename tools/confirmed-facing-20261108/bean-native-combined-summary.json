@@ -1,0 +1,10 @@
+{
+  "routes": 28,
+  "actionDraws": 168,
+  "birthIdleHandoffs": 6,
+  "heldDraws": 56,
+  "layerFallbackDraws": 18,
+  "welcomeWorldDraws": 39,
+  "welcomeWorldExactMatches": 13,
+  "totalNativeDraws": 287
+}

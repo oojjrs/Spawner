@@ -78,6 +78,7 @@ export const UNIT_RANGED_ASSETS = Object.freeze({
   "pebble": {
     "idle": {
       "image": "DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png",
+      "sourceFacing": "left",
       "frameSize": 512,
       "columns": 1,
       "pivotX": 256,
@@ -93,6 +94,7 @@ export const UNIT_RANGED_ASSETS = Object.freeze({
     },
     "animation": {
       "image": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+      "sourceFacing": "left",
       "frameSize": 512,
       "columns": 6,
       "frameCount": 30,

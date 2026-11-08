@@ -67,8 +67,8 @@ globalThis.SpawnerUnitAppearanceFiles = Object.freeze({
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/07/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/07/Source/neutral.png.js",
-    "bytes": 107597,
-    "hash": "44fd4b740374ef81c8c781d9aa4f4ee2c64ff37d2a20dcde66a458b39615e74a",
+    "bytes": 107277,
+    "hash": "a4d8aa5ecb45638e0d4ae68b617d83070ca91597a420ed86f08093edaf390f6c",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/10/Source/neutral.png": {
@@ -115,8 +115,8 @@ globalThis.SpawnerUnitAppearanceFiles = Object.freeze({
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/17/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/17/Source/neutral.png.js",
-    "bytes": 113598,
-    "hash": "fa2833a9381401f6ff2e3a7533752520f3a4201bbc6ba46a9868bd53d15e9cfb",
+    "bytes": 112962,
+    "hash": "29289ee2cecb22834c324d1b74d5ca034b6dc1bd7601af35616fa7ae7986d7a5",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/spore/00/Source/neutral.png": {
