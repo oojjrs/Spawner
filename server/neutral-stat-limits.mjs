@@ -3,7 +3,7 @@ export const NEUTRAL_STAT_LIMITS = Object.freeze(Object.fromEntries([
   ["power",{"min":1,"max":232.59999999999997}],
   ["armor",{"min":0,"max":806}],
   ["speed",{"min":0.5,"max":3.3022500000000004}],
-  ["movement",{"min":0.225,"max":3.525}],
+  ["movement",{"min":0.1375,"max":3.525}],
   ["vision",{"min":1,"max":12}],
   ["combo",{"min":0,"max":19}],
   ["comboPower",{"min":0,"max":100}],
@@ -30,6 +30,6 @@ export const NEUTRAL_STAT_LIMITS = Object.freeze(Object.fromEntries([
   ["lifesteal",{"min":0,"max":40}],
   ["reflection",{"min":0,"max":75}],
   ["regeneration",{"min":0,"max":18.599999999999998}],
-  ["capacity",{"min":0,"max":31}],
+  ["capacity",{"min":0,"max":32}],
   ["harvestSpeed",{"min":0,"max":100}]
 ].map(([field, limits]) => [field, Object.freeze(limits)])));

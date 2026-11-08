@@ -34,7 +34,8 @@ test("33개 허용 범위는 네 종족 무속성 기본값과 실제 배치의 
     const record = evidence.limits[field], baselines = [], maxima = [];
     for (const tribe of tribes) {
       const entry = record.perTribe[tribe], witness = evidence.witnesses[entry.witness];
-      const baseline = value(field, ATTRIBUTE_DNA.stats([], tribe), field);
+      const baselinePieces = entry.minWitness ? evidence.witnesses[entry.minWitness].pieces : [];
+      const baseline = value(field, ATTRIBUTE_DNA.stats(baselinePieces, tribe), field);
       const maximum = value(field, ATTRIBUTE_DNA.stats(witness.pieces, tribe), entry.witness);
       assert.ok(Math.abs(entry.min - baseline) < epsilon, tribe + ":" + field + ":min");
       assert.ok(Math.abs(entry.max - maximum) < epsilon, tribe + ":" + field + ":max");

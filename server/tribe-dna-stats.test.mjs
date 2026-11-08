@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { ATTRIBUTE_DNA } from "./dna.mjs";
 import { dnaUnitStats } from "./dna-unit.mjs";
+import { unitTravelSpeed } from "./attributes.mjs";
 import { combatDamage } from "./combat-stats.mjs";
 import { dnaCombatStats } from "./dna-combat-stats.mjs";
 import { dnaDesignStats } from "../client/dna-editor.mjs";
@@ -65,9 +66,23 @@ test("설계 수치·실험실·실제 유닛이 같은 종족의 DNA 수치를 
 });
 
 
-test("몽돌의 이동 강화는 채집 일꾼에서 가장 큰 상대 개선을 주고 다른 개체는 유지한다",()=>{
-  const ratios=Object.fromEntries(tribes.map(tribe=>[tribe,ATTRIBUTE_DNA.stats(pieces(['gather','movement']),tribe).movement/ATTRIBUTE_DNA.stats(pieces(['gather']),tribe).movement]));
-  for(const tribe of tribes.filter(tribe=>tribe!=='pebble'))assert.ok(ratios.pebble>ratios[tribe]);
+test("몽돌의 이동 조각 증가량과 종족별 채집 기본값·실제 적재 속도가 일치한다",()=>{
+  const gains=Object.fromEntries(tribes.map(tribe=>[tribe,ATTRIBUTE_DNA.stats(pieces(['gather','movement']),tribe).movement-ATTRIBUTE_DNA.stats(pieces(['gather']),tribe).movement]));
+  for(const tribe of tribes.filter(tribe=>tribe!=='pebble'))assert.ok(gains.pebble>gains[tribe]);
   close(ATTRIBUTE_DNA.stats(pieces(['gather','movement']),'pebble').movement,.357);
   close(ATTRIBUTE_DNA.stats(pieces(['movement']),'pebble').movement,.259);
+  close(ATTRIBUTE_DNA.stats(pieces(['gather']),'spore').movement,.1375);
+  close(ATTRIBUTE_DNA.stats(pieces(['gather','movement']),'spore').movement,.242);
+  close(ATTRIBUTE_DNA.stats([],'spore').movement,.25);
+  for(const [tribe,empty,loaded] of [['spore',.1375,.103125],['pebble',.225,.14625]]){
+    const dna={pieces:pieces(['gather','capacity'])},stats=dnaUnitStats(dna,tribe),agent={tribe,dna,stats};
+    close(unitTravelSpeed(agent,0,undefined),empty);close(unitTravelSpeed(agent,stats.capacity,undefined),loaded);
+  }
+  close(ATTRIBUTE_DNA.stats(pieces(['gather']),'spring').movement,.25);
+  close(ATTRIBUTE_DNA.stats(pieces(['gather','movement']),'spring').movement,.349);
+  close(ATTRIBUTE_DNA.stats(pieces(['movement']),'spring').movement,.296);
+  for(const tribe of tribes){
+    const genes=pieces(['gather']),stats=ATTRIBUTE_DNA.stats(genes,tribe);
+    assert.equal(stats.capacity,tribe==='pebble'?2:1);assert.equal(stats.harvest,1);assert.equal(stats.harvestTime,3);assert.equal(ATTRIBUTE_DNA.cost(genes),11);
+  }
 });

@@ -3,10 +3,10 @@
   "radius": 6,
   "cells": 127,
   "sources": {
-    "server/dna.mjs": "26313c758e199b72e2986671b1af648d61764501ca80461ebae21623f6453326",
+    "server/dna.mjs": "28bb314999adee612d995b40893723f13cc04ea26e896f3489647c67509317da",
     "server/dna-board.mjs": "e8ca2af66e138e639f0f70323a250fca2a8740ca3a493d6fb940adee1bd0806e",
     "server/dna-combat-stats.mjs": "0c57d7c213cd307624bae9702ef9819acccc8ca7d69a3697f798257c197612d9",
-    "server/tribe-dna-stats.mjs": "9e5e0772260b8823bdc85186d4c02945a6e6e1f26c8bf43d1bdda5113b2497a7",
+    "server/tribe-dna-stats.mjs": "7306a740778673d9c2fe853fa8d21a12660c433cd5dbc129d4c62c380b87ec2e",
     "server/dna-unit.mjs": "461a737b520791c5b93e4347cc6ad2240a54e1eaf66b5f3b8e6f816806020dc7"
   },
   "limits": {
@@ -159,7 +159,7 @@
       }
     },
     "movement": {
-      "min": 0.225,
+      "min": 0.1375,
       "max": 3.525,
       "upper": 3.525,
       "descending": false,
@@ -180,16 +180,17 @@
           "witness": "movementGather"
         },
         "spore": {
-          "min": 0.25,
-          "max": 2.8625,
-          "upper": 2.8625,
+          "min": 0.1375,
+          "max": 2.75,
+          "upper": 2.75,
           "exact": true,
-          "witness": "movementGather"
+          "witness": "movementGather",
+          "minWitness": "gatherBase"
         },
         "spring": {
-          "min": 0.275,
-          "max": 3.4374999999999996,
-          "upper": 3.4374999999999996,
+          "min": 0.25,
+          "max": 2.725,
+          "upper": 2.725,
           "exact": true,
           "witness": "movementGather"
         }
@@ -1159,8 +1160,8 @@
     },
     "capacity": {
       "min": 0,
-      "max": 31,
-      "upper": 31,
+      "max": 32,
+      "upper": 32,
       "descending": false,
       "exact": true,
       "perTribe": {
@@ -1173,8 +1174,8 @@
         },
         "pebble": {
           "min": 0,
-          "max": 31,
-          "upper": 31,
+          "max": 32,
+          "upper": 32,
           "exact": true,
           "witness": "capacity"
         },
@@ -5103,6 +5104,20 @@
           "rotation": 1,
           "q": -1,
           "r": 5
+        }
+      ]
+    },
+    "gatherBase": {
+      "targetGene": "gather",
+      "count": 1,
+      "prefix": [],
+      "pieces": [
+        {
+          "gene": "gather",
+          "grade": 1,
+          "rotation": 0,
+          "q": 0,
+          "r": 0
         }
       ]
     }

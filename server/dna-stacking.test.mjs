@@ -93,11 +93,11 @@ test("종족별 채집 간격은 기본 시간의 백분율로 줄고 100%부터
   for(const [tribe,base] of [['bean',3],['spore',3],['pebble',3],['spring',3]])for(const speed of [0,1,5,9,10,11]){
     const genes=['gather','capacity','capacity','capacity',...Array(speed).fill('harvestSpeed')];
     const dna={version:6,pieces:M.pack(genes.map(piece),4),level:4,budget:1000};assert.ok(validateDna(dna,4,1000));
-    const f=gameFixture(4,dna,tribe),interval=base*Math.max(0,100-speed*10)/100;
+    const capacity=tribe==='pebble'?5:4,f=gameFixture(capacity,dna,tribe),interval=base*Math.max(0,100-speed*10)/100;
     assert.equal(f.agent.stats.dna.harvestTime,interval);assert.equal(f.agent.stats.dna.harvestReduction,Math.min(100,speed*10));
     f.tick(.999);assert.equal(f.agent.carrying,0);f.tick(1);
-    if(interval===0){assert.equal(f.agent.carrying,4);assert.equal(f.food.amount,16);f.tick(1.001);assert.equal(f.agent.carrying,4);}
+    if(interval===0){assert.equal(f.agent.carrying,capacity);assert.equal(f.food.amount,20-capacity);f.tick(1.001);assert.equal(f.agent.carrying,capacity);}
     else {assert.equal(f.agent.carrying,0);f.tick(1+interval-.00001);assert.equal(f.agent.carrying,0);f.tick(1+interval+.00001);assert.equal(f.agent.carrying,1);}
-    if(speed===10){const depleted=gameFixture(4,dna,tribe);depleted.food.amount=2;depleted.tick(1);assert.equal(depleted.agent.carrying,2);assert.equal(depleted.food.amount,0);}
+    if(speed===10){const depleted=gameFixture(capacity,dna,tribe);depleted.food.amount=2;depleted.tick(1);assert.equal(depleted.agent.carrying,2);assert.equal(depleted.food.amount,0);}
   }
 });

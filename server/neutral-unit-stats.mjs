@@ -29,7 +29,7 @@ const NEUTRAL_STAT_CURVES = Object.freeze({
   power:[null,75,1.5],
   armor:[null,55,2],
   speed:[null,1.12,1],
-  movement:[null,1.1,1],
+  movement:[.225,1.1,1],
   vision:[null,8,1],
   combo:[null,1,2],
   comboPower:[50,65,1],

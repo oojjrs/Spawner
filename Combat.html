@@ -4152,19 +4152,19 @@ const TRIBE_DNA_STATS = Object.freeze(Object.fromEntries(Object.entries({
     growth: {}
   },
   pebble: {
-    base: { health: 1.2, armor: 6, meleePower: .85, rangedPower: .85, meleeSpeed: .9, rangedSpeed: .9, movement: .9 },
+    base: { health: 1.2, armor: 6, meleePower: .85, rangedPower: .85, meleeSpeed: .9, rangedSpeed: .9, movement: .9, gatherCapacity: 2, loadSpeed: 65 },
     growth: { health: 1.2, carapace: 1.6, armor: 1.6, power: .85, rangedPower: .85, speed: .9, rangedSpeed: .9,
       block: 1.2, tenacity: 1.2, reduction: 1.15, reflection: 1.2, regeneration: 1.2, evasion: .8, movement: .85, gatherMovement: 1.2 }
   },
   spore: {
-    base: { health: .9, armor: 0, meleePower: .85, rangedPower: 1.15, meleeSpeed: .95, rangedSpeed: 1.05, movement: 1 },
+    base: { health: .9, armor: 0, meleePower: .85, rangedPower: 1.15, meleeSpeed: .95, rangedSpeed: 1.05, movement: 1, gatherMovement: .55 },
     growth: { health: .85, carapace: .85, armor: .85, power: .8, rangedPower: 1.25, speed: .9, rangedSpeed: 1.15,
       accuracy: 1.2, penetration: 1.1, critical: 1.1, evasion: .9, block: .85, regeneration: .9, movement: .95 }
   },
   spring: {
-    base: { health: .95, armor: 0, meleePower: 1.1, rangedPower: .85, meleeSpeed: 1.05, rangedSpeed: .95, movement: 1.1 },
+    base: { health: .95, armor: 0, meleePower: 1.1, rangedPower: .85, meleeSpeed: 1.05, rangedSpeed: .95, movement: 1 },
     growth: { health: .95, carapace: .8, armor: .8, power: 1.2, rangedPower: .8, speed: 1.15, rangedSpeed: .9,
-      evasion: 1.2, parry: 1.1, counter: 1.15, lifesteal: 1.15, regeneration: 1.05, focus: 1.1, movement: 1.15 }
+      evasion: 1.2, parry: 1.1, counter: 1.15, lifesteal: 1.15, regeneration: 1.05, focus: 1.1, movement: 1.15, gatherMovement: .9 }
   }
 }).map(([tribe, profile]) => [tribe, Object.freeze({ base: Object.freeze(profile.base), growth: Object.freeze(profile.growth) })])));
 
@@ -4563,10 +4563,10 @@ const ATTRIBUTE_DNA = (() => {
     const n=weights(pieces),c=counts(pieces),gather=!!c.gather,profile=tribeDnaStats(tribe);
     const resource=RESOURCE_ECONOMY.find(entry=>entry.tribe===tribe)||RESOURCE_ECONOMY[0],harvestReduction=gather?Math.min(100,10*(n.harvestSpeed||0)):0;
     return {...dnaCombatStats(c,n,undefined,tribe),gatherCount:c.gather||0,antennaCount:c.antenna||0,
-      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?1:0,
-      harvestReduction,harvestTime:gather?resource.harvestSeconds*(100-harvestReduction)/100:0,movement:.25*profile.base.movement+(gather?.11:.04)*(n.movement||0)*(profile.growth[gather?'gatherMovement':'movement']??profile.growth.movement??1),
+      capacity:gather?c.gather*(profile.base.gatherCapacity??1)+(n.capacity||0):0,harvest:gather?1:0,
+      harvestReduction,harvestTime:gather?resource.harvestSeconds*(100-harvestReduction)/100:0,movement:.25*(gather?(profile.base.gatherMovement??profile.base.movement):profile.base.movement)+(gather?.11:.04)*(n.movement||0)*(profile.growth[gather?'gatherMovement':'movement']??profile.growth.movement??1),
       vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion||c.carapace),
-      lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed:gather?75:0};
+      lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed:gather?(profile.base.loadSpeed??75):0};
   }
   function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,q:piece.q,r:piece.r};}
   function validate(value){
@@ -5231,7 +5231,7 @@ const NEUTRAL_STAT_LIMITS = Object.freeze(Object.fromEntries([
   ["power",{"min":1,"max":232.59999999999997}],
   ["armor",{"min":0,"max":806}],
   ["speed",{"min":0.5,"max":3.3022500000000004}],
-  ["movement",{"min":0.225,"max":3.525}],
+  ["movement",{"min":0.1375,"max":3.525}],
   ["vision",{"min":1,"max":12}],
   ["combo",{"min":0,"max":19}],
   ["comboPower",{"min":0,"max":100}],
@@ -5258,7 +5258,7 @@ const NEUTRAL_STAT_LIMITS = Object.freeze(Object.fromEntries([
   ["lifesteal",{"min":0,"max":40}],
   ["reflection",{"min":0,"max":75}],
   ["regeneration",{"min":0,"max":18.599999999999998}],
-  ["capacity",{"min":0,"max":31}],
+  ["capacity",{"min":0,"max":32}],
   ["harvestSpeed",{"min":0,"max":100}]
 ].map(([field, limits]) => [field, Object.freeze(limits)])));
 
@@ -5296,7 +5296,7 @@ const NEUTRAL_STAT_CURVES = Object.freeze({
   power:[null,75,1.5],
   armor:[null,55,2],
   speed:[null,1.12,1],
-  movement:[null,1.1,1],
+  movement:[.225,1.1,1],
   vision:[null,8,1],
   combo:[null,1,2],
   comboPower:[50,65,1],
