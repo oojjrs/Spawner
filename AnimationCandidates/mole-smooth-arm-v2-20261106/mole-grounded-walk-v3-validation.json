@@ -1,0 +1,98 @@
+{
+  "gif": {
+    "sha256": "680b750807a1bb389bde2ce09f0f412c3632d6686608f2afb4bdc57985a5d2a4",
+    "frames": [
+      {
+        "frame": 0,
+        "extraOpaquePixels": 6,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 1,
+        "extraOpaquePixels": 9,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 2,
+        "extraOpaquePixels": 10,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 3,
+        "extraOpaquePixels": 5,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 4,
+        "extraOpaquePixels": 5,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 5,
+        "extraOpaquePixels": 8,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 6,
+        "extraOpaquePixels": 9,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 7,
+        "extraOpaquePixels": 10,
+        "missingOpaquePixels": 0
+      }
+    ]
+  },
+  "webp": {
+    "sha256": "bb04d5e6448ce5d4abd2980dd97157fbf2df0b9ff7ca9783d523d457770b8d43",
+    "frames": [
+      {
+        "frame": 0,
+        "extraOpaquePixels": 0,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 1,
+        "extraOpaquePixels": 0,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 2,
+        "extraOpaquePixels": 0,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 3,
+        "extraOpaquePixels": 0,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 4,
+        "extraOpaquePixels": 0,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 5,
+        "extraOpaquePixels": 0,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 6,
+        "extraOpaquePixels": 0,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 7,
+        "extraOpaquePixels": 0,
+        "missingOpaquePixels": 0
+      }
+    ]
+  },
+  "product": {
+    "staticAtlas": true,
+    "uniqueFrames": 8,
+    "transparentEdges": true,
+    "timedPreviewDisposal": 2
+  }
+}

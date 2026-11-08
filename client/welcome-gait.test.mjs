@@ -22,7 +22,7 @@ test('authored weasel strides follow body rendering scale rather than battlefiel
       near(stride, 187.5 * sourceScale * renderedSourcePixel, key + ' stance distance');
     }
   }
-  assert.equal(welcomeStridePixels(CREATURE_WALK_ANIMATIONS['soil-mole'], { scale: 1 }, 120, 1), null);
+  assert.equal(welcomeStridePixels(CREATURE_WALK_ANIMATIONS['bundle-snail'], { scale: 1 }, 120, 1), null);
   assert.equal(welcomeStridePixels(CREATURE_WALK_ANIMATIONS['white-paw'], null, 120, 1), null);
 });
 

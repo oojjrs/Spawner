@@ -550,7 +550,7 @@ globalThis.SpawnerLocalAssetFiles = Object.freeze([
   "./client/local-assets/Animations/CottonSheepIdle/CalmV5/idle-runtime.webp.js",
   "./client/local-assets/Animations/CreatureApprovedV4/bubble-toad/death.webp.js",
   "./client/local-assets/Animations/CreatureApprovedV4/shadow-weasel/walk-stride-v6.webp.js",
-  "./client/local-assets/Animations/CreatureApprovedV4/soil-mole/walk.webp.js",
+  "./client/local-assets/Animations/CreatureApprovedV4/soil-mole/walk-grounded-v3.webp.js",
   "./client/local-assets/Animations/CreatureApprovedV4/walking-forest/walk.webp.js",
   "./client/local-assets/Animations/CreatureApprovedV4/white-paw/walk-stride-v6.webp.js",
   "./client/local-assets/Animations/CreatureApprovedV5/bubble-toad/attack.webp.js",

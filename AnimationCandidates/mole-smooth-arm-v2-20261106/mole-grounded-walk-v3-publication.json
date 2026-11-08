@@ -1,0 +1,41 @@
+{
+  "approval": "2026-11-08 user: 어, 좋아, 두더지 괜찮은 거 같다. 그대로 적용하자",
+  "approvedSheet": "AnimationCandidates/mole-smooth-arm-v2-20261106/mole-grounded-walk-v3-sheet.png",
+  "approvedSheetSHA256": "4d105f9051e39b4ef68f78ebb46f4353504646492e5fb04fd428bcd51028dca7",
+  "image": "DesignAssets/Animations/CreatureApprovedV4/soil-mole/walk-grounded-v3.webp",
+  "imageSHA256": "9b9436029d4e0c1f8396fe912726863efea1542430f56740b626d051d76cc86d",
+  "thumbnail": "DesignAssets/Planning/ApprovedAnimations96/soil-mole-grounded-walk-v3-preview.webp",
+  "thumbnailSHA256": "0b9f01e580c634421549851eaa1101851fe98f7c500b1e08bb93115d3070dd1b",
+  "runtime": {
+    "image": "DesignAssets/Animations/CreatureApprovedV4/soil-mole/walk-grounded-v3.webp",
+    "frameSize": 256,
+    "viewSize": 256,
+    "columns": 4,
+    "pivotX": 127.25,
+    "pivotY": 181.75,
+    "durationsMs": [
+      180,
+      80,
+      80,
+      80,
+      110,
+      50,
+      40,
+      20
+    ],
+    "loop": true,
+    "registrationScale": 1,
+    "groundRadiusX": 0.387324,
+    "groundRadiusY": 0.087324,
+    "cyclesPerCell": 2.5,
+    "sourceFacing": "left",
+    "strideFrameRatio": 0.4166666666666667,
+    "frameCount": 8,
+    "durationMs": 640
+  },
+  "transform": "Whole atlas common 50% downsample to 256px cells. All eight approved poses kept in original order. No image blending or new drawing.",
+  "timing": "Near paw 0->1: 60px/180ms; 1->2: 27px/80ms; far paw 4->5: 36px/110ms. Phase follows displayed world/combat travel. 7->0 has only 20ms to avoid a long reverse-contact dwell.",
+  "limitations": "Discrete eight-key walk, not a 64-frame interpolation. Contact positions have pixel-level stepping during held keys. Vertical/diagonal motion remains a side-view illustration.",
+  "changedGameplaySpeed": false,
+  "changedDisplaySize": false
+}

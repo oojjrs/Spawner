@@ -1,0 +1,266 @@
+{
+  "status": "approved-source-art",
+  "species": "soil-mole",
+  "sourceTool": "built-in image_gen",
+  "sourceImage": "AnimationCandidates/mole-smooth-arm-v2-20261106/mole-grounded-walk-v3-source.png",
+  "sheetImage": "AnimationCandidates/mole-smooth-arm-v2-20261106/mole-grounded-walk-v3-sheet.png",
+  "previewGif": "AnimationCandidates/mole-smooth-arm-v2-20261106/mole-grounded-walk-v3-preview.gif",
+  "previewWebp": "AnimationCandidates/mole-smooth-arm-v2-20261106/mole-grounded-walk-v3-preview.webp",
+  "sourceImageSHA256": "b8859e670cbf14aa95be2f17dff6bc196120c8f742eef1025c489602f9af2898",
+  "frameSize": 512,
+  "columns": 4,
+  "frameCount": 8,
+  "durationMs": 640,
+  "durationsMs": [
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80,
+    80
+  ],
+  "loop": true,
+  "reference": "AnimationCandidates/mole-smooth-arm-v2-20261106/Source/neutral.png",
+  "changes": "New whole-body key poses with a longer planted near-forepaw sweep, lifted recovery, and an opposite-phase far forepaw. Character silhouette and face use the original reference.",
+  "packaging": "Equal source-grid crops, common unit scale, integer centering into 512x512 cells. No per-frame resizing, warping, painted replacements, or alpha cleanup. Generated RGBA preserved; GIF necessarily has palette/alpha limitations.",
+  "validation": {
+    "uniqueFrames": 8,
+    "allFrameEdgesTransparent": true,
+    "noGameplaySpeedChanges": true,
+    "gifFrames": [
+      {
+        "frame": 0,
+        "durationMs": 80,
+        "disposal": 2,
+        "extraOpaquePixels": 6,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 1,
+        "durationMs": 80,
+        "disposal": 2,
+        "extraOpaquePixels": 9,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 2,
+        "durationMs": 80,
+        "disposal": 2,
+        "extraOpaquePixels": 10,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 3,
+        "durationMs": 80,
+        "disposal": 2,
+        "extraOpaquePixels": 5,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 4,
+        "durationMs": 80,
+        "disposal": 2,
+        "extraOpaquePixels": 5,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 5,
+        "durationMs": 80,
+        "disposal": 2,
+        "extraOpaquePixels": 8,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 6,
+        "durationMs": 80,
+        "disposal": 2,
+        "extraOpaquePixels": 9,
+        "missingOpaquePixels": 0
+      },
+      {
+        "frame": 7,
+        "durationMs": 80,
+        "disposal": 2,
+        "extraOpaquePixels": 10,
+        "missingOpaquePixels": 0
+      }
+    ],
+    "gifRestoresBackgroundEveryFrame": true,
+    "packagingOnly": true
+  },
+  "limitations": "Review preview uses uniform timing. Production preserves these eight poses with measured nonuniform timing; see the publication manifest for registration, stride, approval and limitations.",
+  "frames": [
+    {
+      "frame": 0,
+      "sourceRect": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "destination": [
+        34,
+        34
+      ],
+      "boundsAtAlpha16": [
+        98,
+        120,
+        467,
+        410
+      ],
+      "edgeAlpha": 0,
+      "sha256": "946879fad4319870ca6f5526ece508ef71d4e92fbd149488e2f0461945f2bc1c"
+    },
+    {
+      "frame": 1,
+      "sourceRect": [
+        444,
+        0,
+        443,
+        444
+      ],
+      "destination": [
+        34,
+        34
+      ],
+      "boundsAtAlpha16": [
+        98,
+        120,
+        466,
+        406
+      ],
+      "edgeAlpha": 0,
+      "sha256": "f4db37b160e8673f62d716bdc837eed8a8054112b598c84be02265fa5f4fff70"
+    },
+    {
+      "frame": 2,
+      "sourceRect": [
+        887,
+        0,
+        444,
+        444
+      ],
+      "destination": [
+        34,
+        34
+      ],
+      "boundsAtAlpha16": [
+        80,
+        120,
+        467,
+        404
+      ],
+      "edgeAlpha": 0,
+      "sha256": "3115509f0043b0b8b2d6ce18cdf3f22cb4a5f3509253ff8af493f16643790356"
+    },
+    {
+      "frame": 3,
+      "sourceRect": [
+        1331,
+        0,
+        443,
+        444
+      ],
+      "destination": [
+        34,
+        34
+      ],
+      "boundsAtAlpha16": [
+        50,
+        120,
+        468,
+        384
+      ],
+      "edgeAlpha": 0,
+      "sha256": "f2e3caf6b50e118ef964a841b6e5acb931f2e84ea10eba0b11d32bfc1c23a8b4"
+    },
+    {
+      "frame": 4,
+      "sourceRect": [
+        0,
+        444,
+        444,
+        443
+      ],
+      "destination": [
+        34,
+        34
+      ],
+      "boundsAtAlpha16": [
+        48,
+        120,
+        468,
+        382
+      ],
+      "edgeAlpha": 0,
+      "sha256": "7224a559037e0731ebe2bda73eb235929baebf60c7e94427c2248b8223c98da1"
+    },
+    {
+      "frame": 5,
+      "sourceRect": [
+        444,
+        444,
+        443,
+        443
+      ],
+      "destination": [
+        34,
+        34
+      ],
+      "boundsAtAlpha16": [
+        85,
+        120,
+        467,
+        381
+      ],
+      "edgeAlpha": 0,
+      "sha256": "487bb4b630d73067bad9aef034a3ffd920e094bef731c1ebf49028d4fc679a4c"
+    },
+    {
+      "frame": 6,
+      "sourceRect": [
+        887,
+        444,
+        444,
+        443
+      ],
+      "destination": [
+        34,
+        34
+      ],
+      "boundsAtAlpha16": [
+        96,
+        120,
+        467,
+        378
+      ],
+      "edgeAlpha": 0,
+      "sha256": "a7767b52cd71a96bdbe79183e656dbfa12efcb52aa5de4aa9b8d07bf92e6fee0"
+    },
+    {
+      "frame": 7,
+      "sourceRect": [
+        1331,
+        444,
+        443,
+        443
+      ],
+      "destination": [
+        34,
+        34
+      ],
+      "boundsAtAlpha16": [
+        97,
+        120,
+        466,
+        412
+      ],
+      "edgeAlpha": 0,
+      "sha256": "24313db68adb633f801420235ba13a63dd7ae434e5def1fa2f29ad592431d5c8"
+    }
+  ],
+  "previewGifSHA256": "680b750807a1bb389bde2ce09f0f412c3632d6686608f2afb4bdc57985a5d2a4",
+  "publication": "AnimationCandidates/mole-smooth-arm-v2-20261106/mole-grounded-walk-v3-publication.json"
+}

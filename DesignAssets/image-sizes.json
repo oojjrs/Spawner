@@ -22065,6 +22065,26 @@
         1,
         1
       ]
+    },
+    "DesignAssets/Animations/CreatureApprovedV4/soil-mole/walk-grounded-v3.webp": {
+      "display": [
+        256,
+        256
+      ],
+      "grid": [
+        4,
+        2
+      ]
+    },
+    "DesignAssets/Planning/ApprovedAnimations96/soil-mole-grounded-walk-v3-preview.webp": {
+      "display": [
+        96,
+        96
+      ],
+      "grid": [
+        1,
+        1
+      ]
     }
   }
 }
