@@ -173,14 +173,16 @@ test("채집할 수 없어도 운반 중인 식량으로 회생 생산비를 충
   }
 });
 
-test("다른 종족의 자재와 부족한 운반 식량은 회생 포인트로 세지 않는다", () => {
+test("다른 종족의 운반물도 회생 생산비로 합산하고 부족하면 멸망한다", () => {
   const cost = birthCost({ dna: basicGathererDna() });
-  const material = stranded(cost - 1, "bean");
-  material.agents[0].carryingType = "tree";
-  material.agents[0].carrying = 20;
-  assert.equal(material.checkEnding().reason, "extinction");
+  const enough = stranded(cost - 1, "bean");
+  enough.agents[0].carryingType = "tree";
+  enough.agents[0].carrying = 1;
+  assert.equal(enough.checkEnding(), null);
+  assert.equal(enough.snapshot().evolutionPoints, cost - 1);
+  assert.equal(enough.agents[0].carrying, 1);
   const poor = stranded(cost - 2, "bean");
-  poor.agents[0].carryingType = "clay";
+  poor.agents[0].carryingType = "tree";
   poor.agents[0].carrying = 1;
   assert.equal(poor.checkEnding().reason, "extinction");
 });
