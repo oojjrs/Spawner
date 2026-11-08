@@ -1,5 +1,5 @@
 import { generateWorld } from "../server/world.mjs";
-import { savedRoomDesigns } from "./design-library.mjs";
+import { savedRoomDesigns, savedRoomDesignOrder, orderLibraryDesigns } from "./design-library.mjs";
 
 export async function openStorage() {
   const database = await new Promise((resolve, reject) => {
@@ -64,16 +64,26 @@ export async function openStorage() {
     list() { return transaction("room-list", "readonly", task => task.objectStore("room-list").getAll()); },
     get(id) { return transaction("rooms", "readonly", task => task.objectStore("rooms").get(id)); },
     designs(tribe) {
-      return transaction("designs", "readonly", task => task.objectStore("designs").getAll())
-        .then(designs => designs.filter(design => design.tribe === tribe).sort((a, b) => b.updatedAt - a.updatedAt));
+      return Promise.all([
+        transaction("designs", "readonly", task => task.objectStore("designs").getAll()),
+        transaction("settings", "readonly", task => task.objectStore("settings").get("design-order:" + tribe))
+      ]).then(([designs, order]) => orderLibraryDesigns(designs.filter(design => design.tribe === tribe), order));
     },
     put(room) {
       const designs = savedRoomDesigns(room), imported = new Set(Object.values(room.designIds || {}));
-      return transaction(["rooms", "room-list", "designs"], "readwrite", task => {
+      return transaction(["rooms", "room-list", "designs", "settings"], "readwrite", task => {
         const rooms = task.objectStore("rooms"), library = task.objectStore("designs");
         const previous = rooms.get(room.id);
         previous.onsuccess = () => {
           const oldDesigns = new Map(savedRoomDesigns(previous.result).map(design => [design.id, design]));
+          const order = savedRoomDesignOrder(room), oldOrder = savedRoomDesignOrder(previous.result);
+          if (order && JSON.stringify(order) !== JSON.stringify(oldOrder)) {
+            const tribe = room.colonies.find(colony => colony.ownerId === room.hostId)?.tribe;
+            if (tribe) {
+              const settings = task.objectStore("settings"), key = "design-order:" + tribe, stored = settings.get(key);
+              stored.onsuccess = () => settings.put([...order, ...(stored.result || []).filter(id => !order.includes(id))], key);
+            }
+          }
           for (const design of designs) {
             if ((!imported.has(design.id) || oldDesigns.has(design.id)) &&
                 JSON.stringify(oldDesigns.get(design.id)) !== JSON.stringify(design))

@@ -1915,6 +1915,14 @@ export function createGame(environment, colony, savedGame) {
         state.discoveryReadCount = Math.max(state.discoveryReadCount, action.count);
         return {};
       }
+      if (action.type === "reorder-designs") {
+        const ids = action.templateIds, templates = new Map(state.templates.map(template => [template.id, template]));
+        if (!Array.isArray(ids) || ids.length !== templates.size || new Set(ids).size !== ids.length ||
+            ids.some(id => !Number.isInteger(id) || !templates.has(id))) throw new Error("설계 목록이 변경되었습니다. 다시 순서를 바꿔 주세요.");
+        state.templates = ids.map(id => templates.get(id));
+        state.templateOrderEdited = true;
+        return {};
+      }
       if (action.type === "delete-design") {
         const index = state.templates.findIndex(template => template.id === action.templateId);
         if (index < 0) throw new Error("설계를 찾을 수 없습니다.");

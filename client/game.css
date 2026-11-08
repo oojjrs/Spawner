@@ -435,7 +435,16 @@
     .template-list > .template-add { display: grid; grid-template-rows: 1fr; place-items: center; align-content: center; width: 100%; min-height: 0; padding: 12px; border: 1px dashed #75c4b670; border-radius: 9px; background: #75c4b609; color: var(--accent); font: inherit; font-size: 3rem; cursor: pointer; }
     .template-list > .template-add:hover { border-color: var(--accent); background: #75c4b618; }
     .template-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 140px), 1fr)); gap: 7px; }
-    .template-card { display: grid; grid-template-rows: auto minmax(0, 1fr); aspect-ratio: 1; min-width: 0; min-height: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 9px; background: #ffffff05; }
+    .template-card { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; aspect-ratio: .85; min-width: 0; min-height: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 9px; background: #ffffff05; }
+    .template-reorder { display: grid; place-items: center; width: 100%; height: 22px; min-height: 22px; padding: 0; border: 0; border-top: 1px solid #ffffff0a; background: #ffffff04; color: var(--muted); font: inherit; font-size: 18px; line-height: 1; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+    .template-reorder:hover, .template-reorder:focus-visible { color: var(--accent); background: #75c4b618; }
+    .template-reorder:disabled { cursor: default; opacity: .35; }
+    .template-dragging { opacity: .4; }
+    .template-drop-before { box-shadow: inset 4px 0 var(--accent); }
+    .template-drop-after { box-shadow: inset -4px 0 var(--accent); }
+    .template-drag-ghost { position: fixed; left: 0; top: 0; z-index: 10000; margin: 0; pointer-events: none; background: var(--panel); opacity: .9; box-shadow: 0 8px 24px #0008; }
+    .template-order-status { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    @media (pointer: coarse) { .template-reorder { height: 28px; min-height: 28px; } }
     .template-card:has(.template-spawn:not(:disabled):hover) { border-color: var(--accent); background: #75c4b612; }
     .template-spawn { display: grid; grid-template-rows: minmax(0, 1fr) auto; justify-items: center; align-items: center; gap: 4px; width: 100%; height: 100%; min-width: 0; min-height: 0; padding: 0 8px 9px; border: 0; background: transparent; color: var(--ink); font: inherit; cursor: pointer; }
     .template-card .template-spawn > img { width: 96px; height: 100%; max-width: 100%; max-height: 96px; min-height: 0; }

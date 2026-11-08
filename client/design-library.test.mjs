@@ -68,3 +68,20 @@ test("설계 목록 한도에 닿아도 보관 원본과 다른 설계를 변경
   assert.deepEqual(designs, before);
   assert.equal(Object.values(value.room.designIds).includes("overflow"), false);
 });
+
+test("수동 순서는 새 판의 기본 설계 재사용 후에도 그대로 복원한다", async () => {
+  const { savedRoomDesignOrder, orderLibraryDesigns } = await import('./design-library.mjs');
+  const value = fixture();
+  assert.equal(savedRoomDesignOrder(value.saved()), null);
+  const designs = orderLibraryDesigns([
+    { id: 'starter', tribe: 'bean', updatedAt: 20, template: { name: '기초 채집', dna: null, slots: [] } },
+    { id: 'custom', tribe: 'bean', updatedAt: 10, template: { name: '내 설계', dna: value.dna, slots: [] } }
+  ], ['custom', 'starter']);
+  restoreRoomDesigns(value.room, designs);
+  assert.deepEqual(value.state.templates.map(template => template.name), ['내 설계', '기초 채집']);
+  assert.deepEqual(savedRoomDesignOrder(value.saved()), ['custom', 'starter']);
+  const legacy = orderLibraryDesigns([{ id: 'a', updatedAt: 10 }, { id: 'b', updatedAt: 20 }]);
+  assert.deepEqual(legacy.map(design => design.id), ['b', 'a']);
+  assert.equal(Object.hasOwn(legacy[0], 'order'), false);
+  assert.deepEqual(orderLibraryDesigns([{ id: 'a', updatedAt: 10 }, { id: 'b', updatedAt: 20 }, { id: 'new', updatedAt: 30 }], ['missing', 'a', 'b']).map(design => design.id), ['a', 'b', 'new']);
+});

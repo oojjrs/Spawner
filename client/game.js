@@ -7331,6 +7331,11 @@
     let unitDraft = null;
     let designReturnFocus = null;
     let templateListSignature = "";
+    const templateReorder = Spawner.createTemplateReorder(templateList, {
+      canReorder: () => connection.active && connection.online && !connection.busy && !state.ending,
+      scrollContainer: colonyMenu,
+      commit: templateIds => sendCommand({ type: "reorder-designs", templateIds })
+    });
 
     const designDnaHost = document.createElement("div");
     designDnaHost.className = "dna-editor-host";
@@ -7678,8 +7683,10 @@
     }
 
     function renderUnitTemplates() {
+      templateReorder.refresh();
       const signature = JSON.stringify(state.templates);
       if (signature === templateListSignature) return;
+      templateReorder.cancel();
       templateListSignature = signature;
       const fragment = document.createDocumentFragment();
       for (const template of state.templates) {
@@ -7747,11 +7754,19 @@
         const header = document.createElement("div");
         header.className = "template-card-header";
         header.append(createEvolutionCost(birthCost(template, state.tribe)), actions);
-        card.append(header, button);
+        const reorder = document.createElement("button");
+        reorder.type = "button";
+        reorder.className = "template-reorder";
+        reorder.textContent = "⠿";
+        reorder.title = "드래그하여 순서 변경 · 방향키로 이동";
+        reorder.setAttribute("aria-label", template.name + " 순서 변경, 드래그 또는 방향키 사용");
+        reorder.setAttribute("aria-pressed", "false");
+        card.append(header, button, reorder);
         fragment.append(card);
       }
       fragment.append(evolutionOpenButton);
       templateList.replaceChildren(fragment);
+      templateReorder.refresh();
     }
 
     function nestGrowthBenefits() {
