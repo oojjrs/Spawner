@@ -1,3 +1,4 @@
+import { sameTribeDesign } from "./tribe-designs.mjs";
 import { canRetreat } from "./survival.mjs";
 import { AGENT_DEATH_WARNING, agentRemainingLifespan } from "./lifespan.mjs";
 import { nestDefenderDesign, isNestDefender } from "./nest-defender.mjs";
@@ -1789,9 +1790,10 @@ export function createGame(environment, colony, savedGame) {
     function automaticBirth(template, role) {
       const site = automaticSpawnSites()[0];
       if (!site || state.agents.filter(agent => agent.health > 0).length >= NEST_LEVELS[state.nestLevel - 1].unitCapacity || state.evolutionPoints < birthCost(template,colony.tribe) ||
-          template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key,state.nestLevel,colony.tribe))) return null;
-      const matches = candidate => !!candidate.dna === !!template.dna && combatPrimary(candidate) === combatPrimary(template) && candidate.slots.length === template.slots.length && template.slots.every(key =>
-        candidate.slots.includes(key) && (candidate.attributeLevels?.[key] || 1) === (template.attributeLevels?.[key] || 1));
+          !template.dna && (template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key,state.nestLevel,colony.tribe)))) return null;
+      const matches = candidate => template.dna ? sameTribeDesign(candidate, template) : !candidate.dna &&
+        combatPrimary(candidate) === combatPrimary(template) && candidate.slots.length === template.slots.length && template.slots.every(key =>
+          candidate.slots.includes(key) && (candidate.attributeLevels?.[key] || 1) === (template.attributeLevels?.[key] || 1));
       let stored = state.templates.find(matches), result;
       if (stored) result = command({type:"birth",templateId:stored.id});
       else {
@@ -1803,7 +1805,7 @@ export function createGame(environment, colony, savedGame) {
         } else {
           if (!previous && state.templates.length >= 100) return null;
           const design = command({type:"design",templateId:previous?.id ?? null,name:previous?.name || template.name,
-            slots:[...template.slots],combatPrimary:combatPrimary(template),birth:false});
+            slots:[...template.slots],dna:template.dna,combatPrimary:combatPrimary(template),birth:false});
           stored = state.templates.find(candidate => candidate.id === design.templateId);
           stored.productionRole = role;
           stored.automatic = true;
@@ -1826,9 +1828,10 @@ export function createGame(environment, colony, savedGame) {
       }
       for (const template of [...state.templates]) {
         if (template.automatic !== true || state.agents.some(agent => agent.health > 0 && agent.templateId === template.id)) continue;
-        const obsolete = template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key,state.nestLevel,colony.tribe));
-        const duplicate = state.templates.some(candidate => candidate.id !== template.id && combatPrimary(candidate) === combatPrimary(template) && candidate.slots.length === template.slots.length &&
-          template.slots.every(key => candidate.slots.includes(key) && (candidate.attributeLevels?.[key] || 1) >= (template.attributeLevels?.[key] || 1)));
+        const obsolete = !template.dna && (template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key,state.nestLevel,colony.tribe)));
+        const duplicate = state.templates.some(candidate => candidate.id !== template.id && (template.dna ? sameTribeDesign(candidate, template) :
+          !candidate.dna && combatPrimary(candidate) === combatPrimary(template) && candidate.slots.length === template.slots.length &&
+          template.slots.every(key => candidate.slots.includes(key) && (candidate.attributeLevels?.[key] || 1) >= (template.attributeLevels?.[key] || 1))));
         if (obsolete || duplicate || state.templates.length >= 100) command({type:"delete-design",templateId:template.id});
       }
     }
@@ -1857,7 +1860,7 @@ export function createGame(environment, colony, savedGame) {
       }
       if (state.simSeconds >= (state.attributeProductionReadyAt || 0)) {
         state.attributeProductionReadyAt = state.simSeconds + CONQUEST_PACING.productionInterval;
-        for (const design of state.templates) for (const key of design.slots) {
+        for (const design of state.templates.filter(template => !template.dna)) for (const key of design.slots) {
           if (isAttributeUnlocked(key,state.nestLevel,colony.tribe) &&
               !attributeUpgradeIssue(design,key,state.nestLevel,state.evolutionPoints)) {
             command({type:"upgrade-attribute",templateId:design.id,attributeKey:key});

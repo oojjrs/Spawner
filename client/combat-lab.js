@@ -2,6 +2,7 @@ import { COMBAT_LAB_APPEARANCES, combatLabPlayable, combatLabAppearance, combatL
 import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
 import { SIMULATION_STATS, DEFAULT_SIMULATION_RULES, deriveSimulationStats, createSimulationTrial } from "./combat-simulation.mjs";
 import { createCombatStage } from "./combat-stage.mjs";
+import { TRIBE_COMBAT_ROLES, tribeCombatTemplate } from "../server/tribe-combat-templates.mjs";
 
 const sides = ["left", "right"], elements = {}, inputs = {};
 const builds = Object.fromEntries(sides.map((side, index) => [side, combatLabWithAppearance(
@@ -80,13 +81,26 @@ for (const side of sides) {
   });
   hud.append(rosterActions);
   const appearance = control(hud, "외형", select(COMBAT_LAB_UNITS.map(unit => [unit.key, unit.name]), builds[side].key));
-  appearance.addEventListener("change", () => { rosters[side][selected[side]] = combatLabWithAppearance({ key: appearance.value }, "blade-carapace"); selectBuild(side); changed(); }); inputs[side].appearance = appearance;
+  appearance.addEventListener("change", () => {
+    rosters[side][selected[side]] = tribeCombatTemplate(appearance.value, builds[side].template) || combatLabWithAppearance({ key: appearance.value }, "blade-carapace");
+    selectBuild(side); changed();
+  }); inputs[side].appearance = appearance;
   const dnaAppearance = control(hud, "DNA 외형", select(combatLabPlayable(builds[side].key) ? COMBAT_LAB_APPEARANCES.filter(([key]) => key !== "native") : [["native", "기본"]], combatLabAppearance(builds[side])));
   inputs[side].dnaAppearance = dnaAppearance;
   dnaAppearance.disabled = !combatLabPlayable(builds[side].key);
   dnaAppearance.addEventListener("change", () => {
     if (!Array.from(dnaAppearance.options).some(option => option.value === dnaAppearance.value)) return;
     rosters[side][selected[side]] = combatLabWithAppearance(builds[side], dnaAppearance.value);
+    selectBuild(side); changed();
+  });
+  const template = control(hud, "4레벨 템플릿", select([["", "기본"], ...TRIBE_COMBAT_ROLES.map(role => [role.key, role.name])], ""));
+  inputs[side].template = template;
+  template.disabled = !combatLabPlayable(builds[side].key);
+  template.addEventListener("change", () => {
+    if (!combatLabPlayable(builds[side].key)) return;
+    const build = template.value ? tribeCombatTemplate(builds[side].key, template.value) : combatLabWithAppearance(builds[side], combatLabAppearance(builds[side]));
+    if (!build) return;
+    rosters[side][selected[side]] = build;
     selectBuild(side); changed();
   });
   const gauge = node("div", null, "action-bar"); elements[side + "Gauge"] = node("i"); gauge.append(elements[side + "Gauge"]); hud.append(gauge);
@@ -108,6 +122,8 @@ function selectBuild(side) {
   }));
   inputs[side].dnaAppearance.value = combatLabAppearance(builds[side]);
   inputs[side].dnaAppearance.disabled = !combatLabPlayable(builds[side].key);
+  inputs[side].template.value = builds[side].template || "";
+  inputs[side].template.disabled = !combatLabPlayable(builds[side].key);
 }
 function rosterSettings(side) {
   return rosters[side].map((build, index) => ({ ...structuredClone(build), name: (side === "left" ? "왼쪽 " : "오른쪽 ") + (index + 1) }));

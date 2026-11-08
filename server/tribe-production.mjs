@@ -1,3 +1,5 @@
+import { tribeCombatTemplates } from "./tribe-combat-templates.mjs";
+import { sameTribeDesign, tribeDnaTemplate } from "./tribe-designs.mjs";
 import { AGENT_DEATH_WARNING, agentRemainingLifespan } from "./lifespan.mjs";
 import { birthCost, isAttributeUnlocked } from "./attributes.mjs";
 import { suggestTemplateName } from "./unit-template-names.mjs";
@@ -29,6 +31,16 @@ export function tribeProductionTemplate(state,tribe) {
  if(!role)return null;
  const supply=colonySupply(state,tribe),replacing=young.length<initial.length;
  if(!replacing&&young.length>=initial.length&&(!supply.incomeObserved||supply.rateDeficit>0))return null;
+ if (role === "military" && state.nestLevel === 4) {
+  const templates = tribeCombatTemplates(tribe).map(design => {
+    const template = tribeDnaTemplate(design.dna, "military", state);
+    return { template, weight: design.weight, count: soldiers.filter(agent => sameTribeDesign(agent, template)).length };
+  });
+  templates.sort((a, b) => a.count / a.weight - b.count / b.weight || b.weight - a.weight);
+  const template = templates[0].template;
+  const reserve = replacing ? 0 : supply.reserve;
+  return state.evolutionPoints + 1e-8 >= birthCost(template, tribe) + reserve ? template : null;
+ }
  const armies=[profile.army,["piercing","blade","feet","carapace"],["feet",profile.army[0]],
   ["carapace",profile.army[0]]].map(slots=>[...new Set(slots.filter(key=>isAttributeUnlocked(key,state.nestLevel,tribe)))].slice(0,state.nestLevel));
  const count=slots=>soldiers.filter(agent=>slots.every(key=>agent.slots.includes(key))).length;

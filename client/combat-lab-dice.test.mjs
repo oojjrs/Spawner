@@ -22,7 +22,7 @@ for (const file of ["./combat-lab.js", "../Combat.html"]) test(file + " 주사�
       organs: { attack: 1, ranged: 0 } };
     rosters[side] = Array.from({ length: 5 }, (_, slot) => ({ ...structuredClone(profile), key: COMBAT_LAB_UNITS[slot + sideIndex].key }));
     selected[side] = 3; builds[side] = rosters[side][3];
-    inputs[side] = Object.fromEntries([...SIMULATION_STATS.map(stat => stat.key), "attack", "ranged", "appearance", "dnaAppearance"].map(key => [key, { value: null, replaceChildren(...options) { this.options = options; } }]));
+    inputs[side] = Object.fromEntries([...SIMULATION_STATS.map(stat => stat.key), "attack", "ranged", "appearance", "dnaAppearance", "template"].map(key => [key, { value: null, replaceChildren(...options) { this.options = options; } }]));
   }
   let roll, changes = 0;
   const math = Object.create(Math); math.random = () => 0;

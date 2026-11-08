@@ -9,6 +9,7 @@ import { startingWorkerDna } from '../server/tribe-start.mjs';
 import { COMBAT_LAB_UNITS } from './combat-lab.mjs';
 import { SIMULATION_STATS, DEFAULT_SIMULATION_RULES, deriveSimulationStats, createSimulationTrial } from './combat-simulation.mjs';
 import { unitActionArtDefinition } from './unit-action-art.mjs';
+import { TRIBE_COMBAT_ROLES, tribeCombatTemplate } from '../server/tribe-combat-templates.mjs';
 
 const plain = value => JSON.parse(JSON.stringify(value));
 test('lab combo uses valid independently owned DNA and real melee/armor mechanics', () => {
@@ -47,7 +48,7 @@ function fixture() {
   }
   const main = new Element('main');
   const scope = { COMBAT_LAB_UNITS, SIMULATION_STATS, DEFAULT_SIMULATION_RULES, deriveSimulationStats: build => deriveSimulationStats(plain(build)), createSimulationTrial: settings => createSimulationTrial(plain(settings)),
-    COMBAT_LAB_APPEARANCES, combatLabPlayable, combatLabAppearance, combatLabWithAppearance, structuredClone,
+    COMBAT_LAB_APPEARANCES, combatLabPlayable, combatLabAppearance, combatLabWithAppearance, structuredClone, TRIBE_COMBAT_ROLES, tribeCombatTemplate,
     SpawnerCombatAudio: { createPlayer: () => ({ resume() {}, stop() {} }), create: () => ({}), reset() {} },
     document: { querySelector: () => main, createElement: tag => new Element(tag) },
     Option: class extends Element { constructor(label, value) { super('option', label); this.value = value; } },
@@ -108,4 +109,39 @@ test('lab range control changes only real start distance and resets the current 
   assert.deepEqual(plain(f.rosters), before);
   f.elements.distance.fire('change', '1');
   assert.equal(f.getTrial().time, 0); assert.equal(f.getTrial().agents[0].x, f.getTrial().agents[1].x);
+});
+
+test('40종족 전투 템플릿은 정상4레벨 DNA로 선택·복제되고 중립에는 적용되지 않는다', () => {
+  const f = fixture(), control = f.inputs.left.template;
+  assert.equal(control.options.length, 11);
+  for (const tribe of ['bean', 'spore', 'pebble', 'spring']) {
+    f.inputs.left.appearance.fire('change', tribe);
+    for (const role of TRIBE_COMBAT_ROLES) {
+      control.fire('change', role.key);
+      const build = plain(f.rosters.left[0]);
+      assert.equal(build.key, tribe);
+      assert.equal(build.template, role.key);
+      assert.equal(build.dna.level, 4);
+      assert.ok(validateDna(build.dna, 4, build.dna.budget));
+      assert.equal(build.dna.budget, ATTRIBUTE_DNA.price(build.dna.pieces));
+      assert.ok(ATTRIBUTE_DNA.trace(build.dna.pieces, 4).filled < 127);
+      assert.equal(deriveSimulationStats(build).canInitiate, true);
+      assert.deepEqual(plain(f.getTrial().agents[0].dna), build.dna);
+      assert.equal(f.inputs.left.dnaAppearance.value, combatLabAppearance(build));
+    }
+  }
+  const saved = plain(f.rosters.left[0]);
+  f.nodes.find(node => node.tag === 'button' && node.textContent === '유닛 추가').fire('click');
+  assert.deepEqual(plain(f.rosters.left[1]), saved);
+  assert.notEqual(f.rosters.left[1].dna.pieces, f.rosters.left[0].dna.pieces);
+  f.inputs.left.appearance.fire('change', 'bean');
+  assert.equal(f.rosters.left[1].template, saved.template);
+  assert.deepEqual(plain(f.rosters.left[0]), saved);
+  f.inputs.left.dnaAppearance.fire('change', 'blade-carapace');
+  assert.equal(control.value, '');
+  const neutral = COMBAT_LAB_UNITS.find(unit => !combatLabPlayable(unit.key)).key;
+  f.inputs.left.appearance.fire('change', neutral);
+  assert.equal(control.disabled, true);
+  control.fire('change', 'vanguard');
+  assert.equal(f.rosters.left[1].dna, undefined);
 });
