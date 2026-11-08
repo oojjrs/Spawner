@@ -128,6 +128,11 @@ export function createBeginnerHelp(document, onAction, onGuide, onProgress) {
     save({ enabled: true, resetDismissed: true }).catch(() => {});
   });
   return {
+    close() {
+      if (panel.hidden) return false;
+      finish(false);
+      return true;
+    },
     update(id, state, suppressed, busy) {
       const now = performance.now();
       if (id !== roomId) {

@@ -16,9 +16,9 @@ function fixture(tribe,level,points) {
   return game;
 }
 
-test("몽돌만 60·150·375포인트로 성장하며 부족하면 차감하지 않고 다른 세 종족은 표준 비용을 쓴다",()=>{
-  for (const [tribe,costs] of [["pebble",[60,150,375]],["bean",[80,200,500]],
-    ["spring",[80,200,500]],["spore",[80,200,500]]]) {
+test("몽돌만 30·75·225포인트로 성장하며 부족하면 차감하지 않고 다른 세 종족은 표준 비용을 쓴다",()=>{
+  for (const [tribe,costs] of [["pebble",[30,75,225]],["bean",[40,100,300]],
+    ["spring",[40,100,300]],["spore",[40,100,300]]]) {
     for (const [index,cost] of costs.entries()) {
       const level=index+1,game=fixture(tribe,level,cost-1);
       assert.throws(()=>game.command({type:"upgrade"}),/진화 포인트/,tribe);
@@ -45,7 +45,7 @@ test("기존 몽돌 저장의 레벨과 잔액을 유지하고 다음 성장부�
   assert.equal(game.snapshot().nestLevel,2);
   assert.equal(game.snapshot().evolutionPoints,350);
   game.command({type:"upgrade"});
-  assert.equal(game.snapshot().evolutionPoints,200);
+  assert.equal(game.snapshot().evolutionPoints,275);
   const maximum=fixture("pebble",4,1500);
   assert.throws(()=>maximum.command({type:"upgrade"}),/최고 둥지/);
   assert.equal(maximum.snapshot().evolutionPoints,1500);
@@ -59,8 +59,8 @@ test("몽돌의 수급 전망과 첫 습격 준비 자금도 할인된 첫 성�
   assert.equal(colonyRaidPressure(20,120,[90,120],120,"pebble").arrivalAt,300);
 });
 
-test("AI의 성장 목표 자금은 몽돌 150포인트와 표준 200포인트에 맞춰 자원 가치를 계산한다",()=>{
-  for (const [tribe,weight] of [["pebble",1],["bean",1.125],["spring",1.125],["spore",1.125]]) {
+test("AI의 성장 목표 자금은 몽돌 75포인트와 표준 100포인트에 맞춰 자원 가치를 계산한다",()=>{
+  for (const [tribe,weight] of [["pebble",.5],["bean",.75],["spring",.75],["spore",.75]]) {
     const size=8,agent={id:"worker",tribe,x:1,y:1,carrying:0,slots:[],cost:4,health:100,bornAt:0,lifespan:300,
       attributes:{},stats:{speed:1,capacity:2,health:100,resistance:1,vision:3},personality:{boldness:0,aggression:0,curiosity:0}};
     const home={x:1,y:1},food={x:4,y:1,key:"4,1",resourceType:"pebbles",amount:20};

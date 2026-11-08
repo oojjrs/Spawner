@@ -22,7 +22,7 @@ test("80P에서는 재촉하지 않고 81P부터 성장을 안내한다", () => 
   assert.equal(offer(state).key, "upgrade");
   assert.equal(offer(state).action.command.type, "upgrade");
   state.tribe = "pebble";
-  assert.equal(offer(state).action.label, "성장 · 60P");
+  assert.equal(offer(state).action.label, "성장 · 30P");
   assert.equal(offer(state, ["upgrade"]), null);
 });
 

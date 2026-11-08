@@ -9,10 +9,10 @@ test('opening budget supports real level-two modest military without changing co
  assert.equal(M.stats(soldier).health,50);
  for(const tribe of ['bean','spore','pebble','spring']){
   assert.equal(M.cost(startingWorkerDna(tribe).pieces),26);
-  assert.equal(nestUpgradeCost(1,tribe),tribe==='pebble'?60:80);
-  assert.ok(PLAYER_STARTING_POINTS<nestUpgradeCost(1,tribe));
+  assert.equal(nestUpgradeCost(1,tribe),tribe==='pebble'?30:40);
+  assert.ok(PLAYER_STARTING_POINTS<=nestUpgradeCost(1,tribe));
   const additionalIncome=26+nestUpgradeCost(1,tribe)+2*M.cost(soldier)-PLAYER_STARTING_POINTS;
-  assert.equal(additionalIncome,tribe==='pebble'?130:150);
+  assert.equal(additionalIncome,tribe==='pebble'?100:110);
  }
 });
 
@@ -21,12 +21,12 @@ test('capacity and gathering speed improve throughput while preserving one resou
  const basic=pieces(['gather']),hauler=pieces(['gather','capacity','capacity','health']);
  assert.equal(M.cost(basic),11);assert.equal(M.stats(basic).capacity,1);assert.equal(M.stats(basic).harvest,1);
  assert.equal(M.cost(hauler),26);assert.equal(M.stats(hauler).capacity,3);assert.equal(M.stats(hauler).harvest,1);
- assert.equal(M.stats(hauler).harvestTime,4);
+ assert.equal(M.stats(hauler).harvestTime,3);
  const advanced=pieces(['gather','capacity','capacity','capacity','harvestSpeed']);
  assert.equal(M.stats(advanced).capacity,4);assert.equal(M.stats(advanced).harvest,1);
- assert.equal(M.stats(advanced).harvestTime,4/1.1);
+ assert.equal(M.stats(advanced).harvestTime,3/1.1);
  for(const tribe of ['bean','spore','pebble','spring']) {
-  assert.equal(nestUpgradeCost(2,tribe),tribe==='pebble'?150:200);
-  assert.equal(nestUpgradeCost(3,tribe),tribe==='pebble'?375:500);
+  assert.equal(nestUpgradeCost(2,tribe),tribe==='pebble'?75:100);
+  assert.equal(nestUpgradeCost(3,tribe),tribe==='pebble'?225:300);
  }
 });

@@ -6291,32 +6291,60 @@
     });
     colonyMenuClose.addEventListener("click", closeColonyMenu);
     document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape" || endingReport.open || templateDeleteDialog.open || combatPanel.open) return;
-      if (!helpTooltip.hidden) {
-        hideHelpTooltip();
+      if (event.key !== "Escape" || event.isComposing) return;
+      if (document.getElementById("sound-settings")?.hidden === false) {
         event.preventDefault();
+        event.stopPropagation();
+        if (!event.repeat) globalThis.SpawnerSoundSettings.close(true);
         return;
       }
-      if (codex.open) {
-        closeCodex(true);
+      const dialog = document.activeElement?.closest("dialog[open]") || [...document.querySelectorAll("dialog[open]")].at(-1);
+      if (dialog) {
         event.preventDefault();
+        event.stopPropagation();
+        if (!event.repeat && dialog.dispatchEvent(new Event("cancel", { cancelable: true }))) dialog.close("cancel");
         return;
       }
       if (!evolutionPanel.hidden) {
-        requestCloseEvolutionPanel();
         event.preventDefault();
+        event.stopPropagation();
+        hideHelpTooltip();
+        if (!event.repeat) requestCloseEvolutionPanel();
+        return;
+      }
+      if (document.body.dataset.screen !== "game") return;
+      event.preventDefault();
+      event.stopPropagation();
+      if (event.repeat) return;
+      hideHelpTooltip();
+      if (!agentNameForm.hidden) {
+        if (!connection.busy) closeAgentNameEditor(true);
+        return;
+      }
+      if (!nestNameForm.hidden) {
+        if (!connection.busy) closeNestNameEditor(true);
         return;
       }
       if (!unitPanel.hidden || state.selection) {
         closeColonyMenu();
         closeUnitPanel();
-        event.preventDefault();
         return;
       }
-      if (colonyMenu.hidden) return;
-      closeColonyMenu();
-      event.preventDefault();
-    });
+      if (!colonyMenu.hidden) {
+        closeColonyMenu();
+        return;
+      }
+      if (beginnerHelp.close()) return;
+      if (!controlsGuide.hidden) {
+        collapseControlsGuide();
+        controlsGuideToggle.focus();
+        return;
+      }
+      if (portraitLayout.matches && agentPanel.dataset.portraitExpanded === "true") {
+        portraitPanelToggle.click();
+        portraitPanelToggle.focus();
+      }
+    }, true);
 
     function closeUnitPanel() {
       selectObject(null, null);

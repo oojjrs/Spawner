@@ -40,7 +40,7 @@ test("현행 DNA 카탈로그·유닛·자원·건물·지형을 모두 열고 �
 
 test("DNA 설명은 기관·레벨·가격·종족별 실제 효과와 퇴역 조각을 구분한다", () => {
   const details = (key, tribe) => codexGeneDetails(codexResolveEntry("attribute:" + key).value, tribe);
-  assert.deepEqual(details("gather", "bean").effects, [["채집량", "1개"], ["운반량", "1개"], ["채집 시간", "4초"]]);
+  assert.deepEqual(details("gather", "bean").effects, [["채집량", "1개"], ["운반량", "1개"], ["채집 시간", "3초"]]);
   assert.deepEqual(details("blade", "bean").effects, [["근접 공격력", 2], ["근접 공속", "0.5회/초"]]);
   assert.deepEqual(details("secretion", "bean").effects, [["원거리 공격력", 1.4], ["원거리 공속", "0.5회/초"]]);
   assert.ok(details("health", "pebble").effect.includes("+24"));

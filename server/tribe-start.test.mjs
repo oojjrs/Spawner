@@ -71,14 +71,20 @@ test("AI 부족에는 새 게임과 기존 저장 모두 지원금을 지급하�
   assert.equal(createGame(environment,colony,JSON.stringify(legacy)).snapshot().evolutionPoints,7);
 });
 
-test("초반 둥지 성장은 반드시 채집이 필요하고 이후 비용은 보관한도 안에 있다",()=>{
+test("몽돌은 시작 지원금으로 성장하고 다른 종족은 채집이 필요하며 이후 비용은 보관한도 안에 있다",()=>{
   for(const tribe of ["bean","spore","pebble","spring"]){
     const {game}=fixture(tribe,true);
     assert.equal(game.snapshot().evolutionPoints,PLAYER_STARTING_POINTS,tribe);
-    assert.ok(nestUpgradeCost(1,tribe)>PLAYER_STARTING_POINTS,tribe);
-    assert.throws(()=>game.command({type:"upgrade"}),/진화 포인트/);
-    assert.equal(game.snapshot().nestLevel,1,tribe);
-    assert.equal(game.snapshot().evolutionPoints,PLAYER_STARTING_POINTS,tribe);
+    assert.ok(nestUpgradeCost(1,tribe)>=PLAYER_STARTING_POINTS,tribe);
+    if(tribe==="pebble"){
+      game.command({type:"upgrade"});
+      assert.equal(game.snapshot().nestLevel,2,tribe);
+      assert.equal(game.snapshot().evolutionPoints,0,tribe);
+    }else{
+      assert.throws(()=>game.command({type:"upgrade"}),/진화 포인트/);
+      assert.equal(game.snapshot().nestLevel,1,tribe);
+      assert.equal(game.snapshot().evolutionPoints,PLAYER_STARTING_POINTS,tribe);
+    }
     for(const level of [1,2,3])assert.ok(nestUpgradeCost(level,tribe)<=NEST_LEVELS[level-1].pointCapacity,tribe+":"+level);
   }
 });

@@ -114,7 +114,7 @@ test("공통 가격과 실제 탄생비는 제작기 비용과 같다",t=>{
 
 test("공통 스탯 표시는 기본0 숨김과 합산·괄호 증감·색상을 양쪽에 동일하게 제공한다",t=>{
   const {element}=fixture(t),pieces=[piece('gather',0),piece('health',3)],values=dnaDesignStats(ATTRIBUTE_DNA,pieces);
-  assert.deepEqual(values.stats,ATTRIBUTE_DNA.stats(pieces));assert.equal(values.base.harvestTime,4);
+  assert.deepEqual(values.stats,ATTRIBUTE_DNA.stats(pieces));assert.equal(values.base.harvestTime,3);
   const game=element(),tool=element();renderDnaDesignStats(game,values.stats,values.base,true);renderDnaDesignStats(tool,values.stats,values.base,false);
   const rows=container=>container.children.map(item=>({stat:item.dataset.stat,text:item.textContent,classes:item.className,children:item.children.map(child=>({text:child.textContent,classes:child.className}))}));
   assert.deepEqual(rows(game).filter(row=>row.stat!=='scale'),rows(tool));
@@ -228,7 +228,7 @@ test("범례는 종류별 개수와 실효 변화량을 표시하고 칸 수 배
   const {editor,root}=fixture(t),legend=root.querySelector('.dna-legend');editor.context(4,1000,false);
   const pieces=ATTRIBUTE_DNA.pack(['gather','capacity','capacity','harvestSpeed','harvestSpeed','health','movement','antenna','block','armor'].map(id=>piece(id,0)),4);editor.load({version:6,pieces,level:4,budget:1000},false);
   const rows=()=>Object.fromEntries(legend.children.map(row=>[row.dataset.gene,row.children.slice(1).map(child=>child.textContent)]));
-  assert.deepEqual(rows(),{capacity:['×2',' (운반 +2개)'],gather:['×1',' (채집 기능 해금)'],harvestSpeed:['×2',' (채집 시간 -0.667초)'],health:['×1',' (체력 +20)'],movement:['×1',' (이동 +'+Number((ATTRIBUTE_DNA.stats([piece('movement',0)]).movement-ATTRIBUTE_DNA.stats([]).movement).toFixed(3))+'칸/초)'],antenna:['×1'],block:['×1',' (방어본능 +25%)'],armor:['×1',' (방어 +30)']});
+  assert.deepEqual(rows(),{capacity:['×2',' (운반 +2개)'],gather:['×1',' (채집 기능 해금)'],harvestSpeed:['×2',' (채집 시간 -0.5초)'],health:['×1',' (체력 +20)'],movement:['×1',' (이동 +'+Number((ATTRIBUTE_DNA.stats([piece('movement',0)]).movement-ATTRIBUTE_DNA.stats([]).movement).toFixed(3))+'칸/초)'],antenna:['×1'],block:['×1',' (방어본능 +25%)'],armor:['×1',' (방어 +30)']});
   assert.equal(legend.hidden,false);assert.equal(root.querySelector('.dna-board').children.some(child=>child.className==='dna-fill'),false);
   root.dispatch('keydown',{key:'Delete'});assert.equal(rows().armor,undefined);root.dispatch('keydown',{key:'z',ctrlKey:true});assert.deepEqual(rows().armor,['×1',' (방어 +30)']);editor.load({version:6,pieces:[],level:4,budget:1000},false);assert.equal(legend.hidden,true);
 });
