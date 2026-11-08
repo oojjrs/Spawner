@@ -1,3 +1,34 @@
+## 속성 설계 안내 Esc 표기 제외 [dna-guide-refresh-escape-01a1b9aa]
+
+- 기록·동시변경 확인 2026-11-08T14:49:58+09:00; 판단·기록 Codex /root, 출처 현재 작업트리 diff 및 병행 economy-escape-start-01a1b9af의 사용자 Esc 창닫기 요청. 이번 문구 승인 출처는 approved 기록과 같다.
+- client/game.js의 document keydown이 capture 경로에서 Esc로 설계창을 닫도록 바뀌는 중이다. 공용 editor의 기존 Esc 취소 동작 자체는 유지돼도 게임에서는 창닫기가 우선되므로 승인된 선택취소값의 「 / Esc」만 삭제한다. 새 문구를 추가하지 않고 우클릭만 남겨 현재 배포와 향후 병행 게임 모두 실제 조작에 맞춘다. Attribute에서 지원되는 보조 단축키 Esc를 생략하는 것은 허위 안내가 아니다.
+- 병행 채집시간/둥지비용/초보자 도움말 및 창닫기 수정과 관련 메모리는 보호한다. 제품4파일의 안내·공용CSS와 이 채팅 기록만 원자적으로 분리하고 운영3파일에도 동일한 마지막 표기 삭제를 반영한다. 최종 배포 대상의 입력동작·자산·다른기능은 현행79버전 그대로다.
+## 속성 설계 안내 수정·검수 완료 [dna-guide-refresh-complete-01a1b9aa]
+
+- 기록·최종 로컬 확인 2026-11-08T14:48:13+09:00; 구현·직접검수·기록 Codex /root, 문구/반영/배포 결정 사용자. 출처 codex://threads/01a1b9aa-0bfe-7530-933e-b12476fe2d16 및 본 채팅 검증 도구, H:/Spawner Windows PowerShell. 원 발언 정확 시각·항목 ID는 앞 approved 기록 외 미제공.
+- 승인 5행으로 공용 dna-editor·게임 runtime·Attribute 실행본을 동기화했다. 기본 펼침과 수동 접기/펼치기 및 모든 입력 동작 유지. 공용 dna-board.css에서 안내 폭360px, 높이상한100%-80px, 단어 단위 줄바꿈을 적용해 모바일 마지막행 가림을 해결했다.
+- 직접 근거: 조작7검사 성공 근거 재사용. 3개 마크업 정확 일치와 외부 바이트 보존 확인. 최종1440/390폭의 실제 Attribute 및 게임 패널 컴포넌트4화면 모두 5행 전체노출·가로넘침0·스크롤불필요·오류0. 최종 게임390/제작기1440 PNG 직접 열람으로 글자·행배치 확인. 게임 전체 입장/플레이/미리보기 외형자산 검증은 아니며 fixture 외형 미연결을 제품 결함으로 취급하지 않는다. 제품4파일 형식 정상, 최종CSS 재검사 및 공백 검사 정상.
+- 기존 운영 소스에서 dist/Attribute.html·dist/client/runtime.js의 같은 안내 마크업과 dist/client/dna-board.css만 교체했다. 그 밖 파일/자산경로/공개범위는 보존되며 배포 경로3개만 바뀜을 확인했다. 대량 자산 재준비는 필요하지 않다. 실제 저장버전·배포 결과는 아직 미확인이다.
+- 최종 후보: 제품4파일과 이 채팅 메모리. 요청·승인·원인·구현·검수·한계·다음작업 대조 완료. 다음은 이 범위의 로컬 기록 확정과 준비된 기존 Sites 버전 게시 및 결과 확인이다. 자료 literal /dna-guide-refresh-01a1b9aa의 check.mjs, visual-result.json, 전후 원본과4화면 PNG.
+## 속성 설계 안내 모바일 높이 보완 [dna-guide-refresh-layout-01a1b9aa]
+
+- 기록 2026-11-08T14:47:05+09:00; 직접 검수·판단·기록 Codex /root, 출처 현재 채팅의 검증 도구·visual-result.json·화면 PNG, H:/Spawner Windows PowerShell.
+- 승인 문구 5행을 소스/runtime/Attribute에 적용했고 이 마크업 밖 바이트 동일을 확인했다. 제품4파일 UTF8NoBom/CRLF 및 공백 검사 정상. 격리 Edge에서 실제 Attribute와 실제 게임 패널 DOM/CSS·runtime 조합의 1440/390폭 4화면을 확인해 기본펼침/접기펼치기·가로넘침없음·오류0 확인. 게임은 컴포넌트 검수이며 전체 게임 입장/외형자산 검증은 아니다.
+- 직접 모바일 PNG에서 기존 max-height 100%-130px가 마지막 안내행을 스크롤 아래로 숨김을 발견했다. 이번 안내 범위에서만 100%-80px로 조정하고 단어 단위 줄바꿈을 적용한다. 수정된 레이아웃을 재확인하며 통과한 조작 검사7개는 반복하지 않는다.
+## 속성 설계 안내 문구 승인 [dna-guide-refresh-approved-01a1b9aa]
+
+- 기록 2026-11-08T14:45:06+09:00; 문구·반영·배포 결정 사용자, 기록·구현 판단 Codex /root. 출처 현재 채팅 01a1b9aa-0bfe-7530-933e-b12476fe2d16의 request_user_input_async call_e0dfa1ddacb4449282bf286d793a1884 항목0 응답 「이 문구로 반영하고 배포」. 원발언 정확 시각 미제공, H:/Spawner Windows PowerShell.
+- 앞 copy 기록의 5행 정확 문구와 게임/속성 제작기 공통 위치가 승인됐다. 승인 대기 상태를 대체한다. 공용 안내의 기본 펼침 유지, 긴 행을 수용할 안내 폭만 공용 CSS에서 보완하고 입력 동작은 유지한다. 소스/runtime/Attribute의 해당 마크업만 국소 동기화하여 다른 내용은 보존한다.
+## 속성 설계 안내 문구 승인 대기 [dna-guide-refresh-copy-01a1b9aa]
+
+- 기록·최종 확인 2026-11-08T14:44:16+09:00; 기록·점검 Codex /root, 사용자 요청 출처는 dna-guide-refresh-01a1b9aa와 동일. 제안 5행은 DNA 선택(목록 클릭/휠 클릭), 회전·배치(휠 위·아래/Q·E, 빈칸 좌클릭/Enter), 이동·삭제(배치한 DNA 드래그/좌클릭), 선택 취소(우클릭/Esc), 되돌리기·다시 실행(Ctrl+Z/Ctrl+Y). 정확 문구를 비동기 질문으로 제시했으며 아직 승인 응답 미수신, 제품 파일 수정 전이다.
+- 실제 검증: 기존 dna-editor.test.mjs에서 회전·삭제·undo/redo, 중간조각 클릭삭제, 드래그 이동·취소, 우클릭 선택해제, 드래그 중 취소, 집은 DNA 복구, 반복 DNA 선택 유지의 7개를 실행해 7/7 통과(116.6ms, skip0). 소스 정적 대조와 함께 안내 보완 근거이며 렌더 결과를 검증한 것은 아니다.
+- 기존 Sites 조회로 public/owner 및 현재 버전79, 운영 https://spawner.oojjrs.chatgpt.site 확인. 공식 source helper의 읽기 전용 open이 완료되어 전용 임시 site-source/.sites-checkout에 현행 소스가 준비됐다. 제품 수정·배포는 미수행. 다음 단계는 문구 승인 뒤 공유 소스/실행본 반영, 늘어난 안내의 화면 검수 및 기존 사이트 배포다.
+## 속성 설계 조작 안내 점검 진행 [dna-guide-refresh-01a1b9aa]
+
+- 기록·현재 확인 2026-11-08T14:40:08+09:00; 기록·검토 판단 Codex /root, 점검·수정·배포 요청 사용자. 출처 codex://threads/01a1b9aa-0bfe-7530-933e-b12476fe2d16, H:/Spawner Windows PowerShell. 원발언 정확 시각·항목 ID 불명.
+- 소스 관측: createDnaEditor의 안내는 DNA 선택·회전·배치·되돌리기 4행이다. 실제 목록 클릭/휠 클릭 선택, 휠/Q/E/R 회전, 빈칸 좌클릭/Enter/Space 배치, 기존 조각 드래그 이동·좌클릭 삭제, 우클릭/Esc 취소, Ctrl+Z/Backspace/뒤로 버튼 undo, Ctrl+Y/Ctrl+Shift+Z redo, 방향키 배치점 이동, Delete 마지막 또는 이동 중 조각 삭제, F 화면 맞춤을 지원한다. 현재 안내는 틀린 단축키보다 핵심 편집·취소·redo 누락이 문제다.
+- 판단: 안내 기본 펼침은 유지하고 5행으로 선택, 회전·배치, 이동·삭제, 선택 취소, 되돌리기·다시 실행의 주요 조작을 정리한다. 소스 및 게임 runtime/Attribute 공유 실행본에 동일 적용하며 실제 조작은 바꾸지 않는다. 문서 지침의 정확 문구 사전 승인 전에는 제품 문구를 쓰지 않는다. 다음 단계는 문구 승인 및 허용된 실행 검증·기존 Sites 배포이며 아직 수행 전이다. 연결 GitHub Projects 0개, 시작 작업트리 clean.
 ## 습격 종 단계 운영 배포 완료 [raid-progression-deployed-01a1b984]
 
 - 기록·마지막 확인 2026-11-08T14:25:40+09:00; 실행·검수·기록 Codex /root, 배포 우선 결정 사용자. 출처 codex://threads/01a1b984-9412-78e2-acc2-6bf8770a3caf 및 Sites 실제 응답, H:/Spawner Windows PowerShell. 원발언 시각·항목 ID 불명. 앞 complete의 로컬 완료 상태를 운영 반영 완료로 갱신한다.
