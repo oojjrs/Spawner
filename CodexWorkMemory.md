@@ -1,3 +1,17 @@
+## 자원 선택 정보창 복구 확인 [resource-panel-result-01a1b976]
+
+- 기록 시각 2026-11-08T13:48:34+09:00; 구현·확인·기록 Codex /root, 결정 사용자. 출처 현재 채팅 01a1b976-8849-7bc1-b1e2-fa2b93fbbcd7, H:/Spawner. 위 resource-panel-01a1b976의 로컬 복구를 완료했다.
+- Spawner.html 자원 패널 6줄과 기존 CSS 13줄, game.js의 DOM 참조·잔량 갱신·패널 표시 조건·위치 이동을 복원했다. 기존 도감 클릭 분기는 유지된다. 자원별 이름/원화와 실제 cell.amount/initialAmount를 표시하고 tree는 foodCellMap으로 조회한다.
+- 실제 확인: node --check client/game.js 성공, 복원 DOM ID 5개 각각 유일하고 updateResourceDetails 갱신 호출 1개. 원래 선택 수명 및 잔량 스냅샷 경로는 그대로다. 브라우저는 실제 입장·새 방 생성까지 실행했으나 3초 종족선택 대기 중 지형 생성52%여서 시간초과했다. pageerror 0이지만 게임/자원 클릭·화면 검증 완료는 아니다. 근거 $Trash/resource-panel-01a1b976/{browser.cjs,result.json,panel.png}.
+- 정적 검수와 최종 범위는 제품3파일 및 이 채팅 메모리다. 현재 기존 공개 Sites의 같은 project_id/접근범위를 유지한 배포 준비 대상이며 실제 배포 성공을 선기록하지 않는다.
+
+## 자원 선택 정보창 복구 진행 [resource-panel-01a1b976]
+
+- 기록 시각 2026-11-08T13:44:29+09:00; 기록·판단 Codex /root, 결정 사용자. 출처 현재 채팅 01a1b976-8849-7bc1-b1e2-fa2b93fbbcd7, H:/Spawner. 원 발언 시각과 항목 ID는 제공되지 않음.
+- 사용자 요청: 자원을 선택할 때 사라진 정보창 복구 및 배포. 최초 작업트리 clean, main b5f01568. 연결 Projects 없음.
+- 도구 관측: 799715fa에서 Spawner.html의 resource-details, game.css 스타일과 game.js의 updateResourceDetails·표시 조건·위치 이동 연결이 삭제됐다. 기존 기록은 선택 정보창 유지였으며 자원 선택과 도감 연결은 현재도 남아 있다.
+- 구현 판단: 기존 이름·그림·잔량/초기량·위치 이동·도감 진입을 복구한다. 폐기된 칼날/관통 채집 조건과 옛 채집시간 안내는 다시 넣지 않는다. 기존 문구와 구조를 복원하며 원화·경제·월드 선택 툴팁은 변경하지 않는다. 실제 클릭 후 패널 표시와 닫기·도감 연결을 확인한다.
+
 ## 최종 범위·검수 확인 [vfx-hosting-correction-01a1b8b3]
 
 - 기록 시각 2026-11-08T13:35:05+09:00; 확인·기록 Codex /root, 현재채팅과각도구/담당완료보고대조.

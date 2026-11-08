@@ -147,6 +147,7 @@
     agentNameDisplay.append(agentRenameOpen, unitPanelTitle);
     agentHeading.append(agentNameDisplay, agentNameForm);
     let renamedAgentId = null;
+    const resourceDetails = document.getElementById("resource-details");
     const terrainDetails = document.getElementById("terrain-details");
     document.querySelector("#terrain-speed > img").src = assetSource("DesignAssets/UI/movement-speed.png");
     const burrowDetails = document.createElement("section");
@@ -6311,7 +6312,7 @@
         return;
       }
       const cell = selectionTerrainCell();
-      if (!cell || terrainDetails.hidden) return;
+      if (!cell || (resourceDetails.hidden && terrainDetails.hidden)) return;
       hideHelpTooltip();
       focusDiscovery(cell);
       canvas.focus();
@@ -6405,6 +6406,35 @@
       return agent && state.agents.includes(agent) ? {
         id: agent.templateId, name: agent.templateName, tribe: agent.tribe, slots: [...agent.slots], dna: agent.dna ? Spawner.cloneDna(agent.dna) : null, combatPrimary: agent.combatPrimary, revision: agent.templateRevision
       } : null;
+    }
+
+    function updateResourceDetails() {
+      const selected = state.selection;
+      const tree = selected?.kind === "tree" ? selected.target : null;
+      const cell = tree ? foodCellMap.get(tree.column + "," + tree.row) : selected?.kind === "food" ? selected.target : null;
+      const definition = cell ? Spawner.resourceDefinition(Spawner.resourceTypeForCell(cell, worldMap)) : tree ? Spawner.resourceDefinition("tree") : null;
+      resourceDetails.hidden = !definition;
+      if (!definition) return;
+      const previousHelp = helpTooltipTarget?.dataset.help;
+      unitPanelTitle.textContent = definition.name;
+      const image = document.getElementById("resource-image");
+      if (image.dataset.key !== definition.key) {
+        image.dataset.key = definition.key;
+        image.replaceChildren(createResourceImage(definition));
+      }
+      const amount = Number(Math.max(0, cell?.amount || 0).toFixed(1));
+      const capacity = Math.max(amount, Number((cell?.initialAmount ?? amount).toFixed(1)));
+      const amountElement = document.getElementById("resource-amount");
+      document.getElementById("resource-amount-value").textContent = amount;
+      document.getElementById("resource-capacity").textContent = "/" + capacity;
+      amountElement.dataset.wide = String(String(amount).length + String(capacity).length > 4);
+      amountElement.dataset.help = "남은 " + definition.name + " " + amount + "개 / 처음 자원 " + capacity + "개";
+      amountElement.setAttribute("aria-label", amountElement.dataset.help);
+      image.dataset.help = definition.name;
+      image.setAttribute("aria-label", definition.name);
+      resourceLocation.dataset.help = "자원 위치로 이동\n(" + (tree?.column ?? cell.x) + ", " + (tree?.row ?? cell.y) + ")";
+      resourceLocation.setAttribute("aria-label", "자원 위치로 이동");
+      if (helpTooltipTarget && resourceDetails.contains(helpTooltipTarget) && helpTooltipTarget.dataset.help !== previousHelp) showHelpTooltip(helpTooltipTarget);
     }
 
     function updateTerrainDetails() {
@@ -6682,10 +6712,11 @@
       unitPanelSelectionKey = key;
       updateCorpseDetails();
       updateTerrainDetails();
+      updateResourceDetails();
       updateBurrowDetails();
       updateForeignColonyDetails();
       document.getElementById("unit-codex").hidden = false;
-      resourceLocation.hidden = terrainDetails.hidden && foreignColonyDetails.hidden;
+      resourceLocation.hidden = resourceDetails.hidden && terrainDetails.hidden && foreignColonyDetails.hidden;
       agentDetails.hidden = !agent;
       agentRenameOpen.hidden = !agent || !state.agents.includes(agent);
       agentRenameOpen.disabled = !!state.ending || connection.busy || !connection.online;
@@ -6694,7 +6725,7 @@
       agentNameCancel.disabled = connection.busy;
       agentBirth.hidden = !agent || !state.agents.includes(agent);
       agentDesign.hidden = !agent || !state.agents.includes(agent);
-      unitPanel.hidden = !agent && corpseDetails.hidden && terrainDetails.hidden && burrowDetails.hidden && foreignColonyDetails.hidden;
+      unitPanel.hidden = !agent && corpseDetails.hidden && terrainDetails.hidden && resourceDetails.hidden && burrowDetails.hidden && foreignColonyDetails.hidden;
       if (unitPanel.hidden) return;
       collapseControlsGuide();
       if (!agent) return;

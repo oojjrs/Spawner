@@ -243,6 +243,19 @@
     .unit-panel h2 { min-width: 0; overflow-wrap: anywhere; }
     .unit-panel .panel-close { flex: none; }
     .agent-birth-stats { margin: 12px 0 0; color: var(--muted); font-size: .78rem; line-height: 1.7; white-space: pre-line; overflow-wrap: anywhere; }
+    .unit-panel:has(#resource-details:not([hidden])) { width: min(262px, calc(100vw - var(--info-panel-right) - 12px)); padding: 12px; }
+    .unit-panel:has(#resource-details:not([hidden])) .panel-header { align-items: center; gap: 8px; }
+    .resource-overview { display: grid; grid-template-columns: minmax(0, 128px) minmax(0, 96px); align-items: center; gap: 12px; margin-top: 12px; }
+    #resource-image { display: grid; place-items: center; min-width: 0; height: 96px; }
+    #resource-image .object-image { width: 128px; height: auto; }
+    .resource-amount { display: inline-flex; align-items: baseline; justify-content: center; min-width: 0; gap: 1px; padding: 10px 8px; border-radius: 8px; background: #0d1416; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .resource-amount > strong { font-size: 32px; font-weight: 700; }
+    .resource-amount > span { color: var(--muted); font-size: 18px; font-weight: 400; }
+    .resource-amount[data-wide="true"] > strong { font-size: 24px; }
+    .resource-amount[data-wide="true"] > span { font-size: 14px; }
+    :root:has(#resource-details:not([hidden])) .help-tooltip .evolution-text-icon { width: 1.1em; height: 1.1em; object-fit: contain; vertical-align: -.15em; }
+    .resource-details [data-help] { cursor: help; }
+    .resource-details [data-help]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
     .unit-panel:has(#terrain-details:not([hidden])) { width: min(302px, calc(100vw - var(--info-panel-right) - 12px)); padding: 12px; }
     .unit-panel:has(#terrain-details:not([hidden])) .panel-header { align-items: center; gap: 8px; }
     .terrain-overview { display: grid; grid-template-columns: minmax(0, 128px) minmax(0, 136px); align-items: center; gap: 12px; margin-top: 12px; }
