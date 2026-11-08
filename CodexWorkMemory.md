@@ -6,6 +6,20 @@
 - 앞검증기록의중복모듈은병행재빌드완료후재관측에서이미단일정의로정리되어있어추가덮어쓰기하지않았다. 최종내장Worker검사는a8214c에서성공했고실행본SHA와결과는$Trash/design-preservation-01a1b979/browser-result.json에있다. 초기에실패한검사2건은입력budget정규화비교와동시번들생성시점문제였으며이후정확한저장직전값/최종번들로해당실패범위만재검수했다.
 - 범위: client/design-library.mjs·관련test,storage.mjs,room.mjs,worker.mjs 및runtime의해당내장모듈과본메모리. 다른작업의자원정보창·수명UI·전투·빌드변경은보존한다. 요청/원인/판단/실제결과/한계누락대조완료. 로컬구현완료, 커밋·배포없음. 최종공통형식·범위diff확인은다음도구결과를근거로한다.
 
+## 네 종족 채집 레이어 점검 완료 [harvest-audit-result-01a1b97c]
+
+- 기록 시각 2026-11-08T13:57:08+09:00; 점검·보완·기록 Codex /root, 점검 요청과 자원뒤표시 기준 사용자. 출처 현재 채팅 01a1b97c-550a-75b0-b0c8-bb1b909a66ae, H:/Spawner. 앞선 harvest-audit-01a1b97c의 포자 누락 보완 완료.
+- 실제 자원 판정/자원 애니메이션 pose/나무·자원 drawImage 호출 경로에서 네 종족 각각18조건(zoom6/12/64×선택2×준비/작업/반복3), 총72조건 모두 유닛이 대상 자원보다 먼저 그려진다. 자원 소진·귀환 전환48조건은 수정 전후 그림명령이 동일함을 확인했다. 기존 채집/운반/투척 5검사 성공근거는 재사용하고 바닥 드롭 렌더1검사를 변경후 통과했다. game.js 구문검사도 성공.
+- 추가 제품 변경은 game.js의 저배율 활성 나무 등록/전체 그리기 선택과 현대 tree depth 판정뿐이다. 다른3종족은 기존 공통정렬수정으로 정상이며 별도 수정 불필요. 근거: 프로젝트 임시 spore-resource-layer-01a1b97c/{audit-before.json,audit-after.json,game.audit-before.js}. Canvas 이미지 호출 순서와 기존 프레임 선택 검사이며 전체 게임 픽셀 캡처 확인은 아니다.
+- 기존 다른채팅 변경 보존. 로컬 변경은 미스테이징·미커밋 상태로 둔다. 요청/원인정정/보완/실제검사결과 대조 완료; 다음 한정 형식·diff 결과는 도구 출력으로 남긴다.
+
+## 네 종족 채집 레이어 점검·포자 판정 정정 [harvest-audit-01a1b97c]
+
+- 기록 시각 2026-11-08T13:56:33+09:00; 사용자 요청 다른 개체도 점검, 판단·관측·기록 Codex /root. 출처 현재 채팅 01a1b97c-550a-75b0-b0c8-bb1b909a66ae, H:/Spawner. 원 발언 시각·항목 ID 불명.
+- 기존 harvest-layer-result-01a1b97c의 32조건 완료 근거를 정정한다. 당시 isTreeFood 스텁이 resourceType=tree를 true로 간주했지만 실제 server/food.mjs는 구형 숲먹이만 true다. 실제 판정과 resourceNodePose·drawTree/Detail·drawResourceNode를 연결한 요청 검증에서 새싹콩/몽돌/샘방울 각각18/18 정상, 포자18/18 전면 겹침 재현. 이전 검증은 실제 나무 앞뒤 보장의 근거로 유효하지 않다.
+- 원인: 현대 목재 자원 tree가 depth의 나무 판정에서 빠지고, zoom<=18에서는 숲 캐시만 그려 활성 채집나무도 유닛 뒤에 먼저 칠해진다. 현대 tree를 명시 판정하고 저배율에서 실제 채집 대상인 살아있는 나무만 개별 정렬/전체 그리기에 포함한다. 준비구간도 포함하며 떨어진 목재를 줍는 개체는 제외한다. 다른3종족의 제품 코드는 추가 변경하지 않는다.
+- 기존 client/resource-animation.test.mjs 5개 통과로 네 종족 승인 채집·운반·투척 프레임 및 중복 소품 없음 확인. 실제 그림명령 기록은 audit-before.json 120상태 중 활성72조건/전환48조건이다. 수정은 기존 승인 범위의 본인 누락 보완이며 후속 결과는 아직 미확인.
+
 ## 속성 설계 조작 안내 기본 펼침 완료 [dna-guide-open-result-01a1b981]
 
 - 기록·최종 구현 관측 2026-11-08T13:56:22+09:00; 구현·기록 Codex /root, 결정 사용자. 출처 codex://threads/01a1b981-f290-7b72-9c36-d424b97e4b1a, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID 불명. dna-guide-open-01a1b981의 로컬 수정 완료.
@@ -21,6 +35,12 @@
 - 기록 2026-11-08T13:55:50+09:00; 기록·구현 판단 Codex /root, 요청·결정 사용자. 출처 codex://threads/01a1b981-f290-7b72-9c36-d424b97e4b1a, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID 불명.
 - 사용자: 속성 설계창 조작 안내를 처음에 접어 두지 말 것. 기존 dna-wheel-guide-approved-20261104-01a1a129의 기본 접힘 결정만 이 요청으로 대체한다. 기존 문구와 사용자 접기·펼치기는 유지한다.
 - 관측·판단: 공용 createDnaEditor의 details에 open이 없어 닫혀 생성된다. client/dna-editor.mjs 및 현재 소비되는 runtime.js/Attribute.html의 같은 마크업에 open만 동기화한다. 병행 runtime 및 메모리 변경을 보존하며 전체 재생성은 필요하지 않다. 연결 Projects 0개. 구현·검수 전이며 커밋 요청 없음.
+## 채집 유닛 자원 뒤 정렬 완료 [harvest-layer-result-01a1b97c]
+
+- 기록 시각 2026-11-08T13:52:29+09:00; 구현·관측·기록 Codex /root, 결정 사용자. 출처 현재 채팅 01a1b97c-550a-75b0-b0c8-bb1b909a66ae, H:/Spawner. 앞선 harvest-layer-01a1b97c의 로컬 수정 완료.
+- 실제 drawWorldObjects를 수정 전후 실행해 4자원 × 2배율 × 선택/비선택 × 겹침 위치 2종 = 32조건을 기록했다. 수정 전에는 6조건만 채집자가 자원 뒤였고 수정 후 32조건 모두 채집자 1회→대상 자원 순서다. 기존 바닥 드롭 그리기 회귀 1개와 game.js 구문 검사도 통과했다. 근거: 프로젝트 임시 폴더 spore-resource-layer-01a1b97c/draw-order.json과 원본 사본. 이는 실제 정렬 함수의 호출 순서 확인이며 전체 게임 화면 캡처 검증은 아니다.
+- 대상은 client/game.js의 drawWorldObjects 3개 hunk와 이 채팅 메모리다. 선택 때 채집자가 마지막 재그리기로 앞으로 나오지 않으며 다른 UI 병행 변경은 보존했다. 스테이징·커밋·게시 지시는 없고 해당 작업은 수행하지 않는다.
+
 ## 수명 나뭇잎·사망 동작 복구 결과 [lifespan-leaf-result-01a1b97a]
 
 - 기록·최종 관측 2026-11-08T13:52:27+09:00; 구현·검수·기록 Codex /root, 요구 결정 사용자. 출처 현재 채팅 01a1b97a-6506-7732-9949-ae9d6183d6fa, H:/Spawner. 원 발언 시각·항목 ID 미제공. 앞 start 기록의 구현을 로컬 완료로 갱신한다.
@@ -35,6 +55,12 @@
 - client/game.js에 정보창 자원 아이콘과 현재량 / 한도 갱신 23줄, game.css에 정렬·아이콘 크기 2줄 추가. 수명 아래 표시하며 0개에서도 종족별 아이콘을 유지하고 운반 한도 0 및 중립 생물은 숨긴다. 기존 게임 계산·리스트·HTML은 변경하지 않았다.
 - 실제 확인: node --check 성공, 실제 정보창 DOM/CSS·표시 코드·runtime을 격리 Chromium에서 실행해 0/10→3/10→10/10→0/10 갱신, 운반불가·중립 숨김, 4종족 자원 아이콘 확인. 9상태 모두 숫자 넘침 없고 pageerror 0. 패널 캡처 직접 열람으로 아이콘과 3 / 10 표시 확인. 전체 게임 입장 및 실시간 채집 플레이는 실행하지 않았다. 근거: 작업 폴더 하위 임시 worker-carry-01a1b97b/result.json·panel.png.
 - 제품2파일과 메모리 UTF8NoBom/CRLF 형식 검사 통과 및 diff 검토. 검사 중 다른 채팅의 수명 아이콘·자원 뒤 채집 렌더 변경이 같은 파일에 나타났으며 이를 유지했다. 이번 변경은 미스테이징·미커밋이며 사용자 요청·구현·확인·잔여사항 대조 완료.
+## 채집 유닛 자원 뒤 정렬 진행 [harvest-layer-01a1b97c]
+
+- 기록 시각 2026-11-08T13:51:20+09:00; 기록·판단 Codex /root, 결정 사용자. 출처 현재 채팅 01a1b97c-550a-75b0-b0c8-bb1b909a66ae, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID 불명.
+- 사용자 교정: 포자버섯은 나무 앞에서 채집하지 않고 자원보다 뒤 레이어에 있어야 한다. 현행 drawWorldObjects는 임의 위치의 tree.y와 유닛 발밑 y+.808을 비교하며 선택 때 모든 유닛을 마지막에 그린다. 채집 중인 유효한 대상 자원 직전으로 유닛 depth를 제한하고, 선택 경로의 마지막 재그리기에서 해당 채집 유닛을 제외한다. 바닥 드롭·사체·비채집·전투·탄생은 기존 동작을 유지한다.
+- 웹 JS 수정이며 현재 요청은 로컬 수정까지만이다. 연결 Projects 0개. 다른 채팅의 game.js UI/메모리 변경을 보호하며 본 작업은 drawWorldObjects만 수정한다. 검증은 실제 그리기 순서와 기존 바닥 자원 검사, 형식·한정 diff로 제한한다. 아직 검증 전이다.
+
 ## 일꾼 자원 보유량 표시 진행 [worker-carry-01a1b97b]
 
 - 기록 시각 2026-11-08T13:49:49+09:00; 기록·구현 판단 Codex /root, 결정 사용자. 출처 codex://threads/01a1b97b-fb4d-74b2-adff-439e620cee7f, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID 불명.

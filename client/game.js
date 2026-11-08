@@ -2143,6 +2143,7 @@
       const bottomRight = screenToWorld(viewport.width, viewport.height);
       const objects = [];
       const harvesters = foodHarvestStarts();
+      const harvestingTrees = new Set();
       const movementAgents = selectedMovementAgents();
       const movementVisible = state.selection?.kind === "agent" || movementAgents.length > 0;
       for (const entry of colonyEntries) objects.push({ kind: "colony", depth: entry.y + 3.3, target: entry });
@@ -2158,6 +2159,15 @@
           if (food.amount <= 0 || !Spawner.isTreeFood(food, worldMap)) continue;
           const tree = forest.cells.get(food.x + "," + food.y);
           if (tree) details.set(tree.id, tree);
+        }
+        for (const source of visibleAgents()) {
+          const agent = displayedAgent(source);
+          const food = agent.mode === "harvest" ? foodCellMap.get(agent.harvestResourceKey || agent.x + "," + agent.y) : null;
+          if (food?.resourceType !== "tree" || food.amount <= 0 || food.dropped) continue;
+          const tree = forest.cells.get(food.x + "," + food.y);
+          if (!tree) continue;
+          details.set(tree.id, tree);
+          harvestingTrees.add(tree.id);
         }
         for (const object of [state.selection, state.hover]) {
           if (object?.kind === "tree") details.set(object.target.id, object.target);
@@ -2175,7 +2185,7 @@
         if (tree.x + radius < topLeft.x || tree.x - radius > bottomRight.x ||
           tree.y + tree.height * 0.06 < topLeft.y || tree.y - tree.height * 0.94 > bottomRight.y ||
           treeOverlapsColony(tree)) continue;
-        objects.push({ kind: state.camera.zoom <= 18 ? "treeDetail" : "tree", depth: tree.y, target: tree });
+        objects.push({ kind: state.camera.zoom <= 18 && !harvestingTrees.has(tree.id) ? "treeDetail" : "tree", depth: tree.y, target: tree });
       }
       for (const burrow of worldMap.burrows) {
         if (burrow.health <= 0 && structureEffectPlayback.effects.get("burrow:" + burrow.id + ":damage")?.type !== "destroy" ||
@@ -2193,8 +2203,15 @@
         if (agent.combat) continue;
         const position = interpolatedAgentPosition(agent);
         const birth = state.camera.zoom < 8 ? null : agentBirthPose(agent, true);
-        const depth = position.y + 0.5 + AGENT_HEIGHT * 0.44;
-        objects.push({ kind: "agent", depth, birth: !!birth, target: agent });
+        const displayed = displayedAgent(agent);
+        const food = displayed.mode === "harvest" ?
+          foodCellMap.get(displayed.harvestResourceKey || displayed.x + "," + displayed.y) : null;
+        const behindResource = food?.amount > 0 && !food.dropped && food.kind !== "corpse";
+        const tree = behindResource && (food.resourceType === "tree" || Spawner.isTreeFood(food, worldMap)) ?
+          forest.cells.get(food.x + "," + food.y) : null;
+        const depth = Math.min(position.y + 0.5 + AGENT_HEIGHT * 0.44,
+          behindResource ? (tree ? tree.y : food.y + 0.92) - 0.01 : Infinity);
+        objects.push({ kind: "agent", depth, birth: !!birth, behindResource, target: agent });
       }
       for (const food of resourceNodeCells()) {
         if (food.dropped) { drawDroppedResource(food); continue; }
@@ -2209,7 +2226,7 @@
         else if (object.kind === "treeDetail") drawTreeDetail(object.target);
         else if (object.kind === "colony") drawColony(now, object.target);
         else if (object.kind === "agent") {
-          if (!movementVisible) drawAgent(now, object.target);
+          if (!movementVisible || object.behindResource) drawAgent(now, object.target);
         }
         else if (object.kind === "burrow") drawBurrow(object.target);
         else drawFoodSpot(now, object.target, harvesters.get(object.target.x + "," + object.target.y));
@@ -2217,7 +2234,7 @@
       drawCorpses();
       if (movementVisible) {
         for (const agent of movementAgents) drawSelectedAgentMovement(agent);
-        for (const object of objects) if (object.kind === "agent") drawAgent(now, object.target);
+        for (const object of objects) if (object.kind === "agent" && !object.behindResource) drawAgent(now, object.target);
       }
     }
 
