@@ -77,7 +77,7 @@
   "loop": true,
   "rootMotion": false,
   "pivot": [
-    112,
+    400,
     196
   ],
   "atlas": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.png",
@@ -93,12 +93,19 @@
     "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/Parts/eye-left.png",
     "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/Parts/eye-right.png"
   ],
-  "direction": "한쪽 발을 높이 들면서 몸을 기울였다가 발을 내리며 원위치",
+  "direction": "\ud55c\ucabd \ubc1c\uc744 \ub192\uc774 \ub4e4\uba74\uc11c \ubab8\uc744 \uae30\uc6b8\uc600\ub2e4\uac00 \ubc1c\uc744 \ub0b4\ub9ac\uba70 \uc6d0\uc704\uce58",
   "motion": {
     "rigidBody": true,
     "supportFootFixed": true,
     "maximumTiltDegrees": 15.469860468532227,
     "liftedFoot": "left"
   },
-  "runtimeRegistration": {"frameSize":224,"pivotX":112,"pivotY":196,"viewSize":224,"registrationScale":1}
+  "runtimeRegistration": {
+    "frameSize": 224,
+    "pivotX": 112,
+    "pivotY": 196,
+    "viewSize": 224,
+    "registrationScale": 1
+  },
+  "sourceFacing": "left"
 }

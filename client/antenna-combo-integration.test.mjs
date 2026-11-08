@@ -273,15 +273,18 @@ test('existing combinations and antenna singles preserve original actions except
   assert.equal(Object.keys(baseline.definitions).length, 20);
   const native28 = JSON.parse(read('tools/spring-native-facing-20261108/bean-spore-image-changes.json')).changes;
   const selected28 = new Set(JSON.parse(read('tools/spring-native-facing-20261108/bean-spore-technical-plan.json')).candidateForms);
+  const remainingNative = JSON.parse(read('tools/spring-native-facing-20261108/remaining-facing-pebble-image-changes.json')).changes;
+  const remainingForms = new Set([...JSON.parse(read('tools/spring-native-facing-20261108/remaining-facing-pebble2-plan.json')).targets,...JSON.parse(read('tools/spring-native-facing-20261108/remaining-facing-pebble-extra-plan.json')).fullFamilyTargets]);
+  const springBirthImages = new Set(JSON.parse(read('tools/spring-native-facing-20261108/remaining-facing-spring-birth-fix-plan.json')).mainRuntimeRegistrations.map(r=>r.image));
   const newAttacks = new Set(JSON.parse(read('tools/spring-native-facing-20261108/followup13-integration-map.json')).items.map(row=>row.source));
   const expectedLeft = (key, original) => {
-    const clip=structuredClone(original), change=native28[clip.image];
-    if(selected28.has(key)&&change){
+    const clip=structuredClone(original), change=native28[clip.image]||remainingNative[clip.image];
+    if((selected28.has(key)||remainingForms.has(key)||key==='pebble/carapace-antenna')&&change){
       clip.image=change.afterPath||change.newImage;clip.sourceFacing='left';clip.pivotX=clip.frameSize-clip.pivotX;
       if(clip.scene?.outletX!==undefined)clip.scene.outletX=clip.frameSize-clip.scene.outletX;
-      for(const layer of clip.sceneLayers?.layers||[]){const layerChange=native28[layer.image];if(layerChange)layer.image=layerChange.afterPath||layerChange.newImage;for(const sample of layer.samples)if(sample)sample.destination[0]=clip.frameSize-sample.destination[0]-sample.destination[2];}
+      for(const layer of clip.sceneLayers?.layers||[]){const layerChange=native28[layer.image]||remainingNative[layer.image];if(layerChange)layer.image=layerChange.afterPath||layerChange.newImage;for(const sample of layer.samples)if(sample)sample.destination[0]=clip.frameSize-sample.destination[0]-sample.destination[2];}
     }
-    if(newAttacks.has(clip.image))clip.sourceFacing='left';
+    if(newAttacks.has(clip.image)||springBirthImages.has(clip.image))clip.sourceFacing='left';
     return clip;
   };
 
@@ -328,7 +331,7 @@ test('existing combinations and antenna singles preserve original actions except
   }
   for (const entry of JSON.parse(read('AnimationCandidates/bean-combo-walk-approved-v2-20261107/approval.json')).approvedForms)
     approvedHashes.set(UNIT_ACTION_ART['bean/' + entry.form].actions.walk.image, entry.sha256);
-  const normalized = {...JSON.parse(read('tools/source-facing-normalization-20261108/pixel-changes.json')).changes, ...JSON.parse(read('tools/secretion-source-normalization-20261108/pixel-changes.json')).changes, ...JSON.parse(read('tools/spring-native-facing-20261108/attack-metadata-changes.json')).changes, ...native28, ...Object.fromEntries(JSON.parse(read('tools/spring-native-facing-20261108/followup13-integration-map.json')).items.map(row=>[row.source,{afterSha256:row.candidateSHA256}]))};
+  const normalized = {...JSON.parse(read('tools/source-facing-normalization-20261108/pixel-changes.json')).changes, ...JSON.parse(read('tools/secretion-source-normalization-20261108/pixel-changes.json')).changes, ...JSON.parse(read('tools/spring-native-facing-20261108/attack-metadata-changes.json')).changes, ...native28, ...remainingNative, ...Object.fromEntries(JSON.parse(read('tools/spring-native-facing-20261108/followup13-integration-map.json')).items.map(row=>[row.source,{afterSha256:row.candidateSHA256}]))};
   for (const [image, hash] of Object.entries(baseline.sourceImages))
     assert.equal(sha(image), normalized[image]?.afterSha256 || approvedHashes.get(image) || hash, image);
 });

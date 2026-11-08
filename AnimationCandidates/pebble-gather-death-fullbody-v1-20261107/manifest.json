@@ -6,9 +6,9 @@
   "approvedAt": "2026-11-07T02:33:21Z",
   "approvalScope": "User-approved gathering-form animation. Publish the submitted sheet and GIF unchanged and link the matching planning-table cell only.",
   "sheet": "pebble-gather-death-v1-sheet.png",
-  "sheetSHA256": "6a843aeb318c78afb05459971f64f57818610626a0a4ec7b51e6e8647775db4f",
+  "sheetSHA256": "03a1266e79d91fbf73f11437a56dd0e51bc0514ba6c603b2098ca7953bc492a9",
   "preview": "pebble-gather-death-v1-preview.gif",
-  "previewSHA256": "8090957dcb94e1606db79ebe27bfe91825a4429aef1e73785584f0865e88a471",
+  "previewSHA256": "eb22be1673019dce4fab1bd0be24a9e7ad1a9f78c7b20548d3e028eb1a69f607",
   "frameSize": [
     512,
     512
@@ -41,5 +41,6 @@
     "lastTwoFramesExact": true
   },
   "integration": "Planning review only. Game runtime and deployment are unchanged.",
-  "finalPoseHoldMs": 1020
+  "finalPoseHoldMs": 1020,
+  "sourceFacing": "left"
 }

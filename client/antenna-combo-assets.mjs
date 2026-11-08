@@ -14457,7 +14457,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -14473,7 +14473,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         220
       ],
       "durationMs": 1240,
-      "pivotX": 257.0,
+      "pivotX": 255.0,
       "pivotY": 450,
       "referenceLength": 340,
       "viewSize": 340,
@@ -14483,7 +14483,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14499,7 +14499,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           220
         ],
         "durationMs": 1240,
-        "pivotX": 257.0,
+        "pivotX": 255.0,
         "pivotY": 450,
         "referenceLength": 340,
         "viewSize": 340,
@@ -14508,7 +14508,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14524,7 +14524,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           110
         ],
         "durationMs": 880,
-        "pivotX": 255.5,
+        "pivotX": 256.5,
         "pivotY": 451,
         "referenceLength": 341,
         "viewSize": 341,
@@ -14533,7 +14533,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14549,7 +14549,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           230
         ],
         "durationMs": 980,
-        "pivotX": 217.5,
+        "pivotX": 294.5,
         "pivotY": 451,
         "referenceLength": 340,
         "viewSize": 340,
@@ -14559,7 +14559,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14575,7 +14575,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           270
         ],
         "durationMs": 1200,
-        "pivotX": 256.5,
+        "pivotX": 255.5,
         "pivotY": 450,
         "referenceLength": 340,
         "viewSize": 340,
@@ -14586,7 +14586,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14602,7 +14602,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           240
         ],
         "durationMs": 1030,
-        "pivotX": 250.0,
+        "pivotX": 262.0,
         "pivotY": 447,
         "referenceLength": 339,
         "viewSize": 339,
@@ -14611,7 +14611,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14627,7 +14627,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 397.0,
+        "pivotX": 115.0,
         "pivotY": 437,
         "referenceLength": 175,
         "viewSize": 175,
@@ -14640,7 +14640,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14656,7 +14656,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           750
         ],
         "durationMs": 1940,
-        "pivotX": 265.0,
+        "pivotX": 247.0,
         "pivotY": 449,
         "referenceLength": 339,
         "viewSize": 339,
@@ -14671,7 +14671,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -14687,7 +14687,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         220
       ],
       "durationMs": 1240,
-      "pivotX": 254.0,
+      "pivotX": 258.0,
       "pivotY": 449,
       "referenceLength": 394,
       "viewSize": 394,
@@ -14697,7 +14697,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14713,7 +14713,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           220
         ],
         "durationMs": 1240,
-        "pivotX": 254.0,
+        "pivotX": 258.0,
         "pivotY": 449,
         "referenceLength": 394,
         "viewSize": 394,
@@ -14722,7 +14722,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14738,7 +14738,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           110
         ],
         "durationMs": 880,
-        "pivotX": 254.0,
+        "pivotX": 258.0,
         "pivotY": 450,
         "referenceLength": 392,
         "viewSize": 392,
@@ -14747,7 +14747,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14763,7 +14763,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           230
         ],
         "durationMs": 980,
-        "pivotX": 257.0,
+        "pivotX": 255.0,
         "pivotY": 449,
         "referenceLength": 374,
         "viewSize": 374,
@@ -14773,7 +14773,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14789,7 +14789,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           270
         ],
         "durationMs": 1200,
-        "pivotX": 253.5,
+        "pivotX": 258.5,
         "pivotY": 450,
         "referenceLength": 395,
         "viewSize": 395,
@@ -14800,7 +14800,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14816,7 +14816,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           240
         ],
         "durationMs": 1030,
-        "pivotX": 253.5,
+        "pivotX": 258.5,
         "pivotY": 449,
         "referenceLength": 371,
         "viewSize": 371,
@@ -14825,7 +14825,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14841,7 +14841,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 398.0,
+        "pivotX": 114.0,
         "pivotY": 439,
         "referenceLength": 166,
         "viewSize": 166,
@@ -14854,7 +14854,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14870,7 +14870,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           750
         ],
         "durationMs": 1940,
-        "pivotX": 264.0,
+        "pivotX": 248.0,
         "pivotY": 426,
         "referenceLength": 376,
         "viewSize": 376,
@@ -14986,7 +14986,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -15002,7 +15002,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 392.5,
+        "pivotX": 119.5,
         "pivotY": 439,
         "referenceLength": 155,
         "viewSize": 155,
@@ -15046,7 +15046,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -15062,7 +15062,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         220
       ],
       "durationMs": 1240,
-      "pivotX": 255.5,
+      "pivotX": 256.5,
       "pivotY": 449,
       "referenceLength": 413,
       "viewSize": 413,
@@ -15072,7 +15072,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -15088,7 +15088,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           220
         ],
         "durationMs": 1240,
-        "pivotX": 255.5,
+        "pivotX": 256.5,
         "pivotY": 449,
         "referenceLength": 413,
         "viewSize": 413,
@@ -15097,7 +15097,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -15113,7 +15113,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           110
         ],
         "durationMs": 880,
-        "pivotX": 253.0,
+        "pivotX": 259.0,
         "pivotY": 450,
         "referenceLength": 410,
         "viewSize": 410,
@@ -15122,7 +15122,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -15138,7 +15138,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           270
         ],
         "durationMs": 1200,
-        "pivotX": 257.0,
+        "pivotX": 255.0,
         "pivotY": 450,
         "referenceLength": 424,
         "viewSize": 424,
@@ -15149,7 +15149,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -15165,7 +15165,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           240
         ],
         "durationMs": 1030,
-        "pivotX": 247.0,
+        "pivotX": 265.0,
         "pivotY": 450,
         "referenceLength": 410,
         "viewSize": 410,
@@ -15174,7 +15174,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -15190,7 +15190,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 399.0,
+        "pivotX": 113.0,
         "pivotY": 440,
         "referenceLength": 150,
         "viewSize": 150,
@@ -15203,7 +15203,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -15219,7 +15219,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           750
         ],
         "durationMs": 1940,
-        "pivotX": 260.0,
+        "pivotX": 252.0,
         "pivotY": 440,
         "referenceLength": 404,
         "viewSize": 404,
@@ -27380,7 +27380,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -27865,7 +27865,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -28143,7 +28143,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -28663,7 +28663,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -29114,7 +29114,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -29358,7 +29358,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -29844,7 +29844,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,

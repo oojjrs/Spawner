@@ -1,1 +1,55 @@
-{"tribe":"pebble","action":"walk","locomotion":"step-in-place","frameSize":[512,512],"columns":5,"frameCount":20,"durationsMs":[40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40],"durationMs":800,"loop":true,"rootMotion":false,"pivot":[256,448],"sourceScale":1,"runtimeAtlas":"DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp","approvedSource":"AnimationCandidates/PebbleSingleWalkV6/rig.json","sourceCanvas":[512,512],"sourcePivot":[256,448],"directionVariants":1,"mirrored":false,"cyclesPerCell":2.5}
+{
+  "tribe": "pebble",
+  "action": "walk",
+  "locomotion": "step-in-place",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 5,
+  "frameCount": 20,
+  "durationsMs": [
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40
+  ],
+  "durationMs": 800,
+  "loop": true,
+  "rootMotion": false,
+  "pivot": [
+    256,
+    448
+  ],
+  "sourceScale": 1,
+  "runtimeAtlas": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp",
+  "approvedSource": "AnimationCandidates/PebbleSingleWalkV6/rig.json",
+  "sourceCanvas": [
+    512,
+    512
+  ],
+  "sourcePivot": [
+    256,
+    448
+  ],
+  "directionVariants": 1,
+  "mirrored": false,
+  "cyclesPerCell": 2.5,
+  "sourceFacing": "left"
+}

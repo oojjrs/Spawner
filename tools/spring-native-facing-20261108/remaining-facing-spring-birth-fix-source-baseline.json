@@ -1,0 +1,816 @@
+{
+  "createdAt": "2026-11-08T02:30:04.767803+00:00",
+  "policy": "Bytes must remain identical. SourceFacing-only changes require no image, raw, atlas, preview, layer hash, pivot, timing, or sample edits.",
+  "files": [
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-antenna/body.png",
+      "sha256": "bd7a27d33b2506dd60766a11299f38430f9831630765a7c198578a0f5b133ab3",
+      "bytes": 650140,
+      "roles": [
+        "spring/blade-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-antenna/environment.png",
+      "sha256": "c945d053d51e8a1102d2264c6496c0904587b00c0e2808e9c0733e29f76c3f9b",
+      "bytes": 271668,
+      "roles": [
+        "spring/blade-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-secretion-antenna/body.png",
+      "sha256": "19823a46d35dc74065f32ec1ef292d082c13b8e722cfa7db9733574fd2047754",
+      "bytes": 820323,
+      "roles": [
+        "spring/blade-secretion-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-secretion-antenna/environment.png",
+      "sha256": "89dafdbbd6e9ac8406e38ef9e03612d301f5ea800b3f007c9dd2e78083422450",
+      "bytes": 295881,
+      "roles": [
+        "spring/blade-secretion-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-secretion-carapace-antenna/body.png",
+      "sha256": "764a9acd4cb1f1074be568fe7fb6aa7e66bec46e6de2bcd787df880c9719051d",
+      "bytes": 754290,
+      "roles": [
+        "spring/blade-secretion-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-secretion-carapace-antenna/environment.png",
+      "sha256": "4d353f7e6a238450931a51d99db2651dc60c48da430df70d434d5e426ea43fe1",
+      "bytes": 294264,
+      "roles": [
+        "spring/blade-secretion-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/secretion-antenna/body.png",
+      "sha256": "d1d24d18c2832461358b5d4842e446a9b991f53fc12fe1f4935a9416e211e21e",
+      "bytes": 748478,
+      "roles": [
+        "spring/secretion-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/secretion-antenna/environment.png",
+      "sha256": "ebfe66874cde38398024d9306618457503a386074f2b3ba377c365c6c1cba9c1",
+      "bytes": 287841,
+      "roles": [
+        "spring/secretion-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/birth-generated-source.png",
+      "sha256": "f335265bc33b3bfd924688f005f1d919c27793ae8a858b156878aec70acaba65",
+      "bytes": 1050594,
+      "roles": [
+        "spring/blade-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.gif",
+      "sha256": "7dc67bd9b6c59e7339456ef8bb4a7c56e97ca7f32d6e0522dd02785b0726b734",
+      "bytes": 284836,
+      "roles": [
+        "spring/blade-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.webp",
+      "sha256": "05fc0d9e056a0d1a8c5799d2f347b86c79954aeaf6cf5e4c71fb724a9a6d893e",
+      "bytes": 658148,
+      "roles": [
+        "spring/blade-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-sheet.png",
+      "sha256": "1be3a9178da98bf727536fd7f6798c3ae408f729f2f3de6402357bc1a5848c9f",
+      "bytes": 955322,
+      "roles": [
+        "spring/blade-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png",
+      "sha256": "0e93b0d9c5265290d856d04fcfe5435e946f2b1dedfd5c5473c0db59bbd531d6",
+      "bytes": 1266539,
+      "roles": [
+        "spring/blade-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.gif",
+      "sha256": "41c6f22f8edd43e364600a2b49be0f3bb5f072d8c06f8d0e95585ec398b67742",
+      "bytes": 293586,
+      "roles": [
+        "spring/blade-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.webp",
+      "sha256": "70128a3b21c3fd3066bc730f21e416e23063f770f59694b9662cb6250a6e7c85",
+      "bytes": 754998,
+      "roles": [
+        "spring/blade-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-sheet.png",
+      "sha256": "def4980876a14670f872c4445fea0151d71b690b4b459d21697129c784367406",
+      "bytes": 1105927,
+      "roles": [
+        "spring/blade-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/birth-generated-source.png",
+      "sha256": "0ba5ef9a097c2aedeabc82de66f49e2244504b4ebb55630f59b921a10a6f5a2b",
+      "bytes": 1319481,
+      "roles": [
+        "spring/blade-carapace:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.gif",
+      "sha256": "06072e34b4642fb196f59e5245682442ae139ebd2a157dc92e415c865e093ed0",
+      "bytes": 345276,
+      "roles": [
+        "spring/blade-carapace:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.webp",
+      "sha256": "6584f4934fc3da9c8b3d5ba2924249f8623860c339cbff419b48343bba9c3d14",
+      "bytes": 803214,
+      "roles": [
+        "spring/blade-carapace:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-sheet.png",
+      "sha256": "92d8a06927fd25fe06d577e9e66770fa7d7a7defa422b13b62576e81392041fd",
+      "bytes": 1177918,
+      "roles": [
+        "spring/blade-carapace:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/birth-generated-source.png",
+      "sha256": "303660299522228a2cbd83d477a942e4ef6b9c674930e8b9cec746ad0c02c313",
+      "bytes": 1347145,
+      "roles": [
+        "spring/blade-secretion-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.gif",
+      "sha256": "ac6e34fb2e9d6ddfb17d29b9f7732148b6c825eeb03ce6451e11535a17e8a673",
+      "bytes": 317812,
+      "roles": [
+        "spring/blade-secretion-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.webp",
+      "sha256": "0bbb9efe4a735bcd6c868562f3912adbc6848cd37fed6be416d77061d588cf79",
+      "bytes": 796238,
+      "roles": [
+        "spring/blade-secretion-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-sheet.png",
+      "sha256": "f1df65fdd4c17508bf358e52f86935afc3fe0c7a5cdfe5df7885069135827eee",
+      "bytes": 1167890,
+      "roles": [
+        "spring/blade-secretion-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png",
+      "sha256": "a95f2c9b2fdf6067e305bfc586a9e606cfa57234de94d641fa11099ca1cc163b",
+      "bytes": 1285143,
+      "roles": [
+        "spring/blade-secretion-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.gif",
+      "sha256": "9be34c3d2862ffacff7169b5ea10a5cc92020e8f382e6143c846470741ba82bf",
+      "bytes": 297364,
+      "roles": [
+        "spring/blade-secretion-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.webp",
+      "sha256": "bec0ce519bde8acabb114c34b383fcfa1dbd919c8e7fc7111dd34ffb29d7cf07",
+      "bytes": 739294,
+      "roles": [
+        "spring/blade-secretion-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-sheet.png",
+      "sha256": "f066680ae39fe2281779ae5625ea058ce7ee18714d2eb0308d8e8cda10b47e9a",
+      "bytes": 1098323,
+      "roles": [
+        "spring/blade-secretion-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/birth-generated-source.png",
+      "sha256": "713a9ac9efe75e122615c33efcadb2958bdd3e9d0a2730c889e1837dfeb8b520",
+      "bytes": 1342104,
+      "roles": [
+        "spring/blade-secretion-carapace:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.gif",
+      "sha256": "9815f1582366b6c0f325df0d5458a35792aa4deb18a8dfe091d82dd6fc68d04a",
+      "bytes": 390509,
+      "roles": [
+        "spring/blade-secretion-carapace:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.webp",
+      "sha256": "ffffcfb69b90bb5031b00c2dc731eee5d73f30bf6d7f907f11a1f6697682568d",
+      "bytes": 884626,
+      "roles": [
+        "spring/blade-secretion-carapace:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-sheet.png",
+      "sha256": "c462eb7cfdab4a7eeb7a2b120990dbf3b36c6356cc1e0fc2417028a796ab2186",
+      "bytes": 1249570,
+      "roles": [
+        "spring/blade-secretion-carapace:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/birth-generated-source.png",
+      "sha256": "30b46bf345ddd0648c58660a4cef0f93cd741c5c76049e72012caa0934ca4f44",
+      "bytes": 1238357,
+      "roles": [
+        "spring/blade-secretion:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.gif",
+      "sha256": "e69dd70b4753f159ad4a4bbb9189468c0540da5484274f9042011ed5c20c977b",
+      "bytes": 359568,
+      "roles": [
+        "spring/blade-secretion:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.webp",
+      "sha256": "e1c0016838d68f5b1854305948692666d612fe0095ebf4388acd468a4095e9e1",
+      "bytes": 794246,
+      "roles": [
+        "spring/blade-secretion:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-sheet.png",
+      "sha256": "c441ffa021f2f6b0b886b7c7146c159b04d2ef9fe1ea39054d8a7c49c98b1202",
+      "bytes": 1150179,
+      "roles": [
+        "spring/blade-secretion:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png",
+      "sha256": "d64133e15650c8d3060d3de30bae46f1980c2800b487d83fb956c34d08db6053",
+      "bytes": 1128497,
+      "roles": [
+        "spring/carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.gif",
+      "sha256": "67b9db1491b22ccc214126179c0a4dfb6e5d176efa565e9e7010de873c49219a",
+      "bytes": 264461,
+      "roles": [
+        "spring/carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.webp",
+      "sha256": "16ac8d2321b28490c9c47c8a12f86f5c8f8c63b3874e9ee675f135390933e901",
+      "bytes": 672006,
+      "roles": [
+        "spring/carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-sheet.png",
+      "sha256": "7560e4544ed1dd8dc4b2b067310024266ab672db1d14cde92ddf6460616d1815",
+      "bytes": 991724,
+      "roles": [
+        "spring/carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-gather-actions-v1/spring-gather-birth-v1-preview.gif",
+      "sha256": "cec256761b4786a74b2363645c467e6ad2287d4e7067e680203e834783a83c7a",
+      "bytes": 319857,
+      "roles": [
+        "spring/gather:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-gather-actions-v1/spring-gather-birth-v1-sheet.png",
+      "sha256": "3534eb9b380f6d2ec4e7cf37c2c4f6a1acd582daae322c2e87700715b68e87da",
+      "bytes": 1297956,
+      "roles": [
+        "spring/gather:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/birth-generated-source.png",
+      "sha256": "a2b2694e7b21fdaa331c65a676ed9a7a7ca3e06b802cf394e38bda150a75fa12",
+      "bytes": 1263718,
+      "roles": [
+        "spring/secretion-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.gif",
+      "sha256": "5c4d91c58332287fc0d534b625e4b44d9c1ff31b44138e6254a274bd784c06dc",
+      "bytes": 303510,
+      "roles": [
+        "spring/secretion-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.webp",
+      "sha256": "0cdf598009eaaa919a9c879fbbe3bcbe5bc8720d119aab13b656574387c4868c",
+      "bytes": 727612,
+      "roles": [
+        "spring/secretion-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-sheet.png",
+      "sha256": "44b3888781bd4185fdad61312007e406ac0ebce40332c5714c67ebe69e139d75",
+      "bytes": 1083761,
+      "roles": [
+        "spring/secretion-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-birth-fullscene-v1-20261107/spring-secretion-birth-fullscene-v1-preview.gif",
+      "sha256": "21387c6aa05c105c8cafb842b4f0c1ad556d13f453222141cb5452d0ff34c2ab",
+      "bytes": 1224406,
+      "roles": [
+        "spring/secretion:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-birth-fullscene-v1-20261107/spring-secretion-birth-fullscene-v1-sheet.png",
+      "sha256": "2feecff0b1a1eb2eba1237dc60237066cac2608da5a1e5666a724fbcb3f2bc73",
+      "bytes": 992148,
+      "roles": [
+        "spring/secretion:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png",
+      "sha256": "13d48ac6a0e7f84f9f8421055288e5eacf5308152626c01b05ad7b5a529d9c19",
+      "bytes": 1144421,
+      "roles": [
+        "spring/secretion-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.gif",
+      "sha256": "80ea3ae5e151f210974a97c1b49f721a1b6f982f9f8063a4d03c24f81db81d92",
+      "bytes": 289498,
+      "roles": [
+        "spring/secretion-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.webp",
+      "sha256": "01f53bddac8bdbcbdd370fa9cda48be434df90eb312324b414d30edb000f3409",
+      "bytes": 700048,
+      "roles": [
+        "spring/secretion-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-sheet.png",
+      "sha256": "567423c30f48971101d3fb5c6226bd22f9e0ed4076b110818450a762eebd4c54",
+      "bytes": 1016136,
+      "roles": [
+        "spring/secretion-carapace-antenna:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/birth-generated-source.png",
+      "sha256": "da7484cf419b814b21d23ec4f85b6990d93f03c8ad948d21b5d7060a41462bfc",
+      "bytes": 1534786,
+      "roles": [
+        "spring/secretion-carapace:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.gif",
+      "sha256": "ef06ab0d324b9207de7ffa541b7de4df6797be422c20a489ebee363d08d2d667",
+      "bytes": 377367,
+      "roles": [
+        "spring/secretion-carapace:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.webp",
+      "sha256": "bd28c67a01aec5dae71bef8380962074999ae81af92c0f2f39c0fe3f2336a18d",
+      "bytes": 908028,
+      "roles": [
+        "spring/secretion-carapace:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-sheet.png",
+      "sha256": "587fd81f24250c987365964ce7351511bb584616ee214d1696169dca5aa23d1e",
+      "bytes": 1342502,
+      "roles": [
+        "spring/secretion-carapace:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-cyan-v3/birth-sheet.png",
+      "sha256": "0eae33d2fa138723f92c191337778ec81eaaf55e56a343fea3a432a7a7c1b82a",
+      "bytes": 981070,
+      "roles": [
+        "spring/secretion:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png",
+      "sha256": "1be3a9178da98bf727536fd7f6798c3ae408f729f2f3de6402357bc1a5848c9f",
+      "bytes": 955322,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/idle.png",
+      "sha256": "5429b388602008afa704a24511e49f48afd3e0dc60b2c432ea35fa1c0dfb3d51",
+      "bytes": 938201,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/birth.png",
+      "sha256": "def4980876a14670f872c4445fea0151d71b690b4b459d21697129c784367406",
+      "bytes": 1105927,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/idle.png",
+      "sha256": "3cf10cfb52c54a50f1ce6ea518ad488c9f302eeba823c2974b5c9cf4045fe78c",
+      "bytes": 1130754,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png",
+      "sha256": "f1df65fdd4c17508bf358e52f86935afc3fe0c7a5cdfe5df7885069135827eee",
+      "bytes": 1167890,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/idle.png",
+      "sha256": "1c37aff64a25c308dbce4ecc9840a1413216a5d5e0e017929aa8353e692da6a5",
+      "bytes": 937597,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png",
+      "sha256": "f066680ae39fe2281779ae5625ea058ce7ee18714d2eb0308d8e8cda10b47e9a",
+      "bytes": 1098323,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/idle.png",
+      "sha256": "6b41415104a12123ebeb8fff6725f7531e476e131e447e6216a0713fc56a1526",
+      "bytes": 1033474,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/birth.png",
+      "sha256": "7560e4544ed1dd8dc4b2b067310024266ab672db1d14cde92ddf6460616d1815",
+      "bytes": 991724,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/idle.png",
+      "sha256": "e6a7a996c796dcffd4cff2614e2902ff5b841821dae4f37e07d51d5437ceff83",
+      "bytes": 1008929,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png",
+      "sha256": "44b3888781bd4185fdad61312007e406ac0ebce40332c5714c67ebe69e139d75",
+      "bytes": 1083761,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/idle.png",
+      "sha256": "f263de0201aec166aaac75cbbadce9644cdc5f9375e6de4bb33cfb1fa355d537",
+      "bytes": 856146,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/birth.png",
+      "sha256": "567423c30f48971101d3fb5c6226bd22f9e0ed4076b110818450a762eebd4c54",
+      "bytes": 1016136,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/idle.png",
+      "sha256": "1fc7383df8d3039e76a237446d07431e2b06a3e99de024588862f9e5803f8f57",
+      "bytes": 958449,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/birth.png",
+      "sha256": "81f2c6059b8d79bf3f3dda8363cc9889a9597dfe494684d0e34a8c29c6e0fc31",
+      "bytes": 208286,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png",
+      "sha256": "4d956f01d6c0e47f4f7b4ec61496621394aac27d6ee746f7b62d426a5cde67ee",
+      "bytes": 957323,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/birth.png",
+      "sha256": "3534eb9b380f6d2ec4e7cf37c2c4f6a1acd582daae322c2e87700715b68e87da",
+      "bytes": 1297956,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/idle.png",
+      "sha256": "064d6b34196b02b5092a079c73fbed3bca065645e3e141eeaa8033be007c3d88",
+      "bytes": 3779489,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/birth.png",
+      "sha256": "7bd2ddb6033a01f238908938bb9efc22b7681ac76b92c2edf271b98905fed107",
+      "bytes": 221298,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/idle.png",
+      "sha256": "72470f0882cb54073ac08219e84bc738da8b98a6d33f94bfc3f5b9ba9a2618e2",
+      "bytes": 826599,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/spring-secretion-body.png",
+      "sha256": "b2c6d62189f1ddbf34e066b6fde5d086efad6b741a5a39cb551e9960e523b1c4",
+      "bytes": 1217532,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/BirthSceneLayersV1/19823a46d35dc74065f32ec1ef292d082c13b8e722cfa7db9733574fd2047754.png",
+      "sha256": "19823a46d35dc74065f32ec1ef292d082c13b8e722cfa7db9733574fd2047754",
+      "bytes": 820323,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/BirthSceneLayersV1/4d353f7e6a238450931a51d99db2651dc60c48da430df70d434d5e426ea43fe1.png",
+      "sha256": "4d353f7e6a238450931a51d99db2651dc60c48da430df70d434d5e426ea43fe1",
+      "bytes": 294264,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/BirthSceneLayersV1/764a9acd4cb1f1074be568fe7fb6aa7e66bec46e6de2bcd787df880c9719051d.png",
+      "sha256": "764a9acd4cb1f1074be568fe7fb6aa7e66bec46e6de2bcd787df880c9719051d",
+      "bytes": 754290,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/BirthSceneLayersV1/89dafdbbd6e9ac8406e38ef9e03612d301f5ea800b3f007c9dd2e78083422450.png",
+      "sha256": "89dafdbbd6e9ac8406e38ef9e03612d301f5ea800b3f007c9dd2e78083422450",
+      "bytes": 295881,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/BirthSceneLayersV1/bd7a27d33b2506dd60766a11299f38430f9831630765a7c198578a0f5b133ab3.png",
+      "sha256": "bd7a27d33b2506dd60766a11299f38430f9831630765a7c198578a0f5b133ab3",
+      "bytes": 650140,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/BirthSceneLayersV1/c945d053d51e8a1102d2264c6496c0904587b00c0e2808e9c0733e29f76c3f9b.png",
+      "sha256": "c945d053d51e8a1102d2264c6496c0904587b00c0e2808e9c0733e29f76c3f9b",
+      "bytes": 271668,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/BirthSceneLayersV1/d1d24d18c2832461358b5d4842e446a9b991f53fc12fe1f4935a9416e211e21e.png",
+      "sha256": "d1d24d18c2832461358b5d4842e446a9b991f53fc12fe1f4935a9416e211e21e",
+      "bytes": 748478,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/BirthSceneLayersV1/ebfe66874cde38398024d9306618457503a386074f2b3ba377c365c6c1cba9c1.png",
+      "sha256": "ebfe66874cde38398024d9306618457503a386074f2b3ba377c365c6c1cba9c1",
+      "bytes": 287841,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/BladeCarapaceV1/spring/birth.png",
+      "sha256": "92d8a06927fd25fe06d577e9e66770fa7d7a7defa422b13b62576e81392041fd",
+      "bytes": 1177918,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/BladeCarapaceV1/spring/idle.png",
+      "sha256": "c8796ba1d2dd56d691ea7d9544677df52d20c9ab514d3384624dfb024944fcbd",
+      "bytes": 1317014,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp",
+      "sha256": "d02126491d0dbc9ec8f6c9b2834251ab8c6c724c70964536faacc010a690b32e",
+      "bytes": 53982,
+      "roles": [
+        "reviewed-source",
+        "spring/secretion:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/birth.png",
+      "sha256": "c462eb7cfdab4a7eeb7a2b120990dbf3b36c6356cc1e0fc2417028a796ab2186",
+      "bytes": 1249570,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/idle.png",
+      "sha256": "8512682a2d8249db9d94a900267cb46d876ee27dd89d61a5856913277fcd745a",
+      "bytes": 1362702,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/birth.png",
+      "sha256": "c441ffa021f2f6b0b886b7c7146c159b04d2ef9fe1ea39054d8a7c49c98b1202",
+      "bytes": 1150179,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/idle.png",
+      "sha256": "25373b49ca64f24ad9f9cad544fe73e53552847b57eb2dcb0307f84c19467a9d",
+      "bytes": 1547119,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/birth.png",
+      "sha256": "587fd81f24250c987365964ce7351511bb584616ee214d1696169dca5aa23d1e",
+      "bytes": 1342502,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/idle.png",
+      "sha256": "1e36e4d766d805712e38b5911461b994e0a3986955fed307b3cb346d73226804",
+      "bytes": 1395020,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Animations/TribeMinorV1/spring/antenna/birth.webp",
+      "sha256": "faa622413684a64040cc9cfbbb79773a3933edc87e8fc74f009ee1fcac1252b5",
+      "bytes": 58644,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Planning/Tribes/spring/AnimationStudies/birth-detach-v1/birth-game-preview.webp",
+      "sha256": "053ae40f4f1bf6d30fec8de25cfac1bc62c98257d222b311215c0ace6d29644e",
+      "bytes": 575102,
+      "roles": [
+        "spring/base:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+      "sha256": "01d1eafb5d7d0886dceabbfd8b249d5aae06512e4e507e732ef51e637e3deb00",
+      "bytes": 142506,
+      "roles": [
+        "reviewed-source",
+        "spring/base:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp",
+      "sha256": "42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86",
+      "bytes": 738178,
+      "roles": [
+        "reviewed-source"
+      ]
+    },
+    {
+      "path": "DesignAssets/Tribes/spring/ApprovedGatherV1/source.png",
+      "sha256": "1b1d411adf398832e7c9e0b7ce7a8412e0ff3c0953a6c3860d1c2e343d49f201",
+      "bytes": 474699,
+      "roles": [
+        "spring/gather:birth-source-dependency"
+      ]
+    },
+    {
+      "path": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png",
+      "sha256": "421282a027a2ee1efb71b51dd5270c852c16a0853c8a403fa0a3e42dff1a93af",
+      "bytes": 218591,
+      "roles": [
+        "spring/base:birth-source-dependency"
+      ]
+    }
+  ]
+}

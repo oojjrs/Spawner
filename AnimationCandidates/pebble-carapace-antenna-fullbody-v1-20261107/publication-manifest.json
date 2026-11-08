@@ -471,9 +471,9 @@
       "preview": "AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/pebble-carapace-antenna-birth-proportion-v2-preview.webp",
       "gif": "AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/pebble-carapace-antenna-birth-proportion-v2-preview.gif",
       "cover": "AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/pebble-carapace-antenna-birth-proportion-v2-cover.png",
-      "sheetSHA256": "497b0105e98f9168509a630a87a6a122a7b0c466db690aae435e9d5e020b3da6",
-      "previewSHA256": "3046047e2e3f2d63e28c8b16ffbf16d6a7396fa3f7c7079d65b6d87e3c3f7554",
-      "gifSHA256": "8e699d383fff61ef81e7ce5943e7ea71c50476d4b169ebc46f68274b11d04f25",
+      "sheetSHA256": "9075d9073f6dced5eebc624607c3a366d8ea3371799fdd8c6f1fed080652ba8f",
+      "previewSHA256": "a9df2504d58f62947230fd3f5e26df3240c92c43cf6682787fa27bafeb811298",
+      "gifSHA256": "107eef5b74e2edc95b2fee64605d4f4235291724cca3abee2a72b681cc490aeb",
       "sourceSHA256": "e2be30dfaa682f7efd15b20b919cbf7e075d1cb29143d48367590811885ead39",
       "frameSize": 512,
       "frameHeight": 512,
@@ -493,59 +493,59 @@
       "loop": false,
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "pivotX": 392.5,
+      "sourceFacing": "left",
+      "pivotX": 119.5,
       "pivotY": 439,
       "referenceLength": 155,
       "viewSize": 155,
       "fullScene": true,
       "bodyBounds": [
         [
-          32,
+          118,
           209,
-          394,
+          480,
           424
         ],
         [
-          31,
+          118,
           209,
-          394,
+          481,
           424
         ],
         [
-          32,
+          118,
           209,
-          394,
+          480,
           434
         ],
         [
-          32,
+          37,
           209,
-          475,
+          480,
           450
         ],
         [
-          32,
+          36,
           209,
-          476,
+          480,
           447
         ],
         [
-          31,
+          42,
           209,
-          470,
+          481,
           443
         ],
         [
-          32,
+          52,
           206,
-          460,
+          480,
           439
         ],
         [
-          32,
+          42,
           206,
-          470,
+          480,
           439
         ]
       ],
@@ -554,67 +554,67 @@
       "sceneAnchor": "final-body-floor",
       "finalBodyAnchorPending": false,
       "finalBodyBounds": [
-        315,
+        42,
         309,
-        470,
+        197,
         439
       ],
       "finalBodyMeasurement": "Alpha >= 16 within manually traced complete-character outline; nest-contact pixels excluded for measurement only. No artwork masking/compositing.",
       "finalBodyMeasurementRegion": [
         [
-          315,
+          196,
           380
         ],
         [
-          322,
+          189,
           350
         ],
         [
-          345,
+          166,
           329
         ],
         [
-          370,
+          141,
           314
         ],
         [
-          395,
+          116,
           309
         ],
         [
-          422,
+          89,
           320
         ],
         [
-          450,
+          61,
           342
         ],
         [
-          468,
+          43,
           369
         ],
         [
-          474,
+          37,
           398
         ],
         [
-          457,
+          54,
           424
         ],
         [
-          437,
+          74,
           440
         ],
         [
-          349,
+          162,
           440
         ],
         [
-          324,
+          187,
           423
         ]
       ],
-      "coverSHA256": "716afcebc5db8bc143ce6d403de577ae4265f02a638eac1d4010d8447188af38"
+      "coverSHA256": "cfe37a922ddf08d75e91fa99fc2cc44ab1ddbbc38bca147da5f9f5162bf39e40"
     },
     "death": {
       "sheet": "AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/pebble-carapace-antenna-death-v1-sheet.png",

@@ -2339,7 +2339,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
       "approvalState": "existing-reference",
       "approvalRef": null,
-      "sourceHash": "9ecf44815d59ac26108dcf3b06f63d0df7637958aba28a09bc61efef5c77adb6",
+      "sourceHash": "f4e8c4b5b1b333af82630dbbdbfa6016ad3ed0336577c6ab113167df091771a6",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -2362,11 +2362,11 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         ],
         "landmarks": {
           "leftEye": [
-            211,
+            212,
             377
           ],
           "rightEye": [
-            300,
+            301,
             377
           ],
           "ground": [
@@ -2400,13 +2400,14 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": true,
         "reuseAuthorized": true
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/neutral.png",
+      "sourceFacing": "left"
     },
     "actions": {
       "idle": {
         "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
-        "imageHash": "f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37",
+        "imageHash": "ffcac1997f0596b02155b61dbe1ff401c00c6af65d82d46d9aac0674e07cb3e5",
         "frameSize": 512,
         "columns": 4,
         "frameCount": 64,
@@ -2481,18 +2482,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 448,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37",
+          "sourceHash": "ffcac1997f0596b02155b61dbe1ff401c00c6af65d82d46d9aac0674e07cb3e5",
           "pixelsPerWorld": 966.6666666666666,
           "scale": 0.5296551724137931,
           "offsetX": 120.40827586206896,
           "offsetY": 210.71448275862068
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "walk": {
         "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp",
-        "imageHash": "ca40b3960462707a75183261a324b50a92e9b73735c0e5f9fa4b8e0c8ade4243",
+        "imageHash": "84f464f1d0ea415905397c8c5e0a470639ef1360a2af13c20861d39f81c6e417",
         "frameSize": 512,
         "columns": 5,
         "frameCount": 20,
@@ -2523,18 +2525,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 448,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "ca40b3960462707a75183261a324b50a92e9b73735c0e5f9fa4b8e0c8ade4243",
+          "sourceHash": "84f464f1d0ea415905397c8c5e0a470639ef1360a2af13c20861d39f81c6e417",
           "pixelsPerWorld": 966.6666666666666,
           "scale": 0.5296551724137931,
           "offsetX": 120.40827586206896,
           "offsetY": 210.71448275862068
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "jump": {
         "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
         "image": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp",
-        "imageHash": "482ba8aad3ec26743c3a7258568b9489672597cea5bcc47c9a800a2ae6be870d",
+        "imageHash": "aed4631ba4626792490bf88818472c5c1ce13ca141d06ff5955882f1713a7f24",
         "frameSize": 512,
         "columns": 4,
         "frameCount": 16,
@@ -2561,18 +2564,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 448,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "482ba8aad3ec26743c3a7258568b9489672597cea5bcc47c9a800a2ae6be870d",
+          "sourceHash": "aed4631ba4626792490bf88818472c5c1ce13ca141d06ff5955882f1713a7f24",
           "pixelsPerWorld": 1002.3809523809524,
           "scale": 0.5107838479809976,
           "offsetX": 125.2393349168646,
           "offsetY": 219.16883610451305
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "attack": {
         "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
-        "imageHash": "385db115850e1a9a927ff0d44888bb54fb806b682bab67cb49c23f38daf91188",
+        "imageHash": "c93c897be002e69f2edbfe5262b027cb0408df7b57da9e4891b328324fda3561",
         "frameSize": 512,
         "columns": 4,
         "frameCount": 16,
@@ -2599,18 +2603,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 448,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "385db115850e1a9a927ff0d44888bb54fb806b682bab67cb49c23f38daf91188",
+          "sourceHash": "c93c897be002e69f2edbfe5262b027cb0408df7b57da9e4891b328324fda3561",
           "pixelsPerWorld": 961.9047619047618,
           "scale": 0.5322772277227723,
           "offsetX": 119.73702970297029,
           "offsetY": 209.539801980198
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "hurt": {
         "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp",
-        "imageHash": "2f879a2f5386ff14ce5819759647479108657e2e9295b33c1a058440d182b3a0",
+        "imageHash": "125bf004d7df257cd8acc5e53a8f8005acd676c4338eb029cbdfdd8b20100f10",
         "frameSize": 517,
         "columns": 4,
         "frameCount": 16,
@@ -2637,18 +2642,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 453.5943396226415,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "2f879a2f5386ff14ce5819759647479108657e2e9295b33c1a058440d182b3a0",
+          "sourceHash": "125bf004d7df257cd8acc5e53a8f8005acd676c4338eb029cbdfdd8b20100f10",
           "pixelsPerWorld": 966.6666666666666,
           "scale": 0.5296551724137931,
           "offsetX": 119.08413793103449,
           "offsetY": 207.7514118412492
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "death": {
         "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
-        "imageHash": "ec1dffe7baec15492c0f2e188a930a84bd1eabfb2744079cbc87d14fcf01afb4",
+        "imageHash": "3d6cc0176b00a253f029306f4d2d31633d1dc7dc33f02ec0af8b257350721359",
         "frameSize": 517,
         "columns": 4,
         "frameCount": 8,
@@ -2667,13 +2673,14 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 453.5943396226415,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "ec1dffe7baec15492c0f2e188a930a84bd1eabfb2744079cbc87d14fcf01afb4",
+          "sourceHash": "3d6cc0176b00a253f029306f4d2d31633d1dc7dc33f02ec0af8b257350721359",
           "pixelsPerWorld": 966.6666666666666,
           "scale": 0.5296551724137931,
           "offsetX": 119.08413793103449,
           "offsetY": 207.7514118412492
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       }
     },
     "previewStatus": {},
@@ -2697,7 +2704,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "body": {
           "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
           "image": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
-          "sourceHash": "d8b762b189ea9767c2026dbfb692750a21b761bdd2514a5626e77f156cb76129",
+          "sourceHash": "32cab522457f6430f3eee51a8a603cfea8c8d98d262ce0f70e0912f2af0ae784",
           "frameSize": 151,
           "columns": 8,
           "frameCount": 48,
@@ -2756,13 +2763,14 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
           "pivotY": 135.6640625,
           "cameraMapping": {
             "verified": true,
-            "sourceHash": "d8b762b189ea9767c2026dbfb692750a21b761bdd2514a5626e77f156cb76129",
+            "sourceHash": "32cab522457f6430f3eee51a8a603cfea8c8d98d262ce0f70e0912f2af0ae784",
             "pixelsPerWorld": 217.68043154761907,
             "scale": 2.3520717795342874,
             "offsetX": 78.41858064516131,
             "offsetY": 128.90838709677422,
             "method": "preserve-existing-game-fixed-native-birth-body-camera"
-          }
+          },
+          "sourceFacing": "left"
         },
         "externalRoot": {
           "module": "client/birth.mjs",
@@ -2803,7 +2811,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
           {
             "role": "foreground",
             "image": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-foreground.png",
-            "sourceHash": "55679e22e1abfef2b6964aee486210cfc0a2fbd81a2f05957ce6e22f58847cd3"
+            "sourceHash": "f6caa32eee541c546336be86881a9ac5e085c3727c0b9efa5679b8ea669f4be2"
           }
         ],
         "legacyReference": {
@@ -3297,7 +3305,8 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
             "offsetX": -42.615186615186644,
             "offsetY": 29.938738738738664,
             "method": "preserve-existing-game-fixed-native-birth-body-camera"
-          }
+          },
+          "sourceFacing": "left"
         },
         "externalRoot": {
           "module": "client/birth.mjs",

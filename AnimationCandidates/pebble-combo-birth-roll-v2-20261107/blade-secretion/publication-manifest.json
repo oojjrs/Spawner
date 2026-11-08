@@ -26,14 +26,14 @@
       "frameCount": 14,
       "sheet": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion/birth.png",
       "preview": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion/birth-preview.webp",
-      "sheetSHA256": "03ffaecef1f4f3f05823bc0c7e0fa3e22e390011335e0188866e4251dd41bb45",
-      "previewSHA256": "9eaa64d205e41a084d536c8fc122e5cfd4cfa032bec2dc4c9e4cfeea5a8c641c",
+      "sheetSHA256": "def26b8fa439c5b9d622a0e9184e116d34cb98e9a719fb06b74544364cad0d8b",
+      "previewSHA256": "8a96ce9c6ad40512965dd5da32f22ab2c2b0465143c500e424031d069de40340",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": true,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameHeight": 512,
-      "pivotX": 377,
+      "pivotX": 135,
       "pivotY": 444,
       "referenceLength": 160,
       "viewSize": 160,
@@ -77,17 +77,18 @@
         "sheet": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-sheet.png",
         "preview": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-preview.webp",
         "gif": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-preview.gif",
-        "sheetSHA256": "cc304f8947a9ff2045c28850d9f390f1b095a3fe8d887a8097281d585a4b5118",
-        "previewSHA256": "174d5de2a36f8c2596746496b7f0a5a8ad1e1a134492f5b2b50c9fba7b6631ad",
-        "gifSHA256": "3dd1618f58ed876369c400e11043f507fa8d6fadd4f842b2f0aeeff303d5e427",
+        "sheetSHA256": "48ebe8a87b3c6f6ec742b1e6d70b2600fc52ce4c67f94b025fec55db9e104090",
+        "previewSHA256": "00656284e97280f67e367d01ff0b651ece10f18adc78dd66416f3ffc7a301122",
+        "gifSHA256": "34a2e97248628d95f4fd8d93c5341529f40357261cf72098fe676bd7111cc821",
         "previewLoop": true,
         "previewLoopCount": 0,
-        "fullScene": true
+        "fullScene": true,
+        "sourceFacing": "left"
       }
     }
   },
   "originalSourceImage": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/birth.png",
-  "originalSourceSHA256": "cc304f8947a9ff2045c28850d9f390f1b095a3fe8d887a8097281d585a4b5118",
+  "originalSourceSHA256": "48ebe8a87b3c6f6ec742b1e6d70b2600fc52ce4c67f94b025fec55db9e104090",
   "preservedOriginalFrames": [
     {
       "candidateFrame": 0,

@@ -8,6 +8,7 @@ const baseUnitActionArt = Object.freeze({
   ...BLADE_CARAPACE_ACTION_ART,
   ...SECRETION_COMBO_ACTION_ART,
 
+
   "bean/base": {
     "reference": {
       "image": "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp",
@@ -4425,7 +4426,7 @@ const baseUnitActionArt = Object.freeze({
   "pebble/base": {
     "reference": {
       "image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -4505,7 +4506,7 @@ const baseUnitActionArt = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -4584,7 +4585,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 5,
@@ -4619,7 +4620,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "jump": {
         "image": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -4650,7 +4651,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -4681,7 +4682,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 517,
         "frameHeight": 517,
         "columns": 4,
@@ -4712,7 +4713,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 517,
         "frameHeight": 517,
         "columns": 4,
@@ -4735,7 +4736,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 151,
         "frameHeight": 151,
         "columns": 8,
@@ -4802,7 +4803,7 @@ const baseUnitActionArt = Object.freeze({
   "pebble/gather": {
     "reference": {
       "image": "DesignAssets/Planning/Attributes/Units/pebble-strength.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 144,
       "frameHeight": 144,
       "columns": 1,
@@ -4819,7 +4820,7 @@ const baseUnitActionArt = Object.freeze({
     "actions": {
       "harvest": {
         "image": "DesignAssets/Animations/GatherWorkV1/pebble/harvest.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -4841,7 +4842,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "carry": {
         "image": "DesignAssets/Animations/GatherWorkV1/pebble/carry.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -4863,7 +4864,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "throw": {
         "image": "DesignAssets/Animations/GatherWorkV1/pebble/throw.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -4886,7 +4887,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -4917,7 +4918,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -4931,7 +4932,7 @@ const baseUnitActionArt = Object.freeze({
           120,
           900
         ],
-        "pivotX": 258.5,
+        "pivotX": 253.5,
         "pivotY": 402,
         "viewSize": 512,
         "referenceLength": 357,
@@ -4948,7 +4949,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "idle": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 144,
         "frameHeight": 144,
         "columns": 8,
@@ -4992,7 +4993,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -5039,7 +5040,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -5062,7 +5063,7 @@ const baseUnitActionArt = Object.freeze({
           100,
           60
         ],
-        "pivotX": 256.5,
+        "pivotX": 255.5,
         "pivotY": 400,
         "viewSize": 512,
         "referenceLength": 351,
@@ -6531,7 +6532,7 @@ const baseUnitActionArt = Object.freeze({
   "pebble/antenna": {
     "reference": {
       "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -6551,7 +6552,7 @@ const baseUnitActionArt = Object.freeze({
     "actions": {
       "birth": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/birth.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 8,
@@ -6583,7 +6584,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/death.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -6606,7 +6607,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -6629,7 +6630,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 448,
         "frameHeight": 448,
         "columns": 4,
@@ -6660,7 +6661,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "idle": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -6683,7 +6684,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "harvest": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -6702,7 +6703,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "carry": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -6725,7 +6726,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "throw": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -7054,7 +7055,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 236,
         "frameHeight": 236,
         "columns": 4,
@@ -7106,7 +7107,7 @@ const baseUnitActionArt = Object.freeze({
     "actions": {
       "harvest": {
         "image": "DesignAssets/Animations/GatherWorkV1/spring/harvest.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -7128,7 +7129,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "carry": {
         "image": "DesignAssets/Animations/GatherWorkV1/spring/carry.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -7150,7 +7151,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "throw": {
         "image": "DesignAssets/Animations/GatherWorkV1/spring/throw.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -8411,7 +8412,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -8581,7 +8582,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/birth.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,

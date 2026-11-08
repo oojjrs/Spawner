@@ -32,7 +32,7 @@
   "durationMs": 1440,
   "loop": false,
   "pivot": [
-    57.5,
+    459.5,
     100.625
   ],
   "frames": [
@@ -51,9 +51,9 @@
   "confirmedMiddleKey": "DesignAssets/Tribes/pebble/AnimationStudies/death-keyposes-v3/keypose.png",
   "confirmedMiddleKeySha256": "38e66e80edba526eebe43aac718845ecfd4838a255c9cd3a34a961a06829b0f3",
   "neutralBounds": [
-    53,
+    59,
     148,
-    458,
+    464,
     447
   ],
   "retainedEarlyFrames": [
@@ -126,5 +126,12 @@
   "preview": "DesignAssets/Tribes/Previews/death-tail-repair-lineup-v6.webp",
   "approvalScope": "design and v3 middle key confirmed; eye corrections and revised sequence await user review",
   "runtimeIntegration": "none",
-  "runtimeRegistration": {"frameSize":106,"pivotX":53,"pivotY":93,"viewSize":106,"registrationScale":1.0095238095238095}
+  "runtimeRegistration": {
+    "frameSize": 106,
+    "pivotX": 53,
+    "pivotY": 93,
+    "viewSize": 106,
+    "registrationScale": 1.0095238095238095
+  },
+  "sourceFacing": "left"
 }

@@ -2895,7 +2895,8 @@
         349
       ],
       "finalBodyReferenceLength": 145,
-      "birthPolicy": "Complete authored nest and travel scene. Anchor final body ground at world position; do not add another procedural birth trajectory or second nest."
+      "birthPolicy": "Complete authored nest and travel scene. Anchor final body ground at world position; do not add another procedural birth trajectory or second nest.",
+      "sourceFacing": "left"
     },
     "death": {
       "action": "death",

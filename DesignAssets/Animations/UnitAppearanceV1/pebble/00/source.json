@@ -25,11 +25,11 @@
     ],
     "landmarks": {
       "leftEye": [
-        211,
+        212,
         377
       ],
       "rightEye": [
-        300,
+        301,
         377
       ],
       "ground": [
@@ -97,7 +97,7 @@
   "generationReferenceIds": [
     "existing-pebble-highres-reference"
   ],
-  "sourceHash": "9ecf44815d59ac26108dcf3b06f63d0df7637958aba28a09bc61efef5c77adb6",
+  "sourceHash": "f4e8c4b5b1b333af82630dbbdbfa6016ad3ed0336577c6ab113167df091771a6",
   "provenance": {
     "kind": "existing-original",
     "sourceImage": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/original-highres.png",
@@ -105,7 +105,7 @@
     "sourceRevision": "9f9662c^",
     "currentOriginalReference": {
       "image": "DesignAssets/Tribes/pebble/starter.png",
-      "sourceHash": "965814ab2c957af6dd724bf74d975bb029427cc00c7267e607c0cd0357ea367c"
+      "sourceHash": "a1e89e496bf9d694066858579bd73ab219f27ffe0f4190dc30ddfb84744378c0"
     },
     "reuseDirective": {
       "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
@@ -129,5 +129,6 @@
     "death": "pending",
     "attack": "pending",
     "ranged": "pending"
-  }
+  },
+  "sourceFacing": "left"
 }

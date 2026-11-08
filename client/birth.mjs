@@ -149,7 +149,7 @@ export function sporeBirthPixels(scene, nest) {
 }
 
 export const SPRING_BIRTH_ANIMATION = Object.freeze(imageAnimation({
-  image: "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+  sourceFacing: "left", image: "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
   frameSize: 512, columns: 4, frameCount: 13, pivotX: 320, pivotY: 448,
   outletX: 86, outletY: 105, height: 224, detachAt: .53, contactAt: .79, audioAt: .70,
   duration: SPRING_BIRTH_DURATION, durationsMs: SPRING_BIRTH_DURATIONS
@@ -175,10 +175,10 @@ export function springBirthPlacement(elapsed, outlet, target, height) {
 }
 
 export const PEBBLE_BIRTH_ANIMATION = Object.freeze(imageAnimation({
-  image: "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
+  sourceFacing: "left", image: "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
   foreground: "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-foreground.png",
-  frameSize: 512, columns: 8, frameCount: 48, pivotX: 256, pivotY: 460,
-  outletX: 256, outletY: 460, height: 229, unitHeight: 229, unitPivotY: 460,
+  frameSize: 512, columns: 8, frameCount: 48, pivotX: 256.0, pivotY: 460,
+  outletX: 256.0, outletY: 460, height: 229, unitHeight: 229, unitPivotY: 460,
   detachAt: .12, contactAt: 1.48, audioAt: .25,
   nestOutletX: .5, nestOutletY: .82,
   duration: PEBBLE_BIRTH_DURATION, durationsMs: PEBBLE_BIRTH_DURATIONS

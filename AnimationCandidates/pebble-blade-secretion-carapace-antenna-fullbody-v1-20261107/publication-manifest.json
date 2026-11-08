@@ -12,10 +12,10 @@
       "preview": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-idle-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-idle-v1-preview.gif",
       "cover": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-idle-v1-cover.png",
-      "sheetSHA256": "e889d6674d6f55bd2ff092a9808c48365d9ded65d59f7dea1c7cd67be80b3aa7",
-      "previewSHA256": "403f375db34349003643081aa0c52b544fc44db0e9c7bc3dc16331b44f6f601b",
-      "gifSHA256": "a9c90df992c7f28c11022960e2578407ed3044fd1530f78063170b11172e7919",
-      "sourceSHA256": "b27dcb1834d0aa70f1a7a8594ff653ef6bd32b14fee0360c692b04e14eec3c23",
+      "sheetSHA256": "ac942e6ac75b9fc5bac6f2aa8094e838f5c9e647c24f44d029e5f87a99d7a017",
+      "previewSHA256": "76ae5a09788d716034da8a02dd9679e89cc251138d8716578afca0dc5d083ab4",
+      "gifSHA256": "8951be540d9ce7ba1a96ca754428ad203c85a068e1f1aa60365c6b712345e88b",
+      "sourceSHA256": "ea9ccc168b45f5e828ab8dd61460b260e8ab1b26c7f44fd60bf971c14584ca44",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -34,67 +34,67 @@
       "loop": true,
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "pivotX": 254.0,
+      "sourceFacing": "left",
+      "pivotX": 258.0,
       "pivotY": 449,
       "referenceLength": 394,
       "viewSize": 394,
       "fullScene": false,
       "bodyBounds": [
         [
-          57,
+          61,
           108,
-          451,
+          455,
           449
-        ],
-        [
-          63,
-          96,
-          451,
-          443
-        ],
-        [
-          60,
-          108,
-          453,
-          448
-        ],
-        [
-          62,
-          108,
-          454,
-          449
-        ],
-        [
-          60,
-          105,
-          453,
-          448
-        ],
-        [
-          62,
-          105,
-          452,
-          450
         ],
         [
           61,
+          96,
+          449,
+          443
+        ],
+        [
+          59,
+          108,
+          452,
+          448
+        ],
+        [
+          58,
+          108,
+          450,
+          449
+        ],
+        [
+          59,
           105,
           452,
           448
         ],
         [
-          62,
+          60,
           105,
-          454,
+          450,
+          450
+        ],
+        [
+          60,
+          105,
+          451,
+          448
+        ],
+        [
+          58,
+          105,
+          450,
           448
         ]
       ],
       "packScale": 1.0897435897435896,
       "packCrop": [
-        40,
+        24,
         39,
-        420,
+        404,
         379
       ],
       "packTranslationX": 49,
@@ -110,65 +110,166 @@
       ],
       "sourceBodyBounds": [
         [
-          48,
+          35,
           57,
-          409,
+          396,
           369
         ],
         [
-          53,
+          34,
           47,
-          409,
+          390,
           364
         ],
         [
-          50,
+          32,
           58,
-          411,
+          393,
           369
         ],
         [
-          52,
+          32,
           58,
-          412,
+          392,
           369
         ],
         [
-          50,
+          34,
           55,
-          410,
+          394,
           369
         ],
         [
-          51,
+          33,
           54,
-          410,
+          392,
           371
         ],
         [
-          51,
+          33,
           55,
-          410,
+          392,
           369
         ],
         [
-          52,
+          32,
           55,
-          412,
+          392,
           369
         ]
       ],
-      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center."
+      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center.",
+      "packCropPerFrame": [
+        [
+          24,
+          39,
+          404,
+          379
+        ],
+        [
+          23,
+          39,
+          403,
+          379
+        ],
+        [
+          23,
+          39,
+          403,
+          379
+        ],
+        [
+          24,
+          39,
+          404,
+          379
+        ],
+        [
+          24,
+          39,
+          404,
+          379
+        ],
+        [
+          23,
+          39,
+          403,
+          379
+        ],
+        [
+          23,
+          39,
+          403,
+          379
+        ],
+        [
+          24,
+          39,
+          404,
+          379
+        ]
+      ],
+      "packCropMode": "per-frame",
+      "sourceFrameRects": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ]
     },
     "walk": {
       "sheet": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-walk-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-walk-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-walk-v1-preview.gif",
       "cover": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-walk-v1-cover.png",
-      "sheetSHA256": "9f6c33f4c0428403bcfbb809afdfb3bf696a19442f8b4cc5f49dd9a1e7fba953",
-      "previewSHA256": "7dc49a2d052eec3654cb1f5459ef8d658ed4a259beeabe36b0c62ada84e3bcfe",
-      "gifSHA256": "9ced8ece25fe407bea822ef0cc7ee3eeff49a6414ca3650b69e78b6f70ef51d5",
-      "sourceSHA256": "bb87736ca278587489b980b9c8ba4e29b6ad748658f2aea6a76e0a543a38abc5",
+      "sheetSHA256": "3068c93783a716c8bb0bf6e59554bb33b84fd55332619e28ba49fb5430b1448c",
+      "previewSHA256": "0f52e8b0d7e66516ed7e942af6e38cce2d604aeb61076992ae9cfd3266d23ba2",
+      "gifSHA256": "577e4fa1c0c2e133ab3c5a2b286c2557766dcf64512815c577c08eeb2d242eb0",
+      "sourceSHA256": "c6a4bc09f89e481ae88ce5b2469373dcfd476c6f4b33ee950851b5dd71478e66",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -187,67 +288,67 @@
       "loop": true,
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "pivotX": 254.0,
+      "sourceFacing": "left",
+      "pivotX": 258.0,
       "pivotY": 450,
       "referenceLength": 392,
       "viewSize": 392,
       "fullScene": false,
       "bodyBounds": [
         [
-          58,
+          62,
           110,
-          450,
+          454,
           450
         ],
         [
-          65,
+          61,
           107,
-          451,
+          447,
           450
         ],
         [
-          67,
+          60,
           108,
-          452,
+          445,
           450
         ],
         [
-          67,
+          58,
           111,
-          454,
+          445,
           451
         ],
         [
-          64,
+          60,
           109,
-          452,
+          448,
           450
         ],
         [
-          65,
+          60,
           109,
-          452,
+          447,
           451
         ],
         [
-          66,
+          59,
           108,
-          453,
+          446,
           450
         ],
         [
-          66,
+          58,
           109,
-          454,
+          446,
           450
         ]
       ],
       "packScale": 1.0828025477707006,
       "packCrop": [
-        41,
+        21,
         45,
-        423,
+        403,
         379
       ],
       "packTranslationX": 49,
@@ -263,65 +364,166 @@
       ],
       "sourceBodyBounds": [
         [
-          49,
+          33,
           55,
-          411,
+          395,
           369
         ],
         [
-          55,
+          31,
           53,
-          412,
+          388,
           369
         ],
         [
-          57,
+          30,
           54,
-          413,
+          386,
           369
         ],
         [
-          58,
+          30,
           55,
-          414,
+          386,
           368
         ],
         [
-          55,
+          31,
           56,
-          413,
+          389,
           370
         ],
         [
+          31,
           55,
-          55,
-          412,
+          388,
           370
         ],
         [
-          57,
+          30,
           55,
-          413,
+          386,
           371
         ],
         [
-          57,
+          29,
           55,
-          415,
+          387,
           370
         ]
       ],
-      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center."
+      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center.",
+      "packCropPerFrame": [
+        [
+          21,
+          45,
+          403,
+          379
+        ],
+        [
+          20,
+          45,
+          402,
+          379
+        ],
+        [
+          20,
+          45,
+          402,
+          379
+        ],
+        [
+          21,
+          45,
+          403,
+          379
+        ],
+        [
+          21,
+          45,
+          403,
+          379
+        ],
+        [
+          20,
+          45,
+          402,
+          379
+        ],
+        [
+          20,
+          45,
+          402,
+          379
+        ],
+        [
+          21,
+          45,
+          403,
+          379
+        ]
+      ],
+      "packCropMode": "per-frame",
+      "sourceFrameRects": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ]
     },
     "attack": {
       "sheet": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-attack-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-attack-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-attack-v1-preview.gif",
       "cover": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-attack-v1-cover.png",
-      "sheetSHA256": "ecd719252dc176755909f94454d7931431afcb35564735cf071a966e60ec264f",
-      "previewSHA256": "bba7dbd681d5e35b96255d8527003b496ac449230798983aaafe8cba187e7a1a",
-      "gifSHA256": "150e6aeb377b1f7e42f181c8afeba6ff84b3b1a27125468a723238ba57618197",
-      "sourceSHA256": "d16faa4bdbf2fd0686430451e23fb5a5639c65111dd8347bcd61530997581ad3",
+      "sheetSHA256": "c0a06c071bdd10da34b06c5313ec1abe4e95c5445257bb243928b3b2758002c3",
+      "previewSHA256": "2dcadd48fa4a26e8cd6b306f937c066487d2be02aba6825a56cadd270d92a1b1",
+      "gifSHA256": "a9d1032a800b6652f5c93efb77ab8990b69554b149dd22c3720f3e14fc36b9e9",
+      "sourceSHA256": "d3dde3c021fcf6cb0c82b3ea56e58886309ede43745f1692302fcca77ae7510e",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -340,70 +542,70 @@
       "loop": false,
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "pivotX": 257.0,
+      "sourceFacing": "left",
+      "pivotX": 255.0,
       "pivotY": 449,
       "referenceLength": 374,
       "viewSize": 374,
       "fullScene": false,
       "bodyBounds": [
         [
-          70,
+          68,
           124,
-          444,
+          442,
           449
         ],
         [
-          59,
+          79,
           160,
-          433,
+          453,
           445
         ],
         [
-          55,
+          119,
           113,
-          393,
+          457,
           449
         ],
         [
-          30,
+          81,
           189,
-          431,
+          482,
           445
         ],
         [
-          62,
+          29,
           195,
-          483,
+          450,
           442
         ],
         [
-          59,
+          72,
           150,
-          440,
+          453,
           439
         ],
         [
-          50,
+          80,
           139,
-          432,
+          462,
           437
         ],
         [
-          50,
+          87,
           128,
-          425,
+          462,
           439
         ]
       ],
       "packScale": 1.1801566579634464,
       "packCrop": [
-        38,
+        7,
         68,
-        437,
+        406,
         370
       ],
-      "packTranslationX": 21,
+      "packTranslationX": 20,
       "packTranslationY": [
         103,
         103,
@@ -416,67 +618,168 @@
       ],
       "sourceBodyBounds": [
         [
-          79,
+          48,
           86,
-          396,
+          365,
           362
         ],
         [
-          70,
+          56,
           117,
-          387,
+          373,
           358
         ],
         [
-          67,
+          90,
           76,
-          353,
+          376,
           361
         ],
         [
-          46,
+          59,
           141,
-          385,
+          398,
           358
         ],
         [
-          73,
+          15,
           146,
-          429,
+          371,
           356
         ],
         [
-          71,
+          50,
           108,
-          393,
+          372,
           353
         ],
         [
-          63,
+          57,
           99,
-          386,
+          380,
           352
         ],
         [
-          62,
+          64,
           89,
-          380,
+          382,
           353
         ]
       ],
       "hitTimeMs": 450,
       "hitFrameIndex": 4,
-      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center."
+      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center.",
+      "packCropPerFrame": [
+        [
+          7,
+          68,
+          406,
+          370
+        ],
+        [
+          6,
+          68,
+          405,
+          370
+        ],
+        [
+          6,
+          68,
+          405,
+          370
+        ],
+        [
+          7,
+          68,
+          406,
+          370
+        ],
+        [
+          7,
+          68,
+          406,
+          370
+        ],
+        [
+          6,
+          68,
+          405,
+          370
+        ],
+        [
+          6,
+          68,
+          405,
+          370
+        ],
+        [
+          7,
+          68,
+          406,
+          370
+        ]
+      ],
+      "packCropMode": "per-frame",
+      "sourceFrameRects": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ]
     },
     "ranged-attack": {
       "sheet": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-ranged-attack-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-ranged-attack-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-ranged-attack-v1-preview.gif",
       "cover": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-ranged-attack-v1-cover.png",
-      "sheetSHA256": "b22677ef5940cbd9087b6abde3b885adc7fa39cd0d679de3c553912f38a934e5",
-      "previewSHA256": "033d0f018e910276c8742b76c51f739e74b4b10873286026472df3087e08638a",
-      "gifSHA256": "fa0b23067660585969774f535a3ee86372f46dd82087f988a14a4b82b19cbdab",
-      "sourceSHA256": "4f3e2992256e9c9362a0f3e5e9ca9bb4dfcac7c95a31c8fa4c4c47deba780d0e",
+      "sheetSHA256": "b7f87be63723c30157984659d790293536c6eec649fec976c2762f04617a8711",
+      "previewSHA256": "f93cce824f235418380e5463da09d70d503d6112c5473e5c38ae9514391fa97c",
+      "gifSHA256": "55f11248428cfd55b7b547668ab7cec519f1a3ae1af78eb30e68e3293bed90ad",
+      "sourceSHA256": "2238374871f3d55b16be235f5e3c2389cb7b2c31590c1f2d53bcf5be91d58361",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -495,17 +798,17 @@
       "loop": false,
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "pivotX": 253.5,
+      "sourceFacing": "left",
+      "pivotX": 258.5,
       "pivotY": 450,
       "referenceLength": 395,
       "viewSize": 395,
       "fullScene": false,
       "bodyBounds": [
         [
-          56,
+          61,
           110,
-          451,
+          456,
           450
         ],
         [
@@ -515,33 +818,33 @@
           450
         ],
         [
-          62,
+          58,
           107,
-          454,
+          450,
           449
         ],
         [
-          67,
+          56,
           107,
-          456,
+          445,
           450
         ],
         [
-          68,
+          59,
           108,
-          453,
+          444,
           437
         ],
         [
-          61,
+          60,
           109,
-          452,
+          451,
           450
         ],
         [
-          61,
+          62,
           111,
-          450,
+          451,
           450
         ],
         [
@@ -553,9 +856,9 @@
       ],
       "packScale": 1.103896103896104,
       "packCrop": [
-        40,
+        27,
         50,
-        417,
+        404,
         377
       ],
       "packTranslationX": 48,
@@ -571,68 +874,169 @@
       ],
       "sourceBodyBounds": [
         [
-          48,
+          39,
           61,
-          405,
+          396,
           369
         ],
         [
-          51,
+          37,
           74,
-          406,
+          392,
           368
         ],
         [
-          53,
+          35,
           59,
-          408,
+          390,
           368
         ],
         [
-          57,
+          35,
           58,
-          409,
+          387,
           369
         ],
         [
-          58,
+          37,
           59,
-          407,
+          386,
           357
         ],
         [
-          52,
+          37,
           60,
-          406,
+          391,
           369
         ],
         [
-          52,
+          38,
           62,
-          405,
+          391,
           369
         ],
         [
-          51,
+          38,
           62,
-          406,
+          393,
           369
         ]
       ],
       "launchAtMs": 470,
       "releaseFrameIndex": 3,
       "projectileBakedIntoBodySheet": false,
-      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center."
+      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center.",
+      "packCropPerFrame": [
+        [
+          27,
+          50,
+          404,
+          377
+        ],
+        [
+          26,
+          50,
+          403,
+          377
+        ],
+        [
+          26,
+          50,
+          403,
+          377
+        ],
+        [
+          27,
+          50,
+          404,
+          377
+        ],
+        [
+          27,
+          50,
+          404,
+          377
+        ],
+        [
+          26,
+          50,
+          403,
+          377
+        ],
+        [
+          26,
+          50,
+          403,
+          377
+        ],
+        [
+          27,
+          50,
+          404,
+          377
+        ]
+      ],
+      "packCropMode": "per-frame",
+      "sourceFrameRects": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ]
     },
     "hurt": {
       "sheet": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-hurt-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-hurt-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-hurt-v1-preview.gif",
       "cover": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-hurt-v1-cover.png",
-      "sheetSHA256": "e2044f1f96a7173b9efab99ae285283ca10179481d659aa82c79774788d5bf0e",
-      "previewSHA256": "4459192b37faa50842c1a013c87b5c1ea4a5c98ba4ff4cab0e61ceacf8f10da1",
-      "gifSHA256": "b9ee65e5a3583483c7ad8b1fdeb8cbbe654e88ebfaef525c7721cdc6fd82334a",
-      "sourceSHA256": "c20fc11e13a1acec11e08ac44974f345ae9b33048ff0ec36d175381ffd0dcb2b",
+      "sheetSHA256": "03f42c3141eeeee296dfcd681deda7ad3b1c90985d777fad545c04126d6dc667",
+      "previewSHA256": "55c7115a1ee739dc8c24879115beccf3d2357183cdcdeedfb693fbbdfb953242",
+      "gifSHA256": "04cf819f26e9d8de4236f330b464ff9f19ab8525d81b7a82395f26b1d7186716",
+      "sourceSHA256": "918b898b29c489d67fb0905dcf08c43e9e9504c4fc3348081b1e0712a2e8bc29",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -651,53 +1055,53 @@
       "loop": false,
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "pivotX": 253.5,
+      "sourceFacing": "left",
+      "pivotX": 258.5,
       "pivotY": 449,
       "referenceLength": 371,
       "viewSize": 371,
       "fullScene": false,
       "bodyBounds": [
         [
-          68,
+          73,
           109,
-          439,
+          444,
           449
-        ],
-        [
-          74,
-          100,
-          445,
-          430
-        ],
-        [
-          75,
-          101,
-          452,
-          427
-        ],
-        [
-          58,
-          124,
-          448,
-          449
-        ],
-        [
-          68,
-          121,
-          445,
-          442
         ],
         [
           67,
+          100,
+          438,
+          430
+        ],
+        [
+          60,
+          101,
+          437,
+          427
+        ],
+        [
+          64,
+          124,
+          454,
+          449
+        ],
+        [
+          67,
+          121,
+          444,
+          442
+        ],
+        [
+          69,
           120,
-          443,
+          445,
           443
         ],
         [
-          68,
+          69,
           120,
-          443,
+          444,
           443
         ],
         [
@@ -709,12 +1113,12 @@
       ],
       "packScale": 1.223021582733813,
       "packCrop": [
-        55,
+        51,
         73,
-        393,
+        389,
         375
       ],
-      "packTranslationX": 49,
+      "packTranslationX": 50,
       "packTranslationY": [
         90,
         90,
@@ -733,59 +1137,160 @@
           367
         ],
         [
-          75,
+          64,
           81,
-          379,
+          368,
           351
         ],
         [
-          77,
+          58,
           82,
-          385,
+          366,
           348
         ],
         [
-          63,
+          62,
           101,
-          382,
+          381,
           367
         ],
         [
-          71,
+          65,
           99,
-          379,
+          373,
           361
         ],
         [
-          70,
+          66,
           97,
-          377,
+          373,
           362
         ],
         [
-          70,
+          66,
           97,
-          377,
+          373,
           362
         ],
         [
-          71,
+          66,
           98,
-          378,
+          373,
           362
         ]
       ],
-      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center."
+      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center.",
+      "packCropPerFrame": [
+        [
+          51,
+          73,
+          389,
+          375
+        ],
+        [
+          50,
+          73,
+          388,
+          375
+        ],
+        [
+          50,
+          73,
+          388,
+          375
+        ],
+        [
+          51,
+          73,
+          389,
+          375
+        ],
+        [
+          51,
+          73,
+          389,
+          375
+        ],
+        [
+          50,
+          73,
+          388,
+          375
+        ],
+        [
+          50,
+          73,
+          388,
+          375
+        ],
+        [
+          51,
+          73,
+          389,
+          375
+        ]
+      ],
+      "packCropMode": "per-frame",
+      "sourceFrameRects": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ]
     },
     "birth": {
       "sheet": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-birth-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-birth-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-birth-v1-preview.gif",
       "cover": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-birth-v1-cover.png",
-      "sheetSHA256": "b1afa86210c6315ef20234616a10c504301f0837161d0b0825ff182afe4a85c2",
-      "previewSHA256": "5b5e4385dea4f97a8fa48fb4f0b9e31bd40c512a4d35adb50187ae19d01f1821",
-      "gifSHA256": "e1a6e67d3aaa5a339f2827c8fdbfe56e8a7cc2c453a45dcb91aba98842d0fa9d",
-      "sourceSHA256": "3d71b7ced3a4790623c579218d1a208f2113da45743c447abdd814356b274e2c",
+      "sheetSHA256": "4ffa1ccdf310efc86a1d064416d1725b765deed11a658be50d15e650b373a82d",
+      "previewSHA256": "7201efb7ded1c40401c9c088915d1d7fc3cb72ec7aed490b12ff094a86b15d5d",
+      "gifSHA256": "45eea37f26d2cae8d74cee594d4fc42fd8df85ed40b308c8eb583b74ee7b3539",
+      "sourceSHA256": "65cba0eca08c356018e20d0a90233e29ab47c69ad50c93af39458eb9d59f9bd7",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -804,35 +1309,35 @@
       "loop": false,
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "pivotX": 398.0,
+      "sourceFacing": "left",
+      "pivotX": 114.0,
       "pivotY": 439,
       "referenceLength": 166,
       "viewSize": 166,
       "fullScene": true,
       "bodyBounds": [
         [
-          31,
+          148,
           236,
-          364,
+          481,
           432
         ],
         [
-          31,
+          149,
           236,
-          363,
+          481,
           432
         ],
         [
-          31,
+          100,
           236,
-          412,
+          481,
           450
         ],
         [
-          31,
+          46,
           236,
-          466,
+          481,
           446
         ],
         [
@@ -842,15 +1347,15 @@
           448
         ],
         [
-          31,
+          48,
           235,
-          464,
+          481,
           444
         ],
         [
-          31,
+          42,
           235,
-          470,
+          481,
           439
         ],
         [
@@ -862,9 +1367,9 @@
       ],
       "packScale": 1.13,
       "packCrop": [
-        16,
+        14,
         135,
-        430,
+        428,
         341
       ],
       "packTranslationX": 22,
@@ -880,51 +1385,51 @@
       ],
       "sourceBodyBounds": [
         [
-          24,
+          126,
           144,
-          318,
+          420,
           317
         ],
         [
-          24,
+          125,
           144,
-          318,
+          419,
           317
         ],
         [
-          24,
+          82,
           144,
-          361,
+          419,
           333
         ],
         [
-          24,
+          35,
           144,
-          409,
+          420,
           330
         ],
         [
-          24,
+          22,
           143,
-          422,
+          420,
           331
         ],
         [
-          24,
+          36,
           143,
-          407,
+          419,
           328
         ],
         [
-          24,
+          31,
           143,
-          412,
+          419,
           324
         ],
         [
-          24,
+          22,
           143,
-          422,
+          420,
           323
         ]
       ],
@@ -933,64 +1438,165 @@
       "sceneAnchor": "final-body-floor",
       "finalBodyAnchorPending": false,
       "finalBodyBounds": [
-        315,
+        31,
         280,
-        481,
+        197,
         439
       ],
       "finalBodyMeasurement": "Alpha > 16 within a visually traced final-character outline, excluding the touching nest. The outline is a QA measurement only; no artwork pixels were altered.",
       "finalBodyMeasurementRegion": [
         [
-          315,
+          196,
           369
         ],
         [
-          320,
+          191,
           344
         ],
         [
-          347,
+          164,
           316
         ],
         [
-          383,
+          128,
           302
         ],
         [
-          425,
+          86,
           298
         ],
         [
-          448,
+          63,
           282
         ],
         [
-          486,
+          25,
           273
         ],
         [
-          487,
+          24,
           314
         ],
         [
-          465,
+          46,
           354
         ],
         [
-          465,
+          46,
           403
         ],
         [
-          439,
+          72,
           441
         ],
         [
-          336,
+          175,
           442
         ],
         [
-          322,
+          189,
           410
+        ]
+      ],
+      "packCropPerFrame": [
+        [
+          14,
+          135,
+          428,
+          341
+        ],
+        [
+          13,
+          135,
+          427,
+          341
+        ],
+        [
+          13,
+          135,
+          427,
+          341
+        ],
+        [
+          14,
+          135,
+          428,
+          341
+        ],
+        [
+          14,
+          135,
+          428,
+          341
+        ],
+        [
+          13,
+          135,
+          427,
+          341
+        ],
+        [
+          13,
+          135,
+          427,
+          341
+        ],
+        [
+          14,
+          135,
+          428,
+          341
+        ]
+      ],
+      "packCropMode": "per-frame",
+      "sourceFrameRects": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
         ]
       ]
     },
@@ -999,10 +1605,10 @@
       "preview": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-death-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-death-v1-preview.gif",
       "cover": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-death-v1-cover.png",
-      "sheetSHA256": "e331481bed062b9ad62b89948f231bdbbb3072ba7a15a4fb40327b89f47d1830",
-      "previewSHA256": "361d818056132397f0eaa724e2881b5892e259d773809a0f26b539936e981ce2",
-      "gifSHA256": "a0524dae70bcf5137a79c36a65025bfe87c741cba18693c4207229b6bea58921",
-      "sourceSHA256": "2f6b799f2ea370d6d142ed89e1c307604be4dadebc65f7b4dfef12a5d68856c9",
+      "sheetSHA256": "496098b2eb3da9a0f4f9d79b61d0dec4cc9d304d035a9ce5b66e390dc762ed43",
+      "previewSHA256": "5b461d155c11abc51f9badd70434acf375907f60fe6cbaad33077c00378db542",
+      "gifSHA256": "0d2c32815521e0fa10e0eb95b4a8b1ae15b35b70253dc91445acc1e5074a7bc6",
+      "sourceSHA256": "d0e0e21581bafbcf4e0316195e27b69473107aeac59b3edc52af3397b0186638",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -1021,70 +1627,70 @@
       "loop": false,
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "pivotX": 264.0,
+      "sourceFacing": "left",
+      "pivotX": 248.0,
       "pivotY": 426,
       "referenceLength": 376,
       "viewSize": 376,
       "fullScene": false,
       "bodyBounds": [
         [
-          76,
+          60,
           86,
-          452,
+          436,
           426
         ],
         [
-          76,
+          62,
           96,
-          450,
+          436,
           428
         ],
         [
-          77,
+          53,
           141,
-          459,
+          435,
           440
         ],
         [
-          54,
+          58,
           193,
-          454,
+          458,
           450
         ],
         [
-          54,
+          69,
           209,
-          443,
+          458,
           429
         ],
         [
-          55,
+          71,
           253,
-          441,
+          457,
           427
         ],
         [
-          56,
+          66,
           279,
-          446,
+          456,
           425
         ],
         [
-          58,
+          60,
           297,
-          452,
+          454,
           421
         ]
       ],
       "packScale": 1.0759493670886076,
       "packCrop": [
-        27,
+        24,
         55,
-        420,
+        417,
         410
       ],
-      "packTranslationX": 45,
+      "packTranslationX": 44,
       "packTranslationY": [
         77,
         77,
@@ -1097,45 +1703,45 @@
       ],
       "sourceBodyBounds": [
         [
-          56,
+          39,
           63,
-          405,
+          388,
           379
         ],
         [
-          56,
+          40,
           72,
-          403,
+          387,
           382
         ],
         [
-          57,
+          31,
           115,
-          412,
+          386,
           392
         ],
         [
-          35,
+          37,
           163,
-          407,
+          409,
           402
         ],
         [
-          36,
+          47,
           178,
-          397,
+          408,
           382
         ],
         [
-          37,
+          48,
           218,
-          395,
+          406,
           381
         ],
         [
-          38,
+          43,
           243,
-          400,
+          405,
           378
         ],
         [
@@ -1145,7 +1751,108 @@
           375
         ]
       ],
-      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center."
+      "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center.",
+      "packCropPerFrame": [
+        [
+          24,
+          55,
+          417,
+          410
+        ],
+        [
+          23,
+          55,
+          416,
+          410
+        ],
+        [
+          23,
+          55,
+          416,
+          410
+        ],
+        [
+          24,
+          55,
+          417,
+          410
+        ],
+        [
+          24,
+          55,
+          417,
+          410
+        ],
+        [
+          23,
+          55,
+          416,
+          410
+        ],
+        [
+          23,
+          55,
+          416,
+          410
+        ],
+        [
+          24,
+          55,
+          417,
+          410
+        ]
+      ],
+      "packCropMode": "per-frame",
+      "sourceFrameRects": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ]
     }
   },
   "workActionMapping": {
@@ -1154,5 +1861,5 @@
   },
   "gatherNewArt": false,
   "sourceAppearance": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-appearance.png",
-  "sourceAppearanceSHA256": "d387f5b5ce2859de347288f5e4f2a63fcb0a6690279333ee8568ae4455d89789"
+  "sourceAppearanceSHA256": "f2db5ed261b62da5308111f58e72c359c798faf7012fde4fd299a8215b3f3407"
 }

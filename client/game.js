@@ -556,7 +556,7 @@
       return [key, part];
     }));
     const creaturePresentationResources = { idle: creatureIdleSheets, walk: creatureWalkSheets,
-      attack: creatureAttackSheets, ranged: creatureRangedSheets, hurt: creatureHurtSheets,
+      walkDisplayScale: unitDisplayScale, attack: creatureAttackSheets, ranged: creatureRangedSheets, hurt: creatureHurtSheets,
       owlFrames: talonOwlFrames, beetleFrames, beetleSheet, beetleAttackSheet, beetleSprite };
     const unitPresentation = Spawner.createUnitPresentation({ model: Spawner, height: AGENT_HEIGHT, footsteps: 4,
       time: () => state.simSeconds, reducedMotion: () => idleMotion.matches,
@@ -4306,7 +4306,8 @@
         const burrow = worldMap.burrows.find(burrow => burrow.id === agent.burrowId || burrow.id === agent.spawn.burrowId);
         const mouth = worldToScreen(agent.spawn.fromX + .5, agent.spawn.fromY + .86);
         const moving = { ...agent, mode: "walk", moveStartedAt: agent.spawn.startedAt,
-          moveDuration: agent.spawn.readyAt - agent.spawn.startedAt, stepCount: 1 };
+          moveDuration: agent.spawn.readyAt - agent.spawn.startedAt, stepCount: 1,
+          renderFromX: agent.spawn.fromX, renderFromY: agent.spawn.fromY };
         ctx.save(); ctx.globalAlpha *= Math.min(1, pose.progress / .16); ctx.beginPath();
         ctx.ellipse(mouth.x, mouth.y - cell * .17, cell * .28, cell * .3, 0, 0, Math.PI * 2);
         ctx.rect(mouth.x - cell * 5, mouth.y - cell * .015, cell * 10, cell * 6); ctx.clip();
@@ -4320,7 +4321,8 @@
         const point = worldToScreen(renderPosition.x + .5, renderPosition.y + 1);
         const lift = (1 - pose.progress) * cell * .5;
         const moving = { ...agent, mode: "walk", moveStartedAt: agent.spawn.startedAt,
-          moveDuration: agent.spawn.readyAt - agent.spawn.startedAt, stepCount: 1 };
+          moveDuration: agent.spawn.readyAt - agent.spawn.startedAt, stepCount: 1,
+          renderFromX: agent.spawn.fromX, renderFromY: agent.spawn.fromY };
         ctx.save(); ctx.beginPath(); ctx.rect(point.x - cell * 2, point.y - cell * 3, cell * 4, cell * 3); ctx.clip();
         ctx.translate(0, lift);
         if (!drawCreatureWalk(moving, renderPosition)) drawCreatureIdle({ ...agent, mode: "idle" }, renderPosition);
@@ -7475,7 +7477,7 @@
     function combatUnitScale(agent) {
       return unitDisplayScale(agent);
     }
-    function drawCombatCreature(context, agent, x, floor, height) {
+    function drawCombatCreature(context, agent, x, floor, height, gait) {
       if (agent.species === "spiny-back-beetle" && !Spawner.creatureRangedPose(agent, state.simSeconds)) {
         let pose = Spawner.beetleAnimationPose(agent, state.simSeconds);
         if (pose.action === "attack" && (!beetleAttackSheet.complete || !beetleAttackSheet.naturalWidth))
@@ -7508,9 +7510,15 @@
         return true;
       }
       let animation = pose?.animation || entry.animation;
-      const frame = pose?.frame ?? Spawner.unitAnimationFrame(animation, (state.simSeconds - (agent.animationStartedAt || 0)) * 1000);
+      let frame = pose?.frame ?? Spawner.unitAnimationFrame(animation, (state.simSeconds - (agent.animationStartedAt || 0)) * 1000);
       animation = Spawner.imageFrameGeometry(animation, frame);
       const size = height * (agent.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) * ((attack || walk) && !hurt ? animation.frameSize / (animation.viewSize || animation.frameSize) : 1) * (animation.registrationScale || 1);
+      if (pose === walk && gait?.clock && animation.strideFrameRatio > 0) {
+        const measured = gait.clock.frame(Spawner, agent, state.simSeconds, animation,
+          animation.strideFrameRatio * size / height * gait.displayScale, gait.position, gait.scope);
+        if (measured !== null) frame = gait.reducedMotion ? 0 : measured;
+        animation = Spawner.imageFrameGeometry(pose.animation, frame);
+      }
       context.save(); context.translate(x, floor);
       if (attack && !hurt ? attack.mirrorX : Spawner.unitFrameMirror(animation.sourceFacing || animation.facing || "left", agent.facing)) context.scale(-1, 1);
       context.drawImage(entry.sprite, frame % animation.columns * animation.frameSize, Math.floor(frame / animation.columns) * animation.frameSize,
@@ -7578,6 +7586,7 @@
         const bounds = unitDisplayBounds.get(kind), growth = scale / (unitDisplayScales.get(kind) || 1);
         return [String(agent.id), { scale, width: (bounds?.width || .4) * growth, height: (bounds?.height || .4) * growth }];
       }));
+      const strideClock = combatWatch.strides ||= Spawner.createCreatureStrideClock?.();
       const deathPresentation = combatWatch.deaths ||= Spawner.createDetailCombatDeath?.();
       deathPresentation?.begin(state.simSeconds, { scope: combatWatch.id, roomId: connection.roomId, snapshotTime: connection.simSeconds,
         streamId: state.combatVfx?.streamId, width, height, visibleIds: arenaUnits.map(agent => agent.id),
@@ -7661,7 +7670,9 @@
         const drawDodgeBody = (atX, atY) => {
           context.save(); context.translate(atX, atY); context.scale(appearancePose ? 1 : point.scale, appearancePose ? 1 : point.scale);
           if (agent.combat.stunnedUntil > state.simSeconds) context.globalAlpha *= .65;
-          if (agent.species) drawCombatCreature(context, visual, 0, 0, cell);
+          if (agent.species) drawCombatCreature(context, visual, 0, 0, cell, { clock: strideClock,
+            displayScale: point.scale, position: { x: point.x / cell, y: point.y / cell },
+            scope: combatWatch.id, reducedMotion: idleMotion.matches });
           else if (!((Spawner.beanHeldHurtSource?.(visual) || Spawner.speciesHeldHurtSource?.(visual)) && drawAgentHeldHurt(context, visual, cell, 0, 0, null, appearancePose ? 1 : point.scale)) &&
               (!appearancePose || !appearanceWorld.draw(context, visual, appearancePose, { x: 0, y: 0 }, cell, facing < 0, pixelRatio)))
             drawAgentAppearanceLayer(context, now, visual, cell, { x:-cell / 2, y:-cell * (.5 + AGENT_HEIGHT * .44) }, null, null, null);

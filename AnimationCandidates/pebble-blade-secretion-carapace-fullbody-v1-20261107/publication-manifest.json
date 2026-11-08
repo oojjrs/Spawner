@@ -4,7 +4,7 @@
   "status": "completed-under-user-delegated-production",
   "authorizationMessageId": "Sentinel_cbea50ff285881919d451c1038e1f54a",
   "sourceAppearance": "DesignAssets/Concepts/CombatTriplesV1/pebble-blade-piercing-carapace.png",
-  "sourceAppearanceSHA256": "d2c356c6ecde44525623474de0beb8bfbc37cc65968cb392915594f20850962c",
+  "sourceAppearanceSHA256": "7cf6fa894063c63c2ddd0d399b501248458197499483dba875249ff25f729355",
   "actions": {
     "idle": {
       "durationsMs": [
@@ -25,12 +25,13 @@
       "sheet": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-idle-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-idle-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-idle-v1-preview.gif",
-      "sheetSHA256": "ebd18e240a3e67ffeb89c7fe5e95dc576f2762294f0304c04b0fac7d96c372a0",
-      "previewSHA256": "1cc76335203bbd06d341058bb3b518664c567cbaea46f7ec36fe49e8e0616e78",
-      "gifSHA256": "eb38721f4c83b1c8d1825be922922742de530b1e0bf5285cae58db28b3d33703",
+      "sheetSHA256": "a21e7f53358df4729d612e7531d5d90fd27c3a0fbe450be698049f70875f2072",
+      "previewSHA256": "79afdb343eef0b317cc730359480d9d3bd31e25543f6f4f4835f0515f4c7e6bd",
+      "gifSHA256": "c78b8140d815460caa25c0e85f96d455fbba62a1f6901dfcd23f299d554f79b4",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     },
     "walk": {
       "durationsMs": [
@@ -51,12 +52,13 @@
       "sheet": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-walk-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-walk-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-walk-v1-preview.gif",
-      "sheetSHA256": "995b11e1089f17b7e4649b196b7374e52a9481603203cdab9c16bf45019c0c03",
-      "previewSHA256": "76e338d70eed04151228e8fc95a125496fa9a2efe608a7b3f44acaefd0de5e35",
-      "gifSHA256": "73f005ce3efd13b3695f420b2bf25a63720bbb9bd64d2991a75b0da9c072ef5a",
+      "sheetSHA256": "069d996f935bb81675c9d87aa18432c7689e432f45c56f1129a2b42a1f50c472",
+      "previewSHA256": "29332fa7cdd7c5f39126156cfd7906d208ccb93afaff3bdef626c494f9ff9a1f",
+      "gifSHA256": "a3d6cfcaf9505f3c4650116af66859ebe849a249c3bb8262f2233111eceab0f3",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     },
     "attack": {
       "durationsMs": [
@@ -77,15 +79,16 @@
       "sheet": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-attack-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-attack-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-attack-v1-preview.gif",
-      "sheetSHA256": "91196625fe40b5f5621709875cc42e41d662b79ab9cf216ba26350766999391d",
-      "previewSHA256": "2c30b9361254f579b4342a9de14d9b8963e1794fece278c53a393b1d5c898f82",
-      "gifSHA256": "24594482d100b9ae91e7de96ca8184798da8fe2ee441920a88f88e06c8e59308",
+      "sheetSHA256": "5b5d196e0df21eb3f67c094a6893678b083943e21debfd85c5eb38614e226d52",
+      "previewSHA256": "dd6a1c9f99061aacd8837137f4a6ded16a5964e0319a34557984c1396dbda030",
+      "gifSHA256": "264f5356aa913c8851d17db372a613fceedfef1e4e82fdb7792a32a2b17edd1b",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
       "hitTimeMs": 450,
       "hitFrameIndex": 4,
-      "hitTimingSource": "Integration visual review: strongest forward blade/crystal contact pose."
+      "hitTimingSource": "Integration visual review: strongest forward blade/crystal contact pose.",
+      "sourceFacing": "left"
     },
     "ranged-attack": {
       "durationsMs": [
@@ -106,16 +109,17 @@
       "sheet": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-ranged-attack-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-ranged-attack-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-ranged-attack-v1-preview.gif",
-      "sheetSHA256": "9cdd8f02038c655900cfcde9b957069bfc0cc5489c5b8d5442c06e03e331447e",
-      "previewSHA256": "7a3ce04adbce13ee34ad5d23ff14f7eb993c8520a62f60777ec8b84bf11f2d81",
-      "gifSHA256": "70ba2244df3b12cfe7bbf56cf3775393a042c55d4f7017a5eeaa73c30adf28bc",
+      "sheetSHA256": "a301b6cd1650aa4de15c6c8e041a74961bc018cd16dc66e11c3fffddc0459ed7",
+      "previewSHA256": "1103595bcb7913771a89047ca7d00d95e62b58fda5ebd607e8a69df8c65ec8cf",
+      "gifSHA256": "3d54d6fd4f8547174b536eae0c894d28c096e3f118a813d88111f02f4694d5ec",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
       "launchAtMs": 470,
       "launchFrameIndex": 3,
       "rangedBody": true,
-      "launchTimingSource": "Integration visual review: charge frames 1–2, release recoil frame 3; 180+140+150 ms."
+      "launchTimingSource": "Integration visual review: charge frames 1\u20132, release recoil frame 3; 180+140+150 ms.",
+      "sourceFacing": "left"
     },
     "hurt": {
       "durationsMs": [
@@ -136,12 +140,13 @@
       "sheet": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-hurt-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-hurt-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-hurt-v1-preview.gif",
-      "sheetSHA256": "743bf3f828a05c733357d8b86fbc3b77b0997384aebe14bd28ad4b7c816a860b",
-      "previewSHA256": "209c513239fd76efb5d80d12d6c379346b79ca4252927a4148bc907947cebcba",
-      "gifSHA256": "1cd07c8b3178759af9952fef6ed9163535bc304bbc5b9013307d63a7983ebbfe",
+      "sheetSHA256": "e88beeec0267087fb428410777ced673f3c09d057e616c569b8d88c64270d13d",
+      "previewSHA256": "7d94f8409e34ffa0217d921f3e87aeb22e0829c0a680c865c61676590aebf03e",
+      "gifSHA256": "0b09761bf212a0ab816f8de9e512a149233bfeb13d8a1de8eda515d95fa953c0",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     },
     "birth": {
       "durationsMs": [
@@ -167,14 +172,14 @@
       "frameCount": 14,
       "sheet": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion-carapace/birth.png",
       "preview": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion-carapace/birth-preview.webp",
-      "sheetSHA256": "3b227a36f80f84f6a25e721e0258ee60927e14e010423e5cffeceadc174cf65a",
-      "previewSHA256": "3b7815912b944a434d39d1f3ed324f19919edb732eab5424b6ba73bc2ee85447",
+      "sheetSHA256": "45a14854a4c098f7a1179632d3f7afe796884dd3f496e1e89a15dd4fcf4c601d",
+      "previewSHA256": "5176d4a87467fa57e04580829c19486297111abef29e21f70a1ccad0db1a332c",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": true,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameHeight": 512,
-      "pivotX": 382,
+      "pivotX": 130,
       "pivotY": 433,
       "referenceLength": 176,
       "viewSize": 176,
@@ -218,12 +223,13 @@
         "sheet": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-sheet.png",
         "preview": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-preview.webp",
         "gif": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-preview.gif",
-        "sheetSHA256": "34c7456540441caa3bf8dfc51594a4975ee470febc910b0fa29c8a446f74dfa7",
-        "previewSHA256": "e0f13b6d0ad947dd12bb221520b75f9490b171ed84d29563d70a2b422d0f0878",
-        "gifSHA256": "3ecdf9aca6f8947df0d180c06bf379527a364f0279447fe79407f963a026e0cf",
+        "sheetSHA256": "1cd860440ab878a4ea7e5d02a7a138a53f8350abcd0e6f4a4520d626e878b8b6",
+        "previewSHA256": "6408d13a0f060b46fc9d30dcf22780a3461fafcb06372e488a68861c3af714d9",
+        "gifSHA256": "b2de8c3208dcfac7b91839ea646a4e1d346c48183eae7be488448347df81897b",
         "previewLoop": true,
         "previewLoopCount": 0,
-        "fullScene": true
+        "fullScene": true,
+        "sourceFacing": "left"
       }
     },
     "death": {
@@ -245,12 +251,13 @@
       "sheet": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-death-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-death-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-death-v1-preview.gif",
-      "sheetSHA256": "4b8914c3fea4abed9acc64cea4a4f5afdc4b6f8eb225c23fe8b4d37ff0e13b6c",
-      "previewSHA256": "7c5ccf5612322e8bb9124011cbddd662b0c6049caff1caee51767e1e7b135fac",
-      "gifSHA256": "b1414171e79d6b12e5c876f20549a6be41af86407614ee289f8f54fa88239326",
+      "sheetSHA256": "5f4084e2537b6804d895d6d2326a84c05cc90f97cfdca660baae77fd398cbcc0",
+      "previewSHA256": "a1d2cea5ee8b8897320d2eb460b54092723ccb344460fb63689dbd992f36fbed",
+      "gifSHA256": "83a68675cb5b5956ed292f9dc5c9bcd54681d779a22cdd9c3d51f78d5688033a",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     }
   },
   "rangedBodyOnly": true,

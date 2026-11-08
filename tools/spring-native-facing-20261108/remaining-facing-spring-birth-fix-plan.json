@@ -1,0 +1,711 @@
+{
+  "status": "plan-only; product freeze extended during integration of remote user commit 10758697; no source changes performed",
+  "createdAt": "2026-11-08T02:34:21.966119+00:00",
+  "headAtPlan": "1075869703e539e4d328cd4df537a8221677beb2",
+  "owner": "Shared runtime registries, manifests, image policy, pixel oracle and regression tests require synchronized source-facing metadata updates.",
+  "scope": {
+    "selectedForms": 15,
+    "selectedPlaybackFrames": 271,
+    "runtimeDeclarations": 17,
+    "selectedDeclarations": 15,
+    "shadowedActionDeclarations": 2,
+    "publicationInputs": 11,
+    "publicationAlreadyRight": 7,
+    "publicationMissingFacingDefaultsRight": 4,
+    "layeredPlanningPayloads": 4,
+    "nativeSourcesMustNotBeMirrored": true
+  },
+  "preconditions": [
+    "Wait for the integration owner to confirm remote rebase/integration and explicitly release the write freeze.",
+    "Reimport the latest UNIT_BIRTH_ART before UNIT_ACTION_ART.actions.birth. Compare the current selected catalog to remaining-facing-spring-birth-current-catalog.json before applying any plan.",
+    "Recheck all 101 source/preview/layer SHA-256 entries. If remote changes alter a relevant source, action selection, geometry, timing, layers or publication mapping, do not overwrite or blindly replay this plan; re-audit the changed portion.",
+    "Keep original audit catalogs, historical original/candidate registration proofs, and SHA baselines unchanged. New evidence should use a new filename.",
+    "No image or coordinate transform: only sourceFacing declarations are changed. Parent-scene positions, outlet, travel, pivots, sample rectangles and clocks remain identical."
+  ],
+  "mainRuntimeRegistrations": [
+    {
+      "key": "spring/blade-antenna",
+      "path": "client/antenna-combo-assets.mjs",
+      "objectPointer": "/spring~1blade-antenna/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/blade-carapace-antenna",
+      "path": "client/antenna-combo-assets.mjs",
+      "objectPointer": "/spring~1blade-carapace-antenna/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/blade-secretion-antenna",
+      "path": "client/antenna-combo-assets.mjs",
+      "objectPointer": "/spring~1blade-secretion-antenna/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/blade-secretion-carapace-antenna",
+      "path": "client/antenna-combo-assets.mjs",
+      "objectPointer": "/spring~1blade-secretion-carapace-antenna/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/carapace-antenna",
+      "path": "client/antenna-combo-assets.mjs",
+      "objectPointer": "/spring~1carapace-antenna/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/secretion-antenna",
+      "path": "client/antenna-combo-assets.mjs",
+      "objectPointer": "/spring~1secretion-antenna/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/secretion-carapace-antenna",
+      "path": "client/antenna-combo-assets.mjs",
+      "objectPointer": "/spring~1secretion-carapace-antenna/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/blade-carapace",
+      "path": "client/blade-carapace-assets.mjs",
+      "objectPointer": "/spring~1blade-carapace/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/BladeCarapaceV1/spring/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/secretion-carapace",
+      "path": "client/secretion-combo-assets.mjs",
+      "objectPointer": "/spring~1secretion-carapace/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/blade-secretion",
+      "path": "client/secretion-combo-assets.mjs",
+      "objectPointer": "/spring~1blade-secretion/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/blade-secretion-carapace",
+      "path": "client/secretion-combo-assets.mjs",
+      "objectPointer": "/spring~1blade-secretion-carapace/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/base",
+      "path": "client/unit-action-art-assets.mjs",
+      "objectPointer": "/spring~1base/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/gather",
+      "path": "client/unit-birth-art-assets.mjs",
+      "objectPointer": "/spring~1gather/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/secretion",
+      "path": "client/unit-birth-art-assets.mjs",
+      "objectPointer": "/spring~1secretion/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/secretion",
+      "path": "client/unit-action-art-assets.mjs",
+      "objectPointer": "/spring~1secretion/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp",
+      "selected": false,
+      "reason": "Lower-priority action alias; exact reviewed pixels have the same ordering as native birth. Prevent later fallback/registry regeneration divergence."
+    },
+    {
+      "key": "spring/antenna",
+      "path": "client/unit-birth-art-assets.mjs",
+      "objectPointer": "/spring~1antenna/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/birth.png",
+      "selected": true,
+      "mustPreserve": "All other properties recursively, including image, sceneLayers, sample destinations, clock, pivots, referenceLength and fullScene."
+    },
+    {
+      "key": "spring/antenna",
+      "path": "client/unit-action-art-assets.mjs",
+      "objectPointer": "/spring~1antenna/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/birth.webp",
+      "selected": false,
+      "reason": "Lower-priority action alias; exact reviewed pixels have the same ordering as native birth. Prevent later fallback/registry regeneration divergence."
+    }
+  ],
+  "globalBirthManifestRegistrations": [
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/birth-manifest.json",
+      "pointer": "/15/sourceFacing",
+      "key": "spring/antenna",
+      "current": "right",
+      "proposed": "left"
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/birth-manifest.json",
+      "pointer": "/18/sourceFacing",
+      "key": "spring/gather",
+      "current": "right",
+      "proposed": "left"
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/birth-manifest.json",
+      "pointer": "/19/sourceFacing",
+      "key": "spring/secretion",
+      "current": "right",
+      "proposed": "left"
+    }
+  ],
+  "publicationRegenerationInputs": [
+    {
+      "key": "spring/blade-antenna",
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "changeKind": "replace-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-carapace-antenna",
+      "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "changeKind": "replace-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-secretion-antenna",
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "changeKind": "replace-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-secretion-carapace-antenna",
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "changeKind": "replace-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/carapace-antenna",
+      "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "changeKind": "replace-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/secretion-antenna",
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "changeKind": "replace-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/secretion-carapace-antenna",
+      "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": "right",
+      "proposed": "left",
+      "changeKind": "replace-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-carapace",
+      "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/secretion-carapace",
+      "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-secretion",
+      "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-secretion-carapace",
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    }
+  ],
+  "sourceCompanionMetadataCandidates": [
+    {
+      "key": "spring/blade-antenna",
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-antenna",
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-carapace-antenna",
+      "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-carapace-antenna",
+      "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-secretion-antenna",
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-secretion-antenna",
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-secretion-carapace-antenna",
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-secretion-carapace-antenna",
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/carapace-antenna",
+      "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/carapace-antenna",
+      "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/secretion-antenna",
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/secretion-antenna",
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/secretion-carapace-antenna",
+      "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/secretion-carapace-antenna",
+      "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-carapace",
+      "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-carapace",
+      "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/secretion-carapace",
+      "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/secretion-carapace",
+      "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-secretion",
+      "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-secretion",
+      "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-secretion-carapace",
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/blade-secretion-carapace",
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/base",
+      "path": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/gather",
+      "path": "AnimationCandidates/spring-gather-actions-v1/spring-gather-birth-v1.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/secretion",
+      "path": "AnimationCandidates/spring-secretion-birth-fullscene-v1-20261107/manifest.json",
+      "pointer": "/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    },
+    {
+      "key": "spring/secretion",
+      "path": "DesignAssets/Animations/SecretionApprovedV2/spring/manifest.json",
+      "pointer": "/1/sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "changeKind": "add-explicit-field",
+      "preserveAllOtherFields": true
+    }
+  ],
+  "legacyLocations": [
+    {
+      "path": "client/birth.mjs",
+      "symbol": "SPRING_BIRTH_ANIMATION",
+      "sourceImage": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+      "sourceFacingCurrently": null,
+      "consumer": "game.js drawSpringBirth plus native raw00 adapter",
+      "recommendation": "Record that this legacy declaration lacks a sourceFacing field. An explicit left declaration is semantically consistent, but legacy spring surface/row renderers do not consume it, so metadata alone must not be claimed to repair those paths. Do not add flips or alter coordinates in this metadata-only change."
+    },
+    {
+      "path": "client/spring-secretion-assets.mjs",
+      "symbol": "SPRING_SECRETION_ASSETS.birth",
+      "sourceImage": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp",
+      "sourceFacingCurrently": null,
+      "consumer": "client/secretion-lifecycle.mjs merges this into UNIT_SECRETION_LIFECYCLE_ANIMATIONS.spring.birth",
+      "recommendation": "If normalizing legacy declarations too, add explicit sourceFacing:left only to birth and prove the resulting object differs only in that field. This is a reviewed shadowed source, not the active UNIT_BIRTH override."
+    },
+    {
+      "path": "client/tribe-minor-animations.mjs",
+      "symbol": "TRIBE_MINOR_ANIMATIONS.spring.antenna.birth",
+      "sourceImage": "DesignAssets/Animations/TribeMinorV1/spring/antenna/birth.webp",
+      "sourceFacingCurrently": null,
+      "recommendation": "If normalizing legacy declarations too, add explicit sourceFacing:left only to this birth. Do not change other minor actions."
+    },
+    {
+      "path": "DesignAssets/Animations/TribeMinorV1/manifest.json",
+      "pointer": "/6/sourceFacing",
+      "sourceFacingCurrently": null,
+      "recommendation": "Companion to the legacy antenna birth declaration; validate key/image before using ordinal6 after integration."
+    },
+    {
+      "path": "DesignAssets/Tribes/spring/Animations/Attributes/v1/rig.json",
+      "pointer": "/animations/birth/sourceFacing",
+      "sourceFacingCurrently": null,
+      "recommendation": "Legacy rig source metadata only. Do not rerig or regenerate pixels."
+    },
+    {
+      "path": "DesignAssets/Animations/UnitAppearanceV1/spring/00/motions.json",
+      "pointer": "/sceneActions/birth/body/sourceFacing",
+      "sourceFacingCurrently": null,
+      "generatedCopies": [
+        "client/unit-appearance-assets.mjs /spring~100/sceneActions/birth/body",
+        "DesignAssets/Animations/UnitAppearanceV1/manifest.json /forms/spring~100/sceneActions/birth/body"
+      ],
+      "recommendation": "External legacy scene contract, not selected UNIT_ACTION birth. Its Spring row adapter ignores sourceFacing. Preserve raw source SHA and deformation/module hashes; no behavior fix is claimed from adding metadata here."
+    },
+    {
+      "path": "client/unit-sprite-registration.mjs",
+      "recommendation": "No matching Spring birth sourceFacing entry exists. Do not add a broad image-wide transform or change geometry to force legacy behavior."
+    }
+  ],
+  "planningChanges": {
+    "helper": {
+      "path": "scripts/publish-antenna-combo-docs.py",
+      "symbol": "birth_scene_clip",
+      "problem": "Returned clip currently drops sourceFacing. unit-matrix-preview.js:366 treats missing facing as mirrored; all4 current Spring inline payloads lack the field.",
+      "allowedRepair": "Pass through the existing record.sourceFacing when present. Do not change defaults or infer left for forms without reviewed metadata. Return every other field unchanged.",
+      "suggestedExpression": "Add **({'sourceFacing': record['sourceFacing']} if 'sourceFacing' in record else {}) to the returned clip."
+    },
+    "inline": {
+      "path": "DesignAssets/sections/unit-appearance.js",
+      "rows": [
+        "unit-spring-blade-antenna",
+        "unit-spring-secretion-antenna",
+        "unit-spring-blade-secretion-antenna",
+        "unit-spring-blade-secretion-carapace-antenna"
+      ],
+      "pointer": "data-birth-scene JSON /sourceFacing",
+      "current": null,
+      "proposed": "left",
+      "preserve": "All other JSON properties, exact layer samples and image paths, original preview href/data-preview, all other rows."
+    },
+    "facingMap": {
+      "path": "client/unit-preview-facing-data.js",
+      "generator": "client/build.mjs:244-253",
+      "changes": "All15 forms[key].birth plus selected image map values become left through UNIT_BIRTH override precedence. Do not hand-edit generated output."
+    },
+    "consumers": [
+      "client/unit-matrix-preview.js previewSourceFacing/setPreviewFacing and layered scene mirror",
+      "client/unit-appearance-preview.js shared runtime",
+      "client/birth-scene-preview.test.mjs real publication payload harness"
+    ],
+    "regenerationTest": "Before/after helper payloads for all publications should differ only by passing through sourceFacing where present. Four Spring layered payloads must equal generated helper fields exactly and remain sourceFacing:left after docs regeneration. No source image bytes change."
+  },
+  "historicalEvidenceDoNotRewrite": [
+    "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json: original and candidate snapshots preserve their recorded right label.",
+    "AnimationCandidates/spring-birth-pool-registration-v1-20261107/candidate-registration.json: unchangedRegistration is historical; preserve it.",
+    "tools/birth-resolution-20261108/catalog-before.json and registered-clips.json remain historical. registered-clips is not current selection inventory.",
+    "tools/spring-native-facing-20261108/bean-spore-plan-registry.json and existing original-clips/reports remain historical.",
+    "Generation prompts, QA reports, lifecycle-provenance and raw source hashes are not rewritten to pretend old results were different."
+  ],
+  "testImpact": [
+    {
+      "path": "client/birth-resolution.test.mjs",
+      "lines": "7,12-13",
+      "assertion": "expectedNativeClip() returns unchanged Spring original; after equals expectedNativeClip currently fails for spring/secretion.",
+      "repair": "For exactly audited spring/secretion image/key, clone original and set only sourceFacing:left before returning. Keep deepEqual of all remaining fields, all layer checks and SHA policy assertions unchanged. Other two overrides are not in changed BirthResolutionV1 set."
+    },
+    {
+      "path": "client/bean-spore-native-facing.test.mjs",
+      "lines": "69-74",
+      "assertion": "Non-candidate UNIT_ACTION_ART and UNIT_BIRTH_ART full-object deepEquals currently allow only followup13.",
+      "repair": "Build exact Spring birth allowlist from audit15; for only existing action.birth whose image matches the captured alias, set expected.sourceFacing:left. For three exact B overrides do the same. Continue entire-object deepEqual and original image SHA checks; never skip all Spring/noncandidate registries."
+    },
+    {
+      "path": "client/spring-birth-early-registration.test.mjs",
+      "lines": "20-21",
+      "assertion": "current deepEqual expected from historical original/candidate fails for4 forms.",
+      "repair": "Keep expected===record.candidate historical translation proof unchanged; compare current to {...expected,sourceFacing:left} for the exact4 audited keys. Preserve every sample, geometry, hash and final landing assertion."
+    },
+    {
+      "path": "client/spring-birth-pool-registration.test.mjs",
+      "lines": "19,63",
+      "assertion": "registration equals historical unchangedRegistration, plus scales fixed to right-native convention.",
+      "repair": "Compare registration with {...candidate.unchangedRegistration,sourceFacing:left}; update exact expected horizontal scale to [mirror?1:-1,1] for these4 registered left clips. Preserve coordinate/sample/asset SHA and complete fallback tests. Do not loosen mocks."
+    },
+    {
+      "path": "client/birth-scene-preview.test.mjs",
+      "assertion": "Existing generated helper fixtures omit sourceFacing and do not guarantee pass-through.",
+      "repair": "Add exact helper.sourceFacing===publication.sourceFacing where field exists, and assert absence for missing fields. Add4 inline payload persistence tests without replacing existing transform/sample checks."
+    },
+    {
+      "path": "client/unit-preview-facing.test.mjs",
+      "assertion": "Generated data checks are data-driven and should pass after rebuild; currently do not independently require the15 audited births to be left.",
+      "repair": "Add exact15 birth left assertions keyed to selected source and unchanged image hashes; retain all other existing form checks."
+    }
+  ],
+  "newRegressionDraft": {
+    "path": "tools/spring-native-facing-20261108/remaining-facing-spring-birth-regression-draft.test.mjs",
+    "locationPolicy": "Tools only; no client test added while frozen.",
+    "baselineCommand": "SPRING_BIRTH_BASELINE=1 node --test tools/spring-native-facing-20261108/remaining-facing-spring-birth-regression-draft.test.mjs",
+    "baselineResult": "6/6 passed,812 native Canvas draws. Explicit baseline mode asserts known birth/idle mismatch and missing planning sourceFacing; it is not a post-fix pass.",
+    "postFixCommand": "node --test tools/spring-native-facing-20261108/remaining-facing-spring-birth-regression-draft.test.mjs",
+    "postFixGate": "Selected15 and shadowed2 only sourceFacing differences;101 original hashes unchanged;271 birth frames in both directions542 draws plus30 idle boundary draws;120 fallback frames both ways240 draws;11 publication inputs left;4 planning helper/inline payloads exactly synchronized. Default post-fix run requires all transforms match.",
+    "evidence": "tools/spring-native-facing-20261108/remaining-facing-spring-birth-regression-baseline.txt"
+  },
+  "sourceIdentityBaseline": "tools/spring-native-facing-20261108/remaining-facing-spring-birth-fix-source-baseline.json",
+  "sourceIdentityCount": 101,
+  "completeInventory": "tools/spring-native-facing-20261108/remaining-facing-spring-birth-metadata-inventory.json",
+  "planningInventory": "tools/spring-native-facing-20261108/remaining-facing-spring-birth-planning-inventory.json",
+  "buildAndPublishOwnerOnly": [
+    "After source change and focused tests, owner regenerates catalogs/previews/runtime/Combat/HTML/offline bundles through established workflow. Do not run broad source packers before checking they preserve all newer integration work.",
+    "Metadata-only change does not justify new image nativeSource SHA, dimensions, grid, pixel oracle pixel replacement, reencoded previews, or renamed content-addressed layer files.",
+    "Publication JSON file hashes may change; any downstream document QA sourceManifestSHA256 cache needs narrowly scoped refresh or explicit historical status. No image hashes change.",
+    "Browser/live birth-to-idle, scene anchoring, override/fallback loading, and planning lightbox were not manually verified. Automated source and native-Canvas assertions are documented separately."
+  ],
+  "remainingRisks": [
+    "Upstream integration may change registry, source, or publication contracts. Validate the current baseline before applying a stored transformation plan.",
+    "4 publication records missing sourceFacing silently regenerate right via existing defaults unless explicitly annotated.",
+    "4 layered planning clips ignore form-level facing map unless their own payload preserves sourceFacing.",
+    "Changing sourceFacing flips full scenes dynamically for target direction, so perceived parent-pool side changes even though source samples stay untouched; verify scene anchoring rather than compensating with a source/pivot flip.",
+    "Legacy Spring scene renderer branches can ignore sourceFacing. Shared unit-action-art success alone does not certify every legacy rendering branch.",
+    "Broad metadata search includes idle/attack/provenance references. Use the exact scoped records in this plan, not an indiscriminate right-to-left replacement."
+  ]
+}

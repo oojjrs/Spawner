@@ -1,0 +1,165 @@
+{
+  "baselineCommit": "3d4b2214c2be9e69e002fd99704026b8b568fcb2",
+  "sourcePath": "tools/fertile-soil-edit-source.png",
+  "sourceSHA256": "222564bd9db4f9ecec5bac2f7734c2650a894cadcd67bb204de74ea0a634654b",
+  "method": "image_gen precise-object edit; generated brown soil extracted and inserted into original prop regions only. Original green foreground pixels preserve hand and leaf-bowl occlusion.",
+  "sourcePrompt": "Use case: precise-object-edit. Asset type: existing game animation sprite atlas. Image 1 is the EDIT TARGET, a 1024x512 atlas with 4 columns and 2 rows of 256x256 frames. Image 2 is the style reference for crumbly fertile soil. Change ONLY the tiny bright yellow bean/seed collectible visible in frames 2-8 of image 1 into a rough, irregular dark brown clump of fertile earth, matching the brown soil of image 2. The clump should read immediately as crumbly soil, with small granules and a jagged silhouette, not a brown bean, food, rock, or seed. Keep each replacement at exactly the same position and scale as the previous yellow object, including the hand-held and bowl-held versions. Frame 1 has no collectible and must remain unchanged. Preserve the green sprout creature, its body, face, hands, feet, leaf bowl, pose in each frame, all shadows, outline style, cell layout, and dimensions. Do not redraw or modify anything outside the little collectible itself. Keep the atlas transparent, no background, no added text, no grid lines. Return one 1024x512 transparent sprite sheet with all 8 frames in their original exact layout.",
+  "files": [
+    {
+      "image": "DesignAssets/Animations/GatherWorkV1/bean/harvest.webp",
+      "action": "harvest",
+      "baselineSHA256": "5e39af5cc2081c42b5b6fd6bce06d318ce25d471340e9d98329ed23ab76c369d",
+      "sha256": "2e3218c6a50ffe8640a05568a4083b79698df4847f02c2f913afa6380543b0f9",
+      "width": 1024,
+      "height": 512,
+      "boxes": [
+        [
+          281,
+          211,
+          32,
+          23
+        ],
+        [
+          537,
+          211,
+          32,
+          23
+        ],
+        [
+          809,
+          192,
+          25,
+          25
+        ],
+        [
+          72,
+          441,
+          28,
+          27
+        ],
+        [
+          361,
+          447,
+          35,
+          20
+        ],
+        [
+          623,
+          446,
+          33,
+          18
+        ],
+        [
+          878,
+          445,
+          32,
+          19
+        ]
+      ],
+      "changedVisiblePixels": 2252,
+      "changedOutsideBoxes": 0
+    },
+    {
+      "image": "DesignAssets/Animations/GatherWorkV1/bean/carry.webp",
+      "action": "carry",
+      "baselineSHA256": "295734ded883f6340edd738e37e70852f546f0f8ffed302f7c4a24f705238f4f",
+      "sha256": "5bf4ecd9d2a727f3434e2998c24036d49a7bb7ff89baf42a898e5193b58b44fd",
+      "width": 1024,
+      "height": 512,
+      "boxes": [
+        [
+          109,
+          188,
+          34,
+          19
+        ],
+        [
+          355,
+          174,
+          35,
+          21
+        ],
+        [
+          608,
+          175,
+          35,
+          21
+        ],
+        [
+          860,
+          175,
+          34,
+          22
+        ],
+        [
+          95,
+          431,
+          34,
+          21
+        ],
+        [
+          356,
+          433,
+          34,
+          20
+        ],
+        [
+          618,
+          439,
+          34,
+          21
+        ],
+        [
+          877,
+          440,
+          33,
+          20
+        ]
+      ],
+      "changedVisiblePixels": 2705,
+      "changedOutsideBoxes": 0
+    },
+    {
+      "image": "DesignAssets/Animations/GatherWorkV1/bean/throw.webp",
+      "action": "throw",
+      "baselineSHA256": "c02dcfb61fe5729568ba4d22f0bea7b8882b8d3f5df73ea16726fc4ca447940f",
+      "sha256": "6ddf0c6ab7a202eea506ef603a329dc564120bec4e6cc91c37a2a6960b926490",
+      "width": 1024,
+      "height": 512,
+      "boxes": [
+        [
+          109,
+          185,
+          33,
+          19
+        ],
+        [
+          354,
+          181,
+          34,
+          22
+        ],
+        [
+          572,
+          167,
+          25,
+          26
+        ],
+        [
+          827,
+          159,
+          25,
+          27
+        ],
+        [
+          4,
+          395,
+          30,
+          26
+        ]
+      ],
+      "changedVisiblePixels": 1736,
+      "changedOutsideBoxes": 0
+    }
+  ]
+}

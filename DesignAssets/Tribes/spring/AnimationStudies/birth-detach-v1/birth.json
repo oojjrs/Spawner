@@ -162,5 +162,6 @@
     "landing": "front unoccupied boundary cell",
     "sfx": "DesignAssets/Audio/spring-birth.mp3",
     "sfxAtMs": 0
-  }
+  },
+  "sourceFacing": "left"
 }

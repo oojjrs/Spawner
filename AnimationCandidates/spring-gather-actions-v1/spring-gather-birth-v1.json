@@ -65,5 +65,6 @@
     ],
     "sheetSHA256": "3534eb9b380f6d2ec4e7cf37c2c4f6a1acd582daae322c2e87700715b68e87da",
     "previewSHA256": "cec256761b4786a74b2363645c467e6ad2287d4e7067e680203e834783a83c7a"
-  }
+  },
+  "sourceFacing": "left"
 }

@@ -1,7 +1,7 @@
 {
   "tribe": "pebble",
   "action": "attack",
-  "direction": "right",
+  "direction": "left",
   "status": "review-candidate",
   "frameSize": [
     114,
@@ -34,7 +34,7 @@
   "hitAtMs": 300,
   "impactHoldMs": 300,
   "pivot": [
-    57,
+    455,
     99.75
   ],
   "rootMotion": false,
@@ -47,5 +47,12 @@
     1,
     0
   ],
-  "runtimeRegistration": {"frameSize":104,"pivotX":52,"pivotY":91,"viewSize":104,"registrationScale":1}
+  "runtimeRegistration": {
+    "frameSize": 104,
+    "pivotX": 52,
+    "pivotY": 91,
+    "viewSize": 104,
+    "registrationScale": 1
+  },
+  "sourceFacing": "left"
 }

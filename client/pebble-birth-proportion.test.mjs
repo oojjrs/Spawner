@@ -13,7 +13,7 @@ test('pebble corrected birth preserves authored clock and enters its own idle',(
   assert.equal(pose.animation,clip);assert.equal(pose.frame,frame);assert.equal(pose.missing,false);elapsed+=clip.durationsMs[frame];
  }
  const idle=unitActionArtPose(actor,6.14);assert.equal(idle.action,'idle');assert.equal(idle.animation,definition.actions.idle);
- assert.equal(clip.pivotX,392.5);assert.equal(clip.pivotY,439);assert.equal(clip.referenceLength,155);
+ assert.equal(clip.pivotX,512-392.5);assert.equal(clip.sourceFacing,'left');assert.equal(clip.pivotY,439);assert.equal(clip.referenceLength,155);
 });
 test('first six whole scenes are pixel-identical and final body registration matches idle proportions',()=>{
  const idle=unitActionArtDefinition(actor).actions.idle;

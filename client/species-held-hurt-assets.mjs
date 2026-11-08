@@ -178,7 +178,7 @@ export const SPECIES_HELD_HURT_SOURCES = Object.freeze({
       "frameWidth": 532,
       "frameHeight": 332,
       "columns": 4,
-      "pivotX": 271,
+      "pivotX": 261,
       "pivotY": 326,
       "times": [
         0,
@@ -201,10 +201,10 @@ export const SPECIES_HELD_HURT_SOURCES = Object.freeze({
       "nativeFrameSize": 512,
       "sourcePadding": 64,
       "sourceAnimation": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
-      "sourceHash": "f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37",
+      "sourceHash": "ffcac1997f0596b02155b61dbe1ff401c00c6af65d82d46d9aac0674e07cb3e5",
       "sourceFrame": 0,
       "material": "rigid-rock",
-      "sourceFacing": "right"
+      "sourceFacing": "left"
     },
     "secretion": {
       "image": "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-secretion.webp",
@@ -314,7 +314,7 @@ export const SPECIES_HELD_HURT_SOURCES = Object.freeze({
       "frameWidth": 564,
       "frameHeight": 344,
       "columns": 4,
-      "pivotX": 283,
+      "pivotX": 281,
       "pivotY": 336,
       "times": [
         0,
@@ -337,12 +337,12 @@ export const SPECIES_HELD_HURT_SOURCES = Object.freeze({
       "nativeFrameSize": 512,
       "sourcePadding": 256,
       "sourceAnimation": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
-      "sourceAnimationHash": "f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37",
+      "sourceAnimationHash": "ffcac1997f0596b02155b61dbe1ff401c00c6af65d82d46d9aac0674e07cb3e5",
       "sourceImage": "tools/minor-held-hurt-20261105/pebble-antenna-source.png",
-      "sourceHash": "0a0e375f969a3b5b5146366267b182c8b72b751236f3ec9c2ef69943c63cd123",
+      "sourceHash": "105c921ee9f7da1a48176aa73f8092644dfcad0130a7e972f0dd8fbb00648dd0",
       "sourceFrame": 0,
       "material": "rigid-rock",
-      "sourceFacing": "right"
+      "sourceFacing": "left"
     }
   },
   "spring": {

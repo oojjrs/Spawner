@@ -7,6 +7,8 @@ import {UNIT_ACTION_ART} from './unit-action-art-assets.mjs';
 import {createUnitActionArt,unitActionArtPose} from './unit-action-art.mjs';
 import {unitDisplaySize,unitFrameMirror} from './unit-size.mjs';
 const facingChanges=JSON.parse(readFileSync('tools/spring-native-facing-20261108/bean-spore-image-changes.json')).changes;
+const pebbleFacingChanges=JSON.parse(readFileSync('tools/spring-native-facing-20261108/remaining-facing-pebble-image-changes.json')).changes;
+const pebbleFacingBefore=JSON.parse(readFileSync('tools/spring-native-facing-20261108/remaining-facing-runtime-baseline.json'));
 const facingBefore=JSON.parse(readFileSync('tools/spring-native-facing-20261108/bean-spore-plan-registry.json'));
 const baselineCommit='958b999dc5109cb4827f2013916840c22c7adf07';
 const expected={spore:[79,134.5,162,22,3120,'93696aac1e9eb471a1aae0ba8932eec01e369d0d64d064218a01b4b1c2ce9761'],pebble:[93,75.5,136,48,2620,'d8b762b189ea9767c2026dbfb692750a21b761bdd2514a5626e77f156cb76129'],spring:[105,150,207,13,1790,'01d1eafb5d7d0886dceabbfd8b249d5aae06512e4e507e732ef51e637e3deb00']};
@@ -16,12 +18,12 @@ for(const [tribe,[length,previousX,y,count,ms,hash]] of Object.entries(expected)
  test(tribe+' base birth keeps body-only source and authored timing',()=>{
   assert.deepEqual([a.referenceLength,a.pivotX,a.pivotY,a.frameCount,a.durationsMs.reduce((x,y)=>x+y,0)],[length,x,y,count,ms]);
   assert.equal(a.scene,undefined);assert.equal(a.sceneLayers,undefined);
-  const change=tribe==='spore'?facingChanges[a.image]:null;
+  const change=tribe==='spore'?facingChanges[a.image]:tribe==='pebble'?pebbleFacingChanges[a.image]:null;
   if(change){
-   const before=facingBefore.UNIT_ACTION_ART['spore/base'].actions.birth;
-   assert.equal(change.beforeSha256,hash);assert.equal(change.operation,'mirror-each-cell');
-   assert.equal(change.frameWidth,192);assert.equal(change.frameHeight,192);
-   assert.deepEqual(a,{...before,pivotX:192-before.pivotX,sourceFacing:'left'});
+   const before=(tribe==='spore'?facingBefore:pebbleFacingBefore).UNIT_ACTION_ART[tribe+'/base'].actions.birth;
+   assert.equal(change.beforeSha256,hash);if(tribe==='spore')assert.equal(change.operation,'mirror-each-cell');else assert.equal(change.verification.decodedRgbaExact,true);
+   assert.equal(change.frameWidth,before.frameSize);assert.equal(change.frameHeight,before.frameHeight);
+   assert.deepEqual(a,{...before,pivotX:before.frameSize-before.pivotX,sourceFacing:'left'});
   }
   assert.equal(createHash('sha256').update(readFileSync(a.image)).digest('hex'),change?.afterSha256||hash);
   const agent={tribe,dna:{version:6,pieces:[]},health:10,birth:{startedAt:4,readyAt:4+ms/1000}};

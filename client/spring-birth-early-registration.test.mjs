@@ -18,7 +18,8 @@ for (const [key, record] of Object.entries(approved)) {
       before.destination = after.destination;
     }
     assert.deepEqual(expected, record.candidate);
-    assert.deepEqual(current, expected);
+    assert.equal(expected.sourceFacing, 'right', 'historical registration remains intact');
+    assert.deepEqual(current, { ...expected, sourceFacing: 'left' });
     assert.deepEqual(current.sceneLayers.layers[1].samples.slice(8), record.original.sceneLayers.layers[1].samples.slice(8));
     assert.deepEqual(current.sceneLayers.layers[0], record.original.sceneLayers.layers[0]);
     assert.equal(current.durationMs, 1790);

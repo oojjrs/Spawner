@@ -111,7 +111,7 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
   "pebble/antenna": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/pebble/antenna/attack.png",
     "sourceManifest": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/publication-manifest.json",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "frameSize": 512,
     "frameHeight": 512,
     "columns": 4,
@@ -127,7 +127,7 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
       230
     ],
     "durationMs": 980,
-    "pivotX": 227.0,
+    "pivotX": 285.0,
     "pivotY": 451,
     "referenceLength": 370,
     "viewSize": 370,

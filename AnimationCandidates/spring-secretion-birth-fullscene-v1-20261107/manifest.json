@@ -76,5 +76,6 @@
   "previewSHA256": "21387c6aa05c105c8cafb842b4f0c1ad556d13f453222141cb5452d0ff34c2ab",
   "originalBytesPreserved": true,
   "maxTimelineRGBRMSE": 0.8143368034939472,
-  "usage": "Complete birth scene including pool nest, detachment, fall, landing and settled current footless body. Planning reference only; game runtime and deployment are unchanged."
+  "usage": "Complete birth scene including pool nest, detachment, fall, landing and settled current footless body. Planning reference only; game runtime and deployment are unchanged.",
+  "sourceFacing": "left"
 }

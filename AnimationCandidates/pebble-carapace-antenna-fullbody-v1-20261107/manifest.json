@@ -471,10 +471,10 @@
       "preview": "AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/pebble-carapace-antenna-birth-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/pebble-carapace-antenna-birth-v1-preview.gif",
       "cover": "AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/pebble-carapace-antenna-birth-v1-cover.png",
-      "sheetSHA256": "88efe65d7cc4c9a361daea6f4e395f65100539bd512d8cec9df63ec4efa60503",
-      "previewSHA256": "13ca308de263d0ff4a6a79b8491e04d9d07e9f127a912d03ef18264475e202cc",
-      "gifSHA256": "7dc62e2a82da78f4490cd42fe7de40ce1400e23997f3e881828c7233884b45fb",
-      "sourceSHA256": "e1dd71ebb33f6a64ca1ec413a637f0dd44e7fe870015fd1af0dd00bad837bfba",
+      "sheetSHA256": "3f347945fc1f0c05ba1d639bdae2b127417e6cf530022e97732c56b36f2bd42a",
+      "previewSHA256": "9ca526486350ff89f1120dce047940ef53e2724a1d88b2dea7ecb6a180cc92f4",
+      "gifSHA256": "0f2863731fdf8e76aee5259aa6bf6ad40c4e81d25886cf4a4434b079b4d1ecf7",
+      "sourceSHA256": "12488578ae6013a617a5c68adeaf2ede7b4f1abe47385ea35dfdd9d93f6b6923",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -493,70 +493,70 @@
       "loop": false,
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "pivotX": 401.5,
+      "sourceFacing": "left",
+      "pivotX": 110.5,
       "pivotY": 438,
       "referenceLength": 161,
       "viewSize": 161,
       "fullScene": true,
       "bodyBounds": [
         [
-          32,
+          118,
           209,
-          394,
+          480,
           424
         ],
         [
-          31,
+          118,
           209,
-          394,
+          481,
           424
         ],
         [
-          32,
+          118,
           209,
-          394,
+          480,
           434
         ],
         [
-          32,
+          37,
           209,
-          475,
+          480,
           450
         ],
         [
-          32,
+          36,
           209,
-          476,
+          480,
           447
         ],
         [
-          31,
+          42,
           209,
-          470,
+          481,
           443
         ],
         [
-          32,
+          40,
           209,
-          472,
+          480,
           440
         ],
         [
-          32,
+          30,
           209,
-          482,
+          480,
           438
         ]
       ],
       "packScale": 1.13,
       "packCrop": [
-        16,
+        13,
         132,
-        431,
+        428,
         361
       ],
-      "packTranslationX": 22,
+      "packTranslationX": 21,
       "packTranslationY": [
         200,
         200,
@@ -569,51 +569,51 @@
       ],
       "sourceBodyBounds": [
         [
-          25,
+          99,
           140,
-          345,
+          419,
           330
         ],
         [
-          24,
+          98,
           140,
-          345,
+          419,
           330
         ],
         [
-          25,
+          98,
           140,
-          345,
+          418,
           338
         ],
         [
-          25,
+          27,
           140,
-          417,
+          419,
           353
         ],
         [
-          25,
+          26,
           140,
-          418,
+          419,
           351
         ],
         [
-          24,
+          31,
           140,
-          412,
+          419,
           346
         ],
         [
-          25,
+          29,
           140,
-          414,
+          418,
           344
         ],
         [
-          25,
+          21,
           140,
-          423,
+          419,
           343
         ]
       ],
@@ -622,52 +622,153 @@
       "sceneAnchor": "final-body-floor",
       "finalBodyAnchorPending": false,
       "finalBodyBounds": [
-        321,
+        30,
         288,
-        482,
+        191,
         438
       ],
       "finalBodyMeasurement": "Alpha > 16 within a visually traced final-character outline, excluding the touching nest. The outline is a QA measurement only; no artwork pixels were altered.",
       "finalBodyMeasurementRegion": [
         [
-          321,
+          190,
           370
         ],
         [
-          331,
+          180,
           328
         ],
         [
-          360,
+          151,
           298
         ],
         [
-          390,
+          121,
           283
         ],
         [
-          430,
+          81,
           290
         ],
         [
-          476,
+          35,
           315
         ],
         [
-          492,
+          19,
           380
         ],
         [
-          478,
+          33,
           424
         ],
         [
-          446,
+          65,
           444
         ],
         [
-          356,
+          155,
           445
+        ]
+      ],
+      "packCropPerFrame": [
+        [
+          13,
+          132,
+          428,
+          361
+        ],
+        [
+          12,
+          132,
+          427,
+          361
+        ],
+        [
+          12,
+          132,
+          427,
+          361
+        ],
+        [
+          13,
+          132,
+          428,
+          361
+        ],
+        [
+          13,
+          132,
+          428,
+          361
+        ],
+        [
+          12,
+          132,
+          427,
+          361
+        ],
+        [
+          12,
+          132,
+          427,
+          361
+        ],
+        [
+          13,
+          132,
+          428,
+          361
+        ]
+      ],
+      "packCropMode": "per-frame",
+      "sourceFrameRects": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
         ]
       ]
     },

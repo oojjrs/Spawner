@@ -1993,8 +1993,8 @@
     "key": "pebble/antenna",
     "source": "AnimationCandidates/SheetGifHandoff-20261106/pebble-antenna-birth-sheet.png",
     "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/birth.png",
-    "sourceSHA256": "69fe1857cbc4100485086455bc0012a8d5d27af46b39449ba3c1ede5caa876c8",
-    "sha256": "69fe1857cbc4100485086455bc0012a8d5d27af46b39449ba3c1ede5caa876c8",
+    "sourceSHA256": "5b719e97acfd7d4806efa71e261308b30c14fe847431c2299ea87c2e677c589e",
+    "sha256": "5b719e97acfd7d4806efa71e261308b30c14fe847431c2299ea87c2e677c589e",
     "frame": [
       360,
       360
@@ -2011,15 +2011,15 @@
     "sourceFrameCount": 17,
     "frameCount": 17,
     "bodyBounds": [
-      59,
+      60,
       119,
-      300,
+      301,
       310
     ],
     "referenceBounds": [
-      79,
+      -73,
       135,
-      433,
+      281,
       436
     ],
     "mirrorErrors": [
@@ -2027,7 +2027,7 @@
       2393.208558503251
     ],
     "mirroredSource": false,
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "directCopy": true,
     "scene": null,
     "pivot": [
@@ -2525,7 +2525,7 @@
     "source": "AnimationCandidates/pebble-gather-birth-fullscene-v2-20261107/pebble-gather-birth-fullscene-v2-sheet.png",
     "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/birth.png",
     "sourceSHA256": "e522c7afa1dc8c4ad3de2efa333be1f23b7e33c85f32dbb58cb20f2c94b307b1",
-    "sha256": "8471cda90a0010dcf1ac867d6ab0b5a20d2eef4c39ec89e36ea6dfc2c7b2c4df",
+    "sha256": "8738fc3598b45faea28d111512094106f9bcb8a1d858f83b0f610e3ce6acfadc",
     "frame": [
       512,
       512
@@ -2542,15 +2542,15 @@
     "sourceFrameCount": 67,
     "frameCount": 66,
     "bodyBounds": [
-      418,
+      30,
       408,
-      482,
+      94,
       450
     ],
     "referenceBounds": [
-      21,
+      390,
       66,
-      122,
+      491,
       129
     ],
     "mirrorErrors": [
@@ -2558,16 +2558,16 @@
       2275.8164141796424
     ],
     "mirroredSource": false,
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "directCopy": false,
     "scene": {
-      "outletX": 232.5,
+      "outletX": 279.5,
       "outletY": 258,
       "travelStartMs": 120,
       "travelEndMs": 1480
     },
     "pivot": [
-      450.3168316831683,
+      61.68316831683171,
       449.8217821782178
     ],
     "durationsMs": [
@@ -5097,7 +5097,7 @@
       10818.751631287534
     ],
     "mirroredSource": false,
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "directCopy": true,
     "scene": null,
     "durationsMs": [
@@ -5439,7 +5439,7 @@
       8085.035073557223
     ],
     "mirroredSource": false,
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "directCopy": true,
     "scene": {
       "outletX": 96,
@@ -5524,7 +5524,7 @@
       12659.847680587372
     ],
     "mirroredSource": false,
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "directCopy": false,
     "scene": {
       "outletX": 329,

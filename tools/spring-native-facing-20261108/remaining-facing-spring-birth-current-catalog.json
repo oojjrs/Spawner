@@ -1,0 +1,4153 @@
+{
+  "spring/blade-antenna": {
+    "selectedFrom": "UNIT_ACTION_ART.actions.birth",
+    "birth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 260.5,
+      "pivotY": 332,
+      "referenceLength": 128,
+      "viewSize": 128,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneLayers": {
+        "version": 1,
+        "layers": [
+          {
+            "role": "environment",
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/c945d053d51e8a1102d2264c6496c0904587b00c0e2808e9c0733e29f76c3f9b.png",
+            "frameSize": 316,
+            "frameHeight": 264,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              {
+                "frame": 9,
+                "destination": [
+                  70,
+                  67,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  72,
+                  67,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  75,
+                  67,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  79,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  70,
+                  79,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  72,
+                  79,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  75,
+                  79,
+                  316,
+                  264
+                ]
+              }
+            ]
+          },
+          {
+            "role": "body",
+            "wholeBody": true,
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/bd7a27d33b2506dd60766a11299f38430f9831630765a7c198578a0f5b133ab3.png",
+            "frameSize": 316,
+            "frameHeight": 312,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              {
+                "frame": 0,
+                "destination": [
+                  67,
+                  42,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  70,
+                  42,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  72,
+                  42,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  75,
+                  42,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  67,
+                  55,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  70,
+                  55,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  72,
+                  55,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  75,
+                  55,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 260.5,
+      "pivotY": 332,
+      "referenceLength": 128,
+      "viewSize": 128,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneLayers": {
+        "version": 1,
+        "layers": [
+          {
+            "role": "environment",
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/c945d053d51e8a1102d2264c6496c0904587b00c0e2808e9c0733e29f76c3f9b.png",
+            "frameSize": 316,
+            "frameHeight": 264,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              {
+                "frame": 9,
+                "destination": [
+                  70,
+                  67,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  72,
+                  67,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  75,
+                  67,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  79,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  70,
+                  79,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  72,
+                  79,
+                  316,
+                  264
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  75,
+                  79,
+                  316,
+                  264
+                ]
+              }
+            ]
+          },
+          {
+            "role": "body",
+            "wholeBody": true,
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/bd7a27d33b2506dd60766a11299f38430f9831630765a7c198578a0f5b133ab3.png",
+            "frameSize": 316,
+            "frameHeight": 312,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              {
+                "frame": 0,
+                "destination": [
+                  67,
+                  42,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  70,
+                  42,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  72,
+                  42,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  75,
+                  42,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  67,
+                  55,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  70,
+                  55,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  72,
+                  55,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  75,
+                  55,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "durationMs": 1920,
+      "pivotX": 216,
+      "pivotY": 369,
+      "referenceLength": 160,
+      "viewSize": 160,
+      "registrationScale": 1,
+      "loop": true
+    }
+  },
+  "spring/blade-carapace-antenna": {
+    "selectedFrom": "UNIT_ACTION_ART.actions.birth",
+    "birth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 269,
+      "pivotY": 348,
+      "referenceLength": 130,
+      "viewSize": 130,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor"
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 269,
+      "pivotY": 348,
+      "referenceLength": 130,
+      "viewSize": 130,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor"
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "durationMs": 1920,
+      "pivotX": 216.5,
+      "pivotY": 369,
+      "referenceLength": 183,
+      "viewSize": 183,
+      "registrationScale": 1,
+      "loop": true
+    }
+  },
+  "spring/blade-secretion-antenna": {
+    "selectedFrom": "UNIT_ACTION_ART.actions.birth",
+    "birth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 234,
+      "pivotY": 349,
+      "referenceLength": 145,
+      "viewSize": 145,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneLayers": {
+        "version": 1,
+        "layers": [
+          {
+            "role": "environment",
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/89dafdbbd6e9ac8406e38ef9e03612d301f5ea800b3f007c9dd2e78083422450.png",
+            "frameSize": 316,
+            "frameHeight": 253,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              {
+                "frame": 9,
+                "destination": [
+                  81,
+                  67,
+                  316,
+                  253
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  93,
+                  67,
+                  316,
+                  253
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  108,
+                  66,
+                  316,
+                  253
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  75,
+                  316,
+                  253
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  81,
+                  75,
+                  316,
+                  253
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  93,
+                  75,
+                  316,
+                  253
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  108,
+                  75,
+                  316,
+                  253
+                ]
+              }
+            ]
+          },
+          {
+            "role": "body",
+            "wholeBody": true,
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/19823a46d35dc74065f32ec1ef292d082c13b8e722cfa7db9733574fd2047754.png",
+            "frameSize": 316,
+            "frameHeight": 312,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              {
+                "frame": 0,
+                "destination": [
+                  67,
+                  49,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  81,
+                  49,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  93,
+                  49,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  108,
+                  49,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  67,
+                  58,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  81,
+                  58,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  94,
+                  58,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  107,
+                  58,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 234,
+      "pivotY": 349,
+      "referenceLength": 145,
+      "viewSize": 145,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneLayers": {
+        "version": 1,
+        "layers": [
+          {
+            "role": "environment",
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/89dafdbbd6e9ac8406e38ef9e03612d301f5ea800b3f007c9dd2e78083422450.png",
+            "frameSize": 316,
+            "frameHeight": 253,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              {
+                "frame": 9,
+                "destination": [
+                  81,
+                  67,
+                  316,
+                  253
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  93,
+                  67,
+                  316,
+                  253
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  108,
+                  66,
+                  316,
+                  253
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  75,
+                  316,
+                  253
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  81,
+                  75,
+                  316,
+                  253
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  93,
+                  75,
+                  316,
+                  253
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  108,
+                  75,
+                  316,
+                  253
+                ]
+              }
+            ]
+          },
+          {
+            "role": "body",
+            "wholeBody": true,
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/19823a46d35dc74065f32ec1ef292d082c13b8e722cfa7db9733574fd2047754.png",
+            "frameSize": 316,
+            "frameHeight": 312,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              {
+                "frame": 0,
+                "destination": [
+                  67,
+                  49,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  81,
+                  49,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  93,
+                  49,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  108,
+                  49,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  67,
+                  58,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  81,
+                  58,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  94,
+                  58,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  107,
+                  58,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "durationMs": 1920,
+      "pivotX": 216,
+      "pivotY": 369,
+      "referenceLength": 186,
+      "viewSize": 186,
+      "registrationScale": 1,
+      "loop": true
+    }
+  },
+  "spring/blade-secretion-carapace-antenna": {
+    "selectedFrom": "UNIT_ACTION_ART.actions.birth",
+    "birth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 271,
+      "pivotY": 341,
+      "referenceLength": 129,
+      "viewSize": 129,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneLayers": {
+        "version": 1,
+        "layers": [
+          {
+            "role": "environment",
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/4d353f7e6a238450931a51d99db2651dc60c48da430df70d434d5e426ea43fe1.png",
+            "frameSize": 316,
+            "frameHeight": 295,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              {
+                "frame": 9,
+                "destination": [
+                  66,
+                  67,
+                  316,
+                  295
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  295
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  66,
+                  67,
+                  316,
+                  295
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  72,
+                  316,
+                  295
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  66,
+                  72,
+                  316,
+                  295
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  67,
+                  72,
+                  316,
+                  295
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  66,
+                  72,
+                  316,
+                  295
+                ]
+              }
+            ]
+          },
+          {
+            "role": "body",
+            "wholeBody": true,
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/764a9acd4cb1f1074be568fe7fb6aa7e66bec46e6de2bcd787df880c9719051d.png",
+            "frameSize": 316,
+            "frameHeight": 312,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              {
+                "frame": 0,
+                "destination": [
+                  67,
+                  55,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  66,
+                  55,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  67,
+                  54,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  66,
+                  54,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  67,
+                  63,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  66,
+                  63,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  67,
+                  63,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  66,
+                  63,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 271,
+      "pivotY": 341,
+      "referenceLength": 129,
+      "viewSize": 129,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneLayers": {
+        "version": 1,
+        "layers": [
+          {
+            "role": "environment",
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/4d353f7e6a238450931a51d99db2651dc60c48da430df70d434d5e426ea43fe1.png",
+            "frameSize": 316,
+            "frameHeight": 295,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              {
+                "frame": 9,
+                "destination": [
+                  66,
+                  67,
+                  316,
+                  295
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  295
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  66,
+                  67,
+                  316,
+                  295
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  72,
+                  316,
+                  295
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  66,
+                  72,
+                  316,
+                  295
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  67,
+                  72,
+                  316,
+                  295
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  66,
+                  72,
+                  316,
+                  295
+                ]
+              }
+            ]
+          },
+          {
+            "role": "body",
+            "wholeBody": true,
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/764a9acd4cb1f1074be568fe7fb6aa7e66bec46e6de2bcd787df880c9719051d.png",
+            "frameSize": 316,
+            "frameHeight": 312,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              {
+                "frame": 0,
+                "destination": [
+                  67,
+                  55,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  66,
+                  55,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  67,
+                  54,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  66,
+                  54,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  67,
+                  63,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  66,
+                  63,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  67,
+                  63,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  66,
+                  63,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "durationMs": 1920,
+      "pivotX": 215.5,
+      "pivotY": 368,
+      "referenceLength": 170,
+      "viewSize": 170,
+      "registrationScale": 1,
+      "loop": true
+    }
+  },
+  "spring/carapace-antenna": {
+    "selectedFrom": "UNIT_ACTION_ART.actions.birth",
+    "birth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 277,
+      "pivotY": 348,
+      "referenceLength": 114,
+      "viewSize": 114,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor"
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 277,
+      "pivotY": 348,
+      "referenceLength": 114,
+      "viewSize": 114,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor"
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "durationMs": 1920,
+      "pivotX": 216,
+      "pivotY": 369,
+      "referenceLength": 182,
+      "viewSize": 182,
+      "registrationScale": 1,
+      "loop": true
+    }
+  },
+  "spring/secretion-antenna": {
+    "selectedFrom": "UNIT_ACTION_ART.actions.birth",
+    "birth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 257,
+      "pivotY": 333,
+      "referenceLength": 117,
+      "viewSize": 117,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneLayers": {
+        "version": 1,
+        "layers": [
+          {
+            "role": "environment",
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/ebfe66874cde38398024d9306618457503a386074f2b3ba377c365c6c1cba9c1.png",
+            "frameSize": 316,
+            "frameHeight": 270,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              {
+                "frame": 9,
+                "destination": [
+                  75,
+                  66,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  84,
+                  66,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  94,
+                  66,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  79,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  75,
+                  79,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  84,
+                  78,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  94,
+                  78,
+                  316,
+                  270
+                ]
+              }
+            ]
+          },
+          {
+            "role": "body",
+            "wholeBody": true,
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/d1d24d18c2832461358b5d4842e446a9b991f53fc12fe1f4935a9416e211e21e.png",
+            "frameSize": 316,
+            "frameHeight": 312,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              {
+                "frame": 0,
+                "destination": [
+                  67,
+                  40,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  75,
+                  40,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  84,
+                  40,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  94,
+                  40,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  67,
+                  53,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  76,
+                  53,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  84,
+                  53,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  94,
+                  53,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 257,
+      "pivotY": 333,
+      "referenceLength": 117,
+      "viewSize": 117,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneLayers": {
+        "version": 1,
+        "layers": [
+          {
+            "role": "environment",
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/ebfe66874cde38398024d9306618457503a386074f2b3ba377c365c6c1cba9c1.png",
+            "frameSize": 316,
+            "frameHeight": 270,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              {
+                "frame": 9,
+                "destination": [
+                  75,
+                  66,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  84,
+                  66,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  94,
+                  66,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  79,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  75,
+                  79,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  84,
+                  78,
+                  316,
+                  270
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  94,
+                  78,
+                  316,
+                  270
+                ]
+              }
+            ]
+          },
+          {
+            "role": "body",
+            "wholeBody": true,
+            "image": "DesignAssets/Animations/BirthSceneLayersV1/d1d24d18c2832461358b5d4842e446a9b991f53fc12fe1f4935a9416e211e21e.png",
+            "frameSize": 316,
+            "frameHeight": 312,
+            "columns": 4,
+            "frameCount": 16,
+            "samples": [
+              {
+                "frame": 0,
+                "destination": [
+                  67,
+                  40,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  75,
+                  40,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  84,
+                  40,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  94,
+                  40,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  67,
+                  53,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  76,
+                  53,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  84,
+                  53,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  94,
+                  53,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 13,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 14,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              },
+              {
+                "frame": 15,
+                "destination": [
+                  67,
+                  67,
+                  316,
+                  312
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "durationMs": 1920,
+      "pivotX": 216,
+      "pivotY": 368,
+      "referenceLength": 171,
+      "viewSize": 171,
+      "registrationScale": 1,
+      "loop": true
+    }
+  },
+  "spring/secretion-carapace-antenna": {
+    "selectedFrom": "UNIT_ACTION_ART.actions.birth",
+    "birth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 288.5,
+      "pivotY": 355,
+      "referenceLength": 130,
+      "viewSize": 130,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor"
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 288.5,
+      "pivotY": 355,
+      "referenceLength": 130,
+      "viewSize": 130,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneIncludesNest": true,
+      "sceneAnchor": "final-body-floor"
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "durationMs": 1920,
+      "pivotX": 215.5,
+      "pivotY": 369,
+      "referenceLength": 166,
+      "viewSize": 166,
+      "registrationScale": 1,
+      "loop": true
+    }
+  },
+  "spring/blade-carapace": {
+    "selectedFrom": "UNIT_ACTION_ART.actions.birth",
+    "birth": {
+      "image": "DesignAssets/Animations/BladeCarapaceV1/spring/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 286,
+      "pivotY": 351,
+      "referenceLength": 107,
+      "viewSize": 107,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneIncludesNest": true
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Animations/BladeCarapaceV1/spring/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 286,
+      "pivotY": 351,
+      "referenceLength": 107,
+      "viewSize": 107,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneIncludesNest": true
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/BladeCarapaceV1/spring/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "durationMs": 1920,
+      "pivotX": 216,
+      "pivotY": 368,
+      "referenceLength": 239,
+      "viewSize": 239,
+      "registrationScale": 1,
+      "loop": true
+    }
+  },
+  "spring/secretion-carapace": {
+    "selectedFrom": "UNIT_ACTION_ART.actions.birth",
+    "birth": {
+      "image": "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 280,
+      "pivotY": 369,
+      "referenceLength": 129,
+      "viewSize": 129,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneIncludesNest": true
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 280,
+      "pivotY": 369,
+      "referenceLength": 129,
+      "viewSize": 129,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneIncludesNest": true
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "durationMs": 1920,
+      "pivotX": 215.5,
+      "pivotY": 369,
+      "referenceLength": 251,
+      "viewSize": 251,
+      "registrationScale": 1,
+      "loop": true
+    }
+  },
+  "spring/blade-secretion": {
+    "selectedFrom": "UNIT_ACTION_ART.actions.birth",
+    "birth": {
+      "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 272.5,
+      "pivotY": 363,
+      "referenceLength": 125,
+      "viewSize": 125,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneIncludesNest": true
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 272.5,
+      "pivotY": 363,
+      "referenceLength": 125,
+      "viewSize": 125,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneIncludesNest": true
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "durationMs": 1920,
+      "pivotX": 216,
+      "pivotY": 369,
+      "referenceLength": 240,
+      "viewSize": 240,
+      "registrationScale": 1,
+      "loop": true
+    }
+  },
+  "spring/blade-secretion-carapace": {
+    "selectedFrom": "UNIT_ACTION_ART.actions.birth",
+    "birth": {
+      "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 263.5,
+      "pivotY": 362,
+      "referenceLength": 141,
+      "viewSize": 141,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneIncludesNest": true
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/birth.png",
+      "sourceFacing": "right",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        290
+      ],
+      "durationMs": 1790,
+      "pivotX": 263.5,
+      "pivotY": 362,
+      "referenceLength": 141,
+      "viewSize": 141,
+      "registrationScale": 1,
+      "loop": false,
+      "fullScene": true,
+      "worldTravelIncludedInPixels": true,
+      "sceneAnchor": "final-body-floor",
+      "sceneIncludesNest": true
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 480,
+      "frameHeight": 480,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "durationMs": 1920,
+      "pivotX": 216.5,
+      "pivotY": 369,
+      "referenceLength": 242,
+      "viewSize": 242,
+      "registrationScale": 1,
+      "loop": true
+    }
+  },
+  "spring/base": {
+    "selectedFrom": "UNIT_ACTION_ART.actions.birth",
+    "birth": {
+      "image": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+      "sourceFacing": "right",
+      "frameSize": 236,
+      "frameHeight": 236,
+      "columns": 4,
+      "frameCount": 13,
+      "durationsMs": [
+        130,
+        120,
+        100,
+        100,
+        80,
+        260,
+        80,
+        90,
+        90,
+        100,
+        100,
+        130,
+        410
+      ],
+      "pivotX": 150,
+      "pivotY": 207,
+      "referenceLength": 105,
+      "viewSize": 236,
+      "registrationScale": 1,
+      "loop": false
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+      "sourceFacing": "right",
+      "frameSize": 236,
+      "frameHeight": 236,
+      "columns": 4,
+      "frameCount": 13,
+      "durationsMs": [
+        130,
+        120,
+        100,
+        100,
+        80,
+        260,
+        80,
+        90,
+        90,
+        100,
+        100,
+        130,
+        410
+      ],
+      "pivotX": 150,
+      "pivotY": 207,
+      "referenceLength": 105,
+      "viewSize": 236,
+      "registrationScale": 1,
+      "loop": false
+    },
+    "idle": {
+      "image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp",
+      "sourceFacing": "left",
+      "frameSize": 512,
+      "frameHeight": 512,
+      "columns": 4,
+      "frameCount": 64,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "pivotX": 256,
+      "pivotY": 448,
+      "viewSize": 512,
+      "registrationScale": 1,
+      "loop": true
+    }
+  },
+  "spring/gather": {
+    "selectedFrom": "UNIT_BIRTH_ART",
+    "birth": {
+      "pivotX": 256,
+      "pivotY": 448,
+      "scene": {
+        "outletX": 96,
+        "outletY": 76,
+        "travelStartMs": 530,
+        "travelEndMs": 790
+      },
+      "frameSize": 512,
+      "frameHeight": 512,
+      "columns": 8,
+      "frameCount": 13,
+      "durationsMs": [
+        130,
+        120,
+        100,
+        100,
+        80,
+        260,
+        80,
+        90,
+        90,
+        100,
+        100,
+        130,
+        410
+      ],
+      "durationMs": 1790,
+      "loop": false,
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/birth.png",
+      "sourceFacing": "right",
+      "referenceLength": 275
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 512,
+      "frameHeight": 512,
+      "columns": 8,
+      "frameCount": 64,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "pivotX": 256,
+      "pivotY": 448,
+      "viewSize": 512,
+      "referenceLength": 275,
+      "loop": true
+    }
+  },
+  "spring/secretion": {
+    "selectedFrom": "UNIT_BIRTH_ART",
+    "birth": {
+      "pivotX": 430.7875,
+      "pivotY": 435,
+      "scene": {
+        "outletX": 329,
+        "outletY": 215,
+        "travelStartMs": 530,
+        "travelEndMs": 790
+      },
+      "frameSize": 512,
+      "frameHeight": 512,
+      "columns": 8,
+      "frameCount": 56,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        10,
+        30,
+        40,
+        40,
+        10,
+        30,
+        40,
+        30,
+        10,
+        40,
+        40,
+        10,
+        30,
+        40,
+        10,
+        30,
+        40,
+        40,
+        40,
+        40,
+        40,
+        30,
+        10,
+        40,
+        30,
+        10,
+        40,
+        40,
+        40,
+        40,
+        10,
+        30,
+        40,
+        30,
+        10,
+        40,
+        40,
+        10,
+        30,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        30
+      ],
+      "durationMs": 1790,
+      "loop": false,
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/birth.png",
+      "sourceFacing": "right",
+      "referenceLength": 65,
+      "sceneLayers": {
+        "version": 2,
+        "layers": [
+          {
+            "image": "DesignAssets/Animations/BirthResolutionV1/spring-secretion-body.png",
+            "frameSize": 503,
+            "frameHeight": 496,
+            "columns": 2,
+            "frameCount": 13,
+            "samples": [
+              {
+                "frame": 0,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 0,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 0,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 0,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 1,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 2,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 3,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 4,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  306.14,
+                  196.10000000000002,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  313.9723076923077,
+                  198.20701183431953,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  324.4153846153846,
+                  207.57150887573965,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  334.8584615384616,
+                  224.42760355029588,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  345.3015384615385,
+                  248.77529585798817,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  355.7446153846154,
+                  280.6145857988165,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 5,
+                "destination": [
+                  366.18769230769226,
+                  319.94547337278107,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 6,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 7,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 8,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 9,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 10,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 11,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              },
+              {
+                "frame": 12,
+                "destination": [
+                  374.02,
+                  354.36,
+                  90.53999999999999,
+                  89.28
+                ]
+              }
+            ],
+            "role": "body",
+            "wholeBody": true
+          }
+        ]
+      }
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp",
+      "sourceFacing": "right",
+      "frameSize": 128,
+      "frameHeight": 128,
+      "columns": 4,
+      "frameCount": 13,
+      "durationsMs": [
+        130,
+        120,
+        100,
+        100,
+        80,
+        260,
+        80,
+        90,
+        90,
+        100,
+        100,
+        130,
+        410
+      ],
+      "pivotX": 64,
+      "pivotY": 112,
+      "viewSize": 128,
+      "registrationScale": 1,
+      "loop": false
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 314,
+      "frameHeight": 314,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        1200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        100,
+        2500
+      ],
+      "pivotX": 157.5,
+      "pivotY": 285,
+      "viewSize": 314,
+      "referenceLength": 200,
+      "loop": true
+    }
+  },
+  "spring/antenna": {
+    "selectedFrom": "UNIT_BIRTH_ART",
+    "birth": {
+      "pivotX": 147.5,
+      "pivotY": 206.5,
+      "frameSize": 236,
+      "frameHeight": 236,
+      "columns": 4,
+      "frameCount": 13,
+      "durationsMs": [
+        130,
+        120,
+        100,
+        100,
+        80,
+        260,
+        80,
+        90,
+        90,
+        100,
+        100,
+        130,
+        410
+      ],
+      "durationMs": 1790,
+      "loop": false,
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/birth.png",
+      "sourceFacing": "right",
+      "referenceLength": 105
+    },
+    "bakedActionBirth": {
+      "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/birth.webp",
+      "sourceFacing": "right",
+      "frameSize": 128,
+      "frameHeight": 128,
+      "columns": 4,
+      "frameCount": 13,
+      "durationsMs": [
+        130,
+        120,
+        100,
+        100,
+        80,
+        260,
+        80,
+        90,
+        90,
+        100,
+        100,
+        130,
+        410
+      ],
+      "pivotX": 80,
+      "pivotY": 112,
+      "viewSize": 128,
+      "registrationScale": 1,
+      "loop": false
+    },
+    "idle": {
+      "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png",
+      "sourceFacing": "left",
+      "frameSize": 352,
+      "frameHeight": 352,
+      "columns": 4,
+      "frameCount": 16,
+      "durationsMs": [
+        480,
+        170,
+        170,
+        220,
+        260,
+        170,
+        170,
+        170,
+        300,
+        170,
+        170,
+        260,
+        70,
+        90,
+        110,
+        350
+      ],
+      "pivotX": 175,
+      "pivotY": 317,
+      "viewSize": 352,
+      "referenceLength": 222,
+      "loop": true
+    }
+  }
+}

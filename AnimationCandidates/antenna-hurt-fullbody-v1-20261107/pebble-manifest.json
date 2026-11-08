@@ -1,6 +1,6 @@
 {
   "reference": "AnimationCandidates/pebble-antenna-walk-stable-v6/walk-sheet.png",
-  "referenceSha256": "fde8061b9f85dd5cb5f5e979a57f52cce21dba3f28d623056f7f29ebda60d31b",
+  "referenceSha256": "4bbb061c5c6661db63b062c3b41f1b59440a4e84b9305034231eaa5c4cac8cf0",
   "frameSize": 448,
   "columns": 4,
   "rows": 2,
@@ -19,9 +19,9 @@
   "neutralPreviewLeadInMs": 700,
   "hitHoldMs": 500,
   "recoveryMs": 380,
-  "nativeCombatFacing": "right",
-  "impactFrom": "right",
-  "reactionTowards": "left",
+  "nativeCombatFacing": "left",
+  "impactFrom": "left",
+  "reactionTowards": "right",
   "bodyPartComposition": false,
   "bodyWarping": false,
   "resamplingInSpritePackaging": false,
@@ -56,13 +56,13 @@
         444
       ],
       "wholeFrameTranslation": [
-        2,
+        3,
         53
       ],
       "bboxAlpha128": [
-        39,
+        63,
         115,
-        385,
+        409,
         420
       ],
       "connectedComponentsOver32Pixels": 1,
@@ -77,13 +77,13 @@
         444
       ],
       "wholeFrameTranslation": [
-        2,
+        3,
         55
       ],
       "bboxAlpha128": [
-        43,
+        53,
         121,
-        395,
+        405,
         420
       ],
       "connectedComponentsOver32Pixels": 1,
@@ -102,9 +102,9 @@
         56
       ],
       "bboxAlpha128": [
-        48,
+        50,
         128,
-        398,
+        400,
         420
       ],
       "connectedComponentsOver32Pixels": 1,
@@ -123,9 +123,9 @@
         58
       ],
       "bboxAlpha128": [
-        50,
+        49,
         130,
-        399,
+        398,
         420
       ],
       "connectedComponentsOver32Pixels": 1,
@@ -140,13 +140,13 @@
         887
       ],
       "wholeFrameTranslation": [
-        2,
+        3,
         58
       ],
       "bboxAlpha128": [
-        51,
+        46,
         131,
-        402,
+        397,
         420
       ],
       "connectedComponentsOver32Pixels": 1,
@@ -161,7 +161,7 @@
         887
       ],
       "wholeFrameTranslation": [
-        2,
+        3,
         58
       ],
       "bboxAlpha128": [
@@ -203,8 +203,9 @@
   "action": "hurt",
   "sheet": "pebble-antenna-hurt-sheet.png",
   "preview": "pebble-antenna-hurt-preview.gif",
-  "sheetSHA256": "e6ee61e4a6e8a914436df3232cadf58f8edcba9c0b539e7585475ea48c39434a",
-  "previewSHA256": "94de9f2662316a5ee644fab11066a075186bbe495c814adf0a5f6cf27cc709e5",
+  "sheetSHA256": "3ac6a4e1b2037cde2171e6281235e83d76eedbe48bae7c534dea8d9bb5fe5dcd",
+  "previewSHA256": "0895da4979c5f6a872ecd14b1031907bca49849e3fed1cca890c70964831fa50",
   "approvalDate": "2026-11-07",
-  "integration": "Planning reference only; game runtime and deployment are unchanged."
+  "integration": "Planning reference only; game runtime and deployment are unchanged.",
+  "sourceFacing": "left"
 }

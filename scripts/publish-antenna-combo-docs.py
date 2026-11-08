@@ -40,7 +40,8 @@ def birth_scene_clip(record):
     width, height = size if isinstance(size, list) else (size, record.get('frameHeight', size))
     assert all(isinstance(value, (int, float)) and value > 0 for value in (width, height))
     return {'sceneLayers': scene, 'frameSize': width, 'frameHeight': height,
-            'durationsMs': record['durationsMs'], 'loop': True}
+            'durationsMs': record['durationsMs'], 'loop': True,
+            **({'sourceFacing': record['sourceFacing']} if 'sourceFacing' in record else {})}
 
 
 def main():

@@ -1,0 +1,2288 @@
+{
+  "scope": "Independent Git baseline decoded visible RGBA; not verification flags",
+  "sourceFiles": 207,
+  "sourceCells": 1479,
+  "heldFiles": 2,
+  "packedCrops": 66,
+  "independentGitSourceFiles": 139,
+  "afterHashOnlySourceFiles": 68,
+  "gitAliasSourceFiles": 8,
+  "registeredFiles": 68,
+  "previewFiles": 88,
+  "previewFrames": 784,
+  "exactPreviewFiles": 86,
+  "quantizedGifFiles": 0,
+  "maxGifMeanError": 0,
+  "independentGitPreviewFiles": 86,
+  "afterHashOnlyPreviewFiles": 2,
+  "sources": [
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/idle.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/idle.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/walk.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/walk.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/attack.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/attack.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/ranged.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/ranged.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/hurt.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/hurt.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/birth.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/birth.png",
+      "cells": 16,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/death.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/death.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/idle.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/idle.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/walk.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/walk.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/attack.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/attack.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/ranged.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/ranged.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/hurt.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/hurt.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/birth.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/birth.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/death.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/death.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-idle-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-idle-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-idle-v1-cover.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-appearance.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/idle-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "ea9ccc168b45f5e828ab8dd61460b260e8ab1b26c7f44fd60bf971c14584ca44"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-walk-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-walk-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-walk-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "7d581841fda53df99b791ce66efb6214ee4592414c6e726ee159c1a105d2f453"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/walk-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "c6a4bc09f89e481ae88ce5b2469373dcfd476c6f4b33ee950851b5dd71478e66"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-attack-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-attack-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-attack-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "4295271f06a56a58ccf896d66db63c1703a064594fdfeae100db985e55afd8c0"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/attack-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "d3dde3c021fcf6cb0c82b3ea56e58886309ede43745f1692302fcca77ae7510e"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-ranged-attack-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-ranged-attack-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-ranged-attack-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "ff7fee107a4bd6ee784674cdc5cec728e92a6fd1f77d67463c32373f8e967e2d"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/ranged-attack-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "2238374871f3d55b16be235f5e3c2389cb7b2c31590c1f2d53bcf5be91d58361"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-hurt-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-hurt-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-hurt-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "cef7f75b0243bb9a31e59d5cbb0d50f86bddf69654a8e148ff0940fba42f327b"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/hurt-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "918b898b29c489d67fb0905dcf08c43e9e9504c4fc3348081b1e0712a2e8bc29"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-birth-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-birth-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-birth-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "8f1d5c0fe3280e3845383dec3288296a1a0af26409ac70f78377101b6253d61f"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/birth-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "65cba0eca08c356018e20d0a90233e29ab47c69ad50c93af39458eb9d59f9bd7"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-death-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-death-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-death-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "4051add5507e6980b36634f6a91b4bdc06d167b31085140fdc7395599cf6393b"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/death-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "d0e0e21581bafbcf4e0316195e27b69473107aeac59b3edc52af3397b0186638"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-appearance.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-appearance.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-idle-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-idle-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-idle-v1-cover.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/portrait.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/idle-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "f7c5d2c9f63727e6f94b1898d7996268b1fbcb7e28aafe06fc2813dfdae66c3c"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-walk-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-walk-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-walk-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "02c83422f87f5509309abf33f8830152900584c421cbf0fad8a55d0a17df921c"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/walk-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "b1edd0e1dc0cc07df2f9e55b7b8c90310e5198b351c7e467eb3201f7a66ba02e"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-attack-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-attack-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-attack-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "6309bfea2d1b4cee8f2dba6e4c04137d4c9ea75a66624c014405d3d087543b85"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/attack-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "753eae9f8f04c71e1827c0345cec49927663af8f2ec2dea49a1a5ccd809a514b"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-ranged-attack-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-ranged-attack-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-ranged-attack-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "4c354209b909cb80ef7faf88267b425be49f05918af6704f40421574f28123a9"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/ranged-attack-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "7db751111ae50fc74a7cdd6c0afdd39515d7017d96c04b06c04c3748fbb3305b"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-hurt-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-hurt-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-hurt-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "f33bffbb0ee2c287b9d61188cd3f3f9e52fed3a315d807001fdff6918769585d"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/hurt-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "1b9fb44109e3f78930c16c2261f766034b5d6c020bcf5551ce1e97babf081c79"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "8dfb4261a2cb97c8ab541a898271c9bac87dae97e877faea8003cc455f6dd3bb"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/birth-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "505bc13fb50d7b95766e8750f2d3a750e9a1ab2ddf665dd09d2a7dfd1ff958dc"
+    },
+    {
+      "path": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion-carapace/birth.png",
+      "baselineGitPath": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion-carapace/birth.png",
+      "cells": 16,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-death-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-death-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-death-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "7dd39368107c930597adec7109412543011a540eb75c68b52f2008495d1a42fc"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/death-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "f7baa2af17ee9b53586c468cdfcfcbde1703f839e855534b2f732e28dc02f58f"
+    },
+    {
+      "path": "DesignAssets/Concepts/CombatTriplesV1/pebble-blade-piercing-carapace.png",
+      "baselineGitPath": "DesignAssets/Concepts/CombatTriplesV1/pebble-blade-piercing-carapace.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-appearance.png",
+      "baselineGitPath": "DesignAssets/Concepts/CombatTriplesV1/pebble-blade-piercing-carapace.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/portrait.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/portrait.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/portrait.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/portrait.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
+      "baselineGitPath": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
+      "cells": 64,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp",
+      "baselineGitPath": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp",
+      "cells": 20,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp",
+      "baselineGitPath": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp",
+      "cells": 16,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
+      "baselineGitPath": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
+      "cells": 16,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp",
+      "baselineGitPath": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp",
+      "cells": 16,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+      "baselineGitPath": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
+      "baselineGitPath": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
+      "cells": 48,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-base.webp",
+      "baselineGitPath": "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-base.webp",
+      "cells": 28,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": true
+    },
+    {
+      "path": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/neutral.png",
+      "baselineGitPath": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/neutral.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-foreground.png",
+      "baselineGitPath": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-foreground.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Planning/Attributes/Units/pebble-strength.png",
+      "baselineGitPath": "DesignAssets/Planning/Attributes/Units/pebble-strength.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/GatherWorkV1/pebble/harvest.webp",
+      "baselineGitPath": "DesignAssets/Animations/GatherWorkV1/pebble/harvest.webp",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/GatherWorkV1/pebble/carry.webp",
+      "baselineGitPath": "DesignAssets/Animations/GatherWorkV1/pebble/carry.webp",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/GatherWorkV1/pebble/throw.webp",
+      "baselineGitPath": "DesignAssets/Animations/GatherWorkV1/pebble/throw.webp",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/hurt.png",
+      "baselineGitPath": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/hurt.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/death.png",
+      "baselineGitPath": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/death.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/idle.png",
+      "baselineGitPath": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/idle.png",
+      "cells": 32,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/walk.png",
+      "baselineGitPath": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/walk.png",
+      "cells": 32,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/attack.png",
+      "baselineGitPath": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/attack.png",
+      "cells": 16,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/birth.png",
+      "baselineGitPath": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/birth.png",
+      "cells": 72,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/pebble-gather-body.png",
+      "baselineGitPath": "DesignAssets/Animations/BirthResolutionV1/pebble-gather-body.png",
+      "cells": 16,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
+      "baselineGitPath": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/birth.webp",
+      "baselineGitPath": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/birth.webp",
+      "cells": 24,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/death.webp",
+      "baselineGitPath": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/death.webp",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
+      "baselineGitPath": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/hurt.png",
+      "baselineGitPath": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/hurt.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/DefensiveAttackV1/pebble/antenna/attack.png",
+      "baselineGitPath": "DesignAssets/Animations/DefensiveAttackV1/pebble/antenna/attack.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/birth.png",
+      "baselineGitPath": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/birth.png",
+      "cells": 24,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/MinorHeldHurtV1/pebble-antenna.webp",
+      "baselineGitPath": "DesignAssets/Animations/MinorHeldHurtV1/pebble-antenna.webp",
+      "cells": 28,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": true
+    },
+    {
+      "path": "tools/minor-held-hurt-20261105/pebble-antenna-source.png",
+      "baselineGitPath": "tools/minor-held-hurt-20261105/pebble-antenna-source.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/portrait.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/portrait.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/idle.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/idle.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/walk.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/walk.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/attack.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/attack.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/ranged.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/ranged.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/hurt.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/hurt.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/birth.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/birth.png",
+      "cells": 16,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/death.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/death.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/portrait.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/portrait.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/idle.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/idle.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/walk.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/walk.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/attack.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/attack.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/ranged.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/ranged.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/hurt.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/hurt.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/birth.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/birth.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/death.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/death.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/portrait.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/portrait.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/idle.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/idle.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/walk.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/walk.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/ranged.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/ranged.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/hurt.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/hurt.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/birth.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/birth.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/death.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/death.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/birth.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/birth.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-gather-hurt-fullbody-v1-20261107/pebble-gather-hurt-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-gather-hurt-fullbody-v1-20261107/pebble-gather-hurt-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-gather-death-fullbody-v1-20261107/pebble-gather-death-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-gather-death-fullbody-v1-20261107/pebble-gather-death-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-antenna-idle-v1-20261107/pebble-antenna-idle-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-antenna-idle-v1-20261107/pebble-antenna-idle-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/pebble-antenna-hurt-sheet.png",
+      "baselineGitPath": "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/pebble-antenna-hurt-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-antenna-walk-stable-v6/walk-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-antenna-walk-stable-v6/walk-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-gather-walk-stable-v2-20261107/pebble-gather-walk-v2-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-gather-walk-stable-v2-20261107/pebble-gather-walk-v2-sheet.png",
+      "cells": 32,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-gather-motion-v1-20261107/pebble-gather-attack-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-gather-motion-v1-20261107/pebble-gather-attack-v1-sheet.png",
+      "cells": 16,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Concepts/CombatPairsV1/pebble-blade-piercing.png",
+      "baselineGitPath": "DesignAssets/Concepts/CombatPairsV1/pebble-blade-piercing.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-idle-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-idle-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-walk-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-walk-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-attack-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-attack-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-ranged-attack-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-ranged-attack-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-hurt-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-hurt-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion/birth.png",
+      "baselineGitPath": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion/birth.png",
+      "cells": 16,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-death-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-death-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/Sources/idle-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "29cda275f3bcca6a375b61f012701647f77106010aa0eaca0b367c1fdbb4e135"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/Sources/walk-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "ba8e5ec6a77289ed4b56359a6d794a2d3ef42b152aad283ce054d986cbcc9440"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/Sources/attack-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "018e146607587330a3e79a927cb54dbdf4b0bc83615b26cbd57f9f384a155f17"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/Sources/ranged-attack-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "52c80ee08ee5c99e19f0067cc728788f22c1192489a1acabaa351c69f64143d7"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/Sources/hurt-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "ae14fa03ed585afc15ddc87a967ca77f8428fa61130d743fc58e6235fe66f488"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/Sources/birth-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "44f16ed995a41f9babbee849b96e3830bb99952b5a08ce52c4392b4ed3f39e32"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/Sources/death-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "c3b61533bb0b1c3bd8c123601b0385115871f56eb68b226c02e6744b9e04fc61"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-idle-v1-cover.png",
+      "baselineGitPath": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/portrait.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-walk-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "1a24bb3ab9bd53eef42f19f7435bfe7a2f82c1d74d8213d81703496945ea7fd1"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-attack-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "3ce1d965b9f48f98229e7f7507b9c2a1bd798a96d8766488b429bb5daf3ebe02"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-ranged-attack-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "7beceab70ec60c9c7cde36dc6b40f52e75849031136debb234615467cda7ead6"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-hurt-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "317d6fdc006c097fb353154b7884bb1cfc40f81370cb00d2bb21e7eef11e1659"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "e612699564fd67cef15febc70ed0927f8de5c3ab4421becfb5a772fa76edcc03"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-death-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "7732c9122dbb8345a10cb3422d451f28663cddf654d2aa9762d39b9f637ced66"
+    },
+    {
+      "path": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/pebble-antenna-defensive-attack-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/pebble-antenna-defensive-attack-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/pebble-antenna-defensive-attack-v1-cover.png",
+      "baselineGitPath": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/pebble-antenna-defensive-attack-v1-cover.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/Sources/attack-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "3232d8fabbb93595f0244b4a8df8fb68bc7ab8ee03c1ab163884504dce614baa"
+    },
+    {
+      "path": "AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/pebble-carapace-antenna-birth-proportion-v2-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/pebble-carapace-antenna-birth-proportion-v2-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/pebble-carapace-antenna-birth-proportion-v2-cover.png",
+      "baselineGitPath": "AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/pebble-carapace-antenna-birth-proportion-v2-cover.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-idle-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-idle-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-idle-v1-cover.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/portrait.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-walk-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-walk-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-walk-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "2eb6ba292b7a1ae161d461016428419963cb92c3b14c099dd8057c202d14fb28"
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-ranged-attack-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-ranged-attack-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-ranged-attack-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "09cde3d16966263964b01f9ec7af71842d1bc074fdeabc1aff8bc947e22a6311"
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-hurt-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-hurt-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-hurt-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "277e8477302f2169f06484874c272b3929e4630ccf8d2a0962dd5acad3d78670"
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-birth-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-birth-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-birth-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "d331dac6f634e1f980a424dc5fa613d6216a1937f171d8f9a47ef992b75d8e78"
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-death-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-death-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-death-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "fe4657175e8aaaaba133de32f855ff4bd8dd65969d89ae3becfadfeb49640bef"
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-appearance.png",
+      "baselineGitPath": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-appearance.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/Sources/idle-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "2b9e473f51986d68542132cae5e3065da726bf3e88e12a1b6fdf5c4742a1b9b8"
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/Sources/walk-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "f88c3282c4809c36f88397b94ae674fb6a9b598de0f7933b5568e286f9f21a7d"
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/Sources/ranged-attack-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "6e9d35598da572693747e53be7fbea6db4c1434d736592be081e84ca2be429a3"
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/Sources/hurt-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "299a96573f58179233bd2b9b1912e225e2fedfbfad123265fc7cc2e908c47bdd"
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/Sources/birth-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "43099698d39d783d05e41d637e18f66ded96db7c3d167b88756246d2b2b0fbca"
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/Sources/death-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "169e82631a83ddb1c90acdc8c05d15f2e3822c484de16a6c9914b4aee16c6639"
+    },
+    {
+      "path": "AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/Sources/birth-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "12488578ae6013a617a5c68adeaf2ede7b4f1abe47385ea35dfdd9d93f6b6923"
+    },
+    {
+      "path": "AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/pebble-carapace-antenna-birth-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/pebble-carapace-antenna-birth-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/pebble-carapace-antenna-birth-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "1353f903390aef1a0b4aa255989d583865009ec736e6737694cc4f86cbd735d0"
+    },
+    {
+      "path": "AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/Sources/gather-complete-body-atlas.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "44ffbf93f08c0b1e594a6f8ba587dca6abfc1e200b8f16e5b4e7e1cf50b4de14"
+    },
+    {
+      "path": "AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/pebble-gather-birth-restored-sheet.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "77ac0ad504a0e0403c257d27d3697beeef8b33cae2fcbf24fb315b2dea057bae"
+    },
+    {
+      "path": "AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/Sources/gather-previous-runtime-sheet.png",
+      "baselineGitPath": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/birth.png",
+      "cells": 72,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-idle-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-idle-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-idle-v1-cover.png",
+      "baselineGitPath": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/portrait.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-walk-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-walk-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-walk-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "dafaf9e5ea47e1d71d1b5bdeb8200a713614eefe509e8a20a56c3f7c952477a7"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-attack-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-attack-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-attack-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "33c12fee7ad593c05724d0c6494dea28d375f279ba36d731a2a503126ef862ed"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-ranged-attack-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-ranged-attack-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-ranged-attack-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "ce9c6f725d5b2c0060257fc5131f98e583aca88805fe7424b2c4f68a13edbe28"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-hurt-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-hurt-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-hurt-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "15ace80cba387f3041dd3ded06006229b20e0c2996b0860c703f66d69da9c282"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-birth-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-birth-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-birth-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "2a30219e7935cda5a96448f355645a79bcf410a8ce289a0d499a49a60ed9f52d"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-death-v1-sheet.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-death-v1-sheet.png",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-death-v1-cover.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "060381ef51b39e873da5f759d02e38d6e14ce4e047cbca1307738843bd0b84c8"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-appearance.png",
+      "baselineGitPath": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-appearance.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/Sources/idle-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "18eaf9cc42751b74c0f28502d7fea84a45fc11847de410ba5351c0f585995163"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/Sources/walk-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "ac73db17ecda49dbd31866ffda4d08312d0d90398eea19a5da1206818580cec8"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/Sources/attack-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "0148072447c14a02fc5999fd4de709d27613c6e9942304328a8afd475c165e68"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/Sources/ranged-attack-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "2cbef8bf4852e52366ff9a8675e97c9713beaa04f3b39ca0307b54032933ac1b"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/Sources/hurt-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "dff31d3b5cb2e440a0fd8e7269e181ec314bb109c71d3f525c0677b29cc69156"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/Sources/birth-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "3f03584c415a8aa95a78b46bb69aa0bc56ba07e828e0d357be07a9784ce4bd86"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/Sources/death-generated.png",
+      "independentRGBA": false,
+      "scope": "Current SHA equals execution change map; pre-normalization raw/cover is not in Git",
+      "afterSHA256": "4946b330bf716f6713172b193f71ceb9934bd9d4efbd9ac95270df977cb6e2f0"
+    },
+    {
+      "path": "DesignAssets/Tribes/pebble/starter.png",
+      "baselineGitPath": "DesignAssets/Tribes/pebble/starter.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Welcome/pebble-jump.webp",
+      "baselineGitPath": "DesignAssets/Welcome/pebble-jump.webp",
+      "cells": 16,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/current-reference.png",
+      "baselineGitPath": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/current-reference.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-appearance.png",
+      "baselineGitPath": "DesignAssets/Concepts/CombatPairsV1/pebble-blade-piercing.png",
+      "cells": 1,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/SheetGifHandoff-20261106/pebble-antenna-birth-sheet.png",
+      "baselineGitPath": "AnimationCandidates/SheetGifHandoff-20261106/pebble-antenna-birth-sheet.png",
+      "cells": 24,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/GatherWorkV1-20261107/pebble/carry.webp",
+      "baselineGitPath": "AnimationCandidates/GatherWorkV1-20261107/pebble/carry.webp",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/GatherWorkV1-20261107/pebble/harvest.webp",
+      "baselineGitPath": "AnimationCandidates/GatherWorkV1-20261107/pebble/harvest.webp",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "AnimationCandidates/GatherWorkV1-20261107/pebble/throw.webp",
+      "baselineGitPath": "AnimationCandidates/GatherWorkV1-20261107/pebble/throw.webp",
+      "cells": 8,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    },
+    {
+      "path": "DesignAssets/Animations/PebblePackedBirthV1/gather.png",
+      "baselineGitPath": "DesignAssets/Animations/PebblePackedBirthV1/gather.png",
+      "cells": 66,
+      "exactVisibleRGBA": true,
+      "heldBlockSwap": false
+    }
+  ],
+  "previews": [
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-idle-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-idle-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-walk-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-walk-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-attack-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-attack-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-ranged-attack-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-ranged-attack-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-hurt-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-hurt-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-birth-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-birth-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-death-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-death-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-idle-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-idle-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-walk-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-walk-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-attack-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-attack-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-ranged-attack-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-ranged-attack-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-hurt-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-hurt-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion-carapace/birth-preview.webp",
+      "frames": 14,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-death-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-death-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-gather-hurt-fullbody-v1-20261107/pebble-gather-hurt-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-gather-death-fullbody-v1-20261107/pebble-gather-death-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-antenna-idle-v1-20261107/pebble-antenna-idle-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/pebble-antenna-hurt-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "DesignAssets/Tribes/pebble/Animations/Attributes/v1/Previews/strength.webp",
+      "frames": 29,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-gather-walk-stable-v2-20261107/pebble-gather-walk-v2-preview.gif",
+      "frames": 32,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-idle-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-idle-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-walk-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-walk-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-attack-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-attack-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-ranged-attack-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-ranged-attack-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-hurt-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-hurt-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion/birth-preview.webp",
+      "frames": 14,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-death-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-death-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/pebble-antenna-defensive-attack-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/pebble-antenna-defensive-attack-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/pebble-carapace-antenna-birth-proportion-v2-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-carapace-antenna-birth-proportion-v2-20261107/pebble-carapace-antenna-birth-proportion-v2-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-idle-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-idle-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-walk-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-walk-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-ranged-attack-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-ranged-attack-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-hurt-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-hurt-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-birth-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-birth-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-death-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-secretion-antenna-fullbody-v1-20261107/pebble-secretion-antenna-death-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/pebble-carapace-antenna-birth-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-carapace-antenna-fullbody-v1-20261107/pebble-carapace-antenna-birth-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/pebble-gather-birth-restored-preview.webp",
+      "independentRGBA": false,
+      "scope": "Current SHA/frame count/timing/loop equal execution map; original preview not in Git",
+      "afterSHA256": "d1e1df5cf845062a0018f4913f81ed697a64f8d209f118ca896333e521dd0bab"
+    },
+    {
+      "path": "AnimationCandidates/pebble-single-birth-body-restoration-v1-20261107/pebble-gather-birth-restored-preview.gif",
+      "independentRGBA": false,
+      "scope": "Current SHA/frame count/timing/loop equal execution map; original preview not in Git",
+      "afterSHA256": "d8639d649e976200afec7336e176b0e9df433043d339257e267bd54b31dd9962"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-idle-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-idle-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-walk-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-walk-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-attack-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-attack-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-ranged-attack-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-ranged-attack-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-hurt-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-hurt-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-birth-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-birth-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-death-v1-preview.webp",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-antenna-fullbody-v1-20261107/pebble-blade-secretion-antenna-death-v1-preview.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "DesignAssets/Planning/Tribes/pebble/Animations/Units/jump/jump-preview.gif",
+      "frames": 17,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "DesignAssets/Planning/Thumbnails/Tribes/pebble/Animations/Attributes/v1/Previews/strength.webp.webp",
+      "frames": 29,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-antenna-walk-stable-v6/walk-from-sheet.gif",
+      "frames": 8,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    },
+    {
+      "path": "AnimationCandidates/pebble-gather-motion-v1-20261107/pebble-gather-attack-v1-preview.gif",
+      "frames": 17,
+      "timingLoopDimensionsPreserved": true,
+      "exactVisibleRGBA": true,
+      "maxPaletteMeanError": 0
+    }
+  ],
+  "protectedFiles": 67,
+  "protectedSources": [
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/portrait.png",
+      "sha256": "f8c8ed2538bc6440b74fb9e8b0ff29aef63316d92f56a346da4b374896a26a02"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/idle.png",
+      "sha256": "4947cca8813d84347994f08c230c42ea00fc09afdcb99c2ea748e06b2ce659f7"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/walk.png",
+      "sha256": "b199243f6073426bec4fe9476a5341ba8826f8dff75d0362ed1e937ed9207dcd"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/attack.png",
+      "sha256": "e26173563acf1b2816f2681d80fc4f93d60188b0d2954016a9858b7a919b7fd5"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/hurt.png",
+      "sha256": "134c412f1c83891ce27c3eaf193c5deb361fb2eb6682b451f5565eb31251abc8"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/birth.png",
+      "sha256": "d6276c5984162bc72d8d834aa5c0c11de766c58f1e532f93d7d0bfdbb2b3df57"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-antenna/death.png",
+      "sha256": "a58e517704235fec7570879cfa11194d101783c8c1b460bed71a2e9c67809859"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/portrait.png",
+      "sha256": "546aa7f8f22a14ae9b6aeffff62320981ea51c62db8a577378c396c7741052f4"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/idle.png",
+      "sha256": "c5e436b185b41efa75a154d287bf344fa5a610436cc94dc265d3e059ace955e6"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/walk.png",
+      "sha256": "159cd0bd46fc42974e0b333e245a4e74c5fb046f45911f7951fb65590cb6e13d"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/attack.png",
+      "sha256": "f7f0970459320845623248283b19962ace117bbafa68072f8db8f5ef9d35441b"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/hurt.png",
+      "sha256": "5f0c4a28649fdcddc54415d7f24f3aefff2c606d2a0e3a669a85b62fe28cf156"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/birth.png",
+      "sha256": "05865b1c55bb7d14bbfb13d54e1ddd9f6a2b6df33fe7fe29becdcafe6f6d79eb"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/death.png",
+      "sha256": "15de4017d86fa1ce6d911ab743f2ef0ea224ee4cb4e22292c6cc798d46adc3a7"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/portrait.png",
+      "sha256": "838ff61ea3f69a85e19b1563875e567d212a3e4b0d0ac1b1f6b3367c214792b8"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/idle.png",
+      "sha256": "306f56d893aa1e3afd42053075b6b04eed3e9101198985f9188f1f330c78915f"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/walk.png",
+      "sha256": "27ccca80d2ac316a90923bb9320dbc60f1c33ff5affdcaab4b88169e0bf695b9"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/hurt.png",
+      "sha256": "54e5a94f61e0b9be43fb3b1459e922d161e5042c7863d38cd152ba5d21cb94d7"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/death.png",
+      "sha256": "5e62c012791d351ded20f7c16e7276c0427ce5c003213b8202dc1a64b867d788"
+    },
+    {
+      "path": "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace-antenna/attack.png",
+      "sha256": "447098fee6876335ee822e372448d11f6c271a41ee2db662f9510f2942c7417a"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/portrait.png",
+      "sha256": "db09608ea6aa3233f30e075940e91386c44e762a4856351316dd4ce33c4f55ad"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/idle.png",
+      "sha256": "075f154e1dc1ed11847dde7b4f637cdf9a6b4d977586b96584f14cbd4c79c7b6"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/walk.png",
+      "sha256": "ccbc7d1c1f2b4bb8d12ccbb5b235ec4a99d076a2b34b8a4c8fc9628198cbbb79"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/ranged.png",
+      "sha256": "8f921fc8be663e7c5fee75fe4981ca91976646f6f637484cbf9bede221f56c98"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/hurt.png",
+      "sha256": "06d6db69c2e571d46241fc620ccdafe09bf0ded01df78a47059118b6204e3d49"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/birth.png",
+      "sha256": "e6eba50b4020c4ade20bda580168eceb633d3b7446730bc2e20267996c0cb846"
+    },
+    {
+      "path": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-carapace-antenna/death.png",
+      "sha256": "f6357080e027f60cede487abd8540ba83878349123cdcd7bef7cfa238fbe95d5"
+    },
+    {
+      "path": "DesignAssets/Animations/BladeCarapaceV1/pebble/portrait.png",
+      "sha256": "601332abb6e411f990ccd8fa5295ce8fe19a6f14d5fce95947e061251437fe1f"
+    },
+    {
+      "path": "DesignAssets/Animations/BladeCarapaceV1/pebble/idle.png",
+      "sha256": "3f903da1b47f3b0e89def235a8753e14c98ddd515a569206e897962116cddafe"
+    },
+    {
+      "path": "DesignAssets/Animations/BladeCarapaceV1/pebble/walk.png",
+      "sha256": "8903ce22ec9e7a175c782b9f1afb9c87bda548348ca68c7c3b99f6ad8acd3bd3"
+    },
+    {
+      "path": "DesignAssets/Animations/BladeCarapaceV1/pebble/attack.png",
+      "sha256": "3692d40734cc5880bc3936d5da373f12bd44f568d3f650fc54360fe4f2064004"
+    },
+    {
+      "path": "DesignAssets/Animations/BladeCarapaceV1/pebble/hurt.png",
+      "sha256": "d0afafd2ff8731eca9d426610e8afee8ba4325b778e388a8aa71a2829c554924"
+    },
+    {
+      "path": "DesignAssets/Animations/BladeCarapaceV1/pebble/birth.png",
+      "sha256": "77b0bea9f1b8a53e6e7aedb4e668cb462292b971a3aef1cd9bd59d09bad7fe71"
+    },
+    {
+      "path": "DesignAssets/Animations/BladeCarapaceV1/pebble/death.png",
+      "sha256": "ff0b2e1a364cc842da2063678a046560ed2f9308e209e7d98b9732060cb1598f"
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/portrait.png",
+      "sha256": "5cbe76591e5db043e628cc10064b46ff5b2e2c15efb5a728645df22861d0f958"
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/idle.png",
+      "sha256": "74cb83bcd2d2fd8e6a77fcf8949d6177420b6515c9ccf8934c6adeab0428048d"
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/walk.png",
+      "sha256": "b153853342613c59e556d31201b0beadc41f6e05ce9e97fcdb7c42a50d5267ef"
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/ranged.png",
+      "sha256": "6b8aa37f6a870500673cc5c4f1e4174ee3dd8d1cc1572356f07a154a1e2dcaea"
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/hurt.png",
+      "sha256": "e22a875312382a3d1ec542d26ef3df44833b292cd298d481637afab37665d995"
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/birth.png",
+      "sha256": "18cea969547d111272f46304fb0bed69d1be6b3c8c701af85bcabd7da808cb6e"
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionCombosV1/pebble/secretion-carapace/death.png",
+      "sha256": "5140d5fc98b58e4285bd2c37fc33b102642ba8b54608774985372c1afb42768b"
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/idle.webp",
+      "sha256": "4fcfe0fd19205ab1859d1145a312fead63a5dcc0c7c47bef08506db6535da7e2"
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/walk.webp",
+      "sha256": "d3fb1fdb9b85119c9e426814caa68d65ebbc6dcef0a7a23e885b94de5e471f80"
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/attack.webp",
+      "sha256": "c9cf4c3faa5967dd7294a286ef6eaa7e2294ca063b21da656630fcdc0355471e"
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/hurt.webp",
+      "sha256": "241ccc9e297da063c227803029aea82e11ee8c1521d2307750d86249d6b2df9c"
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/blade/birth.webp",
+      "sha256": "8d72b28adcb200c321f5303e4b2ab7c00a5f4b034024ecac8af6f5ed7e8a4b1e"
+    },
+    {
+      "path": "DesignAssets/Animations/CombatDeathV1/pebble/blade/death.webp",
+      "sha256": "99a8882e61a3583638e6c0327aaabca116a101eb93c6b17e9d309a63bfb53621"
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/idle.webp",
+      "sha256": "d9e9ad58c28d7a842335315b718ace4824a8a40c028ed17e1fb5d178149649f8"
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/walk.webp",
+      "sha256": "0d58863ec4185ec3e9899e89f03f3f69980cd73c9a95aebfb89f41c532928667"
+    },
+    {
+      "path": "DesignAssets/Animations/DefensiveAttackV1/pebble/carapace/attack.png",
+      "sha256": "307eeb6b7fbc1a0cf19fa8c4cf384da47ae89925664c7bc4964d9ef3e0e74bf0"
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/hurt.webp",
+      "sha256": "d10b0fd31ce0c0b69baee07ceef96c05788148c0fadf2c735829a26ba537c715"
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/birth.webp",
+      "sha256": "c812f2cc66f8374884ff506e9621fe396cd9b4255c64c9952b21d6f0e9950976"
+    },
+    {
+      "path": "DesignAssets/Animations/CombatDeathV1/pebble/carapace/death.webp",
+      "sha256": "001ae71c79f3426bd9fb9df0034aec80746e393b954e6322e254e399daa26126"
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV7/pebble/Sheets/carapace/attack.webp",
+      "sha256": "0af9bc135d45a694098601dca4cb03d198adbc2738429eb3d9dd17c1454a4af4"
+    },
+    {
+      "path": "DesignAssets/Animations/UnitRangedV1/pebble/Source/neutral.png",
+      "sha256": "d688e4e363ac109847d9832551f0e0abb6f5ff810e5cd6c0bc16ddbe7b5960d8"
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionIdleV1/pebble/idle.webp",
+      "sha256": "efbf6b83f31479ada534dcd4f3e595d28382b12eb15d18dbf84199f2fd04e268"
+    },
+    {
+      "path": "DesignAssets/Animations/UnitRangedV1/pebble/shoot.webp",
+      "sha256": "c401bca78452c95c08b582517e1fc29444c10afa9c83e302d71736f738e3cede"
+    },
+    {
+      "path": "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-secretion.webp",
+      "sha256": "9a79a6294dc523f341e1afed18bec2b49a7ecfbeb90b499695b206ae2e3cb634"
+    },
+    {
+      "path": "DesignAssets/Animations/UnitRangedV1/pebble/walk.webp",
+      "sha256": "bceec6e78824a416bf8f31177468d7486ecbd3d7a84bdbcbd40d096a4f237b26"
+    },
+    {
+      "path": "DesignAssets/Animations/UnitRangedV1/pebble/birth.png",
+      "sha256": "664e75e6d6a946dbbc09b4cd9516cbcdc45e42df6d9c565a8a255ab1c4864d59"
+    },
+    {
+      "path": "DesignAssets/Animations/UnitRangedV1/pebble/death.png",
+      "sha256": "4cdf00f309490960ab54a91e44d14f05bf49bde6d282ca7ea1d12b7722836e9c"
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/pebble/blade/birth.png",
+      "sha256": "efc3d1a95b5b79982a30689fa357333e822ecf172a11a017a6b2d480c86095de"
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/pebble-blade-body.png",
+      "sha256": "e6a8f8d4b8b7d6298aebfd917c058fd97de9c8c5bba7b5e094424a95abc6b1c0"
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/pebble/secretion/birth.png",
+      "sha256": "d06a22904c8733f6710508ee1e1a37d4027e900cfdd9cb7131f45ea304c55527"
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/pebble-secretion-body.png",
+      "sha256": "cdce4ce21ba34b98e19195acc130b2753eb98100664ee046c55c7d23046de582"
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/pebble/carapace/birth.png",
+      "sha256": "ee5d3153e3796f693113a920674df40eaa01131ce61820ecc093b634e26e0036"
+    },
+    {
+      "path": "DesignAssets/Animations/BirthResolutionV1/pebble-carapace-body.png",
+      "sha256": "dacd3e3e9b3db54af03e350e59b96c50941b2f0cea12c6e3b70d1992aff930eb"
+    }
+  ]
+}

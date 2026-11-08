@@ -273,7 +273,8 @@
     "dimensions": [
       512,
       512
-    ]
+    ],
+    "sourceFacing": "left"
   },
   {
     "name": "spring-antenna-death",
@@ -392,7 +393,7 @@
   {
     "name": "pebble-antenna-birth",
     "source": "AnimationCandidates/SheetGifHandoff-20261106/pebble-antenna-birth-sheet.png",
-    "sourceSha256": "69fe1857cbc4100485086455bc0012a8d5d27af46b39449ba3c1ede5caa876c8",
+    "sourceSha256": "5b719e97acfd7d4806efa71e261308b30c14fe847431c2299ea87c2e677c589e",
     "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/birth.webp",
     "frameSize": 128,
     "columns": 8,
@@ -420,7 +421,7 @@
     "pivotX": 64,
     "pivotY": 112,
     "durationMs": 2620,
-    "sha256": "4b7d26de187184ec914f4af7d385e2048a4d37b0d2e7cc914cebb6566c273a07",
+    "sha256": "e054c5f909118eeec422b79d28796ce8a69261360de2049b71d2758ba64ded8a",
     "grid": [
       8,
       3
@@ -432,7 +433,8 @@
     "dimensions": [
       1024,
       384
-    ]
+    ],
+    "sourceFacing": "left"
   },
   {
     "name": "pebble-antenna-death",
@@ -456,7 +458,7 @@
     "pivotX": 64,
     "pivotY": 112,
     "durationMs": 1440,
-    "sha256": "ddb7d563584ad9f13daa7851cc1b1054219a17b13efe07e3ef91be7ec5569e47",
+    "sha256": "da6f190576caae63ac5c5f76f2f4fb80b2a5278903b8b1002f5933945e4e0b12",
     "grid": [
       4,
       2
@@ -468,7 +470,8 @@
     "dimensions": [
       512,
       256
-    ]
+    ],
+    "sourceFacing": "left"
   },
   {
     "name": "spring-feet-walk-v13",
@@ -545,7 +548,7 @@
   {
     "name": "pebble-antenna-walk-stable-v6",
     "source": "AnimationCandidates/pebble-antenna-walk-stable-v6/walk-sheet.png",
-    "sourceSha256": "fde8061b9f85dd5cb5f5e979a57f52cce21dba3f28d623056f7f29ebda60d31b",
+    "sourceSha256": "4bbb061c5c6661db63b062c3b41f1b59440a4e84b9305034231eaa5c4cac8cf0",
     "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
     "frameSize": 128,
     "columns": 4,
@@ -564,7 +567,7 @@
     "pivotX": 64,
     "pivotY": 112,
     "durationMs": 800,
-    "sha256": "7b270f83cbc550e5b5aa65fab3a40c9b7ea4a48d43dfe0d97c0f571640a79252",
+    "sha256": "9416d85980aa0ddd4bf67ad073029e563f69ed982f2bc88097a9502443d00d0e",
     "grid": [
       4,
       2
@@ -576,6 +579,7 @@
     "dimensions": [
       512,
       256
-    ]
+    ],
+    "sourceFacing": "left"
   }
 ]

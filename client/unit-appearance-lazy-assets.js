@@ -169,44 +169,44 @@ globalThis.SpawnerUnitAppearanceFiles = Object.freeze({
   },
   "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/pebble/00/Source/neutral.png.js",
-    "bytes": 55461,
-    "hash": "9ecf44815d59ac26108dcf3b06f63d0df7637958aba28a09bc61efef5c77adb6",
+    "bytes": 46804,
+    "hash": "f4e8c4b5b1b333af82630dbbdbfa6016ad3ed0336577c6ab113167df091771a6",
     "mime": "image/png"
   },
   "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": {
     "script": "client/unit-appearance-files/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp.js",
-    "bytes": 1678332,
-    "hash": "f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37",
+    "bytes": 5535704,
+    "hash": "ffcac1997f0596b02155b61dbe1ff401c00c6af65d82d46d9aac0674e07cb3e5",
     "mime": "image/webp"
   },
   "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp": {
     "script": "client/unit-appearance-files/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp.js",
-    "bytes": 1668944,
-    "hash": "ca40b3960462707a75183261a324b50a92e9b73735c0e5f9fa4b8e0c8ade4243",
+    "bytes": 2650956,
+    "hash": "84f464f1d0ea415905397c8c5e0a470639ef1360a2af13c20861d39f81c6e417",
     "mime": "image/webp"
   },
   "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp": {
     "script": "client/unit-appearance-files/Tribes/pebble/Animations/Units/jump/jump.webp.js",
-    "bytes": 1179678,
-    "hash": "482ba8aad3ec26743c3a7258568b9489672597cea5bcc47c9a800a2ae6be870d",
+    "bytes": 2043256,
+    "hash": "aed4631ba4626792490bf88818472c5c1ce13ca141d06ff5955882f1713a7f24",
     "mime": "image/webp"
   },
   "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp": {
     "script": "client/unit-appearance-files/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp.js",
-    "bytes": 942646,
-    "hash": "385db115850e1a9a927ff0d44888bb54fb806b682bab67cb49c23f38daf91188",
+    "bytes": 2185456,
+    "hash": "c93c897be002e69f2edbfe5262b027cb0408df7b57da9e4891b328324fda3561",
     "mime": "image/webp"
   },
   "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp": {
     "script": "client/unit-appearance-files/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp.js",
-    "bytes": 929404,
-    "hash": "2f879a2f5386ff14ce5819759647479108657e2e9295b33c1a058440d182b3a0",
+    "bytes": 1975302,
+    "hash": "125bf004d7df257cd8acc5e53a8f8005acd676c4338eb029cbdfdd8b20100f10",
     "mime": "image/webp"
   },
   "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": {
     "script": "client/unit-appearance-files/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png.js",
-    "bytes": 1003379,
-    "hash": "ec1dffe7baec15492c0f2e188a930a84bd1eabfb2744079cbc87d14fcf01afb4",
+    "bytes": 763687,
+    "hash": "3d6cc0176b00a253f029306f4d2d31633d1dc7dc33f02ec0af8b257350721359",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/pebble/10/Source/neutral.png": {

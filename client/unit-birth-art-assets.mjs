@@ -2636,10 +2636,10 @@ export const UNIT_BIRTH_ART = Object.freeze({
     }
   },
   "pebble/gather": {
-    "pivotX": 450.3168316831683,
+    "pivotX": 61.68316831683171,
     "pivotY": 449.8217821782178,
     "scene": {
-      "outletX": 232.5,
+      "outletX": 279.5,
       "outletY": 258,
       "travelStartMs": 120,
       "travelEndMs": 1480
@@ -2719,7 +2719,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
     "durationMs": 2620,
     "loop": false,
     "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/birth.png",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "referenceLength": 64,
     "sceneLayers": {
       "version": 2,
@@ -2734,7 +2734,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                191.66000000000003,
+                237.39999999999998,
                 190.14,
                 82.94,
                 87.10000000000001
@@ -2743,7 +2743,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                191.66000000000003,
+                237.39999999999998,
                 190.14,
                 82.94,
                 87.10000000000001
@@ -2752,7 +2752,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                191.66000000000003,
+                237.39999999999998,
                 190.14,
                 82.94,
                 87.10000000000001
@@ -2761,7 +2761,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                191.66000000000003,
+                237.39999999999998,
                 190.14,
                 82.94,
                 87.10000000000001
@@ -2770,7 +2770,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                192.2121066558111,
+                236.8478933441889,
                 190.62849989822917,
                 82.94,
                 87.10000000000001
@@ -2779,7 +2779,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                193.82425809077955,
+                235.23574190922045,
                 192.05491960105837,
                 82.94,
                 87.10000000000001
@@ -2788,7 +2788,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 1,
               "destination": [
-                196.43020150620805,
+                232.62979849379195,
                 194.36063912070017,
                 82.94,
                 87.10000000000001
@@ -2797,7 +2797,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 1,
               "destination": [
-                199.96368410339915,
+                229.09631589660086,
                 197.487038469367,
                 82.94,
                 87.10000000000001
@@ -2806,7 +2806,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 1,
               "destination": [
-                204.3584530836556,
+                224.7015469163444,
                 201.37549765927133,
                 82.94,
                 87.10000000000001
@@ -2815,7 +2815,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 2,
               "destination": [
-                209.54825564828008,
+                219.51174435171993,
                 205.9673967026257,
                 82.94,
                 87.10000000000001
@@ -2824,7 +2824,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 3,
               "destination": [
-                215.46683899857527,
+                213.59316100142473,
                 211.20411561164258,
                 82.94,
                 87.10000000000001
@@ -2833,7 +2833,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 3,
               "destination": [
-                222.04795033584372,
+                207.01204966415628,
                 217.0270343985345,
                 82.94,
                 87.10000000000001
@@ -2842,7 +2842,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 4,
               "destination": [
-                229.2253368613882,
+                199.8346631386118,
                 223.37753307551395,
                 82.94,
                 87.10000000000001
@@ -2851,7 +2851,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 5,
               "destination": [
-                236.93274577651135,
+                192.12725422348865,
                 230.1969916547934,
                 82.94,
                 87.10000000000001
@@ -2860,7 +2860,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 6,
               "destination": [
-                245.10392428251583,
+                183.95607571748417,
                 237.42679014858538,
                 82.94,
                 87.10000000000001
@@ -2869,7 +2869,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 7,
               "destination": [
-                253.6726195807043,
+                175.3873804192957,
                 245.00830856910238,
                 82.94,
                 87.10000000000001
@@ -2878,7 +2878,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 8,
               "destination": [
-                262.57257887237944,
+                166.48742112762056,
                 252.8829269285569,
                 82.94,
                 87.10000000000001
@@ -2887,7 +2887,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 9,
               "destination": [
-                271.7375493588439,
+                157.32245064115608,
                 260.9920252391614,
                 82.94,
                 87.10000000000001
@@ -2896,7 +2896,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 10,
               "destination": [
-                281.10127824140045,
+                147.95872175859955,
                 269.27698351312847,
                 82.94,
                 87.10000000000001
@@ -2905,7 +2905,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 11,
               "destination": [
-                290.59751272135156,
+                138.46248727864844,
                 277.67918176267045,
                 82.94,
                 87.10000000000001
@@ -2914,7 +2914,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                300.1600000000001,
+                128.89999999999992,
                 286.14000000000004,
                 82.94,
                 87.10000000000001
@@ -2923,7 +2923,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 1,
               "destination": [
-                309.72248727864854,
+                119.33751272135146,
                 294.6008182373295,
                 82.94,
                 87.10000000000001
@@ -2932,7 +2932,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 2,
               "destination": [
-                319.21872175859966,
+                109.84127824140035,
                 303.00301648687156,
                 82.94,
                 87.10000000000001
@@ -2941,7 +2941,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 3,
               "destination": [
-                328.5824506411562,
+                100.47754935884382,
                 311.2879747608386,
                 82.94,
                 87.10000000000001
@@ -2950,7 +2950,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 4,
               "destination": [
-                337.74742112762067,
+                91.31257887237933,
                 319.3970730714431,
                 82.94,
                 87.10000000000001
@@ -2959,7 +2959,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 5,
               "destination": [
-                346.6473804192958,
+                82.41261958070419,
                 327.27169143089765,
                 82.94,
                 87.10000000000001
@@ -2968,7 +2968,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 6,
               "destination": [
-                355.2160757174843,
+                73.84392428251573,
                 334.85320985141465,
                 82.94,
                 87.10000000000001
@@ -2977,7 +2977,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 7,
               "destination": [
-                363.38725422348875,
+                65.67274577651125,
                 342.08300834520657,
                 82.94,
                 87.10000000000001
@@ -2986,7 +2986,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 8,
               "destination": [
-                371.0946631386119,
+                57.965336861388096,
                 348.9024669244861,
                 82.94,
                 87.10000000000001
@@ -2995,7 +2995,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 9,
               "destination": [
-                378.2720496641564,
+                50.78795033584362,
                 355.2529656014655,
                 82.94,
                 87.10000000000001
@@ -3004,7 +3004,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 9,
               "destination": [
-                384.85316100142484,
+                44.206838998575165,
                 361.07588438835745,
                 82.94,
                 87.10000000000001
@@ -3013,7 +3013,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 10,
               "destination": [
-                390.77174435172,
+                38.28825564828003,
                 366.3126032973743,
                 82.94,
                 87.10000000000001
@@ -3022,7 +3022,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 11,
               "destination": [
-                395.96154691634445,
+                33.098453083655556,
                 370.9045023407287,
                 82.94,
                 87.10000000000001
@@ -3031,7 +3031,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 11,
               "destination": [
-                400.3563158966009,
+                28.703684103399098,
                 374.792961530633,
                 82.94,
                 87.10000000000001
@@ -3040,7 +3040,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 11,
               "destination": [
-                403.889798493792,
+                25.170201506208002,
                 377.91936087929986,
                 82.94,
                 87.10000000000001
@@ -3049,7 +3049,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                406.49574190922044,
+                22.56425809077956,
                 380.22508039894166,
                 82.94,
                 87.10000000000001
@@ -3058,7 +3058,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                408.10789334418894,
+                20.952106655811065,
                 381.65150010177075,
                 82.94,
                 87.10000000000001
@@ -3067,7 +3067,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3076,7 +3076,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 12,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3085,7 +3085,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 12,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3094,7 +3094,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 13,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3103,7 +3103,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 13,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3112,7 +3112,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 13,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3121,7 +3121,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 13,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3130,7 +3130,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 14,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3139,7 +3139,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 14,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3148,7 +3148,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 14,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3157,7 +3157,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3166,7 +3166,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3175,7 +3175,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3184,7 +3184,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3193,7 +3193,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3202,7 +3202,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3211,7 +3211,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3220,7 +3220,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3229,7 +3229,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3238,7 +3238,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3247,7 +3247,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3256,7 +3256,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3265,7 +3265,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3274,7 +3274,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3283,7 +3283,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3292,7 +3292,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3301,7 +3301,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3310,7 +3310,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3319,7 +3319,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -3363,7 +3363,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
     "durationMs": 1790,
     "loop": false,
     "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/birth.png",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "referenceLength": 275
   },
   "bean/blade": {
@@ -10637,7 +10637,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
     "durationMs": 1790,
     "loop": false,
     "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/birth.png",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "referenceLength": 65,
     "sceneLayers": {
       "version": 2,
@@ -17039,7 +17039,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
     "durationMs": 2620,
     "loop": false,
     "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/birth.png",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "referenceLength": 241
   },
   "spring/antenna": {
@@ -17067,7 +17067,7 @@ export const UNIT_BIRTH_ART = Object.freeze({
     "durationMs": 1790,
     "loop": false,
     "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/birth.png",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "referenceLength": 105
   },
   "bean/base": {

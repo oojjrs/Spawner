@@ -4,7 +4,7 @@
   "status": "completed-under-user-delegated-production",
   "authorizationMessageId": "Sentinel_cbea50ff285881919d451c1038e1f54a",
   "sourceAppearance": "DesignAssets/Concepts/CombatPairsV1/pebble-blade-piercing.png",
-  "sourceAppearanceSHA256": "6abd039a800de74a32447c32e6ab7723b77fa2354bcee1672caf2503f872240c",
+  "sourceAppearanceSHA256": "69883f6ad80aa7249956e905be20b062fbbe8e648f85beae6a3fdcbe28713a46",
   "actions": {
     "idle": {
       "durationsMs": [
@@ -25,12 +25,13 @@
       "sheet": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-idle-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-idle-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-idle-v1-preview.gif",
-      "sheetSHA256": "0d0a2858d9c2dec35a203923c0443e16c84738ca4ac4b7b7402caa9352d34836",
-      "previewSHA256": "7249402df9778184303102f4e81c5e7ccbb2e37d18996e40a57f07f825b75052",
-      "gifSHA256": "e9828cd0b27896079a9e8eab3bf5fc320f17bb6b79d55b1373dcff58257811fd",
+      "sheetSHA256": "66b07d802d84d20fe1b4ecd4b23fd7f0233e73ab3c9d80e7f2f7c73b7076012a",
+      "previewSHA256": "1aff945fb58cc666710e6c3f37d918a56ca90742075881bbf2129bba21c07551",
+      "gifSHA256": "27f3d474e1dbff761384d9a4cb3e404c65c965fab896d54d06a79c8de29df8fc",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     },
     "walk": {
       "durationsMs": [
@@ -51,12 +52,13 @@
       "sheet": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-walk-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-walk-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-walk-v1-preview.gif",
-      "sheetSHA256": "fa21081b59ef5809e191babc21ec239f7d4d670f06f118b9bfc5a54eae4c19b7",
-      "previewSHA256": "c4242d538282778261523ea46dc94222ac1e7675175ff3d913119264912c91aa",
-      "gifSHA256": "046bd5230ed8a8b416a63269daa69d3bba372766235fa31eaa98565b1f2f1234",
+      "sheetSHA256": "89af8ef7fce157b224e80b2983df7b28a4adc2e650058d5a38bf53ada972cbfc",
+      "previewSHA256": "0c40fd2db784c5620f9ecefb33bee4fd8080462f5fc8487fff345a1f9db2256e",
+      "gifSHA256": "694e8b9bdcd0aca538ba521756aab6a4f03686c13f0692c05825f9dad3e7113b",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     },
     "attack": {
       "durationsMs": [
@@ -77,15 +79,16 @@
       "sheet": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-attack-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-attack-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-attack-v1-preview.gif",
-      "sheetSHA256": "e4f21509d6f258b346c48ba5c0c267529250b8c033071dcfe6d6b07c69497914",
-      "previewSHA256": "4a6fba5eeda233a68a0b5262164143b8294482813fe92fc9daaf2a546be79c87",
-      "gifSHA256": "7414438450b23b21633396fedf093eba2280fd157915bb10dc1e8f106eed2a9d",
+      "sheetSHA256": "6102c97a2a8f8706f126f2d37c191228968e43ca82b46054343c97938b239c83",
+      "previewSHA256": "52461aba09fd8a136dc51dec8e5398e48260847315815e4df307b7036cb6c7dc",
+      "gifSHA256": "da89a8e0390dd7e4221549165f6f8eefb9cecb74be74a9c1aedf21e25ee91b81",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
       "hitTimeMs": 450,
       "hitFrameIndex": 4,
-      "hitTimingSource": "Integration visual review: strongest forward blade/crystal contact pose."
+      "hitTimingSource": "Integration visual review: strongest forward blade/crystal contact pose.",
+      "sourceFacing": "left"
     },
     "ranged-attack": {
       "durationsMs": [
@@ -106,16 +109,17 @@
       "sheet": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-ranged-attack-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-ranged-attack-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-ranged-attack-v1-preview.gif",
-      "sheetSHA256": "c58a441b5559a2d1795e161c862c69c53561f644a6c9121783b109b15659e2c2",
-      "previewSHA256": "9e405a99d9be7fee46db9552863c98acbf6a82deb6c39bbacf283d1cefb38fda",
-      "gifSHA256": "6d2b99b083be9210870833d281f355b9efec45a0f3cfac382aec0a17b0d1f095",
+      "sheetSHA256": "e1ae590d3b6eac994ae906518d798c6f900e73bf6257a5d29cd08ef2d4b039dc",
+      "previewSHA256": "a54b45382f7fd9bf1e48cae92523acf821cf976d9dcfca4ff808a02a6ec355f6",
+      "gifSHA256": "2fe8067bb60a14a0f12897085cdd99470e2e449017648c7b05eb464639dfdd81",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
       "launchAtMs": 470,
       "launchFrameIndex": 3,
       "rangedBody": true,
-      "launchTimingSource": "Integration visual review: charge frames 1–2, release recoil frame 3; 180+140+150 ms."
+      "launchTimingSource": "Integration visual review: charge frames 1\u20132, release recoil frame 3; 180+140+150 ms.",
+      "sourceFacing": "left"
     },
     "hurt": {
       "durationsMs": [
@@ -136,12 +140,13 @@
       "sheet": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-hurt-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-hurt-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-hurt-v1-preview.gif",
-      "sheetSHA256": "f05cecd0c84b029f8a3f20152288bc808fb77ddba95dd2ef641e14d850350b77",
-      "previewSHA256": "4cf11214cd4ea7e9ee73b9e44037988a0f095d1869404407ba6a8110d2b1b1a9",
-      "gifSHA256": "ea4559ed6e9f50ae41648cde1d49df1dda8323928178387fdc494d3eb77a5ab8",
+      "sheetSHA256": "690c5e3037b1c917053c3beb0f9f6adf3eb667c4c993abb9bae1f9510f897651",
+      "previewSHA256": "865af6925bbb58b8f04e7e8c17d544d4742aa702cf6f7811014bde9bf4128bb9",
+      "gifSHA256": "d146195fc0a3fc7d25c1707bcd1de819ea92e42c3e8b7106dbc9fa98004184cf",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     },
     "birth": {
       "durationsMs": [
@@ -167,14 +172,14 @@
       "frameCount": 14,
       "sheet": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion/birth.png",
       "preview": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion/birth-preview.webp",
-      "sheetSHA256": "03ffaecef1f4f3f05823bc0c7e0fa3e22e390011335e0188866e4251dd41bb45",
-      "previewSHA256": "9eaa64d205e41a084d536c8fc122e5cfd4cfa032bec2dc4c9e4cfeea5a8c641c",
+      "sheetSHA256": "def26b8fa439c5b9d622a0e9184e116d34cb98e9a719fb06b74544364cad0d8b",
+      "previewSHA256": "8a96ce9c6ad40512965dd5da32f22ab2c2b0465143c500e424031d069de40340",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": true,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameHeight": 512,
-      "pivotX": 377,
+      "pivotX": 135,
       "pivotY": 444,
       "referenceLength": 160,
       "viewSize": 160,
@@ -218,12 +223,13 @@
         "sheet": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-sheet.png",
         "preview": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-preview.webp",
         "gif": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-birth-v1-preview.gif",
-        "sheetSHA256": "cc304f8947a9ff2045c28850d9f390f1b095a3fe8d887a8097281d585a4b5118",
-        "previewSHA256": "174d5de2a36f8c2596746496b7f0a5a8ad1e1a134492f5b2b50c9fba7b6631ad",
-        "gifSHA256": "3dd1618f58ed876369c400e11043f507fa8d6fadd4f842b2f0aeeff303d5e427",
+        "sheetSHA256": "48ebe8a87b3c6f6ec742b1e6d70b2600fc52ce4c67f94b025fec55db9e104090",
+        "previewSHA256": "00656284e97280f67e367d01ff0b651ece10f18adc78dd66416f3ffc7a301122",
+        "gifSHA256": "34a2e97248628d95f4fd8d93c5341529f40357261cf72098fe676bd7111cc821",
         "previewLoop": true,
         "previewLoopCount": 0,
-        "fullScene": true
+        "fullScene": true,
+        "sourceFacing": "left"
       }
     },
     "death": {
@@ -245,12 +251,13 @@
       "sheet": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-death-v1-sheet.png",
       "preview": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-death-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-blade-secretion-fullbody-v1-20261107/pebble-blade-secretion-death-v1-preview.gif",
-      "sheetSHA256": "e3351598de256f1124a3b04ec1199947c166a88af43d6ec880918e69d19ff4ab",
-      "previewSHA256": "3d3e537a66e48d439f7a273478fdf64373bd01a4d94d6a8a41c77f20bf74e45b",
-      "gifSHA256": "9d27783f467f98a4a353c966e478f47502dc10356d4cec2a3267682c33529b14",
+      "sheetSHA256": "94de2423a6eb13c1026630d942d0f884f9aead9d8ac32e52c74a8edc780a8230",
+      "previewSHA256": "ebbca38278337c788c1d54f6f9ee2199fbce6d707e41fe85e910c8007530ed36",
+      "gifSHA256": "c1b7b8106898af0a96e7944ca9387bd043e7b010a7f296d754ad1cc966469f85",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     }
   },
   "rangedBodyOnly": true,

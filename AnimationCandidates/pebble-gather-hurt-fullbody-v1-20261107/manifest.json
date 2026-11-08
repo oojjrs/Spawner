@@ -6,9 +6,9 @@
   "approvedAt": "2026-11-07T02:12:04Z",
   "approvalScope": "User-approved gathering-form animation. Publish the submitted sheet and GIF unchanged and link the matching planning-table cell only.",
   "sheet": "pebble-gather-hurt-v1-sheet.png",
-  "sheetSHA256": "f5d91668885bd9b6bd78d69866cb1da629d02b07d0aa5c981dda807273f8aee5",
+  "sheetSHA256": "ba850ed9ef269378b22983a518eb4bad1a00bcd8f87a56004fad036a51bb77c6",
   "preview": "pebble-gather-hurt-v1-preview.gif",
-  "previewSHA256": "515a261d5a3839fa8ee2b232e6a955c7e1b9aea1bedb65dea1c568d70817db16",
+  "previewSHA256": "661e94f508f73f07c8fa708ba817d249594f82431872cf765f4c6abce90851e6",
   "frameSize": [
     512,
     512
@@ -43,10 +43,11 @@
   "integration": "Planning review only. Game runtime and deployment are unchanged.",
   "hurtHoldMs": 500,
   "recoveryMs": 380,
-  "impactFrom": "right",
-  "reactionTowards": "left",
+  "impactFrom": "left",
+  "reactionTowards": "right",
   "pivot": [
     256,
     400
-  ]
+  ],
+  "sourceFacing": "left"
 }

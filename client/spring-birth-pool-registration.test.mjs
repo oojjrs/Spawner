@@ -17,7 +17,8 @@ for (const [key, candidate] of Object.entries(changes)) {
   test(`${key}: approved partial scene, persistent sources and original fallback`, () => {
     const definition = UNIT_ACTION_ART[key], clip = definition.actions.birth;
     const { sceneLayers, ...registration } = clip;
-    assert.deepEqual(registration, candidate.unchangedRegistration);
+    assert.equal(candidate.unchangedRegistration.sourceFacing, 'right', 'historical registration remains intact');
+    assert.deepEqual(registration, { ...candidate.unchangedRegistration, sourceFacing: 'left' });
     assert.equal(digest(clip.image), candidate.sourceSHA256);
     const manifest = JSON.parse(fs.readFileSync(new URL(definition.sourceManifest, root)));
     const original = manifest.actions.birth;
@@ -60,7 +61,7 @@ for (const [key, candidate] of Object.entries(changes)) {
       assert.ok(art.draw(c, actor, ms / 1000, 190, 250, 200, mirror));
       if (ms >= 1790) { assert.equal(pose.action, 'idle'); assert.ok(c.calls.every(call => !layers.some(l => l.image === call.image))); continue; }
       assert.equal(pose.action, 'birth'); assert.equal(pose.frame, Math.min(15, Math.floor(ms / 100)));
-      assert.deepEqual(c.transforms, [[190, 250], [mirror ? -1 : 1, 1]]);
+      assert.deepEqual(c.transforms, [[190, 250], [mirror ? 1 : -1, 1]]);
       assert.equal(c.calls.length, pose.frame < 9 ? 1 : 2);
       for (const call of c.calls) {
         const layer = layers.find(l => l.image === call.image), rect = layer.samples[pose.frame].destination;

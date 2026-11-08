@@ -1,7 +1,7 @@
 {
   "version": 1,
   "registry": "client/unit-action-art-assets.mjs",
-  "registrySha256": "764d3dded0c429c90467c45dcc486091f293ebc7a0478503100f01be443e5e94",
+  "registrySha256": "d0557d500a6fc683f7ae2aacbac900429d181c9d8636218de0f31f7ef05484ef",
   "planning": "DesignAssets/sections/unit-appearance.js",
   "actionCount": 86,
   "copiedAssetCount": 34,
@@ -18,7 +18,7 @@
   "references": [
     {
       "slot": "bean/gather/reference",
-      "sha256": "db70c0fb59ce47122d079f5e00fa3f37fdd6e374ef43e6d453d202facc461a47",
+      "sha256": "a17dda751b15b40a691929346d422fff500d69ba458a763d907c343c0a9f4e2b",
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/idle.png",
         "sourceFacing": "left",
@@ -64,7 +64,7 @@
     },
     {
       "slot": "spore/secretion/reference",
-      "sha256": "6687b1d1b3ab3367de9f60ade147a1be7807f5edbeca0d3aca9a436a0865a93e",
+      "sha256": "0f2045a81bc3a73db0c316afa71e17f2e6107ce6dda9ae117ca4f8aacc5247ec",
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/idle.png",
         "sourceFacing": "left",
@@ -87,7 +87,7 @@
     },
     {
       "slot": "spore/antenna/reference",
-      "sha256": "6d26fe3b6fb9228faed066c7f3b4675e47ff2920558dc500c5d27d332823a10a",
+      "sha256": "c61bebb1ebb3b680cf78a7bab273f1bc7f2f3ddc4ea104a3bec829881e4aadcb",
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/idle.png",
         "sourceFacing": "left",
@@ -110,10 +110,10 @@
     },
     {
       "slot": "pebble/antenna/reference",
-      "sha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "sha256": "1c77aa597f859e86a4ac8314ce1b481eb77750b8eb531aa533874ac48b56fcc8",
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -846,9 +846,9 @@
     {
       "slot": "pebble/gather/hurt",
       "source": "AnimationCandidates/pebble-gather-hurt-fullbody-v1-20261107/pebble-gather-hurt-v1-sheet.png",
-      "sourceSha256": "f5d91668885bd9b6bd78d69866cb1da629d02b07d0aa5c981dda807273f8aee5",
+      "sourceSha256": "ba850ed9ef269378b22983a518eb4bad1a00bcd8f87a56004fad036a51bb77c6",
       "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/hurt.png",
-      "sha256": "f5d91668885bd9b6bd78d69866cb1da629d02b07d0aa5c981dda807273f8aee5",
+      "sha256": "ba850ed9ef269378b22983a518eb4bad1a00bcd8f87a56004fad036a51bb77c6",
       "provenance": {
         "kind": "source-byte-copy",
         "sourceMetadata": [
@@ -864,7 +864,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -898,7 +898,7 @@
         "referenceFrame": 0,
         "alphaThreshold": 16,
         "bounds": [
-          83,
+          82,
           174,
           347,
           226
@@ -921,9 +921,9 @@
     {
       "slot": "pebble/gather/death",
       "source": "AnimationCandidates/pebble-gather-death-fullbody-v1-20261107/pebble-gather-death-v1-sheet.png",
-      "sourceSha256": "6a843aeb318c78afb05459971f64f57818610626a0a4ec7b51e6e8647775db4f",
+      "sourceSha256": "03a1266e79d91fbf73f11437a56dd0e51bc0514ba6c603b2098ca7953bc492a9",
       "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/death.png",
-      "sha256": "6a843aeb318c78afb05459971f64f57818610626a0a4ec7b51e6e8647775db4f",
+      "sha256": "03a1266e79d91fbf73f11437a56dd0e51bc0514ba6c603b2098ca7953bc492a9",
       "provenance": {
         "kind": "source-byte-copy",
         "sourceMetadata": [
@@ -939,7 +939,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -953,7 +953,7 @@
           120,
           900
         ],
-        "pivotX": 258.5,
+        "pivotX": 253.5,
         "pivotY": 402,
         "viewSize": 512,
         "referenceLength": 357,
@@ -973,13 +973,13 @@
         "referenceFrame": 0,
         "alphaThreshold": 16,
         "bounds": [
-          80,
+          75,
           163,
           357,
           239
         ],
         "pivot": [
-          258.5,
+          253.5,
           402
         ],
         "referenceLength": 357
@@ -2514,9 +2514,9 @@
     {
       "slot": "pebble/antenna/idle",
       "source": "AnimationCandidates/pebble-antenna-idle-v1-20261107/pebble-antenna-idle-v1-sheet.png",
-      "sourceSha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "sourceSha256": "1c77aa597f859e86a4ac8314ce1b481eb77750b8eb531aa533874ac48b56fcc8",
       "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-      "sha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "sha256": "1c77aa597f859e86a4ac8314ce1b481eb77750b8eb531aa533874ac48b56fcc8",
       "provenance": {
         "kind": "source-byte-copy",
         "sourceMetadata": [
@@ -2532,7 +2532,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -2558,13 +2558,13 @@
         "referenceFrame": 0,
         "alphaThreshold": 16,
         "bounds": [
-          79,
+          1615,
           135,
           354,
           301
         ],
         "pivot": [
-          256,
+          1792,
           436
         ],
         "referenceLength": 354
@@ -2579,9 +2579,9 @@
     {
       "slot": "pebble/antenna/hurt",
       "source": "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/pebble-antenna-hurt-sheet.png",
-      "sourceSha256": "e6ee61e4a6e8a914436df3232cadf58f8edcba9c0b539e7585475ea48c39434a",
+      "sourceSha256": "3ac6a4e1b2037cde2171e6281235e83d76eedbe48bae7c534dea8d9bb5fe5dcd",
       "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/hurt.png",
-      "sha256": "e6ee61e4a6e8a914436df3232cadf58f8edcba9c0b539e7585475ea48c39434a",
+      "sha256": "3ac6a4e1b2037cde2171e6281235e83d76eedbe48bae7c534dea8d9bb5fe5dcd",
       "provenance": {
         "kind": "source-byte-copy",
         "sourceMetadata": [
@@ -2597,7 +2597,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 448,
         "frameHeight": 448,
         "columns": 4,
@@ -5094,9 +5094,9 @@
     {
       "slot": "pebble/antenna/harvest",
       "source": "AnimationCandidates/pebble-antenna-idle-v1-20261107/pebble-antenna-idle-v1-sheet.png",
-      "sourceSha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "sourceSha256": "1c77aa597f859e86a4ac8314ce1b481eb77750b8eb531aa533874ac48b56fcc8",
       "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-      "sha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "sha256": "1c77aa597f859e86a4ac8314ce1b481eb77750b8eb531aa533874ac48b56fcc8",
       "provenance": {
         "kind": "existing-action-alias",
         "sourceSlot": "pebble/antenna/reference",
@@ -5108,7 +5108,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -5132,9 +5132,9 @@
     {
       "slot": "pebble/antenna/carry",
       "source": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
-      "sourceSha256": "7b270f83cbc550e5b5aa65fab3a40c9b7ea4a48d43dfe0d97c0f571640a79252",
+      "sourceSha256": "9416d85980aa0ddd4bf67ad073029e563f69ed982f2bc88097a9502443d00d0e",
       "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
-      "sha256": "7b270f83cbc550e5b5aa65fab3a40c9b7ea4a48d43dfe0d97c0f571640a79252",
+      "sha256": "9416d85980aa0ddd4bf67ad073029e563f69ed982f2bc88097a9502443d00d0e",
       "provenance": {
         "kind": "existing-action-alias",
         "sourceSlot": "pebble/antenna/walk",
@@ -5146,7 +5146,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -5174,9 +5174,9 @@
     {
       "slot": "pebble/antenna/throw",
       "source": "AnimationCandidates/pebble-antenna-idle-v1-20261107/pebble-antenna-idle-v1-sheet.png",
-      "sourceSha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "sourceSha256": "1c77aa597f859e86a4ac8314ce1b481eb77750b8eb531aa533874ac48b56fcc8",
       "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-      "sha256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+      "sha256": "1c77aa597f859e86a4ac8314ce1b481eb77750b8eb531aa533874ac48b56fcc8",
       "provenance": {
         "kind": "existing-action-alias",
         "sourceSlot": "pebble/antenna/reference",
@@ -5188,7 +5188,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -5474,9 +5474,9 @@
     {
       "slot": "pebble/gather/idle",
       "source": "DesignAssets/Tribes/pebble/Animations/Attributes/v1/Previews/strength.webp",
-      "sourceSha256": "e4a73355acab0671d2a8f7a7335a2577ccd39a541092d5545a8b48a89563c157",
+      "sourceSha256": "1bc2ed7802c8a7b5b6d801e8c3755dda254acb0d94fccbc3d763a4e5fbd5c688",
       "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/idle.png",
-      "sha256": "d84f940262ada63a1207a6a0c74dfe9e048d0435ec2c3ad8596a61802c8c60ba",
+      "sha256": "196e56df5ed4bf7c7739125ccb7a4baa6f527d32fb52f59ae87ab4317b8cba30",
       "provenance": {
         "kind": "lossless-frame-pack",
         "sourceMetadata": [],
@@ -5485,7 +5485,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 144,
         "frameHeight": 144,
         "columns": 8,
@@ -5532,7 +5532,7 @@
         "referenceFrame": 0,
         "alphaThreshold": 16,
         "bounds": [
-          21,
+          22,
           66,
           101,
           63
@@ -5553,9 +5553,9 @@
     {
       "slot": "pebble/gather/walk",
       "source": "AnimationCandidates/pebble-gather-walk-stable-v2-20261107/pebble-gather-walk-v2-sheet.png",
-      "sourceSha256": "77351958cbd24b9eeb54e39766b88f73d44aab240bc1f17affcc06ad68af9ec4",
+      "sourceSha256": "e7a42d2f7718ce3c85313168b640fb800392f8f2dceba690a0769b7bcf23b056",
       "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/walk.png",
-      "sha256": "77351958cbd24b9eeb54e39766b88f73d44aab240bc1f17affcc06ad68af9ec4",
+      "sha256": "e7a42d2f7718ce3c85313168b640fb800392f8f2dceba690a0769b7bcf23b056",
       "provenance": {
         "kind": "source-byte-copy",
         "sourceMetadata": [
@@ -5566,7 +5566,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -5616,7 +5616,7 @@
         "referenceFrame": 0,
         "alphaThreshold": 16,
         "bounds": [
-          81,
+          80,
           157,
           351,
           243
@@ -5638,9 +5638,9 @@
     {
       "slot": "pebble/gather/attack",
       "source": "AnimationCandidates/pebble-gather-motion-v1-20261107/pebble-gather-attack-v1-sheet.png",
-      "sourceSha256": "402804789844d116ffb535915d7797fccbb62c34d5e8e5c12296fdf5c55d6972",
+      "sourceSha256": "4fcab909047e551db6c6b840e349171e1a5cd28c2bac3bf22d182ffef60a554f",
       "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/attack.png",
-      "sha256": "402804789844d116ffb535915d7797fccbb62c34d5e8e5c12296fdf5c55d6972",
+      "sha256": "4fcab909047e551db6c6b840e349171e1a5cd28c2bac3bf22d182ffef60a554f",
       "provenance": {
         "kind": "source-byte-copy",
         "sourceMetadata": [],
@@ -5649,7 +5649,7 @@
       },
       "clip": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -5672,7 +5672,7 @@
           100,
           60
         ],
-        "pivotX": 256.5,
+        "pivotX": 255.5,
         "pivotY": 400,
         "viewSize": 512,
         "referenceLength": 351,
@@ -5684,13 +5684,13 @@
         "referenceFrame": 0,
         "alphaThreshold": 16,
         "bounds": [
-          81,
+          80,
           157,
           351,
           243
         ],
         "pivot": [
-          256.5,
+          255.5,
           400
         ],
         "referenceLength": 351

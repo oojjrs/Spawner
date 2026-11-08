@@ -28,6 +28,24 @@ const near=(actual,expected,label)=>assert.ok(Math.abs(actual-expected)<1e-8,`${
 // Keep those exact upstream contracts while checking only source-facing transforms.
 const upstreamGatherWalkDurations=[...Array(23).fill(40),20,20,40,25,25,20,20,10,10,10];
 const upstreamRemovedRanged=new Set(['bean/blade','spore/blade','pebble/blade','spring/blade']);
+const remainingNativeChanges=load('remaining-facing-pebble-image-changes.json').changes;
+const remainingFullForms=new Set([...load('remaining-facing-pebble2-plan.json').targets,...load('remaining-facing-pebble-extra-plan.json').fullFamilyTargets]);
+const remainingBirthLabels=new Map(load('remaining-facing-spring-birth-fix-plan.json').mainRuntimeRegistrations.map(r=>[r.key,r.image]));
+const springBirthImages=new Set(load('remaining-facing-spring-birth-fix-plan.json').mainRuntimeRegistrations.map(r=>r.image));
+function exactRemainingClip(original){
+ const out=structuredClone(original),change=remainingNativeChanges[original.image];
+ if(change){
+  const w=original.frameSize??original.frameWidth;assert.ok(w,original.image+' fixed native cell width');out.image=change.afterPath;out.sourceFacing='left';
+  if(original.pivotX!==undefined)out.pivotX=w-original.pivotX;
+  if(original.outletX!==undefined)out.outletX=w-original.outletX;
+  if(original.scene?.outletX!==undefined)out.scene.outletX=w-original.scene.outletX;
+  if(original.sceneLayers)for(const layer of out.sceneLayers.layers){const layerChange=remainingNativeChanges[layer.image];if(layerChange)layer.image=layerChange.afterPath;for(const sample of layer.samples)if(sample)sample.destination[0]=w-sample.destination[0]-sample.destination[2];}
+  if(change.framePermutation?.some((value,i)=>value!==i)&&!original.times)out.frames=(original.frames||Array.from({length:original.frameCount},(_,i)=>i)).map(i=>change.framePermutation[i]);
+ }
+ if(springBirthImages.has(original.image))out.sourceFacing='left';
+ return out;
+}
+
 const imagePairs=new Map();
 function mapImages(a,b,label){
  if(!a||typeof a!=='object')return;
@@ -75,10 +93,14 @@ test('제외 6형태와 비선택 종족의 registry는 변하지 않는다',()=
   const expected=structuredClone(before.UNIT_ACTION_ART[key]);
   if(upstreamRemovedRanged.has(key)){assert.ok(expected.actions.ranged,key+' upstream removal baseline');delete expected.actions.ranged;assert.equal(Object.hasOwn(UNIT_ACTION_ART[key].actions,'ranged'),false,key+' unsupported blade ranged stays removed');}
   for(const row of springFollowup.filter(r=>r.key===key)){for(const clip of Object.values(expected.actions))if(clip.image===row.source)clip.sourceFacing='left';assert.equal(createHash('sha256').update(readFileSync(new URL('../'+row.source,import.meta.url))).digest('hex'),row.candidateSHA256,key+'/'+row.action+' approved pixels');}
-  assert.deepEqual(UNIT_ACTION_ART[key],expected,key+' only exact followup13 key/source aliases may change');
+  if(key==='spring/gather'){for(const action of ['harvest','carry','throw'])expected.actions[action].sourceFacing='left';assert.equal(createHash('sha256').update(readFileSync(new URL('../'+expected.actions.throw.image,import.meta.url))).digest('hex'),'5dedec26a3c2f6ac5f31db25abbc0ad675bd3cf499ce9751940897168918eeaf',key+' approved left throw pixels');}
+  if(remainingFullForms.has(key)){expected.reference=exactRemainingClip(expected.reference);for(const action of Object.keys(expected.actions))expected.actions[action]=exactRemainingClip(expected.actions[action]);}
+  else if(key==='pebble/carapace-antenna')expected.actions.birth=exactRemainingClip(expected.actions.birth);
+  if(remainingBirthLabels.has(key)&&expected.actions.birth)expected.actions.birth=exactRemainingClip(expected.actions.birth);
+  assert.deepEqual(UNIT_ACTION_ART[key],expected,key+' only exact approved native transforms and upstream contracts may change');
  }
- for(const key of Object.keys(before.UNIT_BIRTH_ART))if(!plan.candidateForms.includes(key))assert.deepEqual(UNIT_BIRTH_ART[key],before.UNIT_BIRTH_ART[key],key);
- for(const t of ['pebble','spring'])assert.deepEqual(clean(UNIT_RANGED_FORMS[t]),before.UNIT_RANGED_FORMS[t],t+' ranged');
+ for(const key of Object.keys(before.UNIT_BIRTH_ART))if(!plan.candidateForms.includes(key)){const original=before.UNIT_BIRTH_ART[key],expected=remainingFullForms.has(key)||remainingBirthLabels.has(key)?exactRemainingClip(original):original;assert.deepEqual(UNIT_BIRTH_ART[key],expected,key);}
+ for(const t of ['pebble','spring']){const expected=structuredClone(before.UNIT_RANGED_FORMS[t]);if(t==='pebble')for(const a of ['birth','death'])expected.lifecycle[a].sourceFacing='right';else expected.lifecycle.birth.sourceFacing='left';assert.deepEqual(clean(UNIT_RANGED_FORMS[t]),expected,t+' ranged keeps independent lifecycle source convention');}
 });
 test('공유 환경은 새 content-address 경로, bean-seed-b는 후보만 copy-on-write한다',()=>{
  const old='DesignAssets/Animations/BirthResolutionV1/bean-seed-b.png',replacement=imagePairs.get(old);assert.ok(replacement&&replacement!==old);
@@ -93,7 +115,7 @@ const pixelCheck=String.raw`
 import sys,json,subprocess,hashlib,io
 from PIL import Image,ImageOps
 import numpy as np
-x=json.load(sys.stdin);plan={r['image']:r for r in x['files']};counts={'files':0,'cells':0,'heldFiles':0,'protectedFiles':0}
+x=json.load(sys.stdin);plan={r['image']:r for r in x['files']};soil={r['image']:r for r in x['soilEdits']};counts={'files':0,'cells':0,'heldFiles':0,'protectedFiles':0}
 for old,new in x['pairs']:
  r=plan.get(old)
  if old in x['unchangedProjectiles']:
@@ -104,6 +126,7 @@ for old,new in x['pairs']:
  assert r is not None, 'Missing baseline grid '+old
  raw=subprocess.check_output(['git','show',x['commit']+':'+old]);assert hashlib.sha256(raw).hexdigest()==r['sha256'], 'Git/plan baseline mismatch '+old
  src=Image.open(io.BytesIO(raw));dst=Image.open(new);assert src.size==dst.size,(old,'dimensions')
+ if old in soil: assert hashlib.sha256(open(new,'rb').read()).hexdigest()==soil[old]['sha256'],(old,'approved fertile-soil prop bytes')
  g=next((v for v in r['gridVariants'] if all(v.get(k) for k in ['frameWidth','frameHeight','columns'])), {'frameWidth':src.width,'frameHeight':src.height,'columns':1})
  w,h,cols=int(g['frameWidth']),int(g['frameHeight']),int(g['columns']);assert src.width%w==0 and src.height%h==0,old
  n=x['held'].get(old);cap=(src.width//w)*(src.height//h)
@@ -111,7 +134,12 @@ for old,new in x['pairs']:
   source=(i+n if i<n else i-n) if n and i<2*n else i
   sx,sy=(source%cols)*w,(source//cols)*h;dx,dy=(i%cols)*w,(i//cols)*h
   a=np.array(ImageOps.mirror(src.crop((sx,sy,sx+w,sy+h))).convert('RGBA'));b=np.array(dst.crop((dx,dy,dx+w,dy+h)).convert('RGBA'));a[a[:,:,3]==0,:3]=0;b[b[:,:,3]==0,:3]=0
-  assert np.array_equal(a,b),(old,new,'cell',i,'decoded visible RGBA differs from independent cell mirror/block swap',int(np.count_nonzero(a!=b)))
+  if old in soil:
+   # Only the user-requested soil props changed after the approved mirror.
+   for left,top,bw,bh in soil[old]['boxes']:
+    x0,y0=max(0,left-dx),max(0,top-dy);x1,y1=min(w,left+bw-dx),min(h,top+bh-dy)
+    if x1>x0 and y1>y0: a[y0:y1,x0:x1]=b[y0:y1,x0:x1]
+  assert np.array_equal(a,b),(old,new,'cell',i,'decoded visible RGBA differs outside approved soil props from independent cell mirror/block swap',int(np.count_nonzero(a!=b)))
   counts['cells']+=1
  src.close();dst.close();del raw,a,b
  counts['files']+=1;counts['heldFiles']+=bool(n)
@@ -120,11 +148,12 @@ for p in x['protected']:
 print(json.dumps(counts))
 `;
 const baselineCommit='958b999dc5109cb4827f2013916840c22c7adf07';
+const soilEdits=JSON.parse(readFileSync(new URL('../tools/fertile-soil-cargo-review.json',import.meta.url))).files;
 test('실제 RGBA 픽셀은 셀별 반전이며 held hurt는 두 블록을 교환하고 제외6형태 픽셀은 보존한다',()=>{
  const heldMap=Object.fromEntries(heldKeys.map(k=>{const s=held(before,k);return[s.image,s.times.length];}));
  const protectedPaths=new Set();function collect(x){if(!x||typeof x!=='object')return;if(x.image)protectedPaths.add(x.image);if(x.portrait)protectedPaths.add(x.portrait);Object.values(x).forEach(collect);}
  for(const k of plan.preservedForms){collect(before.UNIT_ACTION_ART[k]);collect(before.UNIT_BIRTH_ART[k]);}
- const result=execFileSync('python',['-c',pixelCheck],{cwd:root,input:JSON.stringify({commit:baselineCommit,files:plan.files,pairs:[...imagePairs],held:heldMap,protected:[...protectedPaths],unchangedProjectiles:[...unchangedProjectiles]}),maxBuffer:1024*1024,timeout:600000}).toString();const counts=JSON.parse(result);assert.equal(counts.heldFiles,5);assert.equal(counts.files,imagePairs.size-unchangedProjectiles.size);console.log('bean/spore independent pixel coverage',counts);
+ const result=execFileSync('python',['-c',pixelCheck],{cwd:root,input:JSON.stringify({commit:baselineCommit,files:plan.files,soilEdits,pairs:[...imagePairs],held:heldMap,protected:[...protectedPaths],unchangedProjectiles:[...unchangedProjectiles]}),maxBuffer:1024*1024,timeout:600000}).toString();const counts=JSON.parse(result);assert.equal(counts.heldFiles,5);assert.equal(counts.files,imagePairs.size-unchangedProjectiles.size);console.log('bean/spore independent pixel coverage',counts);
 });
 function agentFor(key){const[tribe,form]=key.split('/');return{tribe,attributes:UNIT_COMBINATION_FORMS.find(f=>f.key===form)?.attributes||(form==='base'?{}:form==='gather'?{strength:1}:{[form]:1}),health:10,bornAt:0};}
 function stateAgent(key,action,clip){const a=agentFor(key),seconds=clip.durationsMs.reduce((x,y)=>x+y,0)/1000;

@@ -24,12 +24,12 @@ export const UNIT_ANIMATIONS = Object.freeze({
     "death": {"sourceFacing": "left", "image": "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256.0, "pivotY": 448, durationsMs: [120,100,140,120,140,100,120,600] },
   },
   "pebble": {
-    "idle": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(64).fill(100) },
-    "walk": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp", "frameSize": 512, "columns": 5, "loop": true, cyclesPerCell: 2.5, "pivotX": 256, "pivotY": 448, durationsMs: Array(20).fill(40) },
-    "jump": {"image": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: Array(16).fill(70) },
-    "attack": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60] },
-    "hurt": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20] },
-    "death": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [120,100,140,120,140,100,120,600] },
+    "idle": {"sourceFacing": "left", "image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256.0, "pivotY": 448, durationsMs: Array(64).fill(100) },
+    "walk": {"sourceFacing": "left", "image": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp", "frameSize": 512, "columns": 5, "loop": true, cyclesPerCell: 2.5, "pivotX": 256.0, "pivotY": 448, durationsMs: Array(20).fill(40) },
+    "jump": {"sourceFacing": "left", "image": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256.0, "pivotY": 448, durationsMs: Array(16).fill(70) },
+    "attack": {"sourceFacing": "left", "image": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256.0, "pivotY": 448, durationsMs: [60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60] },
+    "hurt": {"sourceFacing": "left", "image": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256.0, "pivotY": 448, durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20] },
+    "death": {"sourceFacing": "left", "image": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256.0, "pivotY": 448, durationsMs: [120,100,140,120,140,100,120,600] },
   },
   "spring": {
     "idle": {"image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp", "sourceFacing": "left", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(64).fill(100) },
@@ -249,7 +249,7 @@ export function creatureWalkPose(agent, time) {
   }
   const elapsed = time - agent.moveStartedAt;
   if (!animation || agent.health <= 0 || agent.mode !== "walk" ||
-    !(agent.moveDuration > 0) || !Number.isFinite(elapsed) || elapsed < 0 || elapsed >= agent.moveDuration) return null;
+    !(agent.moveDuration > 0) || !Number.isFinite(elapsed) || elapsed < 0 || time >= agent.moveStartedAt + agent.moveDuration) return null;
   if (agent.species === "spring-keeper") return springKeeperFlightPose(agent, time);
   if (agent.species === "bubble-toad") {
     const hop=toadHopMotion(elapsed / agent.moveDuration);

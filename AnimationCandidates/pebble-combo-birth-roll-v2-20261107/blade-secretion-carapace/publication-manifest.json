@@ -26,14 +26,14 @@
       "frameCount": 14,
       "sheet": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion-carapace/birth.png",
       "preview": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion-carapace/birth-preview.webp",
-      "sheetSHA256": "3b227a36f80f84f6a25e721e0258ee60927e14e010423e5cffeceadc174cf65a",
-      "previewSHA256": "3b7815912b944a434d39d1f3ed324f19919edb732eab5424b6ba73bc2ee85447",
+      "sheetSHA256": "45a14854a4c098f7a1179632d3f7afe796884dd3f496e1e89a15dd4fcf4c601d",
+      "previewSHA256": "5176d4a87467fa57e04580829c19486297111abef29e21f70a1ccad0db1a332c",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": true,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameHeight": 512,
-      "pivotX": 382,
+      "pivotX": 130,
       "pivotY": 433,
       "referenceLength": 176,
       "viewSize": 176,
@@ -77,17 +77,18 @@
         "sheet": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-sheet.png",
         "preview": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-preview.webp",
         "gif": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-preview.gif",
-        "sheetSHA256": "34c7456540441caa3bf8dfc51594a4975ee470febc910b0fa29c8a446f74dfa7",
-        "previewSHA256": "e0f13b6d0ad947dd12bb221520b75f9490b171ed84d29563d70a2b422d0f0878",
-        "gifSHA256": "3ecdf9aca6f8947df0d180c06bf379527a364f0279447fe79407f963a026e0cf",
+        "sheetSHA256": "1cd860440ab878a4ea7e5d02a7a138a53f8350abcd0e6f4a4520d626e878b8b6",
+        "previewSHA256": "6408d13a0f060b46fc9d30dcf22780a3461fafcb06372e488a68861c3af714d9",
+        "gifSHA256": "b2de8c3208dcfac7b91839ea646a4e1d346c48183eae7be488448347df81897b",
         "previewLoop": true,
         "previewLoopCount": 0,
-        "fullScene": true
+        "fullScene": true,
+        "sourceFacing": "left"
       }
     }
   },
   "originalSourceImage": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/birth.png",
-  "originalSourceSHA256": "34c7456540441caa3bf8dfc51594a4975ee470febc910b0fa29c8a446f74dfa7",
+  "originalSourceSHA256": "1cd860440ab878a4ea7e5d02a7a138a53f8350abcd0e6f4a4520d626e878b8b6",
   "preservedOriginalFrames": [
     {
       "candidateFrame": 0,

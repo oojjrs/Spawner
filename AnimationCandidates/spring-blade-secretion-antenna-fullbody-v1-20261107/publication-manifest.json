@@ -412,7 +412,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         600,
         100,

@@ -1,0 +1,116 @@
+{
+  "status": "applied",
+  "approval": "Approved spring gather left-throw artwork",
+  "approvedCandidateSHA256": "5dedec26a3c2f6ac5f31db25abbc0ad675bd3cf499ce9751940897168918eeaf",
+  "sourceFacingAfter": "left",
+  "geometryBefore": {
+    "frameSize": 256,
+    "frameHeight": 256,
+    "columns": 4,
+    "frameCount": 8,
+    "durationsMs": [
+      180,
+      140,
+      120,
+      100,
+      80,
+      120,
+      140,
+      320
+    ],
+    "pivotX": 128,
+    "pivotY": 231,
+    "referenceLength": 192,
+    "releaseAtMs": 540,
+    "loop": false,
+    "embeddedCargo": true
+  },
+  "geometryUnchanged": true,
+  "changes": {
+    "DesignAssets/Animations/GatherWorkV1/spring/throw.webp": {
+      "kind": "nativeApprovedWholeCelRepair",
+      "beforeSha256": "42024e218e313b8f3808f6ee2ce6bd63236d8ab3dca264c6c9ad5df14c82635c",
+      "afterSha256": "5dedec26a3c2f6ac5f31db25abbc0ad675bd3cf499ce9751940897168918eeaf",
+      "approvedCandidate": "tools/spring-native-facing-20261108/spring-throw-left-candidate.webp"
+    },
+    "AnimationCandidates/GatherWorkV1-20261107/spring/throw.webp": {
+      "kind": "exactSourceAlias",
+      "beforeSha256": "42024e218e313b8f3808f6ee2ce6bd63236d8ab3dca264c6c9ad5df14c82635c",
+      "afterSha256": "5dedec26a3c2f6ac5f31db25abbc0ad675bd3cf499ce9751940897168918eeaf",
+      "approvedCandidate": "tools/spring-native-facing-20261108/spring-throw-left-candidate.webp"
+    },
+    "AnimationCandidates/GatherWorkV1-20261107/spring/gather-carry-throw.gif": {
+      "kind": "approvedThrowPreviewFramesOnly",
+      "beforeSha256": "9431254a1f9c93498154d31976e2eda54bc396a86edcc9d7e1228ee0b5d6b697",
+      "afterSha256": "e1fd45286e25643dc51e44ea63a357cddcb7ccaa4d695279b6289647dcd467f2",
+      "first16CompressedFrameRecordsExact": true,
+      "first16DecodedVisibleRGBAExact": true,
+      "last8ApprovedGIFVisibleRGBAExact": true,
+      "durationsMsBefore": [
+        180,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        180,
+        180,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        180,
+        180,
+        140,
+        120,
+        100,
+        80,
+        120,
+        140,
+        320
+      ],
+      "durationsMsAfter": [
+        180,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        180,
+        180,
+        140,
+        140,
+        140,
+        140,
+        140,
+        140,
+        180,
+        180,
+        140,
+        120,
+        100,
+        80,
+        120,
+        140,
+        320
+      ],
+      "dimensions": [
+        256,
+        256
+      ],
+      "loop": 0
+    }
+  },
+  "protectedUnchanged": {
+    "DesignAssets/Animations/GatherWorkV1/spring/harvest.webp": "a653b12381dae9c2bab1993ce1157d585dfdc4c1de80ab245a982128f625ad7e",
+    "DesignAssets/Animations/GatherWorkV1/spring/carry.webp": "8ec052df7efdf0bbbecf00b060fb5ef6dca4e7276a365c97ee009ebf5afc39c7",
+    "AnimationCandidates/GatherWorkV1-20261107/spring/harvest.webp": "a653b12381dae9c2bab1993ce1157d585dfdc4c1de80ab245a982128f625ad7e",
+    "AnimationCandidates/GatherWorkV1-20261107/spring/carry.webp": "8ec052df7efdf0bbbecf00b060fb5ef6dca4e7276a365c97ee009ebf5afc39c7",
+    "AnimationCandidates/GatherWorkV1-20261107/spring/source.png": "1dca5933294c00318b59b35029ad7fbb1c4246c15088cd241f2e1230487513b3"
+  },
+  "noRuntimeTransform": true
+}

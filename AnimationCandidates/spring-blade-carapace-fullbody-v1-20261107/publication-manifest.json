@@ -311,7 +311,8 @@
       "webpDecodedFrames": 16,
       "timelineMaxGIFRGBRMSE": 1.213496,
       "maximumOuterEdgeAlpha": 0,
-      "fullScene": true
+      "fullScene": true,
+      "sourceFacing": "left"
     },
     "death": {
       "sheet": "spring-blade-carapace-death-v1-sheet.png",

@@ -7285,10 +7285,10 @@ const UNIT_SPRITE_REGISTRATION = Object.freeze({
   "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":553,"pivotX":276.5,"pivotY":482.6181818181818,"viewSize":553,"registrationScale":1.0784313725490196,"sourceFacing":"left"}),
   "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":553,"pivotX":276.5,"pivotY":482.6181818181818,"viewSize":553,"registrationScale":1.0784313725490196,"sourceFacing":"left"}),
   "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":553,"pivotX":276.5,"pivotY":482.6181818181818,"viewSize":553,"registrationScale":1.0784313725490196,"sourceFacing":"left"}),
-  "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": Object.freeze({"frameSize":512,"pivotX":256,"pivotY":448,"viewSize":512,"registrationScale":1}),
-  "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":512,"pivotX":256,"pivotY":448,"viewSize":512,"registrationScale":1}),
-  "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":517,"pivotX":258.5,"pivotY":453.5943396226415,"viewSize":517,"registrationScale":1.0095238095238095}),
-  "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":517,"pivotX":258.5,"pivotY":453.5943396226415,"viewSize":517,"registrationScale":1.0095238095238095}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp": Object.freeze({"frameSize":512,"pivotX":256,"pivotY":448,"viewSize":512,"registrationScale":1,"sourceFacing":"left"}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":512,"pivotX":256,"pivotY":448,"viewSize":512,"registrationScale":1,"sourceFacing":"left"}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":517,"pivotX":258.5,"pivotY":453.5943396226415,"viewSize":517,"registrationScale":1.0095238095238095,"sourceFacing":"left"}),
+  "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": Object.freeze({"frameSize":517,"pivotX":258.5,"pivotY":453.5943396226415,"viewSize":517,"registrationScale":1.0095238095238095,"sourceFacing":"left"}),
   "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp": Object.freeze({"frameSize":512,"pivotX":256,"pivotY":448,"viewSize":512,"registrationScale":1}),
   "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp": Object.freeze({"frameSize":516,"pivotX":258,"pivotY":453.07317073170736,"viewSize":516,"registrationScale":1.0061349693251533}),
   "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp": Object.freeze({"frameSize":516,"pivotX":258,"pivotY":453.07317073170736,"viewSize":516,"registrationScale":1.0061349693251533}),
@@ -8954,6 +8954,190 @@ function createSimulationTrial(settings) {
 
 return { SIMULATION_STATS, DEFAULT_SIMULATION_RULES, deriveSimulationStats, createSimulationTrial };
 })();
+modules["client/creature-presentation.mjs"] = (() => {
+const { unitFrameMirror } = modules["client/unit-size.mjs"];
+function ready(image) {
+  return image?.complete !== false && (image?.naturalWidth || image?.width) > 0;
+}
+
+function sheetDescriptor(model, agent, animation, frame, sprite, sizePerCell, mirrorX, action) {
+  const source = { owner: sprite, size: animation.frameSize, index: frame,
+    x: frame % animation.columns * animation.frameSize,
+    y: Math.floor(frame / animation.columns) * animation.frameSize };
+  return { species: agent.species, action, animation, frame, sprite, source,
+    selection: source, sizePerCell, mirrorX,
+    groundOffset: agent.species === "talon-owl" || agent.species === "spiny-back-beetle" ? .86 : 1,
+    left: -animation.pivotX / animation.frameSize, top: -animation.pivotY / animation.frameSize,
+    whole: false, smoothing: false, hop: null };
+}
+
+function beetlePresentationFrame(model, index, facing, action, resources) {
+  const attack = action === "attack";
+  const animation = model.imageFrameGeometry(attack ? model.BEETLE_ATTACK_SPRITE : model.BEETLE_SPRITE, index);
+  const sheet = attack ? resources.beetleAttackSheet : resources.beetleSheet;
+  const prepared = attack ? null : resources.beetleFrames?.get(index);
+  const sprite = prepared || sheet;
+  const mirrorX = unitFrameMirror(animation.sourceFacing || animation.facing || "left", facing);
+  const descriptor = sheetDescriptor(model, { species: "spiny-back-beetle" }, animation, index, sprite,
+    animation.scale * (animation.registrationScale || 1), mirrorX, action);
+  descriptor.smoothing = true;
+  descriptor.source = { owner: sheet, size: animation.frameSize, index,
+    x: prepared ? 0 : index % animation.columns * animation.frameSize,
+    y: prepared ? 0 : Math.floor(index / animation.columns) * animation.frameSize };
+  descriptor.selection = descriptor.source;
+  if (ready(sprite)) return descriptor;
+  if (!resources.beetleSprite?.complete || !resources.beetleSprite.naturalWidth) return null;
+  descriptor.sprite = resources.beetleSprite;
+  descriptor.source = null;
+  descriptor.selection = null;
+  descriptor.left = -model.BEETLE_SPRITE.pivotX / model.BEETLE_SPRITE.frameSize;
+  descriptor.mirrorX = unitFrameMirror(model.BEETLE_SPRITE.sourceFacing || model.BEETLE_SPRITE.facing || "left", facing);
+  descriptor.whole = true;
+  return descriptor;
+}
+
+// Phase follows distance traveled by the root, measured in the same cell units
+// as the displayed body. This changes only the visible gait, never movement.
+function creatureStrideFrame(model, agent, time, animation, displayedSizePerCell) {
+  const stride = animation?.strideFrameRatio * displayedSizePerCell;
+  if (!(stride > 0) || !Number.isFinite(stride) || agent.combat?.position?.moving ||
+      !(agent.moveDuration > 0)) return null;
+  const elapsed = time - agent.moveStartedAt;
+  if (!Number.isFinite(elapsed) || elapsed < 0 || time >= agent.moveStartedAt + agent.moveDuration) return null;
+  const distance = Math.hypot(agent.x - agent.renderFromX, agent.y - agent.renderFromY);
+  if (!(distance > 0) || !Number.isFinite(distance)) return null;
+  const steps = Math.max(0, (agent.stepCount || 1) - 1) + elapsed / agent.moveDuration;
+  return model.unitAnimationFrame(animation, steps * distance / stride * animation.durationMs);
+}
+
+// Combat snapshots can pause, retreat or advance by unequal distances. Keep a
+// render-local phase tied to their projected root rather than a wall-time loop.
+function createCreatureStrideClock() {
+  const phases = new Map();
+  return {
+    frame(model, agent, time, animation, stride, point, scope = "") {
+      if (!(animation?.strideFrameRatio > 0) || !(stride > 0) || !Number.isFinite(stride) ||
+          !Number.isFinite(point?.x) || !Number.isFinite(point?.y) || !Number.isFinite(time)) return null;
+      const key = scope + ":" + (agent.id ?? agent.species), segment = agent.combat?.position?.moveStartedAt;
+      const previous = phases.get(key);
+      let phase = previous?.phase || 0;
+      if (!previous || previous.segment !== segment || time < previous.time) phase = 0;
+      else if (time > previous.time) {
+        const dx = point.x - previous.x, dy = point.y - previous.y;
+        const direction = Math.abs(dx) > 1e-9 ? Math.sign(dx * (agent.facing || 1)) : 1;
+        phase += Math.hypot(dx, dy) / stride * direction;
+      }
+      phase = (phase % 1 + 1) % 1;
+      phases.set(key, { ...point, time, segment, phase });
+      if (phases.size > 512) phases.delete(phases.keys().next().value);
+      return model.unitAnimationFrame(animation, phase * animation.durationMs);
+    },
+    clear() { phases.clear(); }
+  };
+}
+
+function creaturePresentationPose(model, agent, time, reducedMotion, resources, action) {
+  if (!action) {
+    if (agent.species === "spiny-back-beetle") return creaturePresentationPose(model, agent, time, reducedMotion, resources, "beetle");
+    for (const candidate of ["hurt", "attack", "walk", agent.species === "talon-owl" ? "owl-idle" : "idle"]) {
+      const descriptor = creaturePresentationPose(model, agent, time, reducedMotion, resources, candidate);
+      if (descriptor) return descriptor;
+    }
+    return null;
+  }
+  if (action === "beetle") {
+    const pose = model.beetleAnimationPose(agent, time);
+    const index = reducedMotion && (pose.action === "idle" || pose.action === "walk") ? model.BEETLE_ANIMATIONS.idle.frames[0] : pose.frame;
+    const facing = pose.action === "attack" ? agent.attack?.directionX || agent.facing || 1 : agent.facing;
+    return beetlePresentationFrame(model, index, facing, pose.action, resources);
+  }
+  if (action === "owl-idle") {
+    const elapsed = (time - (agent.animationStartedAt ?? 0)) * 1000;
+    const index = reducedMotion || agent.mode !== "idle" ? 0 : model.talonOwlIdleFrame(elapsed);
+    const animation = model.imageFrameGeometry(model.TALON_OWL_IDLE, index);
+    const sprite = resources.owlFrames?.get(index);
+    if (!sprite) return null;
+    const descriptor = sheetDescriptor(model, agent, animation, index, sprite,
+      animation.scale * (animation.registrationScale || 1), unitFrameMirror(animation.sourceFacing || animation.facing || "left", agent.facing || 1), "idle");
+    descriptor.source = null;
+    descriptor.selection = null;
+    descriptor.whole = true;
+    descriptor.smoothing = true;
+    return descriptor;
+  }
+  if (action === "walk") {
+    const pose = agent.species === "spring-keeper" ? model.springKeeperFlightPose(agent, time) : model.creatureWalkPose(agent, time);
+    const entry = resources.walk.get(agent.species);
+    if (!pose || !entry?.sprite.complete || !entry.sprite.naturalWidth) return null;
+    const nativeFrame = reducedMotion ? pose.stage === "flight" ? 4 : 0 : pose.frame;
+    const nativeAnimation = model.imageFrameGeometry(pose.animation, nativeFrame);
+    const size = (agent.species === "talon-owl" ? model.TALON_OWL_IDLE.scale : 1.4 * entry.scale) *
+      nativeAnimation.frameSize / (nativeAnimation.viewSize || nativeAnimation.frameSize);
+    const displayScale = resources.walkDisplayScale?.(agent);
+    const strideFrame = !reducedMotion && Number.isFinite(displayScale) ?
+      creatureStrideFrame(model, agent, time, pose.animation, size * displayScale) : null;
+    const frame = strideFrame ?? nativeFrame;
+    const animation = frame === nativeFrame ? nativeAnimation : model.imageFrameGeometry(pose.animation, frame);
+    const descriptor = sheetDescriptor(model, agent, animation, frame, entry.sprite, size, unitFrameMirror(animation.sourceFacing || animation.facing || "left", agent.facing || 1), action);
+    descriptor.hop = !reducedMotion ? pose.hop || null : null;
+    return descriptor;
+  }
+  if (action === "attack" || action === "hurt") {
+    const pose = action === "attack" ? model.creatureAttackPose(agent, time) : model.creatureHurtPose(agent, time);
+    const entry = pose && (action === "hurt" ? resources.hurt : pose.action === "ranged" ? resources.ranged : resources.attack).get(agent.species);
+    if (!entry?.sprite.complete || !entry.sprite.naturalWidth) return null;
+    const animation = model.imageFrameGeometry(pose.animation, pose.frame);
+    let size = agent.species === "talon-owl" ? model.TALON_OWL_IDLE.scale : 1.4 * entry.scale;
+    if (action === "attack") size *= animation.frameSize / animation.viewSize;
+    size *= animation.registrationScale || 1;
+    return sheetDescriptor(model, agent, animation, pose.frame, entry.sprite, size,
+      action === "attack" ? !!pose.mirrorX : unitFrameMirror(animation.sourceFacing || animation.facing || "left", agent.facing || 1), pose.action || action);
+  }
+  if (action !== "idle") return null;
+  const entry = resources.idle.get(agent.species);
+  const movementEndedAt = agent.moveStartedAt + agent.moveDuration;
+  const settledWalk = agent.mode === "walk" && agent.moveDuration > 0 &&
+    Number.isFinite(movementEndedAt) && time >= movementEndedAt;
+  if (!entry || !["idle", "fight"].includes(agent.mode) && !settledWalk || !entry.sprite.complete || !entry.sprite.naturalWidth) return null;
+  const startedAt = settledWalk ? movementEndedAt : agent.animationStartedAt ?? agent.moveStartedAt ?? 0;
+  const frame = reducedMotion ? 0 : model.unitAnimationFrame(entry.animation, (time - startedAt) * 1000);
+  const animation = model.imageFrameGeometry(entry.animation, frame);
+  const descriptor = sheetDescriptor(model, agent, animation, frame, entry.sprite,
+    1.4 * entry.scale * (animation.registrationScale || 1), unitFrameMirror(animation.sourceFacing || animation.facing || "left", agent.facing || 1), action);
+  descriptor.groundOffset = 1;
+  return descriptor;
+}
+
+function drawCreaturePresentation(context, descriptor, anchorX, anchorY, cell, outlineColor, drawOutline) {
+  if (!descriptor) return false;
+  const size = cell * descriptor.sizePerCell;
+  const left = size * descriptor.left, top = size * descriptor.top;
+  context.save();
+  if (descriptor.smoothing) {
+    context.imageSmoothingEnabled = true;
+    context.imageSmoothingQuality = "high";
+  }
+  context.translate(anchorX, anchorY);
+  if (descriptor.mirrorX) context.scale(-1, 1);
+  if (descriptor.hop) {
+    const hop = descriptor.hop, pixel = size / 288, animation = descriptor.animation;
+    context.translate(hop.targetX * pixel - size * animation.pivotX / animation.frameSize,
+      hop.targetY * pixel - size * animation.pivotY / animation.frameSize);
+    context.rotate(hop.rotation);
+    context.translate(-hop.sourceX * pixel + size * animation.pivotX / animation.frameSize,
+      -hop.sourceY * pixel + size * animation.pivotY / animation.frameSize);
+  }
+  if (outlineColor) drawOutline(descriptor.sprite, left, top, size, size, descriptor.selection, outlineColor);
+  if (descriptor.whole) context.drawImage(descriptor.sprite, left, top, size, size);
+  else {
+    const source = descriptor.source;
+    context.drawImage(descriptor.sprite, source.x, source.y, source.size, source.size, left, top, size, size);
+  }
+  context.restore();
+  return true;
+}
+return { beetlePresentationFrame, creatureStrideFrame, createCreatureStrideClock, creaturePresentationPose, drawCreaturePresentation };
+})();
 modules["client/unit-loading.mjs"] = (() => {
 function drawUnitLoading(context, x, y, radius, time) {
   const angle = (globalThis.performance?.now() ?? Date.now()) / 250;
@@ -9079,7 +9263,7 @@ const DEFENSIVE_ATTACK_ART = Object.freeze({
   "pebble/antenna": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/pebble/antenna/attack.png",
     "sourceManifest": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/publication-manifest.json",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "frameSize": 512,
     "frameHeight": 512,
     "columns": 4,
@@ -9095,7 +9279,7 @@ const DEFENSIVE_ATTACK_ART = Object.freeze({
       230
     ],
     "durationMs": 980,
-    "pivotX": 227.0,
+    "pivotX": 285.0,
     "pivotY": 451,
     "referenceLength": 370,
     "viewSize": 370,
@@ -23842,7 +24026,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -23858,7 +24042,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         220
       ],
       "durationMs": 1240,
-      "pivotX": 257.0,
+      "pivotX": 255.0,
       "pivotY": 450,
       "referenceLength": 340,
       "viewSize": 340,
@@ -23868,7 +24052,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -23884,7 +24068,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           220
         ],
         "durationMs": 1240,
-        "pivotX": 257.0,
+        "pivotX": 255.0,
         "pivotY": 450,
         "referenceLength": 340,
         "viewSize": 340,
@@ -23893,7 +24077,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -23909,7 +24093,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           110
         ],
         "durationMs": 880,
-        "pivotX": 255.5,
+        "pivotX": 256.5,
         "pivotY": 451,
         "referenceLength": 341,
         "viewSize": 341,
@@ -23918,7 +24102,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -23934,7 +24118,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           230
         ],
         "durationMs": 980,
-        "pivotX": 217.5,
+        "pivotX": 294.5,
         "pivotY": 451,
         "referenceLength": 340,
         "viewSize": 340,
@@ -23944,7 +24128,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -23960,7 +24144,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           270
         ],
         "durationMs": 1200,
-        "pivotX": 256.5,
+        "pivotX": 255.5,
         "pivotY": 450,
         "referenceLength": 340,
         "viewSize": 340,
@@ -23971,7 +24155,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -23987,7 +24171,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           240
         ],
         "durationMs": 1030,
-        "pivotX": 250.0,
+        "pivotX": 262.0,
         "pivotY": 447,
         "referenceLength": 339,
         "viewSize": 339,
@@ -23996,7 +24180,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24012,7 +24196,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 397.0,
+        "pivotX": 115.0,
         "pivotY": 437,
         "referenceLength": 175,
         "viewSize": 175,
@@ -24025,7 +24209,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-antenna/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24041,7 +24225,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           750
         ],
         "durationMs": 1940,
-        "pivotX": 265.0,
+        "pivotX": 247.0,
         "pivotY": 449,
         "referenceLength": 339,
         "viewSize": 339,
@@ -24056,7 +24240,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -24072,7 +24256,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         220
       ],
       "durationMs": 1240,
-      "pivotX": 254.0,
+      "pivotX": 258.0,
       "pivotY": 449,
       "referenceLength": 394,
       "viewSize": 394,
@@ -24082,7 +24266,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24098,7 +24282,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           220
         ],
         "durationMs": 1240,
-        "pivotX": 254.0,
+        "pivotX": 258.0,
         "pivotY": 449,
         "referenceLength": 394,
         "viewSize": 394,
@@ -24107,7 +24291,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24123,7 +24307,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           110
         ],
         "durationMs": 880,
-        "pivotX": 254.0,
+        "pivotX": 258.0,
         "pivotY": 450,
         "referenceLength": 392,
         "viewSize": 392,
@@ -24132,7 +24316,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24148,7 +24332,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           230
         ],
         "durationMs": 980,
-        "pivotX": 257.0,
+        "pivotX": 255.0,
         "pivotY": 449,
         "referenceLength": 374,
         "viewSize": 374,
@@ -24158,7 +24342,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24174,7 +24358,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           270
         ],
         "durationMs": 1200,
-        "pivotX": 253.5,
+        "pivotX": 258.5,
         "pivotY": 450,
         "referenceLength": 395,
         "viewSize": 395,
@@ -24185,7 +24369,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24201,7 +24385,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           240
         ],
         "durationMs": 1030,
-        "pivotX": 253.5,
+        "pivotX": 258.5,
         "pivotY": 449,
         "referenceLength": 371,
         "viewSize": 371,
@@ -24210,7 +24394,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24226,7 +24410,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 398.0,
+        "pivotX": 114.0,
         "pivotY": 439,
         "referenceLength": 166,
         "viewSize": 166,
@@ -24239,7 +24423,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24255,7 +24439,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           750
         ],
         "durationMs": 1940,
-        "pivotX": 264.0,
+        "pivotX": 248.0,
         "pivotY": 426,
         "referenceLength": 376,
         "viewSize": 376,
@@ -24371,7 +24555,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24387,7 +24571,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 392.5,
+        "pivotX": 119.5,
         "pivotY": 439,
         "referenceLength": 155,
         "viewSize": 155,
@@ -24431,7 +24615,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -24447,7 +24631,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         220
       ],
       "durationMs": 1240,
-      "pivotX": 255.5,
+      "pivotX": 256.5,
       "pivotY": 449,
       "referenceLength": 413,
       "viewSize": 413,
@@ -24457,7 +24641,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24473,7 +24657,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           220
         ],
         "durationMs": 1240,
-        "pivotX": 255.5,
+        "pivotX": 256.5,
         "pivotY": 449,
         "referenceLength": 413,
         "viewSize": 413,
@@ -24482,7 +24666,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24498,7 +24682,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           110
         ],
         "durationMs": 880,
-        "pivotX": 253.0,
+        "pivotX": 259.0,
         "pivotY": 450,
         "referenceLength": 410,
         "viewSize": 410,
@@ -24507,7 +24691,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24523,7 +24707,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           270
         ],
         "durationMs": 1200,
-        "pivotX": 257.0,
+        "pivotX": 255.0,
         "pivotY": 450,
         "referenceLength": 424,
         "viewSize": 424,
@@ -24534,7 +24718,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24550,7 +24734,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           240
         ],
         "durationMs": 1030,
-        "pivotX": 247.0,
+        "pivotX": 265.0,
         "pivotY": 450,
         "referenceLength": 410,
         "viewSize": 410,
@@ -24559,7 +24743,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24575,7 +24759,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 399.0,
+        "pivotX": 113.0,
         "pivotY": 440,
         "referenceLength": 150,
         "viewSize": 150,
@@ -24588,7 +24772,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/secretion-antenna/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -24604,7 +24788,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           750
         ],
         "durationMs": 1940,
-        "pivotX": 260.0,
+        "pivotX": 252.0,
         "pivotY": 440,
         "referenceLength": 404,
         "viewSize": 404,
@@ -36765,7 +36949,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -37250,7 +37434,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -37528,7 +37712,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -38048,7 +38232,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -38499,7 +38683,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -38743,7 +38927,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -39229,7 +39413,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -41931,7 +42115,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -41957,7 +42141,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -41982,7 +42166,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -42007,7 +42191,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -42033,7 +42217,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -42060,7 +42244,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -42085,7 +42269,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -42107,7 +42291,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 377,
+        "pivotX": 135,
         "pivotY": 444,
         "referenceLength": 160,
         "viewSize": 160,
@@ -42120,7 +42304,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -42151,7 +42335,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -42177,7 +42361,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -42202,7 +42386,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -42227,7 +42411,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -42253,7 +42437,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -42280,7 +42464,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -42305,7 +42489,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -42327,7 +42511,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 382,
+        "pivotX": 130,
         "pivotY": 433,
         "referenceLength": 176,
         "viewSize": 176,
@@ -42340,7 +42524,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -42539,7 +42723,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -42817,7 +43001,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -43095,7 +43279,7 @@ const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -44285,7 +44469,7 @@ const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/spring/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -44375,6 +44559,7 @@ const baseUnitActionArt = Object.freeze({
   ...ANTENNA_COMBO_ACTION_ART,
   ...BLADE_CARAPACE_ACTION_ART,
   ...SECRETION_COMBO_ACTION_ART,
+
 
   "bean/base": {
     "reference": {
@@ -48793,7 +48978,7 @@ const baseUnitActionArt = Object.freeze({
   "pebble/base": {
     "reference": {
       "image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -48873,7 +49058,7 @@ const baseUnitActionArt = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -48952,7 +49137,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 5,
@@ -48987,7 +49172,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "jump": {
         "image": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -49018,7 +49203,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -49049,7 +49234,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 517,
         "frameHeight": 517,
         "columns": 4,
@@ -49080,7 +49265,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 517,
         "frameHeight": 517,
         "columns": 4,
@@ -49103,7 +49288,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 151,
         "frameHeight": 151,
         "columns": 8,
@@ -49170,7 +49355,7 @@ const baseUnitActionArt = Object.freeze({
   "pebble/gather": {
     "reference": {
       "image": "DesignAssets/Planning/Attributes/Units/pebble-strength.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 144,
       "frameHeight": 144,
       "columns": 1,
@@ -49187,7 +49372,7 @@ const baseUnitActionArt = Object.freeze({
     "actions": {
       "harvest": {
         "image": "DesignAssets/Animations/GatherWorkV1/pebble/harvest.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -49209,7 +49394,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "carry": {
         "image": "DesignAssets/Animations/GatherWorkV1/pebble/carry.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -49231,7 +49416,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "throw": {
         "image": "DesignAssets/Animations/GatherWorkV1/pebble/throw.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -49254,7 +49439,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -49285,7 +49470,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -49299,7 +49484,7 @@ const baseUnitActionArt = Object.freeze({
           120,
           900
         ],
-        "pivotX": 258.5,
+        "pivotX": 253.5,
         "pivotY": 402,
         "viewSize": 512,
         "referenceLength": 357,
@@ -49316,7 +49501,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "idle": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 144,
         "frameHeight": 144,
         "columns": 8,
@@ -49360,7 +49545,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -49407,7 +49592,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -49430,7 +49615,7 @@ const baseUnitActionArt = Object.freeze({
           100,
           60
         ],
-        "pivotX": 256.5,
+        "pivotX": 255.5,
         "pivotY": 400,
         "viewSize": 512,
         "referenceLength": 351,
@@ -50899,7 +51084,7 @@ const baseUnitActionArt = Object.freeze({
   "pebble/antenna": {
     "reference": {
       "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -50919,7 +51104,7 @@ const baseUnitActionArt = Object.freeze({
     "actions": {
       "birth": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/birth.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 8,
@@ -50951,7 +51136,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/death.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -50974,7 +51159,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -50997,7 +51182,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 448,
         "frameHeight": 448,
         "columns": 4,
@@ -51028,7 +51213,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "idle": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -51051,7 +51236,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "harvest": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -51070,7 +51255,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "carry": {
         "image": "DesignAssets/Animations/TribeMinorV1/pebble/antenna/walk.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -51093,7 +51278,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "throw": {
         "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -51422,7 +51607,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 236,
         "frameHeight": 236,
         "columns": 4,
@@ -51474,7 +51659,7 @@ const baseUnitActionArt = Object.freeze({
     "actions": {
       "harvest": {
         "image": "DesignAssets/Animations/GatherWorkV1/spring/harvest.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -51496,7 +51681,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "carry": {
         "image": "DesignAssets/Animations/GatherWorkV1/spring/carry.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -51518,7 +51703,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "throw": {
         "image": "DesignAssets/Animations/GatherWorkV1/spring/throw.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 256,
         "columns": 4,
         "frameCount": 8,
@@ -52779,7 +52964,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -52949,7 +53134,7 @@ const baseUnitActionArt = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/TribeMinorV1/spring/antenna/birth.webp",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 128,
         "frameHeight": 128,
         "columns": 4,
@@ -55775,10 +55960,10 @@ const UNIT_BIRTH_ART = Object.freeze({
     }
   },
   "pebble/gather": {
-    "pivotX": 450.3168316831683,
+    "pivotX": 61.68316831683171,
     "pivotY": 449.8217821782178,
     "scene": {
-      "outletX": 232.5,
+      "outletX": 279.5,
       "outletY": 258,
       "travelStartMs": 120,
       "travelEndMs": 1480
@@ -55858,7 +56043,7 @@ const UNIT_BIRTH_ART = Object.freeze({
     "durationMs": 2620,
     "loop": false,
     "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/gather/birth.png",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "referenceLength": 64,
     "sceneLayers": {
       "version": 2,
@@ -55873,7 +56058,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                191.66000000000003,
+                237.39999999999998,
                 190.14,
                 82.94,
                 87.10000000000001
@@ -55882,7 +56067,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                191.66000000000003,
+                237.39999999999998,
                 190.14,
                 82.94,
                 87.10000000000001
@@ -55891,7 +56076,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                191.66000000000003,
+                237.39999999999998,
                 190.14,
                 82.94,
                 87.10000000000001
@@ -55900,7 +56085,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                191.66000000000003,
+                237.39999999999998,
                 190.14,
                 82.94,
                 87.10000000000001
@@ -55909,7 +56094,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                192.2121066558111,
+                236.8478933441889,
                 190.62849989822917,
                 82.94,
                 87.10000000000001
@@ -55918,7 +56103,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                193.82425809077955,
+                235.23574190922045,
                 192.05491960105837,
                 82.94,
                 87.10000000000001
@@ -55927,7 +56112,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 1,
               "destination": [
-                196.43020150620805,
+                232.62979849379195,
                 194.36063912070017,
                 82.94,
                 87.10000000000001
@@ -55936,7 +56121,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 1,
               "destination": [
-                199.96368410339915,
+                229.09631589660086,
                 197.487038469367,
                 82.94,
                 87.10000000000001
@@ -55945,7 +56130,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 1,
               "destination": [
-                204.3584530836556,
+                224.7015469163444,
                 201.37549765927133,
                 82.94,
                 87.10000000000001
@@ -55954,7 +56139,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 2,
               "destination": [
-                209.54825564828008,
+                219.51174435171993,
                 205.9673967026257,
                 82.94,
                 87.10000000000001
@@ -55963,7 +56148,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 3,
               "destination": [
-                215.46683899857527,
+                213.59316100142473,
                 211.20411561164258,
                 82.94,
                 87.10000000000001
@@ -55972,7 +56157,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 3,
               "destination": [
-                222.04795033584372,
+                207.01204966415628,
                 217.0270343985345,
                 82.94,
                 87.10000000000001
@@ -55981,7 +56166,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 4,
               "destination": [
-                229.2253368613882,
+                199.8346631386118,
                 223.37753307551395,
                 82.94,
                 87.10000000000001
@@ -55990,7 +56175,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 5,
               "destination": [
-                236.93274577651135,
+                192.12725422348865,
                 230.1969916547934,
                 82.94,
                 87.10000000000001
@@ -55999,7 +56184,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 6,
               "destination": [
-                245.10392428251583,
+                183.95607571748417,
                 237.42679014858538,
                 82.94,
                 87.10000000000001
@@ -56008,7 +56193,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 7,
               "destination": [
-                253.6726195807043,
+                175.3873804192957,
                 245.00830856910238,
                 82.94,
                 87.10000000000001
@@ -56017,7 +56202,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 8,
               "destination": [
-                262.57257887237944,
+                166.48742112762056,
                 252.8829269285569,
                 82.94,
                 87.10000000000001
@@ -56026,7 +56211,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 9,
               "destination": [
-                271.7375493588439,
+                157.32245064115608,
                 260.9920252391614,
                 82.94,
                 87.10000000000001
@@ -56035,7 +56220,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 10,
               "destination": [
-                281.10127824140045,
+                147.95872175859955,
                 269.27698351312847,
                 82.94,
                 87.10000000000001
@@ -56044,7 +56229,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 11,
               "destination": [
-                290.59751272135156,
+                138.46248727864844,
                 277.67918176267045,
                 82.94,
                 87.10000000000001
@@ -56053,7 +56238,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                300.1600000000001,
+                128.89999999999992,
                 286.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56062,7 +56247,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 1,
               "destination": [
-                309.72248727864854,
+                119.33751272135146,
                 294.6008182373295,
                 82.94,
                 87.10000000000001
@@ -56071,7 +56256,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 2,
               "destination": [
-                319.21872175859966,
+                109.84127824140035,
                 303.00301648687156,
                 82.94,
                 87.10000000000001
@@ -56080,7 +56265,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 3,
               "destination": [
-                328.5824506411562,
+                100.47754935884382,
                 311.2879747608386,
                 82.94,
                 87.10000000000001
@@ -56089,7 +56274,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 4,
               "destination": [
-                337.74742112762067,
+                91.31257887237933,
                 319.3970730714431,
                 82.94,
                 87.10000000000001
@@ -56098,7 +56283,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 5,
               "destination": [
-                346.6473804192958,
+                82.41261958070419,
                 327.27169143089765,
                 82.94,
                 87.10000000000001
@@ -56107,7 +56292,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 6,
               "destination": [
-                355.2160757174843,
+                73.84392428251573,
                 334.85320985141465,
                 82.94,
                 87.10000000000001
@@ -56116,7 +56301,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 7,
               "destination": [
-                363.38725422348875,
+                65.67274577651125,
                 342.08300834520657,
                 82.94,
                 87.10000000000001
@@ -56125,7 +56310,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 8,
               "destination": [
-                371.0946631386119,
+                57.965336861388096,
                 348.9024669244861,
                 82.94,
                 87.10000000000001
@@ -56134,7 +56319,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 9,
               "destination": [
-                378.2720496641564,
+                50.78795033584362,
                 355.2529656014655,
                 82.94,
                 87.10000000000001
@@ -56143,7 +56328,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 9,
               "destination": [
-                384.85316100142484,
+                44.206838998575165,
                 361.07588438835745,
                 82.94,
                 87.10000000000001
@@ -56152,7 +56337,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 10,
               "destination": [
-                390.77174435172,
+                38.28825564828003,
                 366.3126032973743,
                 82.94,
                 87.10000000000001
@@ -56161,7 +56346,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 11,
               "destination": [
-                395.96154691634445,
+                33.098453083655556,
                 370.9045023407287,
                 82.94,
                 87.10000000000001
@@ -56170,7 +56355,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 11,
               "destination": [
-                400.3563158966009,
+                28.703684103399098,
                 374.792961530633,
                 82.94,
                 87.10000000000001
@@ -56179,7 +56364,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 11,
               "destination": [
-                403.889798493792,
+                25.170201506208002,
                 377.91936087929986,
                 82.94,
                 87.10000000000001
@@ -56188,7 +56373,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                406.49574190922044,
+                22.56425809077956,
                 380.22508039894166,
                 82.94,
                 87.10000000000001
@@ -56197,7 +56382,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                408.10789334418894,
+                20.952106655811065,
                 381.65150010177075,
                 82.94,
                 87.10000000000001
@@ -56206,7 +56391,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 0,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56215,7 +56400,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 12,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56224,7 +56409,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 12,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56233,7 +56418,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 13,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56242,7 +56427,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 13,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56251,7 +56436,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 13,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56260,7 +56445,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 13,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56269,7 +56454,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 14,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56278,7 +56463,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 14,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56287,7 +56472,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 14,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56296,7 +56481,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56305,7 +56490,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56314,7 +56499,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56323,7 +56508,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56332,7 +56517,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56341,7 +56526,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56350,7 +56535,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56359,7 +56544,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56368,7 +56553,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56377,7 +56562,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56386,7 +56571,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56395,7 +56580,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56404,7 +56589,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56413,7 +56598,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56422,7 +56607,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56431,7 +56616,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56440,7 +56625,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56449,7 +56634,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56458,7 +56643,7 @@ const UNIT_BIRTH_ART = Object.freeze({
             {
               "frame": 15,
               "destination": [
-                408.66,
+                20.399999999999977,
                 382.14000000000004,
                 82.94,
                 87.10000000000001
@@ -56502,7 +56687,7 @@ const UNIT_BIRTH_ART = Object.freeze({
     "durationMs": 1790,
     "loop": false,
     "image": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/birth.png",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "referenceLength": 275
   },
   "bean/blade": {
@@ -63776,7 +63961,7 @@ const UNIT_BIRTH_ART = Object.freeze({
     "durationMs": 1790,
     "loop": false,
     "image": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/birth.png",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "referenceLength": 65,
     "sceneLayers": {
       "version": 2,
@@ -70178,7 +70363,7 @@ const UNIT_BIRTH_ART = Object.freeze({
     "durationMs": 2620,
     "loop": false,
     "image": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/birth.png",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "referenceLength": 241
   },
   "spring/antenna": {
@@ -70206,7 +70391,7 @@ const UNIT_BIRTH_ART = Object.freeze({
     "durationMs": 1790,
     "loop": false,
     "image": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/birth.png",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "referenceLength": 105
   },
   "bean/base": {
@@ -85664,12 +85849,12 @@ const UNIT_ANIMATIONS = Object.freeze({
     "death": {"sourceFacing": "left", "image": "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256.0, "pivotY": 448, durationsMs: [120,100,140,120,140,100,120,600] },
   },
   "pebble": {
-    "idle": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(64).fill(100) },
-    "walk": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp", "frameSize": 512, "columns": 5, "loop": true, cyclesPerCell: 2.5, "pivotX": 256, "pivotY": 448, durationsMs: Array(20).fill(40) },
-    "jump": {"image": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: Array(16).fill(70) },
-    "attack": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60] },
-    "hurt": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20] },
-    "death": {"image": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256, "pivotY": 448, durationsMs: [120,100,140,120,140,100,120,600] },
+    "idle": {"sourceFacing": "left", "image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256.0, "pivotY": 448, durationsMs: Array(64).fill(100) },
+    "walk": {"sourceFacing": "left", "image": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp", "frameSize": 512, "columns": 5, "loop": true, cyclesPerCell: 2.5, "pivotX": 256.0, "pivotY": 448, durationsMs: Array(20).fill(40) },
+    "jump": {"sourceFacing": "left", "image": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256.0, "pivotY": 448, durationsMs: Array(16).fill(70) },
+    "attack": {"sourceFacing": "left", "image": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256.0, "pivotY": 448, durationsMs: [60,70,60,80,30,50,50,50,50,50,50,70,80,90,100,60] },
+    "hurt": {"sourceFacing": "left", "image": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256.0, "pivotY": 448, durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20] },
+    "death": {"sourceFacing": "left", "image": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "frameSize": 512, "columns": 4, "loop": false, "pivotX": 256.0, "pivotY": 448, durationsMs: [120,100,140,120,140,100,120,600] },
   },
   "spring": {
     "idle": {"image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp", "sourceFacing": "left", "frameSize": 512, "columns": 4, "loop": true, "pivotX": 256, "pivotY": 448, durationsMs: Array(64).fill(100) },
@@ -85889,7 +86074,7 @@ function creatureWalkPose(agent, time) {
   }
   const elapsed = time - agent.moveStartedAt;
   if (!animation || agent.health <= 0 || agent.mode !== "walk" ||
-    !(agent.moveDuration > 0) || !Number.isFinite(elapsed) || elapsed < 0 || elapsed >= agent.moveDuration) return null;
+    !(agent.moveDuration > 0) || !Number.isFinite(elapsed) || elapsed < 0 || time >= agent.moveStartedAt + agent.moveDuration) return null;
   if (agent.species === "spring-keeper") return springKeeperFlightPose(agent, time);
   if (agent.species === "bubble-toad") {
     const hop=toadHopMotion(elapsed / agent.moveDuration);
@@ -88300,7 +88485,7 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
       "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
       "approvalState": "existing-reference",
       "approvalRef": null,
-      "sourceHash": "9ecf44815d59ac26108dcf3b06f63d0df7637958aba28a09bc61efef5c77adb6",
+      "sourceHash": "f4e8c4b5b1b333af82630dbbdbfa6016ad3ed0336577c6ab113167df091771a6",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -88323,11 +88508,11 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
         ],
         "landmarks": {
           "leftEye": [
-            211,
+            212,
             377
           ],
           "rightEye": [
-            300,
+            301,
             377
           ],
           "ground": [
@@ -88361,13 +88546,14 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": true,
         "reuseAuthorized": true
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/pebble/00/Source/neutral.png",
+      "sourceFacing": "left"
     },
     "actions": {
       "idle": {
         "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
-        "imageHash": "f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37",
+        "imageHash": "ffcac1997f0596b02155b61dbe1ff401c00c6af65d82d46d9aac0674e07cb3e5",
         "frameSize": 512,
         "columns": 4,
         "frameCount": 64,
@@ -88442,18 +88628,19 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 448,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37",
+          "sourceHash": "ffcac1997f0596b02155b61dbe1ff401c00c6af65d82d46d9aac0674e07cb3e5",
           "pixelsPerWorld": 966.6666666666666,
           "scale": 0.5296551724137931,
           "offsetX": 120.40827586206896,
           "offsetY": 210.71448275862068
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "walk": {
         "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/walk-in-place-v1/walk.webp",
-        "imageHash": "ca40b3960462707a75183261a324b50a92e9b73735c0e5f9fa4b8e0c8ade4243",
+        "imageHash": "84f464f1d0ea415905397c8c5e0a470639ef1360a2af13c20861d39f81c6e417",
         "frameSize": 512,
         "columns": 5,
         "frameCount": 20,
@@ -88484,18 +88671,19 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 448,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "ca40b3960462707a75183261a324b50a92e9b73735c0e5f9fa4b8e0c8ade4243",
+          "sourceHash": "84f464f1d0ea415905397c8c5e0a470639ef1360a2af13c20861d39f81c6e417",
           "pixelsPerWorld": 966.6666666666666,
           "scale": 0.5296551724137931,
           "offsetX": 120.40827586206896,
           "offsetY": 210.71448275862068
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "jump": {
         "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
         "image": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp",
-        "imageHash": "482ba8aad3ec26743c3a7258568b9489672597cea5bcc47c9a800a2ae6be870d",
+        "imageHash": "aed4631ba4626792490bf88818472c5c1ce13ca141d06ff5955882f1713a7f24",
         "frameSize": 512,
         "columns": 4,
         "frameCount": 16,
@@ -88522,18 +88710,19 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 448,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "482ba8aad3ec26743c3a7258568b9489672597cea5bcc47c9a800a2ae6be870d",
+          "sourceHash": "aed4631ba4626792490bf88818472c5c1ce13ca141d06ff5955882f1713a7f24",
           "pixelsPerWorld": 1002.3809523809524,
           "scale": 0.5107838479809976,
           "offsetX": 125.2393349168646,
           "offsetY": 219.16883610451305
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "attack": {
         "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
-        "imageHash": "385db115850e1a9a927ff0d44888bb54fb806b682bab67cb49c23f38daf91188",
+        "imageHash": "c93c897be002e69f2edbfe5262b027cb0408df7b57da9e4891b328324fda3561",
         "frameSize": 512,
         "columns": 4,
         "frameCount": 16,
@@ -88560,18 +88749,19 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 448,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "385db115850e1a9a927ff0d44888bb54fb806b682bab67cb49c23f38daf91188",
+          "sourceHash": "c93c897be002e69f2edbfe5262b027cb0408df7b57da9e4891b328324fda3561",
           "pixelsPerWorld": 961.9047619047618,
           "scale": 0.5322772277227723,
           "offsetX": 119.73702970297029,
           "offsetY": 209.539801980198
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "hurt": {
         "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/hurt-v2/hurt-v2.webp",
-        "imageHash": "2f879a2f5386ff14ce5819759647479108657e2e9295b33c1a058440d182b3a0",
+        "imageHash": "125bf004d7df257cd8acc5e53a8f8005acd676c4338eb029cbdfdd8b20100f10",
         "frameSize": 517,
         "columns": 4,
         "frameCount": 16,
@@ -88598,18 +88788,19 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 453.5943396226415,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "2f879a2f5386ff14ce5819759647479108657e2e9295b33c1a058440d182b3a0",
+          "sourceHash": "125bf004d7df257cd8acc5e53a8f8005acd676c4338eb029cbdfdd8b20100f10",
           "pixelsPerWorld": 966.6666666666666,
           "scale": 0.5296551724137931,
           "offsetX": 119.08413793103449,
           "offsetY": 207.7514118412492
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "death": {
         "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
         "image": "DesignAssets/Tribes/pebble/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
-        "imageHash": "ec1dffe7baec15492c0f2e188a930a84bd1eabfb2744079cbc87d14fcf01afb4",
+        "imageHash": "3d6cc0176b00a253f029306f4d2d31633d1dc7dc33f02ec0af8b257350721359",
         "frameSize": 517,
         "columns": 4,
         "frameCount": 8,
@@ -88628,13 +88819,14 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 453.5943396226415,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "ec1dffe7baec15492c0f2e188a930a84bd1eabfb2744079cbc87d14fcf01afb4",
+          "sourceHash": "3d6cc0176b00a253f029306f4d2d31633d1dc7dc33f02ec0af8b257350721359",
           "pixelsPerWorld": 966.6666666666666,
           "scale": 0.5296551724137931,
           "offsetX": 119.08413793103449,
           "offsetY": 207.7514118412492
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       }
     },
     "previewStatus": {},
@@ -88658,7 +88850,7 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "body": {
           "sourceId": "unit-appearance-v1-pebble-00-neutral-v1",
           "image": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
-          "sourceHash": "d8b762b189ea9767c2026dbfb692750a21b761bdd2514a5626e77f156cb76129",
+          "sourceHash": "32cab522457f6430f3eee51a8a603cfea8c8d98d262ce0f70e0912f2af0ae784",
           "frameSize": 151,
           "columns": 8,
           "frameCount": 48,
@@ -88717,13 +88909,14 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
           "pivotY": 135.6640625,
           "cameraMapping": {
             "verified": true,
-            "sourceHash": "d8b762b189ea9767c2026dbfb692750a21b761bdd2514a5626e77f156cb76129",
+            "sourceHash": "32cab522457f6430f3eee51a8a603cfea8c8d98d262ce0f70e0912f2af0ae784",
             "pixelsPerWorld": 217.68043154761907,
             "scale": 2.3520717795342874,
             "offsetX": 78.41858064516131,
             "offsetY": 128.90838709677422,
             "method": "preserve-existing-game-fixed-native-birth-body-camera"
-          }
+          },
+          "sourceFacing": "left"
         },
         "externalRoot": {
           "module": "client/birth.mjs",
@@ -88764,7 +88957,7 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
           {
             "role": "foreground",
             "image": "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-foreground.png",
-            "sourceHash": "55679e22e1abfef2b6964aee486210cfc0a2fbd81a2f05957ce6e22f58847cd3"
+            "sourceHash": "f6caa32eee541c546336be86881a9ac5e085c3727c0b9efa5679b8ea669f4be2"
           }
         ],
         "legacyReference": {
@@ -89258,7 +89451,8 @@ const UNIT_APPEARANCE_ASSETS = Object.freeze({
             "offsetX": -42.615186615186644,
             "offsetY": 29.938738738738664,
             "method": "preserve-existing-game-fixed-native-birth-body-camera"
-          }
+          },
+          "sourceFacing": "left"
         },
         "externalRoot": {
           "module": "client/birth.mjs",
@@ -90653,7 +90847,7 @@ const SPECIES_HELD_HURT_SOURCES = Object.freeze({
       "frameWidth": 532,
       "frameHeight": 332,
       "columns": 4,
-      "pivotX": 271,
+      "pivotX": 261,
       "pivotY": 326,
       "times": [
         0,
@@ -90676,10 +90870,10 @@ const SPECIES_HELD_HURT_SOURCES = Object.freeze({
       "nativeFrameSize": 512,
       "sourcePadding": 64,
       "sourceAnimation": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
-      "sourceHash": "f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37",
+      "sourceHash": "ffcac1997f0596b02155b61dbe1ff401c00c6af65d82d46d9aac0674e07cb3e5",
       "sourceFrame": 0,
       "material": "rigid-rock",
-      "sourceFacing": "right"
+      "sourceFacing": "left"
     },
     "secretion": {
       "image": "DesignAssets/Animations/SpeciesHeldHurtV1/pebble-secretion.webp",
@@ -90789,7 +90983,7 @@ const SPECIES_HELD_HURT_SOURCES = Object.freeze({
       "frameWidth": 564,
       "frameHeight": 344,
       "columns": 4,
-      "pivotX": 283,
+      "pivotX": 281,
       "pivotY": 336,
       "times": [
         0,
@@ -90812,12 +91006,12 @@ const SPECIES_HELD_HURT_SOURCES = Object.freeze({
       "nativeFrameSize": 512,
       "sourcePadding": 256,
       "sourceAnimation": "DesignAssets/Tribes/pebble/AnimationStudies/idle-v3/idle-v3.webp",
-      "sourceAnimationHash": "f34012e1cd157be0489e47b0c29b3107e37c5d3525363e30df642a588a004a37",
+      "sourceAnimationHash": "ffcac1997f0596b02155b61dbe1ff401c00c6af65d82d46d9aac0674e07cb3e5",
       "sourceImage": "tools/minor-held-hurt-20261105/pebble-antenna-source.png",
-      "sourceHash": "0a0e375f969a3b5b5146366267b182c8b72b751236f3ec9c2ef69943c63cd123",
+      "sourceHash": "105c921ee9f7da1a48176aa73f8092644dfcad0130a7e972f0dd8fbb00648dd0",
       "sourceFrame": 0,
       "material": "rigid-rock",
-      "sourceFacing": "right"
+      "sourceFacing": "left"
     }
   },
   "spring": {
@@ -92157,34 +92351,35 @@ const SPRING_SECRETION_ASSETS = Object.freeze({
     "nativeSecretionIdle": true
   },
   "birth": {
-    "image": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp",
-    "frameSize": 128,
-    "columns": 4,
-    "frameCount": 13,
-    "pivotX": 64,
-    "pivotY": 112,
-    "viewSize": 128,
-    "durationsMs": [
-      130,
-      120,
-      100,
-      100,
-      80,
-      260,
-      80,
-      90,
-      90,
-      100,
-      100,
-      130,
-      410
-    ],
-    "durationMs": 1790,
-    "loop": false,
-    "rangedBody": true,
-    "secretionLifecycle": true,
-    "nativeSecretionLifecycle": true
-  },
+  "image": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp",
+  "frameSize": 128,
+  "columns": 4,
+  "frameCount": 13,
+  "pivotX": 64,
+  "pivotY": 112,
+  "viewSize": 128,
+  "durationsMs": [
+    130,
+    120,
+    100,
+    100,
+    80,
+    260,
+    80,
+    90,
+    90,
+    100,
+    100,
+    130,
+    410
+  ],
+  "durationMs": 1790,
+  "loop": false,
+  "rangedBody": true,
+  "secretionLifecycle": true,
+  "nativeSecretionLifecycle": true,
+  "sourceFacing": "left"
+},
   "death": {
     "image": "DesignAssets/Animations/SecretionApprovedV2/spring/death.webp",
     "frameSize": 128,
@@ -92553,7 +92748,7 @@ function sporeBirthPixels(scene, nest) {
 }
 
 const SPRING_BIRTH_ANIMATION = Object.freeze(imageAnimation({
-  image: "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
+  sourceFacing: "left", image: "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp",
   frameSize: 512, columns: 4, frameCount: 13, pivotX: 320, pivotY: 448,
   outletX: 86, outletY: 105, height: 224, detachAt: .53, contactAt: .79, audioAt: .70,
   duration: SPRING_BIRTH_DURATION, durationsMs: SPRING_BIRTH_DURATIONS
@@ -92579,10 +92774,10 @@ function springBirthPlacement(elapsed, outlet, target, height) {
 }
 
 const PEBBLE_BIRTH_ANIMATION = Object.freeze(imageAnimation({
-  image: "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
+  sourceFacing: "left", image: "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-unit.webp",
   foreground: "DesignAssets/Tribes/pebble/AnimationStudies/birth-den-v1/birth-foreground.png",
-  frameSize: 512, columns: 8, frameCount: 48, pivotX: 256, pivotY: 460,
-  outletX: 256, outletY: 460, height: 229, unitHeight: 229, unitPivotY: 460,
+  frameSize: 512, columns: 8, frameCount: 48, pivotX: 256.0, pivotY: 460,
+  outletX: 256.0, outletY: 460, height: 229, unitHeight: 229, unitPivotY: 460,
   detachAt: .12, contactAt: 1.48, audioAt: .25,
   nestOutletX: .5, nestOutletY: .82,
   duration: PEBBLE_BIRTH_DURATION, durationsMs: PEBBLE_BIRTH_DURATIONS
@@ -92780,6 +92975,8 @@ const UNIT_SECRETION_LIFECYCLE_ANIMATIONS = Object.freeze(Object.fromEntries(
       image: "DesignAssets/Animations/UnitRangedV1/" + tribe + "/" + action + ".png",
       bodyReferenceImage: body.image, secretionLifecycle: true,
       ...(["bean", "spore"].includes(tribe) ? { sourceFacing: "left" } : {}),
+      // This separate frontal source was not reflected with the base body.
+      ...(tribe === "pebble" ? { sourceFacing: "right" } : {}),
       ...(tribe === "bean" && action === "death" ? APPROVED_SPROUT_DEATH_ANIMATIONS.secretion : {}),
       ...(tribe === "spring" ? SPRING_SECRETION_ASSETS[action] : {})
     })])
@@ -94089,6 +94286,7 @@ function talonOwlIdleFrame(elapsedMs) {
 return { TALON_OWL_IDLE, talonOwlIdleFrame };
 })();
 modules["client/combat-stage.mjs"] = (() => {
+const { createCreatureStrideClock } = modules["client/creature-presentation.mjs"];
 const { unitActionArtPose } = modules["client/unit-action-art.mjs"];
 const { CREATURE_RANGED_ANIMATIONS, creatureRangedPose } = modules["client/creature-ranged.mjs"];
 const { drawCombatStun } = modules["client/combat-stun-vfx.mjs"];
@@ -94210,6 +94408,7 @@ function createCombatStage(canvas) {
   let appearancePoses = new Map(), dodgePositions = new Map(), dodgeCues = [], cameraUnits = [], camera = {}, viewLayout;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const deathStarted = new Map(), readyPoses = new Map();
+  const strideClock = createCreatureStrideClock();
   let currentTrial, previousTime = null, seen = 0, effects = [], clock = 0, lastNow = 0;
   let preparation = null;
   const trialPreparations = new WeakMap();
@@ -94362,7 +94561,15 @@ function createCombatStage(canvas) {
     if (!alive && !deathStarted.has(agent.id)) deathStarted.set(agent.id, clock);
     const deathAge = alive ? 0 : clock - deathStarted.get(agent.id);
     const requested = poseFor(agent, time, deathAge);
-    const { pose, source, asset } = readyPose(agent, requested, time);
+    let { pose, source, asset } = readyPose(agent, requested, time);
+    if (pose?.action === "walk" && pose.animation.strideFrameRatio > 0) {
+      const animation = pose.animation;
+      const stride = animation.strideFrameRatio * displaySize(agent, pose) / 100 *
+        animation.frameSize / (animation.viewSize || animation.frameSize) * (animation.registrationScale || 1);
+      const frame = strideClock.frame({ unitAnimationFrame }, agent, time, animation, stride,
+        { x: originalPoint.x / viewLayout.cell, y: originalPoint.y / viewLayout.cell }, agent.combat?.id);
+      if (frame !== null) pose = { ...pose, frame: reducedMotion.matches ? 0 : frame };
+    }
     const geometry = pose && imageFrameGeometry(pose.animation, pose.frame);
     const size = displaySize(agent, pose) * formationScale(width, height), shadowScale = size / Math.min(width * .34, height * .72, 290);
     const radiusX = geometry?.groundRadiusX ? geometry.groundRadiusX * size : width * .054 * shadowScale;
@@ -94490,7 +94697,7 @@ function createCombatStage(canvas) {
     appearanceWorld.clear(); vfxCursor.reset(); detailVfx.consume({ reset: true }, 0);
     effectRendering?.clear();
     currentTrial = undefined; previousTime = null; seen = 0; effects = []; clock = 0; lastNow = 0;
-    deathStarted.clear(); readyPoses.clear(); appearancePoses = new Map(); dodgePositions = new Map(); dodgeCues = []; camera = {};
+    deathStarted.clear(); readyPoses.clear(); strideClock.clear(); appearancePoses = new Map(); dodgePositions = new Map(); dodgeCues = []; camera = {};
   }
 
   function render(trial, now, playing) {

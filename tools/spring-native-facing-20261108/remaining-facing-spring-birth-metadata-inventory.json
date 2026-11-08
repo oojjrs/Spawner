@@ -1,0 +1,3637 @@
+{
+  "publicationAndSourceBirthRecords": [
+    {
+      "key": "spring/blade-antenna",
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/gif",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/sceneLayers/layers/0/image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-antenna/environment.png"
+        },
+        {
+          "pointer": "/actions/birth/sceneLayers/layers/1/image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-antenna/body.png"
+        }
+      ],
+      "role": "regeneration-input"
+    },
+    {
+      "key": "spring/blade-antenna",
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/webpPreview",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/generatedSource",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/blade-antenna",
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/sheet",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/preview",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/webpPreview",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/generatedSource",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/blade-carapace-antenna",
+      "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/gif",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.gif"
+        }
+      ],
+      "role": "regeneration-input"
+    },
+    {
+      "key": "spring/blade-carapace-antenna",
+      "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/webpPreview",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/generatedSource",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/blade-carapace-antenna",
+      "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/sheet",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/preview",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/webpPreview",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/generatedSource",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/blade-secretion-antenna",
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/gif",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/sceneLayers/layers/0/image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-secretion-antenna/environment.png"
+        },
+        {
+          "pointer": "/actions/birth/sceneLayers/layers/1/image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-secretion-antenna/body.png"
+        }
+      ],
+      "role": "regeneration-input"
+    },
+    {
+      "key": "spring/blade-secretion-antenna",
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/blade-secretion-antenna",
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/preview",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/blade-secretion-carapace-antenna",
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/gif",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/sceneLayers/layers/0/image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-secretion-carapace-antenna/environment.png"
+        },
+        {
+          "pointer": "/actions/birth/sceneLayers/layers/1/image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-secretion-carapace-antenna/body.png"
+        }
+      ],
+      "role": "regeneration-input"
+    },
+    {
+      "key": "spring/blade-secretion-carapace-antenna",
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/blade-secretion-carapace-antenna",
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/preview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/carapace-antenna",
+      "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/gif",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.gif"
+        }
+      ],
+      "role": "regeneration-input"
+    },
+    {
+      "key": "spring/carapace-antenna",
+      "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/webpPreview",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/generatedSource",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/carapace-antenna",
+      "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/sheet",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/preview",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/webpPreview",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/generatedSource",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/secretion-antenna",
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/gif",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/sceneLayers/layers/0/image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/secretion-antenna/environment.png"
+        },
+        {
+          "pointer": "/actions/birth/sceneLayers/layers/1/image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/secretion-antenna/body.png"
+        }
+      ],
+      "role": "regeneration-input"
+    },
+    {
+      "key": "spring/secretion-antenna",
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/webpPreview",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/generatedSource",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/secretion-antenna",
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/sheet",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/preview",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/webpPreview",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/generatedSource",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/secretion-carapace-antenna",
+      "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/gif",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.gif"
+        }
+      ],
+      "role": "regeneration-input"
+    },
+    {
+      "key": "spring/secretion-carapace-antenna",
+      "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/webpPreview",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/generatedSource",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/secretion-carapace-antenna",
+      "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/sheet",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/preview",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/webpPreview",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/generatedSource",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/blade-carapace",
+      "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/gif",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.webp"
+        }
+      ],
+      "role": "regeneration-input"
+    },
+    {
+      "key": "spring/blade-carapace",
+      "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/webpPreview",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/generatedSource",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/blade-carapace",
+      "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/sheet",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/preview",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/webpPreview",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/generatedSource",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/secretion-carapace",
+      "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/gif",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.gif"
+        }
+      ],
+      "role": "regeneration-input"
+    },
+    {
+      "key": "spring/secretion-carapace",
+      "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/webpPreview",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/generatedSource",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/secretion-carapace",
+      "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/sheet",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/preview",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/webpPreview",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/generatedSource",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/blade-secretion",
+      "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/gif",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.gif"
+        }
+      ],
+      "role": "regeneration-input"
+    },
+    {
+      "key": "spring/blade-secretion",
+      "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/blade-secretion",
+      "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/preview",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/blade-secretion-carapace",
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/gif",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.gif"
+        }
+      ],
+      "role": "regeneration-input"
+    },
+    {
+      "key": "spring/blade-secretion-carapace",
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/actions/birth/sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/actions/birth/preview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/actions/birth/webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/actions/birth/generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/blade-secretion-carapace",
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "rootSourceFacing": null,
+      "frameCount": 16,
+      "imageReferences": [
+        {
+          "pointer": "/sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/preview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.gif"
+        },
+        {
+          "pointer": "/webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.webp"
+        },
+        {
+          "pointer": "/generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "role": "source-companion-metadata"
+    },
+    {
+      "key": "spring/base",
+      "path": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "role": "single-source-metadata",
+      "imageReferences": [
+        {
+          "pointer": "/runtimeAtlas",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp"
+        },
+        {
+          "pointer": "/preview",
+          "path": "DesignAssets/Planning/Tribes/spring/AnimationStudies/birth-detach-v1/birth-game-preview.webp"
+        },
+        {
+          "pointer": "/nest/source",
+          "path": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png"
+        }
+      ]
+    },
+    {
+      "key": "spring/gather",
+      "path": "AnimationCandidates/spring-gather-actions-v1/spring-gather-birth-v1.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "role": "single-source-metadata",
+      "imageReferences": [
+        {
+          "pointer": "/source",
+          "path": "DesignAssets/Tribes/spring/ApprovedGatherV1/source.png"
+        },
+        {
+          "pointer": "/sheet",
+          "path": "AnimationCandidates/spring-gather-actions-v1/spring-gather-birth-v1-sheet.png"
+        },
+        {
+          "pointer": "/preview",
+          "path": "AnimationCandidates/spring-gather-actions-v1/spring-gather-birth-v1-preview.gif"
+        }
+      ]
+    },
+    {
+      "key": "spring/secretion",
+      "path": "AnimationCandidates/spring-secretion-birth-fullscene-v1-20261107/manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "role": "single-source-metadata",
+      "imageReferences": [
+        {
+          "pointer": "/sheet",
+          "path": "AnimationCandidates/spring-secretion-birth-fullscene-v1-20261107/spring-secretion-birth-fullscene-v1-sheet.png"
+        },
+        {
+          "pointer": "/preview",
+          "path": "AnimationCandidates/spring-secretion-birth-fullscene-v1-20261107/spring-secretion-birth-fullscene-v1-preview.gif"
+        }
+      ]
+    },
+    {
+      "key": "spring/secretion",
+      "path": "DesignAssets/Animations/SecretionApprovedV2/spring/manifest.json",
+      "pointer": "/1",
+      "sourceFacing": null,
+      "role": "single-source-metadata",
+      "imageReferences": [
+        {
+          "pointer": "/1/image",
+          "path": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp"
+        },
+        {
+          "pointer": "/1/source",
+          "path": "AnimationCandidates/spring-secretion-cyan-v3/birth-sheet.png"
+        }
+      ]
+    }
+  ],
+  "jsonReferences": [
+    {
+      "path": "DesignAssets/Tribes/spring/manifest.json",
+      "pointer": "/assets/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "path",
+          "path": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Tribes/spring/Animations/nests.json",
+      "pointer": "/idle/0",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "runtimeAtlas",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp"
+        },
+        {
+          "field": "preview",
+          "path": "DesignAssets/Planning/Tribes/spring/AnimationStudies/birth-detach-v1/birth-game-preview.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth.json",
+      "pointer": "/nest",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "runtimeAtlas",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle-v5/generation-prompts.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "reference",
+          "path": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Tribes/spring/Animations/Nests/stage-01-idle-v5/animation.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/Nests/nest-stage-01.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Tribes/spring/Animations/Attributes/v1/rig.json",
+      "pointer": "/animations/idle",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Tribes/spring/Animations/Attributes/v1/rig.json",
+      "pointer": "/animations/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV3/animations.json",
+      "pointer": "/records/107",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV3/animations.json",
+      "pointer": "/records/113",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV3/animations.json",
+      "pointer": "/records/119",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV3/animations.json",
+      "pointer": "/records/125",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV3/animations.json",
+      "pointer": "/records/130",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "heal",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV3/animations.json",
+      "pointer": "/records/132",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV3/animations.json",
+      "pointer": "/records/138",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV3/animations.json",
+      "pointer": "/records/144",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV3/animations.json",
+      "pointer": "/records/150",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV3/animations.json",
+      "pointer": "/records/155",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "heal",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV3/animations.json",
+      "pointer": "/records/157",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV3/animations.json",
+      "pointer": "/baseRecords/15",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV5/animations.json",
+      "pointer": "/records/29",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "heal",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV5/animations.json",
+      "pointer": "/records/31",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV5/animations.json",
+      "pointer": "/records/36",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "heal",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV5/animations.json",
+      "pointer": "/records/38",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/UnitAppearanceV1/manifest.json",
+      "pointer": "/forms/spring~100/actions/idle",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/UnitAppearanceV1/manifest.json",
+      "pointer": "/forms/spring~100/sceneActions/birth/body",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/animations.json",
+      "pointer": "/records/107",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/animations.json",
+      "pointer": "/records/113",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/animations.json",
+      "pointer": "/records/119",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/animations.json",
+      "pointer": "/records/125",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/animations.json",
+      "pointer": "/records/130",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "heal",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/animations.json",
+      "pointer": "/records/132",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/animations.json",
+      "pointer": "/records/138",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/animations.json",
+      "pointer": "/records/144",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/animations.json",
+      "pointer": "/records/150",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/animations.json",
+      "pointer": "/records/155",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "heal",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/animations.json",
+      "pointer": "/records/157",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/animations.json",
+      "pointer": "/baseRecords/15",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/provenance.json",
+      "pointer": "/records/15",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "DesignAssets/Animations/TribeMinorV1/manifest.json",
+      "pointer": "/6",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/TribeMinorV1/spring/antenna/birth.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV4/animations.json",
+      "pointer": "/records/107",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV4/animations.json",
+      "pointer": "/records/113",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV4/animations.json",
+      "pointer": "/records/119",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV4/animations.json",
+      "pointer": "/records/125",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV4/animations.json",
+      "pointer": "/records/130",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "heal",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV4/animations.json",
+      "pointer": "/records/132",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV4/animations.json",
+      "pointer": "/records/138",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV4/animations.json",
+      "pointer": "/records/144",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV4/animations.json",
+      "pointer": "/records/150",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV4/animations.json",
+      "pointer": "/records/155",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "heal",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV4/animations.json",
+      "pointer": "/records/157",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV4/animations.json",
+      "pointer": "/baseRecords/15",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV6/animations.json",
+      "pointer": "/records/4",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "heal",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV6/animations.json",
+      "pointer": "/records/5",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "heal",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/birth-manifest.json",
+      "pointer": "/15",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/birth-manifest.json",
+      "pointer": "/18",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "AnimationCandidates/spring-gather-actions-v1/spring-gather-birth-v1-sheet.png"
+        },
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/birth.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/birth-manifest.json",
+      "pointer": "/19",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "AnimationCandidates/spring-secretion-birth-fullscene-v1-20261107/spring-secretion-birth-fullscene-v1-sheet.png"
+        },
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/birth.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+      "pointer": "/references/5/clip",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+      "pointer": "/references/6/clip",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+      "pointer": "/references/7/clip",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+      "pointer": "/actions/13",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+      "pointer": "/actions/13/clip",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/gather/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+      "pointer": "/actions/24",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+      "pointer": "/actions/24/clip",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+      "pointer": "/actions/35",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+      "pointer": "/actions/35/clip",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+      "pointer": "/actions/82",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+      "pointer": "/actions/82/clip",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+      "pointer": "/actions/84",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+      "pointer": "/actions/84/clip",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionApprovedV2/spring/manifest.json",
+      "pointer": "/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/SecretionApprovedV2/spring/birth.webp"
+        },
+        {
+          "field": "source",
+          "path": "AnimationCandidates/spring-secretion-cyan-v3/birth-sheet.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/SecretionIdleV1/spring/provenance.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "idleSource",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV3/spring/rig.json",
+      "pointer": "/animations/idle",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/UnitRangedV1/spring/lifecycle-provenance.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "bodyImage",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV5/spring/rig.json",
+      "pointer": "/animations/idle",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/UnitAppearanceV1/spring/00/motions.json",
+      "pointer": "/actions/idle",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/UnitAppearanceV1/spring/00/motions.json",
+      "pointer": "/sceneActions/birth/body",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/birth-detach-v1/birth-unit.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV2/spring/rig.json",
+      "pointer": "/animations/idle",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "DesignAssets/Animations/CombatAttributesV4/spring/rig.json",
+      "pointer": "/animations/idle",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-antenna/original",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-antenna/original/sceneLayers/layers/0",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/c945d053d51e8a1102d2264c6496c0904587b00c0e2808e9c0733e29f76c3f9b.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-antenna/original/sceneLayers/layers/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/bd7a27d33b2506dd60766a11299f38430f9831630765a7c198578a0f5b133ab3.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-antenna/candidate",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-antenna/candidate/sceneLayers/layers/0",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/c945d053d51e8a1102d2264c6496c0904587b00c0e2808e9c0733e29f76c3f9b.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-antenna/candidate/sceneLayers/layers/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/bd7a27d33b2506dd60766a11299f38430f9831630765a7c198578a0f5b133ab3.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1secretion-antenna/original",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1secretion-antenna/original/sceneLayers/layers/0",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/ebfe66874cde38398024d9306618457503a386074f2b3ba377c365c6c1cba9c1.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1secretion-antenna/original/sceneLayers/layers/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/d1d24d18c2832461358b5d4842e446a9b991f53fc12fe1f4935a9416e211e21e.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1secretion-antenna/candidate",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1secretion-antenna/candidate/sceneLayers/layers/0",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/ebfe66874cde38398024d9306618457503a386074f2b3ba377c365c6c1cba9c1.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1secretion-antenna/candidate/sceneLayers/layers/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/d1d24d18c2832461358b5d4842e446a9b991f53fc12fe1f4935a9416e211e21e.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-secretion-antenna/original",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-secretion-antenna/original/sceneLayers/layers/0",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/89dafdbbd6e9ac8406e38ef9e03612d301f5ea800b3f007c9dd2e78083422450.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-secretion-antenna/original/sceneLayers/layers/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/19823a46d35dc74065f32ec1ef292d082c13b8e722cfa7db9733574fd2047754.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-secretion-antenna/candidate",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-secretion-antenna/candidate/sceneLayers/layers/0",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/89dafdbbd6e9ac8406e38ef9e03612d301f5ea800b3f007c9dd2e78083422450.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-secretion-antenna/candidate/sceneLayers/layers/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/19823a46d35dc74065f32ec1ef292d082c13b8e722cfa7db9733574fd2047754.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-secretion-carapace-antenna/original",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-secretion-carapace-antenna/original/sceneLayers/layers/0",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/4d353f7e6a238450931a51d99db2651dc60c48da430df70d434d5e426ea43fe1.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-secretion-carapace-antenna/original/sceneLayers/layers/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/764a9acd4cb1f1074be568fe7fb6aa7e66bec46e6de2bcd787df880c9719051d.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-secretion-carapace-antenna/candidate",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-secretion-carapace-antenna/candidate/sceneLayers/layers/0",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/4d353f7e6a238450931a51d99db2651dc60c48da430df70d434d5e426ea43fe1.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-early-registration-v1-20261107/registration.json",
+      "pointer": "/spring~1blade-secretion-carapace-antenna/candidate/sceneLayers/layers/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/BirthSceneLayersV1/764a9acd4cb1f1074be568fe7fb6aa7e66bec46e6de2bcd787df880c9719051d.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "gif",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.gif"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sceneLayers/layers/0",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/secretion-antenna/environment.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sceneLayers/layers/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/secretion-antenna/body.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "gif",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.gif"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sceneLayers/layers/0",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-antenna/environment.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sceneLayers/layers/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-antenna/body.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "gif",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.gif"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/candidate-registration.json",
+      "pointer": "/spring~1blade-antenna",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sourceImage",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/candidate-registration.json",
+      "pointer": "/spring~1blade-antenna/unchangedRegistration",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/candidate-registration.json",
+      "pointer": "/spring~1secretion-antenna",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sourceImage",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/candidate-registration.json",
+      "pointer": "/spring~1secretion-antenna/unchangedRegistration",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/candidate-registration.json",
+      "pointer": "/spring~1blade-secretion-antenna",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sourceImage",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/candidate-registration.json",
+      "pointer": "/spring~1blade-secretion-antenna/unchangedRegistration",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/candidate-registration.json",
+      "pointer": "/spring~1blade-secretion-carapace-antenna",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sourceImage",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/candidate-registration.json",
+      "pointer": "/spring~1blade-secretion-carapace-antenna/unchangedRegistration",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/birth.png"
+        }
+      ],
+      "historicalSnapshot": true
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.webp"
+        },
+        {
+          "field": "gif",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.gif"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.webp"
+        },
+        {
+          "field": "gif",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.gif"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-idle-v2/manifest.json",
+      "pointer": "",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "motionReference",
+          "path": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "gif",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.gif"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-gather-actions-v1/spring-gather-hurt-v1.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "hurt",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/ApprovedGatherV1/source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-gather-actions-v1/spring-gather-birth-v1.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/ApprovedGatherV1/source.png"
+        },
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-gather-actions-v1/spring-gather-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-gather-actions-v1/spring-gather-birth-v1-preview.gif"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-gather-actions-v1/spring-gather-death-v1.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "death",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/ApprovedGatherV1/source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-gather-actions-v1/spring-gather-attack-v1.json",
+      "pointer": "",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": "attack",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/ApprovedGatherV1/source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "gif",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.gif"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sceneLayers/layers/0",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-secretion-carapace-antenna/environment.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sceneLayers/layers/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-secretion-carapace-antenna/body.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-sheet.png"
+        },
+        {
+          "field": "gif",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.gif"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.webp"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "gif",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.gif"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.webp"
+        },
+        {
+          "field": "gif",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.gif"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth",
+      "sourceFacing": "right",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "gif",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.gif"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sceneLayers/layers/0",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-secretion-antenna/environment.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "pointer": "/actions/birth/sceneLayers/layers/1",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "AnimationCandidates/spring-birth-pool-registration-v1-20261107/blade-secretion-antenna/body.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/birth-manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.gif"
+        },
+        {
+          "field": "webpPreview",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-preview.webp"
+        },
+        {
+          "field": "generatedSource",
+          "path": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/birth-generated-source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-cyan-v3/manifest.json",
+      "pointer": "/birth",
+      "sourceFacing": null,
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-secretion-cyan-v3/birth-sheet.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-gather-motion-v1/spring-gather-walk-v1.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "walk",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/ApprovedGatherV1/source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-gather-motion-v1/spring-gather-idle-v1.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "idle",
+      "directSourceRefs": [
+        {
+          "field": "source",
+          "path": "DesignAssets/Tribes/spring/ApprovedGatherV1/source.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-secretion-birth-fullscene-v1-20261107/manifest.json",
+      "pointer": "",
+      "sourceFacing": null,
+      "facing": null,
+      "action": "birth",
+      "directSourceRefs": [
+        {
+          "field": "sheet",
+          "path": "AnimationCandidates/spring-secretion-birth-fullscene-v1-20261107/spring-secretion-birth-fullscene-v1-sheet.png"
+        },
+        {
+          "field": "preview",
+          "path": "AnimationCandidates/spring-secretion-birth-fullscene-v1-20261107/spring-secretion-birth-fullscene-v1-preview.gif"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/antenna/manifest.json",
+      "pointer": "/appearanceReference",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/ApprovedActionsV1/spring/antenna/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    },
+    {
+      "path": "AnimationCandidates/spring-defensive-counterattack-fullbody-v1-20261107/carapace-antenna/manifest.json",
+      "pointer": "/appearanceReference",
+      "sourceFacing": "left",
+      "facing": null,
+      "action": null,
+      "directSourceRefs": [
+        {
+          "field": "image",
+          "path": "DesignAssets/Animations/AntennaCombosV1/spring/carapace-antenna/idle.png"
+        }
+      ],
+      "historicalSnapshot": false
+    }
+  ]
+}

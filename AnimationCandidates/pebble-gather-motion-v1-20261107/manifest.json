@@ -33,9 +33,9 @@
   "loop": false,
   "pivotX": 256,
   "pivotY": 400,
-  "sourceFacing": "right",
+  "sourceFacing": "left",
   "reviewEndHoldMs": 900,
   "previewLoop": true,
-  "sheetSHA256": "402804789844d116ffb535915d7797fccbb62c34d5e8e5c12296fdf5c55d6972",
-  "previewSHA256": "ff1d92c370b5ddc7e5c87e12a5ad713231efd607dbf8971f6a7a7d0415313a04"
+  "sheetSHA256": "4fcab909047e551db6c6b840e349171e1a5cd28c2bac3bf22d182ffef60a554f",
+  "previewSHA256": "c416b24299fdecc2518b4a980a4de021650c7aa7440e9e5e419c0958cdafcee8"
 }

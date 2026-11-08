@@ -2241,7 +2241,8 @@
           }
         ]
       },
-      "worldTravelIncludedInPixels": true
+      "worldTravelIncludedInPixels": true,
+      "sourceFacing": "left"
     },
     "death": {
       "action": "death",

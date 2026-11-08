@@ -1,0 +1,14 @@
+✔ Spring birth15 and two shadowed action records change only sourceFacing; exact geometry/clock/layers remain (2.434232ms)
+✔ 101 source atlases, originals, previews, body/environment layers keep exact frozen SHA-256 (201.00548ms)
+✔ all 271 birth frames and15 idle handoffs use native Canvas with exact cells and both target transforms (672.29326ms)
+✔ all120 layered birth fallback frames retain exact source orientation for both targets (170.454591ms)
+✔ 11 publication regeneration inputs explicitly preserve native left orientation after the fix (3.979107ms)
+✔ four Spring layered planning payloads retain the exact publication sourceFacing through helper and inline data (59.226314ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1665.578995

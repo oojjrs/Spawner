@@ -1,3 +1,4 @@
+import { createCreatureStrideClock } from "./creature-presentation.mjs";
 import { unitActionArtPose } from "./unit-action-art.mjs";
 import { CREATURE_RANGED_ANIMATIONS, creatureRangedPose } from "./creature-ranged.mjs";
 import { drawCombatStun } from "./combat-stun-vfx.mjs";
@@ -119,6 +120,7 @@ export function createCombatStage(canvas) {
   let appearancePoses = new Map(), dodgePositions = new Map(), dodgeCues = [], cameraUnits = [], camera = {}, viewLayout;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const deathStarted = new Map(), readyPoses = new Map();
+  const strideClock = createCreatureStrideClock();
   let currentTrial, previousTime = null, seen = 0, effects = [], clock = 0, lastNow = 0;
   let preparation = null;
   const trialPreparations = new WeakMap();
@@ -271,7 +273,15 @@ export function createCombatStage(canvas) {
     if (!alive && !deathStarted.has(agent.id)) deathStarted.set(agent.id, clock);
     const deathAge = alive ? 0 : clock - deathStarted.get(agent.id);
     const requested = poseFor(agent, time, deathAge);
-    const { pose, source, asset } = readyPose(agent, requested, time);
+    let { pose, source, asset } = readyPose(agent, requested, time);
+    if (pose?.action === "walk" && pose.animation.strideFrameRatio > 0) {
+      const animation = pose.animation;
+      const stride = animation.strideFrameRatio * displaySize(agent, pose) / 100 *
+        animation.frameSize / (animation.viewSize || animation.frameSize) * (animation.registrationScale || 1);
+      const frame = strideClock.frame({ unitAnimationFrame }, agent, time, animation, stride,
+        { x: originalPoint.x / viewLayout.cell, y: originalPoint.y / viewLayout.cell }, agent.combat?.id);
+      if (frame !== null) pose = { ...pose, frame: reducedMotion.matches ? 0 : frame };
+    }
     const geometry = pose && imageFrameGeometry(pose.animation, pose.frame);
     const size = displaySize(agent, pose) * formationScale(width, height), shadowScale = size / Math.min(width * .34, height * .72, 290);
     const radiusX = geometry?.groundRadiusX ? geometry.groundRadiusX * size : width * .054 * shadowScale;
@@ -399,7 +409,7 @@ export function createCombatStage(canvas) {
     appearanceWorld.clear(); vfxCursor.reset(); detailVfx.consume({ reset: true }, 0);
     effectRendering?.clear();
     currentTrial = undefined; previousTime = null; seen = 0; effects = []; clock = 0; lastNow = 0;
-    deathStarted.clear(); readyPoses.clear(); appearancePoses = new Map(); dodgePositions = new Map(); dodgeCues = []; camera = {};
+    deathStarted.clear(); readyPoses.clear(); strideClock.clear(); appearancePoses = new Map(); dodgePositions = new Map(); dodgeCues = []; camera = {};
   }
 
   function render(trial, now, playing) {

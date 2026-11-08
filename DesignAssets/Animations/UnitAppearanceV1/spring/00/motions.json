@@ -330,7 +330,8 @@
           "offsetX": -42.615186615186644,
           "offsetY": 29.938738738738664,
           "method": "preserve-existing-game-fixed-native-birth-body-camera"
-        }
+        },
+        "sourceFacing": "left"
       },
       "externalRoot": {
         "module": "client/birth.mjs",

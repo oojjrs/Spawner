@@ -13,11 +13,11 @@
       "preview": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/pebble-antenna-defensive-attack-v1-preview.webp",
       "gif": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/pebble-antenna-defensive-attack-v1-preview.gif",
       "cover": "AnimationCandidates/pebble-antenna-defensive-attack-v1-20261107/pebble-antenna-defensive-attack-v1-cover.png",
-      "sheetSHA256": "4566507332229bc18cc415b92bef6974f7963f07a6d4b665b13d38ec8106b15f",
-      "previewSHA256": "2fcc716824e808f585cf2eee979515465af844fe3ab5b652f9b9835980f2c13d",
-      "gifSHA256": "30f9f70ebb9c4d34d49dec9e5dbd79f7160f3592bdb946bc6c12f690daf1e6f4",
-      "coverSHA256": "ac8812494912cb5383c2c92f32efffe254a59680f9ce0e58d9ba7e044addd3bb",
-      "sourceSHA256": "d6dde7ed5e14ee93133082d5775038fd0d8bf2e9363f004479d402c45fdd60ae",
+      "sheetSHA256": "6170b5edd6e8d4d4a24072ed1d54ff79ef10ff24e82e8bba381109af734d7560",
+      "previewSHA256": "df77abfff7f589639095bd96632b75fe8d9f20be071a0bacb4d40af2ece1f368",
+      "gifSHA256": "8b90623b50e6df21e511509ffff6f6e7e4387c4af805737d5110ebd010e94f60",
+      "coverSHA256": "9bc7cba73f91afa718474e555a31edaa7aa5922b02a02a8d4e7f8163d0ebd427",
+      "sourceSHA256": "3232d8fabbb93595f0244b4a8df8fb68bc7ab8ee03c1ab163884504dce614baa",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -36,58 +36,58 @@
       "loop": false,
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "pivotX": 227.0,
+      "sourceFacing": "left",
+      "pivotX": 285.0,
       "pivotY": 451,
       "referenceLength": 370,
       "viewSize": 370,
       "bodyBounds": [
         [
-          42,
+          100,
           127,
-          412,
+          470,
           451
         ],
         [
-          39,
+          96,
           154,
-          416,
+          473,
+          450
+        ],
+        [
+          102,
+          140,
+          476,
+          450
+        ],
+        [
+          69,
+          156,
+          474,
           450
         ],
         [
           36,
-          140,
-          410,
-          450
-        ],
-        [
-          38,
-          156,
-          443,
-          450
-        ],
-        [
-          56,
           161,
-          476,
+          456,
           451
         ],
         [
-          42,
+          88,
           148,
-          424,
+          470,
           450
         ],
         [
-          40,
+          89,
           130,
-          423,
+          472,
           450
         ],
         [
-          45,
+          98,
           127,
-          414,
+          467,
           451
         ]
       ],
@@ -99,9 +99,9 @@
       "anchorMeasurement": "Alpha > 16, frame zero whole-body floor center.",
       "packScale": 1.353846153846154,
       "packCrop": [
-        76,
+        27,
         92,
-        417,
+        368,
         352
       ],
       "packTranslationX": 25,
@@ -117,52 +117,153 @@
       ],
       "sourceBodyBounds": [
         [
-          89,
+          82,
           100,
-          362,
+          355,
           339
         ],
         [
-          87,
+          78,
           120,
-          365,
+          356,
           339
         ],
         [
-          84,
+          83,
           109,
-          360,
+          359,
           338
         ],
         [
-          86,
+          60,
           125,
-          384,
+          358,
           342
         ],
         [
-          99,
+          35,
           131,
-          409,
+          345,
           344
         ],
         [
-          89,
+          73,
           121,
-          370,
+          354,
           344
         ],
         [
-          87,
+          74,
           105,
-          369,
+          356,
           341
         ],
         [
-          91,
+          81,
           100,
-          363,
+          353,
           339
+        ]
+      ],
+      "packCropPerFrame": [
+        [
+          27,
+          92,
+          368,
+          352
+        ],
+        [
+          26,
+          92,
+          367,
+          352
+        ],
+        [
+          26,
+          92,
+          367,
+          352
+        ],
+        [
+          27,
+          92,
+          368,
+          352
+        ],
+        [
+          27,
+          92,
+          368,
+          352
+        ],
+        [
+          26,
+          92,
+          367,
+          352
+        ],
+        [
+          26,
+          92,
+          367,
+          352
+        ],
+        [
+          27,
+          92,
+          368,
+          352
+        ]
+      ],
+      "packCropMode": "per-frame",
+      "sourceFrameRects": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
         ]
       ]
     }
@@ -170,7 +271,7 @@
   "newRangedAttack": false,
   "newGatherArt": false,
   "sourceAppearance": "DesignAssets/Animations/ApprovedActionsV1/pebble/antenna/idle.png",
-  "sourceAppearanceSHA256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
+  "sourceAppearanceSHA256": "1c77aa597f859e86a4ac8314ce1b481eb77750b8eb531aa533874ac48b56fcc8",
   "sourceBaseAttack": "DesignAssets/Tribes/pebble/AnimationStudies/attack-directions-v3/right/attack.webp",
-  "sourceBaseAttackSHA256": "385db115850e1a9a927ff0d44888bb54fb806b682bab67cb49c23f38daf91188"
+  "sourceBaseAttackSHA256": "c93c897be002e69f2edbfe5262b027cb0408df7b57da9e4891b328324fda3561"
 }

@@ -8,6 +8,7 @@ import { SECRETION_COMBO_ACTION_ART as art, SECRETION_COMBO_IMAGE_ASSETS as imag
 import { auditImages, imageDimensions } from './image-audit.mjs';
 const root = fileURLToPath(new URL('..', import.meta.url));
 const sha = path => createHash('sha256').update(readFileSync(resolve(root,path))).digest('hex');
+const facingBaseline = JSON.parse(readFileSync(resolve(root, 'tools/spring-native-facing-20261108/remaining-facing-runtime-baseline.json'))).UNIT_ACTION_ART;
 test('all twelve secretion combinations are published', () => {
  assert.equal(Object.keys(art).length,12);
  assert.equal(images.length,92);
@@ -41,14 +42,24 @@ test('published secretion combinations expose exact source clips and portraits',
  }
 });
 test('birth includes nest/travel and anchors the finished body; ranged uses exact release timing',()=>{
- for(const definition of Object.values(art)) {
+ for(const [key,definition] of Object.entries(art)) {
   const birth=definition.actions.birth,ranged=definition.actions.ranged;
   assert.equal(birth.fullScene,true);
   assert.equal(birth.sceneIncludesNest,true);
   assert.equal(birth.worldTravelIncludedInPixels,true);
   assert.equal(birth.sceneAnchor,'final-body-floor');
   assert.ok(birth.referenceLength<definition.reference.referenceLength);
-  assert.ok((birth.sourceFacing==='left'?birth.pivotX<birth.frameSize/2:birth.pivotX>birth.frameSize/2)&&birth.pivotY>birth.frameHeight/2);
+  // Source facing describes the body, not which half of a complete birth scene
+  // contains its landing point. Spring sources were not mirrored: only their
+  // incorrect facing label changed, so every authored coordinate must survive.
+  if(key.startsWith('spring/')) {
+   const original=facingBaseline[key].actions.birth;
+   assert.equal(original.sourceFacing,'right',key+' audited original label');
+   assert.deepEqual(birth,{...original,sourceFacing:'left'},key+' label-only correction preserves the exact full-scene clip');
+  } else {
+   assert.ok(birth.sourceFacing==='left'?birth.pivotX<birth.frameSize/2:birth.pivotX>birth.frameSize/2,key+' physically mirrored scene landing');
+  }
+  assert.ok(birth.pivotY>birth.frameHeight/2,key+' final-body floor');
   assert.equal(ranged.rangedBody,true);
   assert.ok(ranged.launchAtMs>0&&ranged.launchAtMs<ranged.durationMs);
   let elapsed=0;const starts=ranged.durationsMs.map(ms=>{const start=elapsed;elapsed+=ms;return start;});

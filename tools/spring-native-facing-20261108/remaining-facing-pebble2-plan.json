@@ -1,0 +1,4525 @@
+{
+  "status": "plan-only-awaiting-explicit-product-write-permission",
+  "targets": [
+    "pebble/blade-secretion-carapace",
+    "pebble/blade-secretion-carapace-antenna"
+  ],
+  "nativeActions": 14,
+  "nativeFrames": 118,
+  "files": {
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/idle.png": {
+      "beforeSha256": "ebd18e240a3e67ffeb89c7fe5e95dc576f2762294f0304c04b0fac7d96c372a0",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/walk.png": {
+      "beforeSha256": "995b11e1089f17b7e4649b196b7374e52a9481603203cdab9c16bf45019c0c03",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/attack.png": {
+      "beforeSha256": "91196625fe40b5f5621709875cc42e41d662b79ab9cf216ba26350766999391d",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/ranged.png": {
+      "beforeSha256": "9cdd8f02038c655900cfcde9b957069bfc0cc5489c5b8d5442c06e03e331447e",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/hurt.png": {
+      "beforeSha256": "743bf3f828a05c733357d8b86fbc3b77b0997384aebe14bd28ad4b7c816a860b",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/birth.png": {
+      "beforeSha256": "3b227a36f80f84f6a25e721e0258ee60927e14e010423e5cffeceadc174cf65a",
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 14
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          0,
+          1024,
+          512,
+          1536
+        ],
+        [
+          512,
+          1024,
+          1024,
+          1536
+        ],
+        [
+          1024,
+          1024,
+          1536,
+          1536
+        ],
+        [
+          1536,
+          1024,
+          2048,
+          1536
+        ],
+        [
+          0,
+          1536,
+          512,
+          2048
+        ],
+        [
+          512,
+          1536,
+          1024,
+          2048
+        ],
+        [
+          1024,
+          1536,
+          1536,
+          2048
+        ],
+        [
+          1536,
+          1536,
+          2048,
+          2048
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/death.png": {
+      "beforeSha256": "4b8914c3fea4abed9acc64cea4a4f5afdc4b6f8eb225c23fe8b4d37ff0e13b6c",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/idle.png": {
+      "beforeSha256": "e889d6674d6f55bd2ff092a9808c48365d9ded65d59f7dea1c7cd67be80b3aa7",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/walk.png": {
+      "beforeSha256": "9f6c33f4c0428403bcfbb809afdfb3bf696a19442f8b4cc5f49dd9a1e7fba953",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/attack.png": {
+      "beforeSha256": "ecd719252dc176755909f94454d7931431afcb35564735cf071a966e60ec264f",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/ranged.png": {
+      "beforeSha256": "b22677ef5940cbd9087b6abde3b885adc7fa39cd0d679de3c553912f38a934e5",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/hurt.png": {
+      "beforeSha256": "e2044f1f96a7173b9efab99ae285283ca10179481d659aa82c79774788d5bf0e",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/birth.png": {
+      "beforeSha256": "b1afa86210c6315ef20234616a10c504301f0837161d0b0825ff182afe4a85c2",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/death.png": {
+      "beforeSha256": "e331481bed062b9ad62b89948f231bdbbb3072ba7a15a4fb40327b89f47d1830",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "native"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-idle-v1-sheet.png": {
+      "beforeSha256": "e889d6674d6f55bd2ff092a9808c48365d9ded65d59f7dea1c7cd67be80b3aa7",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet",
+        "active-publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-idle-v1-preview.webp": {
+      "beforeSha256": "403f375db34349003643081aa0c52b544fc44db0e9c7bc3dc16331b44f6f601b",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "a9c90df992c7f28c11022960e2578407ed3044fd1530f78063170b11172e7919",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-idle-v1-cover.png": {
+      "beforeSha256": "d387f5b5ce2859de347288f5e4f2a63fcb0a6690279333ee8568ae4455d89789",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/idle-generated.png": {
+      "beforeSha256": "b27dcb1834d0aa70f1a7a8594ff653ef6bd32b14fee0360c692b04e14eec3c23",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-walk-v1-sheet.png": {
+      "beforeSha256": "9f6c33f4c0428403bcfbb809afdfb3bf696a19442f8b4cc5f49dd9a1e7fba953",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet",
+        "active-publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-walk-v1-preview.webp": {
+      "beforeSha256": "7dc49a2d052eec3654cb1f5459ef8d658ed4a259beeabe36b0c62ada84e3bcfe",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-walk-v1-preview.gif": {
+      "beforeSha256": "9ced8ece25fe407bea822ef0cc7ee3eeff49a6414ca3650b69e78b6f70ef51d5",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-walk-v1-cover.png": {
+      "beforeSha256": "3b736aba005397242c47959ece8a8981976f76559553cb2ad5a56955cb11e421",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/walk-generated.png": {
+      "beforeSha256": "bb87736ca278587489b980b9c8ba4e29b6ad748658f2aea6a76e0a543a38abc5",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-attack-v1-sheet.png": {
+      "beforeSha256": "ecd719252dc176755909f94454d7931431afcb35564735cf071a966e60ec264f",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet",
+        "active-publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-attack-v1-preview.webp": {
+      "beforeSha256": "bba7dbd681d5e35b96255d8527003b496ac449230798983aaafe8cba187e7a1a",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-attack-v1-preview.gif": {
+      "beforeSha256": "150e6aeb377b1f7e42f181c8afeba6ff84b3b1a27125468a723238ba57618197",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-attack-v1-cover.png": {
+      "beforeSha256": "8bbec48e21726b255f1c7e39bae1ed7c53fa0bb3e1eb3e644267ad499b5e0807",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/attack-generated.png": {
+      "beforeSha256": "d16faa4bdbf2fd0686430451e23fb5a5639c65111dd8347bcd61530997581ad3",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-ranged-attack-v1-sheet.png": {
+      "beforeSha256": "b22677ef5940cbd9087b6abde3b885adc7fa39cd0d679de3c553912f38a934e5",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet",
+        "active-publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-ranged-attack-v1-preview.webp": {
+      "beforeSha256": "033d0f018e910276c8742b76c51f739e74b4b10873286026472df3087e08638a",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-ranged-attack-v1-preview.gif": {
+      "beforeSha256": "fa0b23067660585969774f535a3ee86372f46dd82087f988a14a4b82b19cbdab",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-ranged-attack-v1-cover.png": {
+      "beforeSha256": "934ad647a64b37c9ef140242b0a4511db3dea925d066bc4f68a7a9e1bd8f24bf",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/ranged-attack-generated.png": {
+      "beforeSha256": "4f3e2992256e9c9362a0f3e5e9ca9bb4dfcac7c95a31c8fa4c4c47deba780d0e",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-hurt-v1-sheet.png": {
+      "beforeSha256": "e2044f1f96a7173b9efab99ae285283ca10179481d659aa82c79774788d5bf0e",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet",
+        "active-publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-hurt-v1-preview.webp": {
+      "beforeSha256": "4459192b37faa50842c1a013c87b5c1ea4a5c98ba4ff4cab0e61ceacf8f10da1",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "b9ee65e5a3583483c7ad8b1fdeb8cbbe654e88ebfaef525c7721cdc6fd82334a",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-hurt-v1-cover.png": {
+      "beforeSha256": "d13206519cf773a324c066ac26dbca635a06885c124ba079de4e147967675fc4",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/hurt-generated.png": {
+      "beforeSha256": "c20fc11e13a1acec11e08ac44974f345ae9b33048ff0ec36d175381ffd0dcb2b",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-birth-v1-sheet.png": {
+      "beforeSha256": "b1afa86210c6315ef20234616a10c504301f0837161d0b0825ff182afe4a85c2",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet",
+        "active-publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-birth-v1-preview.webp": {
+      "beforeSha256": "5b5e4385dea4f97a8fa48fb4f0b9e31bd40c512a4d35adb50187ae19d01f1821",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-birth-v1-preview.gif": {
+      "beforeSha256": "e1a6e67d3aaa5a339f2827c8fdbfe56e8a7cc2c453a45dcb91aba98842d0fa9d",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-birth-v1-cover.png": {
+      "beforeSha256": "587b1b2b5e290c4baebc12eb71a9b4cf297318ff80e10aaa58ab0bf14b1a0e7e",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/birth-generated.png": {
+      "beforeSha256": "3d71b7ced3a4790623c579218d1a208f2113da45743c447abdd814356b274e2c",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-death-v1-sheet.png": {
+      "beforeSha256": "e331481bed062b9ad62b89948f231bdbbb3072ba7a15a4fb40327b89f47d1830",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet",
+        "active-publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-death-v1-preview.webp": {
+      "beforeSha256": "361d818056132397f0eaa724e2881b5892e259d773809a0f26b539936e981ce2",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-death-v1-preview.gif": {
+      "beforeSha256": "a0524dae70bcf5137a79c36a65025bfe87c741cba18693c4207229b6bea58921",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-death-v1-cover.png": {
+      "beforeSha256": "750078e6df9958e7f79073178edf763b13af6259796de49968a7a09809cd49d3",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/Sources/death-generated.png": {
+      "beforeSha256": "2f6b799f2ea370d6d142ed89e1c307604be4dadebc65f7b4dfef12a5d68856c9",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-appearance.png": {
+      "beforeSha256": "d387f5b5ce2859de347288f5e4f2a63fcb0a6690279333ee8568ae4455d89789",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "appearance-reference"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-idle-v1-sheet.png": {
+      "beforeSha256": "ebd18e240a3e67ffeb89c7fe5e95dc576f2762294f0304c04b0fac7d96c372a0",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet",
+        "active-publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-idle-v1-preview.webp": {
+      "beforeSha256": "1cc76335203bbd06d341058bb3b518664c567cbaea46f7ec36fe49e8e0616e78",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-idle-v1-preview.gif": {
+      "beforeSha256": "eb38721f4c83b1c8d1825be922922742de530b1e0bf5285cae58db28b3d33703",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-idle-v1-cover.png": {
+      "beforeSha256": "2349646783bca80f776c4cf97b2cfad0efce07905e4a2c23eeb89c7f5e3ff4c4",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/idle-generated.png": {
+      "beforeSha256": "3ed8bbbfad45c175b1af47f12d6d4cfa9d97df7c3bed7adffa1281b460416f60",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-walk-v1-sheet.png": {
+      "beforeSha256": "995b11e1089f17b7e4649b196b7374e52a9481603203cdab9c16bf45019c0c03",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet",
+        "active-publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-walk-v1-preview.webp": {
+      "beforeSha256": "76e338d70eed04151228e8fc95a125496fa9a2efe608a7b3f44acaefd0de5e35",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-walk-v1-preview.gif": {
+      "beforeSha256": "73f005ce3efd13b3695f420b2bf25a63720bbb9bd64d2991a75b0da9c072ef5a",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-walk-v1-cover.png": {
+      "beforeSha256": "e1c6b237e587700b4b9ece3edda21790d38d8d693468ad1bc3689a95bd87bc64",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/walk-generated.png": {
+      "beforeSha256": "a46d549e271df10231a1fb5dfe79ed1904c62dc7aa2bb8f7cf704adf621b55f5",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-attack-v1-sheet.png": {
+      "beforeSha256": "91196625fe40b5f5621709875cc42e41d662b79ab9cf216ba26350766999391d",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet",
+        "active-publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-attack-v1-preview.webp": {
+      "beforeSha256": "2c30b9361254f579b4342a9de14d9b8963e1794fece278c53a393b1d5c898f82",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-attack-v1-preview.gif": {
+      "beforeSha256": "24594482d100b9ae91e7de96ca8184798da8fe2ee441920a88f88e06c8e59308",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-attack-v1-cover.png": {
+      "beforeSha256": "634f0585edd9bc5e3672986d61e3138ccbdf58e00d97330c9143557e474866c5",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/attack-generated.png": {
+      "beforeSha256": "de113554dfb65bf02afe7136d877174727373421144758eb36f0d8aa6e862a67",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-ranged-attack-v1-sheet.png": {
+      "beforeSha256": "9cdd8f02038c655900cfcde9b957069bfc0cc5489c5b8d5442c06e03e331447e",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet",
+        "active-publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-ranged-attack-v1-preview.webp": {
+      "beforeSha256": "7a3ce04adbce13ee34ad5d23ff14f7eb993c8520a62f60777ec8b84bf11f2d81",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-ranged-attack-v1-preview.gif": {
+      "beforeSha256": "70ba2244df3b12cfe7bbf56cf3775393a042c55d4f7017a5eeaa73c30adf28bc",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-ranged-attack-v1-cover.png": {
+      "beforeSha256": "dd94645694b3a4af48b18f36006089c9f5866fc7d246f152fbea662f73431a70",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/ranged-attack-generated.png": {
+      "beforeSha256": "9e254c63ba8b4f82e894ca0851913c68b0f05aed5062c3e5b09bd21541d99dd1",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-hurt-v1-sheet.png": {
+      "beforeSha256": "743bf3f828a05c733357d8b86fbc3b77b0997384aebe14bd28ad4b7c816a860b",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet",
+        "active-publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-hurt-v1-preview.webp": {
+      "beforeSha256": "209c513239fd76efb5d80d12d6c379346b79ca4252927a4148bc907947cebcba",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-hurt-v1-preview.gif": {
+      "beforeSha256": "1cd07c8b3178759af9952fef6ed9163535bc304bbc5b9013307d63a7983ebbfe",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-hurt-v1-cover.png": {
+      "beforeSha256": "06442db2051d36be0018d564f28c488bc7ebfa3740f99c7229daf72e7e0381f3",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/hurt-generated.png": {
+      "beforeSha256": "f188d549442ae7a15c0988ce7add1255f33ef5f2c8cfdd868d5065eccf3b19ca",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-sheet.png": {
+      "beforeSha256": "34c7456540441caa3bf8dfc51594a4975ee470febc910b0fa29c8a446f74dfa7",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-preview.webp": {
+      "beforeSha256": "e0f13b6d0ad947dd12bb221520b75f9490b171ed84d29563d70a2b422d0f0878",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-preview.gif": {
+      "beforeSha256": "3ecdf9aca6f8947df0d180c06bf379527a364f0279447fe79407f963a026e0cf",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-birth-v1-cover.png": {
+      "beforeSha256": "ba98a7c3751f3aec4dd4bcef84e2ae4c5bd52ecdd3f1cc1ff3b26867ae57935f",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/birth-generated.png": {
+      "beforeSha256": "67baeacc2be18b44cd902612184302046bc07d02fbc8034e6e91af3d44fd6d57",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion-carapace/birth.png": {
+      "beforeSha256": "3b227a36f80f84f6a25e721e0258ee60927e14e010423e5cffeceadc174cf65a",
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "active-publication-sheet",
+        "publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 14
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          0,
+          1024,
+          512,
+          1536
+        ],
+        [
+          512,
+          1024,
+          1024,
+          1536
+        ],
+        [
+          1024,
+          1024,
+          1536,
+          1536
+        ],
+        [
+          1536,
+          1024,
+          2048,
+          1536
+        ],
+        [
+          0,
+          1536,
+          512,
+          2048
+        ],
+        [
+          512,
+          1536,
+          1024,
+          2048
+        ],
+        [
+          1024,
+          1536,
+          1536,
+          2048
+        ],
+        [
+          1536,
+          1536,
+          2048,
+          2048
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion-carapace/birth-preview.webp": {
+      "beforeSha256": "3b7815912b944a434d39d1f3ed324f19919edb732eab5424b6ba73bc2ee85447",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 14,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-death-v1-sheet.png": {
+      "beforeSha256": "4b8914c3fea4abed9acc64cea4a4f5afdc4b6f8eb225c23fe8b4d37ff0e13b6c",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "publication-sheet",
+        "active-publication-sheet"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "validFrameCount": 8
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-death-v1-preview.webp": {
+      "beforeSha256": "7c5ccf5612322e8bb9124011cbddd662b0c6049caff1caee51767e1e7b135fac",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-death-v1-preview.gif": {
+      "beforeSha256": "b1414171e79d6b12e5c876f20549a6be41af86407614ee289f8f54fa88239326",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 8,
+      "roles": [
+        "temporal-preview"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": null,
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-each-temporal-frame; preserve visible RGBA/timing/loop/palette"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-death-v1-cover.png": {
+      "beforeSha256": "e4420546c21281c8cc78cc3c172f80f7b4c1860d6a468648d8aebaf0362383a6",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "cover"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/Sources/death-generated.png": {
+      "beforeSha256": "795d778b55b30786e68451af038ca190bda51f816a63f4e3947c019e9edec017",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "raw-source"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "irregular": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          444,
+          444
+        ],
+        [
+          444,
+          0,
+          887,
+          444
+        ],
+        [
+          887,
+          0,
+          1330,
+          444
+        ],
+        [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        [
+          0,
+          444,
+          444,
+          887
+        ],
+        [
+          444,
+          444,
+          887,
+          887
+        ],
+        [
+          887,
+          444,
+          1330,
+          887
+        ],
+        [
+          1330,
+          444,
+          1774,
+          887
+        ]
+      ],
+      "reasons": [
+        "sourceFrameRects when present; otherwise exact round-based pack.py 4x2 grid"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-each-cell; retain ordering/dimensions"
+    },
+    "DesignAssets/Concepts/CombatTriplesV1/pebble-blade-piercing-carapace.png": {
+      "beforeSha256": "d2c356c6ecde44525623474de0beb8bfbc37cc65968cb392915594f20850962c",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "appearance-reference"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          1254,
+          1254
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-appearance.png": {
+      "beforeSha256": "d2c356c6ecde44525623474de0beb8bfbc37cc65968cb392915594f20850962c",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "appearance-reference"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          1254,
+          1254
+        ]
+      ],
+      "reasons": [],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "DesignAssets/Animations/AntennaCombosV1/pebble/blade-secretion-carapace-antenna/portrait.png": {
+      "beforeSha256": "d387f5b5ce2859de347288f5e4f2a63fcb0a6690279333ee8568ae4455d89789",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "exact-byte-alias"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace-antenna"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [
+        "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/pebble-blade-secretion-carapace-antenna-idle-v1-cover.png"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    },
+    "DesignAssets/Animations/SecretionCombosV1/pebble/blade-secretion-carapace/portrait.png": {
+      "beforeSha256": "2349646783bca80f776c4cf97b2cfad0efce07905e4a2c23eeb89c7f5e3ff4c4",
+      "dimensions": [
+        512,
+        512
+      ],
+      "temporalFrames": 1,
+      "roles": [
+        "exact-byte-alias"
+      ],
+      "owners": [
+        "pebble/blade-secretion-carapace"
+      ],
+      "grid": null,
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "reasons": [
+        "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/pebble-blade-secretion-carapace-idle-v1-cover.png"
+      ],
+      "sharedUsers": [],
+      "operation": "mirror-single-image"
+    }
+  },
+  "regionalJson": {
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/generation-prompts.json": {
+      "beforeSha256": "e50140dfcedacbf9025cbb88102685cfb89354ebeaebb6f6f99c415e5102b38e",
+      "owner": "pebble/blade-secretion-carapace-antenna",
+      "keys": [
+        "idle",
+        "walk",
+        "attack",
+        "ranged-attack",
+        "hurt",
+        "birth",
+        "death"
+      ],
+      "operation": "preserve-historical-evidence"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/manifest.json": {
+      "beforeSha256": "95fa80aa11fedd7b1b2f4e9b81397dc8e5acf45e3904c325248fea1fe5054dbb",
+      "owner": "pebble/blade-secretion-carapace-antenna",
+      "keys": [
+        "tribe",
+        "form",
+        "status",
+        "authorizationMessageId",
+        "method",
+        "sourceFacing",
+        "antennaIdentity",
+        "actions",
+        "workActionMapping",
+        "gatherNewArt",
+        "sourceAppearance",
+        "sourceAppearanceSHA256"
+      ],
+      "operation": "synchronize-active-source-metadata"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/qa-report.json": {
+      "beforeSha256": "22ef6f293060d6ae77158cb8ee4bcaf4e4c712df7b8c812ee99e3ed77a10a3cc",
+      "owner": "pebble/blade-secretion-carapace-antenna",
+      "keys": [
+        "form",
+        "bodyPartsComposited",
+        "browserPlaybackVerified",
+        "actions",
+        "technicalChecksPassed",
+        "visualReview",
+        "packedContactReviewed",
+        "finalBodyAnchorVerified",
+        "cueTimingVerified"
+      ],
+      "operation": "preserve-historical-evidence"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/publication-manifest.json": {
+      "beforeSha256": "95fa80aa11fedd7b1b2f4e9b81397dc8e5acf45e3904c325248fea1fe5054dbb",
+      "owner": "pebble/blade-secretion-carapace-antenna",
+      "keys": [
+        "tribe",
+        "form",
+        "status",
+        "authorizationMessageId",
+        "method",
+        "sourceFacing",
+        "antennaIdentity",
+        "actions",
+        "workActionMapping",
+        "gatherNewArt",
+        "sourceAppearance",
+        "sourceAppearanceSHA256"
+      ],
+      "operation": "synchronize-active-source-metadata"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/generation-prompts.json": {
+      "beforeSha256": "507b74dc8bf3988256b614b73f8f0dd5dcbac8ea40df46d14960aa09c2402722",
+      "owner": "pebble/blade-secretion-carapace",
+      "keys": [
+        "tool",
+        "transparentBackground",
+        "actions"
+      ],
+      "operation": "preserve-historical-evidence"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/manifest.json": {
+      "beforeSha256": "bcb6b4264d9b1539a0224d947a5b9c2b93455373e17fe18977664192e41e839f",
+      "owner": "pebble/blade-secretion-carapace",
+      "keys": [
+        "tribe",
+        "form",
+        "status",
+        "method",
+        "sourceAppearance",
+        "frameSize",
+        "columns",
+        "rows",
+        "gameIntegration",
+        "deployment",
+        "actions",
+        "excludedActions",
+        "previewPolicy"
+      ],
+      "operation": "synchronize-active-source-metadata"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/qa-report.json": {
+      "beforeSha256": "2009620a5b387917ebde849e96feb4b34f85e683a6c5e16d763986452101a1be",
+      "owner": "pebble/blade-secretion-carapace",
+      "keys": [
+        "actionCount",
+        "frameCount",
+        "sourceGrid",
+        "bodyPartsComposited",
+        "projectileBakedIntoBodySheet",
+        "actions",
+        "allTechnicalChecksPassed",
+        "visualReview",
+        "browserPlaybackTest"
+      ],
+      "operation": "preserve-historical-evidence"
+    },
+    "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json": {
+      "beforeSha256": "fbca4589cd07d3c6af49a525d5cae4fdf9911f9eb53c6c2886d11e52c3838ef0",
+      "owner": "pebble/blade-secretion-carapace",
+      "keys": [
+        "tribe",
+        "form",
+        "status",
+        "authorizationMessageId",
+        "sourceAppearance",
+        "sourceAppearanceSHA256",
+        "actions",
+        "rangedBodyOnly",
+        "projectileBakedIntoBodySheet",
+        "gameIntegration",
+        "deployment",
+        "verification",
+        "note"
+      ],
+      "operation": "synchronize-active-source-metadata"
+    },
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion-carapace/publication-manifest.json": {
+      "beforeSha256": "34048c7c6ce2278f07a052902628e198156ebdeb8584888cf4610c190c16f83a",
+      "owner": "pebble/blade-secretion-carapace",
+      "keys": [
+        "tribe",
+        "form",
+        "actions",
+        "originalSourceImage",
+        "originalSourceSHA256",
+        "preservedOriginalFrames",
+        "independentReview",
+        "originalSourceSheet"
+      ],
+      "operation": "synchronize-active-source-metadata"
+    }
+  },
+  "publications": [
+    {
+      "owner": "pebble/blade-secretion-carapace-antenna",
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/publication-manifest.json"
+    },
+    {
+      "owner": "pebble/blade-secretion-carapace",
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json"
+    },
+    {
+      "owner": "pebble/blade-secretion-carapace",
+      "path": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-secretion-carapace/publication-manifest.json"
+    }
+  ],
+  "preservedHistorical": [
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-antenna-fullbody-v1-20261107/qa-contact.png",
+      "reason": "QA montage includes labels/layout; preserve historical evidence, not whole-image mirror"
+    },
+    {
+      "path": "AnimationCandidates/pebble-blade-secretion-carapace-fullbody-v1-20261107/qa-contact.png",
+      "reason": "QA montage includes labels/layout; preserve historical evidence, not whole-image mirror"
+    }
+  ],
+  "issues": [],
+  "specialHandling": [
+    "Nonantenna birth active roll-v2 has14 frames, old family8-frame source remains lineage and is normalized separately.",
+    "birth pivotX382->130 and antenna398->114; all other off-center pivots W-x.",
+    "raw source grids have unequal cell widths; packCrop must become per-frame crop x0=rawCellWidth-oldX1, x1=rawCellWidth-oldX0.",
+    "packed translation x=512-oldX-round(cropWidth*packScale); source cell boundaries unchanged.",
+    "Any shared source uses same-directory clone and returned pathMap; do not rewrite other owners.",
+    "No projectile angle assets included.",
+    "Existing generation packers must not be rerun; old external generation copy paths remain a known limitation."
+  ],
+  "summary": {
+    "native": 14,
+    "publication-sheet": 15,
+    "active-publication-sheet": 14,
+    "temporal-preview": 29,
+    "cover": 14,
+    "raw-source": 14,
+    "appearance-reference": 3,
+    "exact-byte-alias": 2,
+    "regionalActiveJson": 5,
+    "regionalHistoricalJson": 4
+  },
+  "sharingAudit": {
+    "registryOwnerEntriesChecked": 97,
+    "activePublicationOwnerScan": true,
+    "externalRuntimeReferences": []
+  }
+}

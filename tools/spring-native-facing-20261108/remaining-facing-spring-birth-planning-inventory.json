@@ -1,0 +1,117 @@
+[
+  {
+    "key": "unit-spring-tribe",
+    "sourceFacing": null,
+    "hasScene": false,
+    "payloadKeys": [],
+    "nativeAnimation": "true",
+    "href": "DesignAssets/Planning/Tribes/spring/Previews/birth-game.webp"
+  },
+  {
+    "key": "unit-spring-blade-carapace",
+    "sourceFacing": null,
+    "hasScene": false,
+    "payloadKeys": [],
+    "href": "AnimationCandidates/spring-blade-carapace-fullbody-v1-20261107/spring-blade-carapace-birth-v1-sheet.png"
+  },
+  {
+    "key": "unit-spring-secretion-carapace",
+    "sourceFacing": null,
+    "hasScene": false,
+    "payloadKeys": [],
+    "href": "AnimationCandidates/spring-secretion-carapace-fullbody-v1-20261107/spring-secretion-carapace-birth-v1-sheet.png"
+  },
+  {
+    "key": "unit-spring-blade-secretion",
+    "sourceFacing": null,
+    "hasScene": false,
+    "payloadKeys": [],
+    "href": "AnimationCandidates/spring-blade-secretion-fullbody-v1-20261107/spring-blade-secretion-birth-v1-sheet.png"
+  },
+  {
+    "key": "unit-spring-blade-secretion-carapace",
+    "sourceFacing": null,
+    "hasScene": false,
+    "payloadKeys": [],
+    "href": "AnimationCandidates/spring-blade-secretion-carapace-fullbody-v1-20261107/spring-blade-secretion-carapace-birth-v1-sheet.png"
+  },
+  {
+    "key": "unit-spring-blade-antenna",
+    "sourceFacing": null,
+    "hasScene": true,
+    "payloadKeys": [
+      "sceneLayers",
+      "frameSize",
+      "frameHeight",
+      "durationsMs",
+      "loop"
+    ],
+    "href": "AnimationCandidates/spring-blade-antenna-fullbody-v1-20261107/spring-blade-antenna-birth-v1-sheet.png"
+  },
+  {
+    "key": "unit-spring-secretion-antenna",
+    "sourceFacing": null,
+    "hasScene": true,
+    "payloadKeys": [
+      "sceneLayers",
+      "frameSize",
+      "frameHeight",
+      "durationsMs",
+      "loop"
+    ],
+    "href": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-birth-v1-sheet.png"
+  },
+  {
+    "key": "unit-spring-carapace-antenna",
+    "sourceFacing": null,
+    "hasScene": false,
+    "payloadKeys": [],
+    "href": "AnimationCandidates/spring-carapace-antenna-fullbody-v1-20261107/spring-carapace-antenna-birth-v1-sheet.png"
+  },
+  {
+    "key": "unit-spring-blade-secretion-antenna",
+    "sourceFacing": null,
+    "hasScene": true,
+    "payloadKeys": [
+      "sceneLayers",
+      "frameSize",
+      "frameHeight",
+      "durationsMs",
+      "loop"
+    ],
+    "href": "AnimationCandidates/spring-blade-secretion-antenna-fullbody-v1-20261107/spring-blade-secretion-antenna-birth-v1-sheet.png"
+  },
+  {
+    "key": "unit-spring-blade-carapace-antenna",
+    "sourceFacing": null,
+    "hasScene": false,
+    "payloadKeys": [],
+    "href": "AnimationCandidates/spring-blade-carapace-antenna-fullbody-v1-20261107/spring-blade-carapace-antenna-birth-v1-sheet.png"
+  },
+  {
+    "key": "unit-spring-secretion-carapace-antenna",
+    "sourceFacing": null,
+    "hasScene": false,
+    "payloadKeys": [],
+    "href": "AnimationCandidates/spring-secretion-carapace-antenna-fullbody-v1-20261107/spring-secretion-carapace-antenna-birth-v1-sheet.png"
+  },
+  {
+    "key": "unit-spring-blade-secretion-carapace-antenna",
+    "sourceFacing": null,
+    "hasScene": true,
+    "payloadKeys": [
+      "sceneLayers",
+      "frameSize",
+      "frameHeight",
+      "durationsMs",
+      "loop"
+    ],
+    "href": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-birth-v1-sheet.png"
+  },
+  {
+    "key": "unit-spring-keeper",
+    "sourceFacing": null,
+    "hasScene": false,
+    "payloadKeys": []
+  }
+]

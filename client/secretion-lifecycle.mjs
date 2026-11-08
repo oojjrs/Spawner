@@ -20,6 +20,8 @@ export const UNIT_SECRETION_LIFECYCLE_ANIMATIONS = Object.freeze(Object.fromEntr
       image: "DesignAssets/Animations/UnitRangedV1/" + tribe + "/" + action + ".png",
       bodyReferenceImage: body.image, secretionLifecycle: true,
       ...(["bean", "spore"].includes(tribe) ? { sourceFacing: "left" } : {}),
+      // This separate frontal source was not reflected with the base body.
+      ...(tribe === "pebble" ? { sourceFacing: "right" } : {}),
       ...(tribe === "bean" && action === "death" ? APPROVED_SPROUT_DEATH_ANIMATIONS.secretion : {}),
       ...(tribe === "spring" ? SPRING_SECRETION_ASSETS[action] : {})
     })])

@@ -26,7 +26,7 @@ test('all 19 neutral species have an original idle reference and every strip kee
    const g=imageFrameGeometry(a,frame);assert.equal(g.viewSize,a.viewSize);assert.equal(g.frameSize,a.frameSize);
    assert.ok(Math.abs(g.pivotX-a.pivotX)<=3.000001);assert.ok(Math.abs(g.pivotY-a.pivotY)<=3.000001);
   }
-  if(!a.travelWindow)assert.ok(Number.isFinite(a.cyclesPerCell)&&a.cyclesPerCell>0,r.key);
+  if(!a.travelWindow)assert.ok(Number.isFinite(a.cyclesPerCell)&&a.cyclesPerCell>0 || Number.isFinite(a.temporalCadenceHz)&&a.temporalCadenceHz>0,r.key);
   if(r.preservedGroundRegistration){near(a.pivotX,131.25);near(a.pivotY,220.81);}
  }
 });
@@ -56,14 +56,15 @@ test('authored jumps advance during flight and remain planted before takeoff and
   near(unitMovementPosition(a,(end+1)/2).x,1);near(unitMovementPosition(a,1).x,1);
  }
 });
-test('welcome uses the same species speeds, cell interpolation and animation phase as game movement',()=>{
+test('legacy welcome uses native neutral speed, bounded playable cell time and shared interpolation',()=>{
  for(const key of ['bean','spore','pebble','spring',...reference.map(r=>r.key)])for(const feet of [0,1]){
   const speed=CREATURE_MOVEMENT[key]?.speed||unitStats({feet},key).speed;
+  const duration=CREATURE_MOVEMENT[key]?1/speed:Math.min(1,1/speed);
   let previousX=Infinity;
   const start=welcomeTravelMotion(model,{key,attributes:{feet},width:390,size:184,elapsedMs:0,timeline:20,startedAt:20,phase:'enter'});
   for(const age of [.01,.11,.29,.61,.93,1.21].filter(age=>age*1000<start.durationMs)){
    const m=welcomeTravelMotion(model,{key,attributes:{feet},width:390,size:184,elapsedMs:age*1000,timeline:20+age,startedAt:20,phase:'enter'});
-   near(m.agent.moveDuration,1/speed);near(m.position.x,unitMovementPosition(m.agent,20+age).x);
+   near(m.agent.moveDuration,duration);near(m.position.x,unitMovementPosition(m.agent,20+age).x);
    assert.ok(m.x<=previousX+1e-6);previousX=m.x;
    const pose=m.agent.species?creatureWalkPose(m.agent,20+age):unitAnimationPose(m.agent,20+age);
    if(!['spiny-back-beetle','bean'].includes(key))assert.ok(pose,key);
@@ -89,15 +90,16 @@ test('all 23 welcome units keep valid poses at exact cell boundaries and adjacen
  assert.equal(keys.length,23);
  for(const key of keys)for(const feet of [0,1])for(const origin of [0,20,91.1,100000]){
   const attributes={feet},speed=CREATURE_MOVEMENT[key]?.speed||unitStats(attributes,key).speed;
+  const duration=CREATURE_MOVEMENT[key]?1/speed:Math.min(1,1/speed);
   const request={key,attributes,width:390,size:184,elapsedMs:0,timeline:origin,startedAt:origin,phase:'enter'};
-  const start=welcomeTravelMotion(model,request),steps=Math.round(start.durationMs/1000*speed);
-  const finalAt=origin+steps/speed;
+  const start=welcomeTravelMotion(model,request),steps=Math.round(start.durationMs/1000/duration);
+  const finalAt=origin+steps*duration;
   for(let boundary=0;boundary<=steps;boundary++)for(const delta of [-1e-9,0,1e-9]){
-   const time=origin+boundary/speed+delta;
+   const time=origin+boundary*duration+delta;
    if(time<origin)continue;
    const m=welcomeTravelMotion(model,{...request,elapsedMs:(time-origin)*1000,timeline:time});
-   assert.equal(m.agent.moveStartedAt,origin+(m.agent.stepCount-1)/speed);
-   assert.equal(m.agent.moveDuration,origin+m.agent.stepCount/speed-m.agent.moveStartedAt);
+   assert.equal(m.agent.moveStartedAt,origin+(m.agent.stepCount-1)*duration);
+   assert.equal(m.agent.moveDuration,origin+m.agent.stepCount*duration-m.agent.moveStartedAt);
    assert.equal(m.agent.flightStartedAt,origin);
    assert.ok(Number.isFinite(m.x));
    if(time>=finalAt){near(m.x,195);continue;}

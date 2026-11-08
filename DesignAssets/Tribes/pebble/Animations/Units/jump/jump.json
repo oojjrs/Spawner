@@ -28,12 +28,13 @@
   "columns": 4,
   "frameCount": 16,
   "pivot": [
-    55.5,
+    456.5,
     97.125
   ],
   "rootMotion": false,
   "atlas": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.png",
   "runtimeAtlas": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump.webp",
   "preview": "DesignAssets/Planning/Tribes/pebble/Animations/Units/jump/jump-preview.gif",
-  "contact": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump-contact.png"
+  "contact": "DesignAssets/Tribes/pebble/Animations/Units/jump/jump-contact.png",
+  "sourceFacing": "left"
 }

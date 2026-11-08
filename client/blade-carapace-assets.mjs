@@ -1111,7 +1111,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/spring/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,

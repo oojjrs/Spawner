@@ -435,7 +435,8 @@
       "previewLoopCount": 0,
       "sheetSHA256": "c462eb7cfdab4a7eeb7a2b120990dbf3b36c6356cc1e0fc2417028a796ab2186",
       "previewSHA256": "ffffcfb69b90bb5031b00c2dc731eee5d73f30bf6d7f907f11a1f6697682568d",
-      "gifSHA256": "9815f1582366b6c0f325df0d5458a35792aa4deb18a8dfe091d82dd6fc68d04a"
+      "gifSHA256": "9815f1582366b6c0f325df0d5458a35792aa4deb18a8dfe091d82dd6fc68d04a",
+      "sourceFacing": "left"
     },
     "death": {
       "frameSize": 480,

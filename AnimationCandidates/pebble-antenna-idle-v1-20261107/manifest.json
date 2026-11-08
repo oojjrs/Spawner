@@ -23,10 +23,11 @@
     400
   ],
   "durationMs": 2500,
-  "sheetSHA256": "9c58cb1fa11ed22c48b03b51687de1bf98668b2c6bd9c522c2bc9bbe01a4faf9",
-  "previewSHA256": "2e1fea4bcca881796361390d80c6208da1e109ff25f180b17230be05609d21c4",
+  "sheetSHA256": "1c77aa597f859e86a4ac8314ce1b481eb77750b8eb531aa533874ac48b56fcc8",
+  "previewSHA256": "d6dd1abfc431d839afd7a81f3fb1ef57e0fa4e69ec1b6a73aa0009f8409de537",
   "originalBytesPreserved": true,
   "maxTimelineRGBRMSE": 1.5001309655554609,
   "usage": "Approved full-body idle poses. Planning reference only; game runtime and deployment are unchanged.",
-  "approvalNote": "Accepted by the user with reservations about the result."
+  "approvalNote": "Accepted by the user with reservations about the result.",
+  "sourceFacing": "left"
 }
