@@ -1,3 +1,8 @@
+## 검사·복구 결과 [lab-carapace-complete-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:21:24+09:00; 사용자전체점검지시,확인·기록Codex /root. 출처현재채팅및명시담당도구근거.
+- 전투 실험실의 실제DNA만 dnaCanAttack 재사용으로 선공판정을맞췄다. defensive-base-power35개전부통과(270.9ms), 갑각선공·무기관/안테나/채집피격반응·no-offense경계를검사했다. client/build-combat.mjs로 Combat.html6행을동기화했고원본/산출물형식OK. 담당검수11e9e7,메인diff396765/format9a1fad.
+
 ## 바닥 자원 렌더 순서 검사 완료 [drop-render-complete-01a1b8b3]
 
 - 기록·확인 시각 2026-11-08T13:11:26+09:00; 결정 사용자 현재 채팅의 전체 점검·작업별 완료 지시, 기록 Codex /root. 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e.
@@ -22,6 +27,12 @@
 
 - 기록·확인 시각 2026-11-08T13:11:26+09:00; 결정 사용자 현재 채팅의 전체 점검·작업별 완료 지시, 기록 Codex /root. 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e.
 - server/combat.test.mjs 62개는 접근 후 공격 시작, 근접 명중과 원거리 도달 분리, 독립 공격 간격, 사망 후 공격 취소 및 구형 저장 복원 보존을 검사한다. 최초55실패를 모두 수정했고 마지막 구형 딱정벌레1개도 체력 정확 보존으로 강화 후 통과(97.8791ms, combat-after5.tap). 테스트 삭제·skip 없음. 담당 /root/combat_tests_finish 자체 형식·diff 검수와 메인 diff 대조8479ef/fbe2b5 완료.
+
+## 전투 실험실 갑각 선공 불일치 수정 결정 [lab-carapace-start-01a1b8b3]
+
+- 기록·확인 시각 2026-11-08T13:09:52+09:00; 판단·기록 Codex /root, 발견 /root/combat_tests_finish. 출처 현재 채팅·도구1aaa2f/76867f. 사용자 모든 경로 점검·복구 지시에 포함되는 실제 제품 불일치다.
+- server/dna-unit.mjs의 dnaCanAttack은 갑각을 공격 가능으로 판정하고 도감도 기본 공격력1로 적을 찾는다고 설명하지만 client/combat-simulation.mjs는 melee/ranged만 선공 가능으로 계산해 갑각끼리 실험을 no-offense로 끝낸다. 전투 엔진이 실제로 engage=true인 것과 모순된다.
+- 전투 담당에게 기존 공용 dnaCanAttack을 재사용하는 최소 제품 수정과 갑각/무공격 DNA를 구분하는 회귀 검사를 맡긴다. 임의의 밸런스 변경은 하지 않으며 번들 생성은 메인이 최종 소스에서 수행한다. 제품 수정은 테스트 교정과 별도 커밋한다.
 
 ## 회생 포인트 경계 검사 해결 완료 [test-economy-complete-01a1b8b3]
 

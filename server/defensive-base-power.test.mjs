@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { DNA_COMBAT_RULES } from "./dna-combat-stats.mjs";
 import { ATTRIBUTE_DNA } from "./dna.mjs";
 import { dnaUnitStats } from "./dna-unit.mjs";
 import { dnaAttackMode } from "./dna-actions.mjs";
@@ -51,7 +52,7 @@ function fixture(tribe = "bean", genes = [], offense = ["blade"], options) {
   return { ...f, attacker, defender };
 }
 
-for (const tribe of tribes) test(`${tribe}: all basic bodies and starting workers have power 1 without offensive eligibility`, () => {
+for (const tribe of tribes) test(`${tribe}: basic bodies have power 1 while carapace alone enables initiation`, () => {
   for (const dna of [...forms.map(design), startingWorkerDna(tribe)]) {
     const agent = unit("basic", "left", tribe, dna), stats = agent.stats.dna;
     assert.equal(stats.power, 1); assert.equal(stats.meleePower, 1); assert.equal(stats.meleeSpeed, .5);
@@ -59,11 +60,12 @@ for (const tribe of tribes) test(`${tribe}: all basic bodies and starting worker
     assert.equal(stats.melee, false); assert.equal(stats.ranged, false); assert.equal(stats.rangedPower, 0);
     assert.equal(stats.counter, 0); assert.equal(stats.defensiveMelee, true);
     assert.equal(agent.stats.attackPower, 1); assert.equal(combatProfile(agent).attackPower, 1);
-    assert.equal(combatDisposition(agent), "passive"); assert.equal(militaryAgent(agent), false);
+    const canInitiate = dna.pieces.some(piece => piece.gene === "carapace");
+    assert.equal(combatDisposition(agent), canInitiate ? "aggressive" : "passive"); assert.equal(militaryAgent(agent), false);
     assert.equal(dnaAttackMode(stats, .5), null); assert.equal(dnaAttackMode(stats, .5, true), "melee");
     assert.equal(dnaAttackMode(stats, 2, true), null);
     const derived = deriveSimulationStats({ key: tribe, dna });
-    assert.equal(derived.canAttack, true); assert.equal(derived.canInitiate, false);
+    assert.equal(derived.canAttack, true); assert.equal(derived.canInitiate, canInitiate);
   }
 });
 
@@ -88,29 +90,39 @@ test("all four real colonies start, birth, and restore basic and defensive DNA a
     }
     game.restore(game.save());
     assert.ok(game.agents.every(agent => agent.stats.attackPower === 1 && agent.stats.dna.defensiveMelee));
-    assert.ok(game.agents.every(agent => combatDisposition(agent) === "passive"));
+    for (const agent of game.agents) assert.equal(combatDisposition(agent), agent.dna.pieces.some(piece => piece.gene === "carapace") ? "aggressive" : "passive");
   }
 });
 
-test("all twelve defensive appearance trials take the first hit and deal power-1 responses", () => {
+test("all twelve basic appearance trials preserve power-1 hits and carapace initiative", () => {
   for (const tribe of tribes) for (const genes of forms.slice(2)) {
     const trial = createSimulationTrial({ left: { key: tribe, dna: design(genes) },
       right: { key: "bean", counts: {} }, first: "left", random: false });
     trial.finish();
-    assert.equal(trial.reason, "death"); assert.equal(trial.result().winner, "right");
-    assert.equal(trial.history.find(event => event.kind === "attack").attackerId, "right");
+    assert.equal(trial.reason, "death");
+    assert.equal(trial.history.find(event => event.kind === "attack").attackerId, genes.includes("carapace") ? "left" : "right");
     const incoming = trial.history.find(event => event.kind === "hit" && event.targetId === "left");
     const outgoing = trial.history.filter(event => event.kind === "hit" && event.attackerId === "left");
-    assert.ok(outgoing.length > 0); assert.ok(outgoing[0].time > incoming.time);
+    assert.ok(outgoing.length > 0);
+    if (!genes.includes("carapace")) assert.ok(outgoing[0].time > incoming.time);
     for (const event of outgoing) close(event.damage, 1);
-    close(trial.result().rightHealth, 10 - outgoing.length);
+    close(trial.result().rightHealth, Math.max(0, 10 - outgoing.length));
     assert.equal(trial.history.some(event => event.kind === "counter"), false);
   }
 });
 
-for (const tribe of tribes) for (const genes of forms) test(`${tribe} ${genes.join("+") || "empty"}: survives the first hit and responds for exactly 1`, () => {
+for (const tribe of tribes) for (const genes of forms) test(`${tribe} ${genes.join("+") || "empty"}: uses power 1 with the appropriate initiation permission`, () => {
   const f = fixture(tribe, genes), { attacker, defender } = f;
-  assert.equal(canPursueCombat({ ...defender, combat: null }, { ...attacker, combat: null }, 0), false);
+  assert.equal(canPursueCombat({ ...defender, combat: null }, { ...attacker, combat: null }, 0), genes.includes("carapace"));
+  if (genes.includes("carapace")) {
+    f.tick(0); assert.equal(defender.attack.counter, false); close(defender.attack.startedAt, 0);
+    f.tick(.299); assert.equal(attacker.health, 10);
+    f.tick(.3); close(attacker.health, 9);
+    const hits = f.events.filter(event => event.kind === "hit" && event.sourceId === defender.id);
+    assert.equal(hits.length, 1); close(hits[0].amount, 1);
+    const count = f.events.length; f.tick(.3); assert.equal(f.events.length, count);
+    return;
+  }
   f.tick(0); f.tick(.299);
   assert.equal(defender.attack, null); assert.equal(defender.combat.defending, undefined);
   assert.equal(f.events.some(event => event.kind === "attack" && event.sourceId === defender.id), false);
@@ -137,7 +149,7 @@ test("defensive base damage keeps existing armor and damage-variation calculatio
 
 test("no-offense teams never initiate even when simulation initiative chooses their side", () => {
   for (const tribe of tribes) for (const first of ["left", "right", "simultaneous"]) {
-    const input = { key: tribe, dna: design(["carapace", "antenna"]) };
+    const input = { key: tribe, dna: design(["antenna"]) };
     const trial = createSimulationTrial({ left: input, right: input, first, random: false });
     assert.equal(trial.finish().reason, "no-offense"); assert.equal(trial.history.length, 0);
     const a = unit("a", "left", tribe, input.dna), b = unit("b", "right", tribe, input.dna), f = engine([a, b]);
@@ -235,7 +247,7 @@ test("saved defensive windups resume once, while a dormant saved body remains no
 test("military organs retain their original attack formulas and base bodies do not activate upgrade genes", () => {
   const stats = genes => ATTRIBUTE_DNA.stats(genes.map(gene => ({ gene, grade: 1 })));
   const blade = stats(["blade", "power", "speed"]), ranged = stats(["secretion", "rangedPower", "rangedSpeed"]);
-  close(blade.meleePower, 4); close(blade.meleeSpeed, .55); assert.equal(blade.defensiveMelee, false);
+  close(blade.meleePower, DNA_COMBAT_RULES.powerBase + DNA_COMBAT_RULES.powerGain); close(blade.meleeSpeed, .55); assert.equal(blade.defensiveMelee, false);
   close(ranged.rangedPower, 2.8); close(ranged.rangedSpeed, .55); assert.equal(ranged.meleePower, 0);
   assert.equal(dnaAttackMode(ranged, .5, true), "ranged"); assert.equal(ranged.defensiveMelee, false);
   const upgraded = stats(["power", "speed", "combo", "critical", "counter", "stun"]);

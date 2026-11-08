@@ -2,7 +2,7 @@ import { UNIT_COMBAT_STATS, unitCombatStats, combatProfile, combatAbilityStats }
 import { CREATURE_MOVEMENT } from "../server/creature-movement.mjs";
 import { creatureAttackRole } from "../server/creature-attack-role.mjs";
 import { startingWorkerDna } from "../server/tribe-start.mjs";
-import { dnaUnitStats, dnaAppearance, validateDna } from "../server/dna-unit.mjs";
+import { dnaUnitStats, dnaAppearance, validateDna, dnaCanAttack } from "../server/dna-unit.mjs";
 import { createCombat } from "../server/combat.mjs";
 import { DNA_COMBAT_RULES, dnaCombatStats } from "../server/dna-combat-stats.mjs";
 import { tribeDnaStats } from "../server/tribe-dna-stats.mjs";
@@ -100,9 +100,9 @@ const geneKeys = Object.freeze({ vitality: "health", flatPen: "penetration", has
 function derive(build, rules) {
   if (build.native) {
     if (["bean", "spore", "pebble", "spring"].includes(build.key)) {
-      const stats = dnaUnitStats(build.dna || startingWorkerDna(build.key), build.key);
+      const dna = build.dna || startingWorkerDna(build.key), stats = dnaUnitStats(dna, build.key);
       return { ...stats, canAttack: stats.dna.power > 0 && stats.dna.speed > 0,
-        canInitiate: stats.dna.melee || stats.dna.ranged };
+        canInitiate: dnaCanAttack({ dna, stats }) };
     }
     const role = creatureAttackRole(build.key);
     const stats = { ...unitCombatStats(build.key), speed: CREATURE_MOVEMENT[build.key].speed, resistance: 1 };
