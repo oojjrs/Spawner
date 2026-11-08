@@ -1,0 +1,2678 @@
+{
+  "status": "proposed",
+  "files": {
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-idle-v1-transparent-preview.webp": {
+      "beforeSha256": "fc8f97103357fe41ce9af1299cc9cfe69c23780fbd84a2afba510e416df86c15",
+      "users": [
+        {
+          "owner": "bean/blade-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "0881b5216d4d0070309eceeeb7ab37c0d465a16ae2d3bb3d4c92273b2a25c9e6",
+      "users": [
+        {
+          "owner": "bean/blade-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-antenna/preview.webp": {
+      "beforeSha256": "575494b269c7346fd1bf7df14ba27f96447eb43d3be7c4b4b168b7586c7c10eb",
+      "users": [
+        {
+          "owner": "bean/blade-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-attack-v1-transparent-preview.webp": {
+      "beforeSha256": "ff5186e019e57cd46788ad567437595d6a35c26fc4b17a9b439a3d42472e0fc2",
+      "users": [
+        {
+          "owner": "bean/blade-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-attack-v1-preview.gif": {
+      "beforeSha256": "912c8ccd9d35cb16bc04231c77f605aefaafc2ceba25c9f7de01c92032e0c28b",
+      "users": [
+        {
+          "owner": "bean/blade-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-hurt-v1-transparent-preview.webp": {
+      "beforeSha256": "e72f493c411a9bab69b189f7a4e5d8521a7b4632ef35b737bbbb94b4e75ea0d8",
+      "users": [
+        {
+          "owner": "bean/blade-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "f885903555e147e16d7bcb047247f27928ae71129032c14cb56f0876bde5bc24",
+      "users": [
+        {
+          "owner": "bean/blade-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-birth-complete-v1-preview.webp": {
+      "beforeSha256": "72b453cdccb0b0b1bd1dda4863eeed25b26e767a7f349cc8c10ba7ea0049eb83",
+      "users": [
+        {
+          "owner": "bean/blade-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-birth-complete-v1-from-sheet.gif": {
+      "beforeSha256": "582d903f5a0361a111002e99e660dedc311f21dabb316f193de7619d60a41da5",
+      "users": [
+        {
+          "owner": "bean/blade-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-death-v1-transparent-preview.webp": {
+      "beforeSha256": "3b9b30d7240555984600603000681ee74fc91fa4402c94f207344b6347673781",
+      "users": [
+        {
+          "owner": "bean/blade-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-death-v1-preview.gif": {
+      "beforeSha256": "634e18c89a892aabedc8a6088f6de2bbd929facfa54a4eb063fa22935dbd041a",
+      "users": [
+        {
+          "owner": "bean/blade-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-idle-v1-transparent-preview.webp": {
+      "beforeSha256": "23644b5c059e80b32b82c3806908dae2034a4950b53e064c787616e7f636bb00",
+      "users": [
+        {
+          "owner": "bean/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "84258441f30eb2217f230616e1404c1b86ef488c737d7995565f093068ac6cd6",
+      "users": [
+        {
+          "owner": "bean/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace-antenna/preview.webp": {
+      "beforeSha256": "2e2e2c35d8a0ad6155ae527fa8269b7a8a12210838b986a48434fd1a072e23c9",
+      "users": [
+        {
+          "owner": "bean/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-attack-v1-transparent-preview.webp": {
+      "beforeSha256": "8ee22fe4b311b39850947276b41e259fffa7e8446c88c80897f61a0fcf45d9f1",
+      "users": [
+        {
+          "owner": "bean/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-attack-v1-preview.gif": {
+      "beforeSha256": "522386d5c4204d3a307958073a1299fc356cebf4d923a5a085ee09d586a9ed77",
+      "users": [
+        {
+          "owner": "bean/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-hurt-v1-transparent-preview.webp": {
+      "beforeSha256": "e395a268f605b62db2ea33dbe736135c5512b765def0df8c23476ac4bffe2fee",
+      "users": [
+        {
+          "owner": "bean/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "91cd8e4668dd43335d804f418865afedb3590340db52400070cc7440dabc28ef",
+      "users": [
+        {
+          "owner": "bean/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-birth-complete-v1-preview.webp": {
+      "beforeSha256": "0ee8b00b60d7ed37b1e43d5c24ec211f39042aaab3b49b6c567986f7438db4fb",
+      "users": [
+        {
+          "owner": "bean/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-birth-complete-v1-from-sheet.gif": {
+      "beforeSha256": "76f1914bed8b7ef9e01223936e7c043c01db9c19e8ee82890f395ca89246cbb0",
+      "users": [
+        {
+          "owner": "bean/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-death-v1-transparent-preview.webp": {
+      "beforeSha256": "a8e70111954a1b8abc3623c7d790a61bb5912d47f0f25ee7963df02a7335809e",
+      "users": [
+        {
+          "owner": "bean/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-death-v1-preview.gif": {
+      "beforeSha256": "7b8efebc449ab0c9a478f4dc279939a77249fd4642c91104eef41b2184efe6e3",
+      "users": [
+        {
+          "owner": "bean/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-idle-v1-transparent-preview.webp": {
+      "beforeSha256": "fb89c924bb2e65706de7ff55f776dc602d21bcc1e72193c29dc94087e543480a",
+      "users": [
+        {
+          "owner": "bean/blade-secretion",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-idle-v1-preview.gif": {
+      "beforeSha256": "60b90f1a2359fe5988843acaa4bc3fb5ed74edd586d35ccdf81df8247c24737e",
+      "users": [
+        {
+          "owner": "bean/blade-secretion",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion/preview.webp": {
+      "beforeSha256": "7286bb8a9b7953178c19a351cacf749612b0734d3525d1a47128343ed8b2446e",
+      "users": [
+        {
+          "owner": "bean/blade-secretion",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-attack-v1-transparent-preview.webp": {
+      "beforeSha256": "e345ae1d62e3cb2397c4a7f8e53ae2009dfe0dd37fc05d76417e70abaf65d847",
+      "users": [
+        {
+          "owner": "bean/blade-secretion",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-attack-v1-preview.gif": {
+      "beforeSha256": "70631534f16494aacf18c05008f3416617a10e76dbe34ec7c2a2a949672fbf84",
+      "users": [
+        {
+          "owner": "bean/blade-secretion",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-ranged-v1-transparent-preview.webp": {
+      "beforeSha256": "ccad1b810160dc5fbc77c6b5f170d256e5010b64443e69cb6924bbe752c7fc5b",
+      "users": [
+        {
+          "owner": "bean/blade-secretion",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-ranged-v1-preview.gif": {
+      "beforeSha256": "2474043c9462297ad3d9da1e1c077840493dd66cebeb101eba84f39117c05e82",
+      "users": [
+        {
+          "owner": "bean/blade-secretion",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-hurt-v1-transparent-preview.webp": {
+      "beforeSha256": "64735b2b7d73a14a73fd8ba43019df18fc4db7e12d342f45fd11cae2fd90f260",
+      "users": [
+        {
+          "owner": "bean/blade-secretion",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-hurt-v1-preview.gif": {
+      "beforeSha256": "5ebd11082c4e2a335cf28974dae1cd24434c77d61e59cbd10ae4421a6d41c1d7",
+      "users": [
+        {
+          "owner": "bean/blade-secretion",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-birth-complete-v1-preview.webp": {
+      "beforeSha256": "a5c5a43491695f9dc4c95ef1f0ccd38ea2c0ca9fb78b5dd7d1d704c4090d258f",
+      "users": [
+        {
+          "owner": "bean/blade-secretion",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-birth-complete-v1-from-sheet.gif": {
+      "beforeSha256": "b6f9effae4f3980e9062620b1180705622cea14b09c7483d5a81230b77a2e787",
+      "users": [
+        {
+          "owner": "bean/blade-secretion",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-death-v1-transparent-preview.webp": {
+      "beforeSha256": "47399290fb9ab78889081dfaeac94c22a3b576eed394028f9a4ab582fa024005",
+      "users": [
+        {
+          "owner": "bean/blade-secretion",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-death-v1-preview.gif": {
+      "beforeSha256": "a5c60dfcdc8e5262216c2c3bbefc9c0efc2ddcf3b833b095aa86f16a4ba7220b",
+      "users": [
+        {
+          "owner": "bean/blade-secretion",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-idle-v1-transparent-preview.webp": {
+      "beforeSha256": "ee753fb046f138de0e58bae9ab6b1d4e2030eedfa6ff21a2a791bcbe3bcf6c4f",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "19ccd50ca076f363aa07ac05661f45ef8577a37c8479d5014b332184f5885771",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-antenna/preview.webp": {
+      "beforeSha256": "44ea7bb41ec453cd73ecf93c4f42dfafe315ea1f20c67e8e5412e864f5f43295",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-attack-v1-transparent-preview.webp": {
+      "beforeSha256": "9cf058861f71b9f7ed7c1cc53613303c496a64a7a9bc1e39f1b6e47177076ffe",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-attack-v1-preview.gif": {
+      "beforeSha256": "bb0b62040bf4954b92e4d45e4f6d218cf11fe1da99d46fbfae28102e8395c7f5",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-ranged-v1-transparent-preview.webp": {
+      "beforeSha256": "4fe89082fd9c600d7da9f84f7608dfafa4e29dc8b11f1f982ec8044f9e2cb7ee",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-ranged-v1-preview.gif": {
+      "beforeSha256": "634053577682e83a2a8a1e7ca770c369d5eea9e1d7a28a709588f079d13d4a84",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-hurt-v1-transparent-preview.webp": {
+      "beforeSha256": "449e4da6e9795bcb42f3d84a4b14750d7ce08248c0834405264718fb27220c94",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "f69739e5e20f196eaebba149e687a679d523728ddd6d4653d918904a91026f5c",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-birth-complete-v1-preview.webp": {
+      "beforeSha256": "49ff8f83e33338416fc2e3b08903ff1d81eed1b66ddb09c7383e0b26e94bb40d",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-birth-complete-v1-from-sheet.gif": {
+      "beforeSha256": "20a6586296a9782e529a6b9a2e61f5effdc4219c8ed7766c9ace749404a7a9ad",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-death-v1-transparent-preview.webp": {
+      "beforeSha256": "a797a5d581fb5d0f7cbdfc6cec3b6ee6288ee20c189a7a30465ada7808771522",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-death-v1-preview.gif": {
+      "beforeSha256": "61cd60f76cefb8f801a6e426c208415a55eabd43a3b9f30a28ceab5931822294",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-idle-v1-transparent-preview.webp": {
+      "beforeSha256": "e21653cd96f2c26dbc7cca1d79df653cc4e36577ac4eca680da2ef2a0d72f8c5",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-idle-v1-preview.gif": {
+      "beforeSha256": "f39c92aa7f242d2df8e54b9e1eee495de174ed7f7daf2d14562bedf2c3229beb",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-walk-v1-transparent-preview.webp": {
+      "beforeSha256": "35df34561979c6d0caf2e7f66bced87a724463a7bdea7a400cabfe33a89ce609",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-walk-v1-preview.gif": {
+      "beforeSha256": "e5b236ff739b26e659e0e018119f680c96c20c41c49ff11f6770e5c060db41e4",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "walk",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-attack-v1-transparent-preview.webp": {
+      "beforeSha256": "dd924448731102865d85a40183a5c0751ecc43f3c45a2ac5073f292d71a697d7",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-attack-v1-preview.gif": {
+      "beforeSha256": "d98fe4a96edd6dd1fbd24c15ecb53f89855b6b5599da284da1668252b1ef7bb9",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-ranged-v1-transparent-preview.webp": {
+      "beforeSha256": "ebb5c22eff4ade7e79f7c042293a7469db90fedb64779d6812a22046e2af99ad",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-ranged-v1-preview.gif": {
+      "beforeSha256": "d0415dd608571f86291dc2e5a037ec987c0444dd97af79379ae993fbcbd9a0b2",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-hurt-v1-transparent-preview.webp": {
+      "beforeSha256": "75a811622253ada6997b01eef990707f0f9d3d747292d40d104cb4a40bc6e888",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-hurt-v1-preview.gif": {
+      "beforeSha256": "39b315dc8e7072e5f12a9efc380dc2708935838e3a15f1e87182d2346c5529b0",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-birth-complete-v1-preview.webp": {
+      "beforeSha256": "28cda0636b24804bf352ba5f10c7100e9bad329e3a45cbf48ea00a83afffb4a2",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-birth-complete-v1-from-sheet.gif": {
+      "beforeSha256": "591073652f25a08a4c0a8446171781ae70816cd847d94e052b5d2dc90a85f6f4",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-death-v1-transparent-preview.webp": {
+      "beforeSha256": "0e68afcb2ede86967fecab3ce39d76a010995912c34b676c6c2ffe9de066ba8f",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-death-v1-preview.gif": {
+      "beforeSha256": "fa67851369ee2ca56755bfca0d19b881404e54e124352a9905c92bce5aa09db2",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-idle-v1-transparent-preview.webp": {
+      "beforeSha256": "756e629574a3871758e50bad4bd5211533ee8c79debadb19f1b38ce0f6efa7d9",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "2c938cc790e7f79b7734adc199fa268f133f6ea7189b1e27e3a433b8a03e085b",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-carapace-antenna/preview.webp": {
+      "beforeSha256": "c7ef65561f2d467c8c472a09e7348a9d07ace81fdcfec3a538556f2ab7144d71",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-attack-v1-transparent-preview.webp": {
+      "beforeSha256": "45544a87f4072aa52ee7696d58c74e9f254d52c8e14f1c9a4fc1b289c8f701e5",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-attack-v1-preview.gif": {
+      "beforeSha256": "7ba68ec94dc4b82b4cbec5fe38fc1e0debb272f42abbca78c51d55b7ae3668eb",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-ranged-v1-transparent-preview.webp": {
+      "beforeSha256": "f3f7a74c3bbaf5749e516c3634b60d7f966671dadf26e4d65bee24525733504b",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-ranged-v1-preview.gif": {
+      "beforeSha256": "9eee66158153771be69912248be14c3b45bd56efc4f4323e3e5af3ecc6826be6",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-hurt-v1-transparent-preview.webp": {
+      "beforeSha256": "0317a00ac18f3a19dcb7f2e9d2bc39fecb1cbf250e87005f6e890708c5b7b8ea",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "c45c515d98e928ca0a119e536f371fc6d774b3eb9e2afc75656bb55870606db6",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-birth-complete-v1-preview.webp": {
+      "beforeSha256": "754b0899b6a53ac7e8813246ce80ee00ba44d745e74a5bbc720e3c34ece5555b",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-birth-complete-v1-from-sheet.gif": {
+      "beforeSha256": "893a7d39f5415be444bce272da2643984672a2ecee9a22ab3c9280e5bf20f33a",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-death-v1-transparent-preview.webp": {
+      "beforeSha256": "86717e7093cae944771915334f60443d848093dd92e09f63e219fbc9a8e7af89",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-death-v1-preview.gif": {
+      "beforeSha256": "d7c6aadf5e107576fbfa7aeb7dffc7b77837f4792891b19e45fc2f810ee09bb7",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-idle-v1-transparent-preview.webp": {
+      "beforeSha256": "9d96a12239106e474806cbb712f1adf985dcaba7b17b35dd888484655afe1bd4",
+      "users": [
+        {
+          "owner": "bean/carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "42d92751141cdd998adf255f1ed50dc3a3832f91dc85ac2f50302bec70a3af08",
+      "users": [
+        {
+          "owner": "bean/carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/carapace-antenna/preview.webp": {
+      "beforeSha256": "b6f07cdf4a2cc573c1b8fbf04bd5248268d63dab3f85e1594ea4c32fba6483fd",
+      "users": [
+        {
+          "owner": "bean/carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-hurt-v1-transparent-preview.webp": {
+      "beforeSha256": "07924d7845ada9f950005c3ef4c5521f197e3b44f61c9a91e9991ef972732f3d",
+      "users": [
+        {
+          "owner": "bean/carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "20316c0d04fc268c2907f8590a78670ab62462304d332ad7c8e44fb2f54a73db",
+      "users": [
+        {
+          "owner": "bean/carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-birth-complete-v1-preview.webp": {
+      "beforeSha256": "cc5e801af0ce2faeb5ffbcaaecc824d8ec93c4f69a68ea0ed0a3150c7bff9dbf",
+      "users": [
+        {
+          "owner": "bean/carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-birth-complete-v1-from-sheet.gif": {
+      "beforeSha256": "67408f25be8418fcf91e95366493eae9ef5d8bdefd1c2eb63b63d89ed612d0ad",
+      "users": [
+        {
+          "owner": "bean/carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-death-v1-transparent-preview.webp": {
+      "beforeSha256": "696e0f4fe7b1c49541ffc3b7b9673aff1314227cf7a251423c5da75aeda54ed9",
+      "users": [
+        {
+          "owner": "bean/carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-death-v1-preview.gif": {
+      "beforeSha256": "2895e266e6655d33f8f868a4fa39b3e1952b7f7eb69c6e8d72e826895ee00f48",
+      "users": [
+        {
+          "owner": "bean/carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-idle-v1-transparent-preview.webp": {
+      "beforeSha256": "21172f44237d43c08ac034b9faecf52ea68ad7be13643636873a2e8bf9a99730",
+      "users": [
+        {
+          "owner": "bean/secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "c6d9db49d5d1f308cba2a42ef6e82e9cb5daf1fc9b1dfb47786c8b72a81d40db",
+      "users": [
+        {
+          "owner": "bean/secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-antenna/preview.webp": {
+      "beforeSha256": "044dca8a66a1b7687a7bcb66409699f782391b6ab03a08b39cd688e0ef752e39",
+      "users": [
+        {
+          "owner": "bean/secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-ranged-v1-transparent-preview.webp": {
+      "beforeSha256": "f014ecc0517f2d4f256de144939d9295c586a2de82ebc6730855bebc649022b3",
+      "users": [
+        {
+          "owner": "bean/secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-ranged-v1-preview.gif": {
+      "beforeSha256": "38d36c63004fdfd8411f008ca5b41f28626e71d3bcf9db86a9e5146dea76d19e",
+      "users": [
+        {
+          "owner": "bean/secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-hurt-v1-transparent-preview.webp": {
+      "beforeSha256": "118f2b9a9389203ec7c667a9fbe93c9e392ef989261912c96641324eecc465d1",
+      "users": [
+        {
+          "owner": "bean/secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "6a36351dbefa125e40fcfeec3e6e89a087717f05cb98b096d4ca90bf642b55a3",
+      "users": [
+        {
+          "owner": "bean/secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-birth-complete-v1-preview.webp": {
+      "beforeSha256": "b7b6500f67317c43402c23bd9896d04177d22f8d3e558aae2850e3eed483d7f5",
+      "users": [
+        {
+          "owner": "bean/secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-birth-complete-v1-from-sheet.gif": {
+      "beforeSha256": "a6cc66fc976cfb4391b06037800c1aca6cc7a956def83868afa11ee5b5e8b627",
+      "users": [
+        {
+          "owner": "bean/secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-death-v1-transparent-preview.webp": {
+      "beforeSha256": "cd84d94e321a8443ca5b82545ad61af1313a6565d19cf3fa0a62ecd586377bad",
+      "users": [
+        {
+          "owner": "bean/secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-death-v1-preview.gif": {
+      "beforeSha256": "11e5d7e1cf12b9d7c8a1b9afbac099a50bac414dc7e7a2fe1fff825e592fe4c4",
+      "users": [
+        {
+          "owner": "bean/secretion-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-idle-v1-transparent-preview.webp": {
+      "beforeSha256": "61303036c67e5c9b02bce38733c2fd37d2c434f831bbec017e96fe35b2a5ff9a",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-idle-v1-preview.gif": {
+      "beforeSha256": "94facab42f18bcec49cfcb17b0dff3dace755d0fe653aa8b0ffa2956e09eeb53",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-carapace/preview.webp": {
+      "beforeSha256": "2324e6b56ab90320fdd80ad0bcf00c3e0f843e9b0e2f18a66d5346984dc86029",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-ranged-v1-transparent-preview.webp": {
+      "beforeSha256": "4b69a6ed6c50eb382f804cc97de692c181ddbf94dbf6b641bcbe824ddd3ff0da",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-ranged-v1-preview.gif": {
+      "beforeSha256": "1dc47961ee5329ab5ad69bd39b325cd09813ae7cff148b6b41ce94b13b1b6a31",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-hurt-v1-transparent-preview.webp": {
+      "beforeSha256": "b3e33ef8741e196957e3b6c1131d0b416ce03a1d51093abb731d0729e340cb09",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-hurt-v1-preview.gif": {
+      "beforeSha256": "d732c3e8b0371353f74f4be2008eb9a22ef8fdd8291f69763a59013489075637",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-birth-complete-v1-preview.webp": {
+      "beforeSha256": "c0f6595a36ff139001db90280deea5cfad4f6b3f2172ff95c02ca453dad26a11",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-birth-complete-v1-from-sheet.gif": {
+      "beforeSha256": "faccd7d0506b539b69dc1dc13be6b2e1b134d04f9ceecdd797ab26baf59821ba",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-death-v1-transparent-preview.webp": {
+      "beforeSha256": "b517bfeae493bdd6215b8148436273e713b9970728814bcec0dda3917b0d8de3",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-death-v1-preview.gif": {
+      "beforeSha256": "bf33357f5df3cad69cdc6d25b6e81821211a01831a84262def52b4e31ee2d398",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace",
+          "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-idle-v1-transparent-preview.webp": {
+      "beforeSha256": "602d2657c251aef5aee7e04ca1eff10ad17a3756129765d7ac41f233b4e4fd29",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "5ec72adb345c962fb1673b829585cb095cbd4fd773bb8cd700415c726f329d6c",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-carapace-antenna/preview.webp": {
+      "beforeSha256": "5b253626ef2c14413ad9dfa666167a64b8bb66cc990e1e49b78a587e8803cd29",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-ranged-v1-transparent-preview.webp": {
+      "beforeSha256": "f6435b58c7037f61fdbaf8e705ce5a9b22a43da517f3ed7352442a64989bc0d9",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-ranged-v1-preview.gif": {
+      "beforeSha256": "65eba586d82bc8438236b1488fa77b43c85b941dbe2f580b90af508d756c7f47",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-hurt-v1-transparent-preview.webp": {
+      "beforeSha256": "905948fc2bafa4b493f996e49a2e6e90aaf02405026cc0e215064ecbc38495b6",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "1bf4d271786860f2d3a8c2153717c0c19b066059dc115bc4371adbb95c4739a6",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-birth-complete-v1-preview.webp": {
+      "beforeSha256": "418b8b9b9dd4ed4799267e14b17fd2c861356d71dd192988f70bd85d085624fd",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-birth-complete-v1-from-sheet.gif": {
+      "beforeSha256": "6dbc725ff675b96331d8cc208c89e713e2fcf9dc6cce1b29c8b272e309241ded",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-death-v1-transparent-preview.webp": {
+      "beforeSha256": "e7aebd0e4360dbc8a62f53c6fa5d155e1493afd8cfd93c3b78170d2f729876fd",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-death-v1-preview.gif": {
+      "beforeSha256": "6d1c4967b8a34af151a24e3e9e977ad64183b37bfa1441fa25806a021538ef99",
+      "users": [
+        {
+          "owner": "bean/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-idle-v1-preview.webp": {
+      "beforeSha256": "20d37bdba4331e064cf2969747b6a5d0afd8bf8e68a28f4dada7d363b18d0488",
+      "users": [
+        {
+          "owner": "spore/blade-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "7e2ed836e83343c9fd72746b99a4e40ea7ff2b7f44072b597ed8969cf98833e2",
+      "users": [
+        {
+          "owner": "spore/blade-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-walk-v1-preview.webp": {
+      "beforeSha256": "b9f0faf99ed44046cd0272e4f1902999effb11c24fc47476c3c57b39e6081e0b",
+      "users": [
+        {
+          "owner": "spore/blade-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-walk-v1-preview.gif": {
+      "beforeSha256": "50bf5747a81189ea4c844db02ae5fa322901d170345966e95f7f55d929885c9e",
+      "users": [
+        {
+          "owner": "spore/blade-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-melee-v1-preview.webp": {
+      "beforeSha256": "f948f0a36c3be18c3101f0bf43c536e189a82158ed52604ea74787c013d998e1",
+      "users": [
+        {
+          "owner": "spore/blade-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-melee-v1-preview.gif": {
+      "beforeSha256": "df1f82d0337142d050ea3b8bac567ad29aa9a6a5bd9b8cbd93b42c5c0067870a",
+      "users": [
+        {
+          "owner": "spore/blade-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-hurt-v1-preview.webp": {
+      "beforeSha256": "2f3dd92c1538009e35c01d90f2b69f9fa11e87a5d480b02a233230d68658b8ae",
+      "users": [
+        {
+          "owner": "spore/blade-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "dabf15414c1888387a67dd383e89d5cf527f79a26569f527ee75a3918398c6fa",
+      "users": [
+        {
+          "owner": "spore/blade-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-death-v1-preview.webp": {
+      "beforeSha256": "2f6ca64fb399ad8414954710c7143d34a1284498c0a0c36862a74d903054d89b",
+      "users": [
+        {
+          "owner": "spore/blade-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-death-v1-preview.gif": {
+      "beforeSha256": "7b0ff06be30b5192da22ff923b65a6063757889f1d37e94da733cdfb0e94dd80",
+      "users": [
+        {
+          "owner": "spore/blade-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-birth-v1-preview.webp": {
+      "beforeSha256": "460ac0693ed51d0ce1b88bb774612dc53cc3f4c9e9768c54400a2fdb2c0df9d2",
+      "users": [
+        {
+          "owner": "spore/blade-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-birth-v1-preview.gif": {
+      "beforeSha256": "ee483234f6bcdb41ae603a8b87be3482f6c2f8cfee43353ab3ad36c074935723",
+      "users": [
+        {
+          "owner": "spore/blade-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-idle-v1-preview.webp": {
+      "beforeSha256": "aa0cf8c634fb0ab494e15a9f1d18cbb74a4e5bd84bcbe5fa5c3f5d0fca61e7cc",
+      "users": [
+        {
+          "owner": "spore/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "148095b211177bc14aa3b02333be6cf93be3c807f0b1332557f5622ede4afde9",
+      "users": [
+        {
+          "owner": "spore/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-walk-v1-preview.webp": {
+      "beforeSha256": "853629dede3bc801f808a952405d54d3c0d81051553875d7de5c286128581786",
+      "users": [
+        {
+          "owner": "spore/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-walk-v1-preview.gif": {
+      "beforeSha256": "fc573d163cffcb0768ceade8b5477f1d50ec564ffd1d8a32ee661f289ea6f481",
+      "users": [
+        {
+          "owner": "spore/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-melee-v1-preview.webp": {
+      "beforeSha256": "4ccb0b07c9c54868048cfdf7db95111fe226d72e66b7595982007760190c5957",
+      "users": [
+        {
+          "owner": "spore/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-melee-v1-preview.gif": {
+      "beforeSha256": "f2372795fbb49d83ba7776afa02de6a2217240a7032c6b01a8e55698ca4c8c44",
+      "users": [
+        {
+          "owner": "spore/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-hurt-v1-preview.webp": {
+      "beforeSha256": "311fba69fda8fe44ffce516ef33ff615fcd4c9a6957f8f0552bfa9b8af3bd37c",
+      "users": [
+        {
+          "owner": "spore/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "7cf0560cba4cd47f3b0aa92e5d70a48a67f5db0070e54c74079c2d39aae79a89",
+      "users": [
+        {
+          "owner": "spore/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-death-v1-preview.webp": {
+      "beforeSha256": "c5173f93e29ddde25912d17afd5b33891bc82acc35abbd199d4d640a7fa96fa9",
+      "users": [
+        {
+          "owner": "spore/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-death-v1-preview.gif": {
+      "beforeSha256": "504ddffd49600f01b5411d8667f3a7dfcadc25365d30fbf1f0a2c20d1ce1a40c",
+      "users": [
+        {
+          "owner": "spore/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-birth-v1-preview.webp": {
+      "beforeSha256": "9696a7df5b513c85e154c3ad62b7c6bf33a06819546db752bdd45511e0db2988",
+      "users": [
+        {
+          "owner": "spore/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-birth-v1-preview.gif": {
+      "beforeSha256": "b3baa9b54db3d6cbe629bfa9707cc9a7c38582a76de5e7bbfe8f73bf286a7d03",
+      "users": [
+        {
+          "owner": "spore/blade-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-idle-v1-preview.webp": {
+      "beforeSha256": "89c5e72973358d1a4a0e82a9f1f62088c2f24f5c01953c80c484bf00dddbbfc5",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-idle-v1-preview.gif": {
+      "beforeSha256": "c9049bb6a1a225dd414100c4c20ec7499b43bfdf39fe7960e9993939f53d1e8a",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-walk-v1-preview.webp": {
+      "beforeSha256": "67fa5bf648ea4458b58b42b271d1fe4593f9f8efc62ec0e485dd4d672b159abb",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-walk-v1-preview.gif": {
+      "beforeSha256": "d2bf1f4a81c56fb87cfb4d6b6c0445415ba3bb20f9f73405375c4c78aa028a5e",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "walk",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-melee-v1-preview.webp": {
+      "beforeSha256": "2700a0a5826ce70a700617f12e5abb45a480abd90f1ea4530af299d2f24493ff",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-melee-v1-preview.gif": {
+      "beforeSha256": "5e8d770a0ddecdd9d2ddf022bd3792911e9079b4f92704fe0855fac0ccafae7f",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-ranged-v1-preview.webp": {
+      "beforeSha256": "cb9aa45f9b15394cd25310e2aa2db023c5b7fe276a27ddf2d02e6beeefa76313",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-ranged-v1-preview.gif": {
+      "beforeSha256": "de04fc267a7a3d2525e37224c55329b93fd4c665be7b5ca58021710c752943f2",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-hurt-v1-preview.webp": {
+      "beforeSha256": "26f02ca19039aaab442bf3ebcb1ac5d64df0e1c533e5eda94d28180834a3fd72",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-hurt-v1-preview.gif": {
+      "beforeSha256": "107246609b2209830e9118e81e0f4da154ec18a0f98523f26b512c0490976255",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-death-v1-preview.webp": {
+      "beforeSha256": "e1e7e9e64acb56c3dfb17b865a30ebcf3c14c1246a90f83c6a813445771a6570",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-death-v1-preview.gif": {
+      "beforeSha256": "3f643bfcfd933352c86e119f0211e8065aeeea9c3c101c1973fd7983ef26a20f",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-birth-v1-preview.webp": {
+      "beforeSha256": "0a22ab4f85816f0e8cf3910e15442b5f99143370cd6966fdf07a7b4d5e5bbb54",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-birth-v1-preview.gif": {
+      "beforeSha256": "a0979dc599278d3223dd8620f11a7cf45088cb4c64199259e7341fd527282ed4",
+      "users": [
+        {
+          "owner": "spore/blade-secretion",
+          "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-idle-v1-preview.webp": {
+      "beforeSha256": "2e172fe368106102aea0dfe8bc6f7a70fb50857ddbe2c3c8f0adba7916f98ce9",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "b34c6aba1f094b4700c14722cd238deed57e3fd6254d7550edd8a11a87936b3d",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-walk-v1-preview.webp": {
+      "beforeSha256": "605dad2731df05148b39ac705b5c8cda469d27d8934536a842a96103be73a6f7",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-walk-v1-preview.gif": {
+      "beforeSha256": "a08779260d601b5999d13ea55cb9dea463bf96317db9de3d2d07e076fb028d79",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-melee-v1-preview.webp": {
+      "beforeSha256": "68d7df8b48080a65aaec32460387b05ff845cd2a31a0b0aee23e8ae13e506609",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-melee-v1-preview.gif": {
+      "beforeSha256": "c23081f1806541ae1a281cbf1457383deea7c8ce4528387441634eebdeb8a0e6",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-ranged-v1-preview.webp": {
+      "beforeSha256": "3a4c1c474263146934ab0a8234041f7eb303c9d043d4a0fad08dd32ac3510e29",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-ranged-v1-preview.gif": {
+      "beforeSha256": "d604d906cd168d7b1bc57c6c7e9743068e047ed5fdc1b1049b33a7373d4edc3a",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-hurt-v1-preview.webp": {
+      "beforeSha256": "a9ce0602ab5d8de51f6045e05f9f60b0fc95b846e59f173a23cf0992053c490c",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "62172cbfe8da0251c7a5ea8a1669b21335f8cb25764f3952edf36411d67ee1be",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-death-v1-preview.webp": {
+      "beforeSha256": "4168bff6a493378eb42bda8e52da9d239149b8aefefe0ce51b992592a2953b5e",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-death-v1-preview.gif": {
+      "beforeSha256": "ef51774d65dd95e8fc463d006913e2566a830c179162866eb163d2d718b518d7",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-birth-v1-preview.webp": {
+      "beforeSha256": "b5565051d4026d2d82c304290ac6fb41645c621a62a150ac3797ca1eb6e519ad",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-birth-v1-preview.gif": {
+      "beforeSha256": "71de766c66ce38b5f35cbb7dd483c42aaa052d9bef7c6d94a769378935340e05",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-idle-v1-preview.webp": {
+      "beforeSha256": "cdc199e5a97bf390519e019892600deef210ab6f0cf48b414031d3a9a905fe78",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-idle-v1-preview.gif": {
+      "beforeSha256": "7b175c00d9847954d51c241f329b8dedd76b4428fbeff1fab010bef4cd615c36",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-walk-v1-preview.webp": {
+      "beforeSha256": "96e6236efbe95206bd8293cbe63a3f4f3b247f3bc94c96fa1c2ddf8f4262c318",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-walk-v1-preview.gif": {
+      "beforeSha256": "b991f5c38b07998f72456a0bae20e5074f13ce6cb32726b7b873474434400d94",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "walk",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-melee-v1-preview.webp": {
+      "beforeSha256": "3efa4cfa7b2d8f2a2db656f86e5ef4935f44612e81dd2f69dba721b0ece2b8e9",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-melee-v1-preview.gif": {
+      "beforeSha256": "1682678c8ec8792a32e94dc32cd373a0d21438806fcac8dd6c1cf52ffe6dfe1d",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-ranged-v1-preview.webp": {
+      "beforeSha256": "ae7e5aef881d0a3174580a40bc74eda7b8be5f885f8429b484ec0ac30d49929d",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-ranged-v1-preview.gif": {
+      "beforeSha256": "dd73614daaa88345f4d7462984f37b33777f751a6af264aad4963b697ba53fc7",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-hurt-v1-preview.webp": {
+      "beforeSha256": "255339d96e2d07059738ba42dc573525987be13ccb89f2730c48d34170a7359a",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-hurt-v1-preview.gif": {
+      "beforeSha256": "a5abf8bd0b8a9616b2c6b8a49770808298a708aa2fefdb338e2772e81907c0ef",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-death-v1-preview.webp": {
+      "beforeSha256": "fd59b07129fab916d64b670549a515981194a5849053e736de124e1afa42154f",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-death-v1-preview.gif": {
+      "beforeSha256": "56ace5801ad8a8d510cbb5fad52965d936d418ac71be0774f7fe7ecb4d2fe314",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-birth-v1-preview.webp": {
+      "beforeSha256": "57746ffd1597a9d7471ea817cd75d1eb66e762f59feec2b9304e63079ac0d240",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-birth-v1-preview.gif": {
+      "beforeSha256": "d3106aa154f6f4247220c251cd66b03d2856b1d6d8f08f83bdf193f2d8ce324d",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace",
+          "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-idle-v1-preview.webp": {
+      "beforeSha256": "4903c0e14a52c037836f4cf9458b1a8d1cfce7bdeb12d10cfb63020db83e4fb7",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "e65565cd965e80d0536624e19b2132939dbdf8762f90f57551943e603cad7475",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-walk-v1-preview.webp": {
+      "beforeSha256": "ce292d2bd2d637454f002975524a2707e2958d23d9bb550795b6ae2793053786",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-walk-v1-preview.gif": {
+      "beforeSha256": "6a3bad07e0520f03429360b7c9fbeb3de118ddae98f7d4c92c9c98c9e08a23a5",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-melee-v1-preview.webp": {
+      "beforeSha256": "6a56abd1b9aee783600e0f1f7e2527878e89af1e829da9433dc5dd95c83212a7",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-melee-v1-preview.gif": {
+      "beforeSha256": "69e2ad9fbd604e6808449d5007e275f80b16e1dbc42b375ebf62d5d5e33d910e",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-ranged-v1-preview.webp": {
+      "beforeSha256": "46326e1db5f3175af5f96ef7972d890395fdf61db23874a71a99e4321c5e8545",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-ranged-v1-preview.gif": {
+      "beforeSha256": "eb3d18e08a89ade4a41c6b16725cfa06fcfb983a123f665c2e0778279b8be0c9",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-hurt-v1-preview.webp": {
+      "beforeSha256": "eb81b094cd9a187311926fc5a5bf774ba417e6b6196659ed20160f317ecb9dc6",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "3ee70c54742e561cffe9bc9c2bebdb22c6a795d0e3a6caa8b09abbd05bbffe84",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-death-v1-preview.webp": {
+      "beforeSha256": "22ad5557a6254a41011ac20751546df021371deb9acbc84a534c9a257ce42e4f",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-death-v1-preview.gif": {
+      "beforeSha256": "8b62d9d6e5c5f7f1b29e97019ee04521335279ea26e32d7bb69ecf3718517e23",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-birth-v1-preview.webp": {
+      "beforeSha256": "69496527a76607f626d539ca7b928f0f4dee14a7e81432e1cab651e8cf2aed77",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-birth-v1-preview.gif": {
+      "beforeSha256": "8fb28a157b6f5e8aca72148232dc3b07b152974adeea8198c0cf3de3f7d799a3",
+      "users": [
+        {
+          "owner": "spore/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-idle-v1-preview.webp": {
+      "beforeSha256": "4454262e1c9c1e96757a707ec926462de055c34e294e4fefda4d902423dd1bdb",
+      "users": [
+        {
+          "owner": "spore/carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "da16b9f217e4a6223d3852674bd64db2a1e2830100bf970c7318bcc913f6eab1",
+      "users": [
+        {
+          "owner": "spore/carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-walk-v1-preview.webp": {
+      "beforeSha256": "e33f180a0b52c7469366142c8bcc3d147fbcb34587c0957e5135d1dcf8342a17",
+      "users": [
+        {
+          "owner": "spore/carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-walk-v1-preview.gif": {
+      "beforeSha256": "9f7ae1127e3fbc09aea55832d4a7709426f42333120e1ac63c28691a63d44f49",
+      "users": [
+        {
+          "owner": "spore/carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-hurt-v1-preview.webp": {
+      "beforeSha256": "8a5838c5e1c13b304daf5afe865201f57ae96d27a9f75d7bc7225888616a023b",
+      "users": [
+        {
+          "owner": "spore/carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "b38bd0101b29c59ad17b0013aaaf4117babf7cad336d936b1be30771b3dc7da5",
+      "users": [
+        {
+          "owner": "spore/carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-death-v1-preview.webp": {
+      "beforeSha256": "52f19543edb5492bbd142811ec179c92692cbd78b2b876f301d7fae42a1e3cbd",
+      "users": [
+        {
+          "owner": "spore/carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-death-v1-preview.gif": {
+      "beforeSha256": "1287fa5f8c64ab03739339efafc5be76ec5f6f8636c55ef555960cabc1d1acf6",
+      "users": [
+        {
+          "owner": "spore/carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-birth-v1-preview.webp": {
+      "beforeSha256": "6490a679ae1f71f6be4203fc9392f13efc08b90a10a6ae57a7e2b267b8a24d7c",
+      "users": [
+        {
+          "owner": "spore/carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-birth-v1-preview.gif": {
+      "beforeSha256": "a0276dd4f6226cd7ac8ed6cba35b6b06f8cbe5cf7459e5e7af4454d4cb44a85e",
+      "users": [
+        {
+          "owner": "spore/carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-idle-v1-preview.webp": {
+      "beforeSha256": "be5e9aa67527c48c0d9a0ef9f48eed909b565491e93832bd2dabfbc9017229a2",
+      "users": [
+        {
+          "owner": "spore/secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "ebda960c34fd2ee561f5dcae3ff304e58aee75b903f35c8f33a5bb7993deab6f",
+      "users": [
+        {
+          "owner": "spore/secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-walk-v1-preview.webp": {
+      "beforeSha256": "75fb912fcb336bc3e3776c73e5d908ccece32a54274062a74c9f40eb599fe27a",
+      "users": [
+        {
+          "owner": "spore/secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-walk-v1-preview.gif": {
+      "beforeSha256": "e94ce036f3b9cd1aa92431ddaf4b36c81221e44066a40f6211d563d73c5e4afc",
+      "users": [
+        {
+          "owner": "spore/secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-ranged-v1-preview.webp": {
+      "beforeSha256": "bfef9ea4865e3f5eab8be10c9b0b13f34c071deffd4d43619dc1b17f3770c8db",
+      "users": [
+        {
+          "owner": "spore/secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-ranged-v1-preview.gif": {
+      "beforeSha256": "857a01d12d05dea6a4d90d5eb84527657b71e440a22a090f32f746072222a922",
+      "users": [
+        {
+          "owner": "spore/secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-hurt-v1-preview.webp": {
+      "beforeSha256": "28c784ea46df9c6d918759b64960a5162d543c2575d6ce2a78cc12fde94d6565",
+      "users": [
+        {
+          "owner": "spore/secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "fa14bcf69f80cce9fd78488eed7fb805f02ec309bfb2568d9f225aba35a02a7f",
+      "users": [
+        {
+          "owner": "spore/secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-death-v1-preview.webp": {
+      "beforeSha256": "f16ef1698a35452113285ebe1701caca7f4077d0b918f1e12190b11db4491b95",
+      "users": [
+        {
+          "owner": "spore/secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-death-v1-preview.gif": {
+      "beforeSha256": "e3a2032fcf3d3b37736c4e3a6e687aec8184c31704cf92099a1eff216cfd7a3b",
+      "users": [
+        {
+          "owner": "spore/secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-birth-v1-preview.webp": {
+      "beforeSha256": "2c90ea4577ed4912d7504f76accb9381db540cd73627729fca664ec006f4e546",
+      "users": [
+        {
+          "owner": "spore/secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-birth-v1-preview.gif": {
+      "beforeSha256": "caf85f7f06f9a368c6e65f0a955bcc6e5afebb4abc12a0a8debf2c1d42455204",
+      "users": [
+        {
+          "owner": "spore/secretion-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/spore-secretion-carapace-idle-v1-preview.webp": {
+      "beforeSha256": "608099b4d7ba2e61d79884ab8b99d36c71aa80e439356e9ab8cfd07ce916bd9f",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace",
+          "manifest": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/spore-secretion-carapace-idle-v1-preview.gif": {
+      "beforeSha256": "38d79922aa53ef7de35edf718a2d49b5f592c11e6660b968161e46c5fd583c34",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace",
+          "manifest": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/spore-secretion-carapace-walk-v1-preview.webp": {
+      "beforeSha256": "9963577e44f53bc93c4b32e022d73aa1aa62e13b4dddc268cb289752b54f3273",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace",
+          "manifest": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/spore-secretion-carapace-walk-v1-preview.gif": {
+      "beforeSha256": "412e929eb92347f0b1bf24965f336a64e20d5fc3b3f3029f3719a193597365a4",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace",
+          "manifest": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "walk",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/spore-secretion-carapace-ranged-v1-preview.webp": {
+      "beforeSha256": "552e64baa86629c6476cfa84d72249c8dd26b98e9a5535ca494bac585cbd154e",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace",
+          "manifest": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/spore-secretion-carapace-ranged-v1-preview.gif": {
+      "beforeSha256": "aedca8178aeb51a5ea3695bd0ceca4d316d898ded090422d5a1c2b18554c5f88",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace",
+          "manifest": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/spore-secretion-carapace-hurt-v1-preview.webp": {
+      "beforeSha256": "5894f7667af8407150e32e0235a0c9e55377fce4880630846bced9a1180ac15b",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace",
+          "manifest": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/spore-secretion-carapace-hurt-v1-preview.gif": {
+      "beforeSha256": "ece13da2441eb0d66e17dfb442ec40b5cd220579fc4c6c31af6aabed15c126ee",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace",
+          "manifest": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/spore-secretion-carapace-death-v1-preview.webp": {
+      "beforeSha256": "a7e05babfb90f5ebe697a6a3dd2076e46a3c84b77428280d544593f65dbbaf61",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace",
+          "manifest": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/spore-secretion-carapace-death-v1-preview.gif": {
+      "beforeSha256": "56408d5ac6cba1433f052cf4d1144b46bc0cb83f4effa9141be189899f6f962d",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace",
+          "manifest": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/spore-secretion-carapace-birth-v1-preview.webp": {
+      "beforeSha256": "2908f8738c72dbb9eb668a126a02ea3e398fa8752f65f9855c83291fae6054d9",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace",
+          "manifest": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/spore-secretion-carapace-birth-v1-preview.gif": {
+      "beforeSha256": "043a25c27bdc4c33652e61e3ef9c9457fbe117f170e2a897f9b4538cd55baa8a",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace",
+          "manifest": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-idle-v1-preview.webp": {
+      "beforeSha256": "814ed546cfb9a8ca07324088d4e0129e9e7bdb59ea033a060dd270f73e26e4c8",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "ad219d7a969c3ca50c640a83b5621b69bdb55a561ddb623c43fa2efa0d98d6c3",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-walk-v1-preview.webp": {
+      "beforeSha256": "c9409ae49b5594c5d7db04db091bd95e4246a69f8ddf608b004a6594acacdecf",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-walk-v1-preview.gif": {
+      "beforeSha256": "7afc6af5e020b537a450c184adf016135f59578e8aa67f619b2e8179d56cc278",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-ranged-v1-preview.webp": {
+      "beforeSha256": "4eb40308128128d0470a91093014fbdc3d68a9f5385b376b447fdf2766b86cf7",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-ranged-v1-preview.gif": {
+      "beforeSha256": "0e710062b17e40d17b0fbc023a00835a474faff0f11de63cb9294169fcdb5c21",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "ranged-attack",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-hurt-v1-preview.webp": {
+      "beforeSha256": "9ea4312993aa40c7043dcac413c55421063dfb850700abe047b4b032e7e92813",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-hurt-v1-preview.gif": {
+      "beforeSha256": "f5d672c4d7e6a241eb0e4fcc34b92d5b23ae831901643411dcd01e97e6bf5943",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-death-v1-preview.webp": {
+      "beforeSha256": "c21ca5c04f84ee572323ee4bd88e613258c70945994f380ab63989921018e9bc",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-death-v1-preview.gif": {
+      "beforeSha256": "f238e85e7b8dd23dea5c24feba0313f543bfa640ecdcd5b88721040df995d39e",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-birth-v1-preview.webp": {
+      "beforeSha256": "66988ed6b8c2d90ff3e9949ef4774c03536cca27ab48ae6e1643eee092efcda7",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ]
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-birth-v1-preview.gif": {
+      "beforeSha256": "8ea442f3cf8f80153636ac3cfe1cad3836c03432b3cb8b16f0363e181069db7a",
+      "users": [
+        {
+          "owner": "spore/secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ]
+    }
+  }
+}

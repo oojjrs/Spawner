@@ -33,7 +33,7 @@ function runtimeRecord(record) {
   if (publish) { clean.image = source.image; registerFile(source.image); }
   const actions = {};
   if (publish) for (const [action, clip] of Object.entries(record.actions)) {
-    const animation = pick(clip, ["sourceId", "image", "imageHash", "frameSize", "frameWidth", "frameHeight", "columns", "frameCount", "frames", "durationsMs", "loop", "pivotX", "pivotY", "facing", "frameGeometry", "cameraMapping", "events", "attachmentTransforms", "projectile", "rootMotion"]);
+    const animation = pick(clip, ["sourceId", "image", "imageHash", "frameSize", "frameWidth", "frameHeight", "columns", "frameCount", "frames", "durationsMs", "loop", "pivotX", "pivotY", "facing", "sourceFacing", "frameGeometry", "cameraMapping", "events", "attachmentTransforms", "projectile", "rootMotion"]);
     if (animation.cameraMapping) animation.cameraMapping = pick(animation.cameraMapping, ["verified", "sourceHash", "pixelsPerWorld", "scale", "offsetX", "offsetY"]);
     registerFile(animation.image);
     if (animation.projectile?.image) registerFile(animation.projectile.image);

@@ -1,0 +1,19 @@
+{
+  "files": [
+    "client/antenna-combo-assets.mjs",
+    "client/bean-held-hurt-assets.mjs",
+    "client/bean-secretion-idle-assets.mjs",
+    "client/blade-carapace-assets.mjs",
+    "client/defensive-attack-assets.mjs",
+    "client/secretion-combo-assets.mjs",
+    "client/secretion-idle.mjs",
+    "client/species-held-hurt-assets.mjs",
+    "client/sprout-death-animations.mjs",
+    "client/tribe-minor-animations.mjs",
+    "client/unit-action-art-assets.mjs",
+    "client/unit-birth-art-assets.mjs",
+    "client/unit-ranged-assets.mjs"
+  ],
+  "status": "completed",
+  "legacyFollowup": "bean-spore-legacy-changes.json"
+}

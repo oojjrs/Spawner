@@ -9,6 +9,7 @@ export const UNIT_SECRETION_WALK_ANIMATIONS = Object.freeze(Object.fromEntries(
     return [tribe, Object.freeze({
       image: `DesignAssets/Animations/UnitRangedV1/${tribe}/walk.webp`,
       frameSize: 512, viewSize: 512, pivotX: 256, pivotY: 448, columns: 4,
+      ...(["bean", "spore"].includes(tribe) ? { sourceFacing: "left" } : {}),
       frameCount: durationsMs.length, durationsMs,
       durationMs: durationsMs.reduce((sum, duration) => sum + duration, 0),
       cyclesPerCell: base?.cyclesPerCell || 1, loop: true, rangedBody: true

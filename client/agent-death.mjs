@@ -2,8 +2,8 @@ import { imageAnimation } from "./image-geometry.mjs";
 import { UNIT_ANIMATIONS, unitAnimationFrame } from "./unit-animation.mjs";
 
 export const AGENT_DEATH_ANIMATION = Object.freeze(imageAnimation({
-  image: "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
-  frameSize: 256, columns: 4, frameCount: 16, pivotX: 128, pivotY: 210,
+  sourceFacing: "left", image: "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
+  frameSize: 256, columns: 4, frameCount: 16, pivotX: 128.0, pivotY: 210,
   durationsMs: Object.freeze([160, 80, 80, 70, 70, 60, 60, 60, 60, 60, 80, 90, 100, 110, 120, 1000])
 }));
 

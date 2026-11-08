@@ -53,7 +53,7 @@ test('antenna catalogue covers seven exact organ sets and preserves all historic
   }
 });
 
-test('DNA v5 antenna combinations preserve actual ability rules and independent board pieces', () => {
+test('DNA v6 antenna combinations preserve actual ability rules and independent board pieces', () => {
   assert.equal(COMBAT_LAB_APPEARANCES.length, 14);
   for (const form of forms) {
     const dna = combatLabCombinationDna(form.key), other = combatLabCombinationDna(form.key);
@@ -64,7 +64,8 @@ test('DNA v5 antenna combinations preserve actual ability rules and independent 
       assert.equal(!!stats.dna.melee, !!form.attributes.blade);
       assert.equal(!!stats.dna.ranged, !!form.attributes.secretion);
       assert.equal(stats.dna.armor > tribeDnaStats(tribe).base.armor, !!form.attributes.carapace);
-      assert.equal(!!stats.dna.roaming, true);
+      assert.equal(stats.dna.roaming, undefined);
+      assert.equal(stats.dna.hunting, true);
       assert.equal(!!stats.canAttack, true);
       assert.equal(!!stats.canInitiate, !!(form.attributes.blade || form.attributes.secretion));
     }
@@ -270,6 +271,20 @@ test('existing combinations and antenna singles preserve original actions except
   const { UNIT_BIRTH_ART } = await import('./unit-birth-art-assets.mjs');
   const baseline = JSON.parse(read('tools/antenna-combo-integration-20261107/existing-art-baseline.json'));
   assert.equal(Object.keys(baseline.definitions).length, 20);
+  const native28 = JSON.parse(read('tools/spring-native-facing-20261108/bean-spore-image-changes.json')).changes;
+  const selected28 = new Set(JSON.parse(read('tools/spring-native-facing-20261108/bean-spore-technical-plan.json')).candidateForms);
+  const newAttacks = new Set(JSON.parse(read('tools/spring-native-facing-20261108/followup13-integration-map.json')).items.map(row=>row.source));
+  const expectedLeft = (key, original) => {
+    const clip=structuredClone(original), change=native28[clip.image];
+    if(selected28.has(key)&&change){
+      clip.image=change.afterPath||change.newImage;clip.sourceFacing='left';clip.pivotX=clip.frameSize-clip.pivotX;
+      if(clip.scene?.outletX!==undefined)clip.scene.outletX=clip.frameSize-clip.scene.outletX;
+      for(const layer of clip.sceneLayers?.layers||[]){const layerChange=native28[layer.image];if(layerChange)layer.image=layerChange.afterPath||layerChange.newImage;for(const sample of layer.samples)if(sample)sample.destination[0]=clip.frameSize-sample.destination[0]-sample.destination[2];}
+    }
+    if(newAttacks.has(clip.image))clip.sourceFacing='left';
+    return clip;
+  };
+
   for (const [key, definition] of Object.entries(baseline.definitions)) {
     const expected = DEFENSIVE_ATTACK_ART[key] ? { ...definition, actions: { ...definition.actions, attack: DEFENSIVE_ATTACK_ART[key] } } : definition;
     if (key === 'bean/antenna') expected.actions.carry = definition.actions.walk;
@@ -293,15 +308,18 @@ test('existing combinations and antenna singles preserve original actions except
     const furtherNormalized = JSON.parse(read('tools/secretion-source-normalization-20261108/pixel-changes.json')).changes;
     for (const clip of new Set([expected.reference, ...Object.values(expected.actions)]))
       if (furtherNormalized[clip.image]) { clip.sourceFacing='left'; clip.pivotX=clip.frameSize-clip.pivotX; }
+    expected.reference=expectedLeft(key,expected.reference);
+    expected.actions=Object.fromEntries(Object.entries(expected.actions).map(([action,clip])=>[action,expectedLeft(key,clip)]));
+    if(DEFENSIVE_ATTACK_ART[key])expected.actions.attack=DEFENSIVE_ATTACK_ART[key];
     assert.deepEqual(UNIT_ACTION_ART[key], expected, key);
   }
   const restoredBirth = JSON.parse(read('tools/birth-resolution-20261108/registered-clips.json'));
   for (const [key, clip] of Object.entries(baseline.birth)) {
     if (restoredBirth[key]) {
       const {sceneLayers,...nativeGeometry} = UNIT_BIRTH_ART[key];
-      assert.deepEqual(nativeGeometry,clip,key+' preserves native registration');
-      assert.deepEqual(sceneLayers,restoredBirth[key].sceneLayers,key+' verified source layers');
-    } else assert.deepEqual(UNIT_BIRTH_ART[key],clip,key);
+      assert.deepEqual(nativeGeometry,expectedLeft(key,clip),key+' preserves native registration under source reflection');
+      assert.deepEqual(sceneLayers,expectedLeft(key,restoredBirth[key]).sceneLayers,key+' verified source layers');
+    } else assert.deepEqual(UNIT_BIRTH_ART[key],expectedLeft(key,clip),key);
   }
   const approvedHashes = new Map();
   for (const form of ['blade-carapace', 'blade-secretion', 'secretion-carapace', 'blade-secretion-carapace']) {
@@ -310,7 +328,7 @@ test('existing combinations and antenna singles preserve original actions except
   }
   for (const entry of JSON.parse(read('AnimationCandidates/bean-combo-walk-approved-v2-20261107/approval.json')).approvedForms)
     approvedHashes.set(UNIT_ACTION_ART['bean/' + entry.form].actions.walk.image, entry.sha256);
-  const normalized = {...JSON.parse(read('tools/source-facing-normalization-20261108/pixel-changes.json')).changes, ...JSON.parse(read('tools/secretion-source-normalization-20261108/pixel-changes.json')).changes, ...JSON.parse(read('tools/spring-native-facing-20261108/attack-metadata-changes.json')).changes};
+  const normalized = {...JSON.parse(read('tools/source-facing-normalization-20261108/pixel-changes.json')).changes, ...JSON.parse(read('tools/secretion-source-normalization-20261108/pixel-changes.json')).changes, ...JSON.parse(read('tools/spring-native-facing-20261108/attack-metadata-changes.json')).changes, ...native28, ...Object.fromEntries(JSON.parse(read('tools/spring-native-facing-20261108/followup13-integration-map.json')).items.map(row=>[row.source,{afterSha256:row.candidateSHA256}]))};
   for (const [image, hash] of Object.entries(baseline.sourceImages))
     assert.equal(sha(image), normalized[image]?.afterSha256 || approvedHashes.get(image) || hash, image);
 });

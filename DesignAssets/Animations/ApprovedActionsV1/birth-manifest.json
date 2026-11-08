@@ -1182,7 +1182,7 @@
     "source": "AnimationCandidates/bean-gather-birth-full-v2/bean-gather-birth-complete-v2-sheet.png",
     "image": "DesignAssets/Animations/ApprovedActionsV1/bean/gather/birth.png",
     "sourceSHA256": "9b43a4205cda5cdd7e1063fb62fd6ec7160b2ad9acc510c7c9b62248ee0c6e4f",
-    "sha256": "576b0fd16496119100d7b998ed6deb147c3950bbb3f43f0be702543a7f7a18f8",
+    "sha256": "03630b4a260da55cef5b6fdfddde01097c125ea86e0916a1974433c7c58fdacc",
     "frame": [
       512,
       512
@@ -1588,7 +1588,7 @@
     "source": "AnimationCandidates/bean-secretion-birth-fullscene-v1-20261107/bean-secretion-birth-complete-v1-sheet.png",
     "image": "DesignAssets/Animations/ApprovedActionsV1/bean/secretion/birth.png",
     "sourceSHA256": "47fd7899c7de099727e794cf58a727f4ba82257fbeed2b9272d27e5d60848d1e",
-    "sha256": "a59c98323f33d333bacd70167ec0e6362e9fe1103e11eba92b6abf672beb8507",
+    "sha256": "d035c8bbb3b978fa1847946840fb9d26013c78ac023d3847f3e4b581c16e8c31",
     "frame": [
       512,
       512
@@ -2877,7 +2877,7 @@
     "source": "AnimationCandidates/spore-birth-calibrated-v7/antenna-birth-scene-sheet.png",
     "image": "DesignAssets/Animations/ApprovedActionsV1/spore/antenna/birth.png",
     "sourceSHA256": "4a4d5bca2ad3b848a5d4be1b12321348c5b3f5a0d62c74c0a3f5274220b2f266",
-    "sha256": "7235f1961b34d622b6c3abeff03d3cf38dc40335cece5bc943236565a81a4107",
+    "sha256": "178800fd34fb8a2d9b9dff11fb93832685f393d641ac57c2af2c15869ed4a33f",
     "frame": [
       704,
       640
@@ -4365,7 +4365,7 @@
     "source": "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-birth-scene-v1-sheet.png",
     "image": "DesignAssets/Animations/ApprovedActionsV1/spore/secretion/birth.png",
     "sourceSHA256": "e4403ff30dcd993c19a79cd26c04271688f7ba062acec28600cde15ce341a9fa",
-    "sha256": "304b7813737671057ae9f5b43a44613b39d391f4ce8a9111f4bc7ed374f1e44d",
+    "sha256": "5430c2927aa841fa5a16e8e7e394890e845810c3b144b513f5c496140e375e96",
     "frame": [
       768,
       512

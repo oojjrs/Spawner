@@ -1,0 +1,510 @@
+{
+  "status": "completed",
+  "changes": {
+    "AnimationCandidates/bean-gather-motion-v1/bean-gather-idle-v1.json": {
+      "beforeSha256": "111d16ee5cf454864a62d551e4d86507af6553c3d9793b903c3bb9906767534e",
+      "afterSha256": "6c14765e39263ce3ec4a1949950a40e3bb637444bb560d78030b014634727be6",
+      "alias": "AnimationCandidates/bean-gather-motion-v1/bean-gather-idle-v1-sheet.png",
+      "preservedHistoricalFields": [
+        "sourceCell",
+        "sourceBox",
+        "wholeFrameBounds",
+        "poses",
+        "records"
+      ]
+    },
+    "AnimationCandidates/bean-gather-motion-v1/bean-gather-walk-v1.json": {
+      "beforeSha256": "c46a03eeb74b114b1c15a8c3429791cee798132d15e20c9ffd5fec5c124ab075",
+      "afterSha256": "91f9a80ae89c374a9b111b65fd082ad028ca15e0e0f8a7480a82b8e91bd92640",
+      "alias": "AnimationCandidates/bean-gather-motion-v1/bean-gather-walk-v1-sheet.png",
+      "preservedHistoricalFields": [
+        "sourceCell",
+        "sourceBox",
+        "wholeFrameBounds",
+        "poses",
+        "records"
+      ]
+    },
+    "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-attack-v3.json": {
+      "beforeSha256": "8e48e9abec628f87eded0a233f7c8d8808cb7f677ed9aabd897cd7930132c872",
+      "afterSha256": "df255bf15c6d0eabb6684a09d09f8d8721cd473ca1d5ccc5963a08e7b76600bd",
+      "alias": "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-attack-v3-sheet.png",
+      "preservedHistoricalFields": [
+        "sourceCell",
+        "sourceBox",
+        "wholeFrameBounds",
+        "poses",
+        "records"
+      ]
+    },
+    "AnimationCandidates/bean-gather-hurt-v1/bean-gather-hurt-v1.json": {
+      "beforeSha256": "35607508834f0d1dc1eff850864b12ee5cc63127e6b8b34fccf2eef3569789ef",
+      "afterSha256": "d8cb0431ed9788bc6af383e5e6c58e6ef4a90c636d5ef6a3d732b87eea8f93b5",
+      "alias": "AnimationCandidates/bean-gather-hurt-v1/bean-gather-hurt-v1-sheet.png",
+      "preservedHistoricalFields": [
+        "sourceCell",
+        "sourceBox",
+        "wholeFrameBounds",
+        "poses",
+        "records"
+      ]
+    },
+    "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-death-v2.json": {
+      "beforeSha256": "1c4a2b80b7a7d40fe9c1596f13b5210485f0516317987476b2b55ded9596710c",
+      "afterSha256": "1b8aef52afbe23ee53458d63a8e29f9988a7a5e631b4cbfdbb3ba29ebd0d369e",
+      "alias": "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-death-v2-sheet.png",
+      "preservedHistoricalFields": [
+        "sourceCell",
+        "sourceBox",
+        "wholeFrameBounds",
+        "poses",
+        "records"
+      ]
+    },
+    "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-idle-fullbody-v1.json": {
+      "beforeSha256": "e8b79856ac2fdaf30294a7f234a161d446af45c4e2762447b9a72d13a53c93bd",
+      "afterSha256": "5ad55d2fba93e7b520c0c0aa8e49bf6f162d06d5282e2fbe091cdb6138ea5d2f",
+      "alias": "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-idle-fullbody-v1-sheet.png",
+      "preservedHistoricalFields": [
+        "sourceCell",
+        "sourceBox",
+        "wholeFrameBounds",
+        "poses",
+        "records"
+      ]
+    },
+    "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-walk-fullbody-v1.json": {
+      "beforeSha256": "d6a4a5a331fa7cf497299eaf3c1f7d2f70941f6540a957ba10b8b6b3434ecedd",
+      "afterSha256": "ef6a0e9345f8ca379fb9463e2db0d022c9b396895e8873b4d055010f28126f98",
+      "alias": "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-walk-fullbody-v1-sheet.png",
+      "preservedHistoricalFields": [
+        "sourceCell",
+        "sourceBox",
+        "wholeFrameBounds",
+        "poses",
+        "records"
+      ]
+    },
+    "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-death-fullbody-v1.json": {
+      "beforeSha256": "0bc3b63933b61acc186c0657e03aebf2195c19694da66727b1a505ca562fa683",
+      "afterSha256": "b9b794e3bb1a991359f189f27e53479593fe1e577ce656b40d802a857b099eb3",
+      "alias": "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-death-fullbody-v1-sheet.png",
+      "preservedHistoricalFields": [
+        "sourceCell",
+        "sourceBox",
+        "wholeFrameBounds",
+        "poses",
+        "records"
+      ]
+    },
+    "AnimationCandidates/spore-antenna-idle-v1-20261107/manifest.json": {
+      "beforeSha256": "c2328d08fc61fc8668c32178e8dce46ca5c2184f646c53acb52e79e8eda26aa2",
+      "afterSha256": "9b60cd8a18aa4e09a93142f18ad46db7d4a9f83bfd35ea3c40c6da8a1dae16b1",
+      "alias": "AnimationCandidates/spore-antenna-idle-v1-20261107/spore-antenna-idle-v1-sheet.png",
+      "preservedHistoricalFields": [
+        "sourceCell",
+        "sourceBox",
+        "wholeFrameBounds",
+        "poses",
+        "records"
+      ]
+    },
+    "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/spore-manifest.json": {
+      "beforeSha256": "6343de0e58660ab98fb60dc399a888aae33b537ee4d8233d4314d9696964d2fa",
+      "afterSha256": "de5450cd1dcaf51bc803419303afcc26200ca30a100d76935d3142da98183968",
+      "alias": "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/spore-antenna-hurt-sheet.png",
+      "preservedHistoricalFields": [
+        "sourceCell",
+        "sourceBox",
+        "wholeFrameBounds",
+        "poses",
+        "records"
+      ]
+    }
+  },
+  "previewChanges": {
+    "AnimationCandidates/bean-gather-motion-v1/bean-gather-idle-v1-preview.gif": {
+      "beforeSha256": "dbd207b238bd74cfb14b5588e62471b3bfbdc9ab35401eeaea5e20d7fdf86ad8",
+      "afterSha256": "93dde8c29ad050ca21ab244a58dbaeb67968d936172cdc805ea7d24cea8809d4",
+      "afterPath": "AnimationCandidates/bean-gather-motion-v1/bean-gather-idle-v1-preview.gif",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 68,
+      "durationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopPreserved": true
+      }
+    },
+    "AnimationCandidates/bean-gather-motion-v1/bean-gather-walk-v1-preview.gif": {
+      "beforeSha256": "bd6f1534f23aeb53141436a16705db02a27bbfa0c7845016f57d85b39dc3f884",
+      "afterSha256": "321225b29130eb4759da59cacad712f5349e54c89ece834b39277ba938daf16f",
+      "afterPath": "AnimationCandidates/bean-gather-motion-v1/bean-gather-walk-v1-preview.gif",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 33,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopPreserved": true
+      }
+    },
+    "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-attack-v3-preview.gif": {
+      "beforeSha256": "e1d2c2b712430a58d33083e999e64a6a9c1fb8393fdeefee207e487faa7e84f9",
+      "afterSha256": "d6c6dee1ca308de6517f5a0ee64e38845193accbcde17694e01fe57d1ee1706a",
+      "afterPath": "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-attack-v3-preview.gif",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 10,
+      "durationsMs": [
+        60,
+        70,
+        60,
+        80,
+        30,
+        300,
+        70,
+        80,
+        90,
+        160
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopPreserved": true
+      }
+    },
+    "AnimationCandidates/bean-gather-hurt-v1/bean-gather-hurt-v1-preview.gif": {
+      "beforeSha256": "7e8bea1fc10ca2fa42be7513b359d46677fe1e3636082307cd57f93c8549df3c",
+      "afterSha256": "f01700f1cc3452d70fd851bf8073bdaad068bb73b13d3ecf6d6c05fe926826d1",
+      "afterPath": "AnimationCandidates/bean-gather-hurt-v1/bean-gather-hurt-v1-preview.gif",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        20,
+        30,
+        30,
+        30,
+        500,
+        30,
+        30,
+        30,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        40
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopPreserved": true
+      }
+    },
+    "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-death-v2-preview.gif": {
+      "beforeSha256": "01d808cc2d0dd2830937bcba8436753f83024c164556e0535d9032a83208d4f9",
+      "afterSha256": "d75296fafea62f060c9e6a60ae5c8f2117a07cf51f671b6a2aa075240ca2e7fe",
+      "afterPath": "AnimationCandidates/bean-gather-wholebody-v3/bean-gather-death-v2-preview.gif",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        160,
+        140,
+        60,
+        60,
+        60,
+        60,
+        1560
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopPreserved": true
+      }
+    },
+    "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-idle-fullbody-v1-preview.gif": {
+      "beforeSha256": "8465ba99506a8a1d9c600449749c92d800ef6d13a29089c451ace156d19e5cd5",
+      "afterSha256": "a066aa362e0a0d7106ac5c327b95a55a42742062d070adb9e8f8e3364a1872ae",
+      "afterPath": "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-idle-fullbody-v1-preview.gif",
+      "dimensions": [
+        384,
+        384
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        1000,
+        200,
+        200,
+        100,
+        100,
+        800,
+        200,
+        200,
+        100,
+        200,
+        500,
+        600,
+        200,
+        200,
+        100,
+        1700
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopPreserved": true
+      }
+    },
+    "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-walk-fullbody-v1-preview.gif": {
+      "beforeSha256": "4042d617a0092cffabb313d2d6c961ee6302cc3ebd78cd5c77889f9d3482366a",
+      "afterSha256": "591c1bf69d396227d112f8392cfbeffdf45b1e5224ec993a0388c57c97fc60a1",
+      "afterPath": "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-walk-fullbody-v1-preview.gif",
+      "dimensions": [
+        384,
+        384
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopPreserved": true
+      }
+    },
+    "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-death-fullbody-v1-preview.gif": {
+      "beforeSha256": "4baabb22cac80f80cac106f38f61fc6f361eac34a7dca89f34379021eaf2365c",
+      "afterSha256": "5d2cba946e9444d6583fab59fe282a91a4313149d704aa64eb6bb2cd329b343c",
+      "afterPath": "AnimationCandidates/spore-secretion-fullbody-v1-20261107/spore-secretion-death-fullbody-v1-preview.gif",
+      "dimensions": [
+        384,
+        384
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        60,
+        60,
+        50,
+        50,
+        70,
+        70,
+        60,
+        60,
+        70,
+        70,
+        50,
+        50,
+        60,
+        60,
+        300,
+        300
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopPreserved": true
+      }
+    },
+    "AnimationCandidates/spore-antenna-idle-v1-20261107/spore-antenna-idle-v1-preview.gif": {
+      "beforeSha256": "9ab620e77c8dee2586e2158336874cc6713953d77c94610149c37163a310974f",
+      "afterSha256": "ea04fda7073f526bdf32e46b0a058948a1f8f77e0385b452d8922930a8ed769f",
+      "afterPath": "AnimationCandidates/spore-antenna-idle-v1-20261107/spore-antenna-idle-v1-preview.gif",
+      "dimensions": [
+        384,
+        384
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        1000,
+        200,
+        200,
+        100,
+        100,
+        800,
+        200,
+        200,
+        100,
+        200,
+        500,
+        600,
+        200,
+        200,
+        100,
+        1700
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopPreserved": true
+      }
+    },
+    "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/spore-antenna-hurt-preview.gif": {
+      "beforeSha256": "1eea41c713a9b966e0aa9a2f11f913567154183af86cfd7393b49dc138192de3",
+      "afterSha256": "d45f79f39f25e2968156a966e87937a08d76c4f1556a3c8be7456ec236000b14",
+      "afterPath": "AnimationCandidates/antenna-hurt-fullbody-v1-20261107/spore-antenna-hurt-preview.gif",
+      "dimensions": [
+        448,
+        448
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        700,
+        500,
+        40,
+        40,
+        80,
+        60,
+        40,
+        120
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopPreserved": true
+      }
+    }
+  },
+  "historicalInputPolicy": "Raw generation inputs retained; output sheet coordinate records reflected once; re-generation requires final per-cell mirror. Packers not reexecuted.",
+  "sharingVerification": {
+    "globalActionsOwnersChecked": true,
+    "protectedSixUnitActionAndBirthRegistryChecked": true,
+    "protectedShares": []
+  }
+}

@@ -5,7 +5,7 @@
   "status": "completed-under-user-delegated-production",
   "authorizationMessageId": "Sentinel_a5eca74f00bc81918652d84534456067",
   "sourceAppearance": "DesignAssets/Animations/UnitAppearanceV1/bean/07/Source/neutral.png",
-  "sourceAppearanceSHA256": "1d472b1a15f25475131e2367e5eb589b4f9d910d66d8a93e59b62a3f32507beb",
+  "sourceAppearanceSHA256": "44fd4b740374ef81c8c781d9aa4f4ee2c64ff37d2a20dcde66a458b39615e74a",
   "actions": {
     "idle": {
       "tribe": "bean",
@@ -87,36 +87,36 @@
       ],
       "durationMs": 6400,
       "loop": true,
-      "pivotX": 257.9234828496042,
+      "pivotX": 254.07651715039577,
       "pivotY": 449,
       "sourceScale": 0.1953125,
       "referenceLength": 279,
       "fullScene": false,
-      "sheetSHA256": "d219e405b0b69ca73b0c91e3f95124b407283b0516b77285f693f754dd720730",
-      "previewSHA256": "23644b5c059e80b32b82c3806908dae2034a4950b53e064c787616e7f636bb00",
-      "gifSHA256": "84258441f30eb2217f230616e1404c1b86ef488c737d7995565f093068ac6cd6",
+      "sheetSHA256": "99a8def46f906c42f5ac0f123c135821d81def32498f50335693c3f27451f8d8",
+      "previewSHA256": "1561c2a9ba79dadcbe7134d6c05e39c18950866a3a63ef19ac0954ba3211db07",
+      "gifSHA256": "f859a56df2f6f67f5711603fb194c8ae356002d30c3c627e446c27d3e1dd89ca",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "sourceFacingLabel": "right",
+      "sourceFacing": "left",
+      "sourceFacingLabel": "left",
       "referenceGeometry": {
         "alphaThreshold": 16,
         "neutralBounds": [
-          154,
+          99,
           170,
-          413,
+          358,
           449
         ],
-        "pivotX": 257.9234828496042,
+        "pivotX": 254.07651715039577,
         "pivotY": 449,
         "referenceLength": 279,
         "supportMethod": "Mean x of alpha>=16 pixels in bottom eight pixel rows; lower exclusive alpha bound y.",
         "referenceMethod": "Maximum width/height of exact approved neutral whole-character alpha>=16 bounds. Fixed reference for all actions; not each pose bounding box.",
-        "sourceFacing": "right",
-        "sourceFacingSign": 1
+        "sourceFacing": "left",
+        "sourceFacingSign": -1
       },
       "canonicalCoreLength": 204.8,
-      "sourceFacingSign": 1
+      "sourceFacingSign": -1
     },
     "walk": {
       "tribe": "bean",
@@ -157,35 +157,35 @@
       ],
       "durationMs": 960,
       "loop": true,
-      "pivotX": 257.9234828496042,
+      "pivotX": 254.07651715039577,
       "pivotY": 449,
       "sourceScale": 0.1953125,
       "referenceLength": 279,
       "fullScene": false,
-      "sheetSHA256": "4796ebd9279db8a3b47d69cc6afdafe267cd5e2d5ef65eda38b1998aa0c72a4d",
-      "previewSHA256": "2e2e2c35d8a0ad6155ae527fa8269b7a8a12210838b986a48434fd1a072e23c9",
+      "sheetSHA256": "f759f3eedf12b4f5f967a9af24cc8c1e4c487915f12435a1fb675ec3169fa050",
+      "previewSHA256": "aedc2dc71a470a3424c1c2ef4b3ccdf0eddc09157e5f8b60a08d3b14cbb6d422",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "sourceFacingLabel": "right",
+      "sourceFacing": "left",
+      "sourceFacingLabel": "left",
       "referenceGeometry": {
         "alphaThreshold": 16,
         "neutralBounds": [
-          154,
+          99,
           170,
-          413,
+          358,
           449
         ],
-        "pivotX": 257.9234828496042,
+        "pivotX": 254.07651715039577,
         "pivotY": 449,
         "referenceLength": 279,
         "supportMethod": "Mean x of alpha>=16 pixels in bottom eight pixel rows; lower exclusive alpha bound y.",
         "referenceMethod": "Maximum width/height of exact approved neutral whole-character alpha>=16 bounds. Fixed reference for all actions; not each pose bounding box.",
-        "sourceFacing": "right",
-        "sourceFacingSign": 1
+        "sourceFacing": "left",
+        "sourceFacingSign": -1
       },
       "canonicalCoreLength": 204.8,
-      "sourceFacingSign": 1,
+      "sourceFacingSign": -1,
       "supersededWalk": {
         "sheet": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-walk-v1-sheet.png",
         "sheetSHA256": "b4918836a8af9d7e3f91d1858ee559e71187353a0cc05f5e87e74f21d8f39b58",
@@ -256,42 +256,42 @@
       ],
       "durationMs": 1000,
       "loop": false,
-      "pivotX": 257.9234828496042,
+      "pivotX": 254.07651715039577,
       "pivotY": 449,
       "sourceScale": 0.1953125,
       "referenceLength": 279,
       "fullScene": false,
       "hitAtMs": 350,
       "contactMs": 350,
-      "sheetSHA256": "e1984d70aad758f3416c1b046663e160204a3e9763313b9ae90fa0fbff4456bc",
-      "previewSHA256": "8ee22fe4b311b39850947276b41e259fffa7e8446c88c80897f61a0fcf45d9f1",
-      "gifSHA256": "522386d5c4204d3a307958073a1299fc356cebf4d923a5a085ee09d586a9ed77",
+      "sheetSHA256": "e1e3e73b4d4d0c597e4b6eab50951de41a1c0e6afdee37b88e13506c1b7b7c26",
+      "previewSHA256": "6c9199fc1060b4ae32214cc7dc5778fd47716e8aa7a3167f2edc2e6c98199da0",
+      "gifSHA256": "3f6abab73ab5db61370e9f6b551023f36f66b3aaed3b28af959fe8b8e5df763b",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "sourceFacingLabel": "right",
+      "sourceFacing": "left",
+      "sourceFacingLabel": "left",
       "referenceGeometry": {
         "alphaThreshold": 16,
         "neutralBounds": [
-          154,
+          99,
           170,
-          413,
+          358,
           449
         ],
-        "pivotX": 257.9234828496042,
+        "pivotX": 254.07651715039577,
         "pivotY": 449,
         "referenceLength": 279,
         "supportMethod": "Mean x of alpha>=16 pixels in bottom eight pixel rows; lower exclusive alpha bound y.",
         "referenceMethod": "Maximum width/height of exact approved neutral whole-character alpha>=16 bounds. Fixed reference for all actions; not each pose bounding box.",
-        "sourceFacing": "right",
-        "sourceFacingSign": 1
+        "sourceFacing": "left",
+        "sourceFacingSign": -1
       },
       "canonicalCoreLength": 204.8,
       "hitTimeMs": 350,
       "hitFrameIndex": 6,
       "hitPoseIndex": 4,
       "hitTimingSource": "Strongest attached-blade slash extension, pose4 at timeline frame6; preceding durations sum to350ms.",
-      "sourceFacingSign": 1
+      "sourceFacingSign": -1
     },
     "hurt": {
       "tribe": "bean",
@@ -325,36 +325,36 @@
       ],
       "durationMs": 760,
       "loop": false,
-      "pivotX": 257.9234828496042,
+      "pivotX": 254.07651715039577,
       "pivotY": 449,
       "sourceScale": 0.1953125,
       "referenceLength": 279,
       "fullScene": false,
-      "sheetSHA256": "2264e4003d618340c61f3bc2b84b2b63d26c81a613d8da4ee05f7970adc81ee0",
-      "previewSHA256": "e395a268f605b62db2ea33dbe736135c5512b765def0df8c23476ac4bffe2fee",
-      "gifSHA256": "91cd8e4668dd43335d804f418865afedb3590340db52400070cc7440dabc28ef",
+      "sheetSHA256": "427d7ff4e91ce555d0434fef1448f5941edb44eda25bd143fe02dc7c12c5d338",
+      "previewSHA256": "a8e3bba3c59233871adc158b722e1478653a967fff66c24a33ff14ceebcdd236",
+      "gifSHA256": "e26565e5ddf8e3df3162e803717869bf210415ff853d08db880dac0db6fd68db",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "sourceFacingLabel": "right",
+      "sourceFacing": "left",
+      "sourceFacingLabel": "left",
       "referenceGeometry": {
         "alphaThreshold": 16,
         "neutralBounds": [
-          154,
+          99,
           170,
-          413,
+          358,
           449
         ],
-        "pivotX": 257.9234828496042,
+        "pivotX": 254.07651715039577,
         "pivotY": 449,
         "referenceLength": 279,
         "supportMethod": "Mean x of alpha>=16 pixels in bottom eight pixel rows; lower exclusive alpha bound y.",
         "referenceMethod": "Maximum width/height of exact approved neutral whole-character alpha>=16 bounds. Fixed reference for all actions; not each pose bounding box.",
-        "sourceFacing": "right",
-        "sourceFacingSign": 1
+        "sourceFacing": "left",
+        "sourceFacingSign": -1
       },
       "canonicalCoreLength": 204.8,
-      "sourceFacingSign": 1
+      "sourceFacingSign": -1
     },
     "birth": {
       "tribe": "bean",
@@ -494,12 +494,12 @@
       "birthScene": true,
       "bodySheet": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-birth-body-v1-sheet.png",
       "bodyManifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-birth-body-v1.json",
-      "pivotX": 430.30054419525067,
+      "pivotX": 81.69945580474933,
       "pivotY": 446.15625,
       "sourceScale": 0.5,
       "fullScene": true,
       "finalBodyAnchor": {
-        "x": 430.30054419525067,
+        "x": 81.69945580474933,
         "y": 446.15625
       },
       "finalBodyReferenceLength": 43.59375,
@@ -509,29 +509,29 @@
       },
       "bodyReferenceLength": 279,
       "bodyScale": 0.15625,
-      "sheetSHA256": "5fb141dc4e28695de9ae848b97fcad61f4b09fd29a95d872347fb23f2ffc46b9",
-      "previewSHA256": "0ee8b00b60d7ed37b1e43d5c24ec211f39042aaab3b49b6c567986f7438db4fb",
-      "gifSHA256": "76f1914bed8b7ef9e01223936e7c043c01db9c19e8ee82890f395ca89246cbb0",
+      "sheetSHA256": "c59f28e991738f7a1937f0cd1ac58b7d29fec9560625b7ac07b34c783a982eec",
+      "previewSHA256": "b1ea921a034821dc250885b413f7309e85f123667f56b60a9753a0600121cc74",
+      "gifSHA256": "9c914acb96c0d30eabe86435861081eb0fc91e265589dde74d93a4364cc4c556",
       "previewLoop": true,
       "previewLoopCount": 0,
       "referenceLength": 43.59375,
-      "sourceFacing": "right",
-      "sourceFacingLabel": "right",
+      "sourceFacing": "left",
+      "sourceFacingLabel": "left",
       "referenceGeometry": {
         "alphaThreshold": 16,
         "neutralBounds": [
-          154,
+          99,
           170,
-          413,
+          358,
           449
         ],
-        "pivotX": 257.9234828496042,
+        "pivotX": 254.07651715039577,
         "pivotY": 449,
         "referenceLength": 279,
         "supportMethod": "Mean x of alpha>=16 pixels in bottom eight pixel rows; lower exclusive alpha bound y.",
         "referenceMethod": "Maximum width/height of exact approved neutral whole-character alpha>=16 bounds. Fixed reference for all actions; not each pose bounding box.",
-        "sourceFacing": "right",
-        "sourceFacingSign": 1
+        "sourceFacing": "left",
+        "sourceFacingSign": -1
       },
       "canonicalCoreLength": 204.8,
       "planningPivotX": 256,
@@ -540,15 +540,15 @@
       "birthFinalBodyRasterVerification": {
         "alphaThreshold": 16,
         "actualBounds": [
-          414,
+          58,
           403,
-          454,
+          98,
           446
         ],
         "transformedNeutralBounds": [
-          414.0625,
+          57.46875,
           402.5625,
-          454.53125,
+          97.9375,
           446.15625
         ],
         "maximumBoundaryErrorPixels": 0.53125,
@@ -556,12 +556,12 @@
         "actualRasterReferenceLength": 43,
         "note": "Runtime uses transformed continuous reference to avoid rounding size jumps. Raster bounding box differs by at most anti-alias/resampling edge tolerance."
       },
-      "sourceFacingSign": 1,
+      "sourceFacingSign": -1,
       "sceneLayers": {
         "version": 1,
         "layers": [
           {
-            "imageSHA256": "b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48",
+            "imageSHA256": "b787fdc93791ddae38dc4fc6b6efdd3e0abb8a747c96d7c2511fec74b7caaecd",
             "image": "AnimationCandidates/birth-scene-layers-v1-20261107/bean/environment.png",
             "frameSize": 434,
             "frameHeight": 424,
@@ -572,7 +572,7 @@
               {
                 "frame": 0,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -581,7 +581,7 @@
               {
                 "frame": 1,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -590,7 +590,7 @@
               {
                 "frame": 2,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -599,7 +599,7 @@
               {
                 "frame": 3,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -608,7 +608,7 @@
               {
                 "frame": 4,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -617,7 +617,7 @@
               {
                 "frame": 5,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -626,7 +626,7 @@
               {
                 "frame": 6,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -635,7 +635,7 @@
               {
                 "frame": 7,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -644,7 +644,7 @@
               {
                 "frame": 8,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -653,7 +653,7 @@
               {
                 "frame": 9,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -662,7 +662,7 @@
               {
                 "frame": 10,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -671,7 +671,7 @@
               {
                 "frame": 11,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -680,7 +680,7 @@
               {
                 "frame": 12,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -689,7 +689,7 @@
               {
                 "frame": 13,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -698,7 +698,7 @@
               {
                 "frame": 14,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -707,7 +707,7 @@
               {
                 "frame": 15,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -716,7 +716,7 @@
               {
                 "frame": 16,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -725,7 +725,7 @@
               {
                 "frame": 17,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -734,7 +734,7 @@
               {
                 "frame": 18,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -743,7 +743,7 @@
               {
                 "frame": 19,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -752,7 +752,7 @@
               {
                 "frame": 20,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -761,7 +761,7 @@
               {
                 "frame": 21,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -770,7 +770,7 @@
               {
                 "frame": 22,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -779,7 +779,7 @@
               {
                 "frame": 23,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -788,7 +788,7 @@
               {
                 "frame": 24,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -797,7 +797,7 @@
               {
                 "frame": 25,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -806,7 +806,7 @@
               {
                 "frame": 26,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -815,7 +815,7 @@
               {
                 "frame": 27,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -824,7 +824,7 @@
               {
                 "frame": 28,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -833,7 +833,7 @@
               {
                 "frame": 29,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -842,7 +842,7 @@
               {
                 "frame": 30,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -851,7 +851,7 @@
               {
                 "frame": 31,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -860,7 +860,7 @@
               {
                 "frame": 32,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -869,7 +869,7 @@
               {
                 "frame": 33,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -878,7 +878,7 @@
               {
                 "frame": 34,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -887,7 +887,7 @@
               {
                 "frame": 35,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -896,7 +896,7 @@
               {
                 "frame": 36,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -905,7 +905,7 @@
               {
                 "frame": 37,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -914,7 +914,7 @@
               {
                 "frame": 38,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -923,7 +923,7 @@
               {
                 "frame": 39,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -932,7 +932,7 @@
               {
                 "frame": 40,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -941,7 +941,7 @@
               {
                 "frame": 41,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -950,7 +950,7 @@
               {
                 "frame": 42,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -959,7 +959,7 @@
               {
                 "frame": 43,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -968,7 +968,7 @@
               {
                 "frame": 44,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -977,7 +977,7 @@
               {
                 "frame": 45,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -986,7 +986,7 @@
               {
                 "frame": 46,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -995,7 +995,7 @@
               {
                 "frame": 47,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1004,7 +1004,7 @@
               {
                 "frame": 48,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1013,7 +1013,7 @@
               {
                 "frame": 49,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1022,7 +1022,7 @@
               {
                 "frame": 50,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1031,7 +1031,7 @@
               {
                 "frame": 51,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1040,7 +1040,7 @@
               {
                 "frame": 52,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1049,7 +1049,7 @@
               {
                 "frame": 53,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1058,7 +1058,7 @@
               {
                 "frame": 54,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1067,7 +1067,7 @@
               {
                 "frame": 55,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1076,7 +1076,7 @@
               {
                 "frame": 56,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1085,7 +1085,7 @@
               {
                 "frame": 57,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1094,7 +1094,7 @@
               {
                 "frame": 58,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1103,7 +1103,7 @@
               {
                 "frame": 59,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1112,7 +1112,7 @@
               {
                 "frame": 60,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1121,7 +1121,7 @@
               {
                 "frame": 61,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1130,7 +1130,7 @@
               {
                 "frame": 62,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1139,7 +1139,7 @@
               {
                 "frame": 63,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1148,7 +1148,7 @@
               {
                 "frame": 64,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1157,7 +1157,7 @@
               {
                 "frame": 65,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1166,7 +1166,7 @@
               {
                 "frame": 66,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1175,7 +1175,7 @@
               {
                 "frame": 67,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1184,7 +1184,7 @@
               {
                 "frame": 68,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1193,7 +1193,7 @@
               {
                 "frame": 69,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1202,7 +1202,7 @@
               {
                 "frame": 70,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1211,7 +1211,7 @@
               {
                 "frame": 71,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1220,7 +1220,7 @@
               {
                 "frame": 72,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1229,7 +1229,7 @@
               {
                 "frame": 73,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1238,7 +1238,7 @@
               {
                 "frame": 74,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1247,7 +1247,7 @@
               {
                 "frame": 75,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1256,7 +1256,7 @@
               {
                 "frame": 76,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1265,7 +1265,7 @@
               {
                 "frame": 77,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1274,7 +1274,7 @@
               {
                 "frame": 78,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1283,7 +1283,7 @@
               {
                 "frame": 79,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1292,7 +1292,7 @@
               {
                 "frame": 80,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1301,7 +1301,7 @@
               {
                 "frame": 81,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1310,7 +1310,7 @@
               {
                 "frame": 82,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1319,7 +1319,7 @@
               {
                 "frame": 83,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1328,7 +1328,7 @@
               {
                 "frame": 84,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1337,7 +1337,7 @@
               {
                 "frame": 85,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1346,7 +1346,7 @@
               {
                 "frame": 86,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1355,7 +1355,7 @@
               {
                 "frame": 87,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1364,7 +1364,7 @@
               {
                 "frame": 88,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1373,7 +1373,7 @@
               {
                 "frame": 89,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1382,7 +1382,7 @@
               {
                 "frame": 90,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1391,7 +1391,7 @@
               {
                 "frame": 91,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1400,7 +1400,7 @@
               {
                 "frame": 92,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1409,7 +1409,7 @@
               {
                 "frame": 93,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1418,7 +1418,7 @@
               {
                 "frame": 94,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1427,7 +1427,7 @@
               {
                 "frame": 95,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1436,7 +1436,7 @@
               {
                 "frame": 96,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1445,7 +1445,7 @@
               {
                 "frame": 97,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1454,7 +1454,7 @@
               {
                 "frame": 98,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1463,7 +1463,7 @@
               {
                 "frame": 99,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1472,7 +1472,7 @@
               {
                 "frame": 100,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1481,7 +1481,7 @@
               {
                 "frame": 101,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1490,7 +1490,7 @@
               {
                 "frame": 102,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1499,7 +1499,7 @@
               {
                 "frame": 103,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1508,7 +1508,7 @@
               {
                 "frame": 104,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1517,7 +1517,7 @@
               {
                 "frame": 105,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1526,7 +1526,7 @@
               {
                 "frame": 105,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1535,7 +1535,7 @@
               {
                 "frame": 106,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1544,7 +1544,7 @@
               {
                 "frame": 106,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1553,7 +1553,7 @@
               {
                 "frame": 106,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1562,7 +1562,7 @@
               {
                 "frame": 106,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1571,7 +1571,7 @@
               {
                 "frame": 106,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1580,7 +1580,7 @@
               {
                 "frame": 106,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1589,7 +1589,7 @@
               {
                 "frame": 0,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1598,7 +1598,7 @@
               {
                 "frame": 0,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1607,7 +1607,7 @@
               {
                 "frame": 0,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1616,7 +1616,7 @@
               {
                 "frame": 0,
                 "destination": [
-                  49,
+                  29,
                   29,
                   434,
                   424
@@ -1625,7 +1625,7 @@
             ]
           },
           {
-            "imageSHA256": "79de88f6e96abaffcfca8b35e080ed08fc8e82e402adb256e5e6f91c76c68c10",
+            "imageSHA256": "67bc33be6947df0465793af86e73197076d84ef0542115a40ebc987419373b40",
             "image": "AnimationCandidates/birth-scene-layers-v1-20261107/bean/blade-carapace-antenna/body.png",
             "frameSize": 512,
             "frameHeight": 512,
@@ -1707,7 +1707,7 @@
               {
                 "frame": 0,
                 "destination": [
-                  390,
+                  42,
                   376,
                   80,
                   80
@@ -1716,7 +1716,7 @@
               {
                 "frame": 0,
                 "destination": [
-                  390,
+                  42,
                   375.621652746626,
                   80,
                   80
@@ -1725,7 +1725,7 @@
               {
                 "frame": 1,
                 "destination": [
-                  390,
+                  42,
                   372.02194887881063,
                   80,
                   80
@@ -1734,7 +1734,7 @@
               {
                 "frame": 1,
                 "destination": [
-                  390,
+                  42,
                   370.8652872756387,
                   80,
                   80
@@ -1743,7 +1743,7 @@
               {
                 "frame": 2,
                 "destination": [
-                  390,
+                  42,
                   370.06265060240963,
                   80,
                   80
@@ -1752,7 +1752,7 @@
               {
                 "frame": 2,
                 "destination": [
-                  390,
+                  42,
                   368.39815420141974,
                   80,
                   80
@@ -1761,7 +1761,7 @@
               {
                 "frame": 3,
                 "destination": [
-                  390,
+                  42,
                   367.0214181951773,
                   80,
                   80
@@ -1770,7 +1770,7 @@
               {
                 "frame": 3,
                 "destination": [
-                  390,
+                  42,
                   361.8620435881769,
                   80,
                   80
@@ -1779,7 +1779,7 @@
               {
                 "frame": 4,
                 "destination": [
-                  390,
+                  42,
                   358.64815494409623,
                   80,
                   80
@@ -1788,7 +1788,7 @@
               {
                 "frame": 4,
                 "destination": [
-                  390,
+                  42,
                   356.6259328759106,
                   80,
                   80
@@ -1797,7 +1797,7 @@
               {
                 "frame": 5,
                 "destination": [
-                  390,
+                  42,
                   356.3325301204819,
                   80,
                   80
@@ -1806,7 +1806,7 @@
               {
                 "frame": 5,
                 "destination": [
-                  390,
+                  42,
                   355.2888554216868,
                   80,
                   80
@@ -1815,7 +1815,7 @@
               {
                 "frame": 6,
                 "destination": [
-                  390,
+                  42,
                   352.99277108433733,
                   80,
                   80
@@ -1824,7 +1824,7 @@
               {
                 "frame": 6,
                 "destination": [
-                  390,
+                  42,
                   352.16556224899597,
                   80,
                   80
@@ -1833,7 +1833,7 @@
               {
                 "frame": 6,
                 "destination": [
-                  390,
+                  42,
                   349.784437751004,
                   80,
                   80
@@ -1842,7 +1842,7 @@
               {
                 "frame": 7,
                 "destination": [
-                  390,
+                  42,
                   349.65301204819275,
                   80,
                   80
@@ -1851,7 +1851,7 @@
               {
                 "frame": 7,
                 "destination": [
-                  390,
+                  42,
                   350.61696582247356,
                   80,
                   80
@@ -1860,7 +1860,7 @@
               {
                 "frame": 8,
                 "destination": [
-                  390,
+                  42,
                   353.73493975903614,
                   80,
                   80
@@ -1869,7 +1869,7 @@
               {
                 "frame": 8,
                 "destination": [
-                  390,
+                  42,
                   356.8529136955987,
                   80,
                   80
@@ -1878,7 +1878,7 @@
               {
                 "frame": 9,
                 "destination": [
-                  390,
+                  42,
                   357.8168674698795,
                   80,
                   80
@@ -1887,7 +1887,7 @@
               {
                 "frame": 9,
                 "destination": [
-                  390,
+                  42,
                   357.97899416596425,
                   80,
                   80
@@ -1896,7 +1896,7 @@
               {
                 "frame": 9,
                 "destination": [
-                  390,
+                  42,
                   361.2464706562877,
                   80,
                   80
@@ -1905,7 +1905,7 @@
               {
                 "frame": 10,
                 "destination": [
-                  390,
+                  42,
                   366.9084337349398,
                   80,
                   80
@@ -1914,7 +1914,7 @@
               {
                 "frame": 10,
                 "destination": [
-                  390,
+                  42,
                   372.57039681359186,
                   80,
                   80
@@ -1923,7 +1923,7 @@
               {
                 "frame": 10,
                 "destination": [
-                  390,
+                  42,
                   375.8378733039153,
                   80,
                   80
@@ -1932,7 +1932,7 @@
               {
                 "frame": 11,
                 "destination": [
-                  390,
+                  42,
                   376,
                   80,
                   80
@@ -1941,7 +1941,7 @@
               {
                 "frame": 11,
                 "destination": [
-                  390,
+                  42,
                   376,
                   80,
                   80
@@ -1950,7 +1950,7 @@
               {
                 "frame": 12,
                 "destination": [
-                  390,
+                  42,
                   376,
                   80,
                   80
@@ -1959,7 +1959,7 @@
               {
                 "frame": 12,
                 "destination": [
-                  390,
+                  42,
                   375.97295303663634,
                   80,
                   80
@@ -1968,7 +1968,7 @@
               {
                 "frame": 12,
                 "destination": [
-                  390,
+                  42,
                   375.4590607327268,
                   80,
                   80
@@ -1977,7 +1977,7 @@
               {
                 "frame": 13,
                 "destination": [
-                  390,
+                  42,
                   375.0722891566265,
                   80,
                   80
@@ -1986,7 +1986,7 @@
               {
                 "frame": 13,
                 "destination": [
-                  390,
+                  42,
                   374.6855175805262,
                   80,
                   80
@@ -1995,7 +1995,7 @@
               {
                 "frame": 13,
                 "destination": [
-                  390,
+                  42,
                   374.1716252766167,
                   80,
                   80
@@ -2004,7 +2004,7 @@
               {
                 "frame": 14,
                 "destination": [
-                  390,
+                  42,
                   374.144578313253,
                   80,
                   80
@@ -2013,7 +2013,7 @@
               {
                 "frame": 14,
                 "destination": [
-                  390,
+                  42,
                   374.2572951807229,
                   80,
                   80
@@ -2022,7 +2022,7 @@
               {
                 "frame": 14,
                 "destination": [
-                  390,
+                  42,
                   374.66734337349396,
                   80,
                   80
@@ -2031,7 +2031,7 @@
               {
                 "frame": 14,
                 "destination": [
-                  390,
+                  42,
                   375.21098192771086,
                   80,
                   80
@@ -2040,7 +2040,7 @@
               {
                 "frame": 14,
                 "destination": [
-                  390,
+                  42,
                   375.7100903614458,
                   80,
                   80
@@ -2049,7 +2049,7 @@
               {
                 "frame": 14,
                 "destination": [
-                  390,
+                  42,
                   375.98654819277107,
                   80,
                   80
@@ -2058,7 +2058,7 @@
               {
                 "frame": 15,
                 "destination": [
-                  390,
+                  42,
                   376,
                   80,
                   80
@@ -2067,7 +2067,7 @@
               {
                 "frame": 15,
                 "destination": [
-                  390,
+                  42,
                   376,
                   80,
                   80
@@ -2076,7 +2076,7 @@
               {
                 "frame": 15,
                 "destination": [
-                  390,
+                  42,
                   376,
                   80,
                   80
@@ -2085,7 +2085,7 @@
               {
                 "frame": 15,
                 "destination": [
-                  390,
+                  42,
                   376,
                   80,
                   80
@@ -2094,7 +2094,7 @@
               {
                 "frame": 15,
                 "destination": [
-                  390,
+                  42,
                   376,
                   80,
                   80
@@ -2103,7 +2103,7 @@
               {
                 "frame": 15,
                 "destination": [
-                  390,
+                  42,
                   376,
                   80,
                   80
@@ -2112,7 +2112,7 @@
               {
                 "frame": 15,
                 "destination": [
-                  390,
+                  42,
                   376,
                   80,
                   80
@@ -2121,7 +2121,7 @@
               {
                 "frame": 15,
                 "destination": [
-                  390,
+                  42,
                   376,
                   80,
                   80
@@ -2164,36 +2164,36 @@
       ],
       "durationMs": 2260,
       "loop": false,
-      "pivotX": 257.9234828496042,
+      "pivotX": 254.07651715039577,
       "pivotY": 449,
       "sourceScale": 0.1953125,
       "referenceLength": 279,
       "fullScene": false,
-      "sheetSHA256": "9465f98b71a9c2cf3404746204c3bd1c08bce51bdd5892d77f98dfb980a58ce7",
-      "previewSHA256": "a8e70111954a1b8abc3623c7d790a61bb5912d47f0f25ee7963df02a7335809e",
-      "gifSHA256": "7b8efebc449ab0c9a478f4dc279939a77249fd4642c91104eef41b2184efe6e3",
+      "sheetSHA256": "9ebfde27a2beb06005a691444528e7fb3d0ff12e12e699c54d2dcf4472404dc8",
+      "previewSHA256": "927e65f1815d978a005cc6729ad2067e7c2e2005786e2e7027ba31bb400b062b",
+      "gifSHA256": "b96c79f4dc37f95e6b149d756f532959cbdc75af3d4469a212e0850bf0802a21",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
-      "sourceFacingLabel": "right",
+      "sourceFacing": "left",
+      "sourceFacingLabel": "left",
       "referenceGeometry": {
         "alphaThreshold": 16,
         "neutralBounds": [
-          154,
+          99,
           170,
-          413,
+          358,
           449
         ],
-        "pivotX": 257.9234828496042,
+        "pivotX": 254.07651715039577,
         "pivotY": 449,
         "referenceLength": 279,
         "supportMethod": "Mean x of alpha>=16 pixels in bottom eight pixel rows; lower exclusive alpha bound y.",
         "referenceMethod": "Maximum width/height of exact approved neutral whole-character alpha>=16 bounds. Fixed reference for all actions; not each pose bounding box.",
-        "sourceFacing": "right",
-        "sourceFacingSign": 1
+        "sourceFacing": "left",
+        "sourceFacingSign": -1
       },
       "canonicalCoreLength": 204.8,
-      "sourceFacingSign": 1
+      "sourceFacingSign": -1
     }
   },
   "rangedBodyOnly": false,

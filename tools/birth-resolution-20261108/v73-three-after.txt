@@ -1,0 +1,42 @@
+✔ spore base birth keeps body-only source and authored timing (3.331653ms)
+✔ spore endpoint has uniform scale, centered horizontal bounds and grounded feet (318.807529ms)
+✔ spore runtime draws the corrected body equally in both facings (13.287624ms)
+✔ pebble base birth keeps body-only source and authored timing (1.522284ms)
+✔ pebble endpoint has uniform scale, centered horizontal bounds and grounded feet (268.8487ms)
+✔ pebble runtime draws the corrected body equally in both facings (4.201471ms)
+✔ spring base birth keeps body-only source and authored timing (0.782188ms)
+✔ spring endpoint has uniform scale, centered horizontal bounds and grounded feet (229.655926ms)
+✔ spring runtime draws the corrected body equally in both facings (4.210163ms)
+✔ spore base normalization mirrors every original RGBA cell without changing its frame order (169.678343ms)
+✔ base DNA selects its full 3.85 second birth rather than the idle fallback (4.083822ms)
+✔ base birth source normalization changes only whole-cell facing and the matching scene coordinates (22.266377ms)
+✔ all authored boundaries draw one whole body after emergence in both facings (5.058504ms)
+✔ final whole-body pixels and registration match the actual current idle (602.841418ms)
+✔ offline publication includes both layers and the independently verified fallback (5.925277ms)
+✔ failed layer uses the complete-scene fallback without reviving part rigs (1.052177ms)
+✔ design and compiled runtime use the same layered base birth with left-facing preview (85.915045ms)
+✔ many simultaneous base births reuse two decoded atlases and keep each body clock (4.157111ms)
+✔ whole-body scene uses master frame timing, arbitrary readyAt and final hold (4.634508ms)
+✔ null body samples draw only environment and no outline; whole body gets one outline (0.920822ms)
+✔ scene mirroring uses authored facing once, without extra travel or body rotations (0.561802ms)
+✔ partial layers are not ready and never trigger baked or idle downloads (5.783408ms)
+✔ layer failure falls back atomically, retries with backoff and returns to layers (1.375985ms)
+✔ failure of layers and baked fallback remains unready then retries safely (0.653337ms)
+✔ invalid schema and invalid sample destinations use legacy baked rendering (10.673283ms)
+✔ undersized decoded layer atlas fails over instead of drawing partial body (0.816523ms)
+✔ unlayered birth keeps exact baked crop, reference loading and callback behavior (5.986408ms)
+✔ timeless ready keeps reference semantics while timed scene readiness skips idle decode (0.462124ms)
+✔ scene samples follow mapped pose.frame rather than elapsed frame index (0.339262ms)
+✔ layers without their own reference length still load the legacy scale reference (5.50872ms)
+✔ malformed layer contracts fall back safely without loading any partial layer (43.670678ms)
+✔ slow fallback finishing after recovery cannot replace the whole-body scene (2.036033ms)
+✔ the original 14 bean/spore layered births render 1358 boundaries in both facings without hot-path promises or idle decode (128.69235ms)
+ℹ Stub-only runtime: 1358 boundaries, 2716 facing draws, 104.9 ms; decoded atlas estimate 518425600 bytes; snapshot f95f4901fea1fa4f1763340bdfb98d4c9d368d49465434e2e1452449fc26a79b. No pixel decode or browser rendering measured.
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2340.455791

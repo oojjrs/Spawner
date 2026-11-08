@@ -151,9 +151,9 @@
       "sheet": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-melee-v1-sheet.png",
       "preview": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-melee-v1-preview.webp",
       "gif": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-melee-v1-preview.gif",
-      "sheetSHA256": "d771f4f851a0fe265b2518a97b8251711d476fd0cf84e2efa3b26ff45cd1290e",
-      "previewSHA256": "48991f8a7472c1935d2ca68363b9949b98c8e1d0ab9f198b028ea9a33dc8ae70",
-      "gifSHA256": "d95e7f3918be8d84adba3c233e25b36d61fb745dcabdefd3d9cde59f995b20aa",
+      "sheetSHA256": "f44c42082b7b62f8980b35cd2fb1680c103ae3e060d9b2be6a3102eea692e51c",
+      "previewSHA256": "2c9c83bd4fcb7bab406cb746fe790bc37c7624426246159c3d562baa8359f770",
+      "gifSHA256": "5471b225d249f6ce0fe6ffe7f171fde102aa248ddcb8239e04e6dfcfa37f46e4",
       "durationsMs": [
         60,
         70,
@@ -178,7 +178,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         560,
         70,
@@ -217,15 +217,26 @@
       "hitAtMs": 300,
       "hitTimeMs": 300,
       "hitFrameIndex": 5,
-      "projectileIncluded": false
+      "projectileIncluded": false,
+      "sourceRepair": {
+        "kind": "image-generated-complete-leftward-middle-cels",
+        "sourceFacing": "left",
+        "candidateManifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-antenna-attack-manifest.json",
+        "validation": "tools/spring-native-facing-20261108/followup13-validation.json",
+        "originalWholeFirstLastCelsPreserved": true,
+        "geometryAndTimingUnchanged": true,
+        "legacyGeneratedSourceAndQAFieldsAreHistorical": true,
+        "mirroring": false,
+        "bodyPartComposition": false
+      }
     },
     "ranged-attack": {
       "sheet": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-ranged-v1-sheet.png",
       "preview": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-ranged-v1-preview.webp",
       "gif": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-ranged-v1-preview.gif",
-      "sheetSHA256": "1b064ed9780eba3c6756984da831945519dd062e3da9540f4c2914a5e430d22e",
-      "previewSHA256": "4d1f56a095646e2c7f105ab43669eab9ba8c6adf4674e4244c587f71c354efcd",
-      "gifSHA256": "21601795f78bc7b560ec41feb274795acf037a2295e9c799b4297e35cb35e829",
+      "sheetSHA256": "ab6bcff98fcff5f55fa436d4ca40c0375d463f86e2b2f66a7516cce3cd14be3e",
+      "previewSHA256": "ebc4d48f42ac501d3f70807cad1e83a6d09f5cb6914dff43e897d587989a0da9",
+      "gifSHA256": "86b8b7e0ea5745f8273ec5f56744475523d5708dff79cfa56bb82b570bf8dc40",
       "durationsMs": [
         30,
         40,
@@ -250,7 +261,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         530,
         40,
@@ -288,7 +299,18 @@
       "sceneIncludesNest": false,
       "launchAtMs": 200,
       "launchFrameIndex": 5,
-      "projectileIncluded": false
+      "projectileIncluded": false,
+      "sourceRepair": {
+        "kind": "image-generated-complete-leftward-middle-cels",
+        "sourceFacing": "left",
+        "candidateManifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-antenna-ranged-manifest.json",
+        "validation": "tools/spring-native-facing-20261108/followup13-validation.json",
+        "originalWholeFirstLastCelsPreserved": true,
+        "geometryAndTimingUnchanged": true,
+        "legacyGeneratedSourceAndQAFieldsAreHistorical": true,
+        "mirroring": false,
+        "bodyPartComposition": false
+      }
     },
     "hurt": {
       "sheet": "AnimationCandidates/spring-blade-secretion-carapace-antenna-fullbody-v1-20261107/spring-blade-secretion-carapace-antenna-hurt-v1-sheet.png",

@@ -5,14 +5,25 @@ import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {UNIT_ACTION_ART} from './unit-action-art-assets.mjs';
 import {createUnitActionArt,unitActionArtPose} from './unit-action-art.mjs';
-import {unitDisplaySize} from './unit-size.mjs';
+import {unitDisplaySize,unitFrameMirror} from './unit-size.mjs';
+const facingChanges=JSON.parse(readFileSync('tools/spring-native-facing-20261108/bean-spore-image-changes.json')).changes;
+const facingBefore=JSON.parse(readFileSync('tools/spring-native-facing-20261108/bean-spore-plan-registry.json'));
+const baselineCommit='958b999dc5109cb4827f2013916840c22c7adf07';
 const expected={spore:[79,134.5,162,22,3120,'93696aac1e9eb471a1aae0ba8932eec01e369d0d64d064218a01b4b1c2ce9761'],pebble:[93,75.5,136,48,2620,'d8b762b189ea9767c2026dbfb692750a21b761bdd2514a5626e77f156cb76129'],spring:[105,150,207,13,1790,'01d1eafb5d7d0886dceabbfd8b249d5aae06512e4e507e732ef51e637e3deb00']};
-for(const [tribe,[length,x,y,count,ms,hash]] of Object.entries(expected)){
+for(const [tribe,[length,previousX,y,count,ms,hash]] of Object.entries(expected)){
+ const x=tribe==='spore'?192-previousX:previousX;
  const def=UNIT_ACTION_ART[tribe+'/base'],a=def.actions.birth;
  test(tribe+' base birth keeps body-only source and authored timing',()=>{
   assert.deepEqual([a.referenceLength,a.pivotX,a.pivotY,a.frameCount,a.durationsMs.reduce((x,y)=>x+y,0)],[length,x,y,count,ms]);
   assert.equal(a.scene,undefined);assert.equal(a.sceneLayers,undefined);
-  assert.equal(createHash('sha256').update(readFileSync(a.image)).digest('hex'),hash);
+  const change=tribe==='spore'?facingChanges[a.image]:null;
+  if(change){
+   const before=facingBefore.UNIT_ACTION_ART['spore/base'].actions.birth;
+   assert.equal(change.beforeSha256,hash);assert.equal(change.operation,'mirror-each-cell');
+   assert.equal(change.frameWidth,192);assert.equal(change.frameHeight,192);
+   assert.deepEqual(a,{...before,pivotX:192-before.pivotX,sourceFacing:'left'});
+  }
+  assert.equal(createHash('sha256').update(readFileSync(a.image)).digest('hex'),change?.afterSha256||hash);
   const agent={tribe,dna:{version:6,pieces:[]},health:10,birth:{startedAt:4,readyAt:4+ms/1000}};
   let elapsed=0;for(let frame=0;frame<count;frame++){
    const pose=unitActionArtPose(agent,4+elapsed/1000+.000001);assert.equal(pose.action,'birth');assert.equal(pose.animation,a);assert.equal(pose.frame,frame);elapsed+=a.durationsMs[frame];
@@ -33,7 +44,23 @@ print(json.dumps(out))`],{input:JSON.stringify([[a,count-1],[def.reference,0]]),
  test(tribe+' runtime draws the corrected body equally in both facings',async()=>{
   const calls=[];const surface=(w,h)=>({getContext:()=>({drawImage(){},getImageData(){const data=new Uint8ClampedArray(w*h*4);data.fill(255);return {data};}})});
   const art=createUnitActionArt(v=>v,surface,async image=>({image}));const agent={tribe,dna:{version:6,pieces:[]},health:10,birth:{startedAt:0,readyAt:ms/1000}};await art.prepare(agent);await new Promise(r=>setImmediate(r));
-  for(const mirror of [false,true]){const ctx={save(){},restore(){},translate(){},scale(x,y){assert.equal(x,mirror?-1:1);assert.equal(y,1)},drawImage(...args){calls.push(args)}};assert.equal(art.draw(ctx,agent,ms/1000-.001,0,0,100,mirror),true);}
+  for(const mirror of [false,true]){const ctx={save(){},restore(){},translate(){},scale(x,y){assert.equal(x,unitFrameMirror(a.sourceFacing,mirror?-1:1)?-1:1);assert.equal(y,1)},drawImage(...args){calls.push(args)}};assert.equal(art.draw(ctx,agent,ms/1000-.001,0,0,100,mirror),true);}
   assert.equal(calls.length,2);for(const c of calls){const scale=100*unitDisplaySize(agent)/length;assert.equal(c[0].image,a.image);assert.equal(c[5],-x*scale);assert.equal(c[6],-y*scale);assert.equal(c[7],a.frameSize*scale);assert.equal(c[8],a.frameHeight*scale);}
  });
 }
+
+test('spore base normalization mirrors every original RGBA cell without changing its frame order',()=>{
+ const a=UNIT_ACTION_ART['spore/base'].actions.birth,change=facingChanges[a.image];
+ const result=JSON.parse(execFileSync('python3',['-c',`import json,sys,subprocess,hashlib,io
+from PIL import Image,ImageOps
+import numpy as np
+p=json.load(sys.stdin);raw=subprocess.check_output(['git','show',p['commit']+':'+p['image']]);assert hashlib.sha256(raw).hexdigest()==p['hash']
+with Image.open(io.BytesIO(raw)) as before,Image.open(p['image']) as after:
+ assert before.size==after.size==(768,1152)
+ for f in range(24):
+  box=(f%4*192,f//4*192,f%4*192+192,f//4*192+192)
+  a=np.array(ImageOps.mirror(before.crop(box)).convert('RGBA'));b=np.array(after.crop(box).convert('RGBA'));a[a[:,:,3]==0,:3]=0;b[b[:,:,3]==0,:3]=0
+  assert np.array_equal(a,b),('cell',f)
+print(json.dumps({'cells':24,'exactVisibleRGBA':True}))`],{input:JSON.stringify({commit:baselineCommit,image:a.image,hash:change.beforeSha256}),encoding:'utf8'}));
+ assert.deepEqual(result,{cells:24,exactVisibleRGBA:true});
+});

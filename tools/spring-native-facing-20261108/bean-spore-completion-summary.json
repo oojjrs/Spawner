@@ -1,0 +1,16 @@
+{
+  "sourceImages": 507,
+  "previews": 243,
+  "sourceMetadata": 135,
+  "protectedOldSourceFiles": 19,
+  "preservedProjectiles": 2,
+  "independentFullPixelRegression": "Owned by audit_combo_action_facing; see parent report.",
+  "packerExecution": "Not run. Historical intermediate inputs (26 metadata files), original shared nests, and legacy generation jobs preserved; old jobs can reimport prior-facing sources.",
+  "allCurrentOutputHashesVerified": true,
+  "metadataHashPairsVerified": 692,
+  "metadataHashPairFailures": 0,
+  "contactSheets": [
+    "tools/spring-native-facing-20261108/bean-spore-post-normalization-contact-0.jpg",
+    "tools/spring-native-facing-20261108/bean-spore-post-normalization-contact-1.jpg"
+  ]
+}

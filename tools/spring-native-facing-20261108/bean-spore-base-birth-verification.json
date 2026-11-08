@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "hashFailures": [],
+  "rawToPackedRgbaMismatchFrames": [],
+  "rawToPackedVerifiedFrames": 16,
+  "publicationMatchesNormalizedNative": true,
+  "sourceCount": 21,
+  "previewCount": 3,
+  "metadataCount": 9,
+  "combinedTotals": {
+    "sourceImages": 561,
+    "previews": 280,
+    "sourceMetadataJson": 164
+  }
+}

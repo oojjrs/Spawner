@@ -4,7 +4,7 @@
   "status": "completed-under-user-delegated-production",
   "authorizationMessageId": "Sentinel_cbea50ff285881919d451c1038e1f54a",
   "sourceAppearance": "DesignAssets/Animations/UnitAppearanceV1/bean/11/Source/neutral.png",
-  "sourceAppearanceSHA256": "a442e5bbefd2b3a3ca655d28fc3164a459ad978e322561f4fcb966f840e32324",
+  "sourceAppearanceSHA256": "ba7247467bc178b022c1aab26d54a2fc242691853f929d40aa42a31b3ffea5f8",
   "actions": {
     "idle": {
       "frameSize": 512,
@@ -81,12 +81,13 @@
       "sheet": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-idle-v1-sheet.png",
       "preview": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-idle-v1-transparent-preview.webp",
       "gif": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-idle-v1-preview.gif",
-      "sheetSHA256": "91250f6188993d7e33b3043b9e728515c172a02076b081a0daa509dfc6035ff8",
-      "previewSHA256": "fb89c924bb2e65706de7ff55f776dc602d21bcc1e72193c29dc94087e543480a",
-      "gifSHA256": "60b90f1a2359fe5988843acaa4bc3fb5ed74edd586d35ccdf81df8247c24737e",
+      "sheetSHA256": "db05b463c81dbc14de2ddbf71f4fde3d5bffb7f6fc46c9b93e975487894387b6",
+      "previewSHA256": "512a4117b3a1dbe1c3f2a9983926e77151dfee3c0e01f4a4bd90c236852e7f3d",
+      "gifSHA256": "3515e07b0bece9e7eeb84b7aea30d6a67171d52c2d3f33735c2c6a33ba5aeff8",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     },
     "walk": {
       "frameSize": 512,
@@ -122,8 +123,8 @@
       "loop": true,
       "sheet": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion/walk.png",
       "preview": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion/preview.webp",
-      "sheetSHA256": "e9ffa861c116adfa845a45db7dab77789cd5b7381cf21ce9908dba2b3ac48bf1",
-      "previewSHA256": "7286bb8a9b7953178c19a351cacf749612b0734d3525d1a47128343ed8b2446e",
+      "sheetSHA256": "14f5b0d468d91a8744bdeeacb764e3b2f3f6fa0dd8f6fcc9c9dbc4ba6e6aa55e",
+      "previewSHA256": "a25657da66f995bc824c2d531021f2ac2f0429d4f0bce0978b2ec7aa07c1b841",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
@@ -136,7 +137,7 @@
         "gifSHA256": "19fd507520c8133156d35a0a9663fe4bff5c2ef06882e8addb0db18c7b9871c0"
       },
       "manifest": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion/manifest.json",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewFacing": "right",
       "previewTargetFacing": "left",
       "previewDurationsMs": [
@@ -193,15 +194,16 @@
       "sheet": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-attack-v1-sheet.png",
       "preview": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-attack-v1-transparent-preview.webp",
       "gif": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-attack-v1-preview.gif",
-      "sheetSHA256": "7a48cf24d078ce6ef62653516de43252f6b06fff2772a6b0fcf467f2b1e36720",
-      "previewSHA256": "e345ae1d62e3cb2397c4a7f8e53ae2009dfe0dd37fc05d76417e70abaf65d847",
-      "gifSHA256": "70631534f16494aacf18c05008f3416617a10e76dbe34ec7c2a2a949672fbf84",
+      "sheetSHA256": "4810e32f2ea2044b1dc8639c18b105ee35f0c494ff9d16c8ee1ddaca0a6907af",
+      "previewSHA256": "e1a0ec47e811443b2c1b9fb14d27919632b7d618bb5199c12d15ffa3531ed069",
+      "gifSHA256": "1bae14298be6f1bb7e5483fdb3eb7eafc6c743d3c5e278378a1bc3c3c236c13e",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
       "hitTimeMs": 350,
       "hitFrameIndex": 6,
-      "hitTimingSource": "Integration visual review: strongest forward blade/crystal contact pose."
+      "hitTimingSource": "Integration visual review: strongest forward blade/crystal contact pose.",
+      "sourceFacing": "left"
     },
     "ranged-attack": {
       "frameSize": 512,
@@ -240,12 +242,13 @@
       "gif": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-ranged-v1-preview.gif",
       "launchAtMs": 200,
       "rangedBody": true,
-      "sheetSHA256": "6d5757577322c86c62eb81cf6a3cbb6c21813cce5c32150a918183ad0f313f64",
-      "previewSHA256": "ccad1b810160dc5fbc77c6b5f170d256e5010b64443e69cb6924bbe752c7fc5b",
-      "gifSHA256": "2474043c9462297ad3d9da1e1c077840493dd66cebeb101eba84f39117c05e82",
+      "sheetSHA256": "d4522d7f531c3ba499fecf3baba67a7defc6c639e7c044896789441bd5c8bdae",
+      "previewSHA256": "24e403b0d8f26dd311e33f768ce9ca3b12b339cd944a19f7e0c122d45bdf1e11",
+      "gifSHA256": "abe89c8a1c6a514db9289278ea55d0fa9df622f04eead55c8459e98763cee924",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     },
     "hurt": {
       "frameSize": 512,
@@ -274,12 +277,13 @@
       "sheet": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-hurt-v1-sheet.png",
       "preview": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-hurt-v1-transparent-preview.webp",
       "gif": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-hurt-v1-preview.gif",
-      "sheetSHA256": "9e96a50274322b39d552ff3e9bd57042b501d1d80d80a8f92d334d9334e350c6",
-      "previewSHA256": "64735b2b7d73a14a73fd8ba43019df18fc4db7e12d342f45fd11cae2fd90f260",
-      "gifSHA256": "5ebd11082c4e2a335cf28974dae1cd24434c77d61e59cbd10ae4421a6d41c1d7",
+      "sheetSHA256": "d34aaf2f386c6853c97dafa155660919c6ee96e818285484a707e6f2bafd0370",
+      "previewSHA256": "08b04540c06f0b668d0b44dee7d04a44bc6b69c40e7d5b6f659d1a36276e6d4b",
+      "gifSHA256": "abff97495b95ccf19db12e474d509e998beaf0777a042ddfd1f24bba06570fb9",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     },
     "birth": {
       "frameSize": 512,
@@ -411,12 +415,13 @@
       "gif": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-birth-complete-v1-from-sheet.gif",
       "motionDurationMs": 3850,
       "reviewHoldMs": 650,
-      "sheetSHA256": "8e18aee13d14bc3ea72ca9b1ede0bbedddd0f99e84af3412c096fe1db61656f6",
-      "previewSHA256": "a5c5a43491695f9dc4c95ef1f0ccd38ea2c0ca9fb78b5dd7d1d704c4090d258f",
-      "gifSHA256": "b6f9effae4f3980e9062620b1180705622cea14b09c7483d5a81230b77a2e787",
+      "sheetSHA256": "166c1ffd525d32a4fa9feeb19f6fce42874ee28f40e98d59faae941d329f4e87",
+      "previewSHA256": "836b92f4b4a39b6dac84aca516b18cbf62655c8a33207e73c48473693882e5cc",
+      "gifSHA256": "8cc0ea3214520bf9b3e437be966fe3522493262fd7f8a1e8d290e2d078d3eba0",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": true
+      "fullScene": true,
+      "sourceFacing": "left"
     },
     "death": {
       "frameSize": 512,
@@ -445,12 +450,13 @@
       "sheet": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-death-v1-sheet.png",
       "preview": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-death-v1-transparent-preview.webp",
       "gif": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-death-v1-preview.gif",
-      "sheetSHA256": "dff5570e9a16a4352f0cc7714767038cff36e02741e5794b24815a04baa466ca",
-      "previewSHA256": "47399290fb9ab78889081dfaeac94c22a3b576eed394028f9a4ab582fa024005",
-      "gifSHA256": "a5c60dfcdc8e5262216c2c3bbefc9c0efc2ddcf3b833b095aa86f16a4ba7220b",
+      "sheetSHA256": "42db095e0235ebf256c9fdea7bcd813634b2a215004eb760eb1867bd98603fd2",
+      "previewSHA256": "04112bc020479200d586de86e0a1b8a2788b51c92f2e14cfc69668bc3d0a7e0f",
+      "gifSHA256": "15cd507f1bae1e6fd8c91381d6cf3f6aec31025ad9162687679e0dca2f18a00e",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     }
   },
   "rangedBodyOnly": true,

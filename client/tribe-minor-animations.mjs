@@ -2,45 +2,47 @@ export const TRIBE_MINOR_ANIMATIONS = Object.freeze({
   "spore": {
     "antenna": {
       "walk": {
-        "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/walk.webp",
-        "frameSize": 128,
-        "columns": 4,
-        "frameCount": 8,
-        "durationsMs": [
-          140,
-          140,
-          140,
-          140,
-          140,
-          140,
-          140,
-          140
-        ],
-        "loop": true,
-        "pivotX": 64,
-        "pivotY": 112,
-        "durationMs": 1120
-      },
+  "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/walk.webp",
+  "frameSize": 128,
+  "columns": 4,
+  "frameCount": 8,
+  "durationsMs": [
+    140,
+    140,
+    140,
+    140,
+    140,
+    140,
+    140,
+    140
+  ],
+  "loop": true,
+  "pivotX": 64,
+  "pivotY": 112,
+  "durationMs": 1120,
+  "sourceFacing": "left"
+},
       "death": {
-        "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/death.webp",
-        "frameSize": 128,
-        "columns": 4,
-        "frameCount": 8,
-        "durationsMs": [
-          120,
-          100,
-          140,
-          120,
-          140,
-          100,
-          120,
-          600
-        ],
-        "loop": false,
-        "pivotX": 64,
-        "pivotY": 112,
-        "durationMs": 1440
-      }
+  "image": "DesignAssets/Animations/TribeMinorV1/spore/antenna/death.webp",
+  "frameSize": 128,
+  "columns": 4,
+  "frameCount": 8,
+  "durationsMs": [
+    120,
+    100,
+    140,
+    120,
+    140,
+    100,
+    120,
+    600
+  ],
+  "loop": false,
+  "pivotX": 64,
+  "pivotY": 112,
+  "durationMs": 1440,
+  "sourceFacing": "left"
+}
     }
   },
   "pebble": {

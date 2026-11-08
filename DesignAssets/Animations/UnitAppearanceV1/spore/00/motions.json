@@ -77,17 +77,18 @@
       "pivotX": 274.5,
       "pivotY": 480.375,
       "events": [],
-      "sourceHash": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7",
+      "sourceHash": "203c5212dfa29e8e67eac421b53c311a87a3da63aa31183d67229b6019b9f1e2",
       "cameraMapping": {
         "verified": true,
-        "sourceHash": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7",
+        "sourceHash": "203c5212dfa29e8e67eac421b53c311a87a3da63aa31183d67229b6019b9f1e2",
         "pixelsPerWorld": 1113.157894736842,
         "scale": 0.4599527186761229,
         "offsetX": 129.74297872340426,
         "offsetY": 227.05021276595744,
         "method": "preserve-existing-game-fixed-native-camera",
         "verification": "tools/native-appearance-registration-20261104/report.json"
-      }
+      },
+      "sourceFacing": "left"
     },
     "walk": {
       "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
@@ -117,10 +118,10 @@
       "pivotX": 256,
       "pivotY": 448,
       "events": [],
-      "sourceHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
+      "sourceHash": "ba8930ee9cd56dff0fb6daf1351d859589c5630043f72515195c11249b7027bb",
       "cameraMapping": {
         "verified": true,
-        "sourceHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
+        "sourceHash": "ba8930ee9cd56dff0fb6daf1351d859589c5630043f72515195c11249b7027bb",
         "pixelsPerWorld": 1112.2889190188587,
         "scale": 0.4603120567375886,
         "offsetX": 138.1601134751773,
@@ -133,7 +134,8 @@
         "rig": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/rig.json",
         "sourceImage": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/approved-idle-key.png",
         "sourceHash": "f0283fc0996e528bfe73e91c705e4e55f90f045182344684203a8e2e1fc8ca11"
-      }
+      },
+      "sourceFacing": "left"
     },
     "jump": {
       "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
@@ -163,17 +165,18 @@
       "pivotX": 256,
       "pivotY": 448,
       "events": [],
-      "sourceHash": "088de97292a6c4cb18ac6e2e067ae53479e130fa679d17960d9f1e7241ebbfff",
+      "sourceHash": "f024d8bb797ee75c63fc9373c5b6de2b7eb826d0c81a28c479f3d4280ec5c3f7",
       "cameraMapping": {
         "verified": true,
-        "sourceHash": "088de97292a6c4cb18ac6e2e067ae53479e130fa679d17960d9f1e7241ebbfff",
+        "sourceHash": "f024d8bb797ee75c63fc9373c5b6de2b7eb826d0c81a28c479f3d4280ec5c3f7",
         "pixelsPerWorld": 1148.6796576215627,
         "scale": 0.44572914354567644,
         "offsetX": 141.89333925230682,
         "offsetY": 248.31334369153694,
         "method": "preserve-existing-game-fixed-native-camera",
         "verification": "tools/native-appearance-registration-20261104/report.json"
-      }
+      },
+      "sourceFacing": "left"
     },
     "attack": {
       "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
@@ -203,17 +206,18 @@
       "pivotX": 276.5,
       "pivotY": 482.6181818181818,
       "events": [],
-      "sourceHash": "65e91bdc3af93677e254b8ce24ccf8c98e22930d4179f8f614519554176de36f",
+      "sourceHash": "9bca50d90ffb873b6d4b9c3fb54b4a463830aa2b7041c68023b6f3c6908a6c2f",
       "cameraMapping": {
         "verified": true,
-        "sourceHash": "65e91bdc3af93677e254b8ce24ccf8c98e22930d4179f8f614519554176de36f",
+        "sourceHash": "9bca50d90ffb873b6d4b9c3fb54b4a463830aa2b7041c68023b6f3c6908a6c2f",
         "pixelsPerWorld": 1106.9094882535055,
         "scale": 0.46254911122664555,
         "offsetX": 128.1051707458325,
         "offsetY": 224.76538893818037,
         "method": "preserve-existing-game-fixed-native-camera",
         "verification": "tools/native-appearance-registration-20261104/report.json"
-      }
+      },
+      "sourceFacing": "left"
     },
     "hurt": {
       "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
@@ -243,17 +247,18 @@
       "pivotX": 276.5,
       "pivotY": 482.6181818181818,
       "events": [],
-      "sourceHash": "703eda5d5454549c6bcec7a4cfedec832dfcbf30c885a23e08818a944d86ada2",
+      "sourceHash": "fb6da9ac70c38e40c40f561354fd847b940f571ba225ec600dd07643f04a1983",
       "cameraMapping": {
         "verified": true,
-        "sourceHash": "703eda5d5454549c6bcec7a4cfedec832dfcbf30c885a23e08818a944d86ada2",
+        "sourceHash": "fb6da9ac70c38e40c40f561354fd847b940f571ba225ec600dd07643f04a1983",
         "pixelsPerWorld": 1106.9094882535055,
         "scale": 0.46254911122664555,
         "offsetX": 128.1051707458325,
         "offsetY": 224.76538893818037,
         "method": "preserve-existing-game-fixed-native-camera",
         "verification": "tools/native-appearance-registration-20261104/report.json"
-      }
+      },
+      "sourceFacing": "left"
     },
     "death": {
       "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
@@ -275,17 +280,18 @@
       "pivotX": 276.5,
       "pivotY": 482.6181818181818,
       "events": [],
-      "sourceHash": "8baf1b600e5868e4d1af9ddcc94692ebd3416a72b1b6c97db681eddaafb49c99",
+      "sourceHash": "70057334cec1e75b8ae313211bbc3b1538187f225c18eedd7d85f340bfafa698",
       "cameraMapping": {
         "verified": true,
-        "sourceHash": "8baf1b600e5868e4d1af9ddcc94692ebd3416a72b1b6c97db681eddaafb49c99",
+        "sourceHash": "70057334cec1e75b8ae313211bbc3b1538187f225c18eedd7d85f340bfafa698",
         "pixelsPerWorld": 1106.9094882535055,
         "scale": 0.46254911122664555,
         "offsetX": 128.1051707458325,
         "offsetY": 224.76538893818037,
         "method": "preserve-existing-game-fixed-native-camera",
         "verification": "tools/native-appearance-registration-20261104/report.json"
-      }
+      },
+      "sourceFacing": "left"
     }
   },
   "sceneActions": {}

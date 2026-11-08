@@ -63,21 +63,19 @@ test("전투 속성은 종족별 탄생 경로·등장 시각·프레임을 바�
   }
 });
 
-test("세 종족의 마지막 탄생 프레임은 전투 탄생을 다시 재생하지 않는다", () => {
-  for (const [name, animation] of [["drawSporeBirth", SPORE_BIRTH_ANIMATION], ["drawPebbleBirth", PEBBLE_BIRTH_ANIMATION],
-    ["drawSpringBirth", SPRING_BIRTH_ANIMATION]]) {
-    let calls = 0;
-    const context = createContext({ Spawner: { unitDisplayAttributes, SPORE_BIRTH_ANIMATION }, PEBBLE_BIRTH_ANIMATION, SPRING_BIRTH_ANIMATION,
-      idleMotion: { matches: false }, drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, position, birth) {
-        assert.equal(agent.birth, null); assert.equal(birth, null); calls++;
-      } });
-    runInContext(declaration(name), context);
-    for (let mask = 0; mask < 32; mask++) {
-      const agent = { birth: { startedAt: 0 }, attributes: attributes(combatKeys, mask) };
-      context[name](null, 0, agent, { unitVisible: true, frame: animation.frameCount - 1, x: 0, y: 0 }, {}, 100, null);
-      assert.ok(agent.birth);
+test("세 종족의 공통 원화 탄생은 종료 시 대기로 전환하고 다시 재생하지 않는다", () => {
+  for (const tribe of ["spore", "pebble", "spring"]) for (let mask = 0; mask < 32; mask++) {
+    const duration = agentBirthDuration(tribe);
+    const agent = { tribe, health: 10, mode: "idle", birth: { startedAt: 0, readyAt: duration },
+      attributes: attributes(combatKeys, mask) };
+    const before = structuredClone(agent);
+    assert.equal(unitActionArtPose(agent, duration - .000001).action, "birth");
+    for (const time of [duration, duration + .001, duration + 1]) {
+      const pose = unitActionArtPose(agent, time);
+      assert.equal(pose.action, "idle");
+      assert.notEqual(pose.animation, unitActionArtPose(agent, 0).animation);
     }
-    assert.equal(calls, 32);
+    assert.deepEqual(agent, before);
   }
 });
 

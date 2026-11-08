@@ -75,7 +75,7 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
   "bean/carapace-antenna": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/bean/carapace-antenna/attack.png",
     "sourceManifest": "AnimationCandidates/bean-defensive-retaliation-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "frameSize": 512,
     "frameHeight": 512,
     "columns": 8,
@@ -99,7 +99,7 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
       60
     ],
     "durationMs": 1000,
-    "pivotX": 258.01240694789084,
+    "pivotX": 253.98759305210916,
     "pivotY": 448,
     "referenceLength": 259,
     "viewSize": 259,
@@ -195,7 +195,7 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
   "spore/antenna": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/spore/antenna/attack.png",
     "sourceManifest": "AnimationCandidates/spore-defensive-attack-fullbody-v1-20261107/antenna/publication-manifest.json",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "frameSize": 512,
     "frameHeight": 512,
     "columns": 4,
@@ -267,7 +267,7 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
   "spore/carapace-antenna": {
     "image": "DesignAssets/Animations/DefensiveAttackV1/spore/carapace-antenna/attack.png",
     "sourceManifest": "AnimationCandidates/spore-defensive-attack-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
-    "sourceFacing": "right",
+    "sourceFacing": "left",
     "frameSize": 512,
     "frameHeight": 512,
     "columns": 4,
@@ -291,7 +291,7 @@ export const DEFENSIVE_ATTACK_ART = Object.freeze({
       60
     ],
     "durationMs": 1000,
-    "pivotX": 256.5,
+    "pivotX": 255.5,
     "pivotY": 417,
     "referenceLength": 297,
     "viewSize": 297,

@@ -1,0 +1,27 @@
+{
+  "path": "DesignAssets/sections/unit-appearance.js",
+  "changed": "Only bean/base birth data-birth-scene payload",
+  "beforeSHA256": "9a38fed9f818269e55be3ae324ad364e4ef0c109e0807bac6aff7da6ac931ef4",
+  "afterSHA256": "41b4fa68ce841b24a410cdaf5047dec0502d4c3825c07b2dc1faf7143f7b5acc",
+  "allOtherHTMLByteExact": true,
+  "prior": {
+    "sourceFacing": "right",
+    "environment": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+    "destination": [
+      49,
+      29,
+      434,
+      424
+    ]
+  },
+  "current": {
+    "sourceFacing": "left",
+    "environment": "DesignAssets/Animations/BirthSceneLayersV1/b787fdc93791ddae38dc4fc6b6efdd3e0abb8a747c96d7c2511fec74b7caaecd.png",
+    "destination": [
+      29,
+      29,
+      434,
+      424
+    ]
+  }
+}

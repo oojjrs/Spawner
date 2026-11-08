@@ -1,0 +1,336 @@
+{
+  "id": "spring-blade-carapace-attack",
+  "key": "spring/blade-carapace",
+  "action": "attack",
+  "source": "DesignAssets/Animations/BladeCarapaceV1/spring/attack.png",
+  "originalSHA256": "89cd8bd2d248e093527c55fa4665dc5464df7e27667def129c615ca2615facde",
+  "generated": "tools/spring-native-facing-20261108/followup13-spring-blade-carapace-attack-generated.png",
+  "generationSHA256": "80070999d78f1e2b4ddfc9f4f87dc485a00bc26a04cc71da25c02d30ad793637",
+  "candidate": "tools/spring-native-facing-20261108/followup13-spring-blade-carapace-attack-candidate.png",
+  "candidateSHA256": "773682f9679ab10c2b6b3d2ce77618eb34b030e802d76f374beac02bbd9a37ca",
+  "frameSize": 480,
+  "frameHeight": 480,
+  "frameCount": 16,
+  "columns": 4,
+  "timingUnchanged": true,
+  "geometryUnchanged": true,
+  "frames": [
+    {
+      "frame": 0,
+      "origin": "unchanged-original-whole-cel"
+    },
+    {
+      "frame": 1,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        65,
+        100,
+        223,
+        247
+      ],
+      "wholeBodyComponent": 2,
+      "scale": 1.5324675324675325,
+      "placement": [
+        99,
+        150,
+        242,
+        225
+      ],
+      "wholeCelBoundaryAdjustment": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 2,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        55,
+        110,
+        212,
+        248
+      ],
+      "wholeBodyComponent": 3,
+      "scale": 1.5324675324675325,
+      "placement": [
+        83,
+        164,
+        241,
+        211
+      ],
+      "wholeCelBoundaryAdjustment": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 3,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        60,
+        124,
+        229,
+        250
+      ],
+      "wholeBodyComponent": 4,
+      "scale": 1.5324675324675325,
+      "placement": [
+        91,
+        182,
+        259,
+        193
+      ],
+      "wholeCelBoundaryAdjustment": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 4,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        69,
+        116,
+        231,
+        244
+      ],
+      "wholeBodyComponent": 5,
+      "scale": 1.5324675324675325,
+      "placement": [
+        105,
+        179,
+        248,
+        196
+      ],
+      "wholeCelBoundaryAdjustment": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 5,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        39,
+        125,
+        234,
+        245
+      ],
+      "wholeBodyComponent": 7,
+      "scale": 1.5324675324675325,
+      "placement": [
+        59,
+        191,
+        299,
+        184
+      ],
+      "wholeCelBoundaryAdjustment": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 6,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        -4,
+        135,
+        237,
+        244
+      ],
+      "wholeBodyComponent": 8,
+      "scale": 1.5324675324675325,
+      "placement": [
+        4,
+        208,
+        369,
+        167
+      ],
+      "wholeCelBoundaryAdjustment": [
+        11,
+        0
+      ]
+    },
+    {
+      "frame": 7,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        5,
+        117,
+        236,
+        244
+      ],
+      "wholeBodyComponent": 6,
+      "scale": 1.5324675324675325,
+      "placement": [
+        7,
+        181,
+        354,
+        195
+      ],
+      "wholeCelBoundaryAdjustment": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 8,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        48,
+        101,
+        236,
+        245
+      ],
+      "wholeBodyComponent": 12,
+      "scale": 1.5324675324675325,
+      "placement": [
+        73,
+        154,
+        288,
+        221
+      ],
+      "wholeCelBoundaryAdjustment": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 9,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        52,
+        95,
+        216,
+        246
+      ],
+      "wholeBodyComponent": 11,
+      "scale": 1.5324675324675325,
+      "placement": [
+        79,
+        144,
+        251,
+        231
+      ],
+      "wholeCelBoundaryAdjustment": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 10,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        61,
+        92,
+        208,
+        246
+      ],
+      "wholeBodyComponent": 10,
+      "scale": 1.5324675324675325,
+      "placement": [
+        93,
+        139,
+        225,
+        236
+      ],
+      "wholeCelBoundaryAdjustment": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 11,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        68,
+        84,
+        218,
+        246
+      ],
+      "wholeBodyComponent": 9,
+      "scale": 1.5324675324675325,
+      "placement": [
+        103,
+        127,
+        230,
+        248
+      ],
+      "wholeCelBoundaryAdjustment": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 12,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        67,
+        85,
+        217,
+        247
+      ],
+      "wholeBodyComponent": 13,
+      "scale": 1.5324675324675325,
+      "placement": [
+        102,
+        127,
+        230,
+        248
+      ],
+      "wholeCelBoundaryAdjustment": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 13,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        67,
+        87,
+        218,
+        247
+      ],
+      "wholeBodyComponent": 15,
+      "scale": 1.5324675324675325,
+      "placement": [
+        102,
+        130,
+        231,
+        245
+      ],
+      "wholeCelBoundaryAdjustment": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 14,
+      "origin": "image-generated-whole-cel",
+      "crop": [
+        66,
+        88,
+        217,
+        247
+      ],
+      "wholeBodyComponent": 16,
+      "scale": 1.5324675324675325,
+      "placement": [
+        100,
+        131,
+        231,
+        244
+      ],
+      "wholeCelBoundaryAdjustment": [
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 15,
+      "origin": "unchanged-original-whole-cel"
+    }
+  ],
+  "packaging": "Uniform whole-cel cropping/scaling and atlas packing only. Original complete first/last cels retained. No flips, body-part composites, warps or runtime code."
+}

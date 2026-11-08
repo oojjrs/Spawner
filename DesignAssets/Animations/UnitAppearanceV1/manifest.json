@@ -34,32 +34,32 @@
           "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
           "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/00/Source/neutral.png",
           "coreBounds": [
-            173,
+            172,
             243,
             167,
             206
           ],
           "landmarks": {
             "leftEye": [
-              216,
+              215.5,
               375
             ],
             "rightEye": [
-              296.5,
+              296,
               375
             ],
             "supportPoint": [
-              255.5,
+              256.5,
               448.5
             ],
             "supportPixelBounds": [
-              203,
+              204,
               441,
               105,
               8
             ],
             "faceMidpoint": [
-              256.25,
+              255.75,
               375
             ]
           },
@@ -81,7 +81,7 @@
         },
         "visualBits": [],
         "generationReferenceIds": [],
-        "sourceHash": "9c8893d8792c6d4e987ec0479463ebbd9085f89d38bb1c7db2580c3f4d230f73",
+        "sourceHash": "f21bb702c38c1fc90f66c5b0c719b654aadc2ee3a92127d429680959587e3919",
         "sourceRegistration": {
           "originalRevision": "9f9662c^",
           "sourceImage": "DesignAssets/Units/starter-sprout-bean.png",
@@ -188,7 +188,8 @@
           "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
           "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
           "unobservedCoreBoundsNotInferred": true
-        }
+        },
+        "sourceFacing": "left"
       },
       "actions": {
         "idle": {
@@ -267,10 +268,10 @@
           "pivotX": 315.5,
           "pivotY": 553.268115942029,
           "events": [],
-          "sourceHash": "46a613676ad252c703e4a4391e3482109f11990bd2dd877e879986ae87576cfb",
+          "sourceHash": "b5507fda49231082557751ca25bacc3ff69a664885dd646cfcc2687487396bd0",
           "cameraMapping": {
             "verified": true,
-            "sourceHash": "46a613676ad252c703e4a4391e3482109f11990bd2dd877e879986ae87576cfb",
+            "sourceHash": "b5507fda49231082557751ca25bacc3ff69a664885dd646cfcc2687487396bd0",
             "pixelsPerWorld": 617.5,
             "scale": 0.8291497975708502,
             "offsetX": -5.596761133603252,
@@ -278,7 +279,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "46a613676ad252c703e4a4391e3482109f11990bd2dd877e879986ae87576cfb"
+          "imageHash": "b5507fda49231082557751ca25bacc3ff69a664885dd646cfcc2687487396bd0",
+          "sourceFacing": "left"
         },
         "attack": {
           "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
@@ -308,10 +310,10 @@
           "pivotX": 316,
           "pivotY": 555.1351351351351,
           "events": [],
-          "sourceHash": "5843746f0f742afe688d6623a031f79c27982beab599c7bff9c54f7a91ce1662",
+          "sourceHash": "bdd443428b5ccb183acb50f4db84ff5e31d74d0116656fe3118336ff0fe7a5ed",
           "cameraMapping": {
             "verified": true,
-            "sourceHash": "5843746f0f742afe688d6623a031f79c27982beab599c7bff9c54f7a91ce1662",
+            "sourceHash": "bdd443428b5ccb183acb50f4db84ff5e31d74d0116656fe3118336ff0fe7a5ed",
             "pixelsPerWorld": 901.4200879920468,
             "scale": 0.5679926671486795,
             "offsetX": 76.51431718101728,
@@ -319,7 +321,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "5843746f0f742afe688d6623a031f79c27982beab599c7bff9c54f7a91ce1662"
+          "imageHash": "bdd443428b5ccb183acb50f4db84ff5e31d74d0116656fe3118336ff0fe7a5ed",
+          "sourceFacing": "left"
         },
         "hurt": {
           "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
@@ -349,10 +352,10 @@
           "pivotX": 316,
           "pivotY": 555.1351351351351,
           "events": [],
-          "sourceHash": "1409bf1440a95467211f645c142acc0029852cc0cf32850eec19185c0b6b10c6",
+          "sourceHash": "627a83d7809cea9a8b173d6e82f44a99141858bf16abd588973ee79fce22cf8a",
           "cameraMapping": {
             "verified": true,
-            "sourceHash": "1409bf1440a95467211f645c142acc0029852cc0cf32850eec19185c0b6b10c6",
+            "sourceHash": "627a83d7809cea9a8b173d6e82f44a99141858bf16abd588973ee79fce22cf8a",
             "pixelsPerWorld": 899.9999999999998,
             "scale": 0.568888888888889,
             "offsetX": 76.23111111111109,
@@ -360,7 +363,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "1409bf1440a95467211f645c142acc0029852cc0cf32850eec19185c0b6b10c6"
+          "imageHash": "627a83d7809cea9a8b173d6e82f44a99141858bf16abd588973ee79fce22cf8a",
+          "sourceFacing": "left"
         },
         "death": {
           "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
@@ -390,10 +394,10 @@
           "pivotX": 158,
           "pivotY": 276.5,
           "events": [],
-          "sourceHash": "2659f1cb0b65405ff1acf413883f0a5428eaf5f14ee8d3bbf7ec02f7ebc846ef",
+          "sourceHash": "dc1c79da5cb7969706764a923b7d59daa670f4d02290aa8dcffd140039282692",
           "cameraMapping": {
             "verified": true,
-            "sourceHash": "2659f1cb0b65405ff1acf413883f0a5428eaf5f14ee8d3bbf7ec02f7ebc846ef",
+            "sourceHash": "dc1c79da5cb7969706764a923b7d59daa670f4d02290aa8dcffd140039282692",
             "pixelsPerWorld": 432.50000000000006,
             "scale": 1.183815028901734,
             "offsetX": 68.95722543352605,
@@ -401,7 +405,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "2659f1cb0b65405ff1acf413883f0a5428eaf5f14ee8d3bbf7ec02f7ebc846ef"
+          "imageHash": "dc1c79da5cb7969706764a923b7d59daa670f4d02290aa8dcffd140039282692",
+          "sourceFacing": "left"
         }
       },
       "previewStatus": {},
@@ -1241,25 +1246,25 @@
           "coreBounds": null,
           "landmarks": {
             "leftEye": [
-              220.5,
+              217.5,
               373.5
             ],
             "rightEye": [
-              294.5,
+              291.5,
               373.5
             ],
             "supportPoint": [
-              258,
+              254,
               447.5
             ],
             "supportPixelBounds": [
-              207,
+              203,
               440,
               102,
               8
             ],
             "faceMidpoint": [
-              257.5,
+              254.5,
               373.5
             ]
           },
@@ -1290,7 +1295,7 @@
           "BeanFormsV1/secretion-blade-carapace-antenna-feet",
           "existing-bean-highres-reference"
         ],
-        "sourceHash": "783bed93d96a0eab8e30139e6fb296414359f8b1519177b813e3d6e0edc6536d",
+        "sourceHash": "d8f2fa1e86203fa0b38416fe3ae006adf4f332d2d7a99594ab1b988e6e2497a1",
         "sourceRegistration": {
           "nativeSourceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/05/Source/key-native.png",
           "nativeSourceHash": "3f89d816391251e97f0aacea61ca138cc3be3282e377a8b9ee0902d0e4ca86d9",
@@ -1398,7 +1403,8 @@
           "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
           "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
           "unobservedCoreBoundsNotInferred": true
-        }
+        },
+        "sourceFacing": "left"
       },
       "actions": {},
       "previewStatus": {},
@@ -1437,25 +1443,25 @@
           "coreBounds": null,
           "landmarks": {
             "leftEye": [
-              220.5,
+              216.5,
               373.5
             ],
             "rightEye": [
-              295.5,
+              291.5,
               373.5
             ],
             "supportPoint": [
-              259,
+              253,
               447.5
             ],
             "supportPixelBounds": [
-              206,
+              200,
               440,
               106,
               8
             ],
             "faceMidpoint": [
-              258,
+              254,
               373.5
             ]
           },
@@ -1486,7 +1492,7 @@
           "BeanFormsV1/secretion-blade-carapace-antenna-feet",
           "existing-bean-highres-reference"
         ],
-        "sourceHash": "f67773b4dc68c934587452d8368955ee8d4801251cc4e058d0b248ae9641a889",
+        "sourceHash": "e73dc95d97c9b4f71eeab8bbea1e02151c73eb81e55494e5ff70bfd1864ab78b",
         "sourceRegistration": {
           "nativeSourceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/06/Source/key-native.png",
           "nativeSourceHash": "684dcabd2922117823705db96135edb3adab7a4fff317a654d8d8cd03d98c64b",
@@ -1604,7 +1610,8 @@
           "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
           "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
           "unobservedCoreBoundsNotInferred": true
-        }
+        },
+        "sourceFacing": "left"
       },
       "actions": {},
       "previewStatus": {},
@@ -1643,25 +1650,25 @@
           "coreBounds": null,
           "landmarks": {
             "leftEye": [
-              221,
+              217,
               365.5
             ],
             "rightEye": [
-              295,
+              291,
               365.5
             ],
             "supportPoint": [
-              257.5,
+              254.5,
               448.5
             ],
             "supportPixelBounds": [
-              203,
+              200,
               441,
               109,
               8
             ],
             "faceMidpoint": [
-              258,
+              254,
               365.5
             ]
           },
@@ -1693,7 +1700,7 @@
           "BeanFormsV1/secretion-blade-carapace-antenna-feet",
           "existing-bean-highres-reference"
         ],
-        "sourceHash": "1d472b1a15f25475131e2367e5eb589b4f9d910d66d8a93e59b62a3f32507beb",
+        "sourceHash": "44fd4b740374ef81c8c781d9aa4f4ee2c64ff37d2a20dcde66a458b39615e74a",
         "sourceRegistration": {
           "nativeSourceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/07/Source/key-native.png",
           "nativeSourceHash": "ab033ef2d5d9476a548df00c921d30e21c809d846cddd8571c9926cc9e7326b9",
@@ -1820,7 +1827,8 @@
           "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
           "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
           "unobservedCoreBoundsNotInferred": true
-        }
+        },
+        "sourceFacing": "left"
       },
       "actions": {},
       "previewStatus": {},
@@ -3429,32 +3437,32 @@
           "sourceId": "unit-appearance-v1-bean-10-neutral-v1",
           "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/10/Source/neutral.png",
           "coreBounds": [
-            170,
+            165,
             242,
             177,
             206
           ],
           "landmarks": {
             "leftEye": [
-              220.5,
-              377.5
-            ],
-            "rightEye": [
-              295,
+              217,
               378
             ],
+            "rightEye": [
+              291.5,
+              377.5
+            ],
             "supportPoint": [
-              257.5,
+              254.5,
               447.5
             ],
             "supportPixelBounds": [
-              208,
+              205,
               440,
               99,
               8
             ],
             "faceMidpoint": [
-              257.75,
+              254.25,
               377.75
             ]
           },
@@ -3482,7 +3490,7 @@
           "BeanFormsV1/secretion-blade-carapace-antenna-feet",
           "existing-bean-highres-reference"
         ],
-        "sourceHash": "65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811",
+        "sourceHash": "a2b5b8d3ff52916342141b821f28711b814b330c2063b26ae4966d8bcac65d14",
         "sourceRegistration": null,
         "states": {
           "idle": "pending",
@@ -3555,7 +3563,8 @@
           "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
           "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
           "unobservedCoreBoundsNotInferred": true
-        }
+        },
+        "sourceFacing": "left"
       },
       "actions": {},
       "previewStatus": {},
@@ -3594,25 +3603,25 @@
           "coreBounds": null,
           "landmarks": {
             "leftEye": [
-              220.5,
-              377.5
-            ],
-            "rightEye": [
-              295,
+              217,
               378
             ],
+            "rightEye": [
+              291.5,
+              377.5
+            ],
             "supportPoint": [
-              257.5,
+              254.5,
               447.5
             ],
             "supportPixelBounds": [
-              208,
+              205,
               440,
               99,
               8
             ],
             "faceMidpoint": [
-              257.75,
+              254.25,
               377.75
             ]
           },
@@ -3637,7 +3646,7 @@
           "secretion"
         ],
         "generationReferenceIds": [],
-        "sourceHash": "a442e5bbefd2b3a3ca655d28fc3164a459ad978e322561f4fcb966f840e32324",
+        "sourceHash": "ba7247467bc178b022c1aab26d54a2fc242691853f929d40aa42a31b3ffea5f8",
         "sourceRegistration": {
           "sourceImage": "DesignAssets/Animations/UnitRangedV1/Source/BeanFormsV1/secretion-blade.png",
           "sourceOriginalHash": "18bdbf40a17b8f8e16d6ad03124e88fed648f4f3ab089df60e008cdb0a91f788",
@@ -3729,7 +3738,8 @@
           "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
           "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
           "unobservedCoreBoundsNotInferred": true
-        }
+        },
+        "sourceFacing": "left"
       },
       "actions": {},
       "previewStatus": {},
@@ -3768,25 +3778,25 @@
           "coreBounds": null,
           "landmarks": {
             "leftEye": [
-              220,
-              376
-            ],
-            "rightEye": [
-              295.5,
+              216.5,
               376.5
             ],
+            "rightEye": [
+              292,
+              376
+            ],
             "supportPoint": [
-              257.5,
+              254.5,
               447.5
             ],
             "supportPixelBounds": [
-              209,
+              206,
               440,
               97,
               8
             ],
             "faceMidpoint": [
-              257.75,
+              254.25,
               376.25
             ]
           },
@@ -3811,7 +3821,7 @@
           "secretion"
         ],
         "generationReferenceIds": [],
-        "sourceHash": "cd27cc9c4a5c7e65a93cb91a89b4ee48489422f952e65be8a38e0d2ef3e659ee",
+        "sourceHash": "4c92ef4bb73cc0e4bc884e79c2d368173616b8788d2380b2dbc3147f6b822481",
         "sourceRegistration": {
           "sourceImage": "DesignAssets/Animations/UnitRangedV1/Source/BeanFormsV1/secretion-carapace.png",
           "sourceOriginalHash": "cd27cc9c4a5c7e65a93cb91a89b4ee48489422f952e65be8a38e0d2ef3e659ee",
@@ -3903,7 +3913,8 @@
           "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
           "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
           "unobservedCoreBoundsNotInferred": true
-        }
+        },
+        "sourceFacing": "left"
       },
       "actions": {},
       "previewStatus": {},
@@ -3942,25 +3953,25 @@
           "coreBounds": null,
           "landmarks": {
             "leftEye": [
-              220.5,
+              217,
               369.5
             ],
             "rightEye": [
-              295,
+              291.5,
               369.5
             ],
             "supportPoint": [
-              257.5,
+              254.5,
               448.5
             ],
             "supportPixelBounds": [
-              206,
+              203,
               441,
               103,
               8
             ],
             "faceMidpoint": [
-              257.75,
+              254.25,
               369.5
             ]
           },
@@ -3992,7 +4003,7 @@
           "BeanFormsV1/secretion-blade-carapace-antenna-feet",
           "existing-bean-highres-reference"
         ],
-        "sourceHash": "b65941c3847db84af77eac2b8e97dd75a9df5f50c1e37a80cddfd9fa8f589717",
+        "sourceHash": "13386f12b2fe82e0375344510f89a508efa6f921f2fe83ddccdb43f41b04fbac",
         "sourceRegistration": {
           "nativeSourceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/13/Source/key-native.png",
           "nativeSourceHash": "d0a5d60bd7228a9c87b8d9ba37314abef5116c434ef9a75df02b33507a16fd6a",
@@ -4100,7 +4111,8 @@
           "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
           "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
           "unobservedCoreBoundsNotInferred": true
-        }
+        },
+        "sourceFacing": "left"
       },
       "actions": {},
       "previewStatus": {},
@@ -4139,25 +4151,25 @@
           "coreBounds": null,
           "landmarks": {
             "leftEye": [
-              220.5,
+              217.5,
               375.5
             ],
             "rightEye": [
-              294.5,
+              291.5,
               375.5
             ],
             "supportPoint": [
-              258,
+              254,
               447.5
             ],
             "supportPixelBounds": [
-              208,
+              204,
               440,
               100,
               8
             ],
             "faceMidpoint": [
-              257.5,
+              254.5,
               375.5
             ]
           },
@@ -4188,7 +4200,7 @@
           "BeanFormsV1/secretion-blade-carapace-antenna-feet",
           "existing-bean-highres-reference"
         ],
-        "sourceHash": "6847ae2f9ea518ead664fda2e657abe246250032377149288e63174338231160",
+        "sourceHash": "a543d2629967ddcbcd6a2067012ff2fe2d7225224633b38af8883d4ed9a1d7d1",
         "sourceRegistration": {
           "nativeSourceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/14/Source/key-native.png",
           "nativeSourceHash": "8c339fab1b2b0b32fc2a5374ec8baf84fc4873e0ae52a332ce73dc02cb549b13",
@@ -4296,7 +4308,8 @@
           "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
           "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
           "unobservedCoreBoundsNotInferred": true
-        }
+        },
+        "sourceFacing": "left"
       },
       "actions": {},
       "previewStatus": {},
@@ -4335,25 +4348,25 @@
           "coreBounds": null,
           "landmarks": {
             "leftEye": [
-              221,
+              216.5,
               375.5
             ],
             "rightEye": [
-              295.5,
+              291,
               375.5
             ],
             "supportPoint": [
-              257.5,
+              254.5,
               447.5
             ],
             "supportPixelBounds": [
-              205,
+              202,
               440,
               105,
               8
             ],
             "faceMidpoint": [
-              258.25,
+              253.75,
               375.5
             ]
           },
@@ -4385,7 +4398,7 @@
           "BeanFormsV1/secretion-blade-carapace-antenna-feet",
           "existing-bean-highres-reference"
         ],
-        "sourceHash": "6924db22c440c07ae12b6e19b364ec78c4f5b1c35634806f23d203e316716fc7",
+        "sourceHash": "6ed69c2fb03c0474876680a16ea7e27398a4572c62a10428f0fdf52ae95edc90",
         "sourceRegistration": {
           "nativeSourceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/15/Source/key-native.png",
           "nativeSourceHash": "6f119c0c8da0f32485e82b36ae15a9b42fc04cbb0bd880a27d7caf260d1185c9",
@@ -4493,7 +4506,8 @@
           "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
           "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
           "unobservedCoreBoundsNotInferred": true
-        }
+        },
+        "sourceFacing": "left"
       },
       "actions": {},
       "previewStatus": {},
@@ -4532,25 +4546,25 @@
           "coreBounds": null,
           "landmarks": {
             "leftEye": [
-              220,
-              374.5
-            ],
-            "rightEye": [
-              295,
+              217,
               374
             ],
+            "rightEye": [
+              292,
+              374.5
+            ],
             "supportPoint": [
-              257,
+              255,
               447.5
             ],
             "supportPixelBounds": [
-              206,
+              204,
               440,
               102,
               8
             ],
             "faceMidpoint": [
-              257.5,
+              254.5,
               374.25
             ]
           },
@@ -4582,7 +4596,7 @@
           "BeanFormsV1/secretion-blade-carapace-antenna-feet",
           "existing-bean-highres-reference"
         ],
-        "sourceHash": "66aef70276d8eb28b0bc2794643a061866d5785435bb66dcfce07f6884e28d10",
+        "sourceHash": "57e3d90f888ea77e954c417cdd32bd26ce81c4692f8597eeb65c3929aacfa7f6",
         "sourceRegistration": {
           "nativeSourceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/16/Source/key-native.png",
           "nativeSourceHash": "340d3b5bdc3a3bf1950c6c09fec8580c320bd29565ea7eba7049839430c25847",
@@ -4700,7 +4714,8 @@
           "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
           "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
           "unobservedCoreBoundsNotInferred": true
-        }
+        },
+        "sourceFacing": "left"
       },
       "actions": {},
       "previewStatus": {},
@@ -4739,25 +4754,25 @@
           "coreBounds": null,
           "landmarks": {
             "leftEye": [
-              220.5,
+              216.5,
               368.5
             ],
             "rightEye": [
-              295.5,
+              291.5,
               368.5
             ],
             "supportPoint": [
-              257.5,
+              254.5,
               447.5
             ],
             "supportPixelBounds": [
-              206,
+              203,
               440,
               103,
               8
             ],
             "faceMidpoint": [
-              258,
+              254,
               368.5
             ]
           },
@@ -4790,7 +4805,7 @@
           "BeanFormsV1/secretion-blade-carapace-antenna-feet",
           "existing-bean-highres-reference"
         ],
-        "sourceHash": "9a42c0245c6ac9c44ffa4dbdb67d09c16f49b605b5c80f3735302f53693a19d6",
+        "sourceHash": "fa2833a9381401f6ff2e3a7533752520f3a4201bbc6ba46a9868bd53d15e9cfb",
         "sourceRegistration": {
           "nativeSourceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/17/Source/key-native.png",
           "nativeSourceHash": "60f76b7e5ad69cd542710d05681538f646ef3fbd2124c2acf54845807a7c51b7",
@@ -4898,7 +4913,8 @@
           "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
           "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
           "unobservedCoreBoundsNotInferred": true
-        }
+        },
+        "sourceFacing": "left"
       },
       "actions": {},
       "previewStatus": {},
@@ -7015,10 +7031,10 @@
           "pivotX": 274.5,
           "pivotY": 480.375,
           "events": [],
-          "sourceHash": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7",
+          "sourceHash": "203c5212dfa29e8e67eac421b53c311a87a3da63aa31183d67229b6019b9f1e2",
           "cameraMapping": {
             "verified": true,
-            "sourceHash": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7",
+            "sourceHash": "203c5212dfa29e8e67eac421b53c311a87a3da63aa31183d67229b6019b9f1e2",
             "pixelsPerWorld": 1113.157894736842,
             "scale": 0.4599527186761229,
             "offsetX": 129.74297872340426,
@@ -7026,7 +7042,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7"
+          "imageHash": "203c5212dfa29e8e67eac421b53c311a87a3da63aa31183d67229b6019b9f1e2",
+          "sourceFacing": "left"
         },
         "walk": {
           "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
@@ -7056,10 +7073,10 @@
           "pivotX": 256,
           "pivotY": 448,
           "events": [],
-          "sourceHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
+          "sourceHash": "ba8930ee9cd56dff0fb6daf1351d859589c5630043f72515195c11249b7027bb",
           "cameraMapping": {
             "verified": true,
-            "sourceHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
+            "sourceHash": "ba8930ee9cd56dff0fb6daf1351d859589c5630043f72515195c11249b7027bb",
             "pixelsPerWorld": 1112.2889190188587,
             "scale": 0.4603120567375886,
             "offsetX": 138.1601134751773,
@@ -7073,7 +7090,8 @@
             "sourceImage": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/Source/approved-idle-key.png",
             "sourceHash": "f0283fc0996e528bfe73e91c705e4e55f90f045182344684203a8e2e1fc8ca11"
           },
-          "imageHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d"
+          "imageHash": "ba8930ee9cd56dff0fb6daf1351d859589c5630043f72515195c11249b7027bb",
+          "sourceFacing": "left"
         },
         "jump": {
           "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
@@ -7103,10 +7121,10 @@
           "pivotX": 256,
           "pivotY": 448,
           "events": [],
-          "sourceHash": "088de97292a6c4cb18ac6e2e067ae53479e130fa679d17960d9f1e7241ebbfff",
+          "sourceHash": "f024d8bb797ee75c63fc9373c5b6de2b7eb826d0c81a28c479f3d4280ec5c3f7",
           "cameraMapping": {
             "verified": true,
-            "sourceHash": "088de97292a6c4cb18ac6e2e067ae53479e130fa679d17960d9f1e7241ebbfff",
+            "sourceHash": "f024d8bb797ee75c63fc9373c5b6de2b7eb826d0c81a28c479f3d4280ec5c3f7",
             "pixelsPerWorld": 1148.6796576215627,
             "scale": 0.44572914354567644,
             "offsetX": 141.89333925230682,
@@ -7114,7 +7132,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "088de97292a6c4cb18ac6e2e067ae53479e130fa679d17960d9f1e7241ebbfff"
+          "imageHash": "f024d8bb797ee75c63fc9373c5b6de2b7eb826d0c81a28c479f3d4280ec5c3f7",
+          "sourceFacing": "left"
         },
         "attack": {
           "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
@@ -7144,10 +7163,10 @@
           "pivotX": 276.5,
           "pivotY": 482.6181818181818,
           "events": [],
-          "sourceHash": "65e91bdc3af93677e254b8ce24ccf8c98e22930d4179f8f614519554176de36f",
+          "sourceHash": "9bca50d90ffb873b6d4b9c3fb54b4a463830aa2b7041c68023b6f3c6908a6c2f",
           "cameraMapping": {
             "verified": true,
-            "sourceHash": "65e91bdc3af93677e254b8ce24ccf8c98e22930d4179f8f614519554176de36f",
+            "sourceHash": "9bca50d90ffb873b6d4b9c3fb54b4a463830aa2b7041c68023b6f3c6908a6c2f",
             "pixelsPerWorld": 1106.9094882535055,
             "scale": 0.46254911122664555,
             "offsetX": 128.1051707458325,
@@ -7155,7 +7174,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "65e91bdc3af93677e254b8ce24ccf8c98e22930d4179f8f614519554176de36f"
+          "imageHash": "9bca50d90ffb873b6d4b9c3fb54b4a463830aa2b7041c68023b6f3c6908a6c2f",
+          "sourceFacing": "left"
         },
         "hurt": {
           "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
@@ -7185,10 +7205,10 @@
           "pivotX": 276.5,
           "pivotY": 482.6181818181818,
           "events": [],
-          "sourceHash": "703eda5d5454549c6bcec7a4cfedec832dfcbf30c885a23e08818a944d86ada2",
+          "sourceHash": "fb6da9ac70c38e40c40f561354fd847b940f571ba225ec600dd07643f04a1983",
           "cameraMapping": {
             "verified": true,
-            "sourceHash": "703eda5d5454549c6bcec7a4cfedec832dfcbf30c885a23e08818a944d86ada2",
+            "sourceHash": "fb6da9ac70c38e40c40f561354fd847b940f571ba225ec600dd07643f04a1983",
             "pixelsPerWorld": 1106.9094882535055,
             "scale": 0.46254911122664555,
             "offsetX": 128.1051707458325,
@@ -7196,7 +7216,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "703eda5d5454549c6bcec7a4cfedec832dfcbf30c885a23e08818a944d86ada2"
+          "imageHash": "fb6da9ac70c38e40c40f561354fd847b940f571ba225ec600dd07643f04a1983",
+          "sourceFacing": "left"
         },
         "death": {
           "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
@@ -7218,10 +7239,10 @@
           "pivotX": 276.5,
           "pivotY": 482.6181818181818,
           "events": [],
-          "sourceHash": "8baf1b600e5868e4d1af9ddcc94692ebd3416a72b1b6c97db681eddaafb49c99",
+          "sourceHash": "70057334cec1e75b8ae313211bbc3b1538187f225c18eedd7d85f340bfafa698",
           "cameraMapping": {
             "verified": true,
-            "sourceHash": "8baf1b600e5868e4d1af9ddcc94692ebd3416a72b1b6c97db681eddaafb49c99",
+            "sourceHash": "70057334cec1e75b8ae313211bbc3b1538187f225c18eedd7d85f340bfafa698",
             "pixelsPerWorld": 1106.9094882535055,
             "scale": 0.46254911122664555,
             "offsetX": 128.1051707458325,
@@ -7229,7 +7250,8 @@
             "method": "preserve-existing-game-fixed-native-camera",
             "verification": "tools/native-appearance-registration-20261104/report.json"
           },
-          "imageHash": "8baf1b600e5868e4d1af9ddcc94692ebd3416a72b1b6c97db681eddaafb49c99"
+          "imageHash": "70057334cec1e75b8ae313211bbc3b1538187f225c18eedd7d85f340bfafa698",
+          "sourceFacing": "left"
         }
       },
       "previewStatus": {},

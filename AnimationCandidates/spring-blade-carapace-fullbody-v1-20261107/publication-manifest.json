@@ -175,13 +175,25 @@
       ],
       "previewDurationMs": 2000,
       "previewLoop": true,
-      "sheetSHA256": "89cd8bd2d248e093527c55fa4665dc5464df7e27667def129c615ca2615facde",
-      "gifSHA256": "6d4c14b7be152c703479d351bce80eee8b12ca18de47c27921cc18c9dbad3ade",
-      "previewSHA256": "5bbb072a601824192f4f3174f2351036f648db67f3a590aebafc6ba61783bde9",
+      "sheetSHA256": "773682f9679ab10c2b6b3d2ce77618eb34b030e802d76f374beac02bbd9a37ca",
+      "gifSHA256": "21388a5acdd1a04483789f34e335d0e32128e16b40d263c0858222fc6cb65c1a",
+      "previewSHA256": "cd5244869423ed812bf2ced8073a8b854f7eb969e352f487bcda06eca7380266",
       "gifDecodedFrames": 16,
       "webpDecodedFrames": 16,
       "timelineMaxGIFRGBRMSE": 1.330012,
-      "maximumOuterEdgeAlpha": 0
+      "maximumOuterEdgeAlpha": 0,
+      "sourceFacing": "left",
+      "sourceRepair": {
+        "kind": "image-generated-complete-leftward-middle-cels",
+        "sourceFacing": "left",
+        "candidateManifest": "tools/spring-native-facing-20261108/followup13-spring-blade-carapace-attack-manifest.json",
+        "validation": "tools/spring-native-facing-20261108/followup13-validation.json",
+        "originalWholeFirstLastCelsPreserved": true,
+        "geometryAndTimingUnchanged": true,
+        "legacyGeneratedSourceAndQAFieldsAreHistorical": true,
+        "mirroring": false,
+        "bodyPartComposition": false
+      }
     },
     "hurt": {
       "sheet": "spring-blade-carapace-hurt-v1-sheet.png",

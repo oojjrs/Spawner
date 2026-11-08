@@ -212,10 +212,14 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   function motionSize() { return model.unitDisplaySize({ species: current.key }) * worldPixels(); }
   function travelMotion(atElapsed, atTime) {
     const size = motionSize();
+    const cell = worldPixels();
+    const walk = model.CREATURE_WALK_ANIMATIONS[current.key];
+    const stridePixelsPerCycle = walk?.strideFrameRatio ? model.welcomeStridePixels(walk,
+      creatureResources.walk.get(current.key), cell, nativeAssets.displayScale({ species: current.key })) : null;
     const request = { key: current.key,
       attributes: appearances[current.variant], width, size, elapsedMs: Number.isFinite(atElapsed) ? atElapsed : elapsed,
       timeline: Number.isFinite(atTime) ? atTime : timeline, phase, startedAt: phaseStartedAt, reducedMotion: reducedMotion.matches,
-      id: "welcome-" + current.key + ":" + appearanceNumber, worldPixels: worldPixels() };
+      id: "welcome-" + current.key + ":" + appearanceNumber, worldPixels: cell, stridePixelsPerCycle };
     const motion = globalThis.Spawner.welcomeTravelMotion(globalThis.Spawner, request);
     motion.agent.animationStartedAt = phaseStartedAt;
     if (phase === "perform" && tribes.includes(current.key))

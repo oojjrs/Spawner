@@ -250,6 +250,9 @@ test('the original 14 bean/spore layered births render 1358 boundaries in both f
   const { ANTENNA_COMBINATION_FORMS } = await import('./unit-combination-forms.mjs');
   const { createHook } = await import('node:async_hooks');
   const { createHash } = await import('node:crypto');
+  const { readFileSync } = await import('node:fs');
+  const before=JSON.parse(readFileSync('tools/spring-native-facing-20261108/bean-spore-plan-registry.json')).UNIT_ACTION_ART;
+  const changes=JSON.parse(readFileSync('tools/spring-native-facing-20261108/bean-spore-image-changes.json')).changes;
   const entries = Object.entries(ANTENNA_COMBO_ACTION_ART).filter(([key, definition]) => /^(bean|spore)\//.test(key) && definition.actions.birth?.sceneLayers);
   assert.equal(entries.length, 14);
   const atlases = new Map();
@@ -286,6 +289,12 @@ test('the original 14 bean/spore layered births render 1358 boundaries in both f
   try {
     for (const [entryIndex, [key, definition]] of entries.entries()) {
       const agent = agents[entryIndex], animation = definition.actions.birth;
+      const prior=before[key].actions.birth,expectedClip=structuredClone(prior);
+      const mirroredImage=image=>{const change=changes[image];assert.ok(change,image);assert.equal(change.operation,'mirror-each-cell');return change.afterPath;};
+      expectedClip.image=mirroredImage(prior.image);expectedClip.sourceFacing='left';expectedClip.pivotX=prior.frameSize-prior.pivotX;
+      if(expectedClip.scene)expectedClip.scene.outletX=prior.frameSize-prior.scene.outletX;
+      for(const layer of expectedClip.sceneLayers.layers){layer.image=mirroredImage(layer.image);for(const sample of layer.samples)if(sample)sample.destination[0]=prior.frameSize-sample.destination[0]-sample.destination[2];}
+      assert.deepEqual(animation,expectedClip,key+' exact cell mirror and scene-coordinate transformation only');
       const duration = animation.durationsMs.reduce((sum, value) => sum + value, 0);
       assert.equal(duration, agent.tribe === 'bean' ? 3850 : 3120);
       assert.equal(animation.frameCount, agent.tribe === 'bean' ? 116 : 78);
@@ -320,8 +329,12 @@ test('the original 14 bean/spore layered births render 1358 boundaries in both f
             call.slice(5).forEach((value, coordinate) => assert.ok(Math.abs(value - expected[coordinate]) < 1e-9));
             assert.ok(call.slice(1).every(Number.isFinite));
           }
-          hash.update(JSON.stringify([key, pose.frame, context.transforms,
-            context.calls.map(call => [call[0].image, ...call.slice(1).map(value => Math.round(value * 1e9) / 1e9)])]));
+          // Undo only the independently checked whole-cell mirror. The original
+          // snapshot remains pinned, so this is not a replacement with today's output.
+          const priorVisible=prior.sceneLayers.layers.filter(layer=>layer.samples[pose.frame]!==null);
+          const originalTransforms=[context.transforms[0],['scale',-context.transforms[1][1],1]];
+          hash.update(JSON.stringify([key,pose.frame,originalTransforms,
+            context.calls.map((call,i)=>[priorVisible[i].image,...[...call.slice(1,5),-call[5]-call[7],call[6],call[7],call[8]].map(value=>Math.round(value*1e9)/1e9)])]));
           draws++;
         }
         assert.equal(art.frame(agent, time).getContext('2d').calls.length, visibleLayers.length);
@@ -340,6 +353,6 @@ test('the original 14 bean/spore layered births render 1358 boundaries in both f
   const snapshot = hash.digest('hex');
   assert.equal(rgbaBytes, 518425600);
   assert.equal(snapshot, 'f95f4901fea1fa4f1763340bdfb98d4c9d368d49465434e2e1452449fc26a79b',
-    'published source crops, destinations, facing and scene anchor snapshot');
+    'inverse-normalized source crops, destinations, facing and scene anchor must retain the original published snapshot');
   t.diagnostic(`Stub-only runtime: ${boundaries} boundaries, ${draws} facing draws, ${elapsedMs.toFixed(1)} ms; decoded atlas estimate ${rgbaBytes} bytes; snapshot ${snapshot}. No pixel decode or browser rendering measured.`);
 });

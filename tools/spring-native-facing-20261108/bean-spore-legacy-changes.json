@@ -1,0 +1,13 @@
+{
+  "files": [
+    "client/unit-sprite-registration.mjs",
+    "client/unit-animation.mjs",
+    "client/agent-death.mjs",
+    "client/birth.mjs",
+    "client/secretion-walk.mjs",
+    "client/unit-ranged.mjs",
+    "client/secretion-lifecycle.mjs",
+    "client/unit-ranged.mjs",
+    "client/unit-appearance-assets.mjs"
+  ]
+}

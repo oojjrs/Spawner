@@ -7,7 +7,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 8,
@@ -89,7 +89,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -170,7 +170,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -211,7 +211,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -254,7 +254,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -287,7 +287,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -411,7 +411,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
           10
         ],
         "durationMs": 3850,
-        "pivotX": 430,
+        "pivotX": 82,
         "pivotY": 446,
         "referenceLength": 34.375,
         "viewSize": 34.375,
@@ -424,7 +424,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/secretion-carapace/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -463,7 +463,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 8,
@@ -545,7 +545,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -626,7 +626,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -667,7 +667,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -701,7 +701,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -744,7 +744,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -777,7 +777,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -901,7 +901,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
           10
         ],
         "durationMs": 3850,
-        "pivotX": 430,
+        "pivotX": 82,
         "pivotY": 446,
         "referenceLength": 40.9375,
         "viewSize": 40.9375,
@@ -914,7 +914,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -953,7 +953,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 8,
@@ -1035,7 +1035,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -1116,7 +1116,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -1157,7 +1157,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -1191,7 +1191,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -1234,7 +1234,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -1267,7 +1267,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -1391,7 +1391,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
           10
         ],
         "durationMs": 3850,
-        "pivotX": 430,
+        "pivotX": 82,
         "pivotY": 446,
         "referenceLength": 43.59375,
         "viewSize": 43.59375,
@@ -1404,7 +1404,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SecretionCombosV1/bean/blade-secretion-carapace/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -1443,7 +1443,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -1477,7 +1477,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1510,7 +1510,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1543,7 +1543,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1578,7 +1578,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1611,7 +1611,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 768,
         "frameHeight": 512,
         "columns": 8,
@@ -1697,7 +1697,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
           40
         ],
         "durationMs": 3120,
-        "pivotX": 534.5,
+        "pivotX": 233.5,
         "pivotY": 478,
         "referenceLength": 37,
         "viewSize": 37,
@@ -1710,7 +1710,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/secretion-carapace/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1749,7 +1749,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -1783,7 +1783,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1816,7 +1816,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1849,7 +1849,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1883,7 +1883,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1918,7 +1918,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1951,7 +1951,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 768,
         "frameHeight": 512,
         "columns": 8,
@@ -2037,7 +2037,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
           40
         ],
         "durationMs": 3120,
-        "pivotX": 534.5,
+        "pivotX": 233.5,
         "pivotY": 477,
         "referenceLength": 41,
         "viewSize": 41,
@@ -2050,7 +2050,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -2089,7 +2089,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -2123,7 +2123,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -2156,7 +2156,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -2189,7 +2189,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -2223,7 +2223,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -2258,7 +2258,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -2291,7 +2291,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 768,
         "frameHeight": 512,
         "columns": 8,
@@ -2377,7 +2377,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
           40
         ],
         "durationMs": 3120,
-        "pivotX": 534.0,
+        "pivotX": 234.0,
         "pivotY": 478,
         "referenceLength": 44,
         "viewSize": 44,
@@ -2390,7 +2390,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spore/blade-secretion-carapace/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -3163,7 +3163,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -3407,7 +3407,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -3441,7 +3441,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -3685,7 +3685,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,
@@ -3719,7 +3719,7 @@ export const SECRETION_COMBO_ACTION_ART = Object.freeze({
       },
       "ranged": {
         "image": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/ranged.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,

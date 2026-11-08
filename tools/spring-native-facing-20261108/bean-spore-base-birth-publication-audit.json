@@ -1,0 +1,83 @@
+[
+  {
+    "form": "spore/blade-secretion-carapace",
+    "manifest": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+    "sheet": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-birth-v1-sheet.png",
+    "publicationSHA": "fc690077b07fe9bdc003bbd7929effb3215f589408c28b8641bcd80a9059c1c8",
+    "expectedAfterSHA": "fc690077b07fe9bdc003bbd7929effb3215f589408c28b8641bcd80a9059c1c8",
+    "matches": true,
+    "originalNativeSHA": "bc013c796954ce900b4b7817f39268f0155cf9a8e4c60e9e6f0a811bce7eb03f"
+  },
+  {
+    "form": "bean/base",
+    "manifest": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/publication-manifest.json",
+    "sheet": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-complete-v1-sheet.png",
+    "publicationSHA": "638a6a835b0bc2367c75892b47de7e46b49322130f4e0f58e4450590c31a250c",
+    "expectedAfterSHA": "003711ebbcb64242707ffd00db46e322fcdff2e62f226bc1508c320183df7a44",
+    "matches": false,
+    "originalNativeSHA": "638a6a835b0bc2367c75892b47de7e46b49322130f4e0f58e4450590c31a250c"
+  },
+  {
+    "form": "bean/blade-carapace",
+    "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+    "sheet": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-sheet.png",
+    "publicationSHA": "892db5ae10428cdad2dd9d401e9c30bd5b33e23ddb412b189e509450ff6b0abb",
+    "expectedAfterSHA": "892db5ae10428cdad2dd9d401e9c30bd5b33e23ddb412b189e509450ff6b0abb",
+    "matches": true,
+    "originalNativeSHA": "81830034fd0f5ae571bcff173446892c3bcf6744af8158d65e68a555615305ef"
+  },
+  {
+    "form": "spore/blade-secretion",
+    "manifest": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+    "sheet": "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/spore-blade-secretion-birth-v1-sheet.png",
+    "publicationSHA": "0aff743900607eb0cab769becb8837374f84a11a7478b81f79c6332df85883cc",
+    "expectedAfterSHA": "0aff743900607eb0cab769becb8837374f84a11a7478b81f79c6332df85883cc",
+    "matches": true,
+    "originalNativeSHA": "f79d436af2ed53dd191731d4d7101840a026c0daa93271b81152994253db3e55"
+  },
+  {
+    "form": "spore/blade-carapace",
+    "manifest": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+    "sheet": "spore-blade-carapace-birth-v1-sheet.png",
+    "publicationSHA": "97b89f40b406ba1dee9d3db698c8fb4060b0794b7fae8ca470e32483c8772452",
+    "expectedAfterSHA": "97b89f40b406ba1dee9d3db698c8fb4060b0794b7fae8ca470e32483c8772452",
+    "matches": true,
+    "originalNativeSHA": "043b9d2ba78b73121a4cfb2ff664a88fc9d5a606ef28777e31e6f3a77820fea2"
+  },
+  {
+    "form": "spore/secretion-carapace",
+    "manifest": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+    "sheet": "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/spore-secretion-carapace-birth-v1-sheet.png",
+    "publicationSHA": "0cf87f8528229bf5a76f4915f8bc212f6a381daf116124674b0371648fbc02ff",
+    "expectedAfterSHA": "0cf87f8528229bf5a76f4915f8bc212f6a381daf116124674b0371648fbc02ff",
+    "matches": true,
+    "originalNativeSHA": "27bbe6a282161303cc394c3e05af4955c05d72dfef72273bb7a8ef32a5226132"
+  },
+  {
+    "form": "bean/blade-secretion-carapace",
+    "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+    "sheet": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-birth-complete-v1-sheet.png",
+    "publicationSHA": "7c37dd45b55318499453d84582e1f43f498830cf7c1566dda8cf979e24752b79",
+    "expectedAfterSHA": "7c37dd45b55318499453d84582e1f43f498830cf7c1566dda8cf979e24752b79",
+    "matches": true,
+    "originalNativeSHA": "c14b7371166303c588265233d4c917b67023c60c89b947ac1cb50ea1f5452dee"
+  },
+  {
+    "form": "bean/secretion-carapace",
+    "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json",
+    "sheet": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-birth-complete-v1-sheet.png",
+    "publicationSHA": "288ed5a0ad7e5b3d984a8b833ea31726992830d13586684a402cbf4fe1a4561f",
+    "expectedAfterSHA": "288ed5a0ad7e5b3d984a8b833ea31726992830d13586684a402cbf4fe1a4561f",
+    "matches": true,
+    "originalNativeSHA": "0810057205e529c5f086f90777570e572436620ce4534202ba12d4d4df015563"
+  },
+  {
+    "form": "bean/blade-secretion",
+    "manifest": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+    "sheet": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-birth-complete-v1-sheet.png",
+    "publicationSHA": "166c1ffd525d32a4fa9feeb19f6fce42874ee28f40e98d59faae941d329f4e87",
+    "expectedAfterSHA": "166c1ffd525d32a4fa9feeb19f6fce42874ee28f40e98d59faae941d329f4e87",
+    "matches": true,
+    "originalNativeSHA": "8e18aee13d14bc3ea72ca9b1ede0bbedddd0f99e84af3412c096fe1db61656f6"
+  }
+]

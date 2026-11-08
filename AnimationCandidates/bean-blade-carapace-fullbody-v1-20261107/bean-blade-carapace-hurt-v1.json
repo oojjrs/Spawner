@@ -1,0 +1,195 @@
+{
+  "tribe": "bean",
+  "form": "blade-carapace",
+  "appearanceMask": 3,
+  "action": "hurt",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 16,
+  "framePoseIndices": [
+    0,
+    1,
+    2,
+    3,
+    3,
+    3,
+    2,
+    5,
+    5,
+    6,
+    6,
+    7,
+    7,
+    0,
+    0,
+    0
+  ],
+  "durationsMs": [
+    20,
+    30,
+    30,
+    30,
+    400,
+    30,
+    30,
+    30,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+  ],
+  "durationMs": 760,
+  "loop": false,
+  "pivotX": 256,
+  "pivotY": 448,
+  "sheet": "bean-blade-carapace-hurt-v1-sheet.png",
+  "preview": "bean-blade-carapace-hurt-v1-preview.gif",
+  "distinctWholeBodyPoses": 6,
+  "source": "Sources/approved-neutral.png",
+  "method": "Whole-body imagegen drawings. Code only crops complete cels, uniformly rescales with one fixed scale per atlas, translates whole cels, and packs exact RGBA pixels. No body-part rigging, recombination, mirroring, deformation or interpolation.",
+  "publicationAuthorization": "User requested autonomous completion and planning-document publication without individual confirmations. Newly generated motion has not received individual user approval.",
+  "rangedAttackCreated": false,
+  "records": [
+    {
+      "index": 0,
+      "source": "Sources/approved-neutral.png",
+      "exactApprovedNeutral": true
+    },
+    {
+      "index": 1,
+      "source": "Sources/hurt-wholebody-generated.png",
+      "sourceRect": [
+        419,
+        116,
+        765,
+        427
+      ],
+      "uniformScale": 0.8816568047337278,
+      "wholeCelTranslation": [
+        139,
+        177
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 2,
+      "source": "Sources/hurt-wholebody-generated.png",
+      "sourceRect": [
+        783,
+        171,
+        1147,
+        428
+      ],
+      "uniformScale": 0.8816568047337278,
+      "wholeCelTranslation": [
+        144,
+        225
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 3,
+      "source": "Sources/hurt-wholebody-generated.png",
+      "sourceRect": [
+        1155,
+        206,
+        1529,
+        429
+      ],
+      "uniformScale": 0.8816568047337278,
+      "wholeCelTranslation": [
+        146,
+        255
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 4,
+      "source": "Sources/hurt-wholebody-generated.png",
+      "sourceRect": [
+        29,
+        719,
+        389,
+        940
+      ],
+      "uniformScale": 0.8816568047337278,
+      "wholeCelTranslation": [
+        147,
+        257
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 5,
+      "source": "Sources/hurt-wholebody-generated.png",
+      "sourceRect": [
+        420,
+        639,
+        758,
+        938
+      ],
+      "uniformScale": 0.8816568047337278,
+      "wholeCelTranslation": [
+        140,
+        187
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 6,
+      "source": "Sources/hurt-wholebody-generated.png",
+      "sourceRect": [
+        798,
+        596,
+        1136,
+        935
+      ],
+      "uniformScale": 0.8816568047337278,
+      "wholeCelTranslation": [
+        138,
+        152
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 7,
+      "source": "Sources/approved-neutral.png",
+      "exactApprovedNeutral": true
+    }
+  ],
+  "hold": {
+    "frame": 4,
+    "durationMs": 400
+  },
+  "verification": {
+    "frameCount": 16,
+    "durationMs": 760,
+    "sheetSize": [
+      4096,
+      1024
+    ],
+    "uniqueWholeBodyPoses": 6,
+    "sheetExactPosePixelEquality": true,
+    "transparentBackground": true,
+    "clippedFrames": 0,
+    "singleConnectedBodyOver8Pixels": true,
+    "connectedBodyCounts": [
+      1
+    ],
+    "contentUnion": [
+      141,
+      155,
+      473,
+      448
+    ],
+    "gifDurationMs": 760,
+    "gifDecodedFrames": 8,
+    "finalFourFramesIdentical": true,
+    "sheetSha256": "86595ee13e2821cf3ae063d5854b904ba6d40627d48d6d9acf772d88589cefa1"
+  },
+  "sourceFacing": "left"
+}

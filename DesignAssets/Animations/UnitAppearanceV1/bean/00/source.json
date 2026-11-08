@@ -22,32 +22,32 @@
     "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
     "referenceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/00/Source/neutral.png",
     "coreBounds": [
-      173,
+      172,
       243,
       167,
       206
     ],
     "landmarks": {
       "leftEye": [
-        216,
+        215.5,
         375
       ],
       "rightEye": [
-        296.5,
+        296,
         375
       ],
       "supportPoint": [
-        255.5,
+        256.5,
         448.5
       ],
       "supportPixelBounds": [
-        203,
+        204,
         441,
         105,
         8
       ],
       "faceMidpoint": [
-        256.25,
+        255.75,
         375
       ]
     },
@@ -69,7 +69,7 @@
   },
   "visualBits": [],
   "generationReferenceIds": [],
-  "sourceHash": "9c8893d8792c6d4e987ec0479463ebbd9085f89d38bb1c7db2580c3f4d230f73",
+  "sourceHash": "f21bb702c38c1fc90f66c5b0c719b654aadc2ee3a92127d429680959587e3919",
   "sourceRegistration": {
     "originalRevision": "9f9662c^",
     "sourceImage": "DesignAssets/Units/starter-sprout-bean.png",
@@ -176,5 +176,6 @@
     "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
     "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
     "unobservedCoreBoundsNotInferred": true
-  }
+  },
+  "sourceFacing": "left"
 }

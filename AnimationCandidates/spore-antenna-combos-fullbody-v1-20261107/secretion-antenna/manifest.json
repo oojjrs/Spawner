@@ -1,0 +1,180 @@
+{
+  "tribe": "spore",
+  "form": "secretion-antenna",
+  "displayName": "포자버섯 분비+안테나",
+  "status": "complete-for-planning",
+  "reference": "source.png",
+  "source": "source.png",
+  "sourceSHA256": "1d845b00ffcbf207d8819ec2038572cee731570451ac702492c1ce1fc86fdf32",
+  "actions": [
+    {
+      "action": "idle",
+      "sheet": "spore-secretion-antenna-idle-v1-sheet.png",
+      "preview": "spore-secretion-antenna-idle-v1-preview.gif",
+      "webpPreview": "spore-secretion-antenna-idle-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 6400,
+      "loop": true,
+      "sheetSHA256": "27246dbe9a44da760b0afb928a719c235cf1df70cb3bfcfa281247cd852631aa",
+      "previewSHA256": "102912919f111ba48b555bc9f433059d334f34f4a95bdfc68587a7ed637b03ee",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "walk",
+      "sheet": "spore-secretion-antenna-walk-v1-sheet.png",
+      "preview": "spore-secretion-antenna-walk-v1-preview.gif",
+      "webpPreview": "spore-secretion-antenna-walk-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 1120,
+      "loop": true,
+      "sheetSHA256": "3d5b0752abbc530c16f5713c7c78972fc5a38583b5991a2a5f5ba9beabb96529",
+      "previewSHA256": "23e0ac9804b25e20185c75b0058cb3308a9d375991a0404c49155759e538d3db",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "ranged",
+      "sheet": "spore-secretion-antenna-ranged-v1-sheet.png",
+      "preview": "spore-secretion-antenna-ranged-v1-preview.gif",
+      "webpPreview": "spore-secretion-antenna-ranged-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 600,
+      "loop": false,
+      "sheetSHA256": "1a6b392d890193d4eb29837f35617096262bffac0bb9133e3616c3c441db19e0",
+      "previewSHA256": "3ada6fd3ffd1f39fc0e814b966796380e423ad8cdada704f36ed87a97abbe770",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "hurt",
+      "sheet": "spore-secretion-antenna-hurt-v1-sheet.png",
+      "preview": "spore-secretion-antenna-hurt-v1-preview.gif",
+      "webpPreview": "spore-secretion-antenna-hurt-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 960,
+      "loop": false,
+      "sheetSHA256": "ffc3970e023812787584ba09de9567fbf402ddc973f8d4dcb5e06b6f4a00bfd3",
+      "previewSHA256": "744f3fa98679ab3f00e99dc676afc36809ba937da681b5e065a148c02576b84f",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "death",
+      "sheet": "spore-secretion-antenna-death-v1-sheet.png",
+      "preview": "spore-secretion-antenna-death-v1-preview.gif",
+      "webpPreview": "spore-secretion-antenna-death-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 1440,
+      "loop": false,
+      "sheetSHA256": "74ebb0f97a29573d29816bf71db3a371d8e3e77c6572b3bb1e923ea24de51dc9",
+      "previewSHA256": "2fc78e58bf5779819697b2db0f78d776f60a65ba69c3638c8c83a5360df47276",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "birth",
+      "sheet": "spore-secretion-antenna-birth-v1-sheet.png",
+      "preview": "spore-secretion-antenna-birth-v1-preview.gif",
+      "webpPreview": "spore-secretion-antenna-birth-v1-preview.webp",
+      "frameSize": [
+        768,
+        512
+      ],
+      "columns": 8,
+      "frameCount": 78,
+      "durationMs": 3120,
+      "loop": false,
+      "sheetSHA256": "0b9bb3a54158540f9cd50d10119e9c6ab660c8ae2648720ad7a8c0ba29a466f4",
+      "previewSHA256": "76d0e191f35b1923a3b0bf23426b6e183ae6212998805e41cf00a887f92043ba",
+      "sourceFacing": "left"
+    }
+  ],
+  "excludedActions": [
+    "melee"
+  ],
+  "bodyPartComposition": false,
+  "runtimeModified": false,
+  "deployed": false,
+  "generation": "Built-in image_gen; prompts.json contains character and motion prompts. Complete whole-body poses, no anatomy assembly.",
+  "manualReview": "Exact complete form with attached pale-peach fan sensory gills underneath cap. Existing blades, armor and secretion glands retained when applicable. Each complete body and action reviewed on neutral backdrop.",
+  "validationSummary": {
+    "idle": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 6400
+    },
+    "walk": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 1120
+    },
+    "ranged": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 600
+    },
+    "hurt": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 960
+    },
+    "death": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 1440
+    },
+    "birth": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 76,
+      "gifDurationMs": 3120
+    }
+  },
+  "rangedBodyOnly": true,
+  "projectileBakedIntoBodySheet": false,
+  "sourceFacing": "left"
+}

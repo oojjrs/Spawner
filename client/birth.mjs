@@ -2,10 +2,10 @@ import { imageAnimation, imageScale } from "./image-geometry.mjs";
 import { SPORE_BIRTH_DURATIONS, SPORE_BIRTH_DURATION, SPRING_BIRTH_DURATIONS, SPRING_BIRTH_DURATION, PEBBLE_BIRTH_DURATIONS, PEBBLE_BIRTH_DURATION } from "../server/birth.mjs";
 
 export const SPORE_BIRTH_ANIMATION = Object.freeze(imageAnimation({
-  image: "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp",
+  sourceFacing: "left", image: "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/birth-unit.webp",
   nest: "DesignAssets/Tribes/spore/AnimationStudies/birth-size-v3/nest-stationary.png",
-  frameSize: 576, columns: 4, frameCount: 22, pivotX: 400, pivotY: 486,
-  outletX: 450, outletY: 400,
+  frameSize: 576, columns: 4, frameCount: 22, pivotX: 176.0, pivotY: 486,
+  outletX: 126.0, outletY: 400,
   unitHeight: 179, detachAt: .82, contactAt: 2.10, audioAt: .45, firstUnitFrame: 2,
   nestBounds: Object.freeze({ x: 37, y: 77, width: 459, height: 344 }),
   duration: SPORE_BIRTH_DURATION, durationsMs: SPORE_BIRTH_DURATIONS

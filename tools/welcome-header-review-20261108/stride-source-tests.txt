@@ -1,0 +1,26 @@
+✔ authored weasel strides follow body rendering scale rather than battlefield cell size (1.010685ms)
+✔ welcome forward travel cancels planted-foot motion at the authored half-second cadence (2.107838ms)
+✔ reduced motion stays centered and legacy species retain native travel timing (0.218333ms)
+✔ first four remain fixed and later categories favor neutral species independently of variant count (43.934898ms)
+✔ category threshold, duplicate inputs and missing categories have deterministic behavior (0.546168ms)
+✔ creatures keep their relative sizes while tall poses fit the mobile header (0.213105ms)
+✔ independent bags retain all 87 identities and deterministic sequence diversity (14.321981ms)
+✔ welcome movement keeps exact cue stamps and exposes the final landing cell (1.273595ms)
+✔ an unavailable appearance retries its own assets without changing identity (0.674438ms)
+✔ a never-settling appearance releases the rotation without substituting base art (9.366659ms)
+✔ a failed pose uses a fallback pose of the same immutable appearance (0.793905ms)
+✔ welcome tribe forms face left along their entry and exit direction (8.443458ms)
+✔ slow welcome entries and exits keep walking between native cell moves (2.018918ms)
+✔ welcome entry and exit share native pose clocks and finish fully landed (1.079718ms)
+✔ welcome forms select their own registered body and perform only authored actions (4.051279ms)
+✔ actual welcome header uses idle in the center for tribes and neutral species (6.937656ms)
+✔ compiled welcome sequence matches the weighted source roster exactly (77.212181ms)
+✔ welcome display sizes preserve species order with a balanced showcase spread (0.238373ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 292.987059

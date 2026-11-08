@@ -4,7 +4,7 @@
   "status": "completed-under-user-delegated-production",
   "authorizationMessageId": "Sentinel_cbea50ff285881919d451c1038e1f54a",
   "sourceAppearance": "DesignAssets/Animations/UnitAppearanceV1/bean/12/Source/neutral.png",
-  "sourceAppearanceSHA256": "cd27cc9c4a5c7e65a93cb91a89b4ee48489422f952e65be8a38e0d2ef3e659ee",
+  "sourceAppearanceSHA256": "4c92ef4bb73cc0e4bc884e79c2d368173616b8788d2380b2dbc3147f6b822481",
   "actions": {
     "idle": {
       "frameSize": 512,
@@ -81,12 +81,13 @@
       "sheet": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-idle-v1-sheet.png",
       "preview": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-idle-v1-transparent-preview.webp",
       "gif": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-idle-v1-preview.gif",
-      "sheetSHA256": "b4e9050542db6d485936c2ef7124858e37657aa9dbc65bd556ea5c208211a2d3",
-      "previewSHA256": "61303036c67e5c9b02bce38733c2fd37d2c434f831bbec017e96fe35b2a5ff9a",
-      "gifSHA256": "94facab42f18bcec49cfcb17b0dff3dace755d0fe653aa8b0ffa2956e09eeb53",
+      "sheetSHA256": "31b26094a7ba919d21026bebe401dfaf0908cb948fc71f934b29380df55e47c9",
+      "previewSHA256": "51bb8807e4895a8d0e07ab62a4255460905be75f35f067f24fcecd4c5b1c1b0c",
+      "gifSHA256": "8af63005fb611f039401472b7f6fcfe1489029919e9bb700a3c84827ab7f19b5",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     },
     "walk": {
       "frameSize": 512,
@@ -122,8 +123,8 @@
       "loop": true,
       "sheet": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-carapace/walk.png",
       "preview": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-carapace/preview.webp",
-      "sheetSHA256": "74e448a110d64651a88d7b6c84b29d1c6f00cfb5b13c1db566dfc38236ef6305",
-      "previewSHA256": "2324e6b56ab90320fdd80ad0bcf00c3e0f843e9b0e2f18a66d5346984dc86029",
+      "sheetSHA256": "8ae3b376fe87b17c1061d42abc8d427690ea01cc86388916d6bf13145c6a4289",
+      "previewSHA256": "a503893f72804af9e11f7ebc1586f562b9a7458ec8cb33474acfe0b2e3896223",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
@@ -136,7 +137,7 @@
         "gifSHA256": "656f69f6573e6db65ec6582a75c0bef563a8693ad48f7d83d7e0cb0f3e4eaa0d"
       },
       "manifest": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-carapace/manifest.json",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewFacing": "right",
       "previewTargetFacing": "left",
       "previewDurationsMs": [
@@ -203,12 +204,13 @@
       "gif": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-ranged-v1-preview.gif",
       "launchAtMs": 200,
       "rangedBody": true,
-      "sheetSHA256": "9b4aebe20fe0cee286df45e4148bce9e15b2f36b05f313b25c7d1ae60bd7d853",
-      "previewSHA256": "4b69a6ed6c50eb382f804cc97de692c181ddbf94dbf6b641bcbe824ddd3ff0da",
-      "gifSHA256": "1dc47961ee5329ab5ad69bd39b325cd09813ae7cff148b6b41ce94b13b1b6a31",
+      "sheetSHA256": "4829b0453fe722b27854a4d21b1430d333a8e729b7c3c2fdddbaf19c7948a388",
+      "previewSHA256": "d7efba61c511cccce1c88a6f0e7bddbe58129e5753ee7d3c555184313f5bdda8",
+      "gifSHA256": "0634c47a1cfdb564d2098415320be612f008fc969dea775c9e8deb6558d0a88d",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     },
     "hurt": {
       "frameSize": 512,
@@ -237,12 +239,13 @@
       "sheet": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-hurt-v1-sheet.png",
       "preview": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-hurt-v1-transparent-preview.webp",
       "gif": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-hurt-v1-preview.gif",
-      "sheetSHA256": "d6c38f24e57d9fb783955f304980baae4dae9a1a5ea063a633c3822b6a6bbba2",
-      "previewSHA256": "b3e33ef8741e196957e3b6c1131d0b416ce03a1d51093abb731d0729e340cb09",
-      "gifSHA256": "d732c3e8b0371353f74f4be2008eb9a22ef8fdd8291f69763a59013489075637",
+      "sheetSHA256": "b19036dbcfad45faf974d28a4cc14b5d71bc876f2077a13cd76c98ce970b0913",
+      "previewSHA256": "4bd8323c89f68398c337ba296e9ec13c9bfbb739d61fc2c308f9a6c6ffecf43c",
+      "gifSHA256": "79439ee2fc9873c0d7cf4ff6a7982c8321be6854c3e261af126e1a9380e84257",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     },
     "birth": {
       "frameSize": 512,
@@ -374,12 +377,13 @@
       "gif": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-birth-complete-v1-from-sheet.gif",
       "motionDurationMs": 3850,
       "reviewHoldMs": 650,
-      "sheetSHA256": "0810057205e529c5f086f90777570e572436620ce4534202ba12d4d4df015563",
-      "previewSHA256": "c0f6595a36ff139001db90280deea5cfad4f6b3f2172ff95c02ca453dad26a11",
-      "gifSHA256": "faccd7d0506b539b69dc1dc13be6b2e1b134d04f9ceecdd797ab26baf59821ba",
+      "sheetSHA256": "288ed5a0ad7e5b3d984a8b833ea31726992830d13586684a402cbf4fe1a4561f",
+      "previewSHA256": "758940251e3283c2ac5e26435b080779c023a406cc3a81d8b9ce804c452308a8",
+      "gifSHA256": "9cd22bcf3ec9a27818424623ca9b9d21a5add9be5eb3995dcfee8f0a47549b7d",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": true
+      "fullScene": true,
+      "sourceFacing": "left"
     },
     "death": {
       "frameSize": 512,
@@ -408,12 +412,13 @@
       "sheet": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-death-v1-sheet.png",
       "preview": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-death-v1-transparent-preview.webp",
       "gif": "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-death-v1-preview.gif",
-      "sheetSHA256": "bad299e18a8b7d4eba4123e0e1c71459948cee9b34ff338579a9890917dc2a8a",
-      "previewSHA256": "b517bfeae493bdd6215b8148436273e713b9970728814bcec0dda3917b0d8de3",
-      "gifSHA256": "bf33357f5df3cad69cdc6d25b6e81821211a01831a84262def52b4e31ee2d398",
+      "sheetSHA256": "f623e494ec9e1bf64d21b172a090f06a8ed7cf5748eaef8c96faac2919191441",
+      "previewSHA256": "ca349fe76f69a6a21bcb73e5597a0f1d90a52623e23f587e86f1291780905b45",
+      "gifSHA256": "5cf1a66d59361391068e59e3764c5f5a6d75ada9217b81038d3ad479551d4d53",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "fullScene": false
+      "fullScene": false,
+      "sourceFacing": "left"
     }
   },
   "rangedBodyOnly": true,

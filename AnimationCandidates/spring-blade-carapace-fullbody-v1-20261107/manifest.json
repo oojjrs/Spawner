@@ -915,8 +915,8 @@
       "webpPreview": "spring-blade-carapace-melee-v1-preview.webp",
       "generatedSource": "melee-generated-source.png",
       "sourceSHA256": "e1c6017b4d90fe1042df0c2cb35d1966c9d8529dda72a82a1bbae42d98a5f976",
-      "sheetSHA256": "89cd8bd2d248e093527c55fa4665dc5464df7e27667def129c615ca2615facde",
-      "previewSHA256": "6d4c14b7be152c703479d351bce80eee8b12ca18de47c27921cc18c9dbad3ade",
+      "sheetSHA256": "773682f9679ab10c2b6b3d2ce77618eb34b030e802d76f374beac02bbd9a37ca",
+      "previewSHA256": "21388a5acdd1a04483789f34e335d0e32128e16b40d263c0858222fc6cb65c1a",
       "frameCount": 16,
       "distinctDrawnPoses": 15,
       "frameSize": 480,
@@ -1350,7 +1350,19 @@
       "attackType": "melee",
       "hitAtMs": 300,
       "impactHoldMs": 60,
-      "hitFrameIndex": 5
+      "hitFrameIndex": 5,
+      "sourceFacing": "left",
+      "sourceRepair": {
+        "kind": "image-generated-complete-leftward-middle-cels",
+        "sourceFacing": "left",
+        "candidateManifest": "tools/spring-native-facing-20261108/followup13-spring-blade-carapace-attack-manifest.json",
+        "validation": "tools/spring-native-facing-20261108/followup13-validation.json",
+        "originalWholeFirstLastCelsPreserved": true,
+        "geometryAndTimingUnchanged": true,
+        "legacyGeneratedSourceAndQAFieldsAreHistorical": true,
+        "mirroring": false,
+        "bodyPartComposition": false
+      }
     },
     "hurt": {
       "action": "hurt",

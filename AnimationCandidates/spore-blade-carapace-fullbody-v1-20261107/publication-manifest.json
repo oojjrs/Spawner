@@ -57,13 +57,14 @@
       ],
       "previewDurationMs": 6400,
       "previewLoop": true,
-      "sheetSHA256": "007f9fa60707e73dc658c16585dcef8205d8fb75566c67600787a0895a84b2c8",
-      "gifSHA256": "772af20a4f5fa188c73653a68dabcdf0cf83941be57f667221019fe578b9ca37",
-      "previewSHA256": "5bcbe19c257093699ed50cae23ee634b752211d32a8ff62fb7c4be27181831a4",
+      "sheetSHA256": "e1c823cb1eb1146fc120d5cdc4247673612932918f963ca271fe0b9a38fcfadb",
+      "gifSHA256": "19cc01cf669004bdfdcee7dc7ac6b3982501aef0159c576f43c76fe6c71637d3",
+      "previewSHA256": "b27a9b43a98dd31746ee919ce82107fa3c4f6cb261bf5110746dfa9b003ea5b8",
       "gifDecodedFrames": 16,
       "webpDecodedFrames": 16,
       "timelineMaxGIFRGBRMSE": 1.449067,
-      "maximumOuterEdgeAlpha": 0
+      "maximumOuterEdgeAlpha": 0,
+      "sourceFacing": "left"
     },
     "walk": {
       "sheet": "spore-blade-carapace-walk-v1-sheet.png",
@@ -115,13 +116,14 @@
       ],
       "previewDurationMs": 1120,
       "previewLoop": true,
-      "sheetSHA256": "3cbbe09d3d0a6058072710763bf82006dc703f54d466abbe4d628134deb0cd73",
-      "gifSHA256": "e354250b78b656f733c7b2368aa4506c7482b60d888c19e9e3fcb33083fe1d64",
-      "previewSHA256": "5813c65846bba2d36dacdb12f0e00175c825b107561268429470115dc85868bc",
+      "sheetSHA256": "9081e5a1b4af3fb308bcacfdbd0ac8b2ab52c7282ac6a271c0d6b52c88b47945",
+      "gifSHA256": "ef92a8162a7ec09e652bd5ab1c0e57f36d483ef7942b5bafbb94f7c17eecc14e",
+      "previewSHA256": "d9de5d9a840a1623ea744ab5d9420b0f0426afc9c9193d1b35fe216ddb62c068",
       "gifDecodedFrames": 16,
       "webpDecodedFrames": 16,
       "timelineMaxGIFRGBRMSE": 1.547859,
-      "maximumOuterEdgeAlpha": 0
+      "maximumOuterEdgeAlpha": 0,
+      "sourceFacing": "left"
     },
     "attack": {
       "sheet": "spore-blade-carapace-melee-v1-sheet.png",
@@ -173,13 +175,14 @@
       ],
       "previewDurationMs": 900,
       "previewLoop": true,
-      "sheetSHA256": "5e27541a49c5d2f007a515f74d20cf5d8cc48da972b728eb15a217120aa3521f",
-      "gifSHA256": "4295e265785ce1597ad3cfd873330a74cbf71ec7e067a2cbdca8cb648cb63e97",
-      "previewSHA256": "804167f3b9fefda4529590818895e9b1d86300c097a729defb7166c6ef13ada4",
+      "sheetSHA256": "06603010985884f74b793298196bcedc58be5f0ffb302ad8771d82fa5a7b57eb",
+      "gifSHA256": "3ff2b84cee9edf0215d9cdd65479e3be07a9527fb4c0da795e301c31b4973ca6",
+      "previewSHA256": "8c510e46f072156bdd5f27485b0652952a74aa9498ab27920dcb9e6ac7e3ff88",
       "gifDecodedFrames": 16,
       "webpDecodedFrames": 16,
       "timelineMaxGIFRGBRMSE": 1.50122,
-      "maximumOuterEdgeAlpha": 1
+      "maximumOuterEdgeAlpha": 1,
+      "sourceFacing": "left"
     },
     "hurt": {
       "sheet": "spore-blade-carapace-hurt-v1-sheet.png",
@@ -231,13 +234,14 @@
       ],
       "previewDurationMs": 960,
       "previewLoop": true,
-      "sheetSHA256": "bee95289a86ebe94f5ea186fb2224876e6fb10df11967c88ddfd803f3660b852",
-      "gifSHA256": "78b979dbfc3de5fb4a8a96b9c15bfd5aa9dd58f2ba4320f9c42cdc90c6e9c7b2",
-      "previewSHA256": "86a080f16142e544982d3cb830e115d5ef2b46bc21317ef7e012b5b54de00302",
+      "sheetSHA256": "0740cd379b4c2a264443c73e87efdbf64d765cc854f5140d3a39013a62967291",
+      "gifSHA256": "8a24f2c4386a100b49768013f72493d5022847f582f0bb97e88f3696b4c0991c",
+      "previewSHA256": "0f39d7ae22fac467ecea015ecbef8176b76e8c05e7805d07bf71c64125ade7d7",
       "gifDecodedFrames": 16,
       "webpDecodedFrames": 16,
       "timelineMaxGIFRGBRMSE": 1.570639,
-      "maximumOuterEdgeAlpha": 0
+      "maximumOuterEdgeAlpha": 0,
+      "sourceFacing": "left"
     },
     "death": {
       "sheet": "spore-blade-carapace-death-v1-sheet.png",
@@ -289,13 +293,14 @@
       ],
       "previewDurationMs": 1440,
       "previewLoop": true,
-      "sheetSHA256": "a8c9ac8501b435acea375093858b0c7ba6e5f8a922f270f8598da49c59b0b215",
-      "gifSHA256": "c94e9ba2f774e138661dba31d835ea2010053c4d5da3620ad66feecd64674bf2",
-      "previewSHA256": "e98f39566d2216793654de2dd77b49d13680979f9a9dea74d63fdabe47506932",
+      "sheetSHA256": "ce9bd812f0bcf5db1bca152ba74b9553e543c2224c941d7690d682b680b5c251",
+      "gifSHA256": "8c5cc55174b33f3f17e95c1a75ec52c09865fdce082c480ea25d9571d139841e",
+      "previewSHA256": "78a73f5a6f0da96a5319d3c75da59d6930df1cbbff2e441a30a47778a74d2650",
       "gifDecodedFrames": 16,
       "webpDecodedFrames": 16,
       "timelineMaxGIFRGBRMSE": 1.619659,
-      "maximumOuterEdgeAlpha": 1
+      "maximumOuterEdgeAlpha": 1,
+      "sourceFacing": "left"
     },
     "birth": {
       "sheet": "spore-blade-carapace-birth-v1-sheet.png",
@@ -471,14 +476,15 @@
       ],
       "previewDurationMs": 3120,
       "previewLoop": true,
-      "sheetSHA256": "043b9d2ba78b73121a4cfb2ff664a88fc9d5a606ef28777e31e6f3a77820fea2",
-      "gifSHA256": "e203a6da0fd98ed1dd5cccfd7f7abf74b691e591d94c6082966f565fee77d8f2",
-      "previewSHA256": "cad564389c7b7c09582432bc6efd2c48613eec79890f42995365002791b066c9",
+      "sheetSHA256": "97b89f40b406ba1dee9d3db698c8fb4060b0794b7fae8ca470e32483c8772452",
+      "gifSHA256": "fe13a2ff30f095b8b9928cdc1d17b96358736eb510afaf16acd76dfb7ede41f0",
+      "previewSHA256": "bd8b647fe0bdb62f204c821cd3d3897df3b3c077d065ad2a1742c3875bf76965",
       "gifDecodedFrames": 76,
       "webpDecodedFrames": 76,
       "timelineMaxGIFRGBRMSE": 1.212053,
       "maximumOuterEdgeAlpha": 0,
-      "fullScene": true
+      "fullScene": true,
+      "sourceFacing": "left"
     }
   },
   "rangedAttack": null,

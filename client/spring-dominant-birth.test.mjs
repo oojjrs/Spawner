@@ -4,7 +4,10 @@ import {readFileSync} from 'node:fs';
 import {createContext,runInContext} from 'node:vm';
 import {springDominantBirthForm,springDominantBirthPose,springDominantBirthRow,springDominantBirthPixels,createSpringDominantBirthArt,SPRING_DOMINANT_BIRTH_SETTLED_AT} from './spring-dominant-birth.mjs';
 import {SPRING_BIRTH_ANIMATION,springBirthPlacement,springBirthMotion} from './birth.mjs';
-import {unitFacing} from './unit-size.mjs';
+import {unitFacing,unitFrameMirror} from './unit-size.mjs';
+import {unitActionArtPose} from './unit-action-art.mjs';
+import {createUnitPresentation} from './unit-presentation.mjs';
+import {imageDimensions} from './image-audit.mjs';
 const agent=(patch={})=>({id:'spring',tribe:'spring',health:10,birth:{startedAt:0},attributes:{blade:1},bornAt:0,...patch});
 const profiles={blade:{top:150,tip:383.5},carapace:{top:156,tip:219.5}};
 function source(){const data=new Uint8ClampedArray(512*512*4);for(let y=150;y<452;y++)for(let x=70;x<405;x++){const i=(y*512+x)*4;data.set([25,170,205,255],i);}return data;}
@@ -55,27 +58,43 @@ test('pixel read failure, invalid input and blank art preserve fallback and allo
  for(const [im,t,s]of [[null,.3,.35],[canvas(256,256),.3,.35],[canvas(512,512),.3,.35],[sprite,NaN,.35],[sprite,-1,.35],[sprite,.3,0],[sprite,.3,Infinity]])assert.equal(art.frame(im,a,t,s),null);
 });
 
-const game=readFileSync(new URL('./game.js',import.meta.url),'utf8'),draw=game.match(/^    function drawSpringBirth\([^]*?^    }/m)[0];
-function scene(){const draws=[],water=[],calls=[],handoffs=[],scales=[],outlines=[],sprite={width:670,height:750,combatCamera:{pivotX:555,pivotY:763}},base={complete:true,naturalWidth:944};let available=true,ready=true;
- const scope=createContext({Spawner:{unitFacing,springDominantBirthForm,springBirthMotion,drawSpringBirthWater:(...x)=>water.push(x),drawSpringBirthSurface:(...x)=>draws.push(['fallback',...x]),unitRangedLifecycleAnimation:()=>null},
- SPRING_BIRTH_ANIMATION,AGENT_HEIGHT:.7,idleMotion:{matches:false},state:{simSeconds:.7},unitDisplayScale:()=>.352,
- combatAttributeArt:{ready:()=>ready,frame:(...args)=>{calls.push(args);return sprite;}},springDominantBirthArt:{frame:(...args)=>{calls.push(args);return available?sprite:null;}},
- springBirthSheet:base,tribeArt:{animationFrame:()=>null},agentRangedImage:()=>null,SpawnerAppearance:{unitAppearanceBirthSceneForAgent:()=>null},
- drawAgentAppearanceLayer:(...x)=>handoffs.push(x),drawSelectionOutline:(...x)=>outlines.push(x)});
- runInContext(draw,scope);const ctx=new Proxy({drawImage:(...x)=>draws.push(x),scale:(...x)=>scales.push(x)},{get:(o,k)=>o[k]||(()=>{})});
- return {scope,ctx,draws,water,calls,handoffs,scales,outlines,sprite,setAvailable:v=>available=v,setReady:v=>ready=v};}
+const game=readFileSync(new URL('./game.js',import.meta.url),'utf8');
+const draw=game.match(/^    function drawAgentBirth\([^]*?^    }/m)[0];
 
-test('actual scene hook preserves facing, water, pivot, idle clock, attributes and terminal handoff',()=>{
- const s=scene(),a=agent({facing:-1,attack:{mode:'ranged'},hurtStartedAt:.6,mode:'harvest'}),before=structuredClone(a),birth={frame:6,elapsed:.7,x:2,y:3};
- s.scope.drawSpringBirth(s.ctx,0,a,birth,{x:10,y:20},100,'cyan');assert.equal(s.draws[0][0],s.sprite);assert.equal(s.water.length,1);assert.deepEqual(s.scales[0],[-1,1]);assert.equal(s.outlines.length,1);
- const forwarded=s.calls[0][0];assert.equal(forwarded.birth,null);assert.equal(forwarded.attack,null);assert.equal(forwarded.hurtStartedAt,-Infinity);assert.equal(forwarded.mode,'idle');assert.equal(s.calls[0][1],.7);
- assert.deepEqual(a,before);assert.deepEqual(s.draws[0].slice(1),[-555*140/512,-763*140/512,670*140/512,750*140/512]);
- s.scope.drawSpringBirth(s.ctx,0,a,{...birth,frame:12},{x:10,y:20},100,null);assert.equal(s.handoffs.length,1);assert.equal(s.handoffs[0][2].birth,null);assert.deepEqual(s.handoffs[0][2].attributes,a.attributes);
+test('actual common scene forwards spring births without procedural water or detached body transforms',()=>{
+ const calls=[],scope=createContext({drawAgentAppearanceBody:(...args)=>calls.push(args)});
+ runInContext(draw,scope);
+ for(const attributes of [{blade:1},{carapace:1}])for(const facing of [-1,1]){
+  const a=agent({attributes,facing}),before=structuredClone(a),birth={frame:6,elapsed:.7,x:2,y:3};
+  const ctx={},topLeft={x:10,y:20};scope.drawAgentBirth(ctx,0,a,birth,topLeft,100,'cyan');
+  assert.deepEqual(calls.at(-1),[ctx,0,a,100,topLeft,null,birth,'cyan']);assert.deepEqual(a,before);
+ }
+ assert.doesNotMatch(game,/function drawSpringBirth\(/);
 });
 
-test('actual scene falls back when unready or unreadable and reduced motion uses the settled body',()=>{
- const s=scene(),a=agent(),birth={frame:6,elapsed:.7,x:2,y:3};
- s.setAvailable(false);s.scope.drawSpringBirth(s.ctx,0,a,birth,{x:0,y:0},100,null);assert.equal(s.draws[0][0],'fallback');
- s.setAvailable(true);s.draws.length=0;s.scope.idleMotion.matches=true;s.scope.drawSpringBirth(s.ctx,0,a,birth,{x:0,y:0},100,null);assert.equal(s.draws[0][0],s.sprite);assert.equal(s.calls.at(-1)[2],SPRING_BIRTH_ANIMATION.duration);
- s.setReady(false);s.draws.length=0;s.scope.drawSpringBirth(s.ctx,0,a,birth,{x:0,y:0},100,null);assert.equal(s.draws[0][0],'fallback');
+test('actual common presentation draws one registered whole body in both facings and exits birth exactly once',async()=>{
+ const previous=globalThis.SpawnerAssets;
+ globalThis.SpawnerAssets={source:p=>p,image:()=>({async decode(){[this.width,this.height]=imageDimensions(this.src);}})};
+ try{
+  let time=0;
+  const makeSurface=(width,height)=>({width,height,getContext:()=>({drawImage(){},getImageData:()=>({data:new Uint8ClampedArray(width*height*4).fill(255)})})});
+  const presentation=createUnitPresentation({model:{},height:.7,time:()=>time,displayScale:()=>1,createSurface:makeSurface});
+  const scope=createContext({drawAgentAppearanceBody:(...args)=>presentation.drawAgentAppearanceBody(...args)});runInContext(draw,scope);
+  for(const attributes of [{blade:1},{carapace:1}])for(const facing of [-1,1]){
+   const a=agent({attributes,facing,birth:{startedAt:0,readyAt:1.79}}),before=structuredClone(a);
+   await presentation.prepareAnimation(a,0);
+   for(time of [.7,1.789,1.79,2]){
+    await presentation.prepareAnimation(a,time);
+    const pose=unitActionArtPose(a,time),draws=[],scales=[];
+    const ctx={save(){},restore(){},translate(){},scale:(...x)=>scales.push(x),drawImage:(...x)=>draws.push(x),rotate(){assert.fail('baked birth must not receive an extra rotation');}};
+    scope.drawAgentBirth(ctx,0,a,{elapsed:time}, {x:0,y:0},100,null);
+    assert.equal(pose.action,time<1.79?'birth':'idle');
+    const layers=pose.animation.sceneLayers?.layers.filter(l=>l.samples[pose.frame]);
+    if(layers){assert.equal(layers.filter(l=>l.wholeBody).length,1);assert.deepEqual(draws.map(x=>x[0].src),layers.map(l=>l.image));}
+    else {assert.equal(draws.length,1);assert.equal(draws[0][0].src,pose.animation.image);}
+    assert.deepEqual(scales,[[unitFrameMirror(pose.animation.sourceFacing,unitFacing(a))?-1:1,1]]);
+   }
+   assert.deepEqual(a,before);
+  }
+ }finally{if(previous===undefined)delete globalThis.SpawnerAssets;else globalThis.SpawnerAssets=previous;}
 });

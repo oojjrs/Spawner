@@ -24,25 +24,25 @@
     "coreBounds": null,
     "landmarks": {
       "leftEye": [
-        220.5,
-        377.5
-      ],
-      "rightEye": [
-        295,
+        217,
         378
       ],
+      "rightEye": [
+        291.5,
+        377.5
+      ],
       "supportPoint": [
-        257.5,
+        254.5,
         447.5
       ],
       "supportPixelBounds": [
-        208,
+        205,
         440,
         99,
         8
       ],
       "faceMidpoint": [
-        257.75,
+        254.25,
         377.75
       ]
     },
@@ -67,7 +67,7 @@
     "secretion"
   ],
   "generationReferenceIds": [],
-  "sourceHash": "a442e5bbefd2b3a3ca655d28fc3164a459ad978e322561f4fcb966f840e32324",
+  "sourceHash": "ba7247467bc178b022c1aab26d54a2fc242691853f929d40aa42a31b3ffea5f8",
   "sourceRegistration": {
     "sourceImage": "DesignAssets/Animations/UnitRangedV1/Source/BeanFormsV1/secretion-blade.png",
     "sourceOriginalHash": "18bdbf40a17b8f8e16d6ad03124e88fed648f4f3ab089df60e008cdb0a91f788",
@@ -159,5 +159,6 @@
     "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
     "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
     "unobservedCoreBoundsNotInferred": true
-  }
+  },
+  "sourceFacing": "left"
 }

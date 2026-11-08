@@ -77,17 +77,18 @@
       "pivotX": 315.5,
       "pivotY": 553.268115942029,
       "events": [],
-      "sourceHash": "46a613676ad252c703e4a4391e3482109f11990bd2dd877e879986ae87576cfb",
+      "sourceHash": "b5507fda49231082557751ca25bacc3ff69a664885dd646cfcc2687487396bd0",
       "cameraMapping": {
         "verified": true,
-        "sourceHash": "46a613676ad252c703e4a4391e3482109f11990bd2dd877e879986ae87576cfb",
+        "sourceHash": "b5507fda49231082557751ca25bacc3ff69a664885dd646cfcc2687487396bd0",
         "pixelsPerWorld": 617.5,
         "scale": 0.8291497975708502,
         "offsetX": -5.596761133603252,
         "offsetY": -10.742146335738994,
         "method": "preserve-existing-game-fixed-native-camera",
         "verification": "tools/native-appearance-registration-20261104/report.json"
-      }
+      },
+      "sourceFacing": "left"
     },
     "attack": {
       "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
@@ -117,17 +118,18 @@
       "pivotX": 316,
       "pivotY": 555.1351351351351,
       "events": [],
-      "sourceHash": "5843746f0f742afe688d6623a031f79c27982beab599c7bff9c54f7a91ce1662",
+      "sourceHash": "bdd443428b5ccb183acb50f4db84ff5e31d74d0116656fe3118336ff0fe7a5ed",
       "cameraMapping": {
         "verified": true,
-        "sourceHash": "5843746f0f742afe688d6623a031f79c27982beab599c7bff9c54f7a91ce1662",
+        "sourceHash": "bdd443428b5ccb183acb50f4db84ff5e31d74d0116656fe3118336ff0fe7a5ed",
         "pixelsPerWorld": 901.4200879920468,
         "scale": 0.5679926671486795,
         "offsetX": 76.51431718101728,
         "offsetY": 132.68731396665203,
         "method": "preserve-existing-game-fixed-native-camera",
         "verification": "tools/native-appearance-registration-20261104/report.json"
-      }
+      },
+      "sourceFacing": "left"
     },
     "hurt": {
       "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
@@ -157,17 +159,18 @@
       "pivotX": 316,
       "pivotY": 555.1351351351351,
       "events": [],
-      "sourceHash": "1409bf1440a95467211f645c142acc0029852cc0cf32850eec19185c0b6b10c6",
+      "sourceHash": "627a83d7809cea9a8b173d6e82f44a99141858bf16abd588973ee79fce22cf8a",
       "cameraMapping": {
         "verified": true,
-        "sourceHash": "1409bf1440a95467211f645c142acc0029852cc0cf32850eec19185c0b6b10c6",
+        "sourceHash": "627a83d7809cea9a8b173d6e82f44a99141858bf16abd588973ee79fce22cf8a",
         "pixelsPerWorld": 899.9999999999998,
         "scale": 0.568888888888889,
         "offsetX": 76.23111111111109,
         "offsetY": 132.18978978978976,
         "method": "preserve-existing-game-fixed-native-camera",
         "verification": "tools/native-appearance-registration-20261104/report.json"
-      }
+      },
+      "sourceFacing": "left"
     },
     "death": {
       "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
@@ -197,17 +200,18 @@
       "pivotX": 158,
       "pivotY": 276.5,
       "events": [],
-      "sourceHash": "2659f1cb0b65405ff1acf413883f0a5428eaf5f14ee8d3bbf7ec02f7ebc846ef",
+      "sourceHash": "dc1c79da5cb7969706764a923b7d59daa670f4d02290aa8dcffd140039282692",
       "cameraMapping": {
         "verified": true,
-        "sourceHash": "2659f1cb0b65405ff1acf413883f0a5428eaf5f14ee8d3bbf7ec02f7ebc846ef",
+        "sourceHash": "dc1c79da5cb7969706764a923b7d59daa670f4d02290aa8dcffd140039282692",
         "pixelsPerWorld": 432.50000000000006,
         "scale": 1.183815028901734,
         "offsetX": 68.95722543352605,
         "offsetY": 120.67514450867054,
         "method": "preserve-existing-game-fixed-native-camera",
         "verification": "tools/native-appearance-registration-20261104/report.json"
-      }
+      },
+      "sourceFacing": "left"
     }
   }
 }

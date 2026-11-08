@@ -1,0 +1,1918 @@
+{
+  "status": "completed",
+  "changes": {
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/Sources/approved-idle-wholebody-reference.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/Sources/approved-idle-wholebody-reference.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/Sources/approved-idle-wholebody-reference.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/Sources/approved-idle-wholebody-reference.png",
+      "beforeSha256": "ef97578e2d46f57423346e97e7a77b6d91b6b745c8c4d6e533138e4c3a0b3b22",
+      "afterSha256": "59fb7c6606178ae2b7daa2820df7450b9cd5ce3104b17c7ae703af227a0768e7",
+      "dimensions": [
+        241,
+        287
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          241,
+          287
+        ]
+      ],
+      "grid": {
+        "frameWidth": 241,
+        "frameHeight": 287
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/Sources/approved-idle-frame0.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/Sources/approved-idle-frame0.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/Sources/approved-idle-frame0.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/Sources/approved-idle-frame0.png",
+      "beforeSha256": "1c1d2fb5343613d4d483f894e3842483de9c83bbbaabd96ed2ebeb2f225ec81c",
+      "afterSha256": "4dfe6c72330a3196906c26f5675435f49e92c58da032b37b31b7a1a52835970b",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/Sources/birth-wholebody-generated.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/Sources/birth-wholebody-generated.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/Sources/birth-wholebody-generated.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/Sources/birth-wholebody-generated.png",
+      "beforeSha256": "9d3705291a39c37d271a60500c13a032f8a8db4340d3cd1908e67ab584ca776c",
+      "afterSha256": "ef471549583d9b62c04c622846ec78a5d528991495f02c5dd0e34a0bce36d245",
+      "dimensions": [
+        1193,
+        1319
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          298,
+          330
+        ],
+        [
+          298,
+          0,
+          596,
+          330
+        ],
+        [
+          596,
+          0,
+          895,
+          330
+        ],
+        [
+          895,
+          0,
+          1193,
+          330
+        ],
+        [
+          0,
+          330,
+          298,
+          660
+        ],
+        [
+          298,
+          330,
+          596,
+          660
+        ],
+        [
+          596,
+          330,
+          895,
+          660
+        ],
+        [
+          895,
+          330,
+          1193,
+          660
+        ],
+        [
+          0,
+          660,
+          298,
+          989
+        ],
+        [
+          298,
+          660,
+          596,
+          989
+        ],
+        [
+          596,
+          660,
+          895,
+          989
+        ],
+        [
+          895,
+          660,
+          1193,
+          989
+        ],
+        [
+          0,
+          989,
+          298,
+          1319
+        ],
+        [
+          298,
+          989,
+          596,
+          1319
+        ],
+        [
+          596,
+          989,
+          895,
+          1319
+        ],
+        [
+          895,
+          989,
+          1193,
+          1319
+        ]
+      ],
+      "grid": {
+        "frameWidth": 298,
+        "frameHeight": 330
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/010.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/010.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/010.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/010.png",
+      "beforeSha256": "b244674992eee2ce268ab871acca064eb653e76d8638988028cd3aee065a49b6",
+      "afterSha256": "8140a83d3df962b30da60efae0cc7b6ed47437c9f824e5dbcba452d05b8df1de",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/008.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/008.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/008.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/008.png",
+      "beforeSha256": "8633d7ed10ce7b565a36f00fb59760d9dcec3f8451349f8cd3083efbf82a4810",
+      "afterSha256": "98479c0eaeed3b399281e93d6ebc2adc9980d38d78ef6ff21817143c96e9d31c",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/002.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/002.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/002.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/002.png",
+      "beforeSha256": "70753b03ce1b7d1b096590ea54475e3c40c10cee259258aec94d9801aa59b77d",
+      "afterSha256": "c197830f159bae532d1dd95b545c8ba79070f8aab63363902d6976a4040c3c25",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/003.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/003.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/003.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/003.png",
+      "beforeSha256": "19dbf1277d880db1b0cea755f6a368bb88ce46cfb2e31396296dc0d14a59c764",
+      "afterSha256": "5ce9c8c3935632f4088b7505555e68ccf8fbe5855b64f88fccb052d9f82ae2e7",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/009.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/009.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/009.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/009.png",
+      "beforeSha256": "c09b427530dec4b96ff85e62e7537aaddcc8c431b228a5e5ddd1ae4d2bc5c531",
+      "afterSha256": "1987ae64c459a55b890ec36d111c32d1eac600048470f8b15fa67e68cb622f7c",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/007.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/007.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/007.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/007.png",
+      "beforeSha256": "9f00a9436785a3e4ab02eacb6ef65b80e93c4a946b9afde0fee6f51c1a4e9f26",
+      "afterSha256": "113fb0ed64acabce01d1b043fd5eedea0d541a2be267855b22f5b7e8a4aa1891",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/012.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/012.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/012.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/012.png",
+      "beforeSha256": "ccd39726020a7863fa6e0780313a40b344a4f8193cf5b398d6b14f25c759462c",
+      "afterSha256": "523b47d12d1e5ed94c61cf40ba802378978af965f60ca972a5c71394426524ef",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/004.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/004.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/004.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/004.png",
+      "beforeSha256": "8800a75ca0f3dc8fdd5ec8039416b7b3f4140589f3c58f77bb158770841cd356",
+      "afterSha256": "cc45f35e072b7ad9f752ca6e07f1381727718c8d0fbc84be9bf6b6d194683bb4",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/001.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/001.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/001.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/001.png",
+      "beforeSha256": "8306fd43ec21fb42fe12bd2fc74f73a84d927bf9fef22ae0673d502028c0093a",
+      "afterSha256": "5cc17c8c1343bc7e91d060dbd282ded472158c795ef49532c0753004392b3e30",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/013.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/013.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/013.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/013.png",
+      "beforeSha256": "6d7be783a9cd23d9134ddd3449fcfae2ae29873d7f5894a16980763d24034490",
+      "afterSha256": "ed683fb56a2416950f4d2c40f485cad532599fd52b67654abec66cd8ea4709c3",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/015.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/015.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/015.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/015.png",
+      "beforeSha256": "3da0b4b09e958d1599627e608ef810472244574eafb0546fa2b401192c171211",
+      "afterSha256": "4dfe6c72330a3196906c26f5675435f49e92c58da032b37b31b7a1a52835970b",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/014.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/014.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/014.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/014.png",
+      "beforeSha256": "891870569bd660f34f94b567cb3992b9db8b987a2a8a786afd403167ec63cd15",
+      "afterSha256": "d25ca3747fe15937b6d25a8a237401fdfc0a2105dc052f3d1bf79e71919aa842",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/005.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/005.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/005.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/005.png",
+      "beforeSha256": "ed9a7d8292c46cc2cdecd4a63c39bd747df2dad30408c6a598bbc680aa4ce48c",
+      "afterSha256": "08793aee627a46a47834d4d1e43fdae0810087b7cfcc5e6e4a9abc4826e56b3e",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/011.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/011.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/011.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/011.png",
+      "beforeSha256": "42a335e34b271f2154f4cf155404455eb6b14cd7f49c91cc208ccb8671ba6837",
+      "afterSha256": "4543b27abc820170992f07ff79f98f628904ebf8342831dee8edde076406ff44",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/000.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/000.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/000.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/000.png",
+      "beforeSha256": "07879759d8827c9e95ea6fa9174fd3376a136b1211fc7e186e6507d79127f362",
+      "afterSha256": "903316d4474a79261bcb0726fb5438355cd1021321e50fcc8051478f3ec1903c",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/006.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/006.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/006.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-poses/006.png",
+      "beforeSha256": "3350789109994696f712de7734a5827cc766e07a79d896629cf2d358fc3c9a35",
+      "afterSha256": "fb39c41726db7a794f1819945ece7b9144b3ad8c32a6e5e614908a4e5b8f8bb9",
+      "dimensions": [
+        631,
+        631
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": null,
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-body-v1-sheet.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-body-v1-sheet.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-body-v1-sheet.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-body-v1-sheet.png",
+      "beforeSha256": "178ff651e68c5a0fe41c745fdf7014e5751d817815b6a50400fe65f4dbfc5d0b",
+      "afterSha256": "eca1bf3f122323a80fe10ff1f7a16cf4b64548f98d66a64b21f2891633b4d44b",
+      "dimensions": [
+        5048,
+        1262
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          631,
+          631
+        ],
+        [
+          631,
+          0,
+          1262,
+          631
+        ],
+        [
+          1262,
+          0,
+          1893,
+          631
+        ],
+        [
+          1893,
+          0,
+          2524,
+          631
+        ],
+        [
+          2524,
+          0,
+          3155,
+          631
+        ],
+        [
+          3155,
+          0,
+          3786,
+          631
+        ],
+        [
+          3786,
+          0,
+          4417,
+          631
+        ],
+        [
+          4417,
+          0,
+          5048,
+          631
+        ],
+        [
+          0,
+          631,
+          631,
+          1262
+        ],
+        [
+          631,
+          631,
+          1262,
+          1262
+        ],
+        [
+          1262,
+          631,
+          1893,
+          1262
+        ],
+        [
+          1893,
+          631,
+          2524,
+          1262
+        ],
+        [
+          2524,
+          631,
+          3155,
+          1262
+        ],
+        [
+          3155,
+          631,
+          3786,
+          1262
+        ],
+        [
+          3786,
+          631,
+          4417,
+          1262
+        ],
+        [
+          4417,
+          631,
+          5048,
+          1262
+        ]
+      ],
+      "grid": {
+        "frameWidth": 631,
+        "frameHeight": 631
+      },
+      "copyFrom": "DesignAssets/Animations/BirthSceneLayersV1/eca1bf3f122323a80fe10ff1f7a16cf4b64548f98d66a64b21f2891633b4d44b.png",
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-complete-v1-sheet.png": {
+      "oldImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-complete-v1-sheet.png",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-complete-v1-sheet.png",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-complete-v1-sheet.png",
+      "beforeSha256": "638a6a835b0bc2367c75892b47de7e46b49322130f4e0f58e4450590c31a250c",
+      "afterSha256": "003711ebbcb64242707ffd00db46e322fcdff2e62f226bc1508c320183df7a44",
+      "dimensions": [
+        4096,
+        7680
+      ],
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          2048,
+          0,
+          2560,
+          512
+        ],
+        [
+          2560,
+          0,
+          3072,
+          512
+        ],
+        [
+          3072,
+          0,
+          3584,
+          512
+        ],
+        [
+          3584,
+          0,
+          4096,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          2048,
+          512,
+          2560,
+          1024
+        ],
+        [
+          2560,
+          512,
+          3072,
+          1024
+        ],
+        [
+          3072,
+          512,
+          3584,
+          1024
+        ],
+        [
+          3584,
+          512,
+          4096,
+          1024
+        ],
+        [
+          0,
+          1024,
+          512,
+          1536
+        ],
+        [
+          512,
+          1024,
+          1024,
+          1536
+        ],
+        [
+          1024,
+          1024,
+          1536,
+          1536
+        ],
+        [
+          1536,
+          1024,
+          2048,
+          1536
+        ],
+        [
+          2048,
+          1024,
+          2560,
+          1536
+        ],
+        [
+          2560,
+          1024,
+          3072,
+          1536
+        ],
+        [
+          3072,
+          1024,
+          3584,
+          1536
+        ],
+        [
+          3584,
+          1024,
+          4096,
+          1536
+        ],
+        [
+          0,
+          1536,
+          512,
+          2048
+        ],
+        [
+          512,
+          1536,
+          1024,
+          2048
+        ],
+        [
+          1024,
+          1536,
+          1536,
+          2048
+        ],
+        [
+          1536,
+          1536,
+          2048,
+          2048
+        ],
+        [
+          2048,
+          1536,
+          2560,
+          2048
+        ],
+        [
+          2560,
+          1536,
+          3072,
+          2048
+        ],
+        [
+          3072,
+          1536,
+          3584,
+          2048
+        ],
+        [
+          3584,
+          1536,
+          4096,
+          2048
+        ],
+        [
+          0,
+          2048,
+          512,
+          2560
+        ],
+        [
+          512,
+          2048,
+          1024,
+          2560
+        ],
+        [
+          1024,
+          2048,
+          1536,
+          2560
+        ],
+        [
+          1536,
+          2048,
+          2048,
+          2560
+        ],
+        [
+          2048,
+          2048,
+          2560,
+          2560
+        ],
+        [
+          2560,
+          2048,
+          3072,
+          2560
+        ],
+        [
+          3072,
+          2048,
+          3584,
+          2560
+        ],
+        [
+          3584,
+          2048,
+          4096,
+          2560
+        ],
+        [
+          0,
+          2560,
+          512,
+          3072
+        ],
+        [
+          512,
+          2560,
+          1024,
+          3072
+        ],
+        [
+          1024,
+          2560,
+          1536,
+          3072
+        ],
+        [
+          1536,
+          2560,
+          2048,
+          3072
+        ],
+        [
+          2048,
+          2560,
+          2560,
+          3072
+        ],
+        [
+          2560,
+          2560,
+          3072,
+          3072
+        ],
+        [
+          3072,
+          2560,
+          3584,
+          3072
+        ],
+        [
+          3584,
+          2560,
+          4096,
+          3072
+        ],
+        [
+          0,
+          3072,
+          512,
+          3584
+        ],
+        [
+          512,
+          3072,
+          1024,
+          3584
+        ],
+        [
+          1024,
+          3072,
+          1536,
+          3584
+        ],
+        [
+          1536,
+          3072,
+          2048,
+          3584
+        ],
+        [
+          2048,
+          3072,
+          2560,
+          3584
+        ],
+        [
+          2560,
+          3072,
+          3072,
+          3584
+        ],
+        [
+          3072,
+          3072,
+          3584,
+          3584
+        ],
+        [
+          3584,
+          3072,
+          4096,
+          3584
+        ],
+        [
+          0,
+          3584,
+          512,
+          4096
+        ],
+        [
+          512,
+          3584,
+          1024,
+          4096
+        ],
+        [
+          1024,
+          3584,
+          1536,
+          4096
+        ],
+        [
+          1536,
+          3584,
+          2048,
+          4096
+        ],
+        [
+          2048,
+          3584,
+          2560,
+          4096
+        ],
+        [
+          2560,
+          3584,
+          3072,
+          4096
+        ],
+        [
+          3072,
+          3584,
+          3584,
+          4096
+        ],
+        [
+          3584,
+          3584,
+          4096,
+          4096
+        ],
+        [
+          0,
+          4096,
+          512,
+          4608
+        ],
+        [
+          512,
+          4096,
+          1024,
+          4608
+        ],
+        [
+          1024,
+          4096,
+          1536,
+          4608
+        ],
+        [
+          1536,
+          4096,
+          2048,
+          4608
+        ],
+        [
+          2048,
+          4096,
+          2560,
+          4608
+        ],
+        [
+          2560,
+          4096,
+          3072,
+          4608
+        ],
+        [
+          3072,
+          4096,
+          3584,
+          4608
+        ],
+        [
+          3584,
+          4096,
+          4096,
+          4608
+        ],
+        [
+          0,
+          4608,
+          512,
+          5120
+        ],
+        [
+          512,
+          4608,
+          1024,
+          5120
+        ],
+        [
+          1024,
+          4608,
+          1536,
+          5120
+        ],
+        [
+          1536,
+          4608,
+          2048,
+          5120
+        ],
+        [
+          2048,
+          4608,
+          2560,
+          5120
+        ],
+        [
+          2560,
+          4608,
+          3072,
+          5120
+        ],
+        [
+          3072,
+          4608,
+          3584,
+          5120
+        ],
+        [
+          3584,
+          4608,
+          4096,
+          5120
+        ],
+        [
+          0,
+          5120,
+          512,
+          5632
+        ],
+        [
+          512,
+          5120,
+          1024,
+          5632
+        ],
+        [
+          1024,
+          5120,
+          1536,
+          5632
+        ],
+        [
+          1536,
+          5120,
+          2048,
+          5632
+        ],
+        [
+          2048,
+          5120,
+          2560,
+          5632
+        ],
+        [
+          2560,
+          5120,
+          3072,
+          5632
+        ],
+        [
+          3072,
+          5120,
+          3584,
+          5632
+        ],
+        [
+          3584,
+          5120,
+          4096,
+          5632
+        ],
+        [
+          0,
+          5632,
+          512,
+          6144
+        ],
+        [
+          512,
+          5632,
+          1024,
+          6144
+        ],
+        [
+          1024,
+          5632,
+          1536,
+          6144
+        ],
+        [
+          1536,
+          5632,
+          2048,
+          6144
+        ],
+        [
+          2048,
+          5632,
+          2560,
+          6144
+        ],
+        [
+          2560,
+          5632,
+          3072,
+          6144
+        ],
+        [
+          3072,
+          5632,
+          3584,
+          6144
+        ],
+        [
+          3584,
+          5632,
+          4096,
+          6144
+        ],
+        [
+          0,
+          6144,
+          512,
+          6656
+        ],
+        [
+          512,
+          6144,
+          1024,
+          6656
+        ],
+        [
+          1024,
+          6144,
+          1536,
+          6656
+        ],
+        [
+          1536,
+          6144,
+          2048,
+          6656
+        ],
+        [
+          2048,
+          6144,
+          2560,
+          6656
+        ],
+        [
+          2560,
+          6144,
+          3072,
+          6656
+        ],
+        [
+          3072,
+          6144,
+          3584,
+          6656
+        ],
+        [
+          3584,
+          6144,
+          4096,
+          6656
+        ],
+        [
+          0,
+          6656,
+          512,
+          7168
+        ],
+        [
+          512,
+          6656,
+          1024,
+          7168
+        ],
+        [
+          1024,
+          6656,
+          1536,
+          7168
+        ],
+        [
+          1536,
+          6656,
+          2048,
+          7168
+        ],
+        [
+          2048,
+          6656,
+          2560,
+          7168
+        ],
+        [
+          2560,
+          6656,
+          3072,
+          7168
+        ],
+        [
+          3072,
+          6656,
+          3584,
+          7168
+        ],
+        [
+          3584,
+          6656,
+          4096,
+          7168
+        ],
+        [
+          0,
+          7168,
+          512,
+          7680
+        ],
+        [
+          512,
+          7168,
+          1024,
+          7680
+        ],
+        [
+          1024,
+          7168,
+          1536,
+          7680
+        ],
+        [
+          1536,
+          7168,
+          2048,
+          7680
+        ],
+        [
+          2048,
+          7168,
+          2560,
+          7680
+        ],
+        [
+          2560,
+          7168,
+          3072,
+          7680
+        ],
+        [
+          3072,
+          7168,
+          3584,
+          7680
+        ],
+        [
+          3584,
+          7168,
+          4096,
+          7680
+        ]
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512
+      },
+      "copyFrom": "DesignAssets/Animations/BirthSceneLayersV1/003711ebbcb64242707ffd00db46e322fcdff2e62f226bc1508c320183df7a44.png",
+      "verification": {
+        "exactCellRgbaMirror": true
+      }
+    }
+  },
+  "previewChanges": {
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-body-v1-preview.webp": {
+      "beforeSha256": "710fccd7dd68499cd6e14805b924f2d42fb91dea7f89a82f11fab132ad3af623",
+      "afterSha256": "f741df194108b86e00915ebf476503f33645a28a97df5a1bb2fed76c0df127e0",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-body-v1-preview.webp",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-body-v1-preview.webp",
+      "dimensions": [
+        631,
+        631
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        40,
+        25,
+        35,
+        50,
+        30,
+        60,
+        60,
+        70,
+        70,
+        90,
+        90,
+        60,
+        70,
+        70,
+        200,
+        240
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-complete-v1-preview.webp": {
+      "beforeSha256": "d257baa81724acbf3550d4cc8c7f2d29e243962ca345235278be782f28047bcc",
+      "afterSha256": "0217fc1e9f656052a4b887a59199770c41a36e639e1ae20ee0eeff718ee62c1c",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-complete-v1-preview.webp",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-complete-v1-preview.webp",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 111,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        10,
+        20,
+        10,
+        30,
+        10,
+        15,
+        25,
+        10,
+        30,
+        20,
+        20,
+        10,
+        30,
+        30,
+        10,
+        40,
+        10,
+        30,
+        40,
+        40,
+        30,
+        10,
+        40,
+        40,
+        40,
+        40,
+        10,
+        30,
+        30,
+        10,
+        40,
+        20,
+        20,
+        40,
+        10,
+        30,
+        40,
+        40,
+        40,
+        40,
+        10,
+        150,
+        90
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true
+      }
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-complete-v1-preview.gif": {
+      "beforeSha256": "05aebace434e781e5e4161a4a9484ad52ad4b75f18b852cec9c15c5ca859a215",
+      "afterSha256": "577f92e66b5c973bbe8551c7538196f8ca9b7f5c503986921822c8ef593d9617",
+      "newImage": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-complete-v1-preview.gif",
+      "afterPath": "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/bean-base-birth-complete-v1-preview.gif",
+      "dimensions": [
+        384,
+        384
+      ],
+      "frameCount": 111,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        10,
+        20,
+        10,
+        30,
+        10,
+        20,
+        20,
+        10,
+        30,
+        20,
+        20,
+        10,
+        30,
+        30,
+        10,
+        40,
+        10,
+        30,
+        40,
+        40,
+        30,
+        10,
+        40,
+        40,
+        40,
+        40,
+        10,
+        30,
+        30,
+        10,
+        40,
+        20,
+        20,
+        40,
+        10,
+        30,
+        40,
+        40,
+        40,
+        40,
+        10,
+        150,
+        90
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true
+      }
+    }
+  },
+  "metadataChanges": {
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/complete-scene-manifest.json": {
+      "beforeSha256": "2934f0df0f753dc6fe2d22ca8140afbbee17693da7b323aa872588493d518a6e",
+      "afterSha256": "e88734d829fea3a9816d870664a3a6579d7244cf5e1b9347ad995730dbc99ecf"
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/pixel-verification.json": {
+      "beforeSha256": "7c71465d8edb9311385dbf81d0065893405c8b76e1589e90ed13a4a0ee2582df",
+      "afterSha256": "1e76e5a0845cd660bb883b93bf5dde52d20d89e0a0fd2cd5fe9feefc8530eb54"
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/publication-manifest.json": {
+      "beforeSha256": "da43761cbe6ceeb0b3f7d8daf53de3c49c641f149ad787dbe5b0911255b7a7ee",
+      "afterSha256": "c1ba323700f4ede8cd52b25d846414145d27472492759ca42871c0f2ae0f5e6e"
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/planning-entries.json": {
+      "beforeSha256": "0f5141d630b476c66e22b8aaa9a4f8ed7e0984ddb4cbb5aa9b50079491ce58cd",
+      "afterSha256": "c388c5c7a3196ef8a1de829cd85d37beb898a07d2f43b62a9ef6e0443b3c1b2e"
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/runtime-clip.json": {
+      "beforeSha256": "43fb8020e0dc4961eb3e1a7407e210e35dcc84adfcbce2dea4aadc5becd8eddd",
+      "afterSha256": "9bf2b88d9bdaa69704132af33b2a855919261f940255f81105d8fa9cb96a40d4"
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/source-layout.json": {
+      "beforeSha256": "5dbe9dd8545db9fec257ab27c0a7d4c476ec5761c3094e3d53f33e912965fcdd",
+      "afterSha256": "619086de0a8c978dad205205be4ca139ef56285b34bbe6f79427dae208948fe8"
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/validation.json": {
+      "beforeSha256": "8c4bc90c1fee5172c127eb03368e2973205d83543a2763ca1a997575b2180769",
+      "afterSha256": "596fcc502f7e47522fb38ae1417f63e028e854102d16f574bf52265d4d268c6f"
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/body-manifest.json": {
+      "beforeSha256": "b0aa0763b9c38e2294eb9dc8e9ffa10a78d7f8c29c481166c7e43c811cd88485",
+      "afterSha256": "58c415a6bf706a541857cd93fa12f9ee2f7b1e103dbb0d500d3dafc3f73a5c8f"
+    },
+    "AnimationCandidates/bean-base-birth-fullbody-v1-20261107/existing-scene-layer-reference.json": {
+      "beforeSha256": "d80a6248fcb8b8d04f9f36be60d26c8c67631fa0640bd4ec964ded06b23fc5aa",
+      "afterSha256": "6e76a8996e22338bfd8dc5e51c7fbc24819f6b614ef28b1bfb1a6ed844d9a515"
+    }
+  },
+  "nativeImagesRewritten": false,
+  "limitations": [
+    "Historical packer not reexecuted; pack-body.py still imports external original generation job."
+  ],
+  "rawCellBoundaries": {
+    "x": [
+      0,
+      298,
+      596,
+      895,
+      1193
+    ],
+    "y": [
+      0,
+      330,
+      660,
+      989,
+      1319
+    ],
+    "coordinates": [
+      [
+        0,
+        0,
+        298,
+        330
+      ],
+      [
+        298,
+        0,
+        596,
+        330
+      ],
+      [
+        596,
+        0,
+        895,
+        330
+      ],
+      [
+        895,
+        0,
+        1193,
+        330
+      ],
+      [
+        0,
+        330,
+        298,
+        660
+      ],
+      [
+        298,
+        330,
+        596,
+        660
+      ],
+      [
+        596,
+        330,
+        895,
+        660
+      ],
+      [
+        895,
+        330,
+        1193,
+        660
+      ],
+      [
+        0,
+        660,
+        298,
+        989
+      ],
+      [
+        298,
+        660,
+        596,
+        989
+      ],
+      [
+        596,
+        660,
+        895,
+        989
+      ],
+      [
+        895,
+        660,
+        1193,
+        989
+      ],
+      [
+        0,
+        989,
+        298,
+        1319
+      ],
+      [
+        298,
+        989,
+        596,
+        1319
+      ],
+      [
+        596,
+        989,
+        895,
+        1319
+      ],
+      [
+        895,
+        989,
+        1193,
+        1319
+      ]
+    ]
+  },
+  "verification": {
+    "finalBodyEqualsNormalizedIdleFrame0": true,
+    "allImageHashesCurrent": true,
+    "nativeRuntimeNotRewritten": true
+  }
+}

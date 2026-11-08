@@ -7,6 +7,7 @@ import { createCombatEvolutionArt } from "./combat-evolution.mjs";
 import { createCombatAttributeArt } from "./combat-attributes.mjs";
 import { createUnitPresentation } from "./unit-presentation.mjs";
 import { startingWorkerDna } from "../server/tribe-start.mjs";
+import { imageDimensions } from "./image-audit.mjs";
 
 function surface(width, height) {
   const calls = [], context = { calls, save() {}, restore() {}, translate() {}, scale(x, y) {
@@ -55,8 +56,17 @@ test("모든 전용 클립은 존재하는 단일 시트와 유효한 프레임�
     assert.ok(animation.durationsMs.every(value => value > 0));
     if (animation.frames) {
       assert.equal(animation.frames.length, animation.durationsMs.length);
-      assert.ok(animation.frames.every(value => value >= 0 && value < animation.frameCount));
     } else assert.equal(animation.frameCount, animation.durationsMs.length);
+    // A directional hurt clip can select the second half of a shared atlas.
+    // frameCount is the clip length, not the number of physical source cells.
+    const [width, height] = imageDimensions(animation.image);
+    const frameWidth = animation.frameWidth || animation.frameSize;
+    const frameHeight = animation.frameHeight || animation.frameSize;
+    for (const frame of animation.frames || Array.from({ length: animation.frameCount }, (_, index) => index)) {
+      assert.ok(Number.isInteger(frame) && frame >= 0, key + ' source frame index');
+      assert.ok((frame % animation.columns + 1) * frameWidth <= width &&
+        (Math.floor(frame / animation.columns) + 1) * frameHeight <= height, key + ':' + animation.image + ' source cell ' + frame);
+    }
   }
 });
 

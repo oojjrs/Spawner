@@ -6,10 +6,10 @@
   "bodyFirstVisibleMs": 2590,
   "bodyFinalNeutralMs": 3610,
   "bodyLastFrameEqualsActualIdleFrame0_RGBA": true,
-  "bodyLastFrameRGBA_SHA256": "41830b686e34cdffe157b54821e576a7dac1bc588e73ddbe9f38f69155d3eb93",
-  "actualIdleExtractSHA256": "1c1d2fb5343613d4d483f894e3842483de9c83bbbaabd96ed2ebeb2f225ec81c",
-  "actualIdleOriginalFileSHA256": "46a613676ad252c703e4a4391e3482109f11990bd2dd877e879986ae87576cfb",
-  "environmentSHA256": "b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48",
+  "bodyLastFrameRGBA_SHA256": "f32a0d9c77c3a24f24063c99a0f6f9a99c72bd64e4734ddde1cbfd93beb7e00c",
+  "actualIdleExtractSHA256": "4dfe6c72330a3196906c26f5675435f49e92c58da032b37b31b7a1a52835970b",
+  "actualIdleOriginalFileSHA256": "b5507fda49231082557751ca25bacc3ff69a664885dd646cfcc2687487396bd0",
+  "environmentSHA256": "b787fdc93791ddae38dc4fc6b6efdd3e0abb8a747c96d7c2511fec74b7caaecd",
   "environmentSamplesExactPrior116": true,
   "allLayerSamplesWithinValidFrameRanges": true,
   "environmentFrameRange": [
@@ -26,7 +26,7 @@
   ],
   "nativeIdleReferenceLength": 247,
   "sceneFinalPivot": [
-    430,
+    82,
     446
   ],
   "sceneReferenceLength": 32,

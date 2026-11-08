@@ -70,7 +70,20 @@
     "singleConnectedBodyOver8px": true,
     "clippedFrames": 0,
     "neutralBoundaryMatches": true,
-    "sheetSHA256": "9145721d2c1e04eafb65d902540b19e5e021985fb48000581bcd55041ab843d4",
-    "previewSHA256": "e1d2c2b712430a58d33083e999e64a6a9c1fb8393fdeefee207e487faa7e84f9"
+    "sheetSHA256": "212f0b565ca3502eaa45490467e2129e15370065a7b99d059f605cbc6b56578f",
+    "previewSHA256": "d6c6dee1ca308de6517f5a0ee64e38845193accbcde17694e01fe57d1ee1706a"
+  },
+  "sourceFacing": "left",
+  "sheetSHA256": "212f0b565ca3502eaa45490467e2129e15370065a7b99d059f605cbc6b56578f",
+  "previewSHA256": "d6c6dee1ca308de6517f5a0ee64e38845193accbcde17694e01fe57d1ee1706a",
+  "sourceNormalization": {
+    "operation": "exact horizontal mirror within each output atlas cell",
+    "frameWidth": 512,
+    "frameHeight": 512,
+    "beforeSheetSHA256": "9145721d2c1e04eafb65d902540b19e5e021985fb48000581bcd55041ab843d4",
+    "afterSheetSHA256": "212f0b565ca3502eaa45490467e2129e15370065a7b99d059f605cbc6b56578f",
+    "historicalGenerationInputsRetained": true,
+    "authoringPosesAndRecordsRemainHistorical": true,
+    "reproduction": "Generate historical sheet then mirror each output cell; no packer execution performed."
   }
 }

@@ -1,0 +1,3599 @@
+{
+  "status": "completed",
+  "changes": {
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-sheet.png": {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-sheet.png",
+      "beforeSha256": "224a1f010aa39e72787b2bb172e7e6013f43cca34e955ae564cdd2ab86020661",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "exact-old-native-alias",
+      "copyFrom": "DesignAssets/Animations/BladeCarapaceV1/bean/idle.png",
+      "expectedAfterSha256": "bfe39f895ef8a220eba2c9eece5472127a7513056617c58e14d8edc2a4a09f6a",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "cellCount": 64
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          2048,
+          0,
+          2560,
+          512
+        ],
+        [
+          2560,
+          0,
+          3072,
+          512
+        ],
+        [
+          3072,
+          0,
+          3584,
+          512
+        ],
+        [
+          3584,
+          0,
+          4096,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          2048,
+          512,
+          2560,
+          1024
+        ],
+        [
+          2560,
+          512,
+          3072,
+          1024
+        ],
+        [
+          3072,
+          512,
+          3584,
+          1024
+        ],
+        [
+          3584,
+          512,
+          4096,
+          1024
+        ],
+        [
+          0,
+          1024,
+          512,
+          1536
+        ],
+        [
+          512,
+          1024,
+          1024,
+          1536
+        ],
+        [
+          1024,
+          1024,
+          1536,
+          1536
+        ],
+        [
+          1536,
+          1024,
+          2048,
+          1536
+        ],
+        [
+          2048,
+          1024,
+          2560,
+          1536
+        ],
+        [
+          2560,
+          1024,
+          3072,
+          1536
+        ],
+        [
+          3072,
+          1024,
+          3584,
+          1536
+        ],
+        [
+          3584,
+          1024,
+          4096,
+          1536
+        ],
+        [
+          0,
+          1536,
+          512,
+          2048
+        ],
+        [
+          512,
+          1536,
+          1024,
+          2048
+        ],
+        [
+          1024,
+          1536,
+          1536,
+          2048
+        ],
+        [
+          1536,
+          1536,
+          2048,
+          2048
+        ],
+        [
+          2048,
+          1536,
+          2560,
+          2048
+        ],
+        [
+          2560,
+          1536,
+          3072,
+          2048
+        ],
+        [
+          3072,
+          1536,
+          3584,
+          2048
+        ],
+        [
+          3584,
+          1536,
+          4096,
+          2048
+        ],
+        [
+          0,
+          2048,
+          512,
+          2560
+        ],
+        [
+          512,
+          2048,
+          1024,
+          2560
+        ],
+        [
+          1024,
+          2048,
+          1536,
+          2560
+        ],
+        [
+          1536,
+          2048,
+          2048,
+          2560
+        ],
+        [
+          2048,
+          2048,
+          2560,
+          2560
+        ],
+        [
+          2560,
+          2048,
+          3072,
+          2560
+        ],
+        [
+          3072,
+          2048,
+          3584,
+          2560
+        ],
+        [
+          3584,
+          2048,
+          4096,
+          2560
+        ],
+        [
+          0,
+          2560,
+          512,
+          3072
+        ],
+        [
+          512,
+          2560,
+          1024,
+          3072
+        ],
+        [
+          1024,
+          2560,
+          1536,
+          3072
+        ],
+        [
+          1536,
+          2560,
+          2048,
+          3072
+        ],
+        [
+          2048,
+          2560,
+          2560,
+          3072
+        ],
+        [
+          2560,
+          2560,
+          3072,
+          3072
+        ],
+        [
+          3072,
+          2560,
+          3584,
+          3072
+        ],
+        [
+          3584,
+          2560,
+          4096,
+          3072
+        ],
+        [
+          0,
+          3072,
+          512,
+          3584
+        ],
+        [
+          512,
+          3072,
+          1024,
+          3584
+        ],
+        [
+          1024,
+          3072,
+          1536,
+          3584
+        ],
+        [
+          1536,
+          3072,
+          2048,
+          3584
+        ],
+        [
+          2048,
+          3072,
+          2560,
+          3584
+        ],
+        [
+          2560,
+          3072,
+          3072,
+          3584
+        ],
+        [
+          3072,
+          3072,
+          3584,
+          3584
+        ],
+        [
+          3584,
+          3072,
+          4096,
+          3584
+        ],
+        [
+          0,
+          3584,
+          512,
+          4096
+        ],
+        [
+          512,
+          3584,
+          1024,
+          4096
+        ],
+        [
+          1024,
+          3584,
+          1536,
+          4096
+        ],
+        [
+          1536,
+          3584,
+          2048,
+          4096
+        ],
+        [
+          2048,
+          3584,
+          2560,
+          4096
+        ],
+        [
+          2560,
+          3584,
+          3072,
+          4096
+        ],
+        [
+          3072,
+          3584,
+          3584,
+          4096
+        ],
+        [
+          3584,
+          3584,
+          4096,
+          4096
+        ]
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-sheet.png",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-sheet.png",
+      "afterPath": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-sheet.png",
+      "afterSha256": "bfe39f895ef8a220eba2c9eece5472127a7513056617c58e14d8edc2a4a09f6a",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": true
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/walk.png": {
+      "image": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/walk.png",
+      "beforeSha256": "50350b05bb653c9b311f3b0df9d7de4b98f555bdc42e1bb9227be55de3538679",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "exact-old-native-alias",
+      "copyFrom": "DesignAssets/Animations/BladeCarapaceV1/bean/walk.png",
+      "expectedAfterSha256": "b8aa99b2b58b001e5c88db77829e16c6661fb4d38356c052119d6b5ca9b1580d",
+      "dimensions": [
+        4096,
+        1536
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "cellCount": 24
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          2048,
+          0,
+          2560,
+          512
+        ],
+        [
+          2560,
+          0,
+          3072,
+          512
+        ],
+        [
+          3072,
+          0,
+          3584,
+          512
+        ],
+        [
+          3584,
+          0,
+          4096,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          2048,
+          512,
+          2560,
+          1024
+        ],
+        [
+          2560,
+          512,
+          3072,
+          1024
+        ],
+        [
+          3072,
+          512,
+          3584,
+          1024
+        ],
+        [
+          3584,
+          512,
+          4096,
+          1024
+        ],
+        [
+          0,
+          1024,
+          512,
+          1536
+        ],
+        [
+          512,
+          1024,
+          1024,
+          1536
+        ],
+        [
+          1024,
+          1024,
+          1536,
+          1536
+        ],
+        [
+          1536,
+          1024,
+          2048,
+          1536
+        ],
+        [
+          2048,
+          1024,
+          2560,
+          1536
+        ],
+        [
+          2560,
+          1024,
+          3072,
+          1536
+        ],
+        [
+          3072,
+          1024,
+          3584,
+          1536
+        ],
+        [
+          3584,
+          1024,
+          4096,
+          1536
+        ]
+      ],
+      "oldImage": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/walk.png",
+      "newImage": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/walk.png",
+      "afterPath": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/walk.png",
+      "afterSha256": "b8aa99b2b58b001e5c88db77829e16c6661fb4d38356c052119d6b5ca9b1580d",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-sheet.png": {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-sheet.png",
+      "beforeSha256": "283a651970a25dfa460a970da1d25dd35c4fcacf4010c09adedae93e20cefa29",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "exact-old-native-alias",
+      "copyFrom": "DesignAssets/Animations/BladeCarapaceV1/bean/attack.png",
+      "expectedAfterSha256": "84717b26137ee10b3077505e390b3d93118ab93ec6028a7c4dc8a3ff54c5b189",
+      "dimensions": [
+        4096,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "cellCount": 16
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          2048,
+          0,
+          2560,
+          512
+        ],
+        [
+          2560,
+          0,
+          3072,
+          512
+        ],
+        [
+          3072,
+          0,
+          3584,
+          512
+        ],
+        [
+          3584,
+          0,
+          4096,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          2048,
+          512,
+          2560,
+          1024
+        ],
+        [
+          2560,
+          512,
+          3072,
+          1024
+        ],
+        [
+          3072,
+          512,
+          3584,
+          1024
+        ],
+        [
+          3584,
+          512,
+          4096,
+          1024
+        ]
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-sheet.png",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-sheet.png",
+      "afterPath": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-sheet.png",
+      "afterSha256": "84717b26137ee10b3077505e390b3d93118ab93ec6028a7c4dc8a3ff54c5b189",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-sheet.png": {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-sheet.png",
+      "beforeSha256": "f527113df73400868252940985be6dc4a54b57f8b5c0d41b1ef18e22f8ae3f0f",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "exact-old-native-alias",
+      "copyFrom": "DesignAssets/Animations/BladeCarapaceV1/bean/hurt.png",
+      "expectedAfterSha256": "86595ee13e2821cf3ae063d5854b904ba6d40627d48d6d9acf772d88589cefa1",
+      "dimensions": [
+        4096,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "cellCount": 16
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          2048,
+          0,
+          2560,
+          512
+        ],
+        [
+          2560,
+          0,
+          3072,
+          512
+        ],
+        [
+          3072,
+          0,
+          3584,
+          512
+        ],
+        [
+          3584,
+          0,
+          4096,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          2048,
+          512,
+          2560,
+          1024
+        ],
+        [
+          2560,
+          512,
+          3072,
+          1024
+        ],
+        [
+          3072,
+          512,
+          3584,
+          1024
+        ],
+        [
+          3584,
+          512,
+          4096,
+          1024
+        ]
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-sheet.png",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-sheet.png",
+      "afterPath": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-sheet.png",
+      "afterSha256": "86595ee13e2821cf3ae063d5854b904ba6d40627d48d6d9acf772d88589cefa1",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-sheet.png": {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-sheet.png",
+      "beforeSha256": "81830034fd0f5ae571bcff173446892c3bcf6744af8158d65e68a555615305ef",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "exact-old-native-alias",
+      "copyFrom": "DesignAssets/Animations/BladeCarapaceV1/bean/birth.png",
+      "expectedAfterSha256": "892db5ae10428cdad2dd9d401e9c30bd5b33e23ddb412b189e509450ff6b0abb",
+      "dimensions": [
+        4096,
+        7680
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "cellCount": 120
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          2048,
+          0,
+          2560,
+          512
+        ],
+        [
+          2560,
+          0,
+          3072,
+          512
+        ],
+        [
+          3072,
+          0,
+          3584,
+          512
+        ],
+        [
+          3584,
+          0,
+          4096,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          2048,
+          512,
+          2560,
+          1024
+        ],
+        [
+          2560,
+          512,
+          3072,
+          1024
+        ],
+        [
+          3072,
+          512,
+          3584,
+          1024
+        ],
+        [
+          3584,
+          512,
+          4096,
+          1024
+        ],
+        [
+          0,
+          1024,
+          512,
+          1536
+        ],
+        [
+          512,
+          1024,
+          1024,
+          1536
+        ],
+        [
+          1024,
+          1024,
+          1536,
+          1536
+        ],
+        [
+          1536,
+          1024,
+          2048,
+          1536
+        ],
+        [
+          2048,
+          1024,
+          2560,
+          1536
+        ],
+        [
+          2560,
+          1024,
+          3072,
+          1536
+        ],
+        [
+          3072,
+          1024,
+          3584,
+          1536
+        ],
+        [
+          3584,
+          1024,
+          4096,
+          1536
+        ],
+        [
+          0,
+          1536,
+          512,
+          2048
+        ],
+        [
+          512,
+          1536,
+          1024,
+          2048
+        ],
+        [
+          1024,
+          1536,
+          1536,
+          2048
+        ],
+        [
+          1536,
+          1536,
+          2048,
+          2048
+        ],
+        [
+          2048,
+          1536,
+          2560,
+          2048
+        ],
+        [
+          2560,
+          1536,
+          3072,
+          2048
+        ],
+        [
+          3072,
+          1536,
+          3584,
+          2048
+        ],
+        [
+          3584,
+          1536,
+          4096,
+          2048
+        ],
+        [
+          0,
+          2048,
+          512,
+          2560
+        ],
+        [
+          512,
+          2048,
+          1024,
+          2560
+        ],
+        [
+          1024,
+          2048,
+          1536,
+          2560
+        ],
+        [
+          1536,
+          2048,
+          2048,
+          2560
+        ],
+        [
+          2048,
+          2048,
+          2560,
+          2560
+        ],
+        [
+          2560,
+          2048,
+          3072,
+          2560
+        ],
+        [
+          3072,
+          2048,
+          3584,
+          2560
+        ],
+        [
+          3584,
+          2048,
+          4096,
+          2560
+        ],
+        [
+          0,
+          2560,
+          512,
+          3072
+        ],
+        [
+          512,
+          2560,
+          1024,
+          3072
+        ],
+        [
+          1024,
+          2560,
+          1536,
+          3072
+        ],
+        [
+          1536,
+          2560,
+          2048,
+          3072
+        ],
+        [
+          2048,
+          2560,
+          2560,
+          3072
+        ],
+        [
+          2560,
+          2560,
+          3072,
+          3072
+        ],
+        [
+          3072,
+          2560,
+          3584,
+          3072
+        ],
+        [
+          3584,
+          2560,
+          4096,
+          3072
+        ],
+        [
+          0,
+          3072,
+          512,
+          3584
+        ],
+        [
+          512,
+          3072,
+          1024,
+          3584
+        ],
+        [
+          1024,
+          3072,
+          1536,
+          3584
+        ],
+        [
+          1536,
+          3072,
+          2048,
+          3584
+        ],
+        [
+          2048,
+          3072,
+          2560,
+          3584
+        ],
+        [
+          2560,
+          3072,
+          3072,
+          3584
+        ],
+        [
+          3072,
+          3072,
+          3584,
+          3584
+        ],
+        [
+          3584,
+          3072,
+          4096,
+          3584
+        ],
+        [
+          0,
+          3584,
+          512,
+          4096
+        ],
+        [
+          512,
+          3584,
+          1024,
+          4096
+        ],
+        [
+          1024,
+          3584,
+          1536,
+          4096
+        ],
+        [
+          1536,
+          3584,
+          2048,
+          4096
+        ],
+        [
+          2048,
+          3584,
+          2560,
+          4096
+        ],
+        [
+          2560,
+          3584,
+          3072,
+          4096
+        ],
+        [
+          3072,
+          3584,
+          3584,
+          4096
+        ],
+        [
+          3584,
+          3584,
+          4096,
+          4096
+        ],
+        [
+          0,
+          4096,
+          512,
+          4608
+        ],
+        [
+          512,
+          4096,
+          1024,
+          4608
+        ],
+        [
+          1024,
+          4096,
+          1536,
+          4608
+        ],
+        [
+          1536,
+          4096,
+          2048,
+          4608
+        ],
+        [
+          2048,
+          4096,
+          2560,
+          4608
+        ],
+        [
+          2560,
+          4096,
+          3072,
+          4608
+        ],
+        [
+          3072,
+          4096,
+          3584,
+          4608
+        ],
+        [
+          3584,
+          4096,
+          4096,
+          4608
+        ],
+        [
+          0,
+          4608,
+          512,
+          5120
+        ],
+        [
+          512,
+          4608,
+          1024,
+          5120
+        ],
+        [
+          1024,
+          4608,
+          1536,
+          5120
+        ],
+        [
+          1536,
+          4608,
+          2048,
+          5120
+        ],
+        [
+          2048,
+          4608,
+          2560,
+          5120
+        ],
+        [
+          2560,
+          4608,
+          3072,
+          5120
+        ],
+        [
+          3072,
+          4608,
+          3584,
+          5120
+        ],
+        [
+          3584,
+          4608,
+          4096,
+          5120
+        ],
+        [
+          0,
+          5120,
+          512,
+          5632
+        ],
+        [
+          512,
+          5120,
+          1024,
+          5632
+        ],
+        [
+          1024,
+          5120,
+          1536,
+          5632
+        ],
+        [
+          1536,
+          5120,
+          2048,
+          5632
+        ],
+        [
+          2048,
+          5120,
+          2560,
+          5632
+        ],
+        [
+          2560,
+          5120,
+          3072,
+          5632
+        ],
+        [
+          3072,
+          5120,
+          3584,
+          5632
+        ],
+        [
+          3584,
+          5120,
+          4096,
+          5632
+        ],
+        [
+          0,
+          5632,
+          512,
+          6144
+        ],
+        [
+          512,
+          5632,
+          1024,
+          6144
+        ],
+        [
+          1024,
+          5632,
+          1536,
+          6144
+        ],
+        [
+          1536,
+          5632,
+          2048,
+          6144
+        ],
+        [
+          2048,
+          5632,
+          2560,
+          6144
+        ],
+        [
+          2560,
+          5632,
+          3072,
+          6144
+        ],
+        [
+          3072,
+          5632,
+          3584,
+          6144
+        ],
+        [
+          3584,
+          5632,
+          4096,
+          6144
+        ],
+        [
+          0,
+          6144,
+          512,
+          6656
+        ],
+        [
+          512,
+          6144,
+          1024,
+          6656
+        ],
+        [
+          1024,
+          6144,
+          1536,
+          6656
+        ],
+        [
+          1536,
+          6144,
+          2048,
+          6656
+        ],
+        [
+          2048,
+          6144,
+          2560,
+          6656
+        ],
+        [
+          2560,
+          6144,
+          3072,
+          6656
+        ],
+        [
+          3072,
+          6144,
+          3584,
+          6656
+        ],
+        [
+          3584,
+          6144,
+          4096,
+          6656
+        ],
+        [
+          0,
+          6656,
+          512,
+          7168
+        ],
+        [
+          512,
+          6656,
+          1024,
+          7168
+        ],
+        [
+          1024,
+          6656,
+          1536,
+          7168
+        ],
+        [
+          1536,
+          6656,
+          2048,
+          7168
+        ],
+        [
+          2048,
+          6656,
+          2560,
+          7168
+        ],
+        [
+          2560,
+          6656,
+          3072,
+          7168
+        ],
+        [
+          3072,
+          6656,
+          3584,
+          7168
+        ],
+        [
+          3584,
+          6656,
+          4096,
+          7168
+        ],
+        [
+          0,
+          7168,
+          512,
+          7680
+        ],
+        [
+          512,
+          7168,
+          1024,
+          7680
+        ],
+        [
+          1024,
+          7168,
+          1536,
+          7680
+        ],
+        [
+          1536,
+          7168,
+          2048,
+          7680
+        ],
+        [
+          2048,
+          7168,
+          2560,
+          7680
+        ],
+        [
+          2560,
+          7168,
+          3072,
+          7680
+        ],
+        [
+          3072,
+          7168,
+          3584,
+          7680
+        ],
+        [
+          3584,
+          7168,
+          4096,
+          7680
+        ]
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-sheet.png",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-sheet.png",
+      "afterPath": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-sheet.png",
+      "afterSha256": "892db5ae10428cdad2dd9d401e9c30bd5b33e23ddb412b189e509450ff6b0abb",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-sheet.png": {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-sheet.png",
+      "beforeSha256": "a85debf844b60efb60f5c713f5e1eab8ccbbcbe574d45e448995e834c38ec1f0",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "exact-old-native-alias",
+      "copyFrom": "DesignAssets/Animations/BladeCarapaceV1/bean/death.png",
+      "expectedAfterSha256": "6a9144185416a3d1903809f4aeb76fca146504598d96d42bcbcac3d45d50c4ad",
+      "dimensions": [
+        4096,
+        1024
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 8,
+        "cellCount": 16
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          2048,
+          0,
+          2560,
+          512
+        ],
+        [
+          2560,
+          0,
+          3072,
+          512
+        ],
+        [
+          3072,
+          0,
+          3584,
+          512
+        ],
+        [
+          3584,
+          0,
+          4096,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          2048,
+          512,
+          2560,
+          1024
+        ],
+        [
+          2560,
+          512,
+          3072,
+          1024
+        ],
+        [
+          3072,
+          512,
+          3584,
+          1024
+        ],
+        [
+          3584,
+          512,
+          4096,
+          1024
+        ]
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-sheet.png",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-sheet.png",
+      "afterPath": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-sheet.png",
+      "afterSha256": "6a9144185416a3d1903809f4aeb76fca146504598d96d42bcbcac3d45d50c4ad",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": true
+      }
+    },
+    "DesignAssets/Animations/UnitAppearanceV1/bean/03/Source/neutral.png": {
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/03/Source/neutral.png",
+      "beforeSha256": "bf4aeca1d1ebd509ef47b675bb81e70beb8317d445434b000e2f4e07c71c42cd",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "source-appearance",
+      "dimensions": [
+        512,
+        512
+      ],
+      "grid": {
+        "columns": 1,
+        "rows": 1,
+        "cellCount": 1,
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "explicitUnevenCells": false
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "gridEvidence": "generation-prompts.json: explicit 4x2 whole-body actions, 4x4 birth; birth raw visually checked as sixteen row-major cels; reference images are single full portraits.",
+      "oldImage": "DesignAssets/Animations/UnitAppearanceV1/bean/03/Source/neutral.png",
+      "newImage": "DesignAssets/Animations/UnitAppearanceV1/bean/03/Source/neutral.png",
+      "afterPath": "DesignAssets/Animations/UnitAppearanceV1/bean/03/Source/neutral.png",
+      "afterSha256": "cc9d10c6d12a459db7e3966beb696ead3123b1261423840724272f99c01c95da",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": false
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-native.png": {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-native.png",
+      "beforeSha256": "fbaf453de585b29d8245cd8ee8349bd8d896ab314877f65c3bdfecaaca30cc6a",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "raw-source",
+      "dimensions": [
+        627,
+        627
+      ],
+      "grid": {
+        "columns": 1,
+        "rows": 1,
+        "cellCount": 1,
+        "frameWidth": 627,
+        "frameHeight": 627,
+        "explicitUnevenCells": false
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          627,
+          627
+        ]
+      ],
+      "gridEvidence": "generation-prompts.json: explicit 4x2 whole-body actions, 4x4 birth; birth raw visually checked as sixteen row-major cels; reference images are single full portraits.",
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-native.png",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-native.png",
+      "afterPath": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-native.png",
+      "afterSha256": "5235bcf9507c262274ef5f558385ff3eed9f853648d395b50b964bca80faac16",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": false
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-neutral.png": {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-neutral.png",
+      "beforeSha256": "bf4aeca1d1ebd509ef47b675bb81e70beb8317d445434b000e2f4e07c71c42cd",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "raw-source",
+      "dimensions": [
+        512,
+        512
+      ],
+      "grid": {
+        "columns": 1,
+        "rows": 1,
+        "cellCount": 1,
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "explicitUnevenCells": false
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ],
+      "gridEvidence": "generation-prompts.json: explicit 4x2 whole-body actions, 4x4 birth; birth raw visually checked as sixteen row-major cels; reference images are single full portraits.",
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-neutral.png",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-neutral.png",
+      "afterPath": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-neutral.png",
+      "afterSha256": "cc9d10c6d12a459db7e3966beb696ead3123b1261423840724272f99c01c95da",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": false
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/attack-wholebody-generated.png": {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/attack-wholebody-generated.png",
+      "beforeSha256": "147910c3f3e5e0706c660f3b855750b1d5773ee2050c87aeeaa47c17fd03e2e1",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "raw-source",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "cellCount": 8,
+        "frameWidth": 384,
+        "frameHeight": 512,
+        "explicitUnevenCells": false
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ],
+      "gridEvidence": "generation-prompts.json: explicit 4x2 whole-body actions, 4x4 birth; birth raw visually checked as sixteen row-major cels; reference images are single full portraits.",
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/attack-wholebody-generated.png",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/attack-wholebody-generated.png",
+      "afterPath": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/attack-wholebody-generated.png",
+      "afterSha256": "608c5e73e1cfa652b68135eac1e6908b2ea728bf61c72716f1dc89de45498606",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": false
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/birth-wholebody-generated.png": {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/birth-wholebody-generated.png",
+      "beforeSha256": "e5a1944436ef338600c4641801887e84c1b00b3e84161954d76e72f8dd8231a8",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "raw-source",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 4,
+        "cellCount": 16,
+        "frameWidth": null,
+        "frameHeight": null,
+        "explicitUnevenCells": true
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          314,
+          314
+        ],
+        [
+          314,
+          0,
+          627,
+          314
+        ],
+        [
+          627,
+          0,
+          940,
+          314
+        ],
+        [
+          940,
+          0,
+          1254,
+          314
+        ],
+        [
+          0,
+          314,
+          314,
+          627
+        ],
+        [
+          314,
+          314,
+          627,
+          627
+        ],
+        [
+          627,
+          314,
+          940,
+          627
+        ],
+        [
+          940,
+          314,
+          1254,
+          627
+        ],
+        [
+          0,
+          627,
+          314,
+          940
+        ],
+        [
+          314,
+          627,
+          627,
+          940
+        ],
+        [
+          627,
+          627,
+          940,
+          940
+        ],
+        [
+          940,
+          627,
+          1254,
+          940
+        ],
+        [
+          0,
+          940,
+          314,
+          1254
+        ],
+        [
+          314,
+          940,
+          627,
+          1254
+        ],
+        [
+          627,
+          940,
+          940,
+          1254
+        ],
+        [
+          940,
+          940,
+          1254,
+          1254
+        ]
+      ],
+      "gridEvidence": "generation-prompts.json: explicit 4x2 whole-body actions, 4x4 birth; birth raw visually checked as sixteen row-major cels; reference images are single full portraits.",
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/birth-wholebody-generated.png",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/birth-wholebody-generated.png",
+      "afterPath": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/birth-wholebody-generated.png",
+      "afterSha256": "8c4793041aecdc013c868b8e45f92ad643ceac977b98679ab5a3196db06fa3e9",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": false
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/death-wholebody-generated.png": {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/death-wholebody-generated.png",
+      "beforeSha256": "06d6c12837d74b298e354e2d425eb9aac152af6ccc59e53989316ca64a3a23d6",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "raw-source",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "cellCount": 8,
+        "frameWidth": 384,
+        "frameHeight": 512,
+        "explicitUnevenCells": false
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ],
+      "gridEvidence": "generation-prompts.json: explicit 4x2 whole-body actions, 4x4 birth; birth raw visually checked as sixteen row-major cels; reference images are single full portraits.",
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/death-wholebody-generated.png",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/death-wholebody-generated.png",
+      "afterPath": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/death-wholebody-generated.png",
+      "afterSha256": "ea29e6513aa1f1b4ff04df3321e39bedc7979181b908a0209f54231932922910",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": false
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/hurt-wholebody-generated.png": {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/hurt-wholebody-generated.png",
+      "beforeSha256": "5b8dba2c0b29e6861c073000eaaa8372fa47a39faa704952517c2bc47cd58ecf",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "raw-source",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "cellCount": 8,
+        "frameWidth": 384,
+        "frameHeight": 512,
+        "explicitUnevenCells": false
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ],
+      "gridEvidence": "generation-prompts.json: explicit 4x2 whole-body actions, 4x4 birth; birth raw visually checked as sixteen row-major cels; reference images are single full portraits.",
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/hurt-wholebody-generated.png",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/hurt-wholebody-generated.png",
+      "afterPath": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/hurt-wholebody-generated.png",
+      "afterSha256": "2af90730cff81d747ee5d19d95f8100da3821ab615ea99c3bcaa782e718a9c55",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": false
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/idle-wholebody-generated.png": {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/idle-wholebody-generated.png",
+      "beforeSha256": "63690d4ff5bfc15cfa820a305ee60e62149b921e15a8604d6784f63947a90172",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "raw-source",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "cellCount": 8,
+        "frameWidth": 384,
+        "frameHeight": 512,
+        "explicitUnevenCells": false
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ],
+      "gridEvidence": "generation-prompts.json: explicit 4x2 whole-body actions, 4x4 birth; birth raw visually checked as sixteen row-major cels; reference images are single full portraits.",
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/idle-wholebody-generated.png",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/idle-wholebody-generated.png",
+      "afterPath": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/idle-wholebody-generated.png",
+      "afterSha256": "d5656624125207ac006b3b5a2b74f1c076d874e181b898d784eb0a9eb7189dd9",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": false
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/walk-wholebody-generated.png": {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/walk-wholebody-generated.png",
+      "beforeSha256": "32bb1a4c39abbb1592e96228720d52d476962a988a900685c65a36e5b1d6dae4",
+      "selectedUsers": [
+        "bean/blade-carapace"
+      ],
+      "kind": "raw-source",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "cellCount": 8,
+        "frameWidth": 384,
+        "frameHeight": 512,
+        "explicitUnevenCells": false
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ],
+      "gridEvidence": "generation-prompts.json: explicit 4x2 whole-body actions, 4x4 birth; birth raw visually checked as sixteen row-major cels; reference images are single full portraits.",
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/walk-wholebody-generated.png",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/walk-wholebody-generated.png",
+      "afterPath": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/walk-wholebody-generated.png",
+      "afterSha256": "0fe027926c6c8f9b2658ec8ffc76400054c727c4e75ef0ce0c867dd838cccd00",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": false
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-idle-v1-sheet.png": {
+      "image": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-idle-v1-sheet.png",
+      "beforeSha256": "007f9fa60707e73dc658c16585dcef8205d8fb75566c67600787a0895a84b2c8",
+      "selectedUsers": [
+        "spore/blade-carapace"
+      ],
+      "kind": "exact-old-native-alias",
+      "copyFrom": "DesignAssets/Animations/BladeCarapaceV1/spore/idle.png",
+      "expectedAfterSha256": "e1c823cb1eb1146fc120d5cdc4247673612932918f963ca271fe0b9a38fcfadb",
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 16
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          0,
+          1024,
+          512,
+          1536
+        ],
+        [
+          512,
+          1024,
+          1024,
+          1536
+        ],
+        [
+          1024,
+          1024,
+          1536,
+          1536
+        ],
+        [
+          1536,
+          1024,
+          2048,
+          1536
+        ],
+        [
+          0,
+          1536,
+          512,
+          2048
+        ],
+        [
+          512,
+          1536,
+          1024,
+          2048
+        ],
+        [
+          1024,
+          1536,
+          1536,
+          2048
+        ],
+        [
+          1536,
+          1536,
+          2048,
+          2048
+        ]
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-idle-v1-sheet.png",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-idle-v1-sheet.png",
+      "afterPath": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-idle-v1-sheet.png",
+      "afterSha256": "e1c823cb1eb1146fc120d5cdc4247673612932918f963ca271fe0b9a38fcfadb",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-walk-v1-sheet.png": {
+      "image": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-walk-v1-sheet.png",
+      "beforeSha256": "3cbbe09d3d0a6058072710763bf82006dc703f54d466abbe4d628134deb0cd73",
+      "selectedUsers": [
+        "spore/blade-carapace"
+      ],
+      "kind": "exact-old-native-alias",
+      "copyFrom": "DesignAssets/Animations/BladeCarapaceV1/spore/walk.png",
+      "expectedAfterSha256": "9081e5a1b4af3fb308bcacfdbd0ac8b2ab52c7282ac6a271c0d6b52c88b47945",
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 16
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          0,
+          1024,
+          512,
+          1536
+        ],
+        [
+          512,
+          1024,
+          1024,
+          1536
+        ],
+        [
+          1024,
+          1024,
+          1536,
+          1536
+        ],
+        [
+          1536,
+          1024,
+          2048,
+          1536
+        ],
+        [
+          0,
+          1536,
+          512,
+          2048
+        ],
+        [
+          512,
+          1536,
+          1024,
+          2048
+        ],
+        [
+          1024,
+          1536,
+          1536,
+          2048
+        ],
+        [
+          1536,
+          1536,
+          2048,
+          2048
+        ]
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-walk-v1-sheet.png",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-walk-v1-sheet.png",
+      "afterPath": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-walk-v1-sheet.png",
+      "afterSha256": "9081e5a1b4af3fb308bcacfdbd0ac8b2ab52c7282ac6a271c0d6b52c88b47945",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-melee-v1-sheet.png": {
+      "image": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-melee-v1-sheet.png",
+      "beforeSha256": "5e27541a49c5d2f007a515f74d20cf5d8cc48da972b728eb15a217120aa3521f",
+      "selectedUsers": [
+        "spore/blade-carapace"
+      ],
+      "kind": "exact-old-native-alias",
+      "copyFrom": "DesignAssets/Animations/BladeCarapaceV1/spore/attack.png",
+      "expectedAfterSha256": "06603010985884f74b793298196bcedc58be5f0ffb302ad8771d82fa5a7b57eb",
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 16
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          0,
+          1024,
+          512,
+          1536
+        ],
+        [
+          512,
+          1024,
+          1024,
+          1536
+        ],
+        [
+          1024,
+          1024,
+          1536,
+          1536
+        ],
+        [
+          1536,
+          1024,
+          2048,
+          1536
+        ],
+        [
+          0,
+          1536,
+          512,
+          2048
+        ],
+        [
+          512,
+          1536,
+          1024,
+          2048
+        ],
+        [
+          1024,
+          1536,
+          1536,
+          2048
+        ],
+        [
+          1536,
+          1536,
+          2048,
+          2048
+        ]
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-melee-v1-sheet.png",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-melee-v1-sheet.png",
+      "afterPath": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-melee-v1-sheet.png",
+      "afterSha256": "06603010985884f74b793298196bcedc58be5f0ffb302ad8771d82fa5a7b57eb",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-hurt-v1-sheet.png": {
+      "image": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-hurt-v1-sheet.png",
+      "beforeSha256": "bee95289a86ebe94f5ea186fb2224876e6fb10df11967c88ddfd803f3660b852",
+      "selectedUsers": [
+        "spore/blade-carapace"
+      ],
+      "kind": "exact-old-native-alias",
+      "copyFrom": "DesignAssets/Animations/BladeCarapaceV1/spore/hurt.png",
+      "expectedAfterSha256": "0740cd379b4c2a264443c73e87efdbf64d765cc854f5140d3a39013a62967291",
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 16
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          0,
+          1024,
+          512,
+          1536
+        ],
+        [
+          512,
+          1024,
+          1024,
+          1536
+        ],
+        [
+          1024,
+          1024,
+          1536,
+          1536
+        ],
+        [
+          1536,
+          1024,
+          2048,
+          1536
+        ],
+        [
+          0,
+          1536,
+          512,
+          2048
+        ],
+        [
+          512,
+          1536,
+          1024,
+          2048
+        ],
+        [
+          1024,
+          1536,
+          1536,
+          2048
+        ],
+        [
+          1536,
+          1536,
+          2048,
+          2048
+        ]
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-hurt-v1-sheet.png",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-hurt-v1-sheet.png",
+      "afterPath": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-hurt-v1-sheet.png",
+      "afterSha256": "0740cd379b4c2a264443c73e87efdbf64d765cc854f5140d3a39013a62967291",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-death-v1-sheet.png": {
+      "image": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-death-v1-sheet.png",
+      "beforeSha256": "a8c9ac8501b435acea375093858b0c7ba6e5f8a922f270f8598da49c59b0b215",
+      "selectedUsers": [
+        "spore/blade-carapace"
+      ],
+      "kind": "exact-old-native-alias",
+      "copyFrom": "DesignAssets/Animations/BladeCarapaceV1/spore/death.png",
+      "expectedAfterSha256": "ce9bd812f0bcf5db1bca152ba74b9553e543c2224c941d7690d682b680b5c251",
+      "dimensions": [
+        2048,
+        2048
+      ],
+      "grid": {
+        "frameWidth": 512,
+        "frameHeight": 512,
+        "columns": 4,
+        "cellCount": 16
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          1024,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2048,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ],
+        [
+          1024,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2048,
+          1024
+        ],
+        [
+          0,
+          1024,
+          512,
+          1536
+        ],
+        [
+          512,
+          1024,
+          1024,
+          1536
+        ],
+        [
+          1024,
+          1024,
+          1536,
+          1536
+        ],
+        [
+          1536,
+          1024,
+          2048,
+          1536
+        ],
+        [
+          0,
+          1536,
+          512,
+          2048
+        ],
+        [
+          512,
+          1536,
+          1024,
+          2048
+        ],
+        [
+          1024,
+          1536,
+          1536,
+          2048
+        ],
+        [
+          1536,
+          1536,
+          2048,
+          2048
+        ]
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-death-v1-sheet.png",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-death-v1-sheet.png",
+      "afterPath": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-death-v1-sheet.png",
+      "afterSha256": "ce9bd812f0bcf5db1bca152ba74b9553e543c2224c941d7690d682b680b5c251",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-birth-v1-sheet.png": {
+      "image": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-birth-v1-sheet.png",
+      "beforeSha256": "043b9d2ba78b73121a4cfb2ff664a88fc9d5a606ef28777e31e6f3a77820fea2",
+      "selectedUsers": [
+        "spore/blade-carapace"
+      ],
+      "kind": "exact-old-native-alias",
+      "copyFrom": "DesignAssets/Animations/BladeCarapaceV1/spore/birth.png",
+      "expectedAfterSha256": "97b89f40b406ba1dee9d3db698c8fb4060b0794b7fae8ca470e32483c8772452",
+      "dimensions": [
+        6144,
+        5120
+      ],
+      "grid": {
+        "frameWidth": 768,
+        "frameHeight": 512,
+        "columns": 8,
+        "cellCount": 80
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1536,
+          512
+        ],
+        [
+          1536,
+          0,
+          2304,
+          512
+        ],
+        [
+          2304,
+          0,
+          3072,
+          512
+        ],
+        [
+          3072,
+          0,
+          3840,
+          512
+        ],
+        [
+          3840,
+          0,
+          4608,
+          512
+        ],
+        [
+          4608,
+          0,
+          5376,
+          512
+        ],
+        [
+          5376,
+          0,
+          6144,
+          512
+        ],
+        [
+          0,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1536,
+          1024
+        ],
+        [
+          1536,
+          512,
+          2304,
+          1024
+        ],
+        [
+          2304,
+          512,
+          3072,
+          1024
+        ],
+        [
+          3072,
+          512,
+          3840,
+          1024
+        ],
+        [
+          3840,
+          512,
+          4608,
+          1024
+        ],
+        [
+          4608,
+          512,
+          5376,
+          1024
+        ],
+        [
+          5376,
+          512,
+          6144,
+          1024
+        ],
+        [
+          0,
+          1024,
+          768,
+          1536
+        ],
+        [
+          768,
+          1024,
+          1536,
+          1536
+        ],
+        [
+          1536,
+          1024,
+          2304,
+          1536
+        ],
+        [
+          2304,
+          1024,
+          3072,
+          1536
+        ],
+        [
+          3072,
+          1024,
+          3840,
+          1536
+        ],
+        [
+          3840,
+          1024,
+          4608,
+          1536
+        ],
+        [
+          4608,
+          1024,
+          5376,
+          1536
+        ],
+        [
+          5376,
+          1024,
+          6144,
+          1536
+        ],
+        [
+          0,
+          1536,
+          768,
+          2048
+        ],
+        [
+          768,
+          1536,
+          1536,
+          2048
+        ],
+        [
+          1536,
+          1536,
+          2304,
+          2048
+        ],
+        [
+          2304,
+          1536,
+          3072,
+          2048
+        ],
+        [
+          3072,
+          1536,
+          3840,
+          2048
+        ],
+        [
+          3840,
+          1536,
+          4608,
+          2048
+        ],
+        [
+          4608,
+          1536,
+          5376,
+          2048
+        ],
+        [
+          5376,
+          1536,
+          6144,
+          2048
+        ],
+        [
+          0,
+          2048,
+          768,
+          2560
+        ],
+        [
+          768,
+          2048,
+          1536,
+          2560
+        ],
+        [
+          1536,
+          2048,
+          2304,
+          2560
+        ],
+        [
+          2304,
+          2048,
+          3072,
+          2560
+        ],
+        [
+          3072,
+          2048,
+          3840,
+          2560
+        ],
+        [
+          3840,
+          2048,
+          4608,
+          2560
+        ],
+        [
+          4608,
+          2048,
+          5376,
+          2560
+        ],
+        [
+          5376,
+          2048,
+          6144,
+          2560
+        ],
+        [
+          0,
+          2560,
+          768,
+          3072
+        ],
+        [
+          768,
+          2560,
+          1536,
+          3072
+        ],
+        [
+          1536,
+          2560,
+          2304,
+          3072
+        ],
+        [
+          2304,
+          2560,
+          3072,
+          3072
+        ],
+        [
+          3072,
+          2560,
+          3840,
+          3072
+        ],
+        [
+          3840,
+          2560,
+          4608,
+          3072
+        ],
+        [
+          4608,
+          2560,
+          5376,
+          3072
+        ],
+        [
+          5376,
+          2560,
+          6144,
+          3072
+        ],
+        [
+          0,
+          3072,
+          768,
+          3584
+        ],
+        [
+          768,
+          3072,
+          1536,
+          3584
+        ],
+        [
+          1536,
+          3072,
+          2304,
+          3584
+        ],
+        [
+          2304,
+          3072,
+          3072,
+          3584
+        ],
+        [
+          3072,
+          3072,
+          3840,
+          3584
+        ],
+        [
+          3840,
+          3072,
+          4608,
+          3584
+        ],
+        [
+          4608,
+          3072,
+          5376,
+          3584
+        ],
+        [
+          5376,
+          3072,
+          6144,
+          3584
+        ],
+        [
+          0,
+          3584,
+          768,
+          4096
+        ],
+        [
+          768,
+          3584,
+          1536,
+          4096
+        ],
+        [
+          1536,
+          3584,
+          2304,
+          4096
+        ],
+        [
+          2304,
+          3584,
+          3072,
+          4096
+        ],
+        [
+          3072,
+          3584,
+          3840,
+          4096
+        ],
+        [
+          3840,
+          3584,
+          4608,
+          4096
+        ],
+        [
+          4608,
+          3584,
+          5376,
+          4096
+        ],
+        [
+          5376,
+          3584,
+          6144,
+          4096
+        ],
+        [
+          0,
+          4096,
+          768,
+          4608
+        ],
+        [
+          768,
+          4096,
+          1536,
+          4608
+        ],
+        [
+          1536,
+          4096,
+          2304,
+          4608
+        ],
+        [
+          2304,
+          4096,
+          3072,
+          4608
+        ],
+        [
+          3072,
+          4096,
+          3840,
+          4608
+        ],
+        [
+          3840,
+          4096,
+          4608,
+          4608
+        ],
+        [
+          4608,
+          4096,
+          5376,
+          4608
+        ],
+        [
+          5376,
+          4096,
+          6144,
+          4608
+        ],
+        [
+          0,
+          4608,
+          768,
+          5120
+        ],
+        [
+          768,
+          4608,
+          1536,
+          5120
+        ],
+        [
+          1536,
+          4608,
+          2304,
+          5120
+        ],
+        [
+          2304,
+          4608,
+          3072,
+          5120
+        ],
+        [
+          3072,
+          4608,
+          3840,
+          5120
+        ],
+        [
+          3840,
+          4608,
+          4608,
+          5120
+        ],
+        [
+          4608,
+          4608,
+          5376,
+          5120
+        ],
+        [
+          5376,
+          4608,
+          6144,
+          5120
+        ]
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-birth-v1-sheet.png",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-birth-v1-sheet.png",
+      "afterPath": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-birth-v1-sheet.png",
+      "afterSha256": "97b89f40b406ba1dee9d3db698c8fb4060b0794b7fae8ca470e32483c8772452",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": true
+      }
+    },
+    "DesignAssets/Concepts/CombatPairsV1/spore-blade-carapace.png": {
+      "image": "DesignAssets/Concepts/CombatPairsV1/spore-blade-carapace.png",
+      "beforeSha256": "f16f62f852801ec17a6c21bda59bcd0852f5bb78859c78cde2a02bdf98337a6f",
+      "selectedUsers": [
+        "spore/blade-carapace"
+      ],
+      "kind": "source-appearance",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "grid": {
+        "columns": 1,
+        "rows": 1,
+        "cellCount": 1,
+        "frameWidth": 1254,
+        "frameHeight": 1254,
+        "explicitUnevenCells": false
+      },
+      "cellRectangles": [
+        [
+          0,
+          0,
+          1254,
+          1254
+        ]
+      ],
+      "gridEvidence": "generation-prompts.json: explicit 4x2 whole-body actions, 4x4 birth; birth raw visually checked as sixteen row-major cels; reference images are single full portraits.",
+      "oldImage": "DesignAssets/Concepts/CombatPairsV1/spore-blade-carapace.png",
+      "newImage": "DesignAssets/Concepts/CombatPairsV1/spore-blade-carapace.png",
+      "afterPath": "DesignAssets/Concepts/CombatPairsV1/spore-blade-carapace.png",
+      "afterSha256": "180be785349c8e9ecbeedcbb875cd66bf36ea47125741cf3f16f72ab06f8dd5f",
+      "verification": {
+        "exactRgbaPerCellMirror": true,
+        "alphaExact": true,
+        "geometryUnchanged": true,
+        "byteIdenticalNewNative": false
+      }
+    }
+  },
+  "pathMap": {
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-sheet.png": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-sheet.png",
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/walk.png": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/walk.png",
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-sheet.png": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-sheet.png",
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-sheet.png": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-sheet.png",
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-sheet.png": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-sheet.png",
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-sheet.png": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-sheet.png",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/03/Source/neutral.png": "DesignAssets/Animations/UnitAppearanceV1/bean/03/Source/neutral.png",
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-native.png": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-native.png",
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-neutral.png": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-neutral.png",
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/attack-wholebody-generated.png": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/attack-wholebody-generated.png",
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/birth-wholebody-generated.png": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/birth-wholebody-generated.png",
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/death-wholebody-generated.png": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/death-wholebody-generated.png",
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/hurt-wholebody-generated.png": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/hurt-wholebody-generated.png",
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/idle-wholebody-generated.png": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/idle-wholebody-generated.png",
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/walk-wholebody-generated.png": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/walk-wholebody-generated.png",
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-idle-v1-sheet.png": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-idle-v1-sheet.png",
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-walk-v1-sheet.png": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-walk-v1-sheet.png",
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-melee-v1-sheet.png": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-melee-v1-sheet.png",
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-hurt-v1-sheet.png": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-hurt-v1-sheet.png",
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-death-v1-sheet.png": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-death-v1-sheet.png",
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-birth-v1-sheet.png": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-birth-v1-sheet.png",
+    "DesignAssets/Concepts/CombatPairsV1/spore-blade-carapace.png": "DesignAssets/Concepts/CombatPairsV1/spore-blade-carapace.png"
+  }
+}

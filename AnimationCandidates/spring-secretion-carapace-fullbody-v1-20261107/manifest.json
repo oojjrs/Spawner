@@ -977,8 +977,8 @@
       "webpPreview": "spring-secretion-carapace-ranged-v1-preview.webp",
       "generatedSource": "ranged-generated-source.png",
       "sourceSHA256": "3e2154d65883af64b76bb5c3928d3e2727f163ce3a563e2aed129a0b87344323",
-      "sheetSHA256": "92b23ab75712e51b99f0ff58f8f2063190e44b28c2668f2c04201d2761283402",
-      "previewSHA256": "8395a9c98d2e2295e696102cf94bb918a1b68568c15ba863506e324e413d280c",
+      "sheetSHA256": "2e2ed151aecb229d7072f50ec6f3f9deef2fbb01dd9d039a8166fe3b6b8ef1c4",
+      "previewSHA256": "077b01138f26de9e415496687faaee0fa5c203dc3b029afe8e531c7429dd2d82",
       "frameCount": 16,
       "distinctDrawnPoses": 15,
       "frameSize": 480,
@@ -1443,7 +1443,19 @@
       "referenceLengthMethod": "Alpha >= 16 max(width,height) of neutral whole-body silhouette; birth measures landed final body only, excluding nest.",
       "registrationScale": 1,
       "fullScene": false,
-      "sceneIncludesNest": false
+      "sceneIncludesNest": false,
+      "sourceFacing": "left",
+      "sourceRepair": {
+        "kind": "image-generated-complete-leftward-middle-cels",
+        "sourceFacing": "left",
+        "candidateManifest": "tools/spring-native-facing-20261108/followup13-spring-secretion-carapace-ranged-manifest.json",
+        "validation": "tools/spring-native-facing-20261108/followup13-validation.json",
+        "originalWholeFirstLastCelsPreserved": true,
+        "geometryAndTimingUnchanged": true,
+        "legacyGeneratedSourceAndQAFieldsAreHistorical": true,
+        "mirroring": false,
+        "bodyPartComposition": false
+      }
     },
     "hurt": {
       "action": "hurt",

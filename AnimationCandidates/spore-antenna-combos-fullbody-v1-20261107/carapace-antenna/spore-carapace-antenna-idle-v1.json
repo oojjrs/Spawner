@@ -1,0 +1,575 @@
+{
+  "tribe": "spore",
+  "form": "carapace-antenna",
+  "action": "idle",
+  "status": "complete-for-planning",
+  "frameSize": [
+    512,
+    512
+  ],
+  "columns": 4,
+  "frameCount": 16,
+  "durationsMs": [
+    1000,
+    200,
+    200,
+    100,
+    100,
+    800,
+    200,
+    200,
+    100,
+    200,
+    500,
+    600,
+    200,
+    200,
+    100,
+    1700
+  ],
+  "durationMs": 6400,
+  "loop": true,
+  "previewLoop": true,
+  "sheet": "spore-carapace-antenna-idle-v1-sheet.png",
+  "preview": "spore-carapace-antenna-idle-v1-preview.gif",
+  "webpPreview": "spore-carapace-antenna-idle-v1-preview.webp",
+  "sheetSHA256": "f67b9a485d2804083076f745067c497a819b2edfae302a1c23e32d00f9da858f",
+  "previewSHA256": "0d2cdd86f52d0d2682627788fb194f4f96b5297145e9c798ac5f8a69d5aa1945",
+  "reference": "source.png",
+  "referenceSHA256": "f360f87a9275a45487f25fce8603b0444845be850eca0b230718171a5d9733cf",
+  "method": "Built-in image-generated complete whole-body drawings; cell extraction, one uniform per-clip scale calibration and complete-frame positioning only. No body-part composition, anatomy warping or interpolated body parts. Ranged action uses a complete drawn body, with no embedded projectile.",
+  "validation": {
+    "sourceGridNoOpaqueEdgeCrossing": true,
+    "finalSheetExactFrameRoundtrip": true,
+    "finalNoOpaqueEdgeClipping": true,
+    "previewEncodedFromSavedSheet": true,
+    "gifDurationExact": true,
+    "gifDecodedFrames": 16,
+    "gifDurationMs": 6400
+  },
+  "frames": [
+    {
+      "index": 0,
+      "opaqueBounds": [
+        109,
+        162,
+        403,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "ae9d6c9dcd6a94e180c9a68799da2ccdfa5cd1ef7e277061ac5d6ab96ac2ef82"
+    },
+    {
+      "index": 1,
+      "opaqueBounds": [
+        113,
+        151,
+        405,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "d9e9f5697f1c6a35750654712404564eaf9659944538067472f9c6c6f466d693"
+    },
+    {
+      "index": 2,
+      "opaqueBounds": [
+        112,
+        166,
+        406,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "29b58905367e8c43d808ee99873854a5e5b5690110d142feab37d9d5b8f81959"
+    },
+    {
+      "index": 3,
+      "opaqueBounds": [
+        114,
+        182,
+        407,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "a7905bba72e32f26833e4548fa6b31ecc9f3e7e2e7d48657dd68169a27afeea4"
+    },
+    {
+      "index": 4,
+      "opaqueBounds": [
+        110,
+        162,
+        403,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "bd5bdce419176b80a3ab6d10f283a1f9758667f778207b3429860c17024e6b59"
+    },
+    {
+      "index": 5,
+      "opaqueBounds": [
+        112,
+        163,
+        405,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "6e6cb856134cbe6aed4a3662ceb01947e874b038829804509c2414dcdf334c74"
+    },
+    {
+      "index": 6,
+      "opaqueBounds": [
+        112,
+        158,
+        408,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "09b61a871a2615de5c9a50c43061c0171d1db6cb99f0b791005227dc9c28973d"
+    },
+    {
+      "index": 7,
+      "opaqueBounds": [
+        119,
+        161,
+        411,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "6ea10653cb91bb7b854b16a829c6785f10228e76491ede9933dae383512df229"
+    },
+    {
+      "index": 8,
+      "opaqueBounds": [
+        109,
+        162,
+        406,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "7f3e91c88b856f49408073f9253476223932dfecdfbd56ef7abdcd2a7e96816a"
+    },
+    {
+      "index": 9,
+      "opaqueBounds": [
+        113,
+        163,
+        405,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "ee1fcfa9d5ed4e89dc306fd1dd144162137eb90503d6adbe7ac089ccd879fd33"
+    },
+    {
+      "index": 10,
+      "opaqueBounds": [
+        112,
+        160,
+        405,
+        415
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "138be98f415e382e5f1feecc6c50a71ae6bc97193a3105caf9471514b23fd564"
+    },
+    {
+      "index": 11,
+      "opaqueBounds": [
+        114,
+        152,
+        407,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "2e5b2696385d391107585cecf2574a8b0acad8e96728b254498f3564efd8e2b7"
+    },
+    {
+      "index": 12,
+      "opaqueBounds": [
+        109,
+        161,
+        405,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "80c61ca970cfa22175d26296a0cc2998f3a0f7b2e307a928ec60b119a13984db"
+    },
+    {
+      "index": 13,
+      "opaqueBounds": [
+        111,
+        163,
+        406,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "988efa0ab620a7fdd78ae1a2068fa8259e6c1fcb8eb0fae5ed7ca801572b461a"
+    },
+    {
+      "index": 14,
+      "opaqueBounds": [
+        111,
+        162,
+        405,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "f948dd1a390244aa3b671864027665733df7ad3072540be86cac8e9665aad22d"
+    },
+    {
+      "index": 15,
+      "opaqueBounds": [
+        111,
+        163,
+        405,
+        416
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "39868bfe9f83464ed70a9fd4d2e1f4f36b06354b3cf45c48607bf3fa40c83abb"
+    }
+  ],
+  "integration": "Planning-only deliverable. No game runtime wiring or deployment.",
+  "source": "sources/idle-generated.png",
+  "sourceSHA256": "87a097b6f260d59a5b4dd5d4d8388afecc7363fcce794d14aa41ef00921e85dc",
+  "registration": [
+    {
+      "index": 0,
+      "sourceCell": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "sourceOpaqueBounds": [
+        11,
+        44,
+        294,
+        287
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        97,
+        117
+      ]
+    },
+    {
+      "index": 1,
+      "sourceCell": [
+        314,
+        0,
+        627,
+        314
+      ],
+      "sourceOpaqueBounds": [
+        15,
+        33,
+        295,
+        287
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        98,
+        117
+      ]
+    },
+    {
+      "index": 2,
+      "sourceCell": [
+        627,
+        0,
+        940,
+        314
+      ],
+      "sourceOpaqueBounds": [
+        14,
+        47,
+        296,
+        287
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        98,
+        117
+      ]
+    },
+    {
+      "index": 3,
+      "sourceCell": [
+        940,
+        0,
+        1254,
+        314
+      ],
+      "sourceOpaqueBounds": [
+        16,
+        62,
+        298,
+        287
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        97,
+        117
+      ]
+    },
+    {
+      "index": 4,
+      "sourceCell": [
+        0,
+        314,
+        314,
+        627
+      ],
+      "sourceOpaqueBounds": [
+        13,
+        42,
+        293,
+        285
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        97,
+        119
+      ]
+    },
+    {
+      "index": 5,
+      "sourceCell": [
+        314,
+        314,
+        627,
+        627
+      ],
+      "sourceOpaqueBounds": [
+        14,
+        43,
+        295,
+        285
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        98,
+        119
+      ]
+    },
+    {
+      "index": 6,
+      "sourceCell": [
+        627,
+        314,
+        940,
+        627
+      ],
+      "sourceOpaqueBounds": [
+        13,
+        38,
+        298,
+        285
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        98,
+        119
+      ]
+    },
+    {
+      "index": 7,
+      "sourceCell": [
+        940,
+        314,
+        1254,
+        627
+      ],
+      "sourceOpaqueBounds": [
+        21,
+        40,
+        302,
+        285
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        97,
+        119
+      ]
+    },
+    {
+      "index": 8,
+      "sourceCell": [
+        0,
+        627,
+        314,
+        940
+      ],
+      "sourceOpaqueBounds": [
+        12,
+        41,
+        297,
+        285
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        97,
+        119
+      ]
+    },
+    {
+      "index": 9,
+      "sourceCell": [
+        314,
+        627,
+        627,
+        940
+      ],
+      "sourceOpaqueBounds": [
+        14,
+        42,
+        295,
+        285
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        98,
+        119
+      ]
+    },
+    {
+      "index": 10,
+      "sourceCell": [
+        627,
+        627,
+        940,
+        940
+      ],
+      "sourceOpaqueBounds": [
+        13,
+        39,
+        294,
+        285
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        98,
+        119
+      ]
+    },
+    {
+      "index": 11,
+      "sourceCell": [
+        940,
+        627,
+        1254,
+        940
+      ],
+      "sourceOpaqueBounds": [
+        16,
+        30,
+        298,
+        284
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        97,
+        120
+      ]
+    },
+    {
+      "index": 12,
+      "sourceCell": [
+        0,
+        940,
+        314,
+        1254
+      ],
+      "sourceOpaqueBounds": [
+        12,
+        41,
+        296,
+        285
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        97,
+        119
+      ]
+    },
+    {
+      "index": 13,
+      "sourceCell": [
+        314,
+        940,
+        627,
+        1254
+      ],
+      "sourceOpaqueBounds": [
+        13,
+        42,
+        296,
+        285
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        98,
+        119
+      ]
+    },
+    {
+      "index": 14,
+      "sourceCell": [
+        627,
+        940,
+        940,
+        1254
+      ],
+      "sourceOpaqueBounds": [
+        13,
+        41,
+        295,
+        285
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        98,
+        119
+      ]
+    },
+    {
+      "index": 15,
+      "sourceCell": [
+        940,
+        940,
+        1254,
+        1254
+      ],
+      "sourceOpaqueBounds": [
+        13,
+        42,
+        296,
+        285
+      ],
+      "opaqueEdgePixels": 0,
+      "wholeFrameUniformScale": 1.0424028268551238,
+      "wholeFrameOffset": [
+        97,
+        119
+      ]
+    }
+  ],
+  "pivot": [
+    256,
+    416
+  ],
+  "rangedAttack": false,
+  "sourceFacing": "left"
+}

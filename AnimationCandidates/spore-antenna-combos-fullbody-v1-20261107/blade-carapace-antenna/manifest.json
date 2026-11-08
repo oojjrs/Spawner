@@ -1,0 +1,180 @@
+{
+  "tribe": "spore",
+  "form": "blade-carapace-antenna",
+  "displayName": "포자버섯 칼날+갑각+안테나",
+  "status": "complete-for-planning",
+  "reference": "source.png",
+  "source": "source.png",
+  "sourceSHA256": "dc8dd1d674e076361e409ee9731190fddfcd20f62f0e3ea39f57f6a4c16d9add",
+  "actions": [
+    {
+      "action": "idle",
+      "sheet": "spore-blade-carapace-antenna-idle-v1-sheet.png",
+      "preview": "spore-blade-carapace-antenna-idle-v1-preview.gif",
+      "webpPreview": "spore-blade-carapace-antenna-idle-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 6400,
+      "loop": true,
+      "sheetSHA256": "d836cb5158d32d3cf1f11bb21873dba7fc43eeb8cf8b652a2836b0f9ad4826ad",
+      "previewSHA256": "90190b84e61b2828c927e44337b61258415e160abf43068a11b86c2a3d8e4d25",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "walk",
+      "sheet": "spore-blade-carapace-antenna-walk-v1-sheet.png",
+      "preview": "spore-blade-carapace-antenna-walk-v1-preview.gif",
+      "webpPreview": "spore-blade-carapace-antenna-walk-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 1120,
+      "loop": true,
+      "sheetSHA256": "97397b1936b56b2bf3b9991ff95c1cf202cb3fa479378125135aaf8f7e01a4aa",
+      "previewSHA256": "1bbcc1c87061614bb76d374ee64a5c8304b0a405743a6d495732acd225f771d2",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "melee",
+      "sheet": "spore-blade-carapace-antenna-melee-v1-sheet.png",
+      "preview": "spore-blade-carapace-antenna-melee-v1-preview.gif",
+      "webpPreview": "spore-blade-carapace-antenna-melee-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 900,
+      "loop": false,
+      "sheetSHA256": "3a399b200520c10c54d2c0928867f2fb6ee34a6f82b076fbbcf6eb0aca7c65af",
+      "previewSHA256": "f979dfab88ce6663ec5a2b7f974fdcc6f49ad3e97f771e57b66bd0b568afced9",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "hurt",
+      "sheet": "spore-blade-carapace-antenna-hurt-v1-sheet.png",
+      "preview": "spore-blade-carapace-antenna-hurt-v1-preview.gif",
+      "webpPreview": "spore-blade-carapace-antenna-hurt-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 960,
+      "loop": false,
+      "sheetSHA256": "d0b3d41ea1d1400e765161213d3b7a10099a1469ce6cd2b4d900ad5dcedb165d",
+      "previewSHA256": "4c2b93bdc4b54e505b967022e6c671ce7e9f9f43f4bcd86cfef6c2de0f0ce4c5",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "death",
+      "sheet": "spore-blade-carapace-antenna-death-v1-sheet.png",
+      "preview": "spore-blade-carapace-antenna-death-v1-preview.gif",
+      "webpPreview": "spore-blade-carapace-antenna-death-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 1440,
+      "loop": false,
+      "sheetSHA256": "7e9d5576d486f4ec4044ae86beeecc2c7f8f24c1d9416c544fcaabc9307b1cba",
+      "previewSHA256": "799a5ef2e982a0b6a91da7075596cf304a408a2b5c0e023a78f324a8088f9dc6",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "birth",
+      "sheet": "spore-blade-carapace-antenna-birth-v1-sheet.png",
+      "preview": "spore-blade-carapace-antenna-birth-v1-preview.gif",
+      "webpPreview": "spore-blade-carapace-antenna-birth-v1-preview.webp",
+      "frameSize": [
+        768,
+        512
+      ],
+      "columns": 8,
+      "frameCount": 78,
+      "durationMs": 3120,
+      "loop": false,
+      "sheetSHA256": "30e02e2573532d0510d329496e9462edc8f784320a94cea7a0dbf24c8513f62d",
+      "previewSHA256": "8451c6fd5c79b0054432b838d83b5577c02a596e4e38cc36aa8436e3a7b65ea2",
+      "sourceFacing": "left"
+    }
+  ],
+  "excludedActions": [
+    "ranged"
+  ],
+  "bodyPartComposition": false,
+  "runtimeModified": false,
+  "deployed": false,
+  "generation": "Built-in image_gen; prompts.json contains character and motion prompts. Complete whole-body poses, no anatomy assembly.",
+  "manualReview": "Exact complete form with attached pale-peach fan sensory gills underneath cap. Existing blades, armor and secretion glands retained when applicable. Each complete body and action reviewed on neutral backdrop.",
+  "validationSummary": {
+    "idle": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 6400
+    },
+    "walk": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 1120
+    },
+    "melee": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 900
+    },
+    "hurt": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 960
+    },
+    "death": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 1440
+    },
+    "birth": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 76,
+      "gifDurationMs": 3120
+    }
+  },
+  "rangedBodyOnly": false,
+  "projectileBakedIntoBodySheet": false,
+  "sourceFacing": "left"
+}

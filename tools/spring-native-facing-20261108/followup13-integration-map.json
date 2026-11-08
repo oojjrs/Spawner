@@ -1,0 +1,372 @@
+{
+  "status": "candidate-only; production unchanged",
+  "count": 13,
+  "productionAssetsUnchanged": true,
+  "runtimeCodeChanges": false,
+  "metadataChanges": false,
+  "items": [
+    {
+      "key": "spring/blade-carapace",
+      "action": "attack",
+      "source": "DesignAssets/Animations/BladeCarapaceV1/spring/attack.png",
+      "candidate": "tools/spring-native-facing-20261108/followup13-spring-blade-carapace-attack-candidate.png",
+      "originalSHA256": "89cd8bd2d248e093527c55fa4665dc5464df7e27667def129c615ca2615facde",
+      "candidateSHA256": "773682f9679ab10c2b6b3d2ce77618eb34b030e802d76f374beac02bbd9a37ca",
+      "frameCount": 16,
+      "sheetDimensions": [
+        1920,
+        1920
+      ],
+      "geometryTimingPivotReferenceLengthUnchanged": true,
+      "originalFirstLastVisibleRGBAAndAlphaExact": true,
+      "visualReview": "All whole-body frames reviewed. Peak motion points LEFT; no full-body or organ reflection. Antenna, carapace, blade and secretion identities retained. Original whole-body endpoint cels retained.",
+      "launchPeakFrames": [
+        5,
+        6,
+        7
+      ],
+      "alphaExteriorP99": 2.0,
+      "alphaExteriorMax": 15,
+      "maximumSignificantComponentsPerCel": 1,
+      "structurePass": true,
+      "contact": "tools/spring-native-facing-20261108/followup13-spring-blade-carapace-attack-contact.jpg",
+      "preview": "tools/spring-native-facing-20261108/followup13-spring-blade-carapace-attack-preview.gif",
+      "manifest": "tools/spring-native-facing-20261108/followup13-spring-blade-carapace-attack-manifest.json"
+    },
+    {
+      "key": "spring/blade-secretion",
+      "action": "attack",
+      "source": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/attack.png",
+      "candidate": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-attack-candidate.png",
+      "originalSHA256": "0e3e83e2c366ea470cb44c37763d97c63278b9cb8ab3535a75b44e5039fe82fb",
+      "candidateSHA256": "9bb234f7e24df489afdcf278e667310b6b760074d744cece7d3e65912a430c8f",
+      "frameCount": 16,
+      "sheetDimensions": [
+        1920,
+        1920
+      ],
+      "geometryTimingPivotReferenceLengthUnchanged": true,
+      "originalFirstLastVisibleRGBAAndAlphaExact": true,
+      "visualReview": "All whole-body frames reviewed. Peak motion points LEFT; no full-body or organ reflection. Antenna, carapace, blade and secretion identities retained. Original whole-body endpoint cels retained.",
+      "launchPeakFrames": [
+        5,
+        6,
+        7
+      ],
+      "alphaExteriorP99": 0.0,
+      "alphaExteriorMax": 10,
+      "maximumSignificantComponentsPerCel": 1,
+      "structurePass": true,
+      "contact": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-attack-contact.jpg",
+      "preview": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-attack-preview.gif",
+      "manifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-attack-manifest.json"
+    },
+    {
+      "key": "spring/blade-secretion-carapace",
+      "action": "attack",
+      "source": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/attack.png",
+      "candidate": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-attack-candidate.png",
+      "originalSHA256": "f4cf593665cce8e714726db7c446bf74615346e3bdda4f4ba9d8b46d79a45b83",
+      "candidateSHA256": "ff41d593ad6ebf67ba962df41169f8bf502b92dc75de5636303cd46b5d5ebfab",
+      "frameCount": 16,
+      "sheetDimensions": [
+        1920,
+        1920
+      ],
+      "geometryTimingPivotReferenceLengthUnchanged": true,
+      "originalFirstLastVisibleRGBAAndAlphaExact": true,
+      "visualReview": "All whole-body frames reviewed. Peak motion points LEFT; no full-body or organ reflection. Antenna, carapace, blade and secretion identities retained. Original whole-body endpoint cels retained.",
+      "launchPeakFrames": [
+        5,
+        6,
+        7
+      ],
+      "alphaExteriorP99": 1.0,
+      "alphaExteriorMax": 14,
+      "maximumSignificantComponentsPerCel": 1,
+      "structurePass": true,
+      "contact": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-attack-contact.jpg",
+      "preview": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-attack-preview.gif",
+      "manifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-attack-manifest.json"
+    },
+    {
+      "key": "spring/blade-secretion-antenna",
+      "action": "attack",
+      "source": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/attack.png",
+      "candidate": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-antenna-attack-candidate.png",
+      "originalSHA256": "f54fcabb1178eee6a3235d6dd3ba54886cb6538df0bb764f63ee3a72b15e4e86",
+      "candidateSHA256": "3e1485052581f78e9ab3e864d15f2593e61a99c6cc560ebe545b4c252abf5f22",
+      "frameCount": 16,
+      "sheetDimensions": [
+        1920,
+        1920
+      ],
+      "geometryTimingPivotReferenceLengthUnchanged": true,
+      "originalFirstLastVisibleRGBAAndAlphaExact": true,
+      "visualReview": "All whole-body frames reviewed. Peak motion points LEFT; no full-body or organ reflection. Antenna, carapace, blade and secretion identities retained. Original whole-body endpoint cels retained.",
+      "launchPeakFrames": [
+        5,
+        6,
+        7
+      ],
+      "alphaExteriorP99": 0.0,
+      "alphaExteriorMax": 12,
+      "maximumSignificantComponentsPerCel": 1,
+      "structurePass": true,
+      "contact": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-antenna-attack-contact.jpg",
+      "preview": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-antenna-attack-preview.gif",
+      "manifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-antenna-attack-manifest.json"
+    },
+    {
+      "key": "spring/blade-secretion-carapace-antenna",
+      "action": "attack",
+      "source": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/attack.png",
+      "candidate": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-antenna-attack-candidate.png",
+      "originalSHA256": "d771f4f851a0fe265b2518a97b8251711d476fd0cf84e2efa3b26ff45cd1290e",
+      "candidateSHA256": "f44c42082b7b62f8980b35cd2fb1680c103ae3e060d9b2be6a3102eea692e51c",
+      "frameCount": 16,
+      "sheetDimensions": [
+        1920,
+        1920
+      ],
+      "geometryTimingPivotReferenceLengthUnchanged": true,
+      "originalFirstLastVisibleRGBAAndAlphaExact": true,
+      "visualReview": "All whole-body frames reviewed. Peak motion points LEFT; no full-body or organ reflection. Antenna, carapace, blade and secretion identities retained. Original whole-body endpoint cels retained.",
+      "launchPeakFrames": [
+        5,
+        6,
+        7
+      ],
+      "alphaExteriorP99": 1.0,
+      "alphaExteriorMax": 12,
+      "maximumSignificantComponentsPerCel": 1,
+      "structurePass": true,
+      "contact": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-antenna-attack-contact.jpg",
+      "preview": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-antenna-attack-preview.gif",
+      "manifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-antenna-attack-manifest.json"
+    },
+    {
+      "key": "spring/secretion",
+      "action": "ranged",
+      "source": "DesignAssets/Animations/ApprovedActionsV1/spring/secretion/ranged.png",
+      "candidate": "tools/spring-native-facing-20261108/followup13-spring-secretion-ranged-candidate.png",
+      "originalSHA256": "f506aced908bc557e233b12e75f7f334ea882b3fd1db9f86617cf6978d1cd116",
+      "candidateSHA256": "2e6133d52ba0b9f9bec2644634698df3899d09c47a67d12d5a516b9ca0e0ea57",
+      "frameCount": 8,
+      "sheetDimensions": [
+        2048,
+        1024
+      ],
+      "geometryTimingPivotReferenceLengthUnchanged": true,
+      "originalFirstLastVisibleRGBAAndAlphaExact": true,
+      "visualReview": "All whole-body frames reviewed. Peak motion points LEFT; no full-body or organ reflection. Antenna, carapace, blade and secretion identities retained. Original whole-body endpoint cels retained.",
+      "launchPeakFrames": [
+        3,
+        4
+      ],
+      "alphaExteriorP99": 0.0,
+      "alphaExteriorMax": 3,
+      "maximumSignificantComponentsPerCel": 1,
+      "structurePass": true,
+      "contact": "tools/spring-native-facing-20261108/followup13-spring-secretion-ranged-contact.jpg",
+      "preview": "tools/spring-native-facing-20261108/followup13-spring-secretion-ranged-preview.gif",
+      "manifest": "tools/spring-native-facing-20261108/followup13-spring-secretion-ranged-manifest.json"
+    },
+    {
+      "key": "spring/secretion-carapace",
+      "action": "ranged",
+      "source": "DesignAssets/Animations/SecretionCombosV1/spring/secretion-carapace/ranged.png",
+      "candidate": "tools/spring-native-facing-20261108/followup13-spring-secretion-carapace-ranged-candidate.png",
+      "originalSHA256": "92b23ab75712e51b99f0ff58f8f2063190e44b28c2668f2c04201d2761283402",
+      "candidateSHA256": "2e2ed151aecb229d7072f50ec6f3f9deef2fbb01dd9d039a8166fe3b6b8ef1c4",
+      "frameCount": 16,
+      "sheetDimensions": [
+        1920,
+        1920
+      ],
+      "geometryTimingPivotReferenceLengthUnchanged": true,
+      "originalFirstLastVisibleRGBAAndAlphaExact": true,
+      "visualReview": "All whole-body frames reviewed. Peak motion points LEFT; no full-body or organ reflection. Antenna, carapace, blade and secretion identities retained. Original whole-body endpoint cels retained.",
+      "launchPeakFrames": [
+        5,
+        6,
+        7
+      ],
+      "alphaExteriorP99": 1.0,
+      "alphaExteriorMax": 8,
+      "maximumSignificantComponentsPerCel": 1,
+      "structurePass": true,
+      "contact": "tools/spring-native-facing-20261108/followup13-spring-secretion-carapace-ranged-contact.jpg",
+      "preview": "tools/spring-native-facing-20261108/followup13-spring-secretion-carapace-ranged-preview.gif",
+      "manifest": "tools/spring-native-facing-20261108/followup13-spring-secretion-carapace-ranged-manifest.json"
+    },
+    {
+      "key": "spring/blade-secretion",
+      "action": "ranged",
+      "source": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion/ranged.png",
+      "candidate": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-ranged-candidate.png",
+      "originalSHA256": "0f69e17751b1e3479d48f35d92d480e2cd68c5ccdd37399eb53c23dfc7319e10",
+      "candidateSHA256": "0393de66577491e54e465a0bd20011b24057388a41a65905fa0104c2971438fb",
+      "frameCount": 16,
+      "sheetDimensions": [
+        1920,
+        1920
+      ],
+      "geometryTimingPivotReferenceLengthUnchanged": true,
+      "originalFirstLastVisibleRGBAAndAlphaExact": true,
+      "visualReview": "All whole-body frames reviewed. Peak motion points LEFT; no full-body or organ reflection. Antenna, carapace, blade and secretion identities retained. Original whole-body endpoint cels retained.",
+      "launchPeakFrames": [
+        5,
+        6,
+        7
+      ],
+      "alphaExteriorP99": 1.0,
+      "alphaExteriorMax": 7,
+      "maximumSignificantComponentsPerCel": 1,
+      "structurePass": true,
+      "contact": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-ranged-contact.jpg",
+      "preview": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-ranged-preview.gif",
+      "manifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-ranged-manifest.json"
+    },
+    {
+      "key": "spring/blade-secretion-carapace",
+      "action": "ranged",
+      "source": "DesignAssets/Animations/SecretionCombosV1/spring/blade-secretion-carapace/ranged.png",
+      "candidate": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-ranged-candidate.png",
+      "originalSHA256": "628ab1e2a3eb74f849eafbac7377f1b2687f81336b54626ce480f20882d5aac2",
+      "candidateSHA256": "9adbca44e42dec1b95c39a202762db5e3cef3ba43690e84de1cbe9038080721c",
+      "frameCount": 16,
+      "sheetDimensions": [
+        1920,
+        1920
+      ],
+      "geometryTimingPivotReferenceLengthUnchanged": true,
+      "originalFirstLastVisibleRGBAAndAlphaExact": true,
+      "visualReview": "All whole-body frames reviewed. Peak motion points LEFT; no full-body or organ reflection. Antenna, carapace, blade and secretion identities retained. Original whole-body endpoint cels retained.",
+      "launchPeakFrames": [
+        5,
+        6,
+        7
+      ],
+      "alphaExteriorP99": 0.0,
+      "alphaExteriorMax": 9,
+      "maximumSignificantComponentsPerCel": 1,
+      "structurePass": true,
+      "contact": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-ranged-contact.jpg",
+      "preview": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-ranged-preview.gif",
+      "manifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-ranged-manifest.json"
+    },
+    {
+      "key": "spring/secretion-antenna",
+      "action": "ranged",
+      "source": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-antenna/ranged.png",
+      "candidate": "tools/spring-native-facing-20261108/followup13-spring-secretion-antenna-ranged-candidate.png",
+      "originalSHA256": "96aa8c25cf96afbf33e55ea8576b72c6ad0233ebefbb757895e3192e60f841a4",
+      "candidateSHA256": "5bffe4fe09169d35e9d8cfb65e0d8b757cd96187db876438c4277e96a286b6f2",
+      "frameCount": 16,
+      "sheetDimensions": [
+        1920,
+        1920
+      ],
+      "geometryTimingPivotReferenceLengthUnchanged": true,
+      "originalFirstLastVisibleRGBAAndAlphaExact": true,
+      "visualReview": "All whole-body frames reviewed. Peak motion points LEFT; no full-body or organ reflection. Antenna, carapace, blade and secretion identities retained. Original whole-body endpoint cels retained.",
+      "launchPeakFrames": [
+        5,
+        6,
+        7
+      ],
+      "alphaExteriorP99": 1.0,
+      "alphaExteriorMax": 14,
+      "maximumSignificantComponentsPerCel": 1,
+      "structurePass": true,
+      "contact": "tools/spring-native-facing-20261108/followup13-spring-secretion-antenna-ranged-contact.jpg",
+      "preview": "tools/spring-native-facing-20261108/followup13-spring-secretion-antenna-ranged-preview.gif",
+      "manifest": "tools/spring-native-facing-20261108/followup13-spring-secretion-antenna-ranged-manifest.json"
+    },
+    {
+      "key": "spring/secretion-carapace-antenna",
+      "action": "ranged",
+      "source": "DesignAssets/Animations/AntennaCombosV1/spring/secretion-carapace-antenna/ranged.png",
+      "candidate": "tools/spring-native-facing-20261108/followup13-spring-secretion-carapace-antenna-ranged-candidate.png",
+      "originalSHA256": "f221a60e431447aafc5d312c7c25fa00fbd9dc575968ef97cb369e79d8463f87",
+      "candidateSHA256": "c3eeaf58685f17d83e458c99796a4dc316ebe3dfca0bd1fef0f7973353c3c309",
+      "frameCount": 16,
+      "sheetDimensions": [
+        1920,
+        1920
+      ],
+      "geometryTimingPivotReferenceLengthUnchanged": true,
+      "originalFirstLastVisibleRGBAAndAlphaExact": true,
+      "visualReview": "All whole-body frames reviewed. Peak motion points LEFT; no full-body or organ reflection. Antenna, carapace, blade and secretion identities retained. Original whole-body endpoint cels retained.",
+      "launchPeakFrames": [
+        5,
+        6,
+        7
+      ],
+      "alphaExteriorP99": 0.0,
+      "alphaExteriorMax": 20,
+      "maximumSignificantComponentsPerCel": 1,
+      "structurePass": true,
+      "contact": "tools/spring-native-facing-20261108/followup13-spring-secretion-carapace-antenna-ranged-contact.jpg",
+      "preview": "tools/spring-native-facing-20261108/followup13-spring-secretion-carapace-antenna-ranged-preview.gif",
+      "manifest": "tools/spring-native-facing-20261108/followup13-spring-secretion-carapace-antenna-ranged-manifest.json"
+    },
+    {
+      "key": "spring/blade-secretion-antenna",
+      "action": "ranged",
+      "source": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-antenna/ranged.png",
+      "candidate": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-antenna-ranged-candidate.png",
+      "originalSHA256": "97ef8988ab5097d7cd72c58274aec740cbd50034fddf111f7d86d05bcdfdded0",
+      "candidateSHA256": "621788099936d0cc72557590f3bae9fc315a226dd20080dd29a50773899baeea",
+      "frameCount": 16,
+      "sheetDimensions": [
+        1920,
+        1920
+      ],
+      "geometryTimingPivotReferenceLengthUnchanged": true,
+      "originalFirstLastVisibleRGBAAndAlphaExact": true,
+      "visualReview": "All whole-body frames reviewed. Peak motion points LEFT; no full-body or organ reflection. Antenna, carapace, blade and secretion identities retained. Original whole-body endpoint cels retained.",
+      "launchPeakFrames": [
+        5,
+        6,
+        7
+      ],
+      "alphaExteriorP99": 1.0,
+      "alphaExteriorMax": 18,
+      "maximumSignificantComponentsPerCel": 1,
+      "structurePass": true,
+      "contact": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-antenna-ranged-contact.jpg",
+      "preview": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-antenna-ranged-preview.gif",
+      "manifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-antenna-ranged-manifest.json"
+    },
+    {
+      "key": "spring/blade-secretion-carapace-antenna",
+      "action": "ranged",
+      "source": "DesignAssets/Animations/AntennaCombosV1/spring/blade-secretion-carapace-antenna/ranged.png",
+      "candidate": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-antenna-ranged-candidate.png",
+      "originalSHA256": "1b064ed9780eba3c6756984da831945519dd062e3da9540f4c2914a5e430d22e",
+      "candidateSHA256": "ab6bcff98fcff5f55fa436d4ca40c0375d463f86e2b2f66a7516cce3cd14be3e",
+      "frameCount": 16,
+      "sheetDimensions": [
+        1920,
+        1920
+      ],
+      "geometryTimingPivotReferenceLengthUnchanged": true,
+      "originalFirstLastVisibleRGBAAndAlphaExact": true,
+      "visualReview": "All whole-body frames reviewed. Peak motion points LEFT; no full-body or organ reflection. Antenna, carapace, blade and secretion identities retained. Original whole-body endpoint cels retained.",
+      "launchPeakFrames": [
+        5,
+        6,
+        7
+      ],
+      "alphaExteriorP99": 1.0,
+      "alphaExteriorMax": 17,
+      "maximumSignificantComponentsPerCel": 1,
+      "structurePass": true,
+      "contact": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-antenna-ranged-contact.jpg",
+      "preview": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-antenna-ranged-preview.gif",
+      "manifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-antenna-ranged-manifest.json"
+    }
+  ]
+}

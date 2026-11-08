@@ -23,10 +23,22 @@
   "action": "ranged-attack",
   "sheet": "shoot-sheet.png",
   "preview": "shoot-preview.gif",
-  "sheetSHA256": "f506aced908bc557e233b12e75f7f334ea882b3fd1db9f86617cf6978d1cd116",
-  "previewSHA256": "c1188aab9951863fcf964f6c3d129000a061f9edf1e196917f26f3d53fb817a9",
+  "sheetSHA256": "2e6133d52ba0b9f9bec2644634698df3899d09c47a67d12d5a516b9ca0e0ea57",
+  "previewSHA256": "25527b60bbaa519e1a67ecdd546e9c80eb1f33ab236b8c867ad5358ced5dff88",
   "durationMs": 600,
   "method": "Approved full-body generated poses; original whole-frame packaging and bytes preserved.",
   "integration": "Planning reference only; game runtime and deployment are unchanged.",
-  "gifRegenerationExact": true
+  "gifRegenerationExact": true,
+  "sourceFacing": "left",
+  "sourceRepair": {
+    "kind": "image-generated-complete-leftward-middle-cels",
+    "sourceFacing": "left",
+    "candidateManifest": "tools/spring-native-facing-20261108/followup13-spring-secretion-ranged-manifest.json",
+    "validation": "tools/spring-native-facing-20261108/followup13-validation.json",
+    "originalWholeFirstLastCelsPreserved": true,
+    "geometryAndTimingUnchanged": true,
+    "legacyGeneratedSourceAndQAFieldsAreHistorical": true,
+    "mirroring": false,
+    "bodyPartComposition": false
+  }
 }

@@ -151,9 +151,9 @@
       "sheet": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-ranged-v1-sheet.png",
       "preview": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-ranged-v1-preview.webp",
       "gif": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-ranged-v1-preview.gif",
-      "sheetSHA256": "96aa8c25cf96afbf33e55ea8576b72c6ad0233ebefbb757895e3192e60f841a4",
-      "previewSHA256": "834c4caf6f61c02151f9a0da731f45ecd2ccf3caac168d58c57ee75cdd22a0e8",
-      "gifSHA256": "ce812ad6e50265b557cc43240bdd4bf6f70e6d69a1b579c530dcbad49d185c7c",
+      "sheetSHA256": "5bffe4fe09169d35e9d8cfb65e0d8b757cd96187db876438c4277e96a286b6f2",
+      "previewSHA256": "6a1b5884388cb75bcc64833445e9c48526b033939ef711364ccc6e76964223ec",
+      "gifSHA256": "b9b2fb0cbca289ad3a4e96327b47b2d2c66ce5b05fc6c7d85ac940f1d52a87e8",
       "durationsMs": [
         30,
         40,
@@ -178,7 +178,7 @@
       "frameHeight": 480,
       "columns": 4,
       "frameCount": 16,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "previewDurationsMs": [
         530,
         40,
@@ -216,7 +216,18 @@
       "sceneIncludesNest": false,
       "launchAtMs": 200,
       "launchFrameIndex": 5,
-      "projectileIncluded": false
+      "projectileIncluded": false,
+      "sourceRepair": {
+        "kind": "image-generated-complete-leftward-middle-cels",
+        "sourceFacing": "left",
+        "candidateManifest": "tools/spring-native-facing-20261108/followup13-spring-secretion-antenna-ranged-manifest.json",
+        "validation": "tools/spring-native-facing-20261108/followup13-validation.json",
+        "originalWholeFirstLastCelsPreserved": true,
+        "geometryAndTimingUnchanged": true,
+        "legacyGeneratedSourceAndQAFieldsAreHistorical": true,
+        "mirroring": false,
+        "bodyPartComposition": false
+      }
     },
     "hurt": {
       "sheet": "AnimationCandidates/spring-secretion-antenna-fullbody-v1-20261107/spring-secretion-antenna-hurt-v1-sheet.png",

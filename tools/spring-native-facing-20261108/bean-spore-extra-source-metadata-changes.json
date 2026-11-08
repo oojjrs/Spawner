@@ -1,0 +1,74 @@
+{
+  "status": "completed",
+  "changes": {
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/complete-scene-manifest.json": {
+      "owner": "bean/blade-carapace",
+      "beforeSha256": "b315ebd46bff408bfcfe5bbaf99187b898c5b45cb12707714e0081da44559c55",
+      "afterSha256": "7692fe465300303ca4752c8e73453faec065ff59495924ad2184a0aab9fcc3ea",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json": {
+      "owner": "bean/blade-carapace",
+      "beforeSha256": "4ddec0e068613d92c0d9a195809a0329961df895066c912dd467b8aea9bef7b3",
+      "afterSha256": "a27761563c08474fde9ebb4ee7a16cfb954ba804c4c2a731bafdeff61c4da8df",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/document-preview-qa.json": {
+      "owner": "bean/blade-carapace",
+      "beforeSha256": "4d70f65331be0c518f8b37a78a8be1b3982f6868a011bd9748815a1fad01cfb7",
+      "afterSha256": "b7a562a33ce90aa98c5bd9f2f895a4d18be876d00c01208b36ee5e8c311a56b6",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1.json": {
+      "owner": "bean/blade-carapace",
+      "beforeSha256": "1a64c1f0c1c0452a562f4da1f9d2818db20cf004880f6122b69e1d8242190925",
+      "afterSha256": "f3910e4d75d0e129b429d28223f9841db1c2a7c3889debbaaa283bdc9df23670",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1.json": {
+      "owner": "bean/blade-carapace",
+      "beforeSha256": "59ae0d57c01d8a5e12052d3b563f062afce2692480c483d1d9c20a2e4f7e8ce0",
+      "afterSha256": "0196d26aa20abaee1b25e8082d0a37a04b0f6d7d195a7d39eb7af8ecc9d9a55b",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1.json": {
+      "owner": "bean/blade-carapace",
+      "beforeSha256": "f5f78180a1784abde54d267f47be7bd920622a32dc0dcc2e70acf860b975f5bb",
+      "afterSha256": "605635f3ae7b2bc129fffa7e242a30afe2ec03b9b06fd6714d2e7ad1139faf73",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1.json": {
+      "owner": "bean/blade-carapace",
+      "beforeSha256": "e1d3801cd65735024c7236f4687f9da1ba42a0c1010ffa77bfb75a9de464551b",
+      "afterSha256": "9185b0e0a489c2a3e555506ecafe188d8606157970620288336df05479ea421d",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/manifest.json": {
+      "owner": "bean/blade-carapace",
+      "beforeSha256": "2ff8f7930c059cd369286dbd3e24b7376382c228ff7e86e85f0155eda2562968",
+      "afterSha256": "3d639b9cdd2f3ce4200bff7437ea3c680e3f125be8580c70744d1e247e011894",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json": {
+      "owner": "spore/blade-carapace",
+      "beforeSha256": "ef2c98ee597900bc5761b7755abe5439c2e1437f1909b6f643f6b16ed256540b",
+      "afterSha256": "c8ef3653cb0cdd89550f3e2cea90c62188a3a27b96fe7d0a50cd512f8c58b39d",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    }
+  },
+  "skippedHistorical": [
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-body-v1.json",
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1.json"
+  ],
+  "warnings": [],
+  "packerExecution": "NOT RUN: historical generation jobs can re-import old input and are outside this operation."
+}

@@ -31,9 +31,20 @@
     1700
   ],
   "durationMs": 6400,
-  "sheetSHA256": "6d26fe3b6fb9228faed066c7f3b4675e47ff2920558dc500c5d27d332823a10a",
-  "previewSHA256": "9ab620e77c8dee2586e2158336874cc6713953d77c94610149c37163a310974f",
+  "sheetSHA256": "c61bebb1ebb3b680cf78a7bab273f1bc7f2f3ddc4ea104a3bec829881e4aadcb",
+  "previewSHA256": "ea04fda7073f526bdf32e46b0a058948a1f8f77e0385b452d8922930a8ed769f",
   "originalBytesPreserved": true,
   "maxTimelineRGBRMSE": 2.867880047427923,
-  "usage": "Approved full-body idle poses. Planning reference only; game runtime and deployment are unchanged."
+  "usage": "Approved full-body idle poses. Planning reference only; game runtime and deployment are unchanged.",
+  "sourceFacing": "left",
+  "sourceNormalization": {
+    "operation": "exact horizontal mirror within each output atlas cell",
+    "frameWidth": 384,
+    "frameHeight": 384,
+    "beforeSheetSHA256": "6d26fe3b6fb9228faed066c7f3b4675e47ff2920558dc500c5d27d332823a10a",
+    "afterSheetSHA256": "c61bebb1ebb3b680cf78a7bab273f1bc7f2f3ddc4ea104a3bec829881e4aadcb",
+    "historicalGenerationInputsRetained": true,
+    "authoringPosesAndRecordsRemainHistorical": true,
+    "reproduction": "Generate historical sheet then mirror each output cell; no packer execution performed."
+  }
 }

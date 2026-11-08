@@ -1,0 +1,46 @@
+{
+  "white-paw": {
+    "source": "tools/welcome-header-review-20261108/white-paw-stride-candidate.png",
+    "sourceSha256": "cde723692f2534c8ab7bc671299e90a94446b2b0d6d5deabec4ab850568c2714",
+    "runtime": "DesignAssets/Animations/CreatureApprovedV4/white-paw/walk-stride-v6.webp",
+    "runtimeSha256": "cbf185329cee4164085d0a9aa37a0969ca97e0b9874091d5217ce397e54ff671",
+    "runtimePixelExact": false,
+    "preview": "DesignAssets/Planning/ApprovedAnimations96/white-paw-walk-stride-v6.webp",
+    "previewSha256": "ebeecbbd24a196412a4f16563e4e5ca0f83df1cddbda52f6a1f9d7f36810b37c",
+    "previewFrames": 32,
+    "previewDurationMs": 500,
+    "sourceFrames": 64,
+    "sourceFrameSize": 640,
+    "runtimeFrameSize": 248,
+    "runtimeMethod": "Downsampled from retained native cells with the established runtime camera; lossless WebP encoding of packed pixels.",
+    "runtimeRegistration": {
+      "frameSize": 248,
+      "viewSize": 228.92307692307693,
+      "pivotX": 120.82051282051282,
+      "pivotY": 205.87179487179486,
+      "strideFrameRatio": 0.23815524193548393
+    }
+  },
+  "shadow-weasel": {
+    "source": "tools/welcome-header-review-20261108/shadow-weasel-stride-candidate.png",
+    "sourceSha256": "0e62cd51328bbb064d2d690d9410a0d6b1d739c50d8828b01181da422527092a",
+    "runtime": "DesignAssets/Animations/CreatureApprovedV4/shadow-weasel/walk-stride-v6.webp",
+    "runtimeSha256": "81e27762d3d0f909f9802ffc4ec7f879dcd2ab1d3bb69a54e7a10331e7dfe9fb",
+    "runtimePixelExact": false,
+    "preview": "DesignAssets/Planning/ApprovedAnimations96/shadow-weasel-walk-stride-v6.webp",
+    "previewSha256": "6fc44f3415b6f4fcf8292af3c9b76d116dd31a9672828300eacf418227b70762",
+    "previewFrames": 32,
+    "previewDurationMs": 500,
+    "sourceFrames": 64,
+    "sourceFrameSize": 640,
+    "runtimeFrameSize": 229,
+    "runtimeMethod": "Downsampled from retained native cells with the established runtime camera; lossless WebP encoding of packed pixels.",
+    "runtimeRegistration": {
+      "frameSize": 229,
+      "viewSize": 176.45169082125602,
+      "pivotX": 111.18115886714976,
+      "pivotY": 193.59903492270533,
+      "strideFrameRatio": 0.21943231441048036
+    }
+  }
+}

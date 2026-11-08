@@ -8,7 +8,7 @@ import {UNIT_BIRTH_ART, UNIT_BIRTH_ART_ASSETS} from './unit-birth-art-assets.mjs
 import {UNIT_ACTION_ART} from './unit-action-art-assets.mjs';
 import {createUnitActionArt, unitActionArtPose} from './unit-action-art.mjs';
 import {validateDna} from '../server/dna-unit.mjs';
-import {unitDisplaySize} from './unit-size.mjs';
+import {unitDisplaySize,unitFrameMirror} from './unit-size.mjs';
 const clip = UNIT_BIRTH_ART['bean/base'], idle = UNIT_ACTION_ART['bean/base'].reference;
 const dna = validateDna({version:6, level:1, budget:0, pieces:[]},1,0);
 const actor = {tribe:'bean',dna,health:10,birth:{startedAt:10,readyAt:13.85}};
@@ -27,12 +27,22 @@ test('base DNA selects its full 3.85 second birth rather than the idle fallback'
  assert.equal(unitActionArtPose(actor,at(3849.999)).action,'birth');assert.equal(unitActionArtPose(actor,at(3850)).action,'idle');
  assert.equal(body.samples[unitActionArtPose(actor,at(3610)).frame].frame,15);
 });
+test('base birth source normalization changes only whole-cell facing and the matching scene coordinates',()=>{
+ const before=JSON.parse(readFileSync('tools/spring-native-facing-20261108/bean-spore-plan-registry.json')).UNIT_BIRTH_ART['bean/base'];
+ const changes=JSON.parse(readFileSync('tools/spring-native-facing-20261108/bean-spore-image-changes.json')).changes;
+ const expected=structuredClone(before);
+ const image=path=>{const change=changes[path];assert.ok(change,path);assert.equal(change.operation,'mirror-each-cell');assert.equal(sha(change.afterPath),change.afterSha256);return change.afterPath;};
+ assert.equal(before.sourceFacing,'right');assert.equal(before.pivotX,430);
+ expected.image=image(before.image);expected.sourceFacing='left';expected.pivotX=before.frameSize-before.pivotX;
+ for(const layer of expected.sceneLayers.layers){layer.image=image(layer.image);for(const sample of layer.samples)if(sample)sample.destination[0]=before.frameSize-sample.destination[0]-sample.destination[2];}
+ assert.deepEqual(clip,expected);assert.equal(clip.pivotX,82);
+});
 test('all authored boundaries draw one whole body after emergence in both facings',async()=>{
  const requested=[],art=createUnitActionArt(v=>v,surface,async image=>{requested.push(image);return {image}});
  await art.prepare(actor,at(0));assert.deepEqual(requested.sort(),[body.image,environment.image].sort());
  for(const mirror of [false,true]){let ms=0;for(let frame=0;frame<116;frame++){
   const ctx=record();assert.equal(art.draw(ctx,actor,at(ms),100,200,100,mirror),true);
-  assert.deepEqual(ctx.transforms,[[100,200],[mirror?-1:1,1]]);
+  assert.deepEqual(ctx.transforms,[[100,200],[unitFrameMirror(clip.sourceFacing,mirror?-1:1)?-1:1,1]]);
   assert.equal(ctx.calls.filter(c=>c[0].image===body.image).length,ms>=2590?1:0);
   if(ms>=2590){const c=ctx.calls.at(-1),s=body.samples[frame];assert.deepEqual(c.slice(1,5),[s.frame%8*631,Math.floor(s.frame/8)*631,631,631]);}
   ms+=clip.durationsMs[frame];
@@ -44,7 +54,8 @@ test('final whole-body pixels and registration match the actual current idle',()
 from PIL import Image
 b,i=json.load(sys.stdin)
 def cell(a,f):
- w=a['frameSize'];h=a.get('frameHeight',w);c=a['columns'];im=Image.open(a['image']).convert('RGBA');return im.crop((f%c*w,f//c*h,(f%c+1)*w,(f//c+1)*h))
+ w=a['frameSize'];h=a.get('frameHeight',w);c=a['columns'];
+ with Image.open(a['image']) as im:return im.crop((f%c*w,f//c*h,(f%c+1)*w,(f//c+1)*h)).convert('RGBA')
 x,y=cell(b,15),cell(i,0)
 print(json.dumps({'equal':x.tobytes()==y.tobytes(),'bbox':y.getchannel('A').point(lambda v:255 if v>=16 else 0).getbbox()}))`],{input:JSON.stringify([body,idle]),encoding:'utf8'}));
  assert.equal(result.equal,true);const bounds=result.bbox,length=Math.max(bounds[2]-bounds[0],bounds[3]-bounds[1]);assert.equal(length,247);
@@ -70,9 +81,9 @@ test('design and compiled runtime use the same layered base birth with left-faci
  let html='';runInNewContext(readFileSync('DesignAssets/sections/unit-appearance.js','utf8'),{document:{write:s=>html+=s}});
  const row=html.match(/<tr id="unit-sprout-bean">[\s\S]*?<\/tr>/)[0],cell=row.match(/<td data-action="birth">[\s\S]*?<\/td>/)[0];
  const payload=JSON.parse(cell.match(/data-birth-scene="([^"]+)"/)[1].replaceAll('&quot;','"').replaceAll('&amp;','&'));
- assert.deepEqual(payload.sceneLayers,clip.sceneLayers);assert.equal(payload.sourceFacing,'right');assert.equal(payload.loop,true);
+ assert.deepEqual(payload.sceneLayers,clip.sceneLayers);assert.equal(clip.sourceFacing,'left');assert.equal(payload.sourceFacing,clip.sourceFacing);assert.equal(payload.loop,true);
  assert.ok(cell.includes('bean-base-birth-complete-v1-preview.webp'));assert.ok(!cell.includes('birth-game.webp'));
- const context={};runInNewContext(readFileSync('client/unit-preview-facing-data.js','utf8'),context);assert.equal(context.SpawnerUnitPreviewFacing.forms['bean/base'].birth,'right');
+ const context={};runInNewContext(readFileSync('client/unit-preview-facing-data.js','utf8'),context);assert.equal(context.SpawnerUnitPreviewFacing.forms['bean/base'].birth,clip.sourceFacing);
  const scope={console,setTimeout,clearTimeout,URL,performance};runInNewContext(readFileSync('client/runtime.js','utf8'),scope);
  assert.equal(scope.Spawner.unitActionArtPose(actor,at(2800)).missing,false);assert.equal(scope.Spawner.unitActionArtPose(actor,at(2800)).animation.image,clip.image);
 });

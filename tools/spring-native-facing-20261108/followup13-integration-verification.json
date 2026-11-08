@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "allRecordedAfterHashesMatch": true,
+  "all13NativeByteExactCandidates": true,
+  "all13AliasesByteExactCandidates": true,
+  "sourceFacingLeftInEveryOwnedClip": true,
+  "nativeGeometryAndTimingUnchanged": true,
+  "publicationGeometryAndTimingUnchanged": true,
+  "previewFramesTimingDimensionsAndLoopUnchanged": true,
+  "count": 81,
+  "counts": {
+    "exactSourceAlias": 13,
+    "nativeWholeBodyRepair": 13,
+    "regeneratedPreview": 25,
+    "sourcePublicationMetadata": 30
+  },
+  "GIFMaxRMSE": 2.9743284218316033,
+  "runtimeRegistryImageSizesTestsUntouched": true,
+  "buildCommitPushNotRun": true
+}

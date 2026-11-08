@@ -1,0 +1,1121 @@
+{
+  "status": "completed",
+  "changes": {
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/complete-scene-manifest.json": {
+      "owner": "bean/blade-antenna",
+      "beforeSha256": "2e7a417524b9fde3882899be31536f6442d1844587c019e92a8f9c497743134e",
+      "afterSha256": "569e63973fe63416e18272fade7619a83347f6182c084f81222c0ccdf13a69b1",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json": {
+      "owner": "bean/blade-antenna",
+      "beforeSha256": "45060aa69e9560c56c27eb42e646a09d6833c5ba793c9362e70fbb3ed0df7dfc",
+      "afterSha256": "3780e13b9fc3a286bc0cb8742499a44124b8cd7f3c099bc7c82b2c430ebb86fc",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-attack-v1.json": {
+      "owner": "bean/blade-antenna",
+      "beforeSha256": "cd82ca04fe6f764eb4d5a382524e8dc6141f8348fb59ef71033d721f861b638a",
+      "afterSha256": "5f133bc0a1aa12de0547f4e377933c1e4f9917010b758961d7b68af5fff9e0d3",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-death-v1.json": {
+      "owner": "bean/blade-antenna",
+      "beforeSha256": "2152f296aec754a74c194fc4d3de4c20f9a58d36e5a0491383142e8e557be093",
+      "afterSha256": "f83e49a0ff39ef2b278bc3d9e21d13b85f7f4ee84db8dcfa1f6f8bab2875c5ed",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-idle-v1.json": {
+      "owner": "bean/blade-antenna",
+      "beforeSha256": "3bb6933de85240dff7a9bf8cdf14ca6711eda131dcd678ec99d556028aa11753",
+      "afterSha256": "b7e41d474975fcb3b15b8ae2a565eab3102f348a91958a614b3dcf09c1ec8341",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-hurt-v1.json": {
+      "owner": "bean/blade-antenna",
+      "beforeSha256": "c570365d35499198c2dede052011b5ad6fb440ac7cb84cd654043fddeb9bdba4",
+      "afterSha256": "74932de43428453792061cb48aa99747c0eb87bca117769dcc06e234b22b5b36",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-antenna/manifest.json": {
+      "owner": "bean/blade-antenna",
+      "beforeSha256": "8da4e2093cae8e7ccb5302f83a93d77b668f804fe1c50eecc828ed30c54aa7a1",
+      "afterSha256": "a39679729aa687887dd4b75d94824f5b74c869223b8b550afe9efc62a425726e",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/complete-scene-manifest.json": {
+      "owner": "bean/blade-carapace-antenna",
+      "beforeSha256": "218bae8ca32954d1609a401fb2e096cddabe1f28ce372307c9eb6b5b487898f0",
+      "afterSha256": "7cd29e7074a91d80494d211e2feb3ebdb8dfd1ef39d605e73ba94d8edf62c889",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json": {
+      "owner": "bean/blade-carapace-antenna",
+      "beforeSha256": "118cfc38c6177d1ecf3ac84ae5d414116d37f0856cae85d3d510b72563bff091",
+      "afterSha256": "b741c2c994fe7036deeea13bda6ca13f68f42809b75f42706a88d6c67497ae1c",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-death-v1.json": {
+      "owner": "bean/blade-carapace-antenna",
+      "beforeSha256": "e3c7c5d3f37f2611750cd733e58f0b8ab5d3a1b7738bb0bb8c859d2bf1a6d494",
+      "afterSha256": "f8b9994600f729b42c87219d274dde3d40a079b9d672930c48c7d3d07a24c470",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-hurt-v1.json": {
+      "owner": "bean/blade-carapace-antenna",
+      "beforeSha256": "74c2211a325e2d0c12ae833ad12915580d8a0d64272dfa4955ed063ac48dd9ee",
+      "afterSha256": "bae24e615d7d796eeb5fa53bc7089cecf3c1078b8339bc7e0bba8c73426f392c",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-idle-v1.json": {
+      "owner": "bean/blade-carapace-antenna",
+      "beforeSha256": "85624ff4728fecd9ebf5a340e21f91a9cc333a43118d4de3292b8d7208ad72ab",
+      "afterSha256": "a306efaea0cc1bd96a4df55db9b54563d08f8e9c7bef089bef7ca83eab8d7ea7",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-attack-v1.json": {
+      "owner": "bean/blade-carapace-antenna",
+      "beforeSha256": "07462a3151723a642dc187c2ec3f94e2b4e23dfbb0b40bb56fbb54cec983ad47",
+      "afterSha256": "d67fe349afa83940faed4c6157da4928bd589448b258f15e13b0ff00fecf4fed",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace-antenna/manifest.json": {
+      "owner": "bean/blade-carapace-antenna",
+      "beforeSha256": "e3d0e8aa3a6036730e17a30f1145ff4533a753a62782de9688eb41b94522d5f0",
+      "afterSha256": "7fcc3b88b4d8fe93d4571d9b2d352e9898d2b6c8eb0110962bccd8b8c157a593",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/complete-scene-manifest.json": {
+      "owner": "bean/blade-secretion",
+      "beforeSha256": "b827583af013a239cb47afc74a1d8db1c617fea642378a676228281f4e4be8af",
+      "afterSha256": "eefe659fd7a2853008d647740cfd742fca0010e83f36c9354b3b558e07fb5763",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-hurt-v1.json": {
+      "owner": "bean/blade-secretion",
+      "beforeSha256": "4858a16ebf9a1678c54338d6c4f0aa8aeccc060703e195cb3478353345571f19",
+      "afterSha256": "f491281014363c2c659f013bba816db146806604d931360fbd1d457218bd8d5e",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json": {
+      "owner": "bean/blade-secretion",
+      "beforeSha256": "2bc71fe4bae5161a2e1deebd0cd1bbf93b43525d5264180194271d3939b5a08b",
+      "afterSha256": "ccbe01a605aa26611eea54fb3e08360bb976d0511ce25efc044027c946fee0dd",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-death-v1.json": {
+      "owner": "bean/blade-secretion",
+      "beforeSha256": "77ae156b5fc1377afd1ebb38b25408948190d8b52d3af422fad17ba1210809cf",
+      "afterSha256": "3b753eda2374dd6cd85459d44d942100b75c12b80455ee3608be8a71c2a01872",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-attack-v1.json": {
+      "owner": "bean/blade-secretion",
+      "beforeSha256": "633c0fbfb06b12ff8ae3847b2076f1e1209f56721cb38e6a3a84582ead89aee1",
+      "afterSha256": "3348c5f0081b8c77c5fae182410832a9ba1421f936a80ab3a1a7c05350e4ced4",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-idle-v1.json": {
+      "owner": "bean/blade-secretion",
+      "beforeSha256": "f9590053b8d6808b61e4e3c893a76696aef3883fcd713f2744466908511fb3ca",
+      "afterSha256": "c4e655524388b547a8eea99c709096dbc6cfd03ac59337eaacf2ecb0b305f345",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-ranged-v1.json": {
+      "owner": "bean/blade-secretion",
+      "beforeSha256": "ba52bd827baaf8ba336b5e029a55d59155f01a360cc92a0da553272d1f6c0256",
+      "afterSha256": "725d678b8c2c33e3c592266bff9b2a0af74cce86924943329e78fae017d6faba",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion/manifest.json": {
+      "owner": "bean/blade-secretion",
+      "beforeSha256": "f4d0af5eafe07741b7641e0d0abf318268831a298e4f806b91a71056c10def9b",
+      "afterSha256": "ee5c206bd6bef49baf36ea6ca05dd1b3b061dca53785def01e14a2eaeb2be06d",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/complete-scene-manifest.json": {
+      "owner": "bean/blade-secretion-antenna",
+      "beforeSha256": "75e164a5cd813a4cb4588236474bec6a73c502df94bc3297ade559381b7d071b",
+      "afterSha256": "e0a4924a23935301326e30f2b675333fc85ae7538093e3588be0574323b4b1f6",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-hurt-v1.json": {
+      "owner": "bean/blade-secretion-antenna",
+      "beforeSha256": "c2f99fb61cd7b2d8b884e18b3bb03d3be984982e1b14c300afa4e81b7eeacd7a",
+      "afterSha256": "a5c7e8bad51eb209cbafafe25580eaf1195d43192dcb2a949e5f095fe6756e11",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json": {
+      "owner": "bean/blade-secretion-antenna",
+      "beforeSha256": "d5a6e46733e856f96a6bba184f5a993dca1d5f228b0486eea459673b6e960361",
+      "afterSha256": "629e68b4dbf5f356eb7a5cc3810fc3c225de2cc6c425a0bd4969c9067b8fd2e7",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-ranged-v1.json": {
+      "owner": "bean/blade-secretion-antenna",
+      "beforeSha256": "272c8789b89d034e0c48349f985bd9dc51e352c5d58a4b4e8d9a90a6d77f1874",
+      "afterSha256": "a0781e3b6163258e01c4e9282a187f59d02d80f95bb7718cb3673332bab2f17d",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-attack-v1.json": {
+      "owner": "bean/blade-secretion-antenna",
+      "beforeSha256": "506795af845195ca835fa0d56b09f6aee6a19e0d5af580d9f7f42f860b03b9ff",
+      "afterSha256": "f9ed028c512cf1b4a6e4aa586b306c262f9fe7a234ecb7bcebbe9b81ba41879a",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-death-v1.json": {
+      "owner": "bean/blade-secretion-antenna",
+      "beforeSha256": "b965694ba99b7b5480d20bed14fb19de553189ffc090cbac75798035b3b26972",
+      "afterSha256": "4b0e3ac9426a5bc4615d7dd507c4e9e1934b99b09721dd673de12c2bfd391ff9",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-idle-v1.json": {
+      "owner": "bean/blade-secretion-antenna",
+      "beforeSha256": "6f7065f44e76e00aa859eae4c19c371e4a8d15e41fdb5f11ee71c70ecf4488b6",
+      "afterSha256": "702f79bfd52d6194842180fa5222d0f0e2c73c759612c3f68b39ce789e145102",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-antenna/manifest.json": {
+      "owner": "bean/blade-secretion-antenna",
+      "beforeSha256": "84f0cff114deec070e8f70f2351c185030ef08fbfbbec1c5a676906cca05adb9",
+      "afterSha256": "3b54bb08fa8a2715318f52dc0ffa372e0b44a10006fa2c8d2915acf1e21ad11d",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-walk-v1.json": {
+      "owner": "bean/blade-secretion-carapace",
+      "beforeSha256": "dd6df0261b7adeffa0a7c278b0cc53cc4009c21a53d3d4f714e5fddda08627ad",
+      "afterSha256": "feeb7e0a957ebb7ee1eaf944c96b8703376b5ddb653ea1bce8f162cf70ce2033",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-ranged-v1.json": {
+      "owner": "bean/blade-secretion-carapace",
+      "beforeSha256": "dea5c4e014e0f3ea1da701a714fe5b17a46a7b3adf5ec24221631b5aaf6b7e85",
+      "afterSha256": "5abb9ef12194033a16410332f2b24c7771bf60ed6d33ba81ad8d65f8f934d89a",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/complete-scene-manifest.json": {
+      "owner": "bean/blade-secretion-carapace",
+      "beforeSha256": "d3fcc12cbf4e5759699c637ca942fb74192a92d615512bd5c511bf1b89b6917a",
+      "afterSha256": "728362c05358d09c41d261089852492043956beb679573958f52e5b4b9f480d7",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-attack-v1.json": {
+      "owner": "bean/blade-secretion-carapace",
+      "beforeSha256": "e7f603b1e015cfeb4a0c36340d4d606d917812c764cee0280d30bb9267df0ae0",
+      "afterSha256": "8251799a87cb638c18bffcec635d956a21d2c73c8a0da89adb97ee211afda11a",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json": {
+      "owner": "bean/blade-secretion-carapace",
+      "beforeSha256": "bb94e42d7bd3f5fbdec739c2f7c5b8f10ee0525dbdda8ee3f9fe689e1b391ac9",
+      "afterSha256": "03312fa21115711b0589ba0a257daee661003977f5c695d56aa57ed27bc959b7",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-idle-v1.json": {
+      "owner": "bean/blade-secretion-carapace",
+      "beforeSha256": "f5530e3314cdc3957b89042d2465cb22370ed1c5ac21aaaeed1d5b7f0e4db7c9",
+      "afterSha256": "12647da1a393a2acddebee9f4be8569f27f840e03f67ecf6a77e55f53d34ae94",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-death-v1.json": {
+      "owner": "bean/blade-secretion-carapace",
+      "beforeSha256": "b2c2ce1ac5aee53dd93453e70602e1ad1cf96a130b56a5e31371a3ce93c6f9a0",
+      "afterSha256": "6710604cf9d9efe5e23cbb7134144aa9d4a6bea1e0feacf231dc739ef9cabce3",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-hurt-v1.json": {
+      "owner": "bean/blade-secretion-carapace",
+      "beforeSha256": "f9b506e1c7eef9f0d55d05d059938974e4292d0472ae2a1d430421a155072204",
+      "afterSha256": "bb705a009549698e4ef343177bcef80e6873d132d7aaf25d29c5fd416818159d",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/complete-scene-manifest.json": {
+      "owner": "bean/blade-secretion-carapace-antenna",
+      "beforeSha256": "9480344ae92a636e894f98cd52d1e7d7de91637962669ffb4227fa8b2dad8e71",
+      "afterSha256": "1922b5d10c909d052b23bc631db845dc0b33a6db25f36f8860bc2d5371aad160",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-ranged-v1.json": {
+      "owner": "bean/blade-secretion-carapace-antenna",
+      "beforeSha256": "fe734050d9f1a0b7017fd12709a57a98ed10af41d51271ecd1737fdb37cbee6e",
+      "afterSha256": "434a7162d0db029c5b822bbc47ac53b00830270d4e65ffeb1f642673186d66f2",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json": {
+      "owner": "bean/blade-secretion-carapace-antenna",
+      "beforeSha256": "8675ade869a6557ad0e2950bfa490c1aacd2afef517b39c26a8f2269d96ec7c1",
+      "afterSha256": "6f403dc29e3600731932a6a0f427fefa71fcf7fa7e80cf8eb0b58f576310f6c4",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-idle-v1.json": {
+      "owner": "bean/blade-secretion-carapace-antenna",
+      "beforeSha256": "e6ef11ffc5204f23a1a5997836d2bc49ac166a59e465e1ff674f82c024efe14f",
+      "afterSha256": "fb74dd35cbf1a17c8be1e0457b75d47233d5593ac6ea9182826275d382388f91",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-hurt-v1.json": {
+      "owner": "bean/blade-secretion-carapace-antenna",
+      "beforeSha256": "daae4497be61a0a46992164bef6394f3ac3c1e592467680b42b316c558c0ce7f",
+      "afterSha256": "a1b65101088bab5c3674e1315644a254eec42750d699b72582e234bd4c2a39b6",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-death-v1.json": {
+      "owner": "bean/blade-secretion-carapace-antenna",
+      "beforeSha256": "4c594f016f7880fea2580e3e5bc4a6f99b435fcb5afb2db79028d0a7750a2de9",
+      "afterSha256": "c2a89a6f4eac8fe6d669729a140000e7c5b2a409ef69214987a38f3cd2f3e80a",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-attack-v1.json": {
+      "owner": "bean/blade-secretion-carapace-antenna",
+      "beforeSha256": "1bd0b8574ef3fcdfc6377c270d621d11deb729d935aa70fab6a3ab6fd69a25ef",
+      "afterSha256": "9ad630a1bbb8fc4c315c282e51cd4fac1d8ff2a1579a4a38d012df120b23d55e",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-carapace-antenna/manifest.json": {
+      "owner": "bean/blade-secretion-carapace-antenna",
+      "beforeSha256": "4e4d427405a1b19dbfd20de64436969d76f0a464bfdb03fe361f76605e9e66c9",
+      "afterSha256": "b92324a0d2278cc1a14bc25cabf3ca6bbcf46a1ffb5d1db4421dbb9405125eb8",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/complete-scene-manifest.json": {
+      "owner": "bean/carapace-antenna",
+      "beforeSha256": "cbedc70415be75811b21f8d5daad07c826bbcf27dfa42a70e1b796521767e016",
+      "afterSha256": "1e44feb9903b70003da4caca0761bb10bfdffa582ca0ae45d18fb9e6c5b6062e",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json": {
+      "owner": "bean/carapace-antenna",
+      "beforeSha256": "d24f009bce95cbc2b173f94fc698a511527c9589931f6e0c850b8f9f7bd3f9aa",
+      "afterSha256": "971c54cdcc181b7c7afd76de99f8a5c24a81a1c72fbfed9b21e0930deeeae5fb",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-idle-v1.json": {
+      "owner": "bean/carapace-antenna",
+      "beforeSha256": "039d5cde7d0127ed76678fd5139a859f39ccc932c847ec2d079595209852afd7",
+      "afterSha256": "4b6b52844d1025e827a94fbe18f65a357ca8233f2f10496c48dbb3156e50c7fa",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-death-v1.json": {
+      "owner": "bean/carapace-antenna",
+      "beforeSha256": "32caf06a150ad0c777a7ed638e7972f8482b587fbd6af0debf680a00ebcbe5ca",
+      "afterSha256": "76335d877968625457f007a1036d2961fdb3b2dd28ae4a7c5b528f07dd084e9e",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-hurt-v1.json": {
+      "owner": "bean/carapace-antenna",
+      "beforeSha256": "58570ff7edde2cfa513ee9ca0232ef13717887e47ea4ee64aea89412e2046b59",
+      "afterSha256": "aea01edca79d7b1c83be84c1d2fa08589068a595c3538882251fc3cf9ece72fc",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/carapace-antenna/manifest.json": {
+      "owner": "bean/carapace-antenna",
+      "beforeSha256": "c5bb442bfe1be12593c2d018dd9676d81a35782957f1e6006efa7fab211841c6",
+      "afterSha256": "b935a977958c6e94c28ae95af1fbd53d25b0e8636984e5c0ee26be93f6c4547c",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/complete-scene-manifest.json": {
+      "owner": "bean/secretion-antenna",
+      "beforeSha256": "1a018373bed93a15e8bbb6ac3c133d8bc5833b49e6e86b3eb5f915411588a5e5",
+      "afterSha256": "f9f04d02ca0d5dda60b4247c16b1057d85f76a31df7e8721e3f3f5197088545d",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json": {
+      "owner": "bean/secretion-antenna",
+      "beforeSha256": "61c8ebbd13bbd39f4d8744ba75d029854ceb0da2b1f19e13258d0a0bb3a56c9a",
+      "afterSha256": "6ec72839415c62a78ee11a9d06fbafa6cc8badd1dfea2343933fcd17ecca26a1",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-idle-v1.json": {
+      "owner": "bean/secretion-antenna",
+      "beforeSha256": "f4f1d0fef15aa21aafcecba161106e831bd0ec4343c2648fec9d96a2f9af61c8",
+      "afterSha256": "42a25ad1315353910f65e3aa0ee521715a1aa4c5b62a5993593072d86e25a172",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-hurt-v1.json": {
+      "owner": "bean/secretion-antenna",
+      "beforeSha256": "5174c474040e2f09e1eee133feace1aee825700954fe5887ee98f4824c261a0e",
+      "afterSha256": "1239d7d8c1516ed40122613fcd6e93ca0abd53a841972f0eb92509973128d7b7",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-ranged-v1.json": {
+      "owner": "bean/secretion-antenna",
+      "beforeSha256": "1f6728e9a8cefaecae1d1b074999b735a72bad0c1969e1a0a946e9a0fb0e84e1",
+      "afterSha256": "5ac031598889727d96608d5a2d17a49bf03bc06859cfe71b5639cb464786eeb6",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-death-v1.json": {
+      "owner": "bean/secretion-antenna",
+      "beforeSha256": "6a3e7b55af45c015685ffaf22e198d3fef4164bbb60603c652f444d4fbfb9a69",
+      "afterSha256": "e14b5bf5c2624905af2a98d97191d06067a7af6befc70ab1774ecf240a58987c",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-antenna/manifest.json": {
+      "owner": "bean/secretion-antenna",
+      "beforeSha256": "17da752c2514ac35b9e2ad1b9355dcfeda0547426a266a4d3be14e31461592bd",
+      "afterSha256": "a5f5733e924ecf3cda3490c20f1f57d91f766abc742a4445019787a376a01772",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-death-v1.json": {
+      "owner": "bean/secretion-carapace",
+      "beforeSha256": "6c2e863058f4bdbc70d7c251eda69da80581b67e1d01a48d6b08d2e8a802bf61",
+      "afterSha256": "9b48b9c28ba1f486420d13e2fb20751ec97e2c90c83ae8abb140bbedcae7a734",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/complete-scene-manifest.json": {
+      "owner": "bean/secretion-carapace",
+      "beforeSha256": "0a9009f387ba1e6f6d5dce5f5262496b2f5b6483c76d3d7927015978b908cfdc",
+      "afterSha256": "3e443edc5ad87874b3c3bf3143fce74866c42df806882b173017b14f76575e3a",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json": {
+      "owner": "bean/secretion-carapace",
+      "beforeSha256": "870e4c58d54f4aa720a6b6d65c4bafce46f0daeeddf0a5649bde66dcc1f7aced",
+      "afterSha256": "fa408a5174d160c1c83807c0ba73dff1512267da3315fc5982dd8de2037cb2a6",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-ranged-v1.json": {
+      "owner": "bean/secretion-carapace",
+      "beforeSha256": "708c686d2e051f0398fdcbcad061d8c4c3131988e12f868bdfbf729842f2c827",
+      "afterSha256": "fde43ff5e20956b561a6a01bd3693e8d0dd70da8b9f4ff981393c370289d4670",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-idle-v1.json": {
+      "owner": "bean/secretion-carapace",
+      "beforeSha256": "37fbe8d6f33d3b2b3ad19db1f6209f5c13dc7382312a9246fa46b2c9acdc2c0a",
+      "afterSha256": "8e43083eb7e4b818ad45004caa5c90f2b039a08a4b304efc3ffa7d83d1b3b5ed",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-hurt-v1.json": {
+      "owner": "bean/secretion-carapace",
+      "beforeSha256": "c0de73350aee9c7c9f1e062129067d3762801b109822e2249ef938015a17b7c0",
+      "afterSha256": "9eaeb3e37a84a16c0111da8352cbfb59244a3987b87531c2b79f7d7257349b12",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-carapace/manifest.json": {
+      "owner": "bean/secretion-carapace",
+      "beforeSha256": "7e7c3d2990ae1dfed3f17789af7dcd64066d1c933e2123d4fd2bf8626a76d06b",
+      "afterSha256": "201117bd9116be755c188bf690748da4da82553e3b073082745e3a57dae2b478",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/complete-scene-manifest.json": {
+      "owner": "bean/secretion-carapace-antenna",
+      "beforeSha256": "a33a35806b1369dc0b95c35dd2f97ee14583dd0a59d04304c239efa4bd599cf9",
+      "afterSha256": "14c6759d85d51c1c6adce46212710306bb675d50a19a97addf50563660debebf",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-idle-v1.json": {
+      "owner": "bean/secretion-carapace-antenna",
+      "beforeSha256": "1a50a6a94fc4f27f96da99560e38ad58a2ba799894b4b0c2d78437f90c530042",
+      "afterSha256": "1917a35c476697e65a45bf04a80f67548905109a5604ceb2fc71acbf921e16c2",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json": {
+      "owner": "bean/secretion-carapace-antenna",
+      "beforeSha256": "886d277b8ac32bac091cad3d4a42b2b1fd5d1786abd9f1f1a78fa40268ca21fc",
+      "afterSha256": "a127a14b4cb19e6c8ad25c463527392888c64968a774198d1e121ddf183fe470",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-ranged-v1.json": {
+      "owner": "bean/secretion-carapace-antenna",
+      "beforeSha256": "5e877240124bc7143ab732618390b934761e933323df228829dbc448f8e0b3b2",
+      "afterSha256": "b9a4c8e7b453c64305daa198d65f989e98dcdfe0226c6c0aaa4aaf71d954755d",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-death-v1.json": {
+      "owner": "bean/secretion-carapace-antenna",
+      "beforeSha256": "9f47bcbbe83f135217977b682ac6c001949e24db56cbbac6dd68246a2f8a9e9e",
+      "afterSha256": "c5e239e29cc030c5c24c2ffaddf62da197771675e52ef784678bd018b0d2040b",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-hurt-v1.json": {
+      "owner": "bean/secretion-carapace-antenna",
+      "beforeSha256": "507d9d8464fa35d3b82c5534a4719cbc857253c49f9ed1663b97ff9445403cef",
+      "afterSha256": "17ed649e83d02b0f60c606eb3559be3e99e1287fcafaf46e0277b52ac65b2138",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-carapace-antenna/manifest.json": {
+      "owner": "bean/secretion-carapace-antenna",
+      "beforeSha256": "723667afdea853740875d91b9ce38f660cf7fb4daec7dbe7c2d909159315fd02",
+      "afterSha256": "eea0c82316bae857175724fffe5dc599822614f4b8ea83ebad690f989a9363ca",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/manifest.json": {
+      "owner": "spore/blade-antenna",
+      "beforeSha256": "c7b3521df2d82db51ac69e284409c85efc0e72648fe1338413fe18329af5c662",
+      "afterSha256": "bfe61e5686f76d291f4119c2fe3e6e14d37d32062bb182506f21e225c83ce971",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-idle-v1.json": {
+      "owner": "spore/blade-antenna",
+      "beforeSha256": "a1456b2702f88d5427f8c5bc01f23ac8f17c399a7529c5eae8bd1609f6d4f2e1",
+      "afterSha256": "b24223dd9ce0a0b89aeb9d599019c2e2b00d0cba328c642e6f7eda91fe22a27a",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json": {
+      "owner": "spore/blade-antenna",
+      "beforeSha256": "3a3c3cdd6d6ba46a283e8ead873f94f10823ea67c5f7d7ed564d6952e861f50f",
+      "afterSha256": "c6a569272d59b4b5a8095a7e8f3ce17f66301479abfc2a11ffa2dda9ded4f161",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-hurt-v1.json": {
+      "owner": "spore/blade-antenna",
+      "beforeSha256": "d6f678ae0ae823c4c48aa2b95ddf3d6dd4938e050d66a923eac78bd171e9f40b",
+      "afterSha256": "3683b86947b86990d20c27d227517d1ecb7277ceb8861d57b5e452f81234e333",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-melee-v1.json": {
+      "owner": "spore/blade-antenna",
+      "beforeSha256": "a29ea6b310398451a80da00f6824759d62a36ffde3451d4eac37f48906447c58",
+      "afterSha256": "2439346394cfc097d92e1e5b17f819913b8140243c05ee514a00d023b26e6782",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-walk-v1.json": {
+      "owner": "spore/blade-antenna",
+      "beforeSha256": "3de1fec23f8a10a2d00d648ebfc5972210daf83fbc7c2a423ac9ed2d9bcd5161",
+      "afterSha256": "3652f7eee17ae7b3314413446af45562ff0d9af2a097e44e4463cfee263bfb83",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-birth-v1.json": {
+      "owner": "spore/blade-antenna",
+      "beforeSha256": "ef622641966e26eb3fb674474619fa4a409698ef9e1ad6e2a551bb8ce8679606",
+      "afterSha256": "e7da4bd5a5817356ceaa637039a1b0180ef389a4b25538545d9381c6118450ac",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-death-v1.json": {
+      "owner": "spore/blade-antenna",
+      "beforeSha256": "6898ff6881c60bc4d05cf2f52c814063d051ce1a430b00114517decc898e1324",
+      "afterSha256": "28688bfa0ef91487aebe1b358cf63e954c18eae575b79d1fe19817603f0d1abe",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/manifest.json": {
+      "owner": "spore/blade-carapace-antenna",
+      "beforeSha256": "27fca924b9b670784dd66d39ebee3ba13021b59b6e5e5d8a9ee59d31f14a72f8",
+      "afterSha256": "f30a358a1863e6880c7b64c41c4630a2def9d825ba2ce5e119de651794e899a1",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-hurt-v1.json": {
+      "owner": "spore/blade-carapace-antenna",
+      "beforeSha256": "1334beb55ded1f0427c513b5cc9c04a1005a391acd3e2439e7808ea1fa538b82",
+      "afterSha256": "448f228cecaef010c95b5180e39d715e042c481f4bd94be293b108e8c178dbfa",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json": {
+      "owner": "spore/blade-carapace-antenna",
+      "beforeSha256": "8d3800840dac02426fe81c67f4c38f00edc0130aaeca4095ac06be977f4dbe5d",
+      "afterSha256": "df00e7ee3836c3f3e0eadd5b2704359e8b69aa08b6b42bcf3635b2021b6f7882",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-melee-v1.json": {
+      "owner": "spore/blade-carapace-antenna",
+      "beforeSha256": "a4dccab9e6fcd87af5dc9f8bb347f3ca522f7ad806eaca3ba9ca9ba36b1da76b",
+      "afterSha256": "b3cef81b9a10a662440f826ca651d14a644ae38a4e3ba28d5db249b360e1ce75",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-death-v1.json": {
+      "owner": "spore/blade-carapace-antenna",
+      "beforeSha256": "c364586934f98603a01ccb997a692eef8f1d7baec57c6c9260545b62a335e51f",
+      "afterSha256": "2b9df561748bcd4820dde4e6b0e9d3613a86fd58350b37522592142019949c4b",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-walk-v1.json": {
+      "owner": "spore/blade-carapace-antenna",
+      "beforeSha256": "0c5811650bf9c4cdb4ec7597e87ae2988083d40d87a17c8f83e379e9903349a9",
+      "afterSha256": "dbc4ffbc13b18be374a008af07a8a594648bb219dd7c02b5f576c170b223531a",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-idle-v1.json": {
+      "owner": "spore/blade-carapace-antenna",
+      "beforeSha256": "bd8b5d3d5e6c28d58fb2a05e16773ab5470a307794fcd249428d04e17b667050",
+      "afterSha256": "c66b722731a92d815e3eb302ea1e32bf7b648d3ff20795da5149ee0743301372",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-birth-v1.json": {
+      "owner": "spore/blade-carapace-antenna",
+      "beforeSha256": "bbb852c07d74612646ccfec6915ae638eeb1fbe19640aa7e15c7326c4d445fce",
+      "afterSha256": "6acc35c993fb6a0bdc89f395edb5145bd6042d04a6db41386efd673b73d1286c",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json": {
+      "owner": "spore/blade-secretion",
+      "beforeSha256": "814c976da4176a69a3fe2c95137f7d3a6faf5ecf62d8365a5ac242710ccc06f8",
+      "afterSha256": "ace5d0d2da3760e90abf5aa86fc0844885896b0f37b229afe7a6aa7d8392b18b",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/manifest.json": {
+      "owner": "spore/blade-secretion-antenna",
+      "beforeSha256": "25befcbf472f158ce6a7faad6a90bfe3ba12c7703a2177a26d2195d56c80ff3a",
+      "afterSha256": "073b51f10d23c2f36537aa8ccdb85357c4e4a7c93d79f43162b4b313ae57470e",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-walk-v1.json": {
+      "owner": "spore/blade-secretion-antenna",
+      "beforeSha256": "b34dd95e9ea63e8eafe6bb597f2a6cd711f83aa31e4c0fe604516b6f3822fccb",
+      "afterSha256": "826ad6e63d46d8ada1dd6d8a7ce89b76dc9a8dc8408d28a1f0f150c69949799b",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json": {
+      "owner": "spore/blade-secretion-antenna",
+      "beforeSha256": "1623dd5c5fb8c7967cb2463989de72f5194c1d010b3583c9e61dd732c9c4a4f9",
+      "afterSha256": "6e6d0891d536edf0fd7f5c0f00929b3512a07b37e764575dc1d9172116caa283",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-hurt-v1.json": {
+      "owner": "spore/blade-secretion-antenna",
+      "beforeSha256": "99a3983e8470aa27d596e59aa88e77b4a5936307480fd498eeb121ed6cde199e",
+      "afterSha256": "69d2b71aed10998dff6aac91a31865857af955f0fbabebd1378fa9351ac08f2c",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-death-v1.json": {
+      "owner": "spore/blade-secretion-antenna",
+      "beforeSha256": "2ee0cc38b3b2d8c6974dd9d0983d569ebd4a1d0e8cad78784b297e882e646aca",
+      "afterSha256": "116b0c121f70856320ea60b7ada3c314334f0a42b0a0187cb38c55d4398aa09a",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-idle-v1.json": {
+      "owner": "spore/blade-secretion-antenna",
+      "beforeSha256": "d06674310a275d859b7ce4f3d5fc138777cfd95a71c31efaa4a7a214000b3370",
+      "afterSha256": "691a01e29586f4f7b019c0126b5b7e0a181ffb2e45a3051adc97416ecd153136",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-ranged-v1.json": {
+      "owner": "spore/blade-secretion-antenna",
+      "beforeSha256": "ad759cc5bb522ca96cb2826b792c1eedb916fef30dee45f7c41556bb6ab4389f",
+      "afterSha256": "a1a55858886f15519d68d201383986b14bb32df674c80032f81da6aa33ab6e9d",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-birth-v1.json": {
+      "owner": "spore/blade-secretion-antenna",
+      "beforeSha256": "08be9f651031be3bc7b7eef2560d1ba9fd8ba785608a7fed0d2adad1ac8aada9",
+      "afterSha256": "080b26c0aa1d165a079808bfbd07bc7cc3859c0be3b495439c336cb98e8a79a9",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-melee-v1.json": {
+      "owner": "spore/blade-secretion-antenna",
+      "beforeSha256": "4cf2aba0a3be01146f61876ad0581b052196e924798d285fd1641038736b47c7",
+      "afterSha256": "7b8146e2b9827da888919bb1c446641bfd5cb12c6aa8a0803b825e179cc86414",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json": {
+      "owner": "spore/blade-secretion-carapace",
+      "beforeSha256": "2fe194491df890f4ed52f2c2f7b20505b84b8f2243481a47aaa3aff72992055a",
+      "afterSha256": "20cbff41ae54659d733e4152abae8bf3560fb6570aad1eb492944317aee34c87",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/manifest.json": {
+      "owner": "spore/blade-secretion-carapace-antenna",
+      "beforeSha256": "06c7e107088af0a785d37853e420445df34e839f67394798b0b270842f4c5f84",
+      "afterSha256": "f2da916c013bd74a58246887e3bbf1a7de6cfcadf387830ba04d6333002344a0",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json": {
+      "owner": "spore/blade-secretion-carapace-antenna",
+      "beforeSha256": "10f72b2c73f76c5489c4b11798376aa305629441553d645128f749aa78b8aa99",
+      "afterSha256": "1d259457c997075bc507c28009142b52e3a43faaeb4409272daad741fad72e1a",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-death-v1.json": {
+      "owner": "spore/blade-secretion-carapace-antenna",
+      "beforeSha256": "c50b48b2f73e5ddb5c4dca72dab30f47cb4c80cb316039b3fe7945b8be128416",
+      "afterSha256": "90d225b3c26f8589dc0b95e37923301d5c0b523290e9b77fce4c2f86cc023328",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-melee-v1.json": {
+      "owner": "spore/blade-secretion-carapace-antenna",
+      "beforeSha256": "23c70f3be6581bc4410568b2c5afacea5ee30fbf29929816bdf9ee73e5685aae",
+      "afterSha256": "158bf11a216d603e26e089ffc4fb508e63d7ceadc786c6634a3b5bf70ee07507",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-idle-v1.json": {
+      "owner": "spore/blade-secretion-carapace-antenna",
+      "beforeSha256": "42df22f6f826964e234602c4e908bccdf1d94cb0707b29c34f1328af99697ef4",
+      "afterSha256": "5a95e5fd9eb85d7b1559d5485d74c853cd920f809808f6b6ef07ad2fc899ec5d",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-hurt-v1.json": {
+      "owner": "spore/blade-secretion-carapace-antenna",
+      "beforeSha256": "291653e0a67e77289d720f533151b1a602106731eba55f5154e9e392d4f0a258",
+      "afterSha256": "c082a8182e4a0f609897b8df82d469d787b1dddda6c84d349af1d88be5ce94ba",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-walk-v1.json": {
+      "owner": "spore/blade-secretion-carapace-antenna",
+      "beforeSha256": "66087e153371480994f171b502ee929c5bdfd9c5de7f7152ce82d1275f83119c",
+      "afterSha256": "176606274a91eb5aa206719fbe00401d6884b75e6da8ec267ab9c3c6a3797553",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-birth-v1.json": {
+      "owner": "spore/blade-secretion-carapace-antenna",
+      "beforeSha256": "d831b103f79269c23d2b12715292d4788050d4363fea7d9aed3878956cb7ff70",
+      "afterSha256": "4ceeaf6ef50d8ac6ee8f25eadc1953385eff58e094dd2100b1131914357d1210",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-ranged-v1.json": {
+      "owner": "spore/blade-secretion-carapace-antenna",
+      "beforeSha256": "317f1a8a93efd9875fece85607210f1ad2dbf937b0974c4d55863434b750c723",
+      "afterSha256": "a0d6b9b699db2af3a8d20128fe7104b974b9136b0555ad032a085637a14b4024",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/manifest.json": {
+      "owner": "spore/carapace-antenna",
+      "beforeSha256": "a6a7b48dc1bf93a0a6f59d6f0faecf036009ee46db6b155e05a1533a141053e5",
+      "afterSha256": "5776e6546666358bfdfea2b6ed866ffd0cff6792913a90d711a683cb060e7aa2",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json": {
+      "owner": "spore/carapace-antenna",
+      "beforeSha256": "32ae83454eb50fe835e25af8a19ebccd2ae1e01d5a0c23d3d4297c9bd5faa96d",
+      "afterSha256": "b89c63efe9ae343a4c9570724876989f90d07fbf1860f2d3b336bcb93d83e6fd",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-idle-v1.json": {
+      "owner": "spore/carapace-antenna",
+      "beforeSha256": "9c50487cc260d3bae3c253f6a38cb8fda80f835095efea81887d492884e68373",
+      "afterSha256": "10225349e967db29f7c9a1be43954a74cf7ec4debbae718709a3578356eadb33",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-death-v1.json": {
+      "owner": "spore/carapace-antenna",
+      "beforeSha256": "ba0e77f277baf83183e578f24cf1031b96be588f028daba8886f81e135ef81c1",
+      "afterSha256": "adf6d44c00536860f9160d7168e35bf55cab62d0ddcc28f9c2318888c578a759",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-hurt-v1.json": {
+      "owner": "spore/carapace-antenna",
+      "beforeSha256": "c1462c59ad7929f4452314bc7c4c9bd3fc47565fa6efd5c63e820d2cc5330a5a",
+      "afterSha256": "913793c609a985a36634b041cd36c0f6e0877c5639c503ed6c03e6f32b76a85d",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-walk-v1.json": {
+      "owner": "spore/carapace-antenna",
+      "beforeSha256": "b18de0a8a60bb46861a47b068d1fb425d1e0fe6b95902a6e0a397a6af606ee62",
+      "afterSha256": "43c882d9aebac637ca38d155b433544a30348cd3c5dcfd6100bacfe0bc838cca",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-birth-v1.json": {
+      "owner": "spore/carapace-antenna",
+      "beforeSha256": "a871bfee76d35b927c08627d9107c773ba0f956e60ccf2bf949eb46fe1a2f482",
+      "afterSha256": "ad0b8b13bd2948546235f8063bb75b754333b9396a9b0a45a7c1fef1cd5c0d6e",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/manifest.json": {
+      "owner": "spore/secretion-antenna",
+      "beforeSha256": "9628e7f0f760196472216ecd9cb6b8a51ac9f727c9c3679fda7d1be990cc57f4",
+      "afterSha256": "4a336ac73e684200b7d615a329aac594277ee9fad770eb9058800e59a96dabcd",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-birth-v1.json": {
+      "owner": "spore/secretion-antenna",
+      "beforeSha256": "e2c2b833a1769d2cdd8c12c6d426febfa9e32887931cf617850dfb2f48804ed1",
+      "afterSha256": "95a6bcb69e79cb83aec655964ede1167ba482d0f38b57ceaf0b8b4cad05eea85",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json": {
+      "owner": "spore/secretion-antenna",
+      "beforeSha256": "6ed442d9d371dc9a9e8a677e7a20de80211d7d14009fe4c45ffd46c04dcaaf6c",
+      "afterSha256": "2fde7e25e4172361484b177b3f38769d2c5fc76c963a3de5b1041cc5e1ef2b02",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-hurt-v1.json": {
+      "owner": "spore/secretion-antenna",
+      "beforeSha256": "0addef8c7f1f6d06507cd7e9969f01b8d746a510042d035fb4730cac769edf58",
+      "afterSha256": "4cf898481d50a9c3580c139f454714b6bbc274e942d43c63cb33a98b0ddb9a31",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-ranged-v1.json": {
+      "owner": "spore/secretion-antenna",
+      "beforeSha256": "9e29dc45ea3189d12470cbc89c20ab4265d98b95163e3d085bc0c585819597b2",
+      "afterSha256": "ac339d6ea17600bf95bda40a498ec02b2df22d099ac2bb3fd0a9a6f9ca0aef34",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-death-v1.json": {
+      "owner": "spore/secretion-antenna",
+      "beforeSha256": "f85f6eca3168c045d5d39f06e12251c728f7d0bc4c085cc21923793ad84e55c2",
+      "afterSha256": "3d2ee16fc83c0c5765d903595be17772df29decb6f7e5e2a22cf54f036e35392",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-idle-v1.json": {
+      "owner": "spore/secretion-antenna",
+      "beforeSha256": "6814f85de59a0ea40eb8f4ae27d9bc5bb4b135b3dba4a5bf4807f9589571814f",
+      "afterSha256": "cdd4a2d22ccddd3ec47bdfec7d5b3f78585f6cdab50e625f27b787bf7ec46936",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-walk-v1.json": {
+      "owner": "spore/secretion-antenna",
+      "beforeSha256": "b85dc60dc7f8c38f9e47483030da93058703a463a248e587a2e9f501537ff9ad",
+      "afterSha256": "84e49440ad64f8e6fd14292a7a2bfdd06fe0a5a483fc91db93472dd38c919960",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json": {
+      "owner": "spore/secretion-carapace",
+      "beforeSha256": "52db7abc616395cf9c803985143fcef041f6e72572bdc346a740855c6c434d95",
+      "afterSha256": "007d601c7d41affec094a67ab39654d515962f09337a92fc0172e20515edb010",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-ranged-v1.json": {
+      "owner": "spore/secretion-carapace-antenna",
+      "beforeSha256": "bd25b49dd8379a0b0283ae2d2f99fcac366f3f9cea04df7af37516a39d6ff6ca",
+      "afterSha256": "062b0835a845bd96a06edd8854e1778ef5451f4efa36f40848139e6d51abb374",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/manifest.json": {
+      "owner": "spore/secretion-carapace-antenna",
+      "beforeSha256": "00594c2ac3f77c639c74987ca8ce71746d6ffeefdc080479d4ffb56c480ce497",
+      "afterSha256": "a36739b01cd2fa7480de9e1fdb8de1615d5b1e8eaea8e82e41e63c337a661058",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json": {
+      "owner": "spore/secretion-carapace-antenna",
+      "beforeSha256": "566a79f37a91eaa8f2618c9cce2d32a6947294ba32c6960d411b2cb8444062da",
+      "afterSha256": "c9ee335fbd007ded630a135c91faf76bc10903613b509c759a7b279e39721823",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-death-v1.json": {
+      "owner": "spore/secretion-carapace-antenna",
+      "beforeSha256": "a32b047033180204deab981be3177c9e9c8deb488adf8f1308572276924929e0",
+      "afterSha256": "034ff47157799a1b22ab33dbfc1a490c18f54ebf42feb8f05af8a4d243e02c16",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-walk-v1.json": {
+      "owner": "spore/secretion-carapace-antenna",
+      "beforeSha256": "56eb9bd54b729b5ee8cf533dafa0db3f20ee98586eb3f3455c19d0e35fe20a5f",
+      "afterSha256": "5bf0400e45b223d068a49b2d03197fde7e4b7b6d5f0857f8b83f3d538ff28f82",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-hurt-v1.json": {
+      "owner": "spore/secretion-carapace-antenna",
+      "beforeSha256": "9979bf27e9c4bd3302fb782eaebc1d34a3b0d63ef6fb05c9009e5aad3e73abdf",
+      "afterSha256": "79684605ca132c86295751029a6ab598b7dd56191adceb9c666f3adccd23db29",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-idle-v1.json": {
+      "owner": "spore/secretion-carapace-antenna",
+      "beforeSha256": "ddf3d37b89084d6cc65d2bbd0469710db8c033815fb085553bc957d832a45630",
+      "afterSha256": "cba5fa8fa40fbf069ae8f06461416212ccd787074a168f87ac5e0280f9f1e80a",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-birth-v1.json": {
+      "owner": "spore/secretion-carapace-antenna",
+      "beforeSha256": "40564aab7bddb240cb7ad9c029a57ef20b408291532379ee99139bac1e003f52",
+      "afterSha256": "9970b0095e1b274e2ac83a9d51b1a93e4bf89385b29acfcadbb2a9e3c2796c0d",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/source-layouts.json": {
+      "owner": "bean/*",
+      "beforeSha256": "8d2e3961e8b1ae46231025dc6e8870f15f85bcef205b9e85db9cf6d154761e7b",
+      "afterSha256": "67cc751960e24674f17cce2f948d5d1e0dc7547eca8bfbece7eafaa300cb166d",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    },
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/source-layouts.json": {
+      "owner": "bean/*",
+      "beforeSha256": "de6667df9a3f39e5a7f4c6c11700a58a2ae575af84b2f59642d618e020028ad0",
+      "afterSha256": "aedbb33dddf0fc9478cba13ccf47817834ab8a776bb2a02c845c526ceac2cf5f",
+      "geometryRule": "Owner-scoped cell-space reflection; source-cell bounds retained, local source bounds mirrored, packed offsets W-oldX-round(rawWidth*scale).",
+      "historicalSourcesRetained": true
+    }
+  },
+  "skippedHistorical": [
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-birth-body-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-walk-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-birth-body-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-walk-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-walk-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-birth-body-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-birth-body-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-walk-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-birth-body-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-walk-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-birth-body-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-birth-body-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-walk-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-walk-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-birth-body-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-birth-body-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-walk-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-walk-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-birth-body-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-birth-body-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-birth-body-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-birth-body-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-birth-body-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-birth-body-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-birth-body-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-birth-body-v1.json"
+  ],
+  "warnings": [],
+  "packerExecution": "NOT RUN: historical generation jobs can re-import old input and are outside this operation.",
+  "proposed": [
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/complete-scene-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-attack-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-death-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-idle-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-antenna/bean-blade-antenna-hurt-v1.json",
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-antenna/manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/complete-scene-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-death-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-hurt-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-idle-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/bean-blade-carapace-antenna-attack-v1.json",
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace-antenna/manifest.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/complete-scene-manifest.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-hurt-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/publication-manifest.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-death-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-attack-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-idle-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion/bean-blade-secretion-ranged-v1.json",
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion/manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/complete-scene-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-hurt-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-ranged-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-attack-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-death-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/bean-blade-secretion-antenna-idle-v1.json",
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-antenna/manifest.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-walk-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-ranged-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/complete-scene-manifest.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-attack-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/publication-manifest.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-idle-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-death-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/blade-secretion-carapace/bean-blade-secretion-carapace-hurt-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/complete-scene-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-ranged-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-idle-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-hurt-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-death-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-attack-v1.json",
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-carapace-antenna/manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/complete-scene-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-idle-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-death-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/carapace-antenna/bean-carapace-antenna-hurt-v1.json",
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/carapace-antenna/manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/complete-scene-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-idle-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-hurt-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-ranged-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-antenna/bean-secretion-antenna-death-v1.json",
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-antenna/manifest.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-death-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/complete-scene-manifest.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/publication-manifest.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-ranged-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-idle-v1.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/secretion-carapace/bean-secretion-carapace-hurt-v1.json",
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-carapace/manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/complete-scene-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-idle-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-ranged-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-death-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/bean-secretion-carapace-antenna-hurt-v1.json",
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/secretion-carapace-antenna/manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-idle-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/publication-manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-hurt-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-melee-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-walk-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-birth-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-antenna/spore-blade-antenna-death-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-hurt-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/publication-manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-melee-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-death-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-walk-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-idle-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-carapace-antenna/spore-blade-carapace-antenna-birth-v1.json",
+    "AnimationCandidates/spore-blade-secretion-fullbody-v1-20261107/publication-manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-walk-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/publication-manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-hurt-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-death-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-idle-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-ranged-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-birth-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-antenna/spore-blade-secretion-antenna-melee-v1.json",
+    "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-death-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-melee-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-idle-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-hurt-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-walk-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-birth-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/spore-blade-secretion-carapace-antenna-ranged-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/publication-manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-idle-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-death-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-hurt-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-walk-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/carapace-antenna/spore-carapace-antenna-birth-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-birth-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/publication-manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-hurt-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-ranged-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-death-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-idle-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-antenna/spore-secretion-antenna-walk-v1.json",
+    "AnimationCandidates/spore-secretion-carapace-fullbody-v1-20261107/publication-manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-ranged-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/publication-manifest.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-death-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-walk-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-hurt-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-idle-v1.json",
+    "AnimationCandidates/spore-antenna-combos-fullbody-v1-20261107/secretion-carapace-antenna/spore-secretion-carapace-antenna-birth-v1.json",
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/source-layouts.json",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/source-layouts.json"
+  ],
+  "sourceLayoutRules": {
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/source-layouts.json": "Global source bbox reflected within original per-frame cell: x0New=cellLeft+cellRight-x1Old; x1New=cellLeft+cellRight-x0Old.",
+    "AnimationCandidates/bean-secretion-combos-fullbody-v1-20261107/source-layouts.json": "Global source bbox reflected within original per-frame cell: x0New=cellLeft+cellRight-x1Old; x1New=cellLeft+cellRight-x0Old."
+  }
+}

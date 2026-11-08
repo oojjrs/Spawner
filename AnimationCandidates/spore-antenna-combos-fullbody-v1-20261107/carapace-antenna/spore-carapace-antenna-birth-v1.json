@@ -1,0 +1,984 @@
+{
+  "tribe": "spore",
+  "form": "carapace-antenna",
+  "action": "birth",
+  "status": "complete-for-planning",
+  "frameSize": [
+    768,
+    512
+  ],
+  "columns": 8,
+  "frameCount": 78,
+  "durationsMs": [
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40,
+    40
+  ],
+  "durationMs": 3120,
+  "loop": false,
+  "previewLoop": true,
+  "sheet": "spore-carapace-antenna-birth-v1-sheet.png",
+  "preview": "spore-carapace-antenna-birth-v1-preview.gif",
+  "webpPreview": "spore-carapace-antenna-birth-v1-preview.webp",
+  "sheetSHA256": "7c4168aa4c136a1f1aab7bc5032b91ef97bb56707643bc892fc64c3353e3da25",
+  "previewSHA256": "820340f5faa3921400f9b48674b4a7143936dec4379403ece26a5868dfa2a763",
+  "reference": "source.png",
+  "referenceSHA256": "f360f87a9275a45487f25fce8603b0444845be850eca0b230718171a5d9733cf",
+  "method": "Built-in image-generated complete whole-body drawings; cell extraction, one uniform per-clip scale calibration and complete-frame positioning only. No body-part composition, anatomy warping or interpolated body parts. Ranged action uses a complete drawn body, with no embedded projectile.",
+  "validation": {
+    "sourceGridNoOpaqueEdgeCrossing": true,
+    "finalSheetExactFrameRoundtrip": true,
+    "finalNoOpaqueEdgeClipping": true,
+    "previewEncodedFromSavedSheet": true,
+    "gifDurationExact": true,
+    "gifDecodedFrames": 76,
+    "gifDurationMs": 3120
+  },
+  "frames": [
+    {
+      "index": 0,
+      "opaqueBounds": [
+        373,
+        173,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "3f1f943a9de33fcaab10e9a3c1eaaccec5872dc2820ec257025d8c4a81d1fbdc"
+    },
+    {
+      "index": 1,
+      "opaqueBounds": [
+        373,
+        173,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "3f1f943a9de33fcaab10e9a3c1eaaccec5872dc2820ec257025d8c4a81d1fbdc"
+    },
+    {
+      "index": 2,
+      "opaqueBounds": [
+        373,
+        173,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "a248c311c2342ef033d095a6cb0731e345a42ca3402a573a88f1ca1fed390961"
+    },
+    {
+      "index": 3,
+      "opaqueBounds": [
+        373,
+        173,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "16423804c5a6cfd50827d7157d8ee3a1b7b3812039222f9d9490db45ef601143"
+    },
+    {
+      "index": 4,
+      "opaqueBounds": [
+        373,
+        172,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "5d70442c330cb1259df3e001752266c6a38b32f9759e2666a84c4156c9f4e9ef"
+    },
+    {
+      "index": 5,
+      "opaqueBounds": [
+        373,
+        172,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "05fbfe868a1ffb56e28b8677ceb80b49ad82086f1376941622c764d34a668465"
+    },
+    {
+      "index": 6,
+      "opaqueBounds": [
+        373,
+        172,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "f54e977ae89b436b267480f963df23dd05e1ba49479535a29bb0a9d81944e8f3"
+    },
+    {
+      "index": 7,
+      "opaqueBounds": [
+        373,
+        172,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "e9526030461ed54e5bbb5436235d869f02a564c6cdd353a46f8a355d19a0dd73"
+    },
+    {
+      "index": 8,
+      "opaqueBounds": [
+        373,
+        172,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "9be1bdb3130b282f658a4134ed62a12255d6bcbb155a1d97ba88f5f5f26d5227"
+    },
+    {
+      "index": 9,
+      "opaqueBounds": [
+        373,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "fd0678203283658c1eb052d07c9862b089a3e7f821a3562d943b550ada4e31cb"
+    },
+    {
+      "index": 10,
+      "opaqueBounds": [
+        373,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "9181361588ea321bf29d532c1ba3a6a68af23fd208e3789145e82690cccf9d7f"
+    },
+    {
+      "index": 11,
+      "opaqueBounds": [
+        373,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "ad6e63cf093063afb12313b47d8fb52c38d522d34698a52c1ca4ec93b78e8ce0"
+    },
+    {
+      "index": 12,
+      "opaqueBounds": [
+        373,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "1c7887c6bacf05c813fd799028ea15cdb1c12165a01d2145a23d7b3d2a97a7ea"
+    },
+    {
+      "index": 13,
+      "opaqueBounds": [
+        373,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "c1731c184f3780e028754025e16a9c5c04c2d5a5bb0cd923d89d63004a50cc86"
+    },
+    {
+      "index": 14,
+      "opaqueBounds": [
+        373,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "d099532299e17648e7150c440e622f1ef0023e0394b604dbc061fafb60d797cd"
+    },
+    {
+      "index": 15,
+      "opaqueBounds": [
+        373,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "db7aef108981ef4283bf30b43667a42aacadf00e38c664896fc55c916076f43a"
+    },
+    {
+      "index": 16,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "5ad39bd598599fbf93c9987e3f3774a3041895ae76c97c1533950fc8fc4da474"
+    },
+    {
+      "index": 17,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "aa6e854fedea653003ae58b7bf144220d8229cfb28f195f479a9bda1cd2f2400"
+    },
+    {
+      "index": 18,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "87409187859f11ab333e0d3c1414a023091581f29bacf4ce64cc29d1f0e13a91"
+    },
+    {
+      "index": 19,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "c4c9e137763330327ee2ab2b37fd25e2f74a30b949c0ccac441d91653c4a6541"
+    },
+    {
+      "index": 20,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "d3762da07ff3310a254cb720a8375c9987b6cecdf9b7da1f749c546ae36e2e0e"
+    },
+    {
+      "index": 21,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "cc92358f6935080d9f78eecf1600a46c05def2657d752ec8b12872140ca80bf3"
+    },
+    {
+      "index": 22,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "54fa21c40c0118131ae8029c28d54dd2ed390e89762faa1ce779bbcc16f17418"
+    },
+    {
+      "index": 23,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "32694fdac00fe78985c9016b0af54c5e3bac4e2233aaf38449b2038c4622b664"
+    },
+    {
+      "index": 24,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "6e75364b177ad8e42fab27e657f647fe82b7bef295f0a1b2540a8c3c9a7a10cb"
+    },
+    {
+      "index": 25,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "5996dcfa4689abb969f9fffbf29e4527ea59b94d355563cf5c41ff789b354048"
+    },
+    {
+      "index": 26,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "35452a4a3bfcf56570b425670aa8a1254f7105c3ccb5ed386f0b63cca8fcea86"
+    },
+    {
+      "index": 27,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "82f79caf968817cb72be7d4d94fda26eb1889064bbdcc30bbe73c46e6143fdb7"
+    },
+    {
+      "index": 28,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "f571edc74d4ef201f5fdba59cc6c3a33238b498768b85d428fc43e7d0717e4de"
+    },
+    {
+      "index": 29,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "bd6bf6a24e3db927cfd7c40e0937e33c5f6917201f10323c4e0d982790222a3a"
+    },
+    {
+      "index": 30,
+      "opaqueBounds": [
+        373,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "5dd9d01012326a9777bc2af4b76ffbf6862f99ce35af7fa312cddca7c39d0bc7"
+    },
+    {
+      "index": 31,
+      "opaqueBounds": [
+        370,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "78cad740d035c5d4e866f2b3bce616b870fdc10726810de0988e2f6868edfc3e"
+    },
+    {
+      "index": 32,
+      "opaqueBounds": [
+        363,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "fbec8f662ef8f88b311c38ae65ba0c1a8f005d228f8c4024ec389e90d9965e43"
+    },
+    {
+      "index": 33,
+      "opaqueBounds": [
+        351,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 1,
+      "frameSHA256": "1fbb997482a1a754015a087f377074c84f357e9e83946ec9f5add6cd379cf5d7"
+    },
+    {
+      "index": 34,
+      "opaqueBounds": [
+        345,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "622c5e2109e547cbf678116221637360c6e72adea8a137c7f97063961fea6271"
+    },
+    {
+      "index": 35,
+      "opaqueBounds": [
+        337,
+        170,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "97c58a186bb6e1c2d780c47c1e78442bdace02d1e8ca9620f97b4724e6cfd145"
+    },
+    {
+      "index": 36,
+      "opaqueBounds": [
+        327,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "c5751cef425bf2dd1a975f3c7de9eaa1c5db283236937d4a9d582f3c0617117e"
+    },
+    {
+      "index": 37,
+      "opaqueBounds": [
+        314,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "4fb28f6a4404bea9a95d97fb8b7509c25dde3b69b7dfa8b470ee51facbbcf6a2"
+    },
+    {
+      "index": 38,
+      "opaqueBounds": [
+        303,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "109d0e0b3e43a0b2b760bfafc99b6892b6185c0b2be10f613cad6a65f605d0fd"
+    },
+    {
+      "index": 39,
+      "opaqueBounds": [
+        296,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "0a81ffe716899ca7fad9a82e1594ce7a47d1cc0e9d49bf6094ca00814d5035fe"
+    },
+    {
+      "index": 40,
+      "opaqueBounds": [
+        287,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "fec7d66c3d082a20723c8160a01b0f663d3767c3c918065defaba2a992b25955"
+    },
+    {
+      "index": 41,
+      "opaqueBounds": [
+        278,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "449dc83300453107ff2503f4b8f569e229b8011b93b3c498d1bd1eafa7c8db46"
+    },
+    {
+      "index": 42,
+      "opaqueBounds": [
+        269,
+        171,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "6e3fbce99abb8e2bfdb14c7bc6e5a1549f859fd1bcae2e9fbc9137d17583bb0a"
+    },
+    {
+      "index": 43,
+      "opaqueBounds": [
+        259,
+        172,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "5685693307782f5233b813d59a2bce429dc1b8437af86bc088058db79be87ab6"
+    },
+    {
+      "index": 44,
+      "opaqueBounds": [
+        251,
+        172,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "e4940845cda58bdbb968b256a13c5c2bb0138ac1ac5fd82c4fe50678da9b7b9c"
+    },
+    {
+      "index": 45,
+      "opaqueBounds": [
+        244,
+        172,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "aaaa3c8eac4f929e031e615f1c6d7658537463236d9ac1a16be66120dfb2d1a0"
+    },
+    {
+      "index": 46,
+      "opaqueBounds": [
+        238,
+        172,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "8a85d1aef7760b7e26b82983dd3e125ad2c18b176f154ab3d7e8da0283cb05fb"
+    },
+    {
+      "index": 47,
+      "opaqueBounds": [
+        232,
+        172,
+        703,
+        394
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "cb6924d6d4ac48f402b1aa6099c7629f3ac7edbe76c645a0d3eb49136148378f"
+    },
+    {
+      "index": 48,
+      "opaqueBounds": [
+        227,
+        173,
+        703,
+        403
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "cf37bc87fec84865aca21fd1daabc4f593608994b4c6532b7d1aeba0a0a1861b"
+    },
+    {
+      "index": 49,
+      "opaqueBounds": [
+        222,
+        173,
+        703,
+        418
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "c4418c6a5e5cf1c407019d56a59c55a41f5061b85ac967f8e566d6027a84b8ac"
+    },
+    {
+      "index": 50,
+      "opaqueBounds": [
+        219,
+        173,
+        703,
+        434
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "ccd12ce6d7eaf5cbf9d69bd5fee7b2b654f847cb5decb463a34f87c760e5634f"
+    },
+    {
+      "index": 51,
+      "opaqueBounds": [
+        217,
+        173,
+        703,
+        451
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "f29bc6c28e648962f3aa729c346f37a8caa9b851e81f5c647cd82858b95a94e4"
+    },
+    {
+      "index": 52,
+      "opaqueBounds": [
+        216,
+        173,
+        703,
+        468
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "ea98f97fb637184607c9c81566119cc387551a34e1d4d57c5ddb884e81881242"
+    },
+    {
+      "index": 53,
+      "opaqueBounds": [
+        216,
+        173,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "f2d369255302d1184234c22f12c008a4873c579531dd98375a2f3b0736d75494"
+    },
+    {
+      "index": 54,
+      "opaqueBounds": [
+        216,
+        174,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "ece6a7f3bc7c389d6958aaf23f52d4dc68230e2b4d118e51cf12167647e21fad"
+    },
+    {
+      "index": 55,
+      "opaqueBounds": [
+        216,
+        174,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "ee7224027be5a40626ccaf2439c15efa176d2fe05a33db831cbc8ab6358dd113"
+    },
+    {
+      "index": 56,
+      "opaqueBounds": [
+        216,
+        174,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "dd736ff735019528c276bdd34a6775511a81df3f9a84ce7a4fcfa3595f4e6764"
+    },
+    {
+      "index": 57,
+      "opaqueBounds": [
+        216,
+        174,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "44daaf93cd7384b73ea38fbe536a04f983b110fe73183a0de4ede34d9138b242"
+    },
+    {
+      "index": 58,
+      "opaqueBounds": [
+        216,
+        174,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "a7bddd0eaa87dbefdc151fbfa45217464e2b45dcd7aadd5d3f3f447983adc7e8"
+    },
+    {
+      "index": 59,
+      "opaqueBounds": [
+        216,
+        175,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "ced85662fd72ca288a0a10a257b45e9fba407d54f3f16d8317a9ca42373f9790"
+    },
+    {
+      "index": 60,
+      "opaqueBounds": [
+        216,
+        175,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "20375d34bb0f70a58678372fc4997dc8a1f7f26e4eebe971ed99de1177ec477b"
+    },
+    {
+      "index": 61,
+      "opaqueBounds": [
+        216,
+        175,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "74eb21edecca4a117db945b762f8a326e3866e8173ec206f500c20ec323d4538"
+    },
+    {
+      "index": 62,
+      "opaqueBounds": [
+        216,
+        175,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "17bdaf6e9993da62a401d3efb03cdfa28f2114f32a6b8bd7b4cb7372dac50be1"
+    },
+    {
+      "index": 63,
+      "opaqueBounds": [
+        216,
+        175,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "e9dcbabc8ea210de2dfda1ee85afecd3076f6ce32edd7925b32395a35a24654e"
+    },
+    {
+      "index": 64,
+      "opaqueBounds": [
+        216,
+        175,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "c29d78908c930f07d03efe523f4a47bedf14a4aa4a63e7f0a955a5bc4351e683"
+    },
+    {
+      "index": 65,
+      "opaqueBounds": [
+        216,
+        176,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "650e1fc696501001b874182da62024c18a5f05e56bd7bd5470d76799779844ef"
+    },
+    {
+      "index": 66,
+      "opaqueBounds": [
+        216,
+        176,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "2381df5779aa602288b05b99270e0a4b102cad05f190db9ea2b6e9385dcc826b"
+    },
+    {
+      "index": 67,
+      "opaqueBounds": [
+        216,
+        176,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "306640491db9d4db46ecae92c5de2ae7f0d8e9795355443a411871697b6f78d3"
+    },
+    {
+      "index": 68,
+      "opaqueBounds": [
+        216,
+        176,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "5f669cdbbebc4ea5509ef065fc260efc11c8e3defa7230c8a2654a319557a94b"
+    },
+    {
+      "index": 69,
+      "opaqueBounds": [
+        216,
+        176,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "32dc07ab3c08ef878688f7ac8f6b09ef4ccb5d1828029e610f243da264588834"
+    },
+    {
+      "index": 70,
+      "opaqueBounds": [
+        216,
+        176,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "818fc7bfe33ff4e73a8422088e60659f92d779737dc5ceda3052a2f03652b154"
+    },
+    {
+      "index": 71,
+      "opaqueBounds": [
+        216,
+        176,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "9481a13102be1918ba6075b03f0fccd408d098a070f581dc2fe3cf10da2162a8"
+    },
+    {
+      "index": 72,
+      "opaqueBounds": [
+        216,
+        176,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "6fb4d9b842ecb57af862c310bc2232da6a2c8fa12c9e6f2ae63d8abc32240fa7"
+    },
+    {
+      "index": 73,
+      "opaqueBounds": [
+        216,
+        176,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "e8bde316df9903c7f7080f936ffdeb37adab066d318141d01e0fe08711f00523"
+    },
+    {
+      "index": 74,
+      "opaqueBounds": [
+        216,
+        176,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "9146936e0989de03cd0844c00245e5597e4c6a35224073e91bcd7b7a19f4489a"
+    },
+    {
+      "index": 75,
+      "opaqueBounds": [
+        216,
+        176,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "80151f75c9a9401983f7dc9c695e7884455b3b4086df31e13d18321ac5cc44c6"
+    },
+    {
+      "index": 76,
+      "opaqueBounds": [
+        216,
+        176,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "80151f75c9a9401983f7dc9c695e7884455b3b4086df31e13d18321ac5cc44c6"
+    },
+    {
+      "index": 77,
+      "opaqueBounds": [
+        216,
+        176,
+        703,
+        477
+      ],
+      "largeConnectedComponents": 2,
+      "frameSHA256": "d09e0320d6e49e8805f1b1b5b1e12fe9a7021e5d3aa2c81d3d7ca33bdf182052"
+    }
+  ],
+  "integration": "Planning-only deliverable. No game runtime wiring or deployment.",
+  "kind": "offline full-scene birth preview",
+  "unitBodySheet": "spore-carapace-antenna-birth-body-v1-sheet.png",
+  "unitBodyManifest": "spore-carapace-antenna-birth-body-v1.json",
+  "nestReference": "DesignAssets/Tribes/spore/Animations/Nests/stage-01-idle-spine-v1/nest-stage-01-idle-sheet.png",
+  "runtimeTrace": "birth-runtime-trace.json",
+  "worldTravel": "Current sporeBirthPlacement: 0.82 s detach, two complete-body turns, 2.10 s landing, 2.42 s exact idle handoff; 3.12 s total.",
+  "bodyPartComposition": false,
+  "anatomyWarping": false,
+  "rangedAttack": false,
+  "limits": "Offline reference only. Nest and complete unit are scene-composited. No old unit-body stalk pixels or anatomical part masks are reused.",
+  "sourceFacing": "left"
+}

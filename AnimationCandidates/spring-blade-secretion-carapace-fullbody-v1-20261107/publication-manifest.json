@@ -204,9 +204,21 @@
       "loop": false,
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sheetSHA256": "f4cf593665cce8e714726db7c446bf74615346e3bdda4f4ba9d8b46d79a45b83",
-      "previewSHA256": "78e7c1736f8ae01fb2d2576709a6e7fc95cf1b5ded42c0aa9d04f93deb815751",
-      "gifSHA256": "67b165cdbae85dc5aaf5b5200afb4e1ee93401fe171d8a63a32deb56860aa6cc"
+      "sheetSHA256": "ff41d593ad6ebf67ba962df41169f8bf502b92dc75de5636303cd46b5d5ebfab",
+      "previewSHA256": "1f59bb051e89a4c37e0c3e31d39f6f88e3a08c592f9c00371c32e3371111de7b",
+      "gifSHA256": "3abce54df198ebc610b77537bc127885c1f8b130655b3f7f13e41e319b2ebfc2",
+      "sourceFacing": "left",
+      "sourceRepair": {
+        "kind": "image-generated-complete-leftward-middle-cels",
+        "sourceFacing": "left",
+        "candidateManifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-attack-manifest.json",
+        "validation": "tools/spring-native-facing-20261108/followup13-validation.json",
+        "originalWholeFirstLastCelsPreserved": true,
+        "geometryAndTimingUnchanged": true,
+        "legacyGeneratedSourceAndQAFieldsAreHistorical": true,
+        "mirroring": false,
+        "bodyPartComposition": false
+      }
     },
     "ranged-attack": {
       "frameSize": 480,
@@ -272,11 +284,23 @@
       "loop": false,
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sheetSHA256": "628ab1e2a3eb74f849eafbac7377f1b2687f81336b54626ce480f20882d5aac2",
-      "previewSHA256": "c6d0c7db1a13dd84aac725b76f64a9831762bb45770e70cf2c9e301218c473da",
-      "gifSHA256": "ee10389d99d9a6944e739c412fb83bbd54db7ac5e6092d547a98e50d460d89d0",
+      "sheetSHA256": "9adbca44e42dec1b95c39a202762db5e3cef3ba43690e84de1cbe9038080721c",
+      "previewSHA256": "0aa3ca46af8b805f88c394ca62cdfb2f4679765d0502913b229719ee78b54668",
+      "gifSHA256": "aed2f88e68046e72ddd4b8e6f38f4d8e40d1353eed49ec198c0975575656e641",
       "rangedBody": true,
-      "projectileBakedIntoBodySheet": false
+      "projectileBakedIntoBodySheet": false,
+      "sourceFacing": "left",
+      "sourceRepair": {
+        "kind": "image-generated-complete-leftward-middle-cels",
+        "sourceFacing": "left",
+        "candidateManifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-carapace-ranged-manifest.json",
+        "validation": "tools/spring-native-facing-20261108/followup13-validation.json",
+        "originalWholeFirstLastCelsPreserved": true,
+        "geometryAndTimingUnchanged": true,
+        "legacyGeneratedSourceAndQAFieldsAreHistorical": true,
+        "mirroring": false,
+        "bodyPartComposition": false
+      }
     },
     "hurt": {
       "frameSize": 480,

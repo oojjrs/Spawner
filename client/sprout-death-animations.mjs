@@ -89,6 +89,7 @@ export const APPROVED_SPROUT_DEATH_ANIMATIONS = Object.freeze({
     "registrationScale": 1.2307692307692308,
     "bodyReferenceImage": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
     "secretionLifecycle": true,
-    "nativeSecretionLifecycle": true
+    "nativeSecretionLifecycle": true,
+    "sourceFacing": "left"
   }
 });

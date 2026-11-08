@@ -3,8 +3,8 @@ import test from "node:test";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 import assert from "node:assert/strict";
-import { WELCOME_UNIT_APPEARANCES, WELCOME_NEUTRAL_SHARE, WELCOME_IDLE_DURATION_MS, welcomeDisplaySize, welcomeUnitPerformance, createWelcomeRoster, welcomeCreatureScale, prepareWelcomeChoice, welcomeTravelMotion, drawWelcomeChoice } from "./welcome-presentation.mjs";
-import { CREATURE_IDLE_ANIMATIONS, unitMovementPosition, creatureAnimationSpeed, unitAnimationPose } from "./unit-animation.mjs";
+import { WELCOME_UNIT_APPEARANCES, WELCOME_NEUTRAL_SHARE, WELCOME_IDLE_DURATION_MS, welcomeDisplaySize, welcomeStridePixels, welcomeUnitPerformance, createWelcomeRoster, welcomeCreatureScale, prepareWelcomeChoice, welcomeTravelMotion, drawWelcomeChoice } from "./welcome-presentation.mjs";
+import { CREATURE_IDLE_ANIMATIONS, CREATURE_WALK_ANIMATIONS, unitMovementPosition, creatureAnimationSpeed, unitAnimationPose } from "./unit-animation.mjs";
 import { unitStats } from "../server/attributes.mjs";
 import { unitActionArtDefinition, unitActionArtPose } from "./unit-action-art.mjs";
 import { UNIT_ACTION_ART } from "./unit-action-art-assets.mjs";
@@ -200,10 +200,11 @@ test("actual welcome header uses idle in the center for tribes and neutral speci
   const source = readFileSync(new URL("./welcome-header.js", import.meta.url), "utf8");
   const travel = source.slice(source.indexOf("  function travelMotion("), source.indexOf("  function presentDeparture("));
   const duration = source.slice(source.indexOf("  function phaseDuration("), source.indexOf("  function advance("));
-  const model = { unitStats, creatureAnimationSpeed, unitMovementPosition, welcomeTravelMotion, welcomeUnitPerformance, WELCOME_IDLE_DURATION_MS };
+  const model = { unitStats, creatureAnimationSpeed, unitMovementPosition, welcomeTravelMotion, welcomeStridePixels, CREATURE_WALK_ANIMATIONS, welcomeUnitPerformance, WELCOME_IDLE_DURATION_MS };
   for (const key of ["bean", "spore", "pebble", "spring", "boar", "talon-owl"]) {
     const scope = { globalThis: { Spawner: model }, model, current: { key, variant: 0 }, appearances: [{}],
       tribes: ["bean", "spore", "pebble", "spring"], width: 480, motionSize: () => 100, worldPixels: () => 144,
+      creatureResources: { walk: new Map() }, nativeAssets: { displayScale: () => 1 },
       phase: "perform", phaseStartedAt: 10, timeline: 10.5, elapsed: 500, appearanceNumber: 0,
       reducedMotion: { matches: false }, restDuration: 2000,
       neutralAnimations: () => ({ idle: { durationsMs: [400, 600] }, attack: { durationsMs: [9000] } }),

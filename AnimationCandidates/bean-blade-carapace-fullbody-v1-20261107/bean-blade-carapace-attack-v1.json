@@ -1,0 +1,192 @@
+{
+  "tribe": "bean",
+  "form": "blade-carapace",
+  "appearanceMask": 3,
+  "action": "attack",
+  "frameSize": 512,
+  "columns": 8,
+  "frameCount": 16,
+  "framePoseIndices": [
+    0,
+    1,
+    2,
+    2,
+    3,
+    3,
+    4,
+    4,
+    4,
+    4,
+    5,
+    5,
+    6,
+    7,
+    0,
+    0
+  ],
+  "durationsMs": [
+    60,
+    70,
+    60,
+    80,
+    30,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    70,
+    80,
+    90,
+    100,
+    60
+  ],
+  "durationMs": 1000,
+  "loop": false,
+  "pivotX": 256,
+  "pivotY": 448,
+  "sheet": "bean-blade-carapace-attack-v1-sheet.png",
+  "preview": "bean-blade-carapace-attack-v1-preview.gif",
+  "distinctWholeBodyPoses": 7,
+  "source": "Sources/approved-neutral.png",
+  "method": "Whole-body imagegen drawings. Code only crops complete cels, uniformly rescales with one fixed scale per atlas, translates whole cels, and packs exact RGBA pixels. No body-part rigging, recombination, mirroring, deformation or interpolation.",
+  "publicationAuthorization": "User requested autonomous completion and planning-document publication without individual confirmations. Newly generated motion has not received individual user approval.",
+  "rangedAttackCreated": false,
+  "records": [
+    {
+      "index": 0,
+      "source": "Sources/approved-neutral.png",
+      "exactApprovedNeutral": true
+    },
+    {
+      "index": 1,
+      "source": "Sources/attack-wholebody-generated.png",
+      "sourceRect": [
+        426,
+        62,
+        685,
+        446
+      ],
+      "uniformScale": 0.8869047619047619,
+      "wholeCelTranslation": [
+        146,
+        110
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 2,
+      "source": "Sources/attack-wholebody-generated.png",
+      "sourceRect": [
+        771,
+        41,
+        1028,
+        447
+      ],
+      "uniformScale": 0.8869047619047619,
+      "wholeCelTranslation": [
+        144,
+        91
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 3,
+      "source": "Sources/attack-wholebody-generated.png",
+      "sourceRect": [
+        1127,
+        202,
+        1530,
+        444
+      ],
+      "uniformScale": 0.8869047619047619,
+      "wholeCelTranslation": [
+        143,
+        237
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 4,
+      "source": "Sources/attack-wholebody-generated.png",
+      "sourceRect": [
+        58,
+        697,
+        416,
+        934
+      ],
+      "uniformScale": 0.8869047619047619,
+      "wholeCelTranslation": [
+        148,
+        241
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 5,
+      "source": "Sources/attack-wholebody-generated.png",
+      "sourceRect": [
+        440,
+        680,
+        763,
+        933
+      ],
+      "uniformScale": 0.8869047619047619,
+      "wholeCelTranslation": [
+        158,
+        228
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 6,
+      "source": "Sources/attack-wholebody-generated.png",
+      "sourceRect": [
+        808,
+        635,
+        1129,
+        934
+      ],
+      "uniformScale": 0.8869047619047619,
+      "wholeCelTranslation": [
+        144,
+        186
+      ],
+      "wholeCelLift": 0
+    },
+    {
+      "index": 7,
+      "source": "Sources/approved-neutral.png",
+      "exactApprovedNeutral": true
+    }
+  ],
+  "contactMs": 300,
+  "verification": {
+    "frameCount": 16,
+    "durationMs": 1000,
+    "sheetSize": [
+      4096,
+      1024
+    ],
+    "uniqueWholeBodyPoses": 7,
+    "sheetExactPosePixelEquality": true,
+    "transparentBackground": true,
+    "clippedFrames": 0,
+    "singleConnectedBodyOver8Pixels": true,
+    "connectedBodyCounts": [
+      1
+    ],
+    "contentUnion": [
+      145,
+      95,
+      497,
+      448
+    ],
+    "gifDurationMs": 1000,
+    "gifDecodedFrames": 8,
+    "finalFourFramesIdentical": false,
+    "sheetSha256": "84717b26137ee10b3077505e390b3d93118ab93ec6028a7c4dc8a3ff54c5b189"
+  },
+  "sourceFacing": "left"
+}

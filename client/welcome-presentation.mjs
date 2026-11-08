@@ -13,6 +13,14 @@ export function welcomeDisplaySize(gameSize) {
   return .4 + (gameSize - .4) * .25;
 }
 
+// Convert the authored planted-foot travel into the same screen scale used by
+// the body. A battlefield cell is not a stride, especially for small creatures.
+export function welcomeStridePixels(animation, entry, cell, displayScale) {
+  if (!(animation?.strideFrameRatio > 0) || !(entry?.scale > 0)) return null;
+  return animation.strideFrameRatio * animation.frameSize / (animation.viewSize || animation.frameSize) *
+    1.4 * entry.scale * cell * displayScale;
+}
+
 
 export function welcomeUnitPerformance(agent, startedAt) {
   const definition = unitActionArtDefinition(agent);
@@ -73,16 +81,20 @@ export function welcomeCreatureScale(animation, bounds, top, displaySize, width,
     (ground - 34) / Math.max(.001, -envelope.top), (height - 6 - ground) / Math.max(.001, envelope.bottom));
 }
 
-// Construct the same cell moves used by the game; a complete move always lands
-// before switching to an idle pose in the middle of the header.
-export function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsedMs, timeline, phase, startedAt, reducedMotion = false, id = "welcome", worldPixels }) {
+// Keep native game pose clocks, but let measured gaits use a separate travel
+// distance. A complete move lands before the centered idle presentation.
+export function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsedMs, timeline, phase, startedAt, reducedMotion = false, id = "welcome", worldPixels, stridePixelsPerCycle }) {
   const neutral = !["bean", "spore", "pebble", "spring"].includes(key);
   const stats = neutral ? null : model.unitStats(attributes, key);
   const speed = neutral ? model.creatureAnimationSpeed(key) : model.unitTravelSpeed ?
     model.unitTravelSpeed({ tribe: key, stats }, 0) : stats.speed;
   const cell = Number.isFinite(worldPixels) ? worldPixels : neutral ? Math.min(240, width * .75) : size / .7;
-  const steps = Math.max(1, Math.ceil((width / 2 + size / 2) / cell));
-  const moveDuration = neutral ? 1 / speed : Math.min(1, 1 / speed);
+  const walk = neutral && model.CREATURE_WALK_ANIMATIONS?.[key];
+  const groundedGait = Number.isFinite(stridePixelsPerCycle) && stridePixelsPerCycle > 0 && walk?.durationMs > 0;
+  const cycles = walk?.cyclesPerCell || 1;
+  const travelCell = groundedGait ? stridePixelsPerCycle * cycles : cell;
+  const steps = Math.max(1, Math.ceil((width / 2 + size / 2) / travelCell));
+  const moveDuration = groundedGait ? walk.durationMs / 1000 * cycles : neutral ? 1 / speed : Math.min(1, 1 / speed);
   const durationMs = steps * moveDuration * 1000;
   const moving = !reducedMotion && (phase === "enter" || phase === "exit");
   const origin = Number.isFinite(startedAt) ? startedAt : timeline - elapsedMs / 1000;
@@ -97,8 +109,8 @@ export function welcomeTravelMotion(model, { key, attributes = {}, width, size, 
     ...(!neutral ? { moveAnimationStartedAt: origin } : {}),
     flightStartedAt: origin, renderFromX: -step, renderFromY: 0, x: -step - 1, y: 0 };
   const position = model.unitMovementPosition(agent, timeline, reducedMotion);
-  const x = moving ? width / 2 + (phase === "enter" ? steps * cell : 0) + position.x * cell : width / 2;
-  return { agent, position, x, durationMs, cell, size };
+  const x = moving ? width / 2 + (phase === "enter" ? steps * travelCell : 0) + position.x * travelCell : width / 2;
+  return { agent, position, x, durationMs, cell, travelCell, size };
 }
 
 // A rejected decode or lazy rig must not leave the rotation waiting forever.

@@ -1,0 +1,42 @@
+{
+  "DesignAssets/Animations/CreatureApprovedV4/white-paw/walk-stride-v6.webp": {
+    "display": [
+      248,
+      248
+    ],
+    "grid": [
+      8,
+      8
+    ]
+  },
+  "DesignAssets/Animations/CreatureApprovedV4/shadow-weasel/walk-stride-v6.webp": {
+    "display": [
+      229,
+      229
+    ],
+    "grid": [
+      8,
+      8
+    ]
+  },
+  "DesignAssets/Planning/ApprovedAnimations96/white-paw-walk-stride-v6.webp": {
+    "display": [
+      96,
+      96
+    ],
+    "grid": [
+      1,
+      1
+    ]
+  },
+  "DesignAssets/Planning/ApprovedAnimations96/shadow-weasel-walk-stride-v6.webp": {
+    "display": [
+      96,
+      96
+    ],
+    "grid": [
+      1,
+      1
+    ]
+  }
+}

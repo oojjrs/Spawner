@@ -19,6 +19,7 @@ export const UNIT_SECRETION_LIFECYCLE_ANIMATIONS = Object.freeze(Object.fromEntr
     Object.entries(actions).map(([action, body]) => [action, Object.freeze({ ...body,
       image: "DesignAssets/Animations/UnitRangedV1/" + tribe + "/" + action + ".png",
       bodyReferenceImage: body.image, secretionLifecycle: true,
+      ...(["bean", "spore"].includes(tribe) ? { sourceFacing: "left" } : {}),
       ...(tribe === "bean" && action === "death" ? APPROVED_SPROUT_DEATH_ANIMATIONS.secretion : {}),
       ...(tribe === "spring" ? SPRING_SECRETION_ASSETS[action] : {})
     })])

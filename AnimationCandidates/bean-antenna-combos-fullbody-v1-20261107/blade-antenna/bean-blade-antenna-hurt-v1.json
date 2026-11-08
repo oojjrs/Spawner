@@ -189,10 +189,11 @@
     "gifDurationMs": 760,
     "gifDecodedFrames": 8,
     "finalFourFramesIdentical": true,
-    "sheetSha256": "7677a2569cae7f6166e4db16e7285824d491f4d1b9eba47411b01dc340e67678"
+    "sheetSha256": "ef6ae7399077f478fef8f810129f4be250e32f7040771f84ec881083dd7b6d17"
   },
   "status": "ready-for-authorized-publication",
   "previewLoop": true,
   "sourceMask": "05",
-  "sourceSha256": "783bed93d96a0eab8e30139e6fb296414359f8b1519177b813e3d6e0edc6536d"
+  "sourceSha256": "d8f2fa1e86203fa0b38416fe3ae006adf4f332d2d7a99594ab1b988e6e2497a1",
+  "sourceFacing": "left"
 }

@@ -1,0 +1,24 @@
+bean/spore independent pixel coverage { files: 242, cells: 7270, heldFiles: 5, protectedFiles: 58 }
+✔ bean/spore 28형태의 184 actions와 reference, birth override는 좌향 등록 및 타이밍·격자를 보존한다 (8.234328ms)
+✔ 제외 6형태와 비선택 종족의 registry는 변하지 않는다 (32.362001ms)
+✔ 공유 환경은 새 content-address 경로, bean-seed-b는 후보만 copy-on-write한다 (0.627748ms)
+✔ 실제 RGBA 픽셀은 셀별 반전이며 held hurt는 두 블록을 교환하고 제외6형태 픽셀은 보존한다 (116168.443522ms)
+✔ 실사용 188 route의 첫·끝 pose는 752 production draw에서 양방향과 birth override를 확인한다 (107.554654ms)
+✔ 우선 held hurt 5개는 양쪽 facing 및 피격 방향의 264 draw에서 교환된 원본 블록을 선택한다 (6.22906ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 116494.227466
+
+Independent visual post-review (2026-11-08):
+Viewed bean-spore-post-normalization-contact-0.jpg and -1.jpg using view_image.
+Coverage: all 28 selected forms; idle frame 0 plus attack/ranged first, impact, last = 112 before/after pairs.
+Observed: asymmetric leaves, blade leaves, cap fins and secretion outlets reflect consistently across idle and attack endpoints. Bean lunges/blades and spore cap/blade attack poses now point left. No new endpoint handedness conflict visible in these samples. Frontal poses remain valid frontal poses.
+Limitation: spore/secretion ranged has a static outlet, with no projectile trajectory visible in this sheet; outlet moved left, but direction of actual emission is not independently established from this art alone.
+Pixel scope: 242 unique runtime-referenced transformed images, all 7270 atlas cells, compared to immutable Git baseline with plan SHA cross-check. RGB under alpha=0 ignored; visible RGBA compared exactly. Five held atlases checked with side-block permutation. 58 protected image paths byte-identical, including two independent-angle projectiles.
+Additional scope: 184 stored actions (171 canonical, 12 work, 1 jump), plus five effective birth overrides = 176 effective canonical actions. 188 reachable action routes yielded 752 first/end both-facing production-function mock-canvas draws; held hurt yielded 264 draws. Jump metadata/pixels checked, but no jump pose selector exists in this tested route.
+Not independently covered here: 116 raw reference images, other non-runtime sources among the initial 507 source transforms, 243 previews, full browser game screenshots, full-frame visual rereview of all actions. Those source/preview transforms have separate source-normalization proof. This test does not equate mock-canvas draw coverage with browser screenshot verification.

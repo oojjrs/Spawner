@@ -1,0 +1,1226 @@
+{
+  "status": "completed",
+  "changes": {
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-preview.gif": {
+      "beforeSha256": "3845dc63b5edb26f63221fecd7f26c9095679b5fb05d47efed16e5893e42cdd4",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "action": "idle",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-preview.gif",
+      "afterSha256": "5c0916aaefd55a4dc2b9725fd969fc1cec2ecac7b6923890fe980279b6ccc550",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 9,
+      "durationsMs": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        100,
+        100,
+        1400
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-transparent-preview.webp": {
+      "beforeSha256": "5f3bbe7ff48268b90f36ab01c053b15eab687aee0050a8e05b3c8345546393ca",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "action": "idle",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-transparent-preview.webp",
+      "afterSha256": "05436ec88f278bd80bece226d9b85967d2a1c21bb489461d84c8b1e490942dba",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 9,
+      "durationsMs": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        100,
+        100,
+        1400
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/preview.webp": {
+      "beforeSha256": "d21c6cc491b3ed5d1ac7f49367392be10b23e5989af74953434ef1659286ad87",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "action": "walk",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/preview.webp",
+      "newImage": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/preview.webp",
+      "afterSha256": "9c98d91a688c5ac93dc97dc392fb462527ca2d7a4fb633e8853e44445336bfc2",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 23,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        80,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-preview.gif": {
+      "beforeSha256": "3a5dcc9012d3f425cb80c10a3e3ed18bcaf138adedb92a3048f1ea56d63fb271",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "action": "attack",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-preview.gif",
+      "afterSha256": "ddf343656949ac460899e7181ddc3593b26699827b54a72dda9153046fcd6a72",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        60,
+        70,
+        140,
+        80,
+        200,
+        120,
+        80,
+        250
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-transparent-preview.webp": {
+      "beforeSha256": "901e44a65d23564e5f62144b50eed9ee162f78ede8c08357bff33bafd418b301",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "action": "attack",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-transparent-preview.webp",
+      "afterSha256": "f471e7a36b87410104cda259bd4d93eca92c4033e49b4eeecc595b45c9da0f0f",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        60,
+        70,
+        140,
+        80,
+        200,
+        120,
+        80,
+        250
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-preview.gif": {
+      "beforeSha256": "e125c14c795f17e3b5ad0750335bbc861e8729babc69bbb1dc8e46864cac7010",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "action": "hurt",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-preview.gif",
+      "afterSha256": "77dd8de975ca9ba869e37e895afb8efa0792b3cc2de45a6c40cbe75da5afc787",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        20,
+        30,
+        30,
+        460,
+        30,
+        50,
+        40,
+        100
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-transparent-preview.webp": {
+      "beforeSha256": "b629dd401764afb19d6c2f6e20c6be547fb284f9b8985d652c5aeda5daa0722c",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "action": "hurt",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-transparent-preview.webp",
+      "afterSha256": "906dfd2b30b5bef259636c5f09821920bf8a74ea3e723087d92f6fcfe55b7bea",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        20,
+        30,
+        30,
+        460,
+        30,
+        50,
+        40,
+        100
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-from-sheet.gif": {
+      "beforeSha256": "55dd99bfa79ca1ce7bc470077707283133db9730b6a91147c83afa0f28bd8d59",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "action": "birth",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-from-sheet.gif",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-from-sheet.gif",
+      "afterSha256": "b6c7fac4506f8c0738bc3a91ea30c2533c8c4b56e935df36e7ff4256ea6f1cbe",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 111,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        10,
+        20,
+        10,
+        30,
+        10,
+        20,
+        20,
+        10,
+        30,
+        20,
+        20,
+        10,
+        30,
+        30,
+        10,
+        40,
+        10,
+        30,
+        40,
+        40,
+        30,
+        10,
+        40,
+        40,
+        40,
+        40,
+        10,
+        30,
+        30,
+        10,
+        40,
+        20,
+        20,
+        40,
+        10,
+        30,
+        40,
+        40,
+        40,
+        40,
+        10,
+        150,
+        740
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-preview.webp": {
+      "beforeSha256": "b2f4fcc1b1d88df7155fafd9f6b55ada13f172699d63c7beb816cccdd75eed00",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "action": "birth",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-preview.webp",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-preview.webp",
+      "afterSha256": "70fa5bb2ecc07340c1b44e80d591414eeddf57e869c1c2fa3b866bcab70b932d",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 111,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        10,
+        20,
+        10,
+        30,
+        10,
+        15,
+        25,
+        10,
+        30,
+        20,
+        20,
+        10,
+        30,
+        30,
+        10,
+        40,
+        10,
+        30,
+        40,
+        40,
+        30,
+        10,
+        40,
+        40,
+        40,
+        40,
+        10,
+        30,
+        30,
+        10,
+        40,
+        20,
+        20,
+        40,
+        10,
+        30,
+        40,
+        40,
+        40,
+        40,
+        10,
+        150,
+        740
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-transparent-preview.webp": {
+      "beforeSha256": "ebd2edfc68571a6ffd37f3aa757b73689478bde375b6f2b412373bca6fdc1f57",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "action": "death",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-transparent-preview.webp",
+      "afterSha256": "ef10a4d8969df4dcea5902f3a53e497d30d1444a2d3182b18186c7d08af1ac73",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        160,
+        140,
+        120,
+        120,
+        140,
+        90,
+        1330
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-preview.gif": {
+      "beforeSha256": "3fe8e94bfa9ba524999697ccfa60876c23449da42c96d56b7e68d849b7c1f5f0",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "action": "death",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-preview.gif",
+      "afterSha256": "37bd30fb8a6217ccf321a01e8ec7758e89418502383ca02dcb770bf00130135a",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        160,
+        140,
+        120,
+        120,
+        140,
+        90,
+        1330
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-idle-v1-preview.gif": {
+      "beforeSha256": "772af20a4f5fa188c73653a68dabcdf0cf83941be57f667221019fe578b9ca37",
+      "users": [
+        {
+          "owner": "spore/blade-carapace",
+          "action": "idle",
+          "manifest": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-idle-v1-preview.gif",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-idle-v1-preview.gif",
+      "afterSha256": "19cc01cf669004bdfdcee7dc7ac6b3982501aef0159c576f43c76fe6c71637d3",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        1000,
+        200,
+        200,
+        100,
+        100,
+        800,
+        200,
+        200,
+        100,
+        200,
+        500,
+        600,
+        200,
+        200,
+        100,
+        1700
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-idle-v1-preview.webp": {
+      "beforeSha256": "5bcbe19c257093699ed50cae23ee634b752211d32a8ff62fb7c4be27181831a4",
+      "users": [
+        {
+          "owner": "spore/blade-carapace",
+          "action": "idle",
+          "manifest": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-idle-v1-preview.webp",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-idle-v1-preview.webp",
+      "afterSha256": "b27a9b43a98dd31746ee919ce82107fa3c4f6cb261bf5110746dfa9b003ea5b8",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        1000,
+        200,
+        200,
+        100,
+        100,
+        800,
+        200,
+        200,
+        100,
+        200,
+        500,
+        600,
+        200,
+        200,
+        100,
+        1700
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-walk-v1-preview.webp": {
+      "beforeSha256": "5813c65846bba2d36dacdb12f0e00175c825b107561268429470115dc85868bc",
+      "users": [
+        {
+          "owner": "spore/blade-carapace",
+          "action": "walk",
+          "manifest": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-walk-v1-preview.webp",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-walk-v1-preview.webp",
+      "afterSha256": "d9de5d9a840a1623ea744ab5d9420b0f0426afc9c9193d1b35fe216ddb62c068",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-walk-v1-preview.gif": {
+      "beforeSha256": "e354250b78b656f733c7b2368aa4506c7482b60d888c19e9e3fcb33083fe1d64",
+      "users": [
+        {
+          "owner": "spore/blade-carapace",
+          "action": "walk",
+          "manifest": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-walk-v1-preview.gif",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-walk-v1-preview.gif",
+      "afterSha256": "ef92a8162a7ec09e652bd5ab1c0e57f36d483ef7942b5bafbb94f7c17eecc14e",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-melee-v1-preview.gif": {
+      "beforeSha256": "4295e265785ce1597ad3cfd873330a74cbf71ec7e067a2cbdca8cb648cb63e97",
+      "users": [
+        {
+          "owner": "spore/blade-carapace",
+          "action": "attack",
+          "manifest": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-melee-v1-preview.gif",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-melee-v1-preview.gif",
+      "afterSha256": "3ff2b84cee9edf0215d9cdd65479e3be07a9527fb4c0da795e301c31b4973ca6",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        60,
+        60,
+        60,
+        40,
+        30,
+        50,
+        50,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        170
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-melee-v1-preview.webp": {
+      "beforeSha256": "804167f3b9fefda4529590818895e9b1d86300c097a729defb7166c6ef13ada4",
+      "users": [
+        {
+          "owner": "spore/blade-carapace",
+          "action": "attack",
+          "manifest": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-melee-v1-preview.webp",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-melee-v1-preview.webp",
+      "afterSha256": "8c510e46f072156bdd5f27485b0652952a74aa9498ab27920dcb9e6ac7e3ff88",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        60,
+        60,
+        60,
+        40,
+        30,
+        50,
+        50,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        170
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-hurt-v1-preview.gif": {
+      "beforeSha256": "78b979dbfc3de5fb4a8a96b9c15bfd5aa9dd58f2ba4320f9c42cdc90c6e9c7b2",
+      "users": [
+        {
+          "owner": "spore/blade-carapace",
+          "action": "hurt",
+          "manifest": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-hurt-v1-preview.gif",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-hurt-v1-preview.gif",
+      "afterSha256": "8a24f2c4386a100b49768013f72493d5022847f582f0bb97e88f3696b4c0991c",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        50,
+        40,
+        40,
+        100,
+        100,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        170
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-hurt-v1-preview.webp": {
+      "beforeSha256": "86a080f16142e544982d3cb830e115d5ef2b46bc21317ef7e012b5b54de00302",
+      "users": [
+        {
+          "owner": "spore/blade-carapace",
+          "action": "hurt",
+          "manifest": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-hurt-v1-preview.webp",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-hurt-v1-preview.webp",
+      "afterSha256": "0f39d7ae22fac467ecea015ecbef8176b76e8c05e7805d07bf71c64125ade7d7",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        100,
+        50,
+        40,
+        40,
+        100,
+        100,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        170
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-death-v1-preview.gif": {
+      "beforeSha256": "c94e9ba2f774e138661dba31d835ea2010053c4d5da3620ad66feecd64674bf2",
+      "users": [
+        {
+          "owner": "spore/blade-carapace",
+          "action": "death",
+          "manifest": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-death-v1-preview.gif",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-death-v1-preview.gif",
+      "afterSha256": "8c5cc55174b33f3f17e95c1a75ec52c09865fdce082c480ea25d9571d139841e",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        60,
+        60,
+        50,
+        50,
+        70,
+        70,
+        60,
+        60,
+        70,
+        70,
+        50,
+        50,
+        60,
+        60,
+        300,
+        300
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-death-v1-preview.webp": {
+      "beforeSha256": "e98f39566d2216793654de2dd77b49d13680979f9a9dea74d63fdabe47506932",
+      "users": [
+        {
+          "owner": "spore/blade-carapace",
+          "action": "death",
+          "manifest": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-death-v1-preview.webp",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-death-v1-preview.webp",
+      "afterSha256": "78a73f5a6f0da96a5319d3c75da59d6930df1cbbff2e441a30a47778a74d2650",
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 16,
+      "durationsMs": [
+        60,
+        60,
+        50,
+        50,
+        70,
+        70,
+        60,
+        60,
+        70,
+        70,
+        50,
+        50,
+        60,
+        60,
+        300,
+        300
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-birth-v1-preview.gif": {
+      "beforeSha256": "e203a6da0fd98ed1dd5cccfd7f7abf74b691e591d94c6082966f565fee77d8f2",
+      "users": [
+        {
+          "owner": "spore/blade-carapace",
+          "action": "birth",
+          "manifest": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-birth-v1-preview.gif",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-birth-v1-preview.gif",
+      "afterSha256": "fe13a2ff30f095b8b9928cdc1d17b96358736eb510afaf16acd76dfb7ede41f0",
+      "dimensions": [
+        768,
+        512
+      ],
+      "frameCount": 76,
+      "durationsMs": [
+        80,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        80,
+        40
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    },
+    "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-birth-v1-preview.webp": {
+      "beforeSha256": "cad564389c7b7c09582432bc6efd2c48613eec79890f42995365002791b066c9",
+      "users": [
+        {
+          "owner": "spore/blade-carapace",
+          "action": "birth",
+          "manifest": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "oldImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-birth-v1-preview.webp",
+      "newImage": "AnimationCandidates/spore-blade-carapace-fullbody-v1-20261107/spore-blade-carapace-birth-v1-preview.webp",
+      "afterSha256": "bd8b647fe0bdb62f204c821cd3d3897df3b3c077d065ad2a1742c3875bf76965",
+      "dimensions": [
+        768,
+        512
+      ],
+      "frameCount": 76,
+      "durationsMs": [
+        80,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        80,
+        40
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "timingAndLoopUnchanged": true,
+        "alphaExact": true
+      }
+    }
+  }
+}

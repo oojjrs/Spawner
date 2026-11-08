@@ -1219,7 +1219,20 @@
       448,
       448
     ],
-    "sheetSHA256": "db70c0fb59ce47122d079f5e00fa3f37fdd6e374ef43e6d453d202facc461a47",
-    "previewSHA256": "dbd207b238bd74cfb14b5588e62471b3bfbdc9ab35401eeaea5e20d7fdf86ad8"
+    "sheetSHA256": "a17dda751b15b40a691929346d422fff500d69ba458a763d907c343c0a9f4e2b",
+    "previewSHA256": "93dde8c29ad050ca21ab244a58dbaeb67968d936172cdc805ea7d24cea8809d4"
+  },
+  "sourceFacing": "left",
+  "sheetSHA256": "a17dda751b15b40a691929346d422fff500d69ba458a763d907c343c0a9f4e2b",
+  "previewSHA256": "93dde8c29ad050ca21ab244a58dbaeb67968d936172cdc805ea7d24cea8809d4",
+  "sourceNormalization": {
+    "operation": "exact horizontal mirror within each output atlas cell",
+    "frameWidth": 512,
+    "frameHeight": 512,
+    "beforeSheetSHA256": "db70c0fb59ce47122d079f5e00fa3f37fdd6e374ef43e6d453d202facc461a47",
+    "afterSheetSHA256": "a17dda751b15b40a691929346d422fff500d69ba458a763d907c343c0a9f4e2b",
+    "historicalGenerationInputsRetained": true,
+    "authoringPosesAndRecordsRemainHistorical": true,
+    "reproduction": "Generate historical sheet then mirror each output cell; no packer execution performed."
   }
 }

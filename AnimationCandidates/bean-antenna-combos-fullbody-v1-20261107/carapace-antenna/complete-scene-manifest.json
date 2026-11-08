@@ -290,7 +290,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 150,
+            "x": 362,
             "y": 209.28278125
           },
           "nestFrame": 0
@@ -304,7 +304,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 150,
+            "x": 362,
             "y": 209.28278125
           },
           "nestFrame": 0
@@ -318,7 +318,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 150,
+            "x": 362,
             "y": 209.28278125
           },
           "nestFrame": 0
@@ -332,7 +332,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 150,
+            "x": 362,
             "y": 209.28278125
           },
           "nestFrame": 0
@@ -346,7 +346,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 150,
+            "x": 362,
             "y": 209.28278125
           },
           "nestFrame": 0
@@ -360,7 +360,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 150,
+            "x": 362,
             "y": 209.28278125
           },
           "nestFrame": 0
@@ -374,7 +374,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 150,
+            "x": 362,
             "y": 209.28278125
           },
           "nestFrame": 1
@@ -388,7 +388,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 150,
+            "x": 362,
             "y": 209.28278125
           },
           "nestFrame": 1
@@ -402,7 +402,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 169.6,
+            "x": 342.4,
             "y": 225.8529865625
           },
           "nestFrame": 1
@@ -416,7 +416,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 169.784126984127,
+            "x": 342.215873015873,
             "y": 226.008650946712
           },
           "nestFrame": 1
@@ -430,7 +430,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 171.25714285714287,
+            "x": 340.74285714285713,
             "y": 227.25396602040817
           },
           "nestFrame": 1
@@ -444,7 +444,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 174.2031746031746,
+            "x": 337.7968253968254,
             "y": 229.74459616780047
           },
           "nestFrame": 1
@@ -458,7 +458,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 178.62222222222223,
+            "x": 333.37777777777774,
             "y": 233.4805413888889
           },
           "nestFrame": 2
@@ -472,7 +472,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 184.51428571428573,
+            "x": 327.48571428571427,
             "y": 238.46180168367346
           },
           "nestFrame": 2
@@ -486,7 +486,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 191.8793650793651,
+            "x": 320.12063492063487,
             "y": 244.6883770521542
           },
           "nestFrame": 2
@@ -500,7 +500,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 200.71746031746034,
+            "x": 311.28253968253966,
             "y": 252.1602674943311
           },
           "nestFrame": 3
@@ -514,7 +514,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 211.02857142857144,
+            "x": 300.97142857142853,
             "y": 260.8774730102041
           },
           "nestFrame": 3
@@ -528,7 +528,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 222.8126984126984,
+            "x": 289.1873015873016,
             "y": 270.83999359977327
           },
           "nestFrame": 4
@@ -542,7 +542,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 236.06984126984133,
+            "x": 275.93015873015867,
             "y": 282.0478292630386
           },
           "nestFrame": 4
@@ -556,7 +556,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 250.8,
+            "x": 261.2,
             "y": 294.50098
           },
           "nestFrame": 4
@@ -570,7 +570,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 259.5652173913044,
+            "x": 252.43478260869563,
             "y": 301.9112581521739
           },
           "nestFrame": 5
@@ -584,7 +584,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 268.3304347826087,
+            "x": 243.66956521739132,
             "y": 309.32153630434783
           },
           "nestFrame": 5
@@ -598,7 +598,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 277.09565217391304,
+            "x": 234.90434782608696,
             "y": 316.73181445652176
           },
           "nestFrame": 6
@@ -612,7 +612,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 285.8608695652174,
+            "x": 226.1391304347826,
             "y": 324.14209260869563
           },
           "nestFrame": 6
@@ -626,7 +626,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 294.62608695652176,
+            "x": 217.37391304347824,
             "y": 331.55237076086956
           },
           "nestFrame": 7
@@ -640,7 +640,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 303.39130434782606,
+            "x": 208.60869565217394,
             "y": 338.9626489130435
           },
           "nestFrame": 7
@@ -654,7 +654,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 312.1565217391304,
+            "x": 199.84347826086957,
             "y": 346.37292706521737
           },
           "nestFrame": 8
@@ -668,7 +668,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 320.9217391304348,
+            "x": 191.0782608695652,
             "y": 353.7832052173913
           },
           "nestFrame": 8
@@ -682,7 +682,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 329.68695652173915,
+            "x": 182.31304347826085,
             "y": 361.19348336956523
           },
           "nestFrame": 9
@@ -696,7 +696,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 338.4521739130435,
+            "x": 173.5478260869565,
             "y": 368.60376152173916
           },
           "nestFrame": 9
@@ -710,7 +710,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 347.2173913043478,
+            "x": 164.7826086956522,
             "y": 376.01403967391303
           },
           "nestFrame": 10
@@ -724,7 +724,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 351.6,
+            "x": 160.39999999999998,
             "y": 379.71917874999997
           },
           "nestFrame": 10
@@ -738,7 +738,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 355.3333333333333,
+            "x": 156.66666666666669,
             "y": 382.8754083333333
           },
           "nestFrame": 10
@@ -752,7 +752,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 362.8,
+            "x": 149.2,
             "y": 389.18786750000004
           },
           "nestFrame": 10
@@ -766,7 +766,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 370.26666666666665,
+            "x": 141.73333333333335,
             "y": 395.5003266666667
           },
           "nestFrame": 11
@@ -780,7 +780,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 377.73333333333335,
+            "x": 134.26666666666665,
             "y": 401.81278583333335
           },
           "nestFrame": 11
@@ -794,7 +794,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 385.20000000000005,
+            "x": 126.79999999999995,
             "y": 408.125245
           },
           "nestFrame": 12
@@ -808,7 +808,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 392.6666666666667,
+            "x": 119.33333333333331,
             "y": 414.43770416666666
           },
           "nestFrame": 12
@@ -822,7 +822,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 400.1333333333333,
+            "x": 111.86666666666667,
             "y": 420.7501633333333
           },
           "nestFrame": 12
@@ -836,7 +836,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 407.6,
+            "x": 104.39999999999998,
             "y": 427.0626225
           },
           "nestFrame": 13
@@ -850,7 +850,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 415.0666666666667,
+            "x": 96.93333333333328,
             "y": 433.3750816666667
           },
           "nestFrame": 13
@@ -864,7 +864,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 422.53333333333336,
+            "x": 89.46666666666664,
             "y": 439.68754083333334
           },
           "nestFrame": 13
@@ -878,7 +878,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 14
@@ -892,7 +892,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 14
@@ -906,7 +906,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 14
@@ -920,7 +920,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 14
@@ -934,7 +934,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 15
@@ -948,7 +948,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 15
@@ -962,7 +962,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 15
@@ -976,7 +976,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 15
@@ -990,7 +990,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 15
@@ -1004,7 +1004,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 15
@@ -1018,7 +1018,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 15
@@ -1032,7 +1032,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 15
@@ -1046,7 +1046,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 15
@@ -1060,7 +1060,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 15
@@ -1074,7 +1074,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 15
@@ -1088,7 +1088,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 15
@@ -1102,7 +1102,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 15
@@ -1116,7 +1116,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 14
@@ -1130,7 +1130,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 14
@@ -1144,7 +1144,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 14
@@ -1158,7 +1158,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 14
@@ -1172,7 +1172,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 13
@@ -1186,7 +1186,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 13
@@ -1200,7 +1200,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 13
@@ -1214,7 +1214,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 13
@@ -1228,7 +1228,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 12
@@ -1242,7 +1242,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 12
@@ -1256,7 +1256,7 @@
           "bodyFloor": null,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 12
@@ -1270,7 +1270,7 @@
           "bodyFloor": 446,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 12
@@ -1284,7 +1284,7 @@
           "bodyFloor": 445.621652746626,
           "lift": 0.378347253374004,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 12
@@ -1298,7 +1298,7 @@
           "bodyFloor": 442.02194887881063,
           "lift": 3.9780511211893588,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 11
@@ -1312,7 +1312,7 @@
           "bodyFloor": 440.8652872756387,
           "lift": 5.134712724361284,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 11
@@ -1326,7 +1326,7 @@
           "bodyFloor": 440.06265060240963,
           "lift": 5.937349397590363,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 11
@@ -1340,7 +1340,7 @@
           "bodyFloor": 438.39815420141974,
           "lift": 7.6018457985802375,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 11
@@ -1354,7 +1354,7 @@
           "bodyFloor": 437.0214181951773,
           "lift": 8.978581804822657,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 11
@@ -1368,7 +1368,7 @@
           "bodyFloor": 431.8620435881769,
           "lift": 14.137956411823074,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 10
@@ -1382,7 +1382,7 @@
           "bodyFloor": 428.64815494409623,
           "lift": 17.351845055903784,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 10
@@ -1396,7 +1396,7 @@
           "bodyFloor": 426.6259328759106,
           "lift": 19.37406712408935,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 10
@@ -1410,7 +1410,7 @@
           "bodyFloor": 426.3325301204819,
           "lift": 19.667469879518073,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 10
@@ -1424,7 +1424,7 @@
           "bodyFloor": 425.2888554216868,
           "lift": 20.71114457831325,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 9
@@ -1438,7 +1438,7 @@
           "bodyFloor": 422.99277108433733,
           "lift": 23.00722891566267,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 9
@@ -1452,7 +1452,7 @@
           "bodyFloor": 422.16556224899597,
           "lift": 23.834437751004025,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 9
@@ -1466,7 +1466,7 @@
           "bodyFloor": 419.784437751004,
           "lift": 26.21556224899599,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 9
@@ -1480,7 +1480,7 @@
           "bodyFloor": 419.65301204819275,
           "lift": 26.34698795180723,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 8
@@ -1494,7 +1494,7 @@
           "bodyFloor": 420.61696582247356,
           "lift": 25.383034177526422,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 8
@@ -1508,7 +1508,7 @@
           "bodyFloor": 423.73493975903614,
           "lift": 22.265060240963845,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 8
@@ -1522,7 +1522,7 @@
           "bodyFloor": 426.8529136955987,
           "lift": 19.14708630440127,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 7
@@ -1536,7 +1536,7 @@
           "bodyFloor": 427.8168674698795,
           "lift": 18.18313253012048,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 7
@@ -1550,7 +1550,7 @@
           "bodyFloor": 427.97899416596425,
           "lift": 18.021005834035726,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 7
@@ -1564,7 +1564,7 @@
           "bodyFloor": 431.2464706562877,
           "lift": 14.753529343712275,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 6
@@ -1578,7 +1578,7 @@
           "bodyFloor": 436.9084337349398,
           "lift": 9.091566265060203,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 6
@@ -1592,7 +1592,7 @@
           "bodyFloor": 442.57039681359186,
           "lift": 3.42960318640815,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 5
@@ -1606,7 +1606,7 @@
           "bodyFloor": 445.8378733039153,
           "lift": 0.1621266960847404,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 5
@@ -1620,7 +1620,7 @@
           "bodyFloor": 446,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 5
@@ -1634,7 +1634,7 @@
           "bodyFloor": 446,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 4
@@ -1648,7 +1648,7 @@
           "bodyFloor": 446,
           "lift": 3.500485406665959e-30,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 4
@@ -1662,7 +1662,7 @@
           "bodyFloor": 445.97295303663634,
           "lift": 0.02704696336365822,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 4
@@ -1676,7 +1676,7 @@
           "bodyFloor": 445.4590607327268,
           "lift": 0.5409392672731738,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 4
@@ -1690,7 +1690,7 @@
           "bodyFloor": 445.0722891566265,
           "lift": 0.927710843373494,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 3
@@ -1704,7 +1704,7 @@
           "bodyFloor": 444.6855175805262,
           "lift": 1.3144824194738145,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 3
@@ -1718,7 +1718,7 @@
           "bodyFloor": 444.1716252766167,
           "lift": 1.8283747233833298,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 3
@@ -1732,7 +1732,7 @@
           "bodyFloor": 444.144578313253,
           "lift": 1.855421686746988,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 3
@@ -1746,7 +1746,7 @@
           "bodyFloor": 444.2572951807229,
           "lift": 1.7427048192771075,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 2
@@ -1760,7 +1760,7 @@
           "bodyFloor": 444.66734337349396,
           "lift": 1.3326566265060225,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 2
@@ -1774,7 +1774,7 @@
           "bodyFloor": 445.21098192771086,
           "lift": 0.7890180722891544,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 2
@@ -1788,7 +1788,7 @@
           "bodyFloor": 445.7100903614458,
           "lift": 0.28990963855421453,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 1
@@ -1802,7 +1802,7 @@
           "bodyFloor": 445.98654819277107,
           "lift": 0.013451807228914963,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 1
@@ -1816,7 +1816,7 @@
           "bodyFloor": 446,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 1
@@ -1830,7 +1830,7 @@
           "bodyFloor": 446,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 1
@@ -1844,7 +1844,7 @@
           "bodyFloor": 446,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 1
@@ -1858,7 +1858,7 @@
           "bodyFloor": 446,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 1
@@ -1872,7 +1872,7 @@
           "bodyFloor": 446,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 0
@@ -1886,7 +1886,7 @@
           "bodyFloor": 446,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 0
@@ -1900,7 +1900,7 @@
           "bodyFloor": 446,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 0
@@ -1914,12 +1914,13 @@
           "bodyFloor": 446,
           "lift": 0,
           "seedFloor": {
-            "x": 430,
+            "x": 82,
             "y": 446
           },
           "nestFrame": 0
         }
-      ]
+      ],
+      "sourceFacing": "left"
     }
   }
 }

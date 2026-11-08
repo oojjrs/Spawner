@@ -1,0 +1,21 @@
+{
+  "files": [
+    "DesignAssets/image-sizes.json",
+    "DesignAssets/Animations/UnitAppearanceV1/manifest.json",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/15/source.json",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/05/source.json",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/17/source.json",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/13/source.json",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/16/source.json",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/11/source.json",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/14/source.json",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/12/source.json",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/07/source.json",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/06/source.json",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/00/motions.json",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/00/source.json",
+    "DesignAssets/Animations/UnitAppearanceV1/bean/10/source.json",
+    "DesignAssets/Animations/UnitAppearanceV1/spore/00/motions.json"
+  ],
+  "policyEntries": 285
+}

@@ -979,8 +979,8 @@
       "webpPreview": "spring-blade-secretion-antenna-melee-v1-preview.webp",
       "generatedSource": "melee-generated-source.png",
       "sourceSHA256": "f8474812bca280585f0cb73f7829d54565bc09c340eb4f3e81c280e657be7f5f",
-      "sheetSHA256": "f54fcabb1178eee6a3235d6dd3ba54886cb6538df0bb764f63ee3a72b15e4e86",
-      "previewSHA256": "75db55b02b20817a0ca4846971318c711f0915a9b1f081f70b747c05e849b132",
+      "sheetSHA256": "3e1485052581f78e9ab3e864d15f2593e61a99c6cc560ebe545b4c252abf5f22",
+      "previewSHA256": "6ba9d9931229f5f2d6f6b7b0d924fd01164d498e6d39bc12902947f3184b06ff",
       "frameCount": 16,
       "distinctDrawnPoses": 15,
       "frameSize": 480,
@@ -1446,7 +1446,19 @@
       "registrationScale": 1,
       "fullScene": false,
       "sceneIncludesNest": false,
-      "hitTimeMs": 300
+      "hitTimeMs": 300,
+      "sourceFacing": "left",
+      "sourceRepair": {
+        "kind": "image-generated-complete-leftward-middle-cels",
+        "sourceFacing": "left",
+        "candidateManifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-antenna-attack-manifest.json",
+        "validation": "tools/spring-native-facing-20261108/followup13-validation.json",
+        "originalWholeFirstLastCelsPreserved": true,
+        "geometryAndTimingUnchanged": true,
+        "legacyGeneratedSourceAndQAFieldsAreHistorical": true,
+        "mirroring": false,
+        "bodyPartComposition": false
+      }
     },
     "ranged": {
       "action": "ranged",
@@ -1455,8 +1467,8 @@
       "webpPreview": "spring-blade-secretion-antenna-ranged-v1-preview.webp",
       "generatedSource": "ranged-generated-source.png",
       "sourceSHA256": "6e4731b8f725ffdc29a47141212d42df2fe8b7bd895c30e8236cfeb0e6cb0c22",
-      "sheetSHA256": "97ef8988ab5097d7cd72c58274aec740cbd50034fddf111f7d86d05bcdfdded0",
-      "previewSHA256": "87beaae1c78cc0b46177832164de1088ff488a9706b7069fd290ae7f41b8a2a5",
+      "sheetSHA256": "621788099936d0cc72557590f3bae9fc315a226dd20080dd29a50773899baeea",
+      "previewSHA256": "a03c5ce0af5638a406bae5371272a041b5de153d114a0febf8bf928a41d13932",
       "frameCount": 16,
       "distinctDrawnPoses": 15,
       "frameSize": 480,
@@ -1921,7 +1933,19 @@
       "referenceLengthMethod": "Alpha >= 16 max(width,height) of neutral whole-body silhouette; birth measures landed final body only, excluding nest.",
       "registrationScale": 1,
       "fullScene": false,
-      "sceneIncludesNest": false
+      "sceneIncludesNest": false,
+      "sourceFacing": "left",
+      "sourceRepair": {
+        "kind": "image-generated-complete-leftward-middle-cels",
+        "sourceFacing": "left",
+        "candidateManifest": "tools/spring-native-facing-20261108/followup13-spring-blade-secretion-antenna-ranged-manifest.json",
+        "validation": "tools/spring-native-facing-20261108/followup13-validation.json",
+        "originalWholeFirstLastCelsPreserved": true,
+        "geometryAndTimingUnchanged": true,
+        "legacyGeneratedSourceAndQAFieldsAreHistorical": true,
+        "mirroring": false,
+        "bodyPartComposition": false
+      }
     },
     "hurt": {
       "action": "hurt",

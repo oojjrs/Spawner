@@ -4,7 +4,7 @@
   "form": "blade-secretion-carapace",
   "status": "completed-under-user-delegated-production",
   "sourceAppearance": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/source.png",
-  "sourceAppearanceSHA256": "df44c8d102eadaabf147c8f25a07a6c654d73db082d607825bf86381ab7e7f4a",
+  "sourceAppearanceSHA256": "2dd6663017ca259b66713438085adc8cb8934313620329315057c6405bbe7055",
   "actions": {
     "idle": {
       "durationsMs": [
@@ -36,15 +36,16 @@
       "sheet": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-idle-v1-sheet.png",
       "preview": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-idle-v1-preview.webp",
       "gif": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-idle-v1-preview.gif",
-      "sheetSHA256": "f01985caa83496755db458a616c084fb6b60980eb13925db6f0d107ff82e5bf7",
-      "previewSHA256": "cdc199e5a97bf390519e019892600deef210ab6f0cf48b414031d3a9a905fe78",
-      "gifSHA256": "7b175c00d9847954d51c241f329b8dedd76b4428fbeff1fab010bef4cd615c36",
+      "sheetSHA256": "a8ef64af76dcca94898d4a5566b045dfd79a1d40f35f8880d5b38ea73fd1b982",
+      "previewSHA256": "71275d76f85dc755b0b7c45ea271162b18caee293182755d972482ea17088075",
+      "gifSHA256": "b01a58c4f062b46d1c8a3c560658a3043a180856537dbc943626444cf758f60c",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
       "pivotX": 256,
       "pivotY": 416,
-      "referenceLength": 297
+      "referenceLength": 297,
+      "sourceFacing": "left"
     },
     "walk": {
       "durationsMs": [
@@ -76,15 +77,16 @@
       "sheet": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-walk-v1-sheet.png",
       "preview": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-walk-v1-preview.webp",
       "gif": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-walk-v1-preview.gif",
-      "sheetSHA256": "3b36675a8d1961af04566b18768b9517cc3b1982d5b13c7c57231b5be1be2e55",
-      "previewSHA256": "96e6236efbe95206bd8293cbe63a3f4f3b247f3bc94c96fa1c2ddf8f4262c318",
-      "gifSHA256": "b991f5c38b07998f72456a0bae20e5074f13ce6cb32726b7b873474434400d94",
+      "sheetSHA256": "eed4c99f2b23107baa9179e169a5c3366b25cb27a8cc35a57145cef65fd31fc0",
+      "previewSHA256": "eab6505cd86b11e4cb1009f97ac118ab166ea006ff3d75977fd7f0bb2f63c91e",
+      "gifSHA256": "5222fb9da33079856072c78f289c8f350286f8269f8dc7fc0ee140952d57cb7c",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
       "pivotX": 256,
       "pivotY": 416,
-      "referenceLength": 297
+      "referenceLength": 297,
+      "sourceFacing": "left"
     },
     "attack": {
       "durationsMs": [
@@ -116,9 +118,9 @@
       "sheet": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-melee-v1-sheet.png",
       "preview": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-melee-v1-preview.webp",
       "gif": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-melee-v1-preview.gif",
-      "sheetSHA256": "cefb57a9fe949427f2c1629b171df6f6216d86bcf1510f858759200904a16c46",
-      "previewSHA256": "3efa4cfa7b2d8f2a2db656f86e5ef4935f44612e81dd2f69dba721b0ece2b8e9",
-      "gifSHA256": "1682678c8ec8792a32e94dc32cd373a0d21438806fcac8dd6c1cf52ffe6dfe1d",
+      "sheetSHA256": "e03fac8679509dc51e12d5bbe6eaea90bcb381c04f14b6c7036f0d73d43da910",
+      "previewSHA256": "15ba9148894adcc96770607cce111fc47639c72a3f4b09713cbb20d9853ecf41",
+      "gifSHA256": "ca1f3e3cc58e840af75bc3aff04c23010a7e9bf2d425ab20e173379746867638",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
@@ -127,7 +129,8 @@
       "referenceLength": 297,
       "hitTimeMs": 400,
       "hitFrameIndex": 7,
-      "hitTimingSource": "Authored lowest forward cap-blade sweep contact at frame 7. 100+60+60+60+40+30+50 ms."
+      "hitTimingSource": "Authored lowest forward cap-blade sweep contact at frame 7. 100+60+60+60+40+30+50 ms.",
+      "sourceFacing": "left"
     },
     "ranged-attack": {
       "durationsMs": [
@@ -159,9 +162,9 @@
       "sheet": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-ranged-v1-sheet.png",
       "preview": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-ranged-v1-preview.webp",
       "gif": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-ranged-v1-preview.gif",
-      "sheetSHA256": "1c9ad79c99d30fba13d9e10038dec671177defddf3cb06c73b7947951a9d48d4",
-      "previewSHA256": "ae7e5aef881d0a3174580a40bc74eda7b8be5f885f8429b484ec0ac30d49929d",
-      "gifSHA256": "dd73614daaa88345f4d7462984f37b33777f751a6af264aad4963b697ba53fc7",
+      "sheetSHA256": "f11b140632ea9da4023982332b0890a7963c115024a1905aed4635c413f243ef",
+      "previewSHA256": "37fcd7a6e481033f19480c0db20c5f203aa99cfbd3a143334077b18bf73a7897",
+      "gifSHA256": "f2f35778f071d7d6bbcde63017e5c26d2ac4833ca8a25ab6939699e7c8b85612",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
@@ -172,7 +175,8 @@
       "launchFrameIndex": 5,
       "rangedBody": true,
       "projectileBakedIntoBodySheet": false,
-      "launchTimingSource": "Authored release / recoil frame 5. 80+40+40+40+30 ms."
+      "launchTimingSource": "Authored release / recoil frame 5. 80+40+40+40+30 ms.",
+      "sourceFacing": "left"
     },
     "hurt": {
       "durationsMs": [
@@ -204,15 +208,16 @@
       "sheet": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-hurt-v1-sheet.png",
       "preview": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-hurt-v1-preview.webp",
       "gif": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-hurt-v1-preview.gif",
-      "sheetSHA256": "31da16edffaefc785a91e308fcd1077b8b6f8542834bf3b7feedd75bb400f6a0",
-      "previewSHA256": "255339d96e2d07059738ba42dc573525987be13ccb89f2730c48d34170a7359a",
-      "gifSHA256": "a5abf8bd0b8a9616b2c6b8a49770808298a708aa2fefdb338e2772e81907c0ef",
+      "sheetSHA256": "728bc766b0dfcf2ba1b053696597a8b78c5c6597ce97c7d724d8a823cb675c0b",
+      "previewSHA256": "06ec3cda6c00471aa564d3c6a2948db79271c1caded308abe5a145a0560ec2b0",
+      "gifSHA256": "4baeda7ed8bc31d2662d02be410d342159735d093a4740bab3980d599dc275b2",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
       "pivotX": 256,
       "pivotY": 416,
-      "referenceLength": 297
+      "referenceLength": 297,
+      "sourceFacing": "left"
     },
     "death": {
       "durationsMs": [
@@ -244,15 +249,16 @@
       "sheet": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-death-v1-sheet.png",
       "preview": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-death-v1-preview.webp",
       "gif": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-death-v1-preview.gif",
-      "sheetSHA256": "ecfec8ebfb6ead4cce9806ce26af6a4a251a0519be347fea96ab0518c9f29347",
-      "previewSHA256": "fd59b07129fab916d64b670549a515981194a5849053e736de124e1afa42154f",
-      "gifSHA256": "56ace5801ad8a8d510cbb5fad52965d936d418ac71be0774f7fe7ecb4d2fe314",
+      "sheetSHA256": "40733ae1209c960efb697c0ad4cb68b32cf75988526655353d6a1d454eb4e231",
+      "previewSHA256": "0ebb301262caec0bba34bde3fff8aa99c5a251f13559534bc080e2b432872f83",
+      "gifSHA256": "8eb50a92723ff700d373b8922020c43e376b95b2f116bdc866d0526da95b0897",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": false,
       "pivotX": 256,
       "pivotY": 416,
-      "referenceLength": 297
+      "referenceLength": 297,
+      "sourceFacing": "left"
     },
     "birth": {
       "durationsMs": [
@@ -346,26 +352,27 @@
       "sheet": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-birth-v1-sheet.png",
       "preview": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-birth-v1-preview.webp",
       "gif": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-birth-v1-preview.gif",
-      "sheetSHA256": "bc013c796954ce900b4b7817f39268f0155cf9a8e4c60e9e6f0a811bce7eb03f",
-      "previewSHA256": "57746ffd1597a9d7471ea817cd75d1eb66e762f59feec2b9304e63079ac0d240",
-      "gifSHA256": "d3106aa154f6f4247220c251cd66b03d2856b1d6d8f08f83bdf193f2d8ce324d",
+      "sheetSHA256": "fc690077b07fe9bdc003bbd7929effb3215f589408c28b8641bcd80a9059c1c8",
+      "previewSHA256": "c4c5ff3de1491cb71b8e095d5ef5dec2f2247a9a66adc9f009c1e943838c8a56",
+      "gifSHA256": "f52ec11a9b02dd1bcd47d47cae18ad81a2012f850ddceda6d41622b574fd9a2f",
       "previewLoop": true,
       "previewLoopCount": 0,
       "fullScene": true,
-      "pivotX": 534.0,
+      "pivotX": 234.0,
       "pivotY": 478,
       "referenceLength": 44,
       "finalBodyBounds": [
-        512,
+        212,
         444,
-        556,
+        256,
         478
       ],
       "geometrySource": "Alpha >=16 isolated rightmost whole-body component in final complete-scene frame, excluding nest.",
       "bodyOnlySheet": "AnimationCandidates/spore-blade-secretion-carapace-fullbody-v1-20261107/spore-blade-secretion-carapace-birth-body-v1-sheet.png",
       "bodyOnlyPivotX": 256,
       "bodyOnlyPivotY": 416,
-      "bodyOnlyReferenceLength": 297
+      "bodyOnlyReferenceLength": 297,
+      "sourceFacing": "left"
     }
   },
   "rangedBodyOnly": true,

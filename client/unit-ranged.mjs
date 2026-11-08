@@ -15,6 +15,7 @@ export const UNIT_RANGED_HURT_ANIMATIONS = Object.freeze(Object.fromEntries(
   ["bean", "spore", "pebble", "spring"].map(tribe => [tribe, Object.freeze({
     image: "DesignAssets/Animations/UnitRangedV1/" + tribe + "/hurt.png", frameSize: 512, viewSize: 512, columns: 4,
     pivotX: 256, pivotY: 448, frameCount: 16, durationMs: 760,
+    ...(["bean", "spore"].includes(tribe) ? { sourceFacing: "left" } : {}),
     durationsMs: [20,30,30,30,400,30,30,30,20,20,20,20,20,20,20,20], loop: false, rangedBody: true
   })])));
 export const UNIT_RANGED_FORMS = Object.freeze({
@@ -22,9 +23,9 @@ export const UNIT_RANGED_FORMS = Object.freeze({
     [tribe, Object.freeze({ ...form, hurt: UNIT_RANGED_HURT_ANIMATIONS[tribe], walk: UNIT_SECRETION_WALK_ANIMATIONS[tribe],
       lifecycle: UNIT_SECRETION_LIFECYCLE_ANIMATIONS[tribe] || null })])),
   bean: Object.freeze({ idleAnimation: BEAN_SECRETION_IDLE_ANIMATION, birthBody: drawBeanSecretionBirth, lifecycle: UNIT_SECRETION_LIFECYCLE_ANIMATIONS.bean, hurt: UNIT_RANGED_HURT_ANIMATIONS.bean, walk: UNIT_SECRETION_WALK_ANIMATIONS.bean,
-  idle: { image: root + "Source/neutral.png", frameSize: 512, viewSize: 512, columns: 1,
+  idle: { image: root + "Source/neutral.png", sourceFacing: "left", frameSize: 512, viewSize: 512, columns: 1,
     pivotX: 256, pivotY: 448, frameCount: 1, durationMs: 600, durationsMs: [600], loop: true, rangedBody: true },
-  animation: { image: root + "shoot.webp", frameSize: 512, viewSize: 512, columns: 6,
+  animation: { image: root + "shoot.webp", sourceFacing: "left", frameSize: 512, viewSize: 512, columns: 6,
     pivotX: 256, pivotY: 448, frameCount: 24, durationMs: 600, durationsMs: Array(24).fill(25),
     loop: false, launchAtMs: 200, rangedBody: true },
   reference: { width: 202, height: 206 },

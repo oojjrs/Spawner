@@ -1,0 +1,146 @@
+{
+  "stage": "actual integrated runtime native Canvas QA; Chromium not run",
+  "runtimeSHA": "a64f3b039428fd3307ff1dab5abab258a762bee0a3aabb37439b9b0e70c086e6",
+  "headerSHA": "79e2a10000df576b028d43e31776582d7bae8935074154daa661cc01627151cc",
+  "qaRuntime": "actual integrated client/runtime.js read unchanged; native Canvas production drawUnit; not Chromium",
+  "warnings": 0,
+  "species": {
+    "white-paw": {
+      "samples": 1024,
+      "allWalkValidAndDirectMatch": true,
+      "cycleMs": 500,
+      "advancePxPerCycle": 27.06572837243405,
+      "entryMs": 5312.5,
+      "cyclePoseRepeat": true,
+      "cycleRasterRepeat": true,
+      "normalizedHashesMatchOverlay": true,
+      "movingHashesMatchOverlay": true,
+      "overlayComparisonDifferenceCount": 0,
+      "differences": [],
+      "denseStance": [
+        {
+          "action": "enter",
+          "samples": 164,
+          "worldSoleXRange": [
+            298,
+            298.5
+          ],
+          "worldSoleYRange": [
+            250,
+            250
+          ],
+          "pixelPeakToPeak": 0.5,
+          "minimumSolePixels": 5
+        },
+        {
+          "action": "exit",
+          "samples": 164,
+          "worldSoleXRange": [
+            298,
+            298.5
+          ],
+          "worldSoleYRange": [
+            250,
+            250
+          ],
+          "pixelPeakToPeak": 0.5,
+          "minimumSolePixels": 5
+        }
+      ]
+    },
+    "shadow-weasel": {
+      "samples": 1024,
+      "allWalkValidAndDirectMatch": true,
+      "cycleMs": 500,
+      "advancePxPerCycle": 22.892934497816547,
+      "entryMs": 6153.848,
+      "cyclePoseRepeat": true,
+      "cycleRasterRepeat": true,
+      "normalizedHashesMatchOverlay": true,
+      "movingHashesMatchOverlay": true,
+      "overlayComparisonDifferenceCount": 0,
+      "differences": [],
+      "denseStance": [
+        {
+          "action": "enter",
+          "samples": 164,
+          "worldSoleXRange": [
+            301,
+            302
+          ],
+          "worldSoleYRange": [
+            248,
+            249
+          ],
+          "pixelPeakToPeak": 1,
+          "minimumSolePixels": 1
+        },
+        {
+          "action": "exit",
+          "samples": 164,
+          "worldSoleXRange": [
+            301,
+            302
+          ],
+          "worldSoleYRange": [
+            248,
+            249
+          ],
+          "pixelPeakToPeak": 1,
+          "minimumSolePixels": 1
+        }
+      ]
+    }
+  },
+  "video": {
+    "file": "stride-final-review-integrated-playback.mp4",
+    "kind": "native Canvas production drawUnit render preview; not Chromium recording",
+    "dimensions": [
+      480,
+      640
+    ],
+    "panelDimensions": [
+      480,
+      280
+    ],
+    "frames": 439,
+    "fps": 30,
+    "durationSeconds": 14.633333333333333,
+    "bytes": 395625,
+    "fullDecodePassed": true,
+    "scenes": [
+      {
+        "plan": {
+          "key": "white-paw",
+          "enterMs": 5312.5,
+          "idleMs": 1500,
+          "exitMs": 5312.5
+        },
+        "counts": {
+          "enter": 160,
+          "perform": 45,
+          "exit": 159,
+          "done": 75
+        },
+        "warnings": [],
+        "invalidDraws": 0
+      },
+      {
+        "plan": {
+          "key": "shadow-weasel",
+          "enterMs": 6153.848,
+          "idleMs": 1500,
+          "exitMs": 6153.848
+        },
+        "counts": {
+          "enter": 185,
+          "perform": 45,
+          "exit": 185,
+          "done": 24
+        },
+        "warnings": [],
+        "invalidDraws": 0
+      }
+    ]
+  }
+}

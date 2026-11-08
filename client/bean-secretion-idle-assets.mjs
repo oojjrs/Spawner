@@ -76,5 +76,6 @@ export const BEAN_SECRETION_IDLE_ANIMATION = Object.freeze({
   "loop": true,
   "rangedBody": true,
   "secretionIdle": true,
-  "nativeSecretionIdle": true
+  "nativeSecretionIdle": true,
+  "sourceFacing": "left"
 });

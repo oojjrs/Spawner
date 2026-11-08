@@ -1,32 +1,32 @@
 globalThis.SpawnerUnitAppearanceFiles = Object.freeze({
   "DesignAssets/Animations/UnitAppearanceV1/bean/00/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/00/Source/neutral.png.js",
-    "bytes": 60078,
-    "hash": "9c8893d8792c6d4e987ec0479463ebbd9085f89d38bb1c7db2580c3f4d230f73",
+    "bytes": 49339,
+    "hash": "f21bb702c38c1fc90f66c5b0c719b654aadc2ee3a92127d429680959587e3919",
     "mime": "image/png"
   },
   "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp": {
     "script": "client/unit-appearance-files/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp.js",
-    "bytes": 2421956,
-    "hash": "46a613676ad252c703e4a4391e3482109f11990bd2dd877e879986ae87576cfb",
+    "bytes": 10238696,
+    "hash": "b5507fda49231082557751ca25bacc3ff69a664885dd646cfcc2687487396bd0",
     "mime": "image/webp"
   },
   "DesignAssets/Animations/UnitAttack/attack.png": {
     "script": "client/unit-appearance-files/Animations/UnitAttack/attack.png.js",
-    "bytes": 1895393,
-    "hash": "5843746f0f742afe688d6623a031f79c27982beab599c7bff9c54f7a91ce1662",
+    "bytes": 1432919,
+    "hash": "bdd443428b5ccb183acb50f4db84ff5e31d74d0116656fe3118336ff0fe7a5ed",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitHurt/V3/hurt.png": {
     "script": "client/unit-appearance-files/Animations/UnitHurt/V3/hurt.png.js",
-    "bytes": 1953328,
-    "hash": "1409bf1440a95467211f645c142acc0029852cc0cf32850eec19185c0b6b10c6",
+    "bytes": 1602503,
+    "hash": "627a83d7809cea9a8b173d6e82f44a99141858bf16abd588973ee79fce22cf8a",
     "mime": "image/png"
   },
   "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp": {
     "script": "client/unit-appearance-files/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp.js",
-    "bytes": 350760,
-    "hash": "2659f1cb0b65405ff1acf413883f0a5428eaf5f14ee8d3bbf7ec02f7ebc846ef",
+    "bytes": 359100,
+    "hash": "dc1c79da5cb7969706764a923b7d59daa670f4d02290aa8dcffd140039282692",
     "mime": "image/webp"
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/01/Source/neutral.png": {
@@ -43,8 +43,8 @@ globalThis.SpawnerUnitAppearanceFiles = Object.freeze({
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/03/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/03/Source/neutral.png.js",
-    "bytes": 128910,
-    "hash": "bf4aeca1d1ebd509ef47b675bb81e70beb8317d445434b000e2f4e07c71c42cd",
+    "bytes": 98004,
+    "hash": "cc9d10c6d12a459db7e3966beb696ead3123b1261423840724272f99c01c95da",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/04/Source/neutral.png": {
@@ -55,68 +55,68 @@ globalThis.SpawnerUnitAppearanceFiles = Object.freeze({
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/05/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/05/Source/neutral.png.js",
-    "bytes": 94344,
-    "hash": "783bed93d96a0eab8e30139e6fb296414359f8b1519177b813e3d6e0edc6536d",
+    "bytes": 76283,
+    "hash": "d8f2fa1e86203fa0b38416fe3ae006adf4f332d2d7a99594ab1b988e6e2497a1",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/06/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/06/Source/neutral.png.js",
-    "bytes": 117019,
-    "hash": "f67773b4dc68c934587452d8368955ee8d4801251cc4e058d0b248ae9641a889",
+    "bytes": 89452,
+    "hash": "e73dc95d97c9b4f71eeab8bbea1e02151c73eb81e55494e5ff70bfd1864ab78b",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/07/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/07/Source/neutral.png.js",
-    "bytes": 140711,
-    "hash": "1d472b1a15f25475131e2367e5eb589b4f9d910d66d8a93e59b62a3f32507beb",
+    "bytes": 107597,
+    "hash": "44fd4b740374ef81c8c781d9aa4f4ee2c64ff37d2a20dcde66a458b39615e74a",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/10/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/10/Source/neutral.png.js",
-    "bytes": 76590,
-    "hash": "65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811",
+    "bytes": 60985,
+    "hash": "a2b5b8d3ff52916342141b821f28711b814b330c2063b26ae4966d8bcac65d14",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/11/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/11/Source/neutral.png.js",
-    "bytes": 90173,
-    "hash": "a442e5bbefd2b3a3ca655d28fc3164a459ad978e322561f4fcb966f840e32324",
+    "bytes": 72070,
+    "hash": "ba7247467bc178b022c1aab26d54a2fc242691853f929d40aa42a31b3ffea5f8",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/12/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/12/Source/neutral.png.js",
-    "bytes": 108726,
-    "hash": "cd27cc9c4a5c7e65a93cb91a89b4ee48489422f952e65be8a38e0d2ef3e659ee",
+    "bytes": 81880,
+    "hash": "4c92ef4bb73cc0e4bc884e79c2d368173616b8788d2380b2dbc3147f6b822481",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/13/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/13/Source/neutral.png.js",
-    "bytes": 135637,
-    "hash": "b65941c3847db84af77eac2b8e97dd75a9df5f50c1e37a80cddfd9fa8f589717",
+    "bytes": 102871,
+    "hash": "13386f12b2fe82e0375344510f89a508efa6f921f2fe83ddccdb43f41b04fbac",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/14/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/14/Source/neutral.png.js",
-    "bytes": 85776,
-    "hash": "6847ae2f9ea518ead664fda2e657abe246250032377149288e63174338231160",
+    "bytes": 69020,
+    "hash": "a543d2629967ddcbcd6a2067012ff2fe2d7225224633b38af8883d4ed9a1d7d1",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/15/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/15/Source/neutral.png.js",
-    "bytes": 109009,
-    "hash": "6924db22c440c07ae12b6e19b364ec78c4f5b1c35634806f23d203e316716fc7",
+    "bytes": 87253,
+    "hash": "6ed69c2fb03c0474876680a16ea7e27398a4572c62a10428f0fdf52ae95edc90",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/16/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/16/Source/neutral.png.js",
-    "bytes": 121971,
-    "hash": "66aef70276d8eb28b0bc2794643a061866d5785435bb66dcfce07f6884e28d10",
+    "bytes": 93670,
+    "hash": "57e3d90f888ea77e954c417cdd32bd26ce81c4692f8597eeb65c3929aacfa7f6",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/17/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/17/Source/neutral.png.js",
-    "bytes": 147922,
-    "hash": "9a42c0245c6ac9c44ffa4dbdb67d09c16f49b605b5c80f3735302f53693a19d6",
+    "bytes": 113598,
+    "hash": "fa2833a9381401f6ff2e3a7533752520f3a4201bbc6ba46a9868bd53d15e9cfb",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/spore/00/Source/neutral.png": {
@@ -127,38 +127,38 @@ globalThis.SpawnerUnitAppearanceFiles = Object.freeze({
   },
   "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp": {
     "script": "client/unit-appearance-files/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp.js",
-    "bytes": 3288498,
-    "hash": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7",
+    "bytes": 3471724,
+    "hash": "203c5212dfa29e8e67eac421b53c311a87a3da63aa31183d67229b6019b9f1e2",
     "mime": "image/webp"
   },
   "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp": {
     "script": "client/unit-appearance-files/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp.js",
-    "bytes": 1377356,
-    "hash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
+    "bytes": 1327808,
+    "hash": "ba8930ee9cd56dff0fb6daf1351d859589c5630043f72515195c11249b7027bb",
     "mime": "image/webp"
   },
   "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp": {
     "script": "client/unit-appearance-files/Tribes/spore/Animations/Units/jump/jump.webp.js",
-    "bytes": 1075754,
-    "hash": "088de97292a6c4cb18ac6e2e067ae53479e130fa679d17960d9f1e7241ebbfff",
+    "bytes": 941644,
+    "hash": "f024d8bb797ee75c63fc9373c5b6de2b7eb826d0c81a28c479f3d4280ec5c3f7",
     "mime": "image/webp"
   },
   "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp": {
     "script": "client/unit-appearance-files/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp.js",
-    "bytes": 819314,
-    "hash": "65e91bdc3af93677e254b8ce24ccf8c98e22930d4179f8f614519554176de36f",
+    "bytes": 837046,
+    "hash": "9bca50d90ffb873b6d4b9c3fb54b4a463830aa2b7041c68023b6f3c6908a6c2f",
     "mime": "image/webp"
   },
   "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp": {
     "script": "client/unit-appearance-files/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp.js",
-    "bytes": 809652,
-    "hash": "703eda5d5454549c6bcec7a4cfedec832dfcbf30c885a23e08818a944d86ada2",
+    "bytes": 847254,
+    "hash": "fb6da9ac70c38e40c40f561354fd847b940f571ba225ec600dd07643f04a1983",
     "mime": "image/webp"
   },
   "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png": {
     "script": "client/unit-appearance-files/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png.js",
-    "bytes": 668698,
-    "hash": "8baf1b600e5868e4d1af9ddcc94692ebd3416a72b1b6c97db681eddaafb49c99",
+    "bytes": 491733,
+    "hash": "70057334cec1e75b8ae313211bbc3b1538187f225c18eedd7d85f340bfafa698",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/spore/10/Source/neutral.png": {

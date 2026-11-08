@@ -21,7 +21,7 @@
     "pivotX": 64,
     "pivotY": 112,
     "durationMs": 1120,
-    "sha256": "3d8ef792651e9cad2d9d643f316d6631ec36c783308469943b8e4ed0ef2a4146",
+    "sha256": "7ca8be63f43be7f4ab8688f2a0c3ac2e4351fcb8714b93cd4f0b73832c25a4bb",
     "grid": [
       4,
       2
@@ -33,7 +33,8 @@
     "dimensions": [
       512,
       256
-    ]
+    ],
+    "sourceFacing": "left"
   },
   {
     "name": "spore-antenna-death",
@@ -57,7 +58,7 @@
     "pivotX": 64,
     "pivotY": 112,
     "durationMs": 1440,
-    "sha256": "7366f29a6490a13ee4d199fd12ce6bef755da36825996d6657d9496c548cf4b7",
+    "sha256": "dcb00efdb1852a98a0c2aac9160ff7c4fcfa96c06755469e35d97ad3d37efa30",
     "grid": [
       4,
       2
@@ -69,7 +70,8 @@
     "dimensions": [
       512,
       256
-    ]
+    ],
+    "sourceFacing": "left"
   },
   {
     "name": "spore-feet-walk",

@@ -1,0 +1,180 @@
+{
+  "tribe": "spore",
+  "form": "blade-antenna",
+  "displayName": "포자버섯 칼날+안테나",
+  "status": "complete-for-planning",
+  "reference": "source.png",
+  "source": "source.png",
+  "sourceSHA256": "2d91fe5f15a6217682d51392bcc3b1089b1be3f36641529aaa6f486347314583",
+  "actions": [
+    {
+      "action": "idle",
+      "sheet": "spore-blade-antenna-idle-v1-sheet.png",
+      "preview": "spore-blade-antenna-idle-v1-preview.gif",
+      "webpPreview": "spore-blade-antenna-idle-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 6400,
+      "loop": true,
+      "sheetSHA256": "7bbef31b4fbf1073af25fd229fb73d0375ba5d342217f725b46d302b760c2ef2",
+      "previewSHA256": "545ad3515b0f50d05dd6a066573157e2d9dc6a47b99c6127857b59195eabbce4",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "walk",
+      "sheet": "spore-blade-antenna-walk-v1-sheet.png",
+      "preview": "spore-blade-antenna-walk-v1-preview.gif",
+      "webpPreview": "spore-blade-antenna-walk-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 1120,
+      "loop": true,
+      "sheetSHA256": "7896edaf7f13eb137df69279cd66810c154d6d57915e338ee99c975bcf183370",
+      "previewSHA256": "b4b0ab720aebca6a17c481f060df9c05e98a0c4a881667bbd3a97ec1c7b28b19",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "melee",
+      "sheet": "spore-blade-antenna-melee-v1-sheet.png",
+      "preview": "spore-blade-antenna-melee-v1-preview.gif",
+      "webpPreview": "spore-blade-antenna-melee-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 900,
+      "loop": false,
+      "sheetSHA256": "73b466657f7f5dbec7a3febc7e2fabeeff0c740cc2c0edbd4874076c43566c2a",
+      "previewSHA256": "fc0dae73c7cd5d8801694d275ec2b6eaad0b4650346b816b3600c8a1f5cf1b11",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "hurt",
+      "sheet": "spore-blade-antenna-hurt-v1-sheet.png",
+      "preview": "spore-blade-antenna-hurt-v1-preview.gif",
+      "webpPreview": "spore-blade-antenna-hurt-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 960,
+      "loop": false,
+      "sheetSHA256": "95ff962b21f12a01e04983757ca6d53a995cd5a31234fae9e3e4f75078e0596a",
+      "previewSHA256": "b718cee01605cbccb1f443b167bcba1156d23b9fa11a026a1886e8f6f9ccccb4",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "death",
+      "sheet": "spore-blade-antenna-death-v1-sheet.png",
+      "preview": "spore-blade-antenna-death-v1-preview.gif",
+      "webpPreview": "spore-blade-antenna-death-v1-preview.webp",
+      "frameSize": [
+        512,
+        512
+      ],
+      "columns": 4,
+      "frameCount": 16,
+      "durationMs": 1440,
+      "loop": false,
+      "sheetSHA256": "4cb0ff48049c625820f0e643f253a32f09495982b81761b0692fbd433967878c",
+      "previewSHA256": "1846ee59026aca383e0ffe1c1562ba8f1a4f5cb51782759779e24071e30bd356",
+      "sourceFacing": "left"
+    },
+    {
+      "action": "birth",
+      "sheet": "spore-blade-antenna-birth-v1-sheet.png",
+      "preview": "spore-blade-antenna-birth-v1-preview.gif",
+      "webpPreview": "spore-blade-antenna-birth-v1-preview.webp",
+      "frameSize": [
+        768,
+        512
+      ],
+      "columns": 8,
+      "frameCount": 78,
+      "durationMs": 3120,
+      "loop": false,
+      "sheetSHA256": "3c2c0ecfd455f6bc322865bdf67a9f9c33c21d8bf0c570f559c50f3f4cdf16cf",
+      "previewSHA256": "2f0907986c04cbf09ee6cf8f4c26876b59799c02a59d8418391beefd46dbda32",
+      "sourceFacing": "left"
+    }
+  ],
+  "excludedActions": [
+    "ranged"
+  ],
+  "bodyPartComposition": false,
+  "runtimeModified": false,
+  "deployed": false,
+  "generation": "Built-in image_gen; prompts.json contains character and motion prompts. Complete whole-body poses, no anatomy assembly.",
+  "manualReview": "Exact complete form with attached pale-peach fan sensory gills underneath cap. Existing blades, armor and secretion glands retained when applicable. Each complete body and action reviewed on neutral backdrop.",
+  "validationSummary": {
+    "idle": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 6400
+    },
+    "walk": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 1120
+    },
+    "melee": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 900
+    },
+    "hurt": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 960
+    },
+    "death": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 16,
+      "gifDurationMs": 1440
+    },
+    "birth": {
+      "sourceGridNoOpaqueEdgeCrossing": true,
+      "finalSheetExactFrameRoundtrip": true,
+      "finalNoOpaqueEdgeClipping": true,
+      "previewEncodedFromSavedSheet": true,
+      "gifDurationExact": true,
+      "gifDecodedFrames": 76,
+      "gifDurationMs": 3120
+    }
+  },
+  "rangedBodyOnly": false,
+  "projectileBakedIntoBodySheet": false,
+  "sourceFacing": "left"
+}

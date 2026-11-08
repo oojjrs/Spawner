@@ -19,9 +19,9 @@
   "neutralPreviewLeadInMs": 700,
   "hitHoldMs": 500,
   "recoveryMs": 380,
-  "nativeCombatFacing": "right",
-  "impactFrom": "right",
-  "reactionTowards": "left",
+  "nativeCombatFacing": "left",
+  "impactFrom": "left",
+  "reactionTowards": "right",
   "bodyPartComposition": false,
   "bodyWarping": false,
   "resamplingInSpritePackaging": false,
@@ -39,9 +39,9 @@
         73
       ],
       "bboxAlpha128": [
-        16,
+        14,
         207,
-        434,
+        432,
         420
       ],
       "connectedComponentsOver32Pixels": 1,
@@ -56,13 +56,13 @@
         444
       ],
       "wholeFrameTranslation": [
-        2,
+        3,
         73
       ],
       "bboxAlpha128": [
-        10,
+        19,
         213,
-        429,
+        438,
         420
       ],
       "connectedComponentsOver32Pixels": 1,
@@ -77,13 +77,13 @@
         444
       ],
       "wholeFrameTranslation": [
-        2,
+        3,
         73
       ],
       "bboxAlpha128": [
-        14,
+        16,
         210,
-        432,
+        434,
         420
       ],
       "connectedComponentsOver32Pixels": 1,
@@ -123,9 +123,9 @@
         73
       ],
       "bboxAlpha128": [
-        16,
+        15,
         208,
-        433,
+        432,
         420
       ],
       "connectedComponentsOver32Pixels": 1,
@@ -140,13 +140,13 @@
         887
       ],
       "wholeFrameTranslation": [
-        2,
+        3,
         73
       ],
       "bboxAlpha128": [
-        16,
+        12,
         205,
-        436,
+        432,
         420
       ],
       "connectedComponentsOver32Pixels": 1,
@@ -161,13 +161,13 @@
         887
       ],
       "wholeFrameTranslation": [
-        2,
+        3,
         73
       ],
       "bboxAlpha128": [
-        16,
+        15,
         208,
-        433,
+        432,
         420
       ],
       "connectedComponentsOver32Pixels": 1,
@@ -186,9 +186,9 @@
         73
       ],
       "bboxAlpha128": [
-        16,
+        15,
         207,
-        433,
+        432,
         420
       ],
       "connectedComponentsOver32Pixels": 1,
@@ -203,8 +203,19 @@
   "action": "hurt",
   "sheet": "spore-antenna-hurt-sheet.png",
   "preview": "spore-antenna-hurt-preview.gif",
-  "sheetSHA256": "528fd068c826d6bfad79684f7c2dc9addf0503bf2ddbab89857dbf39edba59f0",
-  "previewSHA256": "1eea41c713a9b966e0aa9a2f11f913567154183af86cfd7393b49dc138192de3",
+  "sheetSHA256": "1b2f9807581a8f04a04c090edb157c04ed5d44cb875be96581a6e4d00609c7fd",
+  "previewSHA256": "d45f79f39f25e2968156a966e87937a08d76c4f1556a3c8be7456ec236000b14",
   "approvalDate": "2026-11-07",
-  "integration": "Planning reference only; game runtime and deployment are unchanged."
+  "integration": "Planning reference only; game runtime and deployment are unchanged.",
+  "sourceFacing": "left",
+  "sourceNormalization": {
+    "operation": "exact horizontal mirror within each output atlas cell",
+    "frameWidth": 448,
+    "frameHeight": 448,
+    "beforeSheetSHA256": "528fd068c826d6bfad79684f7c2dc9addf0503bf2ddbab89857dbf39edba59f0",
+    "afterSheetSHA256": "1b2f9807581a8f04a04c090edb157c04ed5d44cb875be96581a6e4d00609c7fd",
+    "historicalGenerationInputsRetained": true,
+    "authoringPosesAndRecordsRemainHistorical": true,
+    "reproduction": "Generate historical sheet then mirror each output cell; no packer execution performed."
+  }
 }

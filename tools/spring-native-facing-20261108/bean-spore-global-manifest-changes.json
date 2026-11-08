@@ -1,0 +1,8 @@
+{
+  "files": [
+    "DesignAssets/Animations/ApprovedActionsV1/actions-manifest.json",
+    "DesignAssets/Animations/ApprovedActionsV1/birth-manifest.json",
+    "DesignAssets/Animations/TribeMinorV1/manifest.json"
+  ],
+  "historicalRigMetadataNotRebound": true
+}

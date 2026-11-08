@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "reportCounts": {
+    "bean-spore-image-changes.json": {
+      "changes": 507
+    },
+    "bean-spore-preview-changes.json": {
+      "changes": 243
+    },
+    "bean-spore-source-metadata-changes.json": {
+      "changes": 135
+    },
+    "bean-spore-extra-image-changes.json": {
+      "changes": 22
+    },
+    "bean-spore-extra-preview-changes.json": {
+      "changes": 23
+    },
+    "bean-spore-extra-source-metadata-changes.json": {
+      "changes": 9
+    },
+    "bean-spore-global-source-alias-changes.json": {
+      "changes": 12,
+      "metadataChanges": 1
+    },
+    "bean-spore-global-source-metadata-changes.json": {
+      "changes": 10,
+      "previewChanges": 10
+    }
+  },
+  "globalAliasRowsVerified": [
+    "bean/gather/idle",
+    "bean/gather/walk",
+    "bean/gather/attack",
+    "bean/gather/hurt",
+    "bean/gather/death",
+    "spore/secretion/idle",
+    "spore/secretion/walk",
+    "spore/secretion/death",
+    "spore/antenna/idle",
+    "spore/antenna/hurt",
+    "spore/secretion/carry",
+    "spore/antenna/harvest",
+    "spore/antenna/throw",
+    "bean/base/walk"
+  ],
+  "failures": [],
+  "totals": {
+    "sourceImages": 540,
+    "previews": 277,
+    "sourceMetadataJson": 155
+  },
+  "limitations": [
+    "Historical generation raw input and old authoring poses/records retained; historical packers not rerun.",
+    "Two projectile originals and nineteen protected/shared hash originals retained."
+  ]
+}

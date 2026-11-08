@@ -31,7 +31,7 @@
   "pivotX": 315.5,
   "pivotY": 553.268115942029,
   "referenceLength": 247,
-  "sourceFacing": "right",
+  "sourceFacing": "left",
   "source": "Sources/approved-idle-frame0.png",
   "sourceRegisteredIdle": "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp",
   "sourceRegisteredIdleFrame": 0,
@@ -41,79 +41,79 @@
     {
       "index": 0,
       "sourceRect": [
-        54,
+        39,
         105,
-        259,
+        244,
         303
       ],
       "fixedWholeCelScale": 0.9456993011416753,
       "wholeCelTranslation": [
-        218,
+        219,
         371
       ]
     },
     {
       "index": 1,
       "sourceRect": [
-        344,
+        339,
         85,
-        555,
+        550,
         300
       ],
       "fixedWholeCelScale": 0.9456993011416753,
       "wholeCelTranslation": [
-        216,
+        215,
         355
       ]
     },
     {
       "index": 2,
       "sourceRect": [
-        638,
+        648,
         54,
-        843,
+        853,
         299
       ],
       "fixedWholeCelScale": 0.9456993011416753,
       "wholeCelTranslation": [
-        218,
+        219,
         326
       ]
     },
     {
       "index": 3,
       "sourceRect": [
-        936,
+        952,
         34,
-        1136,
+        1152,
         282
       ],
       "fixedWholeCelScale": 0.9456993011416753,
       "wholeCelTranslation": [
-        222,
+        220,
         322
       ]
     },
     {
       "index": 4,
       "sourceRect": [
-        55,
+        40,
         356,
-        258,
+        243,
         607
       ],
       "fixedWholeCelScale": 0.9456993011416753,
       "wholeCelTranslation": [
-        220,
+        219,
         321
       ]
     },
     {
       "index": 5,
       "sourceRect": [
-        350,
+        338,
         348,
-        556,
+        544,
         598
       ],
       "fixedWholeCelScale": 0.9456993011416753,
@@ -125,9 +125,9 @@
     {
       "index": 6,
       "sourceRect": [
-        630,
+        638,
         335,
-        853,
+        861,
         587
       ],
       "fixedWholeCelScale": 0.9456993011416753,
@@ -139,65 +139,65 @@
     {
       "index": 7,
       "sourceRect": [
-        921,
+        934,
         346,
-        1154,
+        1167,
         603
       ],
       "fixedWholeCelScale": 0.9456993011416753,
       "wholeCelTranslation": [
-        206,
+        205,
         314
       ]
     },
     {
       "index": 8,
       "sourceRect": [
-        44,
+        28,
         674,
-        270,
+        254,
         932
       ],
       "fixedWholeCelScale": 0.9456993011416753,
       "wholeCelTranslation": [
-        208,
+        209,
         313
       ]
     },
     {
       "index": 9,
       "sourceRect": [
-        341,
+        336,
         684,
-        558,
+        553,
         939
       ],
       "fixedWholeCelScale": 0.9456993011416753,
       "wholeCelTranslation": [
-        212,
+        214,
         317
       ]
     },
     {
       "index": 10,
       "sourceRect": [
-        628,
+        638,
         701,
-        853,
+        863,
         939
       ],
       "fixedWholeCelScale": 0.9456993011416753,
       "wholeCelTranslation": [
-        210,
+        208,
         332
       ]
     },
     {
       "index": 11,
       "sourceRect": [
-        921,
+        935,
         716,
-        1153,
+        1167,
         940
       ],
       "fixedWholeCelScale": 0.9456993011416753,
@@ -209,23 +209,23 @@
     {
       "index": 12,
       "sourceRect": [
-        49,
+        35,
         1011,
-        263,
+        249,
         1263
       ],
       "fixedWholeCelScale": 0.9456993011416753,
       "wholeCelTranslation": [
-        214,
+        215,
         320
       ]
     },
     {
       "index": 13,
       "sourceRect": [
-        344,
+        337,
         1007,
-        557,
+        550,
         1264
       ],
       "fixedWholeCelScale": 0.9456993011416753,
@@ -237,14 +237,14 @@
     {
       "index": 14,
       "sourceRect": [
-        632,
+        641,
         1006,
-        850,
+        859,
         1265
       ],
       "fixedWholeCelScale": 0.9456993011416753,
       "wholeCelTranslation": [
-        212,
+        213,
         313
       ]
     },

@@ -24,25 +24,25 @@
     "coreBounds": null,
     "landmarks": {
       "leftEye": [
-        221,
+        217,
         365.5
       ],
       "rightEye": [
-        295,
+        291,
         365.5
       ],
       "supportPoint": [
-        257.5,
+        254.5,
         448.5
       ],
       "supportPixelBounds": [
-        203,
+        200,
         441,
         109,
         8
       ],
       "faceMidpoint": [
-        258,
+        254,
         365.5
       ]
     },
@@ -74,7 +74,7 @@
     "BeanFormsV1/secretion-blade-carapace-antenna-feet",
     "existing-bean-highres-reference"
   ],
-  "sourceHash": "1d472b1a15f25475131e2367e5eb589b4f9d910d66d8a93e59b62a3f32507beb",
+  "sourceHash": "44fd4b740374ef81c8c781d9aa4f4ee2c64ff37d2a20dcde66a458b39615e74a",
   "sourceRegistration": {
     "nativeSourceImage": "DesignAssets/Animations/UnitAppearanceV1/bean/07/Source/key-native.png",
     "nativeSourceHash": "ab033ef2d5d9476a548df00c921d30e21c809d846cddd8571c9926cc9e7326b9",
@@ -201,5 +201,6 @@
     "sourceThread": "01a1a155-d06b-7243-b396-e5c947a4714e",
     "scope": "frame-camera-nominal-core-foot-and-recorded-landmarks",
     "unobservedCoreBoundsNotInferred": true
-  }
+  },
+  "sourceFacing": "left"
 }

@@ -204,11 +204,23 @@
       "loop": false,
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sheetSHA256": "92b23ab75712e51b99f0ff58f8f2063190e44b28c2668f2c04201d2761283402",
-      "previewSHA256": "bbd0537d3d46a55eb8bec7c32f1249be2647485d609ffd34f9950eff422f22b7",
-      "gifSHA256": "8395a9c98d2e2295e696102cf94bb918a1b68568c15ba863506e324e413d280c",
+      "sheetSHA256": "2e2ed151aecb229d7072f50ec6f3f9deef2fbb01dd9d039a8166fe3b6b8ef1c4",
+      "previewSHA256": "c6e421e3cd29d955f082c5e84f6173e2575f841eef84cd58ad2fe25d825f52eb",
+      "gifSHA256": "077b01138f26de9e415496687faaee0fa5c203dc3b029afe8e531c7429dd2d82",
       "rangedBody": true,
-      "projectileBakedIntoBodySheet": false
+      "projectileBakedIntoBodySheet": false,
+      "sourceFacing": "left",
+      "sourceRepair": {
+        "kind": "image-generated-complete-leftward-middle-cels",
+        "sourceFacing": "left",
+        "candidateManifest": "tools/spring-native-facing-20261108/followup13-spring-secretion-carapace-ranged-manifest.json",
+        "validation": "tools/spring-native-facing-20261108/followup13-validation.json",
+        "originalWholeFirstLastCelsPreserved": true,
+        "geometryAndTimingUnchanged": true,
+        "legacyGeneratedSourceAndQAFieldsAreHistorical": true,
+        "mirroring": false,
+        "bodyPartComposition": false
+      }
     },
     "hurt": {
       "frameSize": 480,

@@ -1,0 +1,210 @@
+{
+  "stage": "248/229px packed runtime candidate with retained 640px source; native overlay QA only, final integrated build and Chromium not verified",
+  "runtimeSha": "143a6324c8e92d755f251c63561efb5cf2869f83d071198db78bfe571a393c75",
+  "headerSha": "d407947b2a436f358ffb3ba41076f7ace7f53aed4bd0a3995af34debe319fd0f",
+  "warnings": 0,
+  "species": {
+    "white-paw": {
+      "frameSize": 248,
+      "cycleMs": 500,
+      "advancePxPerCycle": 27.06572837243405,
+      "advanceDifferenceFrom640": 0.0,
+      "runtimeSourcePixelScale": 0.45825571847507346,
+      "original640PixelScale": 0.14435055131964813,
+      "modeledLiftPx": 5.052269296187685,
+      "allWalkAndDirectBufferMatch": true,
+      "drawSamples": 1024,
+      "cycleFrameRepeat": true,
+      "cycleRasterRepeat": true,
+      "quarterFrameStance": [
+        {
+          "action": "enter",
+          "cycle": 0,
+          "worldSoleXRange": [
+            298,
+            298.5
+          ],
+          "maximumPixelDriftFromFirst": 0.5,
+          "worldSoleYRange": [
+            250,
+            250
+          ]
+        },
+        {
+          "action": "enter",
+          "cycle": 1,
+          "worldSoleXRange": [
+            271,
+            271
+          ],
+          "maximumPixelDriftFromFirst": 0,
+          "worldSoleYRange": [
+            250,
+            250
+          ]
+        },
+        {
+          "action": "exit",
+          "cycle": 0,
+          "worldSoleXRange": [
+            298,
+            298.5
+          ],
+          "maximumPixelDriftFromFirst": 0.5,
+          "worldSoleYRange": [
+            250,
+            250
+          ]
+        },
+        {
+          "action": "exit",
+          "cycle": 1,
+          "worldSoleXRange": [
+            271,
+            271
+          ],
+          "maximumPixelDriftFromFirst": 0,
+          "worldSoleYRange": [
+            250,
+            250
+          ]
+        }
+      ],
+      "denseSubframeStance": [
+        {
+          "action": "enter",
+          "samples": 164,
+          "worldSoleXRange": [
+            298,
+            298.5
+          ],
+          "worldSoleYRange": [
+            250,
+            250
+          ],
+          "pixelPeakToPeak": 0.5,
+          "minimumSolePixels": 5
+        },
+        {
+          "action": "exit",
+          "samples": 164,
+          "worldSoleXRange": [
+            298,
+            298.5
+          ],
+          "worldSoleYRange": [
+            250,
+            250
+          ],
+          "pixelPeakToPeak": 0.5,
+          "minimumSolePixels": 5
+        }
+      ],
+      "sourceSHA": "cde723692f2534c8ab7bc671299e90a94446b2b0d6d5deabec4ab850568c2714",
+      "runtimeAssetSHA": "cbf185329cee4164085d0a9aa37a0969ca97e0b9874091d5217ce397e54ff671",
+      "manifestSourceMatches": true,
+      "manifestRuntimeMatches": true
+    },
+    "shadow-weasel": {
+      "frameSize": 229,
+      "cycleMs": 500,
+      "advancePxPerCycle": 22.892934497816547,
+      "advanceDifferenceFrom640": 0.0,
+      "runtimeSourcePixelScale": 0.455580786026201,
+      "original640PixelScale": 0.12209565065502187,
+      "modeledLiftPx": 4.273347772925765,
+      "allWalkAndDirectBufferMatch": true,
+      "drawSamples": 1024,
+      "cycleFrameRepeat": true,
+      "cycleRasterRepeat": true,
+      "quarterFrameStance": [
+        {
+          "action": "enter",
+          "cycle": 0,
+          "worldSoleXRange": [
+            302,
+            302
+          ],
+          "maximumPixelDriftFromFirst": 0,
+          "worldSoleYRange": [
+            248,
+            249
+          ]
+        },
+        {
+          "action": "enter",
+          "cycle": 1,
+          "worldSoleXRange": [
+            279,
+            279
+          ],
+          "maximumPixelDriftFromFirst": 0,
+          "worldSoleYRange": [
+            248,
+            249
+          ]
+        },
+        {
+          "action": "exit",
+          "cycle": 0,
+          "worldSoleXRange": [
+            302,
+            302
+          ],
+          "maximumPixelDriftFromFirst": 0,
+          "worldSoleYRange": [
+            248,
+            249
+          ]
+        },
+        {
+          "action": "exit",
+          "cycle": 1,
+          "worldSoleXRange": [
+            279,
+            279
+          ],
+          "maximumPixelDriftFromFirst": 0,
+          "worldSoleYRange": [
+            248,
+            249
+          ]
+        }
+      ],
+      "denseSubframeStance": [
+        {
+          "action": "enter",
+          "samples": 164,
+          "worldSoleXRange": [
+            301,
+            302
+          ],
+          "worldSoleYRange": [
+            248,
+            249
+          ],
+          "pixelPeakToPeak": 1,
+          "minimumSolePixels": 1
+        },
+        {
+          "action": "exit",
+          "samples": 164,
+          "worldSoleXRange": [
+            301,
+            302
+          ],
+          "worldSoleYRange": [
+            248,
+            249
+          ],
+          "pixelPeakToPeak": 1,
+          "minimumSolePixels": 1
+        }
+      ],
+      "sourceSHA": "0e62cd51328bbb064d2d690d9410a0d6b1d739c50d8828b01181da422527092a",
+      "runtimeAssetSHA": "81e27762d3d0f909f9802ffc4ec7f879dcd2ab1d3bb69a54e7a10331e7dfe9fb",
+      "manifestSourceMatches": true,
+      "manifestRuntimeMatches": true
+    }
+  }
+}

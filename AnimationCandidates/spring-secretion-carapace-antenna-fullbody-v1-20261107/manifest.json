@@ -979,8 +979,8 @@
       "webpPreview": "spring-secretion-carapace-antenna-ranged-v1-preview.webp",
       "generatedSource": "ranged-generated-source.png",
       "sourceSHA256": "bbffe8fae230cc41b99e70619b74a9136eac34908c3bf0956a996fcc7697e0c4",
-      "sheetSHA256": "f221a60e431447aafc5d312c7c25fa00fbd9dc575968ef97cb369e79d8463f87",
-      "previewSHA256": "7315925e9f63f81843d9c0dd71d41df6c7b4b6c18d40a5d34b9c746b01b51617",
+      "sheetSHA256": "c3eeaf58685f17d83e458c99796a4dc316ebe3dfca0bd1fef0f7973353c3c309",
+      "previewSHA256": "5a67ec8f27bf0e75739646a041d160fbd6d6d2bc78feac16ad0697053710e75b",
       "frameCount": 16,
       "distinctDrawnPoses": 15,
       "frameSize": 480,
@@ -1445,7 +1445,19 @@
       "referenceLengthMethod": "Alpha >= 16 max(width,height) of neutral whole-body silhouette; birth measures landed final body only, excluding nest.",
       "registrationScale": 1,
       "fullScene": false,
-      "sceneIncludesNest": false
+      "sceneIncludesNest": false,
+      "sourceFacing": "left",
+      "sourceRepair": {
+        "kind": "image-generated-complete-leftward-middle-cels",
+        "sourceFacing": "left",
+        "candidateManifest": "tools/spring-native-facing-20261108/followup13-spring-secretion-carapace-antenna-ranged-manifest.json",
+        "validation": "tools/spring-native-facing-20261108/followup13-validation.json",
+        "originalWholeFirstLastCelsPreserved": true,
+        "geometryAndTimingUnchanged": true,
+        "legacyGeneratedSourceAndQAFieldsAreHistorical": true,
+        "mirroring": false,
+        "bodyPartComposition": false
+      }
     },
     "hurt": {
       "action": "hurt",

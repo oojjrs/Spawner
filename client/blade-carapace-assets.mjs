@@ -6,7 +6,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/BladeCarapaceV1/bean/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/BladeCarapaceV1/bean/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 8,
@@ -88,7 +88,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/bean/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -169,7 +169,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/bean/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -210,7 +210,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/bean/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -243,7 +243,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/bean/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -276,7 +276,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/bean/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -400,7 +400,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
           10
         ],
         "durationMs": 3850,
-        "pivotX": 430,
+        "pivotX": 82,
         "pivotY": 446,
         "referenceLength": 43.59375,
         "viewSize": 43.59375,
@@ -413,7 +413,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/bean/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 8,
@@ -450,7 +450,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/BladeCarapaceV1/spore/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/BladeCarapaceV1/spore/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -484,7 +484,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/spore/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -517,7 +517,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/spore/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -550,7 +550,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/spore/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -583,7 +583,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/spore/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -616,7 +616,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/spore/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 768,
         "frameHeight": 512,
         "columns": 8,
@@ -702,7 +702,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
           40
         ],
         "durationMs": 3120,
-        "pivotX": 534,
+        "pivotX": 234,
         "pivotY": 477,
         "referenceLength": 46,
         "viewSize": 46,
@@ -715,7 +715,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/spore/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -1045,7 +1045,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/spring/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 480,
         "frameHeight": 480,
         "columns": 4,

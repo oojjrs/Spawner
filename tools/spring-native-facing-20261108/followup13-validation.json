@@ -1,0 +1,3449 @@
+[
+  {
+    "id": "spring-blade-carapace-attack",
+    "dimensionsMatch": true,
+    "sourceSHAUnchanged": true,
+    "endpoints": [
+      {
+        "frame": 0,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      },
+      {
+        "frame": 15,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      }
+    ],
+    "frames": [
+      {
+        "frame": 0,
+        "bboxAlphaAbove24": [
+          113,
+          133,
+          322,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          89.61,
+          187.31,
+          206.4
+        ]
+      },
+      {
+        "frame": 1,
+        "bboxAlphaAbove24": [
+          106,
+          155,
+          335,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          79.32,
+          184.88,
+          207.88
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 2,
+        "bboxAlphaAbove24": [
+          89,
+          170,
+          319,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          79.79,
+          184.29,
+          207.17
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 3,
+        "bboxAlphaAbove24": [
+          96,
+          187,
+          344,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          70.78,
+          180.05,
+          205.16
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 4,
+        "bboxAlphaAbove24": [
+          112,
+          185,
+          347,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          66.56,
+          178.07,
+          204.41
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 5,
+        "bboxAlphaAbove24": [
+          65,
+          197,
+          352,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          65.39,
+          177.2,
+          203.36
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 6,
+        "bboxAlphaAbove24": [
+          11,
+          215,
+          367,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          65.41,
+          177.99,
+          203.75
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 7,
+        "bboxAlphaAbove24": [
+          13,
+          187,
+          355,
+          371
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          67.65,
+          179.43,
+          204.8
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 8,
+        "bboxAlphaAbove24": [
+          79,
+          161,
+          355,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.19,
+          182.04,
+          206.03
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 9,
+        "bboxAlphaAbove24": [
+          85,
+          150,
+          324,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          76.72,
+          182.12,
+          205.57
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 10,
+        "bboxAlphaAbove24": [
+          99,
+          145,
+          312,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          77.77,
+          182.83,
+          206.38
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 11,
+        "bboxAlphaAbove24": [
+          109,
+          133,
+          327,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          77.9,
+          183.8,
+          207.06
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 12,
+        "bboxAlphaAbove24": [
+          108,
+          132,
+          326,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          77.33,
+          183.64,
+          206.95
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 13,
+        "bboxAlphaAbove24": [
+          107,
+          137,
+          327,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          77.71,
+          184.43,
+          207.44
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 14,
+        "bboxAlphaAbove24": [
+          106,
+          137,
+          325,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          78.24,
+          184.3,
+          207.49
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 15,
+        "bboxAlphaAbove24": [
+          113,
+          133,
+          322,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          89.61,
+          187.31,
+          206.4
+        ]
+      }
+    ],
+    "pass": true,
+    "oneCompletePosePerGeneratedCel": true
+  },
+  {
+    "id": "spring-blade-secretion-attack",
+    "dimensionsMatch": true,
+    "sourceSHAUnchanged": true,
+    "endpoints": [
+      {
+        "frame": 0,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      },
+      {
+        "frame": 15,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      }
+    ],
+    "frames": [
+      {
+        "frame": 0,
+        "bboxAlphaAbove24": [
+          150,
+          195,
+          301,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          83.17,
+          184.55,
+          196.03
+        ]
+      },
+      {
+        "frame": 1,
+        "bboxAlphaAbove24": [
+          146,
+          205,
+          323,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          76.37,
+          168.62,
+          181.75
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 2,
+        "bboxAlphaAbove24": [
+          139,
+          223,
+          329,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          76.06,
+          166.73,
+          180.36
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 3,
+        "bboxAlphaAbove24": [
+          134,
+          252,
+          331,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.78,
+          164.56,
+          177.89
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 4,
+        "bboxAlphaAbove24": [
+          131,
+          248,
+          317,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.8,
+          164.27,
+          178.03
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 5,
+        "bboxAlphaAbove24": [
+          87,
+          251,
+          313,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          67.77,
+          162.41,
+          176.48
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 6,
+        "bboxAlphaAbove24": [
+          43,
+          256,
+          328,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          68.51,
+          161.73,
+          175.69
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 7,
+        "bboxAlphaAbove24": [
+          75,
+          249,
+          336,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          66.94,
+          162.18,
+          176.2
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 8,
+        "bboxAlphaAbove24": [
+          93,
+          238,
+          326,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          69.76,
+          164.29,
+          178.23
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 9,
+        "bboxAlphaAbove24": [
+          135,
+          226,
+          313,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.54,
+          166.81,
+          180.26
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 10,
+        "bboxAlphaAbove24": [
+          143,
+          202,
+          302,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          79.53,
+          170.17,
+          183.21
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 11,
+        "bboxAlphaAbove24": [
+          146,
+          198,
+          306,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          77.28,
+          169.29,
+          182.34
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 12,
+        "bboxAlphaAbove24": [
+          148,
+          194,
+          302,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          77.47,
+          169.44,
+          182.38
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 13,
+        "bboxAlphaAbove24": [
+          149,
+          195,
+          300,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          76.8,
+          168.56,
+          181.57
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 14,
+        "bboxAlphaAbove24": [
+          150,
+          195,
+          300,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          77.99,
+          168.99,
+          181.9
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 15,
+        "bboxAlphaAbove24": [
+          150,
+          195,
+          301,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          83.17,
+          184.55,
+          196.03
+        ]
+      }
+    ],
+    "pass": true,
+    "oneCompletePosePerGeneratedCel": true
+  },
+  {
+    "id": "spring-blade-secretion-carapace-attack",
+    "dimensionsMatch": true,
+    "sourceSHAUnchanged": true,
+    "endpoints": [
+      {
+        "frame": 0,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      },
+      {
+        "frame": 15,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      }
+    ],
+    "frames": [
+      {
+        "frame": 0,
+        "bboxAlphaAbove24": [
+          141,
+          202,
+          297,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          82.22,
+          182.96,
+          201.36
+        ]
+      },
+      {
+        "frame": 1,
+        "bboxAlphaAbove24": [
+          136,
+          218,
+          302,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.93,
+          167.92,
+          188.33
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 2,
+        "bboxAlphaAbove24": [
+          115,
+          230,
+          303,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.76,
+          166.38,
+          186.38
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 3,
+        "bboxAlphaAbove24": [
+          101,
+          244,
+          295,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.79,
+          165.14,
+          185.11
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 4,
+        "bboxAlphaAbove24": [
+          139,
+          226,
+          317,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.6,
+          166.16,
+          185.99
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 5,
+        "bboxAlphaAbove24": [
+          109,
+          239,
+          311,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          70.5,
+          162.52,
+          183.65
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 6,
+        "bboxAlphaAbove24": [
+          59,
+          249,
+          319,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.02,
+          165.26,
+          185.46
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 7,
+        "bboxAlphaAbove24": [
+          49,
+          245,
+          331,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.58,
+          165.99,
+          185.92
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 8,
+        "bboxAlphaAbove24": [
+          122,
+          230,
+          341,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          71.35,
+          165.83,
+          186.06
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 9,
+        "bboxAlphaAbove24": [
+          147,
+          215,
+          323,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.11,
+          167.53,
+          187.81
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 10,
+        "bboxAlphaAbove24": [
+          133,
+          214,
+          292,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.26,
+          166.79,
+          186.78
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 11,
+        "bboxAlphaAbove24": [
+          139,
+          208,
+          294,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.59,
+          167.18,
+          186.89
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 12,
+        "bboxAlphaAbove24": [
+          142,
+          211,
+          298,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.8,
+          167.24,
+          186.87
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 13,
+        "bboxAlphaAbove24": [
+          139,
+          208,
+          295,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.36,
+          167.08,
+          187.33
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 14,
+        "bboxAlphaAbove24": [
+          136,
+          208,
+          292,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.88,
+          165.75,
+          185.87
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 15,
+        "bboxAlphaAbove24": [
+          141,
+          202,
+          297,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          82.22,
+          182.96,
+          201.36
+        ]
+      }
+    ],
+    "pass": true,
+    "oneCompletePosePerGeneratedCel": true
+  },
+  {
+    "id": "spring-blade-secretion-antenna-attack",
+    "dimensionsMatch": true,
+    "sourceSHAUnchanged": true,
+    "endpoints": [
+      {
+        "frame": 0,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      },
+      {
+        "frame": 15,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      }
+    ],
+    "frames": [
+      {
+        "frame": 0,
+        "bboxAlphaAbove24": [
+          144,
+          196,
+          304,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.02,
+          180.19,
+          197.91
+        ]
+      },
+      {
+        "frame": 1,
+        "bboxAlphaAbove24": [
+          140,
+          194,
+          311,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          67.98,
+          170.52,
+          190.01
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 2,
+        "bboxAlphaAbove24": [
+          134,
+          212,
+          311,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          67.07,
+          169.87,
+          189.66
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 3,
+        "bboxAlphaAbove24": [
+          130,
+          223,
+          314,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          65.64,
+          168.61,
+          188.39
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 4,
+        "bboxAlphaAbove24": [
+          133,
+          208,
+          312,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          68.06,
+          170.59,
+          190.29
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 5,
+        "bboxAlphaAbove24": [
+          66,
+          223,
+          304,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          68.27,
+          169.95,
+          189.66
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 6,
+        "bboxAlphaAbove24": [
+          19,
+          224,
+          309,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          68.16,
+          170.73,
+          190.47
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 7,
+        "bboxAlphaAbove24": [
+          62,
+          221,
+          319,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          68.99,
+          170.82,
+          190.28
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 8,
+        "bboxAlphaAbove24": [
+          100,
+          203,
+          324,
+          367
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          69.5,
+          172.32,
+          191.95
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 9,
+        "bboxAlphaAbove24": [
+          127,
+          196,
+          311,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          69.55,
+          171.47,
+          190.9
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 10,
+        "bboxAlphaAbove24": [
+          127,
+          191,
+          307,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          69.07,
+          170.38,
+          190.02
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 11,
+        "bboxAlphaAbove24": [
+          137,
+          191,
+          307,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          69.69,
+          170.84,
+          190.05
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 12,
+        "bboxAlphaAbove24": [
+          142,
+          198,
+          303,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          67.98,
+          170.62,
+          190.23
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 13,
+        "bboxAlphaAbove24": [
+          140,
+          196,
+          301,
+          367
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          68.54,
+          171.08,
+          190.4
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 14,
+        "bboxAlphaAbove24": [
+          140,
+          197,
+          302,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          67.85,
+          170.15,
+          189.62
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 15,
+        "bboxAlphaAbove24": [
+          144,
+          196,
+          304,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.02,
+          180.19,
+          197.91
+        ]
+      }
+    ],
+    "pass": true,
+    "oneCompletePosePerGeneratedCel": true
+  },
+  {
+    "id": "spring-blade-secretion-carapace-antenna-attack",
+    "dimensionsMatch": true,
+    "sourceSHAUnchanged": true,
+    "endpoints": [
+      {
+        "frame": 0,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      },
+      {
+        "frame": 15,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      }
+    ],
+    "frames": [
+      {
+        "frame": 0,
+        "bboxAlphaAbove24": [
+          129,
+          186,
+          312,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          86.33,
+          188.85,
+          210.36
+        ]
+      },
+      {
+        "frame": 1,
+        "bboxAlphaAbove24": [
+          129,
+          186,
+          317,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.23,
+          176.25,
+          200.33
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 2,
+        "bboxAlphaAbove24": [
+          128,
+          195,
+          326,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.35,
+          176.34,
+          200.47
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 3,
+        "bboxAlphaAbove24": [
+          121,
+          207,
+          311,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.78,
+          176.44,
+          200.52
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 4,
+        "bboxAlphaAbove24": [
+          123,
+          202,
+          308,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          70.28,
+          174.74,
+          199.54
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 5,
+        "bboxAlphaAbove24": [
+          75,
+          195,
+          315,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.21,
+          175.74,
+          199.91
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 6,
+        "bboxAlphaAbove24": [
+          58,
+          191,
+          317,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          71.64,
+          175.21,
+          199.64
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 7,
+        "bboxAlphaAbove24": [
+          47,
+          192,
+          319,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          71.84,
+          175.91,
+          200.36
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 8,
+        "bboxAlphaAbove24": [
+          75,
+          190,
+          318,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.1,
+          176.54,
+          201.14
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 9,
+        "bboxAlphaAbove24": [
+          91,
+          190,
+          308,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.94,
+          176.8,
+          200.82
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 10,
+        "bboxAlphaAbove24": [
+          129,
+          183,
+          305,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.34,
+          176.1,
+          200.18
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 11,
+        "bboxAlphaAbove24": [
+          131,
+          171,
+          315,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.29,
+          177.36,
+          200.94
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 12,
+        "bboxAlphaAbove24": [
+          130,
+          179,
+          314,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.73,
+          178.35,
+          201.77
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 13,
+        "bboxAlphaAbove24": [
+          128,
+          188,
+          314,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.69,
+          176.96,
+          200.9
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 14,
+        "bboxAlphaAbove24": [
+          131,
+          187,
+          309,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.76,
+          177.63,
+          201.3
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 15,
+        "bboxAlphaAbove24": [
+          129,
+          186,
+          312,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          86.33,
+          188.85,
+          210.36
+        ]
+      }
+    ],
+    "pass": true,
+    "oneCompletePosePerGeneratedCel": true
+  },
+  {
+    "id": "spring-secretion-ranged",
+    "dimensionsMatch": true,
+    "sourceSHAUnchanged": true,
+    "endpoints": [
+      {
+        "frame": 0,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      },
+      {
+        "frame": 7,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      }
+    ],
+    "frames": [
+      {
+        "frame": 0,
+        "bboxAlphaAbove24": [
+          144,
+          170,
+          385,
+          449
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          103.1,
+          189.15,
+          190.92
+        ]
+      },
+      {
+        "frame": 1,
+        "bboxAlphaAbove24": [
+          122,
+          206,
+          392,
+          449
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          98.61,
+          179.07,
+          183.71
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 2,
+        "bboxAlphaAbove24": [
+          128,
+          166,
+          391,
+          449
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          87.77,
+          175.72,
+          182.21
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 3,
+        "bboxAlphaAbove24": [
+          103,
+          159,
+          406,
+          448
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          86.12,
+          175.26,
+          182.18
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 4,
+        "bboxAlphaAbove24": [
+          56,
+          164,
+          403,
+          450
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          86.21,
+          175.85,
+          182.5
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 5,
+        "bboxAlphaAbove24": [
+          124,
+          172,
+          391,
+          450
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          85.64,
+          174.83,
+          181.53
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 6,
+        "bboxAlphaAbove24": [
+          125,
+          169,
+          385,
+          449
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          100.73,
+          180.57,
+          184.82
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 7,
+        "bboxAlphaAbove24": [
+          127,
+          167,
+          380,
+          449
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          98.94,
+          187.04,
+          189.36
+        ]
+      }
+    ],
+    "pass": true,
+    "oneCompletePosePerGeneratedCel": true
+  },
+  {
+    "id": "spring-secretion-carapace-ranged",
+    "dimensionsMatch": true,
+    "sourceSHAUnchanged": true,
+    "endpoints": [
+      {
+        "frame": 0,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      },
+      {
+        "frame": 15,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      }
+    ],
+    "frames": [
+      {
+        "frame": 0,
+        "bboxAlphaAbove24": [
+          98,
+          109,
+          338,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          91.37,
+          192.21,
+          205.94
+        ]
+      },
+      {
+        "frame": 1,
+        "bboxAlphaAbove24": [
+          93,
+          127,
+          338,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          84.38,
+          180.6,
+          196.16
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 2,
+        "bboxAlphaAbove24": [
+          92,
+          142,
+          339,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          84.86,
+          180.13,
+          195.55
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 3,
+        "bboxAlphaAbove24": [
+          92,
+          129,
+          340,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          84.37,
+          180.39,
+          196.19
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 4,
+        "bboxAlphaAbove24": [
+          89,
+          116,
+          335,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          80.57,
+          178.24,
+          194.76
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 5,
+        "bboxAlphaAbove24": [
+          43,
+          111,
+          336,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          79.21,
+          177.17,
+          194.0
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 6,
+        "bboxAlphaAbove24": [
+          9,
+          110,
+          344,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          78.54,
+          176.41,
+          193.18
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 7,
+        "bboxAlphaAbove24": [
+          10,
+          109,
+          352,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          78.5,
+          176.39,
+          193.34
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 8,
+        "bboxAlphaAbove24": [
+          51,
+          113,
+          339,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          76.71,
+          175.88,
+          193.09
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 9,
+        "bboxAlphaAbove24": [
+          90,
+          112,
+          338,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          77.72,
+          176.73,
+          193.72
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 10,
+        "bboxAlphaAbove24": [
+          95,
+          110,
+          339,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          77.72,
+          175.68,
+          192.5
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 11,
+        "bboxAlphaAbove24": [
+          95,
+          109,
+          339,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          86.42,
+          181.51,
+          197.22
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 12,
+        "bboxAlphaAbove24": [
+          95,
+          109,
+          340,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          88.41,
+          182.61,
+          197.46
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 13,
+        "bboxAlphaAbove24": [
+          96,
+          109,
+          338,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          86.97,
+          181.96,
+          196.91
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 14,
+        "bboxAlphaAbove24": [
+          96,
+          109,
+          339,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          86.31,
+          181.12,
+          196.23
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 15,
+        "bboxAlphaAbove24": [
+          98,
+          109,
+          338,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          91.37,
+          192.21,
+          205.94
+        ]
+      }
+    ],
+    "pass": true,
+    "oneCompletePosePerGeneratedCel": true
+  },
+  {
+    "id": "spring-blade-secretion-ranged",
+    "dimensionsMatch": true,
+    "sourceSHAUnchanged": true,
+    "endpoints": [
+      {
+        "frame": 0,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      },
+      {
+        "frame": 15,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      }
+    ],
+    "frames": [
+      {
+        "frame": 0,
+        "bboxAlphaAbove24": [
+          111,
+          115,
+          348,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          78.45,
+          186.61,
+          203.65
+        ]
+      },
+      {
+        "frame": 1,
+        "bboxAlphaAbove24": [
+          100,
+          133,
+          347,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.18,
+          179.29,
+          197.83
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 2,
+        "bboxAlphaAbove24": [
+          90,
+          154,
+          344,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.19,
+          178.81,
+          197.47
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 3,
+        "bboxAlphaAbove24": [
+          90,
+          134,
+          341,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          71.61,
+          178.83,
+          197.79
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 4,
+        "bboxAlphaAbove24": [
+          93,
+          132,
+          344,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.37,
+          179.41,
+          198.19
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 5,
+        "bboxAlphaAbove24": [
+          69,
+          126,
+          347,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          62.06,
+          174.49,
+          195.04
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 6,
+        "bboxAlphaAbove24": [
+          9,
+          126,
+          358,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          62.91,
+          175.18,
+          195.42
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 7,
+        "bboxAlphaAbove24": [
+          10,
+          124,
+          356,
+          366
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          62.81,
+          175.06,
+          195.42
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 8,
+        "bboxAlphaAbove24": [
+          76,
+          124,
+          351,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          65.91,
+          176.93,
+          196.81
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 9,
+        "bboxAlphaAbove24": [
+          93,
+          118,
+          344,
+          367
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          69.28,
+          178.0,
+          197.22
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 10,
+        "bboxAlphaAbove24": [
+          100,
+          117,
+          342,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.96,
+          179.38,
+          197.73
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 11,
+        "bboxAlphaAbove24": [
+          102,
+          117,
+          343,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.75,
+          178.92,
+          197.26
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 12,
+        "bboxAlphaAbove24": [
+          105,
+          115,
+          343,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.15,
+          179.1,
+          197.23
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 13,
+        "bboxAlphaAbove24": [
+          106,
+          114,
+          342,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.41,
+          179.01,
+          197.3
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 14,
+        "bboxAlphaAbove24": [
+          106,
+          115,
+          341,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.88,
+          178.66,
+          196.92
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 15,
+        "bboxAlphaAbove24": [
+          111,
+          115,
+          348,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          78.45,
+          186.61,
+          203.65
+        ]
+      }
+    ],
+    "pass": true,
+    "oneCompletePosePerGeneratedCel": true
+  },
+  {
+    "id": "spring-blade-secretion-carapace-ranged",
+    "dimensionsMatch": true,
+    "sourceSHAUnchanged": true,
+    "endpoints": [
+      {
+        "frame": 0,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      },
+      {
+        "frame": 15,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      }
+    ],
+    "frames": [
+      {
+        "frame": 0,
+        "bboxAlphaAbove24": [
+          110,
+          133,
+          338,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          89.41,
+          189.22,
+          204.24
+        ]
+      },
+      {
+        "frame": 1,
+        "bboxAlphaAbove24": [
+          106,
+          146,
+          341,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.62,
+          175.68,
+          193.68
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 2,
+        "bboxAlphaAbove24": [
+          105,
+          155,
+          337,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.39,
+          175.89,
+          194.05
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 3,
+        "bboxAlphaAbove24": [
+          108,
+          148,
+          341,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          71.31,
+          176.39,
+          194.85
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 4,
+        "bboxAlphaAbove24": [
+          107,
+          139,
+          344,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.2,
+          176.91,
+          195.19
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 5,
+        "bboxAlphaAbove24": [
+          100,
+          142,
+          343,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          62.17,
+          172.61,
+          192.93
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 6,
+        "bboxAlphaAbove24": [
+          61,
+          145,
+          346,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          61.95,
+          173.1,
+          193.39
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 7,
+        "bboxAlphaAbove24": [
+          83,
+          145,
+          344,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          60.96,
+          172.77,
+          193.4
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 8,
+        "bboxAlphaAbove24": [
+          105,
+          139,
+          340,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          60.48,
+          172.64,
+          193.11
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 9,
+        "bboxAlphaAbove24": [
+          105,
+          138,
+          337,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          70.39,
+          175.56,
+          194.32
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 10,
+        "bboxAlphaAbove24": [
+          102,
+          138,
+          336,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          71.59,
+          176.33,
+          194.83
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 11,
+        "bboxAlphaAbove24": [
+          105,
+          139,
+          339,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          71.11,
+          175.83,
+          194.59
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 12,
+        "bboxAlphaAbove24": [
+          105,
+          136,
+          340,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          75.06,
+          176.76,
+          194.77
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 13,
+        "bboxAlphaAbove24": [
+          105,
+          139,
+          337,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.71,
+          176.82,
+          195.01
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 14,
+        "bboxAlphaAbove24": [
+          104,
+          139,
+          336,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.82,
+          176.63,
+          194.89
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 15,
+        "bboxAlphaAbove24": [
+          110,
+          133,
+          338,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          89.41,
+          189.22,
+          204.24
+        ]
+      }
+    ],
+    "pass": true,
+    "oneCompletePosePerGeneratedCel": true
+  },
+  {
+    "id": "spring-secretion-antenna-ranged",
+    "dimensionsMatch": true,
+    "sourceSHAUnchanged": true,
+    "endpoints": [
+      {
+        "frame": 0,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      },
+      {
+        "frame": 15,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      }
+    ],
+    "frames": [
+      {
+        "frame": 0,
+        "bboxAlphaAbove24": [
+          128,
+          207,
+          293,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          80.5,
+          173.83,
+          187.65
+        ]
+      },
+      {
+        "frame": 1,
+        "bboxAlphaAbove24": [
+          132,
+          202,
+          300,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.21,
+          162.03,
+          175.71
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 2,
+        "bboxAlphaAbove24": [
+          129,
+          207,
+          302,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.83,
+          161.99,
+          175.49
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 3,
+        "bboxAlphaAbove24": [
+          122,
+          207,
+          301,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.47,
+          161.91,
+          175.67
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 4,
+        "bboxAlphaAbove24": [
+          120,
+          203,
+          299,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          66.51,
+          159.53,
+          174.23
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 5,
+        "bboxAlphaAbove24": [
+          93,
+          197,
+          304,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          63.28,
+          159.29,
+          174.61
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 6,
+        "bboxAlphaAbove24": [
+          30,
+          196,
+          307,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          64.77,
+          159.74,
+          175.15
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 7,
+        "bboxAlphaAbove24": [
+          60,
+          196,
+          310,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          63.9,
+          160.26,
+          175.52
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 8,
+        "bboxAlphaAbove24": [
+          95,
+          196,
+          305,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          62.64,
+          160.16,
+          175.64
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 9,
+        "bboxAlphaAbove24": [
+          116,
+          200,
+          302,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          62.17,
+          158.62,
+          174.29
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 10,
+        "bboxAlphaAbove24": [
+          122,
+          203,
+          304,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          70.87,
+          161.01,
+          175.31
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 11,
+        "bboxAlphaAbove24": [
+          124,
+          204,
+          303,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.47,
+          161.24,
+          175.19
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 12,
+        "bboxAlphaAbove24": [
+          123,
+          205,
+          297,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          71.81,
+          160.97,
+          174.58
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 13,
+        "bboxAlphaAbove24": [
+          126,
+          206,
+          295,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.22,
+          161.16,
+          174.84
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 14,
+        "bboxAlphaAbove24": [
+          130,
+          206,
+          293,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.68,
+          161.32,
+          175.27
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 15,
+        "bboxAlphaAbove24": [
+          128,
+          207,
+          293,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          80.5,
+          173.83,
+          187.65
+        ]
+      }
+    ],
+    "pass": true,
+    "oneCompletePosePerGeneratedCel": true
+  },
+  {
+    "id": "spring-secretion-carapace-antenna-ranged",
+    "dimensionsMatch": true,
+    "sourceSHAUnchanged": true,
+    "endpoints": [
+      {
+        "frame": 0,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      },
+      {
+        "frame": 15,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      }
+    ],
+    "frames": [
+      {
+        "frame": 0,
+        "bboxAlphaAbove24": [
+          135,
+          177,
+          301,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          83.93,
+          187.22,
+          201.63
+        ]
+      },
+      {
+        "frame": 1,
+        "bboxAlphaAbove24": [
+          126,
+          172,
+          305,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          81.65,
+          183.26,
+          196.53
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 2,
+        "bboxAlphaAbove24": [
+          118,
+          180,
+          306,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          82.39,
+          182.05,
+          195.33
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 3,
+        "bboxAlphaAbove24": [
+          114,
+          183,
+          308,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          82.35,
+          181.86,
+          194.99
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 4,
+        "bboxAlphaAbove24": [
+          108,
+          180,
+          310,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          81.87,
+          181.57,
+          195.12
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 5,
+        "bboxAlphaAbove24": [
+          87,
+          176,
+          309,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.9,
+          177.39,
+          191.76
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 6,
+        "bboxAlphaAbove24": [
+          29,
+          170,
+          312,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          75.77,
+          176.69,
+          190.89
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 7,
+        "bboxAlphaAbove24": [
+          35,
+          170,
+          309,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.98,
+          176.91,
+          191.19
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 8,
+        "bboxAlphaAbove24": [
+          72,
+          171,
+          309,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          76.99,
+          177.7,
+          191.48
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 9,
+        "bboxAlphaAbove24": [
+          106,
+          171,
+          309,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          75.79,
+          177.72,
+          191.54
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 10,
+        "bboxAlphaAbove24": [
+          110,
+          167,
+          308,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          86.03,
+          184.34,
+          196.9
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 11,
+        "bboxAlphaAbove24": [
+          113,
+          167,
+          309,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          85.02,
+          184.0,
+          196.55
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 12,
+        "bboxAlphaAbove24": [
+          124,
+          173,
+          307,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          82.7,
+          183.81,
+          196.85
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 13,
+        "bboxAlphaAbove24": [
+          125,
+          174,
+          306,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          81.45,
+          183.12,
+          196.38
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 14,
+        "bboxAlphaAbove24": [
+          126,
+          175,
+          306,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          81.87,
+          183.02,
+          196.2
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 15,
+        "bboxAlphaAbove24": [
+          135,
+          177,
+          301,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          83.93,
+          187.22,
+          201.63
+        ]
+      }
+    ],
+    "pass": true,
+    "oneCompletePosePerGeneratedCel": true
+  },
+  {
+    "id": "spring-blade-secretion-antenna-ranged",
+    "dimensionsMatch": true,
+    "sourceSHAUnchanged": true,
+    "endpoints": [
+      {
+        "frame": 0,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      },
+      {
+        "frame": 15,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      }
+    ],
+    "frames": [
+      {
+        "frame": 0,
+        "bboxAlphaAbove24": [
+          128,
+          178,
+          316,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          79.62,
+          182.55,
+          198.98
+        ]
+      },
+      {
+        "frame": 1,
+        "bboxAlphaAbove24": [
+          130,
+          181,
+          324,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.93,
+          172.76,
+          191.18
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 2,
+        "bboxAlphaAbove24": [
+          124,
+          188,
+          325,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.21,
+          171.65,
+          190.19
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 3,
+        "bboxAlphaAbove24": [
+          117,
+          195,
+          330,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.02,
+          169.41,
+          188.18
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 4,
+        "bboxAlphaAbove24": [
+          117,
+          184,
+          327,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.69,
+          170.51,
+          189.13
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 5,
+        "bboxAlphaAbove24": [
+          90,
+          179,
+          325,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          68.34,
+          168.87,
+          188.94
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 6,
+        "bboxAlphaAbove24": [
+          24,
+          164,
+          326,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          68.22,
+          169.0,
+          189.09
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 7,
+        "bboxAlphaAbove24": [
+          14,
+          164,
+          333,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          69.31,
+          169.56,
+          189.4
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 8,
+        "bboxAlphaAbove24": [
+          90,
+          167,
+          325,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          70.41,
+          170.79,
+          190.39
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 9,
+        "bboxAlphaAbove24": [
+          107,
+          173,
+          322,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          69.46,
+          170.01,
+          189.75
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 10,
+        "bboxAlphaAbove24": [
+          125,
+          173,
+          321,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          68.33,
+          169.71,
+          189.4
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 11,
+        "bboxAlphaAbove24": [
+          128,
+          171,
+          325,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          74.59,
+          172.72,
+          191.01
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 12,
+        "bboxAlphaAbove24": [
+          127,
+          170,
+          324,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          76.14,
+          173.65,
+          191.67
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 13,
+        "bboxAlphaAbove24": [
+          129,
+          176,
+          318,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          73.22,
+          172.35,
+          191.02
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 14,
+        "bboxAlphaAbove24": [
+          127,
+          175,
+          316,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          72.98,
+          171.77,
+          190.57
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 15,
+        "bboxAlphaAbove24": [
+          128,
+          178,
+          316,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          79.62,
+          182.55,
+          198.98
+        ]
+      }
+    ],
+    "pass": true,
+    "oneCompletePosePerGeneratedCel": true
+  },
+  {
+    "id": "spring-blade-secretion-carapace-antenna-ranged",
+    "dimensionsMatch": true,
+    "sourceSHAUnchanged": true,
+    "endpoints": [
+      {
+        "frame": 0,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      },
+      {
+        "frame": 15,
+        "alphaExact": true,
+        "visibleRGBAExact": true
+      }
+    ],
+    "frames": [
+      {
+        "frame": 0,
+        "bboxAlphaAbove24": [
+          133,
+          191,
+          309,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          87.89,
+          184.62,
+          205.95
+        ]
+      },
+      {
+        "frame": 1,
+        "bboxAlphaAbove24": [
+          119,
+          193,
+          312,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          79.15,
+          176.14,
+          198.53
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 2,
+        "bboxAlphaAbove24": [
+          111,
+          193,
+          312,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          78.41,
+          175.77,
+          198.39
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 3,
+        "bboxAlphaAbove24": [
+          112,
+          191,
+          312,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          77.68,
+          174.84,
+          197.47
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 4,
+        "bboxAlphaAbove24": [
+          121,
+          189,
+          326,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          75.71,
+          174.78,
+          197.83
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 5,
+        "bboxAlphaAbove24": [
+          100,
+          189,
+          322,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          71.53,
+          172.2,
+          196.21
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 6,
+        "bboxAlphaAbove24": [
+          48,
+          181,
+          325,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          71.66,
+          172.2,
+          196.43
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 7,
+        "bboxAlphaAbove24": [
+          76,
+          180,
+          325,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          71.83,
+          172.41,
+          196.64
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 8,
+        "bboxAlphaAbove24": [
+          115,
+          185,
+          327,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          71.68,
+          172.18,
+          196.22
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 9,
+        "bboxAlphaAbove24": [
+          128,
+          186,
+          322,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          70.68,
+          171.7,
+          195.56
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 10,
+        "bboxAlphaAbove24": [
+          119,
+          185,
+          321,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          76.21,
+          175.12,
+          198.03
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 11,
+        "bboxAlphaAbove24": [
+          117,
+          185,
+          318,
+          368
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          76.74,
+          175.18,
+          197.75
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 12,
+        "bboxAlphaAbove24": [
+          121,
+          187,
+          322,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          78.12,
+          175.96,
+          198.47
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 13,
+        "bboxAlphaAbove24": [
+          122,
+          188,
+          316,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          76.56,
+          175.67,
+          198.5
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 14,
+        "bboxAlphaAbove24": [
+          121,
+          188,
+          314,
+          370
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          76.61,
+          175.42,
+          198.3
+        ],
+        "significantConnectedComponents": 1
+      },
+      {
+        "frame": 15,
+        "bboxAlphaAbove24": [
+          133,
+          191,
+          309,
+          369
+        ],
+        "edgeMaxAlpha": 0,
+        "opaqueMeanRGB": [
+          87.89,
+          184.62,
+          205.95
+        ]
+      }
+    ],
+    "pass": true,
+    "oneCompletePosePerGeneratedCel": true
+  }
+]

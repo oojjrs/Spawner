@@ -1,0 +1,14 @@
+✔ all eleven bean combo births retain the 3850 ms motion clock and enter idle at readyAt (22.441022ms)
+✔ all eleven trimmed births preserve baked fallback crops in both facings through the final body (79.0214ms)
+✔ 복원한 탄생은 크기·방향·위치·타이밍과 기존 실패 대체 이미지를 보존한다 (2.64959ms)
+✔ 새 전신 레이어는 배포 자산에 포함되고 원본 해시와 크기를 유지한다 (95.565231ms)
+✔ 복원된 모든 프레임은 같은 시계와 양방향에서 원본 crop을 직접 그린다 (67.315946ms)
+✔ 단일 전신 레이어 실패는 기존 이미지로 복귀하고 회복하면 고해상도를 다시 사용한다 (1.118084ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 309.047826

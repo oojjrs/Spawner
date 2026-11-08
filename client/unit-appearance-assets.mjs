@@ -10,7 +10,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "9c8893d8792c6d4e987ec0479463ebbd9085f89d38bb1c7db2580c3f4d230f73",
+      "sourceHash": "f21bb702c38c1fc90f66c5b0c719b654aadc2ee3a92127d429680959587e3919",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -26,32 +26,32 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
         "verified": true,
         "coreBounds": [
-          173,
+          172,
           243,
           167,
           206
         ],
         "landmarks": {
           "leftEye": [
-            216,
+            215.5,
             375
           ],
           "rightEye": [
-            296.5,
+            296,
             375
           ],
           "supportPoint": [
-            255.5,
+            256.5,
             448.5
           ],
           "supportPixelBounds": [
-            203,
+            204,
             441,
             105,
             8
           ],
           "faceMidpoint": [
-            256.25,
+            255.75,
             375
           ]
         },
@@ -71,13 +71,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": true,
         "reuseAuthorized": true
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/00/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/00/Source/neutral.png",
+      "sourceFacing": "left",
+      "sourceNormalization": {
+        "operation": "lossless native cell horizontal reflection",
+        "beforeSha256": "9c8893d8792c6d4e987ec0479463ebbd9085f89d38bb1c7db2580c3f4d230f73",
+        "sourceFacing": "left"
+      }
     },
     "actions": {
       "idle": {
         "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
         "image": "DesignAssets/Tribes/sprout/AnimationStudies/idle-v2/idle-v2.webp",
-        "imageHash": "46a613676ad252c703e4a4391e3482109f11990bd2dd877e879986ae87576cfb",
+        "imageHash": "b5507fda49231082557751ca25bacc3ff69a664885dd646cfcc2687487396bd0",
         "frameSize": 631,
         "columns": 4,
         "frameCount": 64,
@@ -152,18 +158,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 553.268115942029,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "46a613676ad252c703e4a4391e3482109f11990bd2dd877e879986ae87576cfb",
+          "sourceHash": "b5507fda49231082557751ca25bacc3ff69a664885dd646cfcc2687487396bd0",
           "pixelsPerWorld": 617.5,
           "scale": 0.8291497975708502,
           "offsetX": -5.596761133603252,
           "offsetY": -10.742146335738994
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "attack": {
         "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
         "image": "DesignAssets/Animations/UnitAttack/attack.png",
-        "imageHash": "5843746f0f742afe688d6623a031f79c27982beab599c7bff9c54f7a91ce1662",
+        "imageHash": "bdd443428b5ccb183acb50f4db84ff5e31d74d0116656fe3118336ff0fe7a5ed",
         "frameSize": 632,
         "columns": 4,
         "frameCount": 16,
@@ -190,18 +197,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 555.1351351351351,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "5843746f0f742afe688d6623a031f79c27982beab599c7bff9c54f7a91ce1662",
+          "sourceHash": "bdd443428b5ccb183acb50f4db84ff5e31d74d0116656fe3118336ff0fe7a5ed",
           "pixelsPerWorld": 901.4200879920468,
           "scale": 0.5679926671486795,
           "offsetX": 76.51431718101728,
           "offsetY": 132.68731396665203
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "hurt": {
         "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
         "image": "DesignAssets/Animations/UnitHurt/V3/hurt.png",
-        "imageHash": "1409bf1440a95467211f645c142acc0029852cc0cf32850eec19185c0b6b10c6",
+        "imageHash": "627a83d7809cea9a8b173d6e82f44a99141858bf16abd588973ee79fce22cf8a",
         "frameSize": 632,
         "columns": 4,
         "frameCount": 16,
@@ -228,18 +236,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 555.1351351351351,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "1409bf1440a95467211f645c142acc0029852cc0cf32850eec19185c0b6b10c6",
+          "sourceHash": "627a83d7809cea9a8b173d6e82f44a99141858bf16abd588973ee79fce22cf8a",
           "pixelsPerWorld": 899.9999999999998,
           "scale": 0.568888888888889,
           "offsetX": 76.23111111111109,
           "offsetY": 132.18978978978976
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "death": {
         "sourceId": "unit-appearance-v1-bean-00-neutral-v1",
         "image": "DesignAssets/Tribes/sprout/AnimationStudies/death-v1/death-runtime.webp",
-        "imageHash": "2659f1cb0b65405ff1acf413883f0a5428eaf5f14ee8d3bbf7ec02f7ebc846ef",
+        "imageHash": "dc1c79da5cb7969706764a923b7d59daa670f4d02290aa8dcffd140039282692",
         "frameSize": 316,
         "columns": 4,
         "frameCount": 16,
@@ -266,13 +275,14 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 276.5,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "2659f1cb0b65405ff1acf413883f0a5428eaf5f14ee8d3bbf7ec02f7ebc846ef",
+          "sourceHash": "dc1c79da5cb7969706764a923b7d59daa670f4d02290aa8dcffd140039282692",
           "pixelsPerWorld": 432.50000000000006,
           "scale": 1.183815028901734,
           "offsetX": 68.95722543352605,
           "offsetY": 120.67514450867054
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       }
     },
     "previewStatus": {},
@@ -588,7 +598,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "783bed93d96a0eab8e30139e6fb296414359f8b1519177b813e3d6e0edc6536d",
+      "sourceHash": "d8f2fa1e86203fa0b38416fe3ae006adf4f332d2d7a99594ab1b988e6e2497a1",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -609,25 +619,25 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "coreBounds": null,
         "landmarks": {
           "leftEye": [
-            220.5,
+            217.5,
             373.5
           ],
           "rightEye": [
-            294.5,
+            291.5,
             373.5
           ],
           "supportPoint": [
-            258,
+            254,
             447.5
           ],
           "supportPixelBounds": [
-            207,
+            203,
             440,
             102,
             8
           ],
           "faceMidpoint": [
-            257.5,
+            254.5,
             373.5
           ]
         },
@@ -639,7 +649,13 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": false,
         "reuseAuthorized": false
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/05/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/05/Source/neutral.png",
+      "sourceFacing": "left",
+      "sourceNormalization": {
+        "operation": "lossless native cell horizontal reflection",
+        "beforeSha256": "783bed93d96a0eab8e30139e6fb296414359f8b1519177b813e3d6e0edc6536d",
+        "sourceFacing": "left"
+      }
     },
     "actions": {},
     "previewStatus": {},
@@ -662,7 +678,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "f67773b4dc68c934587452d8368955ee8d4801251cc4e058d0b248ae9641a889",
+      "sourceHash": "e73dc95d97c9b4f71eeab8bbea1e02151c73eb81e55494e5ff70bfd1864ab78b",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -683,25 +699,25 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "coreBounds": null,
         "landmarks": {
           "leftEye": [
-            220.5,
+            216.5,
             373.5
           ],
           "rightEye": [
-            295.5,
+            291.5,
             373.5
           ],
           "supportPoint": [
-            259,
+            253,
             447.5
           ],
           "supportPixelBounds": [
-            206,
+            200,
             440,
             106,
             8
           ],
           "faceMidpoint": [
-            258,
+            254,
             373.5
           ]
         },
@@ -713,7 +729,13 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": false,
         "reuseAuthorized": false
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/06/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/06/Source/neutral.png",
+      "sourceFacing": "left",
+      "sourceNormalization": {
+        "operation": "lossless native cell horizontal reflection",
+        "beforeSha256": "f67773b4dc68c934587452d8368955ee8d4801251cc4e058d0b248ae9641a889",
+        "sourceFacing": "left"
+      }
     },
     "actions": {},
     "previewStatus": {},
@@ -736,7 +758,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "1d472b1a15f25475131e2367e5eb589b4f9d910d66d8a93e59b62a3f32507beb",
+      "sourceHash": "44fd4b740374ef81c8c781d9aa4f4ee2c64ff37d2a20dcde66a458b39615e74a",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -758,25 +780,25 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "coreBounds": null,
         "landmarks": {
           "leftEye": [
-            221,
+            217,
             365.5
           ],
           "rightEye": [
-            295,
+            291,
             365.5
           ],
           "supportPoint": [
-            257.5,
+            254.5,
             448.5
           ],
           "supportPixelBounds": [
-            203,
+            200,
             441,
             109,
             8
           ],
           "faceMidpoint": [
-            258,
+            254,
             365.5
           ]
         },
@@ -788,7 +810,13 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": false,
         "reuseAuthorized": false
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/07/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/07/Source/neutral.png",
+      "sourceFacing": "left",
+      "sourceNormalization": {
+        "operation": "lossless native cell horizontal reflection",
+        "beforeSha256": "1d472b1a15f25475131e2367e5eb589b4f9d910d66d8a93e59b62a3f32507beb",
+        "sourceFacing": "left"
+      }
     },
     "actions": {},
     "previewStatus": {},
@@ -811,7 +839,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811",
+      "sourceHash": "a2b5b8d3ff52916342141b821f28711b814b330c2063b26ae4966d8bcac65d14",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -829,32 +857,32 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "sourceId": "unit-appearance-v1-bean-10-neutral-v1",
         "verified": true,
         "coreBounds": [
-          170,
+          165,
           242,
           177,
           206
         ],
         "landmarks": {
           "leftEye": [
-            220.5,
-            377.5
-          ],
-          "rightEye": [
-            295,
+            217,
             378
           ],
+          "rightEye": [
+            291.5,
+            377.5
+          ],
           "supportPoint": [
-            257.5,
+            254.5,
             447.5
           ],
           "supportPixelBounds": [
-            208,
+            205,
             440,
             99,
             8
           ],
           "faceMidpoint": [
-            257.75,
+            254.25,
             377.75
           ]
         },
@@ -873,7 +901,13 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": false,
         "reuseAuthorized": false
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/10/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/10/Source/neutral.png",
+      "sourceFacing": "left",
+      "sourceNormalization": {
+        "operation": "lossless native cell horizontal reflection",
+        "beforeSha256": "65a547fbe1664cfa3e0fb534e94eae029cb9cb18a66518df670daa8e70533811",
+        "sourceFacing": "left"
+      }
     },
     "actions": {},
     "previewStatus": {},
@@ -896,7 +930,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "a442e5bbefd2b3a3ca655d28fc3164a459ad978e322561f4fcb966f840e32324",
+      "sourceHash": "ba7247467bc178b022c1aab26d54a2fc242691853f929d40aa42a31b3ffea5f8",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -917,25 +951,25 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "coreBounds": null,
         "landmarks": {
           "leftEye": [
-            220.5,
-            377.5
-          ],
-          "rightEye": [
-            295,
+            217,
             378
           ],
+          "rightEye": [
+            291.5,
+            377.5
+          ],
           "supportPoint": [
-            257.5,
+            254.5,
             447.5
           ],
           "supportPixelBounds": [
-            208,
+            205,
             440,
             99,
             8
           ],
           "faceMidpoint": [
-            257.75,
+            254.25,
             377.75
           ]
         },
@@ -954,7 +988,13 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": false,
         "reuseAuthorized": false
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/11/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/11/Source/neutral.png",
+      "sourceFacing": "left",
+      "sourceNormalization": {
+        "operation": "lossless native cell horizontal reflection",
+        "beforeSha256": "a442e5bbefd2b3a3ca655d28fc3164a459ad978e322561f4fcb966f840e32324",
+        "sourceFacing": "left"
+      }
     },
     "actions": {},
     "previewStatus": {},
@@ -977,7 +1017,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "cd27cc9c4a5c7e65a93cb91a89b4ee48489422f952e65be8a38e0d2ef3e659ee",
+      "sourceHash": "4c92ef4bb73cc0e4bc884e79c2d368173616b8788d2380b2dbc3147f6b822481",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -998,25 +1038,25 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "coreBounds": null,
         "landmarks": {
           "leftEye": [
-            220,
-            376
-          ],
-          "rightEye": [
-            295.5,
+            216.5,
             376.5
           ],
+          "rightEye": [
+            292,
+            376
+          ],
           "supportPoint": [
-            257.5,
+            254.5,
             447.5
           ],
           "supportPixelBounds": [
-            209,
+            206,
             440,
             97,
             8
           ],
           "faceMidpoint": [
-            257.75,
+            254.25,
             376.25
           ]
         },
@@ -1035,7 +1075,13 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": false,
         "reuseAuthorized": false
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/12/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/12/Source/neutral.png",
+      "sourceFacing": "left",
+      "sourceNormalization": {
+        "operation": "lossless native cell horizontal reflection",
+        "beforeSha256": "cd27cc9c4a5c7e65a93cb91a89b4ee48489422f952e65be8a38e0d2ef3e659ee",
+        "sourceFacing": "left"
+      }
     },
     "actions": {},
     "previewStatus": {},
@@ -1058,7 +1104,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "b65941c3847db84af77eac2b8e97dd75a9df5f50c1e37a80cddfd9fa8f589717",
+      "sourceHash": "13386f12b2fe82e0375344510f89a508efa6f921f2fe83ddccdb43f41b04fbac",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -1080,25 +1126,25 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "coreBounds": null,
         "landmarks": {
           "leftEye": [
-            220.5,
+            217,
             369.5
           ],
           "rightEye": [
-            295,
+            291.5,
             369.5
           ],
           "supportPoint": [
-            257.5,
+            254.5,
             448.5
           ],
           "supportPixelBounds": [
-            206,
+            203,
             441,
             103,
             8
           ],
           "faceMidpoint": [
-            257.75,
+            254.25,
             369.5
           ]
         },
@@ -1110,7 +1156,13 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": false,
         "reuseAuthorized": false
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/13/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/13/Source/neutral.png",
+      "sourceFacing": "left",
+      "sourceNormalization": {
+        "operation": "lossless native cell horizontal reflection",
+        "beforeSha256": "b65941c3847db84af77eac2b8e97dd75a9df5f50c1e37a80cddfd9fa8f589717",
+        "sourceFacing": "left"
+      }
     },
     "actions": {},
     "previewStatus": {},
@@ -1133,7 +1185,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "6847ae2f9ea518ead664fda2e657abe246250032377149288e63174338231160",
+      "sourceHash": "a543d2629967ddcbcd6a2067012ff2fe2d7225224633b38af8883d4ed9a1d7d1",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -1154,25 +1206,25 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "coreBounds": null,
         "landmarks": {
           "leftEye": [
-            220.5,
+            217.5,
             375.5
           ],
           "rightEye": [
-            294.5,
+            291.5,
             375.5
           ],
           "supportPoint": [
-            258,
+            254,
             447.5
           ],
           "supportPixelBounds": [
-            208,
+            204,
             440,
             100,
             8
           ],
           "faceMidpoint": [
-            257.5,
+            254.5,
             375.5
           ]
         },
@@ -1184,7 +1236,13 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": false,
         "reuseAuthorized": false
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/14/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/14/Source/neutral.png",
+      "sourceFacing": "left",
+      "sourceNormalization": {
+        "operation": "lossless native cell horizontal reflection",
+        "beforeSha256": "6847ae2f9ea518ead664fda2e657abe246250032377149288e63174338231160",
+        "sourceFacing": "left"
+      }
     },
     "actions": {},
     "previewStatus": {},
@@ -1207,7 +1265,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "6924db22c440c07ae12b6e19b364ec78c4f5b1c35634806f23d203e316716fc7",
+      "sourceHash": "6ed69c2fb03c0474876680a16ea7e27398a4572c62a10428f0fdf52ae95edc90",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -1229,25 +1287,25 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "coreBounds": null,
         "landmarks": {
           "leftEye": [
-            221,
+            216.5,
             375.5
           ],
           "rightEye": [
-            295.5,
+            291,
             375.5
           ],
           "supportPoint": [
-            257.5,
+            254.5,
             447.5
           ],
           "supportPixelBounds": [
-            205,
+            202,
             440,
             105,
             8
           ],
           "faceMidpoint": [
-            258.25,
+            253.75,
             375.5
           ]
         },
@@ -1259,7 +1317,13 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": false,
         "reuseAuthorized": false
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/15/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/15/Source/neutral.png",
+      "sourceFacing": "left",
+      "sourceNormalization": {
+        "operation": "lossless native cell horizontal reflection",
+        "beforeSha256": "6924db22c440c07ae12b6e19b364ec78c4f5b1c35634806f23d203e316716fc7",
+        "sourceFacing": "left"
+      }
     },
     "actions": {},
     "previewStatus": {},
@@ -1282,7 +1346,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "66aef70276d8eb28b0bc2794643a061866d5785435bb66dcfce07f6884e28d10",
+      "sourceHash": "57e3d90f888ea77e954c417cdd32bd26ce81c4692f8597eeb65c3929aacfa7f6",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -1304,25 +1368,25 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "coreBounds": null,
         "landmarks": {
           "leftEye": [
-            220,
-            374.5
-          ],
-          "rightEye": [
-            295,
+            217,
             374
           ],
+          "rightEye": [
+            292,
+            374.5
+          ],
           "supportPoint": [
-            257,
+            255,
             447.5
           ],
           "supportPixelBounds": [
-            206,
+            204,
             440,
             102,
             8
           ],
           "faceMidpoint": [
-            257.5,
+            254.5,
             374.25
           ]
         },
@@ -1334,7 +1398,13 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": false,
         "reuseAuthorized": false
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/16/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/16/Source/neutral.png",
+      "sourceFacing": "left",
+      "sourceNormalization": {
+        "operation": "lossless native cell horizontal reflection",
+        "beforeSha256": "66aef70276d8eb28b0bc2794643a061866d5785435bb66dcfce07f6884e28d10",
+        "sourceFacing": "left"
+      }
     },
     "actions": {},
     "previewStatus": {},
@@ -1357,7 +1427,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "9a42c0245c6ac9c44ffa4dbdb67d09c16f49b605b5c80f3735302f53693a19d6",
+      "sourceHash": "fa2833a9381401f6ff2e3a7533752520f3a4201bbc6ba46a9868bd53d15e9cfb",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -1380,25 +1450,25 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "coreBounds": null,
         "landmarks": {
           "leftEye": [
-            220.5,
+            216.5,
             368.5
           ],
           "rightEye": [
-            295.5,
+            291.5,
             368.5
           ],
           "supportPoint": [
-            257.5,
+            254.5,
             447.5
           ],
           "supportPixelBounds": [
-            206,
+            203,
             440,
             103,
             8
           ],
           "faceMidpoint": [
-            258,
+            254,
             368.5
           ]
         },
@@ -1410,7 +1480,13 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "referenceVerified": false,
         "reuseAuthorized": false
       },
-      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/17/Source/neutral.png"
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/17/Source/neutral.png",
+      "sourceFacing": "left",
+      "sourceNormalization": {
+        "operation": "lossless native cell horizontal reflection",
+        "beforeSha256": "9a42c0245c6ac9c44ffa4dbdb67d09c16f49b605b5c80f3735302f53693a19d6",
+        "sourceFacing": "left"
+      }
     },
     "actions": {},
     "previewStatus": {},
@@ -1496,7 +1572,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       "idle": {
         "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
         "image": "DesignAssets/Tribes/spore/AnimationStudies/idle-v8/idle-v8.webp",
-        "imageHash": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7",
+        "imageHash": "203c5212dfa29e8e67eac421b53c311a87a3da63aa31183d67229b6019b9f1e2",
         "frameSize": 549,
         "columns": 4,
         "frameCount": 64,
@@ -1571,18 +1647,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 480.375,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "fec5d88c1f0a6d1ddb69581948671da5477330b8a262cfb4219af25e62b9f8e7",
+          "sourceHash": "203c5212dfa29e8e67eac421b53c311a87a3da63aa31183d67229b6019b9f1e2",
           "pixelsPerWorld": 1113.157894736842,
           "scale": 0.4599527186761229,
           "offsetX": 129.74297872340426,
           "offsetY": 227.05021276595744
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "walk": {
         "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
         "image": "DesignAssets/Tribes/spore/AnimationStudies/walk-v2/walk-v2.webp",
-        "imageHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
+        "imageHash": "ba8930ee9cd56dff0fb6daf1351d859589c5630043f72515195c11249b7027bb",
         "frameSize": 512,
         "columns": 4,
         "frameCount": 16,
@@ -1609,18 +1686,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 448,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "368c1bb19b3355d26bd0a156637ee75e3f6781a81df457b1a34a43611661da2d",
+          "sourceHash": "ba8930ee9cd56dff0fb6daf1351d859589c5630043f72515195c11249b7027bb",
           "pixelsPerWorld": 1112.2889190188587,
           "scale": 0.4603120567375886,
           "offsetX": 138.1601134751773,
           "offsetY": 241.78019858156028
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "jump": {
         "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
         "image": "DesignAssets/Tribes/spore/Animations/Units/jump/jump.webp",
-        "imageHash": "088de97292a6c4cb18ac6e2e067ae53479e130fa679d17960d9f1e7241ebbfff",
+        "imageHash": "f024d8bb797ee75c63fc9373c5b6de2b7eb826d0c81a28c479f3d4280ec5c3f7",
         "frameSize": 512,
         "columns": 4,
         "frameCount": 16,
@@ -1647,18 +1725,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 448,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "088de97292a6c4cb18ac6e2e067ae53479e130fa679d17960d9f1e7241ebbfff",
+          "sourceHash": "f024d8bb797ee75c63fc9373c5b6de2b7eb826d0c81a28c479f3d4280ec5c3f7",
           "pixelsPerWorld": 1148.6796576215627,
           "scale": 0.44572914354567644,
           "offsetX": 141.89333925230682,
           "offsetY": 248.31334369153694
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "attack": {
         "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
         "image": "DesignAssets/Tribes/spore/AnimationStudies/attack-directions-v3/right/attack.webp",
-        "imageHash": "65e91bdc3af93677e254b8ce24ccf8c98e22930d4179f8f614519554176de36f",
+        "imageHash": "9bca50d90ffb873b6d4b9c3fb54b4a463830aa2b7041c68023b6f3c6908a6c2f",
         "frameSize": 553,
         "columns": 4,
         "frameCount": 16,
@@ -1685,18 +1764,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 482.6181818181818,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "65e91bdc3af93677e254b8ce24ccf8c98e22930d4179f8f614519554176de36f",
+          "sourceHash": "9bca50d90ffb873b6d4b9c3fb54b4a463830aa2b7041c68023b6f3c6908a6c2f",
           "pixelsPerWorld": 1106.9094882535055,
           "scale": 0.46254911122664555,
           "offsetX": 128.1051707458325,
           "offsetY": 224.76538893818037
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "hurt": {
         "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
         "image": "DesignAssets/Tribes/spore/AnimationStudies/hurt-v2/hurt-v2.webp",
-        "imageHash": "703eda5d5454549c6bcec7a4cfedec832dfcbf30c885a23e08818a944d86ada2",
+        "imageHash": "fb6da9ac70c38e40c40f561354fd847b940f571ba225ec600dd07643f04a1983",
         "frameSize": 553,
         "columns": 4,
         "frameCount": 16,
@@ -1723,18 +1803,19 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 482.6181818181818,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "703eda5d5454549c6bcec7a4cfedec832dfcbf30c885a23e08818a944d86ada2",
+          "sourceHash": "fb6da9ac70c38e40c40f561354fd847b940f571ba225ec600dd07643f04a1983",
           "pixelsPerWorld": 1106.9094882535055,
           "scale": 0.46254911122664555,
           "offsetX": 128.1051707458325,
           "offsetY": 224.76538893818037
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       },
       "death": {
         "sourceId": "unit-appearance-v1-spore-00-neutral-v1",
         "image": "DesignAssets/Tribes/spore/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
-        "imageHash": "8baf1b600e5868e4d1af9ddcc94692ebd3416a72b1b6c97db681eddaafb49c99",
+        "imageHash": "70057334cec1e75b8ae313211bbc3b1538187f225c18eedd7d85f340bfafa698",
         "frameSize": 553,
         "columns": 4,
         "frameCount": 8,
@@ -1753,13 +1834,14 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "pivotY": 482.6181818181818,
         "cameraMapping": {
           "verified": true,
-          "sourceHash": "8baf1b600e5868e4d1af9ddcc94692ebd3416a72b1b6c97db681eddaafb49c99",
+          "sourceHash": "70057334cec1e75b8ae313211bbc3b1538187f225c18eedd7d85f340bfafa698",
           "pixelsPerWorld": 1106.9094882535055,
           "scale": 0.46254911122664555,
           "offsetX": 128.1051707458325,
           "offsetY": 224.76538893818037
         },
-        "events": []
+        "events": [],
+        "sourceFacing": "left"
       }
     },
     "previewStatus": {},
@@ -2892,7 +2974,8 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
     "actions": {
       "idle": {
         "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
-        "image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp", "sourceFacing": "left",
+        "image": "DesignAssets/Tribes/spring/AnimationStudies/idle-v4/idle-v4.webp",
+        "sourceFacing": "left",
         "imageHash": "42cc7532e8f6e7b6ab7c200eebe4f5513be370f20ca36b2bdcf2c53058291f86",
         "frameSize": 512,
         "columns": 4,
@@ -2978,7 +3061,8 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       },
       "walk": {
         "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
-        "image": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp", "sourceFacing": "left",
+        "image": "DesignAssets/Tribes/spring/AnimationStudies/flow-v4/flow-v4.webp",
+        "sourceFacing": "left",
         "imageHash": "0c165ddad0dfaf87f1928885270b6e207e5d997cd3d97dd062dc8ee6b7e92fac",
         "frameSize": 512,
         "columns": 4,
@@ -3054,7 +3138,8 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       },
       "attack": {
         "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
-        "image": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp", "sourceFacing": "left",
+        "image": "DesignAssets/Tribes/spring/AnimationStudies/attack-directions-v3/right/attack.webp",
+        "sourceFacing": "left",
         "imageHash": "38cbbdc1d88de4a69b519c895ae0cb6619e4162f42ae43671f467fc0c9f26a44",
         "frameSize": 516,
         "columns": 4,
@@ -3092,7 +3177,8 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       },
       "hurt": {
         "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
-        "image": "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp", "sourceFacing": "left",
+        "image": "DesignAssets/Tribes/spring/AnimationStudies/hurt-v2/hurt-v2.webp",
+        "sourceFacing": "left",
         "imageHash": "761914e25e0f4def4dc01f4fcadc711db0058a0919a750407a5b35930e5d9ba6",
         "frameSize": 516,
         "columns": 4,
@@ -3130,7 +3216,8 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
       },
       "death": {
         "sourceId": "unit-appearance-v1-spring-00-neutral-v1",
-        "image": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png", "sourceFacing": "left",
+        "image": "DesignAssets/Tribes/spring/AnimationStudies/death-tail-repair-v6/death-tail-repair-v6.png",
+        "sourceFacing": "left",
         "imageHash": "85be0868a66a515983d14d2e10dfdd58f3978cc113e512e52e67bcaac07ca593",
         "frameSize": 516,
         "columns": 4,
