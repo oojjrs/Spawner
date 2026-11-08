@@ -12,7 +12,7 @@ test("시체는 양분 없이 렌더하며 사망 3초에 선택·목록·아바
   const scope = createContext({ state, corpsePlaybackTime: () => time,
     agentListButtons: new Map([[corpse.id, { button: { remove() { removed++; } } }]]),
     agentAvatars: new Map([[corpse.id, {}]]), helpTooltipTarget: null,
-    combatAttributeArt: { clearDeaths() { cleared++; } }, unitAnimationSheets: new Map(),
+    unitAnimationSheets: new Map([["bean", new Map([["death", { attributeFrames: { clear() { cleared++; } } }]])]]),
     renderedAgentListSignature: corpse.id, updateAgentList() { updates++; },
     selectObject() { state.selection = null; } });
   runInContext(source.match(/^    function expireClientCorpses\([^]*?^    }/m)[0], scope);
