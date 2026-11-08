@@ -6779,6 +6779,29 @@
       }
       lifespan.hidden = !Number.isFinite(agent.lifespan);
       if (!lifespan.hidden) lifespan.lastElementChild.textContent = formatLifetime(Math.ceil(Spawner.agentRemainingLifespan(agent, state.simSeconds))) + " / " + formatLifetime(agent.lifespan);
+      let carry = agentDetails.querySelector(".agent-carry");
+      if (!carry) {
+        carry = document.createElement("dl");
+        carry.className = "agent-carry unit-dna-stats";
+        const resource = document.createElement("dt"), value = document.createElement("dd");
+        const image = document.createElement("img");
+        image.alt = "";
+        resource.append(image);
+        carry.append(resource, value);
+        lifespan.after(carry);
+      }
+      const capacity = Spawner.unitCarryCapacity(agent, agent.carryingType) + (hasSynergy(agent.attributes, ["strength", "strength"]) ? 4 : 0);
+      carry.hidden = !!agent.species || !(capacity > 0);
+      if (!carry.hidden) {
+        const resource = Spawner.resourceDefinition(agent.carryingType) ||
+          Spawner.RESOURCE_TYPES.find(value => Spawner.isTribeFood(value.key, agent.tribe));
+        const image = carry.querySelector("img");
+        if (image.dataset.resource !== resource.key) {
+          image.src = assetSource(resource.carryImage);
+          image.dataset.resource = resource.key;
+        }
+        carry.lastElementChild.textContent = agent.carrying + " / " + capacity;
+      }
       const attributes = document.getElementById("agent-attributes");
       const slots = agent.slots || [];
       const signature = JSON.stringify([agent.tribe, agent.species, slots, agent.attributeLevels, agent.attributes, agent.dna, agent.stats?.dna]);

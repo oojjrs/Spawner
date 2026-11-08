@@ -29,6 +29,18 @@
 - 검수: 첫 runtime 생성은 복구 이미지의 표시크기등록 누락으로 실패했고 이전 승인등록2개를 복원한 뒤 공식 --runtime-only 생성 성공. node --test client/agent-death.test.mjs client/unit-appearance-state.test.mjs 13/13 통과(320ms), skip0. UI 검수는 격리 headless Chrome의 실제 새방 생성이4초 클릭 대기한도를 넘어 지형생성73%에서 중지, pageerror0; 잎 배치와 브라우저 사망 장면의 실제 화면 확인은 미완료다. 오류를 제품기동실패로 단정하지 않는다. 재검수 반복 없이 현재 근거/한계를 남긴다.
 - 기존 자원패널 변경과 도중 나타난 설계보관/room/storage/worker 변경은 보존. 이번 파일은 미스테이징·미커밋. 요청·판단·변경·검사·한계 대조 완료, 바로 다음 공유형식/scoped diff 점검 결과는 도구출력에 남긴다. 자료 literal $Trash/lifespan-leaf-01a1b97a.
 
+## 일꾼 자원 보유량 표시 완료 [worker-carry-result-01a1b97b]
+
+- 기록 시각 2026-11-08T13:52:03+09:00; 구현·확인·기록 Codex /root, 결정 사용자. 출처 codex://threads/01a1b97b-fb4d-74b2-adff-439e620cee7f, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID 불명. worker-carry-01a1b97b의 로컬 구현 완료.
+- client/game.js에 정보창 자원 아이콘과 현재량 / 한도 갱신 23줄, game.css에 정렬·아이콘 크기 2줄 추가. 수명 아래 표시하며 0개에서도 종족별 아이콘을 유지하고 운반 한도 0 및 중립 생물은 숨긴다. 기존 게임 계산·리스트·HTML은 변경하지 않았다.
+- 실제 확인: node --check 성공, 실제 정보창 DOM/CSS·표시 코드·runtime을 격리 Chromium에서 실행해 0/10→3/10→10/10→0/10 갱신, 운반불가·중립 숨김, 4종족 자원 아이콘 확인. 9상태 모두 숫자 넘침 없고 pageerror 0. 패널 캡처 직접 열람으로 아이콘과 3 / 10 표시 확인. 전체 게임 입장 및 실시간 채집 플레이는 실행하지 않았다. 근거: 작업 폴더 하위 임시 worker-carry-01a1b97b/result.json·panel.png.
+- 제품2파일과 메모리 UTF8NoBom/CRLF 형식 검사 통과 및 diff 검토. 검사 중 다른 채팅의 수명 아이콘·자원 뒤 채집 렌더 변경이 같은 파일에 나타났으며 이를 유지했다. 이번 변경은 미스테이징·미커밋이며 사용자 요청·구현·확인·잔여사항 대조 완료.
+## 일꾼 자원 보유량 표시 진행 [worker-carry-01a1b97b]
+
+- 기록 시각 2026-11-08T13:49:49+09:00; 기록·구현 판단 Codex /root, 결정 사용자. 출처 codex://threads/01a1b97b-fb4d-74b2-adff-439e620cee7f, H:/Spawner Windows PowerShell. 원 발언 시각·항목 ID 불명.
+- 사용자 요청: 일꾼 유닛 정보창에 현재 채집량과 최대량을 N / K 형태로 표시. 현재 보유한 운반 자원량으로 해석하며 누적 채집 통계는 만들지 않는다.
+- 확인·판단: updateUnitPanel의 수명 아래에 기존 자원 운반 아이콘과 숫자만 표시한다. 현재량은 agent.carrying, 한도는 기존 목록 및 채집 시스템과 같은 unitCarryCapacity+strength 시너지다. 보유량 0일 때 종족 자원 아이콘을 사용하고, 중립 생물 및 운반 한도 0인 유닛에서는 숨긴다. 선택 스냅샷 갱신 때 수치도 갱신한다.
+- 웹 JS 제품이므로 Unity 실행 승인 절차는 적용되지 않는다. 연결 Projects 없음. 다른 채팅의 자원정보창 복구·설계보존 변경은 보존하며 이번 범위는 client/game.js·game.css 및 관련 메모리다. 구현·검수 진행 전, 커밋·게시 요청 없음.
 ## 수명 나뭇잎·사망 동작 복구 진행 [lifespan-leaf-start-01a1b97a]
 
 - 기록 2026-11-08T13:49:38+09:00; 기록·판단 Codex /root, 요청·결정 사용자. 출처 현재 채팅 01a1b97a-6506-7732-9949-ae9d6183d6fa, H:/Spawner Windows. 원 발언 시각·항목 ID 미제공.

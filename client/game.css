@@ -230,6 +230,8 @@
     .help-tooltip:has(.unit-dna-list) { width: min(320px, calc(100vw - 20px)); max-height: calc(100dvh - 20px); overflow-y: auto; pointer-events: auto; }
     .unit-dna-stats { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 12px; margin: 10px 0 0; padding-top: 10px; border-top: 1px solid #303e43; white-space: normal; }
     .unit-dna-stats > dt, .unit-dna-stats > dd { margin: 0; }
+    .agent-carry { align-items: center; }
+    .agent-carry img { display: block; width: 32px; height: 28px; object-fit: contain; }
     .unit-dna-stats > dd { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
     .unit-dna-stats > .design-stat-changed, .unit-dna-stats > .design-stat-changed .design-stat-value { color: #39ff78; font-weight: 700; }
     .codex-resource-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin: 0 2px; padding: 3px; border: 1px solid var(--line); border-radius: 5px; background: #0d1416; vertical-align: middle; cursor: pointer; }
