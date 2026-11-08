@@ -252,3 +252,16 @@ test('normal native header lifecycle and hidden/game return retain valid left-fa
   assert.equal(h.state().timeline, beforeReturn);
   assert.equal(h.callbacks.size, 1);
 });
+
+
+test('each welcome identity rests for exactly 1.5 seconds before its exit', async t => {
+  const h = await headerHarness(t); await h.start();
+  let clock = 0;
+  for (const key of ['bean', 'spore', 'pebble', 'spring', 'shadow-weasel']) {
+    clock = await reach(h, state => state.current.key === key && state.phase === 'perform', clock);
+    const startedAt = h.state().phaseStartedAt;
+    clock = await reach(h, state => state.departing.some(value => value.choice.key === key), clock);
+    const departure = h.state().departing.find(value => value.choice.key === key);
+    assert.ok(Math.abs(departure.startedAt - startedAt - 1.5) < 1e-8, key + ' gets one 1.5 second hold, not an entire idle loop plus another rest');
+  }
+});

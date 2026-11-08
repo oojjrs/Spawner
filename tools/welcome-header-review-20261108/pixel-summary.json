@@ -1,0 +1,2438 @@
+[
+  {
+    "key": "bean",
+    "variant": 0,
+    "idle": {
+      "w": [
+        48,
+        50
+      ],
+      "h": [
+        61,
+        62
+      ]
+    },
+    "walk": {
+      "w": [
+        38,
+        42
+      ],
+      "h": [
+        60,
+        78
+      ]
+    },
+    "ratioWidth": 0.84,
+    "ratioHeight": 0.9836065573770492,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 1,
+    "idle": {
+      "w": [
+        56,
+        56
+      ],
+      "h": [
+        57,
+        65
+      ]
+    },
+    "walk": {
+      "w": [
+        50,
+        56
+      ],
+      "h": [
+        61,
+        65
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 10,
+    "idle": {
+      "w": [
+        53,
+        55
+      ],
+      "h": [
+        60,
+        63
+      ]
+    },
+    "walk": {
+      "w": [
+        53,
+        55
+      ],
+      "h": [
+        60,
+        64
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 11,
+    "idle": {
+      "w": [
+        49,
+        49
+      ],
+      "h": [
+        60,
+        64
+      ]
+    },
+    "walk": {
+      "w": [
+        49,
+        52
+      ],
+      "h": [
+        60,
+        65
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 12,
+    "idle": {
+      "w": [
+        51,
+        52
+      ],
+      "h": [
+        60,
+        62
+      ]
+    },
+    "walk": {
+      "w": [
+        51,
+        52
+      ],
+      "h": [
+        57,
+        63
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 13,
+    "idle": {
+      "w": [
+        53,
+        55
+      ],
+      "h": [
+        60,
+        65
+      ]
+    },
+    "walk": {
+      "w": [
+        50,
+        55
+      ],
+      "h": [
+        60,
+        62
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 14,
+    "idle": {
+      "w": [
+        57,
+        59
+      ],
+      "h": [
+        60,
+        65
+      ]
+    },
+    "walk": {
+      "w": [
+        55,
+        57
+      ],
+      "h": [
+        60,
+        64
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 15,
+    "idle": {
+      "w": [
+        51,
+        54
+      ],
+      "h": [
+        60,
+        64
+      ]
+    },
+    "walk": {
+      "w": [
+        51,
+        52
+      ],
+      "h": [
+        59,
+        63
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 16,
+    "idle": {
+      "w": [
+        55,
+        56
+      ],
+      "h": [
+        60,
+        62
+      ]
+    },
+    "walk": {
+      "w": [
+        54,
+        56
+      ],
+      "h": [
+        57,
+        62
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 2,
+    "idle": {
+      "w": [
+        44,
+        44
+      ],
+      "h": [
+        57,
+        61
+      ]
+    },
+    "walk": {
+      "w": [
+        44,
+        44
+      ],
+      "h": [
+        55,
+        60
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 3,
+    "idle": {
+      "w": [
+        59,
+        60
+      ],
+      "h": [
+        44,
+        45
+      ]
+    },
+    "walk": {
+      "w": [
+        57,
+        62
+      ],
+      "h": [
+        45,
+        48
+      ]
+    },
+    "ratioWidth": 1.0333333333333334,
+    "ratioHeight": 1.0227272727272727,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 4,
+    "idle": {
+      "w": [
+        61,
+        61
+      ],
+      "h": [
+        62,
+        62
+      ]
+    },
+    "walk": {
+      "w": [
+        59,
+        59
+      ],
+      "h": [
+        61,
+        62
+      ]
+    },
+    "ratioWidth": 0.9672131147540983,
+    "ratioHeight": 0.9838709677419355,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 5,
+    "idle": {
+      "w": [
+        59,
+        61
+      ],
+      "h": [
+        52,
+        54
+      ]
+    },
+    "walk": {
+      "w": [
+        57,
+        62
+      ],
+      "h": [
+        52,
+        55
+      ]
+    },
+    "ratioWidth": 1.0163934426229508,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 6,
+    "idle": {
+      "w": [
+        55,
+        57
+      ],
+      "h": [
+        60,
+        61
+      ]
+    },
+    "walk": {
+      "w": [
+        57,
+        59
+      ],
+      "h": [
+        53,
+        61
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 7,
+    "idle": {
+      "w": [
+        60,
+        62
+      ],
+      "h": [
+        60,
+        63
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        63
+      ],
+      "h": [
+        59,
+        67
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 8,
+    "idle": {
+      "w": [
+        56,
+        58
+      ],
+      "h": [
+        60,
+        65
+      ]
+    },
+    "walk": {
+      "w": [
+        56,
+        60
+      ],
+      "h": [
+        59,
+        66
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "bean",
+    "variant": 9,
+    "idle": {
+      "w": [
+        54,
+        55
+      ],
+      "h": [
+        61,
+        63
+      ]
+    },
+    "walk": {
+      "w": [
+        55,
+        57
+      ],
+      "h": [
+        61,
+        65
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 3,
+    "warnings": []
+  },
+  {
+    "key": "bubble-toad",
+    "variant": 0,
+    "idle": {
+      "w": [
+        63,
+        64
+      ],
+      "h": [
+        44,
+        44
+      ]
+    },
+    "walk": {
+      "w": [
+        59,
+        65
+      ],
+      "h": [
+        44,
+        58
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1.0681818181818181,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "bundle-snail",
+    "variant": 0,
+    "idle": {
+      "w": [
+        61,
+        61
+      ],
+      "h": [
+        46,
+        46
+      ]
+    },
+    "walk": {
+      "w": [
+        53,
+        68
+      ],
+      "h": [
+        46,
+        47
+      ]
+    },
+    "ratioWidth": 1.0491803278688525,
+    "ratioHeight": 1.0217391304347827,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "cotton-sheep",
+    "variant": 0,
+    "idle": {
+      "w": [
+        59,
+        60
+      ],
+      "h": [
+        54,
+        54
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        53,
+        55
+      ]
+    },
+    "ratioWidth": 1.0169491525423728,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "dew-rabbit",
+    "variant": 0,
+    "idle": {
+      "w": [
+        53,
+        53
+      ],
+      "h": [
+        59,
+        59
+      ]
+    },
+    "walk": {
+      "w": [
+        47,
+        55
+      ],
+      "h": [
+        54,
+        69
+      ]
+    },
+    "ratioWidth": 0.9622641509433962,
+    "ratioHeight": 0.9152542372881356,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "flower-tail-bird",
+    "variant": 0,
+    "idle": {
+      "w": [
+        58,
+        58
+      ],
+      "h": [
+        54,
+        54
+      ]
+    },
+    "walk": {
+      "w": [
+        57,
+        62
+      ],
+      "h": [
+        53,
+        70
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1.2962962962962963,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "lantern-keeper",
+    "variant": 0,
+    "idle": {
+      "w": [
+        70,
+        70
+      ],
+      "h": [
+        64,
+        64
+      ]
+    },
+    "walk": {
+      "w": [
+        66,
+        73
+      ],
+      "h": [
+        63,
+        77
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 0.984375,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "old-garden-snail",
+    "variant": 0,
+    "idle": {
+      "w": [
+        70,
+        72
+      ],
+      "h": [
+        69,
+        69
+      ]
+    },
+    "walk": {
+      "w": [
+        71,
+        80
+      ],
+      "h": [
+        65,
+        66
+      ]
+    },
+    "ratioWidth": 0.9861111111111112,
+    "ratioHeight": 0.9565217391304348,
+    "walkUniqueHashes": 3,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 0,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        45,
+        45
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        45,
+        46
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 1,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        38,
+        38
+      ]
+    },
+    "walk": {
+      "w": [
+        61,
+        61
+      ],
+      "h": [
+        42,
+        42
+      ]
+    },
+    "ratioWidth": 1.0166666666666666,
+    "ratioHeight": 1.105263157894737,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 10,
+    "idle": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        49,
+        51
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        48,
+        49
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 0.98,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 11,
+    "idle": {
+      "w": [
+        60,
+        62
+      ],
+      "h": [
+        50,
+        51
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        50,
+        50
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 12,
+    "idle": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        50,
+        51
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        50,
+        50
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 13,
+    "idle": {
+      "w": [
+        58,
+        58
+      ],
+      "h": [
+        60,
+        61
+      ]
+    },
+    "walk": {
+      "w": [
+        58,
+        58
+      ],
+      "h": [
+        60,
+        60
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 0.9836065573770492,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 14,
+    "idle": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        52,
+        53
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        51,
+        52
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 15,
+    "idle": {
+      "w": [
+        60,
+        62
+      ],
+      "h": [
+        46,
+        48
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        62
+      ],
+      "h": [
+        47,
+        47
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1.0217391304347827,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 16,
+    "idle": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        52,
+        54
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        52,
+        53
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 2,
+    "idle": {
+      "w": [
+        61,
+        61
+      ],
+      "h": [
+        51,
+        51
+      ]
+    },
+    "walk": {
+      "w": [
+        70,
+        70
+      ],
+      "h": [
+        56,
+        56
+      ]
+    },
+    "ratioWidth": 1.1475409836065573,
+    "ratioHeight": 1.0980392156862746,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 3,
+    "idle": {
+      "w": [
+        62,
+        62
+      ],
+      "h": [
+        50,
+        50
+      ]
+    },
+    "walk": {
+      "w": [
+        61,
+        62
+      ],
+      "h": [
+        50,
+        51
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 4,
+    "idle": {
+      "w": [
+        61,
+        61
+      ],
+      "h": [
+        47,
+        47
+      ]
+    },
+    "walk": {
+      "w": [
+        61,
+        62
+      ],
+      "h": [
+        47,
+        49
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 5,
+    "idle": {
+      "w": [
+        61,
+        61
+      ],
+      "h": [
+        49,
+        49
+      ]
+    },
+    "walk": {
+      "w": [
+        61,
+        61
+      ],
+      "h": [
+        49,
+        50
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 6,
+    "idle": {
+      "w": [
+        60,
+        62
+      ],
+      "h": [
+        52,
+        54
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        50,
+        51
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 0.9807692307692307,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 7,
+    "idle": {
+      "w": [
+        61,
+        63
+      ],
+      "h": [
+        48,
+        53
+      ]
+    },
+    "walk": {
+      "w": [
+        61,
+        62
+      ],
+      "h": [
+        48,
+        51
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1.0208333333333333,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 8,
+    "idle": {
+      "w": [
+        57,
+        57
+      ],
+      "h": [
+        59,
+        65
+      ]
+    },
+    "walk": {
+      "w": [
+        58,
+        60
+      ],
+      "h": [
+        59,
+        62
+      ]
+    },
+    "ratioWidth": 1.0350877192982457,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "pebble",
+    "variant": 9,
+    "idle": {
+      "w": [
+        61,
+        61
+      ],
+      "h": [
+        53,
+        61
+      ]
+    },
+    "walk": {
+      "w": [
+        64,
+        65
+      ],
+      "h": [
+        57,
+        58
+      ]
+    },
+    "ratioWidth": 1.0491803278688525,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "rolling-acorn",
+    "variant": 0,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        57,
+        58
+      ]
+    },
+    "walk": {
+      "w": [
+        47,
+        63
+      ],
+      "h": [
+        55,
+        72
+      ]
+    },
+    "ratioWidth": 1.0333333333333334,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "shadow-weasel",
+    "variant": 0,
+    "idle": {
+      "w": [
+        66,
+        66
+      ],
+      "h": [
+        28,
+        28
+      ]
+    },
+    "walk": {
+      "w": [
+        66,
+        66
+      ],
+      "h": [
+        28,
+        28
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "snare-vine",
+    "variant": 0,
+    "idle": {
+      "w": [
+        54,
+        54
+      ],
+      "h": [
+        65,
+        68
+      ]
+    },
+    "walk": {
+      "w": [
+        59,
+        61
+      ],
+      "h": [
+        66,
+        67
+      ]
+    },
+    "ratioWidth": 1.1111111111111112,
+    "ratioHeight": 1.0307692307692307,
+    "walkUniqueHashes": 3,
+    "warnings": []
+  },
+  {
+    "key": "soil-boar",
+    "variant": 0,
+    "idle": {
+      "w": [
+        65,
+        65
+      ],
+      "h": [
+        48,
+        49
+      ]
+    },
+    "walk": {
+      "w": [
+        66,
+        75
+      ],
+      "h": [
+        46,
+        49
+      ]
+    },
+    "ratioWidth": 1.1538461538461537,
+    "ratioHeight": 1.0208333333333333,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "soil-mole",
+    "variant": 0,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        42,
+        42
+      ]
+    },
+    "walk": {
+      "w": [
+        58,
+        61
+      ],
+      "h": [
+        41,
+        42
+      ]
+    },
+    "ratioWidth": 0.9833333333333333,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spiny-back-beetle",
+    "variant": 0,
+    "idle": {
+      "w": [
+        64,
+        64
+      ],
+      "h": [
+        50,
+        51
+      ]
+    },
+    "walk": {
+      "w": [
+        64,
+        67
+      ],
+      "h": [
+        51,
+        52
+      ]
+    },
+    "ratioWidth": 1.015625,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 3,
+    "warnings": []
+  },
+  {
+    "key": "spiny-back-leader",
+    "variant": 0,
+    "idle": {
+      "w": [
+        77,
+        77
+      ],
+      "h": [
+        66,
+        66
+      ]
+    },
+    "walk": {
+      "w": [
+        79,
+        85
+      ],
+      "h": [
+        68,
+        69
+      ]
+    },
+    "ratioWidth": 1.025974025974026,
+    "ratioHeight": 1.0454545454545454,
+    "walkUniqueHashes": 4,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 0,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        44,
+        44
+      ]
+    },
+    "walk": {
+      "w": [
+        64,
+        64
+      ],
+      "h": [
+        47,
+        47
+      ]
+    },
+    "ratioWidth": 1.0666666666666667,
+    "ratioHeight": 1.0681818181818181,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 1,
+    "idle": {
+      "w": [
+        64,
+        64
+      ],
+      "h": [
+        47,
+        47
+      ]
+    },
+    "walk": {
+      "w": [
+        64,
+        64
+      ],
+      "h": [
+        47,
+        47
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 10,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        48,
+        48
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        46,
+        47
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 0.9791666666666666,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 11,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        45,
+        45
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        62
+      ],
+      "h": [
+        46,
+        46
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1.0222222222222221,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 12,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        51,
+        51
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        52,
+        55
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1.0588235294117647,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 13,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        49,
+        49
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        49,
+        52
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 14,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        46,
+        46
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        46,
+        49
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 15,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        53,
+        53
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        55,
+        58
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1.0377358490566038,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 16,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        44,
+        44
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        42,
+        44
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 2,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        32,
+        32
+      ]
+    },
+    "walk": {
+      "w": [
+        58,
+        58
+      ],
+      "h": [
+        31,
+        31
+      ]
+    },
+    "ratioWidth": 0.9666666666666667,
+    "ratioHeight": 0.96875,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 3,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        38,
+        38
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        38,
+        39
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 4,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        50,
+        50
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        47,
+        48
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 0.96,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 5,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        43,
+        43
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        43,
+        43
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 6,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        44,
+        44
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        45,
+        47
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1.0227272727272727,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 7,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        55,
+        55
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        56,
+        58
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1.0545454545454545,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 8,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        49,
+        49
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        62
+      ],
+      "h": [
+        48,
+        51
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 0.9795918367346939,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spore",
+    "variant": 9,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        46,
+        46
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        45,
+        46
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 0.9782608695652174,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 0,
+    "idle": {
+      "w": [
+        48,
+        48
+      ],
+      "h": [
+        61,
+        61
+      ]
+    },
+    "walk": {
+      "w": [
+        51,
+        57
+      ],
+      "h": [
+        58,
+        59
+      ]
+    },
+    "ratioWidth": 1.1875,
+    "ratioHeight": 0.9508196721311475,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 1,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        59,
+        59
+      ]
+    },
+    "walk": {
+      "w": [
+        55,
+        60
+      ],
+      "h": [
+        56,
+        57
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 0.9491525423728814,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 10,
+    "idle": {
+      "w": [
+        60,
+        66
+      ],
+      "h": [
+        53,
+        60
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        68
+      ],
+      "h": [
+        47,
+        59
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1.0740740740740742,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 11,
+    "idle": {
+      "w": [
+        61,
+        63
+      ],
+      "h": [
+        56,
+        65
+      ]
+    },
+    "walk": {
+      "w": [
+        61,
+        69
+      ],
+      "h": [
+        46,
+        60
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1.0535714285714286,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 12,
+    "idle": {
+      "w": [
+        61,
+        65
+      ],
+      "h": [
+        58,
+        66
+      ]
+    },
+    "walk": {
+      "w": [
+        59,
+        67
+      ],
+      "h": [
+        48,
+        61
+      ]
+    },
+    "ratioWidth": 0.9672131147540983,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 13,
+    "idle": {
+      "w": [
+        60,
+        65
+      ],
+      "h": [
+        59,
+        64
+      ]
+    },
+    "walk": {
+      "w": [
+        56,
+        65
+      ],
+      "h": [
+        49,
+        60
+      ]
+    },
+    "ratioWidth": 0.9333333333333333,
+    "ratioHeight": 1.0169491525423728,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 14,
+    "idle": {
+      "w": [
+        56,
+        63
+      ],
+      "h": [
+        60,
+        64
+      ]
+    },
+    "walk": {
+      "w": [
+        58,
+        67
+      ],
+      "h": [
+        47,
+        60
+      ]
+    },
+    "ratioWidth": 1.0357142857142858,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 15,
+    "idle": {
+      "w": [
+        57,
+        66
+      ],
+      "h": [
+        60,
+        75
+      ]
+    },
+    "walk": {
+      "w": [
+        54,
+        64
+      ],
+      "h": [
+        49,
+        61
+      ]
+    },
+    "ratioWidth": 0.9473684210526315,
+    "ratioHeight": 1.0166666666666666,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 16,
+    "idle": {
+      "w": [
+        61,
+        62
+      ],
+      "h": [
+        56,
+        63
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        66
+      ],
+      "h": [
+        49,
+        59
+      ]
+    },
+    "ratioWidth": 0.9836065573770492,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 2,
+    "idle": {
+      "w": [
+        47,
+        49
+      ],
+      "h": [
+        60,
+        66
+      ]
+    },
+    "walk": {
+      "w": [
+        55,
+        62
+      ],
+      "h": [
+        65,
+        69
+      ]
+    },
+    "ratioWidth": 1.1458333333333333,
+    "ratioHeight": 1.15,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 3,
+    "idle": {
+      "w": [
+        59,
+        60
+      ],
+      "h": [
+        55,
+        56
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        61
+      ],
+      "h": [
+        55,
+        55
+      ]
+    },
+    "ratioWidth": 1.0166666666666666,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 4,
+    "idle": {
+      "w": [
+        52,
+        52
+      ],
+      "h": [
+        60,
+        60
+      ]
+    },
+    "walk": {
+      "w": [
+        50,
+        61
+      ],
+      "h": [
+        48,
+        61
+      ]
+    },
+    "ratioWidth": 0.9615384615384616,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 5,
+    "idle": {
+      "w": [
+        60,
+        60
+      ],
+      "h": [
+        57,
+        57
+      ]
+    },
+    "walk": {
+      "w": [
+        58,
+        62
+      ],
+      "h": [
+        56,
+        60
+      ]
+    },
+    "ratioWidth": 1.0166666666666666,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 6,
+    "idle": {
+      "w": [
+        59,
+        60
+      ],
+      "h": [
+        59,
+        64
+      ]
+    },
+    "walk": {
+      "w": [
+        60,
+        72
+      ],
+      "h": [
+        46,
+        60
+      ]
+    },
+    "ratioWidth": 1.0169491525423728,
+    "ratioHeight": 0.9672131147540983,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 7,
+    "idle": {
+      "w": [
+        57,
+        59
+      ],
+      "h": [
+        58,
+        64
+      ]
+    },
+    "walk": {
+      "w": [
+        54,
+        60
+      ],
+      "h": [
+        46,
+        60
+      ]
+    },
+    "ratioWidth": 0.9473684210526315,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 8,
+    "idle": {
+      "w": [
+        56,
+        57
+      ],
+      "h": [
+        60,
+        67
+      ]
+    },
+    "walk": {
+      "w": [
+        51,
+        69
+      ],
+      "h": [
+        45,
+        60
+      ]
+    },
+    "ratioWidth": 0.9107142857142857,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring",
+    "variant": 9,
+    "idle": {
+      "w": [
+        57,
+        58
+      ],
+      "h": [
+        60,
+        66
+      ]
+    },
+    "walk": {
+      "w": [
+        58,
+        67
+      ],
+      "h": [
+        48,
+        60
+      ]
+    },
+    "ratioWidth": 1.0175438596491229,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "spring-keeper",
+    "variant": 0,
+    "idle": {
+      "w": [
+        70,
+        70
+      ],
+      "h": [
+        61,
+        61
+      ]
+    },
+    "walk": {
+      "w": [
+        68,
+        77
+      ],
+      "h": [
+        57,
+        62
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "talon-owl",
+    "variant": 0,
+    "idle": {
+      "w": [
+        53,
+        53
+      ],
+      "h": [
+        68,
+        68
+      ]
+    },
+    "walk": {
+      "w": [
+        98,
+        111
+      ],
+      "h": [
+        75,
+        113
+      ]
+    },
+    "ratioWidth": 2.0377358490566038,
+    "ratioHeight": 1.4558823529411764,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "vine-turtle",
+    "variant": 0,
+    "idle": {
+      "w": [
+        62,
+        62
+      ],
+      "h": [
+        46,
+        46
+      ]
+    },
+    "walk": {
+      "w": [
+        59,
+        72
+      ],
+      "h": [
+        43,
+        45
+      ]
+    },
+    "ratioWidth": 1.0483870967741935,
+    "ratioHeight": 0.9347826086956522,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "walking-forest",
+    "variant": 0,
+    "idle": {
+      "w": [
+        75,
+        75
+      ],
+      "h": [
+        63,
+        63
+      ]
+    },
+    "walk": {
+      "w": [
+        66,
+        80
+      ],
+      "h": [
+        57,
+        60
+      ]
+    },
+    "ratioWidth": 0.9866666666666667,
+    "ratioHeight": 0.9365079365079365,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  },
+  {
+    "key": "white-paw",
+    "variant": 0,
+    "idle": {
+      "w": [
+        80,
+        80
+      ],
+      "h": [
+        46,
+        46
+      ]
+    },
+    "walk": {
+      "w": [
+        80,
+        80
+      ],
+      "h": [
+        46,
+        46
+      ]
+    },
+    "ratioWidth": 1,
+    "ratioHeight": 1,
+    "walkUniqueHashes": 5,
+    "warnings": []
+  }
+]

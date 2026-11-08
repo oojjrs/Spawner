@@ -58744,10 +58744,19 @@ const WELCOME_UNIT_APPEARANCES = Object.freeze([
   {}, { strength: 1 }, { antenna: 1 }, { blade: 1 }, { secretion: 1 }, { carapace: 1 }, ...UNIT_COMBINATION_FORMS.map(form => form.attributes)
 ].map(attributes => Object.freeze(attributes)));
 
+const WELCOME_IDLE_DURATION_MS = 1500;
+
+// A single-character introduction should not inherit the full battlefield size
+// spread. Keep species proportions and one stable scale through every pose.
+function welcomeDisplaySize(gameSize) {
+  return .4 + (gameSize - .4) * .25;
+}
+
+
 function welcomeUnitPerformance(agent, startedAt) {
   const definition = unitActionArtDefinition(agent);
   const animation = definition?.actions.idle || definition?.reference;
-  const durationMs = animation?.durationsMs.reduce((sum, value) => sum + value, 0) || 2000;
+  const durationMs = WELCOME_IDLE_DURATION_MS;
   const performer = { ...agent, animationStartedAt: startedAt, moveDuration: 0, mode: "idle", attack: null, attackStartedAt: undefined };
   return { agent: performer, action: "idle", animation, durationMs };
 }
@@ -58858,7 +58867,7 @@ function drawWelcomeChoice(choice, draw, options) {
   return null;
 }
 
-return { WELCOME_UNIT_APPEARANCES, welcomeUnitPerformance, WELCOME_NEUTRAL_SHARE, createWelcomeRoster, welcomeCreatureScale, welcomeTravelMotion, prepareWelcomeChoice, drawWelcomeChoice };
+return { WELCOME_UNIT_APPEARANCES, WELCOME_IDLE_DURATION_MS, welcomeDisplaySize, welcomeUnitPerformance, WELCOME_NEUTRAL_SHARE, createWelcomeRoster, welcomeCreatureScale, welcomeTravelMotion, prepareWelcomeChoice, drawWelcomeChoice };
 })();
 modules["client/dna-editor.mjs"] = (() => {
 function dnaDesignStats(M,pieces,tribe) {

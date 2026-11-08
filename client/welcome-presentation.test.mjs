@@ -3,7 +3,7 @@ import test from "node:test";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 import assert from "node:assert/strict";
-import { WELCOME_UNIT_APPEARANCES, WELCOME_NEUTRAL_SHARE, welcomeUnitPerformance, createWelcomeRoster, welcomeCreatureScale, prepareWelcomeChoice, welcomeTravelMotion, drawWelcomeChoice } from "./welcome-presentation.mjs";
+import { WELCOME_UNIT_APPEARANCES, WELCOME_NEUTRAL_SHARE, WELCOME_IDLE_DURATION_MS, welcomeDisplaySize, welcomeUnitPerformance, createWelcomeRoster, welcomeCreatureScale, prepareWelcomeChoice, welcomeTravelMotion, drawWelcomeChoice } from "./welcome-presentation.mjs";
 import { CREATURE_IDLE_ANIMATIONS, unitMovementPosition, creatureAnimationSpeed, unitAnimationPose } from "./unit-animation.mjs";
 import { unitStats } from "../server/attributes.mjs";
 import { unitActionArtDefinition, unitActionArtPose } from "./unit-action-art.mjs";
@@ -189,7 +189,7 @@ test("welcome forms select their own registered body and perform only authored a
     assert.equal(performance.agent.attack, null);
     assert.equal(performance.agent.jumpStartedAt, undefined);
     assert.equal(pose.animation, definition.actions[performance.action] || definition.reference);
-    assert.equal(performance.durationMs, pose.animation.durationsMs.reduce((sum, value) => sum + value, 0));
+    assert.equal(performance.durationMs, 1500);
     assert.equal(performance.agent.attributes, attributes);
     assert.equal(agent.mode, undefined);
   }
@@ -200,7 +200,7 @@ test("actual welcome header uses idle in the center for tribes and neutral speci
   const source = readFileSync(new URL("./welcome-header.js", import.meta.url), "utf8");
   const travel = source.slice(source.indexOf("  function travelMotion("), source.indexOf("  function presentDeparture("));
   const duration = source.slice(source.indexOf("  function phaseDuration("), source.indexOf("  function advance("));
-  const model = { unitStats, creatureAnimationSpeed, unitMovementPosition, welcomeTravelMotion, welcomeUnitPerformance };
+  const model = { unitStats, creatureAnimationSpeed, unitMovementPosition, welcomeTravelMotion, welcomeUnitPerformance, WELCOME_IDLE_DURATION_MS };
   for (const key of ["bean", "spore", "pebble", "spring", "boar", "talon-owl"]) {
     const scope = { globalThis: { Spawner: model }, model, current: { key, variant: 0 }, appearances: [{}],
       tribes: ["bean", "spore", "pebble", "spring"], width: 480, motionSize: () => 100, worldPixels: () => 144,
@@ -213,7 +213,7 @@ test("actual welcome header uses idle in the center for tribes and neutral speci
     assert.ok(!scope.result.motion.agent.attack);
     assert.equal(scope.result.motion.agent.facing, -1);
     assert.equal(scope.result.motion.x, 240);
-    assert.equal(scope.result.duration, scope.tribes.includes(key) ? welcomeUnitPerformance({ tribe: key, attributes: {} }, 10).durationMs : 1000);
+    assert.equal(scope.result.duration, 1500);
     for (const phase of ["enter", "exit"]) {
       scope.phase = phase;
       runInNewContext("result = travelMotion();", scope);
@@ -227,7 +227,27 @@ test("actual welcome header uses idle in the center for tribes and neutral speci
 test("compiled welcome sequence matches the weighted source roster exactly",()=>{
  const scope={console,setTimeout,clearTimeout,URL,performance};
  runInNewContext(readFileSync(new URL('./runtime.js',import.meta.url),'utf8'),scope);
+ assert.equal(scope.Spawner.WELCOME_IDLE_DURATION_MS, 1500);
+ for (const size of [.33, .4, .92]) assert.equal(scope.Spawner.welcomeDisplaySize(size), welcomeDisplaySize(size));
  const actual=scope.Spawner.createWelcomeRoster(tribes,species,WELCOME_UNIT_APPEARANCES.length,seeded(20261107));
  const expected=createWelcomeRoster(tribes,species,WELCOME_UNIT_APPEARANCES.length,seeded(20261107));
  assert.deepEqual(JSON.parse(JSON.stringify(Array.from({length:2000},actual))),Array.from({length:2000},expected));
+});
+
+
+test("welcome display sizes preserve species order with a balanced showcase spread", () => {
+  const sizes = [.33, .345, .36, .375, .38, .39, .4, .41, .44, .46, .49, .51, .53, .56, .59, .64, .66, .7, .76, .82, .92];
+  const displayed = sizes.map(welcomeDisplaySize);
+  assert.equal(welcomeDisplaySize(.4), .4);
+  assert.ok(displayed.at(-1) / displayed[0] < 1.4, "smallest and largest introductions remain comparable");
+  for (let index = 1; index < sizes.length; index++) assert.ok(displayed[index] > displayed[index - 1]);
+  for (const width of [320, 480, 720]) {
+    const height = width * 280 / 480;
+    const base = Math.min(288, width * .58, height * .54);
+    for (const size of sizes) {
+      const cell = base * welcomeDisplaySize(size) / size;
+      assert.ok(Math.abs(size * cell - base * welcomeDisplaySize(size)) < 1e-10);
+      assert.ok(size * cell <= height * .3, "all reference bodies fit mobile and desktop");
+    }
+  }
 });

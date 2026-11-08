@@ -198,18 +198,18 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
     for (const event of events) audioConnection.playWelcome(event.name, 1);
   }
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-  const restDuration = 2000;
+  const restDuration = 0;
   let phase = "perform";
   let elapsed = 0;
   let previousTime = null;
   let frameRequest = 0;
   let width = 0;
   let height = 0;
-  function duration(animation) {
-    return animation.durationsMs.reduce((total, value) => total + value, 0);
-  }
   function groundY() { return height * .88; }
-  function worldPixels() { return Math.min(288, width * .58, height * .54); }
+  function worldPixels() {
+    const size = model.unitDisplaySize({ species: current.key });
+    return Math.min(288, width * .58, height * .54) * model.welcomeDisplaySize(size) / size;
+  }
   function motionSize() { return model.unitDisplaySize({ species: current.key }) * worldPixels(); }
   function travelMotion(atElapsed, atTime) {
     const size = motionSize();
@@ -239,9 +239,7 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
   function phaseDuration() {
     if (phase === "waiting") return 0;
     if (phase === "enter") return travelMotion().durationMs;
-    if (phase === "perform") return tribes.includes(current.key) ?
-      model.welcomeUnitPerformance({ tribe: current.key, attributes: appearances[current.variant] }, phaseStartedAt).durationMs :
-      duration(neutralAnimations(current.key).idle);
+    if (phase === "perform") return model.WELCOME_IDLE_DURATION_MS;
     return restDuration;
   }
   function advance(completedAt) {
