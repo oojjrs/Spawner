@@ -400,7 +400,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
           10
         ],
         "durationMs": 3850,
-        "pivotX": 82,
+        "pivotX": 430,
         "pivotY": 446,
         "referenceLength": 43.59375,
         "viewSize": 43.59375,

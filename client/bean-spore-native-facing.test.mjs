@@ -49,11 +49,22 @@ function exactRemainingClip(original){
 const confirmedFacing=JSON.parse(readFileSync(new URL('../tools/confirmed-facing-20261108/bean-spore-image-changes.json',import.meta.url))).changes;
 const confirmedForms=new Set(['bean/blade-carapace-antenna','bean/blade-secretion-carapace-antenna']);
 const confirmedLabel=label=>[...confirmedForms].some(k=>label===k||label.startsWith(k+'.'));
-const imagePairs=new Map(), extraImagePairs=[];
+const laterFacing=JSON.parse(readFileSync(new URL('../tools/facing-combo-audit-20261108/bean-reflect-image-changes.json',import.meta.url))).changes;
+const laterForms=new Set(['bean/blade-carapace','bean/blade-secretion-carapace-antenna']);
+const laterLabel=label=>[...laterForms].some(k=>label===k||label.startsWith(k+'.'));
+const reflectionParity=label=>1 ^ Number(confirmedLabel(label)) ^ Number(laterLabel(label));
+const correctionDestinations=new Set([...Object.values(confirmedFacing),...Object.values(laterFacing)].map(c=>c.newImage));
+const imagePairs=new Map(), extraImagePairs=[], pairParity=new Map();
+function recordParity(old,now,label){
+ const key=JSON.stringify([old,now]),parity=reflectionParity(label);
+ if(pairParity.has(key))assert.equal(pairParity.get(key),parity,label+' consistent source/destination reflection parity');
+ pairParity.set(key,parity);
+}
+
 function mapImages(a,b,label){
  if(!a||typeof a!=='object')return;
- if(typeof a.image==='string'){assert.ok(b?.image,label);const old=imagePairs.get(a.image);if(old&&old!==b.image){assert.ok(confirmedLabel(label)||Object.values(confirmedFacing).some(c=>c.newImage===old||c.newImage===b.image),label+' only confirmed copy-on-write split');extraImagePairs.push([a.image,b.image]);}else imagePairs.set(a.image,b.image);}
- if(typeof a.portrait==='string')imagePairs.set(a.portrait,b.portrait);
+ if(typeof a.image==='string'){assert.ok(b?.image,label);recordParity(a.image,b.image,label);const old=imagePairs.get(a.image);if(old&&old!==b.image){assert.ok(confirmedLabel(label)||laterLabel(label)||correctionDestinations.has(old)||correctionDestinations.has(b.image),label+' only confirmed copy-on-write split');extraImagePairs.push([a.image,b.image]);}else imagePairs.set(a.image,b.image);}
+ if(typeof a.portrait==='string'){recordParity(a.portrait,b.portrait,label);imagePairs.set(a.portrait,b.portrait);}
  for(const[k,v]of Object.entries(a))if(v&&typeof v==='object')mapImages(v,b?.[k],label+'.'+k);
 }
 for(const k of plan.candidateForms){mapImages(before.UNIT_ACTION_ART[k],UNIT_ACTION_ART[k],k);if(before.UNIT_BIRTH_ART[k])mapImages(before.UNIT_BIRTH_ART[k],UNIT_BIRTH_ART[k],k+'.birth');}
@@ -61,7 +72,7 @@ for(const k of heldKeys)mapImages(held(before,k),held(current,k),k+'.held');
 for(const t of ['bean','spore']){mapImages(before.UNIT_RANGED_FORMS[t],clean(UNIT_RANGED_FORMS[t]),t+'.ranged');mapImages(before.UNIT_SECRETION_IDLE_ANIMATIONS[t],UNIT_SECRETION_IDLE_ANIMATIONS[t],t+'.secretionIdle');}
 function verifyClip(old,now,label){
  assert.equal(now.sourceFacing,'left',label+' sourceFacing');
- near(now.pivotX,confirmedLabel(label)?old.pivotX:(old.frameSize??old.frameWidth)-old.pivotX,label+' pivotX');
+ near(now.pivotX,reflectionParity(label)?(old.frameSize??old.frameWidth)-old.pivotX:old.pivotX,label+' pivotX');
  assert.deepEqual(now.durationsMs,label==='bean/gather.walk'?upstreamGatherWalkDurations:old.durationsMs,label+' preserves approved clock');
  for(const key of ['frameSize','frameHeight','frameWidth','columns','frameCount','durationMs','loop','hitTimeMs','launchAtMs','releaseAtMs','pivotY','referenceLength','viewSize','registrationScale','times'])
   assert.deepEqual(now[key],old[key],label+' preserves '+key);
@@ -74,7 +85,7 @@ function verifyClip(old,now,label){
   old.sceneLayers.layers.forEach((layer,i)=>{
    const next=now.sceneLayers.layers[i];for(const key of ['role','wholeBody','frameSize','frameHeight','columns','frameCount'])assert.deepEqual(next[key],layer[key],label+' layer '+key);
    assert.equal(next.samples.length,layer.samples.length);
-   layer.samples.forEach((sample,j)=>{const got=next.samples[j];if(sample===null){assert.equal(got,null);return;}assert.equal(got.frame,sample.frame);const[x,y,w,h]=sample.destination;near(got.destination[0],confirmedLabel(label)?x:old.frameSize-x-w,label+' layer sample x');assert.deepEqual(got.destination.slice(1),[y,w,h]);});
+   layer.samples.forEach((sample,j)=>{const got=next.samples[j];if(sample===null){assert.equal(got,null);return;}assert.equal(got.frame,sample.frame);const[x,y,w,h]=sample.destination;near(got.destination[0],reflectionParity(label)?old.frameSize-x-w:x,label+' layer sample x');assert.deepEqual(got.destination.slice(1),[y,w,h]);});
   });
  }
 }
@@ -111,7 +122,7 @@ test('공유 환경은 새 content-address 경로, bean-seed-b는 후보만 copy
  const layers=k=>(UNIT_BIRTH_ART[k]||UNIT_ACTION_ART[k].actions.birth).sceneLayers.layers;
  for(const k of ['bean/gather','bean/secretion'])assert.equal(layers(k).find(l=>l.role==='environment').image,replacement);
  assert.equal(layers('bean/antenna').find(l=>l.role==='environment').image,old);
- for(const [oldPath,newPath]of imagePairs)if(oldPath.includes('/BirthSceneLayersV1/')){if(newPath===oldPath)assert.ok(Object.values(confirmedFacing).some(c=>c.newImage===newPath),'only confirmed family may return to prior content-addressed pixels');else assert.notEqual(newPath,oldPath);assert.match(newPath,/\/[a-f0-9]{64}\.png$/);}
+ for(const [oldPath,newPath]of imagePairs)if(oldPath.includes('/BirthSceneLayersV1/')){if(newPath===oldPath)assert.ok(correctionDestinations.has(newPath),'only confirmed family may return to prior content-addressed pixels');else assert.notEqual(newPath,oldPath);assert.match(newPath,/\/[a-f0-9]{64}\.png$/);}
 });
 // Independently decode the immutable Git baseline and current files. The plan's
 // SHA must match the Git blob before it can be used as an expected pixel source.
@@ -148,7 +159,7 @@ for old,new in x['pairs']:
   source=(i+n if i<n else i-n) if n and i<2*n else i
   sx,sy=(source%cols)*w,(source//cols)*h
   cell=src.crop((sx,sy,sx+w,sy+h))
-  expected.append(digest(cell if new in x['confirmedDestinations'] else ImageOps.mirror(cell),i))
+  expected.append(digest(ImageOps.mirror(cell) if x['pairParity'][json.dumps([old,new],separators=(',',':'))] else cell,i))
  src.close();del src,raw,cell
  import gc;gc.collect()
  # Decode one atlas at a time, particularly the 25M-pixel legacy WebP sheets.
@@ -174,7 +185,7 @@ test('실제 RGBA 픽셀은 셀별 반전이며 held hurt는 두 블록을 교�
  const counts={files:0,cells:0,heldFiles:0,protectedFiles:0};
  const batches=[...[...imagePairs,...extraImagePairs].map(pair=>({pairs:[pair],protected:[]})),{pairs:[],protected:[...protectedPaths]}];
  for(const batch of batches){
-  const result=execFileSync('python',['-c',pixelCheck],{cwd:root,input:JSON.stringify({commit:baselineCommit,files:plan.files,soilEdits,...batch,confirmedDestinations:Object.values(confirmedFacing).map(c=>c.newImage),held:heldMap,unchangedProjectiles:[...unchangedProjectiles]}),maxBuffer:1024*1024,timeout:600000}).toString();
+  const result=execFileSync('python',['-c',pixelCheck],{cwd:root,input:JSON.stringify({commit:baselineCommit,files:plan.files,soilEdits,...batch,pairParity:Object.fromEntries(pairParity),held:heldMap,unchangedProjectiles:[...unchangedProjectiles]}),maxBuffer:1024*1024,timeout:600000}).toString();
   for(const[key,value]of Object.entries(JSON.parse(result)))counts[key]+=value;
  }
  assert.equal(counts.heldFiles,5);assert.equal(counts.files,imagePairs.size+extraImagePairs.length-unchangedProjectiles.size);console.log('bean/spore independent pixel coverage',counts);

@@ -1,0 +1,1634 @@
+{
+  "candidateForms": [
+    "bean/blade-carapace",
+    "bean/blade-secretion-carapace-antenna"
+  ],
+  "preservedForms": [
+    "spore/carapace-antenna",
+    "spring/secretion-antenna",
+    "spring/blade-secretion",
+    "spring/secretion-carapace-antenna",
+    "bean/blade-antenna",
+    "pebble/blade-secretion-carapace",
+    "bean/secretion-carapace-antenna",
+    "spore/blade-antenna",
+    "pebble/blade-secretion",
+    "spring/blade-antenna",
+    "spring/blade-carapace",
+    "bean/blade-carapace-antenna",
+    "spore/blade-secretion-carapace-antenna",
+    "spore/blade-carapace-antenna",
+    "spring/carapace-antenna",
+    "bean/blade-secretion-carapace",
+    "spore/blade-secretion",
+    "spore/blade-secretion-antenna",
+    "spring/secretion-carapace",
+    "spore/blade-carapace",
+    "spring/blade-secretion-antenna",
+    "pebble/blade-antenna",
+    "pebble/blade-carapace-antenna",
+    "pebble/blade-secretion-carapace-antenna",
+    "spring/blade-secretion-carapace",
+    "pebble/blade-carapace",
+    "pebble/secretion-antenna",
+    "bean/secretion-carapace",
+    "bean/blade-secretion",
+    "bean/blade-secretion-antenna",
+    "pebble/blade-secretion-antenna",
+    "spring/blade-carapace-antenna",
+    "spore/secretion-antenna",
+    "bean/secretion-antenna",
+    "spore/secretion-carapace",
+    "spore/secretion-carapace-antenna",
+    "pebble/secretion-carapace",
+    "bean/carapace-antenna",
+    "spore/blade-secretion-carapace",
+    "pebble/carapace-antenna",
+    "spring/blade-secretion-carapace-antenna",
+    "pebble/secretion-carapace-antenna"
+  ],
+  "publicationPacking": [
+    {
+      "owner": "bean/blade-carapace",
+      "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+    },
+    {
+      "owner": "bean/blade-secretion-carapace-antenna",
+      "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+    }
+  ],
+  "files": [
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-attack-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-birth-complete-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 120
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-death-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-hurt-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-idle-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 64
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-ranged-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 24
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-carapace-antenna/walk.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 24
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/attack.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/birth.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 120
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/death.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/hurt.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/idle.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 64
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/portrait.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 1,
+          "cellCount": 1
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/ranged.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 24
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/AntennaCombosV1/bean/blade-secretion-carapace-antenna/walk.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 24
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/BirthResolutionV1/bean-blade-carapace-body.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 321,
+          "frameHeight": 309,
+          "columns": 4,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/BladeCarapaceV1/bean/attack.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/BladeCarapaceV1/bean/birth.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 120
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/BladeCarapaceV1/bean/death.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/BladeCarapaceV1/bean/hurt.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/BladeCarapaceV1/bean/idle.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 64
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/BladeCarapaceV1/bean/portrait.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 1,
+          "cellCount": 1
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/BladeCarapaceV1/bean/walk.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 24
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/17/Source/neutral.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 1,
+          "cellCount": 1
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/approved-neutral.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "explicitUnevenCells": false,
+          "cellCount": 1,
+          "evidence": "Approved neutral source is one complete appearance image."
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/attack-wholebody-generated.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "explicitUnevenCells": false,
+          "cellCount": 8,
+          "evidence": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/source-layouts.json"
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/birth-wholebody-generated.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "explicitUnevenCells": true,
+          "cellCount": 16,
+          "evidence": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/source-layouts.json"
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/death-wholebody-generated.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "explicitUnevenCells": false,
+          "cellCount": 8,
+          "evidence": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/source-layouts.json"
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/hurt-wholebody-generated.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "explicitUnevenCells": false,
+          "cellCount": 8,
+          "evidence": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/source-layouts.json"
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/idle-wholebody-generated.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "explicitUnevenCells": false,
+          "cellCount": 8,
+          "evidence": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/source-layouts.json"
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/ranged-wholebody-generated.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "explicitUnevenCells": false,
+          "cellCount": 8,
+          "evidence": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/source-layouts.json"
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/walk-wholebody-generated.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "explicitUnevenCells": false,
+          "cellCount": 8,
+          "evidence": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/source-layouts.json"
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 64
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/walk.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 24
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 120
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/UnitAppearanceV1/bean/03/Source/neutral.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "columns": 1,
+          "rows": 1,
+          "cellCount": 1,
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "explicitUnevenCells": false
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-native.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "columns": 1,
+          "rows": 1,
+          "cellCount": 1,
+          "frameWidth": 627,
+          "frameHeight": 627,
+          "explicitUnevenCells": false
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-neutral.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "columns": 1,
+          "rows": 1,
+          "cellCount": 1,
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "explicitUnevenCells": false
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/attack-wholebody-generated.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "columns": 4,
+          "rows": 2,
+          "cellCount": 8,
+          "frameWidth": 384,
+          "frameHeight": 512,
+          "explicitUnevenCells": false
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/birth-wholebody-generated.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "columns": 4,
+          "rows": 4,
+          "cellCount": 16,
+          "frameWidth": null,
+          "frameHeight": null,
+          "explicitUnevenCells": true
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/death-wholebody-generated.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "columns": 4,
+          "rows": 2,
+          "cellCount": 8,
+          "frameWidth": 384,
+          "frameHeight": 512,
+          "explicitUnevenCells": false
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/hurt-wholebody-generated.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "columns": 4,
+          "rows": 2,
+          "cellCount": 8,
+          "frameWidth": 384,
+          "frameHeight": 512,
+          "explicitUnevenCells": false
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/idle-wholebody-generated.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "columns": 4,
+          "rows": 2,
+          "cellCount": 8,
+          "frameWidth": 384,
+          "frameHeight": 512,
+          "explicitUnevenCells": false
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/walk-wholebody-generated.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "columns": 4,
+          "rows": 2,
+          "cellCount": 8,
+          "frameWidth": 384,
+          "frameHeight": 512,
+          "explicitUnevenCells": false
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-birth-body-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-walk-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 24
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/BirthSceneLayersV1/b787fdc93791ddae38dc4fc6b6efdd3e0abb8a747c96d7c2511fec74b7caaecd.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 434,
+          "frameHeight": 424,
+          "columns": 8,
+          "cellCount": 112
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/BirthSceneLayersV1/b369c14bd1ba6d0f3675db7701017a87d8d567273d3282b8606dff646e6a5f48.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 434,
+          "frameHeight": 424,
+          "columns": 8,
+          "cellCount": 112
+        }
+      ]
+    },
+    {
+      "image": "DesignAssets/Animations/BirthSceneLayersV1/a1f0c0a6415f2acd1eac1a749fdeecfc398e3c9b06e76c38bc4d9f4f65fd0079.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 16
+        }
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-sheet.png",
+      "protectedOrOtherUsers": [
+        "all-nonselected-forms"
+      ],
+      "gridVariants": [
+        {
+          "frameWidth": 512,
+          "frameHeight": 512,
+          "columns": 8,
+          "cellCount": 24
+        }
+      ]
+    }
+  ],
+  "rawSourceFiles": [
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/approved-neutral.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/attack-wholebody-generated.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/birth-wholebody-generated.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          314,
+          314
+        ],
+        [
+          314,
+          0,
+          627,
+          314
+        ],
+        [
+          627,
+          0,
+          940,
+          314
+        ],
+        [
+          940,
+          0,
+          1254,
+          314
+        ],
+        [
+          0,
+          314,
+          314,
+          627
+        ],
+        [
+          314,
+          314,
+          627,
+          627
+        ],
+        [
+          627,
+          314,
+          940,
+          627
+        ],
+        [
+          940,
+          314,
+          1254,
+          627
+        ],
+        [
+          0,
+          627,
+          314,
+          940
+        ],
+        [
+          314,
+          627,
+          627,
+          940
+        ],
+        [
+          627,
+          627,
+          940,
+          940
+        ],
+        [
+          940,
+          627,
+          1254,
+          940
+        ],
+        [
+          0,
+          940,
+          314,
+          1254
+        ],
+        [
+          314,
+          940,
+          627,
+          1254
+        ],
+        [
+          627,
+          940,
+          940,
+          1254
+        ],
+        [
+          940,
+          940,
+          1254,
+          1254
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/death-wholebody-generated.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/hurt-wholebody-generated.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/idle-wholebody-generated.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/ranged-wholebody-generated.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/Sources/walk-wholebody-generated.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-native.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          627,
+          627
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/approved-neutral.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          512,
+          512
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/attack-wholebody-generated.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/birth-wholebody-generated.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          314,
+          314
+        ],
+        [
+          314,
+          0,
+          627,
+          314
+        ],
+        [
+          627,
+          0,
+          940,
+          314
+        ],
+        [
+          940,
+          0,
+          1254,
+          314
+        ],
+        [
+          0,
+          314,
+          314,
+          627
+        ],
+        [
+          314,
+          314,
+          627,
+          627
+        ],
+        [
+          627,
+          314,
+          940,
+          627
+        ],
+        [
+          940,
+          314,
+          1254,
+          627
+        ],
+        [
+          0,
+          627,
+          314,
+          940
+        ],
+        [
+          314,
+          627,
+          627,
+          940
+        ],
+        [
+          627,
+          627,
+          940,
+          940
+        ],
+        [
+          940,
+          627,
+          1254,
+          940
+        ],
+        [
+          0,
+          940,
+          314,
+          1254
+        ],
+        [
+          314,
+          940,
+          627,
+          1254
+        ],
+        [
+          627,
+          940,
+          940,
+          1254
+        ],
+        [
+          940,
+          940,
+          1254,
+          1254
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/death-wholebody-generated.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/hurt-wholebody-generated.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/idle-wholebody-generated.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ]
+    },
+    {
+      "image": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/Sources/walk-wholebody-generated.png",
+      "cellRectangles": [
+        [
+          0,
+          0,
+          384,
+          512
+        ],
+        [
+          384,
+          0,
+          768,
+          512
+        ],
+        [
+          768,
+          0,
+          1152,
+          512
+        ],
+        [
+          1152,
+          0,
+          1536,
+          512
+        ],
+        [
+          0,
+          512,
+          384,
+          1024
+        ],
+        [
+          384,
+          512,
+          768,
+          1024
+        ],
+        [
+          768,
+          512,
+          1152,
+          1024
+        ],
+        [
+          1152,
+          512,
+          1536,
+          1024
+        ]
+      ]
+    }
+  ]
+}

@@ -6,15 +6,25 @@ const audits = ["bean-spore-image-changes.json", "bean-spore-extra-image-changes
   "bean-spore-global-source-alias-changes.json", "remaining-facing-pebble-image-changes.json"]
   .map(name => ({ name, document: JSON.parse(readFileSync(new URL(name, directory))) }));
 
-// Later user-confirmed corrections are applied once after the historical audit chain.
-const confirmedFacing = JSON.parse(readFileSync(new URL("../../tools/confirmed-facing-20261108/bean-spore-image-changes.json", import.meta.url))).changes;
+// User-confirmed corrections are chronological stages, each applied at most once.
+// A later reflection may return to an earlier hash/path; it is not a graph cycle.
+const confirmedStages = [
+  "../../tools/confirmed-facing-20261108/bean-spore-image-changes.json",
+  "../../tools/facing-combo-audit-20261108/bean-reflect-image-changes.json",
+].map(path => JSON.parse(readFileSync(new URL(path, import.meta.url))));
 function confirmedSource(source) {
-  const change = confirmedFacing[source.path];
-  if (!change || change.beforeSha256 !== source.sha256) return source;
-  assert.equal(change.verification.exactRgbaMirror, true);
-  assert.equal(change.verification.alphaExact, true);
-  return { ...source, path: change.newImage, sha256: change.afterSha256,
-    mirrored: !source.mirrored, confirmedFacingCorrection: true };
+  let current = source;
+  for (const stage of confirmedStages) {
+    const change = stage.changes[current.path];
+    if (!change || change.beforeSha256 !== current.sha256) continue;
+    assert.equal(stage.status, "completed");
+    assert.equal(change.verification.exactRgbaMirror, true);
+    assert.equal(change.verification.alphaExact, true);
+    assert.equal(change.verification.dimensionsUnchanged, true);
+    current = { ...current, path: change.newImage, sha256: change.afterSha256,
+      mirrored: !current.mirrored, confirmedFacingCorrection: true };
+  }
+  return current;
 }
 
 export function approvedArtSource(path, approvedHash) {

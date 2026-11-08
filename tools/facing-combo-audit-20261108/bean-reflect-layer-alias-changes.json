@@ -1,0 +1,7 @@
+{
+  "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json": {
+    "beforeSha256": "7a5821d55187a506862f82d61da0afd8392aab10ae7fedb73886c477291e2b77",
+    "afterSha256": "56cc4b70460391dc32308010c5caba4e7ab8d68a2b6592a6db8dc493018d811e",
+    "reason": "Shared publication layer aliases resolve to own immutable runtime source; preserve other forms."
+  }
+}

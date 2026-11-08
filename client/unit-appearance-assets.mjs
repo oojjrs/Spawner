@@ -1436,7 +1436,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "callId": "call_ac2b35a0d4a84662b9df4975654e7ee9",
         "item": 0
       },
-      "sourceHash": "29289ee2cecb22834c324d1b74d5ca034b6dc1bd7601af35616fa7ae7986d7a5",
+      "sourceHash": "fa2833a9381401f6ff2e3a7533752520f3a4201bbc6ba46a9868bd53d15e9cfb",
       "frameWidth": 512,
       "frameHeight": 512,
       "pivot": {
@@ -1459,25 +1459,25 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "coreBounds": null,
         "landmarks": {
           "leftEye": [
-            220.5,
+            216.5,
             368.5
           ],
           "rightEye": [
-            295.5,
+            291.5,
             368.5
           ],
           "supportPoint": [
-            257.5,
+            254.5,
             447.5
           ],
           "supportPixelBounds": [
-            206,
+            203,
             440,
             103,
             8
           ],
           "faceMidpoint": [
-            258,
+            254,
             368.5
           ]
         },
@@ -1487,7 +1487,7 @@ export const UNIT_APPEARANCE_ASSETS = Object.freeze({
         "measurement": {
           "alphaThreshold": 16,
           "sourcePixelBounds": {
-            "x": 97,
+            "x": 156,
             "y": 169,
             "width": 259,
             "height": 279

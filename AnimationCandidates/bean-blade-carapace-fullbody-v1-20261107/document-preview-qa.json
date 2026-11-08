@@ -3,8 +3,8 @@
   "actions": [
     {
       "action": "idle",
-      "sheetSHA256": "bfe39f895ef8a220eba2c9eece5472127a7513056617c58e14d8edc2a4a09f6a",
-      "previewSHA256": "05436ec88f278bd80bece226d9b85967d2a1c21bb489461d84c8b1e490942dba",
+      "sheetSHA256": "59c5088ae651a1d7726a564191ac68a47bcec753066abb64fbe03633051534fd",
+      "previewSHA256": "90a63aea5741a62f2dd32a12219e0ddfb0d83ed3fecd00df7fc67c5f6c8fcf18",
       "sheetFrames": 64,
       "decodedPreviewFrames": 9,
       "durationMs": 6400,
@@ -15,8 +15,8 @@
     },
     {
       "action": "walk",
-      "sheetSHA256": "4be35e0ed1737b76bd470d9e83df47205b55ecfaa8d31291cc8704ef7f95c7e9",
-      "previewSHA256": "06738a49514d335ebd4a49ff9713bb48e3fa31cba08f15f7ab15524d7840f47c",
+      "sheetSHA256": "b0368a1149954e2e93db3c152683e18cb33c06f972ee055299bc09b8e078f986",
+      "previewSHA256": "4774be6283967aeafbde2d1de63a26abc3664d7ce16c65a279e0f4ba4ddefdab",
       "sheetFrames": 24,
       "decodedPreviewFrames": 9,
       "durationMs": 960,
@@ -27,8 +27,8 @@
     },
     {
       "action": "attack",
-      "sheetSHA256": "84717b26137ee10b3077505e390b3d93118ab93ec6028a7c4dc8a3ff54c5b189",
-      "previewSHA256": "f471e7a36b87410104cda259bd4d93eca92c4033e49b4eeecc595b45c9da0f0f",
+      "sheetSHA256": "2f7eae17c5ea9eadbbd908da09b1dae6436a39da21c66a3e47e256a73d64afae",
+      "previewSHA256": "00d07cea8d6835d9cc8d6d10a74e4b54a8b325de05a7d3daa68af60b8c7d0ba9",
       "sheetFrames": 16,
       "decodedPreviewFrames": 8,
       "durationMs": 1000,
@@ -39,8 +39,8 @@
     },
     {
       "action": "hurt",
-      "sheetSHA256": "86595ee13e2821cf3ae063d5854b904ba6d40627d48d6d9acf772d88589cefa1",
-      "previewSHA256": "906dfd2b30b5bef259636c5f09821920bf8a74ea3e723087d92f6fcfe55b7bea",
+      "sheetSHA256": "3228a14be9ab0b72ea4d2f903f74a02ae7825f014381d1d96ae399dcf4e769e7",
+      "previewSHA256": "348d72cecdd201435b2375cc95655111b266296b74ac341a23fb3dc937428508",
       "sheetFrames": 16,
       "decodedPreviewFrames": 8,
       "durationMs": 760,
@@ -51,8 +51,8 @@
     },
     {
       "action": "death",
-      "sheetSHA256": "6a9144185416a3d1903809f4aeb76fca146504598d96d42bcbcac3d45d50c4ad",
-      "previewSHA256": "ef10a4d8969df4dcea5902f3a53e497d30d1444a2d3182b18186c7d08af1ac73",
+      "sheetSHA256": "68ec8940f4af05075feb7a09b7175f523e61393d9aa0f0c2f8acccb0f15872d8",
+      "previewSHA256": "d6512fe9eb182307cd956e9af9de03e85d77f577b1798066af2805c7c9a4f8db",
       "sheetFrames": 16,
       "decodedPreviewFrames": 8,
       "durationMs": 2260,

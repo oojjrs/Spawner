@@ -115,8 +115,8 @@ globalThis.SpawnerUnitAppearanceFiles = Object.freeze({
   },
   "DesignAssets/Animations/UnitAppearanceV1/bean/17/Source/neutral.png": {
     "script": "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/17/Source/neutral.png.js",
-    "bytes": 112962,
-    "hash": "29289ee2cecb22834c324d1b74d5ca034b6dc1bd7601af35616fa7ae7986d7a5",
+    "bytes": 113598,
+    "hash": "fa2833a9381401f6ff2e3a7533752520f3a4201bbc6ba46a9868bd53d15e9cfb",
     "mime": "image/png"
   },
   "DesignAssets/Animations/UnitAppearanceV1/spore/00/Source/neutral.png": {

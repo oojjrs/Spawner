@@ -1,0 +1,38 @@
+{
+  "client/runtime.js": {
+    "modules": [
+      "client/antenna-combo-assets.mjs",
+      "client/blade-carapace-assets.mjs",
+      "client/unit-birth-art-assets.mjs",
+      "client/unit-appearance-assets.mjs"
+    ],
+    "worktreeModules": [
+      "client/antenna-combo-assets.mjs",
+      "client/blade-carapace-assets.mjs",
+      "client/unit-birth-art-assets.mjs",
+      "client/unit-appearance-assets.mjs"
+    ],
+    "ownedSha256": "0c33b1f8e788901b95d0a29651c9fe78907493853bce71b77b00bac086775ca3",
+    "worktreeBeforeSha256": "a2f7581604602fc30ebe1b280f443d0ca498155743245c3e1cdf3638668bb67b",
+    "worktreeAfterSha256": "22171b78d1c6e27c7e6f948c88c158f0af9588f5fa3af99a107f1f880bb83be7",
+    "userUnownedBytesPreserved": true
+  },
+  "Combat.html": {
+    "modules": [
+      "client/antenna-combo-assets.mjs",
+      "client/blade-carapace-assets.mjs",
+      "client/unit-birth-art-assets.mjs",
+      "client/unit-appearance-assets.mjs"
+    ],
+    "worktreeModules": [
+      "client/antenna-combo-assets.mjs",
+      "client/blade-carapace-assets.mjs",
+      "client/unit-birth-art-assets.mjs",
+      "client/unit-appearance-assets.mjs"
+    ],
+    "ownedSha256": "7fd5b76ba49b18b98b870b0086c3e057df69fe639795ae729d5515a1de7d261e",
+    "worktreeBeforeSha256": "9e69ecbd2ad3aa0919bd1dbd633e25c2fc62377844905e83c8db56fb66be0464",
+    "worktreeAfterSha256": "4a6e2c15bba39b1f71209d17a3902fb71c4a015dd2e1cc7f1060d93f730ec1f9",
+    "userUnownedBytesPreserved": true
+  }
+}

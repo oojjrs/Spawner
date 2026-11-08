@@ -1,0 +1,20 @@
+{
+  "changedAppearance": [
+    "bean/17"
+  ],
+  "lazyChanged": [
+    "DesignAssets/Animations/UnitAppearanceV1/bean/17/Source/neutral.png"
+  ],
+  "changedPlanningLines": [
+    104
+  ],
+  "birthSceneMatchesRegistry": true,
+  "neutralHash": "fa2833a9381401f6ff2e3a7533752520f3a4201bbc6ba46a9868bd53d15e9cfb",
+  "wrapperMatchesSourceBytes": true,
+  "files": [
+    "DesignAssets/sections/unit-appearance.js",
+    "client/unit-appearance-assets.mjs",
+    "client/unit-appearance-lazy-assets.js",
+    "client/unit-appearance-files/Animations/UnitAppearanceV1/bean/17/Source/neutral.png.js"
+  ]
+}

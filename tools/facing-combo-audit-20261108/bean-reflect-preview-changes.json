@@ -1,0 +1,1463 @@
+{
+  "status": "completed",
+  "changes": {
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-idle-v1-transparent-preview.webp": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-idle-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-idle-v1-transparent-preview.webp",
+      "beforeSha256": "93389bd1dbbb1616041093f5383f1b94f76dc8e22dae470455932c9cf2e1e8be",
+      "afterSha256": "1352dd9999dc33f785e3a098ca37a36df96b2f7cb94592b1a565756f7f591793",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 9,
+      "durationsMs": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        100,
+        100,
+        1400
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-idle-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-idle-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-idle-v1-preview.gif",
+      "beforeSha256": "2c938cc790e7f79b7734adc199fa268f133f6ea7189b1e27e3a433b8a03e085b",
+      "afterSha256": "5485f546456b41520974ebde019241d6ac5e35b3c87c91b7601ecdb048570d49",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 9,
+      "durationsMs": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        100,
+        100,
+        1400
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-carapace-antenna/preview.webp": {
+      "oldImage": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-carapace-antenna/preview.webp",
+      "newImage": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-secretion-carapace-antenna/preview.webp",
+      "beforeSha256": "03548aab2dd6cc82fa2620c457425189c3b07627f2c978d45ca695bec6bd2d6a",
+      "afterSha256": "d4f890f0d45de7312bc83d01e213256e9b4a49913e72636471b3f07b302459f1",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 22,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        80,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        80
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-attack-v1-transparent-preview.webp": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-attack-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-attack-v1-transparent-preview.webp",
+      "beforeSha256": "1989774ec472cb99bdb2fbe7e68f6ed24d76a23e670ffc2d4a249a47f37f6e83",
+      "afterSha256": "baa19b54905305750b4133e372c5977a2efcc3a56504d2af934f6c18a656e35e",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        60,
+        70,
+        140,
+        80,
+        200,
+        120,
+        80,
+        250
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-attack-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-attack-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-attack-v1-preview.gif",
+      "beforeSha256": "7ba68ec94dc4b82b4cbec5fe38fc1e0debb272f42abbca78c51d55b7ae3668eb",
+      "afterSha256": "1d5fbed4453fe746e7e5bb3bb42ba83d430849d2fb02141725225512ca0ad5b0",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        60,
+        70,
+        140,
+        80,
+        200,
+        120,
+        80,
+        250
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-ranged-v1-transparent-preview.webp": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-ranged-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-ranged-v1-transparent-preview.webp",
+      "beforeSha256": "12bf9931710fd1badad9f225a14cca6c9bca55005d1d5df06551b8a4d2b3a09e",
+      "afterSha256": "6f9ac8f9c6f352aaea9dcec067d6d0ed465102e0596fb37ffbfe425eabd41598",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        50,
+        50,
+        100,
+        75,
+        100,
+        75,
+        75,
+        75
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-ranged-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-ranged-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-ranged-v1-preview.gif",
+      "beforeSha256": "9eee66158153771be69912248be14c3b45bd56efc4f4323e3e5af3ecc6826be6",
+      "afterSha256": "ddb7f389860bc07831d341d2b05aa8e4cdf65d3892f3c3bd71decccc60750795",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        50,
+        50,
+        100,
+        80,
+        100,
+        70,
+        70,
+        80
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-hurt-v1-transparent-preview.webp": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-hurt-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-hurt-v1-transparent-preview.webp",
+      "beforeSha256": "22c8637426640abc34cc967ef39ce9835de82da6fb4b73a5e9fd934583f75302",
+      "afterSha256": "82b38ccf994fd2ab6dbf5dc7e908b53c245b1801a80a48404d64e400e5c64cb2",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        20,
+        30,
+        30,
+        430,
+        60,
+        50,
+        40,
+        100
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-hurt-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-hurt-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-hurt-v1-preview.gif",
+      "beforeSha256": "c45c515d98e928ca0a119e536f371fc6d774b3eb9e2afc75656bb55870606db6",
+      "afterSha256": "4c62546dcb06fa546a4894c4fd42cc159359f7d6095b3df7c5cf4dc3c290f12e",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        20,
+        30,
+        30,
+        430,
+        60,
+        50,
+        40,
+        100
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-birth-complete-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-birth-complete-v1-preview.webp",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-birth-complete-v1-preview.webp",
+      "beforeSha256": "b763e5e2f9bdbef03d63f7053e75f7a9158f3f7e6113578b78a707ecdcac92ce",
+      "afterSha256": "2ec51e76a2c59c83c0262c532a5b9cfb097ccde4302daa455690d502a04425c9",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 111,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        10,
+        20,
+        10,
+        30,
+        10,
+        15,
+        25,
+        10,
+        30,
+        20,
+        20,
+        10,
+        30,
+        30,
+        10,
+        40,
+        10,
+        30,
+        40,
+        40,
+        30,
+        10,
+        40,
+        40,
+        40,
+        40,
+        10,
+        30,
+        30,
+        10,
+        40,
+        20,
+        20,
+        40,
+        10,
+        30,
+        40,
+        40,
+        40,
+        40,
+        10,
+        150,
+        740
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-birth-complete-v1-from-sheet.gif": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-birth-complete-v1-from-sheet.gif",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-birth-complete-v1-from-sheet.gif",
+      "beforeSha256": "893a7d39f5415be444bce272da2643984672a2ecee9a22ab3c9280e5bf20f33a",
+      "afterSha256": "dbc2ec80f826e81cf80fc2e1b89a62518ecbeb506d270c34d8ea73505b77d1c7",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 111,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        10,
+        20,
+        10,
+        30,
+        10,
+        20,
+        20,
+        10,
+        30,
+        20,
+        20,
+        10,
+        30,
+        30,
+        10,
+        40,
+        10,
+        30,
+        40,
+        40,
+        30,
+        10,
+        40,
+        40,
+        40,
+        40,
+        10,
+        30,
+        30,
+        10,
+        40,
+        20,
+        20,
+        40,
+        10,
+        30,
+        40,
+        40,
+        40,
+        40,
+        10,
+        150,
+        740
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-death-v1-transparent-preview.webp": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-death-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-death-v1-transparent-preview.webp",
+      "beforeSha256": "38f81cd8dfe7b411e13fbdc2b377b77566b1bf79add74602fbdbe7307f635471",
+      "afterSha256": "32217fd6e9041f7e6ad6600d8c336a2c8286ab961300b7f10e06d21bb3e495fc",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        160,
+        140,
+        120,
+        120,
+        140,
+        90,
+        1330
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-death-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-death-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-death-v1-preview.gif",
+      "beforeSha256": "d7c6aadf5e107576fbfa7aeb7dffc7b77837f4792891b19e45fc2f810ee09bb7",
+      "afterSha256": "b4eda1b68dba55103f9c80a6c828590e083e68719087b3362020fbe1a308841b",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        160,
+        140,
+        120,
+        120,
+        140,
+        90,
+        1330
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-preview.gif",
+      "beforeSha256": "5c0916aaefd55a4dc2b9725fd969fc1cec2ecac7b6923890fe980279b6ccc550",
+      "afterSha256": "3845dc63b5edb26f63221fecd7f26c9095679b5fb05d47efed16e5893e42cdd4",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 9,
+      "durationsMs": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        100,
+        100,
+        1400
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-transparent-preview.webp": {
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-idle-v1-transparent-preview.webp",
+      "beforeSha256": "05436ec88f278bd80bece226d9b85967d2a1c21bb489461d84c8b1e490942dba",
+      "afterSha256": "90a63aea5741a62f2dd32a12219e0ddfb0d83ed3fecd00df7fc67c5f6c8fcf18",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 9,
+      "durationsMs": [
+        800,
+        800,
+        800,
+        800,
+        800,
+        800,
+        100,
+        100,
+        1400
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/preview.webp": {
+      "oldImage": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/preview.webp",
+      "newImage": "AnimationCandidates/bean-combo-walk-approved-v2-20261107/blade-carapace/preview.webp",
+      "beforeSha256": "9c98d91a688c5ac93dc97dc392fb462527ca2d7a4fb633e8853e44445336bfc2",
+      "afterSha256": "62a9a83f39f04d29b8bfc8d0b769200c0f959ccc86d3225b1a1e364355cabacf",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "action": "walk",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 23,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        80,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-preview.gif",
+      "beforeSha256": "ddf343656949ac460899e7181ddc3593b26699827b54a72dda9153046fcd6a72",
+      "afterSha256": "3a5dcc9012d3f425cb80c10a3e3ed18bcaf138adedb92a3048f1ea56d63fb271",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        60,
+        70,
+        140,
+        80,
+        200,
+        120,
+        80,
+        250
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-transparent-preview.webp": {
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-attack-v1-transparent-preview.webp",
+      "beforeSha256": "f471e7a36b87410104cda259bd4d93eca92c4033e49b4eeecc595b45c9da0f0f",
+      "afterSha256": "00d07cea8d6835d9cc8d6d10a74e4b54a8b325de05a7d3daa68af60b8c7d0ba9",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        60,
+        70,
+        140,
+        80,
+        200,
+        120,
+        80,
+        250
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-preview.gif",
+      "beforeSha256": "77dd8de975ca9ba869e37e895afb8efa0792b3cc2de45a6c40cbe75da5afc787",
+      "afterSha256": "e125c14c795f17e3b5ad0750335bbc861e8729babc69bbb1dc8e46864cac7010",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        20,
+        30,
+        30,
+        460,
+        30,
+        50,
+        40,
+        100
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-transparent-preview.webp": {
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-hurt-v1-transparent-preview.webp",
+      "beforeSha256": "906dfd2b30b5bef259636c5f09821920bf8a74ea3e723087d92f6fcfe55b7bea",
+      "afterSha256": "348d72cecdd201435b2375cc95655111b266296b74ac341a23fb3dc937428508",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        20,
+        30,
+        30,
+        460,
+        30,
+        50,
+        40,
+        100
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-from-sheet.gif": {
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-from-sheet.gif",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-from-sheet.gif",
+      "beforeSha256": "b6c7fac4506f8c0738bc3a91ea30c2533c8c4b56e935df36e7ff4256ea6f1cbe",
+      "afterSha256": "55dd99bfa79ca1ce7bc470077707283133db9730b6a91147c83afa0f28bd8d59",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 111,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        10,
+        20,
+        10,
+        30,
+        10,
+        20,
+        20,
+        10,
+        30,
+        20,
+        20,
+        10,
+        30,
+        30,
+        10,
+        40,
+        10,
+        30,
+        40,
+        40,
+        30,
+        10,
+        40,
+        40,
+        40,
+        40,
+        10,
+        30,
+        30,
+        10,
+        40,
+        20,
+        20,
+        40,
+        10,
+        30,
+        40,
+        40,
+        40,
+        40,
+        10,
+        150,
+        740
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-preview.webp",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-birth-complete-v1-preview.webp",
+      "beforeSha256": "70fa5bb2ecc07340c1b44e80d591414eeddf57e869c1c2fa3b866bcab70b932d",
+      "afterSha256": "6cecfa21bc48be5f9b7d3a5a8199a027eac53f6d82b1321cdc0a536eed125a0a",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 111,
+      "durationsMs": [
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        40,
+        20,
+        20,
+        40,
+        10,
+        20,
+        10,
+        30,
+        10,
+        15,
+        25,
+        10,
+        30,
+        20,
+        20,
+        10,
+        30,
+        30,
+        10,
+        40,
+        10,
+        30,
+        40,
+        40,
+        30,
+        10,
+        40,
+        40,
+        40,
+        40,
+        10,
+        30,
+        30,
+        10,
+        40,
+        20,
+        20,
+        40,
+        10,
+        30,
+        40,
+        40,
+        40,
+        40,
+        10,
+        150,
+        740
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-transparent-preview.webp": {
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-transparent-preview.webp",
+      "beforeSha256": "ef10a4d8969df4dcea5902f3a53e497d30d1444a2d3182b18186c7d08af1ac73",
+      "afterSha256": "d6512fe9eb182307cd956e9af9de03e85d77f577b1798066af2805c7c9a4f8db",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        160,
+        140,
+        120,
+        120,
+        140,
+        90,
+        1330
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-death-v1-preview.gif",
+      "beforeSha256": "37bd30fb8a6217ccf321a01e8ec7758e89418502383ca02dcb770bf00130135a",
+      "afterSha256": "3fe8e94bfa9ba524999697ccfa60876c23449da42c96d56b7e68d849b7c1f5f0",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        160,
+        160,
+        140,
+        120,
+        120,
+        140,
+        90,
+        1330
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-walk-v1-transparent-preview.webp": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-walk-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-walk-v1-transparent-preview.webp",
+      "beforeSha256": "d41eb30b38196a0ec7752908adc6d43cded05f0a4f6e067a5b14c996f8ca5783",
+      "afterSha256": "d49e630accd8d18b0f1e286532d5b6973afb81b297659c50ec30c5f6d871d739",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        40,
+        80,
+        80,
+        480,
+        80,
+        80,
+        40,
+        80
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-walk-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-walk-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/bean-blade-secretion-carapace-antenna-walk-v1-preview.gif",
+      "beforeSha256": "28a5b8ef3c83632a5bb7dc8174b761fc9b8bdc27e57fe933f1ab3fecb1bd3f6b",
+      "afterSha256": "931b9c78b30f53a5232977da55c56b9feee430070a863478e6465fd77b27c856",
+      "users": [
+        {
+          "owner": "bean/blade-secretion-carapace-antenna",
+          "manifest": "AnimationCandidates/bean-antenna-combos-fullbody-v1-20261107/blade-secretion-carapace-antenna/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 8,
+      "durationsMs": [
+        40,
+        80,
+        80,
+        480,
+        80,
+        80,
+        40,
+        80
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-preview.gif",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-preview.gif",
+      "beforeSha256": "604c5ad3a9d3bcc644fb2cb27053a72e112dbdb071ae3c03be84a3d8acbb00f6",
+      "afterSha256": "e7228d983274bb8a4deebbc8ac532810321cc7d2fe0cf371a8c2088010486dc5",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 9,
+      "durationsMs": [
+        40,
+        80,
+        80,
+        480,
+        80,
+        80,
+        40,
+        40,
+        40
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    },
+    "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-transparent-preview.webp": {
+      "oldImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-transparent-preview.webp",
+      "newImage": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/bean-blade-carapace-walk-v1-transparent-preview.webp",
+      "beforeSha256": "06738a49514d335ebd4a49ff9713bb48e3fa31cba08f15f7ab15524d7840f47c",
+      "afterSha256": "4774be6283967aeafbde2d1de63a26abc3664d7ce16c65a279e0f4ba4ddefdab",
+      "users": [
+        {
+          "owner": "bean/blade-carapace",
+          "manifest": "AnimationCandidates/bean-blade-carapace-fullbody-v1-20261107/publication-manifest.json"
+        }
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "frameCount": 9,
+      "durationsMs": [
+        40,
+        80,
+        80,
+        480,
+        80,
+        80,
+        40,
+        40,
+        40
+      ],
+      "loop": 0,
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "frameCountUnchanged": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true
+      }
+    }
+  }
+}

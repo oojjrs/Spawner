@@ -278,6 +278,12 @@ test('existing combinations and antenna singles preserve original actions except
   const remainingForms = new Set([...JSON.parse(read('tools/spring-native-facing-20261108/remaining-facing-pebble2-plan.json')).targets,...JSON.parse(read('tools/spring-native-facing-20261108/remaining-facing-pebble-extra-plan.json')).fullFamilyTargets]);
   const springBirthImages = new Set(JSON.parse(read('tools/spring-native-facing-20261108/remaining-facing-spring-birth-fix-plan.json')).mainRuntimeRegistrations.map(r=>r.image));
   const newAttacks = new Set(JSON.parse(read('tools/spring-native-facing-20261108/followup13-integration-map.json')).items.map(row=>row.source));
+  // Later user selection is a second chronological correction, not a new baseline.
+  const laterCorrection = JSON.parse(read('tools/facing-combo-audit-20261108/bean-reflect-image-changes.json'));
+  const laterSelected = new Set(['bean/blade-carapace', 'bean/blade-secretion-carapace-antenna']);
+  const rewriteLater = value => typeof value === 'string' ? (laterCorrection.pathMap[value] || value)
+    : Array.isArray(value) ? value.map(rewriteLater)
+    : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([k,v]) => [k,rewriteLater(v)])) : value;
   const expectedLeft = (key, original) => {
     const clip=structuredClone(original), change=native28[clip.image]||remainingNative[clip.image];
     if((selected28.has(key)||remainingForms.has(key)||key==='pebble/carapace-antenna')&&change){
@@ -286,6 +292,20 @@ test('existing combinations and antenna singles preserve original actions except
       for(const layer of clip.sceneLayers?.layers||[]){const layerChange=native28[layer.image]||remainingNative[layer.image];if(layerChange)layer.image=layerChange.afterPath||layerChange.newImage;for(const sample of layer.samples)if(sample)sample.destination[0]=clip.frameSize-sample.destination[0]-sample.destination[2];}
     }
     if(newAttacks.has(clip.image)||springBirthImages.has(clip.image))clip.sourceFacing='left';
+    if(laterSelected.has(key)){
+      assert.equal(laterCorrection.status,'completed');
+      const change=laterCorrection.changes[clip.image];
+      assert.ok(change,key+' explicit later source correction');
+      assert.equal(change.verification.exactRgbaMirror,true);
+      assert.equal(change.verification.alphaExact,true);
+      const width=clip.frameSize??clip.frameWidth;
+      clip.sourceFacing='left';
+      if(Number.isFinite(clip.pivotX))clip.pivotX=width-clip.pivotX;
+      if(Number.isFinite(clip.scene?.outletX))clip.scene.outletX=width-clip.scene.outletX;
+      for(const layer of clip.sceneLayers?.layers||[])for(const sample of layer.samples)if(sample)sample.destination[0]=width-sample.destination[0]-sample.destination[2];
+      // Apply the map once: its content-addressed paths can form a two-way pair.
+      return rewriteLater(clip);
+    }
     return clip;
   };
 
@@ -333,6 +353,14 @@ test('existing combinations and antenna singles preserve original actions except
   for (const entry of JSON.parse(read('AnimationCandidates/bean-combo-walk-approved-v2-20261107/approval.json')).approvedForms)
     approvedHashes.set(UNIT_ACTION_ART['bean/' + entry.form].actions.walk.image, entry.sha256);
   const normalized = {...JSON.parse(read('tools/source-facing-normalization-20261108/pixel-changes.json')).changes, ...JSON.parse(read('tools/secretion-source-normalization-20261108/pixel-changes.json')).changes, ...JSON.parse(read('tools/spring-native-facing-20261108/attack-metadata-changes.json')).changes, ...native28, ...remainingNative, ...Object.fromEntries(JSON.parse(read('tools/spring-native-facing-20261108/followup13-integration-map.json')).items.map(row=>[row.source,{afterSha256:row.candidateSHA256}]))};
-  for (const [image, hash] of Object.entries(baseline.sourceImages))
-    assert.equal(sha(image), normalized[image]?.afterSha256 || approvedHashes.get(image) || hash, image);
+  for (const [image, hash] of Object.entries(baseline.sourceImages)) {
+    let expectedHash=normalized[image]?.afterSha256 || approvedHashes.get(image) || hash;
+    const later=laterCorrection.changes[image];
+    if(later?.newImage===image){
+      assert.equal(later.beforeSha256,expectedHash,image+' chronological hash input');
+      assert.equal(later.verification.exactRgbaMirror,true);
+      expectedHash=later.afterSha256;
+    }
+    assert.equal(sha(image),expectedHash,image);
+  }
 });
