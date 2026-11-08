@@ -7,10 +7,10 @@ export const WELCOME_UNIT_APPEARANCES = Object.freeze([
 
 export const WELCOME_IDLE_DURATION_MS = 1500;
 
-// A single-character introduction should not inherit the full battlefield size
-// spread. Keep species proportions and one stable scale through every pose.
+// Use the same relative body sizes as the game. A species-specific showcase
+// compression makes unique creatures look almost as small as their base species.
 export function welcomeDisplaySize(gameSize) {
-  return .4 + (gameSize - .4) * .25;
+  return gameSize;
 }
 
 // Convert the authored planted-foot travel into the same screen scale used by

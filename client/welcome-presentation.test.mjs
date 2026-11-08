@@ -8,6 +8,7 @@ import { CREATURE_IDLE_ANIMATIONS, CREATURE_WALK_ANIMATIONS, unitMovementPositio
 import { unitStats } from "../server/attributes.mjs";
 import { unitActionArtDefinition, unitActionArtPose } from "./unit-action-art.mjs";
 import { UNIT_ACTION_ART } from "./unit-action-art-assets.mjs";
+import { unitDisplaySize } from "./unit-size.mjs";
 
 const tribes = ["bean", "spore", "pebble", "spring"];
 const species = [...Object.keys(CREATURE_IDLE_ANIMATIONS), "talon-owl", "spiny-back-beetle"];
@@ -236,11 +237,13 @@ test("compiled welcome sequence matches the weighted source roster exactly",()=>
 });
 
 
-test("welcome display sizes preserve species order with a balanced showcase spread", () => {
+test("welcome display sizes preserve in-game species proportions without extra compression", () => {
   const sizes = [.33, .345, .36, .375, .38, .39, .4, .41, .44, .46, .49, .51, .53, .56, .59, .64, .66, .7, .76, .82, .92];
   const displayed = sizes.map(welcomeDisplaySize);
   assert.equal(welcomeDisplaySize(.4), .4);
-  assert.ok(displayed.at(-1) / displayed[0] < 1.4, "smallest and largest introductions remain comparable");
+  assert.equal(welcomeDisplaySize(.92) / welcomeDisplaySize(.56), .92 / .56,
+    "white-paw keeps its in-game size ratio to shadow-weasel");
+  assert.deepEqual(displayed, sizes);
   for (let index = 1; index < sizes.length; index++) assert.ok(displayed[index] > displayed[index - 1]);
   for (const width of [320, 480, 720]) {
     const height = width * 280 / 480;
@@ -248,7 +251,23 @@ test("welcome display sizes preserve species order with a balanced showcase spre
     for (const size of sizes) {
       const cell = base * welcomeDisplaySize(size) / size;
       assert.ok(Math.abs(size * cell - base * welcomeDisplaySize(size)) < 1e-10);
-      assert.ok(size * cell <= height * .3, "all reference bodies fit mobile and desktop");
+      assert.ok(Math.abs(cell - base) < 1e-10, "every species uses the same camera scale");
+      assert.ok(size * cell <= height * .5, "all reference bodies fit mobile and desktop");
     }
+  }
+});
+
+test("actual welcome header uses one camera scale for ordinary and unique weasels", () => {
+  const source = readFileSync(new URL("./welcome-header.js", import.meta.url), "utf8");
+  const functions = source.slice(source.indexOf("  function worldPixels("), source.indexOf("  function travelMotion("));
+  for (const width of [240, 320, 480, 720]) {
+    const sizes = ["shadow-weasel", "white-paw"].map(key => {
+      const scope = { model: { unitDisplaySize, welcomeDisplaySize }, current: { key }, width, height: 280 };
+      runInNewContext(functions + "result = { cell: worldPixels(), size: motionSize() };", scope);
+      return scope.result;
+    });
+    assert.ok(Math.abs(sizes[0].cell - sizes[1].cell) < 1e-10);
+    assert.ok(Math.abs(sizes[1].size / sizes[0].size -
+      unitDisplaySize({ species: "white-paw" }) / unitDisplaySize({ species: "shadow-weasel" })) < 1e-10);
   }
 });
