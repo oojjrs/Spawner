@@ -144,6 +144,17 @@
     .colony-focus-button:hover { border-color: #75c4b6a8; background: #1b2d2d; color: #ecf5f3; }
     .colony-focus-button:focus-visible { outline: 2px solid #75c4b6; outline-offset: 2px; }
     #colony-focus { position: absolute; left: 12px; bottom: 64px; z-index: 2; }
+    .tribe-prosperity { position: absolute; left: 12px; bottom: 108px; z-index: 2; display: grid; gap: 2px; width: 172px; margin: 0; padding: 5px; list-style: none; border: 1px solid #ffffff12; border-radius: 7px; background: #14201ed9; color: #b2bfbc; font-size: 11px; line-height: 20px; font-variant-numeric: tabular-nums; pointer-events: none; }
+    .tribe-prosperity[hidden] { display: none; }
+    .tribe-prosperity li { display: grid; grid-template-columns: 12px 48px minmax(0, 1fr); align-items: center; gap: 5px; padding: 0 4px; border-radius: 3px; }
+    .tribe-prosperity-rank { color: #93a5a0; text-align: center; }
+    .tribe-prosperity-name { white-space: nowrap; }
+    .tribe-prosperity-gauge { height: 4px; overflow: hidden; border-radius: 3px; background: #ffffff12; }
+    .tribe-prosperity-gauge > span { display: block; height: 100%; border-radius: inherit; background: #819b92; transform-origin: left; transition: transform 1.2s ease; }
+    .tribe-prosperity .is-player { color: #d8eee5; background: #75c4b61a; }
+    .tribe-prosperity .is-player .tribe-prosperity-rank { color: var(--accent); }
+    .tribe-prosperity .is-player .tribe-prosperity-gauge > span { background: var(--accent); }
+    @media (prefers-reduced-motion: reduce) { .tribe-prosperity-gauge > span { transition: none; } }
     .controls-guide {
       position: fixed; right: var(--info-panel-right); bottom: 64px; z-index: 3;
       width: min(218px, calc(100vw - var(--info-panel-right) - 12px)); max-height: calc(100dvh - 140px); overflow-y: auto; padding: 12px;
@@ -983,6 +994,7 @@
   #portrait-zoom-slider:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; border-radius: 8px; }
   .zoom-layers { display: none; }
   #colony-focus { left: auto; right: 12px; bottom: 12px; min-height: 44px; }
+  .tribe-prosperity { left: 76px; bottom: 12px; width: min(172px, calc(100% - 184px)); }
   :is(.unit-panel, .colony-menu, .controls-guide) {
     bottom: calc(var(--portrait-panel-space) + 12px);
     max-height: calc(100dvh - var(--portrait-panel-space) - 28px);

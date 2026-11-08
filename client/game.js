@@ -76,6 +76,57 @@
     const portraitZoomIn = document.getElementById("portrait-zoom-in");
     const portraitZoomOut = document.getElementById("portrait-zoom-out");
     const colonyFocus = document.getElementById("colony-focus");
+    const tribeProsperity = document.createElement("ol");
+    tribeProsperity.className = "tribe-prosperity";
+    tribeProsperity.setAttribute("role", "list");
+    tribeProsperity.hidden = true;
+    const tribeProsperityRows = new Map();
+    let tribeProsperityUpdatedAt = -Infinity;
+    for (const tribe of Spawner.PLAYER_TRIBES) {
+      const row = document.createElement("li");
+      row.dataset.tribe = tribe.key;
+      const rank = document.createElement("span");
+      rank.className = "tribe-prosperity-rank";
+      rank.setAttribute("aria-hidden", "true");
+      const name = document.createElement("span");
+      name.className = "tribe-prosperity-name";
+      name.id = "tribe-prosperity-" + tribe.key;
+      name.textContent = tribe.name;
+      const gauge = document.createElement("span");
+      gauge.className = "tribe-prosperity-gauge";
+      gauge.setAttribute("role", "meter");
+      gauge.setAttribute("aria-labelledby", name.id);
+      gauge.setAttribute("aria-valuemin", "0");
+      gauge.setAttribute("aria-valuemax", "100");
+      const fill = document.createElement("span");
+      gauge.append(fill);
+      row.append(rank, name, gauge);
+      tribeProsperityRows.set(tribe.key, { row, rank, gauge, fill });
+      tribeProsperity.append(row);
+    }
+    colonyFocus.before(tribeProsperity);
+
+    function updateTribeProsperity(entries, tribe, simSeconds, reset) {
+      tribeProsperity.hidden = !tribe || !Array.isArray(entries) || entries.length !== tribeProsperityRows.size;
+      if (tribeProsperity.hidden) { tribeProsperityUpdatedAt = -Infinity; return; }
+      if (!reset && simSeconds >= tribeProsperityUpdatedAt && simSeconds - tribeProsperityUpdatedAt < 3) return;
+      tribeProsperityUpdatedAt = simSeconds;
+      const order = reset ? Spawner.PLAYER_TRIBES.map(entry => entry.key) : [...tribeProsperity.children].map(row => row.dataset.tribe);
+      const ranked = entries.filter(entry => tribeProsperityRows.has(entry.tribe)).map(entry => ({
+        tribe: entry.tribe, score: Number.isFinite(entry.score) ? Math.max(0, entry.score) : 0
+      })).sort((first, second) => second.score - first.score || order.indexOf(first.tribe) - order.indexOf(second.tribe));
+      const maximum = ranked[0]?.score || 1;
+      for (const [index, entry] of ranked.entries()) {
+        const { row, rank, gauge, fill } = tribeProsperityRows.get(entry.tribe);
+        const ratio = entry.score / maximum;
+        row.classList.toggle("is-player", entry.tribe === tribe);
+        rank.textContent = String(index + 1);
+        gauge.setAttribute("aria-valuenow", String(Math.round(ratio * 100)));
+        fill.style.transition = reset ? "none" : "";
+        fill.style.transform = "scaleX(" + ratio + ")";
+        tribeProsperity.append(row);
+      }
+    }
     const controlsGuide = document.getElementById("controls-guide");
     const controlsGuideToggle = document.getElementById("controls-guide-toggle");
     const controlsGuideClose = document.getElementById("controls-guide-close");
@@ -9654,6 +9705,7 @@
         for (const sheets of unitAnimationSheets.values()) sheets.get("death")?.attributeFrames?.clear();
       }
       Object.assign(state, view);
+      updateTribeProsperity(view.tribeProsperity, state.tribe, packet.state.simSeconds, firstSnapshot || endingStarted);
       if (!firstSnapshot && !state.ending) state.simSeconds = renderedAt;
       syncAgentMovements([...state.agents, ...state.rivals], packet.state.simSeconds, firstSnapshot);
       Spawner.syncNestGrowthPlayback(nestGrowthPlayback, colonyEntries, state.simSeconds, firstSnapshot);

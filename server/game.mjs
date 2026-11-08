@@ -2325,6 +2325,14 @@ export function createGame(environment, colony, savedGame) {
       get discoveredKinds() { return state.discoveredKinds; },
       isVisible(x, y) { return visibleCells.has(y * WORLD_SIZE + x); },
       get nestLevel() { return state.nestLevel; },
+      get prosperity() {
+        if (state.nestHealth <= 0 || state.ending && state.ending.reason !== "victory") return 0;
+        const units = state.agents.reduce((total, agent) => total + (agent.health > 0 ? Math.max(0, agent.cost || 0) : 0), 0);
+        const growth = CONQUEST_PACING.nestCosts.slice(0, state.nestLevel - 1).reduce((total, cost) => total + cost, 0);
+        const income = (state.foodIncome || []).filter(entry => entry[0] > state.simSeconds - 60 && entry[0] <= state.simSeconds)
+          .reduce((total, entry) => total + entry[1], 0);
+        return Math.max(0, state.evolutionPoints) + units + growth + income;
+      },
       get nest() { return { id: "nest:" + colony.id, colonyId: colony.id, kind: "nest", x: colony.x, y: colony.y,
         width: COLONY_SIZE, height: COLONY_SIZE, health: state.nestHealth, maxHealth: NEST_LEVELS[state.nestLevel - 1].health }; },
       receiveNestDamage(amount) {

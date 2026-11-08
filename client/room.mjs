@@ -238,7 +238,9 @@ export function snapshotRoom(room, includeWorld) {
     world: includeWorld ? { roomId: room.id, size: (room.world.size || 320), seed: room.seed, generationVersion: room.world.generationVersion, terrain: room.world.terrain, hazards: room.world.hazards, burrows: room.world.burrows, treeCells: room.world.treeCells,
       creatureHabitats: (room.world.encounters || []).map(plan => ({ key: plan.key, terrains: plan.terrains })),
       resourceCells: [...room.food.values()].filter(cell => cell.kind !== "corpse" && cell.resourceType !== "tree" && !isTreeFood(cell, room.world)).map(cell => [cell.x, cell.y]) } : undefined,
-    state: { ...state, combatVfx, beginnerHelp: beginnerHelpState(room.beginnerHelp) } };
+    state: { ...state, combatVfx, beginnerHelp: beginnerHelpState(room.beginnerHelp),
+      tribeProsperity: room.colonies.filter(colony => colony.tribe).map(colony => ({
+        tribe: colony.tribe, score: room.games.get(colony.ownerId).prosperity })) } };
 }
 
 export function commandRoom(room, action) {
