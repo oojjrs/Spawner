@@ -74,17 +74,16 @@ export function createEncounters(environment, saved, residents) {
       if (!counts.has(agent.regionId)) throw new Error("중립 유닛 소속 지역이 올바르지 않습니다.");
       counts.set(agent.regionId, counts.get(agent.regionId) + 1);
     }
-    if (!regionalSave) {
-      for (const region of record.regions) if (region.spawned && counts.get(region.id) <
-          definitions.find(definition => definition.id === region.id).populationLimit) {
-        region.missingSince = record.missingSince ?? environment.simSeconds;
-        region.nextSpawnAt = record.nextSpawnAt === null ? environment.simSeconds + type.respawnSeconds :
-          Math.max(region.missingSince, record.nextSpawnAt);
-      }
-      record.missingSince = null; record.nextSpawnAt = null;
+    record.missingSince = null; record.nextSpawnAt = null;
+    if (record.sequence > 0 || record.dead) record.spawned = true;
+    for (const region of record.regions) {
+      region.missingSince = null; region.nextSpawnAt = null;
+      if (record.spawned) region.spawned = true;
     }
   }
   state.version = 3;
+  const pending = new Set(state.records.filter(record => !record.spawned && !record.dead));
+  let populationCheckAt = -Infinity;
 
   for (const agent of state.agents) {
     delete agent.experienceContributions;
@@ -245,32 +244,24 @@ export function createEncounters(environment, saved, residents) {
 
   function populate() {
     const now = environment.simSeconds;
-    for (const record of state.records) {
+    if (!pending.size || now < populationCheckAt) return;
+    populationCheckAt = now + 1;
+    for (const record of pending) {
       const type = types.get(record.key), plan = plans.get(record.key);
-      if (type.unique && (record.spawned || record.dead)) continue;
-      if (!record.spawned && !eligible(record, type)) continue;
-      if (type.unique && !record.spawned) {
+      if (!eligible(record, type)) continue;
+      if (type.unique) {
         relocate(record, plan);
         if (!plan.spawnPoints) { regionPlans.get(record.key)[0].x = record.x; regionPlans.get(record.key)[0].y = record.y; }
       }
-      const counts = new Map(record.regions.map(region => [region.id, 0]));
-      for (const agent of state.agents) if (agent.species === record.key && agent.health > 0)
-        counts.set(agent.regionId, counts.get(agent.regionId) + 1);
-      for (const region of record.regions) {
-        const definition = regionPlans.get(record.key).find(definition => definition.id === region.id);
-        let living = counts.get(region.id);
-        if (!region.spawned) {
-          while (living < definition.populationLimit && spawn(record, true, definition)) living++;
-          region.spawned = living >= definition.populationLimit;
-        } else if (living < definition.populationLimit) {
-          if (region.missingSince === null) { region.missingSince = now; region.nextSpawnAt = now + type.respawnSeconds; }
-          if (now >= region.nextSpawnAt && spawn(record, false, definition)) {
-            living++; region.nextSpawnAt = now + type.respawnSeconds;
-          }
+      for (const definition of regionPlans.get(record.key)) {
+        for (let count = 0; count < definition.populationLimit; count++) {
+          if (!spawn(record, true, definition)) break;
         }
-        if (living >= definition.populationLimit) { region.missingSince = null; region.nextSpawnAt = null; }
-        if (type.unique && living > 0) break;
+        if (type.unique && record.spawned) break;
       }
+      record.spawned = true;
+      for (const region of record.regions) region.spawned = true;
+      pending.delete(record);
     }
   }
 
@@ -328,6 +319,7 @@ export function createEncounters(environment, saved, residents) {
 
   function tick() {
     populate();
+    if (!state.agents.length) return;
     const now = environment.simSeconds, nearby = players(), buildings = creatureNestTargets(environment);
     for (const agent of [...state.agents]) {
       if (agent.health <= 0 || creatureSpawning(agent, now)) continue;
@@ -450,7 +442,6 @@ export function createEncounters(environment, saved, residents) {
     record.dead = type.unique && !state.agents.some(entry => entry.species === agent.species && entry.health > 0);
     const region = record.regions.find(region => region.id === agent.regionId);
     region.spawned = true;
-    if (!type.unique && region.missingSince === null) { region.missingSince = environment.simSeconds; region.nextSpawnAt = environment.simSeconds + type.respawnSeconds; }
     state.agents = state.agents.filter(entry => entry !== agent);
     environment.unitIndex?.remove(agent);
     placeCorpse(environment.food, { x: agent.x, y: agent.y, agentId: agent.id, kind: "corpse", species: agent.species,

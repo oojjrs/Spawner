@@ -1,3 +1,4 @@
+import { dnaCanAttack } from "./dna-unit.mjs";
 import { DNA_ACTION_RULES, dnaAttackMode, dnaDefensiveMelee } from "./dna-actions.mjs";
 import { creatureAttackRole, creatureAttackMode } from "./creature-attack-role.mjs";
 import { unitDisplaySize } from "../client/unit-size.mjs";
@@ -38,7 +39,7 @@ export function combatSeparation(agent, target) {
 
 export function combatPositionMode(agent, target) {
   const distance = combatSeparation(agent, target);
-  if (agent.stats?.dna) return dnaAttackMode(agent.stats.dna, distance, agent.combat?.defending || agent.stats.dna.hunting);
+  if (agent.stats?.dna) return dnaAttackMode(agent.stats.dna, distance, agent.combat?.defending || dnaCanAttack(agent));
   if (agent.species) return creatureAttackMode(agent, distance);
   return distance <= DNA_ACTION_RULES.meleeRange ? "melee" : null;
 }
@@ -64,7 +65,7 @@ export function advanceCombatPositions(units, time) {
     const role = combatPositionRole(unit), capabilities = unit.stats?.dna || creatureAttackRole(unit.species);
     const separation = combatSeparation(unit, target), dx = point.x - position.x, dy = point.y - position.y;
     const length = Math.hypot(dx, dy) || 1;
-    const defensiveMelee = dnaDefensiveMelee(unit.stats?.dna) && (unit.combat.defending || unit.stats.dna.hunting);
+    const defensiveMelee = dnaDefensiveMelee(unit.stats?.dna) && (unit.combat.defending || dnaCanAttack(unit));
     if (capabilities && !capabilities.melee && !capabilities.ranged && !defensiveMelee) { next.set(unit, { x: position.x, y: position.y }); continue; }
     const closeMelee = capabilities?.melee && separation <= DNA_ACTION_RULES.meleeRange;
     const desired = role === "back" && capabilities?.ranged && !closeMelee ? 2.3 : .75;

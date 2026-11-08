@@ -28,9 +28,10 @@ export function createCheats(document, onCommand) {
   });
   const buttons = [
     ["cheat-evolution-points", "진화 +1만", "보유 한도를 넘어 진화 포인트를 10,000점 지급합니다."],
-    ["cheat-resources", "재료 +100", "모든 종류의 재료를 창고에 100개씩 지급합니다."],
     ["cheat-upgrade", "둥지 +1", "진화 포인트를 사용하지 않고 둥지를 한 단계 성장시킵니다."],
     ["cheat-heal", "전체 회복", "내 생존 유닛과 본둥지의 체력을 모두 회복합니다. 전초둥지는 회복하지 않습니다."],
+    ["cheat-raid", "습격", "습격"],
+    ["cheat-victory", "승리", "승리"],
     ["cheat-extinction", "멸망", "내 종족의 모든 유닛을 사망시키고 진화 포인트를 0으로 만들어 멸망시킵니다."]
   ].map(([type, label, help]) => {
     const button = document.createElement("button");

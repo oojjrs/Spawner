@@ -38,8 +38,7 @@ function deliver(resourceType, points, tribe, inventory, indexed) {
 function queuedDelivery(count) {
   const result = fixture("bean"), saved = JSON.parse(result.game.save());
   saved.state.agents.splice(count);
-  saved.state.evolutionPoints = 100;
-  saved.state.resourceInventory = { tree: result.game.snapshot().resourceCapacity - 2 };
+  saved.state.evolutionPoints = 198;
   for (const [index, agent] of saved.state.agents.entries()) Object.assign(agent, {
     x: 40, y: 40, renderFromX: 40, renderFromY: 40, carrying: 2, carryingType: index ? "dew" : "pebbles",
     mode: index ? "unload" : "return", unloadReady: 120.3, birth: null, bornAt: 0, survivalState: "stable",
@@ -59,7 +58,7 @@ function deliveryTick(context, time, indexed) {
   finally { context.environment.unitIndex = null; }
 }
 
-test("원재료 납품 대기는 포인트 한도 때문에 재판단하지 않고 실제 운반 수량을 표시한다", () => {
+test("납품 대기는 포인트 여유가 있으면 실제 운반 수량을 표시하고 완료한다", () => {
   for (const indexed of [false, true]) {
     const context = queuedDelivery(1), agent = context.game.agents[0], decisions = agent.decisionCount;
     deliveryTick(context, 120.1, indexed);
@@ -69,19 +68,19 @@ test("원재료 납품 대기는 포인트 한도 때문에 재판단하지 않�
     assert.equal(agent.decisionCount, decisions);
     assert.equal(agent.unloadReady, arrival);
     deliveryTick(context, arrival, indexed);
-    assert.equal(context.game.snapshot().resourceInventory.pebbles, 2);
+    assert.equal(context.game.snapshot().evolutionPoints, 200);
     assert.equal(agent.carrying, 0);
   }
 });
 
-test("다른 개체가 창고를 채우면 캐시된 납품 대기도 다음 틱에 다시 판단한다", () => {
+test("다른 개체가 포인트 한도를 채우면 캐시된 납품 대기도 다음 틱에 다시 판단한다", () => {
   for (const indexed of [false, true]) {
     const context = queuedDelivery(2), agent = context.game.agents[0];
     deliveryTick(context, 120.1, indexed);
     deliveryTick(context, 120.2, indexed);
     const decisions = agent.decisionCount;
     deliveryTick(context, 120.3, indexed);
-    assert.equal(context.game.snapshot().resourceInventory.dew, 2);
+    assert.equal(context.game.snapshot().evolutionPoints, 200);
     deliveryTick(context, 120.4, indexed);
     assert.ok(agent.decisionCount > decisions);
     assert.equal(agent.lastDecisionReason, "completed");
@@ -102,48 +101,47 @@ test("새싹콩의 기본 자원은 비옥토이며 버섯은 누구도 채집�
 
 test("비옥토는 포인트 여유만큼 전환하고 초과 적재물을 보존한다", () => {
   for (const indexed of [false, true]) {
-    const game = deliver("clay", 99, "bean", null, indexed), state = game.snapshot();
-    assert.equal(state.evolutionPoints, 100);
+    const game = deliver("clay", 199, "bean", null, indexed), state = game.snapshot();
+    assert.equal(state.evolutionPoints, 200);
     assert.equal(state.colonyFood, 1);
     assert.equal(game.agents[0].carrying, 1);
     assert.equal(game.agents[0].carryingType, "clay");
-    assert.equal(state.resourceInventory.clay, undefined);
+    assert.equal(state.resourceInventory, undefined);
   }
 });
 
-test("진화 포인트가 가득 차면 기본 자원을 창고에 우회 납품하지 않는다", () => {
+test("진화 포인트가 가득 차면 모든 운반물을 그대로 보존한다", () => {
   for (const indexed of [false, true]) {
-    const game = deliver("clay", 100, "bean", null, indexed), state = game.snapshot();
-    assert.equal(state.evolutionPoints, 100);
-    assert.equal(state.resourceInventory.clay, undefined);
+    const game = deliver("clay", 200, "bean", null, indexed), state = game.snapshot();
+    assert.equal(state.evolutionPoints, 200);
+    assert.equal(state.resourceInventory, undefined);
     assert.equal(state.colonyFood, 0);
     assert.equal(game.agents[0].carrying, 2);
     assert.ok(!game.agents[0].foodDelivery);
   }
 });
 
-test("원재료 창고도 가득 차면 남은 포인트 한도만 납품하고 나머지 적재물을 보존한다", () => {
+test("구저장 재고를 포인트로 합산하고 남은 한도만 납품한다", () => {
   for (const indexed of [false, true]) {
-    const game = deliver("clay", 99, "bean", { tree: 200 }, indexed), state = game.snapshot();
-    assert.equal(state.evolutionPoints, 100);
+    const game = deliver("clay", 99, "bean", { tree: 100 }, indexed), state = game.snapshot();
+    assert.equal(state.evolutionPoints, 200);
     assert.equal(state.colonyFood, 1);
-    assert.equal(state.resourceInventory.tree, 200);
-    assert.equal(state.resourceInventory.clay, undefined);
+    assert.equal(state.resourceInventory, undefined);
     assert.equal(game.agents[0].carrying, 1);
     assert.equal(game.agents[0].carryingType, "clay");
   }
 });
 
-test("다른 종족의 기본 자원은 포인트가 가득 차도 재료로 납품하고 저장 후에도 유지한다", () => {
+test("옛 저장의 다른 종족 운반물도 납품하면 포인트가 되고 저장 후 유지한다", () => {
   const game = deliver("dew", 100, "bean");
-  assert.equal(game.snapshot().evolutionPoints, 100);
-  assert.equal(game.snapshot().colonyFood, 0);
-  assert.equal(game.snapshot().resourceInventory.dew, 2);
+  assert.equal(game.snapshot().evolutionPoints, 102);
+  assert.equal(game.snapshot().colonyFood, 2);
+  assert.equal(game.snapshot().resourceInventory, undefined);
   game.restore(game.save());
-  assert.equal(game.snapshot().resourceInventory.dew, 2);
+  assert.equal(game.snapshot().evolutionPoints, 102);
   const other = deliver("clay", 0, "spore");
-  assert.equal(other.snapshot().evolutionPoints, 0);
-  assert.equal(other.snapshot().resourceInventory.clay, 2);
+  assert.equal(other.snapshot().evolutionPoints, 2);
+  assert.equal(other.snapshot().resourceInventory, undefined);
 });
 
 test("새싹콩의 시작 먹이 전환은 위치와 잔량을 보존하고 먼 버섯과 다른 부족을 유지한다", () => {
@@ -187,4 +185,23 @@ test("비옥토의 13프레임 시퀀스는 실제 수확 성공 후 접촉부�
   assert.equal(harvestPlaybackPose(playback, { ...cell, amount: 1 }, [], 4.295, definition).frame, 9);
   assert.equal(harvestPlaybackPose(playback, { ...cell, amount: 1 }, [], 4.33, definition).frame, 11);
   assert.equal(harvestPlaybackPose(playback, { ...cell, amount: 1 }, [], 4.35, definition).frame, 12);
+});
+
+test("소수 운반물도 손실 없이 같은 양의 포인트로 납품하고 저장한다", () => {
+  const result = fixture("bean"), saved = JSON.parse(result.game.save());
+  saved.state.agents.splice(1);
+  saved.state.evolutionPoints = 199.5;
+  Object.assign(saved.state.agents[0], { x: 40, y: 40, renderFromX: 40, renderFromY: 40,
+    carrying: .8, carryingType: "clay", mode: "unload", unloadReady: 120, birth: null,
+    moveDuration: 0, moveStartedAt: 0, decisionPending: null, nextDecisionAt: 1000,
+    returnPath: [], utility: { action: "return", target: { x: 40, y: 40, key: "home" }, route: [{ x: 40, y: 40 }] } });
+  result.game.restore(JSON.stringify(saved));
+  deliveryTick(result, 120.1, false);
+  assert.equal(result.game.snapshot().evolutionPoints, 200);
+  assert.equal(result.game.snapshot().colonyFood, .5);
+  assert.equal(result.game.agents[0].carrying, .3);
+  result.game.restore(result.game.save());
+  assert.equal(result.game.snapshot().evolutionPoints, 200);
+  assert.equal(result.game.snapshot().colonyFood, .5);
+  assert.equal(result.game.agents[0].carrying, .3);
 });

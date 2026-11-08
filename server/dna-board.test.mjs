@@ -10,8 +10,8 @@ function piece(id){const gene=M.lookup.get(id);return {gene:id,grade:gene.grade,
 function arrangement(ids,level){return {version:6,pieces:M.pack(ids.map(piece),level),budget:1000,level};}
 function signature(points){let variants=[];for(let mirror=0;mirror<2;mirror++){for(let turn=0;turn<6;turn++){const sorted=points.slice().sort((a,b)=>a.q-b.q||a.r-b.r),origin=sorted[0];variants.push(JSON.stringify(sorted.map(p=>[p.q-origin.q,p.r-origin.r])));points=points.map(p=>({q:-p.r,r:p.q+p.r}));}points=points.map(p=>({q:p.r,r:p.q}));}return variants.sort()[0];}
 
-test("39개 조각은 연결된 칸 모양이며 레벨별 4·5·6·8칸이며 회전·반사해도 서로 다르다",()=>{
-  assert.equal(M.catalog.length,39);const shapes=new Set(),sizes=new Set();
+test("40개 조각은 연결된 칸 모양이며 레벨별 4·5·6·8칸이며 회전·반사해도 서로 다르다",()=>{
+  assert.equal(M.catalog.length,40);const shapes=new Set(),sizes=new Set();
   for(const gene of M.catalog){
     const cells=M.pieceCells(piece(gene.id)),remaining=new Set(cells.map(M.key)),queue=[cells[0]];remaining.delete(M.key(cells[0]));
     for(const point of queue)for(const [q,r] of [[1,0],[0,1],[-1,1],[-1,0],[0,-1],[1,-1]]){const next={q:point.q+q,r:point.r+r};if(remaining.delete(M.key(next)))queue.push(next);}

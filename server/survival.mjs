@@ -1,3 +1,5 @@
+import { dnaCanAttack } from "./dna-unit.mjs";
+import { militaryAgent } from "./conquest-pacing.mjs";
 import { combatDamage } from "./combat-stats.mjs";
 import { unitTravelSpeed } from "./attributes.mjs";
 
@@ -5,18 +7,36 @@ export const RETREAT_RECOVERY_RATIO = .7;
 export const RETREAT_SAFE_SECONDS = 5;
 export const RETREAT_ESCAPE_CHANCE = .15;
 
+export function canRetreat(agent) {
+  return !agent.ownerId || !(dnaCanAttack(agent) || militaryAgent(agent, agent.tribe) || agent.combatDisposition === "aggressive");
+}
+
 export function survivalState(agent, damage) {
+  if (!canRetreat(agent)) return "stable";
   if (damage > 0 && (damage >= agent.health * .85 || agent.health <= agent.stats.health * .3)) return "critical";
   if (agent.health < agent.stats.health * .6 || damage >= agent.health * .35) return "caution";
   return "stable";
 }
 
 export function beginRetreat(agent, time) {
+  if (!canRetreat(agent)) { updateRetreat(agent, time, false); return; }
   if (!agent.retreat) agent.retreat = { startedAt: time, recoverHealth: Math.max(agent.health,
     agent.stats.health * RETREAT_RECOVERY_RATIO), safeSince: null, attempts: 0 };
 }
 
 export function updateRetreat(agent, time, threatened) {
+  if (!canRetreat(agent)) {
+    const changed = !!agent.retreat || agent.escapeUntil > 0;
+    agent.retreat = null;
+    agent.escapeUntil = 0;
+    if (["flee", "recover"].includes(agent.utility?.action) || ["flee", "recover", "rest"].includes(agent.mode)) {
+      agent.utility = null;
+      agent.mode = agent.combat ? "fight" : "search";
+      agent.decisionPending = "survival";
+      return true;
+    }
+    return changed;
+  }
   if (!agent.retreat) return false;
   if (threatened || agent.health < agent.retreat.recoverHealth) {
     agent.retreat.safeSince = null;
@@ -39,11 +59,12 @@ export function combatSurvival(agent, opponents, allies) {
   const ownPower = target ? supporters.reduce((sum, ally) => sum + power(ally, target), 0) : 0;
   const enemyPower = opponents.reduce((sum, enemy) => sum + power(enemy, agent), 0);
   const state = survivalState(agent, damage);
-  return { state, damage, retreat: damage > 0 && (state === "critical" || state === "caution" &&
+  return { state, damage, retreat: canRetreat(agent) && damage > 0 && (state === "critical" || state === "caution" &&
     (agent.health < agent.stats.health * .5 || enemyPower > ownPower * 1.25)) };
 }
 
 export function retreatEscapeChance(agent, opponents) {
+  if (!canRetreat(agent)) return 0;
   const speed = unit => unit.species ? unit.stats.speed : unitTravelSpeed(unit, unit.carrying);
   const fastest = Math.max(.1, ...opponents.map(speed));
   const suppression = Math.max(0, ...opponents.map(enemy => enemy.stats.escapeSuppression || 0));

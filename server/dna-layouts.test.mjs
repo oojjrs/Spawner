@@ -51,12 +51,16 @@ test("상위 32종은 16개 짝에서 깊게 맞물리고 겹치지 않는다", 
   assert.deepEqual([...seen].sort(), M.catalog.filter(gene => gene.grade > 1).map(gene => gene.id).sort());
 });
 
-test("근접 완성형은 직접 타격 8종 탐색의 최고 화력을 유지한다", () => {
-  for (const [level, minimum] of [[2, 27.7499], [3, 189.5342], [4, 545.4416]]) {
+test("근접 완성형은 체력을 배분하고 단계별 화력을 높인다", () => {
+  let previous = 0;
+  for (const level of [2, 3, 4]) {
     const layout = DNA_LAYOUTS.find(layout => layout.role === 'melee' && layout.level === level);
     const stats = M.stats(layout.pieces, 'bean');
+    assert.ok(layout.counts.health > 0, 'Lv.' + level);
+    assert.ok(layout.counts.power > 0 && layout.counts.blade === 1, 'Lv.' + level);
     const damage = stats.meleePower * (1 + (stats.hits - 1) * stats.comboPower / 100) * (1 + stats.critical / 100 * (stats.criticalPower / 100 - 1));
     const cycle = stats.focus + .7 + (stats.hits - 1) * stats.comboSpeed + 1 / stats.meleeSpeed;
-    assert.ok(damage / cycle >= minimum, 'Lv.' + level);
+    assert.ok(damage / cycle > previous, 'Lv.' + level);
+    previous = damage / cycle;
   }
 });

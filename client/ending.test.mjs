@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
+import { createCombatAttributeArt } from "./combat-attributes.mjs";
 import { createStateEncoder } from "./state-delta.mjs";
 
 const source = readFileSync(new URL("./worker.mjs", import.meta.url), "utf8").replace(/^import .*;\r?\n/gm, "");
@@ -104,7 +105,7 @@ function presentation() {
   const nodes = new Map();
   const properties = new Map();
   const report = { open: false, showModal() { this.open = true; }, close() { this.open = false; } };
-  const state = { simSeconds: 180, ending: { endedAt: 180, reason: "extinction", bornCount: 2,
+  const state = { simSeconds: 180, agents: [], corpses: [], ending: { endedAt: 180, reason: "extinction", bornCount: 2,
     exploredCells: 32, discoveryCount: 3, nestLevel: 1, colonyFood: 0 } };
   const context = createContext({ Spawner: { hasCombatEvolution: () => false }, state, connection: { roomId: "test", colonyId: 1, active: true },
     endingReport: report, endingToolbar: { hidden: true },
@@ -113,6 +114,9 @@ function presentation() {
     document: { body: { dataset: { screen: "game" } },
       getElementById(id) { if (!nodes.has(id)) nodes.set(id, { focus() {}, replaceChildren() {} }); return nodes.get(id); },
       createDocumentFragment: () => ({ append() {} }), createElement: () => ({ append() {} }) },
+    combatAttributeArt: createCombatAttributeArt(() => "", () => ({}), async () => ({})),
+    unitAnimationSheets: new Map(), agentListButtons: new Map(), agentAvatars: new Map(),
+    renderedAgentListSignature: "", updateAgentList() {},
     performance: { now: () => 0 }, colonyEntries: [{ id: 1, name: "마지막 둥지" }], idleMotion: { matches: false },
     clamp: (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, value)),
     closeCodex() {}, closeEvolutionPanel() {}, closeColonyMenu() {}, closeUnitPanel() {}, hideHelpTooltip() {},
@@ -122,7 +126,7 @@ function presentation() {
       return { action: "death" };
     } }
   });
-  for (const name of ["resetEnding", "openEndingReport", "corpsePlaybackTime", "updateEndingPresentation", "updateEnding", "colonyInactive", "drawAgentCorpse"]) {
+  for (const name of ["resetEnding", "openEndingReport", "corpsePlaybackTime", "updateEndingPresentation", "updateEnding", "colonyInactive", "drawAgentCorpse", "expireClientCorpses"]) {
     runInContext(gameDeclaration(name), context);
   }
   return { context, state, report, fade: () => Number(properties.get("--ending-fade")),
@@ -203,4 +207,46 @@ test("엔딩 진입은 재생 중인 브금을 정지하거나 다른 곡으로 
   assert.ok(sounds.some(sound => sound.src === "combat.mp3" && sound.plays === 1));
   music.update({ simSeconds: 20, agents: [], rivals: [], ending: { endedAt: 20 } });
   assert.deepEqual(sounds.map(sound => [sound.src, sound.pauses, sound.plays]), before);
+});
+
+
+test("사체 3초 만료 후에도 회색 전환을 끝내고 4초에 보고서를 연다", () => {
+  const scene = presentation();
+  scene.state.corpses.push({ id: "last-corpse", diedAt: 180, decaysAt: 183 });
+  scene.start(true);
+  scene.advance(3000);
+  assert.doesNotThrow(() => scene.context.expireClientCorpses());
+  assert.equal(scene.state.corpses.length, 0);
+  assert.equal(scene.report.open, false);
+  scene.advance(1000);
+  assert.equal(scene.report.open, true);
+  assert.equal(scene.fade(), 1);
+});
+
+test("승리는 즉시 보고서를 열고 지도와 생존 둥지를 정상 색으로 유지한다", () => {
+  const scene = presentation();
+  scene.state.ending.reason = "victory";
+  scene.state.agents.push({ health: 10 });
+  scene.start(true);
+  assert.equal(scene.report.open, true);
+  assert.equal(scene.fade(), 0);
+  assert.equal(scene.context.document.body.dataset.ending, "victory");
+  assert.equal(scene.context.document.getElementById("ending-title").textContent, "승리");
+  assert.equal(scene.context.document.getElementById("ending-reason").hidden, true);
+  assert.equal(scene.context.colonyInactive({ id: 1, nestHealth: 100 }), false);
+  scene.report.close();
+  scene.advance(1000);
+  assert.equal(scene.report.open, false);
+  assert.equal(scene.fade(), 0);
+  scene.context.openEndingReport();
+  assert.equal(scene.report.open, true);
+  scene.context.resetEnding();
+  scene.start(false);
+  assert.equal(scene.report.open, true);
+  assert.equal(scene.fade(), 0);
+  scene.context.resetEnding();
+  scene.state.ending.reason = "extinction";
+  scene.start(false);
+  assert.equal(scene.context.document.getElementById("ending-title").textContent, "마지막 불씨가 꺼졌습니다");
+  assert.equal(scene.fade(), 1);
 });

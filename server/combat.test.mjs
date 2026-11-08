@@ -79,14 +79,14 @@ test("후퇴 중인 아군은 같은 셀의 전투에 자동 합류하지 않지
   assert.equal(canPursueCombat(ally, b, 5), false);
 });
 
-test("탈출할 인접 셀이 없으면 위급해도 멈추지 않고 마지막 전투를 수행한다", () => {
-  const a = unit("a", "left", "aggressive"), b = unit("b", "right", "passive");
+test("탈출할 인접 셀이 없으면 위급한 일꾼도 멈추지 않고 마지막 전투를 수행한다", () => {
+  const a = unit("a", "left", "passive"), b = unit("b", "right", "aggressive");
   a.health = 20;
   const f = fixture([a, b]);
   for (const [x, y] of [[99, 100], [101, 100], [100, 99], [100, 101]]) f.environment.world.terrain[y * 320 + x] = 0;
   let rolls = 0;
   f.environment.combatRandom = () => { rolls++; return 0; };
-  f.tick(0);
+  for (let step = 0; step <= 60 && !a.attack; step++) f.tick(step / 20);
   assert.ok(a.attack);
   assert.ok(a.retreat);
   assert.equal(rolls, 0);
@@ -402,33 +402,47 @@ test("방어 반격의 저장 복원은 명중을 한 번 처리하고 일반 �
   again.tick(counter.hitAt + .01); assert.deepEqual(again.hits, []);
 });
 
-test("후퇴 저장은 명중 횟수와 탈출 대기 시각을 유지하고 다음 공격 전에 탈출한다", () => {
+test("일꾼의 후퇴 저장은 탈출 대기를 유지하고 안전한 칸으로 탈출한다", () => {
   const f = pair(); f.a.health = 20;
-  f.a.attributes.antenna = 1; // This fixture fights far from any nest.
+  f.a.combatDisposition = "passive"; f.b.combatDisposition = "aggressive";
   f.a.stats.attackPower = f.b.stats.attackPower = 1;
-  f.tick(0); f.tick(.4);
-  assert.ok(f.a.retreat); assert.equal(f.a.combat.completedExchanges, 2);
-  const saved = JSON.parse(JSON.stringify([f.a, f.b])), next = fixture(saved); let rolls = 0;
-  next.environment.combatRandom = () => { rolls++; return 0; };
-  next.tick(.4); next.tick(1.25);
-  assert.equal(rolls, 0); assert.ok(saved[0].combat);
-  next.tick(2.5);
-  assert.equal(rolls, 1); assert.equal(saved[0].combat, null);
-  assert.equal(saved[0].retreat.attempts, 1); assert.equal(saved[0].mode, "flee");
+  let time = 0;
+  for (let step = 0; step <= 200 && !(f.a.retreat?.attempts > 0); step++) {
+    time = step / 20;
+    f.tick(time);
+  }
+  assert.ok(f.a.retreat.attempts > 0);
+  const saved = JSON.parse(JSON.stringify([f.a, f.b])), next = fixture(saved);
+  const attempts = saved[0].retreat.attempts, nextEscapeAt = saved[0].combat.nextEscapeAt;
+  next.environment.combatRandom = () => 0;
+  next.tick(time);
+  assert.equal(saved[0].retreat.attempts, attempts);
+  assert.equal(saved[0].combat.nextEscapeAt, nextEscapeAt);
+  for (let step = 1; step <= 200 && saved[0].combat; step++) next.tick(time + step / 20);
+  assert.equal(saved[0].combat, null);
+  assert.equal(saved[0].retreat.attempts, attempts + 1);
+  assert.equal(saved[0].mode, "flee");
   assert.equal(Math.abs(saved[0].x - 100) + Math.abs(saved[0].y - 100), 1);
 });
 
-test("후퇴 탈출 실패 뒤에도 공격을 계속하고 같은 시각에 재시도하지 않는다", () => {
+test("일꾼은 후퇴 탈출 실패 뒤에도 공격을 계속하고 같은 시각에 재시도하지 않는다", () => {
   const f = pair(); f.a.health = 20;
-  f.a.attributes.antenna = 1; // This fixture fights far from any nest.
+  f.a.combatDisposition = "passive"; f.b.combatDisposition = "aggressive";
   f.a.stats.attackPower = f.b.stats.attackPower = 1;
-  let rolls = 0; f.environment.combatRandom = () => { rolls++; return .99; };
-  f.tick(0); f.tick(2.5);
-  assert.equal(rolls, 1); assert.ok(f.a.attack); assert.ok(f.a.combat);
-  assert.equal(f.a.combat.attackCount, 3);
-  const count = f.hits.length;
-  f.tick(2.5); assert.equal(rolls, 1); assert.equal(f.hits.length, count);
-  f.tick(f.a.attack.hitAt); assert.ok(f.hits.length > count);
+  let time = 0;
+  for (let step = 0; step <= 200 && !(f.a.retreat?.attempts > 0); step++) {
+    time = step / 20;
+    f.tick(time);
+  }
+  assert.ok(f.a.retreat.attempts > 0);
+  assert.ok(f.a.combat);
+  const attempts = f.a.retreat.attempts, count = f.hits.length;
+  f.tick(time);
+  assert.equal(f.a.retreat.attempts, attempts);
+  assert.equal(f.hits.length, count);
+  for (let step = 1; step <= 200 && f.hits.length === count; step++) f.tick(time + step / 20);
+  assert.ok(f.hits.length > count);
+  assert.ok(f.a.combat);
 });
 
 // Coverage retained from the exchange-era regression suite: death/corpse state,

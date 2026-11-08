@@ -111,7 +111,7 @@ test("전투 수치를 바꿔도 4종족의 이속·시야·운반 수치는 유
     assert.ok(Math.abs(stats.speed - speeds[tribe.key]) < 1e-12);
     assert.equal(stats.vision, 6);
     assert.equal(stats.capacity, 2);
-    assert.equal("lifespan" in stats, false);
+    assert.equal(stats.lifespan, 300);
     assert.equal(stats.resistance, 1);
     assert.equal(stats.combatStrength, unitCombatStats(tribe.key).combatStrength);
   }

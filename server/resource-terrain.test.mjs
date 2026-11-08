@@ -109,10 +109,10 @@ test("폐기한 낙엽은 저장 복원 시 지점·기억·운반·알림에서
   const snapshot = restored.games.get(saved.games[0][0]).snapshot();
   assert.deepEqual([...restored.food], saved.food.filter(([, cell]) => cell.resourceType !== "dry-leaves"));
   assert.ok(snapshot.food.every(cell => cell.resourceType !== "dry-leaves"));
-  assert.deepEqual(snapshot.resourceInventory, { "pebbles": 7 });
+  assert.equal(snapshot.resourceInventory, undefined);
   assert.ok(snapshot.discoveries.every(entry => entry.key !== "material:dry-leaves"));
   assert.equal(snapshot.discoveryReadCount, 1);
-  assert.equal(snapshot.evolutionPoints, data.state.evolutionPoints);
+  assert.equal(snapshot.evolutionPoints, data.state.evolutionPoints + 7);
   const agent = snapshot.agents.find(entry => entry.id === id);
   assert.equal(agent.carrying, 0);
   assert.equal(agent.carryingType, null);
@@ -140,7 +140,8 @@ test("폐기 자원을 모든 저장 경로에서 제거하고 비옥토는 보�
   saved.games[0][1] = JSON.stringify(data);
   const restored = restoreRoom(saved);
   const snapshot = restored.games.get(saved.games[0][0]).snapshot();
-  assert.deepEqual(snapshot.resourceInventory, { "clay": 7 });
+  assert.equal(snapshot.resourceInventory, undefined);
+  assert.equal(snapshot.evolutionPoints, data.state.evolutionPoints + 7);
   assert.ok(snapshot.discoveries.every(entry => !types.some(type => entry.key === "material:" + type)));
   assert.equal(snapshot.discoveries.filter(entry => entry.key === "material:clay").length, 1);
   for (const cell of restored.food.values()) assert.equal(types.includes(cell.resourceType), false);

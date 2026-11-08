@@ -1,4 +1,4 @@
-import { createRoom, chooseRoomTribe, saveRoom, restoreRoom, tickRoom, snapshotRoom, commandRoom } from "./room.mjs";
+import { createRoom, chooseRoomTribe, saveRoom, restoreRoom, tickRoom, snapshotRoom, commandRoom, updateRoomBeginnerHelp } from "./room.mjs";
 import { openStorage } from "./storage.mjs";
 import { createStateEncoder } from "./state-delta.mjs";
 import { createDecisionPool } from "./decision-pool.mjs";
@@ -78,7 +78,7 @@ async function handle(type, data, id) {
   if (type === "create") {
     await persist();
     if (!Number.isInteger(data.seed) || data.seed < 0 || data.seed > 4294967295) throw new Error("시드는 0~4294967295 사이의 정수로 입력해 주세요.");
-    const next = createRoom(data.title, data.seed, null, progress => postMessage({ id, type: "progress", progress: progress * .95 }), data.cheats);
+    const next = createRoom(data.title, data.seed, null, progress => postMessage({ id, type: "progress", progress: progress * .95 }), data.cheats, data.beginnerHelpEnabled);
     await storage.put(saveRoom(next));
     postMessage({ id, type: "progress", progress: 1 });
     room = next;
@@ -127,6 +127,14 @@ async function handle(type, data, id) {
     running = !!room && visible && room.colonies.find(colony => colony.ownerId === room.hostId).tribe !== null && !room.games.get(room.hostId).ending;
     publish(false);
     return null;
+  }
+  if (type === "beginner-help") {
+    if (!room || room.id !== data.roomId) throw new Error("방을 다시 열어 주세요.");
+    const result = updateRoomBeginnerHelp(room, data.patch);
+    dirty = true;
+    await persist();
+    publish(false);
+    return result;
   }
   if (type === "command") {
     if (!room || room.id !== data.roomId || storageError) throw new Error("월드를 다시 열어 주세요.");

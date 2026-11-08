@@ -45,7 +45,7 @@ test('시작 일꾼은 저장 복원 뒤에도 적 탐색 없이 둥지 밖으�
   }
 });
 
-test('전투 도주는 안테나 없이도 옛 둥지 경계 밖의 안전한 칸을 사용한다', () => {
+test('전사는 안테나 없이 체력이 낮아져도 전투에서 도주하지 않는다', () => {
   const player = {...legacy(),id:'player',x:47,y:42,renderFromX:47,renderFromY:42,health:20,
     combatDisposition:'aggressive',stats:{health:100,attack:1,attackPower:1,speed:1,vision:4},moveStartedAt:0,moveDuration:0};
   const enemy = {...player,id:'enemy',ownerId:'enemy',health:100,attributes:{antenna:1}};
@@ -58,6 +58,6 @@ test('전투 도주는 안테나 없이도 옛 둥지 경계 밖의 안전한 �
     environment.simSeconds=time;
     combat.update(player,time);combat.update(enemy,time);
   }
-  assert.ok(player.retreat);assert.equal(player.combat,null);
-  assert.equal(player.x,48);assert.equal(player.y,42);
+  assert.equal(player.retreat,null);assert.ok(player.combat);
+  assert.equal(player.x,47);assert.equal(player.y,42);
 });

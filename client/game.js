@@ -29,20 +29,9 @@
     const appearanceWorld = globalThis.SpawnerAppearance.createUnitAppearanceWorld({ sourceUrl: assetSource });
     let appearanceWorldPoses = new Map();
     const combatVfxCursor = Spawner.createCombatVfxCursor();
-    const detailCombatVfx = Spawner.createDetailCombatVfx();
     const detailVfxImages = new Map();
     const detailVfxRendering = typeof OffscreenCanvas === "undefined" ? null : Spawner.createEffectRendering(
       (width, height) => new OffscreenCanvas(width, height), 8 * 1024 * 1024);
-    let detailVfxReady = null;
-    function prepareDetailVfx() {
-      if (!detailVfxReady) detailVfxReady = Promise.all(Spawner.DETAIL_COMBAT_VFX_ASSETS.map(path =>
-        detailVfxImage(path).decode())).catch(error => {
-          detailVfxReady = null;
-          for (const [path, image] of detailVfxImages) if (!image.naturalWidth) detailVfxImages.delete(path);
-          throw error;
-        });
-      return detailVfxReady;
-    }
     function detailVfxImage(path) {
       if (!detailVfxImages.has(path)) {
         const image = globalThis.SpawnerAssets.image(); image.src = assetSource(path);
@@ -160,7 +149,6 @@
     let renamedAgentId = null;
     const terrainDetails = document.getElementById("terrain-details");
     document.querySelector("#terrain-speed > img").src = assetSource("DesignAssets/UI/movement-speed.png");
-    const resourceDetails = document.getElementById("resource-details");
     const burrowDetails = document.createElement("section");
     burrowDetails.id = "burrow-details";
     burrowDetails.className = "building-details";
@@ -213,7 +201,7 @@
     function positionHelpTooltip() {
       if (!helpTooltipTarget) return;
       const rect = helpTooltipTarget.getBoundingClientRect();
-      const panel = helpTooltipTarget.closest(".colony-menu, .evolution-panel, .codex, .unit-panel, .agent-panel-scroll, .resource-inventory-bar");
+      const panel = helpTooltipTarget.closest(".colony-menu, .evolution-panel, .codex, .unit-panel, .agent-panel-scroll");
       const panelRect = panel.getBoundingClientRect();
       if (!helpTooltipTarget.getClientRects().length || rect.bottom <= panelRect.top || rect.top >= panelRect.bottom) {
         hideHelpTooltip();
@@ -766,9 +754,6 @@
       colonyFood: 0,
       ending: null,
       evolutionPoints: 0,
-      resourceInventory: {},
-      resourceInventoryLimits: {},
-      resourceCapacity: Spawner.materialCapacity(1, []),
       explored: new Set(), visible: new Set(), markers: [],
       discoveries: [], discoveryReadCount: 0,
       nestLevel: 1,
@@ -2230,35 +2215,29 @@
       }
     }
 
-    function drawCombatAgents(now) {
-      const agents = visibleAgents().filter(agent => agent.combat);
-      agents.sort((first, second) => interpolatedAgentPosition(first).y - interpolatedAgentPosition(second).y);
-      for (const agent of agents) drawAgent(now, agent);
-    }
-
     function drawCombatDust() {
-      if (state.camera.layer !== 0) return;
+      const size = Math.max(10, state.camera.zoom);
       for (const units of combatGroups().values()) {
         const combat = units[0].combat;
+        if (!state.visible.has(combat.y * WORLD_SIZE + combat.x)) continue;
         const point = worldToScreen(combat.x + .5, combat.y + .5);
-        const size = state.camera.zoom;
+        if (point.x < -size || point.x > viewport.width + size || point.y < -size || point.y > viewport.height + size) continue;
         ctx.save();
-        for (let index = 0; index < 7; index++) {
-          const phase = state.simSeconds * 3 + index * 2.4;
-          ctx.fillStyle = "rgba(198,180,140,.22)";
-          ctx.beginPath();
-          ctx.ellipse(point.x + Math.sin(phase) * size * .25, point.y + Math.cos(phase * .7) * size * .13,
-            size * (.09 + index % 3 * .025), size * .07, 0, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        if (size >= 18) {
-          ctx.font = "bold 11px sans-serif";
-          ctx.textAlign = "center";
-          for (let side = 0; side < 2; side++) {
-            const members = units.filter(agent => agent.combat.side === side);
-            ctx.fillStyle = side ? "#f6ada3" : "#97e4d6";
-            ctx.fillText(members.length + " · " + Math.ceil(members.reduce((sum, agent) => sum + agent.health, 0)), point.x, point.y + (side ? .57 : -.5) * size);
-          }
+        ctx.fillStyle = "rgba(54,43,29,.18)";
+        ctx.beginPath(); ctx.ellipse(point.x, point.y + size * .16, size * .38, size * .12, 0, 0, Math.PI * 2); ctx.fill();
+        for (let index = 0; index < 12; index++) {
+          const cycle = (index / 12 + (idleMotion.matches ? .3 : state.simSeconds * .63)) % 1;
+          const angle = index * 2.4 + cycle * 1.8;
+          const radius = size * (.12 + cycle * .17);
+          const x = point.x + Math.sin(angle) * size * (.12 + cycle * .1);
+          const y = point.y + size * (.12 - cycle * .3) + Math.cos(angle) * size * .06;
+          const alpha = Math.sin(cycle * Math.PI) * .72;
+          ctx.save(); ctx.translate(x, y); ctx.scale(1, .78);
+          const cloud = ctx.createRadialGradient(-radius * .22, -radius * .25, 0, 0, 0, radius);
+          cloud.addColorStop(0, "rgba(237,221,182," + alpha + ")");
+          cloud.addColorStop(.6, "rgba(190,163,118," + alpha * .84 + ")");
+          cloud.addColorStop(1, "rgba(157,129,88,0)");
+          ctx.fillStyle = cloud; ctx.beginPath(); ctx.arc(0, 0, radius, 0, Math.PI * 2); ctx.fill(); ctx.restore();
         }
         ctx.restore();
       }
@@ -2674,7 +2653,7 @@
     }
 
     function colonyInactive(entry) {
-      return entry.nestHealth === 0 || !!state.ending && entry.id === connection.colonyId;
+      return entry.nestHealth === 0 || !!state.ending && state.ending.reason !== "victory" && entry.id === connection.colonyId;
     }
 
     function colonyAppearance(entry) {
@@ -3618,13 +3597,17 @@
       const firstFrame = audioTime == null;
       const audible = [...state.agents, ...state.rivals].filter(agent =>
         audioVolume(agent.x + .5, agent.y + .5) > 0 || agent.moveDuration > 0 && audioVolume(agent.renderFromX + .5, agent.renderFromY + .5) > 0);
+      const watchingCombat = combatPanel.open && combatWatch;
+      const combatUnits = watchingCombat ? [...state.agents, ...state.rivals].filter(agent => agent.combat?.id === combatWatch.id) : audible;
+      const combatCorpses = (state.corpses || []).filter(corpse => watchingCombat ? combatWatch.members.has(String(corpse.agentId)) : audioVolume(corpse.x + .5, corpse.y + .5) > 0);
       for (const event of globalThis.SpawnerCombatAudio.update(combatAudio,
-        audible.map(displayedAgent), (state.corpses || []).filter(corpse => audioVolume(corpse.x + .5, corpse.y + .5) > 0), time, state.combatVfx)) {
+        combatUnits.map(displayedAgent), combatCorpses, time, state.combatVfx)) {
         const unit = event.unit;
         const position = unit.kind === "corpse" ? { x: unit.renderX ?? unit.x, y: unit.renderY ?? unit.y } :
           interpolatedAgentPosition(unit);
-        audio.playCombat(event.name, audioVolume(position.x + .5, position.y + .5));
+        audio.playCombat(event.name, watchingCombat ? 1 : audioVolume(position.x + .5, position.y + .5));
       }
+      if (watchingCombat) { audioTime = time; return; }
       for (const event of globalThis.SpawnerMovementAudio?.update(movementAudio,
         audible.map(displayedAgent), time, Spawner) || []) {
         const position = event.position || interpolatedAgentPosition(event.unit);
@@ -4445,6 +4428,7 @@
       if (canonical) drawRecordedDnaEffects(cell);
       else for (const [id,launch] of worldRangedFlights) if (!id.startsWith("legacy:") || state.simSeconds > launch.until) worldRangedFlights.delete(id);
       for (const agent of canonical ? [] : visibleAgents()) {
+        if (agent.combat) continue;
         for (const attack of agent.dnaProjectiles || []) {
         if (state.simSeconds >= attack.launchedAt && state.simSeconds <= attack.hitAt) {
           const flightKey = "legacy:"+agent.id+":"+attack.launchedAt+":"+(attack.id || "");
@@ -4468,6 +4452,7 @@
         }
         const impact = agent.dnaActionEvent;
         const impactSource = impact && visibleAgents().find(other => other.id === impact.sourceId);
+        if (impactSource?.combat) continue;
         const bubbleImpact = impactSource?.species === "bubble-toad" && impact.damage > 0 && !impact.blocked && !impact.parried;
         if (impact?.kind === "ranged" && state.simSeconds >= impact.at && state.simSeconds - impact.at < (bubbleImpact ? .48 : .22) && !drawnDnaEvents.has("ranged:" + impact.sourceId + ":" + impact.at)) {
           drawnDnaEvents.add("ranged:" + impact.sourceId + ":" + impact.at);
@@ -4523,11 +4508,16 @@
     }
 
     function drawRecordedDnaEffects(cell) {
+      const combats = visibleAgents().filter(agent => agent.health > 0 && agent.combat);
+      const actors = new Set(combats.map(agent => String(agent.id)));
+      const cells = new Set(combats.map(agent => agent.combat.x + "," + agent.combat.y));
+      const hidden = event => actors.has(String(event.sourceId)) || actors.has(String(event.targetId)) ||
+        event.from && cells.has(event.from.x + "," + event.from.y) || event.to && cells.has(event.to.x + "," + event.to.y);
       if (combatVfxFrame.reset) { worldRangedFlights.clear(); worldRangedImpacts.clear(); }
       const activeIds = new Set(combatVfxFrame.projectiles.map(shot => shot.id));
       for (const id of worldRangedFlights.keys()) if (!activeIds.has(id)) worldRangedFlights.delete(id);
       for (const projectile of combatVfxFrame.projectiles) {
-        if (!projectile.from || !projectile.to) { worldRangedFlights.delete(projectile.id); continue; }
+        if (!projectile.from || !projectile.to || hidden(projectile)) { worldRangedFlights.delete(projectile.id); continue; }
         const source = visibleAgents().find(agent => String(agent.id) === String(projectile.sourceId));
         let launch = worldRangedFlights.get(projectile.id);
         if (!launch) {
@@ -4553,6 +4543,7 @@
       const defended = new Set(combatVfxFrame.active.filter(cue => cue.channel === "defense" &&
         ["block","parry","dodge"].includes(cue.kind)).map(cue => cue.eventId));
       for (const cue of combatVfxFrame.started || []) {
+        if (hidden(cue)) continue;
         const source = visibleAgents().find(agent => String(agent.id) === String(cue.sourceId));
         if (source?.species === "bubble-toad" && cue.channel === "impact" && cue.mode === "ranged" &&
             ["hit","critical","followup"].includes(cue.kind) && cue.amount > 0 && cue.to && !defended.has(cue.eventId))
@@ -4560,13 +4551,14 @@
       }
       for (const [id,cue] of worldRangedImpacts) {
         const record = (combatVfxFrame.retainedEvents || []).find(event => event.id === cue.eventId);
-        if (state.simSeconds < cue.at || state.simSeconds-cue.at >= .48 || !record?.to ||
+        if (hidden(cue) || state.simSeconds < cue.at || state.simSeconds-cue.at >= .48 || !record?.to ||
             record.sourceId !== cue.sourceId || record.targetId !== cue.targetId || !(record.amount > 0) ||
             !["hit","critical"].includes(record.kind)) { worldRangedImpacts.delete(id); continue; }
         worldRangedImpacts.set(id,{ ...cue, to: record.to, age: state.simSeconds-cue.at });
       }
       const cues = [...combatVfxFrame.active.filter(cue => !worldRangedImpacts.has(cue.id)), ...worldRangedImpacts.values()];
       for (const cue of cues) {
+        if (hidden(cue)) continue;
         if (cue.kind === "reflect" && cue.channel === "impact" && cue.amount > 0 && cue.to) {
           const target = visibleAgents().find(agent => String(agent.id) === String(cue.targetId));
           const point = worldToScreen(cue.to.x + .5, cue.to.y + .5), size = Spawner.unitDisplaySize(target || {}) * cell;
@@ -4973,7 +4965,7 @@
     function selectedMovementAgents() {
       const selection = state.selection;
       const agents = selection?.kind === "agent" ? [selection.target] : [];
-      return agents.filter(agent => isAgentSelectable(agent) &&
+      return agents.filter(agent => isAgentSelectable(agent) && !displayedAgent(agent).combat &&
         (displayedAgent(agent).movementPlan || agent.species || displayedAgent(agent).combatTarget));
     }
 
@@ -5445,6 +5437,7 @@
     }
 
     function render(now) {
+      updateBeginnerHelp();
       renderFrame = null;
       if (document.hidden || connection.synchronizing) return;
       if (globalThis.SpawnerFrameTiming && !globalThis.SpawnerFrameTiming.allow(now)) { scheduleRender(); return; }
@@ -5454,7 +5447,7 @@
       moveMap(Math.min(0.05, Math.max(0, (now - state.lastFrame) / 1000)));
       const elapsedMs = Math.max(0, now - state.lastFrame);
       state.lastFrame = now;
-      if (!connection.active || !terrainRendering.ready) { updateAudio(); globalThis.SpawnerFrameTiming?.record(performance.now()); scheduleRender(); return; }
+      if (!connection.active || !terrainRendering.ready) { updateAudio(); updateCombatMarkers(); globalThis.SpawnerFrameTiming?.record(performance.now()); scheduleRender(); return; }
       updateEndingPresentation(elapsedMs);
       state.simSeconds = state.ending ? state.ending.endedAt : Math.max(state.simSeconds, connection.simSeconds +
         Math.min(0.3, (now - connection.receivedAt) / 1000) - MOVEMENT_DELAY);
@@ -5469,8 +5462,8 @@
       updateSelection();
       updateHover();
       combatVfxFrame = combatVfxCursor.consume(state.combatVfx, state.simSeconds);
-      detailCombatVfx.consume(combatVfxFrame, state.simSeconds);
       if (combatPanel.open && combatWorldFrame?.width === canvas.width && combatWorldFrame?.height === canvas.height) {
+        updateCombatMarkers();
         drawCombatPanel(now);
         globalThis.SpawnerFrameTiming?.record(performance.now());
         scheduleRender();
@@ -5479,7 +5472,7 @@
       combatWorldFrame = combatPanel.open ? { width: canvas.width, height: canvas.height } : null;
 
       const appearanceAgents = state.camera.zoom >= 8 ? [...state.agents, ...state.rivals].map(displayedAgent).filter(agent => {
-        if (agent.species || agentBirthPose(agent, true)) return false;
+        if (agent.combat || agent.species || agentBirthPose(agent, true)) return false;
         const position = interpolatedAgentPosition(agent), point = worldToScreen(position.x, position.y), margin = state.camera.zoom * 2;
         return point.x > -margin && point.y > -margin && point.x < viewport.width + margin && point.y < viewport.height + margin;
       }) : [];
@@ -5510,10 +5503,9 @@
       for (const entry of colonyEntries) drawColonyHealthRing(entry);
       pebbleWorldDrawing = true;
       try { drawWorldObjects(now); } finally { pebbleWorldDrawing = false; }
-      pebbleWorldDrawing = true;
-      try { drawCombatAgents(now); } finally { pebbleWorldDrawing = false; }
       drawAttackImpacts();
       drawCombatDust();
+      updateCombatMarkers();
       drawCombatPanel(now);
       drawAgentGroups();
       drawFoodDeliveries(now);
@@ -5709,8 +5701,13 @@
       const cellY = Math.floor(world.y);
       const colony = colonyAt(cellX, cellY);
       const food = foodCellAt(cellX, cellY);
+      if (state.camera.zoom >= 8 && state.camera.layer !== ZOOM_LAYERS.length - 1 && state.visible.has(cellY * WORLD_SIZE + cellX) &&
+          [...combatGroups().values()].some(units => units[0].combat.x === cellX && units[0].combat.y === cellY)) {
+        const cell = terrainCodexCell({ ...worldMap, size: WORLD_SIZE }, state.explored, cellX, cellY);
+        if (cell) return { kind: "terrain", target: cell };
+      }
       const agents = visibleAgents().filter((candidate) => {
-        if (!isAgentSelectable(candidate)) return false;
+        if (!isAgentSelectable(candidate) || candidate.combat) return false;
         const fromX = candidate.renderFromX ?? candidate.x, fromY = candidate.renderFromY ?? candidate.y;
         if (world.x < Math.min(candidate.x, fromX, candidate.birth?.fromX ?? fromX) - 6 ||
             world.x > Math.max(candidate.x, fromX, candidate.birth?.fromX ?? fromX) + 6 ||
@@ -6015,10 +6012,6 @@
         infoAbove ? Math.max(144, window.innerWidth - sidebarWidth * 2 - 24) : availableWidth;
       document.documentElement.toggleAttribute("data-discovery-info-above", infoAbove);
       document.documentElement.style.setProperty("--discovery-toasts-area-width", width + "px");
-      const inventory = document.getElementById("resource-inventory");
-      const bounds = inventory.getBoundingClientRect();
-      document.documentElement.style.setProperty("--resource-inventory-height", bounds.height + "px");
-      document.documentElement.toggleAttribute("data-resource-info-above", !inventory.hidden && availableWidth < bounds.width);
     }
 
     function showDiscoveryToast(entry) {
@@ -6098,7 +6091,7 @@
     }
 
     evolutionOpenButton.addEventListener("click", () => openUnitDesign(null));
-    evolutionClose.addEventListener("click", closeEvolutionPanel);
+    evolutionClose.addEventListener("click", requestCloseEvolutionPanel);
 
     const playTime = document.getElementById("play-time");
     const colonySearch = document.getElementById("colony-search");
@@ -6287,7 +6280,7 @@
         return;
       }
       if (!evolutionPanel.hidden) {
-        closeEvolutionPanel();
+        requestCloseEvolutionPanel();
         event.preventDefault();
         return;
       }
@@ -6318,7 +6311,7 @@
         return;
       }
       const cell = selectionTerrainCell();
-      if (!cell || (resourceDetails.hidden && terrainDetails.hidden)) return;
+      if (!cell || terrainDetails.hidden) return;
       hideHelpTooltip();
       focusDiscovery(cell);
       canvas.focus();
@@ -6525,76 +6518,6 @@
       return image;
     }
 
-    function updateResourceDetails() {
-      const selected = state.selection;
-      const tree = selected?.kind === "tree" ? selected.target : null;
-      const cell = tree ? foodCellMap.get(tree.column + "," + tree.row) : selected?.kind === "food" ? selected.target : null;
-      const definition = cell ? Spawner.resourceDefinition(Spawner.resourceTypeForCell(cell, worldMap)) : tree ? Spawner.resourceDefinition("tree") : null;
-      resourceDetails.hidden = !definition;
-      if (!definition) return;
-      const previousHelp = helpTooltipTarget?.dataset.help;
-      unitPanelTitle.textContent = definition.name;
-      const image = document.getElementById("resource-image");
-      if (image.dataset.key !== definition.key) {
-        image.dataset.key = definition.key;
-        image.replaceChildren(createResourceImage(definition));
-      }
-      const required = cell ? Spawner.resourceHarvestRequirements(cell, worldMap, state.tribe) : null;
-      const amount = Number(Math.max(0, cell?.amount || 0).toFixed(1));
-      const capacity = Math.max(amount, Number((cell?.initialAmount ?? amount).toFixed(1)));
-      const seconds = definition.harvestLocked || !cell ? null : Spawner.resourceHarvestSeconds(definition.key, worldMap);
-      const amountElement = document.getElementById("resource-amount");
-      document.getElementById("resource-amount-value").textContent = amount;
-      document.getElementById("resource-capacity").textContent = "/" + capacity;
-      amountElement.dataset.wide = String(String(amount).length + String(capacity).length > 4);
-      amountElement.dataset.help = "남은 " + definition.name + " " + amount + "개 / 처음 자원 " + capacity + "개";
-      amountElement.setAttribute("aria-label", amountElement.dataset.help);
-      image.dataset.help = definition.name;
-      image.setAttribute("aria-label", definition.name);
-      let harvest = resourceDetails.querySelector(".resource-harvest");
-      if (!harvest) {
-        harvest = document.createElement("div");
-        harvest.className = "resource-harvest";
-        const time = document.createElement("span");
-        time.className = "resource-harvest-time";
-        time.append(document.querySelector("#corpse-decay svg").cloneNode(true), document.createElement("strong"));
-        attachObjectHelp(time, "");
-        const conditions = document.createElement("div");
-        conditions.className = "resource-harvest-conditions";
-        harvest.append(time, conditions);
-        resourceDetails.append(harvest);
-      }
-      const time = harvest.querySelector(".resource-harvest-time");
-      time.querySelector("strong").textContent = seconds === null ? "—" : seconds;
-      time.dataset.help = "채집 시간 · " + (seconds === null ? "—" : "1개당 " + seconds + "초");
-      time.setAttribute("aria-label", time.dataset.help);
-      const boost = required !== null && !Object.values(required).some(value => value > 0);
-      const signature = definition.key + ":" + boost + ":" + (required === null);
-      const conditions = harvest.querySelector(".resource-harvest-conditions");
-      if (conditions.dataset.signature !== signature) {
-        if (helpTooltipTarget && conditions.contains(helpTooltipTarget)) hideHelpTooltip();
-        conditions.dataset.signature = signature;
-        conditions.replaceChildren();
-        for (const key of definition.requirements) {
-          const attribute = ATTRIBUTES.find(attribute => attribute.key === key);
-          const icon = document.createElement("span");
-          icon.className = "resource-harvest-condition";
-          const artwork = document.createElement("img");
-          artwork.src = attribute.image;
-          artwork.alt = "";
-          const badge = boost ? document.createElement("small") : createDesignLock();
-          badge.classList.add("resource-condition-badge");
-          if (boost) badge.textContent = "↑";
-          icon.append(artwork, badge);
-          attachObjectHelp(icon, (boost ? "채집 속도 증가" : "채집 조건") + " · " + attribute.name);
-          conditions.append(icon);
-        }
-      }
-      resourceLocation.dataset.help = "자원 위치로 이동\n(" + (tree?.column ?? cell.x) + ", " + (tree?.row ?? cell.y) + ")";
-      resourceLocation.setAttribute("aria-label", "자원 위치로 이동");
-      if (helpTooltipTarget && resourceDetails.contains(helpTooltipTarget) && helpTooltipTarget.dataset.help !== previousHelp) showHelpTooltip(helpTooltipTarget);
-    }
-
     function createBurrowImage(type, size) {
       const { sprite, crop } = burrowAppearances.get(type);
       const image = document.createElement("canvas");
@@ -6759,11 +6682,10 @@
       unitPanelSelectionKey = key;
       updateCorpseDetails();
       updateTerrainDetails();
-      updateResourceDetails();
       updateBurrowDetails();
       updateForeignColonyDetails();
       document.getElementById("unit-codex").hidden = false;
-      resourceLocation.hidden = resourceDetails.hidden && terrainDetails.hidden && foreignColonyDetails.hidden;
+      resourceLocation.hidden = terrainDetails.hidden && foreignColonyDetails.hidden;
       agentDetails.hidden = !agent;
       agentRenameOpen.hidden = !agent || !state.agents.includes(agent);
       agentRenameOpen.disabled = !!state.ending || connection.busy || !connection.online;
@@ -6772,11 +6694,22 @@
       agentNameCancel.disabled = connection.busy;
       agentBirth.hidden = !agent || !state.agents.includes(agent);
       agentDesign.hidden = !agent || !state.agents.includes(agent);
-      unitPanel.hidden = !agent && corpseDetails.hidden && terrainDetails.hidden && resourceDetails.hidden && burrowDetails.hidden && foreignColonyDetails.hidden;
+      unitPanel.hidden = !agent && corpseDetails.hidden && terrainDetails.hidden && burrowDetails.hidden && foreignColonyDetails.hidden;
       if (unitPanel.hidden) return;
       collapseControlsGuide();
       if (!agent) return;
       unitPanelTitle.textContent = agent.name;
+      let lifespan = agentDetails.querySelector(".agent-lifespan");
+      if (!lifespan) {
+        lifespan = document.createElement("dl");
+        lifespan.className = "agent-lifespan unit-dna-stats";
+        const label = document.createElement("dt"), value = document.createElement("dd");
+        label.textContent = "남은 수명";
+        lifespan.append(label, value);
+        agentDetails.prepend(lifespan);
+      }
+      lifespan.hidden = !Number.isFinite(agent.lifespan);
+      if (!lifespan.hidden) lifespan.lastElementChild.textContent = formatLifetime(Math.ceil(Spawner.agentRemainingLifespan(agent, state.simSeconds))) + " / " + formatLifetime(agent.lifespan);
       const attributes = document.getElementById("agent-attributes");
       const slots = agent.slots || [];
       const signature = JSON.stringify([agent.tribe, agent.species, slots, agent.attributeLevels, agent.attributes, agent.dna, agent.stats?.dna]);
@@ -6824,7 +6757,8 @@
         (template.dna ? !dnaDesignValid(template.dna) : template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, state.tribe)));
       const help = "같은 설계로 탄생" + (Number.isFinite(cost) ? "\n진화 포인트 " + cost + "점" : "");
       const hint = unitActionStatus.textContent || (connection.busy ? "처리 중입니다." : !connection.online ? "연결을 확인해 주세요." :
-        !hasBirthplace() ? "살아 있는 둥지가 없습니다." : state.evolutionPoints < cost ? "진화 포인트가 부족합니다." :
+        !hasBirthplace() ? "살아 있는 둥지가 없습니다." : state.agents.filter(agent => agent.health > 0).length >= unitCapacity() ? "생산 가능한 개체 수를 모두 채웠어요." :
+        state.evolutionPoints < cost ? "진화 포인트가 " + Math.ceil(cost - state.evolutionPoints) + "P 부족합니다." :
         agentBirth.disabled ? "둥지에서 설계를 확인해 주세요." : "");
       const helpChanged = agentBirth.dataset.help !== help || agentBirth.dataset.helpHint !== hint;
       agentBirth.dataset.help = help;
@@ -7201,7 +7135,6 @@
         }
         agentAvatars.delete(id);
       }
-      combatAttributeArt.clearDeaths();
       for (const sheets of unitAnimationSheets.values()) sheets.get("death")?.attributeFrames?.clear();
       renderedAgentListSignature = "";
       updateAgentList();
@@ -7211,14 +7144,8 @@
       const combatCells = new Set([...(state.agents || []), ...(state.rivals || [])].map(agent => displayedAgent(agent))
         .filter(agent => agent.health > 0 && agent.combat).map(agent => agent.x + "," + agent.y));
       for (const corpse of state.corpses) {
-        if (corpsePlaybackTime() >= corpse.decaysAt) continue;
+        if (corpsePlaybackTime() >= corpse.decaysAt || combatCells.has(corpse.x + "," + corpse.y)) continue;
         ctx.save();
-        if (combatCells.has(corpse.x + "," + corpse.y)) {
-          const anchor = worldToScreen(corpse.x + .5, corpse.y + .92);
-          ctx.translate(anchor.x, anchor.y);
-          ctx.scale(.35, .35);
-          ctx.translate(-anchor.x, -anchor.y);
-        }
         const animated = Spawner.CREATURE_DEATH_ANIMATIONS?.[corpse.species];
         const point = worldToScreen(corpse.x + 0.5, corpse.y + (animated ? 1 : 0.5 + AGENT_HEIGHT * .44));
         const scale = unitDisplayScale(corpse);
@@ -7252,7 +7179,6 @@
     const designName = document.getElementById("design-name");
     const designSlots = document.getElementById("design-slots");
     const designPalette = document.getElementById("attribute-palette");
-    const designSave = document.getElementById("design-save");
     const designStatus = document.getElementById("design-status");
     const codex = document.getElementById("codex");
     const codexSearch = document.getElementById("codex-search");
@@ -7309,15 +7235,15 @@
       designDnaEditor.context(state.nestLevel, state.evolutionPoints, unitDraft.readOnly || !!state.ending, unitDraft.tribe);
       unitDraft.dna.level = state.nestLevel;
       unitDraft.dna.budget = state.evolutionPoints;
-      if (!unitDraft.nameEdited && !unitDraft.readOnly) designName.value = Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
+      if (!unitDraft.nameEdited && !unitDraft.readOnly && !unitDraft.saving) designName.value = Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       document.getElementById("design-preview-image").style.setProperty("--dna-scale", String(1 + unitDraft.dna.pieces.length * .01));
       const { stats, base } = Spawner.dnaDesignStats(Spawner.ATTRIBUTE_DNA, unitDraft.dna.pieces, unitDraft.tribe);
       const counts = Spawner.dnaAppearance(unitDraft.dna);
       prepareAgentTemplate(unitDraft).catch(() => {});
       document.getElementById("design-preview-image").src = agentImageSource({ tribe: unitDraft.tribe, dna: unitDraft.dna, attributes: counts, carrying: 0 });
       Spawner.renderDnaDesignStats(document.getElementById("design-stats"), { ...stats, loadSpeed: undefined }, base, true);
-      designSave.disabled = unitDraft.readOnly || !!state.ending || connection.busy || !connection.online || !Spawner.validateDna(unitDraft.dna, state.nestLevel, 999999999);
       setEvolutionText(designStatus, unitDraft.error);
+      queueUnitDesignSave();
     }
 
     const combatPrimaryRow = document.createElement("label");
@@ -7357,12 +7283,41 @@
       return "HP " + Math.ceil(Math.max(0, agent.health ?? agent.stats?.health ?? 100)) + "/" + (agent.stats?.health || 100) +
         " · 공격 " + Math.round(profile.attackPower) + " · 방어 " + Math.round(profile.defense) + " · 공속 " + profile.attackSpeed.toFixed(2);
     }
-    const combatOpen = document.createElement("button");
-    combatOpen.type = "button";
-    combatOpen.className = "combat-open";
-    combatOpen.textContent = "⌕ 전투 확대";
-    combatOpen.hidden = true;
-    document.body.append(combatOpen);
+    const combatMarkers = new Map();
+    const combatMarkerLayer = document.createElement("div");
+    combatMarkerLayer.className = "combat-markers";
+    combatMarkerLayer.hidden = true;
+    canvas.parentElement.append(combatMarkerLayer);
+    function updateCombatMarkers() {
+      combatMarkerLayer.hidden = !connection.active || !terrainRendering.ready || state.camera.zoom < 8 || state.camera.layer === ZOOM_LAYERS.length - 1 || !welcome.hidden ||
+        document.body.dataset.screen !== "game" || combatPanel.open || !evolutionPanel.hidden || codex.open || endingReport.open || templateDeleteDialog.open;
+      if (combatMarkerLayer.hidden) return;
+      combatMarkerLayer.style.left = canvas.offsetLeft + "px";
+      combatMarkerLayer.style.top = canvas.offsetTop + "px";
+      combatMarkerLayer.style.width = viewport.width + "px";
+      combatMarkerLayer.style.height = viewport.height + "px";
+      const groups = combatGroups(), shown = new Set();
+      for (const [id, units] of groups) {
+        const combat = units[0].combat;
+        if (!state.visible.has(combat.y * WORLD_SIZE + combat.x)) continue;
+        const point = worldToScreen(combat.x + .5, combat.y + .5), size = state.camera.zoom;
+        if (point.x + size * .4 < 0 || point.x - size * .4 > viewport.width || point.y + size * .4 < 0 || point.y - size * .4 > viewport.height) continue;
+        let button = combatMarkers.get(id);
+        if (!button) {
+          button = document.createElement("button");
+          button.type = "button"; button.className = "combat-open"; button.textContent = "⌕";
+          button.setAttribute("aria-label", "전투 확대"); button.title = "전투 확대";
+          button.dataset.combatId = String(id);
+          button.addEventListener("pointerdown", event => event.stopPropagation());
+          button.addEventListener("click", () => openCombat(combatGroups().get(id) || [], button));
+          combatMarkers.set(id, button); combatMarkerLayer.append(button);
+        }
+        button.style.left = clamp(point.x + size * .3, 24, Math.max(24, viewport.width - 24)) + "px";
+        button.style.top = clamp(point.y - size * .32, 24, Math.max(24, viewport.height - 24)) + "px";
+        shown.add(id);
+      }
+      for (const [id, button] of combatMarkers) if (!shown.has(id)) { button.remove(); combatMarkers.delete(id); }
+    }
     const combatPanel = document.createElement("dialog");
     combatPanel.className = "combat-panel";
     combatPanel.setAttribute("aria-label", "전투 확대");
@@ -7375,11 +7330,6 @@
     combatHeader.append(combatHeading, combatClose);
     const combatSummary = document.createElement("div");
     combatSummary.className = "combat-summary";
-    const combatBackgrounds = Object.freeze({
-      grassland: assetSource("DesignAssets/Combat/grassland.webp"),
-      forest: assetSource("DesignAssets/Combat/forest.webp"),
-      riverbank: assetSource("DesignAssets/Combat/riverbank.webp")
-    });
     const combatCanvas = document.createElement("canvas");
     combatCanvas.setAttribute("aria-label", "전투 중인 유닛");
     const combatRoster = document.createElement("div");
@@ -7390,39 +7340,42 @@
     combatGauge.setAttribute("aria-label", "다음 공격");
     combatPanel.append(combatHeader, combatSummary, combatCanvas, combatRoster, combatDetail, combatGauge);
     document.body.append(combatPanel);
+    const combatStage = Spawner.createCombatStage(combatCanvas);
     let combatWatch = null;
     let combatSelected = null;
     let combatReturnFocus = null;
     combatClose.addEventListener("click", () => combatPanel.close());
     combatPanel.addEventListener("keydown", event => event.stopPropagation());
     combatPanel.addEventListener("close", () => {
-      detailCombatVfx.clearView();
-      combatWatch?.deaths?.clear();
-      combatOpen.hidden = !selectedCombatUnits().length;
+      combatStage.clear();
+      combatWatch = null;
+      updateCombatMarkers();
       const focus = combatReturnFocus?.isConnected && !combatReturnFocus.hidden ? combatReturnFocus : unitPanel.querySelector("button:not([hidden])");
       focus?.focus({ preventScroll: true });
     });
-    combatOpen.addEventListener("click", async () => {
-      const units = selectedCombatUnits();
-      if (!units.length || combatOpen.disabled) return;
-      const roomId = connection.roomId;
-      combatOpen.disabled = true;
-      try { await Promise.all([prepareDetailVfx(), ...units.filter(unit => !unit.species).map(unit =>
-        unitPresentation.prepareActions(unit, ["idle", "walk", "attack", "ranged", "hurt", "death"]))]); }
+    async function openCombat(units, button) {
+      if (!units?.length || button.disabled || combatPanel.open) return;
+      const roomId = connection.roomId, combat = units[0].combat;
+      const scene = { agents: units, history: [], projectiles: [], time: state.simSeconds, live: true,
+        vfx: state.combatVfx, background: "DesignAssets/Combat/" + combatBackgroundAt(combat.x, combat.y) + ".webp",
+        result: () => null };
+      button.disabled = true;
+      try { await combatStage.prepare(scene); }
       catch (error) {
         setEvolutionText(connectionStatus, error.message); connectionStatus.hidden = false;
         return;
-      } finally { combatOpen.disabled = false; }
-      if (connection.roomId !== roomId || !connection.active || !selectedCombatUnits().some(unit => unit.combat.id === units[0].combat.id)) return;
-      detailCombatVfx.clearView();
-      combatWatch = { id: units[0].combat.id, x: units[0].combat.x, y: units[0].combat.y, summary: "" };
+      } finally { button.disabled = false; }
+      if (connection.roomId !== roomId || !connection.active || !combatGroups().has(combat.id)) return;
+      combatStage.clear();
+      combatWatch = { id: combat.id, roomId, x: combat.x, y: combat.y, summary: "", scene, members: new Map(), survivors: new Map() };
       combatSelected = String(units[0].id);
-      combatReturnFocus = document.activeElement;
+      combatReturnFocus = button;
       stopMapMovement();
       combatPanel.showModal();
+      updateCombatMarkers();
       combatClose.focus();
       scheduleRender();
-    });
+    }
     function combatGroups() {
       const groups = new Map();
       for (const agent of visibleAgents()) {
@@ -7431,14 +7384,6 @@
         groups.get(agent.combat.id).push(agent);
       }
       return groups;
-    }
-    function selectedCombatUnits() {
-      const selection = state.selection;
-      if (!selection?.target || state.camera.layer !== 0 || !["agent", "terrain", "hazard"].includes(selection.kind)) return [];
-      const combat = selection.kind === "agent" ? selection.target.combat : null;
-      const x = combat?.x ?? selection.target.x ?? selection.target.column;
-      const y = combat?.y ?? selection.target.y ?? selection.target.row;
-      return [...combatGroups().values()].find(units => combat ? units[0].combat.id === combat.id : units[0].combat.x === x && units[0].combat.y === y) || [];
     }
     function combatVisualEvent(agent) {
       if (!agent?.combat) return null;
@@ -7474,57 +7419,6 @@
       if (water(terrain) || [[-1,0],[1,0],[0,-1],[0,1]].some(offset => water(terrainAt(x + offset[0], y + offset[1])))) return "riverbank";
       return "grassland";
     }
-    function combatUnitScale(agent) {
-      return unitDisplayScale(agent);
-    }
-    function drawCombatCreature(context, agent, x, floor, height, gait) {
-      if (agent.species === "spiny-back-beetle" && !Spawner.creatureRangedPose(agent, state.simSeconds)) {
-        let pose = Spawner.beetleAnimationPose(agent, state.simSeconds);
-        if (pose.action === "attack" && (!beetleAttackSheet.complete || !beetleAttackSheet.naturalWidth))
-          pose = { action: "idle", frame: Spawner.BEETLE_ANIMATIONS.idle.frames[0] };
-        const attack = pose.action === "attack";
-        const shape = Spawner.imageFrameGeometry(attack ? Spawner.BEETLE_ATTACK_SPRITE : Spawner.BEETLE_SPRITE, pose.frame);
-        const sprite = attack ? beetleAttackSheet : beetleSheet;
-        if (!unitDisplayBounds.has(agent.species) || !sprite.complete || !sprite.naturalWidth) {
-          Spawner.drawUnitLoading(context, x, floor - height * .5, Math.max(7, height * .15), state.simSeconds);
-          return true;
-        }
-        const size = height * shape.scale * (shape.registrationScale || 1);
-        context.save(); context.translate(x, floor);
-        if (shape.facing === "right" ? agent.facing < 0 : agent.facing > 0) context.scale(-1, 1);
-        context.drawImage(sprite, pose.frame % shape.columns * shape.frameSize, Math.floor(pose.frame / shape.columns) * shape.frameSize,
-          shape.frameSize, shape.frameSize, -size * shape.pivotX / shape.frameSize, -size * shape.pivotY / shape.frameSize, size, size);
-        context.restore(); return true;
-      }
-      let hurt = Spawner.creatureHurtPose(agent, state.simSeconds);
-      let attack = Spawner.creatureAttackPose(agent, state.simSeconds);
-      const walk = Spawner.creatureWalkPose(agent, state.simSeconds);
-      let pose = hurt || attack || walk;
-      let entry = hurt ? creatureHurtSheets.get(agent.species) : attack ? (attack.action === "ranged" ? creatureRangedSheets : creatureAttackSheets).get(agent.species) : walk ? creatureWalkSheets.get(agent.species) : agent.species === "talon-owl" ? { sprite: talonOwlSheet, animation: Spawner.TALON_OWL_IDLE } : creatureIdleSheets.get(agent.species);
-      if (pose && (!entry?.sprite.complete || !entry.sprite.naturalWidth)) {
-        hurt = null; attack = null; pose = null;
-        entry = agent.species === "talon-owl" ? { sprite: talonOwlSheet, animation: Spawner.TALON_OWL_IDLE } : creatureIdleSheets.get(agent.species);
-      }
-      if (!unitDisplayBounds.has(agent.species) || !entry?.sprite.complete || !entry.sprite.naturalWidth) {
-        Spawner.drawUnitLoading(context, x, floor - height * .5, Math.max(7, height * .15), state.simSeconds);
-        return true;
-      }
-      let animation = pose?.animation || entry.animation;
-      let frame = pose?.frame ?? Spawner.unitAnimationFrame(animation, (state.simSeconds - (agent.animationStartedAt || 0)) * 1000);
-      animation = Spawner.imageFrameGeometry(animation, frame);
-      const size = height * (agent.species === "talon-owl" ? Spawner.TALON_OWL_IDLE.scale : 1.4 * entry.scale) * ((attack || walk) && !hurt ? animation.frameSize / (animation.viewSize || animation.frameSize) : 1) * (animation.registrationScale || 1);
-      if (pose === walk && gait?.clock && animation.strideFrameRatio > 0) {
-        const measured = gait.clock.frame(Spawner, agent, state.simSeconds, animation,
-          animation.strideFrameRatio * size / height * gait.displayScale, gait.position, gait.scope);
-        if (measured !== null) frame = gait.reducedMotion ? 0 : measured;
-        animation = Spawner.imageFrameGeometry(pose.animation, frame);
-      }
-      context.save(); context.translate(x, floor);
-      if (attack && !hurt ? attack.mirrorX : Spawner.unitFrameMirror(animation.sourceFacing || animation.facing || "left", agent.facing)) context.scale(-1, 1);
-      context.drawImage(entry.sprite, frame % animation.columns * animation.frameSize, Math.floor(frame / animation.columns) * animation.frameSize,
-        animation.frameSize, animation.frameSize, -size * animation.pivotX / animation.frameSize, -size * animation.pivotY / animation.frameSize, size, size);
-      context.restore(); return true;
-    }
     function combatArenaUnits(units) {
       return units.toSorted((a, b) => (a.combat?.side ?? a.side) - (b.combat?.side ?? b.side) ||
         (a.combat?.slot ?? Infinity) - (b.combat?.slot ?? Infinity) ||
@@ -7532,9 +7426,10 @@
         String(a.agentId ?? a.id).localeCompare(String(b.agentId ?? b.id), undefined, { numeric: true }));
     }
     function drawCombatPanel(now) {
-      combatOpen.hidden = !selectedCombatUnits().length || !evolutionPanel.hidden || !welcome.hidden || combatPanel.open;
       if (!combatPanel.open || !combatWatch) return;
-      const units = [...state.agents, ...state.rivals].filter(agent => agent.health > 0 && agent.combat?.id === combatWatch.id);
+      if (combatWatch.roomId !== connection.roomId || !connection.active) { combatPanel.close(); return; }
+      const present = [...state.agents, ...state.rivals];
+      const units = present.filter(agent => agent.health > 0 && agent.combat?.id === combatWatch.id);
       if (!units.some(agent => String(agent.id) === combatSelected)) combatSelected = units.length ? String(units[0].id) : null;
       const sides = [0, 1].map(side => units.filter(agent => agent.combat.side === side));
       if (units.length) combatWatch.summary = sides.map((members, side) => "진영 " + (side + 1) + " · " + members.length + "명 · HP " + Math.ceil(members.reduce((sum, agent) => sum + agent.health, 0))).join("   /   ");
@@ -7553,9 +7448,40 @@
       }
       for (const button of combatRoster.children) button.setAttribute("aria-pressed", String(button.dataset.agent === combatSelected));
       const selected = units.find(agent => String(agent.id) === combatSelected);
-      const arenaUnits = combatArenaUnits(units);
-      const formationMembers = combatWatch.formationMembers ||= new Map();
-      for (const agent of arenaUnits) formationMembers.set(String(agent.id), { ...agent.combat });
+      const scene = combatWatch.scene;
+      const members = combatWatch.members;
+      for (const agent of units) members.set(String(agent.id), { agent: { ...agent, combat: { ...agent.combat,
+        position: agent.combat.position && { ...agent.combat.position } } }, at: connection.simSeconds });
+      const living = new Set(units.map(agent => String(agent.id)));
+      const corpses = [];
+      for (const corpse of state.corpses) {
+        const id = String(corpse.agentId), member = members.get(id);
+        if (!member || living.has(id) || corpse.kind !== "corpse" || corpse.diedAt + 1e-6 < member.at ||
+            corpse.x !== member.agent.x || corpse.y !== member.agent.y || state.simSeconds < corpse.diedAt ||
+            state.simSeconds >= Math.min(corpse.decaysAt, corpse.diedAt + 3)) continue;
+        corpses.push({ ...member.agent, ...corpse, id: member.agent.id, health: 0, attack: null,
+          combat: member.agent.combat, facing: member.agent.facing, diedAt: corpse.diedAt, mode: "death" });
+      }
+      if (!units.length) for (const [id, member] of members) {
+        const survivor = present.find(agent => String(agent.id) === id && agent.health > 0);
+        if (!survivor || combatWatch.survivors.has(id)) continue;
+        combatWatch.survivors.set(id, { ...member.agent, health: survivor.health, attack: null, attackReady: 0,
+          mode: "idle", animationStartedAt: state.simSeconds, hurtStartedAt: -Infinity,
+          combat: { ...member.agent.combat, nextAttackAt: 0, stunnedUntil: 0, targetId: null } });
+      }
+      for (const [id, member] of members) if (!living.has(id) && !corpses.some(corpse => String(corpse.id) === id) &&
+          (state.simSeconds - member.at > .85 || [...state.agents, ...state.rivals].some(agent => String(agent.id) === id && agent.health > 0))) members.delete(id);
+      scene.agents = combatArenaUnits([...units, ...corpses, ...(!units.length ? combatWatch.survivors.values() : [])]);
+      scene.time = state.simSeconds;
+      scene.snapshotTime = connection.simSeconds;
+      if (units.length) combatWatch.settledVfx = null;
+      else combatWatch.settledVfx ??= state.combatVfx;
+      scene.vfx = combatWatch.settledVfx || state.combatVfx;
+      scene.selectedId = combatSelected;
+      if (scene.rosterKey !== rosterKey) {
+        scene.rosterKey = rosterKey;
+        combatStage.prepare({ agents: units, time: scene.time, background: scene.background }).catch(() => {});
+      }
       combatHeading.textContent = "전투";
       const events = { dodge: "회피", parry: "패링", block: "방어", stun: "기절", counter: "반격", hit: "타격" };
       const selectedEvent = combatVisualEvent(selected);
@@ -7564,224 +7490,8 @@
       const profile = selected ? Spawner.combatProfile(selected) : null;
       combatGauge.value = selected ? clamp(1 - ((selected.combat.nextAttackAt || state.simSeconds) - state.simSeconds) / profile.attackInterval, 0, 1) : 0;
       if (units.length) { combatWatch.x = units[0].combat.x; combatWatch.y = units[0].combat.y; }
-      const background = combatBackgroundAt(combatWatch.x, combatWatch.y);
-      if (combatCanvas.dataset.background !== background) {
-        combatCanvas.dataset.background = background;
-        combatCanvas.style.backgroundImage = "url(" + JSON.stringify(combatBackgrounds[background]) + ")";
-      }
-      const width = Math.max(1, Math.round(combatCanvas.clientWidth)), height = Math.max(1, Math.round(combatCanvas.clientHeight));
-      // Layout stays in CSS pixels; the backing store must resolve device pixels.
-      const pixelRatio = Math.max(1, window.devicePixelRatio || 1);
-      const backingWidth = Math.round(width * pixelRatio), backingHeight = Math.round(height * pixelRatio);
-      if (combatCanvas.width !== backingWidth || combatCanvas.height !== backingHeight) {
-        combatCanvas.width = backingWidth; combatCanvas.height = backingHeight;
-      }
-      const context = combatCanvas.getContext("2d");
-      context.setTransform(backingWidth / width, 0, 0, backingHeight / height, 0, 0);
-      context.imageSmoothingEnabled = true;
-      context.imageSmoothingQuality = "high";
-      context.clearRect(0, 0, width, height);
-      const dimensions = new Map(units.map(agent => {
-        const kind = agent.species || agent.tribe || "bean", scale = combatUnitScale(agent);
-        const bounds = unitDisplayBounds.get(kind), growth = scale / (unitDisplayScales.get(kind) || 1);
-        return [String(agent.id), { scale, width: (bounds?.width || .4) * growth, height: (bounds?.height || .4) * growth }];
-      }));
-      const strideClock = combatWatch.strides ||= Spawner.createCreatureStrideClock?.();
-      const deathPresentation = combatWatch.deaths ||= Spawner.createDetailCombatDeath?.();
-      deathPresentation?.begin(state.simSeconds, { scope: combatWatch.id, roomId: connection.roomId, snapshotTime: connection.simSeconds,
-        streamId: state.combatVfx?.streamId, width, height, visibleIds: arenaUnits.map(agent => agent.id),
-        livingAgents: [...state.agents, ...state.rivals] });
-      const deathCommands = deathPresentation?.commands(state.corpses, corpsePlaybackTime(), { width, height, cell: 1 }) || [];
-      const formation = Spawner.combatViewLayout(width, height, combatArenaUnits([...arenaUnits, ...deathCommands.map(command => ({ ...command.corpse,
-        id: command.agentId, combat: formationMembers.get(String(command.agentId)) }))]), combatWatch.camera ||= {});
-      const cell = formation.cell;
-      const appearancePoses = appearanceWorld.prepare(context, arenaUnits, state.simSeconds, cell, pixelRatio);
-      const positions = new Map();
-      const fallbackImpacts = [];
-      let dodgeLabels = [];
-      for (const agent of arenaUnits) {
-        const point = formation.positions.get(String(agent.id)), size = dimensions.get(String(agent.id));
-        positions.set(String(agent.id), { x: point.x, y: point.y,
-          scale: size.scale, width: size.width * cell, height: size.height * cell });
-      }
-      const vfxPositions = new Map(positions);
-      // Current authoritative corpses remain behind the living roster. Only
-      // this open view's previously observed approved body routes are eligible.
-      for (const entry of deathCommands) {
-        const command = { ...entry, cell };
-        const member = formationMembers.get(String(entry.agentId)), projected = member?.position && formation.positions.get(String(entry.agentId));
-        if (projected) {
-          const kind = entry.corpse.species || entry.corpse.tribe || "bean", bounds = unitDisplayBounds.get(kind);
-          const growth = entry.scale / (unitDisplayScales.get(kind) || 1);
-          command.point = { x: projected.x, y: projected.y, width: (bounds?.width || .4) * growth * cell,
-            height: (bounds?.height || .4) * growth * cell };
-        }
-        const { point } = command;
-        context.save(); context.fillStyle = "#13251e3d";
-        const shadow = Spawner.detailCreatureDeathShadow?.(command, creatureDeathSheets.get(command.corpse.species), idleMotion.matches);
-        if (shadow) {
-          const alpha = context.globalAlpha; context.globalAlpha *= shadow.opacity;
-          context.drawImage(groundShadow, point.x - shadow.radiusX, point.y - shadow.radiusY, shadow.radiusX * 2, shadow.radiusY * 2);
-          context.globalAlpha = alpha;
-        } else {
-          context.beginPath(); context.ellipse(point.x, point.y, Math.max(4, point.width * .28), Math.max(2, point.height * .035), 0, 0, Math.PI * 2); context.fill();
-        }
-        context.translate(point.x, point.y); context.scale(command.scale, command.scale);
-        drawAgentCorpse(context, command.corpse, 0, 0, command.cell, null, 1);
-        context.restore();
-      }
-      const target = selected && positions.get(String(selected.attack?.targetId ?? selected.combat.targetId));
-      if (target) {
-        const source = positions.get(String(selected.id));
-        context.strokeStyle = "#f7da88"; context.setLineDash([4, 4]);
-        context.beginPath(); context.moveTo(source.x, source.y - source.height * .5); context.lineTo(target.x, target.y - target.height * .5); context.stroke();
-        context.setLineDash([]);
-      }
-      for (const agent of [...arenaUnits].sort((a, b) => positions.get(String(a.id)).y - positions.get(String(b.id)).y)) {
-        const point = positions.get(String(agent.id)), primary = Spawner.combatPrimary(agent), attack = agent.attack;
-        const impact = combatVisualEvent(agent), age = impact ? state.simSeconds - impact.at : Infinity;
-        const hit = impact && String(impact.targetId) === String(agent.id) && ["hit", "stun"].includes(impact.kind);
-        const opponent = positions.get(String(attack?.targetId ?? agent.combat.targetId));
-        const facing = agent.combat.position ? agent.facing || (agent.combat.side === 0 ? 1 : -1) : agent.combat.side === 0 ? 1 : -1;
-        const progress = attack ? clamp((state.simSeconds - attack.startedAt) / (attack.endsAt - attack.startedAt), 0, 1) : 0;
-        const distance = opponent ? Math.hypot(opponent.x - point.x, opponent.y - point.y) : 0;
-        const lunge = !agent.combat.position && attack && !Spawner.CREATURE_ATTACK_ANIMATIONS[agent.species]?.fixedSupport && state.simSeconds < attack.endsAt ? Math.sin(progress * Math.PI) * Math.min(30 * width / 1200, distance * .28) : 0;
-        const recoil = hit && age >= 0 && age < .16 ? Math.sin(age / .16 * Math.PI) * 7 * width / 1200 : 0;
-        const directionX = distance ? (opponent.x - point.x) / distance : facing;
-        const directionY = distance ? (opponent.y - point.y) / distance : 0;
-        const originalX = point.x + directionX * (lunge - recoil), originalY = point.y + directionY * (lunge - recoil);
-        const evade = agent.health > 0 && Spawner.combatDodgePose?.(combatVfxFrame, positions, agent.id, state.simSeconds, idleMotion.matches);
-        const x = originalX + (evade?.dx || 0), y = originalY + (evade?.dy || 0);
-        vfxPositions.set(String(agent.id), { ...point, x, y });
-        const bodyY = y - point.height * .5;
-        context.save();
-        context.fillStyle = "#13251e3d"; context.beginPath(); context.ellipse(x, y, Math.max(4, point.width * .28), Math.max(2, point.height * .035), 0, 0, Math.PI * 2); context.fill();
-        Spawner.drawUnitHealthRing(context, agent.health, agent.stats?.health, x, y,
-          Math.max(7, point.width * .55), agent.combat.side ? "#e18c82" : "#83d6c1");
-        Spawner.drawUnitAttackRing(context, agent, state.simSeconds, x, y, Math.max(7, point.width * .55));
-        const frozen = hit && age >= 0 && age < .055;
-        const visual = { ...agent, facing, hurtStartedAt: Number.isFinite(agent.hurtStartedAt) ? agent.hurtStartedAt + (frozen && (agent.tribe || "bean") !== "bean" && !Spawner.speciesHeldHurtSource?.(agent) ? age : 0) : agent.hurtStartedAt,
-          combat: { ...agent.combat }, attack: attack ? { ...attack, directionX: facing,
-            startedAt: attack.startedAt + (frozen ? age : 0), hitAt: attack.hitAt + (frozen ? age : 0), endsAt: attack.endsAt + (frozen ? age : 0),
-            meleeContacts: Array.isArray(attack.meleeContacts) ? attack.meleeContacts.map(at => at + (frozen ? age : 0)) : undefined } : null };
-        const appearancePose = appearancePoses.get(String(agent.id));
-        // Reuse the exact live body renderer for every echo, including unified
-        // appearance, dominant forms and creatures. Never author per-unit art.
-        const drawDodgeBody = (atX, atY) => {
-          context.save(); context.translate(atX, atY); context.scale(appearancePose ? 1 : point.scale, appearancePose ? 1 : point.scale);
-          if (agent.combat.stunnedUntil > state.simSeconds) context.globalAlpha *= .65;
-          if (agent.species) drawCombatCreature(context, visual, 0, 0, cell, { clock: strideClock,
-            displayScale: point.scale, position: { x: point.x / cell, y: point.y / cell },
-            scope: combatWatch.id, reducedMotion: idleMotion.matches });
-          else if (!((Spawner.beanHeldHurtSource?.(visual) || Spawner.speciesHeldHurtSource?.(visual)) && drawAgentHeldHurt(context, visual, cell, 0, 0, null, appearancePose ? 1 : point.scale)) &&
-              (!appearancePose || !appearanceWorld.draw(context, visual, appearancePose, { x: 0, y: 0 }, cell, facing < 0, pixelRatio)))
-            drawAgentAppearanceLayer(context, now, visual, cell, { x:-cell / 2, y:-cell * (.5 + AGENT_HEIGHT * .44) }, null, null, null);
-          context.restore();
-        };
-        if (evade) {
-          Spawner.drawCombatDodgeTrails?.(context, { ...evade, x: originalX, y: originalY });
-          Spawner.drawCombatDodgeGhosts?.(context, evade, (dx, dy) => drawDodgeBody(originalX + dx, originalY + dy));
-        }
-        drawDodgeBody(x, y);
-        deathPresentation?.observe(agent, { ...point, x, y }, { scale: point.scale, facing });
-        if (agent.combat.position) formationMembers.set(String(agent.id), { ...agent.combat,
-          position: { ...agent.combat.position, ...(formation.unproject ? formation.unproject({ x, y }) : {
-            x: agent.combat.position.x + (x - point.x) / cell, y: agent.combat.position.y + (y - point.y) * 2 / cell }) } });
-        // Persistent stun reads current status, never a replayed impact event.
-        Spawner.drawCombatStun?.(context, agent, { ...point, x, y }, state.simSeconds,
-          { width, height, reducedMotion: idleMotion.matches, image: detailVfxImage });
-        // A hidden feet trait can still evade on any dominant silhouette. Use
-        // the laboratory's existing semantic label, not a hit or shield burst.
-        // Read all current cues so a simultaneous received hit keeps its recoil.
-        const dodge = state.combatVfx?.version === 1 && combatVfxFrame.active.findLast(cue =>
-          cue.kind === "dodge" && cue.channel === "defense" && String(cue.targetId) === String(agent.id));
-        if (dodge && state.simSeconds >= dodge.at && state.simSeconds < dodge.endsAt)
-          dodgeLabels.push({ targetId: agent.id, x, y: Math.max(20, y - point.height - 20), floor: y, age: state.simSeconds - dodge.at });
-        if (impact && impact.effectKind !== "reflect" && !["dodge", "counter"].includes(impact.kind) && String(impact.targetId) === String(agent.id) && age >= 0 && age < .25)
-          fallbackImpacts.push({ impact, age, primary, x, bodyY, lineWidth: context.lineWidth });
-        context.restore();
-      }
-      // Only this modal receives V4 artwork. Map dust and world effects are unchanged.
-      let defenseCommands = Spawner.drawDetailDefenseEffect ? detailCombatVfx.defenseCommands(vfxPositions, state.simSeconds) : [];
-      const defenseImages = new Map(), replacedDefenseIds = new Set();
-      for (const command of defenseCommands) {
-        let image = detailVfxImages.get(command.image);
-        if (!image) { image = globalThis.SpawnerAssets.image(); image.src = assetSource(command.image); detailVfxImages.set(command.image, image); }
-        defenseImages.set(command.eventId, image);
-        if (Spawner.detailDefenseImageReady(image, command)) replacedDefenseIds.add(command.eventId);
-      }
-      const drawnImpacts = new Set();
-      for (const command of detailCombatVfx.commands(arenaUnits, vfxPositions, state.simSeconds, cell, { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds, project: formation.project, unproject: formation.unproject, cell })) {
-        // Replace only the defended event, and only after its new image is ready.
-        if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
-        let image = detailVfxImages.get(command.image);
-        if (!image && command.image) {
-          image = globalThis.SpawnerAssets.image(); image.src = assetSource(command.image);
-          detailVfxImages.set(command.image, image);
-        }
-        if (Spawner.drawDetailVfxCell(context, image, command, detailVfxRendering)) {
-          if (command.kind === "impact" && command.eventId !== undefined) drawnImpacts.add(command.eventId);
-        } else if (command.kind === "flight") {
-          // Keep an actual shot visible while its approved sheet loads or fails.
-          // Use the same frozen origin, current head and lifetime as the artwork.
-          const directionX = Math.cos(command.pathAngle ?? command.angle), directionY = Math.sin(command.pathAngle ?? command.angle);
-          const x = command.headX ?? command.x + directionX * command.size * .25, y = command.headY ?? command.y + directionY * command.size * .25;
-          const radius = clamp(command.size * .035, 2, 6);
-          context.save(); context.fillStyle = "#b6ed84"; context.strokeStyle = "#e0ffb7"; context.lineWidth = Math.max(1, radius * .55);
-          context.beginPath(); context.moveTo(x - directionX * radius * 4, y - directionY * radius * 4); context.lineTo(x, y); context.stroke();
-          context.beginPath(); context.arc(x, y, radius, 0, Math.PI * 2); context.fill(); context.restore();
-        } else if (command.kind === "impact" && command.effectKind !== "reflect" && command.amount > 0) {
-          const age = state.simSeconds - command.eventAt;
-          // The actor loop has only one reaction per living fighter. A killing
-          // hit or another simultaneous hit still has its own observed point.
-          // Reuse the existing short fallback, never infer an absent recipient.
-          if (age >= 0 && age < .25 && !fallbackImpacts.some(entry => entry.impact.eventId === command.eventId)) {
-            const target = arenaUnits.find(agent => String(agent.id) === String(command.targetId));
-            fallbackImpacts.push({ impact: { kind: "hit", eventId: command.eventId, critical: command.critical }, age,
-              primary: target ? Spawner.combatPrimary(target) : "blade", x: command.contactX ?? command.x, bodyY: command.contactY ?? command.y, lineWidth: 1 });
-          }
-        }
-      }
-      // Replace only the matching impact that actually drew. An unrelated missing
-      // sheet must not duplicate loaded art or suppress an unrepresented cue.
-      for (const { impact, age, primary, x, bodyY, lineWidth } of fallbackImpacts) {
-        const defense = impact.kind === "block" || impact.kind === "parry";
-        if (defenseCommands.some(command => command.eventId === impact.eventId) ||
-          !defense && state.combatVfx?.version === 1 && drawnImpacts.has(impact.eventId)) continue;
-        context.save(); context.globalAlpha = 1 - age / .25;
-        context.strokeStyle = impact.critical ? "#ffda8a" : defense ? "#a6e4fa" : "#ffe1a0";
-        context.lineWidth = lineWidth; context.beginPath();
-        const reach = (10 + age * 18) * (impact.critical ? 1.3 : 1);
-        context.moveTo(x - reach, bodyY + reach); context.lineTo(x + reach, bodyY - reach);
-        context.moveTo(x - reach * .5, bodyY - reach * .75); context.lineTo(x + reach * .5, bodyY + reach * .75);
-        context.stroke(); context.restore();
-      }
-      for (const command of defenseCommands) if (!Spawner.drawDetailDefenseEffect(context, command, defenseImages.get(command.eventId), { reducedMotion: idleMotion.matches, rendering: detailVfxRendering }))
-        Spawner.drawDetailDefenseFallback(context, command);
-      let vitalCommands = detailCombatVfx.vitalCommands(arenaUnits, vfxPositions, state.simSeconds,
-        { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds, includeDirectDamage: true, project: formation.project, unproject: formation.unproject, cell });
-      const labelLayout = Spawner.layoutDetailCombatLabels?.(context,
-        { vitals: vitalCommands, defenses: defenseCommands, dodges: dodgeLabels },
-        { width, height, reducedMotion: idleMotion.matches, positions: vfxPositions });
-      if (labelLayout) ({ vitals: vitalCommands, defenses: defenseCommands, dodges: dodgeLabels } = labelLayout);
-      for (const command of vitalCommands) Spawner.drawDetailVitalEffect(context, command,
-        { width, height, reducedMotion: idleMotion.matches, image: detailVfxImage });
-      Spawner.drawDetailDefenseLabels?.(context, defenseCommands, { width, height, reducedMotion: idleMotion.matches,
-        vitals: vitalCommands, reservedLabels: dodgeLabels });
-      for (const label of dodgeLabels) {
-        if (label.labelHidden) continue;
-        // Reserve a lane above their existing labels, or below the health bar
-        // when the upper edge leaves no room. Never move the HP feedback.
-        const healthLabels = vitalCommands.filter(command => command.kind !== "regeneration" && !command.labelHidden && String(command.targetId) === String(label.targetId));
-        const top = Math.min(label.y, ...healthLabels.map(command => (command.labelTop ?? Math.max(20, Math.min(height - 20,
-          command.y - command.bodyHeight * .5 - 14 - (idleMotion.matches ? 0 : Math.min(1, command.age / .85) * 14) - command.lane * 18))) - 32));
-        const labelY = label.placed ? label.y : top < 20 ? Math.min(height - 20, label.floor + 36) : top;
-        context.save(); context.globalAlpha = 1 - (label.age / .4) ** 2;
-        context.textAlign = "center"; context.textBaseline = "middle"; context.lineJoin = "round";
-        context.font = '700 ' + Math.max(12, Math.min(18, width / 65)) + 'px "Malgun Gothic", sans-serif';
-        context.lineWidth = 4; context.strokeStyle = "#203125"; context.fillStyle = "#d3f1ff";
-        context.strokeText("회피", label.x, labelY); context.fillText("회피", label.x, labelY); context.restore();
-      }
+      scene.background = "DesignAssets/Combat/" + combatBackgroundAt(combatWatch.x, combatWatch.y) + ".webp";
+      combatStage.render(scene, now, true);
     }
     function templateDescription(slots, levels) {
       const counts = attributeCounts(slots, levels);
@@ -7919,7 +7629,9 @@
         designDnaEditor.context(state.nestLevel, state.evolutionPoints, unitDraft.readOnly || !!state.ending, unitDraft.tribe);
         designDnaEditor.load(unitDraft.dna, unitDraft.readOnly || !!state.ending);
       }
-      designSave.hidden = !!readOnly;
+      unitDraft.roomId = connection.roomId;
+      unitDraft.colonyId = connection.colonyId;
+      unitDraft.savedDesign = template ? unitDesignSignature() : null;
       closeCodex(false);
       designName.setCustomValidity("");
       document.getElementById("design-title").textContent = "속성 설계";
@@ -7934,6 +7646,7 @@
       if (unitDraft.dna) designDnaEditor.fit();
       if (readOnly) evolutionClose.focus();
       else designName.focus();
+      if (!template && !readOnly) saveUnitDesign();
     }
 
     function createDesignLock() {
@@ -7998,18 +7711,25 @@
       designSlots.replaceChildren(fragment);
     }
 
+    const dnaHelp = document.createElement("p");
+    dnaHelp.textContent = "조각은 클릭해서 배치·삭제하고, 드래그로 옮길 수 있어요. 변경은 자동 저장됩니다.";
+    designDnaHost.querySelector(".dna-guide").append(dnaHelp);
+    const gatherHelp = document.createElement("p");
+    gatherHelp.textContent = "채집에는 채집기관이 필요합니다.";
+    designDnaHost.querySelector(".dna-guide").append(gatherHelp);
+
     function updateUnitDesign() {
       if (!unitDraft || evolutionPanel.hidden) return;
       if (unitDraft.dna) { updateDnaDesign(); return; }
       updateCombatPrimary();
-      if (!unitDraft.nameEdited && !unitDraft.readOnly) designName.value = Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
+      if (!unitDraft.nameEdited && !unitDraft.readOnly && !unitDraft.saving) designName.value = Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       const counts = attributeCounts(unitDraft.slots, unitDraft.attributeLevels);
       const stats = unitStats(counts, unitDraft.tribe);
       prepareAgentTemplate(unitDraft).catch(() => {});
       document.getElementById("design-preview-image").src = agentImageSource({ tribe: unitDraft.tribe, attributes: counts, carrying: 0 });
       const profile = Spawner.combatProfile({ tribe: unitDraft.tribe, attributes: counts, stats, combatPrimary: unitDraft.combatPrimary });
       const statValues = [["공격", Math.round(profile.attackPower)], ["방어", Math.round(profile.defense)], ["공속", profile.attackSpeed.toFixed(2) + "/초"], ["시야", stats.vision + "칸"], ["운반", stats.capacity + "개"],
-        ["이동", Number(agentSpeed({ stats, tribe: unitDraft.tribe, carrying: 0 }).toFixed(2)) + "칸/초"], ["체력", stats.health]];
+        ["이동", Number(agentSpeed({ stats, tribe: unitDraft.tribe, carrying: 0 }).toFixed(2)) + "칸/초"], ["체력", stats.health], ["수명", formatLifetime(stats.lifespan)]];
       const statsFragment = document.createDocumentFragment();
       for (const [label, value] of statValues) {
         const term = document.createElement("dt");
@@ -8050,30 +7770,73 @@
         button.setAttribute("aria-expanded", String(button.dataset.attributeInfo === selectedAttribute));
       }
       updateCodex();
-      designSave.disabled = !!state.ending || connection.busy || !connection.online || unitDraft.slots.length > slotCapacity() ||
-        unitDraft.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, unitDraft.tribe));
       setEvolutionText(designStatus, unitDraft.error);
+      queueUnitDesignSave();
     }
 
-    async function saveUnitDesign() {
-      if (!unitDraft || unitDraft.readOnly) return;
-      const name = designName.value.trim();
-      if (!name) {
-        designName.setCustomValidity("템플릿 이름을 지어 주세요.");
-        designName.reportValidity();
-        return;
-      }
-      if (unitDraft.dna && !Spawner.validateDna(unitDraft.dna, state.nestLevel, 999999999)) return;
-      const result = await sendCommand(unitDraft.dna ? { type: "design", templateId: unitDraft.id,
-        name, nameEdited: unitDraft.nameEdited, dna: { ...Spawner.cloneDna(unitDraft.dna), budget: state.evolutionPoints, level: state.nestLevel }, birth: false } : { type: "design", templateId: unitDraft.id,
-        name, nameEdited: unitDraft.nameEdited, slots: [...unitDraft.slots], combatPrimary: unitDraft.combatPrimary, birth: false });
-      if (!result || !unitDraft) return;
-      state.selectedTemplateId = result.templateId;
-      closeEvolutionPanel();
-      updateColonyPanel();
+    function unitDesignSignature() {
+      return JSON.stringify({
+        name: designName.value.trim() || Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id),
+        nameEdited: unitDraft.nameEdited,
+        ...(unitDraft.dna ? { dna: { version: unitDraft.dna.version, pieces: unitDraft.dna.pieces } } :
+          { slots: unitDraft.slots, combatPrimary: unitDraft.combatPrimary })
+      });
+    }
+
+    function queueUnitDesignSave() {
+      const draft = unitDraft;
+      if (!draft || draft.readOnly || draft.saving || draft.saveTimer || state.ending || !connection.active || !connection.online) return;
+      const signature = unitDesignSignature();
+      if (signature === draft.savedDesign || signature === draft.failedDesign) return;
+      draft.saveTimer = setTimeout(() => {
+        draft.saveTimer = null;
+        if (unitDraft === draft) saveUnitDesign();
+      }, 150);
+    }
+
+    function saveUnitDesign() {
+      const draft = unitDraft;
+      if (!draft || draft.readOnly) return Promise.resolve(true);
+      clearTimeout(draft.saveTimer);
+      draft.saveTimer = null;
+      if (draft.saving) return draft.saving;
+      draft.saving = Promise.resolve().then(async () => {
+        while (unitDraft === draft && connection.roomId === draft.roomId && connection.colonyId === draft.colonyId) {
+          const signature = unitDesignSignature();
+          if (signature === draft.savedDesign) return true;
+          if (!connection.active || !connection.online || state.ending) return false;
+          if (connection.busy) {
+            await new Promise(resolve => setTimeout(resolve, 50));
+            continue;
+          }
+          if (draft.dna && !Spawner.validateDna(draft.dna, state.nestLevel, 999999999)) return false;
+          const action = JSON.parse(signature);
+          if (action.dna) action.dna = { ...action.dna, budget: state.evolutionPoints, level: state.nestLevel };
+          const result = await sendCommand({ type: "design", templateId: draft.id, ...action, birth: false });
+          if (unitDraft !== draft) return false;
+          if (!result) {
+            draft.failedDesign = signature;
+            return false;
+          }
+          draft.id = result.templateId;
+          draft.savedDesign = signature;
+          draft.failedDesign = null;
+          draft.error = "";
+          state.selectedTemplateId = result.templateId;
+          updateUnitDesign();
+        }
+        return false;
+      }).finally(() => { draft.saving = null; });
+      return draft.saving;
+    }
+
+    async function requestCloseEvolutionPanel() {
+      const draft = unitDraft;
+      if (await saveUnitDesign() && unitDraft === draft) closeEvolutionPanel();
     }
 
     function closeEvolutionPanel() {
+      if (unitDraft) clearTimeout(unitDraft.saveTimer);
       closeCodex(false);
       hideHelpTooltip();
       evolutionPanel.hidden = true;
@@ -8105,67 +7868,10 @@
       colonyMenuClose.focus();
     }
 
-    const resourceInventoryRows = new Map();
-
-    function updateResourceInventory() {
-      const inventory = document.getElementById("resource-inventory");
-      if (!resourceInventoryRows.size) {
-        for (const definition of Spawner.RESOURCE_TYPES) {
-          const row = document.createElement("div");
-          row.tabIndex = 0;
-          row.className = "resource-inventory-item";
-          const image = document.createElement("canvas");
-          image.setAttribute("aria-hidden", "true");
-          const count = document.createElement("strong");
-          row.append(image, count);
-          row.addEventListener("pointerenter", () => showHelpTooltip(row));
-          row.addEventListener("pointerleave", hideHelpTooltip);
-          row.addEventListener("focus", () => showHelpTooltip(row));
-          row.addEventListener("blur", hideHelpTooltip);
-          inventory.append(row);
-          resourceInventoryRows.set(definition.key, { row, count, image, definition });
-        }
-      }
-      const previousHelp = helpTooltipTarget?.dataset.help;
-      let visible = 0;
-      for (const [key, entry] of resourceInventoryRows) {
-        const amount = Math.max(0, state.resourceInventory?.[key] || 0);
-        const limit = state.resourceInventoryLimits?.[key] ?? "—";
-        updatePanelText(entry.count, amount + "/" + limit);
-        entry.row.hidden = amount <= 0;
-        entry.row.dataset.help = entry.definition.name + " · 보유 " + amount + "개 / 비축 한도 " + limit + "개\n" +
-          (Spawner.isColonyFood(key, state.tribe, worldMap.generationVersion) ?
-            "비축 한도를 넘는 납품은 진화 포인트로 전환됩니다." : "다른 자원과 창고 공간을 공유합니다.");
-        entry.row.setAttribute("aria-label", entry.definition.name + " · 보유 " + amount + "개 / 비축 한도 " + limit + "개");
-        if (amount <= 0) continue;
-        visible++;
-        const ratio = window.devicePixelRatio || 1;
-        if (entry.image.dataset.ratio === String(ratio)) continue;
-        const sprite = resourceCarrySprites.get(key), crop = resourceCarryBounds.get(key);
-        entry.image.width = entry.image.height = Math.round(24 * ratio);
-        const scale = Math.min(entry.image.width / crop.width, entry.image.height / crop.height) * .94;
-        entry.image.getContext("2d").drawImage(sprite, crop.x, crop.y, crop.width, crop.height,
-          (entry.image.width - crop.width * scale) / 2, (entry.image.height - crop.height * scale) / 2, crop.width * scale, crop.height * scale);
-        entry.image.dataset.ratio = ratio;
-      }
-      if (helpTooltipTarget && inventory.contains(helpTooltipTarget)) {
-        if (helpTooltipTarget.hidden) hideHelpTooltip();
-        else if (helpTooltipTarget.dataset.help !== previousHelp) showHelpTooltip(helpTooltipTarget);
-      }
-      inventory.hidden = !visible;
-      inventory.setAttribute("aria-label", "자원 재고");
-      const layout = inventory.offsetWidth + "x" + inventory.offsetHeight;
-      if (inventory.dataset.layout !== layout || visible && document.documentElement.style.getPropertyValue("--resource-inventory-height") === "0px") {
-        inventory.dataset.layout = layout;
-        positionDiscoveryToasts(document.getElementById("agent-panel").getBoundingClientRect().width);
-      }
-    }
-
     function updateColonyPanel() {
       if (document.hidden) return;
       cheats?.update(connection.active && document.body.dataset.screen === "game",
         connection.busy || !connection.online, state.tribe, !!state.ending);
-      updateResourceInventory();
       const capacity = pointCapacity();
       foodProgressFill.style.width = (state.evolutionPoints / capacity * 100) + "%";
       const progress = document.getElementById("evolution-progress");
@@ -8189,12 +7895,17 @@
       for (const card of templateList.querySelectorAll("[data-template-id]")) {
         const template = state.templates.find((candidate) => candidate.id === Number(card.dataset.templateId));
         card.querySelector(".template-spawn").disabled = !!state.ending || connection.busy || !connection.online || !hasBirthplace() || state.agents.filter(agent => agent.health > 0).length >= unitCapacity() || state.evolutionPoints < birthCost(template, state.tribe) || (template.dna ? !dnaDesignValid(template.dna) : template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, state.tribe)));
+        const productionIssue = state.agents.filter(agent => agent.health > 0).length >= unitCapacity() ? "생산 가능한 개체 수를 모두 채웠어요." :
+          state.evolutionPoints < birthCost(template, state.tribe) ? "진화 포인트가 " + Math.ceil(birthCost(template, state.tribe) - state.evolutionPoints) + "P 부족합니다." : "";
+        card.title = productionIssue;
+        card.querySelector(".template-spawn").setAttribute("aria-label", template.name + " 생산 · " + birthCost(template, state.tribe) + "P" + (productionIssue ? " · " + productionIssue : ""));
         card.querySelector(".template-edit").disabled = connection.busy || !connection.online;
         card.querySelector(".template-delete").disabled = !!state.ending || connection.busy || !connection.online;
       }
       updateUnitDesign();
       updateCodex();
       updateAgentList();
+      updateBeginnerHelp();
     }
 
     function codexEntry(entry) {
@@ -8450,6 +8161,7 @@
       setEvolutionText(document.getElementById("codex-description"), kind === "resource" ? Spawner.codexResourceDetails(value).description : value.description);
       const hero = document.getElementById("codex-article-icons"), related = document.getElementById("codex-related");
       hero.replaceChildren();
+      hero.classList.toggle("codex-nest-images", kind === "nest");
       related.replaceChildren();
       if (kind === "terrain") {
         hero.append(codexTerrainImage(value, kind));
@@ -8483,7 +8195,7 @@
       if (value.player) {
         related.append(createCodexStats(Spawner.codexStatRows(Spawner.ATTRIBUTE_DNA.stats([], value.key))));
         const rule = document.createElement("p");
-        rule.textContent = "공격기관이 없으면 선제공격하지 않으며 기본 공격력 1로 방어합니다. 원거리 공격은 분비기관이 필요합니다.";
+        rule.textContent = "칼날·분비기관·갑각이 없는 유닛은 선제공격하지 않으며 기본 공격력 1로 방어합니다. 전사는 시야 안의 적을 찾아 싸우며 도주하지 않습니다. 안테나가 있으면 시야 밖까지 수색합니다.";
         related.append(rule);
       } else {
         const stats = value.stats;
@@ -8519,15 +8231,25 @@
 
     function renderAttributeCodex(attribute, related) {
       const tribe = unitDraft?.tribe || state.tribe;
-      document.getElementById("codex-related-title").textContent = (Spawner.PLAYER_TRIBES.find(value => value.key === tribe)?.name || "새싹콩") + " · 조각 1개";
+      const effects = Spawner.codexGeneTribeEffects(attribute);
+      document.getElementById("codex-related-title").textContent = effects.length ?
+        (Spawner.PLAYER_TRIBES.find(value => value.key === tribe)?.name || "새싹콩") + " · 조각 1개" : "조각 1개";
       related.append(createCodexStats(Spawner.codexGeneDetails(attribute, tribe).rows));
-      const heading = document.createElement("h4");
-      heading.textContent = "종족별 효과";
-      related.append(heading, createCodexStats(Spawner.PLAYER_TRIBES.map(value => [value.name, Spawner.codexGeneDetails(attribute, value.key).effect])));
+      if (effects.length) {
+        const heading = document.createElement("h4");
+        heading.textContent = "종족별 효과";
+        related.append(heading, createCodexStats(effects));
+      }
     }
 
     function renderColonyCodex(hero, related) {
-      hero.append(createColonyInfoImage(colonyInfoEntry(), 96));
+      for (const tribe of Spawner.PLAYER_TRIBES) {
+        const image = document.createElement("img");
+        image.className = "codex-building-image";
+        image.src = assetSource(tribe.nest);
+        image.alt = tribe.name;
+        hero.append(image);
+      }
       document.getElementById("codex-related-title").textContent = "레벨별 성장";
       related.append(createNestGrowthTable());
       updateColonyCodex();
@@ -8535,9 +8257,8 @@
 
     function renderBurrowCodex(value, hero, related) {
       hero.append(createBurrowImage(value.key, 96));
-      document.getElementById("codex-related-title").textContent = "출현 규칙";
-      related.append(createCodexStats([["크기", value.width + " × " + value.height + "칸"], ["처음 개체", value.initialCount + "기"],
-        ["출현 간격", value.spawnInterval + "초"], ["최대 개체", value.populationLimit + "기"]]));
+      document.getElementById("codex-related-title").textContent = "";
+      related.append(createCodexStats([["크기", value.width + " × " + value.height + "칸"]]));
     }
 
     function createNestGrowthTable() {
@@ -8550,7 +8271,7 @@
       table.setAttribute("aria-label", "둥지 레벨별 성장");
       const head = document.createElement("thead");
       const headings = document.createElement("tr");
-      for (const title of ["레벨", "최대 체력", "유닛 한도", "DNA 보드", "해금 DNA", "진화 포인트 보관량", "기본 자원 보관량", "다음 성장 비용"]) {
+      for (const title of ["레벨", "최대 체력", "유닛 한도", "DNA 보드", "해금 DNA", "진화 포인트 보관량", "다음 성장 비용"]) {
         const cell = document.createElement("th");
         cell.scope = "col";
         setEvolutionText(cell, title);
@@ -8580,12 +8301,10 @@
         attributes.append(icons);
         const capacity = document.createElement("td");
         capacity.textContent = balance.pointCapacity.toLocaleString("ko-KR");
-        const materials = document.createElement("td");
-        materials.textContent = Spawner.materialCapacity(level, []);
         const cost = document.createElement("td");
         const nextCost = nestUpgradeCost(level, tribe);
         cost.textContent = nextCost === null ? "—" : nextCost.toLocaleString("ko-KR");
-        row.append(name, health, units, slots, attributes, capacity, materials, cost);
+        row.append(name, health, units, slots, attributes, capacity, cost);
         body.append(row);
       }
       table.append(head, body);
@@ -8801,7 +8520,7 @@
       event.preventDefault();
       saveUnitDesign();
     });
-    designBackdrop.addEventListener("click", closeEvolutionPanel);
+    designBackdrop.addEventListener("click", requestCloseEvolutionPanel);
     evolutionPanel.addEventListener("keydown", (event) => {
       if (event.key !== "Tab") return;
       const controls = [...evolutionPanel.querySelectorAll("button, input, [tabindex='0']")].filter((element) => !element.disabled && element.getClientRects().length);
@@ -8821,6 +8540,33 @@
       nestStatus.textContent = "";
       await sendCommand({ type: "upgrade" });
     });
+
+    const beginnerHelp = Spawner.createBeginnerHelp(document,
+      command => sendCommand(command),
+      offer => {
+        if (offer.position) {
+          const agent = state.agents.find(entry => entry.id === offer.position.id);
+          if (agent) { selectAgent(agent); focusAgent(agent); }
+        } else if (offer.key.startsWith("board-")) {
+          const own = colonyEntries.find(entry => entry.id === connection.colonyId);
+          if (own) openColonyPanel(own);
+        } else openCodex(offer.guide);
+      },
+      async (roomId, patch) => {
+        try {
+          const progress = await client.call("beginner-help", { roomId, patch });
+          if (connection.roomId === roomId) state.beginnerHelp = progress;
+          return progress;
+        } catch (error) { showConnectionError(error.message); throw error; }
+      });
+
+    function updateBeginnerHelp() {
+      beginnerHelp.update(connection.roomId, state,
+        !connection.active || !connection.online || document.hidden || document.body.dataset.screen !== "game" ||
+        !evolutionPanel.hidden || !!document.querySelector("dialog[open]") ||
+        state.dragging || !!document.activeElement?.closest("input:not(#beginner-help-enabled), textarea, select"),
+        connection.busy);
+    }
 
     const agentPanel = document.getElementById("agent-panel");
     const agentPanelResize = document.getElementById("agent-panel-resize");
@@ -9387,7 +9133,7 @@
       if (!state.ending || endingRoomId !== connection.roomId || document.body.dataset.screen !== "game") return;
       endingPlayback.elapsedMs = Math.min(4000, endingPlayback.elapsedMs + elapsedMs);
       const progress = clamp((endingPlayback.elapsedMs - 2000) / 2000, 0, 1);
-      const fade = idleMotion.matches ? Number(progress > 0) : progress * progress * (3 - 2 * progress);
+      const fade = state.ending.reason === "victory" ? 0 : idleMotion.matches ? Number(progress > 0) : progress * progress * (3 - 2 * progress);
       canvas.style.setProperty("--ending-fade", String(fade));
       endingToolbar.hidden = endingPlayback.elapsedMs < 4000;
       if (endingPlayback.elapsedMs >= 4000 && endingPlayback.pending) {
@@ -9404,13 +9150,16 @@
       }
       if (document.body.dataset.screen !== "game" || endingRoomId === connection.roomId) return;
       endingRoomId = connection.roomId;
-      endingPlayback.elapsedMs = live ? 0 : 4000;
+      const victory = state.ending.reason === "victory";
+      endingPlayback.elapsedMs = live && !victory ? 0 : 4000;
       endingPlayback.pending = true;
       state.lastFrame = performance.now();
-      canvas.style.setProperty("--ending-fade", live ? "0" : "1");
-      document.body.dataset.ending = "true";
+      canvas.style.setProperty("--ending-fade", live || victory ? "0" : "1");
+      document.body.dataset.ending = victory ? "victory" : "true";
       clearDiscoveryToasts();
       const report = state.ending;
+      document.getElementById("ending-title").textContent = victory ? "승리" : "마지막 불씨가 꺼졌습니다";
+      document.getElementById("ending-reason").hidden = victory || state.agents.some(agent => agent.health > 0);
       document.getElementById("ending-colony").textContent = colonyEntries.find(entry => entry.id === connection.colonyId)?.name || "군락의 기록";
       document.getElementById("ending-reason").textContent = report.reason === "nest-destroyed" ?
         "둥지가 무너지고 마지막 생명도 떠났습니다." : "유닛이 모두 떠났고, 새 생명을 탄생시킬 진화 포인트가 부족합니다.";
@@ -9649,7 +9398,6 @@
       if (colonyChanged) focusColony();
       const { food, sharedTrails, footprints, explored, visible, ...view } = packet.state;
       if (state.corpses.some(corpse => !view.corpses.some(current => current.id === corpse.id))) {
-        combatAttributeArt.clearDeaths();
         for (const sheets of unitAnimationSheets.values()) sheets.get("death")?.attributeFrames?.clear();
       }
       Object.assign(state, view);
@@ -9809,7 +9557,7 @@
           return;
         }
         await prepareTribeRendering(packet.colonies);
-        await Promise.all([prepareAgentRendering(packet), prepareDetailVfx()]);
+        await Promise.all([prepareAgentRendering(packet), combatStage.prepare()]);
         if (birthPreparationVersion !== roomPreparationVersion || pebbleEntryVersion !== pebbleRoomEntryVersion || connection.roomId !== roomId) return;
         connection.active = true;
         applySnapshot(packet);
@@ -9888,7 +9636,7 @@
         roomsSignature = signature;
         roomCount = rooms.length;
         roomList.closest("section").hidden = roomCount === 0;
-        endedRoomIds = rooms.filter(room => room.ending).map(room => room.id);
+        endedRoomIds = rooms.filter(room => room.ending && room.ending.reason !== "victory").map(room => room.id);
         document.getElementById("room-count").textContent = String(roomCount);
         const fragment = document.createDocumentFragment();
         for (const room of rooms.toSorted((a, b) => Number(!!a.ending) - Number(!!b.ending) ||
@@ -9901,8 +9649,8 @@
           title.textContent = room.title;
           if (room.ending) {
             const badge = document.createElement("span");
-            badge.className = "room-ending-badge";
-            badge.textContent = "멸망";
+            badge.className = "room-ending-badge" + (room.ending.reason === "victory" ? " is-victory" : "");
+            badge.textContent = room.ending.reason === "victory" ? "승리" : "멸망";
             title.append(badge);
           }
           if (room.id === connection.roomId) {
@@ -9912,7 +9660,7 @@
             title.append(badge);
           }
           const detail = document.createElement("small");
-          detail.textContent = (room.ending ? "멸망 · " + Math.floor(room.ending.endedAt / 60) + "분의 기록" : room.tribe === null ? "부족 선택 전" : Math.floor(room.simSeconds / 60) + "분 진행") + " · " + new Date(room.updatedAt).toLocaleString("ko-KR");
+          detail.textContent = (room.ending ? (room.ending.reason === "victory" ? "승리 · " : "멸망 · ") + Math.floor(room.ending.endedAt / 60) + "분의 기록" : room.tribe === null ? "부족 선택 전" : Math.floor(room.simSeconds / 60) + "분 진행") + " · " + new Date(room.updatedAt).toLocaleString("ko-KR");
           const seed = document.createElement("small");
           seed.className = "room-seed-label";
           seed.textContent = "시드 " + room.seed;
@@ -10068,7 +9816,7 @@
     document.getElementById("room-name-random").addEventListener("click", randomRoomName);
     document.getElementById("welcome-form").addEventListener("submit", (event) => {
       event.preventDefault();
-      lobbyAction("create", { title: roomTitle.value.trim(), seed: roomSeed.value === "" ? null : Number(roomSeed.value) });
+      lobbyAction("create", { title: roomTitle.value.trim(), seed: roomSeed.value === "" ? null : Number(roomSeed.value), beginnerHelpEnabled: document.getElementById("room-beginner-help").checked });
     });
     document.getElementById("rooms-refresh").addEventListener("click", refreshRooms);
     roomsDeleteAll.addEventListener("click", deleteAllRooms);

@@ -54,11 +54,29 @@ function populateColonies(room, tribe) {
   for (const colony of room.colonies) room.games.set(colony.ownerId, createGame(room, colony));
 }
 
-export function createRoom(title, seed, tribe, onProgress, cheats) {
+const beginnerHelpKeys = new Set(["intro", "gatherer", "upgrade", "military", "board-3", "board-4", "combat", "nest-defense"]);
+
+function beginnerHelpState(value) {
+  const keys = values => Array.isArray(values) ? [...new Set(values.filter(key => beginnerHelpKeys.has(key)))] : [];
+  return { enabled: value?.enabled !== false, completed: keys(value?.completed), dismissed: keys(value?.dismissed) };
+}
+
+export function updateRoomBeginnerHelp(room, patch) {
+  const current = beginnerHelpState(room.beginnerHelp);
+  room.beginnerHelp = beginnerHelpState({
+    enabled: typeof patch.enabled === "boolean" ? patch.enabled : current.enabled,
+    completed: [...current.completed, ...(Array.isArray(patch.completed) ? patch.completed : [])],
+    dismissed: patch.resetDismissed === true ? [] : [...current.dismissed, ...(Array.isArray(patch.dismissed) ? patch.dismissed : [])]
+  });
+  room.revision += 1;
+  return room.beginnerHelp;
+}
+
+export function createRoom(title, seed, tribe, onProgress, cheats, beginnerHelpEnabled) {
   if (tribe === undefined) tribe = "bean";
   if (tribe !== null && !PLAYER_TRIBES.some(entry => entry.key === tribe)) throw new Error("시작할 부족을 선택해 주세요.");
   const room = { id: crypto.randomUUID(), title: requireName(title, 24),
-    hostId: crypto.randomUUID(), seed, cheats: cheats === true, simSeconds: 0, revision: 0, updatedAt: Date.now(),
+    hostId: crypto.randomUUID(), seed, cheats: cheats === true, beginnerHelp: beginnerHelpState({ enabled: beginnerHelpEnabled }), simSeconds: 0, revision: 0, updatedAt: Date.now(),
     world: generateWorld(seed, undefined, progress => onProgress?.(progress * .8)), colonies: [], games: new Map(), food: new Map(), foodSpots: new Map() };
   for (const [x, y, amount, resourceType] of room.world.food) room.food.set(x + "," + y, { x, y, amount, initialAmount: amount, resourceType, terrain: terrainTypes[room.world.terrain[y * (room.world.size || 320) + x]] });
   populateResourceNodes(room);
@@ -76,7 +94,7 @@ export function createRoom(title, seed, tribe, onProgress, cheats) {
 
 export function saveRoom(room) {
   return { version: 2, id: room.id, title: room.title, hostId: room.hostId, seed: room.seed, world: room.world,
-    cheats: room.cheats === true,
+    cheats: room.cheats === true, beginnerHelp: beginnerHelpState(room.beginnerHelp),
     worldGenerationVersion: room.world.generationVersion,
     simulationUpdates: [...room.games].map(([owner, game]) => [owner, simulationUpdates.get(room)?.get(game) || null]),
     ending: room.games.get(room.hostId).ending,
@@ -120,6 +138,7 @@ export function restoreRoom(saved) {
   const size = (world.size || 320);
   const room = { id: saved.id, title: requireName(saved.title, 24),
     hostId: saved.hostId, seed: saved.seed, cheats: saved.cheats === true, simSeconds: saved.simSeconds, revision: 0, updatedAt: saved.updatedAt,
+    beginnerHelp: beginnerHelpState(saved.beginnerHelp || { enabled: saved.beginnerHelpEnabled }),
     resourceVersion: Number.isInteger(saved.resourceVersion) ? saved.resourceVersion : 0,
     world, colonies: [], games: new Map(), food: new Map(saved.food), foodSpots: new Map() };
   room.world.depletedTrees = new Set((saved.depletedTrees || []).filter(index => Number.isInteger(index) && index >= 0 && index < size * size));
@@ -219,7 +238,7 @@ export function snapshotRoom(room, includeWorld) {
     world: includeWorld ? { roomId: room.id, size: (room.world.size || 320), seed: room.seed, generationVersion: room.world.generationVersion, terrain: room.world.terrain, hazards: room.world.hazards, burrows: room.world.burrows, treeCells: room.world.treeCells,
       creatureHabitats: (room.world.encounters || []).map(plan => ({ key: plan.key, terrains: plan.terrains })),
       resourceCells: [...room.food.values()].filter(cell => cell.kind !== "corpse" && cell.resourceType !== "tree" && !isTreeFood(cell, room.world)).map(cell => [cell.x, cell.y]) } : undefined,
-    state: { ...state, combatVfx } };
+    state: { ...state, combatVfx, beginnerHelp: beginnerHelpState(room.beginnerHelp) } };
 }
 
 export function commandRoom(room, action) {

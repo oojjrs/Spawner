@@ -91,13 +91,16 @@ test("4종족의 렌더용 방향은 월드 상태와 무관하고 원본을 보
   }
 });
 
-test("인게임 패널은 타깃이나 잔존 월드 방향 대신 화면 진영을 적용한다", () => {
-  const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
-  const declaration = source.slice(source.indexOf("    function drawCombatPanel("))
-    .match(/^        const facing = [^\r\n]+/m)[0];
-  for (const side of [0, 1]) for (const facing of [-1, 1]) {
-    const scope = createContext({ agent: { facing, combat: { side } }, opponent: { x: side ? 900 : 100 }, point: { x: 500 } });
-    runInContext(declaration + "\nglobalThis.direction = facing;", scope);
-    assert.equal(scope.direction, side ? -1 : 1);
-  }
+test("인게임 스냅샷도 공용 전투 화면에서 잔존 월드 방향 대신 진영을 적용한다", async () => {
+  await harness(async draw => {
+    for (const facing of [-1, 1]) {
+      const agents = [0, 1].map(side => ({ id: "world-" + side, species: "vine-turtle", facing,
+        health: 100, stats: { health: 100 }, mode: "idle", animationStartedAt: 0,
+        combat: { id: "world", side, stunnedUntil: 0 } }));
+      const calls = await draw({ agents, history: [], projectiles: [], time: 1, live: true, result: () => null });
+      const bodies = calls.filter(call => creatureImages.has(call.image));
+      assert.equal(bodies.length, 2);
+      for (const body of bodies) assert.equal(Math.sign(body.transform[0]), body.transform[4] > 520 ? 1 : -1);
+    }
+  });
 });

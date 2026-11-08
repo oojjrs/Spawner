@@ -4162,11 +4162,13 @@ document.write(
 "modules[\"server/nests.mjs\"] = (() => {\n" +
 "const { CONQUEST_PACING } = modules[\"server/conquest-pacing.mjs\"];\n" +
 "\n" +
+"const NEST_RECOVERY = Object.freeze({ delay: 15, rate: .005 });\n" +
+"\n" +
 "const NEST_LEVELS = [\n" +
-"  { health: 100, unitCapacity: 10, slotCapacity: 1, pointCapacity: 100, upgradeCost: CONQUEST_PACING.nestCosts[0] },\n" +
+"  { health: 100, unitCapacity: 10, slotCapacity: 1, pointCapacity: 200, upgradeCost: CONQUEST_PACING.nestCosts[0] },\n" +
 "  { health: 200, unitCapacity: 20, slotCapacity: 2, pointCapacity: 500, upgradeCost: CONQUEST_PACING.nestCosts[1] },\n" +
-"  { health: 400, unitCapacity: 30, slotCapacity: 3, pointCapacity: 2500, upgradeCost: CONQUEST_PACING.nestCosts[2] },\n" +
-"  { health: 800, unitCapacity: 40, slotCapacity: 4, pointCapacity: 12500, upgradeCost: null }\n" +
+"  { health: 400, unitCapacity: 30, slotCapacity: 3, pointCapacity: 1000, upgradeCost: CONQUEST_PACING.nestCosts[2] },\n" +
+"  { health: 800, unitCapacity: 40, slotCapacity: 4, pointCapacity: 2000, upgradeCost: null }\n" +
 "];\n" +
 "\n" +
 "function nestUpgradeCost(level, tribe) {\n" +
@@ -4174,11 +4176,19 @@ document.write(
 "  return cost !== null && tribe === \"pebble\" ? cost * .75 : cost;\n" +
 "}\n" +
 "\n" +
-"function materialCapacity(nestLevel) {\n" +
-"  return [30, 40, 50, 60][Math.max(0, Math.min(3, (nestLevel || 1) - 1))];\n" +
+"return { NEST_RECOVERY, NEST_LEVELS, nestUpgradeCost };\n" +
+"})();\n" +
+"modules[\"server/lifespan.mjs\"] = (() => {\n" +
+"const AGENT_LIFESPAN = 300;\n" +
+"const AGENT_LIFESPAN_BONUS = 120;\n" +
+"const AGENT_DEATH_WARNING = 60;\n" +
+"\n" +
+"function agentRemainingLifespan(agent, time) {\n" +
+"  if (!Number.isFinite(agent.lifespan) || agent.lifespan <= 0) return Infinity;\n" +
+"  return Math.max(0, agent.lifespan - Math.max(0, time - (agent.lifespanStartedAt ?? agent.bornAt)));\n" +
 "}\n" +
 "\n" +
-"return { NEST_LEVELS, nestUpgradeCost, materialCapacity };\n" +
+"return { AGENT_LIFESPAN, AGENT_LIFESPAN_BONUS, AGENT_DEATH_WARNING, agentRemainingLifespan };\n" +
 "})();\n" +
 "modules[\"server/dna-layouts.mjs\"] = (() => {\n" +
 "const DNA_LAYOUTS = [\n" +
@@ -4784,16 +4794,17 @@ document.write(
 "    \"counts\": {\n" +
 "      \"blade\": 1,\n" +
 "      \"antenna\": 1,\n" +
-"      \"power\": 9,\n" +
-"      \"speed\": 1\n" +
+"      \"power\": 5,\n" +
+"      \"speed\": 1,\n" +
+"      \"health\": 5\n" +
 "    },\n" +
 "    \"pieces\": [\n" +
 "      {\n" +
-"        \"gene\": \"power\",\n" +
+"        \"gene\": \"blade\",\n" +
 "        \"grade\": 2,\n" +
-"        \"rotation\": 4,\n" +
-"        \"q\": -1,\n" +
-"        \"r\": -1\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": -4\n" +
 "      },\n" +
 "      {\n" +
 "        \"gene\": \"antenna\",\n" +
@@ -4805,9 +4816,16 @@ document.write(
 "      {\n" +
 "        \"gene\": \"power\",\n" +
 "        \"grade\": 2,\n" +
-"        \"rotation\": 3,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -4,\n" +
+"        \"r\": 1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 0,\n" +
 "        \"q\": -2,\n" +
-"        \"r\": 2\n" +
+"        \"r\": 0\n" +
 "      },\n" +
 "      {\n" +
 "        \"gene\": \"power\",\n" +
@@ -4817,46 +4835,11 @@ document.write(
 "        \"r\": 4\n" +
 "      },\n" +
 "      {\n" +
-"        \"gene\": \"blade\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 0,\n" +
-"        \"q\": -2,\n" +
-"        \"r\": 0\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
 "        \"rotation\": 2,\n" +
-"        \"q\": 2,\n" +
-"        \"r\": -2\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"speed\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 4,\n" +
-"        \"q\": 1,\n" +
-"        \"r\": -2\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 0,\n" +
-"        \"q\": 2,\n" +
-"        \"r\": -4\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 4,\n" +
-"        \"q\": 2,\n" +
-"        \"r\": 1\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 1,\n" +
-"        \"q\": 4,\n" +
-"        \"r\": -2\n" +
+"        \"q\": 0,\n" +
+"        \"r\": 2\n" +
 "      },\n" +
 "      {\n" +
 "        \"gene\": \"power\",\n" +
@@ -4868,9 +4851,44 @@ document.write(
 "      {\n" +
 "        \"gene\": \"power\",\n" +
 "        \"grade\": 2,\n" +
-"        \"rotation\": 2,\n" +
+"        \"rotation\": 4,\n" +
 "        \"q\": 1,\n" +
-"        \"r\": 1\n" +
+"        \"r\": 2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 4,\n" +
+"        \"r\": 0\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 3,\n" +
+"        \"r\": -2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 3,\n" +
+"        \"r\": -4\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"speed\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 3,\n" +
+"        \"q\": 2,\n" +
+"        \"r\": -2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 2,\n" +
+"        \"r\": -4\n" +
 "      }\n" +
 "    ]\n" +
 "  },\n" +
@@ -4882,129 +4900,137 @@ document.write(
 "    \"counts\": {\n" +
 "      \"blade\": 1,\n" +
 "      \"antenna\": 1,\n" +
-"      \"power\": 9,\n" +
+"      \"power\": 5,\n" +
 "      \"combo\": 3,\n" +
-"      \"critical\": 3\n" +
+"      \"critical\": 3,\n" +
+"      \"health\": 5\n" +
 "    },\n" +
 "    \"pieces\": [\n" +
 "      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 4,\n" +
-"        \"q\": -1,\n" +
-"        \"r\": -2\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 4,\n" +
-"        \"q\": -3,\n" +
-"        \"r\": 0\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 4,\n" +
-"        \"q\": -5,\n" +
-"        \"r\": 2\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 3,\n" +
-"        \"q\": 3,\n" +
-"        \"r\": -4\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 0,\n" +
-"        \"q\": 3,\n" +
-"        \"r\": -5\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 3,\n" +
-"        \"q\": 2,\n" +
-"        \"r\": -2\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 0,\n" +
-"        \"q\": 2,\n" +
-"        \"r\": -3\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 1,\n" +
-"        \"q\": 5,\n" +
-"        \"r\": -3\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"critical\",\n" +
-"        \"grade\": 3,\n" +
-"        \"rotation\": 4,\n" +
-"        \"q\": 3,\n" +
-"        \"r\": 2\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"combo\",\n" +
-"        \"grade\": 3,\n" +
-"        \"rotation\": 2,\n" +
-"        \"q\": 3,\n" +
-"        \"r\": -1\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"combo\",\n" +
-"        \"grade\": 3,\n" +
-"        \"rotation\": 2,\n" +
-"        \"q\": 0,\n" +
-"        \"r\": -1\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"critical\",\n" +
-"        \"grade\": 3,\n" +
-"        \"rotation\": 2,\n" +
-"        \"q\": -2,\n" +
-"        \"r\": 1\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 4,\n" +
-"        \"q\": -5,\n" +
-"        \"r\": 5\n" +
-"      },\n" +
-"      {\n" +
 "        \"gene\": \"blade\",\n" +
 "        \"grade\": 2,\n" +
-"        \"rotation\": 0,\n" +
-"        \"q\": -4,\n" +
-"        \"r\": 4\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"combo\",\n" +
-"        \"grade\": 3,\n" +
 "        \"rotation\": 1,\n" +
-"        \"q\": 1,\n" +
-"        \"r\": 3\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"critical\",\n" +
-"        \"grade\": 3,\n" +
-"        \"rotation\": 3,\n" +
-"        \"q\": -1,\n" +
-"        \"r\": 3\n" +
+"        \"q\": 0,\n" +
+"        \"r\": -5\n" +
 "      },\n" +
 "      {\n" +
 "        \"gene\": \"antenna\",\n" +
 "        \"grade\": 2,\n" +
-"        \"rotation\": 1,\n" +
-"        \"q\": 0,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": -2,\n" +
+"        \"r\": -3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 3,\n" +
+"        \"q\": -3,\n" +
 "        \"r\": 1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": -1,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 3,\n" +
+"        \"q\": -3,\n" +
+"        \"r\": 3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 3,\n" +
+"        \"q\": -3,\n" +
+"        \"r\": 5\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": 0\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"critical\",\n" +
+"        \"grade\": 3,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": 1,\n" +
+"        \"r\": -2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -3,\n" +
+"        \"r\": 4\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": 2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 2,\n" +
+"        \"r\": 0\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"combo\",\n" +
+"        \"grade\": 3,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": 3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"combo\",\n" +
+"        \"grade\": 3,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 2,\n" +
+"        \"r\": 1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"critical\",\n" +
+"        \"grade\": 3,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 5,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"combo\",\n" +
+"        \"grade\": 3,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 5,\n" +
+"        \"r\": -3\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 4,\n" +
+"        \"r\": -5\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"critical\",\n" +
+"        \"grade\": 3,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 3,\n" +
+"        \"r\": -5\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": -4\n" +
 "      }\n" +
 "    ]\n" +
 "  },\n" +
@@ -5016,82 +5042,146 @@ document.write(
 "    \"counts\": {\n" +
 "      \"blade\": 1,\n" +
 "      \"antenna\": 1,\n" +
-"      \"power\": 9,\n" +
+"      \"power\": 5,\n" +
 "      \"combo\": 5,\n" +
 "      \"critical\": 3,\n" +
 "      \"criticalPower\": 1,\n" +
-"      \"comboPower\": 2\n" +
+"      \"comboPower\": 2,\n" +
+"      \"health\": 5\n" +
 "    },\n" +
 "    \"pieces\": [\n" +
 "      {\n" +
-"        \"gene\": \"power\",\n" +
+"        \"gene\": \"blade\",\n" +
 "        \"grade\": 2,\n" +
-"        \"rotation\": 4,\n" +
-"        \"q\": -1,\n" +
-"        \"r\": -3\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": -6\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"antenna\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": -2,\n" +
+"        \"r\": -4\n" +
 "      },\n" +
 "      {\n" +
 "        \"gene\": \"power\",\n" +
 "        \"grade\": 2,\n" +
-"        \"rotation\": 4,\n" +
-"        \"q\": -3,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 1,\n" +
+"        \"r\": -6\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 3,\n" +
+"        \"q\": 2,\n" +
+"        \"r\": -4\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 4,\n" +
+"        \"r\": -6\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": 4,\n" +
+"        \"r\": -5\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"power\",\n" +
+"        \"grade\": 2,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": 3,\n" +
+"        \"r\": -4\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 5,\n" +
+"        \"r\": -4\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"combo\",\n" +
+"        \"grade\": 3,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": 1,\n" +
 "        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"combo\",\n" +
+"        \"grade\": 3,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -6,\n" +
+"        \"r\": 0\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -4,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 0,\n" +
+"        \"q\": -2,\n" +
+"        \"r\": -2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 1,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": -1\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"critical\",\n" +
+"        \"grade\": 3,\n" +
+"        \"rotation\": 5,\n" +
+"        \"q\": -3,\n" +
+"        \"r\": 2\n" +
+"      },\n" +
+"      {\n" +
+"        \"gene\": \"critical\",\n" +
+"        \"grade\": 3,\n" +
+"        \"rotation\": 3,\n" +
+"        \"q\": 0,\n" +
+"        \"r\": 3\n" +
 "      },\n" +
 "      {\n" +
 "        \"gene\": \"criticalPower\",\n" +
 "        \"grade\": 4,\n" +
 "        \"rotation\": 0,\n" +
 "        \"q\": -6,\n" +
-"        \"r\": 0\n" +
+"        \"r\": 3\n" +
 "      },\n" +
 "      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 3,\n" +
-"        \"q\": 3,\n" +
-"        \"r\": -5\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 0,\n" +
-"        \"q\": 3,\n" +
-"        \"r\": -6\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 1,\n" +
-"        \"q\": 6,\n" +
-"        \"r\": -6\n" +
+"        \"gene\": \"health\",\n" +
+"        \"grade\": 1,\n" +
+"        \"rotation\": 2,\n" +
+"        \"q\": -2,\n" +
+"        \"r\": 3\n" +
 "      },\n" +
 "      {\n" +
 "        \"gene\": \"combo\",\n" +
 "        \"grade\": 3,\n" +
 "        \"rotation\": 2,\n" +
 "        \"q\": -4,\n" +
-"        \"r\": 2\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 0,\n" +
-"        \"q\": -6,\n" +
-"        \"r\": 4\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"blade\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 0,\n" +
-"        \"q\": -6,\n" +
 "        \"r\": 5\n" +
 "      },\n" +
 "      {\n" +
-"        \"gene\": \"combo\",\n" +
+"        \"gene\": \"critical\",\n" +
 "        \"grade\": 3,\n" +
-"        \"rotation\": 1,\n" +
-"        \"q\": -1,\n" +
-"        \"r\": 4\n" +
+"        \"rotation\": 4,\n" +
+"        \"q\": -2,\n" +
+"        \"r\": 6\n" +
 "      },\n" +
 "      {\n" +
 "        \"gene\": \"combo\",\n" +
@@ -5101,81 +5191,25 @@ document.write(
 "        \"r\": 4\n" +
 "      },\n" +
 "      {\n" +
-"        \"gene\": \"critical\",\n" +
-"        \"grade\": 3,\n" +
+"        \"gene\": \"comboPower\",\n" +
+"        \"grade\": 4,\n" +
 "        \"rotation\": 2,\n" +
 "        \"q\": 2,\n" +
-"        \"r\": -4\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"antenna\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 1,\n" +
-"        \"q\": 3,\n" +
-"        \"r\": -4\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"combo\",\n" +
-"        \"grade\": 3,\n" +
-"        \"rotation\": 0,\n" +
-"        \"q\": -1,\n" +
-"        \"r\": -2\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"critical\",\n" +
-"        \"grade\": 3,\n" +
-"        \"rotation\": 3,\n" +
-"        \"q\": -2,\n" +
-"        \"r\": 0\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 2,\n" +
-"        \"q\": 6,\n" +
-"        \"r\": -3\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 4,\n" +
-"        \"q\": 1,\n" +
 "        \"r\": 1\n" +
 "      },\n" +
 "      {\n" +
 "        \"gene\": \"combo\",\n" +
 "        \"grade\": 3,\n" +
 "        \"rotation\": 0,\n" +
-"        \"q\": 5,\n" +
+"        \"q\": 3,\n" +
 "        \"r\": -1\n" +
 "      },\n" +
 "      {\n" +
-"        \"gene\": \"power\",\n" +
-"        \"grade\": 2,\n" +
-"        \"rotation\": 1,\n" +
-"        \"q\": 0,\n" +
-"        \"r\": 0\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"comboPower\",\n" +
-"        \"grade\": 4,\n" +
-"        \"rotation\": 3,\n" +
-"        \"q\": -1,\n" +
-"        \"r\": 1\n" +
-"      },\n" +
-"      {\n" +
-"        \"gene\": \"critical\",\n" +
-"        \"grade\": 3,\n" +
-"        \"rotation\": 3,\n" +
-"        \"q\": 2,\n" +
-"        \"r\": 2\n" +
-"      },\n" +
-"      {\n" +
 "        \"gene\": \"comboPower\",\n" +
 "        \"grade\": 4,\n" +
 "        \"rotation\": 0,\n" +
-"        \"q\": 2,\n" +
-"        \"r\": 3\n" +
+"        \"q\": 4,\n" +
+"        \"r\": 1\n" +
 "      }\n" +
 "    ]\n" +
 "  },\n" +
@@ -8135,7 +8169,7 @@ document.write(
 "modules[\"server/dna-board.mjs\"] = (() => {\n" +
 "const { DNA_LAYOUTS } = modules[\"server/dna-layouts.mjs\"];\n" +
 "\n" +
-"const DNA_BOARD_SHAPES = Object.freeze({\"capacity\":[[0,0],[0,1],[1,-1],[1,1]],\"gather\":[[0,0],[1,0],[2,0],[-1,1]],\"harvestSpeed\":[[0,0],[1,0],[1,1],[2,1]],\"health\":[[0,0],[1,0],[0,1],[1,1]],\"movement\":[[0,0],[-1,0],[0,1],[1,-1]],\"blade\":[[0,0],[0,1],[1,1],[2,1],[3,0]],\"carapace\":[[0,0],[1,0],[2,0],[3,-1],[3,0]],\"antenna\":[[0,0],[1,-1],[1,0],[2,-1],[2,0]],\"power\":[[0,0],[1,0],[1,1],[2,0],[2,1]],\"speed\":[[0,0],[0,1],[1,-1],[1,0],[2,0]],\"harvest\":[[0,0],[0,1],[0,2],[1,-1],[2,-1]],\"loadSpeed\":[[0,0],[0,1],[0,2],[0,3],[0,4]],\"secretion\":[[0,0],[1,-1],[1,0],[1,1],[2,0]],\"rangedPower\":[[0,0],[0,2],[1,0],[1,1],[1,2]],\"rangedSpeed\":[[0,0],[1,-2],[1,0],[2,-2],[2,-1]],\"legs\":[[0,0],[0,1],[1,-1],[2,-2],[3,-4],[3,-3]],\"combo\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[1,1]],\"critical\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[2,-1]],\"accuracy\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[2,0]],\"armor\":[[0,0],[1,-2],[1,-1],[1,0],[1,1],[2,-1]],\"evasion\":[[0,0],[0,1],[0,2],[1,0],[1,2],[2,2]],\"block\":[[0,0],[0,1],[0,2],[1,-1],[1,2],[2,-1]],\"counter\":[[0,0],[0,1],[1,-1],[1,0],[1,1],[2,-1]],\"tenacity\":[[0,0],[0,1],[0,2],[1,-1],[1,1],[2,-1]],\"vision\":[[0,0],[1,0],[2,0],[3,0]],\"stun\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[1,2]],\"bleed\":[[0,0],[0,1],[0,2],[1,1],[1,2],[2,2]],\"area\":[[0,0],[0,1],[0,2],[1,0],[1,1],[2,0]],\"comboPower\":[[0,0],[1,-3],[1,-2],[1,-1],[1,0],[2,-3],[2,-2],[2,-1]],\"criticalPower\":[[0,0],[0,1],[1,-1],[1,0],[1,1],[2,-2],[2,-1],[2,0]],\"penetration\":[[0,0],[0,1],[1,-2],[1,0],[1,1],[2,-2],[2,-1],[2,0]],\"parry\":[[0,0],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]],\"blockPower\":[[0,0],[0,1],[1,0],[1,1],[1,2],[2,-1],[2,0],[2,1]],\"counterPower\":[[0,0],[1,0],[2,-2],[2,-1],[2,0],[3,-3],[3,-2],[3,-1]],\"reduction\":[[0,0],[0,2],[1,0],[1,1],[1,2],[2,-1],[2,0],[2,1]],\"stunTime\":[[0,0],[1,-2],[1,-1],[1,0],[1,1],[2,-2],[2,-1],[2,0]],\"bleedPower\":[[0,0],[0,1],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]],\"areaPower\":[[0,0],[0,3],[1,0],[1,2],[1,3],[2,0],[2,1],[2,2]],\"lifesteal\":[[0,0],[0,1],[0,2],[0,3],[1,0],[1,1],[1,2],[2,2]],\"reflection\":[[0,0],[1,-3],[1,-2],[1,0],[2,-3],[2,-2],[2,-1],[2,0]],\"regeneration\":[[0,0],[0,1],[0,2],[1,0]],\"comboSpeed\":[[0,0],[0,1],[0,2],[0,3],[1,0],[1,1],[1,2],[2,1]],\"focus\":[[0,0],[1,-3],[1,-1],[1,0],[2,-3],[2,-2],[2,-1],[2,0]]});\n" +
+"const DNA_BOARD_SHAPES = Object.freeze({\"lifespan\":[[0,0],[0,1],[0,2],[0,3],[0,4],[0,5]],\"capacity\":[[0,0],[0,1],[1,-1],[1,1]],\"gather\":[[0,0],[1,0],[2,0],[-1,1]],\"harvestSpeed\":[[0,0],[1,0],[1,1],[2,1]],\"health\":[[0,0],[1,0],[0,1],[1,1]],\"movement\":[[0,0],[-1,0],[0,1],[1,-1]],\"blade\":[[0,0],[0,1],[1,1],[2,1],[3,0]],\"carapace\":[[0,0],[1,0],[2,0],[3,-1],[3,0]],\"antenna\":[[0,0],[1,-1],[1,0],[2,-1],[2,0]],\"power\":[[0,0],[1,0],[1,1],[2,0],[2,1]],\"speed\":[[0,0],[0,1],[1,-1],[1,0],[2,0]],\"harvest\":[[0,0],[0,1],[0,2],[1,-1],[2,-1]],\"loadSpeed\":[[0,0],[0,1],[0,2],[0,3],[0,4]],\"secretion\":[[0,0],[1,-1],[1,0],[1,1],[2,0]],\"rangedPower\":[[0,0],[0,2],[1,0],[1,1],[1,2]],\"rangedSpeed\":[[0,0],[1,-2],[1,0],[2,-2],[2,-1]],\"legs\":[[0,0],[0,1],[1,-1],[2,-2],[3,-4],[3,-3]],\"combo\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[1,1]],\"critical\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[2,-1]],\"accuracy\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[2,0]],\"armor\":[[0,0],[1,-2],[1,-1],[1,0],[1,1],[2,-1]],\"evasion\":[[0,0],[0,1],[0,2],[1,0],[1,2],[2,2]],\"block\":[[0,0],[0,1],[0,2],[1,-1],[1,2],[2,-1]],\"counter\":[[0,0],[0,1],[1,-1],[1,0],[1,1],[2,-1]],\"tenacity\":[[0,0],[0,1],[0,2],[1,-1],[1,1],[2,-1]],\"vision\":[[0,0],[1,0],[2,0],[3,0]],\"stun\":[[0,0],[0,1],[0,2],[1,-1],[1,0],[1,2]],\"bleed\":[[0,0],[0,1],[0,2],[1,1],[1,2],[2,2]],\"area\":[[0,0],[0,1],[0,2],[1,0],[1,1],[2,0]],\"comboPower\":[[0,0],[1,-3],[1,-2],[1,-1],[1,0],[2,-3],[2,-2],[2,-1]],\"criticalPower\":[[0,0],[0,1],[1,-1],[1,0],[1,1],[2,-2],[2,-1],[2,0]],\"penetration\":[[0,0],[0,1],[1,-2],[1,0],[1,1],[2,-2],[2,-1],[2,0]],\"parry\":[[0,0],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]],\"blockPower\":[[0,0],[0,1],[1,0],[1,1],[1,2],[2,-1],[2,0],[2,1]],\"counterPower\":[[0,0],[1,0],[2,-2],[2,-1],[2,0],[3,-3],[3,-2],[3,-1]],\"reduction\":[[0,0],[0,2],[1,0],[1,1],[1,2],[2,-1],[2,0],[2,1]],\"stunTime\":[[0,0],[1,-2],[1,-1],[1,0],[1,1],[2,-2],[2,-1],[2,0]],\"bleedPower\":[[0,0],[0,1],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]],\"areaPower\":[[0,0],[0,3],[1,0],[1,2],[1,3],[2,0],[2,1],[2,2]],\"lifesteal\":[[0,0],[0,1],[0,2],[0,3],[1,0],[1,1],[1,2],[2,2]],\"reflection\":[[0,0],[1,-3],[1,-2],[1,0],[2,-3],[2,-2],[2,-1],[2,0]],\"regeneration\":[[0,0],[0,1],[0,2],[1,0]],\"comboSpeed\":[[0,0],[0,1],[0,2],[0,3],[1,0],[1,1],[1,2],[2,1]],\"focus\":[[0,0],[1,-3],[1,-1],[1,0],[2,-3],[2,-2],[2,-1],[2,0]]});\n" +
 "\n" +
 "function dnaBoardCells(radius) {\n" +
 "  const cells = [];\n" +
@@ -8256,11 +8290,11 @@ document.write(
 "  powerCurve: \"linear\", powerBase: 2, powerGain: 4, powerKnee: 2,\n" +
 "  rangedPowerBase: 1.4, rangedPowerGain: 1.4, rangedPowerKnee: 2,\n" +
 "  rangedAttackRateBase: .5, rangedHasteCap: 7, rangedHasteKnee: 70,\n" +
-"  healthBase: 10, healthPerPoint: 10, armorPerPoint: 10, armorCap: 1, armorKnee: 100,\n" +
-"  flatPenPerPoint: 1, percentPenCap: .8, percentPenKnee: 4,\n" +
+"  healthBase: 10, healthPerPoint: 20, armorPerPoint: 10, armorCap: 1, armorKnee: 100,\n" +
+"  flatPenPerPoint: 5, percentPenCap: .8, percentPenKnee: 4,\n" +
 "  attackRateBase: .5, hasteCap: 7, hasteKnee: 70, maxActionRate: 4,\n" +
 "  windupBase: .3, focusPerPoint: .04, windupMinimum: .08,\n" +
-"  hitGapBase: .12, hitSpeedPerPoint: .005, hitGapMinimum: .06, recovery: 0,\n" +
+"  hitGapBase: .12, hitSpeedPerPoint: .01, hitGapMinimum: .06, recovery: 0,\n" +
 "  defensePreparation: 0, reactionCooldown: 0, counterCooldown: 0,\n" +
 "  followupBase: .5, comboPerPoint: .05, followupCap: 1,\n" +
 "  critCap: .9, critKnee: 9, critMultiplierBase: 2, critMultiplierCap: 5, critPowerKnee: 20,\n" +
@@ -8290,7 +8324,7 @@ document.write(
 "    melee, ranged, defensiveMelee, meleePower, meleeSpeed, rangedPower, rangedSpeed,\n" +
 "    ...(rules.recovery ? { recovery: rules.recovery } : {}),\n" +
 "    health: rules.healthBase * base.health + rules.healthPerPoint * (n.health || 0),\n" +
-"    power: melee || defensiveMelee ? meleePower : rangedPower, hits: attack ? 1 + (n.combo || 0) : 1, speed: melee || defensiveMelee ? meleeSpeed : rangedSpeed,\n" +
+"    power: melee || defensiveMelee ? meleePower : rangedPower, hits: attack ? 1 + (c.combo || 0) : 1, speed: melee || defensiveMelee ? meleeSpeed : rangedSpeed,\n" +
 "    armor: base.armor + rules.armorPerPoint * ((n.armor || 0) + (n.carapace || 0)),\n" +
 "    parry: 100 * capped(n.parry || 0, rules.parryCap, rules.parryKnee),\n" +
 "    block: 100 * capped(n.block || 0, rules.blockCap, rules.blockKnee),\n" +
@@ -8310,7 +8344,7 @@ document.write(
 "    bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,\n" +
 "    area: attack ? Math.min(8, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(100, 60 + 10 * (n.areaPower || 0)) : 0,\n" +
 "    lifesteal: attack ? 100 * capped(n.lifesteal || 0, rules.drainCap, rules.drainKnee) : 0,\n" +
-"    reflection: Math.min(75, 5 * (n.reflection || 0)), regeneration: .1 * (n.regeneration || 0),\n" +
+"    reflection: Math.min(75, 5 * (n.reflection || 0)), regeneration: .5 * (n.regeneration || 0),\n" +
 "    comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : rules.hitGapBase,\n" +
 "    focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : rules.windupBase };\n" +
 "}\n" +
@@ -8318,17 +8352,18 @@ document.write(
 "return { DNA_COMBAT_RULES, dnaCombatStats };\n" +
 "})();\n" +
 "modules[\"server/dna.mjs\"] = (() => {\n" +
+"const { AGENT_LIFESPAN, AGENT_LIFESPAN_BONUS } = modules[\"server/lifespan.mjs\"];\n" +
 "const { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoardPack } = modules[\"server/dna-board.mjs\"];\n" +
 "const { dnaCombatStats } = modules[\"server/dna-combat-stats.mjs\"];\n" +
 "const { tribeDnaStats } = modules[\"server/tribe-dna-stats.mjs\"];\n" +
 "\n" +
 "const ATTRIBUTE_DNA = (() => {\n" +
 "  const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};\n" +
-"  const definitions = [[\"blade\",\"organ\",20],[\"carapace\",\"stat\",10],[\"antenna\",\"organ\",20],[\"gather\",\"organ\",20],[\"legs\",\"stat\",20],[\"power\",\"stat\",10],[\"combo\",\"action\",14],[\"speed\",\"stat\",12],[\"comboPower\",\"stat\",12],[\"critical\",\"stat\",12],[\"criticalPower\",\"stat\",10],[\"accuracy\",\"stat\",10],[\"penetration\",\"stat\",12],[\"health\",\"stat\",10],[\"armor\",\"stat\",10],[\"evasion\",\"stat\",14],[\"parry\",\"action\",14],[\"block\",\"action\",12],[\"blockPower\",\"stat\",10],[\"counter\",\"action\",14],[\"counterPower\",\"stat\",10],[\"tenacity\",\"stat\",10],[\"reduction\",\"stat\",12],[\"movement\",\"stat\",10],[\"capacity\",\"stat\",10],[\"harvest\",\"stat\",10],[\"harvestSpeed\",\"stat\",10],[\"vision\",\"stat\",10],[\"loadSpeed\",\"stat\",10],null,[\"stun\",\"action\",16],[\"stunTime\",\"stat\",12],[\"bleed\",\"action\",16],[\"bleedPower\",\"stat\",12],[\"area\",\"action\",18],[\"areaPower\",\"stat\",12],[\"lifesteal\",\"action\",16],[\"reflection\",\"action\",16],[\"regeneration\",\"action\",14],[\"comboSpeed\",\"stat\",12],[\"focus\",\"stat\",12],null,[\"secretion\",\"organ\",20],[\"rangedPower\",\"stat\",12],[\"rangedSpeed\",\"stat\",12],null];\n" +
+"  const definitions = [[\"blade\",\"organ\",20],[\"carapace\",\"stat\",10],[\"antenna\",\"organ\",20],[\"gather\",\"organ\",20],[\"legs\",\"stat\",20],[\"power\",\"stat\",10],[\"combo\",\"action\",14],[\"speed\",\"stat\",12],[\"comboPower\",\"stat\",12],[\"critical\",\"stat\",12],[\"criticalPower\",\"stat\",10],[\"accuracy\",\"stat\",10],[\"penetration\",\"stat\",12],[\"health\",\"stat\",10],[\"armor\",\"stat\",10],[\"evasion\",\"stat\",14],[\"parry\",\"action\",14],[\"block\",\"action\",12],[\"blockPower\",\"stat\",10],[\"counter\",\"action\",14],[\"counterPower\",\"stat\",10],[\"tenacity\",\"stat\",10],[\"reduction\",\"stat\",12],[\"movement\",\"stat\",10],[\"capacity\",\"stat\",10],[\"harvest\",\"stat\",10],[\"harvestSpeed\",\"stat\",10],[\"vision\",\"stat\",10],[\"loadSpeed\",\"stat\",10],[\"lifespan\",\"stat\",12],[\"stun\",\"action\",16],[\"stunTime\",\"stat\",12],[\"bleed\",\"action\",16],[\"bleedPower\",\"stat\",12],[\"area\",\"action\",18],[\"areaPower\",\"stat\",12],[\"lifesteal\",\"action\",16],[\"reflection\",\"action\",16],[\"regeneration\",\"action\",14],[\"comboSpeed\",\"stat\",12],[\"focus\",\"stat\",12],null,[\"secretion\",\"organ\",20],[\"rangedPower\",\"stat\",12],[\"rangedSpeed\",\"stat\",12],null];\n" +
 "  const alphabet = 'ATGC';\n" +
 "  const genes = definitions.map((entry,index) => entry && ({id:entry[0],category:entry[1],price:entry[2]/2,code:alphabet[Math.floor(index/16)]+alphabet[Math.floor(index/4)%4]+alphabet[index%4],color:colors[entry[1]]})).filter(Boolean);\n" +
 "  const lookup = new Map(genes.map(gene=>[gene.id,gene]));\n" +
-"  const specification=[{\"gene\":\"gather\",\"grade\":1,\"order\":1},{\"gene\":\"health\",\"grade\":1,\"order\":3},{\"gene\":\"blade\",\"grade\":2,\"order\":0},{\"gene\":\"power\",\"grade\":2,\"order\":1},{\"gene\":\"speed\",\"grade\":2,\"order\":2},{\"gene\":\"capacity\",\"grade\":1,\"order\":0},{\"gene\":\"movement\",\"grade\":1,\"order\":4},{\"gene\":\"antenna\",\"grade\":2,\"order\":8},{\"gene\":\"carapace\",\"grade\":2,\"order\":9},{\"gene\":\"combo\",\"grade\":3,\"order\":0},{\"gene\":\"legs\",\"grade\":3,\"order\":10,\"retired\":true},{\"gene\":\"armor\",\"grade\":3,\"order\":11,\"retired\":true},{\"gene\":\"vision\",\"grade\":1,\"order\":6},{\"gene\":\"harvest\",\"grade\":2,\"order\":10,\"retired\":true},{\"gene\":\"harvestSpeed\",\"grade\":1,\"order\":2},{\"gene\":\"loadSpeed\",\"grade\":2,\"order\":11,\"retired\":true},{\"gene\":\"accuracy\",\"grade\":3,\"order\":6},{\"gene\":\"tenacity\",\"grade\":3,\"order\":7},{\"gene\":\"block\",\"grade\":3,\"order\":8},{\"gene\":\"evasion\",\"grade\":3,\"order\":9},{\"gene\":\"parry\",\"grade\":4,\"order\":21},{\"gene\":\"counter\",\"grade\":3,\"order\":2},{\"gene\":\"critical\",\"grade\":3,\"order\":1},{\"gene\":\"criticalPower\",\"grade\":4,\"order\":24},{\"gene\":\"penetration\",\"grade\":4,\"order\":25},{\"gene\":\"comboPower\",\"grade\":4,\"order\":26},{\"gene\":\"blockPower\",\"grade\":4,\"order\":27},{\"gene\":\"counterPower\",\"grade\":4,\"order\":28},{\"gene\":\"reduction\",\"grade\":4,\"order\":29},{\"gene\":\"stun\",\"grade\":3,\"order\":3},{\"gene\":\"stunTime\",\"grade\":4,\"order\":31},{\"gene\":\"bleed\",\"grade\":3,\"order\":4},{\"gene\":\"bleedPower\",\"grade\":4,\"order\":33},{\"gene\":\"area\",\"grade\":3,\"order\":5},{\"gene\":\"areaPower\",\"grade\":4,\"order\":35},{\"gene\":\"lifesteal\",\"grade\":4,\"order\":36},{\"gene\":\"reflection\",\"grade\":4,\"order\":37},{\"gene\":\"regeneration\",\"grade\":1,\"order\":5},{\"gene\":\"comboSpeed\",\"grade\":4,\"order\":39},{\"gene\":\"focus\",\"grade\":4,\"order\":40},{\"gene\":\"secretion\",\"grade\":2,\"order\":3},{\"gene\":\"rangedPower\",\"grade\":2,\"order\":4},{\"gene\":\"rangedSpeed\",\"grade\":2,\"order\":5}];\n" +
+"  const specification=[{\"gene\":\"lifespan\",\"grade\":3,\"order\":10},{\"gene\":\"gather\",\"grade\":1,\"order\":1},{\"gene\":\"health\",\"grade\":1,\"order\":3},{\"gene\":\"blade\",\"grade\":2,\"order\":0},{\"gene\":\"power\",\"grade\":2,\"order\":1},{\"gene\":\"speed\",\"grade\":2,\"order\":2},{\"gene\":\"capacity\",\"grade\":1,\"order\":0},{\"gene\":\"movement\",\"grade\":1,\"order\":4},{\"gene\":\"antenna\",\"grade\":2,\"order\":8},{\"gene\":\"carapace\",\"grade\":2,\"order\":9},{\"gene\":\"combo\",\"grade\":3,\"order\":0},{\"gene\":\"legs\",\"grade\":3,\"order\":10,\"retired\":true},{\"gene\":\"armor\",\"grade\":3,\"order\":11,\"retired\":true},{\"gene\":\"vision\",\"grade\":1,\"order\":6},{\"gene\":\"harvest\",\"grade\":2,\"order\":10,\"retired\":true},{\"gene\":\"harvestSpeed\",\"grade\":1,\"order\":2},{\"gene\":\"loadSpeed\",\"grade\":2,\"order\":11,\"retired\":true},{\"gene\":\"accuracy\",\"grade\":3,\"order\":6},{\"gene\":\"tenacity\",\"grade\":3,\"order\":7},{\"gene\":\"block\",\"grade\":3,\"order\":8},{\"gene\":\"evasion\",\"grade\":3,\"order\":9},{\"gene\":\"parry\",\"grade\":4,\"order\":21},{\"gene\":\"counter\",\"grade\":3,\"order\":2},{\"gene\":\"critical\",\"grade\":3,\"order\":1},{\"gene\":\"criticalPower\",\"grade\":4,\"order\":24},{\"gene\":\"penetration\",\"grade\":4,\"order\":25},{\"gene\":\"comboPower\",\"grade\":4,\"order\":26},{\"gene\":\"blockPower\",\"grade\":4,\"order\":27},{\"gene\":\"counterPower\",\"grade\":4,\"order\":28},{\"gene\":\"reduction\",\"grade\":4,\"order\":29},{\"gene\":\"stun\",\"grade\":3,\"order\":3},{\"gene\":\"stunTime\",\"grade\":4,\"order\":31},{\"gene\":\"bleed\",\"grade\":3,\"order\":4},{\"gene\":\"bleedPower\",\"grade\":4,\"order\":33},{\"gene\":\"area\",\"grade\":3,\"order\":5},{\"gene\":\"areaPower\",\"grade\":4,\"order\":35},{\"gene\":\"lifesteal\",\"grade\":4,\"order\":36},{\"gene\":\"reflection\",\"grade\":4,\"order\":37},{\"gene\":\"regeneration\",\"grade\":1,\"order\":5},{\"gene\":\"comboSpeed\",\"grade\":4,\"order\":39},{\"gene\":\"focus\",\"grade\":4,\"order\":40},{\"gene\":\"secretion\",\"grade\":2,\"order\":3},{\"gene\":\"rangedPower\",\"grade\":2,\"order\":4},{\"gene\":\"rangedSpeed\",\"grade\":2,\"order\":5}];\n" +
 "  for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.order=entry.order;if(entry.retired)gene.retired=true;gene.price=piecePrice({gene:gene.id,grade:gene.grade});}\n" +
 "  const catalog=genes.filter(gene=>!gene.retired).sort((a,b)=>a.grade-b.grade||a.order-b.order);\n" +
 "\n" +
@@ -8337,7 +8372,7 @@ document.write(
 "    ranged:{secretion:'#82d4ed',rangedPower:'#6bb1eb',rangedSpeed:'#5ebade',area:'#89b0ec',areaPower:'#a2c7eb',stun:'#78d0de',stunTime:'#9ddcec'},\n" +
 "    defense:{carapace:'#e3bc68',armor:'#e2cc98',legs:'#d7cb89',evasion:'#e3d58c',parry:'#e0ca6c',block:'#e4c87c',blockPower:'#e7d8ab',counter:'#e5b46c',counterPower:'#eacc9a',tenacity:'#ceb564',reduction:'#dbce9e',reflection:'#ebe199'},\n" +
 "    gathering:{gather:'#80e0a8',capacity:'#76d0a6',harvestSpeed:'#92e3a4',harvest:'#a4dfb9',loadSpeed:'#90d0b9'},\n" +
-"    other:{health:'#a3aab2',movement:'#b4bec5',vision:'#c9ced4',regeneration:'#aebcb8',antenna:'#c7ccd1',focus:'#b3b8c1',accuracy:'#9fabb2'}\n" +
+"    other:{lifespan:'#b7c9b0',health:'#a3aab2',movement:'#b4bec5',vision:'#c9ced4',regeneration:'#aebcb8',antenna:'#c7ccd1',focus:'#b3b8c1',accuracy:'#9fabb2'}\n" +
 "  };\n" +
 "  for(const [group,entries] of Object.entries(palette))for(const [id,color] of Object.entries(entries)){const gene=lookup.get(id);gene.cells=DNA_BOARD_SHAPES[id];gene.group=group;gene.fillColor=color;}\n" +
 "\n" +
@@ -8363,7 +8398,7 @@ document.write(
 "      capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?1:0,\n" +
 "      harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25*profile.base.movement+.04*(n.movement||0)*(profile.growth.movement??1),\n" +
 "      vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion||c.carapace),\n" +
-"      loadSpeed:gather?75:0};\n" +
+"      lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed:gather?75:0};\n" +
 "  }\n" +
 "  function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,q:piece.q,r:piece.r};}\n" +
 "  function validate(value){\n" +
@@ -8680,6 +8715,7 @@ document.write(
 "return { COMBAT_BASE_DAMAGE, COMBAT_STRENGTH_SCALE, COMBAT_MAX_INJURY_PENALTY, UNIT_MAX_HEALTH, ATTRIBUTE_COMBAT_STRENGTH_BONUSES, attributeCombatStrengthBonus, UNIT_COMBAT_STATS, combatAbilityStats, unitCombatStats, combatInjuryPenalty, combatStrength, combatPrimary, combatProfile, combatDamage, migrateCombatStats };\n" +
 "})();\n" +
 "modules[\"server/attributes.mjs\"] = (() => {\n" +
+"const { AGENT_LIFESPAN } = modules[\"server/lifespan.mjs\"];\n" +
 "const { ATTRIBUTE_DNA } = modules[\"server/dna.mjs\"];\n" +
 "const { CONQUEST_PACING } = modules[\"server/conquest-pacing.mjs\"];\n" +
 "const { TRIBE_UNIT_STATS, ATTRIBUTE_STAT_VALUES } = modules[\"server/unit-stats.mjs\"];\n" +
@@ -8772,32 +8808,18 @@ document.write(
 "  return true;\n" +
 "}\n" +
 "\n" +
-"const attributeUpgradeMaterials = {\n" +
-"  antenna: { dew: 6 },\n" +
-"  strength: { tree: 6, pebbles: 4 },\n" +
-"  feet: { tree: 4 },\n" +
-"  blade: { tree: 6 },\n" +
-"  piercing: { tree: 6, pebbles: 6 },\n" +
-"  carapace: { pebbles: 8, clay: 6 },\n" +
-"};\n" +
-"\n" +
 "function attributeUpgradeCost(attributeKey, targetLevel) {\n" +
-"  const base = Object.hasOwn(attributeUpgradeMaterials, attributeKey) ? attributeUpgradeMaterials[attributeKey] : null;\n" +
-"  if (!base || !Number.isInteger(targetLevel) || targetLevel < 2 || targetLevel > attributeLevelLimit()) return null;\n" +
-"  const materials = Object.fromEntries(Object.entries(base).map(([key, amount]) => [key, targetLevel === 2 ? Math.ceil(amount / 2) : 1]));\n" +
-"  return { evolutionPoints: CONQUEST_PACING.attributeCosts[targetLevel], materials };\n" +
+"  if (!attributeKeys.has(attributeKey) || !Number.isInteger(targetLevel) || targetLevel < 2 || targetLevel > attributeLevelLimit()) return null;\n" +
+"  return { evolutionPoints: CONQUEST_PACING.attributeCosts[targetLevel] };\n" +
 "}\n" +
 "\n" +
-"function attributeUpgradeIssue(template, attributeKey, nestLevel, evolutionPoints, inventory) {\n" +
+"function attributeUpgradeIssue(template, attributeKey, nestLevel, evolutionPoints) {\n" +
 "  if (!template?.slots?.includes(attributeKey)) return \"장착한 속성만 강화할 수 있습니다.\";\n" +
 "  const targetLevel = attributeCounts(template.slots, template.attributeLevels)[attributeKey] + 1;\n" +
 "  const cost = attributeUpgradeCost(attributeKey, targetLevel);\n" +
 "  if (!cost) return \"최대 단계에 도달한 속성입니다.\";\n" +
 "  if (targetLevel > attributeLevelLimit(nestLevel)) return \"둥지를 성장시킨 뒤 속성을 강화해 주세요.\";\n" +
 "  if (!Number.isFinite(evolutionPoints) || evolutionPoints < cost.evolutionPoints) return \"강화에 필요한 진화 포인트가 부족합니다.\";\n" +
-"  if (Object.entries(cost.materials).some(([key, amount]) => !Number.isFinite(inventory?.[key]) || inventory[key] < amount)) {\n" +
-"    return \"강화에 필요한 자원 재료가 부족합니다.\";\n" +
-"  }\n" +
 "  return null;\n" +
 "}\n" +
 "\n" +
@@ -8814,6 +8836,7 @@ document.write(
 "    armorPenetration: equipped(\"piercing\") ? ATTRIBUTE_STAT_VALUES.armorPenetration : 0,\n" +
 "    damageReduction: equipped(\"carapace\") ? ATTRIBUTE_STAT_VALUES.damageReduction : 0,\n" +
 "    health: combat.health,\n" +
+"    lifespan: AGENT_LIFESPAN,\n" +
 "    combatStrength: combat.combatStrength + attributeCombatStrengthBonus(attributes),\n" +
 "    resistance: 1\n" +
 "  };\n" +
@@ -8987,6 +9010,7 @@ document.write(
 "return { PLAYER_STARTING_POINTS, TRIBE_STARTING_UNITS, STARTING_WORKER_GENES, startingWorkerDna };\n" +
 "})();\n" +
 "modules[\"server/tribe-production.mjs\"] = (() => {\n" +
+"const { AGENT_DEATH_WARNING, agentRemainingLifespan } = modules[\"server/lifespan.mjs\"];\n" +
 "const { birthCost, isAttributeUnlocked } = modules[\"server/attributes.mjs\"];\n" +
 "const { suggestTemplateName } = modules[\"server/unit-template-names.mjs\"];\n" +
 "const { colonySupply } = modules[\"server/colony-supply.mjs\"];\n" +
@@ -8995,7 +9019,7 @@ document.write(
 "const { CONQUEST_PACING, TRIBE_PACING, colonyWorkerShare, militaryAgent } = modules[\"server/conquest-pacing.mjs\"];\n" +
 "\n" +
 "function productionTemplate(slots,role,state) {\n" +
-" const previous=state.templates.find(template=>template.productionRole===role&&template.slots.length===slots.length&&slots.every(key=>template.slots.includes(key)));\n" +
+" const previous=state.templates.find(template=>!template.dna&&template.productionRole===role&&template.slots.length===slots.length&&slots.every(key=>template.slots.includes(key)));\n" +
 " if(previous)return previous;\n" +
 " return {id:null,name:suggestTemplateName(slots,state.templates),slots:[...slots],attributeLevels:Object.fromEntries(slots.map(key=>[key,1])),revision:1,productionRole:role};\n" +
 "}\n" +
@@ -9006,7 +9030,7 @@ document.write(
 " const living=state.agents.filter(agent=>agent.health>0);\n" +
 " if(!living.length){const worker=productionTemplate([profile.native].filter(Boolean),\"worker\",state);if(state.evolutionPoints>=birthCost(worker,tribe))return worker;\n" +
 "  const basic=productionTemplate([],\"worker\",state);return state.evolutionPoints>=birthCost(basic,tribe)?basic:null;}\n" +
-" const young=living;\n" +
+" const young=living.filter(agent=>agentRemainingLifespan(agent,state.simSeconds)>AGENT_DEATH_WARNING);\n" +
 " const target=NEST_LEVELS[state.nestLevel-1].unitCapacity;\n" +
 " const militaryAllowed=state.simSeconds>=CONQUEST_PACING.neutralConflictAt*profile.tempo;\n" +
 " const workerTarget=militaryAllowed?Math.floor(target*colonyWorkerShare(state.nestLevel,state.simSeconds,tribe)):target;\n" +
@@ -9015,7 +9039,7 @@ document.write(
 " if(workers.length<workerTarget)role=\"worker\";\n" +
 " else if(militaryAllowed&&soldiers.length<target-workerTarget)role=\"military\";\n" +
 " if(!role)return null;\n" +
-" const supply=colonySupply(state,tribe),replacing=living.length<initial.length;\n" +
+" const supply=colonySupply(state,tribe),replacing=young.length<initial.length;\n" +
 " if(!replacing&&young.length>=initial.length&&(!supply.incomeObserved||supply.rateDeficit>0))return null;\n" +
 " const armies=[profile.army,[\"piercing\",\"blade\",\"feet\",\"carapace\"],[\"feet\",profile.army[0]],\n" +
 "  [\"carapace\",profile.army[0]]].map(slots=>[...new Set(slots.filter(key=>isAttributeUnlocked(key,state.nestLevel,tribe)))].slice(0,state.nestLevel));\n" +

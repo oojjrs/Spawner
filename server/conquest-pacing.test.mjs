@@ -19,8 +19,8 @@ function fixture(selected) {
 }
 function change(game,update){const saved=JSON.parse(game.save());update(saved.state);game.restore(JSON.stringify(saved));}
 
-test("개체와 종족 설정에 수명 제한을 두지 않는다",()=>{
- const {game}=fixture(true);assert.ok(game.agents.every(agent=>!("lifespan" in agent)));
+test("유닛 기본 수명은 5분이며 종족 페이싱 설정과 분리한다",()=>{
+ const {game}=fixture(true);assert.ok(game.agents.every(agent=>agent.lifespan===300));
  for(const tribe of Object.values(TRIBE_PACING))assert.equal("lifespan" in tribe,false);
 });
 
@@ -41,12 +41,12 @@ test("선택한 종족에는 성장과 생산을 자동 실행하지 않는다",
 test("목표 편성은 정찰 전담 없이 초반 80:20·후반 30:70을 따른다",()=>{
  const {game}=fixture(false);const state=JSON.parse(game.save()).state;
  Object.assign(state,{simSeconds:310,nestLevel:2,evolutionPoints:100,foodIncomeStartedAt:0,foodIncome:[[305,60]]});
- const base={...state.agents[0],dna:null};state.agents=Array.from({length:16},(_,index)=>({...base,id:"1:"+(index+1),bornAt:300,lifespan:360,productionRole:"worker",slots:["strength"]}));
+ const base={...state.agents[0],dna:null};state.agents=Array.from({length:16},(_,index)=>({...base,id:"1:"+(index+1),bornAt:300,lifespanStartedAt:300,lifespan:360,productionRole:"worker",slots:["strength"]}));
  assert.equal(colonyWorkerShare(2,310,"bean"),.8);
  assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"military");
  state.agents[0].slots=["antenna","strength"];
  assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"military");
- Object.assign(state,{simSeconds:1200,nestLevel:4,foodIncome:[[1195,100]]});state.agents=state.agents.slice(0,12).map(agent=>({...agent,bornAt:1190}));
+ Object.assign(state,{simSeconds:1200,nestLevel:4,foodIncome:[[1195,100]]});state.agents=state.agents.slice(0,12).map(agent=>({...agent,bornAt:1190,lifespanStartedAt:1190}));
  assert.equal(colonyWorkerShare(4,1200,"bean"),.3);assert.equal(tribeProductionTemplate(state,"bean")?.productionRole,"military");
 });
 

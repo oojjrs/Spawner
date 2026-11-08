@@ -3,8 +3,8 @@ import { combatProfile, unitCombatStats } from "./combat-stats.mjs";
 // Opening and midgame calibration uses modest legal DNA defenders.
 // World playtests cover 25 minutes; later stages remain provisional.
 export const RAID_COMBAT_STAGES = Object.freeze([
-  Object.freeze({ at:300, health:.2, damage:.1 }),
-  Object.freeze({ at:480, health:.3, damage:.15 }),
+  Object.freeze({ at:300, health:.1, damage:.025 }),
+  Object.freeze({ at:480, health:.2, damage:.05 }),
   Object.freeze({ at:720, health:.4, damage:.2 }),
   Object.freeze({ at:1080, health:.5, damage:.2 }),
   Object.freeze({ at:1500, health:.65, damage:.25 }),
@@ -19,6 +19,11 @@ const LEGACY_RAID_COMBAT_STAGES = [
   {health:.75,damage:.6}, {health:1,damage:1}
 ];
 
+const VERSION_TWO_RAID_COMBAT_STAGES = [
+  {health:.2,damage:.1}, {health:.3,damage:.15}, {health:.4,damage:.2}, {health:.5,damage:.2},
+  {health:.65,damage:.25}, {health:.8,damage:.4}, {health:.9,damage:.6}, {health:1,damage:1}
+];
+
 export function raidCombatStage(seconds) {
   return Math.max(0, RAID_COMBAT_STAGES.findLastIndex(stage => seconds >= stage.at));
 }
@@ -28,10 +33,11 @@ export function applyRaidCombatScale(agent, departedAt) {
   let marker = agent.raidCombatScale;
   if (departedAt !== undefined) {
     if (!Number.isFinite(departedAt) || departedAt < 0) throw new Error("습격 전투 단계 시간이 올바르지 않습니다.");
-    marker = { version:2, stage:raidCombatStage(departedAt) };
+    marker = { version:3, stage:raidCombatStage(departedAt) };
   }
   if (!marker) return false;
-  const stages = marker.version === 1 ? LEGACY_RAID_COMBAT_STAGES : marker.version === 2 ? RAID_COMBAT_STAGES : null;
+  const stages = marker.version === 1 ? LEGACY_RAID_COMBAT_STAGES : marker.version === 2 ? VERSION_TWO_RAID_COMBAT_STAGES :
+    marker.version === 3 ? RAID_COMBAT_STAGES : null;
   if (!stages || !Number.isInteger(marker.stage) || !stages[marker.stage])
     throw new Error("습격 전투 단계 저장 형식이 올바르지 않습니다.");
   const stage = stages[marker.stage], base = unitCombatStats(agent.species);

@@ -51,7 +51,6 @@ test("네 종족에서 고정 속성 설계·탄생·저장 복원을 지원하�
       assert.ok(result.templateId);
       if (attribute.kind === "combat") assert.equal(game.agents.find(agent => agent.id === result.agentId).attributes[attribute.key], 1);
     }
-    game.command({ type: "cheat-resources" });
     const blade = game.snapshot().templates.find(template => template.slots.includes("blade"));
     assert.throws(() => game.command({ type: "upgrade-attribute", templateId: blade.id, attributeKey: "blade" }), /최대/);
     const child = game.command({ type: "birth", templateId: blade.id });

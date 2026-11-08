@@ -5,7 +5,6 @@ import { runInNewContext } from "node:vm";
 import { unitStats, unitTravelSpeed, unitTerrainSpeedMultiplier, attributeCounts, attributeLevelLimit, attributeUpgradeCost } from "./attributes.mjs";
 import { TRIBE_UNIT_STATS, ATTRIBUTE_STAT_VALUES } from "./unit-stats.mjs";
 import { createGame } from "./game.mjs";
-import { materialCapacity } from "./nests.mjs";
 
 const bases = { bean: [.5, .4], spore: [.5, .4], pebble: [.35, .3], spring: [.9, .275] };
 const bonuses = [0, .3, .3, .3, .3];
@@ -13,7 +12,7 @@ const bonuses = [0, .3, .3, .3, .3];
 function verifyTravel(rules) {
   for (const [tribe, speeds] of Object.entries(bases)) for (let level = 0; level <= 4; level++) {
     const agent = { tribe, stats: rules.unitStats({ feet: level }, tribe) };
-    assert.equal("lifespan" in agent.stats, false, tribe);
+    assert.equal(agent.stats.lifespan, 300, tribe);
     assert.ok(Math.abs(agent.stats.speed - speeds[0] - bonuses[level]) < 1e-12, tribe);
     for (const load of [0, .25, .5, 1]) {
       const expected = speeds[0] * (1 - load) + speeds[1] * load + bonuses[level];
@@ -51,14 +50,13 @@ test("서버·브라우저·시뮬레이션 워커는 같은 고정 스탯을 �
 test("운반량과 기본 스탯은 명시된 단계 값을 적용한다", () => {
   for (const tribe of Object.keys(bases)) for (let level = 0; level <= 4; level++) {
     const stats = unitStats({ strength:level }, tribe);
-    assert.equal("lifespan" in stats, false);
+    assert.equal(stats.lifespan, 300);
     assert.equal(stats.capacity, [1,2,2,2,2][level]);
   }
   assert.equal(ATTRIBUTE_STAT_VALUES.movementBonus, .3);
   assert.equal(attributeLevelLimit(4), 1);
   assert.equal(attributeCounts(["feet"], {feet:4}).feet, 1);
   assert.equal(attributeUpgradeCost("feet", 2), null);
-  assert.deepEqual([1,2,3,4].map(level => materialCapacity(level, [])), [30,40,50,60]);
 });
 
 test("이전 저장의 속도 필드를 종족 상수와 장착 속성으로 복원한다", () => {

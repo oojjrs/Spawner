@@ -1,12 +1,12 @@
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
-import { dnaCanHunt } from "./dna-unit.mjs";
+import { dnaCanHunt, dnaCanSearch } from "./dna-unit.mjs";
 import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
 import { unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { resourceDefinition, resourceTypeForCell } from "./resources.mjs";
 import { burrowApproaches } from "./burrows.mjs";
 import { combatDisposition, canPursueCombat, colonyDefenseTarget } from "./combat.mjs";
 import { combatDamage } from "./combat-stats.mjs";
-import { beginRetreat, updateRetreat, survivalState, combatSurvival } from "./survival.mjs";
+import { beginRetreat, updateRetreat, canRetreat, survivalState, combatSurvival } from "./survival.mjs";
 import { AGENT_ATTACK_DURATION, AGENT_HURT_DURATION } from "./attack.mjs";
 import { encounterTerritory, withinEncounterTerritory } from "./encounter-territory.mjs";
 import { colonySupply, colonyForagers } from "./colony-supply.mjs";
@@ -21,7 +21,7 @@ export function personalityLabels(personality) {
 }
 
 export function actionScore(personality, needs, action) {
-  return needs.food * action.foodGain + (needs.material || 0) * (action.materialGain || 0) +
+  return needs.food * action.foodGain +
     needs.defense * (.8 + .4 * personality.aggression) * action.combatGain +
     needs.information * (.8 + .4 * personality.curiosity) * action.informationGain +
     (1.2 - .4 * personality.boldness) * (action.healingGain + action.riskReduction);
@@ -274,9 +274,10 @@ export function createUtilityAI(context) {
   function evaluate(agent, retain, immediate) {
     const supply = colonySupply(state, context.tribe);
     const gathers = !agent.dna || agent.stats.dna.harvest > 0;
-    const attacks = agent.dna ? agent.stats.dna.melee || agent.stats.dna.ranged || agent.stats.dna.hunting : combatDisposition(agent) === "aggressive";
-    const hunts = attacks && dnaCanHunt(agent);
-    const visible = enemies().filter(enemy => enemy.health > 0);
+    const attacks = combatDisposition(agent) === "aggressive";
+    const warrior = !canRetreat(agent);
+    const hunts = attacks;
+    const visible = enemies().filter(enemy => enemy.health > 0 && dnaCanSearch(agent, enemy, state.simSeconds));
     const safety = assess(agent, visible);
     const defenseTargets = visible.filter(enemy => colonyDefenseTarget(agent, enemy, state.agents, context.defenseStructures?.()));
     const suspendedWork = agent.suspendedWork || (retain && agent.utility?.resuming ? agent.utility : null);
@@ -290,8 +291,6 @@ export function createUtilityAI(context) {
     };
     const allies = state.agents.filter(ally => ally !== agent && ally.health > 0);
     const carryingType = agent.carryingType || "honey-mushrooms";
-    const carryingMaterial = !isFood(carryingType);
-    const materialNeed = key => 1 / (1 + (state.resourceInventory?.[key] || 0) / Math.max(6, state.agents.length * 2));
     const reservation = food => allies.reduce((sum, ally) => sum + (ally.utility?.action === "collect" &&
       ally.utility.target?.key === (food.key || food.x + "," + food.y) ? Math.max(0, ally.utility.plannedCargo - ally.carrying) : 0), 0);
     const foodWithinRange = (immediate ? [state.knownFood.get(suspendedFoodKey)].filter(Boolean) : [...state.knownFood.values()])
@@ -303,7 +302,6 @@ export function createUtilityAI(context) {
       (allies.concat(agent).some(ally => distance(ally, enemy) <= 1) || homeCells().some(cell => distance(cell, enemy) <= 1)));
     const pointTarget = Math.max(nestUpgradeCost(1, context.tribe), nestUpgradeCost(state.nestLevel, context.tribe) || 0);
     const needs = { food: .5 + limit(1 - state.evolutionPoints / pointTarget),
-      material: carryingMaterial && agent.carrying > 0 ? 1.1 : state.evolutionPoints < 5 ? 0.4 : state.evolutionPoints < 20 ? 0.85 : 1.1,
       information: perAgent < 4 ? 1.5 : perAgent < 8 ? 1 : 0.5, defense: underAttack ? 1.5 : 1 };
     if (attacks && !gathers) { needs.food *= .2; needs.information *= 1.6; needs.defense *= 1.2; }
     const baseline = riskValue(agent, predictedDamage(agent, [{ x: agent.x, y: agent.y }], "wait", visible, agent.carrying, 10));
@@ -317,7 +315,7 @@ export function createUtilityAI(context) {
         decisionDamage = Math.max(decisionDamage, combatSurvival(agent, [enemy], [agent, ...support]).damage);
       }
       const risk = riskValue(agent, damage);
-      const candidate = { action, target, route: cells, damage, decisionDamage, foodGain: 0, materialGain: 0, combatGain: 0, informationGain: 0,
+      const candidate = { action, target, route: cells, damage, decisionDamage, foodGain: 0, combatGain: 0, informationGain: 0,
         healingGain: 0, riskReduction: baseline - risk, ...gains, ...extra };
       candidate.score = actionScore(agent.personality, needs, candidate);
       if (action === "explore" && candidate.score <= 0) return;
@@ -327,20 +325,18 @@ export function createUtilityAI(context) {
     };
     const searchHabitats = context.resourceHabitat && supply.interruption > 0 && context.foodType ? [context.foodType] : [];
     const home = homeRoute(agent, agent, homeCells(), supply);
-    const materialSpace = context.materialSpace ? context.materialSpace() : Infinity;
-    const storage = context.deliveryCapacity ? context.deliveryCapacity(context.foodType || carryingType) :
-      Math.max(materialSpace === Infinity ? 0 : materialSpace, Math.max(0, NEST_LEVELS[state.nestLevel - 1].pointCapacity - state.evolutionPoints));
+    const storage = context.deliveryCapacity ? context.deliveryCapacity() :
+      Math.max(0, NEST_LEVELS[state.nestLevel - 1].pointCapacity - state.evolutionPoints);
     const homeTime = home ? travelTime(agent, home, agent.carrying) : Infinity;
-    const delivery = agent.carrying > 0 && (carryingMaterial ? materialSpace > 0 : storage > 0) ? homeRoute(agent, agent, deliveryCells(agent), supply) : null;
+    const delivery = agent.carrying > 0 && storage > 0 ? homeRoute(agent, agent, deliveryCells(agent), supply) : null;
     if (delivery) {
       const unload = agent.mode === "unload" ? Math.max(0.05, agent.unloadReady - state.simSeconds) : 1;
       const deliveryTime = travelTime(agent, delivery, agent.carrying);
       add("return", { ...delivery.at(-1), key: "home" }, delivery,
-        carryingMaterial ? { materialGain: 60 * limit(agent.carrying / (deliveryTime + unload) / 0.25) } :
-          { foodGain: 60 * limit(Math.min(agent.carrying, storage) / (deliveryTime + unload) / 0.25) }, { deliverySeconds:deliveryTime + unload });
+        { foodGain: 60 * limit(Math.min(agent.carrying, storage) / (deliveryTime + unload) / 0.25) }, { deliverySeconds:deliveryTime + unload });
     }
     const missing = agent.stats.health - agent.health;
-    if (missing > 0.01 && home) {
+    if (!warrior && missing > 0.01 && home) {
       const amount = agent.retreat ? Math.max(0, agent.retreat.recoverHealth - agent.health) : Math.min(missing, agent.stats.health / 4);
       const time = homeTime + amount / 0.25;
       add("recover", { ...home.at(-1), key: "home" }, home,
@@ -351,7 +347,7 @@ export function createUtilityAI(context) {
       const foods = foodWithinRange.filter(food => food.amount > 0 &&
         canHarvest(food, agent) &&
         (!agent.carrying || carryingType === resourceType(food)) &&
-        (isFood(resourceType(food)) ? storage > 0 : materialSpace > 0))
+        storage > 0)
         .sort((first, second) => distance(agent, first) - distance(agent, second));
       const currentFood = foods.find(food => (food.key || food.x + "," + food.y) === agent.utility?.target?.key);
       const suspendedFood = foods.find(food => (food.key || food.x + "," + food.y) === suspendedFoodKey);
@@ -361,7 +357,6 @@ export function createUtilityAI(context) {
       for (const food of targets) {
         const type = resourceType(food);
         const definition = resourceDefinition(type);
-        const material = !isFood(type);
         const cells = path(food);
         if (!cells) continue;
         const back = homeRoute(agent, food, deliveryCells(), supply);
@@ -387,12 +382,11 @@ export function createUtilityAI(context) {
           }
           const time = travelTime(agent, cells, agent.carrying) + harvestTime +
             travelTime(agent, back, agent.carrying + amount, type) + 1;
-          const gain = 60 * limit((material ? agent.carrying + amount : Math.min(storage, agent.carrying + amount)) /
-            Math.max(0.05, time) / 0.25) * (material ? materialNeed(type) : 1);
-          const rate = (material ? agent.carrying + amount : Math.min(storage, agent.carrying + amount)) / Math.max(.05, time);
+          const gain = 60 * limit(Math.min(storage, agent.carrying + amount) / Math.max(0.05, time) / 0.25);
+          const rate = Math.min(storage, agent.carrying + amount) / Math.max(.05, time);
           if (!best || gain > best.gain || gain === best.gain && rate > best.rate) best = { gain, amount, time, rate };
         }
-        if (best) add("collect", { x: food.x, y: food.y, key }, cells, material ? { materialGain: best.gain } : { foodGain: best.gain },
+        if (best) add("collect", { x: food.x, y: food.y, key }, cells, { foodGain: best.gain },
           { plannedCargo: agent.carrying + best.amount, deliverySeconds:best.time });
       }
     }
@@ -402,7 +396,8 @@ export function createUtilityAI(context) {
     const collecting = candidates.some(candidate => candidate.action === "collect" && candidate.damage < agent.health * .25);
     const searchKind = hunts ? "enemy" : gathers ? "resource" : null;
     if (!immediate && searchKind && !agent.carrying && (hunts || !collecting)) {
-      const cells = hunts ? [...new Map([...frontier, ...patrolByIndex.values()].map(cell => [indexOf(cell), cell])).values()] : frontier;
+      const cells = hunts ? dnaCanHunt(agent) ?
+        [...new Map([...frontier, ...patrolByIndex.values()].map(cell => [indexOf(cell), cell])).values()] : neighbors(agent) : frontier;
       const recent = new Set((agent.path || []).slice(-24).map(cell => cell.x + "," + cell.y));
       const heading = [...String(agent.id)].reduce((sum, letter) => sum + letter.charCodeAt(0), 0) % 4;
       const direction = agent.lastDirection || [{ dx: 1, dy: 0 }, { dx: 0, dy: 1 }, { dx: -1, dy: 0 }, { dx: 0, dy: -1 }][heading];
@@ -448,12 +443,12 @@ export function createUtilityAI(context) {
     }
     for (const building of !immediate && !agent.retreat && (!agent.dna || agent.stats.dna.power > 0) && combatDisposition(agent) === "aggressive" ? [...(context.burrows ? context.burrows() : []), ...(context.nests ? context.nests() : [])] : []) {
       const cells = burrowApproaches(building).map(cell => path(cell)).filter(Boolean).sort((first, second) => first.length - second.length)[0];
-      if (!cells || !hunts && cells.length > 1) continue;
+      if (!cells || !dnaCanSearch(agent, building, state.simSeconds)) continue;
       const time = travelTime(agent, cells, agent.carrying) + building.health / Math.max(0.1, agent.stats.attack);
       add("fight", { id: building.id, kind: building.kind || "burrow", x: building.x, y: building.y, key: building.id }, cells,
         { combatGain: 40 * 10 / (10 + time) }, {});
     }
-    if (baseline > 0.01) {
+    if (!warrior && baseline > 0.01) {
       const safe = new Map();
       for (const cell of [agent, ...neighbors(agent), ...frontier.toSorted((first, second) => distance(agent, first) - distance(agent, second)).slice(0, 4),
         ...(home ? [home.at(-1)] : [])]) safe.set(indexOf(cell), cell);
@@ -472,6 +467,11 @@ export function createUtilityAI(context) {
         if (cell.x === agent.x && cell.y === agent.y) continue;
         add("flee", { ...cell, key: "safe:" + indexOf(cell) }, path(cell), {}, {});
       }
+    }
+    if (warrior) {
+      const battles = candidates.filter(candidate => candidate.action === "fight");
+      const defense = battles.filter(candidate => candidate.defending);
+      if (battles.length) return (defense.length ? defense : battles).sort((first, second) => second.score - first.score);
     }
     let foragePlans = !attacks ? candidates.filter(candidate => ["collect", "return"].includes(candidate.action) &&
       candidate.damage < agent.health * .25) : null;
@@ -540,7 +540,7 @@ export function createUtilityAI(context) {
   }
 
   function safety(agent) {
-    return assess(agent, enemies().filter(enemy => enemy.health > 0));
+    return assess(agent, enemies().filter(enemy => enemy.health > 0 && dnaCanSearch(agent, enemy, state.simSeconds)));
   }
 
   function nextStep(agent, target) {

@@ -44,17 +44,17 @@ test("5분 전에는 습격하지 않고 큰 굴만 5분~5분 30초에 기존 �
   advance(room, system, first);
   const raids = system.agents.filter(agent => agent.raid);
   assert.equal(raids.length, 1); assert.equal(raids[0].burrowId, "large:1"); assert.equal(raids[0].raid.departedAt, first);
-  assert.equal(system.agents.filter(agent => agent.burrowId === "large:1" && agent.health > 0).length, 6);
-  assert.ok(system.agents.filter(agent => agent.burrowId === "large:1" && !agent.raid && agent.health > 0).length >= 3);
+  assert.equal(system.agents.filter(agent => agent.burrowId === "large:1" && agent.health > 0).length, 3);
+  assert.equal(system.agents.filter(agent => agent.burrowId === "large:1" && !agent.raid && agent.health > 0).length, 2);
   const interval = system.save().burrows[0].nextRaidAt - first; assert.equal(interval, 135);
 });
 
-test("수비가 3마리뿐이거나 굴이 파괴되면 습격을 보내지 않는다", () => {
+test("남은 병력이 없거나 굴이 파괴되면 습격을 보내지 않는다", () => {
   for (const destroyed of [false,true]) {
     const { room, system } = fixture(false), record = system.save().burrows[0], first = record.nextRaidAt;
     advance(room, system, first - .001); record.nextSpawnAt = first + 1000;
     if (destroyed) system.receiveBurrowDamage(record.id, 60);
-    else for (const agent of system.agents.filter(agent => agent.burrowId === record.id).slice(3)) system.receiveDamage(agent, 100);
+    else for (const agent of system.agents.filter(agent => agent.burrowId === record.id)) system.receiveDamage(agent, agent.health);
     advance(room, system, first + 5);
     assert.ok(system.agents.every(agent => !agent.raid));
   }
@@ -77,7 +77,7 @@ test("여러 큰 굴이 있어도 한 둥지에는 단계별 간격으로 1마�
     const next = system.agents.filter(agent => agent.health > 0 && agent.raid?.departedAt > departed);
     if (!killed) { assert.equal(next.length, 0); continue; } // Initial phase allows one living raider.
     assert.equal(next.length, 1); assert.equal(next[0].raid.departedAt, cooldown);
-    assert.ok(system.agents.filter(agent => agent.health > 0 && !agent.raid && agent.burrowId === next[0].burrowId).length >= 3);
+    assert.equal(system.agents.filter(agent => agent.health > 0 && !agent.raid && agent.burrowId === next[0].burrowId).length, 1);
   }
 });
 
@@ -184,7 +184,7 @@ test("실제 월드 저장·복원은 습격 주기와 쿨다운을 포함한 �
   assert.equal(saved.creatures.version, 5); assert.deepEqual(restored.creatureSystem.save(), saved.creatures);
 });
 
-test("야생 개체 수가 가득 차도 담당 굴은 병력을 확보하고 단계별 간격으로 보충 출정한다", () => {
+test("담당 굴은 최초 병력을 소모해 출정하고 이후 보충하지 않는다", () => {
   const { room } = fixture(false);
   room.world.encounters = [{ key:"spiny-back-beetle", populationLimit:3,
     spawnPoints:[140 * 320 + 138, 143 * 320 + 140, 141 * 320 + 143] }];
@@ -196,10 +196,14 @@ test("야생 개체 수가 가득 차도 담당 굴은 병력을 확보하고 �
   const saved = JSON.parse(JSON.stringify(system.save())), restored = createCreatures(room, saved);
   assert.equal(restored.agents.length, system.agents.length);
   assert.deepEqual(restored.save(), saved);
-  advance(room, system, first + 135);
-  assert.equal(system.save().burrows[0].raidSequence, 2);
-  assert.ok(system.agents.filter(agent => agent.health > 0 && !agent.raid && agent.burrowId === "large:1").length >= 3);
-  assert.ok(system.agents.length <= 11);
+  const initialIds = new Set(system.agents.map(agent => agent.id));
+  for (let index = 0; index < 5; index++) {
+    for (const agent of system.agents.filter(agent => agent.raid && agent.health > 0)) system.receiveDamage(agent, agent.health);
+    advance(room, system, room.simSeconds + 150);
+  }
+  assert.equal(system.save().burrows[0].raidSequence, 4);
+  assert.ok(system.agents.every(agent => initialIds.has(agent.id)));
+  assert.equal(system.agents.filter(agent => agent.burrowId === "large:1" && agent.health > 0).length, 0);
 });
 
 test("각 군락이 담당 굴에서 첫 습격을 받고 다음 출정도 자기 쿨다운을 따른다", () => {
@@ -283,4 +287,17 @@ test("습격벌레는 출정·활동 중 붙잡혀도 공격과 반격이 끝나
     room.simSeconds += .25; system.tick();
     assert.equal(agent.raid.phase, phase);
   }
+});
+
+test("병력이 소진된 습격은 저장복원 후에도 재생성하지 않고 지형을 반복 탐색하지 않는다", () => {
+  const { room, system } = fixture(false);
+  for (const agent of system.agents) system.receiveDamage(agent, agent.health);
+  room.simSeconds = 1000; system.tick();
+  assert.equal(system.agents.length, 0);
+  const restored = createCreatures(room, JSON.parse(JSON.stringify(system.save())));
+  room.creatureSystem = restored;
+  restored.tick();
+  Object.defineProperty(room.world, "terrain", { get() { throw new Error("소진된 습격의 지형 재탐색"); } });
+  for (let index = 0; index < 1000; index++) { room.simSeconds++; restored.tick(); }
+  assert.equal(restored.agents.length, 0);
 });

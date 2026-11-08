@@ -66,7 +66,7 @@ for (const [surface, create] of [["source", createGame], ["worker", context.crea
       assert.ok(f.food.amount < 12);
     });
     for (const type of ["tree", "dew", "pebbles", "clay"].filter(type => type !== own)) for (const mode of ["approach", "harvest"]) {
-      test(`${surface}: ${tribe} ${dna ? "DNA" : "legacy"} rejects ${type} in ${mode} without erasing stock/cargo`, () => {
+      test(`${surface}: ${tribe} ${dna ? "DNA" : "legacy"} rejects ${type} in ${mode} without erasing converted points or cargo`, () => {
         const f = fixture(create, tribe, type, dna);
         Object.assign(f.agent, { x: 46, y: 42, mode, harvestReady: 0, harvestPrepared: true,
           carrying: 1, carryingType: type });
@@ -78,7 +78,8 @@ for (const [surface, create] of [["source", createGame], ["worker", context.crea
         assert.ok(agent.utility?.action !== "collect" || agent.utility.target.key !== "46,42");
         assert.equal(agent.carrying, 1);
         assert.equal(agent.carryingType, type);
-        assert.deepEqual(JSON.parse(JSON.stringify(f.game.snapshot().resourceInventory)), { tree: 7, dew: 5, pebbles: 3 });
+        assert.equal(f.game.snapshot().resourceInventory, undefined);
+        assert.equal(f.game.snapshot().evolutionPoints, 15);
       });
     }
   }

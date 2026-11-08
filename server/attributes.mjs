@@ -1,3 +1,4 @@
+import { AGENT_LIFESPAN } from "./lifespan.mjs";
 import { ATTRIBUTE_DNA } from "./dna.mjs";
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
 import { TRIBE_UNIT_STATS, ATTRIBUTE_STAT_VALUES } from "./unit-stats.mjs";
@@ -90,32 +91,18 @@ export function hasSynergy(counts, keys) {
   return true;
 }
 
-const attributeUpgradeMaterials = {
-  antenna: { dew: 6 },
-  strength: { tree: 6, pebbles: 4 },
-  feet: { tree: 4 },
-  blade: { tree: 6 },
-  piercing: { tree: 6, pebbles: 6 },
-  carapace: { pebbles: 8, clay: 6 },
-};
-
 export function attributeUpgradeCost(attributeKey, targetLevel) {
-  const base = Object.hasOwn(attributeUpgradeMaterials, attributeKey) ? attributeUpgradeMaterials[attributeKey] : null;
-  if (!base || !Number.isInteger(targetLevel) || targetLevel < 2 || targetLevel > attributeLevelLimit()) return null;
-  const materials = Object.fromEntries(Object.entries(base).map(([key, amount]) => [key, targetLevel === 2 ? Math.ceil(amount / 2) : 1]));
-  return { evolutionPoints: CONQUEST_PACING.attributeCosts[targetLevel], materials };
+  if (!attributeKeys.has(attributeKey) || !Number.isInteger(targetLevel) || targetLevel < 2 || targetLevel > attributeLevelLimit()) return null;
+  return { evolutionPoints: CONQUEST_PACING.attributeCosts[targetLevel] };
 }
 
-export function attributeUpgradeIssue(template, attributeKey, nestLevel, evolutionPoints, inventory) {
+export function attributeUpgradeIssue(template, attributeKey, nestLevel, evolutionPoints) {
   if (!template?.slots?.includes(attributeKey)) return "장착한 속성만 강화할 수 있습니다.";
   const targetLevel = attributeCounts(template.slots, template.attributeLevels)[attributeKey] + 1;
   const cost = attributeUpgradeCost(attributeKey, targetLevel);
   if (!cost) return "최대 단계에 도달한 속성입니다.";
   if (targetLevel > attributeLevelLimit(nestLevel)) return "둥지를 성장시킨 뒤 속성을 강화해 주세요.";
   if (!Number.isFinite(evolutionPoints) || evolutionPoints < cost.evolutionPoints) return "강화에 필요한 진화 포인트가 부족합니다.";
-  if (Object.entries(cost.materials).some(([key, amount]) => !Number.isFinite(inventory?.[key]) || inventory[key] < amount)) {
-    return "강화에 필요한 자원 재료가 부족합니다.";
-  }
   return null;
 }
 
@@ -132,6 +119,7 @@ export function unitStats(attributes, tribe) {
     armorPenetration: equipped("piercing") ? ATTRIBUTE_STAT_VALUES.armorPenetration : 0,
     damageReduction: equipped("carapace") ? ATTRIBUTE_STAT_VALUES.damageReduction : 0,
     health: combat.health,
+    lifespan: AGENT_LIFESPAN,
     combatStrength: combat.combatStrength + attributeCombatStrengthBonus(attributes),
     resistance: 1
   };

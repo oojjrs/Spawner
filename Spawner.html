@@ -85,6 +85,7 @@
           <span>둥지 이동<small><kbd>PgUp</kbd> 이전 · <kbd>PgDn</kbd> 다음<br><kbd>Home</kbd> 첫 둥지</small></span>
         </li>
       </ul>
+      <div class="beginner-help-settings"><label><input id="beginner-help-enabled" type="checkbox">초보자 도움말</label><button id="beginner-help-replay" type="button">다시 보기</button></div>
     </aside>
     <button class="colony-focus-button controls-guide-toggle" id="controls-guide-toggle" type="button" aria-controls="controls-guide" aria-expanded="true" hidden>조작 안내</button>
     <aside class="agent-panel" id="agent-panel" aria-label="둥지·생명체" data-portrait-expanded="false">
@@ -111,9 +112,7 @@
         </section>
       </div>
     </aside>
-    <button class="first-design discovery-toast" id="first-design" type="button" aria-haspopup="dialog" aria-controls="evolution-panel" aria-label="첫 유닛 설계"><span class="discovery-toast-open"><img class="object-image discovery-image" alt=""><small>첫 유닛 설계</small></span></button>
     <div class="discovery-toasts" id="discovery-toasts" role="log" aria-label="발견 알림" aria-live="polite" aria-relevant="additions"></div>
-    <div class="resource-inventory-bar" id="resource-inventory" role="region" aria-label="자원 재고" hidden></div>
   </div>
 
   <aside class="unit-panel" id="unit-panel" aria-labelledby="unit-panel-title" hidden>
@@ -127,12 +126,6 @@
         <h3 id="terrain-discoveries-title" tabindex="0" data-help="이 지형에서 발견할 수 있는 자원과 생물입니다.">발견 가능</h3>
         <div class="terrain-objects" id="terrain-objects"></div>
       </section>
-    </section>
-    <section class="resource-details" id="resource-details" aria-label="자원 정보" hidden>
-      <div class="resource-overview">
-        <div id="resource-image" tabindex="0" data-help=""></div>
-        <span class="resource-amount" id="resource-amount" tabindex="0" data-help=""><strong id="resource-amount-value"></strong><span id="resource-capacity"></span></span>
-      </div>
     </section>
     <section id="agent-details" aria-label="생명체 정보" hidden>
       <div class="unit-attributes" id="agent-attributes" aria-label="발현 속성"></div>
@@ -175,15 +168,14 @@
     </div>
     <div class="nest-resources">
       <div class="nest-resource-meter">
-        <div class="nest-points" aria-label="진화 포인트"><img data-evolution-symbol alt=""><span><strong id="evolution-points">30</strong> / <span id="point-capacity">100</span></span></div>
-        <div class="food-progress-track" id="evolution-progress" role="progressbar" aria-label="진화 포인트 보관량" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30"><i class="food-progress-fill" id="food-progress-fill"></i></div>
+        <div class="nest-points" aria-label="진화 포인트"><img data-evolution-symbol alt=""><span><strong id="evolution-points">30</strong> / <span id="point-capacity">200</span></span></div>
+        <div class="food-progress-track" id="evolution-progress" role="progressbar" aria-label="진화 포인트 보관량" aria-valuemin="0" aria-valuemax="200" aria-valuenow="30"><i class="food-progress-fill" id="food-progress-fill"></i></div>
       </div>
       <div class="nest-upgrade-actions">
-        <span class="nest-upgrade-help" id="nest-upgrade-help" data-help="유닛의 속성 슬롯 +1칸 · 진화 포인트 보관량 ×5"><button class="secondary-action" id="nest-upgrade" type="button"><span>성장</span><span class="evolution-cost"><img data-evolution-symbol alt=""><strong id="nest-upgrade-points">80</strong></span></button></span>
+        <span class="nest-upgrade-help" id="nest-upgrade-help" data-help="진화 포인트 보관량"><button class="secondary-action" id="nest-upgrade" type="button"><span>성장</span><span class="evolution-cost"><img data-evolution-symbol alt=""><strong id="nest-upgrade-points">80</strong></span></button></span>
         <button class="nest-growth-info" id="nest-growth-info" type="button" aria-label="둥지 성장 자세히 보기" aria-haspopup="dialog" aria-controls="codex" aria-expanded="false">i</button>
       </div>
     </div>
-    <div class="resource-storage" hidden aria-hidden="true"></div>
     <div class="template-list" id="template-list" aria-label="저장된 유닛 설계"><button class="template-card template-add" id="evolution-open-button" type="button" aria-label="새 유닛 설계" aria-controls="evolution-panel" aria-expanded="false">+</button></div>
     <p class="nest-status" id="nest-status" role="status"></p>
   </aside>
@@ -195,7 +187,6 @@
         <label class="design-name" for="design-name">템플릿 이름</label>
         <input class="design-name-input" id="design-name" type="text" form="unit-design-form" maxlength="24" required autocomplete="off" placeholder="이 생명체를 뭐라고 부를까요?">
       </div>
-      <button class="primary-action" id="design-save" type="submit" form="unit-design-form"><span id="design-save-label">설계 저장</span></button>
       <button class="panel-close" id="evolution-close" type="button" aria-label="설계 닫기">×</button>
     </div>
     <form id="unit-design-form">

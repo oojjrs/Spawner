@@ -601,16 +601,17 @@ export const DNA_LAYOUTS = [
     "counts": {
       "blade": 1,
       "antenna": 1,
-      "power": 9,
-      "speed": 1
+      "power": 5,
+      "speed": 1,
+      "health": 5
     },
     "pieces": [
       {
-        "gene": "power",
+        "gene": "blade",
         "grade": 2,
-        "rotation": 4,
-        "q": -1,
-        "r": -1
+        "rotation": 1,
+        "q": 0,
+        "r": -4
       },
       {
         "gene": "antenna",
@@ -622,9 +623,16 @@ export const DNA_LAYOUTS = [
       {
         "gene": "power",
         "grade": 2,
-        "rotation": 3,
+        "rotation": 0,
+        "q": -4,
+        "r": 1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
         "q": -2,
-        "r": 2
+        "r": 0
       },
       {
         "gene": "power",
@@ -634,46 +642,11 @@ export const DNA_LAYOUTS = [
         "r": 4
       },
       {
-        "gene": "blade",
-        "grade": 2,
-        "rotation": 0,
-        "q": -2,
-        "r": 0
-      },
-      {
-        "gene": "power",
-        "grade": 2,
+        "gene": "health",
+        "grade": 1,
         "rotation": 2,
-        "q": 2,
-        "r": -2
-      },
-      {
-        "gene": "speed",
-        "grade": 2,
-        "rotation": 4,
-        "q": 1,
-        "r": -2
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 0,
-        "q": 2,
-        "r": -4
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 4,
-        "q": 2,
-        "r": 1
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 1,
-        "q": 4,
-        "r": -2
+        "q": 0,
+        "r": 2
       },
       {
         "gene": "power",
@@ -685,9 +658,44 @@ export const DNA_LAYOUTS = [
       {
         "gene": "power",
         "grade": 2,
-        "rotation": 2,
+        "rotation": 4,
         "q": 1,
-        "r": 1
+        "r": 2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 4,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 3,
+        "r": -2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 3,
+        "r": -4
+      },
+      {
+        "gene": "speed",
+        "grade": 2,
+        "rotation": 3,
+        "q": 2,
+        "r": -2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 2,
+        "r": -4
       }
     ]
   },
@@ -699,129 +707,137 @@ export const DNA_LAYOUTS = [
     "counts": {
       "blade": 1,
       "antenna": 1,
-      "power": 9,
+      "power": 5,
       "combo": 3,
-      "critical": 3
+      "critical": 3,
+      "health": 5
     },
     "pieces": [
       {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 4,
-        "q": -1,
-        "r": -2
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 4,
-        "q": -3,
-        "r": 0
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 4,
-        "q": -5,
-        "r": 2
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 3,
-        "q": 3,
-        "r": -4
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 0,
-        "q": 3,
-        "r": -5
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 3,
-        "q": 2,
-        "r": -2
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 0,
-        "q": 2,
-        "r": -3
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 1,
-        "q": 5,
-        "r": -3
-      },
-      {
-        "gene": "critical",
-        "grade": 3,
-        "rotation": 4,
-        "q": 3,
-        "r": 2
-      },
-      {
-        "gene": "combo",
-        "grade": 3,
-        "rotation": 2,
-        "q": 3,
-        "r": -1
-      },
-      {
-        "gene": "combo",
-        "grade": 3,
-        "rotation": 2,
-        "q": 0,
-        "r": -1
-      },
-      {
-        "gene": "critical",
-        "grade": 3,
-        "rotation": 2,
-        "q": -2,
-        "r": 1
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 4,
-        "q": -5,
-        "r": 5
-      },
-      {
         "gene": "blade",
         "grade": 2,
-        "rotation": 0,
-        "q": -4,
-        "r": 4
-      },
-      {
-        "gene": "combo",
-        "grade": 3,
         "rotation": 1,
-        "q": 1,
-        "r": 3
-      },
-      {
-        "gene": "critical",
-        "grade": 3,
-        "rotation": 3,
-        "q": -1,
-        "r": 3
+        "q": 0,
+        "r": -5
       },
       {
         "gene": "antenna",
         "grade": 2,
-        "rotation": 1,
-        "q": 0,
+        "rotation": 2,
+        "q": -2,
+        "r": -3
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": -3,
         "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": -1,
+        "r": -1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": -3,
+        "r": 3
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": -3,
+        "r": 5
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 2,
+        "q": 0,
+        "r": 0
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 1,
+        "q": 1,
+        "r": -2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": -3,
+        "r": 4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 0,
+        "r": 2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 2,
+        "r": 0
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 0,
+        "q": 0,
+        "r": 3
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 0,
+        "q": 2,
+        "r": 1
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 2,
+        "q": 5,
+        "r": -1
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 2,
+        "q": 5,
+        "r": -3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 4,
+        "r": -5
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 2,
+        "q": 3,
+        "r": -5
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 0,
+        "r": -4
       }
     ]
   },
@@ -833,82 +849,146 @@ export const DNA_LAYOUTS = [
     "counts": {
       "blade": 1,
       "antenna": 1,
-      "power": 9,
+      "power": 5,
       "combo": 5,
       "critical": 3,
       "criticalPower": 1,
-      "comboPower": 2
+      "comboPower": 2,
+      "health": 5
     },
     "pieces": [
       {
-        "gene": "power",
+        "gene": "blade",
         "grade": 2,
-        "rotation": 4,
-        "q": -1,
-        "r": -3
+        "rotation": 1,
+        "q": 0,
+        "r": -6
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 2,
+        "q": -2,
+        "r": -4
       },
       {
         "gene": "power",
         "grade": 2,
-        "rotation": 4,
-        "q": -3,
+        "rotation": 0,
+        "q": 1,
+        "r": -6
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": 2,
+        "r": -4
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": 4,
+        "r": -6
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": 4,
+        "r": -5
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 2,
+        "q": 3,
+        "r": -4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 5,
+        "r": -4
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 0,
+        "q": 1,
         "r": -1
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 0,
+        "q": -6,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -4,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -2,
+        "r": -2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 0,
+        "r": -1
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 5,
+        "q": -3,
+        "r": 2
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 3,
+        "q": 0,
+        "r": 3
       },
       {
         "gene": "criticalPower",
         "grade": 4,
         "rotation": 0,
         "q": -6,
-        "r": 0
+        "r": 3
       },
       {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 3,
-        "q": 3,
-        "r": -5
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 0,
-        "q": 3,
-        "r": -6
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 1,
-        "q": 6,
-        "r": -6
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": -2,
+        "r": 3
       },
       {
         "gene": "combo",
         "grade": 3,
         "rotation": 2,
         "q": -4,
-        "r": 2
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 0,
-        "q": -6,
-        "r": 4
-      },
-      {
-        "gene": "blade",
-        "grade": 2,
-        "rotation": 0,
-        "q": -6,
         "r": 5
       },
       {
-        "gene": "combo",
+        "gene": "critical",
         "grade": 3,
-        "rotation": 1,
-        "q": -1,
-        "r": 4
+        "rotation": 4,
+        "q": -2,
+        "r": 6
       },
       {
         "gene": "combo",
@@ -918,81 +998,25 @@ export const DNA_LAYOUTS = [
         "r": 4
       },
       {
-        "gene": "critical",
-        "grade": 3,
+        "gene": "comboPower",
+        "grade": 4,
         "rotation": 2,
         "q": 2,
-        "r": -4
-      },
-      {
-        "gene": "antenna",
-        "grade": 2,
-        "rotation": 1,
-        "q": 3,
-        "r": -4
-      },
-      {
-        "gene": "combo",
-        "grade": 3,
-        "rotation": 0,
-        "q": -1,
-        "r": -2
-      },
-      {
-        "gene": "critical",
-        "grade": 3,
-        "rotation": 3,
-        "q": -2,
-        "r": 0
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 2,
-        "q": 6,
-        "r": -3
-      },
-      {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 4,
-        "q": 1,
         "r": 1
       },
       {
         "gene": "combo",
         "grade": 3,
         "rotation": 0,
-        "q": 5,
+        "q": 3,
         "r": -1
       },
       {
-        "gene": "power",
-        "grade": 2,
-        "rotation": 1,
-        "q": 0,
-        "r": 0
-      },
-      {
-        "gene": "comboPower",
-        "grade": 4,
-        "rotation": 3,
-        "q": -1,
-        "r": 1
-      },
-      {
-        "gene": "critical",
-        "grade": 3,
-        "rotation": 3,
-        "q": 2,
-        "r": 2
-      },
-      {
         "gene": "comboPower",
         "grade": 4,
         "rotation": 0,
-        "q": 2,
-        "r": 3
+        "q": 4,
+        "r": 1
       }
     ]
   },

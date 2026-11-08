@@ -52,8 +52,8 @@ test("dead or hidden projectile participants cancel damage",()=>{
 
 test("windup cancellation removes unlaunched shots while launched combo shots remain",()=>{
   const f=fixture(["secretion","combo"]); f.combat.update(f.source,0);
-  assert.equal(f.source.dnaProjectiles.length,4);
-  assert.deepEqual(f.source.dnaProjectiles.map(p=>Math.round(p.launchedAt*100)),[30,42,54,66]);
+  assert.equal(f.source.dnaProjectiles.length,2);
+  assert.deepEqual(f.source.dnaProjectiles.map(p=>Math.round(p.launchedAt*100)),[30,42]);
   f.combat.update(f.source,.31); f.source.attack=null;
   f.combat.update(f.ally,.35); assert.equal(f.source.dnaProjectiles.length,1);
   f.combat.update(f.ally,.7); assert.ok(f.target.health<100); assert.equal(f.source.dnaProjectiles.length,0);

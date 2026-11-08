@@ -50,11 +50,10 @@ test("살아 있거나 탄생 중인 유닛이 남아 있으면 0포인트여도
   assert.equal(game.checkEnding(), null);
 });
 
-test("둥지가 파괴되어도 생존 유닛이 있으면 기다리고, 전멸하면 포인트가 남아도 엔딩이다", () => {
+test("둥지가 파괴되면 생존 유닛과 남은 포인트에 관계없이 엔딩이다", () => {
   const game = fixture(100);
   game.receiveNestDamage(1000);
-  assert.equal(game.checkEnding(), null);
-  game.agents.splice(0);
+  assert.ok(game.agents.some(agent => agent.health > 0));
   assert.equal(game.checkEnding().reason, "nest-destroyed");
 });
 
@@ -116,7 +115,7 @@ test("기존 legacy 설계가 있으면 저비용 채집 회생 경로를 보존
 
 test("채집 없는 빈 DNA 템플릿은 전멸 후 수입 회생 수단으로 세지 않는다",()=>{
   const game=fixture(3);
-  game.command({type:"design",templateId:null,name:"빈 DNA",dna:{version:3,level:1,budget:3,pieces:[]},birth:false});
+  game.command({type:"design",templateId:null,name:"빈 DNA",dna:{version:6,level:1,budget:3,pieces:[]},birth:false});
   game.agents.splice(0);
   assert.equal(game.checkEnding().reason,"extinction");
 });
@@ -141,4 +140,47 @@ test("네 종족의 DNA 전멸 회생 경계는 종족별 구형 비용이 아�
     assert.ok(enough.agents.find(agent=>agent.id===agentId)?.stats.dna.harvest>0,tribe);
     assert.equal(enough.snapshot().evolutionPoints,0,tribe);
   }
+});
+
+function stranded(points, tribe) {
+  const game = fixture(points, tribe);
+  const saved = JSON.parse(game.save());
+  for (const agent of saved.state.agents) agent.dna = { version: 6, level: 1, budget: 3, pieces: [] };
+  game.restore(JSON.stringify(saved));
+  return game;
+}
+
+test("살아 있는 유닛이 있어도 채집과 회생 생산이 불가능하면 멸망한다", () => {
+  const cost = birthCost({ dna: basicGathererDna() });
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) {
+    const poor = stranded(cost - 1, tribe);
+    assert.ok(poor.agents.some(agent => agent.health > 0));
+    assert.equal(poor.checkEnding().reason, "extinction", tribe);
+    const enough = stranded(cost, tribe);
+    assert.equal(enough.checkEnding(), null, tribe);
+  }
+});
+
+test("채집할 수 없어도 운반 중인 식량으로 회생 생산비를 충당하면 멸망하지 않는다", () => {
+  const cost = birthCost({ dna: basicGathererDna() });
+  for (const [tribe, resource] of [["bean", "clay"], ["spore", "tree"], ["pebble", "pebbles"], ["spring", "dew"]]) {
+    const game = stranded(cost - 1, tribe);
+    game.agents[0].carryingType = resource;
+    game.agents[0].carrying = 1;
+    assert.equal(game.checkEnding(), null, tribe);
+    game.agents[0].carrying = 0;
+    assert.equal(game.checkEnding().reason, "extinction", tribe);
+  }
+});
+
+test("다른 종족의 자재와 부족한 운반 식량은 회생 포인트로 세지 않는다", () => {
+  const cost = birthCost({ dna: basicGathererDna() });
+  const material = stranded(cost - 1, "bean");
+  material.agents[0].carryingType = "tree";
+  material.agents[0].carrying = 20;
+  assert.equal(material.checkEnding().reason, "extinction");
+  const poor = stranded(cost - 2, "bean");
+  poor.agents[0].carryingType = "clay";
+  poor.agents[0].carrying = 1;
+  assert.equal(poor.checkEnding().reason, "extinction");
 });

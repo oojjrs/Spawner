@@ -45,8 +45,20 @@ export function dnaCanMove(agent, x, y, colonies) {
   return Number.isInteger(x) && Number.isInteger(y) && x >= 0 && y >= 0;
 }
 
+export function dnaCanAttack(agent) {
+  return !!(agent.stats?.dna?.melee || agent.stats?.dna?.ranged || agent.stats?.dna?.hunting ||
+    agent.dna?.pieces?.some(piece => piece.gene === "carapace"));
+}
+
 export function dnaCanHunt(agent) {
   return !agent.dna && !agent.stats?.dna || !!agent.stats?.dna?.hunting;
+}
+
+export function dnaCanSearch(agent, target, time) {
+  if (dnaCanHunt(agent)) return true;
+  const x = Math.max(target.x, Math.min(agent.x, target.x + (target.width || 1) - 1));
+  const y = Math.max(target.y, Math.min(agent.y, target.y + (target.height || 1) - 1));
+  return Math.hypot(x - agent.x, y - agent.y) <= (agent.stats?.vision || 0) + (agent.waveUntil > time ? 4 : 0);
 }
 
 // The cheapest productive DNA design, not an empty non-gathering body.

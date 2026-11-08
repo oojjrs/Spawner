@@ -3,7 +3,6 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 import { createGame } from "./game.mjs";
-import { RESOURCE_TYPES } from "./resources.mjs";
 import { productionRuntime } from "../client/production.mjs";
 
 function fixture(tribe, create) {
@@ -28,34 +27,26 @@ function fixture(tribe, create) {
 function verifyGrants(create) {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     const game = fixture(tribe, create);
-    const before = game.snapshot().resourceInventory;
-    assert.equal(before.tree, 3);
-    assert.equal(before.clay, 4); // Former warehouse material migrates into the nest.
+    assert.equal(game.snapshot().evolutionPoints, 7);
+    assert.equal(game.snapshot().resourceInventory, undefined);
+    assert.equal(game.snapshot().resourceStores, undefined);
     for (const count of [1, 2]) {
-      game.command({ type: "cheat-resources" });
-      const inventory = game.snapshot().resourceInventory;
+      game.command({ type: "cheat-evolution-points" });
       const saved = JSON.parse(game.save());
-      for (const resource of RESOURCE_TYPES) {
-        const expected = (before[resource.key] || 0) + (resource.category === "material" ? count * 100 : 0);
-        assert.equal(inventory[resource.key] || 0, expected, tribe + resource.key);
-        assert.equal(saved.state.resourceInventory[resource.key] || 0, expected, tribe + resource.key);
-        assert.equal(saved.state.resourceStores.filter(store => store.kind !== "remains")
-          .reduce((amount, store) => amount + (store.inventory[resource.key] || 0), 0), expected, tribe + resource.key);
-      }
-      assert.equal(saved.state.resourceStores.some(store => store.id === "warehouse"), false);
-      assert.equal(saved.state.resourceStores.some(store => store.id === "remains:fixture"), false);
+      assert.equal(saved.state.evolutionPoints, 7 + count * 10000);
+      assert.equal(saved.state.resourceInventory, undefined);
+      assert.equal(saved.state.resourceStores, undefined);
       game.restore(JSON.stringify(saved));
-      const restored = game.snapshot().resourceInventory;
-      for (const resource of RESOURCE_TYPES) assert.equal(restored[resource.key] || 0, inventory[resource.key] || 0, tribe + resource.key);
+      assert.equal(game.snapshot().evolutionPoints, 7 + count * 10000);
     }
   }
 }
 
-test("재료 치트는 폐기된 창고를 복원하지 않고 네 종족의 둥지 재고와 지급분을 보존한다", () => {
+test("구저장 재고는 한 번 포인트로 바뀌고 포인트 치트는 저장 후 유지한다", () => {
   verifyGrants(createGame);
 });
 
-test("내장 워커도 재료 지급분을 보존하고 배포 번들은 재료 치트를 포함하지 않는다", () => {
+test("내장 워커도 포인트만 저장하고 배포 번들은 재료 치트를 포함하지 않는다", () => {
   const runtime = readFileSync(new URL("../client/runtime.js", import.meta.url), "utf8");
   const worker = JSON.parse(runtime.match(/const workerSource = ("[^\r\n]+");/)[1]);
   const context = { Map, Set, Uint8Array, setTimeout, clearTimeout, performance };
@@ -63,4 +54,27 @@ test("내장 워커도 재료 지급분을 보존하고 배포 번들은 재료 
     'globalThis.createGame = modules["server/game.mjs"].createGame; })();', context);
   verifyGrants(context.createGame);
   assert.equal(productionRuntime(runtime).includes("cheat-resources"), false);
+});
+
+test("옛 재고는 저장 한도 내에서 한 번만 전환하고 중복 창고 및 폐기 자원은 더하지 않는다", () => {
+  const game = fixture("bean", createGame), saved = JSON.parse(game.save());
+  saved.state.evolutionPoints = 195;
+  saved.state.resourceInventory = { tree: 7, dew: 3, nutrients: 100, unknown: 50, clay: -2 };
+  saved.state.resourceStores = [{ kind: "nest", inventory: { tree: 7, dew: 3 } }];
+  game.restore(JSON.stringify(saved));
+  assert.equal(game.snapshot().evolutionPoints, 200);
+  game.restore(game.save());
+  assert.equal(game.snapshot().evolutionPoints, 200);
+  for (const field of ["resourceInventory", "resourceStores", "resourceCapacity", "resourceInventoryLimits"]) {
+    assert.equal(Object.hasOwn(game.snapshot(), field), false);
+    assert.equal(Object.hasOwn(JSON.parse(game.save()).state, field), false);
+  }
+  saved.state.evolutionPoints = 10;
+  delete saved.state.resourceInventory;
+  saved.state.resourceStores = [{ kind: "nest", inventory: { dew: 2 } },
+    { kind: "storage", inventory: { clay: 3 } }, { kind: "remains", inventory: { tree: 100 } }];
+  game.restore(JSON.stringify(saved));
+  assert.equal(game.snapshot().evolutionPoints, 15);
+  game.restore(game.save());
+  assert.equal(game.snapshot().evolutionPoints, 15);
 });

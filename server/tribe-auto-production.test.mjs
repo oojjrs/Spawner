@@ -59,20 +59,20 @@ test("포인트가 없으면 부활시키지 않고 기본 개체 비용만 있�
     const cost=birthCost({slots:[]},tribe);
     change(game,state=>{state.evolutionPoints=cost;state.productionReadyAt=0;});
     assert.ok(game.produce(),tribe);
-    assert.deepEqual(game.agents[0].slots,tribe === "spore" ? ["blade"] : []);
+    assert.deepEqual(game.agents[0].slots,[]);
     assert.equal(game.snapshot().evolutionPoints,0);
   }
 });
 
 test("수명 경고에 들어온 초기 개체를 만료 전에 보충하며 같은 시간에 연속 생산하지 않는다", () => {
   const room=fixture(), game=room.games.get("bean");room.hostId="manual";
-  change(game,state=>{state.evolutionPoints=19;for(const agent of state.agents){agent.bornAt=0;agent.lifespan=180;}});
-  game.prepare(120);
+  change(game,state=>{state.evolutionPoints=19;for(const agent of state.agents){agent.bornAt=0;agent.lifespan=300;}});
+  game.prepare(240);
   assert.ok(game.produce());
   assert.equal(game.agents.length,5);
-  assert.equal(game.agents.at(-1).bornAt,120);
+  assert.equal(game.agents.at(-1).bornAt,240);
   assert.equal(game.produce(),null);
-  game.prepare(120 + CONQUEST_PACING.productionInterval);
+  game.prepare(240 + CONQUEST_PACING.productionInterval);
   assert.ok(game.produce());
 });
 
@@ -109,8 +109,8 @@ test("자동 생산 대기 시간은 저장 복원 후 유지하고 이전 저�
   restored.prepare(.5);
   assert.equal(restored.produce(),null);
   restored.prepare(CONQUEST_PACING.productionInterval);
-  assert.equal(restored.produce(),null);
-  assert.equal(restored.nestLevel,2);
+  assert.ok(restored.produce());
+  assert.equal(restored.nestLevel,1);
   change(restored,state=>{delete state.productionReadyAt;state.agents=[];});
   assert.ok(restored.produce());
 });

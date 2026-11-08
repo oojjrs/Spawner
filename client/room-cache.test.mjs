@@ -67,16 +67,24 @@ test("JSON 왕복 저장도 복원하고 손상된 새 지형을 시드로 덮�
   assert.equal(client.generations(), 0);
 });
 
-test("삭제된 초보자 도움말 설정은 신규 방과 이전 저장 복원에서 되살리지 않는다", () => {
+test("초보자 도움말 설정과 완료 항목은 방마다 저장하고 구 설정도 복원한다", () => {
   const client = fixture();
   client.context.crypto = crypto;
   client.room.world.food = [];
-  const room = client.context.createRoom("현재 설정", 7, "bean", null, false);
-  assert.equal(Object.hasOwn(room, "beginnerHelpEnabled"), false);
-  const saved = client.context.saveRoom(room);
-  assert.equal(Object.hasOwn(saved, "beginnerHelpEnabled"), false);
-  saved.beginnerHelpEnabled = true;
+  const room = client.context.createRoom("현재 설정", 7, "bean", null, false, false);
+  assert.equal(room.beginnerHelp.enabled, false);
+  client.context.updateRoomBeginnerHelp(room, { enabled: true, completed: ["military", "invalid"], dismissed: ["intro"] });
+  const saved = structuredClone(client.context.saveRoom(room));
   const restored = client.context.restoreRoom(saved);
-  assert.equal(Object.hasOwn(restored, "beginnerHelpEnabled"), false);
-  assert.equal(Object.hasOwn(client.context.saveRoom(restored), "beginnerHelpEnabled"), false);
+  assert.deepEqual(structuredClone(restored.beginnerHelp), { enabled: true, completed: ["military"], dismissed: ["intro"] });
+  client.context.updateRoomBeginnerHelp(restored, { resetDismissed: true });
+  assert.equal(restored.beginnerHelp.dismissed.length, 0);
+  assert.deepEqual(structuredClone(restored.beginnerHelp.completed), ["military"]);
+  const second = client.context.createRoom("다른 방", 7, "bean", null, false, true);
+  assert.equal(second.beginnerHelp.completed.length, 0);
+  delete saved.beginnerHelp;
+  saved.beginnerHelpEnabled = false;
+  assert.equal(client.context.restoreRoom(saved).beginnerHelp.enabled, false);
+  delete saved.beginnerHelpEnabled;
+  assert.equal(client.context.restoreRoom(saved).beginnerHelp.enabled, true);
 });

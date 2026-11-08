@@ -1,7 +1,7 @@
 import { DNA_ACTION_RULES, dnaAttackMode, dnaDefensiveMelee, dnaProjectileDuration, dnaProjectileValid } from "./dna-actions.mjs";
 import { creatureAttackRole, creatureAttackMode } from "./creature-attack-role.mjs";
 import { initializeCombatPosition, advanceCombatPositions, combatSeparation, combatPositionMode } from "./combat-position.mjs";
-import { dnaCanMove, dnaCanHunt } from "./dna-unit.mjs";
+import { dnaCanMove, dnaCanSearch, dnaCanAttack } from "./dna-unit.mjs";
 import { worldSize } from "./world-size.mjs";
 import { dropCarriedResources } from "./resources.mjs";
 import { militaryAgent } from "./conquest-pacing.mjs";
@@ -12,7 +12,7 @@ import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
 import { CREATURE_ATTACK_TIMINGS } from "./creature-attack.mjs";
 import { unitTravelSpeed, unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { combatDamage, combatProfile, combatAbilityStats } from "./combat-stats.mjs";
-import { beginRetreat, combatSurvival, retreatEscapeChance } from "./survival.mjs";
+import { beginRetreat, updateRetreat, canRetreat, combatSurvival, retreatEscapeChance } from "./survival.mjs";
 import { combatVfxToken, recordCombatVfx } from "./combat-vfx-journal.mjs";
 
 export const COMBAT_DISPOSITIONS = Object.freeze({ peaceful: "평화형", passive: "비선공", aggressive: "선공" });
@@ -27,7 +27,7 @@ export const COMBAT_EXCHANGE_DAMAGE_VERSION = 5;
 const species = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
 
 export function combatDisposition(agent) {
-  if ((agent.dna || agent.stats?.dna) && agent.ownerId) return agent.stats?.dna?.melee || agent.stats?.dna?.ranged || agent.stats?.dna?.hunting ? "aggressive" : "passive";
+  if ((agent.dna || agent.stats?.dna) && agent.ownerId) return dnaCanAttack(agent) ? "aggressive" : "passive";
   const type = species.get(agent.species);
   let disposition = agent.combatDisposition || type?.combatDisposition;
   if (!disposition) disposition = agent.species === "spiny-back-beetle" ? "aggressive" : "passive";
@@ -72,7 +72,7 @@ function canTargetCombat(agent, target, time, defending) {
 }
 
 export function canPursueCombat(agent, target, time, defending) {
-  return (dnaCanHunt(agent) || agent.x === target.x && agent.y === target.y) && canTargetCombat(agent, target, time, defending);
+  return dnaCanSearch(agent, target, time) && canTargetCombat(agent, target, time, defending);
 }
 
 export function peacefulEscapeChance(suppression) {
@@ -136,12 +136,23 @@ export function createCombat(environment) {
     environment.unitIndex?.update(agent);
   }
 
+  function cancelProjectile(projectile, time) {
+    vfx("projectile-cancel", time, projectile.source, projectile.target.agent, 0,
+      { projectileId: projectile.vfxId, causeId: attackCauses.get(projectile.attack) });
+    projectiles.delete(projectile);
+    projectile.source.dnaProjectiles = (projectile.source.dnaProjectiles || []).filter(item => item !== projectile.visual);
+  }
+
   function release(agent, time) {
     if (combatAbilityStats(agent)) agent.dnaCombatEndedAt = time;
     if (agent.combat?.position) agent.combatPosition = { ...agent.combat.position, moving: false };
     agent.combat = null;
     agent.attack = null; agent.attackTargetId = null; agent.attackHit = true;
-    if (agent.health <= 0) return;
+    if (agent.health <= 0) {
+      for (const projectile of projectiles) if (projectile.source.health <= 0 || projectile.target.agent.health <= 0)
+        cancelProjectile(projectile, time);
+      return;
+    }
     agent.utility = null; agent.decisionPending = "combatEnded";
     agent.mode = agent.species ? "idle" : "search";
     agent.nextActionAt = time; agent.nextDecisionAt = time;
@@ -214,6 +225,7 @@ export function createCombat(environment) {
   }
 
   function escape(agent, opponents, time, retreating) {
+    if (!canRetreat(agent)) return false;
     const combat = agent.combat;
     combat.nextEscapeAt = time + PEACEFUL_ESCAPE_INTERVAL;
     const cells = escapeCells(agent, time, retreating);
@@ -296,8 +308,8 @@ export function createCombat(environment) {
     const combat = attacker.combat, mode = combatPositionMode(attacker, target);
     if (!mode) {
       const capabilities = combatAbilityStats(attacker) || creatureAttackRole(attacker.species);
-      const defensiveMelee = dnaDefensiveMelee(attacker.stats?.dna) && (combat.defending || attacker.stats.dna.hunting);
-      if (dnaDefensiveMelee(attacker.stats?.dna) && !combat.defending && !attacker.stats.dna.hunting) combat.waitingForAttack = true;
+      const defensiveMelee = dnaDefensiveMelee(attacker.stats?.dna) && (combat.defending || dnaCanAttack(attacker));
+      if (dnaDefensiveMelee(attacker.stats?.dna) && !combat.defending && !dnaCanAttack(attacker)) combat.waitingForAttack = true;
       combat.nextAttackAt = capabilities && !capabilities.melee && !capabilities.ranged && !defensiveMelee ? Infinity : Math.max(combat.nextAttackAt, time + .05);
       return;
     }
@@ -370,7 +382,7 @@ export function createCombat(environment) {
   }
 
   function dnaHit(attacker, target, time) {
-    const attack = attacker.attack, defender = target.agent, combat = attacker.combat;
+    const attack = attacker.attack, defender = target.agent, combat = attacker.combat, defense = defender.combat;
     const source = combatAbilityStats(attacker), shield = combatAbilityStats(defender);
     const random = environment.combatRandom || Math.random;
     attack.resolved = true; attacker.attackHit = true;
@@ -407,7 +419,7 @@ export function createCombat(environment) {
     const dealt = Math.max(0, previous - defender.health);
     if (source && dealt > 0) restoreHealth(attacker, dealt * source.lifesteal / 100, time, "drain", {
       causeId: hitEvent?.id, fromId: defender.id, from: { x: defender.x, y: defender.y } });
-    combat.completedExchanges++; defender.combat.completedExchanges++;
+    combat.completedExchanges++; defense.completedExchanges++;
     emit(combat, reaction || "hit", time, attacker, defender, damage);
     if (source && damage > 0 && defender.health > 0) {
       if (random() * 100 < source.stun && time >= defender.combat.stunImmuneUntil) {
@@ -607,15 +619,15 @@ export function createCombat(environment) {
 
   function updateProjectiles(time, combatId) {
       for (const projectile of [...projectiles].sort((a, b) => a.arrivesAt - b.arrivesAt)) {
+        if (!projectiles.has(projectile)) continue;
         if (projectile.source.combat && projectile.source.combat.id !== combatId) continue;
         if (!(projectile.launched ? dnaProjectileValid({ ...projectile.source, retreat: null }, { ...projectile.target.agent, retreat: null }) :
             dnaProjectileValid(projectile.source, projectile.target.agent)) ||
             projectile.source.ownerId && !environment.games.get(projectile.source.ownerId)?.agents.includes(projectile.source) ||
             projectile.target.game && !projectile.target.game.agents.includes(projectile.target.agent) ||
             !projectile.launched && projectile.source.attack !== projectile.attack) {
-          vfx("projectile-cancel", time, projectile.source, projectile.target.agent, 0,
-            { projectileId: projectile.vfxId, causeId: attackCauses.get(projectile.attack) });
-          projectiles.delete(projectile); projectile.source.dnaProjectiles = (projectile.source.dnaProjectiles || []).filter(item => item !== projectile.visual); continue;
+          cancelProjectile(projectile, time);
+          continue;
         }
         if (time >= projectile.launchedAt && !projectile.launched) {
           projectile.launched = true;
@@ -626,8 +638,9 @@ export function createCombat(environment) {
               to: { x: projectile.visual.targetX, y: projectile.visual.targetY } });
         }
         if (time + 1e-8 >= projectile.arrivesAt) {
+          projectiles.delete(projectile);
           projectileHit(projectile, projectile.arrivesAt);
-          projectiles.delete(projectile); projectile.source.dnaProjectiles = (projectile.source.dnaProjectiles || []).filter(item => item !== projectile.visual);
+          projectile.source.dnaProjectiles = (projectile.source.dnaProjectiles || []).filter(item => item !== projectile.visual);
         }
       }
   }
@@ -648,7 +661,8 @@ export function createCombat(environment) {
         target.attack?.targetId === agent.id;
       const actor = agent.species && !agent.stats?.dna && defending && combatDisposition(agent) === "peaceful" ?
         { ...agent, combatDisposition: "passive" } : agent;
-      return dnaProjectileValid(agent, target) && canTargetCombat(actor, target, time, defending) &&
+      return (environment.combatSimulation || dnaCanSearch(agent, target, time)) &&
+        dnaProjectileValid(agent, target) && canTargetCombat(actor, target, time, defending) &&
         (!agent.species || agent.stats?.dna || creatureAttackMode(agent, distance(agent, target)) === "ranged") &&
         distance(agent, target) > 0 && distance(agent, target) <= DNA_ACTION_RULES.rangedRange;
     }).sort((a, b) => distance(agent, a.agent) - distance(agent, b.agent) || String(a.agent.id).localeCompare(String(b.agent.id)));
@@ -686,6 +700,7 @@ export function createCombat(environment) {
   }
 
   function update(agent, time) {
+    if (!canRetreat(agent)) updateRetreat(agent, time, false);
     const rangedBusy = updateDnaActions(agent, time);
     updateEffects(agent, time);
     if (agent.health <= 0) { agent.attack = null; return false; }
@@ -734,7 +749,7 @@ export function createCombat(environment) {
         member.attack = null; member.attackTargetId = null;
         member.mode = member.species === "spiny-back-beetle" ? "idle" : "fight";
       } else {
-        if (member.ownerId) {
+        if (member.ownerId && canRetreat(member)) {
           const allies = participants.filter(entry => entry.agent.combat.side === member.combat.side);
           const assessment = combatSurvival(member, opponents.map(entry => entry.agent), allies.map(entry => entry.agent));
           member.survivalState = assessment.state;

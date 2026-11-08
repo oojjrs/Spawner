@@ -11,7 +11,7 @@ export function renderDnaDesignStats(container, stats, base, showScale) {
     ["health", "체력", ""], ["meleePower", "근접 공격력", ""], ["rangedPower", "원거리 공격력", ""], ["hits", "공격횟수", "회"], ["meleeSpeed", "근접 공속", "/초"], ["rangedSpeed", "원거리 공속", "/초"],
     ["armor", "방어", ""], ["parry", "패링", "%"], ["block", "블록", "%"], ["evasion", "회피", "%"],
     ["capacity", "운반", "개"], ["harvest", "채집량", "개"], ["harvestTime", "채집 시간", "초"], ["movement", "이동", "칸/초"],
-    ["vision", "시야", "칸"], ["comboPower", "연격숙련", "%"], ["critical", "치명", "%"], ["criticalPower", "치명위력", "%"],
+    ["lifespan", "수명", "분"], ["vision", "시야", "칸"], ["comboPower", "연격숙련", "%"], ["critical", "치명", "%"], ["criticalPower", "치명위력", "%"],
     ["accuracy", "정밀", "%"], ["penetration", "예리함", ""], ["blockPower", "방어숙련", "%"], ["counter", "반격", "%"],
     ["counterPower", "반격위력", "%"], ["tenacity", "강인함", "%"], ["reduction", "완충", "%"],
     ["stun", "기절", "%"], ["stunTime", "기절연장", "초"], ["bleed", "출혈", "%"],
@@ -24,7 +24,8 @@ export function renderDnaDesignStats(container, stats, base, showScale) {
   for (const [key, label, unit] of rows) {
     if (key === "scale" && !showScale) continue;
     if (stats[key] === undefined || base[key] === undefined) continue;
-    const value = Number(stats[key]), initial = Number(base[key]);
+    const divisor = key === "lifespan" ? 60 : 1;
+    const value = Number(stats[key]) / divisor, initial = Number(base[key]) / divisor;
     if (initial === 0 && value === 0) continue;
     const term = document.createElement("dt");
     term.textContent = label;
@@ -48,7 +49,7 @@ export function renderDnaDesignStats(container, stats, base, showScale) {
   container.replaceChildren(fragment);
 }
 
-export const dnaGeneNames={blade:'칼날',carapace:'갑각',antenna:'안테나',gather:'채집기관',legs:'다리',power:'근접 공격력',combo:'연타',speed:'근접 공속',comboPower:'연격숙련',critical:'치명',criticalPower:'치명위력',accuracy:'정밀',penetration:'예리함',health:'체력',armor:'경화',evasion:'회피',parry:'패링',block:'방어본능',blockPower:'방어숙련',counter:'반격',counterPower:'반격위력',tenacity:'강인함',reduction:'완충',movement:'이속',capacity:'운반',harvest:'채집량',harvestSpeed:'채집속도',vision:'시야',loadSpeed:'하중적응',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중',secretion:'분비기관',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속'};
+export const dnaGeneNames={lifespan:'수명',blade:'칼날',carapace:'갑각',antenna:'안테나',gather:'채집기관',legs:'다리',power:'근접 공격력',combo:'연타',speed:'근접 공속',comboPower:'연격숙련',critical:'치명',criticalPower:'치명위력',accuracy:'정밀',penetration:'예리함',health:'체력',armor:'경화',evasion:'회피',parry:'패링',block:'방어본능',blockPower:'방어숙련',counter:'반격',counterPower:'반격위력',tenacity:'강인함',reduction:'완충',movement:'이속',capacity:'운반',harvest:'채집량',harvestSpeed:'채집속도',vision:'시야',loadSpeed:'하중적응',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중',secretion:'분비기관',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속'};
 
 export function dnaEditorViewport(M,level,start,gene,width,height) {
   const radius=M.boardRadius(level),halfWidth=34*Math.sqrt(3)*(radius+.5)+28,halfHeight=51*radius+62;
@@ -145,7 +146,7 @@ export function createDnaEditor(container,dnaModel,onChange,onAction) {
   function renderLegend(){
     const legend=find('.dna-legend'),counts=M.counts(pieces),stats=M.stats(pieces,tribe);
     const keys={blade:'meleePower',secretion:'rangedPower',gather:'harvest',carapace:'armor',legs:'evasion',power:'meleePower',speed:'meleeSpeed',combo:'hits',harvestSpeed:'harvestTime'};
-    const units={hits:'회',meleeSpeed:'/초',rangedSpeed:'/초',capacity:'개',harvest:'개',harvestTime:'초',movement:'칸/초',vision:'칸',stunTime:'초',area:'칸',regeneration:'/초',comboSpeed:'초',focus:'초'};
+    const units={lifespan:'분',hits:'회',meleeSpeed:'/초',rangedSpeed:'/초',capacity:'개',harvest:'개',harvestTime:'초',movement:'칸/초',vision:'칸',stunTime:'초',area:'칸',regeneration:'/초',comboSpeed:'초',focus:'초'};
     const percentages=['parry','block','evasion','comboPower','critical','criticalPower','accuracy','blockPower','counter','counterPower','tenacity','reduction','stun','bleed','areaPower','lifesteal','reflection'];
     const labels={meleePower:'근접 공격력',rangedPower:'원거리 공격력',meleeSpeed:'근접 공속',rangedSpeed:'원거리 공속',hits:'공격횟수',harvestTime:'채집 시간',movement:'이동',armor:'방어',evasion:'회피'};
     const unlocks={gather:'채집 기능 해금',blade:'근접 선제 공격 기능 해금',secretion:'원거리 선제 공격 기능 해금'};
@@ -157,7 +158,7 @@ export function createDnaEditor(container,dnaModel,onChange,onAction) {
       svg.innerHTML=dnaGeneShapeSvg(M,gene);item.title=names[gene.id];
       const count=document.createElement('span');count.textContent='×'+counts[gene.id];
       const key=keys[gene.id]||gene.id,without=M.stats(pieces.filter(piece=>piece.gene!==gene.id),tribe);
-      const difference=Number((stats[key]-without[key]).toFixed(3)),unit=units[key]||(percentages.includes(key)?'%':'');
+      const difference=Number(((stats[key]-without[key])/(key==='lifespan'?60:1)).toFixed(3)),unit=units[key]||(percentages.includes(key)?'%':'');
       const effect=unlocks[gene.id]||((labels[key]||names[gene.id])+' '+(difference>=0?'+':'')+difference+unit);
       const delta=document.createElement('span');delta.className='dna-legend-delta';delta.textContent=' ('+effect+')';
       item.append(svg,count);if(gene.id!=='antenna')item.append(delta);legend.append(item);

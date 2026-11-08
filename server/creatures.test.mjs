@@ -302,69 +302,48 @@ function population(system, room) {
   return room.world.burrows.map(burrow => system.agents.filter(agent => agent.burrowId === burrow.id && agent.health > 0).length);
 }
 
-test("작은 굴 120초·큰 굴 60초 주기로 한 마리씩 늘고 각 상한 3·6마리를 지킨다", () => {
+test("굴은 최초 개체만 배치하며 시간이 지나거나 멀리 이동해도 증식하지 않는다", () => {
   const room = environment(), system = createCreatures(room, null);
-  assert.deepEqual(population(system, room), [1, 3]);
-  for (const [time, counts] of [[59.999, [1, 3]], [60, [1, 4]], [119.999, [1, 4]], [120, [2, 5]], [180, [2, 6]], [240, [3, 6]], [1800, [3, 6]]]) {
+  const initialIds = system.agents.map(agent => agent.id);
+  Object.assign(system.agents[0], { x: 280, y: 280, renderFromX: 280, renderFromY: 280 });
+  for (const time of [60, 120, 180, 240, 3600, 36000]) {
     room.simSeconds = time; system.tick();
-    assert.deepEqual(population(system, room), counts, String(time));
+    assert.deepEqual(population(system, room), [1, 3]);
+    assert.deepEqual(system.agents.map(agent => agent.id), initialIds);
   }
 });
 
-test("굴에서 멀리 나간 개체도 생존 상한에 포함하며 상한 중 지난 회차를 쌓아 두지 않는다", () => {
+test("전멸한 굴은 입구가 열려 있어도 다시 생성하지 않는다", () => {
   const room = environment(), system = createCreatures(room, null);
-  room.simSeconds = 360; system.tick();
-  const small = system.agents.filter(agent => agent.burrowId === room.world.burrows[0].id);
-  for (const [index, agent] of small.entries()) Object.assign(agent, { x: 280 + index, y: 280, renderFromX: 280 + index, renderFromY: 280 });
-  room.simSeconds = 480; system.tick();
-  assert.deepEqual(population(system, room), [3, 6]);
-  system.receiveDamage(small[0], 100);
-  room.simSeconds = 480.1; system.tick();
-  assert.deepEqual(population(system, room), [2, 6]);
-  room.simSeconds = 600; system.tick();
-  assert.deepEqual(population(system, room), [3, 6]);
-});
-
-test("전멸해도 굴이 남으면 다음 회차에 한 마리씩 다시 생성한다", () => {
-  const room = environment(), system = createCreatures(room, null);
-  for (const agent of system.agents) system.receiveDamage(agent, 100);
-  room.simSeconds = 59.995; system.tick();
+  for (const agent of system.agents) system.receiveDamage(agent, agent.health);
+  room.simSeconds = 36000; system.tick();
   assert.deepEqual(population(system, room), [0, 0]);
-  room.simSeconds = 60; system.tick();
-  assert.deepEqual(population(system, room), [0, 1]);
-  room.simSeconds = 120; system.tick();
-  assert.deepEqual(population(system, room), [1, 2]);
+  assert.equal(system.agents.length, 0);
+  for (let index = 0; index < 1000; index++) { room.simSeconds++; system.tick(); }
+  assert.equal(system.agents.length, 0);
 });
 
-test("저장·복원으로 증식 시각이 초기화되지 않고 새 개체 식별자를 재사용하지 않는다", () => {
+test("옛 증식 예약을 저장복원해도 생존 개체를 늘리거나 죽은 개체를 재생성하지 않는다", () => {
   const room = environment(); let system = createCreatures(room, null);
-  room.simSeconds = 60; system.tick();
-  const ids = new Set(system.agents.map(agent => agent.id));
-  room.simSeconds = 90;
+  const original = system.agents[0];
+  system.receiveDamage(original, original.health);
+  room.simSeconds = 10; system.tick();
   const saved = JSON.parse(JSON.stringify(system.save()));
+  const ids = system.agents.map(agent => agent.id);
   system = createCreatures(room, saved);
-  assert.deepEqual(system.save(), saved);
-  room.simSeconds = 119.995; system.tick();
-  assert.deepEqual(population(system, room), [1, 4]);
-  room.simSeconds = 120; system.tick();
-  assert.deepEqual(population(system, room), [2, 5]);
-  const newer = system.agents.filter(agent => !ids.has(agent.id));
-  assert.equal(newer.length, 2);
-  for (const agent of system.agents) system.receiveDamage(agent, 100);
-  room.simSeconds = 240; system.tick();
-  assert.ok(system.agents.every(agent => !ids.has(agent.id) && !newer.some(previous => previous.id === agent.id)));
+  room.simSeconds = 36000; system.tick();
+  assert.deepEqual(system.agents.map(agent => agent.id), ids);
+  assert.deepEqual(population(system, room), [0, 3]);
 });
 
-test("입구 주변이 막히면 겹쳐 생성하지 않고 빈 칸이 생긴 다음 회차에 증식한다", () => {
-  const room = environment(), system = createCreatures(room, null), burrow = room.world.burrows[0];
+test("막힌 굴의 최초 배치 실패는 통로가 열린 뒤에도 재시도하지 않는다", () => {
+  const room = environment();
   for (let y = 198; y <= 204; y++) for (let x = 127; x <= 133; x++) room.world.hazards[y * 320 + x] = 1;
-  room.simSeconds = 120; system.tick();
-  assert.deepEqual(population(system, room), [1, 5]);
+  const system = createCreatures(room, null);
+  assert.deepEqual(population(system, room), [0, 3]);
   room.world.hazards.fill(0);
-  room.simSeconds = 240; system.tick();
-  assert.deepEqual(population(system, room), [2, 6]);
-  const births = system.agents.filter(agent => agent.burrowId === burrow.id);
-  assert.equal(new Set(births.map(agent => agent.x + "," + agent.y)).size, births.length);
+  room.simSeconds = 36000; system.tick();
+  assert.deepEqual(population(system, room), [0, 3]);
 });
 
 test("굴이 파괴된 저장 상태에서는 기존 개체를 남기고 추가 증식만 중단한다", () => {
@@ -372,11 +351,11 @@ test("굴이 파괴된 저장 상태에서는 기존 개체를 남기고 추가 
   saved.burrows[0].health = 0;
   const system = createCreatures(room, saved), survivor = system.agents[0];
   room.simSeconds = 360; system.tick();
-  assert.deepEqual(population(system, room), [1, 6]);
+  assert.deepEqual(population(system, room), [1, 3]);
   assert.ok(system.agents.includes(survivor));
-  system.receiveDamage(survivor, 100);
+  system.receiveDamage(survivor, survivor.health);
   room.simSeconds = 480; system.tick();
-  assert.deepEqual(population(system, room), [0, 6]);
+  assert.deepEqual(population(system, room), [0, 3]);
 });
 
 test("이전 저장에서 상한보다 많은 생존 개체를 보존하고 빈자리 전에는 더 만들지 않는다", () => {
@@ -385,10 +364,10 @@ test("이전 저장에서 상한보다 많은 생존 개체를 보존하고 빈�
   const system = createCreatures(room, { version: 3, agents });
   assert.deepEqual(population(system, room), [4, 0]);
   room.simSeconds = 120; system.tick();
-  assert.deepEqual(population(system, room), [4, 2]);
+  assert.deepEqual(population(system, room), [4, 0]);
 });
 
-test("실제 월드를 저장·복원하고 스냅샷에서 소속 굴을 유지하며 증식을 이어간다", () => {
+test("실제 월드를 저장·복원하고 스냅샷에서 소속 굴과 소모된 개체 수를 유지한다", () => {
   const room = createRoom("굴 저장 확인", 731047);
   room.simSeconds = 90; room.creatureSystem.tick();
   const saved = JSON.parse(JSON.stringify(saveRoom(room))), restored = restoreRoom(saved);
@@ -401,7 +380,7 @@ test("실제 월드를 저장·복원하고 스냅샷에서 소속 굴을 유지
   restored.simSeconds = 120; restored.creatureSystem.tick();
   for (const burrow of restored.world.burrows) {
     const count = restored.creatureSystem.agents.filter(agent => agent.species === "spiny-back-beetle" && agent.health > 0 && agent.burrowId === burrow.id).length;
-    assert.ok(count <= Math.max(savedCounts.get(burrow.id), BURROW_TYPES[burrow.type].populationLimit), burrow.id);
+    assert.equal(count, savedCounts.get(burrow.id), burrow.id);
   }
   const colony = restored.colonies[0], beetle = restored.creatureSystem.agents.find(agent => agent.species === "spiny-back-beetle");
   Object.assign(beetle, { x: colony.x + 2, y: colony.y + 3 });

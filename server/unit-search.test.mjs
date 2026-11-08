@@ -83,8 +83,8 @@ for (const [surface, api] of surfaces) {
     }
   });
 
-  test(surface + " · 갑각과 안테나는 선제 기본공격1을 시작하되 칼날 전용 강화를 받지 않는다", () => {
-    const f=fixture(api,["carapace","antenna","power","speed"]),target=addEnemy(f),events=[];
+  test(surface + " · 갑각은 안테나 없이도 선제 기본공격1을 시작하되 칼날 전용 강화를 받지 않는다", () => {
+    const f=fixture(api,["carapace","power","speed"]),target=addEnemy(f),events=[];
     Object.assign(target,{x:f.agent.x,y:f.agent.y});
     assert.equal(f.agent.stats.dna.meleePower,1);assert.equal(f.agent.stats.dna.meleeSpeed,.5);
     const environment={simSeconds:0,world:{size:f.size,terrain:new Uint8Array(f.size*f.size).fill(4)},colonies:[f.colony],
@@ -116,13 +116,147 @@ for (const [surface, api] of surfaces) {
     assert.equal(f.state.simSeconds, 0);
   });
 
-  test(surface + " · 안테나 없는 전투형은 원격 적 수색을 하지 않고 접촉한 적에게는 공격한다", () => {
-    const f = fixture(api, ["blade"]), target = addEnemy(f);
-    const plans = f.ai.evaluate(f.agent, false);
-    assert.ok(plans.every(plan => plan.action !== "fight" && !String(plan.target.key).startsWith("enemy-search:")));
-    assert.equal(api.canPursueCombat(f.agent,target,0),false);
-    Object.assign(target,{x:f.agent.x,y:f.agent.y});
-    assert.equal(api.canPursueCombat(f.agent,target,0),true);
+  test(surface + " · 안테나 없는 근접·원거리·갑각 전사는 시야 안을 순찰하고 보이는 적을 추격한다", () => {
+    for (const gene of ["blade", "secretion", "carapace"]) {
+      const f = fixture(api, [gene]);
+      const patrol = f.ai.evaluate(f.agent, false)[0];
+      assert.equal(patrol.action, "explore");
+      assert.match(patrol.target.key, /^enemy-search:/);
+      assert.ok(patrol.route.length > 1);
+      assert.ok(Math.hypot(patrol.target.x - f.agent.x, patrol.target.y - f.agent.y) <= 1);
+      const target = addEnemy(f);
+      target.x = 16;
+      assert.equal(api.combatDisposition(f.agent), "aggressive");
+      assert.equal(api.canPursueCombat(f.agent, target, 0), true);
+      const plan = f.ai.evaluate(f.agent, false)[0];
+      assert.equal(plan.action, "fight");
+      assert.equal(plan.target.id, target.id);
+      assert.ok(plan.route.length > 1);
+    }
+  });
+
+  test(surface + " · 안테나 없는 전사는 공유 시야에 있어도 자신의 시야 밖 적을 추격하지 않는다", () => {
+    for (const gene of ["blade", "secretion", "carapace"]) {
+      const f = fixture(api, [gene]), target = addEnemy(f);
+      assert.equal(api.canPursueCombat(f.agent, target, 0), false);
+      assert.ok(f.ai.evaluate(f.agent, false).every(plan => plan.action !== "fight"));
+      Object.assign(target, { x: 16, y: 13 });
+      assert.equal(api.canPursueCombat(f.agent, target, 0), false);
+    }
+  });
+
+  test(surface + " · 안테나 없는 전사의 탐색 범위는 시야 증가와 적의 시야 이탈을 따른다", () => {
+    const f = fixture(api, ["blade", "vision", "vision"]), target = addEnemy(f);
+    assert.equal(f.agent.stats.vision, 2);
+    assert.equal(f.ai.evaluate(f.agent, false)[0].target.id, target.id);
+    target.x = 18;
+    assert.equal(api.canPursueCombat(f.agent, target, 0), false);
+    assert.ok(f.ai.evaluate(f.agent, false).every(plan => plan.action !== "fight"));
+    target.x = 16;
+    target.hidden = true;
+    assert.equal(api.canPursueCombat(f.agent, target, 0), false);
+  });
+
+  test(surface + " · 시야 안의 적 건물은 안테나 없이도 접근한다", () => {
+    const f = fixture(api, ["carapace", "vision", "vision", "vision", "vision"]);
+    const burrow = { id: "burrow:1", kind: "burrow", x: 18, y: 12, width: 2, height: 2, health: 1 };
+    f.context.burrows = () => [burrow];
+    const plan = f.ai.evaluate(f.agent, false)[0];
+    assert.equal(plan.action, "fight");
+    assert.equal(plan.target.id, burrow.id);
+    assert.ok(plan.route.length > 1);
+    burrow.x = 19;
+    assert.ok(f.ai.evaluate(f.agent, false).every(candidate => candidate.action !== "fight"));
+  });
+
+  test(surface + " · 실제 게임 틱은 안테나 없는 전사의 시야 안 추격을 실행한다", () => {
+    for (const gene of ["blade", "carapace"]) {
+      const f = fixture(api, [gene]), target = addEnemy(f);
+      target.x = 16;
+      const environment = { hostId: "home", simSeconds: 0, world: { size: f.size, seed: 13,
+        terrain: new Uint8Array(f.size * f.size).fill(4), hazards: new Uint8Array(f.size * f.size) },
+        colonies: [f.colony], games: new Map(), food: new Map(), foodSpots: new Map() };
+      const game = api.createGame(environment, f.colony);
+      environment.games.set("home", game);
+      environment.games.set("rival", { agents: [target], receiveDamage(unit, damage) { unit.health -= damage; } });
+      const saved = JSON.parse(game.save());
+      saved.state.agents = [{ ...saved.state.agents[0], dna: f.agent.dna, x: 15, y: 12,
+        renderFromX: 15, renderFromY: 12, birth: null, utility: null }];
+      game.restore(JSON.stringify(saved));
+      const agent = game.agents[0];
+      agent.moveBudget = 1;
+      game.prepare(.1);
+      game.tick(.1);
+      assert.equal(agent.utility.action, "fight");
+      assert.equal(agent.utility.target.id, target.id);
+      assert.equal(agent.x, 16);
+      assert.equal(agent.y, 12);
+    }
+  });
+
+  test(surface + " · 원거리 자동 사격도 안테나 없이는 자신의 시야를 따른다", () => {
+    for (const genes of [["secretion"], ["secretion", "antenna"]]) {
+      const f = fixture(api, genes), target = addEnemy(f);
+      const environment = { simSeconds: 0, world: { size: f.size, terrain: new Uint8Array(f.size * f.size).fill(4) },
+        colonies: [f.colony], games: new Map(), combatRandom: () => .99, damageRandom: () => .5 };
+      for (const agent of [f.agent, target]) environment.games.set(agent.ownerId, { agents: [agent],
+        receiveDamage(unit, damage) { unit.health -= damage; } });
+      const combat = api.createCombat(environment);
+      combat.update(f.agent, 0);
+      assert.equal(!!f.agent.attack, genes.includes("antenna"));
+      if (!f.agent.attack) {
+        target.x = 16;
+        combat.update(f.agent, .3);
+        assert.equal(f.agent.attack.targetId, target.id);
+      }
+    }
+  });
+
+  test(surface + " · 전사는 위급해도 도주·회복 이탈 대신 시야 안의 적과 싸운다", () => {
+    for (const gene of ["blade", "secretion", "carapace"]) for (const antenna of [false, true]) {
+      const f = fixture(api, [gene, ...(antenna ? ["antenna"] : [])]), target = addEnemy(f);
+      f.agent.health = 1;
+      target.x = 16;
+      target.health = 100;
+      target.stats.attack = target.stats.attackPower = target.stats.dna.power = target.stats.dna.meleePower = 50;
+      f.agent.retreat = { recoverHealth: 10, startedAt: 0, attempts: 2, safeSince: null };
+      f.agent.escapeUntil = 20;
+      f.agent.mode = "flee";
+      f.agent.utility = { action: "flee", target: { x: 14, y: 12, key: "old" }, route: [] };
+      const plans = f.ai.evaluate(f.agent, false);
+      assert.equal(f.agent.retreat, null);
+      assert.equal(f.agent.escapeUntil, 0);
+      assert.equal(plans[0].action, "fight");
+      assert.equal(plans[0].target.id, target.id);
+      assert.ok(plans.every(plan => !["flee", "recover"].includes(plan.action)));
+    }
+  });
+
+  test(surface + " · 저장된 전사의 후퇴를 해제하고 실제 교전에서 탈출하지 않는다", () => {
+    for (const gene of ["blade", "secretion", "carapace"]) {
+      const f = fixture(api, [gene]), target = addEnemy(f);
+      f.agent.health = 1;
+      f.agent.retreat = { recoverHealth: 10, startedAt: 0, attempts: 2, safeSince: null };
+      f.agent.escapeUntil = 20;
+      Object.assign(target, { x: f.agent.x, y: f.agent.y, health: 10000 });
+      target.stats.health = 10000;
+      target.stats.dna.meleePower = 0;
+      const environment = { simSeconds: 0, world: { size: f.size, terrain: new Uint8Array(f.size * f.size).fill(4) },
+        colonies: [f.colony], games: new Map(), combatRandom: () => 0, damageRandom: () => .5 };
+      for (const agent of [f.agent, target]) environment.games.set(agent.ownerId, { agents: [agent],
+        receiveDamage(unit, damage) { unit.health -= damage; } });
+      const combat = api.createCombat(environment);
+      for (let step = 0; step <= 60; step++) {
+        environment.simSeconds = step / 10;
+        combat.update(f.agent, environment.simSeconds);
+        combat.update(target, environment.simSeconds);
+      }
+      assert.equal(f.agent.retreat, null);
+      assert.equal(f.agent.escapeUntil, 0);
+      assert.ok(f.agent.combat);
+      assert.deepEqual([f.agent.x, f.agent.y], [15, 12]);
+      assert.ok(target.health < 10000);
+    }
   });
 
   test(surface + " · 다른 유닛의 안테나와 시야가 채집 담당을 정찰로 바꾸지 않는다", () => {

@@ -81,7 +81,7 @@ export async function openStorage() {
           for (const id of ids) {
             const request = rooms.get(id);
             request.onsuccess = () => {
-              if (!request.result?.ending) return;
+              if (!request.result?.ending || request.result.ending.reason === "victory") return;
               rooms.delete(id);
               listings.delete(id);
               removed.push(id);

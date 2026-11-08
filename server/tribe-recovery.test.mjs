@@ -52,14 +52,14 @@ test("구버전 양분과 고기 재고·운반·채집·예약·발견은 복�
     assert.equal("transport" in restored, false); assert.equal("transportCargo" in restored, false);
     assert.equal(restored.preciseHarvestTimes.size, 0); assert.equal("butchery" in restored.appearanceAttributes, false);
     const snapshot = f.game.snapshot();
-    assert.deepEqual(snapshot.resourceInventory, { clay: 4 });
-    assert.ok(snapshot.resourceStores.every(store => !(type in store.inventory)));
+    assert.equal(snapshot.resourceInventory, undefined);
+    assert.equal(snapshot.resourceStores, undefined);
     assert.ok(snapshot.discoveries.every(entry => !["food:" + type, "attribute:butchery"].includes(entry.key)));
     assert.ok(snapshot.food.every(cell => cell.kind !== "corpse" && cell.resourceType !== type));
     assert.equal(f.environment.foodSpots.get("old").cells.length, 0); assert.equal(f.environment.food.has("drop:" + type), false);
     assert.equal(snapshot.corpses.length, 1);
     f.game.prepare(3); f.game.tick(0);
-    assert.equal(f.game.snapshot().corpses.length, 0); assert.equal(f.game.snapshot().evolutionPoints, before);
+    assert.equal(f.game.snapshot().corpses.length, 0); assert.equal(f.game.snapshot().evolutionPoints, before + 4);
     assert.equal(JSON.parse(f.game.save()).state.knownFood.entries.some(([, cell]) => cell.kind === "corpse"), false);
   }
 });

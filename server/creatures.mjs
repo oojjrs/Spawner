@@ -28,6 +28,8 @@ export function createCreatures(environment, saved) {
   const burrowSites = new Map(burrows.map(burrow => [burrow.id, burrow]));
   const state = { version: 5, agents: [], burrows: burrows.map(burrow => ({ id: burrow.id,
     health: BURROW_TYPES[burrow.type].health, nextSpawnAt: environment.simSeconds + BURROW_TYPES[burrow.type].spawnInterval, spawnCount: 0 })) };
+  state.raidSpawnCount = saved?.raidSpawnCount ?? 0;
+  if (!Number.isSafeInteger(state.raidSpawnCount) || state.raidSpawnCount < 0) throw new Error("습격 저장 형식이 올바르지 않습니다.");
   const burrowRecords = new Map(state.burrows.map(record => [record.id, record])), burrowCells = new Map();
   for (const burrow of burrows) for (let y = burrow.y; y < burrow.y + burrow.height; y++) {
     for (let x = burrow.x; x < burrow.x + burrow.width; x++) burrowCells.set(y * size + x, burrow.id);
@@ -86,6 +88,41 @@ export function createCreatures(environment, saved) {
     return agent;
   }
 
+  function spawnRaid(colonyId) {
+    const colony = environment.colonies.find(entry => entry.id === colonyId);
+    const game = colony && environment.games.get(colony.ownerId);
+    if (!game || game.ending || game.nest?.health === 0) throw new Error("습격할 둥지를 찾을 수 없습니다.");
+    const queue = [], visited = new Set();
+    for (const key of colony.occupiedCells) {
+      const [dx, dy] = key.split(",").map(Number);
+      for (const cell of neighbors(colony.x + dx, colony.y + dy, true)) {
+        const key = cell.y * size + cell.x;
+        if (visited.has(key)) continue;
+        visited.add(key); queue.push({ ...cell, distance: 0 });
+      }
+    }
+    const raiders = [];
+    for (let index = 0; index < queue.length && raiders.length < 3; index++) {
+      const cell = queue[index];
+      if (cell.distance >= 1 && !occupied(cell.x, cell.y, null) && !environment.world.hazards?.[cell.y * size + cell.x] &&
+          !(environment.food.get(cell.x + "," + cell.y)?.amount > 0)) {
+        const agent = spawnAt(cell.x, cell.y, "raid:" + colonyId + ":" + ++state.raidSpawnCount, null);
+        agent.raid = { colonyId, phase: "active", departedAt: environment.simSeconds, forced: true };
+        applyRaidCombatScale(agent, environment.simSeconds);
+        agent.nextActionAt = environment.simSeconds;
+        raiders.push(agent);
+      }
+      if (cell.distance >= 3) continue;
+      for (const next of neighbors(cell.x, cell.y, true)) {
+        const key = next.y * size + next.x;
+        if (visited.has(key)) continue;
+        visited.add(key); queue.push({ ...next, distance: cell.distance + 1 });
+      }
+    }
+    if (!raiders.length) throw new Error("둥지 주변에 습격할 빈 공간이 없습니다.");
+    return { raiders: raiders.map(agent => agent.id), x: raiders[0].x, y: raiders[0].y };
+  }
+
   function spawnFromBurrow(record) {
     const burrow = burrowSites.get(record.id), entrance = burrow.entrance;
     if (burrow.creature?.unique) return null;
@@ -108,30 +145,6 @@ export function createCreatures(environment, saved) {
       }
     }
     return null;
-  }
-
-  function growBurrows() {
-    const living = new Map(), residents = new Map();
-    let ambient = 0;
-    for (const agent of state.agents) if (agent.health > 0) {
-      living.set(agent.burrowId, (living.get(agent.burrowId) || 0) + 1);
-      if (!agent.raid) residents.set(agent.burrowId, (residents.get(agent.burrowId) || 0) + 1);
-      if (!raids.sourceIds.has(agent.burrowId)) ambient++;
-    }
-    for (const record of state.burrows) {
-      if (record.health <= 0 || environment.simSeconds + 1e-8 < record.nextSpawnAt) continue;
-      const type = BURROW_TYPES[burrowSites.get(record.id).type];
-      const periods = Math.floor((environment.simSeconds + 1e-8 - record.nextSpawnAt) / type.spawnInterval) + 1;
-      record.nextSpawnAt += periods * type.spawnInterval;
-      const reserve = distribution && raids.sourceIds.has(record.id);
-      const count = (reserve ? residents : living).get(record.id) || 0, births = Math.min(periods,
-        (reserve ? BEETLE_RAIDS.defenders + 1 : type.populationLimit) - count,
-        distribution && !reserve ? Math.max(0, distribution.populationLimit - ambient) : Infinity);
-      for (let index = 0; index < births; index++) {
-        if (!spawnFromBurrow(record)) break;
-        if (!reserve) ambient++;
-      }
-    }
   }
 
   function relocate(agent) {
@@ -314,9 +327,9 @@ export function createCreatures(environment, saved) {
   function tick() {
     expireCorpses(environment.food, environment.simSeconds);
     removeDead();
-    growBurrows();
     raids.dispatch();
     encounters.tick();
+    if (!state.agents.length) return;
     const now = environment.simSeconds;
     const opponents = players(), buildings = creatureNestTargets(environment);
     for (const agent of state.agents) {
@@ -329,9 +342,8 @@ export function createCreatures(environment, saved) {
       if (agent.mode === "spawn") { agent.mode = "idle"; agent.animationStartedAt = agent.spawn.readyAt; }
       finishCreatureMove(agent, now);
       if (combat.update(agent, now)) { agent.pursuitTargetId = null; continue; }
-      if (raids.update(agent)) { agent.attack = null; agent.pursuitTargetId = null; continue; }
       if (now < agent.moveStartedAt + agent.moveDuration) continue;
-      const home = raids.home(agent);
+      let home = raids.home(agent);
       if (agent.returningHome && Math.abs(agent.x - home.x) + Math.abs(agent.y - home.y) <= (agent.raid ? 3 : 0)) {
         agent.returningHome = false;
         delete agent.returnRetryAt;
@@ -340,7 +352,7 @@ export function createCreatures(environment, saved) {
       const candidates = (environment.unitIndex ? environment.unitIndex.nearby(agent.x, agent.y, agent.stats.vision)
         .filter(entry => entry.game) : opponents).concat(buildings);
       const targets = candidates.filter(entry => !agent.returningHome && entry.agent.health > 0 && raids.targetAllowed(agent, entry.game) &&
-        (entry.agent.kind === "nest" ? combatDisposition(agent) === "aggressive" && burrowDistance(home, entry.agent) <= 8 :
+        (entry.agent.kind === "nest" ? agent.raid?.phase !== "outbound" && combatDisposition(agent) === "aggressive" && burrowDistance(home, entry.agent) <= 8 :
           canPursueCombat(agent, entry.agent, now) && !(entry.agent.birth && now < entry.agent.birth.readyAt) &&
           walkable(entry.agent.x, entry.agent.y, Boolean(agent.raid)) && Math.hypot(entry.agent.x - home.x, entry.agent.y - home.y) <= 8))
         .map(entry => ({ ...entry, distance: entry.agent.kind === "nest" ? burrowDistance(agent, entry.agent) :
@@ -359,6 +371,10 @@ export function createCreatures(environment, saved) {
           }
         } else destination = stepToward(agent, candidate.agent, 0);
         if (destination || candidate.distance === 0) { target = candidate; break; }
+      }
+      if (!target) {
+        if (raids.update(agent)) { agent.attack = null; agent.pursuitTargetId = null; continue; }
+        home = raids.home(agent);
       }
       agent.pursuitTargetId = target?.agent.id || null;
       if (updateCreatureNestAttack(agent, target, now)) continue;
@@ -384,7 +400,7 @@ export function createCreatures(environment, saved) {
   }
 
   initializing = false;
-  return { tick, receiveDamage, receiveBurrowDamage, burrowAt, save: () => ({ ...state, encounters: encounters.save() }),
+  return { tick, receiveDamage, receiveBurrowDamage, burrowAt, spawnRaid, save: () => ({ ...state, encounters: encounters.save() }),
     get agents() { return [...state.agents, ...encounters.agents]; },
     get signals() { return encounters.signals; },
     get burrows() { return state.burrows.map(record => ({ ...burrowSites.get(record.id), kind: "burrow", health: record.health,

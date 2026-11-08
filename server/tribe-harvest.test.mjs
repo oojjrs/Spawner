@@ -80,7 +80,7 @@ for (const [tribe, ownFood] of foods) {
     assert.equal(f.game.agents[0].carrying, 0);
   });
 
-  test(tribe + "의 저장된 타 종족 먹이 채집은 복원 후 중단하고 기존 재료는 보존한다", () => {
+  test(tribe + "의 저장된 타 종족 먹이 채집은 복원 후 중단하고 기존 재고는 포인트로 전환한다", () => {
     const f = fixture(tribe, ownFood, createGame);
     advance(f, .25);
     f.environment.world.generationVersion = 10;
@@ -95,7 +95,8 @@ for (const [tribe, ownFood] of foods) {
     advance(f, .25);
     assert.equal(cell.amount, 12);
     assert.ok(f.game.agents[0].utility?.action !== "collect" || f.game.agents[0].utility.target.key !== key);
-    assert.deepEqual(f.game.snapshot().resourceInventory, { dew: 7, clay: 3 });
+    assert.equal(f.game.snapshot().resourceInventory, undefined);
+    assert.equal(f.game.snapshot().evolutionPoints, saved.state.evolutionPoints + 10);
   });
 }
 

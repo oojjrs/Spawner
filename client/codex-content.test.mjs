@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
-import { CODEX_GROUPS, CODEX_GENES, CODEX_UNITS, codexResolveEntry, codexRelatedEntries, codexGeneDetails, codexResourceDetails } from "./codex-content.mjs";
+import { CODEX_GROUPS, CODEX_GENES, CODEX_UNITS, codexResolveEntry, codexRelatedEntries, codexGeneDetails, codexGeneTribeEffects, codexAttributeDescription, codexAttributeEffect, codexResourceDetails } from "./codex-content.mjs";
 import { ATTRIBUTE_DNA } from "../server/dna.mjs";
 import { TERRAIN_CODEX } from "./terrain-codex.mjs";
 
@@ -28,7 +28,7 @@ test("현행 DNA 카탈로그·유닛·자원·건물·지형을 모두 열고 �
     for (const target of codexRelatedEntries(entry, 31)) assert.ok(codexResolveEntry(target), id + " → " + target);
     for (const path of [value.image, value.carryImage].filter(Boolean)) assert.ok(existsSync(new URL(path, root)), path);
   }
-  assert.equal(ids.size, 80);
+  assert.equal(ids.size, 81);
   assert.equal(codexResolveEntry("attribute:feet").key, "movement");
   assert.equal(codexResolveEntry("attribute:strength").key, "capacity");
   assert.equal(codexResolveEntry("attribute:piercing").key, "penetration");
@@ -43,7 +43,7 @@ test("DNA 설명은 기관·레벨·가격·종족별 실제 효과와 퇴역 �
   assert.deepEqual(details("gather", "bean").effects, [["채집량", "1개"], ["운반량", "1개"], ["채집 시간", "4초"]]);
   assert.deepEqual(details("blade", "bean").effects, [["근접 공격력", 2], ["근접 공속", "0.5회/초"]]);
   assert.deepEqual(details("secretion", "bean").effects, [["원거리 공격력", 1.4], ["원거리 공속", "0.5회/초"]]);
-  assert.ok(details("health", "pebble").effect.includes("+12"));
+  assert.ok(details("health", "pebble").effect.includes("+24"));
   assert.ok(details("rangedPower", "spore").effect.includes("+3.5"));
   assert.deepEqual(details("secretion", "spore").effects, [["원거리 공격력", 1.61], ["원거리 공속", "0.525회/초"]]);
   assert.ok(details("power", "spring").effect.includes("+9.6"));
@@ -52,6 +52,42 @@ test("DNA 설명은 기관·레벨·가격·종족별 실제 효과와 퇴역 �
     const value = details(gene.key, tribe);
     assert.ok(!/NaN|undefined|Infinity/.test(JSON.stringify(value)), gene.key);
     assert.ok(value.rows.some(([label, cost]) => label === "조각 비용" && cost === gene.price + "P"));
+  }
+});
+
+test("DNA 공통 효과는 반복하지 않고 실제 종족 차이가 있는 효과만 나눈다", () => {
+  for (const key of ["antenna", "gather", "capacity", "harvestSpeed", "vision", "lifespan", "blockPower", "combo", "area"]) {
+    assert.deepEqual(codexGeneTribeEffects(codexResolveEntry("attribute:" + key).value), [], key);
+  }
+  for (const key of ["blade", "secretion", "health", "power", "carapace", "movement", "regeneration", "focus"]) {
+    const effects = codexGeneTribeEffects(codexResolveEntry("attribute:" + key).value);
+    assert.equal(effects.length, 4, key);
+    assert.ok(new Set(effects.map(([, value]) => value)).size > 1, key);
+  }
+  for (const gene of CODEX_GENES) {
+    assert.ok(gene.description && !gene.description.includes("조각의 레벨·개수"), gene.id);
+    assert.equal(codexAttributeDescription({ key: gene.id }, "bean"), gene.description);
+    assert.equal(codexAttributeEffect({ key: gene.id }, 1, "bean"), codexGeneDetails(gene, "bean").effect);
+  }
+  const antenna = codexResolveEntry("attribute:antenna").value;
+  assert.match(antenna.description, /시야 밖/);
+  assert.match(antenna.description, /없어도 자기 시야 안/);
+  assert.match(antenna.description, /일꾼에게는 효과가 없/);
+  assert.equal(codexGeneDetails(antenna, "bean").effects[0][0], "적 탐색");
+  assert.deepEqual(codexGeneDetails(codexResolveEntry("attribute:carapace").value, "bean").effects, [["방어력", "+20"]]);
+  assert.deepEqual(codexGeneDetails(codexResolveEntry("attribute:carapace").value, "pebble").effects, [["방어력", "+32"]]);
+});
+
+test("실제 DNA 도감 렌더 함수는 공통 효과에 종족별 표를 추가하지 않는다", () => {
+  for (const [key, expected] of [["antenna", 1], ["blockPower", 1], ["carapace", 3]]) {
+    const children = [], title = {};
+    const context = createContext({ Spawner: { CODEX_GENES, PLAYER_TRIBES: [{ key: "bean", name: "새싹콩" }], codexGeneDetails, codexGeneTribeEffects },
+      unitDraft: null, state: { tribe: "bean" }, document: { getElementById: () => title, createElement: () => ({}) },
+      createCodexStats: rows => ({ rows }) });
+    runInContext(declaration("renderAttributeCodex"), context);
+    context.renderAttributeCodex(codexResolveEntry("attribute:" + key).value, { append: (...values) => children.push(...values) });
+    assert.equal(children.length, expected, key);
+    assert.equal(title.textContent, expected === 1 ? "조각 1개" : "새싹콩 · 조각 1개");
   }
 });
 

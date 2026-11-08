@@ -1,4 +1,7 @@
-import { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, dnaCanHunt, basicGathererDna } from "./dna-unit.mjs";
+import { canRetreat } from "./survival.mjs";
+import { AGENT_DEATH_WARNING, agentRemainingLifespan } from "./lifespan.mjs";
+import { DNA_STARTER_DESIGNS } from "../client/dna-starter-designs.mjs";
+import { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, dnaCanSearch, basicGathererDna } from "./dna-unit.mjs";
 import { CONQUEST_PACING, militaryAgent } from "./conquest-pacing.mjs";
 import { isTemplateNameEdited, suggestTemplateName } from "./unit-template-names.mjs";
 import { suggestAgentName } from "./agent-names.mjs";
@@ -6,7 +9,7 @@ import { tribeProductionTemplate } from "./tribe-production.mjs";
 import { worldSize } from "./world-size.mjs";
 import { ATTRIBUTES, ATTRIBUTE_SYNERGIES_ENABLED, isAttributeUnlocked, attributeCounts, migrateAttributeSlots, migrateAttributeLevels, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier, birthCost, hasSynergy } from "./attributes.mjs";
 import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
-import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
+import { NEST_RECOVERY, NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
 import { TRIBE_STARTING_UNITS, PLAYER_STARTING_POINTS, startingWorkerDna } from "./tribe-start.mjs";
 import { colonySupply, recordColonyIncome, restoreColonyIncome } from "./colony-supply.mjs";
 import { agentBirthDuration } from "./birth.mjs";
@@ -15,13 +18,12 @@ import { CORPSE_LIFETIME, placeCorpse, expireCorpses } from "./corpses.mjs";
 import { AGENT_ATTACK_DURATION, AGENT_ATTACK_HIT_TIME } from "./attack.mjs";
 import { createRoadOptimizer } from "./roads.mjs";
 import { createCombat, combatDisposition, canPursueCombat, colonyDefenseTarget, suspendDefenseWork } from "./combat.mjs";
-import { RESOURCE_TYPES, resourceDefinition, resourceTypeForCell, canHarvestResource, migrateResourceType, isColonyFood, isResourceHabitat, populateColonyFood, resourceHarvestSeconds, resourceHarvestMultiplier } from "./resources.mjs";
+import { resourceDefinition, resourceTypeForCell, canHarvestResource, migrateResourceType, isColonyFood, isResourceHabitat, populateColonyFood, resourceHarvestSeconds, resourceHarvestMultiplier } from "./resources.mjs";
 import { burrowDistance, burrowApproaches } from "./burrows.mjs";
 import { commandCheat } from "./cheats.mjs";
 import { combatPrimary, combatProfile, migrateCombatStats } from "./combat-stats.mjs";
 import { resourceHabitatSuitability } from "./resource-habitats.mjs";
 import { tribeHazardKind, tribeTerrainWalkable } from "./tribe-environment.mjs";
-import { createResourceStorage } from "./resource-storage.mjs";
 
 export function createGame(environment, colony, savedGame) {
     populateColonyFood(environment);
@@ -74,7 +76,6 @@ export function createGame(environment, colony, savedGame) {
       foodIncomeStartedAt: environment.simSeconds || 0,
       lastFoodAt: environment.simSeconds || 0,
       ending: null,
-      resourceInventory: {},
       evolutionPoints: 0,
       startingPointsGranted: false,
       explored: new Set(),
@@ -86,6 +87,7 @@ export function createGame(environment, colony, savedGame) {
       rulesVersion: 2,
       nestLevel: 1,
       nestHealth: NEST_LEVELS[0].health,
+      nestDamagedAt: null,
       templates: [],
       nextTemplateId: 1,
       rivals: [],
@@ -114,7 +116,6 @@ export function createGame(environment, colony, savedGame) {
     let discoveryBaselinePending = false;
     let updatingAgents = false;
     let footprintCleanupAt = 0;
-    const resourceStorage = createResourceStorage(state, colony);
     let navigationCache = null;
     const utilityAI = createUtilityAI({ state, tribe: colony.tribe, size: WORLD_SIZE, homeCells: colonyBoundaryCells,
       deliveryCells: colonyDeliveryCells, permanentVisionSources, defenseStructures,
@@ -125,7 +126,7 @@ export function createGame(environment, colony, savedGame) {
       enemies: () => state.rivals.filter(enemy => !enemy.hidden && visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)), burrows: visibleBurrows, nests: visibleNests, synergy,
       resourceType: food => resourceTypeForCell(food, worldMap),
       harvestSeconds: (type, agent) => agent?.dna ? agent.stats.dna.harvestTime : resourceHarvestSeconds(type, worldMap) * resourceHarvestMultiplier(type, agent?.attributes, agent?.tribe || colony.tribe) / (agent?.stats?.harvestSpeedMultiplier ?? 1),
-      materialSpace: () => resourceSpace(), deliveryCapacity,
+      deliveryCapacity,
       isFood: type => isColonyFood(type, colony.tribe, worldMap.generationVersion),
       foodType: {bean:"clay",spore:"tree",pebble:"pebbles",spring:"dew"}[colony.tribe || "bean"],
       resourceHabitat: (type,x,y) => worldMap.hydrology?.resourceHabitats ?
@@ -291,7 +292,7 @@ export function createGame(environment, colony, savedGame) {
       if (["pebble", "spore"].includes(agent.tribe) && agent.birth) agent.birth.readyAt = agent.birth.startedAt + agentBirthDuration(agent.tribe);
       agent.bornAt = Number.isFinite(agent.bornAt) && agent.bornAt >= 0 && agent.bornAt <= state.simSeconds ? agent.bornAt : state.simSeconds;
       const removedWork = !!agent.construction || ["transform", "build"].includes(agent.mode);
-      for (const key of ["lifespan", "construction", "constructionIntent", "constructionError", "constructionRetryAt", "transport", "transportCargo", "transportReadyAt"]) delete agent[key];
+      for (const key of ["construction", "constructionIntent", "constructionError", "constructionRetryAt", "transport", "transportCargo", "transportReadyAt"]) delete agent[key];
       if (removedWork || ["build", "supply"].includes(agent.utility?.action)) {
         agent.utility = null;
         agent.mode = "search";
@@ -356,6 +357,9 @@ export function createGame(environment, colony, savedGame) {
       const healthRatio = agent.dna && Number.isFinite(agent.stats?.health) && agent.stats.health > 0 ?
         Math.max(0, Math.min(1, agent.health / agent.stats.health)) : null;
       agent.stats = agent.dna ? dnaUnitStats(agent.dna, agent.tribe) : unitStats(attributeCounts(agent.slots, agent.attributeLevels), agent.tribe);
+      agent.lifespan = agent.stats.lifespan;
+      agent.lifespanStartedAt = Number.isFinite(agent.lifespanStartedAt) && agent.lifespanStartedAt >= 0 &&
+        agent.lifespanStartedAt <= state.simSeconds ? agent.lifespanStartedAt : state.simSeconds;
       agent.attributes = agent.dna ? { ...dnaAppearance(agent.dna), dnaGather: agent.stats.harvest > 0 } : attributeCounts(agent.slots, agent.attributeLevels);
       agent.health = healthRatio === null ? Math.min(agent.health, agent.stats.health) : agent.stats.health * healthRatio;
       agent.appearanceAttributes = agentAppearanceAttributes(agent);
@@ -483,10 +487,9 @@ export function createGame(environment, colony, savedGame) {
     }
 
     function colonyDeliveryCells(agent) {
-      const stores = resourceStorage.refresh().filter(store => store.kind !== "remains");
-      const material = agent && agent.carrying > 0 && !isColonyFood(agent.carryingType, colony.tribe, worldMap.generationVersion);
-      return stores.filter(store => !agent || resourceStorage.space(store) > 1e-8 ||
-        !material && state.evolutionPoints < pointCapacity()).flatMap(store => resourceStorage.cells(store)).filter(cell => isWalkable(cell.x, cell.y));
+      if (!hasActiveNest() || agent && deliveryCapacity() <= 0) return [];
+      return [[0, 0], [COLONY_SIZE - 1, 0], [0, COLONY_SIZE - 1], [COLONY_SIZE - 1, COLONY_SIZE - 1]]
+        .map(([x, y]) => ({ x: colony.x + x, y: colony.y + y })).filter(cell => isWalkable(cell.x, cell.y));
     }
 
     function isColonyDeliveryCell(x, y) {
@@ -1183,24 +1186,17 @@ export function createGame(environment, colony, savedGame) {
       }
 
       const resourceType = agent.carryingType || "honey-mushrooms";
-      const material = !isColonyFood(resourceType, colony.tribe, worldMap.generationVersion);
-      const availablePoints = Math.max(0, pointCapacity() - state.evolutionPoints);
-      const store = resourceStorage.at(agent.x, agent.y);
-      const availableMaterials = resourceStorage.space(store);
-      const deposited = Math.min(agent.carrying, material ? availableMaterials : availablePoints);
+      const deposited = Math.min(agent.carrying, deliveryCapacity());
       agent.carryingBeforeDeposit = deposited;
       agent.foodDelivery = deposited > 0 ? {
         ...agent.foodDelivery, ...deliveryDestination(agent), colonyId: colony.id, x: agent.x + 0.5, y: agent.y + 0.5,
         startedAt: agent.foodDelivery?.startedAt ?? agent.unloadReady - 1,
         arrivesAt: agent.unloadReady, receivedAt: state.simSeconds, amount: deposited, resourceType
       } : null;
-      if (material && deposited > 0) resourceStorage.deposit(store, resourceType, deposited);
-      if (!material) {
-        state.colonyFood += Math.floor(deposited);
-        if (deposited > 0) state.lastFoodAt = state.simSeconds;
-        recordColonyIncome(state, Math.floor(Math.min(deposited, availablePoints)));
-        state.evolutionPoints += Math.floor(Math.min(deposited, availablePoints));
-      }
+      state.colonyFood += deposited;
+      if (deposited > 0) state.lastFoodAt = state.simSeconds;
+      recordColonyIncome(state, deposited);
+      state.evolutionPoints += deposited;
       agent.carrying = Math.round((agent.carrying - deposited) * 10) / 10;
       if (agent.carrying <= 0) agent.carryingType = null;
       if (deposited > 0) registerRoadJourney(agent);
@@ -1225,12 +1221,12 @@ export function createGame(environment, colony, savedGame) {
           (target.y + Math.floor(index / target.width)) * WORLD_SIZE + target.x + index % target.width).some(index => visibleCells.has(index)));
     }
 
-    function combatTargets() {
+    function combatTargets(agent) {
       if (!decisionTargets || decisionTargetRevision !== (environment.targetRevision || 0)) {
         decisionTargets = state.rivals.filter(enemy => !enemy.hidden && visibleCells.has(enemy.y * WORLD_SIZE + enemy.x)).concat(visibleBurrows(), visibleNests());
         decisionTargetRevision = environment.targetRevision || 0;
       }
-      return decisionTargets.filter(enemy => enemy.health > 0);
+      return decisionTargets.filter(enemy => enemy.health > 0 && dnaCanSearch(agent, enemy, state.simSeconds));
     }
 
     function defenseStructures() {
@@ -1238,7 +1234,7 @@ export function createGame(environment, colony, savedGame) {
     }
 
     function scheduledDecisionEvent(agent) {
-      const targets = combatTargets();
+      const targets = combatTargets(agent);
       if (!agent.retreat && !(agent.utility?.action === "fight" && agent.utility.defending &&
           targets.some(target => target.id === agent.utility.target.id && colonyDefenseTarget(agent, target, state.agents, defenseStructures()))) &&
           targets.some(target => colonyDefenseTarget(agent, target, state.agents, defenseStructures()))) return "defense";
@@ -1247,7 +1243,7 @@ export function createGame(environment, colony, savedGame) {
       const plan = agent.utility, food = plan?.action === "collect" ? state.knownFood.get(plan.target.key) : null;
       const signature = [agent.x, agent.y, agent.health, agent.stats.health, agent.mode, agent.carrying, agent.carryingType,
         state.evolutionPoints, state.nestLevel, colonySupply(state, colony.tribe).urgency,
-        agent.carrying > 0 ? deliveryCapacity(agent.carryingType || "honey-mushrooms") : 0,
+        agent.carrying > 0 ? deliveryCapacity() : 0,
         food?.amount, food?.resourceType, plan?.action, plan?.plannedCargo, plan?.recoverHealth,
         plan?.target.key, plan?.target.id, plan?.target.x, plan?.target.y,
         plan?.target && state.explored.has(plan.target.y * WORLD_SIZE + plan.target.x), ...targets.map(target => target.id)].join(":");
@@ -1271,7 +1267,7 @@ export function createGame(environment, colony, savedGame) {
       const candidates = planned.filter(candidate => ["collect", "return", "recover", "fight", "flee", "explore", "wait"].includes(candidate.action) &&
         candidate.target && dnaCanMove(agent, candidate.target.x, candidate.target.y, colonyEntries) && canFollowUtility(agent, candidate));
       const best = candidates[0];
-      if (best?.defending && !combatTargets().some(target => target.id === best.target.id &&
+      if (best?.defending && !combatTargets(agent).some(target => target.id === best.target.id &&
           colonyDefenseTarget(agent,target,state.agents,defenseStructures()))) {
         agent.decisionPending = "targetLost";
         return;
@@ -1283,7 +1279,7 @@ export function createGame(environment, colony, savedGame) {
       agent.lastDecisionReason = reason;
       agent.nextDecisionAt = state.simSeconds + 3;
       agent.decisionPending = null;
-      agent.knownEnemyIds = new Set(combatTargets().map(enemy => enemy.id));
+      agent.knownEnemyIds = new Set(combatTargets(agent).map(enemy => enemy.id));
       if (!best) {
         agent.utility = null;
         agent.mode = "wait";
@@ -1311,11 +1307,10 @@ export function createGame(environment, colony, savedGame) {
     }
 
     function canFollowUtility(agent, plan) {
-      if (dnaCanHunt(agent)) return true;
-      if (plan.action === "explore") return !String(plan.target?.key).startsWith("enemy-search:");
-      if (plan.action !== "fight") return true;
-      if (["burrow", "nest"].includes(plan.target?.kind)) return burrowDistance(agent, plan.target) <= 1;
-      return agent.x === plan.target?.x && agent.y === plan.target?.y;
+      if (!canRetreat(agent) && ["flee", "recover"].includes(plan.action)) return false;
+      if (plan.action === "fight") return combatTargets(agent).some(target => target.id === plan.target?.id);
+      if (!(plan.action === "explore" && String(plan.target?.key).startsWith("enemy-search:"))) return true;
+      return !!plan.target && dnaCanSearch(agent, plan.target, state.simSeconds);
     }
 
     function decisionEvent(agent) {
@@ -1326,7 +1321,7 @@ export function createGame(environment, colony, savedGame) {
       utilityAI.safety(agent);
       if (previousSafety !== agent.survivalState || previousRetreat !== !!agent.retreat) return "survival";
       if (agent.decisionPending) return agent.decisionPending;
-      const visible = combatTargets();
+      const visible = combatTargets(agent);
       const ids = new Set(visible.map(enemy => enemy.id));
       const discovered = visible.some(enemy => !agent.knownEnemyIds.has(enemy.id));
       agent.knownEnemyIds = ids;
@@ -1340,7 +1335,7 @@ export function createGame(environment, colony, savedGame) {
         resourceTypeForCell(state.knownFood.get(plan.target.key), worldMap)) return "targetLost";
       if (plan?.action === "collect" && agent.carrying >= plan.plannedCargo) return "completed";
       if (plan?.action === "fight" && !ids.has(plan.target.id)) return "targetLost";
-      if (plan?.action === "return" && (agent.carrying <= 0 || deliveryCapacity(agent.carryingType || "honey-mushrooms") <= 0)) return "completed";
+      if (plan?.action === "return" && (agent.carrying <= 0 || deliveryCapacity() <= 0)) return "completed";
       if (plan?.action === "recover" && agent.health >= plan.recoverHealth) return "completed";
       if (plan?.action === "explore" && state.explored.has(plan.target.y * WORLD_SIZE + plan.target.x) &&
         agent.x === plan.target.x && agent.y === plan.target.y) return "completed";
@@ -1370,7 +1365,7 @@ export function createGame(environment, colony, savedGame) {
           agent.foodDelivery = {
             ...deliveryDestination(agent), colonyId: colony.id, x: agent.x + 0.5, y: agent.y + 0.5,
             startedAt: state.simSeconds, arrivesAt: agent.unloadReady, receivedAt: null,
-            amount: Math.min(agent.carrying, deliveryCapacity(agent.carryingType || "honey-mushrooms")),
+            amount: Math.min(agent.carrying, deliveryCapacity()),
             resourceType: agent.carryingType || "honey-mushrooms"
           };
         }
@@ -1379,7 +1374,7 @@ export function createGame(environment, colony, savedGame) {
       if (plan.action === "recover" && home) { agent.mode = "rest"; return false; }
       let target = plan.target;
       if (plan.action === "fight") {
-        target = combatTargets().find(enemy => enemy.id === plan.target.id);
+        target = combatTargets(agent).find(enemy => enemy.id === plan.target.id);
         if (!target) { agent.decisionPending = "targetLost"; return false; }
         const building = ["burrow", "nest"].includes(target.kind);
         if (!building && !canPursueCombat(agent, target, state.simSeconds,
@@ -1391,7 +1386,7 @@ export function createGame(environment, colony, savedGame) {
           combat.update(agent, state.simSeconds);
           return false;
         }
-        if (building && agent.dna && !(agent.stats.dna.melee || agent.stats.dna.ranged || agent.stats.dna.hunting)) { agent.decisionPending = "targetLost"; return false; }
+        if (building && combatDisposition(agent) !== "aggressive") { agent.decisionPending = "targetLost"; return false; }
         if (building && burrowDistance(agent, target) <= 1) {
           if (state.simSeconds >= agent.attackReady) {
             const profile = combatProfile(agent), hits = agent.dna ? agent.stats.dna.hits : 1;
@@ -1463,27 +1458,12 @@ export function createGame(environment, colony, savedGame) {
       return NEST_LEVELS[state.nestLevel - 1].slotCapacity;
     }
 
-    function spendResources(cost) {
-      state.evolutionPoints -= cost.evolutionPoints;
-      resourceStorage.spend(cost.materials);
-    }
-
     function pointCapacity() {
       return NEST_LEVELS[state.nestLevel - 1].pointCapacity;
     }
 
-    function resourceSpace() {
-      return resourceStorage.refresh().reduce((sum, store) => sum + resourceStorage.space(store), 0);
-    }
-
-    function resourceInventoryLimits() {
-      const space = resourceSpace();
-      return Object.fromEntries(RESOURCE_TYPES.map(({ key }) => [key,
-        isColonyFood(key, colony.tribe, worldMap.generationVersion) ? 0 : (state.resourceInventory[key] || 0) + space]));
-    }
-
-    function deliveryCapacity(resourceType) {
-      return isColonyFood(resourceType, colony.tribe, worldMap.generationVersion) ? Math.max(0, pointCapacity() - state.evolutionPoints) : resourceSpace();
+    function deliveryCapacity() {
+      return Math.max(0, pointCapacity() - state.evolutionPoints);
     }
 
     function upgradeCost() {
@@ -1534,6 +1514,8 @@ export function createGame(environment, colony, savedGame) {
         y: position.y,
         profile: { ...state.draftProfile },
         bornAt: state.simSeconds,
+        lifespan: stats.lifespan,
+        lifespanStartedAt: state.simSeconds,
         carrying: 0,
         carryingType: null,
         moveBudget: 0,
@@ -1622,8 +1604,10 @@ export function createGame(environment, colony, savedGame) {
 
     function removeDeadAgents() {
       for (const agent of state.agents) {
+        if (agentRemainingLifespan(agent, state.simSeconds) <= 0) agent.health = 0;
         if (agent.health > 0) continue;
         dropCorpse(agent);
+        combat.release(agent, state.simSeconds);
         environment.unitIndex?.remove(agent);
         agent.health = 0;
       }
@@ -1670,6 +1654,18 @@ export function createGame(environment, colony, savedGame) {
       if (state.simSeconds + 1e-8 >= attack.endsAt) return false;
       agent.moveBudget = 0;
       return true;
+    }
+
+    let nestRecoveryAt = state.simSeconds;
+
+    function recoverNest(elapsed) {
+      if (!Number.isFinite(elapsed) || elapsed <= 0) return;
+      const start = Math.max(nestRecoveryAt, state.simSeconds - elapsed,
+        (state.nestDamagedAt ?? state.simSeconds) + NEST_RECOVERY.delay);
+      nestRecoveryAt = Math.max(nestRecoveryAt, state.simSeconds);
+      if (state.nestHealth <= 0 || state.simSeconds <= start) return;
+      const maximum = NEST_LEVELS[state.nestLevel - 1].health;
+      state.nestHealth = Math.min(maximum, state.nestHealth + (state.simSeconds - start) * maximum * NEST_RECOVERY.rate);
     }
 
     function updateAgents(elapsed) {
@@ -1783,7 +1779,7 @@ export function createGame(environment, colony, savedGame) {
       const site = automaticSpawnSites()[0];
       if (!site || state.agents.filter(agent => agent.health > 0).length >= NEST_LEVELS[state.nestLevel - 1].unitCapacity || state.evolutionPoints < birthCost(template,colony.tribe) ||
           template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key,state.nestLevel,colony.tribe))) return null;
-      const matches = candidate => combatPrimary(candidate) === combatPrimary(template) && candidate.slots.length === template.slots.length && template.slots.every(key =>
+      const matches = candidate => !!candidate.dna === !!template.dna && combatPrimary(candidate) === combatPrimary(template) && candidate.slots.length === template.slots.length && template.slots.every(key =>
         candidate.slots.includes(key) && (candidate.attributeLevels?.[key] || 1) === (template.attributeLevels?.[key] || 1));
       let stored = state.templates.find(matches), result;
       if (stored) result = command({type:"birth",templateId:stored.id});
@@ -1835,7 +1831,7 @@ export function createGame(environment, colony, savedGame) {
       const template = tribeProductionTemplate(state,colony.tribe);
       const workers = state.agents.filter(agent => agent.health > 0 &&
         !militaryAgent(agent,colony.tribe));
-      const replacing = !workers.length;
+      const replacing = !workers.length || workers.every(agent => agentRemainingLifespan(agent, state.simSeconds) <= AGENT_DEATH_WARNING);
       if (replacing && template) {
         const agentId = automaticBirth(template,template.productionRole);
         if (agentId) return agentId;
@@ -1850,10 +1846,9 @@ export function createGame(environment, colony, savedGame) {
       }
       if (state.simSeconds >= (state.attributeProductionReadyAt || 0)) {
         state.attributeProductionReadyAt = state.simSeconds + CONQUEST_PACING.productionInterval;
-        const stock = state.resourceInventory;
         for (const design of state.templates) for (const key of design.slots) {
           if (isAttributeUnlocked(key,state.nestLevel,colony.tribe) &&
-              !attributeUpgradeIssue(design,key,state.nestLevel,state.evolutionPoints,stock)) {
+              !attributeUpgradeIssue(design,key,state.nestLevel,state.evolutionPoints)) {
             command({type:"upgrade-attribute",templateId:design.id,attributeKey:key});
             return null;
           }
@@ -1874,20 +1869,45 @@ export function createGame(environment, colony, savedGame) {
     }
 
     function checkEnding() {
-      if (state.ending || colony.tribe === null || state.agents.some(agent => agent.health > 0) ||
-          hasActiveNest() && state.evolutionPoints >= recoveryBirthCost()) return state.ending;
+      if (state.ending || colony.tribe === null) return state.ending;
+      const alive = state.agents.filter(agent => agent.health > 0);
+      const carriedPoints = alive.reduce((total, agent) => total + Math.max(0, agent.carrying || 0), 0);
+      const canGather = alive.some(agent => agent.stats.capacity > 0 && (!agent.dna || agent.stats.dna.harvest > 0));
+      const surviving = hasActiveNest() && (canGather || state.evolutionPoints + carriedPoints >= recoveryBirthCost());
+      if (surviving) {
+        if (colony.ownerId !== environment.hostId) return null;
+        const opponents = environment.colonies.filter(entry => entry.tribe && entry.tribe !== colony.tribe);
+        const endings = opponents.map(entry => environment.games.get(entry.ownerId)?.checkEnding());
+        if (!endings.length || endings.some(ending => !ending || ending.reason === "victory")) return null;
+      }
       state.ending = { endedAt: state.simSeconds,
-        reason: !hasActiveNest() ? "nest-destroyed" : "extinction",
+        reason: surviving ? "victory" : !hasActiveNest() ? "nest-destroyed" : "extinction",
         bornCount: state.nextAgentId - 1, exploredCells: state.explored.size,
         discoveryCount: state.discoveries.length, colonyFood: state.colonyFood,
         evolutionPoints: state.evolutionPoints, nestLevel: state.nestLevel };
       return state.ending;
     }
 
+    function addNestStarterDesigns() {
+      if (state.nestLevel !== 2 || environment.hostId && colony.ownerId !== environment.hostId) return;
+      for (const starter of DNA_STARTER_DESIGNS) {
+        if (starter.design.level !== 2 || state.templates.length >= 100) continue;
+        const dna = cloneDna(starter.design);
+        if (state.templates.some(template => JSON.stringify(template.dna?.pieces) === JSON.stringify(dna.pieces))) continue;
+        let name = starter.name, suffix = 2;
+        while (state.templates.some(template => template.name === name)) name = starter.name + " " + suffix++;
+        command({ type: "design", templateId: null, name, dna, birth: false });
+      }
+    }
+
     function command(action) {
       if (state.ending && action.type !== "read-discoveries") throw new Error("끝난 군락은 둘러보기만 할 수 있습니다.");
-      const cheat = commandCheat(action, state, removeDeadAgents, checkEnding, resourceStorage.restore);
-      if (cheat !== null) return cheat;
+      const cheat = commandCheat(action, state, removeDeadAgents, checkEnding,
+        () => environment.creatureSystem.spawnRaid(colony.id));
+      if (cheat !== null) {
+        if (action.type === "cheat-upgrade") addNestStarterDesigns();
+        return cheat;
+      }
       if (action.type === "read-discoveries") {
         if (!Number.isInteger(action.count) || action.count < 0 || action.count > state.discoveries.length) {
           throw new Error("확인할 알림 수가 올바르지 않습니다.");
@@ -1906,11 +1926,11 @@ export function createGame(environment, colony, savedGame) {
         if (!template) throw new Error("강화할 설계를 찾을 수 없습니다.");
         if (template.dna) throw new Error("설계 속성을 다시 확인해 주세요.");
         if (!isAttributeUnlocked(action.attributeKey, state.nestLevel, colony.tribe)) throw new Error("둥지를 성장시킨 뒤 속성을 강화해 주세요.");
-        const issue = attributeUpgradeIssue(template, action.attributeKey, state.nestLevel, state.evolutionPoints, state.resourceInventory);
+        const issue = attributeUpgradeIssue(template, action.attributeKey, state.nestLevel, state.evolutionPoints);
         if (issue) throw new Error(issue);
         const level = attributeCounts(template.slots, template.attributeLevels)[action.attributeKey] + 1;
         const cost = attributeUpgradeCost(action.attributeKey, level);
-        spendResources(cost);
+        state.evolutionPoints -= cost.evolutionPoints;
         template.attributeLevels = { ...template.attributeLevels, [action.attributeKey]: level };
         template.unlockedAttributeLevels = { ...template.unlockedAttributeLevels, [action.attributeKey]: level };
         template.revision += 1;
@@ -1984,6 +2004,7 @@ export function createGame(environment, colony, savedGame) {
         const previousHealth = NEST_LEVELS[state.nestLevel - 1].health;
         state.nestLevel += 1;
         if (state.nestHealth > 0) state.nestHealth += NEST_LEVELS[state.nestLevel - 1].health - previousHealth;
+        addNestStarterDesigns();
         return {};
       }
       if (action.type === "rename-colony") {
@@ -2033,10 +2054,6 @@ export function createGame(environment, colony, savedGame) {
       };
       return {
         simSeconds: state.simSeconds, colonyFood: state.colonyFood, encounterSignals: environment.creatureSystem?.signals || [], burrows: environment.creatureSystem?.burrows || [],
-        resourceInventory: { ...state.resourceInventory },
-        resourceStores: resourceStorage.refresh().map(store => ({ ...store, inventory: { ...store.inventory } })),
-        resourceInventoryLimits: resourceInventoryLimits(),
-        resourceCapacity: resourceStorage.refresh().filter(store => store.kind !== "remains").reduce((sum, store) => sum + store.capacity, 0),
         discoveries: state.discoveries.map(entry => ({ ...entry })), discoveryReadCount: state.discoveryReadCount,
         evolutionPoints: state.evolutionPoints, nestLevel: state.nestLevel, unitCapacity: NEST_LEVELS[state.nestLevel - 1].unitCapacity, tribe: colony.tribe,
         ending: state.ending ? { ...state.ending } : null,
@@ -2071,7 +2088,7 @@ export function createGame(environment, colony, savedGame) {
         value?.collection === "Set" ? new Set(value.entries) : value) : saved;
       Object.assign(state, data.state);
       state.startingPointsGranted = data.state.startingPointsGranted === true;
-      for (const key of ["buildings", "nextBuildingId", "constructionProductionReadyAt", "constructionHelpResult", "constructionHelpBuildings", "constructionMaterialNeeds", "foragerMemory", "nestExperienceContributions"]) delete state[key];
+      for (const key of ["buildings", "nextBuildingId", "constructionProductionReadyAt", "constructionHelpResult", "constructionHelpBuildings", "constructionMaterialNeeds", "foragerMemory", "nestExperienceContributions", "resourceInventory", "resourceStores", "resourceInventoryLimits", "resourceCapacity"]) delete state[key];
       state.corpses = [];
       removedFoodKeys = new Set([...foodCellMap].filter(([, cell]) => cell.kind === "corpse" ||
         migrateResourceType(cell.resourceType) === null).map(([key]) => key));
@@ -2081,14 +2098,13 @@ export function createGame(environment, colony, savedGame) {
       for (const [key, cell] of foodCellMap) if (cell.kind !== "corpse" && migrateResourceType(cell.resourceType) === null) foodCellMap.delete(key);
       for (const spot of foodSpotCache.values()) spot.cells = spot.cells.filter(cell => cell.kind !== "corpse" &&
         migrateResourceType(cell.resourceType) !== null);
-      state.evolutionPoints = Math.floor(state.evolutionPoints);
+      state.evolutionPoints = Number.isFinite(state.evolutionPoints) ? Math.max(0, state.evolutionPoints) : 0;
       grantStartingPoints();
-      state.colonyFood = Math.floor(state.colonyFood);
+      state.colonyFood = Number.isFinite(state.colonyFood) ? Math.max(0, state.colonyFood) : 0;
       expireCorpses(foodCellMap, state.simSeconds);
       state.productionReadyAt = Number.isFinite(data.state.productionReadyAt) && data.state.productionReadyAt >= 0 ? data.state.productionReadyAt : 0;
       state.attributeProductionReadyAt = Number.isFinite(data.state.attributeProductionReadyAt) ? Math.max(0,data.state.attributeProductionReadyAt) : 0;
       state.militaryGuidanceCompleted = data.state.militaryGuidanceCompleted === true;
-      state.resourceStores = Array.isArray(data.state.resourceStores) ? data.state.resourceStores : undefined;
       restoreColonyIncome(state, data.state);
       state.lastFoodAt = Number.isFinite(data.state.lastFoodAt) && data.state.lastFoodAt >= 0 ?
         Math.min(state.simSeconds, data.state.lastFoodAt) : state.simSeconds;
@@ -2105,6 +2121,9 @@ export function createGame(environment, colony, savedGame) {
       }
       const nestMaxHealth = NEST_LEVELS[state.nestLevel - 1].health;
       state.nestHealth = Number.isFinite(data.state.nestHealth) ? Math.max(0, Math.min(nestMaxHealth, data.state.nestHealth)) : nestMaxHealth;
+      state.nestDamagedAt = Number.isFinite(data.state.nestDamagedAt) && data.state.nestDamagedAt >= 0 ?
+        Math.min(state.simSeconds, data.state.nestDamagedAt) : state.nestHealth < nestMaxHealth ? state.simSeconds : null;
+      nestRecoveryAt = state.simSeconds;
       discoveryBaselinePending = !Array.isArray(data.state.discoveries);
       state.discoveries = Array.isArray(data.state.discoveries) ? data.state.discoveries : [];
       const discoveries = [];
@@ -2124,14 +2143,13 @@ export function createGame(environment, colony, savedGame) {
       state.discoveries = discoveries;
       state.discoveryReadCount = readCount;
       state.discoveredKinds = discovered;
-      state.resourceInventory = {};
-      for (const [key, amount] of Object.entries(data.state.resourceInventory || {})) {
-        const type = migrateResourceType(key);
-        if (resourceDefinition(type) && Number.isFinite(amount) && amount >= 0) {
-          state.resourceInventory[type] = (state.resourceInventory[type] || 0) + amount;
-        }
-      }
-      resourceStorage.restore();
+      const inventories = data.state.resourceInventory && typeof data.state.resourceInventory === "object" ?
+        [data.state.resourceInventory] : (Array.isArray(data.state.resourceStores) ? data.state.resourceStores : [])
+          .filter(store => store.kind !== "remains").map(store => store.inventory);
+      const restoredPoints = inventories.reduce((total, inventory) => total + Object.entries(inventory || {})
+        .reduce((amount, [key, value]) => amount + (resourceDefinition(migrateResourceType(key)) &&
+          Number.isFinite(value) && value > 0 ? value : 0), 0), 0);
+      if (restoredPoints > 0) state.evolutionPoints += Math.min(restoredPoints, Math.max(0, pointCapacity() - state.evolutionPoints));
       state.explored = state.explored instanceof Set ? state.explored : new Set();
       state.knownFood = state.knownFood instanceof Map ? state.knownFood : new Map();
       for (const [key, cell] of state.knownFood) {
@@ -2218,13 +2236,11 @@ export function createGame(environment, colony, savedGame) {
         const explored = state.explored;
         for (const index of saved.state.explored) explored.add(index);
         Object.assign(state,saved.state,{explored});
-        for (const key of ["buildings", "nextBuildingId", "constructionProductionReadyAt", "constructionHelpResult", "constructionHelpBuildings", "constructionMaterialNeeds", "foragerMemory", "nestExperienceContributions"]) delete state[key];
+        for (const key of ["buildings", "nextBuildingId", "constructionProductionReadyAt", "constructionHelpResult", "constructionHelpBuildings", "constructionMaterialNeeds", "foragerMemory", "nestExperienceContributions", "resourceInventory", "resourceStores", "resourceInventoryLimits", "resourceCapacity"]) delete state[key];
         for (const agent of state.agents) {
-          for (const key of ["lifespan", "construction", "constructionIntent", "constructionError", "constructionRetryAt", "transport", "transportCargo", "transportReadyAt"]) delete agent[key];
-          delete agent.stats.lifespan;
+          for (const key of ["construction", "constructionIntent", "constructionError", "constructionRetryAt", "transport", "transportCargo", "transportReadyAt"]) delete agent[key];
           if (["build", "supply"].includes(agent.utility?.action)) agent.utility = null;
         }
-        resourceStorage.restore();
         this.prepare(environment.simSeconds);
         updatePerception();
       },
@@ -2233,6 +2249,7 @@ export function createGame(environment, colony, savedGame) {
       nextUpdateAt() {
         let at = state.simSeconds + .5;
         for (const agent of state.agents) {
+          at = Math.min(at, state.simSeconds + agentRemainingLifespan(agent, state.simSeconds));
           if (agent.birth) { at = Math.min(at, agent.birth.readyAt); continue; }
           if (agent.decisionPending) return state.simSeconds;
           at = Math.min(at, agent.nextDecisionAt);
@@ -2256,6 +2273,8 @@ export function createGame(environment, colony, savedGame) {
       receiveNestDamage(amount) {
         if (state.nestHealth <= 0 || !Number.isFinite(amount) || amount <= 0) return state.nestHealth;
         state.nestHealth = Math.max(0, state.nestHealth - amount);
+        state.nestDamagedAt = Math.max(state.simSeconds, environment.simSeconds || 0);
+        nestRecoveryAt = state.nestDamagedAt;
         environment.targetRevision = (environment.targetRevision || 0) + 1;
         if (state.nestHealth === 0) {
           roadOptimizer.clear();
@@ -2278,12 +2297,13 @@ export function createGame(environment, colony, savedGame) {
       colonyKnown(entry) { return entry.id === colony.id || state.explored.has((entry.y + 2) * WORLD_SIZE + entry.x + 2); },
       prepare(simSeconds) {
         state.simSeconds = state.ending ? state.ending.endedAt : simSeconds;
+        for (const agent of state.agents) if (agentRemainingLifespan(agent, state.simSeconds) <= 0) agent.health = 0;
         state.rivals = [...environment.games.values()].filter((game) => game !== this).flatMap((game) => game.agents).concat(environment.creatureSystem?.agents || []);
       },
       tick(elapsed) {
         if (state.ending) return;
         navigationCache = {};
-        try { updateAgents(elapsed); }
+        try { recoverNest(elapsed); updateAgents(elapsed); }
         finally { navigationCache = null; }
       },
       planDecisions(requests) {

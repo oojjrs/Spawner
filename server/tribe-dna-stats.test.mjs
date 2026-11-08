@@ -14,7 +14,7 @@ const pieces = genes => genes.map(gene => ({ gene, grade: ATTRIBUTE_DNA.lookup.g
 test("새싹콩의 기존 기본·증가 수치와 종족 미지정 호출을 보존한다", () => {
   const genes = pieces(["blade", "secretion", "health", "power", "rangedPower", "speed", "rangedSpeed", "carapace"]);
   const stats = ATTRIBUTE_DNA.stats(genes, "bean");
-  for (const [key, expected] of Object.entries({ health: 20, meleePower: 10, rangedPower: 4.2, meleeSpeed: .6, rangedSpeed: .6, armor: 20, movement: .25 }))
+  for (const [key, expected] of Object.entries({ health: 30, meleePower: 10, rangedPower: 4.2, meleeSpeed: .6, rangedSpeed: .6, armor: 20, movement: .25 }))
     close(stats[key], expected);
   assert.deepEqual(ATTRIBUTE_DNA.stats(genes), stats);
   assert.deepEqual(ATTRIBUTE_DNA.stats(genes, "unknown"), stats);
@@ -44,8 +44,8 @@ test("특화 효율은 공격 기관 조건·정수 타수·확률 및 공속 �
     const empty = dnaCombatStats({}, weights, undefined, tribe);
     assert.equal(empty.meleePower, 1); assert.equal(empty.rangedPower, 0); assert.equal(empty.hits, 1);
     assert.equal(empty.melee, false); assert.equal(empty.ranged, false); assert.equal(empty.meleeSpeed, .5);
-    const full = dnaCombatStats({ blade: 1, secretion: 1 }, { ...weights, combo: 3 }, undefined, tribe);
-    assert.equal(full.hits, 4);
+    const full = dnaCombatStats({ blade: 1, secretion: 1, combo: 1 }, { ...weights, combo: 3 }, undefined, tribe);
+    assert.equal(full.hits, 2);
     assert.ok(full.meleeSpeed <= 4 && full.rangedSpeed <= 4);
     for (const [key, cap] of Object.entries({ block: 90, evasion: 60, parry: 60, accuracy: 60, critical: 90, lifesteal: 40, reduction: 40 })) assert.equal(full[key], cap, tribe + ":" + key);
   }

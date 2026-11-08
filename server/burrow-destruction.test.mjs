@@ -98,5 +98,6 @@ test("실제 저장 월드에서 부분 피해와 파괴 상태를 복원하고 
   assert.deepEqual(restored.creatureSystem.agents.filter(agent => agent.burrowId === small.id).map(agent => agent.id), survivors);
   const living = restored.creatureSystem.agents.filter(agent => agent.burrowId === large.id);
   assert.ok(living.length > 0 && living.length <= 6);
-  assert.ok(restored.creatureSystem.save().burrows.find(record => record.id === large.id).nextSpawnAt > 600);
+  assert.equal(restored.creatureSystem.save().burrows.find(record => record.id === large.id).spawnCount,
+    saved.creatures.burrows.find(record => record.id === large.id).spawnCount);
 });
