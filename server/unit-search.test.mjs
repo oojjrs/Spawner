@@ -55,7 +55,7 @@ function addEnemy(f) {
 
 for (const [surface, api] of surfaces) {
   test(surface + " · 채집 기관 유닛은 높은 호기심과 옛 정찰 역할에도 채집한다", () => {
-    for (const genes of [["gather", "capacity"], ["gather", "capacity", "antenna"]]) {
+    for (const genes of [["gather", "capacity"], ["gather", "capacity", "antenna"], ["gather", "carapace"], ["gather", "carapace", "antenna"]]) {
       const f = fixture(api, genes);
       f.agent.productionRole = "scout";
       const plans = f.ai.evaluate(f.agent, false);
@@ -110,8 +110,8 @@ for (const [surface, api] of surfaces) {
     assert.equal(game.agents[0].utility.target.key, targetKey);
   });
 
-  test(surface + " · 안테나를 단 근접·원거리·갑각 전투형은 공유 시야의 적을 공격 대상으로 삼는다", () => {
-    for (const genes of [["blade", "antenna"], ["secretion", "antenna"], ["carapace", "antenna"], ["gather", "blade", "antenna"]]) {
+  test(surface + " · 안테나를 단 근접·원거리 전투형은 공유 시야의 적을 공격 대상으로 삼는다", () => {
+    for (const genes of [["blade", "antenna"], ["secretion", "antenna"], ["gather", "blade", "antenna"]]) {
       const f = fixture(api, genes), target = addEnemy(f);
       assert.equal(api.combatDisposition(f.agent), "aggressive");
       const plan = f.ai.evaluate(f.agent, false)[0];
@@ -121,7 +121,7 @@ for (const [surface, api] of surfaces) {
     }
   });
 
-  test(surface + " · 갑각은 안테나 없이도 선제 기본공격1을 시작하되 칼날 전용 강화를 받지 않는다", () => {
+  test(surface + " · 갑각은 선제공격 없이 피격에 기본공격1로 대응하고 칼날 전용 강화를 받지 않는다", () => {
     const f=fixture(api,["carapace","power","speed"]),target=addEnemy(f),events=[];
     Object.assign(target,{x:f.agent.x,y:f.agent.y});
     assert.equal(f.agent.stats.dna.meleePower,1);assert.equal(f.agent.stats.dna.meleeSpeed,.5);
@@ -129,7 +129,10 @@ for (const [surface, api] of surfaces) {
       games:new Map(),combatRandom:()=>.99,damageRandom:()=>.5,onCombatEvent(event){events.push(event);}};
     for(const agent of [f.agent,target]) environment.games.set(agent.ownerId,{agents:[agent],receiveDamage(unit,amount){unit.health=Math.max(0,unit.health-amount);}});
     const combat=api.createCombat(environment);
-    for(let tick=0;tick<=50&&target.health>0;tick++){environment.simSeconds=tick/10;combat.update(f.agent,environment.simSeconds);combat.update(target,environment.simSeconds);}
+    for(let tick=0;tick<10;tick++){environment.simSeconds=tick/10;combat.update(f.agent,environment.simSeconds);combat.update(target,environment.simSeconds);}
+    assert.equal(events.length,0);assert.ok(!f.agent.combat);
+    target.stats.dna.melee=true;
+    for(let tick=10;tick<=100&&target.health>0;tick++){environment.simSeconds=tick/10;combat.update(target,environment.simSeconds);combat.update(f.agent,environment.simSeconds);}
     assert.equal(target.health,0);assert.ok(events.some(event=>event.kind==='attack'&&event.sourceId===f.agent.id));
   });
 
@@ -154,8 +157,8 @@ for (const [surface, api] of surfaces) {
     assert.equal(f.state.simSeconds, 0);
   });
 
-  test(surface + " · 안테나 없는 근접·원거리·갑각 전사는 시야 안을 순찰하고 보이는 적을 추격한다", () => {
-    for (const gene of ["blade", "secretion", "carapace"]) {
+  test(surface + " · 안테나 없는 근접·원거리 전사는 시야 안을 순찰하고 보이는 적을 추격한다", () => {
+    for (const gene of ["blade", "secretion"]) {
       const f = fixture(api, [gene]);
       const patrol = f.ai.evaluate(f.agent, false)[0];
       assert.equal(patrol.action, "explore");
@@ -196,7 +199,7 @@ for (const [surface, api] of surfaces) {
   });
 
   test(surface + " · 시야 안의 적 건물은 안테나 없이도 접근한다", () => {
-    const f = fixture(api, ["carapace", "vision", "vision", "vision", "vision"]);
+    const f = fixture(api, ["blade", "vision", "vision", "vision", "vision"]);
     const burrow = { id: "burrow:1", kind: "burrow", x: 18, y: 12, width: 2, height: 2, health: 1 };
     f.context.burrows = () => [burrow];
     const plan = f.ai.evaluate(f.agent, false)[0];
@@ -208,7 +211,7 @@ for (const [surface, api] of surfaces) {
   });
 
   test(surface + " · 실제 게임 틱은 안테나 없는 전사의 시야 안 추격을 실행한다", () => {
-    for (const gene of ["blade", "carapace"]) {
+    for (const gene of ["blade", "secretion"]) {
       const f = fixture(api, [gene]), target = addEnemy(f);
       target.x = 16;
       const environment = { hostId: "home", simSeconds: 0, world: { size: f.size, seed: 13,
@@ -268,6 +271,7 @@ for (const [surface, api] of surfaces) {
       f.agent.health = 1;
       target.x = 16;
       target.health = 100;
+      target.attack = { targetId: f.agent.id };
       target.stats.attack = target.stats.attackPower = target.stats.dna.power = target.stats.dna.meleePower = 50;
       f.agent.retreat = { recoverHealth: 10, startedAt: 0, attempts: 2, safeSince: null };
       f.agent.escapeUntil = 20;
@@ -291,6 +295,7 @@ for (const [surface, api] of surfaces) {
       Object.assign(target, { x: f.agent.x, y: f.agent.y, health: 10000 });
       target.stats.health = 10000;
       target.stats.dna.meleePower = 0;
+      target.stats.dna.melee = true;
       const environment = { simSeconds: 0, world: { size: f.size, terrain: new Uint8Array(f.size * f.size).fill(4) },
         colonies: [f.colony], games: new Map(), combatRandom: () => 0, damageRandom: () => .5 };
       for (const agent of [f.agent, target]) environment.games.set(agent.ownerId, { agents: [agent],
@@ -317,15 +322,64 @@ for (const [surface, api] of surfaces) {
     assert.equal(f.ai.evaluate(f.agent, false)[0].action, "collect");
   });
 
-  test(surface + " · 채집 기관은 먹이를 모를 때 자원을 찾고 운반 중에는 납품한다", () => {
+  test(surface + " · 채집 기관은 안테나가 있어야 미지 자원을 탐색하고 운반 중에는 납품한다", () => {
     const f = fixture(api, ["gather"]);
     f.state.knownFood.clear();
     for (const index of [...f.state.explored]) if (index % f.size > 20) f.state.explored.delete(index);
-    const search = f.ai.evaluate(f.agent, false)[0];
-    assert.match(search.target.key, /^resource-search:/);
+    assert.ok(f.ai.evaluate(f.agent, false).every(plan => plan.action !== "explore"));
+    const scout = fixture(api, ["gather", "antenna"]);
+    scout.state.knownFood.clear();scout.state.explored = new Set(f.state.explored);
+    assert.match(scout.ai.evaluate(scout.agent, false)[0].target.key, /^resource-search:/);
     f.agent.carrying = 1;
     f.agent.carryingType = "clay";
     assert.equal(f.ai.evaluate(f.agent, false)[0].action, "return");
+  });
+
+  test(surface + " · 갑각 단독은 알려진 영역을 로밍하지만 안테나가 있어도 선공하지 않는다", () => {
+    for (const genes of [["carapace"], ["carapace", "antenna"], ["gather", "carapace"], ["gather", "carapace", "antenna"]]) {
+      const f = fixture(api, genes), target = addEnemy(f);
+      target.x = 16;
+      f.context.burrows = () => [{ id: "burrow:1", kind: "burrow", x: 16, y: 12, width: 1, height: 1, health: 1 }];
+      assert.equal(api.combatDisposition(f.agent), "passive");
+      assert.equal(api.canPursueCombat(f.agent, target, 0), false);
+      const plans = f.ai.evaluate(f.agent, false);
+      assert.ok(plans.every(plan => plan.action !== "fight"));
+      if (genes.includes("gather")) assert.equal(plans[0].action, "collect");
+      else { assert.equal(plans[0].action, "explore");assert.ok(plans[0].route.length > 1); }
+    }
+  });
+
+  test(surface + " · 안테나 없는 로밍은 연속 이동해도 안개를 밝히며 전진하지 않는다", () => {
+    for (const gene of ["carapace", "blade", "secretion"]) {
+      const f = fixture(api, [gene, "vision", "vision"]);
+      f.state.explored = new Set([...f.state.explored].filter(index => Math.hypot(index % f.size - 15, Math.floor(index / f.size) - 12) <= 5));
+      const count = f.state.explored.size;
+      for (let step = 0; step < 30; step++) {
+        const plan = f.ai.evaluate(f.agent, false)[0];
+        assert.equal(plan.action, "explore");
+        assert.ok(plan.route.length > 1);
+        const cell = plan.route[1];Object.assign(f.agent, cell);f.agent.path.push(cell);f.agent.visited.add(cell.x + "," + cell.y);
+        for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) if (dx * dx + dy * dy <= 4)
+          f.state.explored.add((cell.y + dy) * f.size + cell.x + dx);
+        assert.equal(f.state.explored.size, count);
+      }
+    }
+  });
+
+  test(surface + " · 실제 게임은 저장된 갑각·채집 적 수색 계획을 채집으로 바꾼다", () => {
+    const f = fixture(api, ["gather", "carapace"]);
+    for (const corner of ["0,0", "4,0", "0,4", "4,4"]) f.colony.occupiedCells.delete(corner);
+    const environment = { hostId: "home", simSeconds: 0, world: { size: f.size, seed: 13,
+      terrain: new Uint8Array(f.size * f.size).fill(4), hazards: new Uint8Array(f.size * f.size) },
+      colonies: [f.colony], games: new Map(), food: new Map([[f.food.key, f.food]]), foodSpots: new Map() };
+    const game = api.createGame(environment, f.colony);environment.games.set("home", game);
+    const saved = JSON.parse(game.save());
+    saved.state.agents = [{ ...saved.state.agents[0], dna: f.agent.dna, x: 15, y: 12,
+      renderFromX: 15, renderFromY: 12, birth: null, utility: { action: "explore", target: { x: 15, y: 11, key: "enemy-search:367" }, route: [{ x: 15, y: 12 }, { x: 15, y: 11 }] } }];
+    game.restore(JSON.stringify(saved));game.agents[0].moveBudget = 1;
+    game.prepare(.1);game.tick(.1);
+    assert.equal(game.agents[0].utility?.action, "collect");
+    assert.equal(game.agents[0].utility.target.key, f.food.key);
   });
 
   test(surface + " · 옛 저장의 정찰 역할과 안개 탐색 목표를 복원하지 않는다", () => {

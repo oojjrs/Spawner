@@ -1,6 +1,6 @@
 import { isNestDefender } from "./nest-defender.mjs";
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
-import { dnaCanHunt, dnaCanSearch } from "./dna-unit.mjs";
+import { dnaCanHunt, dnaCanSearch, dnaCanAttack, dnaCanExplore, dnaCanPatrol } from "./dna-unit.mjs";
 import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
 import { unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { resourceDefinition, resourceTypeForCell } from "./resources.mjs";
@@ -282,6 +282,7 @@ export function createUtilityAI(context) {
     const hunts = attacks && !defenseOnly;
     const invasion = hunts && !gathers ? context.invasionTarget?.(agent) : null;
     const scouts = !attacks && !gathers && agent.stats?.dna?.antennaCount > 0;
+    const patrols = !attacks && !gathers && !scouts && dnaCanAttack(agent);
     const visible = enemies().filter(enemy => enemy.health > 0 &&
       (dnaCanSearch(agent, enemy, state.simSeconds) || guard &&
         colonyDefenseTarget(agent, enemy, state.agents, context.defenseStructures?.())));
@@ -402,16 +403,17 @@ export function createUtilityAI(context) {
     const knownFoods = immediate ? [] : foodWithinRange.filter(food => food.amount > 0 && isFood(resourceType(food)) && canHarvest(food, agent));
     const assignedForagers = supply.urgency > 0 ? colonyForagers(state, knownFoods, deliveryCells()) : new Set();
     const collecting = candidates.some(candidate => candidate.action === "collect" && candidate.damage < agent.health * .25);
-    const searchKind = guard ? null : hunts ? "enemy" : gathers ? "resource" : scouts ? "scout" : null;
+    const searchKind = guard ? null : hunts ? "enemy" : gathers && dnaCanExplore(agent) ? "resource" : scouts ? "scout" : patrols ? "patrol" : null;
     if (!immediate && !invasion && searchKind && !agent.carrying && (hunts || !collecting)) {
-      const cells = hunts ? dnaCanHunt(agent) ?
+      const cells = patrols ? neighbors(agent) : hunts ? dnaCanHunt(agent) ?
         [...new Map([...frontier, ...patrolByIndex.values()].map(cell => [indexOf(cell), cell])).values()] : neighbors(agent) :
         scouts && !frontier.length ? [...patrolByIndex.values()] : frontier;
       const recent = new Set((agent.path || []).slice(-24).map(cell => cell.x + "," + cell.y));
       const heading = [...String(agent.id)].reduce((sum, letter) => sum + letter.charCodeAt(0), 0) % 4;
       const direction = agent.lastDirection || [{ dx: 1, dy: 0 }, { dx: 0, dy: 1 }, { dx: -1, dy: 0 }, { dx: 0, dy: -1 }][heading];
       const origins = foodWithinRange.filter(food => searchHabitats.includes(resourceType(food)) && food.amount > 0);
-      const ranked = cells.filter(cell => distance(agent, cell) > 0 && (!context.canMove || context.canMove(agent, cell.x, cell.y)))
+      const ranked = cells.filter(cell => distance(agent, cell) > 0 && (!context.canMove || context.canMove(agent, cell.x, cell.y)) &&
+        (dnaCanExplore(agent) || dnaCanPatrol(agent, cell, state.explored, size, state.simSeconds)))
         .map(cell => {
           const gap = distance(agent, cell), key = cell.x + "," + cell.y;
           const forward = Math.max(0, ((cell.x - agent.x) * direction.dx + (cell.y - agent.y) * direction.dy) / gap);
@@ -422,7 +424,7 @@ export function createUtilityAI(context) {
       let count = 0;
       for (const { cell, weight } of ranked) {
         const cells = path(cell);
-        if (!cells) continue;
+        if (!cells || !dnaCanExplore(agent) && cells.slice(1).some(cell => !dnaCanPatrol(agent, cell, state.explored, size, state.simSeconds))) continue;
         const seconds = travelTime(agent, cells, agent.carrying);
         const gain = 60 * limit(weight * 8 / (1 + seconds / 20));
         add("explore", { ...cell, key: searchKind + "-search:" + indexOf(cell) }, cells,
@@ -438,7 +440,8 @@ export function createUtilityAI(context) {
       const approaches = burrowApproaches(invasion);
       const gap = cell => Math.min(...approaches.map(target => distance(cell, target)));
       const destinations = [...approaches, ...frontier].filter(cell => distance(agent, cell) > 0 &&
-        dnaCanSearch(agent, cell, state.simSeconds)).sort((a, b) => gap(a) - gap(b) || distance(agent, a) - distance(agent, b));
+        dnaCanSearch(agent, cell, state.simSeconds) &&
+        (dnaCanExplore(agent) || dnaCanPatrol(agent, cell, state.explored, size, state.simSeconds))).sort((a, b) => gap(a) - gap(b) || distance(agent, a) - distance(agent, b));
       for (const cell of destinations.slice(0, CONQUEST_PACING.frontierSamples)) {
         const cells = path(cell);
         if (!cells) continue;

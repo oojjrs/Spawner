@@ -37,7 +37,7 @@ const species = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
 
 export function combatDisposition(agent) {
   if (isNestDefender(agent)) return "passive";
-  if ((agent.dna || agent.stats?.dna) && agent.ownerId) return dnaCanAttack(agent) ? "aggressive" : "passive";
+  if ((agent.dna || agent.stats?.dna) && agent.ownerId) return agent.stats?.dna?.melee || agent.stats?.dna?.ranged ? "aggressive" : "passive";
   const type = species.get(agent.species);
   let disposition = agent.combatDisposition || type?.combatDisposition;
   if (!disposition) disposition = agent.species === "spiny-back-beetle" ? "aggressive" : "passive";
@@ -61,7 +61,7 @@ export function suspendDefenseWork(agent) {
 }
 
 export function colonyDefenseTarget(agent, target, allies, structures) {
-  if (!agent.ownerId || !militaryAgent(agent, agent.tribe) || combatDisposition(agent) === "peaceful" ||
+  if (!agent.ownerId || !(militaryAgent(agent, agent.tribe) || dnaCanAttack(agent)) || combatDisposition(agent) === "peaceful" ||
       combatTeam(agent) === combatTeam(target) || target.health <= 0 || target.hidden) return false;
   if (target.combat) return target.combat.teams[1 - target.combat.side] === combatTeam(agent);
   if (target.retreat) return false;

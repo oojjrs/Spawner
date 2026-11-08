@@ -4601,7 +4601,7 @@ const ATTRIBUTE_DNA = (() => {
     return {...dnaCombatStats(c,n,undefined,tribe),gatherCount:c.gather||0,antennaCount:c.antenna||0,
       capacity:gather?c.gather*(profile.base.gatherCapacity??1)+(n.capacity||0):0,harvest:gather?1:0,
       harvestReduction,harvestTime:gather?resource.harvestSeconds*(100-harvestReduction)/100:0,movement,movementRestReduction,baseMovement,baseLoadSpeed,
-      vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion||c.carapace),
+      vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion),
       lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed};
   }
   function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,q:piece.q,r:piece.r};}
@@ -5313,6 +5313,21 @@ function dnaCanAttack(agent) {
     agent.dna?.pieces?.some(piece => piece.gene === "carapace"));
 }
 
+function dnaCanExplore(agent) {
+  return !agent.dna && !agent.stats?.dna || agent.stats?.dna?.antennaCount > 0;
+}
+
+function dnaCanPatrol(agent, target, explored, size, time) {
+  const radius = (agent.stats?.vision || 0) + (agent.waveUntil > time ? 4 : 0);
+  const extent = Math.floor(radius);
+  for (let dy = -extent; dy <= extent; dy++) for (let dx = -extent; dx <= extent; dx++) {
+    const x = target.x + dx, y = target.y + dy;
+    if (x < 0 || y < 0 || x >= size || y >= size || dx * dx + dy * dy > radius * radius) continue;
+    if (!explored.has(y * size + x)) return false;
+  }
+  return explored.has(target.y * size + target.x);
+}
+
 function dnaCanHunt(agent) {
   return !agent.dna && !agent.stats?.dna || !!agent.stats?.dna?.hunting;
 }
@@ -5333,7 +5348,7 @@ function basicGathererDna(nestLevel = 1) {
   return validateDna(design, nestLevel, design.budget);
 }
 
-return { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, dnaCanAttack, dnaCanHunt, dnaCanSearch, basicGathererDna };
+return { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, dnaCanAttack, dnaCanExplore, dnaCanPatrol, dnaCanHunt, dnaCanSearch, basicGathererDna };
 })();
 modules["client/unit-size.mjs"] = (() => {
 const UNIT_DISPLAY_SIZES = Object.freeze({
@@ -8382,7 +8397,7 @@ const species = new Map(ENCOUNTER_TYPES.map(type => [type.key, type]));
 
 function combatDisposition(agent) {
   if (isNestDefender(agent)) return "passive";
-  if ((agent.dna || agent.stats?.dna) && agent.ownerId) return dnaCanAttack(agent) ? "aggressive" : "passive";
+  if ((agent.dna || agent.stats?.dna) && agent.ownerId) return agent.stats?.dna?.melee || agent.stats?.dna?.ranged ? "aggressive" : "passive";
   const type = species.get(agent.species);
   let disposition = agent.combatDisposition || type?.combatDisposition;
   if (!disposition) disposition = agent.species === "spiny-back-beetle" ? "aggressive" : "passive";
@@ -8406,7 +8421,7 @@ function suspendDefenseWork(agent) {
 }
 
 function colonyDefenseTarget(agent, target, allies, structures) {
-  if (!agent.ownerId || !militaryAgent(agent, agent.tribe) || combatDisposition(agent) === "peaceful" ||
+  if (!agent.ownerId || !(militaryAgent(agent, agent.tribe) || dnaCanAttack(agent)) || combatDisposition(agent) === "peaceful" ||
       combatTeam(agent) === combatTeam(target) || target.health <= 0 || target.hidden) return false;
   if (target.combat) return target.combat.teams[1 - target.combat.side] === combatTeam(agent);
   if (target.retreat) return false;

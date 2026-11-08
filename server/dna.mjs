@@ -49,7 +49,7 @@ export const ATTRIBUTE_DNA = (() => {
     return {...dnaCombatStats(c,n,undefined,tribe),gatherCount:c.gather||0,antennaCount:c.antenna||0,
       capacity:gather?c.gather*(profile.base.gatherCapacity??1)+(n.capacity||0):0,harvest:gather?1:0,
       harvestReduction,harvestTime:gather?resource.harvestSeconds*(100-harvestReduction)/100:0,movement,movementRestReduction,baseMovement,baseLoadSpeed,
-      vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion||c.carapace),
+      vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion),
       lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed};
   }
   function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,q:piece.q,r:piece.r};}

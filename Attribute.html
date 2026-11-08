@@ -4536,7 +4536,7 @@ const ATTRIBUTE_DNA = (() => {
     return {...dnaCombatStats(c,n,undefined,tribe),gatherCount:c.gather||0,antennaCount:c.antenna||0,
       capacity:gather?c.gather*(profile.base.gatherCapacity??1)+(n.capacity||0):0,harvest:gather?1:0,
       harvestReduction,harvestTime:gather?resource.harvestSeconds*(100-harvestReduction)/100:0,movement,movementRestReduction,baseMovement,baseLoadSpeed,
-      vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion||c.carapace),
+      vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion),
       lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed};
   }
   function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,q:piece.q,r:piece.r};}
@@ -4839,7 +4839,7 @@ function createDnaEditor(container,dnaModel,onChange,onAction,statsContainer) {
   container.replaceChildren(root);
   const find=selector=>root.querySelector(selector),canvas=find('canvas'),board=find('.dna-board'),context=canvas.getContext('2d');
   const sound=typeof onAction==='function'?null:createDnaAudio(),playSound=onAction||sound.play;
-  const tooltip=document.createElement('div');tooltip.className='control-tooltip dna-piece-tooltip';tooltip.setAttribute('role','tooltip');tooltip.hidden=true;root.append(tooltip);
+  const tooltip=document.createElement('div');tooltip.className='control-tooltip dna-piece-tooltip';tooltip.setAttribute('role','tooltip');tooltip.hidden=true;(root.closest?.('dialog')||document.body||root).append(tooltip);
   const view={x:0,y:0,scale:1,width:0,height:0};
   let hoveredPiece=null;
   const panKeys=new Set();let panTime=0;
@@ -4951,7 +4951,7 @@ function createDnaEditor(container,dnaModel,onChange,onAction,statsContainer) {
       if(statsContainer){statsContainer.dataset.dnaHoverStats=keys.join(' ');for(const row of statsContainer.querySelectorAll('[data-stat]'))row.classList.toggle('design-stat-highlight',keys.includes(row.dataset.stat));}
     }
     tooltip.hidden=!piece;
-    if(piece&&cursor)globalThis.SpawnerTooltips?.position(tooltip,{getBoundingClientRect:()=>({left:cursor.clientX-8,right:cursor.clientX+8,top:cursor.clientY-8,bottom:cursor.clientY+8,width:16,height:16})});
+    if(piece&&cursor)globalThis.SpawnerTooltips?.positionPointer(tooltip,cursor);
   }
   function renderControls(){
     renderPieceHover();
@@ -5072,7 +5072,7 @@ function createDnaEditor(container,dnaModel,onChange,onAction,statsContainer) {
     load(design,locked){const value=M.validate(design);if(!value)return false;releasePointer();stopPan();pieces=value.pieces.map(M.clonePiece);if(!contextSet){level=value.level;budget=value.budget;}readOnly=locked===true;history=pieces.map((_,index)=>pieces.slice(0,index).map(M.clonePiece));future=[];moving=-1;hover=null;keyboardPlacement=false;anchor={q:0,r:0};offset=null;selected=M.catalog.find(gene=>gene.grade<=level&&!(gene.category==='organ'&&pieces.some(piece=>piece.gene===gene.id)))?.id||M.catalog[0].id;rotation=0;state();fit();return true;},
     context(nextLevel,nextBudget,locked,nextTribe){const previousLevel=level,previousBudget=budget,previousReadOnly=readOnly,previousTribe=tribe;tribe=nextTribe;if(Number.isInteger(nextLevel)&&nextLevel>=1&&nextLevel<=4)level=nextLevel;if(Number.isFinite(nextBudget)&&nextBudget>=0)budget=Math.floor(nextBudget);contextSet=true;readOnly=locked===true;if(previousLevel===level&&previousBudget===budget&&previousReadOnly===readOnly&&previousTribe===tribe)return;if(previousLevel!==level||previousReadOnly!==readOnly){releasePointer();stopPan();}if(readOnly||M.lookup.get(selected)?.grade>level){moving=-1;selected=M.catalog[0].id;}state();if(previousLevel!==level)fit();},
     getDesign,clearHistory,fit,zoom,
-    destroy(){destroyed=true;hover=null;renderPieceHover();stopPan();releasePointer();globalThis.removeEventListener?.('blur',blur);dialog?.removeEventListener('close',blur);sound?.destroy();observer.disconnect();if(frame)cancelAnimationFrame(frame);root.remove();}
+    destroy(){destroyed=true;hover=null;renderPieceHover();stopPan();releasePointer();globalThis.removeEventListener?.('blur',blur);dialog?.removeEventListener('close',blur);sound?.destroy();observer.disconnect();if(frame)cancelAnimationFrame(frame);tooltip.remove();root.remove();}
   };
 }
 

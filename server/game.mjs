@@ -2,7 +2,7 @@ import { canRetreat } from "./survival.mjs";
 import { AGENT_DEATH_WARNING, agentRemainingLifespan } from "./lifespan.mjs";
 import { nestDefenderDesign, isNestDefender } from "./nest-defender.mjs";
 import { DNA_STARTER_DESIGNS } from "../client/dna-starter-designs.mjs";
-import { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, dnaCanSearch, basicGathererDna } from "./dna-unit.mjs";
+import { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, dnaCanSearch, dnaCanExplore, dnaCanPatrol, basicGathererDna } from "./dna-unit.mjs";
 import { CONQUEST_PACING, militaryAgent } from "./conquest-pacing.mjs";
 import { isTemplateNameEdited, suggestTemplateName } from "./unit-template-names.mjs";
 import { suggestAgentName } from "./agent-names.mjs";
@@ -282,7 +282,7 @@ export function createGame(environment, colony, savedGame) {
     function initializeAgent(agent) {
       agent.dna = cloneDna(agent.dna);
       if (agent.productionRole === "scout") agent.productionRole = null;
-      if (agent.utility?.action === "explore" && !/^(enemy|resource|scout)-search:/.test(agent.utility.target?.key || "")) {
+      if (agent.utility?.action === "explore" && !/^(enemy|resource|scout|patrol)-search:/.test(agent.utility.target?.key || "")) {
         agent.utility = null;
         agent.mode = "search";
         agent.decisionPending = "restore";
@@ -614,7 +614,8 @@ export function createGame(environment, colony, savedGame) {
       if (state.simSeconds - agent.moveStartedAt < agent.moveDuration) {
         return false;
       }
-      if (agent.utility?.action === "explore" && !state.explored.has(destination.y * WORLD_SIZE + destination.x) ||
+      if ((agent.utility?.action === "explore" || !dnaCanExplore(agent)) && !state.explored.has(destination.y * WORLD_SIZE + destination.x) ||
+        agent.utility?.action === "explore" && !dnaCanExplore(agent) && !dnaCanPatrol(agent, destination, state.explored, WORLD_SIZE, state.simSeconds) ||
         !isWalkable(destination.x, destination.y) ||
         Math.abs(destination.x - agent.x) + Math.abs(destination.y - agent.y) !== 1) {
         return false;
@@ -1351,9 +1352,17 @@ export function createGame(environment, colony, savedGame) {
       if (defenseOnly(agent) && (plan.action === "explore" || plan.action === "fight" && !plan.defending)) return false;
       if (!canRetreat(agent) && ["flee", "recover"].includes(plan.action)) return false;
       if (plan.action === "fight") return combatTargets(agent).some(target => target.id === plan.target?.id &&
-        (!defenseOnly(agent) || defenseTarget(agent, target)));
-      if (!(plan.action === "explore" && String(plan.target?.key).startsWith("enemy-search:"))) return true;
-      return !!plan.target && dnaCanSearch(agent, plan.target, state.simSeconds);
+        (!defenseOnly(agent) || defenseTarget(agent, target)) &&
+        (target.kind && target.kind !== "agent" ? combatDisposition(agent) === "aggressive" :
+          canPursueCombat(agent, target, state.simSeconds, defenseTarget(agent, target))));
+      if (plan.action !== "explore") return true;
+      if (!plan.target || !dnaCanExplore(agent) && !dnaCanPatrol(agent, plan.target, state.explored, WORLD_SIZE, state.simSeconds)) return false;
+      const key = String(plan.target.key);
+      if (key.startsWith("enemy-search:")) return combatDisposition(agent) === "aggressive" && dnaCanSearch(agent, plan.target, state.simSeconds);
+      if (key.startsWith("resource-search:")) return dnaCanExplore(agent) && (!agent.dna || agent.stats.dna.harvest > 0);
+      if (key.startsWith("scout-search:")) return agent.stats?.dna?.antennaCount > 0 && !agent.stats.dna.harvest && combatDisposition(agent) !== "aggressive";
+      if (key.startsWith("patrol-search:")) return !agent.stats?.dna?.harvest && combatDisposition(agent) !== "aggressive";
+      return key === "guard-home";
     }
 
     function decisionEvent(agent) {
@@ -1458,7 +1467,9 @@ export function createGame(environment, colony, savedGame) {
         { x: agent.x, y: agent.y + 1 }, { x: agent.x, y: agent.y - 1 }
       ].filter(cell => cell.x >= 0 && cell.y >= 0 && cell.x < WORLD_SIZE && cell.y < WORLD_SIZE &&
         state.explored.has(cell.y * WORLD_SIZE + cell.x) && isWalkable(cell.x, cell.y)) : walkableNeighbors(agent.x, agent.y))
-        .filter(cell => dnaCanMove(agent, cell.x, cell.y, colonyEntries));
+        .filter(cell => dnaCanMove(agent, cell.x, cell.y, colonyEntries) &&
+          (dnaCanExplore(agent) || state.explored.has(cell.y * WORLD_SIZE + cell.x) &&
+            (plan.action !== "explore" || dnaCanPatrol(agent, cell, state.explored, WORLD_SIZE, state.simSeconds))));
       let destination = plan.route.find((cell, index) => index > 0 && plan.route[index - 1].x === agent.x && plan.route[index - 1].y === agent.y);
       if (plan.action === "fight" || !destination || !candidates.some(cell => cell.x === destination.x && cell.y === destination.y)) {
         destination = utilityAI.nextStep(agent, target);

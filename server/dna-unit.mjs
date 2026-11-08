@@ -50,6 +50,21 @@ export function dnaCanAttack(agent) {
     agent.dna?.pieces?.some(piece => piece.gene === "carapace"));
 }
 
+export function dnaCanExplore(agent) {
+  return !agent.dna && !agent.stats?.dna || agent.stats?.dna?.antennaCount > 0;
+}
+
+export function dnaCanPatrol(agent, target, explored, size, time) {
+  const radius = (agent.stats?.vision || 0) + (agent.waveUntil > time ? 4 : 0);
+  const extent = Math.floor(radius);
+  for (let dy = -extent; dy <= extent; dy++) for (let dx = -extent; dx <= extent; dx++) {
+    const x = target.x + dx, y = target.y + dy;
+    if (x < 0 || y < 0 || x >= size || y >= size || dx * dx + dy * dy > radius * radius) continue;
+    if (!explored.has(y * size + x)) return false;
+  }
+  return explored.has(target.y * size + target.x);
+}
+
 export function dnaCanHunt(agent) {
   return !agent.dna && !agent.stats?.dna || !!agent.stats?.dna?.hunting;
 }

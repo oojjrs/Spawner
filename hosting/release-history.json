@@ -1,5 +1,13 @@
 [
   {
+    "version_number": 93,
+    "label": "v93",
+    "notes": [
+      "채집·방어 로밍·선제공격 및 안테나 탐색 조건 수정.",
+      "배치된 DNA 조각의 툴팁을 커서 옆에 표시."
+    ]
+  },
+  {
     "version_number": 92,
     "label": "v92",
     "notes": [

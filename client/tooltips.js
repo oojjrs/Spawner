@@ -14,6 +14,18 @@
     tooltip.dataset.placement = onTop ? "top" : "bottom";
   }
 
+  function positionPointer(tooltip, pointer) {
+    const margin = 10, gap = 16;
+    tooltip.style.maxWidth = Math.max(0, window.innerWidth - margin * 2) + "px";
+    tooltip.style.maxHeight = Math.max(0, window.innerHeight - margin * 2) + "px";
+    const width = tooltip.offsetWidth, height = tooltip.offsetHeight;
+    const right = pointer.clientX + gap, below = pointer.clientY + gap;
+    const left = right + width <= window.innerWidth - margin ? right : pointer.clientX - width - gap;
+    const top = below + height <= window.innerHeight - margin ? below : pointer.clientY - height - gap;
+    tooltip.style.left = Math.max(margin, Math.min(left, window.innerWidth - width - margin)) + "px";
+    tooltip.style.top = Math.max(margin, Math.min(top, window.innerHeight - height - margin)) + "px";
+  }
+
   const tooltip = document.createElement("div");
   tooltip.id = "control-tooltip";
   tooltip.className = "control-tooltip";
@@ -89,5 +101,5 @@
   document.addEventListener("scroll", hide, true);
   document.addEventListener("close", hide, true);
   window.addEventListener("resize", hide);
-  globalThis.SpawnerTooltips = { position };
+  globalThis.SpawnerTooltips = { position, positionPointer };
 })();

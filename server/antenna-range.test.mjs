@@ -18,10 +18,10 @@ test('일반 이동은 안테나나 둥지 거리에 제한되지 않고 올바�
   }
 });
 
-test('안테나는 칼날·분비기관·갑각 전투형만 적 탐색을 해금한다', () => {
-  for (const genes of [[],['antenna'],['gather','antenna'],['blade'],['secretion'],['carapace']])
+test('안테나는 칼날·분비기관 전투형만 적 탐색을 해금한다', () => {
+  for (const genes of [[],['antenna'],['gather','antenna'],['blade'],['secretion'],['carapace'],['carapace','antenna']])
     assert.equal(dnaCanHunt(dnaUnit(genes)),false,genes.join(','));
-  for (const genes of [['blade','antenna'],['secretion','antenna'],['carapace','antenna']])
+  for (const genes of [['blade','antenna'],['secretion','antenna']])
     assert.equal(dnaCanHunt(dnaUnit(genes)),true,genes.join(','));
   assert.equal(dnaCanMove({species:'bubble-toad'},100,100,[]),true);
 });
