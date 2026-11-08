@@ -1,3 +1,8 @@
+## 경제·성장 회귀 검사 완료 [economic-growth-complete-01a1b8b3]
+
+- 기록·확인 시각 2026-11-08T13:11:26+09:00; 결정 사용자 현재 채팅의 전체 점검·작업별 완료 지시, 기록 Codex /root. 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e.
+- server/colony-supply, dna-layouts, dna-level-one, harvest-attributes, opening-economy, tribe-actions, tribe-production 7파일38검사 통과. 종족별 채집 허용, 현재 DNA 비용·체력·독립 수명 조각, 초반 자원과 구형 설계 이행 경계를 검사한다. 폐기된 구도감 채집 설명 기대만 제거했고 실제 채집 권한·속도 검사는 유지했다. 담당 /root/economy_tests_finish 결과 economy-results.json 및 메인 diff6422c9; UTF8NoBom/CRLF와 scoped diff 검수ef91b2 통과.
+
 ## 전투 타격·저장 회귀 검사 완료 [combat-complete-01a1b8b3]
 
 - 기록·확인 시각 2026-11-08T13:11:26+09:00; 결정 사용자 현재 채팅의 전체 점검·작업별 완료 지시, 기록 Codex /root. 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e.

@@ -6,7 +6,6 @@ import { ATTRIBUTES, HARVEST_ATTRIBUTE_KEYS, attributeCounts, migrateAttributeSl
 import { canHarvestResource, resourceHarvestMultiplier, resourceDefinition } from "./resources.mjs";
 import { createGame } from "./game.mjs";
 import { attributeEffect } from "../client/progression-ui.mjs";
-import { codexAttributeEffect, codexAttributeDescription } from "../client/codex-content.mjs";
 
 const groups = {
   blade: ["tree"],
@@ -39,13 +38,11 @@ test("대응 종족의 기본 자원에만 고정 채집 속도 보너스를 적
         assert.equal(resourceHarvestMultiplier(resourceType, { [key]: level }, tribe), expected, tribe + ":" + resourceType);
       }
     }
-    for (const level of [1, 2, 3, 4]) for (const effect of [attributeEffect(attribute, level, tribe), codexAttributeEffect(attribute, level, tribe)]) {
+    for (const level of [1, 2, 3, 4]) {
+      const effect = attributeEffect(attribute, level, tribe);
       assert.equal(effect.includes("채집 시간"), key === nativeKey, tribe + ":" + key);
       assert.doesNotMatch(effect, /운반량/);
     }
-    const description = codexAttributeDescription(attribute, tribe);
-    assert.equal(description.includes("더 빠르게"), key === nativeKey, tribe + ":" + key);
-    assert.doesNotMatch(description, /속성 없이|운반량/);
   }
 });
 

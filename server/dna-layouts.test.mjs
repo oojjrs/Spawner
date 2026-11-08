@@ -33,7 +33,7 @@ test("25개 역할별 완성형은 정해진 유효 조각만으로 레벨별 �
   }
 });
 
-test("상위 32종은 16개 짝에서 깊게 맞물리고 겹치지 않는다", () => {
+test("독립 수명 조각을 제외한 상위 32종은 16개 짝에서 깊게 맞물리고 겹치지 않는다", () => {
   const seen = new Set(), directions = [[1, 0], [0, 1], [-1, 1], [-1, 0], [0, -1], [1, -1]];
   assert.equal(DNA_SHAPE_PAIRS.length, 16);
   for (const pair of DNA_SHAPE_PAIRS) {
@@ -48,7 +48,8 @@ test("상위 32종은 16개 짝에서 깊게 맞물리고 겹치지 않는다", 
       seen.add(gene);
     }
   }
-  assert.deepEqual([...seen].sort(), M.catalog.filter(gene => gene.grade > 1).map(gene => gene.id).sort());
+  assert.deepEqual([...seen, "lifespan"].sort(), M.catalog.filter(gene => gene.grade > 1).map(gene => gene.id).sort());
+  assert.deepEqual(M.lookup.get("lifespan").cells, [[0,0], [0,1], [0,2], [0,3], [0,4], [0,5]]);
 });
 
 test("근접 완성형은 체력을 배분하고 단계별 화력을 높인다", () => {

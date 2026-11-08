@@ -16,7 +16,7 @@ function fixture(points) {
   const context = { state, size:32, permanentVisionSources:()=>[{x:4,y:3,radius:6}],
     homeCells:()=>[{x:4,y:3}], deliveryCells:()=>[{x:4,y:3}],
     walkable:(x,y)=>x>=0&&y>=0&&x<32&&y<32&&state.explored.has(y*32+x), hazardAt:()=>0,
-    enemies:()=>[], synergy:()=>false, canHarvest:()=>true, isFood:type=>type==="pebbles",
+    enemies:()=>[], synergy:()=>false, canHarvest:food=>food.resourceType==="pebbles", isFood:type=>type==="pebbles",
     resourceType:food=>food.resourceType, harvestSeconds:()=>2.5, materialSpace:()=>100 };
   const ai = createUtilityAI(context);
   return { state, agent, ai, context };
@@ -69,10 +69,9 @@ test("위기 채집은 나이와 무관하게 일부 개체에 맡기고 전문 
   assert.equal(assigned.size,2);
 });
 
-test("마지막 재료 채집 개체도 자원 수급이 급하면 자원을 먼저 납품한다", () => {
+test("수급이 급해도 다른 종족 자원보다 채집할 수 있는 주자원을 선택한다", () => {
   const f=fixture(0);
   f.agent.attributes={blade:1};f.state.lastFoodAt=100;
-  f.context.constructionMaterials=()=>({tree:4});
   f.state.knownFood.set("5,4",{x:5,y:4,amount:30,resourceType:"tree"});
   assert.equal(f.ai.evaluate(f.agent,false)[0].target.key,"10,4");
 });

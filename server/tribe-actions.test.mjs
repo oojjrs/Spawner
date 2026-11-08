@@ -45,7 +45,7 @@ for (const tribe of ["bean","spore","pebble","spring"]) {
 
 test("탄생 공간이 막혀도 둥지 성장은 가능하다", () => {
   const {game,room} = fixture("bean");
-  change(game,state => {state.evolutionPoints=20;});
+  change(game,state => {state.evolutionPoints=nestUpgradeCost(1,"bean");});
   room.world.terrain.fill(0);
   game.produce();
   assert.equal(game.nestLevel,2);
@@ -61,9 +61,10 @@ test("전멸한 군락은 성장보다 실제 비용을 지불한 재생산을 �
   assert.equal(game.snapshot().evolutionPoints,15-birthCost(agent,"pebble"));
 });
 
-test("생존 개체의 복제로 초기 설계를 저장하고 탄생 단계와 소유권을 유지한다", () => {
+test("구형 생존 개체의 설계를 저장하고 탄생 단계와 소유권을 유지한다", () => {
   const {game} = fixture("spore");
-  change(game,state => {state.agents=state.agents.filter(agent=>agent.slots.includes("blade"));state.evolutionPoints=10;});
+  change(game,state => {state.agents=state.agents.slice(0,1);
+    Object.assign(state.agents[0],{dna:null,slots:["blade"],attributeLevels:{blade:1}});state.evolutionPoints=10;});
   const source=game.agents[0], id=game.produce(), agent=game.agents.find(candidate=>candidate.id===id);
   assert.ok(agent?.birth);
   assert.deepEqual(agent.slots,source.slots);
@@ -162,7 +163,7 @@ test("실제 방 틱에서도 비용을 모은 AI만 순서대로 4레벨까지 
     assert.equal(game.nestLevel,level+1);
     assert.equal(game.snapshot().evolutionPoints,0);
     assert.equal(player.nestLevel,1);
-    assert.equal(player.snapshot().evolutionPoints,0);
+    assert.equal(player.snapshot().evolutionPoints,30);
   }
 });
 

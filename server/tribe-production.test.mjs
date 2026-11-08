@@ -46,9 +46,10 @@ test("속성 네 개의 생산비 차감과 저장된 과거 지불액을 구분
   }
 });
 
-test("개체가 없어도 실제 종족의 기본 개체 생산비가 남아 있으면 계속할 수 있다", () => {
+test("구형 설계가 있으면 종족별 기본 개체 생산비로 재생산할 수 있다", () => {
   for (const [tribe, points, ended] of [["spore",2,false], ["pebble",3,true], ["bean",3,false], ["spring",3,false]]) {
     const game = fixture(tribe, points, 1);
+    game.command({type:"design", templateId:null, name:"구형 기본", slots:[], birth:false});
     game.checkEnding();
     assert.equal(!!game.snapshot().ending, ended, tribe);
   }
