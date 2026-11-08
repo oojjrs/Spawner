@@ -94382,8 +94382,9 @@ function welcomeCreatureScale(animation, bounds, top, displaySize, width, height
     (ground - 34) / Math.max(.001, -envelope.top), (height - 6 - ground) / Math.max(.001, envelope.bottom));
 }
 
-// Keep native game pose clocks, but let measured gaits use a separate travel
-// distance. A complete move lands before the centered idle presentation.
+// Measured gaits keep their source stride while travel uses the game speed.
+// The pose clock speeds up with that distance, without sliding or slowing the root.
+// A complete move lands before the centered idle presentation.
 function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsedMs, timeline, phase, startedAt, reducedMotion = false, id = "welcome", worldPixels, stridePixelsPerCycle }) {
   const neutral = !["bean", "spore", "pebble", "spring"].includes(key);
   const stats = neutral ? null : model.unitStats(attributes, key);
@@ -94395,7 +94396,7 @@ function welcomeTravelMotion(model, { key, attributes = {}, width, size, elapsed
   const cycles = walk?.cyclesPerCell || 1;
   const travelCell = groundedGait ? stridePixelsPerCycle * cycles : cell;
   const steps = Math.max(1, Math.ceil((width / 2 + size / 2) / travelCell));
-  const moveDuration = groundedGait ? walk.durationMs / 1000 * cycles : neutral ? 1 / speed : Math.min(1, 1 / speed);
+  const moveDuration = groundedGait ? travelCell / (speed * cell) : neutral ? 1 / speed : Math.min(1, 1 / speed);
   const durationMs = steps * moveDuration * 1000;
   const moving = !reducedMotion && (phase === "enter" || phase === "exit");
   const origin = Number.isFinite(startedAt) ? startedAt : timeline - elapsedMs / 1000;

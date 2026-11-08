@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { welcomeStridePixels, welcomeTravelMotion, WELCOME_IDLE_DURATION_MS } from './welcome-presentation.mjs';
-import { CREATURE_WALK_ANIMATIONS, creatureWalkPose, creatureAnimationSpeed, unitMovementPosition } from './unit-animation.mjs';
+import { CREATURE_WALK_ANIMATIONS, creatureWalkPose, creatureAnimationSpeed, unitMovementPosition, unitAnimationFrame } from './unit-animation.mjs';
 
 const model = { CREATURE_WALK_ANIMATIONS, creatureAnimationSpeed, unitMovementPosition };
 const near = (actual, expected, message) => assert.ok(Math.abs(actual - expected) < 1e-7, `${message}: ${actual} vs ${expected}`);
@@ -26,7 +26,7 @@ test('authored weasel strides follow body rendering scale rather than battlefiel
   assert.equal(welcomeStridePixels(CREATURE_WALK_ANIMATIONS['white-paw'], null, 120, 1), null);
 });
 
-test('welcome forward travel cancels planted-foot motion at the authored half-second cadence', () => {
+test('welcome preserves game speed and cancels planted-foot motion at its distance-calibrated cadence', () => {
   for (const key of ['white-paw', 'shadow-weasel']) for (const phase of ['enter', 'exit']) {
     for (const width of [320, 480, 720]) {
       const cell = width / 4, animation = CREATURE_WALK_ANIMATIONS[key];
@@ -34,19 +34,21 @@ test('welcome forward travel cancels planted-foot motion at the authored half-se
       const request = { key, width, size: width / 6, worldPixels: cell, stridePixelsPerCycle: stride,
         phase, startedAt: 11, timeline: 11, elapsedMs: 0 };
       const first = welcomeTravelMotion(model, request);
+      const speed = creatureAnimationSpeed(key), cycleMs = stride / (speed * cell) * 1000;
       const at = elapsedMs => welcomeTravelMotion(model, { ...request, timeline: 11 + elapsedMs / 1000, elapsedMs });
-      near(first.x - at(500).x, stride, key + ' one complete gait');
+      near(first.x - at(cycleMs).x, stride, key + ' one complete gait');
+      near(first.x - at(500).x, speed * cell / 2, key + ' native game speed');
       near(first.cell, cell, 'drawing size stays unchanged');
       for (const ms of [1, 50, 125, 200, 310, 313, 499, 501, 751, 1001]) {
         const motion = at(ms), pose = creatureWalkPose(motion.agent, 11 + ms / 1000);
         assert.ok(pose, key + '/' + ms + ' retains moving pose');
-        assert.equal(pose.frame, Math.floor(ms % 500 / 500 * 64));
-        near(first.x - motion.x, stride * ms / 500, key + ' continuous travel');
+        assert.equal(pose.frame, unitAnimationFrame(animation, ms / cycleMs * animation.durationMs));
+        near(first.x - motion.x, speed * cell * ms / 1000, key + ' continuous travel');
       }
       // A planted paw moves right through 120 source px over .64 of a cycle.
       const sourcePixel = stride / 187.5;
-      for (const ms of [0, 50, 125, 200, 300])
-        near(at(ms).x + 120 * (ms / 500) / .64 * sourcePixel, first.x, 'stationary planted paw');
+      for (const phase of [0, .1, .25, .4, .6])
+        near(at(phase * cycleMs).x + 120 * phase / .64 * sourcePixel, first.x, 'stationary planted paw');
       const end = at(first.durationMs);
       if (phase === 'enter') near(end.x, width / 2, 'exact center landing');
       else assert.ok(end.x + request.size / 2 <= 0, 'exit clears viewport');
@@ -63,4 +65,38 @@ test('reduced motion stays centered and legacy species retain native travel timi
   const legacy = welcomeTravelMotion(model, { ...request, key: 'soil-mole', stridePixelsPerCycle: null });
   assert.equal(legacy.cell, 100); assert.equal(legacy.travelCell, 100);
   near(legacy.agent.moveDuration, 1 / creatureAnimationSpeed('soil-mole'), 'legacy speed');
+});
+
+test('measured header gaits retain native game speed at every display scale rather than reversing snail and weasel pace', () => {
+  for (const key of ['shadow-weasel','white-paw','soil-mole']) for (const width of [240,480,1280]) for (const multiplier of [.5,1,2]) {
+    const cell=width/4, animation=CREATURE_WALK_ANIMATIONS[key], entry={scale:.8};
+    const stride=welcomeStridePixels(animation,entry,cell,.6*multiplier);
+    const request={key,width,size:width/6,worldPixels:cell,stridePixelsPerCycle:stride,phase:'enter',startedAt:91.1,timeline:91.1,elapsedMs:0};
+    const first=welcomeTravelMotion(model,request),speed=creatureAnimationSpeed(key);
+    near(first.travelCell/first.agent.moveDuration/cell,speed,key+' native speed independent of drawing size');
+    const at=ms=>welcomeTravelMotion(model,{...request,timeline:91.1+ms/1000,elapsedMs:ms});
+    for(const ms of [50,100,150,250]) near(first.x-at(ms).x,speed*cell*ms/1000,key+' native screen displacement');
+    const moveMs=first.agent.moveDuration*1000;
+    for(let step=1;step<Math.min(6,first.durationMs/moveMs);step++) {
+      const before=at(step*moveMs-.0001),after=at(step*moveMs+.0001);
+      assert.ok(Math.abs(before.x-after.x)<.001,key+' continuous cell boundary');
+      const a=creatureWalkPose(after.agent,91.1+(step*moveMs+.0001)/1000);
+      assert.ok(a&&a.frame>=0&&a.frame<animation.frameCount);
+    }
+    near(at(first.durationMs).x,width/2,'center landing');
+  }
+  assert.ok(creatureAnimationSpeed('shadow-weasel')>creatureAnimationSpeed('bundle-snail'));
+  assert.ok(creatureAnimationSpeed('white-paw')>creatureAnimationSpeed('bundle-snail'));
+});
+
+test('compiled welcome uses the same speed and distance clock as source modules',async()=>{
+  const {readFileSync}=await import('node:fs'),{runInNewContext}=await import('node:vm');
+  const scope={};runInNewContext(readFileSync(new URL('./runtime.js',import.meta.url),'utf8'),scope);
+  for(const key of ['shadow-weasel','white-paw','soil-mole']) {
+    const clip=CREATURE_WALK_ANIMATIONS[key];
+    const request={key,width:480,size:80,worldPixels:120,stridePixelsPerCycle:welcomeStridePixels(clip,{scale:.8},120,.6),phase:'enter',startedAt:5,timeline:5.4,elapsedMs:400};
+    const source=welcomeTravelMotion(model,request),built=scope.Spawner.welcomeTravelMotion(scope.Spawner,request);
+    near(built.x,source.x,key+' compiled position');near(built.agent.moveDuration,source.agent.moveDuration,key+' compiled move duration');
+    assert.equal(scope.Spawner.creatureWalkPose(built.agent,5.4).frame,creatureWalkPose(source.agent,5.4).frame);
+  }
 });

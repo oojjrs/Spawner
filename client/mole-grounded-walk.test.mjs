@@ -92,14 +92,15 @@ test('combat distance clock freezes on held snapshots and returns cleanly on ret
   assert.equal(clock.frame(model,a,1.1,clip,stride,{x:0,y:0}),0);
 });
 
-test('welcome uses the same source stride at its authored cadence without changing body size', () => {
+test('welcome uses the same source stride and native game speed without changing body size', () => {
   const cell=120, pixels=welcomeStridePixels(clip,entry,cell,display);
   near(pixels,stride*cell,'rendered source stride');
   const request={key:species,width:480,size:80,worldPixels:cell,stridePixelsPerCycle:pixels,phase:'enter',startedAt:5,timeline:5,elapsedMs:0};
   const first=welcomeTravelMotion(model,request);
-  const next=welcomeTravelMotion(model,{...request,timeline:5.64,elapsedMs:640});
-  near(first.x-next.x,pixels,'one authored cycle'); near(next.cell,cell,'drawing scale');
-  assert.equal(animation.creatureWalkPose(next.agent,5.640000001).frame,0);
+  const cycleMs=stride / .65 * 1000;
+  const next=welcomeTravelMotion(model,{...request,timeline:5+cycleMs/1000,elapsedMs:cycleMs});
+  near(first.x-next.x,pixels,'one calibrated cycle'); near(next.cell,cell,'drawing scale');
+  assert.equal(animation.creatureWalkPose(next.agent,5+cycleMs/1000+1e-9).frame,0);
 });
 
 test('built game and unit matrix carry the same approved eight-key animation', () => {
