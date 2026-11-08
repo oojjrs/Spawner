@@ -19,6 +19,10 @@ const retiredBirthMetadataHashes = {
  'DesignAssets/Animations/CombatAttributesV7/spore/carapace/rig.json':'19d0227b2479e746b380f2fc16b1c4e69527dace21f3dbc7ac691c825850e73c',
 };
 const currentInputHash = (path, original) => retiredBirthMetadataHashes[path] || original;
+const sourceHash = path => {
+ const bytes=fs.readFileSync(path);
+ return crypto.createHash('sha256').update(path.endsWith('.json')?bytes.toString('utf8').replace(/\r\n/g,'\n'):bytes).digest('hex');
+};
 
 const tribes=['spore','pebble','spring'];
 const forms=['base','blade','carapace','secretion','antenna'];
@@ -61,7 +65,8 @@ test('both strike directions and facing retain camera, native crop and source or
  for(const tribe of tribes)for(const form of forms)for(const mirror of [false,true])for(const hitSide of [-1,1]){
   const a=unit(tribe,form),s=speciesHeldHurtSource(a),ctx=context(),before=JSON.stringify(a),scale=250*unitDisplaySize(a)/s.referenceLength;
   assert.ok(drawSpeciesHeldHurt(ctx,a,10.2,p=>images.get(p),{cell:250,mirror,hitSide}));
-  const nativeFacing=["blade","carapace"].includes(form)?-1:1,displayFacing=(mirror?-1:1)*nativeFacing;
+  const nativeFacing=tribe==='spring'||["blade","carapace"].includes(form)?-1:1,displayFacing=(mirror?-1:1)*nativeFacing;
+  assert.equal(s.sourceFacing,nativeFacing===-1?'left':'right',tribe+'/'+form);
   const i=hitSide*displayFacing>0?s.times.length:0,draw=ctx.calls.find(c=>c[0]==='draw');
   assert.deepEqual(draw.slice(2,6),[i%s.columns*s.frameWidth,Math.floor(i/s.columns)*s.frameHeight,s.frameWidth,s.frameHeight]);
   assert.deepEqual(draw.slice(6),[-s.pivotX*scale,-s.pivotY*scale,s.frameWidth*scale,s.frameHeight*scale]);
@@ -141,11 +146,11 @@ test('six live V7 blade and carapace sources preserve rig landmarks and material
  const qa=JSON.parse(fs.readFileSync('tools/weapons-held-hurt-20261105/verification.json'));
  const provenance=JSON.parse(fs.readFileSync('tools/weapons-held-hurt-20261105/source-metadata.json'));
  assert.equal(qa.sources.length,6);
- for(const [path,hash] of Object.entries(provenance.inputs))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex'),currentInputHash(path,hash),path);
+ for(const [path,hash] of Object.entries(provenance.inputs))assert.equal(sourceHash(path),currentInputHash(path,hash),path);
  for(const s of qa.sources){
   assert.equal(speciesHeldHurtSource(unit(s.tribe,s.form)),SPECIES_HELD_HURT_SOURCES[s.tribe][s.form]);
   assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.sourceImage)).digest('hex'),s.sourceHash);
-  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.sourceRig)).digest('hex'),currentInputHash(s.sourceRig,s.rigHash));
+  assert.equal(sourceHash(s.sourceRig),currentInputHash(s.sourceRig,s.rigHash));
   assert.equal(crypto.createHash('sha256').update(fs.readFileSync(s.image)).digest('hex'),s.atlasSha256);
   assert.deepEqual(imageDimensions(s.image),s.atlasDimensions);
   assert.ok(s.liveRigLandmarks&&s.neutralExact&&s.decodedAtlasExact&&s.noEdgeClipping);

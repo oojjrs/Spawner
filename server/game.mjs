@@ -1,4 +1,4 @@
-import { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, basicGathererDna } from "./dna-unit.mjs";
+import { cloneDna, validateDna, dnaAppearance, dnaUnitStats, dnaCanMove, dnaCanHunt, basicGathererDna } from "./dna-unit.mjs";
 import { CONQUEST_PACING, militaryAgent } from "./conquest-pacing.mjs";
 import { isTemplateNameEdited, suggestTemplateName } from "./unit-template-names.mjs";
 import { suggestAgentName } from "./agent-names.mjs";
@@ -130,7 +130,7 @@ export function createGame(environment, colony, savedGame) {
       foodType: {bean:"clay",spore:"tree",pebble:"pebbles",spring:"dew"}[colony.tribe || "bean"],
       resourceHabitat: (type,x,y) => worldMap.hydrology?.resourceHabitats ?
         resourceHabitatSuitability(type, y * WORLD_SIZE + x, worldMap.terrain, worldMap.hydrology) : Number(isResourceHabitat(type, worldMap, x, y)),
-      canHarvest: (food, agent) => (!agent.dna || agent.stats.dna.harvest > 0) && canHarvestResource(food, worldMap, agent.attributes, colony.tribe) });
+      canHarvest: (food, agent) => (!agent.dna || agent.stats.dna.harvest > 0) && canHarvestResource(food, worldMap, agent.attributes, agent.tribe || colony.tribe || "bean") });
     const roadOptimizer = createRoadOptimizer({ size: WORLD_SIZE, boundary: colonyDeliveryCells,
       neighbors: walkableNeighbors, explored: index => state.explored.has(index),
       apply(road, route) {
@@ -1074,7 +1074,7 @@ export function createGame(environment, colony, savedGame) {
 
     function harvestAtCurrentCell(agent) {
       const food = foodCellAt(agent.x, agent.y, agent);
-      if (!food || food.amount <= 0 || agent.dna && !agent.stats.dna.harvest || !canHarvestResource(food, worldMap, agent.attributes, colony.tribe) ||
+      if (!food || food.amount <= 0 || agent.dna && !agent.stats.dna.harvest || !canHarvestResource(food, worldMap, agent.attributes, agent.tribe || colony.tribe || "bean") ||
         agent.carrying > 0 && (agent.carryingType || "honey-mushrooms") !== resourceTypeForCell(food, worldMap)) {
         agent.decisionPending = "targetLost"; return;
       }
@@ -1093,7 +1093,7 @@ export function createGame(environment, colony, savedGame) {
       const key = agent.x + "," + agent.y;
       const food = foodCellAt(agent.x, agent.y, agent);
       const resourceType = resourceTypeForCell(food, worldMap);
-      if (agent.dna && !agent.stats.dna.harvest || !canHarvestResource(food, worldMap, agent.attributes, colony.tribe) || agent.carrying > 0 && (agent.carryingType || "honey-mushrooms") !== resourceType) {
+      if (agent.dna && !agent.stats.dna.harvest || !canHarvestResource(food, worldMap, agent.attributes, agent.tribe || colony.tribe || "bean") || agent.carrying > 0 && (agent.carryingType || "honey-mushrooms") !== resourceType) {
         agent.decisionPending = "targetLost"; return;
       }
       const harvestSeconds = agent.dna ? agent.stats.dna.harvestTime : resourceHarvestSeconds(resourceType, worldMap) * resourceHarvestMultiplier(resourceType, agent.attributes, agent.tribe || colony.tribe) / (agent.stats.harvestSpeedMultiplier ?? 1);
@@ -1269,7 +1269,7 @@ export function createGame(environment, colony, savedGame) {
         utilityAI.evaluate(agent, !["completed", "targetLost", "restore"].includes(reason));
       if (planned === undefined) return;
       const candidates = planned.filter(candidate => ["collect", "return", "recover", "fight", "flee", "explore", "wait"].includes(candidate.action) &&
-        candidate.target && dnaCanMove(agent, candidate.target.x, candidate.target.y, colonyEntries));
+        candidate.target && dnaCanMove(agent, candidate.target.x, candidate.target.y, colonyEntries) && canFollowUtility(agent, candidate));
       const best = candidates[0];
       if (best?.defending && !combatTargets().some(target => target.id === best.target.id &&
           colonyDefenseTarget(agent,target,state.agents,defenseStructures()))) {
@@ -1310,6 +1310,14 @@ export function createGame(environment, colony, savedGame) {
       else agent.mode = "search";
     }
 
+    function canFollowUtility(agent, plan) {
+      if (dnaCanHunt(agent)) return true;
+      if (plan.action === "explore") return !String(plan.target?.key).startsWith("enemy-search:");
+      if (plan.action !== "fight") return true;
+      if (["burrow", "nest"].includes(plan.target?.kind)) return burrowDistance(agent, plan.target) <= 1;
+      return agent.x === plan.target?.x && agent.y === plan.target?.y;
+    }
+
     function decisionEvent(agent) {
       if (agent.combat || agent.birth && state.simSeconds < agent.birth.readyAt ||
         agent.attack && state.simSeconds < agent.attack.endsAt) return null;
@@ -1324,9 +1332,10 @@ export function createGame(environment, colony, savedGame) {
       agent.knownEnemyIds = ids;
       if (discovered) return "enemyDiscovered";
       const plan = agent.utility;
+      if (plan && !canFollowUtility(agent, plan)) return "targetLost";
       if (plan?.target && !dnaCanMove(agent, plan.target.x, plan.target.y, colonyEntries)) return "targetLost";
       if (plan?.action === "collect" && (!(state.knownFood.get(plan.target.key)?.amount > 0) ||
-        !canHarvestResource(state.knownFood.get(plan.target.key), worldMap, agent.attributes, colony.tribe))) return "targetLost";
+        !canHarvestResource(state.knownFood.get(plan.target.key), worldMap, agent.attributes, agent.tribe || colony.tribe || "bean"))) return "targetLost";
       if (plan?.action === "collect" && agent.carrying > 0 && (agent.carryingType || "honey-mushrooms") !==
         resourceTypeForCell(state.knownFood.get(plan.target.key), worldMap)) return "targetLost";
       if (plan?.action === "collect" && agent.carrying >= plan.plannedCargo) return "completed";
@@ -1343,6 +1352,7 @@ export function createGame(environment, colony, savedGame) {
     function stepUtilityAgent(agent, elapsed) {
       let plan = agent.utility;
       if (!plan) return false;
+      if (!canFollowUtility(agent, plan)) { agent.decisionPending = "targetLost"; return false; }
       const movingFor = state.simSeconds - agent.moveStartedAt;
       if (movingFor < agent.moveDuration) {
         if (agent.moveDuration - movingFor > 1e-8) return false;
@@ -1381,7 +1391,7 @@ export function createGame(environment, colony, savedGame) {
           combat.update(agent, state.simSeconds);
           return false;
         }
-        if (building && agent.dna && !(agent.stats.dna.melee || agent.stats.dna.ranged)) { agent.decisionPending = "targetLost"; return false; }
+        if (building && agent.dna && !(agent.stats.dna.melee || agent.stats.dna.ranged || agent.stats.dna.hunting)) { agent.decisionPending = "targetLost"; return false; }
         if (building && burrowDistance(agent, target) <= 1) {
           if (state.simSeconds >= agent.attackReady) {
             const profile = combatProfile(agent), hits = agent.dna ? agent.stats.dna.hits : 1;
@@ -1680,7 +1690,7 @@ export function createGame(environment, colony, savedGame) {
         if (agent.birth) {
           if (state.simSeconds < agent.birth.readyAt) continue;
           // Only this verified birth-to-idle seam gets a persistent visual origin.
-          if (agent.tribe === "pebble" && agent.dna?.version === 5 && unitAppearanceForm(agent) === "gather")
+          if (agent.tribe === "pebble" && [5, 6].includes(agent.dna?.version) && unitAppearanceForm(agent) === "gather")
             agent.birthIdleStartedAt = agent.birth.readyAt;
           agent.birth = null;
           agent.moveBudget = 0;

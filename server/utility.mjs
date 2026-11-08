@@ -1,4 +1,5 @@
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
+import { dnaCanHunt } from "./dna-unit.mjs";
 import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
 import { unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier } from "./attributes.mjs";
 import { resourceDefinition, resourceTypeForCell } from "./resources.mjs";
@@ -273,7 +274,8 @@ export function createUtilityAI(context) {
   function evaluate(agent, retain, immediate) {
     const supply = colonySupply(state, context.tribe);
     const gathers = !agent.dna || agent.stats.dna.harvest > 0;
-    const attacks = agent.dna ? agent.stats.dna.melee || agent.stats.dna.ranged : combatDisposition(agent) === "aggressive";
+    const attacks = agent.dna ? agent.stats.dna.melee || agent.stats.dna.ranged || agent.stats.dna.hunting : combatDisposition(agent) === "aggressive";
+    const hunts = attacks && dnaCanHunt(agent);
     const visible = enemies().filter(enemy => enemy.health > 0);
     const safety = assess(agent, visible);
     const defenseTargets = visible.filter(enemy => colonyDefenseTarget(agent, enemy, state.agents, context.defenseStructures?.()));
@@ -398,9 +400,9 @@ export function createUtilityAI(context) {
     const knownFoods = immediate ? [] : foodWithinRange.filter(food => food.amount > 0 && isFood(resourceType(food)) && canHarvest(food, agent));
     const assignedForagers = supply.urgency > 0 ? colonyForagers(state, knownFoods, deliveryCells()) : new Set();
     const collecting = candidates.some(candidate => candidate.action === "collect" && candidate.damage < agent.health * .25);
-    const searchKind = attacks ? "enemy" : gathers ? "resource" : null;
-    if (!immediate && searchKind && !agent.carrying && (attacks || !collecting)) {
-      const cells = attacks ? [...new Map([...frontier, ...patrolByIndex.values()].map(cell => [indexOf(cell), cell])).values()] : frontier;
+    const searchKind = hunts ? "enemy" : gathers ? "resource" : null;
+    if (!immediate && searchKind && !agent.carrying && (hunts || !collecting)) {
+      const cells = hunts ? [...new Map([...frontier, ...patrolByIndex.values()].map(cell => [indexOf(cell), cell])).values()] : frontier;
       const recent = new Set((agent.path || []).slice(-24).map(cell => cell.x + "," + cell.y));
       const heading = [...String(agent.id)].reduce((sum, letter) => sum + letter.charCodeAt(0), 0) % 4;
       const direction = agent.lastDirection || [{ dx: 1, dy: 0 }, { dx: 0, dy: 1 }, { dx: -1, dy: 0 }, { dx: 0, dy: -1 }][heading];
@@ -410,7 +412,7 @@ export function createUtilityAI(context) {
           const gap = distance(agent, cell), key = cell.x + "," + cell.y;
           const forward = Math.max(0, ((cell.x - agent.x) * direction.dx + (cell.y - agent.y) * direction.dy) / gap);
           const freshness = (agent.visited.has(key) ? 1 : 2) * (recent.has(key) ? .2 : 1);
-          const habitat = attacks ? 1 : 1 + 3 * origins.reduce((best, food) => Math.max(best, Math.max(0, 1 - distance(cell, food) / 24)), 0);
+          const habitat = hunts ? 1 : 1 + 3 * origins.reduce((best, food) => Math.max(best, Math.max(0, 1 - distance(cell, food) / 24)), 0);
           return { cell, weight: freshness * (1 + forward) * habitat * Math.min(1, gap / 4) / (5 + gap) };
         }).sort((first, second) => second.weight - first.weight).slice(0, CONQUEST_PACING.frontierSamples);
       let count = 0;
@@ -420,7 +422,7 @@ export function createUtilityAI(context) {
         const seconds = travelTime(agent, cells, agent.carrying);
         const gain = 60 * limit(weight * 8 / (1 + seconds / 20));
         add("explore", { ...cell, key: searchKind + "-search:" + indexOf(cell) }, cells,
-          attacks ? { combatGain: gain } : { informationGain: gain }, {});
+          hunts ? { combatGain: gain } : { informationGain: gain }, {});
         if (++count >= 12) break;
       }
     }
@@ -446,7 +448,7 @@ export function createUtilityAI(context) {
     }
     for (const building of !immediate && !agent.retreat && (!agent.dna || agent.stats.dna.power > 0) && combatDisposition(agent) === "aggressive" ? [...(context.burrows ? context.burrows() : []), ...(context.nests ? context.nests() : [])] : []) {
       const cells = burrowApproaches(building).map(cell => path(cell)).filter(Boolean).sort((first, second) => first.length - second.length)[0];
-      if (!cells) continue;
+      if (!cells || !hunts && cells.length > 1) continue;
       const time = travelTime(agent, cells, agent.carrying) + building.health / Math.max(0.1, agent.stats.attack);
       add("fight", { id: building.id, kind: building.kind || "burrow", x: building.x, y: building.y, key: building.id }, cells,
         { combatGain: 40 * 10 / (10 + time) }, {});

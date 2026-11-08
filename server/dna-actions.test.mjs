@@ -16,11 +16,11 @@ function fixture(ids) {
   return { source,target,ally,env,combat:createCombat(env) };
 }
 
-test("level one opens gathering with four repeatable worker stats",()=>{
-  assert.deepEqual(ATTRIBUTE_DNA.catalog.filter(g=>g.grade===1).map(g=>g.id),["capacity","gather","harvestSpeed","health","movement"]);
-  assert.ok(ATTRIBUTE_DNA.catalog.filter(g=>g.category!=="organ"&&!["capacity","harvestSpeed","health","movement"].includes(g.id)).every(g=>g.grade>=2));
-  assert.equal(stats(["armor"]).armor,3); assert.equal(stats(["evasion"]).evasion,9);
-  assert.equal(stats(["carapace"]).armor,2); assert.equal(stats(["legs"]).evasion,9);
+test("level one opens gathering with six repeatable utility stats",()=>{
+  assert.deepEqual(ATTRIBUTE_DNA.catalog.filter(g=>g.grade===1).map(g=>g.id),["capacity","gather","harvestSpeed","health","movement","regeneration","vision"]);
+  assert.ok(ATTRIBUTE_DNA.catalog.filter(g=>g.category!=="organ"&&!["capacity","harvestSpeed","health","movement","regeneration","vision"].includes(g.id)).every(g=>g.grade>=2));
+  assert.equal(stats(["armor"]).armor,30); assert.equal(stats(["evasion"]).evasion,9);
+  assert.equal(stats(["carapace"]).armor,20); assert.equal(stats(["legs"]).evasion,9);
   const once=stats(["gather","antenna","blade","secretion"]), twice=stats(["gather","antenna","blade","secretion","gather","antenna","blade","secretion"]);
   assert.equal(twice.capacity,2*once.capacity); assert.equal(twice.harvest,1); assert.equal(twice.meleePower,2*once.meleePower); assert.equal(twice.rangedPower,2*once.rangedPower); assert.equal(twice.meleeSpeed,once.meleeSpeed); assert.equal(twice.rangedSpeed,once.rangedSpeed);
 });
@@ -28,17 +28,17 @@ test("level one opens gathering with four repeatable worker stats",()=>{
 test("legacy snapshots survive schema restore while new designs require the current catalog",()=>{
   for(const entry of [{gene:"health",grade:1,shape:[0,1],rotation:0},{gene:"health",grade:2,shape:[0,1,2],rotation:0},{gene:"antenna",grade:1,shape:[0,1],rotation:0},{gene:"movement",grade:2,shape:[0,1,3],rotation:0}]) {
     const dna={version:3,pieces:[entry],budget:1000,level:2};
-    const migrated=ATTRIBUTE_DNA.validate(dna);assert.equal(migrated.version,5);assert.deepEqual(ATTRIBUTE_DNA.stats(migrated.pieces),ATTRIBUTE_DNA.stats(dna.pieces));assert.deepEqual(cloneDna(dna),migrated);assert.equal(validateDna(dna,2,1000),null);
+    const migrated=ATTRIBUTE_DNA.validate(dna);assert.equal(migrated.version,6);assert.deepEqual(ATTRIBUTE_DNA.stats(migrated.pieces),ATTRIBUTE_DNA.stats(dna.pieces));assert.deepEqual(cloneDna(dna),migrated);assert.equal(validateDna(dna,2,1000),null);
   }
-  assert.ok(validateDna({version:5,pieces:[piece("antenna")],budget:1000,level:2},2,1000));
+  assert.ok(validateDna({version:6,pieces:[piece("antenna")],budget:1000,level:2},2,1000));
   assert.equal(validateDna({version:3,pieces:[null],budget:100,level:1},1,100),null);
 });
 
 test("ranged shot hits outside contact after travel and spends one shared cycle",()=>{
   const f=fixture(["blade","secretion"]); f.combat.update(f.source,0);
-  assert.equal(f.source.attack.attackMode,"ranged"); assert.equal(f.target.health,100); assert.equal(f.source.attackReady,2);
+  assert.equal(f.source.attack.attackMode,"ranged"); assert.equal(f.target.health,100); assert.equal(f.source.attackReady,3);
   f.combat.update(f.source,.5); assert.equal(f.target.health,100);
-  f.combat.update(f.source,.7); assert.ok(f.target.health<100); assert.equal(f.source.attackReady,2);
+  f.combat.update(f.source,.7); assert.ok(f.target.health<100); assert.equal(f.source.attackReady,3);
   assert.equal(dnaAttackMode(f.source.stats.dna,1),"melee");
   assert.equal(dnaAttackMode(stats(["secretion"]),0),"ranged");
 });
@@ -61,9 +61,11 @@ test("windup cancellation removes unlaunched shots while launched combo shots re
   cancelled.combat.update(cancelled.ally,1); assert.equal(cancelled.target.health,100);
 });
 
-test("projectile flight does not block a later attack or inherit its counter multiplier",()=>{
+test("launched projectile survives an explicit attack reset without inheriting a later counter",()=>{
   const f=fixture(["secretion"]); f.target.stats.defense=0; f.source.stats.dna.rangedSpeed=4; f.source.stats.dna.focus=.1; f.source.stats.dna.counterPower=200;
   f.combat.update(f.source,0); f.combat.update(f.source,.11); f.combat.update(f.source,.3);
+  assert.equal(f.source.dnaProjectiles.length,1); assert.equal(f.source.attack.startedAt,0); assert.ok(Math.abs(f.source.attackReady-1.05)<1e-9);
+  f.source.attack=null; f.source.attackReady=.3; f.source.dnaScanReady=.3; f.combat.update(f.source,.3);
   assert.equal(f.source.dnaProjectiles.length,2); assert.equal(f.source.attack.startedAt,.3);
   const newAttack=f.source.attack; newAttack.counter=true;
   f.combat.update(f.ally,.44);
@@ -80,11 +82,11 @@ test("hybrid can shoot an adjacent world cell before same-cell melee contact",()
 test("restoring a colony discards in-flight references and keeps its spent cooldown",()=>{
   const f=fixture(["secretion"]); f.combat.update(f.source,0); f.combat.update(f.source,.31);
   const restored={...f.source,attack:null,dnaProjectiles:[]}; f.env.games.get("a").agents=[restored,f.ally];
-  f.combat.update(f.ally,1); assert.equal(f.target.health,100); assert.equal(restored.attackReady,2);
+  f.combat.update(f.ally,1); assert.equal(f.target.health,100); assert.equal(restored.attackReady,3);
 });
 test("melee and ranged investment change only their own power and rate",()=>{
   const melee=stats(["blade","secretion","power","speed"]),ranged=stats(["blade","secretion","rangedPower","rangedSpeed"]);
-  assert.equal(melee.meleePower,6); assert.equal(melee.meleeSpeed,.6); assert.equal(melee.rangedPower,1.4); assert.equal(melee.rangedSpeed,.5);
+  assert.equal(melee.meleePower,10); assert.equal(melee.meleeSpeed,.6); assert.equal(melee.rangedPower,1.4); assert.equal(melee.rangedSpeed,.5);
   assert.equal(ranged.meleePower,2); assert.equal(ranged.meleeSpeed,.5); assert.ok(Math.abs(ranged.rangedPower-4.2)<1e-9); assert.equal(ranged.rangedSpeed,.6);
   assert.equal(stats(["secretion"]).power,1.4); assert.equal(stats(["secretion"]).speed,.5);
   for(const id of ["rangedPower","rangedSpeed"]) { const g=ATTRIBUTE_DNA.lookup.get(id);assert.equal(g.grade,2);assert.ok(g.cells.length>=3);assert.ok(ATTRIBUTE_DNA.trace([piece(id)],2).valid); }

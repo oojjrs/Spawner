@@ -133,11 +133,12 @@ test('failure of layers and baked fallback remains unready then retries safely',
     if (fail) throw new Error('offline');
     return { image };
   });
-  await art.prepare(agent, at(40));
+  await assert.rejects(art.prepare(agent, at(40)), /Unit action assets are not ready/);
   assert.equal(art.readyFrame(agent, at(40)), false);
   assert.equal(art.frame(agent, at(40)), null);
-  fail = false; now += 1001;
-  await art.prepare(agent, at(40));
+  fail = false;
+  await assert.rejects(art.prepare(agent, at(40)), /Unit action assets are not ready/);
+  await art.prepare(agent, at(40), true);
   assert.equal(art.readyAction(agent, at(40)), true);
 });
 

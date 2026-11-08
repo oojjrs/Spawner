@@ -248,7 +248,7 @@ function audio() {
     window: { addEventListener() {} },
     SpawnerMusic: { create: () => ({ update() {}, unlock() { unlocks++; }, suspend() { suspensions++; } }) },
     SpawnerCombatAudio: { sources: {} },
-    SpawnerAssets: { source: value => value },
+    SpawnerAssets: { source: value => value, load: async value => value, ready: Promise.resolve(), welcomeReady: Promise.resolve() },
     fetch: async () => ({ ok: true, arrayBuffer: async () => new ArrayBuffer(0) }),
     setTimeout, performance
   });
@@ -284,4 +284,55 @@ test("복귀 후 화면 동기화가 끝나기 전에는 음악과 효과음을 
   await sound.api.playClick();
   assert.equal(sound.starts.length, 2);
   assert.ok(sound.unlocks() > count);
+});
+
+test("전투 확대 중 배경은 처음과 크기 변경 때만 그리고 창·시계·음향은 계속 갱신한다", () => {
+  const gameSource = readFileSync(new URL("./game.js", import.meta.url), "utf8");
+  const renderSource = gameSource.match(/^    function render\(now\) \{[^]*?^    \}/m)?.[0];
+  assert.ok(renderSource);
+  const calls = new Map(), audioTimes = [], modalTimes = [], frameTimes = [], effectTimes = [];
+  const record = name => calls.set(name, (calls.get(name) || 0) + 1);
+  const state = { lastFrame: 0, simSeconds: 0, ending: null, camera: { zoom: 4 }, agents: [], rivals: [], encounterSignals: [], combatVfx: {} };
+  const delivery = { arrivesAt: 9.96 }, connection = { active: true, synchronizing: false, receivedAt: 0, simSeconds: 10 };
+  const scope = createContext({ state, connection, renderFrame: null, combatWorldFrame: null,
+    document: { hidden: false }, window: { devicePixelRatio: 1 }, viewport: { width: 800, height: 600, pixelRatio: 1 },
+    canvas: { width: 800, height: 600 }, combatPanel: { open: true }, terrainRendering: { ready: true },
+    foodDeliveries: new Map([["delivery", delivery]]), MOVEMENT_DELAY: .15, colonyEntries: [],
+    appearanceWorldPoses: null, appearanceWorld: { prepare() { record("prepare"); return new Map(); } },
+    combatVfxFrame: null, combatVfxCursor: { consume(packet, time) { record("vfx"); return { time }; } },
+    detailCombatVfx: { consume(frame, time) { assert.equal(frame.time, time); effectTimes.push(time); } },
+    pebbleWorldDrawing: false, ctx: { clearRect: () => record("clear"), fillRect() {} },
+    performance: { now: () => state.lastFrame },
+    SpawnerFrameTiming: { allow: () => true, record: now => frameTimes.push(now) },
+    updateAudio: () => audioTimes.push(state.simSeconds), drawCombatPanel: now => modalTimes.push(now) });
+  for (const name of ["drawTribePreviews", "resizeCanvas", "updateZoom", "moveMap", "updateEndingPresentation", "expireClientCorpses",
+    "updateCameraTransition", "updateCameraFollow", "updateTreeMotion", "updateSelection", "updateHover", "drawTerrain", "drawGrid",
+    "drawHazards", "drawTravelTraceLayer", "drawWorldBounds", "drawFlashes", "drawWorldObjects", "drawCombatAgents", "drawAttackImpacts",
+    "drawCombatDust", "drawAgentGroups", "drawFoodDeliveries", "drawBurrowStatus", "drawFog", "positionHelpTooltip", "drawColonyImages",
+    "drawAgentAvatars", "scheduleRender"]) scope[name] = () => record(name);
+  runInContext(renderSource, scope);
+  const expectedPaints = [1, 1, 2, 2, 3, 4, 5, 6, 6], times = expectedPaints.map((value, index) => 100 + index * 16);
+  for (const [index, now] of times.entries()) {
+    if (index === 2) scope.canvas.width *= 2;
+    if (index === 4) scope.canvas.height *= 2;
+    if (index === 5) scope.combatPanel.open = false;
+    if (index === 7) scope.combatPanel.open = true;
+    connection.receivedAt = now;
+    connection.simSeconds = 10 + now / 1000;
+    scope.render(now);
+    for (const name of ["prepare", "clear", "drawTerrain", "drawWorldObjects", "drawCombatAgents", "drawFog"])
+      assert.equal(calls.get(name), expectedPaints[index], name + " frame " + index);
+    assert.equal(audioTimes.length, index + 1);
+    assert.equal(effectTimes.length, index + 1);
+    assert.equal(modalTimes.length, index + 1);
+    assert.equal(calls.get("vfx"), index + 1);
+    assert.equal(calls.get("scheduleRender"), index + 1);
+    assert.equal(state.lastFrame, now);
+    assert.ok(Math.abs(state.simSeconds - (10 + now / 1000 - .15)) < 1e-9);
+    assert.equal(audioTimes.at(-1), state.simSeconds);
+    assert.equal(effectTimes.at(-1), state.simSeconds);
+    if (index === 1) assert.equal(delivery.receivedAtFrame, now);
+  }
+  assert.deepEqual(modalTimes, times);
+  assert.deepEqual(frameTimes, times);
 });

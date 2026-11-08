@@ -4084,7 +4084,7 @@ function unitActionState(agent, time, options = {}) {
   }
   // Preserve explicit clocks, founders and older completed saves. A retained
   // birth snapshot uses the same origin as the server's completed-birth marker.
-  const birthIdle = agent.tribe === 'pebble' && agent.dna?.version === 5 && unitAppearanceForm(agent) === 'gather' ?
+  const birthIdle = agent.tribe === 'pebble' && [5, 6].includes(agent.dna?.version) && unitAppearanceForm(agent) === 'gather' ?
     finite(agent.birth?.readyAt,agent.birthIdleStartedAt) : undefined;
   return state('idle',finite(agent.animationStartedAt,birthIdle,agent.bornAt,0));
 }

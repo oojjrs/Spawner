@@ -7,6 +7,7 @@ import { combatDodgePose, drawCombatDodgeTrails, drawCombatDodgeGhosts, drawComb
 import { drawUnitLoading } from "./unit-loading.mjs";
 import { drawUnitHealthRing } from "./unit-health-ring.mjs";
 import { drawUnitAttackRing } from "./unit-attack-ring.mjs";
+import { createEffectRendering } from "./effect-rendering.mjs";
 import { createCombatStageAppearance } from "./combat-stage-appearance.mjs";
 import { attackAnimationElapsed } from "../server/attack.mjs";
 import { createCombatVfxCursor } from "./combat-vfx-events.mjs";
@@ -109,26 +110,69 @@ function poseFor(agent, time, deathAge) {
 }
 
 export function createCombatStage(canvas) {
-  const context = canvas.getContext("2d"), images = new Map(), imageRetryAt = new Map(), imagePending = new Set();
+  const context = canvas.getContext("2d"), images = new Map(), imageRetryAt = new Map(), imagePending = new Map();
   const appearanceWorld = createUnitAppearanceWorld();
-  const representativeArt = createCombatStageAppearance(image);
+  const representativeArt = createCombatStageAppearance(loadImage);
   const vfxCursor = createCombatVfxCursor(), detailVfx = createDetailCombatVfx();
+  const effectRendering = typeof OffscreenCanvas === "function" ?
+    createEffectRendering((width, height) => new OffscreenCanvas(width, height), 8 * 1024 * 1024) : null;
   let appearancePoses = new Map(), dodgePositions = new Map(), dodgeCues = [], cameraUnits = [], camera = {}, viewLayout;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const deathStarted = new Map(), readyPoses = new Map();
   let currentTrial, previousTime = null, seen = 0, effects = [], clock = 0, lastNow = 0;
+  let preparation = null;
+  const trialPreparations = new WeakMap();
+
+  function loadImage(source) {
+    if (imagePending.has(source)) return imagePending.get(source);
+    const previous = images.get(source);
+    if (previous?.complete && previous.naturalWidth) return Promise.resolve(previous);
+    const asset = globalThis.SpawnerAssets?.image?.() || new Image();
+    const pending = Promise.resolve(globalThis.SpawnerAssets?.load?.(source)).then(async url => {
+      asset.src = url || globalThis.SpawnerAssets?.source?.(source) || source;
+      await asset.decode();
+      if (!asset.complete || !asset.naturalWidth) throw new Error("Combat image is not ready: " + source);
+      images.set(source, asset);
+      imageRetryAt.delete(source);
+      return asset;
+    }).catch(error => {
+      imageRetryAt.set(source, Date.now() + 2000);
+      throw error;
+    }).finally(() => imagePending.delete(source));
+    imagePending.set(source, pending);
+    return pending;
+  }
 
   function image(source) {
     if (!source) return null;
     const previous = images.get(source);
     if (!imagePending.has(source) && (!previous || previous.complete && !previous.naturalWidth) && Date.now() >= (imageRetryAt.get(source) || 0)) {
-      const asset = globalThis.SpawnerAssets?.image?.() || new Image();
-      images.set(source, asset); imageRetryAt.set(source, Date.now() + 2000);
-      imagePending.add(source);
-      Promise.resolve(globalThis.SpawnerAssets?.load?.(source)).then(url => { asset.src = url || globalThis.SpawnerAssets?.source(source) || source; }, () => { imageRetryAt.set(source, Date.now() + 2000); }).finally(() => imagePending.delete(source));
+      loadImage(source).catch(() => {});
     }
     const asset = images.get(source);
     return asset?.complete && asset.naturalWidth ? asset : null;
+  }
+
+  function prepare(trial) {
+    if (!preparation) preparation = Promise.all([...new Set(["DesignAssets/Combat/grassland.webp", ...DETAIL_COMBAT_VFX_ASSETS])]
+      .map(loadImage)).catch(error => { preparation = null; throw error; });
+    if (!trial) return preparation;
+    if (trialPreparations.has(trial)) return trialPreparations.get(trial);
+    const pending = Promise.all([preparation, ...trial.agents.map(entry => {
+      const agent = stageAgent(entry), time = trial.time || 0;
+      if (!agent.species) return representativeArt.prepare(agent, time);
+      const pose = poseFor(agent, time, 0);
+      const clips = [CREATURE_IDLE_ANIMATIONS[agent.species], CREATURE_WALK_ANIMATIONS[agent.species],
+        CREATURE_RANGED_ANIMATIONS[agent.species], CREATURE_ATTACK_ANIMATIONS[agent.species],
+        CREATURE_HURT_ANIMATIONS[agent.species], CREATURE_DEATH_ANIMATIONS[agent.species],
+        agent.species === "spiny-back-beetle" ? BEETLE_SPRITE : null,
+        agent.species === "spiny-back-beetle" ? BEETLE_ATTACK_SPRITE : null,
+        agent.species === "spiny-back-beetle" ? beetleCorpse : null];
+      const source = pose?.animation.image || COMBAT_LAB_UNITS.find(unit => unit.key === agent.key)?.image || BEETLE_NEUTRAL_ASSET;
+      return Promise.all([...new Set([source, ...clips.filter(Boolean).map(clip => clip.image)])].map(loadImage));
+    })]).catch(error => { trialPreparations.delete(trial); throw error; });
+    trialPreparations.set(trial, pending);
+    return pending;
   }
 
   function background(width, height) {
@@ -172,6 +216,7 @@ export function createCombatStage(canvas) {
   }
 
   function readyPose(agent, requested, time) {
+    if (!agent.species) return { pose: requested, source: requested?.animation.image, asset: image(requested?.animation.image) };
     const ranged = unitRangedAppearance(agent);
     if (ranged) { image(ranged.idle.image); image(ranged.animation.image); if (ranged.hurt) image(ranged.hurt.image); image(unitRangedProjectile(agent).image); }
     if (ranged?.lifecycle) for (const clip of Object.values(ranged.lifecycle)) image(clip.image);
@@ -352,6 +397,7 @@ export function createCombatStage(canvas) {
 
   function clear() {
     appearanceWorld.clear(); vfxCursor.reset(); detailVfx.consume({ reset: true }, 0);
+    effectRendering?.clear();
     currentTrial = undefined; previousTime = null; seen = 0; effects = []; clock = 0; lastNow = 0;
     deathStarted.clear(); readyPoses.clear(); appearancePoses = new Map(); dodgePositions = new Map(); dodgeCues = []; camera = {};
   }
@@ -422,7 +468,7 @@ export function createCombatStage(canvas) {
         if (command.kind === "impact" && replacedDefenseIds.has(command.eventId)) continue;
         const key = command.kind === "flight" && flightKey(command.sourceId, command.targetId, command.launchedAt, command.arrivesAt);
         if (key) flightCommands.set(key, command);
-        if (drawDetailVfxCell(context, image(command.image), command)) {
+        if (drawDetailVfxCell(context, image(command.image), command, effectRendering)) {
           if (key) drawnFlights.add(key);
           else drawnImpacts.add(impactKey(command.sourceId, command.targetId, command.eventAt, command.amount));
         }
@@ -451,7 +497,7 @@ export function createCombatStage(canvas) {
         drawnImpacts.has(impactKey(event.attackerId, event.targetId, event.time, event.damage));
       effectArt(effect, points, width, height, covered);
     }
-    for (const command of defenseCommands) if (!drawDetailDefenseEffect(context, command, image(command.image), { reducedMotion: reducedMotion.matches }))
+    for (const command of defenseCommands) if (!drawDetailDefenseEffect(context, command, image(command.image), { reducedMotion: reducedMotion.matches, rendering: effectRendering }))
       drawDetailDefenseFallback(context, command);
     // Use actual HP changes, including drain (which has no history entry).
     const vitalCommands = detailVfx.vitalCommands(trial.agents.map(stageAgent),
@@ -465,5 +511,5 @@ export function createCombatStage(canvas) {
     context.restore();
   }
 
-  return { render, clear, appearanceStats: appearanceWorld.stats };
+  return { prepare, render, clear, appearanceStats: appearanceWorld.stats };
 }

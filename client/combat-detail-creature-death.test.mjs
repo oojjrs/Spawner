@@ -99,10 +99,10 @@ test('pause, reduced motion, resize, missing death art and ending continuation p
   view.agents.push({...view.agents[0],id:'reinforcement',dna:{pieces:Array(400).fill({})},combat:{...view.agents[0].combat,position:{x:8,y:4}}});
   const expanded=view.draw(1.5).find(d=>d.image===a.image),record=view.sandbox.state.corpses[0];
   const formation=combatViewLayout(view.canvas.clientWidth,view.canvas.clientHeight,[...view.agents.filter(agent=>agent.health>0),
-   {...record,id:record.agentId,combat:view.sandbox.combatWatch.formationMembers.get(String(record.agentId))}]);
+   {...record,id:record.agentId,combat:view.sandbox.combatWatch.formationMembers.get(String(record.agentId))}],view.sandbox.combatWatch.camera);
   const projected=formation.positions.get(String(record.agentId));
   assert.equal(expanded.matrix.x,projected.x);assert.equal(expanded.matrix.y,projected.y);
-  assert.ok(expanded.args[6]<recovered.args[6]);assert.notEqual(expanded.matrix.x,recovered.matrix.x);
+  assert.equal(expanded.args[6],recovered.args[6]);assert.equal(expanded.matrix.x,recovered.matrix.x);
   view.agents.pop();const restored=view.draw(1.5).find(d=>d.image===a.image);
   assert.deepEqual(restored.matrix,recovered.matrix);assert.equal(restored.args[6],recovered.args[6]);
   view.canvas.clientWidth/=2;view.canvas.clientHeight/=2;const smaller=view.draw(1.5).find(d=>d.image===a.image);

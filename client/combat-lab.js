@@ -11,6 +11,7 @@ const selected = { left: 0, right: 0 };
 const rules = { ...DEFAULT_SIMULATION_RULES };
 const audio = globalThis.SpawnerCombatAudio.createPlayer(), audioPlayback = globalThis.SpawnerCombatAudio.create();
 let trial, playing = false, lastFrame = 0, controlId = 0;
+let stageReady = false, stagePreparation = null, stageError = null;
 const main = document.querySelector("main");
 main.replaceChildren();
 function node(tag, text, className) {
@@ -120,6 +121,17 @@ function reset() {
     trial=createSimulationTrial(settings(1));
     elements.status.textContent="대결 준비";
   } catch(error) { trial=null;elements.status.textContent=settingError(error); }
+  stageReady = false;
+  stageError = null;
+  const preparingTrial = trial;
+  const preparation = combatStage.prepare(trial).then(() => {
+    if (trial === preparingTrial) stageReady = !!trial;
+  }, error => {
+    if (trial === preparingTrial) stageError = error;
+  }).finally(() => {
+    if (stagePreparation === preparation) { stagePreparation = null; render(); }
+  });
+  stagePreparation = preparation;
   render();
 }
 function render() {
@@ -141,10 +153,11 @@ function render() {
     } catch(error) { elements.status.textContent=settingError(error); }
   }
   const result=trial?.result(),ended=!!result?.reason;
-  for(const key of ["step","run","finish"])elements[key].disabled=!trial||ended;
+  for(const key of ["step","run","finish"])elements[key].disabled=!stageReady||!trial||ended;
   if(!trial){elements.phase.textContent="";return;}
   if(ended) {playing=false;elements.run.textContent="자동 전투";elements.status.textContent=(result.winner==="draw"?"무승부":result.winner==="left"?"왼쪽 승리":"오른쪽 승리")+" · "+({death:"사망",'time-limit':"시간 제한",'no-offense':"선공 유닛 없음",'event-limit':"사건 제한"}[result.reason]||result.reason);}
   else elements.status.textContent=playing?"전투 중":trial.time?"일시정지":"대결 준비";
+  if (stageError) elements.status.textContent = settingError(stageError);
   elements.phase.textContent=trial.time.toFixed(2)+"초 · "+trial.history.length+"개 사건";
 }
 reset();
@@ -152,6 +165,7 @@ function frame(now) {
   const elapsed=lastFrame?Math.min(.1,(now-lastFrame)/1000):0;lastFrame=now;
   if(playing&&trial){trial.advance(elapsed);render();}
   if (trial) for (const event of globalThis.SpawnerCombatAudio.update(audioPlayback, trial.agents, [], trial.time, trial.vfx)) audio.play(event.name, 1);
-  combatStage.render(trial, now, playing);requestAnimationFrame(frame);
+  if (stageReady) combatStage.render(trial, now, playing);
+  requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);

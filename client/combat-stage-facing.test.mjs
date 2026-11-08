@@ -5,7 +5,7 @@ import { createContext, runInContext } from "node:vm";
 import { createCombatStage } from "./combat-stage.mjs";
 import { createSimulationTrial } from "./combat-simulation.mjs";
 import { COMBAT_LAB_UNITS } from "./combat-lab.mjs";
-import { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS } from "./unit-animation.mjs";
+import { UNIT_ANIMATIONS, CREATURE_IDLE_ANIMATIONS, CREATURE_WALK_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS } from "./unit-animation.mjs";
 import { UNIT_IMAGE_BOUNDS } from "./unit-image-bounds.mjs";
 import { TALON_OWL_IDLE } from "./talon-owl-idle.mjs";
 import { BEETLE_SPRITE, BEETLE_ATTACK_SPRITE } from "../server/beetle-animation.mjs";
@@ -46,7 +46,7 @@ async function harness(run) {
 
 const creatureImages = new Set([TALON_OWL_IDLE.image, BEETLE_SPRITE.image, BEETLE_ATTACK_SPRITE.image,
   "DesignAssets/Animations/BeetleDeath/dead-v2.png",
-  ...[CREATURE_IDLE_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS]
+  ...[CREATURE_IDLE_ANIMATIONS, CREATURE_WALK_ANIMATIONS, CREATURE_ATTACK_ANIMATIONS, CREATURE_HURT_ANIMATIONS, CREATURE_DEATH_ANIMATIONS]
     .flatMap(animations => Object.values(animations).map(animation => animation.image))]);
 
 for (const first of ["left", "right", "simultaneous"]) test("23종 양 진영이 선공 " + first + "과 상태 변화에서도 안쪽을 본다", async () => {

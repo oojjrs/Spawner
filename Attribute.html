@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title></title>
-<link rel="stylesheet" href="client/attribute-editor.css"><link rel="stylesheet" href="client/dna-board.css"></head><body>
+<link rel="stylesheet" href="client/tooltips.css"><link rel="stylesheet" href="client/attribute-editor.css"><link rel="stylesheet" href="client/dna-board.css"></head><body>
 <header><svg class="brand" viewBox="0 0 40 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3C9 20 31 28 31 45M31 3C31 20 9 28 9 45"/><path d="m10 9 19 0M15 17h10M15 31h10M10 39h19" opacity=".45"/></svg><h1 data-copy="title"></h1><div class="attribute-view-tools"><button id="zoom-out"></button><button id="fit"></button><button id="zoom-in"></button></div></header>
 <main class="workspace"><aside class="inspector"><dl class="stats" id="stats"></dl><span class="section-label" data-copy="templates"></span><div class="template-row"><input id="template-name" type="text" maxlength="32"><button id="save-template"></button></div><div class="template-actions"><button id="export"></button><button id="import"></button></div><input id="file" type="file" accept="application/json,.json"><output id="file-status" class="file-status" role="status" hidden></output><div class="template-list" id="templates"></div><div class="sequence"><span class="section-label" data-copy="sequence"></span><output id="sequence"></output></div></aside>
 <section class="attribute-editor-host" id="editor"></section>
@@ -9,8 +9,3962 @@
 <script id="dna-model">
 (() => {
 const modules = Object.create(null);
+modules["server/dna-layouts.mjs"] = (() => {
+const DNA_LAYOUTS = [
+  {
+    "role": "worker",
+    "level": 1,
+    "filled": 36,
+    "total": 37,
+    "counts": {
+      "gather": 1,
+      "capacity": 7,
+      "movement": 1
+    },
+    "pieces": [
+      {
+        "gene": "gather",
+        "grade": 1,
+        "rotation": 0,
+        "q": 0,
+        "r": -3
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 0,
+        "q": -3,
+        "r": 2
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 1,
+        "q": -2,
+        "r": -1
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 2,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 3,
+        "q": 3,
+        "r": -1
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 4,
+        "q": -1,
+        "r": 0
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 5,
+        "q": 1,
+        "r": 1
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 5,
+        "q": -1,
+        "r": 3
+      },
+      {
+        "gene": "movement",
+        "grade": 1,
+        "rotation": 1,
+        "q": 1,
+        "r": -1
+      }
+    ]
+  },
+  {
+    "role": "worker",
+    "level": 2,
+    "filled": 60,
+    "total": 61,
+    "counts": {
+      "gather": 1,
+      "capacity": 9,
+      "harvestSpeed": 3,
+      "movement": 2
+    },
+    "pieces": [
+      {
+        "gene": "gather",
+        "grade": 1,
+        "rotation": 0,
+        "q": -3,
+        "r": 0
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 0,
+        "q": -4,
+        "r": 3
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 1,
+        "q": 1,
+        "r": 0
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 2,
+        "q": 0,
+        "r": -3
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 2,
+        "q": -2,
+        "r": 1
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 3,
+        "q": 3,
+        "r": -3
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 3,
+        "q": 0,
+        "r": 0
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 4,
+        "q": 3,
+        "r": 1
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 5,
+        "q": 1,
+        "r": -1
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 5,
+        "q": -1,
+        "r": 4
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 0,
+        "q": 0,
+        "r": -4
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 1,
+        "q": 4,
+        "r": -3
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 2,
+        "q": -1,
+        "r": -2
+      },
+      {
+        "gene": "movement",
+        "grade": 1,
+        "rotation": 0,
+        "q": -2,
+        "r": 3
+      },
+      {
+        "gene": "movement",
+        "grade": 1,
+        "rotation": 1,
+        "q": 1,
+        "r": 2
+      }
+    ]
+  },
+  {
+    "role": "worker",
+    "level": 3,
+    "filled": 88,
+    "total": 91,
+    "counts": {
+      "gather": 1,
+      "capacity": 10,
+      "harvestSpeed": 7,
+      "movement": 4
+    },
+    "pieces": [
+      {
+        "gene": "gather",
+        "grade": 1,
+        "rotation": 0,
+        "q": 0,
+        "r": -5
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 0,
+        "q": -5,
+        "r": 4
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 1,
+        "q": -4,
+        "r": -1
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 2,
+        "q": 1,
+        "r": -2
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 2,
+        "q": 2,
+        "r": 1
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 3,
+        "q": 5,
+        "r": -4
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 4,
+        "q": 1,
+        "r": 0
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 4,
+        "q": 2,
+        "r": 3
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 5,
+        "q": 3,
+        "r": -2
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 5,
+        "q": -2,
+        "r": 2
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 5,
+        "q": -1,
+        "r": 5
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 0,
+        "q": -4,
+        "r": 2
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 0,
+        "q": -4,
+        "r": 4
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 1,
+        "q": -2,
+        "r": -2
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 1,
+        "q": -4,
+        "r": 0
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 2,
+        "q": 0,
+        "r": -4
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 2,
+        "q": 2,
+        "r": -4
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 2,
+        "q": 5,
+        "r": -2
+      },
+      {
+        "gene": "movement",
+        "grade": 1,
+        "rotation": 0,
+        "q": -1,
+        "r": 0
+      },
+      {
+        "gene": "movement",
+        "grade": 1,
+        "rotation": 0,
+        "q": 4,
+        "r": 0
+      },
+      {
+        "gene": "movement",
+        "grade": 1,
+        "rotation": 0,
+        "q": 0,
+        "r": 3
+      },
+      {
+        "gene": "movement",
+        "grade": 1,
+        "rotation": 1,
+        "q": 3,
+        "r": -4
+      }
+    ]
+  },
+  {
+    "role": "worker",
+    "level": 4,
+    "filled": 124,
+    "total": 127,
+    "counts": {
+      "gather": 1,
+      "capacity": 13,
+      "harvestSpeed": 11,
+      "movement": 6
+    },
+    "pieces": [
+      {
+        "gene": "gather",
+        "grade": 1,
+        "rotation": 4,
+        "q": -6,
+        "r": 6
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 0,
+        "q": 3,
+        "r": -5
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 0,
+        "q": -3,
+        "r": -3
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 0,
+        "q": -6,
+        "r": 0
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 1,
+        "q": 2,
+        "r": -6
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 1,
+        "q": -2,
+        "r": 1
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 1,
+        "q": -1,
+        "r": 4
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 2,
+        "q": 6,
+        "r": -6
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 3,
+        "q": 6,
+        "r": -2
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 3,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 4,
+        "q": 1,
+        "r": -3
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 4,
+        "q": -5,
+        "r": 2
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 5,
+        "q": 2,
+        "r": 3
+      },
+      {
+        "gene": "capacity",
+        "grade": 1,
+        "rotation": 5,
+        "q": -1,
+        "r": 6
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 0,
+        "q": -6,
+        "r": 3
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 0,
+        "q": -5,
+        "r": 5
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 1,
+        "q": 2,
+        "r": -3
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 1,
+        "q": -3,
+        "r": 0
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 1,
+        "q": -2,
+        "r": 2
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 2,
+        "q": 1,
+        "r": -2
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 2,
+        "q": 5,
+        "r": -2
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 2,
+        "q": 6,
+        "r": -1
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 2,
+        "q": 3,
+        "r": 0
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 2,
+        "q": 6,
+        "r": 0
+      },
+      {
+        "gene": "harvestSpeed",
+        "grade": 1,
+        "rotation": 2,
+        "q": 1,
+        "r": 2
+      },
+      {
+        "gene": "movement",
+        "grade": 1,
+        "rotation": 1,
+        "q": -1,
+        "r": -4
+      },
+      {
+        "gene": "movement",
+        "grade": 1,
+        "rotation": 1,
+        "q": 5,
+        "r": -4
+      },
+      {
+        "gene": "movement",
+        "grade": 1,
+        "rotation": 1,
+        "q": -1,
+        "r": -2
+      },
+      {
+        "gene": "movement",
+        "grade": 1,
+        "rotation": 1,
+        "q": 3,
+        "r": -2
+      },
+      {
+        "gene": "movement",
+        "grade": 1,
+        "rotation": 1,
+        "q": -4,
+        "r": -1
+      },
+      {
+        "gene": "movement",
+        "grade": 1,
+        "rotation": 1,
+        "q": 1,
+        "r": 4
+      }
+    ]
+  },
+  {
+    "role": "melee",
+    "level": 2,
+    "filled": 60,
+    "total": 61,
+    "counts": {
+      "blade": 1,
+      "antenna": 1,
+      "power": 9,
+      "speed": 1
+    },
+    "pieces": [
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -1,
+        "r": -1
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 2,
+        "q": -2,
+        "r": -2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": -2,
+        "r": 2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": -2,
+        "r": 4
+      },
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": 0
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 2,
+        "q": 2,
+        "r": -2
+      },
+      {
+        "gene": "speed",
+        "grade": 2,
+        "rotation": 4,
+        "q": 1,
+        "r": -2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": 2,
+        "r": -4
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": 2,
+        "r": 1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": 4,
+        "r": -2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 2,
+        "q": 2,
+        "r": 2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 2,
+        "q": 1,
+        "r": 1
+      }
+    ]
+  },
+  {
+    "role": "melee",
+    "level": 3,
+    "filled": 91,
+    "total": 91,
+    "counts": {
+      "blade": 1,
+      "antenna": 1,
+      "power": 9,
+      "combo": 3,
+      "critical": 3
+    },
+    "pieces": [
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -1,
+        "r": -2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -3,
+        "r": 0
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -5,
+        "r": 2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": 3,
+        "r": -4
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": 3,
+        "r": -5
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": 2,
+        "r": -2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": 2,
+        "r": -3
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": 5,
+        "r": -3
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 4,
+        "q": 3,
+        "r": 2
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 2,
+        "q": 3,
+        "r": -1
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 2,
+        "q": 0,
+        "r": -1
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 2,
+        "q": -2,
+        "r": 1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -5,
+        "r": 5
+      },
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": -4,
+        "r": 4
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 1,
+        "q": 1,
+        "r": 3
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 3,
+        "q": -1,
+        "r": 3
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 1,
+        "q": 0,
+        "r": 1
+      }
+    ]
+  },
+  {
+    "role": "melee",
+    "level": 4,
+    "filled": 127,
+    "total": 127,
+    "counts": {
+      "blade": 1,
+      "antenna": 1,
+      "power": 9,
+      "combo": 5,
+      "critical": 3,
+      "criticalPower": 1,
+      "comboPower": 2
+    },
+    "pieces": [
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -1,
+        "r": -3
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -3,
+        "r": -1
+      },
+      {
+        "gene": "criticalPower",
+        "grade": 4,
+        "rotation": 0,
+        "q": -6,
+        "r": 0
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": 3,
+        "r": -5
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": 3,
+        "r": -6
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": 6,
+        "r": -6
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 2,
+        "q": -4,
+        "r": 2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": -6,
+        "r": 4
+      },
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": -6,
+        "r": 5
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 1,
+        "q": -1,
+        "r": 4
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 1,
+        "q": 1,
+        "r": 4
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 2,
+        "q": 2,
+        "r": -4
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 1,
+        "q": 3,
+        "r": -4
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 0,
+        "q": -1,
+        "r": -2
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 3,
+        "q": -2,
+        "r": 0
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 2,
+        "q": 6,
+        "r": -3
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": 1,
+        "r": 1
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 0,
+        "q": 5,
+        "r": -1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": 0,
+        "r": 0
+      },
+      {
+        "gene": "comboPower",
+        "grade": 4,
+        "rotation": 3,
+        "q": -1,
+        "r": 1
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 3,
+        "q": 2,
+        "r": 2
+      },
+      {
+        "gene": "comboPower",
+        "grade": 4,
+        "rotation": 0,
+        "q": 2,
+        "r": 3
+      }
+    ]
+  },
+  {
+    "role": "ranged",
+    "level": 2,
+    "filled": 61,
+    "total": 61,
+    "counts": {
+      "health": 4,
+      "secretion": 1,
+      "antenna": 1,
+      "rangedPower": 7
+    },
+    "pieces": [
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 4,
+        "q": 2,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 3,
+        "r": -4
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 3,
+        "q": 1,
+        "r": -2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -1,
+        "r": -3
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 4,
+        "q": -3,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 3,
+        "r": -2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": 1,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 2,
+        "r": 1
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 0,
+        "q": -1,
+        "r": 2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": -2,
+        "r": 0
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 2,
+        "q": 1,
+        "r": 0
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 3,
+        "q": -3,
+        "r": 4
+      },
+      {
+        "gene": "secretion",
+        "grade": 2,
+        "rotation": 0,
+        "q": -3,
+        "r": 3
+      }
+    ]
+  },
+  {
+    "role": "ranged",
+    "level": 3,
+    "filled": 91,
+    "total": 91,
+    "counts": {
+      "health": 2,
+      "secretion": 1,
+      "antenna": 1,
+      "rangedPower": 10,
+      "rangedSpeed": 1,
+      "area": 2,
+      "stun": 1
+    },
+    "pieces": [
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 1,
+        "q": 5,
+        "r": -5
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 4,
+        "q": 2,
+        "r": -2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": 0,
+        "r": -4
+      },
+      {
+        "gene": "rangedSpeed",
+        "grade": 2,
+        "rotation": 2,
+        "q": 0,
+        "r": -5
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 1,
+        "r": -3
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 4,
+        "q": 3,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 4,
+        "r": -1
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": 1,
+        "r": 2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 1,
+        "q": 2,
+        "r": 2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 3,
+        "q": 1,
+        "r": 3
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 0,
+        "q": 0,
+        "r": 0
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": 3
+      },
+      {
+        "gene": "area",
+        "grade": 3,
+        "rotation": 1,
+        "q": -2,
+        "r": -3
+      },
+      {
+        "gene": "stun",
+        "grade": 3,
+        "rotation": 4,
+        "q": -3,
+        "r": 1
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 3,
+        "q": -4,
+        "r": 2
+      },
+      {
+        "gene": "area",
+        "grade": 3,
+        "rotation": 1,
+        "q": -1,
+        "r": 0
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 3,
+        "q": -4,
+        "r": 5
+      },
+      {
+        "gene": "secretion",
+        "grade": 2,
+        "rotation": 0,
+        "q": -4,
+        "r": 4
+      }
+    ]
+  },
+  {
+    "role": "ranged",
+    "level": 4,
+    "filled": 127,
+    "total": 127,
+    "counts": {
+      "health": 2,
+      "secretion": 1,
+      "antenna": 1,
+      "rangedPower": 12,
+      "rangedSpeed": 3,
+      "area": 2,
+      "stun": 1,
+      "areaPower": 1,
+      "stunTime": 1
+    },
+    "pieces": [
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 1,
+        "q": 6,
+        "r": -6
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 4,
+        "q": 3,
+        "r": -3
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": 1,
+        "r": -5
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 3,
+        "q": 1,
+        "r": -4
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 1,
+        "q": 2,
+        "r": -5
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 4,
+        "q": -3,
+        "r": -2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 4,
+        "q": 4,
+        "r": -1
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": -3
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 2,
+        "q": -2,
+        "r": -2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 3,
+        "q": -5,
+        "r": 2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 0,
+        "q": 5,
+        "r": -2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 2,
+        "q": 5,
+        "r": -1
+      },
+      {
+        "gene": "area",
+        "grade": 3,
+        "rotation": 0,
+        "q": 3,
+        "r": 1
+      },
+      {
+        "gene": "secretion",
+        "grade": 2,
+        "rotation": 0,
+        "q": 1,
+        "r": -2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": -3,
+        "r": 0
+      },
+      {
+        "gene": "stunTime",
+        "grade": 4,
+        "rotation": 2,
+        "q": -4,
+        "r": 2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -6,
+        "r": 5
+      },
+      {
+        "gene": "areaPower",
+        "grade": 4,
+        "rotation": 2,
+        "q": 1,
+        "r": 0
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 5,
+        "q": -1,
+        "r": 1
+      },
+      {
+        "gene": "rangedSpeed",
+        "grade": 2,
+        "rotation": 1,
+        "q": -4,
+        "r": 5
+      },
+      {
+        "gene": "rangedSpeed",
+        "grade": 2,
+        "rotation": 4,
+        "q": -1,
+        "r": 4
+      },
+      {
+        "gene": "area",
+        "grade": 3,
+        "rotation": 1,
+        "q": 0,
+        "r": 4
+      },
+      {
+        "gene": "stun",
+        "grade": 3,
+        "rotation": 3,
+        "q": 2,
+        "r": 4
+      },
+      {
+        "gene": "rangedSpeed",
+        "grade": 2,
+        "rotation": 3,
+        "q": 2,
+        "r": 1
+      }
+    ]
+  },
+  {
+    "role": "all",
+    "level": 2,
+    "filled": 61,
+    "total": 61,
+    "counts": {
+      "health": 4,
+      "blade": 1,
+      "secretion": 1,
+      "antenna": 1,
+      "carapace": 1,
+      "power": 3,
+      "rangedPower": 2
+    },
+    "pieces": [
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 0,
+        "r": -4
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": 2,
+        "r": -4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 3,
+        "r": -4
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -2,
+        "r": 0
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 1,
+        "q": 0,
+        "r": -2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 1,
+        "q": -1,
+        "r": -1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -4,
+        "r": 2
+      },
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": -4,
+        "r": 3
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 2,
+        "q": -1,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 1,
+        "r": 3
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 2,
+        "q": 3,
+        "r": 1
+      },
+      {
+        "gene": "secretion",
+        "grade": 2,
+        "rotation": 2,
+        "q": 4,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 4,
+        "r": -2
+      }
+    ]
+  },
+  {
+    "role": "all",
+    "level": 3,
+    "filled": 91,
+    "total": 91,
+    "counts": {
+      "health": 4,
+      "blade": 1,
+      "secretion": 1,
+      "antenna": 1,
+      "carapace": 1,
+      "power": 3,
+      "rangedPower": 2,
+      "counter": 2,
+      "block": 3
+    },
+    "pieces": [
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 0,
+        "r": -5
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": -1,
+        "r": -4
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 2,
+        "q": -2,
+        "r": -3
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 4,
+        "q": -2,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -5,
+        "r": 1
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 3,
+        "q": 3,
+        "r": -3
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": 1,
+        "r": -3
+      },
+      {
+        "gene": "counter",
+        "grade": 3,
+        "rotation": 2,
+        "q": 5,
+        "r": -5
+      },
+      {
+        "gene": "counter",
+        "grade": 3,
+        "rotation": 4,
+        "q": 4,
+        "r": -1
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 4,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 4,
+        "q": 3,
+        "r": 2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": 1,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -3,
+        "r": 1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": -5,
+        "r": 3
+      },
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": -5,
+        "r": 4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 0,
+        "r": 2
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": 5
+      },
+      {
+        "gene": "secretion",
+        "grade": 2,
+        "rotation": 0,
+        "q": 0,
+        "r": 3
+      }
+    ]
+  },
+  {
+    "role": "all",
+    "level": 4,
+    "filled": 127,
+    "total": 127,
+    "counts": {
+      "health": 5,
+      "blade": 1,
+      "secretion": 1,
+      "antenna": 1,
+      "carapace": 1,
+      "power": 5,
+      "rangedPower": 2,
+      "counter": 2,
+      "block": 4,
+      "counterPower": 1,
+      "blockPower": 1
+    },
+    "pieces": [
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": 0,
+        "r": -6
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 2,
+        "q": -1,
+        "r": -5
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": -2,
+        "r": -3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 1,
+        "r": -6
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 3,
+        "q": 4,
+        "r": -4
+      },
+      {
+        "gene": "secretion",
+        "grade": 2,
+        "rotation": 2,
+        "q": 3,
+        "r": -5
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 5,
+        "r": -6
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -1,
+        "r": 0
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 3,
+        "q": -4,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -6,
+        "r": 0
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": -4,
+        "r": 4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -6,
+        "r": 5
+      },
+      {
+        "gene": "counter",
+        "grade": 3,
+        "rotation": 5,
+        "q": -3,
+        "r": 2
+      },
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": -4,
+        "r": 2
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 2,
+        "q": -1,
+        "r": 4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": -2,
+        "r": 5
+      },
+      {
+        "gene": "counter",
+        "grade": 3,
+        "rotation": 3,
+        "q": 1,
+        "r": 5
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 2,
+        "q": 2,
+        "r": 2
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 5,
+        "q": 2,
+        "r": 4
+      },
+      {
+        "gene": "counterPower",
+        "grade": 4,
+        "rotation": 5,
+        "q": 1,
+        "r": 2
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 0,
+        "q": 0,
+        "r": -1
+      },
+      {
+        "gene": "blockPower",
+        "grade": 4,
+        "rotation": 4,
+        "q": 4,
+        "r": -1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": 6,
+        "r": -3
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 2,
+        "q": 6,
+        "r": 0
+      }
+    ]
+  },
+  {
+    "role": "defense",
+    "level": 2,
+    "filled": 61,
+    "total": 61,
+    "counts": {
+      "health": 9,
+      "carapace": 5
+    },
+    "pieces": [
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 0,
+        "r": -4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -2,
+        "r": -2
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 1,
+        "q": -4,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 1,
+        "r": -4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 3,
+        "r": -4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": -1,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 1,
+        "r": -2
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 0,
+        "q": -4,
+        "r": 4
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 2,
+        "q": 0,
+        "r": 0
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 4,
+        "q": 0,
+        "r": 4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 2,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 2,
+        "r": -2
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 5,
+        "q": 1,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 4,
+        "r": -1
+      }
+    ]
+  },
+  {
+    "role": "defense",
+    "level": 3,
+    "filled": 91,
+    "total": 91,
+    "counts": {
+      "health": 12,
+      "carapace": 5,
+      "block": 3
+    },
+    "pieces": [
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 0,
+        "r": -5
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -1,
+        "r": -4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -3,
+        "r": -2
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 1,
+        "q": -5,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 2,
+        "r": -5
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 4,
+        "r": -5
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": -2,
+        "r": 0
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 4,
+        "q": -1,
+        "r": 1
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 3,
+        "q": 3,
+        "r": -3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -2,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -4,
+        "r": 3
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 2,
+        "q": -1,
+        "r": 2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -1,
+        "r": 3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 1,
+        "r": 4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 2,
+        "r": -2
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 1,
+        "q": 0,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 3,
+        "r": 2
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 3,
+        "q": 5,
+        "r": -1
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 5,
+        "q": 2,
+        "r": 1
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 1,
+        "q": 3,
+        "r": -2
+      }
+    ]
+  },
+  {
+    "role": "defense",
+    "level": 4,
+    "filled": 127,
+    "total": 127,
+    "counts": {
+      "health": 10,
+      "carapace": 3,
+      "block": 4,
+      "blockPower": 1,
+      "parry": 4,
+      "reflection": 1
+    },
+    "pieces": [
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 0,
+        "r": -6
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -1,
+        "r": -5
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 2,
+        "r": -6
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 4,
+        "r": -6
+      },
+      {
+        "gene": "parry",
+        "grade": 4,
+        "rotation": 1,
+        "q": 6,
+        "r": -6
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 6,
+        "r": -3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 6,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -3,
+        "r": -3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -5,
+        "r": -1
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 2,
+        "q": 2,
+        "r": -4
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 4,
+        "q": 1,
+        "r": -1
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 0,
+        "q": -1,
+        "r": -2
+      },
+      {
+        "gene": "reflection",
+        "grade": 4,
+        "rotation": 4,
+        "q": -2,
+        "r": 0
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 4,
+        "q": -5,
+        "r": 3
+      },
+      {
+        "gene": "parry",
+        "grade": 4,
+        "rotation": 3,
+        "q": -4,
+        "r": 6
+      },
+      {
+        "gene": "parry",
+        "grade": 4,
+        "rotation": 0,
+        "q": -4,
+        "r": 3
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 0,
+        "q": -3,
+        "r": 6
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": -1,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 3,
+        "r": -2
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 4,
+        "q": 4,
+        "r": 2
+      },
+      {
+        "gene": "blockPower",
+        "grade": 4,
+        "rotation": 3,
+        "q": 2,
+        "r": 2
+      },
+      {
+        "gene": "parry",
+        "grade": 4,
+        "rotation": 1,
+        "q": 3,
+        "r": 1
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 1,
+        "q": -1,
+        "r": 2
+      }
+    ]
+  },
+  {
+    "role": "hybrid",
+    "level": 2,
+    "filled": 61,
+    "total": 61,
+    "counts": {
+      "health": 4,
+      "blade": 1,
+      "secretion": 1,
+      "antenna": 1,
+      "power": 3,
+      "rangedPower": 3
+    },
+    "pieces": [
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 0,
+        "r": -4
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -2,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -3,
+        "r": -1
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 1,
+        "q": 2,
+        "r": -4
+      },
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": -1,
+        "r": -1
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": 1,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 3,
+        "r": -4
+      },
+      {
+        "gene": "secretion",
+        "grade": 2,
+        "rotation": 2,
+        "q": 4,
+        "r": -1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 2,
+        "q": 3,
+        "r": 1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": 0,
+        "r": 4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 1,
+        "r": 1
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 4,
+        "q": -3,
+        "r": 4
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": -4,
+        "r": 2
+      }
+    ]
+  },
+  {
+    "role": "hybrid",
+    "level": 3,
+    "filled": 91,
+    "total": 91,
+    "counts": {
+      "health": 1,
+      "blade": 1,
+      "secretion": 1,
+      "antenna": 1,
+      "power": 3,
+      "rangedPower": 3,
+      "bleed": 1,
+      "critical": 3,
+      "combo": 3
+    },
+    "pieces": [
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 5,
+        "q": -1,
+        "r": -3
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 2,
+        "q": 3,
+        "r": -5
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 1,
+        "q": 4,
+        "r": -5
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": 5,
+        "r": -5
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 5,
+        "q": -3,
+        "r": -1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": -1,
+        "r": -2
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 0,
+        "q": -5,
+        "r": 0
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 4,
+        "q": 1,
+        "r": 1
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 2,
+        "q": 5,
+        "r": -2
+      },
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": 2,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 3,
+        "r": 2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 3,
+        "q": 1,
+        "r": 4
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 5,
+        "q": -2,
+        "r": 5
+      },
+      {
+        "gene": "bleed",
+        "grade": 3,
+        "rotation": 0,
+        "q": -3,
+        "r": 0
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": 0
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 0,
+        "q": -5,
+        "r": 3
+      },
+      {
+        "gene": "secretion",
+        "grade": 2,
+        "rotation": 1,
+        "q": -3,
+        "r": 3
+      }
+    ]
+  },
+  {
+    "role": "hybrid",
+    "level": 4,
+    "filled": 127,
+    "total": 127,
+    "counts": {
+      "blade": 1,
+      "secretion": 1,
+      "antenna": 1,
+      "power": 4,
+      "rangedPower": 4,
+      "bleed": 1,
+      "critical": 3,
+      "combo": 4,
+      "bleedPower": 1,
+      "criticalPower": 2
+    },
+    "pieces": [
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 0,
+        "q": -1,
+        "r": -5
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 3,
+        "q": 2,
+        "r": -4
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 0,
+        "q": 2,
+        "r": -5
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": 3,
+        "r": -6
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": 6,
+        "r": -6
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 3,
+        "q": 4,
+        "r": -2
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 0,
+        "q": 5,
+        "r": -2
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 4,
+        "q": 4,
+        "r": 2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 4,
+        "q": 2,
+        "r": 2
+      },
+      {
+        "gene": "criticalPower",
+        "grade": 4,
+        "rotation": 0,
+        "q": -4,
+        "r": -2
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 0,
+        "q": -6,
+        "r": 0
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 5,
+        "q": 0,
+        "r": 5
+      },
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": 5
+      },
+      {
+        "gene": "criticalPower",
+        "grade": 4,
+        "rotation": 3,
+        "q": 1,
+        "r": 3
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": -1,
+        "r": 1
+      },
+      {
+        "gene": "bleed",
+        "grade": 3,
+        "rotation": 5,
+        "q": -4,
+        "r": 3
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 5,
+        "q": -1,
+        "r": 0
+      },
+      {
+        "gene": "combo",
+        "grade": 3,
+        "rotation": 1,
+        "q": 0,
+        "r": -3
+      },
+      {
+        "gene": "critical",
+        "grade": 3,
+        "rotation": 2,
+        "q": -2,
+        "r": 0
+      },
+      {
+        "gene": "bleedPower",
+        "grade": 4,
+        "rotation": 4,
+        "q": -6,
+        "r": 5
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 2,
+        "q": -4,
+        "r": 4
+      },
+      {
+        "gene": "secretion",
+        "grade": 2,
+        "rotation": 1,
+        "q": -3,
+        "r": 4
+      }
+    ]
+  },
+  {
+    "role": "meleeArmor",
+    "level": 2,
+    "filled": 61,
+    "total": 61,
+    "counts": {
+      "health": 4,
+      "blade": 1,
+      "antenna": 1,
+      "carapace": 1,
+      "power": 6
+    },
+    "pieces": [
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -1,
+        "r": -1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -3,
+        "r": 1
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 1,
+        "q": -4,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": -2,
+        "r": 3
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": 4
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": 2,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 4,
+        "r": -1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": 0
+      },
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": 1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": 1,
+        "r": -4
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 1,
+        "q": 4,
+        "r": -4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 1,
+        "r": -3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 2,
+        "r": -2
+      }
+    ]
+  },
+  {
+    "role": "meleeArmor",
+    "level": 3,
+    "filled": 91,
+    "total": 91,
+    "counts": {
+      "health": 7,
+      "blade": 1,
+      "antenna": 1,
+      "carapace": 1,
+      "power": 6,
+      "counter": 1,
+      "block": 2
+    },
+    "pieces": [
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 0,
+        "r": -5
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 4,
+        "q": -2,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -3,
+        "r": -2
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 1,
+        "q": -5,
+        "r": 0
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 2,
+        "q": -1,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 1,
+        "r": -3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 2,
+        "r": -5
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 4,
+        "r": -5
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": -3,
+        "r": 5
+      },
+      {
+        "gene": "counter",
+        "grade": 3,
+        "rotation": 2,
+        "q": -2,
+        "r": 2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 2,
+        "q": 1,
+        "r": -1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 5,
+        "q": 0,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 4,
+        "r": -3
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 2,
+        "q": 3,
+        "r": -2
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 4,
+        "q": 3,
+        "r": 2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 4,
+        "r": -1
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 0,
+        "q": -1,
+        "r": 2
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": 2,
+        "r": 3
+      },
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": 4
+      }
+    ]
+  },
+  {
+    "role": "meleeArmor",
+    "level": 4,
+    "filled": 127,
+    "total": 127,
+    "counts": {
+      "health": 3,
+      "blade": 1,
+      "antenna": 1,
+      "carapace": 1,
+      "power": 4,
+      "counter": 1,
+      "block": 3,
+      "counterPower": 1,
+      "lifesteal": 2,
+      "parry": 4
+    },
+    "pieces": [
+      {
+        "gene": "parry",
+        "grade": 4,
+        "rotation": 0,
+        "q": 0,
+        "r": -6
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 5,
+        "q": -3,
+        "r": -3
+      },
+      {
+        "gene": "parry",
+        "grade": 4,
+        "rotation": 3,
+        "q": 5,
+        "r": -4
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 4,
+        "q": 6,
+        "r": -3
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 5,
+        "q": -6,
+        "r": 1
+      },
+      {
+        "gene": "counter",
+        "grade": 3,
+        "rotation": 3,
+        "q": -3,
+        "r": -1
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": -3
+      },
+      {
+        "gene": "blade",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": -2
+      },
+      {
+        "gene": "parry",
+        "grade": 4,
+        "rotation": 0,
+        "q": 1,
+        "r": -3
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": 6,
+        "r": -2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -6,
+        "r": 2
+      },
+      {
+        "gene": "parry",
+        "grade": 4,
+        "rotation": 3,
+        "q": -4,
+        "r": 6
+      },
+      {
+        "gene": "lifesteal",
+        "grade": 4,
+        "rotation": 1,
+        "q": -1,
+        "r": 2
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 1,
+        "q": -2,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -2,
+        "r": 1
+      },
+      {
+        "gene": "lifesteal",
+        "grade": 4,
+        "rotation": 0,
+        "q": 0,
+        "r": 0
+      },
+      {
+        "gene": "power",
+        "grade": 2,
+        "rotation": 3,
+        "q": 4,
+        "r": 1
+      },
+      {
+        "gene": "counterPower",
+        "grade": 4,
+        "rotation": 5,
+        "q": 4,
+        "r": 2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 3,
+        "r": 2
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 2,
+        "q": 1,
+        "r": 3
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 5,
+        "q": -2,
+        "r": 6
+      }
+    ]
+  },
+  {
+    "role": "rangedArmor",
+    "level": 2,
+    "filled": 61,
+    "total": 61,
+    "counts": {
+      "health": 4,
+      "secretion": 1,
+      "antenna": 1,
+      "carapace": 1,
+      "rangedPower": 6
+    },
+    "pieces": [
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 1,
+        "q": 4,
+        "r": -4
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 4,
+        "q": 1,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 4,
+        "r": -2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 2,
+        "q": 4,
+        "r": 0
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": -1,
+        "r": 3
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 0,
+        "q": -3,
+        "r": 4
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": -1,
+        "r": -3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 0,
+        "r": -3
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 4,
+        "q": -4,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -3,
+        "r": 0
+      },
+      {
+        "gene": "secretion",
+        "grade": 2,
+        "rotation": 0,
+        "q": -1,
+        "r": 0
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -1,
+        "r": 1
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 1,
+        "q": -4,
+        "r": 2
+      }
+    ]
+  },
+  {
+    "role": "rangedArmor",
+    "level": 3,
+    "filled": 91,
+    "total": 91,
+    "counts": {
+      "health": 7,
+      "secretion": 1,
+      "antenna": 1,
+      "carapace": 1,
+      "rangedPower": 6,
+      "area": 2,
+      "block": 1
+    },
+    "pieces": [
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 5,
+        "r": -5
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": 1,
+        "r": -4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 1,
+        "r": -5
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 1,
+        "q": 5,
+        "r": -3
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 0,
+        "q": 2,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 5,
+        "r": -1
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": 0,
+        "r": 3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 1,
+        "r": 3
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 0,
+        "q": -2,
+        "r": 3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": -2,
+        "r": 4
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 1,
+        "q": -3,
+        "r": 2
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -5,
+        "r": 2
+      },
+      {
+        "gene": "secretion",
+        "grade": 2,
+        "rotation": 0,
+        "q": 1,
+        "r": -3
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 2,
+        "q": 1,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 1,
+        "r": -1
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 5,
+        "q": -1,
+        "r": 0
+      },
+      {
+        "gene": "area",
+        "grade": 3,
+        "rotation": 0,
+        "q": -2,
+        "r": -3
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 0,
+        "q": -5,
+        "r": 1
+      },
+      {
+        "gene": "area",
+        "grade": 3,
+        "rotation": 1,
+        "q": -3,
+        "r": -2
+      }
+    ]
+  },
+  {
+    "role": "rangedArmor",
+    "level": 4,
+    "filled": 127,
+    "total": 127,
+    "counts": {
+      "health": 7,
+      "secretion": 1,
+      "antenna": 1,
+      "carapace": 2,
+      "rangedPower": 8,
+      "rangedSpeed": 1,
+      "area": 2,
+      "block": 1,
+      "areaPower": 1,
+      "blockPower": 1
+    },
+    "pieces": [
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 1,
+        "q": 6,
+        "r": -6
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 4,
+        "q": 3,
+        "r": -3
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 2,
+        "q": 4,
+        "r": -6
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 4,
+        "q": 4,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 5,
+        "r": -2
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 5,
+        "q": 3,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 4,
+        "r": 1
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 3,
+        "q": 2,
+        "r": -4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": 0,
+        "r": -6
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 4,
+        "q": -4,
+        "r": -1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 1,
+        "q": -5,
+        "r": -1
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 4,
+        "q": 0,
+        "r": -1
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 3,
+        "q": 2,
+        "r": -1
+      },
+      {
+        "gene": "block",
+        "grade": 3,
+        "rotation": 3,
+        "q": 3,
+        "r": 0
+      },
+      {
+        "gene": "rangedSpeed",
+        "grade": 2,
+        "rotation": 3,
+        "q": 2,
+        "r": 0
+      },
+      {
+        "gene": "area",
+        "grade": 3,
+        "rotation": 0,
+        "q": -3,
+        "r": -2
+      },
+      {
+        "gene": "blockPower",
+        "grade": 4,
+        "rotation": 1,
+        "q": -1,
+        "r": -1
+      },
+      {
+        "gene": "secretion",
+        "grade": 2,
+        "rotation": 0,
+        "q": -5,
+        "r": 1
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": -6,
+        "r": 2
+      },
+      {
+        "gene": "area",
+        "grade": 3,
+        "rotation": 0,
+        "q": -6,
+        "r": 4
+      },
+      {
+        "gene": "rangedPower",
+        "grade": 2,
+        "rotation": 0,
+        "q": -4,
+        "r": 3
+      },
+      {
+        "gene": "carapace",
+        "grade": 2,
+        "rotation": 0,
+        "q": -5,
+        "r": 6
+      },
+      {
+        "gene": "antenna",
+        "grade": 2,
+        "rotation": 4,
+        "q": -1,
+        "r": 4
+      },
+      {
+        "gene": "health",
+        "grade": 1,
+        "rotation": 0,
+        "q": 0,
+        "r": 3
+      },
+      {
+        "gene": "areaPower",
+        "grade": 4,
+        "rotation": 1,
+        "q": 2,
+        "r": 2
+      }
+    ]
+  }
+];
+
+const DNA_SHAPE_PAIRS = [
+  {
+    "genes": [
+      "blade",
+      "power"
+    ],
+    "contacts": 8,
+    "pieces": [
+      {
+        "gene": "blade",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "power",
+        "rotation": 0,
+        "q": 0,
+        "r": 0
+      }
+    ]
+  },
+  {
+    "genes": [
+      "secretion",
+      "rangedPower"
+    ],
+    "contacts": 7,
+    "pieces": [
+      {
+        "gene": "secretion",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "rangedPower",
+        "rotation": 0,
+        "q": 2,
+        "r": 0
+      }
+    ]
+  },
+  {
+    "genes": [
+      "speed",
+      "rangedSpeed"
+    ],
+    "contacts": 9,
+    "pieces": [
+      {
+        "gene": "speed",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "rangedSpeed",
+        "rotation": 0,
+        "q": 1,
+        "r": 2
+      }
+    ]
+  },
+  {
+    "genes": [
+      "antenna",
+      "carapace"
+    ],
+    "contacts": 6,
+    "pieces": [
+      {
+        "gene": "antenna",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "carapace",
+        "rotation": 0,
+        "q": 0,
+        "r": 2
+      }
+    ]
+  },
+  {
+    "genes": [
+      "combo",
+      "comboPower"
+    ],
+    "contacts": 7,
+    "pieces": [
+      {
+        "gene": "combo",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "comboPower",
+        "rotation": 0,
+        "q": 1,
+        "r": 3
+      }
+    ]
+  },
+  {
+    "genes": [
+      "critical",
+      "criticalPower"
+    ],
+    "contacts": 7,
+    "pieces": [
+      {
+        "gene": "critical",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "criticalPower",
+        "rotation": 0,
+        "q": 1,
+        "r": 2
+      }
+    ]
+  },
+  {
+    "genes": [
+      "counter",
+      "counterPower"
+    ],
+    "contacts": 8,
+    "pieces": [
+      {
+        "gene": "counter",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "counterPower",
+        "rotation": 0,
+        "q": 0,
+        "r": 3
+      }
+    ]
+  },
+  {
+    "genes": [
+      "stun",
+      "stunTime"
+    ],
+    "contacts": 9,
+    "pieces": [
+      {
+        "gene": "stun",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "stunTime",
+        "rotation": 0,
+        "q": 1,
+        "r": 2
+      }
+    ]
+  },
+  {
+    "genes": [
+      "bleed",
+      "bleedPower"
+    ],
+    "contacts": 9,
+    "pieces": [
+      {
+        "gene": "bleed",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "bleedPower",
+        "rotation": 0,
+        "q": 1,
+        "r": 0
+      }
+    ]
+  },
+  {
+    "genes": [
+      "area",
+      "areaPower"
+    ],
+    "contacts": 10,
+    "pieces": [
+      {
+        "gene": "area",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "areaPower",
+        "rotation": 0,
+        "q": 1,
+        "r": 0
+      }
+    ]
+  },
+  {
+    "genes": [
+      "accuracy",
+      "penetration"
+    ],
+    "contacts": 11,
+    "pieces": [
+      {
+        "gene": "accuracy",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "penetration",
+        "rotation": 0,
+        "q": 1,
+        "r": 2
+      }
+    ]
+  },
+  {
+    "genes": [
+      "tenacity",
+      "reduction"
+    ],
+    "contacts": 11,
+    "pieces": [
+      {
+        "gene": "tenacity",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "reduction",
+        "rotation": 0,
+        "q": 1,
+        "r": 1
+      }
+    ]
+  },
+  {
+    "genes": [
+      "block",
+      "blockPower"
+    ],
+    "contacts": 11,
+    "pieces": [
+      {
+        "gene": "block",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "blockPower",
+        "rotation": 0,
+        "q": 1,
+        "r": 1
+      }
+    ]
+  },
+  {
+    "genes": [
+      "evasion",
+      "parry"
+    ],
+    "contacts": 11,
+    "pieces": [
+      {
+        "gene": "evasion",
+        "rotation": 0,
+        "q": 0,
+        "r": 1
+      },
+      {
+        "gene": "parry",
+        "rotation": 0,
+        "q": 1,
+        "r": 0
+      }
+    ]
+  },
+  {
+    "genes": [
+      "comboSpeed",
+      "focus"
+    ],
+    "contacts": 9,
+    "pieces": [
+      {
+        "gene": "comboSpeed",
+        "rotation": 0,
+        "q": 0,
+        "r": 0
+      },
+      {
+        "gene": "focus",
+        "rotation": 0,
+        "q": 1,
+        "r": 3
+      }
+    ]
+  },
+  {
+    "genes": [
+      "lifesteal",
+      "reflection"
+    ],
+    "contacts": 11,
+    "pieces": [
+      {
+        "gene": "lifesteal",
+        "rotation": 0,
+        "q": 0,
+        "r": 0
+      },
+      {
+        "gene": "reflection",
+        "rotation": 0,
+        "q": 1,
+        "r": 3
+      }
+    ]
+  }
+];
+
+return { DNA_LAYOUTS, DNA_SHAPE_PAIRS };
+})();
 modules["server/dna-board.mjs"] = (() => {
-const DNA_BOARD_SHAPES = Object.freeze({"capacity":[[0,0],[1,0],[2,0],[3,0]],"gather":[[0,0],[1,0],[2,0],[2,1]],"harvestSpeed":[[0,0],[1,0],[1,1],[2,1]],"health":[[0,0],[1,0],[0,1],[1,1]],"movement":[[0,0],[1,0],[-1,1],[0,-1]],"blade":[[0,0],[0,1],[1,-1],[2,-3],[2,-2]],"carapace":[[0,0],[0,1],[0,2],[1,0],[1,1]],"antenna":[[0,0],[0,1],[1,-1],[1,1],[2,-1]],"power":[[0,0],[0,1],[0,2],[1,-1],[1,0]],"speed":[[0,0],[1,-3],[1,-2],[1,-1],[2,-1]],"harvest":[[0,0],[0,1],[0,2],[1,-1],[2,-1]],"loadSpeed":[[0,0],[0,1],[0,2],[0,3],[0,4]],"secretion":[[0,0],[0,1],[1,-1],[1,0],[2,0]],"rangedPower":[[0,0],[0,1],[0,2],[1,0],[2,0]],"rangedSpeed":[[0,0],[0,1],[0,2],[1,0],[2,-1]],"legs":[[0,0],[0,1],[1,-1],[2,-2],[3,-4],[3,-3]],"combo":[[0,0],[0,1],[1,-1],[1,0],[1,1],[2,-1]],"critical":[[0,0],[0,2],[1,0],[1,1],[2,-1],[2,1]],"accuracy":[[0,0],[0,1],[1,-1],[1,1],[2,-1],[2,0]],"armor":[[0,0],[1,-2],[1,-1],[1,0],[1,1],[2,-1]],"evasion":[[0,0],[0,1],[0,2],[0,3],[1,-1],[1,2]],"block":[[0,0],[0,1],[0,2],[1,-1],[2,-1],[3,-1]],"counter":[[0,0],[0,1],[1,-2],[1,-1],[2,-3],[2,-1]],"tenacity":[[0,0],[0,1],[1,-2],[1,-1],[1,0],[2,-2]],"vision":[[0,0],[0,1],[1,0],[2,-1],[3,-2],[3,-1]],"stun":[[0,0],[0,1],[0,2],[0,4],[1,2],[1,3]],"bleed":[[0,0],[0,1],[1,-2],[1,-1],[1,1],[2,-1]],"area":[[0,0],[1,-3],[1,-2],[1,-1],[2,-1],[3,-1]],"comboPower":[[0,0],[0,1],[1,-1],[2,-2],[3,-3],[4,-4],[5,-6],[5,-5]],"criticalPower":[[0,0],[0,1],[0,2],[1,-1],[1,0],[1,1],[2,-1],[2,0]],"penetration":[[0,0],[0,2],[1,0],[1,1],[2,-2],[2,-1],[2,1],[3,-1]],"parry":[[0,0],[0,1],[1,-2],[1,-1],[1,0],[2,-4],[2,-3],[3,-4]],"blockPower":[[0,0],[0,1],[0,2],[1,-1],[2,-1],[3,-1],[4,-2],[4,-1]],"counterPower":[[0,0],[1,-5],[1,-4],[1,-3],[1,-2],[1,-1],[2,-1],[3,-1]],"reduction":[[0,0],[1,-2],[1,-1],[1,0],[1,1],[2,-2],[2,-1],[3,-3]],"stunTime":[[0,0],[0,1],[1,-2],[1,-1],[1,1],[2,-4],[2,-3],[3,-3]],"bleedPower":[[0,0],[0,1],[1,-2],[1,-1],[2,-4],[2,-3],[3,-6],[3,-5]],"areaPower":[[0,0],[0,1],[1,-2],[1,-1],[1,1],[2,-1],[2,0],[3,-2]],"lifesteal":[[0,0],[0,1],[0,3],[1,0],[1,1],[1,2],[1,3],[2,1]],"reflection":[[0,0],[1,-4],[1,-3],[1,-2],[1,-1],[2,-3],[2,-2],[3,-2]],"regeneration":[[0,0],[0,1],[0,2],[1,-1],[1,2],[2,-1],[2,0],[2,1]],"comboSpeed":[[0,0],[0,1],[0,2],[1,0],[1,1],[2,-1],[3,-2],[4,-3]],"focus":[[0,0],[0,1],[1,-2],[1,-1],[1,1],[1,2],[2,-3],[2,2]]});
+const { DNA_LAYOUTS } = modules["server/dna-layouts.mjs"];
+
+const DNA_BOARD_SHAPES = Object.freeze({"capacity":[[0,0],[0,1],[1,-1],[1,1]],"gather":[[0,0],[1,0],[2,0],[-1,1]],"harvestSpeed":[[0,0],[1,0],[1,1],[2,1]],"health":[[0,0],[1,0],[0,1],[1,1]],"movement":[[0,0],[-1,0],[0,1],[1,-1]],"blade":[[0,0],[0,1],[1,1],[2,1],[3,0]],"carapace":[[0,0],[1,0],[2,0],[3,-1],[3,0]],"antenna":[[0,0],[1,-1],[1,0],[2,-1],[2,0]],"power":[[0,0],[1,0],[1,1],[2,0],[2,1]],"speed":[[0,0],[0,1],[1,-1],[1,0],[2,0]],"harvest":[[0,0],[0,1],[0,2],[1,-1],[2,-1]],"loadSpeed":[[0,0],[0,1],[0,2],[0,3],[0,4]],"secretion":[[0,0],[1,-1],[1,0],[1,1],[2,0]],"rangedPower":[[0,0],[0,2],[1,0],[1,1],[1,2]],"rangedSpeed":[[0,0],[1,-2],[1,0],[2,-2],[2,-1]],"legs":[[0,0],[0,1],[1,-1],[2,-2],[3,-4],[3,-3]],"combo":[[0,0],[0,1],[0,2],[1,-1],[1,0],[1,1]],"critical":[[0,0],[0,1],[0,2],[1,-1],[1,0],[2,-1]],"accuracy":[[0,0],[0,1],[0,2],[1,-1],[1,0],[2,0]],"armor":[[0,0],[1,-2],[1,-1],[1,0],[1,1],[2,-1]],"evasion":[[0,0],[0,1],[0,2],[1,0],[1,2],[2,2]],"block":[[0,0],[0,1],[0,2],[1,-1],[1,2],[2,-1]],"counter":[[0,0],[0,1],[1,-1],[1,0],[1,1],[2,-1]],"tenacity":[[0,0],[0,1],[0,2],[1,-1],[1,1],[2,-1]],"vision":[[0,0],[1,0],[2,0],[3,0]],"stun":[[0,0],[0,1],[0,2],[1,-1],[1,0],[1,2]],"bleed":[[0,0],[0,1],[0,2],[1,1],[1,2],[2,2]],"area":[[0,0],[0,1],[0,2],[1,0],[1,1],[2,0]],"comboPower":[[0,0],[1,-3],[1,-2],[1,-1],[1,0],[2,-3],[2,-2],[2,-1]],"criticalPower":[[0,0],[0,1],[1,-1],[1,0],[1,1],[2,-2],[2,-1],[2,0]],"penetration":[[0,0],[0,1],[1,-2],[1,0],[1,1],[2,-2],[2,-1],[2,0]],"parry":[[0,0],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]],"blockPower":[[0,0],[0,1],[1,0],[1,1],[1,2],[2,-1],[2,0],[2,1]],"counterPower":[[0,0],[1,0],[2,-2],[2,-1],[2,0],[3,-3],[3,-2],[3,-1]],"reduction":[[0,0],[0,2],[1,0],[1,1],[1,2],[2,-1],[2,0],[2,1]],"stunTime":[[0,0],[1,-2],[1,-1],[1,0],[1,1],[2,-2],[2,-1],[2,0]],"bleedPower":[[0,0],[0,1],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]],"areaPower":[[0,0],[0,3],[1,0],[1,2],[1,3],[2,0],[2,1],[2,2]],"lifesteal":[[0,0],[0,1],[0,2],[0,3],[1,0],[1,1],[1,2],[2,2]],"reflection":[[0,0],[1,-3],[1,-2],[1,0],[2,-3],[2,-2],[2,-1],[2,0]],"regeneration":[[0,0],[0,1],[0,2],[1,0]],"comboSpeed":[[0,0],[0,1],[0,2],[0,3],[1,0],[1,1],[1,2],[2,1]],"focus":[[0,0],[1,-3],[1,-1],[1,0],[2,-3],[2,-2],[2,-1],[2,0]]});
 
 function dnaBoardCells(radius) {
   const cells = [];
@@ -58,6 +4012,15 @@ function dnaBoardTrace(pieces, level, lookup, radius) {
 }
 
 function dnaBoardPack(pieces, level, radius) {
+  const counts = new Map();
+  for (const piece of pieces) { const key = piece.gene + ':' + piece.grade; counts.set(key, (counts.get(key) || 0) + 1); }
+  for (const layout of DNA_LAYOUTS) {
+    if (layout.level !== level || layout.pieces.length !== pieces.length) continue;
+    const available = new Map();
+    for (const piece of layout.pieces) { const key = piece.gene + ':' + piece.grade; if (!available.has(key)) available.set(key, []); available.get(key).push(piece); }
+    if (available.size !== counts.size || [...counts].some(([key, count]) => available.get(key)?.length !== count)) continue;
+    return pieces.map(piece => { const slot = available.get(piece.gene + ':' + piece.grade).pop(); return { gene: piece.gene, grade: piece.grade, rotation: slot.rotation, q: slot.q, r: slot.r }; });
+  }
   const cells = dnaBoardCells(radius(level)), positions = cells.slice().sort((a, b) =>
     Math.max(Math.abs(a.q), Math.abs(a.r), Math.abs(a.q + a.r)) - Math.max(Math.abs(b.q), Math.abs(b.r), Math.abs(b.q + b.r)) || a.r - b.r || a.q - b.q);
   const keys = new Set(cells.map(cell => cell.q + ',' + cell.r));
@@ -82,6 +4045,7 @@ function dnaBoardPack(pieces, level, radius) {
   }
   return place(0) ? result : null;
 }
+
 return { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoardPack };
 })();
 modules["server/tribe-dna-stats.mjs"] = (() => {
@@ -118,25 +4082,25 @@ const { tribeDnaStats } = modules["server/tribe-dna-stats.mjs"];
 
 const DNA_COMBAT_RULES = Object.freeze({
   basicPower: 1,
-  powerCurve: "linear", powerBase: 2, powerGain: 2, powerKnee: 2,
+  powerCurve: "linear", powerBase: 2, powerGain: 4, powerKnee: 2,
   rangedPowerBase: 1.4, rangedPowerGain: 1.4, rangedPowerKnee: 2,
   rangedAttackRateBase: .5, rangedHasteCap: 7, rangedHasteKnee: 70,
-  healthBase: 10, healthPerPoint: 10, armorPerPoint: 1, armorCap: 1, armorKnee: 100,
+  healthBase: 10, healthPerPoint: 10, armorPerPoint: 10, armorCap: 1, armorKnee: 100,
   flatPenPerPoint: 1, percentPenCap: .8, percentPenKnee: 4,
   attackRateBase: .5, hasteCap: 7, hasteKnee: 70, maxActionRate: 4,
-  windupBase: .3, focusPerPoint: .02, windupMinimum: .08,
+  windupBase: .3, focusPerPoint: .04, windupMinimum: .08,
   hitGapBase: .12, hitSpeedPerPoint: .005, hitGapMinimum: .06, recovery: 0,
   defensePreparation: 0, reactionCooldown: 0, counterCooldown: 0,
   followupBase: .5, comboPerPoint: .05, followupCap: 1,
-  critCap: .75, critKnee: 18.75, critMultiplierBase: 1.5, critMultiplierCap: 4, critPowerKnee: 25,
+  critCap: .9, critKnee: 9, critMultiplierBase: 2, critMultiplierCap: 5, critPowerKnee: 20,
   accuracyCap: .6, accuracyKnee: 20, dodgeCap: .6, dodgeKnee: 20,
-  parryCap: .6, parryKnee: 15, blockCap: .75, blockKnee: 15,
-  blockReductionBase: .5, blockReductionCap: .5, blockPowerKnee: 10,
+  parryCap: .6, parryKnee: 15, blockCap: .9, blockKnee: 10.8,
+  blockReductionBase: .5, blockReductionCap: .9, blockPowerKnee: 8,
   counterCap: 1, counterKnee: 10, counterMultiplierBase: 1, counterMultiplierCap: 2,
   counterPowerKnee: 10, counterWindup: .12,
-  tenacityCap: .75, tenacityKnee: 15, stunCap: .3, stunKnee: 10,
-  stunDurationBase: .25, stunDurationPerPoint: .05, stunDurationCap: 1, stunImmunity: 2,
-  drainCap: .2, drainKnee: 20, jitter: .2
+  tenacityCap: .75, tenacityKnee: 15, stunCap: .6, stunKnee: 10,
+  stunDurationBase: .35, stunDurationPerPoint: .1, stunDurationCap: 1.5, stunImmunity: 2,
+  drainCap: .4, drainKnee: 10, jitter: .2
 });
 
 function dnaCombatStats(counts, weights, inputRules, tribe) {
@@ -166,16 +4130,16 @@ function dnaCombatStats(counts, weights, inputRules, tribe) {
     accuracy: attack ? 100 * capped(n.accuracy || 0, rules.accuracyCap, rules.accuracyKnee) : 0,
     penetration: attack ? rules.flatPenPerPoint * (n.penetration || 0) : 0,
     ...(n.percentPen ? { armorPenetration: capped(n.percentPen, rules.percentPenCap, rules.percentPenKnee) } : {}),
-    blockPower: 100 * DNA_COMBAT_RULES.blockReductionBase,
-    counter: attack ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,
-    counterPower: attack ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,
+    blockPower: 100 * Math.min(rules.blockReductionCap, rules.blockReductionBase + .05 * (c.blockPower || 0)),
+    counter: (attack || c.carapace) ? 100 * capped(n.counter || 0, rules.counterCap, rules.counterKnee) : 0,
+    counterPower: (attack || c.carapace) ? 100 * (rules.counterMultiplierBase + capped(n.counterPower || 0, rules.counterMultiplierCap - rules.counterMultiplierBase, rules.counterPowerKnee)) : 0,
     tenacity: 100 * capped(n.tenacity || 0, rules.tenacityCap, rules.tenacityKnee), reduction: Math.min(40, 2 * (n.reduction || 0)),
     stun: attack ? 100 * capped(n.stun || 0, rules.stunCap, rules.stunKnee) : 0,
     stunTime: attack && n.stun ? Math.min(rules.stunDurationCap, rules.stunDurationBase + rules.stunDurationPerPoint * (n.stunTime || 0)) : 0,
     bleed: attack ? Math.min(75, 5 * (n.bleed || 0)) : 0, bleedPower: attack && n.bleed ? 1 + (n.bleedPower || 0) : 0,
-    area: attack ? Math.min(5, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(75, 35 + 5 * (n.areaPower || 0)) : 0,
+    area: attack ? Math.min(8, n.area || 0) : 0, areaPower: attack && n.area ? Math.min(100, 60 + 10 * (n.areaPower || 0)) : 0,
     lifesteal: attack ? 100 * capped(n.lifesteal || 0, rules.drainCap, rules.drainKnee) : 0,
-    reflection: Math.min(30, 3 * (n.reflection || 0)), regeneration: .1 * (n.regeneration || 0),
+    reflection: Math.min(75, 5 * (n.reflection || 0)), regeneration: .1 * (n.regeneration || 0),
     comboSpeed: attack ? Math.max(rules.hitGapMinimum, rules.hitGapBase - rules.hitSpeedPerPoint * (n.comboSpeed || 0)) : rules.hitGapBase,
     focus: attack ? Math.max(rules.windupMinimum, rules.windupBase - rules.focusPerPoint * (n.focus || 0)) : rules.windupBase };
 }
@@ -193,13 +4157,18 @@ const ATTRIBUTE_DNA = (() => {
   const alphabet = 'ATGC';
   const genes = definitions.map((entry,index) => entry && ({id:entry[0],category:entry[1],price:entry[2]/2,code:alphabet[Math.floor(index/16)]+alphabet[Math.floor(index/4)%4]+alphabet[index%4],color:colors[entry[1]]})).filter(Boolean);
   const lookup = new Map(genes.map(gene=>[gene.id,gene]));
-  const specification=[{"gene":"gather","grade":1,"order":1},{"gene":"health","grade":1,"order":3},{"gene":"blade","grade":2,"order":0},{"gene":"power","grade":2,"order":1},{"gene":"speed","grade":2,"order":2},{"gene":"capacity","grade":1,"order":0},{"gene":"movement","grade":1,"order":4},{"gene":"antenna","grade":2,"order":8},{"gene":"carapace","grade":2,"order":9},{"gene":"combo","grade":3,"order":0},{"gene":"legs","grade":3,"order":10,"retired":true},{"gene":"armor","grade":3,"order":11,"retired":true},{"gene":"vision","grade":3,"order":10},{"gene":"harvest","grade":2,"order":10,"retired":true},{"gene":"harvestSpeed","grade":1,"order":2},{"gene":"loadSpeed","grade":2,"order":11},{"gene":"accuracy","grade":3,"order":6},{"gene":"tenacity","grade":3,"order":7},{"gene":"block","grade":3,"order":8},{"gene":"evasion","grade":3,"order":9},{"gene":"parry","grade":4,"order":21},{"gene":"counter","grade":3,"order":2},{"gene":"critical","grade":3,"order":1},{"gene":"criticalPower","grade":4,"order":24},{"gene":"penetration","grade":4,"order":25},{"gene":"comboPower","grade":4,"order":26},{"gene":"blockPower","grade":4,"order":27},{"gene":"counterPower","grade":4,"order":28},{"gene":"reduction","grade":4,"order":29},{"gene":"stun","grade":3,"order":3},{"gene":"stunTime","grade":4,"order":31},{"gene":"bleed","grade":3,"order":4},{"gene":"bleedPower","grade":4,"order":33},{"gene":"area","grade":3,"order":5},{"gene":"areaPower","grade":4,"order":35},{"gene":"lifesteal","grade":4,"order":36},{"gene":"reflection","grade":4,"order":37},{"gene":"regeneration","grade":4,"order":38},{"gene":"comboSpeed","grade":4,"order":39},{"gene":"focus","grade":4,"order":40},{"gene":"secretion","grade":2,"order":3},{"gene":"rangedPower","grade":2,"order":4},{"gene":"rangedSpeed","grade":2,"order":5}];
+  const specification=[{"gene":"gather","grade":1,"order":1},{"gene":"health","grade":1,"order":3},{"gene":"blade","grade":2,"order":0},{"gene":"power","grade":2,"order":1},{"gene":"speed","grade":2,"order":2},{"gene":"capacity","grade":1,"order":0},{"gene":"movement","grade":1,"order":4},{"gene":"antenna","grade":2,"order":8},{"gene":"carapace","grade":2,"order":9},{"gene":"combo","grade":3,"order":0},{"gene":"legs","grade":3,"order":10,"retired":true},{"gene":"armor","grade":3,"order":11,"retired":true},{"gene":"vision","grade":1,"order":6},{"gene":"harvest","grade":2,"order":10,"retired":true},{"gene":"harvestSpeed","grade":1,"order":2},{"gene":"loadSpeed","grade":2,"order":11,"retired":true},{"gene":"accuracy","grade":3,"order":6},{"gene":"tenacity","grade":3,"order":7},{"gene":"block","grade":3,"order":8},{"gene":"evasion","grade":3,"order":9},{"gene":"parry","grade":4,"order":21},{"gene":"counter","grade":3,"order":2},{"gene":"critical","grade":3,"order":1},{"gene":"criticalPower","grade":4,"order":24},{"gene":"penetration","grade":4,"order":25},{"gene":"comboPower","grade":4,"order":26},{"gene":"blockPower","grade":4,"order":27},{"gene":"counterPower","grade":4,"order":28},{"gene":"reduction","grade":4,"order":29},{"gene":"stun","grade":3,"order":3},{"gene":"stunTime","grade":4,"order":31},{"gene":"bleed","grade":3,"order":4},{"gene":"bleedPower","grade":4,"order":33},{"gene":"area","grade":3,"order":5},{"gene":"areaPower","grade":4,"order":35},{"gene":"lifesteal","grade":4,"order":36},{"gene":"reflection","grade":4,"order":37},{"gene":"regeneration","grade":1,"order":5},{"gene":"comboSpeed","grade":4,"order":39},{"gene":"focus","grade":4,"order":40},{"gene":"secretion","grade":2,"order":3},{"gene":"rangedPower","grade":2,"order":4},{"gene":"rangedSpeed","grade":2,"order":5}];
   for(const entry of specification){const gene=lookup.get(entry.gene);gene.grade=entry.grade;gene.order=entry.order;if(entry.retired)gene.retired=true;gene.price=piecePrice({gene:gene.id,grade:gene.grade});}
   const catalog=genes.filter(gene=>!gene.retired).sort((a,b)=>a.grade-b.grade||a.order-b.order);
 
-  for (const [index, gene] of genes.entries()) { gene.cells = DNA_BOARD_SHAPES[gene.id]; gene.fillColor = `hsl(${(index * 137.508 + 24) % 360} 48% 64%)`; }
-
-  for(const [id,color] of Object.entries({capacity:'#71cdb9',gather:'#d8ba77',harvestSpeed:'#df8d96',health:'#db9d7e',movement:'#a6a1dd'}))lookup.get(id).fillColor=color;
+  const palette={
+    melee:{blade:'#ee7777',power:'#e57161',speed:'#eca689',combo:'#ee8d72',comboPower:'#eba39e',comboSpeed:'#dc865b',critical:'#e75f6f',criticalPower:'#f18e8f',penetration:'#e28969',bleed:'#dd4d4b',bleedPower:'#e69789',lifesteal:'#e48b9a'},
+    ranged:{secretion:'#82d4ed',rangedPower:'#6bb1eb',rangedSpeed:'#5ebade',area:'#89b0ec',areaPower:'#a2c7eb',stun:'#78d0de',stunTime:'#9ddcec'},
+    defense:{carapace:'#e3bc68',armor:'#e2cc98',legs:'#d7cb89',evasion:'#e3d58c',parry:'#e0ca6c',block:'#e4c87c',blockPower:'#e7d8ab',counter:'#e5b46c',counterPower:'#eacc9a',tenacity:'#ceb564',reduction:'#dbce9e',reflection:'#ebe199'},
+    gathering:{gather:'#80e0a8',capacity:'#76d0a6',harvestSpeed:'#92e3a4',harvest:'#a4dfb9',loadSpeed:'#90d0b9'},
+    other:{health:'#a3aab2',movement:'#b4bec5',vision:'#c9ced4',regeneration:'#aebcb8',antenna:'#c7ccd1',focus:'#b3b8c1',accuracy:'#9fabb2'}
+  };
+  for(const [group,entries] of Object.entries(palette))for(const [id,color] of Object.entries(entries)){const gene=lookup.get(id);gene.cells=DNA_BOARD_SHAPES[id];gene.group=group;gene.fillColor=color;}
 
   const boardRadii=[3,4,5,6];
   function boardRadius(level){return Number.isInteger(level)&&level>=1&&level<=4?boardRadii[level-1]:Infinity;}
@@ -222,24 +4191,27 @@ const ATTRIBUTE_DNA = (() => {
     return {...dnaCombatStats(c,n,undefined,tribe),gatherCount:c.gather||0,antennaCount:c.antenna||0,
       capacity:gather?c.gather+(n.capacity||0):0,harvest:gather?1:0,
       harvestTime:gather?4/(1+.1*(n.harvestSpeed||0)):0,movement:.25*profile.base.movement+.04*(n.movement||0)*(profile.growth.movement??1),
-      vision:Math.min(12,1+(c.antenna||0)+.5*(n.vision||0)),scale:1+.01*pieces.length,roaming:!!n.antenna,
-      loadSpeed:gather?Math.min(100,75+5*(n.loadSpeed||0)):0};
+      vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion||c.carapace),
+      loadSpeed:gather?75:0};
   }
   function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,q:piece.q,r:piece.r};}
   function validate(value){
-    if(!value||![1,2,3,4,5].includes(value.version)||!Array.isArray(value.pieces)||value.pieces.length>2048||!Number.isFinite(value.budget)||value.budget<0||value.budget>999999999)return null;
+    if(!value||![1,2,3,4,5,6].includes(value.version)||!Array.isArray(value.pieces)||value.pieces.length>2048||!Number.isFinite(value.budget)||value.budget<0||value.budget>999999999)return null;
     let level=value.level===undefined?1:value.level;
     if(!Number.isInteger(level)||level<1||level>4)return null;
     let pieces=[];
     for(const input of value.pieces){
-      const gene=lookup.get(input?.gene),grade=input?.grade===undefined?(value.version>=3?gene?.grade:1):input.grade;
+      const gene=lookup.get(input?.gene);
+      let grade=input?.grade===undefined?(value.version>=3?gene?.grade:1):input.grade;
       if(!gene||!Number.isInteger(grade)||grade<1||grade>4||!Number.isInteger(input.rotation)||input.rotation<0||input.rotation>5)return null;
-      if(value.version===5){
-        if(input.shape!==undefined||input.cells!==undefined)return null;
+      if(value.version<6&&gene.id==='loadSpeed')continue;
+      if(value.version<6&&['vision','regeneration'].includes(gene.id))grade=1;
+      if(value.version>=5&&(input.shape!==undefined||input.cells!==undefined))return null;
+      if(value.version===6){
         pieces.push({gene:gene.id,grade,rotation:input.rotation,q:input.q,r:input.r});
       }else pieces.push({gene:gene.id,grade,rotation:input.rotation});
     }
-    if(value.version<5){
+    if(value.version<6){
       const source=pieces;
       pieces=pack(source,level);
       while(!pieces&&level<4&&value.level===undefined)pieces=pack(source,++level);
@@ -256,7 +4228,7 @@ const ATTRIBUTE_DNA = (() => {
       }
     }
     if(!trace(pieces).valid)return null;
-    return {version:5,pieces,budget:Math.floor(value.budget),level};
+    return {version:6,pieces,budget:Math.floor(value.budget),level};
   }
 
   return {genes,catalog,lookup,trace,boardCells,pieceCells:dnaPieceCells,pack,piecePrice,price,cost,counts,weights,stats,validate,clonePiece,key,boardRadius,inside};
@@ -264,7 +4236,44 @@ const ATTRIBUTE_DNA = (() => {
 
 return { ATTRIBUTE_DNA };
 })();
+modules["client/dna-audio.mjs"] = (() => {
+function createDnaAudio() {
+  const sounds = new Map();
+  if (typeof Audio === "function") {
+    for (const action of ["place", "remove", "rotate"]) {
+      const audio = new Audio("DesignAssets/Audio/DnaV2/dna-" + action + ".wav");
+      audio.preload = "auto";
+      audio.volume = 0.65;
+      sounds.set(action, audio);
+    }
+  }
+  function stop() {
+    for (const audio of sounds.values()) audio.pause();
+  }
+  function visibility() {
+    if (document.hidden) stop();
+  }
+  document.addEventListener?.("visibilitychange", visibility);
+  return {
+    play(action) {
+      const audio = sounds.get(action);
+      if (!audio || document.hidden) return;
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+    },
+    destroy() {
+      stop();
+      document.removeEventListener?.("visibilitychange", visibility);
+      sounds.clear();
+    }
+  };
+}
+
+return { createDnaAudio };
+})();
 modules["client/dna-editor.mjs"] = (() => {
+const { createDnaAudio } = modules["client/dna-audio.mjs"];
+
 function dnaDesignStats(M,pieces,tribe) {
   const stats=M.stats(pieces,tribe),base={...M.stats([],tribe)},organPieces=pieces.filter(piece=>M.lookup.get(piece.gene)?.category==='organ'),organStats=M.stats(organPieces,tribe);
   for(const key of ['harvestTime','comboSpeed','focus'])if(stats[key]>0)base[key]=organStats[key];
@@ -278,11 +4287,11 @@ function renderDnaDesignStats(container, stats, base, showScale) {
     ["capacity", "운반", "개"], ["harvest", "채집량", "개"], ["harvestTime", "채집 시간", "초"], ["movement", "이동", "칸/초"],
     ["vision", "시야", "칸"], ["comboPower", "연격숙련", "%"], ["critical", "치명", "%"], ["criticalPower", "치명위력", "%"],
     ["accuracy", "정밀", "%"], ["penetration", "예리함", ""], ["blockPower", "방어숙련", "%"], ["counter", "반격", "%"],
-    ["counterPower", "반격위력", "%"], ["tenacity", "강인함", "%"], ["reduction", "완충", "%"], ["loadSpeed", "하중적응", "%"],
+    ["counterPower", "반격위력", "%"], ["tenacity", "강인함", "%"], ["reduction", "완충", "%"],
     ["stun", "기절", "%"], ["stunTime", "기절연장", "초"], ["bleed", "출혈", "%"],
     ["bleedPower", "출혈강도", ""], ["area", "범위공격", "칸"], ["areaPower", "확산위력", "%"], ["lifesteal", "흡혈", "%"],
     ["reflection", "반사", "%"], ["regeneration", "재생", "/초"], ["comboSpeed", "연타 간격", "초"], ["focus", "공격 준비", "초"],
-    ["scale", "크기", "배"], ["melee", "칼날", ""], ["ranged", "분비기관", ""], ["roaming", "안테나", ""]
+    ["scale", "크기", "배"], ["melee", "칼날", ""], ["ranged", "분비기관", ""], ["hunting", "안테나", ""]
   ];
   const format = value => String(Number(value.toFixed(3)));
   const fragment = document.createDocumentFragment();
@@ -370,22 +4379,24 @@ function renderDnaComposition(container,M,dna) {
   fragment.append(list);container.replaceChildren(fragment);
 }
 
-function createDnaEditor(container,dnaModel,onChange) {
+function createDnaEditor(container,dnaModel,onChange,onAction) {
   const M=dnaModel,names=dnaGeneNames,root=document.createElement('section');root.className='dna-editor';root.tabIndex=0;
   root.innerHTML='<div class="dna-board"><canvas aria-label="DNA 편집 영역" tabindex="0"></canvas><div class="dna-legend" hidden></div><div class="dna-tools"></div><details class="dna-guide"><summary>조작 안내</summary><dl><dt>DNA 선택</dt><dd><kbd>휠 클릭</kbd></dd><dt>회전</dt><dd><kbd>휠 위·아래 / Q·E</kbd></dd><dt>배치</dt><dd><kbd>좌클릭 / Enter</kbd></dd><dt>되돌리기</dt><dd><kbd>Ctrl+Z</kbd></dd></dl></details><output class="dna-status dna-organ-limit" aria-live="polite" hidden></output><output class="dna-cost">비용 <strong></strong></output></div><aside class="dna-catalog"><div class="dna-filters"></div><div class="dna-list"></div></aside><div class="dna-dock"><div class="dna-rotation"></div><button class="dna-add" type="button">조각 추가</button></div>';
   container.replaceChildren(root);
   const find=selector=>root.querySelector(selector),canvas=find('canvas'),board=find('.dna-board'),context=canvas.getContext('2d');
+  const sound=typeof onAction==='function'?null:createDnaAudio(),playSound=onAction||sound.play;
   const view={x:0,y:0,scale:1,width:0,height:0};
-  let tribe, pieces=[],level=1,budget=0,readOnly=false,contextSet=false,filter='all',selected=M.catalog[0].id,rotation=0,anchor={q:0,r:0},moving=-1,history=[],future=[],model=M.trace([],1),preview,frame=0,destroyed=false,pointer=null,hover=null,keyboardPlacement=false,warningGene=null,boardFull=false,offset={q:0,r:0};
+  let tribe, pieces=[],level=1,budget=0,readOnly=false,contextSet=false,filter='all',selected=M.catalog[0].id,rotation=0,anchor={q:0,r:0},moving=-1,history=[],future=[],model=M.trace([],1),preview,frame=0,destroyed=false,pointer=null,hover=null,keyboardPlacement=false,warningGene=null,boardFull=false,offset=null,cursor=null;
   function button(parent,label,glyph,action){const element=document.createElement('button');element.type='button';element.title=label;element.setAttribute('aria-label',label);element.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+glyph+'"/></svg>';element.onclick=action;parent.append(element);return element;}
   const undoButton=button(find('.dna-tools'),'되돌리기','M9 5 4 10l5 5M4 10h9a6 6 0 0 1 0 12',undo);
   const redoButton=button(find('.dna-tools'),'다시 실행','m15 5 5 5-5 5m5-5h-9a6 6 0 0 0 0 12',redo);
   const removeButton=button(find('.dna-tools'),'조각 삭제','M5 7h14M9 7V4h6v3M7 7l1 14h8l1-14M10 10v7m4-7v7',remove);
-  const clearButton=button(find('.dna-tools'),'초기화','M5 10a8 8 0 1 1 1 8M5 4v6h6',()=>{if(readOnly||!pieces.length)return;checkpoint();pieces=[];moving=-1;changed();});
+  const clearButton=button(find('.dna-tools'),'초기화','M5 10a8 8 0 1 1 1 8M5 4v6h6',()=>{if(readOnly||!pieces.length)return;checkpoint();pieces=[];moving=-1;changed('remove');});
   const leftButton=button(find('.dna-rotation'),'왼쪽 회전','m8 3-5 5 5 5M3 8h10a7 7 0 1 1-6 11',()=>rotate(-1));
   const rightButton=button(find('.dna-rotation'),'오른쪽 회전','m16 3 5 5-5 5m5-5H11a7 7 0 1 0 6 11',()=>rotate(1));
   const addButton=find('.dna-add');addButton.onclick=commit;
-  function getDesign(){return {version:5,pieces:pieces.map(M.clonePiece),level,budget};}
+  for(const element of [undoButton,redoButton,removeButton,clearButton,leftButton,rightButton,addButton])element.dataset.dnaSound='true';
+  function getDesign(){return {version:6,pieces:pieces.map(M.clonePiece),level,budget};}
   function snapshot(){return pieces.map(M.clonePiece);}
   function checkpoint(){history.push(snapshot());if(history.length>200)history.shift();future=[];}
   function clearHistory(){history=[];future=[];renderControls();}
@@ -404,14 +4415,14 @@ function createDnaEditor(container,dnaModel,onChange) {
     return false;
   }
   function state(){model=M.trace(pieces,level);preview=candidate();boardFull=model.valid&&!hasPlacement();renderCatalog();renderLegend();renderControls();requestDraw();}
-  function changed(){state();if(typeof onChange==='function')onChange(getDesign());}
+  function changed(action){state();if(typeof onChange==='function')onChange(getDesign());playSound(action);}
   function renderLegend(){
     const legend=find('.dna-legend'),counts=M.counts(pieces),stats=M.stats(pieces,tribe);
-    const keys={blade:'meleePower',secretion:'rangedPower',antenna:'vision',gather:'harvest',carapace:'armor',legs:'evasion',power:'meleePower',speed:'meleeSpeed',combo:'hits',harvestSpeed:'harvestTime'};
+    const keys={blade:'meleePower',secretion:'rangedPower',gather:'harvest',carapace:'armor',legs:'evasion',power:'meleePower',speed:'meleeSpeed',combo:'hits',harvestSpeed:'harvestTime'};
     const units={hits:'회',meleeSpeed:'/초',rangedSpeed:'/초',capacity:'개',harvest:'개',harvestTime:'초',movement:'칸/초',vision:'칸',stunTime:'초',area:'칸',regeneration:'/초',comboSpeed:'초',focus:'초'};
-    const percentages=['parry','block','evasion','comboPower','critical','criticalPower','accuracy','blockPower','counter','counterPower','tenacity','reduction','loadSpeed','stun','bleed','areaPower','lifesteal','reflection'];
+    const percentages=['parry','block','evasion','comboPower','critical','criticalPower','accuracy','blockPower','counter','counterPower','tenacity','reduction','stun','bleed','areaPower','lifesteal','reflection'];
     const labels={meleePower:'근접 공격력',rangedPower:'원거리 공격력',meleeSpeed:'근접 공속',rangedSpeed:'원거리 공속',hits:'공격횟수',harvestTime:'채집 시간',movement:'이동',armor:'방어',evasion:'회피'};
-    const unlocks={gather:'채집 기능 해금',blade:'근접 선제 공격 기능 해금',secretion:'원거리 선제 공격 기능 해금',antenna:'자유 이동 기능 해금'};
+    const unlocks={gather:'채집 기능 해금',blade:'근접 선제 공격 기능 해금',secretion:'원거리 선제 공격 기능 해금'};
     legend.replaceChildren();
     for(const gene of [...M.catalog,...M.genes.filter(gene=>gene.retired)]){
       if(!counts[gene.id])continue;
@@ -423,22 +4434,24 @@ function createDnaEditor(container,dnaModel,onChange) {
       const difference=Number((stats[key]-without[key]).toFixed(3)),unit=units[key]||(percentages.includes(key)?'%':'');
       const effect=unlocks[gene.id]||((labels[key]||names[gene.id])+' '+(difference>=0?'+':'')+difference+unit);
       const delta=document.createElement('span');delta.className='dna-legend-delta';delta.textContent=' ('+effect+')';
-      item.append(svg,count,delta);legend.append(item);
+      item.append(svg,count);if(gene.id!=='antenna')item.append(delta);legend.append(item);
     }
     legend.hidden=!legend.children.length;
   }
   function renderCatalog(){
     warningGene=null;
+    const available=new Set(M.catalog.filter(gene=>gene.grade<=level).map(gene=>gene.group));
+    if(filter!=='all'&&!available.has(filter))filter='all';
     const filters=find('.dna-filters');filters.replaceChildren();
-    for(const [type,label] of [['all','전체'],['organ','기관'],['action','기능'],['stat','스탯']]){const item=document.createElement('button');item.type='button';item.textContent=label;item.dataset.category=type;item.setAttribute('aria-pressed',String(filter===type));item.onclick=()=>{filter=type;renderCatalog();root.focus({preventScroll:true});};filters.append(item);}
+    for(const [type,label,id] of [['all','전체'],['gathering','채집','gather'],['other','기타','health'],['melee','근거리','blade'],['ranged','원거리','secretion'],['defense','방어','carapace']]){const item=document.createElement('button');item.type='button';item.textContent=label;item.dataset.category=type;item.disabled=type==='all'?available.size===0:!available.has(type);if(id)item.style.setProperty('--dna-filter-color',M.lookup.get(id).fillColor);item.setAttribute('aria-pressed',String(filter===type));item.onclick=()=>{if(item.disabled)return;filter=type;renderCatalog();root.focus({preventScroll:true});};filters.append(item);}
     const list=find('.dna-list');list.replaceChildren();
     for(const gene of M.catalog){
-      if(gene.grade>level||(filter!=='all'&&gene.category!==filter))continue;
+      if(gene.grade>level||(filter!=='all'&&gene.group!==filter))continue;
       const item=document.createElement('button');item.type='button';item.className='dna-gene';item.setAttribute('aria-label',names[gene.id]);item.title=names[gene.id];item.dataset.gene=gene.id;item.dataset.category=gene.category;const blocked=organBlocked(gene.id);item.disabled=readOnly;item.setAttribute('aria-disabled',String(readOnly||blocked));item.dataset.blocked=String(blocked);item.setAttribute('aria-pressed',String(selected===gene.id));item.style.setProperty('--dna-gene-color',gene.fillColor);
       const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 44 38');svg.innerHTML=dnaGeneShapeSvg(M,gene);
       const name=document.createElement('strong');name.textContent=names[gene.id];const cost=document.createElement('span');cost.className='dna-gene-cost';cost.textContent=String(M.piecePrice({gene:gene.id,grade:gene.grade}));cost.title='진화포인트';item.append(svg,name,cost);
       item.addEventListener('pointerenter',()=>{if(blocked){warningGene=gene.id;renderControls();}});item.addEventListener('pointerleave',()=>{warningGene=null;renderControls();});item.addEventListener('focus',()=>{if(blocked){warningGene=gene.id;renderControls();}});item.addEventListener('blur',()=>{warningGene=null;renderControls();});
-      item.onclick=()=>{if(item.disabled)return;if(blocked){warningGene=gene.id;renderControls();return;}moving=-1;offset={q:0,r:0};selected=gene.id;rotation=0;state();root.focus({preventScroll:true});};list.append(item);
+      item.onclick=()=>{if(item.disabled)return;if(blocked){warningGene=gene.id;renderControls();return;}moving=-1;offset=null;selected=gene.id;rotation=0;state();root.focus({preventScroll:true});};list.append(item);
     }
   }
   function renderControls(){
@@ -467,14 +4480,15 @@ function createDnaEditor(container,dnaModel,onChange) {
     for(const cell of M.boardCells(level)){polygon(dnaHex(screen(cell),32*view.scale));context.fillStyle='#102922';context.fill();context.strokeStyle='#3a574c';context.lineWidth=1;context.stroke();}
     const hovered=hover?model.occupied.get(M.key(hover))?.index:-1;
     for(let index=0;index<pieces.length;index++)drawPiece(pieces[index],index===moving?.18:.88,M.lookup.get(pieces[index].gene).fillColor,index===hovered&&moving<0);
-    if(!readOnly&&preview.piece&&(hover||moving>=0||keyboardPlacement)&&(moving>=0||hovered===undefined||hovered===-1))drawPiece(preview.piece,preview.valid?.58:.42,preview.valid?M.lookup.get(selected).fillColor:'#ed727e',true);
+    if(!readOnly&&preview.piece&&(hover||moving>=0||keyboardPlacement)&&(moving>=0||offset||hovered===undefined||hovered===-1))drawPiece(preview.piece,preview.valid?.58:.42,preview.valid?M.lookup.get(selected).fillColor:'#ed727e',true);
   }
-  function commit(){if(readOnly||!selected)return;const proposed=candidate();if(!proposed.valid){keyboardPlacement=true;preview=proposed;renderControls();requestDraw();return;}if(moving>=0&&JSON.stringify(proposed.pieces[moving])===JSON.stringify(pieces[moving])){cancel();return;}checkpoint();pieces=proposed.pieces;moving=-1;offset={q:0,r:0};if(M.lookup.get(selected).category==='organ'){selected=null;rotation=0;keyboardPlacement=false;}changed();}
-  function cancel(){moving=-1;pointer=null;selected=null;rotation=0;hover=null;keyboardPlacement=false;offset={q:0,r:0};state();}
-  function rotate(delta){if(readOnly||!selected)return;rotation=(rotation+delta+6)%6;preview=candidate();renderControls();requestDraw();}
-  function undo(){if(readOnly)return;if(moving>=0){cancel();return;}if(!history.length)return;future.push(snapshot());pieces=history.pop();changed();}
-  function redo(){if(readOnly||!future.length)return;history.push(snapshot());pieces=future.pop();moving=-1;changed();}
-  function remove(){if(readOnly||!pieces.length)return;checkpoint();pieces.splice(moving>=0?moving:pieces.length-1,1);moving=-1;offset={q:0,r:0};changed();}
+  function commit(){if(readOnly||!selected)return;const proposed=candidate();if(!proposed.valid){keyboardPlacement=!hover;preview=proposed;renderControls();requestDraw();return;}if(moving>=0&&JSON.stringify(proposed.pieces[moving])===JSON.stringify(pieces[moving])){cancel();return;}checkpoint();pieces=proposed.pieces;moving=-1;offset=null;if(M.lookup.get(selected).category==='organ'){selected=null;rotation=0;keyboardPlacement=false;}changed('place');}
+  function cancel(){moving=-1;pointer=null;selected=null;rotation=0;hover=null;keyboardPlacement=false;offset=null;state();}
+  function center(){const points=M.pieceCells({gene:selected,rotation,q:0,r:0}).map(dnaWorld);return {x:(Math.min(...points.map(p=>p.x))+Math.max(...points.map(p=>p.x)))/2,y:(Math.min(...points.map(p=>p.y))+Math.max(...points.map(p=>p.y)))/2};}
+  function rotate(delta){if(readOnly||!selected)return;rotation=(rotation+delta+6)%6;playSound('rotate');if(offset){offset=center();if(cursor&&hover&&!keyboardPlacement){pointAt(cursor);return;}}preview=candidate();renderControls();requestDraw();}
+  function undo(){if(readOnly)return;if(moving>=0){cancel();return;}if(!history.length)return;future.push(snapshot());const next=history.pop(),action=next.length<pieces.length?'remove':'place';pieces=next;changed(action);}
+  function redo(){if(readOnly||!future.length)return;history.push(snapshot());const next=future.pop(),action=next.length<pieces.length?'remove':'place';pieces=next;moving=-1;changed(action);}
+  function remove(){if(readOnly||!pieces.length)return;checkpoint();pieces.splice(moving>=0?moving:pieces.length-1,1);moving=-1;offset=null;changed('remove');}
   function cycleGene(){if(readOnly)return;const items=[...find('.dna-list').children].filter(item=>!item.disabled&&item.dataset.blocked!=='true');if(!items.length)return;const index=items.findIndex(item=>item.dataset.gene===selected);items[(index+1)%items.length].onclick();}
   function fit(){
     if(!view.width||!view.height)return;Object.assign(view,dnaEditorViewport(M,level,null,null,view.width,view.height));
@@ -483,16 +4497,16 @@ function createDnaEditor(container,dnaModel,onChange) {
   }
   function zoom(factor){if(!Number.isFinite(factor)||factor<=0||!view.width||!view.height)return;const next=Math.max(.005,Math.min(2.7,view.scale*factor)),ratio=next/view.scale,x=view.width/2,y=view.height/2;view.x=x-(x-view.x)*ratio;view.y=y-(y-view.y)*ratio;view.scale=next;requestDraw();}
   function resize(){const bounds=board.getBoundingClientRect();if(!bounds.width||!bounds.height||(view.width===bounds.width&&view.height===bounds.height))return;view.width=bounds.width;view.height=bounds.height;canvas.width=Math.ceil(bounds.width*devicePixelRatio);canvas.height=Math.ceil(bounds.height*devicePixelRatio);fit();}
-  function eventCell(event){
-    const bounds=canvas.getBoundingClientRect(),x=(event.clientX-bounds.left-view.x)/view.scale,y=(event.clientY-bounds.top-view.y)/view.scale,r=y/51,q=x/(34*Math.sqrt(3))-r/2;
+  function eventCell(event,shift){
+    const bounds=canvas.getBoundingClientRect(),x=(event.clientX-bounds.left-view.x)/view.scale-(shift?.x||0),y=(event.clientY-bounds.top-view.y)/view.scale-(shift?.y||0),r=y/51,q=x/(34*Math.sqrt(3))-r/2;
     let rq=Math.round(q),rr=Math.round(r),rs=Math.round(-q-r);const dq=Math.abs(rq-q),dr=Math.abs(rr-r),ds=Math.abs(rs+q+r);if(dq>dr&&dq>ds)rq=-rr-rs;else if(dr>ds)rr=-rq-rs;
     return {q:rq,r:rr};
   }
-  function pointAt(event){keyboardPlacement=false;hover=eventCell(event);anchor={q:hover.q-offset.q,r:hover.r-offset.r};preview=candidate();renderControls();requestDraw();}
+  function pointAt(event){cursor={clientX:event.clientX,clientY:event.clientY};keyboardPlacement=false;hover=eventCell(event);anchor=eventCell(event,offset);preview=candidate();renderControls();requestDraw();}
   canvas.addEventListener('pointerdown',event=>{
     if(event.button===1){event.preventDefault();event.stopPropagation();cycleGene();return;}if(event.button!==0||pointer||readOnly)return;
     root.focus({preventScroll:true});const point=eventCell(event),hit=model.occupied.get(M.key(point))?.index;let picked=false;
-    if(moving<0&&hit!==undefined){moving=hit;selected=pieces[hit].gene;rotation=pieces[hit].rotation;offset={q:point.q-pieces[hit].q,r:point.r-pieces[hit].r};picked=true;renderCatalog();}
+    if(moving<0&&hit!==undefined){moving=hit;selected=pieces[hit].gene;rotation=pieces[hit].rotation;offset=center();picked=true;renderCatalog();}
     pointer={id:event.pointerId,x:event.clientX,y:event.clientY,picked,moved:false};pointAt(event);canvas.setPointerCapture(event.pointerId);
   });
   canvas.addEventListener('pointermove',event=>{if(readOnly)return;if(pointer&&pointer.id===event.pointerId&&Math.hypot(event.clientX-pointer.x,event.clientY-pointer.y)>4)pointer.moved=true;pointAt(event);});
@@ -513,14 +4527,14 @@ function createDnaEditor(container,dnaModel,onChange) {
   });
   const observer=new ResizeObserver(resize);observer.observe(board);state();resize();
   return {
-    load(design,locked){const value=M.validate(design);if(!value)return false;pieces=value.pieces.map(M.clonePiece);if(!contextSet){level=value.level;budget=value.budget;}readOnly=locked===true;history=pieces.map((_,index)=>pieces.slice(0,index).map(M.clonePiece));future=[];moving=-1;hover=null;keyboardPlacement=false;anchor={q:0,r:0};offset={q:0,r:0};selected=M.catalog.find(gene=>gene.grade<=level&&!(gene.category==='organ'&&pieces.some(piece=>piece.gene===gene.id)))?.id||M.catalog[0].id;rotation=0;state();fit();return true;},
+    load(design,locked){const value=M.validate(design);if(!value)return false;pieces=value.pieces.map(M.clonePiece);if(!contextSet){level=value.level;budget=value.budget;}readOnly=locked===true;history=pieces.map((_,index)=>pieces.slice(0,index).map(M.clonePiece));future=[];moving=-1;hover=null;keyboardPlacement=false;anchor={q:0,r:0};offset=null;selected=M.catalog.find(gene=>gene.grade<=level&&!(gene.category==='organ'&&pieces.some(piece=>piece.gene===gene.id)))?.id||M.catalog[0].id;rotation=0;state();fit();return true;},
     context(nextLevel,nextBudget,locked,nextTribe){const previousLevel=level,previousBudget=budget,previousReadOnly=readOnly,previousTribe=tribe;tribe=nextTribe;if(Number.isInteger(nextLevel)&&nextLevel>=1&&nextLevel<=4)level=nextLevel;if(Number.isFinite(nextBudget)&&nextBudget>=0)budget=Math.floor(nextBudget);contextSet=true;readOnly=locked===true;if(previousLevel===level&&previousBudget===budget&&previousReadOnly===readOnly&&previousTribe===tribe)return;if(readOnly||M.lookup.get(selected)?.grade>level){moving=-1;selected=M.catalog[0].id;}state();if(previousLevel!==level)fit();},
     getDesign,clearHistory,fit,zoom,
-    destroy(){destroyed=true;observer.disconnect();if(frame)cancelAnimationFrame(frame);root.remove();}
+    destroy(){destroyed=true;sound?.destroy();observer.disconnect();if(frame)cancelAnimationFrame(frame);root.remove();}
   };
 }
 
-return { dnaDesignStats, renderDnaDesignStats, dnaEditorViewport, renderDnaComposition, createDnaEditor };
+return { dnaDesignStats, renderDnaDesignStats, dnaGeneNames, dnaEditorViewport, dnaGeneShapeSvg, renderDnaComposition, createDnaEditor };
 })();
 modules["client/dna-starter-designs.mjs"] = (() => {
 const DNA_STARTER_DESIGNS = [
@@ -528,27 +4542,13 @@ const DNA_STARTER_DESIGNS = [
     "id": "gatherer",
     "name": "기본 채집꾼",
     "design": {
-      "version": 5,
+      "version": 6,
       "pieces": [
         {
           "gene": "gather",
           "grade": 1,
           "rotation": 0,
           "q": 0,
-          "r": 0
-        },
-        {
-          "gene": "capacity",
-          "grade": 1,
-          "rotation": 0,
-          "q": 0,
-          "r": -1
-        },
-        {
-          "gene": "harvestSpeed",
-          "grade": 1,
-          "rotation": 1,
-          "q": -1,
           "r": 0
         }
       ],
@@ -560,49 +4560,21 @@ const DNA_STARTER_DESIGNS = [
     "id": "melee",
     "name": "기본 근접 전사",
     "design": {
-      "version": 5,
+      "version": 6,
       "pieces": [
         {
           "gene": "blade",
           "grade": 2,
-          "rotation": 3,
+          "rotation": 0,
           "q": 0,
           "r": 0
         },
         {
           "gene": "antenna",
           "grade": 2,
-          "rotation": 5,
-          "q": 1,
-          "r": -1
-        },
-        {
-          "gene": "power",
-          "grade": 2,
-          "rotation": 3,
-          "q": -1,
-          "r": 0
-        },
-        {
-          "gene": "health",
-          "grade": 1,
-          "rotation": 4,
+          "rotation": 0,
           "q": 0,
-          "r": -2
-        },
-        {
-          "gene": "movement",
-          "grade": 1,
-          "rotation": 2,
-          "q": 3,
-          "r": -3
-        },
-        {
-          "gene": "carapace",
-          "grade": 2,
-          "rotation": 1,
-          "q": 1,
-          "r": 0
+          "r": -1
         }
       ],
       "budget": 0,
@@ -613,7 +4585,7 @@ const DNA_STARTER_DESIGNS = [
     "id": "ranged",
     "name": "기본 원거리 전사",
     "design": {
-      "version": 5,
+      "version": 6,
       "pieces": [
         {
           "gene": "secretion",
@@ -628,34 +4600,31 @@ const DNA_STARTER_DESIGNS = [
           "rotation": 3,
           "q": 0,
           "r": -1
-        },
-        {
-          "gene": "rangedPower",
-          "grade": 2,
-          "rotation": 1,
-          "q": -1,
-          "r": 1
-        },
-        {
-          "gene": "health",
-          "grade": 1,
-          "rotation": 5,
-          "q": 2,
-          "r": -2
-        },
-        {
-          "gene": "movement",
-          "grade": 1,
-          "rotation": 2,
-          "q": -2,
-          "r": -1
-        },
+        }
+      ],
+      "budget": 0,
+      "level": 2
+    }
+  },
+  {
+    "id": "defense",
+    "name": "방어",
+    "design": {
+      "version": 6,
+      "pieces": [
         {
           "gene": "carapace",
           "grade": 2,
-          "rotation": 4,
-          "q": 1,
-          "r": -2
+          "rotation": 0,
+          "q": 0,
+          "r": 0
+        },
+        {
+          "gene": "antenna",
+          "grade": 2,
+          "rotation": 0,
+          "q": 0,
+          "r": -1
         }
       ],
       "budget": 0,
@@ -663,15 +4632,11 @@ const DNA_STARTER_DESIGNS = [
     }
   }
 ];
-for(const entry of DNA_STARTER_DESIGNS){
-  for(const piece of entry.design.pieces)Object.freeze(piece);
-  Object.freeze(entry.design.pieces);Object.freeze(entry.design);Object.freeze(entry);
-}
-Object.freeze(DNA_STARTER_DESIGNS);
+
 return { DNA_STARTER_DESIGNS };
 })();
 window.AttributeDna = modules["server/dna.mjs"].ATTRIBUTE_DNA;
 globalThis.AttributeDnaEditor = modules["client/dna-editor.mjs"];
 globalThis.AttributeDnaTemplates = modules["client/dna-starter-designs.mjs"];
 })();</script>
-<script src="client/attribute-editor.js"></script></body></html>
+<script src="client/tooltips.js"></script><script src="client/attribute-editor.js"></script></body></html>

@@ -19,6 +19,8 @@ export function createCombatAttributeArt(assetSource, createSurface, loadImage) 
   }
   return {
     prepare: tribe => Promise.all([evolution.prepare(tribe)]),
+    prepareAgent: (agent, time, retry) => evolution.prepareAgent(agent, time, retry),
+    readyAgent: agent => evolution.readyAgent(agent),
     ready: tribe => evolution.ready(tribe), frame, portrait,
     bodySize: (agent, replacement) => evolution.bodySize(agent, replacement) || replacement
   };

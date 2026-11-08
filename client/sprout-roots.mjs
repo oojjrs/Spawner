@@ -11,11 +11,11 @@ export function createSpriteContour(sprite) {
   const pairs = [[], [[3, 0]], [[0, 1]], [[3, 1]], [[1, 2]], [[3, 0], [1, 2]], [[0, 2]], [[3, 2]],
     [[2, 3]], [[0, 2]], [[0, 1], [2, 3]], [[1, 2]], [[1, 3]], [[0, 1]], [[3, 0]], []];
   for (let y = 0; y < height - 1; y++) for (let x = 0; x < width - 1; x++) {
-    const alpha = [data[y * width + x], data[y * width + x + 1],
-      data[(y + 1) * width + x + 1], data[(y + 1) * width + x]];
-    const mask = (alpha[0] >= 128 ? 1 : 0) | (alpha[1] >= 128 ? 2 : 0) |
-      (alpha[2] >= 128 ? 4 : 0) | (alpha[3] >= 128 ? 8 : 0);
+    const offset = y * width + x;
+    const a = data[offset], b = data[offset + 1], c = data[offset + width + 1], d = data[offset + width];
+    const mask = (a >= 128 ? 1 : 0) | (b >= 128 ? 2 : 0) | (c >= 128 ? 4 : 0) | (d >= 128 ? 8 : 0);
     if (!mask || mask === 15) continue;
+    const alpha = [a, b, c, d];
     const keys = [(y * width + x) * 2, (y * width + x + 1) * 2 + 1,
       ((y + 1) * width + x) * 2, (y * width + x) * 2 + 1];
     const corners = [[x - .5, y - .5], [x + .5, y - .5], [x + .5, y + .5], [x - .5, y + .5]];

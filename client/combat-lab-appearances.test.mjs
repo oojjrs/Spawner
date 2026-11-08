@@ -13,7 +13,7 @@ import { unitActionArtDefinition } from './unit-action-art.mjs';
 const plain = value => JSON.parse(JSON.stringify(value));
 test('lab combo uses valid independently owned DNA and real melee/armor mechanics', () => {
   const first = combatLabBladeCarapaceDna(), second = combatLabBladeCarapaceDna();
-  assert.equal(first.version, 5);
+  assert.equal(first.version, 6);
   assert.ok(validateDna(first, first.level, first.budget));
   assert.ok(ATTRIBUTE_DNA.trace(first.pieces, first.level).valid);
   assert.equal(ATTRIBUTE_DNA.price(first.pieces), first.budget);
@@ -28,7 +28,7 @@ test('lab combo uses valid independently owned DNA and real melee/armor mechanic
     for (const agent of trial.agents) assert.match(unitActionArtDefinition(agent).reference.image, /BladeCarapaceV1/);
     trial.finish(); assert.ok(trial.history.length > 0); assert.ok(trial.result());
     const native = combatLabWithAppearance(build, 'native');
-    assert.equal(native.dna, undefined); assert.equal(deriveSimulationStats(native).health, dnaUnitStats(startingWorkerDna(key)).health);
+    assert.equal(native.dna, undefined); assert.equal(deriveSimulationStats(native).health, dnaUnitStats(startingWorkerDna(key), key).health);
   }
   const neutral = COMBAT_LAB_UNITS.find(unit => !combatLabPlayable(unit.key)).key;
   assert.deepEqual(combatLabWithAppearance({ key: neutral, dna: first }, 'blade-carapace'), { key: neutral });
@@ -51,7 +51,7 @@ function fixture() {
     SpawnerCombatAudio: { createPlayer: () => ({ resume() {}, stop() {} }), create: () => ({}), reset() {} },
     document: { querySelector: () => main, createElement: tag => new Element(tag) },
     Option: class extends Element { constructor(label, value) { super('option', label); this.value = value; } },
-    requestAnimationFrame() {}, createCombatStage: () => ({ render() {} }) };
+    requestAnimationFrame() {}, createCombatStage: () => ({ render() {}, prepare: async () => {} }) };
   const code = readFileSync(new URL('./combat-lab.js', import.meta.url), 'utf8').replace(/^import .*;\r?\n/gm, '');
   runInNewContext(code + '\nglobalThis.api = { inputs, rosters, selected, builds, elements, reset, getTrial: () => trial };', scope);
   return { ...scope.api, nodes };

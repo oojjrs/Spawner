@@ -1,0 +1,2 @@
+.control-tooltip { position: fixed; z-index: 30; box-sizing: border-box; width: min(280px, calc(100vw - 20px)); padding: 10px 12px; border: 1px solid #75c4b64a; border-radius: 8px; background: #101719fa; box-shadow: 0 8px 24px #0009; color: #d7e0df; font: 12px/1.65 system-ui, sans-serif; white-space: pre-line; overflow-wrap: anywhere; overflow-y: auto; pointer-events: none; }
+.control-tooltip[hidden] { display: none; }

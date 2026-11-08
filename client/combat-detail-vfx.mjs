@@ -359,16 +359,17 @@ export function drawDetailVitalEffect(context, command, options) {
   }
   context.restore();
 }
-export function drawDetailVfxCell(context, image, command) {
+export function drawDetailVfxCell(context, image, command, rendering) {
   if (!image?.complete || !image.naturalWidth) return false;
   const columns = command.columns || 4, cell = command.frameWidth || image.naturalWidth / columns;
   const sourceHeight = command.frameHeight || (columns === 1 ? image.naturalHeight : cell);
   const sourceX = command.frame % columns * cell, sourceY = Math.floor(command.frame / columns) * sourceHeight;
   if (sourceX + cell > image.naturalWidth || sourceY + sourceHeight > image.naturalHeight) return false;
   const width = command.width || command.size, height = command.height || command.size;
+  const filter = command.filter || (command.critical ? "sepia(1) saturate(3) brightness(1.2)" : null);
+  const filtered = filter && rendering?.frame(image, sourceX, sourceY, cell, sourceHeight, filter);
   context.save();
-  if (command.filter) context.filter = command.filter;
-  else if (command.critical) context.filter = "sepia(1) saturate(3) brightness(1.2)";
+  if (filter) context.filter = filtered ? "none" : filter;
   if (command.muzzleClip) {
     const muzzle = command.muzzleClip;
     context.translate(muzzle.x, muzzle.y); context.rotate(muzzle.angle);
@@ -378,7 +379,7 @@ export function drawDetailVfxCell(context, image, command) {
   context.translate(command.x, command.y); context.rotate(command.angle);
   if (command.mirrorX) context.scale(-1, 1);
   context.globalAlpha *= command.alpha ?? 1;
-  context.drawImage(image, sourceX, sourceY, cell, sourceHeight,
+  context.drawImage(filtered || image, filtered ? 0 : sourceX, filtered ? 0 : sourceY, cell, sourceHeight,
     -width / 2, -height / 2, width, height);
   context.restore(); return true;
 }
@@ -405,7 +406,7 @@ export function detailDefenseCommands(frame, positions, time) {
 export function detailDefenseImageReady(image, command) {
   return !!(command?.directionKnown && DETAIL_DEFENSE_VFX[command.kind] && image?.complete && image.naturalWidth);
 }
-export function drawDetailDefenseEffect(context, command, image, { reducedMotion = false } = {}) {
+export function drawDetailDefenseEffect(context, command, image, { reducedMotion = false, rendering } = {}) {
   if (!detailDefenseImageReady(image, command) || command.age < 0 || command.age >= .45) return false;
   const t = command.age / .45;
   const scale = reducedMotion ? 1 : t < .10 ? .66 + t / .10 * .45 : t < .24 ? 1.11 - (t - .10) / .14 * .11 : 1 + (t - .24) * .15;
@@ -413,10 +414,13 @@ export function drawDetailDefenseEffect(context, command, image, { reducedMotion
   const size = Math.min(500, Math.max(32, command.bodyHeight * (command.kind === 'block' ? 2.12 : 2.25))) * scale * (command.critical ? 1.3 : 1);
   const contactX = command.x + command.towardSource * command.bodyWidth * .40;
   const originX = command.kind === 'block' ? .36 : .52, originY = command.kind === 'block' ? .50 : .57;
+  const filter = command.critical ? "sepia(1) saturate(3) brightness(1.2)" : null;
+  const filtered = filter && rendering?.frame(image, 0, 0, image.naturalWidth, image.naturalHeight, filter);
   context.save(); context.translate(contactX, command.y); context.scale(-command.towardSource, 1);
-  if (command.critical) context.filter = "sepia(1) saturate(3) brightness(1.2)";
+  if (filter) context.filter = filtered ? "none" : filter;
   context.globalAlpha = opacity;
-  context.drawImage(image, -size * originX, -size * originY, size, size);
+  context.drawImage(filtered || image, -size * originX, -size * originY, size, size);
+  if (filtered) context.filter = filter;
   // Only dissipating light fragments, never a reflected shot or additional hit.
   if (!reducedMotion && t > .16) {
     const spread = (t - .16) * command.bodyHeight * .75, fade = Math.max(0, 1 - t);

@@ -1,9 +1,11 @@
+import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
+import { drawUnitAttackRing } from "./unit-attack-ring.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { createCombatVfxCursor } from "./combat-vfx-events.mjs";
-import { createDetailCombatVfx, DETAIL_COMBAT_VFX, DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect } from "./combat-detail-vfx.mjs";
+import { createDetailCombatVfx, DETAIL_COMBAT_VFX, DETAIL_COMBAT_VFX_ASSETS, DETAIL_DEFENSE_VFX, drawDetailVfxCell, drawDetailVitalEffect } from "./combat-detail-vfx.mjs";
 
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 function extract(start, end) {
@@ -30,10 +32,11 @@ function modal({ unavailable = [], rejectDraw = false, version = 1 } = {}) {
   const detail = createDetailCombatVfx(), cursor = createCombatVfxCursor();
   const sandbox = { state: { agents, rivals: [], simSeconds: 0, combatVfx: { version } },
     connection: { get simSeconds() { return sandbox.state.simSeconds; } },
-    Spawner: { DETAIL_COMBAT_VFX_ASSETS, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade",
+    Spawner: { combatViewLayout, unitDisplaySize, drawUnitHealthRing() {}, drawUnitAttackRing, DETAIL_COMBAT_VFX_ASSETS, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade",
       CREATURE_ATTACK_ANIMATIONS: {}, drawDetailVitalEffect, drawDetailVfxCell: (...args) => !rejectDraw && drawDetailVfxCell(...args) },
-    detailCombatVfx: detail, detailVfxImages: new Map(DETAIL_COMBAT_VFX_ASSETS.map(path => [path,
-      { path, complete: !unavailable.includes(path), naturalWidth: 1776 }])),
+    detailVfxImage: path => sandbox.detailVfxImages.get(path),
+    detailCombatVfx: detail, detailVfxRendering: null, detailVfxImages: new Map(DETAIL_COMBAT_VFX_ASSETS.map(path => [path,
+      { path, complete: !unavailable.includes(path), naturalWidth: 1776, naturalHeight: 1776 }])),
     selectedCombatUnits: () => agents, combatOpen: {}, evolutionPanel: { hidden: true }, welcome: { hidden: true },
     combatPanel: { open: true }, combatWatch: { id: "fight" }, combatSelected: "source", combatSummary: {},
     combatRoster: { dataset: { key: "source,target" }, children: [] }, combatHeading: {}, combatDetail: {}, combatGauge: {},
@@ -53,7 +56,7 @@ function modal({ unavailable = [], rejectDraw = false, version = 1 } = {}) {
     detail.consume(sandbox.combatVfxFrame, time);
     sandbox.drawCombatPanel(time * 1000);
     return { art: calls.filter(call => call.kind === "image"),
-      hits: calls.filter(call => call.kind === "stroke" && call.color === "#ffe1a0"),
+      hits: calls.filter(call => call.kind === "stroke" && ["#ffe1a0", "#ffda8a"].includes(call.color)),
       defense: calls.filter(call => call.kind === "stroke" && call.color === "#a6e4fa"),
       flights: calls.filter(call => call.kind === "arc" && call.color === "#b6ed84"),
       trails: calls.filter(call => call.kind === "stroke" && call.color === "#e0ffb7") };
@@ -248,8 +251,8 @@ test("crossfire preserves loaded art and only falls back for the missing species
     "a fallback cannot invent the absent shooter's origin or target's position");
 });
 
-test("area and reflected damage preserve incoming recoil and missing-art fallback in the actual modal", () => {
-  for (const kind of ["area", "reflect"]) for (const mode of ["melee", "ranged"]) {
+test("area damage preserves incoming recoil and missing-art fallback in the actual modal", () => {
+  for (const kind of ["area"]) for (const mode of ["melee", "ranged"]) {
     const { draw, sandbox, agents } = modal({ unavailable: [DETAIL_COMBAT_VFX.hit.image] });
     const incoming = hit({ id: "secondary", kind, mode, sourceId: "target", targetId: "source" });
     const outgoing = hit({ id: "outgoing", mode, at: 1.01 });
@@ -282,7 +285,7 @@ test("secondary damage does not override defense priority or turn zero damage in
 
 
 test("lethal impacts retain missing-art feedback at the victim's last observed position", () => {
-  for (const kind of ["hit", "critical", "block", "area", "reflect"]) for (const mode of ["melee", "ranged"]) {
+  for (const kind of ["hit", "critical", "block", "area"]) for (const mode of ["melee", "ranged"]) {
     const { draw, agents, sandbox, detail } = modal({ unavailable: DETAIL_COMBAT_VFX_ASSETS });
     draw(.9);
     agents[1].health = 0; sandbox.combatRoster.dataset.key = "source";
@@ -293,8 +296,8 @@ test("lethal impacts retain missing-art feedback at the victim's last observed p
     const missing = draw(1.05, events);
     assert.equal(missing.art.length, 0);
     assert.equal(missing.hits.length, 1, kind + ":" + mode + " keeps its killing-hit fallback");
-    assert.equal(missing.hits[0].path[0][1], impact.x);
-    assert.equal(missing.hits[0].path[0][2], impact.y);
+    assert.equal((missing.hits[0].path[0][1] + missing.hits[0].path[1][1]) / 2, impact.contactX ?? impact.x);
+    assert.equal((missing.hits[0].path[0][2] + missing.hits[0].path[1][2]) / 2, impact.contactY ?? impact.y);
     assert.equal(missing.flights.length, 0);
     assert.equal(draw(1.05, [...events, ...events]).hits.length, 1, "repeated snapshots never duplicate the killing hit");
     sandbox.detailVfxImages.get(impact.image).complete = true;
@@ -309,7 +312,7 @@ test("lethal impacts retain missing-art feedback at the victim's last observed p
 });
 
 test("each simultaneous actual hit has its own missing-art feedback without duplicating covered hits or defense", () => {
-  for (const kind of ["hit", "area", "reflect"]) {
+  for (const kind of ["hit", "area"]) {
     const { draw, sandbox } = modal({ unavailable: [DETAIL_COMBAT_VFX.hit.image, DETAIL_COMBAT_VFX.bean.image] });
     const events = [hit({ id: "first", mode: "ranged" }), hit({ id: "second", kind, mode: "melee", at: 1.01 })];
     assert.equal(draw(1.05, events).hits.length, 2, kind + " does not collapse into the latest reaction");
@@ -338,7 +341,7 @@ test("retained lethal fallbacks rescale with the view and never invent absent li
   assert.ok(full, "known lethal victim retains a fallback");
   canvas.clientWidth /= 2; canvas.clientHeight /= 2;
   const small = draw(1.05, events).hits[0];
-  assert.equal(small.path[0][1], full.path[0][1] / 2); assert.equal(small.path[0][2], full.path[0][2] / 2);
+  for (const axis of [1, 2]) assert.equal((small.path[0][axis] + small.path[1][axis]) / 2, (full.path[0][axis] + full.path[1][axis]) / 4);
   sandbox.combatWatch.id = "other-fight"; sandbox.combatRoster.dataset.key = "";
   assert.equal(draw(1.1, events).hits.length, 0, "switching views cannot reuse a corpse position");
   for (const lethal of [false, true]) {
@@ -351,4 +354,17 @@ test("retained lethal fallbacks rescale with the view and never invent absent li
   const omitted = modal({ unavailable: DETAIL_COMBAT_VFX_ASSETS });
   omitted.draw(.9); omitted.sandbox.combatArenaUnits = units => units.filter(agent => agent.id !== "target");
   assert.equal(omitted.draw(1.05, [hit()]).hits.length, 0, "an omitted living unit is not a corpse anchor");
+});
+
+test("reflected damage uses its authored reflection cue and never draws an ordinary hit fallback", () => {
+  const { draw, sandbox } = modal({ unavailable: DETAIL_COMBAT_VFX_ASSETS });
+  const event = hit({ kind: "reflect" });
+  const missing = draw(1.05, [event]);
+  assert.equal(missing.hits.length, 0);
+  assert.equal(missing.art.length, 0);
+  sandbox.detailVfxImages.get(DETAIL_DEFENSE_VFX.block).complete = true;
+  const loaded = draw(1.1, [event]);
+  assert.equal(loaded.hits.length, 0);
+  assert.equal(loaded.art.length, 1);
+  assert.equal(loaded.art[0].image, DETAIL_DEFENSE_VFX.block);
 });

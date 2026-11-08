@@ -175,7 +175,7 @@ test("실제 생물 프로필과 시작 DNA를 외형용 공통 수치로 덮지
 test("실제 설계 DNA와 기존 수치 편집은 서로의 입력을 덮지 않는다", async () => {
   const { validateDna, dnaUnitStats } = await import("../server/dna-unit.mjs");
   const gene = ATTRIBUTE_DNA.lookup.get("blade");
-  const dna = validateDna({version:5,level:2,budget:999,pieces:[{gene:gene.id,grade:gene.grade,rotation:0,q:0,r:0}]},2,999);
+  const dna = validateDna({version:6,level:2,budget:999,pieces:[{gene:gene.id,grade:gene.grade,rotation:0,q:0,r:0}]},2,999);
   assert.ok(dna);
   const trial = createSimulationTrial({left:{key:"spore",dna},right:{key:"white-paw",counts:{power:2,haste:4}},random:false});
   assert.deepEqual(trial.agents[0].stats.dna,dnaUnitStats(dna,"spore").dna);

@@ -13,6 +13,7 @@ async function withStage(run, { unavailable = false, reduced = false } = {}) {
     get src() { return this.source; }
     get naturalWidth() { return this.src.includes(root) ? 1776 : 4096; }
     get naturalHeight() { return this.src.includes(root) ? 888 : 4096; }
+    async decode() { if (!this.complete) throw new Error("missing fixture art"); }
   };
   globalThis.document = { createElement: () => ({ getContext: () => ({ drawImage() {},
     getImageData(x, y, width, height) { return { data: new Uint8ClampedArray(width * height * 4).fill(255) }; } }) }) };
@@ -25,7 +26,7 @@ async function withStage(run, { unavailable = false, reduced = false } = {}) {
     stage.render(trial, now, playing);
     await new Promise(resolve => setImmediate(resolve));
     calls.length = 0; stage.render(trial, now, playing); now += 100;
-    return calls.filter(call => call.name === "drawImage" && call.args[0]?.src.includes(root));
+    return calls.filter(call => call.name === "drawImage" && call.args[0]?.src?.includes(root));
   };
   try { await run({ draw, stage, calls, canvas }); }
   finally {
@@ -63,14 +64,14 @@ test("approved V4 flights and impacts follow four species, both directions and a
         assert.equal(flights.length, 1, tribe + kind);
         assert.ok(flights[0].args[0].src.endsWith(root + tribe + ".png"));
         assert.deepEqual(flights[0].args.slice(1, 5), [0, 0, 444, 444]);
-        assert.equal(calls.filter(call => call.name === "drawImage" && call.args[0]?.src.endsWith("/projectile.png")).length, 0, "no duplicate legacy flight");
+        assert.equal(calls.filter(call => call.name === "drawImage" && call.args[0]?.src?.endsWith("/projectile.png")).length, 0, "no duplicate legacy flight");
         assert.equal(canvas.width, 2080); assert.equal(canvas.height, 960);
         resolve(kind, amount);
         const hits = await draw(trial);
         const defense = kind === "block" || kind === "parry";
         assert.equal(hits.length, amount > 0 && !defense ? 1 : 0, tribe + kind + amount);
         if (defense) {
-          assert.equal(calls.filter(call => call.name === "drawImage" && call.args[0]?.src.endsWith("CombatDefenseV1/" + kind + ".png")).length, 1, "approved defense replaces its impact");
+          assert.equal(calls.filter(call => call.name === "drawImage" && call.args[0]?.src?.endsWith("CombatDefenseV1/" + kind + ".png")).length, 1, "approved defense replaces its impact");
           assert.ok(calls.some(call => call.name === "fillText" && call.args[0] === (kind === "block" ? "방어" : "패링")), "defense label is explicit");
         }
         if (amount > 0) {
@@ -116,7 +117,7 @@ test("missing V4 images, absent journals and reduced motion retain existing fall
     await draw(trial);
     trial.vfx = snapshot; shoot(); if (options.legacy) trial.vfx = undefined;
     assert.equal((await draw(trial)).length, 0);
-    assert.equal(calls.filter(call => call.name === "drawImage" && call.args[0]?.src.endsWith("/projectile.png")).length, 1);
+    assert.equal(calls.filter(call => call.name === "drawImage" && call.args[0]?.src?.endsWith("/projectile.png")).length, 1);
     trial.vfx = snapshot; resolve(); if (options.legacy) trial.vfx = undefined;
     assert.equal((await draw(trial)).length, 0);
     assert.ok(calls.some(call => call.name === "fillText" && call.args[0] === "−3.0"));
@@ -144,7 +145,7 @@ test("general melee impact uses approved hit cells and real simulation journals 
     while (!trial.projectiles.length && trial.time < 3) { trial.advance(1 / 60); control.advance(1 / 60); }
     trial.advance(1 / 60); control.advance(1 / 60);
     assert.equal((await draw(trial)).length, 1);
-    assert.equal(calls.filter(call => call.name === "drawImage" && call.args[0]?.src.endsWith("/projectile.png")).length, 0);
+    assert.equal(calls.filter(call => call.name === "drawImage" && call.args[0]?.src?.endsWith("/projectile.png")).length, 0);
     const arrival = trial.projectiles[0].at + 1 / 60;
     trial.advance(arrival - trial.time); control.advance(arrival - control.time);
     const impacts = await draw(trial);
@@ -164,7 +165,7 @@ test("secondary damage distinguishes reflection and preserves its caption withou
       const art = await draw(trial);
       assert.equal(art.length, unavailable || kind === "reflect" ? 0 : 1);
       if (art.length) assert.ok(art[0].args[0].src.endsWith(root + "hit.png"));
-      if (kind === "reflect") assert.equal(calls.filter(call => call.name === "drawImage" && call.args[0]?.src.endsWith("CombatDefenseV1/block.png")).length, unavailable ? 0 : 1);
+      if (kind === "reflect") assert.equal(calls.filter(call => call.name === "drawImage" && call.args[0]?.src?.endsWith("CombatDefenseV1/block.png")).length, unavailable ? 0 : 1);
       assert.ok(calls.some(call => call.name === "fillText" && call.args[0] === (kind === "reflect" ? "반사 −2.0" : "−2.0")));
       assert.equal(calls.filter(call => call.name === "lineTo").length, unavailable && kind !== "reflect" ? 8 : 0);
     }, { unavailable });
@@ -203,7 +204,7 @@ test("lantern charge uses the body clock after waiting, pausing with impact tail
       shotLaunches: [2.6], endsAt: 3.2, directionX: 1 };
     trial.time = 2.3;
     await draw(trial);
-    const charge = () => calls.filter(call => call.name === "drawImage" && call.args[0]?.src.endsWith("lantern-keeper/charge-atlas.webp"));
+    const charge = () => calls.filter(call => call.name === "drawImage" && call.args[0]?.src?.endsWith("lantern-keeper/charge-atlas.webp"));
     assert.equal(charge().length, 1);
     const frame = charge()[0].args.slice(1, 5);
     trial.vfx.events.push({ id: "paused-hit", kind: "hit", at: 2.3, sourceId: target.id, targetId: source.id, amount: 1 });

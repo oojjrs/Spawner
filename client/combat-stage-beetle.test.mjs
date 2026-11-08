@@ -4,8 +4,8 @@ import { createCombatStage } from "./combat-stage.mjs";
 import { createSimulationTrial } from "./combat-simulation.mjs";
 import { BEETLE_SPRITE, BEETLE_ATTACK_SPRITE, beetleAnimationPose } from "../server/beetle-animation.mjs";
 
-function withStage(run) {
-  const saved = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets };
+async function withStage(run) {
+  const saved = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets, document: globalThis.document };
   const calls = [];
   globalThis.window = { matchMedia: () => ({ matches: false }), devicePixelRatio: 1 };
   globalThis.Image = class {
@@ -13,21 +13,26 @@ function withStage(run) {
     get src() { return this.source; }
     get naturalWidth() { return 4096; }
     get naturalHeight() { return 4096; }
+    async decode() {}
   };
+  globalThis.document = { createElement: () => ({ getContext: () => ({ drawImage() {},
+    getImageData(x, y, width, height) { return { data: new Uint8ClampedArray(width * height * 4).fill(255) }; } }) }) };
   globalThis.SpawnerAssets = { source: path => path };
   const context = new Proxy({}, { get: (target, key) => target[key] || ((...args) => calls.push({ name: key, args })) });
   const stage = createCombatStage({ clientWidth: 1040, clientHeight: 480, getContext: () => context });
   let now = 100;
-  const draw = trial => {
+  const draw = async trial => {
+    await stage.prepare(trial);
+    await new Promise(resolve => setImmediate(resolve));
     calls.length = 0; stage.render(trial, now, false); now += 100;
     const bodies = calls.filter(call => call.name === "drawImage" &&
       [BEETLE_SPRITE.image, BEETLE_ATTACK_SPRITE.image].includes(call.args[0]?.src));
     assert.equal(bodies.length, 1, "exactly one beetle body is drawn");
     return bodies[0];
   };
-  try { run({ draw, stage }); }
+  try { await run({ draw, stage }); }
   finally {
-    globalThis.window = saved.window; globalThis.Image = saved.Image; globalThis.SpawnerAssets = saved.assets;
+    globalThis.window = saved.window; globalThis.Image = saved.Image; globalThis.SpawnerAssets = saved.assets; globalThis.document = saved.document;
   }
 }
 
@@ -39,57 +44,62 @@ function scene() {
   return { beetle, trial: { agents: [beetle, target], history: [], projectiles: [], time: .2, result: () => null } };
 }
 
-function assertPose(draw, trial, beetle, label) {
+async function assertPose(draw, trial, beetle, label) {
   const expected = beetleAnimationPose(beetle, trial.time);
   const sprite = expected.action === "attack" ? BEETLE_ATTACK_SPRITE : BEETLE_SPRITE;
-  const actual = draw(trial).args;
+  const actual = (await draw(trial)).args;
   assert.equal(actual[0].src, sprite.image, label + " sheet");
   assert.equal(actual[1], expected.frame % sprite.columns * sprite.frameSize, label + " source x");
   assert.equal(actual[2], Math.floor(expected.frame / sprite.columns) * sprite.frameSize, label + " source y");
   return expected;
 }
 
-test("laboratory beetle contact uses authoritative fast and slow attack timing", () => {
-  for (const [windup, recovery] of [[.08, .3], [.3, .3], [1.6, .8]]) withStage(({ draw }) => {
+test("laboratory beetle contact uses authoritative fast and slow attack timing", async () => {
+  for (const [windup, recovery] of [[.08, .3], [.3, .3], [1.6, .8]]) await withStage(async ({ draw }) => {
     const { beetle, trial } = scene();
     beetle.attack = { combatId: "simulation", startedAt: .2, hitAt: .2 + windup,
       endsAt: .2 + windup + recovery, directionX: 1, speed: 1 };
     for (const elapsed of [0, windup / 2, windup - .001, windup, windup + recovery / 2, windup + recovery - .001]) {
       trial.time = .2 + elapsed;
-      const pose = assertPose(draw, trial, beetle, `${windup}/${recovery} at ${elapsed}`);
+      const pose = await assertPose(draw, trial, beetle, `${windup}/${recovery} at ${elapsed}`);
       if (elapsed === windup) assert.equal(pose.frame, 3, "the contact cell coincides with hitAt");
     }
   });
 });
 
-test("stale or future beetle attacks do not override idle, and active attacks retain hurt priority rules", () => {
-  withStage(({ draw }) => {
+test("stale or future beetle attacks do not override idle, and active attacks retain hurt priority rules", async () => {
+  await withStage(async ({ draw }) => {
     const { beetle, trial } = scene();
     beetle.attack = { combatId: "simulation", startedAt: 1, hitAt: 1.08, endsAt: 1.38, directionX: 1 };
     for (const time of [.5, 1.08, 1.38, 1.5]) {
       trial.time = time;
-      const expected = assertPose(draw, trial, beetle, `stale/future ${time}`);
+      const expected = await assertPose(draw, trial, beetle, `stale/future ${time}`);
       assert.equal(expected.action, time === 1.08 ? "attack" : "idle");
     }
     beetle.attack = { combatId: "simulation", startedAt: 2, hitAt: 2.08, endsAt: 2.38, directionX: 1 };
     beetle.hurtStartedAt = 2.04; trial.time = 2.08;
-    assert.equal(assertPose(draw, trial, beetle, "attack retains priority").action, "attack");
+    assert.equal((await assertPose(draw, trial, beetle, "attack retains priority")).action, "attack");
     beetle.attack = null; trial.time = 2.1;
-    assert.equal(assertPose(draw, trial, beetle, "hurt after cancellation").action, "hurt");
+    assert.equal((await assertPose(draw, trial, beetle, "hurt after cancellation")).action, "hurt");
   });
 });
 
-test("actual simulation beetle impact cells match the journal without changing combat", () => {
-  withStage(({ draw }) => {
+test("actual simulation beetle impact cells match the journal without changing combat", async () => {
+  await withStage(async ({ draw }) => {
     const settings = { left: { key: "spiny-back-beetle", counts: { focus: 11, vitality: 5 } },
       right: { key: "bean", counts: { vitality: 5 } }, random: false };
     const trial = createSimulationTrial(settings), control = createSimulationTrial(settings);
-    draw(trial);
-    trial.advance(.08); control.advance(.08);
+    await draw(trial);
     const beetle = trial.agents[0];
-    assert.equal(beetle.attack.hitAt, .08);
-    assert.ok(trial.history.some(event => event.attackerId === beetle.id && event.time === .08 && event.damage > 0));
-    assert.equal(assertPose(draw, trial, beetle, "real contact").frame, 3);
+    while (!beetle.attack && trial.time < 10) { trial.advance(.01); control.advance(.01); }
+    assert.ok(beetle.attack);
+    const hitAt = beetle.attack.hitAt;
+    trial.advance(hitAt - trial.time); control.advance(hitAt - control.time);
+    while (!trial.history.some(event => event.attackerId === beetle.id && event.time === hitAt && event.damage > 0) && trial.time < hitAt + .1) {
+      trial.advance(.001); control.advance(.001);
+    }
+    assert.ok(trial.history.some(event => event.attackerId === beetle.id && event.time === hitAt && event.damage > 0));
+    assert.equal((await assertPose(draw, trial, beetle, "real contact")).frame, 3);
     assert.deepEqual(trial.history, control.history);
     assert.deepEqual(trial.agents, control.agents);
     assert.deepEqual(trial.result(), control.result());

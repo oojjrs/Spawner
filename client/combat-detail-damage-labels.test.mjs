@@ -1,3 +1,4 @@
+import { drawUnitAttackRing } from "./unit-attack-ring.mjs";
 import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
 import { createCombatStage } from "./combat-stage.mjs";
 import test from "node:test";
@@ -13,7 +14,7 @@ import { snapshotCombatVfx } from "../server/combat-vfx-journal.mjs";
 
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 const helper = readFileSync(new URL("./combat-detail-dodge.test.mjs", import.meta.url), "utf8").split("const event = ")[0];
-const box = { combatViewLayout, unitDisplaySize, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
+const box = { combatViewLayout, unitDisplaySize, drawUnitAttackRing, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
   DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect };
 createContext(box); runInContext(helper.slice(helper.indexOf("function extract(")), box);
 function modal(options = {}) {
@@ -23,7 +24,7 @@ function modal(options = {}) {
   return { ...view, draw(time, events = []) { labels = []; const result = view.draw(time, events); return { ...result, placed: labels }; } };
 }
 const event = (kind = "hit", extra = {}) => ({ id: kind, kind, at: 1, sourceId: "source", targetId: "target", amount: 2, ...extra });
-const amounts = result => Array.from(result.texts.filter(row => /^[+−]/.test(row.text)));
+const amounts = result => Array.from(result.texts.filter(row => /^(반사 )?[+−]/.test(row.text)));
 const agents = ["source", "target", "other"].map(id => ({ id, tribe: "bean", health: 100 }));
 const positions = new Map(agents.map((agent, index) => [agent.id, { x: 100 + index * 180, y: 260, width: 60, height: 100 }]));
 const viewport = { scope: "fight", width: 600, height: 350, includeDirectDamage: true };
@@ -58,10 +59,10 @@ test("actual modal displays direct damage independently of artwork and a real cr
       const view = modal({ unavailable, width }), outlines = [], context = view.canvas.getContext("2d"), stroke = context.strokeText;
       context.strokeText = function(text, x, y) { outlines.push({ text, x, y, color: this.strokeStyle }); stroke.call(this, text, x, y); };
       const result = view.draw(1.08, [event(kind, extra)]);
-      assert.deepEqual(amounts(result).map(row => row.text), ["−2.0"]);
+      assert.deepEqual(amounts(result).map(row => row.text), [kind === "reflect" ? "반사 −2.0" : "−2.0"]);
       assert.equal(result.texts.filter(row => row.text === "치명").length, kind === "critical" ? 1 : 0);
       assert.equal(outlines.filter(row => row.text === "치명" && row.color === "#203125").length, kind === "critical" ? 1 : 0);
-      assert.equal(amounts(result)[0].color, kind === "critical" ? "#ffda8a" : "#fff9df");
+      assert.equal(amounts(result)[0].color, kind === "critical" ? "#ffda8a" : kind === "reflect" ? "#d6b5ff" : "#fff9df");
       assert.equal(result.placed.filter(row => row.directDamage).length, 1);
       assert.equal(view.draw(1.6, [event(kind, extra)]).art.length, 0, "number tail never extends impact art");
       assert.equal(amounts(view.draw(1.6, [event(kind, extra)])).length, 1);
@@ -214,16 +215,24 @@ test("real blocked criticals retain defense, one gold damage caption and emphasi
     assert.ok(Math.abs(ellipses[1][2] / ellipses[0][2] - 1.3) < 1e-10);
     assert.equal(draws[0].filter, "none"); assert.equal(draws[1].filter, "sepia(1) saturate(3) brightness(1.2)");
     assert.equal(ctx.filter, "none");
-    const previous = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets };
+    const previous = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets, document: globalThis.document };
     try {
       for (const unavailable of [false, true]) for (const reduced of [false, true]) {
         globalThis.window = { matchMedia: () => ({ matches: reduced }), devicePixelRatio: 1 };
+        globalThis.document = { createElement: () => ({ width: 0, height: 0,
+          getContext: () => ({ drawImage() {}, getImageData: (x, y, width, height) => ({ data: new Uint8ClampedArray(width * height * 4).fill(255) }) }) }) };
         delete globalThis.SpawnerAssets;
+        const loaded = [];
+        let failBlock = false;
         globalThis.Image = class {
+          constructor() { loaded.push(this); }
+          async decode() {
+            if (failBlock && this.path === DETAIL_DEFENSE_VFX.block) { this.naturalWidth = 0; throw new Error("offline"); }
+          }
           complete = true; naturalWidth = 4096; naturalHeight = 4096;
           set src(value) {
             this.path = value;
-            if (!value.includes("CombatVfxV4/") && !value.includes("CombatDefenseV1/") || unavailable && value === DETAIL_DEFENSE_VFX.block) this.naturalWidth = 0;
+
           }
           get src() { return this.path; }
         };
@@ -236,8 +245,10 @@ test("real blocked criticals retain defense, one gold damage caption and emphasi
         const trial = { agents: live.units.map((unit, side) => ({ ...unit, combat: { ...unit.combat, side } })), history: [], projectiles: [], time: 0, result: () => null,
           vfx: { version: 1, streamId: "blocked-critical", events: [] } };
         const stage = createCombatStage({ clientWidth: 1040, clientHeight: 480, getContext: () => context });
+        await stage.prepare(trial);
+        failBlock = unavailable;
+        for (const image of loaded) if (unavailable && image.src === DETAIL_DEFENSE_VFX.block) image.naturalWidth = 0;
         stage.render(trial, 100, false);
-        await Promise.resolve(); await Promise.resolve(); await Promise.resolve();
         labels.length = 0; outlines.length = 0; art.length = 0;
         trial.time = live.at + .08; trial.vfx.events = [critical];
         trial.history = [{ index: 0, kind: "block", attackerId: "source", targetId: "target", time: live.at, damage: critical.amount, critical: true }];
@@ -251,7 +262,7 @@ test("real blocked criticals retain defense, one gold damage caption and emphasi
         assert.equal(art.filter(row => row.image === DETAIL_DEFENSE_VFX.block).length, unavailable ? 0 : 1);
         if (!unavailable) assert.equal(art.find(row => row.image === DETAIL_DEFENSE_VFX.block).filter, "sepia(1) saturate(3) brightness(1.2)");
       }
-    } finally { globalThis.window = previous.window; globalThis.Image = previous.Image; globalThis.SpawnerAssets = previous.assets; }
+    } finally { globalThis.window = previous.window; globalThis.Image = previous.Image; globalThis.SpawnerAssets = previous.assets; globalThis.document = previous.document; }
   }
 });
 

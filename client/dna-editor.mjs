@@ -1,3 +1,5 @@
+import { createDnaAudio } from "./dna-audio.mjs";
+
 export function dnaDesignStats(M,pieces,tribe) {
   const stats=M.stats(pieces,tribe),base={...M.stats([],tribe)},organPieces=pieces.filter(piece=>M.lookup.get(piece.gene)?.category==='organ'),organStats=M.stats(organPieces,tribe);
   for(const key of ['harvestTime','comboSpeed','focus'])if(stats[key]>0)base[key]=organStats[key];
@@ -11,11 +13,11 @@ export function renderDnaDesignStats(container, stats, base, showScale) {
     ["capacity", "운반", "개"], ["harvest", "채집량", "개"], ["harvestTime", "채집 시간", "초"], ["movement", "이동", "칸/초"],
     ["vision", "시야", "칸"], ["comboPower", "연격숙련", "%"], ["critical", "치명", "%"], ["criticalPower", "치명위력", "%"],
     ["accuracy", "정밀", "%"], ["penetration", "예리함", ""], ["blockPower", "방어숙련", "%"], ["counter", "반격", "%"],
-    ["counterPower", "반격위력", "%"], ["tenacity", "강인함", "%"], ["reduction", "완충", "%"], ["loadSpeed", "하중적응", "%"],
+    ["counterPower", "반격위력", "%"], ["tenacity", "강인함", "%"], ["reduction", "완충", "%"],
     ["stun", "기절", "%"], ["stunTime", "기절연장", "초"], ["bleed", "출혈", "%"],
     ["bleedPower", "출혈강도", ""], ["area", "범위공격", "칸"], ["areaPower", "확산위력", "%"], ["lifesteal", "흡혈", "%"],
     ["reflection", "반사", "%"], ["regeneration", "재생", "/초"], ["comboSpeed", "연타 간격", "초"], ["focus", "공격 준비", "초"],
-    ["scale", "크기", "배"], ["melee", "칼날", ""], ["ranged", "분비기관", ""], ["roaming", "안테나", ""]
+    ["scale", "크기", "배"], ["melee", "칼날", ""], ["ranged", "분비기관", ""], ["hunting", "안테나", ""]
   ];
   const format = value => String(Number(value.toFixed(3)));
   const fragment = document.createDocumentFragment();
@@ -46,7 +48,7 @@ export function renderDnaDesignStats(container, stats, base, showScale) {
   container.replaceChildren(fragment);
 }
 
-const dnaGeneNames={blade:'칼날',carapace:'갑각',antenna:'안테나',gather:'채집기관',legs:'다리',power:'근접 공격력',combo:'연타',speed:'근접 공속',comboPower:'연격숙련',critical:'치명',criticalPower:'치명위력',accuracy:'정밀',penetration:'예리함',health:'체력',armor:'경화',evasion:'회피',parry:'패링',block:'방어본능',blockPower:'방어숙련',counter:'반격',counterPower:'반격위력',tenacity:'강인함',reduction:'완충',movement:'이속',capacity:'운반',harvest:'채집량',harvestSpeed:'채집속도',vision:'시야',loadSpeed:'하중적응',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중',secretion:'분비기관',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속'};
+export const dnaGeneNames={blade:'칼날',carapace:'갑각',antenna:'안테나',gather:'채집기관',legs:'다리',power:'근접 공격력',combo:'연타',speed:'근접 공속',comboPower:'연격숙련',critical:'치명',criticalPower:'치명위력',accuracy:'정밀',penetration:'예리함',health:'체력',armor:'경화',evasion:'회피',parry:'패링',block:'방어본능',blockPower:'방어숙련',counter:'반격',counterPower:'반격위력',tenacity:'강인함',reduction:'완충',movement:'이속',capacity:'운반',harvest:'채집량',harvestSpeed:'채집속도',vision:'시야',loadSpeed:'하중적응',stun:'기절',stunTime:'기절연장',bleed:'출혈',bleedPower:'출혈강도',area:'범위공격',areaPower:'확산위력',lifesteal:'흡혈',reflection:'반사',regeneration:'재생',comboSpeed:'연타속도',focus:'집중',secretion:'분비기관',rangedPower:'원거리 공격력',rangedSpeed:'원거리 공속'};
 
 export function dnaEditorViewport(M,level,start,gene,width,height) {
   const radius=M.boardRadius(level),halfWidth=34*Math.sqrt(3)*(radius+.5)+28,halfHeight=51*radius+62;
@@ -86,7 +88,7 @@ function dnaCellsSvg(points,color) {
   const path=line=>line.map((p,index)=>(index?'L':'M')+p.x+','+p.y).join('');
   return points.map(point=>'<polygon points="'+dnaHex(dnaWorld(point),32).map(p=>p.x+','+p.y).join(' ')+'" fill="'+color+'" fill-opacity=".08"/>').join('')+dnaChains(points).map(chain=>{const strands=dnaStrands(chain);return '<path d="'+strands.rungs.map(path).join('')+'" fill="none" stroke="'+color+'" stroke-opacity=".65" stroke-width="1.7"/><path d="'+path(strands.two)+'" fill="none" stroke="'+color+'" stroke-opacity=".65" stroke-width="2.8" stroke-linecap="round"/><path d="'+path(strands.one)+'" fill="none" stroke="'+color+'" stroke-width="3.5" stroke-linecap="round"/>';}).join('');
 }
-function dnaGeneShapeSvg(M,gene) {
+export function dnaGeneShapeSvg(M,gene) {
   const points=M.pieceCells({gene:gene.id,q:0,r:0,rotation:0}),world=points.map(dnaWorld),minX=Math.min(...world.map(p=>p.x))-14,maxX=Math.max(...world.map(p=>p.x))+14,minY=Math.min(...world.map(p=>p.y))-14,maxY=Math.max(...world.map(p=>p.y))+14;
   const scale=Math.min(40/(maxX-minX),34/(maxY-minY));
   return '<g transform="translate(22 19) scale('+scale+') translate('+(-(minX+maxX)/2)+' '+(-(minY+maxY)/2)+')">'+dnaCellsSvg(points,gene.fillColor)+'</g>';
@@ -103,22 +105,24 @@ export function renderDnaComposition(container,M,dna) {
   fragment.append(list);container.replaceChildren(fragment);
 }
 
-export function createDnaEditor(container,dnaModel,onChange) {
+export function createDnaEditor(container,dnaModel,onChange,onAction) {
   const M=dnaModel,names=dnaGeneNames,root=document.createElement('section');root.className='dna-editor';root.tabIndex=0;
   root.innerHTML='<div class="dna-board"><canvas aria-label="DNA 편집 영역" tabindex="0"></canvas><div class="dna-legend" hidden></div><div class="dna-tools"></div><details class="dna-guide"><summary>조작 안내</summary><dl><dt>DNA 선택</dt><dd><kbd>휠 클릭</kbd></dd><dt>회전</dt><dd><kbd>휠 위·아래 / Q·E</kbd></dd><dt>배치</dt><dd><kbd>좌클릭 / Enter</kbd></dd><dt>되돌리기</dt><dd><kbd>Ctrl+Z</kbd></dd></dl></details><output class="dna-status dna-organ-limit" aria-live="polite" hidden></output><output class="dna-cost">비용 <strong></strong></output></div><aside class="dna-catalog"><div class="dna-filters"></div><div class="dna-list"></div></aside><div class="dna-dock"><div class="dna-rotation"></div><button class="dna-add" type="button">조각 추가</button></div>';
   container.replaceChildren(root);
   const find=selector=>root.querySelector(selector),canvas=find('canvas'),board=find('.dna-board'),context=canvas.getContext('2d');
+  const sound=typeof onAction==='function'?null:createDnaAudio(),playSound=onAction||sound.play;
   const view={x:0,y:0,scale:1,width:0,height:0};
-  let tribe, pieces=[],level=1,budget=0,readOnly=false,contextSet=false,filter='all',selected=M.catalog[0].id,rotation=0,anchor={q:0,r:0},moving=-1,history=[],future=[],model=M.trace([],1),preview,frame=0,destroyed=false,pointer=null,hover=null,keyboardPlacement=false,warningGene=null,boardFull=false,offset={q:0,r:0};
+  let tribe, pieces=[],level=1,budget=0,readOnly=false,contextSet=false,filter='all',selected=M.catalog[0].id,rotation=0,anchor={q:0,r:0},moving=-1,history=[],future=[],model=M.trace([],1),preview,frame=0,destroyed=false,pointer=null,hover=null,keyboardPlacement=false,warningGene=null,boardFull=false,offset=null,cursor=null;
   function button(parent,label,glyph,action){const element=document.createElement('button');element.type='button';element.title=label;element.setAttribute('aria-label',label);element.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+glyph+'"/></svg>';element.onclick=action;parent.append(element);return element;}
   const undoButton=button(find('.dna-tools'),'되돌리기','M9 5 4 10l5 5M4 10h9a6 6 0 0 1 0 12',undo);
   const redoButton=button(find('.dna-tools'),'다시 실행','m15 5 5 5-5 5m5-5h-9a6 6 0 0 0 0 12',redo);
   const removeButton=button(find('.dna-tools'),'조각 삭제','M5 7h14M9 7V4h6v3M7 7l1 14h8l1-14M10 10v7m4-7v7',remove);
-  const clearButton=button(find('.dna-tools'),'초기화','M5 10a8 8 0 1 1 1 8M5 4v6h6',()=>{if(readOnly||!pieces.length)return;checkpoint();pieces=[];moving=-1;changed();});
+  const clearButton=button(find('.dna-tools'),'초기화','M5 10a8 8 0 1 1 1 8M5 4v6h6',()=>{if(readOnly||!pieces.length)return;checkpoint();pieces=[];moving=-1;changed('remove');});
   const leftButton=button(find('.dna-rotation'),'왼쪽 회전','m8 3-5 5 5 5M3 8h10a7 7 0 1 1-6 11',()=>rotate(-1));
   const rightButton=button(find('.dna-rotation'),'오른쪽 회전','m16 3 5 5-5 5m5-5H11a7 7 0 1 0 6 11',()=>rotate(1));
   const addButton=find('.dna-add');addButton.onclick=commit;
-  function getDesign(){return {version:5,pieces:pieces.map(M.clonePiece),level,budget};}
+  for(const element of [undoButton,redoButton,removeButton,clearButton,leftButton,rightButton,addButton])element.dataset.dnaSound='true';
+  function getDesign(){return {version:6,pieces:pieces.map(M.clonePiece),level,budget};}
   function snapshot(){return pieces.map(M.clonePiece);}
   function checkpoint(){history.push(snapshot());if(history.length>200)history.shift();future=[];}
   function clearHistory(){history=[];future=[];renderControls();}
@@ -137,14 +141,14 @@ export function createDnaEditor(container,dnaModel,onChange) {
     return false;
   }
   function state(){model=M.trace(pieces,level);preview=candidate();boardFull=model.valid&&!hasPlacement();renderCatalog();renderLegend();renderControls();requestDraw();}
-  function changed(){state();if(typeof onChange==='function')onChange(getDesign());}
+  function changed(action){state();if(typeof onChange==='function')onChange(getDesign());playSound(action);}
   function renderLegend(){
     const legend=find('.dna-legend'),counts=M.counts(pieces),stats=M.stats(pieces,tribe);
-    const keys={blade:'meleePower',secretion:'rangedPower',antenna:'vision',gather:'harvest',carapace:'armor',legs:'evasion',power:'meleePower',speed:'meleeSpeed',combo:'hits',harvestSpeed:'harvestTime'};
+    const keys={blade:'meleePower',secretion:'rangedPower',gather:'harvest',carapace:'armor',legs:'evasion',power:'meleePower',speed:'meleeSpeed',combo:'hits',harvestSpeed:'harvestTime'};
     const units={hits:'회',meleeSpeed:'/초',rangedSpeed:'/초',capacity:'개',harvest:'개',harvestTime:'초',movement:'칸/초',vision:'칸',stunTime:'초',area:'칸',regeneration:'/초',comboSpeed:'초',focus:'초'};
-    const percentages=['parry','block','evasion','comboPower','critical','criticalPower','accuracy','blockPower','counter','counterPower','tenacity','reduction','loadSpeed','stun','bleed','areaPower','lifesteal','reflection'];
+    const percentages=['parry','block','evasion','comboPower','critical','criticalPower','accuracy','blockPower','counter','counterPower','tenacity','reduction','stun','bleed','areaPower','lifesteal','reflection'];
     const labels={meleePower:'근접 공격력',rangedPower:'원거리 공격력',meleeSpeed:'근접 공속',rangedSpeed:'원거리 공속',hits:'공격횟수',harvestTime:'채집 시간',movement:'이동',armor:'방어',evasion:'회피'};
-    const unlocks={gather:'채집 기능 해금',blade:'근접 선제 공격 기능 해금',secretion:'원거리 선제 공격 기능 해금',antenna:'자유 이동 기능 해금'};
+    const unlocks={gather:'채집 기능 해금',blade:'근접 선제 공격 기능 해금',secretion:'원거리 선제 공격 기능 해금'};
     legend.replaceChildren();
     for(const gene of [...M.catalog,...M.genes.filter(gene=>gene.retired)]){
       if(!counts[gene.id])continue;
@@ -156,22 +160,24 @@ export function createDnaEditor(container,dnaModel,onChange) {
       const difference=Number((stats[key]-without[key]).toFixed(3)),unit=units[key]||(percentages.includes(key)?'%':'');
       const effect=unlocks[gene.id]||((labels[key]||names[gene.id])+' '+(difference>=0?'+':'')+difference+unit);
       const delta=document.createElement('span');delta.className='dna-legend-delta';delta.textContent=' ('+effect+')';
-      item.append(svg,count,delta);legend.append(item);
+      item.append(svg,count);if(gene.id!=='antenna')item.append(delta);legend.append(item);
     }
     legend.hidden=!legend.children.length;
   }
   function renderCatalog(){
     warningGene=null;
+    const available=new Set(M.catalog.filter(gene=>gene.grade<=level).map(gene=>gene.group));
+    if(filter!=='all'&&!available.has(filter))filter='all';
     const filters=find('.dna-filters');filters.replaceChildren();
-    for(const [type,label] of [['all','전체'],['organ','기관'],['action','기능'],['stat','스탯']]){const item=document.createElement('button');item.type='button';item.textContent=label;item.dataset.category=type;item.setAttribute('aria-pressed',String(filter===type));item.onclick=()=>{filter=type;renderCatalog();root.focus({preventScroll:true});};filters.append(item);}
+    for(const [type,label,id] of [['all','전체'],['gathering','채집','gather'],['other','기타','health'],['melee','근거리','blade'],['ranged','원거리','secretion'],['defense','방어','carapace']]){const item=document.createElement('button');item.type='button';item.textContent=label;item.dataset.category=type;item.disabled=type==='all'?available.size===0:!available.has(type);if(id)item.style.setProperty('--dna-filter-color',M.lookup.get(id).fillColor);item.setAttribute('aria-pressed',String(filter===type));item.onclick=()=>{if(item.disabled)return;filter=type;renderCatalog();root.focus({preventScroll:true});};filters.append(item);}
     const list=find('.dna-list');list.replaceChildren();
     for(const gene of M.catalog){
-      if(gene.grade>level||(filter!=='all'&&gene.category!==filter))continue;
+      if(gene.grade>level||(filter!=='all'&&gene.group!==filter))continue;
       const item=document.createElement('button');item.type='button';item.className='dna-gene';item.setAttribute('aria-label',names[gene.id]);item.title=names[gene.id];item.dataset.gene=gene.id;item.dataset.category=gene.category;const blocked=organBlocked(gene.id);item.disabled=readOnly;item.setAttribute('aria-disabled',String(readOnly||blocked));item.dataset.blocked=String(blocked);item.setAttribute('aria-pressed',String(selected===gene.id));item.style.setProperty('--dna-gene-color',gene.fillColor);
       const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 44 38');svg.innerHTML=dnaGeneShapeSvg(M,gene);
       const name=document.createElement('strong');name.textContent=names[gene.id];const cost=document.createElement('span');cost.className='dna-gene-cost';cost.textContent=String(M.piecePrice({gene:gene.id,grade:gene.grade}));cost.title='진화포인트';item.append(svg,name,cost);
       item.addEventListener('pointerenter',()=>{if(blocked){warningGene=gene.id;renderControls();}});item.addEventListener('pointerleave',()=>{warningGene=null;renderControls();});item.addEventListener('focus',()=>{if(blocked){warningGene=gene.id;renderControls();}});item.addEventListener('blur',()=>{warningGene=null;renderControls();});
-      item.onclick=()=>{if(item.disabled)return;if(blocked){warningGene=gene.id;renderControls();return;}moving=-1;offset={q:0,r:0};selected=gene.id;rotation=0;state();root.focus({preventScroll:true});};list.append(item);
+      item.onclick=()=>{if(item.disabled)return;if(blocked){warningGene=gene.id;renderControls();return;}moving=-1;offset=null;selected=gene.id;rotation=0;state();root.focus({preventScroll:true});};list.append(item);
     }
   }
   function renderControls(){
@@ -200,14 +206,15 @@ export function createDnaEditor(container,dnaModel,onChange) {
     for(const cell of M.boardCells(level)){polygon(dnaHex(screen(cell),32*view.scale));context.fillStyle='#102922';context.fill();context.strokeStyle='#3a574c';context.lineWidth=1;context.stroke();}
     const hovered=hover?model.occupied.get(M.key(hover))?.index:-1;
     for(let index=0;index<pieces.length;index++)drawPiece(pieces[index],index===moving?.18:.88,M.lookup.get(pieces[index].gene).fillColor,index===hovered&&moving<0);
-    if(!readOnly&&preview.piece&&(hover||moving>=0||keyboardPlacement)&&(moving>=0||hovered===undefined||hovered===-1))drawPiece(preview.piece,preview.valid?.58:.42,preview.valid?M.lookup.get(selected).fillColor:'#ed727e',true);
+    if(!readOnly&&preview.piece&&(hover||moving>=0||keyboardPlacement)&&(moving>=0||offset||hovered===undefined||hovered===-1))drawPiece(preview.piece,preview.valid?.58:.42,preview.valid?M.lookup.get(selected).fillColor:'#ed727e',true);
   }
-  function commit(){if(readOnly||!selected)return;const proposed=candidate();if(!proposed.valid){keyboardPlacement=true;preview=proposed;renderControls();requestDraw();return;}if(moving>=0&&JSON.stringify(proposed.pieces[moving])===JSON.stringify(pieces[moving])){cancel();return;}checkpoint();pieces=proposed.pieces;moving=-1;offset={q:0,r:0};if(M.lookup.get(selected).category==='organ'){selected=null;rotation=0;keyboardPlacement=false;}changed();}
-  function cancel(){moving=-1;pointer=null;selected=null;rotation=0;hover=null;keyboardPlacement=false;offset={q:0,r:0};state();}
-  function rotate(delta){if(readOnly||!selected)return;rotation=(rotation+delta+6)%6;preview=candidate();renderControls();requestDraw();}
-  function undo(){if(readOnly)return;if(moving>=0){cancel();return;}if(!history.length)return;future.push(snapshot());pieces=history.pop();changed();}
-  function redo(){if(readOnly||!future.length)return;history.push(snapshot());pieces=future.pop();moving=-1;changed();}
-  function remove(){if(readOnly||!pieces.length)return;checkpoint();pieces.splice(moving>=0?moving:pieces.length-1,1);moving=-1;offset={q:0,r:0};changed();}
+  function commit(){if(readOnly||!selected)return;const proposed=candidate();if(!proposed.valid){keyboardPlacement=!hover;preview=proposed;renderControls();requestDraw();return;}if(moving>=0&&JSON.stringify(proposed.pieces[moving])===JSON.stringify(pieces[moving])){cancel();return;}checkpoint();pieces=proposed.pieces;moving=-1;offset=null;if(M.lookup.get(selected).category==='organ'){selected=null;rotation=0;keyboardPlacement=false;}changed('place');}
+  function cancel(){moving=-1;pointer=null;selected=null;rotation=0;hover=null;keyboardPlacement=false;offset=null;state();}
+  function center(){const points=M.pieceCells({gene:selected,rotation,q:0,r:0}).map(dnaWorld);return {x:(Math.min(...points.map(p=>p.x))+Math.max(...points.map(p=>p.x)))/2,y:(Math.min(...points.map(p=>p.y))+Math.max(...points.map(p=>p.y)))/2};}
+  function rotate(delta){if(readOnly||!selected)return;rotation=(rotation+delta+6)%6;playSound('rotate');if(offset){offset=center();if(cursor&&hover&&!keyboardPlacement){pointAt(cursor);return;}}preview=candidate();renderControls();requestDraw();}
+  function undo(){if(readOnly)return;if(moving>=0){cancel();return;}if(!history.length)return;future.push(snapshot());const next=history.pop(),action=next.length<pieces.length?'remove':'place';pieces=next;changed(action);}
+  function redo(){if(readOnly||!future.length)return;history.push(snapshot());const next=future.pop(),action=next.length<pieces.length?'remove':'place';pieces=next;moving=-1;changed(action);}
+  function remove(){if(readOnly||!pieces.length)return;checkpoint();pieces.splice(moving>=0?moving:pieces.length-1,1);moving=-1;offset=null;changed('remove');}
   function cycleGene(){if(readOnly)return;const items=[...find('.dna-list').children].filter(item=>!item.disabled&&item.dataset.blocked!=='true');if(!items.length)return;const index=items.findIndex(item=>item.dataset.gene===selected);items[(index+1)%items.length].onclick();}
   function fit(){
     if(!view.width||!view.height)return;Object.assign(view,dnaEditorViewport(M,level,null,null,view.width,view.height));
@@ -216,16 +223,16 @@ export function createDnaEditor(container,dnaModel,onChange) {
   }
   function zoom(factor){if(!Number.isFinite(factor)||factor<=0||!view.width||!view.height)return;const next=Math.max(.005,Math.min(2.7,view.scale*factor)),ratio=next/view.scale,x=view.width/2,y=view.height/2;view.x=x-(x-view.x)*ratio;view.y=y-(y-view.y)*ratio;view.scale=next;requestDraw();}
   function resize(){const bounds=board.getBoundingClientRect();if(!bounds.width||!bounds.height||(view.width===bounds.width&&view.height===bounds.height))return;view.width=bounds.width;view.height=bounds.height;canvas.width=Math.ceil(bounds.width*devicePixelRatio);canvas.height=Math.ceil(bounds.height*devicePixelRatio);fit();}
-  function eventCell(event){
-    const bounds=canvas.getBoundingClientRect(),x=(event.clientX-bounds.left-view.x)/view.scale,y=(event.clientY-bounds.top-view.y)/view.scale,r=y/51,q=x/(34*Math.sqrt(3))-r/2;
+  function eventCell(event,shift){
+    const bounds=canvas.getBoundingClientRect(),x=(event.clientX-bounds.left-view.x)/view.scale-(shift?.x||0),y=(event.clientY-bounds.top-view.y)/view.scale-(shift?.y||0),r=y/51,q=x/(34*Math.sqrt(3))-r/2;
     let rq=Math.round(q),rr=Math.round(r),rs=Math.round(-q-r);const dq=Math.abs(rq-q),dr=Math.abs(rr-r),ds=Math.abs(rs+q+r);if(dq>dr&&dq>ds)rq=-rr-rs;else if(dr>ds)rr=-rq-rs;
     return {q:rq,r:rr};
   }
-  function pointAt(event){keyboardPlacement=false;hover=eventCell(event);anchor={q:hover.q-offset.q,r:hover.r-offset.r};preview=candidate();renderControls();requestDraw();}
+  function pointAt(event){cursor={clientX:event.clientX,clientY:event.clientY};keyboardPlacement=false;hover=eventCell(event);anchor=eventCell(event,offset);preview=candidate();renderControls();requestDraw();}
   canvas.addEventListener('pointerdown',event=>{
     if(event.button===1){event.preventDefault();event.stopPropagation();cycleGene();return;}if(event.button!==0||pointer||readOnly)return;
     root.focus({preventScroll:true});const point=eventCell(event),hit=model.occupied.get(M.key(point))?.index;let picked=false;
-    if(moving<0&&hit!==undefined){moving=hit;selected=pieces[hit].gene;rotation=pieces[hit].rotation;offset={q:point.q-pieces[hit].q,r:point.r-pieces[hit].r};picked=true;renderCatalog();}
+    if(moving<0&&hit!==undefined){moving=hit;selected=pieces[hit].gene;rotation=pieces[hit].rotation;offset=center();picked=true;renderCatalog();}
     pointer={id:event.pointerId,x:event.clientX,y:event.clientY,picked,moved:false};pointAt(event);canvas.setPointerCapture(event.pointerId);
   });
   canvas.addEventListener('pointermove',event=>{if(readOnly)return;if(pointer&&pointer.id===event.pointerId&&Math.hypot(event.clientX-pointer.x,event.clientY-pointer.y)>4)pointer.moved=true;pointAt(event);});
@@ -246,9 +253,9 @@ export function createDnaEditor(container,dnaModel,onChange) {
   });
   const observer=new ResizeObserver(resize);observer.observe(board);state();resize();
   return {
-    load(design,locked){const value=M.validate(design);if(!value)return false;pieces=value.pieces.map(M.clonePiece);if(!contextSet){level=value.level;budget=value.budget;}readOnly=locked===true;history=pieces.map((_,index)=>pieces.slice(0,index).map(M.clonePiece));future=[];moving=-1;hover=null;keyboardPlacement=false;anchor={q:0,r:0};offset={q:0,r:0};selected=M.catalog.find(gene=>gene.grade<=level&&!(gene.category==='organ'&&pieces.some(piece=>piece.gene===gene.id)))?.id||M.catalog[0].id;rotation=0;state();fit();return true;},
+    load(design,locked){const value=M.validate(design);if(!value)return false;pieces=value.pieces.map(M.clonePiece);if(!contextSet){level=value.level;budget=value.budget;}readOnly=locked===true;history=pieces.map((_,index)=>pieces.slice(0,index).map(M.clonePiece));future=[];moving=-1;hover=null;keyboardPlacement=false;anchor={q:0,r:0};offset=null;selected=M.catalog.find(gene=>gene.grade<=level&&!(gene.category==='organ'&&pieces.some(piece=>piece.gene===gene.id)))?.id||M.catalog[0].id;rotation=0;state();fit();return true;},
     context(nextLevel,nextBudget,locked,nextTribe){const previousLevel=level,previousBudget=budget,previousReadOnly=readOnly,previousTribe=tribe;tribe=nextTribe;if(Number.isInteger(nextLevel)&&nextLevel>=1&&nextLevel<=4)level=nextLevel;if(Number.isFinite(nextBudget)&&nextBudget>=0)budget=Math.floor(nextBudget);contextSet=true;readOnly=locked===true;if(previousLevel===level&&previousBudget===budget&&previousReadOnly===readOnly&&previousTribe===tribe)return;if(readOnly||M.lookup.get(selected)?.grade>level){moving=-1;selected=M.catalog[0].id;}state();if(previousLevel!==level)fit();},
     getDesign,clearHistory,fit,zoom,
-    destroy(){destroyed=true;observer.disconnect();if(frame)cancelAnimationFrame(frame);root.remove();}
+    destroy(){destroyed=true;sound?.destroy();observer.disconnect();if(frame)cancelAnimationFrame(frame);root.remove();}
   };
 }

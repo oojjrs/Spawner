@@ -1,3 +1,4 @@
+import { drawUnitAttackRing } from "./unit-attack-ring.mjs";
 import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -11,22 +12,26 @@ import { createDetailCombatVfx, DETAIL_COMBAT_VFX, DETAIL_COMBAT_VFX_ASSETS, dra
 
 const source = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
 const helper = readFileSync(new URL('./combat-detail-dodge.test.mjs', import.meta.url), 'utf8').split('const event = ')[0];
-const box = { combatViewLayout, unitDisplaySize, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
+const box = { combatViewLayout, unitDisplaySize, drawUnitAttackRing, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
   DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect };
 createContext(box); runInContext(helper.slice(helper.indexOf('function extract(')), box);
 const fixture = readFileSync(new URL('./combat-detail-damage-labels.test.mjs', import.meta.url), 'utf8');
-const actualScene = new Function('ATTRIBUTE_DNA', 'createCombat', fixture.slice(fixture.indexOf('const dna = '),
-  fixture.indexOf('\ntest("real lethal melee/ranged')) + '\nreturn actualScene;')(ATTRIBUTE_DNA, createCombat);
+const actualScene = new Function('ATTRIBUTE_DNA', 'createCombat', 'assert', fixture.slice(fixture.indexOf('const dna = '),
+  fixture.indexOf('\ntest("real lethal melee/ranged')) + '\nreturn actualScene;')(ATTRIBUTE_DNA, createCombat, assert);
 const delay = Number(source.match(/const MOVEMENT_DELAY = ([\d.]+)/)[1]);
 const extrapolate = (lastPaint, snapshot, elapsed) => Math.max(lastPaint, snapshot + Math.min(.3, elapsed) - delay);
 const amountRows = row => Array.from(row.texts.filter(c => /^[+−]/.test(c.text)));
 
 function modal(options = {}) {
-  const view = box.modal(options);
+  const view = box.modal(options), context = view.canvas.getContext("2d"), criticalHits = [];
+  const stroke = context.stroke.bind(context);
+  context.stroke = () => { stroke(); if (context.strokeStyle === "#ffda8a") criticalHits.push({ path: context.path, color: context.strokeStyle }); };
   view.sandbox.connection = { simSeconds: 0 };
   return { ...view, paint(time, snapshotTime, events = []) {
     view.sandbox.connection.simSeconds = snapshotTime;
-    return view.draw(time, events);
+    criticalHits.length = 0;
+    const result = view.draw(time, events);
+    return { ...result, hits: [...result.hits, ...criticalHits] };
   } };
 }
 
@@ -111,7 +116,7 @@ test('authoritative living-after-death, unseen or omitted targets and restore-to
 test('current-age recovery, resized retained points and original expiry do not extend the killing effect', () => {
   const view = modal({ unavailable: DETAIL_COMBAT_VFX_ASSETS });
   view.paint(1.1, .95); view.agents[1].health = 0; view.sandbox.combatRoster.dataset.key = 'source';
-  const events = [event('critical'), death], first = view.paint(1.12, 1.05, events);
+  const events = [event('hit'), death], first = view.paint(1.12, 1.05, events);
   assert.equal(first.hits.length, 1); const initial = first.commands[0];
   view.sandbox.detailVfxImages.get(initial.image).complete = true;
   const recovered = view.paint(1.2, 1.1, events);

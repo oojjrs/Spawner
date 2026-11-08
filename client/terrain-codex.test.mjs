@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { TERRAIN_CODEX, HAZARD_CODEX, terrainCodexResources, terrainCodexCell } from "./terrain-codex.mjs";
+import { codexResolveEntry } from "./codex-content.mjs";
 
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 
@@ -78,6 +79,7 @@ test("실제 지도 클릭 처리에서 빈 땅·위험 요소를 열고 개체 
 test("코덱스 뒤로·앞으로 이동은 선택 좌표를 복원하고 일반 탐색에는 좌표를 남기지 않는다", () => {
   const codexState = { history: [], index: -1, category: "terrain", cell: null };
   const context = createContext({ codexState, TERRAIN_CODEX, HAZARD_CODEX, ATTRIBUTES: [], ATTRIBUTE_COMBINATIONS: [], NEST_CODEX: [],
+    Spawner: { codexResolveEntry }, codexSearch: { value: "" },
     document: { querySelectorAll: () => [], getElementById: () => ({ focus() {} }) },
     hideHelpTooltip() {}, renderCodexArticle() {}, renderCodexList() {}, updateCodex() {}, updateUnitDesign() {} });
   for (const name of ["codexEntry", "navigateCodex", "moveCodexHistory"]) runInContext(declaration(name), context);
@@ -94,7 +96,11 @@ test("코덱스 뒤로·앞으로 이동은 선택 좌표를 복원하고 일반
 });
 
 test("기획서 지형 표와 위험 설명이 게임 코덱스 데이터와 일치한다", () => {
-  const design = readFileSync(new URL("../Design.html", import.meta.url), "utf8");
+  let design = "";
+  for (const section of ["terrain-floors", "terrain-objects"]) {
+    runInContext(readFileSync(new URL("../DesignAssets/sections/" + section + ".js", import.meta.url), "utf8"),
+      createContext({ document: { write: value => { design += value; } } }));
+  }
   const table = design.match(/<table[^>]*aria-label="지형 바닥"[^>]*>[\s\S]*?<\/table>/)[0];
   for (const terrain of TERRAIN_CODEX) {
     const row = table.match(new RegExp('<tr><th scope="row">' + terrain.name + '[\\s\\S]*?<\\/tr>'))[0];

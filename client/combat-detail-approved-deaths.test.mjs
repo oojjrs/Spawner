@@ -41,7 +41,7 @@ createContext(box);runInContext(fixture.replaceAll('import.meta.url',JSON.string
 function prepare(row) {
   const species=row.species, idle=CREATURE_IDLE_ANIMATIONS[species], animation=CREATURE_DEATH_ANIMATIONS[species];
   const idleScale=idle.frameSize/512*480/Math.max(row.idleBounds.width,row.idleBounds.height);
-  const scope={Spawner:{UNIT_DISPLAY_SIZES},tribeArt:{bounds:sprite=>sprite.bounds},unitDisplayScales:new Map(),unitDisplayBounds:new Map(),unitGroundShapes:new Map()};
+  const scope={Spawner:{UNIT_DISPLAY_SIZES,unitDisplaySize},tribeArt:{bounds:sprite=>sprite.bounds},unitDisplayScales:new Map(),unitDisplayBounds:new Map(),unitGroundShapes:new Map()};
   createContext(scope);runInContext(extract('prepareUnitDisplaySize')+'\n'+extract('prepareCreatureDeathSize'),scope);
   scope.prepareUnitDisplaySize(species,{bounds:row.idleBounds},idle,1.4*idleScale*(idle.registrationScale||1));
   const entry={animation,sprite:{bounds:row.deathBounds}};scope.prepareCreatureDeathSize(species,entry);

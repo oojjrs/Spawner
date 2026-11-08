@@ -5,6 +5,7 @@ import { createContext, runInContext } from "node:vm";
 import { createRoom, chooseRoomTribe, saveRoom, restoreRoom, snapshotRoom, commandRoom, tickRoom } from "./room.mjs";
 import { productionRuntime } from "./production.mjs";
 import { PLAYER_TRIBES } from "../server/player-tribes.mjs";
+import { PLAYER_STARTING_POINTS } from "../server/tribe-start.mjs";
 
 const switchTribe = (room, tribe) => commandRoom(room, { type: "cheat-switch-tribe", tribe });
 
@@ -38,7 +39,8 @@ test("종족을 왕복 전환해도 모든 군락의 진행과 개체 소유권�
     const packet = snapshotRoom(room, false);
     assert.equal(packet.colonyId, colony.id);
     assert.equal(packet.state.tribe, tribe.key);
-    assert.deepEqual(packet.state.templates.map(template => template.name), [tribe.name + " 설계"]);
+    assert.deepEqual(packet.state.templates, JSON.parse(before.get(colony.ownerId)).state.templates.map(template => ({ ...template, tribe: tribe.key })));
+    assert.ok(packet.state.templates.some(template => template.name === tribe.name + " 설계"));
     for (const [owner, game] of room.games) {
       assert.equal(game, games.get(owner));
       assert.equal(game.save(), before.get(owner));
@@ -56,7 +58,7 @@ test("종족을 왕복 전환해도 모든 군락의 진행과 개체 소유권�
   for (const game of room.games.values()) assert.equal(game.snapshot().simSeconds, .1);
 });
 
-test("전환한 종족과 군락별 진행 상태는 저장하고 다시 열어도 유지된다", () => {
+test("전환한 종족의 저장은 미지급 시작 지원금을 한 번만 적용하고 진행을 유지한다", () => {
   const room = createRoom("저장 전환", 13, "spring", null);
   const originalOwner = room.hostId;
   commandRoom(room, { type: "design", templateId: null, name: "샘방울 설계", slots: [], birth: false });
@@ -67,16 +69,21 @@ test("전환한 종족과 군락별 진행 상태는 저장하고 다시 열어�
   commandRoom(room, { type: "design", templateId: null, name: "포자 설계", slots: [], birth: true });
   const before = snapshotRoom(room, false);
   const saved = saveRoom(room);
+  assert.equal(JSON.parse(saved.games.find(([owner]) => owner === saved.hostId)[1]).state.startingPointsGranted, false);
   const restored = restoreRoom(structuredClone(saved));
   const after = snapshotRoom(restored, false);
   assert.equal(after.state.tribe, "spore");
   assert.equal(after.colonyId, before.colonyId);
-  for (const key of ["evolutionPoints", "resourceInventory", "nestLevel", "nestHealth", "templates", "explored", "discoveries"])
+  assert.equal(after.state.evolutionPoints, before.state.evolutionPoints + PLAYER_STARTING_POINTS);
+  assert.equal(JSON.parse(restored.games.get(restored.hostId).save()).state.startingPointsGranted, true);
+  const reopened = restoreRoom(structuredClone(saveRoom(restored)));
+  assert.equal(snapshotRoom(reopened, false).state.evolutionPoints, after.state.evolutionPoints);
+  for (const key of ["resourceInventory", "nestLevel", "nestHealth", "templates", "explored", "discoveries"])
     assert.deepEqual(after.state[key], before.state[key]);
   assert.deepEqual(after.state.agents.map(agent => agent.id), before.state.agents.map(agent => agent.id));
   switchTribe(restored, "spring");
   assert.equal(restored.hostId, originalOwner);
-  assert.equal(snapshotRoom(restored, false).state.templates[0].name, "샘방울 설계");
+  assert.ok(snapshotRoom(restored, false).state.templates.some(template => template.name === "샘방울 설계"));
   const legacy = saveRoom(createRoom("기존 저장", 13, "pebble", null));
   delete legacy.cheats;
   const oldRoom = restoreRoom(legacy);

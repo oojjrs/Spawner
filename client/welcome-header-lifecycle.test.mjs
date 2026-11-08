@@ -167,7 +167,7 @@ test('initial transient failure succeeds once and simultaneous start calls share
   assert.equal(h.loads.get(greenFoot), loadCount);
 });
 
-for (const failedAction of ['idle', 'walk']) test(`actual swallowed ${failedAction} decode failure never starts blank or changes appearance`, async t => {
+for (const failedAction of ['idle', 'walk']) test(`actual ${failedAction} decode failure never starts blank or changes appearance`, async t => {
   const h = await headerHarness(t, { failCurrent: failedAction });
   assert.equal(await h.start(), false);
   assert.equal(h.loads.get(greenFoot), 1);
@@ -177,7 +177,7 @@ for (const failedAction of ['idle', 'walk']) test(`actual swallowed ${failedActi
   assert.equal(h.callbacks.size, 0);
   assert.equal(h.paints.length, 0);
   assert.equal(h.resources(), null);
-  assert.ok(h.warnings.some(values => values.join(' ').includes('Missing welcome appearance assets: bean')));
+  assert.ok(h.warnings.some(values => values.join(' ').includes('Unit action assets are not ready: bean/' + failedAction)));
   const definition = h.scope.Spawner.unitActionArtDefinition({ tribe: 'bean', attributes: {} });
   assert.equal(h.actionLoads.get(definition.actions[failedAction].image), 1, 'Actual image request cooldown suppresses the immediate second decode');
   h.controls.failCurrent = false;

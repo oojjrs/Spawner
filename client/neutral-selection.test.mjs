@@ -1,4 +1,6 @@
 import test from "node:test";
+import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
+import { cloneDna } from "../server/dna-unit.mjs";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
@@ -15,7 +17,7 @@ function fixture(faction) {
   const strokes = [];
   const state = { agents: [own], rivals: [creature], selection: { kind: "agent", target: creature },
     simSeconds: 1, camera: { zoom: 64, followAgentId: creature.id }, visible: new Set([32, 35]) };
-  const scope = createContext({ state, WORLD_SIZE: 10, AGENT_HEIGHT: .7, strokes,
+  const scope = createContext({ state, WORLD_SIZE: 10, AGENT_HEIGHT: .7, strokes, Spawner: { unitDisplayAttributes },
     visibleAgents: () => state.agents.concat(state.rivals.filter(agent => state.visible.has(agent.y * 10 + agent.x))),
     screenToWorld: (x, y) => ({ x, y }), worldToScreen: (x, y) => ({ x: x * 64, y: y * 64 }),
     interpolatedAgentPosition: agent => agent, agentBasePosition: agent => agent, displayedAgent: agent => agent,
@@ -98,8 +100,8 @@ test("비선공 이동 중 다음 칸의 경로를 표시하고 정지 후 깃�
 test("snapshot은 실제 추적·공격 ID를 전달하고 안개·사망·교전 전 대상은 숨긴다", () => {
   const own = { id: "own", x: 2, y: 3, health: 10 };
   const nest = { id: "nest:1", kind: "nest", x: 4, y: 3, width: 2, height: 2, health: 100 };
-  const creature = { id: "creature", x: 1, y: 3, health: 10, pursuitTargetId: own.id };
-  const scope = createContext({ state: { agents: [own], rivals: [creature] }, WORLD_SIZE: 10,
+  const creature = { id: "creature", x: 1, y: 3, health: 10, pursuitTargetId: own.id, stats: {} };
+  const scope = createContext({ state: { agents: [own], rivals: [creature] }, WORLD_SIZE: 10, cloneDna,
     environment: { games: new Map([[1, { nest, buildings: [] }]]) },
     visibleCells: new Set([31, 32, 34]), combatDisposition: () => "aggressive" });
   const start = server.indexOf("      const targetAgents = new Map(");

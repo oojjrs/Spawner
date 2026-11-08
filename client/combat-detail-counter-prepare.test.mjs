@@ -1,3 +1,4 @@
+import { drawUnitAttackRing } from "./unit-attack-ring.mjs";
 import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -10,7 +11,7 @@ import { snapshotCombatVfx } from '../server/combat-vfx-journal.mjs';
 
 const source = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
 const helper = readFileSync(new URL('./combat-detail-dodge.test.mjs', import.meta.url), 'utf8').split('const event = ')[0];
-const box = { combatViewLayout, unitDisplaySize, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
+const box = { combatViewLayout, unitDisplaySize, drawUnitAttackRing, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
   DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect };
 createContext(box); runInContext(helper.slice(helper.indexOf('function extract(')), box);
 function modal(options = {}) {
@@ -117,8 +118,12 @@ function serverScene(tribe, reverse = false) {
     world: { terrain: new Uint8Array(320 * 320).fill(4) }, combatRandom: () => { rolls++; return .99; }, damageRandom: () => { rolls++; return .5; } };
   for (const actor of units) environment.games.set(actor.ownerId, { agents: [actor], receiveDamage(agent, amount) { agent.health = Math.max(0, agent.health - amount); } });
   const combat = createCombat(environment); combat.engage(a, b, 0);
+  b.combat.nextAttackAt = Infinity;
   const tick = time => { environment.simSeconds = time; for (const actor of units) if (actor.health > 0) combat.update(actor, time); };
-  tick(0); const firstAt = a.attack.hitAt; tick(firstAt);
+  tick(0);
+  for (let time = .05; !a.attack && time < 10; time += .05) tick(time);
+  assert.ok(a.attack, "접근을 끝낸 공격자가 공격을 시작한다");
+  const firstAt = a.attack.hitAt; tick(firstAt);
   return { environment, a, b, units, tick, firstAt, rolls: () => rolls };
 }
 

@@ -10,7 +10,7 @@ import {createUnitActionArt, unitActionArtPose} from './unit-action-art.mjs';
 import {validateDna} from '../server/dna-unit.mjs';
 import {unitDisplaySize} from './unit-size.mjs';
 const clip = UNIT_BIRTH_ART['bean/base'], idle = UNIT_ACTION_ART['bean/base'].reference;
-const dna = validateDna({version:5, level:1, budget:0, pieces:[]},1,0);
+const dna = validateDna({version:6, level:1, budget:0, pieces:[]},1,0);
 const actor = {tribe:'bean',dna,health:10,birth:{startedAt:10,readyAt:13.85}};
 const sha = path => createHash('sha256').update(readFileSync(path)).digest('hex');
 const body = clip.sceneLayers.layers[1], environment = clip.sceneLayers.layers[0];

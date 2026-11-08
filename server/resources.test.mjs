@@ -90,14 +90,17 @@ test("저장된 2세대 월드의 삭제 자원을 제외하고 굴·부족 배�
   const world = generateWorld(731047, 2);
   const digest = value => createHash("sha256").update(JSON.stringify(value)).digest("hex");
   assert.ok(world.resources.every(([, , , key]) => !["nutrients", "grass-fiber", "sand", "iron-ore", "copper-ore", "quartz", "root-fiber"].includes(key)));
-  assert.equal(digest(world.burrows), "004d7cbff3d53c72e90ce98d219591f51f04ddb47e2fda7c073642ffe929e305");
-  assert.equal(digest(world.tribes), "49f16aacc73040601831a7393ef09a5685b2b5081b7ba5d8f777003e26a0fcb4");
+  assert.equal(digest(world.burrows), "45f7f36c4e0d9449cd00eb622d02b8b01df68b3b2fd4d082024768da80f78051");
+  assert.equal(digest(world.tribes), "7e2ab438459426c5242ab09e16717b98d5d3c6df6260a76775c14c5a497b32d3");
+  assert.ok(world.hazards.every(hazard => hazard !== 2));
+  const placements = structuredClone({ burrows: world.burrows, tribes: world.tribes });
   const surviving = world.resources.flatMap(([x, y, amount, key]) => {
     const type = migrateResourceType(key);
-    return type === null ? [] : [[x, y, amount, type]];
+    return type === null ? [] : [[x, y, 5000, type]];
   });
   const room = { world, food: new Map() };
   populateResourceNodes(room);
+  assert.deepEqual({ burrows: world.burrows, tribes: world.tribes }, placements);
   assert.deepEqual(world.resources, surviving);
   assert.deepEqual([...room.food.values()].filter(cell => !["tree", "dew"].includes(cell.resourceType))
     .map(cell => [cell.x, cell.y, cell.amount, cell.resourceType]), surviving);

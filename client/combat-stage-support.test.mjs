@@ -1,18 +1,20 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { fixture, withStage, supportDraw, sheep } from "./test-support/combat-stage-support.mjs";
+import { combatViewLayout } from "./unit-size.mjs";
+import { CREATURE_ATTACK_ANIMATIONS } from "./unit-animation.mjs";
 
 const near = (actual, expected, label) => assert.ok(Math.abs(actual - expected) < 1e-7, `${label}: ${actual} != ${expected}`);
 
-test("the laboratory keeps the measured rear hoof planted throughout sheep rams", () => {
+test("the laboratory keeps the measured rear hoof planted throughout sheep rams", async () => {
   for (const side of [0,1]) for (const keyOnly of [false,true]) for (const combo of [false,true])
     for (const group of [false,true]) for (const [width,height,dpr] of [[360,360,1],[1040,480,2],[1440,680,3]])
-      withStage(({ draw }) => {
+      await withStage(async ({ draw }) => {
         const { trial, source } = fixture({ side, keyOnly, combo, group });
         let first; const frames = new Set();
         for (let time = 1; time < source.attack.endsAt - 1e-6; time += .005) {
           trial.time = time;
-          const captured = supportDraw(draw(trial), source, time, dpr);
+          const captured = supportDraw(await draw(trial), source, time, dpr);
           frames.add(captured.frame);
           first ||= captured;
           captured.support.forEach((value, axis) => near(value, first.support[axis], `hoof axis ${axis}`));
@@ -22,28 +24,30 @@ test("the laboratory keeps the measured rear hoof planted throughout sheep rams"
       }, { width, height, dpr });
 });
 
-test("the planted ram still responds to incoming impact recoil and reduced motion", () => {
-  for (const side of [0,1]) for (const reduced of [false,true]) withStage(({ draw }) => {
+test("the planted ram still responds to incoming impact recoil and reduced motion", async () => {
+  for (const side of [0,1]) for (const reduced of [false,true]) await withStage(async ({ draw }) => {
     const { trial, source } = fixture({ side });
     trial.time = 1.37;
-    const base = supportDraw(draw(trial, 1000), source, trial.time);
+    const base = supportDraw(await draw(trial, 1000), source, trial.time);
     trial.history.push({ kind: "hit", targetId: source.id, attackerId: "target", damage: 3, time: trial.time });
-    draw(trial, 1100);
-    const recoil = supportDraw(draw(trial, 1200), source, trial.time);
+    await draw(trial, 1100);
+    const recoil = supportDraw(await draw(trial, 1200), source, trial.time);
     const direction = side ? -1 : 1;
     if (reduced) near(recoil.root[0], base.root[0], "no reduced-motion recoil");
     else assert.ok((base.root[0] - recoil.root[0]) * direction > 15, "incoming hit still pushes backward");
   }, { reduced });
 });
 
-test("non-support-locked neutral attacks retain their existing 45px contact lunge", () => {
-  for (const species of ["soil-boar","vine-turtle","bubble-toad"]) for (const side of [0,1]) withStage(({ draw }) => {
+test("neutral contact lunges follow the approved fixed-support registration", async () => {
+  for (const [species, lunge] of [["soil-boar",0],["vine-turtle",0],["bubble-toad",0],
+    ["flower-tail-bird",45],["rolling-acorn",45],["snare-vine",45]]) for (const side of [0,1]) await withStage(async ({ draw }) => {
     const { trial, source } = fixture({ side, species });
     trial.time = source.attack.hitAt;
-    const body = draw(trial).find(entry => entry.image.includes(`/CreatureAttackV2/${species}/`));
+    const body = (await draw(trial)).find(entry => entry.image === CREATURE_ATTACK_ANIMATIONS[species].image);
     assert.ok(body);
-    const baseline = 1040 * (side ? .6 : .4), direction = side ? -1 : 1;
-    near(body.matrix[4], baseline + direction * 45, species);
+    const baseline = combatViewLayout(1040, 480, trial.agents).positions.get(source.id).x, direction = side ? -1 : 1;
+    assert.equal(!!CREATURE_ATTACK_ANIMATIONS[species].fixedSupport, lunge === 0);
+    near(body.matrix[4], baseline + direction * lunge, species);
   });
 });
 

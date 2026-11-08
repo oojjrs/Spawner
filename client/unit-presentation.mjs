@@ -132,15 +132,13 @@ export function createUnitPresentation(options) {
   function drawAgentHead() {}
 
   function prepareSproutCombatFrames(entry, frameCount) {
+    if (entry !== unitAnimationSheets.get("bean").get("idle") || entry.bodyBounds) return;
     const animation = entry.animation, size = animation.frameSize;
-    entry.bodyBounds = [];
-    entry.bodyFrames = [];
-    entry.floors = [];
-    entry.attributeFrames = new Map();
+    const bodyBounds = [];
     const surface = createSurface(1, 1);
     surface.width = surface.height = size;
     const context = surface.getContext("2d", { willReadFrequently: true });
-    for (let index = 0; index < frameCount; index++) {
+    for (let index = 0; index < 1; index++) {
       context.clearRect(0, 0, size, size);
       context.drawImage(entry.sprite, index % animation.columns * size, Math.floor(index / animation.columns) * size,
         size, size, 0, 0, size, size);
@@ -150,7 +148,7 @@ export function createUnitPresentation(options) {
         mask[pixel] = pixels[offset + 3] > 100 && pixels[offset] > 130 &&
           pixels[offset + 2] > pixels[offset] * .78 && pixels[offset + 1] - pixels[offset] < 35 ? 1 : 0;
       }
-      let largest = 0, silhouette = [], bounds = { x: size * .25, y: size * .43, width: size * .5, height: size * .4 };
+      let largest = 0, bounds = { x: size * .25, y: size * .43, width: size * .5, height: size * .4 };
       for (let pixel = 0; pixel < mask.length; pixel++) {
         if (!mask[pixel]) continue;
         const queue = [pixel]; mask[pixel] = 0;
@@ -163,34 +161,11 @@ export function createUnitPresentation(options) {
             mask[next] = 0; queue.push(next);
           }
         }
-        if (queue.length > largest) { largest = queue.length; silhouette = queue; bounds = { x: left, y: top, width: right - left, height: bottom - top }; }
+        if (queue.length > largest) { largest = queue.length; bounds = { x: left, y: top, width: right - left, height: bottom - top }; }
       }
-      entry.bodyBounds.push(bounds);
-      let floor = bounds.y + bounds.height;
-      for (let y = size - 1; y >= bounds.y + bounds.height / 2; y--) {
-        let found = false;
-        for (let x = Math.max(0, bounds.x - 2); x < Math.min(size, bounds.x + bounds.width + 2); x++)
-          if (pixels[(y * size + x) * 4 + 3] > 100) { found = true; break; }
-        if (found) { floor = y + 1; break; }
-      }
-      entry.floors.push(floor);
-      const rows = Array.from({ length: size }, () => ({ left: size, right: 0 }));
-      for (const pixel of silhouette) {
-        const x = pixel % size, row = rows[Math.floor(pixel / size)];
-        row.left = Math.min(row.left, x); row.right = Math.max(row.right, x + 1);
-      }
-      const margin = Math.max(1, Math.round(size * .008));
-      for (let y = 0; y < bounds.y + bounds.height * .7; y++) {
-        let left = size, right = 0;
-        for (let row = Math.max(0, y - margin); row <= Math.min(size - 1, y + margin); row++) {
-          left = Math.min(left, rows[row].left); right = Math.max(right, rows[row].right);
-        }
-        for (let x = 0; x < size; x++) if (x < left - margin || x >= right + margin) pixels[(y * size + x) * 4 + 3] = 0;
-      }
-      const body = createSurface(1, 1); body.width = body.height = size;
-      body.getContext("2d").putImageData(data, 0, 0);
-      entry.bodyFrames.push(body);
+      bodyBounds.push(bounds);
     }
+    entry.bodyBounds = bodyBounds;
   }
 
   function sproutCombatFrame() { return null; }
@@ -199,17 +174,18 @@ export function createUnitPresentation(options) {
 
   function drawAgentBaseResource() { return false; }
 
-  function drawAgentAnimation(ctx, agent, centerX, floor, height, outlineColor) {
-    const pose = unitActionArtPose(agent, state.simSeconds);
+  function drawAgentAnimation(ctx, agent, centerX, floor, height, outlineColor, time) {
+    const animationTime = time ?? state.simSeconds;
+    const pose = unitActionArtPose(agent, animationTime);
     if (!pose) return false;
     const scale = options.displayScale(agent) || 1;
     const facing = unitFacing(agent);
     if (pose.action === "birth" && options.drawPackedPebbleBirth) {
-      const result = options.drawPackedPebbleBirth(ctx, agent, state.simSeconds, centerX, floor,
+      const result = options.drawPackedPebbleBirth(ctx, agent, animationTime, centerX, floor,
         height / AGENT_HEIGHT / scale, facing < 0, outlineColor, options.birthSurface?.());
       if (result?.handled) return pose;
     }
-    actionArt.draw(ctx, agent, state.simSeconds, centerX, floor, height / AGENT_HEIGHT / scale, facing < 0,
+    actionArt.draw(ctx, agent, animationTime, centerX, floor, height / AGENT_HEIGHT / scale, facing < 0,
       outlineColor ? (context, image, crop, destination) => drawSelectionOutline(image,
         destination.x, destination.y, destination.width, destination.height,
         { owner: image, x: crop.x, y: crop.y, size: crop.width, height: crop.height, index: pose.frame }, outlineColor) : null);
@@ -346,5 +322,5 @@ export function createUnitPresentation(options) {
     drawBody();
   }
 
-  return { hasEmbeddedCargo, animationReady: actionArt.readyFrame, prepareAnimation: actionArt.prepare, agentIdlePose, agentBobOffset, agentWalkPose, drawAgentFeet, agentJumpOffset, agentAppearanceBodyPose, agentBodyPose, agentHeadPose, drawAgentHead, prepareSproutCombatFrames, sproutCombatFrame, drawAgentRanged, drawAgentBaseResource, drawAgentAnimation, drawAgentMovement, drawAgentAttack, drawAgentAppearanceBody, agentAppearanceKey, agentBodyLift, composeAgentAntennae, composeAgentBaseFeet, composeAgentSprite, drawRootMotion };
+  return { hasEmbeddedCargo, animationReady: actionArt.readyFrame, prepareAnimation: actionArt.prepare, prepareActions: actionArt.prepareActions, agentIdlePose, agentBobOffset, agentWalkPose, drawAgentFeet, agentJumpOffset, agentAppearanceBodyPose, agentBodyPose, agentHeadPose, drawAgentHead, prepareSproutCombatFrames, sproutCombatFrame, drawAgentRanged, drawAgentBaseResource, drawAgentAnimation, drawAgentMovement, drawAgentAttack, drawAgentAppearanceBody, agentAppearanceKey, agentBodyLift, composeAgentAntennae, composeAgentBaseFeet, composeAgentSprite, drawRootMotion };
 }

@@ -2,10 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { UNIT_ACTION_ART } from './unit-action-art-assets.mjs';
 import { unitActionArtPose } from './unit-action-art.mjs';
 import { UNIT_BIRTH_ART } from './unit-birth-art-assets.mjs';
 const root = new URL('../', import.meta.url);
+const hashFile = path => createHash('sha256').update(readFileSync(new URL(path, root))).digest('hex');
+const normalizedBirths = Object.assign({}, ...['tools/source-facing-normalization-20261108/pixel-changes.json', 'tools/secretion-source-normalization-20261108/pixel-changes.json'].map(path => JSON.parse(readFileSync(new URL(path, root))).changes));
 
 test('three carapace attacks preserve actual LEFT idle endpoint pixels and registrations', () => {
   const records=[];
@@ -28,11 +31,20 @@ for record in json.loads(sys.argv[1]):
 });
 
 for(const form of ['blade-carapace','blade-secretion','secretion-carapace','blade-secretion-carapace']) {
- test(`pebble ${form}: all new roll boundaries and original key poses remain exact`,()=>{
+ test(`pebble ${form}: all new roll boundaries and original key poses remain exact after recorded facing normalization`,()=>{
   const key='pebble/'+form,clip=UNIT_ACTION_ART[key].actions.birth;
   assert.equal(UNIT_BIRTH_ART[key],undefined); assert.equal(clip.durationMs,2140);
   assert.equal(clip.frameCount,form==='blade-carapace'?13:14);
   const publication=JSON.parse(readFileSync(new URL(`AnimationCandidates/pebble-combo-birth-roll-v2-20261107/${form}/publication-manifest.json`,root)));
+  const normalized = normalizedBirths[publication.actions.birth.sheet];
+  assert.equal(hashFile(publication.originalSourceSheet), publication.originalSourceSHA256);
+  assert.equal(hashFile(publication.actions.birth.sheet), publication.actions.birth.sheetSHA256);
+  if (normalized) {
+   assert.equal(normalized.afterSha256, publication.actions.birth.sheetSHA256);
+   assert.equal(normalized.verification.exactRgbaPerCellMirror, true);
+   assert.equal(normalized.verification.frameOrderUnchanged, true);
+   assert.deepEqual([normalized.frameWidth, normalized.frameHeight, normalized.columns, normalized.frameCount], [clip.frameSize, clip.frameHeight, clip.columns, clip.frameCount]);
+  }
   for(const start of [0,100.125])for(const duration of [2.14,5])for(const facing of [-1,1]) {
    const agent={tribe:'pebble',attributes:Object.fromEntries(form.split('-').map(gene=>[gene,1])),health:10,facing,birth:{startedAt:start,readyAt:start+duration}};
    let ms=0;
@@ -48,7 +60,9 @@ for(const form of ['blade-carapace','blade-secretion','secretion-carapace','blad
 from PIL import Image
 p=json.loads(sys.argv[1]);a=p['actions']['birth'];new=Image.open(a['sheet']).convert('RGBA');old=Image.open(p['originalSourceSheet']).convert('RGBA');w=a['frameSize'];h=a['frameHeight'];cols=a['columns']
 for pair in p['preservedOriginalFrames']:
- i,j=pair['candidateFrame'],pair['sourceFrame'];assert new.crop((i%cols*w,i//cols*h,i%cols*w+w,i//cols*h+h)).tobytes()==old.crop((j%4*w,j//4*h,j%4*w+w,j//4*h+h)).tobytes()
-`,JSON.stringify(publication)],{cwd:root});
+ i,j=pair['candidateFrame'],pair['sourceFrame'];reference=old.crop((j%4*w,j//4*h,j%4*w+w,j//4*h+h))
+ if p['normalizedFacing']: reference=reference.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
+ assert new.crop((i%cols*w,i//cols*h,i%cols*w+w,i//cols*h+h)).tobytes()==reference.tobytes()
+`,JSON.stringify({ ...publication, normalizedFacing: !!normalized })],{cwd:root});
  });
 }

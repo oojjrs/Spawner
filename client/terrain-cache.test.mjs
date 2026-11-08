@@ -116,7 +116,8 @@ function session(database, assets) {
   }
   const context = createContext({
     WORLD_SIZE: 320, COLONY_SIZE: 5, TERRAIN_TYPES: Array.from({ length: 10 }, (value, index) => index),
-    worldMap, terrainRendering: rendering, forest,
+    worldMap, terrainRendering: rendering, forest, worldRenderingGeneration: 0, cancelWorldRendering: null,
+    hazardGroundSprites: [], forestOverview: { revision: 0 },
     clamp: (value, min, max) => Math.min(max, Math.max(min, value)),
     grassGround: { decode: async () => {} }, terrainGrounds: {},
     terrainGroundPixels: () => { stats.grounds++; return Uint8Array.of(assets.ground); },
@@ -433,4 +434,17 @@ test("경계 벌목의 이미지가 일부만 저장돼도 이전 나무 이미�
   await resumed.prepare(map, []);
   assert.equal(resumed.stats.placements, 0);
   assert.deepEqual(resumed.stats.regions.filter(region => !region.cached).map(region => region.index).sort((a, b) => a - b), [1, 20, 21]);
+});
+
+test("cached layouts retain an independent burrow snapshot and reject changed clearings", async () => {
+  const database = storage(), map = world(), assets = { ground: 1, tree: 1, manifest: true };
+  map.burrows = [];
+  const client = session(database, assets);
+  await client.prepare(map, []);
+  assert.equal(client.stats.placements, 1);
+  map.burrows.push({ id: "new", x: 10, y: 0, width: 1, height: 1 });
+  await client.prepare(map, []);
+  assert.equal(client.stats.placements, 2);
+  await client.prepare(map, []);
+  assert.equal(client.stats.placements, 2);
 });

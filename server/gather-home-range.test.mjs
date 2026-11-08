@@ -64,50 +64,52 @@ function tick(fixture) {
 }
 
 for (const [surface, api] of surfaces) for (const tribe of Object.keys(primary)) {
-  test(surface + ' ' + tribe + ': 가까운 범위 밖 자원 6곳이 범위 안 채집 후보를 밀어내지 않는다', () => {
+  test(surface + ' ' + tribe + ': 안테나 없이 옛 둥지 경계 밖의 가까운 자원을 우선 채집한다', () => {
     const f = aiFixture(api, tribe, [[18,12], [18,11], [18,13], [18,10], [18,14], [19,12], [7,12]]);
     const plans = f.ai.evaluate(f.agent, false);
     assert.equal(plans[0]?.action, 'collect');
-    assert.equal(plans[0].target.key, '7,12');
+    assert.ok(plans[0].target.x >= 18);
     assert.ok(plans.every(plan => f.context.canMove(f.agent, plan.target.x, plan.target.y)));
     assert.equal(f.agent.x, 17);
   });
 
-  test(surface + ' ' + tribe + ': 범위 밖 구세이브는 귀환 중 다시 멀어지는 우회로를 계획하지 않는다', () => {
+  test(surface + ' ' + tribe + ': 둥지 밖 구세이브도 지형을 따라 귀환 우회로를 계획한다', () => {
     const f = aiFixture(api, tribe, []);
     Object.assign(f.agent, { x: 20, y: 16 });
     const corridor = new Set(['20,16', '19,16', '19,17', '18,17', '17,17', '17,16', '17,15', '17,14']);
     f.context.walkable = (x, y) => corridor.has(x + ',' + y);
     const ai = api.createUtilityAI(f.context);
-    assert.equal(ai.nextStep(f.agent, { x: 17, y: 14 }), null);
+    const next=ai.nextStep(f.agent, { x: 17, y: 14 });assert.equal(next.x,19);assert.equal(next.y,16);
   });
 
-  test(surface + ' ' + tribe + ': 저장된 범위 밖 채집 목표는 다음 주기까지 반복하지 않고 폐기한다', () => {
+  test(surface + ' ' + tribe + ': 저장된 둥지 밖 채집 목표와 이동을 유지한다', () => {
     const f = gameFixture(api, tribe, { x: 18, y: 12 }, [{ x: 17, y: 12 }, { x: 18, y: 12 }]);
     tick(f);
-    assert.notEqual(f.agent.utility?.target?.key, '18,12');
-    assert.ok(f.agent.x <= 17);
+    assert.equal(f.agent.utility?.target?.key, '18,12');
+    assert.equal(f.agent.x,18);
   });
 
-  test(surface + ' ' + tribe + ': 목표는 범위 안이어도 저장 경로가 밖으로 나가면 안쪽 경로로 다시 계산한다', () => {
+  test(surface + ' ' + tribe + ': 저장된 유효 경로는 옛 둥지 경계를 지나도 유지한다', () => {
     const f = gameFixture(api, tribe, { x: 16, y: 12 }, [
       { x: 17, y: 12 }, { x: 18, y: 12 }, { x: 18, y: 11 }, { x: 17, y: 11 }, { x: 16, y: 11 }, { x: 16, y: 12 }
     ]);
     tick(f);
-    assert.equal(f.agent.x, 16);
+    assert.equal(f.agent.x, 18);
     assert.equal(f.agent.y, 12);
   });
 
-  test(surface + ' ' + tribe + ': 비동기 판단이 범위 밖 목표를 돌려주면 유효한 귀환 후보를 선택한다', () => {
+  test(surface + ' ' + tribe + ': 비동기 판단이 둥지 밖 자원을 선택해도 유효한 채집 후보로 받는다', () => {
     const f = gameFixture(api, tribe, { x: 16, y: 12 }, []);
     Object.assign(f.agent, { carrying: 1, carryingType: primary[tribe], decisionPending: 'restore' });
     f.environment.decisionPlanner = { request() { return [
+      { action: 'explore', target: { x: 22, y: 12, key: 'enemy-search:406' }, route: [], score: 200 },
+      { action: 'fight', target: { x: 23, y: 12, id: 'rival', key: 'rival' }, route: [], score: 150 },
       { action: 'collect', target: { x: 18, y: 12, key: '18,12' }, route: [], plannedCargo: 2, score: 100 },
       { action: 'return', target: { x: 10, y: 10, key: 'home' }, route: [], score: 50 }
     ]; } };
     tick(f);
-    assert.equal(f.agent.utility?.action, 'return');
-    assert.equal(f.agent.utility.target.key, 'home');
+    assert.equal(f.agent.utility?.action, 'collect');
+    assert.equal(f.agent.utility.target.key, '18,12');
     assert.equal(f.agent.carrying, 1);
   });
 }

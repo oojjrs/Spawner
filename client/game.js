@@ -31,6 +31,18 @@
     const combatVfxCursor = Spawner.createCombatVfxCursor();
     const detailCombatVfx = Spawner.createDetailCombatVfx();
     const detailVfxImages = new Map();
+    const detailVfxRendering = typeof OffscreenCanvas === "undefined" ? null : Spawner.createEffectRendering(
+      (width, height) => new OffscreenCanvas(width, height), 8 * 1024 * 1024);
+    let detailVfxReady = null;
+    function prepareDetailVfx() {
+      if (!detailVfxReady) detailVfxReady = Promise.all(Spawner.DETAIL_COMBAT_VFX_ASSETS.map(path =>
+        detailVfxImage(path).decode())).catch(error => {
+          detailVfxReady = null;
+          for (const [path, image] of detailVfxImages) if (!image.naturalWidth) detailVfxImages.delete(path);
+          throw error;
+        });
+      return detailVfxReady;
+    }
     function detailVfxImage(path) {
       if (!detailVfxImages.has(path)) {
         const image = globalThis.SpawnerAssets.image(); image.src = assetSource(path);
@@ -207,28 +219,7 @@
         hideHelpTooltip();
         return;
       }
-      const right = window.innerWidth - 10;
-      helpTooltip.style.maxWidth = Math.max(0, right - 10) + "px";
-      const width = helpTooltip.offsetWidth;
-      const left = rect.right + 8 + width <= right ? rect.right + 8 : rect.left - width - 8;
-      const x = clamp(left, 10, Math.max(10, right - width));
-      helpTooltip.style.maxHeight = "";
-      const overlapsTarget = x < rect.right && x + width > rect.left;
-      if (helpTooltipTarget.dataset.helpDna === "true" && overlapsTarget) {
-        helpTooltip.style.maxHeight = Math.max(80, Math.max(window.innerHeight - rect.bottom - 18, rect.top - 18)) + "px";
-      }
-      let top = clamp(rect.top, 10, Math.max(10, window.innerHeight - helpTooltip.offsetHeight - 10));
-      if (helpTooltipTarget.dataset.helpDna === "true" && overlapsTarget) {
-        const below = rect.bottom + 8, above = rect.top - helpTooltip.offsetHeight - 8;
-        top = below + helpTooltip.offsetHeight <= window.innerHeight - 10 ? below : above >= 10 ? above : top;
-      }
-      const notifications = discoveryToasts.childElementCount ? discoveryToasts.getBoundingClientRect() : null;
-      if (notifications && x + width > notifications.left && x < notifications.right &&
-          top + helpTooltip.offsetHeight > notifications.top && top < notifications.bottom) {
-        top = Math.max(10, notifications.top - helpTooltip.offsetHeight - 12);
-      }
-      helpTooltip.style.left = x + "px";
-      helpTooltip.style.top = top + "px";
+      SpawnerTooltips.position(helpTooltip, helpTooltipTarget);
     }
 
     function setEvolutionText(element, text) {
@@ -366,8 +357,6 @@
     const selectionColor = "#f4f7fa";
     const hoverColor = "#99e6cf";
     const selectionOutlines = new WeakMap();
-    const agentSelectionLayer = document.createElement("canvas");
-    const agentSelectionMask = document.createElement("canvas");
     const foodSelectionShape = document.createElement("canvas");
     foodSelectionShape.width = 1;
     foodSelectionShape.height = 1;
@@ -509,16 +498,6 @@
       sprite.src = assetSource(Spawner.STRUCTURE_EFFECT_ASSETS[key]);
       return [key, sprite];
     }));
-    const sporeBirthSheet = globalThis.SpawnerAssets.image();
-    sporeBirthSheet.src = assetSource(Spawner.SPORE_BIRTH_ANIMATION.image);
-    const sporeBirthFrames = new Map();
-    let sporeBirthReady = null;
-    const springBirthSheet = globalThis.SpawnerAssets.image();
-    springBirthSheet.src = assetSource(SPRING_BIRTH_ANIMATION.image);
-    const pebbleBirthSheet = globalThis.SpawnerAssets.image();
-    pebbleBirthSheet.src = assetSource(PEBBLE_BIRTH_ANIMATION.image);
-    const pebbleBirthForeground = globalThis.SpawnerAssets.image();
-    pebbleBirthForeground.src = assetSource(PEBBLE_BIRTH_ANIMATION.foreground);
     const agentHeadMotions = new Map();
     const agentDisplayLayout = { time: null, agents: null, rivals: null, positions: new Map(), cells: new Map(), offsets: new Map() };
     const agentView = { time: null, agents: null, rivals: null, units: [] };
@@ -1350,20 +1329,22 @@
       return frames;
     }
 
-    async function prepareAgentRendering() {
-      const combatTribes = new Set([...state.agents, ...state.rivals].filter(agent => !agent.species &&
-        Spawner.combatAttributeKeys(agent.attributes).length).map(agent => agent.tribe || "bean"));
-      await Promise.all([...combatTribes].map(tribe => combatAttributeArt.prepare(tribe)));
-      const tribes = new Set([...state.agents, ...state.rivals].filter(agent => !agent.species).map(agent => agent.tribe || "bean"));
-      await Promise.all([...tribes].map(async tribe => {
-        for (const entry of unitAnimationSheets.get(tribe).values()) {
-          if (entry.frames) continue;
-          const animation = entry.animation;
-          entry.frames = await prepareAnimationFrames(entry.sprite, animation.frameSize,
-            animation.columns, animation.frameCount, animation.frameSize);
-        }
-      }));
-      for (const agent of [...state.agents, ...state.rivals]) {
+    async function prepareAgentRendering(packet) {
+      const agents = [...packet.state.agents, ...packet.state.rivals];
+      const tribes = new Set(agents.filter(agent => !agent.species).map(agent => agent.tribe || "bean"));
+      await Promise.all([...tribes].map(key => prepareUnitAnimationSheets(Spawner.PLAYER_TRIBES.find(tribe => tribe.key === key))));
+      await Promise.all(agents.filter(agent => !agent.species).flatMap(agent => [
+        unitPresentation.prepareAnimation(agent, packet.state.simSeconds),
+        unitPresentation.prepareActions(agent, ["idle", "walk", "carry", "harvest", "throw", "attack", "ranged", "hurt", "death"])
+      ]));
+      await Promise.all(agents.filter(agent => !agent.species && Spawner.combatAttributeKeys(agent.attributes).length)
+        .map(agent => combatAttributeArt.prepareAgent(agent, packet.state.simSeconds)));
+      const species = new Set(agents.map(agent => agent.species).filter(Boolean));
+      await Promise.all([...species].flatMap(key => [creatureIdleReady.get(key),
+        key === "spiny-back-beetle" ? beetleRenderingReady : null,
+        ...[creatureIdleSheets, creatureWalkSheets, creatureAttackSheets, creatureRangedSheets, creatureHurtSheets]
+          .map(sheets => sheets.get(key)?.sprite.decode())]));
+      for (const agent of agents) {
         if (agent.species) continue;
         const attributes = Spawner.unitDisplayAttributes(agent);
         for (const layer of agentSpriteLayers(attributes)) selectionContour(agentSprite(agent, layer), null);
@@ -1427,7 +1408,8 @@
         const cells = world[name] || [];
         if (!layout[name] || layout[name].length !== cells.length || !layout[name].every((value, index) => value === cells[index])) return false;
       }
-      return JSON.stringify(layout.resourceCells) === JSON.stringify(world.resourceCells || []);
+      return JSON.stringify(layout.resourceCells) === JSON.stringify(world.resourceCells || []) &&
+        JSON.stringify(layout.burrows || []) === JSON.stringify(world.burrows || []);
     }
 
     async function readWorldRendering(key, world) {
@@ -1446,8 +1428,9 @@
       finally { database?.close(); }
     }
 
-    async function restoreWorldRendering(layout) {
+    async function restoreWorldRendering(layout, generation) {
       const image = await createImageBitmap(layout.hazardImage);
+      if (generation !== worldRenderingGeneration) { image.close(); return; }
       resetForestRendering();
       forest.trees = layout.trees;
       for (const tree of forest.trees) forest.cells.set(tree.column + "," + tree.row, tree);
@@ -1462,9 +1445,10 @@
     }
 
     function worldRenderingRecord() {
-      return { key: forest.layoutKey, layer: "world", terrain: worldMap.terrain, hazards: worldMap.hazards,
-        treeCells: worldMap.treeCells ? worldMap.treeCells.slice() : new Uint8Array(), resourceCells: forest.resourceCells,
-        rendering: { key: terrainRendering.key, phase: terrainRendering.phase, edges: terrainRendering.edges },
+      return { key: forest.layoutKey, layer: "world", terrain: worldMap.terrain.slice(), hazards: worldMap.hazards.slice(),
+        treeCells: worldMap.treeCells ? worldMap.treeCells.slice() : new Uint8Array(), resourceCells: forest.resourceCells.map(cell => [...cell]),
+        burrows: worldMap.burrows.map(burrow => ({ ...burrow })),
+        rendering: { key: terrainRendering.key, phase: terrainRendering.phase, edges: terrainRendering.edges.slice() },
         trees: [...forest.cells.values()], regions: [...forest.imageRegions.values()],
         hazardCells, hazardImage: forest.hazardImage };
     }
@@ -1534,18 +1518,20 @@
       worldMap.treeCells = world.treeCells ? Uint8Array.from(world.treeCells) : null;
       forest.layoutKey = worldRenderingKey(world, colonies);
       forest.resourceCells = world.resourceCells || [];
-      const layout = null;
-      updateForest(world.seed, world.resourceCells);
-      await Promise.all(hazardGroundSprites.map(sprite => sprite.decode()));
+      const layout = forest.layoutKey ? await readWorldRendering(forest.layoutKey, world) : null;
       if (generation !== worldRenderingGeneration) return;
-      updateHazards(world.seed);
-      forest.hazardImage = null;
-      updateTerrainRendering(world.seed, null);
-      for (const image of terrainRendering.forest.values()) image.close();
-      terrainRendering.forest.clear();
-      terrainRendering.forestKeys.clear();
+      if (layout) await restoreWorldRendering(layout, generation);
+      else {
+        updateForest(world.seed, world.resourceCells);
+        await Promise.all(hazardGroundSprites.map(sprite => sprite.decode()));
+        if (generation !== worldRenderingGeneration) return;
+        updateHazards(world.seed);
+        forest.hazardImage = null;
+      }
+      if (generation !== worldRenderingGeneration) return;
       let key = layout ? layout.rendering.key : world.seed >>> 0;
       if (!layout) for (const type of worldMap.terrain) key = Math.imul(key ^ type, 16777619) >>> 0;
+      if (terrainRendering.key !== key) updateTerrainRendering(world.seed, layout?.rendering);
       const trees = forest.trees.filter(tree => !colonies.some(colony => {
         return tree.column >= colony.x && tree.column < colony.x + COLONY_SIZE &&
           tree.row >= colony.y && tree.row < colony.y + COLONY_SIZE;
@@ -1729,6 +1715,7 @@
       terrainRendering.forest.set(index, surface);
       terrainRendering.forestKeys.set(index, key);
       forest.overrides.delete(index);
+      forestOverview.revision++;
       saveForestRegion(index, key, surface);
     }
 
@@ -1737,19 +1724,33 @@
       context.filter = `saturate(${0.78 + detail * 0.22}) contrast(${0.8 + detail * 0.2}) brightness(${0.86 + detail * 0.14})`;
     }
 
+    const forestOverview = { canvas: null, key: null, revision: 0 };
     function drawForestOverview(topLeft, bottomRight) {
-      ctx.save();
-      applyForestMapStyle(ctx, clamp((state.camera.zoom - 6) / 12, 0, 1));
-      ctx.imageSmoothingQuality = "low";
-      for (const index of forest.regions) {
-        const x = index % Math.ceil(WORLD_SIZE / 16) * 16, y = Math.floor(index / Math.ceil(WORLD_SIZE / 16)) * 16;
-        if (x + 16 < topLeft.x || y + 16 < topLeft.y || x > bottomRight.x || y > bottomRight.y) continue;
-        const point = worldToScreen(x, y), size = 16 * state.camera.zoom;
-        const replacement = forest.overrides.get(index);
-        if (replacement) ctx.drawImage(replacement, point.x, point.y, size, size);
-        else if (terrainRendering.forest.has(index)) ctx.drawImage(terrainRendering.forest.get(index), point.x, point.y, size, size);
+      const camera = state.camera, ratio = viewport.pixelRatio || 1;
+      const key = [worldRenderingGeneration, forestOverview.revision, forest.regions.size, camera.x, camera.y,
+        camera.zoom, viewport.width, viewport.height, ratio].join(":");
+      if (!forestOverview.canvas) forestOverview.canvas = document.createElement("canvas");
+      const surface = forestOverview.canvas;
+      if (forestOverview.key !== key) {
+        const width = Math.round(viewport.width * ratio), height = Math.round(viewport.height * ratio);
+        if (surface.width !== width || surface.height !== height) { surface.width = width; surface.height = height; }
+        const context = surface.getContext("2d");
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+        context.clearRect(0, 0, viewport.width, viewport.height);
+        context.save();
+        applyForestMapStyle(context, clamp((camera.zoom - 6) / 12, 0, 1));
+        context.imageSmoothingQuality = "low";
+        for (const index of forest.regions) {
+          const x = index % Math.ceil(WORLD_SIZE / 16) * 16, y = Math.floor(index / Math.ceil(WORLD_SIZE / 16)) * 16;
+          if (x + 16 < topLeft.x || y + 16 < topLeft.y || x > bottomRight.x || y > bottomRight.y) continue;
+          const point = worldToScreen(x, y), size = 16 * camera.zoom;
+          const image = forest.overrides.get(index) || terrainRendering.forest.get(index);
+          if (image) context.drawImage(image, point.x, point.y, size, size);
+        }
+        context.restore();
+        forestOverview.key = key;
       }
-      ctx.restore();
+      ctx.drawImage(surface, 0, 0, viewport.width, viewport.height);
     }
 
     function clipExploredRegions() {
@@ -2311,7 +2312,7 @@
         layer.worker.onmessage = event => {
           layer.pending = false;
           const result = event.data;
-          if (result.roomId !== connection.roomId) { result.image.close(); return; }
+          if (result.roomId !== connection.roomId || !state.footprints.size) { result.image.close(); return; }
           layer.bitmap?.image.close(); layer.bitmap = result;
         };
         layer.worker.onerror = () => { layer.worker.terminate(); layer.worker = null; layer.pending = false; layer.failed = true; layer.footprints = null; };
@@ -2322,6 +2323,11 @@
     function drawTravelTraceLayer() {
       if (!(viewport.width > 0 && viewport.height > 0)) return;
       const layer = travelTraceLayer, camera = state.camera, ratio = viewport.pixelRatio || 1;
+      if (!state.footprints.size) {
+        layer.bitmap?.image.close(); layer.bitmap = null;
+        layer.footprints = null;
+        return;
+      }
       const time = Math.floor(state.simSeconds * 30);
       prepareTravelTraceWorker();
       if (layer.bitmap && layer.bitmap.roomId !== connection.roomId) { layer.bitmap.image.close(); layer.bitmap = null; }
@@ -3259,41 +3265,6 @@
       if (Spawner.resourceDefinition(Spawner.resourceTypeForCell(foodCell, worldMap))) drawResourceNode(now, foodCell, harvestStarted);
     }
 
-    function drawFoodStatus() {
-      const selectedTree = state.selection?.kind === "tree" ? state.selection.target : null;
-      const food = selectedTree ? foodCellMap.get(selectedTree.column + "," + selectedTree.row) || { x: selectedTree.column, y: selectedTree.row, resourceType: "tree", amount: 0 } :
-        state.selection?.kind === "food" ? state.selection.target : null;
-      if (!food) return;
-      const treeFood = Spawner.isTreeFood(food, worldMap);
-      const tree = treeFood ? forest.cells.get(food.x + "," + food.y) : null;
-      if (treeFood && (!tree || treeOverlapsColony(tree))) return;
-      const point = worldToScreen(food.x + 0.5, food.y);
-      const cell = state.camera.zoom;
-      const margin = Math.min(6, cell * 0.06);
-      ctx.save();
-      ctx.font = "13px sans-serif";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      const definition = Spawner.resourceDefinition(Spawner.resourceTypeForCell(food, worldMap));
-      const required = Spawner.resourceHarvestRequirements(food, worldMap, colonyEntries.find(colony => colony.id === connection.colonyId)?.tribe);
-      const requirement = required && ATTRIBUTES.filter(attribute => required[attribute.key] > 0)
-        .map(attribute => attribute.name + (required[attribute.key] > 1 ? "×" + required[attribute.key] : "")).join(" + ");
-      const label = [definition.name + (definition.harvestLocked ? "" : " · " + Number(Math.max(0, food.amount).toFixed(1)) + "개"),
-        definition.harvestLocked ? "채집 잠금" : required === null ? "채집 불가" : requirement ? "필요: " + requirement : "속성 없이 채집 가능"];
-      const width = Math.max(...label.map(line => ctx.measureText(line).width)) + 20;
-      const scale = Math.min(1, (cell - margin * 2) / width, (cell - margin * 2) / 44);
-      ctx.translate(point.x, point.y + margin);
-      ctx.scale(scale, scale);
-      ctx.fillStyle = "rgba(16, 23, 25, 0.96)";
-      ctx.beginPath();
-      ctx.roundRect(-width / 2, 0, width, 44, 6);
-      ctx.fill();
-      ctx.fillStyle = "#edc58d";
-      ctx.fillText(label[0], 0, 14);
-      ctx.fillText(label[1], 0, 30);
-      ctx.restore();
-    }
-
     function drawBurrowStatus() {
       const burrow = state.selection?.kind === "burrow" ? state.selection.target : null;
       if (!burrow || burrow.health <= 0) return;
@@ -3415,7 +3386,6 @@
       const y = floorY - size * .012;
       if (!(radius > 0) || center.x + radius < 0 || center.x - radius > viewport.width ||
           y + depth < 0 || y - depth > viewport.height) return;
-      // Draw in the ground-status pass, after nest sprites, so their walls cannot hide HP.
       Spawner.drawUnitHealthRing(ctx, health, maximum, center.x, y, radius, "#eee1c8");
     }
 
@@ -4129,7 +4099,6 @@
           const sinceRelease = state.simSeconds - releaseAt;
           const flight = clamp(sinceRelease / ((delivery.arrivesAt - delivery.startedAt) * 0.76), 0, 1);
           const agent = state.agents.find(candidate => candidate.id === id) || state.rivals.find(candidate => candidate.id === id);
-          if (agent && unitPresentation.hasEmbeddedCargo(agent)) { ctx.restore(); continue; }
           const source = agent || { id };
           const type = delivery.resourceType || "honey-mushrooms";
           const sprite = resourceCarrySprites.get(type);
@@ -4219,128 +4188,9 @@
       }
     }
 
-    function drawSpringBirth(ctx, now, agent, birth, topLeft, cell, outlineColor) {
-      if (birth.frame === SPRING_BIRTH_ANIMATION.frameCount - 1) {
-        drawAgentAppearanceLayer(ctx, now, { ...agent, birth: null }, cell, topLeft, { x: birth.x, y: birth.y, progress: 1 }, null, outlineColor);
-        return;
-      }
-      const form = Spawner.springDominantBirthForm?.(agent);
-      if (form && combatAttributeArt.ready("spring")) {
-        // Keep the current idle clock so the settled sprite and terminal idle
-        // are identical, including eye animation, facing and the common pivot.
-        const facing = Spawner.unitFacing(agent);
-        const neutral = { ...agent, birth: null, attack: null, support: null, hurtStartedAt: -Infinity,
-          mode: "idle", moveDuration: 0, facing: 1, combat: agent.combat ? { ...agent.combat, side: 1 } : null };
-        const time = idleMotion.matches ? agent.bornAt || 0 : state.simSeconds;
-        const body = combatAttributeArt.frame(neutral, time, 1);
-        const elapsed = idleMotion.matches ? SPRING_BIRTH_ANIMATION.duration : birth.elapsed;
-        const sprite = springDominantBirthArt.frame(body, agent, elapsed, unitDisplayScale(agent), facing);
-        if (sprite) {
-          const floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
-          const camera = sprite.combatCamera, scale = cell * AGENT_HEIGHT * 2 / (camera?.units || 512);
-          const x = -(camera?.pivotX || 256) * scale, y = -(camera?.pivotY || 448) * scale;
-          const width = sprite.width * scale, height = sprite.height * scale;
-          ctx.save(); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
-          Spawner.drawSpringBirthWater(ctx, topLeft.x + cell / 2, floor, cell, elapsed);
-          ctx.translate(topLeft.x + cell / 2, floor); ctx.scale(facing < 0 ? -1 : 1, 1);
-          if (outlineColor) drawSelectionOutline(sprite, x, y, width, height, null, outlineColor);
-          ctx.drawImage(sprite, x, y, width, height); ctx.restore();
-          return;
-        }
-      }
-      const nativeLifecycle = Spawner.unitRangedLifecycleAnimation?.(agent, "birth");
-      const nativeSheet = nativeLifecycle?.nativeSecretionLifecycle && agentRangedImage(nativeLifecycle.image);
-      if (nativeSheet?.complete && nativeSheet.naturalWidth) {
-        const elapsed = idleMotion.matches ? nativeLifecycle.durationMs / 1000 : birth.elapsed;
-        const frame = idleMotion.matches ? nativeLifecycle.frameCount - 1 : Spawner.unitAnimationFrame(nativeLifecycle, elapsed * 1000);
-        const size = cell * Spawner.unitRangedDisplaySize(agent) / (100 * unitDisplayScale(agent)) *
-          (nativeLifecycle.registrationScale || 1) * nativeLifecycle.frameSize / (nativeLifecycle.viewSize || nativeLifecycle.frameSize);
-        const pixel = size / nativeLifecycle.frameSize, centerX = topLeft.x + cell / 2;
-        const floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
-        const source = { owner: nativeSheet, index: frame, size: nativeLifecycle.frameSize,
-          x: frame % nativeLifecycle.columns * nativeLifecycle.frameSize, y: Math.floor(frame / nativeLifecycle.columns) * nativeLifecycle.frameSize };
-        Spawner.drawSpringBirthWater(ctx, centerX, floor, cell, elapsed);
-        ctx.save(); ctx.translate(centerX, floor); ctx.scale(birth.facing, 1);
-        const x = -nativeLifecycle.pivotX * pixel, y = -nativeLifecycle.pivotY * pixel;
-        if (outlineColor) drawSelectionOutline(nativeSheet, x, y, size, size, source, outlineColor);
-        ctx.drawImage(nativeSheet, source.x, source.y, source.size, source.size, x, y, size, size);
-        ctx.restore(); return;
-      }
-      if (!springBirthSheet.complete || !springBirthSheet.naturalWidth) return;
-      const animation = SPRING_BIRTH_ANIMATION;
-      const scale = cell * AGENT_HEIGHT * 350 / 512 / animation.height;
-      const lifecycle = Spawner.unitRangedLifecycleAnimation?.(agent, "birth");
-      const lifecycleSheet = lifecycle && agentRangedImage(lifecycle.image);
-      const attributeFrame = tribeArt.animationFrame(agent, springBirthSheet, animation, birth.frame, "birth", birth.elapsed);
-      const sprite = attributeFrame || lifecycleSheet || springBirthSheet, frameSize = attributeFrame ? sprite.width : animation.frameSize;
-      const padding = (frameSize - animation.frameSize) / 2;
-      const size = frameSize * scale;
-      const x = topLeft.x + cell / 2 - (animation.pivotX + padding) * scale;
-      const y = topLeft.y + cell / 2 + cell * AGENT_HEIGHT * .44 - (animation.pivotY + padding) * scale;
-      const sourceX = attributeFrame ? 0 : birth.frame % animation.columns * animation.frameSize;
-      const sourceY = attributeFrame ? 0 : Math.floor(birth.frame / animation.columns) * animation.frameSize;
-      ctx.save();
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
-      const elapsed = idleMotion.matches ? animation.duration : birth.elapsed;
-      Spawner.drawSpringBirthWater(ctx, topLeft.x + cell / 2,
-        topLeft.y + cell / 2 + cell * AGENT_HEIGHT * .44, cell, elapsed);
-      const source = { x: sourceX, y: sourceY, size: frameSize };
-      const motion = Spawner.springBirthMotion(elapsed);
-      if (outlineColor) {
-        const surface = document.createElement("canvas");
-        surface.width = surface.height = frameSize * 2;
-        Spawner.drawSpringBirthSurface(surface.getContext("2d"), sprite, source,
-          { x: frameSize / 2, y: frameSize / 2, size: frameSize }, motion);
-        drawSelectionOutline(surface, x - size / 2, y - size / 2, size * 2, size * 2, null, outlineColor);
-      }
-      const registered = !outlineColor && !attributeFrame && globalThis.SpawnerAppearance.unitAppearanceBirthSceneForAgent(agent);
-      if (registered) globalThis.SpawnerAppearance.drawUnitAppearanceBirthSceneBody(ctx, registered, springBirthSheet,
-        { frame: birth.frame, elapsed, worldPixels: cell, topLeft, outerDisplayScaleApplied: true,
-          anchor: { x: topLeft.x + cell / 2, y: topLeft.y + cell / 2 + cell * AGENT_HEIGHT * .44 } });
-      else Spawner.drawSpringBirthSurface(ctx, sprite, source, { x, y, size }, motion);
-      ctx.restore();
-    }
 
-    function drawPebbleBirth(ctx, now, agent, birth, topLeft, cell, outlineColor) {
-      const animation = PEBBLE_BIRTH_ANIMATION;
-      if (birth.frame === animation.frameCount - 1) {
-        drawAgentAppearanceLayer(ctx, now, { ...agent, birth: null }, cell, topLeft, { x: birth.x, y: birth.y, progress: 1 }, null, outlineColor);
-        return;
-      }
-      if (!pebbleBirthSheet.complete || !pebbleBirthSheet.naturalWidth) return;
-      const scale = cell * AGENT_HEIGHT * animation.unitHeight / 512 / animation.height;
-      const lifecycle = Spawner.unitRangedLifecycleAnimation?.(agent, "birth");
-      const lifecycleSheet = lifecycle && agentRangedImage(lifecycle.image);
-      const attributeFrame = tribeArt.animationFrame(agent, pebbleBirthSheet, animation, birth.frame, "birth", birth.elapsed);
-      const sprite = attributeFrame || lifecycleSheet || pebbleBirthSheet, frameSize = attributeFrame ? sprite.width : animation.frameSize;
-      const padding = (frameSize - animation.frameSize) / 2;
-      const size = frameSize * scale;
-      const x = topLeft.x + cell / 2 - (animation.pivotX + padding) * scale;
-      const y = topLeft.y + cell / 2 + cell * AGENT_HEIGHT * (animation.unitPivotY / 512 - .5) - (animation.pivotY + padding) * scale;
-      const sourceX = attributeFrame ? 0 : birth.frame % animation.columns * animation.frameSize;
-      const sourceY = attributeFrame ? 0 : Math.floor(birth.frame / animation.columns) * animation.frameSize;
-      ctx.save();
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
-      const entry = colonyEntries.find(value => value.id === agent.birth.colonyId);
-      if (entry && pebbleBirthForeground.complete && pebbleBirthForeground.naturalWidth) {
-        const appearance = colonyAppearance(entry);
-        const origin = worldToScreen(entry.x, entry.y);
-        const center = worldToScreen(entry.x + 2.5, entry.y + 2.5);
-        const nestSize = COLONY_SIZE * cell * appearance.scale;
-        ctx.drawImage(pebbleBirthForeground, origin.x + (COLONY_SIZE * cell - nestSize) / 2,
-          center.y - nestSize * appearance.centerY, nestSize, nestSize);
-      }
-      if (outlineColor) drawSelectionOutline(sprite, x, y, size, size,
-        { owner: sprite, size: frameSize, index: attributeFrame ? 0 : birth.frame, x: sourceX, y: sourceY }, outlineColor);
-      const registered = !outlineColor && !attributeFrame && globalThis.SpawnerAppearance.unitAppearanceBirthSceneForAgent(agent);
-      if (registered) globalThis.SpawnerAppearance.drawUnitAppearanceBirthSceneBody(ctx, registered, pebbleBirthSheet,
-        { frame: birth.frame, elapsed: birth.elapsed, worldPixels: cell, topLeft, outerDisplayScaleApplied: true,
-          anchor: { x: topLeft.x + cell / 2, y: topLeft.y + cell / 2 + cell * AGENT_HEIGHT * .44 } });
-      else ctx.drawImage(sprite, sourceX, sourceY, frameSize, frameSize, x, y, size, size);
-      ctx.restore();
-    }
+
+
 
     function drawAgentRangedBirth(ctx, agent, birth, centerX, floor, cell, outlineColor) {
       const form = Spawner.unitRangedBirthAppearance?.(agent);
@@ -4365,68 +4215,9 @@
       drawAgentAppearanceBody(ctx, now, agent, cell, topLeft, null, birth, outlineColor);
     }
 
-    function prepareSporeBirth() {
-      if (!sporeBirthReady) sporeBirthReady = sporeBirthSheet.decode().then(() => {
-        const shape = Spawner.SPORE_BIRTH_ANIMATION;
-        for (let frame = shape.firstUnitFrame; frame < shape.frameCount; frame++) {
-          const canvas = document.createElement("canvas");
-          canvas.width = canvas.height = shape.frameSize;
-          const target = canvas.getContext("2d", { willReadFrequently: true });
-          target.drawImage(sporeBirthSheet, frame % shape.columns * shape.frameSize, Math.floor(frame / shape.columns) * shape.frameSize,
-            shape.frameSize, shape.frameSize, 0, 0, shape.frameSize, shape.frameSize);
-          sporeBirthFrames.set(frame, canvas);
-        }
-      }).catch(error => { sporeBirthReady = null; throw error; });
-      return sporeBirthReady;
-    }
 
-    function drawSporeBirth(ctx, now, agent, birth, topLeft, cell, outlineColor) {
-      if (!birth.unitVisible) return;
-      const shape = Spawner.SPORE_BIRTH_ANIMATION;
-      const frame = idleMotion.matches ? shape.frameCount - 1 : birth.frame;
-      if (frame === shape.frameCount - 1) {
-        drawAgentAppearanceLayer(ctx, now, { ...agent, birth: null }, cell, topLeft, { x: birth.x, y: birth.y, progress: 1 }, null, outlineColor);
-        return;
-      }
-      const lifecycle = Spawner.unitRangedLifecycleAnimation?.(agent, "birth");
-      const lifecycleSheet = lifecycle && agentRangedImage(lifecycle.image);
-      const attributeFrame = tribeArt.animationFrame(agent, sporeBirthSheet, shape, frame, "birth", birth.elapsed);
-      const sprite = attributeFrame || lifecycleSheet || sporeBirthFrames.get(frame);
-      if (!sprite) return;
-      const registered = !outlineColor && !attributeFrame && globalThis.SpawnerAppearance.unitAppearanceBirthSceneForAgent(agent);
-      if (registered && Math.abs(birth.scale - registered.legacyPixelStage.nativeWorldPerPixelBeforeDisplay) < 1e-9) {
-        globalThis.SpawnerAppearance.drawUnitAppearanceBirthSceneBody(ctx, registered, sporeBirthSheet,
-          { frame, elapsed: idleMotion.matches ? shape.duration : birth.elapsed, worldPixels: cell, topLeft,
-            outerDisplayScaleApplied: true, facing: birth.facing, nativeFrame: sprite,
-            anchor: { x: topLeft.x + cell / 2, y: topLeft.y + cell / 2 + cell * AGENT_HEIGHT * .44 } });
-        return;
-      }
-      const frameSize = attributeFrame ? sprite.width : shape.frameSize;
-      const padding = (frameSize - shape.frameSize) / 2;
-      const pixel = attributeFrame?.minorWorldPerPixel ?? birth.scale;
-      const pivotX = attributeFrame?.minorPivotX ?? shape.pivotX + padding;
-      const pivotY = attributeFrame?.minorPivotY ?? shape.pivotY + padding;
-      const size = frameSize * pixel * cell;
-      const x = -pivotX * pixel * cell;
-      const height = shape.unitHeight * Spawner.imageScale(shape.image) * birth.scale * cell;
-      const y = -pivotY * pixel * cell;
-      const motion = Spawner.sporeBirthMotion(idleMotion.matches ? shape.duration : birth.elapsed);
-      ctx.save();
-      ctx.translate(topLeft.x + cell / 2, topLeft.y + cell / 2 + cell * AGENT_HEIGHT * .44);
-      ctx.scale(birth.facing, 1);
-      ctx.scale(motion.scaleX, motion.scaleY);
-      ctx.translate(0, -height * .5);
-      ctx.rotate(motion.rotation);
-      ctx.translate(0, height * .5);
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
-      const crop = !attributeFrame && lifecycleSheet ? { owner: sprite, index: frame, size: shape.frameSize,
-        x: frame % shape.columns * shape.frameSize, y: Math.floor(frame / shape.columns) * shape.frameSize } : null;
-      if (outlineColor) drawSelectionOutline(sprite, x, y, size, size, crop, outlineColor);
-      if (crop) ctx.drawImage(sprite, crop.x, crop.y, shape.frameSize, shape.frameSize, x, y, size, size);
-      else ctx.drawImage(sprite, x, y, size, size);
-      ctx.restore();
-    }
+
+
 
     async function prepareAgentMovement(tribe) {
       const unit = await tribeArt.prepareUnit(tribe);
@@ -4726,7 +4517,7 @@
       if (!command) return false;
       let image = detailVfxImages.get(command.image);
       if (!image) { image = globalThis.SpawnerAssets.image(); image.src = assetSource(command.image); detailVfxImages.set(command.image, image); }
-      return Spawner.drawDetailVfxCell(ctx, image, command);
+      return Spawner.drawDetailVfxCell(ctx, image, command, detailVfxRendering);
     }
 
     function drawRecordedDnaEffects(cell) {
@@ -4782,7 +4573,7 @@
           if (command) {
             let image = detailVfxImages.get(command.image);
             if (!image) { image = globalThis.SpawnerAssets.image(); image.src = assetSource(command.image); detailVfxImages.set(command.image, image); }
-            Spawner.drawDetailVfxCell(ctx, image, command);
+            Spawner.drawDetailVfxCell(ctx, image, command, detailVfxRendering);
           }
           continue;
         }
@@ -4856,7 +4647,16 @@
         (1.4 * unitDisplayScales.get(species) * Math.max(bounds.width, bounds.height));
     }
 
+    const unitDisplayScaleCache = new WeakMap();
     function unitDisplayScale(unit) {
+      const cached = unitDisplayScaleCache.get(unit);
+      if (cached?.frame === state.lastFrame) return cached.value;
+      const value = calculateUnitDisplayScale(unit);
+      unitDisplayScaleCache.set(unit, { frame: state.lastFrame, value });
+      return value;
+    }
+
+    function calculateUnitDisplayScale(unit) {
       const tribe = unit.tribe || "bean";
       const kind = unit.species || tribe;
       const base = unitDisplayScales.get(kind) || 1;
@@ -4865,7 +4665,7 @@
       const attributes = Spawner.unitDisplayAttributes(unit);
       if (tribe === "bean" && [...agentBaseParts.values(), ...agentParts.values()].some(part => !part.complete || !part.naturalWidth)) return base * growth;
       const equipped = ATTRIBUTES.filter(attribute => attributes[attribute.key] > 0);
-      if (!equipped.length || equipped.some(attribute => attribute.kind === "combat") && !combatAttributeArt.ready(tribe)) return base * growth;
+      if (!equipped.length || equipped.some(attribute => attribute.kind === "combat") && !combatAttributeArt.readyAgent(unit)) return base * growth;
       const key = tribe + ":" + equipped.map(attribute => attribute.key + ":" + attributes[attribute.key]).join(",");
       if (!unitAttributeScales.has(key)) {
         const scale = measureUnitDisplayScale(tribe, attributes, 1);
@@ -5061,38 +4861,8 @@
 
     function drawAgentAppearanceSurface(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
       agent = displayedAgent(agent);
-      const attributes = Spawner.unitDisplayAttributes(agent);
-      if (!outlineColor || birth || cell < 8 || ctx.canvas !== canvas || (agent.tribe || "bean") !== "bean" || !attributes.feet) {
-        drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor);
-        if (!birth && cell >= 8) drawAgentCarrying(ctx, agent, cell, topLeft, renderPosition);
-        return;
-      }
-      const maskWidth = 1024, maskHeight = 1024, maskCell = 512 / AGENT_HEIGHT;
-      const anchor = { x: 512, y: 896 };
-      if (agentSelectionLayer.width !== maskWidth || agentSelectionLayer.height !== maskHeight) {
-        agentSelectionLayer.width = maskWidth; agentSelectionLayer.height = maskHeight;
-      }
-      const layer = agentSelectionLayer.getContext("2d", { willReadFrequently: true });
-      layer.setTransform(1, 0, 0, 1, 0, 0); layer.clearRect(0, 0, maskWidth, maskHeight);
-      const origin = { x: anchor.x - maskCell / 2, y: anchor.y - maskCell * (.5 + AGENT_HEIGHT * .44) };
-      drawAgentAppearanceLayer(layer, now, agent, maskCell, origin, renderPosition, birth, null);
-      const pixels = layer.getImageData(0, 0, maskWidth, maskHeight).data;
-      let x0 = maskWidth, y0 = maskHeight, x1 = -1, y1 = -1;
-      for (let y = 0; y < maskHeight; y++) for (let x = 0; x < maskWidth; x++) if (pixels[(y * maskWidth + x) * 4 + 3] >= 128) {
-        x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y);
-      }
-      if (x1 >= x0 && y1 >= y0) {
-        agentSelectionMask.width = x1 - x0 + 5; agentSelectionMask.height = y1 - y0 + 5;
-        agentSelectionMask.getContext("2d").drawImage(agentSelectionLayer, x0, y0, x1 - x0 + 1, y1 - y0 + 1,
-          2, 2, x1 - x0 + 1, y1 - y0 + 1);
-        selectionOutlines.delete(agentSelectionMask);
-        const scale = cell / maskCell;
-        const floor = topLeft.y + cell * (.5 + AGENT_HEIGHT * .44);
-        drawSelectionOutline(agentSelectionMask, topLeft.x + cell / 2 + (x0 - 2 - anchor.x) * scale,
-          floor + (y0 - 2 - anchor.y) * scale, agentSelectionMask.width * scale, agentSelectionMask.height * scale, null, outlineColor);
-      }
-      drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, renderPosition, birth, null);
-      drawAgentCarrying(ctx, agent, cell, topLeft, renderPosition);
+      drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor);
+      if (!birth && cell >= 8) drawAgentCarrying(ctx, agent, cell, topLeft, renderPosition);
     }
 
     function drawAgentAppearanceLayer(ctx, now, agent, cell, topLeft, renderPosition, birth, outlineColor) {
@@ -5114,14 +4884,14 @@
     }
 
     function drawAgentCarrying(ctx, agent, cell, topLeft, renderPosition) {
-      if (unitPresentation.hasEmbeddedCargo(agent)) return;
+      const delivery = agent.foodDelivery;
+      const released = delivery && delivery.receivedAt == null &&
+        state.simSeconds >= delivery.startedAt + (delivery.arrivesAt - delivery.startedAt) * 0.24;
+      if (!(agent.carrying - (released ? delivery.amount : 0) > 0) || unitPresentation.hasEmbeddedCargo(agent)) return;
       const appearance = Spawner.unitDisplayAttributes(agent), spriteHeight = cell * AGENT_HEIGHT;
       const centerX = topLeft.x + cell / 2, centerY = topLeft.y + cell / 2;
       const bodyPose = agentAppearanceBodyPose(agent, performance.now()), walk = agentWalkPose(agent);
       const spriteY = centerY - spriteHeight / 2;
-      const delivery = agent.foodDelivery;
-      const released = delivery && delivery.receivedAt == null &&
-        state.simSeconds >= delivery.startedAt + (delivery.arrivesAt - delivery.startedAt) * 0.24;
       if (agent.carrying - (released ? delivery.amount : 0) > 0) {
         const type = agent.carryingType || "honey-mushrooms";
         const sprite = resourceCarrySprites.get(type);
@@ -5665,7 +5435,8 @@
       ctx.restore();
     }
 
-    let renderFrame = null;
+    let renderFrame = null, combatWorldFrame = null;
+    globalThis.SpawnerFrameTiming?.useManual();
 
     function scheduleRender() {
       if (renderFrame === null && !document.hidden && !connection.synchronizing) renderFrame = requestAnimationFrame(render);
@@ -5674,14 +5445,14 @@
     function render(now) {
       renderFrame = null;
       if (document.hidden || connection.synchronizing) return;
+      if (globalThis.SpawnerFrameTiming && !globalThis.SpawnerFrameTiming.allow(now)) { scheduleRender(); return; }
       drawTribePreviews(now);
-      if (!tribeSelection.hidden) drawTribeWorld();
       if (viewport.pixelRatio !== (window.devicePixelRatio || 1)) resizeCanvas();
       updateZoom(now);
       moveMap(Math.min(0.05, Math.max(0, (now - state.lastFrame) / 1000)));
       const elapsedMs = Math.max(0, now - state.lastFrame);
       state.lastFrame = now;
-      if (!connection.active || !terrainRendering.ready) { updateAudio(); scheduleRender(); return; }
+      if (!connection.active || !terrainRendering.ready) { updateAudio(); globalThis.SpawnerFrameTiming?.record(performance.now()); scheduleRender(); return; }
       updateEndingPresentation(elapsedMs);
       state.simSeconds = state.ending ? state.ending.endedAt : Math.max(state.simSeconds, connection.simSeconds +
         Math.min(0.3, (now - connection.receivedAt) / 1000) - MOVEMENT_DELAY);
@@ -5697,6 +5468,13 @@
       updateHover();
       combatVfxFrame = combatVfxCursor.consume(state.combatVfx, state.simSeconds);
       detailCombatVfx.consume(combatVfxFrame, state.simSeconds);
+      if (combatPanel.open && combatWorldFrame?.width === canvas.width && combatWorldFrame?.height === canvas.height) {
+        drawCombatPanel(now);
+        globalThis.SpawnerFrameTiming?.record(performance.now());
+        scheduleRender();
+        return;
+      }
+      combatWorldFrame = combatPanel.open ? { width: canvas.width, height: canvas.height } : null;
 
       const appearanceAgents = state.camera.zoom >= 8 ? [...state.agents, ...state.rivals].map(displayedAgent).filter(agent => {
         if (agent.species || agentBirthPose(agent, true)) return false;
@@ -5727,9 +5505,9 @@
       drawFlashes(now);
       for (const entry of colonyEntries) drawColonyGround(entry,
         worldToScreen(entry.x, entry.y), COLONY_SIZE * state.camera.zoom, colonyAppearance(entry));
+      for (const entry of colonyEntries) drawColonyHealthRing(entry);
       pebbleWorldDrawing = true;
       try { drawWorldObjects(now); } finally { pebbleWorldDrawing = false; }
-      for (const entry of colonyEntries) drawColonyHealthRing(entry);
       pebbleWorldDrawing = true;
       try { drawCombatAgents(now); } finally { pebbleWorldDrawing = false; }
       drawAttackImpacts();
@@ -5737,12 +5515,12 @@
       drawCombatPanel(now);
       drawAgentGroups();
       drawFoodDeliveries(now);
-      drawFoodStatus();
       drawBurrowStatus();
       drawFog(now);
       positionHelpTooltip();
       drawColonyImages(now);
       drawAgentAvatars(now);
+      globalThis.SpawnerFrameTiming?.record(performance.now());
 
       scheduleRender();
     }
@@ -6548,7 +6326,12 @@
     document.getElementById("unit-codex").addEventListener("click", () => {
       const selected = state.selection;
       if (!selected) return;
-      if (["terrain", "hazard", "food", "tree"].includes(selected.kind)) {
+      if (["food", "tree"].includes(selected.kind)) {
+        const key = selected.kind === "tree" ? "tree" : Spawner.resourceTypeForCell(selected.target, worldMap);
+        openCodex("resource:" + key);
+        return;
+      }
+      if (["terrain", "hazard"].includes(selected.kind)) {
         const cell = selectionTerrainCell();
         if (cell) openTerrainCodex(cell.x, cell.y);
         return;
@@ -6561,9 +6344,7 @@
         openCodex("nest:colony");
         return;
       }
-      const slots = selected.target.slots || [];
-      const attribute = slots.find(key => ATTRIBUTES.some(value => value.key === key)) || ATTRIBUTES[0].key;
-      openCodex("attribute:" + attribute);
+      openCodex("unit:" + (selected.target.species || selected.target.tribe || state.tribe));
     });
     agentDesign.addEventListener("click", () => {
       const agent = state.selection?.kind === "agent" ? state.selection.target : null;
@@ -6934,7 +6715,16 @@
     }
 
     function renderAgentDnaHelp(container, agent, composition) {
-      const list = composition.querySelector(".unit-dna-list").cloneNode(true);
+      const list = document.createElement("div");
+      list.className = "unit-dna-list";
+      for (const [key, count] of Object.entries(Spawner.ATTRIBUTE_DNA.counts(agent.dna.pieces))) {
+        if (!codexEntry("attribute:" + key)) continue;
+        const link = codexLink("attribute:" + key, true);
+        const amount = document.createElement("strong");
+        amount.textContent = " ×" + count;
+        link.append(amount);
+        list.append(link);
+      }
       const stats = agent.stats?.dna || Spawner.ATTRIBUTE_DNA.stats(agent.dna.pieces, agent.tribe);
       const values = document.createElement("dl");
       values.className = "unit-dna-stats";
@@ -6970,7 +6760,7 @@
       updateResourceDetails();
       updateBurrowDetails();
       updateForeignColonyDetails();
-      document.getElementById("unit-codex").hidden = !!agent?.species;
+      document.getElementById("unit-codex").hidden = false;
       resourceLocation.hidden = resourceDetails.hidden && terrainDetails.hidden && foreignColonyDetails.hidden;
       agentDetails.hidden = !agent;
       agentRenameOpen.hidden = !agent || !state.agents.includes(agent);
@@ -7253,12 +7043,17 @@
         const attributes = Spawner.dnaAppearance(template.dna);
         return prepareAgentTemplate({ tribe: template.tribe, slots: Object.keys(attributes).filter(key => attributes[key] > 0), attributeLevels: attributes });
       }
-      if (template.slots.some(key => Spawner.COMBAT_ATTRIBUTE_KEYS.includes(key)) && !combatAttributeArt.ready(template.tribe || "bean")) {
-        return combatAttributeArt.prepare(template.tribe || "bean").then(() => prepareAgentTemplate(template));
+      const combatAgents = [];
+      for (let count = Math.min(1, template.slots.length); count <= template.slots.length; count++) {
+        const attributes = attributeCounts(template.slots.slice(0, count), template.attributeLevels);
+        const agent = { tribe: template.tribe || "bean", attributes };
+        if (Spawner.combatAttributeKeys(attributes).length && !combatAttributeArt.readyAgent(agent)) combatAgents.push(agent);
       }
+      if (combatAgents.length) return Promise.all(combatAgents.map(agent => combatAttributeArt.prepareAgent(agent, 0)))
+        .then(() => prepareAgentTemplate(template));
       if (template.tribe && template.tribe !== "bean") {
         const tribe = Spawner.PLAYER_TRIBES.find(entry => entry.key === template.tribe);
-        return Promise.all([prepareAgentMovement(tribe), tribe.key === "spore" ? prepareSporeBirth() : tribe.key === "spring" ? springBirthSheet.decode() : tribe.key === "pebble" ? pebbleBirthSheet.decode() : null]).then(() => {
+        return Promise.all([prepareAgentMovement(tribe)]).then(() => {
           for (let count = Math.min(1, template.slots.length); count <= template.slots.length; count++) {
             const attributes = attributeCounts(template.slots.slice(0, count), template.attributeLevels);
             for (const layer of [...agentSpriteLayers(attributes), "full"]) selectionContour(agentSprite({ tribe: tribe.key, attributes }, layer), null);
@@ -7295,12 +7090,12 @@
         if (image) return image;
       }
       if ((!layer || ["full", "body"].includes(layer)) && (agent.tribe || "bean") !== "bean" &&
-          Spawner.hasCombatEvolution(attributes) && ["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0) && combatAttributeArt.ready(agent.tribe)) {
+          Spawner.hasCombatEvolution(attributes) && ["antenna", "strength", "arms", "feet"].some(key => attributes[key] > 0) && combatAttributeArt.readyAgent(agent)) {
         const body = tribeArt.sprite(agent.tribe, attributes, layer || "full");
         const sprite = combatAttributeArt.frame({ ...agent, health: 1, birth: null, attack: null, hurtStartedAt: -Infinity, moveDuration: 0 }, 0, 1, context => context.drawImage(body, 0, 0, 512, 512));
         agentSpriteSet.add(sprite); return sprite;
       }
-      if ((!layer || ["full", "body"].includes(layer)) && Spawner.hasCombatEvolution(attributes) && combatAttributeArt.ready(agent.tribe || "bean")) {
+      if ((!layer || ["full", "body"].includes(layer)) && Spawner.hasCombatEvolution(attributes) && combatAttributeArt.readyAgent(agent)) {
         const sprite = combatAttributeArt.portrait(agent, context => drawCombatAgentAttributes(context, agent));
         if (sprite) { agentSpriteSet.add(sprite); return sprite; }
       }
@@ -7356,7 +7151,7 @@
     function drawAgentCorpse(context, corpse, x, floor, cell, outlineColor, opacity) {
       if (corpse.species) return drawCreatureCorpse(context, corpse, x, floor, cell, outlineColor, opacity);
       context.save(); context.globalAlpha *= opacity;
-      const result = unitPresentation.drawAgentAnimation(context, corpse, x, floor, cell * AGENT_HEIGHT, outlineColor);
+      const result = unitPresentation.drawAgentAnimation(context, corpse, x, floor, cell * AGENT_HEIGHT, outlineColor, corpsePlaybackTime());
       context.restore(); return result;
     }
 
@@ -7436,9 +7231,8 @@
     }
 
     const EVOLUTION_SYMBOL = assetSource("DesignAssets/evolution-point-symbol.png");
-    const COLONY_CODEX = { key: "colony", name: "군락 둥지", effect: "군락의 본둥지",
-      description: "진화 포인트로 둥지를 성장시키면 체력과 속성 슬롯이 늘고 새 속성이 열립니다. 진화 포인트와 자원의 보관량도 늘어납니다. 몽돌의 성장 비용은 25% 적습니다." };
-    const NEST_CODEX = [COLONY_CODEX];
+    const NEST_CODEX = Spawner.CODEX_NESTS;
+    const COLONY_CODEX = NEST_CODEX[0];
     const evolutionSprite = globalThis.SpawnerAssets.image();
     evolutionSprite.src = EVOLUTION_SYMBOL;
     let evolutionPointCache = null;
@@ -7477,20 +7271,16 @@
       } else document.getElementById("codex-article-name").focus({ preventScroll: true });
     });
     setCodexView("article");
-    const burrowCodexFilter = document.createElement("button");
-    burrowCodexFilter.type = "button";
-    burrowCodexFilter.dataset.codexCategory = "burrow";
-    burrowCodexFilter.setAttribute("aria-pressed", "false");
-    burrowCodexFilter.textContent = "굴";
-    document.querySelector(".codex-filter").append(burrowCodexFilter);
-    const resourceCodexFilter = document.createElement("button");
-    resourceCodexFilter.type = "button";
-    resourceCodexFilter.dataset.codexCategory = "resource";
-    resourceCodexFilter.setAttribute("aria-pressed", "false");
-    resourceCodexFilter.textContent = "자원";
-    document.querySelector(".codex-filter").append(resourceCodexFilter);
-    const hazardCodexFilter = document.querySelector('[data-codex-category="hazard"]');
-    if (hazardCodexFilter) hazardCodexFilter.hidden = !HAZARD_CODEX.length;
+    const codexFilters = document.querySelector(".codex-filter");
+    codexFilters.replaceChildren();
+    for (const [kind, title] of [["all", "전체"], ...Spawner.CODEX_GROUPS]) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.dataset.codexCategory = kind;
+      button.setAttribute("aria-pressed", String(kind === "all"));
+      button.textContent = title;
+      codexFilters.append(button);
+    }
     const codexState = { entry: "attribute:antenna", history: [], index: -1, category: "all", cell: null, returnFocus: null };
     let selectedAttribute = null;
     let unitDraft = null;
@@ -7508,7 +7298,7 @@
       unitDraft.dna = Spawner.cloneDna(dna);
       unitDraft.error = "";
       updateUnitDesign();
-    });
+    }, audio.playDna);
     function dnaDesignValid(dna) {
       return !!Spawner.validateDna(dna, state.nestLevel, state.evolutionPoints);
     }
@@ -7610,17 +7400,23 @@
       const focus = combatReturnFocus?.isConnected && !combatReturnFocus.hidden ? combatReturnFocus : unitPanel.querySelector("button:not([hidden])");
       focus?.focus({ preventScroll: true });
     });
-    combatOpen.addEventListener("click", () => {
+    combatOpen.addEventListener("click", async () => {
       const units = selectedCombatUnits();
-      if (!units.length) return;
+      if (!units.length || combatOpen.disabled) return;
+      const roomId = connection.roomId;
+      combatOpen.disabled = true;
+      try { await Promise.all([prepareDetailVfx(), ...units.filter(unit => !unit.species).map(unit =>
+        unitPresentation.prepareActions(unit, ["idle", "walk", "attack", "ranged", "hurt", "death"]))]); }
+      catch (error) {
+        setEvolutionText(connectionStatus, error.message); connectionStatus.hidden = false;
+        return;
+      } finally { combatOpen.disabled = false; }
+      if (connection.roomId !== roomId || !connection.active || !selectedCombatUnits().some(unit => unit.combat.id === units[0].combat.id)) return;
       detailCombatVfx.clearView();
       combatWatch = { id: units[0].combat.id, x: units[0].combat.x, y: units[0].combat.y, summary: "" };
       combatSelected = String(units[0].id);
       combatReturnFocus = document.activeElement;
       stopMapMovement();
-      for (const path of Spawner.DETAIL_COMBAT_VFX_ASSETS) if (!detailVfxImages.has(path)) {
-        const image = globalThis.SpawnerAssets.image(); image.src = assetSource(path); detailVfxImages.set(path, image);
-      }
       combatPanel.showModal();
       combatClose.focus();
       scheduleRender();
@@ -7912,7 +7708,7 @@
           image = globalThis.SpawnerAssets.image(); image.src = assetSource(command.image);
           detailVfxImages.set(command.image, image);
         }
-        if (Spawner.drawDetailVfxCell(context, image, command)) {
+        if (Spawner.drawDetailVfxCell(context, image, command, detailVfxRendering)) {
           if (command.kind === "impact" && command.eventId !== undefined) drawnImpacts.add(command.eventId);
         } else if (command.kind === "flight") {
           // Keep an actual shot visible while its approved sheet loads or fails.
@@ -7949,7 +7745,7 @@
         context.moveTo(x - reach * .5, bodyY - reach * .75); context.lineTo(x + reach * .5, bodyY + reach * .75);
         context.stroke(); context.restore();
       }
-      for (const command of defenseCommands) if (!Spawner.drawDetailDefenseEffect(context, command, defenseImages.get(command.eventId), { reducedMotion: idleMotion.matches }))
+      for (const command of defenseCommands) if (!Spawner.drawDetailDefenseEffect(context, command, defenseImages.get(command.eventId), { reducedMotion: idleMotion.matches, rendering: detailVfxRendering }))
         Spawner.drawDetailDefenseFallback(context, command);
       let vitalCommands = detailCombatVfx.vitalCommands(arenaUnits, vfxPositions, state.simSeconds,
         { scope: combatWatch.id, width, height, snapshotTime: connection.simSeconds, includeDirectDamage: true, project: formation.project, unproject: formation.unproject, cell });
@@ -8100,7 +7896,7 @@
     function openUnitDesign(template, readOnly) {
       readOnly = readOnly || !!state.ending;
       designReturnFocus = document.activeElement;
-      unitDraft = { id: template ? template.id : null, tribe: template?.tribe || state.tribe || "bean", slots: template ? [...new Set((template.slots || []).map(key => key === "arms" ? "strength" : key))] : [], dna: !template || template.dna ? Spawner.cloneDna(template?.dna || { version: 5, pieces: [], budget: state.evolutionPoints, level: state.nestLevel }) : null, attributeLevels: { ...template?.attributeLevels }, combatPrimary: template?.combatPrimary ?? null, error: "", readOnly: !!readOnly, nameEdited: Spawner.isTemplateNameEdited(template) };
+      unitDraft = { id: template ? template.id : null, tribe: template?.tribe || state.tribe || "bean", slots: template ? [...new Set((template.slots || []).map(key => key === "arms" ? "strength" : key))] : [], dna: !template || template.dna ? Spawner.cloneDna(template?.dna || { version: 6, pieces: [], budget: state.evolutionPoints, level: state.nestLevel }) : null, attributeLevels: { ...template?.attributeLevels }, combatPrimary: template?.combatPrimary ?? null, error: "", readOnly: !!readOnly, nameEdited: Spawner.isTemplateNameEdited(template) };
       designName.value = template?.name || Spawner.suggestTemplateName(unitDraft.slots, state.templates, unitDraft.id);
       designName.readOnly = !!readOnly;
       designPalette.hidden = !!readOnly || !!unitDraft.dna;
@@ -8391,15 +8187,7 @@
     }
 
     function codexEntry(entry) {
-      const [kind, key] = entry.split(":");
-      const value = kind === "attribute" ? ATTRIBUTES.find((attribute) => attribute.key === key) :
-        kind === "synergy" ? ATTRIBUTE_COMBINATIONS[Number(key)] :
-        kind === "nest" ? NEST_CODEX.find((entry) => entry.key === key) :
-        kind === "resource" ? Spawner.resourceDefinition(key) :
-        kind === "burrow" ? BURROW_CODEX.find(value => value.key === key) :
-        kind === "terrain" ? TERRAIN_CODEX.find(value => value.key === key) :
-        kind === "hazard" ? HAZARD_CODEX.find(value => value.key === key) : null;
-      return value && !(kind === "synergy" && value.kind === "upgrade") ? { kind, key, value } : null;
+      return Spawner.codexResolveEntry(entry);
     }
 
     function attachObjectHelp(element, text) {
@@ -8453,35 +8241,40 @@
     }
 
     function codexAttributeLink(attribute) {
+      const entry = codexEntry("attribute:" + (attribute.key || attribute.id));
+      return codexLink("attribute:" + entry.key, true);
+    }
+
+    function codexGeneImage(gene) {
+      const image = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      image.setAttribute("viewBox", "0 0 44 38");
+      image.setAttribute("aria-hidden", "true");
+      image.classList.add("codex-gene-image");
+      image.innerHTML = Spawner.dnaGeneShapeSvg(Spawner.ATTRIBUTE_DNA, gene);
+      return image;
+    }
+
+    function codexLink(target, icon) {
+      const entry = codexEntry(target);
       const button = document.createElement("button");
       button.type = "button";
-      button.className = "codex-attribute-link";
-      button.dataset.codexAttribute = attribute.key;
-      button.style.setProperty("--attribute-color", attribute.color);
-      button.setAttribute("aria-label", attribute.name + " 항목 보기");
-      const image = document.createElement("img");
-      image.src = attribute.image;
-      image.alt = "";
-      button.append(image);
-      attachCodexAttributeHelp(button, attribute);
-      button.addEventListener("click", () => navigateCodex("attribute:" + attribute.key, true));
+      button.className = "codex-text-link";
+      button.dataset.codexTarget = entry.kind + ":" + entry.key;
+      button.setAttribute("aria-label", entry.value.name + " 항목 보기");
+      button.title = entry.value.name;
+      if (icon && entry.kind === "attribute") button.append(codexGeneImage(entry.value));
+      const label = document.createElement("span");
+      label.textContent = entry.value.name;
+      button.append(label);
+      button.addEventListener("click", () => {
+        const origin = helpTooltip.contains(button) ? helpTooltipTarget : null;
+        openCodex(button.dataset.codexTarget);
+        if (origin && codexState.returnFocus === button) codexState.returnFocus = origin;
+      });
       return button;
     }
 
-    function codexAttributeIcons(keys) {
-      const icons = document.createElement("div");
-      icons.className = "attribute-combination-icons";
-      for (const key of keys) {
-        if (icons.childElementCount) {
-          const plus = document.createElement("span");
-          plus.textContent = "+";
-          plus.setAttribute("aria-hidden", "true");
-          icons.append(plus);
-        }
-        icons.append(codexAttributeLink(ATTRIBUTES.find((attribute) => attribute.key === key)));
-      }
-      return icons;
-    }
+
 
     function selectionTerrainCell() {
       const selected = state.selection;
@@ -8550,12 +8343,10 @@
       document.getElementById("codex-related-title").textContent = "발견 가능한 자원";
       const list = document.createElement("ul");
       list.className = "codex-terrain-resources codex-resource-icons";
-      const resources = terrainCodexResources(terrain.type, worldMap.generationVersion);
+      const resources = terrainCodexResources(terrain.type, Math.max(11, worldMap.generationVersion || 0));
       for (const resource of resources) {
-        const item = document.createElement("li"), image = document.createElement("img");
-        image.src = assetSource(resource.carryImage); image.alt = "";
-        attachObjectHelp(item, resource.name);
-        item.append(image); list.append(item);
+        const item = document.createElement("li");
+        item.append(codexResourceLink(resource)); list.append(item);
       }
       document.getElementById("codex-related-title").textContent = resources.length ? "발견 가능한 자원" : "";
       related.append(list);
@@ -8571,7 +8362,7 @@
       if (terrain.type >= 6 && terrain.type <= 8) for (const mountain of TERRAIN_CODEX.slice(6, 9)) {
         if (mountain.key !== terrain.key) entries.push(["terrain:" + mountain.key, mountain.name]);
       }
-      if (terrain.type >= 2) entries.push(["attribute:feet", "이속 증가"]);
+      if (terrain.type >= 2) entries.push(["attribute:movement", "이속"]);
       for (const [key, name] of entries) {
         const link = document.createElement("button");
         link.type = "button"; link.className = "codex-text-link"; link.textContent = name;
@@ -8584,21 +8375,21 @@
     function renderCodexList() {
       const query = codexSearch.value.trim().toLocaleLowerCase();
       const fragment = document.createDocumentFragment();
-      for (const [kind, title, values] of [["attribute", "속성", ATTRIBUTES], ["resource", "자원", Spawner.RESOURCE_TYPES], ["synergy", "조합 시너지", ATTRIBUTE_COMBINATIONS], ["nest", "둥지", NEST_CODEX], ["burrow", "굴", BURROW_CODEX], ["terrain", "지형", TERRAIN_CODEX]]) {
+      const tribe = unitDraft?.tribe || state.tribe;
+      for (const [kind, title, values] of Spawner.CODEX_GROUPS) {
         if (codexState.category !== "all" && codexState.category !== kind) continue;
-        const matches = values.map((value, index) => ({ value, key: kind === "synergy" ? String(index) : value.key }))
-          .filter(({ value }) => kind !== "synergy" || value.kind !== "upgrade")
-          .filter(({ value }) => [value.name, ...(kind === "attribute" ? [] : [value.effect || "", value.description]),
-            ...(kind === "attribute" ? [Spawner.codexAttributeDescription(value, unitDraft?.tribe || state.tribe), Spawner.codexAttributeEffect(value, 1, unitDraft?.tribe || state.tribe),
-              ...(value.harvests || []).map(key => Spawner.resourceDefinition(key).name)] : []),
-            ...(kind === "terrain" ? terrainCodexResources(value.type, worldMap.generationVersion).map(resource => resource.name) : []),
-            ...(value.keys || []).map((key) => ATTRIBUTES.find((attribute) => attribute.key === key).name)].join(" ").toLocaleLowerCase().includes(query));
+        const matches = values.filter(value => {
+          const entry = { kind, key: value.key, value };
+          const effect = kind === "attribute" ? Spawner.codexGeneDetails(value, tribe).effect : value.effect;
+          const related = Spawner.codexRelatedEntries(entry, worldMap.generationVersion).map(key => codexEntry(key).value.name);
+          return [value.name, value.description, effect, ...related].filter(Boolean).join(" ").toLocaleLowerCase().includes(query);
+        });
         if (!matches.length) continue;
         const heading = document.createElement("h3");
         heading.textContent = title;
         fragment.append(heading);
-        for (const { value, key } of matches) {
-          const entry = kind + ":" + key;
+        for (const value of matches) {
+          const entry = kind + ":" + value.key;
           const button = document.createElement("button");
           button.type = "button";
           button.className = "codex-entry";
@@ -8606,31 +8397,19 @@
           if (entry === codexState.entry) button.setAttribute("aria-current", "page");
           const icons = document.createElement("span");
           icons.className = "codex-nav-images";
-          for (const attributeKey of kind === "attribute" ? [key] : [...new Set(value.keys || [])]) {
+          if (kind === "attribute") icons.append(codexGeneImage(value));
+          if (kind === "terrain") icons.append(codexTerrainImage(value, kind));
+          if (kind === "burrow") icons.append(createBurrowImage(value.key, 96));
+          if (kind === "nest") icons.append(createColonyInfoImage(colonyInfoEntry(), 96));
+          if (kind === "resource" || kind === "unit") {
             const image = document.createElement("img");
-            image.src = ATTRIBUTE_IMAGES[attributeKey];
-            image.alt = "";
-            icons.append(image);
-          }
-          if (kind === "terrain" || kind === "hazard") icons.append(codexTerrainImage(value, kind));
-          if (kind === "burrow") icons.append(createBurrowImage(key, 96));
-          if (kind === "resource") {
-            const image = document.createElement("img");
-            image.src = assetSource(value.carryImage); image.alt = "";
-            icons.append(image);
-          }
-          if (kind === "nest" && key === "colony") icons.append(createColonyInfoImage(colonyInfoEntry(), 96));
-          if (kind === "nest" && key !== "colony") {
-            const image = document.createElement("img");
-            image.className = "evolution-symbol";
-            image.src = EVOLUTION_SYMBOL;
+            image.src = assetSource(kind === "resource" ? value.carryImage : value.image);
             image.alt = "";
             icons.append(image);
           }
           const label = document.createElement("span");
-          label.textContent = value.name;
+          label.textContent = value.name + (kind === "attribute" ? " · Lv." + value.grade : "");
           button.append(icons, label);
-          if (kind === "attribute") attachCodexAttributeHelp(button, value);
           button.addEventListener("click", () => navigateCodex(entry, true));
           fragment.append(button);
         }
@@ -8647,97 +8426,64 @@
 
     function renderCodexArticle(entry) {
       const { kind, key, value } = entry;
+      const tribe = unitDraft?.tribe || state.tribe;
       setCodexView("article");
-      const article = document.getElementById("codex-article");
-      article.style.setProperty("--attribute-color", kind === "attribute" ? value.color : "#b4dfcf");
-      document.getElementById("codex-entry-kind").textContent = kind === "attribute" ? "속성" : kind === "resource" ? "자원" : kind === "nest" ? "둥지" : kind === "burrow" ? "굴" : kind === "terrain" ? "지형" : kind === "hazard" ? "위험 요소" : "조합 시너지";
+      document.getElementById("codex-article").style.setProperty("--attribute-color", value.color || "#b4dfcf");
+      document.getElementById("codex-entry-kind").textContent = Spawner.CODEX_GROUPS.find(group => group[0] === kind)[1];
       document.getElementById("codex-article-name").textContent = value.name;
-      const attributeLevel = kind === "attribute" ? attributeCounts(unitDraft?.slots || [], unitDraft?.attributeLevels)[key] || 1 : 1;
-      const setEffectText = kind === "attribute" && value.harvests?.length ? setCodexResourceText : setEvolutionText;
-      setEffectText(document.getElementById("codex-article-effect"), kind === "burrow" ? "체력 " + value.health : kind === "attribute" ? Spawner.codexAttributeEffect(value, attributeLevel, unitDraft?.tribe || state.tribe) : kind === "resource" ? "채집 시간 · 1개당 " + value.harvestSeconds + "초" : kind !== "synergy" ? value.effect : value.requirement ||
-        value.keys.map((attributeKey) => ATTRIBUTES.find((attribute) => attribute.key === attributeKey).name).join(" + "));
-      const description = document.getElementById("codex-description");
-      if (kind === "attribute" && value.harvests?.length) setCodexResourceText(description, Spawner.codexAttributeDescription(value, unitDraft?.tribe || state.tribe));
-      else setEvolutionText(description, ["burrow", "resource"].includes(kind) ? "" : kind === "attribute" ? Spawner.codexAttributeDescription(value, unitDraft?.tribe || state.tribe) : value.description);
-      const hero = document.getElementById("codex-article-icons");
+      const effect = kind === "attribute" ? "Lv." + value.grade + " · " + value.price + "P · " + Spawner.codexGeneDetails(value, tribe).effect :
+        kind === "resource" ? Spawner.codexResourceDetails(value).tribe.name + " 전용 자원" :
+        kind === "burrow" ? "체력 " + value.health : kind === "unit" ? value.player ? "플레이어 종족" :
+        "중립 유닛 · 티어 " + value.tiers[0] + (value.unique ? " · 고유 개체" : "") : value.effect;
+      setEvolutionText(document.getElementById("codex-article-effect"), effect);
+      setEvolutionText(document.getElementById("codex-description"), kind === "resource" ? Spawner.codexResourceDetails(value).description : value.description);
+      const hero = document.getElementById("codex-article-icons"), related = document.getElementById("codex-related");
       hero.replaceChildren();
-      const related = document.getElementById("codex-related");
       related.replaceChildren();
-      if (kind === "terrain" || kind === "hazard") {
+      if (kind === "terrain") {
         hero.append(codexTerrainImage(value, kind));
         renderTerrainCodex(entry, related);
-
-      } else if (kind === "burrow") {
-        renderBurrowCodex(value, hero, related);
-      } else if (kind === "resource") {
-        renderResourceCodex(value, hero, related);
-      } else if (kind === "attribute") {
-        const image = document.createElement("img");
-        image.src = value.image;
-        image.alt = value.name + " 문양";
-        hero.append(image);
+      } else if (kind === "burrow") renderBurrowCodex(value, hero, related);
+      else if (kind === "resource") renderResourceCodex(value, hero, related);
+      else if (kind === "attribute") {
+        hero.append(codexGeneImage(value));
         renderAttributeCodex(value, related);
-        const list = document.createElement("ul");
-        list.className = "attribute-combinations";
-        for (const [index, combination] of ATTRIBUTE_COMBINATIONS.entries()) {
-          if (combination.kind === "upgrade" || !combination.keys.includes(key)) continue;
-          const keys = [...new Set(combination.keys)].sort((left, right) => Number(right === key) - Number(left === key));
-          const item = document.createElement("li");
-          item.dataset.combination = index;
-          const heading = document.createElement("div");
-          heading.className = "attribute-combination-heading";
-          const label = document.createElement("div");
-          label.className = "attribute-combination-label";
-          const link = document.createElement("button");
-          link.type = "button";
-          link.className = "codex-synergy-link";
-          link.dataset.codexSynergy = index;
-          const name = document.createElement("strong");
-          name.textContent = combination.name;
-          link.append(name);
-          link.addEventListener("click", () => navigateCodex("synergy:" + index, true));
-          const effects = document.createElement("small");
-          effects.textContent = combination.requirement || keys.map((attributeKey) => ATTRIBUTES.find((attribute) => attribute.key === attributeKey).name).join(" + ");
-          const description = document.createElement("p");
-          description.textContent = combination.description;
-          label.append(link, effects);
-          heading.append(codexAttributeIcons(keys), label);
-          item.append(heading, description);
-          list.append(item);
+      } else if (kind === "nest") renderColonyCodex(hero, related);
+      else if (kind === "unit") renderUnitCodex(value, hero, related);
+      if (kind !== "terrain") {
+        const entries = Spawner.codexRelatedEntries(entry, worldMap.generationVersion);
+        if (entries.length) {
+          const heading = document.createElement("h4"), links = document.createElement("div");
+          heading.textContent = "관련 항목";
+          links.className = "codex-terrain-links";
+          for (const target of entries) links.append(codexLink(target, false));
+          related.append(heading, links);
         }
-        document.getElementById("codex-related-title").textContent = "종족별 해금";
-        if (list.childElementCount) {
-          const heading = document.createElement("h4");
-          heading.textContent = "관련 시너지";
-          related.append(heading, list);
-        }
-      } else if (kind === "nest") {
-        renderColonyCodex(hero, related);
-      } else {
-        hero.append(codexAttributeIcons([...new Set(value.keys)]));
-        document.getElementById("codex-related-title").textContent = "구성 속성";
-        const components = document.createElement("div");
-        components.className = "codex-components";
-        for (const attributeKey of new Set(value.keys)) {
-          const attribute = ATTRIBUTES.find((candidate) => candidate.key === attributeKey);
-          const button = codexAttributeLink(attribute);
-          button.classList.add("codex-component");
-          const label = document.createElement("span");
-          const name = document.createElement("strong");
-          name.textContent = attribute.name;
-          const effect = document.createElement("small");
-          const level = value.attributeLevels?.[attributeKey] || 1;
-          effect.textContent = Spawner.codexAttributeEffect(attribute, level, unitDraft?.tribe || state.tribe);
-          const description = document.createElement("span");
-          description.className = "codex-component-description";
-          description.textContent = Spawner.codexAttributeDescription(attribute, unitDraft?.tribe || state.tribe);
-          label.append(name, effect, description);
-          button.append(label);
-          components.append(button);
-        }
-        related.append(components);
       }
       document.getElementById("codex-content").scrollTop = 0;
+    }
+
+    function renderUnitCodex(value, hero, related) {
+      const image = document.createElement("img");
+      image.src = assetSource(value.image);
+      image.alt = value.name;
+      hero.append(image);
+      document.getElementById("codex-related-title").textContent = "기본 능력";
+      if (value.player) {
+        related.append(createCodexStats(Spawner.codexStatRows(Spawner.ATTRIBUTE_DNA.stats([], value.key))));
+        const rule = document.createElement("p");
+        rule.textContent = "공격기관이 없으면 선제공격하지 않으며 기본 공격력 1로 방어합니다. 원거리 공격은 분비기관이 필요합니다.";
+        related.append(rule);
+      } else {
+        const stats = value.stats;
+        related.append(createCodexStats([["공격 방식", value.role.melee && value.role.ranged ? "근접·원거리" : value.role.ranged ? "원거리" : "근접"],
+          ["이동 방식", value.flying ? "비행" : "지상"], ["성향", value.hostile ? "선제공격" : value.unique ? "피격 시 방어" : "평화적"],
+          ["공격력", stats.power], ["공속", stats.speed + "회/초"], ["추가 타격 확률", stats.combo * 100 + "%"],
+          ...Spawner.codexStatRows(stats), ["채집 속도", stats.harvestSpeed + "배"]]));
+        const heading = document.createElement("h4");
+        heading.textContent = "능력별 티어";
+        related.append(heading, createCodexStats(["종합", "체력", "공격", "방어", "공속", "이동", "시야"].map((name, index) => [name, value.tiers[index]])));
+      }
     }
 
     function createCodexStats(rows) {
@@ -8753,43 +8499,20 @@
 
     function renderResourceCodex(resource, hero, related) {
       const image = document.createElement("img");
-      image.src = assetSource(resource.carryImage); image.alt = resource.name;
+      image.src = assetSource(resource.carryImage);
+      image.alt = resource.name;
       hero.append(image);
-      document.getElementById("codex-related-title").textContent = "종족별 채집 조건";
-      related.append(createCodexStats(Spawner.PLAYER_TRIBES.map(tribe => {
-        const requirements = Spawner.resourceHarvestRequirements({ resourceType: resource.key }, worldMap, tribe.key);
-        if (requirements === null) return [tribe.name, "채집 불가"];
-        const keys = Object.keys(requirements).filter(key => requirements[key] > 0);
-        return [tribe.name, keys.length ? keys.map(key => ATTRIBUTES.find(attribute => attribute.key === key).name).join(" · ") : "속성 없이 채집 가능"];
-      })));
-      const heading = document.createElement("h4");
-      heading.textContent = "채집 관련 속성";
-      const attributes = document.createElement("div");
-      attributes.className = "codex-components";
-      for (const key of resource.requirements) {
-        const link = document.createElement("button");
-        link.type = "button"; link.className = "codex-text-link";
-        link.textContent = ATTRIBUTES.find(attribute => attribute.key === key).name;
-        link.addEventListener("click", () => navigateCodex("attribute:" + key, true));
-        attributes.append(link);
-      }
-      related.append(heading, attributes);
+      document.getElementById("codex-related-title").textContent = "채집";
+      related.append(createCodexStats(Spawner.codexResourceDetails(resource).rows));
     }
 
     function renderAttributeCodex(attribute, related) {
-      const details = Spawner.codexAttributeDetails(attribute, unitDraft?.tribe || state.tribe);
-      related.append(createCodexStats(details.unlocks));
-      if (details.resources.length) {
-        const heading = document.createElement("h4");
-        heading.textContent = "채집 관련 자원";
-        const resources = document.createElement("ul");
-        resources.className = "codex-terrain-resources";
-        for (const resource of details.resources) {
-          const item = document.createElement("li");
-          item.append(codexResourceLink(resource)); resources.append(item);
-        }
-        related.append(heading, resources);
-      }
+      const tribe = unitDraft?.tribe || state.tribe;
+      document.getElementById("codex-related-title").textContent = (Spawner.PLAYER_TRIBES.find(value => value.key === tribe)?.name || "새싹콩") + " · 조각 1개";
+      related.append(createCodexStats(Spawner.codexGeneDetails(attribute, tribe).rows));
+      const heading = document.createElement("h4");
+      heading.textContent = "종족별 효과";
+      related.append(heading, createCodexStats(Spawner.PLAYER_TRIBES.map(value => [value.name, Spawner.codexGeneDetails(attribute, value.key).effect])));
     }
 
     function renderColonyCodex(hero, related) {
@@ -8801,7 +8524,9 @@
 
     function renderBurrowCodex(value, hero, related) {
       hero.append(createBurrowImage(value.key, 96));
-      document.getElementById("codex-related-title").textContent = "";
+      document.getElementById("codex-related-title").textContent = "출현 규칙";
+      related.append(createCodexStats([["크기", value.width + " × " + value.height + "칸"], ["처음 개체", value.initialCount + "기"],
+        ["출현 간격", value.spawnInterval + "초"], ["최대 개체", value.populationLimit + "기"]]));
     }
 
     function createNestGrowthTable() {
@@ -8814,7 +8539,7 @@
       table.setAttribute("aria-label", "둥지 레벨별 성장");
       const head = document.createElement("thead");
       const headings = document.createElement("tr");
-      for (const title of ["레벨", "최대 체력", "속성 슬롯", "속성 종류", "진화 포인트 보관량", "기본 자원 보관량", "다음 성장 비용"]) {
+      for (const title of ["레벨", "최대 체력", "유닛 한도", "DNA 보드", "해금 DNA", "진화 포인트 보관량", "기본 자원 보관량", "다음 성장 비용"]) {
         const cell = document.createElement("th");
         cell.scope = "col";
         setEvolutionText(cell, title);
@@ -8832,12 +8557,14 @@
         const health = document.createElement("td");
         health.textContent = balance.health;
         const slots = document.createElement("td");
-        slots.textContent = balance.slotCapacity + "칸";
+        slots.textContent = Spawner.ATTRIBUTE_DNA.boardCells(level).length + "칸";
+        const units = document.createElement("td");
+        units.textContent = balance.unitCapacity + "기";
         const attributes = document.createElement("td");
         const icons = document.createElement("div");
         icons.className = "codex-growth-attributes";
-        for (const attribute of ATTRIBUTES) {
-          if (attributeUnlockLevel(attribute.key, tribe) === level) icons.append(codexAttributeLink(attribute));
+        for (const attribute of Spawner.CODEX_GENES) {
+          if (attribute.grade === level) icons.append(codexAttributeLink(attribute));
         }
         attributes.append(icons);
         const capacity = document.createElement("td");
@@ -8847,7 +8574,7 @@
         const cost = document.createElement("td");
         const nextCost = nestUpgradeCost(level, tribe);
         cost.textContent = nextCost === null ? "—" : nextCost.toLocaleString("ko-KR");
-        row.append(name, health, slots, attributes, capacity, materials, cost);
+        row.append(name, health, units, slots, attributes, capacity, materials, cost);
         body.append(row);
       }
       table.append(head, body);
@@ -8874,24 +8601,14 @@
     function updateCodex() {
       const entry = codexEntry(codexState.entry);
       if (!entry) return;
-      document.getElementById("nest-growth-info").setAttribute("aria-expanded", String(codex.open && entry.kind === "nest" && entry.key === "colony"));
-      if (entry.kind === "nest" && entry.key === "colony") updateColonyCodex();
+      document.getElementById("nest-growth-info").setAttribute("aria-expanded", String(codex.open && entry.kind === "nest"));
+      if (entry.kind === "nest") updateColonyCodex();
       updateTerrainCodexCell(entry);
-      const counts = attributeCounts(unitDraft ? unitDraft.slots : [], unitDraft?.attributeLevels);
       const stack = document.getElementById("codex-stack");
-      stack.hidden = entry.kind !== "attribute";
-      if (entry.kind === "attribute") {
-        const attribute = entry.value;
-        const count = counts[attribute.key];
-        const tribe = unitDraft?.tribe || state.tribe;
-        setCodexResourceText(stack, (count ? "현재 설계에 장착됨 · " + Spawner.codexAttributeEffect(attribute, count, tribe) :
-          "미장착") + " · 해금: 둥지 Lv." + attributeUnlockLevel(attribute.key, tribe));
-      }
-      for (const item of document.querySelectorAll("#codex-related [data-combination]")) {
-        const combination = ATTRIBUTE_COMBINATIONS[Number(item.dataset.combination)];
-        const active = hasSynergy(counts, combination.keys);
-        item.dataset.active = String(active);
-        item.querySelector("strong").textContent = combination.name + (active ? " · 조합 중" : "");
+      stack.hidden = entry.kind !== "attribute" || !unitDraft?.dna;
+      if (!stack.hidden) {
+        const count = Spawner.ATTRIBUTE_DNA.counts(unitDraft.dna.pieces)[entry.key] || 0;
+        stack.textContent = (count ? "현재 설계에 " + count + "개 배치" : "미배치") + " · 해금: 둥지 Lv." + entry.value.grade;
       }
       codexBack.disabled = codexState.index <= 0;
       codexForward.disabled = codexState.index >= codexState.history.length - 1;
@@ -8915,6 +8632,8 @@
     function navigateCodex(entry, recordHistory, cell) {
       const target = codexEntry(entry);
       if (!target) return;
+      entry = target.kind + ":" + target.key;
+      if (recordHistory) codexSearch.value = "";
       hideHelpTooltip();
       if (codexState.category !== "all" && codexState.category !== target.kind) {
         codexState.category = target.kind;
@@ -8941,6 +8660,9 @@
     }
 
     function openCodex(entry, cell) {
+      const target = codexEntry(entry);
+      if (!target) return;
+      entry = target.kind + ":" + target.key;
       const opening = !codex.open;
       if (opening) {
         codexState.returnFocus = document.activeElement;
@@ -9169,7 +8891,9 @@
     const tribeSelectionStatus = document.getElementById("tribe-selection-status");
     const tribeGrid = document.getElementById("tribe-grid");
     const tribePreviews = new Map();
+    const tribePreviewFrames = new Map();
     const tribeWorldMap = document.getElementById("tribe-world-map");
+    let tribeWorldImage = null;
     const tribeStart = document.getElementById("tribe-start");
     function positionTribeStart() {
       const target = document.getElementById(portraitLayout.matches ? "tribe-start-mobile" : "tribe-start-desktop");
@@ -9288,16 +9012,13 @@
       }
     }
 
-    function drawTribeWorld() {
-      const context = tribeWorldMap.getContext("2d");
+    async function prepareTribeWorld() {
+      const generation = worldRenderingGeneration;
       const size = tribeWorldMap.width;
-      const displayScale = size / (tribeWorldMap.clientWidth || size);
-      context.clearRect(0, 0, size, size);
-      if (terrainRendering.overview) context.drawImage(terrainRendering.overview, 0, 0, size, size);
-      else {
-        context.fillStyle = "#171d1b"; context.fillRect(0, 0, size, size);
-        Spawner.drawUnitLoading(context, size / 2, size / 2, size * .04, 0);
-      }
+      const surface = document.createElement("canvas");
+      surface.width = surface.height = size;
+      const context = surface.getContext("2d");
+      context.drawImage(terrainRendering.overview, 0, 0, size, size);
       context.save();
       applyForestMapStyle(context, 0);
       for (const [index, image] of terrainRendering.forest) {
@@ -9305,6 +9026,18 @@
       }
       context.restore();
       context.drawImage(hazardCanvas, 0, 0, size, size);
+      const image = await createImageBitmap(surface);
+      if (generation !== worldRenderingGeneration) { image.close(); return; }
+      tribeWorldImage?.close();
+      tribeWorldImage = image;
+    }
+
+    function drawTribeWorld() {
+      const context = tribeWorldMap.getContext("2d");
+      const size = tribeWorldMap.width;
+      const displayScale = size / (tribeWorldMap.clientWidth || size);
+      context.clearRect(0, 0, size, size);
+      context.drawImage(tribeWorldImage, 0, 0, size, size);
       for (const colony of tribePacket.tribeStarts) {
         const x = (colony.x + 2.5) / tribePacket.world.size * size;
         const y = (colony.y + 2.5) / tribePacket.world.size * size;
@@ -9377,7 +9110,12 @@
       const nestHeight = Math.max(...previews.map(entry => entry.art.nestHeight));
       const scale = Math.min(...previews.map(entry => Math.min(entry.width * .72 / nestWidth, entry.height * .73 / nestHeight)));
       for (const { tribe, art, preview, width, height } of previews) {
+        const frame = idleMotion.matches ? 0 : Math.floor(now / tribe.frameMs) % tribe.frames;
+        const previous = tribePreviewFrames.get(tribe.key);
+        if (previous?.art === art && previous.frame === frame && previous.width === width &&
+            previous.height === height && previous.scale === scale) continue;
         tribeArt.drawPreview(preview.getContext("2d"), art, tribe, now, width, height, idleMotion.matches, scale);
+        tribePreviewFrames.set(tribe.key, { art, frame, width, height, scale });
       }
     }
 
@@ -9449,17 +9187,14 @@
     }
 
     async function prepareTribeRendering(colonies, { previewOnly = false } = {}) {
-      if (!previewOnly) await Promise.all(Spawner.PLAYER_TRIBES.flatMap(tribe => ["base", "strength", "blade", "secretion", "carapace", "antenna"].map(form =>
-        unitPresentation.prepareAnimation({ tribe: tribe.key, appearanceAttributes: form === "base" ? {} : { [form]: 1 } }))));
+      if (!previewOnly) await Promise.all([...new Set(colonies.map(colony => colony.tribe).filter(Boolean))].map(tribe =>
+        unitPresentation.prepareAnimation({ tribe, appearanceAttributes: {} })));
       const nestSprite = colonyAppearances[0].sprite;
       if (previewOnly && nestSprite.complete && !nestSprite.naturalWidth) nestSprite.src = nestSprite.src;
       await nestSprite.decode();
       await Promise.all([...new Set(colonies.map(colony => colony.tribe).filter(key => key && key !== "bean"))].map(async key => {
         const tribe = Spawner.PLAYER_TRIBES.find(entry => entry.key === key);
         if (!previewOnly) await prepareAgentMovement(tribe);
-        if (!previewOnly && key === "spore") await prepareSporeBirth();
-        if (!previewOnly && key === "spring") await springBirthSheet.decode();
-        if (!previewOnly && key === "pebble") await Promise.all([pebbleBirthSheet.decode(), pebbleBirthForeground.decode()]);
         if (tribeColonies.has(key)) return;
         const source = globalThis.SpawnerAssets.image();
         source.src = assetSource(tribe.nest);
@@ -9990,7 +9725,12 @@
         if (action.type === "birth" || action.type === "design" && action.birth) {
           const template = action.type === "birth" ? action.agentId !== undefined ?
             state.agents.find(candidate => candidate.id === action.agentId) : state.templates.find(candidate => candidate.id === action.templateId) : action;
-          if (template) await prepareAgentTemplate(template);
+          if (template) await Promise.all([
+            prepareAgentTemplate(template),
+            unitPresentation.prepareActions({ ...template, tribe: template.tribe || state.tribe,
+              attributes: template.attributes || (template.dna ? Spawner.dnaAppearance(template.dna) : attributeCounts(template.slots || [], template.attributeLevels)) },
+              ["idle", "walk", "carry", "harvest", "throw", "attack", "ranged", "hurt", "death"])
+          ]);
           if (connection.roomId !== roomId || !connection.active || !connection.online) return null;
         }
         const result = await client.call("command", { roomId, action });
@@ -10022,7 +9762,7 @@
         await prepareWorldRendering(packet.world, packet.tribeStarts || packet.colonies);
         if (version !== roomPreparationVersion) return null;
         if (packet.colonies.find(colony => colony.id === packet.colonyId).tribe === null) {
-          await prepareTribePreviews();
+          await Promise.all([prepareTribePreviews(), prepareTribeWorld()]);
           if (version !== roomPreparationVersion) return null;
         }
         updateRoomCreationProgress(100);
@@ -10057,7 +9797,9 @@
           showTribeSelection(packet);
           return;
         }
-        prepareTribeRendering(packet.colonies).catch(() => {});
+        await prepareTribeRendering(packet.colonies);
+        await Promise.all([prepareAgentRendering(packet), prepareDetailVfx()]);
+        if (birthPreparationVersion !== roomPreparationVersion || pebbleEntryVersion !== pebbleRoomEntryVersion || connection.roomId !== roomId) return;
         connection.active = true;
         applySnapshot(packet);
         if (!connection.online) return;
@@ -10065,7 +9807,6 @@
           setEvolutionText(connectionStatus, terrainRendering.cacheError);
           connectionStatus.hidden = false;
         }
-        prepareAgentRendering().catch(() => {});
         closeEvolutionPanel();
         closeColonyMenu();
         selectObject(null, null);
@@ -10083,6 +9824,7 @@
         updateEnding(false);
         await client.call("resume", { visible: !document.hidden });
       } catch (error) {
+        if (pebbleEntryVersion !== pebbleRoomEntryVersion || connection.roomId !== roomId) return;
         connection.active = false;
         setEvolutionText(tribeSelection.hidden ? welcomeStatus : tribeSelectionStatus, error.message);
       }

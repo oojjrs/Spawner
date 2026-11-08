@@ -13,21 +13,40 @@ function strength(value) {
   return { stats: { combatStrength: value } };
 }
 
-test("블록 감경은 종족·중립·DNA·이전 저장·수동 규칙에서 50%로 고정한다", () => {
+test("방어숙련은 조각당 5%p를 더하고 DNA 블록 감경에만 최대90%까지 적용한다", () => {
   for (const species of Object.keys(UNIT_COMBAT_STATS)) {
     assert.equal(unitCombatStats(species).blockReduction, .5);
     for (const blockReduction of [0, .4, .65, .9, 1])
       assert.equal(combatProfile({ species, stats: { blockReduction } }).blockReduction, .5);
   }
-  for (const blockPower of [0, 50, 65, 90, 100]) {
-    assert.equal(combatProfile({ stats: { dna: { blockPower } } }).blockReduction, .5);
-    assert.equal(dnaCombatStats({}, { blockPower }, { ...DNA_COMBAT_RULES, blockReductionBase: .9, blockReductionCap: 1 }).blockPower, 50);
+  for (const [count, expected] of [[0, 50], [1, 55], [2, 60], [8, 90], [20, 90]]) {
+    const stats = dnaCombatStats({ blockPower: count }, { blockPower: count * 4 });
+    assert.ok(Math.abs(stats.blockPower - expected) < 1e-9);
+    assert.ok(Math.abs(combatProfile({ stats: { dna: stats } }).blockReduction - expected / 100) < 1e-9);
   }
+  assert.equal(combatProfile({ stats: { dna: {} } }).blockReduction, .5);
+  assert.equal(combatProfile({ stats: { dna: { blockPower: 100 } } }).blockReduction, .9);
   const agent = { species: "vine-turtle", health: 37, attackReady: 9,
     stats: { health: 100, combatStrength: 28, block: .28, blockReduction: .65 } };
   migrateCombatStats(agent);
   assert.equal(agent.stats.blockReduction, .5);
   assert.deepEqual([agent.health, agent.attackReady, agent.stats.block], [unitCombatStats(agent.species).health * .37, 9, unitCombatStats(agent.species).block]);
+});
+
+test("근접 폭딜·원거리 다수 제어·갑각 방어 투자는 서로 다른 강점을 만든다", () => {
+  const melee = dnaCombatStats({ blade: 1 }, { power: 2, critical: 3, criticalPower: 4, focus: 4 });
+  const ranged = dnaCombatStats({ secretion: 1 }, { rangedPower: 2, area: 3, areaPower: 4, stun: 3, stunTime: 4 });
+  const armored = dnaCombatStats({ carapace: 1, blockPower: 1 }, { carapace: 2, block: 3, counter: 3, reflection: 4 });
+  const worker = dnaCombatStats({ gather: 1 }, { counter: 3, counterPower: 4 });
+  assert.ok(melee.meleePower > ranged.rangedPower * 2);
+  assert.ok(melee.critical >= 30 && melee.criticalPower >= 250 && melee.focus < .15);
+  assert.ok(ranged.rangedPower * (1 + ranged.area * ranged.areaPower / 100) > melee.meleePower);
+  assert.ok(ranged.stun >= 18 && ranged.stunTime >= .75);
+  assert.equal(armored.meleePower, 1); assert.equal(armored.counter, 30);
+  assert.equal(worker.counter, 0); assert.equal(worker.counterPower, 0);
+  assert.ok(armored.block >= 25 && armored.reflection >= 20);
+  const source = { stats: { dna: { ...melee, meleePower: 20 } } }, target = { stats: { dna: armored } };
+  assert.ok(Math.abs(combatDamage(source, target, .5) - 20 / 1.2) < 1e-9);
 });
 
 function environment() {

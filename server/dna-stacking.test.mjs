@@ -7,7 +7,7 @@ import { createGame } from "./game.mjs";
 import { createUtilityAI } from "./utility.mjs";
 
 const piece=id=>{const g=M.lookup.get(id);return {gene:id,grade:g.grade,rotation:0,q:0,r:0};};
-const build=n=>({version:5,pieces:M.pack(Array.from({length:n},()=>({gene:"gather",grade:1,rotation:0})),2),level:2,budget:500});
+const build=n=>({version:6,pieces:M.pack(Array.from({length:n},()=>({gene:"gather",grade:1,rotation:0})),2),level:2,budget:500});
 
 test("stack prices are order independent and every split pays extra body bases",()=>{
   assert.equal(birthCost({dna:build(0)},"bean"),3);
@@ -31,8 +31,8 @@ test("physical organ copies preserve basic role throughput without extra hits or
   assert.equal(gather.capacity,6);assert.equal(gather.harvest,1);assert.equal(gather.harvestTime,4);assert.equal(gather.loadSpeed,75);assert.equal(gather.health,10);
   assert.equal(blade.meleePower,12);assert.equal(blade.meleeSpeed,.5);assert.equal(blade.hits,1);assert.equal(blade.rangedPower,0);
   assert.ok(Math.abs(ranged.rangedPower-8.4)<1e-9);assert.equal(ranged.rangedSpeed,.5);assert.equal(ranged.hits,1);assert.equal(ranged.meleePower,0);
-  assert.equal(antenna.vision,7);
-  const capped=M.stats(Array.from({length:20},()=>piece("antenna")));assert.equal(capped.vision,12);
+  assert.equal(antenna.vision,1);
+  const capped=M.stats(Array.from({length:20},()=>piece("antenna")));assert.equal(capped.vision,1);
 });
 
 function gameFixture(n,dna){
@@ -72,7 +72,7 @@ test("historical paid cost and DNA survive restore while new births require the 
 
 test("운반은 한도만 늘리고 채집 속도는 1개를 캐는 시간을 줄인다",()=>{
   for(const [capacity,speed] of [[1,0],[4,0],[4,2]]){
-    const genes=['gather',...Array(capacity-1).fill('capacity'),...Array(speed).fill('harvestSpeed')],dna={version:5,pieces:M.pack(genes.map(piece),1),level:1,budget:500};assert.ok(validateDna(dna,1,500));
+    const genes=['gather',...Array(capacity-1).fill('capacity'),...Array(speed).fill('harvestSpeed')],dna={version:6,pieces:M.pack(genes.map(piece),1),level:1,budget:500};assert.ok(validateDna(dna,1,500));
     const stats=M.stats(dna.pieces),f=gameFixture(capacity,dna),interval=4/(1+.1*speed);assert.equal(stats.harvest,1);assert.equal(stats.capacity,capacity);assert.equal(stats.harvestTime,interval);f.tick(1);
     for(let count=1;count<=capacity;count++){f.tick(1+interval*count-.001);assert.equal(f.agent.carrying,count-1);f.tick(1+interval*count+.001);assert.equal(f.agent.carrying,count);assert.equal(f.food.amount,20-count);assert.equal(f.agent.harvestResult.amount,1);if(count<capacity)assert.equal(f.agent.mode,'harvest');}
   }
@@ -80,7 +80,7 @@ test("운반은 한도만 늘리고 채집 속도는 1개를 캐는 시간을 �
 });
 
 test("DNA 수집 계획은 한도까지 1개씩 캐는 시간과 자원 부족을 반영한다",()=>{
-  const dna={version:5,pieces:M.pack(['gather','capacity','capacity','capacity'].map(piece),1),level:1,budget:500},size=14,stats=dnaUnitStats(dna),agent={id:'worker',tribe:'bean',x:1,y:1,dna,stats,attributes:{},slots:[],carrying:0,health:stats.health,bornAt:0,lifespan:180,cost:28,personality:{boldness:0,aggression:0,curiosity:0}},food={x:3,y:1,key:'3,1',resourceType:'clay',amount:20},home={x:1,y:1};
+  const dna={version:6,pieces:M.pack(['gather','capacity','capacity','capacity'].map(piece),1),level:1,budget:500},size=14,stats=dnaUnitStats(dna),agent={id:'worker',tribe:'bean',x:1,y:1,dna,stats,attributes:{},slots:[],carrying:0,health:stats.health,bornAt:0,lifespan:180,cost:28,personality:{boldness:0,aggression:0,curiosity:0}},food={x:3,y:1,key:'3,1',resourceType:'clay',amount:20},home={x:1,y:1};
   const state={simSeconds:0,evolutionPoints:0,colonyFood:0,lastFoodAt:0,nestLevel:1,agents:[agent],knownFood:new Map([[food.key,food]]),resourceInventory:{},markers:[],explored:new Set(Array.from({length:size*size},(_,index)=>index))};
   const ai=createUtilityAI({state,size,tribe:'bean',homeCells:()=>[home],deliveryCells:()=>[home],walkable:(x,y)=>y===1,hazardAt:()=>0,enemies:()=>[],synergy:()=>false,canHarvest:()=>true,terrainAt:()=>4,materialSpace:()=>200,isFood:()=>true,harvestSeconds:()=>stats.dna.harvestTime});
   const full=ai.evaluate(agent,false).find(p=>p.action==='collect');assert.ok(full);assert.equal(full.plannedCargo,4);assert.ok(Math.abs(full.deliverySeconds-(2/.25+1+4*4+2/.1875+1))<1e-9);

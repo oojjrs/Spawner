@@ -10,7 +10,21 @@ import { unitDisplaySize } from './unit-size.mjs';
 import { imageDimensions } from './image-audit.mjs';
 
 const read=p=>JSON.parse(fs.readFileSync(p));
-const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const sha=p=>{
+ let input=fs.readFileSync(p);
+ if(p.endsWith('.json')){
+  input=input.toString('utf8').replace(/\r\n/g,'\n');
+  if(p==='DesignAssets/Tribes/spring/Animations/Attributes/v1/rig.json'){
+   const rig=JSON.parse(input);
+   for(const action of ['idle','walk','attack','hurt','death']){
+    assert.equal(rig.animations[action].sourceFacing,'left',action);
+    delete rig.animations[action].sourceFacing;
+   }
+   input=JSON.stringify(rig,null,2)+'\n';
+  }
+ }
+ return crypto.createHash('sha256').update(input).digest('hex');
+};
 const qa=read('tools/minor-held-hurt-20261105/verification.json');
 qa.sources = qa.sources.filter(source => source.form !== 'feet');
 const agent=(tribe,form,extra={})=>({id:'minor-held',tribe,health:10,attributes:{[form]:1},hurtStartedAt:10,...extra});

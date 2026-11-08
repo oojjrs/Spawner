@@ -1,4 +1,5 @@
 import test from "node:test";
+import { HAZARD_CODEX } from "./terrain-codex.mjs";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
@@ -31,8 +32,8 @@ function renderer() {
   const target = canvas(), cached = canvas();
   cached.width = cached.height = 48;
   const context = createContext({
-    document: { createElement: canvas },
-    hazardGroundSprites: [{ naturalWidth: 1024 }, { naturalWidth: 1024 }],
+    document: { createElement: canvas }, HAZARD_CODEX: [{ hazard: 1 }, { hazard: 2 }],
+    hazardGroundSprites: [{ complete: true, naturalWidth: 1024 }, { complete: true, naturalWidth: 1024 }],
     hazardGroundTiles: new Map(), hazardCells: [], hazardCanvas: cached,
     WORLD_SIZE: 6, worldMap: { hazards: new Uint8Array(36) },
     ctx: target.getContext("2d"), objectOutlineColor: () => null,
@@ -111,4 +112,13 @@ test("위험 표현은 칸 전체에 맞고 선택 시 재질을 중복해서 �
   context.drawHazards();
   assert.equal(target.draws.length, 1);
   assert.deepEqual(target.fills[0], [8, 8, 8, 8]);
+});
+
+test("현행 카탈로그에서 제거된 위험 유형은 준비하거나 그리지 않는다", () => {
+  const { context, cached } = renderer();
+  context.HAZARD_CODEX = HAZARD_CODEX;
+  context.worldMap.hazards.fill(2);
+  context.updateHazards(7);
+  assert.equal(context.hazardCells.length, 0);
+  assert.equal(cached.draws.length, 0);
 });

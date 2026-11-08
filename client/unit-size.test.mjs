@@ -18,11 +18,12 @@ test("실제 DNA와 동일 조각 수 스탯은 모든 체급에서 같은 성�
 test("필드와 전투는 속성 보정 캐시에 DNA 성장을 중복하거나 고정하지 않는다", () => {
   const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
   const scope = createContext({ Spawner: { unitDisplayAttributes, UNIT_DISPLAY_SIZES, unitDisplaySize },
+    state: { lastFrame: 0 }, unitDisplayScaleCache: new WeakMap(),
     unitDisplayScales: new Map([["bean", 2]]), unitAttributeScales: new Map(),
     unitDisplayBounds: new Map([["bean", {}]]), agentBaseParts: new Map(), agentParts: new Map(),
     ATTRIBUTES: [{ key: "antenna" }], combatAttributeArt: { ready: () => true },
     measureUnitDisplayScale: () => 3 });
-  for (const name of ["unitDisplayScale", "combatUnitScale"])
+  for (const name of ["unitDisplayScale", "calculateUnitDisplayScale", "combatUnitScale"])
     runInContext(source.match(new RegExp("^    function " + name + "\\([^]*?^    }", "m"))[0], scope);
   for (const count of [0, 20, 5, 0]) {
     const unit = { tribe: "bean", attributes: { antenna: 1 }, dna: { pieces: Array(count).fill({}) } };
@@ -30,6 +31,18 @@ test("필드와 전투는 속성 보정 캐시에 DNA 성장을 중복하거나 
     assert.equal(scope.combatUnitScale(unit), scope.unitDisplayScale(unit));
   }
   assert.equal(scope.unitAttributeScales.size, 1);
+  let calculations = 0;
+  const calculate = scope.calculateUnitDisplayScale;
+  scope.calculateUnitDisplayScale = unit => { calculations++; return calculate(unit); };
+  const unit = { tribe: "bean", attributes: { antenna: 1 }, dna: { pieces: [] } };
+  const before = scope.unitDisplayScale(unit);
+  assert.equal(scope.unitDisplayScale(unit), before);
+  assert.equal(scope.combatUnitScale(unit), before);
+  assert.equal(calculations, 1);
+  unit.dna.pieces.push({});
+  scope.state.lastFrame = 16;
+  assert.ok(scope.unitDisplayScale(unit) > before);
+  assert.equal(calculations, 2);
 });
 
 test("기본 배율은 외형 체급과 관계없이 유지하여 큰 유닛을 더 크게 표시한다", () => {

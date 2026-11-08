@@ -34,7 +34,7 @@ test("샘방울 2→3은 확인한 시트를 그대로 쓰고 완전 잠수 뒤 
   assert.equal(playback.effects.size, 0);
 });
 
-test("샘방울 3레벨 첫 로드·건너뛰기에는 성장을 재생하지 않고 파괴·다음 레벨에서는 끝낸다", () => {
+test("샘방울 초기 접속·건너뛰기·파괴는 재생하지 않고 다음 승급은 해당 클립으로 전환한다", () => {
   for (const initial of [3, 1]) {
     const playback = createNestGrowthPlayback();
     syncNestGrowthPlayback(playback, [{ ...entry, nestLevel: initial }], 10, true);
@@ -46,6 +46,12 @@ test("샘방울 3레벨 첫 로드·건너뛰기에는 성장을 재생하지 �
     syncNestGrowthPlayback(playback, [{ ...entry, nestLevel: 2 }], 10, true);
     syncNestGrowthPlayback(playback, [entry], 11, false);
     syncNestGrowthPlayback(playback, [changed], 12, false);
-    assert.equal(playback.effects.size, 0);
+    if (changed.nestHealth === 0) assert.equal(playback.effects.size, 0);
+    else {
+      const effect = playback.effects.get(entry.id);
+      assert.equal(effect.animation, nestGrowthAnimation("spring", 3, 4));
+      assert.equal(effect.startedAt, 12);
+      assert.equal(effect.level, 4);
+    }
   }
 });

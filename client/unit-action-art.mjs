@@ -6,6 +6,7 @@ import { unitDisplaySize, unitFrameMirror } from "./unit-size.mjs";
 import { unitActionState } from "./unit-appearance-state.mjs";
 import { UNIT_COMBINATION_FORMS } from "./unit-combination-forms.mjs";
 import { unitAppearanceForm } from "../server/unit-appearance.mjs";
+import { TRIBE_CANVAS_CACHE_BUDGET } from "./canvas-cache.mjs";
 
 function unitActionArtFallbackKey(agent) {
   if (!agent || agent.species) return null;
@@ -71,6 +72,7 @@ export function unitActionArtPose(agent, time) {
 
 export function createUnitActionArt(assetSource, createSurface, loadImage) {
   const images = new Map(), pending = new Map(), bounds = new Map(), retryAfter = new Map();
+  const frames = TRIBE_CANVAS_CACHE_BUDGET.createCache(frame => frame.surface.width * frame.surface.height);
   // Birth scenes use an environment plus one intact body (v1), or a native
   // body-only source (v2). Neither mode splits anatomy or adds a second clock.
   // Weak keys avoid retaining decoded scene metadata after catalogs are replaced.
@@ -172,11 +174,37 @@ export function createUnitActionArt(assetSource, createSurface, loadImage) {
     }).finally(() => pending.delete(animation.image));
     pending.set(animation.image, loading); return loading;
   }
-  async function prepare(agent, time) {
+  async function prepare(agent, time, retry) {
     const definition = unitActionArtDefinition(agent);
     if (!definition) return;
     const pose = unitActionArtPose(agent, time ?? 0);
+    if (retry === true) {
+      retryAfter.delete(definition.reference.image);
+      if (pose) {
+        retryAfter.delete(pose.animation.image);
+        for (const layer of layersFor(pose) || []) retryAfter.delete(layer.image);
+      }
+    }
     await Promise.all([pose ? requestReference(pose) : request(definition.reference), requestPose(pose)]);
+    if (!poseReady(pose)) throw new Error("Unit action assets are not ready: " + (agent.tribe || agent.key || "bean") + "/" + (pose?.action || "idle"));
+  }
+  async function prepareActions(agent, actions, retry) {
+    const selection = unitActionArtSelection(agent, UNIT_ACTION_ART);
+    if (!selection) return;
+    const { definition, key } = selection, authored = actionsFor(definition, key);
+    const poses = [...new Set(actions)].filter(action => authored[action]).map(action => ({
+      action, animation: authored[action], frame: authored[action].frames?.[0] || 0, reference: definition.reference
+    }));
+    if (retry === true) {
+      retryAfter.delete(definition.reference.image);
+      for (const pose of poses) {
+        retryAfter.delete(pose.animation.image);
+        for (const layer of layersFor(pose) || []) retryAfter.delete(layer.image);
+      }
+    }
+    await Promise.all([request(definition.reference), ...poses.map(requestPose)]);
+    if (!images.has(definition.reference.image) || poses.some(pose => !poseReady(pose)))
+      throw new Error("Unit action assets are not ready: " + key + "/" + poses.map(pose => pose.action).join(","));
   }
   function referenceBounds(animation) {
     if (bounds.has(animation)) return bounds.get(animation);
@@ -245,12 +273,21 @@ export function createUnitActionArt(assetSource, createSurface, loadImage) {
     if (!pose) return null;
     requestReference(pose); requestPose(pose);
     if (!poseReady(pose)) return null;
+    const animation = pose.animation, reference = pose.reference;
+    const key = pose.action === "birth" ? null : [animation.image, pose.frame,
+      animation.frameSize, animation.frameHeight, animation.columns, animation.pivotX, animation.pivotY,
+      animation.sourceFacing, animation.viewSize, animation.referenceLength,
+      reference.image, reference.frameSize, reference.viewSize, reference.frames?.[0]].join(":");
+    const cached = key && frames.get(key);
+    if (cached && cached.image === images.get(animation.image) && cached.reference === images.get(reference.image)) return cached.surface;
     const surface = createSurface(512, 512);
-    return draw(surface.getContext("2d"), agent, time, 256, 448, 256 / unitDisplaySize(agent), false, null) ? surface : null;
+    if (!draw(surface.getContext("2d"), agent, time, 256, 448, 256 / unitDisplaySize(agent), false, null)) return null;
+    if (key) frames.set(key, { surface, image: images.get(animation.image), reference: images.get(reference.image) });
+    return surface;
   }
   // ready(agent) intentionally remains the timeless reference/portrait contract.
   // Scene playback callers use readyFrame/readyAction with simulation time.
-  return { prepare, draw, frame, referenceBounds, readyFrame: (agent, time) => { const pose = unitActionArtPose(agent, time); return poseReady(pose); }, readyAction: (agent, time) => { const pose = unitActionArtPose(agent, time); return !!pose && !pose.missing && poseReady(pose); }, ready: agent => {
+  return { prepare, prepareActions, draw, frame, referenceBounds, readyFrame: (agent, time) => { const pose = unitActionArtPose(agent, time); return poseReady(pose); }, readyAction: (agent, time) => { const pose = unitActionArtPose(agent, time); return !!pose && !pose.missing && poseReady(pose); }, ready: agent => {
     const definition = unitActionArtDefinition(agent); return !!definition && images.has(definition.reference.image);
   } };
 }

@@ -137,7 +137,7 @@ export function createUnitPresentationAssets(options) {
     if (unit.species) return base * growth;
     const attributes = model.unitDisplayAttributes(unit);
     const equipped = model.ATTRIBUTES.filter(attribute => attributes[attribute.key] > 0);
-    if (!equipped.length || equipped.some(attribute => attribute.kind === "combat") && !options.combatAttributeArt?.ready(tribe)) return base * growth;
+    if (!equipped.length || equipped.some(attribute => attribute.kind === "combat") && !options.combatAttributeArt?.readyAgent(unit)) return base * growth;
     const key = tribe + ":" + equipped.map(attribute => attribute.key + ":" + attributes[attribute.key]).join(",");
     if (!attributeScales.has(key)) {
       const scale = unitAttributeDisplayScale(base, 1, bodySize(tribe, {}), bodySize(tribe, attributes));

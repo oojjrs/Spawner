@@ -25,10 +25,12 @@ function multiply(a, b) {
     a[0]*b[4]+a[2]*b[5]+a[4], a[1]*b[4]+a[3]*b[5]+a[5]];
 }
 
-export function withStage(run, { width = 1040, height = 480, dpr = 1, reduced = false } = {}) {
-  const saved = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets };
+export async function withStage(run, { width = 1040, height = 480, dpr = 1, reduced = false } = {}) {
+  const saved = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets, document: globalThis.document };
   globalThis.window = { matchMedia: () => ({ matches: reduced }), devicePixelRatio: dpr };
-  globalThis.Image = class { complete = true; naturalWidth = 4096; naturalHeight = 4096; };
+  globalThis.Image = class { complete = true; naturalWidth = 4096; naturalHeight = 4096; async decode() {} };
+  globalThis.document = { createElement: () => ({ getContext: () => ({ drawImage() {},
+    getImageData(x, y, width, height) { return { data: new Uint8ClampedArray(width * height * 4).fill(255) }; } }) }) };
   globalThis.SpawnerAssets = { source: path => path };
   let matrix = [1,0,0,1,0,0], stack = [], draws = [];
   const context = new Proxy({
@@ -41,15 +43,16 @@ export function withStage(run, { width = 1040, height = 480, dpr = 1, reduced = 
   }, { get: (target, key) => key in target ? target[key] : () => {} });
   const canvas = { clientWidth: width, clientHeight: height, getContext: () => context };
   const stage = createCombatStage(canvas);
-  const draw = (trial, now = trial.time * 1000, playing = false) => {
+  const draw = async (trial, now = trial.time * 1000, playing = false) => {
+    await stage.prepare(trial);
     draws = [];
     const before = JSON.stringify(trial.agents);
     stage.render(trial, now, playing);
     assert.equal(JSON.stringify(trial.agents), before, "rendering must not mutate gameplay");
     return draws;
   };
-  try { return run({ stage, draw, canvas }); }
-  finally { globalThis.window = saved.window; globalThis.Image = saved.Image; globalThis.SpawnerAssets = saved.assets; }
+  try { return await run({ stage, draw, canvas }); }
+  finally { globalThis.window = saved.window; globalThis.Image = saved.Image; globalThis.SpawnerAssets = saved.assets; globalThis.document = saved.document; }
 }
 
 export function supportDraw(draws, source, time, dpr = 1) {

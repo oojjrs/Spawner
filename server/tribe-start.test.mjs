@@ -101,7 +101,7 @@ test("시작 개체는 특별 능력치 없는 기본 채집 DNA이며 복제·�
       assert.deepEqual(agent.stats.dna,stats.dna);
       assert.equal(agent.stats.vision,1);
       assert.equal(agent.stats.capacity,stats.capacity);
-      assert.equal(agent.stats.dna.roaming,false);
+      assert.equal(agent.stats.dna.hunting,false);
       assert.equal(agent.stats.dna.melee,false);
       assert.equal(agent.stats.dna.ranged,false);
       assert.equal(agent.cost,26);

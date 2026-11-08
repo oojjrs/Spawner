@@ -1,66 +1,42 @@
-import { unitPresentationTestSource } from "./unit-presentation-fixture.mjs";
-import { unitDisplayAttributes } from "./unit-display-appearance.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-import { createContext, runInContext } from "node:vm";
 import { createGame } from "../server/game.mjs";
-import { unitAnimationPose, unitAnimationFrame } from "./unit-animation.mjs";
-import { imageFrameGeometry } from "./image-geometry.mjs";
+import { unitActionArtPose } from "./unit-action-art.mjs";
+import { presentationRenderer } from "./unit-presentation-test-harness.mjs";
 
-const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
-
-function declaration(name) {
-  const match = source.match(new RegExp("^    function " + name + "\\([^]*?^    }", "m"));
-  assert.ok(match, name);
-  return match[0];
-}
-
-function rendering(action) {
-  const draws = [];
-  const sprite = name => ({ name, complete: true, naturalWidth: 512, naturalHeight: 512 });
-  const sheet = sprite("embedded-sprout");
-  const context = createContext({     state: { simSeconds: .1 }, AGENT_HEIGHT: .7, idleMotion: { matches: false },
-    displayedAgent: value => value, foodDeliveryPose: () => ({}),
-    agentAppearanceBodyPose: () => ({ pivot: 460 / 512, scaleX: 1, scaleY: 1 }), agentWalkPose: () => null,
-    agentBirthPose: () => null,
-    agentHeadPose: () => ({ leftRotation: 0, rightRotation: 0, leftScaleY: 1, rightScaleY: 1 }),
-    agentSprite: (agent, layer) => sprite(layer), drawAgentMovement: () => false,
-    agentParts: new Map(), interpolatedAgentPosition: () => ({}),
-    sproutRoots: { pose: () => null, drawRig() { draws.push("feet-left", "feet-right"); } },
-    sproutCombatFrame: () => sheet, agentAttackFrame: () => -1,
-    Spawner: { unitDisplayAttributes, imageFrameGeometry, sproutRootGeometry: () => ({ height: 76 }), combatHurtFrame: () => -1, unitAnimationPose: () => ({ action, frame: 0, animation: { frameSize: 512, columns: 4, pivotX: 256, pivotY: 448 } }), unitAnimationFrame },
-    unitAnimationSheets: new Map([["bean", new Map([[action, { sprite: sheet, scale: 1 }]])]]),
-    drawAgentRanged: () => false, drawAgentBaseResource: () => false, drawSelectionOutline() {},
-    drawing: { save() {}, restore() {}, beginPath() {}, rect() {}, clip() {}, ellipse() {}, fill() {},
-      translate() {}, scale() {}, rotate() {}, drawImage(image) { draws.push(image.name); } }
-  });
-  for (const name of ["agentBodyLift", "drawAgentHead", "drawAgentFeet", "drawAgentAnimation", "drawAgentAttack", "drawAgentAppearanceBody"])
-    runInContext(declaration(name), context);
-  return { context, draws };
-}
-
-test("감지 유닛은 대기 외형을 유지하고 공격·피격은 속성 합성 애니메이션을 재생한다", () => {
+test("감지 유닛의 대기·공격·피격은 해당 외형의 완성 프레임 하나를 재생한다", async t => {
+  const render = presentationRenderer(t);
+  render.state.simSeconds = .1;
   for (const action of ["idle", "attack", "hurt"]) for (const antenna of [1, 2]) {
-    const render = rendering(action);
-    const agent = { id: "bean:1", tribe: "bean", health: 12, attributes: { antenna }, stats: { capacity: 1 }, carrying: 0 };
-    render.context.drawAgentAppearanceBody(render.context.drawing, 100, agent, 200,
-      { x: 0, y: 0 }, { progress: 1 }, null, null);
-    assert.deepEqual(render.draws, action === "idle" ? ["antenna", "body"] : ["embedded-sprout"]);
+    const agent = { id: "bean:1", tribe: "bean", health: 12, attributes: { antenna },
+      ...(action === "attack" ? { attack: { startedAt: 0 } } : {}),
+      ...(action === "hurt" ? { hurtStartedAt: 0 } : {}) };
+    const pose = unitActionArtPose(agent, .1);
+    assert.equal(pose.action, action);
+    assert.equal(pose.missing, false);
+    await render.presentation.prepareAnimation(agent, .1);
+    render.draws.length = 0;
+    render.presentation.drawAgentAppearanceBody(render.context, 100, agent, 200, { x: 0, y: 0 }, { progress: 1 }, null, null);
+    assert.equal(render.draws.length, 1);
+    assert.equal(render.draws[0][0].src, pose.animation.image);
+    assert.deepEqual(render.draws[0].slice(1, 5), [pose.frame % pose.animation.columns * pose.animation.frameSize,
+      Math.floor(pose.frame / pose.animation.columns) * (pose.animation.frameHeight || pose.animation.frameSize), pose.animation.frameSize, pose.animation.frameHeight || pose.animation.frameSize]);
   }
 });
 
-test("발 속성은 분리한 양발을 그리고 무속성 유닛은 원본 애니메이션을 유지한다", () => {
-  const render = rendering("idle");
-  const agent = { id: "bean:1", tribe: "bean", health: 12, attributes: { feet: 1 }, stats: { capacity: 1 }, carrying: 0 };
-  render.context.drawAgentAppearanceBody(render.context.drawing, 100, agent, 200,
-    { x: 0, y: 0 }, { progress: 1 }, null, null);
-  assert.deepEqual(render.draws, ["feet-left", "feet-right", "sprout-left", "sprout-right", "sprout-stem", "body"]);
-  render.draws.length = 0;
-  agent.attributes = {};
-  render.context.drawAgentAppearanceBody(render.context.drawing, 100, agent, 200,
-    { x: 0, y: 0 }, { progress: 1 }, null, null);
-  assert.deepEqual(render.draws, ["embedded-sprout"]);
+test("퇴역한 발 속성은 기본 완성 애셋을 유지하고 부속지를 합성하지 않는다", async t => {
+  const render = presentationRenderer(t), images = [];
+  for (const attributes of [{ feet: 1 }, {}]) {
+    const agent = { id: "bean:1", tribe: "bean", health: 12, attributes };
+    const pose = unitActionArtPose(agent, 0);
+    await render.presentation.prepareAnimation(agent, 0);
+    render.draws.length = 0;
+    render.presentation.drawAgentAppearanceBody(render.context, 0, agent, 200, { x: 0, y: 0 }, { progress: 1 }, null, null);
+    assert.equal(render.draws.length, 1);
+    assert.equal(render.draws[0][0].src, pose.animation.image);
+    images.push(pose.animation.image);
+  }
+  assert.equal(images[0], images[1]);
 });
 
 test("삭제됐거나 알 수 없는 자원을 시야에서 발견해도 진행을 중단하지 않는다", () => {

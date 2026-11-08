@@ -9,8 +9,11 @@ import { createContext, runInContext } from "node:vm";
 import { createGame } from "../server/game.mjs";
 import { AGENT_DEATH_ANIMATION, AGENT_DEATH_ANIMATIONS, agentDeathAnimation, agentDeathFrame } from "./agent-death.mjs";
 import { UNIT_ANIMATIONS } from "./unit-animation.mjs";
+import { unitActionArtPose } from "./unit-action-art.mjs";
+import { presentationRenderer } from "./unit-presentation-test-harness.mjs";
+import { unitTribeReference, unitAnimationSheetScale } from "./unit-presentation-assets.mjs";
 import { hasCombatEvolution } from "./combat-attributes.mjs";
-import { UNIT_DISPLAY_SIZES } from "./unit-size.mjs";
+import { UNIT_DISPLAY_SIZES, unitDisplaySize, unitFrameMirror } from "./unit-size.mjs";
 
 const metadata = JSON.parse(readFileSync(new URL("../DesignAssets/Tribes/sprout/AnimationStudies/death-v1/sequence.json", import.meta.url), "utf8"));
 const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
@@ -71,34 +74,46 @@ test("각 부족의 사망 그림을 고르고 오래된 사체는 마지막 자
   assert.equal(agentDeathFrame({ kind: "corpse", tribe: "bean" }, 40), 15);
 });
 
-test("월드 사체 렌더러와 목록 아이콘이 같은 애셋을 사용하고 감소된 동작에서는 마지막 자세를 표시한다", () => {
-  const draws = [], fallback = [];
-  const context = { globalAlpha: 1, save() {}, restore() {}, translate() {}, scale() {}, drawImage(...args) { draws.push(args); }, setTransform() {}, clearRect() {} };
-  const corpse = { id: "corpse:1", agentId: "1", kind: "corpse", tribe: "bean", x: 5, y: 5, diedAt: 10, decaysAt: 13 };
-  const sheet = { complete: true, naturalWidth: 1024 };
-  const scope = createContext({ AGENT_DEATH_ANIMATION, agentDeathFrame, AGENT_HEIGHT: 0.7, agentDeathSheet: sheet,
-    Spawner: { unitDisplayAttributes, imageFrameGeometry, agentDeathAnimation, hasCombatEvolution }, unitAnimationSheets: new Map(["bean", "spore", "pebble", "spring"].map(tribe =>
-      [tribe, new Map([["death", { sprite: sheet, scale: .8 }]])])),
-    corpsePlaybackTime: () => scope.state.simSeconds,
-    state: { corpses: [corpse], agents: [], rivals: [], simSeconds: 10, camera: { zoom: 100 }, lastFrame: 0 }, idleMotion: { matches: false },
-    clamp: (value, min, max) => Math.max(min, Math.min(max, value)), ctx: context,
-    resourceNodeCells: () => [corpse], resourceNodePose: () => ({ visible: true, opacity: 1 }),
+test("월드 사체와 목록 아이콘은 같은 완성 사망 애셋과 재생 프레임을 사용한다", async t => {
+  const render = presentationRenderer(t), context = render.context;
+  const corpse = { id: "corpse:1", agentId: "1", kind: "corpse", tribe: "bean", health: 0, x: 5, y: 5, diedAt: 10, decaysAt: 13 };
+  const scope = createContext({ AGENT_HEIGHT: .7, Spawner: {}, unitPresentation: render.presentation,
+    corpsePlaybackTime: () => render.state.simSeconds,
+    state: { corpses: [corpse], agents: [], rivals: [], camera: { zoom: 100 } }, ctx: context,
     worldToScreen: (x, y) => ({ x: x * 100, y: y * 100 }), objectOutlineColor: () => null,
-    drawResourceNode: (...args) => fallback.push(args), drawCorpseResources() {}, drawCorpseGroundShadow() {}, unitDisplayScale: () => 1,
+    drawCorpseGroundShadow() {}, unitDisplayScale: () => 1,
     objectPanel: { hidden: false, getBoundingClientRect: () => ({ top: 0, bottom: 200 }) },
-    document: { hidden: false }, window: { devicePixelRatio: 1 }, unitListEntries: () => [corpse], agentAvatarIndex: 0,
+    document: { hidden: false }, window: { devicePixelRatio: 1 }, unitListEntries: () => [corpse],
     agentAvatars: new Map([[corpse.id, { context, canvas: { width: 80, height: 80, getBoundingClientRect: () => ({ width: 80, height: 80, top: 20, bottom: 100 }) } }]]),
     agentSprite() { throw new Error("사체에 서 있는 유닛 그림을 사용했습니다."); } });
-  for (const name of ["drawAgentCorpse", "drawCorpses", "drawAgentAvatars"]) runInContext(source.match(new RegExp("^    function " + name + "\\([^]*?^    }", "m"))[0], scope);
-  scope.drawCorpses(); assert.equal(draws[0][0], sheet); assert.deepEqual(draws[0].slice(1, 5), [0, 0, AGENT_DEATH_ANIMATION.frameSize, AGENT_DEATH_ANIMATION.frameSize]); assert.equal(fallback.length, 0);
-  scope.state.simSeconds = 12.26; scope.drawCorpses(); assert.deepEqual(draws.at(-1).slice(1, 5), [3 * AGENT_DEATH_ANIMATION.frameSize, 3 * AGENT_DEATH_ANIMATION.frameSize, AGENT_DEATH_ANIMATION.frameSize, AGENT_DEATH_ANIMATION.frameSize]);
-  scope.drawAgentAvatars(0); assert.equal(draws.at(-1)[0], sheet); assert.deepEqual(draws.at(-1).slice(1, 5), [3 * AGENT_DEATH_ANIMATION.frameSize, 3 * AGENT_DEATH_ANIMATION.frameSize, AGENT_DEATH_ANIMATION.frameSize, AGENT_DEATH_ANIMATION.frameSize]);
-  assert.equal(draws.at(-1)[7], 80 * .75 * .7 * .8);
-  scope.state.simSeconds = 10; scope.idleMotion.matches = true; scope.drawCorpses(); assert.deepEqual(draws.at(-1).slice(1, 5), [3 * AGENT_DEATH_ANIMATION.frameSize, 3 * AGENT_DEATH_ANIMATION.frameSize, AGENT_DEATH_ANIMATION.frameSize, AGENT_DEATH_ANIMATION.frameSize]);
-  corpse.tribe = "spore"; scope.drawCorpses(); assert.equal(fallback.length, 0);
-  assert.deepEqual(draws.at(-1).slice(1, 5), [3 * AGENT_DEATH_ANIMATIONS.spore.frameSize, AGENT_DEATH_ANIMATIONS.spore.frameSize, AGENT_DEATH_ANIMATIONS.spore.frameSize, AGENT_DEATH_ANIMATIONS.spore.frameSize]);
-  const count = draws.length;
-  scope.state.simSeconds = 13; scope.drawCorpses(); assert.equal(draws.length, count);
+  for (const name of ["drawAgentCorpse", "drawCorpses", "drawAgentAvatars"])
+    runInContext(source.match(new RegExp("^    function " + name + "\\([^]*?^    }", "m"))[0], scope);
+  for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const time of [10, 12.26]) {
+    corpse.tribe = tribe;
+    render.state.simSeconds = time;
+    const pose = unitActionArtPose(corpse, time);
+    assert.equal(pose.action, "death");
+    assert.equal(pose.missing, false);
+    await render.presentation.prepareAnimation(corpse, time);
+    render.draws.length = 0;
+    scope.drawCorpses();
+    assert.equal(render.draws.length, 1);
+    const world = render.draws[0];
+    assert.equal(world[0].src, pose.animation.image);
+    assert.deepEqual(world.slice(1, 5), [pose.frame % pose.animation.columns * pose.animation.frameSize,
+      Math.floor(pose.frame / pose.animation.columns) * (pose.animation.frameHeight || pose.animation.frameSize),
+      pose.animation.frameSize, pose.animation.frameHeight || pose.animation.frameSize]);
+    scope.agentAvatars.get(corpse.id).frame = null;
+    scope.drawAgentAvatars(time * 1000);
+    assert.equal(render.draws.length, 2);
+    const avatar = render.draws[1];
+    assert.deepEqual(avatar.slice(0, 5), world.slice(0, 5));
+    assert.ok(Math.abs(avatar[7] / world[7] - .6) < 1e-9);
+  }
+  render.draws.length = 0;
+  render.state.simSeconds = 13;
+  scope.drawCorpses();
+  assert.equal(render.draws.length, 0);
 });
 
 test("로컬 실행 목록과 생성된 번들에도 같은 사망 애셋과 프레임 계산이 포함된다", () => {
@@ -116,14 +131,14 @@ test("로컬 실행 목록과 생성된 번들에도 같은 사망 애셋과 프
 });
 
 test("모든 부족의 사망 첫 자세는 256·512 프레임 해상도와 무관하게 일반 유닛 크기에 맞춘다", async () => {
-  const starter = { naturalWidth: 512, naturalHeight: 512 };
+  const starter = { naturalWidth: 512, naturalHeight: 512, async decode() {} };
   const sheets = new Map(Object.values(UNIT_ANIMATIONS).flatMap(animations => Object.values(animations))
     .concat(Object.values(AGENT_DEATH_ANIMATIONS)).map(animation => [animation.image, animation]));
   const scope = createContext({
-    Spawner: { unitDisplayAttributes, UNIT_ANIMATIONS, AGENT_DEATH_ANIMATIONS, agentDeathAnimation },
-    Image: class { complete = true; naturalWidth = 2048; async decode() {} },
+    Spawner: { unitDisplayAttributes, UNIT_ANIMATIONS, AGENT_DEATH_ANIMATIONS, agentDeathAnimation, unitTribeReference, unitAnimationSheetScale },
+    SpawnerAssets: { image: () => ({ complete: true, naturalWidth: 2048, async decode() {} }) },
     assetSource: path => path, combatSheets: new Map(), sharedPresentation: null,
-    agentMovementSheets: new Map(["spore", "pebble", "spring"].map(tribe => [tribe, {}])),
+    agentMovementSheets: new Map(["bean", "spore", "pebble", "spring"].map(tribe => [tribe, {}])),
     unitAnimationReady: new Map(), starterObjectSprite: starter, prepareSproutCombatFrames() {},
     tribeArt: {
       prepareUnit: async () => ({ box: { width: 240, height: 350 } }),
@@ -174,13 +189,13 @@ test("중립·유니크의 사망 첫 자세는 원본 프레임 크기와 무�
       drawImage(sprite, x, y, width, height, left, top, outputWidth) {
         renderedLength = outputWidth * Math.max(bounds.width, bounds.height) / frameSize * displayScale;
       } };
-    const scope = createContext({ Spawner: { unitDisplayAttributes, imageFrameGeometry, UNIT_DISPLAY_SIZES, unitAnimationFrame: () => 0 },
+    const scope = createContext({ Spawner: { unitDisplayAttributes, imageFrameGeometry, UNIT_DISPLAY_SIZES, unitDisplaySize, unitFrameMirror, unitAnimationFrame: () => 0 },
       tribeArt: { bounds: () => bounds }, unitDisplayScales: new Map([[species, displayScale]]),
       creatureDeathSheets: new Map([[species, entry]]), idleMotion: { matches: false }, state: { simSeconds: 0 }, corpsePlaybackTime: () => 0 });
     for (const name of ["prepareCreatureDeathSize", "drawCreatureDeath"])
       runInContext(source.match(new RegExp("^    function " + name + "\\([^]*?^    }", "m"))[0], scope);
     scope.prepareCreatureDeathSize(species, entry);
     assert.equal(scope.drawCreatureDeath(context, { species, diedAt: 0 }, 0, 0, 100, null, 1), true);
-    assert.ok(Math.abs(renderedLength - target * 100) < 1e-9, species);
+    assert.ok(Math.abs(renderedLength - unitDisplaySize({ species }) * 100) < 1e-9, species);
   }
 });

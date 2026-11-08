@@ -1,3 +1,6 @@
+import { presentationRenderer } from "./unit-presentation-test-harness.mjs";
+import { unitActionArtPose } from "./unit-action-art.mjs";
+import { drawUnitAttackRing } from "./unit-attack-ring.mjs";
 import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -30,8 +33,10 @@ function watched(agent = unit(), options = {}) {
 test("only eight approved base/secretion routes are eligible, preserving current dominance and legacy exclusions", () => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     assert.equal(detailDeathForm(unit({ tribe })), tribe + "/base");
-    assert.equal(detailDeathForm(unit({ tribe, attributes: { secretion: 1, carapace: 1, antenna: 1, feet: 1 } })), tribe + "/secretion");
-    for (const key of ["blade", "carapace", "antenna", "feet", "strength", "arms", "piercing", "guard"])
+    assert.equal(detailDeathForm(unit({ tribe, attributes: { feet: 1 } })), tribe + "/base");
+    assert.equal(detailDeathForm(unit({ tribe, attributes: { secretion: 1, carapace: 1, antenna: 1 } })), null);
+    assert.equal(detailDeathForm(unit({ tribe, attributes: { secretion: 1 } })), tribe + "/secretion");
+    for (const key of ["blade", "carapace", "antenna", "strength", "arms", "piercing", "guard"])
       assert.equal(detailDeathForm(unit({ tribe, attributes: { [key]: 1 } })), null);
   }
   assert.equal(detailDeathForm(unit({ species: "spiny-back-beetle" })), null);
@@ -111,15 +116,18 @@ test("delayed snapshots compare death with authoritative living time, not the ex
 
 const gameSource = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 const helper = readFileSync(new URL("./combat-detail-dodge.test.mjs", import.meta.url), "utf8").split("const event = ")[0];
-const box = { combatViewLayout, unitDisplaySize, assert, source: gameSource, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
+const box = { combatViewLayout, unitDisplaySize, drawUnitAttackRing, assert, source: gameSource, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
   DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect };
 createContext(box); runInContext(helper.slice(helper.indexOf("function extract(")), box);
-function modal(tribe, secretion, side = 1, width = 1040) {
+async function modal(testContext, tribe, secretion, side = 1, width = 1040) {
+  const renderer = presentationRenderer(testContext);
   const attributes = secretion ? { secretion: 1 } : {};
   const units = [0, 1].map(index => unit({ id: index ? "target" : "source", tribe, attributes: { ...attributes }, stats: { health: 10 } }));
   const view = box.modal({ units, width }), scope = view.sandbox, bodyOrder = [], corpses = [];
   scope.connection = { roomId: "room" }; scope.state.corpses = [];
   scope.corpsePlaybackTime = () => scope.state.simSeconds;
+  scope.unitPresentation = renderer.presentation;
+  await renderer.presentation.prepareAnimation(corpse({ tribe, attributes, health: 0 }), 1);
   const death = agentDeathAnimation(corpse({ tribe }));
   const [sheetWidth, sheetHeight] = imageDimensions(death.image);
   const base = { path: death.image, complete: true, naturalWidth: sheetWidth, naturalHeight: sheetHeight };
@@ -137,6 +145,7 @@ function modal(tribe, secretion, side = 1, width = 1040) {
   view.draw(.9); // The factory's first paint had no optional presentation hook.
   function draw(time) {
     bodyOrder.length = 0; corpses.length = 0;
+    renderer.state.simSeconds = time;
     scope.combatRoster.dataset.key = view.agents.filter(agent => agent.health > 0 && agent.combat?.id === "fight").map(agent => agent.id).join(",");
     return { ...view.draw(time), order: [...bodyOrder], corpses: [...corpses] };
   }
@@ -148,17 +157,18 @@ function modal(tribe, secretion, side = 1, width = 1040) {
   return { ...view, draw, kill, victim, base, special, side };
 }
 
-test("actual detail renders all eight native death routes on both sides while retaining current source frames and ground scale", () => {
+test("actual detail renders all eight complete death routes on both sides while retaining authored frames and ground scale", async t => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const secretion of [false, true]) for (const side of [0, 1]) {
-    const view = modal(tribe, secretion, side); view.kill();
+    const view = await modal(t, tribe, secretion, side); view.kill();
     const record = structuredClone(view.sandbox.state.corpses[0]);
     for (const age of [.01, .13, .65, 1.5, 2.9]) {
       const result = view.draw(1 + age);
       assert.equal(result.corpses.length, 1, tribe + secretion + age); assert.equal(result.order[0], "corpse", "corpses cannot cover living actors after slot reflow");
       assert.equal(result.corpses[0].corpse.facing, side ? -1 : 1);
-      const draw = result.art.find(row => row.image === (secretion ? view.special.path : view.base.path));
-      assert.ok(draw, tribe + secretion); const frame = agentDeathFrame(record, 1 + age), geometry = imageFrameGeometry(agentDeathAnimation(record), frame);
-      assert.deepEqual(Array.from(draw.args.slice(0, 4)), [frame % geometry.columns * geometry.frameSize, Math.floor(frame / geometry.columns) * geometry.frameSize, geometry.frameSize, geometry.frameSize]);
+      const pose = unitActionArtPose({ ...record, health: 0 }, 1 + age);
+      const draw = result.art.find(row => row.image === pose.animation.image);
+      assert.ok(draw, tribe + secretion); const frame = pose.frame, geometry = pose.animation, height = geometry.frameHeight || geometry.frameSize;
+      assert.deepEqual(Array.from(draw.args.slice(0, 4)), [frame % geometry.columns * geometry.frameSize, Math.floor(frame / geometry.columns) * height, geometry.frameSize, height]);
       assert.equal(result.corpses[0].corpse.diedAt, 1); assert.equal(result.commands.length, 0, "a body does not invent hits or projectiles");
       assert.deepEqual(structuredClone(view.sandbox.state.corpses[0]), record);
     }
@@ -166,16 +176,16 @@ test("actual detail renders all eight native death routes on both sides while re
   }
 });
 
-test("actual modal pause, reduced motion, resize and missing-art recovery preserve death age without reviving live art", () => {
-  const view = modal("bean", true); view.kill();
+test("actual modal pause, reduced motion and resize retain complete death playback age without reviving live art", async t => {
+  const view = await modal(t, "bean", true); view.kill();
   const first = view.draw(1.13); assert.deepEqual(view.draw(1.13).art, first.art);
   view.sandbox.idleMotion.matches = true;
-  const final = view.draw(1.2).art.find(row => row.image === view.special.path), clip = agentDeathAnimation(corpse());
-  assert.deepEqual(Array.from(final.args.slice(0, 4)), [(clip.frameCount - 1) % clip.columns * clip.frameSize, Math.floor((clip.frameCount - 1) / clip.columns) * clip.frameSize, clip.frameSize, clip.frameSize]);
-  view.sandbox.idleMotion.matches = false; view.base.complete = false;
-  assert.equal(view.draw(1.4).art.filter(row => row.image === view.special.path).length, 0);
-  view.base.complete = true;
-  assert.equal(view.draw(1.6).art.filter(row => row.image === view.special.path).length, 1);
+  const pose = unitActionArtPose({ ...view.sandbox.state.corpses[0], health: 0 }, 1.2);
+  const current = view.draw(1.2).art.find(row => row.image === pose.animation.image), clip = pose.animation;
+  const height = clip.frameHeight || clip.frameSize;
+  assert.deepEqual(Array.from(current.args.slice(0, 4)), [pose.frame % clip.columns * clip.frameSize,
+    Math.floor(pose.frame / clip.columns) * height, clip.frameSize, height]);
+  view.sandbox.idleMotion.matches = false;
   view.canvas.clientWidth /= 2; view.canvas.clientHeight /= 2;
   const resized = view.draw(1.7); assert.equal(resized.corpses[0].cell, first.corpses[0].cell / 2);
   view.sandbox.state.corpses = []; assert.equal(view.draw(1.8).corpses.length, 0);
@@ -189,11 +199,65 @@ test("real authoritative base/secretion corpses are accepted without modifying s
     const game = createGame(environment, colony); environment.games.set(colony.ownerId, game);
     const agent = game.agents[0];
     Object.assign(agent, { tribe, birth: null, x: 100, y: 100, combat: { id: "fight", side: 1 },
+      dna: null, stats: { ...agent.stats, dna: null },
       attributes: secretion ? { secretion: 1 } : {}, appearanceAttributes: secretion ? { secretion: 1 } : {} });
     const tracker = watched(agent); game.prepare(1); game.receiveDamage(agent, 100000);
     const records = game.snapshot().corpses, record = records.find(row => row.agentId === agent.id);
     assert.ok(record); const before = JSON.stringify(game.save());
     const rows = tracker.commands(records, 1.05, camera); assert.equal(rows.length, 1); assert.equal(rows[0].corpse.agentId, agent.id);
     assert.equal(rows[0].form, tribe + (secretion ? "/secretion" : "/base")); assert.equal(JSON.stringify(game.save()), before);
+  }
+});
+
+test("전투 확대는 모든 유닛의 여섯 동작 준비를 기다리고 실패하거나 방이 바뀌면 열리지 않는다", async () => {
+  const listenerSource = gameSource.match(/^    combatOpen\.addEventListener\("click", async \(\) => \{[^]*?^    \}\);/m)?.[0];
+  assert.ok(listenerSource);
+  for (const outcome of ["ready", "failed", "changed-room"]) {
+    const units = [{ id: "first", tribe: "bean", combat: { id: "fight", x: 12, y: 24 } },
+      { id: "second", tribe: "spore", combat: { id: "fight", x: 12, y: 24 } },
+      { id: "neutral", species: "vine-turtle", combat: { id: "fight", x: 12, y: 24 } }];
+    const effects = Promise.withResolvers(), first = Promise.withResolvers(), second = Promise.withResolvers();
+    const pending = new Map([["first", first], ["second", second]]), requests = [], transitions = [];
+    let click, effectRequests = 0;
+    const scope = createContext({ selectedCombatUnits: () => units,
+      combatOpen: { disabled: false, addEventListener(name, listener) { assert.equal(name, "click"); click = listener; } },
+      connection: { roomId: "original-room", active: true }, connectionStatus: { hidden: true },
+      prepareDetailVfx() { effectRequests++; return effects.promise; },
+      unitPresentation: { prepareActions(agent, actions) { requests.push([agent.id, Array.from(actions)]); return pending.get(agent.id).promise; } },
+      setEvolutionText: (node, message) => { node.textContent = message; },
+      detailCombatVfx: { clearView: () => transitions.push("clear") }, combatWatch: null, combatSelected: null,
+      combatReturnFocus: null, document: { activeElement: { id: "open-button" } },
+      stopMapMovement: () => transitions.push("stop"), combatPanel: { showModal: () => transitions.push("open") },
+      combatClose: { focus: () => transitions.push("focus") }, scheduleRender: () => transitions.push("render") });
+    runInContext(listenerSource, scope);
+    const opening = click();
+    assert.equal(scope.combatOpen.disabled, true);
+    await click();
+    assert.equal(effectRequests, 1);
+    assert.deepEqual(requests, ["first", "second"].map(id => [id, ["idle", "walk", "attack", "ranged", "hurt", "death"]]));
+    effects.resolve();
+    await Promise.resolve();
+    assert.deepEqual(transitions, []);
+    first.resolve();
+    await Promise.resolve();
+    assert.deepEqual(transitions, []);
+    assert.equal(scope.combatWatch, null);
+    if (outcome === "changed-room") scope.connection.roomId = "other-room";
+    if (outcome === "failed") second.reject(new Error("동작 시트 준비 실패"));
+    else second.resolve();
+    await opening;
+    assert.equal(scope.combatOpen.disabled, false);
+    if (outcome === "ready") {
+      assert.deepEqual(transitions, ["clear", "stop", "open", "focus", "render"]);
+      assert.equal(scope.combatWatch.id, "fight");
+      assert.equal(scope.combatSelected, "first");
+    } else {
+      assert.deepEqual(transitions, []);
+      assert.equal(scope.combatWatch, null);
+    }
+    if (outcome === "failed") {
+      assert.equal(scope.connectionStatus.hidden, false);
+      assert.equal(scope.connectionStatus.textContent, "동작 시트 준비 실패");
+    }
   }
 });

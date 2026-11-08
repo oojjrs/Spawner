@@ -116,10 +116,11 @@ function presentation() {
     performance: { now: () => 0 }, colonyEntries: [{ id: 1, name: "마지막 둥지" }], idleMotion: { matches: false },
     clamp: (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, value)),
     closeCodex() {}, closeEvolutionPanel() {}, closeColonyMenu() {}, closeUnitPanel() {}, hideHelpTooltip() {},
-    stopMapMovement() {}, clearDiscoveryToasts() {}, agentDeathFrame: (corpse, time) => {
+    stopMapMovement() {}, clearDiscoveryToasts() {}, AGENT_HEIGHT: .7,
+    unitPresentation: { drawAgentAnimation: (drawing, corpse, x, floor, height, outline, time) => {
       context.deathTime = time;
-      return -1;
-    }
+      return { action: "death" };
+    } }
   });
   for (const name of ["resetEnding", "openEndingReport", "corpsePlaybackTime", "updateEndingPresentation", "updateEnding", "colonyInactive", "drawAgentCorpse"]) {
     runInContext(gameDeclaration(name), context);
@@ -158,10 +159,10 @@ test("월드가 멈춰도 사망 그리기에는 별도 시간이 흐르고 재�
   const scene = presentation();
   scene.start(true);
   scene.advance(1000);
-  scene.context.drawAgentCorpse(null, {}, 0, 0, 0, null, 1);
+  scene.context.drawAgentCorpse({ globalAlpha: 1, save() {}, restore() {} }, {}, 0, 0, 0, null, 1);
   assert.equal(scene.context.deathTime, 181);
   scene.advance(3000);
-  scene.context.drawAgentCorpse(null, {}, 0, 0, 0, null, 1);
+  scene.context.drawAgentCorpse({ globalAlpha: 1, save() {}, restore() {} }, {}, 0, 0, 0, null, 1);
   assert.equal(scene.context.deathTime, 184);
   assert.equal(scene.state.simSeconds, 180);
   scene.context.resetEnding();

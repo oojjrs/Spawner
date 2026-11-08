@@ -33,7 +33,7 @@ test("몽돌 3→4는 승인한 v5 시트와 6.32초 타이밍을 사용한다",
 
 test("몽돌 3→4는 실제 연속 승급에서만 시작하고 초기 접속·건너뛰기·파괴를 제외한다", () => {
   assert.equal(nestGrowthAnimation("pebble", 2, 4), null);
-  assert.equal(nestGrowthAnimation("spring", 3, 4), null);
+  assert.notEqual(nestGrowthAnimation("spring", 3, 4)?.image, nestGrowthAnimation("pebble", 3, 4).image);
   for (const level of [1, 2, 4]) {
     const playback = createNestGrowthPlayback();
     syncNestGrowthPlayback(playback, [colony(level)], 10, true);

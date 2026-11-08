@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const imports = /^import\s+\{([^}]+)\}\s+from\s+["']([^"']+)["'];?\r?$/gm;
-const exports = /^export\s+(?:function|const|let|class)\s+([A-Za-z_$][\w$]*)/gm;
+const exports = /^export\s+(?:async\s+)?(?:function|const|let|class)\s+([A-Za-z_$][\w$]*)/gm;
 const completed = new Set(), chunks = ["const modules = Object.create(null);"];
 function bundle(name) {
   if (completed.has(name)) return;

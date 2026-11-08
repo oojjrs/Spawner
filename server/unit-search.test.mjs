@@ -4,14 +4,14 @@ import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 import { createGame } from "./game.mjs";
 import { createUtilityAI } from "./utility.mjs";
-import { combatDisposition } from "./combat.mjs";
+import { combatDisposition, canPursueCombat, createCombat } from "./combat.mjs";
 import { dnaUnitStats, dnaAppearance, dnaCanMove } from "./dna-unit.mjs";
 import { ATTRIBUTE_DNA } from "./dna.mjs";
 
 const runtime = readFileSync(new URL("../client/runtime.js", import.meta.url), "utf8");
 const worker = JSON.parse(runtime.match(/const workerSource = ("[^\r\n]+");/)[1]);
 const decision = JSON.parse(worker.match(/^globalThis.SpawnerDecisionWorkerSource = ("[^\n]+");/)[1]);
-const surfaces = [["소스", { createGame, createUtilityAI, combatDisposition }]];
+const surfaces = [["소스", { createGame, createUtilityAI, combatDisposition, canPursueCombat, createCombat }]];
 for (const [name, source, entry] of [["게임 워커", worker, "client/worker.mjs"], ["판단 워커", decision, "client/decision-worker.mjs"]]) {
   const context = { Map, Set, Uint8Array, setTimeout, clearTimeout, performance };
   runInNewContext(source.slice(0, source.indexOf('modules["' + entry + '"]')) +
@@ -21,7 +21,7 @@ for (const [name, source, entry] of [["게임 워커", worker, "client/worker.mj
 
 function fixture(api, genes) {
   const size = 32, colony = { id: 1, ownerId: "home", tribe: "bean", x: 10, y: 10, occupiedCells: new Set(Array.from({ length: 25 }, (_, index) => index % 5 + "," + Math.floor(index / 5))) };
-  const dna = { version: 5, level: 4, budget: 999, pieces: ATTRIBUTE_DNA.pack(genes.map(id => {
+  const dna = { version: 6, level: 4, budget: 999, pieces: ATTRIBUTE_DNA.pack(genes.map(id => {
     const gene = ATTRIBUTE_DNA.lookup.get(id);
     return { gene: id, grade: gene.grade, rotation: 0, q: 0, r: 0 };
   }), 4) };
@@ -46,7 +46,7 @@ function fixture(api, genes) {
 }
 
 function addEnemy(f) {
-  const dna = { version: 5, level: 1, budget: 30, pieces: [] }, stats = dnaUnitStats(dna);
+  const dna = { version: 6, level: 1, budget: 30, pieces: [] }, stats = dnaUnitStats(dna);
   const target = { id: "rival:1", ownerId: "rival", tribe: "bean", dna, stats, health: 1,
     x: 17, y: 12, carrying: 0, attributes: {}, slots: [] };
   f.enemies.push(target);
@@ -72,8 +72,8 @@ for (const [surface, api] of surfaces) {
     assert.ok(f.ai.evaluate(f.agent, false).every(plan => !["collect", "fight", "explore"].includes(plan.action)));
   });
 
-  test(surface + " · 근접·원거리 기관은 공유 시야의 적을 공격 대상으로 삼는다", () => {
-    for (const genes of [["blade"], ["secretion"], ["gather", "blade"]]) {
+  test(surface + " · 안테나를 단 근접·원거리·갑각 전투형은 공유 시야의 적을 공격 대상으로 삼는다", () => {
+    for (const genes of [["blade", "antenna"], ["secretion", "antenna"], ["carapace", "antenna"], ["gather", "blade", "antenna"]]) {
       const f = fixture(api, genes), target = addEnemy(f);
       assert.equal(api.combatDisposition(f.agent), "aggressive");
       const plan = f.ai.evaluate(f.agent, false)[0];
@@ -81,6 +81,18 @@ for (const [surface, api] of surfaces) {
       assert.equal(plan.target.id, target.id);
       assert.ok(Math.hypot(target.x - f.agent.x, target.y - f.agent.y) > f.agent.stats.vision);
     }
+  });
+
+  test(surface + " · 갑각과 안테나는 선제 기본공격1을 시작하되 칼날 전용 강화를 받지 않는다", () => {
+    const f=fixture(api,["carapace","antenna","power","speed"]),target=addEnemy(f),events=[];
+    Object.assign(target,{x:f.agent.x,y:f.agent.y});
+    assert.equal(f.agent.stats.dna.meleePower,1);assert.equal(f.agent.stats.dna.meleeSpeed,.5);
+    const environment={simSeconds:0,world:{size:f.size,terrain:new Uint8Array(f.size*f.size).fill(4)},colonies:[f.colony],
+      games:new Map(),combatRandom:()=>.99,damageRandom:()=>.5,onCombatEvent(event){events.push(event);}};
+    for(const agent of [f.agent,target]) environment.games.set(agent.ownerId,{agents:[agent],receiveDamage(unit,amount){unit.health=Math.max(0,unit.health-amount);}});
+    const combat=api.createCombat(environment);
+    for(let tick=0;tick<=50&&target.health>0;tick++){environment.simSeconds=tick/10;combat.update(f.agent,environment.simSeconds);combat.update(target,environment.simSeconds);}
+    assert.equal(target.health,0);assert.ok(events.some(event=>event.kind==='attack'&&event.sourceId===f.agent.id));
   });
 
   test(surface + " · 안개가 전부 밝혀져도 공격 기관은 적 수색을 계속한다", () => {
@@ -104,11 +116,13 @@ for (const [surface, api] of surfaces) {
     assert.equal(f.state.simSeconds, 0);
   });
 
-  test(surface + " · 안테나 없는 공격 기관의 수색도 둥지 이동 범위를 지킨다", () => {
-    const f = fixture(api, ["blade"]);
+  test(surface + " · 안테나 없는 전투형은 원격 적 수색을 하지 않고 접촉한 적에게는 공격한다", () => {
+    const f = fixture(api, ["blade"]), target = addEnemy(f);
     const plans = f.ai.evaluate(f.agent, false);
-    assert.ok(plans.length > 0);
-    for (const plan of plans) for (const cell of plan.route) assert.ok(dnaCanMove(f.agent, cell.x, cell.y, [f.colony]));
+    assert.ok(plans.every(plan => plan.action !== "fight" && !String(plan.target.key).startsWith("enemy-search:")));
+    assert.equal(api.canPursueCombat(f.agent,target,0),false);
+    Object.assign(target,{x:f.agent.x,y:f.agent.y});
+    assert.equal(api.canPursueCombat(f.agent,target,0),true);
   });
 
   test(surface + " · 다른 유닛의 안테나와 시야가 채집 담당을 정찰로 바꾸지 않는다", () => {
@@ -120,7 +134,7 @@ for (const [surface, api] of surfaces) {
   });
 
   test(surface + " · 채집 기관은 먹이를 모를 때 자원을 찾고 운반 중에는 납품한다", () => {
-    const f = fixture(api, ["gather", "antenna"]);
+    const f = fixture(api, ["gather"]);
     f.state.knownFood.clear();
     for (const index of [...f.state.explored]) if (index % f.size > 20) f.state.explored.delete(index);
     const search = f.ai.evaluate(f.agent, false)[0];

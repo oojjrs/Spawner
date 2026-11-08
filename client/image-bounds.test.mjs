@@ -48,3 +48,41 @@ test("내용이 바뀔 수 있는 canvas의 픽셀 범위는 다시 계산한다
   assert.equal(changed.x, 6);
   assert.equal(f.reads(), 3);
 });
+
+test("같은 이미지의 비동기 범위 측정은 이미 디코딩된 픽셀을 한 번만 Worker로 보낸다", async () => {
+  let bitmaps = 0, messages = 0, transferred;
+  const context = createContext({ createTribeAttributeAnimation: () => ({}), Blob, setTimeout, clearTimeout,
+    OffscreenCanvas: class {}, URL: { createObjectURL: () => "worker", revokeObjectURL() {} },
+    createImageBitmap: async (sprite, x, y, width, height) => {
+      bitmaps++;
+      assert.equal(sprite.src, "sprite.png");
+      assert.deepEqual([x, y, width, height], [0, 0, 4, 4]);
+      return { close() {} };
+    },
+    Worker: class {
+      postMessage(message, transfers) {
+        messages++;
+        assert.equal(transfers[0], message.bitmap);
+        assert.equal(message.source, undefined);
+        transferred = message.bitmap;
+        queueMicrotask(() => this.onmessage({ data: { id: message.id, result: { x: 1, y: 2, width: 2, height: 1 } } }));
+      }
+    }
+  });
+  const source = readFileSync(new URL("./tribe-art.mjs", import.meta.url), "utf8")
+    .replace(/^import .*;\r?\n/gm, "").replace(/^export /gm, "");
+  runInContext(source, context);
+  const art = context.createTribeArt([], value => value);
+  const image = { src: "sprite.png", naturalWidth: 4, naturalHeight: 4 };
+  const [first, second] = await Promise.all([art.prepareBounds(image, 4), art.prepareBounds(image, 4)]);
+  assert.equal(first, second);
+  assert.deepEqual(JSON.parse(JSON.stringify(first)), { x: 1, y: 2, width: 2, height: 1 });
+  assert.ok(transferred);
+  assert.equal(await art.prepareBounds({ ...image }, 4), first);
+  assert.equal(bitmaps, 1);
+  assert.equal(messages, 1);
+  image.naturalWidth = 8;
+  assert.notEqual(await art.prepareBounds(image, 4), first);
+  assert.equal(bitmaps, 2);
+  assert.equal(messages, 2);
+});

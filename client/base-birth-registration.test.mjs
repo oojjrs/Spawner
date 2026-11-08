@@ -13,7 +13,7 @@ for(const [tribe,[length,x,y,count,ms,hash]] of Object.entries(expected)){
   assert.deepEqual([a.referenceLength,a.pivotX,a.pivotY,a.frameCount,a.durationsMs.reduce((x,y)=>x+y,0)],[length,x,y,count,ms]);
   assert.equal(a.scene,undefined);assert.equal(a.sceneLayers,undefined);
   assert.equal(createHash('sha256').update(readFileSync(a.image)).digest('hex'),hash);
-  const agent={tribe,dna:{version:5,pieces:[]},health:10,birth:{startedAt:4,readyAt:4+ms/1000}};
+  const agent={tribe,dna:{version:6,pieces:[]},health:10,birth:{startedAt:4,readyAt:4+ms/1000}};
   let elapsed=0;for(let frame=0;frame<count;frame++){
    const pose=unitActionArtPose(agent,4+elapsed/1000+.000001);assert.equal(pose.action,'birth');assert.equal(pose.animation,a);assert.equal(pose.frame,frame);elapsed+=a.durationsMs[frame];
   }
@@ -32,7 +32,7 @@ print(json.dumps(out))`],{input:JSON.stringify([[a,count-1],[def.reference,0]]),
  });
  test(tribe+' runtime draws the corrected body equally in both facings',async()=>{
   const calls=[];const surface=(w,h)=>({getContext:()=>({drawImage(){},getImageData(){const data=new Uint8ClampedArray(w*h*4);data.fill(255);return {data};}})});
-  const art=createUnitActionArt(v=>v,surface,async image=>({image}));const agent={tribe,dna:{version:5,pieces:[]},health:10,birth:{startedAt:0,readyAt:ms/1000}};await art.prepare(agent);await new Promise(r=>setImmediate(r));
+  const art=createUnitActionArt(v=>v,surface,async image=>({image}));const agent={tribe,dna:{version:6,pieces:[]},health:10,birth:{startedAt:0,readyAt:ms/1000}};await art.prepare(agent);await new Promise(r=>setImmediate(r));
   for(const mirror of [false,true]){const ctx={save(){},restore(){},translate(){},scale(x,y){assert.equal(x,mirror?-1:1);assert.equal(y,1)},drawImage(...args){calls.push(args)}};assert.equal(art.draw(ctx,agent,ms/1000-.001,0,0,100,mirror),true);}
   assert.equal(calls.length,2);for(const c of calls){const scale=100*unitDisplaySize(agent)/length;assert.equal(c[0].image,a.image);assert.equal(c[5],-x*scale);assert.equal(c[6],-y*scale);assert.equal(c[7],a.frameSize*scale);assert.equal(c[8],a.frameHeight*scale);}
  });

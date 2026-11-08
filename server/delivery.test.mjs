@@ -2,8 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createGame } from "./game.mjs";
 
-function fixture(x, y) {
-  const colony = { id: 1, ownerId: "test", x: 40, y: 40, occupiedCells: new Set([
+function fixture(x, y, tribe) {
+  const colony = { id: 1, ownerId: "test", tribe, x: 40, y: 40, occupiedCells: new Set([
     "1,0", "2,0", "3,0", "0,1", "1,1", "2,1", "3,1", "4,1", "0,2", "1,2", "2,2", "3,2", "4,2",
     "0,3", "1,3", "2,3", "3,3", "4,3", "1,4", "2,4", "3,4"
   ]) };
@@ -13,7 +13,7 @@ function fixture(x, y) {
   environment.games.set("test", game);
   game.agents.splice(1);
   const agent = game.agents[0];
-  Object.assign(agent, { x, y, renderFromX: x, renderFromY: y, carrying: 2, carryingType: "clay", mode: "search", utility: null,
+  Object.assign(agent, { x, y, renderFromX: x, renderFromY: y, carrying: 2, carryingType: ({ bean: "clay", spore: "tree", pebble: "pebbles", spring: "dew" })[tribe] || "clay", mode: "search", utility: null,
     birth: null, moveStartedAt: 0, moveDuration: 0, moveBudget: 0, decisionPending: "completed",
     personality: Object.freeze({ boldness: 0, aggression: 0, curiosity: 0 }) });
   return { game, environment, agent };
@@ -26,7 +26,7 @@ function advance(fixture) {
 }
 
 function deliver(fixture, x, y) {
-  for (let step = 0; step < 150 && fixture.game.snapshot().colonyFood === 0; step++) {
+  for (let step = 0; step < 600 && fixture.game.snapshot().colonyFood === 0; step++) {
     advance(fixture);
     if (fixture.agent.mode === "unload") {
       assert.deepEqual([fixture.agent.x, fixture.agent.y], [x, y]);
@@ -80,7 +80,7 @@ test("재료는 포인트 창고가 가득 차도 이동·하역하고 저장 �
   f.game.restore(JSON.stringify(saved));
   f.agent = f.game.agents[0];
   let throwing = false;
-  for (let step = 0; step < 200 && !f.game.snapshot().resourceInventory["pebbles"]; step++) {
+  for (let step = 0; step < 600 && !f.game.snapshot().resourceInventory["pebbles"]; step++) {
     const saved = f.game.save();
     f.game = createGame(f.environment, f.environment.colonies[0]);
     f.game.restore(saved);
@@ -179,3 +179,18 @@ test("사망한 운반자의 재료는 같은 종류로 떨어지고 고기량�
     assert.equal(f.game.snapshot().colonyFood, 0);
   }
 });
+
+for (const [tribe, resourceType] of [["bean", "clay"], ["spore", "tree"], ["pebble", "pebbles"], ["spring", "dew"]]) {
+  test(tribe + ": own resource arrives once and becomes colony food", () => {
+    const f = fixture(40, 40, tribe);
+    const points = f.game.snapshot().evolutionPoints;
+    deliver(f, 40, 40);
+    assert.equal(f.agent.foodDelivery.resourceType, resourceType);
+    assert.ok(f.agent.foodDelivery.receivedAt >= f.agent.foodDelivery.arrivesAt);
+    assert.equal(f.game.snapshot().evolutionPoints, points + 2);
+    f.game.restore(f.game.save());
+    advance(f);
+    assert.equal(f.game.snapshot().colonyFood, 2);
+    assert.equal(f.game.snapshot().evolutionPoints, points + 2);
+  });
+}

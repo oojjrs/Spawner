@@ -1,4 +1,5 @@
 import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
+import { drawUnitAttackRing } from "./unit-attack-ring.mjs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -11,7 +12,7 @@ const source = readFileSync(new URL('./game.js', import.meta.url), 'utf8');
 const helperFile = readFileSync(new URL('./combat-detail-dodge.test.mjs', import.meta.url), 'utf8').split('const event = ')[0];
 const helper = helperFile.slice(helperFile.indexOf('function extract(')).replace('CREATURE_ATTACK_ANIMATIONS: {},',
   'CREATURE_ATTACK_ANIMATIONS: {}, detailDefenseImageReady, drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels,');
-const box = { combatViewLayout, unitDisplaySize, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
+const box = { combatViewLayout, unitDisplaySize, drawUnitAttackRing, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
   DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect, detailDefenseImageReady,
   drawDetailDefenseEffect, drawDetailDefenseFallback, drawDetailDefenseLabels };
 createContext(box); runInContext(helper, box);
@@ -61,8 +62,11 @@ test('lab stage-clock mapping keeps exact original event identity and residual a
 test('labels avoid nearby actual recovery amount and stay still in reduced motion',()=>{
  const labels=[],ctx=new Proxy({fillText:(text,x,y)=>labels.push({text,x,y})},{get:(o,k)=>o[k]??(()=>{})});
  const command={kind:'block',targetId:'target',x:300,y:200,bodyHeight:100,age:.1,amount:.7};
- drawDetailDefenseLabels(ctx,[command],{width:1040,height:480,reducedMotion:true,vitals:[{kind:'regeneration',targetId:'target',y:200,bodyHeight:100,age:.1,lane:0}]});
+ drawDetailDefenseLabels(ctx,[command],{width:1040,height:480,reducedMotion:true,vitals:[{kind:'drain',targetId:'target',y:200,bodyHeight:100,age:.1,lane:0,labelY:130}]});
  const damage=labels.find(l=>l.text==='−0.7');assert.ok(Math.abs(damage.y-130)>=26);assert.ok(labels.find(l=>l.text==='방어').y>250);
+ labels.length=0;
+ drawDetailDefenseLabels(ctx,[command],{width:1040,height:480,reducedMotion:true,vitals:[{kind:'regeneration',targetId:'target',y:200,bodyHeight:100,age:.1,lane:0,labelY:130}]});
+ assert.equal(labels.find(l=>l.text==='−0.7').y,136);
 });
 
 test('actual lab stage replaces only defense impacts, keeps loading fallback, and shows the requested labels',async()=>{
@@ -72,11 +76,12 @@ test('actual lab stage replaces only defense impacts, keeps loading fallback, an
   globalThis.window={matchMedia:()=>({matches:false}),devicePixelRatio:1};delete globalThis.SpawnerAssets;
   for(const unavailable of [false,true])for(const kind of ['block','parry']){
    const draws=[],labels=[];
-   globalThis.Image=class{constructor(){this.complete=true;this.naturalWidth=4096;this.naturalHeight=4096;}set src(value){this.path=value;if(unavailable&&value===DETAIL_DEFENSE_VFX[kind])this.naturalWidth=0;}get src(){return this.path;}};
+   globalThis.Image=class{constructor(){this.complete=true;this.naturalWidth=4096;this.naturalHeight=4096;}set src(value){this.path=value;if(unavailable&&value===DETAIL_DEFENSE_VFX[kind])this.naturalWidth=0;}get src(){return this.path;}async decode(){if(!this.naturalWidth)throw new Error('missing fixture art');}};
    const context=new Proxy({drawImage:(image,...args)=>draws.push({image:image.src,args}),fillText:(text,x,y)=>labels.push({text,x,y})},{get:(o,k)=>o[k]??(()=>{})});
    const canvas={clientWidth:1040,clientHeight:480,getContext:()=>context};
    const agents=[0,1].map(side=>({id:side?'target':'source',tribe:'bean',health:100,stats:{health:100},attributes:{},combat:{side,stunnedUntil:0},animationStartedAt:0}));
    const trial={agents,history:[],projectiles:[],time:0,result:()=>null,vfx:{version:1,streamId:'lab',events:[]}},stage=createCombatStage(canvas);
+   if(unavailable)await assert.rejects(stage.prepare(),/missing fixture art/);else await stage.prepare();
    stage.render(trial,100,true);draws.length=0;labels.length=0;
    trial.time=1.08;const e=event(kind,{amount:kind==='block'?.7:0});trial.vfx.events=[e];trial.history=[{kind,attackerId:'source',targetId:'target',time:1,damage:e.amount}];
    stage.render(trial,1180,true);

@@ -1,4 +1,6 @@
 import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
+import { drawUnitAttackRing } from "./unit-attack-ring.mjs";
+import { COMBAT_EFFECT_ANIMATIONS } from "./combat-effect-assets.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -71,7 +73,7 @@ test("shared renderer preserves the approved palette and three-square motif, res
 
 const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
 const helperFile = readFileSync(new URL("./combat-detail-dodge.test.mjs", import.meta.url), "utf8").split("const event = ")[0];
-const box = { combatViewLayout, unitDisplaySize, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
+const box = { combatViewLayout, unitDisplaySize, drawUnitAttackRing, assert, source, createContext, runInContext, createCombatVfxCursor, createDetailCombatVfx,
   DETAIL_COMBAT_VFX_ASSETS, drawDetailVfxCell, drawDetailVitalEffect };
 createContext(box); runInContext(helperFile.slice(helperFile.indexOf("function extract(")), box);
 function detail(options) {
@@ -97,7 +99,7 @@ test("real detail drawing shows only the stunned actor in both directions and si
       const state = structuredClone(view.agents), first = view.draw(1);
       assert.equal(first.rendered.length, 1); assert.equal(first.rendered[0].targetId, view.agents[side].id);
       assert.deepEqual(view.draw(1).rendered, first.rendered, "paused paints are stable");
-      assert.equal(first.art.length, 0, "a status without a journal does not invent damage art");
+      assert.ok(first.art.every(draw => draw.image === COMBAT_EFFECT_ANIMATIONS.stun.image), "a status without a journal does not invent damage art");
       const next = view.draw(1.2).rendered;
       if (reduced) assert.deepEqual(next[0].dots, first.rendered[0].dots);
       else assert.notDeepEqual(next[0].dots, first.rendered[0].dots);
@@ -107,32 +109,32 @@ test("real detail drawing shows only the stunned actor in both directions and si
     }
 });
 
-function withLab(run, reduced = false) {
+async function withLab(run, reduced) {
   const saved = { window: globalThis.window, Image: globalThis.Image, assets: globalThis.SpawnerAssets };
   const rec = recorder();
   globalThis.window = { matchMedia: () => ({ matches: reduced }), devicePixelRatio: 2 };
   delete globalThis.SpawnerAssets;
-  globalThis.Image = class { constructor() { this.complete = true; this.naturalWidth = 4096; this.naturalHeight = 4096; } set src(value) { this.path = value; } };
+  globalThis.Image = class { constructor() { this.complete = true; this.naturalWidth = 4096; this.naturalHeight = 4096; } set src(value) { this.path = value; } async decode() {} };
   const canvas = { clientWidth: 1040, clientHeight: 480, getContext: () => rec.context };
   const stage = createCombatStage(canvas); let now = 100;
-  const draw = trial => { rec.calls.length = 0; stage.render(trial, now += 100, false); return { halos: structuredClone(halos(rec.calls)), dots: structuredClone(dots(rec.calls)) }; };
-  try { run({ draw, stage }); }
+  const draw = trial => { rec.calls.length = 0; stage.render(trial, now += 100, false); return { halos: structuredClone(halos(rec.calls)), dots: structuredClone(dots(rec.calls)), art: structuredClone(rec.calls.filter(call => call.path === COMBAT_EFFECT_ANIMATIONS.stun.image)) }; };
+  try { await stage.prepare(); await run({ draw, stage }); }
   finally { globalThis.window = saved.window; globalThis.Image = saved.Image; globalThis.SpawnerAssets = saved.assets; }
 }
 
-test("laboratory shares the status renderer, including zero-time pause, reset, expiry and reduced motion", () => {
+test("laboratory shares the status renderer, including zero-time pause, reset, expiry and reduced motion", async () => {
   for (const tribe of ["bean", "spore", "pebble", "spring"]) for (const side of [0, 1]) for (const reduced of [false, true])
-    withLab(({ draw, stage }) => {
+    await withLab(({ draw, stage }) => {
       const trial = { agents: units(tribe), history: [], projectiles: [], time: 0, result: () => null };
       trial.agents[side].combat.stunnedUntil = 2;
       const before = structuredClone(trial.agents), first = draw(trial);
-      assert.equal(first.halos.length, 1); assert.equal(first.dots.length, 3);
+      assert.equal(first.art.length, 1); assert.equal(first.halos.length, 0); assert.equal(first.dots.length, 0);
       assert.deepEqual(draw(trial), first, "wall-clock paints cannot animate a paused zero-time status");
       trial.time = 1;
-      if (reduced) assert.deepEqual(draw(trial), first); else assert.notDeepEqual(draw(trial).dots, first.dots);
-      stage.clear(); assert.equal(draw(trial).halos.length, 1, "reopening reconstructs current stun without events");
-      trial.time = 2; assert.equal(draw(trial).halos.length, 0);
-      trial.time = 1; trial.agents[side].health = 0; assert.equal(draw(trial).halos.length, 0);
+      if (reduced) assert.deepEqual(draw(trial), first); else assert.notDeepEqual(draw(trial).art, first.art);
+      stage.clear(); assert.equal(draw(trial).art.length, 1, "reopening reconstructs current stun without events");
+      trial.time = 2; assert.equal(draw(trial).art.length, 0);
+      trial.time = 1; trial.agents[side].health = 0; assert.equal(draw(trial).art.length, 0);
       trial.agents[side].health = 100; assert.deepEqual(trial.agents, before);
     }, reduced);
 });
@@ -157,7 +159,10 @@ function actualScene(mode, tribe) {
     combatRandom: () => { rolls++; return 0; }, damageRandom: () => .5 };
   const combat = createCombat(environment);
   if (ally) assert.equal(combat.engage(ally, target, 0), true);
-  combat.update(source, 0); const action = source.attack;
+  combat.update(source, 0);
+  for (let time = .05; !source.attack && time < 10; time += .05) combat.update(source, time);
+  assert.ok(source.attack, mode + ":" + tribe + " begins an attack after approaching");
+  const action = source.attack;
   return { units, target, environment, at: action.hitAt, rolls: () => rolls,
     resolve() { if (mode === "ranged") combat.update(source, action.launchedAt); combat.update(mode === "ranged" ? target : source, action.hitAt); } };
 }

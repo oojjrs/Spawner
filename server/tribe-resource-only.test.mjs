@@ -24,7 +24,7 @@ function fixture(create, tribe, resourceType, dnaEnabled) {
   saved.state.agents.splice(1);
   saved.state.nestLevel = 4;
   saved.state.resourceInventory = { tree: 7, dew: 5, pebbles: 3 };
-  Object.assign(saved.state.agents[0], { dna: dnaEnabled ? { version: 5, level: 1, budget: 10000, pieces: ATTRIBUTE_DNA.pack([{ gene: "gather", grade: 1, rotation: 0 }], 1) } : null,
+  Object.assign(saved.state.agents[0], { dna: dnaEnabled ? { version: 6, level: 1, budget: 10000, pieces: ATTRIBUTE_DNA.pack([{ gene: "gather", grade: 1, rotation: 0 }], 1) } : null,
     health: 100, slots: ["blade", "piercing", "antenna", "feet", "strength"], attributeLevels: {},
     bornAt: 0, birth: null, rulesVersion: 2 });
   game.restore(JSON.stringify(saved));
@@ -46,7 +46,7 @@ function advance(fixture, seconds) {
 
 
 for (const [surface, create] of [["source", createGame], ["worker", context.createGame]]) {
-  for (const [tribe, own] of [["bean", "clay"], ["spore", "tree"], ["pebble", "pebbles"], ["spring", "dew"]]) for (const dna of [false, true]) {
+  for (const [tribe, own] of [["bean", "clay"], ["spore", "tree"], ["pebble", "pebbles"], ["spring", "dew"], [undefined, "clay"]]) for (const dna of [false, true]) {
     test(`${surface}: ${tribe} ${dna ? "DNA" : "legacy"} chooses only ${own}`, () => {
       const f = fixture(create, tribe, own, dna);
       for (const [index, resourceType] of ["tree", "dew", "pebbles", "clay"].filter(type => type !== own).entries()) {
@@ -111,5 +111,4 @@ test("resource details report unavailable for foreign resources rather than unlo
       }
     }
   }
-  assert.match(readFileSync(new URL("../client/game.js", import.meta.url), "utf8"), /if \(requirements === null\) return \[tribe.name, "채집 불가"\]/);
 });

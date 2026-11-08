@@ -104,7 +104,7 @@ export function combatProfile(agent) {
       armorPenetration: 0, attackSpeed: selected.speed, attackInterval, windup: abilities.focus,
       evasion: dna ? abilities.evasion / 100 : agent.stats.evasion,
       parry: dna ? abilities.parry / 100 : agent.stats.parry, block: dna ? abilities.block / 100 : agent.stats.block,
-      recovery: abilities.recovery || 0, blockReduction: .5, criticalChance, criticalMultiplier };
+      recovery: abilities.recovery || 0, blockReduction: dna && Number.isFinite(abilities.blockPower) ? Math.max(0, Math.min(.9, abilities.blockPower / 100)) : .5, criticalChance, criticalMultiplier };
   }
   const equipped = key => Array.isArray(agent.slots) ? agent.slots.includes(key) : agent.attributes?.[key] > 0;
   const primary = combatPrimary(agent);

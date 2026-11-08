@@ -48,9 +48,10 @@ test('destroyed, invalid, offscreen and distant nests do not draw misleading rin
 test('legacy snapshot maximum falls back to nest level; full ring is shown without combat flags', () => {
   const f = fixture(); f.draw({ id: 'own', x: 3, y: 4, nestLevel: 2 }); assert.deepEqual(f.calls[0].slice(0, 2), [200, 200]);
 });
-test('ground HP pass is after nest sprites and before combat actors and fog', () => {
+test('ground HP pass is above colony ground and below nest sprites, actors and fog', () => {
   const scene = source.slice(source.indexOf('      drawTerrain();'));
-  assert.ok(scene.indexOf('drawWorldObjects(now)') < scene.indexOf('drawColonyHealthRing(entry)'));
+  assert.ok(scene.indexOf('drawColonyGround(entry,') < scene.indexOf('drawColonyHealthRing(entry)'));
+  assert.ok(scene.indexOf('drawColonyHealthRing(entry)') < scene.indexOf('drawWorldObjects(now)'));
   assert.ok(scene.indexOf('drawColonyHealthRing(entry)') < scene.indexOf('drawCombatAgents(now)'));
   assert.ok(scene.indexOf('drawColonyHealthRing(entry)') < scene.indexOf('drawFog(now)'));
 });

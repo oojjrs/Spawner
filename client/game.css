@@ -34,7 +34,7 @@
       overflow: hidden;
     }
 
-    body[data-screen="entry"] > :not(.entry-gate):not(script) { display: none !important; }
+    body[data-screen="entry"] > :not(.entry-gate):not(script):not(#frame-rate) { display: none !important; }
     .entry-gate { display: grid; place-items: center; min-height: 100dvh; padding: 24px; }
     .entry-gate[hidden] { display: none; }
     #entry-button { min-width: 144px; min-height: 56px; padding: 12px 32px; border: 1px solid #75c4b680; border-radius: 12px; color: var(--ink); background: #24483d; font: inherit; cursor: pointer; }
@@ -216,7 +216,7 @@
     .evolution-stat-row .evolution-stat { flex: 1; min-width: 0; margin: 0; }
     .help-button { display: inline-grid; flex: none; place-items: center; width: 22px; height: 22px; padding: 0; border: 1px solid #75c4b67a; border-radius: 50%; background: transparent; color: var(--accent); font: inherit; font-size: 0.75rem; cursor: help; }
     .help-button:hover, .help-button:focus-visible { border-color: var(--accent); background: #75c4b618; outline: 1px solid var(--accent); outline-offset: 2px; }
-    .help-tooltip { position: fixed; z-index: 20; width: min(280px, calc(100vw - 20px)); padding: 12px; border: 1px solid #75c4b64a; border-radius: 8px; background: #101719fa; box-shadow: 0 8px 24px #0009; color: #d7e0df; font-size: 0.76rem; line-height: 1.65; white-space: pre-line; overflow-wrap: anywhere; pointer-events: none; }
+    .help-tooltip { position: fixed; z-index: 20; width: min(280px, calc(100vw - 20px)); padding: 12px; border: 1px solid #75c4b64a; border-radius: 8px; background: #101719fa; box-shadow: 0 8px 24px #0009; color: #d7e0df; font-size: 0.76rem; line-height: 1.65; white-space: pre-line; overflow-wrap: anywhere; overflow-y: auto; pointer-events: none; }
     .help-tooltip:has(.codex-resource-link) { pointer-events: auto; }
     .help-tooltip:has(.unit-dna-list) { width: min(320px, calc(100vw - 20px)); max-height: calc(100dvh - 20px); overflow-y: auto; pointer-events: auto; }
     .unit-dna-stats { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 12px; margin: 10px 0 0; padding-top: 10px; border-top: 1px solid #303e43; white-space: normal; }
@@ -1153,3 +1153,11 @@
 @media(max-width:700px) {
  .dna-legend { bottom:64px; }
 }
+
+.codex-gene-image { width: 44px; height: 38px; flex: 0 0 auto; }
+.codex-article-icons > .codex-gene-image { width: 96px; height: 84px; }
+.codex-text-link { display: inline-flex; align-items: center; gap: 6px; }
+.codex-growth-attributes { flex-wrap: wrap; min-width: 180px; }
+.codex-growth-attributes .codex-text-link { padding: 3px; }
+.codex-growth-attributes .codex-text-link span { display: none; }
+.codex-growth-attributes .codex-gene-image { width: 32px; height: 28px; }

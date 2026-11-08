@@ -11,7 +11,7 @@ import { unitDisplaySize } from "../client/unit-size.mjs";
 function design(ids, level) {
   const pieces=ATTRIBUTE_DNA.pack(ids.map(id=>{const gene=ATTRIBUTE_DNA.lookup.get(id);return {gene:id,grade:gene.grade,rotation:0};}),level);
   assert.ok(pieces);
-  return {version:5,pieces,level,budget:10000};
+  return {version:6,pieces,level,budget:10000};
 }
 
 function fixture(level, tribe) {
@@ -106,12 +106,12 @@ test("DNA 저장·탄생·수정·복제·복원은 원본 개체의 서열과 �
   const {agentId}=game.command({type:"birth",templateId}),agent=game.agents.find(item=>item.id===agentId);
   assert.equal(game.snapshot().evolutionPoints,points-cost);
   assert.deepEqual(agent.stats.dna,ATTRIBUTE_DNA.stats(dna.pieces));
-  const original=cloneDna(agent.dna);game.command({type:"design",templateId,name:"전사 DNA",dna:design(["blade"],2),birth:false});
+  const original=cloneDna(agent.dna),originalSize=unitDisplaySize(agent);game.command({type:"design",templateId,name:"전사 DNA",dna:design(["blade"],2),birth:false});
   assert.deepEqual(agent.dna,original);
   const copy=game.command({type:"birth",agentId});assert.deepEqual(game.agents.find(item=>item.id===copy.agentId).dna,original);
   game.restore(game.save());const restored=game.agents.find(item=>item.id===agentId);assert.deepEqual(restored.dna,original);
   assert.deepEqual(restored.stats.dna,ATTRIBUTE_DNA.stats(dna.pieces));
-  assert.equal(unitDisplaySize(restored),unitDisplaySize({tribe:"bean"})*1.02);
+  assert.equal(unitDisplaySize(restored),originalSize);
 });
 
 test("DNA는 기관으로 행동을 열고 시작 개체도 같은 채집 DNA를 사용한다",()=>{
@@ -120,8 +120,8 @@ test("DNA는 기관으로 행동을 열고 시작 개체도 같은 채집 DNA를
   assert.equal(canHarvestResource(cell,environment.world,{dnaGather:true},"bean"),true);
   assert.equal(canHarvestResource(cell,environment.world,{},"bean"),true);
   const dna=design(["gather"],1),unit={dna,stats:dnaUnitStats(dna)};
-  assert.equal(dnaCanMove(unit,42,37,[colony]),true);assert.equal(dnaCanMove(unit,42,36,[colony]),false);
-  const roaming=design(["antenna"],2);assert.equal(dnaCanMove({dna:roaming,stats:dnaUnitStats(roaming)},100,100,[colony]),true);
+  assert.equal(dnaCanMove(unit,42,37,[colony]),true);assert.equal(dnaCanMove(unit,42,36,[colony]),true);
+  const antenna=design(["antenna"],2);assert.equal(dnaCanMove({dna:antenna,stats:dnaUnitStats(antenna)},100,100,[colony]),true);assert.equal(dnaUnitStats(antenna).dna.hunting,false);
   assert.ok(game.agents.every(agent=>agent.dna&&agent.stats.capacity>=1));
 });
 
@@ -142,14 +142,19 @@ test("공격 기관 없는 DNA끼리는 실제 전투에서 선제공격하지 �
 test("DNA 연타는 같은 공격 주기 안에 후속 타격하고 범위 공격은 주 대상 사망 때도 발생한다",()=>{
   const base=dnaUnitStats(design(["blade"],2));
   const source={...base,dna:{...base.dna,hits:3,area:1,areaPower:50}},target=dnaUnitStats(design([],1));
-  const f=combatFixture(source,target);f.tick(0);const first=f.a.attack.hitAt;f.tick(first);const health=f.b.health;
+  function firstAttack(fixture) {
+    for(let time=0;time<=10&&!fixture.a.attack;time+=.05)fixture.tick(time);
+    assert.ok(fixture.a.attack,"근접 유닛이 접근한 뒤 첫 공격을 시작한다");
+    return fixture.a.attack.hitAt;
+  }
+  const f=combatFixture(source,target),first=firstAttack(f);f.tick(first);const health=f.b.health;
   f.tick(first+source.dna.comboSpeed);assert.ok(f.b.health<health);
-  const lethal=combatFixture({...base,dna:{...base.dna,power:1000,meleePower:1000,area:1,areaPower:50}},target);lethal.tick(0);lethal.tick(lethal.a.attack.hitAt);
+  const lethal=combatFixture({...base,dna:{...base.dna,power:1000,meleePower:1000,area:1,areaPower:50}},target);lethal.tick(firstAttack(lethal));
   assert.equal(lethal.b.health,0);assert.ok(lethal.c.health<100);
 });
 test("DNA 조각은 연결 없이 빈칸에 놓고 중간 조각을 지워도 다른 좌표를 유지한다",()=>{
   const pieces=[{gene:"capacity",grade:1,rotation:0,q:-2,r:2},{gene:"health",grade:1,rotation:0,q:0,r:0},{gene:"capacity",grade:1,rotation:0,q:0,r:-2}];
-  const dna={version:5,pieces,level:1,budget:10000};
+  const dna={version:6,pieces,level:1,budget:10000};
   assert.ok(validateDna(dna,1,10000));
   assert.ok(validateDna({...dna,pieces:[...pieces].reverse()},1,10000));
   assert.ok(validateDna({...dna,pieces:pieces.filter((_,index)=>index!==1)},1,10000));

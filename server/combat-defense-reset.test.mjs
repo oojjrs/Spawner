@@ -55,7 +55,7 @@ for (const type of ["dna", "native", "legacy"]) for (const reaction of ["parry",
     const ready = f.target.attackReady; f.tick(ready); assert.equal(f.target.attack.startedAt, ready);
   });
 
-for (const type of ["dna", "native", "legacy"]) test(type + " ranged defense blocks half damage and never parries", () => {
+for (const type of ["dna", "native", "legacy"]) test(type + " ranged defense uses its block reduction and never parries", () => {
   const normal = fixture({ type, reaction: "parry", mode: "ranged", world: true });
   normal.tick(0); const at = normal.source.attack.hitAt; normal.tick(at);
   const hit = normal.events.find(event => event.sourceId === "a" && event.kind === "hit");
@@ -64,7 +64,7 @@ for (const type of ["dna", "native", "legacy"]) test(type + " ranged defense blo
   const blocked = fixture({ type, reaction: "block", mode: "ranged", world: true }); blocked.tick(0); blocked.tick(at);
   const block = blocked.events.find(event => event.sourceId === "a" && event.kind === "block");
   assert.ok(block);
-  if (type !== "legacy") assert.ok(Math.abs(block.amount - hit.amount * .5) < 1e-9);
+  if (type !== "legacy") assert.ok(Math.abs(block.amount - hit.amount * (1 - combatProfile(blocked.target).blockReduction)) < 1e-9);
   assert.equal(blocked.target.attackReady === 10, false);
   if (type !== "legacy") assert.equal(blocked.target.attack.startedAt, at);
 });

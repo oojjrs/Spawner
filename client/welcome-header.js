@@ -71,7 +71,6 @@ globalThis.SpawnerWelcomeHeaderReady = (async () => {
       }),
       ...tribes.map(async key => {
         await nativeAssets.prepareTribe(key, ["idle", "walk"], {});
-        await unitPresentation.prepareAnimation({ tribe: key, attributes: {} });
         const walk = nativeAssets.sheets.get(key).get("walk");
         if (walk) movementSheets.set(key, { ...walk.animation, sprite: walk.sprite, scale: walk.scale });
       })

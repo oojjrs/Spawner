@@ -138,7 +138,7 @@ test("이전 저장의 목재·이슬을 지형 이동 없이 추가하고 기�
   populateResourceNodes(room);
   assert.equal(room.food.get("10,10").resourceType, "tree");
   assert.equal(room.food.get("11,10").resourceType, "dew");
-  assert.equal(room.food.get("12,10").amount, 17);
+  assert.equal(room.food.get("12,10").amount, 5000);
   assert.equal(room.food.has("13,10"), false);
   assert.deepEqual(terrain, before);
 });

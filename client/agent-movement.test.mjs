@@ -4,7 +4,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
-import { sproutRootGeometry, sproutJumpOffset, sproutBodyPose } from "./sprout-roots.mjs";
+import { unitActionArtPose } from "./unit-action-art.mjs";
+import { presentationRenderer } from "./unit-presentation-test-harness.mjs";
 import { ATTRIBUTES, COMBAT_ATTRIBUTE_KEYS } from "../server/attributes.mjs";
 import { UNIT_ANIMATIONS, unitAnimationPose, unitMovementPosition } from "./unit-animation.mjs";
 import { SPORE_BIRTH_ANIMATION } from "./birth.mjs";
@@ -19,74 +20,43 @@ function declaration(name) {
   return match[0];
 }
 
-function movement() {
-  const draws = [], translations = [], scales = [];
-  class Image {
-    constructor() { this.complete = true; this.naturalWidth = 2048; }
-    async decode() {}
-  }
-  const context = createContext({ canvas: {}, Image, performance, Spawner: { unitDisplayAttributes, UNIT_ANIMATIONS, combatAttributeKeys, hasCombatEvolution, unitAnimationPose, unitMovementPosition, sproutRootGeometry, sproutJumpOffset, sproutBodyPose }, assetSource: path => path,
-    unitAnimationSheets: new Map(), combatAttributeArt: { ready: () => true, frame: () => ({ width: 512, height: 512 }) },
-    drawAgentFeet() {}, drawAgentTail() {}, drawAgentHead() {},
-    state: { simSeconds: .5 }, idleMotion: { matches: false }, AGENT_JUMP_PREPARATION: .2, AGENT_HEIGHT: .7,
-    clamp: (value, low, high) => Math.max(low, Math.min(high, value)),
-    displayedAgent: agent => agent, agentBirthPose: () => null,
-    tribeArt: { prepareUnit: async () => ({ box: { width: 310, height: 350 } }) },
-    agentWalkPose: () => null, agentBobOffset: () => 0, foodDeliveryPose: () => ({ scaleX: 1, scaleY: 1 }),
-    prepareUnitAnimationSheets: async () => {}, drawAgentAnimation: () => false,
-    drawAgentAttack: () => false, agentSprite: () => ({ width: 512, height: 512 }),
-    drawSelectionOutline() {}, foodSelectionShape: {},
-    ctx: { save() {}, restore() {}, beginPath() {}, rect() {}, clip() {}, ellipse() {}, fill() {},
-      translate: (...args) => translations.push(args), scale: (...args) => scales.push(args), rotate() {},
-      drawImage: (...args) => draws.push(args) }
-  });
-  const start = source.indexOf("    const agentMovementSheets = new Map(");
-  const end = source.indexOf("    const unitAnimationSheets = new Map(", start);
-  runInContext(source.slice(start, end), context);
-  for (const name of ["agentBodyLift", "agentBasePosition", "agentJumpOffset", "agentAppearanceBodyPose", "agentBodyPose", "prepareAgentMovement", "drawAgentMovement",
-    "drawAgentAppearance", "drawAgentAppearanceSurface", "drawAgentAppearanceLayer", "drawAgentAppearanceBody", "drawAgentCarrying"])
-    runInContext(declaration(name), context);
-  return { context, draws, translations, scales };
-}
-
-test("몽돌·포자버섯·샘방울은 현재 이동 원본으로 지면을 따라 이동한다", async () => {
-  const render = movement();
+test("몽돌·포자버섯·샘방울은 이동 좌표와 완성 보행 애셋을 함께 진행한다", async t => {
+  const render = presentationRenderer(t);
   for (const [tribe, file] of [["pebble", "walk-in-place-v1/walk"], ["spore", "walk-v2/walk-v2"], ["spring", "flow-v4/flow-v4"]]) {
     const metadata = JSON.parse(readFileSync(new URL("../DesignAssets/Tribes/" + tribe + "/AnimationStudies/" + file + ".json", import.meta.url), "utf8"));
     assert.equal(metadata.runtimeAtlas, UNIT_ANIMATIONS[tribe].walk.image);
     assert.equal(metadata.rootMotion, false);
-    await render.context.prepareAgentMovement({ key: tribe });
-    const agent = { id: tribe, tribe, attributes: {}, x: 1, y: 2, renderFromX: 0, renderFromY: 0,
+    const agent = { id: tribe, tribe, health: 10, attributes: {}, x: 1, y: 2, renderFromX: 0, renderFromY: 0,
       moveStartedAt: 0, moveDuration: 1, stepCount: 1, facing: 1, carrying: 0 };
     const frames = new Set();
     for (const time of [.1, .4, .7, .9]) {
-      render.context.state.simSeconds = time;
-      const position = render.context.agentBasePosition(agent);
+      render.state.simSeconds = time;
+      const position = unitMovementPosition(agent, time);
       assert.equal(position.x, time);
       assert.equal(position.y, time * 2);
-      assert.equal(render.context.agentBodyPose(agent, 0, { scaleX: 1, scaleY: 1 }).scaleY, 1);
-      render.context.drawAgentAppearance(render.context.ctx, 0, agent, 100, { x: 0, y: 0 }, position, null, null);
-      const draw = render.draws.at(-1);
-      assert.equal(draw[0].src, metadata.runtimeAtlas);
-      assert.equal(render.translations.at(-1)[1], 50 - 70 / 2 + 70 * .94);
-      frames.add(draw[1] + "," + draw[2]);
+      const pose = unitActionArtPose(agent, time);
+      assert.equal(pose.action, "walk");
+      assert.equal(pose.missing, false);
+      await render.presentation.prepareAnimation(agent, time);
+      render.draws.length = 0;
+      render.presentation.drawAgentAppearanceBody(render.context, 0, agent, 100, { x: 0, y: 0 }, position, null, null);
+      assert.equal(render.draws.length, 1);
+      assert.equal(render.draws[0][0].src, pose.animation.image);
+      assert.deepEqual(render.translations.at(-1), [50, 100 * (.5 + .7 * .44)]);
+      frames.add(render.draws[0][1] + "," + render.draws[0][2]);
     }
     assert.ok(frames.size > 1);
-    render.context.state.simSeconds = 1;
-    assert.equal(render.context.drawAgentMovement(render.context.ctx, agent, 0, 0, 70, null), false);
+    assert.equal(unitActionArtPose(agent, 1).action, "idle");
   }
 });
 
-test("새싹콩은 발 속성에 따라 기존 보행과 점프 구분을 유지한다", () => {
-  const render = movement();
+test("퇴역한 발 속성이 남은 새싹콩도 같은 점프 이동 시점을 사용한다", () => {
   const agent = { tribe: "bean", attributes: {}, x: 1, y: 0, renderFromX: 0, renderFromY: 0,
     moveStartedAt: 0, moveDuration: 1 };
-  render.context.state.simSeconds = .1;
-  assert.equal(render.context.agentBasePosition(agent).x, 0);
+  assert.equal(unitMovementPosition(agent, .1).x, 0);
   agent.attributes.feet = 1;
-  assert.equal(render.context.agentBasePosition(agent).x, .1);
+  assert.equal(unitMovementPosition(agent, .1).x, 0);
 });
-
 
 function gameAudio() {
   const played = [], movementPlayed = [], harvests = [];
@@ -154,64 +124,59 @@ function attributeCombinations() {
   return combinations;
 }
 
-test("네 종족의 모든 0~4속성 조합은 다리 유무 외에 기본 이동 궤적을 바꾸지 않는다", () => {
-  const render = movement();
+test("네 종족의 모든 0~4속성 조합은 기본 이동 궤적을 바꾸지 않는다", t => {
+  const render = presentationRenderer(t);
   for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     for (const attributes of attributeCombinations()) {
       const agent = { tribe, attributes, x: 1, y: 2, renderFromX: 0, renderFromY: 0,
         moveStartedAt: 0, moveDuration: 1, stepCount: 1, health: 10 };
       const baseline = { ...agent, attributes: unitDisplayAttributes(agent).feet ? { feet: 1 } : {} };
       for (const time of [0, .1, .3, .6, .9, 1]) {
-        render.context.state.simSeconds = time;
-        const position = render.context.agentBasePosition(agent), expected = render.context.agentBasePosition(baseline);
+        render.state.simSeconds = time;
+        const position = unitMovementPosition(agent, time), expected = unitMovementPosition(baseline, time);
         assert.deepEqual(position, expected, tribe + JSON.stringify(attributes));
-        const jump = render.context.agentJumpOffset(agent, position);
+        const jump = render.presentation.agentJumpOffset(agent, position);
         assert.equal(jump, tribe === "bean" && !unitDisplayAttributes(agent).feet ? Math.sin(expected.progress * Math.PI) * .7 * .18 : 0);
       }
     }
   }
 });
 
-test("전투 외형의 모든 새싹콩 조합도 기본 콩과 같은 점프 높이와 몸체 신축을 사용한다", () => {
-  const render = movement(), cell = 100, origin = { x: 0, y: 0 }, floor = 50 + 70 * .44;
-  for (const attributes of attributeCombinations().filter(hasCombatEvolution)) {
-    const agent = { id: "combat", tribe: "bean", attributes, x: 1, y: 0, renderFromX: 0, renderFromY: 0,
+test("전투 외형의 이동은 단일 완성 프레임을 좌우 반전만 하여 재생한다", async t => {
+  const render = presentationRenderer(t);
+  for (const key of COMBAT_ATTRIBUTE_KEYS) for (const feet of [0, 1]) {
+    const agent = { id: "combat", tribe: "bean", attributes: { [key]: 1, feet }, x: 1, y: 0, renderFromX: 0, renderFromY: 0,
       moveStartedAt: 0, moveDuration: 1, stepCount: 1, health: 10, carrying: 0 };
-    for (const facing of [-1, 1]) for (const time of [.1, .3, .6, .9, 1]) {
+    for (const facing of [-1, 1]) for (const time of [.1, .3, .6, .9]) {
       agent.facing = facing;
-      render.context.state.simSeconds = time;
-      const position = render.context.agentBasePosition(agent), expected = render.context.agentJumpOffset(agent, position) * cell;
-      render.translations.length = 0; render.scales.length = 0;
-      render.context.drawAgentAppearance(render.context.ctx, 0, agent, cell, origin, position, null, null);
-      assert.equal(render.translations[0][0], 50);
-      assert.ok(Math.abs(render.translations[0][1] - floor + expected) < 1e-9, JSON.stringify(attributes));
-      assert.deepEqual(render.scales.at(-1), [facing, 1]);
-      if (!unitDisplayAttributes(agent).feet) {
-        const pose = render.context.agentBodyPose(agent, 0, { scaleX: 1, scaleY: 1 });
-        assert.deepEqual(render.scales[0], [pose.scaleX, pose.scaleY]);
-      } else assert.equal(render.scales.length, 1);
+      render.state.simSeconds = time;
+      await render.presentation.prepareAnimation(agent, time);
+      render.draws.length = 0; render.translations.length = 0; render.scales.length = 0;
+      render.presentation.drawAgentAppearanceBody(render.context, 0, agent, 100, { x: 0, y: 0 }, unitMovementPosition(agent, time), null, null);
+      assert.equal(render.draws.length, 1);
+      assert.deepEqual(render.translations, [[50, 100 * (.5 + .7 * .44)]]);
+      assert.equal(render.scales.length, 1);
+      assert.equal(Math.abs(render.scales[0][0]), render.scales[0][1]);
+      assert.equal(render.draws[0][0].src, unitActionArtPose(agent, time).animation.image);
     }
   }
 });
 
-test("전투 속성 합성은 기본 몸체 점프를 한 번만 적용하고 표시 속성의 다리 유무를 따른다", () => {
-  const render = movement(), painted = [];
-  render.context.combatAttributeArt.frame = (agent, time, scale, drawBody) => {
-    drawBody({ ...render.context.ctx, translate: (...args) => painted.push(args) });
-    return { width: 512, height: 512 };
-  };
+test("표시 외형은 원래 스탯과 독립적으로 완성 애셋을 고르고 이동을 바꾸지 않는다", async t => {
+  const render = presentationRenderer(t);
+  render.state.simSeconds = .1;
   for (const key of COMBAT_ATTRIBUTE_KEYS) {
-    const attributes = { [key]: 1 };
-    const agent = { tribe: "bean", attributes, health: 10, x: 1, y: 0, renderFromX: 0, renderFromY: 0,
-      moveStartedAt: 0, moveDuration: 1, stepCount: 1, carrying: 0 };
-    render.context.state.simSeconds = .6;
-    const position = render.context.agentBasePosition(agent), jump = render.context.agentJumpOffset(agent, position);
-    painted.length = 0; render.translations.length = 0;
-    render.context.drawAgentAppearance(render.context.ctx, 0, agent, 100, { x: 0, y: 0 }, position, null, null);
-    assert.ok(painted.some(([x, y]) => x === 256 && Math.abs(y - 448) < 1e-9));
-    assert.equal(render.translations[0][0], 50);
-    assert.ok(Math.abs(render.translations[0][1] - 50 - 70 * .44 + jump * 100) < 1e-9);
-    assert.equal(render.context.agentJumpOffset({ ...agent, appearanceAttributes: { feet: 1 } }, position), 0);
-    assert.equal(render.context.agentJumpOffset({ ...agent, attributes: { feet: 1 }, appearanceAttributes: attributes }, position), jump);
+    const agent = { tribe: "bean", attributes: { [key]: 1 }, appearanceAttributes: { antenna: 1 }, health: 10,
+      x: 1, y: 0, renderFromX: 0, renderFromY: 0, moveStartedAt: 0, moveDuration: 1, stepCount: 1 };
+    assert.equal(unitMovementPosition(agent, .1).x, 0);
+    assert.equal(render.presentation.agentJumpOffset(agent, { progress: .5 }), .7 * .18);
+    await render.presentation.prepareAnimation(agent, .1);
+    render.draws.length = 0;
+    render.presentation.drawAgentAnimation(render.context, agent, 50, 80.8, 70, null);
+    assert.equal(render.draws.length, 1);
+    assert.equal(render.draws[0][0].src, unitActionArtPose({ ...agent, attributes: { antenna: 1 }, appearanceAttributes: null }, .1).animation.image);
+    agent.appearanceAttributes = { [key]: 1 };
+    agent.attributes = { feet: 1 };
+    assert.equal(unitMovementPosition(agent, .1).x, 0);
   }
 });

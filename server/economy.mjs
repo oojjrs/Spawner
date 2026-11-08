@@ -7,6 +7,20 @@ export const RESOURCE_ECONOMY = Object.freeze([
   { tribe: "spring", key: "dew", coverage: null, amount: 1, harvestSeconds: 2 }
 ].map(entry => Object.freeze(entry)));
 
+export const RESOURCE_NODE_AMOUNT = 5000;
+
+export function normalizeWorldResourceAmounts(world) {
+  const primary = new Set(RESOURCE_ECONOMY.map(entry => entry.key));
+  const points = (world.resources || []).filter(point => primary.has(point[3]));
+  for (const point of points) point[2] = RESOURCE_NODE_AMOUNT;
+  for (const field of world.hydrology?.placementMaps || []) {
+    if (!field.values) continue;
+    for (const [x, y, amount, key] of points) {
+      if (field.id === "resource:amount" || field.id === "resource:" + key + ":amount") field.values[y * world.size + x] = amount;
+    }
+  }
+}
+
 export function populateWorldEconomy(world, fields) {
   const size = world.size, primary = new Set(RESOURCE_ECONOMY.map(entry => entry.key));
   world.food = world.food.filter(point => !primary.has(point[3]));

@@ -19,14 +19,23 @@ export function createCombatEvolutionArt(assetSource, createSurface, loadImage) 
       .map(attributes => art.prepare({ tribe: key, attributes })));
     prepared.add(key);
   }
+  function portraitAgent(agent) {
+    return { ...agent, health: 1, birth: null, attack: null, support: null, combat: null, hurtStartedAt: -Infinity,
+      moveDuration: 0, mode: "idle", bornAt: 0, animationStartedAt: 0 };
+  }
+  async function prepareAgent(agent, time, retry) {
+    await Promise.all([art.prepare(agent, time, retry), art.prepare(portraitAgent(agent), 0, retry)]);
+  }
+  function readyAgent(agent) {
+    return art.readyFrame(portraitAgent(agent), 0);
+  }
   function frame(agent, time) { return art.frame(agent, time); }
   function portrait(agent) {
-    return art.frame({ ...agent, health: 1, birth: null, attack: null, support: null, hurtStartedAt: -Infinity,
-      moveDuration: 0, mode: "idle", bornAt: 0, animationStartedAt: 0 }, 0);
+    return art.frame(portraitAgent(agent), 0);
   }
   function bodySize(agent) {
     const definition = unitActionArtDefinition(agent), bounds = definition && art.referenceBounds(definition.reference);
     return bounds ? { width: bounds.width, height: bounds.height } : null;
   }
-  return { prepare, frame, portrait, bodySize, ready: tribe => prepared.has(tribe || "bean"), clearDeaths() {} };
+  return { prepare, prepareAgent, readyAgent, frame, portrait, bodySize, ready: tribe => prepared.has(tribe || "bean"), clearDeaths() {} };
 }

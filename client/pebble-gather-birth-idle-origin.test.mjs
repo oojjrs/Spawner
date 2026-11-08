@@ -34,7 +34,7 @@ const options = { animations: UNIT_ACTION_ART['pebble/gather'].actions };
 test('Pebble gather idle begins at actual birth completion before and after server tick, snapshot, save and restore', () => {
   for (const time of [0, 100.125]) {
     const f = fixture('pebble', time), spawned = f.snapshot(), readyAt = spawned.birth.readyAt;
-    assert.equal(spawned.dna.version, 5);
+    assert.equal(spawned.dna.version, 6);
     assert.equal(spawned.bornAt, time);
     assert.equal(readyAt, time + 2.62);
     assert.equal(spawned.birthIdleStartedAt, undefined);
@@ -85,7 +85,7 @@ test('the retained-birth fallback and persisted marker cannot shift the other 67
   for (const tribe of ['bean','spore','pebble','spring']) for (const form of UNIT_APPEARANCE_FORMS) {
     if (tribe === 'pebble' && form === 'gather') continue;
     const base = { id: tribe + '/' + form, tribe, health: 10, bornAt: 100, mode: 'idle', moveDuration: 0,
-      dna: { version: 5, pieces: form === 'base' ? [] : form.split('-').map(gene => ({ gene, grade: 1 })) } };
+      dna: { version: 6, pieces: form === 'base' ? [] : form.split('-').map(gene => ({ gene, grade: 1 })) } };
     const readyAt = 100 + agentBirthDuration(tribe), at = readyAt + .01;
     const settings = { animations: UNIT_ACTION_ART[tribe + '/' + form].actions };
     const expected = unitActionState(base, at, settings);

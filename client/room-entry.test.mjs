@@ -23,6 +23,7 @@ function lobby(tribe, actualPreviews = false) {
     } },
     prepareWorldRendering: () => { started.resolve(); return rendering.promise; },
     prepareTribePreviews: async () => {},
+    prepareTribeWorld: async () => {},
     enterRoom: async (roomId, value) => { entries.push({ roomId, packet: value }); }
   });
   for (const name of ["prepareRoom", "lobbyAction"]) {
@@ -65,6 +66,38 @@ test("failed map preparation keeps the lobby open and allows retry", async () =>
   assert.equal(client.context.welcomeStatus.textContent, "map failed");
   assert.equal(client.context.lobbyBusy, false);
   assert.equal(client.button.textContent, "방 만들기");
+});
+
+test("selection waits for its composited map even after terrain and previews finish", async () => {
+  const fixture = lobby(null);
+  const map = Promise.withResolvers();
+  fixture.context.prepareTribeWorld = () => map.promise;
+  const pending = fixture.context.lobbyAction("create", { title: "test" });
+  fixture.rendering.resolve();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(fixture.entries.length, 0);
+  assert.equal(fixture.progress.includes(100), false);
+  assert.equal(fixture.context.welcome.hidden, false);
+  map.resolve();
+  await pending;
+  assert.equal(fixture.entries.length, 1);
+  assert.equal(fixture.progress.at(-1), 100);
+});
+
+test("a failed selection map stays in the lobby and can be retried", async () => {
+  const fixture = lobby(null);
+  fixture.context.prepareTribeWorld = async () => { throw new Error("map composition failed"); };
+  fixture.rendering.resolve();
+  await fixture.context.lobbyAction("create", { title: "test" });
+  assert.equal(fixture.entries.length, 0);
+  assert.equal(fixture.progress.includes(100), false);
+  assert.equal(fixture.context.welcome.hidden, false);
+  assert.equal(fixture.context.lobbyBusy, false);
+  assert.equal(fixture.context.welcomeStatus.textContent, "map composition failed");
+  fixture.context.prepareTribeWorld = async () => {};
+  await fixture.context.lobbyAction("create", { title: "test" });
+  assert.equal(fixture.entries.length, 1);
+  assert.equal(fixture.calls.filter(call => call.type === "create").length, 1);
 });
 
 function declaration(name, context) {
@@ -226,7 +259,7 @@ test("preview rendering skips combat, births and upgrades but full rendering sti
   assert.deepEqual(events, ['nest']);
   events.length = 0;
   await context.prepareTribeRendering([{ tribe: 'bean' }]);
-  assert.equal(events.filter(value => value === 'combat').length, 6);
+  assert.equal(events.filter(value => value === 'combat').length, 1);
   assert.ok(events.includes('growth'));
 });
 
@@ -273,4 +306,83 @@ test("repeated create clicks during preparation do not start duplicate requests"
   for (const key of fixture.context.assets.keys()) fixture.context.resolveAsset(key);
   await pending;
   assert.equal(fixture.entries.length, 1);
+});
+
+function gameEntry() {
+  const assets = Promise.withResolvers(), effects = Promise.withResolvers();
+  const packet = { roomId: "room", colonyId: 1, colonies: [{ id: 1, tribe: "bean" }] };
+  const app = { hidden: true, inert: true }, calls = [];
+  const context = createContext({
+    pebbleRoomEntryVersion: 0, roomPreparationVersion: 0, connection: {},
+    resetEnding() {}, audio: { updateMusic() {} }, clearDiscoveryToasts() {}, foodDeliveries: new Map(), resetAudio() {},
+    welcome: { hidden: false }, welcomeStatus: {}, tribeSelection: { hidden: true }, tribeSelectionStatus: {},
+    setEvolutionText: (element, value) => { element.textContent = value; },
+    pebbleBirthRuntime: { enter: async () => ({ stale: false }) }, rememberRoom() {},
+    prepareTribeRendering: async () => {}, prepareAgentRendering: () => assets.promise,
+    prepareDetailVfx: () => effects.promise,
+    applySnapshot: () => { calls.push('snapshot'); context.connection.online = true; },
+    terrainRendering: {}, closeEvolutionPanel() {}, closeColonyMenu() {}, selectObject() {}, state: {},
+    document: { body: { dataset: { screen: 'welcome' } }, querySelector: () => app, getElementById: () => ({}) },
+    canvas: { parentElement: { appendChild() {} }, focus() {} }, resizeCanvas() {}, focusColony() {}, updateEnding() {},
+    client: { call: async name => calls.push(name) }
+  });
+  declaration('enterRoom', context);
+  return { context, assets, effects, packet, app, calls };
+}
+
+test("game remains hidden and paused until unit art and effects are ready", async () => {
+  const fixture = gameEntry();
+  const pending = fixture.context.enterRoom('room', fixture.packet);
+  await flush();
+  assert.equal(fixture.context.connection.active, false);
+  assert.equal(fixture.app.hidden, true);
+  assert.deepEqual(fixture.calls, []);
+  fixture.assets.resolve();
+  await flush();
+  assert.deepEqual(fixture.calls, []);
+  fixture.effects.resolve();
+  await pending;
+  assert.equal(fixture.app.hidden, false);
+  assert.equal(fixture.context.document.body.dataset.screen, 'game');
+  assert.deepEqual(fixture.calls, ['snapshot', 'resume']);
+});
+
+test("failed unit preparation preserves the entry screen and does not resume simulation", async () => {
+  const fixture = gameEntry();
+  const pending = fixture.context.enterRoom('room', fixture.packet);
+  await flush();
+  fixture.assets.reject(new Error('unit art unavailable'));
+  fixture.effects.resolve();
+  await pending;
+  assert.equal(fixture.context.connection.active, false);
+  assert.equal(fixture.app.hidden, true);
+  assert.equal(fixture.context.welcomeStatus.textContent, 'unit art unavailable');
+  assert.deepEqual(fixture.calls, []);
+});
+
+test("a superseded room cannot open after its remaining assets finish", async () => {
+  const fixture = gameEntry();
+  const pending = fixture.context.enterRoom('room', fixture.packet);
+  await flush();
+  fixture.context.roomPreparationVersion++;
+  fixture.assets.resolve(); fixture.effects.resolve();
+  await pending;
+  assert.equal(fixture.app.hidden, true);
+  assert.deepEqual(fixture.calls, []);
+});
+
+test("a superseded room failure cannot deactivate a newer room", async () => {
+  const fixture = gameEntry();
+  const pending = fixture.context.enterRoom('room', fixture.packet);
+  await flush();
+  fixture.context.pebbleRoomEntryVersion++;
+  fixture.context.connection.roomId = 'new-room';
+  fixture.context.connection.active = true;
+  fixture.context.welcomeStatus.textContent = 'new room ready';
+  fixture.assets.reject(new Error('old room failed'));
+  fixture.effects.resolve();
+  await pending;
+  assert.equal(fixture.context.connection.active, true);
+  assert.equal(fixture.context.welcomeStatus.textContent, 'new room ready');
+  assert.deepEqual(fixture.calls, []);
 });

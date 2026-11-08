@@ -112,23 +112,6 @@ export function starterFoodAccess(world, camp, key, resourceIndex = starterResou
   return {nodes:cells.length,amount:cells.reduce((sum,cell)=>sum+cell[2],0)};
 }
 
-export function increaseStarterFood(world) {
-  const resourceIndex=starterResourceIndex(world), increased=new Set();
-  const foods={sprout:'clay',bean:'clay',spore:'tree',pebble:'pebbles',spring:'dew'};
-  for(const camp of world.camps) {
-    for(const cell of starterFoodCells(world,camp,foods[camp.tribe],resourceIndex)) {
-      if(increased.has(cell))continue;
-      cell[2]*=2000;increased.add(cell);
-    }
-  }
-  for(const field of world.hydrology?.placementMaps||[]) {
-    if(!field.values)continue;
-    for(const [x,y,amount,key] of increased) {
-      if(field.id==='resource:amount'||field.id==='resource:'+key+':amount')field.values[y*world.size+x]=amount;
-    }
-  }
-}
-
 export function placeResourceCamps(world, tribes, version = world.hydrology?.generationVersion) {
   const { size, terrain, hazards } = world, occupied = new Uint8Array(terrain.length), labels = new Int32Array(terrain.length);
   const queue = new Int32Array(terrain.length), populations = [0];

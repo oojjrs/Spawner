@@ -57,7 +57,7 @@ test('DNA v5 antenna combinations preserve actual ability rules and independent 
   assert.equal(COMBAT_LAB_APPEARANCES.length, 14);
   for (const form of forms) {
     const dna = combatLabCombinationDna(form.key), other = combatLabCombinationDna(form.key);
-    assert.equal(dna.version, 5); assert.ok(validateDna(dna, dna.level, dna.budget));
+    assert.equal(dna.version, 6); assert.ok(validateDna(dna, dna.level, dna.budget));
     assert.deepEqual(dnaAppearance(dna), form.attributes); assert.notEqual(dna.pieces, other.pieces); assert.notEqual(dna.pieces[0], other.pieces[0]);
     for (const tribe of tribes) {
       const build = combatLabWithAppearance({ key: tribe }, form.key), stats = deriveSimulationStats(build);

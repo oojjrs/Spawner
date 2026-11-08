@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createCombatStage } from "./combat-stage.mjs";
 import { createSimulationTrial } from "./combat-simulation.mjs";
-import { UNIT_ANIMATIONS } from "./unit-animation.mjs";
+import { unitActionArtDefinition, unitActionArtPose } from "./unit-action-art.mjs";
+import { unitFrameMirror } from "./unit-size.mjs";
 import { unitAppearanceInventory } from "./unit-appearance.mjs";
 
 const tribes = ["bean", "spore", "pebble", "spring"];
@@ -37,7 +38,7 @@ async function harness(run, { unavailable = false, authoredCombination = false }
         const png = readFileSync(new URL('../' + value, import.meta.url));
         this.naturalWidth = missing ? 0 : png.readUInt32BE(16);
         this.naturalHeight = png.readUInt32BE(20);
-      } else this.naturalWidth = missing && /CombatAttributesV7|Attributes\/v[12]/.test(value) ? 0 : 4096;
+      } else this.naturalWidth = missing && /CombatAttributesV7|Attributes\/v[12]|AntennaCombosV1/.test(value) ? 0 : 4096;
     }
     get src() { return this.path; }
     async decode() { if (!this.naturalWidth) throw new Error("missing fixture art"); }
@@ -56,39 +57,43 @@ function fixture(tribe, visual, side = 0) {
 }
 function paths(image) { return image.src ? [image.src] : (image.calls || []).flatMap(call => paths(call.image)); }
 
-test("laboratory representative blade/carapace compositors cover four tribes and both facing directions", async () => {
+test("laboratory authored blade/carapace combinations cover four tribes and both facing directions", async () => {
   await harness(async ({ draw, settle }) => {
     for (const tribe of tribes) for (const dominant of ["blade", "carapace"]) for (const side of [0, 1]) {
       const trial = fixture(tribe, { [dominant]: 1, antenna: 1, feet: 1, ...(dominant === "blade" ? { secretion: 1 } : {}) }, side);
       const agent = trial.agents[side], before = JSON.stringify(agent);
       draw(trial); await settle(); const draws = draw(trial);
-      const sprite = draws.find(call => call.image.calls?.length);
+      const pose = unitActionArtPose(agent, trial.time), animation = pose.animation;
+      const sprite = draws.find(call => call.image.src === animation.image);
       assert.ok(sprite, `${tribe}/${dominant} has representative art`);
-      assert.ok(paths(sprite.image).some(path => path.includes(`/Sheets/${dominant}/idle.webp`)));
-      assert.equal(sprite.matrix[0], side ? -1 : 1);
-      assert.ok(Math.abs(sprite.args[1] / sprite.args[3] + 448 / 512) < 1e-12, "ground pivot is fixed, not fit to padded canvas");
+      assert.equal(sprite.args[0], pose.frame % animation.columns * animation.frameSize);
+      assert.equal(sprite.args[1], Math.floor(pose.frame / animation.columns) * (animation.frameHeight || animation.frameSize));
+      assert.equal(sprite.matrix[0], unitFrameMirror(animation.sourceFacing, side ? -1 : 1) ? -1 : 1);
+      assert.ok(Math.abs(sprite.args[5] / sprite.args[7] + animation.pivotY / (animation.frameHeight || animation.frameSize)) < 1e-12, "the authored ground pivot stays fixed");
       assert.equal(JSON.stringify(agent), before);
     }
   });
 });
 
-test("antenna/feet reuse tribe morphology and preserve lower-priority suppression", async () => {
+test("antenna/feet use their registered complete tribe clip and preserve lower-priority suppression", async () => {
   await harness(async ({ draw, settle }) => {
     for (const tribe of tribes.slice(1)) for (const dominant of ["antenna", "feet"]) {
       const trial = fixture(tribe, dominant === "antenna" ? { antenna: 2, feet: 3 } : { feet: 3 });
-      draw(trial); await settle(); const draws = draw(trial), sprite = draws.find(call => call.image.calls?.length);
+      draw(trial); await settle(); const draws = draw(trial), animation = unitActionArtPose(trial.agents[0], trial.time).animation;
+      const sprite = draws.find(call => call.image.src === animation.image);
       assert.ok(sprite, tribe + dominant);
-      assert.ok(paths(sprite.image).some(path => path.includes("Attributes/v2/Parts/")));
+      assert.equal(sprite.image.calls, undefined);
       assert.ok(sprite.args.every(Number.isFinite));
     }
   });
 });
 
-test("missing representative art keeps base fallback and never promotes incomplete inventory", async () => {
-  await harness(async ({ draw, settle }) => {
+test("missing authored combinations keep preparation closed and never promote incomplete inventory", async () => {
+  await harness(async ({ draw, settle, stage }) => {
     const trial = fixture("spore", { blade: 1, secretion: 1, antenna: 1 });
     draw(trial); await settle(); const draws = draw(trial);
-    assert.ok(draws.some(call => call.image.src === UNIT_ANIMATIONS.spore.idle.image));
+    await assert.rejects(stage.prepare(trial), /Unit action assets are not ready/);
+    assert.equal(draws.some(call => call.image.src === unitActionArtPose(trial.agents[0], trial.time).animation.image), false);
     assert.equal(draws.some(call => call.image.calls?.length), false);
     assert.equal(unitAppearanceInventory().filter(row => row.worldReady).length, 0);
   }, { unavailable: true });
@@ -101,9 +106,10 @@ test("mixed stat-only laboratory builds display their blade-secretion body while
     const trial = createSimulationTrial(settings), control = createSimulationTrial(settings);
     draw(trial); await settle();
     let sawBlade = false, sawFlight = false;
-    for (let index = 0; index < 20; index++) {
+    for (let index = 0; index < 100 && !sawFlight; index++) {
       trial.advance(.1); control.advance(.1);
       const draws = draw(trial);
+      await new Promise(resolve => setImmediate(resolve));
       sawBlade ||= draws.some(call => paths(call.image).some(path => path.includes("/SecretionCombosV1/bean/blade-secretion/")));
       sawFlight ||= draws.some(call => call.image.src?.includes("CombatVfxV4/bean.png"));
       assert.deepEqual(trial.agents, control.agents); assert.deepEqual(trial.history, control.history);
@@ -120,7 +126,7 @@ test("failed art retries after the bounded wall-clock delay and recovers without
     await harness(async ({ draw, settle, recover, requested }) => {
       const trial = fixture("pebble", { blade: 1, secretion: 1, antenna: 1 });
       draw(trial); await settle();
-      assert.equal(draw(trial).some(call => call.image.calls?.length), false);
+      assert.equal(draw(trial).some(call => call.image.src === unitActionArtPose(trial.agents[0], trial.time).animation.image), false);
       const before = requested.length; recover();
       draw(trial); await settle(); assert.equal(requested.length, before, "no retry loop each frame");
       now += 2001; draw(trial); await settle();
@@ -131,19 +137,19 @@ test("failed art retries after the bounded wall-clock delay and recovers without
 });
 
 
-test("representative deaths advance after frozen lethal simulation without changing corpse state", async () => {
-  await harness(async ({ draw, settle }) => {
+test("authored deaths advance after frozen lethal simulation without changing corpse state", async () => {
+  await harness(async ({ draw, settle, stage }) => {
     for (const tribe of tribes) {
       const trial = fixture(tribe, { blade: 1 }, 1);
       draw(trial, 1000); await settle(); draw(trial, 1100);
       trial.agents[1].health = 0; trial.result = () => ({ reason: "death" });
+      await stage.prepare(trial);
       const before = JSON.stringify(trial.agents[1]);
-      const frames = [];
+      const frames = [], animation = unitActionArtDefinition(trial.agents[1]).actions.death;
       for (let index = 0; index < 5; index++) {
-        const sprite = draw(trial, 1200 + index * 100).find(call => paths(call.image).some(path => path.includes("CombatDeathV1/")));
-        assert.ok(sprite); assert.equal(sprite.matrix[0], -1);
-        const sheet = sprite.image.calls.find(call => call.image.src?.includes("CombatDeathV1/"));
-        frames.push(sheet.args.slice(0, 2).join(","));
+        const sprite = draw(trial, 1200 + index * 100).find(call => call.image.src === animation.image);
+        assert.ok(sprite); assert.equal(sprite.matrix[0], unitFrameMirror(animation.sourceFacing, -1) ? -1 : 1);
+        frames.push(sprite.args.slice(0, 2).join(","));
       }
       assert.ok(new Set(frames).size > 1, "death frame advances on stage clock");
       assert.equal(JSON.stringify(trial.agents[1]), before);
@@ -152,18 +158,17 @@ test("representative deaths advance after frozen lethal simulation without chang
 });
 
 
-test("bean idle uses intact canonical root or antenna art with metadata preserved", async () => {
+test("bean idle uses its complete root or antenna clip with metadata preserved", async () => {
   await harness(async ({ draw, settle }) => {
     for (const key of ["antenna", "feet"]) for (const side of [0, 1]) {
       const trial = fixture("bean", { [key]: 1, dnaGather: true }, side); trial.time = 0;
       const before = JSON.stringify(trial.agents[side]);
       draw(trial); await settle();
-      const sprite = draw(trial).find(call => call.image.calls?.length);
-      assert.ok(sprite, key + " idle is composed");
-      const sources = paths(sprite.image);
-      assert.ok(sources.includes("DesignAssets/Units/BaseParts/body.png"));
-      assert.ok(sources.includes(key === "feet" ? "DesignAssets/Units/Parts/bean-root-rig.png" : "DesignAssets/Units/Parts/antenna-1.png"));
-      assert.equal(sprite.matrix[0], side ? -1 : 1);
+      const animation = unitActionArtPose(trial.agents[side], trial.time).animation;
+      const sprite = draw(trial).find(call => call.image.src === animation.image && (call.matrix[4] > 520) === !!side);
+      assert.ok(sprite, key + " authored idle is played");
+      assert.equal(sprite.image.calls, undefined);
+      assert.equal(sprite.matrix[0], unitFrameMirror(animation.sourceFacing, side ? -1 : 1) ? -1 : 1);
       assert.equal(JSON.stringify(trial.agents[side]), before);
     }
   });

@@ -1,4 +1,5 @@
 import { nestGrowthAnimation } from "./nest-growth.mjs";
+import { createEffectRendering } from "./effect-rendering.mjs";
 
 export const STRUCTURE_EFFECT_ASSETS = Object.freeze({
   ring: "DesignAssets/Effects/LevelUp/ring.png",
@@ -76,6 +77,7 @@ export function structureEffectPose(effect, time, reducedMotion) {
 
 export function createStructureEffectRendering(createSurface) {
   const surface = createSurface(512, 512), layer = surface.getContext("2d", { willReadFrequently: true });
+  const rendering = createEffectRendering(createSurface, 256 * 1024);
   const measurements = new WeakMap();
 
   function measure(sprite, frame) {
@@ -121,7 +123,7 @@ export function createStructureEffectRendering(createSurface) {
     context.save();
     context.globalAlpha *= pose.opacity;
     context.imageSmoothingEnabled = true;
-    if (pose.type !== "complete") context.filter = pose.type === "destroy" ?
+    const filter = pose.type === "complete" ? null : pose.type === "destroy" ?
       "brightness(.42) sepia(1) saturate(2)" : "brightness(.55) sepia(1) saturate(12) hue-rotate(320deg)";
     if (sprites.ring?.complete && sprites.ring.naturalWidth) {
       context.save();
@@ -129,10 +131,14 @@ export function createStructureEffectRendering(createSurface) {
       context.beginPath();
       context.rect(centerX - ringWidth / 2, foreground ? floor : floor - ringHeight / 2, ringWidth, ringHeight / 2);
       context.clip();
-      context.drawImage(sprites.ring, centerX - ringWidth / 2, floor - ringHeight / 2, ringWidth, ringHeight);
+      const image = filter && rendering.frame(sprites.ring, 0, 0, sprites.ring.naturalWidth, sprites.ring.naturalHeight, filter);
+      if (filter) context.filter = image ? "none" : filter;
+      context.drawImage(image || sprites.ring, centerX - ringWidth / 2, floor - ringHeight / 2, ringWidth, ringHeight);
       context.restore();
     }
     if (foreground && sprites.sparkle?.complete && sprites.sparkle.naturalWidth) {
+      const image = filter && rendering.frame(sprites.sparkle, 0, 0, sprites.sparkle.naturalWidth, sprites.sparkle.naturalHeight, filter);
+      if (filter) context.filter = image ? "none" : filter;
       const count = pose.type === "damage" ? 4 : 8;
       for (let index = 0; index < count; index++) {
         const delay = pose.reducedMotion ? 0 : index % 3 * .045;
@@ -144,7 +150,7 @@ export function createStructureEffectRendering(createSurface) {
         const size = Math.max(3, Math.min(bodyWidth, bodyHeight) * (.055 + .04 * Math.sin(phase * Math.PI)));
         context.save();
         context.globalAlpha *= Math.sin(phase * Math.PI);
-        context.drawImage(sprites.sparkle, px - size / 2, py - size / 2, size, size);
+        context.drawImage(image || sprites.sparkle, px - size / 2, py - size / 2, size, size);
         context.restore();
       }
     }

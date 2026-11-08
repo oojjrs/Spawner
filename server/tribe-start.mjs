@@ -24,5 +24,5 @@ export function startingWorkerDna(tribe = "bean") {
     return { gene: gene.id, grade: gene.grade, rotation: 0 };
   }), 1);
   if (!pieces) throw new Error("시작 일꾼 DNA가 1레벨 보드에 맞지 않습니다.");
-  return { version: 5, level: 1, budget: 30, pieces };
+  return { version: 6, level: 1, budget: 30, pieces };
 }

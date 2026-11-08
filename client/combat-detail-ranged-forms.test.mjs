@@ -80,11 +80,11 @@ test("unsupported species and missing actors do not acquire an invented projecti
 test("an actual mixed-build simulation launch renders without changing combat history or state", () => {
   const settings = { left: { key: "pebble", organs: { attack: 1, ranged: 1 }, counts: {} },
     right: { key: "bean", organs: { attack: 1 }, counts: {} }, distance: 2, random: false,
-    rules: { maxSeconds: .7 } };
+    rules: { maxSeconds: 10 } };
   const trial = createSimulationTrial(settings), control = createSimulationTrial(settings);
   const cursor = createCombatVfxCursor(), detail = createDetailCombatVfx();
   detail.consume(cursor.consume(trial.vfx, 0), 0);
-  trial.advance(.31); control.advance(.31);
+  for (let step = 0; !trial.vfx.events.some(event => event.kind === "shoot") && step < 200; step++) { trial.advance(.05); control.advance(.05); }
   const shot = trial.vfx.events.find(event => event.kind === "shoot");
   assert.ok(shot); assert.equal(trial.agents[0].stats.melee, true); assert.equal(trial.agents[0].stats.ranged, true);
   assert.equal(unitRangedAppearance(trial.agents[0]), null);

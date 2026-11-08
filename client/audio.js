@@ -3,6 +3,9 @@
   ...globalThis.SpawnerCombatAudio.sources,
   ...globalThis.SpawnerMovementAudio?.sources,
   "click": "DesignAssets/Audio/ui-click.wav",
+  "dna-place": "DesignAssets/Audio/DnaV2/dna-place.wav",
+  "dna-remove": "DesignAssets/Audio/DnaV2/dna-remove.wav",
+  "dna-rotate": "DesignAssets/Audio/DnaV2/dna-rotate.wav",
   "discovery": "DesignAssets/Audio/new-discovery.mp3",
   "footstep": "DesignAssets/Audio/bean-footstep.mp3",
   "seed-eject": "DesignAssets/Audio/nest-seed-eject.mp3",
@@ -127,6 +130,7 @@
       discoverySource = null;
       stopWorld();
       stopWelcome();
+      stopGroup("ui");
       lastPlayed.clear();
     }
 
@@ -354,6 +358,28 @@
       if (start(name, volume, false, group)) lastPlayed.set(key, context.currentTime);
     }
 
+    async function playDna(action) {
+      const name = "dna-" + action;
+      if (!Object.hasOwn(sources, name)) return;
+      if (!available()) await unlock();
+      if (!active || muted || failed || document.hidden) return;
+      try { await prepare([name]); } catch { return; }
+      if (!available()) return;
+      for (const voice of voices) if (voice.group === "ui" && voice.name === name) {
+        voice.source.stop();
+        voices.delete(voice);
+      }
+      const source = context.createBufferSource(), gain = context.createGain();
+      source.buffer = buffers.get(name);
+      gain.gain.value = 0.65;
+      source.connect(gain);
+      gain.connect(context.destination);
+      const voice = { source, gain, group: "ui", name };
+      voices.add(voice);
+      source.onended = () => { voices.delete(voice); source.disconnect(); gain.disconnect(); };
+      source.start();
+    }
+
     async function playClick() {
       if (!available()) await unlock();
       if (!active || muted || failed || document.hidden) return;
@@ -405,7 +431,7 @@
     document.addEventListener("click", event => {
       unlock(true);
       const target = event.target.closest?.("button, [role='button']");
-      if (!target || target === button || target.matches(":disabled") || target.closest("[aria-disabled='true'], [inert]")) return;
+      if (!target || target === button || target.matches(":disabled") || target.closest("[aria-disabled='true'], [inert], [data-dna-sound]")) return;
       playClick();
     }, true);
     document.addEventListener("pointerdown", () => unlock(true), true);
@@ -420,6 +446,6 @@
     music.update(null);
     updateButton();
     unlock();
-    return { available, prepare, play, playCombat, playWelcome, stopWelcome, playClick, setHarvest, setActive, setWorldVolume, stop, updateMusic: music.update, musicWaveform: music.waveform };
+    return { available, prepare, play, playCombat, playWelcome, stopWelcome, playClick, playDna, setHarvest, setActive, setWorldVolume, stop, updateMusic: music.update, musicWaveform: music.waveform };
   } });
 })();

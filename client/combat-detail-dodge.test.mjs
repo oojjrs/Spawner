@@ -40,11 +40,11 @@ function modal({ unavailable = [], rejectDraw = false, version = 1, units, initi
   detail.commands = (...args) => drawnCommands = commands(...args);
   const sandbox = { state: { agents, rivals: [], simSeconds: 0, combatVfx: { version } },
     connection: { get simSeconds() { return sandbox.state.simSeconds; } },
-    Spawner: { combatViewLayout, drawUnitHealthRing() {}, drawUnitAttackRing, DETAIL_COMBAT_VFX_ASSETS, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade",
+    Spawner: { combatViewLayout, unitDisplaySize, drawUnitHealthRing() {}, drawUnitAttackRing, DETAIL_COMBAT_VFX_ASSETS, combatProfile: () => ({ attackInterval: 1 }), combatPrimary: () => "blade",
       CREATURE_ATTACK_ANIMATIONS: {}, drawDetailVitalEffect, drawDetailVfxCell: (...args) => !rejectDraw && drawDetailVfxCell(...args) },
     detailVfxImage: path => sandbox.detailVfxImages.get(path),
-    detailCombatVfx: detail, detailVfxImages: new Map(DETAIL_COMBAT_VFX_ASSETS.map(path => [path,
-      { path, complete: !unavailable.includes(path), naturalWidth: 1776 }])),
+    detailCombatVfx: detail, detailVfxRendering: null, detailVfxImages: new Map(DETAIL_COMBAT_VFX_ASSETS.map(path => [path,
+      { path, complete: !unavailable.includes(path), naturalWidth: 1776, naturalHeight: 1776 }])),
     selectedCombatUnits: () => agents, combatOpen: {}, evolutionPanel: { hidden: true }, welcome: { hidden: true },
     combatPanel: { open: true }, combatWatch: { id: "fight" }, combatSelected: "target", combatSummary: {},
     combatRoster: { dataset: { key: "source,target" }, children: [] }, combatHeading: {}, combatDetail: {}, combatGauge: {},
@@ -102,11 +102,11 @@ function worldScene(mode, tribe) {
   return { environment, units, source, target, at, resolve, rolls: () => rolls };
 }
 
-test("real melee and ranged misses label the blade-dominant defender without a false impact or state change", () => {
+test("real melee and ranged misses label the combined-form defender without a false impact or state change", () => {
   for (const mode of ["melee", "ranged"]) for (const tribe of ["bean", "spore", "pebble", "spring"]) {
     const live = worldScene(mode, tribe), control = worldScene(mode, tribe);
     const view = modal({ units: live.units, initialSnapshot: snapshotCombatVfx(live.environment, 0) });
-    assert.deepEqual(unitDisplayAttributes(live.target), { blade: 1 });
+    assert.deepEqual(unitDisplayAttributes(live.target), { blade: 1, secretion: 1, carapace: 1, antenna: 1 });
     assert.equal(live.target.stats.dna.evasion, 9);
     live.resolve(); control.resolve();
     const snapshot = snapshotCombatVfx(live.environment, live.at), before = structuredClone(snapshot);

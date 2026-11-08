@@ -37,7 +37,7 @@ test('secretion walk uses its own native frames without scaling to cell duration
   }
 });
 
-test('welcome player moves finish at native duration and wait for the next cell interval', () => {
+test('welcome traversal preserves native steps continuously and rests only after traversal', () => {
   for (const speed of [.25, .5, 2]) {
     const model = { unitStats: () => ({ speed }), unitMovementPosition };
     const options = { key: 'spore', attributes: {}, width: 480, size: 100, elapsedMs: 140,
@@ -47,7 +47,11 @@ test('welcome player moves finish at native duration and wait for the next cell 
     assert.equal(unitAnimationPose(motion.agent, 10.14).frame, 2);
     if (speed < 1) {
       const resting = welcomeTravelMotion(model, { ...options, elapsedMs: 1500, timeline: 11.5 });
-      assert.equal(unitAnimationPose(resting.agent, 11.5).action, 'idle');
+      assert.equal(unitAnimationPose(resting.agent, 11.5).action, 'walk');
+      assert.equal(resting.agent.moveStartedAt, 11);
+      assert.equal(resting.agent.moveAnimationStartedAt, 10);
+      const settled = welcomeTravelMotion(model, { ...options, elapsedMs: motion.durationMs, timeline: 10 + motion.durationMs / 1000, phase: 'idle' });
+      assert.equal(unitAnimationPose(settled.agent, 10 + motion.durationMs / 1000).action, 'idle');
     }
   }
 });

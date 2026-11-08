@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createContext, runInContext } from "node:vm";
 import { attributeCounts, COMBAT_ATTRIBUTE_KEYS } from "../server/attributes.mjs";
-import { hasCombatEvolution } from "./combat-attributes.mjs";
+import { hasCombatEvolution, combatAttributeKeys } from "./combat-attributes.mjs";
 
 const source = unitPresentationTestSource(readFileSync(new URL("./game.js", import.meta.url), "utf8"));
 
@@ -23,7 +23,7 @@ function rendering() {
   const canvas = () => ({ width: 512, height: 512, getContext: () => ({ clearRect() {}, drawImage() {} }) });
   const context = createContext({
     attributeCounts,
-    Spawner: { unitDisplayAttributes, unitRangedAppearance, COMBAT_ATTRIBUTE_KEYS, hasCombatEvolution },
+    Spawner: { unitDisplayAttributes, unitRangedAppearance, COMBAT_ATTRIBUTE_KEYS, hasCombatEvolution, combatAttributeKeys },
     viewport: { pixelRatio: 1 },
     Path2D: class {
       constructor() { this.paths = []; }
@@ -102,17 +102,20 @@ test("애니메이션 프레임과 이미지 크기가 바뀌면 윤곽을 갱�
 function commands() {
   let finishPreparation;
   const prepared = new Promise(resolve => { finishPreparation = resolve; });
-  const calls = [];
+  const calls = [], actionCalls = [];
+  const actions = Promise.withResolvers();
   const templates = [{ id: 1, slots: ["feet"] }];
   const context = createContext({
     connection: { busy: false, active: true, online: true, roomId: "room" },
-    state: { templates },
+    state: { templates, tribe: "bean" }, attributeCounts,
+    unitPresentation: { prepareActions: (agent, requested) => { actionCalls.push({ agent, requested }); return actions.promise; } },
     updateColonyPanel() {},
     prepareAgentTemplate: template => { calls.push({ template }); return prepared; },
     client: { async call(type, data) { calls.push({ type, data }); return { agentId: "unit" }; } }
   });
   runInContext(declaration("sendCommand"), context);
-  return { context, calls, finishPreparation };
+  return { context, calls, actionCalls, finishContours: finishPreparation, finishActions: actions.resolve,
+    finishPreparation: () => { finishPreparation(); actions.resolve(); } };
 }
 
 test("저장 설계의 탄생과 새 설계의 즉시 탄생 모두 이미지 준비 후에 생성 명령을 보낸다", async () => {
@@ -137,4 +140,22 @@ test("이미지 준비 중 다른 방으로 이동하면 이전 방의 탄생 �
   assert.equal(await result, null);
   assert.equal(command.calls.length, 1);
   assert.equal(command.context.connection.busy, false);
+});
+
+test("윤곽 준비 후에도 해당 외형의 필수 동작이 준비되기 전에는 탄생을 요청하지 않는다", async () => {
+  const command = commands();
+  const action = { type: "design", tribe: "spore", slots: ["blade"], birth: true };
+  const pending = command.context.sendCommand(action);
+  command.finishContours();
+  await Promise.resolve();
+  await Promise.resolve();
+  assert.equal(command.calls.length, 1);
+  assert.equal(command.context.connection.busy, true);
+  assert.equal(command.actionCalls.length, 1);
+  assert.equal(command.actionCalls[0].agent.tribe, "spore");
+  assert.equal(command.actionCalls[0].agent.attributes.blade, 1);
+  assert.deepEqual(Array.from(command.actionCalls[0].requested), ["idle", "walk", "carry", "harvest", "throw", "attack", "ranged", "hurt", "death"]);
+  command.finishActions();
+  assert.equal((await pending).agentId, "unit");
+  assert.equal(command.calls[1].data.action, action);
 });

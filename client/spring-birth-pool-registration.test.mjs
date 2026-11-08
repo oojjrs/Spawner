@@ -46,7 +46,7 @@ for (const [key, candidate] of Object.entries(changes)) {
   });
   test(`${key}: real DNA5, both facings, every frame boundary, idle exit and demand-only loading`, async () => {
     const dna = combatLabCombinationDna(key.split('/')[1]);
-    assert.equal(dna.version, 5); assert.ok(validateDna(dna, dna.level, dna.budget));
+    assert.equal(dna.version, 6); assert.ok(validateDna(dna, dna.level, dna.budget));
     const actor = { tribe: 'spring', dna, health: 20, birth: { startedAt: 0, readyAt: 1.79 } };
     assert.equal(unitActionArtDefinition(actor), UNIT_ACTION_ART[key]);
     const clip = UNIT_ACTION_ART[key].actions.birth, layers = clip.sceneLayers.layers;

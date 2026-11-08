@@ -2,7 +2,7 @@ import { worldSize } from "./world-size.mjs";
 import { isTreeFood } from "./food.mjs";
 import { attributeCounts } from "./attributes.mjs";
 import { LEGACY_RESOURCE_HABITATS } from "./resource-legacy.mjs";
-import { RESOURCE_ECONOMY, isEconomyHabitat } from "./economy.mjs";
+import { RESOURCE_ECONOMY, RESOURCE_NODE_AMOUNT, isEconomyHabitat, normalizeWorldResourceAmounts } from "./economy.mjs";
 import { resourceHabitatSuitability } from "./resource-habitats.mjs";
 
 export const REMOVED_RESOURCE_TYPES = Object.freeze(["honey-mushrooms","twigs","bark","root-fiber","spider-silk","water","tree-sap","leaf-mold","resin","beeswax","dry-leaves","tree-fruit","berry-bush","seed-pods","root-bulbs","nutrient-moss","meat","carapace","nutrients","sand","grass-fiber","iron-ore","copper-ore","quartz"]);
@@ -240,7 +240,15 @@ export function populateResourceNodes(room) {
       cell.amount += cell.initialAmount - initialAmount;
     }
   }
-  room.resourceVersion = 3;
+  if (!(room.resourceVersion >= 4)) {
+    normalizeWorldResourceAmounts(room.world);
+    for (const cell of room.food.values()) {
+      if (cell.dropped || cell.kind === "corpse" || !resourceDefinition(cell.resourceType)) continue;
+      cell.initialAmount = RESOURCE_NODE_AMOUNT;
+      if (cell.amount > 0) cell.amount = RESOURCE_NODE_AMOUNT;
+    }
+  }
+  room.resourceVersion = 4;
 }
 
 

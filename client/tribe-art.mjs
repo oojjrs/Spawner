@@ -5,14 +5,11 @@ import { createTribeAttributeAnimation, hasTribeAttributes } from "./attribute-a
 
 let boundsWorker = null, boundsWorkerFailed = false, boundsWorkerReady = Promise.resolve(), boundsWorkerId = 0, boundsWorkerCancel = null;
 const boundsWorkerResults = new Map();
+const boundsWorkerPending = new Map();
 function boundsWorkerSource() {
   self.onmessage = async event => {
-    const { id, source, width, height, blob } = event.data;
-    let bitmap;
+    const { id, width, height, bitmap } = event.data;
     try {
-      const response = blob ? null : await fetch(source);
-      if (response && !response.ok) throw new Error(String(response.status));
-      bitmap = await createImageBitmap(blob || await response.blob());
       const surface = new OffscreenCanvas(width, height);
       const context = surface.getContext("2d", { willReadFrequently: true });
       context.drawImage(bitmap, 0, 0);
@@ -28,21 +25,23 @@ function boundsWorkerSource() {
     finally { bitmap?.close(); }
   };
 }
-function prepareImageBounds(source, width, height) {
-  const key = source + "|" + width + "|" + height;
+function prepareImageBounds(sprite, width, height) {
+  const source = sprite.currentSrc || sprite.src;
+  const naturalWidth = sprite.naturalWidth, naturalHeight = sprite.naturalHeight;
+  const key = [source, naturalWidth, naturalHeight, width, height].join("|");
   if (boundsWorkerResults.has(key)) return Promise.resolve(boundsWorkerResults.get(key));
+  if (boundsWorkerPending.has(key)) return boundsWorkerPending.get(key);
   const pending = boundsWorkerReady.then(async () => {
-    const blob = source.startsWith("blob:") ? await fetch(source).then(response => {
-      if (!response.ok) throw new Error(String(response.status));
-      return response.blob();
-    }) : null;
+    if (boundsWorkerFailed || !globalThis.Worker || !globalThis.OffscreenCanvas) throw new Error();
+    if ((sprite.currentSrc || sprite.src) !== source || sprite.naturalWidth !== naturalWidth || sprite.naturalHeight !== naturalHeight) throw new Error();
+    const bitmap = await createImageBitmap(sprite, 0, 0, width, height);
+    if ((sprite.currentSrc || sprite.src) !== source || sprite.naturalWidth !== naturalWidth || sprite.naturalHeight !== naturalHeight) { bitmap.close(); throw new Error(); }
     return new Promise((resolve, reject) => {
-    if (boundsWorkerResults.has(key)) { resolve(boundsWorkerResults.get(key)); return; }
-    if (boundsWorkerFailed || !globalThis.Worker || !globalThis.OffscreenCanvas) { reject(); return; }
+    if (boundsWorkerFailed) { bitmap.close(); reject(); return; }
     if (!boundsWorker) {
       const url = URL.createObjectURL(new Blob(["(" + boundsWorkerSource.toString() + ")()"], { type: "text/javascript" }));
       try { boundsWorker = new Worker(url); }
-      catch { boundsWorkerFailed = true; reject(); return; }
+      catch { bitmap.close(); boundsWorkerFailed = true; reject(); return; }
       finally { URL.revokeObjectURL(url); }
     }
     const worker = boundsWorker, id = ++boundsWorkerId;
@@ -60,10 +59,11 @@ function prepareImageBounds(source, width, height) {
     worker.onmessage = event => { if (event.data.id === id) finish(event.data.result); };
     worker.onerror = () => finish(null);
     timer = setTimeout(() => finish(null), 15000);
-    try { worker.postMessage({ id, source: blob ? null : source, width, height, blob }); }
-    catch { finish(null); }
+    try { worker.postMessage({ id, width, height, bitmap }, [bitmap]); }
+    catch { bitmap.close(); finish(null); }
     });
-  });
+  }).finally(() => boundsWorkerPending.delete(key));
+  boundsWorkerPending.set(key, pending);
   boundsWorkerReady = pending.catch(() => {});
   return pending;
 }
@@ -95,7 +95,7 @@ export function createTribeArt(definitions, assetSource) {
     const height = frame ? size : sprite.naturalHeight || sprite.height;
     try {
       if (!source || !(sprite.naturalWidth > 0)) throw new Error();
-      const result = await prepareImageBounds(source, width, height);
+      const result = await prepareImageBounds(sprite, width, height);
       if ((sprite.currentSrc || sprite.src) !== source || sprite.naturalWidth !== naturalWidth || sprite.naturalHeight !== naturalHeight) return bounds(sprite, frame);
       let entry = imageBounds.get(sprite);
       if (!entry || entry.source !== source || entry.width !== sprite.naturalWidth || entry.height !== sprite.naturalHeight) {

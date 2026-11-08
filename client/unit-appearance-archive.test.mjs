@@ -13,7 +13,10 @@ const read = path => JSON.parse(readFileSync(new URL(path, root), "utf8"));
 const source = read("DesignAssets/Animations/UnitAppearanceV1/bean/1f/source.json");
 const motions = read("DesignAssets/Animations/UnitAppearanceV1/bean/1f/motions.json");
 const archive = motions.archivedBodyActions.harvest;
-const hashFile = path => createHash("sha256").update(readFileSync(new URL(path, root))).digest("hex");
+const hashFile = path => {
+  const bytes = readFileSync(new URL(path, root));
+  return createHash("sha256").update(path.endsWith(".json") ? bytes.toString("utf8").replace(/\r\n/g, "\n") : bytes).digest("hex");
+};
 const io = { hashFile, imageDimensions: path => imageDimensions(new URL(path, root)) };
 
 test("accepted bean1f body loop retains exact source, atlas and honest approval provenance", () => {

@@ -2,13 +2,13 @@ import { ATTRIBUTE_DNA } from "./dna.mjs";
 
 export function cloneDna(dna) {
   if (!dna) return null;
-  const value = dna.version === 5 ? dna : ATTRIBUTE_DNA.validate(dna);
+  const value = dna.version === 6 ? dna : ATTRIBUTE_DNA.validate(dna);
   if (!value) return null;
   return { version: value.version, pieces: value.pieces.map(ATTRIBUTE_DNA.clonePiece), budget: value.budget, level: value.level };
 }
 
 export function validateDna(dna, nestLevel, budget) {
-  if (!dna || dna.version !== 5 || !Array.isArray(dna.pieces)) return null;
+  if (!dna || dna.version !== 6 || !Array.isArray(dna.pieces)) return null;
   const organs = new Set();
   for (const piece of dna.pieces) {
     const gene = ATTRIBUTE_DNA.lookup.get(piece?.gene);
@@ -41,31 +41,19 @@ export function dnaUnitStats(dna, tribe) {
     combatStrength: 0, resistance: 1, movementMultiplier: 1, harvestSpeedMultiplier: 1 };
 }
 
-// The antenna rule applies to starting/legacy units as well as DNA designs.
-// Wild creatures have no nest and retain their own territorial movement rules.
 export function dnaCanMove(agent, x, y, colonies) {
-  if (agent.species && !agent.ownerId) return true;
-  const roaming = agent.dna ? agent.stats?.dna?.roaming : agent.attributes?.antenna > 0;
-  if (roaming) return true;
-  const homes = colonies.filter(colony => !agent.ownerId || colony.ownerId === agent.ownerId);
-  const distanceFromHome = (px, py) => Math.min(...homes.map(colony => {
-    const dx = Math.max(colony.x - px, 0, px - (colony.x + 4));
-    const dy = Math.max(colony.y - py, 0, py - (colony.y + 4));
-    return Math.hypot(dx, dy);
-  }));
-  const nextDistance = distanceFromHome(x, y);
-  if (nextDistance <= 3) return true;
-  // Old saves may already contain an unrestricted unit outside its home range.
-  // Let it approach home, but never move laterally or farther out there.
-  return Number.isFinite(agent.x) && Number.isFinite(agent.y) &&
-    nextDistance < distanceFromHome(agent.x, agent.y);
+  return Number.isInteger(x) && Number.isInteger(y) && x >= 0 && y >= 0;
+}
+
+export function dnaCanHunt(agent) {
+  return !agent.dna && !agent.stats?.dna || !!agent.stats?.dna?.hunting;
 }
 
 // The cheapest productive DNA design, not an empty non-gathering body.
 // Keep recovery checks tied to the current catalog and validation rules.
 export function basicGathererDna(nestLevel = 1) {
   const gene = ATTRIBUTE_DNA.lookup.get("gather");
-  const design = { version: 5, level: nestLevel, budget: 999999999,
+  const design = { version: 6, level: nestLevel, budget: 999999999,
     pieces: [{ gene: gene.id, grade: gene.grade, rotation: 0, q: 0, r: 0 }] };
   return validateDna(design, nestLevel, design.budget);
 }

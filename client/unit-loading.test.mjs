@@ -6,7 +6,7 @@ function surface(width, height) {
   const calls = [], context = new Proxy({ drawImage(image) { calls.push(image); }, getImageData() {
     return { data: new Uint8ClampedArray(width * height * 4).fill(255) };
   } }, { get: (target, key) => target[key] || (() => {}) });
-  return { calls, getContext: () => context };
+  return { width, height, calls, getContext: () => context };
 }
 
 test("one unit prepares independently while another reference remains pending", async () => {

@@ -81,7 +81,7 @@ for (const path of [paths[0], paths[1], paths[4], paths[5]]) test(path.name + " 
   const normal = fixture({ ...path, defense, rolls: [.99, .99, .99, .99] });
   const block = fixture({ ...path, defense, rolls: path.mode === "ranged" ? [.99, 0, 0] : [.99, .99, 0, 0] });
   assert.equal(block.outcome.kind, "block"); assert.equal(block.outcome.critical, true);
-  assert.ok(Math.abs(block.outcome.amount - normal.outcome.amount * .5 * combatProfile(block.source).criticalMultiplier) < 1e-8);
+  assert.ok(Math.abs(block.outcome.amount - normal.outcome.amount * (1 - combatProfile(block.target).blockReduction) * combatProfile(block.source).criticalMultiplier) < 1e-8);
   for (const [kind, rolls] of path.mode === "ranged" ? [["miss", [0]]] : [["miss", [0]], ["parry", [.99, 0]]]) {
     const avoided = fixture({ ...path, defense, rolls });
     assert.equal(avoided.outcome.kind, kind); assert.equal(avoided.outcome.critical, false);
@@ -91,7 +91,7 @@ for (const path of [paths[0], paths[1], paths[4], paths[5]]) test(path.name + " 
   const zeroDefense = path.target === "dna" ? { ...defense, blockPower: 100 } : { blockReduction: 1 };
   const fixed = fixture({ ...path, defense: zeroDefense, rolls: path.mode === "ranged" ? [.99, 0] : [.99, .99, 0] });
   assert.equal(fixed.outcome.kind, "block"); assert.equal(fixed.outcome.critical, false);
-  assert.ok(Math.abs(fixed.outcome.amount - normal.outcome.amount * .5) < 1e-8);
+  assert.ok(Math.abs(fixed.outcome.amount - normal.outcome.amount * (1 - combatProfile(fixed.target).blockReduction)) < 1e-8);
 });
 
 test("native critical probability uses the exact shared profile boundary", () => {
@@ -112,4 +112,24 @@ test("a lethal native critical retains the attack and death causal evidence", ()
   const result = fixture({ ...paths[0], health: 1, rolls: [.99, .99, .99, 0] });
   assert.equal(result.outcome.critical, true); assert.equal(result.target.health, 0);
   assert.equal(result.events.find(event => event.kind === "death").causeId, result.outcome.id);
+});
+
+for (const mode of ["melee", "ranged"]) test(mode + " reflection preserves incoming force before a successful block", () => {
+  const options = { source: "dna", target: "dna", mode, offense: { critical: 0 }, rolls: [.99, .99, .99, .99] };
+  const normal = fixture({ ...options, defense: { armor: 20, reflection: 20 } });
+  const blocked = fixture({ ...options, defense: { armor: 20, reflection: 20, block: 100, blockPower: 90 } });
+  const reflection = value => value.events.find(event => event.kind === "reflect" && event.sourceId === "target").amount;
+  assert.equal(blocked.outcome.kind, "block");
+  assert.ok(Math.abs(blocked.outcome.amount - normal.outcome.amount * .1) < 1e-8);
+  assert.ok(Math.abs(reflection(normal) - normal.outcome.amount * .2) < 1e-8);
+  assert.ok(Math.abs(reflection(blocked) - reflection(normal)) < 1e-8);
+});
+
+test("갑각 단독의 기본공격1도 방어 성공 후 반격을 시작한다", () => {
+  const defense = ATTRIBUTE_DNA.stats([{ gene: "carapace", grade: 2 }, { gene: "counter", grade: 3 }]);
+  const value = fixture({ source: "dna", target: "dna", mode: "melee", offense: { critical: 0 },
+    defense: { ...defense, block: 100, counter: 100 }, rolls: [.99, .99, 0, .99, 0] });
+  assert.equal(value.target.stats.dna.meleePower, 1);
+  assert.ok(value.events.some(event => event.kind === "counter" && event.sourceId === "target"));
+  assert.equal(value.target.attack.counter, true);
 });

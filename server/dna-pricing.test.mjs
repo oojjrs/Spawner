@@ -6,10 +6,9 @@ import { dnaUnitStats, validateDna } from "./dna-unit.mjs";
 import { createGame } from "./game.mjs";
 
 function worker(capacity) {
-  const positions=[[1,-3,0],[1,-2,0],[0,-1,-2],[1,-1,0],[0,0,-3],[2,3,-2],[2,3,-1],[2,3,0]];
-  const pieces=[{gene:'gather',grade:1,rotation:0,q:-2,r:-1},...positions.slice(0,capacity).map(([rotation,q,r])=>({gene:'capacity',grade:1,rotation,q,r}))];
+  const pieces=M.pack(['gather',...Array(7).fill('capacity'),'movement'].map(gene=>({gene,grade:1,rotation:0})),1).slice(0,capacity+1);
   assert.ok(pieces);
-  const dna={version:5,level:1,budget:0,pieces};
+  const dna={version:6,level:1,budget:0,pieces};
   assert.ok(validateDna(dna,1,100));
   return dna;
 }
@@ -65,7 +64,9 @@ test("운반7의 새 생산비46를 실제 차감하고 과거 지불액은 복�
 });
 
 test("기관1개와 운반8개는 기본비를 포함해51P이며 기존 채집 주기를 유지한다",()=>{
-  const dna=worker(8),cost=birthCost({dna},'bean'),rate=income(dna,3);
+  const pieces=M.pack(['gather',...Array(8).fill('capacity')].map(gene=>({gene,grade:1,rotation:0})),2);
+  assert.ok(pieces);const dna={version:6,level:2,budget:0,pieces};assert.ok(validateDna(dna,2,100));
+  const cost=birthCost({dna},'bean'),rate=income(dna,3);
   assert.equal(cost,51);
   assert.ok(Math.abs(rate-540/66)<1e-9);
   assert.equal(Math.ceil(cost/9)*66,396);
