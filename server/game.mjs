@@ -1516,7 +1516,7 @@ export function createGame(environment, colony, savedGame) {
     }
 
     function agentSpeed(agent) {
-      let speed = unitTravelSpeed(agent, agent.carrying);
+      let speed = 1;
       const capacity = unitCarryCapacity(agent, agent.carryingType);
       if (agent.carrying > capacity) speed *= 0.8;
       if (synergy(agent, ["strength", "feet"])) speed *= 1 + 0.5 * Math.min(1, agent.carrying / capacity);
@@ -1525,7 +1525,8 @@ export function createGame(environment, colony, savedGame) {
         speed *= 0.5;
         if (synergy(agent, ["feet", "shell"])) speed *= 3;
       }
-      return speed * unitTerrainSpeedMultiplier(agent, worldMap.terrain[agent.y * WORLD_SIZE + agent.x]);
+      return unitTravelSpeed(agent, agent.carrying, agent.carryingType,
+        speed * unitTerrainSpeedMultiplier(agent, worldMap.terrain[agent.y * WORLD_SIZE + agent.x]));
     }
 
     function spawnAgent(template, faction, newborn, birthCell) {

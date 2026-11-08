@@ -63,7 +63,7 @@ const NEUTRAL_STAT_CURVES = Object.freeze({
 export function neutralTierStat(field, tier) {
   const limits = NEUTRAL_STAT_LIMITS[field], curve = NEUTRAL_STAT_CURVES[field];
   if (!limits || !curve || !Number.isInteger(tier) || tier < 1 || tier > 19) throw new Error("Invalid neutral stat tier");
-  const low = Math.min(limits.min, limits.max, field === "movement" ? curve[0] : Infinity), high = Math.max(limits.min, limits.max);
+  const low = Math.min(limits.min, limits.max, field === "movement" ? curve[0] : Infinity), high = Math.max(limits.min, limits.max, field === "movement" ? curve[1] : -Infinity);
   const clamp = value => Math.max(low, Math.min(high, value));
   const first = clamp(curve[0] ?? limits.min), last = clamp(curve[1]);
   const value = first + (last - first) * ((tier - 1) / 18) ** curve[2];

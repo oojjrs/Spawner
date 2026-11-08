@@ -13,3 +13,10 @@ export const ATTRIBUTE_STAT_VALUES = Object.freeze({
   armorPenetration: .5,
   damageReduction: .45
 });
+
+export function unitMovementInterval(speed, restReduction) {
+  const period = 1 / speed;
+  if (!restReduction || period <= 1) return period;
+  const remaining = Math.max(0, 1 - restReduction / 100);
+  return 1 + (period - 1) * remaining;
+}

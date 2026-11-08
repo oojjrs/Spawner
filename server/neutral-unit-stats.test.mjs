@@ -26,7 +26,7 @@ test("기획서의 19종 33개 스탯 티어가 공용 능력치 배정에 보�
 
 test("모든 중립 스탯은 네 종족 기본값과 합법 DNA 최대 배치 사이에 있다", () => {
   for (const field of fields) {
-    const limits = NEUTRAL_STAT_LIMITS[field], low = field === "movement" ? .225 : Math.min(limits.min, limits.max), high = Math.max(limits.min, limits.max);
+    const limits = NEUTRAL_STAT_LIMITS[field], low = field === "movement" ? .225 : Math.min(limits.min, limits.max), high = field === "movement" ? 1.1 : Math.max(limits.min, limits.max);
     for (const [species, stats] of Object.entries(NEUTRAL_UNIT_STATS))
       assert.ok(stats[field] >= low && stats[field] <= high, species + ":" + field);
     const values = Array.from({ length:19 }, (_, index) => neutralTierStat(field, index + 1));

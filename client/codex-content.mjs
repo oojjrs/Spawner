@@ -77,7 +77,7 @@ const codexGeneDescriptions = Object.freeze({
   capacity: "채집기관이 있는 유닛의 운반 한도를 늘립니다. 한 번에 채집하는 양은 바뀌지 않습니다.",
   harvestSpeed: "채집기관의 채집 시간을 줄입니다. 여러 조각의 효과가 합산되며 채집량은 회당 1개입니다.",
   health: "최대 체력을 늘립니다.",
-  movement: "평상시 이동 속도를 높입니다. 실제 속도에는 지형과 운반 상태도 반영됩니다.",
+  movement: "이동 사이의 휴지 시간을 30% 줄여준다.",
   regeneration: "교전 상태가 아닐 때 체력을 서서히 회복합니다. 교전이 끝난 뒤에는 5초 후부터 회복합니다.",
   vision: "자기 시야의 반경을 넓힙니다. 전사는 안테나가 없어도 이 범위에서 적을 찾아 추격합니다.",
   blade: "근접 공격을 사용합니다. 시야 안의 적을 찾아 싸우며 안테나가 있으면 시야 밖까지 수색합니다. 전사는 도주하지 않습니다.",
@@ -124,7 +124,7 @@ export const CODEX_UNITS = Object.freeze([
   ...PLAYER_TRIBES.map(tribe => ({ ...tribe, player: true,
     image: tribe.starter || "DesignAssets/Units/starter-sprout-bean.png",
     description: ({ bean: "기본 능력과 성장 효율이 균형 잡힌 종족입니다.", spore: "원거리 공격력·공격 속도 성장이 뛰어납니다.",
-      pebble: "기본 방어력과 체력·방어 성장이 뛰어납니다. 둥지 성장 비용이 25% 적습니다.", spring: "근접 공격·회피·이동 성장이 뛰어납니다." })[tribe.key] })),
+      pebble: "기본 방어력과 체력·방어 성장이 뛰어납니다. 둥지 성장 비용이 25% 적습니다.", spring: "근접 공격·회피 성장이 뛰어납니다." })[tribe.key] })),
   ...CODEX_NEUTRAL_DESIGNS.map(design => ({ ...ENCOUNTER_TYPES.find(unit => unit.key === design.key), ...design,
     hostile: design.key === "spiny-back-beetle" || !!ENCOUNTER_TYPES.find(unit => unit.key === design.key)?.hostile,
     image: ENCOUNTER_TYPES.find(unit => unit.key === design.key)?.image || "DesignAssets/Units/spiny-back-beetle.png",
@@ -169,9 +169,10 @@ export function codexGeneDetails(gene, tribe) {
   if (gene.id === "blade") effects = [["근접 공격력", Number(stats.meleePower.toFixed(3))], ["근접 공속", Number(stats.meleeSpeed.toFixed(3)) + "회/초"]];
   if (gene.id === "secretion") effects = [["원거리 공격력", Number(stats.rangedPower.toFixed(3))], ["원거리 공속", Number(stats.rangedSpeed.toFixed(3)) + "회/초"]];
   if (gene.id === "gather") effects = [["채집량", stats.harvest + "개"], ["운반량", stats.capacity + "개"], ["채집 시간", stats.harvestTime + "초"]];
+  if (gene.id === "movement") effects = [];
   if (gene.id === "harvestSpeed") effects = [["채집 시간", "-" + (stats.harvestReduction - base.harvestReduction) + "%"]];
   const limits = {
-    harvestSpeed: "100%",
+    harvestSpeed: "100%", movement: "100%",
     speed: DNA_COMBAT_RULES.maxActionRate + "회/초", rangedSpeed: DNA_COMBAT_RULES.maxActionRate + "회/초",
     vision: "12칸", critical: "90%", parry: "60%", block: "90%", blockPower: "90%", evasion: "60%",
     accuracy: "60%", tenacity: "75%", counter: "100%", reduction: "40%", stun: "60%", stunTime: "1.5초",

@@ -3,6 +3,7 @@ import { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoard
 import { dnaCombatStats } from "./dna-combat-stats.mjs";
 import { tribeDnaStats } from "./tribe-dna-stats.mjs";
 import { RESOURCE_ECONOMY } from "./economy.mjs";
+import { unitMovementInterval } from "./unit-stats.mjs";
 
 export const ATTRIBUTE_DNA = (() => {
   const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};
@@ -42,11 +43,14 @@ export const ATTRIBUTE_DNA = (() => {
   function stats(pieces,tribe){
     const n=weights(pieces),c=counts(pieces),gather=!!c.gather,profile=tribeDnaStats(tribe);
     const resource=RESOURCE_ECONOMY.find(entry=>entry.tribe===tribe)||RESOURCE_ECONOMY[0],harvestReduction=gather?Math.min(100,10*(n.harvestSpeed||0)):0;
+    const movementRestReduction=Math.min(100,30*(c.movement||0)),baseMovement=profile.base.movement,baseLoadSpeed=gather?(profile.base.loadSpeed??75):0;
+    const movement=movementRestReduction?1/unitMovementInterval(baseMovement,movementRestReduction):baseMovement;
+    const loadSpeed=gather&&movementRestReduction?100/(unitMovementInterval(baseMovement*baseLoadSpeed/100,movementRestReduction)*movement):baseLoadSpeed;
     return {...dnaCombatStats(c,n,undefined,tribe),gatherCount:c.gather||0,antennaCount:c.antenna||0,
       capacity:gather?c.gather*(profile.base.gatherCapacity??1)+(n.capacity||0):0,harvest:gather?1:0,
-      harvestReduction,harvestTime:gather?resource.harvestSeconds*(100-harvestReduction)/100:0,movement:profile.base.movement+(gather?.11:.04)*(n.movement||0)*(profile.growth[gather?'gatherMovement':'movement']??profile.growth.movement??1),
+      harvestReduction,harvestTime:gather?resource.harvestSeconds*(100-harvestReduction)/100:0,movement,movementRestReduction,baseMovement,baseLoadSpeed,
       vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion||c.carapace),
-      lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed:gather?(profile.base.loadSpeed??75):0};
+      lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed};
   }
   function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,q:piece.q,r:piece.r};}
   function validate(value){

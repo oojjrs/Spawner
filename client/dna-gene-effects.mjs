@@ -65,6 +65,7 @@ export function dnaGeneTooltip(M,pieces,geneId,tribe,names) {
   const baseline=existing>=0?pieces.filter((_,index)=>index!==existing):pieces;
   const result=dnaGeneEffects(M,baseline,geneId,tribe);
   if(!result)return '';
+  if(geneId==='movement')return '이동 사이의 휴지 시간을 30% 줄여준다.';
   // Describe this piece's own effect, not the entire resulting unit. If its
   // organ is absent, use the same model with that organ enabled for the gain.
   const effects=result.missing.length?result.conditional:result.effects;

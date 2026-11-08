@@ -251,8 +251,9 @@ export function createCombat(environment) {
     agent.renderFromX = from.x; agent.renderFromY = from.y;
     agent.x = destination.x; agent.y = destination.y;
     agent.moveStartedAt = time;
-    const speed = agent.species ? agent.stats.speed : unitTravelSpeed(agent, agent.carrying);
-    agent.moveDuration = 1 / Math.max(.1, speed * unitTerrainSpeedMultiplier(agent, environment.world.terrain[agent.y * size + agent.x]));
+    const terrainSpeed = unitTerrainSpeedMultiplier(agent, environment.world.terrain[agent.y * size + agent.x]);
+    const speed = agent.species ? agent.stats.speed * terrainSpeed : unitTravelSpeed(agent, agent.carrying, agent.carryingType, terrainSpeed);
+    agent.moveDuration = 1 / Math.max(.1, speed);
     agent.escapeUntil = time + agent.moveDuration + COMBAT_ESCAPE_GRACE;
     environment.unitIndex?.update(agent);
     agent.nextActionAt = time + agent.moveDuration;

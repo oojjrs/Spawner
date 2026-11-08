@@ -3,7 +3,7 @@
   "radius": 6,
   "cells": 127,
   "sources": {
-    "server/dna.mjs": "afadc7a9644f99838dcb577f7eafadf9c0730aee0c00339628dcf4a1a913fe0d",
+    "server/dna.mjs": "3a3d42c932a6b0b15351ebd8fdcbc5c0bbc1ffae991c5f535ba099367b5c353c",
     "server/dna-board.mjs": "e8ca2af66e138e639f0f70323a250fca2a8740ca3a493d6fb940adee1bd0806e",
     "server/dna-combat-stats.mjs": "0c57d7c213cd307624bae9702ef9819acccc8ca7d69a3697f798257c197612d9",
     "server/tribe-dna-stats.mjs": "44e5ed71a7c9d87612ab9cdfd6cd956c3a08072efffeda8858a5c43e0292ac18",
@@ -160,36 +160,36 @@
     },
     "movement": {
       "min": 0.35,
-      "max": 3.65,
-      "upper": 3.65,
+      "max": 1,
+      "upper": 1,
       "descending": false,
       "exact": true,
       "perTribe": {
         "bean": {
           "min": 0.5,
-          "max": 3.25,
-          "upper": 3.25,
+          "max": 1,
+          "upper": 1,
           "exact": true,
           "witness": "movementGather"
         },
         "pebble": {
           "min": 0.35,
-          "max": 3.65,
-          "upper": 3.65,
+          "max": 1,
+          "upper": 1,
           "exact": true,
           "witness": "movementGather"
         },
         "spore": {
           "min": 0.5,
-          "max": 3.1125,
-          "upper": 3.1125,
+          "max": 1,
+          "upper": 1,
           "exact": true,
           "witness": "movementGather"
         },
         "spring": {
           "min": 0.9,
-          "max": 3.375,
-          "upper": 3.375,
+          "max": 1,
+          "upper": 1,
           "exact": true,
           "witness": "movementGather"
         }

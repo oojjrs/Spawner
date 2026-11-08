@@ -1,6 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { unitStats } from "./attributes.mjs";
+import { ATTRIBUTE_DNA } from "./dna.mjs";
+import { dnaUnitStats } from "./dna-unit.mjs";
 import { createGame } from "./game.mjs";
 import { createUtilityAI } from "./utility.mjs";
 import { colonyForagers } from "./colony-supply.mjs";
@@ -220,4 +222,28 @@ test("긴급 수급 인원은 나이 대신 빈손 출발과 만재 귀환의 �
   spring.bornAt=-132; bean.bornAt=-129;
   const selected=colonyForagers({simSeconds:0,agents:[spring,bean]},[{x:10,y:1}],[{x:0,y:1}]);
   assert.deepEqual([...selected],["2"]);
+});
+
+test("실제 DNA 이동은 조각당 휴지 30%를 줄이고 적재·지형·저장복원에서도 네 개 상한을 지킨다",()=>{
+  for(const [tribe,empty,loaded,mountain] of [["bean",.5,.4,.4],["spore",.5,.4,.4],["pebble",.35,.3,.6],["spring",.9,.275,.4]]){
+    for(const count of [0,1,2,3,4,5])for(const load of [0,1])for(const terrain of [4,7]){
+      const fixture=movementGame(tribe,0,[],terrain),{game}=fixture;
+      const pieces=ATTRIBUTE_DNA.pack(["gather","capacity",...Array(count).fill("movement")].map(gene=>({gene,grade:1,rotation:0})),2);
+      assert.ok(pieces);
+      const dna={version:6,level:2,budget:100,pieces};
+      fixture.agent.dna=dna;fixture.agent.stats=dnaUnitStats(dna,tribe);
+      fixture.agent.carrying=fixture.agent.stats.capacity*load;
+      fixture.agent.carryingType=load?({bean:"clay",spore:"tree",pebble:"pebbles",spring:"dew"})[tribe]:null;
+      nextStep(fixture);
+      const startedAt=fixture.agent.moveStartedAt;
+      assert.equal(fixture.agent.moveDuration,1);
+      game.restore(game.save());fixture.agent=game.agents[0];
+      nextStep(fixture);
+      const raw=(load?loaded:empty)*(terrain===7?mountain:1),remaining=[1,.7,.4,.1,0,0][count];
+      const expectedRest=(1/raw-1)*remaining;
+      assert.ok(Math.abs(fixture.agent.moveStartedAt-startedAt-1-expectedRest)<1e-7,tribe+":"+count+":"+load+":"+terrain);
+      assert.equal(fixture.agent.moveDuration,1);
+      assert.equal(fixture.agent.moveAnimationStartedAt,count>=4?startedAt:fixture.agent.moveStartedAt);
+    }
+  }
 });

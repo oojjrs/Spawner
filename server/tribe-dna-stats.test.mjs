@@ -66,35 +66,21 @@ test("설계 수치·실험실·실제 유닛이 같은 종족의 DNA 수치를 
 });
 
 
-test("몽돌의 이동 조각 증가량과 종족별 채집 기본값·실제 적재 속도가 일치한다",()=>{
-  const gains=Object.fromEntries(tribes.map(tribe=>[tribe,ATTRIBUTE_DNA.stats(pieces(['gather','movement']),tribe).movement-ATTRIBUTE_DNA.stats(pieces(['gather']),tribe).movement]));
-  for(const tribe of tribes.filter(tribe=>tribe!=='pebble'))assert.ok(gains.pebble>gains[tribe]);
-  close(ATTRIBUTE_DNA.stats(pieces(['gather','movement']),'pebble').movement,.482);
-  close(ATTRIBUTE_DNA.stats(pieces(['movement']),'pebble').movement,.384);
-  close(ATTRIBUTE_DNA.stats(pieces(['gather']),'spore').movement,.5);
-  close(ATTRIBUTE_DNA.stats(pieces(['gather','movement']),'spore').movement,.6045);
-  close(ATTRIBUTE_DNA.stats([],'spore').movement,.5);
-  for(const [tribe,empty,loaded] of [['bean',.5,.4],['spore',.5,.4],['pebble',.35,.3],['spring',.9,.275]]){
-    const dna={pieces:pieces(['gather','capacity'])},stats=dnaUnitStats(dna,tribe),agent={tribe,dna,stats};
-    close(unitTravelSpeed(agent,0,undefined),empty);close(unitTravelSpeed(agent,stats.capacity,undefined),loaded);
-  }
-  close(ATTRIBUTE_DNA.stats(pieces(['gather']),'spring').movement,.9);
-  close(ATTRIBUTE_DNA.stats(pieces(['gather','movement']),'spring').movement,.999);
-  close(ATTRIBUTE_DNA.stats(pieces(['movement']),'spring').movement,.946);
-  for(const tribe of tribes){
-    const genes=pieces(['gather']),stats=ATTRIBUTE_DNA.stats(genes,tribe);
-    assert.equal(stats.capacity,tribe==='pebble'?2:1);assert.equal(stats.harvest,1);assert.equal(stats.harvestTime,1);assert.equal(ATTRIBUTE_DNA.cost(genes),11);
-  }
-});
-
-test("기존 종족 이동 컨셉은 DNA의 빈짐·절반·만재와 이동 강화 후에도 유지된다",()=>{
+test("이속 조각은 종족·역할에 관계없이 휴지를 30%씩 줄이고 네 개에서 멈춘다",()=>{
   for(const [tribe,empty,loaded] of [["bean",.5,.4],["spore",.5,.4],["pebble",.35,.3],["spring",.9,.275]]){
-    for(const movement of [0,1,4]){
-      const dna={pieces:pieces(["gather","capacity",...Array(movement).fill("movement")])},stats=dnaUnitStats(dna,tribe),agent={tribe,dna,stats};
-      const expected=empty+movement*(tribe==="pebble"?.132:tribe==="spring"?.099:tribe==="spore"?.1045:.11);
-      close(stats.speed,expected);
-      for(const load of [0,.5,1])close(unitTravelSpeed(agent,stats.capacity*load,undefined),expected*(1+(loaded/empty-1)*load));
+    for(const gather of [false,true])for(const count of [0,1,2,3,4,5]){
+      const dna={pieces:pieces([...(gather?["gather","capacity"]:[]),...Array(count).fill("movement")])};
+      const stats=dnaUnitStats(dna,tribe),agent={tribe,dna,stats},remaining=[1,.7,.4,.1,0,0][count];
+      assert.equal(stats.movementRestReduction,Math.min(100,count*30));
+      close(1/stats.speed-1,(1/empty-1)*remaining);
+      for(const load of gather?[0,.5,1]:[0])for(const terrain of [1,.6,.4]){
+        const raw=(empty+(loaded-empty)*load)*terrain;
+        close(1/unitTravelSpeed(agent,stats.capacity*load,undefined,terrain)-1,(1/raw-1)*remaining);
+      }
+      if(gather){
+        close(stats.loadedSpeed,unitTravelSpeed(agent,stats.capacity,undefined));
+        assert.equal(stats.capacity,tribe==='pebble'?3:2);assert.equal(stats.harvest,1);assert.equal(stats.harvestTime,1);
+      }
     }
-    close(ATTRIBUTE_DNA.stats([],tribe).movement,empty);
   }
 });

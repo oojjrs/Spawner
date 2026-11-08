@@ -56,7 +56,7 @@ export function createUtilityAI(context) {
 
   function speed(agent, cell, carrying, straight, type) {
     const capacity = unitCarryCapacity(agent, type);
-    let value = unitTravelSpeed(agent, carrying, type);
+    let value = 1;
     if (carrying > capacity) value *= 0.8;
     if (synergy(agent, ["strength", "feet"])) value *= 1 + 0.5 * Math.min(1, carrying / capacity);
     if (straight >= 4 && synergy(agent, ["feet", "feet"])) value *= 1.75;
@@ -64,7 +64,7 @@ export function createUtilityAI(context) {
       value *= 0.5;
       if (synergy(agent, ["feet", "shell"])) value *= 3;
     }
-    return value * unitTerrainSpeedMultiplier(agent, terrainAt(cell.x, cell.y));
+    return unitTravelSpeed(agent, carrying, type, value * unitTerrainSpeedMultiplier(agent, terrainAt(cell.x, cell.y)));
   }
 
   function push(queue, entry) {

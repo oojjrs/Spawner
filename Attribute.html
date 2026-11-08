@@ -4101,7 +4101,14 @@ const ATTRIBUTE_STAT_VALUES = Object.freeze({
   damageReduction: .45
 });
 
-return { TRIBE_UNIT_STATS, ATTRIBUTE_STAT_VALUES };
+function unitMovementInterval(speed, restReduction) {
+  const period = 1 / speed;
+  if (!restReduction || period <= 1) return period;
+  const remaining = Math.max(0, 1 - restReduction / 100);
+  return 1 + (period - 1) * remaining;
+}
+
+return { TRIBE_UNIT_STATS, ATTRIBUTE_STAT_VALUES, unitMovementInterval };
 })();
 modules["server/tribe-dna-stats.mjs"] = (() => {
 const { TRIBE_UNIT_STATS } = modules["server/unit-stats.mjs"];
@@ -4483,6 +4490,7 @@ const { DNA_BOARD_SHAPES, dnaBoardCells, dnaPieceCells, dnaBoardTrace, dnaBoardP
 const { dnaCombatStats } = modules["server/dna-combat-stats.mjs"];
 const { tribeDnaStats } = modules["server/tribe-dna-stats.mjs"];
 const { RESOURCE_ECONOMY } = modules["server/economy.mjs"];
+const { unitMovementInterval } = modules["server/unit-stats.mjs"];
 
 const ATTRIBUTE_DNA = (() => {
   const colors = {organ:'#edba87',action:'#8fbbed',stat:'#87d7b8'};
@@ -4522,11 +4530,14 @@ const ATTRIBUTE_DNA = (() => {
   function stats(pieces,tribe){
     const n=weights(pieces),c=counts(pieces),gather=!!c.gather,profile=tribeDnaStats(tribe);
     const resource=RESOURCE_ECONOMY.find(entry=>entry.tribe===tribe)||RESOURCE_ECONOMY[0],harvestReduction=gather?Math.min(100,10*(n.harvestSpeed||0)):0;
+    const movementRestReduction=Math.min(100,30*(c.movement||0)),baseMovement=profile.base.movement,baseLoadSpeed=gather?(profile.base.loadSpeed??75):0;
+    const movement=movementRestReduction?1/unitMovementInterval(baseMovement,movementRestReduction):baseMovement;
+    const loadSpeed=gather&&movementRestReduction?100/(unitMovementInterval(baseMovement*baseLoadSpeed/100,movementRestReduction)*movement):baseLoadSpeed;
     return {...dnaCombatStats(c,n,undefined,tribe),gatherCount:c.gather||0,antennaCount:c.antenna||0,
       capacity:gather?c.gather*(profile.base.gatherCapacity??1)+(n.capacity||0):0,harvest:gather?1:0,
-      harvestReduction,harvestTime:gather?resource.harvestSeconds*(100-harvestReduction)/100:0,movement:profile.base.movement+(gather?.11:.04)*(n.movement||0)*(profile.growth[gather?'gatherMovement':'movement']??profile.growth.movement??1),
+      harvestReduction,harvestTime:gather?resource.harvestSeconds*(100-harvestReduction)/100:0,movement,movementRestReduction,baseMovement,baseLoadSpeed,
       vision:Math.min(12,1+.5*(n.vision||0)),scale:1+.01*pieces.length,hunting:!!c.antenna&&!!(c.blade||c.secretion||c.carapace),
-      lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed:gather?(profile.base.loadSpeed??75):0};
+      lifespan:AGENT_LIFESPAN+AGENT_LIFESPAN_BONUS*(c.lifespan||0),loadSpeed};
   }
   function clonePiece(piece){return {gene:piece.gene,rotation:piece.rotation,grade:piece.grade,q:piece.q,r:piece.r};}
   function validate(value){
@@ -4689,6 +4700,7 @@ function dnaGeneTooltip(M,pieces,geneId,tribe,names) {
   const baseline=existing>=0?pieces.filter((_,index)=>index!==existing):pieces;
   const result=dnaGeneEffects(M,baseline,geneId,tribe);
   if(!result)return '';
+  if(geneId==='movement')return '이동 사이의 휴지 시간을 30% 줄여준다.';
   // Describe this piece's own effect, not the entire resulting unit. If its
   // organ is absent, use the same model with that organ enabled for the gain.
   const effects=result.missing.length?result.conditional:result.effects;

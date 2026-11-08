@@ -10,7 +10,7 @@ const effect=(result,key)=>result.effects.find(value=>value.key===key);
 
 test('상한은 누적 효과로 판단하고 미배치 선행 속성 때문에 첫 조각을 막지 않는다',()=>{
   for(const gene of M.catalog)assert.equal(dnaGeneCapped(M,[],gene.id,'bean'),false,gene.id);
-  for(const [gene,count] of [['critical',3],['blockPower',3],['reduction',3],['comboSpeed',2],['focus',2],['areaPower',1],['harvestSpeed',10]]){
+  for(const [gene,count] of [['critical',3],['blockPower',3],['reduction',3],['comboSpeed',2],['focus',2],['areaPower',1],['harvestSpeed',10],['movement',4]]){
     const capped=Array.from({length:count},()=>piece(gene));
     assert.equal(dnaGeneCapped(M,capped,gene,'bean'),true,gene);
     assert.equal(dnaGeneCapped(M,capped.slice(1),gene,'bean'),false,gene);
@@ -30,7 +30,7 @@ for(const tribe of ['bean','spore','pebble','spring'])test(`${tribe}: 모든 40�
     for(const value of result.effects){close(value.before,before[value.key]);close(value.after,after[value.key]);close(value.delta,after[value.key]-before[value.key]);}
     for(const [key] of DNA_EFFECT_ROWS)if(Math.abs(after[key]-before[key])>1e-9)assert.ok(result.effects.some(value=>value.key===key),gene.id+': '+key);
     // One concise effect line replaces the old full-unit explanation.
-    assert.ok(text.includes('+')||text.includes('-')||text.includes('사냥 가능'),gene.id);
+    assert.ok(text.includes('+')||text.includes('-')||text.includes('사냥 가능')||gene.id==='movement',gene.id);
   }
 });
 
@@ -72,5 +72,11 @@ test('체력과 재생 hover에는 해당 조각 증가량만 남긴다',()=>{
     const row=effect(result,gene),delta=String(Number(row.delta.toFixed(3)));
     assert.equal(text,row.label+' +'+delta+row.unit);
     assert.doesNotMatch(text,/기본|추가|총회복|교전|출혈|→|크기/);
+  }
+});
+
+test('이속 조각 설명은 휴지 30% 감소를 안내한다',()=>{
+  for(const tribe of ['bean','spore','pebble','spring'])for(const count of [0,1,3,4]){
+    assert.equal(dnaGeneTooltip(M,Array.from({length:count},()=>piece('movement')),'movement',tribe,dnaGeneNames),'이동 사이의 휴지 시간을 30% 줄여준다.');
   }
 });
