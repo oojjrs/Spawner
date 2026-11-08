@@ -233,16 +233,16 @@ test("범례는 종류별 개수와 실효 변화량을 표시하고 칸 수 배
   root.dispatch('keydown',{key:'Delete'});assert.equal(rows().armor,undefined);root.dispatch('keydown',{key:'z',ctrlKey:true});assert.deepEqual(rows().armor,['×1',' (방어 +30)']);editor.load({version:6,pieces:[],level:4,budget:1000},false);assert.equal(legend.hidden,true);
 });
 
-test("전 속성은 배치 전 수치 툴팁을 제공하고 종족·undo·redo에 맞춰 갱신한다",t=>{
+test("전 속성은 간결한 조각 효과만 표시하고 종족·undo·redo에 맞춰 갱신한다",t=>{
   const {editor,root}=fixture(t);editor.context(4,0,false,'spring');
   const item=id=>root.querySelector('.dna-list').children.find(value=>value.dataset.gene===id);
-  for(const gene of ATTRIBUTE_DNA.catalog){assert.match(item(gene.id).title,/샘방울 기준/);assert.match(item(gene.id).title,/추가 시/);assert.doesNotMatch(item(gene.id).title,/undefined|NaN/);}
-  assert.match(item('power').title,/효과 활성에 필요: 칼날/);
-  selectGene(root,'blade');place(root);assert.doesNotMatch(item('power').title,/효과 활성에 필요/);assert.match(item('power').title,/\+9.6/);
-  root.dispatch('keydown',{key:'z',ctrlKey:true});assert.match(item('power').title,/효과 활성에 필요/);
-  root.dispatch('keydown',{key:'y',ctrlKey:true});assert.doesNotMatch(item('power').title,/효과 활성에 필요/);
-  editor.context(4,0,false,'pebble');assert.match(item('power').title,/몽돌 기준/);assert.match(item('power').title,/\+6.8/);
-  editor.context(4,0,true,'pebble');assert.equal(item('power').attributes['aria-disabled'],'true');assert.equal(item('power').disabled,false);assert.match(item('power').title,/읽기 전용/);
+  for(const gene of ATTRIBUTE_DNA.catalog){assert.ok(item(gene.id).title.split('\n').length<=3);assert.doesNotMatch(item(gene.id).title,/undefined|NaN|→|필요|비용|크기|기준/);}
+  assert.equal(item('power').title,'근접 공격력 +9.6');
+  selectGene(root,'blade');place(root);assert.equal(item('power').title,'근접 공격력 +9.6');
+  root.dispatch('keydown',{key:'z',ctrlKey:true});assert.equal(item('power').title,'근접 공격력 +9.6');
+  root.dispatch('keydown',{key:'y',ctrlKey:true});assert.equal(item('power').title,'근접 공격력 +9.6');
+  editor.context(4,0,false,'pebble');assert.equal(item('power').title,'근접 공격력 +6.8');
+  editor.context(4,0,true,'pebble');assert.equal(item('power').attributes['aria-disabled'],'true');assert.equal(item('power').disabled,false);assert.equal(item('power').title,'근접 공격력 +6.8\n읽기 전용');
 });
 
 test("고유색과 무관하게 배치 가능은 파랑·불가는 빨강과 텍스트로 구분한다",t=>{
