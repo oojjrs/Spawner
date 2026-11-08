@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createEncounters } from "./encounters.mjs";
+import { NEUTRAL_UNIT_STATS } from "./neutral-unit-stats.mjs";
 import { createCreatures } from "./creatures.mjs";
 
 const movement = [
@@ -11,7 +12,7 @@ const movement = [
   ["talon-owl", 2, 40], ["spring-keeper", 1.6, 30], ["lantern-keeper", 2.8, 30],
   ["old-garden-snail", .3, 45], ["walking-forest", .3, 60], ["white-paw", 3.2, 90],
   ["spiny-back-leader", 1.4, 120]
-];
+].map(([species, , rest]) => [species, NEUTRAL_UNIT_STATS[species].movement, rest]);
 const aggressive = new Set(["bubble-toad", "snare-vine", "spiny-back-beetle", "soil-boar", "vine-turtle",
   "shadow-weasel", "talon-owl", "white-paw", "spiny-back-leader"]);
 
@@ -48,7 +49,7 @@ function readyToRoam(f,species){
   if(aggressive.has(species)&&species!=="spiny-back-beetle"){
     Object.assign(f.agent,{x:104,renderFromX:104,returningHome:true});
   }
-  if(species==="soil-mole"){f.player.x=110;f.game.agents.push(f.player);}
+  if(species==="soil-mole"){f.player.x=101;f.game.agents.push(f.player);}
   if(species==="walking-forest")f.agent.stepCount=3;
 }
 
@@ -80,7 +81,7 @@ test("중립 생물 19종은 실제 이속을 유지하고 평상시에만 종�
 test("선공 생물 9종은 평상시 대기 중 추격하고 목표 소멸 후 배회 휴지나 연속 귀환으로 전환한다",()=>{
   for(const [species,speed,rest] of movement.filter(([key])=>aggressive.has(key))){
     const f=fixture(species);
-    f.agent.nextActionAt=720+rest;
+    f.agent.nextActionAt=720+rest; f.agent.stats.vision=12; f.player.x=104; f.agent.stats.combat={...f.agent.stats.combat,ranged:false};
     f.game.agents.push(f.player);
     for(let count=0;count<30&&f.agent.mode!=="walk";count++)tick(f,720+count*.1);
     assert.equal(f.agent.mode,"walk",species);
@@ -129,7 +130,7 @@ test("이전 저장은 진행 중인 이동 위치를 유지하면서 새 이속
 });
 
 test("비행 생물의 숲 감속과 지상 생물의 해안 감속은 실제 이동 시간에만 반영한다",()=>{
-  for(const [species,terrain,speed,rest] of [["flower-tail-bird",5,2,3],["spiny-back-beetle",2,1.2,18]]){
+  for(const [species,terrain,speed,rest] of [["flower-tail-bird",5,NEUTRAL_UNIT_STATS["flower-tail-bird"].movement,3],["spiny-back-beetle",2,NEUTRAL_UNIT_STATS["spiny-back-beetle"].movement,18]]){
     const f=fixture(species);f.room.world.terrain.fill(terrain);
     tick(f,720);
     assert.ok(Math.abs(f.agent.moveDuration-1/(speed*.8))<1e-10,species);

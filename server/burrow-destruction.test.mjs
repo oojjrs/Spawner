@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createCreatures } from "./creatures.mjs";
+import { unitStats } from "./attributes.mjs";
 import { createGame } from "./game.mjs";
 import { createRoom, saveRoom, restoreRoom } from "../client/room.mjs";
 
@@ -15,11 +16,12 @@ function fixture(type) {
   for (const [index, beetle] of room.creatureSystem.agents.entries()) Object.assign(beetle,
     { x:260 + index, y:260, homeX:260 + index, homeY:260, renderFromX:260 + index, renderFromY:260 });
   const agent = game.agents[0];
+  Object.assign(agent, { dna: null, slots: ["blade"], attributes: { blade: 1 }, stats: unitStats({ blade: 1 }, agent.tribe), health: 100 });
   Object.assign(agent, { x:burrow.x + burrow.width, y:burrow.y, renderFromX:burrow.x + burrow.width, renderFromY:burrow.y,
     moveStartedAt:0, moveDuration:0, moveBudget:0, mode:"fight", decisionPending:null, nextDecisionAt:100,
     knownEnemyIds:new Set([burrow.id]), combatDisposition:"aggressive", personality:{ boldness:1, aggression:1, curiosity:0 }, actionPriorities:["fight"],
     utility:{ action:"fight", target:{ id:burrow.id, key:burrow.id, kind:"burrow", x:burrow.x, y:burrow.y }, route:[] } });
-  agent.stats.speed = 1;
+  agent.stats.speed = 1; agent.stats.attack = 5;
   return { room, game, burrow, agent, system:room.creatureSystem };
 }
 
@@ -34,7 +36,7 @@ test("작은 굴 20·큰 굴 60의 체력을 적용하고 파괴 시 통행만 �
     assert.equal(system.receiveBurrowDamage(burrow.id, 5), 0);
     assert.equal(system.burrowAt(burrow.x, burrow.y), null);
     assert.deepEqual(system.agents.map(agent => agent.id), ids);
-    assert.ok(system.agents.every(agent => agent.health === 100));
+    assert.ok(system.agents.every(agent => agent.health === agent.stats.health));
   }
 });
 
@@ -88,7 +90,7 @@ test("공격 중 굴이 먼저 파괴되면 다른 굴로 피해를 넘기지 �
 
 test("실제 저장 월드에서 부분 피해와 파괴 상태를 복원하고 파괴된 굴의 재증식을 막는다", () => {
   const room = createRoom("굴 파괴 저장 확인", 731047), system = room.creatureSystem;
-  const small = system.burrows.find(burrow => burrow.type === "small"), large = system.burrows.find(burrow => burrow.type === "large");
+  const small = system.burrows.find(burrow => burrow.type === "small"), large = system.burrows.find(burrow => burrow.type === "large" && system.agents.some(agent => agent.burrowId === burrow.id));
   system.receiveBurrowDamage(small.id, 20); system.receiveBurrowDamage(large.id, 23);
   const survivors = system.agents.filter(agent => agent.burrowId === small.id).map(agent => agent.id);
   const saved = JSON.parse(JSON.stringify(saveRoom(room))), restored = restoreRoom(saved);

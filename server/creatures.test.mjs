@@ -6,7 +6,7 @@ import { BURROW_TYPES } from "./burrows.mjs";
 import { BEETLE_ANIMATIONS, beetleAnimationPose } from "./beetle-animation.mjs";
 import { worldSize } from "./world-size.mjs";
 import { CORPSE_LIFETIME } from "./corpses.mjs";
-import { combatDamage } from "./combat-stats.mjs";
+import { combatDamage, unitCombatStats } from "./combat-stats.mjs";
 import { createGame } from "./game.mjs";
 import { generateWorld, WORLD_GENERATION_VERSION } from "./world.mjs";
 import { createRoom, saveRoom, restoreRoom, snapshotRoom } from "../client/room.mjs";
@@ -14,7 +14,7 @@ import { createRoom, saveRoom, restoreRoom, snapshotRoom } from "../client/room.
 const attack = JSON.parse(readFileSync(new URL("../DesignAssets/Animations/spiny-back-beetle-attack.json", import.meta.url), "utf8"));
 
 function environment() {
-  return { seed: 7, simSeconds: 0, damageRandom: () => .5, world: { seed: 7, sites: [[100, 100]], terrain: new Uint8Array(320 * 320).fill(4), creatureDensity: new Uint8Array(320 * 320).fill(255),
+  return { seed: 7, simSeconds: 0, damageRandom: () => .5, combatRandom: () => .99, world: { seed: 7, sites: [[100, 100]], terrain: new Uint8Array(320 * 320).fill(4), creatureDensity: new Uint8Array(320 * 320).fill(255),
     hazards: new Uint8Array(320 * 320), burrows: [
       { id: "burrow:small:64130", type: "small", x: 130, y: 200, width: 1, height: 1, entrance: { x: 130, y: 201 } },
       { id: "burrow:large:64230", type: "large", x: 230, y: 200, width: 3, height: 1, entrance: { x: 231, y: 201 } }
@@ -32,7 +32,7 @@ function encounter() {
   const room = environment();
   const beetle = loneCreature(room);
   Object.assign(beetle, { x: 140, y: 140, homeX: 140, homeY: 140, renderFromX: 140, renderFromY: 140 });
-  const victim = { id: "1:1", x: 140, y: 140, health: 1000, combatDisposition: "peaceful", stats: { health: 1000, speed: 1, attack: 1, combatStrength: 20 }, moveStartedAt: 0, moveDuration: 0 };
+  const victim = { id: "1:1", x: 140, y: 140, health: 1000, attackReady: 1000, combatDisposition: "peaceful", stats: { health: 1000, speed: 1, attack: 1, combatStrength: 20 }, moveStartedAt: 0, moveDuration: 0 };
   const hits = [];
   room.games.set("first", { agents: [victim], receiveDamage(agent, amount) { hits.push({ time: room.simSeconds, amount }); agent.health -= amount; } });
   return { room, beetle, victim, hits };
@@ -67,13 +67,13 @@ test("대기 후 보행하고 이동 완료 뒤 다시 대기한다", () => {
   system.tick();
   assert.equal(beetle.mode, "walk");
   assert.equal(Math.abs(beetle.x - beetle.renderFromX) + Math.abs(beetle.y - beetle.renderFromY), 1);
-  assert.equal(beetle.moveDuration, 1 / 1.2);
+  assert.equal(beetle.moveDuration, 1 / unitCombatStats("spiny-back-beetle").speed);
   room.simSeconds += beetle.moveDuration;
   system.tick();
   assert.equal(beetle.mode, "idle");
 });
 
-test("턱이 닫히는 프레임에서 한 번만 피해를 주고 공격을 마친다", () => {
+test("턱이 닫히는 프레임에 발사하고 투사체 도달 때 한 번 피해를 준다", () => {
   const { room, beetle, victim, hits } = encounter();
   room.creatureSystem.tick();
   assert.equal(beetle.mode, "attack");
@@ -83,10 +83,12 @@ test("턱이 닫히는 프레임에서 한 번만 피해를 주고 공격을 마
   assert.equal(victim.health, health);
   room.simSeconds = activeAttack.hitAt;
   room.creatureSystem.tick();
-  room.creatureSystem.tick();
+  assert.equal(hits.length, 0);
+  const projectile = beetle.dnaProjectiles.find(entry => entry.launchedAt === activeAttack.hitAt);
+  room.simSeconds = projectile.hitAt; room.creatureSystem.tick(); room.creatureSystem.tick();
   assert.equal(hits.length, 1);
   assert.equal(victim.health, health - combatDamage(beetle, victim, .5));
-  room.simSeconds = activeAttack.endsAt;
+  room.simSeconds = Math.max(room.simSeconds, activeAttack.endsAt);
   room.creatureSystem.tick();
   assert.equal(beetleAnimationPose(beetle, room.simSeconds).action, "idle");
   assert.equal(beetle.attack, null);
@@ -102,17 +104,19 @@ test("공격 준비 중 전투 셀에서 사라진 개체는 맞지 않는다", 
   assert.equal(hits.length, 0);
 });
 
-test("공격 중 저장·복원해도 공격 시간과 단발 피해를 유지한다", () => {
-  const { room, hits } = encounter();
+test("공격 중 저장·복원해도 발사 시각과 투사체 도달의 단발 피해를 유지한다", () => {
+  const { room, beetle, hits } = encounter();
   room.creatureSystem.tick();
-  room.simSeconds = 0.3;
+  const hitAt = beetle.attack.hitAt;
+  room.simSeconds = hitAt - .001;
   room.creatureSystem = createCreatures(room, JSON.parse(JSON.stringify(room.creatureSystem.save())));
-  room.simSeconds = attack.hitTimeMs / 1000;
-  room.creatureSystem.tick();
+  room.simSeconds = hitAt; room.creatureSystem.tick();
+  assert.equal(hits.length, 0);
+  const arrival = room.creatureSystem.agents[0].dnaProjectiles.find(entry => entry.launchedAt === hitAt).hitAt;
+  room.simSeconds = arrival; room.creatureSystem.tick();
   assert.equal(hits.length, 1);
   room.creatureSystem = createCreatures(room, JSON.parse(JSON.stringify(room.creatureSystem.save())));
-  room.simSeconds = 0.8;
-  room.creatureSystem.tick();
+  room.simSeconds = arrival + .01; room.creatureSystem.tick();
   assert.equal(hits.length, 1);
 });
 
@@ -234,7 +238,8 @@ test("배회와 추격 중 둥지 안전 반경으로 들어가지 않는다", (
   const room = environment();
   const beetle = loneCreature(room);
   Object.assign(beetle, { x: 118, y: 100, homeX: 126, homeY: 100, renderFromX: 118, renderFromY: 100 });
-  const victim = { id: "1:1", x: 117, y: 100, health: 12, moveStartedAt: 0, moveDuration: 0 };
+  beetle.stats.vision = 8; beetle.stats.combat = { ...beetle.stats.combat, ranged: false };
+  const victim = { id: "1:1", x: 114, y: 100, health: 12, moveStartedAt: 0, moveDuration: 0 };
   room.games.set("first", { agents: [victim], receiveDamage() { assert.fail("안전 반경의 개체를 공격했다"); } });
   for (let step = 0; step < 600; step++) {
     room.simSeconds = step / 10;
@@ -256,7 +261,7 @@ test("이전 저장의 생존 개체는 체력 비율과 식별자를 유지하�
   assert.ok(beetle.burrowId);
   assert.equal(beetle.id, original.id);
   assert.equal(beetle.health / beetle.stats.health, 0.5);
-  assert.equal(beetle.stats.attack, 3);
+  assert.equal(beetle.stats.attack, unitCombatStats("spiny-back-beetle").attack);
   assert.ok(Math.hypot(beetle.homeX - 100, beetle.homeY - 100) >= 26);
   assert.equal(beetle.mode, "idle");
   assert.deepEqual(createCreatures(room, JSON.parse(JSON.stringify(system.save()))).save(), system.save());

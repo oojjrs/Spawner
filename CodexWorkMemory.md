@@ -1,3 +1,8 @@
+## 검사·복구 결과 [server-ai-complete-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:21:24+09:00; 사용자전체점검지시,확인·기록Codex /root. 출처현재채팅및명시담당도구근거.
+- 중립AI·습격10파일 beetle-pursuit,burrow-destruction,creature-combat,creature-movement,creatures,encounter-territory,nest-destruction,raid-cadence,raid-pressure,raids 고유91개통과. 현재종별시야/이속/출정체력스케일·소모형병력계약을반영하고시야경계/명중피해/복원불변을보존했다. 공유fixture영향13개2978ms,creatures4개366ms,강화3개106ms재검증. 담당범위형식/diff11e9e7통과. 삭제/skip0.
+
 ## 검사·복구 결과 [server-attack-complete-01a1b8b3]
 
 - 기록 시각 2026-11-08T13:21:24+09:00; 사용자전체점검지시,확인·기록Codex /root. 출처현재채팅및명시담당도구근거.

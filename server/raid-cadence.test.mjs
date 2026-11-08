@@ -49,13 +49,13 @@ test("상한을 넘는 구저장 습격을 보존하고 추가 출정만 대기�
   assert.equal(state.raidCooldowns[0].nextRaidAt,120);
 });
 
-test("수비 3마리와 경로 차단은 출정을 막고 해제 후 성공 시각에서만 예약한다",()=>{
+test("소진 병력은 재생성하지 않고 경로 차단 해제 후 성공 시각에서만 예약한다",()=>{
   for(const reason of ["guards","path"]){
     const {environment,state,actions,raids}=fixture(false);
-    if(reason==="guards")for(const agent of state.agents.slice(3))agent.health=0;
+    if(reason==="guards")for(const agent of state.agents)agent.health=0;
     else actions.walkable=()=>false;
     environment.simSeconds=900;raids.dispatch();assert.ok(state.agents.every(agent=>!agent.raid));
-    for(const agent of state.agents)agent.health=100;
+    if(reason==="guards"){ environment.simSeconds=910;raids.dispatch();assert.ok(state.agents.every(agent=>!agent.raid));continue; }
     actions.walkable=(x,y)=>x>=0&&y>=0&&x<320&&y<320;
     environment.simSeconds=910;raids.dispatch();
     assert.equal(state.agents.filter(agent=>agent.raid).length,1);

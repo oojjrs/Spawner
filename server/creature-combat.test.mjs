@@ -33,6 +33,7 @@ function fixture(species, indexed) {
   assert.ok(agent, species);
   Object.assign(agent, { x: 100, y: 100, homeX: 100, homeY: 100, renderFromX: 100, renderFromY: 100,
     mode: "idle", moveStartedAt: 720, moveDuration: 0, nextActionAt: 720 });
+  agent.stats.vision = 8;
   if (indexed) room.unitIndex = createUnitIndex(room);
   return { room, game, agent, hits, indexed };
 }

@@ -1,5 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { unitStats } from "./attributes.mjs";
+import { applyRaidCombatScale } from "./raid-combat-scale.mjs";
 import { createGame } from "./game.mjs";
 import { createCreatures } from "./creatures.mjs";
 import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
@@ -81,6 +83,8 @@ test("습격한 딱정벌레는 인접한 둥지를 공격 프레임에 한 번 
   Object.assign(beetle, { x: 45, y: 42, renderFromX: 45, renderFromY: 42, mode: "idle",
     moveStartedAt: 180, moveDuration: 0, nextActionAt: 180,
     raid: { colonyId: 1, phase: "active", departedAt: 180, activeUntil: 240 } });
+  applyRaidCombatScale(beetle, beetle.raid.departedAt);
+  const remaining = game.nest.health - beetle.stats.attack;
   room.simSeconds = 180;
   room.creatureSystem.tick();
   assert.equal(beetle.mode, "attack");
@@ -90,10 +94,10 @@ test("습격한 딱정벌레는 인접한 둥지를 공격 프레임에 한 번 
   assert.equal(game.nest.health, 100);
   room.simSeconds += 0.001;
   room.creatureSystem.tick();
-  assert.equal(game.nest.health, 97);
+  assert.equal(game.nest.health, remaining);
   room.creatureSystem.tick();
-  assert.equal(game.nest.health, 97);
-  game.receiveNestDamage(97);
+  assert.equal(game.nest.health, remaining);
+  game.receiveNestDamage(remaining);
   room.creatureSystem.tick();
   assert.ok(!beetle.raid);
   assert.deepEqual([beetle.homeX, beetle.homeY], [beetle.x, beetle.y]);
@@ -108,6 +112,7 @@ test("군락 유닛도 다른 군락의 둥지에 접근해 정해진 공격 프
   enemy.agents.splice(0);
   game.agents.splice(1);
   const agent = game.agents[0], target = enemy.nest;
+  Object.assign(agent, { dna: null, combatDisposition: "aggressive", slots: ["blade"], attributes: { blade: 1 }, stats: unitStats({ blade: 1 }, agent.tribe), health: 100 });
   Object.assign(agent, { x: 49, y: 42, renderFromX: 49, renderFromY: 42, moveStartedAt: 0, moveDuration: 0,
     mode: "fight", moveBudget: 0, nextDecisionAt: 100, decisionPending: null, knownEnemyIds: new Set([target.id]),
     utility: { action: "fight", target: { id: target.id, kind: "nest", x: target.x, y: target.y, key: target.id }, route: [] } });
@@ -136,6 +141,6 @@ test("대상 종류가 없는 이전 유닛 공격은 취소하고 공통 근접
   game.prepare(10.3);
   game.tick(0);
   assert.equal(target.health, 100);
-  assert.equal(agent.health, 100);
+  assert.equal(agent.health, agent.stats.health);
   assert.notEqual(agent.attack?.hit, true);
 });

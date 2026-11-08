@@ -1,3 +1,4 @@
+import { NEUTRAL_UNIT_STATS } from "./neutral-unit-stats.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createEncounters } from "./encounters.mjs";
@@ -81,7 +82,7 @@ test("이전 저장에서 영역 밖에 있는 개체는 걸어서 귀환하며 
   f.agent = f.system.agents[0];
   assert.equal(f.agent.x, 119);
   assert.equal(f.agent.returningHome, true);
-  assert.equal(f.agent.stats.vision, 4);
+  assert.equal(f.agent.stats.vision, NEUTRAL_UNIT_STATS["soil-boar"].vision);
   for (let tick = 0; tick < 40 && f.agent.returningHome; tick++)
     advance(f, Math.max(.25, f.agent.nextActionAt - f.room.simSeconds));
   assert.equal(f.agent.returningHome, false);
@@ -99,7 +100,7 @@ test("평화형 동물 6종과 비선공 유니크 4종은 기존 배회·대기
     assert.equal(f.agent.x, 110, species);
     assert.equal(f.agent.y, species === "soil-mole" ? 100 : 99, species);
     assert.equal(f.agent.returningHome, undefined, species);
-    assert.equal(f.agent.stats.vision, radius, species);
+    assert.equal(f.agent.stats.vision, NEUTRAL_UNIT_STATS[species].vision, species);
   }
 });
 
@@ -128,17 +129,17 @@ test("선공종의 감지는 축소한 별도 수치를 적용하고 이전 맵�
   for (const [species, radius, detection] of [["soil-boar", 14, 4], ["bubble-toad", 10, 3], ["vine-turtle", 4, 3],
     ["shadow-weasel", 18, 5], ["snare-vine", 4, 2], ["talon-owl", 22, 6], ["white-paw", 24, 6], ["spiny-back-leader", 16, 5]]) {
     const f = fixture(species, radius);
-    assert.equal(f.agent.stats.vision, detection, species);
+    assert.equal(f.agent.stats.vision, NEUTRAL_UNIT_STATS[species].vision, species);
   }
   for (const [species, radius, detection] of [["soil-boar", 14, 4], ["white-paw", 24, 6]]) {
     const f = fixture(species, radius);
-    f.player.x = 100 + detection + 1;
+    f.player.x = 100 + Math.ceil(NEUTRAL_UNIT_STATS[species].vision) + 1;
     f.game.agents.push(f.player);
     f.system.tick();
     assert.equal(f.agent.x, 99, species);
     assert.equal(f.agent.warningUntil, null, species);
     position(f, 100, 100);
-    f.player.x = 100 + detection;
+    f.player.x = 100 + Math.floor(NEUTRAL_UNIT_STATS[species].vision);
     f.system.tick();
     if (species === "soil-boar") advance(f, 1);
     assert.equal(f.agent.x, 101, species);

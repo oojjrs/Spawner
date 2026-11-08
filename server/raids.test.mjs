@@ -34,6 +34,7 @@ function start(fixture) {
   assert.ok(agent);
   record.nextRaidAt = first + 1000;
   fixture.system.save().raidCooldowns.find(entry => entry.colonyId === agent.raid.colonyId).nextRaidAt = first + 1000;
+  fixture.victim.x = fixture.victim.y = 0;
   return agent;
 }
 
@@ -87,6 +88,7 @@ test("이동 경로가 없으면 출발하지 않고 통로가 열리면 실제 
   const first = system.save().burrows[0].nextRaidAt; advance(room, system, first);
   assert.ok(!system.agents.some(agent => agent.raid));
   room.world.terrain[101 * 320 + 125] = 4;
+  setup.victim.x = setup.victim.y = 0;
   advance(room, system, first + 5);
   const agent = system.agents.find(agent => agent.raid); assert.ok(agent);
   until(room, system, () => agent.raid?.phase === "active", first + 200);
@@ -262,7 +264,7 @@ test("습격벌레는 출정·활동 중 붙잡혀도 공격과 반격이 끝나
     agent.raid.phase = phase;
     agent.raid.activeUntil = phase === "active" ? room.simSeconds : null;
     Object.assign(agent, { x: 120, y: 100, renderFromX: 120, renderFromY: 100, moveDuration: 0 });
-    Object.assign(victim, { x: agent.x, y: agent.y, combatDisposition: "aggressive" });
+    Object.assign(victim, { x: agent.x, y: agent.y, attackReady: 1000, combatDisposition: "aggressive" });
     const combat = createCombat(room);
     assert.equal(combat.engage(victim, agent, room.simSeconds), true, phase);
     combat.update(victim, room.simSeconds);
@@ -271,14 +273,20 @@ test("습격벌레는 출정·활동 중 붙잡혀도 공격과 반격이 끝나
     assert.equal(agent.combat?.id, combatId, phase);
     assert.equal(agent.raid.phase, phase, phase);
     assert.deepEqual({ x: agent.x, y: agent.y }, position, phase);
-    const hitAt = agent.attack.hitAt, endsAt = agent.attack.endsAt, before = victim.health;
+    until(room, system, () => agent.attack, room.simSeconds + 20);
+    const attack = agent.attack, hitAt = attack.hitAt, endsAt = attack.endsAt, before = victim.health;
     advance(room, system, hitAt - 1e-6);
     assert.equal(victim.health, before, phase);
     advance(room, system, hitAt);
     assert.equal(agent.combat?.id, combatId, phase);
     assert.equal(agent.attack.counter, false, phase);
+    if (attack.attackMode === "ranged") {
+      const projectile = agent.dnaProjectiles.find(entry => entry.launchedAt === hitAt);
+      assert.equal(victim.health, before, phase);
+      advance(room, system, projectile.hitAt);
+    }
     assert.ok(victim.health < before, phase);
-    advance(room, system, endsAt);
+    advance(room, system, Math.max(room.simSeconds, endsAt));
     assert.equal(agent.combat?.id, combatId, phase);
     assert.equal(agent.raid.phase, phase, phase);
     assert.deepEqual({ x: agent.x, y: agent.y }, position, phase);

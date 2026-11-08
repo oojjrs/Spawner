@@ -1,5 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { applyRaidCombatScale } from "./raid-combat-scale.mjs";
+import { NEUTRAL_UNIT_STATS } from "./neutral-unit-stats.mjs";
 import { createCreatures } from "./creatures.mjs";
 import { createUnitIndex } from "./unit-index.mjs";
 
@@ -15,8 +17,10 @@ function fixture(phase, health, indexed) {
   Object.assign(agent, { x: 10, y: 12, renderFromX: 10, renderFromY: 12, homeX: 25, homeY: 12,
     moveStartedAt: 720, moveDuration: 0, mode: "idle", nextActionAt: 738,
     raid: { colonyId: 1, phase, departedAt: 700, activeUntil: phase === "active" ? 750 : null } });
-  room.creatureSystem.receiveDamage(agent, 100 - health);
-  const target = { id: "unit", ownerId: "owner", x: 8, y: 12, renderFromX: 8, renderFromY: 12,
+  applyRaidCombatScale(agent, agent.raid.departedAt);
+  room.creatureSystem.receiveDamage(agent, agent.stats.health * (1 - health / 100));
+  agent.stats.vision = 8; agent.stats.combat = { ...agent.stats.combat, ranged: false };
+  const target = { id: "unit", ownerId: "owner", x: 6, y: 12, renderFromX: 6, renderFromY: 12,
     health: 100, attributes: {}, combatDisposition: "peaceful", moveStartedAt: 0, moveDuration: 0,
     stats: { health: 100, combatStrength: 20, speed: 1, vision: 4, attack: 1 } };
   game.agents.push(target);
@@ -29,6 +33,7 @@ function fixture(phase, health, indexed) {
   }
   if (phase === "returning") {
     room.creatureSystem = createCreatures(room, JSON.parse(JSON.stringify(room.creatureSystem.save())));
+    Object.assign(room.creatureSystem.agents.find(candidate => candidate.id === agent.id).stats, { vision: 8, combat: { ...agent.stats.combat, ranged: false } });
   }
   return { room, game, agent: room.creatureSystem.agents.find(candidate => candidate.id === agent.id), target, tick };
 }
@@ -40,7 +45,7 @@ test("생존 습격벌레는 체력과 이전 귀환 저장 여부에 관계없�
     assert.equal(f.agent.pursuitTargetId, f.target.id, phase + ":" + health + ":" + indexed);
     assert.equal(f.agent.mode, "walk");
     assert.deepEqual([f.agent.x, f.agent.y], [9, 12]);
-    assert.equal(f.agent.moveDuration, 1 / 1.2);
+    assert.equal(f.agent.moveDuration, 1 / NEUTRAL_UNIT_STATS["spiny-back-beetle"].movement);
     f.tick(720 + f.agent.moveDuration);
     assert.deepEqual([f.agent.x, f.agent.y], [8, 12]);
   }
@@ -52,10 +57,11 @@ test("이전 습격 귀환 저장은 활동 상태로 바뀌고 재저장에도 
     const saved = JSON.parse(JSON.stringify(f.room.creatureSystem.save()));
     f.room.creatureSystem = createCreatures(f.room, saved);
     const agent = f.room.creatureSystem.agents.find(agent => agent.id === f.agent.id);
+    agent.stats.vision = 8; agent.stats.combat = { ...agent.stats.combat, ranged: false };
     f.tick(720);
     assert.equal(agent.pursuitTargetId, f.target.id);
     assert.deepEqual([agent.x, agent.y], [9, 12]);
-    assert.equal(agent.health, 40);
+    assert.ok(Math.abs(agent.health - agent.stats.health * .4) < 1e-8);
     assert.equal(agent.raid.phase, "active");
     assert.equal(Object.hasOwn(agent.raid, "activeUntil"), false);
   }
@@ -66,7 +72,7 @@ test("습격벌레는 적을 놓치거나 옛 활동 시한이 지나도 출발 
   f.tick(720);
   f.game.agents = [];
   f.tick(f.agent.moveStartedAt + f.agent.moveDuration);
-  f.agent.nextActionAt = 1000;
+  Object.assign(f.agent, { x: 15, y: 12, renderFromX: 15, renderFromY: 12, moveDuration: 0, nextActionAt: 1000 });
   const position = [f.agent.x, f.agent.y];
   f.tick(900);
   assert.deepEqual([f.agent.x, f.agent.y], position);
@@ -83,7 +89,7 @@ test("습격벌레는 무효하거나 다른 진영인 목표를 추격하지 �
     if (invalid === "hidden") f.target.hidden = true;
     if (invalid === "birth") f.target.birth = { readyAt: 730 };
     if (invalid === "escape") f.target.escapeUntil = 730;
-    if (invalid === "distant") f.target.x = 4;
+    if (invalid === "distant") f.target.x = 0;
     if (invalid === "other") {
       f.game.agents = [];
       f.room.games.set("other", { ...f.game, agents: [f.target] });
