@@ -18,11 +18,20 @@
   const version = document.createElement("p");
   version.className = "release-notes-version";
   version.textContent = release.label;
-  const notes = document.createElement("ul");
-  for (const note of release.notes) {
-    const item = document.createElement("li");
-    item.textContent = note;
-    notes.append(item);
+  const history = document.createElement("div");
+  history.className = "release-history";
+  for (const entry of release.history || [release]) {
+    const section = document.createElement("section");
+    const heading = document.createElement("h3");
+    heading.textContent = entry.label;
+    const notes = document.createElement("ul");
+    for (const note of entry.notes) {
+      const item = document.createElement("li");
+      item.textContent = note;
+      notes.append(item);
+    }
+    section.append(heading, notes);
+    history.append(section);
   }
   const close = document.createElement("button");
   close.type = "button";
@@ -36,6 +45,15 @@
     const bounds = dialog.getBoundingClientRect();
     if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
   });
-  dialog.append(title, version, notes, close);
-  document.body.append(button, dialog);
+  dialog.append(title, version, history, close);
+  document.body.append(dialog);
+  const controls = document.getElementById("sound-controls");
+  function placeVersion() {
+    const target = document.body.dataset.screen === "entry" ? document.body : controls || document.body;
+    if (button.parentElement === target) return;
+    if (target === controls) target.prepend(button);
+    else target.append(button);
+  }
+  placeVersion();
+  new MutationObserver(placeVersion).observe(document.body, { attributes: true, attributeFilter: ["data-screen"] });
 })();

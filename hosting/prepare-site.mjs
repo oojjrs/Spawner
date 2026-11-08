@@ -14,7 +14,11 @@ export function prepareSite(destination, readSource, revision, assetDirectory, r
   const manifest = JSON.parse(readFileSync(join(destination, ".openai/hosting.json"), "utf8"));
   const sourceManifest = JSON.parse(readFileSync(join(root, ".openai/hosting.json"), "utf8"));
   if (manifest.project_id !== sourceManifest.project_id || manifest.static?.directory !== "dist") throw new Error("Spawner Site를 확인해 주세요.");
-  const release = createRelease(releaseInput, manifest.project_id, revision, new Date());
+  const previousRelease = join(destination, "dist/release.json");
+  const release = createRelease({ ...releaseInput,
+    history: JSON.parse(readSource("hosting/release-history.json").toString("utf8")),
+    previous_release: existsSync(previousRelease) ? JSON.parse(readFileSync(previousRelease, "utf8")) : null
+  }, manifest.project_id, revision, new Date());
   const html = readSource("Spawner.html").toString("utf8")
     .replace(/^  <script src="\.\/client\/local-assets\.js"><\/script>\r?\n/m, "");
   const pages = new Map([["Spawner.html", html]]);
