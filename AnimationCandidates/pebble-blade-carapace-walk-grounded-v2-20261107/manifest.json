@@ -35,7 +35,7 @@
   "loop": true,
   "pivotX": 256,
   "pivotY": 450,
-  "sourceFacing": "right",
+  "sourceFacing": "left",
   "sourceFrameRects": [
     [
       0,
@@ -212,32 +212,20 @@
       450
     ],
     [
-      54,
+      52,
       112,
-      460,
+      458,
       450
     ],
     [
-      53,
+      52,
       116,
-      460,
+      459,
       450
     ],
     [
-      53,
+      52,
       117,
-      460,
-      450
-    ],
-    [
-      53,
-      115,
-      459,
-      450
-    ],
-    [
-      53,
-      116,
       459,
       450
     ],
@@ -250,24 +238,36 @@
     [
       53,
       116,
-      460,
+      459,
       450
     ],
     [
       53,
-      116,
-      460,
+      115,
+      459,
       450
     ],
     [
-      53,
+      52,
       116,
-      460,
+      459,
+      450
+    ],
+    [
+      52,
+      116,
+      459,
+      450
+    ],
+    [
+      52,
+      116,
+      459,
       450
     ]
   ],
-  "sheetSHA256": "a702254359bade5a9ce12cb8f04d0cf8ad77fdeab8b5371fd971c79bb8a78136",
-  "previewSHA256": "7d88a2bcd6fcdedf3a5f4655e52d9629b5d8114258b8b0b0e547c9c2d87cddbc",
+  "sheetSHA256": "8903ce22ec9e7a175c782b9f1afb9c87bda548348ca68c7c3b99f6ad8acd3bd3",
+  "previewSHA256": "2076bac80485fa741f0c3acdd03013dc9ddde4fd7290c818fc8586c2ab37235a",
   "replaces": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-walk-v1-sheet.png",
   "runtimeEdited": false
 }

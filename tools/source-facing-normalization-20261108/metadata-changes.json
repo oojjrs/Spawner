@@ -1,0 +1,20 @@
+{
+  "status": "completed",
+  "forms": [
+    "pebble/blade-carapace",
+    "pebble/blade-carapace-antenna"
+  ],
+  "files": [
+    "client/blade-carapace-assets.mjs",
+    "client/antenna-combo-assets.mjs",
+    "DesignAssets/image-sizes.json",
+    "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+    "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+    "AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/manifest.json",
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-carapace/publication-manifest.json",
+    "scripts/register-blade-carapace.py",
+    "client/unit-preview-facing-data.js"
+  ],
+  "nativePixelFiles": 27,
+  "previewFiles": 23
+}

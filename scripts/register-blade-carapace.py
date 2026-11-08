@@ -68,7 +68,7 @@ def main():
             px = record.get('pivotX', px)
             py = record.get('pivotY', py)
             length = record.get('referenceLength', length)
-            clip = dict(image=dest.relative_to(ROOT).as_posix(), sourceFacing='right',
+            clip = dict(image=dest.relative_to(ROOT).as_posix(), sourceFacing=record.get('sourceFacing', manifest.get('sourceFacing', 'right')),
                 frameSize=width, frameHeight=height, columns=columns, frameCount=count,
                 durationsMs=record['durationsMs'], durationMs=sum(record['durationsMs']),
                 pivotX=px, pivotY=py, referenceLength=length, viewSize=length,

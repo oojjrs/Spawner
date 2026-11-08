@@ -29,7 +29,7 @@ test('all four blade+carapace forms expose six full-body clips and portraits, wi
       assert.equal(clip.durationsMs.length, clip.frameCount);
       assert.equal(clip.durationMs, clip.durationsMs.reduce((a, b) => a + b, 0));
       assert.equal(clip.loop, action === 'idle' || action === 'walk');
-      assert.equal(clip.sourceFacing, 'right');
+      assert.equal(clip.sourceFacing, source.sourceFacing || manifest.sourceFacing || 'right');
       assert.ok(clip.referenceLength > 0 && clip.viewSize === clip.referenceLength);
       assert.deepEqual(imageDimensions(resolve(root, clip.image)), [clip.frameSize * clip.columns, clip.frameHeight * Math.ceil(clip.frameCount / clip.columns)]);
     }
@@ -44,7 +44,7 @@ test('birth registration anchors the finished body, never the full scene bounds'
     assert.equal(birth.worldTravelIncludedInPixels, true);
     assert.equal(birth.sceneAnchor, 'final-body-floor');
     assert.ok(birth.referenceLength < definition.reference.referenceLength);
-    assert.ok(birth.pivotX > birth.frameSize / 2);
+    assert.ok(birth.sourceFacing === 'left' ? birth.pivotX < birth.frameSize / 2 : birth.pivotX > birth.frameSize / 2);
     assert.ok(birth.pivotY > birth.frameHeight / 2);
   }
   const spore = BLADE_CARAPACE_ACTION_ART['spore/blade-carapace'].actions.birth;

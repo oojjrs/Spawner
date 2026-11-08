@@ -14701,7 +14701,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -14717,7 +14717,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         220
       ],
       "durationMs": 1240,
-      "pivotX": 253.5,
+      "pivotX": 258.5,
       "pivotY": 451,
       "referenceLength": 393,
       "viewSize": 393,
@@ -14727,7 +14727,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14743,7 +14743,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           220
         ],
         "durationMs": 1240,
-        "pivotX": 253.5,
+        "pivotX": 258.5,
         "pivotY": 451,
         "referenceLength": 393,
         "viewSize": 393,
@@ -14752,7 +14752,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14768,7 +14768,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           110
         ],
         "durationMs": 880,
-        "pivotX": 254.5,
+        "pivotX": 257.5,
         "pivotY": 449,
         "referenceLength": 397,
         "viewSize": 397,
@@ -14777,7 +14777,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14793,7 +14793,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           230
         ],
         "durationMs": 980,
-        "pivotX": 231.0,
+        "pivotX": 281.0,
         "pivotY": 442,
         "referenceLength": 374,
         "viewSize": 374,
@@ -14803,7 +14803,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14819,7 +14819,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           240
         ],
         "durationMs": 1030,
-        "pivotX": 255.5,
+        "pivotX": 256.5,
         "pivotY": 449,
         "referenceLength": 381,
         "viewSize": 381,
@@ -14828,7 +14828,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14844,7 +14844,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 393.0,
+        "pivotX": 119.0,
         "pivotY": 438,
         "referenceLength": 170,
         "viewSize": 170,
@@ -14857,7 +14857,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14873,7 +14873,7 @@ const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           750
         ],
         "durationMs": 1940,
-        "pivotX": 254.5,
+        "pivotX": 257.5,
         "pivotY": 444,
         "referenceLength": 387,
         "viewSize": 387,
@@ -34972,7 +34972,7 @@ const BLADE_CARAPACE_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/BladeCarapaceV1/pebble/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -34998,7 +34998,7 @@ const BLADE_CARAPACE_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -35023,7 +35023,7 @@ const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -35052,7 +35052,7 @@ const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -35077,7 +35077,7 @@ const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -35102,7 +35102,7 @@ const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -35123,7 +35123,7 @@ const BLADE_CARAPACE_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 397,
+        "pivotX": 115,
         "pivotY": 440,
         "referenceLength": 141,
         "viewSize": 141,
@@ -35136,7 +35136,7 @@ const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -50308,6 +50308,8 @@ function creatureWalkPose(agent, time) {
   const animation = CREATURE_WALK_ANIMATIONS[agent.species];
   if (animation && agent.health > 0 && agent.combat?.position?.moving) {
     const elapsed = (time - agent.combat.position.moveStartedAt) * 1000;
+    if (!Number.isFinite(elapsed) || elapsed < 0) return null;
+    if (agent.species === "spring-keeper") return springKeeperFlightPose(agent, time);
     return { action: "walk", animation, frame: unitAnimationFrame(animation, elapsed) };
   }
   const elapsed = time - agent.moveStartedAt;
@@ -50355,12 +50357,16 @@ function unitMovementPosition(agent, time, reducedMotion = false) {
 }
 
 function springKeeperFlightPose(agent, time) {
-  if (agent.species !== "spring-keeper" || !(agent.health > 0) || !(agent.moveDuration > 0)) return null;
+  const combatMoving = agent.combat?.position?.moving;
+  if (agent.species !== "spring-keeper" || !(agent.health > 0) || !combatMoving && !(agent.moveDuration > 0)) return null;
   const animation = CREATURE_WALK_ANIMATIONS[agent.species];
-  const elapsed = time - agent.moveStartedAt;
+  const moveStartedAt = combatMoving ? agent.combat.position.moveStartedAt : agent.moveStartedAt;
+  const elapsed = time - moveStartedAt;
   if (!Number.isFinite(elapsed) || elapsed < 0) return null;
-  const startedAt = Number.isFinite(agent.flightStartedAt) ? agent.flightStartedAt : agent.moveStartedAt;
-  if (agent.mode === "walk" && elapsed < agent.moveDuration) {
+  // Combat movement has its own continuous clock and does not set field mode,
+  // moveDuration or flightStartedAt. Reuse the same takeoff/flight strip there.
+  const startedAt = combatMoving ? moveStartedAt : Number.isFinite(agent.flightStartedAt) ? agent.flightStartedAt : agent.moveStartedAt;
+  if (combatMoving || agent.mode === "walk" && elapsed < agent.moveDuration) {
     const age = Math.max(0, (time - startedAt) * 1000);
     const takeoff = age < animation.takeoffDurationMs;
     const frameTime = takeoff ? age : animation.takeoffDurationMs +

@@ -281,6 +281,11 @@ test('existing combinations and antenna singles preserve original actions except
       const approved = JSON.parse(read('AnimationCandidates/pebble-combo-birth-roll-v2-20261107/' + key.split('/')[1] + '/publication-manifest.json')).actions.birth;
       expected.actions.birth = { ...expected.actions.birth, frameCount: approved.frameCount, durationsMs: approved.durationsMs };
     }
+    if (key === 'pebble/blade-carapace') {
+      for (const clip of new Set([expected.reference, ...Object.values(expected.actions)])) {
+        clip.sourceFacing = 'left'; clip.pivotX = clip.frameSize - clip.pivotX;
+      }
+    }
     assert.deepEqual(UNIT_ACTION_ART[key], expected, key);
   }
   for (const [key, clip] of Object.entries(baseline.birth)) assert.deepEqual(UNIT_BIRTH_ART[key], clip, key);
@@ -291,5 +296,7 @@ test('existing combinations and antenna singles preserve original actions except
   }
   for (const entry of JSON.parse(read('AnimationCandidates/bean-combo-walk-approved-v2-20261107/approval.json')).approvedForms)
     approvedHashes.set(UNIT_ACTION_ART['bean/' + entry.form].actions.walk.image, entry.sha256);
-  for (const [image, hash] of Object.entries(baseline.sourceImages)) assert.equal(sha(image), approvedHashes.get(image) || hash, image);
+  const normalized = JSON.parse(read('tools/source-facing-normalization-20261108/pixel-changes.json')).changes;
+  for (const [image, hash] of Object.entries(baseline.sourceImages))
+    assert.equal(sha(image), normalized[image]?.afterSha256 || approvedHashes.get(image) || hash, image);
 });

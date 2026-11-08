@@ -1,0 +1,885 @@
+{
+  "status": "completed",
+  "changes": {
+    "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-idle-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-idle-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-idle-v1-preview.webp",
+      "beforeSha256": "e38e50b90aff99b75a94d46b1406b8ae2ab370bb9d320f3f73afad1bdaa28ad2",
+      "afterSha256": "1d3f5b90e1d62cb38f3fee9bb7aa030f3cd32d4b0dc71208539c4d093496b6a7",
+      "format": "WEBP",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        220,
+        150,
+        150,
+        110,
+        90,
+        150,
+        150,
+        220
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-idle-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-idle-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-idle-v1-preview.gif",
+      "beforeSha256": "6944a7f64d7efb03a680c24202114e5419cf15c900b3efb5e964d76a3d4334da",
+      "afterSha256": "f37f580c1a508fd54563f3491f6b231258a1f704bb0c9a9a02a410b935d67fcc",
+      "format": "GIF",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        220,
+        150,
+        150,
+        110,
+        90,
+        150,
+        150,
+        220
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/pebble-blade-carapace-walk-grounded-v2-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/pebble-blade-carapace-walk-grounded-v2-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/pebble-blade-carapace-walk-grounded-v2-preview.webp",
+      "beforeSha256": "7d88a2bcd6fcdedf3a5f4655e52d9629b5d8114258b8b0b0e547c9c2d87cddbc",
+      "afterSha256": "2076bac80485fa741f0c3acdd03013dc9ddde4fd7290c818fc8586c2ab37235a",
+      "format": "WEBP",
+      "frameCount": 12,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/pebble-blade-carapace-walk-grounded-v2-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/pebble-blade-carapace-walk-grounded-v2-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/pebble-blade-carapace-walk-grounded-v2-preview.gif",
+      "beforeSha256": "772e4d23bc0311cc06ecde762d03e98b66961326f0504e36babcda9248c3faf7",
+      "afterSha256": "ed13bd5f051dafd3b745d410feaaaa06ec629d631040a5c43498b22945ebb0ca",
+      "format": "GIF",
+      "frameCount": 12,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "walk",
+          "field": "gif"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-attack-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-attack-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-attack-v1-preview.webp",
+      "beforeSha256": "375b99a2aef11b060e146036e3b9390004a083b2764f7b17a352d515bb055a32",
+      "afterSha256": "55102bbe33c7e52edd657ae28044a2eb7f8d15ba63fdfc7d2f60e26c6a8354f2",
+      "format": "WEBP",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        160,
+        110,
+        110,
+        70,
+        110,
+        80,
+        110,
+        230
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-attack-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-attack-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-attack-v1-preview.gif",
+      "beforeSha256": "3aae664db439ff319b81e5ecdded75157cdb79171fb7cf5c3a3f85941a8107cd",
+      "afterSha256": "0687f73ef528c19c213eeaf95ffeeba77601e00b518b15f565072827818d3d4a",
+      "format": "GIF",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        160,
+        110,
+        110,
+        70,
+        110,
+        80,
+        110,
+        230
+      ],
+      "loop": 1,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-hurt-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-hurt-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-hurt-v1-preview.webp",
+      "beforeSha256": "adb6544d74d6f61a68fcccf82e143e14df9b5dfab58e49c2b748c26de62b83ff",
+      "afterSha256": "06e34761bb78b6d5f989649e750b669e2eb7c8ab6b7e9a7dfadb44aac4b49cb6",
+      "format": "WEBP",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        160,
+        70,
+        90,
+        90,
+        130,
+        120,
+        130,
+        240
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-hurt-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-hurt-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-hurt-v1-preview.gif",
+      "beforeSha256": "f75eaa9e8543d295cb13e5837e4635971feaa5d2f45579880f80a02c8e248ee0",
+      "afterSha256": "dcca46043045625812e6e60a5cfcc1e6cdacfea5c4da4d43028396d091fc8a24",
+      "format": "GIF",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        160,
+        70,
+        90,
+        90,
+        130,
+        120,
+        130,
+        240
+      ],
+      "loop": 1,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-carapace/birth-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-carapace/birth-preview.webp",
+      "newImage": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-carapace/birth-preview.webp",
+      "beforeSha256": "e2b3b1baf00d1b1c13d856f24e65f2cfb4b201e7117416ba66a8dd07a5f4ed3c",
+      "afterSha256": "a0e8ac811f2cc144556fbaa9dd0b7b5e703fc480ee76175da5a9b19c82073f21",
+      "format": "WEBP",
+      "frameCount": 13,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        330,
+        250,
+        70,
+        65,
+        65,
+        65,
+        65,
+        43,
+        43,
+        44,
+        200,
+        250,
+        650
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-death-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-death-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-death-v1-preview.webp",
+      "beforeSha256": "17e5a22e27d8b7366839966585ed575f6e1b73ed058ad7e76965bf20f43a1ff6",
+      "afterSha256": "18acfef952fe3fc62582e57c5b8bb943d239e45bb1b588de46490780234c40b5",
+      "format": "WEBP",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        180,
+        140,
+        150,
+        180,
+        180,
+        160,
+        200,
+        750
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-death-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-death-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-death-v1-preview.gif",
+      "beforeSha256": "9dd686748f01f5ae72a2f8ad24abca61ef1a78ce63e98a010b10903bee088ee6",
+      "afterSha256": "a704fb0484044a3feedff4b7a208e442edd8253dc5a49cbd63286f5fd85efb4d",
+      "format": "GIF",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        180,
+        140,
+        150,
+        180,
+        180,
+        160,
+        200,
+        750
+      ],
+      "loop": 1,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-idle-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-idle-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-idle-v1-preview.webp",
+      "beforeSha256": "83fe369ef8ea179d6cc7f31bc61d7e89d6e8940822067ac7bee7b3762b85b221",
+      "afterSha256": "a074e4c300a54524f27d5c0f255d1f71eeafd88878409f9df464f00d71608bc5",
+      "format": "WEBP",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        220,
+        150,
+        150,
+        110,
+        90,
+        150,
+        150,
+        220
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+          "action": "idle",
+          "field": "preview"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-idle-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-idle-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-idle-v1-preview.gif",
+      "beforeSha256": "b58d1e19c9ff8cb97e474979aaee9bf7a01b9450c0d981715c2387e383df3bb6",
+      "afterSha256": "e5fa22c45028bfc93b469b8de2d0d0ffe79c0653b2cf476f4deccf719b0cc5c9",
+      "format": "GIF",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        220,
+        150,
+        150,
+        110,
+        90,
+        150,
+        150,
+        220
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+          "action": "idle",
+          "field": "gif"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-walk-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-walk-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-walk-v1-preview.webp",
+      "beforeSha256": "bbb7effbd2ed3e6d1dbbb8c6fea446e98b17013afff4925bcbc0f19ad98e9032",
+      "afterSha256": "4d849cba925917fb7ba8fdf6898925fadd92f5cd87ff79050013e1704c8b81cb",
+      "format": "WEBP",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+          "action": "walk",
+          "field": "preview"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-walk-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-walk-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-walk-v1-preview.gif",
+      "beforeSha256": "7f0f6277147d7335d5902d4e0048cc1a98cbfb96f30cacd68005030a63c5198e",
+      "afterSha256": "4387ad41db6440d3fd0a36f68fc8f87910e28fa358fa3119daba56f01a00654f",
+      "format": "GIF",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+          "action": "walk",
+          "field": "gif"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-attack-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-attack-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-attack-v1-preview.webp",
+      "beforeSha256": "fcda57678088fab8c385392c485d1cab3a4324be82fccec4419a5b2e9db40d85",
+      "afterSha256": "e6675f76f1bef46434fc6e54c89c6377aa83ee1f0be044aaba29bf23175a808a",
+      "format": "WEBP",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        160,
+        110,
+        110,
+        70,
+        110,
+        80,
+        110,
+        230
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+          "action": "attack",
+          "field": "preview"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-attack-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-attack-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-attack-v1-preview.gif",
+      "beforeSha256": "7ea345ea20efaa6c34f23c90b1833cd624552a8d45b947c09f0706b2f4b1c1bf",
+      "afterSha256": "3d1fe190458739759ca386884d4cdcec184ccdc182051c663b17ed12c8a33299",
+      "format": "GIF",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        160,
+        110,
+        110,
+        70,
+        110,
+        80,
+        110,
+        230
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+          "action": "attack",
+          "field": "gif"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-hurt-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-hurt-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-hurt-v1-preview.webp",
+      "beforeSha256": "befb07f437aeaa0c0c338e6dd0a5993fd2f444d25587c2306866f0b24c55f9b3",
+      "afterSha256": "c26692f0bafc631c36b106489666110cab23bab49861d6d4514dce318afb77fb",
+      "format": "WEBP",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        160,
+        70,
+        90,
+        90,
+        130,
+        120,
+        130,
+        240
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+          "action": "hurt",
+          "field": "preview"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-hurt-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-hurt-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-hurt-v1-preview.gif",
+      "beforeSha256": "6a8b3fd15781068d2d9e473d8d2e054bb75263da7bc8ca5afd0e4941064d36b7",
+      "afterSha256": "deff644b31232944aa7228fff76ce81e1bf275b6f8dee0e4aad23cb10f8ecae4",
+      "format": "GIF",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        160,
+        70,
+        90,
+        90,
+        130,
+        120,
+        130,
+        240
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+          "action": "hurt",
+          "field": "gif"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-birth-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-birth-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-birth-v1-preview.webp",
+      "beforeSha256": "401158b5012665ddf4b5c5863ab978442f802465dd9067d907d61d67f7db0a6f",
+      "afterSha256": "618b966fb7d66fb21ac638c92386aec7bc257554ca99e55214ce2aca9fdcc19a",
+      "format": "WEBP",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        330,
+        250,
+        200,
+        130,
+        130,
+        200,
+        250,
+        650
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+          "action": "birth",
+          "field": "preview"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-birth-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-birth-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-birth-v1-preview.gif",
+      "beforeSha256": "fdfb81681b5af06134edb246327f4997332917be625abfee1118bf4ad3b87d56",
+      "afterSha256": "ea151e5f95dc5b98ff7fb5b40500bf40e84f28746cd9765ef2e554a05f20bbe9",
+      "format": "GIF",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        330,
+        250,
+        200,
+        130,
+        130,
+        200,
+        250,
+        650
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+          "action": "birth",
+          "field": "gif"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-death-v1-preview.webp": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-death-v1-preview.webp",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-death-v1-preview.webp",
+      "beforeSha256": "056538b49d8af5d6d7891fe61a268f0b675e287f75d8abdfe3b5254464163efd",
+      "afterSha256": "0e9b0fcc8339c4c03f8b122efb56cc6e2b5d67b03847c1aa53481c0df9ed1e81",
+      "format": "WEBP",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        180,
+        140,
+        150,
+        180,
+        180,
+        160,
+        200,
+        750
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+          "action": "death",
+          "field": "preview"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    },
+    "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-death-v1-preview.gif": {
+      "oldImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-death-v1-preview.gif",
+      "newImage": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-death-v1-preview.gif",
+      "beforeSha256": "e3196b43f2336782a73a4e34b882b9628d663dba8ccf8fac1b8f418bf17dece8",
+      "afterSha256": "f466d53d2334ef9ac63eb907ef45994a2a6df31c1477a2b4216aac0b49107b68",
+      "format": "GIF",
+      "frameCount": 8,
+      "width": 512,
+      "height": 512,
+      "durationsMs": [
+        180,
+        140,
+        150,
+        180,
+        180,
+        160,
+        200,
+        750
+      ],
+      "loop": 0,
+      "references": [
+        {
+          "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+          "action": "death",
+          "field": "gif"
+        }
+      ],
+      "verification": {
+        "exactVisibleRgbaMirror": true,
+        "alphaExact": true,
+        "durationsUnchanged": true,
+        "loopUnchanged": true,
+        "dimensionsUnchanged": true,
+        "originalSymlinkTargetUnchanged": true
+      }
+    }
+  },
+  "failures": {},
+  "missingExistingReferences": [
+    {
+      "image": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-idle-v1-cover.png",
+      "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "action": "idle",
+      "field": "cover"
+    },
+    {
+      "image": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-walk-v1-cover.png",
+      "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "action": "walk",
+      "field": "cover"
+    },
+    {
+      "image": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-attack-v1-cover.png",
+      "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "action": "attack",
+      "field": "cover"
+    },
+    {
+      "image": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-hurt-v1-cover.png",
+      "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "action": "hurt",
+      "field": "cover"
+    },
+    {
+      "image": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-birth-v1-cover.png",
+      "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "action": "birth",
+      "field": "cover"
+    },
+    {
+      "image": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/pebble-blade-carapace-antenna-death-v1-cover.png",
+      "manifest": "AnimationCandidates/pebble-blade-carapace-antenna-fullbody-v1-20261107/publication-manifest.json",
+      "action": "death",
+      "field": "cover"
+    }
+  ]
+}

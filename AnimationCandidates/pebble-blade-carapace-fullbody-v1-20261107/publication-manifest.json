@@ -30,9 +30,11 @@
         150,
         220
       ],
-      "sheetSHA256": "9358e9b1d5e4f2d739e10df5040cb0088153c0cba887f3526ef92a9b797cf754",
-      "previewSHA256": "e38e50b90aff99b75a94d46b1406b8ae2ab370bb9d320f3f73afad1bdaa28ad2",
-      "gifSHA256": "6944a7f64d7efb03a680c24202114e5419cf15c900b3efb5e964d76a3d4334da"
+      "sheetSHA256": "3f903da1b47f3b0e89def235a8753e14c98ddd515a569206e897962116cddafe",
+      "previewSHA256": "1d3f5b90e1d62cb38f3fee9bb7aa030f3cd32d4b0dc71208539c4d093496b6a7",
+      "gifSHA256": "f37f580c1a508fd54563f3491f6b231258a1f704bb0c9a9a02a410b935d67fcc",
+      "sourceFacing": "left",
+      "pivotX": 256
     },
     "walk": {
       "columns": 4,
@@ -56,7 +58,7 @@
       "loop": true,
       "pivotX": 256,
       "pivotY": 450,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "rows": 3,
@@ -65,11 +67,11 @@
       "previewLoopCount": 0,
       "version": 2,
       "sheet": "AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/pebble-blade-carapace-walk-grounded-v2-sheet.png",
-      "sheetSHA256": "a702254359bade5a9ce12cb8f04d0cf8ad77fdeab8b5371fd971c79bb8a78136",
+      "sheetSHA256": "8903ce22ec9e7a175c782b9f1afb9c87bda548348ca68c7c3b99f6ad8acd3bd3",
       "preview": "AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/pebble-blade-carapace-walk-grounded-v2-preview.webp",
-      "previewSHA256": "7d88a2bcd6fcdedf3a5f4655e52d9629b5d8114258b8b0b0e547c9c2d87cddbc",
+      "previewSHA256": "2076bac80485fa741f0c3acdd03013dc9ddde4fd7290c818fc8586c2ab37235a",
       "gif": "AnimationCandidates/pebble-blade-carapace-walk-grounded-v2-20261107/pebble-blade-carapace-walk-grounded-v2-preview.gif",
-      "gifSHA256": "772e4d23bc0311cc06ecde762d03e98b66961326f0504e36babcda9248c3faf7"
+      "gifSHA256": "ed13bd5f051dafd3b745d410feaaaa06ec629d631040a5c43498b22945ebb0ca"
     },
     "attack": {
       "sheet": "pebble-blade-carapace-attack-v1-sheet.png",
@@ -88,11 +90,13 @@
         110,
         230
       ],
-      "sheetSHA256": "c19781e82ac28f6367a72f96262eacef2b9db84b545f22ab6255b48a6fe7ec78",
-      "previewSHA256": "375b99a2aef11b060e146036e3b9390004a083b2764f7b17a352d515bb055a32",
-      "gifSHA256": "3aae664db439ff319b81e5ecdded75157cdb79171fb7cf5c3a3f85941a8107cd",
+      "sheetSHA256": "3692d40734cc5880bc3936d5da373f12bd44f568d3f650fc54360fe4f2064004",
+      "previewSHA256": "55102bbe33c7e52edd657ae28044a2eb7f8d15ba63fdfc7d2f60e26c6a8354f2",
+      "gifSHA256": "0687f73ef528c19c213eeaf95ffeeba77601e00b518b15f565072827818d3d4a",
       "previewLoop": true,
-      "previewLoopCount": 0
+      "previewLoopCount": 0,
+      "sourceFacing": "left",
+      "pivotX": 256
     },
     "hurt": {
       "sheet": "pebble-blade-carapace-hurt-v1-sheet.png",
@@ -111,11 +115,13 @@
         130,
         240
       ],
-      "sheetSHA256": "d18b32e8d67c13ab8bbff7415d267d7d5f217b16e9b745a986126b43a8b1f38e",
-      "previewSHA256": "adb6544d74d6f61a68fcccf82e143e14df9b5dfab58e49c2b748c26de62b83ff",
-      "gifSHA256": "f75eaa9e8543d295cb13e5837e4635971feaa5d2f45579880f80a02c8e248ee0",
+      "sheetSHA256": "d0afafd2ff8731eca9d426610e8afee8ba4325b778e388a8aa71a2829c554924",
+      "previewSHA256": "06e34761bb78b6d5f989649e750b669e2eb7c8ab6b7e9a7dfadb44aac4b49cb6",
+      "gifSHA256": "dcca46043045625812e6e60a5cfcc1e6cdacfea5c4da4d43028396d091fc8a24",
       "previewLoop": true,
-      "previewLoopCount": 0
+      "previewLoopCount": 0,
+      "sourceFacing": "left",
+      "pivotX": 256
     },
     "birth": {
       "sheet": "AnimationCandidates/pebble-combo-birth-roll-v2-20261107/blade-carapace/birth.png",
@@ -138,16 +144,16 @@
         250,
         650
       ],
-      "sheetSHA256": "fc5afb78d74c757897c3508fe24e1f85e1c8ec727a14d69a90dabb3dce9dc9f1",
-      "previewSHA256": "e2b3b1baf00d1b1c13d856f24e65f2cfb4b201e7117416ba66a8dd07a5f4ed3c",
+      "sheetSHA256": "77b0bea9f1b8a53e6e7aedb4e668cb462292b971a3aef1cd9bd59d09bad7fe71",
+      "previewSHA256": "a0e8ac811f2cc144556fbaa9dd0b7b5e703fc480ee76175da5a9b19c82073f21",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
       "frameCount": 13,
-      "pivotX": 397,
+      "pivotX": 115,
       "pivotY": 440,
       "referenceLength": 141,
       "viewSize": 141,
@@ -213,11 +219,13 @@
         200,
         750
       ],
-      "sheetSHA256": "1b15b793419cdd8ae39aae5e0cfe433fb10ab66933774d382bea9dde6e27fb1c",
-      "previewSHA256": "17e5a22e27d8b7366839966585ed575f6e1b73ed058ad7e76965bf20f43a1ff6",
-      "gifSHA256": "9dd686748f01f5ae72a2f8ad24abca61ef1a78ce63e98a010b10903bee088ee6",
+      "sheetSHA256": "ff0b2e1a364cc842da2063678a046560ed2f9308e209e7d98b9732060cb1598f",
+      "previewSHA256": "18acfef952fe3fc62582e57c5b8bb943d239e45bb1b588de46490780234c40b5",
+      "gifSHA256": "a704fb0484044a3feedff4b7a208e442edd8253dc5a49cbd63286f5fd85efb4d",
       "previewLoop": true,
-      "previewLoopCount": 0
+      "previewLoopCount": 0,
+      "sourceFacing": "left",
+      "pivotX": 256
     }
   },
   "rangedAttack": null,
@@ -233,5 +241,6 @@
     "previewLoopOnlyMetadataChange": true,
     "walkVersion2ExactPreviewVerified": true
   },
-  "note": "Birth is a complete cave scene, not a body-only runtime sprite. Production originals and packing provenance remain in the working asset package."
+  "note": "Birth is a complete cave scene, not a body-only runtime sprite. Production originals and packing provenance remain in the working asset package.",
+  "sourceFacing": "left"
 }

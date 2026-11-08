@@ -752,7 +752,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/BladeCarapaceV1/pebble/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -778,7 +778,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -803,7 +803,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -832,7 +832,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -857,7 +857,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -882,7 +882,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -903,7 +903,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 397,
+        "pivotX": 115,
         "pivotY": 440,
         "referenceLength": 141,
         "viewSize": 141,
@@ -916,7 +916,7 @@ export const BLADE_CARAPACE_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,

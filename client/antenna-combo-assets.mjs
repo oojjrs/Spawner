@@ -14270,7 +14270,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "portrait": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/portrait.png",
     "reference": {
       "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/idle.png",
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
@@ -14286,7 +14286,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
         220
       ],
       "durationMs": 1240,
-      "pivotX": 253.5,
+      "pivotX": 258.5,
       "pivotY": 451,
       "referenceLength": 393,
       "viewSize": 393,
@@ -14296,7 +14296,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
     "actions": {
       "idle": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/idle.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14312,7 +14312,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           220
         ],
         "durationMs": 1240,
-        "pivotX": 253.5,
+        "pivotX": 258.5,
         "pivotY": 451,
         "referenceLength": 393,
         "viewSize": 393,
@@ -14321,7 +14321,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "walk": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/walk.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14337,7 +14337,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           110
         ],
         "durationMs": 880,
-        "pivotX": 254.5,
+        "pivotX": 257.5,
         "pivotY": 449,
         "referenceLength": 397,
         "viewSize": 397,
@@ -14346,7 +14346,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "attack": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/attack.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14362,7 +14362,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           230
         ],
         "durationMs": 980,
-        "pivotX": 231.0,
+        "pivotX": 281.0,
         "pivotY": 442,
         "referenceLength": 374,
         "viewSize": 374,
@@ -14372,7 +14372,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "hurt": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/hurt.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14388,7 +14388,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           240
         ],
         "durationMs": 1030,
-        "pivotX": 255.5,
+        "pivotX": 256.5,
         "pivotY": 449,
         "referenceLength": 381,
         "viewSize": 381,
@@ -14397,7 +14397,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "birth": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/birth.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14413,7 +14413,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           650
         ],
         "durationMs": 2140,
-        "pivotX": 393.0,
+        "pivotX": 119.0,
         "pivotY": 438,
         "referenceLength": 170,
         "viewSize": 170,
@@ -14426,7 +14426,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
       },
       "death": {
         "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/death.png",
-        "sourceFacing": "right",
+        "sourceFacing": "left",
         "frameSize": 512,
         "frameHeight": 512,
         "columns": 4,
@@ -14442,7 +14442,7 @@ export const ANTENNA_COMBO_ACTION_ART = Object.freeze({
           750
         ],
         "durationMs": 1940,
-        "pivotX": 254.5,
+        "pivotX": 257.5,
         "pivotY": 444,
         "referenceLength": 387,
         "viewSize": 387,

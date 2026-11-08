@@ -23,16 +23,16 @@
         250,
         650
       ],
-      "sheetSHA256": "fc5afb78d74c757897c3508fe24e1f85e1c8ec727a14d69a90dabb3dce9dc9f1",
-      "previewSHA256": "e2b3b1baf00d1b1c13d856f24e65f2cfb4b201e7117416ba66a8dd07a5f4ed3c",
+      "sheetSHA256": "77b0bea9f1b8a53e6e7aedb4e668cb462292b971a3aef1cd9bd59d09bad7fe71",
+      "previewSHA256": "a0e8ac811f2cc144556fbaa9dd0b7b5e703fc480ee76175da5a9b19c82073f21",
       "previewLoop": true,
       "previewLoopCount": 0,
-      "sourceFacing": "right",
+      "sourceFacing": "left",
       "frameSize": 512,
       "frameHeight": 512,
       "columns": 4,
       "frameCount": 13,
-      "pivotX": 397,
+      "pivotX": 115,
       "pivotY": 440,
       "referenceLength": 141,
       "viewSize": 141,
@@ -117,5 +117,6 @@
     }
   ],
   "independentReview": "Approved by audit_all_animations; continuous browser playback not claimed.",
-  "originalSourceSheet": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-birth-v1-sheet.png"
+  "originalSourceSheet": "AnimationCandidates/pebble-blade-carapace-fullbody-v1-20261107/pebble-blade-carapace-birth-v1-sheet.png",
+  "sourceFacing": "left"
 }

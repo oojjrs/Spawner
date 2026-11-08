@@ -1,0 +1,46 @@
+[
+  {
+    "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/idle.png"
+  },
+  {
+    "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/walk.png"
+  },
+  {
+    "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/attack.png"
+  },
+  {
+    "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/hurt.png"
+  },
+  {
+    "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/birth.png"
+  },
+  {
+    "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/death.png"
+  },
+  {
+    "image": "DesignAssets/Animations/BladeCarapaceV1/pebble/portrait.png",
+    "kind": "portrait"
+  },
+  {
+    "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/idle.png"
+  },
+  {
+    "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/walk.png"
+  },
+  {
+    "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/attack.png"
+  },
+  {
+    "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/hurt.png"
+  },
+  {
+    "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/birth.png"
+  },
+  {
+    "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/death.png"
+  },
+  {
+    "image": "DesignAssets/Animations/AntennaCombosV1/pebble/blade-carapace-antenna/portrait.png",
+    "kind": "portrait"
+  }
+]
