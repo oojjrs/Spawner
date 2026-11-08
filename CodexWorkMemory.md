@@ -1,3 +1,8 @@
+## 툴·전투 검사 완료 [client-combat-complete-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:30:47+09:00; 확인·기록 Codex /root, 현재채팅과도구근거.
+- client전투12파일의초기102개중55실패는48개수정·폐기구계약7개제거로해결했다. 현재95개에대한통과근거확보,기존정상과변경/실패선택재검증합산이며최종일괄재실행은아니다. 공용stage matrix25개는그대로유지하며원거리패링금지음성검사·실제miss/dodge큐·실제arena위치·60Hz타격경계를검사한다. 종료제한뒤active콤보snapshot보존과시간/HP/이벤트불변검사도강화했다. 구실험실대체는combat-simulation의직접엔진동등성·seed·진행방식·사망후취소,23종선택검사는보존. 결과client-combat-result.json;12파일형식/diff bb4fc0/d7abf9/c30505/b16261,마지막대기루프조기종료가드753fa1. 담당 /root/combat_tests_finish완료고정.
+
 ## 툴·전투 검사 완료 [vfx-preview-complete-01a1b8b3]
 
 - 기록 시각 2026-11-08T13:30:47+09:00; 확인·기록 Codex /root, 현재채팅과도구근거.
@@ -85,6 +90,11 @@
 
 - 기록 시각 2026-11-08T13:14:02+09:00; 판단·분담·기록 Codex /root, 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e 및 담당 보고.
 - /root/economy_tests_finish가 tools/spring-native-facing-20261108/remaining-facing-pebble-independent-pixels.py:59의 Path parent가 Windows 역슬래시를 Git tree 경로로 넘기는 이식성 결함을 확인했다. 메인 도구54c4d3에서 해당 경로 생성 확인. 이 도구에서 git show용 경로만 as_posix()로 교정하도록 범위를 확대한다. 제품·원화 내용은 변경하지 않는다.
+
+## 추가 점검 판단 [client-combat-handoff-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:14:02+09:00; 판단·분담·기록 Codex /root, 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e 및 담당 보고.
+- 클라이언트 전투 검사12파일 combat-defense-matrix,combat-lab,combat-lab-dice,combat-simulation,combat-stage-support,combat-stage,combat-vfx-events,combat,melee-combo-timing,melee-lab-timing,ranged-terminal-launch,ranged-timing의 초기55실패를 /root/combat_tests_finish에게 인계한다. 제품 갑각 수정 완료 후 현재 접근·실제 타격 시각·체급과 공용stage계약으로 검사하며 client 담당과 모달 fixture 인터페이스를 조율한다.
 
 ## 승인 원화 변환 증빙 공통 검사 지원 [art-helper-start-01a1b8b3]
 

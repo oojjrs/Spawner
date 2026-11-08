@@ -4,6 +4,7 @@ import { createCombat } from "../server/combat.mjs";
 import { ATTRIBUTE_DNA } from "../server/dna.mjs";
 import { unitRangedPose, unitRangedAttack, UNIT_RANGED_FORMS } from "./unit-ranged.mjs";
 import { bladeRangedPose } from "./blade-ranged.mjs";
+import { unitFrameMirror } from "./unit-size.mjs";
 import { unitAnimationFrame } from "./unit-animation.mjs";
 
 const tribes = ["bean", "spore", "pebble", "spring"];
@@ -21,7 +22,7 @@ test("secretion-only terminal launches preserve all cues for every tribe, direct
     for (const [index, at] of launches.entries()) {
       const pose = unitRangedPose(agent, at);
       assert.equal(pose.action, "shoot"); assert.equal(pose.frame, launchFrame(tribe));
-      assert.equal(pose.mirrorX, reverse);
+      assert.equal(pose.mirrorX, unitFrameMirror(UNIT_RANGED_FORMS[tribe].animation.sourceFacing, reverse ? -1 : 1));
       assert.deepEqual(unitRangedPose(JSON.parse(JSON.stringify(agent)), at), pose);
       if (index + 1 < count) assert.ok(unitRangedPose(agent, at + gap / 3).frame > launchFrame(tribe), "every nonterminal shot still recovers");
     }
@@ -76,7 +77,7 @@ function worldFixture(tribe, hits = 4, start = 0) {
     attributes: { secretion: 1 }, combatDisposition: "aggressive", moveStartedAt: 0, moveDuration: 0,
     stats: { health: 100, speed: 1, vision: 4, dna: { ...dna, rangedSpeed: 4, hits, focus: .3, comboSpeed: .12 } } };
   const target = { id: "target", ownerId: "b", tribe: "bean", x: 102, y: 100, health: 100,
-    attributes: {}, combatDisposition: "passive", moveStartedAt: 0, moveDuration: 0,
+    attributes: {}, attackReady: 1000, combatDisposition: "passive", moveStartedAt: 0, moveDuration: 0,
     stats: { health: 100, speed: 1, combatStrength: 10 } };
   const events = [];
   const game = agents => ({ agents, receiveDamage(agent, amount) { agent.health = Math.max(0, agent.health - amount); } });
@@ -89,12 +90,12 @@ function worldFixture(tribe, hits = 4, start = 0) {
 const normalize = value => JSON.parse(JSON.stringify(value, (key, value) => key === "streamId" ? undefined :
   typeof value === "string" ? value.replace(/combat-vfx:[a-f0-9-]+:/g, "combat-vfx:STREAM:") : value));
 
-test("real world zero-recovery schedules render without delaying shots or retaining a replaced action", () => {
+test("real world schedules retain native recovery without delaying shots or retaining a replaced action", () => {
   for (const tribe of tribes) for (const hits of [1, 4]) for (const start of [0, .1, 10.01]) {
     const f = worldFixture(tribe, hits, start), control = worldFixture(tribe, hits, start);
     const snapshot = structuredClone(f.source), first = f.source.attack;
     const launches = [...first.shotLaunches];
-    assert.ok(Math.abs(first.endsAt - launches.at(-1)) < 1e-12, "actual world schedule has zero final recovery");
+    assert.ok(first.endsAt > launches.at(-1), "actual world schedule retains native final recovery");
     assert.equal(first.hitAt > first.launchedAt, true, "world hitAt is arrival, not release");
     for (const at of launches) {
       const oldPose = unitRangedPose(snapshot, at);
@@ -107,9 +108,11 @@ test("real world zero-recovery schedules render without delaying shots or retain
     }
     const shots = f.events.filter(event => event.kind === "shoot" && event.sourceId === f.source.id);
     assert.deepEqual(shots.map(event => event.at), launches, "all actual launches, including the final boundary, fire once");
-    assert.notEqual(f.source.attack, first, "server retires the action at its boundary");
-    assert.equal(unitRangedPose(f.source, launches.at(-1)).frame, 0, "a new action starts in its own windup, not stale recoil");
-    assert.equal(unitRangedPose(snapshot, launches.at(-1) + .001).action, "idle");
+    f.combat.update(f.source, first.endsAt);
+    assert.notEqual(f.source.attack, first, "server retires the action at its recovery boundary");
+    if (f.source.attack) assert.ok(f.source.attack.startedAt >= first.endsAt, "the next action uses a new epoch");
+    else assert.equal(unitRangedPose(f.source, first.endsAt).action, "idle");
+    assert.equal(unitRangedPose(snapshot, first.endsAt + .001).action, "idle");
     f.source.attack = null;
     assert.equal(unitRangedPose(f.source, launches.at(-1)).action, "idle", "clearing the action cancels its body pose immediately");
   }

@@ -107,7 +107,7 @@ test("시작 거리 편집과 근접 접근은 N:N 교전으로 이어진다", (
 });
 
 test("기관·수치·규칙·예산 편집은 유지되고 잘못된 입력은 거절한다", () => {
-  close(deriveSimulationStats(build({power:2}),{powerCurve:"log"}).attackPower,2+2*Math.log(2)/Math.log(1.5));
+  close(deriveSimulationStats(build({power:2}),{powerCurve:"log",powerGain:2}).attackPower,2+2*Math.log(2)/Math.log(1.5));
   close(deriveSimulationStats(build({vitality:3}),{healthPerPoint:20}).health,70);
   assert.equal(deriveSimulationStats({key:"bean",organs:{attack:1,ranged:1}}).pieceCount,2);
   for(const key of ["attack","ranged"])assert.throws(()=>deriveSimulationStats({key:"bean",organs:{[key]:2}}),/Organ count/);

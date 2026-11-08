@@ -46,7 +46,7 @@ for (const file of ["./combat-lab.js", "../Combat.html"]) test(file + " 주사�
         const stats = deriveSimulationStats(JSON.parse(JSON.stringify(build)));
         assert.ok(stats.canAttack);
         const expected = ["bean", "spore", "pebble", "spring"].includes(build.key)
-          ? dnaUnitStats(build.dna) : { ...unitCombatStats(build.key), ...combatProfile({ species: build.key, stats: unitCombatStats(build.key), attributes: {} }) };
+          ? dnaUnitStats(build.dna, build.key) : { ...unitCombatStats(build.key), ...combatProfile({ species: build.key, stats: unitCombatStats(build.key), attributes: {} }) };
         assert.equal(stats.health, expected.health);
         assert.equal(stats.attackPower, expected.attackPower);
       }

@@ -101,13 +101,13 @@ test("cursor reports retained-history gaps and bounds a large incoming burst", (
 
 test("real simulation launches before damage and emits actual capped drain separately from history", () => {
   const trial = createSimulationTrial({ left: { key: "bean", organs: { ranged: 1, attack: 0 }, counts: { drain: 1 } },
-    right: { key: "spore", organs: { attack: 1 }, counts: {} }, distance: 2, random: false,
-    rules: { maxSeconds: .7 } });
-  trial.advance(.31);
+    right: { key: "spore", organs: { attack: 0, ranged: 0 }, counts: { vitality: 20 } }, distance: 2, random: false,
+    rules: { maxSeconds: 20 } });
+  while (trial.time < 20 && !trial.reason && !trial.vfx.events.some(item => item.kind === "shoot")) trial.advance(.01);
   const shot = trial.vfx.events.find(item => item.kind === "shoot");
   assert.ok(shot); assert.ok(shot.arrivesAt > shot.at);
   assert.equal(trial.vfx.events.some(item => item.kind === "hit"), false);
-  trial.advance(.39);
+  trial.advance(shot.arrivesAt - trial.time + 1 / 60);
   const impact = trial.vfx.events.find(item => item.projectileId === shot.projectileId && item.kind === "hit");
   assert.ok(impact); assert.equal(impact.at, shot.arrivesAt);
   assert.equal(trial.vfx.events.filter(item => item.kind === "drain").length, 0, "full health has no actual drain recovery");

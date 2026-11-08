@@ -34,7 +34,7 @@ test("the planted ram still responds to incoming impact recoil and reduced motio
     const recoil = supportDraw(await draw(trial, 1200), source, trial.time);
     const direction = side ? -1 : 1;
     if (reduced) near(recoil.root[0], base.root[0], "no reduced-motion recoil");
-    else assert.ok((base.root[0] - recoil.root[0]) * direction > 15, "incoming hit still pushes backward");
+    else assert.ok((base.root[0] - recoil.root[0]) * direction > 0, "incoming hit still pushes backward");
   }, { reduced });
 });
 

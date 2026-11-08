@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createCombatStage } from "./combat-stage.mjs";
+import { CREATURE_IDLE_ANIMATIONS } from "./unit-animation.mjs";
 import { combatViewLayout, unitDisplaySize } from "./unit-size.mjs";
 
 async function renderGrowth(left, right, support, sourceUrl) {
@@ -107,15 +108,16 @@ test("실제 엔진이 교전 상태를 해제한 생존자와 사망자를 계�
 for (const species of ["flower-tail-bird", "dew-rabbit", "soil-mole", "rolling-acorn"]) test("대형 편성에 맞춰 " + species + " 본체도 공통 배율로 축소한다", async () => {
   const subject = { tribe: undefined, species, stats: { health: 100, pieceCount: 14 } };
   const small = { tribe: undefined, species: "flower-tail-bird" };
-  const baseline = (await renderGrowth(subject, small, false))[0].width;
+  const body = draws => draws.find(draw => draw.image === CREATURE_IDLE_ANIMATIONS[species].image);
+  const baseline = body(await renderGrowth(subject, small, false)).width;
   const cell = opponent => combatViewLayout(1200, 560, [subject, opponent].map((agent, side) => ({ ...agent, id: String(side), combat: { side } }))).cell;
   for (const opponent of [
     { tribe: undefined, species: "white-paw" },
     { tribe: undefined, species: "spiny-back-leader" },
     { tribe: undefined, species: "white-paw", stats: { health: 100, pieceCount: 100 } },
     { tribe: undefined, species: "white-paw", health: 0 }
-  ]) near((await renderGrowth(subject, opponent, false))[0].width / baseline, cell(opponent) / cell(small));
-  near((await renderGrowth(subject, small, false))[0].width, baseline);
+  ]) near(body(await renderGrowth(subject, opponent, false)).width / baseline, cell(opponent) / cell(small));
+  near(body(await renderGrowth(subject, small, false)).width, baseline);
 });
 
 test("신규 중립종 사망 경계가 누락돼도 전투 렌더를 계속한다", async () => {

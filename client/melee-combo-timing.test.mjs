@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { attackAnimationElapsed, AGENT_ATTACK_HIT_TIME, AGENT_ATTACK_DURATION } from "../server/attack.mjs";
 import { combatEvolutionPose } from "./combat-evolution.mjs";
 import { COMBAT_EVOLUTION_CATALOG } from "./combat-evolution-assets.mjs";
-import { unitAnimationPose } from "./unit-animation.mjs";
+import { unitActionArtDefinition } from "./unit-action-art.mjs";
+import { unitAnimationPose, unitAnimationFrame } from "./unit-animation.mjs";
 
 const attack = (contacts = [10.3, 10.42, 10.54, 10.66]) => ({ combatId: "combo", startedAt: 10,
   hitAt: contacts.at(-1), endsAt: contacts.at(-1) + .35, meleeContacts: contacts });
@@ -40,14 +41,17 @@ test("scheduling a follow-up does not move the current contact or any earlier sw
   }
 });
 
-test("all 12 combat rigs and ordinary bodies hit on every melee contact", () => {
+test("selected authored bodies and ordinary bodies hit on every melee contact", () => {
   for (const [key, definition] of Object.entries(COMBAT_EVOLUTION_CATALOG)) {
     const tribe = key.startsWith("sprout/") ? "bean" : key.split("/")[0];
     const agent = { id: key, tribe, attributes: { blade: 1, carapace: 1, antenna: 1, feet: 1 },
-      combat: { version: 2 }, health: 10, bornAt: 0, hurtStartedAt: -Infinity, attack: attack() };
+      combat: { version: 2 }, health: 10, bornAt: 0, hurtStartedAt: -Infinity, attack: { ...attack(), recovery: .35 } };
     for (const at of agent.attack.meleeContacts) {
       const pose = combatEvolutionPose(agent, at, definition.animations);
-      assert.equal(pose.action, "attack"); assert.equal(pose.sampleTime, 300); assert.equal(pose.frame, 10);
+      const animation = unitActionArtDefinition(agent).actions.attack;
+      assert.equal(pose.action, "attack");
+      assert.equal(pose.animation, animation);
+      assert.equal(pose.frame, unitAnimationFrame(animation, animation.hitTimeMs));
       const ordinary = unitAnimationPose(agent, at); assert.equal(ordinary.action, "attack"); assert.equal(ordinary.frame, 5);
     }
     assert.equal(combatEvolutionPose({ ...agent, attack: null }, 10.5, definition.animations).action, "idle");
