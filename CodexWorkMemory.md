@@ -1,3 +1,8 @@
+## 원화 검사 완료 [art-path-complete-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:27:49+09:00; 구현·검수 /root/economy_tests_finish, 확인·기록 /root, 현재채팅근거.
+- Python독립픽셀검사에서Git tree경로를as_posix로고쳐Windows에서도동작한다. 31.9초통과b7b9e6,원본139·미추적68·등록68·전체소스207검증유지. 검사생성native JSON9개는Trash에증빙보존후task-owned파일만정리2f5720. 파일형식/scopeddiff9ece42통과.
+
 ## 원화 검사 완료 [art-complete-01a1b8b3]
 
 - 기록 시각 2026-11-08T13:27:49+09:00; 구현·검수 /root/economy_tests_finish, 확인·기록 /root, 현재채팅근거.
@@ -65,6 +70,11 @@
 
 - 기록 시각 2026-11-08T13:14:02+09:00; 판단·분담·기록 Codex /root, 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e 및 담당 보고.
 - /root/client_suite_audit가 실제 sections/unit-appearance.js의 cotton-sheep 이동 셀에 기존 음향 data-audio-cues 연결이 누락된 사실을 확인했다. 현재 허용된 전체 점검·복구 범위에서 승인된 movement-audio 정의의 큐 연결만 복구하고 새 문구나 원본 음향은 만들지 않는다. 해당 섹션 제품 수정과 관련 검증은 담당에게 맡기고 빌드 산출물은 메인이 관리한다.
+
+## 추가 점검 판단 [art-path-fix-01a1b8b3]
+
+- 기록 시각 2026-11-08T13:14:02+09:00; 판단·분담·기록 Codex /root, 출처 현재 채팅01a1b8b3-bc5b-71f2-8550-8f273686d21e 및 담당 보고.
+- /root/economy_tests_finish가 tools/spring-native-facing-20261108/remaining-facing-pebble-independent-pixels.py:59의 Path parent가 Windows 역슬래시를 Git tree 경로로 넘기는 이식성 결함을 확인했다. 메인 도구54c4d3에서 해당 경로 생성 확인. 이 도구에서 git show용 경로만 as_posix()로 교정하도록 범위를 확대한다. 제품·원화 내용은 변경하지 않는다.
 
 ## 승인 원화 변환 증빙 공통 검사 지원 [art-helper-start-01a1b8b3]
 

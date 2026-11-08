@@ -56,7 +56,7 @@ def crop_rectangles(path,src,record):
         assert all(record.get(k)==v for k,v in registered_grid.items()),(path,'normalized grid disagrees with actual registered geometry')
         grid=registered_grid
     if path in ['AnimationCandidates/pebble-antenna-walk-stable-v6/walk-sheet.png','AnimationCandidates/pebble-gather-motion-v1-20261107/pebble-gather-attack-v1-sheet.png']:
-        meta=json.loads(git(str(Path(path).parent/'manifest.json')))
+        meta=json.loads(git((Path(path).parent/'manifest.json').as_posix()))
         grid={'frameWidth':meta['frameSize'],'frameHeight':meta.get('frameHeight',meta['frameSize']),'columns':meta['columns']}
     if grid:
         w,h,cols=grid['frameWidth'],grid['frameHeight'],grid['columns']
