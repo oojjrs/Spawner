@@ -129,11 +129,6 @@ export function unitMovementSpeed(stats) {
   return stats.speed * (stats.movementMultiplier ?? 1);
 }
 
-export function unitMovementInterval(speed) {
-  const period = 1 / speed;
-  return period <= 1 ? period : 1 + (period - 1) * .5;
-}
-
 export function unitCarryCapacity(agent, resourceType) {
   return agent.stats.capacity;
 }

@@ -6078,11 +6078,6 @@ function unitMovementSpeed(stats) {
   return stats.speed * (stats.movementMultiplier ?? 1);
 }
 
-function unitMovementInterval(speed) {
-  const period = 1 / speed;
-  return period <= 1 ? period : 1 + (period - 1) * .5;
-}
-
 function unitCarryCapacity(agent, resourceType) {
   return agent.stats.capacity;
 }
@@ -6113,7 +6108,7 @@ function birthCost(template, tribe) {
   return costs[template.slots.length] ?? Infinity;
 }
 
-return { ATTRIBUTES, attributeUnlockLevel, isAttributeUnlocked, HARVEST_ATTRIBUTE_KEYS, COMBAT_ATTRIBUTE_KEYS, ATTRIBUTE_SYNERGIES_ENABLED, ATTRIBUTE_COMBINATIONS, migrateAttributeSlots, attributeLevelLimit, migrateAttributeLevels, attributeCounts, hasSynergy, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitMovementSpeed, unitMovementInterval, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier, birthCost };
+return { ATTRIBUTES, attributeUnlockLevel, isAttributeUnlocked, HARVEST_ATTRIBUTE_KEYS, COMBAT_ATTRIBUTE_KEYS, ATTRIBUTE_SYNERGIES_ENABLED, ATTRIBUTE_COMBINATIONS, migrateAttributeSlots, attributeLevelLimit, migrateAttributeLevels, attributeCounts, hasSynergy, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitMovementSpeed, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier, birthCost };
 })();
 modules["server/resource-legacy.mjs"] = (() => {
 const LEGACY_FOOD_HABITATS = Object.freeze([

@@ -2,14 +2,14 @@ import { CONQUEST_PACING, TRIBE_PACING, colonyWorkerShare, aiUpgradeReadyAt } fr
 import { NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
 import { birthCost, attributeUpgradeCost, attributeLevelLimit } from "./attributes.mjs";
 import { TRIBE_STARTING_UNITS } from "./tribe-start.mjs";
-import { attributeCounts, unitStats, unitCarryCapacity, unitTravelSpeed, unitMovementInterval } from "./attributes.mjs";
+import { attributeCounts, unitStats, unitCarryCapacity, unitTravelSpeed } from "./attributes.mjs";
 import { RESOURCE_ECONOMY } from "./economy.mjs";
 import { resourceHarvestMultiplier } from "./resources.mjs";
 
 export function colonyWorkerRate(tribe,slots,levels,distance) {
  const resource=RESOURCE_ECONOMY.find(entry=>entry.tribe===tribe),attributes=attributeCounts(slots,levels),stats=unitStats(attributes,tribe);
  const agent={tribe,attributes,stats,carryingType:resource.key};
- const capacity=unitCarryCapacity(agent,resource.key),outward=distance*unitMovementInterval(unitTravelSpeed(agent,0,resource.key)),inward=distance*unitMovementInterval(unitTravelSpeed(agent,capacity,resource.key));
+ const capacity=unitCarryCapacity(agent,resource.key),outward=distance/unitTravelSpeed(agent,0,resource.key),inward=distance/unitTravelSpeed(agent,capacity,resource.key);
  const harvest=capacity*resource.harvestSeconds*resourceHarvestMultiplier(resource.key,attributes,tribe);
  return {capacity,seconds:outward+inward+harvest+2,perSecond:capacity/(outward+inward+harvest+2)};
 }

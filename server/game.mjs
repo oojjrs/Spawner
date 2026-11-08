@@ -11,7 +11,7 @@ import { TRIBE_INVASION, sameTribeDesign, tribeDesign } from "./tribe-designs.mj
 import { tribeDefenseAgent } from "./tribe-defense-designs.mjs";
 import { tribeWorkers, tribeInvasionReady, tribeUpgradeReady } from "./tribe-strategy.mjs";
 import { worldSize } from "./world-size.mjs";
-import { ATTRIBUTES, ATTRIBUTE_SYNERGIES_ENABLED, isAttributeUnlocked, attributeCounts, migrateAttributeSlots, migrateAttributeLevels, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitCarryCapacity, unitTravelSpeed, unitMovementInterval, unitTerrainSpeedMultiplier, birthCost, hasSynergy } from "./attributes.mjs";
+import { ATTRIBUTES, ATTRIBUTE_SYNERGIES_ENABLED, isAttributeUnlocked, attributeCounts, migrateAttributeSlots, migrateAttributeLevels, attributeUpgradeCost, attributeUpgradeIssue, unitStats, unitCarryCapacity, unitTravelSpeed, unitTerrainSpeedMultiplier, birthCost, hasSynergy } from "./attributes.mjs";
 import { createPersonality, personalityLabels, createUtilityAI } from "./utility.mjs";
 import { NEST_RECOVERY, NEST_LEVELS, nestUpgradeCost } from "./nests.mjs";
 import { TRIBE_STARTING_UNITS, PLAYER_STARTING_POINTS, startingWorkerDna } from "./tribe-start.mjs";
@@ -1470,12 +1470,12 @@ export function createGame(environment, colony, savedGame) {
         agent.nextDecisionAt = Math.min(agent.nextDecisionAt, state.simSeconds + 0.5);
         return false;
       }
-      const previousEnd = agent.moveStartedAt + Math.max(agent.moveDuration, unitMovementInterval(agentSpeed(agent)));
+      const previousEnd = agent.moveStartedAt + Math.max(agent.moveDuration, 1 / agentSpeed(agent));
       const continuing = agent.moveDuration > 0 && previousEnd >= state.simSeconds - elapsed - 1e-8;
       const moved = moveAgent(agent, destination, !["return", "recover", "flee"].includes(plan.action), continuing ? Math.min(state.simSeconds, previousEnd) : state.simSeconds);
       if (moved) {
         if (continuing) {
-          agent.moveBudget = (state.simSeconds - agent.moveStartedAt) / unitMovementInterval(agentSpeed(agent));
+          agent.moveBudget = (state.simSeconds - agent.moveStartedAt) * agentSpeed(agent);
         } else agent.moveBudget = Math.max(0, agent.moveBudget - 1);
       }
       return moved;
@@ -1745,7 +1745,7 @@ export function createGame(environment, colony, savedGame) {
         if (updateAttack(agent)) continue;
         const reason = scheduledDecisionEvent(agent);
         reconsider(agent, reason);
-        agent.moveBudget = Math.min(1, agent.moveBudget + elapsed / unitMovementInterval(agentSpeed(agent)));
+        agent.moveBudget = Math.min(1, agent.moveBudget + elapsed * agentSpeed(agent));
         if (!["rest", "unload", "harvest"].includes(agent.mode) && state.simSeconds + 1e-8 < agent.moveStartedAt + agent.moveDuration) continue;
         if (agent.mode === "rest") {
           agent.straightSteps = 0;
@@ -2323,7 +2323,7 @@ export function createGame(environment, colony, savedGame) {
           else if (agent.mode === "unload") at = Math.min(at, agent.unloadReady);
           else if (!["wait", "rest"].includes(agent.mode)) {
             at = Math.min(at, Math.max(agent.moveStartedAt + agent.moveDuration,
-              state.simSeconds + Math.max(0, 1 - agent.moveBudget) * unitMovementInterval(agentSpeed(agent))));
+              state.simSeconds + Math.max(0, 1 - agent.moveBudget) / agentSpeed(agent)));
           }
         }
         return at;

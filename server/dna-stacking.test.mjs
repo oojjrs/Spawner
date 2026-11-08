@@ -83,9 +83,9 @@ test("DNA 수집 계획은 한도까지 1개씩 캐는 시간과 자원 부족�
   const dna={version:6,pieces:M.pack(['gather','capacity','capacity','capacity'].map(piece),1),level:1,budget:500},size=14,stats=dnaUnitStats(dna),agent={id:'worker',tribe:'bean',x:1,y:1,dna,stats,attributes:{},slots:[],carrying:0,health:stats.health,bornAt:0,lifespan:180,cost:28,personality:{boldness:0,aggression:0,curiosity:0}},food={x:3,y:1,key:'3,1',resourceType:'clay',amount:20},home={x:1,y:1};
   const state={simSeconds:0,evolutionPoints:0,colonyFood:0,lastFoodAt:0,nestLevel:1,agents:[agent],knownFood:new Map([[food.key,food]]),resourceInventory:{},markers:[],explored:new Set(Array.from({length:size*size},(_,index)=>index))};
   const ai=createUtilityAI({state,size,tribe:'bean',homeCells:()=>[home],deliveryCells:()=>[home],walkable:(x,y)=>y===1,hazardAt:()=>0,enemies:()=>[],synergy:()=>false,canHarvest:()=>true,terrainAt:()=>4,materialSpace:()=>200,isFood:()=>true,harvestSeconds:()=>stats.dna.harvestTime});
-  const full=ai.evaluate(agent,false).find(p=>p.action==='collect');assert.ok(full);assert.equal(full.plannedCargo,4);assert.ok(Math.abs(full.deliverySeconds-(2*1.5+1+4+2*1.75+1))<1e-9);
+  const full=ai.evaluate(agent,false).find(p=>p.action==='collect');assert.ok(full);assert.equal(full.plannedCargo,4);assert.ok(Math.abs(full.deliverySeconds-(2/.5+1+4+2/.4+1))<1e-9);
   food.amount=2;const partial=ai.evaluate(agent,false).find(p=>p.action==='collect');assert.equal(partial.plannedCargo,2);
-  food.amount=20;stats.dna.harvestTime=0;const instant=ai.evaluate(agent,false).find(p=>p.action==='collect');assert.equal(instant.plannedCargo,4);assert.ok(Math.abs(instant.deliverySeconds-(2*1.5+1+2*1.75+1))<1e-9);
+  food.amount=20;stats.dna.harvestTime=0;const instant=ai.evaluate(agent,false).find(p=>p.action==='collect');assert.equal(instant.plannedCargo,4);assert.ok(Math.abs(instant.deliverySeconds-(2/.5+1+2/.4+1))<1e-9);
 });
 
 
