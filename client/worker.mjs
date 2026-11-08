@@ -1,5 +1,6 @@
 import { createRoom, chooseRoomTribe, saveRoom, restoreRoom, tickRoom, snapshotRoom, commandRoom, updateRoomBeginnerHelp } from "./room.mjs";
 import { openStorage } from "./storage.mjs";
+import { restoreRoomDesigns } from "./design-library.mjs";
 import { createStateEncoder } from "./state-delta.mjs";
 import { createDecisionPool } from "./decision-pool.mjs";
 
@@ -114,7 +115,9 @@ async function handle(type, data, id) {
   }
   if (type === "choose-tribe") {
     if (!room || room.id !== data.roomId) throw new Error("방을 다시 열어 주세요.");
+    const designs = await storage.designs(data.tribe);
     chooseRoomTribe(room, data.tribe);
+    restoreRoomDesigns(room, designs);
     dirty = true;
     await persist();
     return { roomId: room.id };
@@ -164,6 +167,7 @@ async function handle(type, data, id) {
     return { roomIds };
   }
   if (type === "delete-all") {
+    await persist();
     await storage.removeAll();
     running = false;
     room = null;
@@ -174,6 +178,7 @@ async function handle(type, data, id) {
     return null;
   }
   if (type === "delete") {
+    await persist();
     const saved = await storage.get(data.roomId);
     if (!saved || saved.title !== data.title) throw new Error("월드 이름이 일치하지 않습니다.");
     await storage.remove(data.roomId);

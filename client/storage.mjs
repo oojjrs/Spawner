@@ -1,18 +1,23 @@
 import { generateWorld } from "../server/world.mjs";
+import { savedRoomDesigns } from "./design-library.mjs";
 
 export async function openStorage() {
   const database = await new Promise((resolve, reject) => {
-    const request = indexedDB.open("spawner-local", 3);
+    const request = indexedDB.open("spawner-local", 4);
     request.onupgradeneeded = () => {
       const database = request.result;
       if (!database.objectStoreNames.contains("rooms")) database.createObjectStore("rooms", { keyPath: "id" });
       if (!database.objectStoreNames.contains("settings")) database.createObjectStore("settings");
       if (!database.objectStoreNames.contains("room-list")) database.createObjectStore("room-list", { keyPath: "id" });
+      const migrateDesigns = !database.objectStoreNames.contains("designs");
+      if (migrateDesigns) database.createObjectStore("designs", { keyPath: "id" });
       const rooms = request.transaction.objectStore("rooms").openCursor();
       rooms.onsuccess = () => {
         const cursor = rooms.result;
         if (!cursor) return;
         request.transaction.objectStore("room-list").put(roomListing(cursor.value));
+        if (migrateDesigns) for (const design of savedRoomDesigns(cursor.value))
+          request.transaction.objectStore("designs").put({ ...design, updatedAt: cursor.value.updatedAt });
         cursor.continue();
       };
     };
@@ -58,10 +63,28 @@ export async function openStorage() {
   return {
     list() { return transaction("room-list", "readonly", task => task.objectStore("room-list").getAll()); },
     get(id) { return transaction("rooms", "readonly", task => task.objectStore("rooms").get(id)); },
+    designs(tribe) {
+      return transaction("designs", "readonly", task => task.objectStore("designs").getAll())
+        .then(designs => designs.filter(design => design.tribe === tribe).sort((a, b) => b.updatedAt - a.updatedAt));
+    },
     put(room) {
-      return transaction(["rooms", "room-list"], "readwrite", task => {
-        task.objectStore("room-list").put(roomListing(room));
-        return task.objectStore("rooms").put(room);
+      const designs = savedRoomDesigns(room), imported = new Set(Object.values(room.designIds || {}));
+      return transaction(["rooms", "room-list", "designs"], "readwrite", task => {
+        const rooms = task.objectStore("rooms"), library = task.objectStore("designs");
+        const previous = rooms.get(room.id);
+        previous.onsuccess = () => {
+          const oldDesigns = new Map(savedRoomDesigns(previous.result).map(design => [design.id, design]));
+          for (const design of designs) {
+            if ((!imported.has(design.id) || oldDesigns.has(design.id)) &&
+                JSON.stringify(oldDesigns.get(design.id)) !== JSON.stringify(design))
+              library.put({ ...design, updatedAt: room.updatedAt });
+            oldDesigns.delete(design.id);
+          }
+          if (previous.result?.hostId === room.hostId) for (const id of oldDesigns.keys()) library.delete(id);
+          task.objectStore("room-list").put(roomListing(room));
+          rooms.put(room);
+        };
+        return { result: room.id };
       });
     },
     remove(id) {

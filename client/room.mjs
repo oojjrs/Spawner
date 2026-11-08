@@ -94,7 +94,7 @@ export function createRoom(title, seed, tribe, onProgress, cheats, beginnerHelpE
 
 export function saveRoom(room) {
   return { version: 2, id: room.id, title: room.title, hostId: room.hostId, seed: room.seed, world: room.world,
-    cheats: room.cheats === true, beginnerHelp: beginnerHelpState(room.beginnerHelp),
+    cheats: room.cheats === true, beginnerHelp: beginnerHelpState(room.beginnerHelp), designIds: { ...room.designIds },
     worldGenerationVersion: room.world.generationVersion,
     simulationUpdates: [...room.games].map(([owner, game]) => [owner, simulationUpdates.get(room)?.get(game) || null]),
     ending: room.games.get(room.hostId).ending,
@@ -138,7 +138,7 @@ export function restoreRoom(saved) {
   const size = (world.size || 320);
   const room = { id: saved.id, title: requireName(saved.title, 24),
     hostId: saved.hostId, seed: saved.seed, cheats: saved.cheats === true, simSeconds: saved.simSeconds, revision: 0, updatedAt: saved.updatedAt,
-    beginnerHelp: beginnerHelpState(saved.beginnerHelp || { enabled: saved.beginnerHelpEnabled }),
+    beginnerHelp: beginnerHelpState(saved.beginnerHelp || { enabled: saved.beginnerHelpEnabled }), designIds: { ...saved.designIds },
     resourceVersion: Number.isInteger(saved.resourceVersion) ? saved.resourceVersion : 0,
     world, colonies: [], games: new Map(), food: new Map(saved.food), foodSpots: new Map() };
   room.world.depletedTrees = new Set((saved.depletedTrees || []).filter(index => Number.isInteger(index) && index >= 0 && index < size * size));
