@@ -1,4 +1,4 @@
-import { applyRaidCombatScale } from "./raid-combat-scale.mjs";
+import { prepareRaidCreature, RAID_CREATURE_STAGES } from "./raid-combat-scale.mjs";
 import { CONQUEST_PACING } from "./conquest-pacing.mjs";
 import { worldSize } from "./world-size.mjs";
 import { COLONY_RAID_PRESSURE, colonyRaidPressure, colonyRaidCadence } from "./raid-pressure.mjs";
@@ -145,18 +145,19 @@ export function createBeetleRaids(environment, state, actions, restoring) {
       const site = sites.get(record.id);
       const guards = state.agents.filter(agent => agent.health > 0 && agent.burrowId === record.id && !agent.raid);
       if (!guards.length) { exhausted.add(colony.id); continue; }
-      const agent = guards.filter(agent => agent.mode !== "attack")
+      const agent = guards.filter(agent => agent.mode !== "attack" && !agent.combat && !agent.attack)
         .sort((left, right) => right.health - left.health || Math.hypot(left.x - site.entrance.x, left.y - site.entrance.y) - Math.hypot(right.x - site.entrance.x, right.y - site.entrance.y))[0];
       if (!agent) continue;
       const cells = path(agent, boundary(colony), false);
       if (!cells) continue;
       agent.raid = { colonyId:colony.id, phase:"outbound", departedAt:now };
-      applyRaidCombatScale(agent, now);
+      prepareRaidCreature(agent, now);
       agent.attackTargetId = null; agent.attackHit = true;
       if (now >= agent.moveStartedAt + agent.moveDuration) actions.idle(agent, 0);
       routes.set(agent.id, { phase:"outbound", path:cells, cursor:1, retryAt:now });
       record.raidSequence++;
-      record.nextRaidAt = now + cadence.interval;
+      record.nextRaidAt = Math.max(now + cadence.interval,
+        agent.raidCombatScale.stage < 2 ? RAID_CREATURE_STAGES[agent.raidCombatScale.stage + 1].at : 0);
       cooldown.nextRaidAt = record.nextRaidAt;
     }
     for (const id of routes.keys()) if (!state.agents.some(agent => agent.id === id && agent.health > 0 && agent.raid)) routes.delete(id);

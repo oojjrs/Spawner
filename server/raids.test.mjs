@@ -1,6 +1,5 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { colonyRaidCadence } from "./raid-pressure.mjs";
 import { createCreatures } from "./creatures.mjs";
 import { CORPSE_LIFETIME } from "./corpses.mjs";
 import { BEETLE_ANIMATIONS } from "./beetle-animation.mjs";
@@ -47,7 +46,7 @@ test("5분 전에는 습격하지 않고 큰 굴만 5분~5분 30초에 기존 �
   assert.equal(raids.length, 1); assert.equal(raids[0].burrowId, "large:1"); assert.equal(raids[0].raid.departedAt, first);
   assert.equal(system.agents.filter(agent => agent.burrowId === "large:1" && agent.health > 0).length, 3);
   assert.equal(system.agents.filter(agent => agent.burrowId === "large:1" && !agent.raid && agent.health > 0).length, 2);
-  const interval = system.save().burrows[0].nextRaidAt - first; assert.equal(interval, 135);
+  assert.equal(system.save().burrows[0].nextRaidAt, 480);
 });
 
 test("남은 병력이 없거나 굴이 파괴되면 습격을 보내지 않는다", () => {
@@ -69,14 +68,13 @@ test("여러 큰 굴이 있어도 한 둥지에는 단계별 간격으로 1마�
     advance(room, system, first);
     const active = system.agents.filter(agent => agent.health > 0 && agent.raid); assert.equal(active.length, 1);
     const departed = active[0].raid.departedAt, cooldown = system.save().raidCooldowns[0].nextRaidAt;
-    assert.equal(cooldown, departed + 135);
+    assert.equal(cooldown, 480);
     if (killed) system.receiveDamage(active[0], 100);
     advance(room, system, cooldown - .001);
     assert.equal(system.agents.filter(agent => agent.health > 0 && agent.raid).length, killed ? 0 : 1);
     if (!killed) assert.ok(["outbound", "active"].includes(active[0].raid.phase));
     advance(room, system, cooldown);
     const next = system.agents.filter(agent => agent.health > 0 && agent.raid?.departedAt > departed);
-    if (!killed) { assert.equal(next.length, 0); continue; } // Initial phase allows one living raider.
     assert.equal(next.length, 1); assert.equal(next[0].raid.departedAt, cooldown);
     assert.equal(system.agents.filter(agent => agent.health > 0 && !agent.raid && agent.burrowId === next[0].burrowId).length, 1);
   }
@@ -217,11 +215,11 @@ test("각 군락이 담당 굴에서 첫 습격을 받고 다음 출정도 자�
   const first = system.agents.filter(agent => agent.raid);
   assert.deepEqual(first.map(agent => agent.raid.colonyId).sort(), [1, 2]);
   assert.equal(new Set(first.map(agent => agent.burrowId)).size, 2);
-  const departures = first.map(agent => ({ colonyId:agent.raid.colonyId, time:agent.raid.departedAt }));
+  const departures = first.map(agent => ({ colonyId:agent.raid.colonyId }));
   for (const agent of first) system.receiveDamage(agent, 100);
-  advance(room, system, 465);
+  advance(room, system, 480);
   for (const departure of departures) assert.ok(system.agents.some(agent => agent.raid?.colonyId === departure.colonyId &&
-    Math.abs(agent.raid.departedAt - departure.time - 135) < 1e-8));
+    agent.raid.departedAt === 480));
 });
 
 test("초기 출정은 5분대로 제한하고 교체 여력에 따라 다른 출정 주기를 유지한다", () => {
@@ -234,7 +232,7 @@ test("초기 출정은 5분대로 제한하고 교체 여력에 따라 다른 �
     const first = cooldown.nextRaidAt, opening = structuredClone(cooldown.opening);
     advance(room, system, first);
     assert.equal(system.agents.filter(agent=>agent.raid).length, 1);
-    assert.ok(Math.abs(cooldown.nextRaidAt - first - colonyRaidCadence(first, opening.pressure).interval) < 1e-8);
+    assert.equal(cooldown.nextRaidAt, 480);
     const saved = structuredClone(system.save());
     room.games.get("owner").colonyFood = 10000;
     const restored = createCreatures(room, saved);

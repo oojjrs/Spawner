@@ -1,4 +1,4 @@
-import { applyRaidCombatScale } from "./raid-combat-scale.mjs";
+import { applyRaidCombatScale, prepareRaidCreature } from "./raid-combat-scale.mjs";
 import { worldSize } from "./world-size.mjs";
 import { beginCreatureSpawn, creatureSpawning } from "./creature-spawn.mjs";
 import { createEncounters } from "./encounters.mjs";
@@ -108,7 +108,7 @@ export function createCreatures(environment, saved) {
           !(environment.food.get(cell.x + "," + cell.y)?.amount > 0)) {
         const agent = spawnAt(cell.x, cell.y, "raid:" + colonyId + ":" + ++state.raidSpawnCount, null);
         agent.raid = { colonyId, phase: "active", departedAt: environment.simSeconds, forced: true };
-        applyRaidCombatScale(agent, environment.simSeconds);
+        prepareRaidCreature(agent, environment.simSeconds);
         agent.nextActionAt = environment.simSeconds;
         raiders.push(agent);
       }
@@ -268,7 +268,7 @@ export function createCreatures(environment, saved) {
 
   function dropCorpse(agent) {
     if (environment.simSeconds >= agent.deathStartedAt + CORPSE_LIFETIME) return;
-    placeCorpse(environment.food, { x: agent.x, y: agent.y, kind: "corpse", species, attributes: {}, facing: agent.facing,
+    placeCorpse(environment.food, { x: agent.x, y: agent.y, kind: "corpse", species: agent.species, attributes: {}, facing: agent.facing,
       agentId: agent.id, hurtStartedAt: agent.hurtStartedAt, hurtCount: agent.hurtCount,
       diedAt: agent.deathStartedAt, decaysAt: agent.deathStartedAt + CORPSE_LIFETIME,
       renderX: agent.deathRenderX, renderY: agent.deathRenderY });
@@ -278,10 +278,10 @@ export function createCreatures(environment, saved) {
     for (const agent of state.agents) {
       if (agent.health > 0) continue;
       if (!Number.isFinite(agent.deathStartedAt)) beginDeath(agent);
-      if ((environment.simSeconds - agent.deathStartedAt) * 1000 + 1e-6 >= BEETLE_ANIMATIONS.death.durationMs) dropCorpse(agent);
+      if ((environment.simSeconds - agent.deathStartedAt) * 1000 + 1e-6 >= (agent.species === species ? BEETLE_ANIMATIONS.death.durationMs : 0)) dropCorpse(agent);
     }
     state.agents = state.agents.filter(agent => {
-      const keep = agent.health > 0 || (environment.simSeconds - agent.deathStartedAt) * 1000 + 1e-6 < BEETLE_ANIMATIONS.death.durationMs;
+      const keep = agent.health > 0 || (environment.simSeconds - agent.deathStartedAt) * 1000 + 1e-6 < (agent.species === species ? BEETLE_ANIMATIONS.death.durationMs : 0);
       if (!keep) environment.unitIndex?.remove(agent);
       return keep;
     });
@@ -317,7 +317,7 @@ export function createCreatures(environment, saved) {
     agent.y = destination.y;
     agent.moveStartedAt = environment.simSeconds;
     agent.moveDuration = creatureMoveDuration(agent, environment.world.terrain[agent.y * size + agent.x]);
-    agent.nextActionAt = environment.simSeconds + agent.moveDuration + (agent.returningHome ? 0 : CREATURE_MOVEMENT[species].restSeconds);
+    agent.nextActionAt = environment.simSeconds + agent.moveDuration + (agent.returningHome ? 0 : CREATURE_MOVEMENT[agent.species].restSeconds);
     agent.animationStartedAt = environment.simSeconds;
     agent.mode = "walk";
     agent.stepCount++;
@@ -347,7 +347,7 @@ export function createCreatures(environment, saved) {
       if (agent.returningHome && Math.abs(agent.x - home.x) + Math.abs(agent.y - home.y) <= (agent.raid ? 3 : 0)) {
         agent.returningHome = false;
         delete agent.returnRetryAt;
-        agent.nextActionAt = now + CREATURE_MOVEMENT[species].restSeconds;
+        agent.nextActionAt = now + CREATURE_MOVEMENT[agent.species].restSeconds;
       }
       const candidates = (environment.unitIndex ? environment.unitIndex.nearby(agent.x, agent.y, agent.stats.vision)
         .filter(entry => entry.game) : opponents).concat(buildings);

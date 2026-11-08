@@ -5,7 +5,7 @@ import { unitDisplaySize } from "../client/unit-size.mjs";
 
 export function combatPositionRole(agent) {
   const role = creatureAttackRole(agent.species);
-  if (role) return role.position;
+  if (role) return agent.stats?.combat?.position || role.position;
   if (agent.stats?.dna?.ranged && !agent.stats.dna.melee) return "back";
   if (agent.attributes?.carapace > 0 || agent.dna?.pieces?.some(piece => piece.gene === "carapace")) return "front";
   return "middle";
@@ -62,7 +62,7 @@ export function advanceCombatPositions(units, time) {
     if (!point || unit.attack || time < Math.max(unit.combat.stunnedUntil || 0, unit.dnaStunnedUntil || 0)) {
       next.set(unit, { x: position.x, y: position.y }); continue;
     }
-    const role = combatPositionRole(unit), capabilities = unit.stats?.dna || creatureAttackRole(unit.species);
+    const role = combatPositionRole(unit), capabilities = unit.stats?.dna || unit.stats?.combat || creatureAttackRole(unit.species);
     const separation = combatSeparation(unit, target), dx = point.x - position.x, dy = point.y - position.y;
     const length = Math.hypot(dx, dy) || 1;
     const defensiveMelee = dnaDefensiveMelee(unit.stats?.dna) && (unit.combat.defending || dnaCanAttack(unit));

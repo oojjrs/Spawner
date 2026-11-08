@@ -62,26 +62,26 @@ test("non-raiders and unrelated species keep their original stats", () => {
   assert.equal(applyRaidCombatScale(other, 300), false); assert.deepEqual(other, original);
 });
 
-test("dispatch scales only the departing beetle and save restore retains its cohort", () => {
+test("dispatch prepares only the departing mole and save restore retains its cohort", () => {
   const {room,system} = fixture(false);
   room.simSeconds = system.save().burrows[0].nextRaidAt; system.tick();
   const raider = system.agents.find(agent => agent.raid);
-  assert.ok(raider); assert.equal(raider.stats.health,13); assert.ok(Math.abs(raider.stats.attack-.45)<1e-8);
+  assert.ok(raider); assert.equal(raider.species,"soil-mole"); assert.equal(raider.stats.health,16); assert.equal(raider.stats.attack,.75);
   assert.ok(system.agents.filter(agent => !agent.raid).every(agent => agent.stats.health===130 && agent.stats.attack===18));
   system.receiveDamage(raider, 5);
   const saved = JSON.parse(JSON.stringify(system.save()));
   room.simSeconds = 1600;
   const restored = createCreatures(room, saved), resumed = restored.agents.find(agent => agent.id===raider.id);
-  assert.equal(resumed.health,8); assert.equal(resumed.stats.health,13); assert.equal(resumed.raidCombatScale.stage,0);
+  assert.equal(resumed.health,11); assert.equal(resumed.stats.health,16); assert.equal(resumed.raidCombatScale.stage,0);
   const second = createCreatures(room, JSON.parse(JSON.stringify(restored.save()))).agents.find(agent=>agent.id===raider.id);
-  assert.deepEqual(second.stats,resumed.stats); assert.equal(second.health,8);
+  assert.deepEqual(second.stats,resumed.stats); assert.equal(second.health,11);
 });
 
 test("old active raids migrate by departure time; retired raiders remain weak after reload", () => {
   const {room,system} = fixture(false);
   room.simSeconds=system.save().burrows[0].nextRaidAt; system.tick();
   const saved=JSON.parse(JSON.stringify(system.save())), raider=saved.agents.find(agent=>agent.raid);
-  delete raider.raidCombatScale;raider.stats={...beetle().stats};raider.health=65;
+  delete raider.raidCombatScale;raider.species="spiny-back-beetle";raider.stats={...beetle().stats};raider.health=65;
   room.simSeconds=1500;
   const restored=createCreatures(room,saved), a=restored.agents.find(agent=>agent.id===raider.id);
   assert.equal(a.health,6.5);assert.equal(a.stats.health,13);
@@ -106,7 +106,7 @@ test("every cohort keeps damage and fractional injury through creature serializa
   for (const [index,stage] of RAID_COMBAT_STAGES.entries()) {
     const {room,system}=fixture(false);
     room.simSeconds=system.save().burrows[0].nextRaidAt;system.tick();
-    const a=system.agents.find(agent=>agent.raid);applyRaidCombatScale(a,stage.at);a.raid.departedAt=stage.at;
+    const a=system.agents.find(agent=>agent.raid);Object.assign(a,beetle());delete a.raidCombatScale;applyRaidCombatScale(a,stage.at);a.raid.departedAt=stage.at;
     a.health=a.stats.health*.6;
     const expected=structuredClone(a.stats), saved=JSON.parse(JSON.stringify(system.save()));
     room.simSeconds=2000;

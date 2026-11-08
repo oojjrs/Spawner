@@ -20,7 +20,7 @@ export function creatureAttackRole(species) {
 }
 
 export function creatureAttackMode(agent, separation) {
-  const role = creatureAttackRole(agent.species);
+  const role = agent.stats?.combat || creatureAttackRole(agent.species);
   if (!role || !Number.isFinite(separation) || separation < 0) return null;
   if (role.melee && separation <= DNA_ACTION_RULES.meleeRange) return "melee";
   if (role.ranged && separation <= DNA_ACTION_RULES.rangedRange) return "ranged";

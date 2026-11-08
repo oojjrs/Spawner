@@ -26,7 +26,7 @@ test("구저장 예약 시각은 보존하며 300초 전에는 실제 출정하�
   environment.simSeconds=299.999;raids.dispatch();assert.ok(state.agents.every(agent=>!agent.raid));
   environment.simSeconds=300;raids.dispatch();
   assert.equal(state.agents.filter(agent=>agent.raid).length,1);
-  assert.equal(state.raidCooldowns[0].nextRaidAt,435);
+  assert.equal(state.raidCooldowns[0].nextRaidAt,480);
 });
 
 test("이동 중 개체를 포함한 생존 습격 상한은 1·2·3이며 사망 뒤에만 자리가 빈다",()=>{
@@ -71,6 +71,6 @@ test("기존 opening 기록과 다음 예약은 복원 시 그대로이며 새 �
   assert.equal(first.state.raidCooldowns[0].nextRaidAt,600);
   first.environment.simSeconds=599;restored.dispatch();assert.ok(first.state.agents.every(agent=>!agent.raid));
   first.environment.simSeconds=600;restored.dispatch();
-  assert.equal(first.state.raidCooldowns[0].nextRaidAt,690);
+  assert.equal(first.state.raidCooldowns[0].nextRaidAt,720);
   assert.deepEqual(first.state.raidCooldowns[0].opening,opening);
 });

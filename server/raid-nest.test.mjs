@@ -115,16 +115,16 @@ for (const [surface, api] of surfaces) {
     f.room.creatureSystem.tick();
     const agent = f.room.creatureSystem.agents.find(unit => unit.raid);
     assert.ok(agent);
-    assert.equal(agent.raidCombatScale.version, 3);
-    assert.equal(agent.stats.health, 13);
-    assert.equal(agent.stats.attackPower, .45);
+    assert.equal(agent.raidCombatScale.version, 4);
+    assert.equal(agent.stats.health, 16);
+    assert.equal(agent.stats.attackPower, .75);
     f.room.creatureSystem.receiveDamage(agent, 2);
     const saved = JSON.parse(JSON.stringify(f.room.creatureSystem.save()));
     f.room.creatureSystem = api.createCreatures(f.room, saved);
     const restored = f.room.creatureSystem.agents.find(unit => unit.id === agent.id);
-    assert.equal(restored.health, 11);
-    assert.equal(restored.stats.health, 13);
-    assert.equal(restored.stats.attackPower, .45);
+    assert.equal(restored.health, 14);
+    assert.equal(restored.stats.health, 16);
+    assert.equal(restored.stats.attackPower, .75);
   });
   for (const indexed of [false, true]) {
     function raid(phase) {
