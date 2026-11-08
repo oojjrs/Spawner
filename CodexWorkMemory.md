@@ -1,3 +1,39 @@
+## 셀 전투 공격·방어 검사 커밋 범위 확정 [cell-combat-commit-01a1ba10]
+
+- 기록 2026-11-08T16:50:01+09:00; 커밋 승인 사용자, 범위분리 판단·기록 Codex /root. 출처 현재 채팅 커밋 요청, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 미제공. 이채팅의 셀진입전사격제거와 방어검사수정을 함께 로컬커밋한다.
+- 기준 HEAD 4b6b463c. 관련 combat.mjs/검사8개/runtime/메모리만 포함하며, 전투거리·승리연출·AI경제·안테나정찰·방버전의 병행변경은 제외한다. combat.mjs의 사격제거부분만 HEAD에 적용, unit-search는 셀밖공격금지항목만 포함, runtime은 HEAD에 해당combat모듈을 공식bundle함수로 치환한3실행면만 반영. 기존 작업폴더내용은 보존한다.
+- 방어 fixture의 새근접거리상수 의존을 제거하고 몸체간격.1로 고정한다. 이는 기존범위1/병행범위.12에서 모두 접촉상태이며, contact/complete의범위75%설정을 대체한다. 방어의미/기대결과는 동일. 기존검증근거를재사용하고 이변경의근접8조건 및 분리번들3면의공격금지조건만 확인한다.
+- 이채팅의관련기록6개를 메모리에서 분리하여 동일커밋에 포함하며 다른채팅의기록은그대로보존한다. 연결작업보드없음(nodes=[]/hasNextPage=false)은이채팅의조회결과재사용. 분리사본의 게임/판단Worker와 소스 접촉전후3조건, .1간격 방어8조건 모두 통과했다(도구e6bf1a). 번들은 HEAD의 공용bundle함수로생성한combat모듈3개만치환했고 다른모듈바이트는보존했다. 최종범위와Git상태확인후커밋하고 결과는 실제Git식별자로보고한다.
+## 기존 방어 검사 두 건 수정 완료 [defense-fixture-complete-01a1ba10]
+
+- 기록·마지막 동작 확인 2026-11-08T16:46:07+09:00; 요청·수정 승인 사용자, 구현·검수·기록 Codex /root. 출처 codex://threads/01a1ba10-4886-7883-aabd-83151b7f68ce 후속요청 및 실제도구ea6b68/9a4aec, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 미제공. defense-fixture-start/contact의 미완료와 cell-combat-complete의 방어검사2건 미수정 상태를 대체한다.
+- 원인·수정: 검사 설정이 옛 stats.parry/block에만 쓰여 현행 stats.combat 방어확률에 반영되지 않았다. combat.test의18종확정반격 조건을 현행 회피0/패링0/막기100/반격100으로 고정하고 실제프로필 확인을 추가. combat-defense-reset의 native 공통 fixture에 백분율 방어값과 블록감소율을 설정하고 호출별중복보정 제거. 추가로 병행근접사거리.12에 맞춰 시험 시작거리를 실제범위75%로 조정했다.
+- 실제 결과:18종반격저장1검사 통과, 방어리셋 최초12중4통과 및 접촉거리교정후 실패8개 모두 통과. 고유13검사 성공근거(최종전체일괄재실행 아님), 패링/막기 직후공격·후딜이후전체간격·회피시대기보존·연타보존·18종타격시각/단일피해/저장복원 확인. 이번후속에서 제품전투코드·실행번들은 변경하지 않았고 앞 셀밖사격 제거 및 병행작업/인덱스를 보존했다.
+- 변경2검사와 메모리는 미스테이징. 자료 H:/Spawner/$Trash/cell-combat-01a1ba10의 defense-fixed.tap, counter-fixed.tap, defense-contact-fixed.tap. 요청·원인·변경·실제결과 대조 완료, 이두실패에 대한 잔여작업 없음. 다른검사의현재전체성공을추정하지 않는다.
+## 방어 검사 현행 접촉거리 동기화 [defense-fixture-contact-01a1ba10]
+
+- 기록 2026-11-08T16:45:27+09:00; 관측·판단·기록 Codex /root, 출처 현재 채팅 실제 검사 및 combat-position.mjs diff. 반격저장1검사18종은 교정 후 통과(145ms). 방어리셋12검사는4통과8실패.
+- 추가 원인: 병행채팅01a1ba16의 COMBAT_MELEE_RANGE=.12가 현재 반영되어 fixture의 기존 몸체간격.5에서는 시각.3에 근접타격이 없었다. 같은 fixture 안 근접 시작거리만 현행범위75%로 맞추어 확정 방어 사건을 검사한다. 제품 접촉거리/병행 변경은 수정하지 않는다. 최초의 잘못된 방어필드 원인은 유지하며 추가 실패와 구분한다.
+## 기존 방어 검사 두 건 수정 진행 [defense-fixture-start-01a1ba10]
+
+- 기록 2026-11-08T16:44:41+09:00; 수정 승인 사용자, 원인진단·수정판단·기록 Codex /root. 출처 codex://threads/01a1ba10-4886-7883-aabd-83151b7f68ce 후속요청: 실패한 방어 검사2개도 원인 확인 후 수정. 원발언 정확시각·항목ID 미제공, H:/Spawner Windows PowerShell.
+- 확정 원인: combatAbilityStats는 stats.combat를 우선하며 combatProfile은 그 evasion/parry/block 백분율을 사용한다. 반격 저장검사는 옛 stats.block=1만 설정하여 현행 block확률을100으로 만들지 않았고, native parry fixture도 옛 stats.parry=1만 바꿔 원래 종족의 회피/패링확률이 남았다. 이전 baseline2건 실패증거 유지.
+- 수정판단: 반격 저장검사의 현행 방어값을 회피0/패링0/막기100/반격100으로 명시하고 실제 프로필을 검증. 방어리셋 공통 native fixture에 현행 백분율 반응값을 설정하여 호출별 중복보정을 제거. 제품 방어공식은 변경하지 않는다. 반격저장1조건(18종 반복)+방어리셋12조건을 대상으로 실행한다. 기존 셀밖사격 제거와 병행 거리/경제/커밋 변경 및 인덱스 보존.
+## 셀 진입 전 원거리 공격 제거 완료 [cell-combat-complete-01a1ba10]
+
+- 기록·마지막 확인 2026-11-08T16:42:00+09:00; 요구·규칙 결정 사용자, 구현·검수·기록 Codex /root. 출처 codex://threads/01a1ba10-4886-7883-aabd-83151b7f68ce, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 미제공. start 기록의 구현 미완료 상태를 대체한다.
+- 구현: server/combat.mjs의 반경3칸 자동사격 updateDnaActions와 전용 거리탐색 helper 제거. 접촉 전에는 투사체/공격/공속대기를 만들지 않으며 기존 engage의 같은 셀·이동완료 조건으로 진입한다. 중립·순수원거리·겸용·안테나유무에 공통 적용. 셀 내부 beginAttack/resolveHit의 원거리·연타·비행 피해·공격 간격은 보존. client/runtime.js 공식 runtime-only 생성 완료.
+- 관련 월드 사격 계약을 셀 접촉 전 금지 및 셀 내부 계약으로 이관: dna-actions, ranged-terminal-launch, unit-search, creature-combat, creature-attack-role, combat-defense-reset, lifespan 검사. 내장 게임/판단 Worker에서 셀 진입 전 공격·피해0/이동완료 뒤 교전 확인, 실제 중립 접근·막힌 경로·사거리·피해·반격 참조 분리·원거리 연타와 쿨타임·저장복원·자연사 취소 확인. UI/운영 실행 검수는 수행하지 않았다.
+- 실제 검증: 최초6파일154검사152통과, 사망 fixture의 실제 release 호출 누락1개 교정 후 통과. 추가2파일86검사76통과; 셀 내부 fixture의 완전한 방어스탯/정지능력, 범위별 공속 선택 및 native ranged 반응 설정을 교정하여 해당29+1조건 통과. lifespan 변경1조건 통과. 최초와 선택 재검증을 합친 고유241조건 중239통과 근거이며 최종 전체 일괄 재실행으로 표현하지 않는다. 제품 변경은 자동사격 제거 이후 추가하지 않았다.
+- 남은2개: combat.test의18종반격 저장 fixture(flower-tail-bird), combat-defense-reset의native parry. 각각 작업 전 combat 소스와 작업 전 검사로 동일실패 직접 재현하여 이번 제거와 무관한 기존 실패로 분리. 두 검사/제품 방어규칙은 수리하지 않았다. 자료 literal $Trash/cell-combat-01a1ba10의 tests.tap, migration.tap, deaths.tap, migration-fixed.tap, roles-fixed.tap 및 baseline 검사 사본. 코드/번들 기존 병행 변경 보존, 스테이징·커밋 없음.
+- 최종 요청·결정·구현·실측·기존 실패·다음 단계 대조 완료. 최종10텍스트 UTF8NoBOM/CRLF 모두 정상, 공백 diff 오류0 및 범위 diff 검토 완료. 기존 성공 검사는 반복하지 않았다.
+## 셀 진입 전 원거리 공격 제거 진행 [cell-combat-start-01a1ba10]
+
+- 기록 2026-11-08T16:32:45+09:00; 결정 사용자, 진단·구현 판단·기록 Codex /root. 출처 codex://threads/01a1ba10-4886-7883-aabd-83151b7f68ce 현재 요청, H:/Spawner Windows PowerShell. 원발언 정확시각·항목ID 미제공.
+- 사용자: 원거리 유닛도 같은 셀에서 전투가 벌어지기 전에는 공격하면 안 되므로 접근 중 사격 로직 제거. 기존 전사 수색 완료 기록의 월드 자동사격 허용을 이 범위에서 대체하며 적 탐색·추적은 유지한다.
+- 코드 확인: combat.mjs updateDnaActions가 접촉 처리보다 먼저 반경3칸의 적에게 독립 공격·투사체를 예약한다. engage는 같은 셀 및 이동완료를 요구하지만 이 경로가 이를 우회한다. 셀 내부 beginAttack/resolveHit의 원거리는 별도 존재한다.
+- 판단: 월드 자동사격 생성과 그 전용 탐색 helper 제거, 셀 내부 원거리·연타·피해/기존 추적 유지. 기존 월드 사격을 요구하는 검사를 새 규칙과 셀 내부 투사체 계약으로 갱신한다. source/내장 게임·판단 Worker와 접촉 전후를 제한 검증할 예정. 연결 GitHub Projects 조회 nodes=[]/hasNextPage=false.
+- 기존 runtime·unit-search 검사·메모리에는 병행 변경이 있어 국소 수정/공식 runtime-only 동기화로 보존한다. 다른 경제·AI·실험실 변경은 이번 수정 대상이 아니다. 현재 구현·검증 미완료.
 ## 전투 템플릿 커밋 범위 분리 [lab-templates-commit-01a1ba01]
 
 - 기록 2026-11-08T16:40:34+09:00; 커밋승인 사용자, 범위분리·검수·기록 Codex /root. 출처현재채팅커밋요청, H:/Spawner Windows PowerShell. 원발언정확시각·항목ID미제공.

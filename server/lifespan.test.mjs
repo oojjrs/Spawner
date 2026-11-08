@@ -158,7 +158,7 @@ test("군락 갱신 순서와 무관하게 수명과 타격이 겹치면 자연�
 });
 
 
-test("마지막 사수나 표적의 자연사는 발사 전후 투사체를 한 번 취소하고 실제 명중은 취소하지 않는다", () => {
+test("셀 전투 마지막 사수나 표적의 자연사는 준비 공격과 발사된 투사체를 취소한다", () => {
   for (const expires of ["source", "target", "both", "neither"]) for (const lifespan of [1.1, 1.25]) {
     const { room, game } = fixture(createGame, "bean");
     room.revision = 0; room.combatRandom = () => .99; room.damageRandom = () => .5;
@@ -175,7 +175,7 @@ test("마지막 사수나 표적의 자연사는 발사 전후 투사체를 한 
       const agent = saved.state.agents[0];
       agent.dna = { version: 6, level: 3, budget: 1000, pieces: M.pack([index ? "blade" : "secretion", "antenna"].map(gene =>
         ({ gene, grade: M.lookup.get(gene).grade, rotation: 0 })), 3) };
-      agent.x = agent.renderFromX = 50 + index * 2; agent.y = agent.renderFromY = 50;
+      agent.x = agent.renderFromX = 50; agent.y = agent.renderFromY = 50;
       agent.birth = null; agent.moveDuration = 0; agent.utility = null;
       current.restore(JSON.stringify(saved));
       const unit = current.agents[0];
@@ -185,12 +185,17 @@ test("마지막 사수나 표적의 자연사는 발사 전후 투사체를 한 
       unit.stats.dna.focus = .3;
       actors.push(unit);
     }
-    room.simSeconds = .9; tickRoom(room, 0);
-    assert.equal(actors[0].dnaProjectiles.length, 1);
+    room.simSeconds = .9;
+    actors[1].attackReady = 1000;
+    assert.ok(room.combatSystem.engage(actors[0], actors[1], .9));
+    for (const [unit, x] of [[actors[0], -1], [actors[1], 1]]) Object.assign(unit.combat.position, { x, y: 0, fromX: x, fromY: 0 });
+    tickRoom(room, 0);
+    assert.equal(actors[0].attack.attackMode, "ranged");
+    assert.equal(actors[0].dnaProjectiles?.length || 0, 0);
     for (let step = 0; step < 8; step++) tickRoom(room, .1);
-    assert.equal(actors[0].dnaProjectiles.length, 0);
+    assert.equal(actors[0].dnaProjectiles?.length || 0, 0);
     const canceled = events.filter(event => event.kind === "projectile-cancel");
-    assert.equal(canceled.length, expires === "neither" ? 0 : 1);
+    assert.equal(canceled.length, expires !== "neither" && lifespan > 1.2 ? 1 : 0);
     assert.equal(events.filter(event => event.kind === "shoot").length, expires === "neither" || lifespan > 1.2 ? 1 : 0);
     if (expires === "neither") {
       assert.equal(actors[1].health, 0);

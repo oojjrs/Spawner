@@ -597,7 +597,10 @@ test("미명중과 명중 후 구형 종별 저장은 기존 피해를 보존하
 test("18종의 확정 방어·반격 fixture도 저장 복원 시 원본 타격 셀과 단일 피해를 보존한다", () => {
   for (const species of Object.keys(CREATURE_ATTACK_TIMINGS)) {
     const f = pair(); durable(f.a, f.b); f.b.species = species; singleNativeAttack(f.b);
-    f.b.stats.block = 1; f.b.stats.combat.counter = 100; f.b.stats.speed = 0; f.b.attackReady = 1000;
+    Object.assign(f.b.stats.combat, { evasion: 0, parry: 0, block: 100, counter: 100 });
+    assert.equal(combatProfile(f.b).block, 1, species);
+    assert.equal(combatProfile(f.b).evasion, 0, species);
+    f.b.stats.speed = 0; f.b.attackReady = 1000;
     startAttacks(f, [f.a]); f.tick(f.a.attack.hitAt);
     advanceUntil(f, () => f.b.attack?.counter, 20);
     assert.ok(f.b.attack.counter, species);

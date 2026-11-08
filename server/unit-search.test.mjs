@@ -194,21 +194,33 @@ for (const [surface, api] of surfaces) {
     }
   });
 
-  test(surface + " · 원거리 자동 사격도 안테나 없이는 자신의 시야를 따른다", () => {
-    for (const genes of [["secretion"], ["secretion", "antenna"]]) {
-      const f = fixture(api, genes), target = addEnemy(f);
+  test(surface + " · 원거리와 겸용 전사는 안테나가 있어도 같은 셀에 도착하기 전에는 사격하지 않는다", () => {
+    for (const genes of [["secretion"], ["secretion", "antenna"], ["blade", "secretion"], ["blade", "secretion", "antenna"]]) {
+      const f = fixture(api, genes), target = addEnemy(f), events = [];
       const environment = { simSeconds: 0, world: { size: f.size, terrain: new Uint8Array(f.size * f.size).fill(4) },
-        colonies: [f.colony], games: new Map(), combatRandom: () => .99, damageRandom: () => .5 };
+        colonies: [f.colony], games: new Map(), combatRandom: () => .99, damageRandom: () => .5,
+        onCombatEvent: event => events.push(event) };
       for (const agent of [f.agent, target]) environment.games.set(agent.ownerId, { agents: [agent],
         receiveDamage(unit, damage) { unit.health -= damage; } });
-      const combat = api.createCombat(environment);
-      combat.update(f.agent, 0);
-      assert.equal(!!f.agent.attack, genes.includes("antenna"));
-      if (!f.agent.attack) {
-        target.x = 16;
-        combat.update(f.agent, .3);
-        assert.equal(f.agent.attack.targetId, target.id);
+      const combat = api.createCombat(environment), health = target.health;
+      for (const [time, x] of [[0, 18], [1, 17], [2, 16]]) {
+        target.x = x;
+        assert.equal(combat.update(f.agent, time), false);
+        assert.ok(!f.agent.attack);
+        assert.ok(!f.agent.combat);
+        assert.equal(f.agent.dnaProjectiles?.length || 0, 0);
+        assert.equal(target.health, health);
       }
+      assert.equal(events.length, 0);
+      target.x = f.agent.x;
+      target.moveStartedAt = 2; target.moveDuration = 1;
+      combat.update(f.agent, 2.99);
+      assert.ok(!f.agent.combat);
+      combat.update(f.agent, 3);
+      assert.equal(f.agent.combat.id, target.combat.id);
+      for (let step = 1; step <= 100 && !events.some(event => event.kind === "attack" && event.sourceId === f.agent.id); step++)
+        combat.update(f.agent, 3 + step / 20);
+      assert.ok(events.some(event => event.kind === "attack" && event.sourceId === f.agent.id));
     }
   });
 

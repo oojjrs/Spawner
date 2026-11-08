@@ -1,7 +1,7 @@
 import { isNestDefender } from "./nest-defender.mjs";
 import { basicRecoveryRate, UNIT_RECOVERY_RULES as SHARED_UNIT_RECOVERY_RULES } from "./unit-recovery.mjs";
 import { DNA_ACTION_RULES, dnaAttackMode, dnaDefensiveMelee, dnaProjectileDuration, dnaProjectileValid } from "./dna-actions.mjs";
-import { creatureAttackRole, creatureAttackMode } from "./creature-attack-role.mjs";
+import { creatureAttackRole } from "./creature-attack-role.mjs";
 import { initializeCombatPosition, advanceCombatPositions, combatSeparation, combatPositionMode } from "./combat-position.mjs";
 import { dnaCanMove, dnaCanSearch, dnaCanAttack } from "./dna-unit.mjs";
 import { worldSize } from "./world-size.mjs";
@@ -574,12 +574,6 @@ export function createCombat(environment) {
   }
 
 
-  function nearby(agent, radius) {
-    return environment.unitIndex ? environment.unitIndex.nearby(agent.x, agent.y, radius) : entries().filter(entry => distance(agent, entry.agent) <= radius);
-  }
-
-  function distance(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
-
   function projectileHit(projectile, time) {
     const { source, target } = projectile, defender = target.agent;
     if (!dnaProjectileValid({ ...source, retreat: null }, { ...defender, retreat: null })) return;
@@ -663,73 +657,14 @@ export function createCombat(environment) {
       }
   }
 
-  function updateDnaActions(agent, time) {
-    if (!agent.combat) updateProjectiles(time);
-    const stats = attackStats(agent);
-    if (!stats || !stats.ranged || !settled(agent, time) || agent.retreat ||
-        time < Math.max(agent.dnaStunnedUntil || 0, agent.combat?.stunnedUntil || 0)) return false;
-    if (!agent.combat && agent.attack?.dnaRanged) {
-      if (time < agent.attack.endsAt) return true;
-      agent.attack = null; agent.attackTargetId = null;
-    }
-    if (!stats.ranged || agent.combat || agent.attack || time < (agent.attackReady || 0) || time < (agent.dnaScanReady || 0)) return false;
-    agent.dnaScanReady = time + .25;
-    const targets = nearby(agent, DNA_ACTION_RULES.rangedRange).filter(entry => {
-      const target = entry.agent;
-      const game = isNestDefender(agent) ? environment.games.get(agent.ownerId) : null;
-      const guardDefending = !!game?.isVisible?.(target.x, target.y) &&
-        colonyDefenseTarget(agent, target, game.agents, [game.nest]);
-      const defending = isNestDefender(agent) ? guardDefending :
-        agent.utility?.action === "fight" && agent.utility.target?.id === target.id || target.attack?.targetId === agent.id;
-      const actor = agent.species && !agent.stats?.dna && defending && combatDisposition(agent) === "peaceful" ?
-        { ...agent, combatDisposition: "passive" } : agent;
-      return (environment.combatSimulation || dnaCanSearch(agent, target, time) || guardDefending) &&
-        dnaProjectileValid(agent, target) && canTargetCombat(actor, target, time, defending) &&
-        (!agent.species || agent.stats?.dna || creatureAttackMode(agent, distance(agent, target)) === "ranged") &&
-        distance(agent, target) > 0 && distance(agent, target) <= DNA_ACTION_RULES.rangedRange;
-    }).sort((a, b) => distance(agent, a.agent) - distance(agent, b.agent) || String(a.agent.id).localeCompare(String(b.agent.id)));
-    const target = targets[0]; if (!target) return false;
-    const separation = distance(agent, target.agent), windup = stats.focus, launchedAt = time + windup;
-    const arrivesAt = launchedAt + dnaProjectileDuration(separation), interval = 1 / stats.rangedSpeed;
-    const timing = CREATURE_ATTACK_TIMINGS[agent.species] || { durationMs: AGENT_ATTACK_DURATION * 1000 };
-    const recovery = Math.max(combatProfile(agent).recovery, timing.durationMs / 1000 - (timing.hitTimeMs / 1000 || AGENT_ATTACK_HIT_TIME));
-    const hitCount = actionCount(stats.hits);
-    const lastLaunchAt = launchedAt + (hitCount - 1) * stats.comboSpeed, endsAt = lastLaunchAt + recovery;
-    agent.attackReady = endsAt + interval;
-    agent.attackInterval = interval;
-    agent.attack = { dnaRanged: true, attackMode: "ranged", startedAt: time, launchedAt, hitAt: arrivesAt, shotLaunches: [],
-      endsAt, recovery, interval, hitCount, speed: 1, targetId: target.agent.id, targetKind: "agent", targetX: target.agent.x, targetY: target.agent.y,
-      fromX: agent.x, fromY: agent.y, directionX: Math.sign(target.agent.x - agent.x) || 1, resolved: false, hit: false };
-    const causeId = combatVfxToken(environment, "attack");
-    attackCauses.set(agent.attack, causeId);
-    vfx("attack", time, agent, target.agent, 0, { causeId, mode: "ranged", endsAt: launchedAt });
-    agent.attackTargetId = target.agent.id;
-    if (agent.species && !agent.stats?.dna) {
-      agent.attackStartedAt = time; agent.animationStartedAt = time; agent.attackHit = false;
-      agent.facing = agent.attack.directionX;
-      agent.mode = agent.species === "spiny-back-beetle" ? "attack" : "fight";
-    }
-    for (let hitIndex = 0; hitIndex < hitCount; hitIndex++) {
-      const shotLaunch = launchedAt + hitIndex * stats.comboSpeed, shotArrival = arrivesAt + hitIndex * stats.comboSpeed;
-      // Keep the animation clock after a projectile arrives and its visual is removed.
-      agent.attack.shotLaunches.push(shotLaunch);
-      const visual = { launchedAt: shotLaunch, hitAt: shotArrival, fromX: agent.x, fromY: agent.y, targetX: target.agent.x, targetY: target.agent.y };
-      agent.dnaProjectiles = [...(agent.dnaProjectiles || []), visual];
-      projectiles.add({ source: agent, target, arrivesAt: shotArrival, launchedAt: shotLaunch, launched: false,
-        attack: agent.attack, visual, hitIndex, vfxId: combatVfxToken(environment, "projectile") });
-    }
-    return true;
-  }
-
   function update(agent, time) {
-    // Capture even an expired attack before ranged cleanup clears it after a long tick.
     if (agent.attack) agent.dnaLastAttackAt = Math.max(agent.dnaLastAttackAt || 0,
       agent.attack.endsAt || agent.attack.startedAt || time);
     if (!canRetreat(agent)) updateRetreat(agent, time, false);
-    const rangedBusy = updateDnaActions(agent, time);
+    if (!agent.combat) updateProjectiles(time);
     updateEffects(agent, time);
     if (agent.health <= 0) { agent.attack = null; return false; }
-    if ((rangedBusy || time < (agent.dnaStunnedUntil || 0)) && !agent.combat) return true;
+    if (time < (agent.dnaStunnedUntil || 0) && !agent.combat) return true;
     if (!agent.combat) contact(agent, time);
     const combat = agent.combat;
     if (!combat) return false;

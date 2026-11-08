@@ -4,6 +4,7 @@ import { CREATURE_ATTACK_ROLES, creatureAttackRole, creatureAttackMode } from ".
 import { createCombat, combatDisposition, canPursueCombat } from "./combat.mjs";
 import { unitCombatStats, combatProfile, combatDamage } from "./combat-stats.mjs";
 import { CREATURE_MOVEMENT } from "./creature-movement.mjs";
+import { combatPositionRadius } from "./combat-position.mjs";
 import { DNA_ACTION_RULES } from "./dna-actions.mjs";
 import { ATTRIBUTE_DNA } from "./dna.mjs";
 import { NEUTRAL_UNIT_STATS } from "./neutral-unit-stats.mjs";
@@ -67,6 +68,16 @@ function fixture(species, separation, disposition) {
     combat.update(target, time);
   }
   return { source, target, environment, combat, tick, hits, events };
+}
+
+function cellFixture(species, separation, disposition) {
+  const f = fixture(species, 0, disposition);
+  f.target.stats.speed = 0;
+  f.target.stats.combat = { ...ATTRIBUTE_DNA.stats([]), armor: 16, melee: false, ranged: false };
+  assert.ok(f.combat.engage(f.source, f.target, 0));
+  const gap = separation + combatPositionRadius(f.source) + combatPositionRadius(f.target);
+  for (const [unit, x] of [[f.source, 0], [f.target, gap]]) Object.assign(unit.combat.position, { x, y: 0, fromX: x, fromY: 0 });
+  return f;
 }
 
 function until(f, predicate) {
@@ -147,104 +158,74 @@ test("모든 중립의 거리 0·1·1초과·3·3초과 경계를 기존 사거�
 });
 
 for (const species of rangedSpecies) {
-  test(`${species}: 거리 2의 실제 투사체는 발사 뒤 비행하고 도착 때 기존 피해를 한 번 준다`, () => {
-    const f = fixture(species, 2, "aggressive"), before = structuredClone(f.source.stats);
+  test(`${species}: 셀 내부 원거리 투사체는 비행 뒤 기존 피해를 한 번 준다`, () => {
+    const f = cellFixture(species, 2, "aggressive"), before = structuredClone(f.source.stats);
     const damage = expectedDamage(species);
-    near(combatDamage(f.source, f.target, .5), damage);
-    f.tick(0);
-    const attack = f.source.attack;
-    assert.equal(attack?.attackMode, "ranged");
-    assert.equal(attack.targetId, f.target.id);
-    assert.ok(!f.source.combat && !f.target.combat);
+    f.tick(0); const attack = f.source.attack;
+    assert.equal(attack.attackMode, "ranged");
+    assert.equal(attack.combatId, f.target.combat.id);
     near(attack.launchedAt, f.source.stats.combat.focus);
-    near(attack.hitAt, attack.launchedAt + 2 / 6);
     near(f.source.attackReady - attack.endsAt, 1 / f.source.stats.combat.rangedSpeed);
     f.tick(attack.launchedAt - epsilon);
     assert.equal(sourceEvents(f, "shoot").length, 0);
     assert.equal(f.target.health, 100);
     f.tick(attack.launchedAt);
-    assert.equal(sourceEvents(f, "shoot").length, 1);
-    assert.equal(f.target.health, 100);
-    f.tick(attack.hitAt - epsilon);
-    assert.equal(f.target.health, 100);
-    f.tick(attack.hitAt);
-    f.tick(attack.hitAt);
+    const shot = sourceEvents(f, "shoot")[0];
+    near(shot.arrivesAt - shot.at, (2 + combatPositionRadius(f.source) + combatPositionRadius(f.target)) / 6);
+    f.tick(shot.arrivesAt - epsilon); assert.equal(f.target.health, 100);
+    f.tick(shot.arrivesAt); f.tick(shot.arrivesAt);
     near(f.target.health, 100 - damage);
-    assert.equal(f.hits.length, 1); assert.equal(f.hits[0].id, f.target.id); near(f.hits[0].amount, damage);
-    const shot = sourceEvents(f, "shoot")[0], hit = sourceEvents(f, "hit")[0];
-    assert.equal(sourceEvents(f, "hit").length, 1);
-    assert.equal(hit.mode, "ranged");
-    assert.equal(hit.at, attack.hitAt);
-    near(hit.amount, damage);
-    assert.equal(hit.projectileId, shot.projectileId);
-    assert.equal(hit.causeId, shot.causeId);
-    near(shot.arrivesAt - shot.at, 2 / 6);
-    assert.deepEqual(f.source.dnaProjectiles, []);
-    assert.deepEqual(f.source.stats, before);
-    noDna(f.source);
-    noDna(f.target);
+    const hit = sourceEvents(f, "hit")[0];
+    assert.equal(f.hits.length, 1); assert.equal(sourceEvents(f, "hit").length, 1);
+    assert.equal(hit.mode, "ranged"); assert.equal(hit.at, shot.arrivesAt);
+    near(hit.amount, damage); assert.equal(hit.projectileId, shot.projectileId); assert.equal(hit.causeId, shot.causeId);
+    assert.deepEqual(f.source.dnaProjectiles, []); assert.deepEqual(f.source.stats, before);
+    noDna(f.source); noDna(f.target);
   });
 
-  test(`${species}: 실제 원거리 사거리 3은 포함하고 3초과는 제외한다`, () => {
-    for (const separation of [3, 3 + epsilon]) {
+  test(`${species}: 월드 거리 1~3은 공격하지 않고 셀 내부 사거리 3은 포함한다`, () => {
+    for (const separation of [1, 2, 3]) {
       const f = fixture(species, separation, "aggressive");
-      f.tick(0);
-      if (separation === 3) {
-        assert.equal(f.source.attack?.attackMode, "ranged");
-        const attack = f.source.attack;
-        near(attack.hitAt - attack.launchedAt, .5);
-        f.tick(attack.hitAt - epsilon);
-        assert.equal(f.target.health, 100);
-        f.tick(attack.hitAt);
-        assert.ok(f.target.health < 100);
-      } else {
-        f.tick(1);
-        assert.ok(!f.source.attack && !f.source.combat);
-        assert.equal(sourceEvents(f, "shoot").length, 0);
-        assert.equal(f.target.health, 100);
-      }
+      f.tick(0); f.tick(1);
+      assert.ok(!f.source.attack && !f.source.combat);
+      assert.equal(f.events.length, 0); assert.equal(f.target.health, 100);
+    }
+    for (const separation of [3, 3 + epsilon]) {
+      const f = cellFixture(species, separation, "aggressive"); f.tick(0);
+      assert.equal(!!f.source.attack, separation === 3);
+      assert.equal(f.target.health, 100);
     }
   });
 
-  test(`${species}: 발사 전 취소는 피해를 없애고 발사 후 공격 종료는 비행탄을 유지한다`, () => {
-    const cancelled = fixture(species, 2, "aggressive");
-    cancelled.tick(0);
-    const cancelledAttack = cancelled.source.attack, ready = cancelled.source.attackReady;
-    cancelled.source.attack = null;
-    cancelled.tick(cancelledAttack.hitAt);
-    assert.equal(cancelled.target.health, 100);
-    assert.equal(sourceEvents(cancelled, "shoot").length, 0);
-    assert.equal(sourceEvents(cancelled, "projectile-cancel").length, 1);
-    assert.deepEqual(cancelled.source.dnaProjectiles, []);
-    assert.equal(cancelled.source.attackReady, ready);
-    const launched = fixture(species, 2, "aggressive");
-    launched.tick(0);
-    const attack = launched.source.attack;
-    launched.tick(attack.launchedAt);
-    launched.source.attack = null;
-    launched.tick(attack.hitAt);
-    assert.ok(launched.target.health < 100);
-    assert.equal(sourceEvents(launched, "shoot").length, 1);
-    assert.equal(sourceEvents(launched, "hit").length, 1);
-    assert.equal(sourceEvents(launched, "projectile-cancel").length, 0);
+  test(`${species}: 셀 내부 발사 전 취소는 피해를 없애고 발사 후 공격 종료는 비행탄을 유지한다`, () => {
+    for (const emitted of [0, 1]) {
+      const f = cellFixture(species, 2, "aggressive"); f.tick(0);
+      const attack = f.source.attack, ready = f.source.attackReady;
+      if (emitted) f.tick(attack.launchedAt);
+      const arrival = emitted ? f.source.dnaProjectiles[0].hitAt : attack.launchedAt + 1;
+      f.source.attack = null; f.source.combat.nextAttackAt = Infinity;
+      f.tick(arrival);
+      near(f.target.health, 100 - emitted * expectedDamage(species));
+      assert.equal(sourceEvents(f, "shoot").length, emitted); assert.equal(sourceEvents(f, "hit").length, emitted);
+      assert.equal(sourceEvents(f, "projectile-cancel").length, 0);
+      assert.equal(f.source.dnaProjectiles?.length || 0, 0); assert.equal(f.source.attackReady, ready);
+    }
   });
 
-  test(`${species}: 발사 후 사망·숨김은 취소하고 후퇴해도 이미 발사된 투사체는 도달한다`, () => {
+  test(`${species}: 셀 내부 발사 후 사망·숨김은 취소하고 후퇴한 발사체는 도달한다`, () => {
     for (const participant of ["source", "target"]) for (const field of ["health", "hidden", "retreat"]) {
-      const f = fixture(species, 2, "aggressive");
-      f.tick(0);
-      const attack = f.source.attack;
-      f.tick(attack.launchedAt);
-      f[participant][field] = field === "health" ? 0 : true;
+      const f = cellFixture(species, 2, "aggressive"); f.tick(0); f.tick(f.source.attack.launchedAt);
+      const arrival = f.source.dnaProjectiles[0].hitAt;
+      f[participant][field] = field === "health" ? 0 : field === "retreat" ?
+        { startedAt: f.environment.simSeconds, attempts: 0, safeSince: null, recoverHealth: 70 } : true;
       const health = f.target.health;
-      f.tick(attack.hitAt);
+      if (field === "health") f.combat.release(f[participant], arrival);
+      f.tick(arrival);
       if (field === "retreat") {
-        assert.ok(f.target.health < health, participant);
-        assert.equal(sourceEvents(f, "hit").length, 1);
+        assert.ok(f.target.health < health, participant); assert.equal(sourceEvents(f, "hit").length, 1);
         assert.equal(sourceEvents(f, "projectile-cancel").length, 0);
       } else {
-        assert.equal(f.target.health, health, participant + ":" + field);
-        assert.equal(sourceEvents(f, "hit").length, 0);
+        assert.equal(f.target.health, health, participant + ":" + field); assert.equal(sourceEvents(f, "hit").length, 0);
         assert.equal(sourceEvents(f, "projectile-cancel").length, 1);
       }
       assert.deepEqual(f.source.dnaProjectiles, []);
@@ -325,7 +306,7 @@ test("역할 추가는 기존 19종의 선공·비선공·평화 성향과 선�
     const f = fixture(species, 2, undefined);
     assert.equal(combatDisposition(f.source), disposition, species);
     f.tick(0);
-    assert.equal(!!f.source.attack, disposition === "aggressive" && ranged, species);
+    assert.equal(!!f.source.attack, false, species);
     if (disposition !== "aggressive") {
       f.tick(1);
       assert.equal(f.target.health, 100);
@@ -339,22 +320,15 @@ test("역할 추가는 기존 19종의 선공·비선공·평화 성향과 선�
 });
 
 for (const species of contactSpecies) {
-  test(`${species}: 원거리에서 같은 셀로 바뀌어도 이미 소비한 공속 대기 후 전투 공격한다`, () => {
-    const f = fixture(species, 2, "aggressive");
-    f.tick(0);
-    const attack = f.source.attack, ready = f.source.attackReady;
-    f.tick(attack.hitAt);
+  test(`${species}: 셀 접근 중 공속을 소비하지 않고 접촉한 뒤 전투 공격한다`, () => {
+    const f = fixture(species, 2, "aggressive"); f.tick(0); f.tick(1);
+    assert.ok(!f.source.attack && !f.source.combat);
+    assert.equal(f.source.attackReady || 0, 0);
     f.target.x = f.target.renderFromX = f.source.x;
-    f.tick(attack.hitAt + .01);
-    assert.ok(f.source.combat);
-    near(f.source.combat.nextAttackAt, ready);
-    assert.ok(!f.source.attack);
-    f.tick(ready - epsilon);
-    assert.ok(!f.source.attack);
-    f.tick(ready);
     until(f, () => f.source.attack);
+    assert.equal(f.source.combat.id, f.target.combat.id);
     assert.ok(["melee", "ranged"].includes(f.source.attack.attackMode));
-    assert.ok(f.source.attack.startedAt >= ready);
+    assert.ok(f.source.attack.startedAt >= 1);
     near(f.source.combat.nextAttackAt - f.source.attack.endsAt, combatProfile(f.source).attackInterval);
     noDna(f.source);
   });
@@ -362,10 +336,11 @@ for (const species of contactSpecies) {
 
 test("중립 원거리도 기존 공격속도와 이동속도의 독립성·피해 난수 공식을 유지한다", () => {
   for (const species of rangedSpecies) for (const speed of [.5, 2]) {
-    const f = fixture(species, 2, "aggressive");
+    const f = cellFixture(species, 2, "aggressive");
     f.source.stats.attackSpeed = speed; f.source.stats.combat.rangedSpeed = speed;
     f.source.stats.speed = speed === .5 ? 8 : .1;
-    const profile = combatProfile(f.source), damage = combatDamage(f.source, f.target, .5);
+    const profile = combatProfile({ ...f.source, attack: { attackMode: "ranged" } }), damage = combatDamage(f.source, f.target, .5);
+    const gap = f.target.combat.position.x;
     let rolls = 0;
     f.environment.damageRandom = () => { rolls++; return .5; };
     f.tick(0);
@@ -376,13 +351,15 @@ test("중립 원거리도 기존 공격속도와 이동속도의 독립성·피�
     assert.equal(rolls, 0);
     f.tick(attack.launchedAt);
     assert.equal(rolls, 0);
-    f.tick(attack.hitAt);
-    f.tick(attack.hitAt);
+    const arrival = f.source.dnaProjectiles[0].hitAt;
+    f.tick(arrival); f.tick(arrival);
     assert.equal(rolls, 1);
     near(f.target.health, 100 - damage);
     f.tick(ready - epsilon);
     assert.equal(sourceEvents(f, "attack").length, 1);
+    for (const [unit, x] of [[f.source, 0], [f.target, gap]]) Object.assign(unit.combat.position, { x, y: 0, fromX: x, fromY: 0 });
     f.tick(ready);
+    assert.equal(f.source.attack.attackMode, "ranged");
     assert.equal(sourceEvents(f, "attack").length, 2);
     near(f.source.attackReady - f.source.attack.endsAt, 1 / speed);
     noDna(f.source);
@@ -407,43 +384,19 @@ for (const species of ["flower-tail-bird", "soil-mole"]) {
     }
   });
 
-  test(`${species}: 자신을 겨냥한 원거리 공격에만 기존 평화 성향 그대로 방어 사격한다`, () => {
+  test(`${species}: 공격 대상으로 지정되어도 셀 밖에서 방어 사격하지 않는다`, () => {
     const f = fixture(species, 2, undefined), before = structuredClone(f.source.stats);
-    const role = structuredClone(creatureAttackRole(species));
-    const damage = expectedDamage(species);
     f.target.attack = { targetId: f.source.id };
-    assert.equal(combatDisposition(f.source), "peaceful");
-    f.tick(0);
-    const attack = f.source.attack, ready = f.source.attackReady;
-    assert.equal(attack?.attackMode, "ranged");
-    assert.equal(attack.targetId, f.target.id);
-    assert.equal(combatDisposition(f.source), "peaceful");
-    near(attack.launchedAt, f.source.stats.combat.focus);
-    near(attack.hitAt, attack.launchedAt + 2 / 6);
-    near(ready - attack.endsAt, 1 / f.source.stats.combat.rangedSpeed);
-    f.tick(attack.launchedAt);
-    assert.equal(sourceEvents(f, "shoot").length, 1);
-    assert.equal(f.target.health, 100);
-    f.tick(attack.hitAt - epsilon);
-    assert.equal(f.target.health, 100);
-    f.tick(attack.hitAt);
-    f.tick(attack.hitAt);
-    near(f.target.health, 100 - damage);
-    assert.equal(sourceEvents(f, "hit").length, 1);
-    assert.equal(sourceEvents(f, "hit")[0].mode, "ranged");
-    near(sourceEvents(f, "hit")[0].amount, damage);
-    f.target.attack = null;
-    f.tick(ready);
-    assert.ok(!f.source.attack);
-    assert.equal(sourceEvents(f, "attack").length, 1);
+    f.tick(0); f.tick(1);
+    assert.ok(!f.source.attack && !f.source.combat);
+    assert.equal(f.source.dnaProjectiles?.length || 0, 0);
+    assert.equal(f.events.length, 0); assert.equal(f.target.health, 100);
     assert.equal(combatDisposition(f.source), "peaceful");
     assert.equal(Object.hasOwn(f.source, "combatDisposition"), false);
-    assert.deepEqual(f.source.stats, before);
-    assert.deepEqual(creatureAttackRole(species), role);
-    noDna(f.source);
+    assert.deepEqual(f.source.stats, before); noDna(f.source);
   });
 
-  test(`${species}: 방어 중에도 거리 1의 근접 전환과 거리 3초과 사격 금지를 지킨다`, () => {
+  test(`${species}: 방어 중에도 셀 밖 거리 1 및 3초과에서 사격하지 않는다`, () => {
     for (const separation of [1, 3 + epsilon]) {
       const f = fixture(species, separation, undefined);
       f.target.attack = { targetId: f.source.id };
@@ -473,52 +426,29 @@ test("등불지기 같은 셀에서 발사된 투사체는 시전자·목표의 
   }
 });
 
-test("soil-boar: 수동 DNA 원거리 기관은 자연중립 근딜 역할보다 우선한다", () => {
-  const f = fixture("soil-boar", 2, "aggressive");
+test("soil-boar: 수동 DNA 원거리 기관은 같은 셀에서 자연중립 근딜 역할보다 우선한다", () => {
+  const f = fixture("soil-boar", 0, "aggressive");
   const gene = ATTRIBUTE_DNA.lookup.get("secretion");
   const dna = ATTRIBUTE_DNA.stats([{ gene: gene.id, grade: gene.grade, q: 0, r: 0, rotation: 0 }]);
   assert.equal(creatureAttackRole(f.source.species).role, "melee");
   assert.equal(creatureAttackMode(f.source, 2), null);
-  near(combatProfile(f.source).attackInterval, 1 / NEUTRAL_UNIT_STATS["soil-boar"].speed);
-  assert.equal(dna.ranged, true);
-  assert.equal(dna.melee, false);
-  near(dna.rangedPower, 1.4);
-  near(dna.rangedSpeed, .5);
   f.source.stats.dna = dna;
-  f.source.animationStartedAt = -6;
-  f.source.attackStartedAt = -5;
   const before = structuredClone(f.source.stats), damage = 1.4 * 100 / 116;
-  f.tick(0);
+  until(f, () => f.source.attack);
   const attack = f.source.attack;
-  assert.equal(attack?.attackMode, "ranged");
-  assert.equal(attack.targetId, f.target.id);
-  assert.ok(!f.source.combat && !f.target.combat);
-  near(attack.launchedAt, .3);
-  near(attack.hitAt, .3 + 2 / 6);
-  const ready = f.source.attackReady; near(ready - attack.endsAt, 2);
-  f.tick(attack.launchedAt - epsilon);
-  assert.equal(sourceEvents(f, "shoot").length, 0);
+  assert.equal(attack.attackMode, "ranged"); assert.equal(attack.targetId, f.target.id);
+  assert.equal(attack.combatId, f.target.combat.id);
+  near(attack.launchedAt - attack.startedAt, .3);
+  near(f.source.attackReady - attack.endsAt, 2);
+  f.tick(attack.launchedAt - epsilon); assert.equal(sourceEvents(f, "shoot").length, 0);
   f.tick(attack.launchedAt);
-  assert.equal(sourceEvents(f, "shoot").length, 1);
-  assert.equal(f.target.health, 100);
-  f.tick(attack.hitAt - epsilon);
-  assert.equal(f.target.health, 100);
-  f.tick(attack.hitAt);
-  f.tick(attack.hitAt);
+  const shot = sourceEvents(f, "shoot")[0]; assert.ok(shot.arrivesAt > shot.at);
+  f.tick(shot.arrivesAt - epsilon); assert.equal(f.target.health, 100);
+  f.tick(shot.arrivesAt); f.tick(shot.arrivesAt);
   near(f.target.health, 100 - damage);
   assert.equal(sourceEvents(f, "hit").length, 1);
-  const hit = sourceEvents(f, "hit")[0], shot = sourceEvents(f, "shoot")[0];
-  assert.equal(hit.mode, "ranged");
-  assert.equal(hit.projectileId, shot.projectileId);
-  near(hit.amount, damage);
-  near(hit.at - shot.at, 2 / 6);
-  f.tick(ready - epsilon);
-  assert.equal(sourceEvents(f, "attack").length, 1);
-  f.tick(ready);
-  assert.equal(sourceEvents(f, "attack").length, 2);
-  near(f.source.attack.startedAt, ready);
-  near(f.source.attackReady - f.source.attack.endsAt, 2);
-  assert.equal(f.source.animationStartedAt, -6);
-  assert.equal(f.source.attackStartedAt, -5);
+  const hit = sourceEvents(f, "hit")[0];
+  assert.equal(hit.mode, "ranged"); assert.equal(hit.projectileId, shot.projectileId); near(hit.amount, damage);
+  near(f.source.animationStartedAt, attack.startedAt); near(f.source.attackStartedAt, attack.startedAt);
   assert.deepEqual(f.source.stats, before);
 });

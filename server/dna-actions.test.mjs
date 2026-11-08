@@ -9,11 +9,13 @@ const piece = id => { const gene = ATTRIBUTE_DNA.lookup.get(id); return { gene:i
 const stats = ids => ATTRIBUTE_DNA.stats(ids.map(piece));
 function fixture(ids) {
   const source = { id:"source", ownerId:"a", tribe:"bean", x:100, y:100, health:10, attributes:{}, combatDisposition:"aggressive", moveStartedAt:0, moveDuration:0, stats:{ health:10, speed:1, vision:4, dna:stats(ids) } };
-  const target = { id:"target", ownerId:"b", tribe:"bean", x:102, y:100, health:100, attributes:{}, combatDisposition:"passive", moveStartedAt:0, moveDuration:0, stats:{ health:100, speed:1, combatStrength:10 } };
-  const ally = { ...target, id:"ally", ownerId:"a", x:100, health:50 };
+  const target = { id:"target", ownerId:"b", tribe:"bean", x:100, y:100, health:100, attributes:{}, combatDisposition:"passive", moveStartedAt:0, moveDuration:0, stats:{ health:100, speed:1, combatStrength:10, dna:stats([]) } };
+  const ally = { ...target, id:"ally", ownerId:"a", x:99, health:50 };
   const game = agents => ({ agents, receiveDamage(agent, amount) { agent.health=Math.max(0,agent.health-amount); } });
   const env = { world:{terrain:new Uint8Array(320*320)}, games:new Map([["a",game([source,ally])],["b",game([target])]]), combatRandom:()=>.99, damageRandom:()=>.5 };
-  return { source,target,ally,env,combat:createCombat(env) };
+  const combat=createCombat(env); combat.engage(source,target,0);
+  for(const [unit,x] of [[source,-1.2],[target,1.2]]) Object.assign(unit.combat.position,{x,y:0,fromX:x,fromY:0});
+  return { source,target,ally,env,combat };
 }
 
 test("level one opens gathering with six repeatable utility stats",()=>{
@@ -34,56 +36,72 @@ test("legacy snapshots survive schema restore while new designs require the curr
   assert.equal(validateDna({version:3,pieces:[null],budget:100,level:1},1,100),null);
 });
 
-test("ranged shot hits outside contact after travel and spends one shared cycle",()=>{
+test("same-cell ranged shot applies damage only after flight and retains its shared cycle",()=>{
   const f=fixture(["blade","secretion"]); f.combat.update(f.source,0);
-  assert.equal(f.source.attack.attackMode,"ranged"); assert.equal(f.target.health,100); assert.equal(f.source.attackReady,3);
-  f.combat.update(f.source,.5); assert.equal(f.target.health,100);
-  f.combat.update(f.source,.7); assert.ok(f.target.health<100); assert.equal(f.source.attackReady,3);
+  const attack=f.source.attack, ready=f.source.attackReady;
+  assert.equal(attack.attackMode,"ranged"); assert.equal(attack.combatId,f.source.combat.id);
+  assert.equal(f.target.health,100); assert.equal(ready,attack.endsAt+attack.interval);
+  f.combat.update(f.source,attack.launchedAt);
+  const arrival=f.source.dnaProjectiles[0].hitAt;
+  f.combat.update(f.source,arrival-.001); assert.equal(f.target.health,100);
+  f.combat.update(f.source,arrival); assert.ok(f.target.health<100); assert.equal(f.source.attackReady,ready);
   assert.equal(dnaAttackMode(f.source.stats.dna,1),"melee");
   assert.equal(dnaAttackMode(stats(["secretion"]),0),"ranged");
 });
 
-test("dead or hidden projectile participants cancel damage",()=>{
-  for(const field of ["health","hidden","retreat"]) {
-    const f=fixture(["secretion"]); f.combat.update(f.source,0); f.source[field]=field==="health"?0:true;
-    f.combat.update(f.ally,1); assert.equal(f.target.health,100,field);
+test("dead or hidden projectile participants cancel same-cell damage",()=>{
+  for(const participant of ["source","target"]) for(const field of ["health","hidden"]) {
+    const f=fixture(["secretion"]); f.combat.update(f.source,0); f.combat.update(f.source,f.source.attack.launchedAt);
+    const arrival=f.source.dnaProjectiles[0].hitAt;
+    f[participant][field]=field==="health"?0:true;
+    const health=f.target.health;
+    if(field==="health") f.combat.release(f[participant],arrival);
+    f.combat.update(f.target,arrival);
+    assert.equal(f.target.health,health,participant+field);
+    assert.equal(f.source.dnaProjectiles.length,0);
   }
 });
 
-test("windup cancellation removes unlaunched shots while launched combo shots remain",()=>{
-  const f=fixture(["secretion","combo"]); f.combat.update(f.source,0);
-  assert.equal(f.source.dnaProjectiles.length,2);
-  assert.deepEqual(f.source.dnaProjectiles.map(p=>Math.round(p.launchedAt*100)),[30,42]);
-  f.combat.update(f.source,.31); f.source.attack=null;
-  f.combat.update(f.ally,.35); assert.equal(f.source.dnaProjectiles.length,1);
-  f.combat.update(f.ally,.7); assert.ok(f.target.health<100); assert.equal(f.source.dnaProjectiles.length,0);
-  const cancelled=fixture(["secretion"]); cancelled.combat.update(cancelled.source,0); cancelled.source.attack=null;
-  cancelled.combat.update(cancelled.ally,1); assert.equal(cancelled.target.health,100);
+test("canceling a cell attack prevents pending combo shots while a launched shot remains",()=>{
+  for(const emitted of [0,1]) {
+    const f=fixture(["secretion","combo"]); f.combat.update(f.source,0);
+    const attack=f.source.attack;
+    if(emitted) f.combat.update(f.source,attack.launchedAt);
+    assert.equal(f.source.dnaProjectiles?.length||0,emitted);
+    f.source.attack=null; f.source.combat.nextAttackAt=Infinity;
+    f.combat.update(f.target,2);
+    assert.equal(f.target.health,100-emitted*1.4);
+    assert.equal(f.source.dnaProjectiles?.length||0,0);
+  }
 });
 
-test("launched projectile survives an explicit attack reset without inheriting a later counter",()=>{
-  const f=fixture(["secretion"]); f.target.stats.defense=0; f.source.stats.dna.rangedSpeed=4; f.source.stats.dna.focus=.1; f.source.stats.dna.counterPower=200;
-  f.combat.update(f.source,0); f.combat.update(f.source,.11); f.combat.update(f.source,.3);
-  assert.equal(f.source.dnaProjectiles.length,1); assert.equal(f.source.attack.startedAt,0); assert.ok(Math.abs(f.source.attackReady-1.05)<1e-9);
-  f.source.attack=null; f.source.attackReady=.3; f.source.dnaScanReady=.3; f.combat.update(f.source,.3);
-  assert.equal(f.source.dnaProjectiles.length,2); assert.equal(f.source.attack.startedAt,.3);
-  const newAttack=f.source.attack; newAttack.counter=true;
-  f.combat.update(f.ally,.44);
-  assert.ok(Math.abs(f.target.health-98.6)<1e-8); assert.equal(newAttack.resolved,false);
+test("launched cell projectile retains its attack when a later counter starts",()=>{
+  const f=fixture(["secretion"]); f.source.stats.dna.counterPower=200;
+  f.combat.update(f.source,0); const first=f.source.attack;
+  f.combat.update(f.source,first.launchedAt); const arrival=f.source.dnaProjectiles[0].hitAt;
+  f.source.attack=null; f.source.combat.nextAttackAt=first.launchedAt+.01;
+  f.combat.update(f.source,first.launchedAt+.01);
+  const later=f.source.attack; later.counter=true;
+  f.combat.update(f.target,arrival);
+  assert.ok(Math.abs(f.target.health-98.6)<1e-8);
+  assert.notEqual(later,first); assert.equal(first.counter,false);
 });
 
-test("hybrid can shoot an adjacent world cell before same-cell melee contact",()=>{
-  const f=fixture(["blade","secretion"]); f.target.x=101; f.combat.update(f.source,0);
-  assert.equal(f.source.attack.attackMode,"ranged"); assert.equal(f.source.combat,undefined);
-  f.combat.update(f.ally,.5); assert.ok(f.target.health<100);
-  assert.equal(f.source.dnaActionEvent.kind,"ranged"); assert.equal(f.target.dnaActionEvent.targetId,f.target.id);
+test("hybrid cannot shoot an adjacent world cell before same-cell contact",()=>{
+  const f=fixture(["blade","secretion"]); f.source.combat=null; f.target.combat=null; f.target.x=101;
+  for(const time of [0,.5,1,3]) assert.equal(f.combat.update(f.source,time),false);
+  assert.ok(!f.source.attack); assert.ok(!f.source.combat);
+  assert.equal(f.source.dnaProjectiles?.length||0,0); assert.equal(f.target.health,100);
 });
 
 test("restoring a colony discards in-flight references and keeps its spent cooldown",()=>{
-  const f=fixture(["secretion"]); f.combat.update(f.source,0); f.combat.update(f.source,.31);
+  const f=fixture(["secretion"]); f.combat.update(f.source,0); f.combat.update(f.source,f.source.attack.launchedAt);
+  const ready=f.source.attackReady;
   const restored={...f.source,attack:null,dnaProjectiles:[]}; f.env.games.get("a").agents=[restored,f.ally];
-  f.combat.update(f.ally,1); assert.equal(f.target.health,100); assert.equal(restored.attackReady,3);
+  restored.combat.nextAttackAt=Infinity;
+  f.combat.update(f.target,1); assert.equal(f.target.health,100); assert.equal(restored.attackReady,ready);
 });
+
 test("melee and ranged investment change only their own power and rate",()=>{
   const melee=stats(["blade","secretion","power","speed"]),ranged=stats(["blade","secretion","rangedPower","rangedSpeed"]);
   assert.equal(melee.meleePower,10); assert.equal(melee.meleeSpeed,.6); assert.equal(melee.rangedPower,1.4); assert.equal(melee.rangedSpeed,.5);
@@ -92,11 +110,15 @@ test("melee and ranged investment change only their own power and rate",()=>{
   for(const id of ["rangedPower","rangedSpeed"]) { const g=ATTRIBUTE_DNA.lookup.get(id);assert.equal(g.grade,2);assert.ok(g.cells.length>=3);assert.ok(ATTRIBUTE_DNA.trace([piece(id)],2).valid); }
 });
 
-test("ranged damage is the visible base and selected rate owns the shared cooldown",()=>{
-  const f=fixture(["blade","secretion","power","speed","rangedSpeed"]); f.target.stats.defense=0; f.target.stats.attackPower=0;
-  f.combat.update(f.source,0); const ready=1+1/.6; assert.equal(f.source.attackReady,ready);
-  f.combat.update(f.source,.7); assert.ok(Math.abs(f.target.health-98.6)<1e-8);
-  f.source.x=f.target.x; f.combat.update(f.source,1.1); assert.equal(f.source.combat.nextAttackAt,ready);
+test("ranged and melee cell attacks use their own visible power and full interval",()=>{
+  const f=fixture(["blade","secretion","power","speed","rangedSpeed"]);
+  f.combat.update(f.source,0); const attack=f.source.attack, ready=f.source.attackReady;
+  assert.ok(Math.abs(ready-attack.endsAt-1/.6)<1e-9);
+  f.combat.update(f.source,attack.launchedAt);
+  f.combat.update(f.source,f.source.dnaProjectiles[0].hitAt);
+  assert.ok(Math.abs(f.target.health-98.6)<1e-8);
+  f.combat.update(f.source,attack.endsAt);
   for(const unit of [f.source,f.target]) Object.assign(unit.combat.position,{x:unit.combat.side?.4:-.4,y:0,fromX:unit.combat.side?.4:-.4,fromY:0});
-  f.combat.update(f.source,ready); assert.equal(f.source.attack.attackMode,"melee"); assert.ok(Math.abs(f.source.combat.nextAttackAt-(ready+1+1/.6))<1e-9);
+  f.combat.update(f.source,ready); assert.equal(f.source.attack.attackMode,"melee");
+  assert.ok(Math.abs(f.source.combat.nextAttackAt-f.source.attack.endsAt-1/.6)<1e-9);
 });

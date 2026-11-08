@@ -85,15 +85,10 @@ test("더 가까운 둥지보다 공격 가능한 유닛을 우선 추적한다"
     nest(context, "nest", 101, 100);
     const target = unit(context, 100, 100 + DNA_ACTION_RULES.rangedRange + (species === "spiny-back-beetle" ? 1 : 0));
     tick(context, 720);
-    if (species === "spiny-back-beetle") {
-      assert.equal(context.agent.mode, "walk", species);
-      assert.equal(context.agent.y, 101, species);
-      assert.equal(context.agent.attackTargetId ?? null, null, species);
-    } else {
-      assert.equal(context.agent.attack?.attackMode, "ranged", species);
-      assert.equal(context.agent.attack.targetId, target.id, species);
-      assert.equal(context.agent.y, 100, species);
-    }
+    assert.equal(context.agent.mode, "walk", species);
+    assert.equal(context.agent.y, 101, species);
+    assert.equal(context.agent.attackTargetId ?? null, null, species);
+    assert.equal(target.health, 100);
     assert.equal(context.hits.length, 0, species);
   }
 });
@@ -243,28 +238,42 @@ test("둥지 주변 배회 제한 안에서도 유닛을 우선 추적하고 둥
 });
 
 
-test("겸용 중립은 사거리 안에서 둥지보다 유닛을 먼저 사격하고 근접 경로 차단에도 타격한다", () => {
+test("겸용 중립은 유닛과 같은 셀에 도착한 뒤에만 공격하고 막힌 경로 너머로 사격하지 않는다", () => {
   for (const species of ["spiny-back-beetle", "vine-turtle"]) for (const indexed of [false, true]) for (const blocked of [false, true]) {
     const context = fixture(species, indexed), building = nest(context, "nest", 101, 100);
     const target = unit(context, 100, 100 + DNA_ACTION_RULES.rangedRange);
     if (blocked) for (const [x, y] of [[target.x - 1, target.y], [target.x + 1, target.y], [target.x, target.y - 1], [target.x, target.y + 1]])
       context.room.world.terrain[y * 320 + x] = 0;
     tick(context, 720);
-    const attack = context.agent.attack;
-    assert.equal(attack?.attackMode, "ranged", species);
-    assert.equal(attack.targetKind, "agent", species);
-    assert.equal(attack.targetId, target.id, species);
-    assert.equal(context.agent.x, 100); assert.equal(context.agent.y, 100);
-    assert.equal(target.health, 100); assert.equal(building.health, 120);
-    tick(context, attack.launchedAt);
-    tick(context, attack.hitAt - .001); assert.equal(target.health, 100);
-    tick(context, attack.hitAt); assert.ok(target.health < 100, species);
-    const health = target.health; tick(context, attack.hitAt);
-    assert.equal(target.health, health); assert.equal(building.health, 120); assert.equal(context.hits.length, 0);
+    assert.notEqual(context.agent.attack?.targetKind, "agent", species);
+    assert.equal(context.agent.dnaProjectiles?.length || 0, 0);
+    assert.equal(target.health, 100);
+    if (blocked) {
+      tick(context, 722);
+      assert.equal(target.health, 100);
+      assert.ok(!context.agent.combat);
+      assert.equal(context.agent.dnaProjectiles?.length || 0, 0);
+      continue;
+    }
+    for (let step = 1; step <= 400 && target.health === 100; step++) {
+      tick(context, 720 + step / 10);
+      if (!context.agent.combat) {
+        assert.notEqual(context.agent.attack?.targetKind, "agent");
+        assert.equal(context.agent.dnaProjectiles?.length || 0, 0);
+        assert.equal(target.health, 100);
+      } else {
+        assert.equal(context.agent.x, target.x);
+        assert.equal(context.agent.y, target.y);
+        assert.equal(context.agent.combat.id, target.combat.id);
+      }
+    }
+    assert.ok(target.health < 100, species);
+    assert.equal(building.health, 120);
+    assert.equal(context.hits.length, 0);
   }
 });
 
-test("탄생 준비 중인 개체는 공통 추적·원거리 선정에서 제외하고 완료 시각부터 허용한다", () => {
+test("탄생 준비 중인 개체는 추적에서 제외하고 완료 시각부터 사격 없이 접근한다", () => {
   for (const species of ["spiny-back-beetle", "vine-turtle"]) for (const participant of ["source", "target"]) {
     const context = fixture(species, true), target = unit(context, 100, 103);
     const source = context.agent, pending = participant === "source" ? source : target;
@@ -273,6 +282,10 @@ test("탄생 준비 중인 개체는 공통 추적·원거리 선정에서 제�
     assert.equal(canPursueCombat(source, target, 730 - .001), false, participant);
     assert.equal(canPursueCombat(source, target, 730), true, participant);
     tick(context, 720); assert.ok(!source.attack, participant);
-    tick(context, 730); assert.equal(source.attack?.targetId, target.id, participant);
+    tick(context, 730);
+    assert.ok(!source.attack, participant);
+    assert.equal(source.mode, "walk", participant);
+    assert.equal(source.y, 101, participant);
+    assert.equal(target.health, 100, participant);
   }
 });
