@@ -228,7 +228,44 @@ test("범례는 종류별 개수와 실효 변화량을 표시하고 칸 수 배
   const {editor,root}=fixture(t),legend=root.querySelector('.dna-legend');editor.context(4,1000,false);
   const pieces=ATTRIBUTE_DNA.pack(['gather','capacity','capacity','harvestSpeed','harvestSpeed','health','movement','antenna','block','armor'].map(id=>piece(id,0)),4);editor.load({version:6,pieces,level:4,budget:1000},false);
   const rows=()=>Object.fromEntries(legend.children.map(row=>[row.dataset.gene,row.children.slice(1).map(child=>child.textContent)]));
-  assert.deepEqual(rows(),{capacity:['×2',' (운반 +2개)'],gather:['×1',' (채집 기능 해금)'],harvestSpeed:['×2',' (채집 시간 -0.667초)'],health:['×1',' (체력 +20)'],movement:['×1',' (이동 +0.04칸/초)'],antenna:['×1'],block:['×1',' (방어본능 +25%)'],armor:['×1',' (방어 +30)']});
+  assert.deepEqual(rows(),{capacity:['×2',' (운반 +2개)'],gather:['×1',' (채집 기능 해금)'],harvestSpeed:['×2',' (채집 시간 -0.667초)'],health:['×1',' (체력 +20)'],movement:['×1',' (이동 +'+Number((ATTRIBUTE_DNA.stats([piece('movement',0)]).movement-ATTRIBUTE_DNA.stats([]).movement).toFixed(3))+'칸/초)'],antenna:['×1'],block:['×1',' (방어본능 +25%)'],armor:['×1',' (방어 +30)']});
   assert.equal(legend.hidden,false);assert.equal(root.querySelector('.dna-board').children.some(child=>child.className==='dna-fill'),false);
   root.dispatch('keydown',{key:'Delete'});assert.equal(rows().armor,undefined);root.dispatch('keydown',{key:'z',ctrlKey:true});assert.deepEqual(rows().armor,['×1',' (방어 +30)']);editor.load({version:6,pieces:[],level:4,budget:1000},false);assert.equal(legend.hidden,true);
+});
+
+test("전 속성은 배치 전 수치 툴팁을 제공하고 종족·undo·redo에 맞춰 갱신한다",t=>{
+  const {editor,root}=fixture(t);editor.context(4,0,false,'spring');
+  const item=id=>root.querySelector('.dna-list').children.find(value=>value.dataset.gene===id);
+  for(const gene of ATTRIBUTE_DNA.catalog){assert.match(item(gene.id).title,/샘방울 기준/);assert.match(item(gene.id).title,/추가 시/);assert.doesNotMatch(item(gene.id).title,/undefined|NaN/);}
+  assert.match(item('power').title,/효과 활성에 필요: 칼날/);
+  selectGene(root,'blade');place(root);assert.doesNotMatch(item('power').title,/효과 활성에 필요/);assert.match(item('power').title,/\+9.6/);
+  root.dispatch('keydown',{key:'z',ctrlKey:true});assert.match(item('power').title,/효과 활성에 필요/);
+  root.dispatch('keydown',{key:'y',ctrlKey:true});assert.doesNotMatch(item('power').title,/효과 활성에 필요/);
+  editor.context(4,0,false,'pebble');assert.match(item('power').title,/몽돌 기준/);assert.match(item('power').title,/\+6.8/);
+  editor.context(4,0,true,'pebble');assert.equal(item('power').attributes['aria-disabled'],'true');assert.equal(item('power').disabled,false);assert.match(item('power').title,/읽기 전용/);
+});
+
+test("고유색과 무관하게 배치 가능은 파랑·불가는 빨강과 텍스트로 구분한다",t=>{
+  const {editor,root,draw,draws}=fixture(t,{width:800,height:600});editor.context(4,0,false);
+  const item=id=>root.querySelector('.dna-list').children.find(value=>value.dataset.gene===id);
+  const placement=root.querySelector('.dna-placement');
+  assert.equal(item('power').dataset.availability,'available');assert.match(item('power').attributes['aria-label'],/배치 가능/);
+  assert.equal(item('power').children.find(value=>value.className==='dna-gene-availability').textContent,'✓ 배치 가능');
+  selectGene(root,'power');root.dispatch('keydown',{key:'ArrowLeft'});draw();
+  assert.equal(placement.hidden,false);assert.equal(placement.dataset.state,'available');assert.equal(placement.textContent,'✓ 배치 가능');
+  assert.ok(draws.some(value=>value.color==='#6bc7ff'));assert.equal(draws.some(value=>value.color===ATTRIBUTE_DNA.lookup.get('power').fillColor),false);
+  place(root);draw();assert.ok(draws.some(value=>value.color===ATTRIBUTE_DNA.lookup.get('power').fillColor));
+  for(let index=0;index<10;index++)root.dispatch('keydown',{key:'ArrowLeft'});draw();
+  assert.equal(placement.dataset.state,'blocked');assert.match(placement.textContent,/배치 불가.*판을 벗어/);assert.ok(draws.some(value=>value.color==='#ff7b89'));
+  assert.match(root.querySelector('canvas').attributes['aria-label'],/배치 불가/);
+  root.dispatch('keydown',{key:'Escape'});assert.equal(placement.hidden,true);
+});
+
+test("공간 부족과 기관 중복은 텍스트로 표시하고 재배치 후 복구한다",t=>{
+  const {editor,root}=fixture(t);selectGene(root,'gather');place(root);
+  const item=id=>root.querySelector('.dna-list').children.find(value=>value.dataset.gene===id);
+  assert.equal(item('gather').dataset.availability,'blocked');assert.match(item('gather').title,/이미 배치됨/);
+  const pieces=ATTRIBUTE_DNA.pack(['gather',...Array(7).fill('capacity'),'movement'].map(id=>piece(id,0)),1);
+  editor.load(design(pieces),false);assert.equal(item('health').dataset.availability,'blocked');assert.match(item('health').title,/공간 부족/);
+  root.dispatch('keydown',{key:'Delete'});assert.equal(item('movement').dataset.availability,'available');
 });

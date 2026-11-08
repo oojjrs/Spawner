@@ -6443,9 +6443,8 @@
       const remaining = corpse ? Math.max(0, agent.decaysAt - corpsePlaybackTime()) : Spawner.agentRemainingLifespan(agent, state.simSeconds);
       life.hidden = !Number.isFinite(remaining);
       if (life.hidden) return remaining;
-      const personality = agent.personalityLabels;
       const help = corpse ? agent.name + "의 사체 · 사라짐까지 " + formatLifetime(Math.ceil(remaining)) :
-        agent.name + " · 남은 수명 " + formatLifetime(Math.ceil(remaining)) + (personality ? "\n대담함 " + personality.boldness + " · 호전성 " + personality.aggression + " · 호기심 " + personality.curiosity : "");
+        Math.ceil(remaining) + "초";
       const previousHelp = life.dataset.help;
       life.dataset.help = help;
       life.setAttribute("aria-label", help);
@@ -8014,6 +8013,35 @@
       colonyMenuClose.focus();
     }
 
+    function templateProductionIssues(template) {
+      const issues = [], count = state.agents.filter(agent => agent.health > 0).length;
+      if (state.ending) issues.push("게임이 종료되어 생산할 수 없습니다.");
+      if (!connection.online) issues.push("연결이 끊겼습니다. 다시 연결해 주세요.");
+      else if (connection.busy) issues.push("이전 요청을 처리 중입니다. 잠시 기다려 주세요.");
+      if (!hasBirthplace()) issues.push("둥지가 파괴되어 생산할 수 없습니다.");
+      if (count >= unitCapacity()) issues.push("개체 수 한도에 도달했습니다. (" + count + "/" + unitCapacity() + "마리)");
+      const cost = birthCost(template, state.tribe);
+      if (state.evolutionPoints < cost) issues.push("진화 포인트 " + Math.ceil(cost - state.evolutionPoints) + "P 부족 (현재 " + state.evolutionPoints + "P / 필요 " + cost + "P)");
+      if (template.dna && !dnaDesignValid(template.dna)) {
+        const M = Spawner.ATTRIBUTE_DNA;
+        // Validate with unlimited points to separate design faults from the
+        // point shortage already reported above. Use live nest/shape rules.
+        if (!Spawner.validateDna(template.dna, state.nestLevel, 999999999)) {
+          const required = Math.max(1, ...template.dna.pieces.map(piece => Math.max(piece.grade || 1, M.lookup.get(piece.gene)?.grade || 1)));
+          const trace = M.trace(template.dna.pieces, state.nestLevel);
+          if (required > state.nestLevel) issues.push("둥지 Lv." + required + " 필요 (현재 Lv." + state.nestLevel + ")");
+          if (trace.outside.length) issues.push("현재 둥지의 DNA 판보다 큰 설계입니다. 둥지를 성장시키거나 설계를 줄여 주세요.");
+          if (trace.reason === "collision") issues.push("DNA 조각이 겹칩니다. 설계를 수정해 주세요.");
+          if (required <= state.nestLevel && !trace.outside.length && trace.reason !== "collision") issues.push("사용할 수 없는 속성이나 중복 기관이 있습니다. 설계를 수정해 주세요.");
+        }
+      } else if (!template.dna) {
+        if (template.slots.length > slotCapacity()) issues.push("속성 슬롯 부족 (설계 " + template.slots.length + "개 / 현재 " + slotCapacity() + "개)");
+        if (template.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, state.tribe))) issues.push("현재 종족·둥지 레벨에서 사용할 수 없는 속성이 있습니다.");
+        if (new Set(template.slots).size !== template.slots.length || template.slots.some(key => !ATTRIBUTES.some(attribute => attribute.key === key))) issues.push("중복되거나 유효하지 않은 속성이 있습니다. 설계를 수정해 주세요.");
+      }
+      return issues;
+    }
+
     function updateColonyPanel() {
       if (document.hidden) return;
       cheats?.update(connection.active && document.body.dataset.screen === "game",
@@ -8040,11 +8068,16 @@
       renderUnitTemplates();
       for (const card of templateList.querySelectorAll("[data-template-id]")) {
         const template = state.templates.find((candidate) => candidate.id === Number(card.dataset.templateId));
-        card.querySelector(".template-spawn").disabled = !!state.ending || connection.busy || !connection.online || !hasBirthplace() || state.agents.filter(agent => agent.health > 0).length >= unitCapacity() || state.evolutionPoints < birthCost(template, state.tribe) || (template.dna ? !dnaDesignValid(template.dna) : template.slots.length > slotCapacity() || template.slots.some(key => !isAttributeUnlocked(key, state.nestLevel, state.tribe)));
-        const productionIssue = state.agents.filter(agent => agent.health > 0).length >= unitCapacity() ? "생산 가능한 개체 수를 모두 채웠어요." :
-          state.evolutionPoints < birthCost(template, state.tribe) ? "진화 포인트가 " + Math.ceil(birthCost(template, state.tribe) - state.evolutionPoints) + "P 부족합니다." : "";
-        card.title = productionIssue;
-        card.querySelector(".template-spawn").setAttribute("aria-label", template.name + " 생산 · " + birthCost(template, state.tribe) + "P" + (productionIssue ? " · " + productionIssue : ""));
+        const issues = templateProductionIssues(template), spawn = card.querySelector(".template-spawn");
+        spawn.disabled = issues.length > 0;
+        const productionIssue = issues.length ? "생산 불가\n" + issues.join("\n") : "";
+        if (card.dataset.tooltip !== productionIssue) card.title = productionIssue;
+        card.tabIndex = spawn.disabled ? 0 : -1;
+        card.setAttribute("aria-label", template.name + (productionIssue ? " · " + productionIssue : ""));
+        // Disabled buttons do not reliably receive pointer/focus events. The
+        // focusable card owns the explanation, including its disabled image.
+        spawn.style.pointerEvents = spawn.disabled ? "none" : "";
+        spawn.setAttribute("aria-label", template.name + " 생산 · " + birthCost(template, state.tribe) + "P" + (productionIssue ? " · " + productionIssue : ""));
         card.querySelector(".template-edit").disabled = connection.busy || !connection.online;
         card.querySelector(".template-delete").disabled = !!state.ending || connection.busy || !connection.online;
       }

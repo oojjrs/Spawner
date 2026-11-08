@@ -20,3 +20,15 @@
  .attribute-editor-host{min-height:620px;height:calc(100dvh - 62px)}.attribute-editor-host .dna-editor{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(270px,1fr) 58px 230px}
  .attribute-editor-host .progression{margin:0}.attribute-editor-host .progression label{display:none}.attribute-editor-host .progression select{padding:5px 8px}
 }
+/* Gene art keeps its own color. Availability uses an independent blue/gray
+   frame and text so red melee genes never resemble a placement error. */
+.dna-editor .dna-gene[data-availability="available"]{background:#183344;border-color:#5faedb;color:#e5f3ff}
+.dna-editor .dna-gene[data-availability="blocked"]{background:#252d32;border-color:#66717b;border-style:dashed;color:#b5bfc8;opacity:1;cursor:default}
+.dna-editor .dna-gene[aria-pressed="true"]{box-shadow:inset 0 0 0 2px #9bdaff;border-color:#9bdaff}
+.dna-editor .dna-gene:focus-visible{outline:2px solid #c6eaff;outline-offset:2px}
+.dna-editor .dna-gene-availability{grid-column:2 / -1;color:#9bdaff;font-size:10px;line-height:1.2}
+.dna-editor .dna-gene[data-availability="blocked"] .dna-gene-availability{color:#bdc7cf}
+.dna-editor .dna-placement{position:absolute;top:58px;left:50%;transform:translateX(-50%);max-width:calc(100% - 24px);box-sizing:border-box;padding:7px 11px;border:1px solid #6bc7ff;border-radius:8px;background:#0d2537f5;color:#b4e3ff;font:600 12px/1.4 system-ui,sans-serif;text-align:center;pointer-events:none;z-index:3}
+.dna-editor .dna-placement[data-state="blocked"]{border-color:#ff7b89;background:#341820f5;color:#ffb8c1}
+.dna-editor .dna-placement[hidden]{display:none}
+@media(max-width:700px){.dna-editor .dna-gene{height:108px;min-height:108px}.dna-editor .dna-gene-availability{font-size:9px}}
