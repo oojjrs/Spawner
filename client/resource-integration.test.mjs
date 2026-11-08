@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { createContext, runInContext, runInNewContext } from "node:vm";
 import { createHash } from "node:crypto";
-import { RESOURCE_TYPES, resourceDefinition, populateResourceNodes, populateForestResources, resourceHarvestSeconds } from "../server/resources.mjs";
+import { RESOURCE_TYPES, resourceDefinition, populateResourceNodes, populateForestResources } from "../server/resources.mjs";
 import { isTreeFood } from "../server/food.mjs";
 import { createGame } from "../server/game.mjs";
 import { generateMapWorld } from "../server/map.mjs";
@@ -11,26 +11,49 @@ import { createRoom, saveRoom, restoreRoom } from "./room.mjs";
 import { RESOURCE_HARVEST_ANIMATIONS } from "./harvest-assets.mjs";
 import { createHarvestPlayback, harvestPlaybackPose } from "./harvest.mjs";
 
+const root = new URL("../", import.meta.url);
+
+function assembledDesignPage(name) {
+  const pageUrl = new URL("DesignAssets/" + name + ".html", root);
+  const page = readFileSync(pageUrl, "utf8");
+  const base = page.match(/<base\s+href="([^"]+)"/);
+  assert.ok(base, name + " document base");
+  const baseUrl = new URL(base[1], pageUrl);
+  let sections = 0;
+  // Design.html is only a shell. Expand the sections actually loaded by its page,
+  // with the same base URL and document.write output used in the browser.
+  const html = page.replace(/<script\s+src="(DesignAssets\/sections\/[^"]+)"\s*><\/script>/g, (_, src) => {
+    const writes = [];
+    runInNewContext(readFileSync(new URL(src, baseUrl), "utf8"), {
+      document: { write: (...parts) => writes.push(parts.join("")) }
+    }, { filename: src });
+    assert.ok(writes.length, src + " writes its section");
+    sections++;
+    return writes.join("");
+  });
+  assert.ok(sections > 0, name + " loads document sections");
+  return html;
+}
+
 test("기획서의 자원 원화·운반물과 실행 참조가 일치하고 삭제한 애니메이션은 등록하지 않는다", () => {
-  const design = readFileSync(new URL("../Design.html", import.meta.url), "utf8");
-  const source = readFileSync(new URL("./game.js", import.meta.url), "utf8");
+  const design = assembledDesignPage("codex-food");
   for (const definition of RESOURCE_TYPES) {
     const key = definition.key;
     const aliases = [key, key === "tree" ? "wood" : key === "honey-mushrooms" ? "basic-mushroom" : key];
     const row = aliases.map(alias => design.match(new RegExp('<tr data-resource="' + alias + '"[^>]*>[^]*?</tr>'))).find(Boolean);
     assert.ok(row, key);
     const sources = [...row[0].matchAll(/<img[^>]+data-original-src="([^"]+)"/g)].map(match => match[1]);
+    assert.ok(sources.length >= 2, key + " original and carry images");
     assert.equal(definition.image, sources[0], key + " original");
-    assert.ok(existsSync(sources[0]));
     assert.equal(definition.carryImage, sources[1], key + " carry");
-    assert.ok(existsSync(definition.image));
-    assert.ok(existsSync(definition.carryImage));
+    assert.ok(existsSync(new URL(definition.image, root)), key + " original exists");
+    assert.ok(existsSync(new URL(definition.carryImage, root)), key + " carry exists");
   }
   for (const key of ["nutrients", "iron-ore", "copper-ore", "quartz"]) {
     assert.ok(RESOURCE_HARVEST_ANIMATIONS.every(animation => animation.resourceType !== key));
   }
   for (const animation of RESOURCE_HARVEST_ANIMATIONS) {
-    const png = readFileSync(animation.image);
+    const png = readFileSync(new URL(animation.image, root));
     assert.equal(png.readUInt32BE(16), animation.columns * animation.frameSize, animation.resourceType);
     assert.ok(png.readUInt32BE(20) >= Math.ceil(animation.frameCount / animation.columns) * animation.frameSize, animation.resourceType);
     if (animation.loopDurationsMs) assert.equal(animation.loopDurationsMs.length, animation.frameCount);
@@ -96,7 +119,8 @@ function fixture(resourceType, amount, carapaceAmount) {
   environment.games.set(colony.ownerId, game);
   const saved = JSON.parse(game.save());
   saved.state.agents.splice(1);
-  Object.assign(saved.state.agents[0], { x: 46, y: 42, renderFromX: 46, renderFromY: 42, slots: ["strength"],
+  // Keep the tribe's starting DNA, which determines both gathering ability and time.
+  Object.assign(saved.state.agents[0], { x: 46, y: 42, renderFromX: 46, renderFromY: 42,
     carrying: 0, carryingType: null, birth: null, bornAt: 120, mode: "approach", moveStartedAt: 0,
     moveDuration: 0, moveBudget: 0, harvestResult: null, decisionPending: null, nextDecisionAt: 1000,
     utility: { action: "collect", target: { x: 46, y: 42, key }, route: [{ x: 46, y: 42 }], plannedCargo: 2 } });
@@ -113,13 +137,29 @@ function advance(f, age) {
 
 test("목재·이슬을 실제 수확하고 소진한 나무는 시야 정보와 지도에 잔량 0으로 전달한다", () => {
   for (const key of ["tree", "dew"]) {
-    const f = fixture(key, 1, 0), seconds = resourceHarvestSeconds(key, f.environment.world);
+    const f = fixture(key, 1, 0);
+    assert.ok(f.agent.dna, key + " uses starting DNA");
+    assert.equal(f.agent.stats.dna.harvest, 1, key + " can gather");
+    const seconds = f.agent.stats.dna.harvestTime;
+    assert.ok(Number.isFinite(seconds) && seconds > 0, key + " DNA harvest time");
     advance(f, 0);
+    assert.equal(f.agent.mode, "harvest", key);
+    assert.equal(f.agent.harvestStarted, 120, key + " harvest starts");
+    assert.equal(f.agent.harvestReady, 121, key + " preparation deadline");
     advance(f, 1);
-    advance(f, 1 + seconds + .001);
+    assert.equal(f.agent.harvestPrepared, true, key + " preparation finished");
+    const completedAt = 121 + seconds;
+    assert.equal(f.agent.harvestReady, completedAt, key + " DNA harvest deadline");
+    advance(f, completedAt - 120 - .001);
+    assert.equal(f.agent.carrying, 0, key + " not harvested early");
+    assert.equal(f.cell.amount, 1, key + " remains before deadline");
+    advance(f, completedAt - 120);
     assert.equal(f.agent.carrying, 1, key);
     assert.equal(f.agent.carryingType, key);
     assert.equal(f.cell.amount, 0);
+    assert.equal(f.agent.harvestResult.completedAt, completedAt, key + " exact harvest time");
+    assert.equal(f.agent.harvestResult.amount, 1, key + " harvested amount");
+    assert.equal(f.agent.harvestResult.remaining, 0, key + " depleted result");
     if (key === "tree") {
       assert.equal(f.environment.world.treeCells[42 * 320 + 46], 0);
       assert.ok(f.environment.world.depletedTrees.has(42 * 320 + 46));
@@ -155,9 +195,12 @@ test("소진 나무 위치를 저장·복원하고 같은 칸이 사체로 바�
 });
 
 test("기획서 미리보기와 실행 맵이 같은 최신 생성 로직을 사용한다", () => {
-  const html = readFileSync(new URL("../Design.html", import.meta.url), "utf8");
+  const html = assembledDesignPage("world");
+  const model = html.match(/<script id="design-world-model"[^>]*>([^]*?)<\/script>/);
+  assert.ok(model, "world page includes the built preview model");
   const context = {};
-  runInNewContext(html.match(/<script id="design-world-model"[^>]*>([^]*?)<\/script>/)[1], context);
+  runInNewContext(model[1], context);
+  assert.equal(typeof context.SpawnerDesignWorld?.generateWorld, "function");
   const preview = context.SpawnerDesignWorld.generateWorld(1669442258);
   const runtime = generateMapWorld(1669442258);
   const hash = world => createHash("sha256").update(JSON.stringify([
